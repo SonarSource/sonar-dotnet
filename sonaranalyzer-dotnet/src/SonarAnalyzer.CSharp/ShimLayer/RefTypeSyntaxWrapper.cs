@@ -17,8 +17,6 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<TypeSyntax, SyntaxToken, TypeSyntax> WithRefKeywordAccessor;
         private static readonly Func<TypeSyntax, TypeSyntax, TypeSyntax> WithTypeAccessor;
 
-        private readonly TypeSyntax node;
-
         static RefTypeSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(RefTypeSyntaxWrapper));
@@ -30,10 +28,10 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private RefTypeSyntaxWrapper(TypeSyntax node)
         {
-            this.node = node;
+            this.SyntaxNode = node;
         }
 
-        public TypeSyntax SyntaxNode => this.node;
+        public TypeSyntax SyntaxNode { get; }
 
         public SyntaxToken RefKeyword
         {
@@ -68,7 +66,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator TypeSyntax(RefTypeSyntaxWrapper wrapper)
         {
-            return wrapper.node;
+            return wrapper.SyntaxNode;
         }
 
         public static bool IsInstance(SyntaxNode node)

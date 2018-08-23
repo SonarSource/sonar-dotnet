@@ -153,16 +153,15 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 private readonly TypeDeclarationTuple partialTypeDeclaration;
                 private readonly ReadonlyFieldCollector readonlyFieldCollector;
-                private readonly IEnumerable<FieldTuple> allFields;
 
-                public IEnumerable<FieldTuple> AllFields => allFields;
+                public IEnumerable<FieldTuple> AllFields { get; }
 
                 public PartialTypeDeclarationProcessor(TypeDeclarationTuple partialTypeDeclaration, ReadonlyFieldCollector readonlyFieldCollector)
                 {
                     this.partialTypeDeclaration = partialTypeDeclaration;
                     this.readonlyFieldCollector = readonlyFieldCollector;
 
-                    allFields = partialTypeDeclaration.SyntaxNode.DescendantNodes()
+                    AllFields = partialTypeDeclaration.SyntaxNode.DescendantNodes()
                         .OfType<FieldDeclarationSyntax>()
                         .SelectMany(f => GetAllFields(f));
                 }
@@ -189,7 +188,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 private void CollectFieldsFromDeclarations()
                 {
-                    var fieldDeclarations = allFields.Where(f =>
+                    var fieldDeclarations = AllFields.Where(f =>
                         IsFieldRelevant(f.Symbol) &&
                         f.SyntaxNode.Initializer != null);
 

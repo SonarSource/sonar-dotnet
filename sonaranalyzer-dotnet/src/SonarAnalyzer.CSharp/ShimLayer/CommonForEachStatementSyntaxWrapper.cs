@@ -20,8 +20,6 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<StatementSyntax, SyntaxToken> CloseParenTokenAccessor;
         private static readonly Func<StatementSyntax, StatementSyntax> StatementAccessor;
 
-        private readonly StatementSyntax node;
-
         static CommonForEachStatementSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(CommonForEachStatementSyntaxWrapper));
@@ -35,10 +33,10 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private CommonForEachStatementSyntaxWrapper(StatementSyntax node)
         {
-            this.node = node;
+            this.SyntaxNode = node;
         }
 
-        public StatementSyntax SyntaxNode => this.node;
+        public StatementSyntax SyntaxNode { get; }
 
         public SyntaxToken ForEachKeyword
         {
@@ -110,7 +108,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator StatementSyntax(CommonForEachStatementSyntaxWrapper wrapper)
         {
-            return wrapper.node;
+            return wrapper.SyntaxNode;
         }
 
         public static bool IsInstance(SyntaxNode node)

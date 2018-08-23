@@ -12,8 +12,6 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         internal const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.PatternSyntax";
         private static readonly Type WrappedType;
 
-        private readonly CSharpSyntaxNode node;
-
         static PatternSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(PatternSyntaxWrapper));
@@ -21,10 +19,10 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private PatternSyntaxWrapper(CSharpSyntaxNode node)
         {
-            this.node = node;
+            this.SyntaxNode = node;
         }
 
-        public CSharpSyntaxNode SyntaxNode => this.node;
+        public CSharpSyntaxNode SyntaxNode { get; }
 
         public static explicit operator PatternSyntaxWrapper(SyntaxNode node)
         {
@@ -43,7 +41,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator CSharpSyntaxNode(PatternSyntaxWrapper wrapper)
         {
-            return wrapper.node;
+            return wrapper.SyntaxNode;
         }
 
         public static bool IsInstance(SyntaxNode node)

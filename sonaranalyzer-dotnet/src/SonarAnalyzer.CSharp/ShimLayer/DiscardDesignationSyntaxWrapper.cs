@@ -15,8 +15,6 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<CSharpSyntaxNode, SyntaxToken> UnderscoreTokenAccessor;
         private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithUnderscoreTokenAccessor;
 
-        private readonly CSharpSyntaxNode node;
-
         static DiscardDesignationSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(DiscardDesignationSyntaxWrapper));
@@ -26,10 +24,10 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private DiscardDesignationSyntaxWrapper(CSharpSyntaxNode node)
         {
-            this.node = node;
+            this.SyntaxNode = node;
         }
 
-        public CSharpSyntaxNode SyntaxNode => this.node;
+        public CSharpSyntaxNode SyntaxNode { get; }
 
         public SyntaxToken UnderscoreToken
         {
@@ -61,12 +59,12 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator VariableDesignationSyntaxWrapper(DiscardDesignationSyntaxWrapper wrapper)
         {
-            return VariableDesignationSyntaxWrapper.FromUpcast(wrapper.node);
+            return VariableDesignationSyntaxWrapper.FromUpcast(wrapper.SyntaxNode);
         }
 
         public static implicit operator CSharpSyntaxNode(DiscardDesignationSyntaxWrapper wrapper)
         {
-            return wrapper.node;
+            return wrapper.SyntaxNode;
         }
 
         public static bool IsInstance(SyntaxNode node)

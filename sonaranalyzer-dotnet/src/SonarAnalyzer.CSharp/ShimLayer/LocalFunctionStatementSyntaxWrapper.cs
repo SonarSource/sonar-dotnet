@@ -32,8 +32,6 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<StatementSyntax, ArrowExpressionClauseSyntax, StatementSyntax> WithExpressionBodyAccessor;
         private static readonly Func<StatementSyntax, SyntaxToken, StatementSyntax> WithSemicolonTokenAccessor;
 
-        private readonly StatementSyntax node;
-
         static LocalFunctionStatementSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(LocalFunctionStatementSyntaxWrapper));
@@ -59,10 +57,10 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private LocalFunctionStatementSyntaxWrapper(StatementSyntax node)
         {
-            this.node = node;
+            this.SyntaxNode = node;
         }
 
-        public StatementSyntax SyntaxNode => this.node;
+        public StatementSyntax SyntaxNode { get; }
 
         public SyntaxTokenList Modifiers
         {
@@ -153,7 +151,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator StatementSyntax(LocalFunctionStatementSyntaxWrapper wrapper)
         {
-            return wrapper.node;
+            return wrapper.SyntaxNode;
         }
 
         public static bool IsInstance(SyntaxNode node)

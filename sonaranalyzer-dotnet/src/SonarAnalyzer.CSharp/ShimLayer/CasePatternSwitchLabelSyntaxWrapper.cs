@@ -20,8 +20,6 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode, SwitchLabelSyntax> WithPatternAccessor;
         private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode, SwitchLabelSyntax> WithWhenClauseAccessor;
 
-        private readonly SwitchLabelSyntax node;
-
         static CasePatternSwitchLabelSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(CasePatternSwitchLabelSyntaxWrapper));
@@ -35,10 +33,10 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private CasePatternSwitchLabelSyntaxWrapper(SwitchLabelSyntax node)
         {
-            this.node = node;
+            this.SyntaxNode = node;
         }
 
-        public SwitchLabelSyntax SyntaxNode => this.node;
+        public SwitchLabelSyntax SyntaxNode { get; }
 
         public PatternSyntaxWrapper Pattern
         {
@@ -73,7 +71,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator SwitchLabelSyntax(CasePatternSwitchLabelSyntaxWrapper wrapper)
         {
-            return wrapper.node;
+            return wrapper.SyntaxNode;
         }
 
         public static bool IsInstance(SyntaxNode node)

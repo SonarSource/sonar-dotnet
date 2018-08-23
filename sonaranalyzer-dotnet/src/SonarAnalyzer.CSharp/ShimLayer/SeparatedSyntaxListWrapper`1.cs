@@ -152,16 +152,15 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             private readonly SeparatedSyntaxListWrapper<TNode> wrapper;
             private int index;
-            private TNode current;
 
             public Enumerator(SeparatedSyntaxListWrapper<TNode> wrapper)
             {
                 this.wrapper = wrapper;
                 this.index = -1;
-                this.current = default(TNode);
+                this.Current = default(TNode);
             }
 
-            public TNode Current => this.current;
+            public TNode Current { get; private set; }
 
             object IEnumerator.Current => this.Current;
 
@@ -206,14 +205,14 @@ namespace SonarAnalyzer.ShimLayer.CSharp
                 }
 
                 this.index++;
-                this.current = this.wrapper[this.index];
+                this.Current = this.wrapper[this.index];
                 return true;
             }
 
             public void Reset()
             {
                 this.index = -1;
-                this.current = default(TNode);
+                this.Current = default(TNode);
             }
         }
 

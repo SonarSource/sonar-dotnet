@@ -17,8 +17,6 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithThrowKeywordAccessor;
         private static readonly Func<ExpressionSyntax, ExpressionSyntax, ExpressionSyntax> WithExpressionAccessor;
 
-        private readonly ExpressionSyntax node;
-
         static ThrowExpressionSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(ThrowExpressionSyntaxWrapper));
@@ -30,10 +28,10 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private ThrowExpressionSyntaxWrapper(ExpressionSyntax node)
         {
-            this.node = node;
+            this.SyntaxNode = node;
         }
 
-        public ExpressionSyntax SyntaxNode => this.node;
+        public ExpressionSyntax SyntaxNode { get; }
 
         public SyntaxToken ThrowKeyword
         {
@@ -68,7 +66,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator ExpressionSyntax(ThrowExpressionSyntaxWrapper wrapper)
         {
-            return wrapper.node;
+            return wrapper.SyntaxNode;
         }
 
         public static bool IsInstance(SyntaxNode node)
