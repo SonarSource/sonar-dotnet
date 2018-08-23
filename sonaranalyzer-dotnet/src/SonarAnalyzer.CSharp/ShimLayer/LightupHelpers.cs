@@ -48,18 +48,17 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         internal static Func<TSyntax, TProperty> CreateSyntaxPropertyAccessor<TSyntax, TProperty>(Type type, string propertyName)
         {
-            Func<TSyntax, TProperty> fallbackAccessor =
-                syntax =>
+            TProperty fallbackAccessor(TSyntax syntax)
+            {
+                if (syntax == null)
                 {
-                    if (syntax == null)
-                    {
-                        // Unlike an extension method which would throw ArgumentNullException here, the light-up
-                        // behavior needs to match behavior of the underlying property.
-                        throw new NullReferenceException();
-                    }
+                    // Unlike an extension method which would throw ArgumentNullException here, the light-up
+                    // behavior needs to match behavior of the underlying property.
+                    throw new NullReferenceException();
+                }
 
-                    return default(TProperty);
-                };
+                return default(TProperty);
+            }
 
             if (type == null)
             {
@@ -97,18 +96,17 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         internal static Func<TSyntax, SeparatedSyntaxListWrapper<TProperty>> CreateSeparatedSyntaxListPropertyAccessor<TSyntax, TProperty>(Type type, string propertyName)
         {
-            Func<TSyntax, SeparatedSyntaxListWrapper<TProperty>> fallbackAccessor =
-                syntax =>
+            SeparatedSyntaxListWrapper<TProperty> fallbackAccessor(TSyntax syntax)
+            {
+                if (syntax == null)
                 {
-                    if (syntax == null)
-                    {
-                        // Unlike an extension method which would throw ArgumentNullException here, the light-up
-                        // behavior needs to match behavior of the underlying property.
-                        throw new NullReferenceException();
-                    }
+                    // Unlike an extension method which would throw ArgumentNullException here, the light-up
+                    // behavior needs to match behavior of the underlying property.
+                    throw new NullReferenceException();
+                }
 
-                    return SeparatedSyntaxListWrapper<TProperty>.UnsupportedEmpty;
-                };
+                return SeparatedSyntaxListWrapper<TProperty>.UnsupportedEmpty;
+            }
 
             if (type == null)
             {
@@ -158,23 +156,22 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         internal static Func<TSyntax, TProperty, TSyntax> CreateSyntaxWithPropertyAccessor<TSyntax, TProperty>(Type type, string propertyName)
         {
-            Func<TSyntax, TProperty, TSyntax> fallbackAccessor =
-                (syntax, newValue) =>
+            TSyntax fallbackAccessor(TSyntax syntax, TProperty newValue)
+            {
+                if (syntax == null)
                 {
-                    if (syntax == null)
-                    {
-                        // Unlike an extension method which would throw ArgumentNullException here, the light-up
-                        // behavior needs to match behavior of the underlying property.
-                        throw new NullReferenceException();
-                    }
+                    // Unlike an extension method which would throw ArgumentNullException here, the light-up
+                    // behavior needs to match behavior of the underlying property.
+                    throw new NullReferenceException();
+                }
 
-                    if (Equals(newValue, default(TProperty)))
-                    {
-                        return syntax;
-                    }
+                if (Equals(newValue, default(TProperty)))
+                {
+                    return syntax;
+                }
 
-                    throw new NotSupportedException();
-                };
+                throw new NotSupportedException();
+            }
 
             if (type == null)
             {
@@ -221,23 +218,22 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         internal static Func<TSyntax, SeparatedSyntaxListWrapper<TProperty>, TSyntax> CreateSeparatedSyntaxListWithPropertyAccessor<TSyntax, TProperty>(Type type, string propertyName)
         {
-            Func<TSyntax, SeparatedSyntaxListWrapper<TProperty>, TSyntax> fallbackAccessor =
-                (syntax, newValue) =>
+            TSyntax fallbackAccessor(TSyntax syntax, SeparatedSyntaxListWrapper<TProperty> newValue)
+            {
+                if (syntax == null)
                 {
-                    if (syntax == null)
-                    {
-                        // Unlike an extension method which would throw ArgumentNullException here, the light-up
-                        // behavior needs to match behavior of the underlying property.
-                        throw new NullReferenceException();
-                    }
+                    // Unlike an extension method which would throw ArgumentNullException here, the light-up
+                    // behavior needs to match behavior of the underlying property.
+                    throw new NullReferenceException();
+                }
 
-                    if (newValue is null)
-                    {
-                        return syntax;
-                    }
+                if (newValue is null)
+                {
+                    return syntax;
+                }
 
-                    throw new NotSupportedException();
-                };
+                throw new NotSupportedException();
+            }
 
             if (type == null)
             {
