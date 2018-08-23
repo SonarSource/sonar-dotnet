@@ -54,6 +54,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override bool IsOptional(ParameterSyntax parameter) =>
             parameter.Modifiers.Any(SyntaxKind.OptionalKeyword);
 
-        protected override sealed GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }
 }

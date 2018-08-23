@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules
         internal const string MessageFormat = "This file has {1} lines, which is greater than {0} authorized. Split it into " +
             "smaller files.";
 
-        public override sealed ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         private const int DefaultValueMaximum = 1000;
 

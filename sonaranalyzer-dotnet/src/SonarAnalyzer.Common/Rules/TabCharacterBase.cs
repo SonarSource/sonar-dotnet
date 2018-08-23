@@ -48,6 +48,6 @@ namespace SonarAnalyzer.Rules
 
         protected abstract DiagnosticDescriptor Rule { get; }
 
-        public override sealed ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

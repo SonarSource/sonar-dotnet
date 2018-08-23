@@ -46,6 +46,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool IsWriteOnlyProperty(PropertyStatementSyntax prop) => prop.Modifiers.Any(SyntaxKind.WriteOnlyKeyword);
 
-        protected override sealed GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }
 }

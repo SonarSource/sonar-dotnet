@@ -51,6 +51,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return parent?.ChildNodes().OfType<EnumMemberDeclarationSyntax>() ?? new EnumMemberDeclarationSyntax[0];
         }
 
-        protected override sealed GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }
 }
