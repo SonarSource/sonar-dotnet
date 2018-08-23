@@ -53,11 +53,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var literal = (LiteralExpressionSyntax)c.Node;
 
-                    if (literal.Token.ValueText == literal.Token.Text)
-                    {
-                        return; // Literal doesn't contain any separator
-                    }
-
                     var decimalParts = literal.Token.Text.Split('.');
                     if (decimalParts.Length > 2)
                     {
