@@ -38,8 +38,6 @@ import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 
 public class SarifParserCallbackImpl implements SarifParserCallback {
 
-  private static final Logger LOG = Loggers.get(SarifParserCallbackImpl.class);
-
   private final SensorContext context;
   private final Map<String, String> repositoryKeyByRoslynRuleKey;
   private final Set<Issue> savedIssues = new HashSet<>();
@@ -54,10 +52,6 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
     if (repositoryKey == null) {
       return;
-    }
-
-    if (inputModule != null) {
-      LOG.info("Issue on project, key '" + inputModule.key() + "' value '" + inputModule.toString() + "'");
     }
 
     NewIssue newIssue = context.newIssue();
