@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static ISet<KnownType> TaskTypes = new HashSet<KnownType>
+        private static readonly ISet<KnownType> TaskTypes = new HashSet<KnownType>
         {
             KnownType.System_Threading_Tasks_Task,
             KnownType.System_Threading_Tasks_Task_T,

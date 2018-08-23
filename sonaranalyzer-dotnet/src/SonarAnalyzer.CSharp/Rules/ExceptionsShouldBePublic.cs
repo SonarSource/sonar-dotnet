@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        private static ISet<KnownType> baseExceptions = new HashSet<KnownType>
+        private static readonly ISet<KnownType> baseExceptions = new HashSet<KnownType>
         {
             KnownType.System_Exception,
             KnownType.System_ApplicationException,

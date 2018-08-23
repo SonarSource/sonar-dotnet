@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static ISet<KnownType> IgnoredTypes = new HashSet<KnownType>
+        private static readonly ISet<KnownType> IgnoredTypes = new HashSet<KnownType>
         {
             KnownType.UnityEditor_AssetModificationProcessor,
             KnownType.UnityEditor_AssetPostprocessor,

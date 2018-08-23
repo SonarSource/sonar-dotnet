@@ -77,8 +77,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             throw new NotSupportedException($"Not supported language extension '{extension}'");
         }
 
-        private static Func<ParseOptions, bool> VisualBasicFilter = (options) => options is VB.VisualBasicParseOptions;
+        private static readonly Func<ParseOptions, bool> VisualBasicFilter = (options) => options is VB.VisualBasicParseOptions;
 
-        private static Func<ParseOptions, bool> CSharpFilter = (options) => options is CS.CSharpParseOptions;
+        private static readonly Func<ParseOptions, bool> CSharpFilter = (options) => options is CS.CSharpParseOptions;
     }
 }

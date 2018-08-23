@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             };
 
-        private static ISet<SyntaxKind> boolLiterals =
+        private static readonly ISet<SyntaxKind> boolLiterals =
             new HashSet<SyntaxKind>
             {
                 SyntaxKind.TrueLiteralExpression,
