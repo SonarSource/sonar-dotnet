@@ -45,32 +45,30 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if ((c.Compilation as CSharpCompilation)?.LanguageVersion.CompareTo(LanguageVersionEx.CSharp7) < 0)
+                    if (!c.Compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp7))
                     {
                         return;
                     }
 
                     var literal = (LiteralExpressionSyntax)c.Node;
 
-                    var parts = literal.Token.Text.Split('_');
+                    var parts = literal.Token.Text
+                        .Split('.')[0] // Get rid of the decimal part (1_234.567 => 1_234)
+                        .Split('_');
 
                     var previousPartLength = -1;
                     for (var i = 1; i < parts.Length; i++)
                     {
                         var currentPartLength = GetCurrentPartLength(parts[i], i == parts.Length - 1);
-                        if (previousPartLength == -1)
-                        {
-                            previousPartLength = currentPartLength;
-                        }
-                        else if (currentPartLength != previousPartLength)
+
+                        if (currentPartLength != previousPartLength &&
+                            previousPartLength != -1)
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, literal.GetLocation()));
                             return;
                         }
-                        else
-                        {
-                            // continue
-                        }
+
+                        previousPartLength = currentPartLength;
                     }
                 },
                 SyntaxKind.NumericLiteralExpression);
