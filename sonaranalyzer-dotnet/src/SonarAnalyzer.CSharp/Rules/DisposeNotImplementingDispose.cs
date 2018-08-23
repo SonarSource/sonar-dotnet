@@ -123,7 +123,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SemanticModel semanticModel,
             HashSet<IMethodSymbol> disposeMethodsCalledFromDispose)
         {
-            if (!IsCallOnThis(invocationExpression))
+            if (!invocationExpression.IsOnThis())
             {
                 return;
             }
@@ -135,21 +135,6 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             disposeMethodsCalledFromDispose.Add(invokedMethod);
-        }
-
-        private static bool IsCallOnThis(InvocationExpressionSyntax invocation)
-        {
-            if (invocation.Expression is NameSyntax)
-            {
-                return true;
-            }
-
-            if (invocation.Expression is MemberAccessExpressionSyntax memberAccess && memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
-            {
-                return true;
-            }
-
-            return false;
         }
 
         private static void ReportDisposeMethods(IEnumerable<IMethodSymbol> disposeMethods,

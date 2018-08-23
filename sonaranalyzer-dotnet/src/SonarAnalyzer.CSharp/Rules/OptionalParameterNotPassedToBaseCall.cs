@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    if (!IsOnBase(invocation) ||
+                    if (!invocation.IsOnBase() ||
                         invocation.ArgumentList == null)
                     {
                         return;
@@ -74,12 +74,6 @@ namespace SonarAnalyzer.Rules.CSharp
             return semanticModel.GetEnclosingSymbol(invocation.SpanStart) is IMethodSymbol enclosingSymbol &&
                 enclosingSymbol.IsOverride &&
                 object.Equals(enclosingSymbol.OverriddenMethod, calledMethod);
-        }
-
-        private static bool IsOnBase(InvocationExpressionSyntax invocation)
-        {
-            return invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
-                memberAccess.Expression.IsKind(SyntaxKind.BaseExpression);
         }
     }
 }
