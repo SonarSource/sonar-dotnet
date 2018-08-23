@@ -36,8 +36,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
             ConcurrentDictionary<SyntaxKind, bool> wrappedSyntax = SupportedWrappers.GetOrAdd(underlyingType, _ => new ConcurrentDictionary<SyntaxKind, bool>());
 
             // Avoid creating the delegate if the value already exists
-            bool canCast;
-            if (!wrappedSyntax.TryGetValue(node.Kind(), out canCast))
+            if (!wrappedSyntax.TryGetValue(node.Kind(), out var canCast))
             {
                 canCast = wrappedSyntax.GetOrAdd(
                     node.Kind(),

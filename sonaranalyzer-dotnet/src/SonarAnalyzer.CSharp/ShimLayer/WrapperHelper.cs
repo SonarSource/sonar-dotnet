@@ -54,8 +54,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         /// <returns>The wrapped type, or null if there is no info.</returns>
         internal static Type GetWrappedType(Type wrapperType)
         {
-            Type wrappedType;
-            if (WrappedTypes.TryGetValue(wrapperType, out wrappedType))
+            if (WrappedTypes.TryGetValue(wrapperType, out var wrappedType))
             {
                 return wrappedType;
             }
