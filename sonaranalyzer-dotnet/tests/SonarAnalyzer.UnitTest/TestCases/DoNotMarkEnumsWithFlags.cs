@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -57,12 +57,6 @@ namespace Tests.Diagnostics
     {
         Value = -3, // Secondary
         Other = -4 // Secondary
-    }
-
-    [Flags]
-    public enum Color6 : float // Noncompliant
-    {
-        Val = 2.4 // Secondary
     }
 
     [Flags]

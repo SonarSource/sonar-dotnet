@@ -142,9 +142,8 @@ namespace Tests.TestCases
         }
 
         void M1Bis(
-            int a
-            , // Fixed
-            int c
+            int a,
+                        int c
             ) // Fixed
         {
             var result = a + c;

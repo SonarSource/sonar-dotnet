@@ -54,7 +54,7 @@ namespace Tests.Diagnostics
             { }
             foreach (var i in array)
             { }
-            foreach (B[] i in array.OfType<B[]>()) // Fixed
+            foreach (B[] i in array) // Fixed
             { }
         }
         public void M5(ArrayList list)

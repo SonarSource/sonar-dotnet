@@ -20,8 +20,8 @@
 
 extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,20 +30,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void NumberPatternShouldBeRegular_CSharp6()
+        public void NumberPatternShouldBeRegular_BeforeCSharp7()
         {
             Verifier.VerifyNoIssueReported(@"TestCases\NumberPatternShouldBeRegular.cs",
                 new NumberPatternShouldBeRegular(),
-                new CSharpParseOptions(LanguageVersion.CSharp6));
+                ParseOptionsHelper.BeforeCSharp7);
         }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void NumberPatternShouldBeRegular_CSharp7()
+        public void NumberPatternShouldBeRegular_FromCSharp7()
         {
             Verifier.VerifyAnalyzer(@"TestCases\NumberPatternShouldBeRegular.cs",
                 new NumberPatternShouldBeRegular(),
-                new CSharpParseOptions(LanguageVersion.CSharp7));
+                ParseOptionsHelper.FromCSharp7);
         }
     }
 }

@@ -58,19 +58,4 @@ namespace Tests.Diagnostics
 
         static bool Initialize() => true;
     }
-
-    class FooBar
-    {
-        static MissingType f;
-
-        static MissingSymbol()
-        {
-            f = new MissingType();
-        }
-    }
-
-    class Hello
-    {
-        static Hello() =>
-    }
 }

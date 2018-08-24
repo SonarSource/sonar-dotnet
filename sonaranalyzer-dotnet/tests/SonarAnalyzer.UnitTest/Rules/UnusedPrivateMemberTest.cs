@@ -19,9 +19,9 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
-using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -759,15 +759,17 @@ namespace UnityEditor
         [TestCategory("Rule")]
         public void UnusedPrivateMember()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.cs", new UnusedPrivateMember());
+            Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.cs",
+                new UnusedPrivateMember());
         }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnusedPrivateMember_CSharp7()
+        public void UnusedPrivateMember_FromCSharp7()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.CSharp7.cs", new UnusedPrivateMember(),
-                options: new CSharpParseOptions(LanguageVersion.CSharp7));
+            Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.CSharp7.cs",
+                new UnusedPrivateMember(),
+                ParseOptionsHelper.FromCSharp7);
         }
 
         [TestMethod]

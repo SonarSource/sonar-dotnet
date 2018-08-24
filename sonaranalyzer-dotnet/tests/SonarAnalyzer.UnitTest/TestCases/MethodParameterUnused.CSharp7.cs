@@ -7,7 +7,7 @@
             this.Foo(new[] { ("some", "thing") });
         }
 
-        private void Foo((string key, string value)[] bars) // Noncompliant - FP - we need a higher version of Roslyn in the tests to have the right symbol
+        private void Foo((string key, string value)[] bars)
         {
             foreach (var (key, value) in bars)
             { }

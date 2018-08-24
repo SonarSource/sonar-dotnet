@@ -19,9 +19,9 @@
  */
 
 extern alias csharp;
+using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CommentedOutCode_NoDocumentation()
         {
             Verifier.VerifyAnalyzer(@"TestCases\CommentedOutCode.cs", new CommentedOutCode(),
-                new CSharpParseOptions(documentationMode: Microsoft.CodeAnalysis.DocumentationMode.None));
+                new[] { new CSharpParseOptions(documentationMode: Microsoft.CodeAnalysis.DocumentationMode.None) });
         }
     }
 }

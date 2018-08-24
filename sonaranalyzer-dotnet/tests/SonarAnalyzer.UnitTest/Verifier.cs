@@ -82,7 +82,7 @@ namespace SonarAnalyzer.UnitTest
         }
 
         public static void VerifyAnalyzer(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            ParseOptions options = null, params MetadataReference[] additionalReferences)
+            IEnumerable<ParseOptions> options = null, params MetadataReference[] additionalReferences)
         {
             VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, options, additionalReferences);
         }
@@ -114,11 +114,11 @@ namespace SonarAnalyzer.UnitTest
         }
 
         public static void VerifyAnalyzer(IEnumerable<string> paths, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            ParseOptions options = null, params MetadataReference[] additionalReferences)
+            IEnumerable<ParseOptions> options = null, params MetadataReference[] additionalReferences)
         {
             var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths, additionalReferences);
 
-            foreach (var compilation in solutionBuilder.Compile(options))
+            foreach (var compilation in solutionBuilder.Compile(options?.ToArray()))
             {
                 DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer);
             }
@@ -136,40 +136,52 @@ namespace SonarAnalyzer.UnitTest
             DiagnosticVerifier.VerifyNoIssueReported(compilation, diagnosticAnalyzer);
         }
 
-        public static void VerifyNoIssueReported(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer, ParseOptions options = null,
-            params MetadataReference[] additionalReferences)
+        public static void VerifyNoIssueReported(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
+            IEnumerable<ParseOptions> options = null, params MetadataReference[] additionalReferences)
         {
-            var compilation = SolutionBuilder.Create()
+            var projectBuilder = SolutionBuilder.Create()
                 .AddProject(AnalyzerLanguage.FromPath(path))
                 .AddReferences(additionalReferences)
-                .AddDocument(path)
-                .GetCompilation(options);
+                .AddDocument(path);
 
-            DiagnosticVerifier.VerifyNoIssueReported(compilation, diagnosticAnalyzer);
+
+            if (options == null)
+            {
+                var compilation = projectBuilder.GetCompilation(null);
+                DiagnosticVerifier.VerifyNoIssueReported(compilation, diagnosticAnalyzer);
+            }
+            else
+            {
+                foreach (var option in options)
+                {
+                    var compilation = projectBuilder.GetCompilation(option);
+                    DiagnosticVerifier.VerifyNoIssueReported(compilation, diagnosticAnalyzer);
+                }
+            }
         }
 
         public static void VerifyCodeFix(string path, string pathToExpected,
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider,
-            params MetadataReference[] additionalReferences)
+            IEnumerable<ParseOptions> options = null, params MetadataReference[] additionalReferences)
         {
             CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider,
-                null, additionalReferences);
+                null, options, additionalReferences);
         }
 
         public static void VerifyCodeFix(string path, string pathToExpected, string pathToBatchExpected,
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider,
-            params MetadataReference[] additionalReferences)
+            IEnumerable<ParseOptions> options = null, params MetadataReference[] additionalReferences)
         {
             CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToBatchExpected, diagnosticAnalyzer, codeFixProvider,
-                null, additionalReferences);
+                null, options, additionalReferences);
         }
 
         public static void VerifyCodeFix(string path, string pathToExpected,
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider, string codeFixTitle,
-            params MetadataReference[] additionalReferences)
+            IEnumerable<ParseOptions> options = null, params MetadataReference[] additionalReferences)
         {
             CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider,
-                codeFixTitle, additionalReferences);
+                codeFixTitle, options, additionalReferences);
         }
     }
 }

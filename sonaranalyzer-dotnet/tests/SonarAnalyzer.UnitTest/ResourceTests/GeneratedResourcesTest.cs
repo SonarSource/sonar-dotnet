@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
         private const string RspecRelativeFolderPath = @"..\..\..\..\rspec\";
 
         [TestMethod]
-        public void AnalyzersHaveCorrespondingResource_CS()
+        public void AnalyzersHaveCorrespondingResource_CSharp()
         {
             var rulesFromResources = GetRulesFromResources(RspecRelativeFolderPath + "cs");
 
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
         }
 
         [TestMethod]
-        public void AnalyzersHaveCorrespondingResource_VB()
+        public void AnalyzersHaveCorrespondingResource_VisualBasic()
         {
             var rulesFromResources = GetRulesFromResources(RspecRelativeFolderPath + "vbnet");
 
