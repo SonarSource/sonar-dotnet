@@ -19,8 +19,9 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,6 +33,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void GenericTypeParameterInOut()
         {
             Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterInOut.cs", new GenericTypeParameterInOut());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void GenericTypeParameterInOut_CSharp7()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterInOut.CSharp7.cs", new GenericTypeParameterInOut(),
+                options: new CSharpParseOptions(LanguageVersion.CSharp7));
         }
     }
 }
