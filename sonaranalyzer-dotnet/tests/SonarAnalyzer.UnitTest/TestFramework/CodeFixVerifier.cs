@@ -37,9 +37,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     {
         public static void VerifyCodeFix(string path, string pathToExpected, string pathToBatchExpected,
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider, string codeFixTitle,
-            params MetadataReference[] additionalReferences)
+            IEnumerable<ParseOptions> options = null, params MetadataReference[] additionalReferences)
         {
-            var parseOptions = ParseOptionsHelper.GetParseOptionsByFileExtension(Path.GetExtension(path));
+            var parseOptions = options ?? ParseOptionsHelper.GetParseOptionsByFileExtension(Path.GetExtension(path));
 
             foreach (var parseOption in parseOptions)
             {

@@ -33,20 +33,22 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     {
         private static readonly IEnumerable<ParseOptions> defaultParseOptions =
             ImmutableArray.Create<ParseOptions>(
-                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp5),
-                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp6),
+
                 new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7),
+                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7_1),
+                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7_2),
+                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7_3),
                 new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic12),
                 new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic14),
-                new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic15));
+                new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic15),
+                new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic15_3),
+                new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic15_5)
+                );
 
         public static IEnumerable<ParseOptions> GetParseOptionsOrDefault(IEnumerable<ParseOptions> parseOptions) =>
             parseOptions != null && parseOptions.WhereNotNull().Any()
                 ? parseOptions
                 : defaultParseOptions;
-
-        public static IEnumerable<ParseOptions> GetParseOptions(Func<ParseOptions, bool> filter) =>
-            defaultParseOptions.Where(filter);
 
         public static IEnumerable<ParseOptions> GetParseOptionsByFileExtension(string extension) =>
             defaultParseOptions.Where(GetFilterByFileExtension(extension));
@@ -80,5 +82,25 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static readonly Func<ParseOptions, bool> VisualBasicFilter = (options) => options is VB.VisualBasicParseOptions;
 
         private static readonly Func<ParseOptions, bool> CSharpFilter = (options) => options is CS.CSharpParseOptions;
+
+        public static IEnumerable<ParseOptions> FromCSharp6 { get; } =
+            ImmutableArray.Create(
+                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp6),
+                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7),
+                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7_1),
+                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7_2),
+                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7_3));
+
+        public static IEnumerable<ParseOptions> FromCSharp7 { get; } =
+            ImmutableArray.Create(
+                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7),
+                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7_1),
+                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7_2),
+                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7_3));
+
+        public static IEnumerable<ParseOptions> BeforeCSharp7 { get; } =
+            ImmutableArray.Create(
+                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp5),
+                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp6));
     }
 }

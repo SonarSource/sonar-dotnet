@@ -20,8 +20,8 @@
 
 extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -65,23 +65,26 @@ public static class Utils
         [TestCategory("Rule")]
         public void NullPointerDereference()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereference.cs", new NullPointerDereference());
+            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereference.cs",
+                new NullPointerDereference());
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void NullPointerDereference_CSharp6()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereferenceCSharp6.cs", new NullPointerDereference(),
-                new CSharpParseOptions(LanguageVersion.CSharp6));
+            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereferenceCSharp6.cs",
+                new NullPointerDereference(),
+                ParseOptionsHelper.FromCSharp6);
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void NullPointerDereference_CSharp7()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereferenceCSharp7.cs", new NullPointerDereference(),
-                new CSharpParseOptions(LanguageVersion.CSharp7));
+            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereferenceCSharp7.cs",
+                new NullPointerDereference(),
+                ParseOptionsHelper.FromCSharp7);
         }
     }
 }

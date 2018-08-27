@@ -22,6 +22,7 @@ extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,20 +31,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ConditionEvaluatesToConstant()
+        public void ConditionEvaluatesToConstant_CSharp6()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.cs",
                 new ConditionEvaluatesToConstant(),
-                new CSharpParseOptions(LanguageVersion.CSharp6));
+                new[] { new CSharpParseOptions(LanguageVersion.CSharp6) });
         }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ConditionEvaluatesToConstant_CSharp7()
+        public void ConditionEvaluatesToConstant_FromCSharp7()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp7.cs",
                 new ConditionEvaluatesToConstant(),
-                new CSharpParseOptions(LanguageVersion.CSharp7));
+                ParseOptionsHelper.FromCSharp7);
         }
     }
 }

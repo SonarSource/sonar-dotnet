@@ -42,10 +42,16 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private static readonly object GotoDefaultEntry = new object();
         private static readonly object GotoNullEntry = new object();
         private static readonly HashSet<SyntaxKind> csharp6SwitchLabelKinds = new HashSet<SyntaxKind>
-            {
-                SyntaxKind.CaseSwitchLabel,
-                SyntaxKind.DefaultSwitchLabel,
-            };
+        {
+            SyntaxKind.CaseSwitchLabel,
+            SyntaxKind.DefaultSwitchLabel,
+        };
+        private static readonly HashSet<SyntaxKind> csharp7DefaultLabelKinds = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.DefaultExpression,
+            SyntaxKindEx.DefaultLiteralExpression,
+        };
+
 
         internal CSharpControlFlowGraphBuilder(CSharpSyntaxNode node, SemanticModel semanticModel)
             : base(node, semanticModel)
@@ -758,7 +764,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             return BuildExpression(switchStatement.Expression, switchBlock);
 
             bool ContainsDefaultLabel(SwitchSectionSyntax s) =>
-                s.Labels.OfType<CaseSwitchLabelSyntax>().Any(l => l.Value.IsKind(SyntaxKind.DefaultExpression));
+                s.Labels.OfType<CaseSwitchLabelSyntax>().Any(l => l.Value.IsAnyKind(csharp7DefaultLabelKinds));
         }
 
         private Block BuildCasePattern(CasePatternSwitchLabelSyntaxWrapper casePatternSwitchLabel,

@@ -20,8 +20,8 @@
 
 extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -49,11 +49,11 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodParameterUnused_CSharp7()
+        public void MethodParameterUnused_FromCSharp7()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.CSharp7.cs",
+            Verifier.VerifyNoIssueReported(@"TestCases\MethodParameterUnused.CSharp7.cs",
                 new MethodParameterUnused(),
-                new CSharpParseOptions(LanguageVersion.CSharp7),
+                ParseOptionsHelper.FromCSharp7,
                 NuGetMetadataReference.SystemValueTuple("4.5.0"));
         }
     }
