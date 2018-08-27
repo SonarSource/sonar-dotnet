@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -102,8 +103,8 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var typeParameter in declaredSymbol.TypeParameters
                 .Where(typeParameter => typeParameter.Variance == VarianceKind.None))
             {
-                var canBeIn = CheckTypeParameter(typeParameter, VarianceKind.In, declaredSymbol, returnType, parameterSymbols);
-                var canBeOut = CheckTypeParameter(typeParameter, VarianceKind.Out, declaredSymbol, returnType, parameterSymbols);
+                var canBeIn = CheckTypeParameter(typeParameter, VarianceKind.In, returnType, parameterSymbols);
+                var canBeOut = CheckTypeParameter(typeParameter, VarianceKind.Out, returnType, parameterSymbols);
 
                 if (canBeIn ^ canBeOut)
                 {
@@ -117,23 +118,23 @@ namespace SonarAnalyzer.Rules.CSharp
         #region Top level per type parameter
 
         private static bool CheckTypeParameter(ITypeParameterSymbol typeParameter, VarianceKind variance,
-            INamedTypeSymbol delegateType, ITypeSymbol returnType, ImmutableArray<IParameterSymbol> parameters)
+            ITypeSymbol returnType, ImmutableArray<IParameterSymbol> parameters)
         {
-            var canBe = CheckTypeParameterContraintsInSymbol(typeParameter, variance, delegateType);
+            var canBe = CheckTypeParameterContraintsInSymbol(typeParameter, variance);
             if (!canBe)
             {
                 return false;
             }
 
             canBe = CanTypeParameterBeVariant(typeParameter, variance, returnType,
-                true, false, delegateType);
+                true, false);
 
             if (!canBe)
             {
                 return false;
             }
 
-            canBe = CheckTypeParameterInParameters(typeParameter, variance, parameters, delegateType);
+            canBe = CheckTypeParameterInParameters(typeParameter, variance, parameters);
             return canBe;
         }
         private static bool CheckTypeParameter(ITypeParameterSymbol typeParameter, VarianceKind variance,
@@ -150,8 +151,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     typeParameter, variance,
                     baseInterface,
                     true,
-                    false,
-                    baseInterface);
+                    false);
 
                 if (!canBeVariant)
                 {
@@ -212,25 +212,25 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool CheckTypeParameterInMethod(ITypeParameterSymbol typeParameter, VarianceKind variance,
             IMethodSymbol method)
         {
-            var canBe = CheckTypeParameterContraintsInSymbol(typeParameter, variance, method);
+            var canBe = CheckTypeParameterContraintsInSymbol(typeParameter, variance);
             if (!canBe)
             {
                 return false;
             }
+
 
             canBe = CanTypeParameterBeVariant(
                 typeParameter, variance,
                 method.ReturnType,
                 true,
-                false,
-                method);
+                false);
 
             if (!canBe)
             {
                 return false;
             }
 
-            return CheckTypeParameterInParameters(typeParameter, variance, method.Parameters, method);
+            return CheckTypeParameterInParameters(typeParameter, variance, method.Parameters);
         }
 
         private static bool CheckTypeParameterInEvent(ITypeParameterSymbol typeParameter, VarianceKind variance,
@@ -240,12 +240,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 typeParameter, variance,
                 @event.Type,
                 false,
-                true,
-                @event);
+                true);
         }
 
         private static bool CheckTypeParameterInParameters(ITypeParameterSymbol typeParameter, VarianceKind variance,
-            ImmutableArray<IParameterSymbol> parameters, ISymbol context)
+            ImmutableArray<IParameterSymbol> parameters)
         {
             foreach (var param in parameters)
             {
@@ -253,8 +252,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     typeParameter, variance,
                     param.Type,
                     param.RefKind != RefKind.None,
-                    true,
-                    context);
+                    true);
 
                 if (!canBe)
                 {
@@ -264,8 +262,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return true;
         }
 
-        private static bool CheckTypeParameterContraintsInSymbol(ITypeParameterSymbol typeParameter, VarianceKind variance,
-            ISymbol context)
+        private static bool CheckTypeParameterContraintsInSymbol(ITypeParameterSymbol typeParameter, VarianceKind variance)
         {
             foreach (var constraintType in typeParameter.ConstraintTypes)
             {
@@ -274,8 +271,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     variance,
                     constraintType,
                     false,
-                    true,
-                    context);
+                    true);
 
                 if (!canBe)
                 {
@@ -294,8 +290,7 @@ namespace SonarAnalyzer.Rules.CSharp
             VarianceKind variance,
             ITypeSymbol type,
             bool requireOutputSafety,
-            bool requireInputSafety,
-            ISymbol context)
+            bool requireInputSafety)
         {
             switch (type.Kind)
             {
@@ -310,10 +305,10 @@ namespace SonarAnalyzer.Rules.CSharp
                         (requireOutputSafety && variance == VarianceKind.In) ||
                         (requireInputSafety && variance == VarianceKind.Out));
                 case SymbolKind.ArrayType:
-                    return CanTypeParameterBeVariant(parameter, variance, ((IArrayTypeSymbol)type).ElementType, requireOutputSafety, requireInputSafety, context);
+                    return CanTypeParameterBeVariant(parameter, variance, ((IArrayTypeSymbol)type).ElementType, requireOutputSafety, requireInputSafety);
                 case SymbolKind.ErrorType:
                 case SymbolKind.NamedType:
-                    return CanTypeParameterBeVariant(parameter, variance, (INamedTypeSymbol)type, requireOutputSafety, requireInputSafety, context);
+                    return CanTypeParameterBeVariant(parameter, variance, (INamedTypeSymbol)type, requireOutputSafety, requireInputSafety);
                 default:
                     return true;
             }
@@ -324,8 +319,7 @@ namespace SonarAnalyzer.Rules.CSharp
             VarianceKind variance,
             INamedTypeSymbol namedType,
             bool requireOutputSafety,
-            bool requireInputSafety,
-            ISymbol context)
+            bool requireInputSafety)
         {
 
             switch (namedType.TypeKind)
@@ -339,6 +333,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     break;
                 default:
                     return true;
+            }
+
+            if (namedType.IsTupleType())
+            {
+                return false;
             }
 
             var currentNamedType = namedType;
@@ -375,7 +374,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             throw new NotSupportedException();
                     }
 
-                    if (!CanTypeParameterBeVariant(parameter, variance, typeArg, requireOut, requireIn, context))
+                    if (!CanTypeParameterBeVariant(parameter, variance, typeArg, requireOut, requireIn))
                     {
                         return false;
                     }
