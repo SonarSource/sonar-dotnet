@@ -103,8 +103,8 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var typeParameter in declaredSymbol.TypeParameters
                 .Where(typeParameter => typeParameter.Variance == VarianceKind.None))
             {
-                var canBeIn = CheckTypeParameter(typeParameter, VarianceKind.In, declaredSymbol, returnType, parameterSymbols);
-                var canBeOut = CheckTypeParameter(typeParameter, VarianceKind.Out, declaredSymbol, returnType, parameterSymbols);
+                var canBeIn = CheckTypeParameter(typeParameter, VarianceKind.In, returnType, parameterSymbols);
+                var canBeOut = CheckTypeParameter(typeParameter, VarianceKind.Out, returnType, parameterSymbols);
 
                 if (canBeIn ^ canBeOut)
                 {
@@ -118,9 +118,9 @@ namespace SonarAnalyzer.Rules.CSharp
         #region Top level per type parameter
 
         private static bool CheckTypeParameter(ITypeParameterSymbol typeParameter, VarianceKind variance,
-            INamedTypeSymbol delegateType, ITypeSymbol returnType, ImmutableArray<IParameterSymbol> parameters)
+            ITypeSymbol returnType, ImmutableArray<IParameterSymbol> parameters)
         {
-            var canBe = CheckTypeParameterContraintsInSymbol(typeParameter, variance, delegateType);
+            var canBe = CheckTypeParameterContraintsInSymbol(typeParameter, variance);
             if (!canBe)
             {
                 return false;
@@ -212,7 +212,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool CheckTypeParameterInMethod(ITypeParameterSymbol typeParameter, VarianceKind variance,
             IMethodSymbol method)
         {
-            var canBe = CheckTypeParameterContraintsInSymbol(typeParameter, variance, method);
+            var canBe = CheckTypeParameterContraintsInSymbol(typeParameter, variance);
             if (!canBe)
             {
                 return false;
@@ -262,8 +262,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return true;
         }
 
-        private static bool CheckTypeParameterContraintsInSymbol(ITypeParameterSymbol typeParameter, VarianceKind variance,
-            ISymbol context)
+        private static bool CheckTypeParameterContraintsInSymbol(ITypeParameterSymbol typeParameter, VarianceKind variance)
         {
             foreach (var constraintType in typeParameter.ConstraintTypes)
             {
