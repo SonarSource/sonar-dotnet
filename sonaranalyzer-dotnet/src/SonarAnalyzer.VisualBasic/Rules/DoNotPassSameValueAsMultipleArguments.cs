@@ -38,10 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-        protected override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
             Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;

@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
                 isEnabledByDefault: false);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         [RuleParameter("format", PropertyType.String,
             "Regular expression used to check the property names against.", NamingHelper.PascalCasingPattern)]

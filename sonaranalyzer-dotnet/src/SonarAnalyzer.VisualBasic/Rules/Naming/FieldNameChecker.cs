@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -45,16 +44,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
                             IsCandidateSymbol(symbol) &&
                             !NamingHelper.IsRegexMatch(symbol.Name, Pattern))
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, name.GetLocation(),
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], name.GetLocation(),
                                 symbol.Name, Pattern));
                         }
                     }
                 },
                 SyntaxKind.FieldDeclaration);
         }
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

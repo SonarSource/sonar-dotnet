@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
@@ -32,8 +31,6 @@ namespace SonarAnalyzer.Rules
         internal const string DiagnosticId = "S104";
         internal const string MessageFormat = "This file has {1} lines, which is greater than {0} authorized. Split it into " +
             "smaller files.";
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         private const int DefaultValueMaximum = 1000;
 
@@ -57,13 +54,12 @@ namespace SonarAnalyzer.Rules
 
                     if (linesCount > Maximum)
                     {
-                        stac.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, Location.Create(stac.Tree,
+                        stac.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], Location.Create(stac.Tree,
                             TextSpan.FromBounds(0, 0)), Maximum, linesCount));
                     }
                 });
         }
 
-        protected abstract DiagnosticDescriptor Rule { get; }
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract bool IsEndOfFileToken(SyntaxToken token);
     }

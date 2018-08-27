@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
@@ -30,9 +29,6 @@ namespace SonarAnalyzer.Rules
     {
         internal const string DiagnosticId = "S112";
         internal const string MessageFormat = "'{0}' should not be thrown by user code.";
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         internal static readonly ISet<KnownType> ReservedExceptionTypeNames = new HashSet<KnownType>
         {
@@ -57,7 +53,7 @@ namespace SonarAnalyzer.Rules
             var expressionType = context.SemanticModel.GetTypeInfo(throwStatementExpression).Type;
             if (expressionType.IsAny(ReservedExceptionTypeNames))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwStatementExpression.GetLocation(),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], throwStatementExpression.GetLocation(),
                     expressionType.ToDisplayString()));
             }
         }

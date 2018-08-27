@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -54,9 +53,6 @@ namespace SonarAnalyzer.Rules
             };
 
         protected abstract ISet<SyntaxKind> InvalidModifiers { get; }
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
@@ -97,7 +93,7 @@ namespace SonarAnalyzer.Rules
 
                 if (incorrectFieldVariables != null)
                 {
-                    analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
+                    analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0],
                         fieldDeclaration.Declaration.Type.GetLocation(), incorrectFieldVariables));
                 }
             }

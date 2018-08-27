@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
@@ -34,11 +33,8 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4144";
         protected const string MessageFormat = "Update this method so that its implementation is not identical to '{0}'.";
 
-        protected abstract DiagnosticDescriptor Rule { get; }
         protected abstract TLanguageKindEnum ClassDeclarationSyntaxKind { get; }
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -66,7 +62,7 @@ namespace SonarAnalyzer.Rules
 
                         foreach (var duplicate in duplicates)
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, GetMethodIdentifier(duplicate).GetLocation(),
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], GetMethodIdentifier(duplicate).GetLocation(),
                                 additionalLocations: new[] { GetMethodIdentifier(method).GetLocation() },
                                 messageArgs: GetMethodIdentifier(method).ValueText));
                         }

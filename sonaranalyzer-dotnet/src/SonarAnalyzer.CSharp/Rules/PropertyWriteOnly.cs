@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        protected override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(SyntaxKind.PropertyDeclaration);
         public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => kindsOfInterest;

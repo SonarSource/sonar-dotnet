@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor s4025 =
             DiagnosticDescriptorBuilder.GetDescriptor(S4025DiagnosticId, S4025MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s2387, s4025);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(s2387, s4025);
 
         protected override void Initialize(SonarAnalysisContext context)
         {

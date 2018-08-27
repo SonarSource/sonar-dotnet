@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
@@ -83,8 +82,6 @@ namespace SonarAnalyzer.Rules
         where TVariableDeclaratorSyntax : SyntaxNode
         where TLanguageKindEnum : struct
     {
-        protected abstract DiagnosticDescriptor Rule { get; }
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract TLanguageKindEnum StringLiteralSyntaxKind { get; }
         protected abstract TLanguageKindEnum[] StringConcatenateExpressions { get; }
@@ -110,7 +107,7 @@ namespace SonarAnalyzer.Rules
                     if (IsInCheckedContext(stringLiteral, c.SemanticModel) &&
                         UriRegex.IsMatch(GetLiteralText(stringLiteral)))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, stringLiteral.GetLocation(), AbsoluteUriMessage));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], stringLiteral.GetLocation(), AbsoluteUriMessage));
                     }
                 },
                 StringLiteralSyntaxKind);
@@ -126,14 +123,14 @@ namespace SonarAnalyzer.Rules
                     var leftNode = GetLeftNode(addExpression);
                     if (IsPathDelimiter(leftNode))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, leftNode.GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], leftNode.GetLocation(),
                             PathDelimiterMessage));
                     }
 
                     var rightNode = GetRightNode(addExpression);
                     if (IsPathDelimiter(rightNode))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, rightNode.GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], rightNode.GetLocation(),
                             PathDelimiterMessage));
                     }
                 },

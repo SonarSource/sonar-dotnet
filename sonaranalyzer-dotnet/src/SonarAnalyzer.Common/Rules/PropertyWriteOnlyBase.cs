@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.Common
                     }
 
                     var identifier = GetIdentifier(prop);
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation(),
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation(),
                         identifier.ValueText));
                 },
                 SyntaxKindsOfInterest.ToArray());
@@ -61,9 +61,5 @@ namespace SonarAnalyzer.Rules.Common
         protected abstract bool IsWriteOnlyProperty(TPropertyDeclaration prop);
 
         public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

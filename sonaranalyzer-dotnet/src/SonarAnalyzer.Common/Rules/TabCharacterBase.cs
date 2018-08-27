@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Helpers;
@@ -40,14 +39,10 @@ namespace SonarAnalyzer.Rules
                     }
 
                     var location = c.Tree.GetLocation(TextSpan.FromBounds(offset, offset));
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], location));
                 });
         }
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

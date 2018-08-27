@@ -61,15 +61,11 @@ namespace SonarAnalyzer.Rules.Common
                     foreach (var parameter in parameters.Where(p => IsOptional(p) && !HasAllowedAttribute(p, c.SemanticModel)))
                     {
                         var location = GetReportLocation(parameter);
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], location));
                     }
                 },
                 SyntaxKindsOfInterest.ToArray());
         }
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         private static bool HasAllowedAttribute(TParameterSyntax parameterSyntax, SemanticModel semanticModel)
         {

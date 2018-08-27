@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.Common
 
                     if (!AreAllRequiredMembersInitialized(enumDeclaration))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, GetIdentifier(enumDeclaration).GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], GetIdentifier(enumDeclaration).GetLocation()));
                     }
                 },
                 SyntaxKindsOfInterest.ToArray());
@@ -68,10 +68,6 @@ namespace SonarAnalyzer.Rules.Common
         protected abstract IList<TEnumMemberDeclarationSyntax> GetMembers(TEnumDeclarationSyntax declaration);
 
         protected abstract bool IsInitialized(TEnumMemberDeclarationSyntax member);
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         private bool AreAllRequiredMembersInitialized(TEnumDeclarationSyntax declaration)
         {

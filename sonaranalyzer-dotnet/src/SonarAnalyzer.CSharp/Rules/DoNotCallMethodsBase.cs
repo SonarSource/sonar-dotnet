@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -32,9 +31,6 @@ namespace SonarAnalyzer.Rules
     public abstract class DoNotCallMethodsBase : SonarDiagnosticAnalyzer
     {
         internal abstract IEnumerable<MethodSignature> CheckedMethods { get; }
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
@@ -73,7 +69,7 @@ namespace SonarAnalyzer.Rules
 
             if (ShouldReportOnMethodCall(invocation, analysisContext.SemanticModel, disallowedMethodSignature))
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.Value.GetLocation(),
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], identifier.Value.GetLocation(),
                     disallowedMethodSignature.ToShortName()));
             }
         }

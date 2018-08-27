@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.Common
                     }
 
                     var identifier = GetIdentifier(method);
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation()));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation()));
                 },
                 SyntaxKindsOfInterest.ToArray());
         }
@@ -71,9 +71,5 @@ namespace SonarAnalyzer.Rules.Common
         protected abstract SyntaxToken GetIdentifier(TMethodSyntax method);
 
         public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

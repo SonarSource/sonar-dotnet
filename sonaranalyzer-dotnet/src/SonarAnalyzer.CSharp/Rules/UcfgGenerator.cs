@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title, SourceScope.Main);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         private readonly ImmutableHashSet<string> SecurityRules = ImmutableHashSet
             .Create("S2091", "S3649", "S2631", "S2083", "S2078", "S2076");

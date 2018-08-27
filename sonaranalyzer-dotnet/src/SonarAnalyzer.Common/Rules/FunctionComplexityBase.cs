@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
@@ -56,7 +55,7 @@ namespace SonarAnalyzer.Rules
             var complexity = GetComplexity(nodeToAnalyze);
             if (complexity > Maximum)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location(syntax), Maximum, complexity, declarationType));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], location(syntax), Maximum, complexity, declarationType));
             }
         }
 
@@ -68,9 +67,5 @@ namespace SonarAnalyzer.Rules
         }
 
         protected abstract int GetComplexity(SyntaxNode node);
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

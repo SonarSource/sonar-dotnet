@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -62,7 +61,7 @@ namespace SonarAnalyzer.Rules
 
                     if (!NamingHelper.IsRegexMatch(enumIdentifier.ValueText, enumPattern))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, enumIdentifier.GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], enumIdentifier.GetLocation(),
                             enumPattern));
                     }
                 },
@@ -72,9 +71,5 @@ namespace SonarAnalyzer.Rules
         protected abstract TLanguageKindEnum EnumStatementSyntaxKind { get; }
 
         protected abstract SyntaxToken GetIdentifier(TEnumDeclarationSyntax declaration);
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -48,7 +47,7 @@ namespace SonarAnalyzer.Rules.Common
                 c =>
                 {
                     var local = (TLocalDeclarationSyntax)c.Node;
-                    CheckAndReportVariables(GetIdentifiers(local).ToList(), c, Rule);
+                    CheckAndReportVariables(GetIdentifiers(local).ToList(), c, SupportedDiagnostics[0]);
                 },
                 LocalDeclarationKind);
 
@@ -57,14 +56,10 @@ namespace SonarAnalyzer.Rules.Common
                 c =>
                 {
                     var field = (TFieldDeclarationSyntax)c.Node;
-                    CheckAndReportVariables(GetIdentifiers(field).ToList(), c, Rule);
+                    CheckAndReportVariables(GetIdentifiers(field).ToList(), c, SupportedDiagnostics[0]);
                 },
                 FieldDeclarationKind);
         }
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         private static void CheckAndReportVariables(IList<SyntaxToken> variables, SyntaxNodeAnalysisContext context, DiagnosticDescriptor rule)
         {

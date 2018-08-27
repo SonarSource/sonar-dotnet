@@ -39,8 +39,6 @@ namespace SonarAnalyzer.Rules
         where TInvocationSyntax : SyntaxNode
         where TArgumentSyntax : SyntaxNode
     {
-        protected abstract DiagnosticDescriptor Rule { get; }
-
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
         protected abstract TSyntaxKind InvocationExpressionSyntaxKind { get; }
@@ -79,7 +77,7 @@ namespace SonarAnalyzer.Rules
                                 arguments[i].IsEquivalentTo(arguments[j]) &&
                                 IsDuplicateUsage(parameterUsage, argConvertedTypes[j]))
                             {
-                                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
+                                c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0],
                                     arguments[i].GetLocation(),
                                     additionalLocations: new[] { arguments[j].GetLocation() },
                                     messageArgs: ToOrdinalNumberString(j + 1)));

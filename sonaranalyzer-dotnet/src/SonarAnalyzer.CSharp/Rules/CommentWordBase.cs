@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -31,9 +30,6 @@ namespace SonarAnalyzer.Rules.CSharp
     public abstract class CommentWordBase : SonarDiagnosticAnalyzer
     {
         protected abstract string Word { get; }
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
@@ -54,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 c.Tree,
                                 TextSpan.FromBounds(startLocation, startLocation + Word.Length));
 
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], location));
                         }
                     }
                 });

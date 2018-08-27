@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor codeSmellRule =
           DiagnosticDescriptorBuilder.GetDescriptor(CodeSmellDiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
             ImmutableArray.Create(bugRule, codeSmellRule);
 
         private static readonly ISet<MethodSignature> HandledFormatMethods = new HashSet<MethodSignature>

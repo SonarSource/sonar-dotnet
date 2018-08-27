@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules
         protected const string Title = "Symbol reference calculator";
 
         private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         internal const string SymbolReferenceFileName = "symrefs.pb";
 

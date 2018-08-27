@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.Common
                     var identifier = GetIdentifier(zeroMember);
                     if (identifier.ValueText != "None")
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, zeroMember.GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], zeroMember.GetLocation(),
                             identifier.ValueText));
                     }
                 },
@@ -107,9 +107,5 @@ namespace SonarAnalyzer.Rules.Common
         protected abstract IEnumerable<TEnumMemberSyntax> GetMembers(TEnumDeclarationSyntax node);
 
         public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

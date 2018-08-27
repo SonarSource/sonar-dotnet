@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
@@ -37,9 +36,6 @@ namespace SonarAnalyzer.Rules
 
         protected const string MessageFormat =
             "The {0} of '{1}' is always '>=0', so fix this test to get the real expected behavior.";
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected abstract TLanguageKindEnum GreaterThanOrEqualExpression { get; }
         protected abstract TLanguageKindEnum LessThanOrEqualExpression { get; }
@@ -90,7 +86,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, context.Node.GetLocation(),
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], context.Node.GetLocation(),
                 symbol.Name.ToLowerInvariant(), symbolType));
         }
 
