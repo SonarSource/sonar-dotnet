@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules
                         .Where(f => FieldIsRelevant(f.Symbol)))
                     {
                         var identifier = GetIdentifier(variable.Syntax);
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation(),
                             identifier.ValueText));
                     }
                 },
@@ -78,9 +78,5 @@ namespace SonarAnalyzer.Rules
         protected abstract IEnumerable<TVariableSyntax> GetVariables(TFieldDeclarationSyntax fieldDeclaration);
 
         protected abstract SyntaxToken GetIdentifier(TVariableSyntax variable);
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

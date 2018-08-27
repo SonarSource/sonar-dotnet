@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
@@ -78,7 +77,7 @@ namespace SonarAnalyzer.Rules.Common
                                 return;
                             }
 
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], c.Node.GetLocation()));
                         },
                         ThrowSyntaxKind);
                 });
@@ -91,9 +90,5 @@ namespace SonarAnalyzer.Rules.Common
         protected abstract TLanguageKindEnum ThrowSyntaxKind { get; }
 
         protected abstract SyntaxNode GetThrowExpression(SyntaxNode syntaxNode);
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

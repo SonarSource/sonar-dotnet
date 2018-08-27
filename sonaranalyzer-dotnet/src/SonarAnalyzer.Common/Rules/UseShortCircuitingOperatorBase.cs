@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.Common
 
                     if (GetOperands(node).All(o => IsBool(o, c.SemanticModel)))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, GetOperator(node).GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], GetOperator(node).GetLocation(),
                             GetCurrentOpName(node), GetSuggestedOpName(node)));
                     }
                 },
@@ -75,9 +75,5 @@ namespace SonarAnalyzer.Rules.Common
         protected abstract SyntaxToken GetOperator(TBinaryExpression expression);
 
         protected abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

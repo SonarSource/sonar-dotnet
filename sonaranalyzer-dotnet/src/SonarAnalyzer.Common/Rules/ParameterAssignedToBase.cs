@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules
                         && (IsAssignmentToParameter(symbol) || IsAssignmentToCatchVariable(symbol, left))
                         && (!IsReadBefore(c.SemanticModel, symbol, assignment)))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, left.GetLocation(), left.ToString()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], left.GetLocation(), left.ToString()));
                     }
                 },
                 SyntaxKindsOfInterest.ToArray());
@@ -67,9 +67,5 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxNode GetAssignedNode(TAssignmentStatementSyntax assignment);
 
         public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules
                     var nameEnding = NameEndings.FirstOrDefault(ending => name.EndsWith(ending, System.StringComparison.OrdinalIgnoreCase));
                     if (nameEnding != null)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation(),
                             name.Substring(name.Length - nameEnding.Length, nameEnding.Length)));
                     }
                 },
@@ -61,8 +61,5 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxToken GetIdentifier(SyntaxNode node);
 
         public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

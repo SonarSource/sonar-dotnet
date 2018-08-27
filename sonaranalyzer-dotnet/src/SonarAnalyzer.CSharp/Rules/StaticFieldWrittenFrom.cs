@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -99,7 +98,7 @@ namespace SonarAnalyzer.Rules
                            var message = GetDiagnosticMessageArgument(cbc.CodeBlock, cbc.OwningSymbol, fieldWithLocations.Key);
                            var secondaryLocations = fieldWithLocations.Key.DeclaringSyntaxReferences
                                                                       .Select(x => x.GetSyntax().GetLocation());
-                           c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location,
+                           c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], location,
                                additionalLocations: secondaryLocations,
                                messageArgs: message));
                        }
@@ -109,9 +108,6 @@ namespace SonarAnalyzer.Rules
 
         protected abstract bool IsValidCodeBlockContext(SyntaxNode node, ISymbol owningSymbol);
         protected abstract string GetDiagnosticMessageArgument(SyntaxNode node, ISymbol owningSymbol, IFieldSymbol field);
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         private static void AddFieldLocation(IFieldSymbol fieldSymbol, Location location, Dictionary<IFieldSymbol, List<Location>> locationsForFields)
         {

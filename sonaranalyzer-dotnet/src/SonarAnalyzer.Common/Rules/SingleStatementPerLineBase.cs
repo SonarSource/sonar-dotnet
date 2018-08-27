@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
@@ -57,14 +56,10 @@ namespace SonarAnalyzer.Rules.Common
                     foreach (var statementsByLine in statementsByLines.Where(pair => pair.Value.Count > 1))
                     {
                         var location = CalculateLocationForLine(lines[statementsByLine.Key], c.Tree, statementsByLine.Value);
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], location));
                     }
                 });
         }
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         private IEnumerable<TStatementSyntax> GetStatements(SyntaxTree tree)
         {

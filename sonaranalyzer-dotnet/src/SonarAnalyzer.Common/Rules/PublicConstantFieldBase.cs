@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
@@ -64,7 +63,7 @@ namespace SonarAnalyzer.Rules.Common
 
                     foreach (var variable in variables)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, GetReportLocation(variable),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], GetReportLocation(variable),
                             MessageArgument));
                     }
                 },
@@ -77,9 +76,5 @@ namespace SonarAnalyzer.Rules.Common
         public abstract string MessageArgument { get; }
 
         protected abstract Location GetReportLocation(TFieldName node);
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

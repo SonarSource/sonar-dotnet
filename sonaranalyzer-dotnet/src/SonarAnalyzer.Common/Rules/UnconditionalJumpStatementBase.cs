@@ -33,7 +33,6 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S1751";
         protected const string MessageFormat = "Remove this '{0}' statement or make it conditional.";
 
-        protected abstract DiagnosticDescriptor Rule { get; }
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
         protected abstract LoopWalkerBase<TStatementSyntax, TLanguageKindEnum> GetWalker(SyntaxNodeAnalysisContext context);
@@ -49,7 +48,7 @@ namespace SonarAnalyzer.Rules
                     walker.Visit();
                     foreach (var node in walker.GetRuleViolations())
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation(), GetKeywordText(node)));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], node.GetLocation(), GetKeywordText(node)));
                     }
                 },
                 LoopStatements.ToArray());

@@ -27,6 +27,7 @@ using SonarAnalyzer.Rules.Common;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     using System.Collections.Generic;
+    using System.Collections.Immutable;
     using Helpers;
     using Microsoft.CodeAnalysis.VisualBasic;
     using Microsoft.CodeAnalysis.VisualBasic.Syntax;
@@ -39,7 +40,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         public override SyntaxKind FieldDeclarationKind => SyntaxKind.FieldDeclaration;
         public override SyntaxKind LocalDeclarationKind => SyntaxKind.LocalDeclarationStatement;

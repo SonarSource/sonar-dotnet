@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -30,10 +29,6 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class ObjectShouldBeInitializedCorrectlyBase : SonarDiagnosticAnalyzer
     {
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-
         /// <summary>
         /// Gets the KnownType representing the type on which instances the rule will raise issues on.
         /// </summary>
@@ -62,7 +57,7 @@ namespace SonarAnalyzer.Rules
                         !ObjectCreatedWithAllowedValue(objectCreation, c.SemanticModel) &&
                         !IsLaterAssignedWithAllowedValue(objectCreation, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], objectCreation.GetLocation()));
                     }
                 },
                 SyntaxKind.ObjectCreationExpression);
@@ -79,7 +74,7 @@ namespace SonarAnalyzer.Rules
                         IsPropertyOnTrackedType(assignment.Left, c.SemanticModel) &&
                         !IsAllowedValue(assignment.Right, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, assignment.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], assignment.GetLocation()));
                     }
                 },
                 SyntaxKind.SimpleAssignmentExpression);
