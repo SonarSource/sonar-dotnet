@@ -52,6 +52,12 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
       return;
     }
 
+    // De-duplicate issues
+    Issue issue = new Issue(ruleId, inputModule.toString(), true);
+    if (!savedIssues.add(issue)) {
+      return;
+    }
+
     NewIssue newIssue = context.newIssue();
     newIssue
       .forRule(RuleKey.of(repositoryKey, ruleId))
@@ -65,6 +71,12 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   public void onFileIssue(String ruleId, String absolutePath, String message) {
     String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
     if (repositoryKey == null) {
+      return;
+    }
+
+    // De-duplicate issues
+    Issue issue = new Issue(ruleId, absolutePath, false);
+    if (!savedIssues.add(issue)) {
       return;
     }
 
@@ -90,6 +102,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
       return;
     }
 
+    // De-duplicate issues
     Issue issue = new Issue(ruleId, primaryLocation);
     if (!savedIssues.add(issue)) {
       return;
@@ -137,11 +150,22 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
 
   private static class Issue {
     private String ruleId;
+    private String moduleId;
     private String absolutePath;
     private int startLine;
     private int startColumn;
     private int endLine;
     private int endColumn;
+
+    Issue(String ruleId, String moduleOrPath, boolean isModuleId) {
+      this.ruleId = ruleId;
+      if (isModuleId) {
+        this.moduleId = moduleOrPath;
+        this.absolutePath = "";
+      } else {
+        this.absolutePath = moduleOrPath;
+      }
+    }
 
     Issue(String ruleId, Location location) {
       this.ruleId = ruleId;
@@ -154,7 +178,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
 
     @Override
     public int hashCode() {
-      return Objects.hash(ruleId, absolutePath, startLine, startColumn, endLine, endColumn);
+      return Objects.hash(ruleId, moduleId, absolutePath, startLine, startColumn, endLine, endColumn);
     }
 
     @Override
@@ -165,9 +189,13 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
       Issue o = (Issue) other;
 
       // note that comparison of absolute path is done using Path.
-      return Objects.equals(ruleId, o.ruleId) && Objects.equals(startLine, o.startLine)
-        && Objects.equals(startColumn, o.startColumn) && Objects.equals(endLine, o.endLine)
-        && Objects.equals(endColumn, o.endColumn) && Paths.get(absolutePath).equals(Paths.get(o.absolutePath));
+      return Objects.equals(ruleId, o.ruleId)
+        && Objects.equals(moduleId, o.moduleId)
+        && Objects.equals(startLine, o.startLine)
+        && Objects.equals(startColumn, o.startColumn)
+        && Objects.equals(endLine, o.endLine)
+        && Objects.equals(endColumn, o.endColumn)
+        && Paths.get(absolutePath).equals(Paths.get(o.absolutePath));
     }
   }
 }

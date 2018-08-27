@@ -125,6 +125,26 @@ public class SarifParserCallbackImplTest {
   }
 
   @Test
+  public void should_ignore_repeated_module_issues() {
+    callback.onProjectIssue("rule1", ctx.module(), "message");
+    callback.onProjectIssue("rule1", ctx.module(), "message");
+
+    assertThat(ctx.allIssues()).hasSize(1);
+    assertThat(ctx.allIssues()).extracting("ruleKey").extracting("rule")
+      .containsOnly("rule1");
+  }
+
+  @Test
+  public void should_ignore_repeated_file_issues() {
+    callback.onFileIssue("rule1", createAbsolutePath("file1"), "message");
+    callback.onFileIssue("rule1", createAbsolutePath("file1"), "message");
+
+    assertThat(ctx.allIssues()).hasSize(1);
+    assertThat(ctx.allIssues()).extracting("ruleKey").extracting("rule")
+      .containsOnly("rule1");
+  }
+
+  @Test
   public void should_ignore_repeated_issues() {
     callback.onIssue("rule1", createLocation("file1", 2, 3), Collections.emptyList());
     callback.onIssue("rule1", createLocation("file1", 2, 3), Collections.emptyList());
@@ -139,7 +159,10 @@ public class SarifParserCallbackImplTest {
   }
 
   private Location createLocation(String filePath, int startLine, int startColumn, int endLine, int endColumn) {
-    return new Location(temp.getRoot().toPath().resolve(filePath).toString(), "msg", startLine, startColumn, endLine, endColumn);
+    return new Location(createAbsolutePath(filePath), "msg", startLine, startColumn, endLine, endColumn);
   }
 
+  private String createAbsolutePath(String filePath) {
+    return temp.getRoot().toPath().resolve(filePath).toString();
+  }
 }
