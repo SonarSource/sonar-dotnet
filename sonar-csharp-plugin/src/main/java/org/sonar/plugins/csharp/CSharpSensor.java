@@ -38,6 +38,7 @@ import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
 import org.sonarsource.dotnet.shared.plugins.RealPathProvider;
 import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
+import org.sonarsource.dotnet.shared.plugins.RoslynReport;
 
 import static java.util.stream.Collectors.toList;
 
@@ -90,7 +91,7 @@ public class CSharpSensor implements Sensor {
       protobufDataImporter.importResults(context, protobufPaths, toRealPath);
     }
 
-    List<Path> roslynDirs = reportPathCollector.roslynDirs();
+    List<RoslynReport> roslynDirs = reportPathCollector.roslynDirs();
     if (!roslynDirs.isEmpty()) {
       Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
         .findAll()

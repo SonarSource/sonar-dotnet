@@ -31,8 +31,8 @@ public class ReportPathCollectorTest {
 
   @Test
   public void should_save_roslyn_report_paths() {
-    Path p1 = Paths.get("p1");
-    Path p2 = Paths.get("p2");
+    RoslynReport p1 = new RoslynReport(null, Paths.get("p1"));
+    RoslynReport p2 = new RoslynReport(null, Paths.get("p2"));
     underTest.addRoslynDirs(Collections.singletonList(p1));
     underTest.addRoslynDirs(Collections.singletonList(p2));
     assertThat(underTest.roslynDirs()).containsOnly(p1, p2);

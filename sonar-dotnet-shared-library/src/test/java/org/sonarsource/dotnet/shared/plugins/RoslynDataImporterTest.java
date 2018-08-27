@@ -86,9 +86,9 @@ public class RoslynDataImporterTest {
   }
 
   @Test
-  public void roslynReportIsProcessed() throws IOException {
+  public void roslynReportIsProcessed() {
     Map<String, List<RuleKey>> activeRules = createActiveRules();
-    roslynDataImporter.importRoslynReports(Collections.singletonList(workDir.resolve("roslyn-report.json")), tester, activeRules, String::toString);
+    roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(tester.module(), workDir.resolve("roslyn-report.json"))), tester, activeRules, String::toString);
 
     assertThat(tester.allIssues())
       .extracting("ruleKey", "primaryLocation.textRange.start.line", "primaryLocation.message")
@@ -104,19 +104,19 @@ public class RoslynDataImporterTest {
   }
 
   @Test
-  public void roslynEmptyReportShouldNotFail() throws IOException {
+  public void roslynEmptyReportShouldNotFail() {
     Map<String, List<RuleKey>> activeRules = createActiveRules();
-    roslynDataImporter.importRoslynReports(Collections.singletonList(workDir.resolve("roslyn-report-empty.json")), tester, activeRules, String::toString);
+    roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(null, workDir.resolve("roslyn-report-empty.json"))), tester, activeRules, String::toString);
   }
 
   @Test
-  public void failWithDuplicateRuleKey() throws IOException {
+  public void failWithDuplicateRuleKey() {
     Map<String, List<RuleKey>> activeRules = ImmutableMap.of(
       "sonaranalyzer-cs", ImmutableList.of(RuleKey.of("csharpsquid", "[parameters_key]")),
       "foo", ImmutableList.of(RuleKey.of("roslyn.foo", "[parameters_key]")));
 
     exception.expectMessage("Rule keys must be unique, but \"[parameters_key]\" is defined in both the \"csharpsquid\" and \"roslyn.foo\" rule repositories.");
-    roslynDataImporter.importRoslynReports(Collections.singletonList(workDir.resolve("roslyn-report.json")), tester, activeRules, String::toString);
+    roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(null, workDir.resolve("roslyn-report.json"))), tester, activeRules, String::toString);
   }
 
   private static Map<String, List<RuleKey>> createActiveRules() {

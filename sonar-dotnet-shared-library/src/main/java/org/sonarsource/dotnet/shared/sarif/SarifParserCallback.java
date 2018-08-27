@@ -20,10 +20,11 @@
 package org.sonarsource.dotnet.shared.sarif;
 
 import java.util.Collection;
+import org.sonar.api.batch.fs.InputModule;
 
 public interface SarifParserCallback {
 
-  void onProjectIssue(String ruleId, String message);
+  void onProjectIssue(String ruleId, InputModule inputModule, String message);
 
   void onFileIssue(String ruleId, String absolutePath, String message);
 

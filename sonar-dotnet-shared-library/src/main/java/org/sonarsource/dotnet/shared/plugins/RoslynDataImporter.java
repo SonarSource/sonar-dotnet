@@ -19,7 +19,6 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,15 +36,15 @@ import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
 public class RoslynDataImporter {
   private static final Logger LOG = Loggers.get(RoslynDataImporter.class);
 
-  public void importRoslynReports(List<Path> reportPaths, final SensorContext context, Map<String,
+  public void importRoslynReports(List<RoslynReport> reportPaths, final SensorContext context, Map<String,
     List<RuleKey>> activeRoslynRulesByPartialRepoKey, Function<String, String> toRealPath) {
     Map<String, String> repositoryKeyByRoslynRuleKey = getRepoKeyByRoslynRuleKey(activeRoslynRulesByPartialRepoKey);
     SarifParserCallback callback = new SarifParserCallbackImpl(context, repositoryKeyByRoslynRuleKey);
 
     LOG.info("Importing {} Roslyn {}", reportPaths.size(), pluralize("report", reportPaths.size()));
 
-    for (Path reportPath : reportPaths) {
-      SarifParserFactory.create(reportPath, toRealPath).accept(callback);
+    for (RoslynReport report : reportPaths) {
+      SarifParserFactory.create(report, toRealPath).accept(callback);
     }
   }
 

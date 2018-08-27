@@ -51,13 +51,13 @@ public class AbstractPropertiesSensorTest {
     when(config.protobufReportPaths()).thenReturn(Collections.singletonList(proto1));
     underTest.execute(mock(SensorContext.class));
     verify(reportPathCollector).addProtobufDirs(Collections.singletonList(proto1));
-    verify(reportPathCollector).addRoslynDirs(Collections.singletonList(roslyn1));
+    verify(reportPathCollector).addRoslynDirs(Collections.singletonList(new RoslynReport(null, roslyn1)));
 
     when(config.roslynReportPaths()).thenReturn(Collections.singletonList(roslyn2));
     when(config.protobufReportPaths()).thenReturn(Collections.singletonList(proto2));
     underTest.execute(mock(SensorContext.class));
     verify(reportPathCollector).addProtobufDirs(Collections.singletonList(proto2));
-    verify(reportPathCollector).addRoslynDirs(Collections.singletonList(roslyn2));
+    verify(reportPathCollector).addRoslynDirs(Collections.singletonList(new RoslynReport(null, roslyn2)));
 
     verifyNoMoreInteractions(reportPathCollector);
   }

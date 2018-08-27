@@ -34,12 +34,15 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import org.sonar.api.batch.fs.InputModule;
 
 class SarifParser10 implements SarifParser {
-  private JsonObject root;
+  private final InputModule inputModule;
+  private final JsonObject root;
   private final Function<String, String> toRealPath;
 
-  SarifParser10(JsonObject root, Function<String, String> toRealPath) {
+  SarifParser10(InputModule inputModule, JsonObject root, Function<String, String> toRealPath) {
+    this.inputModule = inputModule;
     this.root = root;
     this.toRealPath = toRealPath;
   }
@@ -74,7 +77,7 @@ class SarifParser10 implements SarifParser {
     String ruleId = resultObj.get("ruleId").getAsString();
     String message = resultObj.get("message").getAsString();
     if (!handleLocationsElement(resultObj, ruleId, message, callback)) {
-      callback.onProjectIssue(ruleId, message);
+      callback.onProjectIssue(ruleId, inputModule, message);
     }
   }
 
