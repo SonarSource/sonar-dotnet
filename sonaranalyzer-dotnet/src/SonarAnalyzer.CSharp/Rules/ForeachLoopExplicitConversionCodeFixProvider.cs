@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -35,36 +36,38 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class ForeachLoopExplicitConversionCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Filter collection for the expected type";
-        public override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(ForeachLoopExplicitConversion.DiagnosticId);
-            }
-        }
-        public override FixAllProvider GetFixAllProvider()
-        {
-            return WellKnownFixAllProviders.BatchFixer;
-        }
+        public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+            ImmutableArray.Create(ForeachLoopExplicitConversion.DiagnosticId);
 
-        protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        public override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
+
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var foreachSyntax = root.FindNode(diagnosticSpan).FirstAncestorOrSelf<ForEachStatementSyntax>();
-            var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+            if (foreachSyntax == null)
+            {
+                return TaskHelper.CompletedTask;
+            }
+
+            var semanticModel = context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false).GetAwaiter().GetResult();
             var enumerableHelperType = semanticModel.Compilation.GetTypeByMetadataName(ofTypeExtensionClass);
 
             if (enumerableHelperType != null)
             {
-                var newRoot = CalculateNewRoot(root, foreachSyntax, semanticModel);
-
                 context.RegisterCodeFix(
                     CodeAction.Create(
                         Title,
-                        c => Task.FromResult(context.Document.WithSyntaxRoot(newRoot))),
+                        c =>
+                        {
+                            var newRoot = CalculateNewRoot(root, foreachSyntax, semanticModel);
+                            return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                        }),
                     context.Diagnostics);
             }
+
+            return TaskHelper.CompletedTask;
         }
 
         private const string ofTypeExtensionClass = "System.Linq.Enumerable";
