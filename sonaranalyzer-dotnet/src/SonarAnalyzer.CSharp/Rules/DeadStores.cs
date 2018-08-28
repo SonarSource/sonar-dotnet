@@ -276,7 +276,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private bool IsAllowedInitialization(EqualsValueClauseSyntax initializer)
             {
-                return IsAllowedObjectInitialization(initializer.Value) ||
+                return initializer.Value.IsKind(SyntaxKind.DefaultExpression) ||
+                    IsAllowedObjectInitialization(initializer.Value) ||
                     IsAllowedBooleanInitialization(initializer.Value) ||
                     IsAllowedNumericInitialization(initializer.Value) ||
                     IsAllowedStringInitialization(initializer.Value);
