@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 33 to the maximum authorized 30 or less.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  18,
+"endLine":  137,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 38 to the maximum authorized 30 or less.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  18,
+"endLine":  14,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 43 to the maximum authorized 30 or less.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  18,
+"endLine":  19,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 31 to the maximum authorized 30 or less.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\MapperRegistry.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  27,
+"endLine":  5,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 31 to the maximum authorized 30 or less.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  27,
+"endLine":  16,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 42 to the maximum authorized 30 or less.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  18,
+"endLine":  27,
+"endColumn":  35
+}
+}
+}
+]
+}

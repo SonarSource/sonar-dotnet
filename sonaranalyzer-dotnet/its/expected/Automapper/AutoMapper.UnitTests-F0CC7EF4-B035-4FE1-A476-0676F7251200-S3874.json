@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'ref' modifier.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  47,
+"endLine":  61,
+"endColumn":  50
+}
+}
+}
+]
+}

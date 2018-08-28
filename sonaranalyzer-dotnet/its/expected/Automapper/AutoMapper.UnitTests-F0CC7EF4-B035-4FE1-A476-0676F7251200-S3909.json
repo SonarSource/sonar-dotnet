@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3909",
+"message":  "Refactor this collection to implement 'System.Collections.Generic.IEnumerable<T>'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SequenceContainsNoElementsTest.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  18,
+"endLine":  29,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3909",
+"message":  "Refactor this collection to implement 'System.Collections.ObjectModel.Collection<T>'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  203,
+"startColumn":  22,
+"endLine":  203,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3909",
+"message":  "Refactor this collection to implement 'System.Collections.Generic.IEnumerable<T>'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Regression.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  26,
+"endLine":  125,
+"endColumn":  32
+}
+}
+}
+]
+}

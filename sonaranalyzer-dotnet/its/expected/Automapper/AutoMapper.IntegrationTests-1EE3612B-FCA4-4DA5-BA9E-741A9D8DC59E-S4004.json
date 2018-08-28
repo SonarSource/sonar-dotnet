@@ -1,0 +1,498 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'Items' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\BuiltInTypes\ProjectEnumerableOfIntToList.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  31,
+"endLine":  21,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ItemsIds' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\BuiltInTypes\ProjectEnumerableOfIntToList.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  30,
+"endLine":  33,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\BuiltInTypes\ProjectUsing.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  42,
+"endLine":  91,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\BuiltInTypes\ProjectUsing.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  30,
+"endLine":  105,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Articles' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  49,
+"endLine":  73,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Articles' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  49,
+"endLine":  165,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Articles' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  49,
+"endLine":  280,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Products' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  363,
+"startColumn":  41,
+"endLine":  363,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Products' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  369,
+"startColumn":  46,
+"endLine":  369,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Articles' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  386,
+"startColumn":  49,
+"endLine":  386,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Products' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  477,
+"startColumn":  41,
+"endLine":  477,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Products' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  483,
+"startColumn":  46,
+"endLine":  483,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Articles' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  500,
+"startColumn":  49,
+"endLine":  500,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Articles' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  520,
+"startColumn":  44,
+"endLine":  520,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Ends' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  550,
+"startColumn":  42,
+"endLine":  550,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Racks' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  570,
+"startColumn":  38,
+"endLine":  570,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Content' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandCollections.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  51,
+"endLine":  71,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Content' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandCollections.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  54,
+"endLine":  97,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Content' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandCollectionsWithStrings.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  51,
+"endLine":  71,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Content' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandCollectionsWithStrings.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  54,
+"endLine":  97,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Bars' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectAndAllowNullCollections.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  33,
+"endLine":  44,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Bazs' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectAndAllowNullCollections.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  33,
+"endLine":  46,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Items' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ICollectionAggregateProjections.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  38,
+"endLine":  21,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Items' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\IEnumerableAggregateProjections.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  38,
+"endLine":  21,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Days' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  57,
+"endLine":  94,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Days' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  57,
+"endLine":  113,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Days' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  39,
+"endLine":  128,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Days' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  54,
+"endLine":  165,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Content' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProxyTests.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  57,
+"endLine":  68,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Content' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProxyTests.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  60,
+"endLine":  94,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Content' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProxyTests.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  61,
+"endLine":  100,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Content' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\MaxDepth\MaxDepthWithCollections.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  51,
+"endLine":  69,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Content' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\MaxDepth\MaxDepthWithCollections.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  54,
+"endLine":  88,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Customers' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\MaxDepth\NavigationPropertySO.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  50,
+"endLine":  27,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Customers' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\MaxDepth\NavigationPropertySO.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  53,
+"endLine":  48,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Arts' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\MaxDepth\NestedDtos.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  45,
+"endLine":  23,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Items' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ProjectionOrder\ProjectionOrderTest.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  46,
+"endLine":  33,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Items' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ProjectionOrder\ProjectionOrderTest.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  46,
+"endLine":  38,
+"endColumn":  51
+}
+}
+}
+]
+}

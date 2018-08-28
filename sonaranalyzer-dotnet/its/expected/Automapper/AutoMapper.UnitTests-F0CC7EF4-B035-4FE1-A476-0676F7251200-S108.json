@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  638,
+"startColumn":  39,
+"endLine":  638,
+"endColumn":  42
+}
+}
+}
+]
+}

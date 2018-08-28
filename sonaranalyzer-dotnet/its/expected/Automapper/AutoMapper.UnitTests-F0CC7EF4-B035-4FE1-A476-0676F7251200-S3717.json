@@ -1,0 +1,459 @@
+{
+"issues":  [
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  21,
+"endLine":  87,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  21,
+"endLine":  92,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  21,
+"endLine":  100,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  21,
+"endLine":  108,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  21,
+"endLine":  116,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  21,
+"endLine":  124,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  17,
+"endLine":  130,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  17,
+"endLine":  135,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  17,
+"endLine":  140,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  17,
+"endLine":  145,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  17,
+"endLine":  150,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  17,
+"endLine":  155,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  17,
+"endLine":  160,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  17,
+"endLine":  165,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  17,
+"endLine":  170,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  17,
+"endLine":  175,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1108,
+"startColumn":  17,
+"endLine":  1108,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  21,
+"endLine":  270,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  21,
+"endLine":  280,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  285,
+"startColumn":  21,
+"endLine":  285,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  307,
+"startColumn":  21,
+"endLine":  307,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  312,
+"startColumn":  21,
+"endLine":  312,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  21,
+"endLine":  317,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  21,
+"endLine":  322,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  327,
+"startColumn":  27,
+"endLine":  327,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  27,
+"endLine":  332,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  337,
+"startColumn":  21,
+"endLine":  337,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  357,
+"startColumn":  21,
+"endLine":  357,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  367,
+"startColumn":  27,
+"endLine":  367,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  377,
+"startColumn":  21,
+"endLine":  377,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  399,
+"startColumn":  21,
+"endLine":  399,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  404,
+"startColumn":  27,
+"endLine":  404,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  409,
+"startColumn":  27,
+"endLine":  409,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\BindersAndResultConverters.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  17,
+"endLine":  83,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\BindersAndResultConverters.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  17,
+"endLine":  93,
+"endColumn":  53
+}
+}
+}
+]
+}

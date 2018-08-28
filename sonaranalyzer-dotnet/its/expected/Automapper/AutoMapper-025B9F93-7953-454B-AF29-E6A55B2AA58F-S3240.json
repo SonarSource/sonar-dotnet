@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3240",
+"message":  "Use the '?:' operator here.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperVisitor.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  13,
+"endLine":  123,
+"endColumn":  15
+}
+}
+}
+]
+}

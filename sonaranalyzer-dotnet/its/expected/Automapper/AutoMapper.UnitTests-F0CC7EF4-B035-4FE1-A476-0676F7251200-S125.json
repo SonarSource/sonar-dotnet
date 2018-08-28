@@ -1,0 +1,420 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  296,
+"startColumn":  5,
+"endLine":  296,
+"endColumn":  8
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  5,
+"endLine":  198,
+"endColumn":  8
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConditionBug.cs",
+"region":  {
+"startLine":  281,
+"startColumn":  91,
+"endLine":  281,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConventionCreateMapsWithCircularReference.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  17,
+"endLine":  11,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity12.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity17.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity20.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity26.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity5.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity8.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO11.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO12.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO14.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  9,
+"endLine":  18,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO17.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO20.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  13,
+"endLine":  14,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO22.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO3.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO5.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO6.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\MapAtRuntime.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  13,
+"endLine":  39,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO14.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  9,
+"endLine":  18,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\MapAtRuntimeWithCollections.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  13,
+"endLine":  40,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectCollectionsBug.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  17,
+"endLine":  54,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectConstructorParameters.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  13,
+"endLine":  47,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  340,
+"startColumn":  113,
+"endLine":  340,
+"endColumn":  171
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1333,
+"startColumn":  13,
+"endLine":  1333,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  9,
+"endLine":  14,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  25,
+"endLine":  123,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberNameReplacers.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  13,
+"endLine":  43,
+"endColumn":  189
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\PropertyMapContexts.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Tests\TypeMapFactorySpecs.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  13,
+"endLine":  64,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeExtensionsTests.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  1,
+"endLine":  26,
+"endColumn":  66
+}
+}
+}
+]
+}

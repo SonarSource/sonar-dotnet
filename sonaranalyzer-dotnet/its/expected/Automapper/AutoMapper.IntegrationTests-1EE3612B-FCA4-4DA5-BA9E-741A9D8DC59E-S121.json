@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  17,
+"endLine":  174,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  245,
+"startColumn":  17,
+"endLine":  245,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Parameterization\ParameterizedQueries.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  17,
+"endLine":  105,
+"endColumn":  19
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  28,
+"endLine":  14,
+"endColumn":  31
+}
+}
+}
+]
+}

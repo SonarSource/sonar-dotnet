@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\AutoMapperTester.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  21,
+"endLine":  22,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  662,
+"startColumn":  25,
+"endLine":  662,
+"endColumn":  31
+}
+}
+}
+]
+}

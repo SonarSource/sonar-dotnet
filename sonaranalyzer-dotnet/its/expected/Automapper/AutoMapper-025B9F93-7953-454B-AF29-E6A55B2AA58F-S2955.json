@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(TMemberMapper)' instead or add a constraint to 'TMemberMapper' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  26,
+"endLine":  34,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(TSource)' instead or add a constraint to 'TSource' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  26,
+"endLine":  69,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(TSource)' instead or add a constraint to 'TSource' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  26,
+"endLine":  78,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(TDestination)' instead or add a constraint to 'TDestination' so that it can't be a value type.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  31,
+"endLine":  82,
+"endColumn":  35
+}
+}
+}
+]
+}

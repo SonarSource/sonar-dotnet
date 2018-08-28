@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1939",
+"message":  "'int' should not be explicitly used as the underlying type.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CannotConvertEnumToNullable.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  32,
+"endLine":  8,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1939",
+"message":  "'int' should not be explicitly used as the underlying type.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CannotProjectStringToNullableEnum.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  32,
+"endLine":  11,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1939",
+"message":  "'IEnumerable<StringKeyValuePair>' implements 'IEnumerable' so 'IEnumerable' can be removed from the inheritance list.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  51,
+"endLine":  16,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1939",
+"message":  "'Dictionary<string, string>' implements 'IEnumerable<StringKeyValuePair>' so 'IEnumerable<StringKeyValuePair>' can be removed from the inheritance list.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  64,
+"endLine":  16,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S1939",
+"message":  "'int' should not be explicitly used as the underlying type.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableEnumToNullableValueType.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  36,
+"endLine":  10,
+"endColumn":  41
+}
+}
+}
+]
+}

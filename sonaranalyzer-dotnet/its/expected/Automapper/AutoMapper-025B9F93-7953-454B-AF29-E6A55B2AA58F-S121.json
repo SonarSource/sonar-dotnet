@@ -1,0 +1,1278 @@
+{
+"issues":  [
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  17,
+"endLine":  117,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\DefaultMember.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  13,
+"endLine":  15,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\DefaultMember.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  13,
+"endLine":  19,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  17,
+"endLine":  55,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\NameSplitMember.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  21,
+"endLine":  41,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\NameSplitMember.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  21,
+"endLine":  43,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\ParentSourceToDestinationNameMapper.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  17,
+"endLine":  20,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\PrePostfixName.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  13,
+"endLine":  19,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\PrePostfixName.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  13,
+"endLine":  42,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\PrePostfixName.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  17,
+"endLine":  50,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\PrePostfixName.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  13,
+"endLine":  53,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberPath.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  13,
+"endLine":  27,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  21,
+"endLine":  84,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  17,
+"endLine":  103,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  17,
+"endLine":  107,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  17,
+"endLine":  110,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\DelegateFactory.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  13,
+"endLine":  87,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  13,
+"endLine":  29,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'for' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyGenerator.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  13,
+"endLine":  158,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  13,
+"endLine":  161,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  17,
+"endLine":  213,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  217,
+"startColumn":  13,
+"endLine":  217,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  13,
+"endLine":  219,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  235,
+"startColumn":  13,
+"endLine":  235,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  273,
+"startColumn":  13,
+"endLine":  273,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  278,
+"startColumn":  13,
+"endLine":  278,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  287,
+"startColumn":  13,
+"endLine":  287,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  362,
+"startColumn":  13,
+"endLine":  362,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  365,
+"startColumn":  13,
+"endLine":  365,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  388,
+"startColumn":  13,
+"endLine":  388,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  408,
+"startColumn":  13,
+"endLine":  408,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  410,
+"startColumn":  13,
+"endLine":  410,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  420,
+"startColumn":  17,
+"endLine":  420,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  422,
+"startColumn":  17,
+"endLine":  422,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  467,
+"startColumn":  17,
+"endLine":  467,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  469,
+"startColumn":  17,
+"endLine":  469,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  473,
+"startColumn":  13,
+"endLine":  473,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  487,
+"startColumn":  13,
+"endLine":  487,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  558,
+"startColumn":  17,
+"endLine":  558,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'for' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  13,
+"endLine":  106,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'for' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  13,
+"endLine":  114,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  17,
+"endLine":  221,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  236,
+"startColumn":  17,
+"endLine":  236,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  241,
+"startColumn":  21,
+"endLine":  241,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ReflectionHelper.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  13,
+"endLine":  169,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'for' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ReflectionHelper.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  17,
+"endLine":  176,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  13,
+"endLine":  202,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  13,
+"endLine":  216,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  13,
+"endLine":  50,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfigurationExpressionValidator.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  13,
+"endLine":  17,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ArrayCopyMapper.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  13,
+"endLine":  40,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\CollectionMapperExpressionFactory.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  13,
+"endLine":  33,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\CollectionMapperExpressionFactory.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  13,
+"endLine":  52,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\CollectionMapperExpressionFactory.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  13,
+"endLine":  55,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\CollectionMapperExpressionFactory.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  13,
+"endLine":  58,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\MultidimensionalArrayMapper.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  17,
+"endLine":  24,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\NameValueCollectionMapper.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ReadOnlyCollectionMapper.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  13,
+"endLine":  17,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  17,
+"endLine":  99,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  13,
+"endLine":  118,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  17,
+"endLine":  86,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  17,
+"endLine":  88,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  17,
+"endLine":  90,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  211,
+"startColumn":  13,
+"endLine":  211,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionRequest.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  13,
+"endLine":  39,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionRequest.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  13,
+"endLine":  40,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionRequest.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  13,
+"endLine":  47,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionRequest.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  13,
+"endLine":  48,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionRequest.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  13,
+"endLine":  49,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperHelper.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  13,
+"endLine":  17,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperHelper.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  13,
+"endLine":  26,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperVisitor.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  13,
+"endLine":  57,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperVisitor.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  13,
+"endLine":  140,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\NullsafeQueryRewriter.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  13,
+"endLine":  47,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\NullsafeQueryRewriter.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  13,
+"endLine":  64,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ResolutionContext.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  13,
+"endLine":  84,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeDetails.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  17,
+"endLine":  48,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeDetails.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  13,
+"endLine":  51,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'for' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeDetails.cs",
+"region":  {
+"startLine":  194,
+"startColumn":  13,
+"endLine":  194,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeDetails.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  13,
+"endLine":  197,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  13,
+"endLine":  161,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  13,
+"endLine":  164,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  13,
+"endLine":  167,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  13,
+"endLine":  170,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  13,
+"endLine":  173,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  13,
+"endLine":  176,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  13,
+"endLine":  179,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  182,
+"startColumn":  13,
+"endLine":  182,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  13,
+"endLine":  197,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  13,
+"endLine":  297,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  302,
+"startColumn":  13,
+"endLine":  302,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  308,
+"startColumn":  13,
+"endLine":  308,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  313,
+"startColumn":  13,
+"endLine":  313,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  13,
+"endLine":  318,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  323,
+"startColumn":  13,
+"endLine":  323,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  333,
+"startColumn":  13,
+"endLine":  333,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMapFactory.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  13,
+"endLine":  49,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  13,
+"endLine":  36,
+"endColumn":  15
+}
+}
+}
+]
+}

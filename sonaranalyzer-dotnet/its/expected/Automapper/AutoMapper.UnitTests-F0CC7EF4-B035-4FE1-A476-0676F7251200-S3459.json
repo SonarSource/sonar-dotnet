@@ -1,0 +1,875 @@
+{
+"issues":  [
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Items', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  38,
+"endLine":  167,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Items', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  209,
+"startColumn":  42,
+"endLine":  209,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'DummyCollectionSum', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CannotMapICollectionToAggregateSumDestination.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  24,
+"endLine":  18,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'DummyEnumerableCount', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CannotProjectIEnumerableToAggregateDestinations.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  24,
+"endLine":  18,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'DummyEnumerableSum', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CannotProjectIEnumerableToAggregateDestinations.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  24,
+"endLine":  19,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'DummyEnumerableMin', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CannotProjectIEnumerableToAggregateDestinations.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  24,
+"endLine":  20,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'DummyEnumerableMax', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CannotProjectIEnumerableToAggregateDestinations.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  24,
+"endLine":  21,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Date', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CustomConverters.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  30,
+"endLine":  18,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Number', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ForAllMembersAndDoNotUseDestinationValue.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  24,
+"endLine":  17,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Value', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\GuidTryExpression.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  27,
+"endLine":  18,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Number', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InternalProperties.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  26,
+"endLine":  18,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Number', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\IntToNullableDecimal.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  29,
+"endLine":  17,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Json', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  28,
+"endLine":  33,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'SubTimeout', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapOverloadsWithDynamic.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  24,
+"endLine":  14,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Timeout', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapOverloadsWithDynamic.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  24,
+"endLine":  20,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'SubSettings', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapOverloadsWithDynamic.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  31,
+"endLine":  22,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Number', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableIntToNullableDecimal.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  29,
+"endLine":  17,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Number', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableIntToNullableDecimal.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  29,
+"endLine":  51,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Number', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableResolveUsing.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  29,
+"endLine":  13,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'OddNumber', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableResolveUsing.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  29,
+"endLine":  17,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'OddNumber', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableUntypedMapFrom.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  29,
+"endLine":  16,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Number', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullSubstituteType.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  26,
+"endLine":  17,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Inner', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullToString.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  27,
+"endLine":  20,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Number', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectUsingTheQueriedEntity.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  24,
+"endLine":  15,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'X', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ReadOnlyCollectionMappingBug.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  35,
+"endLine":  13,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'AgeV', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\RecognizeDestinationPostfixes.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  24,
+"endLine":  19,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Number', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\StructMapping.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  24,
+"endLine":  17,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Items', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\TargetISet.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  33,
+"endLine":  20,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Name', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  701,
+"startColumn":  27,
+"endLine":  701,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'SValue', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  27,
+"endLine":  54,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Value', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  27,
+"endLine":  59,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Value', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  265,
+"startColumn":  27,
+"endLine":  265,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Value', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  25,
+"endLine":  293,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Value', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  331,
+"startColumn":  25,
+"endLine":  331,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Value', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  375,
+"startColumn":  24,
+"endLine":  375,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'IntValue', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  412,
+"startColumn":  24,
+"endLine":  412,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Value', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  421,
+"startColumn":  37,
+"endLine":  421,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'IntValue', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  459,
+"startColumn":  24,
+"endLine":  459,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Value', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  469,
+"startColumn":  37,
+"endLine":  469,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Value', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  506,
+"startColumn":  27,
+"endLine":  506,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Value', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  540,
+"startColumn":  27,
+"endLine":  540,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Color', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  27,
+"endLine":  20,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Color', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  34,
+"endLine":  51,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Color', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  27,
+"endLine":  82,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Number', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForAllMaps.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  24,
+"endLine":  19,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Number', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForAllMaps.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  24,
+"endLine":  28,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Number', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForAllMaps.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  24,
+"endLine":  37,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Color', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\CustomMapperTests.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  27,
+"endLine":  144,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Foo', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\DynamicMapperTests.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  27,
+"endLine":  101,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Bar', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\DynamicMapperTests.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  27,
+"endLine":  102,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Jack', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\DynamicMapperTests.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  29,
+"endLine":  103,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Foo', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  27,
+"endLine":  61,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Bar', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  27,
+"endLine":  62,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Collection', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  37,
+"endLine":  20,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Collection', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  37,
+"endLine":  41,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Collection', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  37,
+"endLine":  62,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Value', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  32,
+"endLine":  83,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Link', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  29,
+"endLine":  124,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Link', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  29,
+"endLine":  171,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Color', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\BindersAndResultConverters.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  24,
+"endLine":  25,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Color', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\BindersAndResultConverters.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  24,
+"endLine":  60,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Child', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectionTests.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  32,
+"endLine":  150,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Value1', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  29,
+"endLine":  61,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Value2', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  28,
+"endLine":  62,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Value3', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  29,
+"endLine":  63,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'TheId', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  27,
+"endLine":  99,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Values', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  42,
+"endLine":  148,
+"endColumn":  48
+}
+}
+}
+]
+}

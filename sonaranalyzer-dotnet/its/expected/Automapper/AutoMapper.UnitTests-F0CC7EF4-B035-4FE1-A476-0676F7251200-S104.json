@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S104",
+"message":  "This file has 1223 lines, which is greater than 1000 authorized. Split it into smaller files.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultiThreadingIssues.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S104",
+"message":  "This file has 1281 lines, which is greater than 1000 authorized. Split it into smaller files.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S104",
+"message":  "This file has 1436 lines, which is greater than 1000 authorized. Split it into smaller files.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S104",
+"message":  "This file has 1301 lines, which is greater than 1000 authorized. Split it into smaller files.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+}
+]
+}

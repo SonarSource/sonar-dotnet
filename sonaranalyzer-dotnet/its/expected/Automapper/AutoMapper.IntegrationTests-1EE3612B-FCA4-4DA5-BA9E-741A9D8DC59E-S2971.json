@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S2971",
+"message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  57,
+"endLine":  23,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  83,
+"endLine":  115,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  83,
+"endLine":  210,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  324,
+"startColumn":  83,
+"endLine":  324,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  430,
+"startColumn":  86,
+"endLine":  430,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop this useless call to 'ToList' or replace it by 'AsEnumerable' if you are using LINQ to Entities.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  69,
+"endLine":  112,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop this useless call to 'ToList' or replace it by 'AsEnumerable' if you are using LINQ to Entities.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  96,
+"endLine":  177,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop this useless call to 'ToList' or replace it by 'AsEnumerable' if you are using LINQ to Entities.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  98,
+"endLine":  197,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop this useless call to 'ToList' or replace it by 'AsEnumerable' if you are using LINQ to Entities.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  91,
+"endLine":  218,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ProjectionOrder\ProjectionOrderTest.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  163,
+"endLine":  61,
+"endColumn":  168
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ProjectionOrder\ProjectionOrderTest.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  163,
+"endLine":  65,
+"endColumn":  168
+}
+}
+}
+]
+}

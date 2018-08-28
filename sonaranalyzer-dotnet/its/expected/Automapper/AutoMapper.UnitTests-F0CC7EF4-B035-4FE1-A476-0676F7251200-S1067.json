@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SamePropertyNameOnParentAndChildClasses.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  68,
+"endLine":  22,
+"endColumn":  164
+}
+}
+}
+]
+}

@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'd.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConventionCreateMapsWithCircularReference.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  25,
+"endLine":  21,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'pm.DestinationProperty.Name.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForAllMembers.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  46,
+"endLine":  25,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'c.SourceMember.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForPath.cs",
+"region":  {
+"startLine":  358,
+"startColumn":  39,
+"endLine":  358,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'Assert.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NestedAndArraysTests.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  17,
+"endLine":  73,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'Assert.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NestedAndArraysTests.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  17,
+"endLine":  74,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectCollectionEnumerableTest.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  24,
+"endLine":  73,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectCollectionListTest.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  24,
+"endLine":  71,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectCollectionListTest.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  24,
+"endLine":  98,
+"endColumn":  65
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to '_.TrimStart().StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  71,
+"endLine":  77,
+"endColumn":  105
+}
+}
+}
+]
+}

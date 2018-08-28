@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  29,
+"endLine":  62,
+"endColumn":  199
+}
+}
+}
+]
+}

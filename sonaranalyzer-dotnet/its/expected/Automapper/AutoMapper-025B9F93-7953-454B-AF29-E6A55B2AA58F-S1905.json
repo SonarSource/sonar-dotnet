@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1905",
+"message":  "Remove this unnecessary cast to 'IEnumerable<object>'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  78,
+"endLine":  66,
+"endColumn":  93
+}
+}
+}
+]
+}

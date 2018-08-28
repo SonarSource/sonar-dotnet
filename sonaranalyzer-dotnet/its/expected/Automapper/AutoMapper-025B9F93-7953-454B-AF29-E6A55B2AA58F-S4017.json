@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\IProjectionExpression.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  81,
+"endLine":  66,
+"endColumn":  137
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionExpression.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  78,
+"endLine":  77,
+"endColumn":  109
+}
+}
+}
+]
+}

@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S4047",
+"message":  "Make this method generic and replace the 'object' parameter with a type parameter.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  29,
+"endLine":  63,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  50,
+"endLine":  63,
+"endColumn":  55
+}
+}
+]
+},
+{
+"id":  "S4047",
+"message":  "Make this method generic and replace the 'object' parameter with a type parameter.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  22,
+"endLine":  92,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  39,
+"endLine":  92,
+"endColumn":  45
+}
+}
+]
+}
+]
+}

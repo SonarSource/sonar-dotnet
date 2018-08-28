@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  24,
+"endLine":  40,
+"endColumn":  33
+}
+}
+}
+]
+}

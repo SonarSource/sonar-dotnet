@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'testContext' to 'context' to match the base class declaration.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ChildClassTests.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  54,
+"endLine":  61,
+"endColumn":  65
+}
+}
+}
+]
+}

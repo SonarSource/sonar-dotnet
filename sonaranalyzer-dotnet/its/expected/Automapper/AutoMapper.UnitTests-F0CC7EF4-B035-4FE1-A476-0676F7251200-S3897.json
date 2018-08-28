@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Parent>'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  629,
+"startColumn":  22,
+"endLine":  629,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Child>'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  664,
+"startColumn":  22,
+"endLine":  664,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Parent>'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  431,
+"startColumn":  22,
+"endLine":  431,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Child>'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  466,
+"startColumn":  22,
+"endLine":  466,
+"endColumn":  27
+}
+}
+}
+]
+}

@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S2344",
+"message":  "Rename this enumeration to remove the 'Enum' suffix.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\EnumMatchingOnValue.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  21,
+"endLine":  15,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2344",
+"message":  "Rename this enumeration to remove the 'Enum' suffix.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\EnumMatchingOnValue.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  21,
+"endLine":  26,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2344",
+"message":  "Rename this enumeration to remove the 'Enum' suffix.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ParentChildResolversBug.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  21,
+"endLine":  8,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2344",
+"message":  "Rename this enumeration to remove the 'Enum' suffix.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ParentChildResolversBug.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  21,
+"endLine":  15,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2344",
+"message":  "Rename this enumeration to remove the 'Flags' suffix.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  552,
+"startColumn":  22,
+"endLine":  552,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2344",
+"message":  "Rename this enumeration to remove the 'Flags' suffix.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  562,
+"startColumn":  22,
+"endLine":  562,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2344",
+"message":  "Rename this enumeration to remove the 'Enum' suffix.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\EnumToNullableEnum.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  21,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2344",
+"message":  "Rename this enumeration to remove the 'Enum' suffix.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\FillingExistingDestination.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  21,
+"endLine":  226,
+"endColumn":  29
+}
+}
+}
+]
+}

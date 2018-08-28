@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3237",
+"message":  "Use the 'value' parameter in this property set accessor declaration.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  638,
+"startColumn":  35,
+"endLine":  638,
+"endColumn":  38
+}
+}
+}
+]
+}

@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S3967",
+"message":  "Change this multidimensional array to a jagged array.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultidimensionalArrays.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  24,
+"endLine":  14,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3967",
+"message":  "Change this multidimensional array to a jagged array.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultidimensionalArrays.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  19,
+"endLine":  15,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3967",
+"message":  "Change this multidimensional array to a jagged array.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultidimensionalArrays.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  16,
+"endLine":  57,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3967",
+"message":  "Change this multidimensional array to a jagged array.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  729,
+"startColumn":  27,
+"endLine":  729,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3967",
+"message":  "Change this multidimensional array to a jagged array.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  740,
+"startColumn":  27,
+"endLine":  740,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3967",
+"message":  "Change this multidimensional array to a jagged array.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  812,
+"startColumn":  27,
+"endLine":  812,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3967",
+"message":  "Change this multidimensional array to a jagged array.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  823,
+"startColumn":  27,
+"endLine":  823,
+"endColumn":  34
+}
+}
+}
+]
+}

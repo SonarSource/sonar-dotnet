@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConventionCreateMapsWithCircularReference.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  16,
+"endLine":  46,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConventionCreateMapsWithCircularReference.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  16,
+"endLine":  55,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConventionCreateMapsWithCircularReference.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  16,
+"endLine":  64,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConventionCreateMapsWithCircularReference.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  16,
+"endLine":  73,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConventionCreateMapsWithCircularReference.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  16,
+"endLine":  82,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConventionCreateMapsWithCircularReference.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  16,
+"endLine":  88,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\OneSourceWithMultipleDestinationsAndPreserveReferences.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  16,
+"endLine":  10,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\OneSourceWithMultipleDestinationsWithoutPR.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  16,
+"endLine":  10,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForPath.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  16,
+"endLine":  197,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectionTests.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  16,
+"endLine":  33,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectionTests.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  16,
+"endLine":  42,
+"endColumn":  23
+}
+}
+}
+]
+}

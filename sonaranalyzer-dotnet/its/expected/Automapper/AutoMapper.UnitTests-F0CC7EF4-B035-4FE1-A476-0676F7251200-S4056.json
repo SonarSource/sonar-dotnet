@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableConverterBug.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  28,
+"endLine":  67,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  61,
+"endLine":  225,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  523,
+"startColumn":  55,
+"endLine":  523,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1308,
+"startColumn":  24,
+"endLine":  1308,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1754,
+"startColumn":  20,
+"endLine":  1754,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  24,
+"endLine":  201,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  71,
+"endLine":  216,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  94,
+"endLine":  280,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ValueTypes.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  69,
+"endLine":  140,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ValueTypes.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  77,
+"endLine":  141,
+"endColumn":  95
+}
+}
+}
+]
+}

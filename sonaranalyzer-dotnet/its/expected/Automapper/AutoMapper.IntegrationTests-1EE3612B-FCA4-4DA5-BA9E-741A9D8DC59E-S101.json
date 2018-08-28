@@ -1,0 +1,199 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename class 'BaseDTO' to match camel case naming rules, consider using 'BaseDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ChildClassTests.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  22,
+"endLine":  25,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'SubDTO' to match camel case naming rules, consider using 'SubDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ChildClassTests.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  22,
+"endLine":  41,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Class1DTO' to match camel case naming rules, consider using 'Class1Dto'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandMembersPath.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  22,
+"endLine":  105,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Class2DTO' to match camel case naming rules, consider using 'Class2Dto'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandMembersPath.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  22,
+"endLine":  113,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Class3DTO' to match camel case naming rules, consider using 'Class3Dto'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandMembersPath.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  22,
+"endLine":  121,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Class1DTO' to match camel case naming rules, consider using 'Class1Dto'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\NestedExplicitExpand.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  22,
+"endLine":  106,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Class2DTO' to match camel case naming rules, consider using 'Class2Dto'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\NestedExplicitExpand.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  22,
+"endLine":  114,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Class3DTO' to match camel case naming rules, consider using 'Class3Dto'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\NestedExplicitExpand.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  22,
+"endLine":  122,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Class1DTO' to match camel case naming rules, consider using 'Class1Dto'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\NestedExplicitExpandWithFields.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  22,
+"endLine":  106,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Class2DTO' to match camel case naming rules, consider using 'Class2Dto'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\NestedExplicitExpandWithFields.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  22,
+"endLine":  114,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Class3DTO' to match camel case naming rules, consider using 'Class3Dto'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\NestedExplicitExpandWithFields.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  22,
+"endLine":  122,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'ICollectionAggregateProjections' to match camel case naming rules, consider using 'CollectionAggregateProjections'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ICollectionAggregateProjections.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  18,
+"endLine":  13,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'IEnumerableAggregateProjections' to match camel case naming rules, consider using 'EnumerableAggregateProjections'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\IEnumerableAggregateProjections.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  18,
+"endLine":  13,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'CustDTO' to match camel case naming rules, consider using 'CustDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\MaxDepth\NavigationPropertySO.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  22,
+"endLine":  42,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'CustomerDTO' to match camel case naming rules, consider using 'CustomerDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\MaxDepth\NavigationPropertySO.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  22,
+"endLine":  51,
+"endColumn":  33
+}
+}
+}
+]
+}

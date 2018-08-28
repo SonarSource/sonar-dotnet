@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 214 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  215
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 278 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\BindersAndResultConverters.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  1,
+"endLine":  43,
+"endColumn":  279
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 213 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\MapFromTest.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  1,
+"endLine":  34,
+"endColumn":  214
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 215 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\MapFromTest.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  216
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\MapFromTest.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  1,
+"endLine":  36,
+"endColumn":  229
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 213 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\MapFromTest.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  214
+}
+}
+}
+]
+}

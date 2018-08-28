@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3218",
+"message":  "Rename this class to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  26,
+"endLine":  85,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this class to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  26,
+"endLine":  96,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this class to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  26,
+"endLine":  108,
+"endColumn":  41
+}
+}
+}
+]
+}

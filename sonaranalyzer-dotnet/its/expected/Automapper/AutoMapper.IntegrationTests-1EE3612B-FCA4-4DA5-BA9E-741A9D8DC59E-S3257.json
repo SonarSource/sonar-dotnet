@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "Remove the array type; it is redundant.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\BuiltInTypes\ProjectEnumerableOfIntToList.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  53,
+"endLine":  73,
+"endColumn":  56
+}
+}
+}
+]
+}

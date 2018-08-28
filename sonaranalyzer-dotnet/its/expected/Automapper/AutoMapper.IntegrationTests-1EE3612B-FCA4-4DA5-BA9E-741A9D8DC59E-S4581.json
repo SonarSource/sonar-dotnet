@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4581",
+"message":  "Use 'Guid.NewGuid()' or 'Guid.Empty' or add arguments to this Guid instantiation.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  269,
+"startColumn":  26,
+"endLine":  269,
+"endColumn":  36
+}
+}
+}
+]
+}

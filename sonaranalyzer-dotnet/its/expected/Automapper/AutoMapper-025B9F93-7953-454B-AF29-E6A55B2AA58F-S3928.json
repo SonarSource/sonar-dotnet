@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3928",
+"message":  "The parameter name 'interfaceType' is not declared in the argument list.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyGenerator.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  31,
+"endLine":  127,
+"endColumn":  51
+}
+}
+}
+]
+}

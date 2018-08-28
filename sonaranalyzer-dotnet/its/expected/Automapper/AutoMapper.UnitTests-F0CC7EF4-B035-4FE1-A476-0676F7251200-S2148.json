@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BasicFlattening.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  27,
+"endLine":  98,
+"endColumn":  34
+}
+}
+}
+]
+}

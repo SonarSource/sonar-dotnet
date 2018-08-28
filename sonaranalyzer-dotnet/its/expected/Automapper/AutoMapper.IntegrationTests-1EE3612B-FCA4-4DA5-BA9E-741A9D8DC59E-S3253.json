@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S3253",
+"message":  "Remove this redundant 'base()' call.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ChildClassTests.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  17,
+"endLine":  49,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant 'base()' call.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\CustomMapFromTest.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  17,
+"endLine":  46,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\DerivedComplexTypes.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  13,
+"endLine":  30,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProxyTests.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  13,
+"endLine":  45,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProxyTests.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  13,
+"endLine":  75,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant 'base()' call.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ValueTransformers\ValueTransformerTests.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  21,
+"endLine":  30,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant 'base()' call.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ValueTransformers\ValueTransformerTests.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  21,
+"endLine":  83,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant 'base()' call.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ValueTransformers\ValueTransformerTests.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  21,
+"endLine":  144,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant 'base()' call.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ValueTransformers\ValueTransformerTests.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  21,
+"endLine":  191,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant 'base()' call.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ValueTransformers\ValueTransformerTests.cs",
+"region":  {
+"startLine":  247,
+"startColumn":  21,
+"endLine":  247,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant 'base()' call.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ValueTransformers\ValueTransformerTests.cs",
+"region":  {
+"startLine":  303,
+"startColumn":  21,
+"endLine":  303,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant 'base()' call.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ValueTransformers\ValueTransformerTests.cs",
+"region":  {
+"startLine":  361,
+"startColumn":  21,
+"endLine":  361,
+"endColumn":  29
+}
+}
+}
+]
+}

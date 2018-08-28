@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\BuiltInTypes\ProjectUsing.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  16,
+"endLine":  108,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  16,
+"endLine":  59,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  16,
+"endLine":  68,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  16,
+"endLine":  151,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  16,
+"endLine":  160,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  266,
+"startColumn":  16,
+"endLine":  266,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  275,
+"startColumn":  16,
+"endLine":  275,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  372,
+"startColumn":  16,
+"endLine":  372,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  381,
+"startColumn":  16,
+"endLine":  381,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  486,
+"startColumn":  16,
+"endLine":  486,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  495,
+"startColumn":  16,
+"endLine":  495,
+"endColumn":  23
+}
+}
+}
+]
+}

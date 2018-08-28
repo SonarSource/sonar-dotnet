@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'Result'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\GenericTypeConverter.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  36,
+"endLine":  29,
+"endColumn":  54
+}
+}
+}
+]
+}

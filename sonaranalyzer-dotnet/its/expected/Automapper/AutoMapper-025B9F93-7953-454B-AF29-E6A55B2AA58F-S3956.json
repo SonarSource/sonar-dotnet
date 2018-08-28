@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\AdvancedConfiguration.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  16,
+"endLine":  36,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\AdvancedConfiguration.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  16,
+"endLine":  38,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  19,
+"endLine":  170,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  19,
+"endLine":  17,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\PathConfigurationExpression.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  19,
+"endLine":  14,
+"endColumn":  40
+}
+}
+}
+]
+}

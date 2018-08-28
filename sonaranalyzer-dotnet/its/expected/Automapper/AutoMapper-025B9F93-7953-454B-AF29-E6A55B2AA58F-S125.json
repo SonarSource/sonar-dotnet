@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  13,
+"endLine":  175,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ArrayMapper.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  13,
+"endLine":  26,
+"endColumn":  42
+}
+}
+}
+]
+}

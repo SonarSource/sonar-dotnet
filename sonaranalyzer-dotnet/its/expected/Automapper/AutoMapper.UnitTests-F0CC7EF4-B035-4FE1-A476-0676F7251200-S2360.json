@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  522,
+"startColumn":  42,
+"endLine":  522,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  780,
+"startColumn":  40,
+"endLine":  780,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  870,
+"startColumn":  52,
+"endLine":  870,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1315,
+"startColumn":  53,
+"endLine":  1315,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1315,
+"startColumn":  69,
+"endLine":  1315,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1384,
+"startColumn":  54,
+"endLine":  1384,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1464,
+"startColumn":  44,
+"endLine":  1464,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1464,
+"startColumn":  58,
+"endLine":  1464,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1464,
+"startColumn":  70,
+"endLine":  1464,
+"endColumn":  73
+}
+}
+}
+]
+}

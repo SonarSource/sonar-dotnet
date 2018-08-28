@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3963",
+"message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapFromClosureBug.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  9,
+"endLine":  12,
+"endColumn":  79
+}
+}
+}
+]
+}

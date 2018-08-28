@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2346",
+"message":  "Rename 'One' to 'None'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\EnumConditionsBug.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  29,
+"endLine":  12,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2346",
+"message":  "Rename 'Three' to 'None'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\EnumConditionsBug.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  29,
+"endLine":  14,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2346",
+"message":  "Rename 'One' to 'None'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  439,
+"startColumn":  13,
+"endLine":  439,
+"endColumn":  16
+}
+}
+}
+]
+}

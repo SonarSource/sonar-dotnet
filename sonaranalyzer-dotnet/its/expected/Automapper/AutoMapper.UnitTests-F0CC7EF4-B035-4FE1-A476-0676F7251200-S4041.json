@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4041",
+"message":  "Change the name of type 'Data' to be different from an existing framework namespace.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BasicFlattening.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  22,
+"endLine":  127,
+"endColumn":  26
+}
+}
+}
+]
+}

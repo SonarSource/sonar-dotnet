@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  20,
+"endLine":  73,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  20,
+"endLine":  83,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  20,
+"endLine":  175,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  250,
+"startColumn":  16,
+"endLine":  250,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  16,
+"endLine":  293,
+"endColumn":  34
+}
+}
+}
+]
+}

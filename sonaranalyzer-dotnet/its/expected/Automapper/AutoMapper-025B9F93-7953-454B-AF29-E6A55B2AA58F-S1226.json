@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S1226",
+"message":  "Introduce a new variable instead of reusing the parameter 'typeMap'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  17,
+"endLine":  60,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1226",
+"message":  "Introduce a new variable instead of reusing the parameter 'destinationParameter'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  17,
+"endLine":  30,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1226",
+"message":  "Introduce a new variable instead of reusing the parameter 'typeMapsPath'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  17,
+"endLine":  91,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1226",
+"message":  "Introduce a new variable instead of reusing the parameter 'node'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  222,
+"startColumn":  21,
+"endLine":  222,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1226",
+"message":  "Introduce a new variable instead of reusing the parameter 'sourceType'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  17,
+"endLine":  71,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1226",
+"message":  "Introduce a new variable instead of reusing the parameter 'sourceType'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  17,
+"endLine":  80,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1226",
+"message":  "Introduce a new variable instead of reusing the parameter 'destinationType'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  17,
+"endLine":  84,
+"endColumn":  32
+}
+}
+}
+]
+}

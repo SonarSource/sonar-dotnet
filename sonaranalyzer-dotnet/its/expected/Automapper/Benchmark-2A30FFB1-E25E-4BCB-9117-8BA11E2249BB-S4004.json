@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'WorkAddresses' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  34,
+"endLine":  73,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'WorkAddresses' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  37,
+"endLine":  83,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'WorkAddresses' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  41,
+"endLine":  165,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'WorkAddresses' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  37,
+"endLine":  175,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Foos' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  250,
+"startColumn":  31,
+"endLine":  250,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Foos' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  35,
+"endLine":  293,
+"endColumn":  39
+}
+}
+}
+]
+}

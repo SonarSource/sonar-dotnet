@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4022",
+"message":  "Change this enum storage to 'Int32'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableBytesAndEnums.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  21,
+"endLine":  15,
+"endColumn":  24
+}
+}
+}
+]
+}

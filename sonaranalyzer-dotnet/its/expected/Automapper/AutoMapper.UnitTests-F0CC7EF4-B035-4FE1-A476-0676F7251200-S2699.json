@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeExtensionsTests.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  25,
+"endLine":  24,
+"endColumn":  56
+}
+}
+}
+]
+}

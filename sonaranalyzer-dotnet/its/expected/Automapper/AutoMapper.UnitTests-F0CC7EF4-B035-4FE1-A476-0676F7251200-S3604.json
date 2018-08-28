@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3604",
+"message":  "Remove the member initializer, all constructors set an initial value for the member.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  600,
+"startColumn":  46,
+"endLine":  600,
+"endColumn":  63
+}
+}
+}
+]
+}

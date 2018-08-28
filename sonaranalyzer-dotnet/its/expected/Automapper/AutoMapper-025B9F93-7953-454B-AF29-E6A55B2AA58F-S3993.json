@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'SourceToDestinationMapperAttribute'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\SourceToDestinationMapperAttribute.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  27,
+"endLine":  6,
+"endColumn":  61
+}
+}
+}
+]
+}

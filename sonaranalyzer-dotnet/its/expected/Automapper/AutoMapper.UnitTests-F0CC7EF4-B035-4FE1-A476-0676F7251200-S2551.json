@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2551",
+"message":  "Lock on a new 'object' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\StaticMapping.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  19,
+"endLine":  68,
+"endColumn":  23
+}
+}
+}
+]
+}

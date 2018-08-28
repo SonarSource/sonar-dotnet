@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3240",
+"message":  "Use the '?:' operator here.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  606,
+"startColumn":  21,
+"endLine":  606,
+"endColumn":  23
+}
+}
+}
+]
+}

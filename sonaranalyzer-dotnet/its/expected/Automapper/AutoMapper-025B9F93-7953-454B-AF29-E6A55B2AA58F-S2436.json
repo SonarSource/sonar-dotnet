@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'MemberConfigurationExpression.ResolveUsing' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  25,
+"endLine":  124,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'MemberConfigurationExpression' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  18,
+"endLine":  12,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'PathConfigurationExpression' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\PathConfigurationExpression.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  18,
+"endLine":  10,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'IMemberConfigurationExpression.ResolveUsing' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\IMemberConfigurationExpression.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  14,
+"endLine":  242,
+"endColumn":  26
+}
+}
+}
+]
+}

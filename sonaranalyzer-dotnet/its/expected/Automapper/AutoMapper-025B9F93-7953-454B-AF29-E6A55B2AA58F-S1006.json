@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\DefaultMember.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  215,
+"endLine":  13,
+"endColumn":  221
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Add the default parameter value defined in the overridden method.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  142,
+"endLine":  88,
+"endColumn":  153
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Add the default parameter value defined in the overridden method.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionExpression.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  55,
+"endLine":  56,
+"endColumn":  65
+}
+}
+}
+]
+}

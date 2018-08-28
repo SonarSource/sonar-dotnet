@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove this unused 'result' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\BuiltInTypes\ProjectUsing.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  21,
+"endLine":  137,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'dto' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProxyTests.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  17,
+"endLine":  26,
+"endColumn":  20
+}
+}
+}
+]
+}

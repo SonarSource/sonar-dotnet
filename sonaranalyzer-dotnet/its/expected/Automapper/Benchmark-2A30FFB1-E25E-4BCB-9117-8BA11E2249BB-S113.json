@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BenchEngine.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\BenchEngine.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  1,
+"endLine":  34,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FlatteningMapper.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  633,
+"startColumn":  1,
+"endLine":  633,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HiPerfTimer.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\HiPerfTimer.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  1,
+"endLine":  58,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IObjectToObjectMapper.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\IObjectToObjectMapper.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  1,
+"endLine":  11,
+"endColumn":  2
+}
+}
+}
+]
+}

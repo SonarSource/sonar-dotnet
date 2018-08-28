@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\HiPerfTimer.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  57,
+"endLine":  26,
+"endColumn":  62
+}
+}
+}
+]
+}

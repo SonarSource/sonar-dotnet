@@ -1,0 +1,37 @@
+{
+"issues":  [
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\UnitTests\AutoMapperSpecBase.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  27,
+"endLine":  53,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Automapper\src\UnitTests\AutoMapperSpecBase.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  27,
+"endLine":  53,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Automapper\src\UnitTests\AutoMapperSpecBase.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  21,
+"endLine":  61,
+"endColumn":  28
+}
+}
+]
+}
+]
+}
