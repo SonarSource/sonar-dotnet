@@ -34,6 +34,19 @@ namespace Tests.Diagnostics
             s2 = "f";
             Console.Write(s2);
         }
+
+        public void Defaults()
+        {
+            var s = default(string);
+            s = "";
+            var b = default(bool);
+            b = true;
+            var o = default(object);
+            o = new object();
+            var i = default(int);
+            i = 42;
+            Console.WriteLine("", s, b, o, i);
+        }
     }
 
     public class DeadStores
