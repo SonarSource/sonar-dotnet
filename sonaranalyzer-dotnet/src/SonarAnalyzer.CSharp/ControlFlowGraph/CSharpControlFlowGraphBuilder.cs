@@ -749,8 +749,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                         caseSwitchLabel.Value != null &&
                         caseSwitchLabel.Value.IsKind(SyntaxKind.NullLiteralExpression))
                     {
-                        currentSectionBlock = CreateBinaryBranchBlock(caseSwitchLabel,
-                            trueSuccessor: sectionBlock, falseSuccessor: currentSectionBlock);
+                        // Creating BranchBlock instead of BinaryBranchBlock will generate some
+                        // false negatives because we will not be able to evaluate the case label
+                        // condition. BinaryBranchBlock causes exceptions in the CSharpExplodedGraph
+                        // because there is no instruction for the branch condition. Such instruction
+                        // would be difficult to generate because it is not present in the AST.
+                        // See https://github.com/SonarSource/sonar-csharp/issues/1801
+                        currentSectionBlock = CreateBranchBlock(caseSwitchLabel,
+                             successors: new[] { sectionBlock, currentSectionBlock });
                     }
                 }
             }
@@ -764,7 +770,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             return BuildExpression(switchStatement.Expression, switchBlock);
 
             bool ContainsDefaultLabel(SwitchSectionSyntax s) =>
-                s.Labels.OfType<CaseSwitchLabelSyntax>().Any(l => l.Value.IsAnyKind(csharp7DefaultLabelKinds));
+                s.Labels.Any(l => l.IsKind(SyntaxKind.DefaultSwitchLabel));
         }
 
         private Block BuildCasePattern(CasePatternSwitchLabelSyntaxWrapper casePatternSwitchLabel,

@@ -1,8 +1,4 @@
 ﻿extern alias csharp;
-
-using System;
-using System.Collections;
-using System.Collections.Generic;
 /*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2018 SonarSource SA
@@ -2735,7 +2731,7 @@ namespace NS
         [TestCategory("CFG")]
         public void Cfg_Switch_Patterns_Default()
         {
-            var cfg = Build("cw0(); switch(o) { case int i: case string s: cw1(); break; case default: case double d: cw2(); break; } cw3();");
+            var cfg = Build("cw0(); switch(o) { case int i: case string s: cw1(); break; default: case double d: cw2(); break; } cw3();");
 
             VerifyCfg(cfg, 8);
 
@@ -2862,7 +2858,7 @@ namespace NS
         [TestCategory("CFG")]
         public void Cfg_Switch_Patterns_GotoDefault()
         {
-            var cfg = Build("cw0(); switch(o) { case int i: case string s: cw1(); goto default; case default: case double d: cw2(); break; } cw3();");
+            var cfg = Build("cw0(); switch(o) { case int i: case string s: cw1(); goto default; default: case double d: cw2(); break; } cw3();");
 
             VerifyCfg(cfg, 8);
 
@@ -2910,7 +2906,7 @@ namespace NS
 
             var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
             var caseIntBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
-            var caseNullBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
+            var caseNullBlock = (BranchBlock)cfg.Blocks.ElementAt(2);
             var firstSectionBlock = (JumpBlock)cfg.Blocks.ElementAt(3);
             var lastBlock = (SimpleBlock)cfg.Blocks.ElementAt(4);
             var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(5);
@@ -2922,8 +2918,7 @@ namespace NS
             caseIntBlock.FalseSuccessorBlock.Should().Be(caseNullBlock);
             VerifyAllInstructions(caseIntBlock, "int i");
 
-            caseNullBlock.TrueSuccessorBlock.Should().Be(firstSectionBlock);
-            caseNullBlock.FalseSuccessorBlock.Should().Be(lastBlock);
+            caseNullBlock.SuccessorBlocks.Should().OnlyContain(firstSectionBlock, lastBlock);
             VerifyAllInstructions(caseNullBlock);
 
             firstSectionBlock.SuccessorBlock.Should().Be(lastBlock);
@@ -2932,6 +2927,47 @@ namespace NS
             lastBlock.SuccessorBlock.Should().Be(exitBlock);
             VerifyAllInstructions(lastBlock, "cw2", "cw2()");
         }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Switch_Patterns_Null_Default()
+        {
+            var cfg = Build(@"cw0(); switch(o) { case int i: cw1(); break; case null: cw2(); break; default: cw3(); break; } cw4();");
+
+            VerifyCfg(cfg, 8);
+
+            var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
+            var caseIntBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
+            var intSectionBlock = (JumpBlock)cfg.Blocks.ElementAt(2);
+            var caseNullBlock = (BranchBlock)cfg.Blocks.ElementAt(3);
+            var nullSectionBlock = (JumpBlock)cfg.Blocks.ElementAt(4);
+            var defaultSectionBlock = (JumpBlock)cfg.Blocks.ElementAt(5);
+            var lastBlock = (SimpleBlock)cfg.Blocks.ElementAt(6);
+            var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(7);
+
+            switchBlock.SuccessorBlocks.Should().OnlyContain(caseIntBlock);
+            VerifyAllInstructions(switchBlock, "cw0", "cw0()", "o");
+
+            caseIntBlock.TrueSuccessorBlock.Should().Be(intSectionBlock);
+            caseIntBlock.FalseSuccessorBlock.Should().Be(caseNullBlock);
+            VerifyAllInstructions(caseIntBlock, "int i");
+
+            intSectionBlock.SuccessorBlock.Should().Be(lastBlock);
+            VerifyAllInstructions(intSectionBlock, "cw1", "cw1()");
+
+            caseNullBlock.SuccessorBlocks.Should().OnlyContain(nullSectionBlock, defaultSectionBlock);
+            VerifyAllInstructions(caseNullBlock);
+
+            nullSectionBlock.SuccessorBlock.Should().Be(lastBlock);
+            VerifyAllInstructions(nullSectionBlock, "cw2", "cw2()");
+
+            defaultSectionBlock.SuccessorBlock.Should().Be(lastBlock);
+            VerifyAllInstructions(defaultSectionBlock, "cw3", "cw3()");
+
+            lastBlock.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(lastBlock, "cw4", "cw4()");
+        }
+
 
         #endregion
 

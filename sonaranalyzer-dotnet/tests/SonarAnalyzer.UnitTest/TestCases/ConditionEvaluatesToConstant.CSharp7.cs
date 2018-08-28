@@ -110,6 +110,12 @@
                     }
                     break;
 
+                case null:
+                    if (o == null) // Compliant, False Negative
+                    {
+                    }
+
+                    break;
                 default:
                     break;
             }
