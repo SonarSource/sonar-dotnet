@@ -131,6 +131,11 @@ namespace Tests.Diagnostics
                     }
                     break;
 
+                case null:
+                    o.ToString(); // Compliant, False Negative
+
+                    break;
+
                 default:
                     break;
             }
