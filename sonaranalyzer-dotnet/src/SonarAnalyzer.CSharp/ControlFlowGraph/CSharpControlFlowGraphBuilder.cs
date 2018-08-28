@@ -755,6 +755,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                         // because there is no instruction for the branch condition. Such instruction
                         // would be difficult to generate because it is not present in the AST.
                         // See https://github.com/SonarSource/sonar-csharp/issues/1801
+
                         currentSectionBlock = CreateBranchBlock(caseSwitchLabel,
                              successors: new[] { sectionBlock, currentSectionBlock });
                     }
