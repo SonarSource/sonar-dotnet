@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
@@ -28,6 +29,7 @@ using SonarAnalyzer.Utilities;
 
 namespace SonarAnalyzer.RuleDocGenerator
 {
+    [ExcludeFromCodeCoverage]
     public static class Program
     {
         public static void Main(string[] args)

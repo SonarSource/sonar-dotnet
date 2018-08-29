@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Xml;
@@ -26,6 +27,7 @@ using System.Xml.Serialization;
 
 namespace SonarAnalyzer.RuleDescriptorGenerator
 {
+    [ExcludeFromCodeCoverage]
     public class RuleDetail
     {
         private const string CardinalitySingle = "SINGLE";

@@ -19,10 +19,12 @@
  */
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Xml.Serialization;
 
 namespace SonarAnalyzer.RuleDescriptorGenerator
 {
+    [ExcludeFromCodeCoverage]
     [XmlRoot("rules", Namespace = "")]
     public class RuleDescriptorRoot
     {

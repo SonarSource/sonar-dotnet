@@ -19,11 +19,13 @@
  */
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Xml.Serialization;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.RuleDescriptorGenerator
 {
+    [ExcludeFromCodeCoverage]
     [XmlRoot("profile", Namespace = "")]
     public class QualityProfileRoot
     {
