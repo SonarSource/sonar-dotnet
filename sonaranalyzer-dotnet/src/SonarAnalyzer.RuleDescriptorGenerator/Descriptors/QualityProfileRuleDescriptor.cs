@@ -18,11 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Diagnostics.CodeAnalysis;
 using System.Xml.Serialization;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.RuleDescriptorGenerator
 {
+    [ExcludeFromCodeCoverage]
     [XmlType("rule")]
     public class QualityProfileRuleDescriptor
     {

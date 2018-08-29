@@ -24,7 +24,9 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class DebugHelper
     {
+        internal const string AnalyzerInternalDebugEnvVariable = "ANALYZER_INTERNAL_DEBUG";
+
         public static bool IsInternalDebuggingContext() =>
-            Environment.GetEnvironmentVariable("ANALYZER_INTERNAL_DEBUG") == "true";
+            Environment.GetEnvironmentVariable(AnalyzerInternalDebugEnvVariable) == "true";
     }
 }

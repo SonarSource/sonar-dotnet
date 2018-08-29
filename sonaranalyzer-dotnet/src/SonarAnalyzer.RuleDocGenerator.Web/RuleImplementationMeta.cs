@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -29,6 +30,7 @@ using SonarAnalyzer.RuleDescriptors;
 
 namespace SonarAnalyzer.RuleDocGenerator
 {
+    [ExcludeFromCodeCoverage]
     public class RuleImplementationMeta
     {
         internal const string CrosslinkPattern = "([rR]ule\\W+)?\\{rule:(?:csharpsquid|vbnet):(?<ruleId>S[0-9]+)\\}";

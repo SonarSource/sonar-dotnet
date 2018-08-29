@@ -19,10 +19,12 @@
  */
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 
 namespace SonarAnalyzer.RuleDocGenerator
 {
+    [ExcludeFromCodeCoverage]
     public class SonarAnalyzerDescriptor
     {
         [JsonProperty("version")]
