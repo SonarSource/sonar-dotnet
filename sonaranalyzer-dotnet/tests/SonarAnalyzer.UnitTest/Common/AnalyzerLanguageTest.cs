@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Common;
 using System;
 using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Common
 {
@@ -46,19 +46,15 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void AnalyzerLanguage_GetDirectory()
         {
-            AnalyzerLanguage.CSharp.GetDirectoryName()
-                .Should().Be("CSharp");
-            AnalyzerLanguage.VisualBasic.GetDirectoryName()
-                .Should().Be("VisualBasic");
+            AnalyzerLanguage.CSharp.DirectoryName.Should().Be("CSharp");
+            AnalyzerLanguage.VisualBasic.DirectoryName.Should().Be("VisualBasic");
         }
 
         [TestMethod]
         public void AnalyzerLanguage_GetQualityProfileRepositoryKey()
         {
-            AnalyzerLanguage.CSharp.GetQualityProfileRepositoryKey()
-                .Should().Be("csharpsquid");
-            AnalyzerLanguage.VisualBasic.GetQualityProfileRepositoryKey()
-                .Should().Be("vbnet");
+            AnalyzerLanguage.CSharp.RepositoryKey.Should().Be("csharpsquid");
+            AnalyzerLanguage.VisualBasic.RepositoryKey.Should().Be("vbnet");
         }
 
         [TestMethod]

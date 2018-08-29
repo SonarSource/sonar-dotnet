@@ -88,64 +88,76 @@ namespace SonarAnalyzer.Common
             throw new NotSupportedException($"Supplied language needs to be '{CsLiteral}' or '{VbNetLiteral}', but found: '{language}'.");
         }
 
-        public string GetQualityProfileRepositoryKey()
+        public string RepositoryKey
         {
-            if (this == CSharp)
+            get
             {
-                return "csharpsquid";
-            }
+                if (this == CSharp)
+                {
+                    return "csharpsquid";
+                }
 
-            if (this == VisualBasic)
-            {
-                return "vbnet";
-            }
+                if (this == VisualBasic)
+                {
+                    return "vbnet";
+                }
 
-            throw new NotSupportedException($"Quality profile can only be queried for a single language. But was called on '{ToString()}'.");
+                throw new NotSupportedException($"Quality profile can only be queried for a single language. But was called on '{ToString()}'.");
+            }
         }
 
-        public string GetDirectoryName()
+        public string DirectoryName
         {
-            if (this == CSharp)
+            get
             {
-                return "CSharp";
-            }
+                if (this == CSharp)
+                {
+                    return "CSharp";
+                }
 
-            if (this == VisualBasic)
-            {
-                return "VisualBasic";
-            }
+                if (this == VisualBasic)
+                {
+                    return "VisualBasic";
+                }
 
-            throw new NotSupportedException($"Can't get folder name for '{ToString()}'.");
+                throw new NotSupportedException($"Can't get folder name for '{ToString()}'.");
+            }
         }
 
-        public string GetFriendlyName()
+        public string FriendlyName
         {
-            if (this == CSharp)
+            get
             {
-                return "C#";
-            }
+                if (this == CSharp)
+                {
+                    return "C#";
+                }
 
-            if (this == VisualBasic)
-            {
-                return "VB.NET";
-            }
+                if (this == VisualBasic)
+                {
+                    return "VB.NET";
+                }
 
-            throw new NotSupportedException($"Can't get friendly name for '{ToString()}'.");
+                throw new NotSupportedException($"Can't get friendly name for '{ToString()}'.");
+            }
         }
 
-        public string GetFileExtension()
+        public string FileExtension
         {
-            if (this == CSharp)
+            get
             {
-                return "cs";
-            }
+                if (this == CSharp)
+                {
+                    return "cs";
+                }
 
-            if (this == VisualBasic)
-            {
-                return "vb";
-            }
+                if (this == VisualBasic)
+                {
+                    return "vb";
+                }
 
-            throw new NotSupportedException($"Can't get file extension for '{ToString()}'.");
+                throw new NotSupportedException($"Can't get file extension for '{ToString()}'.");
+            }
         }
 
         public static AnalyzerLanguage FromPath(string path)

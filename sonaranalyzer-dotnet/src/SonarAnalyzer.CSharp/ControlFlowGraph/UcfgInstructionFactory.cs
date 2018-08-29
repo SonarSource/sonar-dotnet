@@ -175,40 +175,41 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             var instructionsToReturn = new[] { instruction };
 
-            switch (instruction.InstrCase)
+            if (instruction.InstrCase == Instruction.InstrOneofCase.Assigncall)
             {
-                case Instruction.InstrOneofCase.Assigncall:
-                    switch (expression.ExprCase)
-                    {
-                        case Expression.ExprOneofCase.Var:
-                            instruction.Assigncall.Variable = expression.Var;
-                            return instructionsToReturn;
+                switch (expression.ExprCase)
+                {
+                    case Expression.ExprOneofCase.Var:
+                        instruction.Assigncall.Variable = expression.Var;
+                        return instructionsToReturn;
 
-                        case Expression.ExprOneofCase.FieldAccess:
-                            instruction.Assigncall.FieldAccess = expression.FieldAccess;
-                            return instructionsToReturn;
+                    case Expression.ExprOneofCase.FieldAccess:
+                        instruction.Assigncall.FieldAccess = expression.FieldAccess;
+                        return instructionsToReturn;
 
-                        default:
-                            return NoInstructions;
-                    }
+                    default:
+                        return NoInstructions;
+                }
+            }
+            else if (instruction.InstrCase == Instruction.InstrOneofCase.NewObject)
+            {
+                switch (expression.ExprCase)
+                {
+                    case Expression.ExprOneofCase.Var:
+                        instruction.NewObject.Variable = expression.Var;
+                        return instructionsToReturn;
 
-                case Instruction.InstrOneofCase.NewObject:
-                    switch (expression.ExprCase)
-                    {
-                        case Expression.ExprOneofCase.Var:
-                            instruction.NewObject.Variable = expression.Var;
-                            return instructionsToReturn;
+                    case Expression.ExprOneofCase.FieldAccess:
+                        instruction.NewObject.FieldAccess = expression.FieldAccess;
+                        return instructionsToReturn;
 
-                        case Expression.ExprOneofCase.FieldAccess:
-                            instruction.NewObject.FieldAccess = expression.FieldAccess;
-                            return instructionsToReturn;
-
-                        default:
-                            return NoInstructions;
-                    }
-
-                default:
-                    return NoInstructions;
+                    default:
+                        return NoInstructions;
+                }
+            }
+            else
+            {
+                return NoInstructions;
             }
         }
 
@@ -220,10 +221,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private IEnumerable<Instruction> BuildAnnotationCall(SyntaxNode syntaxNode, Expression destination, Expression value) =>
             BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.Annotation, destination, value);
 
-        private IEnumerable<Instruction> BuildArrayGetCall(SyntaxNode syntaxNode, ITypeSymbol nodeTypeSymbol,
-            Expression target) =>
-            BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.ArrayGet,
-                this.expressionService.CreateVariable(), target);
+        private IEnumerable<Instruction> BuildArrayGetCall(SyntaxNode syntaxNode, ITypeSymbol nodeTypeSymbol) =>
+            BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.ArrayGet, this.expressionService.CreateVariable(),
+                GetTargetExpression(syntaxNode, nodeTypeSymbol));
 
         private IEnumerable<Instruction> BuildArraySetCall(SyntaxNode syntaxNode, Expression destination, Expression value) =>
             BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.ArraySet,
@@ -692,8 +692,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             if (elementAccessType.TypeKind == TypeKind.Array)
             {
-                return BuildArrayGetCall(elementAccessSyntax, elementAccessType, GetTargetExpression(elementAccessSyntax,
-                    elementAccessType));
+                return BuildArrayGetCall(elementAccessSyntax, elementAccessType);
             }
 
             if (!(GetNodeSymbol(elementAccessSyntax) is IPropertySymbol indexerPropertySymbol))
@@ -731,8 +730,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             if (elementAccessType.TypeKind == TypeKind.Array)
             {
-                return BuildArrayGetCall(elementAccessSyntax, elementAccessType, GetTargetExpression(elementAccessSyntax,
-                    elementAccessType));
+                return BuildArrayGetCall(elementAccessSyntax, elementAccessType);
             }
 
             if (!(GetNodeSymbol(elementAccessSyntax) is IPropertySymbol indexerPropertySymbol))

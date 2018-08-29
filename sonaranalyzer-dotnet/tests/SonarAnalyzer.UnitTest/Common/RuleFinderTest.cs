@@ -19,12 +19,12 @@
  */
 
 extern alias csharp;
+using System.Linq;
+using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Utilities;
-using System.Linq;
 
 namespace SonarAnalyzer.UnitTest.Common
 {
@@ -60,12 +60,10 @@ namespace SonarAnalyzer.UnitTest.Common
             var finder = new RuleFinder();
 
             var countParameterless = finder.GetParameterlessAnalyzerTypes(AnalyzerLanguage.CSharp).Count();
-            finder.GetAllAnalyzerTypes().Count()
-                .Should().BeGreaterThan(countParameterless);
+            finder.AllAnalyzerTypes.Count().Should().BeGreaterThan(countParameterless);
 
             countParameterless = finder.GetParameterlessAnalyzerTypes(AnalyzerLanguage.VisualBasic).Count();
-            finder.GetAllAnalyzerTypes().Count()
-                .Should().BeGreaterThan(countParameterless);
+            finder.AllAnalyzerTypes.Count().Should().BeGreaterThan(countParameterless);
         }
     }
 }

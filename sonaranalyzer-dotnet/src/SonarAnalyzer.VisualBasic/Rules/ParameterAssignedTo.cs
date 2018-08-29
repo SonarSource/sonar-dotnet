@@ -91,6 +91,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return false;
         }
 
-        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }
 }

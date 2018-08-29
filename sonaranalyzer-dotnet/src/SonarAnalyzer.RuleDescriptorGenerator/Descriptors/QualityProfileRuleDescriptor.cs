@@ -32,7 +32,7 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
 
         public QualityProfileRuleDescriptor(AnalyzerLanguage language)
         {
-            RepositoryKey = language.GetQualityProfileRepositoryKey();
+            RepositoryKey = language.RepositoryKey;
         }
 
         [XmlElement("repositoryKey")]
