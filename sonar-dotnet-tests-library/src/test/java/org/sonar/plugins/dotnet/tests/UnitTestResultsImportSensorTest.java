@@ -65,7 +65,6 @@ public class UnitTestResultsImportSensorTest {
   public void analyze() throws Exception {
     UnitTestResults results = mock(UnitTestResults.class);
     when(results.tests()).thenReturn(42);
-    when(results.passedPercentage()).thenReturn(84d);
     when(results.skipped()).thenReturn(1);
     when(results.failures()).thenReturn(2);
     when(results.errors()).thenReturn(3);

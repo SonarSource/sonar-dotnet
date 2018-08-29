@@ -45,7 +45,6 @@ public class XUnitTestResultsFileParserTest {
 
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("One of the assemblies contains no test result, please make sure this is expected.");
     assertThat(results.tests()).isEqualTo(0);
-    assertThat(results.passedPercentage()).isEqualTo(0);
     assertThat(results.skipped()).isEqualTo(0);
     assertThat(results.failures()).isEqualTo(0);
     assertThat(results.errors()).isEqualTo(0);
@@ -76,7 +75,6 @@ public class XUnitTestResultsFileParserTest {
     assertThat(results.failures()).isEqualTo(3);
     assertThat(results.errors()).isEqualTo(5);
     assertThat(results.tests()).isEqualTo(17);
-    assertThat(results.passedPercentage()).isEqualTo(5 * 100.0 / 17);
     assertThat(results.skipped()).isEqualTo(4);
     assertThat(results.executionTime()).isEqualTo(227 + 228);
   }
@@ -90,7 +88,6 @@ public class XUnitTestResultsFileParserTest {
     assertThat(results.errors()).isEqualTo(0);
     assertThat(results.skipped()).isEqualTo(2);
     assertThat(results.tests()).isEqualTo(6);
-    assertThat(results.passedPercentage()).isEqualTo(3 * 100.0 / 6);
   }
 
   @Test
@@ -101,7 +98,6 @@ public class XUnitTestResultsFileParserTest {
     assertThat(results.failures()).isEqualTo(3);
     assertThat(results.errors()).isEqualTo(5);
     assertThat(results.tests()).isEqualTo(17);
-    assertThat(results.passedPercentage()).isEqualTo(5 * 100.0 / 17);
     assertThat(results.skipped()).isEqualTo(4);
     assertThat(results.executionTime()).isNull();
   }
@@ -113,7 +109,6 @@ public class XUnitTestResultsFileParserTest {
 
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("One of the assemblies contains no test result, please make sure this is expected.");
     assertThat(results.tests()).isEqualTo(0);
-    assertThat(results.passedPercentage()).isEqualTo(0);
     assertThat(results.skipped()).isEqualTo(0);
     assertThat(results.failures()).isEqualTo(0);
     assertThat(results.errors()).isEqualTo(0);
@@ -127,7 +122,6 @@ public class XUnitTestResultsFileParserTest {
 
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("One of the assemblies contains no test result, please make sure this is expected.");
     assertThat(results.tests()).isEqualTo(0);
-    assertThat(results.passedPercentage()).isEqualTo(0);
     assertThat(results.skipped()).isEqualTo(0);
     assertThat(results.failures()).isEqualTo(0);
     assertThat(results.errors()).isEqualTo(0);

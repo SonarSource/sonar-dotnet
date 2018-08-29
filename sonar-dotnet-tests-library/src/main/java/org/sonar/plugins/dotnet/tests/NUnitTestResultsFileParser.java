@@ -71,19 +71,17 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
       int skipped = xmlParserHelper.getRequiredIntAttribute("skipped");
 
       int totalSkipped = skipped + inconclusive + ignored;
-      int passed = total - errors - failures;
 
       Double duration = readExecutionTimeFromDirectlyNestedTestSuiteTags(xmlParserHelper);
       Long executionTime = duration != null ? (long) duration.doubleValue() : null;
 
-      unitTestResults.add(total, passed, totalSkipped, failures, errors, executionTime);
+      unitTestResults.add(total, totalSkipped, failures, errors, executionTime);
     }
 
     private void handleTestRunTag(XmlParserHelper xmlParserHelper) {
       int total = xmlParserHelper.getRequiredIntAttribute("total");
       int failures = xmlParserHelper.getRequiredIntAttribute("failed");
       int inconclusive = xmlParserHelper.getRequiredIntAttribute("inconclusive");
-      int passed = xmlParserHelper.getRequiredIntAttribute("passed");
       int skipped = xmlParserHelper.getRequiredIntAttribute("skipped");
 
       int totalSkipped = skipped + inconclusive;
@@ -93,7 +91,7 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
 
       int errors = readErrorCountFromNestedTestCaseTags(xmlParserHelper);
 
-      unitTestResults.add(total, passed, totalSkipped, failures, errors, executionTime);
+      unitTestResults.add(total, totalSkipped, failures, errors, executionTime);
     }
 
     @CheckForNull
@@ -121,7 +119,6 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
       return executionTime;
     }
 
-    @CheckForNull
     private static int readErrorCountFromNestedTestCaseTags(XmlParserHelper xmlParserHelper) {
       int errors = 0;
 

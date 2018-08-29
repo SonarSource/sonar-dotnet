@@ -50,20 +50,19 @@ public class NUnitTestResultsFileParserTest {
   }
 
   @Test
-  public void valid() throws Exception {
+  public void valid() {
     UnitTestResults results = new UnitTestResults();
     new NUnitTestResultsFileParser().accept(new File("src/test/resources/nunit/valid.xml"), results);
 
     assertThat(results.errors()).isEqualTo(30);
     assertThat(results.failures()).isEqualTo(20);
     assertThat(results.tests()).isEqualTo(200);
-    assertThat(results.passedPercentage()).isEqualTo(150 * 100.0 / 200); // 200 - 30 - 20
     assertThat(results.skipped()).isEqualTo(9); // 4 + 3 + 2
     assertThat(results.executionTime()).isEqualTo(51);
   }
 
   @Test
-  public void valid_comma_in_double() throws Exception {
+  public void valid_comma_in_double() {
     UnitTestResults results = new UnitTestResults();
     new NUnitTestResultsFileParser().accept(new File("src/test/resources/nunit/valid_comma_in_double.xml"), results);
 
@@ -71,27 +70,25 @@ public class NUnitTestResultsFileParserTest {
   }
 
   @Test
-  public void valid_no_execution_time() throws Exception {
+  public void valid_no_execution_time() {
     UnitTestResults results = new UnitTestResults();
     new NUnitTestResultsFileParser().accept(new File("src/test/resources/nunit/valid_no_execution_time.xml"), results);
 
     assertThat(results.failures()).isEqualTo(20);
     assertThat(results.errors()).isEqualTo(30);
     assertThat(results.tests()).isEqualTo(200);
-    assertThat(results.passedPercentage()).isEqualTo(150 * 100.0 / 200); // 200 - 30 - 20
     assertThat(results.skipped()).isEqualTo(9); // 4 + 3 + 2
     assertThat(results.executionTime()).isNull();
   }
 
   @Test
-  public void nunit3_sample() throws Exception {
+  public void nunit3_sample() {
     UnitTestResults results = new UnitTestResults();
     new NUnitTestResultsFileParser().accept(new File("src/test/resources/nunit/nunit3_sample.xml"), results);
 
     assertThat(results.failures()).isEqualTo(2);
     assertThat(results.errors()).isEqualTo(1);
     assertThat(results.tests()).isEqualTo(18);
-    assertThat(results.passedPercentage()).isEqualTo(12 * 100.0 / 18);
     assertThat(results.skipped()).isEqualTo(4); // 1 + 3
     assertThat(results.executionTime()).isEqualTo(154);
   }
