@@ -133,8 +133,13 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly IEnumerable<ISymbol> excludedLocals;
             private readonly CSharpSyntaxNode node;
 
-        private static readonly ISet<string> AllowedNumericValues = new HashSet<string> { "-1", "0", "1" };
-        private static readonly ISet<string> AllowedStringValues = new HashSet<string> { "" };
+            private static readonly ISet<string> AllowedNumericValues = new HashSet<string> { "-1", "0", "1" };
+            private static readonly ISet<string> AllowedStringValues = new HashSet<string> { "" };
+            private static readonly ISet<SyntaxKind> UnaryPlusOrMinus = new HashSet<SyntaxKind>
+            {
+                SyntaxKind.UnaryPlusExpression,
+                SyntaxKind.UnaryMinusExpression
+            };
 
             public InBlockLivenessAnalysis(Block block, IEnumerable<ISymbol> blockOutState, IEnumerable<ISymbol> excludedLocals, CSharpSyntaxNode node, ISymbol declaration,
                 SyntaxNodeAnalysisContext context)
@@ -294,11 +299,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     expression.IsKind(SyntaxKind.FalseLiteralExpression);
             }
 
-            private bool IsAllowedNumericInitialization(ExpressionSyntax expression)
-            {
-                return expression.IsKind(SyntaxKind.NumericLiteralExpression) &&
-                    AllowedNumericValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText);
-            }
+            private bool IsAllowedNumericInitialization(ExpressionSyntax expression) =>
+                expression.IsKind(SyntaxKind.NumericLiteralExpression) && // 0 or 1
+                AllowedNumericValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText)
+                ||
+                expression.IsAnyKind(UnaryPlusOrMinus) && // +1 or -1
+                IsAllowedNumericInitialization(((PrefixUnaryExpressionSyntax)expression).Operand);
 
             private bool IsAllowedStringInitialization(ExpressionSyntax expression)
             {

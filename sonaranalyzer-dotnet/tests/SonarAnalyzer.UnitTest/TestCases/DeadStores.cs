@@ -17,34 +17,56 @@ namespace Tests.Diagnostics
         {
             return 5;
         }
-        public void Foo()
+
+        public void IgnoredValues()
         {
-            string s = null; // Compliant
-            s = "foo";
-            Console.Write(s);
-            int i = 0;
-            int a = -1;
-            int b = 1;
-            bool t = true;
-            bool f = false;
-            string foo = ""; // Compliant
-            foo = "f";
-            Console.Write(foo);
-            string s2 = string.Empty; // Compliant
-            s2 = "f";
-            Console.Write(s2);
+            var stringEmpty = string.Empty; // Compliant
+            stringEmpty = "other";
+
+            string stringNull = null; // Compliant
+            stringNull = "other";
+
+            var boolFalse = false; // Compliant
+            boolFalse = true;
+
+            var boolTrue = true; // Compliant
+            boolTrue = false;
+
+            object objectNull = null; // Compliant
+            objectNull = new object();
+
+            var intZero = 0; // Compliant
+            intZero = 42;
+
+            var intOne = 1; // Compliant
+            intOne = 42;
+
+            var intMinusOne = -1; // Compliant
+            intMinusOne = 42;
+
+            var intPlusOne = +1; // Compliant
+            intPlusOne = 42;
+
+            // Variables should be used in order the rule to trigger
+            Console.WriteLine("", stringEmpty, stringNull, boolFalse, boolTrue,
+                objectNull, intZero, intOne, intMinusOne, intPlusOne);
         }
 
         public void Defaults()
         {
-            var s = default(string);
+            var s = default(string); // Compliant
             s = "";
-            var b = default(bool);
+
+            var b = default(bool); // Compliant
             b = true;
-            var o = default(object);
+
+            var o = default(object); // Compliant
             o = new object();
-            var i = default(int);
+
+            var i = default(int); // Compliant
             i = 42;
+
+            // Variables should be used in order the rule to trigger
             Console.WriteLine("", s, b, o, i);
         }
     }
