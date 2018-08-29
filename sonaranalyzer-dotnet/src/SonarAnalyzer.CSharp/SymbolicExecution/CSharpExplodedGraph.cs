@@ -469,7 +469,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     }
                     else
                     {
-                        throw new NotImplementedException($"{instruction.Kind()}");
+                        throw new NotSupportedException($"{instruction.Kind()}");
                     }
                     break;
 
@@ -479,7 +479,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     break;
 
                 default:
-                    throw new NotImplementedException($"{instruction.Kind()}");
+                    throw new NotSupportedException($"{instruction.Kind()}");
             }
 
             newProgramState = EnsureStackState(parenthesizedExpression, newProgramState);

@@ -57,7 +57,7 @@ namespace SonarAnalyzer.RuleDocGenerator
             return new RuleImplementationMeta
             {
                 Id = detail.Key,
-                Language = language.GetFriendlyName(),
+                Language = language.FriendlyName,
                 Severity = detail.Severity,
                 Title = detail.Title,
                 Description = GetParameterDescription(detail.Parameters) +

@@ -30,9 +30,10 @@ namespace SonarAnalyzer.Utilities
 {
     public class RuleFinder
     {
-        private readonly List<Type> diagnosticAnalyzers;
+        private readonly IReadOnlyList<Type> diagnosticAnalyzers;
 
-        public static IEnumerable<Assembly> PackagedRuleAssemblies => new[]
+        public static IEnumerable<Assembly> PackagedRuleAssemblies { get; } =
+            new[]
             {
                 Assembly.Load(typeof(Rules.CSharp.FlagsEnumZeroMember).Assembly.GetName()),
                 Assembly.Load(typeof(Rules.VisualBasic.FlagsEnumZeroMember).Assembly.GetName()),
@@ -61,10 +62,7 @@ namespace SonarAnalyzer.Utilities
                 .Any(p => p.GetCustomAttributes<RuleParameterAttribute>().Any());
         }
 
-        public IEnumerable<Type> GetAllAnalyzerTypes()
-        {
-            return this.diagnosticAnalyzers;
-        }
+        public IEnumerable<Type> AllAnalyzerTypes => diagnosticAnalyzers;
 
         public IEnumerable<Type> GetAnalyzerTypes(AnalyzerLanguage language)
         {

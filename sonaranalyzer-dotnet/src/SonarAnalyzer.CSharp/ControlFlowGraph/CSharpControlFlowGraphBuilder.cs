@@ -46,11 +46,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             SyntaxKind.CaseSwitchLabel,
             SyntaxKind.DefaultSwitchLabel,
         };
-        private static readonly HashSet<SyntaxKind> csharp7DefaultLabelKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.DefaultExpression,
-            SyntaxKindEx.DefaultLiteralExpression,
-        };
 
 
         internal CSharpControlFlowGraphBuilder(CSharpSyntaxNode node, SemanticModel semanticModel)

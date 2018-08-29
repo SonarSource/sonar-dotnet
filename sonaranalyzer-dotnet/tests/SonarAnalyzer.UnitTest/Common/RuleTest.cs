@@ -45,9 +45,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void DiagnosticAnalyzerHasRuleAttribute()
         {
-            var analyzers = new RuleFinder().GetAllAnalyzerTypes();
-
-            foreach (var analyzer in analyzers)
+            foreach (var analyzer in new RuleFinder().AllAnalyzerTypes)
             {
                 var ruleDescriptors = analyzer.GetCustomAttributes<RuleAttribute>();
 
@@ -128,8 +126,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void AllParameterizedRules_AreDisabledByDefault()
         {
-            new RuleFinder()
-                .GetAllAnalyzerTypes()
+            new RuleFinder().AllAnalyzerTypes
                 .Where(RuleFinder.IsParameterized)
                 .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
                 .SelectMany(analyzer => analyzer.SupportedDiagnostics)
@@ -140,8 +137,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void AllRulesEnabledByDefault_ContainSonarWayCustomTag()
         {
-            var analyzers = new RuleFinder()
-                .GetAllAnalyzerTypes()
+            var analyzers = new RuleFinder().AllAnalyzerTypes
                 .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
                 .SelectMany(analyzer => analyzer.SupportedDiagnostics)
                 .ToList();
@@ -180,14 +176,12 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void AllRules_SonarWayTagPresenceMatchesIsEnabledByDefault()
         {
-            var allAnalyzers = new RuleFinder()
-                .GetAllAnalyzerTypes()
+            var allAnalyzers = new RuleFinder().AllAnalyzerTypes
                 .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
                 .SelectMany(analyzer => analyzer.SupportedDiagnostics)
                 .ToList();
 
-            var parameterizedAnalyzers = new RuleFinder()
-                .GetAllAnalyzerTypes()
+            var parameterizedAnalyzers = new RuleFinder().AllAnalyzerTypes
                 .Where(RuleFinder.IsParameterized)
                 .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
                 .SelectMany(analyzer => analyzer.SupportedDiagnostics)
