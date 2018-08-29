@@ -24,7 +24,7 @@ function Test-SonarAnalyzerDll {
     }
 }
 
-function Build-Project([string]$ProjectName, [string]$SolutionRelativePath) {
+function Build-Project([string]$ProjectName, [string]$SolutionRelativePath, [int]$CpuCount = 4) {
     New-Item -ItemType directory -Path .\output\$ProjectName | out-null
 
     $solutionPath = Resolve-Path ".\sources\${ProjectName}\${SolutionRelativePath}"
@@ -36,7 +36,7 @@ function Build-Project([string]$ProjectName, [string]$SolutionRelativePath) {
     Restore-Packages $msbuildVersion $solutionPath
     # Note: Summary doesn't work for MSBuild 14
     Invoke-MSBuild $msbuildVersion $solutionPath `
-        /m `
+        /m:$CpuCount `
         /t:rebuild `
         /p:Configuration=Debug `
         /clp:"Summary;ErrorsOnly" `
@@ -189,6 +189,14 @@ try {
     Write-Debug "Installing the import before target file at '${msBuildImportBefore15}'"
     Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore15 -Type container -Force) -Force -Recurse
 
+    
+    # Note: Automapper has multiple configurations that are built simultaneously and sometimes
+    # it happens that a the same project is built in parallel in different configurations. The
+    # protobuf-generating rules try to write their output in the same folder and fail, even
+    # though there is a basic lock, because it is process-wide and not machine-wide.
+    # Parallel builds are not a problem when run through the Scanner for MSBuild because it
+    # redirects the outputs of the different configurations in separate folders.
+    Build-Project "Automapper" "Automapper.sln" -CpuCount 1
     Build-Project "akka.net" "src\Akka.sln"
     Build-Project "Nancy" "src\Nancy.sln"
     Build-Project "Ember-MM" "Ember Media Manager.sln"

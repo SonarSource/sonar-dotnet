@@ -1,0 +1,290 @@
+{
+"issues":  [
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Products', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  35,
+"endLine":  106,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Products', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  35,
+"endLine":  200,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Products', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  313,
+"startColumn":  35,
+"endLine":  313,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'ProductArticles', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  314,
+"startColumn":  42,
+"endLine":  314,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Products', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  418,
+"startColumn":  35,
+"endLine":  418,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'ProductArticles', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  419,
+"startColumn":  42,
+"endLine":  419,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Products', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  539,
+"startColumn":  35,
+"endLine":  539,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'ProductArticles', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  540,
+"startColumn":  42,
+"endLine":  540,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Cables', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  602,
+"startColumn":  33,
+"endLine":  602,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'DataHalls', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  604,
+"startColumn":  36,
+"endLine":  604,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'TrainingCourses', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandCollections.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  42,
+"endLine":  60,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'TrainingContents', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandCollections.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  43,
+"endLine":  61,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'TrainingCourses', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandCollectionsWithStrings.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  42,
+"endLine":  60,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'TrainingContents', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandCollectionsWithStrings.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  43,
+"endLine":  61,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'TrainingCourses', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProxyTests.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  42,
+"endLine":  47,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'TrainingContents', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProxyTests.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  43,
+"endLine":  48,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Entities', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\QueryableInterfaceInheritanceIssue.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  50,
+"endLine":  48,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'TrainingCourses', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\MaxDepth\MaxDepthWithCollections.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  42,
+"endLine":  58,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'TrainingContents', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\MaxDepth\MaxDepthWithCollections.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  43,
+"endLine":  59,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Entities', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Parameterization\ParameterizedQueries.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  34,
+"endLine":  36,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Source1', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ProjectionOrder\ProjectionOrderTest.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  35,
+"endLine":  53,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Source2', or set its value.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ProjectionOrder\ProjectionOrderTest.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  35,
+"endLine":  55,
+"endColumn":  42
+}
+}
+}
+]
+}

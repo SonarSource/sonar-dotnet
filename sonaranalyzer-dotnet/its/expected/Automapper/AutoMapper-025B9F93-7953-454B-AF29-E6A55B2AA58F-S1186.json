@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  489,
+"startColumn":  25,
+"endLine":  489,
+"endColumn":  34
+}
+}
+}
+]
+}

@@ -1,0 +1,355 @@
+{
+"issues":  [
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  645,
+"startColumn":  17,
+"endLine":  645,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  646,
+"startColumn":  17,
+"endLine":  646,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  652,
+"startColumn":  17,
+"endLine":  652,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  653,
+"startColumn":  17,
+"endLine":  653,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  654,
+"startColumn":  17,
+"endLine":  654,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  680,
+"startColumn":  17,
+"endLine":  680,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  681,
+"startColumn":  17,
+"endLine":  681,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  687,
+"startColumn":  17,
+"endLine":  687,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  688,
+"startColumn":  17,
+"endLine":  688,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  689,
+"startColumn":  17,
+"endLine":  689,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  447,
+"startColumn":  17,
+"endLine":  447,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  448,
+"startColumn":  17,
+"endLine":  448,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  454,
+"startColumn":  17,
+"endLine":  454,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  455,
+"startColumn":  17,
+"endLine":  455,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  456,
+"startColumn":  17,
+"endLine":  456,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  482,
+"startColumn":  17,
+"endLine":  482,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  483,
+"startColumn":  17,
+"endLine":  483,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  489,
+"startColumn":  17,
+"endLine":  489,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  490,
+"startColumn":  17,
+"endLine":  490,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  491,
+"startColumn":  17,
+"endLine":  491,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\EnumConditionsBug.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  25,
+"endLine":  37,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\EnumConditionsBug.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  25,
+"endLine":  42,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  384,
+"startColumn":  21,
+"endLine":  384,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\MembersToExpand_ExpressionArray.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  69,
+"endLine":  33,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\MembersToExpand_ExpressionArray.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  69,
+"endLine":  34,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectCollectionListTest.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  17,
+"endLine":  69,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectCollectionListTest.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  17,
+"endLine":  70,
+"endColumn":  63
+}
+}
+}
+]
+}

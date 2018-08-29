@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1168",
+"message":  "Return an empty collection instead of null.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  17,
+"endLine":  164,
+"endColumn":  29
+}
+}
+}
+]
+}

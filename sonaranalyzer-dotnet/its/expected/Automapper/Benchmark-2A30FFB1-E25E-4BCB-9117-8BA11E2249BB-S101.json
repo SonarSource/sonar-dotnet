@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename class 'AddressDTO' to match camel case naming rules, consider using 'AddressDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  22,
+"endLine":  58,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'CustomerDTO' to match camel case naming rules, consider using 'CustomerDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  22,
+"endLine":  76,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'AddressDTO' to match camel case naming rules, consider using 'AddressDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  22,
+"endLine":  150,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'CustomerDTO' to match camel case naming rules, consider using 'CustomerDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  22,
+"endLine":  168,
+"endColumn":  33
+}
+}
+}
+]
+}

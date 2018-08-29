@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'str.TrimStart().StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\AutoMapperConfigurationException.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  44,
+"endLine":  121,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'nameToSearch.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\ReplaceName.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  49,
+"endLine":  39,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 's.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\ReplaceName.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  91,
+"endLine":  40,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'genericTypeDef.FullName.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperVisitor.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  21,
+"endLine":  156,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'pm.DestinationProperty.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  300,
+"startColumn":  52,
+"endLine":  300,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'pm.DestinationProperty.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  306,
+"startColumn":  53,
+"endLine":  306,
+"endColumn":  113
+}
+}
+}
+]
+}

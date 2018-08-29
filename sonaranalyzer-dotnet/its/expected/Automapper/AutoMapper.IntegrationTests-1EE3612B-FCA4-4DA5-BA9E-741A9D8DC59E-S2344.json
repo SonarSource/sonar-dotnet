@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2344",
+"message":  "Rename this enumeration to remove the 'Enum' suffix.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\BuiltInTypes\ProjectUsing.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  21,
+"endLine":  25,
+"endColumn":  27
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExtensionMethods.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  30,
+"endLine":  11,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExtensionMethods.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  30,
+"endLine":  52,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExtensionMethods.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  67,
+"endLine":  96,
+"endColumn":  81
+}
+}
+}
+]
+}

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  56,
+"endLine":  174,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  44,
+"endLine":  200,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  46,
+"endLine":  201,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  246,
+"startColumn":  27,
+"endLine":  246,
+"endColumn":  54
+}
+}
+}
+]
+}

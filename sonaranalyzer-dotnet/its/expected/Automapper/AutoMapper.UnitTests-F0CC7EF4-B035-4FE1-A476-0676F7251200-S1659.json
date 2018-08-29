@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1659",
+"message":  "Declare '_endDate' in a separate statement.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapping.cs",
+"region":  {
+"startLine":  291,
+"startColumn":  45,
+"endLine":  291,
+"endColumn":  53
+}
+}
+}
+]
+}

@@ -1,0 +1,290 @@
+{
+"issues":  [
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  69,
+"endLine":  102,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  71,
+"endLine":  103,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  64,
+"endLine":  104,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  17,
+"endLine":  116,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  17,
+"endLine":  118,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  17,
+"endLine":  119,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  17,
+"endLine":  132,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  17,
+"endLine":  134,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  17,
+"endLine":  135,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  17,
+"endLine":  148,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  17,
+"endLine":  150,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  17,
+"endLine":  151,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  17,
+"endLine":  165,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  17,
+"endLine":  167,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  17,
+"endLine":  168,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  187,
+"startColumn":  17,
+"endLine":  187,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  17,
+"endLine":  188,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  208,
+"startColumn":  17,
+"endLine":  208,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  209,
+"startColumn":  17,
+"endLine":  209,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  17,
+"endLine":  229,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  17,
+"endLine":  230,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  17,
+"endLine":  174,
+"endColumn":  80
+}
+}
+}
+]
+}

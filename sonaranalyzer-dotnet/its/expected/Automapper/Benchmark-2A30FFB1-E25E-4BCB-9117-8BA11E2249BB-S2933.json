@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2933",
+"message":  "Make '_freq' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\HiPerfTimer.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  22,
+"endLine":  18,
+"endColumn":  27
+}
+}
+}
+]
+}

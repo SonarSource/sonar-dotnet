@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  23,
+"endLine":  60,
+"endColumn":  46
+}
+}
+}
+]
+}

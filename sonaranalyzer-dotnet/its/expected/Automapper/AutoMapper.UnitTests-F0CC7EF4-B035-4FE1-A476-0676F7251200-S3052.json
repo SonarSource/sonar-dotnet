@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_callCount', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DestinationCtorCalledTwice.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  47,
+"endLine":  16,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'NongenericDestination', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\GenericTypeConverter.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  53,
+"endLine":  77,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_calledForRoot', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  29,
+"endLine":  11,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_calledForValues', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  31,
+"endLine":  12,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '_calledForInt', the compiler will do that for you.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  28,
+"endLine":  13,
+"endColumn":  35
+}
+}
+}
+]
+}

@@ -1,0 +1,70 @@
+{
+"issues":  [
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\UnitTests\AutoMapperSpecBase.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  27,
+"endLine":  53,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Automapper\src\UnitTests\AutoMapperSpecBase.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  27,
+"endLine":  53,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Automapper\src\UnitTests\AutoMapperSpecBase.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  21,
+"endLine":  61,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\UnitTests\AutoMapperTester.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  18,
+"endLine":  7,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\Automapper\src\UnitTests\AutoMapperTester.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  18,
+"endLine":  7,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\Automapper\src\UnitTests\AutoMapperTester.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  21,
+"endLine":  22,
+"endColumn":  28
+}
+}
+]
+}
+]
+}

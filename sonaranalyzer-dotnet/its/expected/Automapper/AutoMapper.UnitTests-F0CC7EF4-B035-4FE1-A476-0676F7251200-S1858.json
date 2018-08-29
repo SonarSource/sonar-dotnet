@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1858",
+"message":  "There's no need to call 'ToString()' on a string.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  271,
+"startColumn":  89,
+"endLine":  271,
+"endColumn":  100
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3453",
+"message":  "This class can't be instantiated; make its constructor 'public'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  958,
+"startColumn":  22,
+"endLine":  958,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3453",
+"message":  "This class can't be instantiated; make its constructor 'public'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\General.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  26,
+"endLine":  72,
+"endColumn":  34
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\LowerUnderscoreNamingConvention.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  64,
+"endLine":  11,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PascalCaseNamingConvention.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  78,
+"endLine":  10,
+"endColumn":  85
+}
+}
+}
+]
+}

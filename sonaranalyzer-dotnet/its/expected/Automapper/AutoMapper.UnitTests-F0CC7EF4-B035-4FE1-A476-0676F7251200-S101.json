@@ -1,0 +1,5646 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_an_array_as_ICollection_with_MapAtRuntime' to match camel case naming rules, consider using 'When_Mapping_To_An_Array_As_ICollection_With_MapAtRuntime'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  18,
+"endLine":  14,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_an_array' to match camel case naming rules, consider using 'When_Mapping_An_Array'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  18,
+"endLine":  58,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_a_primitive_array' to match camel case naming rules, consider using 'When_Mapping_A_Primitive_Array'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  18,
+"endLine":  77,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_a_primitive_array_with_custom_mapping_function' to match camel case naming rules, consider using 'When_Mapping_A_Primitive_Array_With_Custom_Mapping_Function'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  18,
+"endLine":  102,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_a_primitive_array_with_custom_object_mapper' to match camel case naming rules, consider using 'When_Mapping_A_Primitive_Array_With_Custom_Object_Mapper'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  18,
+"endLine":  124,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_null_list_to_array' to match camel case naming rules, consider using 'When_Mapping_Null_List_To_Array'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  18,
+"endLine":  156,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_null_array_to_list' to match camel case naming rules, consider using 'When_Mapping_Null_Array_To_List'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  18,
+"endLine":  198,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_collections' to match camel case naming rules, consider using 'When_Mapping_Collections'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  18,
+"endLine":  240,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_an_existing_array_typed_as_IEnumerable' to match camel case naming rules, consider using 'When_Mapping_To_An_Existing_Array_Typed_As_IEnumerable'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  278,
+"startColumn":  18,
+"endLine":  278,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_concrete_non_generic_ienumerable' to match camel case naming rules, consider using 'When_Mapping_To_A_Concrete_Non_Generic_Ienumerable'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  309,
+"startColumn":  18,
+"endLine":  309,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_concrete_generic_ienumerable' to match camel case naming rules, consider using 'When_Mapping_To_A_Concrete_Generic_Ienumerable'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  356,
+"startColumn":  18,
+"endLine":  356,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_concrete_non_generic_icollection' to match camel case naming rules, consider using 'When_Mapping_To_A_Concrete_Non_Generic_Icollection'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  403,
+"startColumn":  18,
+"endLine":  403,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_concrete_generic_icollection' to match camel case naming rules, consider using 'When_Mapping_To_A_Concrete_Generic_Icollection'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  450,
+"startColumn":  18,
+"endLine":  450,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_concrete_ilist' to match camel case naming rules, consider using 'When_Mapping_To_A_Concrete_Ilist'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  485,
+"startColumn":  18,
+"endLine":  485,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_concrete_generic_ilist' to match camel case naming rules, consider using 'When_Mapping_To_A_Concrete_Generic_Ilist'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  520,
+"startColumn":  18,
+"endLine":  520,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_custom_list_with_the_same_type' to match camel case naming rules, consider using 'When_Mapping_To_A_Custom_List_With_The_Same_Type'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  555,
+"startColumn":  18,
+"endLine":  555,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_custom_collection_with_the_same_type_not_implementing_IList' to match camel case naming rules, consider using 'When_Mapping_To_A_Custom_Collection_With_The_Same_Type_Not_Implementing_IList'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  592,
+"startColumn":  18,
+"endLine":  592,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_collection_with_instantiation_managed_by_the_destination' to match camel case naming rules, consider using 'When_Mapping_To_A_Collection_With_Instantiation_Managed_By_The_Destination'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  656,
+"startColumn":  18,
+"endLine":  656,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_an_existing_list_with_existing_items' to match camel case naming rules, consider using 'When_Mapping_To_An_Existing_List_With_Existing_Items'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  708,
+"startColumn":  18,
+"endLine":  708,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_a_collection_with_null_members' to match camel case naming rules, consider using 'When_Mapping_A_Collection_With_Null_Members'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  760,
+"startColumn":  18,
+"endLine":  760,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_scanning_by_assembly' to match camel case naming rules, consider using 'When_Scanning_By_Assembly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\AssemblyScanning.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  22,
+"endLine":  10,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_scanning_by_type' to match camel case naming rules, consider using 'When_Scanning_By_Type'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\AssemblyScanning.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  22,
+"endLine":  39,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_scanning_by_name' to match camel case naming rules, consider using 'When_Scanning_By_Name'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\AssemblyScanning.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  22,
+"endLine":  53,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'AddressDTO' to match camel case naming rules, consider using 'AddressDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BasicFlattening.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  22,
+"endLine":  18,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'CustomerDTO' to match camel case naming rules, consider using 'CustomerDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BasicFlattening.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  22,
+"endLine":  36,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'OrderDTO' to match camel case naming rules, consider using 'OrderDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BasicFlattening.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  22,
+"endLine":  175,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'CurrencyDTO' to match camel case naming rules, consider using 'CurrencyDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BasicFlattening.cs",
+"region":  {
+"startLine":  182,
+"startColumn":  22,
+"endLine":  182,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_configuring_before_and_after_methods' to match camel case naming rules, consider using 'When_Configuring_Before_And_After_Methods'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BeforeAfterMapping.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_configuring_before_and_after_methods_multiple_times' to match camel case naming rules, consider using 'When_Configuring_Before_And_After_Methods_Multiple_Times'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BeforeAfterMapping.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  18,
+"endLine":  38,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_using_a_class_to_do_before_after_mappings' to match camel case naming rules, consider using 'When_Using_A_Class_To_Do_Before_After_Mappings'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BeforeAfterMapping.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  18,
+"endLine":  72,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_many_child_relationship' to match camel case naming rules, consider using 'When_Mapping_To_A_Destination_With_A_Bidirectional_Parent_One_To_Many_Child_Relationship'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  18,
+"endLine":  229,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_many_child_relationship_using_CustomMapper_with_context' to match camel case naming rules, consider using 'When_Mapping_To_A_Destination_With_A_Bidirectional_Parent_One_To_Many_Child_Relationship_Using_CustomMapper_With_Context'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  397,
+"startColumn":  18,
+"endLine":  397,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_one_child_relationship' to match camel case naming rules, consider using 'When_Mapping_To_A_Destination_With_A_Bidirectional_Parent_One_To_One_Child_Relationship'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  496,
+"startColumn":  18,
+"endLine":  496,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_destination_containing_two_dtos_mapped_from_the_same_source' to match camel case naming rules, consider using 'When_Mapping_To_A_Destination_Containing_Two_Dtos_Mapped_From_The_Same_Source'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  548,
+"startColumn":  18,
+"endLine":  548,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_with_a_bidirectional_relationship_that_includes_arrays' to match camel case naming rules, consider using 'When_Mapping_With_A_Bidirectional_Relationship_That_Includes_Arrays'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  600,
+"startColumn":  18,
+"endLine":  600,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_the_same_map_is_used_again' to match camel case naming rules, consider using 'When_The_Same_Map_Is_Used_Again'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  18,
+"endLine":  11,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_the_source_has_cyclical_references' to match camel case naming rules, consider using 'When_The_Source_Has_Cyclical_References'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  18,
+"endLine":  69,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_many_child_relationship' to match camel case naming rules, consider using 'When_Mapping_To_A_Destination_With_A_Bidirectional_Parent_One_To_Many_Child_Relationship'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  18,
+"endLine":  131,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_one_child_relationship' to match camel case naming rules, consider using 'When_Mapping_To_A_Destination_With_A_Bidirectional_Parent_One_To_One_Child_Relationship'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  18,
+"endLine":  299,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_destination_containing_two_dtos_mapped_from_the_same_source' to match camel case naming rules, consider using 'When_Mapping_To_A_Destination_Containing_Two_Dtos_Mapped_From_The_Same_Source'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  351,
+"startColumn":  18,
+"endLine":  351,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_with_a_bidirectional_relationship_that_includes_arrays' to match camel case naming rules, consider using 'When_Mapping_With_A_Bidirectional_Relationship_That_Includes_Arrays'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  18,
+"endLine":  402,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'InnerDTO' to match camel case naming rules, consider using 'InnerDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AfterMapNestedObjects.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  22,
+"endLine":  20,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'OuterDTO' to match camel case naming rules, consider using 'OuterDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AfterMapNestedObjects.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  22,
+"endLine":  25,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_an_assignable_object_with_nullable_off' to match camel case naming rules, consider using 'When_Mapping_To_An_Assignable_Object_With_Nullable_Off'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AllowNullDestinationValuesBugs.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  22,
+"endLine":  8,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_byte_arrays' to match camel case naming rules, consider using 'When_Mapping_Byte_Arrays'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AssignableCollectionBug.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  22,
+"endLine":  9,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'ADTO' to match camel case naming rules, consider using 'Adto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\BaseMapWithIncludesAndUnincludedMappings.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  22,
+"endLine":  7,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'BDTO' to match camel case naming rules, consider using 'Bdto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\BaseMapWithIncludesAndUnincludedMappings.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  22,
+"endLine":  12,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'BDTO2' to match camel case naming rules, consider using 'Bdto2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\BaseMapWithIncludesAndUnincludedMappings.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  22,
+"endLine":  17,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_conditionally_skipping_null_destination_values' to match camel case naming rules, consider using 'When_Conditionally_Skipping_Null_Destination_Values'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ContextValuesIncorrect.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  22,
+"endLine":  20,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_configuring_all_members_and_some_do_not_match' to match camel case naming rules, consider using 'When_Configuring_All_Members_And_Some_Do_Not_Match'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\IgnoreAll.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  18,
+"endLine":  7,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_configuring_all_non_source_value_null_members' to match camel case naming rules, consider using 'When_Configuring_All_Non_Source_Value_Null_Members'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\IgnoreAll.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  18,
+"endLine":  30,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'InitializeNRE2' to match camel case naming rules, consider using 'InitializeNre2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InitializeNRE.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  18,
+"endLine":  8,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'InitializeNRE' to match camel case naming rules, consider using 'InitializeNre'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InitializeNRE.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  18,
+"endLine":  39,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'class1' to match camel case naming rules, consider using 'Class1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  35,
+"endLine":  111,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'class2' to match camel case naming rules, consider using 'Class2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  26,
+"endLine":  116,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'class3' to match camel case naming rules, consider using 'Class3'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  26,
+"endLine":  121,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'class4' to match camel case naming rules, consider using 'Class4'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  26,
+"endLine":  126,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'class1DTO' to match camel case naming rules, consider using 'Class1Dto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  35,
+"endLine":  131,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'class2DTO' to match camel case naming rules, consider using 'Class2Dto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  26,
+"endLine":  136,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'class3DTO' to match camel case naming rules, consider using 'Class3Dto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  26,
+"endLine":  141,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'class4DTO' to match camel case naming rules, consider using 'Class4Dto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  26,
+"endLine":  146,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename interface 'iclass1' to match camel case naming rules, consider using 'IIclass1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  30,
+"endLine":  151,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename interface 'iclass2' to match camel case naming rules, consider using 'IIclass2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  30,
+"endLine":  156,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename interface 'iclass3' to match camel case naming rules, consider using 'IIclass3'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  30,
+"endLine":  161,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename interface 'iclass4' to match camel case naming rules, consider using 'IIclass4'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  30,
+"endLine":  166,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename interface 'iclass1DTO' to match camel case naming rules, consider using 'IIclass1Dto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  30,
+"endLine":  171,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename interface 'iclass2DTO' to match camel case naming rules, consider using 'IIclass2Dto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  30,
+"endLine":  176,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename interface 'iclass3DTO' to match camel case naming rules, consider using 'IIclass3Dto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  30,
+"endLine":  181,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename interface 'iclass4DTO' to match camel case naming rules, consider using 'IIclass4Dto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  186,
+"startColumn":  30,
+"endLine":  186,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO1' to match camel case naming rules, consider using 'EntityDto1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO1.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO10' to match camel case naming rules, consider using 'EntityDto10'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO10.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  18,
+"endLine":  5,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO11' to match camel case naming rules, consider using 'EntityDto11'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO11.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO12' to match camel case naming rules, consider using 'EntityDto12'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO12.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO13' to match camel case naming rules, consider using 'EntityDto13'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO13.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO14' to match camel case naming rules, consider using 'EntityDto14'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO14.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  18,
+"endLine":  10,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO15' to match camel case naming rules, consider using 'EntityDto15'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO15.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO16' to match camel case naming rules, consider using 'EntityDto16'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO16.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO17' to match camel case naming rules, consider using 'EntityDto17'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO17.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO18' to match camel case naming rules, consider using 'EntityDto18'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO18.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  18,
+"endLine":  5,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO19' to match camel case naming rules, consider using 'EntityDto19'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO19.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  18,
+"endLine":  5,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO2' to match camel case naming rules, consider using 'EntityDto2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO2.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  18,
+"endLine":  5,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO20' to match camel case naming rules, consider using 'EntityDto20'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO20.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO21' to match camel case naming rules, consider using 'EntityDto21'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO21.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  18,
+"endLine":  5,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO22' to match camel case naming rules, consider using 'EntityDto22'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO22.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO23' to match camel case naming rules, consider using 'EntityDto23'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO23.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO24' to match camel case naming rules, consider using 'EntityDto24'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO24.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO25' to match camel case naming rules, consider using 'EntityDto25'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO25.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  18,
+"endLine":  10,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO26' to match camel case naming rules, consider using 'EntityDto26'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO26.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO3' to match camel case naming rules, consider using 'EntityDto3'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO3.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO4' to match camel case naming rules, consider using 'EntityDto4'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO4.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO5' to match camel case naming rules, consider using 'EntityDto5'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO5.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO6' to match camel case naming rules, consider using 'EntityDto6'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO6.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO7' to match camel case naming rules, consider using 'EntityDto7'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO7.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  18,
+"endLine":  5,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO8' to match camel case naming rules, consider using 'EntityDto8'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO8.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO9' to match camel case naming rules, consider using 'EntityDto9'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO9.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  18,
+"endLine":  5,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO1' to match camel case naming rules, consider using 'EntityDto1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO1.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO10' to match camel case naming rules, consider using 'EntityDto10'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO10.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  18,
+"endLine":  5,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO11' to match camel case naming rules, consider using 'EntityDto11'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO11.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO12' to match camel case naming rules, consider using 'EntityDto12'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO12.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO13' to match camel case naming rules, consider using 'EntityDto13'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO13.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO14' to match camel case naming rules, consider using 'EntityDto14'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO14.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  18,
+"endLine":  10,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO15' to match camel case naming rules, consider using 'EntityDto15'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO15.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO16' to match camel case naming rules, consider using 'EntityDto16'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO16.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO17' to match camel case naming rules, consider using 'EntityDto17'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO17.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO18' to match camel case naming rules, consider using 'EntityDto18'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO18.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  18,
+"endLine":  5,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO19' to match camel case naming rules, consider using 'EntityDto19'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO19.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  18,
+"endLine":  5,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO2' to match camel case naming rules, consider using 'EntityDto2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO2.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  18,
+"endLine":  5,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO20' to match camel case naming rules, consider using 'EntityDto20'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO20.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO21' to match camel case naming rules, consider using 'EntityDto21'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO21.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  18,
+"endLine":  5,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO22' to match camel case naming rules, consider using 'EntityDto22'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO22.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO23' to match camel case naming rules, consider using 'EntityDto23'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO23.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO24' to match camel case naming rules, consider using 'EntityDto24'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO24.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO25' to match camel case naming rules, consider using 'EntityDto25'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO25.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  18,
+"endLine":  10,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO26' to match camel case naming rules, consider using 'EntityDto26'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO26.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO3' to match camel case naming rules, consider using 'EntityDto3'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO3.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO4' to match camel case naming rules, consider using 'EntityDto4'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO4.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO5' to match camel case naming rules, consider using 'EntityDto5'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO5.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO6' to match camel case naming rules, consider using 'EntityDto6'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO6.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO7' to match camel case naming rules, consider using 'EntityDto7'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO7.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  18,
+"endLine":  5,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO8' to match camel case naming rules, consider using 'EntityDto8'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO8.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'EntityDTO9' to match camel case naming rules, consider using 'EntityDto9'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO9.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  18,
+"endLine":  5,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_a_type_converter_implementing_multiple_type_converter_interfaces' to match camel case naming rules, consider using 'When_Specifying_A_Type_Converter_Implementing_Multiple_Type_Converter_Interfaces'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultipleTypeConverterInterfaces.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  22,
+"endLine":  6,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_with_lowercae_naming_conventions_two_ways_in_profiles' to match camel case naming rules, consider using 'When_Mapping_With_Lowercae_Naming_Conventions_Two_Ways_In_Profiles'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NamingConventions.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  22,
+"endLine":  31,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Self_referencing_existing_destination' to match camel case naming rules, consider using 'Self_Referencing_Existing_Destination'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\PreserveReferencesSameDestination.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_for_derived_class_is_duplicated' to match camel case naming rules, consider using 'When_Mapping_For_Derived_Class_Is_Duplicated'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\RepeatedMappingConfigurationTest.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  18,
+"endLine":  5,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'BUVM' to match camel case naming rules, consider using 'Buvm'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SamePropertyNameOnParentAndChildClasses.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  22,
+"endLine":  40,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'OrganizationDTO' to match camel case naming rules, consider using 'OrganizationDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  22,
+"endLine":  10,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'BranchDTO' to match camel case naming rules, consider using 'BranchDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  22,
+"endLine":  29,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'CollectionDTOController' to match camel case naming rules, consider using 'CollectionDtoController'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  22,
+"endLine":  36,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'OrganizationDTO' to match camel case naming rules, consider using 'OrganizationDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  22,
+"endLine":  103,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'BranchDTO' to match camel case naming rules, consider using 'BranchDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  22,
+"endLine":  122,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'CollectionDTOController' to match camel case naming rules, consider using 'CollectionDtoController'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  22,
+"endLine":  129,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Self_referencing_existing_destination_without_PreserveReferences' to match camel case naming rules, consider using 'Self_Referencing_Existing_Destination_Without_PreserveReferences'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\WithoutPreserveReferencesSameDestination.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_existing_observable_collection' to match camel case naming rules, consider using 'When_Mapping_To_Existing_Observable_Collection'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  18,
+"endLine":  13,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_member_typed_as_IEnumerable' to match camel case naming rules, consider using 'When_Mapping_To_Member_Typed_As_IEnumerable'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  18,
+"endLine":  48,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_existing_collection_typed_as_IEnumerable' to match camel case naming rules, consider using 'When_Mapping_To_Existing_Collection_Typed_As_IEnumerable'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  18,
+"endLine":  87,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_readonly_property_as_IEnumerable_and_existing_destination' to match camel case naming rules, consider using 'When_Mapping_To_Readonly_Property_As_IEnumerable_And_Existing_Destination'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  18,
+"endLine":  101,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_readonly_property_as_IEnumerable' to match camel case naming rules, consider using 'When_Mapping_To_Readonly_Property_As_IEnumerable'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  18,
+"endLine":  130,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_struct_collection' to match camel case naming rules, consider using 'When_Mapping_From_Struct_Collection'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  18,
+"endLine":  160,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_custom_collection_type' to match camel case naming rules, consider using 'When_Mapping_To_Custom_Collection_Type'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  18,
+"endLine":  201,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_unknown_collection_type' to match camel case naming rules, consider using 'When_Mapping_To_Unknown_Collection_Type'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  18,
+"endLine":  231,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_collections_with_inheritance' to match camel case naming rules, consider using 'When_Mapping_Collections_With_Inheritance'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  267,
+"startColumn":  18,
+"endLine":  267,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_passing_a_not_empty_collection' to match camel case naming rules, consider using 'When_Passing_A_Not_Empty_Collection'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  18,
+"endLine":  297,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_collections_with_structs' to match camel case naming rules, consider using 'When_Mapping_Collections_With_Structs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  337,
+"startColumn":  18,
+"endLine":  337,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename struct 'FooDTO' to match camel case naming rules, consider using 'FooDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  347,
+"startColumn":  23,
+"endLine":  347,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename struct 'BarDTO' to match camel case naming rules, consider using 'BarDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  348,
+"startColumn":  23,
+"endLine":  348,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_ICollection_types_but_implementations_are_different' to match camel case naming rules, consider using 'When_Mapping_From_ICollection_Types_But_Implementations_Are_Different'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  649,
+"startColumn":  18,
+"endLine":  649,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_enumerable_to_array' to match camel case naming rules, consider using 'When_Mapping_Enumerable_To_Array'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  695,
+"startColumn":  18,
+"endLine":  695,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_adding_a_condition_for_all_members' to match camel case naming rules, consider using 'When_Adding_A_Condition_For_All_Members'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConditionalMapping.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_ignoring_all_properties_with_an_inaccessible_setter_and_explicitly_implemented_member' to match camel case naming rules, consider using 'When_Ignoring_All_Properties_With_An_Inaccessible_Setter_And_Explicitly_Implemented_Member'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConditionalMapping.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  18,
+"endLine":  42,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_configuring_a_member_to_skip_based_on_the_property_value' to match camel case naming rules, consider using 'When_Configuring_A_Member_To_Skip_Based_On_The_Property_Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConditionalMapping.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  18,
+"endLine":  66,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_configuring_a_member_to_skip_based_on_the_property_value_with_custom_mapping' to match camel case naming rules, consider using 'When_Configuring_A_Member_To_Skip_Based_On_The_Property_Value_With_Custom_Mapping'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConditionalMapping.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  18,
+"endLine":  101,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_configuring_a_map_to_ignore_all_properties_with_an_inaccessible_setter' to match camel case naming rules, consider using 'When_Configuring_A_Map_To_Ignore_All_Properties_With_An_Inaccessible_Setter'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConditionalMapping.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  18,
+"endLine":  141,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_configuring_a_reverse_map_to_ignore_all_source_properties_with_an_inaccessible_setter' to match camel case naming rules, consider using 'When_Configuring_A_Reverse_Map_To_Ignore_All_Source_Properties_With_An_Inaccessible_Setter'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConditionalMapping.cs",
+"region":  {
+"startLine":  215,
+"startColumn":  18,
+"endLine":  215,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_using_custom_validation' to match camel case naming rules, consider using 'When_Using_Custom_Validation'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_using_a_type_converter' to match camel case naming rules, consider using 'When_Using_A_Type_Converter'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  18,
+"endLine":  72,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_using_a_type_converter_class' to match camel case naming rules, consider using 'When_Using_A_Type_Converter_Class'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  18,
+"endLine":  87,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_skipping_validation' to match camel case naming rules, consider using 'When_Skipping_Validation'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  18,
+"endLine":  107,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_constructor_does_not_match' to match camel case naming rules, consider using 'When_Constructor_Does_Not_Match'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  18,
+"endLine":  128,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_constructor_partially_matches' to match camel case naming rules, consider using 'When_Constructor_Partially_Matches'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  18,
+"endLine":  153,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_constructor_partially_matches_and_ctor_param_configured' to match camel case naming rules, consider using 'When_Constructor_Partially_Matches_And_Ctor_Param_Configured'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  18,
+"endLine":  179,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_constructor_partially_matches_and_constructor_validation_skipped' to match camel case naming rules, consider using 'When_Constructor_Partially_Matches_And_Constructor_Validation_Skipped'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  209,
+"startColumn":  18,
+"endLine":  209,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_testing_a_dto_with_mismatched_members' to match camel case naming rules, consider using 'When_Testing_A_Dto_With_Mismatched_Members'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  18,
+"endLine":  238,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_testing_a_dto_with_fully_mapped_and_custom_matchers' to match camel case naming rules, consider using 'When_Testing_A_Dto_With_Fully_Mapped_And_Custom_Matchers'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  18,
+"endLine":  299,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_testing_a_dto_with_matching_member_names_but_mismatched_types' to match camel case naming rules, consider using 'When_Testing_A_Dto_With_Matching_Member_Names_But_Mismatched_Types'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  326,
+"startColumn":  18,
+"endLine":  326,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_testing_a_dto_with_member_type_mapped_mappings' to match camel case naming rules, consider using 'When_Testing_A_Dto_With_Member_Type_Mapped_Mappings'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  351,
+"startColumn":  18,
+"endLine":  351,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_testing_a_dto_with_matched_members_but_mismatched_types_that_are_ignored' to match camel case naming rules, consider using 'When_Testing_A_Dto_With_Matched_Members_But_Mismatched_Types_That_Are_Ignored'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  18,
+"endLine":  402,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_testing_a_dto_with_array_types_with_mismatched_element_types' to match camel case naming rules, consider using 'When_Testing_A_Dto_With_Array_Types_With_Mismatched_Element_Types'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  443,
+"startColumn":  18,
+"endLine":  443,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_testing_a_dto_with_list_types_with_mismatched_element_types' to match camel case naming rules, consider using 'When_Testing_A_Dto_With_List_Types_With_Mismatched_Element_Types'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  478,
+"startColumn":  18,
+"endLine":  478,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_testing_a_dto_with_readonly_members' to match camel case naming rules, consider using 'When_Testing_A_Dto_With_Readonly_Members'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  513,
+"startColumn":  18,
+"endLine":  513,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_testing_a_dto_in_a_specfic_profile' to match camel case naming rules, consider using 'When_Testing_A_Dto_In_A_Specfic_Profile'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  544,
+"startColumn":  18,
+"endLine":  544,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_testing_a_dto_with_mismatched_custom_member_mapping' to match camel case naming rules, consider using 'When_Testing_A_Dto_With_Mismatched_Custom_Member_Mapping'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  580,
+"startColumn":  18,
+"endLine":  580,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_testing_a_dto_with_value_specified_members' to match camel case naming rules, consider using 'When_Testing_A_Dto_With_Value_Specified_Members'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  612,
+"startColumn":  18,
+"endLine":  612,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_testing_a_dto_with_setter_only_peroperty_member' to match camel case naming rules, consider using 'When_Testing_A_Dto_With_Setter_Only_Peroperty_Member'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  634,
+"startColumn":  18,
+"endLine":  634,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_testing_a_dto_with_matching_void_method_member' to match camel case naming rules, consider using 'When_Testing_A_Dto_With_Matching_Void_Method_Member'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  658,
+"startColumn":  18,
+"endLine":  658,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_redirecting_types' to match camel case naming rules, consider using 'When_Redirecting_Types'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  684,
+"startColumn":  18,
+"endLine":  684,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Dynamic_constructor_mapping' to match camel case naming rules, consider using 'Dynamic_Constructor_Mapping'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  18,
+"endLine":  11,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'ParentDTO' to match camel case naming rules, consider using 'ParentDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  22,
+"endLine":  13,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'ChildDTO' to match camel case naming rules, consider using 'ChildDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  22,
+"endLine":  20,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Constructor_mapping_without_preserve_references' to match camel case naming rules, consider using 'Constructor_Mapping_Without_Preserve_References'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  18,
+"endLine":  72,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'ParentDTO' to match camel case naming rules, consider using 'ParentDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  22,
+"endLine":  74,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'ChildDTO' to match camel case naming rules, consider using 'ChildDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  22,
+"endLine":  81,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Preserve_references_with_constructor_mapping' to match camel case naming rules, consider using 'Preserve_References_With_Constructor_Mapping'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  18,
+"endLine":  137,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'ParentDTO' to match camel case naming rules, consider using 'ParentDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  22,
+"endLine":  139,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'ChildDTO' to match camel case naming rules, consider using 'ChildDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  22,
+"endLine":  146,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_construct_mapping_a_struct_with_string' to match camel case naming rules, consider using 'When_Construct_Mapping_A_Struct_With_String'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  18,
+"endLine":  204,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_construct_mapping_a_struct' to match camel case naming rules, consider using 'When_Construct_Mapping_A_Struct'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  235,
+"startColumn":  18,
+"endLine":  235,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_an_abstract_type' to match camel case naming rules, consider using 'When_Mapping_To_An_Abstract_Type'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  281,
+"startColumn":  18,
+"endLine":  281,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_a_constructor_with_extra_parameters_doesnt_match' to match camel case naming rules, consider using 'When_A_Constructor_With_Extra_Parameters_Doesnt_Match'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  302,
+"startColumn":  18,
+"endLine":  302,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_renaming_class_constructor_parameter' to match camel case naming rules, consider using 'When_Renaming_Class_Constructor_Parameter'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  345,
+"startColumn":  18,
+"endLine":  345,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_constructor_matches_with_prefix_and_postfix' to match camel case naming rules, consider using 'When_Constructor_Matches_With_Prefix_And_Postfix'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  392,
+"startColumn":  18,
+"endLine":  392,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_constructor_matches_with_destination_prefix_and_postfix' to match camel case naming rules, consider using 'When_Constructor_Matches_With_Destination_Prefix_And_Postfix'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  433,
+"startColumn":  18,
+"endLine":  433,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_constructor_matches_but_is_overriden_by_ConstructUsing' to match camel case naming rules, consider using 'When_Constructor_Matches_But_Is_Overriden_By_ConstructUsing'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  474,
+"startColumn":  18,
+"endLine":  474,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_constructor_is_match_with_default_value' to match camel case naming rules, consider using 'When_Constructor_Is_Match_With_Default_Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  511,
+"startColumn":  18,
+"endLine":  511,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_constructor_is_partial_match_with_value_type' to match camel case naming rules, consider using 'When_Constructor_Is_Partial_Match_With_Value_Type'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  544,
+"startColumn":  18,
+"endLine":  544,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'GeolocationDTO' to match camel case naming rules, consider using 'GeolocationDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  548,
+"startColumn":  22,
+"endLine":  548,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_constructor_is_partial_match' to match camel case naming rules, consider using 'When_Constructor_Is_Partial_Match'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  594,
+"startColumn":  18,
+"endLine":  594,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'GeolocationDTO' to match camel case naming rules, consider using 'GeolocationDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  598,
+"startColumn":  22,
+"endLine":  598,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_constructor_matches_but_the_destination_is_passed' to match camel case naming rules, consider using 'When_Constructor_Matches_But_The_Destination_Is_Passed'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  655,
+"startColumn":  18,
+"endLine":  655,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_through_constructor_and_destination_has_setter' to match camel case naming rules, consider using 'When_Mapping_Through_Constructor_And_Destination_Has_Setter'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  713,
+"startColumn":  18,
+"endLine":  713,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_an_optional_GUID_constructor' to match camel case naming rules, consider using 'When_Mapping_An_Optional_Guid_Constructor'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  774,
+"startColumn":  18,
+"endLine":  774,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_a_constructor_parameter_from_nested_members' to match camel case naming rules, consider using 'When_Mapping_A_Constructor_Parameter_From_Nested_Members'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  809,
+"startColumn":  18,
+"endLine":  809,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_the_destination_has_a_matching_constructor_with_optional_extra_parameters' to match camel case naming rules, consider using 'When_The_Destination_Has_A_Matching_Constructor_With_Optional_Extra_Parameters'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  850,
+"startColumn":  18,
+"endLine":  850,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_an_object_with_a_constructor_with_a_matching_argument' to match camel case naming rules, consider using 'When_Mapping_To_An_Object_With_A_Constructor_With_A_Matching_Argument'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  895,
+"startColumn":  18,
+"endLine":  895,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_an_object_with_a_private_constructor' to match camel case naming rules, consider using 'When_Mapping_To_An_Object_With_A_Private_Constructor'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  949,
+"startColumn":  18,
+"endLine":  949,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_an_object_using_service_location' to match camel case naming rules, consider using 'When_Mapping_To_An_Object_Using_Service_Location'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  990,
+"startColumn":  18,
+"endLine":  990,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_an_object_using_contextual_service_location' to match camel case naming rules, consider using 'When_Mapping_To_An_Object_Using_Contextual_Service_Location'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1040,
+"startColumn":  18,
+"endLine":  1040,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_an_object_with_multiple_constructors_and_constructor_mapping_is_disabled' to match camel case naming rules, consider using 'When_Mapping_To_An_Object_With_Multiple_Constructors_And_Constructor_Mapping_Is_Disabled'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1090,
+"startColumn":  18,
+"endLine":  1090,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_an_object_with_a_constructor_with_multiple_optional_arguments' to match camel case naming rules, consider using 'When_Mapping_To_An_Object_With_A_Constructor_With_Multiple_Optional_Arguments'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1282,
+"startColumn":  18,
+"endLine":  1282,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_an_object_with_a_constructor_with_single_optional_arguments' to match camel case naming rules, consider using 'When_Mapping_To_An_Object_With_A_Constructor_With_Single_Optional_Arguments'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1359,
+"startColumn":  18,
+"endLine":  1359,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_an_object_with_a_constructor_with_string_optional_arguments' to match camel case naming rules, consider using 'When_Mapping_To_An_Object_With_A_Constructor_With_String_Optional_Arguments'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1426,
+"startColumn":  18,
+"endLine":  1426,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_configuring_ctor_param_members' to match camel case naming rules, consider using 'When_Configuring_Ctor_Param_Members'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1508,
+"startColumn":  18,
+"endLine":  1508,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_configuring_nullable_ctor_param_members' to match camel case naming rules, consider using 'When_Configuring_Nullable_Ctor_Param_Members'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1539,
+"startColumn":  18,
+"endLine":  1539,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_with_contextual_values' to match camel case naming rules, consider using 'When_Mapping_With_Contextual_Values'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ContextItems.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  22,
+"endLine":  8,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_with_contextual_values_shortcut' to match camel case naming rules, consider using 'When_Mapping_With_Contextual_Values_Shortcut'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ContextItems.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  22,
+"endLine":  43,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_with_contextual_values_in_resolve_func' to match camel case naming rules, consider using 'When_Mapping_With_Contextual_Values_In_Resolve_Func'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ContextItems.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  22,
+"endLine":  70,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'ToDTO' to match camel case naming rules, consider using 'ToDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  22,
+"endLine":  70,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'FromDTO' to match camel case naming rules, consider using 'FromDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  22,
+"endLine":  80,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_classes_with_implicit_conversion_operators_on_the_destination' to match camel case naming rules, consider using 'When_Mapping_To_Classes_With_Implicit_Conversion_Operators_On_The_Destination'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConversionOperators.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  22,
+"endLine":  8,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_classes_with_implicit_conversion_operators_on_the_source' to match camel case naming rules, consider using 'When_Mapping_To_Classes_With_Implicit_Conversion_Operators_On_The_Source'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConversionOperators.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  22,
+"endLine":  43,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_classes_with_explicit_conversion_operator_on_the_destination' to match camel case naming rules, consider using 'When_Mapping_To_Classes_With_Explicit_Conversion_Operator_On_The_Destination'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConversionOperators.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  22,
+"endLine":  83,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_classes_with_explicit_conversion_operator_on_the_source' to match camel case naming rules, consider using 'When_Mapping_To_Classes_With_Explicit_Conversion_Operator_On_The_Source'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConversionOperators.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  22,
+"endLine":  114,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_implementing_multiple_IValueResolver_interfaces' to match camel case naming rules, consider using 'When_Implementing_Multiple_IValueResolver_Interfaces'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  18,
+"endLine":  10,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_using_IMemberResolver_derived_interface' to match camel case naming rules, consider using 'When_Using_IMemberResolver_Derived_Interface'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  18,
+"endLine":  48,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_throwing_NRE_from_MapFrom_value_types' to match camel case naming rules, consider using 'When_Throwing_Nre_From_MapFrom_Value_Types'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  18,
+"endLine":  210,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_throwing_NRE_from_MapFrom' to match camel case naming rules, consider using 'When_Throwing_Nre_From_MapFrom'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  257,
+"startColumn":  18,
+"endLine":  257,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_using_value_with_mismatched_properties' to match camel case naming rules, consider using 'When_Using_Value_With_Mismatched_Properties'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  281,
+"startColumn":  18,
+"endLine":  281,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_custom_resolving_mismatched_properties' to match camel case naming rules, consider using 'When_Custom_Resolving_Mismatched_Properties'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  319,
+"startColumn":  18,
+"endLine":  319,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_resolve_throws' to match camel case naming rules, consider using 'When_Resolve_Throws'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  365,
+"startColumn":  18,
+"endLine":  365,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_different_types_with_UseValue' to match camel case naming rules, consider using 'When_Mapping_Different_Types_With_UseValue'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  401,
+"startColumn":  18,
+"endLine":  401,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_different_types_with_ResolveUsing' to match camel case naming rules, consider using 'When_Mapping_Different_Types_With_ResolveUsing'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  448,
+"startColumn":  18,
+"endLine":  448,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_object_to_string_with_use_value' to match camel case naming rules, consider using 'When_Mapping_From_Object_To_String_With_Use_Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  496,
+"startColumn":  18,
+"endLine":  496,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_object_to_string' to match camel case naming rules, consider using 'When_Mapping_From_Object_To_String'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  529,
+"startColumn":  18,
+"endLine":  529,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_dto_member_with_custom_mapping' to match camel case naming rules, consider using 'When_Mapping_To_A_Dto_Member_With_Custom_Mapping'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  563,
+"startColumn":  18,
+"endLine":  563,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_using_a_custom_resolver_for_a_child_model_property_instead_of_the_model' to match camel case naming rules, consider using 'When_Using_A_Custom_Resolver_For_A_Child_Model_Property_Instead_Of_The_Model'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  641,
+"startColumn":  18,
+"endLine":  641,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_reseting_a_mapping_to_use_a_resolver_to_a_different_member' to match camel case naming rules, consider using 'When_Reseting_A_Mapping_To_Use_A_Resolver_To_A_Different_Member'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  690,
+"startColumn":  18,
+"endLine":  690,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_reseting_a_mapping_from_a_property_to_a_method' to match camel case naming rules, consider using 'When_Reseting_A_Mapping_From_A_Property_To_A_Method'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  739,
+"startColumn":  18,
+"endLine":  739,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_a_custom_constructor_and_member_resolver' to match camel case naming rules, consider using 'When_Specifying_A_Custom_Constructor_And_Member_Resolver'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  777,
+"startColumn":  18,
+"endLine":  777,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_a_member_resolver_and_custom_constructor' to match camel case naming rules, consider using 'When_Specifying_A_Member_Resolver_And_Custom_Constructor'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  837,
+"startColumn":  18,
+"endLine":  837,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_a_custom_translator' to match camel case naming rules, consider using 'When_Specifying_A_Custom_Translator'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  897,
+"startColumn":  18,
+"endLine":  897,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_a_custom_translator_using_projection' to match camel case naming rules, consider using 'When_Specifying_A_Custom_Translator_Using_Projection'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  944,
+"startColumn":  18,
+"endLine":  944,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_a_custom_translator_and_passing_in_the_destination_object' to match camel case naming rules, consider using 'When_Specifying_A_Custom_Translator_And_Passing_In_The_Destination_Object'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  991,
+"startColumn":  18,
+"endLine":  991,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_a_custom_translator_using_generics' to match camel case naming rules, consider using 'When_Specifying_A_Custom_Translator_Using_Generics'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1043,
+"startColumn":  18,
+"endLine":  1043,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_a_custom_constructor_function_for_custom_converters' to match camel case naming rules, consider using 'When_Specifying_A_Custom_Constructor_Function_For_Custom_Converters'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1098,
+"startColumn":  18,
+"endLine":  1098,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_a_custom_translator_with_mismatched_properties' to match camel case naming rules, consider using 'When_Specifying_A_Custom_Translator_With_Mismatched_Properties'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1152,
+"startColumn":  18,
+"endLine":  1152,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_configuring_a_global_constructor_function_for_resolvers' to match camel case naming rules, consider using 'When_Configuring_A_Global_Constructor_Function_For_Resolvers'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1189,
+"startColumn":  18,
+"endLine":  1189,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_custom_resolver_requests_property_to_be_ignored' to match camel case naming rules, consider using 'When_Custom_Resolver_Requests_Property_To_Be_Ignored'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1240,
+"startColumn":  18,
+"endLine":  1240,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_using_inheritance_with_value_resoluvers' to match camel case naming rules, consider using 'When_Using_Inheritance_With_Value_Resoluvers'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1280,
+"startColumn":  18,
+"endLine":  1280,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_member_and_member_resolver_using_string_property_names' to match camel case naming rules, consider using 'When_Specifying_Member_And_Member_Resolver_Using_String_Property_Names'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1340,
+"startColumn":  18,
+"endLine":  1340,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_a_custom_member_mapping_to_a_nested_object' to match camel case naming rules, consider using 'When_Specifying_A_Custom_Member_Mapping_To_A_Nested_Object'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1387,
+"startColumn":  18,
+"endLine":  1387,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_a_custom_member_mapping_with_a_cast' to match camel case naming rules, consider using 'When_Specifying_A_Custom_Member_Mapping_With_A_Cast'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1415,
+"startColumn":  18,
+"endLine":  1415,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_destination_property_does_not_have_a_setter' to match camel case naming rules, consider using 'When_Destination_Property_Does_Not_Have_A_Setter'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1455,
+"startColumn":  18,
+"endLine":  1455,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_destination_property_does_not_have_a_getter' to match camel case naming rules, consider using 'When_Destination_Property_Does_Not_Have_A_Getter'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1521,
+"startColumn":  18,
+"endLine":  1521,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_destination_type_requires_a_constructor' to match camel case naming rules, consider using 'When_Destination_Type_Requires_A_Constructor'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1602,
+"startColumn":  18,
+"endLine":  1602,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_a_constant_value' to match camel case naming rules, consider using 'When_Mapping_From_A_Constant_Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1647,
+"startColumn":  18,
+"endLine":  1647,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_building_custom_configuration_mapping_to_itself' to match camel case naming rules, consider using 'When_Building_Custom_Configuration_Mapping_To_Itself'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1679,
+"startColumn":  18,
+"endLine":  1679,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_one_type_to_another' to match camel case naming rules, consider using 'When_Mapping_From_One_Type_To_Another'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1709,
+"startColumn":  18,
+"endLine":  1709,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_generic_dictionary_with_mapped_value_pairs' to match camel case naming rules, consider using 'When_Mapping_To_A_Generic_Dictionary_With_Mapped_Value_Pairs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  22,
+"endLine":  56,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_generic_dictionary_interface_with_mapped_value_pairs' to match camel case naming rules, consider using 'When_Mapping_To_A_Generic_Dictionary_Interface_With_Mapped_Value_Pairs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  22,
+"endLine":  110,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_a_source_with_a_null_dictionary_member' to match camel case naming rules, consider using 'When_Mapping_From_A_Source_With_A_Null_Dictionary_Member'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  22,
+"endLine":  164,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_generic_dictionary_that_does_not_use_keyvaluepairs' to match camel case naming rules, consider using 'When_Mapping_To_A_Generic_Dictionary_That_Does_Not_Use_Keyvaluepairs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  22,
+"endLine":  207,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_a_list_of_object_to_generic_dictionary' to match camel case naming rules, consider using 'When_Mapping_From_A_List_Of_Object_To_Generic_Dictionary'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  415,
+"startColumn":  22,
+"endLine":  415,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_nongeneric_type_inherited_from_dictionary' to match camel case naming rules, consider using 'When_Mapping_Nongeneric_Type_Inherited_From_Dictionary'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  466,
+"startColumn":  22,
+"endLine":  466,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_untyped_enum_to_typed_enum' to match camel case naming rules, consider using 'When_Mapping_From_Untyped_Enum_To_Typed_Enum'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  18,
+"endLine":  10,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_nested_types' to match camel case naming rules, consider using 'When_Mapping_Nested_Types'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  18,
+"endLine":  33,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_two_non_configured_types' to match camel case naming rules, consider using 'When_Mapping_Two_Non_Configured_Types'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  18,
+"endLine":  82,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_two_non_configured_types_with_resolvers' to match camel case naming rules, consider using 'When_Mapping_Two_Non_Configured_Types_With_Resolvers'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  18,
+"endLine":  109,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_two_non_configured_types_with_nesting' to match camel case naming rules, consider using 'When_Mapping_Two_Non_Configured_Types_With_Nesting'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  18,
+"endLine":  154,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_two_non_configured_types_that_do_not_match' to match camel case naming rules, consider using 'When_Mapping_Two_Non_Configured_Types_That_Do_Not_Match'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
+"region":  {
+"startLine":  208,
+"startColumn":  18,
+"endLine":  208,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_an_existing_destination_object' to match camel case naming rules, consider using 'When_Mapping_To_An_Existing_Destination_Object'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  18,
+"endLine":  237,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_inline_mapping_with_inline_captured_closure' to match camel case naming rules, consider using 'When_Inline_Mapping_With_Inline_Captured_Closure'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  18,
+"endLine":  274,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_dynamically_mapping_a_badly_configured_map' to match camel case naming rules, consider using 'When_Dynamically_Mapping_A_Badly_Configured_Map'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
+"region":  {
+"startLine":  334,
+"startColumn":  18,
+"endLine":  334,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_dynamically_mapping_a_badly_configured_map_and_turning_off_validation' to match camel case naming rules, consider using 'When_Dynamically_Mapping_A_Badly_Configured_Map_And_Turning_Off_Validation'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
+"region":  {
+"startLine":  356,
+"startColumn":  18,
+"endLine":  356,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_automatically_dynamically_mapping' to match camel case naming rules, consider using 'When_Automatically_Dynamically_Mapping'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
+"region":  {
+"startLine":  381,
+"startColumn":  18,
+"endLine":  381,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_automatically_dynamically_projecting' to match camel case naming rules, consider using 'When_Automatically_Dynamically_Projecting'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
+"region":  {
+"startLine":  404,
+"startColumn":  18,
+"endLine":  404,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mixing_auto_and_manual_map' to match camel case naming rules, consider using 'When_Mixing_Auto_And_Manual_Map'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
+"region":  {
+"startLine":  430,
+"startColumn":  18,
+"endLine":  430,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mixing_auto_and_manual_map_with_mismatched_properties' to match camel case naming rules, consider using 'When_Mixing_Auto_And_Manual_Map_With_Mismatched_Properties'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
+"region":  {
+"startLine":  476,
+"startColumn":  18,
+"endLine":  476,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_a_null_object_with_an_enum' to match camel case naming rules, consider using 'When_Mapping_From_A_Null_Object_With_An_Enum'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  397,
+"startColumn":  18,
+"endLine":  397,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_nullable_flags_enum' to match camel case naming rules, consider using 'When_Mapping_To_A_Nullable_Flags_Enum'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  429,
+"startColumn":  18,
+"endLine":  429,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_a_null_object_with_a_nullable_enum' to match camel case naming rules, consider using 'When_Mapping_From_A_Null_Object_With_A_Nullable_Enum'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  461,
+"startColumn":  18,
+"endLine":  461,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_a_null_object_with_a_nullable_enum_as_string' to match camel case naming rules, consider using 'When_Mapping_From_A_Null_Object_With_A_Nullable_Enum_As_String'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  492,
+"startColumn":  18,
+"endLine":  492,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_a_flags_enum' to match camel case naming rules, consider using 'When_Mapping_A_Flags_Enum'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  547,
+"startColumn":  18,
+"endLine":  547,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_the_target_has_an_enummemberattribute_value' to match camel case naming rules, consider using 'When_The_Target_Has_An_Enummemberattribute_Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  585,
+"startColumn":  18,
+"endLine":  585,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_the_source_has_an_enummemberattribute_value' to match camel case naming rules, consider using 'When_The_Source_Has_An_Enummemberattribute_Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  647,
+"startColumn":  18,
+"endLine":  647,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_using_expressions' to match camel case naming rules, consider using 'When_Mapping_Using_Expressions'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  22,
+"endLine":  98,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_circular_references' to match camel case naming rules, consider using 'When_Mapping_Circular_References'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  26,
+"endLine":  261,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_null_is_passed_to_an_extension_method' to match camel case naming rules, consider using 'When_Null_Is_Passed_To_An_Extension_Method'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExtensionMethods.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  18,
+"endLine":  19,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_extension_method_returns_value_type_SourceExtensions' to match camel case naming rules, consider using 'When_Extension_Method_Returns_Value_Type_SourceExtensions'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExtensionMethods.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  25,
+"endLine":  50,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_extension_method_returns_value_type' to match camel case naming rules, consider using 'When_Extension_Method_Returns_Value_Type'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExtensionMethods.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  18,
+"endLine":  55,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_extension_method_returns_object_SourceExtensions' to match camel case naming rules, consider using 'When_Extension_Method_Returns_Object_SourceExtensions'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExtensionMethods.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  25,
+"endLine":  94,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_extension_method_returns_object' to match camel case naming rules, consider using 'When_Extension_Method_Returns_Object'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExtensionMethods.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  18,
+"endLine":  102,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_extension_contains_LINQ_methods' to match camel case naming rules, consider using 'When_Extension_Contains_Linq_Methods'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExtensionMethods.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  18,
+"endLine":  146,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_a_source_child_object_is_null' to match camel case naming rules, consider using 'When_A_Source_Child_Object_Is_Null'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\FillingExistingDestination.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  18,
+"endLine":  8,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_the_destination_object_is_specified' to match camel case naming rules, consider using 'When_The_Destination_Object_Is_Specified'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\FillingExistingDestination.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  18,
+"endLine":  39,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_the_destination_object_is_specified_with_child_objects' to match camel case naming rules, consider using 'When_The_Destination_Object_Is_Specified_With_Child_Objects'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\FillingExistingDestination.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  18,
+"endLine":  84,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_the_destination_object_has_child_objects' to match camel case naming rules, consider using 'When_The_Destination_Object_Has_Child_Objects'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\FillingExistingDestination.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  18,
+"endLine":  159,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_the_destination_object_is_specified_and_you_are_converting_an_enum' to match camel case naming rules, consider using 'When_The_Destination_Object_Is_Specified_And_You_Are_Converting_An_Enum'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\FillingExistingDestination.cs",
+"region":  {
+"startLine":  222,
+"startColumn":  18,
+"endLine":  222,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_conditionally_applying_a_resolver_globally' to match camel case naming rules, consider using 'When_Conditionally_Applying_A_Resolver_Globally'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForAllMembers.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  22,
+"endLine":  9,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_dto_with_a_missing_match' to match camel case naming rules, consider using 'When_Mapping_Dto_With_A_Missing_Match'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\General.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  22,
+"endLine":  11,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_a_null_model' to match camel case naming rules, consider using 'When_Mapping_A_Null_Model'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\General.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  22,
+"endLine":  36,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_a_dto_with_a_private_parameterless_constructor' to match camel case naming rules, consider using 'When_Mapping_A_Dto_With_A_Private_Parameterless_Constructor'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\General.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  22,
+"endLine":  63,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_dto_string_property_and_the_dto_type_is_not_a_string' to match camel case naming rules, consider using 'When_Mapping_To_A_Dto_String_Property_And_The_Dto_Type_Is_Not_A_String'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\General.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  22,
+"endLine":  102,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_dto_with_an_array_property' to match camel case naming rules, consider using 'When_Mapping_Dto_With_An_Array_Property'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\General.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  22,
+"endLine":  139,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_a_dto_with_mismatched_property_types' to match camel case naming rules, consider using 'When_Mapping_A_Dto_With_Mismatched_Property_Types'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\General.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  22,
+"endLine":  178,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_an_array_of_model_objects' to match camel case naming rules, consider using 'When_Mapping_An_Array_Of_Model_Objects'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\General.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  22,
+"endLine":  205,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_a_List_of_model_objects' to match camel case naming rules, consider using 'When_Mapping_A_List_Of_Model_Objects'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\General.cs",
+"region":  {
+"startLine":  246,
+"startColumn":  22,
+"endLine":  246,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_a_nullable_type_to_non_nullable_type' to match camel case naming rules, consider using 'When_Mapping_A_Nullable_Type_To_Non_Nullable_Type'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\General.cs",
+"region":  {
+"startLine":  287,
+"startColumn":  22,
+"endLine":  287,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_a_non_nullable_type_to_a_nullable_type' to match camel case naming rules, consider using 'When_Mapping_A_Non_Nullable_Type_To_A_Nullable_Type'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\General.cs",
+"region":  {
+"startLine":  328,
+"startColumn":  22,
+"endLine":  328,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_a_nullable_type_to_a_nullable_type' to match camel case naming rules, consider using 'When_Mapping_A_Nullable_Type_To_A_Nullable_Type'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\General.cs",
+"region":  {
+"startLine":  371,
+"startColumn":  22,
+"endLine":  371,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_tuples' to match camel case naming rules, consider using 'When_Mapping_Tuples'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\General.cs",
+"region":  {
+"startLine":  415,
+"startColumn":  22,
+"endLine":  415,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_overriding_global_ignore' to match camel case naming rules, consider using 'When_Overriding_Global_Ignore'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IgnoreAllTests.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  18,
+"endLine":  8,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_configuring__non_generic_ctor_param_members' to match camel case naming rules, consider using 'When_Configuring__Non_Generic_Ctor_Param_Members'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IMappingExpression\ForCtorParam.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  18,
+"endLine":  7,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_using_non_generic_ResolveUsing' to match camel case naming rules, consider using 'When_Using_Non_Generic_ResolveUsing'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IMappingExpression\NonGenericResolveUsing.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  18,
+"endLine":  7,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_reverse_mapping_classes_with_simple_properties' to match camel case naming rules, consider using 'When_Reverse_Mapping_Classes_With_Simple_Properties'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IMappingExpression\NonGenericReverseMapping.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  22,
+"endLine":  12,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_reverse_mapping_and_ignoring_via_method' to match camel case naming rules, consider using 'When_Reverse_Mapping_And_Ignoring_Via_Method'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IMappingExpression\NonGenericReverseMapping.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  22,
+"endLine":  46,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_reverse_mapping_and_ignoring' to match camel case naming rules, consider using 'When_Reverse_Mapping_And_Ignoring'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IMappingExpression\NonGenericReverseMapping.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  22,
+"endLine":  73,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_destination_with_an_indexer_property' to match camel case naming rules, consider using 'When_Mapping_To_A_Destination_With_An_Indexer_Property'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Indexers.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  22,
+"endLine":  9,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_a_source_with_non_english_property_names' to match camel case naming rules, consider using 'When_Mapping_A_Source_With_Non_English_Property_Names'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internationalization.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  22,
+"endLine":  8,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_adding_a_custom_mapper' to match camel case naming rules, consider using 'When_Adding_A_Custom_Mapper'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\CustomMapperTests.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  18,
+"endLine":  11,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_adding_a_simple_custom_mapper' to match camel case naming rules, consider using 'When_Adding_A_Simple_Custom_Mapper'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\CustomMapperTests.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  18,
+"endLine":  69,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_adding_an_object_based_custom_mapper' to match camel case naming rules, consider using 'When_Adding_An_Object_Based_Custom_Mapper'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\CustomMapperTests.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  18,
+"endLine":  133,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_dynamic_from_getter_only_property' to match camel case naming rules, consider using 'When_Mapping_To_Dynamic_From_Getter_Only_Property'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\DynamicMapperTests.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  18,
+"endLine":  36,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_dynamic' to match camel case naming rules, consider using 'When_Mapping_To_Dynamic'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\DynamicMapperTests.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  18,
+"endLine":  58,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_dynamic' to match camel case naming rules, consider using 'When_Mapping_From_Dynamic'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\DynamicMapperTests.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  18,
+"endLine":  76,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_struct_from_dynamic' to match camel case naming rules, consider using 'When_Mapping_Struct_From_Dynamic'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\DynamicMapperTests.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  18,
+"endLine":  95,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_dynamic_with_missing_property' to match camel case naming rules, consider using 'When_Mapping_From_Dynamic_With_Missing_Property'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\DynamicMapperTests.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  18,
+"endLine":  121,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_dynamic_null_to_int' to match camel case naming rules, consider using 'When_Mapping_From_Dynamic_Null_To_Int'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\DynamicMapperTests.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  18,
+"endLine":  137,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_dynamic_to_dynamic' to match camel case naming rules, consider using 'When_Mapping_From_Dynamic_To_Dynamic'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\DynamicMapperTests.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  18,
+"endLine":  155,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_dynamic_to_nullable' to match camel case naming rules, consider using 'When_Mapping_From_Dynamic_To_Nullable'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\DynamicMapperTests.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  18,
+"endLine":  172,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_StringDictionary' to match camel case naming rules, consider using 'When_Mapping_To_StringDictionary'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  18,
+"endLine":  15,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_StringDictionary' to match camel case naming rules, consider using 'When_Mapping_From_StringDictionary'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  18,
+"endLine":  34,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_struct_from_StringDictionary' to match camel case naming rules, consider using 'When_Mapping_Struct_From_StringDictionary'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  18,
+"endLine":  55,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_StringDictionary_with_missing_property' to match camel case naming rules, consider using 'When_Mapping_From_StringDictionary_With_Missing_Property'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  18,
+"endLine":  81,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_StringDictionary_null_to_int' to match camel case naming rules, consider using 'When_Mapping_From_StringDictionary_Null_To_Int'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  18,
+"endLine":  102,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_StringDictionary_to_StringDictionary' to match camel case naming rules, consider using 'When_Mapping_From_StringDictionary_To_StringDictionary'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  18,
+"endLine":  123,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_StringDictionary_to_existing_destination' to match camel case naming rules, consider using 'When_Mapping_From_StringDictionary_To_Existing_Destination'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  18,
+"endLine":  143,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_StringDictionary_to_abstract_type' to match camel case naming rules, consider using 'When_Mapping_From_StringDictionary_To_Abstract_Type'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  18,
+"endLine":  218,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_encountering_a_member_mapping_problem_during_mapping' to match camel case naming rules, consider using 'When_Encountering_A_Member_Mapping_Problem_During_Mapping'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingExceptions.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  18,
+"endLine":  7,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'CustomerStubDTO' to match camel case naming rules, consider using 'CustomerStubDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ShouldSupportOnlyDestinationTypeBeingDerived.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  22,
+"endLine":  56,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'CustomerDTO' to match camel case naming rules, consider using 'CustomerDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ShouldSupportOnlyDestinationTypeBeingDerived.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  22,
+"endLine":  61,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'OrderDTO' to match camel case naming rules, consider using 'OrderDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ShouldSupportOnlyDestinationTypeBeingDerived.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  22,
+"endLine":  71,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'CustomerStubDTO' to match camel case naming rules, consider using 'CustomerStubDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ShouldSupportOnlyDestinationTypeBeingDerived.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  22,
+"endLine":  105,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'CustomerDTO' to match camel case naming rules, consider using 'CustomerDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ShouldSupportOnlyDestinationTypeBeingDerived.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  22,
+"endLine":  110,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'OrderDTO' to match camel case naming rules, consider using 'OrderDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ShouldSupportOnlyDestinationTypeBeingDerived.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  22,
+"endLine":  120,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'FormControlBaseDTO2' to match camel case naming rules, consider using 'FormControlBaseDto2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\SourceValidationWithInheritance.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  31,
+"endLine":  31,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'FormElementDTO2' to match camel case naming rules, consider using 'FormElementDto2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\SourceValidationWithInheritance.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  22,
+"endLine":  37,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'FormControlBaseDTO2' to match camel case naming rules, consider using 'FormControlBaseDto2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\SourceValidationWithInheritance.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  31,
+"endLine":  90,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'FormElementDTO2' to match camel case naming rules, consider using 'FormElementDto2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\SourceValidationWithInheritance.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  22,
+"endLine":  96,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_a_mapping_order_for_base_members' to match camel case naming rules, consider using 'When_Specifying_A_Mapping_Order_For_Base_Members'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingOrder.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  22,
+"endLine":  9,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_a_mapping_order_for_source_members' to match camel case naming rules, consider using 'When_Specifying_A_Mapping_Order_For_Source_Members'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingOrder.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  22,
+"endLine":  73,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_using_a_member_name_replacer' to match camel case naming rules, consider using 'When_Using_A_Member_Name_Replacer'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberNameReplacers.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_derived_classes_in_arrays' to match camel case naming rules, consider using 'When_Mapping_Derived_Classes_In_Arrays'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  22,
+"endLine":  13,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_derived_classes' to match camel case naming rules, consider using 'When_Mapping_Derived_Classes'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  22,
+"endLine":  72,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_derived_classes_from_intefaces_to_abstract' to match camel case naming rules, consider using 'When_Mapping_Derived_Classes_From_Intefaces_To_Abstract'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  22,
+"endLine":  118,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_derived_classes_as_property_of_top_object' to match camel case naming rules, consider using 'When_Mapping_Derived_Classes_As_Property_Of_Top_Object'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  22,
+"endLine":  176,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_dto_with_only_properties' to match camel case naming rules, consider using 'When_Mapping_Dto_With_Only_Properties'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  22,
+"endLine":  238,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_dto_with_only_fields' to match camel case naming rules, consider using 'When_Mapping_Dto_With_Only_Fields'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  338,
+"startColumn":  22,
+"endLine":  338,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_dto_with_fields_and_properties' to match camel case naming rules, consider using 'When_Mapping_Dto_With_Fields_And_Properties'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  437,
+"startColumn":  22,
+"endLine":  437,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_ignoring_a_dto_property_during_configuration' to match camel case naming rules, consider using 'When_Ignoring_A_Dto_Property_During_Configuration'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  537,
+"startColumn":  22,
+"endLine":  537,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_dto_with_get_methods' to match camel case naming rules, consider using 'When_Mapping_Dto_With_Get_Methods'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  588,
+"startColumn":  22,
+"endLine":  588,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_a_dto_with_names_matching_properties' to match camel case naming rules, consider using 'When_Mapping_A_Dto_With_Names_Matching_Properties'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  645,
+"startColumn":  22,
+"endLine":  645,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_with_a_dto_subtype' to match camel case naming rules, consider using 'When_Mapping_With_A_Dto_Subtype'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  702,
+"startColumn":  22,
+"endLine":  702,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_a_dto_with_a_set_only_property_and_a_get_method' to match camel case naming rules, consider using 'When_Mapping_A_Dto_With_A_Set_Only_Property_And_A_Get_Method'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  754,
+"startColumn":  22,
+"endLine":  754,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_using_a_custom_member_mappings' to match camel case naming rules, consider using 'When_Mapping_Using_A_Custom_Member_Mappings'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  799,
+"startColumn":  22,
+"endLine":  799,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_using_custom_member_mappings_without_generics' to match camel case naming rules, consider using 'When_Mapping_Using_Custom_Member_Mappings_Without_Generics'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  954,
+"startColumn":  22,
+"endLine":  954,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'OrderDTO' to match camel case naming rules, consider using 'OrderDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  967,
+"startColumn":  26,
+"endLine":  967,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'StringCAPS' to match camel case naming rules, consider using 'StringCaps'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  976,
+"startColumn":  26,
+"endLine":  976,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_top_level_camelCased_destination_member' to match camel case naming rules, consider using 'When_Mapping_To_A_Top_Level_CamelCased_Destination_Member'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1062,
+"startColumn":  22,
+"endLine":  1062,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_a_self_referential_object' to match camel case naming rules, consider using 'When_Mapping_To_A_Self_Referential_Object'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1100,
+"startColumn":  22,
+"endLine":  1100,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_to_types_in_a_non_generic_manner' to match camel case naming rules, consider using 'When_Mapping_To_Types_In_A_Non_Generic_Manner'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1162,
+"startColumn":  22,
+"endLine":  1162,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_matching_source_and_destination_members_with_underscored_members' to match camel case naming rules, consider using 'When_Matching_Source_And_Destination_Members_With_Underscored_Members'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1193,
+"startColumn":  22,
+"endLine":  1193,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_source_members_contain_prefixes' to match camel case naming rules, consider using 'When_Source_Members_Contain_Prefixes'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1231,
+"startColumn":  22,
+"endLine":  1231,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_source_members_contain_prefixes_with_lowercase' to match camel case naming rules, consider using 'When_Source_Members_Contain_Prefixes_With_Lowercase'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1275,
+"startColumn":  22,
+"endLine":  1275,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_source_members_contain_postfixes_with_lowercase' to match camel case naming rules, consider using 'When_Source_Members_Contain_Postfixes_With_Lowercase'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1318,
+"startColumn":  22,
+"endLine":  1318,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_source_members_contain_postfixes_and_prefixes' to match camel case naming rules, consider using 'When_Source_Members_Contain_Postfixes_And_Prefixes'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1361,
+"startColumn":  22,
+"endLine":  1361,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_source_member_names_match_with_underscores' to match camel case naming rules, consider using 'When_Source_Member_Names_Match_With_Underscores'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1405,
+"startColumn":  22,
+"endLine":  1405,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_recognizing_explicit_member_aliases' to match camel case naming rules, consider using 'When_Recognizing_Explicit_Member_Aliases'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1436,
+"startColumn":  22,
+"endLine":  1436,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_destination_members_contain_prefixes' to match camel case naming rules, consider using 'When_Destination_Members_Contain_Prefixes'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1468,
+"startColumn":  22,
+"endLine":  1468,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_destination_type_has_private_members' to match camel case naming rules, consider using 'When_Destination_Type_Has_Private_Members'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1505,
+"startColumn":  18,
+"endLine":  1505,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_a_custom_contextual_constructor' to match camel case naming rules, consider using 'When_Specifying_A_Custom_Contextual_Constructor'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NestedContainers.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  22,
+"endLine":  9,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_a_custom_contextual_constructor_for_type_converters' to match camel case naming rules, consider using 'When_Specifying_A_Custom_Contextual_Constructor_For_Type_Converters'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NestedContainers.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  22,
+"endLine":  79,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mappping_null_array_to_IEnumerable_with_MapAtRuntime' to match camel case naming rules, consider using 'When_Mappping_Null_Array_To_IEnumerable_With_MapAtRuntime'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  18,
+"endLine":  11,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mappping_null_array_to_IEnumerable' to match camel case naming rules, consider using 'When_Mappping_Null_Array_To_IEnumerable'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  18,
+"endLine":  32,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mappping_null_list_to_ICollection' to match camel case naming rules, consider using 'When_Mappping_Null_List_To_ICollection'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  18,
+"endLine":  53,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_untyped_null_to_IEnumerable_and_AllowNullCollections_is_true' to match camel case naming rules, consider using 'When_Mapping_Untyped_Null_To_IEnumerable_And_AllowNullCollections_Is_True'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  18,
+"endLine":  74,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_null_interface_and_AllowNullDestinationValues_is_false' to match camel case naming rules, consider using 'When_Mapping_From_Null_Interface_And_AllowNullDestinationValues_Is_False'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  18,
+"endLine":  99,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_null_interface' to match camel case naming rules, consider using 'When_Mapping_From_Null_Interface'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  18,
+"endLine":  146,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_a_model_with_null_items' to match camel case naming rules, consider using 'When_Mapping_A_Model_With_Null_Items'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  18,
+"endLine":  192,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_overriding_null_behavior_with_null_source_items' to match camel case naming rules, consider using 'When_Overriding_Null_Behavior_With_Null_Source_Items'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  272,
+"startColumn":  18,
+"endLine":  272,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_overriding_null_behavior_in_sub_profile' to match camel case naming rules, consider using 'When_Overriding_Null_Behavior_In_Sub_Profile'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  364,
+"startColumn":  18,
+"endLine":  364,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_overriding_null_behavior_in_a_profile' to match camel case naming rules, consider using 'When_Overriding_Null_Behavior_In_A_Profile'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  460,
+"startColumn":  18,
+"endLine":  460,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_using_a_custom_resolver_and_the_source_value_is_null' to match camel case naming rules, consider using 'When_Using_A_Custom_Resolver_And_The_Source_Value_Is_Null'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  514,
+"startColumn":  18,
+"endLine":  514,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_using_a_custom_member_mapping_and_source_is_null' to match camel case naming rules, consider using 'When_Mapping_Using_A_Custom_Member_Mapping_And_Source_Is_Null'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  558,
+"startColumn":  18,
+"endLine":  558,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_a_resolver_for_a_nullable_type' to match camel case naming rules, consider using 'When_Specifying_A_Resolver_For_A_Nullable_Type'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  596,
+"startColumn":  18,
+"endLine":  596,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_overriding_collection_null_behavior' to match camel case naming rules, consider using 'When_Overriding_Collection_Null_Behavior'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  645,
+"startColumn":  18,
+"endLine":  645,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_overriding_collection_null_behavior_in_profile_with_MapAtRuntime' to match camel case naming rules, consider using 'When_Overriding_Collection_Null_Behavior_In_Profile_With_MapAtRuntime'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  717,
+"startColumn":  18,
+"endLine":  717,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_overriding_collection_null_behavior_in_profile' to match camel case naming rules, consider using 'When_Overriding_Collection_Null_Behavior_In_Profile'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  800,
+"startColumn":  18,
+"endLine":  800,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_a_null_model' to match camel case naming rules, consider using 'When_Mapping_A_Null_Model'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  883,
+"startColumn":  18,
+"endLine":  883,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_segregating_configuration_through_a_profile' to match camel case naming rules, consider using 'When_Segregating_Configuration_Through_A_Profile'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Profiles.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  22,
+"endLine":  9,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_configuring_a_profile_through_a_profile_subclass' to match camel case naming rules, consider using 'When_Configuring_A_Profile_Through_A_Profile_Subclass'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Profiles.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  22,
+"endLine":  52,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_disabling_constructor_mapping_with_profiles' to match camel case naming rules, consider using 'When_Disabling_Constructor_Mapping_With_Profiles'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Profiles.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  22,
+"endLine":  117,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_projecting_and_inheriting_maps' to match camel case naming rules, consider using 'When_Projecting_And_Inheriting_Maps'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\InheritedMaps.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  22,
+"endLine":  25,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_mapping_from_and_source_member_both_can_work' to match camel case naming rules, consider using 'When_Mapping_From_And_Source_Member_Both_Can_Work'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\MapFromTest.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  18,
+"endLine":  66,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'ParameterizedQueriesTests_with_anonymous_object_and_factory' to match camel case naming rules, consider using 'ParameterizedQueriesTests_With_Anonymous_Object_And_Factory'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ParameterizedQueriesTests.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  18,
+"endLine":  11,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'ParameterizedQueriesTests_with_anonymous_object' to match camel case naming rules, consider using 'ParameterizedQueriesTests_With_Anonymous_Object'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ParameterizedQueriesTests.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  18,
+"endLine":  59,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'ParameterizedQueriesTests_with_dictionary_object' to match camel case naming rules, consider using 'ParameterizedQueriesTests_With_Dictionary_Object'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ParameterizedQueriesTests.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  18,
+"endLine":  107,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'ParameterizedQueriesTests_with_filter' to match camel case naming rules, consider using 'ParameterizedQueriesTests_With_Filter'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ParameterizedQueriesTests.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  18,
+"endLine":  155,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'automapper_fails_to_map_custom_mappings_when_mapping_collections_for_an_interface' to match camel case naming rules, consider using 'Automapper_Fails_To_Map_Custom_Mappings_When_Mapping_Collections_For_An_Interface'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Regression.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  22,
+"endLine":  27,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Chris_bennages_nullable_datetime_issue' to match camel case naming rules, consider using 'Chris_Bennages_Nullable_Datetime_Issue'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Regression.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  22,
+"endLine":  51,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_reverse_mapping_classes_with_simple_properties' to match camel case naming rules, consider using 'When_Reverse_Mapping_Classes_With_Simple_Properties'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapping.cs",
+"region":  {
+"startLine":  346,
+"startColumn":  18,
+"endLine":  346,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_validating_only_against_source_members_and_source_matches' to match camel case naming rules, consider using 'When_Validating_Only_Against_Source_Members_And_Source_Matches'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapping.cs",
+"region":  {
+"startLine":  381,
+"startColumn":  18,
+"endLine":  381,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_validating_only_against_source_members_and_source_does_not_match' to match camel case naming rules, consider using 'When_Validating_Only_Against_Source_Members_And_Source_Does_Not_Match'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapping.cs",
+"region":  {
+"startLine":  413,
+"startColumn":  18,
+"endLine":  413,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_validating_only_against_source_members_and_unmatching_source_members_are_manually_mapped' to match camel case naming rules, consider using 'When_Validating_Only_Against_Source_Members_And_Unmatching_Source_Members_Are_Manually_Mapped'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapping.cs",
+"region":  {
+"startLine":  437,
+"startColumn":  18,
+"endLine":  437,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_validating_only_against_source_members_and_unmatching_source_members_are_manually_mapped_with_resolvers' to match camel case naming rules, consider using 'When_Validating_Only_Against_Source_Members_And_Unmatching_Source_Members_Are_Manually_Mapped_With_Resolvers'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapping.cs",
+"region":  {
+"startLine":  463,
+"startColumn":  18,
+"endLine":  463,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_reverse_mapping_and_ignoring_via_method' to match camel case naming rules, consider using 'When_Reverse_Mapping_And_Ignoring_Via_Method'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapping.cs",
+"region":  {
+"startLine":  490,
+"startColumn":  18,
+"endLine":  490,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_reverse_mapping_and_ignoring' to match camel case naming rules, consider using 'When_Reverse_Mapping_And_Ignoring'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapping.cs",
+"region":  {
+"startLine":  517,
+"startColumn":  18,
+"endLine":  517,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_reverse_mapping_open_generics' to match camel case naming rules, consider using 'When_Reverse_Mapping_Open_Generics'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapping.cs",
+"region":  {
+"startLine":  564,
+"startColumn":  18,
+"endLine":  564,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_constructing_type_maps_with_matching_property_names' to match camel case naming rules, consider using 'When_Constructing_Type_Maps_With_Matching_Property_Names'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Tests\TypeMapFactorySpecs.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  18,
+"endLine":  34,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_using_a_custom_source_naming_convention' to match camel case naming rules, consider using 'When_Using_A_Custom_Source_Naming_Convention'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Tests\TypeMapFactorySpecs.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  18,
+"endLine":  76,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_using_a_custom_destination_naming_convention' to match camel case naming rules, consider using 'When_Using_A_Custom_Destination_Naming_Convention'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Tests\TypeMapFactorySpecs.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  18,
+"endLine":  129,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_using_a_source_member_name_replacer' to match camel case naming rules, consider using 'When_Using_A_Source_Member_Name_Replacer'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Tests\TypeMapFactorySpecs.cs",
+"region":  {
+"startLine":  182,
+"startColumn":  18,
+"endLine":  182,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_converting_to_string' to match camel case naming rules, consider using 'When_Converting_To_String'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  18,
+"endLine":  88,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_type_converters_for_object_mapper_types' to match camel case naming rules, consider using 'When_Specifying_Type_Converters_For_Object_Mapper_Types'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  18,
+"endLine":  137,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_type_converters' to match camel case naming rules, consider using 'When_Specifying_Type_Converters'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  18,
+"endLine":  179,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_type_converters_on_types_with_incompatible_members' to match camel case naming rules, consider using 'When_Specifying_Type_Converters_On_Types_With_Incompatible_Members'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  254,
+"startColumn":  18,
+"endLine":  254,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_mapping_with_the_BCL_type_converter_class' to match camel case naming rules, consider using 'When_Specifying_Mapping_With_The_Bcl_Type_Converter_Class'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  301,
+"startColumn":  18,
+"endLine":  301,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_a_type_converter_for_a_non_generic_configuration' to match camel case naming rules, consider using 'When_Specifying_A_Type_Converter_For_A_Non_Generic_Configuration'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  375,
+"startColumn":  18,
+"endLine":  375,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_specifying_a_non_generic_type_converter_for_a_non_generic_configuration' to match camel case naming rules, consider using 'When_Specifying_A_Non_Generic_Type_Converter_For_A_Non_Generic_Configuration'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  417,
+"startColumn":  18,
+"endLine":  417,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_value_types_are_the_source_of_map_cycles' to match camel case naming rules, consider using 'When_Value_Types_Are_The_Source_Of_Map_Cycles'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ValueTypes.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  18,
+"endLine":  7,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_destination_type_is_a_value_type' to match camel case naming rules, consider using 'When_Destination_Type_Is_A_Value_Type'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ValueTypes.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  18,
+"endLine":  45,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_source_struct_config_has_custom_mappings' to match camel case naming rules, consider using 'When_Source_Struct_Config_Has_Custom_Mappings'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ValueTypes.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  18,
+"endLine":  85,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename struct 'matrixDigiInStruct1' to match camel case naming rules, consider using 'MatrixDigiInStruct1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ValueTypes.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  23,
+"endLine":  87,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_destination_type_is_a_nullable_value_type' to match camel case naming rules, consider using 'When_Destination_Type_Is_A_Nullable_Value_Type'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ValueTypes.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  18,
+"endLine":  122,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'When_using_ConfigurationExpression_Advanced' to match camel case naming rules, consider using 'When_Using_ConfigurationExpression_Advanced'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\When_using_ConfigurationExpression_Advanced.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  18,
+"endLine":  6,
+"endColumn":  61
+}
+}
+}
+]
+}

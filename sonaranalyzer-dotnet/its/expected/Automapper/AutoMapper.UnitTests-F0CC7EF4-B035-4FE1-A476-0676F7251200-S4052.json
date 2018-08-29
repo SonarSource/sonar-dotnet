@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4052",
+"message":  "Refactor this type not to derive from an outdated type 'System.Collections.CollectionBase'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  203,
+"startColumn":  22,
+"endLine":  203,
+"endColumn":  34
+}
+}
+}
+]
+}

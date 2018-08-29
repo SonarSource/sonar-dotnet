@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'SourceMember'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\SourceToDestinationNameMapperAttributesMember.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  16,
+"endLine":  23,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ConditionParameters'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\IPathConfigurationExpression.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  19,
+"endLine":  31,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'LockingConcurrentDictionary'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\LockingConcurrentDictionary.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  21,
+"endLine":  7,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'MapperFuncs'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  452,
+"startColumn":  25,
+"endLine":  452,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ValidationContext'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  499,
+"startColumn":  19,
+"endLine":  499,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'PropertyPath'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  558,
+"startColumn":  23,
+"endLine":  558,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'QueryExpressions'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  571,
+"startColumn":  19,
+"endLine":  571,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'DestinationMemberName'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeDetails.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  23,
+"endLine":  80,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ValueTransformerConfiguration'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ValueTransformerConfiguration.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  19,
+"endLine":  7,
+"endColumn":  48
+}
+}
+}
+]
+}

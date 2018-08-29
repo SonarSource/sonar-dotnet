@@ -1,0 +1,1317 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BasicFlattening.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  44,
+"endLine":  195,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AfterMapNestedObjects.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  54,
+"endLine":  38,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\BaseMapWithIncludesAndUnincludedMappings.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  58,
+"endLine":  88,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\BaseMapWithIncludesAndUnincludedMappings.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  85,
+"endLine":  88,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\BaseMapWithIncludesAndUnincludedMappings.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  80,
+"endLine":  102,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\BaseMapWithIncludesAndUnincludedMappings.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  88,
+"endLine":  117,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\BaseMapWithIncludesAndUnincludedMappings.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  115,
+"endLine":  117,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CannotConvertEnumToNullable.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  46,
+"endLine":  29,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CannotMapICollectionToAggregateSumDestination.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  41,
+"endLine":  42,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CannotProjectIEnumerableToAggregateDestinations.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  41,
+"endLine":  29,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CollectionWhere.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  54,
+"endLine":  12,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CollectionWhere.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  36,
+"endLine":  35,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CollectionWhere.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  43,
+"endLine":  40,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CollectionWhere.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  45,
+"endLine":  43,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConventionCreateMapsWithCircularReference.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  32,
+"endLine":  33,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConventionCreateMapsWithCircularReference.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  50,
+"endLine":  37,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DeepInheritanceIssue.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  40,
+"endLine":  25,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DeepInheritanceIssue.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  40,
+"endLine":  26,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DeepInheritanceIssue.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  52,
+"endLine":  28,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DeepInheritanceIssue.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  52,
+"endLine":  29,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DestinationValueInitializedByCtorBug.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  38,
+"endLine":  18,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DestinationValueInitializedByCtorBug.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  43,
+"endLine":  54,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MappingInheritance.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  42,
+"endLine":  78,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultiThreadingIssues.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  39,
+"endLine":  104,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultiThreadingIssues.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  39,
+"endLine":  112,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultiThreadingIssues.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  39,
+"endLine":  121,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableConverterBug.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  47,
+"endLine":  27,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableConverterBug.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  38,
+"endLine":  44,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableConverterBug.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  42,
+"endLine":  54,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableEnumToNullableValueType.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  50,
+"endLine":  34,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullSubstituteInnerClass.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  59,
+"endLine":  43,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ParentChildResolversBug.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  40,
+"endLine":  94,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectCollectionsBug.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  39,
+"endLine":  58,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectCollectionsBug.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  39,
+"endLine":  59,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SubclassMappings.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  36,
+"endLine":  31,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  54,
+"endLine":  44,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  53,
+"endLine":  48,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  54,
+"endLine":  99,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  53,
+"endLine":  103,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  54,
+"endLine":  122,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  53,
+"endLine":  126,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1242,
+"startColumn":  54,
+"endLine":  1242,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  43,
+"endLine":  229,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  56,
+"endLine":  248,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  46,
+"endLine":  130,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  56,
+"endLine":  153,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  56,
+"endLine":  154,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  56,
+"endLine":  155,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  275,
+"startColumn":  43,
+"endLine":  275,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  276,
+"startColumn":  43,
+"endLine":  276,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForPath.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  46,
+"endLine":  63,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IMappingExpression\NonGenericConstructorTests.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  27,
+"endLine":  45,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IMappingExpression\NonGenericProjectEnumTest.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  49,
+"endLine":  26,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IMappingExpression\NonGenericProjectEnumTest.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  49,
+"endLine":  75,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\NameValueCollectionMapperTests.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  58,
+"endLine":  77,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  57,
+"endLine":  18,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  41,
+"endLine":  20,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  47,
+"endLine":  21,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  45,
+"endLine":  22,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  49,
+"endLine":  23,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  46,
+"endLine":  42,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  46,
+"endLine":  69,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  46,
+"endLine":  89,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  46,
+"endLine":  110,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  46,
+"endLine":  131,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ShouldSupportOnlyDestinationTypeBeingDerived.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  34,
+"endLine":  80,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ShouldSupportOnlyDestinationTypeBeingDerived.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  62,
+"endLine":  80,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ShouldSupportOnlyDestinationTypeBeingDerived.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  34,
+"endLine":  129,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ShouldSupportOnlyDestinationTypeBeingDerived.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  62,
+"endLine":  129,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberNameReplacers.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  36,
+"endLine":  36,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1126,
+"startColumn":  50,
+"endLine":  1126,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1128,
+"startColumn":  88,
+"endLine":  1128,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1134,
+"startColumn":  88,
+"endLine":  1134,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ConstructorTests.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  27,
+"endLine":  43,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\InheritedMaps.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  31,
+"endLine":  42,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\MembersToExpand_ExpressionArray.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  23,
+"endLine":  39,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\MembersToExpand_ExpressionArray.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  119,
+"endLine":  39,
+"endColumn":  121
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NestedExpressionsMapFromTests.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  51,
+"endLine":  29,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NestedExpressionsMapFromTests.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  38,
+"endLine":  31,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NestedExpressionsMapFromTests.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  38,
+"endLine":  32,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NonGenericQueryableTests.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  32,
+"endLine":  26,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NonGenericQueryableTests.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  26,
+"endLine":  27,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NonGenericQueryableTests.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  63,
+"endLine":  27,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NonGenericQueryableTests.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  97,
+"endLine":  27,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NonGenericQueryableTests.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  26,
+"endLine":  28,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NonGenericQueryableTests.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  63,
+"endLine":  28,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NonGenericQueryableTests.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  97,
+"endLine":  28,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ParameterizedQueriesTests.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  39,
+"endLine":  176,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectEnumerableToArrayTest.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  32,
+"endLine":  29,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectEnumerableToArrayTest.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  26,
+"endLine":  30,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectEnumerableToArrayTest.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  63,
+"endLine":  30,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectEnumerableToArrayTest.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  97,
+"endLine":  30,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectEnumerableToArrayTest.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  26,
+"endLine":  31,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectEnumerableToArrayTest.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  63,
+"endLine":  31,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectEnumerableToArrayTest.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  97,
+"endLine":  31,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectEnumTest.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  49,
+"endLine":  26,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectionTests.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  44,
+"endLine":  84,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectionTests.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  50,
+"endLine":  97,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectionTests.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  55,
+"endLine":  113,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Regression.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  55,
+"endLine":  116,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  366,
+"startColumn":  41,
+"endLine":  366,
+"endColumn":  43
+}
+}
+}
+]
+}

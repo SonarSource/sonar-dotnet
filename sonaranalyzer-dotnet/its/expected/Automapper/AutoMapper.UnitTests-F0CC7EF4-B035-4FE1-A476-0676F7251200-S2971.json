@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S2971",
+"message":  "Drop this useless call to 'ToArray' or replace it by 'AsEnumerable' if you are using LINQ to Entities.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultiThreadingIssues.cs",
+"region":  {
+"startLine":  789,
+"startColumn":  18,
+"endLine":  789,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop this useless call to 'ToArray' or replace it by 'AsEnumerable' if you are using LINQ to Entities.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultiThreadingIssues.cs",
+"region":  {
+"startLine":  1320,
+"startColumn":  18,
+"endLine":  1320,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  80,
+"endLine":  40,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  86,
+"endLine":  46,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  82,
+"endLine":  52,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  84,
+"endLine":  58,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  80,
+"endLine":  73,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  86,
+"endLine":  79,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  84,
+"endLine":  90,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectionTests.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  83,
+"endLine":  16,
+"endColumn":  88
+}
+}
+}
+]
+}

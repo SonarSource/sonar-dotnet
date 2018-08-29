@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\BenchEngine.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  31,
+"endLine":  31,
+"endColumn":  66
+}
+}
+}
+]
+}

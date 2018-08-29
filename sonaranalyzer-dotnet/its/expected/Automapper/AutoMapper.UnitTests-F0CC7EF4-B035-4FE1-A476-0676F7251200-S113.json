@@ -1,0 +1,2266 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ArraysAndLists.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  785,
+"startColumn":  1,
+"endLine":  785,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AssemblyScanning.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\AssemblyScanning.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  1,
+"endLine":  67,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AssertionExtensions.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\AssertionExtensions.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AutoMapperTester.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\AutoMapperTester.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  1,
+"endLine":  41,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BasicFlattening.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BasicFlattening.cs",
+"region":  {
+"startLine":  209,
+"startColumn":  1,
+"endLine":  209,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BidirectionalRelationships.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  727,
+"startColumn":  1,
+"endLine":  727,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BidirectionalRelationshipsWithoutPR.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  529,
+"startColumn":  1,
+"endLine":  529,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AddingConfigurationForNonMatchingDestinationMemberBug.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AddingConfigurationForNonMatchingDestinationMemberBug.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  1,
+"endLine":  34,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AfterMapNestedObjects.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AfterMapNestedObjects.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  1,
+"endLine":  48,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AllowNullCollectionsAssignableArray.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AllowNullCollectionsAssignableArray.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  1,
+"endLine":  42,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AllowNullDestinationValuesBugs.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AllowNullDestinationValuesBugs.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  1,
+"endLine":  50,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AssertConfigurationIsValidNullables.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AssertConfigurationIsValidNullables.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  1,
+"endLine":  23,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AutoMapperInheritanceProblemDemo.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AutoMapperInheritanceProblemDemo.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  1,
+"endLine":  107,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BaseMapWithIncludesAndUnincludedMappings.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\BaseMapWithIncludesAndUnincludedMappings.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  1,
+"endLine":  122,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CaseSensitivityBug.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CaseSensitivityBug.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  1,
+"endLine":  28,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CollectionBaseClassGetConvention.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CollectionBaseClassGetConvention.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  1,
+"endLine":  48,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CollectionsNullability.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CollectionsNullability.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  1,
+"endLine":  40,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CollectionWhere.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CollectionWhere.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  1,
+"endLine":  54,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ConstructorParameterNamedType.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConstructorParameterNamedType.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  1,
+"endLine":  30,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ConstructUsingReturnsNull.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConstructUsingReturnsNull.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  1,
+"endLine":  30,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ContextValuesIncorrect.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ContextValuesIncorrect.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  1,
+"endLine":  58,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ConventionCreateMapsWithCircularReference.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConventionCreateMapsWithCircularReference.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  1,
+"endLine":  95,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ConvertMapperThreading.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConvertMapperThreading.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  1,
+"endLine":  47,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CreateMapExpressionWithIgnoredPropertyBug.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CreateMapExpressionWithIgnoredPropertyBug.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  1,
+"endLine":  34,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CustomConverters.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CustomConverters.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  1,
+"endLine":  149,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DeepCloningBug.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DeepCloningBug.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  1,
+"endLine":  46,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DeepInheritanceIssue.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DeepInheritanceIssue.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  1,
+"endLine":  80,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DestinationCtorCalledTwice.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DestinationCtorCalledTwice.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  1,
+"endLine":  50,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DuplicateExtensionMethods.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateExtensionMethods.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  1,
+"endLine":  42,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DuplicateValuesBug.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateValuesBug.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  1,
+"endLine":  74,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DuplicateValuesBugWithoutPR.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateValuesBugWithoutPR.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  1,
+"endLine":  72,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DynamicMapArrays.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DynamicMapArrays.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  1,
+"endLine":  39,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'EmptyNullSubstituteBug.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\EmptyNullSubstituteBug.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  1,
+"endLine":  56,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'EnumMatchingOnValue.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\EnumMatchingOnValue.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  1,
+"endLine":  53,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ExistingArrays.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ExistingArrays.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  1,
+"endLine":  63,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ForAllMembersAndDoNotUseDestinationValue.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ForAllMembersAndDoNotUseDestinationValue.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  1,
+"endLine":  40,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'GuidTryExpression.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\GuidTryExpression.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  1,
+"endLine":  41,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IgnoreAll.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\IgnoreAll.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  1,
+"endLine":  74,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IncludeBaseInheritance.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\IncludeBaseInheritance.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  1,
+"endLine":  74,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IncludeInheritance.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\IncludeInheritance.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  1,
+"endLine":  74,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'InitializeNRE.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InitializeNRE.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  1,
+"endLine":  64,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'InterfaceMultipleInheritance.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  222,
+"startColumn":  1,
+"endLine":  222,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'InterfaceSelfMappingBug.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceSelfMappingBug.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  1,
+"endLine":  47,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'InternalProperties.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InternalProperties.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IntToNullableDecimal.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\IntToNullableDecimal.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  1,
+"endLine":  40,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'JsonNet.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  194,
+"startColumn":  1,
+"endLine":  194,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'LazyCollectionMapping.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\LazyCollectionMapping.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  1,
+"endLine":  73,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ListSourceMapperBug.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ListSourceMapperBug.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  1,
+"endLine":  46,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MapAtRuntime.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\MapAtRuntime.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  1,
+"endLine":  119,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MapAtRuntimeWithCollections.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\MapAtRuntimeWithCollections.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  1,
+"endLine":  141,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MapExpandoObjectProperty.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapExpandoObjectProperty.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  1,
+"endLine":  30,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MapFromClosureBug.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapFromClosureBug.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  1,
+"endLine":  70,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MapOverloadsWithDynamic.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapOverloadsWithDynamic.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  1,
+"endLine":  55,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MappingToAReadOnlyCollection.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MappingToAReadOnlyCollection.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  1,
+"endLine":  55,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MemberNamedTypeBug.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MemberNamedTypeBug.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  1,
+"endLine":  63,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MissingMapping.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MissingMapping.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  1,
+"endLine":  29,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MultidimensionalArrays.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultidimensionalArrays.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  1,
+"endLine":  85,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MultipleInterfaceInheritance.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultipleInterfaceInheritance.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  1,
+"endLine":  54,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MultipleTypeConverterInterfaces.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultipleTypeConverterInterfaces.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  1,
+"endLine":  74,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MultiThreadingIssues.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultiThreadingIssues.cs",
+"region":  {
+"startLine":  1326,
+"startColumn":  1,
+"endLine":  1326,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NamingConventions.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NamingConventions.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  1,
+"endLine":  70,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NestedMappingProjectionsExplicitExpanding.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NestedMappingProjectionsExplicitExpanding.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  1,
+"endLine":  63,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NullableConverterBug.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableConverterBug.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  1,
+"endLine":  72,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NullableDateTime.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableDateTime.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  1,
+"endLine":  104,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NullableEnums.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableEnums.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  1,
+"endLine":  26,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NullableEnumToNullableValueType.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableEnumToNullableValueType.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  1,
+"endLine":  42,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NullableIntToNullableDecimal.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableIntToNullableDecimal.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  1,
+"endLine":  73,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NullableIntToNullableEnum.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableIntToNullableEnum.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  1,
+"endLine":  45,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NullablePropertiesBug.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullablePropertiesBug.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  1,
+"endLine":  22,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NullableResolveUsing.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableResolveUsing.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  1,
+"endLine":  36,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NullableUntypedMapFrom.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableUntypedMapFrom.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NullArrayBug.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullArrayBug.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  1,
+"endLine":  49,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NullSubstituteInnerClass.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullSubstituteInnerClass.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  1,
+"endLine":  56,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NullSubstituteType.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullSubstituteType.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  1,
+"endLine":  36,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NullToString.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullToString.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  1,
+"endLine":  39,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ObjectEnumToObjectEnum.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ObjectEnumToObjectEnum.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  1,
+"endLine":  51,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'OneSourceWithMultipleDestinationsAndPreserveReferences.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\OneSourceWithMultipleDestinationsAndPreserveReferences.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  1,
+"endLine":  43,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'OneSourceWithMultipleDestinationsWithoutPR.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\OneSourceWithMultipleDestinationsWithoutPR.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  1,
+"endLine":  41,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ParentChildResolversBug.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ParentChildResolversBug.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  1,
+"endLine":  109,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PreserveReferencesSameDestination.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\PreserveReferencesSameDestination.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  1,
+"endLine":  92,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ProjectCollectionsBug.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectCollectionsBug.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  1,
+"endLine":  70,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ProjectConstructorParameters.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectConstructorParameters.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  1,
+"endLine":  57,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ProjectUsingTheQueriedEntity.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectUsingTheQueriedEntity.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PropertyNamedType.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\PropertyNamedType.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  1,
+"endLine":  26,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ReadOnlyFieldMappingBug.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ReadOnlyFieldMappingBug.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  1,
+"endLine":  39,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RecognizeIxesBug.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\RecognizeIxesBug.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  1,
+"endLine":  63,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RemovePrefixes.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\RemovePrefixes.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  1,
+"endLine":  31,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ReportMissingInclude.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ReportMissingInclude.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  1,
+"endLine":  82,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ReverseMapReplaceMemberName.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ReverseMapReplaceMemberName.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  1,
+"endLine":  101,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SamePropertyNameOnParentAndChildClasses.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SamePropertyNameOnParentAndChildClasses.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  1,
+"endLine":  67,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SelectiveConfigurationValidation.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SelectiveConfigurationValidation.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  1,
+"endLine":  50,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SetterOnlyBug.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SetterOnlyBug.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  1,
+"endLine":  50,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'StructMapping.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\StructMapping.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  1,
+"endLine":  40,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SubclassMappings.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SubclassMappings.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  1,
+"endLine":  41,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TargetISet.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\TargetISet.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  1,
+"endLine":  39,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'UseDestinationValue.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  1,
+"endLine":  195,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'WithoutPreserveReferencesSameDestination.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\WithoutPreserveReferencesSameDestination.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  1,
+"endLine":  92,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BuildExecutionPlan.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BuildExecutionPlan.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  1,
+"endLine":  66,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ConditionalMapping.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConditionalMapping.cs",
+"region":  {
+"startLine":  300,
+"startColumn":  1,
+"endLine":  300,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ConfigCompilation.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigCompilation.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  1,
+"endLine":  27,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ConfigurationRules.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationRules.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  1,
+"endLine":  95,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ContextItems.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ContextItems.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  1,
+"endLine":  97,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ConvensionTest.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  182,
+"startColumn":  1,
+"endLine":  182,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ConversionOperators.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConversionOperators.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  1,
+"endLine":  145,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CustomCollectionTester.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomCollectionTester.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  1,
+"endLine":  25,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CustomMapping.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1757,
+"startColumn":  1,
+"endLine":  1757,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Dictionaries.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  486,
+"startColumn":  1,
+"endLine":  486,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DynamicMapping.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
+"region":  {
+"startLine":  525,
+"startColumn":  1,
+"endLine":  525,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ExplicitMapperCreation.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExplicitMapperCreation.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  1,
+"endLine":  43,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FillingExistingDestination.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\FillingExistingDestination.cs",
+"region":  {
+"startLine":  247,
+"startColumn":  1,
+"endLine":  247,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ForAllMaps.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForAllMaps.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  1,
+"endLine":  71,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ForAllMembers.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForAllMembers.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  1,
+"endLine":  54,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ForPath.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForPath.cs",
+"region":  {
+"startLine":  383,
+"startColumn":  1,
+"endLine":  383,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IgnoreAllTests.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IgnoreAllTests.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  1,
+"endLine":  221,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ForCtorParam.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IMappingExpression\ForCtorParam.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  1,
+"endLine":  124,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NonGenericConstructorTests.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IMappingExpression\NonGenericConstructorTests.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  1,
+"endLine":  60,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NonGenericResolveUsing.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IMappingExpression\NonGenericResolveUsing.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NonGenericReverseMapping.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IMappingExpression\NonGenericReverseMapping.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  1,
+"endLine":  120,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Indexers.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Indexers.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  1,
+"endLine":  58,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DelegateFactoryTests.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  1,
+"endLine":  132,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PrimitiveExtensionsTester.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\PrimitiveExtensionsTester.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  1,
+"endLine":  57,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Internationalization.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internationalization.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  1,
+"endLine":  45,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ConvertMapperTests.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ConvertMapperTests.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  1,
+"endLine":  55,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CustomMapperTests.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\CustomMapperTests.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  1,
+"endLine":  180,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DynamicMapperTests.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\DynamicMapperTests.cs",
+"region":  {
+"startLine":  215,
+"startColumn":  1,
+"endLine":  215,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ReadOnlyCollectionMapperTests.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  1,
+"endLine":  178,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'StringDictionaryMapperTests.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  257,
+"startColumn":  1,
+"endLine":  257,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MappingExceptions.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingExceptions.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  1,
+"endLine":  47,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ApplyIncludeBaseRecursively.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ApplyIncludeBaseRecursively.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  1,
+"endLine":  52,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IncludeBaseBug.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludeBaseBug.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  1,
+"endLine":  50,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IncludeBaseShouldNotCreateMaps.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludeBaseShouldNotCreateMaps.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  1,
+"endLine":  33,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IncludeBaseShouldValidateTypes.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludeBaseShouldValidateTypes.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  1,
+"endLine":  21,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IncludeBaseWithNonGenericUsage.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludeBaseWithNonGenericUsage.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  1,
+"endLine":  78,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'InheritanceWithoutIncludeShouldWork.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\InheritanceWithoutIncludeShouldWork.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MapToBaseClass.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\MapToBaseClass.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  1,
+"endLine":  31,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'OpenGenericsWithInheritance.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\OpenGenericsWithInheritance.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  1,
+"endLine":  230,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PreserveReferencesWithInheritance.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\PreserveReferencesWithInheritance.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  1,
+"endLine":  105,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ReverseMapWithInclude.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ReverseMapWithInclude.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  1,
+"endLine":  75,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ShouldInheritBeforeAndAfterMap.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ShouldInheritBeforeAndAfterMap.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  1,
+"endLine":  144,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SourceValidationWithInheritance.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\SourceValidationWithInheritance.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  1,
+"endLine":  123,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MappingOrder.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingOrder.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  1,
+"endLine":  126,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MapToAttributeTest.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MapToAttributeTest.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  1,
+"endLine":  46,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MaxExecutionPlanDepth.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MaxExecutionPlanDepth.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  1,
+"endLine":  109,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NestedContainers.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NestedContainers.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  1,
+"endLine":  140,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NullBehavior.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  905,
+"startColumn":  1,
+"endLine":  905,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ObjectSubstitution.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ObjectSubstitution.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  1,
+"endLine":  65,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'OpenGenerics.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\OpenGenerics.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  1,
+"endLine":  143,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ConstructorTests.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ConstructorTests.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  1,
+"endLine":  58,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ExplicitExpansion.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ExplicitExpansion.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  1,
+"endLine":  78,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ExplicitValues.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ExplicitValues.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  1,
+"endLine":  42,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'GenericsTests.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\GenericsTests.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  1,
+"endLine":  46,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'InheritedMaps.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\InheritedMaps.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  1,
+"endLine":  58,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MapFromTest.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\MapFromTest.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  1,
+"endLine":  93,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NestedAndArraysTests.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NestedAndArraysTests.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  1,
+"endLine":  114,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NestedExpressionsMapFromTests.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NestedExpressionsMapFromTests.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  1,
+"endLine":  59,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NonGenericQueryableTests.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NonGenericQueryableTests.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  1,
+"endLine":  57,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NullableItemsTests.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NullableItemsTests.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  1,
+"endLine":  112,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NullSubstitutes.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NullSubstitutes.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  1,
+"endLine":  78,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ParameterizedQueriesTests.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ParameterizedQueriesTests.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  1,
+"endLine":  205,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PrimitiveArraysTest.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\PrimitiveArraysTest.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  1,
+"endLine":  63,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ToStringTests.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ToStringTests.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  1,
+"endLine":  85,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Regression.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Regression.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  1,
+"endLine":  153,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ReverseMapping.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapping.cs",
+"region":  {
+"startLine":  598,
+"startColumn":  1,
+"endLine":  598,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SeparateConfiguration.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\SeparateConfiguration.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  1,
+"endLine":  39,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'StaticMapping.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\StaticMapping.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  1,
+"endLine":  139,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TesterExtensions.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TesterExtensions.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  1,
+"endLine":  15,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MapperTests.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Tests\MapperTests.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  1,
+"endLine":  26,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TypeInfoSpecs.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Tests\TypeInfoSpecs.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  1,
+"endLine":  7,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TypeConverters.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  458,
+"startColumn":  1,
+"endLine":  458,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TypeExtensionsTests.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeExtensionsTests.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  1,
+"endLine":  30,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'UsingEngineInsideMap.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\UsingEngineInsideMap.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  1,
+"endLine":  49,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ValueTransformers.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ValueTransformers.cs",
+"region":  {
+"startLine":  247,
+"startColumn":  1,
+"endLine":  247,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ValueTypes.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ValueTypes.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  1,
+"endLine":  162,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'When_using_ConfigurationExpression_Advanced.cs'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\When_using_ConfigurationExpression_Advanced.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  1,
+"endLine":  36,
+"endColumn":  2
+}
+}
+}
+]
+}

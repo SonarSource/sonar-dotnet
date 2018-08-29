@@ -1,0 +1,251 @@
+{
+"issues":  [
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateValuesBug.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  13,
+"endLine":  31,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateValuesBugWithoutPR.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  13,
+"endLine":  31,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  13,
+"endLine":  81,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity12.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  9,
+"endLine":  16,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity20.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  9,
+"endLine":  19,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity26.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  9,
+"endLine":  14,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity5.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  9,
+"endLine":  16,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity8.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  9,
+"endLine":  18,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO11.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  9,
+"endLine":  15,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO12.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  9,
+"endLine":  16,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO15.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  9,
+"endLine":  13,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO17.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  9,
+"endLine":  17,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO20.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  9,
+"endLine":  20,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO22.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  9,
+"endLine":  15,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO3.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  9,
+"endLine":  15,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO5.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  9,
+"endLine":  16,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO6.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  9,
+"endLine":  14,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO15.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  9,
+"endLine":  13,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1356,
+"startColumn":  13,
+"endLine":  1358,
+"endColumn":  14
+}
+}
+}
+]
+}

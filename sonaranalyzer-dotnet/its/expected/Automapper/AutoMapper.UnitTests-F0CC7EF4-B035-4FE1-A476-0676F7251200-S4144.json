@@ -1,0 +1,76 @@
+{
+"issues":  [
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'ShouldMapEnumByMatchingNames'.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  194,
+"startColumn":  21,
+"endLine":  194,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  21,
+"endLine":  178,
+"endColumn":  49
+}
+}
+]
+},
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'include_should_allow_automapper_to_select_more_specific_included_type_with_one_parameter'.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludedBaseMappingShouldInheritBaseMappings.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  21,
+"endLine":  261,
+"endColumn":  90
+}
+},
+{
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludedBaseMappingShouldInheritBaseMappings.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  21,
+"endLine":  240,
+"endColumn":  109
+}
+}
+]
+},
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'include_should_allow_automapper_to_select_more_specific_included_type_with_one_parameter'.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludedMappingShouldInheritBaseMappings.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  21,
+"endLine":  225,
+"endColumn":  90
+}
+},
+{
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludedMappingShouldInheritBaseMappings.cs",
+"region":  {
+"startLine":  203,
+"startColumn":  21,
+"endLine":  203,
+"endColumn":  109
+}
+}
+]
+}
+]
+}

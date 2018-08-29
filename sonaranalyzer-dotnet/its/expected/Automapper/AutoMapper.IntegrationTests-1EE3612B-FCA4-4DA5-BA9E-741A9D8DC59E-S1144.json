@@ -1,0 +1,329 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Products'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  51,
+"endLine":  106,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Products'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  51,
+"endLine":  200,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Products'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  313,
+"startColumn":  51,
+"endLine":  313,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'ProductArticles'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  314,
+"startColumn":  65,
+"endLine":  314,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Products'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  418,
+"startColumn":  51,
+"endLine":  418,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'ProductArticles'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  419,
+"startColumn":  65,
+"endLine":  419,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Products'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  539,
+"startColumn":  51,
+"endLine":  539,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'ProductArticles'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  540,
+"startColumn":  65,
+"endLine":  540,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Cables'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  602,
+"startColumn":  47,
+"endLine":  602,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'CableEnds'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  603,
+"startColumn":  13,
+"endLine":  603,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'DataHalls'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\CustomMapFrom\MapObjectPropertyFromSubQuery.cs",
+"region":  {
+"startLine":  604,
+"startColumn":  53,
+"endLine":  604,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Categories'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandCollections.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  13,
+"endLine":  59,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'TrainingCourses'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandCollections.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  65,
+"endLine":  60,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'TrainingContents'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandCollections.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  67,
+"endLine":  61,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Categories'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandCollectionsWithStrings.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  13,
+"endLine":  59,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'TrainingCourses'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandCollectionsWithStrings.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  65,
+"endLine":  60,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'TrainingContents'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandCollectionsWithStrings.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  67,
+"endLine":  61,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'TrainingCourses'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProxyTests.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  65,
+"endLine":  47,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'TrainingContents'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProxyTests.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  67,
+"endLine":  48,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Entities'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\QueryableInterfaceInheritanceIssue.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  66,
+"endLine":  48,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'TrainingCourses'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\MaxDepth\MaxDepthWithCollections.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  65,
+"endLine":  58,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'TrainingContents'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\MaxDepth\MaxDepthWithCollections.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  67,
+"endLine":  59,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Entities'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Parameterization\ParameterizedQueries.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  50,
+"endLine":  36,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Source1'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ProjectionOrder\ProjectionOrderTest.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  50,
+"endLine":  53,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Source2'.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ProjectionOrder\ProjectionOrderTest.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  50,
+"endLine":  55,
+"endColumn":  54
+}
+}
+}
+]
+}

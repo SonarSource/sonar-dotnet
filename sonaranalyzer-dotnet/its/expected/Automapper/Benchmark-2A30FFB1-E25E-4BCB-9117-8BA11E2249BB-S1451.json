@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\BenchEngine.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\HiPerfTimer.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\IObjectToObjectMapper.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\Program.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+}
+]
+}

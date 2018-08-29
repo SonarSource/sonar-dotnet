@@ -1,0 +1,498 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\BenchEngine.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  32,
+"endLine":  24,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  91,
+"endLine":  28,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '234.7' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  26,
+"endLine":  31,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  80,
+"endLine":  34,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  77,
+"endLine":  35,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  80,
+"endLine":  39,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  77,
+"endLine":  40,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  91,
+"endLine":  98,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '234.7' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  26,
+"endLine":  101,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  80,
+"endLine":  104,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  77,
+"endLine":  105,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  80,
+"endLine":  109,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  77,
+"endLine":  110,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '12' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  21,
+"endLine":  212,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '123123' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  21,
+"endLine":  213,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  214,
+"startColumn":  23,
+"endLine":  214,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2312112' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  23,
+"endLine":  216,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '123' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  56,
+"endLine":  220,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '321' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  71,
+"endLine":  220,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '12345' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  56,
+"endLine":  221,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '54321' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  73,
+"endLine":  221,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '12345' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  222,
+"startColumn":  56,
+"endLine":  222,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '54321' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  222,
+"startColumn":  73,
+"endLine":  222,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  33,
+"endLine":  230,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  36,
+"endLine":  230,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  39,
+"endLine":  230,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  42,
+"endLine":  230,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  28,
+"endLine":  231,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  31,
+"endLine":  231,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '9' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  34,
+"endLine":  231,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  357,
+"startColumn":  44,
+"endLine":  357,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  374,
+"startColumn":  44,
+"endLine":  374,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2007' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  413,
+"startColumn":  41,
+"endLine":  413,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  413,
+"startColumn":  47,
+"endLine":  413,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  413,
+"startColumn":  50,
+"endLine":  413,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2007' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  452,
+"startColumn":  41,
+"endLine":  452,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  452,
+"startColumn":  47,
+"endLine":  452,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  452,
+"startColumn":  50,
+"endLine":  452,
+"endColumn":  51
+}
+}
+}
+]
+}

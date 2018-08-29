@@ -1,0 +1,407 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ParentModel'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  23,
+"endLine":  39,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ChildrenStructModel'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  23,
+"endLine":  52,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ChildModel'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  23,
+"endLine":  57,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ParentDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  23,
+"endLine":  63,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ChildrenStructDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  23,
+"endLine":  69,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ChildDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  23,
+"endLine":  74,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Source'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\StructMapping.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  16,
+"endLine":  11,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'MyCollection'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  23,
+"endLine":  162,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Foo'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  341,
+"startColumn":  23,
+"endLine":  341,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Bar'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  342,
+"startColumn":  23,
+"endLine":  342,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'FooDTO'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  347,
+"startColumn":  23,
+"endLine":  347,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'BarDTO'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  348,
+"startColumn":  23,
+"endLine":  348,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Source'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  206,
+"startColumn":  23,
+"endLine":  206,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Destination'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  211,
+"startColumn":  23,
+"endLine":  211,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Source'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  247,
+"startColumn":  23,
+"endLine":  247,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Destination'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  252,
+"startColumn":  23,
+"endLine":  252,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'GeoCoordinate'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  555,
+"startColumn":  23,
+"endLine":  555,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Destination'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExtensionMethods.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  23,
+"endLine":  64,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Destination'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExtensionMethods.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  23,
+"endLine":  111,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Order'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForPath.cs",
+"region":  {
+"startLine":  288,
+"startColumn":  23,
+"endLine":  288,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'CustomerHolder'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForPath.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  23,
+"endLine":  293,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Customer'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForPath.cs",
+"region":  {
+"startLine":  298,
+"startColumn":  23,
+"endLine":  298,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'OrderDto'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForPath.cs",
+"region":  {
+"startLine":  304,
+"startColumn":  23,
+"endLine":  304,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ValueSource'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  23,
+"endLine":  114,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Destination'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\DynamicMapperTests.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  16,
+"endLine":  99,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Destination'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  16,
+"endLine":  59,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Source'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ValueTypes.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  23,
+"endLine":  9,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Destination'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ValueTypes.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  23,
+"endLine":  19,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Destination'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ValueTypes.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  23,
+"endLine":  55,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'matrixDigiInStruct1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ValueTypes.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  23,
+"endLine":  87,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Destination'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ValueTypes.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  23,
+"endLine":  132,
+"endColumn":  34
+}
+}
+}
+]
+}

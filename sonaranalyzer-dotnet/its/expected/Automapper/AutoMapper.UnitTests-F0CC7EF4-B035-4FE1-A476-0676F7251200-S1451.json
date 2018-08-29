@@ -1,0 +1,4593 @@
+{
+"issues":  [
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ReflectionExtensions.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\AssemblyScanning.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\AssertionExtensions.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\AutoMapperSpecBase.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\AutoMapperTester.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BasicFlattening.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BeforeAfterMapping.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AddingConfigurationForNonMatchingDestinationMemberBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AfterMapNestedObjects.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AllowNullCollectionsAssignableArray.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AllowNullDestinationValuesBugs.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AssertConfigurationIsValidNullables.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AssignableCollectionBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AutoMapperInheritanceProblemDemo.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\BaseMapWithIncludesAndUnincludedMappings.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CannotConvertEnumToNullable.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CannotMapICollectionToAggregateSumDestination.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CannotProjectIEnumerableToAggregateDestinations.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CannotProjectStringToNullableEnum.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CaseSensitivityBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CollectionBaseClassGetConvention.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CollectionMapperMapsISetIncorrectly.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CollectionsNullability.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CollectionWhere.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConditionBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConstructorParameterNamedType.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConstructUsingReturnsNull.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ContextValuesIncorrect.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConventionCreateMapsWithCircularReference.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConvertMapperThreading.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CreateMapExpressionWithIgnoredPropertyBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CustomConverters.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CustomIEnumerableBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DeepCloningBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DeepInheritanceIssue.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DestinationCtorCalledTwice.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DestinationValueInitializedByCtorBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateExtensionMethods.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateValuesBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateValuesBugWithoutPR.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DynamicMapArrays.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\EFCollections.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\EmptyNullSubstituteBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\EnumConditionsBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\EnumMatchingOnValue.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ExistingArrays.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ForAllMembersAndDoNotUseDestinationValue.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\GenericTypeConverter.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\GuidTryExpression.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\IgnoreAll.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\IncludeBaseInheritance.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\IncludeInheritance.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InitializeNRE.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceSelfMappingBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InternalProperties.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\IntToNullableDecimal.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\LazyCollectionMapping.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ListSourceMapperBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\BaseEntity.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\BaseEntityDTO.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity1.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity10.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity11.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity12.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity13.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity14.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity15.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity16.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity17.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity18.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity19.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity2.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity20.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity21.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity22.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity23.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity24.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity25.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity26.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity3.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity4.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity5.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity6.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity7.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity8.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\Entity9.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO1.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO10.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO11.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO12.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO13.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO14.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO15.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO16.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO17.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO18.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO19.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO2.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO20.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO21.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO22.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO23.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO24.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO25.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO26.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO3.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO4.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO5.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO6.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO7.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO8.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO9.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\MapAtRuntime.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\BaseEntity.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\BaseEntityDTO.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity1.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity10.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity11.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity12.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity13.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity14.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity15.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity16.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity17.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity18.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity19.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity2.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity20.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity21.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity22.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity23.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity24.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity25.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity26.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity3.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity4.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity5.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity6.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity7.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity8.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity9.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO1.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO10.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO11.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO12.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO13.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO14.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO15.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO16.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO17.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO18.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO19.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO2.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO20.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO21.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO22.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO23.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO24.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO25.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO26.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO3.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO4.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO5.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO6.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO7.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO8.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO9.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\MapAtRuntimeWithCollections.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapExpandoObjectProperty.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapFromClosureBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapOverloadsWithDynamic.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MappingInheritance.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MappingToAReadOnlyCollection.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MemberNamedTypeBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MissingMapping.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultidimensionalArrays.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultipleInterfaceInheritance.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultipleTypeConverterInterfaces.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultiThreadingIssues.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NamingConventions.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NestedMappingProjectionsExplicitExpanding.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NonExistingProperty.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableBytesAndEnums.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableConverterBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableDateTime.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableEnums.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableEnumToNullableValueType.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableIntToNullableDecimal.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableIntToNullableEnum.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullablePropertiesBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableResolveUsing.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableToInvalid.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableUntypedMapFrom.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullArrayBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullSubstituteInnerClass.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullSubstituteType.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullToString.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ObjectEnumToObjectEnum.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ObjectTypeMapFailure.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\OneSourceWithMultipleDestinationsAndPreserveReferences.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\OneSourceWithMultipleDestinationsWithoutPR.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ParentChildResolversBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\PreserveReferencesSameDestination.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectCollectionsBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectConstructorParameters.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectUsingTheQueriedEntity.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\PropertyNamedType.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ReadOnlyCollectionMappingBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ReadOnlyFieldMappingBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\RecognizeDestinationPostfixes.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\RecognizeIxesBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\RemovePrefixes.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\RepeatedMappingConfigurationTest.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ReportMissingInclude.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ReverseMapReplaceMemberName.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SamePropertyNameOnParentAndChildClasses.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SelectiveConfigurationValidation.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SequenceContainsNoElementsTest.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SetterOnlyBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\StructMapping.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SubclassMappings.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\TargetISet.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\TypeMapIncludeBaseTypes.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\WithoutPreserveReferencesSameDestination.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BuildExecutionPlan.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConditionalMapping.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigCompilation.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationRules.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ContextItems.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConversionOperators.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomCollectionTester.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\EnumToNullableEnum.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExplicitMapperCreation.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExtensionMethods.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\FillingExistingDestination.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForAllMaps.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForAllMembers.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForAllOtherMembers.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForPath.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\General.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IgnoreAllPropertiesWithAnInaccessibleSetterTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IgnoreAllTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IMappingExpression\ForCtorParam.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IMappingExpression\NonGenericConstructorTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IMappingExpression\NonGenericProjectEnumTest.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IMappingExpression\NonGenericResolveUsing.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IMappingExpression\NonGenericReverseMapping.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Indexers.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\InterfaceMapping.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\CreateProxyThreading.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\GenerateSimilarType.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\NullConstructorParameter.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\PrimitiveExtensionsTester.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\QueryMapperHelperTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internationalization.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ConvertMapperTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\CustomMapperTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\DynamicMapperTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\NameValueCollectionMapperTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\TypeHelperTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingExceptions.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ApplyIncludeBaseRecursively.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ConventionMappedCollectionShouldMapBaseTypes.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IgnoreShouldBeInherited.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IgnoreShouldBeInheritedIfConventionCannotMap.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludeBaseBug.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludeBaseShouldNotCreateMaps.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludeBaseShouldValidateTypes.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludeBaseWithNonGenericUsage.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludedBaseMappingShouldInheritBaseMappings.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludedMappingShouldInheritBaseMappings.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\InheritanceWithoutIncludeShouldWork.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\MapToBaseClass.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\MultipleInheritedBaseMappingsOfSameTypeFails.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\OpenGenericsWithInheritance.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\OverrideIgnore.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\PreserveReferencesWithInheritance.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\PropertyOnMappingShouldResolveMostSpecificType.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ReverseMapWithInclude.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ShouldInheritBeforeAndAfterMap.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ShouldSupportOnlyDestinationTypeBeingDerived.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\SourceValidationWithInheritance.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingOrder.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MapToAttributeTest.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MaxDepthTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MaxExecutionPlanDepth.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberNameReplacers.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NestedContainers.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ObjectSubstitution.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\OpenGenerics.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Profiles.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\BindersAndResultConverters.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ConstructorTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ExplicitExpansion.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ExplicitValues.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\GenericsTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\InheritedMaps.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\MapFromTest.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\MembersToExpand_ExpressionArray.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\MoreExplanatoryExceptionTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NestedAndArraysTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NestedExpressionsMapFromTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NonGenericQueryableTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NullableItemsTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NullSubstitutes.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ParameterizedQueriesTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\PrimitiveArraysTest.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectCollectionEnumerableTest.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectCollectionListTest.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectEnumerableToArrayTest.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectEnumTest.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectionTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectTest.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ToStringTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\PropertyMapContexts.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Regression.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapping.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapWithoutPreserveReferences.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapWithPreserveReferences.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\SeparateConfiguration.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\StaticMapping.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TesterExtensions.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Tests\MapperTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Tests\TypeInfoSpecs.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Tests\TypeMapFactorySpecs.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeExtensionsTests.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\UsingEngineInsideMap.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ValueTransformers.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ValueTypes.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\When_using_ConfigurationExpression_Advanced.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+}
+]
+}

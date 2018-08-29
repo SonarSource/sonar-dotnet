@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_allDone'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultiThreadingIssues.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  18,
+"endLine":  14,
+"endColumn":  38
+}
+}
+}
+]
+}

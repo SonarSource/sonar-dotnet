@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S2376",
+"message":  "Provide a getter for 'Property' or replace the property with a 'SetProperty' method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SetterOnlyBug.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  27,
+"endLine":  39,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2376",
+"message":  "Provide a getter for 'Value' or replace the property with a 'SetValue' method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  638,
+"startColumn":  27,
+"endLine":  638,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2376",
+"message":  "Provide a getter for 'Value' or replace the property with a 'SetValue' method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1538,
+"startColumn":  27,
+"endLine":  1538,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2376",
+"message":  "Provide a getter for 'SomeList' or replace the property with a 'SetSomeList' method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1558,
+"startColumn":  26,
+"endLine":  1558,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2376",
+"message":  "Provide a getter for 'SomeValue' or replace the property with a 'SetSomeValue' method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  767,
+"startColumn":  28,
+"endLine":  767,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2376",
+"message":  "Provide a getter for 'Value6' or replace the property with a 'SetValue6' method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeExtensionsTests.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  27,
+"endLine":  21,
+"endColumn":  33
+}
+}
+}
+]
+}

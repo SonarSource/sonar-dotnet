@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S2326",
+"message":  "'T' is not used in the class.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MappingInheritance.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  36,
+"endLine":  84,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2326",
+"message":  "'Z' is not used in the class.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  49,
+"endLine":  70,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2326",
+"message":  "'Z' is not used in the class.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  49,
+"endLine":  163,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2326",
+"message":  "'T' is not used in the class.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ShouldSupportOnlyDestinationTypeBeingDerived.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  22,
+"endLine":  13,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2326",
+"message":  "'T' is not used in the class.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ShouldSupportOnlyDestinationTypeBeingDerived.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  27,
+"endLine":  17,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2326",
+"message":  "'T' is not used in the class.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\OpenGenerics.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  26,
+"endLine":  110,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2326",
+"message":  "'T' is not used in the class.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\OpenGenerics.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  26,
+"endLine":  116,
+"endColumn":  27
+}
+}
+}
+]
+}

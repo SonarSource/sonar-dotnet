@@ -1,0 +1,1304 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  27,
+"endLine":  41,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  27,
+"endLine":  59,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  27,
+"endLine":  65,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  27,
+"endLine":  76,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  27,
+"endLine":  199,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  27,
+"endLine":  212,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  27,
+"endLine":  218,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  27,
+"endLine":  224,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  264,
+"startColumn":  27,
+"endLine":  264,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  277,
+"startColumn":  27,
+"endLine":  277,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  283,
+"startColumn":  27,
+"endLine":  283,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  289,
+"startColumn":  27,
+"endLine":  289,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  474,
+"startColumn":  24,
+"endLine":  474,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  479,
+"startColumn":  24,
+"endLine":  479,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  485,
+"startColumn":  24,
+"endLine":  485,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  491,
+"startColumn":  24,
+"endLine":  491,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  27,
+"endLine":  166,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  27,
+"endLine":  179,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  185,
+"startColumn":  27,
+"endLine":  185,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  27,
+"endLine":  191,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CaseSensitivityBug.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  24,
+"endLine":  20,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'id' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CaseSensitivityBug.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  24,
+"endLine":  25,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'IDCard' to match camel case naming rules, consider using 'IdCard'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateExtensionMethods.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  27,
+"endLine":  22,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'IDCard' to match camel case naming rules, consider using 'IdCard'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateExtensionMethods.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  27,
+"endLine":  32,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ClientIPAddress' to match camel case naming rules, consider using 'ClientIpAddress'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\EmptyNullSubstituteBug.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  27,
+"endLine":  20,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'prop1' to match camel case naming rules, consider using 'Prop1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  24,
+"endLine":  153,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'prop2' to match camel case naming rules, consider using 'Prop2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  24,
+"endLine":  158,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'prop3' to match camel case naming rules, consider using 'Prop3'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  24,
+"endLine":  163,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'prop4' to match camel case naming rules, consider using 'Prop4'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  24,
+"endLine":  168,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'prop1' to match camel case naming rules, consider using 'Prop1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  24,
+"endLine":  173,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'prop2' to match camel case naming rules, consider using 'Prop2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  24,
+"endLine":  178,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'prop3' to match camel case naming rules, consider using 'Prop3'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  24,
+"endLine":  183,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'prop4' to match camel case naming rules, consider using 'Prop4'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  24,
+"endLine":  188,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'doMapping' to match camel case naming rules, consider using 'DoMapping'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultiThreadingIssues.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  21,
+"endLine":  74,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'createSource' to match camel case naming rules, consider using 'CreateSource'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultiThreadingIssues.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  23,
+"endLine":  87,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'cmok' to match camel case naming rules, consider using 'Cmok'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NamingConventions.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  27,
+"endLine":  10,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'cmok' to match camel case naming rules, consider using 'Cmok'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NamingConventions.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  27,
+"endLine":  22,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'field' to match camel case naming rules, consider using 'Field'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ParentChildResolversBug.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  36,
+"endLine":  24,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'field' to match camel case naming rules, consider using 'Field'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ParentChildResolversBug.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  34,
+"endLine":  33,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'fieldCode' to match camel case naming rules, consider using 'FieldCode'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ParentChildResolversBug.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  27,
+"endLine":  42,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'AP1' to match camel case naming rules, consider using 'Ap1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectCollectionsBug.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  24,
+"endLine":  14,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'AP2' to match camel case naming rules, consider using 'Ap2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectCollectionsBug.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  27,
+"endLine":  15,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'BP1' to match camel case naming rules, consider using 'Bp1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectCollectionsBug.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  24,
+"endLine":  24,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'BP2' to match camel case naming rules, consider using 'Bp2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectCollectionsBug.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  35,
+"endLine":  25,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'AP1' to match camel case naming rules, consider using 'Ap1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectCollectionsBug.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  24,
+"endLine":  30,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'AP2' to match camel case naming rules, consider using 'Ap2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectCollectionsBug.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  27,
+"endLine":  31,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'BP1' to match camel case naming rules, consider using 'Bp1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectCollectionsBug.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  24,
+"endLine":  40,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'BP2' to match camel case naming rules, consider using 'Bp2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectCollectionsBug.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  41,
+"endLine":  41,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'AA' to match camel case naming rules, consider using 'Aa'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SamePropertyNameOnParentAndChildClasses.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  27,
+"endLine":  34,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'BUId' to match camel case naming rules, consider using 'BuId'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SamePropertyNameOnParentAndChildClasses.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  24,
+"endLine":  35,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'BU' to match camel case naming rules, consider using 'Bu'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SamePropertyNameOnParentAndChildClasses.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  33,
+"endLine":  36,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'AA' to match camel case naming rules, consider using 'Aa'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SamePropertyNameOnParentAndChildClasses.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  27,
+"endLine":  54,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'BUId' to match camel case naming rules, consider using 'BuId'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SamePropertyNameOnParentAndChildClasses.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  24,
+"endLine":  55,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'BU' to match camel case naming rules, consider using 'Bu'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SamePropertyNameOnParentAndChildClasses.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  31,
+"endLine":  56,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  26,
+"endLine":  12,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  27,
+"endLine":  31,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'SelectedID' to match camel case naming rules, consider using 'SelectedId'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  23,
+"endLine":  41,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  26,
+"endLine":  46,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  27,
+"endLine":  65,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'SelectedID' to match camel case naming rules, consider using 'SelectedId'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  23,
+"endLine":  81,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  26,
+"endLine":  105,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  27,
+"endLine":  124,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'SelectedID' to match camel case naming rules, consider using 'SelectedId'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  23,
+"endLine":  134,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  26,
+"endLine":  139,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  27,
+"endLine":  158,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'SelectedID' to match camel case naming rules, consider using 'SelectedId'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  23,
+"endLine":  174,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  24,
+"endLine":  15,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  24,
+"endLine":  22,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'val' to match camel case naming rules, consider using 'Val'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  27,
+"endLine":  24,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'Value2fff' to match camel case naming rules, consider using 'Value2Fff'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  570,
+"startColumn":  24,
+"endLine":  570,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'BOM' to match camel case naming rules, consider using 'Bom'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  45,
+"endLine":  25,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'BillOfMaterialsID' to match camel case naming rules, consider using 'BillOfMaterialsId'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  24,
+"endLine":  72,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'BillOfMaterialsID' to match camel case naming rules, consider using 'BillOfMaterialsId'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  24,
+"endLine":  96,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'AP1' to match camel case naming rules, consider using 'Ap1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  28,
+"endLine":  225,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'AP2' to match camel case naming rules, consider using 'Ap2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  31,
+"endLine":  226,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'BP1' to match camel case naming rules, consider using 'Bp1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  236,
+"startColumn":  28,
+"endLine":  236,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'BP2' to match camel case naming rules, consider using 'Bp2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  47,
+"endLine":  237,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'AP1' to match camel case naming rules, consider using 'Ap1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  28,
+"endLine":  242,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'AP2' to match camel case naming rules, consider using 'Ap2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  31,
+"endLine":  243,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'BP1' to match camel case naming rules, consider using 'Bp1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  252,
+"startColumn":  28,
+"endLine":  252,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'BP2' to match camel case naming rules, consider using 'Bp2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  53,
+"endLine":  253,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'value' to match camel case naming rules, consider using 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForAllOtherMembers.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  24,
+"endLine":  17,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'value1' to match camel case naming rules, consider using 'Value1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForAllOtherMembers.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  24,
+"endLine":  18,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'value2' to match camel case naming rules, consider using 'Value2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForAllOtherMembers.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  24,
+"endLine":  19,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForPath.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  24,
+"endLine":  14,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'NestedID' to match camel case naming rules, consider using 'NestedId'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForPath.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  24,
+"endLine":  21,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForPath.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  24,
+"endLine":  33,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'OtherID' to match camel case naming rules, consider using 'OtherId'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForPath.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  24,
+"endLine":  36,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForPath.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  24,
+"endLine":  199,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ShouldSupportOnlyDestinationTypeBeingDerived.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  20,
+"endLine":  152,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ShouldSupportOnlyDestinationTypeBeingDerived.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  20,
+"endLine":  157,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ID' to match camel case naming rules, consider using 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\ShouldSupportOnlyDestinationTypeBeingDerived.cs",
+"region":  {
+"startLine":  182,
+"startColumn":  23,
+"endLine":  182,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'someValueWithPascalName' to match camel case naming rules, consider using 'SomeValueWithPascalName'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1073,
+"startColumn":  28,
+"endLine":  1073,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'value' to match camel case naming rules, consider using 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1204,
+"startColumn":  28,
+"endLine":  1204,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'fooValue' to match camel case naming rules, consider using 'FooValue'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1281,
+"startColumn":  28,
+"endLine":  1281,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'EntityID' to match camel case naming rules, consider using 'EntityId'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NestedAndArraysTests.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  28,
+"endLine":  15,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'EntityID' to match camel case naming rules, consider using 'EntityId'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NestedAndArraysTests.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  28,
+"endLine":  32,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'EntityID' to match camel case naming rules, consider using 'EntityId'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NestedAndArraysTests.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  28,
+"endLine":  38,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'position' to match camel case naming rules, consider using 'Position'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ParameterizedQueriesTests.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  24,
+"endLine":  169,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'value' to match camel case naming rules, consider using 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Tests\TypeMapFactorySpecs.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  24,
+"endLine":  89,
+"endColumn":  29
+}
+}
+}
+]
+}

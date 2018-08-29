@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'CollectionController' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  22,
+"endLine":  70,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'CollectionController' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  22,
+"endLine":  163,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'CollectionMapping.FillCollection' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  422,
+"startColumn":  29,
+"endLine":  422,
+"endColumn":  43
+}
+}
+}
+]
+}

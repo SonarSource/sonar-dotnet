@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1109",
+"message":  "Move this closing curly brace to the next line.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  10,
+"endLine":  105,
+"endColumn":  11
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2342",
+"message":  "Rename this enumeration to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?s$'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\EnumConditionsBug.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  21,
+"endLine":  12,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2342",
+"message":  "Rename this enumeration to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?s$'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\EnumConditionsBug.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  21,
+"endLine":  14,
+"endColumn":  26
+}
+}
+}
+]
+}

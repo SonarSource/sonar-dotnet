@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\EntityDTO20.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  11,
+"endLine":  11,
+"endColumn":  15
+}
+}
+}
+]
+}

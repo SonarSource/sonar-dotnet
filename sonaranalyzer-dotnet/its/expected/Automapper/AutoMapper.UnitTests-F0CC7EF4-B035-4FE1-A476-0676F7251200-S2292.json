@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2292",
+"message":  "Make this an auto-implemented property and remove its backing field.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  379,
+"startColumn":  34,
+"endLine":  379,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2292",
+"message":  "Make this an auto-implemented property and remove its backing field.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  681,
+"startColumn":  27,
+"endLine":  681,
+"endColumn":  33
+}
+}
+}
+]
+}

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  71,
+"endLine":  77,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  273,
+"startColumn":  28,
+"endLine":  273,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  281,
+"startColumn":  33,
+"endLine":  281,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  296,
+"startColumn":  33,
+"endLine":  296,
+"endColumn":  61
+}
+}
+}
+]
+}

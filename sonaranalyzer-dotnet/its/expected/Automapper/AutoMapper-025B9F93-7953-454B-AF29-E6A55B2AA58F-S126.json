@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  555,
+"startColumn":  13,
+"endLine":  555,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  13,
+"endLine":  120,
+"endColumn":  20
+}
+}
+}
+]
+}

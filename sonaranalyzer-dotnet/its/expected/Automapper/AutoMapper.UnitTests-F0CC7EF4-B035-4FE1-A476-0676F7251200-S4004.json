@@ -1,0 +1,2786 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'Items' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  44,
+"endLine":  21,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Items' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  49,
+"endLine":  26,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values2' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  316,
+"startColumn":  30,
+"endLine":  316,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values2' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  363,
+"startColumn":  30,
+"endLine":  363,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values2' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  410,
+"startColumn":  30,
+"endLine":  410,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  415,
+"startColumn":  32,
+"endLine":  415,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values2' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  416,
+"startColumn":  32,
+"endLine":  416,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  461,
+"startColumn":  40,
+"endLine":  461,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  496,
+"startColumn":  26,
+"endLine":  496,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  531,
+"startColumn":  34,
+"endLine":  531,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  566,
+"startColumn":  36,
+"endLine":  566,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  571,
+"startColumn":  36,
+"endLine":  571,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  673,
+"startColumn":  37,
+"endLine":  673,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  725,
+"startColumn":  37,
+"endLine":  725,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'WorkAddresses' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BasicFlattening.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  41,
+"endLine":  33,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'WorkAddresses' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BasicFlattening.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  37,
+"endLine":  43,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  38,
+"endLine":  54,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  36,
+"endLine":  71,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'BookAuthors' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  37,
+"endLine":  87,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'BookAuthors' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  37,
+"endLine":  93,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Authors' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  50,
+"endLine":  107,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  36,
+"endLine":  219,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  284,
+"startColumn":  36,
+"endLine":  284,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  486,
+"startColumn":  35,
+"endLine":  486,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  635,
+"startColumn":  32,
+"endLine":  635,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Parents' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  670,
+"startColumn":  33,
+"endLine":  670,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  705,
+"startColumn":  35,
+"endLine":  705,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Parents' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  719,
+"startColumn":  36,
+"endLine":  719,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Contacts' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  49,
+"endLine":  82,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Suppliers' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  50,
+"endLine":  89,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Contacts' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  43,
+"endLine":  103,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Suppliers' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  44,
+"endLine":  111,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  186,
+"startColumn":  36,
+"endLine":  186,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  437,
+"startColumn":  32,
+"endLine":  437,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Parents' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  472,
+"startColumn":  33,
+"endLine":  472,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  507,
+"startColumn":  35,
+"endLine":  507,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Parents' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  521,
+"startColumn":  36,
+"endLine":  521,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Images' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AssignableCollectionBug.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  34,
+"endLine":  70,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Images' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AssignableCollectionBug.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  34,
+"endLine":  75,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Stuff' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CollectionMapperMapsISetIncorrectly.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  33,
+"endLine":  22,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Items' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CollectionsNullability.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  33,
+"endLine":  14,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Value' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConditionBug.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  40,
+"endLine":  23,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'UsersInRoles' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConventionCreateMapsWithCircularReference.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  47,
+"endLine":  52,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'UsersInRoles' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConventionCreateMapsWithCircularReference.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  51,
+"endLine":  61,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'UsersInRoles' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConventionCreateMapsWithCircularReference.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  47,
+"endLine":  70,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'UsersInRoles' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConventionCreateMapsWithCircularReference.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  51,
+"endLine":  79,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\EFCollections.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  39,
+"endLine":  15,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\EFCollections.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  43,
+"endLine":  30,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Tags' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InitializeNRE.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  40,
+"endLine":  47,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities2' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity1.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  37,
+"endLine":  27,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities11' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity10.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  38,
+"endLine":  11,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities10' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity11.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  38,
+"endLine":  16,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities8' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity11.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  37,
+"endLine":  17,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities20' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity12.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  38,
+"endLine":  17,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities16' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity12.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  38,
+"endLine":  18,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities14' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity12.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  38,
+"endLine":  19,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities12' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity14.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  38,
+"endLine":  18,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities1' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity14.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  37,
+"endLine":  19,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities20' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity17.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  38,
+"endLine":  19,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities8' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity17.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  37,
+"endLine":  20,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities5' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity17.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  37,
+"endLine":  21,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities18' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity17.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  38,
+"endLine":  22,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities8' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity20.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  37,
+"endLine":  25,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities26' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity20.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  38,
+"endLine":  27,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities12' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity20.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  38,
+"endLine":  28,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities17' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity20.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  38,
+"endLine":  29,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities21' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity20.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  38,
+"endLine":  31,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities16' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity20.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  38,
+"endLine":  32,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities20' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity22.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  38,
+"endLine":  16,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities24' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity22.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  38,
+"endLine":  17,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities19' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity25.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  38,
+"endLine":  17,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities20' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity26.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  38,
+"endLine":  16,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities4' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity3.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  37,
+"endLine":  16,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities8' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity3.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  37,
+"endLine":  17,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities5' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity5.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  37,
+"endLine":  24,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities6' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity5.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  30,
+"endLine":  25,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'TimeSlots' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity5.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  38,
+"endLine":  26,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities12' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity6.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  38,
+"endLine":  20,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities20' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity8.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  38,
+"endLine":  20,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities17' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity8.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  38,
+"endLine":  21,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities22' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity8.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  38,
+"endLine":  23,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities3' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity8.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  37,
+"endLine":  25,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities11' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\Entity8.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  38,
+"endLine":  26,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities2' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO1.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  40,
+"endLine":  27,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities11' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO10.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  41,
+"endLine":  11,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities10' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO11.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  41,
+"endLine":  16,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities8' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO11.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  40,
+"endLine":  17,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities20' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO12.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  41,
+"endLine":  17,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities16' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO12.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  41,
+"endLine":  18,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities14' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO12.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  41,
+"endLine":  19,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities12' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO14.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  41,
+"endLine":  19,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities1' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO14.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  40,
+"endLine":  20,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities20' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO17.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  41,
+"endLine":  19,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities8' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO17.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  40,
+"endLine":  20,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities5' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO17.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  40,
+"endLine":  21,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities18' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO17.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  41,
+"endLine":  22,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities8' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO20.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  40,
+"endLine":  25,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities26' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO20.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  41,
+"endLine":  26,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities12' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO20.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  41,
+"endLine":  27,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities17' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO20.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  41,
+"endLine":  28,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities21' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO20.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  41,
+"endLine":  29,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities16' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO20.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  41,
+"endLine":  30,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities20' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO22.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  41,
+"endLine":  16,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities24' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO22.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  41,
+"endLine":  17,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities19' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO25.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  41,
+"endLine":  17,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities20' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO26.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  41,
+"endLine":  16,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities4' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO3.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  40,
+"endLine":  16,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities8' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO3.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  40,
+"endLine":  17,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities5' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO5.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  40,
+"endLine":  24,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities6' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO5.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  33,
+"endLine":  25,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'TimeSlots' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO5.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  41,
+"endLine":  26,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities12' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO6.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  41,
+"endLine":  20,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities20' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO8.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  41,
+"endLine":  20,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities17' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO8.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  41,
+"endLine":  21,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities22' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO8.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  41,
+"endLine":  22,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities3' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO8.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  40,
+"endLine":  23,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Entities11' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\EntityDTO8.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  41,
+"endLine":  24,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MappingToAReadOnlyCollection.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  44,
+"endLine":  20,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values2' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MappingToAReadOnlyCollection.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  44,
+"endLine":  21,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Ones' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\PreserveReferencesSameDestination.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  48,
+"endLine":  49,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Ones' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\PreserveReferencesSameDestination.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  51,
+"endLine":  65,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'BP2' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectCollectionsBug.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  35,
+"endLine":  25,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'BP2' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectCollectionsBug.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  41,
+"endLine":  41,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'CostCenters' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SamePropertyNameOnParentAndChildClasses.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  52,
+"endLine":  63,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Ones' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\WithoutPreserveReferencesSameDestination.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  48,
+"endLine":  49,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Ones' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\WithoutPreserveReferencesSameDestination.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  51,
+"endLine":  65,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ShipsTo' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  187,
+"startColumn":  30,
+"endLine":  187,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ShipsTo' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  33,
+"endLine":  210,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ShipsTo' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  33,
+"endLine":  216,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ShipsTo' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  33,
+"endLine":  240,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Details' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  379,
+"startColumn":  34,
+"endLine":  379,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Details' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  395,
+"startColumn":  40,
+"endLine":  395,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Details' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  401,
+"startColumn":  36,
+"endLine":  401,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Items' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  653,
+"startColumn":  38,
+"endLine":  653,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Items' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  662,
+"startColumn":  38,
+"endLine":  662,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  35,
+"endLine":  16,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  37,
+"endLine":  29,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  35,
+"endLine":  77,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  37,
+"endLine":  90,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  35,
+"endLine":  142,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  37,
+"endLine":  155,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Data' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomCollectionTester.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  35,
+"endLine":  14,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'SubModels' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  35,
+"endLine":  216,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'SubSubModels' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  38,
+"endLine":  221,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'SomeList' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1551,
+"startColumn":  26,
+"endLine":  1551,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'SomeList' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1558,
+"startColumn":  26,
+"endLine":  1558,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  56,
+"endLine":  62,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  61,
+"endLine":  72,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  56,
+"endLine":  116,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  89,
+"endLine":  126,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Bar' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  76,
+"endLine":  170,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Bar' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  79,
+"endLine":  175,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Items' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  79,
+"endLine":  213,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Items' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  79,
+"endLine":  218,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  426,
+"startColumn":  52,
+"endLine":  426,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Data' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  470,
+"startColumn":  39,
+"endLine":  470,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'BOM' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  45,
+"endLine":  25,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Types' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  41,
+"endLine":  46,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'BillOfMaterials' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  42,
+"endLine":  79,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Types' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  38,
+"endLine":  80,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'BP2' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  47,
+"endLine":  237,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'BP2' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  53,
+"endLine":  253,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'StartingWith_ShouldBeNullAfterwards' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IgnoreAllTests.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  33,
+"endLine":  51,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ValueInt' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  44,
+"endLine":  127,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ValueString' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  47,
+"endLine":  128,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ValueUser' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  56,
+"endLine":  129,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ValueIUser' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  46,
+"endLine":  130,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ValueInt' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  44,
+"endLine":  143,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ValueString' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  47,
+"endLine":  144,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ValueUser' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  56,
+"endLine":  145,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ValueIUser' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\ReadOnlyCollectionMapperTests.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  46,
+"endLine":  146,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'BarList' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\OpenGenericsWithInheritance.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  34,
+"endLine":  47,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'BarList' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\OpenGenericsWithInheritance.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  39,
+"endLine":  53,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'BarList' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\OpenGenericsWithInheritance.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  34,
+"endLine":  112,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'BarList' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\OpenGenericsWithInheritance.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  39,
+"endLine":  118,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Properties' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\PreserveReferencesWithInheritance.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  34,
+"endLine":  17,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Properties' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\PreserveReferencesWithInheritance.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  34,
+"endLine":  53,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MaxDepthTests.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  34,
+"endLine":  14,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MaxDepthTests.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  39,
+"endLine":  33,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1107,
+"startColumn":  40,
+"endLine":  1107,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values2' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  652,
+"startColumn":  30,
+"endLine":  652,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values3' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  653,
+"startColumn":  44,
+"endLine":  653,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values5' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  655,
+"startColumn":  44,
+"endLine":  655,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values6' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  656,
+"startColumn":  36,
+"endLine":  656,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values2' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  662,
+"startColumn":  30,
+"endLine":  662,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values3' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  663,
+"startColumn":  44,
+"endLine":  663,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values5' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  665,
+"startColumn":  44,
+"endLine":  665,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values6' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  666,
+"startColumn":  36,
+"endLine":  666,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values2' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  724,
+"startColumn":  30,
+"endLine":  724,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values3' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  725,
+"startColumn":  44,
+"endLine":  725,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values5' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  727,
+"startColumn":  44,
+"endLine":  727,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values6' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  728,
+"startColumn":  36,
+"endLine":  728,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values2' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  735,
+"startColumn":  30,
+"endLine":  735,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values3' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  736,
+"startColumn":  44,
+"endLine":  736,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values5' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  738,
+"startColumn":  44,
+"endLine":  738,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values6' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  739,
+"startColumn":  36,
+"endLine":  739,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values2' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  807,
+"startColumn":  30,
+"endLine":  807,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values3' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  808,
+"startColumn":  44,
+"endLine":  808,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values5' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  810,
+"startColumn":  44,
+"endLine":  810,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values6' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  811,
+"startColumn":  36,
+"endLine":  811,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values2' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  818,
+"startColumn":  30,
+"endLine":  818,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values3' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  819,
+"startColumn":  44,
+"endLine":  819,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values5' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  821,
+"startColumn":  44,
+"endLine":  821,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values6' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  822,
+"startColumn":  36,
+"endLine":  822,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'SubEntities' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NestedAndArraysTests.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  47,
+"endLine":  17,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NestedExpressionsMapFromTests.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  32,
+"endLine":  51,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Addresses' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectCollectionEnumerableTest.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  35,
+"endLine":  44,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Addresses' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectCollectionListTest.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  35,
+"endLine":  47,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Addresses' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectCollectionListTest.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  38,
+"endLine":  62,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Articles' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectionTests.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  49,
+"endLine":  47,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Users' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapWithoutPreserveReferences.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  51,
+"endLine":  30,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Users' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapWithoutPreserveReferences.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  49,
+"endLine":  51,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Users' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapWithPreserveReferences.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  51,
+"endLine":  30,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Users' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapWithPreserveReferences.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  49,
+"endLine":  51,
+"endColumn":  54
+}
+}
+}
+]
+}

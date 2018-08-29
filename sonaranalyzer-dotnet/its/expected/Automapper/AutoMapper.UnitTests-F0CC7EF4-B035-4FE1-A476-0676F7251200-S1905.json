@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1905",
+"message":  "Remove this unnecessary cast to 'IDictionary'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  362,
+"startColumn":  30,
+"endLine":  362,
+"endColumn":  60
+}
+}
+}
+]
+}

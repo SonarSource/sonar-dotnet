@@ -1,0 +1,2786 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Items'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  13,
+"endLine":  162,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Items'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  51,
+"endLine":  167,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  13,
+"endLine":  172,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  13,
+"endLine":  177,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Items'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  13,
+"endLine":  204,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Items'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  209,
+"startColumn":  55,
+"endLine":  209,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  214,
+"startColumn":  13,
+"endLine":  214,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  13,
+"endLine":  219,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Inner'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  13,
+"endLine":  15,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'OtherInner'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  13,
+"endLine":  16,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Value1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  13,
+"endLine":  17,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Value2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  13,
+"endLine":  18,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  13,
+"endLine":  23,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  13,
+"endLine":  28,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  13,
+"endLine":  33,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  13,
+"endLine":  38,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Inner'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  13,
+"endLine":  43,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'OtherInner'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  13,
+"endLine":  44,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Value1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  13,
+"endLine":  45,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Value2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  13,
+"endLine":  46,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  13,
+"endLine":  51,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'ArrayOfItems'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AllowNullCollectionsAssignableArray.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  13,
+"endLine":  14,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AssertConfigurationIsValidNullables.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  13,
+"endLine":  11,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\AssertConfigurationIsValidNullables.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  13,
+"endLine":  15,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'DummyCollectionSum'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CannotMapICollectionToAggregateSumDestination.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  50,
+"endLine":  18,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'DummyEnumerableCount'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CannotProjectIEnumerableToAggregateDestinations.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  52,
+"endLine":  18,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'DummyEnumerableSum'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CannotProjectIEnumerableToAggregateDestinations.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  50,
+"endLine":  19,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'DummyEnumerableMin'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CannotProjectIEnumerableToAggregateDestinations.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  50,
+"endLine":  20,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'DummyEnumerableMax'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CannotProjectIEnumerableToAggregateDestinations.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  50,
+"endLine":  21,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConstructUsingReturnsNull.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  13,
+"endLine":  11,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConstructUsingReturnsNull.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  13,
+"endLine":  15,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConvertMapperThreading.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  13,
+"endLine":  15,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConvertMapperThreading.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  13,
+"endLine":  20,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Date'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CustomConverters.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  42,
+"endLine":  18,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'IntEntity'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CustomConverters.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  13,
+"endLine":  97,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'BoolModel'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CustomConverters.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  13,
+"endLine":  109,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'NullableIntEntity'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CustomConverters.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  13,
+"endLine":  121,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'UserId'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateExtensionMethods.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  13,
+"endLine":  19,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'UserName'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateExtensionMethods.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  13,
+"endLine":  20,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'UserPhone'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateExtensionMethods.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  13,
+"endLine":  21,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'IDCard'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateExtensionMethods.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  13,
+"endLine":  22,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Kind'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateExtensionMethods.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  13,
+"endLine":  23,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'UnUsedAmount'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateExtensionMethods.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  13,
+"endLine":  24,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Outlay'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateExtensionMethods.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  13,
+"endLine":  25,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'UserId'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateExtensionMethods.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  13,
+"endLine":  29,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'UserName'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateExtensionMethods.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  13,
+"endLine":  30,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'UserPhone'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateExtensionMethods.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  13,
+"endLine":  31,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'IDCard'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateExtensionMethods.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  13,
+"endLine":  32,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Kind'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateExtensionMethods.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  13,
+"endLine":  33,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'UnUsedAmount'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateExtensionMethods.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  13,
+"endLine":  34,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ForAllMembersAndDoNotUseDestinationValue.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  38,
+"endLine":  17,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\GuidTryExpression.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  40,
+"endLine":  18,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\InternalProperties.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  40,
+"endLine":  18,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\IntToNullableDecimal.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  43,
+"endLine":  17,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Json'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  40,
+"endLine":  33,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Json'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  13,
+"endLine":  181,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Json'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\JsonNet.cs",
+"region":  {
+"startLine":  186,
+"startColumn":  13,
+"endLine":  186,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'ExpandoObject'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapExpandoObjectProperty.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  13,
+"endLine":  15,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'SubTimeout'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapOverloadsWithDynamic.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  42,
+"endLine":  14,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'SubColour'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapOverloadsWithDynamic.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  13,
+"endLine":  15,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Timeout'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapOverloadsWithDynamic.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  39,
+"endLine":  20,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Colour'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapOverloadsWithDynamic.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  13,
+"endLine":  21,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'SubSettings'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapOverloadsWithDynamic.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  50,
+"endLine":  22,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableIntToNullableDecimal.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  43,
+"endLine":  17,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableIntToNullableDecimal.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  13,
+"endLine":  47,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableIntToNullableDecimal.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  43,
+"endLine":  51,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableResolveUsing.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  43,
+"endLine":  13,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'OddNumber'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableResolveUsing.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  46,
+"endLine":  17,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'OddNumber'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableUntypedMapFrom.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  46,
+"endLine":  16,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullSubstituteType.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullSubstituteType.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  40,
+"endLine":  17,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Inner'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullToString.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Inner'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullToString.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  40,
+"endLine":  20,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectUsingTheQueriedEntity.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  38,
+"endLine":  15,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\PropertyNamedType.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  13,
+"endLine":  11,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Type'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\PropertyNamedType.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  13,
+"endLine":  15,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'X'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ReadOnlyCollectionMappingBug.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  44,
+"endLine":  13,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Age'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\RecognizeDestinationPostfixes.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  13,
+"endLine":  11,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Age2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\RecognizeDestinationPostfixes.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  13,
+"endLine":  12,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'AgeV'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\RecognizeDestinationPostfixes.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  36,
+"endLine":  19,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'NameV'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\RecognizeDestinationPostfixes.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  13,
+"endLine":  20,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'GetNumber'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\RemovePrefixes.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  13,
+"endLine":  12,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\RemovePrefixes.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  13,
+"endLine":  16,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'MyProfile'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ReverseMapReplaceMemberName.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  13,
+"endLine":  74,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\StructMapping.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  38,
+"endLine":  17,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Items'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\TargetISet.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  46,
+"endLine":  20,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'CollectionHolder'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  13,
+"endLine":  20,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Items'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  303,
+"startColumn":  13,
+"endLine":  303,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'PublicProperty'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConditionalMapping.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  13,
+"endLine":  53,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'PrivateProperty'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConditionalMapping.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  13,
+"endLine":  60,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'PublicProperty'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConditionalMapping.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  13,
+"endLine":  62,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Name'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  701,
+"startColumn":  39,
+"endLine":  701,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  285,
+"startColumn":  13,
+"endLine":  285,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  290,
+"startColumn":  13,
+"endLine":  290,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'PersonTarget'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  13,
+"endLine":  321,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'PersonTarget'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  323,
+"startColumn":  13,
+"endLine":  327,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'Dest'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  967,
+"startColumn":  13,
+"endLine":  970,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'SValue'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  41,
+"endLine":  54,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  40,
+"endLine":  59,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  265,
+"startColumn":  40,
+"endLine":  265,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  288,
+"startColumn":  13,
+"endLine":  288,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  38,
+"endLine":  293,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  326,
+"startColumn":  13,
+"endLine":  326,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  331,
+"startColumn":  38,
+"endLine":  331,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  375,
+"startColumn":  37,
+"endLine":  375,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'IntValue'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  412,
+"startColumn":  40,
+"endLine":  412,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  421,
+"startColumn":  50,
+"endLine":  421,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'IntValue'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  459,
+"startColumn":  40,
+"endLine":  459,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  469,
+"startColumn":  50,
+"endLine":  469,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  506,
+"startColumn":  40,
+"endLine":  506,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  540,
+"startColumn":  40,
+"endLine":  540,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Color'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  13,
+"endLine":  15,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Color'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  40,
+"endLine":  20,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Color'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  47,
+"endLine":  51,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Color'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Enumerations.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  40,
+"endLine":  82,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForAllMaps.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  13,
+"endLine":  15,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForAllMaps.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  38,
+"endLine":  19,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForAllMaps.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  13,
+"endLine":  24,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForAllMaps.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  38,
+"endLine":  28,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForAllMaps.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  13,
+"endLine":  33,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ForAllMaps.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  38,
+"endLine":  37,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal type 'DoIt3'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  9,
+"endLine":  14,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'SetValue'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  9,
+"endLine":  20,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'SetValue2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  9,
+"endLine":  68,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'SetValue'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  9,
+"endLine":  73,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'DoIt'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  9,
+"endLine":  78,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'DoIt4'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  9,
+"endLine":  84,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'DoIt2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  9,
+"endLine":  90,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'DoIt4'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  9,
+"endLine":  96,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private type 'Test'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  9,
+"endLine":  104,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'DoIt'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  13,
+"endLine":  103,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'PrivateProperty'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\PrimitiveExtensionsTester.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  13,
+"endLine":  22,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'PublicProperty'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\PrimitiveExtensionsTester.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  13,
+"endLine":  24,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Color'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\CustomMapperTests.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  40,
+"endLine":  144,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Foo'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\DynamicMapperTests.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  38,
+"endLine":  101,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Bar'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\DynamicMapperTests.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  38,
+"endLine":  102,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Jack'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\DynamicMapperTests.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  41,
+"endLine":  103,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'StringValue'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\DynamicMapperTests.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  13,
+"endLine":  176,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'NullIntValue'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\DynamicMapperTests.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  13,
+"endLine":  177,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Foo'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  38,
+"endLine":  61,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Bar'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  38,
+"endLine":  62,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludeBaseWithNonGenericUsage.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  13,
+"endLine":  17,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Timestamp'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludeBaseWithNonGenericUsage.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  13,
+"endLine":  18,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludeBaseWithNonGenericUsage.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  13,
+"endLine":  23,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Time'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludeBaseWithNonGenericUsage.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  13,
+"endLine":  24,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludeBaseWithNonGenericUsage.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  13,
+"endLine":  53,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Timestamp'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludeBaseWithNonGenericUsage.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  13,
+"endLine":  54,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludeBaseWithNonGenericUsage.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  13,
+"endLine":  59,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Time'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludeBaseWithNonGenericUsage.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  13,
+"endLine":  60,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'One'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingOrder.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  21,
+"endLine":  41,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Inner'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MaxExecutionPlanDepth.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  13,
+"endLine":  12,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Inner'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MaxExecutionPlanDepth.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  13,
+"endLine":  17,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Inner'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MaxExecutionPlanDepth.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  13,
+"endLine":  22,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Inner'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MaxExecutionPlanDepth.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  13,
+"endLine":  27,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Inner'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MaxExecutionPlanDepth.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  13,
+"endLine":  32,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Inner'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MaxExecutionPlanDepth.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  13,
+"endLine":  37,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MaxExecutionPlanDepth.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  13,
+"endLine":  42,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Inner'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MaxExecutionPlanDepth.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  13,
+"endLine":  47,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Inner'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MaxExecutionPlanDepth.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  13,
+"endLine":  52,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Inner'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MaxExecutionPlanDepth.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  13,
+"endLine":  57,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Inner'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MaxExecutionPlanDepth.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  13,
+"endLine":  62,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Inner'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MaxExecutionPlanDepth.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  13,
+"endLine":  67,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Inner'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MaxExecutionPlanDepth.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  13,
+"endLine":  72,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MaxExecutionPlanDepth.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  13,
+"endLine":  77,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Collection'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  13,
+"endLine":  15,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Collection'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  55,
+"endLine":  20,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Collection'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  13,
+"endLine":  36,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Collection'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  55,
+"endLine":  41,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Collection'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  13,
+"endLine":  57,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Collection'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  55,
+"endLine":  62,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  13,
+"endLine":  78,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  45,
+"endLine":  83,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  13,
+"endLine":  117,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Link'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  13,
+"endLine":  118,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  13,
+"endLine":  123,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Link'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  41,
+"endLine":  124,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  13,
+"endLine":  164,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Link'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  13,
+"endLine":  165,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Id'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  13,
+"endLine":  170,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Link'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  41,
+"endLine":  171,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Color'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\BindersAndResultConverters.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  37,
+"endLine":  25,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Color'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\BindersAndResultConverters.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  37,
+"endLine":  60,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectionTests.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  13,
+"endLine":  132,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Greeting'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectionTests.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  13,
+"endLine":  142,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Number'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectionTests.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  13,
+"endLine":  149,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Child'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectionTests.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  45,
+"endLine":  150,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'OrderItems'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapping.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  13,
+"endLine":  93,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Product'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapping.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  13,
+"endLine":  98,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'OrderItemsCount'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapping.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  13,
+"endLine":  103,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'A'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  13,
+"endLine":  15,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'B'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  13,
+"endLine":  17,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'A'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  13,
+"endLine":  31,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'A'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  13,
+"endLine":  58,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'B'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  13,
+"endLine":  60,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'A'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  13,
+"endLine":  74,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'A'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  13,
+"endLine":  100,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'B'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  13,
+"endLine":  102,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'A'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  13,
+"endLine":  116,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'A'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  13,
+"endLine":  143,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'B'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  13,
+"endLine":  145,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'A'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  13,
+"endLine":  154,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'some__source'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Tests\TypeMapFactorySpecs.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  13,
+"endLine":  84,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Tests\TypeMapFactorySpecs.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  13,
+"endLine":  89,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'SomeSourceValue'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Tests\TypeMapFactorySpecs.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  13,
+"endLine":  94,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'SomeSource'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Tests\TypeMapFactorySpecs.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  13,
+"endLine":  137,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Tests\TypeMapFactorySpecs.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  13,
+"endLine":  142,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'some__source__value'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Tests\TypeMapFactorySpecs.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  13,
+"endLine":  147,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Value2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  13,
+"endLine":  55,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Value3'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  13,
+"endLine":  56,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Value1'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  43,
+"endLine":  61,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Value2'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  42,
+"endLine":  62,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Value3'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  43,
+"endLine":  63,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'TheId'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  40,
+"endLine":  99,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Values'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeConverters.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  56,
+"endLine":  148,
+"endColumn":  60
+}
+}
+}
+]
+}

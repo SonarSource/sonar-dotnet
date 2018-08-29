@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1659",
+"message":  "Declare '_stopTime' in a separate statement.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\HiPerfTimer.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  34,
+"endLine":  17,
+"endColumn":  43
+}
+}
+}
+]
+}

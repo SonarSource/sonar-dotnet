@@ -1,0 +1,992 @@
+{
+"issues":  [
+{
+"id":  "S2933",
+"message":  "Make '_sourceItems' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  22,
+"endLine":  17,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_source' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  19,
+"endLine":  60,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_source' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  15,
+"endLine":  79,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_source' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  15,
+"endLine":  104,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_source' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  15,
+"endLine":  126,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'implementation' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  600,
+"startColumn":  31,
+"endLine":  600,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_values' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  678,
+"startColumn":  36,
+"endLine":  678,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_values' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  730,
+"startColumn":  36,
+"endLine":  730,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_strings' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  764,
+"startColumn":  37,
+"endLine":  764,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_sourceList' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CollectionWhere.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  27,
+"endLine":  12,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_value' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\GuidTryExpression.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  22,
+"endLine":  10,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'appointmentStatusHistory1' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\MapAtRuntime.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  21,
+"endLine":  44,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'center1' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\MapAtRuntime.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  21,
+"endLine":  45,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'insurance1' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\MapAtRuntime.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  22,
+"endLine":  46,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'patient1' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\MapAtRuntime.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  22,
+"endLine":  47,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'resource1' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\MapAtRuntime.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  22,
+"endLine":  48,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'service1' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\MapAtRuntime.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  22,
+"endLine":  49,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'speciality1' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\MapAtRuntime.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  22,
+"endLine":  50,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'appointmentStatusHistory1' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\MapAtRuntimeWithCollections.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  21,
+"endLine":  45,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'center1' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\MapAtRuntimeWithCollections.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  21,
+"endLine":  46,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'insurance1' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\MapAtRuntimeWithCollections.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  22,
+"endLine":  47,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'patient1' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\MapAtRuntimeWithCollections.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  22,
+"endLine":  48,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'resource1' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\MapAtRuntimeWithCollections.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  22,
+"endLine":  49,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'service1' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\MapAtRuntimeWithCollections.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  22,
+"endLine":  50,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'speciality1' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\MapAtRuntimeWithCollections.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  22,
+"endLine":  51,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_e' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultidimensionalArrays.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  16,
+"endLine":  13,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_propValue' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NestedMappingProjectionsExplicitExpanding.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  13,
+"endLine":  12,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_date' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableDateTime.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  18,
+"endLine":  40,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_date' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\NullableDateTime.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  18,
+"endLine":  74,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_value' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectConstructorParameters.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  25,
+"endLine":  26,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_items' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\TargetISet.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  18,
+"endLine":  11,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_owner' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  28,
+"endLine":  75,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_owner' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  28,
+"endLine":  168,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_myCollection' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  35,
+"endLine":  112,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_myCollection' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  35,
+"endLine":  141,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_destination' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CollectionMapping.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  21,
+"endLine":  299,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_source' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConditionalMapping.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  16,
+"endLine":  11,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_destination' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConditionalMapping.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  21,
+"endLine":  12,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_height' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConditionalMapping.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  28,
+"endLine":  156,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'name' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  403,
+"startColumn":  20,
+"endLine":  403,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'name' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  444,
+"startColumn":  20,
+"endLine":  444,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_destination' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  657,
+"startColumn":  21,
+"endLine":  657,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_myType' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  727,
+"startColumn":  28,
+"endLine":  727,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_str' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1303,
+"startColumn":  28,
+"endLine":  1303,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_a' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1446,
+"startColumn":  28,
+"endLine":  1446,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_b' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1447,
+"startColumn":  28,
+"endLine":  1447,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_c' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  1448,
+"startColumn":  25,
+"endLine":  1448,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_items' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  15,
+"endLine":  94,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_ex' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  367,
+"startColumn":  19,
+"endLine":  367,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_source' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  899,
+"startColumn":  24,
+"endLine":  899,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_source' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  946,
+"startColumn":  24,
+"endLine":  946,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_source' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  993,
+"startColumn":  24,
+"endLine":  993,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_source' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1045,
+"startColumn":  24,
+"endLine":  1045,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_today' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1469,
+"startColumn":  30,
+"endLine":  1469,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'inner' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  48,
+"endLine":  261,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_resultWithGenerics' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  29,
+"endLine":  156,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_destination' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
+"region":  {
+"startLine":  239,
+"startColumn":  29,
+"endLine":  239,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_config' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IMappingExpression\NonGenericProjectEnumTest.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  37,
+"endLine":  12,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_mapper' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\IMappingExpression\NonGenericProjectEnumTest.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  25,
+"endLine":  60,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_z' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  25,
+"endLine":  158,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_a' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  25,
+"endLine":  168,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_z' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  25,
+"endLine":  233,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_a' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\StringDictionaryMapperTests.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  25,
+"endLine":  242,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_config' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NestedExpressionsMapFromTests.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  41,
+"endLine":  13,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_config' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NonGenericQueryableTests.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  37,
+"endLine":  11,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_config' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NullableItemsTests.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  41,
+"endLine":  14,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_config' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\NullableItemsTests.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  41,
+"endLine":  75,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_config' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectCollectionEnumerableTest.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  37,
+"endLine":  14,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_config' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectCollectionListTest.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  37,
+"endLine":  16,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_config' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectEnumerableToArrayTest.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  37,
+"endLine":  14,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_config' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectEnumTest.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  37,
+"endLine":  12,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_niceGreeting' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectionTests.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  16,
+"endLine":  70,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_badGreeting' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectionTests.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  16,
+"endLine":  71,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_config' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectTest.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  37,
+"endLine":  39,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_startDate' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapping.cs",
+"region":  {
+"startLine":  291,
+"startColumn":  18,
+"endLine":  291,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_endDate' 'readonly'.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ReverseMapping.cs",
+"region":  {
+"startLine":  291,
+"startColumn":  45,
+"endLine":  291,
+"endColumn":  53
+}
+}
+}
+]
+}

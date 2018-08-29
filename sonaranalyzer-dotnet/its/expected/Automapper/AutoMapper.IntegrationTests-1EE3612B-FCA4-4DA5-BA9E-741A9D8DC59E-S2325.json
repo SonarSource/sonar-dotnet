@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'Check' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandMembersPath.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  22,
+"endLine":  71,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Check' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\NestedExplicitExpand.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  22,
+"endLine":  72,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Check' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\NestedExplicitExpandWithFields.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  22,
+"endLine":  72,
+"endColumn":  27
+}
+}
+}
+]
+}

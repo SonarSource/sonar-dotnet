@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4035",
+"message":  "Seal class 'ExpressionRequest' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionRequest.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  18,
+"endLine":  12,
+"endColumn":  35
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyBase.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  27,
+"endLine":  5,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  27,
+"endLine":  16,
+"endColumn":  34
+}
+}
+}
+]
+}

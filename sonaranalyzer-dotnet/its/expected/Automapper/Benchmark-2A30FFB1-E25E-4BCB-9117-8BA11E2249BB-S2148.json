@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\BenchEngine.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  32,
+"endLine":  24,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  23,
+"endLine":  216,
+"endColumn":  30
+}
+}
+}
+]
+}

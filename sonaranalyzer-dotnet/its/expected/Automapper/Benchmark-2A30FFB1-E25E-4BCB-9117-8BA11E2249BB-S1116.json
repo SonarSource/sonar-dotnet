@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1116",
+"message":  "Remove this empty statement.",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  13,
+"endLine":  332,
+"endColumn":  14
+}
+}
+}
+]
+}

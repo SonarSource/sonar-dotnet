@@ -1,0 +1,472 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove this unused 'plan' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  17,
+"endLine":  97,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'book2' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  17,
+"endLine":  129,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'a' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\BaseMapWithIncludesAndUnincludedMappings.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  17,
+"endLine":  39,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'target' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CollectionMapperMapsISetIncorrectly.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  17,
+"endLine":  43,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'result' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConventionCreateMapsWithCircularReference.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  17,
+"endLine":  43,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'dest' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\EnumConditionsBug.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  21,
+"endLine":  46,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'dest' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ExistingArrays.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  17,
+"endLine":  20,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'dest' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ExistingArrays.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  17,
+"endLine":  28,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'appointmentsDTO' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\MapAtRuntime.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  17,
+"endLine":  104,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'DTOs' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\MapAtRuntime.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  17,
+"endLine":  108,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'DTOs17' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\MapAtRuntime.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  17,
+"endLine":  112,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'DTOs25' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\MapAtRuntime.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  17,
+"endLine":  116,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'appointmentsDTO' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\MapAtRuntimeWithCollections.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  17,
+"endLine":  126,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'DTOs' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\MapAtRuntimeWithCollections.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  17,
+"endLine":  130,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'DTOs17' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\MapAtRuntimeWithCollections.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  17,
+"endLine":  134,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'DTOs25' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\MapAtRuntimeWithCollections.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  17,
+"endLine":  138,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'settings' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapExpandoObjectProperty.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  17,
+"endLine":  27,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 't2' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MultiThreadingIssues.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  22,
+"endLine":  82,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'b' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ProjectCollectionsBug.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  21,
+"endLine":  61,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'newPredicate' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\SamePropertyNameOnParentAndChildClasses.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  17,
+"endLine":  23,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'parentModel' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  17,
+"endLine":  67,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'mappedChildren' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  17,
+"endLine":  68,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'mappedChildren' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  17,
+"endLine":  133,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'o' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  931,
+"startColumn":  20,
+"endLine":  931,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'clients' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  17,
+"endLine":  52,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'clientExp' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  17,
+"endLine":  54,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'clients' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  17,
+"endLine":  107,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'clientExp' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  17,
+"endLine":  109,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'clients' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  17,
+"endLine":  130,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'clientExp' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  17,
+"endLine":  132,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'clientExp' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  17,
+"endLine":  145,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'mapper' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomCollectionTester.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  17,
+"endLine":  10,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'config' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1409,
+"startColumn":  21,
+"endLine":  1409,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'config' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1698,
+"startColumn":  21,
+"endLine":  1698,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'tm' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  17,
+"endLine":  144,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove this unused 'c' local variable.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludeBaseShouldValidateTypes.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  21,
+"endLine":  14,
+"endColumn":  22
+}
+}
+}
+]
+}

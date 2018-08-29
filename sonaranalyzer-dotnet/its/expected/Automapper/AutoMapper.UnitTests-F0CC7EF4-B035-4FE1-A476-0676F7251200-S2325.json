@@ -1,0 +1,420 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'base_has_include_of_source_but_mapping_with_both_sides_being_unmapped_types_from_the_base_fails' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\BaseMapWithIncludesAndUnincludedMappings.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  21,
+"endLine":  32,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetItems' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CollectionBaseClassGetConvention.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  37,
+"endLine":  17,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CalculateTotal' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\MapFromClosureBug.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  25,
+"endLine":  32,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Value' a static property.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ConfigurationValidation.cs",
+"region":  {
+"startLine":  638,
+"startColumn":  27,
+"endLine":  638,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetString' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\CustomCollectionTester.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  27,
+"endLine":  20,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetString' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
+"region":  {
+"startLine":  477,
+"startColumn":  31,
+"endLine":  477,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetSomeCoolValues' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\General.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  41,
+"endLine":  145,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SetValue' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  22,
+"endLine":  16,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CreateValueSource' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  23,
+"endLine":  56,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SetValue' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  22,
+"endLine":  70,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DoIt' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  22,
+"endLine":  75,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DoIt4' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  22,
+"endLine":  80,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DoIt2' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  22,
+"endLine":  86,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DoIt4' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  22,
+"endLine":  92,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Map' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Mappers\CustomMapperTests.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  27,
+"endLine":  29,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Ignored' a static property.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  549,
+"startColumn":  29,
+"endLine":  549,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetSomeCoolValue' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  594,
+"startColumn":  31,
+"endLine":  594,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetSomeOtherCoolValue' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  604,
+"startColumn":  31,
+"endLine":  604,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SomeCoolValue' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  651,
+"startColumn":  31,
+"endLine":  651,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SomeOtherCoolValue' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  661,
+"startColumn":  31,
+"endLine":  661,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SomeMethodToGetMoreBlarg' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  808,
+"startColumn":  28,
+"endLine":  808,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IAmSomeMethod' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  816,
+"startColumn":  31,
+"endLine":  816,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SomeSubValue' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  827,
+"startColumn":  31,
+"endLine":  827,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SomeSubSubValue' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  837,
+"startColumn":  31,
+"endLine":  837,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetOtherValue' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1238,
+"startColumn":  28,
+"endLine":  1238,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetOtherValue' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1282,
+"startColumn":  28,
+"endLine":  1282,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetOtherValue' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1325,
+"startColumn":  28,
+"endLine":  1325,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetOtherValue' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  1368,
+"startColumn":  28,
+"endLine":  1368,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetItems' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  217,
+"startColumn":  26,
+"endLine":  217,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetItems' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  302,
+"startColumn":  26,
+"endLine":  302,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetItems' a static method.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  394,
+"startColumn":  26,
+"endLine":  394,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Value5' a static property.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\TypeExtensionsTests.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  27,
+"endLine":  20,
+"endColumn":  33
+}
+}
+}
+]
+}

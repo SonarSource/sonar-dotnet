@@ -1,0 +1,292 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'istanbul' 4 times.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  50,
+"endLine":  27,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  54,
+"endLine":  28,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  43,
+"endLine":  34,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  43,
+"endLine":  39,
+"endColumn":  53
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'istiklal cad.' 4 times.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  99,
+"endLine":  27,
+"endColumn":  114
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  103,
+"endLine":  28,
+"endColumn":  118
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  92,
+"endLine":  34,
+"endColumn":  107
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  92,
+"endLine":  39,
+"endColumn":  107
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'istanbul' 4 times.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  50,
+"endLine":  97,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  54,
+"endLine":  98,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  43,
+"endLine":  104,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  43,
+"endLine":  109,
+"endColumn":  53
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'istiklal cad.' 4 times.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  99,
+"endLine":  97,
+"endColumn":  114
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  103,
+"endLine":  98,
+"endColumn":  118
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  92,
+"endLine":  104,
+"endColumn":  107
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  92,
+"endLine":  109,
+"endColumn":  107
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'turkey' 6 times.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  72,
+"endLine":  27,
+"endColumn":  80
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  76,
+"endLine":  28,
+"endColumn":  84
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  65,
+"endLine":  34,
+"endColumn":  73
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  62,
+"endLine":  35,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  65,
+"endLine":  39,
+"endColumn":  73
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  62,
+"endLine":  40,
+"endColumn":  70
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'turkey' 6 times.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  72,
+"endLine":  97,
+"endColumn":  80
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  76,
+"endLine":  98,
+"endColumn":  84
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  65,
+"endLine":  104,
+"endColumn":  73
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  62,
+"endLine":  105,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  65,
+"endLine":  109,
+"endColumn":  73
+}
+},
+{
+"uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  62,
+"endLine":  110,
+"endColumn":  70
+}
+}
+]
+}
+]
+}

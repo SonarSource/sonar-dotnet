@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectAndAllowNullCollections.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  39,
+"endLine":  70,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectAndAllowNullCollections.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  39,
+"endLine":  71,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ProjectionWithExplicitExpansion.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  13,
+"endLine":  21,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  17,
+"endLine":  114,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  13,
+"endLine":  149,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
+"region":  {
+"startLine":  342,
+"startColumn":  17,
+"endLine":  342,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProxyTests.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  13,
+"endLine":  84,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProxyTests.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  13,
+"endLine":  111,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\Automapper\src\IntegrationTests\MaxDepth\MaxDepthWithCollections.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  13,
+"endLine":  18,
+"endColumn":  54
+}
+}
+}
+]
+}

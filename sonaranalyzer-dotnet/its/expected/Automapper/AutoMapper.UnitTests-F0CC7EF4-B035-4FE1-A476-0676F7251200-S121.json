@@ -1,0 +1,550 @@
+{
+"issues":  [
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  645,
+"startColumn":  17,
+"endLine":  645,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  646,
+"startColumn":  17,
+"endLine":  646,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  652,
+"startColumn":  17,
+"endLine":  652,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  653,
+"startColumn":  17,
+"endLine":  653,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  654,
+"startColumn":  17,
+"endLine":  654,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  680,
+"startColumn":  17,
+"endLine":  680,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  681,
+"startColumn":  17,
+"endLine":  681,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  687,
+"startColumn":  17,
+"endLine":  687,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  688,
+"startColumn":  17,
+"endLine":  688,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
+"region":  {
+"startLine":  689,
+"startColumn":  17,
+"endLine":  689,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  447,
+"startColumn":  17,
+"endLine":  447,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  448,
+"startColumn":  17,
+"endLine":  448,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  454,
+"startColumn":  17,
+"endLine":  454,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  455,
+"startColumn":  17,
+"endLine":  455,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  456,
+"startColumn":  17,
+"endLine":  456,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  482,
+"startColumn":  17,
+"endLine":  482,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  483,
+"startColumn":  17,
+"endLine":  483,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  489,
+"startColumn":  17,
+"endLine":  489,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  490,
+"startColumn":  17,
+"endLine":  490,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationshipsWithoutPR.cs",
+"region":  {
+"startLine":  491,
+"startColumn":  17,
+"endLine":  491,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\ConditionBug.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  25,
+"endLine":  110,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CustomConverters.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  17,
+"endLine":  57,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CustomIEnumerableBug.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  13,
+"endLine":  31,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\CustomIEnumerableBug.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  17,
+"endLine":  32,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateValuesBug.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  17,
+"endLine":  16,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateValuesBug.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  17,
+"endLine":  35,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateValuesBugWithoutPR.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  17,
+"endLine":  16,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\DuplicateValuesBugWithoutPR.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  17,
+"endLine":  35,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\LazyCollectionMapping.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  17,
+"endLine":  25,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  21,
+"endLine":  20,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  21,
+"endLine":  54,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  21,
+"endLine":  113,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  21,
+"endLine":  147,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  17,
+"endLine":  56,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  17,
+"endLine":  58,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExtensionMethods.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  520,
+"startColumn":  17,
+"endLine":  520,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  606,
+"startColumn":  21,
+"endLine":  606,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  608,
+"startColumn":  21,
+"endLine":  608,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'else' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\NullBehavior.cs",
+"region":  {
+"startLine":  611,
+"startColumn":  17,
+"endLine":  611,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectCollectionListTest.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  17,
+"endLine":  69,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S121",
+"message":  "Add curly braces around the nested statement(s) in this 'if' block.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Projection\ProjectCollectionListTest.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  17,
+"endLine":  70,
+"endColumn":  19
+}
+}
+}
+]
+}

@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S4039",
+"message":  "Make 'Mapper' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IMapper.ServiceCtor'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  36,
+"endLine":  196,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'Mapper' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IMapper.ConfigurationProvider'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  40,
+"endLine":  198,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.AllPropertyMapActions'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  96,
+"endLine":  58,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.AllTypeMapActions'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  80,
+"endLine":  61,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.GlobalIgnores'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  51,
+"endLine":  62,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.MemberConfigurations'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  65,
+"endLine":  63,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.SourceExtensionMethods'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  55,
+"endLine":  64,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.TypeConfigurations'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  69,
+"endLine":  65,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.TypeMapConfigs'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  66,
+"endLine":  66,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'Profile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProfileConfiguration.OpenTypeMapConfigs'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  66,
+"endLine":  67,
+"endColumn":  84
+}
+}
+}
+]
+}

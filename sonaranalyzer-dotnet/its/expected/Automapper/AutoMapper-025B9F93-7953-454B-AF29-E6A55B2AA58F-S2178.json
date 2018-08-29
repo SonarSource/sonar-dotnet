@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2178",
+"message":  "Correct this '&' to '&&'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  35,
+"endLine":  168,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this '&' to '&&'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  36,
+"endLine":  172,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this '&' to '&&'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  35,
+"endLine":  176,
+"endColumn":  36
+}
+}
+}
+]
+}

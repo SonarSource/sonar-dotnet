@@ -1,0 +1,100 @@
+{
+"issues":  [
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'Property' or the name of method 'GetProperty' to make them distinguishable.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\UnitTests\Bug\SetterOnlyBug.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  27,
+"endLine":  39,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Automapper\src\UnitTests\Bug\SetterOnlyBug.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  27,
+"endLine":  44,
+"endColumn":  38
+}
+}
+]
+},
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'Value' or the name of method 'GetValue' to make them distinguishable.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1538,
+"startColumn":  27,
+"endLine":  1538,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1543,
+"startColumn":  27,
+"endLine":  1543,
+"endColumn":  35
+}
+}
+]
+},
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'SomeList' or the name of method 'GetSomeList' to make them distinguishable.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1558,
+"startColumn":  26,
+"endLine":  1558,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
+"region":  {
+"startLine":  1563,
+"startColumn":  26,
+"endLine":  1563,
+"endColumn":  37
+}
+}
+]
+},
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'SomeValue' or the name of method 'GetSomeValue' to make them distinguishable.",
+"location":  [
+{
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  767,
+"startColumn":  28,
+"endLine":  767,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
+"region":  {
+"startLine":  772,
+"startColumn":  28,
+"endLine":  772,
+"endColumn":  40
+}
+}
+]
+}
+]
+}

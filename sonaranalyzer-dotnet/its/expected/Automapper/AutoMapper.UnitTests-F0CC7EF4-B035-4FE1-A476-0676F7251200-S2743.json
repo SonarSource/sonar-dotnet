@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2743",
+"message":  "A static field in a generic type is not shared among instances of different close constructed types.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\GenericTypeConverter.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  31,
+"endLine":  77,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2743",
+"message":  "A static field in a generic type is not shared among instances of different close constructed types.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\GenericTypeConverter.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  47,
+"endLine":  79,
+"endColumn":  77
+}
+}
+}
+]
+}
