@@ -119,7 +119,6 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
       return executionTime;
     }
 
-    @CheckForNull
     private static int readErrorCountFromNestedTestCaseTags(XmlParserHelper xmlParserHelper) {
       int errors = 0;
 
