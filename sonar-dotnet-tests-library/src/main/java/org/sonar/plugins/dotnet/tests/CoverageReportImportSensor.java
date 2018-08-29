@@ -103,13 +103,21 @@ public class CoverageReportImportSensor implements Sensor {
       }
 
       hasAnyMainFileCovered = true;
-      NewCoverage newCoverage = context.newCoverage().onFile(inputFile);
 
+      boolean fileHasCoverage = false;
+
+      NewCoverage newCoverage = context.newCoverage().onFile(inputFile);
       for (Map.Entry<Integer, Integer> entry : coverage.hits(filePath).entrySet()) {
+        fileHasCoverage = true;
         newCoverage.lineHits(entry.getKey(), entry.getValue());
       }
-
       newCoverage.save();
+
+      if (fileHasCoverage) {
+        LOG.debug("Found some coverage info for the file '{}'.", filePath);
+      } else {
+        LOG.debug("No coverage info found for the file '{}'.", filePath);
+      }
     }
 
     if (!coverage.files().isEmpty() && !hasAnyMainFileCovered) {

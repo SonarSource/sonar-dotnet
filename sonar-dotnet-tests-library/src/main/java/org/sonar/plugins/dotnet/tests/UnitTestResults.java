@@ -25,15 +25,13 @@ import javax.annotation.Nullable;
 public class UnitTestResults {
 
   private int tests;
-  private int passed;
   private int skipped;
   private int failures;
   private int errors;
   private Long executionTime;
 
-  public void add(int tests, int passed, int skipped, int failures, int errors, @Nullable Long executionTime) {
+  public void add(int tests, int skipped, int failures, int errors, @Nullable Long executionTime) {
     this.tests += tests;
-    this.passed += passed;
     this.skipped += skipped;
     this.failures += failures;
     this.errors += errors;
@@ -48,10 +46,6 @@ public class UnitTestResults {
 
   public int tests() {
     return tests;
-  }
-
-  double passedPercentage() {
-    return tests != 0 ? (passed * 100.0 / tests) : 0;
   }
 
   public int skipped() {

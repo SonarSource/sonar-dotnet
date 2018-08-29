@@ -42,33 +42,23 @@ public class VisualStudioTestResultsFileParserTest {
   }
 
   @Test
-  public void wrong_passed_number() {
-    thrown.expect(ParseErrorException.class);
-    thrown.expectMessage("Expected an integer instead of \"foo\" for the attribute \"passed\" in ");
-    thrown.expectMessage(new File("src/test/resources/visualstudio_test_results/wrong_passed_number.trx").getAbsolutePath());
-    new VisualStudioTestResultsFileParser().accept(new File("src/test/resources/visualstudio_test_results/wrong_passed_number.trx"), mock(UnitTestResults.class));
-  }
-
-  @Test
-  public void valid() throws Exception {
+  public void valid() {
     UnitTestResults results = new UnitTestResults();
     new VisualStudioTestResultsFileParser().accept(new File("src/test/resources/visualstudio_test_results/valid.trx"), results);
 
     assertThat(results.failures()).isEqualTo(14);
     assertThat(results.errors()).isEqualTo(3);
     assertThat(results.tests()).isEqualTo(43);
-    assertThat(results.passedPercentage()).isEqualTo(14 * 100.0 / 43);
     assertThat(results.skipped()).isEqualTo(12); // 43 - 31
     assertThat(results.executionTime()).isEqualTo(816l);
   }
 
   @Test
-  public void valid_missing_attributes() throws Exception {
+  public void valid_missing_attributes() {
     UnitTestResults results = new UnitTestResults();
     new VisualStudioTestResultsFileParser().accept(new File("src/test/resources/visualstudio_test_results/valid_missing_attributes.trx"), results);
 
     assertThat(results.tests()).isEqualTo(3);
-    assertThat(results.passedPercentage()).isEqualTo(3 * 100.0 / 3);
     assertThat(results.skipped()).isEqualTo(0);
     assertThat(results.failures()).isEqualTo(0);
     assertThat(results.errors()).isEqualTo(0);

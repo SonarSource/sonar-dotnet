@@ -81,7 +81,6 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
       foundCounters = true;
 
       int total = xmlParserHelper.getIntAttributeOrZero("total");
-      int passed = xmlParserHelper.getIntAttributeOrZero("passed");
       int failed = xmlParserHelper.getIntAttributeOrZero("failed");
       int errors = xmlParserHelper.getIntAttributeOrZero("error");
       int timeout = xmlParserHelper.getIntAttributeOrZero("timeout");
@@ -94,7 +93,7 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
       int skipped = total - executed;
       int failures = timeout + failed + aborted;
 
-      unitTestResults.add(total, passed, skipped, failures, errors, null);
+      unitTestResults.add(total, skipped, failures, errors, null);
     }
 
     private void handleTimesTag(XmlParserHelper xmlParserHelper) {
@@ -102,7 +101,7 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
       Date finish = getRequiredDateAttribute(xmlParserHelper, "finish");
       long duration = finish.getTime() - start.getTime();
 
-      unitTestResults.add(0, 0, 0, 0, 0, duration);
+      unitTestResults.add(0, 0, 0, 0, duration);
     }
 
     private Date getRequiredDateAttribute(XmlParserHelper xmlParserHelper, String name) {
