@@ -497,7 +497,9 @@ namespace SonarAnalyzer.SymbolicExecution
             var newProgramState = programState;
             if (DiscardDesignationSyntaxWrapper.IsInstance(variableDesignation))
             {
-                // do nothing
+                // Push value for the discard, it will be popped when visiting the block for the
+                // corresponding case statement.
+                newProgramState = newProgramState.PushValue(SymbolicValue.Create());
             }
             else if (SingleVariableDesignationSyntaxWrapper.IsInstance(variableDesignation))
             {
