@@ -83,7 +83,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
                 var terminator = block.TerminatorCase == BasicBlock.TerminatorOneofCase.Jump
                     ? $"JUMP: #{string.Join(", #", block.Jump.Destinations)}"
-                    : $"RET: {Serialize(block.Ret.ReturnedExpression)}";
+                    : $"RET: {SerializeExpression(block.Ret.ReturnedExpression)}";
 
                 var jumps = new[] { $"TERMINATOR: {terminator}" };
 
@@ -106,26 +106,26 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 switch (instruction.InstrCase)
                 {
                     case Instruction.InstrOneofCase.Assigncall:
-                        return Serialize(instruction.Assigncall);
+                        return SerializeAssignCall(instruction.Assigncall);
 
                     case Instruction.InstrOneofCase.NewObject:
-                        return Serialize(instruction.NewObject);
+                        return SerializeNewObject(instruction.NewObject);
 
                     default:
                         throw new ArgumentOutOfRangeException(nameof(instruction));
                 }
             }
 
-            private string Serialize(NewObject newObject)
+            private string SerializeNewObject(NewObject newObject)
             {
                 string target;
                 switch (newObject.TargetCase)
                 {
                     case NewObject.TargetOneofCase.Variable:
-                        target = Serialize(newObject.Variable);
+                        target = SerializeVariable(newObject.Variable);
                         break;
                     case NewObject.TargetOneofCase.FieldAccess:
-                        target = Serialize(newObject.FieldAccess);
+                        target = SerializeFieldAccess(newObject.FieldAccess);
                         break;
                     default:
                         throw new NotSupportedException(newObject.TargetCase.ToString());
@@ -134,74 +134,74 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return $"{target} := new {newObject.Type}";
             }
 
-            private string Serialize(AssignCall assignCall)
+            private string SerializeAssignCall(AssignCall assignCall)
             {
                 string target;
                 switch (assignCall.TargetCase)
                 {
                     case AssignCall.TargetOneofCase.Variable:
-                        target = Serialize(assignCall.Variable);
+                        target = SerializeVariable(assignCall.Variable);
                         break;
                     case AssignCall.TargetOneofCase.FieldAccess:
-                        target = Serialize(assignCall.FieldAccess);
+                        target = SerializeFieldAccess(assignCall.FieldAccess);
                         break;
                     default:
                         throw new NotSupportedException(assignCall.TargetCase.ToString());
                 }
 
-                var arguments = string.Join(", ", assignCall.Args.Select(Serialize));
+                var arguments = string.Join(", ", assignCall.Args.Select(SerializeExpression));
 
                 return $"{target} := {assignCall.MethodId} [ {arguments} ]";
             }
 
-            private string Serialize(FieldAccess fieldAccess)
+            private string SerializeFieldAccess(FieldAccess fieldAccess)
             {
                 switch (fieldAccess.ExprObjCase)
                 {
                     case FieldAccess.ExprObjOneofCase.Object:
-                        return $"{Serialize(fieldAccess.Object)}.{Serialize(fieldAccess.Field)}";
+                        return $"{SerializeVariable(fieldAccess.Object)}.{SerializeVariable(fieldAccess.Field)}";
                     case FieldAccess.ExprObjOneofCase.This:
-                        return $"{Serialize(fieldAccess.This)}.{Serialize(fieldAccess.Field)}";
+                        return $"{SerializeThis(fieldAccess.This)}.{SerializeVariable(fieldAccess.Field)}";
                     case FieldAccess.ExprObjOneofCase.Classname:
-                        return $"{Serialize(fieldAccess.Classname)}.{Serialize(fieldAccess.Field)}";
+                        return $"{SerializeClassName(fieldAccess.Classname)}.{SerializeVariable(fieldAccess.Field)}";
                     default:
                         throw new NotSupportedException(fieldAccess.ExprObjCase.ToString());
                 }
             }
 
-            private string Serialize(ClassName classname)
+            private string SerializeClassName(ClassName classname)
             {
                 return classname.Classname;
             }
 
-            private string Serialize(This @this)
+            private string SerializeThis(This @this)
             {
                 return "this";
             }
 
-            private string Serialize(Variable variable)
+            private string SerializeVariable(Variable variable)
             {
                 return variable.Name;
             }
 
-            private string Serialize(Expression expression)
+            private string SerializeExpression(Expression expression)
             {
                 switch (expression.ExprCase)
                 {
                     case Expression.ExprOneofCase.Var:
-                        return Serialize(expression.Var);
+                        return SerializeVariable(expression.Var);
 
                     case Expression.ExprOneofCase.Const:
                         return "CONST";
 
                     case Expression.ExprOneofCase.This:
-                        return Serialize(expression.This);
+                        return SerializeThis(expression.This);
 
                     case Expression.ExprOneofCase.Classname:
-                        return Serialize(expression.Classname);
+                        return SerializeClassName(expression.Classname);
 
                     case Expression.ExprOneofCase.FieldAccess:
-                        return Serialize(expression.FieldAccess);
+                        return SerializeFieldAccess(expression.FieldAccess);
 
                     default:
                         throw new ArgumentOutOfRangeException(nameof(expression));
