@@ -55,14 +55,14 @@ class C
             dot.Should().BeIgnoringLineEndings(@"digraph ""C.Foo(string, string)"" {
 ENTRY [shape=record label=""{ENTRY|a|b}""]
 ENTRY -> 0
-0 [shape=record label=""{BLOCK:0|\{ \""name\"": \""%0\"" \} __concat a,b|\{ \""name\"": \""x\"" \} __id %0|TERMINATOR JUMP: 1, 2}""]
+0 [shape=record label=""{BLOCK:#0|%0 := __concat [ a, b ]|x := __id [ %0 ]|TERMINATOR: JUMP: #1, #2}""]
 0 -> 1
 0 -> 2
-1 [shape=record label=""{BLOCK:1|\{ \""name\"": \""%1\"" \} C.Bar(string, int) _this_,a,\""\""\""\""|TERMINATOR JUMP: 3}""]
+1 [shape=record label=""{BLOCK:#1|%1 := C.Bar(string, int) [ this, a, CONST ]|TERMINATOR: JUMP: #3}""]
 1 -> 3
-2 [shape=record label=""{BLOCK:2|\{ \""name\"": \""%2\"" \} C.Bar(string, int) _this_,b,\""\""\""\""|TERMINATOR JUMP: 3}""]
+2 [shape=record label=""{BLOCK:#2|%2 := C.Bar(string, int) [ this, b, CONST ]|TERMINATOR: JUMP: #3}""]
 2 -> 3
-3 [shape=record label=""{BLOCK:3|TERMINATOR RET: \""\""\""\""}""]
+3 [shape=record label=""{BLOCK:#3|TERMINATOR: RET: CONST}""]
 3 -> END
 END [shape=record label=""{END}""]
 }
