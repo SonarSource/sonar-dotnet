@@ -153,7 +153,7 @@ namespace Tests.Diagnostics
                     break;
 
                 case int _: // The discard is redundant, but still allowed
-                    o.ToString(); // Compliant
+                    o.ToString();
                     break;
 
                 case null:
