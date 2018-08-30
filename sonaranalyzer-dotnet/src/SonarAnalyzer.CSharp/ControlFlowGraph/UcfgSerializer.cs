@@ -82,12 +82,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 var instructions = block.Instructions.Select(SerializeInstruction);
 
                 var terminator = block.TerminatorCase == BasicBlock.TerminatorOneofCase.Jump
-                    ? $"JUMP: {string.Join(", ", block.Jump.Destinations)}"
+                    ? $"JUMP: #{string.Join(", #", block.Jump.Destinations)}"
                     : $"RET: {SerializeExpression(block.Ret.ReturnedExpression)}";
 
-                var jumps = new[] { $"TERMINATOR {terminator}" };
+                var jumps = new[] { $"TERMINATOR: {terminator}" };
 
-                this.writer.WriteNode(block.Id, $"BLOCK:{block.Id}", instructions.Union(jumps).ToArray());
+                this.writer.WriteNode(block.Id, $"BLOCK:#{block.Id}", instructions.Union(jumps).ToArray());
                 if (block.TerminatorCase == BasicBlock.TerminatorOneofCase.Jump)
                 {
                     foreach (var destination in block.Jump.Destinations)
@@ -106,36 +106,102 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 switch (instruction.InstrCase)
                 {
                     case Instruction.InstrOneofCase.Assigncall:
-                        return $"{instruction.Assigncall.Variable} {instruction.Assigncall.MethodId} " +
-                            $"{string.Join(",", instruction.Assigncall.Args.Select(SerializeExpression))}";
+                        return SerializeAssignCall(instruction.Assigncall);
 
                     case Instruction.InstrOneofCase.NewObject:
-                        return $"{instruction.NewObject.Variable} {instruction.NewObject.Type}";
+                        return SerializeNewObject(instruction.NewObject);
 
                     default:
                         throw new ArgumentOutOfRangeException(nameof(instruction));
                 }
             }
 
+            private string SerializeNewObject(NewObject newObject)
+            {
+                string target;
+                switch (newObject.TargetCase)
+                {
+                    case NewObject.TargetOneofCase.Variable:
+                        target = SerializeVariable(newObject.Variable);
+                        break;
+                    case NewObject.TargetOneofCase.FieldAccess:
+                        target = SerializeFieldAccess(newObject.FieldAccess);
+                        break;
+                    default:
+                        throw new NotSupportedException(newObject.TargetCase.ToString());
+                }
+
+                return $"{target} := new {newObject.Type}";
+            }
+
+            private string SerializeAssignCall(AssignCall assignCall)
+            {
+                string target;
+                switch (assignCall.TargetCase)
+                {
+                    case AssignCall.TargetOneofCase.Variable:
+                        target = SerializeVariable(assignCall.Variable);
+                        break;
+                    case AssignCall.TargetOneofCase.FieldAccess:
+                        target = SerializeFieldAccess(assignCall.FieldAccess);
+                        break;
+                    default:
+                        throw new NotSupportedException(assignCall.TargetCase.ToString());
+                }
+
+                var arguments = string.Join(", ", assignCall.Args.Select(SerializeExpression));
+
+                return $"{target} := {assignCall.MethodId} [ {arguments} ]";
+            }
+
+            private string SerializeFieldAccess(FieldAccess fieldAccess)
+            {
+                switch (fieldAccess.ExprObjCase)
+                {
+                    case FieldAccess.ExprObjOneofCase.Object:
+                        return $"{SerializeVariable(fieldAccess.Object)}.{SerializeVariable(fieldAccess.Field)}";
+                    case FieldAccess.ExprObjOneofCase.This:
+                        return $"{SerializeThis(fieldAccess.This)}.{SerializeVariable(fieldAccess.Field)}";
+                    case FieldAccess.ExprObjOneofCase.Classname:
+                        return $"{SerializeClassName(fieldAccess.Classname)}.{SerializeVariable(fieldAccess.Field)}";
+                    default:
+                        throw new NotSupportedException(fieldAccess.ExprObjCase.ToString());
+                }
+            }
+
+            private string SerializeClassName(ClassName classname)
+            {
+                return classname.Classname;
+            }
+
+            private string SerializeThis(This @this)
+            {
+                return "this";
+            }
+
+            private string SerializeVariable(Variable variable)
+            {
+                return variable.Name;
+            }
+
             private string SerializeExpression(Expression expression)
             {
-                // Names are based on Java sonar-ucfg toString methods
                 switch (expression.ExprCase)
                 {
                     case Expression.ExprOneofCase.Var:
-                        return expression.Var.Name;
+                        return SerializeVariable(expression.Var);
 
                     case Expression.ExprOneofCase.Const:
-                        return $"\"{expression.Const.Value}\"";
+                        return "CONST";
 
                     case Expression.ExprOneofCase.This:
-                        return "_this_";
+                        return SerializeThis(expression.This);
 
                     case Expression.ExprOneofCase.Classname:
-                        return $"ClassName:{expression.Classname.Classname}";
+                        return SerializeClassName(expression.Classname);
 
                     case Expression.ExprOneofCase.FieldAccess:
-                        return $"FieldAccess {expression.FieldAccess.Object.Name} {expression.FieldAccess.Field}";
+                        return SerializeFieldAccess(expression.FieldAccess);
 
                     default:
                         throw new ArgumentOutOfRangeException(nameof(expression));
