@@ -66,6 +66,17 @@ namespace Tests.Diagnostics
             }
         }
 
+        void VariableDesignationPattern_Discard(object o)
+        {
+            if (o is string _) // Ensure that the discard does not throw exception when processed
+            {
+                if (o == null)
+                {
+                    o.ToString(); // Noncompliant, False Positive
+                }
+            }
+        }
+
         void Patterns_In_Loops(object o, object[] items)
         {
             while (o is string s)
@@ -91,6 +102,16 @@ namespace Tests.Diagnostics
                     s.ToString();
                 }
             }
+        }
+
+        void Patterns_In_Loops_With_Discard(object o, object[] items)
+        {
+            // The following should not throw exceptions
+            while (o is string _) { }
+
+            do { } while (o is string _);
+
+            for (int i = 0; i < length && items[i] is string _; i++) { }
         }
 
         void Switch_Pattern_Source(object o)
