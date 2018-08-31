@@ -29,9 +29,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void SingleStatementPerLine()
+        public void SingleStatementPerLine_CSharp()
         {
             Verifier.VerifyAnalyzer(@"TestCases\SingleStatementPerLine.cs", new CS.SingleStatementPerLine());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void SingleStatementPerLine_VisualBasic()
+        {
             Verifier.VerifyAnalyzer(@"TestCases\SingleStatementPerLine.vb", new VB.SingleStatementPerLine());
         }
     }
