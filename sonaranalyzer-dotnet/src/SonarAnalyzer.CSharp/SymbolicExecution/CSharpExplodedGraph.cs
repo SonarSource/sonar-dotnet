@@ -54,7 +54,12 @@ namespace SonarAnalyzer.SymbolicExecution
 
             if (block is UsingEndBlock usingFinalizerBlock)
             {
-                newProgramState = InvokeChecks(newProgramState, (ps, check) => check.PreProcessUsingStatement(node.ProgramPoint, ps));
+                var result = InvokeChecks(newProgramState, (ps, check) => check.PreProcessUsingStatement(node.ProgramPoint, ps));
+                if (!result.HasValue)
+                {
+                    return;
+                }
+                newProgramState = result.Value;
                 newProgramState = CleanStateAfterBlock(newProgramState, block);
                 EnqueueAllSuccessors(block, newProgramState);
                 return;
@@ -149,13 +154,14 @@ namespace SonarAnalyzer.SymbolicExecution
             var expression = instruction as ExpressionSyntax;
             var parenthesizedExpression = expression?.GetSelfOrTopParenthesizedExpression();
             var newProgramPoint = new ProgramPoint(node.ProgramPoint.Block, node.ProgramPoint.Offset + 1);
-            var newProgramState = node.ProgramState;
 
-            newProgramState = InvokeChecks(newProgramState, (ps, check) => check.PreProcessInstruction(node.ProgramPoint, ps));
-            if (newProgramState == null)
+            var checkResult = InvokeChecks(node.ProgramState, (ps, check) => check.PreProcessInstruction(node.ProgramPoint, ps));
+            if (!checkResult.HasValue)
             {
                 return;
             }
+
+            var newProgramState = checkResult.Value;
 
             switch (instruction.Kind())
             {
@@ -363,8 +369,13 @@ namespace SonarAnalyzer.SymbolicExecution
                         var sv = new SymbolicValue();
                         newProgramState = newProgramState.SetConstraint(sv, ObjectConstraint.NotNull);
                         newProgramState = newProgramState.PushValue(sv);
-                        newProgramState = InvokeChecks(newProgramState,
+                        checkResult = InvokeChecks(newProgramState,
                             (ps, check) => check.ObjectCreated(ps, sv, instruction));
+                        if (!checkResult.HasValue)
+                        {
+                            return;
+                        }
+                        newProgramState = checkResult.Value;
                     }
                     break;
 
@@ -380,8 +391,13 @@ namespace SonarAnalyzer.SymbolicExecution
                         var sv = new SymbolicValue();
                         newProgramState = newProgramState.SetConstraint(sv, ObjectConstraint.NotNull);
                         newProgramState = newProgramState.PushValue(sv);
-                        newProgramState = InvokeChecks(newProgramState,
+                        checkResult = InvokeChecks(newProgramState,
                             (ps, check) => check.ObjectCreated(ps, sv, instruction));
+                        if (!checkResult.HasValue)
+                        {
+                            return;
+                        }
+                        newProgramState = checkResult.Value;
                     }
                     break;
 
@@ -398,7 +414,12 @@ namespace SonarAnalyzer.SymbolicExecution
                     break;
 
                 case SyntaxKind.ObjectCreationExpression:
-                    newProgramState = VisitObjectCreation((ObjectCreationExpressionSyntax)instruction, newProgramState);
+                    checkResult = VisitObjectCreation((ObjectCreationExpressionSyntax)instruction, newProgramState);
+                    if (!checkResult.HasValue)
+                    {
+                        return;
+                    }
+                    newProgramState = checkResult.Value;
                     break;
 
                 case SyntaxKind.ElementAccessExpression:
@@ -531,10 +552,10 @@ namespace SonarAnalyzer.SymbolicExecution
             return newProgramState;
         }
 
-        private ProgramState InvokeChecks(ProgramState programState, Func<ProgramState, ExplodedGraphCheck, ProgramState> invoke)
+        private Optional<ProgramState> InvokeChecks(ProgramState programState, Func<ProgramState, ExplodedGraphCheck, Optional<ProgramState>> invoke)
         {
-            // If a check returns null, we will skip the next checks and return null
-            return this.explodedGraphChecks.Aggregate(programState, (ps, check) => ps == null ? null : invoke(ps, check));
+            // If a check returns no-value ProgramState, we will skip the next checks and return no value
+            return this.explodedGraphChecks.Aggregate(new Optional<ProgramState>(programState), (ps, check) => ps.HasValue ? invoke(ps.Value, check) : new Optional<ProgramState>());
         }
 
         private ProgramState EnsureStackState(ExpressionSyntax parenthesizedExpression, ProgramState programState)
@@ -777,9 +798,15 @@ namespace SonarAnalyzer.SymbolicExecution
             return SetNewSymbolicValueIfTracked(symbol, sv, newProgramState);
         }
 
-        private ProgramState VisitObjectCreation(ObjectCreationExpressionSyntax ctor, ProgramState programState)
+        private Optional<ProgramState> VisitObjectCreation(ObjectCreationExpressionSyntax ctor, ProgramState programState)
         {
-            var newProgramState = InvokeChecks(programState, (ps, check) => check.ObjectCreating(ps, ctor));
+            var newProgramState = programState;
+            var result = InvokeChecks(programState, (ps, check) => check.ObjectCreating(ps, ctor));
+            if (!result.HasValue)
+            {
+                return result;
+            }
+            newProgramState = result.Value;
 
             var sv = new SymbolicValue();
             newProgramState = newProgramState.PopValues(ctor.ArgumentList?.Arguments.Count ?? 0);
@@ -799,7 +826,13 @@ namespace SonarAnalyzer.SymbolicExecution
 
             newProgramState = newProgramState.PushValue(sv);
 
-            return InvokeChecks(newProgramState, (ps, check) => check.ObjectCreated(ps, sv, ctor));
+            result = InvokeChecks(newProgramState, (ps, check) => check.ObjectCreated(ps, sv, ctor));
+            if (!result.HasValue)
+            {
+                return result;
+            }
+            newProgramState = result.Value;
+            return newProgramState;
         }
 
         private static ProgramState VisitInitializer(SyntaxNode instruction, ExpressionSyntax parenthesizedExpression, ProgramState programState)

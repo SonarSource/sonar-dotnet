@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ValuePropertyAccessed?.Invoke(this, new MemberAccessedEventArgs(identifier));
             }
 
-            public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
+            public override Optional<ProgramState> PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
             {
                 var instruction = programPoint.Block.Instructions[programPoint.Offset];
 
@@ -102,7 +102,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     : programState;
             }
 
-            private ProgramState ProcessMemberAccess(ProgramState programState, MemberAccessExpressionSyntax memberAccess)
+            private Optional<ProgramState> ProcessMemberAccess(ProgramState programState, MemberAccessExpressionSyntax memberAccess)
             {
                 if (!(memberAccess.Expression.RemoveParentheses() is IdentifierNameSyntax identifier) ||
                     memberAccess.Name.Identifier.ValueText != ValueLiteral)
@@ -119,7 +119,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (symbol.HasConstraint(ObjectConstraint.Null, programState))
                 {
                     OnValuePropertyAccessed(identifier);
-                    return null;
+                    return new Optional<ProgramState>();
                 }
 
                 return programState;

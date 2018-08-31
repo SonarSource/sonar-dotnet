@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Helpers.FlowAnalysis
         [TestMethod]
         public void TrySetOppositeConstraint_Existing_No_Set_True()
         {
-            var ps = new ProgramState();
+            var ps = ProgramState.Empty;
 
             var newProgramStates = this.sv_0.TrySetOppositeConstraint(BoolConstraint.True, ps).ToList();
 
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Helpers.FlowAnalysis
         [TestMethod]
         public void TrySetOppositeConstraint_Existing_No_Set_False()
         {
-            var ps = new ProgramState();
+            var ps = ProgramState.Empty;
 
             var newProgramStates = this.sv_0.TrySetOppositeConstraint(BoolConstraint.False, ps).ToList();
 
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.UnitTest.Helpers.FlowAnalysis
         [TestMethod]
         public void TrySetOppositeConstraint_Existing_No_Set_None()
         {
-            var ps = new ProgramState();
+            var ps = ProgramState.Empty;
 
             var newProgramStates = this.sv_0.TrySetOppositeConstraint(NullableValueConstraint.NoValue, ps).ToList();
 
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.UnitTest.Helpers.FlowAnalysis
         [TestMethod]
         public void TrySetOppositeConstraint_Existing_No_Set_Some()
         {
-            var ps = new ProgramState();
+            var ps = ProgramState.Empty;
 
             var newProgramStates = this.sv_0.TrySetOppositeConstraint(NullableValueConstraint.HasValue, ps).ToList();
 
@@ -91,7 +91,7 @@ namespace SonarAnalyzer.UnitTest.Helpers.FlowAnalysis
         [TestMethod]
         public void TrySetOppositeConstraint_Existing_No_Set_Null()
         {
-            var ps = new ProgramState();
+            var ps = ProgramState.Empty;
 
             var newProgramStates = this.sv_0.TrySetOppositeConstraint(ObjectConstraint.Null, ps).ToList();
 
@@ -102,7 +102,7 @@ namespace SonarAnalyzer.UnitTest.Helpers.FlowAnalysis
         [TestMethod]
         public void TrySetOppositeConstraint_Existing_No_Set_NotNull()
         {
-            var ps = new ProgramState();
+            var ps = ProgramState.Empty;
 
             var newProgramStates = this.sv_0.TrySetOppositeConstraint(ObjectConstraint.NotNull, ps).ToList();
 

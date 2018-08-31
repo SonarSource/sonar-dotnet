@@ -33,22 +33,22 @@ namespace SonarAnalyzer.SymbolicExecution
             this.semanticModel = explodedGraph.SemanticModel;
         }
 
-        public virtual ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
+        public virtual Optional<ProgramState> PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
         {
             return programState;
         }
 
-        public virtual ProgramState PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState)
+        public virtual Optional<ProgramState> PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState)
         {
             return programState;
         }
 
-        public virtual ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue, SyntaxNode instruction)
+        public virtual Optional<ProgramState> ObjectCreated(ProgramState programState, SymbolicValue symbolicValue, SyntaxNode instruction)
         {
             return programState;
         }
 
-        public virtual ProgramState ObjectCreating(ProgramState programState, SyntaxNode instruction)
+        public virtual Optional<ProgramState> ObjectCreating(ProgramState programState, SyntaxNode instruction)
         {
             return programState;
         }

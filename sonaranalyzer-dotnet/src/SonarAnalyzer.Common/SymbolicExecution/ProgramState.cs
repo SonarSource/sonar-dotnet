@@ -31,7 +31,7 @@ using SonarAnalyzer.SymbolicExecution.SymbolicValues;
 
 namespace SonarAnalyzer.SymbolicExecution
 {
-    public sealed class ProgramState : IEquatable<ProgramState>
+    public struct ProgramState : IEquatable<ProgramState>
     {
         private ImmutableDictionary<ISymbol, SymbolicValue> Values { get; }
         public ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> Constraints { get; }
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.SymbolicExecution
             SymbolicValue.Base
         };
 
-        private readonly Lazy<int> hash;
+        private int? hash;
 
         private int ComputeHash()
         {
@@ -95,16 +95,14 @@ namespace SonarAnalyzer.SymbolicExecution
             return h;
         }
 
-        public ProgramState()
-            : this(ImmutableDictionary<ISymbol, SymbolicValue>.Empty,
-                  InitialConstraints,
-                  ImmutableDictionary<ProgramPoint, int>.Empty,
-                  ImmutableStack<SymbolicValue>.Empty,
-                  ImmutableHashSet<BinaryRelationship>.Empty)
-        {
-        }
+        public static ProgramState Empty { get; } =
+            new ProgramState(ImmutableDictionary<ISymbol, SymbolicValue>.Empty,
+                InitialConstraints,
+                ImmutableDictionary<ProgramPoint, int>.Empty,
+                ImmutableStack<SymbolicValue>.Empty,
+                ImmutableHashSet<BinaryRelationship>.Empty);
 
-        internal ProgramState TrySetRelationship(BinaryRelationship relationship)
+        internal Optional<ProgramState> TrySetRelationship(BinaryRelationship relationship)
         {
             // Only add new relationships, and ones that are on SV's that belong to a local symbol
             if (Relationships.Contains(relationship) ||
@@ -116,7 +114,7 @@ namespace SonarAnalyzer.SymbolicExecution
             var relationships = GetAllRelationshipsWith(relationship);
             if (relationships == null)
             {
-                return null;
+                return new Optional<ProgramState>();
             }
 
             return new ProgramState(
@@ -262,7 +260,7 @@ namespace SonarAnalyzer.SymbolicExecution
             ProgramPointVisitCounts = programPointVisitCounts;
             ExpressionStack = expressionStack;
             Relationships = relationships;
-            this.hash = new Lazy<int>(ComputeHash);
+            this.hash = null;
         }
 
         public ProgramState PushValue(SymbolicValue symbolicValue)
@@ -388,11 +386,12 @@ namespace SonarAnalyzer.SymbolicExecution
                 .Concat(cleanedValues.Values.OfType<NullableSymbolicValue>().Select(x => x.WrappedValue)) // Do not lose constraints on wrapped SV
                 .ToHashSet();
 
+            var @this = this;
             var cleanedConstraints = Constraints
                 .Where(kv =>
                     usedSymbolicValues.Contains(kv.Key) ||
                     ProtectedSymbolicValues.Contains(kv.Key) ||
-                    ExpressionStack.Contains(kv.Key))
+                    @this.ExpressionStack.Contains(kv.Key))
                 .ToImmutableDictionary();
 
             // Relationships for live symbols (no transitivity, so both of them need to be live in order to hold any information)
@@ -405,31 +404,24 @@ namespace SonarAnalyzer.SymbolicExecution
             return new ProgramState(cleanedValues, cleanedConstraints, ProgramPointVisitCounts, ExpressionStack, cleanedRelationships);
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object obj) =>
+            obj is ProgramState other &&
+            Equals(other);
+
+        public bool Equals(ProgramState other) =>
+            DictionaryHelper.DictionaryEquals(Values, other.Values) &&
+            DictionaryHelper.DictionaryEquals(Constraints, other.Constraints) &&
+            Enumerable.SequenceEqual(ExpressionStack, other.ExpressionStack) &&
+            Relationships.SetEquals(other.Relationships);
+
+        public override int GetHashCode()
         {
-            if (obj == null)
+            if (!this.hash.HasValue)
             {
-                return false;
+                this.hash = ComputeHash();
             }
-
-            var p = obj as ProgramState;
-            return Equals(p);
+            return this.hash.Value;
         }
-
-        public bool Equals(ProgramState other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
-
-            return DictionaryHelper.DictionaryEquals(Values, other.Values) &&
-                DictionaryHelper.DictionaryEquals(Constraints, other.Constraints) &&
-                Enumerable.SequenceEqual(ExpressionStack, other.ExpressionStack) &&
-                Relationships.SetEquals(other.Relationships);
-        }
-
-        public override int GetHashCode() => this.hash.Value;
 
         public ProgramState SetConstraint(SymbolicValue symbolicValue, SymbolicValueConstraint constraint)
         {

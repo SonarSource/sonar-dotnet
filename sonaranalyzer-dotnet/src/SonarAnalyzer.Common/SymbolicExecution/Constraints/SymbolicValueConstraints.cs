@@ -20,14 +20,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints
 {
     public class SymbolicValueConstraints
     {
-        private readonly Dictionary<Type, SymbolicValueConstraint> constraints
-            = new Dictionary<Type, SymbolicValueConstraint>();
+        private readonly ImmutableDictionary<Type, SymbolicValueConstraint> constraints
+            = ImmutableDictionary.Create<Type, SymbolicValueConstraint>();
 
         private readonly int hashCode;
 
@@ -38,11 +39,11 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
 
         private SymbolicValueConstraints(SymbolicValueConstraint constraint)
         {
-            SetConstraint(constraint, this.constraints);
+            constraints = SetConstraint(constraint, ImmutableDictionary.Create<Type, SymbolicValueConstraint>());
             this.hashCode = ComputeHashcode();
         }
 
-        private SymbolicValueConstraints(Dictionary<Type, SymbolicValueConstraint> constraints)
+        private SymbolicValueConstraints(ImmutableDictionary<Type, SymbolicValueConstraint> constraints)
         {
             this.constraints = constraints;
             this.hashCode = ComputeHashcode();
@@ -52,36 +53,30 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
 
         internal SymbolicValueConstraints WithConstraint(SymbolicValueConstraint constraint)
         {
-            var constraintsCopy = new Dictionary<Type, SymbolicValueConstraint>(this.constraints);
-            SetConstraint(constraint, constraintsCopy);
-
-            return new SymbolicValueConstraints(constraintsCopy);
+            return new SymbolicValueConstraints(SetConstraint(constraint, constraints));
         }
 
         internal SymbolicValueConstraints WithoutConstraint(SymbolicValueConstraint constraint)
         {
-            var constraintsCopy = new Dictionary<Type, SymbolicValueConstraint>(this.constraints);
-            if (constraintsCopy.Remove(constraint.GetType()))
-            {
-                return new SymbolicValueConstraints(constraintsCopy);
-            }
-            return this;
+            return new SymbolicValueConstraints(this.constraints.Remove(constraint.GetType()));
         }
 
-        private static void SetConstraint(SymbolicValueConstraint constraint,
-            Dictionary<Type, SymbolicValueConstraint> constraints)
+        private static ImmutableDictionary<Type, SymbolicValueConstraint> SetConstraint(SymbolicValueConstraint constraint,
+            ImmutableDictionary<Type, SymbolicValueConstraint> constraints)
         {
-            constraints[constraint.GetType()] = constraint;
+            var newConstraints = constraints.SetItem(constraint.GetType(), constraint);
 
             if (constraint is BoolConstraint ||
                 constraint is DisposableConstraint)
             {
-                constraints[typeof(ObjectConstraint)] = ObjectConstraint.NotNull;
+                newConstraints = newConstraints.SetItem(typeof(ObjectConstraint), ObjectConstraint.NotNull);
                 if (constraints.ContainsKey(typeof(NullableValueConstraint)))
                 {
-                    constraints[typeof(NullableValueConstraint)] = NullableValueConstraint.HasValue;
+                    newConstraints = newConstraints.SetItem(typeof(NullableValueConstraint), NullableValueConstraint.HasValue);
                 }
             }
+
+            return newConstraints;
         }
 
         internal T GetConstraintOrDefault<T>()

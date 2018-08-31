@@ -41,7 +41,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_No_Set_True()
         {
-            var ps = new ProgramState();
+            var ps = ProgramState.Empty;
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.True, ps).ToList();
 
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_No_Set_False()
         {
-            var ps = new ProgramState();
+            var ps = ProgramState.Empty;
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.False, ps).ToList();
 
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_No_Set_NoValue()
         {
-            var ps = new ProgramState();
+            var ps = ProgramState.Empty;
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, ps).ToList();
 
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_No_Set_HasValue()
         {
-            var ps = new ProgramState();
+            var ps = ProgramState.Empty;
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, ps).ToList();
 
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_No_Set_Null()
         {
-            var ps = new ProgramState();
+            var ps = ProgramState.Empty;
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.Null, ps).ToList();
 
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_No_Set_NotNull()
         {
-            var ps = new ProgramState();
+            var ps = ProgramState.Empty;
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, ps).ToList();
 
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_No_Set_Nothing()
         {
-            var ps = new ProgramState();
+            var ps = ProgramState.Empty;
 
             var newProgramStates = this.sv_0.TrySetConstraint(null, ps).ToList();
 
@@ -119,7 +119,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_True_Set_True()
         {
-            var ps = this.sv_0.TrySetConstraint(BoolConstraint.True, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(BoolConstraint.True, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.True, ps).ToList();
 
@@ -129,7 +129,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_True_Set_False()
         {
-            var ps = this.sv_0.TrySetConstraint(BoolConstraint.True, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(BoolConstraint.True, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.False, ps).ToList();
 
@@ -139,7 +139,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_True_Set_NoValue()
         {
-            var ps = this.sv_0.TrySetConstraint(BoolConstraint.True, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(BoolConstraint.True, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, ps).ToList();
 
@@ -149,7 +149,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_True_Set_HasValue()
         {
-            var ps = this.sv_0.TrySetConstraint(BoolConstraint.True, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(BoolConstraint.True, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, ps).ToList();
 
@@ -159,7 +159,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_True_Set_Null()
         {
-            var ps = this.sv_0.TrySetConstraint(BoolConstraint.True, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(BoolConstraint.True, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.Null, ps).ToList();
 
@@ -169,7 +169,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_True_Set_NotNull()
         {
-            var ps = this.sv_0.TrySetConstraint(BoolConstraint.True, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(BoolConstraint.True, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, ps).ToList();
 
@@ -179,7 +179,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_True_Set_Nothing()
         {
-            var ps = this.sv_0.TrySetConstraint(BoolConstraint.True, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(BoolConstraint.True, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(null, ps).ToList();
 
@@ -189,7 +189,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_False_Set_True()
         {
-            var ps = this.sv_0.TrySetConstraint(BoolConstraint.False, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(BoolConstraint.False, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.True, ps).ToList();
 
@@ -199,7 +199,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_False_Set_False()
         {
-            var ps = this.sv_0.TrySetConstraint(BoolConstraint.False, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(BoolConstraint.False, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.False, ps).ToList();
 
@@ -209,7 +209,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_False_Set_NoValue()
         {
-            var ps = this.sv_0.TrySetConstraint(BoolConstraint.False, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(BoolConstraint.False, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, ps).ToList();
 
@@ -219,7 +219,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_False_Set_HasValue()
         {
-            var ps = this.sv_0.TrySetConstraint(BoolConstraint.False, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(BoolConstraint.False, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, ps).ToList();
 
@@ -229,7 +229,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_False_Set_Null()
         {
-            var ps = this.sv_0.TrySetConstraint(BoolConstraint.False, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(BoolConstraint.False, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.Null, ps).ToList();
 
@@ -239,7 +239,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_False_Set_NotNull()
         {
-            var ps = this.sv_0.TrySetConstraint(BoolConstraint.False, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(BoolConstraint.False, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, ps).ToList();
 
@@ -249,7 +249,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_False_Set_Nothing()
         {
-            var ps = this.sv_0.TrySetConstraint(BoolConstraint.False, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(BoolConstraint.False, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(null, ps).ToList();
 
@@ -259,7 +259,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_NoValue_Set_True()
         {
-            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.True, ps).ToList();
 
@@ -269,7 +269,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_NoValue_Set_False()
         {
-            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.False, ps).ToList();
 
@@ -279,7 +279,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_NoValue_Set_NoValue()
         {
-            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, ps).ToList();
 
@@ -289,7 +289,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_NoValue_Set_HasValue()
         {
-            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, ps).ToList();
 
@@ -299,7 +299,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_NoValue_Set_Null()
         {
-            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.Null, ps).ToList();
 
@@ -309,7 +309,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_NoValue_Set_NotNull()
         {
-            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, ps).ToList();
 
@@ -319,7 +319,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_NoValue_Set_Nothing()
         {
-            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(null, ps).ToList();
 
@@ -329,7 +329,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_HasValue_Set_True()
         {
-            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.True, ps).ToList();
 
@@ -341,7 +341,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_HasValue_Set_False()
         {
-            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.False, ps).ToList();
 
@@ -353,7 +353,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_HasValue_Set_NoValue()
         {
-            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, ps).ToList();
 
@@ -363,7 +363,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_HasValue_Set_HasValue()
         {
-            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, ps).ToList();
 
@@ -373,7 +373,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_HasValue_Set_Null()
         {
-            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.Null, ps).ToList();
 
@@ -383,7 +383,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_HasValue_Set_NotNull()
         {
-            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, ps).ToList();
 
@@ -393,7 +393,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_HasValue_Set_Nothing()
         {
-            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(null, ps).ToList();
 
@@ -403,7 +403,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_Null_Set_True()
         {
-            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.Null, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.Null, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.True, ps).ToList();
 
@@ -413,7 +413,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_Null_Set_False()
         {
-            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.Null, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.Null, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.False, ps).ToList();
 
@@ -423,7 +423,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_Null_Set_NoValue()
         {
-            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.Null, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.Null, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, ps).ToList();
 
@@ -433,7 +433,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_Null_Set_HasValue()
         {
-            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.Null, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.Null, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, ps).ToList();
 
@@ -443,7 +443,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_Null_Set_Null()
         {
-            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.Null, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.Null, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.Null, ps).ToList();
 
@@ -453,7 +453,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_Null_Set_NotNull()
         {
-            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.Null, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.Null, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, ps).ToList();
 
@@ -463,7 +463,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_Null_Set_Nothing()
         {
-            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.Null, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.Null, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(null, ps).ToList();
 
@@ -473,7 +473,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_NotNull_Set_True()
         {
-            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.True, ps).ToList();
 
@@ -485,7 +485,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_NotNull_Set_False()
         {
-            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.False, ps).ToList();
 
@@ -497,7 +497,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_NotNull_Set_NoValue()
         {
-            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, ps).ToList();
 
@@ -507,7 +507,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_NotNull_Set_HasValue()
         {
-            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, ps).ToList();
 
@@ -517,7 +517,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_NotNull_Set_Null()
         {
-            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.Null, ps).ToList();
 
@@ -527,7 +527,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_NotNull_Set_NotNull()
         {
-            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, ps).ToList();
 
@@ -537,7 +537,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [TestMethod]
         public void TrySetConstraint_Existing_NotNull_Set_Nothing()
         {
-            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, new ProgramState()).Single();
+            var ps = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, ProgramState.Empty).Single();
 
             var newProgramStates = this.sv_0.TrySetConstraint(null, ps).ToList();
 

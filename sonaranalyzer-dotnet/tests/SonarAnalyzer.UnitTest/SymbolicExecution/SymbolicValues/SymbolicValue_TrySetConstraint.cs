@@ -243,7 +243,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
         private ProgramState SetupProgramState(SymbolicValue sv, IEnumerable<SymbolicValueConstraint> constraints)
         {
-            return constraints.Aggregate(new ProgramState(),
+            return constraints.Aggregate(ProgramState.Empty,
                 (ps, constraint) => ps.SetConstraint(sv, constraint));
         }
     }

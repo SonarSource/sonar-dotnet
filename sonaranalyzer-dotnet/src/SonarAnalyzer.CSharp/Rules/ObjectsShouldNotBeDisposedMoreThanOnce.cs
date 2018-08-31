@@ -111,7 +111,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
             }
 
-            public override ProgramState PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState)
+            public override Optional<ProgramState> PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState)
             {
                 var newProgramState = programState;
 
@@ -137,7 +137,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return newProgramState;
             }
 
-            public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
+            public override Optional<ProgramState> PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
             {
 
                 return !(programPoint.Block.Instructions[programPoint.Offset] is InvocationExpressionSyntax instruction)

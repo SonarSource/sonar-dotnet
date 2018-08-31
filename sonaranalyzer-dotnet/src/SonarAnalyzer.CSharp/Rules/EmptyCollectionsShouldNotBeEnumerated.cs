@@ -136,7 +136,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 CollectionAccessed?.Invoke(this, new CollectionAccessedEventArgs(node, empty));
             }
 
-            public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
+            public override Optional<ProgramState> PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
             {
                 var instruction = programPoint.Block.Instructions[programPoint.Offset];
 
@@ -151,7 +151,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            private ProgramState ProcessInvocation(ProgramState programState, InvocationExpressionSyntax invocation)
+            private Optional<ProgramState> ProcessInvocation(ProgramState programState, InvocationExpressionSyntax invocation)
             {
                 // Argument of the nameof expression is not pushed on stack so we need to exit the checks
                 if (invocation.IsNameof(this.semanticModel))
@@ -203,7 +203,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return newProgramState;
             }
 
-            private ProgramState ProcessElementAccess(ProgramState programState, ElementAccessExpressionSyntax elementAccess)
+            private Optional<ProgramState> ProcessElementAccess(ProgramState programState, ElementAccessExpressionSyntax elementAccess)
             {
                 var collectionSymbol = this.semanticModel.GetSymbolInfo(elementAccess.Expression).Symbol;
                 var collectionType = GetCollectionType(collectionSymbol);
@@ -229,7 +229,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return programState;
             }
 
-            public override ProgramState ObjectCreating(ProgramState programState, SyntaxNode instruction)
+            public override Optional<ProgramState> ObjectCreating(ProgramState programState, SyntaxNode instruction)
             {
                 if (instruction.IsKind(SyntaxKind.ObjectCreationExpression))
                 {
@@ -244,7 +244,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return programState;
             }
 
-            public override ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue,
+            public override Optional<ProgramState> ObjectCreated(ProgramState programState, SymbolicValue symbolicValue,
                 SyntaxNode instruction)
             {
                 var newProgramState = programState;
