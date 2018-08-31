@@ -29,6 +29,32 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
+        public void EmptyCollectionsShouldNotBeEnumerated_temp()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+using System;
+using System.Collections.Generic;
+public class C
+{
+    public void PassingToConstructor_Removes_Constraints()
+    {
+        var list = new int[] { };
+        new Foo(1, 2, list); // Compliant
+        list.Clone(); // Compliant, this will normally raise
+    }
+}
+class Foo
+{
+    // Important to test not only the first argument
+    public Foo(int param, int other, IEnumerable<int> arg)
+    {
+    }
+}
+", new EmptyCollectionsShouldNotBeEnumerated());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void EmptyCollectionsShouldNotBeEnumerated()
         {
             Verifier.VerifyAnalyzer(@"TestCases\EmptyCollectionsShouldNotBeEnumerated.cs",

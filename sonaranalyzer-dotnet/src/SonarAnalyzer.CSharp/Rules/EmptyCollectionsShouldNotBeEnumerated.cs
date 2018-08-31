@@ -229,55 +229,55 @@ namespace SonarAnalyzer.Rules.CSharp
                 return programState;
             }
 
-            ////public override ProgramState ObjectCreating(ProgramState programState, SyntaxNode instruction)
-            ////{
-            ////    if (instruction.IsKind(SyntaxKind.ObjectCreationExpression))
-            ////    {
-            ////        // When any object is being created ...
-            ////        var objectCreationSyntax = (ObjectCreationExpressionSyntax)instruction;
+            public override Optional<ProgramState> ObjectCreating(ProgramState programState, SyntaxNode instruction)
+            {
+                if (instruction.IsKind(SyntaxKind.ObjectCreationExpression))
+                {
+                    // When any object is being created ...
+                    var objectCreationSyntax = (ObjectCreationExpressionSyntax)instruction;
 
-            ////        // Remove collection constraint from all arguments passed to the constructor
-            ////        var newProgramState = RemoveCollectionConstraintsFromArguments(objectCreationSyntax.ArgumentList, programState);
-            ////        return newProgramState;
-            ////    }
+                    // Remove collection constraint from all arguments passed to the constructor
+                    var newProgramState = RemoveCollectionConstraintsFromArguments(objectCreationSyntax.ArgumentList, programState);
+                    return newProgramState;
+                }
 
-            ////    return programState;
-            ////}
+                return programState;
+            }
 
-            ////public override ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue,
-            ////    SyntaxNode instruction)
-            ////{
-            ////    var newProgramState = programState;
-            ////    CollectionCapacityConstraint constraint = null;
+            public override Optional<ProgramState> ObjectCreated(ProgramState programState, SymbolicValue symbolicValue,
+                SyntaxNode instruction)
+            {
+                var newProgramState = programState;
+                CollectionCapacityConstraint constraint = null;
 
-            ////    if (instruction.IsKind(SyntaxKind.ObjectCreationExpression))
-            ////    {
-            ////        var objectCreationSyntax = (ObjectCreationExpressionSyntax)instruction;
-            ////        var constructor = this.semanticModel.GetSymbolInfo(objectCreationSyntax).Symbol as IMethodSymbol;
-            ////        // When a collection is being created ...
-            ////        if (IsCollectionConstructor(constructor))
-            ////        {
-            ////            // ... try to devise what constraint could be applied by the constructor or the initializer
-            ////            constraint =
-            ////                GetInitializerConstraint(objectCreationSyntax.Initializer) ??
-            ////                GetCollectionConstraint(constructor);
-            ////        }
-            ////    }
-            ////    else if (instruction.IsKind(SyntaxKind.ArrayCreationExpression))
-            ////    {
-            ////        // When an array is being created ...
-            ////        var arrayCreationSyntax = (ArrayCreationExpressionSyntax)instruction;
+                if (instruction.IsKind(SyntaxKind.ObjectCreationExpression))
+                {
+                    var objectCreationSyntax = (ObjectCreationExpressionSyntax)instruction;
+                    var constructor = this.semanticModel.GetSymbolInfo(objectCreationSyntax).Symbol as IMethodSymbol;
+                    // When a collection is being created ...
+                    if (IsCollectionConstructor(constructor))
+                    {
+                        // ... try to devise what constraint could be applied by the constructor or the initializer
+                        constraint =
+                            GetInitializerConstraint(objectCreationSyntax.Initializer) ??
+                            GetCollectionConstraint(constructor);
+                    }
+                }
+                else if (instruction.IsKind(SyntaxKind.ArrayCreationExpression))
+                {
+                    // When an array is being created ...
+                    var arrayCreationSyntax = (ArrayCreationExpressionSyntax)instruction;
 
-            ////        // ... try to devise what constraint could be applied by the array size or the initializer
-            ////        constraint =
-            ////            GetInitializerConstraint(arrayCreationSyntax.Initializer) ??
-            ////            GetArrayConstraint(arrayCreationSyntax);
-            ////    }
+                    // ... try to devise what constraint could be applied by the array size or the initializer
+                    constraint =
+                        GetInitializerConstraint(arrayCreationSyntax.Initializer) ??
+                        GetArrayConstraint(arrayCreationSyntax);
+                }
 
-            ////    return constraint != null
-            ////        ? newProgramState.SetConstraint(symbolicValue, constraint)
-            ////        : newProgramState;
-            ////}
+                return constraint != null
+                    ? newProgramState.SetConstraint(symbolicValue, constraint)
+                    : newProgramState;
+            }
 
             private static bool IsIgnoredMethod(IMethodSymbol methodSymbol)
             {
