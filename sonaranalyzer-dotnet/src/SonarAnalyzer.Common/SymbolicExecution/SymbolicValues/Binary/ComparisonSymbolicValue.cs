@@ -45,12 +45,12 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             var relationship = GetRelationship(boolConstraint);
 
             var newProgramState = programState.TrySetRelationship(relationship);
-            if (newProgramState == null)
+            if (!newProgramState.HasValue)
             {
                 return Enumerable.Empty<ProgramState>();
             }
 
-            return new[] { newProgramState };
+            return new[] { newProgramState.Value };
         }
 
         private BinaryRelationship GetRelationship(BoolConstraint boolConstraint)

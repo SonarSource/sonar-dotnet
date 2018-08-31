@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 MemberAccessed?.Invoke(this, new MemberAccessedEventArgs(identifier));
             }
 
-            public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
+            public override Optional<ProgramState> PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
             {
                 var instruction = programPoint.Block.Instructions[programPoint.Offset];
                 switch (instruction.Kind())
@@ -132,7 +132,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            private ProgramState ProcessAwait(ProgramState programState, AwaitExpressionSyntax awaitExpression)
+            private Optional<ProgramState> ProcessAwait(ProgramState programState, AwaitExpressionSyntax awaitExpression)
             {
                 if (!(awaitExpression.Expression is IdentifierNameSyntax identifier))
                 {
@@ -143,7 +143,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return ProcessIdentifier(programState, identifier, symbol);
             }
 
-            private ProgramState ProcessElementAccess(ProgramState programState, ElementAccessExpressionSyntax elementAccess)
+            private Optional<ProgramState> ProcessElementAccess(ProgramState programState, ElementAccessExpressionSyntax elementAccess)
             {
                 if (!(elementAccess.Expression is IdentifierNameSyntax identifier))
                 {
@@ -183,7 +183,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return new MemberAccessIdentifierScope(null, false);
             }
 
-            private ProgramState ProcessMemberAccess(ProgramState programState, MemberAccessExpressionSyntax memberAccess)
+            private Optional<ProgramState> ProcessMemberAccess(ProgramState programState, MemberAccessExpressionSyntax memberAccess)
             {
                 var memberAccessIdentifierScope = GetIdentifierFromMemberAccess(memberAccess);
                 if (memberAccessIdentifierScope.Identifier == null)
@@ -216,7 +216,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return memberAccess.Name.Identifier.ValueText == "GetType";
             }
 
-            private ProgramState ProcessIdentifier(ProgramPoint programPoint, ProgramState programState, IdentifierNameSyntax identifier)
+            private Optional<ProgramState> ProcessIdentifier(ProgramPoint programPoint, ProgramState programState, IdentifierNameSyntax identifier)
             {
                 if (programPoint.Block.Instructions.Last() != identifier ||
                     programPoint.Block.SuccessorBlocks.Count != 1 ||
@@ -229,7 +229,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return ProcessIdentifier(programState, identifier, symbol);
             }
 
-            private ProgramState ProcessIdentifier(ProgramState programState, IdentifierNameSyntax identifier, ISymbol symbol)
+            private Optional<ProgramState> ProcessIdentifier(ProgramState programState, IdentifierNameSyntax identifier, ISymbol symbol)
             {
                 if (this.explodedGraph.IsSymbolTracked(symbol))
                 {
@@ -238,18 +238,18 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (symbol.HasConstraint(ObjectConstraint.Null, programState))
                     {
                         OnMemberAccessed(identifier);
-                        return null;
+                        return new Optional<ProgramState>();
                     }
                 }
 
                 return SetNotNullConstraintOnSymbol(symbol, programState);
             }
 
-            private static ProgramState SetNotNullConstraintOnSymbol(ISymbol symbol, ProgramState programState)
+            private static Optional<ProgramState> SetNotNullConstraintOnSymbol(ISymbol symbol, Optional<ProgramState> programState)
             {
-                if (programState == null)
+                if (!programState.HasValue)
                 {
-                    return null;
+                    return new Optional<ProgramState>();
                 }
 
                 if (symbol == null)
@@ -259,7 +259,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (!IsNullableValueType(symbol))
                 {
-                    return symbol.SetConstraint(ObjectConstraint.NotNull, programState);
+                    return symbol.SetConstraint(ObjectConstraint.NotNull, programState.Value);
                 }
 
                 return programState;

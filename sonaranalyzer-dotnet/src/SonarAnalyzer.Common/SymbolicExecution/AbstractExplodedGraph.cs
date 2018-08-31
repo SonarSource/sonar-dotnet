@@ -341,9 +341,9 @@ namespace SonarAnalyzer.SymbolicExecution
             }
         }
 
-        protected void EnqueueNewNode(ProgramPoint programPoint, ProgramState programState)
+        protected void EnqueueNewNode(ProgramPoint programPoint, Optional<ProgramState> programState)
         {
-            if (programState == null)
+            if (!programState.HasValue)
             {
                 return;
             }
@@ -358,13 +358,13 @@ namespace SonarAnalyzer.SymbolicExecution
                 this.programPoints[pos] = pos;
             }
 
-            if (programState.GetVisitedCount(pos) >= MaxProgramPointExecutionCount)
+            if (programState.Value.GetVisitedCount(pos) >= MaxProgramPointExecutionCount)
             {
-                OnProgramPointVisitCountExceedLimit(pos, programState);
+                OnProgramPointVisitCountExceedLimit(pos, programState.Value);
                 return;
             }
 
-            var newNode = new ExplodedGraphNode(pos, programState.AddVisit(pos));
+            var newNode = new ExplodedGraphNode(pos, programState.Value.AddVisit(pos));
             if (this.nodesAlreadyInGraph.Add(newNode))
             {
                 this.workList.Enqueue(newNode);

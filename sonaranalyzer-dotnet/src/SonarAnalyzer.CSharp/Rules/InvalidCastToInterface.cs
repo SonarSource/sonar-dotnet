@@ -120,7 +120,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 this.context = context;
             }
 
-            public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
+            public override Optional<ProgramState> PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
             {
                 var instruction = programPoint.Block.Instructions[programPoint.Offset];
 
@@ -129,7 +129,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     : programState;
             }
 
-            private ProgramState ProcessCastAccess(ProgramState programState, CastExpressionSyntax castExpression)
+            private Optional<ProgramState> ProcessCastAccess(ProgramState programState, CastExpressionSyntax castExpression)
             {
                 var typeExpression = this.semanticModel.GetTypeInfo(castExpression.Expression).Type;
                 if (typeExpression == null ||
@@ -153,7 +153,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     this.context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, castExpression.GetLocation(), MessageDefinite));
                 }
 
-                return null;
+                return new Optional<ProgramState>();
             }
         }
 

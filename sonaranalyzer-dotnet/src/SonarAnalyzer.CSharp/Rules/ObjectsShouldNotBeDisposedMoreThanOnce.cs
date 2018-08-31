@@ -111,33 +111,33 @@ namespace SonarAnalyzer.Rules.CSharp
             {
             }
 
-            public override ProgramState PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState)
-            {
-                var newProgramState = programState;
+            ////public override ProgramState PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState)
+            ////{
+            ////    var newProgramState = programState;
 
-                var usingFinalizer = (UsingEndBlock)programPoint.Block;
+            ////    var usingFinalizer = (UsingEndBlock)programPoint.Block;
 
-                var disposables = usingFinalizer.Identifiers
-                    .Select(i =>
-                    new
-                    {
-                        SyntaxNode = i.Parent,
-                        Symbol = this.semanticModel.GetDeclaredSymbol(i.Parent)
-                            ?? this.semanticModel.GetSymbolInfo(i.Parent).Symbol
-                    });
+            ////    var disposables = usingFinalizer.Identifiers
+            ////        .Select(i =>
+            ////        new
+            ////        {
+            ////            SyntaxNode = i.Parent,
+            ////            Symbol = this.semanticModel.GetDeclaredSymbol(i.Parent)
+            ////                ?? this.semanticModel.GetSymbolInfo(i.Parent).Symbol
+            ////        });
 
-                foreach (var disposable in disposables)
-                {
-                    newProgramState = ProcessDisposableSymbol(newProgramState, disposable.SyntaxNode, disposable.Symbol);
-                }
+            ////    foreach (var disposable in disposables)
+            ////    {
+            ////        newProgramState = ProcessDisposableSymbol(newProgramState, disposable.SyntaxNode, disposable.Symbol);
+            ////    }
 
-                newProgramState = ProcessStreamDisposingTypes(newProgramState,
-                    (SyntaxNode)usingFinalizer.UsingStatement.Expression ?? usingFinalizer.UsingStatement.Declaration);
+            ////    newProgramState = ProcessStreamDisposingTypes(newProgramState,
+            ////        (SyntaxNode)usingFinalizer.UsingStatement.Expression ?? usingFinalizer.UsingStatement.Declaration);
 
-                return newProgramState;
-            }
+            ////    return newProgramState;
+            ////}
 
-            public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
+            public override Optional<ProgramState> PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
             {
 
                 return !(programPoint.Block.Instructions[programPoint.Offset] is InvocationExpressionSyntax instruction)

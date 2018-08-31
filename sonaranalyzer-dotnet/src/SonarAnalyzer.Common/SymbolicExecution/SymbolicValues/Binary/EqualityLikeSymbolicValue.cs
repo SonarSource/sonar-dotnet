@@ -102,17 +102,17 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             var relationship = GetRelationship(boolConstraint);
 
             var newProgramState = programState.TrySetRelationship(relationship);
-            if (newProgramState == null)
+            if (!newProgramState.HasValue)
             {
                 return Enumerable.Empty<ProgramState>();
             }
 
             if (!rightHasConstraint && !leftHasConstraint)
             {
-                return new[] { newProgramState };
+                return new[] { newProgramState.Value };
             }
 
-            return SetConstraint(boolConstraint, leftConstraints, rightConstraints, newProgramState);
+            return SetConstraint(boolConstraint, leftConstraints, rightConstraints, newProgramState.Value);
         }
 
         internal abstract IEnumerable<ProgramState> SetConstraint(BoolConstraint boolConstraint,
