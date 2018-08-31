@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S106",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  327,
+"startColumn":  6,
+"endLine":  327,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S106",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  328,
+"startColumn":  6,
+"endLine":  328,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S106",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  329,
+"startColumn":  6,
+"endLine":  329,
+"endColumn":  23
+}
+}
+}
+]
+}

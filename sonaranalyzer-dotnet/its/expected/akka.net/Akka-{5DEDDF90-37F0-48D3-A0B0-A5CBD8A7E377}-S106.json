@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S106",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  373,
+"startColumn":  25,
+"endLine":  373,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S106",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  381,
+"startColumn":  22,
+"endLine":  381,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S106",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  11,
+"endLine":  28,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S106",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  17,
+"endLine":  66,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S106",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\StandardOutWriter.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  34,
+"endLine":  29,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S106",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\StandardOutWriter.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  34,
+"endLine":  42,
+"endColumn":  51
+}
+}
+}
+]
+}

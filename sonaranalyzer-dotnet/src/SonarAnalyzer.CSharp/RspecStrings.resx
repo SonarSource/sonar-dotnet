@@ -327,6 +327,36 @@
   <data name="S105_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S106_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S106_Description" xml:space="preserve">
+    <value>When logging a message there are several important requirements which must be fulfilled:</value>
+  </data>
+  <data name="S106_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S106_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S106_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S106_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S106_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S106_Tags" xml:space="preserve">
+    <value>bad-practice,cert</value>
+  </data>
+  <data name="S106_Title" xml:space="preserve">
+    <value>Standard outputs should not be used directly to log anything</value>
+  </data>
+  <data name="S106_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1066_Category" xml:space="preserve">
     <value>Major Code Smell</value>
   </data>

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S106",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\RemoteDeploy\Shared\SomeActor.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  13,
+"endLine":  17,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S106",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\RemoteDeploy\Shared\SomeActor.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  17,
+"endLine":  24,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S106",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\RemoteDeploy\Shared\SomeActor.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  17,
+"endLine":  28,
+"endColumn":  34
+}
+}
+}
+]
+}
