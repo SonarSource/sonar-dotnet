@@ -23,21 +23,23 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.sonar.api.profiles.ProfileExporter;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.Rule;
+import org.sonar.api.rules.RuleFinder;
+import org.sonar.api.rules.RuleQuery;
 
 public abstract class AbstractSonarLintProfileExporter extends ProfileExporter {
-  private final AbstractRulesDefinition rulesDefinition;
   private final String analyzerName;
   private final String repositoryKey;
+  private final RuleFinder ruleFinder;
 
-  public AbstractSonarLintProfileExporter(AbstractRulesDefinition rulesDefinition, String profileKey, String profileName, String languageKey,
-    String analyzerName, String repositoryKey) {
+  public AbstractSonarLintProfileExporter(String profileKey, String profileName, String languageKey, String analyzerName, String repositoryKey, RuleFinder ruleFinder) {
     super(profileKey, profileName);
+    this.ruleFinder = ruleFinder;
     setSupportedLanguages(languageKey);
-    this.rulesDefinition = rulesDefinition;
     this.analyzerName = analyzerName;
     this.repositoryKey = repositoryKey;
   }
@@ -45,7 +47,7 @@ public abstract class AbstractSonarLintProfileExporter extends ProfileExporter {
   @Override
   public void exportProfile(RulesProfile ruleProfile, Writer writer) {
     Set<String> disabledRuleKeys = new LinkedHashSet<>();
-    disabledRuleKeys.addAll(rulesDefinition.allRuleKeys());
+    disabledRuleKeys.addAll(ruleFinder.findAll(RuleQuery.create().withRepositoryKey(repositoryKey)).stream().map(Rule::getKey).collect(Collectors.toList()));
 
     appendLine(writer, "<?xml version=\"1.0\" encoding=\"utf-8\"?>");
     appendLine(writer, "<RuleSet Name=\"Rules for SonarLint\" Description=\"This rule set was automatically generated from SonarQube.\" ToolsVersion=\"14.0\">");

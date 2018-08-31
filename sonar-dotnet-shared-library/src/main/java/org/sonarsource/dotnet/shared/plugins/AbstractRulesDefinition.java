@@ -63,7 +63,6 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   private static final Version SQ_7_3 = Version.create(7, 3);
   private static final Gson GSON = new Gson();
 
-  private Set<String> allRuleKeys = null;
   private final String repositoryKey;
   private final String repositoryName;
   private final String languageKey;
@@ -92,19 +91,11 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     RulesDefinitionXmlLoader loader = new RulesDefinitionXmlLoader();
     loader.load(repository, new InputStreamReader(getClass().getResourceAsStream(rulesXmlFilePath), StandardCharsets.UTF_8));
 
-    allRuleKeys = new LinkedHashSet<>();
     for (NewRule rule : repository.rules()) {
       updateMetadata(rule);
-      allRuleKeys.add(rule.key());
     }
 
-    allRuleKeys = Collections.unmodifiableSet(allRuleKeys);
     repository.done();
-  }
-
-  public Set<String> allRuleKeys() {
-    requireNonNull(allRuleKeys);
-    return allRuleKeys;
   }
 
   private void updateMetadata(NewRule rule) {
