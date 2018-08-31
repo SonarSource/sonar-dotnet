@@ -322,7 +322,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private void EnqueueStartNode()
         {
-            var initialProgramState = new ProgramState();
+            var initialProgramState = ProgramState.Empty;
             foreach (var parameter in this.declarationParameters)
             {
                 var sv = SymbolicValue.Create(parameter.Type);

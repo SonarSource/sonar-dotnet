@@ -45,8 +45,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestCategory("Symbolic execution")]
         public void ProgramState_Equivalence()
         {
-            var ps1 = new ProgramState();
-            var ps2 = new ProgramState();
+            var ps1 = ProgramState.Empty;
+            var ps2 = ProgramState.Empty;
 
             var sv = new SymbolicValue();
             var constraint = new FakeConstraint();
@@ -64,8 +64,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestCategory("Symbolic execution")]
         public void ProgramState_Diff_SymbolicValue()
         {
-            var ps1 = new ProgramState();
-            var ps2 = new ProgramState();
+            var ps1 = ProgramState.Empty;
+            var ps2 = ProgramState.Empty;
 
             var symbol = GetSymbol();
             ps1 = ps1.StoreSymbolicValue(symbol, new SymbolicValue());
@@ -79,8 +79,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestCategory("Symbolic execution")]
         public void ProgramState_Diff_Constraint()
         {
-            var ps1 = new ProgramState();
-            var ps2 = new ProgramState();
+            var ps1 = ProgramState.Empty;
+            var ps2 = ProgramState.Empty;
 
             var symbol = GetSymbol();
             var sv = new SymbolicValue();
@@ -97,8 +97,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestCategory("Symbolic execution")]
         public void ProgramState_Diff_Symbol()
         {
-            var ps1 = new ProgramState();
-            var ps2 = new ProgramState();
+            var ps1 = ProgramState.Empty;
+            var ps2 = ProgramState.Empty;
 
             var sv = new SymbolicValue();
             ps1 = ps1.StoreSymbolicValue(GetSymbol(), sv);
@@ -112,7 +112,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestCategory("Symbolic execution")]
         public void ProgramState_Constraint()
         {
-            var ps = new ProgramState();
+            var ps = ProgramState.Empty;
             var sv = new SymbolicValue();
             var symbol = GetSymbol();
             var constraint = new FakeConstraint();
@@ -127,7 +127,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestCategory("Symbolic execution")]
         public void ProgramState_NotNull_Bool_Constraint()
         {
-            var ps = new ProgramState();
+            var ps = ProgramState.Empty;
             var sv = new SymbolicValue();
             var symbol = GetSymbol();
 

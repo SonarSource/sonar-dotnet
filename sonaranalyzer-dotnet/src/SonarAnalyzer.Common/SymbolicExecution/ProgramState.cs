@@ -95,14 +95,12 @@ namespace SonarAnalyzer.SymbolicExecution
             return h;
         }
 
-        ////public ProgramState()
-        ////    : this(ImmutableDictionary<ISymbol, SymbolicValue>.Empty,
-        ////          InitialConstraints,
-        ////          ImmutableDictionary<ProgramPoint, int>.Empty,
-        ////          ImmutableStack<SymbolicValue>.Empty,
-        ////          ImmutableHashSet<BinaryRelationship>.Empty)
-        ////{
-        ////}
+        public static ProgramState Empty { get; } =
+            new ProgramState(ImmutableDictionary<ISymbol, SymbolicValue>.Empty,
+                InitialConstraints,
+                ImmutableDictionary<ProgramPoint, int>.Empty,
+                ImmutableStack<SymbolicValue>.Empty,
+                ImmutableHashSet<BinaryRelationship>.Empty);
 
         internal Optional<ProgramState> TrySetRelationship(BinaryRelationship relationship)
         {
