@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RoslynExportProfile Version="1.0">
+  <Configuration>
+    <RuleSet Name="Rules for SonarQube" Description="This rule set was automatically generated from SonarQube." ToolsVersion="14.0">
+    </RuleSet>
+    <AdditionalFiles>
+      <AdditionalFile FileName="SonarLint.xml">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxBbmFseXNpc0lucHV0Pg0KICA8UnVsZXM+DQogIDwvUnVsZXM+DQogIDxGaWxlcz4NCiAgPC9GaWxlcz4NCjwvQW5hbHlzaXNJbnB1dD4NCg==</AdditionalFile>
+    </AdditionalFiles>
+  </Configuration>
+  <Deployment>
+    <Plugins>
+    </Plugins>
+    <NuGetPackages>
+    </NuGetPackages>
+  </Deployment>
+</RoslynExportProfile>

@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.sonarsource.dotnet</groupId>
+    <artifactId>sonar-csharp</artifactId>
+    <version>7.6-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>sonar-vbnet-plugin</artifactId>
+  <packaging>sonar-plugin</packaging>
+
+  <name>SonarVB</name>
+  <description>Code Analyzer for VB.NET</description>
+  <url>http://redirect.sonarsource.com/plugins/vbnet.html</url>
+  <inceptionYear>2012</inceptionYear>
+  <organization>
+    <name>SonarSource</name>
+    <url>http://www.sonarsource.com</url>
+  </organization>
+  <licenses>
+    <license>
+      <name>GNU LGPL 3</name>
+      <url>http://www.gnu.org/licenses/lgpl.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>aleve</id>
+      <name>Amaury Levé</name>
+      <organization>SonarSource</organization>
+    </developer>
+    <developer>
+      <id>vhristov</id>
+      <name>Valeri Hristov</name>
+      <organization>SonarSource</organization>
+    </developer>
+    <developer>
+      <id>jgyerik</id>
+      <name>Janos Gyerik</name>
+      <organization>SonarSource</organization>
+    </developer>
+    <developer>
+      <id>dmeneses</id>
+      <name>Duarte Meneses</name>
+      <organization>SonarSource</organization>
+    </developer>
+    <developer>
+      <id>jhenry</id>
+      <name>Julien Henry</name>
+      <organization>SonarSource</organization>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git@github.com:SonarSource/sonar-csharp.git</connection>
+    <developerConnection>scm:git:git@github.com:SonarSource/sonar-csharp.git</developerConnection>
+    <url>https://github.com/SonarSource/sonar-csharp</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <properties>
+    <sonar.version>7.3</sonar.version>
+    <sonarLTS.version>6.7</sonarLTS.version>
+    <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
+    <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>sonar-dotnet-tests-library</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>sonar-dotnet-shared-library</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+      <version>3.0.2</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.sonarsource.analyzer-commons</groupId>
+      <artifactId>sonar-analyzer-commons</artifactId>
+      <version>1.7.0.243</version>
+    </dependency>
+    <dependency>
+      <groupId>org.sonarsource.sonarqube</groupId>
+      <artifactId>sonar-plugin-api</artifactId>
+      <version>${sonar.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- test dependencies -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>0.9.15</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.6.1</version>
+      <scope>test</scope>
+    </dependency>
+     <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.6</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>2.8.9</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>19.0</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- FIXME the following 3 dependencies are due to some issue of integrating unit tests with sonar-plugin-api 7.3+ -->
+    <dependency>
+      <groupId>org.codehaus.woodstox</groupId>
+      <artifactId>stax2-api</artifactId>
+      <version>3.1.4</version>
+      <exclusions>
+        <exclusion>
+          <groupId>stax</groupId>
+          <artifactId>stax-api</artifactId>
+        </exclusion>
+      </exclusions>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.woodstox</groupId>
+      <artifactId>woodstox-core-lgpl</artifactId>
+      <version>4.4.0</version>
+      <exclusions>
+        <exclusion>
+          <groupId>javax.xml.stream</groupId>
+          <artifactId>stax-api</artifactId>
+        </exclusion>
+      </exclusions>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.staxmate</groupId>
+      <artifactId>staxmate</artifactId>
+      <version>2.0.1</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.codehaus.woodstox</groupId>
+          <artifactId>woodstox-core-asl</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>stax</groupId>
+          <artifactId>stax-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.codehaus.woodstox</groupId>
+          <artifactId>stax2-api</artifactId>
+        </exclusion>
+      </exclusions>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>${sonarAnalyzer.workDirectory}</directory>
+        <includes>
+          <include>org/sonar/plugins/vbnet/*.xml</include>
+          <include>org/sonar/plugins/vbnet/*.json</include>
+          <include>static/version.txt</include>
+          <include>static/SonarAnalyzer-${project.version}.zip</include>
+        </includes>
+      </resource>
+    </resources>
+
+    <plugins>
+      <plugin>
+        <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+        <artifactId>sonar-packaging-maven-plugin</artifactId>
+        <configuration>
+          <pluginName>SonarVB</pluginName>
+          <pluginClass>org.sonar.plugins.vbnet.VbNetPlugin</pluginClass>
+          <skipDependenciesPackaging>true</skipDependenciesPackaging>
+          <sonarLintSupported>false</sonarLintSupported>
+          <sonarQubeMinVersion>${sonarLTS.version}</sonarQubeMinVersion> <!-- runtime minimal API version -->
+        </configuration>
+      </plugin>
+       <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <shadedArtifactAttached>false</shadedArtifactAttached>
+              <createDependencyReducedPom>false</createDependencyReducedPom>
+              <minimizeJar>true</minimizeJar>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/LICENSE*</exclude>
+                    <exclude>META-INF/NOTICE*</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>LICENSE*</exclude>
+                    <exclude>NOTICE*</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>enforce-plugin-size</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <phase>verify</phase>
+            <configuration>
+              <rules>
+                <requireFilesSize>
+                  <maxsize>2000000</maxsize>
+                  <minsize>1000000</minsize>
+                  <files>
+                    <file>${project.build.directory}/${project.build.finalName}.jar</file>
+                  </files>
+                </requireFilesSize>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>local-analyzer</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <analyzer.configuration>Release</analyzer.configuration>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.7</version>
+            <executions>
+              <execution>
+                <id>copy-analyzer-data</id>
+                <phase>validate</phase>
+                <configuration>
+                  <exportAntProperties>true</exportAntProperties>
+                  <tasks>
+                    <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
+                    <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic">
+                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/${analyzer.configuration}/">
+                        <include name="SonarAnalyzer.dll"/>
+                        <include name="SonarAnalyzer.VisualBasic.dll"/>
+                        <include name="Google.Protobuf.dll"/>
+                      </fileset>
+                    </copy>
+                    <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
+                         basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic"/>
+                    <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/vbnet">
+                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/net46/vbnet">
+                        <include name="rules.xml"/>
+                      </fileset>
+                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/rspec/vbnet">
+                        <include name="*.json" /> <!-- Allows to copy each rule definition json file and the Sonar-way profile. -->
+                      </fileset>
+                    </copy>
+
+                    <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8" />
+                  </tasks>
+                </configuration>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>download-analyzer</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-enforcer-plugin</artifactId>
+            <version>1.4.1</version>
+            <executions>
+              <execution>
+                <id>enforce-property</id>
+                <goals>
+                  <goal>enforce</goal>
+                </goals>
+                <configuration>
+                  <rules>
+                    <requireProperty>
+                      <property>analyzer.version</property>
+                      <message>You must set the property analyzer.version to specify the version of the NuGet artifacts to download.</message>
+                      <regex>^(\d+)\.(\d+)\.(\d+)\.(\d+)$</regex>
+                      <regex>.+</regex>
+                      <regexMessage>The analyzer.version property must have 4 digits.</regexMessage>
+                    </requireProperty>
+                  </rules>
+                  <fail>true</fail>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>download-artifacts</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>copy</goal>
+                </goals>
+                <configuration>
+                  <artifactItems>
+                    <artifactItem>
+                      <groupId>${project.groupId}</groupId>
+                      <artifactId>SonarAnalyzer.RuleDocGenerator.VisualBasic</artifactId>
+                      <version>${analyzer.version}</version>
+                      <type>nupkg</type>
+                      <overWrite>true</overWrite>
+                    </artifactItem>
+                    <artifactItem>
+                      <groupId>${project.groupId}</groupId>
+                      <artifactId>SonarAnalyzer.VisualBasic</artifactId>
+                      <version>${analyzer.version}</version>
+                      <type>nupkg</type>
+                      <overWrite>true</overWrite>
+                    </artifactItem>
+                  </artifactItems>
+                  <outputDirectory>${sonarAnalyzer.workDirectory}</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.7</version>
+            <executions>
+              <execution>
+                <id>unzip-copy-analyzer-data</id>
+                <phase>validate</phase>
+                <configuration>
+                  <exportAntProperties>true</exportAntProperties>
+                  <tasks>
+                    <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
+                    <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic-${analyzer.version}.nupkg"
+                           dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic/" />
+                    <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
+                         basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.VisualBasic"/>
+
+                    <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.VisualBasic-${analyzer.version}.nupkg"
+                           dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.VisualBasic/" />
+                    <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/vbnet">
+                        <fileset dir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.VisualBasic/xml">
+                        <include name="*.xml"/>
+                      </fileset>
+                    </copy>
+                    <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/vbnet">
+                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/rspec/vbnet">
+                        <include name="*.json" /> <!-- Allows to copy each rule definition json file and the Sonar-way profile. -->
+                      </fileset>
+                    </copy>
+                    <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8" />
+                  </tasks>
+                </configuration>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>
