@@ -110,6 +110,7 @@
                     }
                     break;
 
+                case int _: // The discard is redundant, but still allowed
                 case null:
                     if (o == null) // Compliant, False Negative
                     {
