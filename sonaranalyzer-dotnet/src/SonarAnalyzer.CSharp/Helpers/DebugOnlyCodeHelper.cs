@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Helpers
 
         #region DEBUG directive blocks
 
-        public static bool IsInDebugBlock(SyntaxNode node) =>
+        public static bool IsInDebugBlock(this SyntaxNode node) =>
             IfDirectiveHelper.GetActiveConditionalCompilationSections(node)
             .Any(IsDebugString);
 
@@ -41,14 +41,13 @@ namespace SonarAnalyzer.Helpers
 
         #region DEBUG conditional method attributes
 
-        public static bool IsCallerInConditionalDebug(SyntaxNode node,
-            SemanticModel semanticModel)
+        public static bool IsCallerInConditionalDebug(SyntaxNode node, SemanticModel semanticModel)
         {
             var methodSymbol = FindContainingMethod(node, semanticModel);
             return IsConditionalDebugMethod(methodSymbol);
         }
 
-        public static bool IsConditionalDebugMethod(IMethodSymbol methodSymbol)
+        public static bool IsConditionalDebugMethod(this IMethodSymbol methodSymbol)
         {
             if (methodSymbol == null)
             {

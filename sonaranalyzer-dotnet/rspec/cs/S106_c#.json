@@ -1,0 +1,17 @@
+{
+  "title": "Standard outputs should not be used directly to log anything",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "bad-practice",
+    "cert"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-106",
+  "sqKey": "S106",
+  "scope": "Main"
+}

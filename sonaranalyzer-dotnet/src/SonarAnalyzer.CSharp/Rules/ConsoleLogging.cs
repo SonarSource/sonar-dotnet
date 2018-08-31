@@ -18,11 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -31,42 +28,13 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class ConsoleLogging : SonarDiagnosticAnalyzer
+    public sealed class ConsoleLogging : DoNotWriteToStandardOutputBase
     {
-        internal const string DiagnosticId = "S2228";
+        private const string DiagnosticId = "S2228";
         private const string MessageFormat = "Remove this logging statement.";
-
-        private static readonly ISet<string> BannedConsoleMembers = new HashSet<string> { "WriteLine", "Write" };
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    if (c.Compilation.Options.OutputKind == OutputKind.ConsoleApplication)
-                    {
-                        return;
-                    }
-
-                    var methodCall = (InvocationExpressionSyntax) c.Node;
-                    var methodSymbol = c.SemanticModel.GetSymbolInfo(methodCall.Expression).Symbol;
-
-                    if (methodSymbol != null &&
-                        methodSymbol.IsInType(KnownType.System_Console) &&
-                        BannedConsoleMembers.Contains(methodSymbol.Name) &&
-                        !DebugOnlyCodeHelper.IsInDebugBlock(c.Node) &&
-                        !DebugOnlyCodeHelper.IsCallerInConditionalDebug(methodCall, c.SemanticModel))
-
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodCall.Expression.GetLocation()));
-                    }
-                },
-                SyntaxKind.InvocationExpression);
-        }
     }
 }

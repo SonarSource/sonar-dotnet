@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S106",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\Echo.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  35,
+"endLine":  27,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S106",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\Echo.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  17,
+"endLine":  29,
+"endColumn":  34
+}
+}
+}
+]
+}
