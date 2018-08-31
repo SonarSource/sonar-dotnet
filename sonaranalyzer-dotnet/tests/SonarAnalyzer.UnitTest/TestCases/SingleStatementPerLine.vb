@@ -3,6 +3,9 @@
         Sub Main()
             Dim a = 0 : Dim b = 0  ' Noncompliant {{Reformat the code to have only one statement per line.}}
 '           ^^^^^^^^^^^^^^^^^^^^^
+
+            Dim message As String = "Error in {0}.{1}.{2} : {3} Authorization error : {4}   text" : Dim number As Integer = 8
+            ' Do not report on the previous line as it contains the VBC error pattern
         End Sub
         Sub New()
             If someCondition Then : doSomething() ' Noncompliant

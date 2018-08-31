@@ -43,16 +43,16 @@ namespace SonarAnalyzer.Helpers
         /// </returns>
         public static bool IsTriggeringVbcError(Diagnostic diagnostic)
         {
-            var rootNode = diagnostic.Location?.SourceTree?.GetRoot();
-
-            if (rootNode != null &&
-                rootNode.Language == LanguageNames.VisualBasic &&
-                IsTextMatchingVbcErrorPattern(rootNode.FindNode(diagnostic.Location.SourceSpan)?.ToString()))
+            if (diagnostic.Location == null ||
+                diagnostic.Location.SourceTree?.GetRoot().Language != LanguageNames.VisualBasic)
             {
-                    return true;
+                return false;
             }
 
-            return false;
+            var text = diagnostic.Location.SourceTree.GetText();
+            var lineNumber = diagnostic.Location.GetLineNumberToReport();
+
+            return IsTextMatchingVbcErrorPattern(text.Lines[lineNumber - 1].ToString());
         }
 
         public static bool IsTextMatchingVbcErrorPattern(string text) =>
