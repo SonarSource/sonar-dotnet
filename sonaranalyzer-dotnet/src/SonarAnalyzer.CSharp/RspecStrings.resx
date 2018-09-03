@@ -1759,7 +1759,7 @@
     <value>Major Security Hotspot</value>
   </data>
   <data name="S1313_Description" xml:space="preserve">
-    <value>Hardcoding an IP address into source code is a bad idea for several reasons:</value>
+    <value>Hardcoding IP addresses is security sensitive. It has led in the past to the following vulnerabilities:</value>
   </data>
   <data name="S1313_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
