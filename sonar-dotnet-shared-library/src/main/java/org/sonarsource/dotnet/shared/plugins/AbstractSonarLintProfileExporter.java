@@ -46,8 +46,7 @@ public abstract class AbstractSonarLintProfileExporter extends ProfileExporter {
 
   @Override
   public void exportProfile(RulesProfile ruleProfile, Writer writer) {
-    Set<String> disabledRuleKeys = new LinkedHashSet<>();
-    disabledRuleKeys.addAll(ruleFinder.findAll(RuleQuery.create().withRepositoryKey(repositoryKey)).stream().map(Rule::getKey).collect(Collectors.toList()));
+    Set<String> disabledRuleKeys = ruleFinder.findAll(RuleQuery.create().withRepositoryKey(repositoryKey)).stream().map(Rule::getKey).collect(Collectors.toSet());
 
     appendLine(writer, "<?xml version=\"1.0\" encoding=\"utf-8\"?>");
     appendLine(writer, "<RuleSet Name=\"Rules for SonarLint\" Description=\"This rule set was automatically generated from SonarQube.\" ToolsVersion=\"14.0\">");
