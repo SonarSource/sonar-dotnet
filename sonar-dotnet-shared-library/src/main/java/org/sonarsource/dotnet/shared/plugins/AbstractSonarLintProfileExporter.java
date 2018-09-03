@@ -21,6 +21,7 @@ package org.sonarsource.dotnet.shared.plugins;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.sonar.api.profiles.ProfileExporter;
@@ -45,10 +46,11 @@ public abstract class AbstractSonarLintProfileExporter extends ProfileExporter {
 
   @Override
   public void exportProfile(RulesProfile ruleProfile, Writer writer) {
-    Set<String> disabledRuleKeys = ruleFinder.findAll(RuleQuery.create().withRepositoryKey(repositoryKey))
+    Set<String> allRuleKeys = ruleFinder.findAll(RuleQuery.create().withRepositoryKey(repositoryKey))
       .stream()
       .map(Rule::getKey)
       .collect(Collectors.toSet());
+    Set<String> disabledRuleKeys = new HashSet<>(allRuleKeys);
 
     appendLine(writer, "<?xml version=\"1.0\" encoding=\"utf-8\"?>");
     appendLine(writer, "<RuleSet Name=\"Rules for SonarLint\" Description=\"This rule set was automatically generated from SonarQube.\" ToolsVersion=\"14.0\">");
