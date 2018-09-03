@@ -44,9 +44,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.ScannerSide;
@@ -54,8 +51,6 @@ import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 import org.sonar.api.utils.Version;
-
-import static java.util.Objects.requireNonNull;
 
 @ScannerSide
 public abstract class AbstractRulesDefinition implements RulesDefinition {
