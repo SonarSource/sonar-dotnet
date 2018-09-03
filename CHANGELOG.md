@@ -16,7 +16,111 @@ For reference, the possible headings are:
 ## Unreleased
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonar-csharp/compare/7.3.1.5982...HEAD)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/7.5.0.6605...HEAD)
+
+
+
+## [7.5](https://github.com/SonarSource/sonar-csharp/releases/tag/7.5.0.6605)
+
+### New Rules
+* [1814](https://github.com/SonarSource/sonar-csharp/issues/1814) - Rule S106: Standard outputs should not be used directly to log anything
+
+### Improvements
+* [1812](https://github.com/SonarSource/sonar-csharp/issues/1812) - Deprecate S2228 in favor of S106
+* [1798](https://github.com/SonarSource/sonar-csharp/issues/1798) - Update S1854: Dead stores should allow initialization with default()
+* [1780](https://github.com/SonarSource/sonar-csharp/issues/1780) - Improve debug logging when importing code coverage and test coverage
+* [1775](https://github.com/SonarSource/sonar-csharp/issues/1775) - Add support for switch statements pattern matching in CFG
+* [1774](https://github.com/SonarSource/sonar-csharp/issues/1774) - Update S3253: Rule should handle ExpressionBody
+* [1773](https://github.com/SonarSource/sonar-csharp/issues/1773) - Update S3626: Rule should handle ExpressionBody
+* [1767](https://github.com/SonarSource/sonar-csharp/issues/1767) - Update S1172: Rule should handle ExpressionBody
+* [1764](https://github.com/SonarSource/sonar-csharp/issues/1764) - Update S1185: Rule should handle ExpressionBody
+* [1763](https://github.com/SonarSource/sonar-csharp/issues/1763) - Update S3604: Rule should handle ExpressionBody
+* [1761](https://github.com/SonarSource/sonar-csharp/issues/1761) - Update S3052: Rule should handle ExpressionBody
+* [1758](https://github.com/SonarSource/sonar-csharp/issues/1758) - Update S3963: Rule should handle ExpressionBody
+* [1754](https://github.com/SonarSource/sonar-csharp/issues/1754) - Update S2326: Rule should handle ExpressionBody
+* [1752](https://github.com/SonarSource/sonar-csharp/issues/1752) - Update S2292: Rule should handle ExpressionBody
+* [1751](https://github.com/SonarSource/sonar-csharp/issues/1751) - Update metrics to handle ExpressionBody
+* [1746](https://github.com/SonarSource/sonar-csharp/issues/1746) - Update S1144: Rule should handle ExpressionBody
+* [1743](https://github.com/SonarSource/sonar-csharp/issues/1743) - Update Symbolic Execution Engine: Run rules on ExpressionBody
+* [1739](https://github.com/SonarSource/sonar-csharp/issues/1739) - Update S2325: Rule should handle ExpressionBody
+* [1737](https://github.com/SonarSource/sonar-csharp/issues/1737) - Update S3880: Rule should handle ExpressionBody
+* [1734](https://github.com/SonarSource/sonar-csharp/issues/1734) - Update S2365: Rule should handle ExpressionBody
+* [1733](https://github.com/SonarSource/sonar-csharp/issues/1733) - Update S138: Rule should handle ExpressionBody
+* [1728](https://github.com/SonarSource/sonar-csharp/issues/1728) - Update S3881: Rule should handle ExpressionBody
+* [1727](https://github.com/SonarSource/sonar-csharp/issues/1727) - Update S4005: Rule should handle ExpressionBody
+* [1726](https://github.com/SonarSource/sonar-csharp/issues/1726) - Update S3997: Rule should handle ExpressionBody
+
+### Bug Fixes
+* [1824](https://github.com/SonarSource/sonar-csharp/issues/1824) - SonarC# NPE with SonarLint for VS connected mode
+* [1801](https://github.com/SonarSource/sonar-csharp/issues/1801) - Create BrancBlock for "case null" sections to avoid exceptions in the exploded graph
+* [1791](https://github.com/SonarSource/sonar-csharp/issues/1791) - Module and file level issues are not de-duplicated correctly
+* [1789](https://github.com/SonarSource/sonar-csharp/issues/1789) - Module levels issues are not reported correctly
+* [1799](https://github.com/SonarSource/sonar-csharp/issues/1799) - Fix S1854: False Positive when variable initialized with -1 or +1
+
+
+## [7.4](https://github.com/SonarSource/sonar-csharp/releases/tag/7.4.0.6452)
+
+### Improvements
+*   [#1195](https://github.com/SonarSource/sonar-csharp/issues/1195) - Fix S1144:   Issues is raised while method is being used (DebuggerDisplayAttribute)
+*   [#1225](https://github.com/SonarSource/sonar-csharp/issues/1225) - Fix S1144:   False Positive on Inner Classes
+*   [#1398](https://github.com/SonarSource/sonar-csharp/issues/1398) - S1144   False positive for protected ctor
+*   [#1434](https://github.com/SonarSource/sonar-csharp/issues/1434) - Rule   S4150: False positive on field used in switch block
+*   [#1448](https://github.com/SonarSource/sonar-csharp/issues/1448) - S1450:   false negative for fields used in expression bodies
+*   [#1449](https://github.com/SonarSource/sonar-csharp/issues/1449) - S1450 not   appearing in VS2015 IDE
+*   [#1460](https://github.com/SonarSource/sonar-csharp/issues/1460) - Update   S3881: Rule should allow abstract IDisposable implementations
+*   [#1486](https://github.com/SonarSource/sonar-csharp/issues/1486) - Fix S2187:   does not report for test classes with only assembly-related attributes
+*   [#1491](https://github.com/SonarSource/sonar-csharp/issues/1491) - Fix S3887:   Rule should not report when field is readonly and initialized with immutable   type in ctor
+*   [#1498](https://github.com/SonarSource/sonar-csharp/issues/1498) - Test   method detection code is not consistent across rules
+*   [#1529](https://github.com/SonarSource/sonar-csharp/issues/1529) -   "Fields should not have public accessibility" should not run   against structs
+*   [#1536](https://github.com/SonarSource/sonar-csharp/issues/1536) - S1450   "Private fields only used as local variables in methods should become   local variables" not triggered by rule sample
+*   [#1537](https://github.com/SonarSource/sonar-csharp/issues/1537) - Fix S3242:   Rule should not suggest base type for virtual methods
+*   [#1543](https://github.com/SonarSource/sonar-csharp/issues/1543) - S3400:   Don't raise issue for virtual methods
+*   [#1553](https://github.com/SonarSource/sonar-csharp/issues/1553) - Fix S4226:   False positive for interfaces
+*   [#1562](https://github.com/SonarSource/sonar-csharp/issues/1562) - Populate   Security Standards data for Security Hotspots and Vulnerabilities rules
+*   [#1563](https://github.com/SonarSource/sonar-csharp/issues/1563) - Change   "Message" of Security Hotspot issues
+*   [#158](https://github.com/SonarSource/sonar-csharp/issues/158) - Fix S1450:   Rule should not raise an issue when methods call each other
+*   [#1586](https://github.com/SonarSource/sonar-csharp/issues/1586) - Fix S1075:   Rule should not report on virtual path for asp.net
+*   [#1588](https://github.com/SonarSource/sonar-csharp/issues/1588) - Adjust the   "message" of S2245 because RSPEC-2245 is now a Security   Hotspot
+*   [#159](https://github.com/SonarSource/sonar-csharp/issues/159) - Fix S1144:   Unused private members should not report false positives with Unity classes
+*   [#1593](https://github.com/SonarSource/sonar-csharp/issues/1593) - Fix S4049:   GetEnumerator should be white-listed
+*   [#1596](https://github.com/SonarSource/sonar-csharp/issues/1596) - Stop   feeding the comment_lines_data metric
+*   [#1607](https://github.com/SonarSource/sonar-csharp/issues/1607) - Fix S1450:   Implement robust detection whether a local field could be converted to a   local variable
+*   [#1608](https://github.com/SonarSource/sonar-csharp/issues/1608) - Update   S2551: rule should be enabled by default (Sonar way)
+*   [#1609](https://github.com/SonarSource/sonar-csharp/issues/1609) - Update   S3963: rule should be enabled by default (Sonar way)
+*   [#1610](https://github.com/SonarSource/sonar-csharp/issues/1610) - Fix S3242:   Rule should not suggest base type resulting in inconsistent accessibility   (bis)
+*   [#1623](https://github.com/SonarSource/sonar-csharp/issues/1623) - Update   S1144: Develop robust mechanism to detect when a class member is unused
+*   [#1638](https://github.com/SonarSource/sonar-csharp/issues/1638) - Add a   warning to notify user that no coverage report file was found for the given   pattern
+*   [#1643](https://github.com/SonarSource/sonar-csharp/issues/1643) - Fix S4143:   False Positive when variable is reassigned
+*   [#1644](https://github.com/SonarSource/sonar-csharp/issues/1644) - Fix S4261:   False positive on async Main
+*   [#1649](https://github.com/SonarSource/sonar-csharp/issues/1649) - Fix the   executable lines of code count to ignore attributes
+*   [#1658](https://github.com/SonarSource/sonar-csharp/issues/1658) - Update   S4261: Default severity should be Code Smell
+*   [#1660](https://github.com/SonarSource/sonar-csharp/issues/1660) - Update   S4524: Rule should be in the default quality profile (SonarWay)
+*   [#1661](https://github.com/SonarSource/sonar-csharp/issues/1661) - Update   S2255: Rule should be in the default quality profile (SonarWay)
+*   [#1662](https://github.com/SonarSource/sonar-csharp/issues/1662) - Update   S2245: Rule should be in the default quality profile (SonarWay)
+*   [#1667](https://github.com/SonarSource/sonar-csharp/issues/1667) - Update   S4524: metadata needs to be updated
+*   [#1669](https://github.com/SonarSource/sonar-csharp/issues/1669) - Fix S1226:   rule doesn't detect correctly that param was read before being assigned
+*   [#1670](https://github.com/SonarSource/sonar-csharp/issues/1670) - Deprecate   S2758 in favor of S3923
+*   [#1673](https://github.com/SonarSource/sonar-csharp/issues/1673) - Update   S1764: update rule metadata
+*   [#1675](https://github.com/SonarSource/sonar-csharp/issues/1675) - Update   S2259: documentation should include ability to use ValidatedNotNull   attribute
+*   [#1686](https://github.com/SonarSource/sonar-csharp/issues/1686) - Legacy   Xunit test projects are not recognized as test projects
+*   [#1687](https://github.com/SonarSource/sonar-csharp/issues/1687) - Fix S2699:   handle skipped XUnit Theory tests
+*   [#1688](https://github.com/SonarSource/sonar-csharp/issues/1688) - Fix S2699:   handle all test method types for supported test frameworks
+*   [#1691](https://github.com/SonarSource/sonar-csharp/issues/1691) - Fix S3433:   handle all test method types for supported test frameworks
+*   [#1693](https://github.com/SonarSource/sonar-csharp/issues/1693) - Fix S2386:   Rule should handle effective accessiblity
+*   [#1694](https://github.com/SonarSource/sonar-csharp/issues/1694) - Fix S3887:   Rule should handle effective accessiblity
+*   [#1695](https://github.com/SonarSource/sonar-csharp/issues/1695) - Fix S3887:   Rule should not raise for uninitialized readonly fields
+*   [#1705](https://github.com/SonarSource/sonar-csharp/issues/1705) - Fix S1607:   : handle all test method types for supported test frameworks
+*   [#1710](https://github.com/SonarSource/sonar-csharp/issues/1710) - Fix S2699:   handle all test method types for supported test frameworks
+*   [#1711](https://github.com/SonarSource/sonar-csharp/issues/1711) - Update   S2971: Rule should not only suggest to remove call to ToList or ToArray
+*   [#182](https://github.com/SonarSource/sonar-csharp/issues/182) - Fix 1450:   False positive in VS2017 but not VS2015
+*   [#505](https://github.com/SonarSource/sonar-csharp/issues/505) - Fix S2386:   Rule should not report when field is readonly and ...
+*   [#904](https://github.com/SonarSource/sonar-csharp/issues/904) - Fix S1144:   rule should not report false positives with constants
+
+### Bug Fixes
+*   [#1446](https://github.com/SonarSource/sonar-csharp/issues/1446) - Exclusions   from executable lines of code are not handled correctly
+* [#1636](https://github.com/SonarSource/sonar-csharp/issues/1636) - Fix S3963:   Rule should not raise a NullPointerException for expression body
+* [#1657](https://github.com/SonarSource/sonar-csharp/issues/1657) - Compute   metrics only on source files with .cs and .csx file extensions
+* [#1663](https://github.com/SonarSource/sonar-csharp/issues/1663) - Fix S4433:   Remediation cost should be constant
 
 
 ## [7.3.1](https://github.com/SonarSource/sonar-csharp/releases/tag/7.3.1.5982)
