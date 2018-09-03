@@ -44,11 +44,6 @@ public class CSharpSonarRulesDefinitionTest {
     assertThat(context.repositories()).hasSize(1);
     assertThat(context.repository("csharpsquid").rules()).isNotEmpty();
 
-    Set<String> sonarLintRules = csharpRulesDefinition.allRuleKeys();
-    assertThat(sonarLintRules.contains("S100")).isTrue();
-    assertThat(sonarLintRules.size()).isGreaterThan(50);
-    assertThat(sonarLintRules.size()).isLessThanOrEqualTo(context.repository("csharpsquid").rules().size());
-
     Rule s100 = context.repository("csharpsquid").rule("S100");
     assertThat(s100.debtRemediationFunction().type()).isEqualTo(DebtRemediationFunction.Type.CONSTANT_ISSUE);
     assertThat(s100.debtRemediationFunction().baseEffort()).isEqualTo("5min");

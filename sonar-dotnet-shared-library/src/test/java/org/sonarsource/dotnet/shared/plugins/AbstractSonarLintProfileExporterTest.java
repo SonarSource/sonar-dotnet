@@ -22,16 +22,21 @@ package org.sonarsource.dotnet.shared.plugins;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.Rule;
+import org.sonar.api.rules.RuleFinder;
+import org.sonar.api.rules.RuleQuery;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doThrow;
@@ -60,13 +65,12 @@ public class AbstractSonarLintProfileExporterTest {
     rulesProfile = mock(RulesProfile.class);
     when(rulesProfile.getActiveRulesByRepository("csharpsquid")).thenReturn(Collections.singletonList(activeRuleS1000));
 
-    Set<String> allRules = new HashSet<>();
-    allRules.add(ruleS1000.getKey());
-    allRules.add(ruleS1001.getKey());
-    AbstractRulesDefinition rulesDefinition = mock(AbstractRulesDefinition.class);
-    when(rulesDefinition.allRuleKeys()).thenReturn(allRules);
-    exporter = new AbstractSonarLintProfileExporter(rulesDefinition,
-      "sonarlint-vs-cs", "SonarLint for Visual Studio Rule Set", "cs", "SonarAnalyzer.CSharp", "csharpsquid") {
+    List<Rule> allRules = new ArrayList<>();
+    allRules.add(ruleS1000);
+    allRules.add(ruleS1001);
+    RuleFinder ruleFinder = mock(RuleFinder.class);
+    when(ruleFinder.findAll(Mockito.any(RuleQuery.class))).thenReturn(allRules);
+    exporter = new AbstractSonarLintProfileExporter("sonarlint-vs-cs", "SonarLint for Visual Studio Rule Set", "cs", "SonarAnalyzer.CSharp", "csharpsquid", ruleFinder) {
     };
   }
 

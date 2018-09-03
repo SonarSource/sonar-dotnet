@@ -19,13 +19,14 @@
  */
 package org.sonar.plugins.csharp;
 
+import org.sonar.api.rules.RuleFinder;
 import org.sonarsource.dotnet.shared.plugins.AbstractSonarLintProfileExporter;
 
 public class SonarLintProfileExporter extends AbstractSonarLintProfileExporter {
   private static final String PROFILE_KEY = "sonarlint-vs-cs";
   private static final String PROFILE_NAME = "SonarLint for Visual Studio Rule Set";
 
-  public SonarLintProfileExporter(CSharpSonarRulesDefinition csharpRulesDefinition) {
-    super(csharpRulesDefinition, PROFILE_KEY, PROFILE_NAME, CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.SONARANALYZER_NAME, CSharpPlugin.REPOSITORY_KEY);
+  public SonarLintProfileExporter(RuleFinder ruleFinder) {
+    super(PROFILE_KEY, PROFILE_NAME, CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.SONARANALYZER_NAME, CSharpPlugin.REPOSITORY_KEY, ruleFinder);
   }
 }

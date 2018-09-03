@@ -44,9 +44,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.ScannerSide;
@@ -55,15 +52,12 @@ import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 import org.sonar.api.utils.Version;
 
-import static java.util.Objects.requireNonNull;
-
 @ScannerSide
 public abstract class AbstractRulesDefinition implements RulesDefinition {
 
   private static final Version SQ_7_3 = Version.create(7, 3);
   private static final Gson GSON = new Gson();
 
-  private Set<String> allRuleKeys = null;
   private final String repositoryKey;
   private final String repositoryName;
   private final String languageKey;
@@ -92,19 +86,11 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     RulesDefinitionXmlLoader loader = new RulesDefinitionXmlLoader();
     loader.load(repository, new InputStreamReader(getClass().getResourceAsStream(rulesXmlFilePath), StandardCharsets.UTF_8));
 
-    allRuleKeys = new LinkedHashSet<>();
     for (NewRule rule : repository.rules()) {
       updateMetadata(rule);
-      allRuleKeys.add(rule.key());
     }
 
-    allRuleKeys = Collections.unmodifiableSet(allRuleKeys);
     repository.done();
-  }
-
-  public Set<String> allRuleKeys() {
-    requireNonNull(allRuleKeys);
-    return allRuleKeys;
   }
 
   private void updateMetadata(NewRule rule) {
