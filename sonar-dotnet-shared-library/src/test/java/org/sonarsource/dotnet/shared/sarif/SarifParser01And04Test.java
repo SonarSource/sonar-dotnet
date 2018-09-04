@@ -71,18 +71,17 @@ public class SarifParser01And04Test {
 
     new SarifParser01And04(null, getRoot("v0_1.json"), String::toString).accept(callback);
 
-    InOrder inOrder = inOrder(callback);
 
 
     Location location = new Location( "C:\\Foo.cs", "Remove this unused method parameter \"args\".", 43, 55, 44, 57);
-    inOrder.verify(callback).onIssue("S1172", location, Collections.emptyList());
+    verify(callback).onIssue("S1172", location, Collections.emptyList());
     location = new Location("C:\\Bar.cs", "There is just a full message.", 2, 2, 4, 4);
-    inOrder.verify(callback).onIssue("CA1000", location, Collections.emptyList());
+    verify(callback).onIssue("CA1000", location, Collections.emptyList());
     verify(callback, Mockito.times(2)).onIssue(Mockito.anyString(), Mockito.any(Location.class), Mockito.anyCollectionOf(Location.class));
 
-    inOrder.verify(callback).onProjectIssue("AssemblyLevelRule", null, "This is an assembly level Roslyn issue with no location.");
-    inOrder.verify(callback).onProjectIssue("NoAnalysisTargetsLocation", null, "No analysis targets, report at assembly level.");
-    verify(callback, Mockito.times(2)).onProjectIssue(Mockito.anyString(), Mockito.any(InputModule.class), Mockito.anyString());
+    verify(callback).onProjectIssue("AssemblyLevelRule", null, "This is an assembly level Roslyn issue with no location.");
+    verify(callback).onProjectIssue("NoAnalysisTargetsLocation", null, "No analysis targets, report at assembly level.");
+    verify(callback, Mockito.times(2)).onProjectIssue(Mockito.anyString(), Mockito.nullable(InputModule.class), Mockito.anyString());
   }
 
   // VS 2015 Update 2
