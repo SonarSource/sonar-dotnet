@@ -80,6 +80,7 @@
     <gitRepositoryName>sonar-csharp</gitRepositoryName>
     <!-- Release: enable publication to Bintray -->
     <artifactsToPublish>${project.groupId}:sonar-csharp-plugin:jar,${project.groupId}:sonar-vbnet-plugin:jar</artifactsToPublish>
+    <artifactsToDownload>${project.groupId}:SonarAnalyzer.CSharp:nupkg,${project.groupId}:SonarAnalyzer.VisualBasic:nupkg</artifactsToDownload>
     <sonar.jacoco.reportPaths>../target/jacoco.exec</sonar.jacoco.reportPaths>
   </properties>
 
