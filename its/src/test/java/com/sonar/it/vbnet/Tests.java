@@ -62,6 +62,7 @@ import static org.assertj.core.api.Assertions.assertThat;
   DoNotAnalyzeTestFilesTest.class,
   MetricsTest.class,
   NoSonarTest.class,
+  ScannerPluginCompatibilityTest.class,
   UnitTestResultsTest.class
 })
 public class Tests {
@@ -78,13 +79,13 @@ public class Tests {
 
   public static Location getVbNetLocation () {
     Location vbnetLocation;
-    String vbnetVersion = System.getProperty("vbnetVersion");
-    if (StringUtils.isEmpty(vbnetVersion)) {
+    String csharpVersion = System.getProperty("csharpVersion"); // C# and VB.Net versions are the same
+    if (StringUtils.isEmpty(csharpVersion)) {
       // use the plugin that was built on local machine
       vbnetLocation = FileLocation.byWildcardMavenFilename(new File("../sonar-vbnet-plugin/target"), "sonar-vbnet-plugin-*.jar");
     } else {
       // QA environment downloads the plugin built by the CI job
-      vbnetLocation = MavenLocation.of("org.sonarsource.dotnet", "sonar-vbnet-plugin", vbnetVersion);
+      vbnetLocation = MavenLocation.of("org.sonarsource.dotnet", "sonar-vbnet-plugin", csharpVersion);
     }
     return vbnetLocation;
   }
