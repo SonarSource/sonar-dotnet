@@ -29,12 +29,17 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonar.api.batch.rule.Severity;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.Issue.Flow;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
+import org.sonar.api.batch.sensor.rule.AdHocRule;
+import org.sonar.api.rules.RuleType;
 import org.sonarsource.dotnet.shared.plugins.SarifParserCallbackImpl;
 
+import static java.util.Collections.emptySet;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.groups.Tuple.tuple;
 
 public class SarifParserCallbackImplTest {
   @Rule
@@ -56,12 +61,12 @@ public class SarifParserCallbackImplTest {
       .setContents("My file\ncontents\nwith some\n lines")
       .build());
 
-    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey);
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
   }
 
   @Test
   public void should_add_project_issues() {
-    callback.onProjectIssue("rule1", ctx.module(), "msg");
+    callback.onProjectIssue("rule1", "warning", ctx.module(), "msg");
     assertThat(ctx.allIssues()).hasSize(1);
     assertThat(ctx.allIssues().iterator().next().primaryLocation().inputComponent().key()).isEqualTo("projectKey");
     assertThat(ctx.allIssues().iterator().next().ruleKey().rule()).isEqualTo("rule1");
@@ -70,7 +75,7 @@ public class SarifParserCallbackImplTest {
   @Test
   public void should_add_file_issues() {
     String absoluteFilePath = temp.getRoot().toPath().resolve("file1").toString();
-    callback.onFileIssue("rule1", absoluteFilePath, "msg");
+    callback.onFileIssue("rule1", "warning", absoluteFilePath, "msg");
     assertThat(ctx.allIssues()).hasSize(1);
     assertThat(ctx.allIssues().iterator().next().primaryLocation().inputComponent().key()).isEqualTo("module1:file1");
     assertThat(ctx.allIssues().iterator().next().ruleKey().rule()).isEqualTo("rule1");
@@ -79,26 +84,26 @@ public class SarifParserCallbackImplTest {
   @Test
   public void should_ignore_file_issue_with_unknown_rule_key() {
     String absoluteFilePath = temp.getRoot().toPath().resolve("file1").toString();
-    callback.onFileIssue("rule45", absoluteFilePath, "msg");
+    callback.onFileIssue("rule45", "warning", absoluteFilePath, "msg");
     assertThat(ctx.allIssues()).isEmpty();
   }
 
   @Test
   public void should_ignore_file_issue_with_unknown_file() {
-    callback.onFileIssue("rule1", "file-unknown", "msg");
+    callback.onFileIssue("rule1", "warning", "file-unknown", "msg");
     assertThat(ctx.allIssues()).isEmpty();
   }
 
   @Test
   public void should_ignore_project_issue_with_unknown_rule_key() {
-    callback.onProjectIssue("rule45", ctx.module(), "msg");
+    callback.onProjectIssue("rule45", "warning", ctx.module(), "msg");
     assertThat(ctx.allIssues()).isEmpty();
   }
 
   @Test
   public void should_add_issues() {
-    callback.onIssue("rule1", createLocation("file1", 2, 3), Collections.emptyList());
-    callback.onIssue("rule2", createLocation("file1", 2, 3), Collections.emptyList());
+    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.emptyList());
+    callback.onIssue("rule2", "warning", createLocation("file1", 2, 3), Collections.emptyList());
 
     assertThat(ctx.allIssues()).extracting("ruleKey").extracting("rule")
       .containsOnly("rule1", "rule2");
@@ -106,7 +111,7 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_add_issue_with_secondary_location() {
-    callback.onIssue("rule1", createLocation("file1", 2, 3), Collections.singletonList(createLocation("file1", 4, 5)));
+    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.singletonList(createLocation("file1", 4, 5)));
 
     assertThat(ctx.allIssues()).hasSize(1);
 
@@ -126,8 +131,8 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_ignore_repeated_module_issues() {
-    callback.onProjectIssue("rule1", ctx.module(), "message");
-    callback.onProjectIssue("rule1", ctx.module(), "message");
+    callback.onProjectIssue("rule1", "warning", ctx.module(), "message");
+    callback.onProjectIssue("rule1", "warning", ctx.module(), "message");
 
     assertThat(ctx.allIssues()).hasSize(1);
     assertThat(ctx.allIssues()).extracting("ruleKey").extracting("rule")
@@ -136,8 +141,8 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_ignore_repeated_file_issues() {
-    callback.onFileIssue("rule1", createAbsolutePath("file1"), "message");
-    callback.onFileIssue("rule1", createAbsolutePath("file1"), "message");
+    callback.onFileIssue("rule1", "warning", createAbsolutePath("file1"), "message");
+    callback.onFileIssue("rule1", "warning", createAbsolutePath("file1"), "message");
 
     assertThat(ctx.allIssues()).hasSize(1);
     assertThat(ctx.allIssues()).extracting("ruleKey").extracting("rule")
@@ -146,12 +151,57 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_ignore_repeated_issues() {
-    callback.onIssue("rule1", createLocation("file1", 2, 3), Collections.emptyList());
-    callback.onIssue("rule1", createLocation("file1", 2, 3), Collections.emptyList());
+    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.emptyList());
+    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.emptyList());
 
     assertThat(ctx.allIssues()).hasSize(1);
     assertThat(ctx.allIssues()).extracting("ruleKey").extracting("rule")
       .containsOnly("rule1");
+  }
+
+  @Test
+  public void should_register_adhoc_rule() {
+    callback.onRule("S12345", "My rule", "Rule description", "Error", "Foo");
+
+    assertThat(ctx.allAdHocRules())
+      .extracting(AdHocRule::engineId, AdHocRule::ruleId, AdHocRule::name, AdHocRule::description, AdHocRule::severity, AdHocRule::type)
+      .containsExactlyInAnyOrder(tuple("roslyn", "S12345", "My rule", "Rule description", Severity.CRITICAL, RuleType.BUG));
+  }
+
+  @Test
+  public void should_map_error_severity() {
+    callback.onRule("S12345", "My rule", "Rule description", "Error", "Foo");
+
+    assertThat(ctx.allAdHocRules())
+      .extracting(AdHocRule::severity)
+      .containsExactlyInAnyOrder(Severity.CRITICAL);
+  }
+
+  @Test
+  public void should_map_warning_severity() {
+    callback.onRule("S12345", "My rule", "Rule description", "Warning", "Foo");
+
+    assertThat(ctx.allAdHocRules())
+      .extracting(AdHocRule::severity)
+      .containsExactlyInAnyOrder(Severity.MAJOR);
+  }
+
+  @Test
+  public void should_map_info_severity() {
+    callback.onRule("S12345", "My rule", "Rule description", "Info", "Foo");
+
+    assertThat(ctx.allAdHocRules())
+      .extracting(AdHocRule::severity)
+      .containsExactlyInAnyOrder(Severity.INFO);
+  }
+
+  @Test
+  public void should_map_unknown_severity() {
+    callback.onRule("S12345", "My rule", "Rule description", "fdnsifhdjs", "Foo");
+
+    assertThat(ctx.allAdHocRules())
+      .extracting(AdHocRule::severity)
+      .containsExactlyInAnyOrder(Severity.INFO);
   }
 
   private Location createLocation(String filePath, int line, int column) {

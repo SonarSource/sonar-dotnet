@@ -34,7 +34,6 @@
         },
         {
           "ruleId": "S105",
-          "level": "warning",
           "message": "Some dummy message",
           "locations": [
             {

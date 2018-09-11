@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.rule.RuleKey;
@@ -35,11 +34,17 @@ import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
 @ScannerSide
 public class RoslynDataImporter {
   private static final Logger LOG = Loggers.get(RoslynDataImporter.class);
+  private final AbstractConfiguration config;
 
-  public void importRoslynReports(List<RoslynReport> reportPaths, final SensorContext context, Map<String,
-    List<RuleKey>> activeRoslynRulesByPartialRepoKey, Function<String, String> toRealPath) {
+  public RoslynDataImporter(AbstractConfiguration config) {
+    this.config = config;
+  }
+
+  public void importRoslynReports(List<RoslynReport> reportPaths, final SensorContext context, Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey,
+    Function<String, String> toRealPath) {
     Map<String, String> repositoryKeyByRoslynRuleKey = getRepoKeyByRoslynRuleKey(activeRoslynRulesByPartialRepoKey);
-    SarifParserCallback callback = new SarifParserCallbackImpl(context, repositoryKeyByRoslynRuleKey);
+    SarifParserCallback callback = new SarifParserCallbackImpl(context, repositoryKeyByRoslynRuleKey, config.importAllIssues(), config.bugCategories(),
+      config.codeSmellCategories(), config.vulnerabilityCategories());
 
     LOG.info("Importing {} Roslyn {}", reportPaths.size(), pluralize("report", reportPaths.size()));
 

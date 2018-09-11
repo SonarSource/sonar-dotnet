@@ -19,11 +19,12 @@
  */
 package org.sonar.plugins.csharp;
 
+import org.sonar.api.SonarRuntime;
 import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
 
 public class CSharpPropertyDefinitions extends AbstractPropertyDefinitions {
 
-  public CSharpPropertyDefinitions() {
-    super(CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME, CSharpPlugin.FILE_SUFFIXES_DEFVALUE);
+  public CSharpPropertyDefinitions(SonarRuntime runtime) {
+    super(CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME, CSharpPlugin.FILE_SUFFIXES_DEFVALUE, runtime);
   }
 }

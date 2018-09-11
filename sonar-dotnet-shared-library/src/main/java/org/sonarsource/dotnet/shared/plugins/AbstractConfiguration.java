@@ -26,14 +26,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+
+import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getAnalyzerWorkDirProperty;
+import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getRoslynJsonReportPathProperty;
 
 @ScannerSide
 public abstract class AbstractConfiguration {
@@ -54,17 +59,6 @@ public abstract class AbstractConfiguration {
    */
   private String getOldRoslynJsonReportPathProperty() {
     return PROP_PREFIX + languageKey + ".roslyn.reportFilePath";
-  }
-
-  /**
-   * The new property is written by scanners, and might contain multiple paths.
-   */
-  private String getRoslynJsonReportPathProperty() {
-    return PROP_PREFIX + languageKey + ".roslyn.reportFilePaths";
-  }
-
-  private String getAnalyzerWorkDirProperty() {
-    return PROP_PREFIX + languageKey + ".analyzer.projectOutPaths";
   }
 
   /**
@@ -96,7 +90,7 @@ public abstract class AbstractConfiguration {
   }
 
   private List<Path> protobufReportPaths(boolean silent) {
-    List<Path> analyzerWorkDirPaths = Arrays.stream(configuration.getStringArray(getAnalyzerWorkDirProperty()))
+    List<Path> analyzerWorkDirPaths = Arrays.stream(configuration.getStringArray(getAnalyzerWorkDirProperty(languageKey)))
       .map(Paths::get)
       .collect(Collectors.toList());
 
@@ -106,7 +100,7 @@ public abstract class AbstractConfiguration {
       if (oldValue.isPresent()) {
         analyzerWorkDirPaths = Collections.singletonList(Paths.get(oldValue.get()));
       } else {
-        return empty("Property missing: '" + getAnalyzerWorkDirProperty() + "'. No protobuf files will be loaded for this project.", silent);
+        return empty("Property missing: '" + getAnalyzerWorkDirProperty(languageKey) + "'. No protobuf files will be loaded for this project.", silent);
       }
     }
 
@@ -155,7 +149,7 @@ public abstract class AbstractConfiguration {
   }
 
   public List<Path> roslynReportPaths() {
-    String[] strPaths = configuration.getStringArray(getRoslynJsonReportPathProperty());
+    String[] strPaths = configuration.getStringArray(getRoslynJsonReportPathProperty(languageKey));
     if (strPaths.length > 0) {
       LOG.debug("Found Roslyn issues report");
       return Arrays.stream(strPaths)
@@ -172,5 +166,21 @@ public abstract class AbstractConfiguration {
         return Collections.singletonList(path.get());
       }
     }
+  }
+
+  public boolean importAllIssues() {
+    return configuration.getBoolean(AbstractPropertyDefinitions.getImportAllIssuesProperty(languageKey)).orElse(false);
+  }
+
+  public Set<String> bugCategories() {
+    return new HashSet<>(Arrays.asList(configuration.getStringArray(AbstractPropertyDefinitions.getBugCategoriesProperty(languageKey))));
+  }
+
+  public Set<String> codeSmellCategories() {
+    return new HashSet<>(Arrays.asList(configuration.getStringArray(AbstractPropertyDefinitions.getCodeSmellCategoriesProperty(languageKey))));
+  }
+
+  public Set<String> vulnerabilityCategories() {
+    return new HashSet<>(Arrays.asList(configuration.getStringArray(AbstractPropertyDefinitions.getVulnerabilityCategoriesProperty(languageKey))));
   }
 }

@@ -20,6 +20,7 @@
 package org.sonar.plugins.csharp;
 
 import org.sonar.api.Plugin;
+import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
@@ -31,15 +32,15 @@ public class CSharpPlugin implements Plugin {
 
   static final String LANGUAGE_KEY = "cs";
   static final String LANGUAGE_NAME = "C#";
-  
+
   static final String REPOSITORY_KEY = "csharpsquid";
   static final String REPOSITORY_NAME = "SonarAnalyzer";
   static final String PLUGIN_KEY = "csharp";
   static final String SONARANALYZER_NAME = "SonarAnalyzer.CSharp";
 
-  static final String FILE_SUFFIXES_KEY = "sonar.cs.file.suffixes";
+  static final String FILE_SUFFIXES_KEY = AbstractPropertyDefinitions.getFileSuffixProperty(LANGUAGE_KEY);
   static final String FILE_SUFFIXES_DEFVALUE = ".cs";
-  static final String IGNORE_HEADER_COMMENTS = "sonar.cs.ignoreHeaderComments";
+  static final String IGNORE_HEADER_COMMENTS = AbstractPropertyDefinitions.getIgnoreHeaderCommentsProperty(LANGUAGE_KEY);
 
   @Override
   public void define(Context context) {
@@ -60,7 +61,7 @@ public class CSharpPlugin implements Plugin {
       RoslynDataImporter.class,
       RoslynProfileExporter.class);
 
-    context.addExtensions(new CSharpPropertyDefinitions().create());
+    context.addExtensions(new CSharpPropertyDefinitions(context.getRuntime()).create());
     context.addExtensions(CSharpCodeCoverageProvider.extensions());
     context.addExtensions(CSharpUnitTestResultsProvider.extensions());
     context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties());
