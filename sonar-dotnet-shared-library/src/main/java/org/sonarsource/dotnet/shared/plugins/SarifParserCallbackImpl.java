@@ -159,11 +159,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
 
   private void createExternalIssue(InputFile inputFile, String ruleId, @Nullable String level, Location primaryLocation, Collection<Location> secondaryLocations) {
     NewExternalIssue newIssue = newExternalIssue(ruleId);
-    newIssue.at(newIssue.newLocation()
-      .on(inputFile)
-      .at(inputFile.newRange(primaryLocation.getStartLine(), primaryLocation.getStartColumn(),
-        primaryLocation.getEndLine(), primaryLocation.getEndColumn()))
-      .message(primaryLocation.getMessage()));
+    newIssue.at(createPrimaryLocation(inputFile, primaryLocation, newIssue::newLocation));
     setExternalIssueSeverityAndType(ruleId, level, newIssue);
 
     populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation);
@@ -196,15 +192,23 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     NewIssue newIssue = context.newIssue();
     newIssue
       .forRule(RuleKey.of(repositoryKey, ruleId))
-      .at(newIssue.newLocation()
-        .on(inputFile)
-        .at(inputFile.newRange(primaryLocation.getStartLine(), primaryLocation.getStartColumn(),
-          primaryLocation.getEndLine(), primaryLocation.getEndColumn()))
-        .message(primaryLocation.getMessage()));
+      .at(createPrimaryLocation(inputFile, primaryLocation, newIssue::newLocation));
 
     populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation);
 
     newIssue.save();
+  }
+
+  private NewIssueLocation createPrimaryLocation(InputFile inputFile, Location primaryLocation, Supplier<NewIssueLocation> newIssueLocationSupplier) {
+    NewIssueLocation newIssueLocation = newIssueLocationSupplier.get()
+      .on(inputFile)
+      .at(inputFile.newRange(primaryLocation.getStartLine(), primaryLocation.getStartColumn(),
+        primaryLocation.getEndLine(), primaryLocation.getEndColumn()));
+    String message = primaryLocation.getMessage();
+    if (message != null) {
+      newIssueLocation.message(message);
+    }
+    return newIssueLocation;
   }
 
   private void populateSecondaryLocations(Collection<Location> secondaryLocations, Supplier<NewIssueLocation> newIssueLocationProvider,
@@ -264,7 +268,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     return "Error".equalsIgnoreCase(defaultLevel) ? RuleType.BUG : RuleType.CODE_SMELL;
   }
 
-  private Severity mapSeverity(String defaultLevel) {
+  private static Severity mapSeverity(String defaultLevel) {
     switch (defaultLevel.toLowerCase(Locale.ENGLISH)) {
       case "error":
         return Severity.CRITICAL;

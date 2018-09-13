@@ -67,7 +67,7 @@ class SarifParser10 implements SarifParser {
     }
   }
 
-  private void handleRules(JsonObject rules, SarifParserCallback callback) {
+  private static void handleRules(JsonObject rules, SarifParserCallback callback) {
     for (Entry<String, JsonElement> ruleEl : rules.entrySet()) {
       JsonObject ruleObj = ruleEl.getValue().getAsJsonObject();
       handleRule(ruleObj, callback);
