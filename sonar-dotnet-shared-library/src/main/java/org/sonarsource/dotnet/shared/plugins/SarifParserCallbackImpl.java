@@ -166,12 +166,12 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
       .message(primaryLocation.getMessage()));
     setExternalIssueSeverityAndType(ruleId, level, newIssue);
 
-    populateSecondaryLocations(inputFile, secondaryLocations, newIssue::newLocation, newIssue::addLocation);
+    populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation);
 
     newIssue.save();
   }
 
-  private void setExternalIssueSeverityAndType(String ruleId, String level, NewExternalIssue newIssue) {
+  private void setExternalIssueSeverityAndType(String ruleId, @Nullable String level, NewExternalIssue newIssue) {
     if (level != null) {
       newIssue.severity(mapSeverity(level));
     } else if (defaultLevelByRuleId.containsKey(ruleId)) {
@@ -202,20 +202,18 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
           primaryLocation.getEndLine(), primaryLocation.getEndColumn()))
         .message(primaryLocation.getMessage()));
 
-    populateSecondaryLocations(inputFile, secondaryLocations, newIssue::newLocation, newIssue::addLocation);
+    populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation);
 
     newIssue.save();
   }
 
-  private InputFile populateSecondaryLocations(InputFile inputFile, Collection<Location> secondaryLocations, Supplier<NewIssueLocation> newIssueLocationProvider,
+  private void populateSecondaryLocations(Collection<Location> secondaryLocations, Supplier<NewIssueLocation> newIssueLocationProvider,
     Consumer<NewIssueLocation> newIssueLocationConsumer) {
     for (Location secondaryLocation : secondaryLocations) {
-      if (!inputFile.absolutePath().equalsIgnoreCase(secondaryLocation.getAbsolutePath())) {
-        inputFile = context.fileSystem().inputFile(context.fileSystem().predicates()
-          .hasAbsolutePath(secondaryLocation.getAbsolutePath()));
-        if (inputFile == null) {
-          continue;
-        }
+      InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates()
+        .hasAbsolutePath(secondaryLocation.getAbsolutePath()));
+      if (inputFile == null) {
+        continue;
       }
 
       NewIssueLocation newIssueLocation = newIssueLocationProvider.get()
@@ -230,7 +228,6 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
 
       newIssueLocationConsumer.accept(newIssueLocation);
     }
-    return inputFile;
   }
 
   @Override
@@ -252,15 +249,17 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
       .save();
   }
 
-  private RuleType mapRuleType(String category, String defaultLevel) {
-    if (bugCategories.contains(category)) {
-      return RuleType.BUG;
-    }
-    if (codeSmellCategories.contains(category)) {
-      return RuleType.CODE_SMELL;
-    }
-    if (vulnerabilityCategories.contains(category)) {
-      return RuleType.VULNERABILITY;
+  private RuleType mapRuleType(@Nullable String category, String defaultLevel) {
+    if (category != null) {
+      if (bugCategories.contains(category)) {
+        return RuleType.BUG;
+      }
+      if (codeSmellCategories.contains(category)) {
+        return RuleType.CODE_SMELL;
+      }
+      if (vulnerabilityCategories.contains(category)) {
+        return RuleType.VULNERABILITY;
+      }
     }
     return "Error".equalsIgnoreCase(defaultLevel) ? RuleType.BUG : RuleType.CODE_SMELL;
   }
