@@ -21,6 +21,7 @@ package org.sonarsource.dotnet.shared.sarif;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import org.junit.Before;
@@ -31,12 +32,14 @@ import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.Severity;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.batch.sensor.issue.ExternalIssue;
 import org.sonar.api.batch.sensor.issue.Issue.Flow;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.batch.sensor.rule.AdHocRule;
 import org.sonar.api.rules.RuleType;
 import org.sonarsource.dotnet.shared.plugins.SarifParserCallbackImpl;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.emptySet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
@@ -201,43 +204,60 @@ public class SarifParserCallbackImplTest {
   }
 
   @Test
-  public void should_map_error_severity() {
+  public void should_map_severity_name_and_description() {
     callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
-    callback.onRule("S12345", "My rule", "Rule description", "Error", "Foo");
+    callback.onRule("S1", "My rule1", "Rule description", "Error", "Foo");
+    callback.onRule("S2", null, null, "Warning", "Foo");
+    callback.onRule("S3", "My rule3", null, "Info", "Foo");
+    callback.onRule("S4", null, "Rule description", "Note", "Foo");
 
     assertThat(ctx.allAdHocRules())
-      .extracting(AdHocRule::severity)
-      .containsExactlyInAnyOrder(Severity.CRITICAL);
+      .extracting(AdHocRule::ruleId, AdHocRule::severity, AdHocRule::name, AdHocRule::description)
+      .containsExactlyInAnyOrder(
+        tuple("S1", Severity.CRITICAL, "My rule1", "Rule description"),
+        tuple("S2", Severity.MAJOR, "S2", null),
+        tuple("S3", Severity.INFO, "My rule3", null),
+        tuple("S4", Severity.INFO, "S4", "Rule description"));
   }
 
   @Test
-  public void should_map_warning_severity() {
+  public void should_fallback_on_rule_severity() {
     callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
-    callback.onRule("S12345", "My rule", "Rule description", "Warning", "Foo");
+    callback.onRule("rule45", "My rule", "Rule description", "Note", "Foo");
 
-    assertThat(ctx.allAdHocRules())
-      .extracting(AdHocRule::severity)
-      .containsExactlyInAnyOrder(Severity.MAJOR);
+    callback.onIssue("rule45", null, createLocation("file1", 2, 3), Collections.emptyList());
+
+    assertThat(ctx.allExternalIssues()).extracting(ExternalIssue::severity).containsExactly(Severity.INFO);
   }
 
   @Test
-  public void should_map_info_severity() {
+  public void should_fallback_on_major_severity() {
     callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
-    callback.onRule("S12345", "My rule", "Rule description", "Info", "Foo");
 
-    assertThat(ctx.allAdHocRules())
-      .extracting(AdHocRule::severity)
-      .containsExactlyInAnyOrder(Severity.INFO);
+    callback.onIssue("rule45", null, createLocation("file1", 2, 3), Collections.emptyList());
+
+    assertThat(ctx.allExternalIssues()).extracting(ExternalIssue::severity).containsExactly(Severity.MAJOR);
   }
 
   @Test
-  public void should_map_unknown_severity() {
-    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
-    callback.onRule("S12345", "My rule", "Rule description", "fdnsifhdjs", "Foo");
+  public void should_map_rule_type() {
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, new HashSet<>(asList("bug1", "bug2")), new HashSet<>(asList("cs1", "cs2")),
+      new HashSet<>(asList("vul1", "vul2")));
+
+    callback.onRule("S1", "My rule", "Rule description", "Info", "bug1");
+    callback.onRule("S2", "My rule", "Rule description", "Info", "cs2");
+    callback.onRule("S3", "My rule", "Rule description", "Info", "vul1");
+    callback.onRule("S4", "My rule", "Rule description", "Info", "unknown");
+    callback.onRule("S5", "My rule", "Rule description", "Info", null);
 
     assertThat(ctx.allAdHocRules())
-      .extracting(AdHocRule::severity)
-      .containsExactlyInAnyOrder(Severity.INFO);
+      .extracting(AdHocRule::ruleId, AdHocRule::type)
+      .containsExactlyInAnyOrder(
+        tuple("S1", RuleType.BUG),
+        tuple("S2", RuleType.CODE_SMELL),
+        tuple("S3", RuleType.VULNERABILITY),
+        tuple("S4", RuleType.CODE_SMELL),
+        tuple("S5", RuleType.CODE_SMELL));
   }
 
   private Location createLocation(String filePath, int line, int column) {
