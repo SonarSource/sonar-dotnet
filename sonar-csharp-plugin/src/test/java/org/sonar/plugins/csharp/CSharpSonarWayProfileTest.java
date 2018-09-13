@@ -21,78 +21,131 @@ package org.sonar.plugins.csharp;
 
 import com.google.common.collect.Sets;
 import com.sonar.plugins.security.api.CsRules;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
-
 import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.sonar.api.rule.RuleKey;
-import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
+import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.BuiltInQualityProfile;
+import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.Context;
+import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.NewBuiltInQualityProfile;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
 
 public class CSharpSonarWayProfileTest {
   @Rule
   public LogTester logTester = new LogTester();
 
   @Test
-  public void sonar_security_missing() {
-    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
-    BuiltInQualityProfilesDefinition.Context context = new BuiltInQualityProfilesDefinition.Context();
-    CsRules.ruleKeys = new HashSet<>();
+  public void sonar_security_with_already_activated_rule() {
+    NewBuiltInQualityProfile profile = Mockito.mock(NewBuiltInQualityProfile.class);
+    Mockito.when(profile.activateRule(CSharpPlugin.REPOSITORY_KEY, "TEST")).thenThrow(IllegalArgumentException.class);
+    Context context = Mockito.mock(Context.class);
+    Mockito.when(context.createBuiltInQualityProfile(anyString(), anyString())).thenReturn(profile);
+    CsRules.ruleKeys = Sets.newHashSet("TEST");
+
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_73_RUNTIME);
     profileDef.define(context);
-    BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = context.profile("cs", "Sonar way");
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
+  }
+
+  @Test
+  public void sonar_security_with_custom_frontend_plugin() {
+    Context context = new Context();
+    CsRules.ruleKeys = Sets.newHashSet("S3649");
+
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_74_RUNTIME);
+    profileDef.define(context);
+
+    BuiltInQualityProfile profile = context.profile("cs", "Sonar way");
+    assertThat(profile.language()).isEqualTo(CSharpPlugin.LANGUAGE_KEY);
+    assertThat(profile.rule(RuleKey.of("roslyn.sonaranalyzer.security.cs", "S3649"))).isNotNull();
+  }
+
+  @Test(expected=java.lang.IllegalArgumentException.class)
+  public void sonar_security_with_duplicated_quality_profile_name() {
+    Context context = new Context();
+    NewBuiltInQualityProfile sonarWay = context.createBuiltInQualityProfile("Sonar way", CSharpPlugin.LANGUAGE_KEY);
+    sonarWay.activateRule(CSharpPlugin.REPOSITORY_KEY, "S1");
+    sonarWay.done();
+    CsRules.ruleKeys = Sets.newHashSet("S2");
+
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_73_RUNTIME);
+    profileDef.define(context);
+  }
+
+  @Test
+  public void sonar_security_missing() {
+    Context context = new Context();
+    CsRules.ruleKeys = new HashSet<>();
+
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_67_RUNTIME);
+    profileDef.define(context);
+
+    BuiltInQualityProfile profile = context.profile("cs", "Sonar way");
     assertThat(profile.language()).isEqualTo(CSharpPlugin.LANGUAGE_KEY);
     assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S3649"))).isNull();
   }
 
   @Test
   public void sonar_security_present() {
-    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
-    BuiltInQualityProfilesDefinition.Context context = new BuiltInQualityProfilesDefinition.Context();
+    Context context = new Context();
     CsRules.ruleKeys = Sets.newHashSet("S3649");
+
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_73_RUNTIME);
     profileDef.define(context);
-    BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = context.profile("cs", "Sonar way");
+
+    BuiltInQualityProfile profile = context.profile("cs", "Sonar way");
     assertThat(profile.language()).isEqualTo(CSharpPlugin.LANGUAGE_KEY);
     assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S3649"))).isNotNull();
   }
 
   @Test
   public void sonar_security_ClassNotFoundException() {
-    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
-    BuiltInQualityProfilesDefinition.Context context = new BuiltInQualityProfilesDefinition.Context();
+    Context context = new Context();
     CsRules.exceptionToThrow = new ClassNotFoundException();
+
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_73_RUNTIME);
     profileDef.define(context);
+
     assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
   }
 
   @Test
   public void sonar_security_NoSuchMethodException() {
-    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
-    BuiltInQualityProfilesDefinition.Context context = new BuiltInQualityProfilesDefinition.Context();
+    Context context = new Context();
     CsRules.exceptionToThrow = new NoSuchMethodException();
+
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_73_RUNTIME);
     profileDef.define(context);
+
     assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
   }
 
   @Test
   public void sonar_security_IllegalAccessException() {
-    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
-    BuiltInQualityProfilesDefinition.Context context = new BuiltInQualityProfilesDefinition.Context();
+    Context context = new Context();
     CsRules.exceptionToThrow = new IllegalAccessException();
+
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_73_RUNTIME);
     profileDef.define(context);
+
     assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
   }
 
   @Test
   public void sonar_security_InvocationTargetException() {
-    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
-    BuiltInQualityProfilesDefinition.Context context = new BuiltInQualityProfilesDefinition.Context();
+    Context context = new Context();
     CsRules.exceptionToThrow = new InvocationTargetException(new Exception());
+
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_73_RUNTIME);
     profileDef.define(context);
+
     assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
   }
 }

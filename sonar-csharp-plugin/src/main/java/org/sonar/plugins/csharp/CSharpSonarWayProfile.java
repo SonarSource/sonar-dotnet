@@ -23,19 +23,38 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
+import org.sonar.api.SonarRuntime;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
+import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
 public class CSharpSonarWayProfile implements BuiltInQualityProfilesDefinition {
   private static final Logger LOG = Loggers.get(CSharpSonarWayProfile.class);
+  private static final Version SQ_7_4 = Version.create(7, 4);
+  private final boolean supportsSecurityFrontend;
+
+  public CSharpSonarWayProfile(SonarRuntime sonarRuntime) {
+    this.supportsSecurityFrontend = sonarRuntime.getApiVersion().isGreaterThanOrEqual(SQ_7_4);
+  }
 
   @Override
   public void define(Context context) {
     NewBuiltInQualityProfile sonarWay = context.createBuiltInQualityProfile("Sonar way", CSharpPlugin.LANGUAGE_KEY);
     BuiltInQualityProfileJsonLoader.load(sonarWay, CSharpPlugin.REPOSITORY_KEY, "org/sonar/plugins/csharp/Sonar_way_profile.json");
-    getSecurityRuleKeys().forEach(key -> sonarWay.activateRule(CSharpPlugin.REPOSITORY_KEY, key));
+    final String repositoryKey;
+    if (supportsSecurityFrontend) {
+      repositoryKey = "roslyn.sonaranalyzer.security.cs";
+    } else {
+      repositoryKey = CSharpPlugin.REPOSITORY_KEY;
+    }
+    try {
+      getSecurityRuleKeys().forEach(key -> sonarWay.activateRule(repositoryKey, key));
+    }
+    catch (IllegalArgumentException e) {
+      LOG.warn("Could not activate C# security rules", e);
+    }
     sonarWay.done();
   }
 
