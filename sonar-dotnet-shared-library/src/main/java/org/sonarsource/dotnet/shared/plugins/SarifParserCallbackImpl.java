@@ -199,7 +199,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     newIssue.save();
   }
 
-  private NewIssueLocation createPrimaryLocation(InputFile inputFile, Location primaryLocation, Supplier<NewIssueLocation> newIssueLocationSupplier) {
+  private static NewIssueLocation createPrimaryLocation(InputFile inputFile, Location primaryLocation, Supplier<NewIssueLocation> newIssueLocationSupplier) {
     NewIssueLocation newIssueLocation = newIssueLocationSupplier.get()
       .on(inputFile)
       .at(inputFile.newRange(primaryLocation.getStartLine(), primaryLocation.getStartColumn(),
