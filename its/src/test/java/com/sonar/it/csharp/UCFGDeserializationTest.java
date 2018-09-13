@@ -38,7 +38,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import org.apache.commons.lang.StringUtils;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -49,6 +48,7 @@ import org.sonar.ucfg.UCFGtoProtobuf;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
+// FIXME must remove this test after the 7.4 release
 public class UCFGDeserializationTest {
   private static final String PROJECT_KEY = "ucfg_tests"; // same key used for different MSBuild projects
   private static final String QUALITY_PROFILE = "CsharpProfile";
@@ -67,9 +67,18 @@ public class UCFGDeserializationTest {
     // - "LATEST_RELEASE[1.0]" for latest release of series 1.0.x
     // The SonarQube alias "LTS" has been dropped. An alternative is "LATEST_RELEASE[6.7]".
     // The term "latest" refers to the highest version number, not the most recently published version.
+
+    String sonarVersion = Optional.ofNullable(System.getProperty("sonar.runtimeVersion")).filter(v -> !"LTS".equals(v)).orElse("LATEST_RELEASE[6.7]");
+
+    // Starting with SonarQube 7.4, the responsibility for handling UCFGs moves to Sonar Security C# Frontend Plugin,
+    // breaking compatibility with this plugin. We keep executing these tests only for previous versions.
+    if (sonarVersion.contains("DEV") || sonarVersion.contains("7.4")) {
+      return;
+    }
+
     Location csharpLocation = Tests.getCsharpLocation();
     OrchestratorBuilder builder = Orchestrator.builderEnv()
-      .setSonarVersion(Optional.ofNullable(System.getProperty("sonar.runtimeVersion")).filter(v -> !"LTS".equals(v)).orElse("LATEST_RELEASE[6.7]"))
+      .setSonarVersion(sonarVersion)
       .setEdition(Edition.DEVELOPER)
       .addPlugin(csharpLocation)
       .addPlugin(MavenLocation.of("com.sonarsource.security", "sonar-security-plugin", "7.3.0.1282"))
@@ -113,6 +122,9 @@ public class UCFGDeserializationTest {
 
   @Test
   public void ucfgs_created_when_rules_enabled() throws IOException {
+    if (orchestrator == null) {
+      return;
+    }
     // enable a security rule
     createQP("S3649");
 
@@ -125,6 +137,9 @@ public class UCFGDeserializationTest {
 
   @Test
   public void ucfgs_not_created_when_rules_not_enabled() throws IOException {
+    if (orchestrator == null) {
+      return;
+    }
     // No security rules in QP
     createQP("S100");
 
