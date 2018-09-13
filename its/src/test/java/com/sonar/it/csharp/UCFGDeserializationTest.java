@@ -72,7 +72,7 @@ public class UCFGDeserializationTest {
       .setSonarVersion(Optional.ofNullable(System.getProperty("sonar.runtimeVersion")).filter(v -> !"LTS".equals(v)).orElse("LATEST_RELEASE[6.7]"))
       .setEdition(Edition.DEVELOPER)
       .addPlugin(csharpLocation)
-      .addPlugin(MavenLocation.of("com.sonarsource.security", "sonar-security-plugin", "DEV"))
+      .addPlugin(MavenLocation.of("com.sonarsource.security", "sonar-security-plugin", "7.3.0.1282"))
       .activateLicense();
 
     orchestrator = builder.build();

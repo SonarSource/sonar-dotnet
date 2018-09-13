@@ -51,8 +51,7 @@ public class CSharpSonarWayProfile implements BuiltInQualityProfilesDefinition {
     }
     try {
       getSecurityRuleKeys().forEach(key -> sonarWay.activateRule(repositoryKey, key));
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       LOG.warn("Could not activate C# security rules", e);
     }
     sonarWay.done();
