@@ -61,7 +61,7 @@ public class SarifParserCallbackImplTest {
       .setContents("My file\ncontents\nwith some\n lines")
       .build());
 
-    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
   }
 
   @Test
@@ -82,10 +82,18 @@ public class SarifParserCallbackImplTest {
   }
 
   @Test
-  public void should_ignore_file_issue_with_unknown_rule_key() {
+  public void should_create_external_file_issue_for_unknown_rule_key() {
     String absoluteFilePath = temp.getRoot().toPath().resolve("file1").toString();
     callback.onFileIssue("rule45", "warning", absoluteFilePath, "msg");
     assertThat(ctx.allIssues()).isEmpty();
+    assertThat(ctx.allExternalIssues()).isEmpty();
+
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
+    callback.onFileIssue("rule45", "warning", absoluteFilePath, "msg");
+
+    assertThat(ctx.allIssues()).isEmpty();
+    assertThat(ctx.allExternalIssues()).hasSize(1);
+
   }
 
   @Test
@@ -98,6 +106,14 @@ public class SarifParserCallbackImplTest {
   public void should_ignore_project_issue_with_unknown_rule_key() {
     callback.onProjectIssue("rule45", "warning", ctx.module(), "msg");
     assertThat(ctx.allIssues()).isEmpty();
+    assertThat(ctx.allExternalIssues()).isEmpty();
+
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
+
+    callback.onProjectIssue("rule45", "warning", ctx.module(), "msg");
+
+    assertThat(ctx.allIssues()).isEmpty();
+    assertThat(ctx.allExternalIssues()).isEmpty();
   }
 
   @Test
@@ -107,6 +123,21 @@ public class SarifParserCallbackImplTest {
 
     assertThat(ctx.allIssues()).extracting("ruleKey").extracting("rule")
       .containsOnly("rule1", "rule2");
+  }
+
+  @Test
+  public void should_create_external_issue_for_unknown_rule_key() {
+    callback.onIssue("rule45", "warning", createLocation("file1", 2, 3), Collections.emptyList());
+
+    assertThat(ctx.allIssues()).isEmpty();
+    assertThat(ctx.allExternalIssues()).isEmpty();
+
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
+
+    callback.onIssue("rule45", "warning", createLocation("file1", 2, 3), Collections.emptyList());
+
+    assertThat(ctx.allIssues()).isEmpty();
+    assertThat(ctx.allExternalIssues()).hasSize(1);
   }
 
   @Test
@@ -161,6 +192,7 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_register_adhoc_rule() {
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
     callback.onRule("S12345", "My rule", "Rule description", "Error", "Foo");
 
     assertThat(ctx.allAdHocRules())
@@ -170,6 +202,7 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_map_error_severity() {
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
     callback.onRule("S12345", "My rule", "Rule description", "Error", "Foo");
 
     assertThat(ctx.allAdHocRules())
@@ -179,6 +212,7 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_map_warning_severity() {
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
     callback.onRule("S12345", "My rule", "Rule description", "Warning", "Foo");
 
     assertThat(ctx.allAdHocRules())
@@ -188,6 +222,7 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_map_info_severity() {
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
     callback.onRule("S12345", "My rule", "Rule description", "Info", "Foo");
 
     assertThat(ctx.allAdHocRules())
@@ -197,6 +232,7 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_map_unknown_severity() {
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
     callback.onRule("S12345", "My rule", "Rule description", "fdnsifhdjs", "Foo");
 
     assertThat(ctx.allAdHocRules())

@@ -37,6 +37,7 @@ import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+import static java.util.Arrays.asList;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getAnalyzerWorkDirProperty;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getRoslynJsonReportPathProperty;
 
@@ -173,14 +174,14 @@ public abstract class AbstractConfiguration {
   }
 
   public Set<String> bugCategories() {
-    return new HashSet<>(Arrays.asList(configuration.getStringArray(AbstractPropertyDefinitions.getBugCategoriesProperty(languageKey))));
+    return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.getBugCategoriesProperty(languageKey))));
   }
 
   public Set<String> codeSmellCategories() {
-    return new HashSet<>(Arrays.asList(configuration.getStringArray(AbstractPropertyDefinitions.getCodeSmellCategoriesProperty(languageKey))));
+    return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.getCodeSmellCategoriesProperty(languageKey))));
   }
 
   public Set<String> vulnerabilityCategories() {
-    return new HashSet<>(Arrays.asList(configuration.getStringArray(AbstractPropertyDefinitions.getVulnerabilityCategoriesProperty(languageKey))));
+    return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.getVulnerabilityCategoriesProperty(languageKey))));
   }
 }
