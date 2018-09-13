@@ -177,10 +177,10 @@ public class AbstractConfigurationTest {
   }
 
   @Test
-  public void externalIssueIsTrueByDefault() throws IOException {
+  public void externalIssueIsFalseByDefault() throws IOException {
     config = new AbstractConfiguration(settings.asConfig(), "cs") {
     };
-    assertThat(config.importAllIssues()).isTrue();
+    assertThat(config.importAllIssues()).isFalse();
   }
 
   @Test

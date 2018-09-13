@@ -88,9 +88,9 @@ public abstract class AbstractPropertyDefinitions {
           .category(EXTERNAL_ANALYZERS_CATEGORY)
           .subCategory(languageName)
           .index(0)
-          .defaultValue("true")
-          .name("Import all Roslyn Issues")
-          .description("Should issues coming from third party Roslyn analyzers be reported as external issues?")
+          .defaultValue("false")
+          .name("External Roslyn analyzers")
+          .description("Import issues reported by external Roslyn analyzers")
           .onQualifiers(Qualifiers.PROJECT)
           .build());
       result.add(
@@ -100,8 +100,8 @@ public abstract class AbstractPropertyDefinitions {
           .category(EXTERNAL_ANALYZERS_CATEGORY)
           .subCategory(languageName)
           .index(1)
-          .name("Code Smell Roslyn Categories")
-          .description("List of Roslyn rule categories that will be mapped to code smells")
+          .name("Rule Categories associated to Code Smells")
+          .description("List of rule categories used by external analyzers and associated to the Code Smell type.")
           .onQualifiers(Qualifiers.PROJECT)
           .build());
       result.add(
@@ -111,8 +111,8 @@ public abstract class AbstractPropertyDefinitions {
           .category(EXTERNAL_ANALYZERS_CATEGORY)
           .subCategory(languageName)
           .index(2)
-          .name("Bug Roslyn Categories")
-          .description("List of Roslyn rule categories that will be mapped to bugs")
+          .name("Rule Categories associated to Bugs")
+          .description("List of rule categories used by external analyzers and associated to the Bug type.")
           .onQualifiers(Qualifiers.PROJECT)
           .build());
       result.add(
@@ -122,8 +122,8 @@ public abstract class AbstractPropertyDefinitions {
           .category(EXTERNAL_ANALYZERS_CATEGORY)
           .subCategory(languageName)
           .index(3)
-          .name("Vulnerability Roslyn Categories")
-          .description("List of Roslyn rule categories that will be mapped to vulnerabilities")
+          .name("Rule Categories associated to Vulnerabilities")
+          .description("List of rule categories used by external analyzers and associated to the Vulnerability type.")
           .onQualifiers(Qualifiers.PROJECT)
           .build());
     }
