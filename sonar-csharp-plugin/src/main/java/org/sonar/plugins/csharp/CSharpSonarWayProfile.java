@@ -23,21 +23,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
-import org.sonar.api.SonarRuntime;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
-import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
 public class CSharpSonarWayProfile implements BuiltInQualityProfilesDefinition {
   private static final Logger LOG = Loggers.get(CSharpSonarWayProfile.class);
-  private static final Version SQ_7_4 = Version.create(7, 4);
-  private final boolean supportsSecurityFrontend;
-
-  public CSharpSonarWayProfile(SonarRuntime sonarRuntime) {
-    this.supportsSecurityFrontend = sonarRuntime.getApiVersion().isGreaterThanOrEqual(SQ_7_4);
-  }
 
   @Override
   public void define(Context context) {
@@ -66,10 +58,7 @@ public class CSharpSonarWayProfile implements BuiltInQualityProfilesDefinition {
     return new HashSet<>();
   }
 
-  private String getRepositoryKey() {
-    if (!supportsSecurityFrontend) {
-      return CSharpPlugin.REPOSITORY_KEY;
-    }
+  private static String getRepositoryKey() {
     try {
       Class<?> csRulesClass = Class.forName("com.sonar.plugins.security.api.CsRules");
       Method getRuleKeysMethod = csRulesClass.getMethod("getRepositoryKey");
