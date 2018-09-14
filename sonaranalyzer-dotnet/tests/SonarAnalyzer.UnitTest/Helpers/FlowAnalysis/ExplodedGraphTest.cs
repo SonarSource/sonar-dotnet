@@ -1,4 +1,6 @@
 ﻿extern alias csharp;
+
+using System;
 /*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2018 SonarSource SA
@@ -21,6 +23,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime;
 using System.Text;
 using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
 using csharp::SonarAnalyzer.LiveVariableAnalysis.CSharp;
@@ -611,6 +614,10 @@ namespace NS
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_InternalStateCount_MaxReached()
         {
+            GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
+            GC.Collect();
+            GC.Collect();
+
             var testInput = @"
 using System;
 

@@ -21,6 +21,8 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using System;
+using System.Runtime;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -39,6 +41,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CognitiveComplexity_StackOverflow()
         {
+            GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
+            GC.Collect();
+            GC.Collect();
+
             Verifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.cs",
                 new CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
         }
