@@ -55,6 +55,22 @@ public class CSharpSonarWayProfileTest {
   }
 
   @Test
+  public void sonar_security_with_unknown_rule_repository() {
+    // we could still fail if we are using a SQ >= 7.4 and old version of SonarSecurity (returning some keys)
+    // case in which IllegalStateException will be thrown
+    NewBuiltInQualityProfile profile = Mockito.mock(NewBuiltInQualityProfile.class);
+    Mockito.when(profile.activateRule("roslyn.sonaranalyzer.security.cs", "TEST")).thenThrow(IllegalStateException.class);
+    Context context = Mockito.mock(Context.class);
+    Mockito.when(context.createBuiltInQualityProfile(anyString(), anyString())).thenReturn(profile);
+    CsRules.ruleKeys = Sets.newHashSet("TEST");
+
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_74_RUNTIME);
+    profileDef.define(context);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
+  }
+
+  @Test
   public void sonar_security_with_custom_frontend_plugin() {
     Context context = new Context();
     CsRules.ruleKeys = Sets.newHashSet("S3649");
