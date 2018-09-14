@@ -35,4 +35,8 @@ public class CsRules {
     }
     return ruleKeys;
   }
+
+  public static String getRepositoryKey() {
+    return "roslyn.sonaranalyzer.security.cs";
+  }
 }

@@ -43,12 +43,7 @@ public class CSharpSonarWayProfile implements BuiltInQualityProfilesDefinition {
   public void define(Context context) {
     NewBuiltInQualityProfile sonarWay = context.createBuiltInQualityProfile("Sonar way", CSharpPlugin.LANGUAGE_KEY);
     BuiltInQualityProfileJsonLoader.load(sonarWay, CSharpPlugin.REPOSITORY_KEY, "org/sonar/plugins/csharp/Sonar_way_profile.json");
-    final String repositoryKey;
-    if (supportsSecurityFrontend) {
-      repositoryKey = "roslyn.sonaranalyzer.security.cs";
-    } else {
-      repositoryKey = CSharpPlugin.REPOSITORY_KEY;
-    }
+    final String repositoryKey = getRepositoryKey();
     try {
       getSecurityRuleKeys().forEach(key -> sonarWay.activateRule(repositoryKey, key));
     } catch (IllegalArgumentException|IllegalStateException e) {
@@ -69,5 +64,19 @@ public class CSharpSonarWayProfile implements BuiltInQualityProfilesDefinition {
     }
 
     return new HashSet<>();
+  }
+
+  private String getRepositoryKey() {
+    if (!supportsSecurityFrontend) {
+      return CSharpPlugin.REPOSITORY_KEY;
+    }
+    try {
+      Class<?> csRulesClass = Class.forName("com.sonar.plugins.security.api.CsRules");
+      Method getRuleKeysMethod = csRulesClass.getMethod("getRepositoryKey");
+      return (String) getRuleKeysMethod.invoke(null);
+    } catch (ClassNotFoundException|NoSuchMethodException|IllegalAccessException|InvocationTargetException e) {
+      LOG.debug("com.sonar.plugins.security.api.CsRules#getRepositoryKey is not found, will use default repository key: " + e.getMessage());
+    }
+    return CSharpPlugin.REPOSITORY_KEY;
   }
 }
