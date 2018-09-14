@@ -25,6 +25,7 @@ import java.util.Set;
 public class CsRules {
   public static Set<String> ruleKeys = new HashSet<>();
   public static Exception exceptionToThrow;
+  public static boolean returnRepository;
 
   public static Set<String> getRuleKeys() throws Exception {
     if (exceptionToThrow != null) {
@@ -34,5 +35,13 @@ public class CsRules {
       throw exception;
     }
     return ruleKeys;
+  }
+
+  public static String getRepositoryKey() throws Exception {
+    if (returnRepository) {
+      return "roslyn.TEST";
+    } else {
+      throw exceptionToThrow;
+    }
   }
 }
