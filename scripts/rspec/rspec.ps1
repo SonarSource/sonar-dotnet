@@ -36,7 +36,7 @@ $ErrorActionPreference = "Stop"
 $RuleTemplateFolder = "${PSScriptRoot}\\rspec-templates"
 
 # Update the following variable when a new version of rule-api has to be used.
-$rule_api_version = "1.21.2.1138"
+$rule_api_version = "1.22.0.1199"
 $rule_api_error = "Download Rule-api from " + `
     "'https://repox.sonarsource.com/sonarsource-private-releases/com/sonarsource/rule-api/rule-api/${rule_api_version}' " +`
     "to a folder and set the %rule_api_path% environment variable with the full path of that folder. For example 'c:\\work\\tools'."
@@ -93,6 +93,11 @@ $resourceLanguageMap = @{
 $helpLanguageMap = @{
     "cs" = "csharp";
     "vbnet" = "vbnet";
+}
+
+$sonarpediaMap = @{
+    "cs" = ".\sonaranalyzer-dotnet\src\SonarAnalyzer.CSharp";
+    "vbnet" = ".\sonaranalyzer-dotnet\src\SonarAnalyzer.VisualBasic";
 }
 
 # Values have to match the ones from Microsoft.CodeAnalysis.LanguageNames
@@ -322,12 +327,19 @@ function ReplaceTokens($text) {
 
 ### SCRIPT START ###
 
+$sonarpediaFolder = $sonarpediaMap.Get_Item($language)
+Write-Host "Will change directory to $sonarpediaFolder to run rule-api"
+cd $sonarpediaFolder
+
 if ($ruleKey) {
     java -jar $rule_api_jar generate -rule $ruleKey
 }
 else {
     java -jar $rule_api_jar update
 }
+
+Write-Host "Ran rule-api, will move back to root"
+cd ../../../
 
 $csRules = GetRules "cs"
 $vbRules = GetRules "vbnet"

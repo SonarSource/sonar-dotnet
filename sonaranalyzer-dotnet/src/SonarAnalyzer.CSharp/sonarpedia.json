@@ -1,5 +1,5 @@
 {
-  "rules-metadata-path": "./sonaranalyzer-dotnet/rspec/cs",
+  "rules-metadata-path": "../../rspec/cs/",
   "languages": [
     "CSH"
   ],
