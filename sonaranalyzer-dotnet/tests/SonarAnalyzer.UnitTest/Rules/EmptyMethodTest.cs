@@ -57,5 +57,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new EmptyMethodCodeFixProvider(),
                 EmptyMethodCodeFixProvider.TitleComment);
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void EmptyMethod_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.vb",
+                new SonarAnalyzer.Rules.VisualBasic.EmptyMethod());
+        }
     }
 }
+
+
