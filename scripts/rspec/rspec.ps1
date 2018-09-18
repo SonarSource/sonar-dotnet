@@ -329,7 +329,7 @@ function ReplaceTokens($text) {
 
 $sonarpediaFolder = $sonarpediaMap.Get_Item($language)
 Write-Host "Will change directory to $sonarpediaFolder to run rule-api"
-cd $sonarpediaFolder
+pushd $sonarpediaFolder
 
 if ($ruleKey) {
     java -jar $rule_api_jar generate -rule $ruleKey
@@ -339,7 +339,7 @@ else {
 }
 
 Write-Host "Ran rule-api, will move back to root"
-cd ../../../
+popd
 
 $csRules = GetRules "cs"
 $vbRules = GetRules "vbnet"
