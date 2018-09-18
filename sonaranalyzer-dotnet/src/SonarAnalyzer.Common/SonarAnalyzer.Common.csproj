@@ -43,14 +43,23 @@
   </ItemGroup>
 
   <!-- Generate protobuf classes, supports windows and linux execution -->
-  <Target Name="GenerateProtobufClasses" BeforeTargets="CoreCompile" Outputs="./Protobuf/Ucfg.cs;.\Protobuf\AnalyzerReport.cs" Inputs="$(UcfgProtoPath)ucfg.proto;.\Protobuf\AnalyzerReport.proto">
+  <Target Name="GenerateProtobufClasses" BeforeTargets="CoreCompile"
+          Outputs="./Protobuf/Ucfg.cs;./Protobuf/AnalyzerReport.cs"
+          Inputs="$(UcfgProtoPath)ucfg.proto;./Protobuf/AnalyzerReport.proto">
     <Message Importance="high" Text="Generating protobuf classes..." />
+    <!-- There is no built-in way to distinguish between Linux and OSX -->
     <PropertyGroup>
-      <!-- This path is platform dependent, it should become conditional when we decide we want to build on Linux or OSX -->
-      <ProtocExe>"$(UserProfile)/.nuget/packages/Google.Protobuf.Tools/3.4.0/tools/windows_x64/protoc.exe"</ProtocExe>
+      <IsWindows Condition="'$(OS)'=='Windows_NT'">true</IsWindows>
+      <IsOSX Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))' == 'true'">true</IsOSX>
+      <IsLinux Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' == 'true'">true</IsLinux>
     </PropertyGroup>
-    <Exec Command="$(ProtocExe) -I=$(UcfgProtoPath) --csharp_out=./Protobuf $(UcfgProtoPath)ucfg.proto" />
-    <Exec Command="$(ProtocExe) -I=./Protobuf --csharp_out=./Protobuf ./Protobuf/AnalyzerReport.proto" />
+    <PropertyGroup>
+      <ProtocCompiler Condition="$(IsWindows)==true">"$(UserProfile)/.nuget/packages/Google.Protobuf.Tools/3.4.0/tools/windows_x64/protoc.exe"</ProtocCompiler>
+      <ProtocCompiler Condition="$(IsOSX)==true">~/.nuget/packages/google.protobuf.tools/3.4.0/tools/macosx_x64/protoc</ProtocCompiler>
+      <ProtocCompiler Condition="$(IsLinux)==true">~/.nuget/packages/google.protobuf.tools/3.4.0/tools/linux_x64/protoc</ProtocCompiler>
+    </PropertyGroup>
+    <Exec Command="$(ProtocCompiler) -I=$(UcfgProtoPath) --csharp_out=./Protobuf $(UcfgProtoPath)ucfg.proto" />
+    <Exec Command="$(ProtocCompiler) -I=./Protobuf --csharp_out=./Protobuf ./Protobuf/AnalyzerReport.proto" />
     <Message Importance="high" Text="Protobuf classes generated." />
   </Target>
 
