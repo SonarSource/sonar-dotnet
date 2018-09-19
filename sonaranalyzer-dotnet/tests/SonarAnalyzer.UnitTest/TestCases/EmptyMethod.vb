@@ -1,4 +1,7 @@
-﻿Module Foo
+﻿Imports System.Diagnostics
+Imports System.Runtime.InteropServices
+
+Module Foo
 ' The tests do not track location because it would introduce a comment inside the body (and the issue would not be raised)
 
 ' Noncompliant@+1 {{Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.}}
@@ -17,6 +20,10 @@
     Throw New NotSupportedException
   End Function
 
+  Function Exception3()
+    Throw
+  End Function
+
   Sub Comment1()
     ' foo
   End Sub
@@ -31,6 +38,19 @@
 
   Function Ok2()
     Return "bar"
+  End Function
+
+' Noncompliant@+1
+  Function Incomplete1()
+
+  Function Incomplete2()
+    Return "bar"
+
+' Noncompliant@+1
+  Sub Incomplete3()
+
+  Function Incomplete4()
+    Thr
   End Function
 
 End Module
@@ -69,5 +89,23 @@ Module Bar
       ' x
     End Function
   End Class
+
+  <DllImport("FOO.DLL")> _
+  Private Shared Function FOO(ByVal Handle As IntPtr) As IntPtr
+  End Function
+
+  <DllImport("FOO.DLL")> _
+  Private Shared Sub FOO(ByVal Handle As IntPtr)
+  End Sub
+
+' Noncompliant@+2
+  <Conditional("DEBUG"), Conditional("TEST1")>
+  Sub TraceMethod()
+  End Sub
+
+' Noncompliant@+2
+  <DllI
+  Private Shared Sub FOO(ByVal Handle As IntPtr)
+  End Sub
 
 End Module

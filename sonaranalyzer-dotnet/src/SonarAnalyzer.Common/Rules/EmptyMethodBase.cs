@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules
                 SyntaxKinds.ToArray());
         }
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-        protected abstract ISet<TLanguageKindEnum> SyntaxKinds { get; }
+        protected abstract TLanguageKindEnum[] SyntaxKinds { get; }
         protected abstract void CheckMethod(SyntaxNodeAnalysisContext context);
     }
 }

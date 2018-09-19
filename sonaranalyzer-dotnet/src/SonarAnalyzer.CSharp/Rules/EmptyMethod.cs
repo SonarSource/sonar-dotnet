@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
             Helpers.CSharp.GeneratedCodeRecognizer.Instance;
 
-        protected override ISet<SyntaxKind> SyntaxKinds { get; } = new HashSet<SyntaxKind>
+        protected override SyntaxKind[] SyntaxKinds { get; } = new []
         {
             SyntaxKind.MethodDeclaration
         };

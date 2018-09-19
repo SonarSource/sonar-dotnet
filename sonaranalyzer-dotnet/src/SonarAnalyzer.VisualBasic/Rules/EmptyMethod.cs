@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
             Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
 
-        protected override ISet<SyntaxKind> SyntaxKinds { get; } = new HashSet<SyntaxKind>
+        protected override SyntaxKind[] SyntaxKinds { get; } = new []
         {
             SyntaxKind.FunctionBlock,
             SyntaxKind.SubBlock
@@ -70,6 +70,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 return true;
             }
 
+            if (IsDllImport(methodStatement))
+            {
+                return true;
+            }
+
             var methodSymbol = semanticModel.GetDeclaredSymbol(methodStatement);
             if (methodSymbol != null &&
                 methodSymbol.IsOverride &&
@@ -81,5 +86,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             return methodSymbol.IsOverrides() && semanticModel.Compilation.IsTest();
         }
+
+        private static bool IsDllImport(MethodStatementSyntax methodStatement) => methodStatement.AttributeLists
+            .SelectMany(list => list.Attributes)
+            .Any(a => a.Name.GetText().ToString().Equals("dllimport", System.StringComparison.OrdinalIgnoreCase));
     }
 }

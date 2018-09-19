@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  898,
+"startColumn":  17,
+"endLine":  898,
+"endColumn":  37
+}
+}
+}
+]
+}
