@@ -19,6 +19,7 @@
  */
 package com.sonar.it.vbnet;
 
+import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.Build;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
@@ -78,16 +79,7 @@ public class Tests {
     .build();
 
   public static Location getVbNetLocation () {
-    Location vbnetLocation;
-    String csharpVersion = System.getProperty("csharpVersion"); // C# and VB.Net versions are the same
-    if (StringUtils.isEmpty(csharpVersion)) {
-      // use the plugin that was built on local machine
-      vbnetLocation = FileLocation.byWildcardMavenFilename(new File("../sonar-vbnet-plugin/target"), "sonar-vbnet-plugin-*.jar");
-    } else {
-      // QA environment downloads the plugin built by the CI job
-      vbnetLocation = MavenLocation.of("org.sonarsource.dotnet", "sonar-vbnet-plugin", csharpVersion);
-    }
-    return vbnetLocation;
+    return TestUtils.getPluginLocation("sonar-vbnet-plugin");
   }
 
   public static Path projectDir(TemporaryFolder temp, String projectName) throws IOException {
