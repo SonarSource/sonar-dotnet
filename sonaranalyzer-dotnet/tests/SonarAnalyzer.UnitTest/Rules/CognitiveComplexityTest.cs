@@ -42,5 +42,13 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.cs",
                 new CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CognitiveComplexity_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\CognitiveComplexity.vb",
+                new SonarAnalyzer.Rules.VisualBasic.CognitiveComplexity());
+        }
     }
 }

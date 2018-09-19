@@ -3773,7 +3773,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["3773"],
             //["3774"],
             //["3775"],
-            //["3776"],
+            ["3776"] = "CODE_SMELL",
             //["3777"],
             //["3778"],
             //["3779"],
