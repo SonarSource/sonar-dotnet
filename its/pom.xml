@@ -7,7 +7,7 @@
     <groupId>org.sonarsource.parent</groupId>
     <artifactId>parent</artifactId>
     <version>46</version>
-	<relativePath></relativePath>
+    <relativePath></relativePath>
   </parent>
 
   <groupId>com.sonarsource.it</groupId>
@@ -64,6 +64,11 @@
       <artifactId>assertj-core</artifactId>
       <version>3.6.1</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.2</version>
     </dependency>
   </dependencies>
 
