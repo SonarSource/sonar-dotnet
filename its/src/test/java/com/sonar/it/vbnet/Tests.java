@@ -63,7 +63,8 @@ import static org.assertj.core.api.Assertions.assertThat;
   DoNotAnalyzeTestFilesTest.class,
   MetricsTest.class,
   NoSonarTest.class,
-  ScannerPluginCompatibilityTest.class,
+  NoSonarTest.class,
+//  ScannerPluginCompatibilityTest.class, // the equivalent C# test is currently disabled
   UnitTestResultsTest.class
 })
 public class Tests {
