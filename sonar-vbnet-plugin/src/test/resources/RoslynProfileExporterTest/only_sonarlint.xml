@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RoslynExportProfile Version="1.0">
+  <Configuration>
+    <RuleSet Name="Rules for SonarQube" Description="This rule set was automatically generated from SonarQube." ToolsVersion="14.0">
+      <Rules AnalyzerId="SonarAnalyzer.VisualBasic" RuleNamespace="SonarAnalyzer.VisualBasic">
+        <Rule Id="[template_key&quot;&apos;&lt;&gt;&amp;]" Action="Warning" />
+        <Rule Id="[parameters_key]" Action="Warning" />
+        <Rule Id="InactiveRule" Action="None" />
+      </Rules>
+    </RuleSet>
+    <AdditionalFiles>
+      <AdditionalFile FileName="SonarLint.xml">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxBbmFseXNpc0lucHV0Pg0KICA8UnVsZXM+DQogICAgPFJ1bGU+DQogICAgICA8S2V5Plt0ZW1wbGF0ZV9rZXkmcXVvdDsmYXBvczsmbHQ7Jmd0OyZhbXA7XTwvS2V5Pg0KICAgICAgPFBhcmFtZXRlcnM+DQogICAgICAgIDxQYXJhbWV0ZXI+DQogICAgICAgICAgPEtleT5SdWxlS2V5PC9LZXk+DQogICAgICAgICAgPFZhbHVlPlt0ZW1wbGF0ZV9rZXkmcXVvdDsmYXBvczsmbHQ7Jmd0OyZhbXA7XTwvVmFsdWU+DQogICAgICAgIDwvUGFyYW1ldGVyPg0KICAgICAgPC9QYXJhbWV0ZXJzPg0KICAgIDwvUnVsZT4NCiAgICA8UnVsZT4NCiAgICAgIDxLZXk+W3BhcmFtZXRlcnNfa2V5XTwvS2V5Pg0KICAgICAgPFBhcmFtZXRlcnM+DQogICAgICAgIDxQYXJhbWV0ZXI+DQogICAgICAgICAgPEtleT5bcGFyYW0yX2RlZmF1bHRfa2V5XTwvS2V5Pg0KICAgICAgICAgIDxWYWx1ZT5bcGFyYW0yX2RlZmF1bHRfdmFsdWVdPC9WYWx1ZT4NCiAgICAgICAgPC9QYXJhbWV0ZXI+DQogICAgICAgIDxQYXJhbWV0ZXI+DQogICAgICAgICAgPEtleT5bcGFyYW0xX2tleV08L0tleT4NCiAgICAgICAgICA8VmFsdWU+W3BhcmFtMV92YWx1ZV08L1ZhbHVlPg0KICAgICAgICA8L1BhcmFtZXRlcj4NCiAgICAgIDwvUGFyYW1ldGVycz4NCiAgICA8L1J1bGU+DQogIDwvUnVsZXM+DQogIDxGaWxlcz4NCiAgPC9GaWxlcz4NCjwvQW5hbHlzaXNJbnB1dD4NCg==</AdditionalFile>
+    </AdditionalFiles>
+  </Configuration>
+  <Deployment>
+    <Plugins>
+      <Plugin Key="vbnet" Version="1.7.0" StaticResourceName="SonarAnalyzer.zip" />
+    </Plugins>
+    <NuGetPackages>
+      <NuGetPackage Id="SonarAnalyzer.VisualBasic" Version="1.10.0" />
+    </NuGetPackages>
+  </Deployment>
+</RoslynExportProfile>

@@ -1,0 +1,7 @@
+{
+  "rules-metadata-path": "../sonaranalyzer-dotnet/rspec/cs",
+  "languages": [
+    "CSH"
+  ],
+  "latest-update": "2018-09-03T09:18:49.351Z"
+}

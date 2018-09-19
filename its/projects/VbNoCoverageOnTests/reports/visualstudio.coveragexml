@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<results>
+  <modules>
+    <module name="mylibrary.dll" path="mylibrary.dll" id="1CFE5B57EB777045B5A806F7FD0FEF4C01000000" block_coverage="16.67" line_coverage="15.79" blocks_covered="2" blocks_not_covered="10" lines_covered="3" lines_partially_covered="0" lines_not_covered="16">
+      <functions>
+        <function id="8272" token="0x6000001" name="Method()" type_name="Class1" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="3">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="4" start_column="9" end_line="4" end_column="37" />
+            <range source_id="0" covered="yes" start_line="6" start_column="9" end_line="6" end_column="28" />
+            <range source_id="0" covered="no" start_line="7" start_column="13" end_line="7" end_column="40" />
+            <range source_id="0" covered="yes" start_line="8" start_column="9" end_line="8" end_column="15" />
+            <range source_id="0" covered="yes" start_line="12" start_column="9" end_line="12" end_column="21" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="MyLib.Tests/UnitTest1.vb">
+        </source_file>
+      </source_files>
+    </module>
+  </modules>
+</results>
