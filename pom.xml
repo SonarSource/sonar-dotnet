@@ -35,22 +35,22 @@
       <name>Amaury Levé</name>
       <organization>SonarSource</organization>
     </developer>
-	<developer>
-      <id>vhristov</id>
-      <name>Valeri Hristov</name>
-      <organization>SonarSource</organization>
-    </developer>
-	<developer>
-      <id>jgyerik</id>
-      <name>Janos Gyerik</name>
-      <organization>SonarSource</organization>
-    </developer>
-	<developer>
-      <id>dmeneses</id>
-      <name>Duarte Meneses</name>
-      <organization>SonarSource</organization>
-    </developer>
-	<developer>
+    <developer>
+        <id>vhristov</id>
+        <name>Valeri Hristov</name>
+        <organization>SonarSource</organization>
+      </developer>
+    <developer>
+        <id>jgyerik</id>
+        <name>Janos Gyerik</name>
+        <organization>SonarSource</organization>
+      </developer>
+    <developer>
+        <id>dmeneses</id>
+        <name>Duarte Meneses</name>
+        <organization>SonarSource</organization>
+      </developer>
+    <developer>
       <id>jhenry</id>
       <name>Julien Henry</name>
       <organization>SonarSource</organization>
@@ -61,6 +61,7 @@
     <module>sonar-dotnet-tests-library</module>
     <module>sonar-dotnet-shared-library</module>
     <module>sonar-csharp-plugin</module>
+    <module>sonar-vbnet-plugin</module>
   </modules>
 
   <scm>
@@ -78,7 +79,8 @@
   <properties>
     <gitRepositoryName>sonar-csharp</gitRepositoryName>
     <!-- Release: enable publication to Bintray -->
-    <artifactsToPublish>${project.groupId}:sonar-csharp-plugin:jar</artifactsToPublish>
+    <artifactsToPublish>${project.groupId}:sonar-csharp-plugin:jar,${project.groupId}:sonar-vbnet-plugin:jar</artifactsToPublish>
+    <artifactsToDownload>${project.groupId}:SonarAnalyzer.CSharp:nupkg,${project.groupId}:SonarAnalyzer.VisualBasic:nupkg</artifactsToDownload>
     <sonar.jacoco.reportPaths>../target/jacoco.exec</sonar.jacoco.reportPaths>
   </properties>
 
