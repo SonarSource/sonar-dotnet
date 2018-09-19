@@ -105,7 +105,7 @@ public class CoverageTest {
 
   @Test
   public void no_coverage_on_tests() throws Exception {
-    Path projectDir = Tests.projectDir(temp, "NoCoverageOnTests");
+    Path projectDir = Tests.projectDir(temp, "VbNoCoverageOnTests");
     orchestrator.executeBuild(Tests.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("VbNoCoverageOnTests")
