@@ -91,21 +91,23 @@ Module Bar
   End Class
 
   <DllImport("FOO.DLL")> _
-  Private Shared Function FOO(ByVal Handle As IntPtr) As IntPtr
+  Private Shared Function External1(ByVal Handle As IntPtr) As IntPtr
   End Function
 
   <DllImport("FOO.DLL")> _
-  Private Shared Sub FOO(ByVal Handle As IntPtr)
+  Private Shared Sub External2(ByVal Handle As IntPtr)
   End Sub
+
+  Declare Function External3 Lib "foo.dll" Alias "FooBar" (ByVal lpBuffer As String) As Integer
 
 ' Noncompliant@+2
   <Conditional("DEBUG"), Conditional("TEST1")>
-  Sub TraceMethod()
+  Sub OtherAttribute1()
   End Sub
 
 ' Noncompliant@+2
   <DllI
-  Private Shared Sub FOO(ByVal Handle As IntPtr)
+  Private Shared Sub OtherAttribute2(ByVal Handle As IntPtr)
   End Sub
 
 End Module
