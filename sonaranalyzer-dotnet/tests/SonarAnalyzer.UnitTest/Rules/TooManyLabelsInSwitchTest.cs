@@ -19,8 +19,10 @@
  */
 
 extern alias csharp;
+extern alias vbnet;
+using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
+using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,8 +33,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TooManyLabelsInSwitch()
         {
-            var diagnostic = new TooManyLabelsInSwitch {Maximum = 2};
-            Verifier.VerifyAnalyzer(@"TestCases\TooManyLabelsInSwitch.cs", diagnostic);
+            Verifier.VerifyAnalyzer(@"TestCases\TooManyLabelsInSwitch.cs",
+                new CSharp.TooManyLabelsInSwitch { Maximum = 2 });
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TooManyLabelsInSwitch_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\TooManyLabelsInSwitch.vb",
+                new VisualBasic.TooManyLabelsInSwitch { Maximum = 2 });
         }
     }
 }
