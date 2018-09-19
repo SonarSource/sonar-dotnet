@@ -19,13 +19,12 @@
  */
 package com.sonar.it.vbnet;
 
+import com.sonar.orchestrator.Orchestrator;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-
-import com.sonar.orchestrator.Orchestrator;
 
 import java.nio.file.Path;
 
@@ -60,7 +59,7 @@ public class DoNotAnalyzeTestFilesTest {
     orchestrator.executeBuild(Tests.newScanner(projectDir)
       .addArgument("end"));
 
-    assertThat(Tests.getComponent("DoNotAnalyzeTestFilesTest:DoNotAnalyzeTestFilesTest:039CD4D5-8C38-47EB-AE09-F2457DE61EFC:UnitTest1.vb")).isNotNull();
+    assertThat(Tests.getComponent("VbDoNotAnalyzeTestFilesTest:VbDoNotAnalyzeTestFilesTest:039CD4D5-8C38-47EB-AE09-F2457DE61EFC:UnitTest1.vb")).isNotNull();
     assertThat(getMeasureAsInt("VbDoNotAnalyzeTestFilesTest", "files")).isNull();
     assertThat(getMeasureAsInt("VbDoNotAnalyzeTestFilesTest", "lines")).isNull();
     assertThat(getMeasureAsInt("VbDoNotAnalyzeTestFilesTest", "ncloc")).isNull();

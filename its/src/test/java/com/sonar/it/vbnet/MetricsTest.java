@@ -37,9 +37,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MetricsTest {
 
-  private static final String PROJECT = "MetricsTest";
-  private static final String DIRECTORY = "MetricsTest:MetricsTest:107A81BD-3E88-4E13-B659-770551688818:foo";
-  private static final String FILE = "MetricsTest:MetricsTest:107A81BD-3E88-4E13-B659-770551688818:foo/Module1.vb";
+  private static final String PROJECT = "VbMetricsTest";
+  private static final String DIRECTORY = "VbMetricsTest:VbMetricsTest:107A81BD-3E88-4E13-B659-770551688818:foo";
+  private static final String FILE = "VbMetricsTest:VbMetricsTest:107A81BD-3E88-4E13-B659-770551688818:foo/Module1.vb";
   public static TemporaryFolder temp = new TemporaryFolder();
   @ClassRule
   public static RuleChain chain = getRuleChain();
