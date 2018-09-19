@@ -45,7 +45,7 @@ public class DoNotAnalyzeTestFilesTest {
 
   @Test
   public void should_not_increment_test() throws Exception {
-    Path projectDir = Tests.projectDir(temp, "DoNotAnalyzeTestFilesTest");
+    Path projectDir = Tests.projectDir(temp, "VbDoNotAnalyzeTestFilesTest");
     orchestrator.executeBuild(Tests.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("VbDoNotAnalyzeTestFilesTest")
