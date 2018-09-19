@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -30,43 +29,28 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class TooManyLabelsInSwitch : ParameterLoadingDiagnosticAnalyzer
+    public class TooManyLabelsInSwitch : TooManyLabelsInSwitchBase<SyntaxKind, SwitchStatementSyntax>
     {
-        internal const string DiagnosticId = "S1479";
-        private const string MessageFormat = "Consider reworking this 'switch' to reduce the number of 'case' from {1} to at most {0}.";
-
-        private static readonly DiagnosticDescriptor rule =
+        protected override DiagnosticDescriptor Rule { get; } =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
                 isEnabledByDefault: false);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private const string MessageFormat = "Consider reworking this 'switch' to reduce the number of 'case's" +
+            " from {1} to at most {0}.";
 
-        private const int DefaultValueMaximum = 30;
+        protected override SyntaxKind[] SyntaxKinds { get; } =
+            new[] { SyntaxKind.SwitchStatement };
 
-        [RuleParameter("maximum", PropertyType.Integer, "Maximum number of case", DefaultValueMaximum)]
-        public int Maximum { get; set; } = DefaultValueMaximum;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
+            Helpers.CSharp.GeneratedCodeRecognizer.Instance;
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var switchNode = (SwitchStatementSyntax)c.Node;
-                    var type = c.SemanticModel.GetTypeInfo(switchNode.Expression).Type;
+        protected override SyntaxNode GetExpression(SwitchStatementSyntax statement) =>
+            statement.Expression;
 
-                    if (type == null ||
-                        type.TypeKind == TypeKind.Enum)
-                    {
-                        return;
-                    }
+        protected override int GetSectionsCount(SwitchStatementSyntax statement) =>
+            statement.Sections.Count;
 
-                    var numberOfSections = switchNode.Sections.Count;
-                    if (numberOfSections > Maximum)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, switchNode.SwitchKeyword.GetLocation(), Maximum, numberOfSections));
-                    }
-                },
-                SyntaxKind.SwitchStatement);
-        }
+        protected override Location GetKeywordLocation(SwitchStatementSyntax statement) =>
+            statement.SwitchKeyword.GetLocation();
     }
 }
