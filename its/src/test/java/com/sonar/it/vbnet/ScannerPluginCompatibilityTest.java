@@ -19,6 +19,7 @@
  */
 package com.sonar.it.vbnet;
 
+import com.sonar.it.shared.TestUtils;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -30,6 +31,7 @@ import com.sonar.orchestrator.locator.FileLocation;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,8 +44,9 @@ public class ScannerPluginCompatibilityTest {
   public void scanner_2_1_plugin_greater_than_6_should_fail_with_nice_message() throws Exception {
     Path projectDir = Tests.projectDir(temp, "VbNoCoverageOnTests");
     Orchestrator orchestrator = Orchestrator.builderEnv()
-      .addPlugin(FileLocation.byWildcardMavenFilename(new File("../sonar-vbnet-plugin/target"), "sonar-vbnet-plugin-*.jar"))
-      .addPlugin(FileLocation.of("../sonar-vbnet-plugin/target/sonar-csharp-plugin-6.1.0.2359.jar"))
+      .setSonarVersion(Optional.ofNullable(System.getProperty("sonar.runtimeVersion")).filter(v -> !"LTS".equals(v)).orElse("LATEST_RELEASE[6.7]"))
+      .addPlugin(Tests.getVbNetLocation())
+      .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin")) // rely on the fact that the current version is now >6
       .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_no_rule.xml"))
       .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_class_name.xml"))
       .build();
@@ -67,7 +70,8 @@ public class ScannerPluginCompatibilityTest {
   public void scanner_2_1_plugin_greater_than_6_without_sonarcsharp_should_fail_with_weird_message() throws Exception {
     Path projectDir = Tests.projectDir(temp, "VbNoCoverageOnTests");
     Orchestrator orchestrator = Orchestrator.builderEnv()
-      .addPlugin(FileLocation.byWildcardMavenFilename(new File("../sonar-vbnet-plugin/target"), "sonar-vbnet-plugin-*.jar"))
+      .setSonarVersion(Optional.ofNullable(System.getProperty("sonar.runtimeVersion")).filter(v -> !"LTS".equals(v)).orElse("LATEST_RELEASE[6.7]"))
+      .addPlugin(Tests.getVbNetLocation())
       .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_no_rule.xml"))
       .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_class_name.xml"))
       .build();
