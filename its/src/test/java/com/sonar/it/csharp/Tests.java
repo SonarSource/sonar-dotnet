@@ -19,6 +19,7 @@
  */
 package com.sonar.it.csharp;
 
+import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.Build;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
@@ -83,16 +84,7 @@ public class Tests {
 
 
   public static Location getCsharpLocation () {
-    Location csharpLocation;
-    String csharpVersion = System.getProperty("csharpVersion");
-    if (StringUtils.isEmpty(csharpVersion)) {
-      // use the plugin that was built on local machine
-      csharpLocation = FileLocation.byWildcardMavenFilename(new File("../sonar-csharp-plugin/target"), "sonar-csharp-plugin-*.jar");
-    } else {
-      // QA environment downloads the plugin built by the CI job
-      csharpLocation = MavenLocation.of("org.sonarsource.dotnet", "sonar-csharp-plugin", csharpVersion);
-    }
-    return csharpLocation;
+    return TestUtils.getPluginLocation("sonar-csharp-plugin");
   }
   public static Path projectDir(TemporaryFolder temp, String projectName) throws IOException {
     Path projectDir = Paths.get("projects").resolve(projectName);
