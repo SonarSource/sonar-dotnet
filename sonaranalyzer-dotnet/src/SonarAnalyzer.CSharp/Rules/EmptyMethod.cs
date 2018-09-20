@@ -31,24 +31,20 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class EmptyMethod : SonarDiagnosticAnalyzer
+    public sealed class EmptyMethod : EmptyMethodBase<SyntaxKind>
     {
-        internal const string DiagnosticId = "S1186";
-        private const string MessageFormat = "Add a nested comment explaining why this method is empty, throw a " +
-            "'NotSupportedException' or complete the implementation.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
+            Helpers.CSharp.GeneratedCodeRecognizer.Instance;
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override SyntaxKind[] SyntaxKinds { get; } = new []
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckMethodDeclaration,
-                SyntaxKind.MethodDeclaration);
-        }
+            SyntaxKind.MethodDeclaration
+        };
 
-        private static void CheckMethodDeclaration(SyntaxNodeAnalysisContext context)
+        protected override void CheckMethod(SyntaxNodeAnalysisContext context)
         {
             var methodNode = (MethodDeclarationSyntax)context.Node;
 
@@ -88,12 +84,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool ContainsComment(BlockSyntax node)
         {
-            return ContainsComment(node.OpenBraceToken.TrailingTrivia) || ContainsComment(node.CloseBraceToken.LeadingTrivia);
+            return ContainsComment(node.OpenBraceToken.TrailingTrivia) ||
+                ContainsComment(node.CloseBraceToken.LeadingTrivia);
         }
 
         private static bool ContainsComment(SyntaxTriviaList trivias)
         {
-            return trivias.Any(trivia => trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) || trivia.IsKind(SyntaxKind.MultiLineCommentTrivia));
+            return trivias.Any(trivia => trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) ||
+                trivia.IsKind(SyntaxKind.MultiLineCommentTrivia));
         }
     }
 }

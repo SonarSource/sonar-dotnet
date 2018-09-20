@@ -6,31 +6,27 @@
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public override void DoSomething()
-{
-}
+Sub DoSomething()
+End Sub
 
-public override void DoSomethingElse()
-{
-}
+Function DoSomething()
+End Function
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public override void DoSomething()
-{
-  // Do nothing because of X and Y.
-}
+Sub DoSomething()
+    ' Not implemented because of reason
+End Sub
 
-public override void DoSomethingElse()
-{
-  throw new NotSupportedException();
-}
+Function DoSomething()
+    Throw New NotSupportedException
+End Function
 </pre>
 <h2>Exceptions</h2>
 <p>The following methods are ignored:</p>
 <ul>
-  <li> empty <code>virtual</code> methods, </li>
-  <li> empty methods that override an <code>abstract</code> method, </li>
+  <li> empty <code>Overridable</code> or <code>MustOverride</code> methods, </li>
+  <li> empty methods that override an <code>MustOverride</code> method, </li>
   <li> empty overrides in test assemblies. </li>
 </ul>
 
