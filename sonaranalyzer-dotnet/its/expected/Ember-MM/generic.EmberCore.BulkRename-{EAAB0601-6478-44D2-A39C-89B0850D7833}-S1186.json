@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"region":  {
+"startLine":  86,
+"startColumn":  17,
+"endLine":  86,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"region":  {
+"startLine":  90,
+"startColumn":  17,
+"endLine":  90,
+"endColumn":  34
+}
+}
+}
+]
+}
