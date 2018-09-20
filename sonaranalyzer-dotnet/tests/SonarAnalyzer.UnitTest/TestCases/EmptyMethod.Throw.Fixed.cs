@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace Tests.Diagnostics
 {
@@ -26,6 +27,9 @@ namespace Tests.Diagnostics
         }
 
         extern void F6();
+
+        [DllImport("avifil32.dll")]
+        private static extern void F7();
     }
 
     public abstract class MyClass
