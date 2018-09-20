@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -19,8 +19,10 @@
  */
 
 extern alias csharp;
+extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
+using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +34,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void AllBranchesShouldNotHaveSameImplementation()
         {
             Verifier.VerifyAnalyzer(@"TestCases\AllBranchesShouldNotHaveSameImplementation.cs",
-                new AllBranchesShouldNotHaveSameImplementation());
+                new CSharp.AllBranchesShouldNotHaveSameImplementation());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void AllBranchesShouldNotHaveSameImplementation_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\AllBranchesShouldNotHaveSameImplementation.vb",
+                new VisualBasic.AllBranchesShouldNotHaveSameImplementation());
         }
     }
 }
