@@ -19,8 +19,10 @@
  */
 
 extern alias csharp;
+extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
+using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +33,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UnaryPrefixOperatorRepeated()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.cs", new UnaryPrefixOperatorRepeated());
+            Verifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.cs",
+                new CSharp.UnaryPrefixOperatorRepeated());
         }
 
         [TestMethod]
@@ -41,8 +44,16 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyCodeFix(
                 @"TestCases\UnaryPrefixOperatorRepeated.cs",
                 @"TestCases\UnaryPrefixOperatorRepeated.Fixed.cs",
-                new UnaryPrefixOperatorRepeated(),
-                new UnaryPrefixOperatorRepeatedCodeFixProvider());
+                new CSharp.UnaryPrefixOperatorRepeated(),
+                new CSharp.UnaryPrefixOperatorRepeatedCodeFixProvider());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UnaryPrefixOperatorRepeated_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\UnaryPrefixOperatorRepeated.vb",
+                new VisualBasic.UnaryPrefixOperatorRepeated());
         }
     }
 }
