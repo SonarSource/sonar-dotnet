@@ -31,8 +31,12 @@ namespace SonarAnalyzer.Common.VisualBasic
     {
         private MethodStatementSyntax currentMethod;
         private readonly List<ExpressionSyntax> logicalOperationsToIgnore = new List<ExpressionSyntax>();
+        private readonly InnerWalker walker;
 
-        private InnerWalker walker => new InnerWalker(this);
+        public CognitiveComplexityWalker()
+        {
+            this.walker = new InnerWalker(this);
+        }
 
         public override void Visit(SyntaxNode node)
         {
