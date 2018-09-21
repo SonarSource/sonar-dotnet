@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,16 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Rules.Common;
+using SonarAnalyzer.Common.VisualBasic;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
@@ -36,7 +34,58 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class CognitiveComplexity : CognitiveComplexityBase
     {
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
+                 isEnabledByDefault: false);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+
+        public override DiagnosticDescriptor Rule => rule;
+
+        public override ICognitiveComplexityWalker CreateWalker() => new CognitiveComplexityWalker();
+
+        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                 c => CheckComplexity<MethodBlockSyntax>(c,
+                     m => m,
+                     m => m.SubOrFunctionStatement.Identifier.GetLocation(),
+                     "method",
+                     Threshold),
+                 SyntaxKind.SubBlock,
+                 SyntaxKind.FunctionBlock);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c => CheckComplexity<ConstructorBlockSyntax>(c,
+                    co => co,
+                    co => co.BlockStatement.DeclarationKeyword.GetLocation(),
+                    "constructor",
+                    Threshold),
+                SyntaxKind.ConstructorBlock);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c => CheckComplexity<OperatorBlockSyntax>(c,
+                    o => o,
+                    o => o.BlockStatement.DeclarationKeyword.GetLocation(),
+                    "operator",
+                    Threshold),
+                SyntaxKind.OperatorBlock);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c => CheckComplexity<AccessorBlockSyntax>(c,
+                    a => a,
+                    a => a.AccessorStatement.DeclarationKeyword.GetLocation(),
+                    "accessor",
+                    PropertyThreshold),
+                SyntaxKind.GetAccessorBlock,
+                SyntaxKind.SetAccessorBlock);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+               c => CheckComplexity<FieldDeclarationSyntax>(c,
+                    m => m,
+                    m => m.Declarators[0].Names[0].Identifier.GetLocation(),
+                    "field",
+                    Threshold),
+               SyntaxKind.FieldDeclaration);
+        }
     }
 }
