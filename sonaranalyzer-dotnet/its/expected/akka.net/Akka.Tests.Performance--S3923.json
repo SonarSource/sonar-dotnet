@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3923",
+"message":  "Remove this if or edit its blocks so that they are not all the same.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  25,
+"endLine":  50,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3923",
+"message":  "Remove this if or edit its blocks so that they are not all the same.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  21,
+"endLine":  103,
+"endColumn":  22
+}
+}
+}
+]
+}
