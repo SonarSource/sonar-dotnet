@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        protected abstract HashSet<TSyntaxKindEnum> SyntaxKinds { get; }
+        protected abstract ISet<TSyntaxKindEnum> SyntaxKinds { get; }
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 

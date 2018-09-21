@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override DiagnosticDescriptor Rule { get; } =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override HashSet<SyntaxKind> SyntaxKinds { get; } = new HashSet<SyntaxKind>
+        protected override ISet<SyntaxKind> SyntaxKinds { get; } = new HashSet<SyntaxKind>
         {
             SyntaxKind.LogicalNotExpression,
             SyntaxKind.BitwiseNotExpression,

@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class UnaryPrefixOperatorRepeated :
         UnaryPrefixOperatorRepeatedBase<SyntaxKind, UnaryExpressionSyntax>
     {
-        protected override HashSet<SyntaxKind> SyntaxKinds { get; } = new HashSet<SyntaxKind>
+        protected override ISet<SyntaxKind> SyntaxKinds { get; } = new HashSet<SyntaxKind>
         {
             SyntaxKind.NotExpression
         };
