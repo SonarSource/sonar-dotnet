@@ -2037,6 +2037,36 @@
   <data name="S2429_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S2761_Category" xml:space="preserve">
+    <value>Major Bug</value>
+  </data>
+  <data name="S2761_Description" xml:space="preserve">
+    <value>Calling the Not operator twice does nothing: the second invocation undoes the first. Either this is a bug, if the operator was actually meant to be called once, or misleading if done on purpose.</value>
+  </data>
+  <data name="S2761_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S2761_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2761_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S2761_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S2761_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S2761_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S2761_Title" xml:space="preserve">
+    <value>'Not' boolean operator should not be repeated</value>
+  </data>
+  <data name="S2761_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S2951_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
   </data>

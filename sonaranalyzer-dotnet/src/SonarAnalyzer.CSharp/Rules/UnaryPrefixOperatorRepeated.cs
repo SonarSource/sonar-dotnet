@@ -18,12 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -31,61 +30,28 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class UnaryPrefixOperatorRepeated : SonarDiagnosticAnalyzer
+    public sealed class UnaryPrefixOperatorRepeated :
+        UnaryPrefixOperatorRepeatedBase<SyntaxKind, PrefixUnaryExpressionSyntax>
     {
-        internal const string DiagnosticId = "S2761";
-        private const string MessageFormat = "Use the '{0}' operator just once or not at all.";
-
-        private static readonly DiagnosticDescriptor rule =
+        protected override DiagnosticDescriptor Rule { get; } =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override ISet<SyntaxKind> SyntaxKinds { get; } = new HashSet<SyntaxKind>
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var topLevelUnary = (PrefixUnaryExpressionSyntax)c.Node;
+            SyntaxKind.LogicalNotExpression,
+            SyntaxKind.BitwiseNotExpression,
+        };
 
-                    if (!TopLevelUnaryInChain(topLevelUnary))
-                    {
-                        return;
-                    }
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
+            Helpers.CSharp.GeneratedCodeRecognizer.Instance;
 
-                    var repeatedCount = 0U;
-                    var currentUnary = topLevelUnary;
-                    var lastUnary = currentUnary;
-                    while (currentUnary != null &&
-                           SameOperators(currentUnary, topLevelUnary))
-                    {
-                        lastUnary = currentUnary;
-                        repeatedCount++;
-                        currentUnary = currentUnary.Operand as PrefixUnaryExpressionSyntax;
-                    }
+        protected override SyntaxNode GetOperand(PrefixUnaryExpressionSyntax unarySyntax) =>
+            unarySyntax.Operand;
 
-                    if (repeatedCount < 2)
-                    {
-                        return;
-                    }
+        protected override SyntaxToken GetOperatorToken(PrefixUnaryExpressionSyntax unarySyntax) =>
+            unarySyntax.OperatorToken;
 
-                    var errorLocation = new TextSpan(topLevelUnary.SpanStart, lastUnary.OperatorToken.Span.End - topLevelUnary.SpanStart);
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
-                            Location.Create(c.Node.SyntaxTree, errorLocation),
-                            topLevelUnary.OperatorToken.ToString()));
-                },
-                SyntaxKind.LogicalNotExpression,
-                SyntaxKind.BitwiseNotExpression);
-        }
-
-        private static bool TopLevelUnaryInChain(PrefixUnaryExpressionSyntax unary)
-        {
-            return !(unary.Parent is PrefixUnaryExpressionSyntax parent) || !SameOperators(parent, unary);
-        }
-
-        private static bool SameOperators(PrefixUnaryExpressionSyntax expression1, PrefixUnaryExpressionSyntax expression2)
-        {
-            return expression1.OperatorToken.IsKind(expression2.OperatorToken.Kind());
-        }
+        protected override bool SameOperators(PrefixUnaryExpressionSyntax expression1, PrefixUnaryExpressionSyntax expression2) =>
+            expression1.OperatorToken.IsKind(expression2.OperatorToken.Kind());
     }
 }
