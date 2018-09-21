@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules
                 };
 
             private static bool AreEquivalent(IEnumerable<SyntaxNode> nodes1, IEnumerable<SyntaxNode> nodes2) =>
-                nodes1.Equals(nodes2, (x, y) => x.IsEquivalentTo(y));
+                nodes1.Equals(nodes2, (x, y) => x.IsEquivalentTo(y, topLevel: false));
         }
 
         protected abstract class TernaryStatementAnalyzerBase<TTernaryStatement>
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules
                     var whenTrue = GetWhenTrue(ternaryStatement);
                     var whenFalse = GetWhenFalse(ternaryStatement);
 
-                    if (whenTrue.IsEquivalentTo(whenFalse))
+                    if (whenTrue.IsEquivalentTo(whenFalse, topLevel: false))
                     {
                         context.ReportDiagnostic(Diagnostic.Create(rule, ternaryStatement.GetLocation(), messageArgs));
                     }
