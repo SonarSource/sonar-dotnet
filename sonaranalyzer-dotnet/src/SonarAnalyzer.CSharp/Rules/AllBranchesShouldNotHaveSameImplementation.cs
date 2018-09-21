@@ -72,17 +72,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 new[] { elseSyntax.Statement };
 
             protected override IEnumerable<IEnumerable<SyntaxNode>> GetIfBlocksStatements(ElseClauseSyntax elseSyntax,
-                out IfStatementSyntax topLevelIfSyntax)
+                out IfStatementSyntax topLevelIf)
             {
                 var allStatements = new List<IEnumerable<SyntaxNode>>();
 
                 var currentElse = elseSyntax;
 
-                topLevelIfSyntax = null;
+                topLevelIf = null;
 
                 while (currentElse?.Parent is IfStatementSyntax currentIf)
                 {
-                    topLevelIfSyntax = currentIf;
+                    topLevelIf = currentIf;
                     allStatements.Add(new[] { currentIf.Statement });
                     currentElse = currentIf.Parent as ElseClauseSyntax;
                 }

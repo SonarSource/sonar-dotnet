@@ -32,16 +32,18 @@ namespace SonarAnalyzer.Rules
         internal const string DiagnosticId = "S3923";
         internal const string MessageFormat = "{0}";
 
-        protected abstract class SameImplementationAnalyzerBase
-        {
-            public abstract Action<SyntaxNodeAnalysisContext> GetAction(DiagnosticDescriptor rule, params object[] messageArgs);
-        }
-
-        protected abstract class IfStatementAnalyzerBase<TElseSyntax, TIfSyntax> : SameImplementationAnalyzerBase
+        protected abstract class IfStatementAnalyzerBase<TElseSyntax, TIfSyntax>
             where TElseSyntax : SyntaxNode
             where TIfSyntax : SyntaxNode
         {
-            public override Action<SyntaxNodeAnalysisContext> GetAction(DiagnosticDescriptor rule, params object[] messageArgs) =>
+            protected abstract IEnumerable<SyntaxNode> GetStatements(TElseSyntax elseSyntax);
+
+            protected abstract IEnumerable<IEnumerable<SyntaxNode>> GetIfBlocksStatements(TElseSyntax elseSyntax,
+                out TIfSyntax topLevelIf);
+
+            protected abstract bool IsLastElseInChain(TElseSyntax elseSyntax);
+
+            public Action<SyntaxNodeAnalysisContext> GetAction(DiagnosticDescriptor rule, params object[] messageArgs) =>
                 context =>
                 {
                     var elseSyntax = (TElseSyntax)context.Node;
@@ -61,25 +63,18 @@ namespace SonarAnalyzer.Rules
                     }
                 };
 
-            protected abstract IEnumerable<SyntaxNode> GetStatements(TElseSyntax elseSyntax);
-
-            protected abstract IEnumerable<IEnumerable<SyntaxNode>> GetIfBlocksStatements(TElseSyntax elseSyntax,
-                out TIfSyntax topLevelIf);
-
-            protected abstract bool IsLastElseInChain(TElseSyntax elseSyntax);
-
             private static bool AreEquivalent(IEnumerable<SyntaxNode> nodes1, IEnumerable<SyntaxNode> nodes2) =>
-                nodes1.Equals(nodes2, (x, y) => x.IsEquivalentTo(y, false));
+                nodes1.Equals(nodes2, (x, y) => x.IsEquivalentTo(y));
         }
 
-        protected abstract class TernaryStatementAnalyzerBase<TTernaryStatement> : SameImplementationAnalyzerBase
+        protected abstract class TernaryStatementAnalyzerBase<TTernaryStatement>
             where TTernaryStatement : SyntaxNode
         {
             protected abstract SyntaxNode GetWhenTrue(TTernaryStatement ternaryStatement);
 
             protected abstract SyntaxNode GetWhenFalse(TTernaryStatement ternaryStatement);
 
-            public override Action<SyntaxNodeAnalysisContext> GetAction(DiagnosticDescriptor rule, params object[] messageArgs) =>
+            public Action<SyntaxNodeAnalysisContext> GetAction(DiagnosticDescriptor rule, params object[] messageArgs) =>
                 context =>
                 {
                     var ternaryStatement = (TTernaryStatement)context.Node;
@@ -87,14 +82,14 @@ namespace SonarAnalyzer.Rules
                     var whenTrue = GetWhenTrue(ternaryStatement);
                     var whenFalse = GetWhenFalse(ternaryStatement);
 
-                    if (whenTrue.IsEquivalentTo(whenFalse, false))
+                    if (whenTrue.IsEquivalentTo(whenFalse))
                     {
                         context.ReportDiagnostic(Diagnostic.Create(rule, ternaryStatement.GetLocation(), messageArgs));
                     }
                 };
         }
 
-        protected abstract class SwitchStatementAnalyzerBase<TSwitchStatement, TSwitchSection> : SameImplementationAnalyzerBase
+        protected abstract class SwitchStatementAnalyzerBase<TSwitchStatement, TSwitchSection>
             where TSwitchStatement : SyntaxNode
             where TSwitchSection : SyntaxNode
         {
@@ -104,7 +99,7 @@ namespace SonarAnalyzer.Rules
 
             protected abstract bool AreEquivalent(TSwitchSection section1, TSwitchSection section2);
 
-            public override Action<SyntaxNodeAnalysisContext> GetAction(DiagnosticDescriptor rule, params object[] messageArgs) =>
+            public Action<SyntaxNodeAnalysisContext> GetAction(DiagnosticDescriptor rule, params object[] messageArgs) =>
                 context =>
                 {
                     var switchStatement = (TSwitchStatement)context.Node;
