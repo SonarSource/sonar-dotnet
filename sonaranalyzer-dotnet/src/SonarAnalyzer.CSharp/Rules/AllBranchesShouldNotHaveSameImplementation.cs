@@ -33,14 +33,14 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class AllBranchesShouldNotHaveSameImplementation : AllBranchesShouldNotHaveSameImplementationBase
     {
-        private const string IfMessage =
-            "Remove this if or edit its blocks so that they are not all the same.";
+        private const string SwitchMessage =
+            "Remove this 'switch' or edit its sections so that they are not all the same.";
 
         private const string TernaryMessage =
             "Remove this ternary operator or edit it so that when true and when false blocks are not the same.";
 
-        private const string SwitchMessage =
-            "Remove this 'switch' or edit its sections so that they are not all the same.";
+        private const string IfMessage =
+            "Remove this 'if' or edit its blocks so that they are not all the same.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
