@@ -189,8 +189,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             const string expectedErrorMessage =
                 "Expected diagnostics.Where(d => d.Id == AnalyzerFailedDiagnosticId) to be empty, but found {error AD0001: " +
-                "Analyzer 'SonarAnalyzer.Rules.CSharp.CheckFileLicense' threw an exception of type " +
-                "'System.InvalidOperationException' with message 'Invalid regular expression: " +
+                "* 'SonarAnalyzer.Rules.CSharp.CheckFileLicense' * System.InvalidOperationException * 'Invalid regular expression: " +
                 FailingSingleLineRegexHeader + "'.}.";
 
             Action action =
