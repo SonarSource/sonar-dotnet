@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Common
     public abstract class CognitiveComplexityWalkerBase : ICognitiveComplexityWalker
     {
         protected readonly List<SecondaryLocation> incrementLocations = new List<SecondaryLocation>();
-        // used to track logical operations inside parantheses
+        // used to track logical operations inside parentheses
         protected readonly List<SyntaxNode> logicalOperationsToIgnore = new List<SyntaxNode>();
         protected bool hasDirectRecursiveCall;
 

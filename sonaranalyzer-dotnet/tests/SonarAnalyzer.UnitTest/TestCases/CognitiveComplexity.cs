@@ -599,7 +599,7 @@ namespace Tests.Diagnostics
 //                    ^^ Secondary {{+1}}
         }
 
-        void ChainedConditionsWithParantheses() // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+        void ChainedConditionsWithParentheses() // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
         {
             var res = a && b && (c && d);
 //                      ^^ Secondary {{+1}}
