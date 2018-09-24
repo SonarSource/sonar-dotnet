@@ -1,0 +1,295 @@
+{
+"issues":  [
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  96,
+"startColumn":  18,
+"endLine":  96,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  99,
+"startColumn":  3,
+"endLine":  99,
+"endColumn":  5
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  101,
+"startColumn":  5,
+"endLine":  101,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  105,
+"startColumn":  7,
+"endLine":  105,
+"endColumn":  9
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  108,
+"startColumn":  8,
+"endLine":  108,
+"endColumn":  10
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  118,
+"startColumn":  7,
+"endLine":  118,
+"endColumn":  9
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  119,
+"startColumn":  8,
+"endLine":  119,
+"endColumn":  10
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  129,
+"startColumn":  4,
+"endLine":  129,
+"endColumn":  9
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 101 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  118,
+"startColumn":  18,
+"endLine":  118,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  124,
+"startColumn":  3,
+"endLine":  124,
+"endColumn":  5
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  126,
+"startColumn":  5,
+"endLine":  126,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  128,
+"startColumn":  7,
+"endLine":  128,
+"endColumn":  9
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  134,
+"startColumn":  8,
+"endLine":  134,
+"endColumn":  14
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  136,
+"startColumn":  10,
+"endLine":  136,
+"endColumn":  12
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  138,
+"startColumn":  11,
+"endLine":  138,
+"endColumn":  13
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  141,
+"startColumn":  12,
+"endLine":  141,
+"endColumn":  14
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  153,
+"startColumn":  10,
+"endLine":  153,
+"endColumn":  12
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  161,
+"startColumn":  10,
+"endLine":  161,
+"endColumn":  12
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  165,
+"startColumn":  11,
+"endLine":  165,
+"endColumn":  13
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  172,
+"startColumn":  10,
+"endLine":  172,
+"endColumn":  12
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  176,
+"startColumn":  11,
+"endLine":  176,
+"endColumn":  13
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  183,
+"startColumn":  10,
+"endLine":  183,
+"endColumn":  12
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  185,
+"startColumn":  11,
+"endLine":  185,
+"endColumn":  13
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  188,
+"startColumn":  12,
+"endLine":  188,
+"endColumn":  14
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  199,
+"startColumn":  10,
+"endLine":  199,
+"endColumn":  12
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  201,
+"startColumn":  11,
+"endLine":  201,
+"endColumn":  13
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  204,
+"startColumn":  12,
+"endLine":  204,
+"endColumn":  14
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  219,
+"startColumn":  7,
+"endLine":  219,
+"endColumn":  9
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  220,
+"startColumn":  8,
+"endLine":  220,
+"endColumn":  10
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  224,
+"startColumn":  7,
+"endLine":  224,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  230,
+"startColumn":  4,
+"endLine":  230,
+"endColumn":  9
+}
+}
+]
+}
+]
+}

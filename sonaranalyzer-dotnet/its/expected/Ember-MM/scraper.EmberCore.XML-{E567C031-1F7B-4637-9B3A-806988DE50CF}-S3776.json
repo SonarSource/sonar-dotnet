@@ -1,0 +1,6832 @@
+{
+"issues":  [
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 90 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  29,
+"startColumn":  23,
+"endLine":  29,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  36,
+"startColumn":  9,
+"endLine":  36,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  40,
+"startColumn":  9,
+"endLine":  40,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  43,
+"startColumn":  13,
+"endLine":  43,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  45,
+"startColumn":  13,
+"endLine":  45,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  50,
+"startColumn":  17,
+"endLine":  50,
+"endColumn":  22
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  54,
+"startColumn":  13,
+"endLine":  54,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  55,
+"startColumn":  17,
+"endLine":  55,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  56,
+"startColumn":  21,
+"endLine":  56,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  58,
+"startColumn":  29,
+"endLine":  58,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  58,
+"startColumn":  56,
+"endLine":  58,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  59,
+"startColumn":  33,
+"endLine":  59,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  64,
+"startColumn":  29,
+"endLine":  64,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  64,
+"startColumn":  56,
+"endLine":  64,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  65,
+"startColumn":  33,
+"endLine":  65,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  70,
+"startColumn":  29,
+"endLine":  70,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  70,
+"startColumn":  56,
+"endLine":  70,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  71,
+"startColumn":  33,
+"endLine":  71,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  77,
+"startColumn":  13,
+"endLine":  77,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  78,
+"startColumn":  17,
+"endLine":  78,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  81,
+"startColumn":  21,
+"endLine":  81,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  84,
+"startColumn":  25,
+"endLine":  84,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  88,
+"startColumn":  29,
+"endLine":  88,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  89,
+"startColumn":  33,
+"endLine":  89,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  97,
+"startColumn":  9,
+"endLine":  97,
+"endColumn":  13
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  98,
+"startColumn":  13,
+"endLine":  98,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  100,
+"startColumn":  17,
+"endLine":  100,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  105,
+"startColumn":  17,
+"endLine":  105,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  106,
+"startColumn":  21,
+"endLine":  106,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  109,
+"startColumn":  25,
+"endLine":  109,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  113,
+"startColumn":  29,
+"endLine":  113,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  74,
+"startColumn":  21,
+"endLine":  74,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  77,
+"startColumn":  13,
+"endLine":  77,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  77,
+"startColumn":  63,
+"endLine":  77,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  78,
+"startColumn":  17,
+"endLine":  78,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  80,
+"startColumn":  21,
+"endLine":  80,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  82,
+"startColumn":  25,
+"endLine":  82,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  84,
+"startColumn":  29,
+"endLine":  84,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  90,
+"startColumn":  13,
+"endLine":  90,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  90,
+"startColumn":  63,
+"endLine":  90,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  91,
+"startColumn":  17,
+"endLine":  91,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  95,
+"startColumn":  9,
+"endLine":  95,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  116,
+"startColumn":  21,
+"endLine":  116,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  119,
+"startColumn":  9,
+"endLine":  119,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  120,
+"startColumn":  13,
+"endLine":  120,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  120,
+"startColumn":  69,
+"endLine":  120,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  122,
+"startColumn":  13,
+"endLine":  122,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  123,
+"startColumn":  17,
+"endLine":  123,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  123,
+"startColumn":  25,
+"endLine":  123,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  124,
+"startColumn":  21,
+"endLine":  124,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  124,
+"startColumn":  61,
+"endLine":  124,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  126,
+"startColumn":  21,
+"endLine":  126,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  129,
+"startColumn":  17,
+"endLine":  129,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  9,
+"endLine":  133,
+"endColumn":  13
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  134,
+"startColumn":  13,
+"endLine":  134,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  134,
+"startColumn":  53,
+"endLine":  134,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  136,
+"startColumn":  13,
+"endLine":  136,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  476,
+"startColumn":  17,
+"endLine":  476,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  480,
+"startColumn":  13,
+"endLine":  480,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  484,
+"startColumn":  17,
+"endLine":  484,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  486,
+"startColumn":  17,
+"endLine":  486,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  489,
+"startColumn":  21,
+"endLine":  489,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  493,
+"startColumn":  17,
+"endLine":  493,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  500,
+"startColumn":  21,
+"endLine":  500,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  503,
+"startColumn":  25,
+"endLine":  503,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  524,
+"startColumn":  13,
+"endLine":  524,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  535,
+"startColumn":  9,
+"endLine":  535,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  718,
+"startColumn":  17,
+"endLine":  718,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  723,
+"startColumn":  13,
+"endLine":  723,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  724,
+"startColumn":  17,
+"endLine":  724,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  725,
+"startColumn":  21,
+"endLine":  725,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  731,
+"startColumn":  13,
+"endLine":  731,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  732,
+"startColumn":  17,
+"endLine":  732,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  733,
+"startColumn":  21,
+"endLine":  733,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  733,
+"startColumn":  62,
+"endLine":  733,
+"endColumn":  69
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  733,
+"startColumn":  103,
+"endLine":  733,
+"endColumn":  109
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  733,
+"startColumn":  162,
+"endLine":  733,
+"endColumn":  169
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  738,
+"startColumn":  13,
+"endLine":  738,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  739,
+"startColumn":  17,
+"endLine":  739,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  739,
+"startColumn":  30,
+"endLine":  739,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  740,
+"startColumn":  21,
+"endLine":  740,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  742,
+"startColumn":  21,
+"endLine":  742,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  747,
+"startColumn":  17,
+"endLine":  747,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  754,
+"startColumn":  9,
+"endLine":  754,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 60 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  396,
+"startColumn":  17,
+"endLine":  396,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  400,
+"startColumn":  13,
+"endLine":  400,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  404,
+"startColumn":  17,
+"endLine":  404,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  406,
+"startColumn":  17,
+"endLine":  406,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  409,
+"startColumn":  21,
+"endLine":  409,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  413,
+"startColumn":  17,
+"endLine":  413,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  418,
+"startColumn":  21,
+"endLine":  418,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  421,
+"startColumn":  25,
+"endLine":  421,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  422,
+"startColumn":  29,
+"endLine":  422,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  425,
+"startColumn":  37,
+"endLine":  425,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  425,
+"startColumn":  64,
+"endLine":  425,
+"endColumn":  71
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  426,
+"startColumn":  41,
+"endLine":  426,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  432,
+"startColumn":  37,
+"endLine":  432,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  432,
+"startColumn":  64,
+"endLine":  432,
+"endColumn":  71
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  433,
+"startColumn":  41,
+"endLine":  433,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  439,
+"startColumn":  37,
+"endLine":  439,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  439,
+"startColumn":  64,
+"endLine":  439,
+"endColumn":  71
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  440,
+"startColumn":  41,
+"endLine":  440,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  457,
+"startColumn":  13,
+"endLine":  457,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  458,
+"startColumn":  17,
+"endLine":  458,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  458,
+"startColumn":  44,
+"endLine":  458,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  471,
+"startColumn":  9,
+"endLine":  471,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 65 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  585,
+"startColumn":  17,
+"endLine":  585,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  589,
+"startColumn":  13,
+"endLine":  589,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  591,
+"startColumn":  13,
+"endLine":  591,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  595,
+"startColumn":  13,
+"endLine":  595,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  596,
+"startColumn":  17,
+"endLine":  596,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  599,
+"startColumn":  17,
+"endLine":  599,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  600,
+"startColumn":  21,
+"endLine":  600,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  602,
+"startColumn":  21,
+"endLine":  602,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  606,
+"startColumn":  13,
+"endLine":  606,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  611,
+"startColumn":  17,
+"endLine":  611,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  613,
+"startColumn":  25,
+"endLine":  613,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  615,
+"startColumn":  25,
+"endLine":  615,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  619,
+"startColumn":  25,
+"endLine":  619,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  621,
+"startColumn":  25,
+"endLine":  621,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  627,
+"startColumn":  25,
+"endLine":  627,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  629,
+"startColumn":  25,
+"endLine":  629,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  634,
+"startColumn":  17,
+"endLine":  634,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  635,
+"startColumn":  21,
+"endLine":  635,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  638,
+"startColumn":  21,
+"endLine":  638,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  639,
+"startColumn":  25,
+"endLine":  639,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  641,
+"startColumn":  25,
+"endLine":  641,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  649,
+"startColumn":  13,
+"endLine":  649,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  655,
+"startColumn":  17,
+"endLine":  655,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  656,
+"startColumn":  21,
+"endLine":  656,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  662,
+"startColumn":  17,
+"endLine":  662,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  664,
+"startColumn":  21,
+"endLine":  664,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  666,
+"startColumn":  21,
+"endLine":  666,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  667,
+"startColumn":  25,
+"endLine":  667,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  667,
+"startColumn":  59,
+"endLine":  667,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  669,
+"startColumn":  25,
+"endLine":  669,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  669,
+"startColumn":  63,
+"endLine":  669,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  671,
+"startColumn":  25,
+"endLine":  671,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  678,
+"startColumn":  21,
+"endLine":  678,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  683,
+"startColumn":  21,
+"endLine":  683,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  684,
+"startColumn":  25,
+"endLine":  684,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  693,
+"startColumn":  9,
+"endLine":  693,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  57,
+"startColumn":  17,
+"endLine":  57,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  73,
+"startColumn":  9,
+"endLine":  73,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  73,
+"startColumn":  49,
+"endLine":  73,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  74,
+"startColumn":  13,
+"endLine":  74,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  82,
+"startColumn":  13,
+"endLine":  82,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  86,
+"startColumn":  9,
+"endLine":  86,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  88,
+"startColumn":  13,
+"endLine":  88,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  88,
+"startColumn":  90,
+"endLine":  88,
+"endColumn":  97
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  89,
+"startColumn":  17,
+"endLine":  89,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  95,
+"startColumn":  17,
+"endLine":  95,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  99,
+"startColumn":  13,
+"endLine":  99,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  103,
+"startColumn":  9,
+"endLine":  103,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  108,
+"startColumn":  9,
+"endLine":  108,
+"endColumn":  13
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  115,
+"startColumn":  9,
+"endLine":  115,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  629,
+"startColumn":  9,
+"endLine":  629,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  631,
+"startColumn":  9,
+"endLine":  631,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  634,
+"startColumn":  13,
+"endLine":  634,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  638,
+"startColumn":  17,
+"endLine":  638,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  639,
+"startColumn":  21,
+"endLine":  639,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  640,
+"startColumn":  25,
+"endLine":  640,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  641,
+"startColumn":  29,
+"endLine":  641,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  678,
+"startColumn":  9,
+"endLine":  678,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  697,
+"startColumn":  9,
+"endLine":  697,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  699,
+"startColumn":  13,
+"endLine":  699,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  702,
+"startColumn":  17,
+"endLine":  702,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  708,
+"startColumn":  21,
+"endLine":  708,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  709,
+"startColumn":  25,
+"endLine":  709,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  710,
+"startColumn":  29,
+"endLine":  710,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  716,
+"startColumn":  29,
+"endLine":  716,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  717,
+"startColumn":  33,
+"endLine":  717,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  723,
+"startColumn":  53,
+"endLine":  723,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  749,
+"startColumn":  9,
+"endLine":  749,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  762,
+"startColumn":  14,
+"endLine":  762,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  769,
+"startColumn":  13,
+"endLine":  769,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  772,
+"startColumn":  17,
+"endLine":  772,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  775,
+"startColumn":  17,
+"endLine":  775,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  781,
+"startColumn":  13,
+"endLine":  781,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  781,
+"startColumn":  46,
+"endLine":  781,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  783,
+"startColumn":  17,
+"endLine":  783,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  786,
+"startColumn":  17,
+"endLine":  786,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  796,
+"startColumn":  13,
+"endLine":  796,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  796,
+"startColumn":  46,
+"endLine":  796,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  798,
+"startColumn":  17,
+"endLine":  798,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  802,
+"startColumn":  17,
+"endLine":  802,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  812,
+"startColumn":  9,
+"endLine":  812,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 54 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  433,
+"startColumn":  21,
+"endLine":  433,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  441,
+"startColumn":  13,
+"endLine":  441,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  444,
+"startColumn":  17,
+"endLine":  444,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  447,
+"startColumn":  17,
+"endLine":  447,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  453,
+"startColumn":  13,
+"endLine":  453,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  455,
+"startColumn":  17,
+"endLine":  455,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  458,
+"startColumn":  17,
+"endLine":  458,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  459,
+"startColumn":  21,
+"endLine":  459,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  459,
+"startColumn":  62,
+"endLine":  459,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  465,
+"startColumn":  21,
+"endLine":  465,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  473,
+"startColumn":  13,
+"endLine":  473,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  475,
+"startColumn":  17,
+"endLine":  475,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  479,
+"startColumn":  17,
+"endLine":  479,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  480,
+"startColumn":  21,
+"endLine":  480,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  480,
+"startColumn":  62,
+"endLine":  480,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  486,
+"startColumn":  21,
+"endLine":  486,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  494,
+"startColumn":  13,
+"endLine":  494,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  495,
+"startColumn":  17,
+"endLine":  495,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  496,
+"startColumn":  21,
+"endLine":  496,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  496,
+"startColumn":  62,
+"endLine":  496,
+"endColumn":  68
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  500,
+"startColumn":  21,
+"endLine":  500,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  502,
+"startColumn":  25,
+"endLine":  502,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  503,
+"startColumn":  29,
+"endLine":  503,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  506,
+"startColumn":  29,
+"endLine":  506,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  514,
+"startColumn":  13,
+"endLine":  514,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  515,
+"startColumn":  17,
+"endLine":  515,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  515,
+"startColumn":  44,
+"endLine":  515,
+"endColumn":  51
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  518,
+"startColumn":  21,
+"endLine":  518,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  522,
+"startColumn":  13,
+"endLine":  522,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  522,
+"startColumn":  46,
+"endLine":  522,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  523,
+"startColumn":  17,
+"endLine":  523,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  529,
+"startColumn":  9,
+"endLine":  529,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 76 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  215,
+"startColumn":  14,
+"endLine":  215,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  220,
+"startColumn":  13,
+"endLine":  220,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  220,
+"startColumn":  35,
+"endLine":  220,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  225,
+"startColumn":  13,
+"endLine":  225,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  231,
+"startColumn":  13,
+"endLine":  231,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  233,
+"startColumn":  17,
+"endLine":  233,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  233,
+"startColumn":  63,
+"endLine":  233,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  246,
+"startColumn":  17,
+"endLine":  246,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  247,
+"startColumn":  21,
+"endLine":  247,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  249,
+"startColumn":  21,
+"endLine":  249,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  251,
+"startColumn":  21,
+"endLine":  251,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  255,
+"startColumn":  17,
+"endLine":  255,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  258,
+"startColumn":  25,
+"endLine":  258,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  265,
+"startColumn":  25,
+"endLine":  265,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  269,
+"startColumn":  33,
+"endLine":  269,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  270,
+"startColumn":  37,
+"endLine":  270,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  274,
+"startColumn":  37,
+"endLine":  274,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  276,
+"startColumn":  37,
+"endLine":  276,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  281,
+"startColumn":  25,
+"endLine":  281,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  284,
+"startColumn":  25,
+"endLine":  284,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  288,
+"startColumn":  13,
+"endLine":  288,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  290,
+"startColumn":  17,
+"endLine":  290,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  290,
+"startColumn":  63,
+"endLine":  290,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  296,
+"startColumn":  17,
+"endLine":  296,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  297,
+"startColumn":  21,
+"endLine":  297,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  299,
+"startColumn":  21,
+"endLine":  299,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  301,
+"startColumn":  21,
+"endLine":  301,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  305,
+"startColumn":  17,
+"endLine":  305,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  308,
+"startColumn":  25,
+"endLine":  308,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  315,
+"startColumn":  25,
+"endLine":  315,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  319,
+"startColumn":  33,
+"endLine":  319,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  320,
+"startColumn":  37,
+"endLine":  320,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  324,
+"startColumn":  37,
+"endLine":  324,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  326,
+"startColumn":  37,
+"endLine":  326,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  331,
+"startColumn":  25,
+"endLine":  331,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  334,
+"startColumn":  25,
+"endLine":  334,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  339,
+"startColumn":  9,
+"endLine":  339,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 68 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  343,
+"startColumn":  9,
+"endLine":  343,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  351,
+"startColumn":  9,
+"endLine":  351,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  352,
+"startColumn":  13,
+"endLine":  352,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  354,
+"startColumn":  17,
+"endLine":  354,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  354,
+"startColumn":  63,
+"endLine":  354,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  355,
+"startColumn":  13,
+"endLine":  355,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  359,
+"startColumn":  9,
+"endLine":  359,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  360,
+"startColumn":  9,
+"endLine":  360,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  360,
+"startColumn":  27,
+"endLine":  360,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  361,
+"startColumn":  9,
+"endLine":  361,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  362,
+"startColumn":  9,
+"endLine":  362,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  363,
+"startColumn":  13,
+"endLine":  363,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  365,
+"startColumn":  13,
+"endLine":  365,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  369,
+"startColumn":  9,
+"endLine":  369,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  369,
+"startColumn":  29,
+"endLine":  369,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  370,
+"startColumn":  9,
+"endLine":  370,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  371,
+"startColumn":  9,
+"endLine":  371,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  371,
+"startColumn":  28,
+"endLine":  371,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  372,
+"startColumn":  9,
+"endLine":  372,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  374,
+"startColumn":  9,
+"endLine":  374,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  374,
+"startColumn":  28,
+"endLine":  374,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  375,
+"startColumn":  9,
+"endLine":  375,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  375,
+"startColumn":  29,
+"endLine":  375,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  376,
+"startColumn":  9,
+"endLine":  376,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  376,
+"startColumn":  27,
+"endLine":  376,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  380,
+"startColumn":  13,
+"endLine":  380,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  380,
+"startColumn":  58,
+"endLine":  380,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  381,
+"startColumn":  17,
+"endLine":  381,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  381,
+"startColumn":  52,
+"endLine":  381,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  386,
+"startColumn":  9,
+"endLine":  386,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  387,
+"startColumn":  13,
+"endLine":  387,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  389,
+"startColumn":  13,
+"endLine":  389,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  393,
+"startColumn":  9,
+"endLine":  393,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  394,
+"startColumn":  9,
+"endLine":  394,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  395,
+"startColumn":  9,
+"endLine":  395,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  396,
+"startColumn":  9,
+"endLine":  396,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  398,
+"startColumn":  28,
+"endLine":  398,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  399,
+"startColumn":  9,
+"endLine":  399,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  401,
+"startColumn":  13,
+"endLine":  401,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  409,
+"startColumn":  9,
+"endLine":  409,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  411,
+"startColumn":  13,
+"endLine":  411,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  411,
+"startColumn":  51,
+"endLine":  411,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  412,
+"startColumn":  13,
+"endLine":  412,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  412,
+"startColumn":  45,
+"endLine":  412,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  414,
+"startColumn":  13,
+"endLine":  414,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  417,
+"startColumn":  9,
+"endLine":  417,
+"endColumn":  13
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  418,
+"startColumn":  13,
+"endLine":  418,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  420,
+"startColumn":  13,
+"endLine":  420,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  422,
+"startColumn":  13,
+"endLine":  422,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  423,
+"startColumn":  17,
+"endLine":  423,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  423,
+"startColumn":  38,
+"endLine":  423,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  425,
+"startColumn":  17,
+"endLine":  425,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  429,
+"startColumn":  13,
+"endLine":  429,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  429,
+"startColumn":  51,
+"endLine":  429,
+"endColumn":  57
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"region":  {
+"startLine":  147,
+"startColumn":  44,
+"endLine":  147,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"region":  {
+"startLine":  148,
+"startColumn":  17,
+"endLine":  148,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"region":  {
+"startLine":  150,
+"startColumn":  21,
+"endLine":  150,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"region":  {
+"startLine":  151,
+"startColumn":  25,
+"endLine":  151,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"region":  {
+"startLine":  153,
+"startColumn":  25,
+"endLine":  153,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"region":  {
+"startLine":  157,
+"startColumn":  21,
+"endLine":  157,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"region":  {
+"startLine":  161,
+"startColumn":  21,
+"endLine":  161,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"region":  {
+"startLine":  165,
+"startColumn":  21,
+"endLine":  165,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"region":  {
+"startLine":  169,
+"startColumn":  21,
+"endLine":  169,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"region":  {
+"startLine":  172,
+"startColumn":  25,
+"endLine":  172,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"region":  {
+"startLine":  177,
+"startColumn":  21,
+"endLine":  177,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 45 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  361,
+"startColumn":  49,
+"endLine":  361,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  364,
+"startColumn":  17,
+"endLine":  364,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  366,
+"startColumn":  25,
+"endLine":  366,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  370,
+"startColumn":  25,
+"endLine":  370,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  374,
+"startColumn":  25,
+"endLine":  374,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  378,
+"startColumn":  25,
+"endLine":  378,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  382,
+"startColumn":  25,
+"endLine":  382,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  388,
+"startColumn":  25,
+"endLine":  388,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  392,
+"startColumn":  25,
+"endLine":  392,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  396,
+"startColumn":  25,
+"endLine":  396,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  400,
+"startColumn":  25,
+"endLine":  400,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  400,
+"startColumn":  65,
+"endLine":  400,
+"endColumn":  71
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  401,
+"startColumn":  29,
+"endLine":  401,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  405,
+"startColumn":  29,
+"endLine":  405,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  409,
+"startColumn":  29,
+"endLine":  409,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  416,
+"startColumn":  25,
+"endLine":  416,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  420,
+"startColumn":  25,
+"endLine":  420,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  424,
+"startColumn":  25,
+"endLine":  424,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  431,
+"startColumn":  17,
+"endLine":  431,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  433,
+"startColumn":  21,
+"endLine":  433,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  434,
+"startColumn":  25,
+"endLine":  434,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  437,
+"startColumn":  29,
+"endLine":  437,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  443,
+"startColumn":  21,
+"endLine":  443,
+"endColumn":  24
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 38 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  272,
+"startColumn":  32,
+"endLine":  272,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  275,
+"startColumn":  17,
+"endLine":  275,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  276,
+"startColumn":  21,
+"endLine":  276,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  281,
+"startColumn":  17,
+"endLine":  281,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  282,
+"startColumn":  21,
+"endLine":  282,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  284,
+"startColumn":  25,
+"endLine":  284,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  289,
+"startColumn":  17,
+"endLine":  289,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  293,
+"startColumn":  17,
+"endLine":  293,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  294,
+"startColumn":  21,
+"endLine":  294,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  297,
+"startColumn":  17,
+"endLine":  297,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  301,
+"startColumn":  17,
+"endLine":  301,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  302,
+"startColumn":  21,
+"endLine":  302,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  305,
+"startColumn":  17,
+"endLine":  305,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  309,
+"startColumn":  17,
+"endLine":  309,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  310,
+"startColumn":  21,
+"endLine":  310,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  313,
+"startColumn":  17,
+"endLine":  313,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  317,
+"startColumn":  17,
+"endLine":  317,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  318,
+"startColumn":  21,
+"endLine":  318,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  323,
+"startColumn":  17,
+"endLine":  323,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  331,
+"startColumn":  21,
+"endLine":  331,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  339,
+"startColumn":  17,
+"endLine":  339,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  340,
+"startColumn":  21,
+"endLine":  340,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  342,
+"startColumn":  21,
+"endLine":  342,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  346,
+"startColumn":  25,
+"endLine":  346,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  347,
+"startColumn":  29,
+"endLine":  347,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  350,
+"startColumn":  25,
+"endLine":  350,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  356,
+"startColumn":  17,
+"endLine":  356,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 37 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  454,
+"startColumn":  44,
+"endLine":  454,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  457,
+"startColumn":  17,
+"endLine":  457,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  457,
+"startColumn":  60,
+"endLine":  457,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  461,
+"startColumn":  17,
+"endLine":  461,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  462,
+"startColumn":  21,
+"endLine":  462,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  463,
+"startColumn":  25,
+"endLine":  463,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  465,
+"startColumn":  25,
+"endLine":  465,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  471,
+"startColumn":  17,
+"endLine":  471,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  472,
+"startColumn":  21,
+"endLine":  472,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  473,
+"startColumn":  25,
+"endLine":  473,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  475,
+"startColumn":  25,
+"endLine":  475,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  481,
+"startColumn":  17,
+"endLine":  481,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  482,
+"startColumn":  21,
+"endLine":  482,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  483,
+"startColumn":  25,
+"endLine":  483,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  485,
+"startColumn":  25,
+"endLine":  485,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  491,
+"startColumn":  17,
+"endLine":  491,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  492,
+"startColumn":  21,
+"endLine":  492,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  497,
+"startColumn":  17,
+"endLine":  497,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  498,
+"startColumn":  21,
+"endLine":  498,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  503,
+"startColumn":  17,
+"endLine":  503,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  504,
+"startColumn":  21,
+"endLine":  504,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  509,
+"startColumn":  17,
+"endLine":  509,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  510,
+"startColumn":  21,
+"endLine":  510,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  512,
+"startColumn":  21,
+"endLine":  512,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  515,
+"startColumn":  17,
+"endLine":  515,
+"endColumn":  21
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 36 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  520,
+"startColumn":  29,
+"endLine":  520,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  523,
+"startColumn":  17,
+"endLine":  523,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  524,
+"startColumn":  21,
+"endLine":  524,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  526,
+"startColumn":  21,
+"endLine":  526,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  531,
+"startColumn":  17,
+"endLine":  531,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  532,
+"startColumn":  21,
+"endLine":  532,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  534,
+"startColumn":  21,
+"endLine":  534,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  539,
+"startColumn":  17,
+"endLine":  539,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  540,
+"startColumn":  21,
+"endLine":  540,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  542,
+"startColumn":  21,
+"endLine":  542,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  547,
+"startColumn":  17,
+"endLine":  547,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  548,
+"startColumn":  21,
+"endLine":  548,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  550,
+"startColumn":  21,
+"endLine":  550,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  555,
+"startColumn":  17,
+"endLine":  555,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  556,
+"startColumn":  21,
+"endLine":  556,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  558,
+"startColumn":  21,
+"endLine":  558,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  563,
+"startColumn":  17,
+"endLine":  563,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  564,
+"startColumn":  21,
+"endLine":  564,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  566,
+"startColumn":  21,
+"endLine":  566,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  571,
+"startColumn":  17,
+"endLine":  571,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  572,
+"startColumn":  21,
+"endLine":  572,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  574,
+"startColumn":  21,
+"endLine":  574,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  579,
+"startColumn":  17,
+"endLine":  579,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  580,
+"startColumn":  21,
+"endLine":  580,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  582,
+"startColumn":  21,
+"endLine":  582,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  587,
+"startColumn":  17,
+"endLine":  587,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  588,
+"startColumn":  21,
+"endLine":  588,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  590,
+"startColumn":  21,
+"endLine":  590,
+"endColumn":  25
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 36 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  667,
+"startColumn":  29,
+"endLine":  667,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  670,
+"startColumn":  17,
+"endLine":  670,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  671,
+"startColumn":  21,
+"endLine":  671,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  673,
+"startColumn":  21,
+"endLine":  673,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  678,
+"startColumn":  17,
+"endLine":  678,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  679,
+"startColumn":  21,
+"endLine":  679,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  681,
+"startColumn":  21,
+"endLine":  681,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  686,
+"startColumn":  17,
+"endLine":  686,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  687,
+"startColumn":  21,
+"endLine":  687,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  689,
+"startColumn":  21,
+"endLine":  689,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  694,
+"startColumn":  17,
+"endLine":  694,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  695,
+"startColumn":  21,
+"endLine":  695,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  697,
+"startColumn":  21,
+"endLine":  697,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  702,
+"startColumn":  17,
+"endLine":  702,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  703,
+"startColumn":  21,
+"endLine":  703,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  705,
+"startColumn":  21,
+"endLine":  705,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  710,
+"startColumn":  17,
+"endLine":  710,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  711,
+"startColumn":  21,
+"endLine":  711,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  713,
+"startColumn":  21,
+"endLine":  713,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  718,
+"startColumn":  17,
+"endLine":  718,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  719,
+"startColumn":  21,
+"endLine":  719,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  721,
+"startColumn":  21,
+"endLine":  721,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  726,
+"startColumn":  17,
+"endLine":  726,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  727,
+"startColumn":  21,
+"endLine":  727,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  729,
+"startColumn":  21,
+"endLine":  729,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  734,
+"startColumn":  17,
+"endLine":  734,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  735,
+"startColumn":  21,
+"endLine":  735,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  737,
+"startColumn":  21,
+"endLine":  737,
+"endColumn":  25
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 36 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  783,
+"startColumn":  29,
+"endLine":  783,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  786,
+"startColumn":  17,
+"endLine":  786,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  787,
+"startColumn":  21,
+"endLine":  787,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  789,
+"startColumn":  21,
+"endLine":  789,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  794,
+"startColumn":  17,
+"endLine":  794,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  795,
+"startColumn":  21,
+"endLine":  795,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  797,
+"startColumn":  21,
+"endLine":  797,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  802,
+"startColumn":  17,
+"endLine":  802,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  803,
+"startColumn":  21,
+"endLine":  803,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  805,
+"startColumn":  21,
+"endLine":  805,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  810,
+"startColumn":  17,
+"endLine":  810,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  811,
+"startColumn":  21,
+"endLine":  811,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  813,
+"startColumn":  21,
+"endLine":  813,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  818,
+"startColumn":  17,
+"endLine":  818,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  819,
+"startColumn":  21,
+"endLine":  819,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  821,
+"startColumn":  21,
+"endLine":  821,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  826,
+"startColumn":  17,
+"endLine":  826,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  827,
+"startColumn":  21,
+"endLine":  827,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  829,
+"startColumn":  21,
+"endLine":  829,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  834,
+"startColumn":  17,
+"endLine":  834,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  835,
+"startColumn":  21,
+"endLine":  835,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  837,
+"startColumn":  21,
+"endLine":  837,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  842,
+"startColumn":  17,
+"endLine":  842,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  843,
+"startColumn":  21,
+"endLine":  843,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  845,
+"startColumn":  21,
+"endLine":  845,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  850,
+"startColumn":  17,
+"endLine":  850,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  851,
+"startColumn":  21,
+"endLine":  851,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  853,
+"startColumn":  21,
+"endLine":  853,
+"endColumn":  25
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 55 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  314,
+"startColumn":  49,
+"endLine":  314,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  318,
+"startColumn":  17,
+"endLine":  318,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  318,
+"startColumn":  29,
+"endLine":  318,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  323,
+"startColumn":  17,
+"endLine":  323,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  328,
+"startColumn":  21,
+"endLine":  328,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  331,
+"startColumn":  25,
+"endLine":  331,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  332,
+"startColumn":  29,
+"endLine":  332,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  337,
+"startColumn":  21,
+"endLine":  337,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  340,
+"startColumn":  25,
+"endLine":  340,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  341,
+"startColumn":  29,
+"endLine":  341,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  346,
+"startColumn":  21,
+"endLine":  346,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  349,
+"startColumn":  25,
+"endLine":  349,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  350,
+"startColumn":  29,
+"endLine":  350,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  355,
+"startColumn":  21,
+"endLine":  355,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  356,
+"startColumn":  25,
+"endLine":  356,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  359,
+"startColumn":  29,
+"endLine":  359,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  360,
+"startColumn":  33,
+"endLine":  360,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  365,
+"startColumn":  25,
+"endLine":  365,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  367,
+"startColumn":  29,
+"endLine":  367,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  368,
+"startColumn":  33,
+"endLine":  368,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  374,
+"startColumn":  21,
+"endLine":  374,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  377,
+"startColumn":  25,
+"endLine":  377,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  378,
+"startColumn":  29,
+"endLine":  378,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  386,
+"startColumn":  17,
+"endLine":  386,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  314,
+"startColumn":  49,
+"endLine":  314,
+"endColumn":  62
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  499,
+"startColumn":  39,
+"endLine":  499,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  507,
+"startColumn":  17,
+"endLine":  507,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  511,
+"startColumn":  21,
+"endLine":  511,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  512,
+"startColumn":  25,
+"endLine":  512,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  519,
+"startColumn":  17,
+"endLine":  519,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  520,
+"startColumn":  21,
+"endLine":  520,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  522,
+"startColumn":  21,
+"endLine":  522,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  527,
+"startColumn":  17,
+"endLine":  527,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  528,
+"startColumn":  21,
+"endLine":  528,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  529,
+"startColumn":  25,
+"endLine":  529,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  530,
+"startColumn":  29,
+"endLine":  530,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  532,
+"startColumn":  29,
+"endLine":  532,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  535,
+"startColumn":  25,
+"endLine":  535,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  536,
+"startColumn":  29,
+"endLine":  536,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  499,
+"startColumn":  39,
+"endLine":  499,
+"endColumn":  63
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  360,
+"startColumn":  44,
+"endLine":  360,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  361,
+"startColumn":  17,
+"endLine":  361,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  361,
+"startColumn":  56,
+"endLine":  361,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  366,
+"startColumn":  17,
+"endLine":  366,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  367,
+"startColumn":  21,
+"endLine":  367,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  372,
+"startColumn":  17,
+"endLine":  372,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  373,
+"startColumn":  21,
+"endLine":  373,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  378,
+"startColumn":  17,
+"endLine":  378,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  379,
+"startColumn":  21,
+"endLine":  379,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  384,
+"startColumn":  17,
+"endLine":  384,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  385,
+"startColumn":  21,
+"endLine":  385,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  386,
+"startColumn":  25,
+"endLine":  386,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  389,
+"startColumn":  25,
+"endLine":  389,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  396,
+"startColumn":  17,
+"endLine":  396,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  400,
+"startColumn":  17,
+"endLine":  400,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  402,
+"startColumn":  17,
+"endLine":  402,
+"endColumn":  21
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  293,
+"startColumn":  49,
+"endLine":  293,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  297,
+"startColumn":  17,
+"endLine":  297,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  300,
+"startColumn":  21,
+"endLine":  300,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  304,
+"startColumn":  25,
+"endLine":  304,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  310,
+"startColumn":  17,
+"endLine":  310,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  311,
+"startColumn":  21,
+"endLine":  311,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  315,
+"startColumn":  25,
+"endLine":  315,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  317,
+"startColumn":  25,
+"endLine":  317,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  318,
+"startColumn":  29,
+"endLine":  318,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  327,
+"startColumn":  17,
+"endLine":  327,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  330,
+"startColumn":  21,
+"endLine":  330,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  332,
+"startColumn":  21,
+"endLine":  332,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  337,
+"startColumn":  17,
+"endLine":  337,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  338,
+"startColumn":  21,
+"endLine":  338,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  342,
+"startColumn":  25,
+"endLine":  342,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  348,
+"startColumn":  17,
+"endLine":  348,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  349,
+"startColumn":  21,
+"endLine":  349,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  352,
+"startColumn":  25,
+"endLine":  352,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  293,
+"startColumn":  49,
+"endLine":  293,
+"endColumn":  64
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 38 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  407,
+"startColumn":  49,
+"endLine":  407,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  413,
+"startColumn":  17,
+"endLine":  413,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  415,
+"startColumn":  17,
+"endLine":  415,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  419,
+"startColumn":  17,
+"endLine":  419,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  422,
+"startColumn":  17,
+"endLine":  422,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  424,
+"startColumn":  21,
+"endLine":  424,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  425,
+"startColumn":  25,
+"endLine":  425,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  428,
+"startColumn":  29,
+"endLine":  428,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  428,
+"startColumn":  52,
+"endLine":  428,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  436,
+"startColumn":  17,
+"endLine":  436,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  439,
+"startColumn":  17,
+"endLine":  439,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  441,
+"startColumn":  21,
+"endLine":  441,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  443,
+"startColumn":  25,
+"endLine":  443,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  446,
+"startColumn":  29,
+"endLine":  446,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  446,
+"startColumn":  52,
+"endLine":  446,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  455,
+"startColumn":  21,
+"endLine":  455,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  456,
+"startColumn":  25,
+"endLine":  456,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  457,
+"startColumn":  29,
+"endLine":  457,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  458,
+"startColumn":  33,
+"endLine":  458,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  469,
+"startColumn":  17,
+"endLine":  469,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  407,
+"startColumn":  49,
+"endLine":  407,
+"endColumn":  62
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 32 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  365,
+"startColumn":  29,
+"endLine":  365,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  370,
+"startColumn":  17,
+"endLine":  370,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  375,
+"startColumn":  21,
+"endLine":  375,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  376,
+"startColumn":  25,
+"endLine":  376,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  377,
+"startColumn":  29,
+"endLine":  377,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  380,
+"startColumn":  25,
+"endLine":  380,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  381,
+"startColumn":  29,
+"endLine":  381,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  387,
+"startColumn":  21,
+"endLine":  387,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  388,
+"startColumn":  25,
+"endLine":  388,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  390,
+"startColumn":  25,
+"endLine":  390,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  394,
+"startColumn":  25,
+"endLine":  394,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  397,
+"startColumn":  21,
+"endLine":  397,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  400,
+"startColumn":  25,
+"endLine":  400,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  403,
+"startColumn":  21,
+"endLine":  403,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  406,
+"startColumn":  25,
+"endLine":  406,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  410,
+"startColumn":  17,
+"endLine":  410,
+"endColumn":  21
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  314,
+"startColumn":  24,
+"endLine":  314,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  315,
+"startColumn":  17,
+"endLine":  315,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  318,
+"startColumn":  21,
+"endLine":  318,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  322,
+"startColumn":  21,
+"endLine":  322,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  326,
+"startColumn":  21,
+"endLine":  326,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  329,
+"startColumn":  25,
+"endLine":  329,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  335,
+"startColumn":  21,
+"endLine":  335,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  337,
+"startColumn":  21,
+"endLine":  337,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  338,
+"startColumn":  25,
+"endLine":  338,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  341,
+"startColumn":  21,
+"endLine":  341,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  345,
+"startColumn":  21,
+"endLine":  345,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  345,
+"startColumn":  67,
+"endLine":  345,
+"endColumn":  74
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  349,
+"startColumn":  21,
+"endLine":  349,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  350,
+"startColumn":  25,
+"endLine":  350,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  351,
+"startColumn":  29,
+"endLine":  351,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  353,
+"startColumn":  29,
+"endLine":  353,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  356,
+"startColumn":  25,
+"endLine":  356,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  360,
+"startColumn":  17,
+"endLine":  360,
+"endColumn":  21
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  207,
+"startColumn":  25,
+"endLine":  207,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  211,
+"startColumn":  17,
+"endLine":  211,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  215,
+"startColumn":  17,
+"endLine":  215,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  217,
+"startColumn":  17,
+"endLine":  217,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  218,
+"startColumn":  86,
+"endLine":  218,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  223,
+"startColumn":  17,
+"endLine":  223,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  226,
+"startColumn":  21,
+"endLine":  226,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  229,
+"startColumn":  25,
+"endLine":  229,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  232,
+"startColumn":  29,
+"endLine":  232,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  234,
+"startColumn":  33,
+"endLine":  234,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  241,
+"startColumn":  21,
+"endLine":  241,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  245,
+"startColumn":  25,
+"endLine":  245,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  247,
+"startColumn":  29,
+"endLine":  247,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  248,
+"startColumn":  33,
+"endLine":  248,
+"endColumn":  35
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  541,
+"startColumn":  25,
+"endLine":  541,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  545,
+"startColumn":  17,
+"endLine":  545,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  546,
+"startColumn":  21,
+"endLine":  546,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  551,
+"startColumn":  17,
+"endLine":  551,
+"endColumn":  22
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  552,
+"startColumn":  21,
+"endLine":  552,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  555,
+"startColumn":  25,
+"endLine":  555,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  558,
+"startColumn":  29,
+"endLine":  558,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  559,
+"startColumn":  33,
+"endLine":  559,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  564,
+"startColumn":  21,
+"endLine":  564,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  565,
+"startColumn":  25,
+"endLine":  565,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  567,
+"startColumn":  25,
+"endLine":  567,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  248,
+"startColumn":  24,
+"endLine":  248,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  252,
+"startColumn":  17,
+"endLine":  252,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  255,
+"startColumn":  21,
+"endLine":  255,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  257,
+"startColumn":  25,
+"endLine":  257,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  259,
+"startColumn":  29,
+"endLine":  259,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  260,
+"startColumn":  33,
+"endLine":  260,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  262,
+"startColumn":  37,
+"endLine":  262,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  262,
+"startColumn":  53,
+"endLine":  262,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  268,
+"startColumn":  25,
+"endLine":  268,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  270,
+"startColumn":  25,
+"endLine":  270,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 57 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  393,
+"startColumn":  25,
+"endLine":  393,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  397,
+"startColumn":  17,
+"endLine":  397,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  401,
+"startColumn":  17,
+"endLine":  401,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  403,
+"startColumn":  17,
+"endLine":  403,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  404,
+"startColumn":  86,
+"endLine":  404,
+"endColumn":  88
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  407,
+"startColumn":  17,
+"endLine":  407,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  410,
+"startColumn":  21,
+"endLine":  410,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  413,
+"startColumn":  25,
+"endLine":  413,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  416,
+"startColumn":  29,
+"endLine":  416,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  418,
+"startColumn":  33,
+"endLine":  418,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  420,
+"startColumn":  37,
+"endLine":  420,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  423,
+"startColumn":  37,
+"endLine":  423,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  426,
+"startColumn":  37,
+"endLine":  426,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  435,
+"startColumn":  21,
+"endLine":  435,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  439,
+"startColumn":  25,
+"endLine":  439,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  441,
+"startColumn":  29,
+"endLine":  441,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  442,
+"startColumn":  33,
+"endLine":  442,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  444,
+"startColumn":  37,
+"endLine":  444,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  447,
+"startColumn":  37,
+"endLine":  447,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  450,
+"startColumn":  37,
+"endLine":  450,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  460,
+"startColumn":  21,
+"endLine":  460,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  462,
+"startColumn":  21,
+"endLine":  462,
+"endColumn":  25
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 92 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  129,
+"startColumn":  24,
+"endLine":  129,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  146,
+"startColumn":  17,
+"endLine":  146,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  147,
+"startColumn":  21,
+"endLine":  147,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  148,
+"startColumn":  25,
+"endLine":  148,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  151,
+"startColumn":  25,
+"endLine":  151,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  156,
+"startColumn":  17,
+"endLine":  156,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  160,
+"startColumn":  17,
+"endLine":  160,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  161,
+"startColumn":  21,
+"endLine":  161,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  163,
+"startColumn":  21,
+"endLine":  163,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  166,
+"startColumn":  17,
+"endLine":  166,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  170,
+"startColumn":  17,
+"endLine":  170,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  171,
+"startColumn":  21,
+"endLine":  171,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  173,
+"startColumn":  21,
+"endLine":  173,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  176,
+"startColumn":  17,
+"endLine":  176,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  180,
+"startColumn":  17,
+"endLine":  180,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  181,
+"startColumn":  21,
+"endLine":  181,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  182,
+"startColumn":  25,
+"endLine":  182,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  184,
+"startColumn":  25,
+"endLine":  184,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  187,
+"startColumn":  21,
+"endLine":  187,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  191,
+"startColumn":  21,
+"endLine":  191,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  192,
+"startColumn":  25,
+"endLine":  192,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  194,
+"startColumn":  25,
+"endLine":  194,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  197,
+"startColumn":  21,
+"endLine":  197,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  201,
+"startColumn":  21,
+"endLine":  201,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  202,
+"startColumn":  25,
+"endLine":  202,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  204,
+"startColumn":  25,
+"endLine":  204,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  207,
+"startColumn":  21,
+"endLine":  207,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  211,
+"startColumn":  21,
+"endLine":  211,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  212,
+"startColumn":  25,
+"endLine":  212,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  214,
+"startColumn":  25,
+"endLine":  214,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  217,
+"startColumn":  21,
+"endLine":  217,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  221,
+"startColumn":  21,
+"endLine":  221,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  222,
+"startColumn":  25,
+"endLine":  222,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  223,
+"startColumn":  29,
+"endLine":  223,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  225,
+"startColumn":  29,
+"endLine":  225,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  228,
+"startColumn":  25,
+"endLine":  228,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  231,
+"startColumn":  21,
+"endLine":  231,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  235,
+"startColumn":  21,
+"endLine":  235,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  236,
+"startColumn":  25,
+"endLine":  236,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  237,
+"startColumn":  29,
+"endLine":  237,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  239,
+"startColumn":  29,
+"endLine":  239,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  242,
+"startColumn":  25,
+"endLine":  242,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  245,
+"startColumn":  21,
+"endLine":  245,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  249,
+"startColumn":  21,
+"endLine":  249,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  250,
+"startColumn":  25,
+"endLine":  250,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  252,
+"startColumn":  25,
+"endLine":  252,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  255,
+"startColumn":  21,
+"endLine":  255,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  259,
+"startColumn":  21,
+"endLine":  259,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  260,
+"startColumn":  25,
+"endLine":  260,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  261,
+"startColumn":  29,
+"endLine":  261,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  263,
+"startColumn":  29,
+"endLine":  263,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  266,
+"startColumn":  25,
+"endLine":  266,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  269,
+"startColumn":  21,
+"endLine":  269,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  273,
+"startColumn":  21,
+"endLine":  273,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  75,
+"startColumn":  36,
+"endLine":  75,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  78,
+"startColumn":  17,
+"endLine":  78,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  79,
+"startColumn":  21,
+"endLine":  79,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  81,
+"startColumn":  25,
+"endLine":  81,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  97,
+"startColumn":  17,
+"endLine":  97,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  101,
+"startColumn":  17,
+"endLine":  101,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  113,
+"startColumn":  21,
+"endLine":  113,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  118,
+"startColumn":  33,
+"endLine":  118,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  126,
+"startColumn":  21,
+"endLine":  126,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  128,
+"startColumn":  25,
+"endLine":  128,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  130,
+"startColumn":  25,
+"endLine":  130,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  25,
+"endLine":  133,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  137,
+"startColumn":  25,
+"endLine":  137,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  145,
+"startColumn":  17,
+"endLine":  145,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  146,
+"startColumn":  21,
+"endLine":  146,
+"endColumn":  23
+}
+}
+]
+}
+]
+}
