@@ -77,12 +77,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 elseSyntax.Statements;
 
             protected override IEnumerable<IEnumerable<SyntaxNode>> GetIfBlocksStatements(ElseBlockSyntax elseSyntax,
-                out MultiLineIfBlockSyntax topLevelIfSyntax)
+                out MultiLineIfBlockSyntax topLevelIf)
             {
-                topLevelIfSyntax = (MultiLineIfBlockSyntax)elseSyntax.Parent;
-                return topLevelIfSyntax.ElseIfBlocks
+                topLevelIf = (MultiLineIfBlockSyntax)elseSyntax.Parent;
+                return topLevelIf.ElseIfBlocks
                     .Select(elseif => elseif.Statements.Cast<SyntaxNode>())
-                    .Concat(new[] { topLevelIfSyntax.Statements.Cast<SyntaxNode>() });
+                    .Concat(new[] { topLevelIf.Statements.Cast<SyntaxNode>() });
             }
         }
 

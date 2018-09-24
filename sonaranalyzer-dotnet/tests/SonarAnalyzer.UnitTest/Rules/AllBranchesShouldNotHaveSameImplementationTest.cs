@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void AllBranchesShouldNotHaveSameImplementation()
+        public void AllBranchesShouldNotHaveSameImplementation_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\AllBranchesShouldNotHaveSameImplementation.cs",
                 new CSharp.AllBranchesShouldNotHaveSameImplementation());
