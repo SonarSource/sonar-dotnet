@@ -2,8 +2,7 @@
 <p>For just one or two cases however, the code will be more readable with <code>if</code> statements.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-switch (variable)
-{
+switch (variable) {
   case 0:
     doSomething();
     break;
@@ -14,12 +13,9 @@ switch (variable)
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-if (variable == 0)
-{
+if (variable == 0) {
   doSomething();
-}
-else
-{
+} else {
   doSomethingElse();
 }
 </pre>
