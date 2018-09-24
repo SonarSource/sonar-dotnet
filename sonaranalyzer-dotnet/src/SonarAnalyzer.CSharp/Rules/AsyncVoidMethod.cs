@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -38,8 +39,18 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+
+        private const string MsTestV1AssemblyName = "Microsoft.VisualStudio.QualityTools.UnitTestFramework";
+        private static readonly IEnumerable<KnownType> AllowedAsyncVoidMsTestAttributes = new List<KnownType>
+        {
+            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyCleanupAttribute,
+            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyInitializeAttribute,
+            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ClassCleanupAttribute,
+            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ClassInitializeAttribute,
+            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestCleanupAttribute,
+            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestInitializeAttribute
+        };
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -66,7 +77,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsExceptionToTheRule(MethodDeclarationSyntax methodDeclaration, IMethodSymbol methodSymbol) =>
             methodSymbol.IsEventHandler() ||
-            IsUsedAsEventHandler(methodDeclaration);
+            IsUsedAsEventHandler(methodDeclaration) ||
+            HasAnyMsTestV1AllowedAttribute(methodSymbol);
 
         private static bool IsUsedAsEventHandler(MethodDeclarationSyntax methodDeclaration) =>
             methodDeclaration.FirstAncestorOrSelf<ClassDeclarationSyntax>()
@@ -76,5 +88,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Select(aes => aes.Right)
                 .OfType<IdentifierNameSyntax>()
                 .Any(ins => ins.Identifier.ValueText == methodDeclaration.Identifier.ValueText);
+
+        private static bool HasAnyMsTestV1AllowedAttribute(IMethodSymbol methodSymbol) =>
+            methodSymbol.GetAttributes().Any(a =>
+                a.AttributeClass.ContainingAssembly.Name == MsTestV1AssemblyName &&
+                a.AttributeClass.IsAny(AllowedAsyncVoidMsTestAttributes));
     }
 }

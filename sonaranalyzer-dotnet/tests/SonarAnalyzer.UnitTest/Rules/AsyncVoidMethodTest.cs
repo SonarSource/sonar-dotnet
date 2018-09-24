@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,6 +32,26 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void AsyncVoidMethod()
         {
             Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod.cs", new AsyncVoidMethod());
+        }
+
+        [DataTestMethod]
+        [DataRow("1.1.11")]
+        [DataRow(Constants.NuGetLatestVersion)]
+        [TestCategory("Rule")]
+        public void AsyncVoidMethod_MsTestV2(string testFwkVersion)
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV2.cs",
+                new AsyncVoidMethod(),
+                additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void AsyncVoidMethod_MsTestV1()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV1.cs",
+                new AsyncVoidMethod(),
+                additionalReferences: GacMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
         }
     }
 }
