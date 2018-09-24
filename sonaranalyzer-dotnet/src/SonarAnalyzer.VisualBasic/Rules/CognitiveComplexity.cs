@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Common.VisualBasic;
+using System;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
@@ -37,54 +38,39 @@ namespace SonarAnalyzer.Rules.VisualBasic
              DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
                  isEnabledByDefault: false);
 
+        private static readonly Func<ICognitiveComplexityWalker> walkerFactory = () => new CognitiveComplexityWalker();
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         public override DiagnosticDescriptor Rule => rule;
 
-        public override ICognitiveComplexityWalker CreateWalker() => new CognitiveComplexityWalker();
-
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                 c => CheckComplexity<MethodBlockSyntax>(c,
-                     m => m,
-                     m => m.SubOrFunctionStatement.Identifier.GetLocation(),
-                     "method",
-                     Threshold),
+                 c => CheckComplexity<MethodBlockSyntax>(c, m => m, m => m.SubOrFunctionStatement.Identifier.GetLocation(),
+                     walkerFactory, "method", Threshold),
                  SyntaxKind.SubBlock,
                  SyntaxKind.FunctionBlock);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckComplexity<ConstructorBlockSyntax>(c,
-                    co => co,
-                    co => co.BlockStatement.DeclarationKeyword.GetLocation(),
-                    "constructor",
-                    Threshold),
+                c => CheckComplexity<ConstructorBlockSyntax>(c, co => co, co => co.BlockStatement.DeclarationKeyword.GetLocation(),
+                    walkerFactory, "constructor", Threshold),
                 SyntaxKind.ConstructorBlock);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckComplexity<OperatorBlockSyntax>(c,
-                    o => o,
-                    o => o.BlockStatement.DeclarationKeyword.GetLocation(),
-                    "operator",
-                    Threshold),
+                c => CheckComplexity<OperatorBlockSyntax>(c, o => o, o => o.BlockStatement.DeclarationKeyword.GetLocation(),
+                    walkerFactory, "operator", Threshold),
                 SyntaxKind.OperatorBlock);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckComplexity<AccessorBlockSyntax>(c,
-                    a => a,
-                    a => a.AccessorStatement.DeclarationKeyword.GetLocation(),
-                    "accessor",
-                    PropertyThreshold),
+                c => CheckComplexity<AccessorBlockSyntax>(c, a => a, a => a.AccessorStatement.DeclarationKeyword.GetLocation(),
+                    walkerFactory, "accessor", PropertyThreshold),
                 SyntaxKind.GetAccessorBlock,
                 SyntaxKind.SetAccessorBlock);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-               c => CheckComplexity<FieldDeclarationSyntax>(c,
-                    m => m,
-                    m => m.Declarators[0].Names[0].Identifier.GetLocation(),
-                    "field",
-                    Threshold),
+               c => CheckComplexity<FieldDeclarationSyntax>(c, f => f, f => f.Declarators[0].Names[0].Identifier.GetLocation(),
+                    walkerFactory, "field", Threshold),
                SyntaxKind.FieldDeclaration);
         }
     }

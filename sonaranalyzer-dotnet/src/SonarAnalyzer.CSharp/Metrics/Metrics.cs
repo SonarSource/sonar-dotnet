@@ -191,7 +191,8 @@ namespace SonarAnalyzer.Metrics.CSharp
         {
             var walker = new CognitiveComplexityWalker();
             walker.Walk(node);
-            return walker.VisitEndedCorrectly ? walker.Complexity : -1;
+            // nesting level should be 0 at the end of the analysis, otherwise there is a bug
+            return walker.NestingLevel == 0 ? walker.Complexity : -1;
         }
     }
 }

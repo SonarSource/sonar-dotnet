@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
@@ -27,20 +26,11 @@ using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Common.VisualBasic
 {
-    public sealed class CognitiveComplexityWalker : CognitiveComplexityWalkerBase
+    public sealed class CognitiveComplexityWalker : CognitiveComplexityWalkerBase<MethodStatementSyntax>
     {
-        private MethodStatementSyntax currentMethod;
-        private readonly List<ExpressionSyntax> logicalOperationsToIgnore = new List<ExpressionSyntax>();
-        private readonly InnerWalker walker;
-
-        public CognitiveComplexityWalker()
-        {
-            this.walker = new InnerWalker(this);
-        }
-
         public override void Visit(SyntaxNode node)
         {
-            walker.Visit(node);
+            new InnerWalker(this).Visit(node);
         }
 
         private class InnerWalker : VisualBasicSyntaxWalker

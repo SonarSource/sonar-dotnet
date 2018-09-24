@@ -41,13 +41,9 @@ namespace SonarAnalyzer.Rules
 
         public abstract DiagnosticDescriptor Rule { get; }
 
-        public abstract ICognitiveComplexityWalker CreateWalker();
-
-        protected void CheckComplexity<TSyntax>(SyntaxNodeAnalysisContext context,
-                Func<TSyntax, SyntaxNode> nodeSelector,
-                Func<TSyntax, Location> getLocationToReport,
-                string declarationType,
-                int threshold)
+        protected void CheckComplexity<TSyntax>(SyntaxNodeAnalysisContext context, Func<TSyntax, SyntaxNode> nodeSelector,
+                Func<TSyntax, Location> getLocationToReport, Func<ICognitiveComplexityWalker> walkerFactory,
+                string declarationType, int threshold)
             where TSyntax : SyntaxNode
         {
             var syntax = (TSyntax)context.Node;
@@ -57,18 +53,23 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            ICognitiveComplexityWalker cognitiveWalker = CreateWalker();
+            var cognitiveWalker = walkerFactory();
             cognitiveWalker.Walk(nodeToAnalyze);
-            cognitiveWalker.EnsureVisitEndedCorrectly();
+            if (cognitiveWalker.NestingLevel != 0)
+            {
+                throw new InvalidOperationException("There is a problem with the cognitive complexity walker. " +
+                    $"Expecting ending nesting to be '0' got '{cognitiveWalker.NestingLevel}'");
+            }
 
             if (cognitiveWalker.Complexity > Threshold)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(
-                    Rule,
-                    getLocationToReport(syntax),
-                    cognitiveWalker.IncrementLocations.ToAdditionalLocations(),
-                    cognitiveWalker.IncrementLocations.ToProperties(),
-                    new object[] { declarationType, cognitiveWalker.Complexity, threshold }));
+                context.ReportDiagnosticWhenActive(
+                    Diagnostic.Create(
+                        Rule,
+                        getLocationToReport(syntax),
+                        cognitiveWalker.IncrementLocations.ToAdditionalLocations(),
+                        cognitiveWalker.IncrementLocations.ToProperties(),
+                        new object[] { declarationType, cognitiveWalker.Complexity, threshold }));
             }
         }
     }

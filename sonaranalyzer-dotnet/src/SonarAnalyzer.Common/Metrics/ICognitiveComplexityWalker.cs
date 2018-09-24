@@ -25,13 +25,10 @@ namespace SonarAnalyzer.Common
 {
     public interface ICognitiveComplexityWalker
     {
-        void EnsureVisitEndedCorrectly();
-
         void Walk(SyntaxNode node);
 
-        void Visit(SyntaxNode node);
-
         int Complexity { get; }
+        int NestingLevel { get; }
         IEnumerable<SecondaryLocation> IncrementLocations { get; }
     }
 }

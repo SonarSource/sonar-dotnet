@@ -27,26 +27,17 @@ namespace SonarAnalyzer.Common
     public abstract class CognitiveComplexityWalkerBase : ICognitiveComplexityWalker
     {
         protected readonly List<SecondaryLocation> incrementLocations = new List<SecondaryLocation>();
-
-        protected int nestingLevel;
+        // used to track logical operations inside parantheses
+        protected readonly List<SyntaxNode> logicalOperationsToIgnore = new List<SyntaxNode>();
         protected bool hasDirectRecursiveCall;
 
-        public int Complexity { get; protected set; }
+        public int NestingLevel { get; protected set; }
 
-        public bool VisitEndedCorrectly => this.nestingLevel == 0;
+        public int Complexity { get; protected set; }
 
         public IEnumerable<SecondaryLocation> IncrementLocations => this.incrementLocations;
 
         public abstract void Visit(SyntaxNode node);
-
-        public void EnsureVisitEndedCorrectly()
-        {
-            if (!VisitEndedCorrectly)
-            {
-                throw new InvalidOperationException("There is a problem with the cognitive complexity walker. " +
-                    $"Expecting ending nesting to be '0' got '{this.nestingLevel}'");
-            }
-        }
 
         public void Walk(SyntaxNode node)
         {
@@ -62,15 +53,15 @@ namespace SonarAnalyzer.Common
                 // See ticket #727.
 
                 // Reset nesting level, so the problem with the walker is not reported.
-                this.nestingLevel = 0;
+                this.NestingLevel = 0;
             }
         }
 
         protected void VisitWithNesting<TSyntaxNode>(TSyntaxNode node, Action<TSyntaxNode> visit)
         {
-            this.nestingLevel++;
+            this.NestingLevel++;
             visit(node);
-            this.nestingLevel--;
+            this.NestingLevel--;
         }
 
         protected void IncreaseComplexityByOne(SyntaxToken token)
@@ -80,7 +71,7 @@ namespace SonarAnalyzer.Common
 
         protected void IncreaseComplexityByNestingPlusOne(SyntaxToken token)
         {
-            var increment = this.nestingLevel + 1;
+            var increment = this.NestingLevel + 1;
             var message = increment == 1
                 ? "+1"
                 : $"+{increment} (incl {increment - 1} for nesting)";
@@ -92,5 +83,11 @@ namespace SonarAnalyzer.Common
             Complexity += increment;
             this.incrementLocations.Add(new SecondaryLocation(token.GetLocation(), message));
         }
+    }
+
+    public abstract class CognitiveComplexityWalkerBase<TMethodSyntax> : CognitiveComplexityWalkerBase
+        where TMethodSyntax: class
+    {
+        protected TMethodSyntax currentMethod;
     }
 }

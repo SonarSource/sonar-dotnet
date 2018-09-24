@@ -38,51 +38,52 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
                 isEnabledByDefault: false);
 
+        private static readonly Func<ICognitiveComplexityWalker> walkerFactory = () => new CognitiveComplexityWalker();
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         public override DiagnosticDescriptor Rule => rule;
 
-        public override ICognitiveComplexityWalker CreateWalker() => new CognitiveComplexityWalker();
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckComplexity<MethodDeclarationSyntax>(c, m => m, m => m.Identifier.GetLocation(),
-                    "method", Threshold),
+                    walkerFactory, "method", Threshold),
                 SyntaxKind.MethodDeclaration);
 
             // Here, we only care about arrowed properties, others will be handled by the accessor.
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckComplexity<PropertyDeclarationSyntax>(c, p => p.ExpressionBody, p => p.Identifier.GetLocation(),
-                    "property", PropertyThreshold),
+                    walkerFactory, "property", PropertyThreshold),
                 SyntaxKind.PropertyDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckComplexity<ConstructorDeclarationSyntax>(c, co => co, co => co.Identifier.GetLocation(),
-                    "constructor", Threshold),
+                    walkerFactory, "constructor", Threshold),
                 SyntaxKind.ConstructorDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckComplexity<DestructorDeclarationSyntax>(c, d => d, d => d.Identifier.GetLocation(),
-                    "destructor", Threshold),
+                    walkerFactory, "destructor", Threshold),
                 SyntaxKind.DestructorDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckComplexity<OperatorDeclarationSyntax>(c, o => o, o => o.OperatorToken.GetLocation(),
-                    "operator", Threshold),
+                    walkerFactory, "operator", Threshold),
                 SyntaxKind.OperatorDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckComplexity<AccessorDeclarationSyntax>(c, a => a, a => a.Keyword.GetLocation(),
-                    "accessor", PropertyThreshold),
+                    walkerFactory, "accessor", PropertyThreshold),
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
                 SyntaxKind.AddAccessorDeclaration,
                 SyntaxKind.RemoveAccessorDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-               c => CheckComplexity<FieldDeclarationSyntax>(c, m => m, m => m.Declaration.Variables[0].Identifier.GetLocation(),
-                    "field", Threshold),
+               c => CheckComplexity<FieldDeclarationSyntax>(c, f => f, f => f.Declaration.Variables[0].Identifier.GetLocation(),
+                   walkerFactory, "field", Threshold),
                SyntaxKind.FieldDeclaration);
         }
     }
