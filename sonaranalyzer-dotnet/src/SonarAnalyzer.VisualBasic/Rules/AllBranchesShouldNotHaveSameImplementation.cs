@@ -63,6 +63,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
             context.RegisterSyntaxNodeActionInNonGenerated(
                 new IfStatementAnalyzer().GetAction(rule, IfMessage),
                 SyntaxKind.ElseBlock);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                new SingleLineIfStatementAnalyzer().GetAction(rule, IfMessage),
+                SyntaxKind.SingleLineElseClause);
         }
 
         private class IfStatementAnalyzer : IfStatementAnalyzerBase<ElseBlockSyntax, MultiLineIfBlockSyntax>
@@ -89,6 +93,21 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             protected override SyntaxNode GetWhenTrue(TernaryConditionalExpressionSyntax ternaryStatement) =>
                 ternaryStatement.WhenTrue.RemoveParentheses();
+        }
+
+        private class SingleLineIfStatementAnalyzer : IfStatementAnalyzerBase<SingleLineElseClauseSyntax, SingleLineIfStatementSyntax>
+        {
+            protected override IEnumerable<IEnumerable<SyntaxNode>> GetIfBlocksStatements(SingleLineElseClauseSyntax elseSyntax,
+                out SingleLineIfStatementSyntax topLevelIf)
+            {
+                topLevelIf = (SingleLineIfStatementSyntax)elseSyntax.Parent;
+                return new[] { topLevelIf.Statements.Cast<SyntaxNode>() };
+            }
+
+            protected override IEnumerable<SyntaxNode> GetStatements(SingleLineElseClauseSyntax elseSyntax) =>
+                elseSyntax.Statements;
+
+            protected override bool IsLastElseInChain(SingleLineElseClauseSyntax elseSyntax) => true;
         }
 
         private class SelectCaseStatementAnalyzer : SwitchStatementAnalyzerBase<SelectBlockSyntax, CaseBlockSyntax>
