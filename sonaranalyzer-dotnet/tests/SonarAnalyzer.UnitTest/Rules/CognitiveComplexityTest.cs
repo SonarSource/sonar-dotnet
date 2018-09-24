@@ -21,7 +21,8 @@
 extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.UnitTest.Helpers;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,20 +31,39 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CognitiveComplexity()
+        public void CognitiveComplexity_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\CognitiveComplexity.cs",
-                new CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+                new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
         }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void CognitiveComplexity_StackOverflow()
+        public void CognitiveComplexity_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\CognitiveComplexity.vb",
+                new VB.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CognitiveComplexity_StackOverflow_CS()
         {
             if (!TestContextHelper.IsAzureDevOpsContext) // FIX ME: Test throws OOM on Azure DevOps
             {
                 Verifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.cs",
-                        new CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+                    new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+            }
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CognitiveComplexity_StackOverflow_VB()
+        {
+            if (!TestContextHelper.IsAzureDevOpsContext) // FIX ME: Test throws OOM on Azure DevOps
+            {
+                Verifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.vb",
+                    new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
             }
         }
     }
