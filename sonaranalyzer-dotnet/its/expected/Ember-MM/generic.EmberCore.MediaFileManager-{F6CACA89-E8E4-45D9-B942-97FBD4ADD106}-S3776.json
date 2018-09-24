@@ -1,0 +1,109 @@
+{
+"issues":  [
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  207,
+"startColumn":  17,
+"endLine":  207,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  215,
+"startColumn":  13,
+"endLine":  215,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  217,
+"startColumn":  17,
+"endLine":  217,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  221,
+"startColumn":  13,
+"endLine":  221,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  224,
+"startColumn":  17,
+"endLine":  224,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  227,
+"startColumn":  21,
+"endLine":  227,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  227,
+"startColumn":  46,
+"endLine":  227,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  228,
+"startColumn":  25,
+"endLine":  228,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  230,
+"startColumn":  33,
+"endLine":  230,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  238,
+"startColumn":  33,
+"endLine":  238,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  248,
+"startColumn":  9,
+"endLine":  248,
+"endColumn":  14
+}
+}
+]
+}
+]
+}

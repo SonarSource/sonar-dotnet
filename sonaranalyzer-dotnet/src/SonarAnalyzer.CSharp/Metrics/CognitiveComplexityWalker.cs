@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -29,211 +28,158 @@ using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Metrics.CSharp
 {
-    public sealed class CognitiveComplexityWalker : CSharpSyntaxWalker
+    public sealed class CognitiveComplexityWalker : CognitiveComplexityWalkerBase<MethodDeclarationSyntax>
     {
-        private readonly List<SecondaryLocation> incrementLocations = new List<SecondaryLocation>();
-        private readonly List<ExpressionSyntax> logicalOperationsToIgnore = new List<ExpressionSyntax>();
-
-        private MethodDeclarationSyntax currentMethod;
-        private int nestingLevel;
-        private bool hasDirectRecursiveCall;
-
-        public int Complexity { get; private set; }
-
-        public bool VisitEndedCorrectly => this.nestingLevel == 0;
-
-        public IEnumerable<SecondaryLocation> IncrementLocations => this.incrementLocations;
-
-        public void EnsureVisitEndedCorrectly()
-        {
-            if (!VisitEndedCorrectly)
-            {
-                throw new InvalidOperationException("There is a problem with the cognitive complexity walker. " +
-                    $"Expecting ending nesting to be '0' got '{this.nestingLevel}'");
-            }
-        }
-
-        public void Walk(SyntaxNode node)
-        {
-            try
-            {
-                Visit(node);
-            }
-            catch (InsufficientExecutionStackException)
-            {
-                // TODO: trace this exception
-
-                // Roslyn walker overflows the stack when the depth of the call is around 2050.
-                // See ticket #727.
-
-                // Reset nesting level, so the problem with the walker is not reported.
-                this.nestingLevel = 0;
-            }
-        }
-
         public override void Visit(SyntaxNode node)
         {
-            if (node.IsKind(SyntaxKindEx.LocalFunctionStatement))
+            new InnerWalker(this).Visit(node);
+        }
+
+        private class InnerWalker : CSharpSyntaxWalker
+        {
+            private readonly CognitiveComplexityWalker parent;
+            public InnerWalker(CognitiveComplexityWalker parent)
             {
-                VisitWithNesting(node, base.Visit);
-            }
-            else
-            {
-                base.Visit(node);
-            }
-        }
-
-        public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
-        {
-            this.currentMethod = node;
-            base.VisitMethodDeclaration(node);
-
-            if (this.hasDirectRecursiveCall)
-            {
-                IncreaseComplexity(node.Identifier, 1, "+1 (recursion)");
-            }
-        }
-
-        public override void VisitIfStatement(IfStatementSyntax node)
-        {
-            if (node.Parent.IsKind(SyntaxKind.ElseClause))
-            {
-                base.VisitIfStatement(node);
-            }
-            else
-            {
-                IncreaseComplexityByNestingPlusOne(node.IfKeyword);
-                VisitWithNesting(node, base.VisitIfStatement);
-            }
-        }
-
-        public override void VisitElseClause(ElseClauseSyntax node)
-        {
-            IncreaseComplexityByOne(node.ElseKeyword);
-            base.VisitElseClause(node);
-        }
-
-        public override void VisitConditionalExpression(ConditionalExpressionSyntax node)
-        {
-            IncreaseComplexityByNestingPlusOne(node.QuestionToken);
-            VisitWithNesting(node, base.VisitConditionalExpression);
-        }
-
-        public override void VisitSwitchStatement(SwitchStatementSyntax node)
-        {
-            IncreaseComplexityByNestingPlusOne(node.SwitchKeyword);
-            VisitWithNesting(node, base.VisitSwitchStatement);
-        }
-
-        public override void VisitForStatement(ForStatementSyntax node)
-        {
-            IncreaseComplexityByNestingPlusOne(node.ForKeyword);
-            VisitWithNesting(node, base.VisitForStatement);
-        }
-
-        public override void VisitWhileStatement(WhileStatementSyntax node)
-        {
-            IncreaseComplexityByNestingPlusOne(node.WhileKeyword);
-            VisitWithNesting(node, base.VisitWhileStatement);
-        }
-
-        public override void VisitDoStatement(DoStatementSyntax node)
-        {
-            IncreaseComplexityByNestingPlusOne(node.DoKeyword);
-            VisitWithNesting(node, base.VisitDoStatement);
-        }
-
-        public override void VisitForEachStatement(ForEachStatementSyntax node)
-        {
-            IncreaseComplexityByNestingPlusOne(node.ForEachKeyword);
-            VisitWithNesting(node, base.VisitForEachStatement);
-        }
-
-        public override void VisitCatchClause(CatchClauseSyntax node)
-        {
-            IncreaseComplexityByNestingPlusOne(node.CatchKeyword);
-            VisitWithNesting(node, base.VisitCatchClause);
-        }
-
-        public override void VisitInvocationExpression(InvocationExpressionSyntax node)
-        {
-            var identifierNameSyntax = node.Expression as IdentifierNameSyntax;
-            if (this.currentMethod != null &&
-                identifierNameSyntax != null &&
-                node.HasExactlyNArguments(this.currentMethod.ParameterList.Parameters.Count) &&
-                string.Equals(identifierNameSyntax.Identifier.ValueText,
-                    this.currentMethod.Identifier.ValueText, StringComparison.Ordinal))
-            {
-                this.hasDirectRecursiveCall = true;
+                this.parent = parent;
             }
 
-            base.VisitInvocationExpression(node);
-        }
-
-        public override void VisitBinaryExpression(BinaryExpressionSyntax node)
-        {
-            var nodeKind = node.Kind();
-            if (!this.logicalOperationsToIgnore.Contains(node) &&
-                (nodeKind == SyntaxKind.LogicalAndExpression ||
-                 nodeKind == SyntaxKind.LogicalOrExpression))
+            public override void Visit(SyntaxNode node)
             {
-                var left = node.Left.RemoveParentheses();
-                if (!left.IsKind(nodeKind))
+                if (node.IsKind(SyntaxKindEx.LocalFunctionStatement))
                 {
-                    IncreaseComplexityByOne(node.OperatorToken);
+                    parent.VisitWithNesting(node, base.Visit);
                 }
-
-                var right = node.Right.RemoveParentheses();
-                if (right.IsKind(nodeKind))
+                else
                 {
-                    this.logicalOperationsToIgnore.Add(right);
+                    base.Visit(node);
                 }
             }
 
-            base.VisitBinaryExpression(node);
-        }
+            public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
+            {
+                parent.currentMethod = node;
+                base.VisitMethodDeclaration(node);
 
-        public override void VisitGotoStatement(GotoStatementSyntax node)
-        {
-            IncreaseComplexityByNestingPlusOne(node.GotoKeyword);
-            base.VisitGotoStatement(node);
-        }
+                if (parent.hasDirectRecursiveCall)
+                {
+                    parent.IncreaseComplexity(node.Identifier, 1, "+1 (recursion)");
+                }
+            }
 
-        public override void VisitSimpleLambdaExpression(SimpleLambdaExpressionSyntax node)
-        {
-            VisitWithNesting(node, base.VisitSimpleLambdaExpression);
-        }
+            public override void VisitIfStatement(IfStatementSyntax node)
+            {
+                if (node.Parent.IsKind(SyntaxKind.ElseClause))
+                {
+                    base.VisitIfStatement(node);
+                }
+                else
+                {
+                    parent.IncreaseComplexityByNestingPlusOne(node.IfKeyword);
+                    parent.VisitWithNesting(node, base.VisitIfStatement);
+                }
+            }
 
-        public override void VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node)
-        {
-            VisitWithNesting(node, base.VisitParenthesizedLambdaExpression);
-        }
+            public override void VisitElseClause(ElseClauseSyntax node)
+            {
+                parent.IncreaseComplexityByOne(node.ElseKeyword);
+                base.VisitElseClause(node);
+            }
 
-        private void VisitWithNesting<TSyntaxNode>(TSyntaxNode node, Action<TSyntaxNode> visit)
-        {
-            this.nestingLevel++;
-            visit(node);
-            this.nestingLevel--;
-        }
+            public override void VisitConditionalExpression(ConditionalExpressionSyntax node)
+            {
+                parent.IncreaseComplexityByNestingPlusOne(node.QuestionToken);
+                parent.VisitWithNesting(node, base.VisitConditionalExpression);
+            }
 
-        private void IncreaseComplexityByOne(SyntaxToken token)
-        {
-            IncreaseComplexity(token, 1, "+1");
-        }
+            public override void VisitSwitchStatement(SwitchStatementSyntax node)
+            {
+                parent.IncreaseComplexityByNestingPlusOne(node.SwitchKeyword);
+                parent.VisitWithNesting(node, base.VisitSwitchStatement);
+            }
 
-        private void IncreaseComplexityByNestingPlusOne(SyntaxToken token)
-        {
-            var increment = this.nestingLevel + 1;
-            var message = increment == 1
-                ? "+1"
-                : $"+{increment} (incl {increment - 1} for nesting)";
-            IncreaseComplexity(token, increment, message);
-        }
+            public override void VisitForStatement(ForStatementSyntax node)
+            {
+                parent.IncreaseComplexityByNestingPlusOne(node.ForKeyword);
+                parent.VisitWithNesting(node, base.VisitForStatement);
+            }
 
-        private void IncreaseComplexity(SyntaxToken token, int increment, string message)
-        {
-            Complexity += increment;
-            this.incrementLocations.Add(new SecondaryLocation(token.GetLocation(), message));
+            public override void VisitWhileStatement(WhileStatementSyntax node)
+            {
+                parent.IncreaseComplexityByNestingPlusOne(node.WhileKeyword);
+                parent.VisitWithNesting(node, base.VisitWhileStatement);
+            }
+
+            public override void VisitDoStatement(DoStatementSyntax node)
+            {
+                parent.IncreaseComplexityByNestingPlusOne(node.DoKeyword);
+                parent.VisitWithNesting(node, base.VisitDoStatement);
+            }
+
+            public override void VisitForEachStatement(ForEachStatementSyntax node)
+            {
+                parent.IncreaseComplexityByNestingPlusOne(node.ForEachKeyword);
+                parent.VisitWithNesting(node, base.VisitForEachStatement);
+            }
+
+            public override void VisitCatchClause(CatchClauseSyntax node)
+            {
+                parent.IncreaseComplexityByNestingPlusOne(node.CatchKeyword);
+                parent.VisitWithNesting(node, base.VisitCatchClause);
+            }
+
+            public override void VisitInvocationExpression(InvocationExpressionSyntax node)
+            {
+                var identifierNameSyntax = node.Expression as IdentifierNameSyntax;
+                if (parent.currentMethod != null &&
+                    identifierNameSyntax != null &&
+                    node.HasExactlyNArguments(parent.currentMethod.ParameterList.Parameters.Count) &&
+                    string.Equals(identifierNameSyntax.Identifier.ValueText,
+                        parent.currentMethod.Identifier.ValueText, StringComparison.Ordinal))
+                {
+                    parent.hasDirectRecursiveCall = true;
+                }
+
+                base.VisitInvocationExpression(node);
+            }
+
+            public override void VisitBinaryExpression(BinaryExpressionSyntax node)
+            {
+                var nodeKind = node.Kind();
+                if (!parent.logicalOperationsToIgnore.Contains(node) &&
+                    (nodeKind == SyntaxKind.LogicalAndExpression ||
+                     nodeKind == SyntaxKind.LogicalOrExpression))
+                {
+                    var left = node.Left.RemoveParentheses();
+                    if (!left.IsKind(nodeKind))
+                    {
+                        parent.IncreaseComplexityByOne(node.OperatorToken);
+                    }
+
+                    var right = node.Right.RemoveParentheses();
+                    if (right.IsKind(nodeKind))
+                    {
+                        parent.logicalOperationsToIgnore.Add(right);
+                    }
+                }
+
+                base.VisitBinaryExpression(node);
+            }
+
+            public override void VisitGotoStatement(GotoStatementSyntax node)
+            {
+                parent.IncreaseComplexityByNestingPlusOne(node.GotoKeyword);
+                base.VisitGotoStatement(node);
+            }
+
+            public override void VisitSimpleLambdaExpression(SimpleLambdaExpressionSyntax node)
+            {
+                parent.VisitWithNesting(node, base.VisitSimpleLambdaExpression);
+            }
+
+            public override void VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node)
+            {
+                parent.VisitWithNesting(node, base.VisitParenthesizedLambdaExpression);
+            }
         }
     }
 }

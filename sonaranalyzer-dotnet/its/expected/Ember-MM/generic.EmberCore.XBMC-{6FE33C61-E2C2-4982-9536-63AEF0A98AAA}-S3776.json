@@ -1,0 +1,331 @@
+{
+"issues":  [
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  22,
+"startColumn":  17,
+"endLine":  22,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  25,
+"startColumn":  13,
+"endLine":  25,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  26,
+"startColumn":  17,
+"endLine":  26,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  27,
+"startColumn":  21,
+"endLine":  27,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  28,
+"startColumn":  64,
+"endLine":  28,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  29,
+"startColumn":  21,
+"endLine":  29,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  30,
+"startColumn":  62,
+"endLine":  30,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  36,
+"startColumn":  17,
+"endLine":  36,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  37,
+"startColumn":  21,
+"endLine":  37,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  37,
+"startColumn":  72,
+"endLine":  37,
+"endColumn":  79
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  43,
+"startColumn":  17,
+"endLine":  43,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  44,
+"startColumn":  21,
+"endLine":  44,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  51,
+"startColumn":  55,
+"endLine":  51,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  54,
+"startColumn":  21,
+"endLine":  54,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  59,
+"startColumn":  17,
+"endLine":  59,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  64,
+"startColumn":  13,
+"endLine":  64,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  9,
+"endLine":  69,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  155,
+"startColumn":  14,
+"endLine":  155,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  163,
+"startColumn":  4,
+"endLine":  163,
+"endColumn":  9
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  166,
+"startColumn":  5,
+"endLine":  166,
+"endColumn":  8
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  167,
+"startColumn":  6,
+"endLine":  167,
+"endColumn":  8
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  169,
+"startColumn":  6,
+"endLine":  169,
+"endColumn":  8
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  180,
+"startColumn":  6,
+"endLine":  180,
+"endColumn":  8
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  180,
+"startColumn":  25,
+"endLine":  180,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  181,
+"startColumn":  7,
+"endLine":  181,
+"endColumn":  9
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  187,
+"startColumn":  7,
+"endLine":  187,
+"endColumn":  9
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  187,
+"startColumn":  73,
+"endLine":  187,
+"endColumn":  80
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  193,
+"startColumn":  8,
+"endLine":  193,
+"endColumn":  10
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  204,
+"startColumn":  7,
+"endLine":  204,
+"endColumn":  9
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  226,
+"startColumn":  7,
+"endLine":  226,
+"endColumn":  9
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  232,
+"startColumn":  7,
+"endLine":  232,
+"endColumn":  9
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  237,
+"startColumn":  8,
+"endLine":  237,
+"endColumn":  10
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  241,
+"startColumn":  7,
+"endLine":  241,
+"endColumn":  9
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  246,
+"startColumn":  8,
+"endLine":  246,
+"endColumn":  10
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  253,
+"startColumn":  3,
+"endLine":  253,
+"endColumn":  8
+}
+}
+]
+}
+]
+}
