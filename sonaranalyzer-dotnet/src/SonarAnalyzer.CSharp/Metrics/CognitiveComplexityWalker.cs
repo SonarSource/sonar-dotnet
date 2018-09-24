@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Metrics.CSharp
             {
                 Visit(node);
             }
-            catch (InsufficientExecutionStackException)
+            catch (Exception ex) when (ex is InsufficientExecutionStackException || ex is OutOfMemoryException)
             {
                 // TODO: trace this exception
 
