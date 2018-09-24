@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -35,8 +35,28 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class SwitchCasesMinimumThree : SwitchCasesMinimumThreeBase
     {
+        private const string MessageFormat = "Replace this 'Select' statement with 'If' statements to increase readability.";
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-    }
+
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var selectNode = (SelectBlockSyntax)c.Node;
+                    if (!HasAtLeastThreeLabels(selectNode))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, selectNode.SelectStatement.SelectKeyword.GetLocation()));
+                    }
+                },
+                SyntaxKind.SelectBlock);
+        }
+
+        private static bool HasAtLeastThreeLabels(SelectBlockSyntax node)
+        {
+            return node.CaseBlocks.Sum(caseBlock => caseBlock.CaseStatement.Cases.Count) >= 3;
+        }
+}
 }
