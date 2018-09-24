@@ -486,6 +486,12 @@ Namespace Tests.Diagnostics
 '                 ^^^ Secondary {{+1}}
 '                              ^^^ Secondary@-1 {{+1}}
     End Sub
+
+    Private Sub ChainedConditionsWithParantheses() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+      Dim res = a AndAlso b AndAlso (c AndAlso d)
+'                 ^^^^^^^ Secondary {{+1}}
+    End Sub
+
   End Class
 
   Class GotoComplexity

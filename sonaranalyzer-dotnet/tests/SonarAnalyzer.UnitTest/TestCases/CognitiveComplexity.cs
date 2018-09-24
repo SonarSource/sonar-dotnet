@@ -598,6 +598,12 @@ namespace Tests.Diagnostics
                 !(((b && c)));
 //                    ^^ Secondary {{+1}}
         }
+
+        void ChainedConditionsWithParantheses() // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+        {
+            var res = a && b && (c && d);
+//                      ^^ Secondary {{+1}}
+        }
     }
 
     class GotoComplexity
