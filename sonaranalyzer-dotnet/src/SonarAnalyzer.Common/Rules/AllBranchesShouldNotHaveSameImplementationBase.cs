@@ -29,6 +29,15 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class AllBranchesShouldNotHaveSameImplementationBase : SonarDiagnosticAnalyzer
     {
+        protected const string SelectMessage =
+            "Remove this '{0}' or edit its sections so that they are not all the same.";
+
+        protected const string TernaryMessage =
+            "Remove this ternary operator or edit it so that when true and when false blocks are not the same.";
+
+        protected const string IfMessage =
+            "Remove this '{0}' or edit its blocks so that they are not all the same.";
+
         internal const string DiagnosticId = "S3923";
         internal const string MessageFormat = "{0}";
 
@@ -43,7 +52,7 @@ namespace SonarAnalyzer.Rules
 
             protected abstract bool IsLastElseInChain(TElseSyntax elseSyntax);
 
-            public Action<SyntaxNodeAnalysisContext> GetAction(DiagnosticDescriptor rule, params object[] messageArgs) =>
+            public Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule, params object[] messageArgs) =>
                 context =>
                 {
                     var elseSyntax = (TElseSyntax)context.Node;
@@ -59,7 +68,8 @@ namespace SonarAnalyzer.Rules
 
                     if (ifBlocksStatements.All(ifStatements => AreEquivalent(ifStatements, elseStatements)))
                     {
-                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, topLevelIf.GetLocation(), messageArgs));
+                        var message = string.Format(IfMessage, messageArgs);
+                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, topLevelIf.GetLocation(), message));
                     }
                 };
 
@@ -74,7 +84,7 @@ namespace SonarAnalyzer.Rules
 
             protected abstract SyntaxNode GetWhenFalse(TTernaryStatement ternaryStatement);
 
-            public Action<SyntaxNodeAnalysisContext> GetAction(DiagnosticDescriptor rule, params object[] messageArgs) =>
+            public Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
                 context =>
                 {
                     var ternaryStatement = (TTernaryStatement)context.Node;
@@ -84,7 +94,7 @@ namespace SonarAnalyzer.Rules
 
                     if (whenTrue.IsEquivalentTo(whenFalse, topLevel: false))
                     {
-                        context.ReportDiagnostic(Diagnostic.Create(rule, ternaryStatement.GetLocation(), messageArgs));
+                        context.ReportDiagnostic(Diagnostic.Create(rule, ternaryStatement.GetLocation(), TernaryMessage));
                     }
                 };
         }
@@ -99,7 +109,7 @@ namespace SonarAnalyzer.Rules
 
             protected abstract bool AreEquivalent(TSwitchSection section1, TSwitchSection section2);
 
-            public Action<SyntaxNodeAnalysisContext> GetAction(DiagnosticDescriptor rule, params object[] messageArgs) =>
+            public Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule, params object[] messageArgs) =>
                 context =>
                 {
                     var switchStatement = (TSwitchStatement)context.Node;
@@ -110,7 +120,8 @@ namespace SonarAnalyzer.Rules
                         HasDefaultLabel(switchStatement) &&
                         sections.Skip(1).All(section => AreEquivalent(section, sections[0])))
                     {
-                        context.ReportDiagnostic(Diagnostic.Create(rule, switchStatement.GetLocation(), messageArgs));
+                        var message = string.Format(SelectMessage, messageArgs);
+                        context.ReportDiagnostic(Diagnostic.Create(rule, switchStatement.GetLocation(), message));
                     }
                 };
         }

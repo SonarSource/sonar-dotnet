@@ -35,15 +35,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class AllBranchesShouldNotHaveSameImplementation : AllBranchesShouldNotHaveSameImplementationBase
     {
-        private const string SelectMessage =
-            "Remove this 'Select Case' or edit its sections so that they are not all the same.";
-
-        private const string TernaryMessage =
-            "Remove this ternary operator or edit it so that when true and when false blocks are not the same.";
-
-        private const string IfMessage =
-            "Remove this 'If' or edit its blocks so that they are not all the same.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -53,19 +44,19 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                new SelectCaseStatementAnalyzer().GetAction(rule, SelectMessage),
+                new SelectCaseStatementAnalyzer().GetAnalysisAction(rule, "Select Case"),
                 SyntaxKind.SelectBlock);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                new TernaryStatementAnalyzer().GetAction(rule, TernaryMessage),
+                new TernaryStatementAnalyzer().GetAnalysisAction(rule),
                 SyntaxKind.TernaryConditionalExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                new IfStatementAnalyzer().GetAction(rule, IfMessage),
+                new IfStatementAnalyzer().GetAnalysisAction(rule, "If"),
                 SyntaxKind.ElseBlock);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                new SingleLineIfStatementAnalyzer().GetAction(rule, IfMessage),
+                new SingleLineIfStatementAnalyzer().GetAnalysisAction(rule, "If"),
                 SyntaxKind.SingleLineElseClause);
         }
 
@@ -121,6 +112,5 @@ namespace SonarAnalyzer.Rules.VisualBasic
             protected override bool HasDefaultLabel(SelectBlockSyntax switchStatement) =>
                 switchStatement.CaseBlocks.Any(section => section.IsKind(SyntaxKind.CaseElseBlock));
         }
-
     }
 }
