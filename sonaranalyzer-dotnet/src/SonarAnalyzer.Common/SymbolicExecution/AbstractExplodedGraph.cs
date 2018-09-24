@@ -136,7 +136,7 @@ namespace SonarAnalyzer.SymbolicExecution
                         VisitBranchBlock(branchBlock, node);
                     }
                 }
-                catch (TooManyInternalStatesException)
+                catch (Exception ex) when (ex is TooManyInternalStatesException || ex is OutOfMemoryException)
                 {
                     OnMaxInternalStateCountReached();
                     return;
