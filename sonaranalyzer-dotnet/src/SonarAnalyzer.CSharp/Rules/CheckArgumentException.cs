@@ -166,9 +166,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return Enumerable.Empty<string>();
         }
 
-        private static string TakeOnlyBeforeDot(Optional<object> value)
-        {
-            return ((string)value.Value).Split('.').FirstOrDefault();
-        }
+        private static string TakeOnlyBeforeDot(Optional<object> value) =>
+            (value.Value as string)?.Split('.').FirstOrDefault();
     }
 }

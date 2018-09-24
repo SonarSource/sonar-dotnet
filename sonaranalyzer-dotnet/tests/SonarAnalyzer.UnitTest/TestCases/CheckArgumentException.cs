@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Tests.Diagnostics
@@ -159,6 +159,12 @@ namespace Tests.Diagnostics
                         throw new ArgumentNullException("b"); // Noncompliant
                     };
                 };
+        }
+
+        void Bar(int a)
+        {
+            // See https://github.com/SonarSource/sonar-csharp/issues/1867
+            throw new ArgumentNullException(null, string.Empty); // Noncompliant
         }
     }
 }
