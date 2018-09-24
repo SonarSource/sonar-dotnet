@@ -99,7 +99,9 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var invocation = (InvocationExpressionSyntax)analysisContext.Node;
 
-            if (!(analysisContext.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol) || !methodSymbol.Parameters.Any())
+            if (!(analysisContext.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol) ||
+                !methodSymbol.Parameters.Any() ||
+                methodSymbol.Parameters.All(x => x.Name != "format"))
             {
                 return;
             }
