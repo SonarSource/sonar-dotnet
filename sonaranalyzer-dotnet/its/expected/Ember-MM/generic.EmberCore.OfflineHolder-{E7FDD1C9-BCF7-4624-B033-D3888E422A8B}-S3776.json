@@ -1,0 +1,421 @@
+{
+"issues":  [
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  100,
+"startColumn":  17,
+"endLine":  100,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  106,
+"startColumn":  9,
+"endLine":  106,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  111,
+"startColumn":  9,
+"endLine":  111,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  113,
+"startColumn":  9,
+"endLine":  113,
+"endColumn":  13
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  136,
+"startColumn":  9,
+"endLine":  136,
+"endColumn":  12
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  142,
+"startColumn":  13,
+"endLine":  142,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  142,
+"startColumn":  38,
+"endLine":  142,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  146,
+"startColumn":  13,
+"endLine":  146,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  146,
+"startColumn":  35,
+"endLine":  146,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  156,
+"startColumn":  9,
+"endLine":  156,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  174,
+"startColumn":  9,
+"endLine":  174,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  179,
+"startColumn":  9,
+"endLine":  179,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  187,
+"startColumn":  9,
+"endLine":  187,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  190,
+"startColumn":  13,
+"endLine":  190,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  190,
+"startColumn":  45,
+"endLine":  190,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  192,
+"startColumn":  13,
+"endLine":  192,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  195,
+"startColumn":  9,
+"endLine":  195,
+"endColumn":  13
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  200,
+"startColumn":  9,
+"endLine":  200,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  208,
+"startColumn":  9,
+"endLine":  208,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  218,
+"startColumn":  9,
+"endLine":  218,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  224,
+"startColumn":  9,
+"endLine":  224,
+"endColumn":  14
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  227,
+"startColumn":  9,
+"endLine":  227,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  276,
+"startColumn":  9,
+"endLine":  276,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  279,
+"startColumn":  13,
+"endLine":  279,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  282,
+"startColumn":  13,
+"endLine":  282,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  284,
+"startColumn":  17,
+"endLine":  284,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  290,
+"startColumn":  13,
+"endLine":  290,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  294,
+"startColumn":  25,
+"endLine":  294,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  295,
+"startColumn":  29,
+"endLine":  295,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  297,
+"startColumn":  29,
+"endLine":  297,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  305,
+"startColumn":  13,
+"endLine":  305,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  309,
+"startColumn":  13,
+"endLine":  309,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  310,
+"startColumn":  17,
+"endLine":  310,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  313,
+"startColumn":  17,
+"endLine":  313,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  317,
+"startColumn":  13,
+"endLine":  317,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  324,
+"startColumn":  13,
+"endLine":  324,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  326,
+"startColumn":  13,
+"endLine":  326,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  331,
+"startColumn":  13,
+"endLine":  331,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  332,
+"startColumn":  17,
+"endLine":  332,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  336,
+"startColumn":  17,
+"endLine":  336,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  340,
+"startColumn":  13,
+"endLine":  340,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  346,
+"startColumn":  13,
+"endLine":  346,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  348,
+"startColumn":  17,
+"endLine":  348,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  349,
+"startColumn":  21,
+"endLine":  349,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  355,
+"startColumn":  9,
+"endLine":  355,
+"endColumn":  14
+}
+}
+]
+}
+]
+}

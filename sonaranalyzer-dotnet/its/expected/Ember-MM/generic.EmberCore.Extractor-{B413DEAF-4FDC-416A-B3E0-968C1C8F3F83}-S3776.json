@@ -1,0 +1,343 @@
+{
+"issues":  [
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 64 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  131,
+"startColumn":  21,
+"endLine":  131,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  135,
+"startColumn":  17,
+"endLine":  135,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  135,
+"startColumn":  38,
+"endLine":  135,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  143,
+"startColumn":  21,
+"endLine":  143,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  146,
+"startColumn":  21,
+"endLine":  146,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  147,
+"startColumn":  25,
+"endLine":  147,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  147,
+"startColumn":  59,
+"endLine":  147,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  150,
+"startColumn":  25,
+"endLine":  150,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  150,
+"startColumn":  63,
+"endLine":  150,
+"endColumn":  70
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  153,
+"startColumn":  25,
+"endLine":  153,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  155,
+"startColumn":  29,
+"endLine":  155,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  155,
+"startColumn":  76,
+"endLine":  155,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  157,
+"startColumn":  29,
+"endLine":  157,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  163,
+"startColumn":  21,
+"endLine":  163,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  180,
+"startColumn":  21,
+"endLine":  180,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  182,
+"startColumn":  25,
+"endLine":  182,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  184,
+"startColumn":  29,
+"endLine":  184,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  189,
+"startColumn":  50,
+"endLine":  189,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  191,
+"startColumn":  21,
+"endLine":  191,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  196,
+"startColumn":  21,
+"endLine":  196,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  198,
+"startColumn":  21,
+"endLine":  198,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  198,
+"startColumn":  39,
+"endLine":  198,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  198,
+"startColumn":  131,
+"endLine":  198,
+"endColumn":  137
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  198,
+"startColumn":  87,
+"endLine":  198,
+"endColumn":  94
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  198,
+"startColumn":  181,
+"endLine":  198,
+"endColumn":  188
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  199,
+"startColumn":  25,
+"endLine":  199,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  203,
+"startColumn":  25,
+"endLine":  203,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  209,
+"startColumn":  25,
+"endLine":  209,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  212,
+"startColumn":  29,
+"endLine":  212,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  218,
+"startColumn":  33,
+"endLine":  218,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  229,
+"startColumn":  21,
+"endLine":  229,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  234,
+"startColumn":  21,
+"endLine":  234,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  237,
+"startColumn":  21,
+"endLine":  237,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  239,
+"startColumn":  21,
+"endLine":  239,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  243,
+"startColumn":  29,
+"endLine":  243,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  243,
+"startColumn":  59,
+"endLine":  243,
+"endColumn":  66
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  252,
+"startColumn":  13,
+"endLine":  252,
+"endColumn":  18
+}
+}
+]
+}
+]
+}

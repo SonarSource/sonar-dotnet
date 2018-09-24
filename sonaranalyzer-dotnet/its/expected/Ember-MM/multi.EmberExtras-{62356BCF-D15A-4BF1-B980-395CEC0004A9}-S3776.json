@@ -1,0 +1,205 @@
+{
+"issues":  [
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  185,
+"startColumn":  17,
+"endLine":  185,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  186,
+"startColumn":  9,
+"endLine":  186,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  187,
+"startColumn":  13,
+"endLine":  187,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  187,
+"startColumn":  47,
+"endLine":  187,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  193,
+"startColumn":  17,
+"endLine":  193,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  194,
+"startColumn":  21,
+"endLine":  194,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  196,
+"startColumn":  25,
+"endLine":  196,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  197,
+"startColumn":  29,
+"endLine":  197,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  198,
+"startColumn":  33,
+"endLine":  198,
+"endColumn":  35
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  87,
+"startColumn":  17,
+"endLine":  87,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  94,
+"startColumn":  13,
+"endLine":  94,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  96,
+"startColumn":  17,
+"endLine":  96,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  98,
+"startColumn":  21,
+"endLine":  98,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  99,
+"startColumn":  25,
+"endLine":  99,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  100,
+"startColumn":  48,
+"endLine":  100,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  106,
+"startColumn":  21,
+"endLine":  106,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  108,
+"startColumn":  21,
+"endLine":  108,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  112,
+"startColumn":  17,
+"endLine":  112,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  113,
+"startColumn":  21,
+"endLine":  113,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  117,
+"startColumn":  13,
+"endLine":  117,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  120,
+"startColumn":  9,
+"endLine":  120,
+"endColumn":  14
+}
+}
+]
+}
+]
+}
