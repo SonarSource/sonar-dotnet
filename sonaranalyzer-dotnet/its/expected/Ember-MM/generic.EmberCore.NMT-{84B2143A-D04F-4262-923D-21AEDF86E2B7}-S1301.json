@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1301",
+"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"region":  {
+"startLine":  111,
+"startColumn":  25,
+"endLine":  111,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"region":  {
+"startLine":  146,
+"startColumn":  25,
+"endLine":  146,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"region":  {
+"startLine":  213,
+"startColumn":  17,
+"endLine":  213,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"region":  {
+"startLine":  226,
+"startColumn":  13,
+"endLine":  226,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"region":  {
+"startLine":  93,
+"startColumn":  13,
+"endLine":  93,
+"endColumn":  19
+}
+}
+}
+]
+}
