@@ -70,6 +70,11 @@ namespace SonarAnalyzer.Helpers.VisualBasic
 
         #endregion Statement
 
+        public static bool IsAnyKind(this SyntaxToken syntaxToken, ISet<SyntaxKind> collection)
+        {
+            return syntaxToken != null && collection.Contains((SyntaxKind)syntaxToken.RawKind);
+        }
+
         public static bool IsAnyKind(this SyntaxNode syntaxNode, ISet<SyntaxKind> collection)
         {
             return syntaxNode != null && collection.Contains((SyntaxKind)syntaxNode.RawKind);

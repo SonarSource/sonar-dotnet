@@ -31,42 +31,18 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class BooleanCheckInverted : SonarDiagnosticAnalyzer
+    public sealed class BooleanCheckInverted : BooleanCheckInvertedBase<BinaryExpressionSyntax>
     {
-        internal const string DiagnosticId = "S1940";
-        private const string MessageFormat = "Use the opposite operator ('{0}') instead.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
+            ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var expression = (BinaryExpressionSyntax)c.Node;
-                    var enclosingSymbol = c.SemanticModel.GetEnclosingSymbol(expression.SpanStart) as IMethodSymbol;
-
-                    if (enclosingSymbol?.MethodKind == MethodKind.UserDefinedOperator ||
-                        IsIgnoredNullableOperation(expression, c.SemanticModel))
-                    {
-                        return;
-                    }
-
-                    var parenthesizedParent = expression.Parent;
-                    while (parenthesizedParent is ParenthesizedExpressionSyntax)
-                    {
-                        parenthesizedParent = parenthesizedParent.Parent;
-                    }
-
-                    if (parenthesizedParent is PrefixUnaryExpressionSyntax logicalNot && logicalNot.OperatorToken.IsKind(SyntaxKind.ExclamationToken))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, logicalNot.GetLocation(),
-                            OppositeTokens[expression.OperatorToken.Kind()]));
-                    }
-                },
+                GetAnalysisAction(rule),
                 SyntaxKind.GreaterThanExpression,
                 SyntaxKind.GreaterThanOrEqualExpression,
                 SyntaxKind.LessThanExpression,
@@ -75,16 +51,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.NotEqualsExpression);
         }
 
-        private static bool IsIgnoredNullableOperation(BinaryExpressionSyntax expression, SemanticModel semanticModel)
+        protected override bool IsIgnoredNullableOperation(BinaryExpressionSyntax expression, SemanticModel semanticModel) =>
+            expression.OperatorToken.IsAnyKind(ignoredNullableOperators) &&
+            (IsNullable(expression.Left, semanticModel) || IsNullable(expression.Right, semanticModel));
+
+        protected override bool IsLogicalNot(BinaryExpressionSyntax expression, out SyntaxNode logicalNot)
         {
-            return expression.OperatorToken.IsAnyKind(ignoredNullableOperators) &&
-                (IsNullable(expression.Left, semanticModel) || IsNullable(expression.Right, semanticModel));
+            var parenthesizedParent = expression.GetSelfOrTopParenthesizedExpression().Parent;
+            var prefixUnaryExpression = parenthesizedParent as PrefixUnaryExpressionSyntax;
+
+            logicalNot = prefixUnaryExpression;
+
+            return prefixUnaryExpression != null
+                && prefixUnaryExpression.OperatorToken.IsKind(SyntaxKind.ExclamationToken);
         }
 
-        private static bool IsNullable(ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            return semanticModel.GetSymbolInfo(expression).Symbol.GetSymbolType() is INamedTypeSymbol symbolType && symbolType.ConstructedFrom.Is(KnownType.System_Nullable_T);
-        }
+        protected override string GetSuggestedReplacement(BinaryExpressionSyntax expression) =>
+            OppositeTokens[expression.OperatorToken.Kind()];
 
         private static readonly ISet<SyntaxKind> ignoredNullableOperators = new HashSet<SyntaxKind>
         {
