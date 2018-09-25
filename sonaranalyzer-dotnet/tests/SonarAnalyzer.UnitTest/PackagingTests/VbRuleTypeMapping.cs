@@ -1937,7 +1937,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["1937"],
             //["1938"],
             //["1939"],
-            //["1940"],
+            ["1940"] = "CODE_SMELL",
             //["1941"],
             //["1942"],
             //["1943"],

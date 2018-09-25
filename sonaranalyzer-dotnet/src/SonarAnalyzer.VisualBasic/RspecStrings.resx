@@ -987,6 +987,36 @@
   <data name="S1871_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S1940_Category" xml:space="preserve">
+    <value>Minor Code Smell</value>
+  </data>
+  <data name="S1940_Description" xml:space="preserve">
+    <value>It is needlessly complex to invert the result of a boolean comparison. The opposite comparison should be made instead.</value>
+  </data>
+  <data name="S1940_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S1940_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1940_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S1940_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S1940_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S1940_Tags" xml:space="preserve">
+    <value>pitfall</value>
+  </data>
+  <data name="S1940_Title" xml:space="preserve">
+    <value>Boolean checks should not be inverted</value>
+  </data>
+  <data name="S1940_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2178_Category" xml:space="preserve">
     <value>Blocker Code Smell</value>
   </data>
