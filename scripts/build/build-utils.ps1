@@ -141,10 +141,6 @@ function Invoke-UnitTests([string]$binPath, [bool]$failsIfNotTest) {
     & (Get-VsTestPath) $testFiles /Parallel /Enablecodecoverage /InIsolation /Logger:trx /UseVsixExtensions:true `
         /TestAdapterPath:$testDirs
     Test-ExitCode "ERROR: Unit Tests execution FAILED."
-
-    if ($failsIfNotTest -And $cmdOutput -Match "Warning: No test is available") {
-        throw "No test was found but was expecting to find some"
-    }
 }
 
 function Invoke-IntegrationTests([ValidateSet("14.0", "15.0")][string] $msbuildVersion) {
