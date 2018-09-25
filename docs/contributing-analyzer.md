@@ -32,6 +32,7 @@ You can run the Unit Tests via the Test Explorer of Visual Studio or using `.\sc
 
 To run the ITs you will need to follow this pattern:
 
+1. Make sure the project is built: Integration tests don't build the analyzer, but use the results of the latest build (debug or release)
 1. Open the `Developer Command Prompt for VS2017` from the start menu
 1. Go to `PATH_TO_CLONED_REPOSITORY/sonaranalyzer-dotnet/its`
 1. Run `powershell`
@@ -49,6 +50,8 @@ You can visualize the differences using:
 1. `git diff --cached`
 
 Please review all added/removed/updated issue to confirm they are wanted. When this is done run `.\update-expected.ps1` to update the list of expected issues.
+
+Note: Integration tests build the code to analyze. If you have an antivirus program on your computer, this may fail with some error messages about an executable file that cannot be open for writing. If this happens, look at the antivirus logs for confirmation, and contact IT team to add an rule to your antivirus program...
 
 ### Manual Tests
 
