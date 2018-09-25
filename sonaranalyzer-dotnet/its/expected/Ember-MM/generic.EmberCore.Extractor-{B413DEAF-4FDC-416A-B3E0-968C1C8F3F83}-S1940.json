@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  135,
+"startColumn":  20,
+"endLine":  135,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  135,
+"startColumn":  46,
+"endLine":  135,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  135,
+"startColumn":  72,
+"endLine":  135,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  136,
+"startColumn":  17,
+"endLine":  136,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  136,
+"startColumn":  43,
+"endLine":  136,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  184,
+"startColumn":  32,
+"endLine":  184,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"region":  {
+"startLine":  30,
+"startColumn":  11,
+"endLine":  30,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmTVExtrator.vb",
+"region":  {
+"startLine":  61,
+"startColumn":  32,
+"endLine":  61,
+"endColumn":  49
+}
+}
+}
+]
+}
