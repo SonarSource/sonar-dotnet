@@ -1,0 +1,524 @@
+{
+"issues":  [
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  90,
+"startColumn":  19,
+"endLine":  90,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  91,
+"startColumn":  66,
+"endLine":  91,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  91,
+"startColumn":  89,
+"endLine":  91,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  91,
+"startColumn":  113,
+"endLine":  91,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  112,
+"startColumn":  24,
+"endLine":  112,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  115,
+"startColumn":  32,
+"endLine":  115,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  125,
+"startColumn":  24,
+"endLine":  125,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  128,
+"startColumn":  32,
+"endLine":  128,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  168,
+"startColumn":  16,
+"endLine":  168,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  171,
+"startColumn":  24,
+"endLine":  171,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  181,
+"startColumn":  16,
+"endLine":  181,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  184,
+"startColumn":  24,
+"endLine":  184,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  194,
+"startColumn":  16,
+"endLine":  194,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  205,
+"startColumn":  20,
+"endLine":  205,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  213,
+"startColumn":  32,
+"endLine":  213,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  329,
+"startColumn":  16,
+"endLine":  329,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  348,
+"startColumn":  141,
+"endLine":  348,
+"endColumn":  189
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  349,
+"startColumn":  103,
+"endLine":  349,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  351,
+"startColumn":  12,
+"endLine":  351,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  351,
+"startColumn":  58,
+"endLine":  351,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  421,
+"startColumn":  28,
+"endLine":  421,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  429,
+"startColumn":  28,
+"endLine":  429,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  457,
+"startColumn":  33,
+"endLine":  457,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  457,
+"startColumn":  103,
+"endLine":  457,
+"endColumn":  131
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  482,
+"startColumn":  44,
+"endLine":  482,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  608,
+"startColumn":  117,
+"endLine":  608,
+"endColumn":  149
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  609,
+"startColumn":  87,
+"endLine":  609,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  611,
+"startColumn":  31,
+"endLine":  611,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  611,
+"startColumn":  61,
+"endLine":  611,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  626,
+"startColumn":  12,
+"endLine":  626,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  657,
+"startColumn":  16,
+"endLine":  657,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  678,
+"startColumn":  20,
+"endLine":  678,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  703,
+"startColumn":  25,
+"endLine":  703,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  703,
+"startColumn":  116,
+"endLine":  703,
+"endColumn":  151
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  723,
+"startColumn":  36,
+"endLine":  723,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  104,
+"startColumn":  44,
+"endLine":  104,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  186,
+"startColumn":  52,
+"endLine":  186,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  307,
+"startColumn":  55,
+"endLine":  307,
+"endColumn":  148
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  327,
+"startColumn":  12,
+"endLine":  327,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgRenameManual.vb",
+"region":  {
+"startLine":  53,
+"startColumn":  12,
+"endLine":  53,
+"endColumn":  40
+}
+}
+}
+]
+}
