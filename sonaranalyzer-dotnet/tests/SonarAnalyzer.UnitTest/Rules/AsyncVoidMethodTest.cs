@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\AsyncVoidMethod_MsTestV1.cs",
                 new AsyncVoidMethod(),
-                additionalReferences: GacMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
+                additionalReferences: NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework);
         }
     }
 }
