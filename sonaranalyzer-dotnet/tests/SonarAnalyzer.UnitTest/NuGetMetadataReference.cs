@@ -218,7 +218,7 @@ namespace SonarAnalyzer.UnitTest
             Create("Microsoft.AspNet.Mvc", packageVersion);
 
         public static MetadataReference[] MicrosoftVisualStudioQualityToolsUnitTestFramework =>
-            Create("Microsoft.VisualStudio.QualityTools.UnitTestFramework.Updated", "15.0.26228");
+            Create("VS.QualityTools.UnitTestFramework", "15.0.27323.2");
 
         public static MetadataReference[] MSTestTestFrameworkV1 =>
             Create("MSTest.TestFramework", "1.1.11");
