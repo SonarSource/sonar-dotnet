@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -34,18 +33,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class BooleanCheckInverted : BooleanCheckInvertedBase<BinaryExpressionSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly ISet<SyntaxKind> ignoredNullableOperators =
+            new HashSet<SyntaxKind>
+            {
+                SyntaxKind.GreaterThanToken,
+                SyntaxKind.GreaterThanEqualsToken,
+                SyntaxKind.LessThanToken,
+                SyntaxKind.LessThanEqualsToken,
+            };
 
-        private static readonly ISet<SyntaxKind> ignoredNullableOperators = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.GreaterThanToken,
-            SyntaxKind.GreaterThanEqualsToken,
-            SyntaxKind.LessThanToken,
-            SyntaxKind.LessThanEqualsToken,
-        };
-
-        private static readonly Dictionary<SyntaxKind, string> OppositeTokens =
+        private static readonly Dictionary<SyntaxKind, string> oppositeTokens =
             new Dictionary<SyntaxKind, string>
             {
                 { SyntaxKind.GreaterThanToken, "<=" },
@@ -56,15 +53,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 { SyntaxKind.LessThanGreaterThanToken, "=" },
             };
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(rule);
-
-        protected override string GetSuggestedReplacement(BinaryExpressionSyntax expression) =>
-            OppositeTokens[expression.OperatorToken.Kind()];
+        protected override DiagnosticDescriptor Rule { get; } =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
-                GetAnalysisAction(rule),
+                GetAnalysisAction(),
                 SyntaxKind.GreaterThanExpression,
                 SyntaxKind.GreaterThanOrEqualExpression,
                 SyntaxKind.LessThanExpression,
@@ -86,5 +80,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return unaryExpression != null
                 && unaryExpression.OperatorToken.IsKind(SyntaxKind.NotKeyword);
         }
+
+        protected override string GetSuggestedReplacement(BinaryExpressionSyntax expression) =>
+            oppositeTokens[expression.OperatorToken.Kind()];
     }
 }

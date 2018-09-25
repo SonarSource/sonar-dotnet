@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
@@ -31,13 +32,18 @@ namespace SonarAnalyzer.Rules
         internal const string DiagnosticId = "S1940";
         protected const string MessageFormat = "Use the opposite operator ('{0}') instead.";
 
+        protected abstract DiagnosticDescriptor Rule { get; }
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray.Create(Rule);
+
         protected abstract bool IsLogicalNot(TBinaryExpression expression, out SyntaxNode logicalNot);
 
         protected abstract string GetSuggestedReplacement(TBinaryExpression expression);
 
         protected abstract bool IsIgnoredNullableOperation(TBinaryExpression expression, SemanticModel semanticModel);
 
-        protected Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule)
+        protected Action<SyntaxNodeAnalysisContext> GetAnalysisAction()
         {
             return c =>
             {
@@ -52,7 +58,7 @@ namespace SonarAnalyzer.Rules
                 if (IsLogicalNot(expression, out var logicalNot))
                 {
                     c.ReportDiagnosticWhenActive(
-                        Diagnostic.Create(rule, logicalNot.GetLocation(), GetSuggestedReplacement(expression)));
+                        Diagnostic.Create(Rule, logicalNot.GetLocation(), GetSuggestedReplacement(expression)));
                 }
             };
         }

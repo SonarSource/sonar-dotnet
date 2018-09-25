@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -33,23 +32,38 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class BooleanCheckInverted : BooleanCheckInvertedBase<BinaryExpressionSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly ISet<SyntaxKind> ignoredNullableOperators =
+            new HashSet<SyntaxKind>
+            {
+                SyntaxKind.GreaterThanToken,
+                SyntaxKind.GreaterThanEqualsToken,
+                SyntaxKind.LessThanToken,
+                SyntaxKind.LessThanEqualsToken,
+            };
+
+        private static readonly Dictionary<SyntaxKind, string> oppositeTokens =
+            new Dictionary<SyntaxKind, string>
+            {
+                { SyntaxKind.GreaterThanToken, "<=" },
+                { SyntaxKind.GreaterThanEqualsToken, "<" },
+                { SyntaxKind.LessThanToken, ">=" },
+                { SyntaxKind.LessThanEqualsToken, ">" },
+                { SyntaxKind.EqualsEqualsToken, "!=" },
+                { SyntaxKind.ExclamationEqualsToken, "==" },
+            };
+
+        protected override DiagnosticDescriptor Rule { get; } =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
-                GetAnalysisAction(rule),
+                GetAnalysisAction(),
                 SyntaxKind.GreaterThanExpression,
                 SyntaxKind.GreaterThanOrEqualExpression,
                 SyntaxKind.LessThanExpression,
                 SyntaxKind.LessThanOrEqualExpression,
                 SyntaxKind.EqualsExpression,
                 SyntaxKind.NotEqualsExpression);
-        }
 
         protected override bool IsIgnoredNullableOperation(BinaryExpressionSyntax expression, SemanticModel semanticModel) =>
             expression.OperatorToken.IsAnyKind(ignoredNullableOperators) &&
@@ -67,25 +81,6 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         protected override string GetSuggestedReplacement(BinaryExpressionSyntax expression) =>
-            OppositeTokens[expression.OperatorToken.Kind()];
-
-        private static readonly ISet<SyntaxKind> ignoredNullableOperators = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.GreaterThanToken,
-            SyntaxKind.GreaterThanEqualsToken,
-            SyntaxKind.LessThanToken,
-            SyntaxKind.LessThanEqualsToken
-        };
-
-        private static readonly Dictionary<SyntaxKind, string> OppositeTokens =
-            new Dictionary<SyntaxKind, string>
-            {
-                {SyntaxKind.GreaterThanToken, "<="},
-                {SyntaxKind.GreaterThanEqualsToken, "<"},
-                {SyntaxKind.LessThanToken, ">="},
-                {SyntaxKind.LessThanEqualsToken, ">"},
-                {SyntaxKind.EqualsEqualsToken, "!="},
-                {SyntaxKind.ExclamationEqualsToken, "=="}
-            };
+            oppositeTokens[expression.OperatorToken.Kind()];
     }
 }
