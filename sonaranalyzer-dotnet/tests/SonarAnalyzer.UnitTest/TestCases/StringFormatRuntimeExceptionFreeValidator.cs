@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace Tests.Diagnostics
 {
@@ -79,56 +75,54 @@ namespace Tests.Diagnostics
             Console.Write("[0}", args[0]); // Noncompliant
             Console.Write("{-1}", args[0]); // Noncompliant
             Console.Write("{0} {1}", args[0]); // Noncompliant
-            Console.Write(null, 1, 2); // Noncompliant
+            Console.Write(null, "foo", "bar"); // Noncompliant
         }
 
         void System_Console_WriteLine(string[] args)
         {
-            Console.WriteLine("0");
-            Console.WriteLine("{0}", 42);
-            Console.WriteLine("{"); // Compliant
-            Console.WriteLine(ulong.MaxValue);
-
-            Console.WriteLine("[0}", args[0]); // Noncompliant
-            Console.WriteLine("{-1}", args[0]); // Noncompliant
-            Console.WriteLine("{0} {1}", args[0]); // Noncompliant
-            Console.WriteLine(null, 1, 2); // Noncompliant
+            Console.WriteLine(null, "foo", "bar"); // Noncompliant
         }
 
         void System_Text_StringBuilder_AppendFormat(string[] args)
         {
-            System.Text.StringBuilder.AppendFormat("{0}", 42);
+            var sb = new System.Text.StringBuilder();
 
-            System.Text.StringBuilder.AppendFormat("[0}", args[0]); // Noncompliant
-            System.Text.StringBuilder.AppendFormat("{-1}", args[0]); // Noncompliant
-            System.Text.StringBuilder.AppendFormat("{0} {1}", args[0]); // Noncompliant
-            System.Text.StringBuilder.AppendFormat(null, 1, 2); // Noncompliant
+            sb.AppendFormat("{0}", 42);
+
+            sb.AppendFormat("[0}", args[0]); // Noncompliant
+            sb.AppendFormat("{-1}", args[0]); // Noncompliant
+            sb.AppendFormat("{0} {1}", args[0]); // Noncompliant
+            sb.AppendFormat(null, "foo", "bar"); // Noncompliant
         }
 
         void System_IO_TextWriter_Write(string[] args)
         {
-            System.IO.TextWriter.Write("0");
-            System.IO.TextWriter.Write("{0}", 42);
-            System.IO.TextWriter.Write("{"); // Compliant
-            System.IO.TextWriter.Write(ulong.MaxValue);
+            System.IO.TextWriter tw = new System.IO.StreamWriter("");
 
-            System.IO.TextWriter.Write("[0}", args[0]); // Noncompliant
-            System.IO.TextWriter.Write("{-1}", args[0]); // Noncompliant
-            System.IO.TextWriter.Write("{0} {1}", args[0]); // Noncompliant
-            System.IO.TextWriter.Write(null, 1, 2); // Noncompliant
+            tw.Write("0");
+            tw.Write("{0}", 42);
+            tw.Write("{"); // Compliant
+            tw.Write(ulong.MaxValue);
+
+            tw.Write("[0}", args[0]); // Noncompliant
+            tw.Write("{-1}", args[0]); // Noncompliant
+            tw.Write("{0} {1}", args[0]); // Noncompliant
+            tw.Write(null, "foo", "bar"); // Noncompliant
         }
 
         void System_IO_TextWriter_WriteLine(string[] args)
         {
-            System.IO.TextWriter.WriteLine("0");
-            System.IO.TextWriter.WriteLine("{0}", 42);
-            System.IO.TextWriter.WriteLine("{"); // Compliant
-            System.IO.TextWriter.WriteLine(ulong.MaxValue);
+            System.IO.TextWriter tw = new System.IO.StreamWriter("");
 
-            System.IO.TextWriter.WriteLine("[0}", args[0]); // Noncompliant
-            System.IO.TextWriter.WriteLine("{-1}", args[0]); // Noncompliant
-            System.IO.TextWriter.WriteLine("{0} {1}", args[0]); // Noncompliant
-            System.IO.TextWriter.WriteLine(null, 1, 2); // Noncompliant
+            tw.WriteLine("0");
+            tw.WriteLine("{0}", 42);
+            tw.WriteLine("{"); // Compliant
+            tw.WriteLine(ulong.MaxValue);
+
+            tw.WriteLine("[0}", args[0]); // Noncompliant
+            tw.WriteLine("{-1}", args[0]); // Noncompliant
+            tw.WriteLine("{0} {1}", args[0]); // Noncompliant
+            tw.WriteLine(null, "foo", "bar"); // Noncompliant
         }
 
         void System_Diagnostics_Debug_WriteLine(string[] args)
@@ -137,11 +131,12 @@ namespace Tests.Diagnostics
             System.Diagnostics.Debug.WriteLine("{0}", 42);
             System.Diagnostics.Debug.WriteLine("{"); // Compliant
             System.Diagnostics.Debug.WriteLine(ulong.MaxValue);
+            System.Diagnostics.Debug.WriteLine("", "");
 
-            System.Diagnostics.Debug.WriteLine("[0}", args[0]); // Noncompliant
-            System.Diagnostics.Debug.WriteLine("{-1}", args[0]); // Noncompliant
-            System.Diagnostics.Debug.WriteLine("{0} {1}", args[0]); // Noncompliant
-            System.Diagnostics.Debug.WriteLine(null, 1, 2); // Noncompliant
+            System.Diagnostics.Debug.WriteLine("[0}", args); // Noncompliant
+            System.Diagnostics.Debug.WriteLine("{-1}", args); // Noncompliant
+            System.Diagnostics.Debug.WriteLine("{0} {1}", (object)args[0]); // Noncompliant
+            System.Diagnostics.Debug.WriteLine(null, "foo", "bar"); // Noncompliant
         }
 
         void System_Diagnostics_Trace_TraceError(string[] args)
@@ -153,7 +148,7 @@ namespace Tests.Diagnostics
             System.Diagnostics.Trace.TraceError("[0}", args[0]); // Noncompliant
             System.Diagnostics.Trace.TraceError("{-1}", args[0]); // Noncompliant
             System.Diagnostics.Trace.TraceError("{0} {1}", args[0]); // Noncompliant
-            System.Diagnostics.Trace.TraceError(null, 1, 2); // Noncompliant
+            System.Diagnostics.Trace.TraceError(null, "foo", "bar"); // Noncompliant
         }
 
         void System_Diagnostics_Trace_TraceInformation(string[] args)
@@ -165,7 +160,7 @@ namespace Tests.Diagnostics
             System.Diagnostics.Trace.TraceInformation("[0}", args[0]); // Noncompliant
             System.Diagnostics.Trace.TraceInformation("{-1}", args[0]); // Noncompliant
             System.Diagnostics.Trace.TraceInformation("{0} {1}", args[0]); // Noncompliant
-            System.Diagnostics.Trace.TraceInformation(null, 1, 2); // Noncompliant
+            System.Diagnostics.Trace.TraceInformation(null, "foo", "bar"); // Noncompliant
         }
 
         void System_Diagnostics_Trace_TraceWarning(string[] args)
@@ -177,19 +172,21 @@ namespace Tests.Diagnostics
             System.Diagnostics.Trace.TraceWarning("[0}", args[0]); // Noncompliant
             System.Diagnostics.Trace.TraceWarning("{-1}", args[0]); // Noncompliant
             System.Diagnostics.Trace.TraceWarning("{0} {1}", args[0]); // Noncompliant
-            System.Diagnostics.Trace.TraceWarning(null, 1, 2); // Noncompliant
+            System.Diagnostics.Trace.TraceWarning(null, "foo", "bar"); // Noncompliant
         }
 
         void System_Diagnostics_TraceSource_TraceInformation(string[] args)
         {
-            System.Diagnostics.TraceSource.TraceInformation("0");
-            System.Diagnostics.TraceSource.TraceInformation("{0}", 42);
-            System.Diagnostics.TraceSource.TraceInformation("{"); // Compliant
+            var ts = new System.Diagnostics.TraceSource("");
 
-            System.Diagnostics.TraceSource.TraceInformation("[0}", args[0]); // Noncompliant
-            System.Diagnostics.TraceSource.TraceInformation("{-1}", args[0]); // Noncompliant
-            System.Diagnostics.TraceSource.TraceInformation("{0} {1}", args[0]); // Noncompliant
-            System.Diagnostics.TraceSource.TraceInformation(null, 1, 2); // Noncompliant
+            ts.TraceInformation("0");
+            ts.TraceInformation("{0}", 42);
+            ts.TraceInformation("{"); // Compliant
+
+            ts.TraceInformation("[0}", args[0]); // Noncompliant
+            ts.TraceInformation("{-1}", args[0]); // Noncompliant
+            ts.TraceInformation("{0} {1}", args[0]); // Noncompliant
+            ts.TraceInformation(null, "foo", "bar"); // Noncompliant
         }
     }
 }
