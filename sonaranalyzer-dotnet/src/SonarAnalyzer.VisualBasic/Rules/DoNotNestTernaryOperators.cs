@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -35,8 +35,21 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class DoNotNestTernaryOperators : DoNotNestTernaryOperatorsBase
     {
+        private const string MessageFormat = "Extract this nested If operator into independent If...Then...Else statements.";
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                if (c.Node.Ancestors().OfType<TernaryConditionalExpressionSyntax>().Any())
+                {
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
+                }
+            },
+                SyntaxKind.TernaryConditionalExpression);
+        }
     }
 }

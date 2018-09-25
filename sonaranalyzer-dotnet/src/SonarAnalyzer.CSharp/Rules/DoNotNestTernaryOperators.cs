@@ -31,9 +31,8 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotNestTernaryOperators : SonarDiagnosticAnalyzer
+    public sealed class DoNotNestTernaryOperators : DoNotNestTernaryOperatorsBase
     {
-        internal const string DiagnosticId = "S3358";
         private const string MessageFormat = "Extract this nested ternary operation into an independent statement.";
 
         private static readonly DiagnosticDescriptor rule =
