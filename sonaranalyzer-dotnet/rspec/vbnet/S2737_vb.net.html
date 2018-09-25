@@ -1,0 +1,41 @@
+<p>A <code>Catch</code> clause that only rethrows the caught exception has the same effect as omitting the <code>Catch</code> altogether and letting
+it bubble up automatically, but with more code and the additional detriment of leaving maintainers scratching their heads. </p>
+<p>Such clauses should either be eliminated or populated with the appropriate logic.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Dim s As String = ""
+Try
+    s = File.ReadAllText(fileName)
+Catch e As Exception
+    Throw
+End Try
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Dim s As String = ""
+Try
+    s = File.ReadAllText(fileName)
+Catch e As Exception
+    logger.LogError(e)
+    Throw
+End Try
+</pre>
+<p>or</p>
+<pre>
+Dim s As String = File.ReadAllText(fileName)
+</pre>
+<h2>Exceptions</h2>
+<p>This rule will not generate issues for <code>Catch</code> blocks with just <code>Throw</code> inside if they are followed by a <code>Catch</code>
+block for a more general exception type that does more than just rethrowing the exception.</p>
+<pre>
+Dim s As String = ""
+Try
+    s = File.ReadAllText(fileName)
+Catch e As IOException 'Compliant, if removed will change the logic
+    Throw
+Catch e As Exception 'Compliant, does more than just rethrow
+    logger.LogError(e)
+    Throw
+End Try
+</pre>
+
