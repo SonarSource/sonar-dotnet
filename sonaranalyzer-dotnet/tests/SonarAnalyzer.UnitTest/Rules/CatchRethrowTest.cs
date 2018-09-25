@@ -29,33 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CatchRethrow_Temp()
-        {
-            Verifier.VerifyCSharpAnalyzer(@"
-public class C
-{
-    public void M()
-    {
-        try
-        {
-            doSomething();
-        }
-        catch (ArgumentException)
-        {
-            throw;
-        }
-        catch
-        {
-            Console.WriteLine("");
-            throw;
-        }
-    }
-}
-", new CatchRethrow());
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
         public void CatchRethrow()
         {
             Verifier.VerifyAnalyzer(@"TestCases\CatchRethrow.cs", new CatchRethrow());

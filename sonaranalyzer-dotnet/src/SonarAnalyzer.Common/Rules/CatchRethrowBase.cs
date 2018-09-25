@@ -52,19 +52,20 @@ namespace SonarAnalyzer.Rules
                 ComputeExceptionTypesIfNeeded(catches, context.SemanticModel));
             var redundantCatches = new HashSet<TCatchClause>();
 
-            // We handle differently catch clauses that just throw, but have
-            // next catch clause that handles more basic exception _and_ does
-            // more than just throw, because when removed they could change the
-            // behavior of the method.
-            var isIntermediate = false;
+            // We handle differently redundant catch clauses (just throw inside) that are
+            // followed by a non-redundant catch clause, because if they are removed, the
+            // method behavior will change.
+            var foundNotRedundantCatch = false;
 
             for (var i = catches.Count - 1; i >= 0; i--)
             {
                 var currentCatch = catches[i];
                 if (ContainsOnlyThrow(currentCatch))
                 {
-                    if (isIntermediate)
+                    if (foundNotRedundantCatch)
                     {
+                        // Make sure we report only catch clauses that will not change
+                        // the method behavior if removed.
                         if (!HasFilter(currentCatch) &&
                             !IsMoreSpecificTypeThanANotRedundantCatch(i, catches, caughtExceptionTypes.Value, redundantCatches))
                         {
@@ -78,7 +79,7 @@ namespace SonarAnalyzer.Rules
                 }
                 else
                 {
-                    isIntermediate = true;
+                    foundNotRedundantCatch = true;
                 }
             }
 
@@ -96,10 +97,10 @@ namespace SonarAnalyzer.Rules
             var currentType = caughtExceptionTypes[catchIndex];
             for (var i = catchIndex + 1; i < caughtExceptionTypes.Count; i++)
             {
-                var followingType = caughtExceptionTypes[i];
+                var nextCatchType = caughtExceptionTypes[i];
 
-                if (followingType == null ||
-                    currentType.DerivesOrImplements(followingType))
+                if (nextCatchType == null ||
+                    currentType.DerivesOrImplements(nextCatchType))
                 {
                     return !redundantCatches.Contains(catches[i]);
                 }

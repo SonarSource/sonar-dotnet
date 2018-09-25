@@ -17,21 +17,21 @@ Namespace Tests.TestCases
 
             Try
                 doSomething()
-            Catch __unusedArgumentException1__ As ArgumentException 'Noncompliant
+            Catch exc As ArgumentException 'Noncompliant
                 Throw
             End Try
 
             Try
                 doSomething()
-            Catch __unusedArgumentException1__ As ArgumentException 'Noncompliant
+            Catch exc As ArgumentException 'Noncompliant
                 Throw
-            Catch __unusedNotSupportedException2__ As NotSupportedException 'Noncompliant
+            Catch exc As NotSupportedException 'Noncompliant
                 Throw
             End Try
 
             Try
                 doSomething()
-            Catch __unusedArgumentException1__ As ArgumentException 
+            Catch exc As ArgumentException 
                 Throw
             Catch
                 Console.WriteLine("")
@@ -40,37 +40,43 @@ Namespace Tests.TestCases
 
             Try
                 doSomething()
-            Catch __unusedArgumentException1__ As ArgumentException 'Noncompliant
+            Catch exc As ArgumentException 'Noncompliant
                 Throw
-            Catch __unusedNotSupportedException2__ As NotSupportedException
+            Catch exc As NotSupportedException
                 Console.WriteLine("")
                 Throw
             End Try
 
             Try
                 doSomething()
-            Catch __unusedArgumentException1__ As ArgumentException When True
+            Catch exc As ArgumentException When True
                 Throw
-            Catch __unusedNotSupportedException2__ As NotSupportedException
+            Catch exc As NotSupportedException
                 Console.WriteLine("")
                 Throw
             End Try
 
             Try
                 doSomething()
-            Catch __unusedNotSupportedException1__ As NotSupportedException 'Noncompliant
+            Catch exc As ArgumentException When True 'Noncompliant
+                Throw
+            End Try
+
+            Try
+                doSomething()
+            Catch exc As NotSupportedException 'Noncompliant
                 Throw
             Finally
             End Try
 
             Try
                 doSomething()
-            Catch __unusedArgumentNullException1__ As ArgumentNullException 'Noncompliant
+            Catch exc As ArgumentNullException 'Noncompliant
                 Throw
-            Catch __unusedNotImplementedException2__ As NotImplementedException
+            Catch exc As NotImplementedException
                 Console.WriteLine("")
                 Throw
-            Catch __unusedArgumentException3__ As ArgumentException 'Noncompliant
+            Catch exc As ArgumentException 'Noncompliant
                 Throw
             Catch 'Noncompliant
                 Throw
@@ -78,12 +84,12 @@ Namespace Tests.TestCases
 
             Try
                 doSomething()
-            Catch __unusedArgumentNullException1__ As ArgumentNullException 'Noncompliant
+            Catch exc As ArgumentNullException 'Noncompliant
                 Throw
-            Catch __unusedNotImplementedException2__ As NotImplementedException
+            Catch exc As NotImplementedException
                 Console.WriteLine("")
                 Throw
-            Catch __unusedSystemException4__ As SystemException 'Noncompliant
+            Catch exc As SystemException 'Noncompliant
                 Throw
             Catch 'Noncompliant
                 Throw
