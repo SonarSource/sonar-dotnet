@@ -1,0 +1,1252 @@
+{
+"issues":  [
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  122,
+"startColumn":  16,
+"endLine":  122,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  124,
+"startColumn":  20,
+"endLine":  124,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  125,
+"startColumn":  20,
+"endLine":  125,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  126,
+"startColumn":  20,
+"endLine":  126,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  127,
+"startColumn":  20,
+"endLine":  127,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  128,
+"startColumn":  20,
+"endLine":  128,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  128,
+"startColumn":  55,
+"endLine":  128,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  128,
+"startColumn":  91,
+"endLine":  128,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  128,
+"startColumn":  128,
+"endLine":  128,
+"endColumn":  167
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  131,
+"startColumn":  20,
+"endLine":  131,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  599,
+"startColumn":  70,
+"endLine":  599,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  603,
+"startColumn":  70,
+"endLine":  603,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1124,
+"startColumn":  60,
+"endLine":  1124,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1222,
+"startColumn":  62,
+"endLine":  1222,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1225,
+"startColumn":  65,
+"endLine":  1225,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1238,
+"startColumn":  20,
+"endLine":  1238,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1413,
+"startColumn":  40,
+"endLine":  1413,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  703,
+"startColumn":  62,
+"endLine":  703,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"region":  {
+"startLine":  45,
+"startColumn":  124,
+"endLine":  45,
+"endColumn":  154
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"region":  {
+"startLine":  64,
+"startColumn":  124,
+"endLine":  64,
+"endColumn":  153
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  342,
+"startColumn":  16,
+"endLine":  342,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  355,
+"startColumn":  16,
+"endLine":  355,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  420,
+"startColumn":  16,
+"endLine":  420,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  642,
+"startColumn":  102,
+"endLine":  642,
+"endColumn":  147
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2626,
+"startColumn":  24,
+"endLine":  2626,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  577,
+"startColumn":  38,
+"endLine":  577,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1120,
+"startColumn":  20,
+"endLine":  1120,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1212,
+"startColumn":  24,
+"endLine":  1212,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1217,
+"startColumn":  28,
+"endLine":  1217,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1238,
+"startColumn":  40,
+"endLine":  1238,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1248,
+"startColumn":  62,
+"endLine":  1248,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1370,
+"startColumn":  24,
+"endLine":  1370,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1449,
+"startColumn":  16,
+"endLine":  1449,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1461,
+"startColumn":  68,
+"endLine":  1461,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1482,
+"startColumn":  71,
+"endLine":  1482,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1718,
+"startColumn":  86,
+"endLine":  1718,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1718,
+"startColumn":  123,
+"endLine":  1718,
+"endColumn":  152
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1790,
+"startColumn":  20,
+"endLine":  1790,
+"endColumn":  292
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2021,
+"startColumn":  20,
+"endLine":  2021,
+"endColumn":  295
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2664,
+"startColumn":  12,
+"endLine":  2664,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2746,
+"startColumn":  20,
+"endLine":  2746,
+"endColumn":  294
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2979,
+"startColumn":  16,
+"endLine":  2979,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3283,
+"startColumn":  16,
+"endLine":  3283,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3319,
+"startColumn":  16,
+"endLine":  3319,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3319,
+"startColumn":  57,
+"endLine":  3319,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3469,
+"startColumn":  28,
+"endLine":  3469,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3469,
+"startColumn":  80,
+"endLine":  3469,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3474,
+"startColumn":  28,
+"endLine":  3474,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3548,
+"startColumn":  87,
+"endLine":  3548,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3614,
+"startColumn":  16,
+"endLine":  3614,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3651,
+"startColumn":  16,
+"endLine":  3651,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3651,
+"startColumn":  57,
+"endLine":  3651,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3827,
+"startColumn":  86,
+"endLine":  3827,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3877,
+"startColumn":  16,
+"endLine":  3877,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3915,
+"startColumn":  16,
+"endLine":  3915,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3915,
+"startColumn":  57,
+"endLine":  3915,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4100,
+"startColumn":  84,
+"endLine":  4100,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<=') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4512,
+"startColumn":  28,
+"endLine":  4512,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<=') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4512,
+"startColumn":  89,
+"endLine":  4512,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<=') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4693,
+"startColumn":  28,
+"endLine":  4693,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<=') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4693,
+"startColumn":  89,
+"endLine":  4693,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<=') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4861,
+"startColumn":  28,
+"endLine":  4861,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<=') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4861,
+"startColumn":  89,
+"endLine":  4861,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<=') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5004,
+"startColumn":  28,
+"endLine":  5004,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<=') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5004,
+"startColumn":  89,
+"endLine":  5004,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5271,
+"startColumn":  16,
+"endLine":  5271,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5534,
+"startColumn":  58,
+"endLine":  5534,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5852,
+"startColumn":  16,
+"endLine":  5852,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5902,
+"startColumn":  16,
+"endLine":  5902,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5926,
+"startColumn":  16,
+"endLine":  5926,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5947,
+"startColumn":  166,
+"endLine":  5947,
+"endColumn":  232
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6420,
+"startColumn":  28,
+"endLine":  6420,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6511,
+"startColumn":  28,
+"endLine":  6511,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6564,
+"startColumn":  12,
+"endLine":  6564,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6649,
+"startColumn":  20,
+"endLine":  6649,
+"endColumn":  294
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6774,
+"startColumn":  68,
+"endLine":  6774,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<=') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6775,
+"startColumn":  104,
+"endLine":  6775,
+"endColumn":  149
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6776,
+"startColumn":  113,
+"endLine":  6776,
+"endColumn":  162
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6798,
+"startColumn":  68,
+"endLine":  6798,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<=') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6799,
+"startColumn":  104,
+"endLine":  6799,
+"endColumn":  149
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6800,
+"startColumn":  113,
+"endLine":  6800,
+"endColumn":  162
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6870,
+"startColumn":  24,
+"endLine":  6870,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6875,
+"startColumn":  24,
+"endLine":  6875,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6975,
+"startColumn":  24,
+"endLine":  6975,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6978,
+"startColumn":  24,
+"endLine":  6978,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7262,
+"startColumn":  38,
+"endLine":  7262,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7567,
+"startColumn":  20,
+"endLine":  7567,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8390,
+"startColumn":  24,
+"endLine":  8390,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8393,
+"startColumn":  24,
+"endLine":  8393,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8396,
+"startColumn":  24,
+"endLine":  8396,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8690,
+"startColumn":  12,
+"endLine":  8690,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8706,
+"startColumn":  12,
+"endLine":  8706,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8722,
+"startColumn":  12,
+"endLine":  8722,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8733,
+"startColumn":  12,
+"endLine":  8733,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8864,
+"startColumn":  16,
+"endLine":  8864,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('<>') instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8877,
+"startColumn":  16,
+"endLine":  8877,
+"endColumn":  58
+}
+}
+}
+]
+}
