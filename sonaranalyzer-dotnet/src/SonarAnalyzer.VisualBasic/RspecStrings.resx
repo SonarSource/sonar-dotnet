@@ -657,6 +657,36 @@
   <data name="S1479_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S1481_Category" xml:space="preserve">
+    <value>Minor Code Smell</value>
+  </data>
+  <data name="S1481_Description" xml:space="preserve">
+    <value>If a local variable is declared but not used, it is dead code and should be removed. Doing so will improve maintainability because developers will not wonder what the variable is used for.</value>
+  </data>
+  <data name="S1481_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S1481_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1481_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S1481_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S1481_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S1481_Tags" xml:space="preserve">
+    <value>unused</value>
+  </data>
+  <data name="S1481_Title" xml:space="preserve">
+    <value>Unused local variables should be removed</value>
+  </data>
+  <data name="S1481_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1541_Category" xml:space="preserve">
     <value>Critical Code Smell</value>
   </data>
