@@ -611,6 +611,11 @@ namespace NS
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_InternalStateCount_MaxReached()
         {
+            if (TestContextHelper.IsAzureDevOpsContext) // FIX ME: test throws OOM on Azure DevOps
+            {
+                return;
+            }
+
             var testInput = @"
 using System;
 
