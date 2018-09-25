@@ -2247,6 +2247,36 @@
   <data name="S3866_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3923_Category" xml:space="preserve">
+    <value>Major Bug</value>
+  </data>
+  <data name="S3923_Description" xml:space="preserve">
+    <value>Having all branches in a Select Case or If chain with the same implementation is an error. Either a copy-paste error was made and something different should be executed, or there shouldn't be a Select Case / If chain at all.</value>
+  </data>
+  <data name="S3923_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3923_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3923_RemediationCost" xml:space="preserve">
+    <value>15min</value>
+  </data>
+  <data name="S3923_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S3923_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3923_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S3923_Title" xml:space="preserve">
+    <value>All branches in a conditional structure should not have exactly the same implementation</value>
+  </data>
+  <data name="S3923_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3981_Category" xml:space="preserve">
     <value>Major Bug</value>
   </data>
