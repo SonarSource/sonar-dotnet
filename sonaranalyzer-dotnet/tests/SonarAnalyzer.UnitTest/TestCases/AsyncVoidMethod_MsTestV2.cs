@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests.Diagnostics
@@ -26,5 +27,30 @@ namespace Tests.Diagnostics
 
         [TestMethod]
         public async void MyTest() { } // Noncompliant
+    }
+
+    [TestClass]
+    public class MyOtherUnitTests
+    {
+        [AssemblyCleanup]
+        public static async Task AssemblyCleanup() { }
+
+        [AssemblyInitialize]
+        public static async Task AssemblyInitialize() { }
+
+        [ClassCleanup]
+        public static async Task ClassCleanup() { }
+
+        [ClassInitialize]
+        public static async Task ClassInitialize() { }
+
+        [TestCleanup]
+        public async Task TestCleanup() { }
+
+        [TestInitialize]
+        public async Task TestInitialize() { }
+
+        [TestMethod]
+        public async Task MyTest() { }
     }
 }
