@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -19,8 +19,10 @@
  */
 
 extern alias csharp;
+extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
+using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,17 +31,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void VariableUnused()
+        public void VariableUnused_CS()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\VariableUnused.cs", new VariableUnused());
+            Verifier.VerifyAnalyzer(@"TestCases\VariableUnused.cs", new CSharp.VariableUnused());
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void VariableUnused_VB()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\VariableUnused.vb",
-                new SonarAnalyzer.Rules.VisualBasic.VariableUnused());
+            Verifier.VerifyAnalyzer(@"TestCases\VariableUnused.vb", new VisualBasic.VariableUnused());
         }
     }
 }

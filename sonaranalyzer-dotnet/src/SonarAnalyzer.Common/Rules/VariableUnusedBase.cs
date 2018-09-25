@@ -18,16 +18,59 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules
 {
     public abstract class VariableUnusedBase : SonarDiagnosticAnalyzer
     {
-        protected const string DiagnosticId = "S1481";
-        protected const string MessageFormat = "";
+        internal const string DiagnosticId = "S1481";
+        protected const string MessageFormat = "Remove the unused local variable '{0}'.";
+
+        protected abstract class UnusedLocalsCollectorBase<TLocalDeclaration>
+            where TLocalDeclaration : SyntaxNode
+        {
+            private readonly ISet<ISymbol> declaredLocals = new HashSet<ISymbol>();
+            private readonly ISet<ISymbol> usedLocals = new HashSet<ISymbol>();
+
+            protected abstract IEnumerable<SyntaxNode> GetDeclaredVariables(TLocalDeclaration localDeclaration);
+
+            public void CollectDeclarations(SyntaxNodeAnalysisContext c) =>
+                declaredLocals.UnionWith(
+                    GetDeclaredVariables((TLocalDeclaration)c.Node)
+                        .Select(variable => c.SemanticModel.GetDeclaredSymbol(variable))
+                        .WhereNotNull());
+
+            public void CollectUsages(SyntaxNodeAnalysisContext c) =>
+                usedLocals.UnionWith(GetUsedSymbols(c.Node, c.SemanticModel));
+
+            public Action<CodeBlockAnalysisContext> GetReportUnusedVariablesAction(DiagnosticDescriptor rule) =>
+                c =>
+                {
+                    foreach (var unused in declaredLocals.Except(usedLocals))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, unused.Locations.First(), unused.Name));
+                    }
+                };
+        }
+
+        internal static IEnumerable<ISymbol> GetUsedSymbols(SyntaxNode node, SemanticModel semanticModel)
+        {
+            var symbolInfo = semanticModel.GetSymbolInfo(node);
+            if (symbolInfo.Symbol != null)
+            {
+                yield return symbolInfo.Symbol;
+            }
+
+            foreach (var candidate in symbolInfo.CandidateSymbols.WhereNotNull())
+            {
+                yield return candidate;
+            }
+        }
     }
 }

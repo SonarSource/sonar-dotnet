@@ -17,7 +17,7 @@ namespace Tests.Diagnostics
 
             using (var x = new StreamReader("")) // Compliant
             {
-                var v = 5; // Noncompliant {{Remove this unused 'v' local variable.}}
+                var v = 5; // Noncompliant {{Remove the unused local variable 'v'.}}
             }
 
             int a; // Noncompliant
