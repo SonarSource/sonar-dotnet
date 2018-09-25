@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MyLibrary
 {
@@ -70,5 +71,17 @@ namespace MyLibrary
     {
         int Current { get; }
         bool MoveNext();
+    }
+
+    public class AsyncTests
+    {
+        public async void GetResultAsync() // Compliant - use async
+        {
+            await Task.FromResult(true).ConfigureAwait(false);
+        }
+
+        public Task GetSomething1() => Task.FromResult(true); // Compliant - return type is Task
+        public Task<bool> GetSomething2() => Task.FromResult(true); // Compliant - return type is Task<T>
+        public ValueTask<bool> GetSomething3() => Task.FromResult(true); // Compliant - return type is ValueTask<T>
     }
 }
