@@ -44,5 +44,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CatchRethrow(),
                 new CatchRethrowCodeFixProvider());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CatchRethrow_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\CatchRethrow.vb",
+                new SonarAnalyzer.Rules.VisualBasic.CatchRethrow());
+        }
     }
 }
+

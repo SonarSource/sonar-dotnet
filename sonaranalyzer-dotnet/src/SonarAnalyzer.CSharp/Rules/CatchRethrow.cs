@@ -18,10 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -34,90 +31,26 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class CatchRethrow : SonarDiagnosticAnalyzer
+    public sealed class CatchRethrow : CatchRethrowBase<CatchClauseSyntax>
     {
-        internal const string DiagnosticId = "S2737";
-        private const string MessageFormat = @"Add logic to this catch clause or eliminate it and rethrow the exception automatically.";
-
         private static readonly BlockSyntax ThrowBlock = SyntaxFactory.Block(SyntaxFactory.ThrowStatement());
 
-        private static readonly DiagnosticDescriptor rule =
+        protected override DiagnosticDescriptor Rule { get; } =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        protected override bool ContainsOnlyThrow(CatchClauseSyntax currentCatch) =>
+            EquivalenceChecker.AreEquivalent(currentCatch.Block, ThrowBlock);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override IReadOnlyList<CatchClauseSyntax> GetCatches(SyntaxNode syntaxNode) =>
+            ((TryStatementSyntax)syntaxNode).Catches;
+
+        protected override SyntaxNode GetDeclarationType(CatchClauseSyntax catchClause) =>
+            catchClause.Declaration?.Type;
+
+        protected override bool HasFilter(CatchClauseSyntax catchClause) =>
+            catchClause.Filter != null;
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnInvalidCatch, SyntaxKind.TryStatement);
-        }
-
-        private void RaiseOnInvalidCatch(SyntaxNodeAnalysisContext context)
-        {
-            var tryStatement = (TryStatementSyntax)context.Node;
-            var catches = tryStatement.Catches.ToList();
-            var caughtExceptionTypes = new Lazy<List<INamedTypeSymbol>>(() =>
-                ComputeExceptionTypesIfNeeded(catches, context.SemanticModel));
-            var redundantCatches = new HashSet<CatchClauseSyntax>();
-            var isIntermediate = false;
-
-            for (var i = catches.Count - 1; i >= 0; i--)
-            {
-                var currentCatch = catches[i];
-                if (!EquivalenceChecker.AreEquivalent(currentCatch.Block, ThrowBlock))
-                {
-                    isIntermediate = true;
-                    continue;
-                }
-
-                if (!isIntermediate)
-                {
-                    redundantCatches.Add(currentCatch);
-                    continue;
-                }
-
-                if (currentCatch.Filter != null)
-                {
-                    continue;
-                }
-
-                if (!IsMoreSpecificTypeThanANotRedundantCatch(i, catches, caughtExceptionTypes.Value, redundantCatches))
-                {
-                    redundantCatches.Add(currentCatch);
-                }
-            }
-
-            foreach (var redundantCatch in redundantCatches)
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, redundantCatch.GetLocation()));
-            }
-        }
-
-        private static bool IsMoreSpecificTypeThanANotRedundantCatch(int catchIndex, List<CatchClauseSyntax> catches,
-            List<INamedTypeSymbol> caughtExceptionTypes, ISet<CatchClauseSyntax> redundantCatches)
-        {
-            var currentType = caughtExceptionTypes[catchIndex];
-            for (var i = catchIndex + 1; i < caughtExceptionTypes.Count; i++)
-            {
-                var followingType = caughtExceptionTypes[i];
-
-                if (followingType == null ||
-                    currentType.DerivesOrImplements(followingType))
-                {
-                    return !redundantCatches.Contains(catches[i]);
-                }
-            }
-            return false;
-        }
-
-        private static List<INamedTypeSymbol> ComputeExceptionTypesIfNeeded(IEnumerable<CatchClauseSyntax> catches,
-            SemanticModel semanticModel)
-        {
-            return catches
-                .Select(clause =>
-                    clause.Declaration?.Type != null
-                        ? semanticModel.GetTypeInfo(clause.Declaration.Type).Type as INamedTypeSymbol
-                        : null)
-                .ToList();
-        }
     }
 }
