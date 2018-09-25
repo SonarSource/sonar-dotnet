@@ -139,7 +139,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 catch (Exception ex) when
                     (ex is TooManyInternalStatesException ||
                     ex is OutOfMemoryException ||
-                    (ex is AggregateException ae && ae.Flatten().InnerException is OutOfMemoryException))
+                    (ex is AggregateException ae && ae.Flatten().InnerExceptions.OfType<OutOfMemoryException>().Any()))
                 {
                     OnMaxInternalStateCountReached();
                     return;
