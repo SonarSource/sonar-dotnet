@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3358",
+"message":  "Extract this nested If operator into independent If...Then...Else statements.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1229,
+"startColumn":  157,
+"endLine":  1229,
+"endColumn":  272
+}
+}
+}
+]
+}
