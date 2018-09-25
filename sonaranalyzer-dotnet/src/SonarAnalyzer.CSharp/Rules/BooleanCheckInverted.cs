@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -52,12 +53,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 { SyntaxKind.ExclamationEqualsToken, "==" },
             };
 
-        protected override DiagnosticDescriptor Rule { get; } =
+        private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
+            ImmutableArray.Create(rule);
+            
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
-                GetAnalysisAction(),
+                GetAnalysisAction(rule),
                 SyntaxKind.GreaterThanExpression,
                 SyntaxKind.GreaterThanOrEqualExpression,
                 SyntaxKind.LessThanExpression,
