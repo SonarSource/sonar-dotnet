@@ -72,7 +72,9 @@ namespace SonarAnalyzer.Rules.CSharp
             if (method.IsConstructor() ||
                 method.MethodKind == MethodKind.PropertyGet ||
                 method.IsOverride ||
-                method.GetInterfaceMember() != null)
+                method.GetInterfaceMember() != null ||
+                method.IsAsync ||
+                method.ReturnType.OriginalDefinition.IsAny(KnownType.SystemTasks))
             {
                 return false;
             }

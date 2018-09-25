@@ -322,6 +322,12 @@ namespace SonarAnalyzer.Helpers
             new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>"),
             new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>")
         };
+        internal static readonly ISet<KnownType> SystemTasks = new HashSet<KnownType>
+        {
+            System_Threading_Tasks_Task,
+            System_Threading_Tasks_Task_T,
+            System_Threading_Tasks_ValueTask_TResult
+        };
         internal static readonly KnownType Sytem_Resources_ResourceManager = new KnownType("System.Resources.ResourceManager");
         internal static readonly KnownType UnityEditor_AssetModificationProcessor = new KnownType("UnityEditor.AssetModificationProcessor");
         internal static readonly KnownType UnityEditor_AssetPostprocessor = new KnownType("UnityEditor.AssetPostprocessor");

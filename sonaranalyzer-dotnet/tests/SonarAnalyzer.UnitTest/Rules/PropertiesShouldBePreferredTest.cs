@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +32,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void PropertiesShouldBePreferred()
         {
             Verifier.VerifyAnalyzer(@"TestCases\PropertiesShouldBePreferred.cs",
-                new PropertiesShouldBePreferred());
+                new PropertiesShouldBePreferred(),
+                additionalReferences: NuGetMetadataReference.SystemThreadingTasksExtensions("4.0.0"));
         }
     }
 }
