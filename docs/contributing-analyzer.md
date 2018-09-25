@@ -16,6 +16,12 @@ All C# and VB .NET analyzers present in SonarLint for Visual Studio, in the Sona
 1. [.NET Core SDK 2.1.402](https://www.microsoft.com/net/download/core) (the current previews are: [Windows x64 installer](https://dotnetcli.blob.core.windows.net/dotnet/Sdk/2.1.300-rtm-008866/dotnet-sdk-2.1.300-rtm-008866-win-x64.exe), [Windows x86 installer](https://dotnetcli.blob.core.windows.net/dotnet/Sdk/2.1.300-rtm-008866/dotnet-sdk-2.1.300-rtm-008866-win-x86.exe))
 1. Open `SonarAnalyzer.sln` in the `sonaranalyzer-dotnet` subfolder
 
+The following environment variables must be set:
+- **MSBUILD_PATH** - path to MSBuild.exe from the Visual Studio installation folder
+- **ORCHESTRATOR_CONFIG_URL** - path to orchestrator.properties (for integration tests)
+- **rule_api_path** - path to folder containing the rule api jar
+- **Path** - the **Path** must contain the path to the dotnet core installation folder
+
 ## Running Tests
 
 ### Unit Tests
