@@ -2097,6 +2097,36 @@
   <data name="S2951_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3358_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S3358_Description" xml:space="preserve">
+    <value>Just because you can do something, doesn't mean you should, and that's the case with nested ternary operations. Nesting ternary operators results in the kind of code that may seem clear as day when you write it, but six months later will leave maintainers (or worse - future you) scratching their heads and cursing.</value>
+  </data>
+  <data name="S3358_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3358_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3358_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S3358_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S3358_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3358_Tags" xml:space="preserve">
+    <value>confusing</value>
+  </data>
+  <data name="S3358_Title" xml:space="preserve">
+    <value>If operators should not be nested</value>
+  </data>
+  <data name="S3358_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3385_Category" xml:space="preserve">
     <value>Major Code Smell</value>
   </data>
