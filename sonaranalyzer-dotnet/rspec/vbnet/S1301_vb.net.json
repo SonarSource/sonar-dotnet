@@ -1,5 +1,5 @@
 {
-  "title": "\"switch\" statements should have at least 3 \"case\" clauses",
+  "title": "\"Select\" statements should have at least 3 \"Case\" clauses",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

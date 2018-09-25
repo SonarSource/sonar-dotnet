@@ -544,7 +544,7 @@
     <value>switch statements are useful when there are many different cases depending on the value of the same expression.</value>
   </data>
   <data name="S1301_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S1301_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -562,7 +562,7 @@
     <value>misra,bad-practice</value>
   </data>
   <data name="S1301_Title" xml:space="preserve">
-    <value>"switch" statements should have at least 3 "case" clauses</value>
+    <value>"Select" statements should have at least 3 "Case" clauses</value>
   </data>
   <data name="S1301_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
