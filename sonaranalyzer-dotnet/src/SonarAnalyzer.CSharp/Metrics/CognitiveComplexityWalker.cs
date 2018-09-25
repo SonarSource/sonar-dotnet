@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -59,7 +60,10 @@ namespace SonarAnalyzer.Metrics.CSharp
             {
                 Visit(node);
             }
-            catch (Exception ex) when (ex is InsufficientExecutionStackException || ex is OutOfMemoryException)
+            catch (Exception ex) when
+                (ex is InsufficientExecutionStackException ||
+                ex is OutOfMemoryException ||
+                (ex is AggregateException ae && ae.Flatten().InnerExceptions.OfType<OutOfMemoryException>().Any()))
             {
                 // TODO: trace this exception
 
