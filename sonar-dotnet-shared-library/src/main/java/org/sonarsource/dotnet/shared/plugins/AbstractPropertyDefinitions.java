@@ -83,25 +83,14 @@ public abstract class AbstractPropertyDefinitions {
 
     if (runtime.getApiVersion().isGreaterThanOrEqual(Version.create(7, 4))) {
       result.add(
-        PropertyDefinition.builder(getImportAllIssuesProperty(languageKey))
+        PropertyDefinition.builder(getIgnoreIssuesProperty(languageKey))
           .type(PropertyType.BOOLEAN)
           .category(EXTERNAL_ANALYZERS_CATEGORY)
           .subCategory(languageName)
           .index(0)
           .defaultValue("false")
-          .name("External Roslyn analyzers")
-          .description("Import issues reported by external Roslyn analyzers")
-          .onQualifiers(Qualifiers.PROJECT)
-          .build());
-      result.add(
-        PropertyDefinition.builder(getCodeSmellCategoriesProperty(languageKey))
-          .type(PropertyType.STRING)
-          .multiValues(true)
-          .category(EXTERNAL_ANALYZERS_CATEGORY)
-          .subCategory(languageName)
-          .index(1)
-          .name("Rule Categories associated to Code Smells")
-          .description("List of rule categories used by external analyzers and associated to the Code Smell type.")
+          .name("Ignore issues from external Roslyn analyzers")
+          .description("If set to 'true', issues reported by external Roslyn analyzers won't be imported.")
           .onQualifiers(Qualifiers.PROJECT)
           .build());
       result.add(
@@ -110,9 +99,9 @@ public abstract class AbstractPropertyDefinitions {
           .multiValues(true)
           .category(EXTERNAL_ANALYZERS_CATEGORY)
           .subCategory(languageName)
-          .index(2)
-          .name("Rule Categories associated to Bugs")
-          .description("List of rule categories used by external analyzers and associated to the Bug type.")
+          .index(1)
+          .name("Rule categories associated with Bugs")
+          .description("External rule categories to be treated as Bugs.")
           .onQualifiers(Qualifiers.PROJECT)
           .build());
       result.add(
@@ -121,9 +110,20 @@ public abstract class AbstractPropertyDefinitions {
           .multiValues(true)
           .category(EXTERNAL_ANALYZERS_CATEGORY)
           .subCategory(languageName)
+          .index(2)
+          .name("Rule categories associated with Vulnerabilities")
+          .description("External rule categories to be treated as Vulnerabilities.")
+          .onQualifiers(Qualifiers.PROJECT)
+          .build());
+      result.add(
+        PropertyDefinition.builder(getCodeSmellCategoriesProperty(languageKey))
+          .type(PropertyType.STRING)
+          .multiValues(true)
+          .category(EXTERNAL_ANALYZERS_CATEGORY)
+          .subCategory(languageName)
           .index(3)
-          .name("Rule Categories associated to Vulnerabilities")
-          .description("List of rule categories used by external analyzers and associated to the Vulnerability type.")
+          .name("Rule categories associated with Code Smells")
+          .description("External rule categories to be treated as Code Smells. By default, external issues are Code Smells, or Bugs in the case the severity is error.")
           .onQualifiers(Qualifiers.PROJECT)
           .build());
     }
@@ -147,8 +147,8 @@ public abstract class AbstractPropertyDefinitions {
     return PROP_PREFIX + languageKey + ".analyzer.projectOutPaths";
   }
 
-  public static String getImportAllIssuesProperty(String languageKey) {
-    return PROP_PREFIX + languageKey + ".roslyn.importAllIssues";
+  public static String getIgnoreIssuesProperty(String languageKey) {
+    return PROP_PREFIX + languageKey + ".roslyn.ignoreIssues";
   }
 
   public static String getBugCategoriesProperty(String languageKey) {

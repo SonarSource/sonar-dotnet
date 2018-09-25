@@ -180,7 +180,7 @@ public class AbstractConfigurationTest {
   public void externalIssueIsFalseByDefault() throws IOException {
     config = new AbstractConfiguration(settings.asConfig(), "cs") {
     };
-    assertThat(config.importAllIssues()).isFalse();
+    assertThat(config.ignoreThirdPartyIssues()).isFalse();
   }
 
   @Test
@@ -188,6 +188,6 @@ public class AbstractConfigurationTest {
     settings.setProperty("sonar.cs.roslyn.importAllIssues", "false");
     config = new AbstractConfiguration(settings.asConfig(), "cs") {
     };
-    assertThat(config.importAllIssues()).isFalse();
+    assertThat(config.ignoreThirdPartyIssues()).isFalse();
   }
 }

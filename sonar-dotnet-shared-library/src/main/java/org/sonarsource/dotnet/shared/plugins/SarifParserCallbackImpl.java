@@ -53,18 +53,18 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   private final SensorContext context;
   private final Map<String, String> repositoryKeyByRoslynRuleKey;
   private final Set<Issue> savedIssues = new HashSet<>();
-  private final boolean importAllIssues;
+  private final boolean ignoreThirdPartyIssues;
   private final Set<String> bugCategories;
   private final Set<String> codeSmellCategories;
   private final Set<String> vulnerabilityCategories;
   private final Map<String, String> defaultLevelByRuleId = new HashMap<>();
   private final Map<String, RuleType> ruleTypeByRuleId = new HashMap<>();
 
-  public SarifParserCallbackImpl(SensorContext context, Map<String, String> repositoryKeyByRoslynRuleKey, boolean importAllIssues, Set<String> bugCategories,
+  public SarifParserCallbackImpl(SensorContext context, Map<String, String> repositoryKeyByRoslynRuleKey, boolean ignoreThirdPartyIssues, Set<String> bugCategories,
     Set<String> codeSmellCategories, Set<String> vulnerabilityCategories) {
     this.context = context;
     this.repositoryKeyByRoslynRuleKey = repositoryKeyByRoslynRuleKey;
-    this.importAllIssues = importAllIssues;
+    this.ignoreThirdPartyIssues = ignoreThirdPartyIssues;
     this.bugCategories = bugCategories;
     this.codeSmellCategories = codeSmellCategories;
     this.vulnerabilityCategories = vulnerabilityCategories;
@@ -111,7 +111,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
     if (repositoryKey != null) {
       createFileLevelIssue(ruleId, message, repositoryKey, inputFile);
-    } else if (importAllIssues) {
+    } else if (!ignoreThirdPartyIssues) {
       createFileLevelExternalIssue(ruleId, level, message, inputFile);
     }
   }
@@ -152,7 +152,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
     if (repositoryKey != null) {
       createIssue(inputFile, ruleId, primaryLocation, secondaryLocations, repositoryKey);
-    } else if (importAllIssues) {
+    } else if (!ignoreThirdPartyIssues) {
       createExternalIssue(inputFile, ruleId, level, primaryLocation, secondaryLocations);
     }
   }
@@ -236,7 +236,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
 
   @Override
   public void onRule(String ruleId, @Nullable String shortDescription, @Nullable String fullDescription, String defaultLevel, @Nullable String category) {
-    if (!importAllIssues || repositoryKeyByRoslynRuleKey.containsKey(ruleId)) {
+    if (ignoreThirdPartyIssues || repositoryKeyByRoslynRuleKey.containsKey(ruleId)) {
       // This is not an external rule
       return;
     }

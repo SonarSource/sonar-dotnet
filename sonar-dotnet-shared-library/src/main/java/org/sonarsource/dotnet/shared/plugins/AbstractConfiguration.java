@@ -169,8 +169,8 @@ public abstract class AbstractConfiguration {
     }
   }
 
-  public boolean importAllIssues() {
-    return configuration.getBoolean(AbstractPropertyDefinitions.getImportAllIssuesProperty(languageKey)).orElse(false);
+  public boolean ignoreThirdPartyIssues() {
+    return configuration.getBoolean(AbstractPropertyDefinitions.getIgnoreIssuesProperty(languageKey)).orElse(false);
   }
 
   public Set<String> bugCategories() {

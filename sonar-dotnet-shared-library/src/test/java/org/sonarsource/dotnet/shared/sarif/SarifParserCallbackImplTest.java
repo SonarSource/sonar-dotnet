@@ -64,7 +64,7 @@ public class SarifParserCallbackImplTest {
       .setContents("My file\ncontents\nwith some\n lines")
       .build());
 
-    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
   }
 
   @Test
@@ -91,7 +91,7 @@ public class SarifParserCallbackImplTest {
     assertThat(ctx.allIssues()).isEmpty();
     assertThat(ctx.allExternalIssues()).isEmpty();
 
-    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
     callback.onFileIssue("rule45", "warning", absoluteFilePath, "msg");
 
     assertThat(ctx.allIssues()).isEmpty();
@@ -135,7 +135,7 @@ public class SarifParserCallbackImplTest {
     assertThat(ctx.allIssues()).isEmpty();
     assertThat(ctx.allExternalIssues()).isEmpty();
 
-    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
 
     callback.onIssue("rule45", "warning", createLocation("file1", 2, 3), Collections.emptyList());
 
@@ -195,7 +195,7 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_register_adhoc_rule() {
-    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
     callback.onRule("S12345", "My rule", "Rule description", "Error", "Foo");
 
     assertThat(ctx.allAdHocRules())
@@ -205,7 +205,7 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_map_severity_name_and_description() {
-    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
     callback.onRule("S1", "My rule1", "Rule description", "Error", "Foo");
     callback.onRule("S2", null, null, "Warning", "Foo");
     callback.onRule("S3", "My rule3", null, "Info", "Foo");
@@ -222,7 +222,7 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_fallback_on_rule_severity() {
-    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
     callback.onRule("rule45", "My rule", "Rule description", "Note", "Foo");
 
     callback.onIssue("rule45", null, createLocation("file1", 2, 3), Collections.emptyList());
@@ -232,7 +232,7 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_fallback_on_major_severity() {
-    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
 
     callback.onIssue("rule45", null, createLocation("file1", 2, 3), Collections.emptyList());
 
@@ -241,7 +241,7 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_map_rule_type() {
-    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, new HashSet<>(asList("bug1", "bug2")), new HashSet<>(asList("cs1", "cs2")),
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, new HashSet<>(asList("bug1", "bug2")), new HashSet<>(asList("cs1", "cs2")),
       new HashSet<>(asList("vul1", "vul2")));
 
     callback.onRule("S1", "My rule", "Rule description", "Info", "bug1");
