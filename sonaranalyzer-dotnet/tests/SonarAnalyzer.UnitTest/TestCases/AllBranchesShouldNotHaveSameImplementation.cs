@@ -63,7 +63,7 @@ namespace Tests.Diagnostics
 
         public void SwitchCases()
         {
-            switch (i) // Noncompliant
+            switch (i) // Noncompliant {{Remove this 'switch' or edit its sections so that they are not all the same.}}
             {
                 case 1:
                     DoSomething();

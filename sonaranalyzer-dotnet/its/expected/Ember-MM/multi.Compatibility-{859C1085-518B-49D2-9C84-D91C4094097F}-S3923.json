@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3923",
+"message":  "Remove this 'If' or edit its blocks so that they are not all the same.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  48,
+"startColumn":  4,
+"endLine":  52,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3923",
+"message":  "Remove this 'If' or edit its blocks so that they are not all the same.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  55,
+"startColumn":  4,
+"endLine":  59,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3923",
+"message":  "Remove this 'If' or edit its blocks so that they are not all the same.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  32,
+"startColumn":  4,
+"endLine":  36,
+"endColumn":  10
+}
+}
+}
+]
+}

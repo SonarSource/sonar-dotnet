@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3923",
+"message":  "Remove this 'If' or edit its blocks so that they are not all the same.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"region":  {
+"startLine":  204,
+"startColumn":  17,
+"endLine":  206,
+"endColumn":  23
+}
+}
+}
+]
+}
