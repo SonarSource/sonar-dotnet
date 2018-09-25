@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Metrics.CSharp
             catch (Exception ex) when
                 (ex is InsufficientExecutionStackException ||
                 ex is OutOfMemoryException ||
-                (ex is AggregateException ae && ae.InnerException is OutOfMemoryException))
+                (ex is AggregateException ae && ae.Flatten().InnerException is OutOfMemoryException))
             {
                 // TODO: trace this exception
 
