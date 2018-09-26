@@ -73,7 +73,7 @@ namespace SonarAnalyzer.UnitTest
             var matchingDlls = Directory.GetFiles(packageDirectory, "*.dll", SearchOption.AllDirectories)
                 .Select(path => new FileInfo(path))
                 .GroupBy(file => file.Directory.Name)
-                .Where(group => allowedNugetLibDirectories.Any(y => group.Key.StartsWith(y)))
+                .Where(group => allowedNugetLibDirectories.Any(y => group.Key.StartsWith(y)) || group.Key.EndsWith(".dll"))
                 .OrderByDescending(group => group.Key)
                 .First();
 
@@ -216,6 +216,9 @@ namespace SonarAnalyzer.UnitTest
 
         public static MetadataReference[] MicrosoftAspNetMvc(string packageVersion) =>
             Create("Microsoft.AspNet.Mvc", packageVersion);
+
+        public static MetadataReference[] MicrosoftVisualStudioQualityToolsUnitTestFramework =>
+            Create("VS.QualityTools.UnitTestFramework", "15.0.27323.2");
 
         public static MetadataReference[] MSTestTestFrameworkV1 =>
             Create("MSTest.TestFramework", "1.1.11");

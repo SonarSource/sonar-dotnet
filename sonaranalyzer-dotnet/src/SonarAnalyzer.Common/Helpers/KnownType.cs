@@ -42,8 +42,12 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.DataTestMethodAttribute");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_WorkItemAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.WorkItemAttribute");
-        internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyInitializeAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.AssemblyInitializeAttribute");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyCleanupAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.AssemblyCleanupAttribute");
+        internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyInitializeAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.AssemblyInitializeAttribute");
+        internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_ClassCleanupAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute");
+        internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_ClassInitializeAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute");
+        internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_TestCleanupAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute");
+        internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_TestInitializeAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute");
         internal static readonly KnownType NUnit_Framework_Assert = new KnownType("NUnit.Framework.Assert");
         internal static readonly KnownType NUnit_Framework_ExpectedExceptionAttribute = new KnownType("NUnit.Framework.ExpectedExceptionAttribute");
         internal static readonly KnownType NUnit_Framework_IgnoreAttribute = new KnownType("NUnit.Framework.IgnoreAttribute");

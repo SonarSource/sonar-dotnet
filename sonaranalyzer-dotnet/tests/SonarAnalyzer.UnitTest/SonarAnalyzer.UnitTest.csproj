@@ -209,7 +209,7 @@
       <DependentUpon>SomeResources.resx</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="**\*.cs" Exclude="**\obj\**\*;**\bin\**\*;**\*.Designer.cs;TestCases\**\*.cs;TestCasesForRuleFailure\**\*.*" />
+     <Compile Include="**\*.cs" Exclude="**\obj\**\*;**\bin\**\*;**\*.Designer.cs;TestCases\**\*.cs;TestCasesForRuleFailure\**\*.*" />
     <None Include="TestCases\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
