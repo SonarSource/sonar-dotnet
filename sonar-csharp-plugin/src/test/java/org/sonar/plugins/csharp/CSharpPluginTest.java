@@ -23,8 +23,11 @@ import com.google.common.collect.ImmutableList;
 import java.util.List;
 import org.junit.Test;
 import org.sonar.api.Plugin;
+import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
+import org.sonar.api.internal.SonarRuntimeImpl;
+import org.sonar.api.utils.Version;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
@@ -33,13 +36,14 @@ import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 public class CSharpPluginTest {
 
   @Test
   public void getExtensions() {
-    Plugin.Context context = new Plugin.Context(mock(SonarRuntime.class));
+    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(7, 4), SonarQubeSide.SCANNER);
+
+    Plugin.Context context = new Plugin.Context(sonarRuntime);
     new CSharpPlugin().define(context);
 
     List extensions = context.getExtensions();
@@ -69,7 +73,7 @@ public class CSharpPluginTest {
         + CSharpCodeCoverageProvider.extensions().size()
         + CSharpUnitTestResultsProvider.extensions().size()
         + RoslynProfileExporter.sonarLintRepositoryProperties().size()
-        + new CSharpPropertyDefinitions().create().size());
+        + new CSharpPropertyDefinitions(sonarRuntime).create().size());
   }
 
   private static List nonProperties(List extensions) {

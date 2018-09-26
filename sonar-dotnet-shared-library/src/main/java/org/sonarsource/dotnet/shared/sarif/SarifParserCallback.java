@@ -20,13 +20,16 @@
 package org.sonarsource.dotnet.shared.sarif;
 
 import java.util.Collection;
+import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.InputModule;
 
 public interface SarifParserCallback {
 
-  void onProjectIssue(String ruleId, InputModule inputModule, String message);
+  void onProjectIssue(String ruleId, @Nullable String level, InputModule inputModule, String message);
 
-  void onFileIssue(String ruleId, String absolutePath, String message);
+  void onFileIssue(String ruleId, @Nullable String level, String absolutePath, String message);
 
-  void onIssue(String ruleId, Location primaryLocation, Collection<Location> secondaryLocations);
+  void onIssue(String ruleId, @Nullable String level, Location primaryLocation, Collection<Location> secondaryLocations);
+
+  void onRule(String ruleId, @Nullable String shortDescription, @Nullable String fullDescription, String defaultLevel, @Nullable String category);
 }

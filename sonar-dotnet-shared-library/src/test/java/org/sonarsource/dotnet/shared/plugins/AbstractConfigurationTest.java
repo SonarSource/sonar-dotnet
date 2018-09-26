@@ -26,8 +26,11 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.sonar.api.SonarQubeSide;
 import org.sonar.api.config.PropertyDefinitions;
 import org.sonar.api.config.internal.MapSettings;
+import org.sonar.api.internal.SonarRuntimeImpl;
+import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
@@ -47,7 +50,7 @@ public class AbstractConfigurationTest {
   @Before
   public void setUp() {
     workDir = temp.getRoot().toPath();
-    AbstractPropertyDefinitions definitions = new AbstractPropertyDefinitions("cs", "C#", ".cs") {
+    AbstractPropertyDefinitions definitions = new AbstractPropertyDefinitions("cs", "C#", ".cs", SonarRuntimeImpl.forSonarQube(Version.create(7, 4), SonarQubeSide.SERVER)) {
     };
     settings = new MapSettings(new PropertyDefinitions(definitions.create()));
   }
@@ -171,5 +174,20 @@ public class AbstractConfigurationTest {
     assertThat(config.protobufReportPathsSilent()).isNotEmpty();
     assertThat(config.roslynReportPaths()).isEmpty();
     assertThat(config.protobufReportPathsSilent()).containsOnly(workDir.resolve("report").resolve("output-cs"));
+  }
+
+  @Test
+  public void externalIssueIsFalseByDefault() throws IOException {
+    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    };
+    assertThat(config.ignoreThirdPartyIssues()).isFalse();
+  }
+
+  @Test
+  public void optOutExternalIssues() throws IOException {
+    settings.setProperty("sonar.cs.roslyn.importAllIssues", "false");
+    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    };
+    assertThat(config.ignoreThirdPartyIssues()).isFalse();
   }
 }

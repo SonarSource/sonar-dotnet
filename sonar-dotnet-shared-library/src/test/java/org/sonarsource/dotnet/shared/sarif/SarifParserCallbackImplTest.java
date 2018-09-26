@@ -21,6 +21,7 @@ package org.sonarsource.dotnet.shared.sarif;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import org.junit.Before;
@@ -29,12 +30,19 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonar.api.batch.rule.Severity;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.batch.sensor.issue.ExternalIssue;
 import org.sonar.api.batch.sensor.issue.Issue.Flow;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
+import org.sonar.api.batch.sensor.rule.AdHocRule;
+import org.sonar.api.rules.RuleType;
 import org.sonarsource.dotnet.shared.plugins.SarifParserCallbackImpl;
 
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptySet;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.groups.Tuple.tuple;
 
 public class SarifParserCallbackImplTest {
   @Rule
@@ -56,12 +64,12 @@ public class SarifParserCallbackImplTest {
       .setContents("My file\ncontents\nwith some\n lines")
       .build());
 
-    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey);
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
   }
 
   @Test
   public void should_add_project_issues() {
-    callback.onProjectIssue("rule1", ctx.module(), "msg");
+    callback.onProjectIssue("rule1", "warning", ctx.module(), "msg");
     assertThat(ctx.allIssues()).hasSize(1);
     assertThat(ctx.allIssues().iterator().next().primaryLocation().inputComponent().key()).isEqualTo("projectKey");
     assertThat(ctx.allIssues().iterator().next().ruleKey().rule()).isEqualTo("rule1");
@@ -70,43 +78,74 @@ public class SarifParserCallbackImplTest {
   @Test
   public void should_add_file_issues() {
     String absoluteFilePath = temp.getRoot().toPath().resolve("file1").toString();
-    callback.onFileIssue("rule1", absoluteFilePath, "msg");
+    callback.onFileIssue("rule1", "warning", absoluteFilePath, "msg");
     assertThat(ctx.allIssues()).hasSize(1);
     assertThat(ctx.allIssues().iterator().next().primaryLocation().inputComponent().key()).isEqualTo("module1:file1");
     assertThat(ctx.allIssues().iterator().next().ruleKey().rule()).isEqualTo("rule1");
   }
 
   @Test
-  public void should_ignore_file_issue_with_unknown_rule_key() {
+  public void should_create_external_file_issue_for_unknown_rule_key() {
     String absoluteFilePath = temp.getRoot().toPath().resolve("file1").toString();
-    callback.onFileIssue("rule45", absoluteFilePath, "msg");
+    callback.onFileIssue("rule45", "warning", absoluteFilePath, "msg");
     assertThat(ctx.allIssues()).isEmpty();
+    assertThat(ctx.allExternalIssues()).isEmpty();
+
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
+    callback.onFileIssue("rule45", "warning", absoluteFilePath, "msg");
+
+    assertThat(ctx.allIssues()).isEmpty();
+    assertThat(ctx.allExternalIssues()).hasSize(1);
+
   }
 
   @Test
   public void should_ignore_file_issue_with_unknown_file() {
-    callback.onFileIssue("rule1", "file-unknown", "msg");
+    callback.onFileIssue("rule1", "warning", "file-unknown", "msg");
     assertThat(ctx.allIssues()).isEmpty();
   }
 
   @Test
   public void should_ignore_project_issue_with_unknown_rule_key() {
-    callback.onProjectIssue("rule45", ctx.module(), "msg");
+    callback.onProjectIssue("rule45", "warning", ctx.module(), "msg");
     assertThat(ctx.allIssues()).isEmpty();
+    assertThat(ctx.allExternalIssues()).isEmpty();
+
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
+
+    callback.onProjectIssue("rule45", "warning", ctx.module(), "msg");
+
+    assertThat(ctx.allIssues()).isEmpty();
+    assertThat(ctx.allExternalIssues()).isEmpty();
   }
 
   @Test
   public void should_add_issues() {
-    callback.onIssue("rule1", createLocation("file1", 2, 3), Collections.emptyList());
-    callback.onIssue("rule2", createLocation("file1", 2, 3), Collections.emptyList());
+    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.emptyList());
+    callback.onIssue("rule2", "warning", createLocation("file1", 2, 3), Collections.emptyList());
 
     assertThat(ctx.allIssues()).extracting("ruleKey").extracting("rule")
       .containsOnly("rule1", "rule2");
   }
 
   @Test
+  public void should_create_external_issue_for_unknown_rule_key() {
+    callback.onIssue("rule45", "warning", createLocation("file1", 2, 3), Collections.emptyList());
+
+    assertThat(ctx.allIssues()).isEmpty();
+    assertThat(ctx.allExternalIssues()).isEmpty();
+
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
+
+    callback.onIssue("rule45", "warning", createLocation("file1", 2, 3), Collections.emptyList());
+
+    assertThat(ctx.allIssues()).isEmpty();
+    assertThat(ctx.allExternalIssues()).hasSize(1);
+  }
+
+  @Test
   public void should_add_issue_with_secondary_location() {
-    callback.onIssue("rule1", createLocation("file1", 2, 3), Collections.singletonList(createLocation("file1", 4, 5)));
+    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.singletonList(createLocation("file1", 4, 5)));
 
     assertThat(ctx.allIssues()).hasSize(1);
 
@@ -126,8 +165,8 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_ignore_repeated_module_issues() {
-    callback.onProjectIssue("rule1", ctx.module(), "message");
-    callback.onProjectIssue("rule1", ctx.module(), "message");
+    callback.onProjectIssue("rule1", "warning", ctx.module(), "message");
+    callback.onProjectIssue("rule1", "warning", ctx.module(), "message");
 
     assertThat(ctx.allIssues()).hasSize(1);
     assertThat(ctx.allIssues()).extracting("ruleKey").extracting("rule")
@@ -136,8 +175,8 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_ignore_repeated_file_issues() {
-    callback.onFileIssue("rule1", createAbsolutePath("file1"), "message");
-    callback.onFileIssue("rule1", createAbsolutePath("file1"), "message");
+    callback.onFileIssue("rule1", "warning", createAbsolutePath("file1"), "message");
+    callback.onFileIssue("rule1", "warning", createAbsolutePath("file1"), "message");
 
     assertThat(ctx.allIssues()).hasSize(1);
     assertThat(ctx.allIssues()).extracting("ruleKey").extracting("rule")
@@ -146,12 +185,79 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_ignore_repeated_issues() {
-    callback.onIssue("rule1", createLocation("file1", 2, 3), Collections.emptyList());
-    callback.onIssue("rule1", createLocation("file1", 2, 3), Collections.emptyList());
+    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.emptyList());
+    callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.emptyList());
 
     assertThat(ctx.allIssues()).hasSize(1);
     assertThat(ctx.allIssues()).extracting("ruleKey").extracting("rule")
       .containsOnly("rule1");
+  }
+
+  @Test
+  public void should_register_adhoc_rule() {
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
+    callback.onRule("S12345", "My rule", "Rule description", "Error", "Foo");
+
+    assertThat(ctx.allAdHocRules())
+      .extracting(AdHocRule::engineId, AdHocRule::ruleId, AdHocRule::name, AdHocRule::description, AdHocRule::severity, AdHocRule::type)
+      .containsExactlyInAnyOrder(tuple("roslyn", "S12345", "My rule", "Rule description", Severity.CRITICAL, RuleType.BUG));
+  }
+
+  @Test
+  public void should_map_severity_name_and_description() {
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
+    callback.onRule("S1", "My rule1", "Rule description", "Error", "Foo");
+    callback.onRule("S2", null, null, "Warning", "Foo");
+    callback.onRule("S3", "My rule3", null, "Info", "Foo");
+    callback.onRule("S4", null, "Rule description", "Note", "Foo");
+
+    assertThat(ctx.allAdHocRules())
+      .extracting(AdHocRule::ruleId, AdHocRule::severity, AdHocRule::name, AdHocRule::description)
+      .containsExactlyInAnyOrder(
+        tuple("S1", Severity.CRITICAL, "My rule1", "Rule description"),
+        tuple("S2", Severity.MAJOR, "S2", null),
+        tuple("S3", Severity.INFO, "My rule3", null),
+        tuple("S4", Severity.INFO, "S4", "Rule description"));
+  }
+
+  @Test
+  public void should_fallback_on_rule_severity() {
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
+    callback.onRule("rule45", "My rule", "Rule description", "Note", "Foo");
+
+    callback.onIssue("rule45", null, createLocation("file1", 2, 3), Collections.emptyList());
+
+    assertThat(ctx.allExternalIssues()).extracting(ExternalIssue::severity).containsExactly(Severity.INFO);
+  }
+
+  @Test
+  public void should_fallback_on_major_severity() {
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
+
+    callback.onIssue("rule45", null, createLocation("file1", 2, 3), Collections.emptyList());
+
+    assertThat(ctx.allExternalIssues()).extracting(ExternalIssue::severity).containsExactly(Severity.MAJOR);
+  }
+
+  @Test
+  public void should_map_rule_type() {
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, new HashSet<>(asList("bug1", "bug2")), new HashSet<>(asList("cs1", "cs2")),
+      new HashSet<>(asList("vul1", "vul2")));
+
+    callback.onRule("S1", "My rule", "Rule description", "Info", "bug1");
+    callback.onRule("S2", "My rule", "Rule description", "Info", "cs2");
+    callback.onRule("S3", "My rule", "Rule description", "Info", "vul1");
+    callback.onRule("S4", "My rule", "Rule description", "Info", "unknown");
+    callback.onRule("S5", "My rule", "Rule description", "Info", null);
+
+    assertThat(ctx.allAdHocRules())
+      .extracting(AdHocRule::ruleId, AdHocRule::type)
+      .containsExactlyInAnyOrder(
+        tuple("S1", RuleType.BUG),
+        tuple("S2", RuleType.CODE_SMELL),
+        tuple("S3", RuleType.VULNERABILITY),
+        tuple("S4", RuleType.CODE_SMELL),
+        tuple("S5", RuleType.CODE_SMELL));
   }
 
   private Location createLocation(String filePath, int line, int column) {

@@ -47,6 +47,7 @@ import org.sonar.api.internal.google.common.collect.ImmutableMap;
 import org.sonar.api.rule.RuleKey;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class RoslynDataImporterTest {
   @Rule
@@ -54,7 +55,7 @@ public class RoslynDataImporterTest {
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
 
-  private RoslynDataImporter roslynDataImporter = new RoslynDataImporter();
+  private RoslynDataImporter roslynDataImporter = new RoslynDataImporter(mock(AbstractConfiguration.class));
   private SensorContextTester tester;
   private Path workDir;
 
@@ -88,7 +89,8 @@ public class RoslynDataImporterTest {
   @Test
   public void roslynReportIsProcessed() {
     Map<String, List<RuleKey>> activeRules = createActiveRules();
-    roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(tester.module(), workDir.resolve("roslyn-report.json"))), tester, activeRules, String::toString);
+    roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(tester.module(), workDir.resolve("roslyn-report.json"))), tester, activeRules,
+      String::toString);
 
     assertThat(tester.allIssues())
       .extracting("ruleKey", "primaryLocation.textRange.start.line", "primaryLocation.message")

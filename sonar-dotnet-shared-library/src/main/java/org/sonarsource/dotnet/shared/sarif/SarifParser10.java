@@ -24,19 +24,21 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-
-import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
 import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.function.Function;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.InputModule;
 
 class SarifParser10 implements SarifParser {
+  private static final String PROPERTIES_PROP = "properties";
+  private static final String LEVEL_PROP = "level";
   private final InputModule inputModule;
   private final JsonObject root;
   private final Function<String, String> toRealPath;
@@ -55,11 +57,36 @@ class SarifParser10 implements SarifParser {
 
     for (JsonElement runElement : root.get("runs").getAsJsonArray()) {
       JsonObject run = runElement.getAsJsonObject();
-      JsonArray results = run.getAsJsonArray("results");
-      if (results != null) {
-        handleIssues(results, callback);
+      // Process rules first
+      if (run.has("rules")) {
+        handleRules(run.getAsJsonObject("rules"), callback);
+      }
+      if (run.has("results")) {
+        handleIssues(run.getAsJsonArray("results"), callback);
       }
     }
+  }
+
+  private static void handleRules(JsonObject rules, SarifParserCallback callback) {
+    for (Entry<String, JsonElement> ruleEl : rules.entrySet()) {
+      JsonObject ruleObj = ruleEl.getValue().getAsJsonObject();
+      handleRule(ruleObj, callback);
+    }
+  }
+
+  private static void handleRule(JsonObject ruleObj, SarifParserCallback callback) {
+    String ruleId = ruleObj.get("id").getAsString();
+    String shortDescription = ruleObj.has("shortDescription") ? ruleObj.get("shortDescription").getAsString() : null;
+    String fullDescription = ruleObj.has("fullDescription") ? ruleObj.get("fullDescription").getAsString() : null;
+    String defaultLevel = ruleObj.has("defaultLevel") ? ruleObj.get("defaultLevel").getAsString() : "warning";
+    String category = null;
+    if (ruleObj.has(PROPERTIES_PROP)) {
+      JsonObject props = ruleObj.getAsJsonObject(PROPERTIES_PROP);
+      if (props.has("category")) {
+        category = props.get("category").getAsString();
+      }
+    }
+    callback.onRule(ruleId, shortDescription, fullDescription, defaultLevel, category);
   }
 
   private void handleIssues(JsonArray results, SarifParserCallback callback) {
@@ -76,8 +103,9 @@ class SarifParser10 implements SarifParser {
 
     String ruleId = resultObj.get("ruleId").getAsString();
     String message = resultObj.get("message").getAsString();
+    String level = resultObj.has(LEVEL_PROP) ? resultObj.get(LEVEL_PROP).getAsString() : null;
     if (!handleLocationsElement(resultObj, ruleId, message, callback)) {
-      callback.onProjectIssue(ruleId, inputModule, message);
+      callback.onProjectIssue(ruleId, level, inputModule, message);
     }
   }
 
@@ -85,6 +113,8 @@ class SarifParser10 implements SarifParser {
     if (!resultObj.has("locations")) {
       return false;
     }
+
+    String level = resultObj.has(LEVEL_PROP) ? resultObj.get(LEVEL_PROP).getAsString() : null;
 
     JsonArray locations = resultObj.getAsJsonArray("locations");
     if (locations.size() != 1) {
@@ -96,8 +126,8 @@ class SarifParser10 implements SarifParser {
       relatedLocations = resultObj.getAsJsonArray("relatedLocations");
     }
     Map<String, String> messageMap = new HashMap<>();
-    if (resultObj.has("properties")) {
-      JsonObject properties = resultObj.getAsJsonObject("properties");
+    if (resultObj.has(PROPERTIES_PROP)) {
+      JsonObject properties = resultObj.getAsJsonObject(PROPERTIES_PROP);
       if (properties.has("customProperties")) {
         messageMap = new Gson().fromJson(properties.get("customProperties"), new TypeToken<Map<String, String>>() {
         }.getType());
@@ -105,10 +135,10 @@ class SarifParser10 implements SarifParser {
     }
 
     JsonObject firstIssueLocation = locations.get(0).getAsJsonObject().getAsJsonObject("resultFile");
-    return handleResultFileElement(ruleId, message, firstIssueLocation, relatedLocations, messageMap, callback);
+    return handleResultFileElement(ruleId, level, message, firstIssueLocation, relatedLocations, messageMap, callback);
   }
 
-  private boolean handleResultFileElement(String ruleId, String message, JsonObject resultFileObj, JsonArray relatedLocations,
+  private boolean handleResultFileElement(String ruleId, @Nullable String level, String message, JsonObject resultFileObj, JsonArray relatedLocations,
     Map<String, String> messageMap, SarifParserCallback callback) {
     if (!resultFileObj.has("uri") || !resultFileObj.has("region")) {
       return false;
@@ -118,7 +148,7 @@ class SarifParser10 implements SarifParser {
     if (primaryLocation == null) {
       String uri = resultFileObj.get("uri").getAsString();
       String absolutePath = toRealPath.apply(uriToAbsolutePath(uri));
-      callback.onFileIssue(ruleId, absolutePath, message);
+      callback.onFileIssue(ruleId, level, absolutePath, message);
     } else {
       Collection<Location> secondaryLocations = new ArrayList<>();
       for (JsonElement relatedLocationEl : relatedLocations) {
@@ -133,7 +163,7 @@ class SarifParser10 implements SarifParser {
         }
         secondaryLocations.add(secondaryLocation);
       }
-      callback.onIssue(ruleId, primaryLocation, secondaryLocations);
+      callback.onIssue(ruleId, level, primaryLocation, secondaryLocations);
     }
 
     return true;
