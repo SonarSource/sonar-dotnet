@@ -42,13 +42,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                if (c.Node.Ancestors().OfType<TernaryConditionalExpressionSyntax>().Any())
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
-                }
-            },
+                    if (c.Node.Ancestors().OfType<TernaryConditionalExpressionSyntax>().Any())
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
+                    }
+                },
                 SyntaxKind.TernaryConditionalExpression);
         }
     }
