@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1481",
-"message":  "Remove this unused 'newPath' local variable.",
+"message":  "Remove the unused local variable 'newPath'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'newPath' local variable.",
+"message":  "Remove the unused local variable 'newPath'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
 "region":  {

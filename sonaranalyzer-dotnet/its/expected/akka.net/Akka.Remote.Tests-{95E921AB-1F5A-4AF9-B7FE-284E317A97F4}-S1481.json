@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1481",
-"message":  "Remove this unused 'child' local variable.",
+"message":  "Remove the unused local variable 'child'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemoteDaemonSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'fd' local variable.",
+"message":  "Remove the unused local variable 'fd'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'fd' local variable.",
+"message":  "Remove the unused local variable 'fd'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'monitorB' local variable.",
+"message":  "Remove the unused local variable 'monitorB'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'fireException' local variable.",
+"message":  "Remove the unused local variable 'fireException'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\TestTransportSpec.cs",
 "region":  {

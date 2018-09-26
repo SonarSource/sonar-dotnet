@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1481",
-"message":  "Remove this unused 'result' local variable.",
+"message":  "Remove the unused local variable 'result'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\TextResourceFinderFixture.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'result' local variable.",
+"message":  "Remove the unused local variable 'result'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\TextResourceFinderFixture.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'result' local variable.",
+"message":  "Remove the unused local variable 'result'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\TextResourceFinderFixture.cs",
 "region":  {

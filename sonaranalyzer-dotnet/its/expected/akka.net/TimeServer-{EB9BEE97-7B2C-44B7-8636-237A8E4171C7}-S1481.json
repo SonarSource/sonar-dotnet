@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1481",
-"message":  "Remove this unused 'server' local variable.",
+"message":  "Remove the unused local variable 'server'.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\TimeServer\TimeServer\Program.cs",
 "region":  {
