@@ -19,6 +19,7 @@
  */
 package com.sonar.it.csharp;
 
+import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
 import java.nio.file.Path;
 import org.junit.Before;
@@ -39,14 +40,14 @@ public class DoNotAnalyzeTestFilesTest {
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
   @Before
-  public void init() throws Exception {
+  public void init() {
     orchestrator.resetData();
   }
 
   @Test
   public void should_not_increment_test() throws Exception {
     Path projectDir = Tests.projectDir(temp, "DoNotAnalyzeTestFilesTest");
-    orchestrator.executeBuild(Tests.newScanner(projectDir)
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("DoNotAnalyzeTestFilesTest")
       .setProjectName("DoNotAnalyzeTestFilesTest")
@@ -54,9 +55,9 @@ public class DoNotAnalyzeTestFilesTest {
       .setProfile("no_rule")
       .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml"));
 
-    Tests.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(Tests.newScanner(projectDir)
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("end"));
 
     assertThat(Tests.getComponent("DoNotAnalyzeTestFilesTest:DoNotAnalyzeTestFilesTest:8A3B715A-6E95-4BC1-93C6-A59E9D3F5D5C:UnitTest1.cs")).isNotNull();

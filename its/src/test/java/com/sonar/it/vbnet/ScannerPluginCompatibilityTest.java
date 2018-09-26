@@ -45,7 +45,7 @@ public class ScannerPluginCompatibilityTest {
     Path projectDir = Tests.projectDir(temp, "VbNoCoverageOnTests");
     Orchestrator orchestrator = Orchestrator.builderEnv()
       .setSonarVersion(Optional.ofNullable(System.getProperty("sonar.runtimeVersion")).filter(v -> !"LTS".equals(v)).orElse("LATEST_RELEASE[6.7]"))
-      .addPlugin(Tests.getVbNetLocation())
+      .addPlugin(TestUtils.getPluginLocation("sonar-vbnet-plugin"))
       .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin")) // rely on the fact that the current version is now >6
       .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_no_rule.xml"))
       .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_class_name.xml"))
@@ -71,7 +71,7 @@ public class ScannerPluginCompatibilityTest {
     Path projectDir = Tests.projectDir(temp, "VbNoCoverageOnTests");
     Orchestrator orchestrator = Orchestrator.builderEnv()
       .setSonarVersion(Optional.ofNullable(System.getProperty("sonar.runtimeVersion")).filter(v -> !"LTS".equals(v)).orElse("LATEST_RELEASE[6.7]"))
-      .addPlugin(Tests.getVbNetLocation())
+      .addPlugin(TestUtils.getPluginLocation("sonar-vbnet-plugin"))
       .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_no_rule.xml"))
       .restoreProfileAtStartup(FileLocation.of("profiles/vbnet_class_name.xml"))
       .build();

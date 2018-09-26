@@ -19,6 +19,7 @@
  */
 package com.sonar.it.csharp;
 
+import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 
@@ -98,7 +99,7 @@ public class CoverageTest {
   @Test
   public void no_coverage_on_tests() throws Exception {
     Path projectDir = Tests.projectDir(temp, "NoCoverageOnTests");
-    orchestrator.executeBuild(Tests.newScanner(projectDir)
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("NoCoverageOnTests")
       .setProjectName("NoCoverageOnTests")
@@ -106,9 +107,9 @@ public class CoverageTest {
       .setProfile("no_rule")
       .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml"));
 
-    Tests.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(Tests.newScanner(projectDir)
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("end"));
 
     assertThat(getMeasureAsInt("NoCoverageOnTests", "files")).isEqualTo(2); // Only main files are counted
@@ -126,7 +127,7 @@ public class CoverageTest {
 
   private BuildResult analyzeCoverageTestProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "CoverageTest");
-    orchestrator.executeBuild(Tests.newScanner(projectDir)
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("CoverageTest")
       .setProjectName("CoverageTest")
@@ -134,9 +135,9 @@ public class CoverageTest {
       .setProfile("no_rule")
       .setProperties(keyValues));
 
-    Tests.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    return orchestrator.executeBuild(Tests.newScanner(projectDir)
+    return orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("end"));
   }
 

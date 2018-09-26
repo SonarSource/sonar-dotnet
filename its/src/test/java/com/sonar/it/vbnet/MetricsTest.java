@@ -19,6 +19,7 @@
  */
 package com.sonar.it.vbnet;
 
+import com.sonar.it.shared.TestUtils;
 import org.apache.commons.lang.SystemUtils;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -56,7 +57,7 @@ public class MetricsTest {
           ORCHESTRATOR.resetData();
 
           Path projectDir = Tests.projectDir(temp, "VbMetricsTest");
-          ORCHESTRATOR.executeBuild(Tests.newScanner(projectDir)
+          ORCHESTRATOR.executeBuild(TestUtils.newScanner(projectDir)
             .addArgument("begin")
             .setProjectKey("VbMetricsTest")
             .setProjectName("VbMetricsTest")
@@ -65,9 +66,9 @@ public class MetricsTest {
             // Without that, the MetricsTest project is considered as a Test project :)
             .setProperty("sonar.msbuild.testProjectPattern", "noTests"));
 
-          Tests.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
+          TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
 
-          ORCHESTRATOR.executeBuild(Tests.newScanner(projectDir)
+          ORCHESTRATOR.executeBuild(TestUtils.newScanner(projectDir)
             .addArgument("end"));
         }
       });

@@ -19,6 +19,7 @@
  */
 package com.sonar.it.csharp;
 
+import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.OrchestratorBuilder;
 import com.sonar.orchestrator.build.BuildResult;
@@ -76,11 +77,10 @@ public class UCFGDeserializationTest {
       return;
     }
 
-    Location csharpLocation = Tests.getCsharpLocation();
     OrchestratorBuilder builder = Orchestrator.builderEnv()
       .setSonarVersion(sonarVersion)
       .setEdition(Edition.DEVELOPER)
-      .addPlugin(csharpLocation)
+      .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin"))
       .addPlugin(MavenLocation.of("com.sonarsource.security", "sonar-security-plugin", "7.3.0.1282"))
       .activateLicense();
 

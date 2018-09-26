@@ -19,6 +19,7 @@
  */
 package com.sonar.it.vbnet;
 
+import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -46,7 +47,7 @@ public class DoNotAnalyzeTestFilesTest {
   @Test
   public void should_not_increment_test() throws Exception {
     Path projectDir = Tests.projectDir(temp, "VbDoNotAnalyzeTestFilesTest");
-    orchestrator.executeBuild(Tests.newScanner(projectDir)
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("VbDoNotAnalyzeTestFilesTest")
       .setProjectName("VbDoNotAnalyzeTestFilesTest")
@@ -54,9 +55,9 @@ public class DoNotAnalyzeTestFilesTest {
       .setProfile("vbnet_no_rule")
       .setProperty("sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml"));
 
-    Tests.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(Tests.newScanner(projectDir)
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("end"));
 
     assertThat(Tests.getComponent("VbDoNotAnalyzeTestFilesTest:VbDoNotAnalyzeTestFilesTest:039CD4D5-8C38-47EB-AE09-F2457DE61EFC:UnitTest1.vb")).isNotNull();

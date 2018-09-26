@@ -19,6 +19,7 @@
  */
 package com.sonar.it.csharp;
 
+import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class UnitTestResultsTest {
   public TemporaryFolder temp = new TemporaryFolder();
 
   @Before
-  public void init() throws Exception {
+  public void init() {
     orchestrator.resetData();
   }
 
@@ -88,7 +89,7 @@ public class UnitTestResultsTest {
 
   private BuildResult analyzeTestProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "UnitTestResultsTest");
-    orchestrator.executeBuild(Tests.newScanner(projectDir)
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("UnitTestResultsTest")
       .setProjectName("UnitTestResultsTest")
@@ -96,9 +97,9 @@ public class UnitTestResultsTest {
       .setProfile("no_rule")
       .setProperties(keyValues));
 
-    Tests.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    return orchestrator.executeBuild(Tests.newScanner(projectDir)
+    return orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("end"));
   }
 }

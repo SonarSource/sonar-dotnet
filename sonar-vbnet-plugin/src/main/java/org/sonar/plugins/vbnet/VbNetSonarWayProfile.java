@@ -19,10 +19,6 @@
  */
 package org.sonar.plugins.vbnet;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.HashSet;
-import java.util.Set;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;

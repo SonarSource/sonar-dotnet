@@ -19,6 +19,7 @@
  */
 package com.sonar.it.csharp;
 
+import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
 import java.nio.file.Path;
 import org.junit.BeforeClass;
@@ -44,7 +45,7 @@ public class NoSonarTest {
     orchestrator.resetData();
 
     Path projectDir = Tests.projectDir(temp, "NoSonarTest");
-    ORCHESTRATOR.executeBuild(Tests.newScanner(projectDir)
+    ORCHESTRATOR.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("NoSonarTest")
       .setProjectName("NoSonarTest")
@@ -53,9 +54,9 @@ public class NoSonarTest {
       // Without that, the NoSonarTest project is considered as a Test project :)
       .setProperty("sonar.msbuild.testProjectPattern", "noTests"));
 
-    Tests.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
+    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
 
-    ORCHESTRATOR.executeBuild(Tests.newScanner(projectDir)
+    ORCHESTRATOR.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("end"));
   }
 

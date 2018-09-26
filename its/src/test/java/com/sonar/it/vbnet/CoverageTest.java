@@ -19,6 +19,7 @@
  */
 package com.sonar.it.vbnet;
 
+import com.sonar.it.shared.TestUtils;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -57,7 +58,7 @@ public class CoverageTest {
 
   private void analyzeCoverageTestProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "VbCoverageTest");
-    orchestrator.executeBuild(Tests.newScanner(projectDir)
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("VbCoverageTest")
       .setProjectName("VbCoverageTest")
@@ -65,9 +66,9 @@ public class CoverageTest {
       .setProfile("vbnet_no_rule")
       .setProperties(keyValues));
 
-    Tests.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(Tests.newScanner(projectDir)
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("end"));
   }
 
@@ -106,7 +107,7 @@ public class CoverageTest {
   @Test
   public void no_coverage_on_tests() throws Exception {
     Path projectDir = Tests.projectDir(temp, "VbNoCoverageOnTests");
-    orchestrator.executeBuild(Tests.newScanner(projectDir)
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("VbNoCoverageOnTests")
       .setProjectName("VbNoCoverageOnTests")
@@ -114,9 +115,9 @@ public class CoverageTest {
       .setProfile("vbnet_no_rule")
       .setProperty("sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml"));
 
-    Tests.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(Tests.newScanner(projectDir)
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("end"));
 
     assertThat(getMeasureAsInt("VbNoCoverageOnTests", "files")).isEqualTo(2); // Only main files are counted

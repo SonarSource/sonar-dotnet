@@ -70,33 +70,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 })
 public class Tests {
 
-  private static final String MSBUILD_PATH = "MSBUILD_PATH";
   private static final String NUGET_PATH = "NUGET_PATH";
 
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
-    .setSonarVersion(Optional.ofNullable(System.getProperty("sonar.runtimeVersion")).filter(v -> !"LTS".equals(v)).orElse("LATEST_RELEASE[6.7]"))
-    .addPlugin(getCsharpLocation())
+    .setSonarVersion(System.getProperty(System.getProperty("sonar.runtimeVersion"), "LATEST_RELEASE"))
+    .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin"))
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/class_name.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/template_rule.xml"))
     .build();
 
-
-  public static Location getCsharpLocation () {
-    return TestUtils.getPluginLocation("sonar-csharp-plugin");
-  }
   public static Path projectDir(TemporaryFolder temp, String projectName) throws IOException {
     Path projectDir = Paths.get("projects").resolve(projectName);
     FileUtils.deleteDirectory(new File(temp.getRoot(), projectName));
     Path tmpProjectDir = temp.newFolder(projectName).toPath();
     FileUtils.copyDirectory(projectDir.toFile(), tmpProjectDir.toFile());
     return tmpProjectDir;
-  }
-
-  public static Build<ScannerForMSBuild> newScanner(Path projectDir) {
-    return ScannerForMSBuild.create(projectDir.toFile())
-      .setScannerVersion(System.getProperty("scannerMsbuild.version"));
   }
 
   public static void runNuGet(Orchestrator orch, Path projectDir, String... arguments) {
@@ -119,53 +109,21 @@ public class Tests {
     return nugetPath;
   }
 
-  public static void runMSBuild(Orchestrator orch, Path projectDir, String... arguments) {
-    Path msBuildPath = getMsBuildPath(orch);
-
-    int r = CommandExecutor.create().execute(Command.create(msBuildPath.toString())
-      .addArguments(arguments)
-      .setDirectory(projectDir.toFile()), 60 * 1000);
-    assertThat(r).isEqualTo(0);
-  }
-
-  private static Path getMsBuildPath(Orchestrator orch) {
-    String msBuildPathStr = orch.getConfiguration().getString(MSBUILD_PATH, "C:\\Program Files (x86)\\Microsoft "
-      + "Visual Studio\\2017\\Enterprise\\MSBuild\\15.0\\Bin\\MSBuild.exe");
-    Path msBuildPath = Paths.get(msBuildPathStr).toAbsolutePath();
-    if (!Files.exists(msBuildPath)) {
-      throw new IllegalStateException("Unable to find MSBuild at '" + msBuildPath.toString() +
-        "'. Please configure property '" + MSBUILD_PATH + "'");
-    }
-    return msBuildPath;
-  }
-
-  @CheckForNull
-  static Measure getMeasure(String componentKey, String metricKey) {
-    WsMeasures.ComponentWsResponse response = newWsClient().measures().component(new ComponentWsRequest()
-      .setComponentKey(componentKey)
-      .setMetricKeys(singletonList(metricKey)));
-    List<Measure> measures = response.getComponent().getMeasuresList();
-    return measures.size() == 1 ? measures.get(0) : null;
+  static WsComponents.Component getComponent(String componentKey) {
+    return TestUtils.getComponent(ORCHESTRATOR, componentKey);
   }
 
   @CheckForNull
   static Integer getMeasureAsInt(String componentKey, String metricKey) {
-    Measure measure = getMeasure(componentKey, metricKey);
-    return (measure == null) ? null : Integer.parseInt(measure.getValue());
+    return TestUtils.getMeasureAsInt(ORCHESTRATOR, componentKey, metricKey);
   }
 
-  static WsComponents.Component getComponent(String componentKey) {
-    return newWsClient().components().show(new ShowWsRequest().setKey(componentKey)).getComponent();
+  @CheckForNull
+  static WsMeasures.Measure getMeasure(String componentKey, String metricKey) {
+    return TestUtils.getMeasure(ORCHESTRATOR, componentKey, metricKey);
   }
-  
+
   static List<Issues.Issue> getIssues(String componentKey) {
-    return newWsClient().issues().search(new SearchWsRequest().setComponentKeys(Collections.singletonList(componentKey))).getIssuesList();
+    return TestUtils.getIssues(ORCHESTRATOR, componentKey);
   }
-
-  static WsClient newWsClient() {
-    return WsClientFactories.getDefault().newClient(HttpConnector.newBuilder()
-      .url(ORCHESTRATOR.getServer().getUrl())
-      .build());
-  }
-
 }
