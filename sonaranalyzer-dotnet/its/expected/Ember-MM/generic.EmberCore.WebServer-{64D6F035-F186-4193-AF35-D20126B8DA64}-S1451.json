@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\frmSettingsHolder.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\My%20Project\AssemblyInfo.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsUtils.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+}
+]
+}

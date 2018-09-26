@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.NUnit.Tests\AssertionsTests.cs",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.NUnit.Tests\TestKitTestFixtureTest.cs",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.NUnit.Tests\TestKitTests.cs",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\My%20Project\AssemblyInfo.vb",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgImgView.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgNewSet.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgRestart.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgStudioSelect.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVRegExProfiles.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S1451",
+"message":  "Add or update the header of this file.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\My%20Project\AssemblyInfo.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+}
+]
+}
