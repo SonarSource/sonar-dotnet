@@ -31,11 +31,9 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class SwitchCasesMinimumThree : SonarDiagnosticAnalyzer
+    public sealed class SwitchCasesMinimumThree : SwitchCasesMinimumThreeBase
     {
-        internal const string DiagnosticId = "S1301";
         private const string MessageFormat = "Replace this 'switch' statement with 'if' statements to increase readability.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -55,9 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.SwitchStatement);
         }
 
-        private static bool HasAtLeastThreeLabels(SwitchStatementSyntax node)
-        {
-            return node.Sections.Sum(section => section.Labels.Count) >= 3;
-        }
+        private static bool HasAtLeastThreeLabels(SwitchStatementSyntax node) =>
+            node.Sections.Sum(section => section.Labels.Count) >= 3;
     }
 }
