@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'lhttp'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"region":  {
+"startLine":  46,
+"startColumn":  13,
+"endLine":  46,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'n'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  690,
+"startColumn":  21,
+"endLine":  690,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'sqlCB'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  510,
+"startColumn":  17,
+"endLine":  510,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'test'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  206,
+"startColumn":  29,
+"endLine":  206,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'tmpAL'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  405,
+"startColumn":  17,
+"endLine":  405,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'temp'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  312,
+"startColumn":  25,
+"endLine":  312,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'sStudio'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  572,
+"startColumn":  13,
+"endLine":  572,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'currname'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  217,
+"startColumn":  13,
+"endLine":  217,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'sMoviePath'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  904,
+"startColumn":  17,
+"endLine":  904,
+"endColumn":  27
+}
+}
+}
+]
+}

@@ -1,0 +1,16 @@
+{
+  "title": "Unused local variables should be removed",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "unused"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-1481",
+  "sqKey": "S1481",
+  "scope": "All"
+}

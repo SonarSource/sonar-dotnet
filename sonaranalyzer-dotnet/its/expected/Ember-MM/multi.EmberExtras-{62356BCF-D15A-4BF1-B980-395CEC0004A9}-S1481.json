@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'i'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  17,
+"startColumn":  21,
+"endLine":  17,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'i'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  30,
+"startColumn":  17,
+"endLine":  30,
+"endColumn":  18
+}
+}
+}
+]
+}

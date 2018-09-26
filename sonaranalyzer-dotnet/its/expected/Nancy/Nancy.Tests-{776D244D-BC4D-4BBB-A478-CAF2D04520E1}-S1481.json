@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1481",
-"message":  "Remove this unused 'culture' local variable.",
+"message":  "Remove the unused local variable 'culture'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\Culture\BuiltInCultureConventionFixture.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'value' local variable.",
+"message":  "Remove the unused local variable 'value'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\Diagnostics\DefaultRequestTraceFactoryFixture.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'value' local variable.",
+"message":  "Remove the unused local variable 'value'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\Diagnostics\DefaultRequestTraceFactoryFixture.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'e' local variable.",
+"message":  "Remove the unused local variable 'e'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'request' local variable.",
+"message":  "Remove the unused local variable 'request'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\IO\RequestStreamFixture.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'result' local variable.",
+"message":  "Remove the unused local variable 'result'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\Localization\ResourceBasedTextResourceFixture.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'dataThatDoesntResetStreamPosition' local variable.",
+"message":  "Remove the unused local variable 'dataThatDoesntResetStreamPosition'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializerfixture.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'result' local variable.",
+"message":  "Remove the unused local variable 'result'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DynamicModelBinderAdapterFixture.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'result' local variable.",
+"message":  "Remove the unused local variable 'result'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DynamicModelBinderAdapterFixture.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'result' local variable.",
+"message":  "Remove the unused local variable 'result'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DynamicModelBinderAdapterFixture.cs",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'result' local variable.",
+"message":  "Remove the unused local variable 'result'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DynamicModelBinderAdapterFixture.cs",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'result' local variable.",
+"message":  "Remove the unused local variable 'result'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DynamicModelBinderAdapterFixture.cs",
 "region":  {
@@ -158,7 +158,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'result' local variable.",
+"message":  "Remove the unused local variable 'result'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DynamicModelBinderAdapterFixture.cs",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'result' local variable.",
+"message":  "Remove the unused local variable 'result'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DynamicModelBinderAdapterFixture.cs",
 "region":  {
@@ -184,7 +184,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'result' local variable.",
+"message":  "Remove the unused local variable 'result'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DynamicModelBinderAdapterFixture.cs",
 "region":  {
@@ -197,7 +197,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'request' local variable.",
+"message":  "Remove the unused local variable 'request'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
 "region":  {
@@ -210,7 +210,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'request' local variable.",
+"message":  "Remove the unused local variable 'request'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
 "region":  {
@@ -223,7 +223,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'result' local variable.",
+"message":  "Remove the unused local variable 'result'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\ResponseExtensionsFixture.cs",
 "region":  {
@@ -236,7 +236,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'result' local variable.",
+"message":  "Remove the unused local variable 'result'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\ResponseExtensionsFixture.cs",
 "region":  {
@@ -249,7 +249,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'result' local variable.",
+"message":  "Remove the unused local variable 'result'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRouteInvokerFixture.cs",
 "region":  {
@@ -262,7 +262,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'result' local variable.",
+"message":  "Remove the unused local variable 'result'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRouteInvokerFixture.cs",
 "region":  {
@@ -275,7 +275,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'result' local variable.",
+"message":  "Remove the unused local variable 'result'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRouteInvokerFixture.cs",
 "region":  {
@@ -288,7 +288,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'cache' local variable.",
+"message":  "Remove the unused local variable 'cache'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\RouteCacheFixture.cs",
 "region":  {
@@ -301,7 +301,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'cache' local variable.",
+"message":  "Remove the unused local variable 'cache'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\RouteCacheFixture.cs",
 "region":  {
