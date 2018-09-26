@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,25 +18,44 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Rules.Common;
+using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class HardcodedIpAddress : HardcodedIpAddressBase
+    public sealed class HardcodedIpAddress : HardcodedIpAddressBase<LiteralExpressionSyntax>
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
+            ImmutableArray.Create(rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                GetAnalysisAction(rule),
+                SyntaxKind.StringLiteralExpression);
+
+        protected override string GetValueText(LiteralExpressionSyntax literalExpression) =>
+            literalExpression.Token.ValueText;
+
+        protected override bool HasAttributes(LiteralExpressionSyntax literalExpression) =>
+            literalExpression.Ancestors().AnyOfKind(SyntaxKind.Attribute);
+
+        protected override string GetAssignedVariableName(LiteralExpressionSyntax stringLiteral) =>
+            stringLiteral.FirstAncestorOrSelf<SyntaxNode>(IsVariableIdentifier)?.ToString().ToUpperInvariant();
+
+        private static bool IsVariableIdentifier(SyntaxNode syntaxNode) =>
+            syntaxNode is StatementSyntax ||
+            syntaxNode is VariableDeclaratorSyntax ||
+            syntaxNode is ParameterSyntax;
     }
 }

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,16 +18,66 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class HardcodedIpAddressBase : SonarDiagnosticAnalyzer
+    public abstract class HardcodedIpAddressBase<TLiteralExpression> : SonarDiagnosticAnalyzer
+        where TLiteralExpression : SyntaxNode
     {
         protected const string DiagnosticId = "S1313";
-        protected const string MessageFormat = "";
+        protected const string MessageFormat = "Make sure using this hardcoded IP address '{0}' is safe here.";
+
+        private static readonly ISet<string> IgnoredVariableNames =
+            new HashSet<string>
+            {
+                "VERSION",
+                "ASSEMBLY",
+            };
+
+        protected Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
+            c =>
+            {
+                var stringLiteral = (TLiteralExpression)c.Node;
+                var literalValue = GetValueText(stringLiteral);
+
+                if (literalValue == "::" ||
+                    literalValue == "127.0.0.1" ||
+                    !IPAddress.TryParse(literalValue, out var address))
+                {
+                    return;
+                }
+
+                if (address.AddressFamily == AddressFamily.InterNetwork &&
+                    literalValue.Split('.').Length != 4)
+                {
+                    return;
+                }
+
+                var variableName = GetAssignedVariableName(stringLiteral);
+                if (variableName != null &&
+                    IgnoredVariableNames.Any(variableName.Contains))
+                {
+                    return;
+                }
+
+                if (HasAttributes(stringLiteral))
+                {
+                    return;
+                }
+
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, stringLiteral.GetLocation(), literalValue));
+            };
+
+        protected abstract string GetAssignedVariableName(TLiteralExpression stringLiteral);
+        protected abstract string GetValueText(TLiteralExpression literalExpression);
+        protected abstract bool HasAttributes(TLiteralExpression literalExpression);
     }
 }
