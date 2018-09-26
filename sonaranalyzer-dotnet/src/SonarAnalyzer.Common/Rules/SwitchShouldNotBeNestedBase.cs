@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,6 +28,5 @@ namespace SonarAnalyzer.Rules
     public abstract class SwitchShouldNotBeNestedBase : SonarDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S1821";
-        protected const string MessageFormat = "";
     }
 }
