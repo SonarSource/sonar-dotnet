@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1481",
-"message":  "Remove this unused 'controller' local variable.",
+"message":  "Remove the unused local variable 'controller'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingFailureSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'first' local variable.",
+"message":  "Remove the unused local variable 'first'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingFailureSpec.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'second' local variable.",
+"message":  "Remove the unused local variable 'second'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingFailureSpec.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'sharedStore' local variable.",
+"message":  "Remove the unused local variable 'sharedStore'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingFailureSpec.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'first' local variable.",
+"message":  "Remove the unused local variable 'first'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingGracefulShutdownSpec.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'second' local variable.",
+"message":  "Remove the unused local variable 'second'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingGracefulShutdownSpec.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'sharedStore' local variable.",
+"message":  "Remove the unused local variable 'sharedStore'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingGracefulShutdownSpec.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'first' local variable.",
+"message":  "Remove the unused local variable 'first'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingLeavingSpec.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'second' local variable.",
+"message":  "Remove the unused local variable 'second'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingLeavingSpec.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'third' local variable.",
+"message":  "Remove the unused local variable 'third'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingLeavingSpec.cs",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'fourth' local variable.",
+"message":  "Remove the unused local variable 'fourth'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingLeavingSpec.cs",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'sharedStore' local variable.",
+"message":  "Remove the unused local variable 'sharedStore'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingLeavingSpec.cs",
 "region":  {
@@ -158,7 +158,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'controller' local variable.",
+"message":  "Remove the unused local variable 'controller'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'first' local variable.",
+"message":  "Remove the unused local variable 'first'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
 "region":  {
@@ -184,7 +184,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'second' local variable.",
+"message":  "Remove the unused local variable 'second'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
 "region":  {
@@ -197,7 +197,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'third' local variable.",
+"message":  "Remove the unused local variable 'third'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
 "region":  {
@@ -210,7 +210,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'fourth' local variable.",
+"message":  "Remove the unused local variable 'fourth'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
 "region":  {
@@ -223,7 +223,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'fifth' local variable.",
+"message":  "Remove the unused local variable 'fifth'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
 "region":  {
@@ -236,7 +236,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'sharedStore' local variable.",
+"message":  "Remove the unused local variable 'sharedStore'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
 "region":  {
@@ -249,7 +249,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'x' local variable.",
+"message":  "Remove the unused local variable 'x'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
 "region":  {
@@ -262,7 +262,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'y' local variable.",
+"message":  "Remove the unused local variable 'y'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
 "region":  {
@@ -275,7 +275,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'x' local variable.",
+"message":  "Remove the unused local variable 'x'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
 "region":  {
@@ -288,7 +288,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'x' local variable.",
+"message":  "Remove the unused local variable 'x'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
 "region":  {
@@ -301,7 +301,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'r' local variable.",
+"message":  "Remove the unused local variable 'r'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
 "region":  {

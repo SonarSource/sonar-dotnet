@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1481",
-"message":  "Remove this unused 'messages' local variable.",
+"message":  "Remove the unused local variable 'messages'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared.Tests\NodeMessageHelpers.cs",
 "region":  {
