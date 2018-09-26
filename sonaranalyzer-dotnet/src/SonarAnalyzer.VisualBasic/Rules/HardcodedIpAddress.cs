@@ -18,29 +18,25 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.Common;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [TestClass]
-    public class HardcodedIpAddressTest
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+    [Rule(DiagnosticId)]
+    public sealed class HardcodedIpAddress : HardcodedIpAddressBase
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void HardcodedIpAddress()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\HardcodedIpAddress.cs", new HardcodedIpAddress());
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void HardcodedIpAddress_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\HardcodedIpAddress.vb",
-                new SonarAnalyzer.Rules.VisualBasic.HardcodedIpAddress());
-        }
+        private static readonly DiagnosticDescriptor rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
     }
 }
-

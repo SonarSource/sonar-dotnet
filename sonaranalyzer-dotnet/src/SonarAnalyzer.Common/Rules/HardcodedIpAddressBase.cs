@@ -18,29 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules
 {
-    [TestClass]
-    public class HardcodedIpAddressTest
+    public abstract class HardcodedIpAddressBase : SonarDiagnosticAnalyzer
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void HardcodedIpAddress()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\HardcodedIpAddress.cs", new HardcodedIpAddress());
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void HardcodedIpAddress_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\HardcodedIpAddress.vb",
-                new SonarAnalyzer.Rules.VisualBasic.HardcodedIpAddress());
-        }
+        protected const string DiagnosticId = "S1313";
+        protected const string MessageFormat = "";
     }
 }
-
