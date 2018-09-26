@@ -687,6 +687,36 @@
   <data name="S139_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S1451_Category" xml:space="preserve">
+    <value>Blocker Code Smell</value>
+  </data>
+  <data name="S1451_Description" xml:space="preserve">
+    <value>Each source file should start with a header stating file ownership and the license which must be used to distribute the application. </value>
+  </data>
+  <data name="S1451_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S1451_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1451_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S1451_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S1451_Severity" xml:space="preserve">
+    <value>Blocker</value>
+  </data>
+  <data name="S1451_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S1451_Title" xml:space="preserve">
+    <value>Track lack of copyright and license headers</value>
+  </data>
+  <data name="S1451_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1479_Category" xml:space="preserve">
     <value>Major Code Smell</value>
   </data>
