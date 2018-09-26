@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -21,13 +21,79 @@
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System;
 using System.Collections.Immutable;
+using System.Text.RegularExpressions;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class CheckFileLicenseBase : SonarDiagnosticAnalyzer
+    public abstract class CheckFileLicenseBase : ParameterLoadingDiagnosticAnalyzer
     {
-        protected const string DiagnosticId = "S1451";
-        protected const string MessageFormat = "";
+        public const string DiagnosticId = "S1451";
+        protected const string MessageFormat = "Add or update the header of this file.";
+
+        #region HeaderFormat
+        internal const string HeaderFormatRuleParameterKey = "headerFormat";
+        internal const string HeaderFormatPropertyKey = nameof(HeaderFormat);
+        public abstract string HeaderFormat { get; set; }
+        #endregion
+
+        #region IsRegularExpression
+        internal const string IsRegularExpressionRuleParameterKey = "isRegularExpression";
+        internal const string IsRegularExpressionPropertyKey = nameof(IsRegularExpression);
+        internal const string IsRegularExpressionDefaultValue = "false";
+        [RuleParameter(IsRegularExpressionRuleParameterKey, PropertyType.Boolean,
+            "Whether the headerFormat is a regular expression.", IsRegularExpressionDefaultValue)]
+        public bool IsRegularExpression { get; set; } = bool.Parse(IsRegularExpressionDefaultValue);
+        #endregion
+
+        protected static bool IsRegexPatternValid(string pattern)
+        {
+            try
+            {
+                Regex.Match(string.Empty, pattern);
+                return true;
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
+        }
+
+        protected bool HasValidLicenseHeader(SyntaxNode node)
+        {
+            if (node == null || !node.HasLeadingTrivia)
+            {
+                return false;
+            }
+
+            var trivias = node.GetLeadingTrivia();
+            if (isEndOfLine(trivias.Last()))
+            {
+                trivias = trivias.RemoveAt(trivias.Count - 1);
+            }
+
+            var header = trivias.ToString();
+            return header != null && AreHeadersEqual(header);
+        }
+
+        protected abstract bool isEndOfLine(SyntaxTrivia trivia);
+
+        protected bool AreHeadersEqual(string currentHeader)
+        {
+            var unixEndingHeader = currentHeader.Replace("\r\n", "\n");
+            var unixEndingHeaderFormat = HeaderFormat.Replace("\r\n", "\n").Replace("\\r\\n", "\n");
+
+            return IsRegularExpression
+                ? Regex.IsMatch(unixEndingHeader, unixEndingHeaderFormat)
+                : unixEndingHeader.Equals(unixEndingHeaderFormat, StringComparison.Ordinal);
+        }
+
+        protected ImmutableDictionary<string, string> CreateDiagnosticProperties()
+        {
+            return ImmutableDictionary<string, string>.Empty
+                .Add(HeaderFormatPropertyKey, HeaderFormat)
+                .Add(IsRegularExpressionPropertyKey, IsRegularExpression.ToString());
+        }
     }
 }
