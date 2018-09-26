@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1481",
-"message":  "Remove this unused 'foo' local variable.",
+"message":  "Remove the unused local variable 'foo'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\NewRemoteActorSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'foo' local variable.",
+"message":  "Remove the unused local variable 'foo'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\NewRemoteActorSpec.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'foo' local variable.",
+"message":  "Remove the unused local variable 'foo'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\NewRemoteActorSpec.cs",
 "region":  {

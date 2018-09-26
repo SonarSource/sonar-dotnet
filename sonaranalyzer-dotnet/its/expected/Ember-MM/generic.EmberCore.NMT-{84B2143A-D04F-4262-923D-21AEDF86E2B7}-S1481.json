@@ -1,0 +1,277 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'destPathShort'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  295,
+"startColumn":  17,
+"endLine":  295,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'sBasePath'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  297,
+"startColumn":  17,
+"endLine":  297,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'destPathShort'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  377,
+"startColumn":  17,
+"endLine":  377,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'sBasePath'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  379,
+"startColumn":  17,
+"endLine":  379,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'uni'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  547,
+"startColumn":  17,
+"endLine":  547,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'tVid'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  637,
+"startColumn":  17,
+"endLine":  637,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'tAud'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  638,
+"startColumn":  17,
+"endLine":  638,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'tRes'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  639,
+"startColumn":  17,
+"endLine":  639,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'uni'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  642,
+"startColumn":  17,
+"endLine":  642,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'tVid'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  690,
+"startColumn":  17,
+"endLine":  690,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'tAud'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  691,
+"startColumn":  17,
+"endLine":  691,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'tRes'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  692,
+"startColumn":  17,
+"endLine":  692,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'ThumbsPath'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  693,
+"startColumn":  17,
+"endLine":  693,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'BackdropPath'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  694,
+"startColumn":  17,
+"endLine":  694,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'tVid'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  721,
+"startColumn":  17,
+"endLine":  721,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'tAud'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  722,
+"startColumn":  17,
+"endLine":  722,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'tRes'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  723,
+"startColumn":  17,
+"endLine":  723,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'ThumbsPath'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  724,
+"startColumn":  17,
+"endLine":  724,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'BackdropPath'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  725,
+"startColumn":  17,
+"endLine":  725,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'uni'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  726,
+"startColumn":  17,
+"endLine":  726,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'oFile'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1283,
+"startColumn":  21,
+"endLine":  1283,
+"endColumn":  26
+}
+}
+}
+]
+}

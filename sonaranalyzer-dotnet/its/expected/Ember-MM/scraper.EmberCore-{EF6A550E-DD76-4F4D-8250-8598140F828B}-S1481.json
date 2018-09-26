@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'IMPA'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  661,
+"startColumn":  7,
+"endLine":  661,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'MPDB'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  662,
+"startColumn":  7,
+"endLine":  662,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'thumbLink'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  719,
+"startColumn":  11,
+"endLine":  719,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'popularHaveYear'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  679,
+"startColumn":  29,
+"endLine":  679,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'movieInfo'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  780,
+"startColumn":  29,
+"endLine":  780,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'doSave'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"region":  {
+"startLine":  321,
+"startColumn":  13,
+"endLine":  321,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'iEpisode'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  62,
+"startColumn":  13,
+"endLine":  62,
+"endColumn":  21
+}
+}
+}
+]
+}

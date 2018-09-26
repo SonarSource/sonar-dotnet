@@ -20,7 +20,6 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -32,61 +31,30 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class VariableUnused : SonarDiagnosticAnalyzer
+    public sealed class VariableUnused : VariableUnusedBase
     {
-        internal const string DiagnosticId = "S1481";
-        private const string MessageFormat = "Remove this unused '{0}' local variable.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
+            ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(cbc =>
             {
-                var declaredLocals = new HashSet<ISymbol>();
-                var usedLocals = new HashSet<ISymbol>();
+                var collector = new UnusedLocalsCollector();
 
-                cbc.RegisterSyntaxNodeAction(c =>
-                {
-                    declaredLocals.UnionWith(
-                        ((LocalDeclarationStatementSyntax)c.Node).Declaration.Variables
-                            .Select(variable => c.SemanticModel.GetDeclaredSymbol(variable))
-                            .WhereNotNull());
-                },
-                SyntaxKind.LocalDeclarationStatement);
-
-                cbc.RegisterSyntaxNodeAction(c =>
-                {
-                    usedLocals.UnionWith(GetUsedSymbols(c.Node, c.SemanticModel));
-                },
-                SyntaxKind.IdentifierName);
-
-                cbc.RegisterCodeBlockEndAction(c =>
-                {
-                    declaredLocals.ExceptWith(usedLocals);
-                    foreach (var unused in declaredLocals)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, unused.Locations.First(), unused.Name));
-                    }
-                });
+                cbc.RegisterSyntaxNodeAction(collector.CollectDeclarations, SyntaxKind.LocalDeclarationStatement);
+                cbc.RegisterSyntaxNodeAction(collector.CollectUsages, SyntaxKind.IdentifierName);
+                cbc.RegisterCodeBlockEndAction(collector.GetReportUnusedVariablesAction(rule));
             });
         }
 
-        internal static IEnumerable<ISymbol> GetUsedSymbols(SyntaxNode node, SemanticModel semanticModel)
+        private class UnusedLocalsCollector : UnusedLocalsCollectorBase<LocalDeclarationStatementSyntax>
         {
-            var symbolInfo = semanticModel.GetSymbolInfo(node);
-            if (symbolInfo.Symbol != null)
-            {
-                yield return symbolInfo.Symbol;
-            }
-
-            foreach (var candidate in symbolInfo.CandidateSymbols.WhereNotNull())
-            {
-                yield return candidate;
-            }
+            protected override IEnumerable<SyntaxNode> GetDeclaredVariables(LocalDeclarationStatementSyntax localDeclaration) =>
+                localDeclaration.Declaration.Variables;
         }
     }
 }

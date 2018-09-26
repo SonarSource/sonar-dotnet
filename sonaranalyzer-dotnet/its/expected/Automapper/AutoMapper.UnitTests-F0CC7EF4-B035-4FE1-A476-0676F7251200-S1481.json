@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1481",
-"message":  "Remove this unused 'plan' local variable.",
+"message":  "Remove the unused local variable 'plan'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\ArraysAndLists.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'book2' local variable.",
+"message":  "Remove the unused local variable 'book2'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\BidirectionalRelationships.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'a' local variable.",
+"message":  "Remove the unused local variable 'a'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\BaseMapWithIncludesAndUnincludedMappings.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'target' local variable.",
+"message":  "Remove the unused local variable 'target'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\CollectionMapperMapsISetIncorrectly.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'result' local variable.",
+"message":  "Remove the unused local variable 'result'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\ConventionCreateMapsWithCircularReference.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'dest' local variable.",
+"message":  "Remove the unused local variable 'dest'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\EnumConditionsBug.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'dest' local variable.",
+"message":  "Remove the unused local variable 'dest'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\ExistingArrays.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'dest' local variable.",
+"message":  "Remove the unused local variable 'dest'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\ExistingArrays.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'appointmentsDTO' local variable.",
+"message":  "Remove the unused local variable 'appointmentsDTO'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\MapAtRuntime.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'DTOs' local variable.",
+"message":  "Remove the unused local variable 'DTOs'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\MapAtRuntime.cs",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'DTOs17' local variable.",
+"message":  "Remove the unused local variable 'DTOs17'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\MapAtRuntime.cs",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'DTOs25' local variable.",
+"message":  "Remove the unused local variable 'DTOs25'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntime\MapAtRuntime.cs",
 "region":  {
@@ -158,7 +158,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'appointmentsDTO' local variable.",
+"message":  "Remove the unused local variable 'appointmentsDTO'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\MapAtRuntimeWithCollections.cs",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'DTOs' local variable.",
+"message":  "Remove the unused local variable 'DTOs'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\MapAtRuntimeWithCollections.cs",
 "region":  {
@@ -184,7 +184,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'DTOs17' local variable.",
+"message":  "Remove the unused local variable 'DTOs17'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\MapAtRuntimeWithCollections.cs",
 "region":  {
@@ -197,7 +197,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'DTOs25' local variable.",
+"message":  "Remove the unused local variable 'DTOs25'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\MapAtRuntimeWithCollections\MapAtRuntimeWithCollections.cs",
 "region":  {
@@ -210,7 +210,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'settings' local variable.",
+"message":  "Remove the unused local variable 'settings'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\MapExpandoObjectProperty.cs",
 "region":  {
@@ -223,7 +223,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 't2' local variable.",
+"message":  "Remove the unused local variable 't2'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\MultiThreadingIssues.cs",
 "region":  {
@@ -236,7 +236,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'b' local variable.",
+"message":  "Remove the unused local variable 'b'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\ProjectCollectionsBug.cs",
 "region":  {
@@ -249,7 +249,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'newPredicate' local variable.",
+"message":  "Remove the unused local variable 'newPredicate'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\SamePropertyNameOnParentAndChildClasses.cs",
 "region":  {
@@ -262,7 +262,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'parentModel' local variable.",
+"message":  "Remove the unused local variable 'parentModel'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
 "region":  {
@@ -275,7 +275,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'mappedChildren' local variable.",
+"message":  "Remove the unused local variable 'mappedChildren'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
 "region":  {
@@ -288,7 +288,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'mappedChildren' local variable.",
+"message":  "Remove the unused local variable 'mappedChildren'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
 "region":  {
@@ -301,7 +301,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'o' local variable.",
+"message":  "Remove the unused local variable 'o'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
 "region":  {
@@ -314,7 +314,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'clients' local variable.",
+"message":  "Remove the unused local variable 'clients'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
 "region":  {
@@ -327,7 +327,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'clientExp' local variable.",
+"message":  "Remove the unused local variable 'clientExp'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
 "region":  {
@@ -340,7 +340,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'clients' local variable.",
+"message":  "Remove the unused local variable 'clients'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
 "region":  {
@@ -353,7 +353,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'clientExp' local variable.",
+"message":  "Remove the unused local variable 'clientExp'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
 "region":  {
@@ -366,7 +366,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'clients' local variable.",
+"message":  "Remove the unused local variable 'clients'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
 "region":  {
@@ -379,7 +379,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'clientExp' local variable.",
+"message":  "Remove the unused local variable 'clientExp'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
 "region":  {
@@ -392,7 +392,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'clientExp' local variable.",
+"message":  "Remove the unused local variable 'clientExp'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
 "region":  {
@@ -405,7 +405,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'mapper' local variable.",
+"message":  "Remove the unused local variable 'mapper'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\CustomCollectionTester.cs",
 "region":  {
@@ -418,7 +418,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'config' local variable.",
+"message":  "Remove the unused local variable 'config'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
 "region":  {
@@ -431,7 +431,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'config' local variable.",
+"message":  "Remove the unused local variable 'config'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
 "region":  {
@@ -444,7 +444,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'tm' local variable.",
+"message":  "Remove the unused local variable 'tm'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\DynamicMapping.cs",
 "region":  {
@@ -457,7 +457,7 @@
 },
 {
 "id":  "S1481",
-"message":  "Remove this unused 'c' local variable.",
+"message":  "Remove the unused local variable 'c'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\MappingInheritance\IncludeBaseShouldValidateTypes.cs",
 "region":  {

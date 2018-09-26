@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'i'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"region":  {
+"startLine":  49,
+"startColumn":  17,
+"endLine":  49,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'MovieTag'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  32,
+"startColumn":  17,
+"endLine":  32,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'uni'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  124,
+"startColumn":  21,
+"endLine":  124,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'oFile'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  396,
+"startColumn":  21,
+"endLine":  396,
+"endColumn":  26
+}
+}
+}
+]
+}

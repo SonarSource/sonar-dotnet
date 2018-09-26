@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'selNode'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  220,
+"startColumn":  17,
+"endLine":  220,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'url'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  476,
+"startColumn":  25,
+"endLine":  476,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'Poster'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  764,
+"startColumn":  13,
+"endLine":  764,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'Fanart'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  765,
+"startColumn":  13,
+"endLine":  765,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'url'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  799,
+"startColumn":  25,
+"endLine":  799,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'tmp'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  620,
+"startColumn":  29,
+"endLine":  620,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'xSettings'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  91,
+"startColumn":  21,
+"endLine":  91,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'detailsType'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  286,
+"startColumn":  21,
+"endLine":  286,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'encoding__1'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  102,
+"startColumn":  25,
+"endLine":  102,
+"endColumn":  36
+}
+}
+}
+]
+}

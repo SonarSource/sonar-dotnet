@@ -1,0 +1,22 @@
+<p>If a local variable is declared but not used, it is dead code and should be removed. Doing so will improve maintainability because developers will
+not wonder what the variable is used for.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Public Function NumberOfMinutes(ByVal hours As Integer) As Integer
+    Dim seconds As Integer = 0 ' Seconds never used
+    Return hours * 60
+End Function
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Public Function NumberOfMinutes(ByVal hours As Integer) As Integer
+    Return hours * 60
+End Function
+</pre>
+<h2>Exceptions</h2>
+<p>Unused locally created resources in a <code>Using</code> statement are not reported.</p>
+<pre>
+Using t = New TestTimer()
+End Using
+</pre>
+
