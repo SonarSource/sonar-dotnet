@@ -138,13 +138,9 @@ function Invoke-UnitTests([string]$binPath, [bool]$failsIfNotTest) {
         }
     $testDirs = $testDirs | Select-Object -Uniq
 
-    $cmdOutput = Exec { & (Get-VsTestPath) $testFiles /Parallel /Enablecodecoverage /InIsolation /Logger:trx `
-        /UseVsixExtensions:true /TestAdapterPath:$testDirs `
-    } -errorMessage "ERROR: Unit Tests execution FAILED."
-
-    if ($failsIfNotTest -And $cmdOutput -Match "Warning: No test is available") {
-        throw "No test was found but was expecting to find some"
-    }
+    & (Get-VsTestPath) $testFiles /Parallel /Enablecodecoverage /InIsolation /Logger:trx /UseVsixExtensions:true `
+        /TestAdapterPath:$testDirs
+    Test-ExitCode "ERROR: Unit Tests execution FAILED."
 }
 
 function Invoke-IntegrationTests([ValidateSet("14.0", "15.0")][string] $msbuildVersion) {
