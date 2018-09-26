@@ -18,29 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules
 {
-    [TestClass]
-    public class DoNotNestTernaryOperatorsTest
+    public abstract class DoNotNestTernaryOperatorsBase : SonarDiagnosticAnalyzer
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void DoNotNestTernaryOperators_CS()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotNestTernaryOperators.cs",
-                new DoNotNestTernaryOperators());
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void DoNotNestTernaryOperators_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotNestTernaryOperators.vb",
-                new SonarAnalyzer.Rules.VisualBasic.DoNotNestTernaryOperators());
-        }
+        protected const string DiagnosticId = "S3358";
     }
 }
