@@ -1,0 +1,17 @@
+{
+  "title": "\"Select\" statements should have at least 3 \"Case\" clauses",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "misra",
+    "bad-practice"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-1301",
+  "sqKey": "S1301",
+  "scope": "All"
+}
