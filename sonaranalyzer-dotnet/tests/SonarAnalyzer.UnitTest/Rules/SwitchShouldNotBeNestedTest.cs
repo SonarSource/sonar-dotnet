@@ -29,10 +29,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void SwitchShouldNotBeNested()
+        public void SwitchShouldNotBeNested_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\SwitchShouldNotBeNested.cs",
                 new SwitchShouldNotBeNested());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void SwitchShouldNotBeNested_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\SwitchShouldNotBeNested.vb",
+                new SonarAnalyzer.Rules.VisualBasic.SwitchShouldNotBeNested());
+        }
     }
 }
+

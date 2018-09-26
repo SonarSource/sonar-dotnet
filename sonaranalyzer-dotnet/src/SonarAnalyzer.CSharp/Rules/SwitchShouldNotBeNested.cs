@@ -31,9 +31,8 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class SwitchShouldNotBeNested : SonarDiagnosticAnalyzer
+    public sealed class SwitchShouldNotBeNested : SwitchShouldNotBeNestedBase
     {
-        internal const string DiagnosticId = "S1821";
         private const string MessageFormat = "Refactor the code to eliminate this nested 'switch'.";
 
         private static readonly DiagnosticDescriptor rule =

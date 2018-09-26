@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'Select'.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5787,
+"startColumn":  17,
+"endLine":  5787,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'Select'.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5792,
+"startColumn":  17,
+"endLine":  5792,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'Select'.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8790,
+"startColumn":  17,
+"endLine":  8790,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'Select'.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8799,
+"startColumn":  17,
+"endLine":  8799,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'Select'.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8834,
+"startColumn":  17,
+"endLine":  8834,
+"endColumn":  23
+}
+}
+}
+]
+}
