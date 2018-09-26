@@ -927,6 +927,36 @@
   <data name="S1764_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S1821_Category" xml:space="preserve">
+    <value>Critical Code Smell</value>
+  </data>
+  <data name="S1821_Description" xml:space="preserve">
+    <value>Nested switch structures are difficult to understand because you can easily confuse the cases of an inner switch as belonging to an outer statement. Therefore nested switch statements should be avoided.</value>
+  </data>
+  <data name="S1821_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S1821_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1821_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S1821_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S1821_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S1821_Tags" xml:space="preserve">
+    <value>pitfall</value>
+  </data>
+  <data name="S1821_Title" xml:space="preserve">
+    <value>"switch" statements should not be nested</value>
+  </data>
+  <data name="S1821_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1862_Category" xml:space="preserve">
     <value>Major Bug</value>
   </data>
