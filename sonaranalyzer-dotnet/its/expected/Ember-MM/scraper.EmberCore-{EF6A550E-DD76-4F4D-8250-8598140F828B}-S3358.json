@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3358",
+"message":  "Extract this nested If operator into independent If...Then...Else statements.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  231,
+"startColumn":  157,
+"endLine":  231,
+"endColumn":  274
+}
+}
+}
+]
+}
