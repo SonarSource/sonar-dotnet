@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -269,5 +269,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CheckFileLicense { HeaderFormat = MultiLineHeader },
                 new CheckFileLicenseCodeFixProvider());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CheckFileLicense_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense.vb",
+                new SonarAnalyzer.Rules.VisualBasic.CheckFileLicense());
+        }
     }
 }
+
