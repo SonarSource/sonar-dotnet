@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'Select'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  200,
+"startColumn":  33,
+"endLine":  200,
+"endColumn":  39
+}
+}
+}
+]
+}
