@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RoslynExportProfile Version="1.0">
+  <Configuration>
+    <RuleSet Name="Rules for SonarQube" Description="This rule set was automatically generated from SonarQube." ToolsVersion="14.0">
+      <Rules AnalyzerId="SonarAnalyzer.VisualBasic" RuleNamespace="SonarAnalyzer.VisualBasic">
+        <Rule Id="S1000" Action="Warning" />
+        <Rule Id="SonarLintInactiveRule" Action="None" />
+      </Rules>
+      <Rules AnalyzerId="custom-roslyn" RuleNamespace="custom-roslyn-namespace">
+        <Rule Id="CA1000" Action="Warning" />
+        <Rule Id="CustomRoslynInactiverule1" Action="None" />
+      </Rules>
+    </RuleSet>
+    <AdditionalFiles>
+      <AdditionalFile FileName="SonarLint.xml">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxBbmFseXNpc0lucHV0Pg0KICA8UnVsZXM+DQogICAgPFJ1bGU+DQogICAgICA8S2V5PlMxMDAwPC9LZXk+DQogICAgPC9SdWxlPg0KICA8L1J1bGVzPg0KICA8RmlsZXM+DQogIDwvRmlsZXM+DQo8L0FuYWx5c2lzSW5wdXQ+DQo=</AdditionalFile>
+    </AdditionalFiles>
+  </Configuration>
+  <Deployment>
+    <Plugins>
+      <Plugin Key="vbnet" Version="1.7.0" StaticResourceName="SonarAnalyzer.zip" />
+      <Plugin Key="customPluginKey" Version="customPluginVersion" StaticResourceName="customPluginStaticResourceName" />
+    </Plugins>
+    <NuGetPackages>
+      <NuGetPackage Id="SonarAnalyzer.VisualBasic" Version="1.10.0" />
+      <NuGetPackage Id="custom-roslyn-package" Version="custom-rolsyn-version" />
+    </NuGetPackages>
+  </Deployment>
+</RoslynExportProfile>
