@@ -6,7 +6,12 @@
     <PropertyGroup>
       <SonarAnalyzerRegressionTestRunning Condition="Exists('$(MSBuildStartupDirectory)\binaries\SonarAnalyzer.dll')">true</SonarAnalyzerRegressionTestRunning>
       <SonarAnalyzerRegressionTestRunning Condition="$(SonarAnalyzerRegressionTestRunning) == ''">false</SonarAnalyzerRegressionTestRunning>
-      <ProjectConfFilePath>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)\ProjectOutFolderPath.txt;$(MSBuildStartupDirectory)\SonarLint.xml</ProjectConfFilePath>
+      <ProjectConfFilePath Condition="!Exists('$(MSBuildStartupDirectory)\sources\$(PROJECT)\SonarLint.xml')">
+        $(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)\ProjectOutFolderPath.txt;$(MSBuildStartupDirectory)\SonarLint.xml
+      </ProjectConfFilePath>
+      <ProjectConfFilePath Condition="Exists('$(MSBuildStartupDirectory)\sources\$(PROJECT)\SonarLint.xml')">
+        $(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)\ProjectOutFolderPath.txt;$(MSBuildStartupDirectory)\sources\$(PROJECT)\SonarLint.xml
+      </ProjectConfFilePath>
     </PropertyGroup>
 
     <MakeDir Condition="$(SonarAnalyzerRegressionTestRunning)"

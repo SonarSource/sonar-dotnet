@@ -4,45 +4,6 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Messages.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\PerformanceActors.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
 "uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Properties\AssemblyInfo.cs",
 "region":  {
 "startLine":  1,
