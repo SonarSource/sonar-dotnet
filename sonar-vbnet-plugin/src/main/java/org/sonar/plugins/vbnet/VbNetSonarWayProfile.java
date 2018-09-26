@@ -35,37 +35,6 @@ public class VbNetSonarWayProfile implements BuiltInQualityProfilesDefinition {
   public void define(Context context) {
     NewBuiltInQualityProfile sonarWay = context.createBuiltInQualityProfile("Sonar way", VbNetPlugin.LANGUAGE_KEY);
     BuiltInQualityProfileJsonLoader.load(sonarWay, VbNetPlugin.REPOSITORY_KEY, "org/sonar/plugins/vbnet/Sonar_way_profile.json");
-    final String repositoryKey = getRepositoryKey();
-    try {
-      getSecurityRuleKeys().forEach(key -> sonarWay.activateRule(repositoryKey, key));
-    } catch (IllegalArgumentException|IllegalStateException e) {
-      LOG.warn("Could not activate C# security rules", e);
-    }
     sonarWay.done();
-  }
-
-  private static Set<String> getSecurityRuleKeys() {
-    try {
-      Class<?> csRulesClass = Class.forName("com.sonar.plugins.security.api.CsRules");
-      Method getRuleKeysMethod = csRulesClass.getMethod("getRuleKeys");
-      return (Set<String>) getRuleKeysMethod.invoke(null);
-    } catch (ClassNotFoundException|NoSuchMethodException e) {
-      LOG.debug("com.sonar.plugins.security.api.CsRules#getRuleKeys is not found, no security rules added to Sonar way cs profile: " + e.getMessage());
-    } catch (IllegalAccessException|InvocationTargetException e) {
-      LOG.debug("[" + e.getClass().getName() + "] No security rules added to Sonar way cs profile: " + e.getMessage());
-    }
-
-    return new HashSet<>();
-  }
-
-  private static String getRepositoryKey() {
-    try {
-      Class<?> csRulesClass = Class.forName("com.sonar.plugins.security.api.CsRules");
-      Method getRuleKeysMethod = csRulesClass.getMethod("getRepositoryKey");
-      return (String) getRuleKeysMethod.invoke(null);
-    } catch (ClassNotFoundException|NoSuchMethodException|IllegalAccessException|InvocationTargetException e) {
-      LOG.debug("com.sonar.plugins.security.api.CsRules#getRepositoryKey is not found, will use default repository key: " + e.getMessage());
-    }
-    return VbNetPlugin.REPOSITORY_KEY;
   }
 }
