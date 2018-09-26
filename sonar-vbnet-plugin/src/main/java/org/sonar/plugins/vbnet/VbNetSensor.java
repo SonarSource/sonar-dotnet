@@ -58,7 +58,7 @@ public class VbNetSensor implements Sensor {
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    descriptor.name("C#")
+    descriptor.name("VB.NET")
       .onlyOnLanguage(VbNetPlugin.LANGUAGE_KEY)
       .global();
   }

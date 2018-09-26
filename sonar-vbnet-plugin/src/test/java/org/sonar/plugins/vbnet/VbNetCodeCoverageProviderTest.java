@@ -43,10 +43,10 @@ public class VbNetCodeCoverageProviderTest {
       VbNetCoverageReportImportSensor.class,
       VbNetIntegrationCoverageReportImportSensor.class);
     assertThat(propertyKeys(VbNetCodeCoverageProvider.extensions())).containsOnly(
-      "sonar.vb.ncover3.reportsPaths", "sonar.vb.ncover3.it.reportsPaths",
-      "sonar.vb.opencover.reportsPaths", "sonar.vb.opencover.it.reportsPaths",
-      "sonar.vb.dotcover.reportsPaths", "sonar.vb.dotcover.it.reportsPaths",
-      "sonar.vb.vscoveragexml.reportsPaths", "sonar.vb.vscoveragexml.it.reportsPaths");
+      "sonar.vbnet.ncover3.reportsPaths", "sonar.vbnet.ncover3.it.reportsPaths",
+      "sonar.vbnet.opencover.reportsPaths", "sonar.vbnet.opencover.it.reportsPaths",
+      "sonar.vbnet.dotcover.reportsPaths", "sonar.vbnet.dotcover.it.reportsPaths",
+      "sonar.vbnet.vscoveragexml.reportsPaths", "sonar.vbnet.vscoveragexml.it.reportsPaths");
   }
 
   @Test

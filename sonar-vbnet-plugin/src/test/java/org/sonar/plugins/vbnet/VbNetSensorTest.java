@@ -91,7 +91,7 @@ public class VbNetSensorTest {
     sensor.describe(sensorDescriptor);
     assertThat(sensorDescriptor.isGlobal()).isTrue();
     assertThat(sensorDescriptor.languages()).containsOnly("vbnet");
-    assertThat(sensorDescriptor.name()).isEqualTo("C#");
+    assertThat(sensorDescriptor.name()).isEqualTo("VB.NET");
   }
 
   @Test

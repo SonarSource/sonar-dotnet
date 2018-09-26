@@ -30,18 +30,18 @@ import org.sonar.plugins.dotnet.tests.CoverageReportImportSensor;
 
 public class VbNetCodeCoverageProvider {
 
-  private static final String CATEGORY = "C#";
+  private static final String CATEGORY = "VB.NET";
   private static final String SUBCATEGORY = "Code Coverage";
 
-  private static final String NCOVER3_PROPERTY_KEY = "sonar.vb.ncover3.reportsPaths";
-  private static final String OPENCOVER_PROPERTY_KEY = "sonar.vb.opencover.reportsPaths";
-  private static final String DOTCOVER_PROPERTY_KEY = "sonar.vb.dotcover.reportsPaths";
-  private static final String VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY = "sonar.vb.vscoveragexml.reportsPaths";
+  private static final String NCOVER3_PROPERTY_KEY = "sonar.vbnet.ncover3.reportsPaths";
+  private static final String OPENCOVER_PROPERTY_KEY = "sonar.vbnet.opencover.reportsPaths";
+  private static final String DOTCOVER_PROPERTY_KEY = "sonar.vbnet.dotcover.reportsPaths";
+  private static final String VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY = "sonar.vbnet.vscoveragexml.reportsPaths";
 
-  private static final String IT_NCOVER3_PROPERTY_KEY = "sonar.vb.ncover3.it.reportsPaths";
-  private static final String IT_OPENCOVER_PROPERTY_KEY = "sonar.vb.opencover.it.reportsPaths";
-  private static final String IT_DOTCOVER_PROPERTY_KEY = "sonar.vb.dotcover.it.reportsPaths";
-  private static final String IT_VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY = "sonar.vb.vscoveragexml.it.reportsPaths";
+  private static final String IT_NCOVER3_PROPERTY_KEY = "sonar.vbnet.ncover3.it.reportsPaths";
+  private static final String IT_OPENCOVER_PROPERTY_KEY = "sonar.vbnet.opencover.it.reportsPaths";
+  private static final String IT_DOTCOVER_PROPERTY_KEY = "sonar.vbnet.dotcover.it.reportsPaths";
+  private static final String IT_VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY = "sonar.vbnet.vscoveragexml.it.reportsPaths";
 
   private static final CoverageConfiguration COVERAGE_CONF = new CoverageConfiguration(
     VbNetPlugin.LANGUAGE_KEY,

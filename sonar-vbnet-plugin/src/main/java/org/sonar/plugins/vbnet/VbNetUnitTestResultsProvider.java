@@ -31,12 +31,12 @@ import org.sonar.plugins.dotnet.tests.UnitTestResultsImportSensor;
 
 public class VbNetUnitTestResultsProvider {
 
-  private static final String CATEGORY = "C#";
+  private static final String CATEGORY = "VB.NET";
   private static final String SUBCATEGORY = "Unit Tests";
 
-  private static final String VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY = "sonar.vb.vstest.reportsPaths";
-  private static final String NUNIT_TEST_RESULTS_PROPERTY_KEY = "sonar.vb.nunit.reportsPaths";
-  private static final String XUNIT_TEST_RESULTS_PROPERTY_KEY = "sonar.vb.xunit.reportsPaths";
+  private static final String VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY = "sonar.vbnet.vstest.reportsPaths";
+  private static final String NUNIT_TEST_RESULTS_PROPERTY_KEY = "sonar.vbnet.nunit.reportsPaths";
+  private static final String XUNIT_TEST_RESULTS_PROPERTY_KEY = "sonar.vbnet.xunit.reportsPaths";
 
   private static final UnitTestConfiguration UNIT_TEST_CONF = new UnitTestConfiguration(VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY, NUNIT_TEST_RESULTS_PROPERTY_KEY,
     XUNIT_TEST_RESULTS_PROPERTY_KEY);

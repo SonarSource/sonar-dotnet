@@ -21,24 +21,14 @@ package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.build.Build;
-import com.sonar.orchestrator.build.ScannerForMSBuild;
-import com.sonar.orchestrator.container.Edition;
 import com.sonar.orchestrator.locator.FileLocation;
-import com.sonar.orchestrator.locator.Location;
-import com.sonar.orchestrator.locator.MavenLocation;
-import com.sonar.orchestrator.util.Command;
-import com.sonar.orchestrator.util.CommandExecutor;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Optional;
 import javax.annotation.CheckForNull;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
 import org.junit.ClassRule;
 import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
@@ -47,23 +37,12 @@ import org.junit.runners.Suite.SuiteClasses;
 import org.sonarqube.ws.Issues;
 import org.sonarqube.ws.WsComponents;
 import org.sonarqube.ws.WsMeasures;
-import org.sonarqube.ws.WsMeasures.Measure;
-import org.sonarqube.ws.client.HttpConnector;
-import org.sonarqube.ws.client.WsClient;
-import org.sonarqube.ws.client.WsClientFactories;
-import org.sonarqube.ws.client.component.ShowWsRequest;
-import org.sonarqube.ws.client.measure.ComponentWsRequest;
-
-import static java.util.Collections.singletonList;
-import static java.util.Objects.requireNonNull;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(Suite.class)
 @SuiteClasses({
   CoverageTest.class,
   DoNotAnalyzeTestFilesTest.class,
   MetricsTest.class,
-  NoSonarTest.class,
   NoSonarTest.class,
   UnitTestResultsTest.class
 })

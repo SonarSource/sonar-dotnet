@@ -39,8 +39,8 @@ public class VbNetUnitTestResultsProviderTest {
       VbNetUnitTestResultsAggregator.class,
       VbNetUnitTestResultsImportSensor.class);
     assertThat(propertyKeys(VbNetUnitTestResultsProvider.extensions())).containsOnly(
-      "sonar.vb.vstest.reportsPaths",
-      "sonar.vb.nunit.reportsPaths");
+      "sonar.vbnet.vstest.reportsPaths",
+      "sonar.vbnet.nunit.reportsPaths");
   }
 
   @Test
