@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'n'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  181,
+"startColumn":  21,
+"endLine":  181,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'iSel'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\frmSettingsHolder.vb",
+"region":  {
+"startLine":  63,
+"startColumn":  13,
+"endLine":  63,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'id'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  144,
+"startColumn":  21,
+"endLine":  144,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'DBMovie'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  275,
+"startColumn":  21,
+"endLine":  275,
+"endColumn":  28
+}
+}
+}
+]
+}
