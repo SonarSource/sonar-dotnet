@@ -537,6 +537,36 @@
   <data name="S1226_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S1301_Category" xml:space="preserve">
+    <value>Minor Code Smell</value>
+  </data>
+  <data name="S1301_Description" xml:space="preserve">
+    <value>switch statements are useful when there are many different cases depending on the value of the same expression.</value>
+  </data>
+  <data name="S1301_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S1301_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1301_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S1301_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S1301_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S1301_Tags" xml:space="preserve">
+    <value>misra,bad-practice</value>
+  </data>
+  <data name="S1301_Title" xml:space="preserve">
+    <value>"Select" statements should have at least 3 "Case" clauses</value>
+  </data>
+  <data name="S1301_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S131_Category" xml:space="preserve">
     <value>Critical Code Smell</value>
   </data>
