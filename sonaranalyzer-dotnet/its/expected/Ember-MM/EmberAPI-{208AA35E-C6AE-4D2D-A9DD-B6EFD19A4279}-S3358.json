@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3358",
+"message":  "Extract this nested If operator into independent If...Then...Else statements.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"region":  {
+"startLine":  1083,
+"startColumn":  64,
+"endLine":  1083,
+"endColumn":  183
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested If operator into independent If...Then...Else statements.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"region":  {
+"startLine":  1083,
+"startColumn":  185,
+"endLine":  1083,
+"endColumn":  253
+}
+}
+}
+]
+}
