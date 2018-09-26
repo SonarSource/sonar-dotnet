@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1301",
+"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"region":  {
+"startLine":  108,
+"startColumn":  21,
+"endLine":  108,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"region":  {
+"startLine":  131,
+"startColumn":  13,
+"endLine":  131,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"region":  {
+"startLine":  222,
+"startColumn":  9,
+"endLine":  222,
+"endColumn":  15
+}
+}
+}
+]
+}

@@ -2,26 +2,20 @@
 <p>For just one or two cases however, the code will be more readable with <code>if</code> statements.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-switch (variable)
-{
-  case 0:
-    doSomething();
-    break;
-  default:
-    doSomethingElse();
-    break;
-}
+Select Case variable
+    Case 0
+        doSomething()
+    Case Else
+        doSomethingElse()
+End Select
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-if (variable == 0)
-{
-  doSomething();
-}
-else
-{
-  doSomethingElse();
-}
+If variable = 0 Then
+    doSomething()
+Else
+    doSomethingElse()
+End If
 </pre>
 <h2>See</h2>
 <ul>

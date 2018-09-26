@@ -18,29 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules
 {
-    [TestClass]
-    public class SwitchCasesMinimumThreeTest
+    public abstract class SwitchCasesMinimumThreeBase : SonarDiagnosticAnalyzer
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void SwitchCasesMinimumThree_CS()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchCasesMinimumThree.cs", new SwitchCasesMinimumThree());
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void SwitchCasesMinimumThree_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchCasesMinimumThree.vb",
-                new SonarAnalyzer.Rules.VisualBasic.SwitchCasesMinimumThree());
-        }
+        protected const string DiagnosticId = "S1301";
     }
 }
-

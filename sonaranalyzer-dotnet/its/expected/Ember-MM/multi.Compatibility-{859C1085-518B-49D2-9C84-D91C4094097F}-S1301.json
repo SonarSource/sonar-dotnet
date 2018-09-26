@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1301",
+"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  101,
+"startColumn":  5,
+"endLine":  101,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  113,
+"startColumn":  5,
+"endLine":  113,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  126,
+"startColumn":  5,
+"endLine":  126,
+"endColumn":  11
+}
+}
+}
+]
+}

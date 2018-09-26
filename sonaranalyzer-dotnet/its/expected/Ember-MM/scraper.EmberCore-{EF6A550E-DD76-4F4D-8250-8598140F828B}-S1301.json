@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1301",
+"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  815,
+"startColumn":  4,
+"endLine":  815,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  759,
+"startColumn":  17,
+"endLine":  759,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  776,
+"startColumn":  17,
+"endLine":  776,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"region":  {
+"startLine":  1255,
+"startColumn":  13,
+"endLine":  1255,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"region":  {
+"startLine":  314,
+"startColumn":  9,
+"endLine":  314,
+"endColumn":  15
+}
+}
+}
+]
+}
