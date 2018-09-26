@@ -54,9 +54,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.SelectBlock);
         }
 
-        private static bool HasAtLeastThreeLabels(SelectBlockSyntax node)
-        {
-            return node.CaseBlocks.Sum(caseBlock => caseBlock.CaseStatement.Cases.Count) >= 3;
-        }
-}
+        private static bool HasAtLeastThreeLabels(SelectBlockSyntax node) =>
+            node.CaseBlocks.Sum(caseBlock => caseBlock.CaseStatement.Cases.Count) >= 3;
+    }
 }

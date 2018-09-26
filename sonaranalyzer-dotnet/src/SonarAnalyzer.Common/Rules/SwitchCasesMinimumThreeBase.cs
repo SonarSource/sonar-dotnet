@@ -22,7 +22,6 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-
     public abstract class SwitchCasesMinimumThreeBase : SonarDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S1301";

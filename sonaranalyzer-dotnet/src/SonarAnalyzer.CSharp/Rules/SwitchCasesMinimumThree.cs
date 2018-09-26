@@ -53,9 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.SwitchStatement);
         }
 
-        private static bool HasAtLeastThreeLabels(SwitchStatementSyntax node)
-        {
-            return node.Sections.Sum(section => section.Labels.Count) >= 3;
-        }
+        private static bool HasAtLeastThreeLabels(SwitchStatementSyntax node) =>
+            node.Sections.Sum(section => section.Labels.Count) >= 3;
     }
 }
