@@ -18,11 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -34,121 +30,56 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotHardcodeCredentials : ParameterLoadingDiagnosticAnalyzer
+    public sealed class DoNotHardcodeCredentials : DoNotHardcodeCredentialsBase
     {
-        internal const string DiagnosticId = "S2068";
-        private const string MessageFormat = "Remove hard-coded password(s): '{0}'.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
                 isEnabledByDefault: false);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private IEnumerable<string> splitCredentialWords;
-        private string credentialWords;
-        private Regex passwordValuePattern;
-
-        private const string DefaultCredentialWords = "password, passwd, pwd";
-        [RuleParameter("credentialWords", PropertyType.String, "Comma separated list of words identifying potential credentials",
-            DefaultCredentialWords)]
-        public string CredentialWords
-        {
-            get => this.credentialWords;
-            set
-            {
-                this.credentialWords = value;
-                this.splitCredentialWords = value.ToUpperInvariant()
-                    .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                    .Select(x => x.Trim())
-                    .ToList();
-                this.passwordValuePattern = new Regex(string.Format(@"\b(?<password>{0})\b[:=]\S",
-                    string.Join("|", this.splitCredentialWords)), RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            }
-        }
-
-        public DoNotHardcodeCredentials()
-        {
-            CredentialWords = DefaultCredentialWords;
-        }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
+            ImmutableArray.Create(rule);
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(VerifyDeclaration, SyntaxKind.VariableDeclaration);
-            context.RegisterSyntaxNodeActionInNonGenerated(VerifyAssignment, SyntaxKind.SimpleAssignmentExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                new VariableDeclarationBannedWordsFinder(this).GetAnalysisAction(rule),
+                SyntaxKind.VariableDeclarator);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                new AssignmentExpressionBannedWordsFinder(this).GetAnalysisAction(rule),
+                SyntaxKind.SimpleAssignmentExpression);
         }
 
-        private void VerifyAssignment(SyntaxNodeAnalysisContext context)
+        private class VariableDeclarationBannedWordsFinder : BannedWordsFinderBase<VariableDeclaratorSyntax>
         {
-            var assignment = context.Node as AssignmentExpressionSyntax;
-            if (!assignment.IsKind(SyntaxKind.SimpleAssignmentExpression) ||
-                !assignment.Left.IsKnownType(KnownType.System_String, context.SemanticModel) ||
-                !assignment.Right.IsKind(SyntaxKind.StringLiteralExpression))
-            {
-                return;
-            }
+            public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentialsBase analyzer) : base(analyzer) { }
 
-            var variableName = (assignment.Left as IdentifierNameSyntax)?.Identifier.ValueText;
-            var variableValue = (assignment.Right as LiteralExpressionSyntax)?.Token.ValueText;
+            protected override string GetAssignedValue(VariableDeclaratorSyntax declarator) =>
+                declarator.Initializer?.Value.ToString();
 
-            var bannedWords = FindBannedWords(variableName, variableValue);
-            if (bannedWords != null)
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignment.GetLocation(), bannedWords));
-            }
+            protected override string GetVariableName(VariableDeclaratorSyntax declarator) =>
+                declarator.Identifier.ValueText;
+
+            protected override bool IsAssignedWithStringLiteral(VariableDeclaratorSyntax declarator, SemanticModel semanticModel) =>
+                (declarator.Initializer?.Value is LiteralExpressionSyntax literalExpression) &&
+                literalExpression.IsKind(SyntaxKind.StringLiteralExpression) &&
+                declarator.IsDeclarationKnownType(KnownType.System_String, semanticModel);
         }
 
-        private void VerifyDeclaration(SyntaxNodeAnalysisContext context)
+        private class AssignmentExpressionBannedWordsFinder : BannedWordsFinderBase<AssignmentExpressionSyntax>
         {
-            var declaration = context.Node as VariableDeclarationSyntax;
+            public AssignmentExpressionBannedWordsFinder(DoNotHardcodeCredentialsBase analyzer) : base(analyzer) { }
 
-            var stringTypeDeclarators = declaration.Variables
-                .Where(v => v.IsDeclarationKnownType(KnownType.System_String, context.SemanticModel));
+            protected override string GetAssignedValue(AssignmentExpressionSyntax assignment) =>
+                (assignment.Right as LiteralExpressionSyntax)?.Token.ValueText;
 
-            foreach (var variableDeclarator in stringTypeDeclarators)
-            {
-                var bannedWords = FindBannedWords(variableDeclarator);
-                if (bannedWords != null)
-                {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, variableDeclarator.GetLocation(), bannedWords));
-                }
-            }
-        }
+            protected override string GetVariableName(AssignmentExpressionSyntax assignment) =>
+                (assignment.Left as IdentifierNameSyntax)?.Identifier.ValueText;
 
-        private string FindBannedWords(VariableDeclaratorSyntax variableDeclarator)
-        {
-            var variableName = variableDeclarator?.Identifier.ValueText;
-            if (!(variableDeclarator?.Initializer?.Value is LiteralExpressionSyntax literalExpression) ||
-                !literalExpression.IsKind(SyntaxKind.StringLiteralExpression))
-            {
-                return null;
-            }
-
-            return FindBannedWords(variableName, literalExpression.Token.ValueText);
-        }
-
-        private string FindBannedWords(string variableName, string variableValue)
-        {
-            if (string.IsNullOrWhiteSpace(variableValue))
-            {
-                return null;
-            }
-
-            var bannedWordsFound = variableName
-                .SplitCamelCaseToWords()
-                .Intersect(this.splitCredentialWords)
-                .ToHashSet(StringComparer.OrdinalIgnoreCase);
-
-            var matches = this.passwordValuePattern.Matches(variableValue);
-            foreach (Match match in matches)
-            {
-                bannedWordsFound.Add(match.Groups["password"].Value);
-            }
-
-            // Rule was initially implemented with everything lower (which is wrong) so we have to force lower
-            // before reporting to avoid new issues to appear on SQ/SC.
-            return bannedWordsFound.Count > 0
-                ? string.Join(", ", bannedWordsFound.Select(x => x.ToLowerInvariant()))
-                : null;
+            protected override bool IsAssignedWithStringLiteral(AssignmentExpressionSyntax assignment, SemanticModel semanticModel) =>
+                assignment.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
+                assignment.Left.IsKnownType(KnownType.System_String, semanticModel) &&
+                assignment.Right.IsKind(SyntaxKind.StringLiteralExpression);
         }
     }
 }

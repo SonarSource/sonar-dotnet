@@ -3,16 +3,16 @@ end up in the hands of an attacker. This is particularly true for applications t
 <p>Credentials should be stored outside of the code in a strongly-protected encrypted configuration file or database.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-string username = "admin";
-string password = "Password123"; // Noncompliant
-string usernamePassword  = "user=admin&amp;password=Password123"; // Noncompliant
-string usernamePassword2 = "user=admin&amp;" + "password=" + password; // Noncompliant
+Dim username As String = "admin"
+Dim password As String = "Password123"
+Dim usernamePassword As String = "user=admin&amp;password=Password123"
+Dim usernamePassword2 As String = "user=admin&amp;" &amp; "password=" &amp; password
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-string username = "admin";
-string password = GetEncryptedPassword();
-string usernamePassword = string.Format("user={0}&amp;password={1}", GetEncryptedUsername(), GetEncryptedPassword());
+Dim username As String = "admin"
+Dim password As String = GetEncryptedPassword()
+Dim usernamePassword As String = String.Format("user={0}&amp;password={1}", GetEncryptedUsername(), GetEncryptedPassword())
 </pre>
 <h2>See</h2>
 <ul>
