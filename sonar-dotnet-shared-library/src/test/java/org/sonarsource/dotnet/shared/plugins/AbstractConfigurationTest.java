@@ -177,7 +177,7 @@ public class AbstractConfigurationTest {
   }
 
   @Test
-  public void externalIssueIsFalseByDefault() {
+  public void ignoreExternalIssuesIsFalseByDefault() {
     config = new AbstractConfiguration(settings.asConfig(), "cs") {
     };
     assertThat(config.ignoreThirdPartyIssues()).isFalse();
