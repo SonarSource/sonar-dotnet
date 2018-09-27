@@ -1,0 +1,16 @@
+{
+  "title": "Using hardcoded IP addresses is security-sensitive",
+  "type": "SECURITY_HOTSPOT",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [
+    "cert"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-1313",
+  "sqKey": "S1313",
+  "scope": "Main"
+}
