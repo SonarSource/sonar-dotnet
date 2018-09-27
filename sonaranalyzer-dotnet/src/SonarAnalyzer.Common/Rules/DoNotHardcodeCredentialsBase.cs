@@ -62,12 +62,12 @@ namespace SonarAnalyzer.Rules
             CredentialWords = DefaultCredentialWords;
         }
 
-        protected abstract class BannedWordsFinderBase<TSyntaxNode>
+        protected abstract class CredentialWordsFinderBase<TSyntaxNode>
              where TSyntaxNode : SyntaxNode
         {
             private readonly DoNotHardcodeCredentialsBase analyzer;
 
-            protected BannedWordsFinderBase(DoNotHardcodeCredentialsBase analyzer)
+            protected CredentialWordsFinderBase(DoNotHardcodeCredentialsBase analyzer)
             {
                 this.analyzer = analyzer;
             }
@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules
                     var variableName = GetVariableName(declarator);
                     var variableValue = GetAssignedValue(declarator);
 
-                    var bannedWords = FindBannedWords(variableName, variableValue);
+                    var bannedWords = FindCredentialWords(variableName, variableValue);
                     if (bannedWords.Any())
                     {
                         context.ReportDiagnosticWhenActive(
@@ -99,15 +99,14 @@ namespace SonarAnalyzer.Rules
                     }
                 };
 
-            protected IEnumerable<string> FindBannedWords(string variableName, string variableValue)
+            protected IEnumerable<string> FindCredentialWords(string variableName, string variableValue)
             {
-                if (string.IsNullOrWhiteSpace(variableName) ||
-                    string.IsNullOrWhiteSpace(variableValue))
+                if (string.IsNullOrWhiteSpace(variableValue))
                 {
                     return Enumerable.Empty<string>();
                 }
 
-                var bannedWordsFound = variableName
+                var credentialWordsFound = variableName
                     .SplitCamelCaseToWords()
                     .Intersect(analyzer.splitCredentialWords)
                     .ToHashSet(StringComparer.OrdinalIgnoreCase);
@@ -115,12 +114,12 @@ namespace SonarAnalyzer.Rules
                 var matches = analyzer.passwordValuePattern.Matches(variableValue);
                 foreach (Match match in matches)
                 {
-                    bannedWordsFound.Add(match.Groups["password"].Value);
+                    credentialWordsFound.Add(match.Groups["password"].Value);
                 }
 
                 // Rule was initially implemented with everything lower (which is wrong) so we have to force lower
                 // before reporting to avoid new issues to appear on SQ/SC.
-                return bannedWordsFound.Select(x => x.ToLowerInvariant());
+                return credentialWordsFound.Select(x => x.ToLowerInvariant());
             }
         }
     }

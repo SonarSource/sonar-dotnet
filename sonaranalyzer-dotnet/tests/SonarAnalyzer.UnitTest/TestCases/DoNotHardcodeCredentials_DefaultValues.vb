@@ -17,4 +17,19 @@ Namespace Tests.Diagnostics
             foo = "foo=1password=1"
         End Sub
     End Class
+
+    Class FalseNegatives
+        Private password As String
+
+        Public Sub Foo()
+            Me.password = "foo" ' False Negative
+            Configuration.Password = "foo" ' False Negative
+            Me.password = Configuration.Password = "foo" ' False Negative
+        End Sub
+
+        Class Configuration
+            Public Shared Property Password As String
+        End Class
+    End Class
+
 End Namespace

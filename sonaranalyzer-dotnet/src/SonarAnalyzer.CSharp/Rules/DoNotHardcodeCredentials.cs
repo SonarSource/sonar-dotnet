@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.SimpleAssignmentExpression);
         }
 
-        private class VariableDeclarationBannedWordsFinder : BannedWordsFinderBase<VariableDeclaratorSyntax>
+        private class VariableDeclarationBannedWordsFinder : CredentialWordsFinderBase<VariableDeclaratorSyntax>
         {
             public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentialsBase analyzer) : base(analyzer) { }
 
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 declarator.IsDeclarationKnownType(KnownType.System_String, semanticModel);
         }
 
-        private class AssignmentExpressionBannedWordsFinder : BannedWordsFinderBase<AssignmentExpressionSyntax>
+        private class AssignmentExpressionBannedWordsFinder : CredentialWordsFinderBase<AssignmentExpressionSyntax>
         {
             public AssignmentExpressionBannedWordsFinder(DoNotHardcodeCredentialsBase analyzer) : base(analyzer) { }
 
