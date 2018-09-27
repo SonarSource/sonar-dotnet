@@ -25,7 +25,6 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
 public class VbNetSonarWayProfile implements BuiltInQualityProfilesDefinition {
-  private static final Logger LOG = Loggers.get(VbNetSonarWayProfile.class);
 
   @Override
   public void define(Context context) {
