@@ -1,0 +1,13 @@
+<p>Recursion is acceptable in methods, where you can break out of it. But with class types, you end up with code that will compile but not run if you
+try to instantiate the class.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Class C1(Of T)
+End Class
+Class C2(Of T)
+    Inherits C1(Of C2 (Of T))
+End Class
+' ...
+Dim c2 = New C2(Of Integer)
+</pre>
+
