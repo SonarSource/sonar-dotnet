@@ -39,12 +39,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
+import org.sonar.api.SonarQubeSide;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.internal.google.common.collect.ImmutableList;
 import org.sonar.api.internal.google.common.collect.ImmutableMap;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.api.utils.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -103,6 +106,22 @@ public class RoslynDataImporterTest {
           "Custom Roslyn analyzer message"),
         Tuple.tuple(RuleKey.of("csharpsquid", "[parameters_key]"), null,
           "This is an assembly level Roslyn issue with no location"));
+
+    assertThat(tester.allAdHocRules()).isEmpty();
+    assertThat(tester.allExternalIssues()).hasSize(1);
+  }
+
+  @Test
+  public void dont_import_external_issues_before_7_4() {
+    tester.setRuntime(SonarRuntimeImpl.forSonarQube(Version.create(7, 3), SonarQubeSide.SCANNER));
+
+    Map<String, List<RuleKey>> activeRules = createActiveRules();
+    roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(tester.module(), workDir.resolve("roslyn-report.json"))), tester, activeRules,
+      String::toString);
+
+    assertThat(tester.allIssues()).hasSize(4);
+    assertThat(tester.allAdHocRules()).isEmpty();
+    assertThat(tester.allExternalIssues()).isEmpty();
   }
 
   @Test
