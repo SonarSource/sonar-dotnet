@@ -19,6 +19,7 @@
  */
 package com.sonar.it.csharp;
 
+import com.sonar.it.shared.TestUtils;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -43,23 +44,23 @@ public class MultiTargetAppTest {
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
   @Before
-  public void init() throws Exception {
+  public void init() {
     orchestrator.resetData();
   }
 
   @Test
   public void should_analyze_multitarget_project() throws Exception {
     Path projectDir = Tests.projectDir(temp, "MultiTargetConsoleApp");
-    orchestrator.executeBuild(Tests.newScanner(projectDir)
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("MultiTargetConsoleApp")
       .setProjectName("MultiTargetConsoleApp")
       .setProjectVersion("1.0"));
 
     Tests.runNuGet(orchestrator, projectDir, "restore");
-    Tests.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(Tests.newScanner(projectDir)
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("end"));
 
     assertThat(getComponent("MultiTargetConsoleApp:MultiTargetConsoleApp:9D7FB932-3B1E-446D-9D34-A63410458B88:Program.cs")).isNotNull();

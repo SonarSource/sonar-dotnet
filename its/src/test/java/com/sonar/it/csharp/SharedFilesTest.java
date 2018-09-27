@@ -19,6 +19,7 @@
  */
 package com.sonar.it.csharp;
 
+import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
 import java.nio.file.Path;
 import java.util.List;
@@ -29,10 +30,9 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Issues.Issue;
 
-import static com.sonar.it.csharp.Tests.getMeasureAsInt;
-import static com.sonar.it.csharp.Tests.getIssues;
-
 import static com.sonar.it.csharp.Tests.getComponent;
+import static com.sonar.it.csharp.Tests.getIssues;
+import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SharedFilesTest {
@@ -43,23 +43,23 @@ public class SharedFilesTest {
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
   @Before
-  public void init() throws Exception {
+  public void init() {
     orchestrator.resetData();
   }
   
   @Test
   public void should_analyze_shared_files() throws Exception {
     Path projectDir = Tests.projectDir(temp, "SharedFilesTest");
-    orchestrator.executeBuild(Tests.newScanner(projectDir)
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("SharedFilesTest")
       .setProjectName("SharedFilesTest")
       .setProjectVersion("1.0")
       .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml"));
 
-    Tests.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(Tests.newScanner(projectDir)
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("end"));
 
     assertThat(getComponent("SharedFilesTest:Class1.cs")).isNotNull();

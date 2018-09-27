@@ -19,6 +19,7 @@
  */
 package com.sonar.it.csharp;
 
+import com.sonar.it.shared.TestUtils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -73,7 +74,7 @@ public class MetricsTest {
           ORCHESTRATOR.resetData();
 
           Path projectDir = Tests.projectDir(temp, "MetricsTest");
-          ORCHESTRATOR.executeBuild(Tests.newScanner(projectDir)
+          ORCHESTRATOR.executeBuild(TestUtils.newScanner(projectDir)
             .addArgument("begin")
             .setProjectKey("MetricsTest")
             .setProjectName("MetricsTest")
@@ -82,9 +83,9 @@ public class MetricsTest {
             // Without that, the MetricsTest project is considered as a Test project :)
             .setProperty("sonar.msbuild.testProjectPattern", "noTests"));
 
-          Tests.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
+          TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
 
-          ORCHESTRATOR.executeBuild(Tests.newScanner(projectDir)
+          ORCHESTRATOR.executeBuild(TestUtils.newScanner(projectDir)
             .addArgument("end"));
         }
       });
