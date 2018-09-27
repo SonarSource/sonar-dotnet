@@ -18,11 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -34,11 +30,8 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class HardcodedIpAddress : HotspotDiagnosticAnalyzer
+    public sealed class HardcodedIpAddress : HardcodedIpAddressBase<LiteralExpressionSyntax>
     {
-        internal const string DiagnosticId = "S1313";
-        private const string MessageFormat = "Make sure using this hardcoded IP address '{0}' is safe here.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                 .WithNotConfigurable();
@@ -53,9 +46,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
         }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private static readonly ISet<string> SkippedWords = new HashSet<string> { "VERSION", "ASSEMBLY" };
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
+            ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -67,57 +59,24 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    ccc.RegisterSyntaxNodeActionInNonGenerated(
-                        c =>
-                        {
-                            var stringLiteral = (LiteralExpressionSyntax)c.Node;
-                            var text = stringLiteral.Token.ValueText;
-
-                            if (text == "::")
-                            {
-                                return;
-                            }
-
-                            if (text == "127.0.0.1")
-                            {
-                                return;
-                            }
-
-                            if (!IPAddress.TryParse(text, out var address))
-                            {
-                                return;
-                            }
-
-                            if (address.AddressFamily == AddressFamily.InterNetwork &&
-                                text.Split('.').Length != 4)
-                            {
-                                return;
-                            }
-
-                            var ancestorOrSelf = stringLiteral.FirstAncestorOrSelf<SyntaxNode>(IsCheckedType);
-                            var ancestorString = ancestorOrSelf?.ToString().ToUpperInvariant();
-                            if (ancestorString != null && SkippedWords.Any(s => ancestorString.Contains(s)))
-                            {
-                                return;
-                            }
-
-                            var attribute = stringLiteral.FirstAncestorOrSelf<AttributeSyntax>();
-                            if (attribute != null)
-                            {
-                                return;
-                            }
-
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, stringLiteral.GetLocation(), text));
-                        },
+                    context.RegisterSyntaxNodeActionInNonGenerated(
+                        GetAnalysisAction(rule),
                         SyntaxKind.StringLiteralExpression);
                 });
         }
 
-        private static bool IsCheckedType(SyntaxNode syntaxNode)
-        {
-            return syntaxNode is StatementSyntax ||
-                syntaxNode is VariableDeclaratorSyntax ||
-                syntaxNode is ParameterSyntax;
-        }
+        protected override string GetValueText(LiteralExpressionSyntax literalExpression) =>
+            literalExpression.Token.ValueText;
+
+        protected override bool HasAttributes(LiteralExpressionSyntax literalExpression) =>
+            literalExpression.Ancestors().AnyOfKind(SyntaxKind.Attribute);
+
+        protected override string GetAssignedVariableName(LiteralExpressionSyntax stringLiteral) =>
+            stringLiteral.FirstAncestorOrSelf<SyntaxNode>(IsVariableIdentifier)?.ToString().ToUpperInvariant();
+
+        private static bool IsVariableIdentifier(SyntaxNode syntaxNode) =>
+            syntaxNode is StatementSyntax ||
+            syntaxNode is VariableDeclaratorSyntax ||
+            syntaxNode is ParameterSyntax;
     }
 }

@@ -19,8 +19,10 @@
  */
 
 extern alias csharp;
+extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
+using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,10 +31,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void HardcodedIpAddress()
+        public void HardcodedIpAddress_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\HardcodedIpAddress.cs",
-                new HardcodedIpAddress(new TestAnalyzerConfiguration(null, "S1313")));
+                new CSharp.HardcodedIpAddress(new TestAnalyzerConfiguration(null, "S1313")));
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void HardcodedIpAddress_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\HardcodedIpAddress.vb",
+                new VisualBasic.HardcodedIpAddress(new TestAnalyzerConfiguration(null, "S1313")));
         }
 
         [TestMethod]
@@ -40,7 +50,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void HardcodedIpAddress_Not_Enabled()
         {
             Verifier.VerifyNoIssueReported(@"TestCases\HardcodedIpAddress.cs",
-                new HardcodedIpAddress(new TestAnalyzerConfiguration(null)));
+                new CSharp.HardcodedIpAddress(new TestAnalyzerConfiguration(null)));
+            Verifier.VerifyNoIssueReported(@"TestCases\HardcodedIpAddress.vb",
+                new VisualBasic.HardcodedIpAddress(new TestAnalyzerConfiguration(null)));
         }
     }
 }
+

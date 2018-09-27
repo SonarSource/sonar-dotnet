@@ -19,13 +19,13 @@ possible, but in the case of a hardcoded IP address the fix will be much slower,
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-var ip = "192.168.12.42";
-var address = IPAddress.Parse(ip);
+Dim ip = "192.168.12.42" ' Noncompliant
+Dim address = IPAddress.Parse(ip)
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-var ip = ConfigurationManager.AppSettings["myapplication.ip"];
-var address = IPAddress.Parse(ip);
+Dim ip = ConfigurationManager.AppSettings("myapplication.ip") ' Compliant
+Dim address = IPAddress.Parse(ip)
 </pre>
 <h2>Exceptions</h2>
 <ul>
