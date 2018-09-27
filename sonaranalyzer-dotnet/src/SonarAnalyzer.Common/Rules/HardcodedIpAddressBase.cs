@@ -29,18 +29,25 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class HardcodedIpAddressBase<TLiteralExpression> : SonarDiagnosticAnalyzer
-        where TLiteralExpression : SyntaxNode
+    public abstract class HardcodedIpAddressBase : SonarDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S1313";
         protected const string MessageFormat = "Make sure using this hardcoded IP address '{0}' is safe here.";
 
-        private static readonly ISet<string> IgnoredVariableNames =
+        protected static readonly ISet<string> IgnoredVariableNames =
             new HashSet<string>
             {
                 "VERSION",
                 "ASSEMBLY",
             };
+    }
+
+    public abstract class HardcodedIpAddressBase<TLiteralExpression> : HardcodedIpAddressBase
+        where TLiteralExpression : SyntaxNode
+    {
+        protected abstract string GetAssignedVariableName(TLiteralExpression stringLiteral);
+        protected abstract string GetValueText(TLiteralExpression literalExpression);
+        protected abstract bool HasAttributes(TLiteralExpression literalExpression);
 
         protected Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
             c =>
@@ -75,9 +82,5 @@ namespace SonarAnalyzer.Rules
 
                 c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, stringLiteral.GetLocation(), literalValue));
             };
-
-        protected abstract string GetAssignedVariableName(TLiteralExpression stringLiteral);
-        protected abstract string GetValueText(TLiteralExpression literalExpression);
-        protected abstract bool HasAttributes(TLiteralExpression literalExpression);
     }
 }
