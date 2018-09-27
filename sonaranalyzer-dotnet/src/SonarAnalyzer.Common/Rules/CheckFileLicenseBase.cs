@@ -29,23 +29,19 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class CheckFileLicenseBase : ParameterLoadingDiagnosticAnalyzer
     {
-        public const string DiagnosticId = "S1451";
+        internal const string DiagnosticId = "S1451";
         protected const string MessageFormat = "Add or update the header of this file.";
 
-        #region HeaderFormat
         internal const string HeaderFormatRuleParameterKey = "headerFormat";
         internal const string HeaderFormatPropertyKey = nameof(HeaderFormat);
         public abstract string HeaderFormat { get; set; }
-        #endregion
 
-        #region IsRegularExpression
         internal const string IsRegularExpressionRuleParameterKey = "isRegularExpression";
         internal const string IsRegularExpressionPropertyKey = nameof(IsRegularExpression);
         internal const string IsRegularExpressionDefaultValue = "false";
         [RuleParameter(IsRegularExpressionRuleParameterKey, PropertyType.Boolean,
             "Whether the headerFormat is a regular expression.", IsRegularExpressionDefaultValue)]
         public bool IsRegularExpression { get; set; } = bool.Parse(IsRegularExpressionDefaultValue);
-        #endregion
 
         protected static bool IsRegexPatternValid(string pattern)
         {
@@ -68,7 +64,7 @@ namespace SonarAnalyzer.Rules
             }
 
             var trivias = node.GetLeadingTrivia();
-            if (isEndOfLine(trivias.Last()))
+            if (IsEndOfLine(trivias.Last()))
             {
                 trivias = trivias.RemoveAt(trivias.Count - 1);
             }
@@ -77,7 +73,7 @@ namespace SonarAnalyzer.Rules
             return header != null && AreHeadersEqual(header);
         }
 
-        protected abstract bool isEndOfLine(SyntaxTrivia trivia);
+        protected abstract bool IsEndOfLine(SyntaxTrivia trivia);
 
         protected bool AreHeadersEqual(string currentHeader)
         {
