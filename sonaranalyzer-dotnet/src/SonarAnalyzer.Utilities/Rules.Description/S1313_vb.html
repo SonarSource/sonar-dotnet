@@ -19,17 +19,18 @@ possible, but in the case of a hardcoded IP address the fix will be much slower,
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-String ip = "192.168.12.42"; // Noncompliant
-Socket socket = new Socket(ip, 6667);
+Dim ip = "192.168.12.42" ' Noncompliant
+Dim address = IPAddress.Parse(ip)
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Dim ip = ConfigurationManager.AppSettings("myapplication.ip") ' Compliant
+Dim address = IPAddress.Parse(ip)
 </pre>
 <h2>Exceptions</h2>
-<p>No issue is reported for the following cases because they are not considered sensitive:</p>
 <ul>
-  <li> Loopback addresses 127.0.0.0/8 in CIDR notation (from 127.0.0.0 to 127.255.255.255) </li>
-  <li> Broadcast address 255.255.255.255 </li>
-  <li> Non routable address 0.0.0.0 </li>
-  <li> Strings of the form <code>2.5.&lt;number&gt;.&lt;number&gt;</code> as they <a href="http://www.oid-info.com/introduction.htm">often match
-  Object Identifiers</a> (OID). </li>
+  <li> Although "::" is a valid IPv6 address, the rule doesn't report on it. </li>
+  <li> No issue is reported for 127.0.0.1 because loopback is not considered as sensitive </li>
 </ul>
 <h2>See</h2>
 <ul>
