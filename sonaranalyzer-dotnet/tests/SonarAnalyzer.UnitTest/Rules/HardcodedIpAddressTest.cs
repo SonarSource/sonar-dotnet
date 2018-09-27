@@ -19,8 +19,10 @@
  */
 
 extern alias csharp;
+extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
+using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,9 +31,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void HardcodedIpAddress()
+        public void HardcodedIpAddress_CS()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\HardcodedIpAddress.cs", new HardcodedIpAddress());
+            Verifier.VerifyAnalyzer(@"TestCases\HardcodedIpAddress.cs", new CSharp.HardcodedIpAddress());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void HardcodedIpAddress_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\HardcodedIpAddress.vb", new VisualBasic.HardcodedIpAddress());
         }
     }
 }
+

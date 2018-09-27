@@ -75,5 +75,11 @@ namespace SonarAnalyzer.Helpers.VisualBasic
 
         public static bool IsAnyKind(this SyntaxNode syntaxNode, ISet<SyntaxKind> collection) =>
             syntaxNode != null && collection.Contains((SyntaxKind)syntaxNode.RawKind);
+
+        public static bool AnyOfKind(this IEnumerable<SyntaxNode> nodes, SyntaxKind kind) =>
+            nodes.Any(n => n.RawKind == (int)kind);
+
+        public static bool AnyOfKind(this IEnumerable<SyntaxToken> tokens, SyntaxKind kind) =>
+            tokens.Any(n => n.RawKind == (int)kind);
     }
 }
