@@ -20,8 +20,6 @@
 package org.sonar.plugins.vbnet;
 
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
 public class VbNetSonarWayProfile implements BuiltInQualityProfilesDefinition {
