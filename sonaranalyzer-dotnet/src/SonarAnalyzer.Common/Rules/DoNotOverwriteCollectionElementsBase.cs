@@ -42,8 +42,6 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4143";
         protected const string MessageFormat = "Verify this is the index/key that was intended; a value has already been set for it.";
 
-        #region common abstract methods
-
         protected abstract SyntaxNode GetExpression(TInvocationSyntax invocation);
 
         protected abstract SyntaxNode GetExpression(TMemberAccessSyntax memberAccess);
@@ -57,10 +55,6 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxToken GetIdentifierToken(TBaseSyntax baseAccess);
 
         protected abstract SyntaxNode GetName(TMemberAccessSyntax memberAccess);
-
-        #endregion common abstract methods
-
-        #region common methods
 
         protected string GetInvokedOnName(TInvocationSyntax invocation)
         {
@@ -104,10 +98,8 @@ namespace SonarAnalyzer.Rules
 
         protected IEnumerable<TStatementSyntax> GetPreviousStatements(SyntaxNode expression) =>
             expression.FirstAncestorOrSelf<TStatementSyntax>() is TStatementSyntax statement
-            ? statement.Parent.ChildNodes().OfType<TStatementSyntax>().TakeWhile(x => x != statement).Reverse()
-            : Enumerable.Empty<TStatementSyntax>();
-
-        #endregion common methods
+                ? statement.Parent.ChildNodes().OfType<TStatementSyntax>().TakeWhile(x => x != statement).Reverse()
+                : Enumerable.Empty<TStatementSyntax>();
 
         protected abstract class InvocationVerifierBase
         {
@@ -153,9 +145,9 @@ namespace SonarAnalyzer.Rules
                     var methodName = GetMethodName(invocation);
                     var invokedOn = this.getInvokedOnName(invocation);
 
-                    if (methodName == null ||
-                        methodName != "Add" ||
-                        invokedOn == null ||
+                    if (string.IsNullOrWhiteSpace(methodName) ||
+                        !methodName.Equals("Add", StringComparison.OrdinalIgnoreCase) ||
+                        string.IsNullOrWhiteSpace(invokedOn) ||
                         !IsDictionaryAdd(c.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol))
                     {
                         return;
@@ -181,13 +173,13 @@ namespace SonarAnalyzer.Rules
             private bool IsInvocationOnSameItem(SyntaxNode expression, string invokedOn) =>
                 expression is TInvocationSyntax ies &&
                 HasNumberOfArguments(ies, 2) &&
-                GetMethodName(ies) == "Add" &&
-                getInvokedOnName(ies) == invokedOn;
+                GetMethodName(ies).Equals("Add", StringComparison.OrdinalIgnoreCase) &&
+                getInvokedOnName(ies).Equals(invokedOn, StringComparison.OrdinalIgnoreCase);
 
             protected string GetMethodName(TInvocationSyntax invocation) =>
                 GetExpression(invocation) is TMemberAccessSyntax memberAccess
-                ? GetIdentifierToken(memberAccess).ValueText
-                : null;
+                    ? GetIdentifierToken(memberAccess).ValueText
+                    : null;
 
             protected bool IsDictionaryAdd(IMethodSymbol methodSymbol)
             {
@@ -207,19 +199,19 @@ namespace SonarAnalyzer.Rules
         }
 
         protected abstract class AssignmentVerifierBase<TAssignmentSyntax, TElementAccessSyntax>
+            where TAssignmentSyntax : SyntaxNode
+            where TElementAccessSyntax : SyntaxNode
         {
             protected abstract TAssignmentSyntax GetAssignment(SyntaxNode node);
 
-            protected abstract bool TryGetElementAccess(TAssignmentSyntax assignment, out TElementAccessSyntax elementAccess);
+            protected abstract TElementAccessSyntax GetElementAccess(TAssignmentSyntax assignment);
 
-            protected abstract bool TryGetCollectionIdentifier(TElementAccessSyntax elementAccess,
-                out string collectionIdentifier);
+            protected abstract string GetCollectionIdentifier(TElementAccessSyntax elementAccess);
 
             protected abstract IEnumerable<string> GetArguments(TElementAccessSyntax elementAccess);
 
-            protected abstract bool TryGetPreviousAssignmentOfVariable(TElementAccessSyntax elementAccess,
-                string collectionIdentifier, IEnumerable<string> arguments,
-                out TElementAccessSyntax previousAssignmentOfVariable);
+            protected abstract TElementAccessSyntax GetPreviousAssignmentOfVariable(TElementAccessSyntax elementAccess,
+                string collectionIdentifier, IEnumerable<string> arguments);
 
             protected abstract void Report(SyntaxNodeAnalysisContext c, DiagnosticDescriptor rule,
                 TElementAccessSyntax elementAccess, TElementAccessSyntax previousAssignmentOfVariable);
@@ -227,19 +219,21 @@ namespace SonarAnalyzer.Rules
             public Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
                 context =>
                 {
-                    var assignment = GetAssignment(context.Node);
+                    var elementAccess = GetElementAccess(GetAssignment(context.Node));
+                    if (elementAccess == null)
+                    {
+                        return;
+                    }
 
-                    TElementAccessSyntax elementAccess;
-                    string collectionIdentifier = null;
-                    if (!TryGetElementAccess(assignment, out elementAccess) ||
-                        !TryGetCollectionIdentifier(elementAccess, out collectionIdentifier))
+                    var collectionIdentifier = GetCollectionIdentifier(elementAccess);
+                    if (collectionIdentifier == null)
                     {
                         return;
                     }
 
                     var arguments = GetArguments(elementAccess);
-                    TElementAccessSyntax previous;
-                    if (TryGetPreviousAssignmentOfVariable(elementAccess, collectionIdentifier, arguments, out previous))
+                    var previous = GetPreviousAssignmentOfVariable(elementAccess, collectionIdentifier, arguments);
+                    if (previous != null)
                     {
                         Report(context, rule, elementAccess, previous);
                     }
