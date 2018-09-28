@@ -2,14 +2,12 @@
 try to instantiate the class.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class C1&lt;T&gt;
-{
-}
-class C2&lt;T&gt; : C1&lt;C2&lt;C2&lt;T&gt;&gt;&gt; // Noncompliant
-{
-}
-
-...
-var c2 = new C2&lt;int&gt;();
+Class C1(Of T)
+End Class
+Class C2(Of T)
+    Inherits C1(Of C2 (Of T))
+End Class
+' ...
+Dim c2 = New C2(Of Integer)
 </pre>
 
