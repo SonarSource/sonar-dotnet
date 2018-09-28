@@ -2577,6 +2577,36 @@
   <data name="S4142_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4143_Category" xml:space="preserve">
+    <value>Major Bug</value>
+  </data>
+  <data name="S4143_Description" xml:space="preserve">
+    <value>It is highly suspicious when a value is saved for a key or index and then unconditionally overwritten. Such replacements are likely in error.</value>
+  </data>
+  <data name="S4143_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4143_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4143_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S4143_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S4143_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4143_Tags" xml:space="preserve">
+    <value>suspicious</value>
+  </data>
+  <data name="S4143_Title" xml:space="preserve">
+    <value>Map values should not be replaced unconditionally</value>
+  </data>
+  <data name="S4143_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S4144_Category" xml:space="preserve">
     <value>Major Code Smell</value>
   </data>
