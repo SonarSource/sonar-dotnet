@@ -18,9 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -32,10 +30,8 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class GenericInheritanceShouldNotBeRecursive : SonarDiagnosticAnalyzer
+    public sealed class GenericInheritanceShouldNotBeRecursive : GenericInheritanceShouldNotBeRecursiveBase
     {
-        internal const string DiagnosticId = "S3464";
-        private const string MessageFormat = "Refactor this {0} so that the generic inheritance chain is not recursive.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -50,14 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var typeDeclaration = (TypeDeclarationSyntax)c.Node;
                     var typeSymbol = c.SemanticModel.GetDeclaredSymbol(typeDeclaration);
 
-                    if (!IsGenericType(typeSymbol))
-                    {
-                        return;
-                    }
-
-                    var baseTypes = GetBaseTypes(typeSymbol);
-
-                    if (baseTypes.Any(t => IsGenericType(t) && HasRecursiveGenericSubstitution(t, typeSymbol)))
+                    if (IsRecursiveInheritance(typeSymbol))
                     {
                         c.ReportDiagnosticWhenActive(
                             Diagnostic.Create(rule, typeDeclaration.Identifier.GetLocation(), typeDeclaration.Keyword));
@@ -67,30 +56,5 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.InterfaceDeclaration);
         }
 
-        private static IEnumerable<INamedTypeSymbol> GetBaseTypes(INamedTypeSymbol typeSymbol)
-        {
-            var interfaces = typeSymbol.Interfaces.Where(IsGenericType);
-            return typeSymbol.IsClass()
-                ? interfaces.Concat(new[] { typeSymbol.BaseType })
-                : interfaces;
-        }
-
-        private static bool HasRecursiveGenericSubstitution(INamedTypeSymbol typeSymbol, INamedTypeSymbol declaredType)
-        {
-            bool IsSameAsDeclaredType(INamedTypeSymbol type) =>
-                type.OriginalDefinition.Equals(declaredType) && HasSubstitutedTypeArguments(type);
-
-            bool ContainsRecursiveGenericSubstitution(IEnumerable<ITypeSymbol> types) =>
-                types.OfType<INamedTypeSymbol>()
-                    .Any(type => IsSameAsDeclaredType(type) || ContainsRecursiveGenericSubstitution(type.TypeArguments));
-
-            return ContainsRecursiveGenericSubstitution(typeSymbol.TypeArguments);
-        }
-
-        private static bool IsGenericType(INamedTypeSymbol type) =>
-            type != null && type.IsGenericType;
-
-        private static bool HasSubstitutedTypeArguments(INamedTypeSymbol type) =>
-            type.TypeArguments.OfType<INamedTypeSymbol>().Any();
     }
 }

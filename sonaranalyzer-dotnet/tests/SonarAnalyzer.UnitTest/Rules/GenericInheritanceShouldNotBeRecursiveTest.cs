@@ -29,10 +29,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void GenericInheritanceShouldNotBeRecursive()
+        public void GenericInheritanceShouldNotBeRecursive_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\GenericInheritanceShouldNotBeRecursive.cs",
                 new GenericInheritanceShouldNotBeRecursive());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void GenericInheritanceShouldNotBeRecursive_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\GenericInheritanceShouldNotBeRecursive.vb",
+                new SonarAnalyzer.Rules.VisualBasic.GenericInheritanceShouldNotBeRecursive());
+        }
     }
 }
+
+
