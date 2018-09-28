@@ -123,7 +123,7 @@ public abstract class AbstractPropertyDefinitions {
           .subCategory(languageName)
           .index(3)
           .name("Rule categories associated with Code Smells")
-          .description("External rule categories to be treated as Code Smells. By default, external issues are Code Smells, or Bugs in the case the severity is error.")
+          .description("External rule categories to be treated as Code Smells. By default, external issues are Code Smells, or Bugs when the severity is error.")
           .onQualifiers(Qualifiers.PROJECT)
           .build());
     }
