@@ -30,11 +30,8 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class ReversedOperators : SonarDiagnosticAnalyzer
+    public sealed class ReversedOperators : ReversedOperatorsBase<PrefixUnaryExpressionSyntax>
     {
-        internal const string DiagnosticId = "S2757";
-        private const string MessageFormat = "Was '{0}' meant instead?";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -43,35 +40,16 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var unaryExpression = (PrefixUnaryExpressionSyntax) c.Node;
-
-                    var operatorToken = unaryExpression.OperatorToken;
-                    var previousToken = operatorToken.GetPreviousToken();
-                    var nextToken = operatorToken.GetNextToken();
-
-                    var operatorLocation = operatorToken.GetLocation();
-
-                    var operatorSpan = operatorLocation.GetLineSpan();
-                    var previousSpan = previousToken.GetLocation().GetLineSpan();
-                    var nextSpan = nextToken.GetLocation().GetLineSpan();
-
-                    if (previousToken.IsKind(SyntaxKind.EqualsToken) &&
-                        TiedTogether(previousSpan, operatorSpan) &&
-                        !(operatorToken.IsKind(SyntaxKind.MinusToken) && TiedTogether(operatorSpan, nextSpan)))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, operatorLocation, $"{operatorToken.Text}="));
-                    }
-                },
+                GetAnalysisAction(rule),
                 SyntaxKind.UnaryMinusExpression,
                 SyntaxKind.UnaryPlusExpression,
                 SyntaxKind.LogicalNotExpression);
         }
 
-        private static bool TiedTogether(FileLinePositionSpan span, FileLinePositionSpan nextSpan)
-        {
-            return span.EndLinePosition == nextSpan.StartLinePosition;
-        }
+        protected override SyntaxToken GetOperatorToken(PrefixUnaryExpressionSyntax e) => e.OperatorToken;
+
+        protected override bool IsEqualsToken(SyntaxToken token) => token.IsKind(SyntaxKind.EqualsToken);
+
+        protected override bool IsMinusToken(SyntaxToken token) => token.IsKind(SyntaxKind.MinusToken);
     }
 }

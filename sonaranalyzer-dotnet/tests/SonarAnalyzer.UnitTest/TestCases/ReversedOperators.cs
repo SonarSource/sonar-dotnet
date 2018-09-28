@@ -22,6 +22,7 @@ namespace Tests.Diagnostics
 
             target += num;
 
+            target +=- num;
             target += -num;
             target =
                 +num;

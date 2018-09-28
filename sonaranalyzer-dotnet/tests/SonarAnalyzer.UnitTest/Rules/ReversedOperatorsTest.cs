@@ -18,9 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,9 +30,17 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ReversedOperators()
+        public void ReversedOperators_CS()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ReversedOperators.cs", new ReversedOperators());
+            Verifier.VerifyAnalyzer(@"TestCases\ReversedOperators.cs", new CS.ReversedOperators());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ReversedOperators_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\ReversedOperators.vb",
+                new VB.ReversedOperators());
         }
     }
 }
