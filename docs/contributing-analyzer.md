@@ -29,7 +29,7 @@ The following environment variables must be set:
 You can run the Unit Tests via the Test Explorer of Visual Studio or using `.\scripts\build\dev-build.ps1 test`
 
 ### Integration Tests
-
+#### Running the tests
 To run the ITs you will need to follow this pattern:
 
 1. Make sure the project is built: Integration tests don't build the analyzer, but use the results of the latest build (debug or release)
@@ -44,13 +44,21 @@ If the script ends with `SUCCESS: No differences were found!` (or exit code 0), 
 
 If the script ends with `ERROR: There are differences between the actual and the expected issues.` (or exit code 1),
 the changes you have made have impacted one or many issues raised by the rules.
+#### Manual differences review
 You can visualize the differences using:
 
 1. `cd actual`
 1. `git diff --cached`
 
-Please review all added/removed/updated issue to confirm they are wanted. When this is done run `.\update-expected.ps1` to update the list of expected issues.
 
+#### Semi-automated differences review
+If you run the project `ReviewDiffs` in debug mode from Visual Studio, it will print in the output windows all places where a difference has been found. From there you can easily navigate between differences (double-click, F4...).
+
+*Disclaimer*: This program is still very new and the paint is still very wet. It may not work in all situations, but it's easy to update it ??.
+
+*PS*: This program outputs message in a way that is compatible with the [VsColorOutput](https://marketplace.visualstudio.com/items?itemName=MikeWard-AnnArbor.VSColorOutput) extension, so that errors are colored in red, and differences are colored like warnings.
+#### Updating the references
+Please review all added/removed/updated issue to confirm they are wanted. When this is done run `.\update-expected.ps1` to update the list of expected issues.
 Note: Integration tests build the code to analyze. If you have an antivirus program on your computer, this may fail with some error messages about an executable file that cannot be open for writing. If this happens, look at the antivirus logs for confirmation, and contact IT team to add an rule to your antivirus program...
 
 ### Manual Tests
