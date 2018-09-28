@@ -1,0 +1,16 @@
+{
+  "title": "Type inheritance should not be recursive",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "1h"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-3464",
+  "sqKey": "S3464",
+  "scope": "Main"
+}
