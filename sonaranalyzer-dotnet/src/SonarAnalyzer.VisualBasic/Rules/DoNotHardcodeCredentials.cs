@@ -54,35 +54,35 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentialsBase analyzer) : base(analyzer) { }
 
-            protected override string GetAssignedValue(VariableDeclaratorSyntax declarator) =>
-                declarator.Initializer?.Value.ToString();
+            protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode) =>
+                syntaxNode.Initializer?.Value.ToString();
 
-            protected override string GetVariableName(VariableDeclaratorSyntax declarator) =>
-                declarator.Names[0].Identifier.ValueText; // We already tested the count in IsAssignedWithStringLiteral
+            protected override string GetVariableName(VariableDeclaratorSyntax syntaxNode) =>
+                syntaxNode.Names[0].Identifier.ValueText; // We already tested the count in IsAssignedWithStringLiteral
 
-            protected override bool IsAssignedWithStringLiteral(VariableDeclaratorSyntax declarator,
+            protected override bool IsAssignedWithStringLiteral(VariableDeclaratorSyntax syntaxNode,
                 SemanticModel semanticModel) =>
-                declarator.Names.Count == 1 &&
-                (declarator.Initializer?.Value is LiteralExpressionSyntax literalExpression) &&
+                syntaxNode.Names.Count == 1 &&
+                (syntaxNode.Initializer?.Value is LiteralExpressionSyntax literalExpression) &&
                 literalExpression.IsKind(SyntaxKind.StringLiteralExpression) &&
-                declarator.Names[0].IsDeclarationKnownType(KnownType.System_String, semanticModel);
+                syntaxNode.Names[0].IsDeclarationKnownType(KnownType.System_String, semanticModel);
         }
 
         private class AssignmentExpressionBannedWordsFinder : CredentialWordsFinderBase<AssignmentStatementSyntax>
         {
             public AssignmentExpressionBannedWordsFinder(DoNotHardcodeCredentialsBase analyzer) : base(analyzer) { }
 
-            protected override string GetAssignedValue(AssignmentStatementSyntax assignment) =>
-                (assignment.Right as LiteralExpressionSyntax)?.Token.ValueText;
+            protected override string GetAssignedValue(AssignmentStatementSyntax syntaxNode) =>
+                (syntaxNode.Right as LiteralExpressionSyntax)?.Token.ValueText;
 
-            protected override string GetVariableName(AssignmentStatementSyntax assignment) =>
-                (assignment.Left as IdentifierNameSyntax)?.Identifier.ValueText;
+            protected override string GetVariableName(AssignmentStatementSyntax syntaxNode) =>
+                (syntaxNode.Left as IdentifierNameSyntax)?.Identifier.ValueText;
 
-            protected override bool IsAssignedWithStringLiteral(AssignmentStatementSyntax assignment,
+            protected override bool IsAssignedWithStringLiteral(AssignmentStatementSyntax syntaxNode,
                 SemanticModel semanticModel) =>
-                assignment.IsKind(SyntaxKind.SimpleAssignmentStatement) &&
-                assignment.Left.IsKnownType(KnownType.System_String, semanticModel) &&
-                assignment.Right.IsKind(SyntaxKind.StringLiteralExpression);
+                syntaxNode.IsKind(SyntaxKind.SimpleAssignmentStatement) &&
+                syntaxNode.Left.IsKnownType(KnownType.System_String, semanticModel) &&
+                syntaxNode.Right.IsKind(SyntaxKind.StringLiteralExpression);
         }
     }
 }

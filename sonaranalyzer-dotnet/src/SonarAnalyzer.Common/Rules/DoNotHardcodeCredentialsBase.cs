@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules
         private string credentialWords;
         private IEnumerable<string> splitCredentialWords;
         private Regex passwordValuePattern;
-        
+
         [RuleParameter("credentialWords", PropertyType.String,
             "Comma separated list of words identifying potential credentials", DefaultCredentialWords)]
         public string CredentialWords
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        public DoNotHardcodeCredentialsBase()
+        protected DoNotHardcodeCredentialsBase()
         {
             CredentialWords = DefaultCredentialWords;
         }
