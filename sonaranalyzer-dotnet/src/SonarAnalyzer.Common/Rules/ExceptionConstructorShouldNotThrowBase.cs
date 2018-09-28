@@ -18,30 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules
 {
-    [TestClass]
-    public class ExceptionConstructorShouldNotThrowTest
+    public abstract class ExceptionConstructorShouldNotThrowBase : SonarDiagnosticAnalyzer
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ExceptionConstructorShouldNotThrow()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ExceptionConstructorShouldNotThrow.cs",
-                new ExceptionConstructorShouldNotThrow());
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ExceptionConstructorShouldNotThrow_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ExceptionConstructorShouldNotThrow.vb",
-                new SonarAnalyzer.Rules.VisualBasic.ExceptionConstructorShouldNotThrow());
-        }
+        protected const string DiagnosticId = "S3693";
+        protected const string MessageFormat = "";
     }
 }
-
