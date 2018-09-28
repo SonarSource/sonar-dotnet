@@ -21,6 +21,8 @@ Namespace Tests.TestCases
       target =-num ' Compliant most probably intent To assign inverse value?
       target=-num ' Compliant most probably intent To assign inverse value?
 
+      target +=- num
+
       target += num
 
       target += -num

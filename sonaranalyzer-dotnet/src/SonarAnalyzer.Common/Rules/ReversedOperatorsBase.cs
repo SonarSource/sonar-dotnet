@@ -25,25 +25,22 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ReversedOperatorsBase : SonarDiagnosticAnalyzer
+    public abstract class ReversedOperatorsBase<TUnaryExpressionSyntax> : SonarDiagnosticAnalyzer
+        where TUnaryExpressionSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S2757";
         protected const string MessageFormat = "Was '{0}' meant instead?";
 
-        protected static bool TiedTogether(FileLinePositionSpan left, FileLinePositionSpan right)
-        {
-            return left.EndLinePosition == right.StartLinePosition;
-        }
-    }
-
-    public abstract class ReversedOperatorsBase<TUnaryExpressionSyntax> : ReversedOperatorsBase
-        where TUnaryExpressionSyntax : SyntaxNode
-    {
         protected abstract SyntaxToken GetOperatorToken(TUnaryExpressionSyntax e);
 
         protected abstract bool IsEqualsToken(SyntaxToken token);
 
         protected abstract bool IsMinusToken(SyntaxToken token);
+
+        protected static bool TiedTogether(FileLinePositionSpan left, FileLinePositionSpan right)
+        {
+            return left.EndLinePosition == right.StartLinePosition;
+        }
 
         public Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
             c =>

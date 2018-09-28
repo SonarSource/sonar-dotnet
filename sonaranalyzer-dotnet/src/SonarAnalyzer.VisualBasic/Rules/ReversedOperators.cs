@@ -41,6 +41,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GetAnalysisAction(rule),
+                // As opposed to C#, the VB operators for negation ('Not') and inequality ('<>') leave no room for confusion
                 SyntaxKind.UnaryMinusExpression,
                 SyntaxKind.UnaryPlusExpression);
         }

@@ -2221,7 +2221,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S2757_Description" xml:space="preserve">
-    <value>The use of operators pairs ( =+, =- or =! ) where the reversed, single operator was meant (+=, -= or !=) will compile and run, but not produce the expected results.</value>
+    <value>The use of operators pairs ( =+ or =-) where the reversed, single operator was meant (+= or -=) will compile and run, but not produce the expected results.</value>
   </data>
   <data name="S2757_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
