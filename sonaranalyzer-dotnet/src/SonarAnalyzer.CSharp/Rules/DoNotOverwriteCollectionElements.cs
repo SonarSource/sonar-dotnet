@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -32,38 +33,34 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
     public sealed class DoNotOverwriteCollectionElements
-        : DoNotOverwriteCollectionElementsBase<InvocationExpressionSyntax, IdentifierNameSyntax,
-            StatementSyntax, MemberAccessExpressionSyntax, ThisExpressionSyntax, BaseExpressionSyntax, ExpressionStatementSyntax>
+        : DoNotOverwriteCollectionElementsBase<InvocationExpressionSyntax, IdentifierNameSyntax, StatementSyntax,
+            MemberAccessExpressionSyntax, ThisExpressionSyntax, BaseExpressionSyntax, ExpressionStatementSyntax>
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        internal override DiagnosticDescriptor Rule => rule;
-
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => VerifyAssignment(c),
+                new AssignmentVerifier(this).GetAnalysisAction(rule),
                 SyntaxKind.SimpleAssignmentExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-               c => VerifyInvocationExpression(c),
+               new InvocationVerifier(this).GetAnalysisAction(rule),
                SyntaxKind.InvocationExpression);
         }
 
-        internal override KnownType DictionaryType => KnownType.System_Collections_Generic_IDictionary_TKey_TValue;
-
-        protected override SyntaxNode GetExpression(ExpressionStatementSyntax expression) => expression.Expression;
-
-        protected override SyntaxNode GetExpression(InvocationExpressionSyntax invocation) => invocation.Expression;
-
-        protected override SyntaxNode GetExpression(MemberAccessExpressionSyntax memberAccess) => memberAccess.Expression;
+        #region common methods
 
         protected override SyntaxNode GetName(MemberAccessExpressionSyntax memberAccess) => memberAccess.Name;
 
+        protected override SyntaxNode GetExpression(MemberAccessExpressionSyntax memberAccess) => memberAccess.Expression;
+
         protected override SyntaxToken GetIdentifierToken(IdentifierNameSyntax invocation) => invocation.Identifier;
+
+        protected override SyntaxNode GetExpression(InvocationExpressionSyntax invocation) => invocation.Expression;
 
         protected override SyntaxToken GetIdentifierToken(MemberAccessExpressionSyntax memberAccess) => memberAccess.Name.Identifier;
 
@@ -71,49 +68,119 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxToken GetIdentifierToken(BaseExpressionSyntax baseAccess) => baseAccess.Token;
 
-        protected override bool HasNumberOfArguments(InvocationExpressionSyntax invocation, int number)
-            => invocation.ArgumentList != null && invocation.ArgumentList.Arguments.Count == number;
+        #endregion common methods
 
-        protected override SyntaxNode GetFirstArgument(InvocationExpressionSyntax invocation)
-            => invocation.ArgumentList != null && invocation.ArgumentList.Arguments.Count >= 1
-                ? invocation.ArgumentList.Arguments[0]
-                : null;
-
-        private void VerifyAssignment(SyntaxNodeAnalysisContext c)
+        private class InvocationVerifier : InvocationVerifierBase
         {
-            var assignment = (AssignmentExpressionSyntax)c.Node;
+            private readonly DoNotOverwriteCollectionElements analyzer;
 
-            if (!(assignment.Left is ElementAccessExpressionSyntax elementAccess) ||
-                elementAccess.ArgumentList == null ||
-                elementAccess.ArgumentList.Arguments.Count == 0 ||
-                !((elementAccess.Expression as IdentifierNameSyntax)?.Identifier.ValueText is string accessedOn))
+            public InvocationVerifier(DoNotOverwriteCollectionElements analyzer)
+                : base(analyzer.GetInvokedOnName, analyzer.GetPreviousStatements)
             {
-                return;
+                this.analyzer = analyzer;
             }
 
-            var arguments = elementAccess.ArgumentList.Arguments.Select(a => a.ToString());
+            internal override KnownType DictionaryType => KnownType.System_Collections_Generic_IDictionary_TKey_TValue;
 
-            var previousAssignmentOfVariable = GetPreviousStatements(assignment)
-                .OfType<ExpressionStatementSyntax>()
-                .Select(ess => ess.Expression)
-                .TakeWhile(e => IsElementAccessAssignmentOnSameItem(e, accessedOn))
-                .Cast<AssignmentExpressionSyntax>()
-                .Select(aes => aes.Left)
-                .Cast<ElementAccessExpressionSyntax>()
-                .FirstOrDefault(eaes => arguments.SequenceEqual(eaes.ArgumentList.Arguments.Select(a => a.ToString())));
+            protected override bool HasNumberOfArguments(InvocationExpressionSyntax invocation, int number)
+                => invocation.ArgumentList != null && invocation.ArgumentList.Arguments.Count == number;
 
-            if (previousAssignmentOfVariable != null)
+            protected override SyntaxNode GetFirstArgument(InvocationExpressionSyntax invocation)
+                => invocation.ArgumentList != null && invocation.ArgumentList.Arguments.Count >= 1
+                    ? invocation.ArgumentList.Arguments[0]
+                    : null;
+
+            protected override SyntaxNode GetExpression(ExpressionStatementSyntax expression)
+                => expression.Expression;
+
+            protected override InvocationExpressionSyntax GetInvocation(SyntaxNode node)
+                => (InvocationExpressionSyntax)node;
+
+            protected override SyntaxNode GetExpression(MemberAccessExpressionSyntax memberAccess)
+                => analyzer.GetExpression(memberAccess);
+
+            protected override SyntaxNode GetExpression(InvocationExpressionSyntax memberAccess)
+                => analyzer.GetExpression(memberAccess);
+
+            protected override SyntaxToken GetIdentifierToken(MemberAccessExpressionSyntax memberAccess)
+                => analyzer.GetIdentifierToken(memberAccess);
+
+            protected override SyntaxNode GetName(MemberAccessExpressionSyntax memberAccess)
+                => analyzer.GetName(memberAccess);
+        }
+
+        private class AssignmentVerifier : AssignmentVerifierBase<AssignmentExpressionSyntax, ElementAccessExpressionSyntax>
+        {
+            private readonly DoNotOverwriteCollectionElements analyzer;
+            public AssignmentVerifier(DoNotOverwriteCollectionElements analyzer)
+            {
+                this.analyzer = analyzer;
+            }
+
+            protected override void Report(SyntaxNodeAnalysisContext c, DiagnosticDescriptor rule,
+                ElementAccessExpressionSyntax elementAccess, ElementAccessExpressionSyntax previousAssignmentOfVariable)
             {
                 c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, elementAccess.GetLocation(),
                     additionalLocations: new[] { previousAssignmentOfVariable.GetLocation() }));
             }
+
+            protected override bool TryGetElementAccess(AssignmentExpressionSyntax assignment, out ElementAccessExpressionSyntax elementAccess)
+            {
+                elementAccess = null;
+                if (assignment.Left is ElementAccessExpressionSyntax ea &&
+                    ea.ArgumentList != null &&
+                    ea.ArgumentList.Arguments.Count != 0)
+                {
+                    elementAccess = ea;
+                    return true;
+                }
+                return false;
+            }
+
+            protected override bool TryGetCollectionIdentifier(ElementAccessExpressionSyntax elementAccess, out string collectionIdentifier)
+            {
+                collectionIdentifier = null;
+                if ((elementAccess.Expression as IdentifierNameSyntax)?.Identifier.ValueText is string ci)
+                {
+                    collectionIdentifier = ci;
+                    return true;
+                }
+                return false;
+            }
+
+            protected override bool TryGetPreviousAssignmentOfVariable(ElementAccessExpressionSyntax elementAccess, string collectionIdentifier,
+                IEnumerable<string> arguments, out ElementAccessExpressionSyntax previousAssignmentOfVariable)
+            {
+                previousAssignmentOfVariable = null;
+                ElementAccessExpressionSyntax result = analyzer.GetPreviousStatements(elementAccess)
+                    .OfType<ExpressionStatementSyntax>()
+                    .Select(ess => ess.Expression)
+                    .TakeWhile(e => IsElementAccessAssignmentOnSameItem(e, collectionIdentifier))
+                    .Cast<AssignmentExpressionSyntax>()
+                    .Select(aes => aes.Left)
+                    .Cast<ElementAccessExpressionSyntax>()
+                    .FirstOrDefault(eaes => arguments.SequenceEqual(eaes.ArgumentList.Arguments.Select(a => a.ToString())));
+                if (result != null)
+                {
+                    previousAssignmentOfVariable = result;
+                    return true;
+                }
+                return false;
+            }
+
+            private static bool IsElementAccessAssignmentOnSameItem(ExpressionSyntax expression, string accessedOn) =>
+                expression is AssignmentExpressionSyntax aes &&
+                aes.Left is ElementAccessExpressionSyntax currentElementAccess &&
+                currentElementAccess.ArgumentList != null &&
+                currentElementAccess.Expression is IdentifierNameSyntax ins &&
+                ins.Identifier.ValueText == accessedOn;
+
+            protected override AssignmentExpressionSyntax GetAssignment(SyntaxNode node)
+                => (AssignmentExpressionSyntax)node;
+
+            protected override IEnumerable<string> GetArguments(ElementAccessExpressionSyntax elementAccess)
+                => elementAccess.ArgumentList.Arguments.Select(a => a.ToString());
         }
 
-        private static bool IsElementAccessAssignmentOnSameItem(ExpressionSyntax expression, string accessedOn) =>
-            expression is AssignmentExpressionSyntax aes &&
-            aes.Left is ElementAccessExpressionSyntax currentElementAccess &&
-            currentElementAccess.ArgumentList != null &&
-            currentElementAccess.Expression is IdentifierNameSyntax ins &&
-            ins.Identifier.ValueText == accessedOn;
     }
 }
