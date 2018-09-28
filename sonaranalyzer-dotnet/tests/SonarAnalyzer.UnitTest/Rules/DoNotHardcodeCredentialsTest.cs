@@ -19,8 +19,10 @@
  */
 
 extern alias csharp;
+extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
+using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,26 +31,51 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotHardcodeCredentials_DefaultValues()
+        public void DoNotHardcodeCredentials_CS_DefaultValues()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_DefaultValues.cs",
-                new DoNotHardcodeCredentials());
+                new CSharp.DoNotHardcodeCredentials());
         }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotHardcodeCredentials_CustomValues()
+        public void DoNotHardcodeCredentials_CS_CustomValues()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.cs",
-                new DoNotHardcodeCredentials { CredentialWords = "kode,facal-faire" });
+                new CSharp.DoNotHardcodeCredentials { CredentialWords = "kode,facal-faire" });
         }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotHardcodeCredentials_CustomValues_CaseInsensitive()
+        public void DoNotHardcodeCredentials_CS_CustomValues_CaseInsensitive()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.cs",
-                new DoNotHardcodeCredentials { CredentialWords = "KODE ,,,, FaCaL-FaIrE " });
+                new CSharp.DoNotHardcodeCredentials { CredentialWords = "KODE ,,,, FaCaL-FaIrE " });
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotHardcodeCredentials_VB_DefaultValues()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_DefaultValues.vb",
+                new VisualBasic.DoNotHardcodeCredentials());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotHardcodeCredentials_VB_CustomValues()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.vb",
+                new VisualBasic.DoNotHardcodeCredentials { CredentialWords = "kode,facal-faire" });
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotHardcodeCredentials_VB_CustomValues_CaseInsensitive()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.vb",
+                new VisualBasic.DoNotHardcodeCredentials { CredentialWords = "KODE ,,,, FaCaL-FaIrE " });
         }
     }
 }
+
