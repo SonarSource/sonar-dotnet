@@ -4,45 +4,6 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShard.cs",
 "region":  {
 "startLine":  1,
@@ -56,72 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.Messages.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Properties\AssemblyInfo.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardAllocationStrategy.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

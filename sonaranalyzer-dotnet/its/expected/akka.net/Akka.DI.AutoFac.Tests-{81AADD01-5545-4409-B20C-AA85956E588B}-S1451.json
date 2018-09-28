@@ -4,19 +4,6 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.AutoFac.Tests\AutoFacDependencyResolverSpecs.cs",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
 "uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.AutoFac.Tests\Properties\AssemblyInfo.cs",
 "region":  {
 "startLine":  1,
