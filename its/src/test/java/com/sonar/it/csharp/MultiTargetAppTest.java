@@ -20,6 +20,7 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
+import java.util.stream.Collectors;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -65,7 +66,10 @@ public class MultiTargetAppTest {
 
     assertThat(getComponent("MultiTargetConsoleApp:MultiTargetConsoleApp:9D7FB932-3B1E-446D-9D34-A63410458B88:Program.cs")).isNotNull();
 
-    List<Issues.Issue> issues = getIssues("MultiTargetConsoleApp:MultiTargetConsoleApp:9D7FB932-3B1E-446D-9D34-A63410458B88:Program.cs");
+    List<Issues.Issue> issues = getIssues("MultiTargetConsoleApp:MultiTargetConsoleApp:9D7FB932-3B1E-446D-9D34-A63410458B88:Program.cs")
+      .stream()
+      .filter(x -> x.getRule().startsWith("csharpsquid:"))
+      .collect(Collectors.toList());
     assertThat(issues).hasSize(4);
   }
 }
