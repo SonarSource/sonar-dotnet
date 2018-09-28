@@ -1137,6 +1137,36 @@
   <data name="S1940_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S2068_Category" xml:space="preserve">
+    <value>Blocker Vulnerability</value>
+  </data>
+  <data name="S2068_Description" xml:space="preserve">
+    <value>Because it is easy to extract strings from a compiled application, credentials should never be hard-coded. Do so, and they're almost guaranteed to end up in the hands of an attacker. This is particularly true for applications that are distributed.</value>
+  </data>
+  <data name="S2068_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S2068_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2068_RemediationCost" xml:space="preserve">
+    <value>30min</value>
+  </data>
+  <data name="S2068_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S2068_Severity" xml:space="preserve">
+    <value>Blocker</value>
+  </data>
+  <data name="S2068_Tags" xml:space="preserve">
+    <value>cwe,cert,sans-top25-porous,owasp-a2</value>
+  </data>
+  <data name="S2068_Title" xml:space="preserve">
+    <value>Credentials should not be hard-coded</value>
+  </data>
+  <data name="S2068_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
+  </data>
   <data name="S2178_Category" xml:space="preserve">
     <value>Blocker Code Smell</value>
   </data>

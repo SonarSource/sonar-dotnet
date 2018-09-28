@@ -22,6 +22,24 @@ namespace Tests.Diagnostics
             foo = "passwordpassword";
             foo = "foo=1;password=1"; // Noncompliant
             foo = "foo=1password=1";
+            foo = ""; // Compliant
+        }
+    }
+
+    class FalseNegatives
+    {
+        private string password;
+
+        public void Foo()
+        {
+            this.password = "foo"; // False Negative
+            Configuration.Password = "foo"; // False Negative
+            this.password = Configuration.Password = "foo"; // False Negative
+        }
+
+        class Configuration
+        {
+            public static string Password { get; set; }
         }
     }
 }
