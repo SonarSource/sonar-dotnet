@@ -69,29 +69,29 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
-            context.RegisterSyntaxTreeActionInNonGenerated(stac =>
-            {
-                if (HeaderFormat == null)
+            context.RegisterSyntaxTreeActionInNonGenerated(
+                stac =>
                 {
-                    return;
-                }
+                    if (HeaderFormat == null)
+                    {
+                        return;
+                    }
 
-                if (IsRegularExpression && !IsRegexPatternValid(HeaderFormat))
-                {
-                    throw new InvalidOperationException($"Invalid regular expression: {HeaderFormat}");
-                }
+                    if (IsRegularExpression && !IsRegexPatternValid(HeaderFormat))
+                    {
+                        throw new InvalidOperationException($"Invalid regular expression: {HeaderFormat}");
+                    }
 
-                var firstNode = stac.Tree.GetRoot().ChildTokens().FirstOrDefault().Parent;
-                if (!HasValidLicenseHeader(firstNode))
-                {
-                    var properties = CreateDiagnosticProperties();
-                    stac.ReportDiagnosticWhenActive(Diagnostic.Create(rule, Location.Create(stac.Tree,
-                        TextSpan.FromBounds(0, 0)), properties));
-                }
-            });
+                    var firstNode = stac.Tree.GetRoot().ChildTokens().FirstOrDefault().Parent;
+                    if (!HasValidLicenseHeader(firstNode))
+                    {
+                        var properties = CreateDiagnosticProperties();
+                        stac.ReportDiagnosticWhenActive(Diagnostic.Create(rule, Location.Create(stac.Tree,
+                            TextSpan.FromBounds(0, 0)), properties));
+                    }
+                });
         }
 
         protected override bool IsEndOfLine(SyntaxTrivia trivia) => trivia.IsKind(SyntaxKind.EndOfLineTrivia);
-
     }
 }
