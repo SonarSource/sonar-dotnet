@@ -231,7 +231,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (array.Initializer == null ||
                 !array.Initializer.Expressions.Any() ||
-                array.Type == null)
+                array.Type == null ||
+                array.Type.RankSpecifiers.Count > 1)
             {
                 return;
             }
@@ -250,7 +251,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var canBeSimplified = array.Initializer.Expressions
                 .Select(exp => context.SemanticModel.GetTypeInfo(exp).Type)
-                .All(type => object.Equals(type, arrayType.ElementType));
+                .All(type => Equals(type, arrayType.ElementType));
 
             if (canBeSimplified)
             {

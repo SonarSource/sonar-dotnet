@@ -33,8 +33,14 @@ namespace Tests.Diagnostics
             var yyy = new int[3 // Fixed
                 , 3// Fixed
                 ] { { 1, 1, 1 }, { 2, 2, 2 }, { 3, 3, 3 } };
-            var zzz = new int[][] { new[] { 1, 2, 3 }, new int[0], new int[0] }; // Fixed
-            var www = new int[][][] { new[] { new[] { 0 } } }; // Fixed
+
+            // see https://github.com/SonarSource/sonar-csharp/issues/1840
+            var multiDimIntArray = new int[][] // Compliant - type specifier is mandatory here
+            {
+                new int[] { 1 } // Fixed
+            };
+            var zzz = new int[][] { new[] { 1, 2, 3 }, new int[0], new int[0] };
+            var www = new int[][][] { new[] { new[] { 0 } } };
 
             int? xx = ((new int?(5))); // Fixed
             xx = new Nullable<int>(5); // Fixed
