@@ -5,7 +5,7 @@ namespace Tests.Diagnostics
 {
     class TestCases
     {
-        public static readonly IDictionary<int, int> dictionaryField;
+        public IDictionary<int, int> dictionaryField;
 
         void SameIndexOnDictionary(Dictionary<int, int> dict)
         {
@@ -88,10 +88,47 @@ namespace Tests.Diagnostics
             c.dictionaryField.Add(0, 1); // Noncompliant
         }
 
+        void IDictionaryAddWithThis()
+        {
+            this.dictionaryField.Add(0, 0); // Secondary
+            this.dictionaryField.Add(0, 1); // Noncompliant
+        }
+
         void DoNotReportOnNonDictionaryAdd(CustomAdd c)
         {
             c.Add(0, 1);
             c.Add(0, 2); // Compliant this is not on a dictionary
+        }
+
+        void AccessOnMethodCall()
+        {
+            GetArray()[0] = 1;
+            GetArray()[0] = 2;
+        }
+
+        int[] GetArray()
+        {
+            return new int[1];
+        }
+
+        void rspec(IDictionary<string, string> towns)
+        {
+            towns.Add(y, "Boston");
+            towns[y] = "Paris"; // FN - issue #1908
+        }
+    }
+
+    class InheritanceTest : Dictionary<int, int>
+    {
+        void InheritanceTest()
+        {
+            base.Add(0, 0); // Secondary
+            base.Add(0, 1); // Noncompliant
+        }
+        void MyAdd()
+        {
+            this.Add(0, 0); // Secondary
+            this.Add(0, 1); // Noncompliant
         }
     }
 

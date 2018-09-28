@@ -79,7 +79,9 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Collections_Generic_Dictionary_TKey_TValue = new KnownType("System.Collections.Generic.Dictionary<TKey, TValue>");
         internal static readonly KnownType System_Collections_Generic_HashSet_T = new KnownType("System.Collections.Generic.HashSet<T>");
         internal static readonly KnownType System_Collections_Generic_ICollection_T = new KnownType(SpecialType.System_Collections_Generic_ICollection_T, "System.Collections.Generic.ICollection<T>");
+        internal static readonly KnownType System_Collections_Generic_ICollection_T_VB = new KnownType(SpecialType.System_Collections_Generic_ICollection_T, "System.Collections.Generic.ICollection(Of T)");
         internal static readonly KnownType System_Collections_Generic_IDictionary_TKey_TValue = new KnownType("System.Collections.Generic.IDictionary<TKey, TValue>");
+        internal static readonly KnownType System_Collections_Generic_IDictionary_TKey_TValue_VB = new KnownType("System.Collections.Generic.IDictionary(Of TKey, TValue)");
         internal static readonly KnownType System_Collections_Generic_IEnumerable_T = new KnownType(SpecialType.System_Collections_Generic_IEnumerable_T, "System.Collections.Generic.IEnumerable<T>");
         internal static readonly KnownType System_Collections_Generic_IList_T = new KnownType(SpecialType.System_Collections_Generic_IList_T, "System.Collections.Generic.IList<T>");
         internal static readonly KnownType System_Collections_Generic_IReadOnlyCollection_T = new KnownType("System.Collections.Generic.IReadOnlyCollection<T>");
