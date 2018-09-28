@@ -42,12 +42,14 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
+import java.util.*;
+import java.util.stream.Collectors;
 import javax.annotation.Nullable;
+import javax.swing.text.StyledEditorKit;
+
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.ScannerSide;
-import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 import org.sonar.api.utils.Version;
@@ -86,24 +88,40 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     RulesDefinitionXmlLoader loader = new RulesDefinitionXmlLoader();
     loader.load(repository, new InputStreamReader(getClass().getResourceAsStream(rulesXmlFilePath), StandardCharsets.UTF_8));
 
-    for (NewRule rule : repository.rules()) {
-      updateMetadata(rule);
-    }
+    setupHotspotRules(repository.rules());
 
     repository.done();
   }
 
-  private void updateMetadata(NewRule rule) {
+  private void setupHotspotRules(Collection<NewRule> rules) {
+    Map<NewRule, RuleMetadata> hotspotRuleMetadata = readHotspotRuleMetadata(rules);
+
+    // Either set security standards fields, or remove the rules altogether,
+    // depending on whether the SonarQube instance supports hotspots or not.
     if (supportsSecurityHotspots) {
-      RuleMetadata ruleMetadata = readRuleMetadata(rule.key());
-      for (String s : ruleMetadata.securityStandards.OWASP) {
-        rule.addOwaspTop10(RulesDefinition.OwaspTop10.valueOf(s));
-      }
-      rule.addCwe(ruleMetadata.securityStandards.CWE);
-      if (ruleMetadata.isSecurityHotspot()) {
-        setSecurityHotspotType(rule);
+      for (Map.Entry<NewRule, RuleMetadata> entry : hotspotRuleMetadata.entrySet()) {
+        updateSecurityStandards(entry.getKey(), entry.getValue());
       }
     }
+    else {
+      rules.removeAll(hotspotRuleMetadata.keySet());
+    }
+  }
+
+  private void updateSecurityStandards(NewRule rule, RuleMetadata ruleMetadata) {
+    for (String s : ruleMetadata.securityStandards.OWASP) {
+      rule.addOwaspTop10(RulesDefinition.OwaspTop10.valueOf(s));
+    }
+    rule.addCwe(ruleMetadata.securityStandards.CWE);
+  }
+
+  private Map<NewRule, RuleMetadata> readHotspotRuleMetadata(Collection<NewRule> rules) {
+    return rules.stream()
+        .collect(Collectors.toMap(rule -> rule, rule -> readRuleMetadata(rule.key())))
+        .entrySet()
+        .stream()
+        .filter(entry -> entry.getValue().isSecurityHotspot())
+        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
   }
 
   private static RuleMetadata readRuleMetadata(String ruleKey) {
@@ -117,26 +135,14 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     }
   }
 
-  /**
-   * The rules.xml file is backwards compatible with SonarQube 6.7,
-   * so we need to explicitly set the type after deserialization
-   */
-  private static void setSecurityHotspotType(NewRule rule) {
-    try {
-      Field type = rule.getClass().getDeclaredField("type");
-      type.setAccessible(true);
-      type.set(rule, RuleType.SECURITY_HOTSPOT);
-    } catch (NoSuchFieldException|IllegalAccessException e) {
-      throw new IllegalStateException("Cannot set type to SECURITY_HOTSPOT", e);
-    }
-  }
-
   private static class RuleMetadata {
     private static final String SECURITY_HOTSPOT = "SECURITY_HOTSPOT";
 
+    String sqKey;
     String type;
     SecurityStandards securityStandards = new SecurityStandards();
 
+    String getKey() { return sqKey; }
     boolean isSecurityHotspot() {
       return SECURITY_HOTSPOT.equals(type);
     }
