@@ -16,16 +16,6 @@ namespace Tests.Diagnostics
             return something + "foo";
         }
 
-        public async Task DoSomethingAsync(string value) // Noncompliant - this is an edge case that might be worth handling later on
-        {
-            await Task.Delay(0);
-
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value)); // Secondary
-            }
-        }
-
         public async void OnSomeEvent(object sender, EventArgs args) // Noncompliant - it might looks weird to throw from some event method but that's valid syntax
         {
             if (sender == null)
@@ -108,6 +98,17 @@ namespace Tests.Diagnostics
             Func<Task> func = async () => await Task.Delay(0);
 
             return func();
+        }
+
+        // See https://github.com/SonarSource/sonar-csharp/issues/1819
+        public async Task DoSomethingAsync(string value)
+        {
+            await Task.Delay(0);
+
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
         }
     }
 }

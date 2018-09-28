@@ -40,6 +40,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private readonly SemanticModel semanticModel;
         private readonly List<Location> argumentExceptionLocations = new List<Location>();
 
+        private bool keepWalking = true;
+
         public IEnumerable<Location> ArgumentExceptionLocations => this.argumentExceptionLocations;
 
         public ParameterValidationInMethodWalker(SemanticModel semanticModel)
@@ -49,11 +51,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override void Visit(SyntaxNode node)
         {
-            // Don't explorer deeper if this node is equivalent to a method declaration
-            if (!node.IsAnyKind(SubMethodEquivalents))
+            if (this.keepWalking &&
+                !node.IsAnyKind(SubMethodEquivalents))  // Don't explore deeper if this node is equivalent to a method declaration
             {
                 base.Visit(node);
             }
+        }
+
+        public override void VisitAwaitExpression(AwaitExpressionSyntax node)
+        {
+            this.keepWalking = false;
         }
 
         public override void VisitThrowStatement(ThrowStatementSyntax node)
