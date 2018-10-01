@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,14 +31,14 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class ExceptionConstructorShouldNotThrow : SonarDiagnosticAnalyzer
+    public sealed class ExceptionConstructorShouldNotThrow : ExceptionConstructorShouldNotThrowBase
     {
-        internal const string DiagnosticId = "S3693";
-        private const string MessageFormat = "Avoid throwing exceptions in this constructor.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+
+        protected override DiagnosticDescriptor Rule => rule;
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -56,17 +56,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var throwStatementsPerCtor = classDeclaration.Members
                         .OfType<ConstructorDeclarationSyntax>()
-                        .Select(ctor => ctor.DescendantNodes().OfType<ThrowStatementSyntax>().ToList())
+                        .Select(ctor => ctor.DescendantNodes().OfType<ThrowStatementSyntax>().Cast<SyntaxNode>().ToList())
                         .Where(@throw => @throw.Count > 0)
                         .ToList();
 
-                    foreach (var throwStatement in throwStatementsPerCtor)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, throwStatement.First().GetLocation(),
-                            throwStatement.Skip(1).Select(@throw => @throw.GetLocation())));
-                    }
+                    ReportAllThrowLocations(c, throwStatementsPerCtor);
                 },
                 SyntaxKind.ClassDeclaration);
         }
+
+
     }
 }

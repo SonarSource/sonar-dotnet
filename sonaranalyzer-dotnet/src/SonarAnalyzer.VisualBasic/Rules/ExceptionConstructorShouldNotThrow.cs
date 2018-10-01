@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -38,5 +38,32 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected override DiagnosticDescriptor Rule => rule;
+
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var classDeclaration = (ClassBlockSyntax)c.Node;
+
+                    var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
+                    if (classSymbol == null ||
+                        !classSymbol.DerivesFrom(KnownType.System_Exception))
+                    {
+                        return;
+                    }
+
+                    var throwStatementsPerCtor = classDeclaration.Members
+                        .OfType<ConstructorBlockSyntax>()
+                        .Select(ctor => ctor.DescendantNodes().OfType<ThrowStatementSyntax>().Cast<SyntaxNode>().ToList())
+                        .Where(@throw => @throw.Count > 0)
+                        .ToList();
+
+                    ReportAllThrowLocations(c, throwStatementsPerCtor);
+                },
+                SyntaxKind.ClassBlock);
+        }
     }
 }

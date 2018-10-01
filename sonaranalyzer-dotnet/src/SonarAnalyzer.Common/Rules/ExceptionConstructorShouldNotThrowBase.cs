@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -19,15 +19,30 @@
  */
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 
 namespace SonarAnalyzer.Rules
 {
     public abstract class ExceptionConstructorShouldNotThrowBase : SonarDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S3693";
-        protected const string MessageFormat = "";
+        protected const string MessageFormat = "Avoid throwing exceptions in this constructor.";
+
+        protected abstract DiagnosticDescriptor Rule {get;}
+        protected void ReportAllThrowLocations(SyntaxNodeAnalysisContext c,
+            List<List<SyntaxNode>> throwStatementsPerCtor)
+        {
+            foreach (var throwStatement in throwStatementsPerCtor)
+            {
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwStatement.First().GetLocation(),
+                    throwStatement.Skip(1).Select(@throw => @throw.GetLocation())));
+            }
+        }
+
     }
 }

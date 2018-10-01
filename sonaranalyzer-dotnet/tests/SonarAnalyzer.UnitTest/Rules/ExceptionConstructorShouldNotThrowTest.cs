@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ExceptionConstructorShouldNotThrow()
+        public void ExceptionConstructorShouldNotThrow_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ExceptionConstructorShouldNotThrow.cs",
                 new ExceptionConstructorShouldNotThrow());
