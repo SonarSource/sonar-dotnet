@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.csharp;
 
-import java.util.Set;
 import org.junit.Test;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.debt.DebtRemediationFunction;

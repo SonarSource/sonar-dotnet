@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
@@ -21,10 +21,6 @@
     <Compile Include="Protobuf\AnalyzerReport.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
-    <Compile Remove="Protobuf\Ucfg.cs" />
-    <Compile Include="Protobuf\Ucfg.cs">
-      <SonarQubeExclude>true</SonarQubeExclude>
-    </Compile>
     <Compile Include="..\AssemblyInfo.Shared.cs" Link="Properties\AssemblyInfo.Shared.cs" />
     <Compile Include="..\Signing.cs" Link="Properties\Signing.cs" />
   </ItemGroup>
@@ -33,17 +29,8 @@
     <AdditionalFiles Include="..\SonarLint.xml" Link="Properties\SonarLint.xml" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <!-- The path to the ucfg submodule, relative to this project -->
-    <UcfgProtoPath>./../../../sonar-ucfg/src/main/protobuf/</UcfgProtoPath>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="$(UcfgProtoPath)ucfg.proto" Link="Protobuf\ucfg.proto" />
-  </ItemGroup>
-
   <!-- Generate protobuf classes, supports windows and linux execution -->
-  <Target Name="GenerateProtobufClasses" BeforeTargets="CoreCompile" Outputs="./Protobuf/Ucfg.cs;./Protobuf/AnalyzerReport.cs" Inputs="$(UcfgProtoPath)ucfg.proto;./Protobuf/AnalyzerReport.proto">
+  <Target Name="GenerateProtobufClasses" BeforeTargets="CoreCompile" Outputs="./Protobuf/AnalyzerReport.cs" Inputs="./Protobuf/AnalyzerReport.proto">
     <Message Importance="high" Text="Generating protobuf classes..." />
     <!-- There is no built-in way to distinguish between Linux and OSX -->
     <PropertyGroup>
@@ -56,7 +43,6 @@
       <ProtocCompiler Condition="$(IsOSX)==true">~/.nuget/packages/google.protobuf.tools/3.6.1/tools/macosx_x64/protoc</ProtocCompiler>
       <ProtocCompiler Condition="$(IsLinux)==true">~/.nuget/packages/google.protobuf.tools/3.6.1/tools/linux_x64/protoc</ProtocCompiler>
     </PropertyGroup>
-    <Exec Command="$(ProtocCompiler) -I=$(UcfgProtoPath) --csharp_out=./Protobuf $(UcfgProtoPath)ucfg.proto" />
     <Exec Command="$(ProtocCompiler) -I=./Protobuf --csharp_out=./Protobuf ./Protobuf/AnalyzerReport.proto" />
     <Message Importance="high" Text="Protobuf classes generated." />
   </Target>

@@ -53,7 +53,6 @@ import static org.assertj.core.api.Assertions.assertThat;
   MultiTargetAppTest.class,
   NoSonarTest.class,
   SharedFilesTest.class,
-  UCFGDeserializationTest.class,
   UnitTestResultsTest.class
 })
 public class Tests {
