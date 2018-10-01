@@ -18,17 +18,30 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ObjectShouldBeInitializedCorrectlyBase : SonarDiagnosticAnalyzer
+    public abstract class ObjectShouldBeInitializedCorrectlyBase : HotspotDiagnosticAnalyzer
     {
+        public ObjectShouldBeInitializedCorrectlyBase()
+            : base(new AlwaysEnabledAnalyzerConfiguration())
+        {
+        }
+
+        public ObjectShouldBeInitializedCorrectlyBase(IAnalyzerConfiguration analysisConfiguration)
+            : base(analysisConfiguration)
+        {
+        }
+
         /// <summary>
         /// Gets the KnownType representing the type on which instances the rule will raise issues on.
         /// </summary>
@@ -48,36 +61,45 @@ namespace SonarAnalyzer.Rules
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterCompilationStartAction(
+                ccc =>
                 {
-                    var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
-
-                    if (IsTrackedType(objectCreation, c.SemanticModel) &&
-                        !ObjectCreatedWithAllowedValue(objectCreation, c.SemanticModel) &&
-                        !IsLaterAssignedWithAllowedValue(objectCreation, c.SemanticModel))
+                    if (!IsEnabled(ccc.Options))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], objectCreation.GetLocation()));
+                        return;
                     }
-                },
-                SyntaxKind.ObjectCreationExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var assignment = (AssignmentExpressionSyntax)c.Node;
+                    ccc.RegisterSyntaxNodeActionInNonGenerated(
+                        c =>
+                        {
+                            var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
 
-                    // Ignore assignments within object initializers, they are
-                    // reported in the ObjectCreationExpression handler
-                    if (assignment.FirstAncestorOrSelf<InitializerExpressionSyntax>() == null &&
-                        IsTrackedPropertyName(assignment.Left) &&
-                        IsPropertyOnTrackedType(assignment.Left, c.SemanticModel) &&
-                        !IsAllowedValue(assignment.Right, c.SemanticModel))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], assignment.GetLocation()));
-                    }
-                },
-                SyntaxKind.SimpleAssignmentExpression);
+                            if (IsTrackedType(objectCreation, c.SemanticModel) &&
+                                !ObjectCreatedWithAllowedValue(objectCreation, c.SemanticModel) &&
+                                !IsLaterAssignedWithAllowedValue(objectCreation, c.SemanticModel))
+                            {
+                                c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], objectCreation.GetLocation()));
+                            }
+                        },
+                        SyntaxKind.ObjectCreationExpression);
+
+                    ccc.RegisterSyntaxNodeActionInNonGenerated(
+                        c =>
+                        {
+                            var assignment = (AssignmentExpressionSyntax)c.Node;
+
+                            // Ignore assignments within object initializers, they are
+                            // reported in the ObjectCreationExpression handler
+                            if (assignment.FirstAncestorOrSelf<InitializerExpressionSyntax>() == null &&
+                                IsTrackedPropertyName(assignment.Left) &&
+                                IsPropertyOnTrackedType(assignment.Left, c.SemanticModel) &&
+                                !IsAllowedValue(assignment.Right, c.SemanticModel))
+                            {
+                                c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], assignment.GetLocation()));
+                            }
+                        },
+                        SyntaxKind.SimpleAssignmentExpression);
+                });
         }
 
         /// <summary>
@@ -197,5 +219,19 @@ namespace SonarAnalyzer.Rules
 
         private static IEnumerable<StatementSyntax> GetNextStatements(StatementSyntax statement) =>
             statement.Parent.ChildNodes().OfType<StatementSyntax>().SkipWhile(x => x != statement).Skip(1);
+
+        private class AlwaysEnabledAnalyzerConfiguration : IAnalyzerConfiguration
+        {
+            public string ProjectOutputPath => string.Empty;
+
+            public IReadOnlyCollection<string> EnabledRules { get; } = Array.Empty<string>();
+
+            public bool IsEnabled(string ruleKey) => true;
+
+            public void Read(AnalyzerOptions options)
+            {
+                // Do nothing
+            }
+        }
     }
 }

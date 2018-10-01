@@ -32,7 +32,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotUseRandom()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseRandom.cs",
-                new DoNotUseRandom());
+                new DoNotUseRandom(new TestAnalyzerConfiguration(null, "S2245")));
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotUseRandom_Not_Enabled()
+        {
+            Verifier.VerifyNoIssueReported(@"TestCases\DoNotUseRandom.cs",
+                new DoNotUseRandom(new TestAnalyzerConfiguration(null)));
         }
     }
 }

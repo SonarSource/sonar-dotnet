@@ -1,5 +1,5 @@
 {
-  "title": "Storing personal data in cookies is security-sensitive",
+  "title": "Using cookies is security-sensitive",
   "type": "SECURITY_HOTSPOT",
   "status": "ready",
   "remediation": {
@@ -8,12 +8,15 @@
   },
   "tags": [
     "cwe",
+    "owasp-a1",
     "cert",
+    "sans-top25-porous",
     "owasp-a3"
   ],
   "standards": [
     "CWE",
-    "OWASP Top Ten"
+    "OWASP Top Ten",
+    "SANS Top 25"
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-2255",
@@ -22,9 +25,12 @@
   "securityStandards": {
     "CWE": [
       315,
-      312
+      312,
+      565,
+      807
     ],
     "OWASP": [
+      "A1",
       "A3"
     ]
   }

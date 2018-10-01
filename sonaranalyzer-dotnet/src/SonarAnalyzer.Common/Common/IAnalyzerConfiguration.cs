@@ -29,6 +29,8 @@ namespace SonarAnalyzer.Common
 
         IReadOnlyCollection<string> EnabledRules { get; }
 
+        bool IsEnabled(string ruleKey);
+
         void Read(AnalyzerOptions options);
    }
 }

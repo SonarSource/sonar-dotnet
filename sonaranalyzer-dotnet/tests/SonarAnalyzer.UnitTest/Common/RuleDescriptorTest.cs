@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Common
             {
                 ruleDetail.Should().NotBeNull();
                 ruleDetail.Type.Should().NotBeNull();
-                ruleDetail.Type.Should().BeOneOf("CODE_SMELL", "BUG", "VULNERABILITY");
+                ruleDetail.Type.Should().BeOneOf("CODE_SMELL", "BUG", "VULNERABILITY", "SECURITY_HOTSPOT");
                 ruleDetail.Description.Should().NotBeNull();
                 ruleDetail.Key.Should().NotBeNull();
                 ruleDetail.Title.Should().NotBeNull();

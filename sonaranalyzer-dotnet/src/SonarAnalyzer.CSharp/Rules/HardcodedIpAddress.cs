@@ -34,13 +34,24 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class HardcodedIpAddress : SonarDiagnosticAnalyzer
+    public sealed class HardcodedIpAddress : HotspotDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1313";
         private const string MessageFormat = "Make sure using this hardcoded IP address '{0}' is safe here.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
+                .WithNotConfigurable();
+
+        public HardcodedIpAddress()
+            : base(new DefaultAnalyzerConfiguration())
+        {
+        }
+
+        public HardcodedIpAddress(IAnalyzerConfiguration analysisConfiguration)
+            : base(analysisConfiguration)
+        {
+        }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
@@ -48,49 +59,58 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterCompilationStartAction(
+                ccc =>
                 {
-                    var stringLiteral = (LiteralExpressionSyntax)c.Node;
-                    var text = stringLiteral.Token.ValueText;
-
-                    if (text == "::")
+                    if (!IsEnabled(ccc.Options))
                     {
                         return;
                     }
 
-                    if (text == "127.0.0.1")
-                    {
-                        return;
-                    }
+                    ccc.RegisterSyntaxNodeActionInNonGenerated(
+                        c =>
+                        {
+                            var stringLiteral = (LiteralExpressionSyntax)c.Node;
+                            var text = stringLiteral.Token.ValueText;
 
-                    if (!IPAddress.TryParse(text, out var address))
-                    {
-                        return;
-                    }
+                            if (text == "::")
+                            {
+                                return;
+                            }
 
-                    if (address.AddressFamily == AddressFamily.InterNetwork &&
-                        text.Split('.').Length != 4)
-                    {
-                        return;
-                    }
+                            if (text == "127.0.0.1")
+                            {
+                                return;
+                            }
 
-                    var ancestorOrSelf = stringLiteral.FirstAncestorOrSelf<SyntaxNode>(IsCheckedType);
-                    var ancestorString = ancestorOrSelf?.ToString().ToUpperInvariant();
-                    if (ancestorString != null && SkippedWords.Any(s => ancestorString.Contains(s)))
-                    {
-                        return;
-                    }
+                            if (!IPAddress.TryParse(text, out var address))
+                            {
+                                return;
+                            }
 
-                    var attribute = stringLiteral.FirstAncestorOrSelf<AttributeSyntax>();
-                    if (attribute != null)
-                    {
-                        return;
-                    }
+                            if (address.AddressFamily == AddressFamily.InterNetwork &&
+                                text.Split('.').Length != 4)
+                            {
+                                return;
+                            }
 
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, stringLiteral.GetLocation(), text));
-                },
-                SyntaxKind.StringLiteralExpression);
+                            var ancestorOrSelf = stringLiteral.FirstAncestorOrSelf<SyntaxNode>(IsCheckedType);
+                            var ancestorString = ancestorOrSelf?.ToString().ToUpperInvariant();
+                            if (ancestorString != null && SkippedWords.Any(s => ancestorString.Contains(s)))
+                            {
+                                return;
+                            }
+
+                            var attribute = stringLiteral.FirstAncestorOrSelf<AttributeSyntax>();
+                            if (attribute != null)
+                            {
+                                return;
+                            }
+
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, stringLiteral.GetLocation(), text));
+                        },
+                        SyntaxKind.StringLiteralExpression);
+                });
         }
 
         private static bool IsCheckedType(SyntaxNode syntaxNode)

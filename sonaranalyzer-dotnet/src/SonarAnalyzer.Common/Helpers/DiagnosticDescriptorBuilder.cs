@@ -101,5 +101,17 @@ namespace SonarAnalyzer.Helpers
 #endif
                 .ToArray();
         }
+
+        public static DiagnosticDescriptor WithNotConfigurable(this DiagnosticDescriptor dd) =>
+            new DiagnosticDescriptor(
+                dd.Id,
+                dd.Title,
+                dd.MessageFormat,
+                dd.Category,
+                dd.DefaultSeverity,
+                true,
+                dd.Description,
+                dd.HelpLinkUri,
+                dd.CustomTags.Union(new[] { WellKnownDiagnosticTags.NotConfigurable }).ToArray());
     }
 }
