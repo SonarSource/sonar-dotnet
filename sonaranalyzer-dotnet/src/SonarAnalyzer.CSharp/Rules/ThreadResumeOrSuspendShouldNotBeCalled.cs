@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotCallThreadResumeOrSuspendMethods : DoNotCallMethodsCSharpBase
+    public sealed class ThreadResumeOrSuspendShouldNotBeCalled : DoNotCallMethodsCsharpBase
     {
         internal const string DiagnosticId = "S3889";
         private const string MessageFormat = "Refactor the code to remove this use of '{0}'.";
