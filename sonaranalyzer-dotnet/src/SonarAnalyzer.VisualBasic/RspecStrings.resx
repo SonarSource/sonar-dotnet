@@ -1174,7 +1174,7 @@
     <value>Because it is easy to extract strings from a compiled application, credentials should never be hard-coded. Do so, and they're almost guaranteed to end up in the hands of an attacker. This is particularly true for applications that are distributed.</value>
   </data>
   <data name="S2068_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S2068_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2546,6 +2546,36 @@
   </data>
   <data name="S3866_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
+  </data>
+  <data name="S3869_Category" xml:space="preserve">
+    <value>Blocker Bug</value>
+  </data>
+  <data name="S3869_Description" xml:space="preserve">
+    <value>Not surprisingly, the SafeHandle.DangerousGetHandle method is dangerous. That's because it may not return a valid handle. Using it can lead to leaks and vulnerabilities. While it is possible to use the method successfully, it's extremely difficult to do correctly, so the method should simply be avoided altogether.</value>
+  </data>
+  <data name="S3869_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3869_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3869_RemediationCost" xml:space="preserve">
+    <value>20min</value>
+  </data>
+  <data name="S3869_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S3869_Severity" xml:space="preserve">
+    <value>Blocker</value>
+  </data>
+  <data name="S3869_Tags" xml:space="preserve">
+    <value>leak,unpredictable</value>
+  </data>
+  <data name="S3869_Title" xml:space="preserve">
+    <value>"SafeHandle.DangerousGetHandle" should not be called</value>
+  </data>
+  <data name="S3869_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S3923_Category" xml:space="preserve">
     <value>Major Bug</value>
