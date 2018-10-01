@@ -21,22 +21,21 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class ExceptionConstructorShouldNotThrow : ExceptionConstructorShouldNotThrowBase
     {
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override DiagnosticDescriptor Rule => rule;
 
@@ -45,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var classDeclaration = (ClassDeclarationSyntax)c.Node;
+                    var classDeclaration = (ClassBlockSyntax)c.Node;
 
                     var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
                     if (classSymbol == null ||
@@ -55,16 +54,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var throwStatementsPerCtor = classDeclaration.Members
-                        .OfType<ConstructorDeclarationSyntax>()
-                        .Select(ctor => ctor.DescendantNodes().Where(n => n.IsKind(SyntaxKind.ThrowStatement)).ToList())
+                        .OfType<ConstructorBlockSyntax>()
+                        .Select(ctor => ctor.DescendantNodes().Where(n=>n.IsKind(SyntaxKind.ThrowStatement)).ToList())
                         .Where(@throw => @throw.Count > 0)
                         .ToList();
 
                     ReportAllThrowLocations(c, throwStatementsPerCtor);
                 },
-                SyntaxKind.ClassDeclaration);
+                SyntaxKind.ClassBlock);
         }
-
-
     }
 }
