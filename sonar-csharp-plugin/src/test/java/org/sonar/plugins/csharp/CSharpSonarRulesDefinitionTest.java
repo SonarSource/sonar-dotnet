@@ -70,8 +70,7 @@ public class CSharpSonarRulesDefinitionTest {
     RulesDefinition.Repository repository = context.repository("csharpsquid");
 
     RulesDefinition.Rule hardcodedCredentialsRule = repository.rule(SECURITY_HOTSPOT_RULE_KEY);
-    assertThat(hardcodedCredentialsRule.type()).isEqualTo(RuleType.VULNERABILITY);
-    assertThat(hardcodedCredentialsRule.activatedByDefault()).isFalse();
+    assertThat(hardcodedCredentialsRule).isNull();
   }
 
   @Test
@@ -83,7 +82,7 @@ public class CSharpSonarRulesDefinitionTest {
 
     RulesDefinition.Rule rule = repository.rule(SECURITY_HOTSPOT_RULE_KEY);
     assertThat(rule.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);
-    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:312", "cwe:315", "owaspTop10:a3");
+    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:312", "cwe:315", "cwe:565", "cwe:807", "owaspTop10:a1", "owaspTop10:a3");
   }
 
   @Test
@@ -96,18 +95,5 @@ public class CSharpSonarRulesDefinitionTest {
     RulesDefinition.Rule rule = repository.rule(VULNERABILITY_RULE_KEY);
     assertThat(rule.type()).isEqualTo(RuleType.VULNERABILITY);
     assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:79", "owaspTop10:a7");
-  }
-
-  @Test
-  public void test_security_standards_not_set_when_unsupported() throws Exception {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SonarVersion.SQ_67_RUNTIME);
-    RulesDefinition.Context context = new RulesDefinition.Context();
-    definition.define(context);
-    RulesDefinition.Repository repository = context.repository("csharpsquid");
-
-    RulesDefinition.Rule securityHotspotRule = repository.rule(SECURITY_HOTSPOT_RULE_KEY);
-    RulesDefinition.Rule vulnerabilityRule = repository.rule(VULNERABILITY_RULE_KEY);
-    assertThat(securityHotspotRule.securityStandards()).isEmpty();
-    assertThat(vulnerabilityRule.securityStandards()).isEmpty();
   }
 }

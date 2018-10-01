@@ -46,6 +46,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
+import javax.lang.model.element.VariableElement;
 import javax.swing.text.StyledEditorKit;
 
 import org.sonar.api.SonarRuntime;
@@ -94,17 +95,23 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   }
 
   private void setupHotspotRules(Collection<NewRule> rules) {
-    Map<NewRule, RuleMetadata> hotspotRuleMetadata = readHotspotRuleMetadata(rules);
+    Map<NewRule, RuleMetadata> ruleRuleMetadata = rules.stream()
+      .collect(Collectors.toMap(rule -> rule, rule -> readRuleMetadata(rule.key())));
 
     // Either set security standards fields, or remove the rules altogether,
     // depending on whether the SonarQube instance supports hotspots or not.
     if (supportsSecurityHotspots) {
-      for (Map.Entry<NewRule, RuleMetadata> entry : hotspotRuleMetadata.entrySet()) {
+      for (Map.Entry<NewRule, RuleMetadata> entry : ruleRuleMetadata.entrySet()) {
         updateSecurityStandards(entry.getKey(), entry.getValue());
       }
     }
     else {
-      rules.removeAll(hotspotRuleMetadata.keySet());
+      List<NewRule> hotspotRules = ruleRuleMetadata.entrySet()
+        .stream()
+        .filter(entry -> entry.getValue().isSecurityHotspot())
+        .map(Map.Entry::getKey)
+        .collect(Collectors.toList());
+      rules.removeAll(hotspotRules);
     }
   }
 
@@ -113,15 +120,6 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
       rule.addOwaspTop10(RulesDefinition.OwaspTop10.valueOf(s));
     }
     rule.addCwe(ruleMetadata.securityStandards.CWE);
-  }
-
-  private Map<NewRule, RuleMetadata> readHotspotRuleMetadata(Collection<NewRule> rules) {
-    return rules.stream()
-        .collect(Collectors.toMap(rule -> rule, rule -> readRuleMetadata(rule.key())))
-        .entrySet()
-        .stream()
-        .filter(entry -> entry.getValue().isSecurityHotspot())
-        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
   }
 
   private static RuleMetadata readRuleMetadata(String ruleKey) {
