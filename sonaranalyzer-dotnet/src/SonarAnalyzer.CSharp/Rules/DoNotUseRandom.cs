@@ -62,20 +62,20 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     ccc.RegisterSyntaxNodeActionInNonGenerated(
-                    c =>
-                    {
-                        var objectCreationSyntax = (ObjectCreationExpressionSyntax)c.Node;
-
-                        var argumentsCount = objectCreationSyntax.ArgumentList?.Arguments.Count;
-
-                        if (argumentsCount <= 1 && // Random has two ctors - with zero and one parameter
-                            c.SemanticModel.GetSymbolInfo(objectCreationSyntax).Symbol is IMethodSymbol methodSymbol &&
-                            methodSymbol.ContainingType.Is(KnownType.System_Random))
+                        c =>
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreationSyntax.GetLocation()));
-                        }
-                    },
-                    SyntaxKind.ObjectCreationExpression);
+                            var objectCreationSyntax = (ObjectCreationExpressionSyntax)c.Node;
+
+                            var argumentsCount = objectCreationSyntax.ArgumentList?.Arguments.Count;
+
+                            if (argumentsCount <= 1 && // Random has two ctors - with zero and one parameter
+                                c.SemanticModel.GetSymbolInfo(objectCreationSyntax).Symbol is IMethodSymbol methodSymbol &&
+                                methodSymbol.ContainingType.Is(KnownType.System_Random))
+                            {
+                                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreationSyntax.GetLocation()));
+                            }
+                        },
+                        SyntaxKind.ObjectCreationExpression);
                 });
         }
     }
