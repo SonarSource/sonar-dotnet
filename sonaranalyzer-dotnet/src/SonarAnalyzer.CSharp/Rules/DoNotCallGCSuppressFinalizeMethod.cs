@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotCallGCSuppressFinalizeMethod : DoNotCallMethodsBase
+    public sealed class DoNotCallGCSuppressFinalizeMethod : DoNotCallMethodsBase<InvocationExpressionSyntax>
     {
         internal const string DiagnosticId = "S3971";
         private const string MessageFormat = "Do not call 'GC.SuppressFinalize'.";
@@ -64,5 +64,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return false;
         }
+
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeInvocation, SyntaxKind.InvocationExpression);
+
+        protected override SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation) =>
+            invocation.GetMethodCallIdentifier();
     }
 }

@@ -21,6 +21,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
@@ -30,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class NormalizeStringsToUppercase : DoNotCallMethodsBase
+    public sealed class NormalizeStringsToUppercase : DoNotCallMethodsBase<InvocationExpressionSyntax>
     {
         internal const string DiagnosticId = "S4040";
         private const string MessageFormat = "Change this normalization to 'ToUpperInvariant()'.";
@@ -64,5 +65,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 invocation.ArgumentList.Arguments.Count == (isExtensionMethod ? 1 : 2) &&
                 invocation.ArgumentList.Arguments[isExtensionMethod ? 0 : 1].Expression.ToString() == "CultureInfo.InvariantCulture";
         }
+
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeInvocation, SyntaxKind.InvocationExpression);
+
+        protected override SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation) =>
+            invocation.GetMethodCallIdentifier();
     }
 }

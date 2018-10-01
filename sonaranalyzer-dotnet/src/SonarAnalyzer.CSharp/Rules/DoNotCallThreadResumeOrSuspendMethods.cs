@@ -21,6 +21,8 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -29,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotCallThreadResumeOrSuspendMethods : DoNotCallMethodsBase
+    public sealed class DoNotCallThreadResumeOrSuspendMethods : DoNotCallMethodsBase<InvocationExpressionSyntax>
     {
         internal const string DiagnosticId = "S3889";
         private const string MessageFormat = "Refactor the code to remove this use of '{0}'.";
@@ -44,5 +46,11 @@ namespace SonarAnalyzer.Rules.CSharp
             new MethodSignature(KnownType.System_Threading_Thread, "Resume")
         };
         internal override IEnumerable<MethodSignature> CheckedMethods => invalidMethods;
+
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeInvocation, SyntaxKind.InvocationExpression);
+
+        protected override SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation) =>
+            invocation.GetMethodCallIdentifier();
     }
 }
