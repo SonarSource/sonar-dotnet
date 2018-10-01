@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var throwStatementsPerCtor = classDeclaration.Members
                         .OfType<ConstructorDeclarationSyntax>()
-                        .Select(ctor => ctor.DescendantNodes().OfType<ThrowStatementSyntax>().Cast<SyntaxNode>().ToList())
+                        .Select(ctor => ctor.DescendantNodes().Where(n => n.IsKind(SyntaxKind.ThrowStatement)).ToList())
                         .Where(@throw => @throw.Count > 0)
                         .ToList();
 
