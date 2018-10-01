@@ -31,6 +31,8 @@ As for any maven project, the command `mvn clean install` automatically runs the
 
 ### Integration Tests
 
+Before running ITs, you need to setup the NUGET_PATH environment variable to point to the *nuget.exe* executable.
+
 To run the ITs, from your command prompt, you can either:
 
 * go to the `its` folder and run `mvn clean install`
