@@ -43,11 +43,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
-import javax.lang.model.element.VariableElement;
-import javax.swing.text.StyledEditorKit;
 
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.ScannerSide;
@@ -95,27 +95,29 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   }
 
   private void setupHotspotRules(Collection<NewRule> rules) {
-    Map<NewRule, RuleMetadata> ruleRuleMetadata = rules.stream()
+    Map<NewRule, RuleMetadata> allRuleMetadata = rules.stream()
       .collect(Collectors.toMap(rule -> rule, rule -> readRuleMetadata(rule.key())));
 
     // Either set security standards fields, or remove the rules altogether,
     // depending on whether the SonarQube instance supports hotspots or not.
     if (supportsSecurityHotspots) {
-      for (Map.Entry<NewRule, RuleMetadata> entry : ruleRuleMetadata.entrySet()) {
+      for (Map.Entry<NewRule, RuleMetadata> entry : allRuleMetadata.entrySet()) {
         updateSecurityStandards(entry.getKey(), entry.getValue());
       }
-    }
-    else {
-      List<NewRule> hotspotRules = ruleRuleMetadata.entrySet()
-        .stream()
-        .filter(entry -> entry.getValue().isSecurityHotspot())
-        .map(Map.Entry::getKey)
-        .collect(Collectors.toList());
-      rules.removeAll(hotspotRules);
+    } else {
+      rules.removeAll(getHotspotRules(allRuleMetadata));
     }
   }
 
-  private void updateSecurityStandards(NewRule rule, RuleMetadata ruleMetadata) {
+  private static List<NewRule> getHotspotRules(Map<NewRule, RuleMetadata> allRuleMetadata) {
+    return allRuleMetadata.entrySet()
+      .stream()
+      .filter(entry -> entry.getValue().isSecurityHotspot())
+      .map(Map.Entry::getKey)
+      .collect(Collectors.toList());
+  }
+
+  private static void updateSecurityStandards(NewRule rule, RuleMetadata ruleMetadata) {
     for (String s : ruleMetadata.securityStandards.OWASP) {
       rule.addOwaspTop10(RulesDefinition.OwaspTop10.valueOf(s));
     }
