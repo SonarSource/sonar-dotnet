@@ -74,7 +74,7 @@ public class CSharpSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_security_standards_with_security_hotspot() {
+  public void test_security_hotspot_has_correct_type_and_security_standards() {
     CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SonarVersion.SQ_73_RUNTIME);
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);

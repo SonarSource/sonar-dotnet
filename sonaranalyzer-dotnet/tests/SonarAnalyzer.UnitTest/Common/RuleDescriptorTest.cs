@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -75,7 +75,8 @@ namespace SonarAnalyzer.UnitTest.Common
             {
                 ruleDetail.Should().NotBeNull();
                 ruleDetail.Type.Should().NotBeNull();
-                ruleDetail.Type.Should().BeOneOf("CODE_SMELL", "BUG", "VULNERABILITY", "SECURITY_HOTSPOT");
+                // SECURITY_HOTSPOTS are converted to VULNERABILITY to ensure compatiblity with old versions of SonarQube
+                ruleDetail.Type.Should().BeOneOf("CODE_SMELL", "BUG", "VULNERABILITY");
                 ruleDetail.Description.Should().NotBeNull();
                 ruleDetail.Key.Should().NotBeNull();
                 ruleDetail.Title.Should().NotBeNull();

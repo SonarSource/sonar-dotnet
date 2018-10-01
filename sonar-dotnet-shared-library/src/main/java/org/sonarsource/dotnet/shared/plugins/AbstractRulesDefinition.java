@@ -46,11 +46,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 
 import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.ScannerSide;
+import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 import org.sonar.api.utils.Version;
@@ -98,23 +100,26 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     Map<NewRule, RuleMetadata> allRuleMetadata = rules.stream()
       .collect(Collectors.toMap(rule -> rule, rule -> readRuleMetadata(rule.key())));
 
+    Set<NewRule> hotspotRules = getHotspotRules(allRuleMetadata);
+
     // Either set security standards fields, or remove the rules altogether,
     // depending on whether the SonarQube instance supports hotspots or not.
     if (supportsSecurityHotspots) {
       for (Map.Entry<NewRule, RuleMetadata> entry : allRuleMetadata.entrySet()) {
         updateSecurityStandards(entry.getKey(), entry.getValue());
       }
+      hotspotRules.forEach(rule -> rule.setType(RuleType.SECURITY_HOTSPOT));
     } else {
-      rules.removeAll(getHotspotRules(allRuleMetadata));
+      rules.removeAll(hotspotRules);
     }
   }
 
-  private static List<NewRule> getHotspotRules(Map<NewRule, RuleMetadata> allRuleMetadata) {
+  private static Set<NewRule> getHotspotRules(Map<NewRule, RuleMetadata> allRuleMetadata) {
     return allRuleMetadata.entrySet()
       .stream()
       .filter(entry -> entry.getValue().isSecurityHotspot())
       .map(Map.Entry::getKey)
-      .collect(Collectors.toList());
+      .collect(Collectors.toSet());
   }
 
   private static void updateSecurityStandards(NewRule rule, RuleMetadata ruleMetadata) {
@@ -142,7 +147,9 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     String type;
     SecurityStandards securityStandards = new SecurityStandards();
 
-    String getKey() { return sqKey; }
+    String getKey() {
+      return sqKey;
+    }
     boolean isSecurityHotspot() {
       return SECURITY_HOTSPOT.equals(type);
     }
