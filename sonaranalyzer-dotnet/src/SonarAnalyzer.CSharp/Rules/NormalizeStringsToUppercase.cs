@@ -21,7 +21,6 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
@@ -31,13 +30,14 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class NormalizeStringsToUppercase : DoNotCallMethodsBase<InvocationExpressionSyntax>
+    public sealed class NormalizeStringsToUppercase : DoNotCallMethodsCsharpBase
     {
         internal const string DiagnosticId = "S4040";
         private const string MessageFormat = "Change this normalization to 'ToUpperInvariant()'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         private static readonly List<MethodSignature> checkedMethods = new List<MethodSignature>
@@ -47,6 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
             new MethodSignature(KnownType.System_Char, "ToLowerInvariant"),
             new MethodSignature(KnownType.System_String, "ToLowerInvariant"),
         };
+
         internal override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
 
         protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation,
@@ -65,11 +66,5 @@ namespace SonarAnalyzer.Rules.CSharp
                 invocation.ArgumentList.Arguments.Count == (isExtensionMethod ? 1 : 2) &&
                 invocation.ArgumentList.Arguments[isExtensionMethod ? 0 : 1].Expression.ToString() == "CultureInfo.InvariantCulture";
         }
-
-        protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeInvocation, SyntaxKind.InvocationExpression);
-
-        protected override SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation) =>
-            invocation.GetMethodCallIdentifier();
     }
 }

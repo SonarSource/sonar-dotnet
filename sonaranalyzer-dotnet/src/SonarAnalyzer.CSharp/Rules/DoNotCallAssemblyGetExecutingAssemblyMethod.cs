@@ -21,8 +21,6 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -31,25 +29,21 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotCallAssemblyGetExecutingAssemblyMethod : DoNotCallMethodsBase<InvocationExpressionSyntax>
+    public sealed class DoNotCallAssemblyGetExecutingAssemblyMethod : DoNotCallMethodsCsharpBase
     {
         internal const string DiagnosticId = "S3902";
         private const string MessageFormat = "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         private static readonly IEnumerable<MethodSignature> checkedMethods = new List<MethodSignature>
         {
             new MethodSignature(KnownType.System_Reflection_Assembly, "GetExecutingAssembly")
         };
+
         internal override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
-
-        protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeInvocation, SyntaxKind.InvocationExpression);
-
-        protected override SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation) =>
-            invocation.GetMethodCallIdentifier();
     }
 }

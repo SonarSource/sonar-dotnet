@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context) =>
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeInvocation, SyntaxKind.InvocationExpression);
 
         protected override SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation) =>

@@ -1174,7 +1174,7 @@
     <value>Because it is easy to extract strings from a compiled application, credentials should never be hard-coded. Do so, and they're almost guaranteed to end up in the hands of an attacker. This is particularly true for applications that are distributed.</value>
   </data>
   <data name="S2068_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2068_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>

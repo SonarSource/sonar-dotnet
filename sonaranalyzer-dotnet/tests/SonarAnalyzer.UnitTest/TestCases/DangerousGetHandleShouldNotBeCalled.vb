@@ -18,6 +18,9 @@ Module Tests
   End Sub
 
   Class Bar
+    Sub Test()
+      DangerousHandle()
+    End Sub
     Function DangerousHandle() As IntPtr
     End Function
   End Class

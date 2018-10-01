@@ -31,14 +31,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DangerousGetHandleShouldNotBeCalled_CS()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.cs", new csharp.DangerousGetHandleShouldNotBeCalled());
+            Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.cs",
+                new csharp.DangerousGetHandleShouldNotBeCalled());
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DangerousGetHandleShouldNotBeCalled_VB()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.vb", new vbnet.DangerousGetHandleShouldNotBeCalled());
+            Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.vb",
+                new vbnet.DangerousGetHandleShouldNotBeCalled());
         }
     }
 }

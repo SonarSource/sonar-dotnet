@@ -18,30 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Common;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Helpers.VisualBasic;
 
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.Rules.CSharp
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    [Rule(DiagnosticId)]
-    public sealed class DangerousGetHandleShouldNotBeCalled : DangerousGetHandleShouldNotBeCalledBase<InvocationExpressionSyntax>
+    public abstract class DoNotCallMethodsCsharpBase : DoNotCallMethodsBase<InvocationExpressionSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context) =>
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeInvocation, SyntaxKind.InvocationExpression);
 
-        protected override SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation) =>
+        protected sealed override SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation) =>
             invocation.GetMethodCallIdentifier();
     }
 }

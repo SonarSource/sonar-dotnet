@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotCallExitMethods : DoNotCallMethodsBase<InvocationExpressionSyntax>
+    public sealed class DoNotCallExitMethods : DoNotCallMethodsCsharpBase
     {
         internal const string DiagnosticId = "S1147";
         private const string MessageFormat = "Remove this call to '{0}' or ensure it is really required.";
@@ -60,11 +60,5 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Select(s => s.IsMainMethod())
                 .FirstOrDefault();
         }
-
-        protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeInvocation, SyntaxKind.InvocationExpression);
-
-        protected override SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation) =>
-            invocation.GetMethodCallIdentifier();
     }
 }

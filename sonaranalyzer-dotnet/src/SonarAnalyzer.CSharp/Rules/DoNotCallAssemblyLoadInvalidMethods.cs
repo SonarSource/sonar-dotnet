@@ -21,8 +21,6 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -31,7 +29,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotCallAssemblyLoadInvalidMethods : DoNotCallMethodsBase<InvocationExpressionSyntax>
+    public sealed class DoNotCallAssemblyLoadInvalidMethods : DoNotCallMethodsCsharpBase
     {
         internal const string DiagnosticId = "S3885";
         private const string MessageFormat = "Replace this call to '{0}' with 'Assembly.Load'.";
@@ -47,11 +45,5 @@ namespace SonarAnalyzer.Rules.CSharp
             new MethodSignature(KnownType.System_Reflection_Assembly, "LoadWithPartialName")
         };
         internal override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
-
-        protected sealed override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeInvocation, SyntaxKind.InvocationExpression);
-
-        protected override SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation) =>
-            invocation.GetMethodCallIdentifier();
     }
 }

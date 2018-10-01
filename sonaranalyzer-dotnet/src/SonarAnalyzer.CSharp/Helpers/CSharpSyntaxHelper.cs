@@ -218,6 +218,10 @@ namespace SonarAnalyzer.Helpers
             {
                 return memberAccessCall.Name.Identifier;
             }
+            if (invocation.Expression is MemberBindingExpressionSyntax memberBindingCall)
+            {
+                return memberBindingCall.Name.Identifier;
+            }
             return null;
         }
 
