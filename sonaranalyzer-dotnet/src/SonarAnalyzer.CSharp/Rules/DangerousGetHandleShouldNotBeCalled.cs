@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotCallDangerousGetHandleMethod : DoNotCallMethodsBase
+    public sealed class DangerousGetHandleShouldNotBeCalled : DoNotCallMethodsBase
     {
         internal const string DiagnosticId = "S3869";
         private const string MessageFormat = "Refactor the code to remove this use of '{0}'.";
