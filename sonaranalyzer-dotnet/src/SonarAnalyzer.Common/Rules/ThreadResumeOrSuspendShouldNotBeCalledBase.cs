@@ -18,29 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules
 {
-    [TestClass]
-    public class ThreadResumeOrSuspendShouldNotBeCalledTest
+    public abstract class ThreadResumeOrSuspendShouldNotBeCalledBase : SonarDiagnosticAnalyzer
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ThreadResumeOrSuspendShouldNotBeCalled()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ThreadResumeOrSuspendShouldNotBeCalled.cs", new ThreadResumeOrSuspendShouldNotBeCalled());
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ThreadResumeOrSuspendShouldNotBeCalled_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ThreadResumeOrSuspendShouldNotBeCalled.vb",
-                new SonarAnalyzer.Rules.VisualBasic.ThreadResumeOrSuspendShouldNotBeCalled());
-        }
+        protected const string DiagnosticId = "S3889";
+        protected const string MessageFormat = "";
     }
 }
-
