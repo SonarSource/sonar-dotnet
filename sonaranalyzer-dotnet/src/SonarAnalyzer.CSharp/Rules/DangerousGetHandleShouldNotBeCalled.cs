@@ -18,9 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -29,19 +30,17 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DangerousGetHandleShouldNotBeCalled : DoNotCallMethodsBase
+    public sealed class DangerousGetHandleShouldNotBeCalled : DangerousGetHandleShouldNotBeCalledBase<InvocationExpressionSyntax>
     {
-        internal const string DiagnosticId = "S3869";
-        private const string MessageFormat = "Refactor the code to remove this use of '{0}'.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly IEnumerable<MethodSignature> invalidMethods = new List<MethodSignature>
-        {
-            new MethodSignature(KnownType.System_Runtime_InteropServices_SafeHandle, "DangerousGetHandle")
-        };
-        internal override IEnumerable<MethodSignature> CheckedMethods => invalidMethods;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeInvocation, SyntaxKind.InvocationExpression);
+
+        protected override SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation) =>
+            invocation.GetMethodCallIdentifier();
     }
 }

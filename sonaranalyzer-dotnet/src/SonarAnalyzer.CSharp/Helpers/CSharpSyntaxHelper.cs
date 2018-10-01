@@ -204,6 +204,23 @@ namespace SonarAnalyzer.Helpers
                    (methodDeclaration as DestructorDeclarationSyntax)?.Identifier;
         }
 
+        public static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation)
+        {
+            if (invocation == null)
+            {
+                return null;
+            }
+            if (invocation.Expression is IdentifierNameSyntax directMethodCall)
+            {
+                return directMethodCall.Identifier;
+            }
+            if (invocation.Expression is MemberAccessExpressionSyntax memberAccessCall)
+            {
+                return memberAccessCall.Name.Identifier;
+            }
+            return null;
+        }
+
         public static Location FindIdentifierLocation(this BaseMethodDeclarationSyntax methodDeclaration)
         {
             return GetIdentifierOrDefault(methodDeclaration)?.GetLocation();

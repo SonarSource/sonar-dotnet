@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using csharp = SonarAnalyzer.Rules.CSharp;
+using vbnet = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,17 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DangerousGetHandleShouldNotBeCalled()
+        public void DangerousGetHandleShouldNotBeCalled_CS()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.cs", new DangerousGetHandleShouldNotBeCalled());
+            Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.cs", new csharp.DangerousGetHandleShouldNotBeCalled());
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void DangerousGetHandleShouldNotBeCalled_VB()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.vb",
-                new SonarAnalyzer.Rules.VisualBasic.DangerousGetHandleShouldNotBeCalled());
+            Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.vb", new vbnet.DangerousGetHandleShouldNotBeCalled());
         }
     }
 }

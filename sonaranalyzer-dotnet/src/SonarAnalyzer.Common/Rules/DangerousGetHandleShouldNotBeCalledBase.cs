@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,16 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DangerousGetHandleShouldNotBeCalledBase : SonarDiagnosticAnalyzer
+    public abstract class DangerousGetHandleShouldNotBeCalledBase<TInvocation> : DoNotCallMethodsBase<TInvocation>
+        where TInvocation : SyntaxNode
     {
-        protected const string DiagnosticId = "S3869";
-        protected const string MessageFormat = "";
+        internal const string DiagnosticId = "S3869";
+        protected const string MessageFormat = "Refactor the code to remove this use of '{0}'.";
+
+        private readonly IEnumerable<MethodSignature> invalidMethods = new List<MethodSignature>
+        {
+            new MethodSignature(KnownType.System_Runtime_InteropServices_SafeHandle, "DangerousGetHandle")
+        };
+
+        internal override IEnumerable<MethodSignature> CheckedMethods => invalidMethods;
     }
 }

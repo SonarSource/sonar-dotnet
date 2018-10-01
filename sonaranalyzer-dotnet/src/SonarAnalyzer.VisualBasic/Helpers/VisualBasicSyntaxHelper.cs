@@ -81,5 +81,22 @@ namespace SonarAnalyzer.Helpers.VisualBasic
 
         public static bool AnyOfKind(this IEnumerable<SyntaxToken> tokens, SyntaxKind kind) =>
             tokens.Any(n => n.RawKind == (int)kind);
+
+        public static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation)
+        {
+            if (invocation == null)
+            {
+                return null;
+            }
+            if (invocation.Expression is IdentifierNameSyntax directMethodCall)
+            {
+                return directMethodCall.Identifier;
+            }
+            if (invocation.Expression is MemberAccessExpressionSyntax memberAccessCall)
+            {
+                return memberAccessCall.Name.Identifier;
+            }
+            return null;
+        }
     }
 }
