@@ -207,6 +207,36 @@
   <data name="S104_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S1048_Category" xml:space="preserve">
+    <value>Blocker Bug</value>
+  </data>
+  <data name="S1048_Description" xml:space="preserve">
+    <value>If Finalize or an override of Finalize throws an exception, and the runtime is not hosted by an application that overrides the default policy, the runtime terminates the process immediately without graceful cleanup (finally blocks and finalizers are not executed). This behavior ensures process integrity if the finalizer cannot free or destroy resources.</value>
+  </data>
+  <data name="S1048_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S1048_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1048_RemediationCost" xml:space="preserve">
+    <value>30min</value>
+  </data>
+  <data name="S1048_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S1048_Severity" xml:space="preserve">
+    <value>Blocker</value>
+  </data>
+  <data name="S1048_Tags" xml:space="preserve">
+    <value>misra</value>
+  </data>
+  <data name="S1048_Title" xml:space="preserve">
+    <value>Finalizers should not throw exceptions</value>
+  </data>
+  <data name="S1048_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S105_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
   </data>
@@ -1174,7 +1204,7 @@
     <value>Because it is easy to extract strings from a compiled application, credentials should never be hard-coded. Do so, and they're almost guaranteed to end up in the hands of an attacker. This is particularly true for applications that are distributed.</value>
   </data>
   <data name="S2068_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S2068_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>

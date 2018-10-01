@@ -29,10 +29,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotThrowFromDestructors()
+        public void DoNotThrowFromDestructors_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotThrowFromDestructors.cs",
                 new DoNotThrowFromDestructors());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotThrowFromDestructors_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotThrowFromDestructors.vb",
+                new SonarAnalyzer.Rules.VisualBasic.DoNotThrowFromDestructors());
+        }
     }
 }
+

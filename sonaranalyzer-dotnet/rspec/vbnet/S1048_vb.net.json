@@ -1,0 +1,16 @@
+{
+  "title": "Finalizers should not throw exceptions",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [
+    "misra"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-1048",
+  "sqKey": "S1048",
+  "scope": "Main"
+}
