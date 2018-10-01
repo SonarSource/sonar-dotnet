@@ -61,11 +61,20 @@ namespace Tests.Diagnostics
             values[index] = 2; // Noncompliant
         }
 
-        void PlusPlusIndexAccess(int[] values)
+        void IncrementDecrementIndexAccess(int[] values)
         {
             int index = 0;
-            values[index++] = 1; // Secondary
-            values[index++] = 2; // Noncompliant - FP - it's not the same index
+            values[index++] = 1;
+            values[index++] = 2;
+
+            values[index--] = 1;
+            values[index--] = 2;
+
+            values[++index] = 1;
+            values[++index] = 2;
+
+            values[--index] = 1;
+            values[--index] = 2;
         }
 
         void IDictionaryAdd(IDictionary<int, int> dict)
@@ -92,6 +101,22 @@ namespace Tests.Diagnostics
         {
             c.Add(0, 1);
             c.Add(0, 2); // Compliant this is not on a dictionary
+        }
+
+        void IncrementDecrementInvocation(Dictionary<int, int> dict)
+        {
+            int index = 0;
+            dict.Add(index++, 1);
+            dict.Add(index++, 2);
+
+            dict.Add(index--, 1);
+            dict.Add(index--, 2);
+
+            dict.Add(++index, 1);
+            dict.Add(++index, 2);
+
+            dict.Add(--index, 1);
+            dict.Add(--index, 2);
         }
     }
 

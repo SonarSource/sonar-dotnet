@@ -51,7 +51,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (!(assignment.Left is ElementAccessExpressionSyntax elementAccess) ||
                         elementAccess.ArgumentList == null ||
-                        elementAccess.ArgumentList.Arguments.Count == 0)
+                        elementAccess.ArgumentList.Arguments.Count == 0 ||
+                        HasAnyExcludedArgumentKind(elementAccess.ArgumentList.Arguments))
                     {
                         return;
                     }
@@ -87,7 +88,8 @@ namespace SonarAnalyzer.Rules.CSharp
                    var invocation = (InvocationExpressionSyntax)c.Node;
 
                    if (invocation.ArgumentList == null ||
-                       invocation.ArgumentList.Arguments.Count != 2)
+                       invocation.ArgumentList.Arguments.Count != 2 ||
+                       HasAnyExcludedArgumentKind(invocation.ArgumentList.Arguments))
                    {
                        return;
                    }
@@ -121,6 +123,13 @@ namespace SonarAnalyzer.Rules.CSharp
                },
                SyntaxKind.InvocationExpression);
         }
+
+        private static bool HasAnyExcludedArgumentKind(SeparatedSyntaxList<ArgumentSyntax> arguments) =>
+            arguments.Select(a => a.Expression).Any(e =>
+                e.IsKind(SyntaxKind.PostIncrementExpression) ||
+                e.IsKind(SyntaxKind.PostDecrementExpression) ||
+                e.IsKind(SyntaxKind.PreIncrementExpression) ||
+                e.IsKind(SyntaxKind.PreDecrementExpression));
 
         private static bool IsElementAccessAssignmentOnSameItem(ExpressionSyntax expression, string accessedOn) =>
             expression is AssignmentExpressionSyntax aes &&
