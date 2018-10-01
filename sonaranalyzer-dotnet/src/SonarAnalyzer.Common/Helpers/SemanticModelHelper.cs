@@ -27,9 +27,14 @@ namespace SonarAnalyzer.Helpers
         public static SemanticModel GetSyntaxTreeSemanticModel(this SemanticModel model, SyntaxNode node)
         {
             // See https://github.com/dotnet/roslyn/issues/18730
-            return model.SyntaxTree == node.SyntaxTree
-                ? model
-                : model.Compilation.GetSemanticModel(node.SyntaxTree);
+            if (model.SyntaxTree == node.SyntaxTree)
+            {
+                return model;
+            }
+
+            return model.Compilation.ContainsSyntaxTree(node.SyntaxTree)
+                ? model.Compilation.GetSemanticModel(node.SyntaxTree)
+                : null;
         }
     }
 }
