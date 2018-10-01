@@ -64,16 +64,9 @@ namespace SonarAnalyzer.Rules
             }
 
             var trivias = node.GetLeadingTrivia();
-            //if (IsEndOfLine(trivias.Last()))
-            //{
-            //    trivias = trivias.RemoveAt(trivias.Count - 1);
-            //}
-
             var header = trivias.ToString();
             return header != null && AreHeadersEqual(header);
         }
-
-        protected abstract bool IsEndOfLine(SyntaxTrivia trivia);
 
         protected bool AreHeadersEqual(string currentHeader)
         {
