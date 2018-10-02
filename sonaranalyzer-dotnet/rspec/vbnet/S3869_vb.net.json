@@ -1,0 +1,17 @@
+{
+  "title": "\"SafeHandle.DangerousGetHandle\" should not be called",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "20min"
+  },
+  "tags": [
+    "leak",
+    "unpredictable"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-3869",
+  "sqKey": "S3869",
+  "scope": "All"
+}

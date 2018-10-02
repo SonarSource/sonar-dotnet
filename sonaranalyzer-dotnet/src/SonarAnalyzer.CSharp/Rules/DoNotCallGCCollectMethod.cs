@@ -29,19 +29,21 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotCallGCCollectMethod : DoNotCallMethodsBase
+    public sealed class DoNotCallGCCollectMethod : DoNotCallMethodsCSharpBase
     {
         internal const string DiagnosticId = "S1215";
         private const string MessageFormat = "Refactor the code to remove this use of '{0}'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         private static readonly IEnumerable<MethodSignature> checkedMethods = new List<MethodSignature>
         {
             new MethodSignature(KnownType.System_GC, "Collect"),
         };
+
         internal override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
     }
 }

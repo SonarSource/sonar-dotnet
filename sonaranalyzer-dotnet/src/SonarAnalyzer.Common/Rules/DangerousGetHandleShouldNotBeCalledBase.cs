@@ -18,30 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp = SonarAnalyzer.Rules.CSharp;
-using vbnet = SonarAnalyzer.Rules.VisualBasic;
+using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules
 {
-    [TestClass]
-    public class DangerousGetHandleShouldNotBeCalledTest
+    public abstract class DangerousGetHandleShouldNotBeCalledBase<TInvocation> : DoNotCallMethodsBase<TInvocation>
+        where TInvocation : SyntaxNode
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void DangerousGetHandleShouldNotBeCalled_CS()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.cs",
-                new csharp.DangerousGetHandleShouldNotBeCalled());
-        }
+        internal const string DiagnosticId = "S3869";
+        protected const string MessageFormat = "Refactor the code to remove this use of '{0}'.";
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void DangerousGetHandleShouldNotBeCalled_VB()
+        private readonly IEnumerable<MethodSignature> invalidMethods = new List<MethodSignature>
         {
-            Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.vb",
-                new vbnet.DangerousGetHandleShouldNotBeCalled());
-        }
+            new MethodSignature(KnownType.System_Runtime_InteropServices_SafeHandle, "DangerousGetHandle")
+        };
+
+        internal override IEnumerable<MethodSignature> CheckedMethods => invalidMethods;
     }
 }
-

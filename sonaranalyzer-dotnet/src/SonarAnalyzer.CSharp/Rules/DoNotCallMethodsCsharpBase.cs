@@ -18,30 +18,19 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp = SonarAnalyzer.Rules.CSharp;
-using vbnet = SonarAnalyzer.Rules.VisualBasic;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
-    [TestClass]
-    public class DangerousGetHandleShouldNotBeCalledTest
+    public abstract class DoNotCallMethodsCSharpBase : DoNotCallMethodsBase<InvocationExpressionSyntax>
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void DangerousGetHandleShouldNotBeCalled_CS()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.cs",
-                new csharp.DangerousGetHandleShouldNotBeCalled());
-        }
+        protected sealed override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeInvocation, SyntaxKind.InvocationExpression);
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void DangerousGetHandleShouldNotBeCalled_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.vb",
-                new vbnet.DangerousGetHandleShouldNotBeCalled());
-        }
+        protected sealed override SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation) =>
+            invocation.GetMethodCallIdentifier();
     }
 }
-
