@@ -195,7 +195,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 // Because of partial classes we cannot always rely on the current semantic model.
                 // See issue: https://github.com/SonarSource/sonar-csharp/issues/690
-                var disposeMethodSymbol = this.semanticModel.GetSyntaxTreeSemanticModel(disposeMethod)
+                var disposeMethodSymbol = disposeMethod.SyntaxTree.GetSemanticModel(this.semanticModel)
                     ?.GetDeclaredSymbol(disposeMethod);
                 if (disposeMethodSymbol == null)
                 {
@@ -280,11 +280,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     .SelectMany(t => t.GetMembers())
                     .OfType<IMethodSymbol>()
                     .Where(IsDisposeBool)
-                    .SelectMany(m => m.DeclaringSyntaxReferences)
-                    .Select(r => r.GetSyntax())
-                    // Because of partial classes we cannot always rely on the current semantic model.
-                    .Select(r => this.semanticModel.GetSyntaxTreeSemanticModel(r)?.GetDeclaredSymbol(r))
-                    .WhereNotNull()
                     .Any(methodSym => !methodSym.IsAbstract);
             }
         }
