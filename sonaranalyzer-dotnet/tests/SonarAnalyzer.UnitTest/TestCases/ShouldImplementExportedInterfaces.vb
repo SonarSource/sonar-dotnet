@@ -99,7 +99,7 @@ Namespace Classes
         Implements ISomething(Of BaseThing)
     End Class
 
-    <Export(GetType(ISomething(Of BaseThing)))> ' Noncompliant
+    <Export(GetType(ISomething(Of BaseThing)))> ' Noncompliant {{Implement 'ISomething(Of BaseThing)' on 'Something(Of BaseThing)' or remove this export attribute.}}
     Public Class Something(Of BaseThing)
     End Class
 

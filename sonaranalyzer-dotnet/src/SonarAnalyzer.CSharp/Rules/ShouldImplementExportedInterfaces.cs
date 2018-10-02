@@ -32,7 +32,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class ShouldImplementExportedInterfaces : ShouldImplementExportedInterfacesBase<AttributeArgumentSyntax, ExpressionSyntax, ClassDeclarationSyntax>
+    public sealed class ShouldImplementExportedInterfaces :
+        ShouldImplementExportedInterfacesBase<AttributeArgumentSyntax, ExpressionSyntax, ClassDeclarationSyntax>
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -63,17 +64,18 @@ namespace SonarAnalyzer.Rules.CSharp
                             : ActionForClass;
 
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attributeSyntax.GetLocation(), action,
-                            exportedType.Name, attributeTargetType.Name));
+                            exportedType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
+                            attributeTargetType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)));
                     }
                 },
                 SyntaxKind.Attribute);
         }
 
         protected override string GetIdentifier(AttributeArgumentSyntax argumentSyntax) =>
-            argumentSyntax.NameColon?.Name.Identifier.ValueText;
+            argumentSyntax?.NameColon?.Name.Identifier.ValueText;
         protected override ExpressionSyntax GetExpression(AttributeArgumentSyntax argumentSyntax) =>
             argumentSyntax?.Expression;
-        protected override SyntaxNode GetExportedTypeSyntax(ExpressionSyntax expressionSyntax) =>
+        protected override SyntaxNode GetTypeOfOrGetTypeExpression(ExpressionSyntax expressionSyntax) =>
             (expressionSyntax as TypeOfExpressionSyntax)?.Type;
     }
 }

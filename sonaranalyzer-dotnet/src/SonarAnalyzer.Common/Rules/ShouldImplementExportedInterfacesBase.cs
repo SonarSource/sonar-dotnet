@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.Common
         protected INamedTypeSymbol GetExportedTypeSymbol(SeparatedSyntaxList<TArgumentSyntax>? attributeArguments,
             SemanticModel semanticModel)
         {
-            if (attributeArguments == null)
+            if (!attributeArguments.HasValue)
             {
                 return null;
             }
@@ -69,9 +69,9 @@ namespace SonarAnalyzer.Rules.Common
             var argumentSyntax = GetArgumentFromNamedArgument(arguments) ??
                 GetArgumentFromSingleArgumentAttribute(arguments) ??
                 GetArgumentFromDoubleArgumentAttribute(arguments, semanticModel);
-            var typeOfExpression = GetExpression(argumentSyntax);
+            var typeOfOrGetTypeExpression = GetExpression(argumentSyntax);
 
-            var exportedTypeSyntax = GetExportedTypeSyntax(typeOfExpression);
+            var exportedTypeSyntax = GetTypeOfOrGetTypeExpression(typeOfOrGetTypeExpression);
             if (exportedTypeSyntax == null)
             {
                 return null;
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.Common
         }
 
         private TArgumentSyntax GetArgumentFromNamedArgument(IEnumerable<TArgumentSyntax> arguments) =>
-            arguments.FirstOrDefault(x => GetIdentifier(x) == "contractType");
+            arguments.FirstOrDefault(x => "contractType".Equals(GetIdentifier(x), System.StringComparison.OrdinalIgnoreCase));
 
         private TArgumentSyntax GetArgumentFromSingleArgumentAttribute(IEnumerable<TArgumentSyntax> arguments)
         {
@@ -121,6 +121,7 @@ namespace SonarAnalyzer.Rules.Common
 
         protected abstract string GetIdentifier(TArgumentSyntax argumentSyntax);
         protected abstract TExpressionSyntax GetExpression(TArgumentSyntax argumentSyntax);
-        protected abstract SyntaxNode GetExportedTypeSyntax(TExpressionSyntax expressionSyntax);
+        // Retrieve the expression inside of the typeof()/GetType() (e.g. typeof(Foo) => Foo)
+        protected abstract SyntaxNode GetTypeOfOrGetTypeExpression(TExpressionSyntax expressionSyntax);
     }
 }

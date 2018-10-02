@@ -31,7 +31,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class ShouldImplementExportedInterfaces : ShouldImplementExportedInterfacesBase<ArgumentSyntax, ExpressionSyntax, ClassStatementSyntax>
+    public sealed class ShouldImplementExportedInterfaces :
+        ShouldImplementExportedInterfacesBase<ArgumentSyntax, ExpressionSyntax, ClassStatementSyntax>
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -62,7 +63,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                             : ActionForClass;
 
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attributeSyntax.GetLocation(), action,
-                            exportedType.Name, attributeTargetType.Name));
+                            exportedType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
+                            attributeTargetType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)));
                     }
                 },
                 SyntaxKind.Attribute);
@@ -72,7 +74,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             (argumentSyntax as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier.ValueText;
         protected override ExpressionSyntax GetExpression(ArgumentSyntax argumentSyntax) =>
             argumentSyntax?.GetExpression();
-        protected override SyntaxNode GetExportedTypeSyntax(ExpressionSyntax expressionSyntax) =>
+        protected override SyntaxNode GetTypeOfOrGetTypeExpression(ExpressionSyntax expressionSyntax) =>
             (expressionSyntax as GetTypeExpressionSyntax)?.Type;
     }
 }
