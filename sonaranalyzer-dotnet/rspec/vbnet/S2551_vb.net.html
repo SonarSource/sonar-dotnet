@@ -1,0 +1,27 @@
+<p>Locking on the current object instance (i.e. <code>Me</code>), or on a <code>Type</code> object increases the chance of deadlocks because any other
+thread could acquire (or attempt to acquire) the same lock for another unrelated purpose. </p>
+<p>Instead, a new, private <code>object</code> should be created and used for the lock.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Public Sub MyLockingMethod()
+    SyncLock Me 'Noncompliant
+        ' ...
+    End SyncLock
+End Sub
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Class MyClass
+    Dim lockObj As New Object()
+
+    Public Sub MyLockingMethod()
+        SyncLock lockObj
+            ' ...
+        End SyncLock
+    End Sub
+End Class
+</pre>
+<h2>See</h2>
+<p><a href="https://docs.microsoft.com/en-us/dotnet/standard/threading/managed-threading-best-practices">Microsoft Documentation: Managed Threading
+Best Practices</a></p>
+

@@ -1,0 +1,16 @@
+{
+  "title": "Types and \"Me\" should not be used for locking",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "multi-threading"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-2551",
+  "sqKey": "S2551",
+  "scope": "All"
+}
