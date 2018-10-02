@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -38,5 +38,27 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var lockStatement = (SyncLockStatementSyntax)c.Node;
+
+                    if (LockOnThis(lockStatement.Expression) ||
+                        LockOnSystemType(lockStatement.Expression, c.SemanticModel))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, lockStatement.Expression.GetLocation()));
+                    }
+                },
+                SyntaxKind.SyncLockStatement);
+        }
+
+        private static bool LockOnSystemType(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            semanticModel.GetTypeInfo(expression).Type.Is(KnownType.System_Type);
+
+        private static bool LockOnThis(ExpressionSyntax expression) =>
+            expression.IsKind(SyntaxKind.MeExpression);
     }
 }

@@ -1,12 +1,25 @@
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
-Imports System.Linq
-Imports System.Text
 
-Namespace Tests.TestCases
-    Class Foo
-        Public Sub Test()
+Namespace Tests.Diagnostics
+    Public Class LockOnThisOrType
+        Public Sub MyLockingMethod()
+            SyncLock Me ' Noncompliant {{Lock on a new 'object' instead.}}
+'                    ^^
+            End SyncLock
 
-		End Sub
+            SyncLock lockObj
+            End SyncLock
+
+            SyncLock GetType(LockOnThisOrType) ' Noncompliant
+'                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+            End SyncLock
+
+            SyncLock (New LockOnThisOrType()).[GetType]() ' Noncompliant
+'                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            End SyncLock
+        End Sub
+
+        Dim lockObj As New Object()
     End Class
 End Namespace

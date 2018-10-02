@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,6 +28,6 @@ namespace SonarAnalyzer.Rules
     public abstract class LockOnThisOrTypeBase : SonarDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S2551";
-        protected const string MessageFormat = "";
+        protected const string MessageFormat = "Lock on a new 'object' instead.";
     }
 }
