@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Helpers
     {
         private readonly IAnalyzerConfiguration analysisConfiguration;
 
-        public HotspotDiagnosticAnalyzer(IAnalyzerConfiguration analysisConfiguration)
+        protected HotspotDiagnosticAnalyzer(IAnalyzerConfiguration analysisConfiguration)
         {
             this.analysisConfiguration = analysisConfiguration;
         }

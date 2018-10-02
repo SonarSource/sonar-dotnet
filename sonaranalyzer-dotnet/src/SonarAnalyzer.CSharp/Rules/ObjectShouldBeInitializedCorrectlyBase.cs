@@ -32,12 +32,12 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class ObjectShouldBeInitializedCorrectlyBase : HotspotDiagnosticAnalyzer
     {
-        public ObjectShouldBeInitializedCorrectlyBase()
+        protected ObjectShouldBeInitializedCorrectlyBase()
             : base(new AlwaysEnabledAnalyzerConfiguration())
         {
         }
 
-        public ObjectShouldBeInitializedCorrectlyBase(IAnalyzerConfiguration analysisConfiguration)
+        protected ObjectShouldBeInitializedCorrectlyBase(IAnalyzerConfiguration analysisConfiguration)
             : base(analysisConfiguration)
         {
         }
