@@ -1,4 +1,4 @@
-using System.Threading;
+﻿using System.Threading;
 
 namespace Tests.Diagnostics
 {
@@ -13,6 +13,7 @@ namespace Tests.Diagnostics
 
             var thread = Thread.CurrentThread;
             thread.Suspend(); // Noncompliant
+            thread?.Suspend(); // Noncompliant
 
             ((((((Thread))).CurrentThread))).Suspend(); // Noncompliant
         }
