@@ -21,7 +21,9 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
+import com.sonar.orchestrator.container.Edition;
 import com.sonar.orchestrator.locator.FileLocation;
+import com.sonar.orchestrator.locator.MavenLocation;
 import com.sonar.orchestrator.util.Command;
 import com.sonar.orchestrator.util.CommandExecutor;
 import java.io.File;
@@ -62,11 +64,14 @@ public class Tests {
 
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
-    .setSonarVersion(System.getProperty(System.getProperty("sonar.runtimeVersion"), "LATEST_RELEASE"))
+    .setSonarVersion(TestUtils.replaceLtsVersion(System.getProperty("sonar.runtimeVersion", "LATEST_RELEASE")))
     .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin"))
+    .setEdition(Edition.DEVELOPER)
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/class_name.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/template_rule.xml"))
+    .addPlugin(MavenLocation.of("com.sonarsource.security", "sonar-security-plugin", "7.3.0.1282"))
+    .activateLicense()
     .build();
 
   public static Path projectDir(TemporaryFolder temp, String projectName) throws IOException {

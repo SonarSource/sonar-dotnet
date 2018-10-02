@@ -38,7 +38,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -61,32 +60,15 @@ public class UCFGDeserializationTest {
 
   @BeforeClass
   public static void initializeOrchestrator() {
-    // Versions of SonarQube and plugins support aliases:
-    // - "DEV" for the latest build of master that passed QA
-    // - "DEV[1.0]" for the latest build that passed QA of series 1.0.x
-    // - "LATEST_RELEASE" for the latest release
-    // - "LATEST_RELEASE[1.0]" for latest release of series 1.0.x
-    // The SonarQube alias "LTS" has been dropped. An alternative is "LATEST_RELEASE[6.7]".
-    // The term "latest" refers to the highest version number, not the most recently published version.
-
-    String sonarVersion = Optional.ofNullable(System.getProperty("sonar.runtimeVersion")).filter(v -> !"LTS".equals(v)).orElse("LATEST_RELEASE[6.7]");
-
+    String sonarVersion = System.getProperty("sonar.runtimeVersion", "LATEST_RELEASE");
     // Starting with SonarQube 7.4, the responsibility for handling UCFGs moves to Sonar Security C# Frontend Plugin,
     // breaking compatibility with this plugin. We keep executing these tests only for previous versions.
     if (sonarVersion.contains("DEV") || sonarVersion.contains("7.4")) {
+      orchestrator = null;
       return;
     }
 
-    OrchestratorBuilder builder = Orchestrator.builderEnv()
-      .setSonarVersion(sonarVersion)
-      .setEdition(Edition.DEVELOPER)
-      .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin"))
-      .addPlugin(MavenLocation.of("com.sonarsource.security", "sonar-security-plugin", "7.3.0.1282"))
-      .activateLicense();
-
-    orchestrator = builder.build();
-    orchestrator.start();
-
+    orchestrator = Tests.ORCHESTRATOR;
     orchestrator.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
   }
 
