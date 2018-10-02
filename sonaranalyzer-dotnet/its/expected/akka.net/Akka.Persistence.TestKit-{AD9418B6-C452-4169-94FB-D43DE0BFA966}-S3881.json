@@ -21,6 +21,15 @@
 "endLine":  16,
 "endColumn":  80
 }
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\PluginSpec.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  32,
+"endLine":  52,
+"endColumn":  39
+}
 }
 ]
 }

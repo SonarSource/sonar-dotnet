@@ -192,7 +192,7 @@ namespace SonarAnalyzer.Helpers
             return childNodes
                 .OfType<InvocationExpressionSyntax>()
                 .Where(syntaxPredicate)
-                .Select(e => e.Expression.SyntaxTree.GetSemanticModel(semanticModel)?.GetSymbolInfo(e.Expression).Symbol)
+                .Select(e => e.Expression.SyntaxTree.GetSemanticModelOrDefault(semanticModel)?.GetSymbolInfo(e.Expression).Symbol)
                 .OfType<IMethodSymbol>()
                 .Any(symbolPredicate);
         }

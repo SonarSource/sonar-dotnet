@@ -45,6 +45,15 @@
 "endLine":  12,
 "endColumn":  63
 }
+},
+{
+"uri":  "sources\Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  316,
+"startColumn":  33,
+"endLine":  316,
+"endColumn":  40
+}
 }
 ]
 },
