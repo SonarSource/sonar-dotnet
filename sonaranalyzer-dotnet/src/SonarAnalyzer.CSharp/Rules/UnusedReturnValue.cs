@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static IEnumerable<SyntaxNodeSymbolSemanticModelTuple<InvocationExpressionSyntax, IMethodSymbol>> CollectInvocations(
-            IEnumerable<SyntaxNodeSemanticModelTuple<BaseTypeDeclarationSyntax>> containers)
+            IEnumerable<SyntaxNodeAndSemanticModel<BaseTypeDeclarationSyntax>> containers)
         {
             return containers
                 .SelectMany(container => container.SyntaxNode.DescendantNodes()

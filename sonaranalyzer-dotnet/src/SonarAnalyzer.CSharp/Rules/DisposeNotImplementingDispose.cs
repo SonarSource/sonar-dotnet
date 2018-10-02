@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(method => MethodIsDisposeImplementation(method, disposeMethod)))
             {
                 var methodDeclarations = method.DeclaringSyntaxReferences
-                    .Select(r => new SyntaxNodeSemanticModelTuple<MethodDeclarationSyntax>
+                    .Select(r => new SyntaxNodeAndSemanticModel<MethodDeclarationSyntax>
                     {
                         SyntaxNode = r.GetSyntax() as MethodDeclarationSyntax,
                         SemanticModel = compilation.GetSemanticModel(r.SyntaxTree)

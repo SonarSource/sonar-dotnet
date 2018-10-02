@@ -31,7 +31,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     using FieldTuple = SyntaxNodeSymbolSemanticModelTuple<VariableDeclaratorSyntax, IFieldSymbol>;
-    using TypeDeclarationTuple = SyntaxNodeSemanticModelTuple<TypeDeclarationSyntax>;
+    using TypeDeclarationTuple = SyntaxNodeAndSemanticModel<TypeDeclarationSyntax>;
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Select(reference => reference.GetSyntax())
                         .OfType<TypeDeclarationSyntax>()
                         .Select(node =>
-                            new SyntaxNodeSemanticModelTuple<TypeDeclarationSyntax>
+                            new SyntaxNodeAndSemanticModel<TypeDeclarationSyntax>
                             {
                                 SyntaxNode = node,
                                 SemanticModel = c.Compilation.GetSemanticModel(node.SyntaxTree)

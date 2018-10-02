@@ -28,66 +28,35 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace SonarAnalyzer.Helpers
 {
     using SyntaxNodeSymbolSemanticModelTuple = SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol>;
-    using TypeWithSemanticModel = SyntaxNodeSemanticModelTuple<BaseTypeDeclarationSyntax>;
+    using TypeWithSemanticModel = SyntaxNodeAndSemanticModel<BaseTypeDeclarationSyntax>;
 
-    internal class RemovableDeclarationCollector
+    internal class RemovableDeclarationCollector : RemovableDeclarationCollectorBase<BaseTypeDeclarationSyntax, SyntaxKind>
     {
-        private readonly Compilation compilation;
-        private readonly INamedTypeSymbol namedType;
-
-        private IEnumerable<TypeWithSemanticModel> typeDeclarations;
-
-        public static readonly Func<SyntaxNode, bool> IsNodeStructOrClassDeclaration =
-            node => node.IsKind(SyntaxKind.ClassDeclaration) ||
-                node.IsKind(SyntaxKind.StructDeclaration);
-
-        public static readonly Func<SyntaxNode, bool> IsNodeContainerTypeDeclaration =
-            node => IsNodeStructOrClassDeclaration(node) ||
-                node.IsKind(SyntaxKind.InterfaceDeclaration);
-
         public RemovableDeclarationCollector(INamedTypeSymbol namedType, Compilation compilation)
+            : base(namedType, compilation)
         {
-            this.namedType = namedType;
-            this.compilation = compilation;
         }
 
-        public IEnumerable<TypeWithSemanticModel> TypeDeclarations
+        public static bool IsNodeStructOrClassDeclaration(SyntaxNode node) =>
+            node.IsKind(SyntaxKind.ClassDeclaration) || node.IsKind(SyntaxKind.StructDeclaration);
+        public static bool IsNodeContainerTypeDeclaration(SyntaxNode node) =>
+            IsNodeStructOrClassDeclaration(node) || node.IsKind(SyntaxKind.InterfaceDeclaration);
+
+        protected override IEnumerable<SyntaxNode> SelectMatchingDeclarations(
+            SyntaxNodeAndSemanticModel<BaseTypeDeclarationSyntax> container,
+            ISet<SyntaxKind> kinds)
         {
-            get
-            {
-                if (this.typeDeclarations == null)
-                {
-                    this.typeDeclarations = this.namedType.DeclaringSyntaxReferences
-                        .Select(reference => reference.GetSyntax())
-                        .OfType<BaseTypeDeclarationSyntax>()
-                        .Select(node =>
-                            new TypeWithSemanticModel
-                            {
-                                SyntaxNode = node,
-                                SemanticModel = this.compilation.GetSemanticModel(node.SyntaxTree)
-                            })
-                        .Where(n => n.SemanticModel != null);
-                }
-                return this.typeDeclarations;
-            }
+            return container.SyntaxNode.DescendantNodes(IsNodeContainerTypeDeclaration)
+                .Where(node => kinds.Contains(node.Kind()));
         }
 
-        public IEnumerable<SyntaxNodeSymbolSemanticModelTuple> GetRemovableDeclarations(
-            ISet<SyntaxKind> kinds, Accessibility maxAcessibility)
-        {
-            return TypeDeclarations
-                .SelectMany(container => SelectMatchingDeclarations(container, kinds)
-                    .Select(node => SelectNodeTuple(node, container.SemanticModel)))
-                    .Where(tuple => IsRemovable(tuple.Symbol, maxAcessibility));
-        }
-
-        public IEnumerable<SyntaxNodeSymbolSemanticModelTuple> GetRemovableFieldLikeDeclarations(
-            ISet<SyntaxKind> kinds, Accessibility maxAcessibility)
+        public override IEnumerable<SyntaxNodeSymbolSemanticModelTuple> GetRemovableFieldLikeDeclarations(
+    ISet<SyntaxKind> kinds, Accessibility maxAcessibility)
         {
             var fieldLikeNodes = TypeDeclarations
                 .SelectMany(typeDeclaration => SelectMatchingDeclarations(typeDeclaration, kinds)
                     .Select(node =>
-                        new SyntaxNodeSemanticModelTuple<BaseFieldDeclarationSyntax>
+                        new SyntaxNodeAndSemanticModel<BaseFieldDeclarationSyntax>
                         {
                             SyntaxNode = (BaseFieldDeclarationSyntax)node,
                             SemanticModel = typeDeclaration.SemanticModel
@@ -97,51 +66,6 @@ namespace SonarAnalyzer.Helpers
                 .SelectMany(fieldLikeNode => fieldLikeNode.SyntaxNode.Declaration.Variables
                     .Select(variable => SelectNodeTuple(variable, fieldLikeNode.SemanticModel))
                     .Where(tuple => IsRemovable(tuple.Symbol, maxAcessibility)));
-        }
-
-        private static readonly ISet<MethodKind> RemovableMethodKinds = new HashSet<MethodKind>
-        {
-            MethodKind.Ordinary,
-            MethodKind.Constructor
-        };
-
-        public static bool IsRemovable(IMethodSymbol methodSymbol, Accessibility maxAccessibility)
-        {
-            return IsRemovable((ISymbol)methodSymbol, maxAccessibility) &&
-                RemovableMethodKinds.Contains(methodSymbol.MethodKind) &&
-                !methodSymbol.IsMainMethod() &&
-                !methodSymbol.IsEventHandler() &&
-                !methodSymbol.IsSerializationConstructor();
-        }
-
-        public static bool IsRemovable(ISymbol symbol, Accessibility maxAccessibility)
-        {
-            return symbol != null &&
-                symbol.GetEffectiveAccessibility() <= maxAccessibility &&
-                !symbol.IsImplicitlyDeclared &&
-                !symbol.IsAbstract &&
-                !symbol.IsVirtual &&
-                !symbol.GetAttributes().Any() &&
-                !symbol.ContainingType.IsInterface() &&
-                symbol.GetInterfaceMember() == null &&
-                symbol.GetOverriddenMember() == null;
-        }
-
-        private static SyntaxNodeSymbolSemanticModelTuple SelectNodeTuple(SyntaxNode node, SemanticModel semanticModel)
-        {
-            return new SyntaxNodeSymbolSemanticModelTuple
-            {
-                SyntaxNode = node,
-                Symbol = semanticModel.GetDeclaredSymbol(node),
-                SemanticModel = semanticModel
-            };
-        }
-
-        private static IEnumerable<SyntaxNode> SelectMatchingDeclarations(TypeWithSemanticModel container,
-            ISet<SyntaxKind> kinds)
-        {
-            return container.SyntaxNode.DescendantNodes(IsNodeContainerTypeDeclaration)
-                .Where(node => kinds.Contains(node.Kind()));
         }
     }
 }
