@@ -29,10 +29,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ShouldImplementExportedInterfaces()
+        public void ShouldImplementExportedInterfaces_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.cs",
                 new ShouldImplementExportedInterfaces(),
+                additionalReferences: FrameworkMetadataReference.SystemComponentModelComposition);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ShouldImplementExportedInterfaces_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.vb",
+                new SonarAnalyzer.Rules.VisualBasic.ShouldImplementExportedInterfaces(),
                 additionalReferences: FrameworkMetadataReference.SystemComponentModelComposition);
         }
 

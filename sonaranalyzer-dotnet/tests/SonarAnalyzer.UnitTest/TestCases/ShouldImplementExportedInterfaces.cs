@@ -102,7 +102,7 @@ namespace Classes
 
     }
 
-    [Export(typeof(ISomething<BaseThing>))] // Noncompliant
+    [Export(typeof(ISomething<BaseThing>))] // Noncompliant {{Implement 'ISomething<BaseThing>' on 'Something<BaseThing>' or remove this export attribute.}}
     public class Something<BaseThing>
     {
     }

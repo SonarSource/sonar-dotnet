@@ -6,16 +6,15 @@ filled with the exported type) leading to unexpected behaviors/crashes.</p>
 <p>The rule raises an issue when a class doesn't implement or inherit the type declared in the <code>ExportAttribute</code>. </p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-[Export(typeof(ISomeType))]
-public class SomeType // Noncompliant; doesn't implement 'ISomeType'.
-{
-}
+&lt;Export(GetType(ISomeType))&gt;
+Public Class SomeType  // Noncompliant; doesn't implement 'ISomeType'.
+End Class
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-[Export(typeof(ISomeType))]
-public class SomeType : ISomeType
-{
-}
+&lt;Export(GetType(ISomeType))&gt;
+Public Class SomeType
+    Inherits ISomeType
+End Class
 </pre>
 

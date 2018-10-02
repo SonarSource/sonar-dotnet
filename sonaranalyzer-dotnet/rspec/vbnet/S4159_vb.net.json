@@ -1,0 +1,17 @@
+{
+  "title": "Classes should implement their \"ExportAttribute\" interfaces",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "mef",
+    "pitfall"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-4159",
+  "sqKey": "S4159",
+  "scope": "All"
+}
