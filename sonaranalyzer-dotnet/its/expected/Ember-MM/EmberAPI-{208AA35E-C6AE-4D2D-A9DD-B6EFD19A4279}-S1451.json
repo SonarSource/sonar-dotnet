@@ -4,19 +4,6 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S1451",
-"message":  "Add or update the header of this file.",
-"location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  1,

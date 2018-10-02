@@ -91,7 +91,5 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     }
                 });
         }
-
-        protected override bool IsEndOfLine(SyntaxTrivia trivia) => trivia.IsKind(SyntaxKind.EndOfLineTrivia);
     }
 }

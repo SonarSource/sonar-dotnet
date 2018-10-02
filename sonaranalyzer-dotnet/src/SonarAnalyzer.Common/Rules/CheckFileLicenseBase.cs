@@ -64,25 +64,23 @@ namespace SonarAnalyzer.Rules
             }
 
             var trivias = node.GetLeadingTrivia();
-            if (IsEndOfLine(trivias.Last()))
-            {
-                trivias = trivias.RemoveAt(trivias.Count - 1);
-            }
-
             var header = trivias.ToString();
             return header != null && AreHeadersEqual(header);
         }
-
-        protected abstract bool IsEndOfLine(SyntaxTrivia trivia);
 
         protected bool AreHeadersEqual(string currentHeader)
         {
             var unixEndingHeader = currentHeader.Replace("\r\n", "\n");
             var unixEndingHeaderFormat = HeaderFormat.Replace("\r\n", "\n").Replace("\\r\\n", "\n");
-
+            if (!IsRegularExpression && !unixEndingHeaderFormat.EndsWith("\n"))
+            {
+                // In standard text mode, we want to be sure that the matched header is on its own
+                // line, with nothing else on the same line.
+                unixEndingHeaderFormat += "\n";
+            }
             return IsRegularExpression
                 ? Regex.IsMatch(unixEndingHeader, unixEndingHeaderFormat)
-                : unixEndingHeader.Equals(unixEndingHeaderFormat, StringComparison.Ordinal);
+                : unixEndingHeader.StartsWith(unixEndingHeaderFormat, StringComparison.Ordinal);
         }
 
         protected ImmutableDictionary<string, string> CreateDiagnosticProperties()
