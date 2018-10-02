@@ -2487,6 +2487,36 @@
   <data name="S3385_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3453_Category" xml:space="preserve">
+    <value>Major Bug</value>
+  </data>
+  <data name="S3453_Description" xml:space="preserve">
+    <value>A class with only private constructors can't be instantiated, thus, it seems to be pointless code.</value>
+  </data>
+  <data name="S3453_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3453_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3453_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S3453_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S3453_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3453_Tags" xml:space="preserve">
+    <value>design</value>
+  </data>
+  <data name="S3453_Title" xml:space="preserve">
+    <value>Classes should not have only "private" constructors</value>
+  </data>
+  <data name="S3453_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3464_Category" xml:space="preserve">
     <value>Blocker Bug</value>
   </data>

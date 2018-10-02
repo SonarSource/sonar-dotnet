@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,31 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules
 {
-    [TestClass]
-    public class ClassNotInstantiatableTest
+    public abstract class ClassNotInstantiatableBase : SonarDiagnosticAnalyzer
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ClassNotInstantiatable()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ClassNotInstantiatable.cs",
-                new ClassNotInstantiatable());
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ClassNotInstantiatable_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ClassNotInstantiatable.vb",
-                new SonarAnalyzer.Rules.VisualBasic.ClassNotInstantiatable());
-        }
+        protected const string DiagnosticId = "S3453";
+        protected const string MessageFormat = "";
     }
 }
-
-

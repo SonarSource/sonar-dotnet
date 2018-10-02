@@ -1,0 +1,21 @@
+<p>A class with only <code>private</code> constructors can't be instantiated, thus, it seems to be pointless code.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Public Class [MyClass]
+    Private Sub New() // Noncompliant
+        ' ...
+    End Sub
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Public Class [MyClass]
+    Private Sub New()
+        ' ...
+    End Sub
+End Class
+</pre>
+<h2>Exceptions</h2>
+<p>Classes that themselves access their private constructors (singletons or smart enums) are ignored. Classes with only <code>static</code> members
+are also ignored because they are covered by Rule S1118.</p>
+
