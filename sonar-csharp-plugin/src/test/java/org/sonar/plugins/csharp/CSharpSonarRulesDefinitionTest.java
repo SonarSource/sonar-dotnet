@@ -82,7 +82,7 @@ public class CSharpSonarRulesDefinitionTest {
 
     RulesDefinition.Rule rule = repository.rule(SECURITY_HOTSPOT_RULE_KEY);
     assertThat(rule.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);
-    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:312", "cwe:315", "cwe:565", "cwe:807", "owaspTop10:a1", "owaspTop10:a3");
+    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:312", "cwe:315", "owaspTop10:a3");
   }
 
   @Test
