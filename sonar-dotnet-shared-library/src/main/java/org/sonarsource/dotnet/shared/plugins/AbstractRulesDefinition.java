@@ -104,9 +104,7 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     // Either set security standards fields, or remove the rules altogether,
     // depending on whether the SonarQube instance supports hotspots or not.
     if (supportsSecurityHotspots) {
-      for (Map.Entry<NewRule, RuleMetadata> entry : allRuleMetadata.entrySet()) {
-        updateSecurityStandards(entry.getKey(), entry.getValue());
-      }
+      allRuleMetadata.forEach(AbstractRulesDefinition::updateSecurityStandards);
       hotspotRules.forEach(rule -> rule.setType(RuleType.SECURITY_HOTSPOT));
     } else {
       rules.removeAll(hotspotRules);
