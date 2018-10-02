@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using csharp = SonarAnalyzer.Rules.CSharp;
+using vbnet = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ThreadResumeOrSuspendShouldNotBeCalled()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ThreadResumeOrSuspendShouldNotBeCalled.cs", new ThreadResumeOrSuspendShouldNotBeCalled());
+            Verifier.VerifyAnalyzer(@"TestCases\ThreadResumeOrSuspendShouldNotBeCalled.cs",
+                new csharp.ThreadResumeOrSuspendShouldNotBeCalled());
         }
 
         [TestMethod]
@@ -39,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ThreadResumeOrSuspendShouldNotBeCalled_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ThreadResumeOrSuspendShouldNotBeCalled.vb",
-                new SonarAnalyzer.Rules.VisualBasic.ThreadResumeOrSuspendShouldNotBeCalled());
+                new vbnet.ThreadResumeOrSuspendShouldNotBeCalled());
         }
     }
 }
