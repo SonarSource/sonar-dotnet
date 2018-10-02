@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -81,28 +82,34 @@ namespace SonarAnalyzer.Rules.Common
         }
 
         private TArgumentSyntax GetArgumentFromNamedArgument(IEnumerable<TArgumentSyntax> arguments) =>
-            arguments.FirstOrDefault(x => "contractType".Equals(GetIdentifier(x), System.StringComparison.OrdinalIgnoreCase));
+            // it's ok to use case insensitive even for C# because if that casing is incorrect the code won't compile
+            arguments.FirstOrDefault(x => "contractType".Equals(GetIdentifier(x), StringComparison.OrdinalIgnoreCase));
 
-        private TArgumentSyntax GetArgumentFromSingleArgumentAttribute(IEnumerable<TArgumentSyntax> arguments)
+        private TArgumentSyntax GetArgumentFromSingleArgumentAttribute(SeparatedSyntaxList<TArgumentSyntax> arguments)
         {
-            if (arguments.ElementAtOrDefault(1) != null)
+            if (arguments.Count != 1)
             {
                 return null;
             }
 
             // Only one argument, should be typeof expression
-            return arguments.ElementAtOrDefault(0);
+            return arguments[0];
         }
 
-        private TArgumentSyntax GetArgumentFromDoubleArgumentAttribute(IEnumerable<TArgumentSyntax> arguments,
+        private TArgumentSyntax GetArgumentFromDoubleArgumentAttribute(SeparatedSyntaxList<TArgumentSyntax> arguments,
             SemanticModel semanticModel)
         {
-            var firstArgument = GetExpression(arguments.ElementAtOrDefault(0));
+            if (arguments.Count != 2)
+            {
+                return null;
+            }
+
+            var firstArgument = GetExpression(arguments[0]);
             if (firstArgument != null &&
                 semanticModel.GetConstantValue(firstArgument).Value is string)
             {
                 // Two arguments, second should be typeof expression
-                return arguments.ElementAtOrDefault(1);
+                return arguments[1];
             }
 
             return null;
