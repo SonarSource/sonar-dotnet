@@ -29,19 +29,21 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotCallAssemblyGetExecutingAssemblyMethod : DoNotCallMethodsBase
+    public sealed class DoNotCallAssemblyGetExecutingAssemblyMethod : DoNotCallMethodsCSharpBase
     {
         internal const string DiagnosticId = "S3902";
         private const string MessageFormat = "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         private static readonly IEnumerable<MethodSignature> checkedMethods = new List<MethodSignature>
         {
             new MethodSignature(KnownType.System_Reflection_Assembly, "GetExecutingAssembly")
         };
+
         internal override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
     }
 }

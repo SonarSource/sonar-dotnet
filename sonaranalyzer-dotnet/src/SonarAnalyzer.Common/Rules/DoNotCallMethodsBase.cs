@@ -21,28 +21,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DoNotCallMethodsBase : SonarDiagnosticAnalyzer
+    public abstract class DoNotCallMethodsBase<TInvocationExpressionSyntax> : SonarDiagnosticAnalyzer
+        where TInvocationExpressionSyntax : SyntaxNode
     {
         internal abstract IEnumerable<MethodSignature> CheckedMethods { get; }
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeInvocation, SyntaxKind.InvocationExpression);
-        }
+        protected abstract SyntaxToken? GetMethodCallIdentifier(TInvocationExpressionSyntax invocation);
 
-        protected virtual bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation,
+        protected virtual bool ShouldReportOnMethodCall(TInvocationExpressionSyntax invocation,
             SemanticModel semanticModel, MethodSignature methodSignature) => true;
 
-        private void AnalyzeInvocation(SyntaxNodeAnalysisContext analysisContext)
+        protected void AnalyzeInvocation(SyntaxNodeAnalysisContext analysisContext)
         {
-            var invocation = (InvocationExpressionSyntax)analysisContext.Node;
+            var invocation = (TInvocationExpressionSyntax)analysisContext.Node;
 
             if (!IsInValidContext(invocation, analysisContext.SemanticModel))
             {
@@ -74,23 +70,8 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected virtual bool IsInValidContext(InvocationExpressionSyntax invocationSyntax,
+        protected virtual bool IsInValidContext(TInvocationExpressionSyntax invocationSyntax,
             SemanticModel semanticModel) => true;
-
-        protected SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation)
-        {
-            if (invocation.Expression is IdentifierNameSyntax directMethodCall)
-            {
-                return directMethodCall.Identifier;
-            }
-
-            if (invocation.Expression is MemberAccessExpressionSyntax memberAccessCall)
-            {
-                return memberAccessCall.Name.Identifier;
-            }
-
-            return null;
-        }
 
         private MethodSignature FindDisallowedMethodSignature(SyntaxToken identifier, ISymbol methodCallSymbol)
         {

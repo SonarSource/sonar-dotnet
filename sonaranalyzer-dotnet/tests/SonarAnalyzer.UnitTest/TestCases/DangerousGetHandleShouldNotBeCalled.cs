@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
 
@@ -20,9 +20,16 @@ namespace Tests.Diagnostics
                 IntPtr dangerousHandle = handle.DangerousGetHandle(); // Noncompliant {{Refactor the code to remove this use of 'SafeHandle.DangerousGetHandle'.}}
 //                                              ^^^^^^^^^^^^^^^^^^
                 IntPtr dangerousHandle2 = (((handle))).DangerousGetHandle(); // Noncompliant
+                IntPtr dangerousHandle3 = handle?.DangerousGetHandle(); // Noncompliant
+                DangerousGetHandle();
                 return dangerousHandle;
             }
 
+            return IntPtr.Zero;
+        }
+
+        private static IntPtr DangerousGetHandle()
+        {
             return IntPtr.Zero;
         }
     }

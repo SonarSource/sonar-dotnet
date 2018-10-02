@@ -3,11 +3,9 @@ lead to leaks and vulnerabilities. While it is possible to use the method succes
 simply be avoided altogether.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-static void Main(string[] args)
-{
-    System.Reflection.FieldInfo fieldInfo = ...;
-    SafeHandle handle = (SafeHandle)fieldInfo.GetValue(rKey);
-    IntPtr dangerousHandle = handle.DangerousGetHandle();  // Noncompliant
-}
+Sub Dangerous(fieldInfo As System.Reflection.FieldInfo)
+  Dim handle As SafeHandle = CType(fieldInfo.GetValue(fieldInfo), SafeHandle)
+  Dim dangerousHandle As IntPtr = handle.DangerousGetHandle ' Noncompliant
+End Sub
 </pre>
 

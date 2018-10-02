@@ -1,0 +1,11 @@
+<p>Not surprisingly, the <code>SafeHandle.DangerousGetHandle</code> method is dangerous. That's because it may not return a valid handle. Using it can
+lead to leaks and vulnerabilities. While it is possible to use the method successfully, it's extremely difficult to do correctly, so the method should
+simply be avoided altogether.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Sub Dangerous(fieldInfo As System.Reflection.FieldInfo)
+  Dim handle As SafeHandle = CType(fieldInfo.GetValue(fieldInfo), SafeHandle)
+  Dim dangerousHandle As IntPtr = handle.DangerousGetHandle ' Noncompliant
+End Sub
+</pre>
+

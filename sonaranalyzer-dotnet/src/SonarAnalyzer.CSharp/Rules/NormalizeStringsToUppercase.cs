@@ -30,13 +30,14 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class NormalizeStringsToUppercase : DoNotCallMethodsBase
+    public sealed class NormalizeStringsToUppercase : DoNotCallMethodsCSharpBase
     {
         internal const string DiagnosticId = "S4040";
         private const string MessageFormat = "Change this normalization to 'ToUpperInvariant()'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         private static readonly List<MethodSignature> checkedMethods = new List<MethodSignature>
@@ -46,6 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
             new MethodSignature(KnownType.System_Char, "ToLowerInvariant"),
             new MethodSignature(KnownType.System_String, "ToLowerInvariant"),
         };
+
         internal override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
 
         protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation,
