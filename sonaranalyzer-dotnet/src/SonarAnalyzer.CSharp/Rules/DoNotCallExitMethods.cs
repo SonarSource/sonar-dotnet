@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
@@ -31,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotCallExitMethods : DoNotCallMethodsBase
+    public sealed class DoNotCallExitMethods : DoNotCallMethodsCSharpBase
     {
         internal const string DiagnosticId = "S1147";
         private const string MessageFormat = "Remove this call to '{0}' or ensure it is really required.";

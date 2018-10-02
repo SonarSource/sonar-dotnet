@@ -18,9 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -29,21 +30,17 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotCallAssemblyLoadInvalidMethods : DoNotCallMethodsCSharpBase
+    public sealed class DangerousGetHandleShouldNotBeCalled : DangerousGetHandleShouldNotBeCalledBase<InvocationExpressionSyntax>
     {
-        internal const string DiagnosticId = "S3885";
-        private const string MessageFormat = "Replace this call to '{0}' with 'Assembly.Load'.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly IEnumerable<MethodSignature> checkedMethods = new List<MethodSignature>
-        {
-            new MethodSignature(KnownType.System_Reflection_Assembly, "LoadFrom"),
-            new MethodSignature(KnownType.System_Reflection_Assembly, "LoadFile"),
-            new MethodSignature(KnownType.System_Reflection_Assembly, "LoadWithPartialName")
-        };
-        internal override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeInvocation, SyntaxKind.InvocationExpression);
+
+        protected override SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation) =>
+            invocation.GetMethodCallIdentifier();
     }
 }
