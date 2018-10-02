@@ -40,8 +40,14 @@ namespace Tests.Diagnostics
             var yyy = new int[3 // Noncompliant, we report two issues on this to keep the comma unfaded
                 , 3// Noncompliant
                 ] { { 1, 1, 1 }, { 2, 2, 2 }, { 3, 3, 3 } };
-            var zzz = new int[][] { new[] { 1, 2, 3 }, new int[0], new int[0] }; // Noncompliant
-            var www = new int[][][] { new[] { new[] { 0 } } }; // Noncompliant
+
+            // see https://github.com/SonarSource/sonar-csharp/issues/1840
+            var multiDimIntArray = new int[][] // Compliant - type specifier is mandatory here
+            {
+                new int[] { 1 } // Noncompliant
+            };
+            var zzz = new int[][] { new[] { 1, 2, 3 }, new int[0], new int[0] };
+            var www = new int[][][] { new[] { new[] { 0 } } };
 
             int? xx = ((new int?(5))); // Noncompliant {{Remove the explicit nullable type creation; it is redundant.}}
 //                      ^^^^^^^^
