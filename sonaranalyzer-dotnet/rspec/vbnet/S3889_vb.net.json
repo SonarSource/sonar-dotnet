@@ -1,0 +1,17 @@
+{
+  "title": "Neither \"Thread.Resume\" nor \"Thread.Suspend\" should be used",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "20min"
+  },
+  "tags": [
+    "multi-threading",
+    "unpredictable"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-3889",
+  "sqKey": "S3889",
+  "scope": "All"
+}
