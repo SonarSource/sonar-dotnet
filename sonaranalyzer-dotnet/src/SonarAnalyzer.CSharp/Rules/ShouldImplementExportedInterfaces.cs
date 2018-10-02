@@ -18,37 +18,26 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.Common;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
+
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class ShouldImplementExportedInterfaces : SonarDiagnosticAnalyzer
+    public sealed class ShouldImplementExportedInterfaces :
+        ShouldImplementExportedInterfacesBase<AttributeArgumentSyntax, ExpressionSyntax, ClassDeclarationSyntax>
     {
-        internal const string DiagnosticId = "S4159";
-        private const string MessageFormat = "{0} '{1}' on '{2}' or remove this export attribute.";
-        private const string ActionForInterface = "Implement";
-        private const string ActionForClass = "Derive from";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private static readonly ISet<KnownType> ExportAttributes = new HashSet<KnownType>
-        {
-            KnownType.System_ComponentModel_Composition_ExportAttribute,
-            KnownType.System_ComponentModel_Composition_InheritedExportAttribute,
-        };
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -63,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var exportedType = GetExportedTypeSyntax(attributeSyntax, c.SemanticModel);
+                    var exportedType = GetExportedTypeSymbol(attributeSyntax.ArgumentList?.Arguments, c.SemanticModel);
                     var attributeTargetType = GetAttributeTargetSymbol(attributeSyntax, c.SemanticModel);
 
                     if (exportedType != null &&
@@ -75,84 +64,18 @@ namespace SonarAnalyzer.Rules.CSharp
                             : ActionForClass;
 
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attributeSyntax.GetLocation(), action,
-                            exportedType.Name, attributeTargetType.Name));
+                            exportedType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
+                            attributeTargetType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)));
                     }
                 },
                 SyntaxKind.Attribute);
         }
 
-        private ITypeSymbol GetAttributeTargetSymbol(AttributeSyntax attributeSyntax, SemanticModel semanticModel)
-        {
-            // Parent is AttributeListSyntax, we handle only class attributes
-            if (!(attributeSyntax.Parent?.Parent is ClassDeclarationSyntax attributeTarget))
-            {
-                return null;
-            }
-
-            return semanticModel.GetDeclaredSymbol(attributeTarget);
-        }
-
-        private INamedTypeSymbol GetExportedTypeSyntax(AttributeSyntax attribute, SemanticModel semanticModel)
-        {
-            if (attribute.ArgumentList == null)
-            {
-                return null;
-            }
-
-            var arguments = attribute.ArgumentList.Arguments;
-            if (arguments.Count == 0 ||
-                arguments.Count > 2)
-            {
-                return null;
-            }
-
-            var typeOfExpression = GetTypeFromNamedArgument(arguments) ??
-                GetTypeFromSingleArgumentAttribute(arguments) ??
-                GetTypeFromDoubleArgumentAttribute(arguments, semanticModel);
-
-            var exportedTypeSyntax = (typeOfExpression as TypeOfExpressionSyntax)?.Type;
-            if (exportedTypeSyntax == null)
-            {
-                return null;
-            }
-
-            return semanticModel.GetSymbolInfo(exportedTypeSyntax).Symbol as INamedTypeSymbol;
-        }
-
-        private static ExpressionSyntax GetTypeFromNamedArgument(IEnumerable<AttributeArgumentSyntax> arguments) =>
-            arguments.FirstOrDefault(IsContractTypeNamedArgument)?.Expression;
-
-        private static ExpressionSyntax GetTypeFromDoubleArgumentAttribute(IEnumerable<AttributeArgumentSyntax> arguments,
-            SemanticModel semanticModel)
-        {
-            var firstArgument = arguments.ElementAtOrDefault(0)?.Expression;
-            if (firstArgument != null &&
-                semanticModel.GetConstantValue(firstArgument).Value is string)
-            {
-                // Two arguments, second should be typeof expression
-                return arguments.ElementAtOrDefault(1)?.Expression;
-            }
-
-            return null;
-        }
-
-        private static ExpressionSyntax GetTypeFromSingleArgumentAttribute(IEnumerable<AttributeArgumentSyntax> arguments)
-        {
-            if (arguments.ElementAtOrDefault(1) != null)
-            {
-                return null;
-            }
-
-            // Only one argument, should be typeof expression
-            return arguments.ElementAtOrDefault(0)?.Expression;
-        }
-
-        private static bool IsContractTypeNamedArgument(AttributeArgumentSyntax argument) =>
-            argument.NameColon?.Name.Identifier.ValueText == "contractType";
-
-        private static bool IsOfExportType(ITypeSymbol type, INamedTypeSymbol exportedType) =>
-            type.GetSelfAndBaseTypes()
-                .Union(type.AllInterfaces)
-                .Any(currentType => currentType.Equals(exportedType));
+        protected override string GetIdentifier(AttributeArgumentSyntax argumentSyntax) =>
+            argumentSyntax?.NameColon?.Name.Identifier.ValueText;
+        protected override ExpressionSyntax GetExpression(AttributeArgumentSyntax argumentSyntax) =>
+            argumentSyntax?.Expression;
+        protected override SyntaxNode GetTypeOfOrGetTypeExpression(ExpressionSyntax expressionSyntax) =>
+            (expressionSyntax as TypeOfExpressionSyntax)?.Type;
     }
 }
