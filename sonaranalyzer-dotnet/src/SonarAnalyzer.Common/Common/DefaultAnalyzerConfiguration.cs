@@ -34,6 +34,9 @@ namespace SonarAnalyzer.Common
 
         public IReadOnlyCollection<string> EnabledRules { get; private set; }
 
+        public bool IsEnabled(string ruleKey) =>
+            EnabledRules.Contains(ruleKey);
+
         public void Read(AnalyzerOptions options)
         {
             var projectOutputAdditionalFile = options.AdditionalFiles

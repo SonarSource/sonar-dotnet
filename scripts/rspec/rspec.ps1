@@ -195,14 +195,8 @@ function CreateStringResources($lang, $rules) {
 
         $severity = $severitiesMap.Get_Item(${json}.defaultSeverity)
 
-        # Ensure compatibility with SonarQube 6.7 LTS (the $resourcesPath file is used to generate rules.xml, which is deserialized at runtime)
-        $backwardsCompatibleType = ${json}.type;
-        if ($backwardsCompatibleType -eq "SECURITY_HOTSPOT") {
-            $backwardsCompatibleType = "VULNERABILITY";
-        }
-
         [void]$resources.Add("${rule}_Description=${description}")
-        [void]$resources.Add("${rule}_Type=$backwardsCompatibleType")
+        [void]$resources.Add("${rule}_Type=$(${json}.type)")
         [void]$resources.Add("${rule}_Title=$(${json}.title)")
         [void]$resources.Add("${rule}_Category=${severity} $($categoriesMap.Get_Item(${json}.type))")
         [void]$resources.Add("${rule}_IsActivatedByDefault=$(${sonarWayRules}.ruleKeys -Contains ${rule})")
@@ -218,7 +212,16 @@ function CreateStringResources($lang, $rules) {
         if ($rule -eq $ruleKey) {
             $newRuleData = $json
         }
+
+        # Remove hotspots from the JSON object, we will save this object in a new file that will be
+        # used to define Sonar Way on SonarQube that is older than 7.3 and does not support hotspots
+        if ($json.type -eq "SECURITY_HOTSPOT") {
+            $sonarWayRules.ruleKeys = $sonarWayRules.ruleKeys | ? {$_ -ne $rule}
+        }
     }
+
+    # Create a new Sonar Way definition without hotspots to be loaded on SonarQube older than 7.3
+    ConvertTo-Json $sonarWayRules | Set-Content "${rspecFolder}\\Sonar_way_profile_no_hotspot.json"
 
     # improve readability of the generated file
     [void]$resources.Sort()

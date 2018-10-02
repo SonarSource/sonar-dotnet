@@ -32,7 +32,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeSecure()
         {
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure.cs",
-                new CookieShouldBeSecure(),
+                new CookieShouldBeSecure(new TestAnalyzerConfiguration(null, "S2092")),
+                additionalReferences: FrameworkMetadataReference.SystemWeb);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CookiesShouldBeSecure_Not_Enabled()
+        {
+            Verifier.VerifyNoIssueReported(@"TestCases\CookieShouldBeSecure.cs",
+                new CookieShouldBeSecure(new TestAnalyzerConfiguration(null)),
                 additionalReferences: FrameworkMetadataReference.SystemWeb);
         }
     }

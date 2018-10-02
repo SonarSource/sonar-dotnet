@@ -35,7 +35,18 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Make sure storing this data in this cookie is safe here.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
+                .WithNotConfigurable();
+
+        public CookieShouldNotContainSensitiveData()
+            : base(new DefaultAnalyzerConfiguration())
+        {
+        }
+
+        public CookieShouldNotContainSensitiveData(IAnalyzerConfiguration analysisConfiguration)
+            : base(analysisConfiguration)
+        {
+        }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 

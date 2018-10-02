@@ -32,7 +32,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldNotContainSensitiveData()
         {
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldNotContainSensitiveData.cs",
-                new CookieShouldNotContainSensitiveData(),
+                new CookieShouldNotContainSensitiveData(new TestAnalyzerConfiguration(null, "S2255")),
+                additionalReferences: FrameworkMetadataReference.SystemWeb);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CookiesShouldNotContainSensitiveData_Not_Enabled()
+        {
+            Verifier.VerifyNoIssueReported(@"TestCases\CookieShouldNotContainSensitiveData.cs",
+                new CookieShouldNotContainSensitiveData(new TestAnalyzerConfiguration(null)),
                 additionalReferences: FrameworkMetadataReference.SystemWeb);
         }
     }

@@ -1,4 +1,4 @@
-<p>Hardcoding IP addresses is security sensitive. It has led in the past to the following vulnerabilities:</p>
+<p>Hardcoding IP addresses is security-sensitive. It has led in the past to the following vulnerabilities:</p>
 <ul>
   <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-5901">CVE-2006-5901</a> </li>
   <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-3725">CVE-2005-3725</a> </li>
@@ -8,7 +8,7 @@ have the same IP address. When it does change, the hardcoded IP will have to be 
 delivery and deployment:</p>
 <ul>
   <li> The developers will have to do a rapid fix every time this happens, instead of having an operation team change a configuration file. </li>
-  <li> It forces the same address to be used in every environment (dev, sys, qa, prod) </li>
+  <li> It forces the same address to be used in every environment (dev, sys, qa, prod). </li>
 </ul>
 <p>Last but not least it has an effect on application security. Attackers might be able to decompile the code and thereby discover a potentially
 sensitive address. They can perform a Denial of Service attack on the service at this address or spoof the IP address. Such an attack is always

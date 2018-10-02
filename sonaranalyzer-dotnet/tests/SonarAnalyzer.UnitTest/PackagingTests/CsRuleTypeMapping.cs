@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -1310,7 +1310,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["1310"],
             //["1311"],
             //["1312"],
-            ["1313"] = "VULNERABILITY",
+            ["1313"] = "SECURITY_HOTSPOT",
             //["1314"],
             //["1315"],
             //["1316"],
@@ -2089,7 +2089,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["2089"],
             //["2090"],
             //["2091"],
-            ["2092"] = "VULNERABILITY",
+            ["2092"] = "SECURITY_HOTSPOT",
             //["2093"],
             //["2094"],
             //["2095"],
@@ -2242,7 +2242,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["2242"],
             //["2243"],
             //["2244"],
-            ["2245"] = "VULNERABILITY",
+            ["2245"] = "SECURITY_HOTSPOT",
             //["2246"],
             //["2247"],
             //["2248"],
@@ -2252,7 +2252,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["2252"],
             //["2253"],
             //["2254"],
-            ["2255"] = "VULNERABILITY",
+            ["2255"] = "SECURITY_HOTSPOT",
             //["2256"],
             //["2257"],
             //["2258"],

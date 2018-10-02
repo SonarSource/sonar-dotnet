@@ -387,23 +387,5 @@ public class Class1
                 return ucfg.MethodId;
             }
         }
-
-        private class TestAnalyzerConfiguration : IAnalyzerConfiguration
-        {
-            public TestAnalyzerConfiguration(string projectOutputPath, params string[] enabledRules)
-            {
-                ProjectOutputPath = projectOutputPath;
-                EnabledRules = enabledRules;
-            }
-
-            public IReadOnlyCollection<string> EnabledRules { get; }
-
-            public string ProjectOutputPath { get; }
-
-            public void Read(AnalyzerOptions options)
-            {
-                // do nothing
-            }
-        }
     }
 }

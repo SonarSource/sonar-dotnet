@@ -36,6 +36,13 @@ namespace SonarAnalyzer.Utilities
         private const string RuleDescriptionPathPattern = "SonarAnalyzer.Rules.Description.{0}.html";
         internal const string CodeFixProviderSuffix = "CodeFixProvider";
 
+        private static readonly HashSet<string> BackwardsCompatibleTypes = new HashSet<string>
+        {
+            "BUG",
+            "CODE_SMELL",
+            "VULNERABILITY",
+        };
+
         private static readonly Assembly SonarAnalyzerUtilitiesAssembly = typeof(RuleDetailBuilder).Assembly;
 
         public static IEnumerable<RuleDetail> GetAllRuleDetails(AnalyzerLanguage language)
@@ -66,7 +73,7 @@ namespace SonarAnalyzer.Utilities
             var ruleDetail = new RuleDetail
             {
                 Key = rule.Key,
-                Type = resources.GetString($"{rule.Key}_Type"),
+                Type = GetBackwardsCompatibleType(resources.GetString($"{rule.Key}_Type")),
                 Title = resources.GetString($"{rule.Key}_Title"),
                 Severity = resources.GetString($"{rule.Key}_Severity"),
                 IsActivatedByDefault = bool.Parse(resources.GetString($"{rule.Key}_IsActivatedByDefault")),
@@ -196,5 +203,13 @@ namespace SonarAnalyzer.Utilities
 
             throw new ArgumentException("Language needs to be either C# or VB.NET", nameof(language));
         }
+
+        // SonarQube before 7.3 supports only 3 types of issues: BUG, CODE_SMELL and VULNERABILITY.
+        // This method returns backwards compatible issue type. The type should be adjusted in
+        // AbstractRulesDefinition.
+        private static string GetBackwardsCompatibleType(string type) =>
+            BackwardsCompatibleTypes.Contains(type)
+                ? type
+                : "VULNERABILITY";
     }
 }

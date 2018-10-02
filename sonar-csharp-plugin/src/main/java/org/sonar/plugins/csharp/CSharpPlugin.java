@@ -48,7 +48,6 @@ public class CSharpPlugin implements Plugin {
       CSharp.class,
       ReportPathCollector.class,
       CSharpSonarRulesDefinition.class,
-      CSharpSonarWayProfile.class,
       CSharpSensor.class,
       CSharpConfiguration.class,
       WrongEncodingFileFilter.class,
@@ -62,6 +61,7 @@ public class CSharpPlugin implements Plugin {
       RoslynProfileExporter.class);
 
     context.addExtensions(new CSharpPropertyDefinitions(context.getRuntime()).create());
+    context.addExtension(new CSharpSonarWayProfile(context.getRuntime()));
     context.addExtensions(CSharpCodeCoverageProvider.extensions());
     context.addExtensions(CSharpUnitTestResultsProvider.extensions());
     context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties());

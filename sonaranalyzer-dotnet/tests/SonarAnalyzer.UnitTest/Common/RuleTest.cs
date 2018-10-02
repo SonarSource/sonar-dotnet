@@ -137,16 +137,21 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void AllRulesEnabledByDefault_ContainSonarWayCustomTag()
         {
-            var analyzers = new RuleFinder().AllAnalyzerTypes
+            var descriptors = new RuleFinder().AllAnalyzerTypes
                 .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
                 .SelectMany(analyzer => analyzer.SupportedDiagnostics)
+                // Security hotspots are enabled by default, but they will report issues only
+                // when their ID is contained in SonarLint.xml
+                .Where(descriptor => !IsSecurityHotspot(descriptor))
                 .ToList();
 
-            foreach (var analyzer in analyzers)
+            foreach (var descriptor in descriptors)
             {
-                if (analyzer.IsEnabledByDefault)
+                if (descriptor.IsEnabledByDefault)
                 {
-                    analyzer.CustomTags.Should().Contain(DiagnosticDescriptorBuilder.SonarWayTag);
+                    descriptor.CustomTags.Should().Contain(
+                        DiagnosticDescriptorBuilder.SonarWayTag,
+                        $"{descriptor.Id} should be in SonarWay");
                 }
             }
         }
@@ -193,17 +198,54 @@ namespace SonarAnalyzer.UnitTest.Common
 
                 if (parameterizedAnalyzers.Contains(analyzer))
                 {
-                    analyzer.IsEnabledByDefault.Should().BeFalse();
+                    analyzer.IsEnabledByDefault.Should().BeFalse($"{analyzer.Id} has parameters and should be disabled by default");
+                }
+                else if (IsSecurityHotspot(analyzer))
+                {
+                    // Security hotspots are enabled by default, but they will report issues only
+                    // when their ID is contained in SonarLint.xml
+                    analyzer.IsEnabledByDefault.Should().BeTrue($"{analyzer.Id} should be enabled by default");
                 }
                 else if (isInSonarWay)
                 {
-                    analyzer.IsEnabledByDefault.Should().BeTrue();
+                    analyzer.IsEnabledByDefault.Should().BeTrue($"{analyzer.Id} is in SonarWay");
                 }
                 else
                 {
-                    analyzer.IsEnabledByDefault.Should().BeFalse();
+                    analyzer.IsEnabledByDefault.Should().BeFalse($"{analyzer.Id} is not in SonarWay");
                 }
             }
         }
+
+        [TestMethod]
+        public void SecurityHotspots_Inherit_From_Same_Base_Class()
+        {
+            new RuleFinder().AllAnalyzerTypes
+                .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
+                .Where(analyzer => analyzer.SupportedDiagnostics.Any(IsSecurityHotspot))
+                .Should()
+                .AllBeAssignableTo<HotspotDiagnosticAnalyzer>();
+        }
+
+        [TestMethod]
+        public void SecurityHotspots_Rules_Not_Configurable()
+        {
+            var hotspotDiagnosticDescriptors = new RuleFinder()
+                .GetAnalyzerTypes(AnalyzerLanguage.CSharp)
+                .Select(t => (SonarDiagnosticAnalyzer)Activator.CreateInstance(t))
+                .SelectMany(diagnosticAnalyzer => diagnosticAnalyzer.SupportedDiagnostics)
+                .Where(IsSecurityHotspot)
+                .ToList();
+
+            foreach (var descriptor in hotspotDiagnosticDescriptors)
+            {
+                descriptor.CustomTags.Should().Contain(
+                    WellKnownDiagnosticTags.NotConfigurable,
+                    because: $"{descriptor.Id} is hotspot and should not be configurable");
+            }
+        }
+
+        private static bool IsSecurityHotspot(DiagnosticDescriptor diagnostic) =>
+            diagnostic.Category.IndexOf("hotspot", StringComparison.OrdinalIgnoreCase) >= 0;
     }
 }

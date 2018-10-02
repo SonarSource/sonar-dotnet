@@ -18,29 +18,31 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Common;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest
 {
-    [TestClass]
-    public class HardcodedIpAddressTest
+    public class TestAnalyzerConfiguration : IAnalyzerConfiguration
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void HardcodedIpAddress()
+        public TestAnalyzerConfiguration(string projectOutputPath, params string[] enabledRules)
         {
-            Verifier.VerifyAnalyzer(@"TestCases\HardcodedIpAddress.cs",
-                new HardcodedIpAddress(new TestAnalyzerConfiguration(null, "S1313")));
+            ProjectOutputPath = projectOutputPath;
+            EnabledRules = enabledRules;
         }
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void HardcodedIpAddress_Not_Enabled()
+        public IReadOnlyCollection<string> EnabledRules { get; }
+
+        public string ProjectOutputPath { get; }
+
+        public bool IsEnabled(string ruleKey) =>
+            EnabledRules.Contains(ruleKey);
+
+        public void Read(AnalyzerOptions options)
         {
-            Verifier.VerifyNoIssueReported(@"TestCases\HardcodedIpAddress.cs",
-                new HardcodedIpAddress(new TestAnalyzerConfiguration(null)));
+            // do nothing
         }
     }
 }

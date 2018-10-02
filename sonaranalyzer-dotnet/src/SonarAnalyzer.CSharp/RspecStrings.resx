@@ -1759,7 +1759,7 @@
     <value>Major Security Hotspot</value>
   </data>
   <data name="S1313_Description" xml:space="preserve">
-    <value>Hardcoding IP addresses is security sensitive. It has led in the past to the following vulnerabilities:</value>
+    <value>Hardcoding IP addresses is security-sensitive. It has led in the past to the following vulnerabilities:</value>
   </data>
   <data name="S1313_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -1783,7 +1783,7 @@
     <value>Using hardcoded IP addresses is security-sensitive</value>
   </data>
   <data name="S1313_Type" xml:space="preserve">
-    <value>VULNERABILITY</value>
+    <value>SECURITY_HOTSPOT</value>
   </data>
   <data name="S134_Category" xml:space="preserve">
     <value>Critical Code Smell</value>
@@ -2773,7 +2773,7 @@
     <value>Creating cookies without the "secure" flag is security-sensitive</value>
   </data>
   <data name="S2092_Type" xml:space="preserve">
-    <value>VULNERABILITY</value>
+    <value>SECURITY_HOTSPOT</value>
   </data>
   <data name="S2114_Category" xml:space="preserve">
     <value>Major Bug</value>
@@ -3289,7 +3289,7 @@
     <value>Critical Security Hotspot</value>
   </data>
   <data name="S2245_Description" xml:space="preserve">
-    <value>When software generates predictable values in a context requiring unpredictability, it may be possible for an attacker to guess the next value that will be generated, and use this guess to impersonate another user or access sensitive information.</value>
+    <value>Using pseudorandom number generators (PRNGs) is security-sensitive. For example, it has led in the past to the following vulnerabilities:</value>
   </data>
   <data name="S2245_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -3313,13 +3313,13 @@
     <value>Using pseudorandom number generators (PRNGs) is security-sensitive</value>
   </data>
   <data name="S2245_Type" xml:space="preserve">
-    <value>VULNERABILITY</value>
+    <value>SECURITY_HOTSPOT</value>
   </data>
   <data name="S2255_Category" xml:space="preserve">
     <value>Minor Security Hotspot</value>
   </data>
   <data name="S2255_Description" xml:space="preserve">
-    <value>Attackers can use widely-available tools to view cookies and read any sensitive information they may contain. Even if the information is encoded in a way that is not human-readable, certain techniques could determine which encoding is being used, then decode the information.</value>
+    <value>Using cookies is security-sensitive. It has led in the past to the following vulnerabilities:</value>
   </data>
   <data name="S2255_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -3337,13 +3337,13 @@
     <value>Minor</value>
   </data>
   <data name="S2255_Tags" xml:space="preserve">
-    <value>cwe,cert,owasp-a3</value>
+    <value>cwe,owasp-a1,cert,sans-top25-porous,owasp-a3</value>
   </data>
   <data name="S2255_Title" xml:space="preserve">
-    <value>Storing personal data in cookies is security-sensitive</value>
+    <value>Using cookies is security-sensitive</value>
   </data>
   <data name="S2255_Type" xml:space="preserve">
-    <value>VULNERABILITY</value>
+    <value>SECURITY_HOTSPOT</value>
   </data>
   <data name="S2259_Category" xml:space="preserve">
     <value>Major Bug</value>
