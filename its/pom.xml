@@ -22,7 +22,7 @@
   </organization>
 
   <properties>
-    <scannerMsbuild.version>4.0.2.892</scannerMsbuild.version>
+    <scannerMsbuild.version>4.3.1.1372</scannerMsbuild.version>
     <surefire.argLine>-server</surefire.argLine>
   </properties>
 
@@ -30,13 +30,14 @@
     <dependency>
       <groupId>org.sonarsource.orchestrator</groupId>
       <artifactId>sonar-orchestrator</artifactId>
-      <version>3.21.0.1721</version>
+      <version>3.22.0.1787</version>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.scanner.msbuild</groupId>
       <artifactId>sonar-scanner-msbuild</artifactId>
       <version>${scannerMsbuild.version}</version>
       <type>zip</type>
+      <classifier>net46</classifier>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
