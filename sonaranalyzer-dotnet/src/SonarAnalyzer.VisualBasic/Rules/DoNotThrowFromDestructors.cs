@@ -37,20 +37,21 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class DoNotThrowFromDestructors : DoNotThrowFromDestructorsBase
     {
         private const string MessageFormat = "Remove this 'Throw' statement.";
+
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                if (IsFinalizer(c.Node.FirstAncestorOrSelf<MethodBlockSyntax>()))
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
-                }
-            },
+                    if (IsFinalizer(c.Node.FirstAncestorOrSelf<MethodBlockSyntax>()))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
+                    }
+                },
                 SyntaxKind.ThrowStatement);
         }
 
@@ -60,14 +61,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 return false;
             }
-            var decl = methodBlockSyntax.SubOrFunctionStatement;
-            var noParam = decl.ParameterList == null || decl.ParameterList.Parameters.Count == 0;
-            var noTypeParam = decl.TypeParameterList == null || decl.TypeParameterList.Parameters.Count == 0;
-            var isSub = decl.SubOrFunctionKeyword.Kind() == SyntaxKind.SubKeyword;
-            var isProtected = decl.Modifiers.Any(testc => testc.Kind() == SyntaxKind.ProtectedKeyword);
+
+            var subOrFunctionDeclaration = methodBlockSyntax.SubOrFunctionStatement;
+            var noParam = subOrFunctionDeclaration.ParameterList == null || subOrFunctionDeclaration.ParameterList.Parameters.Count == 0;
+            var noTypeParam = subOrFunctionDeclaration.TypeParameterList == null || subOrFunctionDeclaration.TypeParameterList.Parameters.Count == 0;
+            var isSub = subOrFunctionDeclaration.SubOrFunctionKeyword.IsKind(SyntaxKind.SubKeyword);
+            var isProtected = subOrFunctionDeclaration.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.ProtectedKeyword));
 
             return noParam && noTypeParam && isSub && isProtected &&
-                decl.Identifier.ValueText.Equals("Finalize", StringComparison.InvariantCultureIgnoreCase);
+                subOrFunctionDeclaration.Identifier.ValueText.Equals("Finalize", StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }

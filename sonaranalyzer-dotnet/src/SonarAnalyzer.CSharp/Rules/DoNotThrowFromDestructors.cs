@@ -41,7 +41,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
                     if (c.Node.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>() is DestructorDeclarationSyntax)
                     {
