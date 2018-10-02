@@ -23,18 +23,32 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.sonar.api.SonarRuntime;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
+import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
+import javax.annotation.Nullable;
+
 public class CSharpSonarWayProfile implements BuiltInQualityProfilesDefinition {
   private static final Logger LOG = Loggers.get(CSharpSonarWayProfile.class);
+  private final boolean supportsSecurityHotspots;
+  private static final Version SQ_7_3 = Version.create(7, 3);
+
+  CSharpSonarWayProfile(@Nullable SonarRuntime sonarRuntime) {
+    this.supportsSecurityHotspots = sonarRuntime != null && sonarRuntime.getApiVersion().isGreaterThanOrEqual(SQ_7_3);
+  }
 
   @Override
   public void define(Context context) {
     NewBuiltInQualityProfile sonarWay = context.createBuiltInQualityProfile("Sonar way", CSharpPlugin.LANGUAGE_KEY);
-    BuiltInQualityProfileJsonLoader.load(sonarWay, CSharpPlugin.REPOSITORY_KEY, "org/sonar/plugins/csharp/Sonar_way_profile.json");
+    String sonarWayJsonPath = supportsSecurityHotspots
+      ? "org/sonar/plugins/csharp/Sonar_way_profile.json"
+      : "org/sonar/plugins/csharp/Sonar_way_profile_no_hotspot.json";
+    BuiltInQualityProfileJsonLoader.load(sonarWay, CSharpPlugin.REPOSITORY_KEY, sonarWayJsonPath);
     final String repositoryKey = getRepositoryKey();
     try {
       getSecurityRuleKeys().forEach(key -> sonarWay.activateRule(repositoryKey, key));

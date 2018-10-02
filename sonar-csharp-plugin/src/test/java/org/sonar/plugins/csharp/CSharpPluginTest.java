@@ -51,7 +51,6 @@ public class CSharpPluginTest {
     Class<?>[] expectedExtensions = new Class<?>[] {
       CSharp.class,
       CSharpSonarRulesDefinition.class,
-      CSharpSonarWayProfile.class,
       CSharpSensor.class,
       CSharpConfiguration.class,
       WrongEncodingFileFilter.class,
@@ -70,6 +69,7 @@ public class CSharpPluginTest {
 
     assertThat(extensions).hasSize(
       expectedExtensions.length
+        + 1 // CSharpSonarWayProfile
         + CSharpCodeCoverageProvider.extensions().size()
         + CSharpUnitTestResultsProvider.extensions().size()
         + RoslynProfileExporter.sonarLintRepositoryProperties().size()

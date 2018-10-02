@@ -212,7 +212,16 @@ function CreateStringResources($lang, $rules) {
         if ($rule -eq $ruleKey) {
             $newRuleData = $json
         }
+
+        # Remove hotspots from the JSON object, we will save this object in a new file that will be
+        # used to define Sonar Way on SonarQube that is older than 7.3 and does not support hotspots
+        if ($json.type -eq "SECURITY_HOTSPOT") {
+            $sonarWayRules.ruleKeys = $sonarWayRules.ruleKeys | ? {$_ -ne $rule}
+        }
     }
+
+    # Create a new Sonar Way definition without hotspots to be loaded on SonarQube older than 7.3
+    ConvertTo-Json $sonarWayRules | Set-Content "${rspecFolder}\\Sonar_way_profile_no_hotspot.json"
 
     # improve readability of the generated file
     [void]$resources.Sort()
