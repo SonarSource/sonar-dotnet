@@ -84,19 +84,22 @@ namespace SonarAnalyzer.Helpers.VisualBasic
 
         public static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation)
         {
-            if (invocation == null)
+           if (invocation == null)
             {
                 return null;
             }
-            if (invocation.Expression is IdentifierNameSyntax directMethodCall)
+            var expressionType = invocation.Expression.Kind();
+            // in vb.net when using the null - conditional operator (e.g.handle?.IsClosed), the parser
+            // will generate a SimpleMemberAccessExpression and not a MemberBindingExpressionSyntax like for C#
+            switch (expressionType)
             {
-                return directMethodCall.Identifier;
+                case SyntaxKind.IdentifierName:
+                    return ((IdentifierNameSyntax)invocation.Expression).Identifier;
+                case SyntaxKind.SimpleMemberAccessExpression:
+                    return ((MemberAccessExpressionSyntax)invocation.Expression).Name.Identifier;
+                default:
+                    return null;
             }
-            if (invocation.Expression is MemberAccessExpressionSyntax memberAccessCall)
-            {
-                return memberAccessCall.Name.Identifier;
-            }
-            return null;
         }
     }
 }

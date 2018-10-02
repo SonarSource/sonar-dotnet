@@ -25,7 +25,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    public abstract class DoNotCallMethodsCsharpBase : DoNotCallMethodsBase<InvocationExpressionSyntax>
+    public abstract class DoNotCallMethodsCSharpBase : DoNotCallMethodsBase<InvocationExpressionSyntax>
     {
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeInvocation, SyntaxKind.InvocationExpression);

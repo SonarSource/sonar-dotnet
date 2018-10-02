@@ -210,19 +210,22 @@ namespace SonarAnalyzer.Helpers
             {
                 return null;
             }
-            if (invocation.Expression is IdentifierNameSyntax directMethodCall)
+            var expression = invocation.Expression;
+            var expressionType = expression.Kind();
+            switch (expressionType)
             {
-                return directMethodCall.Identifier;
+                case SyntaxKind.IdentifierName:
+                    // method()
+                    return ((IdentifierNameSyntax)expression).Identifier;
+                case SyntaxKind.SimpleMemberAccessExpression:
+                    // foo.method()
+                    return ((MemberAccessExpressionSyntax)expression).Name.Identifier;
+                case SyntaxKind.MemberBindingExpression:
+                    // foo?.method()
+                    return ((MemberBindingExpressionSyntax)expression).Name.Identifier;
+                default:
+                    return null;
             }
-            if (invocation.Expression is MemberAccessExpressionSyntax memberAccessCall)
-            {
-                return memberAccessCall.Name.Identifier;
-            }
-            if (invocation.Expression is MemberBindingExpressionSyntax memberBindingCall)
-            {
-                return memberBindingCall.Name.Identifier;
-            }
-            return null;
         }
 
         public static Location FindIdentifierLocation(this BaseMethodDeclarationSyntax methodDeclaration)

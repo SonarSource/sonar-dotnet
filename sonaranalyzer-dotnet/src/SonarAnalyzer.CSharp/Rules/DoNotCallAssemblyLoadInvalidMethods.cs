@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotCallAssemblyLoadInvalidMethods : DoNotCallMethodsCsharpBase
+    public sealed class DoNotCallAssemblyLoadInvalidMethods : DoNotCallMethodsCSharpBase
     {
         internal const string DiagnosticId = "S3885";
         private const string MessageFormat = "Replace this call to '{0}' with 'Assembly.Load'.";

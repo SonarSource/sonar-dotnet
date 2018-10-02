@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotCallAssemblyGetExecutingAssemblyMethod : DoNotCallMethodsCsharpBase
+    public sealed class DoNotCallAssemblyGetExecutingAssemblyMethod : DoNotCallMethodsCSharpBase
     {
         internal const string DiagnosticId = "S3902";
         private const string MessageFormat = "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.";

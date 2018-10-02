@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotCallExitMethods : DoNotCallMethodsCsharpBase
+    public sealed class DoNotCallExitMethods : DoNotCallMethodsCSharpBase
     {
         internal const string DiagnosticId = "S1147";
         private const string MessageFormat = "Remove this call to '{0}' or ensure it is really required.";
