@@ -3,12 +3,10 @@
 synchronization mechanisms should be used, such as <code>Monitor</code>, <code>Mutex</code>, and <code>Semaphore</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-static void Main(string[] args)
-{
-  // ...
-  Thread.CurrentThread.Suspend(); // Noncompliant
-  Thread.CurrentThread.Resume(); // Noncompliant
-}
+Public Sub Foo()
+    Thread.CurrentThread.Suspend() ' Noncompliant
+    Thread.[Resume]() ' Noncompliant
+End Sub
 </pre>
 <h2>See</h2>
 <ul>
