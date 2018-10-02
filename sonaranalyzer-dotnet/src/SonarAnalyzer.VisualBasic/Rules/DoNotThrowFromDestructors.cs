@@ -18,38 +18,58 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.Common;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class DoNotThrowFromDestructors : DoNotThrowFromDestructorsBase
     {
-        private const string MessageFormat = "Remove this 'throw' statement.";
+        private const string MessageFormat = "Remove this 'Throw' statement.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (c.Node.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>() is DestructorDeclarationSyntax)
+                    if (IsFinalizer(c.Node.FirstAncestorOrSelf<MethodBlockSyntax>()))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
                     }
                 },
                 SyntaxKind.ThrowStatement);
+        }
+
+        private bool IsFinalizer(MethodBlockSyntax methodBlockSyntax)
+        {
+            if (methodBlockSyntax == null)
+            {
+                return false;
+            }
+
+            var subOrFunctionDeclaration = methodBlockSyntax.SubOrFunctionStatement;
+            var noParam = subOrFunctionDeclaration.ParameterList == null || subOrFunctionDeclaration.ParameterList.Parameters.Count == 0;
+            var noTypeParam = subOrFunctionDeclaration.TypeParameterList == null || subOrFunctionDeclaration.TypeParameterList.Parameters.Count == 0;
+            var isSub = subOrFunctionDeclaration.SubOrFunctionKeyword.IsKind(SyntaxKind.SubKeyword);
+            var isProtected = subOrFunctionDeclaration.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.ProtectedKeyword));
+
+            return noParam && noTypeParam && isSub && isProtected &&
+                subOrFunctionDeclaration.Identifier.ValueText.Equals("Finalize", StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }
