@@ -52,6 +52,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         private const string MultiSingleLineCommentHeader = @"//-----
 // MyHeader
 //-----";
+        private const string HeaderForcingLineBreak = @"//---
+
+
+";
         private const string SingleLineRegexHeader = @"// Copyright \(c\) \w*\. All Rights Reserved\. " +
             @"Licensed under the LGPL License\.  See License\.txt in the project root for license information\.";
         private const string MultiLineRegexHeader = @"/\*
@@ -162,6 +166,38 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiSingleLineLicenseStartWithNamespace.cs",
                 new CheckFileLicense { HeaderFormat = MultiSingleLineCommentHeader });
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CheckFileLicense_WhenLicensedWithMultiSingleLineCommentStartingWithAdditionalComments_ShouldBeCompliant_CS()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiSingleLineLicenseStartWithAdditionalComment.cs",
+                new CheckFileLicense { HeaderFormat = MultiSingleLineCommentHeader });
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CheckFileLicense_WhenLicensedWithMultiSingleLineCommentStartingWithAdditionalCommentOnSameLine_ShouldBeNonCompliant_CS()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiSingleLineLicenseStartWithAdditionalCommentOnSameLine.cs",
+                new CheckFileLicense { HeaderFormat = MultiSingleLineCommentHeader });
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CheckFileLicense_WithForcingEmptyLines_ShouldBeNonCompliant_CS()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_ForcingEmptyLinesKo.cs",
+                new CheckFileLicense { HeaderFormat = HeaderForcingLineBreak });
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CheckFileLicense_WithForcingEmptyLines_ShouldBeCompliant_CS()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_ForcingEmptyLinesOk.cs",
+                new CheckFileLicense { HeaderFormat = HeaderForcingLineBreak });
         }
 
         [TestMethod]

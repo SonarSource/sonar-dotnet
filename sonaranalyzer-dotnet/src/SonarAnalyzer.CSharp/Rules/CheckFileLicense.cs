@@ -92,7 +92,5 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 });
         }
-
-        protected override bool IsEndOfLine(SyntaxTrivia trivia) => trivia.IsKind(SyntaxKind.EndOfLineTrivia);
     }
 }
