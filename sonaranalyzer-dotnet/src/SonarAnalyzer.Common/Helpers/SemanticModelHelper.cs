@@ -24,12 +24,17 @@ namespace SonarAnalyzer.Helpers
 {
     public static class SemanticModelHelper
     {
-        public static SemanticModel GetSyntaxTreeSemanticModel(this SemanticModel model, SyntaxNode node)
+        public static SemanticModel GetSemanticModelOrDefault(this SyntaxTree syntaxTree, SemanticModel model)
         {
             // See https://github.com/dotnet/roslyn/issues/18730
-            return model.SyntaxTree == node.SyntaxTree
-                ? model
-                : model.Compilation.GetSemanticModel(node.SyntaxTree);
+            if (syntaxTree == model.SyntaxTree)
+            {
+                return model;
+            }
+
+            return model.Compilation.ContainsSyntaxTree(syntaxTree)
+                ? model.Compilation.GetSemanticModel(syntaxTree)
+                : null;
         }
     }
 }
