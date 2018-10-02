@@ -30,11 +30,8 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class LockOnThisOrType : SonarDiagnosticAnalyzer
+    public sealed class LockOnThisOrType : LockOnThisOrTypeBase
     {
-        internal const string DiagnosticId = "S2551";
-        private const string MessageFormat = "Lock on a new 'object' instead.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -56,14 +53,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.LockStatement);
         }
 
-        private static bool LockOnSystemType(ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            return semanticModel.GetTypeInfo(expression).Type.Is(KnownType.System_Type);
-        }
+        private static bool LockOnSystemType(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            semanticModel.GetTypeInfo(expression).Type.Is(KnownType.System_Type);
 
-        private static bool LockOnThis(ExpressionSyntax expression)
-        {
-            return expression.IsKind(SyntaxKind.ThisExpression);
-        }
+        private static bool LockOnThis(ExpressionSyntax expression) =>
+            expression.IsKind(SyntaxKind.ThisExpression);
     }
 }
