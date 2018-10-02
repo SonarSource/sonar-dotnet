@@ -2637,6 +2637,36 @@
   <data name="S3869_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S3889_Category" xml:space="preserve">
+    <value>Blocker Bug</value>
+  </data>
+  <data name="S3889_Description" xml:space="preserve">
+    <value>Thread.Suspend and Thread.Resume can give unpredictable results, and both methods have been deprecated. Indeed, if Thread.Suspend is not used very carefully, a thread can be suspended while holding a lock, thus leading to a deadlock. Other safer synchronization mechanisms should be used, such as Monitor, Mutex, and Semaphore.</value>
+  </data>
+  <data name="S3889_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3889_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3889_RemediationCost" xml:space="preserve">
+    <value>20min</value>
+  </data>
+  <data name="S3889_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S3889_Severity" xml:space="preserve">
+    <value>Blocker</value>
+  </data>
+  <data name="S3889_Tags" xml:space="preserve">
+    <value>multi-threading,unpredictable</value>
+  </data>
+  <data name="S3889_Title" xml:space="preserve">
+    <value>Neither "Thread.Resume" nor "Thread.Suspend" should be used</value>
+  </data>
+  <data name="S3889_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3923_Category" xml:space="preserve">
     <value>Major Bug</value>
   </data>

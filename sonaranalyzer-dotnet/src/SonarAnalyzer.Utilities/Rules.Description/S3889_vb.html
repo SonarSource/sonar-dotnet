@@ -1,0 +1,16 @@
+<p><code>Thread.Suspend</code> and <code>Thread.Resume</code> can give unpredictable results, and both methods have been deprecated. Indeed, if
+<code>Thread.Suspend</code> is not used very carefully, a thread can be suspended while holding a lock, thus leading to a deadlock. Other safer
+synchronization mechanisms should be used, such as <code>Monitor</code>, <code>Mutex</code>, and <code>Semaphore</code>.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Public Sub Foo()
+    Thread.CurrentThread.Suspend() ' Noncompliant
+    Thread.[Resume]() ' Noncompliant
+End Sub
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://msdn.microsoft.com/en-us/library/system.threading.thread.resume.aspx">Thread.Resume Method ()</a> </li>
+  <li> <a href="https://msdn.microsoft.com/en-us/library/system.threading.thread.suspend(v=vs.110).aspx">Thread.Suspend Method ()</a> </li>
+</ul>
+
