@@ -1,0 +1,20 @@
+<p>In the Attributed Programming Model, the <code>ExportAttribute</code> declares that a part "exports", or provides to the composition container, an
+object that fulfills a particular contract. During composition, parts with imports that have matching contracts will have those dependencies filled by
+the exported object.</p>
+<p>If the type doesn't implement the interface it is exporting there will be an issue at runtime (either a cast exception or just a container not
+filled with the exported type) leading to unexpected behaviors/crashes.</p>
+<p>The rule raises an issue when a class doesn't implement or inherit the type declared in the <code>ExportAttribute</code>. </p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+&lt;Export(GetType(ISomeType))&gt;
+Public Class SomeType  // Noncompliant; doesn't implement 'ISomeType'.
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+&lt;Export(GetType(ISomeType))&gt;
+Public Class SomeType
+    Inherits ISomeType
+End Class
+</pre>
+
