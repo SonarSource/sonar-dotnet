@@ -16,8 +16,27 @@ For reference, the possible headings are:
 ## Unreleased
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonar-csharp/compare/7.5.0.6605...HEAD)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/7.6.0.7024...HEAD)
 
+
+## [7.6](https://github.com/SonarSource/sonar-csharp/releases/tag/7.6.0.7024)
+
+### Improvements
+* [1852](https://github.com/SonarSource/sonar-csharp/issues/1852) - Update SonarC# and VB documentation to cover uploading issues for all Roslyn analzyers
+* [1825](https://github.com/SonarSource/sonar-csharp/issues/1825) - Update SonarC# to allow import of other roslyn issues
+* [1920](https://github.com/SonarSource/sonar-csharp/issues/1920) - Security Hotspots rules should only be displayed on SonarQube/SonarCloud
+
+### Bug Fixes
+* [1891](https://github.com/SonarSource/sonar-csharp/issues/1891) - Fix plugin to use newer version of protobuf
+* [1867](https://github.com/SonarSource/sonar-csharp/issues/1867) - Fix S3928: Rule should not throw NullReferenceException for ArgumentNullException with null parameter name
+* [1804](https://github.com/SonarSource/sonar-csharp/issues/1804) - Fix S3881: Rule throws AD0001 with SyntaxTree not part of the compilation
+* [1857](https://github.com/SonarSource/sonar-csharp/issues/1857) - Fix S4143: False positive when incrementing key using ++ operator
+* [1851](https://github.com/SonarSource/sonar-csharp/issues/1851) - Fix S3457: should not report for Debug.WriteLine(message, category)
+* [1847](https://github.com/SonarSource/sonar-csharp/issues/1847) - Fix S3168: Rule should ignore MSTest V1 cleanup and initialize attributes
+* [1845](https://github.com/SonarSource/sonar-csharp/issues/1845) - Fix S4586: false positive with local function
+* [1843](https://github.com/SonarSource/sonar-csharp/issues/1843) - Fix S4049: Do not raise issue when method is async or return Task/Task<T>/ValueTask<T>
+* [1840](https://github.com/SonarSource/sonar-csharp/issues/1840) - Fix S3257: should not recommend removing explicit type for multidimensional array
+* [1819](https://github.com/SonarSource/sonar-csharp/issues/1819) - Fix S4457: False positive when ArgumentException thrown after awaited call
 
 
 ## [7.5](https://github.com/SonarSource/sonar-csharp/releases/tag/7.5.0.6605)
