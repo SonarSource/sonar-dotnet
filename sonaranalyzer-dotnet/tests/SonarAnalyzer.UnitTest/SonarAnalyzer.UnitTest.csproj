@@ -208,7 +208,7 @@
       <DependentUpon>SomeResources.resx</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-     <Compile Include="**\*.cs" Exclude="**\obj\**\*;**\bin\**\*;**\*.Designer.cs;TestCases\**\*.cs;TestCasesForRuleFailure\**\*.*" />
+    <Compile Include="**\*.cs" Exclude="**\obj\**\*;**\bin\**\*;**\*.Designer.cs;TestCases\**\*.cs;TestCasesForRuleFailure\**\*.*" />
     <None Include="TestCases\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -232,10 +232,6 @@
       <Project>{39ccd086-a7f8-42a0-b402-3c9bd9eb4825}</Project>
       <Name>SonarAnalyzer.CSharp</Name>
       <Aliases>global,csharp</Aliases>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\SonarAnalyzer.RuleDocGenerator.Web\SonarAnalyzer.RuleDocGenerator.Web.csproj">
-      <Project>{98ef48f7-28d7-44ca-8c7f-6042ea4898e1}</Project>
-      <Name>SonarAnalyzer.RuleDocGenerator.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\SonarAnalyzer.Utilities\SonarAnalyzer.Utilities.csproj">
       <Project>{4c1bb6ce-645f-400b-b491-af7bb40e5c01}</Project>
