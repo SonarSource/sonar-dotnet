@@ -4,34 +4,30 @@ will most likely result in unexpected behaviours.</p>
 <p>This rule raises an issue when a constructor of a class marked shared with a <code>PartCreationPolicyAttribute</code> is invoked.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-[Export(typeof(IFooBar))]
-[PartCreationPolicy(CreationPolicy.Shared)]
-public class FooBar : IFooBar
-{
-}
+&lt;Export(GetType(IFooBar))&gt;
+&lt;PartCreationPolicy(CreationPolicy.[Shared])&gt;
+Public Class FooBar
+    Inherits IFooBar
+End Class
 
-public class Program
-{
-    public static void Main()
-    {
-        var fooBar = new FooBar(); // Noncompliant;
-    }
-}
+Public Class Program
+    Public Shared Sub Main()
+        Dim fooBar = New FooBar() ' Noncompliant
+    End Sub
+End Class
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-[Export(typeof(IFooBar))]
-[PartCreationPolicy(CreationPolicy.Shared)]
-public class FooBar : IFooBar
-{
-}
+&lt;Export(GetType(IFooBar))&gt;
+&lt;PartCreationPolicy(CreationPolicy.[Shared])&gt;
+Public Class FooBar
+    Inherits IFooBar
+End Class
 
-public class Program
-{
-    public static void Main()
-    {
-        var fooBar = serviceProvider.GetService&lt;IFooBar&gt;();
-    }
-}
+Public Class Program
+    Public Shared Sub Main()
+        Dim fooBar = serviceProvider.GetService(Of IFooBar)()
+    End Sub
+End Class
 </pre>
 

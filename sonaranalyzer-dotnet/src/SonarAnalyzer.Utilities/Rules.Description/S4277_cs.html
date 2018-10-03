@@ -1,0 +1,37 @@
+<p>Marking a class with <code>PartCreationPolicy(CreationPolicy.Shared)</code>, which is part of Managed Extensibility Framework (MEF), means that a
+single, shared instance of the exported object will be created. Therefore it doesn't make sense to create new instances using the constructor and it
+will most likely result in unexpected behaviours.</p>
+<p>This rule raises an issue when a constructor of a class marked shared with a <code>PartCreationPolicyAttribute</code> is invoked.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+[Export(typeof(IFooBar))]
+[PartCreationPolicy(CreationPolicy.Shared)]
+public class FooBar : IFooBar
+{
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        var fooBar = new FooBar(); // Noncompliant;
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+[Export(typeof(IFooBar))]
+[PartCreationPolicy(CreationPolicy.Shared)]
+public class FooBar : IFooBar
+{
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        var fooBar = serviceProvider.GetService&lt;IFooBar&gt;();
+    }
+}
+</pre>
+
