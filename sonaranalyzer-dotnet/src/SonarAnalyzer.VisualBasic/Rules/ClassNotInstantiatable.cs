@@ -41,7 +41,41 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            throw new System.NotImplementedException();
+            context.RegisterSymbolAction(CheckClassWithOnlyUnusedPrivateConstructors, SymbolKind.NamedType);
+        }
+
+        private static void CheckClassWithOnlyUnusedPrivateConstructors(SymbolAnalysisContext context)
+        {
+            var namedType = context.Symbol as INamedTypeSymbol;
+            if (!IsNonStaticClassWithNoAttributes(namedType))
+            {
+                return;
+            }
+
+            var members = namedType.GetMembers();
+            var constructors = GetConstructors(members).ToList();
+
+            if (!HasOnlyCandidateConstructors(constructors) ||
+                HasOnlyStaticMembers(members.Except(constructors).ToList()))
+            {
+                return;
+            }
+
+            var typeDeclarations = new RemovableDeclarationCollector(namedType, context.Compilation).TypeDeclarations;
+
+            if (!IsAnyConstructorCalled<TypeStatementSyntax, ObjectCreationExpressionSyntax, ClassStatementSyntax>
+                (namedType, typeDeclarations))
+            {
+                var message = constructors.Count > 1
+                    ? "at least one of its constructors"
+                    : "its constructor";
+
+                foreach (var classDeclaration in typeDeclarations)
+                {
+                    context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, classDeclaration.SyntaxNode.Identifier.GetLocation(),
+                        message));
+                }
+            }
         }
     }
 }

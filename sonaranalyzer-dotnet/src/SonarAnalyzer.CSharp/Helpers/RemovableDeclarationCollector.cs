@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -28,7 +27,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace SonarAnalyzer.Helpers
 {
     using SyntaxNodeSymbolSemanticModelTuple = SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol>;
-    using TypeWithSemanticModel = SyntaxNodeAndSemanticModel<BaseTypeDeclarationSyntax>;
 
     internal class RemovableDeclarationCollector : RemovableDeclarationCollectorBase<BaseTypeDeclarationSyntax, SyntaxKind>
     {
