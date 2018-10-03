@@ -33,16 +33,15 @@ namespace SonarAnalyzer.Rules
         protected const string AddStaThreadMessage = "Add the 'STAThread' attribute to this entry point.";
         protected const string ChangeMtaThreadToStaThreadMessage = "Change the 'MTAThread' attribute of this entry point to 'STAThread'.";
 
-        protected abstract IMethodSymbol GetSymbol(SemanticModel model, TMethodSyntax method);
-
-        protected abstract void Report(SyntaxNodeAnalysisContext c, TMethodSyntax method, string message);
+        protected abstract Location GetLocation(TMethodSyntax method);
 
         protected void Action(SyntaxNodeAnalysisContext c)
         {
             var methodDeclaration = (TMethodSyntax)c.Node;
-            var methodSymbol = GetSymbol(c.SemanticModel, methodDeclaration);
+            var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration) as IMethodSymbol;
 
-            if (methodSymbol.IsMainMethod() &&
+            if (methodSymbol != null &&
+                methodSymbol.IsMainMethod() &&
                 !methodSymbol.GetAttributes(KnownType.System_STAThreadAttribute).Any() &&
                 IsAssemblyReferencingWindowsForms(c.SemanticModel.Compilation))
             {
@@ -50,13 +49,14 @@ namespace SonarAnalyzer.Rules
                     ? ChangeMtaThreadToStaThreadMessage
                     : AddStaThreadMessage;
 
-                Report(c, methodDeclaration, message);
+                c.ReportDiagnosticWhenActive(
+                    Diagnostic.Create(SupportedDiagnostics[0],
+                        GetLocation(methodDeclaration),
+                        message));
             }
         }
 
-        protected static bool IsAssemblyReferencingWindowsForms(Compilation compilation)
-        {
-            return compilation.ReferencedAssemblyNames.Any(r => r.IsStrongName && r.Name == "System.Windows.Forms");
-        }
+        protected static bool IsAssemblyReferencingWindowsForms(Compilation compilation) =>
+            compilation.ReferencedAssemblyNames.Any(r => r.IsStrongName && r.Name == "System.Windows.Forms");
     }
 }

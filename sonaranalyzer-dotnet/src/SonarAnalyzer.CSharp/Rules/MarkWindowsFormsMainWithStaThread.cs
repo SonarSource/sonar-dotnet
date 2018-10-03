@@ -37,18 +37,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override IMethodSymbol GetSymbol(SemanticModel model, MethodDeclarationSyntax method) =>
-            model.GetDeclaredSymbol(method);
+        protected override Location GetLocation(MethodDeclarationSyntax method) =>
+            method.FindIdentifierLocation();
 
-        protected override void Report(SyntaxNodeAnalysisContext c, MethodDeclarationSyntax method, string message) =>
-            c.ReportDiagnosticWhenActive(
-                Diagnostic.Create(rule,
-                    method.FindIdentifierLocation(),
-                    message));
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(Action, SyntaxKind.MethodDeclaration);
-        }
     }
 }
