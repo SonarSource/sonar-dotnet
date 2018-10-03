@@ -1,0 +1,17 @@
+{
+  "title": "\"Shared\" parts should not be created with \"new\"",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "mef",
+    "pitfall"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-4277",
+  "sqKey": "S4277",
+  "scope": "Main"
+}
