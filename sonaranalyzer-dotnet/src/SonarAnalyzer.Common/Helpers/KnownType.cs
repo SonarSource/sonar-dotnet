@@ -255,6 +255,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_STAThreadAttribute = new KnownType("System.STAThreadAttribute");
         internal static readonly KnownType System_String = new KnownType(SpecialType.System_String, "string");
         internal static readonly KnownType System_String_Array = new KnownType("string[]");
+        internal static readonly KnownType System_String_Array_VB = new KnownType("String()");
         internal static readonly KnownType System_StringComparison = new KnownType("System.StringComparison");
         internal static readonly KnownType System_SystemException = new KnownType("System.SystemException");
         internal static readonly KnownType System_Text_StringBuilder = new KnownType("System.Text.StringBuilder");

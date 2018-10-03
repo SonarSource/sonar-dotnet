@@ -1,0 +1,18 @@
+{
+  "title": "Windows Forms entry points should be marked with STAThread",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Linear",
+    "linearDesc": null,
+    "linearFactor": null
+  },
+  "tags": [
+    "winforms",
+    "pitfall"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-4210",
+  "sqKey": "S4210",
+  "scope": "All"
+}

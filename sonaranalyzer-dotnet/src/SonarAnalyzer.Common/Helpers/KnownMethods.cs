@@ -33,10 +33,12 @@ namespace SonarAnalyzer.Helpers
             // Adding support for new async main: https://blogs.msdn.microsoft.com/mazhou/2017/05/30/c-7-series-part-2-async-main
             return methodSymbol != null &&
                 methodSymbol.IsStatic &&
-                methodSymbol.Name.Equals("Main", StringComparison.Ordinal) &&
+                // vb.net is case insensitive
+                methodSymbol.Name.Equals("Main", StringComparison.OrdinalIgnoreCase) &&
                 (
                     methodSymbol.Parameters.Length == 0 ||
-                    (methodSymbol.Parameters.Length == 1 && methodSymbol.Parameters[0].IsType(KnownType.System_String_Array))
+                    (methodSymbol.Parameters.Length == 1 && methodSymbol.Parameters[0].IsType(KnownType.System_String_Array)) ||
+                    (methodSymbol.Parameters.Length == 1 && methodSymbol.Parameters[0].IsType(KnownType.System_String_Array_VB))
                 ) &&
                 (
                     methodSymbol.ReturnsVoid ||

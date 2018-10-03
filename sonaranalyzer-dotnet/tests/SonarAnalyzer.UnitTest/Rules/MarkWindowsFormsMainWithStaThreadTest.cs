@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using csharp = SonarAnalyzer.Rules.CSharp;
+using vbnet = SonarAnalyzer.Rules.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -29,19 +29,36 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MarkWindowsFormsMainWithStaThread()
+        public void MarkWindowsFormsMainWithStaThread_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.cs",
-                new MarkWindowsFormsMainWithStaThread(),
+                new csharp.MarkWindowsFormsMainWithStaThread(),
                 additionalReferences: FrameworkMetadataReference.SystemWindowsForms);
         }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MarkWindowsFormsMainWithStaThread_NoWindowsForms()
+        public void MarkWindowsFormsMainWithStaThread_CS_NoWindowsForms()
         {
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.cs",
-                new MarkWindowsFormsMainWithStaThread());
+                new csharp.MarkWindowsFormsMainWithStaThread());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MarkWindowsFormsMainWithStaThread_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.vb",
+                new vbnet.MarkWindowsFormsMainWithStaThread(),
+                additionalReferences: FrameworkMetadataReference.SystemWindowsForms);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MarkWindowsFormsMainWithStaThread_VB_NoWindowsForms()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb",
+                new vbnet.MarkWindowsFormsMainWithStaThread());
         }
     }
 }
