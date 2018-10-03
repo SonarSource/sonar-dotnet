@@ -19,13 +19,13 @@ Namespace Tests.Diagnostics
 '                                      ^^^^^^^
 
         <OperationContract(IsOneWay:=False)>
-        Function MyServiceMethod3() As Integer
+        Function MyServiceMethod3() As String
 
         <OperationContract(IsTerminating:=True)>
         <My(IsOneWay:=True)>
         Function MyServiceMethod4() As Integer
 
-        <OperationContract(IsOneWay:="mistake")>
+        <OperationContract(Action:="Action", IsOneWay:="mistake")>
         Function MyServiceMethod5() As Integer
 
         <OperationContract(IsOneWay:=True, AsyncPattern:=True)>
