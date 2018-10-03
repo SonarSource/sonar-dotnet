@@ -22,41 +22,42 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.Common;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class ConstructorArgumentValueShouldExist : ConstructorArgumentValueShouldExistBase
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var propertyDeclaration = (PropertyDeclarationSyntax)c.Node;
+                    var propertyDeclaration = (PropertyStatementSyntax)c.Node;
                     var propertySymbol = c.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
                     CheckConstructorArgumentProperty(c, propertyDeclaration, propertySymbol);
                 },
-                SyntaxKind.PropertyDeclaration);
+                SyntaxKind.PropertyStatement);
         }
         protected override IEnumerable<string> GetAllParentClassConstructorArgumentNames(SyntaxNode propertyDeclaration)
         {
             return propertyDeclaration
-                .FirstAncestorOrSelf<ClassDeclarationSyntax>()
+                .FirstAncestorOrSelf<ClassBlockSyntax>()
                 .Members
-                .OfType<ConstructorDeclarationSyntax>()
-                .SelectMany(x => x.ParameterList.Parameters)
-                .Select(x => x.Identifier.ValueText);
+                .OfType<ConstructorBlockSyntax>()
+                .SelectMany(x => x.BlockStatement.ParameterList.Parameters)
+                .Select(x => x.Identifier.Identifier.ValueText);
         }
         internal override void ReportIssue(SyntaxNodeAnalysisContext c, AttributeData constructorArgumentAttribute)
         {
