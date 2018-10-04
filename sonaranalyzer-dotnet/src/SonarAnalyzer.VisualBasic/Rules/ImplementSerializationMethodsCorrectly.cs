@@ -21,14 +21,14 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class ImplementSerializationMethodsCorrectly : ImplementSerializationMethodsCorrectlyBase
     {
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override Location GetIdentifierLocation(IMethodSymbol methodSymbol) =>
             methodSymbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax())
-                .OfType<MethodDeclarationSyntax>()
+                .OfType<MethodStatementSyntax>()
                 .FirstOrDefault()
                 ?.Identifier
                 .GetLocation();
