@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void PartCreationPolicyShouldBeUsedWithExportAttribute()
+        public void PartCreationPolicyShouldBeUsedWithExportAttribute_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.cs",
                 new PartCreationPolicyShouldBeUsedWithExportAttribute(),

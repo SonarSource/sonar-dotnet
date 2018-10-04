@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract TClassSyntax GetClassDeclaration(TAttributeSyntax attribute);
 
-        protected void Action(SyntaxNodeAnalysisContext c)
+        protected void AnalyzeNode(SyntaxNodeAnalysisContext c)
         {
             var attribute = (TAttributeSyntax)c.Node;
             if (!IsPartCreationPolicyAttribute(attribute))
@@ -45,21 +45,23 @@ namespace SonarAnalyzer.Rules
             }
 
             TClassSyntax classDeclaration = GetClassDeclaration(attribute);
-            if (classDeclaration != null)
+            if (classDeclaration == null)
             {
-                var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration) as ITypeSymbol;
-                if (classSymbol == null ||
-                    classSymbol.GetAttributes(KnownType.System_ComponentModel_Composition_ExportAttribute).Any() ||
-                    classSymbol.GetSelfAndBaseTypes().Any(s => s.GetAttributes(KnownType.System_ComponentModel_Composition_InheritedExportAttribute).Any()))
-                {
-                    return;
-                }
-
-                c.ReportDiagnosticWhenActive(
-                    Diagnostic.Create(
-                        SupportedDiagnostics[0],
-                        attribute.GetLocation()));
+                return;
             }
+
+            var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration) as ITypeSymbol;
+            if (classSymbol == null ||
+                classSymbol.GetAttributes(KnownType.System_ComponentModel_Composition_ExportAttribute).Any() ||
+                classSymbol.GetSelfAndBaseTypes().Any(s => s.GetAttributes(KnownType.System_ComponentModel_Composition_InheritedExportAttribute).Any()))
+            {
+                return;
+            }
+
+            c.ReportDiagnosticWhenActive(
+                Diagnostic.Create(
+                    SupportedDiagnostics[0],
+                    attribute.GetLocation()));
 
             bool IsPartCreationPolicyAttribute(TAttributeSyntax attributeSyntax) =>
                 c.SemanticModel.GetSymbolInfo(attributeSyntax).Symbol is IMethodSymbol attributeSymbol &&

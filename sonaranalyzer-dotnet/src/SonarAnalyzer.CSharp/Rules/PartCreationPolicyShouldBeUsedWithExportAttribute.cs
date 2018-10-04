@@ -42,6 +42,6 @@ namespace SonarAnalyzer.Rules.CSharp
             attribute.FirstAncestorOrSelf<MemberDeclarationSyntax>() as ClassDeclarationSyntax;
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(Action, SyntaxKind.Attribute);
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeNode, SyntaxKind.Attribute);
     }
 }
