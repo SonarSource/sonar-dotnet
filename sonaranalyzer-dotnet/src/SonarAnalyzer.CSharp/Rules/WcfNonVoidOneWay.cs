@@ -19,64 +19,31 @@
  */
 
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.Common;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class WcfNonVoidOneWay : SonarDiagnosticAnalyzer
+    public sealed class WcfNonVoidOneWay : WcfNonVoidOneWayBase<MethodDeclarationSyntax, SyntaxKind>
     {
-        internal const string DiagnosticId = "S3598";
-        private const string MessageFormat = "This method can't return any values because it is marked as one-way operation.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
-                    if (methodSymbol == null ||
-                        methodSymbol.ReturnsVoid)
-                    {
-                        return;
-                    }
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
+            Helpers.CSharp.GeneratedCodeRecognizer.Instance;
 
-                    var operationContractAttribute = methodSymbol
-                        .GetAttributes(KnownType.System_ServiceModel_OperationContractAttribute)
-                        .FirstOrDefault();
-                    if (operationContractAttribute == null)
-                    {
-                        return;
-                    }
+        protected override SyntaxKind MethodDeclarationKind =>
+            SyntaxKind.MethodDeclaration;
 
-                    var asyncPattern = operationContractAttribute.NamedArguments.FirstOrDefault(na => na.Key == "AsyncPattern").Value.Value as bool?;
-                    if (asyncPattern.HasValue &&
-                        asyncPattern.Value)
-                    {
-                        return;
-                    }
-
-                    var isOneWay = operationContractAttribute.NamedArguments.FirstOrDefault(na => na.Key == "IsOneWay").Value.Value as bool?;
-                    if (isOneWay.HasValue &&
-                        isOneWay.Value)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.ReturnType.GetLocation()));
-                    }
-                },
-                SyntaxKind.MethodDeclaration);
-        }
+        protected override Location GetReturnTypeLocation(MethodDeclarationSyntax method) =>
+            method.ReturnType.GetLocation();
     }
 }

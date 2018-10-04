@@ -1,0 +1,22 @@
+<p>When declaring a Windows Communication Foundation (WCF) <code>OperationContract</code> method one-way, that service method won't return any result,
+not even an underlying empty confirmation message. These are fire-and-forget methods that are useful in event-like communication. Specifying a return
+type therefore does not make sense.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+&lt;ServiceContract&gt;
+Interface IMyService
+    &lt;OperationContract(IsOneWay:=True)&gt;
+    Function SomethingHappened(ByVal parameter As Integer) As Integer ' Noncompliant
+End Interface
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+&lt;ServiceContract&gt;
+Interface IMyService
+    &lt;OperationContract(IsOneWay:=True)&gt;
+    Sub SomethingHappened(ByVal parameter As Integer)
+End Interface
+</pre>
+<h2>Exceptions</h2>
+<p>The rule doesn't report if <code>OperationContractAttribute.AsyncPattern</code> is set to <code>true</code>.</p>
+

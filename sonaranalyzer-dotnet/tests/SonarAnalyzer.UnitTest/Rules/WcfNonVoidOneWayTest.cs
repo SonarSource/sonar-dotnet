@@ -29,11 +29,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void WcfNonVoidOneWay()
+        public void WcfNonVoidOneWay_CS()
         {
-            Verifier.VerifyAnalyzer(
-                @"TestCases\WcfNonVoidOneWay.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\WcfNonVoidOneWay.cs",
                 new WcfNonVoidOneWay(),
+                additionalReferences: FrameworkMetadataReference.SystemServiceModel);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void WcfNonVoidOneWay_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\WcfNonVoidOneWay.vb",
+                new SonarAnalyzer.Rules.VisualBasic.WcfNonVoidOneWay(),
                 additionalReferences: FrameworkMetadataReference.SystemServiceModel);
         }
     }
