@@ -22,7 +22,7 @@ Namespace Tests.Diagnostics
         End Sub
 
         Public Overrides Sub MyMethod2(Optional i As Integer = 1)
-            ' Special to VB.NET: Call without parentheses must be handled
+        ' Special for VB.NET: Call without parentheses must be handled
             MyBase.MyMethod2 ' Noncompliant {{Pass the missing user-supplied parameter value to this 'base' call.}}
 '           ^^^^^^^^^^^^^^^^
         End Sub
