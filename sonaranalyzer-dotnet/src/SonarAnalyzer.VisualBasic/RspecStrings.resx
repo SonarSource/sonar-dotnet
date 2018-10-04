@@ -2937,6 +2937,36 @@
   <data name="S4277_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S4428_Category" xml:space="preserve">
+    <value>Major Bug</value>
+  </data>
+  <data name="S4428_Description" xml:space="preserve">
+    <value>The PartCreationPolicyAttribute attribute, which is part of the Managed Extensibility Framework (MEF), is used to specify how the exported object will be created. Therefore it doesn't make sense not to export this a class with this attribute using the ExportAttribute attribute.</value>
+  </data>
+  <data name="S4428_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4428_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4428_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S4428_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S4428_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4428_Tags" xml:space="preserve">
+    <value>mef,pitfall</value>
+  </data>
+  <data name="S4428_Title" xml:space="preserve">
+    <value>"PartCreationPolicyAttribute" should be used with "ExportAttribute"</value>
+  </data>
+  <data name="S4428_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="HelpLinkFormat" xml:space="preserve">
     <value>https://rules.sonarsource.com/vbnet/RSPEC-{0}</value>
   </data>

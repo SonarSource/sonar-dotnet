@@ -35,5 +35,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new PartCreationPolicyShouldBeUsedWithExportAttribute(),
                 additionalReferences: FrameworkMetadataReference.SystemComponentModelComposition);
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void PartCreationPolicyShouldBeUsedWithExportAttribute_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.vb",
+                new SonarAnalyzer.Rules.VisualBasic.PartCreationPolicyShouldBeUsedWithExportAttribute(),
+                additionalReferences: FrameworkMetadataReference.SystemComponentModelComposition);
+        }
     }
 }
+

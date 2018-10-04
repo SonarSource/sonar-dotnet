@@ -1,0 +1,21 @@
+<p>The <code>PartCreationPolicyAttribute</code> attribute, which is part of the Managed Extensibility Framework (MEF), is used to specify how the
+exported object will be created. Therefore it doesn't make sense not to export this a class with this attribute using the <code>ExportAttribute</code>
+attribute.</p>
+<p>This rule raises an issue when a class is marked as shared with a <code>PartCreationPolicyAttribute</code> but lacks a
+<code>ExportAttribute</code>.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+[PartCreationPolicy(CreationPolicy.Any)] // Noncompliant
+public class FooBar : IFooBar
+{
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+[Export(typeof(IFooBar))]
+[PartCreationPolicy(CreationPolicy.Any)]
+public class FooBar : IFooBar
+{
+}
+</pre>
+
