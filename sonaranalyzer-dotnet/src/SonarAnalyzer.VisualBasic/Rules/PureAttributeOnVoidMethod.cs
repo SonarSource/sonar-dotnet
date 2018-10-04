@@ -18,32 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
-using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [TestClass]
-    public class PureAttributeOnVoidMethodTest
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+    [Rule(DiagnosticId)]
+    public sealed class PureAttributeOnVoidMethod : PureAttributeOnVoidMethodBase
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void PureAttributeOnVoidMethod_CS()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.cs",
-                new CSharp.PureAttributeOnVoidMethod());
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void PureAttributeOnVoidMethod_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\PureAttributeOnVoidMethod.vb",
-                new VisualBasic.PureAttributeOnVoidMethod());
-        }
+        protected override DiagnosticDescriptor Rule { get; } =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
     }
 }
-

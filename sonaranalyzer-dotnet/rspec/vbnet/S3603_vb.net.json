@@ -1,0 +1,16 @@
+{
+  "title": "Methods with \"Pure\" attribute should return a value ",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-3603",
+  "sqKey": "S3603",
+  "scope": "All"
+}

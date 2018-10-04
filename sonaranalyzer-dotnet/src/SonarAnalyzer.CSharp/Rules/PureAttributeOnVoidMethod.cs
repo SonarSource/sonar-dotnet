@@ -18,11 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -31,39 +27,9 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class PureAttributeOnVoidMethod : SonarDiagnosticAnalyzer
+    public sealed class PureAttributeOnVoidMethod : PureAttributeOnVoidMethodBase
     {
-        internal const string DiagnosticId = "S3603";
-        private const string MessageFormat = "Remove the 'Pure' attribute or change the method to return a value.";
-
-        private static readonly DiagnosticDescriptor rule =
+        protected override DiagnosticDescriptor Rule { get; } =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
-                    if (methodSymbol == null ||
-                        !methodSymbol.ReturnsVoid ||
-                        methodSymbol.Parameters.Any(p => p.RefKind != RefKind.None))
-                    {
-                        return;
-                    }
-
-                    var pureAttribute = methodDeclaration.AttributeLists
-                        .GetAttributes(KnownType.System_Diagnostics_Contracts_PureAttribute, c.SemanticModel)
-                        .FirstOrDefault();
-                    if (pureAttribute != null)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, pureAttribute.GetLocation()));
-                    }
-                },
-                SyntaxKind.MethodDeclaration);
-        }
     }
 }
