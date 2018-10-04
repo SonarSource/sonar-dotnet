@@ -20,31 +20,31 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.Common;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
     [Rule(DiagnosticId)]
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class ProvideDeserializationMethodsForOptionalFields :
-        ProvideDeserializationMethodsForOptionalFieldsBase<ClassDeclarationSyntax, SyntaxKind>
+        ProvideDeserializationMethodsForOptionalFieldsBase<ClassStatementSyntax, SyntaxKind>
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+            Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
 
         protected override SyntaxKind ClassDeclarationSyntaxKind =>
-            SyntaxKind.ClassDeclaration;
+            SyntaxKind.ClassStatement;
 
-        protected override Location GetClassDeclarationIdentifierLocation(ClassDeclarationSyntax classDeclaration) =>
+        protected override Location GetClassDeclarationIdentifierLocation(ClassStatementSyntax classDeclaration) =>
             classDeclaration.Identifier.GetLocation();
     }
 }

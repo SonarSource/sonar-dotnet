@@ -2817,6 +2817,36 @@
   <data name="S3923_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S3926_Category" xml:space="preserve">
+    <value>Major Bug</value>
+  </data>
+  <data name="S3926_Description" xml:space="preserve">
+    <value>Fields marked with System.Runtime.Serialization.OptionalFieldAttribute are serialized just like any other field. But such fields are ignored on deserialization, and retain the default values associated with their types. Therefore, deserialization event handlers should be declared to set such fields during the deserialization process.</value>
+  </data>
+  <data name="S3926_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3926_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3926_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S3926_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S3926_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3926_Tags" xml:space="preserve">
+    <value>serialization</value>
+  </data>
+  <data name="S3926_Title" xml:space="preserve">
+    <value>Deserialization methods should be provided for "OptionalField" members</value>
+  </data>
+  <data name="S3926_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3981_Category" xml:space="preserve">
     <value>Major Bug</value>
   </data>

@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,10 +29,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ProvideDeserializationMethodsForOptionalFields()
+        public void ProvideDeserializationMethodsForOptionalFields_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.cs",
                 new ProvideDeserializationMethodsForOptionalFields());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ProvideDeserializationMethodsForOptionalFields_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\ProvideDeserializationMethodsForOptionalFields.vb",
+                new SonarAnalyzer.Rules.VisualBasic.ProvideDeserializationMethodsForOptionalFields());
         }
     }
 }

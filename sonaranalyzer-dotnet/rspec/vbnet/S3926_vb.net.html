@@ -1,0 +1,32 @@
+<p>Fields marked with <code>System.Runtime.Serialization.OptionalFieldAttribute</code> are serialized just like any other field. But such fields are
+ignored on deserialization, and retain the default values associated with their types. Therefore, deserialization event handlers should be declared to
+set such fields during the deserialization process.</p>
+<p>This rule raises when at least one field with the <code>System.Runtime.Serialization.OptionalFieldAttribute</code> attribute is declared but one
+(or both) of the following event handlers <code>System.Runtime.Serialization.OnDeserializingAttribute</code> or
+<code>System.Runtime.Serialization.OnDeserializedAttribute</code> are not present.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+&lt;Serializable&gt;
+Public Class Foo ' Noncompliant
+    &lt;OptionalField(VersionAdded:=2)&gt;
+    Private optionalField As Integer = 5
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+&lt;Serializable&gt;
+Public Class Foo
+    &lt;OptionalField(VersionAdded:=2)&gt;
+    Private optionalField As Integer = 5
+
+    &lt;OnDeserializing&gt;
+    Private Sub OnDeserializing(ByVal context As StreamingContext)
+        optionalField = 5
+    End Sub
+
+    &lt;OnDeserialized&gt;
+    Private Sub OnDeserialized(ByVal context As StreamingContext)
+    End Sub
+End Class
+</pre>
+
