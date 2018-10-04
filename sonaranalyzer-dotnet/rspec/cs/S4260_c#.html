@@ -11,17 +11,13 @@ namespace myLibrary
   {
     public MyExtension() { }
 
-    public MyExtension(object value1, object value2)
+    public MyExtension(object value1)
     {
       Value1 = value1;
-      Value2 = value2;
     }
 
-    [ConstructorArgument("value1")]
+    [ConstructorArgument("value2")]
     public object Value1 { get; set; }
-
-    [ConstructorArgument("value3")]  // Noncompliant
-    public object Value2 { get; set; }
   }
 }
 </pre>
@@ -35,17 +31,13 @@ namespace myLibrary
   {
     public MyExtension() { }
 
-    public MyExtension(object value1, object value2)
+    public MyExtension(object value1)
     {
       Value1 = value1;
-      Value2 = value2;
     }
 
     [ConstructorArgument("value1")]
     public object Value1 { get; set; }
-
-    [ConstructorArgument("value2")]
-    public object Value2 { get; set; }
   }
 }
 </pre>
