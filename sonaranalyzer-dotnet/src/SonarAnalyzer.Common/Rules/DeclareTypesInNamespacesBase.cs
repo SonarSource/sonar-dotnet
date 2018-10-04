@@ -28,9 +28,9 @@ namespace SonarAnalyzer.Rules
     public abstract class DeclareTypesInNamespacesBase : SonarDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S3903";
-        protected const string MessageFormat = "Move the type '{0}' into a named namespace.";
+        protected const string MessageFormat = "Move '{0}' into a named namespace.";
 
-        protected abstract bool IsOuterTypeWithoutNamespace(SyntaxNode declaration, SemanticModel semanticModel);
+        protected abstract bool IsInnerTypeOrWithinNamespace(SyntaxNode declaration, SemanticModel semanticModel);
 
         protected abstract SyntaxToken GetTypeIdentifier(SyntaxNode declaration);
 
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules
             c =>
             {
                 var declaration = c.Node;
-                if (!IsOuterTypeWithoutNamespace(declaration, c.SemanticModel))
+                if (IsInnerTypeOrWithinNamespace(declaration, c.SemanticModel))
                 {
                     return;
                 }

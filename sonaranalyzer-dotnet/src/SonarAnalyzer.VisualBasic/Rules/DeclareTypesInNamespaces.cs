@@ -38,27 +38,45 @@ namespace SonarAnalyzer.Rules.VisualBasic
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
             ImmutableArray.Create(rule);
 
-        protected override SyntaxToken GetTypeIdentifier(SyntaxNode declaration) =>
-            ((TypeStatementSyntax)declaration).Identifier;
-
-        protected override bool IsOuterTypeWithoutNamespace(SyntaxNode declaration, SemanticModel semanticModel)
+        protected override SyntaxToken GetTypeIdentifier(SyntaxNode declaration)
         {
-            if (declaration.Parent.Parent is TypeBlockSyntax || // Inner type
-                declaration.Parent.Parent is NamespaceBlockSyntax) // Outer type within a namespace
+            switch (declaration.Kind())
             {
-                return false;
+                case SyntaxKind.EnumStatement:
+                    return ((EnumStatementSyntax)declaration).Identifier;
+                case SyntaxKind.ClassStatement:
+                case SyntaxKind.InterfaceStatement:
+                case SyntaxKind.StructureStatement:
+                    return ((TypeStatementSyntax)declaration).Identifier;
+                default:
+                    return default(SyntaxToken);
+            }
+        }
+
+        protected override bool IsInnerTypeOrWithinNamespace(SyntaxNode declaration, SemanticModel semanticModel)
+        {
+            switch (declaration.Parent.Parent.Kind())
+            {
+                case SyntaxKind.ClassBlock:
+                case SyntaxKind.InterfaceBlock:
+                case SyntaxKind.StructureBlock:
+                case SyntaxKind.NamespaceBlock:
+                    return true;
             }
 
-            // If we are an outer type without a declared namespace,
+            // If declaration is an outer type that is not within a namespace block,
             // make sure there is no Root Namespace set in the project
             var typeSymbol = (INamedTypeSymbol)semanticModel.GetDeclaredSymbol(declaration);
-            return typeSymbol != null && typeSymbol.ContainingNamespace.IsGlobalNamespace;
+            return typeSymbol == null ||
+                !typeSymbol.ContainingNamespace.IsGlobalNamespace;
         }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GetAnalysisAction(rule),
                 SyntaxKind.ClassStatement,
-                SyntaxKind.StructureStatement);
+                SyntaxKind.StructureStatement,
+                SyntaxKind.EnumStatement,
+                SyntaxKind.InterfaceStatement);
     }
 }

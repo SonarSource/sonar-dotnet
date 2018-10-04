@@ -39,16 +39,28 @@ namespace SonarAnalyzer.Rules.CSharp
             ImmutableArray.Create(rule);
 
         protected override SyntaxToken GetTypeIdentifier(SyntaxNode declaration) =>
-            ((TypeDeclarationSyntax)declaration).Identifier;
+            ((BaseTypeDeclarationSyntax)declaration).Identifier;
 
-        protected override bool IsOuterTypeWithoutNamespace(SyntaxNode declaration, SemanticModel semanticModel) =>
-            !(declaration.Parent is TypeDeclarationSyntax ||
-            declaration.Parent is NamespaceDeclarationSyntax);
+        protected override bool IsInnerTypeOrWithinNamespace(SyntaxNode declaration, SemanticModel semanticModel)
+        {
+            switch (declaration.Parent.Kind())
+            {
+                case SyntaxKind.ClassDeclaration:
+                case SyntaxKind.StructDeclaration:
+                case SyntaxKind.NamespaceDeclaration:
+                case SyntaxKind.InterfaceDeclaration:
+                    return true;
+                default:
+                    return false;
+            }
+        }
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GetAnalysisAction(rule),
                 SyntaxKind.ClassDeclaration,
-                SyntaxKind.StructDeclaration);
+                SyntaxKind.StructDeclaration,
+                SyntaxKind.EnumDeclaration,
+                SyntaxKind.InterfaceDeclaration);
     }
 }
