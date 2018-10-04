@@ -29,11 +29,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ConstructorArgumentValueShouldExist()
+        public void ConstructorArgumentValueShouldExist_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ConstructorArgumentValueShouldExist.cs",
                 new ConstructorArgumentValueShouldExist(),
                 additionalReferences: FrameworkMetadataReference.SystemXaml);
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ConstructorArgumentValueShouldExist_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\ConstructorArgumentValueShouldExist.vb",
+                new SonarAnalyzer.Rules.VisualBasic.ConstructorArgumentValueShouldExist(),
+                additionalReferences: FrameworkMetadataReference.SystemXaml);
+        }
     }
 }
+

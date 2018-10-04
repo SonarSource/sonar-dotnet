@@ -1,0 +1,44 @@
+<p>When creating a custom Markup Extension that accepts parameters in WPF, the <code>ConstructorArgument</code> markup must be used to identify the
+discrete properties that match these parameters. However since this is done via a string, the compiler will not notice if there are typos.</p>
+<p>This rule raises an issue when the string argument to <code>ConstructorArgumentAttribute</code> doesn't match any parameter of any constructor.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Imports System
+
+Namespace myLibrary
+    Public Class MyExtension
+        Inherits MarkupExtension
+
+        Public Sub New()
+        End Sub
+
+        Public Sub New(ByVal value1 As Object)
+            Value1 = value1
+        End Sub
+
+        &lt;ConstructorArgument("value2")&gt; ' Noncompliant
+        Public Property Value1 As Object
+    End Class
+End Namespace
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Imports System
+
+Namespace MyLibrary
+    Public Class MyExtension
+        Inherits MarkupExtension
+
+        Public Sub New()
+        End Sub
+
+        Public Sub New(ByVal value1 As Object)
+            Value1 = value1
+        End Sub
+
+        &lt;ConstructorArgument("value1")&gt;
+        Public Property Value1 As Object
+    End Class
+End Namespace
+</pre>
+

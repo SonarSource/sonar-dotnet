@@ -1,33 +1,43 @@
-using System;
+﻿using System;
 using System.Windows.Markup;
 
 namespace Tests.Diagnostics
 {
-    public class MyExtension : MarkupExtension
+    public class MyExtension1 : MarkupExtension
     {
-        public MyExtension() { }
-
-        public MyExtension(object value1, object value2)
-        {
-            Value1 = value1;
-            Value2 = value2;
-        }
+        public MyExtension1(object value1) { Value1 = value1; }
 
         [ConstructorArgument("value1")]
         public object Value1 { get; set; }
+    }
+    public class MyExtension2 : MarkupExtension
+    {
+        public MyExtension2(object value1) { Value1 = value1; }
 
-        [System.Windows.Markup.ConstructorArgument("value2")]
-        public object Value2 { get; set; }
+        [System.Windows.Markup.ConstructorArgument("value1")]
+        public object Value1 { get; set; }
+    }
+    public class MyExtension3 : MarkupExtension
+    {
+        public MyExtension3(object value1) { Value1 = value1; }
 
-        [ConstructorArgument("value3")]  // Noncompliant {{Change this 'ConstructorArgumentAttribute' value to match one of the existing constructors arguments.}}
+        [ConstructorArgument("value2")]  // Noncompliant {{Change this 'ConstructorArgumentAttribute' value to match one of the existing constructors arguments.}}
 //                           ^^^^^^^^
-        public object Value3 { get; set; }
+        public object Value1 { get; set; }
+    }
+    public class MyExtension4 : MarkupExtension
+    {
+        public MyExtension4(object value1) { Value1 = value1; }
 
         [ConstructorArgument] // Invalid syntax - argument is mandatory - do not raise
-        public object Value4 { get; set; }
+        public object Value1 { get; set; }
+    }
+    public class MyExtension5 : MarkupExtension
+    {
+        public MyExtension5(object value1) { Value1 = value1; }
 
         [ConstructorArgument("foo")]
         [ConstructorArgument("bar")] // Invalid syntax - only 1 attribute allowed - do not raise
-        public object Value4 { get; set; }
+        public object Value1 { get; set; }
     }
 }
