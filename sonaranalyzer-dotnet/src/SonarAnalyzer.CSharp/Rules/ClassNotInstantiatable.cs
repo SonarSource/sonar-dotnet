@@ -18,11 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
@@ -32,11 +30,8 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class ClassNotInstantiatable : SonarDiagnosticAnalyzer
+    public sealed class ClassNotInstantiatable : ClassNotInstantiatableBase
     {
-        internal const string DiagnosticId = "S3453";
-        private const string MessageFormat = "This class can't be instantiated; make {0} 'public'.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -66,7 +61,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var typeDeclarations = new RemovableDeclarationCollector(namedType, context.Compilation).TypeDeclarations;
 
-            if (!IsAnyConstructorCalled(namedType, typeDeclarations))
+            if (!IsAnyConstructorCalled<BaseTypeDeclarationSyntax, ObjectCreationExpressionSyntax, ClassDeclarationSyntax>
+                (namedType, typeDeclarations))
             {
                 var message = constructors.Count > 1
                     ? "at least one of its constructors"
@@ -74,75 +70,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 foreach (var classDeclaration in typeDeclarations)
                 {
-                    context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, classDeclaration.SyntaxNode.Identifier.GetLocation(),
-                        message));
+                    context.ReportDiagnosticIfNonGenerated(
+                        Diagnostic.Create(rule, classDeclaration.SyntaxNode.Identifier.GetLocation(), message));
                 }
             }
-        }
-
-        private static bool HasOnlyCandidateConstructors(ICollection<IMethodSymbol> constructors)
-        {
-            return constructors.Any() &&
-                !HasNonPrivateConstructor(constructors) &&
-                constructors.All(c => !c.GetAttributes().Any());
-        }
-
-        private static bool IsNonStaticClassWithNoAttributes(INamedTypeSymbol namedType)
-        {
-            return namedType.IsClass() &&
-                !namedType.IsStatic &&
-                !namedType.GetAttributes().Any();
-        }
-
-        private static bool IsAnyConstructorCalled(INamedTypeSymbol namedType,
-            IEnumerable<SyntaxNodeSemanticModelTuple<BaseTypeDeclarationSyntax>> typeDeclarations)
-        {
-            return typeDeclarations
-                .Select(classDeclaration => new
-                {
-                    classDeclaration.SemanticModel,
-                    DescendantNodes = classDeclaration.SyntaxNode.DescendantNodes().ToList()
-                })
-                .Any(descendants =>
-                    IsAnyConstructorToCurrentType(descendants.DescendantNodes, namedType, descendants.SemanticModel) ||
-                    IsAnyNestedTypeExtendingCurrentType(descendants.DescendantNodes, namedType, descendants.SemanticModel));
-        }
-
-        private static bool HasNonPrivateConstructor(IEnumerable<IMethodSymbol> constructors)
-        {
-            return constructors.Any(method => method.DeclaredAccessibility != Accessibility.Private);
-        }
-
-        private static bool IsAnyNestedTypeExtendingCurrentType(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType,
-            SemanticModel semanticModel)
-        {
-            return descendantNodes
-                .OfType<ClassDeclarationSyntax>()
-                .Select(c => semanticModel.GetDeclaredSymbol(c)?.BaseType)
-                .Any(baseType => baseType != null && baseType.OriginalDefinition.DerivesFrom(namedType));
-        }
-
-        private static bool IsAnyConstructorToCurrentType(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType,
-            SemanticModel semanticModel)
-        {
-            return descendantNodes
-                .OfType<ObjectCreationExpressionSyntax>()
-                .Select(ctor => semanticModel.GetSymbolInfo(ctor).Symbol as IMethodSymbol)
-                .WhereNotNull()
-                .Any(ctor => Equals(ctor.ContainingType?.OriginalDefinition, namedType));
-        }
-
-        private static IEnumerable<IMethodSymbol> GetConstructors(IEnumerable<ISymbol> members)
-        {
-            return members
-                .OfType<IMethodSymbol>()
-                .Where(method => method.MethodKind == MethodKind.Constructor);
-        }
-
-        private static bool HasOnlyStaticMembers(ICollection<ISymbol> members)
-        {
-            return members.Any() &&
-                members.All(member => member.IsStatic);
         }
     }
 }

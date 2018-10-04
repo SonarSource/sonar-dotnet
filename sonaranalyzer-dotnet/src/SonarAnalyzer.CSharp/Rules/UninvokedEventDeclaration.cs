@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var invokedEventSymbols = delegateInvocations
                 .Select(tuple =>
-                    new SyntaxNodeSemanticModelTuple<ExpressionSyntax>
+                    new SyntaxNodeAndSemanticModel<ExpressionSyntax>
                     {
                         SyntaxNode = GetEventExpressionFromInvocation(tuple.SyntaxNode, tuple.Symbol),
                         SemanticModel = tuple.SemanticModel
@@ -143,7 +143,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         node.IsKind(SyntaxKind.Argument))
                     .Cast<ArgumentSyntax>()
                     .Select(node =>
-                        new SyntaxNodeSemanticModelTuple<SyntaxNode>
+                        new SyntaxNodeAndSemanticModel<SyntaxNode>
                         {
                             SyntaxNode = node.Expression,
                             SemanticModel = container.SemanticModel
@@ -153,7 +153,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .SelectMany(container => container.SyntaxNode.DescendantNodes()
                     .OfType<EqualsValueClauseSyntax>()
                     .Select(node =>
-                        new SyntaxNodeSemanticModelTuple<SyntaxNode>
+                        new SyntaxNodeAndSemanticModel<SyntaxNode>
                         {
                             SyntaxNode = node.Value,
                             SemanticModel = container.SemanticModel
@@ -165,7 +165,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         node.IsKind(SyntaxKind.SimpleAssignmentExpression))
                     .Cast<AssignmentExpressionSyntax>()
                     .Select(node =>
-                        new SyntaxNodeSemanticModelTuple<SyntaxNode>
+                        new SyntaxNodeAndSemanticModel<SyntaxNode>
                         {
                             SyntaxNode = node.Right,
                             SemanticModel = container.SemanticModel

@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var typesDeclarationsAndSemanticModels =
                         namedType.DeclaringSyntaxReferences
-                        .Select(r => new SyntaxNodeSemanticModelTuple<SyntaxNode>
+                        .Select(r => new SyntaxNodeAndSemanticModel<SyntaxNode>
                         {
                             SyntaxNode = r.GetSyntax(),
                             SemanticModel = c.Compilation.GetSemanticModel(r.SyntaxTree)

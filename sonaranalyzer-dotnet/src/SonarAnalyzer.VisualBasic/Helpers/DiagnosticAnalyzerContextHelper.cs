@@ -92,6 +92,13 @@ namespace SonarAnalyzer.Helpers
             context.ReportDiagnosticIfNonGenerated(VisualBasic.GeneratedCodeRecognizer.Instance, diagnostic, compilation);
         }
 
+        public static void ReportDiagnosticIfNonGenerated(
+            this SymbolAnalysisContext context,
+            Diagnostic diagnostic)
+        {
+            context.ReportDiagnosticIfNonGenerated(VisualBasic.GeneratedCodeRecognizer.Instance, diagnostic,
+                context.Compilation);
+        }
         #endregion ReportDiagnosticIfNonGenerated
     }
 }

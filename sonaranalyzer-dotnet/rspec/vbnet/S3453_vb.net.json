@@ -1,0 +1,16 @@
+{
+  "title": "Classes should not have only \"private\" constructors",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "design"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-3453",
+  "sqKey": "S3453",
+  "scope": "All"
+}
