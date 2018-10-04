@@ -66,6 +66,6 @@ namespace SonarAnalyzer.Rules
         }
 
         protected abstract IEnumerable<string> GetAllParentClassConstructorArgumentNames(SyntaxNode propertyDeclaration);
-        internal abstract void ReportIssue(SyntaxNodeAnalysisContext c, AttributeData constructorArgumentAttribute);
+        protected abstract void ReportIssue(SyntaxNodeAnalysisContext c, AttributeData constructorArgumentAttribute);
     }
 }

@@ -50,6 +50,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 },
                 SyntaxKind.PropertyStatement);
         }
+
         protected override IEnumerable<string> GetAllParentClassConstructorArgumentNames(SyntaxNode propertyDeclaration)
         {
             return propertyDeclaration
@@ -59,7 +60,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 .SelectMany(x => x.BlockStatement.ParameterList.Parameters)
                 .Select(x => x.Identifier.Identifier.ValueText);
         }
-        internal override void ReportIssue(SyntaxNodeAnalysisContext c, AttributeData constructorArgumentAttribute)
+
+        protected override void ReportIssue(SyntaxNodeAnalysisContext c, AttributeData constructorArgumentAttribute)
         {
             var attributeSyntax =
                 (AttributeSyntax)constructorArgumentAttribute.ApplicationSyntaxReference.GetSyntax();
