@@ -40,16 +40,14 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsNodeStructOrClassDeclaration(SyntaxNode node) =>
             node.IsKind(SyntaxKind.ClassStatement) || node.IsKind(SyntaxKind.StructureStatement);
+
         public static bool IsNodeContainerTypeDeclaration(SyntaxNode node) =>
             IsNodeStructOrClassDeclaration(node) || node.IsKind(SyntaxKind.InterfaceStatement);
 
         protected override IEnumerable<SyntaxNode> SelectMatchingDeclarations(
-            SyntaxNodeAndSemanticModel<TypeBlockSyntax> container,
-            ISet<SyntaxKind> kinds)
-        {
-            return container.SyntaxNode.DescendantNodes(IsNodeContainerTypeDeclaration)
+            SyntaxNodeAndSemanticModel<TypeBlockSyntax> container, ISet<SyntaxKind> kinds) =>
+            container.SyntaxNode.DescendantNodes(IsNodeContainerTypeDeclaration)
                 .Where(node => kinds.Contains(node.Kind()));
-        }
 
         public override IEnumerable<SyntaxNodeSymbolSemanticModelTuple> GetRemovableFieldLikeDeclarations(
     ISet<SyntaxKind> kinds, Accessibility maxAcessibility)

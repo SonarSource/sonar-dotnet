@@ -55,8 +55,8 @@ namespace SonarAnalyzer.Rules
                     IsAnyNestedTypeExtendingCurrentType<TClassDeclarationSyntax>(descendants.DescendantNodes, namedType, descendants.SemanticModel));
         }
 
-        protected static bool IsAnyNestedTypeExtendingCurrentType<TClassDeclarationSyntax>(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType,
-            SemanticModel semanticModel)
+        protected static bool IsAnyNestedTypeExtendingCurrentType<TClassDeclarationSyntax>(
+            IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel)
             where TClassDeclarationSyntax : SyntaxNode
         {
             return descendantNodes
@@ -65,42 +65,32 @@ namespace SonarAnalyzer.Rules
                 .Any(baseType => baseType != null && baseType.OriginalDefinition.DerivesFrom(namedType));
         }
 
-        protected static bool IsAnyConstructorToCurrentType<TObjectCreationSyntax>(IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType,
-            SemanticModel semanticModel)
-            where TObjectCreationSyntax : SyntaxNode
-        {
-            return descendantNodes
+        protected static bool IsAnyConstructorToCurrentType<TObjectCreationSyntax>(
+            IEnumerable<SyntaxNode> descendantNodes, INamedTypeSymbol namedType, SemanticModel semanticModel)
+            where TObjectCreationSyntax : SyntaxNode =>
+            descendantNodes
                 .OfType<TObjectCreationSyntax>()
                 .Select(ctor => semanticModel.GetSymbolInfo(ctor).Symbol as IMethodSymbol)
                 .WhereNotNull()
                 .Any(ctor => Equals(ctor.ContainingType?.OriginalDefinition, namedType));
-        }
 
-        protected static IEnumerable<IMethodSymbol> GetConstructors(IEnumerable<ISymbol> members)
-        {
-            return members
+        protected static IEnumerable<IMethodSymbol> GetConstructors(IEnumerable<ISymbol> members) =>
+            members
                 .OfType<IMethodSymbol>()
                 .Where(method => method.MethodKind == MethodKind.Constructor);
-        }
 
-        protected static bool HasOnlyStaticMembers(ICollection<ISymbol> members)
-        {
-            return members.Any() &&
-                members.All(member => member.IsStatic);
-        }
+        protected static bool HasOnlyStaticMembers(ICollection<ISymbol> members) =>
+            members.Any()
+            && members.All(member => member.IsStatic);
 
-        protected static bool IsNonStaticClassWithNoAttributes(INamedTypeSymbol namedType)
-        {
-            return namedType.IsClass() &&
-                !namedType.IsStatic &&
-                !namedType.GetAttributes().Any();
-        }
+        protected static bool IsNonStaticClassWithNoAttributes(INamedTypeSymbol namedType) =>
+            namedType.IsClass()
+            && !namedType.IsStatic
+            && !namedType.GetAttributes().Any();
 
-        protected static bool HasOnlyCandidateConstructors(ICollection<IMethodSymbol> constructors)
-        {
-            return constructors.Any() &&
-                !HasNonPrivateConstructor(constructors) &&
-                constructors.All(c => !c.GetAttributes().Any());
-        }
+        protected static bool HasOnlyCandidateConstructors(ICollection<IMethodSymbol> constructors) =>
+            constructors.Any()
+            && !HasNonPrivateConstructor(constructors)
+            && constructors.All(c => !c.GetAttributes().Any());
     }
 }

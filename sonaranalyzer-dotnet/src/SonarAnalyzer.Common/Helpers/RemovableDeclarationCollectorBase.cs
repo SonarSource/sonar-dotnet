@@ -79,16 +79,10 @@ namespace SonarAnalyzer.Helpers
         public abstract IEnumerable<SyntaxNodeSymbolSemanticModelTuple> GetRemovableFieldLikeDeclarations(
             ISet<TSyntaxKind> kinds, Accessibility maxAcessibility);
 
-        private static readonly ISet<MethodKind> RemovableMethodKinds = new HashSet<MethodKind>
-        {
-            MethodKind.Ordinary,
-            MethodKind.Constructor
-        };
-
         public static bool IsRemovable(IMethodSymbol methodSymbol, Accessibility maxAccessibility)
         {
             return IsRemovable((ISymbol)methodSymbol, maxAccessibility) &&
-                RemovableMethodKinds.Contains(methodSymbol.MethodKind) &&
+                (methodSymbol.MethodKind == MethodKind.Ordinary || methodSymbol.MethodKind == MethodKind.Constructor) &&
                 !methodSymbol.IsMainMethod() &&
                 !methodSymbol.IsEventHandler() &&
                 !methodSymbol.IsSerializationConstructor();
