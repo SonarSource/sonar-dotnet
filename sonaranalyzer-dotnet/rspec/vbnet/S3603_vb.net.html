@@ -1,0 +1,26 @@
+<p>Marking a method with the <code>Pure</code> attribute specifies that the method doesn't make any visible changes; thus, the method should return a
+result, otherwise the call to the method should be equal to no-operation. So <code>Pure</code> on a <code>void</code> method is either a mistake, or
+the method doesn't do any meaningful task.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Class Person
+    Private age As Integer
+
+    &lt;Pure&gt; ' Noncompliant. In this case the method makes a possibly visible state change
+    Private Sub ConfigureAge(ByVal age As Integer)
+        ...
+        Me.age = age
+    End Sub
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Class Person
+    Private age As Integer
+
+    Private Sub ConfigureAge(ByVal age As Integer)
+        Me.age = age
+    End Sub
+End Class
+</pre>
+

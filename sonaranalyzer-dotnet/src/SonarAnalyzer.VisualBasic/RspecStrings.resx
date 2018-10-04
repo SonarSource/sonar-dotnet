@@ -2547,6 +2547,36 @@
   <data name="S3464_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S3603_Category" xml:space="preserve">
+    <value>Major Bug</value>
+  </data>
+  <data name="S3603_Description" xml:space="preserve">
+    <value>Marking a method with the Pure attribute specifies that the method doesn't make any visible changes; thus, the method should return a result, otherwise the call to the method should be equal to no-operation. So Pure on a void method is either a mistake, or the method doesn't do any meaningful task.</value>
+  </data>
+  <data name="S3603_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3603_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3603_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S3603_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S3603_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3603_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S3603_Title" xml:space="preserve">
+    <value>Methods with "Pure" attribute should return a value </value>
+  </data>
+  <data name="S3603_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3693_Category" xml:space="preserve">
     <value>Blocker Bug</value>
   </data>
