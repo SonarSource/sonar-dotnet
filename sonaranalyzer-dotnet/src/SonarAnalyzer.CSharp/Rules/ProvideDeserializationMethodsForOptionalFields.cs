@@ -31,20 +31,25 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [Rule(DiagnosticId)]
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ProvideDeserializationMethodsForOptionalFields :
-        ProvideDeserializationMethodsForOptionalFieldsBase<ClassDeclarationSyntax, SyntaxKind>
+    public sealed class ProvideDeserializationMethodsForOptionalFields : ProvideDeserializationMethodsForOptionalFieldsBase
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+        protected override Location GetNamedTypeIdentifierLocation(SyntaxNode node)
+        {
+            switch (node.Kind())
+            {
+                case SyntaxKind.ClassDeclaration:
+                    return ((ClassDeclarationSyntax)node).Identifier.GetLocation();
 
-        protected override SyntaxKind ClassDeclarationSyntaxKind =>
-            SyntaxKind.ClassDeclaration;
+                case SyntaxKind.StructDeclaration:
+                    return ((StructDeclarationSyntax)node).Identifier.GetLocation();
 
-        protected override Location GetClassDeclarationIdentifierLocation(ClassDeclarationSyntax classDeclaration) =>
-            classDeclaration.Identifier.GetLocation();
+                default:
+                    return null;
+            }
+        }
     }
 }

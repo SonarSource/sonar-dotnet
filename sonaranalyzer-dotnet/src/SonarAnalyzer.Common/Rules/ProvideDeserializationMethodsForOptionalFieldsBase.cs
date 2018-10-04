@@ -41,44 +41,39 @@ namespace SonarAnalyzer.Rules.Common
                 KnownType.System_Runtime_Serialization_OnDeserializedAttribute
             };
 
-    }
-
-    public abstract class ProvideDeserializationMethodsForOptionalFieldsBase<TClassDeclarationSyntax, TClassDeclarationSyntaxKind> :
-        ProvideDeserializationMethodsForOptionalFieldsBase
-        where TClassDeclarationSyntax : SyntaxNode
-        where TClassDeclarationSyntaxKind : struct
-    {
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                GeneratedCodeRecognizer,
+            context.RegisterSymbolAction(
                 c =>
                 {
-                    var classDeclaration = (TClassDeclarationSyntax)c.Node;
-                    if (!(c.SemanticModel.GetDeclaredSymbol(classDeclaration) is INamedTypeSymbol classSymbol))
+                    var namedTypeSymbol = (INamedTypeSymbol)c.Symbol;
+                    if (namedTypeSymbol.TypeKind != TypeKind.Class &&
+                        namedTypeSymbol.TypeKind != TypeKind.Struct)
                     {
                         return;
                     }
 
-                    var watchedAttributes = classSymbol.GetMembers()
+                    var watchedAttributes = namedTypeSymbol.GetMembers()
                         .SelectMany(m => m.GetAttributes(AttributesToFind))
                         .ToList();
 
                     var errorMessage = GetErrorMessage(watchedAttributes);
-                    if (errorMessage == null)
+                    var declaringSyntax = namedTypeSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
+
+                    if (errorMessage == null ||
+                        declaringSyntax == null)
                     {
                         return;
                     }
 
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0],
-                        GetClassDeclarationIdentifierLocation(classDeclaration), errorMessage));
+                        GetNamedTypeIdentifierLocation(declaringSyntax),
+                        errorMessage));
                 },
-                ClassDeclarationSyntaxKind);
+                SymbolKind.NamedType);
         }
 
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-        protected abstract TClassDeclarationSyntaxKind ClassDeclarationSyntaxKind { get; }
-        protected abstract Location GetClassDeclarationIdentifierLocation(TClassDeclarationSyntax classDeclaration);
+        protected abstract Location GetNamedTypeIdentifierLocation(SyntaxNode node);
 
         private string GetErrorMessage(IEnumerable<AttributeData> attributes)
         {
