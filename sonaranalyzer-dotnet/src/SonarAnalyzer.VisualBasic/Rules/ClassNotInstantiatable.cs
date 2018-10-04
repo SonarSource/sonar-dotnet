@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             var typeDeclarations = new RemovableDeclarationCollector(namedType, context.Compilation).TypeDeclarations;
 
-            if (!IsAnyConstructorCalled<TypeStatementSyntax, ObjectCreationExpressionSyntax, ClassStatementSyntax>
+            if (!IsAnyConstructorCalled<TypeBlockSyntax, ObjectCreationExpressionSyntax, ClassBlockSyntax>
                 (namedType, typeDeclarations))
             {
                 var message = constructors.Count > 1
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                 foreach (var classDeclaration in typeDeclarations)
                 {
-                    context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, classDeclaration.SyntaxNode.Identifier.GetLocation(),
+                    context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, classDeclaration.SyntaxNode.BlockStatement.Identifier.GetLocation(),
                         message));
                 }
             }

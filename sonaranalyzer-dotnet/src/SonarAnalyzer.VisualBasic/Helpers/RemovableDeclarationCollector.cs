@@ -30,7 +30,8 @@ namespace SonarAnalyzer.Helpers
     using SyntaxNodeSymbolSemanticModelTuple = SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol>;
     using TypeWithSemanticModel = SyntaxNodeAndSemanticModel<DeclarationStatementSyntax>;
 
-    internal class RemovableDeclarationCollector : RemovableDeclarationCollectorBase<TypeStatementSyntax, SyntaxKind>
+    internal class RemovableDeclarationCollector :
+        RemovableDeclarationCollectorBase<TypeBlockSyntax, TypeStatementSyntax, SyntaxKind>
     {
         public RemovableDeclarationCollector(INamedTypeSymbol namedType, Compilation compilation)
             : base(namedType, compilation)
@@ -43,7 +44,7 @@ namespace SonarAnalyzer.Helpers
             IsNodeStructOrClassDeclaration(node) || node.IsKind(SyntaxKind.InterfaceStatement);
 
         protected override IEnumerable<SyntaxNode> SelectMatchingDeclarations(
-            SyntaxNodeAndSemanticModel<TypeStatementSyntax> container,
+            SyntaxNodeAndSemanticModel<TypeBlockSyntax> container,
             ISet<SyntaxKind> kinds)
         {
             return container.SyntaxNode.DescendantNodes(IsNodeContainerTypeDeclaration)
@@ -67,5 +68,8 @@ namespace SonarAnalyzer.Helpers
                     .Select(variable => SelectNodeTuple(variable, fieldLikeNode.SemanticModel))
                     .Where(tuple => IsRemovable(tuple.Symbol, maxAcessibility)));
         }
+
+        internal override TypeBlockSyntax GetOwnerOfSubnodes(TypeStatementSyntax node) =>
+            node.Parent as TypeBlockSyntax;
     }
 }

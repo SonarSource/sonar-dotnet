@@ -28,7 +28,8 @@ namespace SonarAnalyzer.Helpers
 {
     using SyntaxNodeSymbolSemanticModelTuple = SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol>;
 
-    internal class RemovableDeclarationCollector : RemovableDeclarationCollectorBase<BaseTypeDeclarationSyntax, SyntaxKind>
+    internal class RemovableDeclarationCollector :
+        RemovableDeclarationCollectorBase<BaseTypeDeclarationSyntax, BaseTypeDeclarationSyntax, SyntaxKind>
     {
         public RemovableDeclarationCollector(INamedTypeSymbol namedType, Compilation compilation)
             : base(namedType, compilation)
@@ -65,5 +66,8 @@ namespace SonarAnalyzer.Helpers
                     .Select(variable => SelectNodeTuple(variable, fieldLikeNode.SemanticModel))
                     .Where(tuple => IsRemovable(tuple.Symbol, maxAcessibility)));
         }
+
+        internal override BaseTypeDeclarationSyntax GetOwnerOfSubnodes(BaseTypeDeclarationSyntax node) =>
+            node;
     }
 }

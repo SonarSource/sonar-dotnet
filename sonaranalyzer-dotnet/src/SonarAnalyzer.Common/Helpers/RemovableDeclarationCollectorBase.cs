@@ -27,13 +27,16 @@ namespace SonarAnalyzer.Helpers
 {
     using SyntaxNodeSymbolSemanticModelTuple = SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol>;
 
-    public abstract class RemovableDeclarationCollectorBase<TBaseDeclarationSyntax, TSyntaxKind>
-        where TBaseDeclarationSyntax : SyntaxNode
+    // For C#, TOwnerOfSubnodes == TDeclaration == BaseTypeDeclarationSyntax
+    // For VB, TOwnerOfSubnodes == TypeBlockSyntax, TDeclaration = TypeStatementSyntax
+    public abstract class RemovableDeclarationCollectorBase<TOwnerOfSubnodes, TDeclaration, TSyntaxKind>
+        where TOwnerOfSubnodes : SyntaxNode
+        where TDeclaration : SyntaxNode
     {
         private readonly Compilation compilation;
         private readonly INamedTypeSymbol namedType;
 
-        private IEnumerable<SyntaxNodeAndSemanticModel<TBaseDeclarationSyntax>> typeDeclarations;
+        private IEnumerable<SyntaxNodeAndSemanticModel<TOwnerOfSubnodes>> typeDeclarations;
 
         protected RemovableDeclarationCollectorBase(INamedTypeSymbol namedType, Compilation compilation)
         {
@@ -41,7 +44,7 @@ namespace SonarAnalyzer.Helpers
             this.compilation = compilation;
         }
 
-        public IEnumerable<SyntaxNodeAndSemanticModel<TBaseDeclarationSyntax>> TypeDeclarations
+        public IEnumerable<SyntaxNodeAndSemanticModel<TOwnerOfSubnodes>> TypeDeclarations
         {
             get
             {
@@ -49,11 +52,11 @@ namespace SonarAnalyzer.Helpers
                 {
                     this.typeDeclarations = this.namedType.DeclaringSyntaxReferences
                         .Select(reference => reference.GetSyntax())
-                        .OfType<TBaseDeclarationSyntax>()
+                        .OfType<TDeclaration>()
                         .Select(node =>
-                            new SyntaxNodeAndSemanticModel<TBaseDeclarationSyntax>
+                            new SyntaxNodeAndSemanticModel<TOwnerOfSubnodes>
                             {
-                                SyntaxNode = node,
+                                SyntaxNode = GetOwnerOfSubnodes(node),
                                 SemanticModel = this.compilation.GetSemanticModel(node.SyntaxTree)
                             })
                         .Where(n => n.SemanticModel != null);
@@ -61,6 +64,8 @@ namespace SonarAnalyzer.Helpers
                 return this.typeDeclarations;
             }
         }
+
+        internal abstract TOwnerOfSubnodes GetOwnerOfSubnodes(TDeclaration node);
 
         public IEnumerable<SyntaxNodeSymbolSemanticModelTuple> GetRemovableDeclarations(
             ISet<TSyntaxKind> kinds, Accessibility maxAcessibility)
@@ -113,7 +118,7 @@ namespace SonarAnalyzer.Helpers
         }
 
         protected abstract IEnumerable<SyntaxNode> SelectMatchingDeclarations(
-            SyntaxNodeAndSemanticModel<TBaseDeclarationSyntax> container,
+            SyntaxNodeAndSemanticModel<TOwnerOfSubnodes> container,
             ISet<TSyntaxKind> kinds);
     }
 }
