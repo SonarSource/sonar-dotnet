@@ -2787,6 +2787,36 @@
   <data name="S3889_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S3903_Category" xml:space="preserve">
+    <value>Major Bug</value>
+  </data>
+  <data name="S3903_Description" xml:space="preserve">
+    <value>Types are declared in namespaces in order to prevent name collisions and as a way to organize them into the object hierarchy. Types that are defined outside any named namespace are in a global namespace that cannot be referenced in code.</value>
+  </data>
+  <data name="S3903_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3903_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3903_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S3903_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S3903_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3903_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S3903_Title" xml:space="preserve">
+    <value>Types should be defined in named namespaces</value>
+  </data>
+  <data name="S3903_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3923_Category" xml:space="preserve">
     <value>Major Bug</value>
   </data>

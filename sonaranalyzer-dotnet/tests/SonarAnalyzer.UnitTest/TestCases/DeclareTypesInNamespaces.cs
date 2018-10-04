@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 public class Foo // Noncompliant {{Move the type 'Foo' into a named namespace.}}
@@ -12,7 +12,6 @@ public struct Bar // Noncompliant {{Move the type 'Bar' into a named namespace.}
 {
     struct InnerBar // Compliant - we want to report only on the outer struct
     {
-
     }
 }
 

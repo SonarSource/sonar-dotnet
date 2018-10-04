@@ -1,0 +1,16 @@
+{
+  "title": "Types should be defined in named namespaces",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-3903",
+  "sqKey": "S3903",
+  "scope": "All"
+}

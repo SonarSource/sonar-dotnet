@@ -19,8 +19,10 @@
  */
 
 extern alias csharp;
+extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
+using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,10 +31,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DeclareTypesInNamespaces()
+        public void DeclareTypesInNamespaces_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DeclareTypesInNamespaces.cs",
-                new DeclareTypesInNamespaces());
+                new CSharp.DeclareTypesInNamespaces());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DeclareTypesInNamespaces_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\DeclareTypesInNamespaces.vb",
+                new VisualBasic.DeclareTypesInNamespaces());
         }
     }
 }
+

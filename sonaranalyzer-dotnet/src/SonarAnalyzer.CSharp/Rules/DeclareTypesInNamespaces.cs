@@ -30,32 +30,25 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DeclareTypesInNamespaces : SonarDiagnosticAnalyzer
+    public sealed class DeclareTypesInNamespaces : DeclareTypesInNamespacesBase
     {
-        internal const string DiagnosticId = "S3903";
-        private const string MessageFormat = "Move the type '{0}' into a named namespace.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
+            ImmutableArray.Create(rule);
+
+        protected override SyntaxToken GetTypeIdentifier(SyntaxNode declaration) =>
+            ((TypeDeclarationSyntax)declaration).Identifier;
+
+        protected override bool IsOuterTypeWithoutNamespace(SyntaxNode declaration, SemanticModel semanticModel) =>
+            !(declaration.Parent is TypeDeclarationSyntax ||
+            declaration.Parent is NamespaceDeclarationSyntax);
+
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var declaration = (TypeDeclarationSyntax)c.Node;
-                    if (declaration.Parent is TypeDeclarationSyntax ||
-                        declaration.Parent is NamespaceDeclarationSyntax)
-                    {
-                        return;
-                    }
-
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, declaration.Identifier.GetLocation(),
-                        declaration.Identifier.ValueText));
-                },
+                GetAnalysisAction(rule),
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration);
-        }
     }
 }
