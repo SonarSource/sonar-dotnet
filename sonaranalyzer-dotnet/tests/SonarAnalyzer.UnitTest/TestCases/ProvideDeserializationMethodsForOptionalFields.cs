@@ -1,9 +1,10 @@
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace Tests.Diagnostics
 {
     public class NoEventHandlerMethods // Noncompliant {{Add deserialization event handlers.}}
+//               ^^^^^^^^^^^^^^^^^^^^^
     {
         [OptionalField]
         int optionalField = 5;

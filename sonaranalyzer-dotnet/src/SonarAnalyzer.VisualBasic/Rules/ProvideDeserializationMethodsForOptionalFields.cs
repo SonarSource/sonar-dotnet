@@ -20,17 +20,17 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.Common;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
     [Rule(DiagnosticId)]
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class ProvideDeserializationMethodsForOptionalFields : ProvideDeserializationMethodsForOptionalFieldsBase
     {
         private static readonly DiagnosticDescriptor rule =
@@ -41,11 +41,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             switch (node.Kind())
             {
-                case SyntaxKind.ClassDeclaration:
-                    return ((ClassDeclarationSyntax)node).Identifier.GetLocation();
+                case SyntaxKind.ClassStatement:
+                    return ((ClassStatementSyntax)node).Identifier.GetLocation();
 
-                case SyntaxKind.StructDeclaration:
-                    return ((StructDeclarationSyntax)node).Identifier.GetLocation();
+                case SyntaxKind.StructureStatement:
+                    return ((StructureStatementSyntax)node).Identifier.GetLocation();
 
                 default:
                     return null;

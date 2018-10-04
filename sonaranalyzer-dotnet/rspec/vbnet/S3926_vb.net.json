@@ -1,0 +1,16 @@
+{
+  "title": "Deserialization methods should be provided for \"OptionalField\" members",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "serialization"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-3926",
+  "sqKey": "S3926",
+  "scope": "All"
+}

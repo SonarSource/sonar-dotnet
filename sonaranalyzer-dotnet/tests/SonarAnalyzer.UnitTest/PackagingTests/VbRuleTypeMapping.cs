@@ -3923,7 +3923,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             ["3923"] = "BUG",
             //["3924"],
             //["3925"],
-            //["3926"],
+            ["3926"] = "BUG",
             //["3927"],
             //["3928"],
             //["3929"],
