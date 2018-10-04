@@ -1,0 +1,49 @@
+<p>Generally, writing the least code that will <em>readably</em> do the job is a good thing, so omitting default parameter values seems to make sense.
+Unfortunately, when you omit them from the <code>base</code> call in an override, you're not actually getting the job done thoroughly, because you're
+ignoring the value the caller passed in. The result will likely not be what the caller expected.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Public Class BaseClass
+    Public Overridable Sub MyMethod(ByVal Optional i As Integer = 1)
+        Console.WriteLine(i)
+    End Sub
+End Class
+
+Public Class DerivedClass
+    Inherits BaseClass
+
+    Public Overrides Sub MyMethod(ByVal Optional i As Integer = 1)
+        ' ...
+        MyBase.MyMethod() ' Noncompliant; caller's value is ignored
+    End Sub
+
+    Private Shared Function Main(ByVal args As String()) As Integer
+        Dim dc As DerivedClass = New DerivedClass()
+        dc.MyMethod(12) ' prints 1
+    End Function
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Public Class BaseClass
+    Public Overridable Sub MyMethod(ByVal Optional i As Integer = 1)
+        Console.WriteLine(i)
+    End Sub
+End Class
+
+Public Class DerivedClass
+    Inherits BaseClass
+
+    Public Overrides Sub MyMethod(ByVal Optional i As Integer = 1)
+        ' ...
+        MyBase.MyMethod(i)
+    End Sub
+
+    Private Shared Function Main(ByVal args As String()) As Integer
+        Dim dc As DerivedClass = New DerivedClass()
+        dc.MyMethod(12) ' prints 12
+    End Function
+End Class
+
+</pre>
+

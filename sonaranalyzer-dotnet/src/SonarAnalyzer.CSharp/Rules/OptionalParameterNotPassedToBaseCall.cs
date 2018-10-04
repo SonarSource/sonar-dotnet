@@ -30,15 +30,17 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class OptionalParameterNotPassedToBaseCall : SonarDiagnosticAnalyzer
+    public sealed class OptionalParameterNotPassedToBaseCall : OptionalParameterNotPassedToBaseCallBase<InvocationExpressionSyntax>
     {
-        internal const string DiagnosticId = "S3466";
-        private const string MessageFormat = "Pass the missing user-supplied parameter value{0} to this 'base' call.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+
+        protected override DiagnosticDescriptor Rule => rule;
+
+        protected override int GetArgumentCount(InvocationExpressionSyntax invocation) =>
+            invocation.ArgumentList == null ? 0 : invocation.ArgumentList.Arguments.Count;
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -46,34 +48,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    if (!invocation.IsOnBase() ||
-                        invocation.ArgumentList == null)
+                    if (!invocation.IsOnBase())
                     {
                         return;
                     }
 
-                    if (!(c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol calledMethod) ||
-                        !calledMethod.IsVirtual ||
-                        invocation.ArgumentList.Arguments.Count == calledMethod.Parameters.Length ||
-                        !IsCallInsideOverride(invocation, calledMethod, c.SemanticModel))
-                    {
-                        return;
-                    }
-
-                    var pluralize = calledMethod.Parameters.Length - invocation.ArgumentList.Arguments.Count > 1
-                        ? "s"
-                        : string.Empty;
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation(), pluralize));
+                    ReportOptionalParameterNotPassedToBase(c, invocation);
                 },
                 SyntaxKind.InvocationExpression);
-        }
-
-        private static bool IsCallInsideOverride(InvocationExpressionSyntax invocation, IMethodSymbol calledMethod,
-            SemanticModel semanticModel)
-        {
-            return semanticModel.GetEnclosingSymbol(invocation.SpanStart) is IMethodSymbol enclosingSymbol &&
-                enclosingSymbol.IsOverride &&
-                object.Equals(enclosingSymbol.OverriddenMethod, calledMethod);
         }
     }
 }

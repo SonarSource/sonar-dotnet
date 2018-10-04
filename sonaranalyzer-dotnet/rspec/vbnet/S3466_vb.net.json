@@ -1,0 +1,16 @@
+{
+  "title": "Optional parameters should be passed to \"base\" calls",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-3466",
+  "sqKey": "S3466",
+  "scope": "All"
+}

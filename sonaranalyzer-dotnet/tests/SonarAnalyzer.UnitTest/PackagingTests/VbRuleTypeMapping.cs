@@ -3463,7 +3463,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["3463"],
             ["3464"] = "BUG",
             //["3465"],
-            //["3466"],
+            ["3466"] = "BUG",
             //["3467"],
             //["3468"],
             //["3469"],
