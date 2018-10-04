@@ -30,32 +30,37 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DeclareTypesInNamespaces : SonarDiagnosticAnalyzer
+    public sealed class DeclareTypesInNamespaces : DeclareTypesInNamespacesBase
     {
-        internal const string DiagnosticId = "S3903";
-        private const string MessageFormat = "Move the type '{0}' into a named namespace.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
+            ImmutableArray.Create(rule);
+
+        protected override SyntaxToken GetTypeIdentifier(SyntaxNode declaration) =>
+            ((BaseTypeDeclarationSyntax)declaration).Identifier;
+
+        protected override bool IsInnerTypeOrWithinNamespace(SyntaxNode declaration, SemanticModel semanticModel)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var declaration = (TypeDeclarationSyntax)c.Node;
-                    if (declaration.Parent is TypeDeclarationSyntax ||
-                        declaration.Parent is NamespaceDeclarationSyntax)
-                    {
-                        return;
-                    }
-
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, declaration.Identifier.GetLocation(),
-                        declaration.Identifier.ValueText));
-                },
-                SyntaxKind.ClassDeclaration,
-                SyntaxKind.StructDeclaration);
+            switch (declaration.Parent.Kind())
+            {
+                case SyntaxKind.ClassDeclaration:
+                case SyntaxKind.StructDeclaration:
+                case SyntaxKind.NamespaceDeclaration:
+                case SyntaxKind.InterfaceDeclaration:
+                    return true;
+                default:
+                    return false;
+            }
         }
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                GetAnalysisAction(rule),
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.StructDeclaration,
+                SyntaxKind.EnumDeclaration,
+                SyntaxKind.InterfaceDeclaration);
     }
 }
