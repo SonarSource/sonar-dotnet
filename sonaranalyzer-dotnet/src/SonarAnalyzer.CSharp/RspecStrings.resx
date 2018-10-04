@@ -181,7 +181,7 @@
     <value>Minor Code Smell</value>
   </data>
   <data name="S101_Description" xml:space="preserve">
-    <value>Shared naming conventions allow teams to collaborate efficiently. This rule checks whether or not type names are camel cased. To reduce noise, two consecutive upper case characters are allowed unless they form the whole type name. So, MyXClass is compliant, but XC on its own is not.</value>
+    <value>Shared naming conventions allow teams to collaborate efficiently. This rule checks whether or not type names are using PascalCase. To reduce noise, two consecutive upper case characters are allowed unless they form the whole type name. So, MyXClass is compliant, but XC on its own is not.</value>
   </data>
   <data name="S101_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -202,7 +202,7 @@
     <value>convention</value>
   </data>
   <data name="S101_Title" xml:space="preserve">
-    <value>Types should be named in camel case</value>
+    <value>Types should be named in PascalCase</value>
   </data>
   <data name="S101_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
@@ -7069,7 +7069,7 @@
     <value>Major Bug</value>
   </data>
   <data name="S3603_Description" xml:space="preserve">
-    <value>Marking a method with the [Pure] attribute specifies that the method doesn't make any visible changes; thus, the method should return a result, otherwise the call to the method should be equal to no-operation. So [Pure] on a void method is either a mistake, or the method doesn't do any meaningful task.</value>
+    <value>Marking a method with the Pure attribute specifies that the method doesn't make any visible changes; thus, the method should return a result, otherwise the call to the method should be equal to no-operation. So Pure on a void method is either a mistake, or the method doesn't do any meaningful task.</value>
   </data>
   <data name="S3603_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
