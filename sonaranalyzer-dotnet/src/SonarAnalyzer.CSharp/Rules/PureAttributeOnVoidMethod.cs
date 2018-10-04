@@ -29,7 +29,9 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class PureAttributeOnVoidMethod : PureAttributeOnVoidMethodBase
     {
-        protected override DiagnosticDescriptor Rule { get; } =
+        private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        protected override DiagnosticDescriptor Rule { get; } = rule;
     }
 }
