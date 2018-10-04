@@ -5,17 +5,17 @@ attribute.</p>
 <code>ExportAttribute</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-[PartCreationPolicy(CreationPolicy.Any)] // Noncompliant
-public class FooBar : IFooBar
-{
-}
+&lt;PartCreationPolicy(CreationPolicy.Any)&gt; ' Noncompliant
+Public Class FooBar
+    Inherits IFooBar
+End Class
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-[Export(typeof(IFooBar))]
-[PartCreationPolicy(CreationPolicy.Any)]
-public class FooBar : IFooBar
-{
-}
+&lt;Export(GetType(IFooBar))&gt;
+&lt;PartCreationPolicy(CreationPolicy.Any)&gt;
+Public Class FooBar
+    Inherits IFooBar
+End Class
 </pre>
 

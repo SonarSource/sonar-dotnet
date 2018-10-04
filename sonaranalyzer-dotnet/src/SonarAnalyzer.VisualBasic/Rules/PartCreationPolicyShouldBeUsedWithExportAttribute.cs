@@ -20,26 +20,26 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class PartCreationPolicyShouldBeUsedWithExportAttribute
-        : PartCreationPolicyShouldBeUsedWithExportAttributeBase<AttributeSyntax, ClassDeclarationSyntax>
+        : PartCreationPolicyShouldBeUsedWithExportAttributeBase<AttributeSyntax, ClassStatementSyntax>
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override ClassDeclarationSyntax GetClassDeclaration(AttributeSyntax attribute) =>
-            attribute.FirstAncestorOrSelf<MemberDeclarationSyntax>() as ClassDeclarationSyntax;
+        protected override ClassStatementSyntax GetClassDeclaration(AttributeSyntax attribute) =>
+            attribute.FirstAncestorOrSelf<ClassStatementSyntax>();
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeNode, SyntaxKind.Attribute);

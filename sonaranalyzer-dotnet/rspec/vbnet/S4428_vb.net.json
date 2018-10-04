@@ -1,0 +1,17 @@
+{
+  "title": "\"PartCreationPolicyAttribute\" should be used with \"ExportAttribute\"",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "mef",
+    "pitfall"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-4428",
+  "sqKey": "S4428",
+  "scope": "All"
+}

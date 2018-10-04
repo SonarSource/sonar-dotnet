@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using csharp = SonarAnalyzer.Rules.CSharp;
+using vbnet = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,10 +29,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void PartCreationPolicyShouldBeUsedWithExportAttribute()
+        public void PartCreationPolicyShouldBeUsedWithExportAttribute_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.cs",
-                new PartCreationPolicyShouldBeUsedWithExportAttribute(),
+                new csharp.PartCreationPolicyShouldBeUsedWithExportAttribute(),
+                additionalReferences: FrameworkMetadataReference.SystemComponentModelComposition);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void PartCreationPolicyShouldBeUsedWithExportAttribute_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.vb",
+                new vbnet.PartCreationPolicyShouldBeUsedWithExportAttribute(),
                 additionalReferences: FrameworkMetadataReference.SystemComponentModelComposition);
         }
     }
