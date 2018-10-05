@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Helpers.VisualBasic
             return currentExpression;
         }
 
-        public static ExpressionSyntax GetSelfOrTopParenthesizedExpression(this ExpressionSyntax node)
+        public static SyntaxNode GetSelfOrTopParenthesizedExpression(this SyntaxNode node)
         {
             var current = node;
             var parent = current.Parent as ParenthesizedExpressionSyntax;
@@ -51,6 +51,12 @@ namespace SonarAnalyzer.Helpers.VisualBasic
             }
             return current;
         }
+
+        public static ExpressionSyntax GetSelfOrTopParenthesizedExpression(this ExpressionSyntax expression) =>
+            (ExpressionSyntax)GetSelfOrTopParenthesizedExpression((SyntaxNode)expression);
+
+        public static SyntaxNode GetFirstNonParenthesizedParent(this SyntaxNode node) =>
+            node.GetSelfOrTopParenthesizedExpression().Parent;
 
         #region Statement
 

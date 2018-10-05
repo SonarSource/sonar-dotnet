@@ -1,0 +1,16 @@
+{
+  "title": "Non-async \"Task\/Task<T>\" methods should not return null",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5 min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-4586",
+  "sqKey": "S4586",
+  "scope": "All"
+}

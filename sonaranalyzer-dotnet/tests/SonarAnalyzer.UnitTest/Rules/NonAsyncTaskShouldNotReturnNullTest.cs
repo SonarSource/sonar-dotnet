@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,10 +29,19 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void NonAsyncTaskShouldNotReturnNull()
+        public void NonAsyncTaskShouldNotReturnNull_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\NonAsyncTaskShouldNotReturnNull.cs",
                 new NonAsyncTaskShouldNotReturnNull());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void NonAsyncTaskShouldNotReturnNull_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\NonAsyncTaskShouldNotReturnNull.vb",
+                new SonarAnalyzer.Rules.VisualBasic.NonAsyncTaskShouldNotReturnNull());
+        }
     }
 }
+
