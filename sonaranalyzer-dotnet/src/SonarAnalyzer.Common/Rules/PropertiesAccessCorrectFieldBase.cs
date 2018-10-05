@@ -18,30 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules
 {
-    [TestClass]
-    public class PropertiesAccessCorrectFieldTest
+    public abstract class PropertiesAccessCorrectFieldBase : SonarDiagnosticAnalyzer
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void PropertiesAccessCorrectField()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.cs",
-                new PropertiesAccessCorrectField());
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void PropertiesAccessCorrectField_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.vb",
-                new SonarAnalyzer.Rules.VisualBasic.PropertiesAccessCorrectField());
-        }
+        protected const string DiagnosticId = "S4275";
+        protected const string MessageFormat = "";
     }
 }
-
