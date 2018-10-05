@@ -19,8 +19,10 @@
  */
 
 extern alias csharp;
+extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
+using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,9 +31,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ShiftDynamicNotInteger()
+        public void ShiftDynamicNotInteger_CS()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ShiftDynamicNotInteger.cs", new ShiftDynamicNotInteger());
+            Verifier.VerifyAnalyzer(@"TestCases\ShiftDynamicNotInteger.cs", new CSharp.ShiftDynamicNotInteger());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ShiftDynamicNotInteger_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\ShiftDynamicNotInteger.vb", new VisualBasic.ShiftDynamicNotInteger());
         }
     }
 }

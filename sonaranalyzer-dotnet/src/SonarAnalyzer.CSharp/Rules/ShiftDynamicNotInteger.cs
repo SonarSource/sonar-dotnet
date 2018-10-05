@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -31,70 +30,22 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class ShiftDynamicNotInteger : SonarDiagnosticAnalyzer
+    public sealed class ShiftDynamicNotInteger : ShiftDynamicNotIntegerBase<ExpressionSyntax>
     {
-        internal const string DiagnosticId = "S3449";
-        private const string MessageFormat = "Remove this erroneous shift, it will fail because '{0}' can't be implicitly converted to 'int'.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override DiagnosticDescriptor Rule { get; } = rule;
+
+        protected override bool ShouldRaise(SemanticModel semanticModel, ExpressionSyntax left, ExpressionSyntax right) =>
+            IsDynamic(left, semanticModel) &&
+            !IsConvertibleToInt(right, semanticModel);
+
+        protected override bool CanBeConvertedTo(ExpressionSyntax expression, ITypeSymbol type, SemanticModel semanticModel)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckExpressionWithTwoParts<BinaryExpressionSyntax>(c.Node, b => b.Left, b => b.Right, c),
-                SyntaxKind.LeftShiftExpression,
-                SyntaxKind.RightShiftExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckExpressionWithTwoParts<AssignmentExpressionSyntax>(c.Node, b => b.Left, b => b.Right, c),
-                SyntaxKind.LeftShiftAssignmentExpression,
-                SyntaxKind.RightShiftAssignmentExpression);
-        }
-
-        private static void CheckExpressionWithTwoParts<T>(SyntaxNode node, Func<T, ExpressionSyntax> leftSelector, Func<T, ExpressionSyntax> rightSelector,
-            SyntaxNodeAnalysisContext context)
-            where T : SyntaxNode
-        {
-            var nodeWithTwoSides = (T)node;
-            var left = leftSelector(nodeWithTwoSides);
-            var right = rightSelector(nodeWithTwoSides);
-
-            if (IsDynamic(left, context.SemanticModel) &&
-                !MightBeConvertibleToInt(right, context.SemanticModel, out var typeOfRight))
-            {
-                var typeInMessage = GetTypeNameForMessage(right, typeOfRight, context.SemanticModel);
-
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, right.GetLocation(),
-                    typeInMessage));
-            }
-        }
-
-        private static string GetTypeNameForMessage(ExpressionSyntax expression, ITypeSymbol typeOfRight, SemanticModel semanticModel)
-        {
-            var constValue = semanticModel.GetConstantValue(expression);
-            return constValue.HasValue && constValue.Value == null
-                ? "null"
-                : typeOfRight.ToMinimalDisplayString(semanticModel, expression.SpanStart);
-        }
-
-        private static bool MightBeConvertibleToInt(ExpressionSyntax expression, SemanticModel semanticModel, out ITypeSymbol type)
-        {
-            type = semanticModel.GetTypeInfo(expression).Type;
-            if (type is IErrorTypeSymbol)
-            {
-                return true;
-            }
-
-            var intType = semanticModel.Compilation.GetTypeByMetadataName("System.Int32");
-            if (intType == null)
-            {
-                return false;
-            }
-
-            var conversion = semanticModel.ClassifyConversion(expression, intType);
+            var conversion = semanticModel.ClassifyConversion(expression, type);
             return conversion.Exists && (conversion.IsIdentity || conversion.IsImplicit);
         }
 
@@ -102,6 +53,19 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var type = semanticModel.GetTypeInfo(expression).Type;
             return type != null && type.TypeKind == TypeKind.Dynamic;
+        }
+
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c => CheckExpressionWithTwoParts<BinaryExpressionSyntax>(c, b => b.Left, b => b.Right),
+                SyntaxKind.LeftShiftExpression,
+                SyntaxKind.RightShiftExpression);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c => CheckExpressionWithTwoParts<AssignmentExpressionSyntax>(c, b => b.Left, b => b.Right),
+                SyntaxKind.LeftShiftAssignmentExpression,
+                SyntaxKind.RightShiftAssignmentExpression);
         }
     }
 }

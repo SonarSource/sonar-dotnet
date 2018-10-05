@@ -1,0 +1,16 @@
+{
+  "title": "Right operands of shift operators should be integers",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-3449",
+  "sqKey": "S3449",
+  "scope": "All"
+}
