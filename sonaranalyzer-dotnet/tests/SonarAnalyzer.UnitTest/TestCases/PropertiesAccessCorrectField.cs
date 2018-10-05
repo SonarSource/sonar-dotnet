@@ -15,9 +15,9 @@ namespace Tests.Diagnostics
 
         public int Y
         {
-            get { return x; }  // Noncompliant {{Refactor this getter so that it actually refers to the field 'y'}}
+            get { return x; }  // Noncompliant {{Refactor this getter so that it actually refers to the field 'y'.}}
 //                       ^
-            set { x = value; } // Noncompliant {{Refactor this setter so that it actually refers to the field 'y'}}
+            set { x = value; } // Noncompliant {{Refactor this setter so that it actually refers to the field 'y'.}}
 //                ^
         }
     }
@@ -47,9 +47,9 @@ namespace Tests.Diagnostics
         private int __x__X; // test that underscores and casing in names are ignored
         public int XX
         {
-            get { return yyy; }   // Noncompliant {{Refactor this getter so that it actually refers to the field '__x__X'}}
+            get { return yyy; }   // Noncompliant {{Refactor this getter so that it actually refers to the field '__x__X'.}}
 //                       ^^^
-            set { yyy = value; }  // Noncompliant {{Refactor this setter so that it actually refers to the field '__x__X'}}
+            set { yyy = value; }  // Noncompliant {{Refactor this setter so that it actually refers to the field '__x__X'.}}
 //                ^^^
         }
 

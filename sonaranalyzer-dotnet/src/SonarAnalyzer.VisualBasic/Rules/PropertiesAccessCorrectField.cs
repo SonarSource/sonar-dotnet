@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.VisualBasic;
 using SonarAnalyzer.Rules.Common;
 
 namespace SonarAnalyzer.Rules.VisualBasic
@@ -38,5 +39,67 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected override DiagnosticDescriptor Rule => rule;
+
+        protected override FieldData? FindFieldAssignment(IPropertySymbol property, Compilation compilation)
+        {
+            if (property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax accessor &&
+                // We assume that if there are multiple field assignments in a property
+                // then they are all to the same field
+                // The ".Parent" is to go from the accessor statement to the accessor block
+                accessor.Parent.DescendantNodes().FirstOrDefault(n => n is AssignmentStatementSyntax) is AssignmentStatementSyntax assignment &&
+                assignment.IsKind(SyntaxKind.SimpleAssignmentStatement))
+            {
+                return ExtractFieldFromExpression(AccessorKind.Setter, assignment.Left, compilation);
+            }
+
+            return null;
+        }
+
+        protected override FieldData? FindReturnedField(IPropertySymbol property, Compilation compilation)
+        {
+            // We don't handle properties with multiple returns that return different fields
+            if (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax accessor &&
+                // The ".Parent" is to go from the accessor statement to the accessor block
+                accessor.Parent.DescendantNodes().FirstOrDefault(n => n.Kind() == SyntaxKind.ReturnStatement) is ReturnStatementSyntax returnStatement &&
+                returnStatement.Expression != null)
+            {
+                return ExtractFieldFromExpression(AccessorKind.Getter, returnStatement.Expression, compilation);
+            }
+            return null;
+        }
+
+        private static FieldData? ExtractFieldFromExpression(AccessorKind accessorKind,
+            ExpressionSyntax expression,
+            Compilation compilation)
+        {
+            var semanticModel = compilation.GetSemanticModel(expression.SyntaxTree);
+            if (semanticModel == null)
+            {
+                return null;
+            }
+
+            var strippedExpression = expression.RemoveParentheses();
+
+            // Check for direct field access: "foo"
+            if (strippedExpression is IdentifierNameSyntax &&
+                semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field)
+            {
+                return new FieldData(accessorKind, field, strippedExpression);
+            }
+            else
+            {
+                // Check for "this.foo"
+                if (strippedExpression is MemberAccessExpressionSyntax member &&
+                    member.Expression is MeExpressionSyntax thisExpression &&
+                    semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field2)
+                {
+                    return new FieldData(accessorKind, field2, member.Name);
+                }
+            }
+
+            return null;
+        }
     }
 }

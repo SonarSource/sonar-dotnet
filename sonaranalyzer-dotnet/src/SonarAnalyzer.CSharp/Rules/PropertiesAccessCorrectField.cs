@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // Check for "this.foo"
                 if (strippedExpression is MemberAccessExpressionSyntax member &&
                     member.Expression is ThisExpressionSyntax thisExpression &&
-                    semanticModel.GetSymbolInfo(expression).Symbol is IFieldSymbol field2)
+                    semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field2)
                 {
                     return new FieldData(accessorKind, field2, member.Name);
                 }
@@ -98,8 +98,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return null;
         }
-
-
 
     }
 }

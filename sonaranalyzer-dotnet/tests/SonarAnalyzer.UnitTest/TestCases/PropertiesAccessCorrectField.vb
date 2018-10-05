@@ -2,24 +2,24 @@
 
 Namespace Tests.Diagnostics
     Class NonCompliantClass_FromRspec
-        Private x As Integer
-        Private y As Integer
+        Private x_ As Integer
+        Private y_ As Integer
 
         Public Property X As Integer
             Get
-                Return x
+                Return x_
             End Get
             Set(ByVal value As Integer)
-                x = value
+                x_ = value
             End Set
         End Property
 
         Public Property Y As Integer
-            Get ' Noncompliant {{Refactor this getter so that it actually refers to the field 'y'}}
-                Return x
+            Get
+                Return x_ ' Noncompliant {{Refactor this getter so that it actually refers to the field 'y_'.}}
             End Get
             Set(ByVal value As Integer)
-                x = value
+                x_ = value ' Noncompliant {{Refactor this setter so that it actually refers to the field 'y_'.}}
             End Set
         End Property
     End Class
@@ -51,18 +51,18 @@ Namespace Tests.Diagnostics
         Private yyy As Integer
         Private __x__X As Integer
 
-        Public Property XX As Integer
+        Public Property XX As Integer ' test that underscores and casing in names are ignored
             Get
-                Return yyy
+                Return yyy ' Noncompliant {{Refactor this getter so that it actually refers to the field '__x__X'.}}
             End Get
             Set(ByVal value As Integer)
-                yyy = value
+                yyy = value ' Noncompliant {{Refactor this setter so that it actually refers to the field '__x__X'.}}
             End Set
         End Property
 
         Public ReadOnly Property _Y___Y_Y_ As String
             Get
-                Return __x__X
+                Return __x__X ' Noncompliant
             End Get
         End Property
     End Class
@@ -73,10 +73,10 @@ Namespace Tests.Diagnostics
 
         Public Property AAA As String
             Get
-                Return aString
+                Return aString ' Noncompliant - field called 'aaa' exists, even though type is different
             End Get
             Set(ByVal value As String)
-                aString = value
+                aString = value ' Noncompliant
             End Set
         End Property
     End Class
@@ -87,7 +87,7 @@ Namespace Tests.Diagnostics
 
         Public WriteOnly Property AAA As String
             Set(ByVal value As String)
-                aString = "foo" & value
+                aString = "foo" & value ' Noncompliant
             End Set
         End Property
     End Class
@@ -103,17 +103,17 @@ Namespace Tests.Diagnostics
     Partial Class NonCompliant_PartialClass
         Public Property MyProperty As Object
             Get
-                Return Me.anotherObject
+                Return Me.anotherObject ' Noncompliant
             End Get
             Set(ByVal value As Object)
-                Me.anotherObject = value
+                Me.anotherObject = value ' Noncompliant
             End Set
         End Property
     End Class
 
     Class NonCompliant_ComplexProperty
-        Private field1 As Integer
-        Private field2 As Integer
+        Private field1_ As Integer
+        Private field2_ As Integer
         Private initialized As Boolean
         Private isDisposed As Boolean
 
@@ -128,7 +128,8 @@ Namespace Tests.Diagnostics
                     Throw New ObjectDisposedException("object name")
                 End If
 
-                Return Me.field2
+                Return Me.field2_ ' Noncompliant
+'                         ^^^^^^^
             End Get
             Set(ByVal value As Integer)
 
@@ -136,47 +137,51 @@ Namespace Tests.Diagnostics
                     Throw New ArgumentOutOfRangeException(NameOf(value))
                 End If
 
-                Me.field2 = value
+                Me.field2_ = value ' Noncompliant
+'                  ^^^^^^^
             End Set
         End Property
     End Class
 
     Class NonCompliant_Parentheses
-        Private field1 As Integer
-        Private field2 As Integer
+        Private field1_ As Integer
+        Private field2_ As Integer
 
         Public ReadOnly Property Field2 As Integer
             Get
-                Return (((Me.field1)))
+                Return (((Me.field1_))) ' Noncompliant
+'                            ^^^^^^^
             End Get
         End Property
     End Class
 
     Class NonCompliant_OuterClass
-        Private fielda As String
-        Private fieldb As String
+        Private fielda_ As String
+        Private fieldb_ As String
 
         Structure NonCompliant_NestedClass
-            Private fielda As Integer
-            Private fieldb As Integer
+            Private fielda_ As Integer
+            Private fieldb_ As Integer
 
             Public Property FieldA As Integer
                 Get
-                    Return Me.fieldb
+                    Return Me.fieldb_  ' Noncompliant
                 End Get
                 Set(ByVal value As Integer)
-                    Me.fieldb = value
+                    Me.fieldb_ = value ' Noncompliant
                 End Set
             End Property
         End Structure
     End Class
 
     Structure Compliant_Indexer
+        ' Declare an array to store the data elements.
         Private ReadOnly arr As Integer() = New Integer(99) {}
 
+        ' Define the indexer to allow client code to use [] notation.
         Default Public Property Item(ByVal i As Integer) As Integer
             Get
-                Return arr(i)
+                Return arr(i) ' Compliant - we don't know which field to check against
             End Get
             Set(ByVal value As Integer)
                 arr(i) = value
@@ -185,23 +190,23 @@ Namespace Tests.Diagnostics
     End Structure
 
     Class CompliantClass
-        Private xxx As Integer
+        Private xxx_ As Integer
 
         Public Property XXX As Integer
             Get
-                Return xxx
+                Return xxx_
             End Get
             Set(ByVal value As Integer)
-                xxx = value
+                xxx_ = value
             End Set
         End Property
 
         Public Property UUU As Integer
             Get
-                Return xxx
+                Return xxx_ ' Compliant - no matching field name
             End Get
             Set(ByVal value As Integer)
-                xxx = value
+                xxx_ = value
             End Set
         End Property
 
@@ -211,7 +216,7 @@ Namespace Tests.Diagnostics
 
         Public Property Abc As String
             Get
-                Return yyy
+                Return yyy ' Compliant - multiple possible matching field names, so don't raise
             End Get
             Set(ByVal value As String)
                 yyy = value
@@ -255,7 +260,7 @@ Namespace Tests.Diagnostics
 
         Public Property Field1 As Integer
             Get
-                Return field2
+                Return field2 ' Compliant - aren't checking inherited fields
             End Get
             Set(ByVal value As Integer)
                 field2 = value
