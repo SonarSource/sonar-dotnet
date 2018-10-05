@@ -32,94 +32,15 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class PropertiesAccessCorrectField : SonarDiagnosticAnalyzer
+    public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldBase
     {
-        internal const string DiagnosticId = "S4275";
-        private const string MessageFormat = "Refactor this {0} so that it actually refers to the field '{1}'";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            // We want to check the fields read and assigned in all properties in this class
-            // so this is a symbol-level rule (also means the callback is called only once
-            // for partial classes)
-            context.RegisterSymbolAction(CheckType, SymbolKind.NamedType);
-        }
+        protected override DiagnosticDescriptor Rule => rule;
 
-        private void CheckType(SymbolAnalysisContext context)
-        {
-            var symbol = (INamedTypeSymbol)context.Symbol;
-            if (symbol.TypeKind != TypeKind.Class &&
-                symbol.TypeKind != TypeKind.Structure)
-            {
-                return;
-            }
-
-            var fields = symbol.GetMembers().Where(m => m.Kind == SymbolKind.Field).OfType<IFieldSymbol>();
-            if (!fields.Any())
-            {
-                return;
-            }
-
-            var properties = GetExplictlyDeclaredProperties(symbol);
-            if (!properties.Any())
-            {
-                return;
-            }
-
-            var propertyToFieldMatcher = new PropertyToFieldMatcher(fields);
-            var allPropertyData = CollectPropertyData(properties, context.Compilation);
-
-            // Check that if there is a single matching field name it is used by the property
-            foreach (var data in allPropertyData)
-            {
-                var expectedField = propertyToFieldMatcher.GetSingleMatchingFieldOrNull(data.PropertySymbol);
-                if (expectedField != null)
-                {
-                    CheckExpectedFieldIsUsed(expectedField, data.FieldUpdated, context);
-                    CheckExpectedFieldIsUsed(expectedField, data.FieldReturned, context);
-                }
-            }
-        }
-
-        private static IEnumerable<IPropertySymbol> GetExplictlyDeclaredProperties(INamedTypeSymbol symbol) =>
-            symbol.GetMembers()
-                .Where(m => m.Kind == SymbolKind.Property)
-                .OfType<IPropertySymbol>()
-                .Where(p => !p.IsImplicitlyDeclared);
-
-        private static void CheckExpectedFieldIsUsed(IFieldSymbol expectedField, FieldData? actualField, SymbolAnalysisContext context)
-        {
-            if (actualField.HasValue && actualField.Value.Field != expectedField)
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(
-                    rule,
-                    actualField.Value.LocationNode.GetLocation(),
-                    actualField.Value.AccessorKind == AccessorKind.Getter ? "getter" : "setter",
-                    expectedField.Name
-                    ));
-            }
-        }
-
-        private static IList<PropertyData> CollectPropertyData(IEnumerable<IPropertySymbol> properties, Compilation compilation)
-        {
-            IList<PropertyData> allPropertyData = new List<PropertyData>();
-
-            // Collect the list of fields read/written by each property
-            foreach (var property in properties)
-            {
-                var returned = FindReturnedField(property, compilation);
-                var updated = FindFieldAssignment(property, compilation);
-                var data = new PropertyData(property, returned, updated);
-                allPropertyData.Add(data);
-            }
-            return allPropertyData;
-        }
-
-        private static FieldData? FindFieldAssignment(IPropertySymbol property, Compilation compilation)
+        protected override FieldData? FindFieldAssignment(IPropertySymbol property, Compilation compilation)
         {
             if (property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor &&
                 // We assume that if there are multiple field assignments in a property
@@ -134,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return null;
         }
 
-        private static FieldData? FindReturnedField(IPropertySymbol property, Compilation compilation)
+        protected override FieldData? FindReturnedField(IPropertySymbol property, Compilation compilation)
         {
             // We don't handle properties with multiple returns that return different fields
             if (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor &&
@@ -178,82 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return null;
         }
 
-        private struct PropertyData
-        {
-            public PropertyData(IPropertySymbol propertySymbol, FieldData? returned, FieldData? updated)
-            {
-                PropertySymbol = propertySymbol;
-                FieldReturned = returned;
-                FieldUpdated = updated;
-            }
 
-            public IPropertySymbol PropertySymbol { get; }
 
-            public FieldData? FieldReturned { get; }
-
-            public FieldData? FieldUpdated { get; }
-        }
-
-        private enum AccessorKind
-        {
-            Getter,
-            Setter
-        }
-
-        private struct FieldData
-        {
-            public FieldData(AccessorKind accessor, IFieldSymbol field, SyntaxNode locationNode)
-            {
-                AccessorKind = accessor;
-                Field = field;
-                LocationNode = locationNode;
-            }
-
-            public AccessorKind AccessorKind { get; }
-
-            public IFieldSymbol Field { get; }
-
-            public SyntaxNode LocationNode { get; }
-        }
-
-        /// <summary>
-        /// The rule decides if a property is returning/settings the expected field.
-        /// We decide what the expected field name should be based on a fuzzy match
-        /// between the field name and the property name.
-        /// This class hides the details of matching logic.
-        /// </summary>
-        private class PropertyToFieldMatcher
-        {
-            private readonly IDictionary<IFieldSymbol, string> fieldToStandardNameMap;
-
-            public PropertyToFieldMatcher(IEnumerable<IFieldSymbol> fields)
-            {
-                // Calcuate and cache the standardised versions of the field names to avoid
-                // calculating them every time
-                this.fieldToStandardNameMap = fields.ToDictionary(f => f, f => GetCanonicalFieldName(f.Name));
-            }
-
-            public IFieldSymbol GetSingleMatchingFieldOrNull(IPropertySymbol propertySymbol)
-            {
-                // We're not caching the property name as only expect to be called once per property
-                var standardisedPropertyName = GetCanonicalFieldName(propertySymbol.Name);
-
-                var matchingFields = this.fieldToStandardNameMap.Keys
-                    .Where(k => AreCanonicalNamesEqual(this.fieldToStandardNameMap[k], standardisedPropertyName))
-                    .ToList();
-
-                if (matchingFields.Count != 1)
-                {
-                    return null;
-                }
-                return matchingFields[0];
-            }
-
-            private static string GetCanonicalFieldName(string name) =>
-                name.Replace("_", string.Empty);
-
-            private static bool AreCanonicalNamesEqual(string name1, string name2) =>
-                name1.Equals(name2, System.StringComparison.OrdinalIgnoreCase);
-        }
     }
 }
