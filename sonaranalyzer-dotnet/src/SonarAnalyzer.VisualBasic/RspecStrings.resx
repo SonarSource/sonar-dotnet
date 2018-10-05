@@ -3178,6 +3178,36 @@
   <data name="S4260_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S4275_Category" xml:space="preserve">
+    <value>Critical Bug</value>
+  </data>
+  <data name="S4275_Description" xml:space="preserve">
+    <value>Properties provide a way to enforce encapsulation by providing public, protected or internal methods that give controlled access to private fields. However in classes with multiple fields it is not unusual that cut and paste is used to quickly create the needed properties, which can result in the wrong field being accessed by a getter or setter.</value>
+  </data>
+  <data name="S4275_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4275_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4275_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S4275_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S4275_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S4275_Tags" xml:space="preserve">
+    <value>pitfall</value>
+  </data>
+  <data name="S4275_Title" xml:space="preserve">
+    <value>Getters and setters should access the expected fields</value>
+  </data>
+  <data name="S4275_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S4277_Category" xml:space="preserve">
     <value>Critical Bug</value>
   </data>

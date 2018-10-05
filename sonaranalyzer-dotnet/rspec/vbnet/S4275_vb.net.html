@@ -1,0 +1,62 @@
+<p>Properties provide a way to enforce encapsulation by providing <code>public</code>, <code>protected</code> or <code>internal</code> methods that
+give controlled access to <code>private</code> fields. However in classes with multiple fields it is not unusual that cut and paste is used to quickly
+create the needed properties, which can result in the wrong field being accessed by a getter or setter.</p>
+<p>This rule raises an issue in any of these cases:</p>
+<ul>
+  <li> A setter does not update the field with the corresponding name. </li>
+  <li> A getter does not access the field with the corresponding name. </li>
+</ul>
+<p>For simple properties it is better to use <a
+href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/auto-implemented-properties">auto-implemented
+properties</a> (C# 3.0 or later).</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Class A
+    Private x As Integer
+    Private y As Integer
+
+    Public Property X As Integer
+        Get
+            Return x
+        End Get
+        Set(ByVal value As Integer)
+            x = value
+        End Set
+    End Property
+
+    Public Property Y As Integer
+        Get  ' Noncompliant: field 'y' is not used in the return value
+            Return x
+        End Get
+        Set(ByVal value As Integer) ' Noncompliant: field 'y' is not updated
+            x = value
+        End Set
+    End Property
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Class A
+    Private x As Integer
+    Private y As Integer
+
+    Public Property X As Integer
+        Get
+            Return x
+        End Get
+        Set(ByVal value As Integer)
+            x = value
+        End Set
+    End Property
+
+    Public Property Y As Integer
+        Get
+            Return y
+        End Get
+        Set(ByVal value As Integer)
+            y = value
+        End Set
+    End Property
+End Class
+</pre>
+

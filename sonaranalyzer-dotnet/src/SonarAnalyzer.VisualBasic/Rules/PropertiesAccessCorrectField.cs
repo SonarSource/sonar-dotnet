@@ -22,32 +22,34 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.VisualBasic;
+using SonarAnalyzer.Rules.Common;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldBase
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override DiagnosticDescriptor Rule => rule;
 
         protected override FieldData? FindFieldAssignment(IPropertySymbol property, Compilation compilation)
         {
-            if (property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor &&
+            if (property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax accessor &&
                 // We assume that if there are multiple field assignments in a property
                 // then they are all to the same field
-                accessor.DescendantNodes().FirstOrDefault(n => n is ExpressionStatementSyntax) is ExpressionStatementSyntax expression &&
-                expression.Expression is AssignmentExpressionSyntax assignment &&
-                assignment.IsKind(SyntaxKind.SimpleAssignmentExpression))
+                // The ".Parent" is to go from the accessor statement to the accessor block
+                accessor.Parent.DescendantNodes().FirstOrDefault(n => n is AssignmentStatementSyntax) is AssignmentStatementSyntax assignment &&
+                assignment.IsKind(SyntaxKind.SimpleAssignmentStatement))
             {
                 return ExtractFieldFromExpression(AccessorKind.Setter, assignment.Left, compilation);
             }
@@ -58,8 +60,9 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override FieldData? FindReturnedField(IPropertySymbol property, Compilation compilation)
         {
             // We don't handle properties with multiple returns that return different fields
-            if (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor &&
-                accessor.DescendantNodes().FirstOrDefault(n => n.RawKind == (int)SyntaxKind.ReturnStatement) is ReturnStatementSyntax returnStatement &&
+            if (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax accessor &&
+                // The ".Parent" is to go from the accessor statement to the accessor block
+                accessor.Parent.DescendantNodes().FirstOrDefault(n => n.Kind() == SyntaxKind.ReturnStatement) is ReturnStatementSyntax returnStatement &&
                 returnStatement.Expression != null)
             {
                 return ExtractFieldFromExpression(AccessorKind.Getter, returnStatement.Expression, compilation);
@@ -89,7 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 // Check for "this.foo"
                 if (strippedExpression is MemberAccessExpressionSyntax member &&
-                    member.Expression is ThisExpressionSyntax thisExpression &&
+                    member.Expression is MeExpressionSyntax thisExpression &&
                     semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field2)
                 {
                     return new FieldData(accessorKind, field2, member.Name);
@@ -98,6 +101,5 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return null;
         }
-
     }
 }
