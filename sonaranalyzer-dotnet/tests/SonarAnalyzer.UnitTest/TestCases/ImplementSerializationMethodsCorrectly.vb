@@ -5,12 +5,12 @@ Namespace Tests.Diagnostics
     <Serializable>
     Public Class Foo
         <OnSerializing>
-        Public Sub OnSerializing(ByVal context As StreamingContext) ' Noncompliant {{Make this method 'private'.}}
+        Public Sub OnSerializing(ByVal context As StreamingContext) ' Noncompliant {{Make this method 'Private'.}}
 '                  ^^^^^^^^^^^^^
         End Sub
 
         <OnSerialized>
-        Private Function OnSerialized(ByVal context As StreamingContext) As Integer ' Noncompliant {{Make this method return 'void'.}}
+        Private Function OnSerialized(ByVal context As StreamingContext) As Integer ' Noncompliant {{Make this method a 'Sub' not a 'Function'.}}
         End Function
 
         <OnDeserializing>
@@ -29,22 +29,22 @@ Namespace Tests.Diagnostics
         End Sub
 
         <OnDeserializing>
-        Public Function OnDeserializing2(ByVal context As StreamingContext) As Integer ' Noncompliant {{Make this method 'private' and return 'void'.}}
+        Public Function OnDeserializing2(ByVal context As StreamingContext) As Integer ' Noncompliant {{Make this method 'Private' and a 'Sub' not a 'Function'.}}
             Throw New NotImplementedException()
         End Function
 
         <OnDeserializing>
-        Public Sub OnDeserializing3() ' Noncompliant {{Make this method 'private' and have a single parameter of type 'StreamingContext'.}}
+        Public Sub OnDeserializing3() ' Noncompliant {{Make this method 'Private' and have a single parameter of type 'StreamingContext'.}}
             Throw New NotImplementedException()
         End Sub
 
         <OnDeserializing>
-        Private Function OnDeserializing4() As Integer ' Noncompliant {{Make this method return 'void' and have a single parameter of type 'StreamingContext'.}}
+        Private Function OnDeserializing4() As Integer ' Noncompliant {{Make this method a 'Sub' not a 'Function' and have a single parameter of type 'StreamingContext'.}}
             Throw New NotImplementedException()
         End Function
 
         <OnDeserializing>
-        Public Function OnDeserializing5(Of T)() As Integer ' Noncompliant {{Make this method 'private', return 'void', have no type parameters and have a single parameter of type 'StreamingContext'.}}
+        Public Function OnDeserializing5(Of T)() As Integer ' Noncompliant {{Make this method 'Private', a 'Sub' not a 'Function', have no type parameters and have a single parameter of type 'StreamingContext'.}}
             Throw New NotImplementedException()
         End Function
 

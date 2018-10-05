@@ -32,9 +32,22 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ImplementSerializationMethodsCorrectly : ImplementSerializationMethodsCorrectlyBase
     {
+        private const string problemMakePrivateText = "'private'";
+        private const string problemReturnVoidText = "return 'void'";
+
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
+            = ImmutableArray.Create(rule);
+
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
+            Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+
+        protected override string MethodShouldBePrivateMessage =>
+            problemMakePrivateText;
+
+        protected override string MethodReturnTypeShouldBeVoidMessage =>
+            problemReturnVoidText;
 
         protected override Location GetIdentifierLocation(IMethodSymbol methodSymbol) =>
             methodSymbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax())

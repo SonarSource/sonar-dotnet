@@ -29,8 +29,6 @@ namespace SonarAnalyzer.Rules
     {
         internal const string DiagnosticId = "S3927";
         protected const string MessageFormat = "Make this method {0}.";
-        private const string problemMakePrivateText = "'private'";
-        private const string problemReturnVoidText = "return 'void'";
         private const string problemParameterText = "have a single parameter of type 'StreamingContext'";
         private const string problemGenericParameterText = "have no type parameters";
 
@@ -63,24 +61,29 @@ namespace SonarAnalyzer.Rules
                     var location = GetIdentifierLocation(methodSymbol);
                     if (location != null)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], location, issues.ToSentence()));
+                        c.ReportDiagnosticIfNonGenerated(GeneratedCodeRecognizer, Diagnostic.Create(SupportedDiagnostics[0],
+                            location, issues.ToSentence()));
                     }
                 },
                 SymbolKind.Method);
         }
 
+        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract string MethodShouldBePrivateMessage { get; }
+        protected abstract string MethodReturnTypeShouldBeVoidMessage { get; }
+
         protected abstract Location GetIdentifierLocation(IMethodSymbol methodSymbol);
 
-        private static IEnumerable<string> FindIssues(IMethodSymbol methodSymbol)
+        private IEnumerable<string> FindIssues(IMethodSymbol methodSymbol)
         {
             if (methodSymbol.DeclaredAccessibility != Accessibility.Private)
             {
-                yield return problemMakePrivateText;
+                yield return MethodShouldBePrivateMessage;
             }
 
             if (!methodSymbol.ReturnsVoid)
             {
-                yield return problemReturnVoidText;
+                yield return MethodReturnTypeShouldBeVoidMessage;
             }
 
             if (!methodSymbol.TypeParameters.IsEmpty)
