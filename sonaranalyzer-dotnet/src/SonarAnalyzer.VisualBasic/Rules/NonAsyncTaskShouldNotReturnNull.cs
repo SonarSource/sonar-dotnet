@@ -18,35 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.ShimLayer.CSharp;
+using SonarAnalyzer.Helpers.VisualBasic;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class NonAsyncTaskShouldNotReturnNull : NonAsyncTaskShouldNotReturnNullBase
     {
-        private const string MessageFormat = "Do not return null from this method, instead return 'Task.FromResult<T>(null)', " +
-            "'Task.CompletedTask' or 'Task.Delay(0)'.";
+        private const string MessageFormat = "Do not return null from this method, instead return " +
+            "'Task.FromResult(Of T)(Nothing)', 'Task.CompletedTask' or 'Task.Delay(0)'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private static readonly ISet<SyntaxKind> TrackedNullLiteralLocations =
-            new HashSet<SyntaxKind>
-            {
-                SyntaxKind.ArrowExpressionClause,
-                SyntaxKind.ReturnStatement,
-            };
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -55,20 +47,40 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var nullLiteral = (LiteralExpressionSyntax)c.Node;
 
-                    if (!nullLiteral.GetFirstNonParenthesizedParent().IsAnyKind(TrackedNullLiteralLocations))
+                    if (!IsParentReturnOrReturnTernary(nullLiteral))
                     {
                         return;
                     }
 
                     var enclosingMember = GetEnclosingMember(nullLiteral);
                     if (enclosingMember != null &&
-                        !enclosingMember.IsKind(SyntaxKind.VariableDeclaration) &&
+                        !enclosingMember.IsKind(SyntaxKind.VariableDeclarator) &&
                         IsInvalidEnclosingSymbolContext(enclosingMember, c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, nullLiteral.GetLocation()));
                     }
                 },
-                SyntaxKind.NullLiteralExpression);
+                SyntaxKind.NothingLiteralExpression);
+        }
+
+        private static bool IsParentReturnOrReturnTernary(SyntaxNode node)
+        {
+            var parent = node.GetFirstNonParenthesizedParent();
+
+            if (parent.IsKind(SyntaxKind.ReturnStatement))
+            {
+                return true;
+            }
+            else if (parent.IsKind(SyntaxKind.TernaryConditionalExpression))
+            {
+                var grandParent = parent.GetFirstNonParenthesizedParent();
+
+                return grandParent.IsKind(SyntaxKind.ReturnStatement);
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private static SyntaxNode GetEnclosingMember(LiteralExpressionSyntax literal)
@@ -77,13 +89,13 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 switch (ancestor.Kind())
                 {
-                    case SyntaxKind.ParenthesizedLambdaExpression:
-                    case SyntaxKindEx.LocalFunctionStatement:
+                    case SyntaxKind.MultiLineFunctionLambdaExpression:
+                    case SyntaxKind.SingleLineFunctionLambdaExpression:
                         return null;
 
-                    case SyntaxKind.VariableDeclaration:
-                    case SyntaxKind.PropertyDeclaration:
-                    case SyntaxKind.MethodDeclaration:
+                    case SyntaxKind.VariableDeclarator:
+                    case SyntaxKind.PropertyBlock:
+                    case SyntaxKind.FunctionBlock:
                         return ancestor;
 
                     default:
