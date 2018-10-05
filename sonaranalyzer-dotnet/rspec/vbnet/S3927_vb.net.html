@@ -1,0 +1,57 @@
+<p>Serialization event handlers that don't have the correct signature will simply not be called, thus bypassing any attempts to augment the automated
+de/serialization.</p>
+<p>This rule raises issue when a method marked with one of the following attributes is not <code>private</code>, does not return <code>void</code>,
+has type parameters, or does not have a single parameter of type <code>System.Runtime.Serialization.StreamingContext</code>:</p>
+<ul>
+  <li> <code>System.Runtime.Serialization.OnSerializingAttribute</code> </li>
+  <li> <code>System.Runtime.Serialization.OnSerializedAttribute</code> </li>
+  <li> <code>System.Runtime.Serialization.OnDeserializingAttribute</code> </li>
+  <li> <code>System.Runtime.Serialization.OnDeserializedAttribute</code> </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+&lt;Serializable&gt;
+Public Class Foo
+    &lt;OnSerializing&gt;
+    Public Sub OnSerializing(ByVal context As StreamingContext) ' Noncompliant should be private
+    End Sub
+
+    &lt;OnSerialized&gt;
+    Private Function OnSerialized(ByVal context As StreamingContext) As Integer '  Noncompliant should return void
+    End Function
+
+    &lt;OnDeserializing&gt;
+    Private Sub OnDeserializing() ' Noncompliant should have a single parameter of type StreamingContext
+    End Sub
+
+    &lt;OnSerializing&gt;
+    Public Sub OnSerializing2(Of T)(ByVal context As StreamingContext) ' Noncompliant should have no type parameters
+    End Sub
+
+    &lt;OnDeserialized&gt;
+    Private Sub OnDeserialized(ByVal context As StreamingContext, ByVal str As String) ' Noncompliant should have a single parameter of type StreamingContext
+    End Sub
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+&lt;Serializable&gt;
+Public Class Foo
+    &lt;OnSerializing&gt;
+    Private Sub OnSerializing(ByVal context As StreamingContext)
+    End Sub
+
+    &lt;OnSerialized&gt;
+    Private Sub OnSerialized(ByVal context As StreamingContext)
+    End Sub
+
+    &lt;OnDeserializing&gt;
+    Private Sub OnDeserializing(ByVal context As StreamingContext)
+    End Sub
+
+    &lt;OnDeserialized&gt;
+    Private Sub OnDeserialized(ByVal context As StreamingContext)
+    End Sub
+End Class
+</pre>
+

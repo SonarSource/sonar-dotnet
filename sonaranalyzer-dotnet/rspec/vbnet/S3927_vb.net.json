@@ -1,0 +1,16 @@
+{
+  "title": "Serialization event handlers should be implemented correctly",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-3927",
+  "sqKey": "S3927",
+  "scope": "All"
+}

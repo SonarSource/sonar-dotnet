@@ -21,19 +21,19 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class ImplementSerializationMethodsCorrectly : ImplementSerializationMethodsCorrectlyBase
     {
-        private const string problemMakePrivateText = "'private'";
-        private const string problemReturnVoidText = "return 'void'";
+        private const string problemMakePrivateText = "'Private'";
+        private const string problemReturnVoidText = "a 'Sub' not a 'Function'";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
             = ImmutableArray.Create(rule);
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+            Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
 
         protected override string MethodShouldBePrivateMessage =>
             problemMakePrivateText;
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override Location GetIdentifierLocation(IMethodSymbol methodSymbol) =>
             methodSymbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax())
-                .OfType<MethodDeclarationSyntax>()
+                .OfType<MethodStatementSyntax>()
                 .FirstOrDefault()
                 ?.Identifier
                 .GetLocation();

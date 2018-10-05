@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,10 +29,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ImplementSerializationMethodsCorrectly()
+        public void ImplementSerializationMethodsCorrectly_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.cs",
                 new ImplementSerializationMethodsCorrectly());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ImplementSerializationMethodsCorrectly_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.vb",
+                new SonarAnalyzer.Rules.VisualBasic.ImplementSerializationMethodsCorrectly());
+        }
     }
 }
+
+

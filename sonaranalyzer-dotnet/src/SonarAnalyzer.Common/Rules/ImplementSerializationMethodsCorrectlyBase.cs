@@ -1,0 +1,101 @@
+﻿/*
+ * SonarAnalyzer for .NET
+ * Copyright (C) 2015-2018 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
+
+namespace SonarAnalyzer.Rules
+{
+    public abstract class ImplementSerializationMethodsCorrectlyBase : SonarDiagnosticAnalyzer
+    {
+        internal const string DiagnosticId = "S3927";
+        protected const string MessageFormat = "Make this method {0}.";
+        private const string problemParameterText = "have a single parameter of type 'StreamingContext'";
+        private const string problemGenericParameterText = "have no type parameters";
+
+        private static readonly ISet<KnownType> serializationAttributes =
+            new HashSet<KnownType>
+            {
+                KnownType.System_Runtime_Serialization_OnSerializingAttribute,
+                KnownType.System_Runtime_Serialization_OnSerializedAttribute,
+                KnownType.System_Runtime_Serialization_OnDeserializingAttribute,
+                KnownType.System_Runtime_Serialization_OnDeserializedAttribute
+            };
+
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            context.RegisterSymbolAction(
+                c =>
+                {
+                    var methodSymbol = (IMethodSymbol)c.Symbol;
+                    if (!methodSymbol.GetAttributes(serializationAttributes).Any())
+                    {
+                        return;
+                    }
+
+                    var issues = FindIssues(methodSymbol).ToList();
+                    if (issues.Count == 0)
+                    {
+                        return;
+                    }
+
+                    var location = GetIdentifierLocation(methodSymbol);
+                    if (location != null)
+                    {
+                        c.ReportDiagnosticIfNonGenerated(GeneratedCodeRecognizer, Diagnostic.Create(SupportedDiagnostics[0],
+                            location, issues.ToSentence()));
+                    }
+                },
+                SymbolKind.Method);
+        }
+
+        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract string MethodShouldBePrivateMessage { get; }
+        protected abstract string MethodReturnTypeShouldBeVoidMessage { get; }
+
+        protected abstract Location GetIdentifierLocation(IMethodSymbol methodSymbol);
+
+        private IEnumerable<string> FindIssues(IMethodSymbol methodSymbol)
+        {
+            if (methodSymbol.DeclaredAccessibility != Accessibility.Private)
+            {
+                yield return MethodShouldBePrivateMessage;
+            }
+
+            if (!methodSymbol.ReturnsVoid)
+            {
+                yield return MethodReturnTypeShouldBeVoidMessage;
+            }
+
+            if (!methodSymbol.TypeParameters.IsEmpty)
+            {
+                yield return problemGenericParameterText;
+            }
+
+            if (methodSymbol.Parameters.Length != 1 ||
+                !methodSymbol.Parameters.First().IsType(KnownType.System_Runtime_Serialization_StreamingContext))
+            {
+                yield return problemParameterText;
+            }
+        }
+    }
+}
