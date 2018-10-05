@@ -20,6 +20,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.Helpers
@@ -33,10 +35,10 @@ namespace SonarAnalyzer.Helpers
             var ifList = new List<IfStatementSyntax>();
             var currentIf = ifStatement;
 
-            while (currentIf.Parent is ElseClauseSyntax &&
-                currentIf.Parent.Parent is IfStatementSyntax)
+            while (currentIf.Parent.IsKind(SyntaxKind.ElseClause) &&
+                currentIf.Parent.Parent.IsKind(SyntaxKind.IfStatement))
             {
-                var precedingIf = (IfStatementSyntax) currentIf.Parent.Parent;
+                var precedingIf = (IfStatementSyntax)currentIf.Parent.Parent;
                 ifList.Add(precedingIf);
                 currentIf = precedingIf;
             }

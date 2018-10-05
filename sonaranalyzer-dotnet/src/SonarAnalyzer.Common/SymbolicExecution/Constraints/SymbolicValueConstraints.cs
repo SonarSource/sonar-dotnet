@@ -20,7 +20,7 @@
 
 using System;
 using System.Collections.Generic;
-using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints
 {
@@ -127,11 +127,8 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
             return this.hashCode;
         }
 
-        public override bool Equals(object obj)
-        {
-            return obj is SymbolicValueConstraints other &&
-                DictionaryHelper.DictionaryEquals(this.constraints, other.constraints);
-        }
+        public override bool Equals(object obj) => obj is SymbolicValueConstraints other &&
+                this.constraints.DictionaryEquals(other.constraints);
 
         // for debugging
         public override string ToString()

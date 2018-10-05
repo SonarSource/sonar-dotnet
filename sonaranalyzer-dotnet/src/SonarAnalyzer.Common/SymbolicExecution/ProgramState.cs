@@ -23,7 +23,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Relationships;
@@ -423,8 +422,8 @@ namespace SonarAnalyzer.SymbolicExecution
                 return false;
             }
 
-            return DictionaryHelper.DictionaryEquals(Values, other.Values) &&
-                DictionaryHelper.DictionaryEquals(Constraints, other.Constraints) &&
+            return Values.DictionaryEquals(other.Values) &&
+                Constraints.DictionaryEquals(other.Constraints) &&
                 Enumerable.SequenceEqual(ExpressionStack, other.ExpressionStack) &&
                 Relationships.SetEquals(other.Relationships);
         }

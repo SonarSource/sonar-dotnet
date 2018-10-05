@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -29,10 +28,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class TokenTypeAnalyzer : TokenTypeAnalyzerBase
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
+            Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
 
-        protected override TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel)
-            => new TokenClassifier(token, semanticModel);
+        protected override TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel) =>
+            new TokenClassifier(token, semanticModel);
 
         private class TokenClassifier : TokenClassifierBase
         {
@@ -41,60 +41,52 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
             }
 
-            protected override SyntaxNode GetBindableParent(SyntaxToken token)
-            {
-                return new SymbolReferenceAnalyzer().GetBindableParent(token);
-            }
+            protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
+                new SymbolReferenceAnalyzer().GetBindableParent(token);
 
-            protected override bool IsIdentifier(SyntaxToken token)
-            {
-                return token.IsKind(SyntaxKind.IdentifierToken);
-            }
+            protected override bool IsIdentifier(SyntaxToken token) =>
+                token.IsKind(SyntaxKind.IdentifierToken);
 
-            protected override bool IsKeyword(SyntaxToken token)
-            {
-                return SyntaxFacts.IsKeywordKind(token.Kind());
-            }
+            protected override bool IsKeyword(SyntaxToken token) =>
+                SyntaxFacts.IsKeywordKind(token.Kind());
 
-            protected override bool IsContextualKeyword(SyntaxToken token)
-            {
-                return SyntaxFacts.IsContextualKeyword(token.Kind());
-            }
+            protected override bool IsContextualKeyword(SyntaxToken token) =>
+                SyntaxFacts.IsContextualKeyword(token.Kind());
 
-            protected override bool IsRegularComment(SyntaxTrivia trivia)
-            {
-                return trivia.IsKind(SyntaxKind.CommentTrivia);
-            }
+            protected override bool IsRegularComment(SyntaxTrivia trivia) =>
+                trivia.IsKind(SyntaxKind.CommentTrivia);
 
             protected override bool IsNumericLiteral(SyntaxToken token)
             {
-                return NumericKinds.Contains(token.Kind());
+                switch (token.Kind())
+                {
+                    case SyntaxKind.DecimalLiteralToken:
+                    case SyntaxKind.FloatingLiteralToken:
+                    case SyntaxKind.IntegerLiteralToken:
+                        return true;
+
+                    default:
+                        return false;
+                }
             }
 
             protected override bool IsStringLiteral(SyntaxToken token)
             {
-                return StringKinds.Contains(token.Kind());
+                switch (token.Kind())
+                {
+                    case SyntaxKind.StringLiteralToken:
+                    case SyntaxKind.CharacterLiteralToken:
+                    case SyntaxKind.InterpolatedStringTextToken:
+                    case SyntaxKind.EndOfInterpolatedStringToken:
+                        return true;
+
+                    default:
+                        return false;
+                }
             }
 
-            protected override bool IsDocComment(SyntaxTrivia trivia)
-            {
-                return trivia.IsKind(SyntaxKind.DocumentationCommentTrivia);
-            }
-
-            private static readonly ISet<SyntaxKind> StringKinds = new HashSet<SyntaxKind>
-            {
-                SyntaxKind.StringLiteralToken,
-                SyntaxKind.CharacterLiteralToken,
-                SyntaxKind.InterpolatedStringTextToken,
-                SyntaxKind.EndOfInterpolatedStringToken
-            };
-
-            private static readonly ISet<SyntaxKind> NumericKinds = new HashSet<SyntaxKind>
-            {
-                SyntaxKind.DecimalLiteralToken,
-                SyntaxKind.FloatingLiteralToken,
-                SyntaxKind.IntegerLiteralToken
-            };
+            protected override bool IsDocComment(SyntaxTrivia trivia) =>
+                trivia.IsKind(SyntaxKind.DocumentationCommentTrivia);
         }
     }
 }

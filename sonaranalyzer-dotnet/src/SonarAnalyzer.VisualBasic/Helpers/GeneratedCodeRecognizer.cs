@@ -41,10 +41,9 @@ namespace SonarAnalyzer.Helpers.VisualBasic
         protected override bool IsTriviaComment(SyntaxTrivia trivia) =>
             trivia.IsKind(SyntaxKind.CommentTrivia);
 
-        protected override string GetAttributeName(SyntaxNode node)
-        {
-            var attribute = node as AttributeSyntax;
-            return attribute?.Name.ToString() ?? string.Empty;
-        }
+        protected override string GetAttributeName(SyntaxNode node) =>
+            node.IsKind(SyntaxKind.Attribute)
+                ? ((AttributeSyntax)node).Name.ToString()
+                : string.Empty;
     }
 }

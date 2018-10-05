@@ -59,11 +59,9 @@ namespace SonarAnalyzer.Helpers
         public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
         {
             var currentExpression = expression;
-            var parentheses = expression as ParenthesizedExpressionSyntax;
-            while (parentheses != null)
+            while (currentExpression?.IsKind(SyntaxKind.ParenthesizedExpression) ?? false)
             {
-                currentExpression = parentheses.Expression;
-                parentheses = currentExpression as ParenthesizedExpressionSyntax;
+                currentExpression = ((ParenthesizedExpressionSyntax)currentExpression).Expression;
             }
             return currentExpression;
         }
@@ -74,11 +72,9 @@ namespace SonarAnalyzer.Helpers
         public static SyntaxNode GetSelfOrTopParenthesizedExpression(this SyntaxNode node)
         {
             var current = node;
-            var parent = current.Parent as ParenthesizedExpressionSyntax;
-            while (parent != null)
+            while (current?.Parent?.IsKind(SyntaxKind.ParenthesizedExpression) ?? false)
             {
-                current = parent;
-                parent = current.Parent as ParenthesizedExpressionSyntax;
+                current = current.Parent;
             }
             return current;
         }
@@ -107,69 +103,64 @@ namespace SonarAnalyzer.Helpers
 
         private static bool IsOn(this ExpressionSyntax expression, SyntaxKind onKind)
         {
-            if (expression is InvocationExpressionSyntax invocation)
+            switch (expression.Kind())
             {
-                return IsOn(invocation.Expression, onKind);
-            }
+                case SyntaxKind.InvocationExpression:
+                    return IsOn(((InvocationExpressionSyntax)expression).Expression, onKind);
 
-            if (expression is NameSyntax)
-            {
-                // This is a simplification as we don't check where the method is defined (so this could be this or base)
-                return true;
-            }
+                case SyntaxKind.AliasQualifiedName:
+                case SyntaxKind.GenericName:
+                case SyntaxKind.IdentifierName:
+                case SyntaxKind.QualifiedName:
+                    // This is a simplification as we don't check where the method is defined (so this could be this or base)
+                    return true;
 
-            if (expression is MemberAccessExpressionSyntax memberAccess &&
-                memberAccess.Expression.RemoveParentheses().IsKind(onKind))
-            {
-                return true;
-            }
+                case SyntaxKind.PointerMemberAccessExpression:
+                case SyntaxKind.SimpleMemberAccessExpression:
+                    return ((MemberAccessExpressionSyntax)expression).Expression.RemoveParentheses().IsKind(onKind);
 
-            if (expression is ConditionalAccessExpressionSyntax conditionalAccess &&
-                conditionalAccess.Expression.RemoveParentheses().IsKind(onKind))
-            {
-                return true;
-            }
+                case SyntaxKind.ConditionalAccessExpression:
+                    return ((ConditionalAccessExpressionSyntax)expression).Expression.RemoveParentheses().IsKind(onKind);
 
-            return false;
+                default:
+                    return false;
+            }
         }
 
-        public static bool IsInNameofCall(this ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            var argumentList = (expression.Parent as ArgumentSyntax)?.Parent as ArgumentListSyntax;
-
-            if (!(argumentList?.Parent is InvocationExpressionSyntax nameofCall))
-            {
-                return false;
-            }
-
-            return nameofCall.IsNameof(semanticModel);
-        }
+        public static bool IsInNameofCall(this ExpressionSyntax expression, SemanticModel semanticModel) =>
+            expression.Parent != null &&
+            expression.Parent.IsKind(SyntaxKind.Argument) &&
+            expression.Parent.Parent != null &&
+            expression.Parent.Parent.IsKind(SyntaxKind.ArgumentList) &&
+            expression.Parent.Parent.Parent != null &&
+            expression.Parent.Parent.Parent.IsKind(SyntaxKind.InvocationExpression) &&
+            ((InvocationExpressionSyntax)expression.Parent.Parent.Parent).IsNameof(semanticModel);
 
         public static bool IsNameof(this InvocationExpressionSyntax expression, SemanticModel semanticModel)
         {
-            if (semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol calledSymbol)
+            if (expression == null ||
+                !expression.Expression.IsKind(SyntaxKind.IdentifierName) ||
+                semanticModel.GetSymbolInfo(expression).Symbol?.Kind == SymbolKind.Method)
             {
                 return false;
             }
 
-            var nameofIdentifier = (expression?.Expression as IdentifierNameSyntax)?.Identifier;
-
-            return nameofIdentifier.HasValue &&
-                (nameofIdentifier.Value.ToString() == NameOfKeywordText);
+            return ((IdentifierNameSyntax)expression.Expression).Identifier.ToString() == NameOfKeywordText;
         }
 
         public static bool IsStringEmpty(this ExpressionSyntax expression, SemanticModel semanticModel)
         {
-            if (!(expression is MemberAccessExpressionSyntax memberAccessExpression))
+            if (!expression.IsKind(SyntaxKind.SimpleMemberAccessExpression) &&
+                !expression.IsKind(SyntaxKind.PointerMemberAccessExpression))
             {
                 return false;
             }
 
-            var name = semanticModel.GetSymbolInfo(memberAccessExpression.Name);
+            var nameSymbolInfo = semanticModel.GetSymbolInfo(((MemberAccessExpressionSyntax)expression).Name);
 
-            return name.Symbol != null &&
-                   name.Symbol.IsInType(KnownType.System_String) &&
-                   name.Symbol.Name == nameof(string.Empty);
+            return nameSymbolInfo.Symbol != null &&
+                   nameSymbolInfo.Symbol.IsInType(KnownType.System_String) &&
+                   nameSymbolInfo.Symbol.Name == nameof(string.Empty);
         }
 
         public static bool IsAnyKind(this SyntaxNode syntaxNode, ISet<SyntaxKind> syntaxKinds) =>
@@ -200,9 +191,20 @@ namespace SonarAnalyzer.Helpers
 
         public static SyntaxToken? GetIdentifierOrDefault(this BaseMethodDeclarationSyntax methodDeclaration)
         {
-            return (methodDeclaration as MethodDeclarationSyntax)?.Identifier ??
-                   (methodDeclaration as ConstructorDeclarationSyntax)?.Identifier ??
-                   (methodDeclaration as DestructorDeclarationSyntax)?.Identifier;
+            switch (methodDeclaration.Kind())
+            {
+                case SyntaxKind.ConstructorDeclaration:
+                    return ((ConstructorDeclarationSyntax)methodDeclaration).Identifier;
+
+                case SyntaxKind.DestructorDeclaration:
+                    return ((DestructorDeclarationSyntax)methodDeclaration).Identifier;
+
+                case SyntaxKind.MethodDeclaration:
+                    return ((MethodDeclarationSyntax)methodDeclaration).Identifier;
+
+                default:
+                    return null;
+            }
         }
 
         public static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation)
@@ -212,18 +214,20 @@ namespace SonarAnalyzer.Helpers
                 return null;
             }
             var expression = invocation.Expression;
-            var expressionType = expression.Kind();
-            switch (expressionType)
+            switch (expression.Kind())
             {
                 case SyntaxKind.IdentifierName:
                     // method()
                     return ((IdentifierNameSyntax)expression).Identifier;
+
                 case SyntaxKind.SimpleMemberAccessExpression:
                     // foo.method()
                     return ((MemberAccessExpressionSyntax)expression).Name.Identifier;
+
                 case SyntaxKind.MemberBindingExpression:
                     // foo?.method()
                     return ((MemberBindingExpressionSyntax)expression).Name.Identifier;
+
                 default:
                     return null;
             }
@@ -258,29 +262,39 @@ namespace SonarAnalyzer.Helpers
             // * VariableDeclarationSyntax (for local variable or field),
             // * PropertyDeclarationSyntax,
             // * SimpleAssigmentExpression
+            return node.Ancestors()
+                .Select(GetExpressionTree)
+                .FirstOrDefault(tuple => tuple.Item1)
+                ?.Item2?.IsKnownType(KnownType.System_Linq_Expressions_Expression_T, semanticModel)
+                ?? false;
 
-            var potentialExpressionNode = node.Ancestors().FirstOrDefault(ancestor =>
-                ancestor is VariableDeclarationSyntax ||
-                ancestor is PropertyDeclarationSyntax ||
-                ancestor is AssignmentExpressionSyntax);
-
-            SyntaxNode typeIdentifiedNode = null;
-            switch (potentialExpressionNode)
+            Tuple<bool, SyntaxNode> GetExpressionTree(SyntaxNode syntaxNode)
             {
-                case VariableDeclarationSyntax varDecl:
-                    typeIdentifiedNode = varDecl.Type;
-                    break;
-                case PropertyDeclarationSyntax propDecl:
-                    typeIdentifiedNode = propDecl.Type;
-                    break;
-                case AssignmentExpressionSyntax assignExpr:
-                    typeIdentifiedNode = assignExpr.Left;
-                    break;
-                default:
-                    return false;
-            }
+                switch (syntaxNode.Kind())
+                {
+                    case SyntaxKind.VariableDeclaration:
+                        return new Tuple<bool, SyntaxNode>(true, ((VariableDeclarationSyntax)syntaxNode).Type);
 
-            return typeIdentifiedNode?.IsKnownType(KnownType.System_Linq_Expressions_Expression_T, semanticModel) ?? false;
+                    case SyntaxKind.PropertyDeclaration:
+                        return new Tuple<bool, SyntaxNode>(true, ((PropertyDeclarationSyntax)syntaxNode).Type);
+
+                    case SyntaxKind.AddAssignmentExpression:
+                    case SyntaxKind.AndAssignmentExpression:
+                    case SyntaxKind.DivideAssignmentExpression:
+                    case SyntaxKind.ExclusiveOrAssignmentExpression:
+                    case SyntaxKind.LeftShiftAssignmentExpression:
+                    case SyntaxKind.ModuloAssignmentExpression:
+                    case SyntaxKind.MultiplyAssignmentExpression:
+                    case SyntaxKind.OrAssignmentExpression:
+                    case SyntaxKind.RightShiftAssignmentExpression:
+                    case SyntaxKind.SimpleAssignmentExpression:
+                    case SyntaxKind.SubtractAssignmentExpression:
+                        return new Tuple<bool, SyntaxNode>(true, ((AssignmentExpressionSyntax)syntaxNode).Left);
+
+                    default:
+                        return new Tuple<bool, SyntaxNode>(false, null);
+                }
+            }
         }
 
         public static bool HasDefaultLabel(this SwitchStatementSyntax node) =>

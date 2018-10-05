@@ -39,15 +39,43 @@ namespace SonarAnalyzer.Common.VisualBasic
             }
         }
 
-        protected override bool IsEndOfFile(SyntaxToken token) => token.IsKind(SyntaxKind.EndOfFileToken);
+        protected override bool IsEndOfFile(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.EndOfFileToken);
 
-        protected override bool IsNoneToken(SyntaxToken token) => token.IsKind(SyntaxKind.None);
+        protected override bool IsNoneToken(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.None);
 
-        protected override bool IsCommentTrivia(SyntaxTrivia trivia) => TriviaKinds.Contains(trivia.Kind());
+        protected override bool IsCommentTrivia(SyntaxTrivia trivia)
+        {
+            switch (trivia.Kind())
+            {
+                case SyntaxKind.CommentTrivia:
+                case SyntaxKind.DocumentationCommentExteriorTrivia:
+                case SyntaxKind.DocumentationCommentTrivia:
+                    return true;
 
-        protected override bool IsClass(SyntaxNode node) => ClassKinds.Contains(node.Kind());
+                default:
+                    return false;
+            }
+        }
 
-        protected override bool IsStatement(SyntaxNode node) => node is ExecutableStatementSyntax;
+        protected override bool IsClass(SyntaxNode node)
+        {
+            switch (node.Kind())
+            {
+                case SyntaxKind.ClassBlock:
+                case SyntaxKind.StructureBlock:
+                case SyntaxKind.InterfaceBlock:
+                case SyntaxKind.ModuleBlock:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
+        protected override bool IsStatement(SyntaxNode node) =>
+            node is ExecutableStatementSyntax;
 
         protected override bool IsFunction(SyntaxNode node)
         {
@@ -66,10 +94,67 @@ namespace SonarAnalyzer.Common.VisualBasic
             return true;
         }
 
-        protected override IEnumerable<SyntaxNode> PublicApiNodes => Enumerable.Empty<SyntaxNode>(); // Not calculated for VB.Net
+        protected override IEnumerable<SyntaxNode> PublicApiNodes =>
+            Enumerable.Empty<SyntaxNode>(); // Not calculated for VB.Net
 
-        private bool IsComplexityIncreasingKind(SyntaxNode node) =>
-            ComplexityIncreasingKinds.Contains(node.Kind());
+        private bool IsComplexityIncreasingKind(SyntaxNode node)
+        {
+            switch (node.Kind())
+            {
+                case SyntaxKind.IfStatement:
+                case SyntaxKind.SingleLineIfStatement:
+                case SyntaxKind.TernaryConditionalExpression:
+                case SyntaxKind.CaseStatement:
+
+                case SyntaxKind.WhileStatement:
+                case SyntaxKind.DoWhileStatement:
+                case SyntaxKind.DoUntilStatement:
+                case SyntaxKind.SimpleDoStatement:
+                case SyntaxKind.ForStatement:
+                case SyntaxKind.ForEachStatement:
+
+                case SyntaxKind.ThrowStatement:
+                case SyntaxKind.TryStatement:
+
+                case SyntaxKind.ErrorStatement:
+
+                case SyntaxKind.ResumeStatement:
+                case SyntaxKind.ResumeNextStatement:
+                case SyntaxKind.ResumeLabelStatement:
+
+                case SyntaxKind.OnErrorGoToLabelStatement:
+                case SyntaxKind.OnErrorGoToMinusOneStatement:
+                case SyntaxKind.OnErrorGoToZeroStatement:
+                case SyntaxKind.OnErrorResumeNextStatement:
+
+                case SyntaxKind.GoToStatement:
+
+                case SyntaxKind.ExitDoStatement:
+                case SyntaxKind.ExitForStatement:
+                case SyntaxKind.ExitFunctionStatement:
+                case SyntaxKind.ExitOperatorStatement:
+                case SyntaxKind.ExitPropertyStatement:
+                case SyntaxKind.ExitSelectStatement:
+                case SyntaxKind.ExitSubStatement:
+                case SyntaxKind.ExitTryStatement:
+                case SyntaxKind.ExitWhileStatement:
+
+                case SyntaxKind.ContinueDoStatement:
+                case SyntaxKind.ContinueForStatement:
+                case SyntaxKind.ContinueWhileStatement:
+
+                case SyntaxKind.StopStatement:
+
+                case SyntaxKind.AndAlsoExpression:
+                case SyntaxKind.OrElseExpression:
+
+                case SyntaxKind.EndStatement:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
 
         public override int GetComplexity(SyntaxNode node) =>
             node.DescendantNodesAndSelf()
@@ -82,22 +167,8 @@ namespace SonarAnalyzer.Common.VisualBasic
             return 0; // Not implemented
         }
 
-        public override ICollection<int> ExecutableLines => new List<int>(); // Not implemented
-
-        private static readonly ISet<SyntaxKind> TriviaKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.CommentTrivia,
-            SyntaxKind.DocumentationCommentExteriorTrivia,
-            SyntaxKind.DocumentationCommentTrivia
-        };
-
-        private static readonly ISet<SyntaxKind> ClassKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.ClassBlock,
-            SyntaxKind.StructureBlock,
-            SyntaxKind.InterfaceBlock,
-            SyntaxKind.ModuleBlock
-        };
+        public override ICollection<int> ExecutableLines =>
+            new List<int>(); // Not implemented
 
         private static readonly ISet<SyntaxKind> FunctionKinds = new HashSet<SyntaxKind>
         {
@@ -125,58 +196,6 @@ namespace SonarAnalyzer.Common.VisualBasic
             SyntaxKind.RaiseEventAccessorBlock,
             SyntaxKind.AddHandlerAccessorBlock,
             SyntaxKind.RemoveHandlerAccessorBlock
-        };
-
-        private static readonly ISet<SyntaxKind> ComplexityIncreasingKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.IfStatement,
-            SyntaxKind.SingleLineIfStatement,
-            SyntaxKind.TernaryConditionalExpression,
-            SyntaxKind.CaseStatement,
-
-            SyntaxKind.WhileStatement,
-            SyntaxKind.DoWhileStatement,
-            SyntaxKind.DoUntilStatement,
-            SyntaxKind.SimpleDoStatement,
-            SyntaxKind.ForStatement,
-            SyntaxKind.ForEachStatement,
-
-            SyntaxKind.ThrowStatement,
-            SyntaxKind.TryStatement,
-
-            SyntaxKind.ErrorStatement,
-
-            SyntaxKind.ResumeStatement,
-            SyntaxKind.ResumeNextStatement,
-            SyntaxKind.ResumeLabelStatement,
-
-            SyntaxKind.OnErrorGoToLabelStatement,
-            SyntaxKind.OnErrorGoToMinusOneStatement,
-            SyntaxKind.OnErrorGoToZeroStatement,
-            SyntaxKind.OnErrorResumeNextStatement,
-
-            SyntaxKind.GoToStatement,
-
-            SyntaxKind.ExitDoStatement,
-            SyntaxKind.ExitForStatement,
-            SyntaxKind.ExitFunctionStatement,
-            SyntaxKind.ExitOperatorStatement,
-            SyntaxKind.ExitPropertyStatement,
-            SyntaxKind.ExitSelectStatement,
-            SyntaxKind.ExitSubStatement,
-            SyntaxKind.ExitTryStatement,
-            SyntaxKind.ExitWhileStatement,
-
-            SyntaxKind.ContinueDoStatement,
-            SyntaxKind.ContinueForStatement,
-            SyntaxKind.ContinueWhileStatement,
-
-            SyntaxKind.StopStatement,
-
-            SyntaxKind.AndAlsoExpression,
-            SyntaxKind.OrElseExpression,
-
-            SyntaxKind.EndStatement
         };
     }
 }
