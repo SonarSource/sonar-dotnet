@@ -41,16 +41,16 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly Dictionary<string, HashSet<KnownType>> InvalidMemberAccess =
-            new Dictionary<string, HashSet<KnownType>>
+        private static readonly Dictionary<string, ImmutableArray<KnownType>> InvalidMemberAccess =
+            new Dictionary<string, ImmutableArray<KnownType>>
             {
-                ["Wait"] = new HashSet<KnownType> { KnownType.System_Threading_Tasks_Task },
-                ["WaitAny"] = new HashSet<KnownType> { KnownType.System_Threading_Tasks_Task },
-                ["WaitAll"] = new HashSet<KnownType> { KnownType.System_Threading_Tasks_Task },
-                ["Result"] = new HashSet<KnownType> { KnownType.System_Threading_Tasks_Task_T },
-                ["Sleep"] = new HashSet<KnownType> { KnownType.System_Threading_Thread },
-                ["GetResult"] = new HashSet<KnownType> { KnownType.System_Runtime_CompilerServices_TaskAwaiter,
-                    KnownType.System_Runtime_CompilerServices_TaskAwaiter_TResult },
+                ["Wait"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task),
+                ["WaitAny"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task),
+                ["WaitAll"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task),
+                ["Result"] = ImmutableArray.Create(KnownType.System_Threading_Tasks_Task_T),
+                ["Sleep"] = ImmutableArray.Create(KnownType.System_Threading_Thread),
+                ["GetResult"] = ImmutableArray.Create(KnownType.System_Runtime_CompilerServices_TaskAwaiter,
+                    KnownType.System_Runtime_CompilerServices_TaskAwaiter_TResult),
             };
 
         private static readonly Dictionary<string, KnownType> TaskThreadPoolCalls =
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ["Wait"] = new[] { "Task.Wait", "await" },
                 ["GetResult"] = new[] { "Task.GetAwaiter.GetResult", "await" },
                 ["WaitAny"] = new[] { "Task.WaitAny", "await Task.WhenAny" },
-                ["WaitAll"] =  new[] { "Task.WaitAll", "await Task.WhenAll" },
+                ["WaitAll"] = new[] { "Task.WaitAll", "await Task.WhenAll" },
                 ["Sleep"] = new[] { "Thread.Sleep", "await Task.Delay" },
             };
 

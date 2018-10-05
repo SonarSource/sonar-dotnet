@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -37,21 +36,14 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3876";
         private const string MessageFormat = "Use string or an integral type here, or refactor this indexer into a method.";
 
-        private static readonly ISet<KnownType> allowedIndexerTypes = new HashSet<KnownType>
-        {
-            KnownType.System_Object,
-            KnownType.System_String
-        };
+        private static readonly ImmutableArray<KnownType> allowedIndexerTypes =
+            new[] { KnownType.System_Object, KnownType.System_String }
+            .Concat(KnownType.IntegralNumbers)
+            .ToImmutableArray();
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        static StringOrIntegralTypesForIndexers()
-        {
-            allowedIndexerTypes.UnionWith(KnownType.IntegralNumbers);
-        }
 
         protected override void Initialize(SonarAnalysisContext context)
         {

@@ -44,20 +44,18 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private const string EqualsName = "Equals";
 
-        private static readonly ISet<KnownType> AllowedTypes = new HashSet<KnownType>
-        {
-            KnownType.System_Type,
-            KnownType.System_Reflection_Assembly,
-            KnownType.System_Reflection_MemberInfo,
-            KnownType.System_Reflection_Module,
-            KnownType.System_Data_Common_CommandTrees_DbExpression,
-            KnownType.System_Object
-        };
+        private static readonly ImmutableArray<KnownType> AllowedTypes =
+            ImmutableArray.Create(
+                KnownType.System_Type,
+                KnownType.System_Reflection_Assembly,
+                KnownType.System_Reflection_MemberInfo,
+                KnownType.System_Reflection_Module,
+                KnownType.System_Data_Common_CommandTrees_DbExpression,
+                KnownType.System_Object
+            );
 
-        private static readonly ISet<KnownType> AllowedTypesWithAllDerived = new HashSet<KnownType>
-        {
-            KnownType.System_Windows_DependencyObject
-        };
+        private static readonly ImmutableArray<KnownType> AllowedTypesWithAllDerived =
+            ImmutableArray.Create(KnownType.System_Windows_DependencyObject);
 
         protected override void Initialize(SonarAnalysisContext context)
         {

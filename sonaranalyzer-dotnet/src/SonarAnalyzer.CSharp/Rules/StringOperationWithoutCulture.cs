@@ -110,11 +110,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string CompareToMethodName = "CompareTo";
         private const string ToStringMethodName = "ToString";
 
-        private static readonly ISet<KnownType> StringCultureSpecifierNames = new HashSet<KnownType>
-        {
-            KnownType.System_Globalization_CultureInfo,
-            KnownType.System_Globalization_CompareOptions,
-            KnownType.System_StringComparison
-        };
+        private static readonly ImmutableArray<KnownType> StringCultureSpecifierNames =
+            ImmutableArray.Create(
+                KnownType.System_Globalization_CultureInfo,
+                KnownType.System_Globalization_CompareOptions,
+                KnownType.System_StringComparison
+            );
     }
 }

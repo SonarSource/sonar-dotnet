@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -31,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     public abstract class DoNotCallInsecureSecurityAlgorithm : SonarDiagnosticAnalyzer
     {
-        internal abstract ISet<KnownType> AlgorithmTypes { get; }
+        internal abstract ImmutableArray<KnownType> AlgorithmTypes { get; }
         protected abstract ISet<string> AlgorithmParameterlessFactoryMethods { get; }
         protected abstract ISet<string> AlgorithmParameteredFactoryMethods { get; }
         protected abstract ISet<string> FactoryParameterNames { get; }

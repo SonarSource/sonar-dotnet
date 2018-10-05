@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -41,23 +40,23 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> RelevantTypes = new HashSet<KnownType>
-        {
-            KnownType.System_Boolean,
-            KnownType.System_Byte,
-            KnownType.System_SByte,
-            KnownType.System_Char,
-            KnownType.System_Decimal,
-            KnownType.System_Double,
-            KnownType.System_Single,
-            KnownType.System_Int32,
-            KnownType.System_UInt32,
-            KnownType.System_Int64,
-            KnownType.System_UInt64,
-            KnownType.System_Int16,
-            KnownType.System_UInt16,
-            KnownType.System_String,
-        };
+        private static readonly ImmutableArray<KnownType> RelevantTypes =
+            ImmutableArray.Create(
+                KnownType.System_Boolean,
+                KnownType.System_Byte,
+                KnownType.System_SByte,
+                KnownType.System_Char,
+                KnownType.System_Decimal,
+                KnownType.System_Double,
+                KnownType.System_Single,
+                KnownType.System_Int32,
+                KnownType.System_UInt32,
+                KnownType.System_Int64,
+                KnownType.System_UInt64,
+                KnownType.System_Int16,
+                KnownType.System_UInt16,
+                KnownType.System_String
+            );
 
         protected override void Initialize(SonarAnalysisContext context)
         {

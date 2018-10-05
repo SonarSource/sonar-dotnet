@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -36,18 +35,18 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3998";
         private const string MessageFormat = "Replace this lock on '{0}' with a lock against an object that cannot be accessed across application domain boundaries.";
 
-        private static readonly ISet<KnownType> weakIdentityTypes = new HashSet<KnownType>
-        {
-            KnownType.System_MarshalByRefObject,
-            KnownType.System_ExecutionEngineException,
-            KnownType.System_OutOfMemoryException,
-            KnownType.System_StackOverflowException,
-            KnownType.System_String,
-            KnownType.System_IO_FileStream,
-            KnownType.System_Reflection_MemberInfo,
-            KnownType.System_Reflection_ParameterInfo,
-            KnownType.System_Threading_Thread
-        };
+        private static readonly ImmutableArray<KnownType> weakIdentityTypes =
+            ImmutableArray.Create(
+                KnownType.System_MarshalByRefObject,
+                KnownType.System_ExecutionEngineException,
+                KnownType.System_OutOfMemoryException,
+                KnownType.System_StackOverflowException,
+                KnownType.System_String,
+                KnownType.System_IO_FileStream,
+                KnownType.System_Reflection_MemberInfo,
+                KnownType.System_Reflection_ParameterInfo,
+                KnownType.System_Threading_Thread
+            );
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -64,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (lockExpressionType != null &&
                     lockExpressionType.DerivesFromAny(weakIdentityTypes))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, lockExpression.GetLocation(), 
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, lockExpression.GetLocation(),
                         lockExpressionType.Name));
                 }
             },

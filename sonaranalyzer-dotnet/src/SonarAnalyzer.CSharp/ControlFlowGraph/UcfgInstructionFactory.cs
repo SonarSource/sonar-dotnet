@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -36,12 +37,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
     {
         private static readonly IEnumerable<Instruction> NoInstructions = Enumerable.Empty<Instruction>();
 
-        private static readonly ISet<KnownType> UnsupportedVariableTypes =
-            new[] { KnownType.System_Boolean }
-            .Union(KnownType.IntegralNumbers)
-            .Union(KnownType.NonIntegralNumbers)
-            .Union(KnownType.PointerTypes)
-            .ToHashSet();
+        private static readonly ImmutableArray<KnownType> UnsupportedVariableTypes =
+            ImmutableArray.Create(
+                new[] { KnownType.System_Boolean }
+                .Union(KnownType.IntegralNumbers)
+                .Union(KnownType.NonIntegralNumbers)
+                .Union(KnownType.PointerTypes)
+                .ToArray()
+            );
 
         private readonly UcfgExpressionService expressionService;
         private readonly SemanticModel semanticModel;

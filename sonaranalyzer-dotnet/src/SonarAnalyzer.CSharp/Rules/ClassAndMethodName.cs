@@ -63,12 +63,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 { SyntaxKind.PropertyDeclaration, "property" }
             };
 
-        private static readonly ISet<KnownType> ComRelatedTypes =
-            new HashSet<KnownType>
-            {
+        private static readonly ImmutableArray<KnownType> ComRelatedTypes =
+            ImmutableArray.Create(
                 KnownType.System_Runtime_InteropServices_ComImportAttribute,
                 KnownType.System_Runtime_InteropServices_InterfaceTypeAttribute
-            };
+            );
 
         protected override void Initialize(SonarAnalysisContext context)
         {

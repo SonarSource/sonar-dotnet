@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
@@ -74,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             derived2Type.DerivesOrImplements(interfaceType).Should().BeTrue();
             derived1Type.DerivesOrImplements(interfaceType).Should().BeFalse();
 
-            var baseTypes = new HashSet<KnownType>(new[] { interfaceType, baseType });
+            var baseTypes = ImmutableArray.Create(new[] { interfaceType, baseType });
             derived1Type.DerivesOrImplementsAny(baseTypes).Should().BeTrue();
         }
 
@@ -85,7 +86,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 .Single(m => m.GetParameters().Length == 1);
 
             var baseKnownType = (KnownType)ctor.Invoke(new object[] { "NS.Base" });
-            var baseKnownTypes = new HashSet<KnownType>(new[] { baseKnownType });
+            var baseKnownTypes = ImmutableArray.Create(new[] { baseKnownType });
 
             var baseType = this.semanticModel.GetDeclaredSymbol(this.baseClassDeclaration) as INamedTypeSymbol;
 

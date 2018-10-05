@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -90,12 +91,12 @@ namespace SonarAnalyzer.Helpers
 
         public static IEnumerable<AttributeSyntax> GetAttributes(this SyntaxList<AttributeListSyntax> attributeLists,
             KnownType attributeKnownType, SemanticModel semanticModel) =>
-            GetAttributes(attributeLists, new HashSet<KnownType> { attributeKnownType }, semanticModel);
+            attributeLists.SelectMany(list => list.Attributes)
+                .Where(a => semanticModel.GetTypeInfo(a).Type.Is(attributeKnownType));
 
         public static IEnumerable<AttributeSyntax> GetAttributes(this SyntaxList<AttributeListSyntax> attributeLists,
-            ISet<KnownType> attributeKnownTypes, SemanticModel semanticModel) =>
-            attributeLists
-                .SelectMany(list => list.Attributes)
+            ImmutableArray<KnownType> attributeKnownTypes, SemanticModel semanticModel) =>
+            attributeLists.SelectMany(list => list.Attributes)
                 .Where(a => semanticModel.GetTypeInfo(a).Type.IsAny(attributeKnownTypes));
 
         public static bool IsOnThis(this ExpressionSyntax expression) =>

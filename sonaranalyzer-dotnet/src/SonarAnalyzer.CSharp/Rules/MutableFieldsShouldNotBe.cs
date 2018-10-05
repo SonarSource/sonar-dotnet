@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -32,16 +33,14 @@ namespace SonarAnalyzer.Rules
     {
         protected const string MessageFormat = "Use an immutable collection or reduce the accessibility of the field(s) {0}.";
 
-        private static readonly ISet<KnownType> MutableBaseTypes =
-            new HashSet<KnownType>
-            {
+        private static readonly ImmutableArray<KnownType> MutableBaseTypes =
+            ImmutableArray.Create(
                 KnownType.System_Collections_Generic_ICollection_T,
                 KnownType.System_Array
-            };
+            );
 
-        private static readonly ISet<KnownType> ImmutableBaseTypes =
-            new HashSet<KnownType>
-            {
+        private static readonly ImmutableArray<KnownType> ImmutableBaseTypes =
+            ImmutableArray.Create(
                 KnownType.System_Collections_ObjectModel_ReadOnlyCollection_T,
                 KnownType.System_Collections_ObjectModel_ReadOnlyDictionary_TKey_TValue,
                 KnownType.System_Collections_Immutable_IImmutableArray_T,
@@ -50,7 +49,7 @@ namespace SonarAnalyzer.Rules
                 KnownType.System_Collections_Immutable_IImmutableSet_T,
                 KnownType.System_Collections_Immutable_IImmutableStack_T,
                 KnownType.System_Collections_Immutable_IImmutableQueue_T
-            };
+            );
 
         protected abstract ISet<SyntaxKind> InvalidModifiers { get; }
 

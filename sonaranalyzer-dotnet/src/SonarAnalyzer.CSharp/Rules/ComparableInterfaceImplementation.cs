@@ -45,11 +45,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private const string ObjectEquals = nameof(object.Equals);
 
-        private static readonly ISet<KnownType> ComparableInterfaces = new HashSet<KnownType>
-        {
-            KnownType.System_IComparable,
-            KnownType.System_IComparable_T
-        };
+        private static readonly ImmutableArray<KnownType> ComparableInterfaces =
+            ImmutableArray.Create(
+                KnownType.System_IComparable,
+                KnownType.System_IComparable_T
+            );
 
         private static readonly IList<string> RequiredOperators = new List<string>
         {

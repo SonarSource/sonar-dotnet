@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
@@ -289,52 +289,52 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Windows_Markup_ConstructorArgumentAttribute = new KnownType("System.Windows.Markup.ConstructorArgumentAttribute");
         internal static readonly KnownType System_Xml_XmlDocument = new KnownType("System.Xml.XmlDocument");
         internal static readonly KnownType System_Xml_XmlNode = new KnownType("System.Xml.XmlNode");
-        internal static readonly ISet<KnownType> SystemActionVariants = new HashSet<KnownType>
-        {
-            new KnownType("System.Action"),
-            new KnownType("System.Action<T>"),
-            new KnownType("System.Action<T1, T2>"),
-            new KnownType("System.Action<T1, T2, T3>"),
-            new KnownType("System.Action<T1, T2, T3, T4>"),
-            new KnownType("System.Action<T1, T2, T3, T4, T5>"),
-            new KnownType("System.Action<T1, T2, T3, T4, T5, T6>"),
-            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7>"),
-            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8>"),
-            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9>"),
-            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>"),
-            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>"),
-            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>"),
-            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>"),
-            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>"),
-            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>"),
-            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>")
-        };
-        internal static readonly ISet<KnownType> SystemFuncVariants = new HashSet<KnownType>
-        {
-            new KnownType("System.Func<TResult>"),
-            new KnownType("System.Func<T, TResult>"),
-            new KnownType("System.Func<T1, T2, TResult>"),
-            new KnownType("System.Func<T1, T2, T3, TResult>"),
-            new KnownType("System.Func<T1, T2, T3, T4, TResult>"),
-            new KnownType("System.Func<T1, T2, T3, T4, T5, TResult>"),
-            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, TResult>"),
-            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, TResult>"),
-            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>"),
-            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>"),
-            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>"),
-            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>"),
-            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>"),
-            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>"),
-            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>"),
-            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>"),
-            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>")
-        };
-        internal static readonly ISet<KnownType> SystemTasks = new HashSet<KnownType>
-        {
-            System_Threading_Tasks_Task,
-            System_Threading_Tasks_Task_T,
-            System_Threading_Tasks_ValueTask_TResult
-        };
+        internal static readonly ImmutableArray<KnownType> SystemActionVariants =
+            ImmutableArray.Create(
+                new KnownType("System.Action"),
+                new KnownType("System.Action<T>"),
+                new KnownType("System.Action<T1, T2>"),
+                new KnownType("System.Action<T1, T2, T3>"),
+                new KnownType("System.Action<T1, T2, T3, T4>"),
+                new KnownType("System.Action<T1, T2, T3, T4, T5>"),
+                new KnownType("System.Action<T1, T2, T3, T4, T5, T6>"),
+                new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7>"),
+                new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8>"),
+                new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9>"),
+                new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>"),
+                new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>"),
+                new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>"),
+                new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>"),
+                new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>"),
+                new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>"),
+                new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>")
+            );
+        internal static readonly ImmutableArray<KnownType> SystemFuncVariants =
+            ImmutableArray.Create(
+                new KnownType("System.Func<TResult>"),
+                new KnownType("System.Func<T, TResult>"),
+                new KnownType("System.Func<T1, T2, TResult>"),
+                new KnownType("System.Func<T1, T2, T3, TResult>"),
+                new KnownType("System.Func<T1, T2, T3, T4, TResult>"),
+                new KnownType("System.Func<T1, T2, T3, T4, T5, TResult>"),
+                new KnownType("System.Func<T1, T2, T3, T4, T5, T6, TResult>"),
+                new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, TResult>"),
+                new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>"),
+                new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>"),
+                new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>"),
+                new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>"),
+                new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>"),
+                new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>"),
+                new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>"),
+                new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>"),
+                new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>")
+            );
+        internal static readonly ImmutableArray<KnownType> SystemTasks =
+            ImmutableArray.Create(
+                System_Threading_Tasks_Task,
+                System_Threading_Tasks_Task_T,
+                System_Threading_Tasks_ValueTask_TResult
+            );
         internal static readonly KnownType Sytem_Resources_ResourceManager = new KnownType("System.Resources.ResourceManager");
         internal static readonly KnownType UnityEditor_AssetModificationProcessor = new KnownType("UnityEditor.AssetModificationProcessor");
         internal static readonly KnownType UnityEditor_AssetPostprocessor = new KnownType("UnityEditor.AssetPostprocessor");
@@ -344,46 +344,46 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Xunit_FactAttribute = new KnownType("Xunit.FactAttribute");
         internal static readonly KnownType Xunit_TheoryAttribute = new KnownType("Xunit.TheoryAttribute");
         internal static readonly KnownType LegacyXunit_TheoryAttribute = new KnownType("Xunit.Extensions.TheoryAttribute");
-        internal static readonly ISet<KnownType> CallerInfoAttributes = new HashSet<KnownType>
-        {
-            System_Runtime_CompilerServices_CallerFilePathAttribute,
-            System_Runtime_CompilerServices_CallerLineNumberAttribute,
-            System_Runtime_CompilerServices_CallerMemberNameAttribute
-        };
-        internal static readonly ISet<KnownType> FloatingPointNumbers = new HashSet<KnownType>
-        {
-            System_Single,
-            System_Double
-        };
-        internal static readonly ISet<KnownType> IntegralNumbers = new HashSet<KnownType>
-        {
-            System_Int16,
-            System_Int32,
-            System_Int64,
-            System_UInt16,
-            System_UInt32,
-            System_UInt64,
-            System_Char,
-            System_Byte,
-            System_SByte
-        };
-        internal static readonly ISet<KnownType> NonIntegralNumbers = new HashSet<KnownType>
-        {
-            System_Single,
-            System_Double,
-            System_Decimal
-        };
-        internal static readonly ISet<KnownType> PointerTypes = new HashSet<KnownType>
-        {
-            System_IntPtr,
-            System_UIntPtr
-        };
-        internal static readonly ISet<KnownType> UnsignedIntegers = new HashSet<KnownType>
-        {
-            System_UInt64,
-            System_UInt32,
-            System_UInt16
-        };
+        internal static readonly ImmutableArray<KnownType> CallerInfoAttributes =
+            ImmutableArray.Create(
+                System_Runtime_CompilerServices_CallerFilePathAttribute,
+                System_Runtime_CompilerServices_CallerLineNumberAttribute,
+                System_Runtime_CompilerServices_CallerMemberNameAttribute
+            );
+        internal static readonly ImmutableArray<KnownType> FloatingPointNumbers =
+            ImmutableArray.Create(
+                System_Single,
+                System_Double
+            );
+        internal static readonly ImmutableArray<KnownType> IntegralNumbers =
+            ImmutableArray.Create(
+                System_Int16,
+                System_Int32,
+                System_Int64,
+                System_UInt16,
+                System_UInt32,
+                System_UInt64,
+                System_Char,
+                System_Byte,
+                System_SByte
+            );
+        internal static readonly ImmutableArray<KnownType> NonIntegralNumbers =
+            ImmutableArray.Create(
+                System_Single,
+                System_Double,
+                System_Decimal
+            );
+        internal static readonly ImmutableArray<KnownType> PointerTypes =
+            ImmutableArray.Create(
+                System_IntPtr,
+                System_UIntPtr
+            );
+        internal static readonly ImmutableArray<KnownType> UnsignedIntegers =
+            ImmutableArray.Create(
+                System_UInt64,
+                System_UInt32,
+                System_UInt16
+            );
 
         #endregion Known types
 

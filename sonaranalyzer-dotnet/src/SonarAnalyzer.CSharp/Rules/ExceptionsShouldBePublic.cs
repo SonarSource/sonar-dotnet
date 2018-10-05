@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -39,12 +38,12 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        private static readonly ISet<KnownType> baseExceptions = new HashSet<KnownType>
-        {
-            KnownType.System_Exception,
-            KnownType.System_ApplicationException,
-            KnownType.System_SystemException
-        };
+        private static readonly ImmutableArray<KnownType> baseExceptions =
+            ImmutableArray.Create(
+                KnownType.System_Exception,
+                KnownType.System_ApplicationException,
+                KnownType.System_SystemException
+            );
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 

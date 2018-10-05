@@ -42,18 +42,16 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> DefaultAllowedExceptions = new HashSet<KnownType>
-        {
-            KnownType.System_NotImplementedException
-        };
+        private static readonly ImmutableArray<KnownType> DefaultAllowedExceptions =
+            ImmutableArray.Create(KnownType.System_NotImplementedException);
 
-        private static readonly ISet<KnownType> EventAccessorAllowedExceptions = new HashSet<KnownType>
-        {
-            KnownType.System_NotImplementedException,
-            KnownType.System_InvalidOperationException,
-            KnownType.System_NotSupportedException,
-            KnownType.System_ArgumentException
-        };
+        private static readonly ImmutableArray<KnownType> EventAccessorAllowedExceptions =
+            ImmutableArray.Create(
+                KnownType.System_NotImplementedException,
+                KnownType.System_InvalidOperationException,
+                KnownType.System_NotSupportedException,
+                KnownType.System_ArgumentException
+            );
 
         private static readonly ISet<SyntaxKind> TrackedOperators = new HashSet<SyntaxKind>
         {
@@ -94,7 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private void CheckForIssue<TSyntax>(SyntaxNodeAnalysisContext analysisContext,
-            Func<TSyntax, bool> isTrackedSyntax, ISet<KnownType> allowedThrowTypes)
+            Func<TSyntax, bool> isTrackedSyntax, ImmutableArray<KnownType> allowedThrowTypes)
             where TSyntax : SyntaxNode
         {
             var syntax = (TSyntax)analysisContext.Node;
@@ -107,7 +105,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private void ReportOnInvalidThrowStatement(SyntaxNodeAnalysisContext analysisContext,
-            SyntaxNode node, ISet<KnownType> allowedTypes)
+            SyntaxNode node, ImmutableArray<KnownType> allowedTypes)
         {
             var throwToReportOn = node.DescendantNodes()
                 .OfType<ThrowStatementSyntax>()

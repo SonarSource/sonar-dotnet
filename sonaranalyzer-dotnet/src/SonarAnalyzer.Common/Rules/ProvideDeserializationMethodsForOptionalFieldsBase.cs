@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
@@ -33,13 +34,12 @@ namespace SonarAnalyzer.Rules.Common
         protected const string OnDeserializedMethodMissing = "Add the missing 'OnDeserializedAttribute' event handler.";
         protected const string OnDeserializingMethodMissing = "Add the missing 'OnDeserializingAttribute' event handler.";
 
-        internal static readonly ISet<KnownType> AttributesToFind =
-            new HashSet<KnownType>
-            {
+        internal static readonly ImmutableArray<KnownType> AttributesToFind =
+            ImmutableArray.Create(
                 KnownType.System_Runtime_Serialization_OptionalFieldAttribute,
                 KnownType.System_Runtime_Serialization_OnDeserializingAttribute,
                 KnownType.System_Runtime_Serialization_OnDeserializedAttribute
-            };
+            );
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {

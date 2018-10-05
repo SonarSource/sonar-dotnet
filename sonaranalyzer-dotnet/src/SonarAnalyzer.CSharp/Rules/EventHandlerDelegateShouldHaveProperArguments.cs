@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -44,11 +43,11 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> EventHandlerTypes = new HashSet<KnownType>
-        {
-            KnownType.System_EventHandler,
-            KnownType.System_EventHandler_TEventArgs
-        };
+        private static readonly ImmutableArray<KnownType> EventHandlerTypes =
+            ImmutableArray.Create(
+                KnownType.System_EventHandler,
+                KnownType.System_EventHandler_TEventArgs
+            );
 
         protected override void Initialize(SonarAnalysisContext context)
         {

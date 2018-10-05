@@ -44,13 +44,13 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> ArgumentExceptionTypesToCheck = new HashSet<KnownType>
-        {
-            KnownType.System_ArgumentException,
-            KnownType.System_ArgumentNullException,
-            KnownType.System_ArgumentOutOfRangeException,
-            KnownType.System_DuplicateWaitObjectException
-        };
+        private static readonly ImmutableArray<KnownType> ArgumentExceptionTypesToCheck =
+            ImmutableArray.Create(
+                KnownType.System_ArgumentException,
+                KnownType.System_ArgumentNullException,
+                KnownType.System_ArgumentOutOfRangeException,
+                KnownType.System_DuplicateWaitObjectException
+            );
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(CheckForIssue,

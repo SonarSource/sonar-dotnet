@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -126,11 +125,11 @@ namespace SonarAnalyzer.Rules.CSharp
             return returnType.IsAny(DisallowedTypes);
         }
 
-        private static readonly ISet<KnownType> DisallowedTypes = new HashSet<KnownType>
-        {
-            KnownType.System_Int64,
-            KnownType.System_Int32,
-            KnownType.System_Decimal
-        };
+        private static readonly ImmutableArray<KnownType> DisallowedTypes =
+            ImmutableArray.Create(
+                KnownType.System_Int64,
+                KnownType.System_Int32,
+                KnownType.System_Decimal
+            );
     }
 }

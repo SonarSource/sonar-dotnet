@@ -37,17 +37,17 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S4004";
         private const string MessageFormat = "Make the '{0}' property read-only by removing the property setter or making it private.";
 
-        private static readonly ISet<KnownType> collectionTypes = new HashSet<KnownType>
-        {
-            KnownType.System_Collections_Generic_ICollection_T,
-            KnownType.System_Collections_ICollection,
-        };
+        private static readonly ImmutableArray<KnownType> collectionTypes =
+            ImmutableArray.Create(
+                KnownType.System_Collections_Generic_ICollection_T,
+                KnownType.System_Collections_ICollection
+            );
 
-        private static readonly ISet<KnownType> ignoredCollectionTypes = new HashSet<KnownType>
-        {
-            KnownType.System_Array,
-            KnownType.System_Security_PermissionSet,
-        };
+        private static readonly ImmutableArray<KnownType> ignoredCollectionTypes =
+            ImmutableArray.Create(
+                KnownType.System_Array,
+                KnownType.System_Security_PermissionSet
+            );
 
         private static readonly ISet<Accessibility> privateOrInternalAccessibility = new HashSet<Accessibility>
         {

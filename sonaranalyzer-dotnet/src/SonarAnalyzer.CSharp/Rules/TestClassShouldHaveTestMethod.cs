@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -41,14 +40,14 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> HandledGlobalSetupAndCleanUpAttributes = new HashSet<KnownType>
-        {
-            // Only applies to MSTest.
-            // NUnit has equivalent attributes, but they can only be applied to classes
-            // marked with [SetupFixture], which cannot contain tests.
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyInitializeAttribute,
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyCleanupAttribute,
-        };
+        private static readonly ImmutableArray<KnownType> HandledGlobalSetupAndCleanUpAttributes =
+            ImmutableArray.Create(
+                // Only applies to MSTest.
+                // NUnit has equivalent attributes, but they can only be applied to classes
+                // marked with [SetupFixture], which cannot contain tests.
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyInitializeAttribute,
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyCleanupAttribute
+            );
 
         protected override void Initialize(SonarAnalysisContext context)
         {

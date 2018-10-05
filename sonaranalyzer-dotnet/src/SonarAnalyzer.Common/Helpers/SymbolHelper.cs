@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
@@ -49,7 +50,7 @@ namespace SonarAnalyzer.Helpers
             symbol?.GetAttributes().Where(a => a.AttributeClass.Is(attributeType))
                 ?? Enumerable.Empty<AttributeData>();
 
-        internal static IEnumerable<AttributeData> GetAttributes(this ISymbol symbol, IEnumerable<KnownType> attributeTypes) =>
+        internal static IEnumerable<AttributeData> GetAttributes(this ISymbol symbol, ImmutableArray<KnownType> attributeTypes) =>
             symbol?.GetAttributes().Where(a => a.AttributeClass.IsAny(attributeTypes))
                 ?? Enumerable.Empty<AttributeData>();
 

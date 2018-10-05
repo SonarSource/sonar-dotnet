@@ -51,12 +51,12 @@ namespace SonarAnalyzer.Rules.CSharp
             SymbolKind.Method
         };
 
-        private static readonly ISet<KnownType> WebControllerTypes = new HashSet<KnownType>
-        {
-            KnownType.System_Web_Mvc_Controller,
-            KnownType.System_Web_Http_ApiController,
-            KnownType.Microsoft_AspNetCore_Mvc_Controller
-        };
+        private static readonly ImmutableArray<KnownType> WebControllerTypes =
+            ImmutableArray.Create(
+                KnownType.System_Web_Mvc_Controller,
+                KnownType.System_Web_Http_ApiController,
+                KnownType.Microsoft_AspNetCore_Mvc_Controller
+            );
 
         protected override void Initialize(SonarAnalysisContext context)
         {
