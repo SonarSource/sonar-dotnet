@@ -48,32 +48,7 @@ if (-Not (Test-Path $rule_api_jar)) {
     throw $rule_api_error
 }
 
-$resgenPath = "${Env:ProgramFiles(x86)}\\Microsoft SDKs\\Windows\\v10.0A\\bin\\NETFX 4.6.1 Tools\\ResGen.exe"
-if (-Not (Test-Path $resgenPath)) {
-    throw "You need to install the Windows SDK before using this script."
-}
-
 $sonaranalyzerPath = "${PSScriptRoot}\\..\\..\\sonaranalyzer-dotnet"
-
-$categoriesMap = @{
-    "BUG" = "Bug";
-    "CODE_SMELL" = "Code Smell";
-    "VULNERABILITY" = "Vulnerability";
-    "SECURITY_HOTSPOT" = "Security Hotspot";
-}
-
-$severitiesMap = @{
-    "Critical" = "Critical";
-    "Major" = "Major";
-    "Minor" = "Minor";
-    "Info" = "Info";
-    "Blocker" = "Blocker";
-}
-
-$remediationsMap = @{
-    "" = "";
-    "Constant/Issue" = "Constant/Issue";
-}
 
 $projectsMap = @{
     "cs" = "SonarAnalyzer.CSharp";
@@ -90,20 +65,9 @@ $resourceLanguageMap = @{
     "vbnet" = "vb";
 }
 
-$helpLanguageMap = @{
-    "cs" = "csharp";
-    "vbnet" = "vbnet";
-}
-
 $sonarpediaMap = @{
     "cs" = ".\sonaranalyzer-dotnet\src\SonarAnalyzer.CSharp";
     "vbnet" = ".\sonaranalyzer-dotnet\src\SonarAnalyzer.VisualBasic";
-}
-
-# Values have to match the ones from Microsoft.CodeAnalysis.LanguageNames
-$roslynLanguageMap = @{
-    "cs" = "C#";
-    "vbnet" = "Visual Basic";
 }
 
 # Returns the path to the folder where the RSPEC html and json files for the specified language will be downloaded.
@@ -166,7 +130,7 @@ function UpdateTestEntry($rule) {
         Set-Content "${ruleTypeTestCase}"
 }
 
-function CreateStringResources($lang, $rules) {
+function GetRulesInfo($lang, $rules) {
     $rspecFolder = GetRspecDownloadPath $lang
     $suffix = $ruleapiLanguageMap.Get_Item($lang)
 
@@ -176,43 +140,9 @@ function CreateStringResources($lang, $rules) {
     $resources = New-Object System.Collections.ArrayList
     foreach ($rule in $rules) {
         $json = Get-Content -Raw "${rspecFolder}\\${rule}_${suffix}.json" | ConvertFrom-Json
-        $html = Get-Content -Raw "${rspecFolder}\\${rule}_${suffix}.html"
-
-        # take the first paragraph of the HTML file
-        if ($html -Match "<p>((.|\n)*?)</p>") {
-            # strip HTML tags and new lines
-            $description = $Matches[1] -replace '<[^>]*>', ''
-            $description = $description -replace '\n|( +)', ' '
-            $description = $description -replace '&amp;', '&'
-            $description = $description -replace '&lt;', '<'
-            $description = $description -replace '&gt;', '>'
-            $description = $description -replace '\\!', '!'
-            $description = $description -replace '\\}', '}'
-        }
-        else {
-            throw "The downloaded HTML for rule '${rule}' does not contain any paragraphs."
-        }
-
-        $severity = $severitiesMap.Get_Item(${json}.defaultSeverity)
-
-        [void]$resources.Add("${rule}_Description=${description}")
-        [void]$resources.Add("${rule}_Type=$(${json}.type)")
-        [void]$resources.Add("${rule}_Title=$(${json}.title)")
-        [void]$resources.Add("${rule}_Category=${severity} $($categoriesMap.Get_Item(${json}.type))")
-        [void]$resources.Add("${rule}_IsActivatedByDefault=$(${sonarWayRules}.ruleKeys -Contains ${rule})")
-        [void]$resources.Add("${rule}_Severity=${severity}") # TODO see how can we implement lowering the severity for certain rules
-        [void]$resources.Add("${rule}_Tags=" + (${json}.tags -Join ","))
-        [void]$resources.Add("${rule}_Scope=$(${json}.scope)")
-
-        if (${json}.remediation.func) {
-            [void]$resources.Add("${rule}_Remediation=$($remediationsMap.Get_Item(${json}.remediation.func))")
-            [void]$resources.Add("${rule}_RemediationCost=$(${json}.remediation.constantCost)") # TODO see if we have remediations other than constantConst and fix them
-        }
-
         if ($rule -eq $ruleKey) {
             $newRuleData = $json
         }
-
         # Remove hotspots from the JSON object, we will save this object in a new file that will be
         # used to define Sonar Way on SonarQube that is older than 7.3 and does not support hotspots
         if ($json.type -eq "SECURITY_HOTSPOT") {
@@ -222,21 +152,6 @@ function CreateStringResources($lang, $rules) {
 
     # Create a new Sonar Way definition without hotspots to be loaded on SonarQube older than 7.3
     ConvertTo-Json $sonarWayRules | Set-Content "${rspecFolder}\\Sonar_way_profile_no_hotspot.json"
-
-    # improve readability of the generated file
-    [void]$resources.Sort()
-
-    [void]$resources.Add("HelpLinkFormat=https://rules.sonarsource.com/$($helpLanguageMap.Get_Item($lang))/RSPEC-{0}")
-    [void]$resources.Add("RoslynLanguage=$($roslynLanguageMap.Get_Item($lang))")
-
-    $rawResourcesPath = "${PSScriptRoot}\\${lang}_strings.restext"
-    $resourcesPath = "${sonaranalyzerPath}\\src\\$($projectsMap.Get_Item($lang))\\RspecStrings.resx"
-
-    Set-Content $rawResourcesPath $resources
-
-    # generate resx file
-    Invoke-Expression "& `"${resgenPath}`" ${rawResourcesPath} ${resourcesPath}"
-
     return $newRuleData
 }
 
@@ -349,8 +264,8 @@ $vbRules = GetRules "vbnet"
 
 CopyResources "cs" $csRules $vbRules
 CopyResources "vbnet" $vbRules $csRules
-$csRuleData = CreateStringResources "cs" $csRules
-$vbRuleData = CreateStringResources "vbnet" $vbRules
+$csRuleData = GetRulesInfo "cs" $csRules
+$vbRuleData = GetRulesInfo "vbnet" $vbRules
 
 if ($className -And $ruleKey) {
     if ($language -eq "cs") {
