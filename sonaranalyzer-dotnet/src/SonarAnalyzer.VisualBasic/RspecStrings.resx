@@ -2487,6 +2487,36 @@
   <data name="S3385_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3449_Category" xml:space="preserve">
+    <value>Critical Bug</value>
+  </data>
+  <data name="S3449_Description" xml:space="preserve">
+    <value>Numbers can be shifted with the &lt;&lt; and &gt;&gt; operators, but the right operand of the operation needs to be an int or a type that has an implicit conversion to int. However, with dynamic, the compiler's type checking is turned off, so you can pass anything to a shift operator and have it compile. And if the argument can't be converted to int at runtime, then a RuntimeBinderException will be raised.</value>
+  </data>
+  <data name="S3449_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3449_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3449_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S3449_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S3449_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S3449_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S3449_Title" xml:space="preserve">
+    <value>Right operands of shift operators should be integers</value>
+  </data>
+  <data name="S3449_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3453_Category" xml:space="preserve">
     <value>Major Bug</value>
   </data>
