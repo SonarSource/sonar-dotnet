@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
@@ -33,12 +33,12 @@ namespace SonarAnalyzer.Rules.Common
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
-        internal static readonly ISet<KnownType> AllowedExceptionBaseTypes = new HashSet<KnownType>
-        {
-            KnownType.System_NotImplementedException,
-            KnownType.System_NotSupportedException,
-            KnownType.System_InvalidOperationException
-        };
+        internal static readonly ImmutableArray<KnownType> AllowedExceptionBaseTypes =
+            ImmutableArray.Create(
+                KnownType.System_NotImplementedException,
+                KnownType.System_NotSupportedException,
+                KnownType.System_InvalidOperationException
+            );
     }
 
     public abstract class PropertyGetterWithThrowBase<TLanguageKindEnum, TAccessorSyntax> :

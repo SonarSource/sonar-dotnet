@@ -41,11 +41,11 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3966";
         private const string MessageFormat = "Refactor this code to make sure '{0}' is disposed only once.";
 
-        private static readonly ISet<KnownType> typesDisposingUnderlyingStream = new HashSet<KnownType>
-        {
-            KnownType.System_IO_StreamReader,
-            KnownType.System_IO_StreamWriter
-        };
+        private static readonly ImmutableArray<KnownType> typesDisposingUnderlyingStream =
+            ImmutableArray.Create(
+                KnownType.System_IO_StreamReader,
+                KnownType.System_IO_StreamWriter
+            );
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);

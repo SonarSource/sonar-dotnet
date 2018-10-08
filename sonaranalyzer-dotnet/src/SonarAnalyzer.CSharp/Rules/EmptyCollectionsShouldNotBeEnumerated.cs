@@ -45,16 +45,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> TrackedCollectionTypes = new HashSet<KnownType>
-        {
-            KnownType.System_Collections_Generic_Dictionary_TKey_TValue,
-            KnownType.System_Collections_Generic_List_T,
-            KnownType.System_Collections_Generic_Queue_T,
-            KnownType.System_Collections_Generic_Stack_T,
-            KnownType.System_Collections_Generic_HashSet_T,
-            KnownType.System_Collections_ObjectModel_ObservableCollection_T,
-            KnownType.System_Array,
-        };
+        private static readonly ImmutableArray<KnownType> TrackedCollectionTypes =
+            ImmutableArray.Create(
+                KnownType.System_Collections_Generic_Dictionary_TKey_TValue,
+                KnownType.System_Collections_Generic_List_T,
+                KnownType.System_Collections_Generic_Queue_T,
+                KnownType.System_Collections_Generic_Stack_T,
+                KnownType.System_Collections_Generic_HashSet_T,
+                KnownType.System_Collections_ObjectModel_ObservableCollection_T,
+                KnownType.System_Array
+            );
 
         private static readonly HashSet<string> AddMethods = new HashSet<string>
         {

@@ -42,14 +42,14 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly IDictionary<string, ISet<KnownType>> methodsWithType = new Dictionary<string, ISet<KnownType>>
+        private static readonly IDictionary<string, ImmutableArray<KnownType>> methodsWithType = new Dictionary<string, ImmutableArray<KnownType>>
         {
-            ["AreEqual"] = new HashSet<KnownType> { KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert,
-                KnownType.NUnit_Framework_Assert },
-            ["AreSame"] = new HashSet<KnownType> { KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert,
-                KnownType.NUnit_Framework_Assert },
-            ["Equal"] = new HashSet<KnownType> { KnownType.Xunit_Assert },
-            ["Same"] = new HashSet<KnownType> { KnownType.Xunit_Assert }
+            ["AreEqual"] = ImmutableArray.Create(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert,
+                KnownType.NUnit_Framework_Assert),
+            ["AreSame"] = ImmutableArray.Create(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert,
+                KnownType.NUnit_Framework_Assert),
+            ["Equal"] = ImmutableArray.Create(KnownType.Xunit_Assert),
+            ["Same"] = ImmutableArray.Create(KnownType.Xunit_Assert)
         };
 
         protected override void Initialize(SonarAnalysisContext context)

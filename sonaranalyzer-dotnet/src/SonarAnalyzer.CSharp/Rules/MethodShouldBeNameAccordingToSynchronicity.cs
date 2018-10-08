@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -43,12 +42,12 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> TaskTypes = new HashSet<KnownType>
-        {
-            KnownType.System_Threading_Tasks_Task,
-            KnownType.System_Threading_Tasks_Task_T,
-            KnownType.System_Threading_Tasks_ValueTask_TResult
-        };
+        private static readonly ImmutableArray<KnownType> TaskTypes =
+            ImmutableArray.Create(
+                KnownType.System_Threading_Tasks_Task,
+                KnownType.System_Threading_Tasks_Task_T,
+                KnownType.System_Threading_Tasks_ValueTask_TResult
+            );
 
         protected override void Initialize(SonarAnalysisContext context)
         {

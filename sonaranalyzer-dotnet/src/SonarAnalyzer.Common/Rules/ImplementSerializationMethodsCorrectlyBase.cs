@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
@@ -32,14 +33,13 @@ namespace SonarAnalyzer.Rules
         private const string problemParameterText = "have a single parameter of type 'StreamingContext'";
         private const string problemGenericParameterText = "have no type parameters";
 
-        private static readonly ISet<KnownType> serializationAttributes =
-            new HashSet<KnownType>
-            {
+        private static readonly ImmutableArray<KnownType> serializationAttributes =
+            ImmutableArray.Create(
                 KnownType.System_Runtime_Serialization_OnSerializingAttribute,
                 KnownType.System_Runtime_Serialization_OnSerializedAttribute,
                 KnownType.System_Runtime_Serialization_OnDeserializingAttribute,
                 KnownType.System_Runtime_Serialization_OnDeserializedAttribute
-            };
+            );
 
         protected override void Initialize(SonarAnalysisContext context)
         {

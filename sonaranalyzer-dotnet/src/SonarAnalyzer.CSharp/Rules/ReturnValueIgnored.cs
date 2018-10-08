@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -108,9 +107,8 @@ namespace SonarAnalyzer.Rules.CSharp
             return containingType.IsAny(ImmutableKnownTypes);
         }
 
-        private static readonly ISet<KnownType> ImmutableKnownTypes
-            = new HashSet<KnownType>
-            {
+        private static readonly ImmutableArray<KnownType> ImmutableKnownTypes =
+            ImmutableArray.Create(
                 KnownType.System_Object,
                 KnownType.System_Int16,
                 KnownType.System_Int32,
@@ -143,7 +141,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Collections_Immutable_ImmutableSortedSet_T,
                 KnownType.System_Collections_Immutable_ImmutableStack,
                 KnownType.System_Collections_Immutable_ImmutableStack_T
-            };
+            );
 
         private static bool IsLinqMethod(IMethodSymbol methodSymbol)
         {

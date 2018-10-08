@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
@@ -27,21 +27,17 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 {
     public static class TaintAnalysisEntryPointDetector
     {
-        private static readonly ISet<KnownType> controllerTypes = new HashSet<KnownType>
-        {
-            KnownType.Microsoft_AspNetCore_Mvc_ControllerBase,
-            KnownType.System_Web_Mvc_Controller,
-        };
+        private static readonly ImmutableArray<KnownType> controllerTypes =
+            ImmutableArray.Create(
+                KnownType.Microsoft_AspNetCore_Mvc_ControllerBase,
+                KnownType.System_Web_Mvc_Controller
+            );
 
-        private static readonly ISet<KnownType> nonControllerAttributeTypes = new HashSet<KnownType>
-        {
-            KnownType.Microsoft_AspNetCore_Mvc_NonControllerAttribute,
-        };
+        private static readonly ImmutableArray<KnownType> nonControllerAttributeTypes =
+            ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_NonControllerAttribute);
 
-        private static readonly ISet<KnownType> controllerAttributeTypes = new HashSet<KnownType>
-        {
-            KnownType.Microsoft_AspNetCore_Mvc_ControllerAttribute,
-        };
+        private static readonly ImmutableArray<KnownType> controllerAttributeTypes =
+            ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_ControllerAttribute);
 
         public static bool IsEntryPoint(IMethodSymbol methodSymbol) =>
             methodSymbol.GetEffectiveAccessibility() == Accessibility.Public &&

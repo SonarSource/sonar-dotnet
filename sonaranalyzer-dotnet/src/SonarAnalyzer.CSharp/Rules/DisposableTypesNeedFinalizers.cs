@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -42,10 +41,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> nativeHandles = new HashSet<KnownType> {
+        private static readonly ImmutableArray<KnownType> nativeHandles =
+            ImmutableArray.Create(
                 KnownType.System_IntPtr,
                 KnownType.System_UIntPtr,
-                KnownType.System_Runtime_InteropServices_HandleRef };
+                KnownType.System_Runtime_InteropServices_HandleRef
+            );
 
         protected override void Initialize(SonarAnalysisContext context)
         {

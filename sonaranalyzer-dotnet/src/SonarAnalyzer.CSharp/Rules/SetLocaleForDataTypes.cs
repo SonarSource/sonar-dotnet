@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -42,11 +41,11 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> checkedTypes = new HashSet<KnownType>
-        {
-            KnownType.System_Data_DataTable,
-            KnownType.System_Data_DataSet
-        };
+        private static readonly ImmutableArray<KnownType> checkedTypes =
+            ImmutableArray.Create(
+                KnownType.System_Data_DataTable,
+                KnownType.System_Data_DataSet
+            );
 
         protected override void Initialize(SonarAnalysisContext context)
         {

@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -42,15 +41,15 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         private const string MsTestV1AssemblyName = "Microsoft.VisualStudio.QualityTools.UnitTestFramework";
-        private static readonly IEnumerable<KnownType> AllowedAsyncVoidMsTestAttributes = new List<KnownType>
-        {
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyCleanupAttribute,
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyInitializeAttribute,
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ClassCleanupAttribute,
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ClassInitializeAttribute,
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestCleanupAttribute,
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestInitializeAttribute
-        };
+        private static readonly ImmutableArray<KnownType> AllowedAsyncVoidMsTestAttributes =
+            ImmutableArray.Create(
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyCleanupAttribute,
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyInitializeAttribute,
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ClassCleanupAttribute,
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ClassInitializeAttribute,
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestCleanupAttribute,
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestInitializeAttribute
+            );
 
         protected override void Initialize(SonarAnalysisContext context)
         {

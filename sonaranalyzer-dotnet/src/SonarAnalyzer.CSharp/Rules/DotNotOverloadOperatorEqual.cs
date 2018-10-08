@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -37,12 +36,12 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3875";
         private const string MessageFormat = "Remove this overload of 'operator =='.";
 
-        private static readonly ISet<KnownType> InterfacesRelyingOnOperatorEqualOverload = new HashSet<KnownType>
-        {
-            KnownType.System_IComparable,
-            KnownType.System_IComparable_T,
-            KnownType.System_IEquatable_T
-        };
+        private static readonly ImmutableArray<KnownType> InterfacesRelyingOnOperatorEqualOverload =
+            ImmutableArray.Create(
+                KnownType.System_IComparable,
+                KnownType.System_IComparable_T,
+                KnownType.System_IEquatable_T
+            );
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);

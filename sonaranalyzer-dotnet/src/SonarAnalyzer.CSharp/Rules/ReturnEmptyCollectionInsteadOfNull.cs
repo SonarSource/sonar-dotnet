@@ -42,16 +42,11 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> CollectionTypes = new HashSet<KnownType>
-        {
-            KnownType.System_Collections_IEnumerable,
-            KnownType.System_Array
-        };
-
-        private static readonly ISet<KnownType> IgnoredTypes = new HashSet<KnownType>
-        {
-            KnownType.System_Xml_XmlNode
-        };
+        private static readonly ImmutableArray<KnownType> CollectionTypes =
+            ImmutableArray.Create(
+                KnownType.System_Collections_IEnumerable,
+                KnownType.System_Array
+            );
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -111,7 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return methodSymbol != null &&
                 !methodSymbol.ReturnType.Is(KnownType.System_String) &&
                 methodSymbol.ReturnType.DerivesOrImplementsAny(CollectionTypes) &&
-                !methodSymbol.ReturnType.DerivesFromAny(IgnoredTypes);
+                !methodSymbol.ReturnType.DerivesFrom(KnownType.System_Xml_XmlNode);
         }
 
         private static LiteralExpressionSyntax GetNullLiteralOrDefault(ArrowExpressionClauseSyntax expressionBody)

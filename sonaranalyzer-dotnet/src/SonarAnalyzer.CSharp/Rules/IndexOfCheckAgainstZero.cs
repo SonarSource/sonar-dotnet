@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -37,7 +36,15 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2692";
         private const string MessageFormat = "0 is a valid index, but this check ignores it.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly ImmutableArray<KnownType> CheckedTypes =
+            ImmutableArray.Create(
+                KnownType.System_Array,
+                KnownType.System_Collections_Generic_IList_T,
+                KnownType.System_String,
+                KnownType.System_Collections_IList
+            );
+
+    private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
@@ -81,15 +88,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var possibleTypes = new HashSet<KnownType>
-            {
-                KnownType.System_Array,
-                KnownType.System_Collections_Generic_IList_T,
-                KnownType.System_String,
-                KnownType.System_Collections_IList
-            };
-
-            return indexOfSymbol.ContainingType.DerivesOrImplementsAny(possibleTypes);
+            return indexOfSymbol.ContainingType.DerivesOrImplementsAny(CheckedTypes);
         }
     }
 }

@@ -38,8 +38,8 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> algorithmTypes = new HashSet<KnownType>
-        {
+        private static readonly ImmutableArray<KnownType> algorithmTypes =
+            ImmutableArray.Create(
                 KnownType.System_Security_Cryptography_SHA1,
                 KnownType.System_Security_Cryptography_MD5,
                 KnownType.System_Security_Cryptography_DSA,
@@ -47,8 +47,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Security_Cryptography_HMACSHA1,
                 KnownType.System_Security_Cryptography_HMACMD5,
                 KnownType.System_Security_Cryptography_HMACRIPEMD160
-        };
-        internal override ISet<KnownType> AlgorithmTypes => algorithmTypes;
+            );
+        internal override ImmutableArray<KnownType> AlgorithmTypes => algorithmTypes;
 
         private static readonly ISet<string> algorithmParameterlessFactoryMethods = new HashSet<string>
         {

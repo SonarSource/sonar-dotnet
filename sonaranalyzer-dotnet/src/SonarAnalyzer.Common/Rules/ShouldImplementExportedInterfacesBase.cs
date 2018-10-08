@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
@@ -33,12 +34,11 @@ namespace SonarAnalyzer.Rules.Common
         protected const string ActionForInterface = "Implement";
         protected const string ActionForClass = "Derive from";
 
-        internal static readonly ISet<KnownType> ExportAttributes =
-            new HashSet<KnownType>
-            {
+        internal static readonly ImmutableArray<KnownType> ExportAttributes =
+            ImmutableArray.Create(
                 KnownType.System_ComponentModel_Composition_ExportAttribute,
-                KnownType.System_ComponentModel_Composition_InheritedExportAttribute,
-            };
+                KnownType.System_ComponentModel_Composition_InheritedExportAttribute
+            );
     }
 
     public abstract class ShouldImplementExportedInterfacesBase<TArgumentSyntax, TExpressionSyntax, TClassSyntax>

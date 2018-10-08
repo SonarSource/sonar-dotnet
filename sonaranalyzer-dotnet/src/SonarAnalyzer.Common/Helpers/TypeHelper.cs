@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
@@ -67,9 +67,23 @@ namespace SonarAnalyzer.Helpers
             return typeSymbol != null && IsMatch(typeSymbol, type);
         }
 
-        public static bool IsAny(this ITypeSymbol typeSymbol, IEnumerable<KnownType> types)
+        public static bool IsAny(this ITypeSymbol typeSymbol, ImmutableArray<KnownType> types)
         {
-            return typeSymbol != null && types.Any(t => IsMatch(typeSymbol, t));
+            if (typeSymbol == null)
+            {
+                return false;
+            }
+
+            // For is twice as fast as foreach on ImmutableArray so don't use Linq here
+            for (int i = 0; i < types.Length; i++)
+            {
+                if (IsMatch(typeSymbol, types[i]))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public static bool IsType(this IParameterSymbol parameter, KnownType type)
@@ -88,7 +102,7 @@ namespace SonarAnalyzer.Helpers
                 symbol.ContainingType.Equals(type);
         }
 
-        public static bool IsInType(this ISymbol symbol, ISet<KnownType> types)
+        public static bool IsInType(this ISymbol symbol, ImmutableArray<KnownType> types)
         {
             return symbol != null && symbol.ContainingType.IsAny(types);
         }
@@ -107,7 +121,7 @@ namespace SonarAnalyzer.Helpers
                 typeSymbol.AllInterfaces.Any(symbol => symbol.ConstructedFrom.Equals(type));
         }
 
-        public static bool ImplementsAny(this ITypeSymbol typeSymbol, ISet<KnownType> types)
+        public static bool ImplementsAny(this ITypeSymbol typeSymbol, ImmutableArray<KnownType> types)
         {
             return typeSymbol != null &&
                 typeSymbol.AllInterfaces.Any(symbol => symbol.ConstructedFrom.IsAny(types));
@@ -143,7 +157,7 @@ namespace SonarAnalyzer.Helpers
             return false;
         }
 
-        public static bool DerivesFromAny(this ITypeSymbol typeSymbol, ISet<KnownType> baseTypes)
+        public static bool DerivesFromAny(this ITypeSymbol typeSymbol, ImmutableArray<KnownType> baseTypes)
         {
             var currentType = typeSymbol;
             while (currentType != null)
@@ -170,7 +184,7 @@ namespace SonarAnalyzer.Helpers
                 type.DerivesFrom(baseType);
         }
 
-        public static bool DerivesOrImplementsAny(this ITypeSymbol type, ISet<KnownType> baseTypes)
+        public static bool DerivesOrImplementsAny(this ITypeSymbol type, ImmutableArray<KnownType> baseTypes)
         {
             return type.ImplementsAny(baseTypes) ||
                 type.DerivesFromAny(baseTypes);

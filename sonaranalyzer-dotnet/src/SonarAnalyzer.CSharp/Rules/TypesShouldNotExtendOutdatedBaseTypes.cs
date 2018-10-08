@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -40,17 +39,17 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> outdatedTypes = new HashSet<KnownType>
-        {
-            KnownType.System_ApplicationException,
-            KnownType.System_Xml_XmlDocument,
-            KnownType.System_Collections_CollectionBase,
-            KnownType.System_Collections_DictionaryBase,
-            KnownType.System_Collections_Queue,
-            KnownType.System_Collections_ReadOnlyCollectionBase,
-            KnownType.System_Collections_SortedList,
-            KnownType.System_Collections_Stack,
-        };
+        private static readonly ImmutableArray<KnownType> outdatedTypes =
+            ImmutableArray.Create(
+                KnownType.System_ApplicationException,
+                KnownType.System_Xml_XmlDocument,
+                KnownType.System_Collections_CollectionBase,
+                KnownType.System_Collections_DictionaryBase,
+                KnownType.System_Collections_Queue,
+                KnownType.System_Collections_ReadOnlyCollectionBase,
+                KnownType.System_Collections_SortedList,
+                KnownType.System_Collections_Stack
+            );
 
         protected override void Initialize(SonarAnalysisContext context)
         {

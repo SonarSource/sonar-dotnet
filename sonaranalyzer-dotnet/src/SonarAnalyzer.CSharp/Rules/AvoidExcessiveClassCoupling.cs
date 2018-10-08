@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -49,40 +48,40 @@ namespace SonarAnalyzer.Rules.CSharp
             "Maximum number of classes a single class is allowed to depend upon", ThresholdDefaultValue)]
         public int Threshold { get; set; } = ThresholdDefaultValue;
 
-        private static readonly ISet<KnownType> ignoredTypes = new HashSet<KnownType>
-        {
-            KnownType.Void,
-            KnownType.System_Boolean,
-            KnownType.System_Byte,
-            KnownType.System_SByte,
-            KnownType.System_Int16,
-            KnownType.System_UInt16,
-            KnownType.System_Int32,
-            KnownType.System_UInt32,
-            KnownType.System_Int64,
-            KnownType.System_UInt64,
-            KnownType.System_IntPtr,
-            KnownType.System_UIntPtr,
-            KnownType.System_Char,
-            KnownType.System_Single,
-            KnownType.System_Double,
-            KnownType.System_String,
-            KnownType.System_Object,
-            KnownType.System_Threading_Tasks_Task,
-            KnownType.System_Threading_Tasks_Task_T,
-            KnownType.System_Threading_Tasks_ValueTask_TResult,
-            KnownType.System_Action,
-            KnownType.System_Action_T,
-            KnownType.System_Action_T1_T2,
-            KnownType.System_Action_T1_T2_T3,
-            KnownType.System_Action_T1_T2_T3_T4,
-            KnownType.System_Func_TResult,
-            KnownType.System_Func_T_TResult,
-            KnownType.System_Func_T1_T2_TResult,
-            KnownType.System_Func_T1_T2_T3_TResult,
-            KnownType.System_Func_T1_T2_T3_T4_TResult,
-            KnownType.System_Lazy,
-        };
+        private static readonly ImmutableArray<KnownType> ignoredTypes =
+            ImmutableArray.Create(
+                KnownType.Void,
+                KnownType.System_Boolean,
+                KnownType.System_Byte,
+                KnownType.System_SByte,
+                KnownType.System_Int16,
+                KnownType.System_UInt16,
+                KnownType.System_Int32,
+                KnownType.System_UInt32,
+                KnownType.System_Int64,
+                KnownType.System_UInt64,
+                KnownType.System_IntPtr,
+                KnownType.System_UIntPtr,
+                KnownType.System_Char,
+                KnownType.System_Single,
+                KnownType.System_Double,
+                KnownType.System_String,
+                KnownType.System_Object,
+                KnownType.System_Threading_Tasks_Task,
+                KnownType.System_Threading_Tasks_Task_T,
+                KnownType.System_Threading_Tasks_ValueTask_TResult,
+                KnownType.System_Action,
+                KnownType.System_Action_T,
+                KnownType.System_Action_T1_T2,
+                KnownType.System_Action_T1_T2_T3,
+                KnownType.System_Action_T1_T2_T3_T4,
+                KnownType.System_Func_TResult,
+                KnownType.System_Func_T_TResult,
+                KnownType.System_Func_T1_T2_TResult,
+                KnownType.System_Func_T1_T2_T3_TResult,
+                KnownType.System_Func_T1_T2_T3_T4_TResult,
+                KnownType.System_Lazy
+            );
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {

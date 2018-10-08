@@ -41,17 +41,17 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> formatAndClutureTypes = new HashSet<KnownType>
-        {
-            KnownType.System_IFormatProvider,
-            KnownType.System_Globalization_CultureInfo,
-        };
+        private static readonly ImmutableArray<KnownType> formatAndClutureTypes =
+            ImmutableArray.Create(
+                KnownType.System_IFormatProvider,
+                KnownType.System_Globalization_CultureInfo
+            );
 
-        private static readonly ISet<KnownType> formattableTypes = new HashSet<KnownType>
-        {
-            KnownType.System_String,
-            KnownType.System_Object,
-        };
+        private static readonly ImmutableArray<KnownType> formattableTypes =
+            ImmutableArray.Create(
+                KnownType.System_String,
+                KnownType.System_Object
+            );
 
         private static readonly ISet<MethodSignature> whitelistMethods = new HashSet<MethodSignature>
         {

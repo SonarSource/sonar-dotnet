@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 [KnownType.System_Collections_CollectionBase.TypeName] = KnownType.System_Collections_ObjectModel_Collection_T,
             };
 
-        private static readonly ISet<KnownType> genericTypes = nongenericToGenericMapping.Values.ToHashSet();
+        private static readonly ImmutableArray<KnownType> genericTypes = nongenericToGenericMapping.Values.ToImmutableArray();
 
         protected override void Initialize(SonarAnalysisContext context)
         {
