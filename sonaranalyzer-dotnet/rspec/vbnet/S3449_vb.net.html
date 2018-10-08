@@ -4,9 +4,12 @@ turned off, so you can pass anything to a shift operator and have it compile. An
 then a <code>RuntimeBinderException</code> will be raised.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Dim d As Object = 5
-Dim x As Integer = d &gt;&gt; 5.4 ' Noncompliant
-x = d &gt;&gt; Nothing ' Noncompliant
-x &lt;&lt;= new Object() ' Noncompliant
+Dim o As Object = 5
+Dim x As Integer = 5
+
+x = o &gt;&gt; 5 ' Noncompliant
+x = x &gt;&gt; o ' Noncompliant
 </pre>
+<h2>Exceptions</h2>
+<p>This rule does not raise when the right expression is <code>Nothing</code>.</p>
 
