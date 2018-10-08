@@ -11,5 +11,9 @@ x = o &gt;&gt; 5 ' Noncompliant
 x = x &gt;&gt; o ' Noncompliant
 </pre>
 <h2>Exceptions</h2>
-<p>This rule does not raise when the right expression is <code>Nothing</code>.</p>
+<p>This rule does not raise when the left or the right expression is <code>Nothing</code>.</p>
+<pre>
+x = Nothing &gt;&gt; 5
+x = 5 &gt;&gt; Nothing
+</pre>
 

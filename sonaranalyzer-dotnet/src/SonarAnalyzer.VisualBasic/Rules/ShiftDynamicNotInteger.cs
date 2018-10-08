@@ -50,13 +50,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                Helpers.VisualBasic.GeneratedCodeRecognizer.Instance,
                 c => CheckExpressionWithTwoParts<BinaryExpressionSyntax>(c, b => b.Left, b => b.Right),
                 SyntaxKind.LeftShiftExpression,
                 SyntaxKind.RightShiftExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                Helpers.VisualBasic.GeneratedCodeRecognizer.Instance,
                 c => CheckExpressionWithTwoParts<AssignmentStatementSyntax>(c, b => b.Left, b => b.Right),
                 SyntaxKind.LeftShiftAssignmentStatement,
                 SyntaxKind.RightShiftAssignmentStatement);

@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules
         private bool IsErrorType(TExpressionSyntax expression, SemanticModel semanticModel, out ITypeSymbol type)
         {
             type = semanticModel.GetTypeInfo(expression).Type;
-            return type is IErrorTypeSymbol;
+            return type.Is(TypeKind.Error);
         }
 
         protected bool IsConvertibleToInt(TExpressionSyntax expression, SemanticModel semanticModel)

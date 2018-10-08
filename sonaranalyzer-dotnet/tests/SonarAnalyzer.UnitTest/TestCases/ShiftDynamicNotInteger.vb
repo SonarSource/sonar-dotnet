@@ -11,6 +11,9 @@ Namespace Tests.Diagnostics
             x = o >> 5 ' Noncompliant
             x = o << 5 ' Noncompliant
 
+            x = Nothing >> 5 ' Compliant, returns 0
+            x = Nothing << 5 ' Compliant, returns 0
+
             x = x >> Nothing ' Compliant, returns x
             x = x << Nothing ' Compliant, returns x
 
