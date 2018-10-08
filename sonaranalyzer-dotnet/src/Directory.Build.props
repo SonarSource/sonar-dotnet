@@ -1,0 +1,19 @@
+<Project>
+  <ItemGroup Condition="'$(Rspec2Resx)' != ''">
+    <RSpecFiles Include="$(ProjectDir)..\..\rspec\$(Rspec2Resx)\*.html"/>
+    <RSpecFiles Include="$(ProjectDir)..\..\rspec\$(Rspec2Resx)\*.json"/>
+  </ItemGroup>
+  <Target Condition="'$(Rspec2Resx)' != ''"
+          Name="GenerateResxFromRspec" 
+          Inputs="@(RSpecFiles)" 
+          Outputs="$(ProjectDir)RspecStrings.resx" 
+          BeforeTargets="_GenerateCompileInputs">
+    <PropertyGroup>
+      <PowerShellExe Condition="'$(PowerShellExe)'==''">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>
+    </PropertyGroup>
+    <Exec Command="$(PowerShellExe) -command &quot;if ((Get-ExecutionPolicy) -ne &apos;Unrestricted&apos;) {echo &apos;Powershell: error 0000: You have to run Set-ExecutionPolicy Unrestricted (In powershell32)&apos;} &quot; " />
+    <Exec ConsoleToMsBuild="true"
+      Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -command &quot;  &amp; { ..\..\..\scripts\rspec\rspec2resx.ps1 $(Rspec2Resx)  $(ProjectDir)../../rspec/$(Rspec2Resx) $(ProjectDir)RspecStrings.resx } &quot;" />
+  </Target>
+
+</Project>
