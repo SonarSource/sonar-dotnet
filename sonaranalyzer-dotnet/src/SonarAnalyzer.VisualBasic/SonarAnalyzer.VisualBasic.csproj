@@ -25,13 +25,27 @@
     <AdditionalFiles Include="..\SonarLint.xml" Link="Properties\SonarLint.xml" />
   </ItemGroup>
 
-  <!--
-    This PropertyGroup is used as a hack to prevent the NU1605 issue to be reported as an error. The rule is detecting
-    the downgrade of System.Collections.Immutable from 1.2.0 to 1.1.37 (VS 2015 Update 3 only embeds 1.1.37).
-    Do not use NoWarn in order to avoid hiding other issues.
-  -->
   <PropertyGroup>
+    <!--
+      This Propertyis used as a hack to prevent the NU1605 issue to be reported as an error. The rule is detecting
+      the downgrade of System.Collections.Immutable from 1.2.0 to 1.1.37 (VS 2015 Update 3 only embeds 1.1.37).
+      Do not use NoWarn in order to avoid hiding other issues.
+    -->
     <WarningsAsErrors />
+    <ResXGenerator>vbnet</ResXGenerator>
   </PropertyGroup>
+
+  <ItemGroup>
+    <RSpecFiles Include="..\..\rspec\*.html"/>
+    <RSpecFiles Include="..\..\rspec\*.json"/>
+  </ItemGroup>
+  <Target Name="GenerateResxFromRspec" Inputs="@{RSpecFiles}" Outputs="RspecStrings.resx" BeforeTargets="_GenerateCompileInputs">
+    <PropertyGroup>
+      <PowerShellExe Condition="'$(PowerShellExe)'==''">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>
+    </PropertyGroup>
+    <Exec Command="$(PowerShellExe) -command &quot;if ((Get-ExecutionPolicy) -ne &apos;Unrestricted&apos;) {echo &apos;Powershell: error 0000: You have to run Set-ExecutionPolicy Unrestricted (In powershell32)&apos;} &quot; " />
+    <Exec ConsoleToMsBuild="true"
+      Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -command &quot;  &amp; { ..\..\..\scripts\rspec\rspec2resx.ps1 vbnet  $(ProjectDir)../../rspec/vbnet $(ProjectDir)RspecStrings.resx } &quot;" />
+  </Target>
 
 </Project>
