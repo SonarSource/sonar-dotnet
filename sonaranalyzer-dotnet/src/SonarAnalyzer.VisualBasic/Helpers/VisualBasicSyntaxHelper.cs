@@ -28,26 +28,25 @@ namespace SonarAnalyzer.Helpers.VisualBasic
 {
     internal static class VisualBasicSyntaxHelper
     {
-        public static ExpressionSyntax RemoveParentheses(this ExpressionSyntax expression)
+        public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
         {
             var currentExpression = expression;
-            var parentheses = expression as ParenthesizedExpressionSyntax;
-            while (parentheses != null)
+            while (currentExpression?.IsKind(SyntaxKind.ParenthesizedExpression) ?? false)
             {
-                currentExpression = parentheses.Expression;
-                parentheses = currentExpression as ParenthesizedExpressionSyntax;
+                currentExpression = ((ParenthesizedExpressionSyntax)currentExpression).Expression;
             }
             return currentExpression;
         }
 
+        public static ExpressionSyntax RemoveParentheses(this ExpressionSyntax expression) =>
+            (ExpressionSyntax)RemoveParentheses((SyntaxNode)expression);
+
         public static SyntaxNode GetSelfOrTopParenthesizedExpression(this SyntaxNode node)
         {
             var current = node;
-            var parent = current.Parent as ParenthesizedExpressionSyntax;
-            while (parent != null)
+            while (current?.Parent?.IsKind(SyntaxKind.ParenthesizedExpression) ?? false)
             {
-                current = parent;
-                parent = current.Parent as ParenthesizedExpressionSyntax;
+                current = current.Parent;
             }
             return current;
         }
@@ -116,30 +115,27 @@ namespace SonarAnalyzer.Helpers.VisualBasic
 
         private static bool IsOn(this ExpressionSyntax expression, SyntaxKind onKind)
         {
-            if (expression is InvocationExpressionSyntax invocation)
+            switch (expression.Kind())
             {
-                return IsOn(invocation.Expression, onKind);
-            }
+                case SyntaxKind.InvocationExpression:
+                    return IsOn(((InvocationExpressionSyntax)expression).Expression, onKind);
 
-            if (expression is NameSyntax)
-            {
-                // This is a simplification as we don't check where the method is defined (so this could be this or base)
-                return true;
-            }
+                case SyntaxKind.GlobalName:
+                case SyntaxKind.GenericName:
+                case SyntaxKind.IdentifierName:
+                case SyntaxKind.QualifiedName:
+                    // This is a simplification as we don't check where the method is defined (so this could be this or base)
+                    return true;
 
-            if (expression is MemberAccessExpressionSyntax memberAccess &&
-                memberAccess.Expression.RemoveParentheses().IsKind(onKind))
-            {
-                return true;
-            }
+                case SyntaxKind.SimpleMemberAccessExpression:
+                    return ((MemberAccessExpressionSyntax)expression).Expression.RemoveParentheses().IsKind(onKind);
 
-            if (expression is ConditionalAccessExpressionSyntax conditionalAccess &&
-                conditionalAccess.Expression.RemoveParentheses().IsKind(onKind))
-            {
-                return true;
-            }
+                case SyntaxKind.ConditionalAccessExpression:
+                    return ((ConditionalAccessExpressionSyntax)expression).Expression.RemoveParentheses().IsKind(onKind);
 
-            return false;
+                default:
+                    return false;
+            }
         }
     }
 }

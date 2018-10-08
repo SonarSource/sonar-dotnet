@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var parent = ifStatement.Parent;
 
-            while (parent is BlockSyntax)
+            while (parent.IsKind(SyntaxKind.Block))
             {
                 var block = (BlockSyntax) parent;
 
@@ -84,8 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 parent = parent.Parent;
             }
 
-            var parentIfStatement = parent as IfStatementSyntax;
-            return parentIfStatement;
+            return parent as IfStatementSyntax;
         }
     }
 }

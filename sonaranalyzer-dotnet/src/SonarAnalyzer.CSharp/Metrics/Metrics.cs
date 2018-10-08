@@ -33,32 +33,6 @@ namespace SonarAnalyzer.Metrics.CSharp
 {
     public class Metrics : MetricsBase
     {
-        private static readonly ISet<SyntaxKind> TriviaKinds =
-            new HashSet<SyntaxKind>
-            {
-                SyntaxKind.SingleLineCommentTrivia,
-                SyntaxKind.MultiLineCommentTrivia,
-                SyntaxKind.SingleLineDocumentationCommentTrivia,
-                SyntaxKind.MultiLineDocumentationCommentTrivia
-            };
-
-        private static readonly ISet<SyntaxKind> ClassKinds =
-            new HashSet<SyntaxKind>
-            {
-                SyntaxKind.ClassDeclaration,
-                SyntaxKind.StructDeclaration,
-                SyntaxKind.InterfaceDeclaration
-            };
-
-        private static readonly ISet<SyntaxKind> FunctionKinds = new
-            HashSet<SyntaxKind>
-            {
-                SyntaxKind.ConstructorDeclaration,
-                SyntaxKind.DestructorDeclaration,
-                SyntaxKind.MethodDeclaration,
-                SyntaxKind.OperatorDeclaration
-            };
-
         private readonly SemanticModel semanticModel;
 
         public Metrics(SyntaxTree tree, SemanticModel semanticModel)
@@ -83,58 +57,124 @@ namespace SonarAnalyzer.Metrics.CSharp
             }
         }
 
-        protected override bool IsEndOfFile(SyntaxToken token) => token.IsKind(SyntaxKind.EndOfFileToken);
+        protected override bool IsEndOfFile(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.EndOfFileToken);
 
-        protected override bool IsNoneToken(SyntaxToken token) => token.IsKind(SyntaxKind.None);
+        protected override bool IsNoneToken(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.None);
 
-        protected override bool IsCommentTrivia(SyntaxTrivia trivia) => TriviaKinds.Contains(trivia.Kind());
+        protected override bool IsCommentTrivia(SyntaxTrivia trivia)
+        {
+            switch (trivia.Kind())
+            {
+                case SyntaxKind.SingleLineCommentTrivia:
+                case SyntaxKind.MultiLineCommentTrivia:
+                case SyntaxKind.SingleLineDocumentationCommentTrivia:
+                case SyntaxKind.MultiLineDocumentationCommentTrivia:
+                    return true;
 
-        protected override bool IsClass(SyntaxNode node) => ClassKinds.Contains(node.Kind());
+                default:
+                    return false;
+            }
+        }
 
-        protected override bool IsStatement(SyntaxNode node) => node is StatementSyntax &&
-            !node.IsKind(SyntaxKind.Block);
+        protected override bool IsClass(SyntaxNode node)
+        {
+            switch (node.Kind())
+            {
+                case SyntaxKind.ClassDeclaration:
+                case SyntaxKind.StructDeclaration:
+                case SyntaxKind.InterfaceDeclaration:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
+        protected override bool IsStatement(SyntaxNode node)
+        {
+            switch (node.Kind())
+            {
+                case SyntaxKind.BreakStatement:
+                case SyntaxKind.CheckedStatement:
+                case SyntaxKind.ContinueStatement:
+                case SyntaxKind.DoStatement:
+                case SyntaxKind.EmptyStatement:
+                case SyntaxKind.ExpressionStatement:
+                case SyntaxKind.FixedStatement:
+                case SyntaxKind.ForEachStatement:
+                case SyntaxKind.ForStatement:
+                case SyntaxKind.GlobalStatement:
+                case SyntaxKind.GotoCaseStatement:
+                case SyntaxKind.GotoDefaultStatement:
+                case SyntaxKind.GotoStatement:
+                case SyntaxKind.IfStatement:
+                case SyntaxKind.LabeledStatement:
+                case SyntaxKind.LocalDeclarationStatement:
+                case SyntaxKind.LockStatement:
+                case SyntaxKind.ReturnStatement:
+                case SyntaxKind.SwitchStatement:
+                case SyntaxKind.ThrowStatement:
+                case SyntaxKind.TryStatement:
+                case SyntaxKind.UncheckedStatement:
+                case SyntaxKind.UnsafeStatement:
+                case SyntaxKind.UsingStatement:
+                case SyntaxKind.WhileStatement:
+                case SyntaxKind.YieldBreakStatement:
+                case SyntaxKind.YieldReturnStatement:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
 
         protected override bool IsFunction(SyntaxNode node)
         {
-            if (node is PropertyDeclarationSyntax property && property.ExpressionBody != null)
+            switch (node.Kind())
             {
-                return true;
-            }
+                case SyntaxKind.PropertyDeclaration:
+                    return ((PropertyDeclarationSyntax)node).ExpressionBody != null;
 
-            if (node is BaseMethodDeclarationSyntax method && method.ExpressionBody() != null)
-            {
-                return true;
-            }
+                case SyntaxKind.ConstructorDeclaration:
+                case SyntaxKind.ConversionOperatorDeclaration:
+                case SyntaxKind.DestructorDeclaration:
+                case SyntaxKind.MethodDeclaration:
+                case SyntaxKind.OperatorDeclaration:
+                    var methodDeclaration = (BaseMethodDeclarationSyntax)node;
+                    return methodDeclaration.ExpressionBody() != null ||
+                        methodDeclaration.Body != null; // Non-abstract, non-interface methods
 
-            if (FunctionKinds.Contains(node.Kind()) &&
-                node.ChildNodes().AnyOfKind(SyntaxKind.Block))
-            {
-                // Non-abstract, non-interface methods
-                return true;
-            }
+                case SyntaxKind.AddAccessorDeclaration:
+                case SyntaxKind.GetAccessorDeclaration:
+                case SyntaxKind.RemoveAccessorDeclaration:
+                case SyntaxKind.SetAccessorDeclaration:
+                    var accessor = (AccessorDeclarationSyntax)node;
+                    if (accessor.HasBodyOrExpressionBody())
+                    {
+                        return true;
+                    }
 
-            if (node is AccessorDeclarationSyntax accessor)
-            {
-                if (accessor.HasBodyOrExpressionBody())
-                {
-                    return true;
-                }
+                    if (!accessor.Parent.Parent.IsKind(SyntaxKind.PropertyDeclaration) &&
+                        !accessor.Parent.Parent.IsKind(SyntaxKind.EventDeclaration))
+                    {
+                        // Unexpected
+                        return false;
+                    }
 
-                if (!(accessor.Parent.Parent is BasePropertyDeclarationSyntax prop))
-                {
-                    // Unexpected
+                    var basePropertyNode = (BasePropertyDeclarationSyntax)accessor.Parent.Parent;
+
+                    if (basePropertyNode.Modifiers.Any(SyntaxKind.AbstractKeyword))
+                    {
+                        return false;
+                    }
+
+                    return !basePropertyNode.Parent.IsKind(SyntaxKind.InterfaceDeclaration);
+
+                default:
                     return false;
-                }
-
-                if (prop.Modifiers.Any(SyntaxKind.AbstractKeyword))
-                {
-                    return false;
-                }
-
-                return !(prop.Parent is InterfaceDeclarationSyntax);
             }
-
-            return false;
         }
 
         protected override IEnumerable<SyntaxNode> PublicApiNodes

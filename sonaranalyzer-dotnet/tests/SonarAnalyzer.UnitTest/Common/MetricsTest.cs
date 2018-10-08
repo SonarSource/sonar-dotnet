@@ -25,7 +25,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.UnitTest.ControlFlowGraph;
 
 namespace SonarAnalyzer.UnitTest.Common
 {

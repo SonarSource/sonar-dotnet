@@ -61,12 +61,12 @@ namespace SonarAnalyzer.Helpers.CSharp
         }
 
         protected override bool IsTriviaComment(SyntaxTrivia trivia) =>
-            trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) || trivia.IsKind(SyntaxKind.MultiLineCommentTrivia);
+            trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) ||
+            trivia.IsKind(SyntaxKind.MultiLineCommentTrivia);
 
-        protected override string GetAttributeName(SyntaxNode node)
-        {
-            var attribute = node as AttributeSyntax;
-            return attribute?.Name.ToString() ?? string.Empty;
-        }
+        protected override string GetAttributeName(SyntaxNode node) =>
+            node.IsKind(SyntaxKind.Attribute)
+                ? ((AttributeSyntax)node).Name.ToString()
+                : string.Empty;
     }
 }

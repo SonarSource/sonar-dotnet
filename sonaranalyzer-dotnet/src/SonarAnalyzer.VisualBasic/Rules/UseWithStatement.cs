@@ -131,7 +131,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static bool IsCandidateForExtraction(ExpressionSyntax currentMemberExpression, SyntaxNodeAnalysisContext context)
         {
             return currentMemberExpression != null &&
-                !(currentMemberExpression is IdentifierNameSyntax) &&
+                !currentMemberExpression.IsKind(SyntaxKind.IdentifierName) &&
                 !(currentMemberExpression is InstanceExpressionSyntax) &&
                 !(context.SemanticModel.GetSymbolInfo(currentMemberExpression).Symbol is ITypeSymbol);
         }
@@ -139,7 +139,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static ExecutableStatementSyntax GetParentStatement(ExpressionSyntax expression)
         {
             var expr = expression;
-            var parent = expression.Parent as ExpressionSyntax;
+            var parent = expr.Parent as ExpressionSyntax;
             while (parent != null)
             {
                 expr = parent;

@@ -120,12 +120,10 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static bool CanSymbolBeInterfaceMemberOrOverride(ISymbol symbol)
-        {
-            return symbol is IMethodSymbol ||
-                symbol is IPropertySymbol ||
-                symbol is IEventSymbol;
-        }
+        public static bool CanSymbolBeInterfaceMemberOrOverride(ISymbol symbol) =>
+            symbol?.Kind == SymbolKind.Method
+            || symbol?.Kind == SymbolKind.Property
+            || symbol?.Kind == SymbolKind.Event;
 
         public static IEnumerable<INamedTypeSymbol> GetSelfAndBaseTypes(this ITypeSymbol type)
         {
@@ -134,12 +132,11 @@ namespace SonarAnalyzer.Helpers
                 yield break;
             }
 
-            var baseType = type as INamedTypeSymbol;
-            while (baseType != null &&
-                !(baseType is IErrorTypeSymbol))
+            var currentType = type;
+            while (currentType?.Kind == SymbolKind.NamedType)
             {
-                yield return baseType;
-                baseType = baseType.BaseType;
+                yield return (INamedTypeSymbol)currentType;
+                currentType = currentType.BaseType;
             }
         }
 
@@ -172,17 +169,17 @@ namespace SonarAnalyzer.Helpers
 
         public static IEnumerable<IParameterSymbol> GetParameters(this ISymbol symbol)
         {
-            if (symbol is IMethodSymbol methodSymbol)
+            switch (symbol.Kind)
             {
-                return methodSymbol.Parameters;
-            }
+                case SymbolKind.Method:
+                    return ((IMethodSymbol)symbol).Parameters;
 
-            if (symbol is IPropertySymbol propertySymbol)
-            {
-                return propertySymbol.Parameters;
-            }
+                case SymbolKind.Property:
+                    return ((IPropertySymbol)symbol).Parameters;
 
-            return Enumerable.Empty<IParameterSymbol>();
+                default:
+                    return Enumerable.Empty<IParameterSymbol>();
+            }
         }
 
         public static bool IsAnyAttributeInOverridingChain(IPropertySymbol propertySymbol)

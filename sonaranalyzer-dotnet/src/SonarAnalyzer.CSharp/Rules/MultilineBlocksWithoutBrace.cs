@@ -93,13 +93,11 @@ namespace SonarAnalyzer.Rules.CSharp
             CheckStatement(context, lastStatementInIfChain, "conditionally", "unconditionally");
         }
 
-        private static bool IsNestedStatement(StatementSyntax nested)
-        {
-            return nested is IfStatementSyntax ||
-                nested is ForStatementSyntax ||
-                nested is ForEachStatementSyntax ||
-                nested is WhileStatementSyntax;
-        }
+        private static bool IsNestedStatement(StatementSyntax nested) =>
+            nested.IsKind(SyntaxKind.IfStatement) ||
+            nested.IsKind(SyntaxKind.ForStatement) ||
+            nested.IsKind(SyntaxKind.ForEachStatement) ||
+            nested.IsKind(SyntaxKind.WhileStatement);
 
         private static StatementSyntax GetLastStatementInIfChain(IfStatementSyntax ifStatement)
         {
@@ -117,12 +115,26 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             return statement;
+            //var currentIfStatement = ifStatement;
+            //var statement = currentIfStatement.Statement;
+            //while (currentIfStatement != null)
+            //{
+            //    if (currentIfStatement.Else == null)
+            //    {
+            //        return currentIfStatement.Statement;
+            //    }
+
+            //    statement = currentIfStatement.Else.Statement;
+            //    currentIfStatement = statement as IfStatementSyntax;
+            //}
+
+            //return statement;
         }
 
         private static void CheckStatement(SyntaxNodeAnalysisContext context, StatementSyntax statement,
             string executed, string execute)
         {
-            if (statement is BlockSyntax)
+            if (statement.IsKind(SyntaxKind.Block))
             {
                 return;
             }
@@ -145,16 +157,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 var location = Location.Create(context.Node.SyntaxTree, TextSpan.FromBounds(nextStatement.SpanStart, lineSpan.End));
 
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location,
-                    additionalLocations: new [] { statement.GetLocation() },
+                    additionalLocations: new[] { statement.GetLocation() },
                     messageArgs: new object[] { executed, execute, nextStatementPosition.Line - statementPosition.Line + 1 }));
             }
         }
 
-        private static bool IsStatementCandidateLoop(StatementSyntax statement)
-        {
-            return statement is ForEachStatementSyntax ||
-                statement is ForStatementSyntax ||
-                statement is WhileStatementSyntax;
-        }
+        private static bool IsStatementCandidateLoop(StatementSyntax statement) =>
+            statement.IsKind(SyntaxKind.ForEachStatement) ||
+            statement.IsKind(SyntaxKind.ForStatement) ||
+            statement.IsKind(SyntaxKind.WhileStatement);
     }
 }

@@ -134,15 +134,16 @@ namespace SonarAnalyzer.Metrics.CSharp
                 return hasExcludeFromCodeCoverageAttribute;
             }
 
-            switch (this.semanticModel.GetDeclaredSymbol(node))
+            var nodeSymbol = this.semanticModel.GetDeclaredSymbol(node);
+            switch (nodeSymbol?.Kind)
             {
-                case IMethodSymbol methodSymbol:
+                case SymbolKind.Method:
                     return hasExcludeFromCodeCoverageAttribute ||
-                        methodSymbol.GetAttributes().Any(HasExcludedAttribute);
+                        nodeSymbol.GetAttributes().Any(HasExcludedAttribute);
 
-                case INamedTypeSymbol namedTypeSymbol:
+                case SymbolKind.NamedType:
                     return hasExcludeFromCodeCoverageAttribute ||
-                        namedTypeSymbol.GetAttributes().Any(HasExcludedAttribute);
+                        nodeSymbol.GetAttributes().Any(HasExcludedAttribute);
 
                 default:
                     return hasExcludeFromCodeCoverageAttribute;

@@ -51,5 +51,32 @@ namespace SonarAnalyzer.Helpers
             }
             return value;
         }
+
+        public static bool DictionaryEquals<TKey, TValue>(this IDictionary<TKey, TValue> dict1, IDictionary<TKey, TValue> dict2)
+        {
+            if (dict1 == dict2)
+            {
+                return true;
+            }
+
+            if (dict1 == null ||
+                dict2 == null ||
+                dict1.Count != dict2.Count)
+            {
+                return false;
+            }
+
+            var valueComparer = EqualityComparer<TValue>.Default;
+
+            foreach (var kvp in dict1)
+            {
+                if (!dict2.TryGetValue(kvp.Key, out var value2) ||
+                    !valueComparer.Equals(kvp.Value, value2))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
