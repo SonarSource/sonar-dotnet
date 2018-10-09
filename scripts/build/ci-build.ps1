@@ -244,6 +244,7 @@ function Invoke-DotNetBuild() {
 
     Restore-Packages "15.0" $solutionName
     Invoke-MSBuild "15.0" $solutionName `
+        /bl:"${binPath}\msbuild.binlog" `
         /consoleloggerparameters:Summary `
         /m `
         /p:configuration=$buildConfiguration `
