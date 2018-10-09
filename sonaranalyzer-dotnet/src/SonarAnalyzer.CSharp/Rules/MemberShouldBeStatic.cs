@@ -55,7 +55,8 @@ namespace SonarAnalyzer.Rules.CSharp
             ImmutableArray.Create(
                 KnownType.System_Web_Mvc_Controller,
                 KnownType.System_Web_Http_ApiController,
-                KnownType.Microsoft_AspNetCore_Mvc_Controller
+                KnownType.Microsoft_AspNetCore_Mvc_Controller,
+                KnownType.System_Web_HttpApplication
             );
 
         protected override void Initialize(SonarAnalysisContext context)

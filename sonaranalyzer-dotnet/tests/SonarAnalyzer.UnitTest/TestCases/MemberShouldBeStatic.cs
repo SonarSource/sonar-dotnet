@@ -201,6 +201,14 @@ namespace Tests.Diagnostics
         protected int BarBar() => 1; // Noncompliant
     }
 
+    public class HttpApplication1 : System.Web.HttpApplication
+    {
+        public int Foo() => 0;
+
+        protected int FooFoo() => 0; // Noncompliant
+    }
+
+
     // Handle invalid code causing NullReferenceException: https://github.com/SonarSource/sonar-csharp/issues/819
     public class Class7
     {
