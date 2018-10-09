@@ -61,3 +61,4 @@ packages/
 
 # rule-api temp artifacts
 *.restext
+RspecStrings.resx

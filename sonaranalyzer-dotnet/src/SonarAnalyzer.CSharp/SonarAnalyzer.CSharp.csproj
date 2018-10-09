@@ -31,13 +31,18 @@
     </Compile>
   </ItemGroup>
 
-  <!--
-    This PropertyGroup is used as a hack to prevent the NU1605 issue to be reported as an error. The rule is detecting
-    the downgrade of System.Collections.Immutable from 1.2.0 to 1.1.37 (VS 2015 Update 3 only embeds 1.1.37).
-    Do not use NoWarn in order to avoid hiding other issues.
-  -->
   <PropertyGroup>
+    <!--
+      This Property is used as a hack to prevent the NU1605 issue to be reported as an error. The rule is detecting
+      the downgrade of System.Collections.Immutable from 1.2.0 to 1.1.37 (VS 2015 Update 3 only embeds 1.1.37).
+      Do not use NoWarn in order to avoid hiding other issues.
+    -->
     <WarningsAsErrors />
+    <!--
+    This property triggers the generation of the .resx file from the rspec repository.  It's handled by the 
+    GenerateResxFromRspec target in the sonaranalyzer-dotnet\src\Directory.Build.props file
+    -->
+    <Rspec2Resx>cs</Rspec2Resx>
   </PropertyGroup>
 
 </Project>
