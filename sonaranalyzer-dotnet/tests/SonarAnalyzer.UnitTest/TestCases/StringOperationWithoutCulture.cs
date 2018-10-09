@@ -42,6 +42,9 @@ namespace Tests.Diagnostics
             i = "".IndexOf('');
             i = "".LastIndexOf(""); // Noncompliant
             i = "".LastIndexOf("", StringComparison.CurrentCulture);
+            // Make sure we don't report it for Expressions
+            Expression<Func<string, bool>> e = s => s.ToUpper() == "TOTO";
+            Func<string, bool> f = s => s.ToUpper() == "TOTO"; // Noncompliant
         }
     }
 }
