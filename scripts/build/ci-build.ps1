@@ -104,9 +104,10 @@ function Get-ScannerMsBuildPath() {
     if (-Not (Test-Path $scannerMsbuild)) {
         Write-Debug "Scanner for MSBuild not found, downloading it"
 
-        # This links always redirect to the latest released scanner
-        $downloadLink = "https://repox.sonarsource.com/sonarsource-public-releases/org/sonarsource/scanner/msbuild/" +
-            "sonar-scanner-msbuild/%5BRELEASE%5D/sonar-scanner-msbuild-%5BRELEASE%5D-net46.zip"
+        # DO NOT COMMIT THIS CHANGE - using an unreleased version of the scanner to test a fix
+        $downloadLink = "https://repox.sonarsource.com/sonarsource-public-builds/org/sonarsource/scanner/msbuild/" +
+            "sonar-scanner-msbuild/4.4.1.1530/sonar-scanner-msbuild-4.4.1.1530-net46.zip"
+
         $scannerMsbuildZip = Join-Path $currentDir "\MSBuild.SonarQube.Runner.zip"
 
         Write-Debug "Downloading scanner from '${downloadLink}' at '${currentDir}'"
