@@ -102,7 +102,7 @@ function Get-ScannerMsBuildPath() {
     $scannerMsbuild = Join-Path $currentDir "SonarScanner.MSBuild.exe"
 
     if (-Not (Test-Path $scannerMsbuild)) {
-        Write-Debug "Scanner for MSBuild not found, downloading it"
+        Write-Host "XXXXX Scanner for MSBuild not found, downloading it"
 
         # DO NOT COMMIT THIS CHANGE - using an unreleased version of the scanner to test a fix
         $downloadLink = "https://repox.sonarsource.com/sonarsource-public-builds/org/sonarsource/scanner/msbuild/" +
@@ -110,17 +110,17 @@ function Get-ScannerMsBuildPath() {
 
         $scannerMsbuildZip = Join-Path $currentDir "\MSBuild.SonarQube.Runner.zip"
 
-        Write-Debug "Downloading scanner from '${downloadLink}' at '${currentDir}'"
+        Write-Host "XXXXX Downloading scanner from '${downloadLink}' at '${currentDir}'"
         (New-Object System.Net.WebClient).DownloadFile($downloadLink, $scannerMsbuildZip)
 
         # perhaps we could use other folder, not the repository root
         Expand-ZIPFile $scannerMsbuildZip $currentDir
 
-        Write-Debug "Deleting downloaded zip"
+        Write-Host "XXXXX Deleting downloaded zip"
         Remove-Item $scannerMsbuildZip -Force
     }
 
-    Write-Debug "Scanner for MSBuild found at '$scannerMsbuild'"
+    Write-Host "XXXXX Scanner for MSBuild found at '$scannerMsbuild'"
     return $scannerMsbuild
 }
 
