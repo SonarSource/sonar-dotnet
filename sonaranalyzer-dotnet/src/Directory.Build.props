@@ -8,6 +8,7 @@
           Inputs="@(RSpecFiles)" 
           Outputs="$(ProjectDir)RspecStrings.resx" 
           BeforeTargets="_GenerateCompileInputs">
+    <Message Importance="high" Text="Generating resx files" />
     <PropertyGroup>
       <PowerShellExe Condition="'$(PowerShellExe)'==''">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>
     </PropertyGroup>
