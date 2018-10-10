@@ -262,39 +262,29 @@ namespace SonarAnalyzer.Helpers
             // * VariableDeclarationSyntax (for local variable or field),
             // * PropertyDeclarationSyntax,
             // * SimpleAssigmentExpression
-            return node.Ancestors()
-                .Select(GetExpressionTree)
-                .FirstOrDefault(tuple => tuple.Item1)
-                ?.Item2?.IsKnownType(KnownType.System_Linq_Expressions_Expression_T, semanticModel)
-                ?? false;
-
-            Tuple<bool, SyntaxNode> GetExpressionTree(SyntaxNode syntaxNode)
+            foreach (var n in node.Ancestors())
             {
-                switch (syntaxNode.Kind())
+                switch (n.Kind())
                 {
-                    case SyntaxKind.VariableDeclaration:
-                        return new Tuple<bool, SyntaxNode>(true, ((VariableDeclarationSyntax)syntaxNode).Type);
-
-                    case SyntaxKind.PropertyDeclaration:
-                        return new Tuple<bool, SyntaxNode>(true, ((PropertyDeclarationSyntax)syntaxNode).Type);
-
-                    case SyntaxKind.AddAssignmentExpression:
-                    case SyntaxKind.AndAssignmentExpression:
-                    case SyntaxKind.DivideAssignmentExpression:
-                    case SyntaxKind.ExclusiveOrAssignmentExpression:
-                    case SyntaxKind.LeftShiftAssignmentExpression:
-                    case SyntaxKind.ModuloAssignmentExpression:
-                    case SyntaxKind.MultiplyAssignmentExpression:
-                    case SyntaxKind.OrAssignmentExpression:
-                    case SyntaxKind.RightShiftAssignmentExpression:
-                    case SyntaxKind.SimpleAssignmentExpression:
-                    case SyntaxKind.SubtractAssignmentExpression:
-                        return new Tuple<bool, SyntaxNode>(true, ((AssignmentExpressionSyntax)syntaxNode).Left);
-
+                    case SyntaxKind.FromClause:
+                    case SyntaxKind.LetClause:
+                    case SyntaxKind.JoinClause:
+                    case SyntaxKind.JoinIntoClause:
+                    case SyntaxKind.WhereClause:
+                    case SyntaxKind.OrderByClause:
+                    case SyntaxKind.SelectClause:
+                    case SyntaxKind.GroupClause:
+                        // For those clauses, we don't know how to differentiate an expression tree from a delegate,
+                        // so we assume we are in the (more restricted) expression tree
+                        return true;
+                    case SyntaxKind.SimpleLambdaExpression:
+                    case SyntaxKind.ParenthesizedLambdaExpression:
+                        return semanticModel.GetTypeInfo(n).ConvertedType.OriginalDefinition.Is(KnownType.System_Linq_Expressions_Expression_T);
                     default:
-                        return new Tuple<bool, SyntaxNode>(false, null);
+                        continue;
                 }
             }
+            return false;
         }
 
         public static bool HasDefaultLabel(this SwitchStatementSyntax node) =>
