@@ -737,8 +737,25 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     if (CasePatternSwitchLabelSyntaxWrapper.IsInstance(label))
                     {
                         var casePatternSwitchLabel = (CasePatternSwitchLabelSyntaxWrapper)label;
-                        currentSectionBlock = BuildCasePattern(casePatternSwitchLabel,
-                            trueSuccessor: sectionBlock, falseSuccessor: currentSectionBlock);
+
+                        if (ConstantPatternSyntaxWrapper.IsInstance(casePatternSwitchLabel.Pattern))
+                        {
+                            // Creating BranchBlock instead of BinaryBranchBlock will generate some
+                            // false negatives because we will not be able to evaluate the case label
+                            // condition. BinaryBranchBlock causes exceptions in the CSharpExplodedGraph
+                            // because there is no instruction for the branch condition. Such instruction
+                            // would be difficult to generate because it is not present in the AST.
+                            // See https://github.com/SonarSource/sonar-csharp/issues/1801
+                            // and https://github.com/SonarSource/sonar-csharp/issues/1831
+
+                            currentSectionBlock = CreateBranchBlock(casePatternSwitchLabel,
+                                successors: new[] { sectionBlock, currentSectionBlock });
+                        }
+                        else
+                        {
+                            currentSectionBlock = BuildCasePattern(casePatternSwitchLabel,
+                                trueSuccessor: sectionBlock, falseSuccessor: currentSectionBlock);
+                        }
                     }
                     else if (label is CaseSwitchLabelSyntax caseSwitchLabel &&
                         caseSwitchLabel.Value != null &&

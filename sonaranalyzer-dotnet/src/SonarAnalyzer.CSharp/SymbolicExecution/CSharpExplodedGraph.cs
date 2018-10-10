@@ -478,6 +478,11 @@ namespace SonarAnalyzer.SymbolicExecution
                     newProgramState = VisitDeclarationPattern((DeclarationPatternSyntaxWrapper)instruction, newProgramState);
                     break;
 
+                case SyntaxKindEx.ConstantPattern:
+                    // The 0 in 'case 0 when ...'
+                    // Do nothing
+                    break;
+
                 default:
                     throw new NotSupportedException($"{instruction.Kind()}");
             }
