@@ -122,5 +122,15 @@
             }
         }
 
+        void Switch_Pattern_Constant_With_When(int i)
+        {
+            switch (i)
+            {
+                case 0 when i == 0: // the when is redundant, but needed to convert the case to pattern
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
