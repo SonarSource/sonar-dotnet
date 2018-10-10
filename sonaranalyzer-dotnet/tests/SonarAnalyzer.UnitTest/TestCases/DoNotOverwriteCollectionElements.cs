@@ -157,6 +157,20 @@ namespace Tests.Diagnostics
         }
     }
 
+    class RegressionTests
+    {
+        // See https://github.com/SonarSource/sonar-csharp/issues/1967
+        void NullReference()
+        {
+            var act = new Action<int, int>((x, y) => x++);
+            var dict = new Dictionary<int, int>();
+
+            act(0, 1); // Some invocation that's not a method, but still have two arguments
+            dict.Add(0, 0); // Secondary
+            dict.Add(0, 1); // Noncompliant
+        }
+    }
+
     class CustomIndexerOneArg
     {
         int this[string key]

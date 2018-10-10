@@ -173,8 +173,8 @@ namespace SonarAnalyzer.Rules
             private bool IsInvocationOnSameItem(SyntaxNode expression, string invokedOn) =>
                 expression is TInvocationSyntax ies &&
                 HasNumberOfArguments(ies, 2) &&
-                GetMethodName(ies).Equals("Add", StringComparison.OrdinalIgnoreCase) &&
-                getInvokedOnName(ies).Equals(invokedOn, StringComparison.OrdinalIgnoreCase);
+                "Add".Equals(GetMethodName(ies), StringComparison.OrdinalIgnoreCase) &&
+                invokedOn.Equals(getInvokedOnName(ies), StringComparison.OrdinalIgnoreCase);
 
             protected string GetMethodName(TInvocationSyntax invocation) =>
                 GetExpression(invocation) is TMemberAccessSyntax memberAccess
