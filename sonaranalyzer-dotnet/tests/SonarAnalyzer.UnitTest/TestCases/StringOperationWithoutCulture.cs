@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
+using System.Linq.Expressions;
 
 namespace Tests.Diagnostics
 {
@@ -42,9 +43,19 @@ namespace Tests.Diagnostics
             i = "".IndexOf('');
             i = "".LastIndexOf(""); // Noncompliant
             i = "".LastIndexOf("", StringComparison.CurrentCulture);
+        }
+
+        void TestExpressions()
+        {
             // Make sure we don't report it for Expressions
             Expression<Func<string, bool>> e = s => s.ToUpper() == "TOTO";
             Func<string, bool> f = s => s.ToUpper() == "TOTO"; // Noncompliant
+            var primes = new List<string> { "two", "three", "five", "seven" };
+            var withT = primes.Where(s => s.ToUpper().StartsWith("T")); // Noncompliant
+            var withTQuery = primes.AsQueryable().Where(s => s.ToUpper().StartsWith("T"));
+            var withoutT = from s in primes where !s.ToUpper().StartsWith("T") select s; // False negative
+            var withoutTQuery = from s in primes.AsQueryable() where !s.ToUpper().StartsWith("T") select s;
+
         }
     }
 }
