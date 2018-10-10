@@ -1,4 +1,14 @@
 <Project>
+
+  <!-- Include the parent Directory.Build.props file, if there is one. -->
+  <PropertyGroup>
+    <!-- Search up the tree, starting at the folder above the one containing this file -->
+    <SearchRootDirectory>$([System.IO.Directory]::GetParent($(MSBuildThisFileDirectory)))</SearchRootDirectory>
+    <SearchRootDirectory>$([System.IO.Directory]::GetParent($(SearchRootDirectory)))</SearchRootDirectory>
+    <ParentDirectoryBuildProps>$([MSBuild]::GetDirectoryNameOfFileAbove($(SearchRootDirectory), Directory.Build.props))\Directory.Build.props</ParentDirectoryBuildProps>
+  </PropertyGroup>
+  <Import Project="$(ParentDirectoryBuildProps)" Condition="$(ParentDirectoryBuildProps)!=''" />
+
   <PropertyGroup>
     <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
   </PropertyGroup>
