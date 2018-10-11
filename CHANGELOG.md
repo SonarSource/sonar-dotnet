@@ -16,7 +16,14 @@ For reference, the possible headings are:
 ## Unreleased
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonar-csharp/compare/7.6.0.7024...HEAD)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/7.7.0.7192...HEAD)
+
+
+## [7.7](https://github.com/SonarSource/sonar-csharp/releases/tag/7.7.0.7192)
+
+### Bug Fixes
+* [1967](https://github.com/SonarSource/sonar-csharp/issues/1967) - Fix S4143: throwing System.NullReferenceException
+* [1831](https://github.com/SonarSource/sonar-csharp/issues/1831) - AD0001 after upgrading from 7.4 to 7.5
 
 
 ## [7.6](https://github.com/SonarSource/sonar-csharp/releases/tag/7.6.0.7024)
