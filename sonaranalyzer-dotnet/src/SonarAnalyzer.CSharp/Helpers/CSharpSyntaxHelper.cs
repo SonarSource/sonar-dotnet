@@ -280,7 +280,7 @@ namespace SonarAnalyzer.Helpers
                     case SyntaxKind.SimpleLambdaExpression:
                     case SyntaxKind.ParenthesizedLambdaExpression:
                         return semanticModel.GetTypeInfo(n).ConvertedType?.OriginalDefinition.Is(KnownType.System_Linq_Expressions_Expression_T)
-                            ??false;
+                            ?? false;
                     default:
                         continue;
                 }
