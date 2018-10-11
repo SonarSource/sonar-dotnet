@@ -60,11 +60,14 @@ namespace Tests.Diagnostics
         Func<string> normalProperty => () => FuncWithOptionals(str: null); //Noncompliant
         Expression<Action> expTreeProperty => () => FuncWithOptionals(null); //Compliant
 
+        void takeExpression(Expression<Func<int, int>> expr) { }
+
         public static void Method1()
         {
             // Variable declaration
             Func<string> var1 = () => FuncWithOptionals(null); //Noncompliant
             Expression<Action> expTreeVar = () => FuncWithOptionals(null); //Compliant
+            takeExpression(() => FuncWithOptionals(null)); //Compliant
 
             // Simple assigment
             var1 = () => FuncWithOptionals(str: null, args: "123"); //Noncompliant
