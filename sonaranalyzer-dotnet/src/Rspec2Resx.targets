@@ -1,14 +1,5 @@
 <Project>
 
-  <!-- Include the parent Directory.Build.props file, if there is one. -->
-  <PropertyGroup>
-    <!-- Search up the tree, starting at the folder above the one containing this file -->
-    <SearchRootDirectory>$([System.IO.Directory]::GetParent($(MSBuildThisFileDirectory)))</SearchRootDirectory>
-    <SearchRootDirectory>$([System.IO.Directory]::GetParent($(SearchRootDirectory)))</SearchRootDirectory>
-    <ParentDirectoryBuildProps>$([MSBuild]::GetDirectoryNameOfFileAbove($(SearchRootDirectory), Directory.Build.props))\Directory.Build.props</ParentDirectoryBuildProps>
-  </PropertyGroup>
-  <Import Project="$(ParentDirectoryBuildProps)" Condition="$(ParentDirectoryBuildProps)!=''" />
-
   <PropertyGroup>
     <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
   </PropertyGroup>
@@ -23,7 +14,7 @@
           Inputs="@(RSpecFiles)" 
           Outputs="RspecStrings.resx" 
           BeforeTargets="BeforeBuild">
-    <Message Importance="high" Text="Generating resx files" />
+    <Message Importance="high" Text="Generating resx files from Rspec..." />
     <PropertyGroup>
       <PowerShellExe Condition="'$(PowerShellExe)'==''">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>
     </PropertyGroup>

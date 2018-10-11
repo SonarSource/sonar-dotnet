@@ -32,10 +32,12 @@
       Do not use NoWarn in order to avoid hiding other issues.
     -->
     <WarningsAsErrors />
-    <!--
-    This property triggers the generation of the .resx file from the rspec repository.  It's handled by the 
-    GenerateResxFromRspec target in the sonaranalyzer-dotnet\src\Directory.Build.props file
-    -->
+  </PropertyGroup>
+
+  <!-- Generation of resx files from the Rspec file-->
+  <Import Project="..\Rspec2Resx.targets" />
+  <PropertyGroup>
     <Rspec2Resx>vbnet</Rspec2Resx>
   </PropertyGroup>
+
 </Project>
