@@ -274,6 +274,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_UIntPtr = new KnownType(SpecialType.System_UIntPtr, "UIntPtr");
         internal static readonly KnownType System_Uri = new KnownType("System.Uri");
         internal static readonly KnownType System_ValueType = new KnownType(SpecialType.System_ValueType, "ValueType");
+        internal static readonly KnownType System_Web_HttpApplication = new KnownType("System.Web.HttpApplication");
         internal static readonly KnownType System_Web_HttpCookie = new KnownType("System.Web.HttpCookie");
         internal static readonly KnownType System_Web_Http_ApiController = new KnownType("System.Web.Http.ApiController");
         internal static readonly KnownType System_Web_HttpRequestBase = new KnownType("System.Web.HttpRequestBase");
