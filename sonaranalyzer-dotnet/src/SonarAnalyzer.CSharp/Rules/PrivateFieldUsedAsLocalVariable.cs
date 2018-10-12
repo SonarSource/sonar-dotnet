@@ -102,17 +102,17 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             // Contains statements that READ field values. First grouped by field symbol (that is read),
             // then by method/property/ctor symbol (that contains the statements)
-            private readonly Dictionary<IFieldSymbol, Lookup<ISymbol, StatementSyntax>> readsByField =
-                new Dictionary<IFieldSymbol, Lookup<ISymbol, StatementSyntax>>();
+            private readonly Dictionary<IFieldSymbol, Lookup<ISymbol, SyntaxNode>> readsByField =
+                new Dictionary<IFieldSymbol, Lookup<ISymbol, SyntaxNode>>();
 
             // Contains statements that WRITE field values. First grouped by field symbol (that is written),
             // then by method/property/ctor symbol (that contains the statements)
-            private readonly Dictionary<IFieldSymbol, Lookup<ISymbol, StatementSyntax>> writesByField =
-                new Dictionary<IFieldSymbol, Lookup<ISymbol, StatementSyntax>>();
+            private readonly Dictionary<IFieldSymbol, Lookup<ISymbol, SyntaxNode>> writesByField =
+                new Dictionary<IFieldSymbol, Lookup<ISymbol, SyntaxNode>>();
 
             // Contains all method/property invocations grouped by the statement that contains them.
-            private readonly Lookup<StatementSyntax, ISymbol> invocations =
-                new Lookup<StatementSyntax, ISymbol>();
+            private readonly Lookup<SyntaxNode, ISymbol> invocations =
+                new Lookup<SyntaxNode, ISymbol>();
 
             private readonly SemanticModel semanticModel;
             private readonly IDictionary<IFieldSymbol, VariableDeclaratorSyntax> privateFields;
@@ -153,25 +153,28 @@ namespace SonarAnalyzer.Rules.CSharp
                     // Returns true when readStatement is preceded with a statement that overwrites fieldSymbol,
                     // or false when readStatement is preceded with an invocation of a method or property that
                     // overwrites fieldSymbol.
-                    bool IsPrecededWithWrite(StatementSyntax readStatement)
+                    bool IsPrecededWithWrite(SyntaxNode readStatementOrArrowExpression)
                     {
-                        foreach (var statement in GetPreviousStatements(readStatement))
+                        if (readStatementOrArrowExpression is StatementSyntax readStatement)
                         {
-                            // When the readStatement is preceded with a write statement (that is also not a read statement)
-                            // we want to report this field.
-                            if (IsOverwritingValue(statement))
+                            foreach (var statement in GetPreviousStatements(readStatement))
                             {
-                                return true;
-                            }
+                                // When the readStatement is preceded with a write statement (that is also not a read statement)
+                                // we want to report this field.
+                                if (IsOverwritingValue(statement))
+                                {
+                                    return true;
+                                }
 
-                            // When the readStatement is preceded with an invocation that has side effects, e.g. writes the field
-                            // we don't want to report this field because it could be difficult or impossible to change the code.
-                            if (IsInvocationWithSideEffects(statement))
-                            {
-                                return false;
+                                // When the readStatement is preceded with an invocation that has side effects, e.g. writes the field
+                                // we don't want to report this field because it could be difficult or impossible to change the code.
+                                if (IsInvocationWithSideEffects(statement))
+                                {
+                                    return false;
+                                }
                             }
                         }
-
+                        // ArrowExpressionClauseSyntax cannot be preceded by anything...
                         return false;
                     }
 
@@ -216,16 +219,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     ClassifyFieldReference(enclosingSymbol, memberReference);
                 }
-                else if (memberReference.Symbol is IMethodSymbol
-                    || memberReference.Symbol is IPropertySymbol)
+                else if (memberReference.Symbol is IMethodSymbol)
                 {
-                    var statement = memberReference.Syntax.FirstAncestorOrSelf<StatementSyntax>();
-                    if (statement != null)
+                    var pseudoStatement = GetParentPseudoStatement(memberReference);
+                    if (pseudoStatement != null)
                     {
-                        var invocationsInStatement = this.invocations.GetOrAdd(statement, x => new HashSet<ISymbol>());
-                        invocationsInStatement.Add(memberReference.Symbol);
+                        var invocationsInPseudoStatement = this.invocations.GetOrAdd(pseudoStatement, x => new HashSet<ISymbol>());
+                        invocationsInPseudoStatement.Add(memberReference.Symbol);
                     }
                 }
+            }
+
+            // A PseudoStatement is a Statement or an ArrowExpressionClauseSyntax (which denotes an expression-bodied member)
+            private static SyntaxNode GetParentPseudoStatement(SyntaxNodeWithSymbol<SyntaxNode, ISymbol> memberReference)
+            {
+                return memberReference.Syntax.Ancestors().FirstOrDefault(
+                    a => a is StatementSyntax || a is ArrowExpressionClauseSyntax);
             }
 
             /// <summary>
@@ -238,13 +247,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 // being null or not, because the rule will not be able to detect field reads from inline property
                 // or field initializers.
                 var fieldAccessInMethod = (IsWrite(fieldReference) ? this.writesByField : this.readsByField)
-                    .GetOrAdd((IFieldSymbol)fieldReference.Symbol, x => new Lookup<ISymbol, StatementSyntax>())
-                    .GetOrAdd(enclosingSymbol, x => new HashSet<StatementSyntax>());
+                    .GetOrAdd((IFieldSymbol)fieldReference.Symbol, x => new Lookup<ISymbol, SyntaxNode>())
+                    .GetOrAdd(enclosingSymbol, x => new HashSet<SyntaxNode>());
 
-                var statement = fieldReference.Syntax.FirstAncestorOrSelf<StatementSyntax>();
-                if (statement != null)
+                var pseudoStatement = GetParentPseudoStatement(fieldReference);
+                if (pseudoStatement != null)
                 {
-                    fieldAccessInMethod.Add(statement);
+                    fieldAccessInMethod.Add(pseudoStatement);
                 }
             }
 
