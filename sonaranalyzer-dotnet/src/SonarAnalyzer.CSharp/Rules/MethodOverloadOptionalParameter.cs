@@ -165,14 +165,12 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return false;
             }
-            var named1 = t1 as INamedTypeSymbol;
-            var named2 = t2 as INamedTypeSymbol;
-            if (named1 == null || named2 == null)
+            if (t1 is INamedTypeSymbol named1 && t2 is INamedTypeSymbol named2)
             {
-                return false;
+                return named1.TypeArguments.SequenceEqual(named2.TypeArguments,
+                    (arg1, arg2) => AreTypesEqual(arg1, arg2));
             }
-            return named1.TypeArguments.SequenceEqual(named2.TypeArguments,
-                (arg1, arg2) => AreTypesEqual(arg1, arg2));
+            return false;
         }
     }
 }
