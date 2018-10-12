@@ -222,4 +222,40 @@ namespace Tests.Diagnostics
             Console.WriteLine(F0);
         }
     }
+
+    public class AccessInExpressionBodiedConstructs
+    {
+        private string F0;
+        public string M0 => F0 ?? (F0 = "test");
+        private string F1;
+        public string M1() => F1 ?? (F1 = "test");
+        private string F2;
+        public string M2
+        {
+            get => "value";
+            set => F2 ?? (F2 = "test");
+        }
+        private string F3;
+        AccessInExpressionBodiedConstructs()
+        {
+            F3 ?? (F3 = "test");
+        }
+        private string F4;
+        ~AccessInExpressionBodiedConstructs()
+        {
+            F4 ?? (F4 = "test");
+        }
+        private string F5;
+        public string this[int i]
+        {
+            get => "value";
+            set => F5 ?? (F5 = "test");
+        }
+        private string F6;
+        public string this[int i]
+        {
+            get => F6 ?? (F6 = "test");
+        }
+
+    }
 }
