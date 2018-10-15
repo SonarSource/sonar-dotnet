@@ -275,8 +275,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
 
                 bool IsLeftSideOfAssignment(SyntaxNode syntaxNode) =>
+                    syntaxNode.Parent.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
                     syntaxNode.Parent is AssignmentExpressionSyntax assignmentExpression &&
-                    syntaxNode.Parent.Kind() == SyntaxKind.SimpleAssignmentExpression &&
                     assignmentExpression.Left == syntaxNode;
             }
 
