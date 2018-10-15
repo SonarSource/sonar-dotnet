@@ -59,5 +59,14 @@ namespace Tests.Diagnostics
         void Foo5<T>(IEnumerable<T> messages);
         void Foo5<MyType>(MyType messages);
         void Foo5(MyType messages, string delimiter = "\n");
+
+        void Foo6<T>(KeyValuePair<T, int> ids);
+        void Foo6<U>(KeyValuePair<T, string> messages, string delimiter = "\n");
+
+        void Foo7<T>(KeyValuePair<KeyValuePair<T, int>, string> ids);
+        void Foo7<U>(KeyValuePair<KeyValuePair<U, string>, string> messages, string delimiter = "\n");
+
+        void Foo8<T>(KeyValuePair<KeyValuePair<T, int>, string> ids);
+        void Foo8<U>(KeyValuePair<KeyValuePair<U, int>, string> messages, string delimiter = "\n"); // Noncompliant
     }
 }

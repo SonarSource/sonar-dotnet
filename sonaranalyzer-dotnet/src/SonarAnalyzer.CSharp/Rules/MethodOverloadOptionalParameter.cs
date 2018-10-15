@@ -148,15 +148,29 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return candidateHidingMethod.Parameters
                     .Zip(method.Parameters, (param1, param2) => new { param1, param2 })
-                    .All(p => AreParameterTypesEqual(p.param1, p.param2) &&
+                    .All(p => AreTypesEqual(p.param1.Type, p.param2.Type) &&
                               p.param1.IsOptional == p.param2.IsOptional);
         }
 
-        private static bool AreParameterTypesEqual(IParameterSymbol p1, IParameterSymbol p2)
+        private static bool AreTypesEqual(ITypeSymbol t1, ITypeSymbol t2)
         {
-            return Equals(p1.Type, p2.Type) ||
-                   p1.Type.Is(TypeKind.TypeParameter) && p2.Type.Is(TypeKind.TypeParameter) ||
-                   Equals(p1.Type.OriginalDefinition, p2.Type.OriginalDefinition);
+            return Equals(t1, t2) ||
+                   t1.Is(TypeKind.TypeParameter) && t2.Is(TypeKind.TypeParameter) ||
+                   AreGenericInstancesTypesEqual(t1, t2);
+        }
+
+        private static bool AreGenericInstancesTypesEqual(ITypeSymbol t1, ITypeSymbol t2)
+        {
+            if (t1.OriginalDefinition != t2.OriginalDefinition)
+            {
+                return false;
+            }
+            if (t1 is INamedTypeSymbol named1 && t2 is INamedTypeSymbol named2)
+            {
+                return named1.TypeArguments.SequenceEqual(named2.TypeArguments,
+                    (arg1, arg2) => AreTypesEqual(arg1, arg2));
+            }
+            return false;
         }
     }
 }
