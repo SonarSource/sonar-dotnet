@@ -258,4 +258,13 @@ namespace Tests.Diagnostics
         }
 
     }
+    public struct CompoundAssignmentReadAsWellAsWrite
+    {
+        private int F0 = 0;
+        void M1()
+        {
+            F0 += 1;
+            Console.WriteLine(F0);
+        }
+    }
 }
