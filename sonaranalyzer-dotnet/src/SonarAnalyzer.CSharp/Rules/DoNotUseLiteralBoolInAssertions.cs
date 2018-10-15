@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -86,12 +87,44 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (methodSymbol != null &&
                         invocation.ArgumentList != null &&
                         IsTrackedMethod(methodSymbol) &&
-                        IsFirstOrSecondArgumentABoolLiteral(invocation.ArgumentList.Arguments))
+                        IsFirstOrSecondArgumentABoolLiteral(invocation.ArgumentList.Arguments) &&
+                        !IsWorkingWithNullableType(methodSymbol, invocation.ArgumentList.Arguments, c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);
+        }
+
+        private bool IsWorkingWithNullableType(ISymbol symbol, SeparatedSyntaxList<ArgumentSyntax> arguments, SemanticModel semanticModel)
+        {
+            if (symbol is IMethodSymbol methodSymbol)
+            {
+                if (methodSymbol.TypeArguments.Length == 1) // We usually expect all comparison test methods to have one generic argument
+                {
+                    // Since we already know we are comparing with bool, no need to check Nullable<bool>, Nullable<T> is enough
+                    return methodSymbol.TypeArguments[0].OriginalDefinition.Is(KnownType.System_Nullable_T);
+                }
+                else if (methodSymbol.TypeArguments.Length == 0) // But they can also work with Object (NUnit...)
+                {
+                    if(arguments.Count != 2)
+                    {
+                        return false;
+                    }
+                    var nonBoolLiteral = IsBooleanLiteral(arguments[0]) ? arguments[1] : arguments[0];
+                    var nonBoolType = semanticModel.GetTypeInfo(nonBoolLiteral.Expression);
+                    return nonBoolType.Type?.OriginalDefinition.Is(KnownType.System_Nullable_T) ?? false;
+                }
+                else
+                {
+                    // Other case, not handled
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private static bool IsFirstOrSecondArgumentABoolLiteral(
