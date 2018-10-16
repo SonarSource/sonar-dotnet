@@ -53,7 +53,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-#if true
             context.RegisterSymbolAction(
                 analysisContext =>
                 {
@@ -66,8 +65,9 @@ namespace SonarAnalyzer.Rules.CSharp
                         }
                         var disposableFields = namedType.GetMembers().OfType<IFieldSymbol>()
                             .Where(IsNonStaticNonPublicDisposableField).ToHashSet();
+
                         var disposableFieldsWithInitializer = disposableFields
-                            .Where(f => IsOwnerSinceDeclaration(f, analysisContext.Compilation));
+                            .Where(f => IsOwnerSinceDeclaration(f));
 
                         var otherInitializationsOfFields = namedType.GetMembers().OfType<IMethodSymbol>().
                             SelectMany(m => GetAssignementsToFieldsIn(m, analysisContext.Compilation)).
@@ -97,87 +97,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SymbolKind.NamedType);
-#else
-            context.RegisterCompilationStartAction(
-                analysisContext =>
-                {
-
-                    var fieldsByNamedType = MultiValueDictionary<INamedTypeSymbol, IFieldSymbol>.Create<HashSet<IFieldSymbol>>();
-                    var ownedFields = new HashSet<IFieldSymbol>();
-
-                    analysisContext.RegisterSymbolAction(
-                        c =>
-                        {
-                            var namedTypeSymbol = (INamedTypeSymbol)c.Symbol;
-                            if (!namedTypeSymbol.IsClass() ||
-                                namedTypeSymbol.Implements(KnownType.System_IDisposable))
-                            {
-                                return;
-                            }
-
-                            var disposableFields = namedTypeSymbol.GetMembers()
-                                .OfType<IFieldSymbol>()
-                                .Where(IsNonStaticNonPublicDisposableField)
-                                .ToHashSet();
-
-                            fieldsByNamedType.AddRangeWithKey(namedTypeSymbol, disposableFields);
-                        },
-                        SymbolKind.NamedType);
-
-
-                    analysisContext.RegisterSyntaxNodeAction(
-                        c =>
-                        {
-                            var assignment = (AssignmentExpressionSyntax)c.Node;
-                            var expression = assignment.Right;
-                            var fieldSymbol = c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol as IFieldSymbol;
-
-                            AddFieldIfNeeded(fieldSymbol, expression, ownedFields);
-                        },
-                        SyntaxKind.SimpleAssignmentExpression);
-
-                    analysisContext.RegisterSyntaxNodeAction(
-                        c =>
-                        {
-                            var field = (FieldDeclarationSyntax)c.Node;
-
-                            foreach (var variableDeclaratorSyntax in field.Declaration.Variables
-                                .Where(declaratorSyntax => declaratorSyntax.Initializer != null))
-                            {
-                                var fieldSymbol = c.SemanticModel.GetDeclaredSymbol(variableDeclaratorSyntax) as IFieldSymbol;
-
-                                AddFieldIfNeeded(fieldSymbol, variableDeclaratorSyntax.Initializer.Value, ownedFields);
-                            }
-
-                        },
-                        SyntaxKind.FieldDeclaration);
-
-                    analysisContext.RegisterCompilationEndAction(
-                        c =>
-                        {
-                            foreach (var kv in fieldsByNamedType)
-                            {
-                                foreach (var classSyntax in kv.Key.DeclaringSyntaxReferences
-                                    .Select(declaringSyntaxReference => declaringSyntaxReference.GetSyntax())
-                                    .OfType<ClassDeclarationSyntax>())
-                                {
-                                    var assignedFields = kv.Value.Intersect(ownedFields).ToList();
-
-                                    if (!assignedFields.Any())
-                                    {
-                                        continue;
-                                    }
-                                    var variableNames = string.Join(", ",
-                                        assignedFields.Select(symbol => $"'{symbol.Name}'").OrderBy(s => s));
-
-                                    c.ReportDiagnosticIfNonGenerated(
-                                        Diagnostic.Create(rule, classSyntax.Identifier.GetLocation(), variableNames),
-                                        c.Compilation);
-                                }
-                            }
-                        });
-                });
-#endif
         }
 
         private IEnumerable<IFieldSymbol> GetAssignementsToFieldsIn(IMethodSymbol m, Compilation compilation)
@@ -207,7 +126,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return empty;
         }
 
-        private bool IsOwnerSinceDeclaration(IFieldSymbol f, Compilation compilation)
+        private bool IsOwnerSinceDeclaration(IFieldSymbol f)
         {
             var syntaxRef = f.DeclaringSyntaxReferences.SingleOrDefault();
             if (syntaxRef == null)
@@ -219,18 +138,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 return varDeclarator.Initializer != null && varDeclarator.Initializer.Value is ObjectCreationExpressionSyntax;
             }
             return false;
-        }
-
-        private static void AddFieldIfNeeded(IFieldSymbol fieldSymbol, ExpressionSyntax expression,
-            HashSet<IFieldSymbol> fieldsAssigned)
-        {
-            if (!(expression is ObjectCreationExpressionSyntax objectCreation) ||
-                !IsNonStaticNonPublicDisposableField(fieldSymbol))
-            {
-                return;
-            }
-
-            fieldsAssigned.Add(fieldSymbol);
         }
 
         internal static bool IsNonStaticNonPublicDisposableField(IFieldSymbol fieldSymbol)
