@@ -1,7 +1,10 @@
-<p>Classes with <code>IDisposable</code> members or native resources (<code>IntPtr</code>, <code>UIntPtr</code>, and <code>HandleRef</code>) are
-responsible for cleaning up those members. Native resources shoudl be released, and <code>Dispose</code> should be called for <code>IDisposable</code>
-methods. The best practice here is for the owning class to itself implement <code>IDisposable</code> and handle member cleanup in its own
-<code>Dispose</code> method.</p>
+<p>An <code>IDisposable</code> object should be disposed (there are some rare exceptions where not disposing is fine, most notably <code>Task</code>).
+If a class has an <code>IDisposable</code> field, there can be two situations:</p>
+<p>- The class observes a field that it under the responsibility of another class. </p>
+<p>- The class owns the field, and is therefore responsible for calling <code>Dispose</code> on it.</p>
+<p>In the second case, the safest way for the class to ensure <code>Dispose</code> is called is to call it in its own <code>Dispose</code> function,
+and therefore to be itself <code>IDisposable</code>. We consider that a class own a <code>IDisposable</code> field resource if it created the object
+referenced by the field.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 public class ResourceHolder   // Noncompliant; doesn't implement IDisposable
@@ -9,7 +12,7 @@ public class ResourceHolder   // Noncompliant; doesn't implement IDisposable
   private FileStream fs;  // This member is never Disposed
   public void OpenResource(string path)
   {
-    this.fs = new FileStream(path, FileMode.Open);
+    this.fs = new FileStream(path, FileMode.Open); // I create the FileStream, I'm owning it
   }
   public void CloseResource()
   {
@@ -24,7 +27,7 @@ public class ResourceHolder : IDisposable
 &nbsp;&nbsp;private FileStream fs;
 &nbsp;&nbsp;public void OpenResource(string path)
 &nbsp;&nbsp;{
-&nbsp;&nbsp;&nbsp;&nbsp;this.fs = new FileStream(path, FileMode.Open);
+&nbsp;&nbsp;&nbsp;&nbsp;this.fs = new FileStream(path, FileMode.Open); // I create the FileStream, I'm owning it
 &nbsp;&nbsp;}
 &nbsp;&nbsp;public void CloseResource()
 &nbsp;&nbsp;{
