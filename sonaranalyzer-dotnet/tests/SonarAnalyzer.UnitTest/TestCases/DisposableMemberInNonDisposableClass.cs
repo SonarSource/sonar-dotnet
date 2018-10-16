@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
+
 
 namespace Tests.Diagnostics
 {
@@ -32,7 +34,6 @@ namespace Tests.Diagnostics
 
         public void Dispose()
         {
-            this.fs.Dispose();
         }
     }
 
@@ -64,6 +65,33 @@ namespace Tests.Diagnostics
 
     public class ResourceHolder5 : ResourceHolder2 //Compliant
     {
+    }
+
+    public class ObserverVsOwner // Noncompliant {{Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'fs2', 'fs3'.}}
+    {
+        protected FileStream fs, fs2 = new FileStream("eee", FileMode.Open), fs3; // Only fs will be compliant
+        public FileStream Stream
+        {
+            get { return fs; }
+            set { fs = value; }
+        }
+        public ObserverVsOwner(string path)
+        {
+            fs3 = new FileStream(path, FileMode.Open);
+        }
+    }
+
+    public class TestWithTasks // Noncompliant {{Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 't2'.}}
+    {
+        // Tasks are IDisposable who usually don't really need to be disposed, but they are typicall create with a factory
+        Task t1 = Task.Run(() => { Console.WriteLine("Who did that?"); });
+        Task t2 = new Task(() => { Console.WriteLine("Not me!"); });
+    }
+
+    public class ExpressionBodied // Noncompliant {{Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'fs'.}}
+    {
+        protected FileStream fs;
+        ExpressionBodied(int i) => fs = new FileStream("eee", FileMode.Open);
     }
 
     public interface IService
