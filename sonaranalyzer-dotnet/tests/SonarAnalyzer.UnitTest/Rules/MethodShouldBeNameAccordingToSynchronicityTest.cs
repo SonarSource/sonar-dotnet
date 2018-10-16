@@ -40,6 +40,34 @@ namespace SonarAnalyzer.UnitTest.Rules
                 additionalReferences: NuGetMetadataReference.SystemThreadingTasksExtensions(tasksVersion));
         }
 
+        [TestMethod]
+        [DataRow("3.0.20105.1")]
+        [DataRow(Constants.NuGetLatestVersion)]
+        [TestCategory("Rule")]
+        public void MethodShouldBeNameAccordingToSynchronicity_MVC(string mvcVersion)
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNameAccordingToSynchronicity.MVC.cs",
+                new MethodShouldBeNameAccordingToSynchronicity(),
+                additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(mvcVersion));
+        }
+
+        [TestMethod]
+        [DataRow("2.0.4", "2.0.3")]
+        [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
+        [TestCategory("Rule")]
+        public void MethodShouldBeNameAccordingToSynchronicity_MVC_Core(string aspNetCoreMvcVersion,
+            string aspNetCoreRoutingVersion)
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNameAccordingToSynchronicity.MVC.Core.cs",
+                new MethodShouldBeNameAccordingToSynchronicity(),
+                additionalReferences:
+                    new[] { FrameworkMetadataReference.Netstandard }
+                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetCoreMvcVersion))
+                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspNetCoreMvcVersion))
+                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspNetCoreRoutingVersion))
+                    .ToArray());
+        }
+
         [DataTestMethod]
         [DataRow("1.1.11")]
         [DataRow(Constants.NuGetLatestVersion)]

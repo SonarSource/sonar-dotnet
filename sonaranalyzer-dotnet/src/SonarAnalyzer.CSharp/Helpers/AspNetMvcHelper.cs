@@ -25,7 +25,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
 {
-    public static class TaintAnalysisEntryPointDetector
+    public static class AspNetMvcHelper
     {
         private static readonly ImmutableArray<KnownType> controllerTypes =
             ImmutableArray.Create(
@@ -39,11 +39,19 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private static readonly ImmutableArray<KnownType> controllerAttributeTypes =
             ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_ControllerAttribute);
 
-        public static bool IsEntryPoint(IMethodSymbol methodSymbol) =>
+        /// <summary>
+        /// Returns a value indicating whether the provided method symbol is a ASP.NET MVC
+        /// controller method.
+        /// </summary>
+        public static bool IsControllerMethod(this IMethodSymbol methodSymbol) =>
             methodSymbol.GetEffectiveAccessibility() == Accessibility.Public &&
             IsControllerType(methodSymbol?.ContainingType);
 
-        private static bool IsControllerType(INamedTypeSymbol containingType) =>
+        /// <summary>
+        /// Returns a value indicating whether the provided type symbol is a ASP.NET MVC
+        /// controller.
+        /// </summary>
+        public static bool IsControllerType(this INamedTypeSymbol containingType) =>
             containingType != null &&
             (containingType.DerivesFromAny(controllerTypes)
                 || containingType.GetAttributes(controllerAttributeTypes).Any()) &&

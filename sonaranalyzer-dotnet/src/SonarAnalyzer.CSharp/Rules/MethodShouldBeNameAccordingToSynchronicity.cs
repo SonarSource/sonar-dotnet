@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -65,7 +66,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         methodSymbol.IsMainMethod() ||
                         methodSymbol.GetInterfaceMember() != null ||
                         methodSymbol.GetOverriddenMember() != null ||
-                        methodSymbol.IsTestMethod())
+                        methodSymbol.IsTestMethod() ||
+                        methodSymbol.IsControllerMethod())
                     {
                         return;
                     }

@@ -41,6 +41,9 @@ namespace SonarAnalyzer.UnitTest
         internal static MetadataReference Mscorlib { get; }
             = Create("mscorlib.dll");
 
+        internal static MetadataReference Netstandard { get; }
+            = Create("netstandard.dll");
+
         internal static MetadataReference System { get; }
             = Create("System.dll");
 

@@ -26,7 +26,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SonarAnalyzer.UnitTest.ControlFlowGraph
 {
     [TestClass]
-    public class EntryPointRecognizer_IsEntryPoint
+    public class AspNetMvcHelper_IsControllerMethod
     {
         [DataTestMethod]
         [DataRow("3.0.20105.1")]
@@ -55,11 +55,11 @@ public class Foo : System.Web.Mvc.Controller
             var privateFoo = compilation.GetMethodSymbol("PrivateFoo");
             var innerFoo = compilation.GetMethodSymbol("InnerFoo");
 
-            TaintAnalysisEntryPointDetector.IsEntryPoint(publicFoo).Should().Be(true);
-            TaintAnalysisEntryPointDetector.IsEntryPoint(protectedFoo).Should().Be(false);
-            TaintAnalysisEntryPointDetector.IsEntryPoint(internalFoo).Should().Be(false);
-            TaintAnalysisEntryPointDetector.IsEntryPoint(privateFoo).Should().Be(false);
-            TaintAnalysisEntryPointDetector.IsEntryPoint(innerFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(true);
+            AspNetMvcHelper.IsControllerMethod(protectedFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerMethod(internalFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerMethod(privateFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerMethod(innerFoo).Should().Be(false);
         }
 
         [DataTestMethod]
@@ -88,9 +88,9 @@ public class MyController : Controller
             var publicBar = compilation.GetMethodSymbol("PublicBar");
             var publicDiz = compilation.GetMethodSymbol("PublicDiz");
 
-            TaintAnalysisEntryPointDetector.IsEntryPoint(publicFoo).Should().Be(true);
-            TaintAnalysisEntryPointDetector.IsEntryPoint(publicBar).Should().Be(false);
-            TaintAnalysisEntryPointDetector.IsEntryPoint(publicDiz).Should().Be(false);
+            AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(true);
+            AspNetMvcHelper.IsControllerMethod(publicBar).Should().Be(false);
+            AspNetMvcHelper.IsControllerMethod(publicDiz).Should().Be(false);
         }
 
         [DataTestMethod]
@@ -113,7 +113,7 @@ public class Foo
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
 
-            TaintAnalysisEntryPointDetector.IsEntryPoint(publicFoo).Should().Be(true);
+            AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(true);
         }
 
         [DataTestMethod]
@@ -136,7 +136,7 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
 
-            TaintAnalysisEntryPointDetector.IsEntryPoint(publicFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(false);
         }
     }
 }
