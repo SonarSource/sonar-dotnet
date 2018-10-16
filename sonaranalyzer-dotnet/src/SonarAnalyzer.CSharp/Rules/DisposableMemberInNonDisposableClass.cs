@@ -18,8 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -27,6 +29,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -50,12 +53,57 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
+#if true
+            context.RegisterSymbolAction(
+                analysisContext =>
+                {
+                    try
+                    {
+                        var namedType = analysisContext.Symbol as INamedTypeSymbol;
+                        if (!namedType.IsClass() || namedType.Implements(KnownType.System_IDisposable))
+                        {
+                            return;
+                        }
+                        var disposableFields = namedType.GetMembers().OfType<IFieldSymbol>()
+                            .Where(IsNonStaticNonPublicDisposableField).ToHashSet();
+                        var disposableFieldsWithInitializer = disposableFields
+                            .Where(f => IsOwnerSinceDeclaration(f, analysisContext.Compilation));
+
+                        var otherInitializationsOfFields = namedType.GetMembers().OfType<IMethodSymbol>().
+                            SelectMany(m => GetAssignementsToFieldsIn(m, analysisContext.Compilation)).
+                            Where(f => disposableFields.Contains(f));
+
+                        var message = string.Join(", ",
+                            disposableFieldsWithInitializer.
+                            Union(otherInitializationsOfFields).
+                            Distinct().
+                            Select(symbol => $"'{symbol.Name}'").
+                            OrderBy(s => s));
+
+                        if (!string.IsNullOrEmpty(message))
+                        {
+                            var typeDeclarations = new RemovableDeclarationCollector(namedType, analysisContext.Compilation).TypeDeclarations;
+                            foreach (var classDeclaration in typeDeclarations)
+                            {
+                                analysisContext.ReportDiagnosticIfNonGenerated(
+                                    Diagnostic.Create(rule, classDeclaration.SyntaxNode.Identifier.GetLocation(), message));
+                            }
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        System.Diagnostics.Debugger.Launch();
+                        throw;
+                    }
+                },
+                SymbolKind.NamedType);
+#else
             context.RegisterCompilationStartAction(
                 analysisContext =>
                 {
 
                     var fieldsByNamedType = MultiValueDictionary<INamedTypeSymbol, IFieldSymbol>.Create<HashSet<IFieldSymbol>>();
-                    var fieldsAssigned = new HashSet<IFieldSymbol>();
+                    var ownedFields = new HashSet<IFieldSymbol>();
 
                     analysisContext.RegisterSymbolAction(
                         c =>
@@ -84,7 +132,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             var expression = assignment.Right;
                             var fieldSymbol = c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol as IFieldSymbol;
 
-                            AddFieldIfNeeded(fieldSymbol, expression, fieldsAssigned);
+                            AddFieldIfNeeded(fieldSymbol, expression, ownedFields);
                         },
                         SyntaxKind.SimpleAssignmentExpression);
 
@@ -98,7 +146,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             {
                                 var fieldSymbol = c.SemanticModel.GetDeclaredSymbol(variableDeclaratorSyntax) as IFieldSymbol;
 
-                                AddFieldIfNeeded(fieldSymbol, variableDeclaratorSyntax.Initializer.Value, fieldsAssigned);
+                                AddFieldIfNeeded(fieldSymbol, variableDeclaratorSyntax.Initializer.Value, ownedFields);
                             }
 
                         },
@@ -113,7 +161,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                     .Select(declaringSyntaxReference => declaringSyntaxReference.GetSyntax())
                                     .OfType<ClassDeclarationSyntax>())
                                 {
-                                    var assignedFields = kv.Value.Intersect(fieldsAssigned).ToList();
+                                    var assignedFields = kv.Value.Intersect(ownedFields).ToList();
 
                                     if (!assignedFields.Any())
                                     {
@@ -129,6 +177,48 @@ namespace SonarAnalyzer.Rules.CSharp
                             }
                         });
                 });
+#endif
+        }
+
+        private IEnumerable<IFieldSymbol> GetAssignementsToFieldsIn(IMethodSymbol m, Compilation compilation)
+        {
+            var empty = Enumerable.Empty<IFieldSymbol>();
+            if (m.DeclaringSyntaxReferences.Length != 1)
+            {
+                return empty;
+            }
+            if (m.DeclaringSyntaxReferences[0].GetSyntax() is BaseMethodDeclarationSyntax method)
+            {
+                if (!method.HasBodyOrExpressionBody())
+                {
+                    return empty;
+                }
+                var semanticModel = compilation.GetSemanticModel(method.SyntaxTree);
+                var methodNodes = method.Body == null ?
+                    method.ExpressionBody().DescendantNodes() :
+                    method.Body.DescendantNodes();
+                return methodNodes.
+                    OfType<AssignmentExpressionSyntax>().
+                    Where(n => n.IsKind(SyntaxKind.SimpleAssignmentExpression) && n.Right is ObjectCreationExpressionSyntax).
+                    Select(n => semanticModel.GetSymbolInfo(n.Left).Symbol).
+                    OfType<IFieldSymbol>()
+                    ?? empty;
+            }
+            return empty;
+        }
+
+        private bool IsOwnerSinceDeclaration(IFieldSymbol f, Compilation compilation)
+        {
+            var syntaxRef = f.DeclaringSyntaxReferences.SingleOrDefault();
+            if (syntaxRef == null)
+            {
+                return false;
+            }
+            if (syntaxRef.GetSyntax() is VariableDeclaratorSyntax varDeclarator)
+            {
+                return varDeclarator.Initializer != null && varDeclarator.Initializer.Value is ObjectCreationExpressionSyntax;
+            }
+            return false;
         }
 
         private static void AddFieldIfNeeded(IFieldSymbol fieldSymbol, ExpressionSyntax expression,
