@@ -5,7 +5,6 @@
     <AssemblyName>SonarAnalyzer.Utilities</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
     <CodeAnalysisRuleSet>..\SonarAnalyzer.ruleset</CodeAnalysisRuleSet>
-    <AppConfig>app.config</AppConfig>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
@@ -13,11 +12,6 @@
     <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj" />
     <ProjectReference Include="..\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj" />
     <ProjectReference Include="..\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="*.config" />
-    <None Include="app.config" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +34,7 @@
   -->
   <PropertyGroup>
     <WarningsAsErrors />
+    <NoWarn>NU1605</NoWarn>
   </PropertyGroup>
 
 </Project>
