@@ -74,14 +74,14 @@ namespace SonarAnalyzer.Rules
         /// Returns the index or key from the provided InvocationExpression or SimpleAssignmentExpression.
         /// Returns null if the provided SyntaxNode is not an InvocationExpression or SimpleAssignmentExpression.
         /// </summary>
-        protected abstract SyntaxNode GetIndexOrKey(TStatementSyntax syntaxNode);
+        protected abstract SyntaxNode GetIndexOrKey(TStatementSyntax statement);
 
         /// <summary>
         /// Returns the identifier of a collection that is modified in the provided InvocationExpression
         /// or SimpleAssignmentExpression. Returns null if the provided SyntaxNode is not an
         /// InvocationExpression or SimpleAssignmentExpression.
         /// </summary>
-        protected abstract SyntaxNode GetCollectionIdentifier(TStatementSyntax syntaxNode);
+        protected abstract SyntaxNode GetCollectionIdentifier(TStatementSyntax statement);
 
         /// <summary>
         /// Returns a value specifying whether the provided SyntaxNode is an identifier or
@@ -90,15 +90,15 @@ namespace SonarAnalyzer.Rules
         protected abstract bool IsIdentifierOrLiteral(SyntaxNode syntaxNode);
 
         private Func<TStatementSyntax, bool> IsSameCollection(SyntaxNode collectionIdentifier) =>
-            expression =>
-                GetCollectionIdentifier(expression) is SyntaxNode identifier &&
+            statement =>
+                GetCollectionIdentifier(statement) is SyntaxNode identifier &&
                 identifier.ToString() == collectionIdentifier.ToString();
 
         private bool IsDictionaryOrCollection(SyntaxNode identifier, SemanticModel semanticModel) =>
             semanticModel.GetTypeInfo(identifier).Type.DerivesOrImplementsAny(dictionaryOrCollection);
 
         private Func<TStatementSyntax, bool> IsSameIndexOrKey(SyntaxNode indexOrKey) =>
-            syntaxNode => GetIndexOrKey(syntaxNode)?.ToString() == indexOrKey.ToString();
+            statement => GetIndexOrKey(statement)?.ToString() == indexOrKey.ToString();
 
         /// <summary>
         /// Returns all statements before the specified statement within the containing method.
