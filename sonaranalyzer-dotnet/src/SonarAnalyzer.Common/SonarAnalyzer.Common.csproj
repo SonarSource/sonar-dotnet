@@ -68,6 +68,7 @@
   -->
   <PropertyGroup>
     <WarningsAsErrors />
+    <NoWarn>NU1605</NoWarn>
   </PropertyGroup>
 
 </Project>
