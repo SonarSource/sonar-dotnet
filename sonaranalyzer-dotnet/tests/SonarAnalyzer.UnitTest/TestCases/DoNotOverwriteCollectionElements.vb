@@ -12,9 +12,9 @@ Namespace Tests.TestCases
 
     Private Sub SameIndexOnDictionaryItem(ByVal dict As Dictionary(Of Integer, Integer))
       dict.Item(0) = 0 ' Secondary
-'     ^^^^^^^^^^^^
+'     ^^^^^^^^^^^^^^^^
       dict.Item(0) = 1 ' Noncompliant {{Verify this is the index/key that was intended; a value has already been set for it.}}
-'     ^^^^^^^^^^^^
+'     ^^^^^^^^^^^^^^^^
     End Sub
 
     Private Sub MeUsage
@@ -38,13 +38,13 @@ Namespace Tests.TestCases
     End Sub
 
     Private Sub SameIndexOnArray3(ByVal obj As CustomIndexerOneArg)
-      obj("foo") = 0 ' Secondary
-      obj("foo") = 1 ' Noncompliant
+      obj("foo") = 0 
+      obj("foo") = 1 
     End Sub
 
     Private Sub SameIndexOnArray4(ByVal obj As CustomIndexerMultiArg)
-      obj("s", 1, 1) = 0 ' Secondary
-      obj("s", 1, 1) = 1 ' Noncompliant
+      obj("s", 1, 1) = 0 
+      obj("s", 1, 1) = 1 
     End Sub
 
     Private Sub SameIndexOnList(ByVal list As List(Of Integer))
@@ -127,6 +127,16 @@ Namespace Tests.TestCases
     End Sub
 
     Private Sub Handler()
+    End Sub
+
+    Private Sub ConditionalAccess1()
+      dictionaryField.Add(0, 1) ' Secondary
+      dictionaryField?.Add(0, 1) ' Noncompliant
+    End Sub
+
+    Private Sub ConditionalAccess2()
+      dictionaryField?.Add(0, 1) ' Secondary
+      dictionaryField.Add(0, 1) ' Noncompliant
     End Sub
 
   End Class
