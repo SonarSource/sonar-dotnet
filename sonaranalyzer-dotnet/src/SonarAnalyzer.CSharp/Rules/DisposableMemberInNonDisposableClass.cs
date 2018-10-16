@@ -45,55 +45,42 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly ISet<Accessibility> Accessibilities = new HashSet<Accessibility>
-        {
-            Accessibility.Protected,
-            Accessibility.Private
-        };
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSymbolAction(
                 analysisContext =>
                 {
-                    try
+                    var namedType = analysisContext.Symbol as INamedTypeSymbol;
+                    if (!namedType.IsClass() || namedType.Implements(KnownType.System_IDisposable))
                     {
-                        var namedType = analysisContext.Symbol as INamedTypeSymbol;
-                        if (!namedType.IsClass() || namedType.Implements(KnownType.System_IDisposable))
-                        {
-                            return;
-                        }
-                        var disposableFields = namedType.GetMembers().OfType<IFieldSymbol>()
-                            .Where(IsNonStaticNonPublicDisposableField).ToHashSet();
-
-                        var disposableFieldsWithInitializer = disposableFields
-                            .Where(f => IsOwnerSinceDeclaration(f));
-
-                        var otherInitializationsOfFields = namedType.GetMembers().OfType<IMethodSymbol>().
-                            SelectMany(m => GetAssignementsToFieldsIn(m, analysisContext.Compilation)).
-                            Where(f => disposableFields.Contains(f));
-
-                        var message = string.Join(", ",
-                            disposableFieldsWithInitializer.
-                            Union(otherInitializationsOfFields).
-                            Distinct().
-                            Select(symbol => $"'{symbol.Name}'").
-                            OrderBy(s => s));
-
-                        if (!string.IsNullOrEmpty(message))
-                        {
-                            var typeDeclarations = new RemovableDeclarationCollector(namedType, analysisContext.Compilation).TypeDeclarations;
-                            foreach (var classDeclaration in typeDeclarations)
-                            {
-                                analysisContext.ReportDiagnosticIfNonGenerated(
-                                    Diagnostic.Create(rule, classDeclaration.SyntaxNode.Identifier.GetLocation(), message));
-                            }
-                        }
+                        return;
                     }
-                    catch(Exception e)
+                    var disposableFields = namedType.GetMembers().OfType<IFieldSymbol>()
+                        .Where(IsNonStaticNonPublicDisposableField).ToHashSet();
+
+                    var disposableFieldsWithInitializer = disposableFields
+                        .Where(f => IsOwnerSinceDeclaration(f));
+
+                    var otherInitializationsOfFields = namedType.GetMembers().OfType<IMethodSymbol>().
+                        SelectMany(m => GetAssignementsToFieldsIn(m, analysisContext.Compilation)).
+                        Where(f => disposableFields.Contains(f));
+
+                    var message = string.Join(", ",
+                        disposableFieldsWithInitializer.
+                        Union(otherInitializationsOfFields).
+                        Distinct().
+                        Select(symbol => $"'{symbol.Name}'").
+                        OrderBy(s => s));
+
+                    if (!string.IsNullOrEmpty(message))
                     {
-                        System.Diagnostics.Debugger.Launch();
-                        throw;
+                        var typeDeclarations = new RemovableDeclarationCollector(namedType, analysisContext.Compilation).TypeDeclarations;
+                        foreach (var classDeclaration in typeDeclarations)
+                        {
+                            analysisContext.ReportDiagnosticIfNonGenerated(
+                                Diagnostic.Create(rule, classDeclaration.SyntaxNode.Identifier.GetLocation(), message));
+                        }
                     }
                 },
                 SymbolKind.NamedType);
@@ -120,8 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     OfType<AssignmentExpressionSyntax>().
                     Where(n => n.IsKind(SyntaxKind.SimpleAssignmentExpression) && n.Right is ObjectCreationExpressionSyntax).
                     Select(n => semanticModel.GetSymbolInfo(n.Left).Symbol).
-                    OfType<IFieldSymbol>()
-                    ?? empty;
+                    OfType<IFieldSymbol>();
             }
             return empty;
         }
@@ -144,7 +130,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return fieldSymbol != null &&
                    !fieldSymbol.IsStatic &&
-                   Accessibilities.Contains(fieldSymbol.DeclaredAccessibility) &&
+                   (fieldSymbol.DeclaredAccessibility == Accessibility.Protected || fieldSymbol.DeclaredAccessibility == Accessibility.Private) &&
                    fieldSymbol.Type.Implements(KnownType.System_IDisposable);
         }
     }
