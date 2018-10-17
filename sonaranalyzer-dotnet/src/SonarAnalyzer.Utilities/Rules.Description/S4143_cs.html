@@ -1,7 +1,10 @@
 <p>It is highly suspicious when a value is saved for a key or index and then unconditionally overwritten. Such replacements are likely in error.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-towns[x] = "London";
-towns[x] = "Chicago";  // Noncompliant
+list[index] = "value 1";
+list[index] = "value 2";  // Noncompliant
+
+dictionary.Add(key, "value 1");
+dictionary[key] = "value 2"; // Noncompliant
 </pre>
 
