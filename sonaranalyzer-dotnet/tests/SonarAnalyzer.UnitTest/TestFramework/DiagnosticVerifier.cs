@@ -50,34 +50,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     .GetExpectedIssueLocations(compilation.SyntaxTrees.Skip(1).First().GetText().Lines)
                     .ToList();
 
-                foreach (var diagnostic in diagnostics)
-                {
-                    VerifyIssue(expectedIssues,
-                        issue => issue.IsPrimary,
-                        diagnostic.Location,
-                        diagnostic.GetMessage(),
-                        out var issueId);
-
-                    var secondaryLocations = diagnostic.AdditionalLocations
-                        .Select((location, i) => diagnostic.GetSecondaryLocation(i))
-                        .OrderBy(x => x.Location.GetLineNumberToReport())
-                        .ThenBy(x => x.Location.GetLineSpan().StartLinePosition.Character);
-
-                    foreach (var secondaryLocation in secondaryLocations)
-                    {
-                        VerifyIssue(expectedIssues,
-                            issue => issue.IssueId == issueId && !issue.IsPrimary,
-                            secondaryLocation.Location,
-                            secondaryLocation.Message,
-                            out issueId);
-                    }
-                }
-
-                if (expectedIssues.Count != 0)
-                {
-                    Execute.Assertion.FailWith($"Issue expected but not raised on line(s) " +
-                        $"{string.Join(",", expectedIssues.Select(i => i.LineNumber))}.");
-                }
+                CompareActualToExpected(diagnostics, expectedIssues, false);
 
                 // When there are no diagnostics reported from the test (for example the FileLines analyzer
                 // does not report in each call to Verifier.VerifyAnalyzer) we skip the check for the extension
@@ -91,6 +64,40 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             finally
             {
                 SuppressionHandler.UnHookSuppression();
+            }
+        }
+
+        private static void CompareActualToExpected(IEnumerable<Diagnostic> diagnostics, List<IIssueLocation> expectedIssues, bool compareIdToMessage)
+        {
+            foreach (var diagnostic in diagnostics)
+            {
+                VerifyIssue(expectedIssues,
+                    issue => issue.IsPrimary,
+                    diagnostic.Location,
+                    compareIdToMessage ? diagnostic.Id : diagnostic.GetMessage(),
+                    compareIdToMessage ? diagnostic.Id + ": " + diagnostic.GetMessage() : null,
+                    out var issueId);
+
+                var secondaryLocations = diagnostic.AdditionalLocations
+                    .Select((location, i) => diagnostic.GetSecondaryLocation(i))
+                    .OrderBy(x => x.Location.GetLineNumberToReport())
+                    .ThenBy(x => x.Location.GetLineSpan().StartLinePosition.Character);
+
+                foreach (var secondaryLocation in secondaryLocations)
+                {
+                    VerifyIssue(expectedIssues,
+                        issue => issue.IssueId == issueId && !issue.IsPrimary,
+                        secondaryLocation.Location,
+                        secondaryLocation.Message,
+                        null,
+                        out issueId);
+                }
+            }
+
+            if (expectedIssues.Count != 0)
+            {
+                Execute.Assertion.FailWith($"Issue expected but not raised on line(s) " +
+                    $"{string.Join(",", expectedIssues.Select(i => i.LineNumber))}.");
             }
         }
 
@@ -134,15 +141,25 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .Result;
 
             VerifyNoExceptionThrown(diagnostics);
+            VerifyBuildErrors(diagnostics, compilation);
 
             return diagnostics;
+        }
+
+        private static void VerifyBuildErrors(ImmutableArray<Diagnostic> diagnostics, Compilation compilation)
+        {
+            var buildErrors = diagnostics.Where(d => d.Id.StartsWith("CS") && d.Severity == DiagnosticSeverity.Error);
+            var expectedBuildErrors = new IssueLocationCollector()
+                .GetExpectedBuildErrors(compilation.SyntaxTrees.Skip(1).First().GetText().Lines)
+                .ToList();
+            CompareActualToExpected(buildErrors, expectedBuildErrors, true);
         }
 
         private static void VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics) =>
             diagnostics.Where(d => d.Id == AnalyzerFailedDiagnosticId).Should().BeEmpty();
 
         private static void VerifyIssue(IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
-            Location location, string message, out string issueId)
+            Location location, string message, string extraInfo, out string issueId)
         {
             var lineNumber = location.GetLineNumberToReport();
 
@@ -152,7 +169,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             if (expectedIssue == null)
             {
-                Execute.Assertion.FailWith($"Issue with message '{message}' not expected on line {lineNumber}");
+                Execute.Assertion.FailWith($"Issue with message '{(string.IsNullOrEmpty(extraInfo) ? message : extraInfo)}' not expected on line {lineNumber}");
             }
 
             if (expectedIssue.Message != null && expectedIssue.Message != message)
