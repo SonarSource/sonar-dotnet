@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
             switch (assignmentOrInvocation?.Kind())
             {
                 case SyntaxKind.InvocationExpression:
-                    return GetCollectionIdentifier((InvocationExpressionSyntax)assignmentOrInvocation)
+                    return GetInvokedMethodContainer((InvocationExpressionSyntax)assignmentOrInvocation)
                         .RemoveParentheses();
 
                 case SyntaxKind.SimpleAssignmentExpression:
@@ -116,20 +116,21 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static SyntaxNode GetCollectionIdentifier(InvocationExpressionSyntax invocation)
+        private static SyntaxNode GetInvokedMethodContainer(InvocationExpressionSyntax invocation)
         {
             var expression = invocation.Expression.RemoveParentheses();
             switch (expression.Kind())
             {
                 case SyntaxKind.SimpleMemberAccessExpression:
+                    // a.Add(x)
+                    // InvocationExpression | a.Add(x)
+                    //   Expression: SimpleMemberAccess
+                    //                 Name: Add
+                    //                 Expression: a  // we need this
                     var memberAccess = (MemberAccessExpressionSyntax)expression;
                     return memberAccess.Name.ToString() == "Add"
                         ? memberAccess.Expression
                         : null; // Ignore invocations that are on methods different than Add
-                case SyntaxKind.IdentifierName:
-                case SyntaxKind.ThisExpression:
-                case SyntaxKind.BaseExpression:
-                    return expression;
                 case SyntaxKind.MemberBindingExpression:
                     // a?.Add(x)
                     // ConditionalExpression | a?.Add(x)
@@ -148,11 +149,20 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             switch (expression?.Kind())
             {
-                case SyntaxKind.MemberBindingExpression:
-                    return ((MemberBindingExpressionSyntax)expression).Name;
                 case SyntaxKind.SimpleMemberAccessExpression:
+                    // a.b[index]
+                    // ElementAccess    // <-- we are here
+                    //   Arguments: index
+                    //   Expression: SimpleMemberAccess
+                    //                 Expression: a
+                    //                 Name: b  // <-- we need this
                     return ((MemberAccessExpressionSyntax)expression).Name;
                 case SyntaxKind.IdentifierName:
+                    // a[index]
+                    // ElementAccess    // <-- we are here
+                    //   Arguments: index
+                    //   Expression: IdentifierName
+                    //                 Name: a  // <-- we need this
                     return expression;
                 default:
                     return null;

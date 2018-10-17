@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             var invocation = GetInvocation(statement);
             return invocation != null
-                ? GetCollectionIdentifier(invocation).RemoveParentheses()
+                ? GetInvokedMethodContainer(invocation).RemoveParentheses()
                 : null;
         }
 
@@ -105,7 +105,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
-        private static SyntaxNode GetCollectionIdentifier(InvocationExpressionSyntax invocation)
+        private static SyntaxNode GetInvokedMethodContainer(InvocationExpressionSyntax invocation)
         {
             //Supported syntax structures:
             // dictionary(key) = value
