@@ -50,7 +50,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 ucfg.Parameters.AddRange(methodSymbol.GetParameters().Select(p => p.Name));
 
                 if (syntaxNode is BaseMethodDeclarationSyntax methodDeclaration &&
-                    TaintAnalysisEntryPointDetector.IsEntryPoint(methodSymbol))
+                    AspNetMvcHelper.IsControllerMethod(methodSymbol))
                 {
                     var entryPointBlock = this.blockBuilder.CreateEntryPointBlock(methodDeclaration, methodSymbol, this.blockIdProvider.Get(cfg.EntryBlock));
                     ucfg.BasicBlocks.Add(entryPointBlock);
