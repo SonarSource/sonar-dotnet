@@ -1,9 +1,3 @@
 [submodule "sonaranalyzer-dotnet/its/sources"]
 	path = sonaranalyzer-dotnet/its/sources
 	url = https://github.com/SonarSource/dotnet-test-sources.git
-[submodule "sonar-ucfg"]
-	path = sonar-ucfg
-	url = https://github.com/SonarSource/sonar-ucfg.git
-[submodule "its/projects/SimplCommerce"]
-	path = its/projects/SimplCommerce
-	url = https://github.com/simplcommerce/SimplCommerce.git
