@@ -61,12 +61,14 @@ namespace SonarAnalyzer.Rules.CSharp
             switch (assignmentOrInvocation?.Kind())
             {
                 case SyntaxKind.InvocationExpression:
-                    return GetCollectionIdentifier((InvocationExpressionSyntax)assignmentOrInvocation);
+                    return GetCollectionIdentifier((InvocationExpressionSyntax)assignmentOrInvocation)
+                        .RemoveParentheses();
 
                 case SyntaxKind.SimpleAssignmentExpression:
                     var assignment = (AssignmentExpressionSyntax)assignmentOrInvocation;
                     var elementAccess = assignment.Left as ElementAccessExpressionSyntax;
-                    return GetIdentifier(elementAccess?.Expression.RemoveParentheses());
+                    return GetIdentifier(elementAccess?.Expression.RemoveParentheses())
+                        .RemoveParentheses();
 
                 default:
                     return null;

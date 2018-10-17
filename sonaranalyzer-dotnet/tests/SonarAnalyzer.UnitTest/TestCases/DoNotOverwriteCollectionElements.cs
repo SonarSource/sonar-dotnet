@@ -21,6 +21,18 @@ namespace Tests.Diagnostics
             array[0] = 42; // Noncompliant
         }
 
+        void Parenthesis_Indexer(int[] array)
+        {
+            array[(0)] = 42; // Secondary
+            (array)[0] = 42; // Noncompliant
+        }
+
+        void Parenthesis_Invocation(Dictionary<int, int> dict)
+        {
+            dict.Add((0), 42); // Secondary
+            (dict).Add(0, 42); // Noncompliant
+        }
+
         void SameIndexOnList(List<int> list)
         {
             list[0] = 42; // Secondary
@@ -41,9 +53,9 @@ namespace Tests.Diagnostics
 
         void SameIndexSpacedOut(string[] names)
         {
-            names["a"] = "a"; // Secondary
-            names["b"] = "b";
-            names["a"] = "c"; // Noncompliant
+            names[0] = "a"; // Secondary
+            names[1] = "b";
+            names[0] = "c"; // Noncompliant
         }
 
         void NonSequentialAccessOnSameIndex(int[] values)
@@ -94,8 +106,8 @@ namespace Tests.Diagnostics
         void ListRemove(List<int> list)
         {
             list.Remove(0);
-            list.Remove(0);
-            list.Add(0, 1);
+            list.Remove(0); // Ignore methods that do not add/set items
+            list[0] = 1; // Compliant
         }
 
         void IDictionaryAddOnMultiMemberAccess(TestCases c)
@@ -127,7 +139,7 @@ namespace Tests.Diagnostics
             return new int[1];
         }
 
-        void InitTowns(IDictionary<string, string> towns)
+        void InitTowns(IDictionary<string, string> towns, string y)
         {
             towns.Add(y, "Boston"); // Secondary
             towns[y] = "Paris"; // Noncompliant, https://github.com/SonarSource/sonar-csharp/issues/1908
@@ -142,11 +154,12 @@ namespace Tests.Diagnostics
 
     class InheritanceTest : Dictionary<int, int>
     {
-        void InheritanceTest()
+        void AddToBaseField()
         {
             base.Add(0, 0); // Secondary
             base.Add(0, 1); // Noncompliant
         }
+
         void MyAdd()
         {
             this.Add(0, 0); // Secondary
@@ -186,7 +199,7 @@ namespace Tests.Diagnostics
 
     class CustomIndexerOneArg
     {
-        int this[string key]
+        public int this[string key]
         {
             get { return 1; }
             set { }
@@ -195,7 +208,7 @@ namespace Tests.Diagnostics
 
     class CustomIndexerMultiArg
     {
-        int this[string s, int i, double d]
+        public int this[string s, int i, double d]
         {
             get { return 1; }
             set { }

@@ -32,11 +32,8 @@ namespace SonarAnalyzer.Rules
         where TStatementSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S4143";
-        protected const string MessageFormat = "Verify this is the index/key that was intended; a value has already been set for it.";
-
-        private static readonly ImmutableArray<KnownType> dictionaryOrCollection = ImmutableArray.Create(
-            KnownType.System_Collections_Generic_IDictionary_TKey_TValue,
-            KnownType.System_Collections_Generic_ICollection_T);
+        protected const string MessageFormat = "Verify this is the index/key that was intended; " +
+            "a value has already been set for it.";
 
         protected abstract DiagnosticDescriptor Rule { get; }
 
@@ -94,8 +91,12 @@ namespace SonarAnalyzer.Rules
                 GetCollectionIdentifier(statement) is SyntaxNode identifier &&
                 identifier.ToString() == collectionIdentifier.ToString();
 
-        private bool IsDictionaryOrCollection(SyntaxNode identifier, SemanticModel semanticModel) =>
-            semanticModel.GetTypeInfo(identifier).Type.DerivesOrImplementsAny(dictionaryOrCollection);
+        private bool IsDictionaryOrCollection(SyntaxNode identifier, SemanticModel semanticModel)
+        {
+            var identifierType = semanticModel.GetTypeInfo(identifier).Type;
+            return identifierType.DerivesOrImplements(KnownType.System_Collections_Generic_IDictionary_TKey_TValue)
+                || identifierType.DerivesOrImplements(KnownType.System_Collections_Generic_ICollection_T);
+        }
 
         private Func<TStatementSyntax, bool> IsSameIndexOrKey(SyntaxNode indexOrKey) =>
             statement => GetIndexOrKey(statement)?.ToString() == indexOrKey.ToString();

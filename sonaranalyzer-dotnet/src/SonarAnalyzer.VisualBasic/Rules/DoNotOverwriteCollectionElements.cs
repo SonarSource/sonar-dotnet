@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             var invocation = GetInvocation(statement);
             return invocation != null
-                ? GetCollectionIdentifier(invocation)
+                ? GetCollectionIdentifier(invocation).RemoveParentheses()
                 : null;
         }
 
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             var invocation = GetInvocation(statement);
             return invocation != null
-                ? GetFirstArgumentExpression(invocation)
+                ? GetFirstArgumentExpression(invocation).RemoveParentheses()
                 : null;
         }
 

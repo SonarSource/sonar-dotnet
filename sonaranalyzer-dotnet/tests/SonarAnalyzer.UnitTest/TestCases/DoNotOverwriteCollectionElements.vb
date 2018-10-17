@@ -27,6 +27,16 @@ Namespace Tests.TestCases
       MyClass.dictionaryField.Item(0) = 1 ' Noncompliant
     End Sub
 
+    Private Sub Parenthesis_Indexer(ByVal array() As Integer)
+      array((0)) = 0 ' Secondary
+      array(0) = 1 ' Noncompliant
+    End Sub
+
+    Private Sub Parenthesis_Invocation(ByVal dict As Dictionary(Of Integer, Integer))
+      dict((0)) = 0 ' Secondary
+      dict.Add((0), 1) ' Noncompliant
+    End Sub
+
     Private Sub SameIndexOnArray1(ByVal array() As Integer)
       array(0) = 0 ' Secondary
       array(0) = 1 ' Noncompliant
@@ -39,12 +49,12 @@ Namespace Tests.TestCases
 
     Private Sub SameIndexOnArray3(ByVal obj As CustomIndexerOneArg)
       obj("foo") = 0 
-      obj("foo") = 1 
+      obj("foo") = 1 ' Compliant, obj is not a collection
     End Sub
 
     Private Sub SameIndexOnArray4(ByVal obj As CustomIndexerMultiArg)
       obj("s", 1, 1) = 0 
-      obj("s", 1, 1) = 1 
+      obj("s", 1, 1) = 1 ' Compliant obj is not a dictionary
     End Sub
 
     Private Sub SameIndexOnList(ByVal list As List(Of Integer))
