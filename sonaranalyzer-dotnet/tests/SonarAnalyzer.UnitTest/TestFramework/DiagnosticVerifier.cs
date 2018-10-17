@@ -22,7 +22,11 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis;
@@ -34,6 +38,42 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
+
+    class ErrorInUnitTest : Exception
+    {
+#pragma warning disable S3963 // "static" fields should be initialized inline
+        static ErrorInUnitTest()
+        {
+            var msCoreResourceManager = new ResourceManager("mscorlib", typeof(Object).Assembly);
+            at = msCoreResourceManager.GetString("Word_At");
+            inFileLineNum = msCoreResourceManager.GetString("StackTrace_InFileLineNumber");
+        }
+#pragma warning restore S3963 // "static" fields should be initialized inline
+
+        private static string GetFullPathOfRealSourceCode(string path) =>
+            Path.GetFullPath(Path.Combine(@"..\..\TestCases", path));
+
+        public ErrorInUnitTest(Location loc, string message) : base(message)
+        {
+            PathToRealSource = GetFullPathOfRealSourceCode(loc.GetLineSpan().Path);
+            Line = loc.GetLineNumberToReport();
+        }
+
+        public override string StackTrace
+        {
+            get
+            {
+                var addedLine = at + " Analyzed code " + string.Format(inFileLineNum, PathToRealSource, Line);
+                return addedLine + Environment.NewLine + base.StackTrace;
+            }
+        }
+
+        private int Line { get; }
+        private string PathToRealSource { get; }
+
+        private static string at;
+        private static string inFileLineNum;
+    }
     internal static class DiagnosticVerifier
     {
         private const string AnalyzerFailedDiagnosticId = "AD0001";
@@ -169,25 +209,25 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             if (expectedIssue == null)
             {
-                Execute.Assertion.FailWith($"Issue with message '{(string.IsNullOrEmpty(extraInfo) ? message : extraInfo)}' not expected on line {lineNumber}");
+                throw new ErrorInUnitTest(location, $"Issue with message '{(string.IsNullOrEmpty(extraInfo) ? message : extraInfo)}' not expected on line {lineNumber}");
             }
 
             if (expectedIssue.Message != null && expectedIssue.Message != message)
             {
-                Execute.Assertion.FailWith($"Expected message on line {lineNumber} to be '{expectedIssue.Message}', but got '{message}'.");
+                throw new ErrorInUnitTest(location, $"Expected message on line {lineNumber} to be '{expectedIssue.Message}', but got '{message}'.");
             }
 
             var diagnosticStart = location.GetLineSpan().StartLinePosition.Character;
 
             if (expectedIssue.Start.HasValue && expectedIssue.Start != diagnosticStart)
             {
-                Execute.Assertion.FailWith(
+                throw new ErrorInUnitTest(location,
                     $"Expected issue on line {lineNumber} to start on column {expectedIssue.Start} but got column {diagnosticStart}.");
             }
 
             if (expectedIssue.Length.HasValue && expectedIssue.Length != location.SourceSpan.Length)
             {
-                Execute.Assertion.FailWith(
+                throw new ErrorInUnitTest(location,
                     $"Expected issue on line {lineNumber} to have a length of {expectedIssue.Length} but got a length of {location.SourceSpan.Length}).");
             }
 
