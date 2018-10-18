@@ -78,13 +78,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     {
         private const string AnalyzerFailedDiagnosticId = "AD0001";
 
-        public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer)
+        public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CheckMode checkMode)
         {
             try
             {
                 SuppressionHandler.HookSuppression();
 
-                var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzer);
+                var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzer, checkMode);
 
                 var expectedIssues = new IssueLocationCollector()
                     .GetExpectedIssueLocations(compilation.SyntaxTrees.Skip(1).First().GetText().Lines)
@@ -141,23 +141,25 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        public static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer)
+        public static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation,
+            DiagnosticAnalyzer diagnosticAnalyzer, CheckMode checkMode)
         {
             var ids = diagnosticAnalyzer.SupportedDiagnostics
                 .Select(diagnostic => diagnostic.Id)
                 .ToHashSet();
 
-            return GetAllDiagnostics(compilation, new[] { diagnosticAnalyzer })
+            return GetAllDiagnostics(compilation, new[] { diagnosticAnalyzer }, checkMode)
                 .Where(d => ids.Contains(d.Id));
         }
 
-        public static void VerifyNoIssueReported(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer)
+        public static void VerifyNoIssueReported(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer,
+            CheckMode checkMode = CheckMode.CheckCompilationErrors)
         {
-            GetDiagnostics(compilation, diagnosticAnalyzer).Should().BeEmpty();
+            GetDiagnostics(compilation, diagnosticAnalyzer, checkMode).Should().BeEmpty();
         }
 
         public static ImmutableArray<Diagnostic> GetAllDiagnostics(Compilation compilation,
-            IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers)
+            IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers, CheckMode checkMode)
         {
             var compilationOptions = compilation.Language == LanguageNames.CSharp
                 ? (CompilationOptions)new CS.CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true)
@@ -181,8 +183,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .Result;
 
             VerifyNoExceptionThrown(diagnostics);
-            VerifyBuildErrors(diagnostics, compilation);
-
+            if (checkMode == CheckMode.CheckCompilationErrors)
+            {
+                VerifyBuildErrors(diagnostics, compilation);
+            }
             return diagnostics;
         }
 

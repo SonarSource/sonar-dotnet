@@ -124,7 +124,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var fixAllDiagnosticProvider = new FixAllDiagnosticProvider(
                 codeFixProvider.FixableDiagnosticIds.ToHashSet(),
                 (doc, ids, ct) => Task.FromResult(
-                    DiagnosticVerifier.GetDiagnostics(currentDocument.Project.GetCompilationAsync(ct).Result, diagnosticAnalyzer)),
+                    DiagnosticVerifier.GetDiagnostics(
+                        currentDocument.Project.GetCompilationAsync(ct).Result,
+                        diagnosticAnalyzer, CheckMode.IgnoreCompilationErrors)), // TODO: Is that the right decision?
                 null);
 
             var fixAllContext = new FixAllContext(currentDocument, codeFixProvider, FixAllScope.Document,
@@ -150,7 +152,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 project = project.WithParseOptions(parseOption);
             }
 
-            diagnostics = DiagnosticVerifier.GetDiagnostics(project.GetCompilationAsync().Result, diagnosticAnalyzer).ToList();
+            diagnostics = DiagnosticVerifier.GetDiagnostics(project.GetCompilationAsync().Result,
+                diagnosticAnalyzer, CheckMode.IgnoreCompilationErrors).ToList(); // TODO: Is that the right choice?
             actualCode = document.GetSyntaxRootAsync().Result.GetText().ToString();
         }
 
