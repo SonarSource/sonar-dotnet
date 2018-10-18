@@ -62,7 +62,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .AddReferences(
                     FrameworkMetadataReference.Mscorlib,
                     FrameworkMetadataReference.System,
-                    FrameworkMetadataReference.SystemCore);
+                    FrameworkMetadataReference.SystemCore,
+                    FrameworkMetadataReference.SystemRuntime,
+                    FrameworkMetadataReference.SystemGlobalization);
 
             if (createExtraEmptyFile)
             {

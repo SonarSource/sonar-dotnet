@@ -37,14 +37,14 @@ namespace SonarAnalyzer.UnitTest
         private static readonly List<string> allowedNugetLibDirectories =
             new List<string>
             {
-                "lib",
-                "portable-net45",
-                "net20",
-                "net40",
                 "net45",
-                "netstandard1.0",
+                "net40",
+                "net20",
+                "netstandard2.0",
                 "netstandard1.1",
-                "netstandard2.0"
+                "netstandard1.0",
+                "portable-net45",
+                "lib",
             };
 
         private static readonly PackageManager packageManager =
@@ -69,15 +69,28 @@ namespace SonarAnalyzer.UnitTest
         {
             EnsurePackageIsInstalled(packageId, packageVersion);
 
+            var allowedNugetLibDirectoriesByPreference = allowedNugetLibDirectories.
+                Zip(Enumerable.Range(0, allowedNugetLibDirectories.Count), (folder, priority) => new { folder, priority });
             var packageDirectory = GetNuGetPackageDirectory(packageId, packageVersion);
-            var matchingDlls = Directory.GetFiles(packageDirectory, "*.dll", SearchOption.AllDirectories)
+            var matchingDllsGroups = Directory.GetFiles(packageDirectory, "*.dll", SearchOption.AllDirectories)
                 .Select(path => new FileInfo(path))
-                .GroupBy(file => file.Directory.Name)
-                .Where(group => allowedNugetLibDirectories.Any(y => group.Key.StartsWith(y)) || group.Key.EndsWith(".dll"))
-                .OrderByDescending(group => group.Key)
-                .First();
+                .GroupBy(file => file.Directory.Name).ToArray();
+            IGrouping<string, FileInfo> selectedGroup;
+            if (matchingDllsGroups.Length == 1 && matchingDllsGroups[0].Key.EndsWith(".dll"))
+            {
+                selectedGroup = matchingDllsGroups[0];
+            }
+            else
+            {
+                selectedGroup = matchingDllsGroups.Join(allowedNugetLibDirectoriesByPreference,
+                    group => group.Key.Split('+').First(),
+                    allowed => allowed.folder,
+                    (group, allowed) => new { group, allowed.priority })
+                .OrderBy(merged => merged.priority)
+                .First().group;
+            }
 
-            return matchingDlls.Select(file => MetadataReference.CreateFromFile(file.FullName)).ToArray();
+            return selectedGroup.Select(file => MetadataReference.CreateFromFile(file.FullName)).ToArray();
         }
 
         private static string GetNuGetPackageDirectory(string packageId, string packageVersion) =>
