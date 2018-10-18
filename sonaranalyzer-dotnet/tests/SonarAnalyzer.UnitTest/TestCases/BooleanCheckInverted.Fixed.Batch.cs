@@ -28,7 +28,7 @@ namespace Tests.Diagnostics
             var c = true && (new int[0].Length != 0); // Fixed
 
             int[] args = { };
-            var a = !(args.Length != 0); // Fixed
+            bool ba = !(args.Length != 0); // Fixed
 
             SomeFunc(a < 10); // Fixed
         }

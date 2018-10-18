@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Tests.Diagnostics
@@ -13,22 +13,22 @@ namespace Tests.Diagnostics
                 //...
             }
 
-            private Base() // Compliant
+            private Base(int i) // Compliant
             {
 
             }
 
-            protected Base() // Compliant
+            protected Base(int i, int j) // Compliant
             {
 
             }
 
-            internal Base() // Noncompliant
+            internal Base(int i, int j, int k) // Noncompliant
             {
 
             }
 
-            internal protected Base() // Noncompliant
+            internal protected Base(int i, int j, int k, int l) // Noncompliant
             {
 
             }

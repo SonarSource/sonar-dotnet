@@ -33,7 +33,7 @@ namespace Tests.TestCases
             int k = 5 - 5; //Noncompliant
             // Secondary@-1
 
-            l = 5 | 5; // Noncompliant
+            int l = 5 | 5; // Noncompliant
             // Secondary@-1
             l |= (l); // Noncompliant
             // Secondary@-1
@@ -53,7 +53,7 @@ namespace Tests.TestCases
 //          ^^^^^^^^^^^^^^ {{Change one instance of 'new object()' to a different value; comparing 'new object()' to itself always returns true.}}
 //                                ^^^^^^^^^^^^ Secondary@-1
 
-            Foo f;
+            Foo f = new Foo();
             f.Equals(f); // Noncompliant
             // Secondary@-1
 

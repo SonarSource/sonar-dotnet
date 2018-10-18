@@ -16,7 +16,7 @@ namespace Tests.Diagnostics
         {
             return Task.Run(() => "George");
         }
-
+        void nop(int i) { }
         public void ResultExamples()
         {
             var x = GetFooAsync().Result; // Noncompliant {{Replace this use of 'Task.Result' with 'await'.}}
@@ -26,11 +26,11 @@ namespace Tests.Diagnostics
             Task.Delay(0).GetAwaiter().GetResult(); // Noncompliant
 
             // Compliant - the following constructions don't cause deadlock
-            Task.Run(GetFooAsync).Result;
+            nop(Task.Run(GetFooAsync).Result);
             Task.Run(GetFooAsync).GetAwaiter().GetResult();
             Task.Factory.StartNew(GetFooAsync).GetAwaiter().GetResult();
             Task.Factory.StartNew(GetFooAsync).Unwrap().GetAwaiter().GetResult();
-            (((Task.Factory.StartNew(GetFooAsync).Unwrap()))).Result;
+            nop((((Task.Factory.StartNew(GetFooAsync).Unwrap()))).Result);
 
             // FP - the following cases should be valid
             var y = GetNameAsync().Result; // Noncompliant

@@ -45,7 +45,7 @@ namespace Tests.Diagnostics
             foo(i == 42);
 
             foo(
-                (int x) =>
+                (int xx) =>
                 {
                     int a;
                     a = 42;
@@ -82,12 +82,12 @@ namespace Tests.Diagnostics
             if (!string.IsNullOrEmpty(result)) result = result + " ";
             var v1 = new Action(delegate { });
             var v2 = new Action(delegate { var foo = 42; });
-            var v3 = new Func<object, object>((x) => x = 42);
-            var v4 = new Action<object>((x) => { x = 42; });
+            var v3 = new Func<object, object>((xx) => xx = 42);
+            var v4 = new Action<object>((xx) => { xx = 42; });
             var v5 = new { MyField = 42 };
             var v6 = new MyClass { MyField = 42 };
             var v7 = new MyClass() { MyField = 42 };
-            var v8 = foo(x => { x = 42; return 0; });
+            var v8 = foo(xx => { xx = 42; return 0; });
 
             var index = 0;
             new int[] { 0, 1, 2 }[index = 2] = 10; // Noncompliant
@@ -103,9 +103,9 @@ namespace Tests.Diagnostics
             oo = (o) ?? (object)(o = new object()); // Compliant
 
             oo = oo ?? (o = new object()); // Noncompliant
-
-            if ((a = b = 0) != 0) { }  // Compliant
-            int x = (a = b) + 5; // Noncompliant
+            int xa = 0, xb = 0;
+            if ((xa = xb = 0) != 0) { }  // Compliant
+            int x = (xa = xb) + 5; // Noncompliant
         }
         public void TestMethod1()
         {
@@ -117,6 +117,6 @@ namespace Tests.Diagnostics
                 k = 10;
         }
 
-        public bool GetBool() => return true;
+        public bool GetBool() => true;
     }
 }

@@ -26,7 +26,7 @@ namespace Tests.Diagnostics
             [CallerFilePath]string callerFilePath = null, [CallerLineNumber]int callerLineNumber = 0) { }
 
         public Program([CallerFilePath]string callerFilePath, string other) { } // Noncompliant
-        public Program(string other, [CallerFilePath]string callerFilePath) { }
+        public Program(int other, [CallerFilePath]string callerFilePath) { }
     }
 
     class BaseClass
@@ -36,30 +36,17 @@ namespace Tests.Diagnostics
 
     interface MyInterface
     {
-        void Method2(string callerFilePath, string other) { }
+        void Method2(string callerFilePath, string other);
     }
 
     class DerivedClass : BaseClass, MyInterface
     {
-        public override void Method1([CallerFilePath]string callerFilePath, string other) // Compliant, method overriden
+        public override void Method1([CallerFilePath]string callerFilePath, string other = "") // Compliant, method overriden
         {
         }
 
         public void Method2([CallerFilePath]string callerFilePath, string other) // Compliant, method from interface
         {
         }
-    }
-
-    class InvalidSyntax
-    {
-        public void Method0() {}
-        public void () {}
-        public void Method1( { }
-        public void Method2) { }
-        public void Method3([CallerFilePath]) { }
-        public void Method4([CallerFilePath],string other) { }
-        public void Method5([CallerFilePath] string, string other) { }
-        public void Method6([CallerFilePathAttribute string parameter) { }
-        public void Method6([CallerLineNumber][CallerFilePath]string callerFilePath, string other) { } // Noncompliant
     }
 }

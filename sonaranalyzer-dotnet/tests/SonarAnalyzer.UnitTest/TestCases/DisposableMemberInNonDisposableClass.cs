@@ -41,7 +41,7 @@ namespace Tests.Diagnostics
     {
         protected FileStream fs;
 
-        protected ResourceHolder3()
+        protected ResourceHolder3(string path)
         {
             this.fs = new FileStream(path, FileMode.Open);
         }
@@ -53,6 +53,7 @@ namespace Tests.Diagnostics
 
     public class ResourceHolder4 : ResourceHolder3 // Compliant; it doesn't have its own field
     {
+        ResourceHolder4(string path) : base(path) { }
         public void OpenResource(string path)
         {
             this.fs = new FileStream(path, FileMode.Open);

@@ -4,7 +4,7 @@ namespace Tests.Diagnostics
 {
     public class Program
     {
-        public void IfElseCases()
+        public void IfElseCases(int b, int c)
         {
             if (b == 0)  // Noncompliant
             {
@@ -61,7 +61,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void SwitchCases()
+        public void SwitchCases(int i)
         {
             switch (i) // Noncompliant {{Remove this 'switch' or edit its sections so that they are not all the same.}}
             {
@@ -127,14 +127,14 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void TernaryCases(bool c)
+        public void TernaryCases(bool c, int a)
         {
             int b = a > 12 ? 4 : 4;  // Noncompliant
 
             var x = 1 > 18 ? true : true; // Noncompliant
             var y = 1 > 18 ? true : false;
             y = 1 > 18 ? (true) : true; // Noncompliant
-            TernaryCases(1 > 18 ? (true) : true); // Noncompliant
+            TernaryCases(1 > 18 ? (true) : true, a); // Noncompliant
         }
 
         private void DoSomething()

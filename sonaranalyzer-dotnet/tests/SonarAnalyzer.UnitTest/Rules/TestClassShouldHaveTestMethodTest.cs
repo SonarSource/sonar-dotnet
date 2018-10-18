@@ -35,8 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.NUnit.cs",
                 new TestClassShouldHaveTestMethod(),
-                null,
-                NuGetMetadataReference.NUnit(testFwkVersion));
+                additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion));
         }
 
         [DataTestMethod]
@@ -47,8 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.MsTest.cs",
                 new TestClassShouldHaveTestMethod(),
-                null,
-                NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
+                additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
         }
     }
 }

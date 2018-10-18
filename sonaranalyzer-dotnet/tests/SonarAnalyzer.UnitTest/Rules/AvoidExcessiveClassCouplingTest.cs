@@ -154,7 +154,7 @@ public class Functions // Compliant, Func types are not counted
 using System;
 public class Pointers // Compliant, pointers are not counted
 {
-    public void Foo(int* pointer) { }
+    public void Foo(int* pointer) { } // Ignore CS0214
 }
 ",
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
@@ -168,7 +168,7 @@ public class Pointers // Compliant, pointers are not counted
 using System;
 public class Pointers // Compliant, enums are not counted
 {
-    public ConsoleColor Foo(ConsoleColor c) { }
+    public ConsoleColor Foo(ConsoleColor c) { return ConsoleColor.Black; }
 }
 ",
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
@@ -180,6 +180,7 @@ public class Pointers // Compliant, enums are not counted
         {
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
+using System.Collections.Generic;
 public class Lazyness // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 1 to the maximum authorized 0 or less.}}
 {
     public void Foo(Lazy<IEnumerable<int>> lazy) { } // +1 IEnumerable
@@ -199,7 +200,7 @@ public class Types // Compliant, pointers are not counted
     public void Foo(bool b1,
         byte b2, sbyte b3, int i1, uint i2, long i3, ulong i4,
         IntPtr p1, UIntPtr p2,
-        char c1, single d1,
+        char c1, float d1,
         double d2, string s1,
         object o1) { }
 }
@@ -256,7 +257,7 @@ public class Properties // Noncompliant {{Split this class into smaller and more
         }
     }
     // expression body
-    public object C6 => new Dictionary<int, int>();
+    public object C7 => new Dictionary<int, int>();
 }
 ",
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
@@ -272,11 +273,11 @@ public class Indexers // Noncompliant {{Split this class into smaller and more s
 {
     // accessibility
     public IList<int> this[int i] { get { return null; } } // +1 IList
-    private ICollection<int> this[int i] { get { return null; } } // +1 ICollection
-    protected IEnumerable<int> this[int i] { get { return null; } } // +1 IEnumerable
-    internal IEnumerator<int> this[int i] { get { return null; } } // +1 IEnumerator
+    private ICollection<int> this[int i, int j] { get { return null; } } // +1 ICollection
+    protected IEnumerable<int> this[int i, int j, int k] { get { return null; } } // +1 IEnumerable
+    internal IEnumerator<int> this[int i, int j, int k, int l] { get { return null; } } // +1 IEnumerator
     // parameters
-    public int this[IEqualityComparer<int> i, Stack<int> j] { get { return null; } } // +1 IEqualityComparer, +1 Stack
+    public int this[IEqualityComparer<int> i, Stack<int> j] { get { return 0; } } // +1 IEqualityComparer, +1 Stack
 }
 ",
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
@@ -333,16 +334,16 @@ public class Methods // Noncompliant {{Split this class into smaller and more sp
     // return type
     private IEqualityComparer<int> M5() { return null; } // +1 IEqualityComparer
     // generic constraints
-    private void M6<T>() where T : Stack<int> { return null; } // +1 Stack
+    private void M6<T>() where T : Stack<int> { return; } // +1 Stack
     // method body
     private void M8()
     {
         Queue<int> q; // +1 Queue
-        Console.Write(); // +1 Console
+        Console.Clear(); // +1 Console
 }
     // expression body
     private object M9() => new List<int>(); // +1 List
-    private void M10() => Debug.Write(); // +1 Debug
+    private void M10() => Debug.Write(1); // +1 Debug
 }
 ",
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
@@ -452,7 +453,7 @@ using System;
 [Serializable]
 public class Self // Compliant, attributes are not counted
 {
-    [Serializable]
+    [Obsolete]
     void M1()
     {
     }
