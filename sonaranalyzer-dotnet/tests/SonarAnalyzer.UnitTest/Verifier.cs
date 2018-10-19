@@ -32,16 +32,16 @@ using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest
 {
-    public enum CheckMode
+    public enum CompilationErrorBehavior
     {
-        CheckCompilationErrors,
-        IgnoreCompilationErrors
+        FailTest,
+        Ignore
     }
 
     internal static class Verifier
     {
         public static void VerifyNoExceptionThrown(string path,
-            IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers, CheckMode checkMode = CheckMode.CheckCompilationErrors)
+            IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers, CompilationErrorBehavior checkMode = CompilationErrorBehavior.FailTest)
         {
             var compilation = SolutionBuilder
                 .Create()
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.UnitTest
         }
 
         public static void VerifyCSharpAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            CheckMode checkMode = CheckMode.CheckCompilationErrors, params MetadataReference[] additionalReferences)
+            CompilationErrorBehavior checkMode = CompilationErrorBehavior.FailTest, params MetadataReference[] additionalReferences)
         {
             var solution = SolutionBuilder
                .Create()
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest
         }
 
         public static void VerifyVisualBasicAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            CheckMode checkMode = CheckMode.CheckCompilationErrors, params MetadataReference[] additionalReferences)
+            CompilationErrorBehavior checkMode = CompilationErrorBehavior.FailTest, params MetadataReference[] additionalReferences)
         {
             var solution = SolutionBuilder
                .Create()
@@ -89,14 +89,14 @@ namespace SonarAnalyzer.UnitTest
         }
 
         public static void VerifyAnalyzer(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            IEnumerable<ParseOptions> options = null, CheckMode checkMode = CheckMode.CheckCompilationErrors,
+            IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.FailTest,
             params MetadataReference[] additionalReferences)
         {
             VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, options, checkMode, additionalReferences);
         }
 
         public static void VerifyUtilityAnalyzer<TMessage>(IEnumerable<string> paths, UtilityAnalyzerBase diagnosticAnalyzer,
-            string protobufPath, Action<IList<TMessage>> verifyProtobuf, CheckMode checkMode = CheckMode.CheckCompilationErrors)
+            string protobufPath, Action<IList<TMessage>> verifyProtobuf, CompilationErrorBehavior checkMode = CompilationErrorBehavior.FailTest)
             where TMessage : IMessage<TMessage>, new()
         {
             var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths);
@@ -122,7 +122,7 @@ namespace SonarAnalyzer.UnitTest
         }
 
         public static void VerifyAnalyzer(IEnumerable<string> paths, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            IEnumerable<ParseOptions> options = null, CheckMode checkMode = CheckMode.CheckCompilationErrors,
+            IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.FailTest,
             params MetadataReference[] additionalReferences)
         {
             var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths, additionalReferences);

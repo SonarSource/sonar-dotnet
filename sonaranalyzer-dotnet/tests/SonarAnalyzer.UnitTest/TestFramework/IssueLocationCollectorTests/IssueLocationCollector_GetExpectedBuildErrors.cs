@@ -26,10 +26,10 @@ using System.Linq;
 namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
     [TestClass]
-    public class IssueLocationCollector_GetExpectedIssueLocations
+    public class IssueLocationCollector_GetExpectedBuildErrors
     {
         [TestMethod]
-        public void GetExpectedIssueLocations_No_Comments()
+        public void GetExpectedBuildErrors_No_Comments()
         {
             var code = @"public class Foo
 {
@@ -38,48 +38,28 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         Console.WriteLine(o);
     }
 }";
-            var locations = new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+            var expectedErrors = new IssueLocationCollector().GetExpectedBuildErrors(SourceText.From(code).Lines);
 
-            locations.Should().BeEmpty();
+            expectedErrors.Should().BeEmpty();
         }
 
         [TestMethod]
-        public void GetExpectedIssueLocations_Locations()
+        public void GetExpectedBuildErrors_expectedErrors()
         {
             var code = @"public class Foo
 {
-    public void Bar(object o) // Noncompliant
+    public void Bar(object o) // Ignore CS1234
     {
-        // Noncompliant@+1
+        // Ignore@+1 CS3456
         Console.WriteLine(o);
     }
 }";
-            var locations = new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+            var expectedErrors = new IssueLocationCollector().GetExpectedBuildErrors(SourceText.From(code).Lines);
 
-            locations.Should().HaveCount(2);
+            expectedErrors.Should().HaveCount(2);
 
-            locations.Select(l => l.IsPrimary).Should().Equal(new[] { true, true });
-            locations.Select(l => l.LineNumber).Should().Equal(new[] { 3, 6 });
-        }
-
-        [TestMethod]
-        public void GetExpectedIssueLocations_ExactLocations()
-        {
-            var code = @"public class Foo
-{
-    public void Bar(object o)
-//              ^^^
-//                         ^ Secondary@-1
-    {
-        Console.WriteLine(o);
-    }
-}";
-            var locations = new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
-
-            locations.Should().HaveCount(2);
-
-            locations.Select(l => l.IsPrimary).Should().BeEquivalentTo(new[] { true, false });
-            locations.Select(l => l.LineNumber).Should().Equal(new[] { 3, 3 });
+            expectedErrors.Select(l => l.IsPrimary).Should().Equal(new[] { true, true });
+            expectedErrors.Select(l => l.LineNumber).Should().Equal(new[] { 3, 6 });
         }
     }
 }

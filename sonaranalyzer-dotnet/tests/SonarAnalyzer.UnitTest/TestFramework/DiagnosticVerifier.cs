@@ -38,11 +38,22 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
-
-    class ErrorInUnitTest : Exception
+    /// <summary>
+    /// This exception class is used in unit tests that analyze some code to report a violation.
+    /// It differs from classical unit test failure reporting in that it injects in its call
+    /// stack a location that correspond to the source file that is being analyzed (when analysing
+    /// inline code snippets, this location will be incorrect).
+    /// As a result, in the UI, we can just click on this line to directly open the right file at
+    /// the right place to see the actual issue.
+    /// </summary>
+    ///
+    public class ErrorInCodeAnalyzedDuringUnitTests : Exception
     {
+        private static string at;
+        private static string inFileLineNum;
+        private string additionalStackTraceLine;
 #pragma warning disable S3963 // "static" fields should be initialized inline
-        static ErrorInUnitTest()
+        static ErrorInCodeAnalyzedDuringUnitTests()
         {
             var msCoreResourceManager = new ResourceManager("mscorlib", typeof(Object).Assembly);
             at = msCoreResourceManager.GetString("Word_At");
@@ -53,32 +64,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static string GetFullPathOfRealSourceCode(string path) =>
             Path.GetFullPath(Path.Combine(@"..\..\TestCases", path));
 
-        public ErrorInUnitTest(Location loc, string message) : base(message)
+        public ErrorInCodeAnalyzedDuringUnitTests(Location loc, string message) : base(message)
         {
-            PathToRealSource = GetFullPathOfRealSourceCode(loc.GetLineSpan().Path);
-            Line = loc.GetLineNumberToReport();
+            var pathToRealSource = GetFullPathOfRealSourceCode(loc.GetLineSpan().Path);
+            var line = loc.GetLineNumberToReport();
+            additionalStackTraceLine = $"{at} Analyzed code {string.Format(inFileLineNum, pathToRealSource, line)}{Environment.NewLine}";
         }
 
-        public override string StackTrace
-        {
-            get
-            {
-                var addedLine = at + " Analyzed code " + string.Format(inFileLineNum, PathToRealSource, Line);
-                return addedLine + Environment.NewLine + base.StackTrace;
-            }
-        }
-
-        private int Line { get; }
-        private string PathToRealSource { get; }
-
-        private static string at;
-        private static string inFileLineNum;
+        public override string StackTrace => additionalStackTraceLine + base.StackTrace;
     }
     internal static class DiagnosticVerifier
     {
         private const string AnalyzerFailedDiagnosticId = "AD0001";
 
-        public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CheckMode checkMode)
+        public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode)
         {
             try
             {
@@ -142,7 +141,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         public static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation,
-            DiagnosticAnalyzer diagnosticAnalyzer, CheckMode checkMode)
+            DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode)
         {
             var ids = diagnosticAnalyzer.SupportedDiagnostics
                 .Select(diagnostic => diagnostic.Id)
@@ -153,13 +152,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         public static void VerifyNoIssueReported(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer,
-            CheckMode checkMode = CheckMode.CheckCompilationErrors)
+            CompilationErrorBehavior checkMode = CompilationErrorBehavior.FailTest)
         {
             GetDiagnostics(compilation, diagnosticAnalyzer, checkMode).Should().BeEmpty();
         }
 
         public static ImmutableArray<Diagnostic> GetAllDiagnostics(Compilation compilation,
-            IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers, CheckMode checkMode)
+            IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers, CompilationErrorBehavior checkMode)
         {
             var compilationOptions = compilation.Language == LanguageNames.CSharp
                 ? (CompilationOptions)new CS.CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true)
@@ -183,7 +182,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .Result;
 
             VerifyNoExceptionThrown(diagnostics);
-            if (checkMode == CheckMode.CheckCompilationErrors)
+            if (checkMode == CompilationErrorBehavior.FailTest)
             {
                 VerifyBuildErrors(diagnostics, compilation);
             }
@@ -213,25 +212,25 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             if (expectedIssue == null)
             {
-                throw new ErrorInUnitTest(location, $"Issue with message '{(string.IsNullOrEmpty(extraInfo) ? message : extraInfo)}' not expected on line {lineNumber}");
+                throw new ErrorInCodeAnalyzedDuringUnitTests(location, $"Issue with message '{(string.IsNullOrEmpty(extraInfo) ? message : extraInfo)}' not expected on line {lineNumber}");
             }
 
             if (expectedIssue.Message != null && expectedIssue.Message != message)
             {
-                throw new ErrorInUnitTest(location, $"Expected message on line {lineNumber} to be '{expectedIssue.Message}', but got '{message}'.");
+                throw new ErrorInCodeAnalyzedDuringUnitTests(location, $"Expected message on line {lineNumber} to be '{expectedIssue.Message}', but got '{message}'.");
             }
 
             var diagnosticStart = location.GetLineSpan().StartLinePosition.Character;
 
             if (expectedIssue.Start.HasValue && expectedIssue.Start != diagnosticStart)
             {
-                throw new ErrorInUnitTest(location,
+                throw new ErrorInCodeAnalyzedDuringUnitTests(location,
                     $"Expected issue on line {lineNumber} to start on column {expectedIssue.Start} but got column {diagnosticStart}.");
             }
 
             if (expectedIssue.Length.HasValue && expectedIssue.Length != location.SourceSpan.Length)
             {
-                throw new ErrorInUnitTest(location,
+                throw new ErrorInCodeAnalyzedDuringUnitTests(location,
                     $"Expected issue on line {lineNumber} to have a length of {expectedIssue.Length} but got a length of {location.SourceSpan.Length}).");
             }
 
