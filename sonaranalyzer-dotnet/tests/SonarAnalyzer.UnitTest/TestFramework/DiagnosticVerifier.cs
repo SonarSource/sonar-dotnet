@@ -66,7 +66,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public ErrorInCodeAnalyzedDuringUnitTests(Location loc, string message) : base(message)
         {
-            var pathToRealSource = GetFullPathOfRealSourceCode(loc.GetLineSpan().Path);
+            var reportedPath = loc.GetLineSpan().Path;
+            if (string.IsNullOrEmpty(reportedPath))
+            {
+                additionalStackTraceLine = string.Empty;
+                return;
+            }
+            var pathToRealSource = GetFullPathOfRealSourceCode(reportedPath);
             var line = loc.GetLineNumberToReport();
             additionalStackTraceLine = $"{at} Analyzed code {string.Format(inFileLineNum, pathToRealSource, line)}{Environment.NewLine}";
         }
@@ -152,7 +158,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         public static void VerifyNoIssueReported(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer,
-            CompilationErrorBehavior checkMode = CompilationErrorBehavior.FailTest)
+            CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
         {
             GetDiagnostics(compilation, diagnosticAnalyzer, checkMode).Should().BeEmpty();
         }
