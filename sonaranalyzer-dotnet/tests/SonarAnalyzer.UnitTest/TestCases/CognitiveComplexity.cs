@@ -317,12 +317,12 @@ namespace Tests.Diagnostics
             }
         }
 
-        void EmptyMethodBody() => Console.Write();
+        void EmptyMethodBody() => Console.Write("");
 
-        void IfMethodBody() => a && b || c;
+        bool IfMethodBody(bool a, bool b, bool c) => a && b || c;
 //           ^^^^^^^^^^^^ {{Refactor this method to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
-//                               ^^ Secondary@-1 {{+1}}
-//                                    ^^ Secondary@-2 {{+1}}
+//                                                     ^^ Secondary@-1 {{+1}}
+//                                                          ^^ Secondary@-2 {{+1}}
 
         void MethodWithInnerMethod() // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
         {
@@ -423,7 +423,7 @@ namespace Tests.Diagnostics
             if (foo == null)
 //          ^^ Secondary {{+1}}
             {
-                throw ArgumentNullException();
+                throw new ArgumentNullException();
             }
         }
     }
@@ -434,8 +434,11 @@ namespace Tests.Diagnostics
         {
 
         }
+    }
 
-        ~DestructorsComplexity() // Noncompliant {{Refactor this destructor to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+    class DestructorsComplexity2
+    {
+        ~DestructorsComplexity2() // Noncompliant {{Refactor this destructor to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
         {
             if (true)
 //          ^^ Secondary {{+1}}
@@ -495,7 +498,7 @@ namespace Tests.Diagnostics
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
 //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary@-1 {{+1 (recursion)}}
         {
-            var act = () => IndirectRecursionFromLocalLambda();
+            Action act = () => IndirectRecursionFromLocalLambda();
             act();
         }
     }
@@ -507,7 +510,7 @@ namespace Tests.Diagnostics
             var a = true;
         }
 
-        void SimpleAnd() // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+        void SimpleAnd2() // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
         {
             var a = true && false;
 //                       ^^ Secondary {{+1}}
@@ -531,7 +534,7 @@ namespace Tests.Diagnostics
 //                                ^^ Secondary@-1 {{+1}}
         }
 
-        void AndOrIf() // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 4 to the 0 allowed.}}
+        void AndOrIf(bool a, bool b, bool c, bool d, bool e, bool f) // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 4 to the 0 allowed.}}
         {
             if (a
 //          ^^ Secondary {{+1}}
@@ -546,7 +549,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        void AndNotIf() // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
+        void AndNotIf(bool a, bool b, bool c, bool d) // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
         {
             var res =
                 a
@@ -557,7 +560,7 @@ namespace Tests.Diagnostics
                 && d;
         }
 
-        void AndOrNot1() // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
+        void AndOrNot1(bool a, bool b, bool c, bool d) // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
         {
             var res =
                 d
@@ -570,7 +573,7 @@ namespace Tests.Diagnostics
 //                  ^^ Secondary {{+1}}
         }
 
-        void AndOrNot2() // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
+        void AndOrNot2(bool a, bool b, bool c, bool d) // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
         {
             var res =
                 a
@@ -582,14 +585,14 @@ namespace Tests.Diagnostics
 //              ^^ Secondary {{+1}}
         }
 
-        void AndNot3() // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
+        void AndNot3(bool a, bool b, bool c, bool d) // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
         {
             var res = a && d && !(b && c);
 //                      ^^ Secondary {{+1}}
 //                                  ^^ Secondary@-1 {{+1}}
         }
 
-        void AndNotParenthesis() // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
+        void AndNotParenthesis(bool a, bool b, bool c) // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
         {
             var res =
                 a
@@ -599,7 +602,7 @@ namespace Tests.Diagnostics
 //                    ^^ Secondary {{+1}}
         }
 
-        void ChainedConditionsWithParentheses() // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+        void ChainedConditionsWithParentheses(bool a, bool b, bool c, bool d) // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
         {
             var res = a && b && (c && d);
 //                      ^^ Secondary {{+1}}
@@ -644,7 +647,7 @@ namespace Tests.Diagnostics
                 }
             };
 
-        private Func<int, string> act = // Noncompliant {{Refactor this field to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
+        private Func<int, string> act2 = // Noncompliant {{Refactor this field to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
             x =>
             {
                 if (x > 0)
@@ -685,7 +688,7 @@ namespace Tests.Diagnostics
 
         void SimpleAction()
         {
-            Action<string> act = x => Console.Write();
+            Action<string> act = x => Console.Write(x);
         }
 
         void BlockAction()

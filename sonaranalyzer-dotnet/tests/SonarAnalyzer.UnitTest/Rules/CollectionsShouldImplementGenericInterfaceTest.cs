@@ -32,7 +32,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CollectionsShouldImplementGenericInterface()
         {
             Verifier.VerifyAnalyzer(@"TestCases\CollectionsShouldImplementGenericInterface.cs",
-                new CollectionsShouldImplementGenericInterface());
+                new CollectionsShouldImplementGenericInterface(),
+                checkMode:CompilationErrorBehavior.Ignore); // It would be too tedious to implement all those interfaces
         }
     }
 }

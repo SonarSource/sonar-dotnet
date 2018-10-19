@@ -23,6 +23,7 @@ using System;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -44,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Action action = () => Verifier.VerifyAnalyzer(
                 @"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.cs",
                 new MarkAssemblyWithAssemblyVersionAttribute());
-            action.Should().Throw<AssertFailedException>();
+            action.Should().Throw<ErrorInCodeAnalyzedDuringUnitTests>();
         }
     }
 }

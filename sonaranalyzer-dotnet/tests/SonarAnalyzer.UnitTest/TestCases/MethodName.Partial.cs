@@ -12,6 +12,6 @@ namespace Tests.Diagnostics
 {
     public partial class SomeClass
     {
-        public partial void MY_METHOD();
+        partial void MY_METHOD();
     }
 }

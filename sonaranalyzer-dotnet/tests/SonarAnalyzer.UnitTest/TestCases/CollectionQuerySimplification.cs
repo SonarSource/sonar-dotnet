@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 
 namespace Tests.Diagnostics
@@ -13,7 +14,7 @@ namespace Tests.Diagnostics
             x = coll.Select((element) => ((element as object))).Any(element => (element != null) && CheckCondition(element) && true);  // Noncompliant use OfType
             var y = coll.Where(element => element is object).Select(element => element as object); // Noncompliant use OfType
 //                       ^^^^^
-            var y = coll.Where(element => element is object).Select(element => element as object[]);
+            y = coll.Where(element => element is object).Select(element => element as object[]);
             y = coll.Where(element => element is object).Select(element => (object)element); // Noncompliant use OfType
             x = coll.Where(element => element == null).Any();  // Noncompliant use Any([expression])
 //                   ^^^^^
@@ -32,7 +33,7 @@ namespace Tests.Diagnostics
                 .AsEnumerable()
                 .Where(e => e == null);
 
-            var z = coll
+            var z2 = coll
                 .Select(element => element as object)
                 .ToList();
 

@@ -23,6 +23,7 @@ using System;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -61,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.cs",
                     @"ResourceTests\SomeResources.Designer.cs"
                 }, new MarkAssemblyWithNeutralResourcesLanguageAttribute());
-            action.Should().Throw<AssertFailedException>().And
+            action.Should().Throw<ErrorInCodeAnalyzedDuringUnitTests>().And
                   .Message.Should().Be("Issue with message 'Mark this assembly with 'System.Resources.NeutralResourcesLanguageAttribute'.' not expected on line 1");
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
+    struct Point { public float X; public float Y; }
     class CompareNaN
     {
         void TestDouble()

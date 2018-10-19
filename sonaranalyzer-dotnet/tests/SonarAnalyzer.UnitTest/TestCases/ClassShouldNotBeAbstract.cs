@@ -9,7 +9,7 @@ namespace Tests.Diagnostics
     }
     public abstract partial class A
     {
-        public void Y();
+        public void Y() { }
     }
 
     public abstract class Empty //Noncompliant {{Convert this 'abstract' class to a concrete class with a protected constructor.}}
@@ -20,15 +20,17 @@ namespace Tests.Diagnostics
 
     public abstract class Animal //Noncompliant {{Convert this 'abstract' class to an interface.}}
     {
-        abstract void move();
-        abstract void feed();
+        protected abstract void move();
+        protected abstract void feed();
 
     }
 
+    public class SomeBaseClass { }
+
     public abstract class Animal2 : SomeBaseClass //Compliant
     {
-        abstract void move();
-        abstract void feed();
+        protected abstract void move();
+        protected abstract void feed();
 
     }
 
@@ -99,12 +101,13 @@ namespace Tests.Diagnostics
     public abstract class View2Derived : View2 //Compliant, still has abstract parts
     {
         public string Content3 { get; }
-        public override string Content1 { get { return 1; } }
+        public override string Content1 { get { return ""; } }
     }
 
     public abstract class View3Derived : SomeUnknownType // Noncompliant
+                                                         // Ignore@-1 CS0246
     {
         public string Content3 { get; }
-        public override string Content1 { get { return 1; } }
+        public override int Content1 { get { return 1; } } // Ignore CS0115
     }
 }

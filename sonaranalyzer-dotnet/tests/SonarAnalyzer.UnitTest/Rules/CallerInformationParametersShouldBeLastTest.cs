@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\CallerInformationParametersShouldBeLastInvalidSyntax.cs",
                 new CallerInformationParametersShouldBeLast(),
-                checkMode:CheckMode.IgnoreCompilationErrors);
+                checkMode:CompilationErrorBehavior.Ignore);
         }
     }
 }
