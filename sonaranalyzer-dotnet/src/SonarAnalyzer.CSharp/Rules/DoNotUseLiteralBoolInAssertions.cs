@@ -98,31 +98,29 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private bool IsWorkingWithNullableType(ISymbol symbol, SeparatedSyntaxList<ArgumentSyntax> arguments, SemanticModel semanticModel)
         {
-            if (symbol is IMethodSymbol methodSymbol)
+            if (!(symbol is IMethodSymbol methodSymbol))
             {
-                if (methodSymbol.TypeArguments.Length == 1) // We usually expect all comparison test methods to have one generic argument
+                return false;
+            }
+
+            if (methodSymbol.TypeArguments.Length == 1) // We usually expect all comparison test methods to have one generic argument
+            {
+                // Since we already know we are comparing with bool, no need to check Nullable<bool>, Nullable<T> is enough
+                return methodSymbol.TypeArguments[0].OriginalDefinition.Is(KnownType.System_Nullable_T);
+            }
+            else if (methodSymbol.TypeArguments.Length == 0) // But they can also work with Object (NUnit...)
+            {
+                if (arguments.Count != 2)
                 {
-                    // Since we already know we are comparing with bool, no need to check Nullable<bool>, Nullable<T> is enough
-                    return methodSymbol.TypeArguments[0].OriginalDefinition.Is(KnownType.System_Nullable_T);
-                }
-                else if (methodSymbol.TypeArguments.Length == 0) // But they can also work with Object (NUnit...)
-                {
-                    if(arguments.Count != 2)
-                    {
-                        return false;
-                    }
-                    var nonBoolLiteral = IsBooleanLiteral(arguments[0]) ? arguments[1] : arguments[0];
-                    var nonBoolType = semanticModel.GetTypeInfo(nonBoolLiteral.Expression);
-                    return nonBoolType.Type?.OriginalDefinition.Is(KnownType.System_Nullable_T) ?? false;
-                }
-                else
-                {
-                    // Other case, not handled
                     return false;
                 }
+                var nonBoolLiteral = IsBooleanLiteral(arguments[0]) ? arguments[1] : arguments[0];
+                var nonBoolType = semanticModel.GetTypeInfo(nonBoolLiteral.Expression);
+                return nonBoolType.Type?.OriginalDefinition.Is(KnownType.System_Nullable_T) ?? false;
             }
             else
             {
+                // Other case, not handled
                 return false;
             }
         }
