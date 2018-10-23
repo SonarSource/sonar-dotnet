@@ -48,9 +48,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         {
             var code = @"public class Foo
 {
-    public void Bar(object o) // Error [CS1234]
+    public void Bar(object o) // Ignore [CS1234]
     {
-        // Error@+1 [CS3456]
+        // Ignore@+1 [CS3456]
         Console.WriteLine(o);
     }
 }";
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         {
             var code = @"public class Foo
 {
-    public void Bar(object o) // Error [CS1234,CS2345,CS3456]
+    public void Bar(object o) // Ignore [CS1234,CS2345,CS3456]
     {
     }
 }";

@@ -82,6 +82,6 @@
 
     public class Invalid
     {
-        public int () => 42; // Error [CS1519,CS8124,CS1519]
+        public int () => 42; // Ignore [CS1519,CS8124,CS1519]
     }
 }

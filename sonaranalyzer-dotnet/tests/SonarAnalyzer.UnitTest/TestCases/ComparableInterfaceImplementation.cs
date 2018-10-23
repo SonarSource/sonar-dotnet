@@ -180,11 +180,11 @@ namespace Tests.Diagnostics.ComparableInterfaceImplementation
             return true;
         }
 
-        public bool Equals { get; set; } // Error [CS0102]
+        public bool Equals { get; set; } // Ignore [CS0102]
 
-        public bool Equals => true; // Error [CS0102]
+        public bool Equals => true; // Ignore [CS0102]
 
-        public bool Equals() => true; // Error [CS0102,CS0111]
+        public bool Equals() => true; // Ignore [CS0102,CS0111]
 
         public static bool operator ==(DifferentEquals left, DifferentEquals right)
         {
@@ -387,7 +387,7 @@ namespace Tests.Diagnostics.ComparableInterfaceImplementation
             return !(left == right);
         }
 
-        public static bool operator <=(MissingGreaterThanOrEqualTo left, MissingGreaterThanOrEqualTo right) // Error [CS0216]
+        public static bool operator <=(MissingGreaterThanOrEqualTo left, MissingGreaterThanOrEqualTo right) // Ignore [CS0216]
         {
             return Compare(left, right) <= 0;
         }
@@ -449,7 +449,7 @@ namespace Tests.Diagnostics.ComparableInterfaceImplementation
             return !(left == right);
         }
 
-        public static bool operator >=(MissingLessThanOrEqualTo left, MissingLessThanOrEqualTo right) // Error [CS0216]
+        public static bool operator >=(MissingLessThanOrEqualTo left, MissingLessThanOrEqualTo right) // Ignore [CS0216]
         {
             return Compare(left, right) >= 0;
         }
@@ -835,7 +835,7 @@ namespace Tests.Diagnostics.ComparableGenericInterfaceImplementation
             return !(left == right);
         }
 
-        public static bool operator <=(MissingGreaterThanOrEqualTo left, MissingGreaterThanOrEqualTo right) // Error [CS0216]
+        public static bool operator <=(MissingGreaterThanOrEqualTo left, MissingGreaterThanOrEqualTo right) // Ignore [CS0216]
         {
             return Compare(left, right) <= 0;
         }
@@ -897,7 +897,7 @@ namespace Tests.Diagnostics.ComparableGenericInterfaceImplementation
             return !(left == right);
         }
 
-        public static bool operator >=(MissingLessThanOrEqualTo left, MissingLessThanOrEqualTo right) // Error [CS0216]
+        public static bool operator >=(MissingLessThanOrEqualTo left, MissingLessThanOrEqualTo right) // Ignore [CS0216]
         {
             return Compare(left, right) >= 0;
         }
