@@ -44,13 +44,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         }
 
         [TestMethod]
-        public void GetExpectedBuildErrors_expectedErrors()
+        public void GetExpectedBuildErrors_ExpectedErrors()
         {
             var code = @"public class Foo
 {
-    public void Bar(object o) // Ignore CS1234
+    public void Bar(object o) // Error [CS1234]
     {
-        // Ignore@+1 CS3456
+        // Error@+1 [CS3456]
         Console.WriteLine(o);
     }
 }";
@@ -60,6 +60,24 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 
             expectedErrors.Select(l => l.IsPrimary).Should().Equal(new[] { true, true });
             expectedErrors.Select(l => l.LineNumber).Should().Equal(new[] { 3, 6 });
+        }
+
+        [TestMethod]
+        public void GetExpectedBuildErrors_Multiple_ExpectedErrors()
+        {
+            var code = @"public class Foo
+{
+    public void Bar(object o) // Error [CS1234,CS2345,CS3456]
+    {
+    }
+}";
+            var expectedErrors = new IssueLocationCollector().GetExpectedBuildErrors(SourceText.From(code).Lines);
+
+            expectedErrors.Should().HaveCount(3);
+
+            expectedErrors.Select(l => l.IsPrimary).Should().Equal(new[] { true, true, true });
+            expectedErrors.Select(l => l.LineNumber).Should().Equal(new[] { 3, 3, 3 });
+            expectedErrors.Select(l => l.IssueId).Should().Equal(new[] { "CS1234", "CS2345", "CS3456" });
         }
     }
 }

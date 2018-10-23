@@ -154,7 +154,7 @@ public class Functions // Compliant, Func types are not counted
 using System;
 public class Pointers // Compliant, pointers are not counted
 {
-    public void Foo(int* pointer) { } // Ignore CS0214
+    public void Foo(int* pointer) { } // Error [CS0214]
 }
 ",
                 new AvoidExcessiveClassCoupling { Threshold = 0 });

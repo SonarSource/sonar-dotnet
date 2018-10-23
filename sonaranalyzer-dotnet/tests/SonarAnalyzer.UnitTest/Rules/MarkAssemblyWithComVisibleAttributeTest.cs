@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Action action = () => Verifier.VerifyAnalyzer(
                 @"TestCases\MarkAssemblyWithComVisibleAttributeNoncompliant.cs",
                 new MarkAssemblyWithComVisibleAttribute());
-            action.Should().Throw<ErrorInCodeAnalyzedDuringUnitTests>();
+            action.Should().Throw<UnexpectedDiagnosticException>();
         }
     }
 }

@@ -22,11 +22,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Resources;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis;
@@ -38,47 +34,6 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
-    /// <summary>
-    /// This exception class is used in unit tests that analyze some code to report a violation.
-    /// It differs from classical unit test failure reporting in that it injects in its call
-    /// stack a location that correspond to the source file that is being analyzed (when analysing
-    /// inline code snippets, this location will be incorrect).
-    /// As a result, in the UI, we can just click on this line to directly open the right file at
-    /// the right place to see the actual issue.
-    /// </summary>
-    ///
-    public class ErrorInCodeAnalyzedDuringUnitTests : Exception
-    {
-        private static string at;
-        private static string inFileLineNum;
-        private string additionalStackTraceLine;
-#pragma warning disable S3963 // "static" fields should be initialized inline
-        static ErrorInCodeAnalyzedDuringUnitTests()
-        {
-            var msCoreResourceManager = new ResourceManager("mscorlib", typeof(Object).Assembly);
-            at = msCoreResourceManager.GetString("Word_At");
-            inFileLineNum = msCoreResourceManager.GetString("StackTrace_InFileLineNumber");
-        }
-#pragma warning restore S3963 // "static" fields should be initialized inline
-
-        private static string GetFullPathOfRealSourceCode(string path) =>
-            Path.GetFullPath(Path.Combine(@"..\..\TestCases", path));
-
-        public ErrorInCodeAnalyzedDuringUnitTests(Location loc, string message) : base(message)
-        {
-            var reportedPath = loc.GetLineSpan().Path;
-            if (string.IsNullOrEmpty(reportedPath))
-            {
-                additionalStackTraceLine = string.Empty;
-                return;
-            }
-            var pathToRealSource = GetFullPathOfRealSourceCode(reportedPath);
-            var line = loc.GetLineNumberToReport();
-            additionalStackTraceLine = $"{at} Analyzed code {string.Format(inFileLineNum, pathToRealSource, line)}{Environment.NewLine}";
-        }
-
-        public override string StackTrace => additionalStackTraceLine + base.StackTrace;
-    }
     internal static class DiagnosticVerifier
     {
         private const string AnalyzerFailedDiagnosticId = "AD0001";
@@ -218,25 +173,25 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             if (expectedIssue == null)
             {
-                throw new ErrorInCodeAnalyzedDuringUnitTests(location, $"Issue with message '{(string.IsNullOrEmpty(extraInfo) ? message : extraInfo)}' not expected on line {lineNumber}");
+                throw new UnexpectedDiagnosticException(location, $"Issue with message '{(string.IsNullOrEmpty(extraInfo) ? message : extraInfo)}' not expected on line {lineNumber}");
             }
 
             if (expectedIssue.Message != null && expectedIssue.Message != message)
             {
-                throw new ErrorInCodeAnalyzedDuringUnitTests(location, $"Expected message on line {lineNumber} to be '{expectedIssue.Message}', but got '{message}'.");
+                throw new UnexpectedDiagnosticException(location, $"Expected message on line {lineNumber} to be '{expectedIssue.Message}', but got '{message}'.");
             }
 
             var diagnosticStart = location.GetLineSpan().StartLinePosition.Character;
 
             if (expectedIssue.Start.HasValue && expectedIssue.Start != diagnosticStart)
             {
-                throw new ErrorInCodeAnalyzedDuringUnitTests(location,
+                throw new UnexpectedDiagnosticException(location,
                     $"Expected issue on line {lineNumber} to start on column {expectedIssue.Start} but got column {diagnosticStart}.");
             }
 
             if (expectedIssue.Length.HasValue && expectedIssue.Length != location.SourceSpan.Length)
             {
-                throw new ErrorInCodeAnalyzedDuringUnitTests(location,
+                throw new UnexpectedDiagnosticException(location,
                     $"Expected issue on line {lineNumber} to have a length of {expectedIssue.Length} but got a length of {location.SourceSpan.Length}).");
             }
 

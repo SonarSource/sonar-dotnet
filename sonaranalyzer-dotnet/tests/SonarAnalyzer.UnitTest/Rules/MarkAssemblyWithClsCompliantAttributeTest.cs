@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Action action = () => Verifier.VerifyAnalyzer(
                 @"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.cs",
                 new MarkAssemblyWithAssemblyVersionAttribute());
-            action.Should().Throw<ErrorInCodeAnalyzedDuringUnitTests>();
+            action.Should().Throw<UnexpectedDiagnosticException>();
         }
     }
 }

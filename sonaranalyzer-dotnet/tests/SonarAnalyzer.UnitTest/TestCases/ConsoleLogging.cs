@@ -56,7 +56,7 @@ namespace Tests.Diagnostics
 
     internal class Exceptions_MethodLevelConditionals
     {
-        [System.Diagnostics.Conditional("Wrong conditional")] // Ignore CS0633
+        [System.Diagnostics.Conditional("Wrong conditional")] // Error [CS0633]
         public static void LogDebugA(string message)
         {
             Console.WriteLine(); // Noncompliant - wrong conditional
