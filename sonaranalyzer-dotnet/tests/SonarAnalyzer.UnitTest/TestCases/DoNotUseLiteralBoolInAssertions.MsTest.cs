@@ -17,7 +17,6 @@ namespace Tests.Diagnostics
             Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(false, b); // Noncompliant
             Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(b, false); // Noncompliant
             Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(true, false); // Noncompliant
-
             Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(b, b);
 
             Debug.Assert(false); // Noncompliant
@@ -25,6 +24,9 @@ namespace Tests.Diagnostics
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
             System.Diagnostics.Debug.Assert(b);
+
+            bool? x = false;
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(false, x); // Compliant, since the comparison triggers a conversion
         }
     }
 }

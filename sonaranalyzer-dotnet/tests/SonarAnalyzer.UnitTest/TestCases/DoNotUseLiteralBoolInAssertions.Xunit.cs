@@ -22,6 +22,10 @@ namespace Tests.Diagnostics
             Xunit.Assert.True(true);
             // There is no Assert.Fail in Xunit. Assert.True(false) is way to simulate it.
             Xunit.Assert.True(false);
+
+            bool? x = false;
+            Xunit.Assert.Equal(false, x); // Compliant, since the comparison triggers a conversion
+
         }
     }
 }

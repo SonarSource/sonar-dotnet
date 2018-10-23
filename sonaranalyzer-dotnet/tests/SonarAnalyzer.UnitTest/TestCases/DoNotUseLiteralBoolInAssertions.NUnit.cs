@@ -22,6 +22,10 @@ namespace Tests.Diagnostics
             NUnit.Framework.Assert.AreEqual(true, false); // Noncompliant
 
             NUnit.Framework.Assert.AreEqual(b, b);
+
+            bool? x = false;
+            NUnit.Framework.Assert.AreEqual(false, x); // Compliant, since the comparison triggers a conversion
+
         }
     }
 }
