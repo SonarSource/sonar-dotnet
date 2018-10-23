@@ -37,7 +37,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private const string MESSAGE_PATTERN = @"\s*(\{\{(?<message>.*)\}\})*";
         private const string TYPE_PATTERN = @"(?<issueType>Noncompliant|Secondary)";
         private const string BUILD_ERROR_PATTERN = @"Error";
-        private const string BUILD_ERROR_ID_PATTERN = @"\s*(?<message>CS[0-9]+)";
         private const string PRECISE_LOCATION_PATTERN = @"\s*(?<position>\^+)\s*";
         private const string NO_PRECISE_LOCATION_PATTERN = @"\s*(?<!\^+\s{1})";
         private const string COMMENT_PATTERN = @"(?<comment>\/\/|\')";
