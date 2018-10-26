@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Tests.Diagnostics
@@ -7,12 +7,12 @@ namespace Tests.Diagnostics
 
     class Program
     {
-        public void Foo()
+        public void Foo(Object x)
         {
             if (x is Fruit)  // Noncompliant
             {
-                var f = (Fruit)x;
-//                      ^^^^^^^^ Secondary
+                var f1 = (Fruit)x;
+//                       ^^^^^^^^ Secondary
             }
 
             var f = x as Fruit;
@@ -22,7 +22,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void Bar()
+        public void Bar(object x)
         {
             if (!(x is Fruit))
             {
@@ -35,7 +35,7 @@ namespace Tests.Diagnostics
 
         }
 
-        public void FooBar()
+        public void FooBar(object x)
         {
             if (x is int)
             {
@@ -43,11 +43,11 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void UnknownFoo()
+        public void UnknownFoo(object x)
         {
-            if (x is Car)  // Compliant because we ignore what the type is (there will be an error)
+            if (x is Car)  // Compliant because we ignore what the type is // Ignore [CS0246]
             {
-                var c = (Car)x;
+                var c = (Car)x; // Ignore [CS0246]
             }
         }
     }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -7,13 +7,10 @@ namespace Tests.Diagnostics
     {
     }
 
-    protected class MyOtherAttribute : Attribute // Noncompliant
+    public class MyOtherAttribute : Attribute // Noncompliant
     {
     }
 
-    protected internal class MyOtherAttribute2 : Attribute // Noncompliant
-    {
-    }
 
     public sealed class Bar : Attribute // Compliant - sealed
     { }
@@ -29,6 +26,10 @@ namespace Tests.Diagnostics
             public class InnerInnerAttr : Attribute // Compliant - effective accessibility is private
             {
             }
+        }
+
+        protected class InnerAttr2 : Attribute // Noncompliant
+        {
         }
     }
 }

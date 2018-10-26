@@ -23,6 +23,7 @@ using System;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -215,7 +216,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Action action =
                 () => Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_EmptyFile.cs",
                     new CheckFileLicense { HeaderFormat = SingleLineHeader });
-            action.Should().Throw<AssertFailedException>()
+            action.Should().Throw<UnexpectedDiagnosticException>()
                   .WithMessage("Issue with message 'Add or update the header of this file.' not expected on line 1");
         }
 

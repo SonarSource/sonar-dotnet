@@ -32,9 +32,17 @@ using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest
 {
+    public enum CompilationErrorBehavior
+    {
+        FailTest,
+        Ignore,
+        Default = Ignore
+    }
+
     internal static class Verifier
     {
-        public static void VerifyNoExceptionThrown(string path, IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers)
+        public static void VerifyNoExceptionThrown(string path,
+            IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
         {
             var compilation = SolutionBuilder
                 .Create()
@@ -42,11 +50,11 @@ namespace SonarAnalyzer.UnitTest
                 .AddDocument(path)
                 .GetCompilation();
 
-            var diagnostics = DiagnosticVerifier.GetAllDiagnostics(compilation, diagnosticAnalyzers);
+            var diagnostics = DiagnosticVerifier.GetAllDiagnostics(compilation, diagnosticAnalyzers, checkMode);
         }
 
         public static void VerifyCSharpAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            params MetadataReference[] additionalReferences)
+            CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default, params MetadataReference[] additionalReferences)
         {
             var solution = SolutionBuilder
                .Create()
@@ -59,12 +67,12 @@ namespace SonarAnalyzer.UnitTest
             // then add ability to shift result reports with this line number
             foreach (var compilation in solution.Compile())
             {
-                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer);
+                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, checkMode);
             }
         }
 
         public static void VerifyVisualBasicAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            params MetadataReference[] additionalReferences)
+            CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default, params MetadataReference[] additionalReferences)
         {
             var solution = SolutionBuilder
                .Create()
@@ -77,25 +85,26 @@ namespace SonarAnalyzer.UnitTest
             // then add ability to shift result reports with this line number
             foreach (var compilation in solution.Compile())
             {
-                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer);
+                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, checkMode);
             }
         }
 
         public static void VerifyAnalyzer(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            IEnumerable<ParseOptions> options = null, params MetadataReference[] additionalReferences)
+            IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+            params MetadataReference[] additionalReferences)
         {
-            VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, options, additionalReferences);
+            VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, options, checkMode, additionalReferences);
         }
 
         public static void VerifyUtilityAnalyzer<TMessage>(IEnumerable<string> paths, UtilityAnalyzerBase diagnosticAnalyzer,
-            string protobufPath, Action<IList<TMessage>> verifyProtobuf)
+            string protobufPath, Action<IList<TMessage>> verifyProtobuf, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
             where TMessage : IMessage<TMessage>, new()
         {
             var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths);
 
             foreach (var compilation in solutionBuilder.Compile())
             {
-                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer);
+                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, checkMode);
 
                 verifyProtobuf(ReadProtobuf(protobufPath).ToList());
             }
@@ -114,13 +123,14 @@ namespace SonarAnalyzer.UnitTest
         }
 
         public static void VerifyAnalyzer(IEnumerable<string> paths, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            IEnumerable<ParseOptions> options = null, params MetadataReference[] additionalReferences)
+            IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+            params MetadataReference[] additionalReferences)
         {
             var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths, additionalReferences);
 
             foreach (var compilation in solutionBuilder.Compile(options?.ToArray()))
             {
-                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer);
+                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, checkMode);
             }
         }
 

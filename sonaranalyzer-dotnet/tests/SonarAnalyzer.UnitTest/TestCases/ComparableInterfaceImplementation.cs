@@ -58,12 +58,12 @@ namespace Tests.Diagnostics.ComparableInterfaceImplementation
             return Compare(left, right) > 0;
         }
 
-        public static bool operator >=(MissingEquals left, MissingEquals right)
+        public static bool operator >=(Compliant left, Compliant right)
         {
             return Compare(left, right) >= 0;
         }
 
-        public static bool operator <=(MissingEquals left, MissingEquals right)
+        public static bool operator <=(Compliant left, Compliant right)
         {
             return Compare(left, right) <= 0;
         }
@@ -134,17 +134,17 @@ namespace Tests.Diagnostics.ComparableInterfaceImplementation
 
     }
 
-    public class DiferentEquals : IComparable // Noncompliant {{When implementing IComparable, you should also override Equals.}}
-//               ^^^^^^^^^^^^^^
+    public class DifferentEquals : IComparable // Noncompliant {{When implementing IComparable, you should also override Equals.}}
+//               ^^^^^^^^^^^^^^^
     {
         public string Name { get; set; }
 
         public int CompareTo(object obj)
         {
-            return Compare(this, obj as DiferentEquals);
+            return Compare(this, obj as DifferentEquals);
         }
 
-        private static int Compare(DiferentEquals left, DiferentEquals right)
+        private static int Compare(DifferentEquals left, DifferentEquals right)
         {
             if (left == null && right == null)
             {
@@ -166,50 +166,52 @@ namespace Tests.Diagnostics.ComparableInterfaceImplementation
 
         public bool Equals(object obj, string someParam)
         {
-            var other = obj as DiferentEquals;
+            var other = obj as DifferentEquals;
             return other != null && this.Name != other.Name;
         }
 
-        public void Equals(object obj)
+        public bool Equals(object obj)
         {
+            return true;
         }
 
         public bool Equals()
         {
+            return true;
         }
 
-        public bool Equals { get; set; }
+        public bool Equals { get; set; } // Ignore [CS0102]
 
-        public bool Equals => true;
+        public bool Equals => true; // Ignore [CS0102]
 
-        public bool Equals() => true;
+        public bool Equals() => true; // Ignore [CS0102,CS0111]
 
-        public static bool operator ==(DiferentEquals left, DiferentEquals right)
+        public static bool operator ==(DifferentEquals left, DifferentEquals right)
         {
             return left.Equals(right);
         }
 
-        public static bool operator !=(DiferentEquals left, DiferentEquals right)
+        public static bool operator !=(DifferentEquals left, DifferentEquals right)
         {
             return !(left == right);
         }
 
-        public static bool operator <(DiferentEquals left, DiferentEquals right)
+        public static bool operator <(DifferentEquals left, DifferentEquals right)
         {
             return Compare(left, right) < 0;
         }
 
-        public static bool operator >(DiferentEquals left, DiferentEquals right)
+        public static bool operator >(DifferentEquals left, DifferentEquals right)
         {
             return Compare(left, right) > 0;
         }
 
-        public static bool operator >=(MissingEquals left, MissingEquals right)
+        public static bool operator >=(DifferentEquals left, DifferentEquals right)
         {
             return Compare(left, right) >= 0;
         }
 
-        public static bool operator <=(MissingEquals left, MissingEquals right)
+        public static bool operator <=(DifferentEquals left, DifferentEquals right)
         {
             return Compare(left, right) <= 0;
         }
@@ -261,12 +263,12 @@ namespace Tests.Diagnostics.ComparableInterfaceImplementation
             return !(left == right);
         }
 
-        public static bool operator >=(MissingEquals left, MissingEquals right)
+        public static bool operator >=(MissingGreaterThan left, MissingGreaterThan right)
         {
             return Compare(left, right) >= 0;
         }
 
-        public static bool operator <=(MissingEquals left, MissingEquals right)
+        public static bool operator <=(MissingGreaterThan left, MissingGreaterThan right)
         {
             return Compare(left, right) <= 0;
         }
@@ -318,12 +320,12 @@ namespace Tests.Diagnostics.ComparableInterfaceImplementation
             return Compare(left, right) > 0;
         }
 
-        public static bool operator >=(MissingEquals left, MissingEquals right)
+        public static bool operator >=(MissingNotEqual left, MissingNotEqual right)
         {
             return Compare(left, right) >= 0;
         }
 
-        public static bool operator <=(MissingEquals left, MissingEquals right)
+        public static bool operator <=(MissingNotEqual left, MissingNotEqual right)
         {
             return Compare(left, right) <= 0;
         }
@@ -385,7 +387,7 @@ namespace Tests.Diagnostics.ComparableInterfaceImplementation
             return !(left == right);
         }
 
-        public static bool operator <=(MissingGreaterThanOrEqualTo left, MissingGreaterThanOrEqualTo right)
+        public static bool operator <=(MissingGreaterThanOrEqualTo left, MissingGreaterThanOrEqualTo right) // Ignore [CS0216]
         {
             return Compare(left, right) <= 0;
         }
@@ -398,7 +400,7 @@ namespace Tests.Diagnostics.ComparableInterfaceImplementation
 
         public int CompareTo(object obj)
         {
-            return Compare(this, obj as MissingNotEqual);
+            return Compare(this, obj as MissingLessThanOrEqualTo);
         }
 
         private static int Compare(MissingLessThanOrEqualTo left, MissingLessThanOrEqualTo right)
@@ -447,7 +449,7 @@ namespace Tests.Diagnostics.ComparableInterfaceImplementation
             return !(left == right);
         }
 
-        public static bool operator >=(MissingLessThanOrEqualTo left, MissingLessThanOrEqualTo right)
+        public static bool operator >=(MissingLessThanOrEqualTo left, MissingLessThanOrEqualTo right) // Ignore [CS0216]
         {
             return Compare(left, right) >= 0;
         }
@@ -518,12 +520,12 @@ namespace Tests.Diagnostics.ComparableGenericInterfaceImplementation
         {
             return Compare(left, right) > 0;
         }
-        public static bool operator >=(MissingEquals left, MissingEquals right)
+        public static bool operator >=(Compliant left, Compliant right)
         {
             return Compare(left, right) >= 0;
         }
 
-        public static bool operator <=(MissingEquals left, MissingEquals right)
+        public static bool operator <=(Compliant left, Compliant right)
         {
             return Compare(left, right) <= 0;
         }
@@ -591,17 +593,17 @@ namespace Tests.Diagnostics.ComparableGenericInterfaceImplementation
         }
     }
 
-    public class DiferentEquals : IComparable<DiferentEquals> // Noncompliant {{When implementing IComparable<T>, you should also override Equals.}}
-//               ^^^^^^^^^^^^^^
+    public class DifferentEquals : IComparable<DifferentEquals> // Noncompliant {{When implementing IComparable<T>, you should also override Equals.}}
+//               ^^^^^^^^^^^^^^^
     {
         public string Name { get; set; }
 
-        public int CompareTo(DiferentEquals obj)
+        public int CompareTo(DifferentEquals obj)
         {
             return Compare(this, obj);
         }
 
-        private static int Compare(DiferentEquals left, DiferentEquals right)
+        private static int Compare(DifferentEquals left, DifferentEquals right)
         {
             if (left == null && right == null)
             {
@@ -623,40 +625,41 @@ namespace Tests.Diagnostics.ComparableGenericInterfaceImplementation
 
         public bool Equals(object obj, string someParam)
         {
-            var other = obj as DiferentEquals;
+            var other = obj as DifferentEquals;
             return other != null && this.Name != other.Name;
         }
 
-        public void Equals(object obj)
+        public bool Equals(object obj)
         {
+            return true;
         }
 
-        public static bool operator ==(DiferentEquals left, DiferentEquals right)
+        public static bool operator ==(DifferentEquals left, DifferentEquals right)
         {
             return left.Equals(right);
         }
 
-        public static bool operator !=(DiferentEquals left, DiferentEquals right)
+        public static bool operator !=(DifferentEquals left, DifferentEquals right)
         {
             return !(left == right);
         }
 
-        public static bool operator <(DiferentEquals left, DiferentEquals right)
+        public static bool operator <(DifferentEquals left, DifferentEquals right)
         {
             return Compare(left, right) < 0;
         }
 
-        public static bool operator >(DiferentEquals left, DiferentEquals right)
+        public static bool operator >(DifferentEquals left, DifferentEquals right)
         {
             return Compare(left, right) > 0;
         }
 
-        public static bool operator >=(MissingEquals left, MissingEquals right)
+        public static bool operator >=(DifferentEquals left, DifferentEquals right)
         {
             return Compare(left, right) >= 0;
         }
 
-        public static bool operator <=(MissingEquals left, MissingEquals right)
+        public static bool operator <=(DifferentEquals left, DifferentEquals right)
         {
             return Compare(left, right) <= 0;
         }
@@ -708,12 +711,12 @@ namespace Tests.Diagnostics.ComparableGenericInterfaceImplementation
             return !(left == right);
         }
 
-        public static bool operator >=(MissingEquals left, MissingEquals right)
+        public static bool operator >=(MissingGreaterThan left, MissingGreaterThan right)
         {
             return Compare(left, right) >= 0;
         }
 
-        public static bool operator <=(MissingEquals left, MissingEquals right)
+        public static bool operator <=(MissingGreaterThan left, MissingGreaterThan right)
         {
             return Compare(left, right) <= 0;
         }
@@ -765,12 +768,12 @@ namespace Tests.Diagnostics.ComparableGenericInterfaceImplementation
             return Compare(left, right) > 0;
         }
 
-        public static bool operator >=(MissingEquals left, MissingEquals right)
+        public static bool operator >=(MissingNotEqual left, MissingNotEqual right)
         {
             return Compare(left, right) >= 0;
         }
 
-        public static bool operator <=(MissingEquals left, MissingEquals right)
+        public static bool operator <=(MissingNotEqual left, MissingNotEqual right)
         {
             return Compare(left, right) <= 0;
         }
@@ -786,7 +789,7 @@ namespace Tests.Diagnostics.ComparableGenericInterfaceImplementation
             return Compare(this, obj);
         }
 
-        private static int Compare(MissingNotEqual left, MissingNotEqual right)
+        private static int Compare(MissingGreaterThanOrEqualTo left, MissingGreaterThanOrEqualTo right)
         {
             if (left == null && right == null)
             {
@@ -812,27 +815,27 @@ namespace Tests.Diagnostics.ComparableGenericInterfaceImplementation
             return other != null && this.Name != other.Name;
         }
 
-        public static bool operator <(MissingNotEqual left, MissingNotEqual right)
+        public static bool operator <(MissingGreaterThanOrEqualTo left, MissingGreaterThanOrEqualTo right)
         {
             return Compare(left, right) < 0;
         }
 
-        public static bool operator >(MissingNotEqual left, MissingNotEqual right)
+        public static bool operator >(MissingGreaterThanOrEqualTo left, MissingGreaterThanOrEqualTo right)
         {
             return Compare(left, right) > 0;
         }
 
-        public static bool operator ==(MissingGreaterThan left, MissingGreaterThan right)
+        public static bool operator ==(MissingGreaterThanOrEqualTo left, MissingGreaterThanOrEqualTo right)
         {
             return left.Equals(right);
         }
 
-        public static bool operator !=(MissingGreaterThan left, MissingGreaterThan right)
+        public static bool operator !=(MissingGreaterThanOrEqualTo left, MissingGreaterThanOrEqualTo right)
         {
             return !(left == right);
         }
 
-        public static bool operator <=(MissingEquals left, MissingEquals right)
+        public static bool operator <=(MissingGreaterThanOrEqualTo left, MissingGreaterThanOrEqualTo right) // Ignore [CS0216]
         {
             return Compare(left, right) <= 0;
         }
@@ -848,7 +851,7 @@ namespace Tests.Diagnostics.ComparableGenericInterfaceImplementation
             return Compare(this, obj);
         }
 
-        private static int Compare(MissingNotEqual left, MissingNotEqual right)
+        private static int Compare(MissingLessThanOrEqualTo left, MissingLessThanOrEqualTo right)
         {
             if (left == null && right == null)
             {
@@ -874,27 +877,27 @@ namespace Tests.Diagnostics.ComparableGenericInterfaceImplementation
             return other != null && this.Name != other.Name;
         }
 
-        public static bool operator <(MissingNotEqual left, MissingNotEqual right)
+        public static bool operator <(MissingLessThanOrEqualTo left, MissingLessThanOrEqualTo right)
         {
             return Compare(left, right) < 0;
         }
 
-        public static bool operator >(MissingNotEqual left, MissingNotEqual right)
+        public static bool operator >(MissingLessThanOrEqualTo left, MissingLessThanOrEqualTo right)
         {
             return Compare(left, right) > 0;
         }
 
-        public static bool operator ==(MissingGreaterThan left, MissingGreaterThan right)
+        public static bool operator ==(MissingLessThanOrEqualTo left, MissingLessThanOrEqualTo right)
         {
             return left.Equals(right);
         }
 
-        public static bool operator !=(MissingGreaterThan left, MissingGreaterThan right)
+        public static bool operator !=(MissingLessThanOrEqualTo left, MissingLessThanOrEqualTo right)
         {
             return !(left == right);
         }
 
-        public static bool operator >=(MissingEquals left, MissingEquals right)
+        public static bool operator >=(MissingLessThanOrEqualTo left, MissingLessThanOrEqualTo right) // Ignore [CS0216]
         {
             return Compare(left, right) >= 0;
         }
@@ -906,6 +909,11 @@ namespace Tests.Diagnostics.BothInterfacesImplementation
     public class NonCompliant : IComparable, IComparable<NonCompliant> // Noncompliant {{When implementing IComparable or IComparable<T>, you should also override Equals, <, >, <=, >=, ==, !=.}}
     {
         public string Name { get; set; }
+
+        public int CompareTo(object obj)
+        {
+            return 0;
+        }
 
         public int CompareTo(NonCompliant obj)
         {

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,7 +19,7 @@ namespace Tests.Diagnostics
     class TestClass_06 : IEnumerable, ICollection<string> { }
     class TestClass_07 : IEnumerable, IList<string> { }
     class TestClass_08 : IEnumerable, IEnumerable<string> { }
-    class TestClass_09 : IEnumerable, Collection<string> { }
+    class TestClass_09 : Collection<string>, IEnumerable { }
     class TestClass_10<T> : IEnumerable, IList<T> { }
 
     class TestClass_11<T> : IEnumerable, ICollection, ICollection<T> { }

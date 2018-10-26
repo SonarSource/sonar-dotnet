@@ -11,6 +11,7 @@ namespace Tests.Diagnostics
     {
         public static object[] os = new int[0]; // Noncompliant {{Refactor the code to not rely on potentially unsafe array conversions.}}
 //                                  ^^^^^^^^^^
+                                                // Ignore@-2 [CS0029]
         public static object[] os2 = new object[0];
 
         static void Main(string[] args)

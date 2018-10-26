@@ -38,46 +38,19 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     {
         private const string AnalyzerFailedDiagnosticId = "AD0001";
 
-        public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer)
+        public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode)
         {
             try
             {
                 SuppressionHandler.HookSuppression();
 
-                var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzer);
+                var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzer, checkMode);
 
                 var expectedIssues = new IssueLocationCollector()
                     .GetExpectedIssueLocations(compilation.SyntaxTrees.Skip(1).First().GetText().Lines)
                     .ToList();
 
-                foreach (var diagnostic in diagnostics)
-                {
-                    VerifyIssue(expectedIssues,
-                        issue => issue.IsPrimary,
-                        diagnostic.Location,
-                        diagnostic.GetMessage(),
-                        out var issueId);
-
-                    var secondaryLocations = diagnostic.AdditionalLocations
-                        .Select((location, i) => diagnostic.GetSecondaryLocation(i))
-                        .OrderBy(x => x.Location.GetLineNumberToReport())
-                        .ThenBy(x => x.Location.GetLineSpan().StartLinePosition.Character);
-
-                    foreach (var secondaryLocation in secondaryLocations)
-                    {
-                        VerifyIssue(expectedIssues,
-                            issue => issue.IssueId == issueId && !issue.IsPrimary,
-                            secondaryLocation.Location,
-                            secondaryLocation.Message,
-                            out issueId);
-                    }
-                }
-
-                if (expectedIssues.Count != 0)
-                {
-                    Execute.Assertion.FailWith($"Issue expected but not raised on line(s) " +
-                        $"{string.Join(",", expectedIssues.Select(i => i.LineNumber))}.");
-                }
+                CompareActualToExpected(diagnostics, expectedIssues, false);
 
                 // When there are no diagnostics reported from the test (for example the FileLines analyzer
                 // does not report in each call to Verifier.VerifyAnalyzer) we skip the check for the extension
@@ -94,23 +67,59 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        public static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer)
+        private static void CompareActualToExpected(IEnumerable<Diagnostic> diagnostics, List<IIssueLocation> expectedIssues, bool compareIdToMessage)
+        {
+            foreach (var diagnostic in diagnostics)
+            {
+                VerifyIssue(expectedIssues,
+                    issue => issue.IsPrimary,
+                    diagnostic.Location,
+                    compareIdToMessage ? diagnostic.Id : diagnostic.GetMessage(),
+                    compareIdToMessage ? diagnostic.Id + ": " + diagnostic.GetMessage() : null,
+                    out var issueId);
+
+                var secondaryLocations = diagnostic.AdditionalLocations
+                    .Select((location, i) => diagnostic.GetSecondaryLocation(i))
+                    .OrderBy(x => x.Location.GetLineNumberToReport())
+                    .ThenBy(x => x.Location.GetLineSpan().StartLinePosition.Character);
+
+                foreach (var secondaryLocation in secondaryLocations)
+                {
+                    VerifyIssue(expectedIssues,
+                        issue => issue.IssueId == issueId && !issue.IsPrimary,
+                        secondaryLocation.Location,
+                        secondaryLocation.Message,
+                        null,
+                        out issueId);
+                }
+            }
+
+            if (expectedIssues.Count != 0)
+            {
+                Execute.Assertion.FailWith($"Issue expected but not raised on line(s) " +
+                    $"{string.Join(",", expectedIssues.Select(i => i.LineNumber))}.");
+            }
+        }
+
+        public static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation,
+            DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode)
         {
             var ids = diagnosticAnalyzer.SupportedDiagnostics
                 .Select(diagnostic => diagnostic.Id)
                 .ToHashSet();
 
-            return GetAllDiagnostics(compilation, new[] { diagnosticAnalyzer })
+            return GetAllDiagnostics(compilation, new[] { diagnosticAnalyzer }, checkMode)
                 .Where(d => ids.Contains(d.Id));
         }
 
-        public static void VerifyNoIssueReported(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer)
+        public static void VerifyNoIssueReported(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer,
+            CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
         {
-            GetDiagnostics(compilation, diagnosticAnalyzer).Should().BeEmpty();
+            GetDiagnostics(compilation, diagnosticAnalyzer, checkMode).Should().BeEmpty();
         }
 
         public static ImmutableArray<Diagnostic> GetAllDiagnostics(Compilation compilation,
-            IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers)
+            IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers, CompilationErrorBehavior checkMode)
         {
             var compilationOptions = compilation.Language == LanguageNames.CSharp
                 ? (CompilationOptions)new CS.CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true)
@@ -134,15 +143,27 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .Result;
 
             VerifyNoExceptionThrown(diagnostics);
-
+            if (checkMode == CompilationErrorBehavior.FailTest)
+            {
+                VerifyBuildErrors(diagnostics, compilation);
+            }
             return diagnostics;
+        }
+
+        private static void VerifyBuildErrors(ImmutableArray<Diagnostic> diagnostics, Compilation compilation)
+        {
+            var buildErrors = diagnostics.Where(d => d.Id.StartsWith("CS") && d.Severity == DiagnosticSeverity.Error);
+            var expectedBuildErrors = new IssueLocationCollector()
+                .GetExpectedBuildErrors(compilation.SyntaxTrees.Skip(1).First().GetText().Lines)
+                .ToList();
+            CompareActualToExpected(buildErrors, expectedBuildErrors, true);
         }
 
         private static void VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics) =>
             diagnostics.Where(d => d.Id == AnalyzerFailedDiagnosticId).Should().BeEmpty();
 
         private static void VerifyIssue(IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
-            Location location, string message, out string issueId)
+            Location location, string message, string extraInfo, out string issueId)
         {
             var lineNumber = location.GetLineNumberToReport();
 
@@ -152,25 +173,25 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             if (expectedIssue == null)
             {
-                Execute.Assertion.FailWith($"Issue with message '{message}' not expected on line {lineNumber}");
+                throw new UnexpectedDiagnosticException(location, $"Issue with message '{(string.IsNullOrEmpty(extraInfo) ? message : extraInfo)}' not expected on line {lineNumber}");
             }
 
             if (expectedIssue.Message != null && expectedIssue.Message != message)
             {
-                Execute.Assertion.FailWith($"Expected message on line {lineNumber} to be '{expectedIssue.Message}', but got '{message}'.");
+                throw new UnexpectedDiagnosticException(location, $"Expected message on line {lineNumber} to be '{expectedIssue.Message}', but got '{message}'.");
             }
 
             var diagnosticStart = location.GetLineSpan().StartLinePosition.Character;
 
             if (expectedIssue.Start.HasValue && expectedIssue.Start != diagnosticStart)
             {
-                Execute.Assertion.FailWith(
+                throw new UnexpectedDiagnosticException(location,
                     $"Expected issue on line {lineNumber} to start on column {expectedIssue.Start} but got column {diagnosticStart}.");
             }
 
             if (expectedIssue.Length.HasValue && expectedIssue.Length != location.SourceSpan.Length)
             {
-                Execute.Assertion.FailWith(
+                throw new UnexpectedDiagnosticException(location,
                     $"Expected issue on line {lineNumber} to have a length of {expectedIssue.Length} but got a length of {location.SourceSpan.Length}).");
             }
 

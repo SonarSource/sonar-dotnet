@@ -73,7 +73,7 @@
             }
             while (o is string s);
 
-            for (int i = 0; i < length && items[i] is string s; i++)
+            for (int i = 0; i < items.Length && items[i] is string s; i++)
             {
                 if (s != null) // Noncompliant, always true
                 {

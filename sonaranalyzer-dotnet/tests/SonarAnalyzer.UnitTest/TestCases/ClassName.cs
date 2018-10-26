@@ -1,4 +1,4 @@
-﻿namespace Tests.Diagnostics
+﻿namespace t1
 {
     class FSM // Noncompliant {{Rename class 'FSM' to match camel case naming rules, consider using 'Fsm'.}}
 //        ^^^
@@ -12,7 +12,9 @@
     class foo // Noncompliant {{Rename class 'foo' to match camel case naming rules, consider using 'Foo'.}}
     {
     }
-
+}
+namespace t2
+{
     interface foo // Noncompliant {{Rename interface 'foo' to match camel case naming rules, consider using 'IFoo'.}}
     {
     }
@@ -40,7 +42,9 @@
     interface IIIFoo // Compliant
     {
     }
-
+}
+namespace t3
+{
     partial class Foo
     {
     }
@@ -75,13 +79,16 @@
 
     }
 
-    [System.Runtime.InteropServices.ComImport()]
+    [System.Runtime.InteropServices.ComImport(),
+     System.Runtime.InteropServices.Guid("00000000-0000-0000-0000-000000000001")]
     internal interface SVsLog  // Compliant
     {
     }
 
     class IILMarker { } // Noncompliant {{Rename class 'IILMarker' to match camel case naming rules, consider using 'IilMarker'.}}
-
+}
+namespace t4
+{
     interface IILMarker { } // Compliant
 
     interface ITVImageScraper { }
@@ -98,13 +105,16 @@
     class ABCDEFGHIJK { }// Noncompliant
     class Abcd4a { }// Noncompliant
 
-    class A_B_C { } // Noncompliant;
+    class A_B_C { } // Noncompliant
 
     class AB { } // Compliant
     class AbABaa { } // Compliant
     class _AbABaa { } // Noncompliant {{Rename class '_AbABaa' to match camel case naming rules, trim underscores from the name.}}
 
     class 你好 { } // Compliant
+}
 
-    public partial class ELN { }
+namespace Tests.Diagnostics
+{
+    public partial class ELN { } // Compliant because the other subpart is generated
 }

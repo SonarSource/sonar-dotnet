@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Tests.Diagnostics
@@ -16,6 +16,7 @@ namespace Tests.Diagnostics
     {
         public bool Equals(ClassWithEqualsT other)
         {
+            return false;
         }
     }
 
@@ -23,6 +24,7 @@ namespace Tests.Diagnostics
     {
         protected bool Equals(Foo other)
         {
+            return false;
         }
     }
 }

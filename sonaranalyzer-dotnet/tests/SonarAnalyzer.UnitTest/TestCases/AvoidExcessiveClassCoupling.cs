@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Tests.Diagnostics
 {
-    interface IFoo { }
+    public interface IFoo { }
     class FooBase : IFoo { }
     class Foo1 : FooBase { }
     public struct MyStruct { }

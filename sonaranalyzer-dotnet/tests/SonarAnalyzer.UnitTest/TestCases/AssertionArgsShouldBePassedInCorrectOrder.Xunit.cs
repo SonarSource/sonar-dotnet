@@ -3,9 +3,9 @@ using Xunit;
 
 namespace Tests.Diagnostics
 {
-    [Fact]
     class Program
     {
+        [Fact]
         public void Foo()
         {
             var str = "";

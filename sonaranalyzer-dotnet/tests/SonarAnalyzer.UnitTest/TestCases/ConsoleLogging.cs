@@ -8,11 +8,10 @@ namespace Tests.Diagnostics
     {
         private static byte[] GenerateKey(byte[] key)
         {
-            GenerateKey2(key);
             Console.WriteLine("debug key = {0}", BitConverter.ToString(key)); //Noncompliant {{Remove this logging statement.}}
 //          ^^^^^^^^^^^^^^^^^
 
-            Console.WriteLine(); //Noncopmliant
+            Console.WriteLine(); //Noncompliant
 //          ^^^^^^^^^^^^^^^^^
 
             Console.Write("debug key = {0}", BitConverter.ToString(key)); //Noncompliant
@@ -45,19 +44,19 @@ namespace Tests.Diagnostics
             get
             {
                 Console.WriteLine("Property1 read"); // Noncompliant
-                return property;
+                return property1;
             }
             set
             {
                 Console.WriteLine("Property1 written"); // Noncompliant
-                property = value;
+                property1 = value;
             }
         }
     }
 
     internal class Exceptions_MethodLevelConditionals
     {
-        [System.Diagnostics.Conditional("Wrong conditional")]
+        [System.Diagnostics.Conditional("Wrong conditional")] // Ignore [CS0633]
         public static void LogDebugA(string message)
         {
             Console.WriteLine(); // Noncompliant - wrong conditional

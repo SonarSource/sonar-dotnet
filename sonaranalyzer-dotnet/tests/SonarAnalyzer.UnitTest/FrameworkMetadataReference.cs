@@ -62,6 +62,12 @@ namespace SonarAnalyzer.UnitTest
         internal static MetadataReference SystemRuntimeSerialization { get; }
             = Create("System.Runtime.Serialization.dll");
 
+        internal static MetadataReference SystemRuntime { get; }
+            = Create("System.Runtime.dll");
+
+        internal static MetadataReference SystemGlobalization { get; }
+            = Create("System.Globalization.dll");
+
         internal static MetadataReference SystemServiceModel { get; }
             = Create("System.ServiceModel.dll");
 

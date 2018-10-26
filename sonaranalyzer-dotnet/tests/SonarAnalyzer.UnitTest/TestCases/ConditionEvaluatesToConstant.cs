@@ -140,9 +140,10 @@ namespace Tests.Diagnostics
             }
         }
 
-        void Pointer(int* a)
+        void Pointer(int* a) // Ignore [CS0214]
         {
-            if (a != null) // Compliant
+            if (a != null)  // Ignore [CS0214]
+                            // Compliant
             {
             }
         }
@@ -255,7 +256,7 @@ namespace Tests.Diagnostics
 
         public void Method8(bool cond)
         {
-            foreach (var item in new int[][] { { 1, 2, 3 } })
+            foreach (var item in new int[][] { new int[] { 1, 2, 3 } })
             {
                 foreach (var i in item)
                 {
@@ -420,7 +421,7 @@ namespace Tests.Diagnostics
                 x = true;
             }
         }
-
+        static object GetObject() { return null; }
         public void M()
         {
             var o1 = GetObject();
@@ -498,8 +499,8 @@ namespace Tests.Diagnostics
             }
 
             var fail = false;
-            Action a = new Action(() => { fail = true; });
-            a();
+            Action ac = new Action(() => { fail = true; });
+            ac();
             if (!fail) // This is compliant, we don't know anything about 'fail'
             {
             }
@@ -772,12 +773,17 @@ namespace Tests.Diagnostics
             return false;
         }
 
+        public static bool operator !=(ConditionEvaluatesToConstant a, ConditionEvaluatesToConstant b)
+        {
+            return false;
+        }
+
         public void StringEmpty(string s1)
         {
             string s = null;
             if (string.IsNullOrEmpty(s)) { } // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
             if (string.IsNullOrWhiteSpace(s)) { } // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
-            if (string.IsInterned(s)) { }
+            if (string.IsInterned(s) != null) { }
             s = "";
             if (string.IsNullOrEmpty(s)) { } // Noncompliant
 //Secondary@-1
@@ -829,7 +835,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        int ValueEquals(int i, int j)
+        void ValueEquals(int i, int j)
         {
             if (i == j)
             {
@@ -840,7 +846,7 @@ namespace Tests.Diagnostics
 
         void DefaultExpression(object o)
         {
-            if (default(o) == null) { } // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+            if (default(object) == null) { } // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
             int? nullableInt = null;
             if (nullableInt == null) { } // Noncompliant
             if (default(int?) == null) { } // Noncompliant
@@ -859,6 +865,7 @@ namespace Tests.Diagnostics
             where TStruct : struct
         {
             if (default(TStruct) != null) { } // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+                                              // Ignore@-1 [CS0019]
         }
 
         void DefaultUnconstrainedGenericExpression<T>(T arg)
@@ -951,7 +958,7 @@ namespace Tests.Diagnostics
             if (object.Equals(i, j)) { } // Noncompliant
         }
 
-        async Task Test_Await_Constraint(object o, Task t)
+        async Task Test_Await_Constraint(Task<string> t)
         {
             if (t != null)
             {
@@ -1203,6 +1210,7 @@ namespace Tests.Diagnostics
             public static void M(MyStructWithNoOperator a)
             {
                 if (a == null) // Noncompliant, also a compiler error
+                               // Ignore@-1 [CS0019]
                 { // Secondary
                 }
             }
@@ -1384,7 +1392,7 @@ namespace Tests.Diagnostics
                 {
                     Console.WriteLine();
                 }
-                if (Exceptions.F)
+                if (ConstantExpressionsAreExcluded.F)
                 {
                     Console.WriteLine();
                 }
@@ -1400,7 +1408,7 @@ namespace Tests.Diagnostics
                     Console.WriteLine();
                 }
                 while (ConstantExpressionsAreExcluded.F);
-                var x = Exceptions.T ? 1 : 2;
+                var x = ConstantExpressionsAreExcluded.T ? 1 : 2;
             }
         }
     }
@@ -1432,7 +1440,7 @@ namespace Tests.Diagnostics
             Stream stream = null;
             try
             {
-                stream = File.Open("file");
+                stream = File.Open("file", FileMode.Open);
                 using (var reader = new StreamReader(stream))
                 {
                     // read the file here
@@ -1496,7 +1504,7 @@ namespace Tests.Diagnostics
         {
             object o = null;
             _foo1 = o;
-            System.Threading.Monitor.Wait(); // This is a multi-threaded application, the fields could change
+            System.Threading.Monitor.Wait(o); // This is a multi-threaded application, the fields could change
             if (_foo1 != null) { } // Compliant S2583
             if (_foo1 == null) { } // Compliant S2589
             if (o != null) { } // Noncompliant

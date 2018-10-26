@@ -30,7 +30,7 @@ namespace Tests.Diagnostics
             var c = true && !(new int[0].Length == 0); // Noncompliant
 
             int[] args = { };
-            var a = !!(args.Length == 0); // Noncompliant
+            bool ba = !!(args.Length == 0); // Noncompliant
 
             SomeFunc(!(a >= 10)); // Noncompliant
         }

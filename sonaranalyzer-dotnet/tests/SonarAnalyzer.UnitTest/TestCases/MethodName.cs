@@ -35,11 +35,11 @@
 
         public void Should_Define_Convention_That_Returns_Metadata_Module_Type() { } // Compliant
 
-        public void Should_return_JSON_serialized_querystring { } // Compliant
+        public void Should_return_JSON_serialized_querystring() { } // Compliant
 
-        public void IsLocal_should_return_true_if_userHostAddr_is_localhost_IPV4 { } // Compliant
+        public void IsLocal_should_return_true_if_userHostAddr_is_localhost_IPV4() { } // Compliant
 
-        public void 你好 { }
+        public void 你好() { }
 
         public void Łódź() { }
 
@@ -50,14 +50,15 @@
         public int ArrowedProperty2
         {
             get => 41;
-            set => null;
+            set => bar();
         }
     }
 
-    [System.Runtime.InteropServices.ComImport()]
-    public class MMMM
+    [System.Runtime.InteropServices.ComImport(),
+     System.Runtime.InteropServices.Guid("00000000-0000-0000-0000-000000000001")]
+    public abstract class MMMM
     {
-        public void MMMMMethod() { } // Compliant
+        public abstract void MMMMMethod(); // Compliant
     }
 
     public class Base
@@ -74,13 +75,13 @@
 
     public partial class SomeClass
     {
-        public partial void MY_METHOD()
+        partial void MY_METHOD()
         {
         }
     }
 
     public class Invalid
     {
-        public int () => 42;
+        public int () => 42; // Ignore [CS1519,CS8124,CS1519]
     }
 }

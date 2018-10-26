@@ -147,7 +147,7 @@ namespace Tests.TestCases
             }
             else
             {
-                elem = new NonExistendType();
+                elem = new NonExistentType(); // Ignore [CS0246]
             }
 
             if (false) // Noncompliant

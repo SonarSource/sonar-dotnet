@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs",
                 new AssertionArgsShouldBePassedInCorrectOrder(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
+                additionalReferences:NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
         }
 
         [DataTestMethod]
@@ -59,7 +59,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.Xunit.cs",
                 new AssertionArgsShouldBePassedInCorrectOrder(),
-                additionalReferences: NuGetMetadataReference.XunitFramework(testFwkVersion)
+                additionalReferences:
+                    NuGetMetadataReference.XunitFramework(testFwkVersion).
+                    Concat(Enumerable.Repeat(FrameworkMetadataReference.Netstandard, 1))
                     .ToArray());
         }
     }

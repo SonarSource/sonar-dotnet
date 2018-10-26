@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -34,7 +34,7 @@ namespace Tests.Diagnostics
                 //...
             }
 
-
+            Action a = () => { };
             {} a(); if (true) { }
 
             /*}*/  if (true)

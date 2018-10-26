@@ -93,7 +93,7 @@ namespace Tests.Diagnostics
 
         void Foo7(int a)
         {
-            var res =
+            Action<int> res =
                 i =>
                 {
                     throw new ArgumentNullException("i");
@@ -105,7 +105,7 @@ namespace Tests.Diagnostics
 
         void Foo8(int a)
         {
-            var res =
+            Action<int, int> res =
                 (i, j) =>
                 {
                     throw new ArgumentNullException("i");
@@ -122,7 +122,7 @@ namespace Tests.Diagnostics
             throw new ArgumentOutOfRangeException(nameof(item2), item2, null); // Noncompliant
         }
 
-        public int Foo
+        public int Foo9
         {
             get
             {
@@ -151,9 +151,9 @@ namespace Tests.Diagnostics
 
         void ComplexCase(int a)
         {
-            var simple = b =>
+            Action<int> simple = b =>
                 {
-                    var parenthesized = (c, d) =>
+                    Action<int, int> parenthesized = (c, d) =>
                     {
                         throw new ArgumentNullException("a"); // Noncompliant
                         throw new ArgumentNullException("b"); // Noncompliant
@@ -161,7 +161,7 @@ namespace Tests.Diagnostics
                 };
         }
 
-        void Bar(int a)
+        void Bar2(int a)
         {
             // See https://github.com/SonarSource/sonar-csharp/issues/1867
             throw new ArgumentNullException(null, string.Empty); // Noncompliant

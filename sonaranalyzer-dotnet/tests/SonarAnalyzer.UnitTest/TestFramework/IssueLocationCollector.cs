@@ -36,6 +36,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private const string ISSUE_IDS_PATTERN = @"\s*(\[(?<issueIds>.*)\])*";
         private const string MESSAGE_PATTERN = @"\s*(\{\{(?<message>.*)\}\})*";
         private const string TYPE_PATTERN = @"(?<issueType>Noncompliant|Secondary)";
+        private const string BUILD_ERROR_PATTERN = @"Ignore";
         private const string PRECISE_LOCATION_PATTERN = @"\s*(?<position>\^+)\s*";
         private const string NO_PRECISE_LOCATION_PATTERN = @"\s*(?<!\^+\s{1})";
         private const string COMMENT_PATTERN = @"(?<comment>\/\/|\')";
@@ -44,6 +45,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             COMMENT_PATTERN + "*" + NO_PRECISE_LOCATION_PATTERN + TYPE_PATTERN + OFFSET_PATTERN + ISSUE_IDS_PATTERN + MESSAGE_PATTERN;
         private const string PRECISE_ISSUE_LOCATION_PATTERN =
             @"^" + COMMENT_PATTERN + PRECISE_LOCATION_PATTERN + TYPE_PATTERN + "*" + OFFSET_PATTERN + ISSUE_IDS_PATTERN + MESSAGE_PATTERN + "$";
+        internal const string BUILD_ERROR_LOCATION_PATTERN =
+            COMMENT_PATTERN + "*" + NO_PRECISE_LOCATION_PATTERN + BUILD_ERROR_PATTERN + OFFSET_PATTERN + ISSUE_IDS_PATTERN + "$";
 
         public IList<IIssueLocation> GetExpectedIssueLocations(IEnumerable<TextLine> lines)
         {
@@ -58,6 +61,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .ToList();
 
             return MergeLocations(locations, preciseLocations);
+        }
+
+        internal IList<IIssueLocation> GetExpectedBuildErrors(IEnumerable<TextLine> lines)
+        {
+            return lines
+                .SelectMany(GetBuildErrorsLocations)
+                .WhereNotNull()
+                .ToList()
+                .Cast<IIssueLocation>()
+                .ToList();
         }
 
         public static bool IsNotIssueLocationLine(string line)
@@ -92,9 +105,19 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         internal /*for testing*/ IEnumerable<IssueLocation> GetIssueLocations(TextLine line)
         {
+            return GetLocations(line, ISSUE_LOCATION_PATTERN);
+        }
+
+        internal /*for testing*/ IEnumerable<IssueLocation> GetBuildErrorsLocations(TextLine line)
+        {
+            return GetLocations(line, BUILD_ERROR_LOCATION_PATTERN);
+        }
+
+        private IEnumerable<IssueLocation> GetLocations(TextLine line, string pattern)
+        {
             var lineText = line.ToString();
 
-            var match = Regex.Match(lineText, ISSUE_LOCATION_PATTERN);
+            var match = Regex.Match(lineText, pattern);
             if (match.Success)
             {
                 return CreateIssueLocations(match, line.LineNumber + 1);

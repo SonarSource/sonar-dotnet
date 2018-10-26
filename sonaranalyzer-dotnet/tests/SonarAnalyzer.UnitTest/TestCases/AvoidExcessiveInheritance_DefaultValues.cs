@@ -1,24 +1,24 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
-    class BaseClass { }
+    public class BaseClass { }
 
-    class DerivedClass_1 : BaseClass { }
+    public class DerivedClass_1 : BaseClass { }
 
-    class DerivedClass_2 : DerivedClass_1 { }
+    public class DerivedClass_2 : DerivedClass_1 { }
 
-    class DerivedClass_3 : DerivedClass_2 { }
+    public class DerivedClass_3 : DerivedClass_2 { }
 
-    class DerivedClass_4 : DerivedClass_3 { }
+    public class DerivedClass_4 : DerivedClass_3 { }
 
-    class DerivedClass_5 : DerivedClass_4 { }
+    public class DerivedClass_5 : DerivedClass_4 { }
 
-    class DerivedClass_6 : DerivedClass_5 { } // Noncompliant {{This class has 6 parents which is greater than 5 authorized.}}
-//        ^^^^^^^^^^^^^^
-    class DerivedClass_7 : DerivedClass_6 { } // Noncompliant {{This class has 7 parents which is greater than 5 authorized.}}
-//        ^^^^^^^^^^^^^^
+    public class DerivedClass_6 : DerivedClass_5 { } // Noncompliant {{This class has 6 parents which is greater than 5 authorized.}}
+//               ^^^^^^^^^^^^^^
+    public class DerivedClass_7 : DerivedClass_6 { } // Noncompliant {{This class has 7 parents which is greater than 5 authorized.}}
+//               ^^^^^^^^^^^^^^
 
     public class SubClass_0 : Exception { }
     public class SubClass_1 : SubClass_0 { }
