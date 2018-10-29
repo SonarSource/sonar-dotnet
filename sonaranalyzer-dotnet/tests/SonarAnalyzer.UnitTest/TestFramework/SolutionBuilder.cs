@@ -58,13 +58,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             var project = Solution.AddProject(projectName, projectName, languageName);
 
-            var projectBuilder = ProjectBuilder.FromProject(project)
-                .AddReferences(
-                    FrameworkMetadataReference.Mscorlib,
-                    FrameworkMetadataReference.System,
-                    FrameworkMetadataReference.SystemCore,
-                    FrameworkMetadataReference.SystemRuntime,
-                    FrameworkMetadataReference.SystemGlobalization);
+            var projectBuilder = ProjectBuilder
+                .FromProject(project)
+                .AddReferences(FrameworkMetadataReference.Mscorlib)
+                .AddReferences(FrameworkMetadataReference.System)
+                .AddReferences(FrameworkMetadataReference.SystemCore)
+                .AddReferences(FrameworkMetadataReference.SystemRuntime)
+                .AddReferences(FrameworkMetadataReference.SystemGlobalization);
 
             if (createExtraEmptyFile)
             {
@@ -81,9 +81,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static SolutionBuilder Create() =>
             FromSolution(new AdhocWorkspace().CurrentSolution);
 
-        public static SolutionBuilder CreateSolutionFromPaths(IEnumerable<string> paths, params MetadataReference[] additionalReferences)
+        public static SolutionBuilder CreateSolutionFromPaths(IEnumerable<string> paths,
+            IEnumerable<MetadataReference> additionalReferences = null)
         {
-            if (paths == null || !paths.Any())
+            if (paths == null ||
+                !paths.Any())
             {
                 throw new ArgumentException("Please specify at least one file path to analyze.", nameof(paths));
             }
@@ -99,9 +101,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .AddDocuments(paths)
                 .AddReferences(additionalReferences);
 
-            if (additionalReferences.Any(r => r.Display.Contains("\\netstandard")))
+            if (additionalReferences != null &&
+                additionalReferences.Any(r => r.Display.Contains("\\netstandard")))
             {
-                project = project.AddReference(FrameworkMetadataReference.Netstandard);
+                project = project.AddReferences(FrameworkMetadataReference.Netstandard);
             }
 
             return project.GetSolution();

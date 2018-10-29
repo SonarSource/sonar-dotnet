@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     {
         public static void VerifyCodeFix(string path, string pathToExpected, string pathToBatchExpected,
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider, string codeFixTitle,
-            IEnumerable<ParseOptions> options = null, params MetadataReference[] additionalReferences)
+            IEnumerable<ParseOptions> options = null, IEnumerable<MetadataReference> additionalReferences = null)
         {
             var parseOptions = options ?? ParseOptionsHelper.GetParseOptionsByFileExtension(Path.GetExtension(path));
 
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        private static Document CreateDocument(string path, params MetadataReference[] additionalReferences) =>
+        private static Document CreateDocument(string path, IEnumerable<MetadataReference> additionalReferences) =>
             SolutionBuilder.Create()
                 .AddProject(AnalyzerLanguage.FromPath(path))
                 .AddReferences(additionalReferences)

@@ -57,11 +57,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public Document FindDocument(string name) =>
             Project.Documents.Single(d => d.Name == name);
 
-        public ProjectBuilder AddReference(MetadataReference reference) =>
-            FromProject(Project.AddMetadataReference(reference));
-
-        public ProjectBuilder AddReferences(params MetadataReference[] references) =>
-            FromProject(Project.AddMetadataReferences(references));
+        public ProjectBuilder AddReferences(IEnumerable<MetadataReference> references) =>
+            FromProject(Project.AddMetadataReferences(references ?? Enumerable.Empty<MetadataReference>()));
 
         public ProjectBuilder AddProjectReference(Func<SolutionBuilder, ProjectId> getProjectId) =>
             FromProject(Project.AddProjectReference(new ProjectReference(getProjectId(GetSolution()))));

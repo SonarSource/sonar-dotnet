@@ -42,9 +42,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
             using (var workspace = new AdhocWorkspace())
             {
                 var document = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                    .AddMetadataReference(FrameworkMetadataReference.Mscorlib)
-                    .AddMetadataReference(FrameworkMetadataReference.System)
-                    .AddMetadataReference(FrameworkMetadataReference.SystemCore)
+                    .AddMetadataReferences(FrameworkMetadataReference.Mscorlib)
+                    .AddMetadataReferences(FrameworkMetadataReference.System)
+                    .AddMetadataReferences(FrameworkMetadataReference.SystemCore)
                     .AddDocument("test", SymbolHelperTest.TestInput);
                 var compilation = document.Project.GetCompilationAsync().Result;
                 var tree = compilation.SyntaxTrees.First();

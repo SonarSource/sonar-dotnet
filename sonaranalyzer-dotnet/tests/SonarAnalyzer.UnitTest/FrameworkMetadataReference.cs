@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using Microsoft.CodeAnalysis;
 
@@ -30,72 +32,73 @@ namespace SonarAnalyzer.UnitTest
         private static readonly string systemAssembliesFolder =
             new FileInfo(typeof(object).Assembly.Location).Directory.FullName;
 
-        private static MetadataReference Create(string assemblyName) =>
-            MetadataReference.CreateFromFile(Path.Combine(systemAssembliesFolder, assemblyName));
+        private static IEnumerable<MetadataReference> Create(string assemblyName) =>
+            ImmutableArray.Create((MetadataReference)MetadataReference.CreateFromFile(
+                Path.Combine(systemAssembliesFolder, assemblyName)));
 
         #endregion Helpers
 
-        internal static MetadataReference MicrosoftVisualBasic { get; }
+        internal static IEnumerable<MetadataReference> MicrosoftVisualBasic { get; }
             = Create("Microsoft.VisualBasic.dll");
 
-        internal static MetadataReference Mscorlib { get; }
+        internal static IEnumerable<MetadataReference> Mscorlib { get; }
             = Create("mscorlib.dll");
 
-        internal static MetadataReference Netstandard { get; }
+        internal static IEnumerable<MetadataReference> Netstandard { get; }
             = Create("netstandard.dll");
 
-        internal static MetadataReference System { get; }
+        internal static IEnumerable<MetadataReference> System { get; }
             = Create("System.dll");
 
-        internal static MetadataReference SystemComponentModelComposition { get; }
+        internal static IEnumerable<MetadataReference> SystemComponentModelComposition { get; }
             = Create("System.ComponentModel.Composition.dll");
 
-        internal static MetadataReference SystemCore { get; }
+        internal static IEnumerable<MetadataReference> SystemCore { get; }
             = Create("System.Core.dll");
 
-        internal static MetadataReference SystemData { get; }
+        internal static IEnumerable<MetadataReference> SystemData { get; }
             = Create("System.Data.dll");
 
-        internal static MetadataReference SystemDirectoryServices { get; }
+        internal static IEnumerable<MetadataReference> SystemDirectoryServices { get; }
             = Create("System.DirectoryServices.dll");
 
-        internal static MetadataReference SystemDrawing { get; }
+        internal static IEnumerable<MetadataReference> SystemDrawing { get; }
             = Create("System.Drawing.dll");
 
-        internal static MetadataReference SystemRuntimeSerialization { get; }
-            = Create("System.Runtime.Serialization.dll");
-
-        internal static MetadataReference SystemRuntime { get; }
-            = Create("System.Runtime.dll");
-
-        internal static MetadataReference SystemGlobalization { get; }
+        internal static IEnumerable<MetadataReference> SystemGlobalization { get; }
             = Create("System.Globalization.dll");
 
-        internal static MetadataReference SystemServiceModel { get; }
-            = Create("System.ServiceModel.dll");
-
-        internal static MetadataReference SystemWeb { get; }
-            = Create("System.Web.dll");
-
-        internal static MetadataReference SystemWindowsForms { get; }
-            = Create("System.Windows.Forms.dll");
-
-        internal static MetadataReference SystemXaml { get; }
-            = Create("System.Xaml.dll");
-
-        internal static MetadataReference SystemXml { get; }
-            = Create("System.Xml.dll");
-
-        internal static MetadataReference SystemXmlLinq { get; }
-            = Create("System.Xml.Linq.dll");
-
-        internal static MetadataReference SystemReflection { get; }
+        internal static IEnumerable<MetadataReference> SystemReflection { get; }
             = Create("System.Reflection.dll");
 
-        internal static MetadataReference SystemXmlXDocument { get; }
-            = Create("System.Xml.XDocument.dll");
+        internal static IEnumerable<MetadataReference> SystemRuntime { get; }
+            = Create("System.Runtime.dll");
 
-        internal static MetadataReference SystemThreadingTasks { get; }
+        internal static IEnumerable<MetadataReference> SystemRuntimeSerialization { get; }
+            = Create("System.Runtime.Serialization.dll");
+
+        internal static IEnumerable<MetadataReference> SystemServiceModel { get; }
+            = Create("System.ServiceModel.dll");
+
+        internal static IEnumerable<MetadataReference> SystemThreadingTasks { get; }
             = Create("System.Threading.Tasks.dll");
+
+        internal static IEnumerable<MetadataReference> SystemWeb { get; }
+            = Create("System.Web.dll");
+
+        internal static IEnumerable<MetadataReference> SystemWindowsForms { get; }
+            = Create("System.Windows.Forms.dll");
+
+        internal static IEnumerable<MetadataReference> SystemXaml { get; }
+            = Create("System.Xaml.dll");
+
+        internal static IEnumerable<MetadataReference> SystemXml { get; }
+            = Create("System.Xml.dll");
+
+        internal static IEnumerable<MetadataReference> SystemXmlLinq { get; }
+            = Create("System.Xml.Linq.dll");
+
+        internal static IEnumerable<MetadataReference> SystemXmlXDocument { get; }
+            = Create("System.Xml.XDocument.dll");
     }
 }

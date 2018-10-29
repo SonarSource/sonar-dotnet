@@ -66,45 +66,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
             }
         }
 
-        public class MyStream : System.IO.Stream
-        {
-            public override bool CanRead { get; }
-            public override bool CanSeek { get; }
-            public override bool CanWrite { get; }
-            public override long Length { get; }
-            public override long Position { get; set; }
-
-            public override void Flush()
-            {
-                throw new System.NotImplementedException();
-            }
-
-            public override int Read(byte[] buffer, int offset, int count)
-            {
-                throw new System.NotImplementedException();
-            }
-
-            public override long Seek(long offset, SeekOrigin origin)
-            {
-                throw new System.NotImplementedException();
-            }
-
-            public override void SetLength(long value)
-            {
-                throw new System.NotImplementedException();
-            }
-
-            public override void Write(byte[] buffer, int offset, int count)
-            {
-                throw new System.NotImplementedException();
-            }
-
-            protected override void Dispose(bool disposing)
-            {
-
-            }
-        }
-
         [TestMethod]
         public void SonarAnalysis_ByDefault_ExecuteRule()
         {
@@ -155,7 +116,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 {
                     foreach (var testCase in this.TestCases)
                     {
-                        if (testCase.Analyzer.GetType() == typeof(AnonymousDelegateEventUnsubscribe))
+                        if (testCase.Analyzer is AnonymousDelegateEventUnsubscribe)
                         {
                             Verifier.VerifyNoIssueReported(testCase.Path, testCase.Analyzer);
                         }
