@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -12,14 +12,10 @@ namespace Tests.Diagnostics
         public bool Equals(SealedClassImplementsIEquatable other) => true;
     }
 
-    public static class StaticClassImplementsIEquatable : IEquatable<StaticClassImplementsIEquatable> // Compliant
-    {
-        public bool Equals(StaticClassImplementsIEquatable other) => true;
-    }
-
     public class ClassImplementsIEquatable : IEquatable<ClassImplementsIEquatable> // Noncompliant {{Seal class 'ClassImplementsIEquatable' or implement 'IEqualityComparer<T>' instead.}}
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^
     {
+        public bool Equals(ClassImplementsIEquatable other) => true;
     }
 
     public class ClassProperlyImplementsIEquatable : IEquatable<ClassProperlyImplementsIEquatable> // Noncompliant
@@ -59,7 +55,7 @@ namespace Tests.Diagnostics
 
         private class PrivateClass : IEquatable<PrivateClass> // Compliant because private
         {
-            public bool Equals(InternalClass other) => false;
+            public bool Equals(PrivateClass other) => false;
         }
     }
 }

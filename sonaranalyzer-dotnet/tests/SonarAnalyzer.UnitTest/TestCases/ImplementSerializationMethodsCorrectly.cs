@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace Tests.Diagnostics
@@ -11,7 +11,7 @@ namespace Tests.Diagnostics
 //                  ^^^^^^^^^^^^^
 
         [OnSerialized]
-        int OnSerialized(StreamingContext context) { } // Noncompliant {{Make this method return 'void'.}}
+        int OnSerialized(StreamingContext context) { return 1; } // Noncompliant {{Make this method return 'void'.}}
 
         [OnDeserializing]
         void OnDeserializing() { } // Noncompliant  {{Make this method have a single parameter of type 'StreamingContext'.}}
@@ -19,7 +19,7 @@ namespace Tests.Diagnostics
         [OnDeserialized]
         void OnDeserialized(StreamingContext context, string str) { } // Noncompliant {{Make this method have a single parameter of type 'StreamingContext'.}}
 
-        void OnDeserialized(StreamingContext context, string str) { } // Compliant
+        void OnDeserialized2(StreamingContext context, string str) { } // Compliant
 
         [OnDeserialized]
         void OnDeserialized<T>(StreamingContext context) { } // Noncompliant {{Make this method have no type parameters.}}
@@ -35,9 +35,5 @@ namespace Tests.Diagnostics
 
         [OnDeserializing]
         public int OnDeserializing5<T>() { throw new NotImplementedException(); } // Noncompliant {{Make this method 'private', return 'void', have no type parameters and have a single parameter of type 'StreamingContext'.}}
-
-        [OnDeserializing]
-        public int  { throw new NotImplementedException(); }
     }
-
 }

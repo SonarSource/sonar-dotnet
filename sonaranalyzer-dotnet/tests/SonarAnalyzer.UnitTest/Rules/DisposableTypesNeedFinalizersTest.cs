@@ -34,5 +34,16 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\DisposableTypesNeedFinalizers.cs",
                 new DisposableTypesNeedFinalizers());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DisposableTypesNeedFinalizers_InvalidCode()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+public class Foo_05 : IDisposable
+{
+    private HandleRef;
+}", new DisposableTypesNeedFinalizers(), checkMode: CompilationErrorBehavior.Ignore);
+        }
     }
 }

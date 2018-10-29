@@ -6,9 +6,32 @@ using System.Security.Permissions;
 namespace MyLibrary
 {
 
+    // Noncompliant - in Part2.cs
 
 
-    // Noncompliant (in *part2.cs)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     [Serializable]
     public partial class PartialFoo : ISerializable

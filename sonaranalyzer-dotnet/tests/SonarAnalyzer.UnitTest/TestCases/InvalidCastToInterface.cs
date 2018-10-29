@@ -32,7 +32,9 @@ namespace Tests.Diagnostics
     public class InvalidCastToInterface
     {
         public class Nested : MyClass4, IDisposable
-        { }
+        {
+            public void Dispose() { }
+        }
 
         static void Main()
         {
@@ -51,11 +53,11 @@ namespace Tests.Diagnostics
             IMyInterface i = new MyClass3();
             var c = (IMyInterface2)i; // Compliant
             IMyInterface4 ii = null;
-            var c = (IMyInterface2)i; // Compliant
-            var d = (IMyInterface3)i;
+            var d = (IMyInterface2)i; // Compliant
+            var e = (IMyInterface3)i;
 
             var o = (object)true;
-            d = (IMyInterface3)o;
+            e = (IMyInterface3)o;
 
             var coll = (IEnumerable<int>)new List<int>();
 
@@ -67,7 +69,7 @@ namespace Tests.Diagnostics
 
     public class DerivedNode : MiddleNode, IDisposable
     {
-
+        public void Dispose() { }
     }
     public class MiddleNode : Node
     {
@@ -144,30 +146,24 @@ namespace Tests.Diagnostics
     {
         public void Method<T>(T generic) where T : new()
         {
-            IFoo ifoo;
-            IBar ibar;
-            Foo foo;
-            Bar bar;
-            FooBar foobar;
-            FinalBar finalbar;
-            object o;
+            IFoo ifoo = null;
+            IBar ibar = null;
+            Foo foo = null;
+            Bar bar = null;
+            FooBar foobar = null;
+            FinalBar finalbar = null;
+            object o = null;
 
             o = (IFoo)bar;  // Noncompliant
             o = (IFoo)ibar;
-            o = (Foo)bar; // Compliant; causes compiler error
+            o = (Foo)bar; // Compliant; causes compiler error // Error [CS0030] - invalid cast
             o = (Foo)ibar;
-            o = (IFoo)finalbar; // Compliant; causes compiler error
-            o = (IFoo)T;
-            o = (T)IFoo;
-            o = (Bar)generic; // Compliant; causes compiler error
+            o = (IFoo)finalbar; // Compliant; causes compiler error // Error [CS0030] - invalid cast
+            o = (Bar)generic; // Compliant; causes compiler error // Error [CS0030] - invalid cast
 
             o = bar  as IFoo;
             o = ibar as IFoo;
-            o = bar  as Foo;
             o = ibar as Foo;
-            o = finalbar as IFoo;
-            o = T as IFoo;
-            o = IFoo as T;
             o = generic as Bar;
 
             o = bar  is IFoo;
@@ -175,8 +171,6 @@ namespace Tests.Diagnostics
             o = bar  is Foo;
             o = ibar is Foo;
             o = finalbar is IFoo;
-            o = T is IFoo;
-            o = IFoo is T;
             o = generic is Bar;
         }
     }

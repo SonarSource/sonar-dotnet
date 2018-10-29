@@ -12,7 +12,6 @@ namespace Tests.Diagnostics
     class S3996_Bar : S3996_Foo
     {
         public override string Url { get; set; } // Compliant
-        override string Url_InvalidCode { get; set; } // Compliant
     }
 
     class S3996
@@ -71,8 +70,6 @@ namespace Tests.Diagnostics
     class S3995_Bar : S3995_Foo
     {
         public override string Uri() => ""; // Compliant
-
-        public override string Uri_InvalidCode() => ""; // Compliant
     }
 
     class S3995
@@ -187,7 +184,6 @@ namespace Tests.Diagnostics
             Uri result;
             // Do not raise issues when using Uri class
             Uri.TryCreate("", UriKind.Absolute, out result); // Compliant
-            Uri.TryCreate(new object(), UriKind.Absolute, out result); // Compliant - invalid code
 
             result = new Uri("foo");
             result = new Uri("foo", true);

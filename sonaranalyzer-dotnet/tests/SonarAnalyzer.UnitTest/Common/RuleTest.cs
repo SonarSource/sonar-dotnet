@@ -104,8 +104,8 @@ namespace SonarAnalyzer.UnitTest.Common
                 .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
                 .ToList();
 
-            Verifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\InvalidSyntax.cs", analyzers);
-            Verifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\SpecialCases.cs", analyzers);
+            Verifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\InvalidSyntax.cs", analyzers, CompilationErrorBehavior.Ignore);
+            Verifier.VerifyNoExceptionThrown(@"TestCasesForRuleFailure\SpecialCases.cs", analyzers, CompilationErrorBehavior.Ignore);
         }
 
         [TestMethod]

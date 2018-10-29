@@ -19,10 +19,8 @@
  */
 
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 
 namespace SonarAnalyzer.Rules

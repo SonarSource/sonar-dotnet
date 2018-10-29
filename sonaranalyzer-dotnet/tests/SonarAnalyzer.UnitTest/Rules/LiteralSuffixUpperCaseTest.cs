@@ -31,7 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void LiteralSuffixUpperCase()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\LiteralSuffixUpperCase.cs", new LiteralSuffixUpperCase());
+            Verifier.VerifyAnalyzer(@"TestCases\LiteralSuffixUpperCase.cs",
+                new LiteralSuffixUpperCase());
         }
 
         [TestMethod]

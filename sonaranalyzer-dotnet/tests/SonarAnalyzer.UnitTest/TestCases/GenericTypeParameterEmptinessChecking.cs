@@ -27,13 +27,13 @@ namespace Tests.Diagnostics
             {
             }
         }
-        public void My(ImmutableArray<B> analyzers)
+        public void My(ImmutableArray<B> analyzers) // Error [CS0122]
         {
-            if (t.Any(x => x == null)) //compliant, B is a class
+            if (analyzers.Any(x => x == null)) //compliant, B is a class
             {
             }
         }
-        public void Mx(List<C> t)
+        public void Mx(List<C> t) // Error [CS0246] - unknown type C
         {
             if (t.Any(x => x == null)) //compliant, we don't know anything about C
             {
@@ -61,7 +61,7 @@ namespace Tests.Diagnostics
             {
             }
         }
-        public void M4<T>(T t) where T : C
+        public void M5<T>(T t) where T : C // Error [CS0246] - unknown type
         {
             if (t == null)
             {

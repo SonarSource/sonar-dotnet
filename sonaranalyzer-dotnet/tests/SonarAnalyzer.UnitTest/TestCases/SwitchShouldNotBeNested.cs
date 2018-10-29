@@ -4,7 +4,7 @@ namespace Tests.Diagnostics
 {
     public class Program
     {
-        public Program()
+        public Program(char choice, int value)
         {
             switch (choice)
             {
@@ -27,6 +27,7 @@ namespace Tests.Diagnostics
                             break;
                     }
                     Console.WriteLine("Invalid response");
+                    break;
             }
 
 

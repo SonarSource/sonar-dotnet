@@ -2,7 +2,7 @@
 
 namespace Tests.Diagnostics
 {
-    class Program : IDisposable
+    class Program
     {
         public void Foo()
         {

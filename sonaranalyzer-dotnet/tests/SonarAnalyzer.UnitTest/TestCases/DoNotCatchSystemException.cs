@@ -1,8 +1,10 @@
-using System;
+﻿using System;
 using System.IO;
 
 namespace Tests.Diagnostics
 {
+    public class DummyType : Exception { }
+
     class Program
     {
         public void Method()

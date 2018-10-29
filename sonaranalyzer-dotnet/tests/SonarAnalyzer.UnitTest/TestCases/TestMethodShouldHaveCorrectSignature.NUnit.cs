@@ -106,9 +106,6 @@ namespace Tests.Diagnostics
 
     public class NUnitTest_Theories
     {
-        [DatapointSource]
-        public int[] values = new int[] { 42 };
-
         [NUnit.Framework.Theory]
         private void PrivateTestMethod(int data) // Noncompliant
         {

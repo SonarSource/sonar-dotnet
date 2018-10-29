@@ -4,7 +4,7 @@ namespace Tests.Diagnostics
 {
     public class Program
     {
-        public void Foo()
+        public void Foo(int a)
         {
             switch (a)
             {
@@ -71,7 +71,7 @@ namespace Tests.Diagnostics
                 case 0:
                     break;
                 case 1:
-                default: // Noncompliant 
+                default: // Noncompliant
                     break;
                 case 2:
                     break;

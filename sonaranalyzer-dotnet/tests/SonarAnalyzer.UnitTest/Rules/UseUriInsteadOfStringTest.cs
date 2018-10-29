@@ -32,7 +32,29 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UseUriInsteadOfString()
         {
             Verifier.VerifyAnalyzer(@"TestCases\UseUriInsteadOfString.cs",
-                new UseUriInsteadOfString());
+                new UseUriInsteadOfString(),
+                additionalReferences: FrameworkMetadataReference.SystemDrawing);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UseUriInsteadOfString_InvalidCode()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+public class Foo
+{
+}
+
+public class Bar : Foo
+{
+    public override string UriProperty { get; set; }
+    public override string UriMethod() => "";
+
+    public void Main()
+    {
+        Uri.TryCreate(new object(), UriKind.Absolute, out result); // Compliant - invalid code
+    }
+}", new UseUriInsteadOfString(), checkMode: CompilationErrorBehavior.Ignore);
         }
     }
 }

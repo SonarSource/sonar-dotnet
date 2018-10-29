@@ -73,6 +73,9 @@ namespace Tests.Diagnostics
 
     public class DeadStores
     {
+        int doSomething() => 1;
+        int doSomethingElse() => 1;
+
         void calculateRate(int a, int b)
         {
             b = doSomething(); // Noncompliant {{Remove this useless assignment to local variable 'b'.}}
@@ -113,7 +116,7 @@ namespace Tests.Diagnostics
         }
         void X(out int i) { i = 10; }
 
-        void calculateRate(int a, int b)
+        void calculateRate2(int a, int b)
         {
             var x = 0;
             x = 1; // Noncompliant
@@ -134,7 +137,9 @@ namespace Tests.Diagnostics
             x = 31; // Noncompliant
         }
 
-        void calculateRate2(int a, int b)
+        void storeI(int i) { }
+
+        void calculateRate3(int a, int b)
         {
             int i;
 
@@ -237,7 +242,7 @@ namespace Tests.Diagnostics
             get
             {
                 var i = 10; // Noncompliant
-                if (nameof(((i))) == "i")
+                if (nameof(((i))) == "i") // Error [CS8081]
                 {
                     i = 11;
                 }
@@ -246,6 +251,8 @@ namespace Tests.Diagnostics
                     i = 12;
                 }
                 Console.WriteLine(i);
+
+                return 42;
             }
         }
 
@@ -268,7 +275,7 @@ namespace Tests.Diagnostics
         {
             var l = new List<int>(); // Compliant, not reporting on captured variables
 
-            return (() =>
+            return (() => // Error [CS0149] - no method name
             {
                 var k = 10; // Noncompliant
                 k = 12; // Noncompliant
@@ -283,6 +290,8 @@ namespace Tests.Diagnostics
             {
                 if (f) { }
             }
+
+            return null;
         }
 
         public List<int> Method4(int i)
@@ -293,6 +302,8 @@ namespace Tests.Diagnostics
             {
                 if (f) { }
             }
+
+            return null;
         }
 
         public List<int> Method5(out int i, ref int j)
@@ -304,11 +315,13 @@ namespace Tests.Diagnostics
             {
                 j = 12; // Compliant, ref parameter
             }
+
+            return null;
         }
         public void Method5Call1(out int i)
         {
             int x = 10;
-            Method5(out i, x);
+            Method5(out i, ref x);
         }
 
         public void Method5Call2()
@@ -323,6 +336,8 @@ namespace Tests.Diagnostics
             Action a = () => { Console.WriteLine(i); };
             i = 11; // Not reporting on captured local variables
             a();
+
+            return null;
         }
 
         public List<int> Method7_Foreach()
@@ -337,6 +352,8 @@ namespace Tests.Diagnostics
                 in new int[0])
             {
             }
+
+            return null;
         }
 
         public void Unused()
@@ -370,6 +387,8 @@ namespace Tests.Diagnostics
                         i = 12;
                     }
                     Console.WriteLine(i);
+
+                    return 0;
                 }
             }
 

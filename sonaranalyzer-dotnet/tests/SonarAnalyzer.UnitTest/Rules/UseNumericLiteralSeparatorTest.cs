@@ -34,7 +34,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyNoIssueReported(@"TestCases\UseNumericLiteralSeparator.cs",
                 new UseNumericLiteralSeparator(),
-                ParseOptionsHelper.BeforeCSharp7);
+                ParseOptionsHelper.BeforeCSharp7,
+                CompilationErrorBehavior.Ignore);
         }
 
         [TestMethod]

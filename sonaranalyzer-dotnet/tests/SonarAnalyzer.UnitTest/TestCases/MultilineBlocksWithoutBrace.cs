@@ -79,7 +79,7 @@ Tests(); // Noncompliant
                 Tests(); // Noncompliant
         }
 
-        public void Test2()
+        public void Test2(bool b)
         {
             int i = 1;
             if (true)
@@ -114,6 +114,7 @@ Tests(); // Noncompliant
                     ; ; ;
             }
 
+            var x = b;
             if (x) // Compliant
             {
                 ; ;
@@ -161,7 +162,7 @@ Tests(); // Noncompliant
             Console.WriteLine();
         }
 
-        void TestWeirdAlignment()
+        void TestWeirdAlignment(bool a)
         {
             try {
               if (a)

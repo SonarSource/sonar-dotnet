@@ -19,6 +19,8 @@
  */
 
 extern alias csharp;
+
+using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -27,12 +29,38 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class MemberShouldBeStaticTest
     {
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow("1.0.0", "3.0.20105.1")]
+        [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void MemberShouldBeStatic()
+        public void MemberShouldBeStatic(string aspnetCoreVersion, string aspnetVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.cs",
-                new MemberShouldBeStatic());
+                new MemberShouldBeStatic(),
+                additionalReferences: NuGetMetadataReference.MicrosoftAspNetCoreMvcWebApiCompatShim(aspnetCoreVersion)
+                    .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspnetVersion))
+                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspnetCoreVersion))
+                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspnetCoreVersion))
+                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspnetCoreVersion))
+                    .Concat(new[] { FrameworkMetadataReference.SystemWeb })
+                    .ToArray());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MemberShouldBeStatic_InvalidCode()
+        {
+            // Handle invalid code causing NullReferenceException: https://github.com/SonarSource/sonar-csharp/issues/819
+            Verifier.VerifyCSharpAnalyzer(@"
+public class Class7
+{
+    public async Task<Result<T> Function<T>(Func<Task<Result<T>>> f)
+    {
+        Result<T> result;
+        result = await f();
+        return result;
+    }
+}", new MemberShouldBeStatic(), checkMode: CompilationErrorBehavior.Ignore);
         }
     }
 }

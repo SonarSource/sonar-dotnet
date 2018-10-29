@@ -7,7 +7,6 @@ namespace Tests.Diagnostics
     {
         public async Task GetTaskAsync1()
         {
-            return null; // async
         }
 
         public async Task<object> GetTaskAsync2()
@@ -99,6 +98,7 @@ namespace Tests.Diagnostics
             return condition ? Task.FromResult(5) : null; // Should be non-compliant
         }
 
+        private Task foo;
         public Task Foo
         {
             get

@@ -22,8 +22,7 @@ namespace Tests.Diagnostics
         }
         private static bool HasContent2b(List<string> l)
         {
-            return 1UL <= Enumerable.Count(l); // Noncompliant
-                                               // Ignore@-1 [CS0034]
+            return 1UL <= Enumerable.Count(l); // Noncompliant // Error [CS0034]
         }
         private static bool HasContent3(List<string> l)
         {

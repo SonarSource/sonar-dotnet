@@ -34,5 +34,30 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\NativeMethodsShouldBeWrapped.cs",
                 new NativeMethodsShouldBeWrapped());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void NativeMethodsShouldBeWrapped_InvalidCode()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+public class InvalidSyntax
+{
+    extern public void Extern1
+    extern public void Extern2;
+    extern private void Extern3(int x);
+    public void Wrapper
+    {
+        Extern3(x);
+    }
+    public void Wrapper(
+    {
+        Extern3(x);
+    }
+    public void Wrapper()
+    {
+        Extern3(x);
+    }
+}", new NativeMethodsShouldBeWrapped(), checkMode: CompilationErrorBehavior.Ignore);
+        }
     }
 }

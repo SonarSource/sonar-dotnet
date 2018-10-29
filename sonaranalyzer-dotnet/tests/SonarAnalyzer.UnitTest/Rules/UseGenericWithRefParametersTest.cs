@@ -34,5 +34,15 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\UseGenericWithRefParameters.cs",
                 new UseGenericWithRefParameters());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UseGenericWithRefParameters_InvalidCode()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+public void (ref object o1)
+{
+}", new UseGenericWithRefParameters(), checkMode: CompilationErrorBehavior.Ignore);
+        }
     }
 }

@@ -21,8 +21,7 @@ namespace SomeNamespace
     {
         static class SubClass
         {
-            // Doesn't compile: CS1109 extensions method can't be on inner classes
-            static void Foobar(this Program p) // Noncompliant
+            static void Foobar(this Program p) // Noncompliant // Error [CS1109] - extensions method can't be on inner classes
             {
             }
         }
@@ -44,7 +43,7 @@ namespace SomeOtherNamespace
         {
         }
 
-        static void Baz(this SomeNonExistingClass snec)
+        static void Baz(this SomeNonExistingClass snec) // Error [CS0246] - unknown type
         {
         }
     }

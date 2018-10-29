@@ -46,12 +46,12 @@ namespace Tests.Diagnostics
 
         private string[] stringArray;
 
-        public string[] LazyInitialization
+        public string[] LazyInitialization1
         {
             get { return stringArray ?? (stringArray = (string[])staticStrings.Clone()); }
         }
 
-        public string[] LazyInitialization
+        public string[] LazyInitialization2
         {
             get
             {

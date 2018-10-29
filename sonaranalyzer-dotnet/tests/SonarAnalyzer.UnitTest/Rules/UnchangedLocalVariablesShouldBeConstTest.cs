@@ -34,5 +34,23 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\UnchangedLocalVariablesShouldBeConst.cs",
                 new UnchangedLocalVariablesShouldBeConst());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UnchangedLocalVariablesShouldBeConst_InvalidCode()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+// invalid code
+public void Test_TypeThatCannotBeConst(int arg)
+{
+    System.Random random = 1;
+}
+
+// invalid code
+public void (int arg)
+{
+    int intVar = 1;
+}", new UnchangedLocalVariablesShouldBeConst(), checkMode: CompilationErrorBehavior.Ignore);
+        }
     }
 }

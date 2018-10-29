@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
 {
     public class MyAttribute : Attribute
     {
-        public bool isOneWay { get; set; }
+        public bool IsOneWay { get; set; }
     }
 
     [ServiceContract]
@@ -26,7 +26,7 @@ namespace Tests.Diagnostics
         [My(IsOneWay = true)]
         int MyServiceMethod4();
 
-        [OperationContract(IsOneWay = "mistake")]
+        [OperationContract(IsOneWay = "mistake")] // Error [CS0029] - Cannot implicitly convert type 'string' to 'bool' not expected on
         int MyServiceMethod5();
 
         [OperationContract(IsOneWay = true, AsyncPattern = true)]

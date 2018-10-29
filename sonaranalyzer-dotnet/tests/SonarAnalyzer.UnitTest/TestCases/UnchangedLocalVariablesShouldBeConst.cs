@@ -207,16 +207,17 @@ namespace Tests.Diagnostics
             dynamic value = 42; // Compliant. Const only works with null.
             TestUtils x = 2; // Compliant (type with implicit conversion). Const only works with null.
 
-            int[] x = { 1, 2, 3 }; // Compliant (expression on the right is not constant).
+            int[] xx = { 1, 2, 3 }; // Compliant (expression on the right is not constant).
             int[] y = new int[] { 1, 2, 3 }; // Compliant (expression on the right is not constant).
             Exception[] z = { }; // Compliant (expression on the right is not constant).
         }
 
-        public void Test_Property
+        public int Test_Property
         {
             get
             {
                 int a = 1; // Noncompliant
+                return a;
             }
             set
             {
@@ -256,19 +257,6 @@ namespace Tests.Diagnostics
 
                 return 1;
             }
-        }
-
-
-        // invalid code
-        public void Test_TypeThatCannotBeConst(int arg)
-        {
-            System.Random random = 1;
-        }
-
-        // invalid code
-        public void (int arg)
-        {
-            int intVar = 1;
         }
     }
 }

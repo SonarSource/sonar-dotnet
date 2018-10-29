@@ -33,7 +33,6 @@ namespace Tests.Diagnostics
             x = ~Permissions.Read;  // Compliant
 
             var y = Permissions2.Read | Permissions2.Write;
-            var z = Permissions3.Read | Permissions3.Write;
 
             var w = 1 | 3;
 

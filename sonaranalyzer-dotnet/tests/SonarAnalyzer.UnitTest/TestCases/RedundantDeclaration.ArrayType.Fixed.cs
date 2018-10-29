@@ -59,7 +59,7 @@ new[]{ 1 } // Fixed
             };
 
             Delegate d = new Action(() => { });
-            Delegate d = new Func<double>(() => { return 1; });
+            Delegate d2 = new Func<double>(() => { return 1; });
 
             NullableTest2(f(5));
 

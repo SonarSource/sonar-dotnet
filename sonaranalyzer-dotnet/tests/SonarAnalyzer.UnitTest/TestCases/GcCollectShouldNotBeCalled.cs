@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -11,7 +11,6 @@ namespace Tests.Diagnostics
             GC.Collect(); // Noncompliant {{Refactor the code to remove this use of 'GC.Collect'.}}
 //             ^^^^^^^
             GC.Collect(2, GCCollectionMode.Optimized); // Noncompliant
-            ((((((GC))).Collect()))); // Noncompliant
 
             Collect(); // Noncompliant
         }

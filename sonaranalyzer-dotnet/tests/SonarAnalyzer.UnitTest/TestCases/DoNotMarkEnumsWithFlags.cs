@@ -78,12 +78,6 @@ namespace Tests.Diagnostics
     }
 
     [Flags]
-    public enum InvalidStringEnum : string // Noncompliant
-    {
-        MyValue = "toto" // Secondary
-    }
-
-    [Flags]
     enum EnumFoo3
     {
         N1 = 1,

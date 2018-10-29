@@ -11,7 +11,7 @@ namespace Tests.Diagnostics
         [NUnit.Framework.TestCase(1)]
         public async Task NUnit_TestCase(int i) { }
 
-        [NUnit.Framework.TestCaseSource()]
+        [NUnit.Framework.TestCaseSource("foo")]
         public async Task NUnit_TestCaseSource() { }
 
         [NUnit.Framework.Theory]

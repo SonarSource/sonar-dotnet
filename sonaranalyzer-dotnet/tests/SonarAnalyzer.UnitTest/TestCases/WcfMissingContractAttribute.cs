@@ -21,6 +21,6 @@ namespace Tests.Diagnostics
     class IMyService3 // Noncompliant {{Add the 'ServiceContract' attribute to  this class.}}
     {
         [System.ServiceModel.OperationContract]
-        int MyServiceMethod() { }
+        int MyServiceMethod() { return 1; }
     }
 }

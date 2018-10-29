@@ -14,8 +14,6 @@ namespace Tests.Diagnostics
             var thread = Thread.CurrentThread;
             thread.Suspend(); // Noncompliant
             thread?.Suspend(); // Noncompliant
-
-            ((((((Thread))).CurrentThread))).Suspend(); // Noncompliant
         }
     }
 }

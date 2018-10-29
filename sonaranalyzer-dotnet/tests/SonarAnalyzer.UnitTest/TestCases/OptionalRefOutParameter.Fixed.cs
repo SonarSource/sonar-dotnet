@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 namespace Tests.Diagnostics
 {
-    public class OptionalRefOutParameter : Base
+    public class OptionalRefOutParameter
     {
         public void DoStuff(ref int i) // Fixed
         {
@@ -11,6 +12,7 @@ namespace Tests.Diagnostics
         }
         public void DoStuff2(out int i) // Fixed
         {
+            i = 23;
             Console.WriteLine(i);
         }
         public void DoStuff3([Optional] int i)
@@ -20,7 +22,7 @@ namespace Tests.Diagnostics
 
         public static void Main()
         {
-            new MyClass().DoStuff(); // This doesn't compile, CS7036 shows
+            new MyClass().DoStuff(); // Error [CS0246]
         }
     }
 }

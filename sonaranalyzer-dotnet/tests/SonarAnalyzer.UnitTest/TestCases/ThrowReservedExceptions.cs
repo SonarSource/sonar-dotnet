@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
 
             throw new ArgumentNullException(); // Compliant
 
-            OutOfMemoryException e = (OutOfMemoryException)new ArgumentException(); // Compliant
+            OutOfMemoryException e1 = (OutOfMemoryException)new ArgumentException(); // Error [CS0030] - cannot cast
 
             try
             {

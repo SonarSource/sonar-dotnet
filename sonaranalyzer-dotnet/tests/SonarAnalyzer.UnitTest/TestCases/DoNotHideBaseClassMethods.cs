@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace MyLibrary
@@ -28,7 +28,7 @@ namespace MyLibrary
 
         public void GenericMethod<TType>(TType s1, object s2) { } // Noncompliant
 
-        public void GenericMethod2(IEnumerable<T> s1, object s2) { } // Noncompliant
+        public void GenericMethod2<T>(IEnumerable<T> s1, object s2) { } // Noncompliant
     }
 
     class Bar2 : Foo

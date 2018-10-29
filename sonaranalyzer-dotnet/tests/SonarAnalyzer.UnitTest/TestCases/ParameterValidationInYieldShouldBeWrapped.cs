@@ -24,7 +24,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        public IEnumerable<int> YieldBreak(int a) // Noncompliant
+        public static IEnumerable<int> YieldBreak(int a) // Noncompliant
         {
             if (a < 0)
             {
@@ -55,9 +55,9 @@ namespace Tests.Diagnostics
 
             return Iterator(something);
 
-            IEnumerable<string> Iterator(string something)
+            IEnumerable<string> Iterator(string s)
             {
-                yield return something;
+                yield return s;
             }
         }
 

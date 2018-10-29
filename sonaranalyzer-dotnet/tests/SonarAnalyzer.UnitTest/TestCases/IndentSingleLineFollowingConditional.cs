@@ -9,7 +9,7 @@ namespace Tests.Diagnostics
         private void SomethingElseEntirely() { /* no-op */ }
         private void Foo() { /* no-op */ }
 
-        public void RSpec()
+        public void RSpec(bool condition)
         {
             if (condition)  // Noncompliant
 //          ^^^^^^^^^^^^^^
@@ -121,7 +121,7 @@ namespace Tests.Diagnostics
             int total = 0;
             string data = "abc";
 
-            do  // Noncompliant         
+            do  // Noncompliant
 //          ^^
             while (total < 10)                  // comments are included in highlighting for compound statements
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary

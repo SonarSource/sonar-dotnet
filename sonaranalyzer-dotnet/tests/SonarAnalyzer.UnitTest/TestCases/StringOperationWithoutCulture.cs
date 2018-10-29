@@ -40,7 +40,7 @@ namespace Tests.Diagnostics
             i = "".CompareTo(o); // Noncompliant
 
             i = "".IndexOf(""); // Noncompliant
-            i = "".IndexOf('');
+            i = "".IndexOf('a');
             i = "".LastIndexOf(""); // Noncompliant
             i = "".LastIndexOf("", StringComparison.CurrentCulture);
         }

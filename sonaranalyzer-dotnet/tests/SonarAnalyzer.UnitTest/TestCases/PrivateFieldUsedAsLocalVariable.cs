@@ -16,7 +16,7 @@ namespace Tests.Diagnostics
         }
 
         private int F3 = 1; // Compliant - Referenced from another field initializer
-        public int F4 = F3; // Compliant - Public
+        public int F4 = F3; // Compliant - Public // Error [CS0236]
 
         private int F5 = 0; // Noncompliant
         private int F6; // Noncompliant
@@ -38,7 +38,8 @@ namespace Tests.Diagnostics
         private int F10 = 0; // Compliant - not assigned from every path
         void M4(bool p1)
         {
-            for (F8 = 0; F8 < 42; F8++) { }
+            for (F8 = 0; F8 < 42; F8++)
+            { }
 
             if (p1)
             {
@@ -91,7 +92,7 @@ namespace Tests.Diagnostics
         private int F20 = 42; // Compliant - accessed through instance
         private int F21 = 42; // Compliant - accessed through instance
         private static int F22 = 42; // Noncompliant, overwritten static instance
-        private int F23 = 42; // Noncompliant - access through this?.
+        private int F23 = 42;
         void M9(PrivateFieldUsedAsLocalVariable inst)
         {
             F19 = inst.F19;
@@ -112,7 +113,7 @@ namespace Tests.Diagnostics
             PrivateFieldUsedAsLocalVariable.F22 = 42;
             Console.WriteLine(F22);
 
-            this?.F23 = 42;
+            this.F21 = this?.F23 ?? 42;
         }
 
         private int F24 = 42; // Noncompliant - passed as 'out'
@@ -130,7 +131,7 @@ namespace Tests.Diagnostics
 
         private int F26 = 42; // Noncompliant - always assigned from constructor
         private int F27 = 42; // Compliant - passed to another constructor
-        PrivateFieldUsedAsLocalVariable() : this(F27)
+        PrivateFieldUsedAsLocalVariable() : this(F27) // Error [CS0120]
         {
             F26 = 42;
         }
@@ -165,14 +166,14 @@ namespace Tests.Diagnostics
         private string F32 = ""; // Noncompliant
         void M13()
         {
-            this.F32 = 42;
+            this.F32 = 42.ToString();
             Console.WriteLine(this.F31);
         }
 
         private static string F33 = ""; // Noncompliant
         ~PrivateFieldUsedAsLocalVariable()
         {
-            this.F33 = "foo";
+            F33 = "foo";
         }
 
         private string F34 = ""; // Compliant
@@ -214,7 +215,7 @@ namespace Tests.Diagnostics
 
     public struct SomeStruct
     {
-        private int F0 = 0; // Noncompliant
+        private int F0; // Noncompliant
 
         void M1()
         {
@@ -232,35 +233,29 @@ namespace Tests.Diagnostics
         private string F2;
         public string M2
         {
-            get => "value";
-            set => F2 ?? (F2 = "test");
+            get => F2 ?? (F2 = "test");
+            set => F2 = "value";
         }
         private string F3;
         AccessInExpressionBodiedConstructs()
         {
-            F3 ?? (F3 = "test");
+            F3 = F3 ?? "test";
         }
         private string F4;
         ~AccessInExpressionBodiedConstructs()
         {
-            F4 ?? (F4 = "test");
+            F4 = F4 ?? "test";
         }
         private string F5;
         public string this[int i]
         {
             get => "value";
-            set => F5 ?? (F5 = "test");
+            set => F5 = F5 ?? "test";
         }
-        private string F6;
-        public string this[int i]
-        {
-            get => F6 ?? (F6 = "test");
-        }
-
     }
     public struct CompoundAssignmentReadAsWellAsWrite
     {
-        private int F0 = 0;
+        private int F0;
         void M1()
         {
             F0 += 1;

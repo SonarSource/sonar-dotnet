@@ -4,7 +4,7 @@ namespace Tests.Diagnostics
 {
     public class Program
     {
-        public Program()
+        public Program(int myVariable)
         {
             switch (myVariable)
             {

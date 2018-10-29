@@ -24,6 +24,7 @@ using System.IO;
 using System.Linq;
 using Google.Protobuf;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -36,7 +37,7 @@ namespace SonarAnalyzer.UnitTest
     {
         FailTest,
         Ignore,
-        Default = Ignore
+        Default = FailTest
     }
 
     internal static class Verifier
@@ -54,7 +55,8 @@ namespace SonarAnalyzer.UnitTest
         }
 
         public static void VerifyCSharpAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default, params MetadataReference[] additionalReferences)
+            IEnumerable<CSharpParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+            params MetadataReference[] additionalReferences)
         {
             var solution = SolutionBuilder
                .Create()
@@ -65,7 +67,7 @@ namespace SonarAnalyzer.UnitTest
 
             // TODO: add [CallerLineNumber]int lineNumber = 0
             // then add ability to shift result reports with this line number
-            foreach (var compilation in solution.Compile())
+            foreach (var compilation in solution.Compile(options?.ToArray()))
             {
                 DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, checkMode);
             }
@@ -147,7 +149,8 @@ namespace SonarAnalyzer.UnitTest
         }
 
         public static void VerifyNoIssueReported(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            IEnumerable<ParseOptions> options = null, params MetadataReference[] additionalReferences)
+            IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
+            params MetadataReference[] additionalReferences)
         {
             var projectBuilder = SolutionBuilder.Create()
                 .AddProject(AnalyzerLanguage.FromPath(path))
@@ -158,14 +161,14 @@ namespace SonarAnalyzer.UnitTest
             if (options == null)
             {
                 var compilation = projectBuilder.GetCompilation(null);
-                DiagnosticVerifier.VerifyNoIssueReported(compilation, diagnosticAnalyzer);
+                DiagnosticVerifier.VerifyNoIssueReported(compilation, diagnosticAnalyzer, checkMode);
             }
             else
             {
                 foreach (var option in options)
                 {
                     var compilation = projectBuilder.GetCompilation(option);
-                    DiagnosticVerifier.VerifyNoIssueReported(compilation, diagnosticAnalyzer);
+                    DiagnosticVerifier.VerifyNoIssueReported(compilation, diagnosticAnalyzer, checkMode);
                 }
             }
         }

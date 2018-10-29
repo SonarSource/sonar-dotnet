@@ -27,7 +27,7 @@ namespace Tests.Diagnostics
 
         private struct InnerStruct
         {
-            private FileStream inner_field_fs1 = new FileStream(@"c:\foo.txt", FileMode.Open); // Noncompliant - should be reported on once
+            private FileStream inner_field_fs1 = new FileStream(@"c:\foo.txt", FileMode.Open); // Noncompliant - should be reported on once // Error [CS0573] - cannot have field init in struct
         }
 
         private FileStream Return()
@@ -36,7 +36,7 @@ namespace Tests.Diagnostics
             return fs;
         }
 
-        public DisposableNotDisposed() : this(field_fs10)
+        public DisposableNotDisposed() : this(field_fs10) // Error [CS0120]
         {
         }
 

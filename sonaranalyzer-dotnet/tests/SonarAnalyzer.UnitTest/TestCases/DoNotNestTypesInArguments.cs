@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-using ComplexType = ICollection<ICollection<ICollection<int>>>;
+using ComplexType = System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<int>>>;
 
 namespace MyLibrary
 {

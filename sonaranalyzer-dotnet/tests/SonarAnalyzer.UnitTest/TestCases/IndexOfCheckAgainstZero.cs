@@ -12,8 +12,8 @@ namespace Tests.Diagnostics
 
             List<string> strings = new List<string>();
             System.Collections.IList stringIList = new List<string>();
-            strings.add(color);
-            strings.add(name);
+            strings.Add(color);
+            strings.Add(name);
             string[] stringArray = strings.ToArray();
 
             if (stringIList.IndexOf(color) > 0) // Noncompliant

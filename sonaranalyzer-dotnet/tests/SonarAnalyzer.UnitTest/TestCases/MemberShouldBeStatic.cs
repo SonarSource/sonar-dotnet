@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 
 namespace Tests.Diagnostics
 {
@@ -72,7 +73,7 @@ namespace Tests.Diagnostics
         public int Method8_0(Class1 arg) { return (arg).instanceInterface.InterfaceProperty1; } // Noncompliant
         public int Method8_1(Class1 arg) { return (int)arg?.instanceInterface?.InterfaceProperty1; } // Noncompliant
         public int Method8_2(Class1 arg) { return (int)((arg))?.instanceInterface?.InterfaceProperty1; } // Noncompliant
-        public int Method8_3(Class1 arg) { return ((int)arg)?.instanceInterface?.InterfaceProperty1; } // Noncompliant
+        public int Method8_3(Class1 arg) { return ((int)arg)?.instanceInterface?.InterfaceProperty1; } // Noncompliant // Error [CS0030]
         public void Method9() { (Property2 + 1).ToString(); }
 
         public int Method10() => 0; // Noncompliant
@@ -81,7 +82,6 @@ namespace Tests.Diagnostics
         public int Method13() => staticMember; // Noncompliant
         public int Method13_1() => (staticMember); // Noncompliant
         public int Method14() => Class1.staticMember; // Noncompliant
-        public int Method14_1() => (Class1).staticMember; // Noncompliant
         public int Method15() => new Class1().instanceMember; // Noncompliant
         public int Method15_1() => (new Class1()).instanceMember; // Noncompliant
         public int Method16() => 0; // Noncompliant
@@ -138,7 +138,7 @@ namespace Tests.Diagnostics
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Foo", "Bar", Justification = "baz")]
         public int Property2 => 0; // Noncompliant
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Foo", "Bar", Justification = "baz")]
-        public int Property3 { }
+        public int Property3 { } // Error [CS0548]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Foo", "Bar", Justification = "baz")]
         public int Method1() { return 0; } // Noncompliant
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Foo", "Bar", Justification = "baz")]
@@ -206,17 +206,5 @@ namespace Tests.Diagnostics
         public int Foo() => 0;
 
         protected int FooFoo() => 0; // Noncompliant
-    }
-
-
-    // Handle invalid code causing NullReferenceException: https://github.com/SonarSource/sonar-csharp/issues/819
-    public class Class7
-    {
-        public async Task<Result<T> Function<T>(Func<Task<Result<T>>> f)
-        {
-            Result<T> result;
-            result = await f();
-            return result;
-        }
     }
 }

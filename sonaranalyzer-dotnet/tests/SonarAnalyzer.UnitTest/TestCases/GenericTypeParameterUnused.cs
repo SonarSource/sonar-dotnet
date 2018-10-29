@@ -15,13 +15,18 @@ namespace Tests.Diagnostics
         int Add<T>(int a, int b); //Compliant
     }
 
-    public class InterfaceImplementation : Interface, IDummyInterface
+    public class InterfaceImplementation : Interface, IDummyInterface // Error [CS0246] - IDummyInterface not found
     {
         public int Add<T>(int a, int b) //Compliant, it is implementing the interface.
-        { }
+        {
+            return 0;
+        }
 
-        public int IDummyInterface.MyMethod<T>(int a, int b) //Compliant, it is implementing the interface, although we don't know anything about it
-        { }
+        int IDummyInterface.MyMethod<T>(int a, int b) // Error [CS0246,CS0538] - Compliant, it is implementing the interface, although we don't know anything about it
+                                                      // Ignore@-1 CS0538
+        {
+            return 0;
+        }
     }
 
     public class MoreMath<T> // Noncompliant {{'T' is not used in the class.}}
@@ -64,7 +69,7 @@ namespace Tests.Diagnostics
         }
     }
 
-    public class MoreMath
+    public abstract class MoreMath
     {
         public int Add(int a, int b)
         {
@@ -79,6 +84,7 @@ namespace Tests.Diagnostics
         public override int Do<T>(int a)
         {
             //don't use T here, but the method is still compliant because it is an override
+            return 1;
         }
     }
 

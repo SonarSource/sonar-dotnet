@@ -37,6 +37,19 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void ImplementSerializationMethodsCorrectly_CS_InvalidCode()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+[Serializable]
+public class Foo
+{
+    [OnDeserializing]
+    public int  { throw new NotImplementedException(); }
+}", new ImplementSerializationMethodsCorrectly(), checkMode: CompilationErrorBehavior.Ignore);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void ImplementSerializationMethodsCorrectly_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ImplementSerializationMethodsCorrectly.vb",

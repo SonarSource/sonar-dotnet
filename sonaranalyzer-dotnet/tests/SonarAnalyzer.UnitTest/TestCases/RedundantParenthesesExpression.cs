@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Tests.Diagnostics
 {
@@ -14,7 +15,7 @@ namespace Tests.Diagnostics
 
         void Invoke(object param) { }
 
-        void Del()
+        object Del()
         {
             return (3);
             return (a);
@@ -23,24 +24,26 @@ namespace Tests.Diagnostics
             return (((a)));
 //                 ^^ Noncompliant [0]
 //                      ^^ Secondary@-1 [0]
+            var x = 1;
             return (x + 1);
             return (string.Empty);
             return ("".ToString());
             return ("".ToString((CultureInfo.InvariantCulture)));
             return (string.Compare("a", "b"));
 
+            var y = 12;
             return ((((x & 0x0000FFFF))) | y);
 //                  ^^ Noncompliant [1]
 //                                    ^^ Secondary@-1 [1]
 
-            int x = (y / 2 + 1);
-            int y = (4 + x) * y;
-            int z = ((4 + x) * y);
-            int u = ((4 + x) * (y));
-            int u = ((4 + x) * ((y)));
-//                             ^ Noncompliant [2]
-//                                 ^ Secondary@-1 [2]
-            if ((0)) { }
+            int x2 = (y / 2 + 1);
+            int y2 = (4 + x2) * y2;
+            int z = ((4 + x2) * y2);
+            int u = ((4 + x2) * (y2));
+            int u2 = ((4 + x2) * ((y2)));
+//                               ^ Noncompliant [2]
+//                                    ^ Secondary@-1 [2]
+            if ((0)) { } // Error [CS0029] - cannot convert
             while ((true)) { }
             do { } while ((true));
 
@@ -55,24 +58,24 @@ namespace Tests.Diagnostics
             Console.Write((false) ? 0 : 1);
             Console.Write((x > y) ? 0 : 1);
             Console.Write((false ? false : true) ? 0 : 1);
-            Console.Write((foo()) ? 0 : 1);
-            Console.Write((foo) ? 0 : 1);
-            Invoke(((int)plop));
+            Console.Write((foo()) ? 0 : 1); // Error [CS0841] - undeclared var
+            Console.Write((foo) ? 0 : 1); // Error [CS0841] - undeclared var
+            Invoke(((int)plop)); // Error [CS0841] - undeclared var
 
             int[] tab;
-            tab[(1 + 2)];
-            tab[(1 + 2) / 2];
+            tab[(1 + 2)]; // Error [CS0201] - not a statement
+            tab[(1 + 2) / 2]; // Error [CS0201] - not a statement
 
             int p = ((int[])tab)[0];
             var n = new Bar((1 / 3));
 
-            this.a = (b);
+            this.a = (b); // Error [CS0103] - unknown b
             this.a = (true ? 1 : 2);
             this.a = false ? (true ? 1 : 2) : 2;
             this.a = (1 + 2) / 2;
-            this.a = ((int[])contentSpec.value)[0];
+            this.a = ((int[])contentSpec.value)[0]; // Error [CS0103] - unknown contentSpec
 
-            object[] foo = new[] { (true ? 1 : 2) };
+            object[] foo = new[] { (true ? 1 : 2) }; // Error [CS0029] - cannot convert
         }
 
         public static short value1 = (((short)(0)));

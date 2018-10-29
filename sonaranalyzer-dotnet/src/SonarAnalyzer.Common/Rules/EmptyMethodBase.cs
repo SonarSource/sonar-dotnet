@@ -21,7 +21,6 @@
 using Microsoft.CodeAnalysis.Diagnostics;
 using System.Linq;
 using SonarAnalyzer.Helpers;
-using System.Collections.Generic;
 
 namespace SonarAnalyzer.Rules
 {

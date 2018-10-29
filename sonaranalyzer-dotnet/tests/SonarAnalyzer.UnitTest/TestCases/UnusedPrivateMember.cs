@@ -109,35 +109,57 @@ namespace Tests.Diagnostics
                 get { return 42; }
             }
         }
-        internal class Class4 : MyInterface { } // Noncompliant {{Remove the unused internal type 'Class4'.}}
+
+        internal class Class4 : MyInterface // Noncompliant {{Remove the unused internal type 'Class4'.}}
+        {
+            public void Method() { }
+        }
     }
 
-    class NewClass
+    class NewClass1
     {
         // See https://github.com/SonarSource/sonar-csharp/issues/888
         static async Task Main() // Compliant - valid main method since C# 7.1
         {
             Console.WriteLine("Test");
         }
+    }
 
+    class NewClass2
+    {
         static async Task<int> Main() // Compliant - valid main method since C# 7.1
         {
             Console.WriteLine("Test");
-        }
 
+            return 1;
+        }
+    }
+
+    class NewClass3
+    {
         static async Task Main(string[] args) // Compliant - valid main method since C# 7.1
         {
             Console.WriteLine("Test");
         }
+    }
 
+    class NewClass4
+    {
         static async Task<int> Main(string[] args) // Compliant - valid main method since C# 7.1
         {
             Console.WriteLine("Test");
-        }
 
+            return 1;
+        }
+    }
+
+    class NewClass5
+    {
         static async Task<string> Main(string[] args) // Noncompliant
         {
             Console.WriteLine("Test");
+
+            return "ok";
         }
     }
 

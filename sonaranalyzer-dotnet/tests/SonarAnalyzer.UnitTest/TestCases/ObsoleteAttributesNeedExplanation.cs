@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -16,7 +16,7 @@ namespace Tests.Diagnostics
         void Method() { }
 
         [Obsolete] // Noncompliant
-        void Property { get; set; }
+        int Property { get; set; }
 
         [Obsolete] // Noncompliant
         int Field;
@@ -32,7 +32,7 @@ namespace Tests.Diagnostics
     interface IInterface
     {
         [Obsolete] // Noncompliant
-        void Method() { }
+        void Method();
     }
 
 
@@ -57,7 +57,7 @@ namespace Tests.Diagnostics
         void Method() { }
 
         [Obsolete("explanation")]
-        void Property { get; set; }
+        string Property { get; set; }
 
         [Obsolete("explanation", true)]
         int Field;
@@ -73,7 +73,7 @@ namespace Tests.Diagnostics
     interface IInterface_Explained
     {
         [Obsolete("explanation")]
-        void Method() { }
+        void Method();
     }
 
 
@@ -93,7 +93,7 @@ namespace Tests.Diagnostics
 
         void Method() { }
 
-        void Property { get; set; }
+        int Property { get; set; }
 
         int Field;
 

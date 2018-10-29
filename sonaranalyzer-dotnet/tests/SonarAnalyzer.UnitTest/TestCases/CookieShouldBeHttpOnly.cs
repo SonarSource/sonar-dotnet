@@ -77,7 +77,7 @@ namespace Tests.Diagnostics
             }
             c3.HttpOnly = true;
 
-            HttpCookie c4;
+            HttpCookie c4 = null;
             if (foo)
             {
                 c4 = new HttpCookie("c"); // Noncompliant, HttpOnly is not set in the same scope

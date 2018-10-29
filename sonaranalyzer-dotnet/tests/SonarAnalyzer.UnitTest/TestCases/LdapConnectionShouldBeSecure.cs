@@ -77,7 +77,7 @@ namespace Tests.Diagnostics
             }
             c3.AuthenticationType = AuthenticationTypes.Secure;
 
-            DirectoryEntry c4;
+            DirectoryEntry c4 = null;
             if (foo)
             {
                 c4 = new DirectoryEntry("path", "user", "pass", AuthenticationTypes.None); // Noncompliant, HttpOnly is not set in the same scope

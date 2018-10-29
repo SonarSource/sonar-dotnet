@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -8,6 +8,7 @@ namespace Tests.Diagnostics
     class Foo
     {
         public void Foo2(decimal a, decimal b) { }
+        public void Foo2(double a, double b) { }
         public void Foo2(bool a, bool b) { }
         public void Foo2(string a, string b) { }
         public void Foo2(int a, int b) { }
@@ -15,14 +16,16 @@ namespace Tests.Diagnostics
         public void DifferentUsages(IA a, A b) { }
         public void Foo2(A a, A b) { }
 
-        public void Foo5(int a, int b, int c, int d, int e) {}
-        public void Bar(string a, int b) {}
+        public void Foo5(int a, int b, int c, int d, int e) { }
+        public void Bar(string a, int b) { }
+
+        public void FooInt(int x, int y) { }
 
         private string x;
 
         public void Test()
         {
-            int x, y;
+            int x = 0, y = 1;
 
             Foo5(x, x, x, x, x);
 //                  ^ Noncompliant    {{Verify that this is the intended value; it is the same as the 1st argument.}}
@@ -44,7 +47,7 @@ namespace Tests.Diagnostics
 // Secondary@-1
 
             Foo2(true, true);
-            bool b;
+            bool b = true;
             Foo2(b, b); // Noncompliant
 // Secondary@-1
 
@@ -58,7 +61,7 @@ namespace Tests.Diagnostics
             Foo2(x.ToString(), x.ToString()); // Noncompliant
 // Secondary@-1
 
-            Foo foo1, foo2;
+            Foo foo1 = null, foo2 = null;
             Foo2(foo1.x, foo1.x); // Noncompliant
 // Secondary@-1
             Foo2(foo1.x, /* My comment */ foo1.x); // Noncompliant

@@ -10,6 +10,14 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class SomeAttribute : Attribute
+    {
+        public SomeAttribute(string s)
+        {
+
+        }
+    }
+
     public class HardcodedIpAddress
     {
         private static void WriteAssemblyInfo(string assemblyName, string version, string author, string description, string title)

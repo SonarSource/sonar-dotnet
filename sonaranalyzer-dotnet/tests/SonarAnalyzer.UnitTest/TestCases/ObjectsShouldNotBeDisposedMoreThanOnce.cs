@@ -67,8 +67,8 @@ namespace Tests.Diagnostics
 
         public void Disposed_Using3(Stream str)
         {
-            using (var s = new FileStream("path", FileAccess.Read)) // Noncompliant
-//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            using (var s = new FileStream("path", FileMode.Open)) // Noncompliant
+//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             {
                 using (var sr = new StreamReader(s))
                 {
@@ -76,7 +76,7 @@ namespace Tests.Diagnostics
             }
 
             Stream stream;
-            using (stream = new FileStream("path", FileAccess.Read)) // Noncompliant
+            using (stream = new FileStream("path", FileMode.Open)) // Noncompliant
 //                 ^^^^^^
             {
                 using (var sr = new StreamReader(stream))
@@ -95,7 +95,7 @@ namespace Tests.Diagnostics
 
         public void Disposed_Using4()
         {
-            Stream s = new FileStream("path", FileAccess.Read);
+            Stream s = new FileStream("path", FileMode.Open);
             try
             {
                 using (var sr = new StreamReader(s))

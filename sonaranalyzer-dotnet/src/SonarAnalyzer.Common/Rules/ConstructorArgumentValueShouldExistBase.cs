@@ -20,10 +20,8 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 
 namespace SonarAnalyzer.Rules

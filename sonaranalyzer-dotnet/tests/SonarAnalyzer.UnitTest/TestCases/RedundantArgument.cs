@@ -60,9 +60,9 @@ namespace Tests.Diagnostics
         Func<string> normalProperty => () => FuncWithOptionals(str: null); //Noncompliant
         Expression<Action> expTreeProperty => () => FuncWithOptionals(null); //Compliant
 
-        void takeExpression(Expression<Func<int, int>> expr) { }
+        void takeExpression(Expression<Func<string>> expr) { }
 
-        public static void Method1()
+        public void Method1()
         {
             // Variable declaration
             Func<string> var1 = () => FuncWithOptionals(null); //Noncompliant

@@ -17,6 +17,9 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void M1(string s) { }
+        public void M2(string s) { }
+
         void Test_1(bool condition)
         {
             object o = null;
@@ -58,11 +61,11 @@ namespace Tests.Diagnostics
             object o2;
             if (OutP(out o1) &&
                 OutP(out o2) &&
-                o2.Count != 0)
+                o2.ToString() != "")
             {
             }
         }
-        void OutP(out object o) { o = new object(); }
+        bool OutP(out object o) { o = new object(); return true; }
 
         void Test_Struct()
         {
@@ -180,6 +183,8 @@ namespace Tests.Diagnostics
             }
         }
 
+        object GetObject() => null;
+
         void Equals(object b)
         {
             object a = null;
@@ -248,7 +253,7 @@ namespace Tests.Diagnostics
             var t = i.GetType();
 
             i = null;
-            var t = i.GetType(); // Noncompliant
+            var t2 = i.GetType(); // Noncompliant
         }
 
         static void MultiplePop()
@@ -310,6 +315,7 @@ namespace Tests.Diagnostics
         internal object _foo3;
         public object _foo4;
         protected internal object _foo5;
+        object _foo6;
         private readonly object _foo7 = new object();
         private static object _foo8;
         private const object NullConst = null;
@@ -543,7 +549,7 @@ namespace Tests.Diagnostics
         {
             object o = null;
             _foo1 = o;
-            System.Threading.Monitor.Wait(); // This is a multi-threaded application, the fields could change
+            System.Threading.Monitor.Wait(this); // This is a multi-threaded application, the fields could change
             _foo1.ToString(); // Compliant
             o.ToString(); // Noncompliant, local variable constraints are not cleared
         }
@@ -564,10 +570,9 @@ namespace Tests.Diagnostics
 
         void DoSomething() { }
 
-        void TestNameOf()
+        void TestNameOf(int a)
         {
-            var x = nameof();
-            var y = nameof(a, b);
+            var x = nameof(a);
             x.ToString();
         }
 
@@ -651,7 +656,7 @@ namespace Tests.Diagnostics
         string x;
         async Task Foo(Task t)
         {
-            var s = null;
+            string s = null;
             x = s;
             await t; // awaiting clears the constraints
             x.ToString(); // Compliant

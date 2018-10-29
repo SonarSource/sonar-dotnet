@@ -29,8 +29,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class TestMethodShouldNotBeIgnoredTest
     {
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TestMethodShouldNotBeIgnored_MsTest_Legacy()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.MsTest.cs",
+                new TestMethodShouldNotBeIgnored(),
+                additionalReferences: NuGetMetadataReference.MSTestTestFramework("1.1.11"),
+                checkMode: CompilationErrorBehavior.Ignore); // IgnoreAttribute doesn't contain any reason param
+        }
+
         [DataTestMethod]
-        [DataRow("1.1.11")]
+        [DataRow("1.2.0")]
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestMethodShouldNotBeIgnored_MsTest(string testFwkVersion)
@@ -42,6 +52,19 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
+        [DataRow("2.7.0")]
+        [TestCategory("Rule")]
+        public void TestMethodShouldNotBeIgnored_NUnit_V2(string testFwkVersion)
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.NUnit.V2.cs",
+                new TestMethodShouldNotBeIgnored(),
+                additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                    .Concat(NuGetMetadataReference.NUnit(testFwkVersion))
+                    .ToArray());
+        }
+
+        [DataTestMethod]
+        [DataRow("3.0.0")] // Ignore without reason no longer exist
         [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestMethodShouldNotBeIgnored_NUnit(string testFwkVersion)

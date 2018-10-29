@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -18,11 +18,11 @@ namespace Tests.Diagnostics
 
     interface System { } // Compliant (it's not public)
 
-    private interface Data { } // Compliant (it's not public)
+    private interface Data { } // Error [CS1527] - Compliant (it's not public)
 
     namespace Accessibility { }  // Compliant (namespace are not checked)
 
-    interface { }
+    interface { } // Error [CS1001]
 }
 
 namespace All_Variants

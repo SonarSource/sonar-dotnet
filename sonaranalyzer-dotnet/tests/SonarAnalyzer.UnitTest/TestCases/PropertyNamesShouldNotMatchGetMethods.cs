@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -14,7 +14,7 @@ namespace Tests.Diagnostics
         { get; set; }
         public int GetFoo()
 //                 ^^^^^^ Secondary
-        { }
+        { return 1; }
 
         public DateTime Date { get; }
         public string GetDateAsString()
@@ -25,7 +25,7 @@ namespace Tests.Diagnostics
         public string Bar // Noncompliant {{Change either the name of property 'Bar' or the name of method 'Bar' to make them distinguishable.}}
 //                    ^^^
         { get; }
-        public int Bar()
+        public int Bar() // Error [CS0102]
 //                 ^^^ Secondary
         {
             return 42;
@@ -55,8 +55,5 @@ namespace Tests.Diagnostics
 
         public override int MyProperty { get; set; } // Compliant - override
         public int GetMyProperty() => 42;
-
-        public int { get; } // Missing identifier on purpose
-        public int () { return 42; } // Missing identifier on purpose
     }
 }

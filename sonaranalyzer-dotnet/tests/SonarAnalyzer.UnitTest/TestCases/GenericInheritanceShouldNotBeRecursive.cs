@@ -24,7 +24,7 @@ namespace Tests.ClassRecursion
 
     class C7<T> : CA<CA<CA<CA<CA<CA<CA<CA<CA<CA<CA<CA<C7<CB<T>>>>>>>>>>>>>> { } // Noncompliant
 
-    class C8<T> : IComparable<C8<IEquatable<T>>> { } // Noncompliant
+    class C8<T> : IComparable<C8<IEquatable<T>>> { } // Noncompliant // Error [CS0535]
 }
 
 namespace Tests.InterfaceRecursion

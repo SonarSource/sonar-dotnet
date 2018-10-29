@@ -56,7 +56,7 @@
         {
             get
             {
-                throw new ObjectDisposedException(); // Compliant
+                throw new ObjectDisposedException(""); // Compliant
             }
         }
         public int MyProperty8
@@ -70,6 +70,8 @@
                 {
                     throw; // Compliant
                 }
+
+                return 0;
             }
         }
         public int this[int i]

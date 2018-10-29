@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,6 +7,8 @@ namespace Tests.Diagnostics
     class Program : IEqualityComparer<int>
     {
         public bool Equals(int left, int right) => left == right;
+
+        public int GetHashCode(int obj) => 42;
 
         void UnexpectedBehavior()
         {

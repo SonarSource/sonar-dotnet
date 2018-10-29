@@ -4,7 +4,28 @@ using System.Security.Cryptography;
 
 namespace Tests.Diagnostics
 {
-    public class MyTripleDESCryptoServiceProvider : TripleDES { }
+    public class MyTripleDESCryptoServiceProvider : TripleDES
+    {
+        public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[] rgbIV)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[] rgbIV)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void GenerateIV()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void GenerateKey()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 
     public class InsecureEncryptionAlgorithm
     {
@@ -33,12 +54,12 @@ namespace Tests.Diagnostics
             {
                 //...
             }
-            using (var rc2 = new RC2CryptoServiceProvider()) // Noncompliant
+            using (var rc21 = new RC2CryptoServiceProvider()) // Noncompliant
             {
 
             }
 
-            using (var rc2 = RC2.Create()) // Noncompliant
+            using (var rc22 = RC2.Create()) // Noncompliant
             {
 
             }

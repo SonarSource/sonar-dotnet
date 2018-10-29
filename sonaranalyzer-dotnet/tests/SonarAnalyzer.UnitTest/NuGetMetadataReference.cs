@@ -37,12 +37,17 @@ namespace SonarAnalyzer.UnitTest
         private static readonly List<string> allowedNugetLibDirectories =
             new List<string>
             {
-                "net45",
-                "net40",
-                "net20",
                 "netstandard2.0",
+                "net47",
+                "net461",
+                "netstandard1.6",
+                "netstandard1.3",
                 "netstandard1.1",
                 "netstandard1.0",
+                "net45",
+                "net451",
+                "net40",
+                "net20",
                 "portable-net45",
                 "lib",
             };
@@ -221,6 +226,12 @@ namespace SonarAnalyzer.UnitTest
         public static MetadataReference[] MicrosoftAspNetCoreMvcCore(string packageVersion) =>
             Create("Microsoft.AspNetCore.Mvc.Core", packageVersion);
 
+        public static MetadataReference[] MicrosoftAspNetCoreMvcWebApiCompatShim(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Mvc.WebApiCompatShim", packageVersion);
+
+        public static MetadataReference[] MicrosoftAspNetCoreMvcAbstractions(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Mvc.Abstractions", packageVersion);
+
         public static MetadataReference[] MicrosoftAspNetCoreMvcViewFeatures(string packageVersion) =>
             Create("Microsoft.AspNetCore.Mvc.ViewFeatures", packageVersion);
 
@@ -260,5 +271,8 @@ namespace SonarAnalyzer.UnitTest
             Create("xunit", "1.9.1")
             .Concat(Create("xunit.extensions", "1.9.1"))
             .ToArray();
+
+        public static MetadataReference[] MicrosoftNetHttpHeaders(string packageVersion) =>
+            Create("Microsoft.Net.Http.Headers", packageVersion);
     }
 }

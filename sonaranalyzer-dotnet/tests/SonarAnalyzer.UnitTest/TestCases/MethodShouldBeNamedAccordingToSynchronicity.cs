@@ -7,6 +7,7 @@ namespace Tests.Diagnostics
     {
         public ValueTask<T> FooValueTaskT<T>() // Noncompliant
         {
+            return default(ValueTask<T>);
         }
 
         public Task FooTask() // Noncompliant {{Add the 'Async' suffix to the name of this method.}}
@@ -73,6 +74,7 @@ namespace Tests.Diagnostics
 
         public Task Do() // Compliant - comes from interface so not possible to change
         {
+            return null;
         }
     }
 
@@ -120,24 +122,17 @@ namespace Tests.Diagnostics
 
     public class Program2
     {
-        public static async Task<int> Main() { }
+        public static async Task<int> Main() { return 0; }
     }
 
     public class Program3
     {
-        public static async Task Main(string[] args) { return 0; }
+        public static async Task Main(string[] args) { }
     }
 
     public class Program4
     {
         public static async Task<int> Main(string[] args) { return 0; }
-    }
-
-    public class InvalidCode
-    {
-        public Task ()
-        {
-        }
     }
 
     public class TestAttributes

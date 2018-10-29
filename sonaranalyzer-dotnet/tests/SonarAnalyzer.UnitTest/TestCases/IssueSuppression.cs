@@ -1,7 +1,7 @@
 ﻿using System;
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("", "")] // Noncompliant
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("")] // Compliant, non existent ctor
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("")] // Compliant // Error [CS7036] - ctor doesn't exist
 
 namespace Tests.TestCases
 {

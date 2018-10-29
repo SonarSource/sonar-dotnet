@@ -38,7 +38,7 @@ namespace MyLibrary
     {
     }
 
-    public interface
+    public interface // Error [CS1001]
     {
     }
 }

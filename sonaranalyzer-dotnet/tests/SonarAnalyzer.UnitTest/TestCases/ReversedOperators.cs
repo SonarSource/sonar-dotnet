@@ -28,7 +28,7 @@ namespace Tests.Diagnostics
                 +num;
 
             bool a, b;
-            if (a =! b) { } // Noncompliant
+            if (a =! b) { } // Noncompliant // Error [CS0165] - b not initialized
             if (a != b) { }
             if (a = !b) { }
         }

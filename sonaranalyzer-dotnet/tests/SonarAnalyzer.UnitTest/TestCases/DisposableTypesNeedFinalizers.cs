@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 
 namespace MyLibrary
@@ -16,7 +16,7 @@ namespace MyLibrary
                 if (!disposed)
                 {
                     // Dispose of resources held by this instance.
-                    FreeResource(myResource);
+                    FreeResource(myResource); // Error [CS0103] - method doesn't exist
                     disposed = true;
 
                     // Suppress finalization of this disposed instance.
@@ -32,7 +32,7 @@ namespace MyLibrary
                 Dispose(true);
             }
         }
-        public class Foo_Compliant : IDisposable
+        public class Foo_Compliant : IDisposable // Error [CS0535]
         {
             private IntPtr myResource;
             private bool disposed = false;
@@ -42,7 +42,7 @@ namespace MyLibrary
                 if (!disposed)
                 {
                     // Dispose of resources held by this instance.
-                    FreeResource(myResource);
+                    FreeResource(myResource); // Error [CS0103] - method doesn't exist
                     disposed = true;
 
                     // Suppress finalization of this disposed instance.
@@ -59,17 +59,17 @@ namespace MyLibrary
         }
     }
 
-    public class Foo_01 : IDisposable // Noncompliant
+    public class Foo_01 : IDisposable // Noncompliant // Error [CS0535]
     {
         private UIntPtr myResource;
     }
 
-    public class Foo_02 : IDisposable // Noncompliant
+    public class Foo_02 : IDisposable // Noncompliant // Error [CS0535]
     {
         private UIntPtr myResource;
     }
 
-    public class Foo_03 : IDisposable // Noncompliant
+    public class Foo_03 : IDisposable // Noncompliant // Error [CS0535]
     {
         private HandleRef myResource;
     }
@@ -80,12 +80,8 @@ namespace MyLibrary
 
         public void Dispose() {}
     }
-    public class Foo_05 : IDisposable
-    {
-        private HandleRef;
-    }
 
-    public class Foo_06 : IDisposable
+    public class Foo_06 : IDisposable // Error [CS0535]
     {
         private object myResource;
     }

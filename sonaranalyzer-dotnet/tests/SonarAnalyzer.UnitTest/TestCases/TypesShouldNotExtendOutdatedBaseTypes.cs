@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
@@ -47,9 +47,9 @@ namespace Tests.Diagnostics
 
     class FooDerived : FooBase { } // Compliant - doesn't directly implement type
 
-    class Foo13 : InvalidType{ }
+    class Foo13 : InvalidType{ } // Error [CS0246] - unknown type
 
-    class : System.Collections.Stack { }
+    class : System.Collections.Stack { } // Error [CS1001] - missing identifier
 }
 
 

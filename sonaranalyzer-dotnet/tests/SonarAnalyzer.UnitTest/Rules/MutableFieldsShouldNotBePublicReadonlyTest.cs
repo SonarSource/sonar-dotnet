@@ -19,6 +19,7 @@
  */
 
 extern alias csharp;
+
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -30,7 +30,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void OnErrorStatement()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\OnErrorStatement.vb", new OnErrorStatement());
+            Verifier.VerifyAnalyzer(@"TestCases\OnErrorStatement.vb",
+                new OnErrorStatement());
         }
     }
 }

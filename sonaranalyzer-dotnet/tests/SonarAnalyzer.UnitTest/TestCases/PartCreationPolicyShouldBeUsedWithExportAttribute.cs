@@ -27,21 +27,21 @@ namespace Tests.Diagnostics
     }
 
     [PartCreationPolicy(CreationPolicy.Any)] // Noncompliant, Export is not inherited
-    class Program3 : Program1
+    class Program4 : Program1
     {
     }
 
-    class Program4
+    class Program5
     {
-        [PartCreationPolicy(CreationPolicy.Any)] // Compliant, attribute cannot be used on methods, don't raise
+        [PartCreationPolicy(CreationPolicy.Any)] // Error [CS0592] - Compliant, attribute cannot be used on methods, don't raise
         public void Method() { }
 
-        [PartCreationPolicy(CreationPolicy.Any)] // Compliant, attribute cannot be used on fields, don't raise
+        [PartCreationPolicy(CreationPolicy.Any)] // Error [CS0592] - Compliant, attribute cannot be used on fields, don't raise
         public int Field;
 
-        [PartCreationPolicy(CreationPolicy.Any)] // Compliant, attribute cannot be used on properties, don't raise
+        [PartCreationPolicy(CreationPolicy.Any)] // Error [CS0592] - Compliant, attribute cannot be used on properties, don't raise
         public int Property { get; set; }
     }
 
-    [PartCreationPolicy(CreationPolicy.Any)] // Compliant, illegal use, don't raise
+    [PartCreationPolicy(CreationPolicy.Any)] // Error [CS0116] - Compliant, illegal use, don't raise
 }

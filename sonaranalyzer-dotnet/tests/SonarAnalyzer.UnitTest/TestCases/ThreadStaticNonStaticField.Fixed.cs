@@ -12,8 +12,8 @@ namespace Tests.Diagnostics
         private int count2 = 0;
 
         [System.ThreadStatic]
-        private static int count2 = 0;
+        private static int count3 = 0;
 
-        private int count3 = 0;
+        private int count4 = 0;
     }
 }

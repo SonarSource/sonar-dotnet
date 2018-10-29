@@ -23,7 +23,7 @@ namespace Tests.Diagnostics
 
         [Test]
         [NUnit.Framework.ExpectedException(typeof(ArgumentNullException))]  // Compliant - one line
-        public void TestFoo6() => new object().ToString();
+        public string TestFoo6() => new object().ToString();
 
         [Test]
         public void TestFoo8()

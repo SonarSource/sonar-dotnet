@@ -31,7 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void GenericReadonlyFieldPropertyAssignment()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\GenericReadonlyFieldPropertyAssignment.cs", new GenericReadonlyFieldPropertyAssignment());
+            Verifier.VerifyAnalyzer(@"TestCases\GenericReadonlyFieldPropertyAssignment.cs",
+                new GenericReadonlyFieldPropertyAssignment());
         }
 
         [TestMethod]

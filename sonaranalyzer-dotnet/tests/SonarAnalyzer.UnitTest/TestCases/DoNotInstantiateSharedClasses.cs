@@ -14,17 +14,17 @@ namespace Tests.Diagnostics
     [PartCreationPolicy(CreationPolicy.Any)]
     class AnyClass { }
 
-    [PartCreationPolicy(Foo)]
+    [PartCreationPolicy(Foo)] // Error [CS0103] - Foo doesn't exist
     class InvalidAttrParameter { }
 
-    [PartCreationPolicy()]
+    [PartCreationPolicy()] // Error [CS7036]
     class NoAttrParameter { }
 
     class NoAttr { }
 
     class Program
     {
-        public void Foo()
+        public void Bar()
         {
             new SharedClass(); // Noncompliant {{Refactor this code so that it doesn't invoke the constructor of this class.}}
 //          ^^^^^^^^^^^^^^^^^

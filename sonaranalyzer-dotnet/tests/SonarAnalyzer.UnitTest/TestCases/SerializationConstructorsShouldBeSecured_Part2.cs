@@ -1,8 +1,6 @@
 ﻿using System.Runtime.Serialization;
 using System.Security.Permissions;
 
-
-[assembly: System.Security.AllowPartiallyTrustedCallers()]
 namespace MyLibrary
 {
     public partial class PartialFoo

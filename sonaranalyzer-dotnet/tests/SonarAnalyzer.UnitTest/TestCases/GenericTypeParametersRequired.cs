@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace MyLibrary
@@ -24,12 +24,11 @@ namespace MyLibrary
 
         public void MyMethod_05<TValue, TKey>(TKey foo) { } // Noncompliant
         public void MyMethod_06<TValue, TKey>(TValue foo) { } // Noncompliant
-        public void MyMethod_07<TKey>(T foo) { } // Noncompliant
-        public TKey MyMethod_08<TKey>() { } // Noncompliant
+        public TKey MyMethod_08<TKey>() { return default(TKey); } // Noncompliant
 
         public void MyMethod_09() { }
         public void MyMethod_10(int i) { }
-        public void MyMethod_11(T i) { }
+        public void MyMethod_11(T i) { } // Error [CS0122]
 
         public void MyMethod_12<T>(IEquatable<T> foo) { }
         public void MyMethod_13<T, K>(Dictionary<K, T> foo) { }
@@ -37,7 +36,7 @@ namespace MyLibrary
         public void MyMethod_14<T, V>(Tuple<List<List<V>>, Tuple<ISet<T>, T>> foo) { }
 
         public void MyMethod_15<V>(params V[] p) { }
-        public void MyMethod_16<V>(params T[] p) { } // Noncompliant
+        public void MyMethod_16<V>(params T[] p) { } // Noncompliant // Error [CS0246]
 
         public void MyMethod_17<V>(V[] p) { }
         public void MyMethod_18<V>(MyClass[] p) { } // Noncompliant
@@ -45,6 +44,6 @@ namespace MyLibrary
         public void MyMethod_19<V>(List<V[]> p) { }
         public void MyMethod_20<V>(List<MyClass[]> p) { } // Noncompliant
         public void MyMethod_21<V>(List<V>[] p) { }
-        public void MyMethod_22<V>(List<T>[] p) { } // Noncompliant
+        public void MyMethod_22<V>(List<T>[] p) { } // Noncompliant // Error [CS0246]
     }
 }

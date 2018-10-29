@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
-
     class SillyBitwiseOperation
     {
         static void Main(string[] args  )
@@ -36,11 +35,14 @@ namespace Tests.Diagnostics
             var resultULong = 1UL; // Fixed
             resultULong = 1UL | 18446744073709551615UL; // Compliant
 
-            m(1UL); // Fixed
+            MyMethod(1UL); // Fixed
         }
+
         private static long returnLong()
         {
             return 1L;
         }
+
+        private static void MyMethod(UInt64 u) { }
     }
 }

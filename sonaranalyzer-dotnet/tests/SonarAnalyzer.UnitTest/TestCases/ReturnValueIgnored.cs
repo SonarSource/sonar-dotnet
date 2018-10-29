@@ -19,9 +19,9 @@ namespace Tests.Diagnostics
     class ReturnValueIgnored
     {
         [Pure]
-        int Method() { }
+        int Method() { return 0; }
         [Pure]
-        int Method(ref int i) { }
+        int Method(ref int i) { return i; }
 
         void Test()
         {
@@ -49,7 +49,7 @@ namespace Tests.Diagnostics
             Method(ref j);
 
             Action<int> a = (input) => "this string".Equals("other string"); // Noncompliant
-            Func<int, bool> a = (input) => "this string".Equals("other string");
+            Func<int, bool> f = (input) => "this string".Equals("other string");
 
             PureType.GetValue(); // Noncompliant
             NonPureType.GetValue();

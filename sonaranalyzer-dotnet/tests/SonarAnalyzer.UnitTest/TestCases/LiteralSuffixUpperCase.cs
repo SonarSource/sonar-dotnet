@@ -21,7 +21,7 @@ namespace Tests.TestCases
             const int i = 0xf; // Compliant
             const int j = 0Xf; // Compliant
             const int k = 0; // Compliant
-            const int l = 0u;
+            const uint l = 0u;
 
             Test(45l); // Noncompliant
         }

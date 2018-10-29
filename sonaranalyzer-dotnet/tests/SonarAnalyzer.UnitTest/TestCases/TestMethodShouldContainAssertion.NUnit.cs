@@ -17,11 +17,6 @@
             Assert.IsTrue(true);
         }
 
-        public void AssertSomething()
-        {
-            Assert.IsTrue(true);
-        }
-
         public void ExpectSomething()
         {
             Assert.IsTrue(true);
@@ -65,13 +60,6 @@
         {
             var x = 42;
             NUnit.Framework.Assert.AreEqual(x, 42);
-        }
-
-        [Test]
-        [ExpectedException(typeof(Exception))]
-        public void Test4()
-        {
-            var x = System.IO.File.Open("", System.IO.FileMode.Open);
         }
 
         [Test]
@@ -167,13 +155,6 @@
         {
             var x = 42;
             NUnit.Framework.Assert.AreEqual(x, 42);
-        }
-
-        [TestCase]
-        [ExpectedException(typeof(Exception))]
-        public void TestCase4()
-        {
-            var x = System.IO.File.Open("", System.IO.FileMode.Open);
         }
 
         [TestCase]
@@ -273,13 +254,6 @@
         }
 
         [TestCaseSource("Foo")]
-        [ExpectedException(typeof(Exception))]
-        public void TestCaseSource4()
-        {
-            var x = System.IO.File.Open("", System.IO.FileMode.Open);
-        }
-
-        [TestCaseSource("Foo")]
         public void TestCaseSource5()
         {
             var x = 42;
@@ -373,13 +347,6 @@
         {
             var x = 42;
             NUnit.Framework.Assert.AreEqual(x, 42);
-        }
-
-        [Theory]
-        [ExpectedException(typeof(Exception))]
-        public void Theory4()
-        {
-            var x = System.IO.File.Open("", System.IO.FileMode.Open);
         }
 
         [Theory]

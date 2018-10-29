@@ -24,7 +24,7 @@ namespace Tests.Diagnostics
 
             checked
             {
-                e = list.Sum();  // Compliant
+                int e = list.Sum();  // Compliant
             }
 
             unchecked

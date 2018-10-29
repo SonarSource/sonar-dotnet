@@ -183,10 +183,10 @@ namespace Tests.Diagnostics
         }
     }
 
-    class RegressionTests
+    public class RegressionTests
     {
         // See https://github.com/SonarSource/sonar-csharp/issues/1967
-        void NullReference()
+        public void NullReference()
         {
             var act = new Action<int, int>((x, y) => x++);
             var dict = new Dictionary<int, int>();
@@ -197,7 +197,7 @@ namespace Tests.Diagnostics
         }
     }
 
-    class CustomIndexerOneArg
+    public class CustomIndexerOneArg
     {
         public int this[string key]
         {
@@ -206,7 +206,7 @@ namespace Tests.Diagnostics
         }
     }
 
-    class CustomIndexerMultiArg
+    public class CustomIndexerMultiArg
     {
         public int this[string s, int i, double d]
         {
@@ -215,7 +215,7 @@ namespace Tests.Diagnostics
         }
     }
 
-    class CustomAdd
+    public class CustomAdd
     {
         public void Add(int a, int b) { }
     }

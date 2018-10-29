@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace Tests.Diagnostics
 {
@@ -18,7 +19,7 @@ namespace Tests.Diagnostics
         }
 
         private FileStream fs;
-        public FileStream WriteToFile(string path, string text)
+        public FileStream WriteToFile2(string path, string text)
         {
             using (fs = File.Create(path)) // Noncompliant
             {
@@ -28,7 +29,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        public FileStream WriteToFile2(string path, string text)
+        public FileStream WriteToFile3(string path, string text)
         {
             var fs = File.Create(path);
             var bytes = Encoding.UTF8.GetBytes(text);
@@ -36,11 +37,11 @@ namespace Tests.Diagnostics
             return fs;
         }
 
-        public void WriteToFile3(string path, string text)
+        public void WriteToFile4(string path, string text)
         {
             using (fs = File.Create(path))
             {
-                var f = new Func(() =>
+                var f = new Func<FileStream>(() =>
                 {
                     return fs;
                 });

@@ -20,6 +20,7 @@
 
 extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -33,6 +34,25 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\NotAssignedPrivateMember.cs",
                 new NotAssignedPrivateMember());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void NotAssignedPrivateMember_IndexingMovableFixedBuffer()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+unsafe struct FixedArray
+{
+    private fixed int a[42]; // Compliant, because of the fixed modifier
+
+    private int[] b; // Noncompliant
+
+    void M()
+    {
+        a[0] = 42;
+        b[0] = 42;
+    }
+}", new NotAssignedPrivateMember(), new[] { new CSharpParseOptions(LanguageVersion.CSharp7_3) });
         }
     }
 }

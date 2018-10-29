@@ -5,6 +5,8 @@ namespace Tests.Diagnostics
 {
     public class ToStringNoNull
     {
+        private List<int> collection;
+
         public string AnyOther()
         {
             return null;
@@ -28,6 +30,8 @@ namespace Tests.Diagnostics
 
     public class ToStringNoNull2
     {
+        private List<int> collection;
+
         public override string ToString()
         {
             if (this.collection.Count == 0)

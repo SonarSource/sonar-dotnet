@@ -1,11 +1,12 @@
-using System;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
 {
     class Program
     {
-        public void Test1(string[] strings)
+        public void Test1(string[] strings, int length)
         {
             for (int i = 0; i < length; i++)
             {
@@ -215,7 +216,7 @@ namespace Tests.Diagnostics
         {
             while (true)
             {
-                if (foo())
+                if (Foo())
                 {
                     continue;
                 }
@@ -224,6 +225,8 @@ namespace Tests.Diagnostics
                 GetHashCode();
             }
         }
+
+        public bool Foo() { return true; }
 
         public void Test8()
         {
@@ -309,7 +312,7 @@ namespace Tests.Diagnostics
         {
             while (true)
             {
-                UtilFunc(lambda =>
+                UtilFunc(() =>
                 {
                     return; // Compliant
                 });
@@ -376,6 +379,8 @@ namespace Tests.Diagnostics
                     }
                 }
             }
+
+            return false;
         }
 
         public bool TestWithRetry2()
@@ -394,6 +399,8 @@ namespace Tests.Diagnostics
                     }
                 }
             }
+
+            return false;
         }
 
         public bool TestWithRetry3(Func<bool> doSomething)
@@ -412,6 +419,8 @@ namespace Tests.Diagnostics
                     }
                 }
             }
+
+            return false;
         }
 
         public bool TestWithRetry4(Action doSomething, Action<Exception> logError)
@@ -428,9 +437,10 @@ namespace Tests.Diagnostics
                 }
                 finally
                 {
-                    return true;
                 }
             }
+
+            return true;
         }
 
         public async Task<bool> TestWithRetry5(Func<Task<bool>> doSomething)
@@ -449,7 +459,12 @@ namespace Tests.Diagnostics
                     }
                 }
             }
+
+            return false;
         }
+
+        public void ResetRetryTimeout() { }
+        public bool WaitRetryTimeout() { return true; }
 
         protected virtual FileStream CreateLock(string lockFileName, bool retries)
         {
@@ -481,5 +496,8 @@ namespace Tests.Diagnostics
                 }
             };
         }
+
+        public void foo() { }
+        public void bar() { }
     }
 }

@@ -7,10 +7,10 @@ namespace Tests.Diagnostics
         public int MyProperty { get; set; }
     }
 
-    [MyAttribute()] //Noncompliant {{Remove these redundant parentheses.}}
+    [MyAttribute()] // Noncompliant {{Remove these redundant parentheses.}}
 //              ^^
-    [MyAttribute] //Compliant
-    [MyAttribute(MyProperty =5)] //Compliant
+    [MyAttribute] // Compliant // Error [CS0579] - duplicate attribute
+    [MyAttribute(MyProperty =5)] // Compliant // Error [CS0579] - duplicate attribute
     class MyClass
     {
         public MyClass()

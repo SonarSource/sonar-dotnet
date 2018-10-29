@@ -1,7 +1,7 @@
 ﻿using System;
 
 // Invalid method, testing if IMethodSymbol.ContainingType returns null (it currently doesn't)
-private void Do(int x) { }
+private void Do(int x) { } // Error [CS0116]
 
 namespace Tests.Diagnostics
 {
@@ -34,9 +34,10 @@ namespace Tests.Diagnostics
 
         public static int Wrapper3() // Compliant, no arguments
         {
-            return DoSomething(false) // simulate some check
-                ? Extern0()
-                : 5;
+            if (DoSomething(false)) // simulate some check
+                Extern0();
+
+            return 5;
         }
 
         public static void Wrapper4(string s, int x) // Compliant, more than one statement
@@ -74,35 +75,16 @@ namespace Tests.Diagnostics
             Extern1(DoSomething(s), DoSomething(x));
 
         public static int Wrapper11() => // Compliant, no arguments
-            DoSomething(false) ? Extern0() : 5; // simulate some check
+            DoSomething(false) ? Extern4("") : 5; // simulate some check
 
         private class PrivateClass
         {
             extern public static void Extern(); // Compliant, container class is private
         }
 
-        internal class PrivateClass
+        internal class PrivateClass2
         {
             extern public static void Extern(); // Compliant, container class is internal
-        }
-    }
-
-    public class InvalidSyntax
-    {
-        extern public void Extern1
-        extern public void Extern2;
-        extern private void Extern3(int x);
-        public void Wrapper
-        {
-            Extern3(x);
-        }
-        public void Wrapper(
-        {
-            Extern3(x);
-        }
-        public void Wrapper()
-        {
-            Extern3(x);
         }
     }
 }

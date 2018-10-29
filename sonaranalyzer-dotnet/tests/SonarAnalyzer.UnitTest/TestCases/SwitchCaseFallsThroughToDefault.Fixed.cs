@@ -6,6 +6,10 @@ namespace Tests.Diagnostics
 {
     public class SwitchCaseFallsThroughToDefault
     {
+        private void handleA() { }
+        private void handleB() { }
+        private void handleTheRest() { }
+
         public SwitchCaseFallsThroughToDefault(char ch)
         {
             switch (ch)

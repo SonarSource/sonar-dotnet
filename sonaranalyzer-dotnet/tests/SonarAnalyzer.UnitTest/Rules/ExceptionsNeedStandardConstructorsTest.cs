@@ -34,5 +34,22 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ExceptionsNeedStandardConstructors.cs",
                 new ExceptionsNeedStandardConstructors());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ExceptionsNeedStandardConstructors_InvalidCode()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+public class  : Exception
+{
+    My_07_Exception() {}
+
+    My_07_Exception(string message) { }
+
+    My_07_Exception(string message, Exception innerException) {}
+
+    My_07_Exception(SerializationInfo info, StreamingContext context) {}
+}", new ExceptionsNeedStandardConstructors(), checkMode: CompilationErrorBehavior.Ignore);
+        }
     }
 }

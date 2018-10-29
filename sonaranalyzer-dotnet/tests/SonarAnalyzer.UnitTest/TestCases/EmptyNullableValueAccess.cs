@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Tests.Diagnostics
 {
     public class EmptyNullableValueAccess
     {
-        protected override void LogFailure(Exception e)
+        protected void LogFailure(Exception e)
         {
             try
             {
@@ -22,7 +23,7 @@ namespace Tests.Diagnostics
             new TestClass { Number = null }
         };
 
-        private class TestClass
+        public class TestClass
         {
             public int? Number { get; set; }
         }
@@ -39,6 +40,7 @@ namespace Tests.Diagnostics
             }
         }
 
+        private int i0;
         public void SetI0()
         {
             i0 = 42;
@@ -57,7 +59,7 @@ namespace Tests.Diagnostics
         }
 
         public IEnumerable<TestClass> TestEnumerableExpressionWithCompilableCode() => numbers.OrderBy(i => i.Number.HasValue).ThenBy(i => i.Number);
-        public IEnumerable<int> TestEnumerableExpressionWithNonCompilableCode() => numbers.OrderBy(i => i.Number.HasValue).ThenBy(i => i.Number);
+        public IEnumerable<int> TestEnumerableExpressionWithNonCompilableCode() => numbers.OrderBy(i => i.Number.HasValue).ThenBy(i => i.Number).Select(x => x.Number ?? 0);
 
         public void TestNonNull()
         {

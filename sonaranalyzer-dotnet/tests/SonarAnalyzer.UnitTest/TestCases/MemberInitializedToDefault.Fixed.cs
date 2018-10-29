@@ -25,7 +25,6 @@ namespace Tests.Diagnostics
 
         public static object o; // Fixed
         public object MyProperty { get; set; } // Fixed
-        public object MyProperty2 { get { return null; } set { } } = null;
         public object Property3 => null;
         public object Property4
         {

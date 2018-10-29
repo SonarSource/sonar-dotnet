@@ -6,20 +6,20 @@ namespace Tests.Diagnostics
     {
         private void Test()
         {
-            byte b = 1 << 10; // Noncompliant {{Either promote shift target to a larger integer type or shift by 2 instead.}}
+            byte b = 1 << 10; // Noncompliant {{Either promote shift target to a larger integer type or shift by 2 instead.}} // Error [CS0266] - cannot cast int to bool
 //                   ^^^^^^^
-            b = 1 << 10; // Noncompliant {{Either promote shift target to a larger integer type or shift by 2 instead.}}
+            b = 1 << 10; // Noncompliant {{Either promote shift target to a larger integer type or shift by 2 instead.}} // Error [CS0266] - cannot cast int to bool
 //              ^^^^^^^
             b = 1 << 0;
 
-            sbyte sb = 1 << 10; // Noncompliant
+            sbyte sb = 1 << 10; // Noncompliant // Error [CS0031]
 
             int i = 1 << 10;
             i = i << 32;  // Noncompliant
             uint ui = 1 << 32; // Noncompliant
             Int32 i32 = 1 << 32; // Noncompliant
             Int64 i64 = 1 << 32;
-            Int64 i64 = 1 << 64; // Noncompliant
+            Int64 i642 = 1 << 64; // Noncompliant
 
             long l = 1 << 32;
             l = 1 << 64; // Noncompliant {{Remove this useless shift by 64.}}
@@ -46,7 +46,7 @@ namespace Tests.Diagnostics
         private void NonIntegerTypes()
         {
             object o = 1 << 1024; // Compliant
-            IDoNotExist e = 1 << 1024; // Compliant
+            IDoNotExist e = 1 << 1024; // Compliant // Error [CS0246]
 
             double d = 1 << 1024; // Compliant
             float f = 1 << 1024; // Compliant
@@ -63,7 +63,7 @@ namespace Tests.Diagnostics
 
         private void Lambda()
         {
-            var x = () => 1 << 0; // Noncompliant
+            Func<int> x = () => 1 << 0; // Noncompliant
         }
 
         private void ParanthesesAttack()
@@ -89,7 +89,7 @@ namespace Tests.Diagnostics
 
         public byte Next() => 1;
 
-        public int GetInt(ByteOrder byteOrder = ByteOrder.BigEndian)
+        public int GetInt()
         {
             return (short)(((Next() & 0xff) << 24)
                         | ((Next() & 0xff) << 16)
@@ -99,10 +99,10 @@ namespace Tests.Diagnostics
 
         private int RightShift()
         {
-            int i = i >> 60; // Noncompliant {{Correct this shift; '60' is larger than the type size.}}
+            int i = i >> 60; // Noncompliant {{Correct this shift; '60' is larger than the type size.}} // Error [CS0165] - use of unassigned var
             i >>= 60; // Noncompliant {{Correct this shift; '60' is larger than the type size.}}
-            int i = i >> 31; // Compliant
-            ulong ul = ul >> 64; // Noncompliant {{Correct this shift; '64' is larger than the type size.}}
+            int i2 = i >> 31; // Compliant
+            ulong ul = ul >> 64; // Noncompliant {{Correct this shift; '64' is larger than the type size.}} // Error [CS0165] - use of unassigned var
             i = i >> 0; // Compliant
 
 
@@ -115,6 +115,8 @@ namespace Tests.Diagnostics
 
             ul = ul << 32; // Compliant
             ul = ul >> 0;  // Compliant
+
+            return 42;
         }
     }
 }

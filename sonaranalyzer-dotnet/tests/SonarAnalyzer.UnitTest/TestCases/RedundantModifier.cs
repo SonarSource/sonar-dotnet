@@ -71,6 +71,12 @@ partial interface PartialInterface //Noncompliant
         }
     }
 
+    class Point
+    {
+        public int x;
+        public int y;
+    }
+
     class Class4
     {
         unsafe interface MyInterface

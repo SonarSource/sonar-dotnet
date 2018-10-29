@@ -67,6 +67,12 @@ interface PartialInterface //Fixed
         }
     }
 
+    class Point
+    {
+        public int x;
+        public int y;
+    }
+
     class Class4
     {
         unsafe interface MyInterface
