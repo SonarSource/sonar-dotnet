@@ -59,6 +59,9 @@ namespace SonarAnalyzer.UnitTest
         internal static MetadataReference SystemDirectoryServices { get; }
             = Create("System.DirectoryServices.dll");
 
+        internal static MetadataReference SystemDrawing { get; }
+            = Create("System.Drawing.dll");
+
         internal static MetadataReference SystemRuntimeSerialization { get; }
             = Create("System.Runtime.Serialization.dll");
 
@@ -82,5 +85,17 @@ namespace SonarAnalyzer.UnitTest
 
         internal static MetadataReference SystemXml { get; }
             = Create("System.Xml.dll");
+
+        internal static MetadataReference SystemXmlLinq { get; }
+            = Create("System.Xml.Linq.dll");
+
+        internal static MetadataReference SystemReflection { get; }
+            = Create("System.Reflection.dll");
+
+        internal static MetadataReference SystemXmlXDocument { get; }
+            = Create("System.Xml.XDocument.dll");
+
+        internal static MetadataReference SystemThreadingTasks { get; }
+            = Create("System.Threading.Tasks.dll");
     }
 }

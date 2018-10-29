@@ -31,7 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void OptionalRefOutParameter()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\OptionalRefOutParameter.cs", new OptionalRefOutParameter());
+            Verifier.VerifyAnalyzer(@"TestCases\OptionalRefOutParameter.cs",
+                new OptionalRefOutParameter());
         }
 
         [TestMethod]

@@ -47,8 +47,8 @@ namespace Tests.Diagnostics
 
         protected void OnFooBar(EventArgs e)
         {
-            SomeEvent(); // Invalid syntax
-            SomeEvent(null, null, null); // Invalid syntax
+            SomeEvent(); // Error [CS7036] - Invalid syntax
+            SomeEvent(null, null, null); // Error [CS1593] - Invalid syntax
         }
 
         protected void OnEvent()

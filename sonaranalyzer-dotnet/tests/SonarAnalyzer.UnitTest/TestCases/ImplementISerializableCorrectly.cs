@@ -105,15 +105,15 @@ namespace Tests.Diagnostics
     }
 
     [Serializable]
-    public class Serializable_ExplicitImplementation : ISerializable
+    public class Serializable_ExplicitImplementation2 : ISerializable
     {
-        public Serializable_ExplicitImplementation()
+        public Serializable_ExplicitImplementation2()
         { /*do something*/ }
-        protected Serializable_ExplicitImplementation(SerializationInfo info, StreamingContext context)
+        protected Serializable_ExplicitImplementation2(SerializationInfo info, StreamingContext context)
         { /*do something*/ }
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         { GetObjectData(info, context); }
-        protected virtual GetObjectData(SerializationInfo info, StreamingContext context) { }
+        protected void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
 
     [Serializable]

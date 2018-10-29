@@ -58,7 +58,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyNoIssueReported(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs",
                 new ExpectedExceptionAttributeShouldNotBeUsed(),
-                additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion));
+                additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion),
+                checkMode: CompilationErrorBehavior.Ignore);
         }
     }
 }

@@ -36,6 +36,6 @@ namespace Tests.Diagnostics
     static class Ext
     {
         public static string ToLower(this string s, int i) => s;
-        public static string ToLower(this char s, int i) => s;
+        public static char ToLower(this char s, int i) => s;
     }
 }

@@ -24,10 +24,6 @@ namespace Tests.Diagnostics
         {
         }
 
-        public DefaultBaseConstructorCall(double d) /*c*/  : /*don't keep*/ base() // Fixed
-
-
-
         public DefaultBaseConstructorCall(string s)
             : base() // Fixed
         {

@@ -46,10 +46,10 @@ namespace Tests.Diagnostics
 
             // catch clauses count different
             try { }
-            catch (Exception)
+            catch (ApplicationException)
             {
             }
-            catch (ApplicationException)
+            catch (Exception)
             {
             }
 
@@ -58,7 +58,7 @@ namespace Tests.Diagnostics
             catch (Exception)
             {
                 Console.WriteLine();
-                Console.Write();
+                Console.Write("");
             }
 
             // has finally
@@ -76,7 +76,7 @@ namespace Tests.Diagnostics
             finally
             {
                 Console.WriteLine();
-                Console.Write();
+                Console.Write("");
             }
 
             // False negative - the catch clause has a name for the exception, while the try on #36 does not have a name
@@ -100,12 +100,12 @@ namespace Tests.Diagnostics
             catch (ApplicationException)
             {
             }
-            catch (Exception)
+            catch (ArgumentException)
             {
             }
 
             try { } // Noncompliant, same catches, different order
-            catch (Exception)
+            catch (ArgumentException)
             {
             }
             catch (ApplicationException)
@@ -129,10 +129,10 @@ namespace Tests.Diagnostics
             {
                 // Child, not on the same level
                 try { }
-                catch (Exception)
+                catch (ApplicationException)
                 {
                 }
-                catch (ApplicationException)
+                catch (Exception)
                 {
                 }
             }
@@ -147,19 +147,19 @@ namespace Tests.Diagnostics
             {
                 // Not on the same level
                 try { }
-                catch (Exception)
+                catch (ApplicationException)
                 {
                 }
-                catch (ApplicationException)
+                catch (Exception)
                 {
                 }
             }
 
             try { } // Noncompliant {{Combine this 'try' with the one starting on line 128.}}
-            catch (Exception)
+            catch (ApplicationException)
             {
             }
-            catch (ApplicationException)
+            catch (Exception)
             {
             }
         }
@@ -174,7 +174,7 @@ namespace Tests.Diagnostics
                 try { } // Noncompliant {{Combine this 'try' with the one starting on line 171.}}
                 finally { }
 
-                return 0;
+                return "";
             }
             set
             {

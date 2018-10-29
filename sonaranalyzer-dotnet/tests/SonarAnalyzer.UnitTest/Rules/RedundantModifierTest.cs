@@ -31,7 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void RedundantModifier()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantModifier.cs", new RedundantModifier());
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantModifier.cs",
+                new RedundantModifier());
         }
 
         [TestMethod]

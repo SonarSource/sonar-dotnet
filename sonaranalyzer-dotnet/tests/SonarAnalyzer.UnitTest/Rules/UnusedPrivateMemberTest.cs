@@ -92,7 +92,7 @@ public class PrivateMembers
 //              ^ {{Remove the unused private field 'a'.}}
 //                    ^ @-1 {{Remove the unused private field 'c'.}}
 
-    public void Method1() => b;
+    public int Method1() => b;
 }
 ", new UnusedPrivateMember());
         }
@@ -257,8 +257,8 @@ public class PropertyUsages
     private int this[string i] { get { return 5; } set { } }
     public void Method3()
     {
-        var x = this[5];
-        this[5] = 10;
+        var x = this[""5""];
+        this[""5""] = 10;
     }
 }
 ", new UnusedPrivateMember());
@@ -436,10 +436,10 @@ public class NonPrivateMembers
 
     public class InnerPublicClass
     {
-        internal NonPrivateMembers(int i) { var x = 5; }
-        protected NonPrivateMembers(string s) { var x = 5; }
-        protected internal NonPrivateMembers(double d) { var x = 5; }
-        public NonPrivateMembers(char c) { var x = 5; }
+        internal InnerPublicClass(int i) { var x = 5; }
+        protected InnerPublicClass(string s) { var x = 5; }
+        protected internal InnerPublicClass(double d) { var x = 5; }
+        public InnerPublicClass(char c) { var x = 5; }
     }
 }
 ", new UnusedPrivateMember());
@@ -460,19 +460,19 @@ public abstract class PrivateConstructors
 
     public class Constructor2
     {
-        public Constructor2(int 5) { }
+        public Constructor2(int a) { }
         private Constructor2() { var x = 5; }
     }
 
     public class Constructor3
     {
-        public Constructor3(int 5) : Constructor3() { }
+        public Constructor3(int a) : this() { }
         private Constructor3() { var x = 5; }
     }
 
-    public class Constructor3
+    public class Constructor4
     {
-        static Constructor3() { var x = 5; }
+        static Constructor4() { var x = 5; }
     }
 }
 ", new UnusedPrivateMember());
@@ -549,7 +549,7 @@ public class NonPrivateTypes
         public void Types_InternalsVisibleTo()
         {
             Verifier.VerifyCSharpAnalyzer(@"
-[assembly:System.Runtime.CompilerServices.InternalsVisibleTo("")]
+[assembly:System.Runtime.CompilerServices.InternalsVisibleTo("""")]
 public class PrivateTypes
 {
     private class PrivateClass { } // Noncompliant
@@ -633,18 +633,30 @@ public class PrivateConstructors
         {
             Verifier.VerifyCSharpAnalyzer(@"
 using System.Threading.Tasks;
-public class NewClass
+public class NewClass1
 {
     // See https://github.com/SonarSource/sonar-csharp/issues/888
     static async Task Main() { } // Compliant - valid main method since C# 7.1
+}
 
-    static async Task<int> Main() { } // Compliant - valid main method since C# 7.1
+public class NewClass2
+{
+    static async Task<int> Main() { return 1; } // Compliant - valid main method since C# 7.1
+}
 
+public class NewClass3
+{
     static async Task Main(string[] args) { } // Compliant - valid main method since C# 7.1
+}
 
-    static async Task<int> Main(string[] args) { } // Compliant - valid main method since C# 7.1
+public class NewClass4
+{
+    static async Task<int> Main(string[] args) { return 1; } // Compliant - valid main method since C# 7.1
+}
 
-    static async Task<string> Main(string[] args) { } // Noncompliant
+public class NewClass5
+{
+    static async Task<string> Main(string[] args) { return ""a""; } // Noncompliant
 }
 ", new UnusedPrivateMember());
         }
@@ -677,7 +689,7 @@ public class FieldUsages
         public void Assembly_Level_Attributes_FalsePositive()
         {
             Verifier.VerifyCSharpAnalyzer(@"
-[assembly: AssemblyCompany(Foo.Constants.AppCompany)]
+[assembly: System.Reflection.AssemblyCompany(Foo.Constants.AppCompany)]
 public static class Foo
 {
     internal static class Constants // Noncompliant, False Positive; we cannot detect usages from assembly level attributes.

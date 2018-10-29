@@ -24,7 +24,7 @@ namespace Tests.Diagnostics
         ICollection<string> ArrowedGetStrings4() => null; // Noncompliant
         Array ArrowedGetArray() => null; // Noncompliant
 
-        IEnumerable<int> GetValues(string str)
+        IEnumerable<char> GetValues(string str)
         {
             if (str == null)
             {
@@ -62,7 +62,7 @@ namespace Tests.Diagnostics
             return null; // Compliant - string is a collection but we allow null
         }
 
-        int Age { get; private set; }
+        public int Age { get; private set; }
 
         // See https://github.com/SonarSource/sonar-csharp/issues/761
         public List<int> Method()

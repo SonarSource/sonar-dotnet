@@ -64,10 +64,10 @@ namespace Tests.Diagnostics
     {
         public void Foo()
         {
-            Bar("some string", "other string", "third string"); // Compliant, this cannot be compiled
-            Bar("some string"); // Compliant, this cannot be compiled
-            Bar(); // Compliant
-            Console.Write(); // Compliant
+            Bar("some string", "other string", "third string"); // Compliant, this cannot be compiled // Error [CS1501]
+            Bar("some string"); // Compliant, this cannot be compiled // Error [CS1501]
+            Bar(); // Compliant // Error [CS1501]
+            Console.Write(true); // Compliant
             Console.WriteLine(); // Compliant
         }
 

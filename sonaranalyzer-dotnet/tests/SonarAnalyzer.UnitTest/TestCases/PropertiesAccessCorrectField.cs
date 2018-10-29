@@ -53,7 +53,7 @@ namespace Tests.Diagnostics
 //                ^^^
         }
 
-        public string _Y___Y_Y_
+        public int _Y___Y_Y_
         {
             get { return __x__X; } // Noncompliant
 //                       ^^^^^^
@@ -172,7 +172,7 @@ namespace Tests.Diagnostics
     }
 
 
-    struct Compliant_Indexer
+    class Compliant_Indexer
     {
         // Declare an array to store the data elements.
         private readonly int[] arr = new int[100];
@@ -234,7 +234,7 @@ namespace Tests.Diagnostics
         public int Field2
         {
             get { return wrapped.field1; }
-            get { wrapped.field1 = value; }
+            set { wrapped.field1 = value; }
         }
     }
 

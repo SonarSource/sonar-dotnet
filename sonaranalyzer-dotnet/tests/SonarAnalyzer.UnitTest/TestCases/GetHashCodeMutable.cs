@@ -40,13 +40,4 @@ namespace Tests.Diagnostics
             return hash;
         }
     }
-
-    class
-    {
-        int i;
-        public override int GetHashCode()
-        {
-            return i; // we don't report on this
-        }
-    }
 }

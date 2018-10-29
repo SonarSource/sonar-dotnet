@@ -178,22 +178,10 @@ namespace MyLibrary
     [Serializable]
     public partial class MalformedAttributes : ISerializable
     {
-        [FileIOPermissionAttribute(SecurityAction.Whatever_Mate)]
+        [FileIOPermissionAttribute(SecurityAction.Whatever_Mate)] // Error [CS0117] - invalid value
         public MalformedAttributes() { }
 
         protected MalformedAttributes(SerializationInfo info, StreamingContext context) { } // Noncompliant
-
-        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
-    }
-
-[Serializable]
-    public partial class InvalidCode : ISerializable
-    {
-        [FileIOPermissionAttribute(SecurityAction.Demand, Unrestricted = true)]
-        [ZoneIdentityPermission(SecurityAction.Demand, Unrestricted = true)]
-        public InvalidCode() { }
-
-        protected (SerializationInfo info, StreamingContext context) { }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Tests.Diagnostics
@@ -8,6 +8,12 @@ namespace Tests.Diagnostics
         public static MyType operator ==(MyType x, MyType y) // Noncompliant {{Remove this overload of 'operator =='.}}
 //                                    ^^
         {
+            return null;
+        }
+
+        public static MyType operator !=(MyType x, MyType y)
+        {
+            return null;
         }
     }
 
@@ -19,6 +25,11 @@ namespace Tests.Diagnostics
         }
 
         public static bool operator ==(MyTypeWithAdditionOverload x, MyTypeWithAdditionOverload y) // Compliant
+        {
+            return false;
+        }
+
+        public static bool operator !=(MyTypeWithAdditionOverload x, MyTypeWithAdditionOverload y)
         {
             return false;
         }
@@ -35,11 +46,21 @@ namespace Tests.Diagnostics
         {
             return false;
         }
+
+        public static bool operator !=(MyTypeWithSubstractionOverload x, MyTypeWithSubstractionOverload y)
+        {
+            return false;
+        }
     }
 
     struct ComparableTypeMyStruct
     {
-        public static bool operator ==(MyStruct x, MyStruct y) // Compliant
+        public static bool operator ==(ComparableTypeMyStruct x, ComparableTypeMyStruct y) // Compliant
+        {
+            return false;
+        }
+
+        public static bool operator !=(ComparableTypeMyStruct x, ComparableTypeMyStruct y)
         {
             return false;
         }
@@ -56,6 +77,11 @@ namespace Tests.Diagnostics
         {
             return false;
         }
+
+        public static bool operator !=(GenericComparableType x, GenericComparableType y)
+        {
+            return false;
+        }
     }
 
     class ComparableType : IComparable
@@ -69,16 +95,26 @@ namespace Tests.Diagnostics
         {
             return false;
         }
+
+        public static bool operator !=(ComparableType x, ComparableType y)
+        {
+            return false;
+        }
     }
 
     class EquatableType : IEquatable<EquatableType>
     {
-        public bool Equals(ComparableType other)
+        public bool Equals(EquatableType other)
         {
             throw new NotImplementedException();
         }
 
         public static bool operator ==(EquatableType x, EquatableType y) // Compliant
+        {
+            return false;
+        }
+
+        public static bool operator !=(EquatableType x, EquatableType y)
         {
             return false;
         }

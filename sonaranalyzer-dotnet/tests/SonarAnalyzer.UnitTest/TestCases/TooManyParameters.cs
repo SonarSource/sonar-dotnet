@@ -28,8 +28,8 @@ namespace Tests.Diagnostics
 
         // see https://github.com/SonarSource/sonar-csharp/issues/1459
         // We should not raise for imported methods according to external definition.
-        [DllImport()]
-        public static extern Extern(int p1, int p2, int p3, int p4); // Compliant, external definition
+        [DllImport("foo.dll")]
+        public static extern void Extern(int p1, int p2, int p3, int p4); // Compliant, external definition
     }
 
     public interface If
@@ -62,6 +62,7 @@ namespace Tests.Diagnostics
     public class SubClass2 : TooManyParameters
     {
         public SubClass2(int p1, int p2, int p3, string s1, string s2) // Noncompliant
+            : base(p1, p2, p3)
         {
 
         }

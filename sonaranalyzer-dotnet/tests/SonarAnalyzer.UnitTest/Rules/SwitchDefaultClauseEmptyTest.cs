@@ -31,7 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SwitchDefaultClauseEmpty()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchDefaultClauseEmpty.cs", new SwitchDefaultClauseEmpty());
+            Verifier.VerifyAnalyzer(@"TestCases\SwitchDefaultClauseEmpty.cs",
+                new SwitchDefaultClauseEmpty());
         }
 
         [TestMethod]

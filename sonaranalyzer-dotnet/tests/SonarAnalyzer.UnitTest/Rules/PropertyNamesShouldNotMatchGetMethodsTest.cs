@@ -34,5 +34,15 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\PropertyNamesShouldNotMatchGetMethods.cs",
                 new PropertyNamesShouldNotMatchGetMethods());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void PropertyNamesShouldNotMatchGetMethods_InvalidCode()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+    public int { get; } // Missing identifier on purpose
+    public int () { return 42; } // Missing identifier on purpose
+", new PropertyNamesShouldNotMatchGetMethods(), checkMode: CompilationErrorBehavior.Ignore);
+        }
     }
 }

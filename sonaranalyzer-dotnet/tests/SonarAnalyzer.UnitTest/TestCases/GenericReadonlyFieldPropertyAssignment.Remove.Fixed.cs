@@ -65,8 +65,8 @@ namespace Tests.TestCases
 
         public void MovePointVertically(int newX)
         {
-            point.X = newX; // Compliant, compiler error CS1648
-            point.X++;      // Compliant, compiler error CS1648
+            point.X = newX; // Compliant // Error [CS1648]
+            point.X++;      // Compliant // Error [CS1648]
             Console.WriteLine(point.X);
         }
     }

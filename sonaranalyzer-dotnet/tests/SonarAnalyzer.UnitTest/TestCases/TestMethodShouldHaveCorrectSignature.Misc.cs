@@ -48,7 +48,6 @@
     [TestClass]
     public class NonTestAttributesAreIgnored
     {
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
         [System.Diagnostics.DebuggerStepThrough]
         private void PrivateTestMethod() // Noncompliant {{Make this test method 'public'.}}
@@ -60,7 +59,7 @@
     [TestClass]
     public class InvalidAttributes
     {
-        [UnknownAttribute]      // Shouldn't fail
+        [UnknownAttribute]      // Shouldn't fail // Error [CS0246, CS0246]
         private void AMethod()
         {
         }

@@ -58,25 +58,36 @@ namespace Tests.TestCases
         void DoSomething(int a, int b) => throw new NotImplementedException();
     }
 
-    class MainEntryPoints
+    class MainEntryPoints1
     {
         static void Main(string[] args) // Compliant because Main is ignored + empty method
         {
         }
+    }
 
+    class MainEntryPoints2
+    {
         static async Task Main(string[] args) // Compliant - new main syntax
         {
             Console.WriteLine("Test");
         }
+    }
 
+    class MainEntryPoints3
+    {
         static async Task<int> Main(string[] args) // Compliant - new main syntax
         {
             Console.WriteLine("Test");
+            return 1;
         }
+    }
 
+    class MainEntryPoints4
+    {
         static async Task<string> Main(string[] args) // Noncompliant
         {
             Console.WriteLine("Test");
+            return "";
         }
     }
 
@@ -114,7 +125,7 @@ namespace Tests.TestCases
         }
 
         [Any]
-        private static void MyMethod(this string s,
+        private static void MyMethod2(this string s,
             int i) // Compliant because of the attribute
         {
 
@@ -246,7 +257,7 @@ namespace Tests.TestCases
 
     public class Dead
     {
-        private int Method1(int p) => (new Action(() => { p = 10; return p; }))(); // Not reporting on this
+        private int Method1(int p) => (new Func<int>(() => { p = 10; return p; }))(); // Not reporting on this
 
         private void Method2(int p)
         {
@@ -311,7 +322,7 @@ namespace Tests.TestCases
         }
     }
 
-    public class Intermediate : ISerializable
+    public class Intermediate : ISerializable // Error [CS0535]
     { }
 
     [Serializable]
@@ -337,11 +348,11 @@ namespace Tests.TestCases
     }
 
     [Serializable]
-    public class NotProperImplementedSerializableClass
+    public class NotProperImplementedSerializableClass2
     {
         private string value;
 
-        private NotProperImplementedSerializableClass(SerializationInfo info, StreamingContext context) // Compliant, not ISerializable
+        private NotProperImplementedSerializableClass2(SerializationInfo info, StreamingContext context) // Noncompliant
         {
             value = info.GetString("Value");
         }

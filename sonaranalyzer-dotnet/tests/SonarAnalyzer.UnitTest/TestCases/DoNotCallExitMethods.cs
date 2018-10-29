@@ -15,40 +15,16 @@ namespace Tests.Diagnostics
             Application.Exit();
         }
 
-        public void FooProperty
+        public int FooProperty
         {
             get
             {
                 Environment.Exit(0); // Noncompliant
+                return 0;
             }
             set
             {
                 Environment.Exit(0); // Noncompliant
-            }
-        }
-
-        public static void Main()
-        {
-            Environment.Exit(0); // Compliant - inside Main
-        }
-        public static int Main(string[] args)
-        {
-            Environment.Exit(0); // Compliant - inside Main
-        }
-        public static async Task<int> Main(string[] args)
-        {
-            Environment.Exit(0); // Compliant - inside Main
-        }
-
-        public static void Main()
-        {
-            Foo();
-
-            int x = 1;
-
-            void Foo()
-            {
-                Environment.Exit(0); // Compliant - inside Main
             }
         }
 
@@ -62,6 +38,43 @@ namespace Tests.Diagnostics
             {
                 Environment.Exit(0); // Noncompliant
             }
+        }
+    }
+
+    class MyProgram
+    {
+        public static void Main()
+        {
+            Environment.Exit(0); // Compliant - inside Main
+
+            Foo();
+
+            int x = 1;
+
+            void Foo()
+            {
+                Environment.Exit(0); // Compliant - inside Main
+            }
+        }
+    }
+
+    class MyProgram1
+    {
+        public static async Task<int> Main(string[] args)
+        {
+            Environment.Exit(0); // Compliant - inside Main
+
+            return 1;
+        }
+    }
+
+    class MyProgram2
+    {
+        public static int Main(string[] args)
+        {
+            Environment.Exit(0); // Compliant - inside Main
+
+            return 0;
         }
     }
 

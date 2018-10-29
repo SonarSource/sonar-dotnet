@@ -1,8 +1,10 @@
-﻿namespace Tests.Diagnostics
+﻿using System;
+
+namespace Tests.Diagnostics
 {
     public class SwitchDefaultClauseEmpty
     {
-        enum Fruit
+        public enum Fruit
         {
             Apple,
             Orange,

@@ -5,6 +5,8 @@ namespace Tests.Diagnostics
 {
     public class MyAttribute : Attribute { }
 
+    public class SomeException : Exception { }
+
     public class PropertyToAutoProperty
     {
         static public implicit operator int (PropertyToAutoProperty x)
@@ -78,7 +80,7 @@ namespace Tests.Diagnostics
             set { PropertyToAutoProperty._make3 += value; }
         }
 
-        public string Make4 // Compliant, returns a static field
+        public string Make9 // Compliant, returns a static field
         {
             get { return _make3; }
             set { _make3 = value; }

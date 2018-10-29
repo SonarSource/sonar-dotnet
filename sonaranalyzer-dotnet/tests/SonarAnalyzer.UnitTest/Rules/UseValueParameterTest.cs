@@ -31,7 +31,20 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UseValueParameter()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\UseValueParameter.cs", new UseValueParameter());
+            Verifier.VerifyAnalyzer(@"TestCases\UseValueParameter.cs",
+                new UseValueParameter());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UseValueParameter_InvalidCode()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+public int Foo
+{
+    get => field;
+    set => // Noncompliant
+}", new UseValueParameter(), checkMode: CompilationErrorBehavior.Ignore);
         }
     }
 }

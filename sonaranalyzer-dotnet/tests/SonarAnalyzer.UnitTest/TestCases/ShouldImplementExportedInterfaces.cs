@@ -56,15 +56,15 @@ namespace Classes
     {
     }
 
-    [Export(1)]
-    [Export(1, typeof(IComparable))]
-    [Export(typeof(ASDASD))]
-    [Export(typeof(MyInterface), typeof(IComparable))]
+    [Export(1)] // Error [CS1503]
+    [Export(1, typeof(IComparable))] // Error [CS1503]
+    [Export(typeof(ASDASD))] // Error [CS0246]
+    [Export(typeof(MyInterface), typeof(IComparable))] // Error [CS1503]
     class InvalidSyntax
     {
     }
 
-    [Import(typeof(MyInterface))]
+    [Import(typeof(MyInterface))] // Error [CS0592] - cannot import here
     [InheritedExport(typeof(MyInterface))] // Noncompliant
     [InheritedExport(typeof(OtherAttributes))]
     class OtherAttributes
@@ -89,7 +89,7 @@ namespace Classes
 
         [Export(typeof(MyInterface))]
         [Export(typeof(Exported))]
-        public NotExported MyMethod() { }
+        public NotExported MyMethod() { return null; }
     }
 
     interface ISomething<T> { }
@@ -102,7 +102,7 @@ namespace Classes
 
     }
 
-    [Export(typeof(ISomething<BaseThing>))] // Noncompliant {{Implement 'ISomething<BaseThing>' on 'Something<BaseThing>' or remove this export attribute.}}
+    [Export(typeof(ISomething<BaseThing>))] // Noncompliant {{Implement 'ISomething<BaseThing>' on 'Something<BaseThing>' or remove this export attribute.}} // Error [CS0416]
     public class Something<BaseThing>
     {
     }
@@ -114,7 +114,7 @@ namespace Classes
     }
 
     [Export(typeof(ISomething<>))] // Noncompliant
-    public class Something<T> : ISomething<T>
+    public class Soomething<T> : ISomething<T>
     {
     }
 }

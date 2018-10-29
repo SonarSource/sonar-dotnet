@@ -13,7 +13,7 @@ namespace Tests.Diagnostics
     {
         public object O { get; set; }
 
-        public Test(int a, int b)
+        public void Test(int a, int b)
         {
             if (O == null && new ShortCircuitNullPointerDereference().O == null)
             {

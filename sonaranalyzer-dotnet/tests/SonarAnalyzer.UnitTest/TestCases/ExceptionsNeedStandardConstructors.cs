@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace MyLibrary
@@ -75,16 +75,5 @@ namespace MyLibrary
         public My_06_Exception(string message, Exception innerException) { }
 
         public My_06_Exception(SerializationInfo info, StreamingContext context) { }
-    }
-
-    public class  : Exception
-    {
-        My_07_Exception() {}
-
-        My_07_Exception(string message) { }
-
-        My_07_Exception(string message, Exception innerException) {}
-
-        My_07_Exception(SerializationInfo info, StreamingContext context) {}
     }
 }

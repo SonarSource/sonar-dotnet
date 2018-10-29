@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace MyLibrary
 {
@@ -60,7 +60,7 @@ namespace MyLibrary
     public class Foo5
 //               ^^^^ Noncompliant {{Provide an implementation for: 'operator=='.}}
     {
-        public static object operator !=(Foo5 a, Foo5 b) => new object();
+        public static object operator !=(Foo5 a, Foo5 b) => new object(); // Error [CS0216] - requires == operator
 
         public override bool Equals(object obj) => false;
         public override int GetHashCode() => 0;
@@ -69,6 +69,6 @@ namespace MyLibrary
     public class Foo6
 //               ^^^^ Noncompliant {{Provide an implementation for: 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.}}
     {
-        public static object operator ==(Foo6 a, Foo6 b) => new object();
+        public static object operator ==(Foo6 a, Foo6 b) => new object(); // Error [CS0216] - requires != operator
     }
 }

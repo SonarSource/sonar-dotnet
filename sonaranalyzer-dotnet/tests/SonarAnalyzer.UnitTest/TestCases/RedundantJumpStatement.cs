@@ -29,7 +29,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        void Foo2()
+        void Foo2(bool a)
         {
             if (a)
             {
@@ -38,11 +38,11 @@ namespace Tests.Diagnostics
             else
             {
                 return;
-                Foo2();
+                Foo2(a);
             }
         }
 
-        void Loop_Continue()
+        void Loop_Continue(bool a)
         {
             for (int i = 0; i < 10; i++)
             {
@@ -53,7 +53,7 @@ namespace Tests.Diagnostics
                 else
                 {
                     continue;
-                    Foo2();
+                    Foo2(a);
                 }
             }
         }

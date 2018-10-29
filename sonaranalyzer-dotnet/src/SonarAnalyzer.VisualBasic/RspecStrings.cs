@@ -5,8 +5,8 @@
 // So, you should not remove it, nor manually edit it.
 //------------------------------------------------------------------------------
 
-namespace SonarAnalyzer {
-    using System;
+namespace SonarAnalyzer
+{
     using System.Reflection;
 
 

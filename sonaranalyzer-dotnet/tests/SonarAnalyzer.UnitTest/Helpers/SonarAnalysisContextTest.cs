@@ -21,10 +21,8 @@
 extern alias csharp;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -65,6 +63,45 @@ namespace SonarAnalyzer.UnitTest.Helpers
             finally
             {
                 SonarAnalysisContext.ShouldExecuteRegisteredAction = null;
+            }
+        }
+
+        public class MyStream : System.IO.Stream
+        {
+            public override bool CanRead { get; }
+            public override bool CanSeek { get; }
+            public override bool CanWrite { get; }
+            public override long Length { get; }
+            public override long Position { get; set; }
+
+            public override void Flush()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override int Read(byte[] buffer, int offset, int count)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override long Seek(long offset, SeekOrigin origin)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void SetLength(long value)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void Write(byte[] buffer, int offset, int count)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            protected override void Dispose(bool disposing)
+            {
+
             }
         }
 

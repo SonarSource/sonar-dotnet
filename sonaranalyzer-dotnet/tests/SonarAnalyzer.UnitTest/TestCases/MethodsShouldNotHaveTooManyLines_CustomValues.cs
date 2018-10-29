@@ -2,7 +2,7 @@
 
 namespace Tests.Diagnostics
 {
-    class Program
+    abstract class Program
     {
         public Program() // Noncompliant {{This constructor 'Program' has 4 lines, which is greater than the 2 lines authorized. Split it into smaller methods.}}
 //             ^^^^^^^
@@ -13,7 +13,7 @@ namespace Tests.Diagnostics
             i++;
         }
 
-        public ~Program() // Noncompliant {{This finalizer '~Program' has 4 lines, which is greater than the 2 lines authorized. Split it into smaller methods.}}
+        ~Program() // Noncompliant {{This finalizer '~Program' has 4 lines, which is greater than the 2 lines authorized. Split it into smaller methods.}}
         {
             int i = 1; i++;
             i++;
@@ -53,7 +53,7 @@ namespace Tests.Diagnostics
 
         extern int Method_05();
 
-        public int Method_06() // Noncompliant {{This method 'Method_06' has 6 lines, which is greater than the 2 lines authorized. Split it into smaller methods.}}
+        public int Method_06() // Noncompliant {{This method 'Method_06' has 7 lines, which is greater than the 2 lines authorized. Split it into smaller methods.}}
         {
             // We only report on outer methods.
             // The lines of code of inner functions are counted against the method.
@@ -63,6 +63,8 @@ namespace Tests.Diagnostics
                 i++;
                 i++;
             }
+
+            return 1;
         }
 
         public string Method_07() // Noncompliant {{This method 'Method_07' has 4 lines, which is greater than the 2 lines authorized. Split it into smaller methods.}}

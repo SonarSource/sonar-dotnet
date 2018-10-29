@@ -16,7 +16,7 @@ namespace Tests.Diagnostics
         public virtual void Print3(string[] messages, string delimiter = "\n") { }// Noncompliant {{This method signature overlaps the one defined on line 15, the default parameter value can't be used.}}
     }
 
-    public class MethodOverloadOptionalParameter : MyBase, IMyInterface
+    public partial class MethodOverloadOptionalParameter : MyBase, IMyInterface
     {
         public override void Print3(string[] messages) { }
         public override void Print3(string[] messages, string delimiter = "\n") { }// Compliant; comes from base class
@@ -39,7 +39,7 @@ namespace Tests.Diagnostics
     {
         void Print(string messages, int num, object something);
 
-        void Print(string messages, int num = 0, object something = null);
+        void Print(string messages, int num = 0, object something = null); // Error [CS0111] - Already contains member with same params
     }
 
     public interface Generics
@@ -61,7 +61,7 @@ namespace Tests.Diagnostics
         void Foo5(MyType messages, string delimiter = "\n");
 
         void Foo6<T>(KeyValuePair<T, int> ids);
-        void Foo6<U>(KeyValuePair<T, string> messages, string delimiter = "\n");
+        void Foo6<U>(KeyValuePair<U, string> messages, string delimiter = "\n");
 
         void Foo7<T>(KeyValuePair<KeyValuePair<T, int>, string> ids);
         void Foo7<U>(KeyValuePair<KeyValuePair<U, string>, string> messages, string delimiter = "\n");

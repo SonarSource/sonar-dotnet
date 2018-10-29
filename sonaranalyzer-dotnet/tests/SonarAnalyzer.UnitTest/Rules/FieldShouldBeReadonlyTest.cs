@@ -31,7 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void FieldShouldBeReadonly()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\FieldShouldBeReadonly.cs", new FieldShouldBeReadonly());
+            Verifier.VerifyAnalyzer(@"TestCases\FieldShouldBeReadonly.cs",
+                new FieldShouldBeReadonly());
         }
 
         [TestMethod]

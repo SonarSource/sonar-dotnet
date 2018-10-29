@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -159,9 +159,11 @@ namespace Tests.Diagnostics
             {
                 throw;
             }
+
+            return true;
         }
 
-        public static bool operator ==(ValidProgram a, ValidProgram b)
+        public static bool operator ==(ValidRethrowProgram a, ValidRethrowProgram b) // Error [CS0216] - no != operator
         {
             try
             {
@@ -170,8 +172,11 @@ namespace Tests.Diagnostics
             {
                 throw;
             }
+
+            return true;
         }
 
+        public void Dispose() { }
     }
 
     class InvalidProgram : IDisposable

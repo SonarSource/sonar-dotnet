@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -34,15 +34,30 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class DiagnosticAnalyzerContextHelperTest
     {
-        private static void VerifyEmpty(string name, string content, DiagnosticAnalyzer diagnosticAnalyzer)
+        private static void VerifyEmpty(string name, string content, DiagnosticAnalyzer diagnosticAnalyzer,
+            CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
         {
+            AnalyzerLanguage language;
+            if (name.EndsWith(".cs"))
+            {
+                language = AnalyzerLanguage.CSharp;
+            }
+            else if (name.EndsWith(".vb"))
+            {
+                language = AnalyzerLanguage.VisualBasic;
+            }
+            else
+            {
+                throw new ArgumentException($"Was expecting the file name to end with '.cs' or '.vb', got '{name}'.", nameof(name));
+            }
+
             var compilation = SolutionBuilder
                .Create()
-               .AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
+               .AddProject(language, createExtraEmptyFile: false)
                .AddSnippet(content, name)
                .GetCompilation();
 
-            DiagnosticVerifier.VerifyNoIssueReported(compilation, diagnosticAnalyzer);
+            DiagnosticVerifier.VerifyNoIssueReported(compilation, diagnosticAnalyzer, checkMode);
         }
 
         private static bool IsGenerated(string content, GeneratedCodeRecognizer generatedCodeRecognizer)

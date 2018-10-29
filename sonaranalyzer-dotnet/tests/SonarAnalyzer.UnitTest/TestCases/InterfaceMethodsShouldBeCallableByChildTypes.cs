@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -45,12 +45,12 @@ namespace Tests.Diagnostics
 
     public class Foo3 : IFoo
     {
-        void Method() // Compliant - IFoo is not explicitly implemented
+        public void Method() // Compliant - IFoo is not explicitly implemented
         {
         }
 
-        int Property { get; set; }
-        event EventHandler Event { add { } remove { } }
+        public int Property { get; set; }
+        public event EventHandler Event { add { } remove { } }
     }
 
     public class Foo4 : IFoo
@@ -108,7 +108,7 @@ namespace Tests.Diagnostics
         event EventHandler IFoo.Event
         { add { } remove { } }
 
-        public event EventHandler Event { add { } }
+        public event EventHandler Event { add { } remove { } }
     }
 
     public class Foo7 : IFoo

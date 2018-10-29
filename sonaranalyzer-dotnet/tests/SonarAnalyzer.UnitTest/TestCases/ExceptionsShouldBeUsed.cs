@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -22,6 +22,8 @@ namespace Tests.Diagnostics
             return new Exception();
             throw new Exception();
         }
+
+        void Foo(Exception ex) { }
 
         Exception CompliantArrow() => new Exception();
 

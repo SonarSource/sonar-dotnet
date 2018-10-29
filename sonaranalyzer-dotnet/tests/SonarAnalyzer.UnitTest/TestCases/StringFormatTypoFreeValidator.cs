@@ -53,32 +53,36 @@ namespace Tests.Diagnostics
 
         void System_Text_StringBuilder_AppendFormat(string[] args)
         {
-            System.Text.StringBuilder.AppendFormat("0"); // Noncompliant
-            System.Text.StringBuilder.AppendFormat("{0}", 42);
+            var sb = new System.Text.StringBuilder();
+            sb.AppendFormat("0"); // Noncompliant
+            sb.AppendFormat("{0}", 42);
 
-            System.Text.StringBuilder.AppendFormat("{0}", args[0], args[1]); // Noncompliant
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            System.Text.StringBuilder.AppendFormat("{2}", 1, 2, 3); // Noncompliant
+            sb.AppendFormat("{0}", args[0], args[1]); // Noncompliant
+//          ^^^^^^^^^^^^^^^
+            sb.AppendFormat("{2}", 1, 2, 3); // Noncompliant
         }
 
         void System_IO_TextWriter_Write(string[] args)
         {
-            System.IO.TextWriter.Write("0"); // Compliant
-            System.IO.TextWriter.Write("{0}", 42);
+            var tw = System.IO.File.CreateText("C:\\perl.txt");
+            tw.Write("0"); // Compliant
+            tw.Write("{0}", 42);
 
-            System.IO.TextWriter.Write("{0}", args[0], args[1]); // Noncompliant
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^
-            System.IO.TextWriter.Write("{2}", 1, 2, 3); // Noncompliant
+            tw.Write("{0}", args[0], args[1]); // Noncompliant
+//          ^^^^^^^^
+            tw.Write("{2}", 1, 2, 3); // Noncompliant
         }
 
         void System_IO_TextWriter_WriteLine(string[] args)
         {
-            System.IO.TextWriter.WriteLine("0"); // Compliant
-            System.IO.TextWriter.WriteLine("{0}", 42);
+            var tw = System.IO.File.CreateText("C:\\perl.txt");
 
-            System.IO.TextWriter.WriteLine("{0}", args[0], args[1]); // Noncompliant
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            System.IO.TextWriter.WriteLine("{2}", 1, 2, 3); // Noncompliant
+            tw.WriteLine("0"); // Compliant
+            tw.WriteLine("{0}", 42);
+
+            tw.WriteLine("{0}", args[0], args[1]); // Noncompliant
+//          ^^^^^^^^^^^^
+            tw.WriteLine("{2}", 1, 2, 3); // Noncompliant
         }
 
         void System_Diagnostics_Debug_WriteLine(string[] args)
@@ -123,12 +127,13 @@ namespace Tests.Diagnostics
 
         void System_Diagnostics_TraceSource_TraceInformation(string[] args)
         {
-            System.Diagnostics.TraceSource.TraceInformation("0"); // Compliant
-            System.Diagnostics.TraceSource.TraceInformation("{0}", 42);
+            var ts = new System.Diagnostics.TraceSource("TraceTest");
+            ts.TraceInformation("0"); // Compliant
+            ts.TraceInformation("{0}", 42);
 
-            System.Diagnostics.TraceSource.TraceInformation("{0}", args[0], args[1]); // Noncompliant
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            System.Diagnostics.TraceSource.TraceInformation("{2}", 1, 2, 3); // Noncompliant
+            ts.TraceInformation("{0}", args[0], args[1]); // Noncompliant
+//          ^^^^^^^^^^^^^^^^^^^
+            ts.TraceInformation("{2}", 1, 2, 3); // Noncompliant
         }
     }
 }

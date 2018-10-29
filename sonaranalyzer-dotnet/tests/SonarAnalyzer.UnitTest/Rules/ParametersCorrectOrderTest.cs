@@ -31,7 +31,23 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ParametersCorrectOrder()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.cs", new ParametersCorrectOrder());
+            Verifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.cs",
+                new ParametersCorrectOrder());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ParametersCorrectOrder_InvalidCode()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+public class Foo
+{
+    public void Bar()
+    {
+        new ()
+        new System. ()
+    }
+}", new ParametersCorrectOrder(), checkMode: CompilationErrorBehavior.Ignore);
         }
     }
 }

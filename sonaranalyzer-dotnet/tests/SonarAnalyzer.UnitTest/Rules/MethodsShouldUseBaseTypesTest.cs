@@ -71,5 +71,30 @@ internal class Bar
             Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldUseBaseTypes.cs",
                 new MethodsShouldUseBaseTypes());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MethodsShouldUseBaseTypes_InvalidCode()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Foo
+{
+    private void FooBar(IList<int> , IList<string>)
+    {
+        a.ToList();
+    }
+
+    // New test case - code doesn't compile but was making analyzer crash
+    private void Foo(IList<int> a, IList<string> a)
+    {
+        a.ToList();
+    }
+}", new MethodsShouldUseBaseTypes(), checkMode: CompilationErrorBehavior.Ignore);
+        }
     }
 }

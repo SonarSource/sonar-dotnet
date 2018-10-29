@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -33,6 +33,23 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotExposeListT.cs",
                 new DoNotExposeListT());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotExposeListT_InvalidCode()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+public class InvalidCode
+{
+    public List<int> () => null;
+
+    public List<T> { get; set; }
+
+    public List<InvalidType> Method() => null;
+
+    public InvalidType Method2() => null;
+}", new DoNotExposeListT(), checkMode: CompilationErrorBehavior.Ignore);
         }
     }
 }

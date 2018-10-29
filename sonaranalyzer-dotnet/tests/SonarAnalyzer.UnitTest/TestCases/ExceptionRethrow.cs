@@ -1,5 +1,10 @@
-﻿namespace Tests.Diagnostics
+﻿using System;
+
+namespace Tests.Diagnostics
 {
+    public class ExceptionType1 : Exception { }
+    public class ExceptionType2 : Exception { }
+
     public class ExceptionRethrow
     {
         public void Test()

@@ -15,11 +15,13 @@ namespace Tests.Diagnostics
         [HttpPost] // Compliant - no input to validate
         public ActionResult Foo2()
         {
+            return null;
         }
 
         [ValidateInput(false)] // Compliant - no HttpPostAttribute
         public ActionResult Foo3(string input)
         {
+            return null;
         }
 
         [System.Web.Mvc.HttpPost] // Compliant - input is validated
@@ -28,6 +30,8 @@ namespace Tests.Diagnostics
         {
             return Foo(input);
         }
+
+        private ActionResult Foo(string i) => null;
     }
 
     public class NonCompliantController : Controller
@@ -47,25 +51,27 @@ namespace Tests.Diagnostics
         }
 
         [HttpPost] // Noncompliant
-        [ValidateInput("foo")]
+        [ValidateInput("foo")] // Error [CS1503] - cannot convert
         public ActionResult Foo3(string input)
         {
             return Foo(input);
         }
 
         [HttpPost] // Noncompliant
-        [ValidateInput()]
+        [ValidateInput()] // Error [CS7036] - no arg given
         public ActionResult Foo4(string input)
         {
             return Foo(input);
         }
 
         [HttpPost] // Noncompliant
-        [ValidateInput(false, "foo")]
+        [ValidateInput(false, "foo")] // Error [CS1729] - ctor doesn't exist
         public ActionResult Foo5(string input)
         {
             return Foo(input);
         }
+
+        private ActionResult Foo(string i) => null;
     }
 
     public class MoreNonCompliantController
@@ -75,5 +81,7 @@ namespace Tests.Diagnostics
         {
             return Foo(input);
         }
+
+        private ActionResult Foo(string i) => null;
     }
 }

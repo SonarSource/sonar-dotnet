@@ -65,6 +65,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspNetCoreMvcVersion))
                     // for IRouter and VirtualPathData
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspNetCoreRoutingVersion))
+                    // for IActionResult
+                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcAbstractions(aspNetCoreMvcVersion))
+                    .Concat(NuGetMetadataReference.MicrosoftNetHttpHeaders("2.1.1"))
                     .ToArray());
         }
 

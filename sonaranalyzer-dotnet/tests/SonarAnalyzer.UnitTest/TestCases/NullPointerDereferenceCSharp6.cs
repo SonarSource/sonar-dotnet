@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
+    public class A { }
+
     class NullPointerDereferenceWithFieldsCSharp6 : A
     {
         private object _foo1;

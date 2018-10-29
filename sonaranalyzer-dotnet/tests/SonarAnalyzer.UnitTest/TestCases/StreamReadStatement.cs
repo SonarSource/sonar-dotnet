@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
 {
@@ -14,7 +16,7 @@ namespace Tests.Diagnostics
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                 var l = stream.Read(result, 0, (int)stream.Length);
                 stream.ReadAsync(result, 0, (int)stream.Length); // Noncompliant {{Check the return value of the 'ReadAsync' call to see how many bytes were read.}}
-                await stream.ReadAsync(result, 0, (int)stream.Length); // Noncompliant
+                await stream.ReadAsync(result, 0, (int)stream.Length); // Error [CS4033] - ctor can't be async // Noncompliant
                 stream.Write(result, 0, (int)stream.Length);
             }
         }
@@ -97,7 +99,7 @@ namespace Tests.Diagnostics
 
     public class Program
     {
-        public void Foo()
+        public async Task Foo()
         {
             var stream = new DerivedStream();
             var array = new byte[10];
@@ -107,7 +109,7 @@ namespace Tests.Diagnostics
             await stream.ReadAsync(array, 0, (int)stream.Length); // Noncompliant
             var res = await stream.ReadAsync(array, 0, (int)stream.Length); // Compliant
 
-            stream.ReadAsync(array, 0, (int)stream.Length).Result; // Compliant - (false negative) should not be compliant
+            var x = stream.ReadAsync(array, 0, (int)stream.Length).Result; // Compliant - (false negative) should not be compliant
         }
     }
 }

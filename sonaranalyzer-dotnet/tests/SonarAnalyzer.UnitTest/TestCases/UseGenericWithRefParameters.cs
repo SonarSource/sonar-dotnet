@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -19,10 +19,7 @@ namespace Tests.Diagnostics
                          ref Foo o2,
                          ref object[] o3)
         {
-        }
-
-        public void (ref object o1)
-        {
+            o1 = null;
         }
     }
 }

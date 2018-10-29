@@ -50,16 +50,6 @@ namespace Tests.Diagnostics
         }
     }
 
-    public struct Foo
-    {
-        public const string NameConst = "foobar"; // Noncompliant {{Define a constant instead of using this literal 'foobar' 4 times.}}
-//                                      ^^^^^^^^
-
-        private string name1 = "foobar"; // Secondary
-        private string name2 = "foobar"; // Secondary
-        private string name3 = "foobar"; // Secondary
-    }
-
     public class OuterClass
     {
         private string Name { get; } = "foobar"; // Noncompliant
@@ -74,10 +64,18 @@ namespace Tests.Diagnostics
 
         private struct InnerStruct
         {
-            private string name1 = "foobar"; // Secondary - inner struct count with base
-            private string name2 = "foobar"; // Secondary
-            private string name3 = "foobar"; // Secondary
-            private string name4 = "foobar"; // Secondary
+            private string name1;
+            private string name2;
+            private string name3;
+            private string name4;
+
+            public InnerStruct(string s)
+            {
+                name1 = "foobar"; // Secondary - inner struct count with base
+                name2 = "foobar"; // Secondary
+                name3 = "foobar"; // Secondary
+                name4 = "foobar"; // Secondary
+            }
         }
     }
 }

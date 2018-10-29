@@ -48,6 +48,8 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class Foo { }
+
     public class DummyCl
     {
         public int A { get; set; }

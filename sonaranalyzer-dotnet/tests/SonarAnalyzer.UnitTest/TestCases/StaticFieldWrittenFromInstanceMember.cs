@@ -34,7 +34,7 @@ namespace Tests.Diagnostics
             set
             {
                 count++; // Noncompliant [1]
-                this.count += 42; // Compliant, already reported on this symbol
+                count += 42; // Compliant, already reported on this symbol
                 myVar = value;
             }
         }

@@ -583,19 +583,21 @@ namespace Test_21
 {
     public interface I
     {
-        void Foo() { }
+        void Foo();
 
-        void Foo2() { }
+        void Foo2();
     }
 
     public class A : I
     {
         public virtual void Foo() { }
+        public void Foo2() { }
     }
 
     public class B : A
     {
         public override void Foo() { }
+        public void Foo2() { }
     }
 
     public interface IOther
@@ -614,23 +616,6 @@ namespace Test_21
         public void MethodB(B b)
         {
             b.Foo();
-        }
-    }
-}
-
-namespace Test_22
-{
-    public class Foo
-    {
-        // New test case - code doesn't compile but was making analyzer crash
-        private void Foo(IList<int> a, IList<string> a)
-        {
-            a.ToList();
-        }
-
-        private void FooBar(IList<int> , IList<string>)
-        {
-            a.ToList();
         }
     }
 }
@@ -771,7 +756,7 @@ namespace Test_26
 {
     public class Foo
     {
-        public void Foo(Dictionary<string, string> dictionary)
+        public void Bar(Dictionary<string, string> dictionary)
         {
             var x = dictionary.Count;
         }

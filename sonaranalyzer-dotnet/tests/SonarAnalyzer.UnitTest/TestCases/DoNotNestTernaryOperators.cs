@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
     {
         public bool Foo()
         {
-            var b = System.Environment?.NewLine;
+            var b = System.Environment.NewLine?.ToString();
             return true ? FooImpl(true, false) : true;
         }
 
@@ -23,6 +23,8 @@ namespace Tests.Diagnostics
                  isMarried // Noncompliant
                 ? "Mrs. "
                 : "Miss ";
+
+            return false;
         }
     }
 }

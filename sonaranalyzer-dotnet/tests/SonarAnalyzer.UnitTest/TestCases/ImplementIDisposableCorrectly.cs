@@ -62,7 +62,7 @@ namespace Tests.Diagnostics
 
         protected virtual void Dispose(bool disposing) { }
 
-        ~FinalizedDisposable() =>
+        ~FinalizedDisposableExpression() =>
             Dispose(false);
     }
 

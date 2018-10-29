@@ -9,6 +9,8 @@ namespace Tests.Diagnostics
 
         [ConstructorArgument("value1")]
         public object Value1 { get; set; }
+
+        public override object ProvideValue(IServiceProvider serviceProvider) => null;
     }
     public class MyExtension2 : MarkupExtension
     {
@@ -16,6 +18,8 @@ namespace Tests.Diagnostics
 
         [System.Windows.Markup.ConstructorArgument("value1")]
         public object Value1 { get; set; }
+
+        public override object ProvideValue(IServiceProvider serviceProvider) => null;
     }
     public class MyExtension3 : MarkupExtension
     {
@@ -24,20 +28,26 @@ namespace Tests.Diagnostics
         [ConstructorArgument("value2")]  // Noncompliant {{Change this 'ConstructorArgumentAttribute' value to match one of the existing constructors arguments.}}
 //                           ^^^^^^^^
         public object Value1 { get; set; }
+
+        public override object ProvideValue(IServiceProvider serviceProvider) => null;
     }
     public class MyExtension4 : MarkupExtension
     {
         public MyExtension4(object value1) { Value1 = value1; }
 
-        [ConstructorArgument] // Invalid syntax - argument is mandatory - do not raise
+        [ConstructorArgument] // Error [CS7036] - Invalid syntax - argument is mandatory - do not raise
         public object Value1 { get; set; }
+
+        public override object ProvideValue(IServiceProvider serviceProvider) => null;
     }
     public class MyExtension5 : MarkupExtension
     {
         public MyExtension5(object value1) { Value1 = value1; }
 
         [ConstructorArgument("foo")]
-        [ConstructorArgument("bar")] // Invalid syntax - only 1 attribute allowed - do not raise
+        [ConstructorArgument("bar")] // Error [CS0579] - Invalid syntax - only 1 attribute allowed - do not raise
         public object Value1 { get; set; }
+
+        public override object ProvideValue(IServiceProvider serviceProvider) => null;
     }
 }

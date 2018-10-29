@@ -82,6 +82,6 @@ namespace MyLibrary
 
         public Task GetSomething1() => Task.FromResult(true); // Compliant - return type is Task
         public Task<bool> GetSomething2() => Task.FromResult(true); // Compliant - return type is Task<T>
-        public ValueTask<bool> GetSomething3() => Task.FromResult(true); // Compliant - return type is ValueTask<T>
+        public ValueTask<bool> GetSomething3() => default(ValueTask<bool>); // Compliant - return type is ValueTask<T>
     }
 }

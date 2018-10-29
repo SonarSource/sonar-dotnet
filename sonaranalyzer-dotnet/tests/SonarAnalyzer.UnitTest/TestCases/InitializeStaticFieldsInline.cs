@@ -4,6 +4,11 @@ using System.Globalization;
 
 namespace Tests.Diagnostics
 {
+    static class RuntimeInformation
+    {
+        public static bool IsWindows() { return true; }
+    }
+
     class Program
     {
         public static int i;

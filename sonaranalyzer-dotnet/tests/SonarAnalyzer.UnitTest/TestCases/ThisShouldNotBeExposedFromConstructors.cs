@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using static Renamed = Tests.Diagnostics.Other.StaticMethod;
+using static Renamed = Tests.Diagnostics.Other.StaticMethod; // Error [CS0426,CS8085]
 
 namespace Tests.Diagnostics
 {

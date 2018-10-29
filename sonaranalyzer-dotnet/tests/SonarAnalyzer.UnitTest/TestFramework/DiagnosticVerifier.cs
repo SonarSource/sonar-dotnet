@@ -154,7 +154,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             var buildErrors = diagnostics.Where(d => d.Id.StartsWith("CS") && d.Severity == DiagnosticSeverity.Error);
             var expectedBuildErrors = new IssueLocationCollector()
-                .GetExpectedBuildErrors(compilation.SyntaxTrees.Skip(1).First().GetText().Lines)
+                .GetExpectedBuildErrors(compilation.SyntaxTrees.Skip(1).FirstOrDefault()?.GetText().Lines)
                 .ToList();
             CompareActualToExpected(buildErrors, expectedBuildErrors, true);
         }

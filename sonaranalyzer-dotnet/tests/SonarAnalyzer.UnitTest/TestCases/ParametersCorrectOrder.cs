@@ -127,17 +127,14 @@ namespace Tests.Diagnostics
             var left = "valueLeft";
             var right = "valueRight";
 
-            var call1 = Method(left, right);
-            var call2 = Method(right, left); // Noncompliant [A]
+            Method(left, right);
+            Method(right, left); // Noncompliant [A]
 
             var foo1 = new Foo(left, right);
             var foo2 = new Foo(right, left); // Noncompliant [B]
 
             var c1 = new A.B.C(left, right);
             var c2 = new A.B.C(right, left); // Noncompliant [C]
-
-            new ()
-            new System. ()
         }
     }
 

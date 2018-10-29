@@ -2,7 +2,12 @@
 
 namespace Tests.Diagnostics
 {
-    class UseValueParameter
+    public interface IDrawing
+    {
+        event EventHandler OnDraw;
+    }
+
+    class UseValueParameter : IDrawing
     {
         private int count;
         public int Count
@@ -21,8 +26,8 @@ namespace Tests.Diagnostics
             //get { return count; }
             set // Noncompliant
             {
-                var value = 5;
-                count = value;
+                var val = 5;
+                count = val;
             }
         }
         public int Count5
@@ -49,7 +54,7 @@ namespace Tests.Diagnostics
 
         event EventHandler PreDrawEvent;
 
-        event EventHandler IDrawingObject.OnDraw
+        event EventHandler IDrawing.OnDraw
         {
             add // Noncompliant {{Use the 'value' parameter in this event accessor declaration.}}
             {
@@ -69,26 +74,26 @@ namespace Tests.Diagnostics
 
     interface IFoo
     {
-        int Foo { get; set; }
+        int Foo1 { get; set; }
 
-        event EventHandler Bar;
+        event EventHandler Bar3;
     }
 
     public class Foo : IFoo
     {
-        public virtual int Foo
+        public virtual int Foo1
         {
             get { return 42; }
             set { } // Compliant because interface implementation
         }
 
-        public virtual float Bar
+        public virtual float Bar2
         {
             get { return 42; }
             set { } // Noncompliant
         }
 
-        public virtual event EventHandler Bar
+        public virtual event EventHandler Bar3
         {
             add { } // Compliant because interface implementation
             remove { } // Compliant because interface implementation
@@ -97,19 +102,19 @@ namespace Tests.Diagnostics
 
     public class Bar : Foo
     {
-        public override int Foo
+        public override int Foo1
         {
             get { return 42; }
             set { } // Noncompliant
         }
 
-        public override float Bar
+        public override float Bar2
         {
             get { return 42; }
             set { } // Noncompliant
         }
 
-        public override event EventHandler Bar
+        public override event EventHandler Bar3
         {
             add { } // Noncompliant
             remove { } // Noncompliant
@@ -134,7 +139,7 @@ namespace Tests.Diagnostics
         public string Id
         {
             get => null;
-            set => id = 10; // Noncompliant
+            set => id = ""; // Noncompliant
         }
 
         public int A
@@ -146,12 +151,6 @@ namespace Tests.Diagnostics
         {
             add => throw new Exception();
             remove => throw new Exception();
-        }
-
-        public int Foo
-        {
-            get => field;
-            set => // Noncompliant
         }
     }
 }

@@ -118,7 +118,7 @@ namespace Tests.Diagnostics
             get => 42;
         }
 
-        int Prop6
+        int Prop7
         {
             get => Prop6; // Compliant - FP
         }

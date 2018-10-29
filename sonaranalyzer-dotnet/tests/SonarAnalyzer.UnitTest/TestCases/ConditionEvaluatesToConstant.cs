@@ -140,9 +140,9 @@ namespace Tests.Diagnostics
             }
         }
 
-        void Pointer(int* a) // Ignore [CS0214]
+        void Pointer(int* a) // Error [CS0214]
         {
-            if (a != null)  // Ignore [CS0214]
+            if (a != null)  // Error [CS0214]
                             // Compliant
             {
             }
@@ -865,7 +865,7 @@ namespace Tests.Diagnostics
             where TStruct : struct
         {
             if (default(TStruct) != null) { } // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
-                                              // Ignore@-1 [CS0019]
+                                              // Error@-1 [CS0019]
         }
 
         void DefaultUnconstrainedGenericExpression<T>(T arg)
@@ -1210,7 +1210,7 @@ namespace Tests.Diagnostics
             public static void M(MyStructWithNoOperator a)
             {
                 if (a == null) // Noncompliant, also a compiler error
-                               // Ignore@-1 [CS0019]
+                               // Error@-1 [CS0019]
                 { // Secondary
                 }
             }

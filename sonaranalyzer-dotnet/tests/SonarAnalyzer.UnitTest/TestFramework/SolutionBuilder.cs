@@ -94,11 +94,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 throw new ArgumentException("Please use a collection of paths with the same extension", nameof(paths));
             }
 
-            return Create()
+            var project = Create()
                 .AddProject(AnalyzerLanguage.FromPath(paths.First()))
                 .AddDocuments(paths)
-                .AddReferences(additionalReferences)
-                .GetSolution();
+                .AddReferences(additionalReferences);
+
+            if (additionalReferences.Any(r => r.Display.Contains("\\netstandard")))
+            {
+                project = project.AddReference(FrameworkMetadataReference.Netstandard);
+            }
+
+            return project.GetSolution();
         }
 
         public static SolutionBuilder FromSolution(Solution solution) =>

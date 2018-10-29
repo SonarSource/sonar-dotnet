@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -55,6 +55,7 @@ namespace Tests.Diagnostics
         public MyException4()
         {
             throw; // Noncompliant
+            // Error@-1 [CS0156]
         }
     }
 

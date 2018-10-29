@@ -37,7 +37,7 @@ namespace Tests.Diagnostics
 
             unsafe
             {
-                GCHandle pinnedArray = GCHandle.Alloc(byteArray, GCHandleType.Pinned);
+                GCHandle pinnedArray = GCHandle.Alloc(new object(), GCHandleType.Pinned);
                 IntPtr pointer = pinnedArray.AddrOfPinnedObject();
 
                 int* a = (int*)pointer.ToPointer();

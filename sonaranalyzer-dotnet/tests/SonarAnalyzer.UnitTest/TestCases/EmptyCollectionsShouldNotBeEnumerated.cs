@@ -724,51 +724,54 @@ namespace Tests.Diagnostics
         }
     }
 
-    // Large CFG that causes the exploded graph to hit the exploration limit
-    // See https://github.com/SonarSource/sonar-csharp/issues/767 (comments!)
-    private static void MethodName(object[] table, object[][] aoTable2, ref Dictionary<double, string> dictPorts)
+    class LargeCfg
     {
-        try
+        // Large CFG that causes the exploded graph to hit the exploration limit
+        // See https://github.com/SonarSource/sonar-csharp/issues/767 (comments!)
+        private static void MethodName(object[] table, object[][] aoTable2, ref Dictionary<double, string> dictPorts)
         {
-            string sValue = "-1";
-            switch (5)
+            try
             {
-                case 3: sValue = ""; break;
-                case 4: sValue = ""; break;
-                case 5: sValue = ""; break;
-            }
-
-            var list = new List<double>();
-            for (int i = 0; i < table.Length; i++)
-            {
-                if (Convert.ToInt32(table[3]) == 1 /* Normal */ &&
-                    Convert.ToInt32(aoTable2[5][9]) == 1 /* On */)
+                string sValue = "-1";
+                switch (5)
                 {
-                    string sValue2;
-                    switch (Convert.ToInt32(aoTable2[5][4]))
-                    {
-                        default: sValue2 = ""; break;
-                    }
+                    case 3: sValue = ""; break;
+                    case 4: sValue = ""; break;
+                    case 5: sValue = ""; break;
+                }
 
-                    if (dictPorts.ContainsKey(5))
+                var list = new List<double>();
+                for (int i = 0; i < table.Length; i++)
+                {
+                    if (Convert.ToInt32(table[3]) == 1 /* Normal */ &&
+                        Convert.ToInt32(aoTable2[5][9]) == 1 /* On */)
                     {
-                        list.Add(7);
+                        string sValue2;
+                        switch (Convert.ToInt32(aoTable2[5][4]))
+                        {
+                            default: sValue2 = ""; break;
+                        }
+
+                        if (dictPorts.ContainsKey(5))
+                        {
+                            list.Add(7);
+                        }
+                    }
+                    else
+                    {
+                        dictPorts.Add(5, sValue);
                     }
                 }
-                else
+
+                if (list.Count > 0)
                 {
-                    dictPorts.Add(5, sValue);
+                    list.Sort(); // Compliant. This used to be a FP
                 }
             }
-
-            if (list.Count > 0)
+            catch
             {
-                list.Sort(); // Compliant. This used to be a FP
+                // silently do nothing
             }
-        }
-        catch
-        {
-            // silently do nothing
         }
     }
 }

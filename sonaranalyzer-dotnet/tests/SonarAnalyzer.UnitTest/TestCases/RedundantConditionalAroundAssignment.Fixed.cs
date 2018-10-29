@@ -48,21 +48,24 @@ namespace Tests.Diagnostics
             }
         }
 
+        private static int? f;
         // Properties are not checked
-        public static void Property
+        public static int Property
         {
             get
             {
-                if (x != null)
+                if (f != null)
                 {
-                    x = null;
+                    f = null;
                 }
+
+                return 1;
             }
             set
             {
-                if (x != null)
+                if (f != null)
                 {
-                    x = null;
+                    f = null;
                 }
             }
         }

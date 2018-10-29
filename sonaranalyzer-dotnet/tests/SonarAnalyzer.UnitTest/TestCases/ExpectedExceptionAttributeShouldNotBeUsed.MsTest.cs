@@ -22,7 +22,7 @@ namespace Tests.Diagnostics
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]  // Compliant - one line
-        public void TestFoo5 => new object().ToString();
+        public string TestFoo5() => new object().ToString();
 
         [TestMethod]
         public void TestFoo7()

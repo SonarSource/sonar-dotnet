@@ -11,7 +11,9 @@ namespace Tests.Diagnostics
             {
                 return true;
             }
+
             // do some checks here
+            return false;
         }
     }
     class Derived : Base
@@ -23,7 +25,9 @@ namespace Tests.Diagnostics
             {
                 return true;
             }
+
             // do some checks here
+            return false;
         }
     }
 }

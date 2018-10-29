@@ -44,7 +44,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyNoIssueReported(@"TestCases\NameOfShouldBeUsed.cs",
                 new NameOfShouldBeUsed(),
-                new[] { new CSharpParseOptions(LanguageVersion.CSharp5) });
+                new[] { new CSharpParseOptions(LanguageVersion.CSharp5) },
+                CompilationErrorBehavior.Ignore);
         }
     }
 }

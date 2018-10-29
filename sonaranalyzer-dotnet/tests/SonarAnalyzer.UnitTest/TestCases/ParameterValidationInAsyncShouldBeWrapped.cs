@@ -36,7 +36,7 @@ namespace Tests.Diagnostics
             return FooInternalAsync(something);
         }
 
-        private static async Task FooInternalAsync(string something)
+        private static async Task<string> FooInternalAsync(string something)
         {
             await Task.Delay(1);
             return something + "foo";
@@ -67,10 +67,10 @@ namespace Tests.Diagnostics
 
             return FooLocalFunctionAsync(something);
 
-            async Task FooLocalFunctionAsync(string something)
+            async Task<string> FooLocalFunctionAsync(string s)
             {
                 await Task.Delay(1);
-                return something + "foo";
+                return s + "foo";
             }
         }
 
@@ -83,6 +83,8 @@ namespace Tests.Diagnostics
                     {
                         throw new ArgumentOutOfRangeException(nameof(age)); // Compliant - we don't know where/how the func is used
                     }
+
+                    return "";
                 };
 
             await Task.Delay(0);

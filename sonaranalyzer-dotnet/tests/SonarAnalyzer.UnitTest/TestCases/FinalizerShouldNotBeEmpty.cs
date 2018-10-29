@@ -31,9 +31,4 @@ namespace Tests.Diagnostics
     {
         ~Program3() => Console.WriteLine();
     }
-
-    class Program4
-    {
-        ~Program4() =>
-    }
 }

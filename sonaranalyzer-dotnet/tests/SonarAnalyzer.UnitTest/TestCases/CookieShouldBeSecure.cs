@@ -77,7 +77,7 @@ namespace Tests.Diagnostics
             }
             c3.Secure = true;
 
-            HttpCookie c4;
+            HttpCookie c4 = null;
             if (foo)
             {
                 c4 = new HttpCookie("c"); // Noncompliant, Secure is not set in the same scope

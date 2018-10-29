@@ -37,11 +37,11 @@ namespace Tests.Diagnostics
             x = "foo";
         }
 
-        void f01(int x)
+        void f01(string x)
         {
             int tmp = x.Length;
             tmp = 5;
-            x = 1;
+            x = "1";
         }
 
         void f02(int x)
@@ -177,19 +177,21 @@ namespace Tests.Diagnostics
             param = i => 42;
         }
 
-        public void f11(int a, int b, int c, int d, int e, int f)
+        public void f11(int a, int b, int c, int d, bool e, int f)
         {
             a++;
             ++b;
             --c;
             d--;
-            !e;
-            ~f;
+            !e; // Error [CS0201] - expression used as statement
+            ~f; // Error [CS0201] - expression used as statement
         }
 
-        public f12(int param)
+        public int f12(int param)
         {
             param = param + 1;
+
+            return param;
         }
 
         public void f13(string x)

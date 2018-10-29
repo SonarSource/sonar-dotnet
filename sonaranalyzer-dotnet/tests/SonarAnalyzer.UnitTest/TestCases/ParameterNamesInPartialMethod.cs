@@ -51,7 +51,7 @@ namespace Tests.Diagnostics
 
         public override void DoSomethingVirtual(int x, int someParam) //Noncompliant {{Rename parameter 'someParam' to 'y' to match the base class declaration.}}
         {
-            base.DoSomethingVirtual(x, y);
+            base.DoSomethingVirtual(x, someParam);
         }
     }
 

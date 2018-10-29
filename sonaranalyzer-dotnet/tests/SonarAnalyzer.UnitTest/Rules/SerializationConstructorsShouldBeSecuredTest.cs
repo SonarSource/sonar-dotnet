@@ -37,6 +37,24 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void SerializationConstructorsShouldBeSecured_InvalidCode()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+[Serializable]
+    public partial class InvalidCode : ISerializable
+    {
+        [FileIOPermissionAttribute(SecurityAction.Demand, Unrestricted = true)]
+        [ZoneIdentityPermission(SecurityAction.Demand, Unrestricted = true)]
+        public InvalidCode() { }
+
+        protected (SerializationInfo info, StreamingContext context) { }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+    }", new SerializationConstructorsShouldBeSecured(), checkMode: CompilationErrorBehavior.Ignore);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void SerializationConstructorsShouldBeSecured_NoAssemblyAttribute()
         {
             Verifier.VerifyAnalyzer(@"TestCases\SerializationConstructorsShouldBeSecured_NoAssemblyAttribute.cs",
@@ -47,12 +65,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SerializationConstructorsShouldBeSecured_PartialClasses()
         {
-            Verifier.VerifyAnalyzer(new[]
-            {
-                @"TestCases\SerializationConstructorsShouldBeSecured_Part1.cs",
-                @"TestCases\SerializationConstructorsShouldBeSecured_Part2.cs",
-            },
-            new SerializationConstructorsShouldBeSecured());
+            Verifier.VerifyAnalyzer(
+                new[]
+                {
+                    @"TestCases\SerializationConstructorsShouldBeSecured_Part1.cs",
+                    @"TestCases\SerializationConstructorsShouldBeSecured_Part2.cs",
+                },
+                new SerializationConstructorsShouldBeSecured());
         }
     }
 }

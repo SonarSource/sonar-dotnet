@@ -77,7 +77,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        void Patterns_In_Loops(object o, object[] items)
+        void Patterns_In_Loops(object o, object[] items, int length)
         {
             while (o is string s)
             {
@@ -111,7 +111,7 @@ namespace Tests.Diagnostics
 
             do { } while (o is string _);
 
-            for (int i = 0; i < length && items[i] is string _; i++) { }
+            for (int i = 0; i < items.Length && items[i] is string _; i++) { }
         }
 
         void Switch_Pattern_Source(object o)

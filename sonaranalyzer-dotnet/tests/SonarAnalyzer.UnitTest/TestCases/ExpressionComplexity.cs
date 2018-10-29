@@ -23,12 +23,12 @@ namespace Tests.Diagnostics
 
             for (var i = a1 ? (b1==0 ? (c1 ? (d1 ? 1 : 1) : 1) : 1) : 1; i < 1; i++) {} // Noncompliant
 
-            IEnumerable<bool> foo = {
+            bool[] foo = {
                 true && true && true && true && true, // Noncompliant
                 true && true && true && true
             };
 
-            foo = new List<bool>
+            var foo2 = new List<bool>
             {
                 true && true && true && true && true, // Noncompliant
                 true && true && true && true
@@ -44,7 +44,7 @@ namespace Tests.Diagnostics
 
             var a2 = false ? (true ? (false ? 1 : 0) : 0) : 1;
 
-            var foo2 = new Action(delegate () {
+            var foo3 = new Action(delegate () {
                 bool a = true && true;
                 bool b = true && true;
                 bool c = true && true;

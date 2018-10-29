@@ -1,12 +1,58 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Immutable;
 
 namespace Tests.Diagnostics
 {
-    class Foo : ICollection<string> { }
-    class Bar : ReadOnlyCollection<string> { }
+    public class Foo : ICollection<string>
+    {
+        public int Count { get; }
+        public bool IsReadOnly { get; }
+
+        public void Add(string item)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Clear()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool Contains(string item)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void CopyTo(string[] array, int arrayIndex)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerator<string> GetEnumerator()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool Remove(string item)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
+    public class Bar : ReadOnlyCollection<string>
+    {
+        public Bar(IList<string> list) : base(list)
+        {
+        }
+    }
 
     public class NotPublicAndStatic
     {

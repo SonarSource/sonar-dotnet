@@ -5,7 +5,7 @@ namespace Tests.Diagnostics
     {
         public FooBar()
         {
-            System
+            System // Error [CS0120] - method call is not static
                    .Collections
                    .
                    // WTF

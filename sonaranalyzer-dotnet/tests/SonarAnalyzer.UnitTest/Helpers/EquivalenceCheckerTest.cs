@@ -21,11 +21,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Helpers

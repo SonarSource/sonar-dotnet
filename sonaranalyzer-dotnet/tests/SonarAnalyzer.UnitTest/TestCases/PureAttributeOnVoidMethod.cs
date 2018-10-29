@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics.Contracts;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests.TestCases
 {

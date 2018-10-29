@@ -4,8 +4,9 @@ namespace Tests.Diagnostics
 {
     public class Program
     {
-        public Program()
+        public Program(int myVariable)
         {
+            var length = myVariable;
             switch (myVariable)
             {
                 case 0:
@@ -29,7 +30,7 @@ namespace Tests.Diagnostics
                         Console.WriteLine("4");
                         break;
                     }
-                case 3: // Noncompliant {{Reduce this 'switch/case' number of lines from 9 to at most 8, for example by extracting code into a method.}}
+                case 3: // Noncompliant {{Reduce this 'switch/case' number of lines from 10 to at most 8, for example by extracting code into a method.}}
                 case 4:
                     if (true)
                     {
@@ -46,6 +47,7 @@ namespace Tests.Diagnostics
                             }
                         }
                     }
+                    break;
                 case 5: // Noncompliant
                     var x = Foo(42);
                     break;
@@ -59,8 +61,10 @@ namespace Tests.Diagnostics
                         Console.WriteLine("5");
                         Console.WriteLine("6");
                         Console.WriteLine("7");
+
+                        return "";
                     }
-                case:
+                case: // Error [CS0150]
                 default:
                     break;
             }

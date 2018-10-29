@@ -38,7 +38,7 @@ namespace Tests.Diagnostics
                 throw new Exception("arg1"); // Noncompliant
         }
 
-        public bool Method_02(int arg1, int arg1) // Invalid code
+        public bool Method_02(int arg1, int arg1) // Error [CS0100] - duplicated args
         {
             throw new Exception("arg1");
         }

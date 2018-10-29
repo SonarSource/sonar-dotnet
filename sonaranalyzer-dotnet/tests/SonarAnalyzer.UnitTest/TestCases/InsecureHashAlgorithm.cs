@@ -35,6 +35,8 @@ namespace Tests.Diagnostics
 
         public void Md5Calls()
         {
+            byte[] temp = null;
+
             using (var md5 = new MD5CryptoServiceProvider()) //Noncompliant
             {
                 var hash = md5.ComputeHash(temp);

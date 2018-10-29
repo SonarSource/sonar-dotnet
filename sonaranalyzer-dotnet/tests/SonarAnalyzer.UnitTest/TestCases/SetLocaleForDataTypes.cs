@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Data;
 using System.Globalization;
 
@@ -22,9 +22,9 @@ namespace Tests.Diagnostics
             dataTable2 = new DataTable { Locale = CultureInfo.InvariantCulture };
         }
 
-        void Bar(DataTable table)
+        void Bar(DataColumn column)
         {
-            table.Unique = true; // Compliant - not creating the DataTable
+            column.Unique = true; // Compliant - not creating the DataTable
         }
 
         void Bar(DataSet set)

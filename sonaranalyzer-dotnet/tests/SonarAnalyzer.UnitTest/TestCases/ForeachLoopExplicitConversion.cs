@@ -15,7 +15,7 @@ namespace Tests.Diagnostics
             { }
             foreach (int item in s)
             { }
-            foreach (A item in s) //Compliant, compiler error
+            foreach (A item in s) // Compliant // Error [CS0030] - cannot convert
             { }
         }
         public void M1(IEnumerable<int> enumerable)

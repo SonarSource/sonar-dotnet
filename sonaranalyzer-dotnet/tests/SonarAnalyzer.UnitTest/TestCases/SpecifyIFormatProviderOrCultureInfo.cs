@@ -50,7 +50,7 @@ namespace Tests.Diagnostics
             42.ToString(CultureInfo.CurrentCulture);
             string.Format(CultureInfo.CurrentUICulture, "{0}", 42);
 
-            Activator.CreateInstance(); // Compliant - excluded
+            Activator.CreateInstance(); // Compliant - excluded // Error [CS0411] - cannot infer type
 
             var resourceManager = new ResourceManager(typeof(Program));
             resourceManager.GetObject("a"); // Compliant - excluded

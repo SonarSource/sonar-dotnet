@@ -16,6 +16,8 @@ namespace Tests.Diagnostics
             throw e; // Noncompliant
         }
 
+        public void Bar(object o) { }
+
         protected void NotCompliantCases_Nonpublic(object o)
         {
             o.ToString(); // Noncompliant
@@ -57,7 +59,7 @@ namespace Tests.Diagnostics
 
             b.ToString(); // Compliant, bool cannot be null
 
-            var v = null;
+            object v = null;
             v.ToString(); // Compliant, we don't care about local variables
 
             field.ToString(); // Compliant

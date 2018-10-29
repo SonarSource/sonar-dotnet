@@ -23,7 +23,7 @@ namespace Tests.Diagnostics
 
             comparison = new MyClass().GetType() != typeof(Nullable<int>);
             comparison = 42.GetType() != typeof(int);
-            comparison = 42.ToString() != typeof(int);
+            comparison = 42.ToString().GetType() != typeof(int);
             comparison = new object() != typeof(Nullable<int>);
         }
     }

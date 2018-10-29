@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 
 namespace Tests.Diagnostics
@@ -21,11 +21,11 @@ namespace Tests.Diagnostics
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
         private static extern bool RemoveDirectory5(string name);
 
-        [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
-        public extern bool RemoveDirectory6(string name); // Invalid syntax - CS0601 - so do not raise an issue
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode)] // Error [CS0601] - so do not raise an issue
+        public extern bool RemoveDirectory6(string name);
 
-        [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
-        public static bool RemoveDirectory7(string name); // Invalid syntax - CS0601 + CS0501 - so do not raise an issue
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode)] // Error [CS0601]
+        public static bool RemoveDirectory7(string name); // Error [CS0501] - so do not raise an issue
     }
 
     internal class Foo
