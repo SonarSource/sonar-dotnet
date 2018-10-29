@@ -60,12 +60,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNamedAccordingToSynchronicity.MVC.Core.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
-                additionalReferences:
-                    new[] { FrameworkMetadataReference.Netstandard }
+                additionalReferences: FrameworkMetadataReference.Netstandard
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetCoreMvcVersion))
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspNetCoreMvcVersion))
-                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspNetCoreRoutingVersion))
-                    .ToArray());
+                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspNetCoreRoutingVersion)));
         }
 
         [DataTestMethod]
@@ -77,8 +75,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNamedAccordingToSynchronicity.MsTest.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
                 additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion)
-                    .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions("4.0.0"))
-                    .ToArray());
+                    .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions("4.0.0")));
         }
 
         [DataTestMethod]
@@ -90,8 +87,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNamedAccordingToSynchronicity.NUnit.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
                 additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion)
-                    .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions("4.0.0"))
-                    .ToArray());
+                    .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions("4.0.0")));
         }
 
         [DataTestMethod]
@@ -103,8 +99,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNamedAccordingToSynchronicity.Xunit.cs",
                 new MethodShouldBeNamedAccordingToSynchronicity(),
                 additionalReferences: NuGetMetadataReference.XunitFramework(testFwkVersion)
-                    .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions("4.0.0"))
-                    .ToArray());
+                    .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions("4.0.0")));
         }
     }
 }

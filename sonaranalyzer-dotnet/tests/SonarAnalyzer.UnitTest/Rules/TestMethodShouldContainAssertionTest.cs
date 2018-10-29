@@ -39,13 +39,10 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new TestMethodShouldContainAssertion(),
                 additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion)
                     .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
-                    .Concat(new[]
-                    {
-                        FrameworkMetadataReference.SystemReflection,
-                        FrameworkMetadataReference.SystemXmlXDocument,
-                        FrameworkMetadataReference.SystemXmlLinq,
-                        FrameworkMetadataReference.SystemThreadingTasks
-                    })
+                    .Concat(FrameworkMetadataReference.SystemReflection)
+                    .Concat(FrameworkMetadataReference.SystemXmlXDocument)
+                    .Concat(FrameworkMetadataReference.SystemXmlLinq)
+                    .Concat(FrameworkMetadataReference.SystemThreadingTasks)
                     .ToArray());
         }
 
@@ -59,13 +56,10 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new TestMethodShouldContainAssertion(),
                 additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion)
                     .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
-                    .Concat(new[]
-                    {
-                        FrameworkMetadataReference.SystemReflection,
-                        FrameworkMetadataReference.SystemXmlXDocument,
-                        FrameworkMetadataReference.SystemXmlLinq,
-                        FrameworkMetadataReference.SystemThreadingTasks
-                    })
+                    .Concat(FrameworkMetadataReference.SystemReflection)
+                    .Concat(FrameworkMetadataReference.SystemXmlXDocument)
+                    .Concat(FrameworkMetadataReference.SystemXmlLinq)
+                    .Concat(FrameworkMetadataReference.SystemThreadingTasks)
                     .ToArray());
         }
 
@@ -114,13 +108,10 @@ public class Foo
                 new TestMethodShouldContainAssertion(),
                 additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion)
                     .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
-                    .Concat(new[]
-                    {
-                        FrameworkMetadataReference.SystemReflection,
-                        FrameworkMetadataReference.SystemXmlXDocument,
-                        FrameworkMetadataReference.SystemXmlLinq,
-                        FrameworkMetadataReference.SystemThreadingTasks
-                    })
+                    .Concat(FrameworkMetadataReference.SystemReflection)
+                    .Concat(FrameworkMetadataReference.SystemXmlXDocument)
+                    .Concat(FrameworkMetadataReference.SystemXmlLinq)
+                    .Concat(FrameworkMetadataReference.SystemThreadingTasks)
                     .ToArray());
         }
 
@@ -134,13 +125,10 @@ public class Foo
                 new TestMethodShouldContainAssertion(),
                 additionalReferences: NuGetMetadataReference.XunitFramework(testFwkVersion)
                     .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
-                    .Concat(new[]
-                    {
-                        FrameworkMetadataReference.SystemReflection,
-                        FrameworkMetadataReference.SystemXmlXDocument,
-                        FrameworkMetadataReference.SystemXmlLinq,
-                        FrameworkMetadataReference.SystemThreadingTasks
-                    })
+                    .Concat(FrameworkMetadataReference.SystemReflection)
+                    .Concat(FrameworkMetadataReference.SystemXmlXDocument)
+                    .Concat(FrameworkMetadataReference.SystemXmlLinq)
+                    .Concat(FrameworkMetadataReference.SystemThreadingTasks)
                     .ToArray());
         }
 

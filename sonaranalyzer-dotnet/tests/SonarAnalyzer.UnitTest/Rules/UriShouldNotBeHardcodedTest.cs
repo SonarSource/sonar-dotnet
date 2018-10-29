@@ -20,6 +20,7 @@
 
 extern alias csharp;
 
+using System.Collections.Immutable;
 using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -45,9 +46,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNet.cs",
                 new UriShouldNotBeHardcoded(),
-                additionalReferences: new[] { FrameworkMetadataReference.SystemWeb }
+                additionalReferences: FrameworkMetadataReference.SystemWeb
                     .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion))
-                    .ToArray());
+                    .ToImmutableArray());
         }
 
         [DataTestMethod]
@@ -68,7 +69,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     // for IActionResult
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcAbstractions(aspNetCoreMvcVersion))
                     .Concat(NuGetMetadataReference.MicrosoftNetHttpHeaders("2.1.1"))
-                    .ToArray());
+                    .ToImmutableArray());
         }
 
         [TestMethod]

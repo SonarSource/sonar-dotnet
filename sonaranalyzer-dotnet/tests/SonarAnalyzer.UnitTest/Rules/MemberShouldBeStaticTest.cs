@@ -20,6 +20,7 @@
 
 extern alias csharp;
 
+using System.Collections.Immutable;
 using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -42,8 +43,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspnetCoreVersion))
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspnetCoreVersion))
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspnetCoreVersion))
-                    .Concat(new[] { FrameworkMetadataReference.SystemWeb })
-                    .ToArray());
+                    .Concat(FrameworkMetadataReference.SystemWeb)
+                    .ToImmutableArray());
         }
 
         [TestMethod]

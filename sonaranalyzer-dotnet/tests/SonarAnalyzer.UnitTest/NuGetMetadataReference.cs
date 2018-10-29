@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -55,6 +56,32 @@ namespace SonarAnalyzer.UnitTest
         private static readonly PackageManager packageManager =
             new PackageManager(CreatePackageRepository(), PackagesFolderRelativePath);
 
+        public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion)
+        {
+            EnsurePackageIsInstalled(packageId, packageVersion);
+
+            var allowedNugetLibDirectoriesByPreference = allowedNugetLibDirectories.
+                Zip(Enumerable.Range(0, allowedNugetLibDirectories.Count), (folder, priority) => new { folder, priority });
+            var packageDirectory = GetNuGetPackageDirectory(packageId, packageVersion);
+            var matchingDllsGroups = Directory.GetFiles(packageDirectory, "*.dll", SearchOption.AllDirectories)
+                .Select(path => new FileInfo(path))
+                .GroupBy(file => file.Directory.Name).ToArray();
+            IGrouping<string, FileInfo> selectedGroup;
+
+            selectedGroup = matchingDllsGroups.Length == 1 && matchingDllsGroups[0].Key.EndsWith(".dll")
+                ? matchingDllsGroups[0]
+                : matchingDllsGroups.Join(allowedNugetLibDirectoriesByPreference,
+                    group => group.Key.Split('+').First(),
+                    allowed => allowed.folder,
+                    (group, allowed) => new { group, allowed.priority })
+                .OrderBy(merged => merged.priority)
+                .First()
+                .group;
+
+            return selectedGroup.Select(file => (MetadataReference)MetadataReference.CreateFromFile(file.FullName))
+                .ToImmutableArray();
+        }
+
         private static IPackageRepository CreatePackageRepository()
         {
             var currentFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -69,35 +96,6 @@ namespace SonarAnalyzer.UnitTest
 
             return aggregateRepository;
         }
-
-        public static MetadataReference[] Create(string packageId, string packageVersion)
-        {
-            EnsurePackageIsInstalled(packageId, packageVersion);
-
-            var allowedNugetLibDirectoriesByPreference = allowedNugetLibDirectories.
-                Zip(Enumerable.Range(0, allowedNugetLibDirectories.Count), (folder, priority) => new { folder, priority });
-            var packageDirectory = GetNuGetPackageDirectory(packageId, packageVersion);
-            var matchingDllsGroups = Directory.GetFiles(packageDirectory, "*.dll", SearchOption.AllDirectories)
-                .Select(path => new FileInfo(path))
-                .GroupBy(file => file.Directory.Name).ToArray();
-            IGrouping<string, FileInfo> selectedGroup;
-            if (matchingDllsGroups.Length == 1 && matchingDllsGroups[0].Key.EndsWith(".dll"))
-            {
-                selectedGroup = matchingDllsGroups[0];
-            }
-            else
-            {
-                selectedGroup = matchingDllsGroups.Join(allowedNugetLibDirectoriesByPreference,
-                    group => group.Key.Split('+').First(),
-                    allowed => allowed.folder,
-                    (group, allowed) => new { group, allowed.priority })
-                .OrderBy(merged => merged.priority)
-                .First().group;
-            }
-
-            return selectedGroup.Select(file => MetadataReference.CreateFromFile(file.FullName)).ToArray();
-        }
-
         private static string GetNuGetPackageDirectory(string packageId, string packageVersion) =>
             $@"{PackagesFolderRelativePath}{packageId}.{GetRealVersionFolder(packageId, packageVersion)}\lib";
 
@@ -143,44 +141,6 @@ namespace SonarAnalyzer.UnitTest
             }
         }
 
-        private static bool IsCheckForLatestPackageRequired(string packageId)
-        {
-            // Install new nugets only once per day to improve the performance when running tests locally.
-
-            // We write a file with the timestamp of the last check in the package directory
-            // of the newest version of the package.
-            // If we can't find the package directory, we assume a check is required.
-            // If we can find an installation of the package but not the timestamp file, we assume a
-            // check is required (the package we found might be a specific older version that was installed
-            // by another test).
-
-            // Choosing one day to reduce the waiting time when a new version of the used nugets is
-            // released. If the waiting time when running tests locally is big we can increase.Annecy, France
-            const int VersionCheckDelayInDays = 1;
-
-            var lastCheck = GetLastCheckTime(packageId);
-            LogMessage($"Last check for latest NuGets: {lastCheck}");
-            return (DateTime.Now.Subtract(lastCheck).TotalDays > VersionCheckDelayInDays);
-        }
-
-        private static DateTime GetLastCheckTime(string packageId)
-        {
-            var filePath = GetLastCheckFilePath(packageId);
-            if (filePath == null ||
-                !File.Exists(filePath) ||
-                !DateTime.TryParse(File.ReadAllText(filePath), out var timestamp))
-            {
-                return DateTime.MinValue;
-            }
-            return timestamp;
-        }
-
-        private static void WriteLastUpdateFile(string packageId)
-        {
-            var filePath = GetLastCheckFilePath(packageId);
-            File.WriteAllText(filePath, DateTime.Now.ToString("d")); // short date pattern
-        }
-
         private static string GetLastCheckFilePath(string packageId)
         {
             // The file containing the last-check timestamp is stored in folder of the
@@ -202,6 +162,18 @@ namespace SonarAnalyzer.UnitTest
             return Path.Combine(directory, LastUpdateFileName);
         }
 
+        private static DateTime GetLastCheckTime(string packageId)
+        {
+            var filePath = GetLastCheckFilePath(packageId);
+            if (filePath == null ||
+                !File.Exists(filePath) ||
+                !DateTime.TryParse(File.ReadAllText(filePath), out var timestamp))
+            {
+                return DateTime.MinValue;
+            }
+            return timestamp;
+        }
+
         private static void InstallPackage(string packageId, string packageVersion)
         {
             var realVersion = packageVersion != Constants.NuGetLatestVersion
@@ -213,66 +185,88 @@ namespace SonarAnalyzer.UnitTest
                 ignoreDependencies: true, allowPrereleaseVersions: false);
         }
 
+        private static bool IsCheckForLatestPackageRequired(string packageId)
+        {
+            // Install new nugets only once per day to improve the performance when running tests locally.
+
+            // We write a file with the timestamp of the last check in the package directory
+            // of the newest version of the package.
+            // If we can't find the package directory, we assume a check is required.
+            // If we can find an installation of the package but not the timestamp file, we assume a
+            // check is required (the package we found might be a specific older version that was installed
+            // by another test).
+
+            // Choosing one day to reduce the waiting time when a new version of the used nugets is
+            // released. If the waiting time when running tests locally is big we can increase.Annecy, France
+            const int VersionCheckDelayInDays = 1;
+
+            var lastCheck = GetLastCheckTime(packageId);
+            LogMessage($"Last check for latest NuGets: {lastCheck}");
+            return (DateTime.Now.Subtract(lastCheck).TotalDays > VersionCheckDelayInDays);
+        }
         private static void LogMessage(string message)
         {
             Console.WriteLine($"[{DateTime.Now}] Test setup: {message}");
         }
 
+        private static void WriteLastUpdateFile(string packageId)
+        {
+            var filePath = GetLastCheckFilePath(packageId);
+            File.WriteAllText(filePath, DateTime.Now.ToString("d")); // short date pattern
+        }
         #endregion
 
-        public static MetadataReference[] FluentAssertions(string packageVersion) =>
-            Create("FluentAssertions", packageVersion);
-
-        public static MetadataReference[] MicrosoftAspNetCoreMvcCore(string packageVersion) =>
-            Create("Microsoft.AspNetCore.Mvc.Core", packageVersion);
-
-        public static MetadataReference[] MicrosoftAspNetCoreMvcWebApiCompatShim(string packageVersion) =>
-            Create("Microsoft.AspNetCore.Mvc.WebApiCompatShim", packageVersion);
-
-        public static MetadataReference[] MicrosoftAspNetCoreMvcAbstractions(string packageVersion) =>
-            Create("Microsoft.AspNetCore.Mvc.Abstractions", packageVersion);
-
-        public static MetadataReference[] MicrosoftAspNetCoreMvcViewFeatures(string packageVersion) =>
-            Create("Microsoft.AspNetCore.Mvc.ViewFeatures", packageVersion);
-
-        public static MetadataReference[] MicrosoftAspNetCoreRoutingAbstractions(string packageVersion) =>
-            Create("Microsoft.AspNetCore.Routing.Abstractions", packageVersion);
-
-        public static MetadataReference[] MicrosoftAspNetMvc(string packageVersion) =>
-            Create("Microsoft.AspNet.Mvc", packageVersion);
-
-        public static MetadataReference[] MicrosoftVisualStudioQualityToolsUnitTestFramework =>
+        public static IEnumerable<MetadataReference> MicrosoftVisualStudioQualityToolsUnitTestFramework =>
             Create("VS.QualityTools.UnitTestFramework", "15.0.27323.2");
 
-        public static MetadataReference[] MSTestTestFrameworkV1 =>
+        public static IEnumerable<MetadataReference> MSTestTestFrameworkV1 =>
             Create("MSTest.TestFramework", "1.1.11");
 
-        public static MetadataReference[] MSTestTestFramework(string packageVersion) =>
+        public static IEnumerable<MetadataReference> XunitFrameworkV1 =>
+            Create("xunit", "1.9.1")
+            .Concat(Create("xunit.extensions", "1.9.1"));
+
+        public static IEnumerable<MetadataReference> FluentAssertions(string packageVersion) =>
+            Create("FluentAssertions", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreMvcAbstractions(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Mvc.Abstractions", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreMvcCore(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Mvc.Core", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreMvcViewFeatures(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Mvc.ViewFeatures", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreMvcWebApiCompatShim(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Mvc.WebApiCompatShim", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreRoutingAbstractions(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Routing.Abstractions", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftAspNetMvc(string packageVersion) =>
+            Create("Microsoft.AspNet.Mvc", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftNetHttpHeaders(string packageVersion) =>
+            Create("Microsoft.Net.Http.Headers", packageVersion);
+
+        public static IEnumerable<MetadataReference> MSTestTestFramework(string packageVersion) =>
             Create("MSTest.TestFramework", packageVersion);
 
-        public static MetadataReference[] NUnit(string packageVersion) =>
+        public static IEnumerable<MetadataReference> NUnit(string packageVersion) =>
             Create("NUnit", packageVersion);
 
-        public static MetadataReference[] SystemCollectionsImmutable(string packageVersion) =>
+        public static IEnumerable<MetadataReference> SystemCollectionsImmutable(string packageVersion) =>
             Create("System.Collections.Immutable", packageVersion);
 
-        public static MetadataReference[] SystemThreadingTasksExtensions(string packageVersion) =>
+        public static IEnumerable<MetadataReference> SystemThreadingTasksExtensions(string packageVersion) =>
             Create("System.Threading.Tasks.Extensions", packageVersion);
 
-        public static MetadataReference[] SystemValueTuple(string packageVersion) =>
+        public static IEnumerable<MetadataReference> SystemValueTuple(string packageVersion) =>
             Create("System.ValueTuple", packageVersion);
 
-        public static MetadataReference[] XunitFramework(string packageVersion) =>
+        public static IEnumerable<MetadataReference> XunitFramework(string packageVersion) =>
             Create("xunit.assert", packageVersion)
-            .Concat(Create("xunit.extensibility.core", packageVersion))
-            .ToArray();
-
-        public static MetadataReference[] XunitFrameworkV1 =>
-            Create("xunit", "1.9.1")
-            .Concat(Create("xunit.extensions", "1.9.1"))
-            .ToArray();
-
-        public static MetadataReference[] MicrosoftNetHttpHeaders(string packageVersion) =>
-            Create("Microsoft.Net.Http.Headers", packageVersion);
+            .Concat(Create("xunit.extensibility.core", packageVersion));
     }
 }

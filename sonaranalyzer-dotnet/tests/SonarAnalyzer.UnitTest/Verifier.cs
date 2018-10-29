@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using Google.Protobuf;
@@ -56,7 +57,7 @@ namespace SonarAnalyzer.UnitTest
 
         public static void VerifyCSharpAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer,
             IEnumerable<CSharpParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-            params MetadataReference[] additionalReferences)
+            IEnumerable<MetadataReference> additionalReferences = null)
         {
             var solution = SolutionBuilder
                .Create()
@@ -74,7 +75,7 @@ namespace SonarAnalyzer.UnitTest
         }
 
         public static void VerifyVisualBasicAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default, params MetadataReference[] additionalReferences)
+            CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default, IEnumerable<MetadataReference> additionalReferences = null)
         {
             var solution = SolutionBuilder
                .Create()
@@ -93,7 +94,7 @@ namespace SonarAnalyzer.UnitTest
 
         public static void VerifyAnalyzer(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
             IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-            params MetadataReference[] additionalReferences)
+            IEnumerable<MetadataReference> additionalReferences = null)
         {
             VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, options, checkMode, additionalReferences);
         }
@@ -126,7 +127,7 @@ namespace SonarAnalyzer.UnitTest
 
         public static void VerifyAnalyzer(IEnumerable<string> paths, SonarDiagnosticAnalyzer diagnosticAnalyzer,
             IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-            params MetadataReference[] additionalReferences)
+            IEnumerable<MetadataReference> additionalReferences = null)
         {
             var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths, additionalReferences);
 
@@ -137,7 +138,7 @@ namespace SonarAnalyzer.UnitTest
         }
 
         public static void VerifyNoIssueReportedInTest(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            params MetadataReference[] additionalReferences)
+            IEnumerable<MetadataReference> additionalReferences = null)
         {
             var compilation = SolutionBuilder.Create()
                 .AddTestProject(AnalyzerLanguage.FromPath(path))
@@ -150,7 +151,7 @@ namespace SonarAnalyzer.UnitTest
 
         public static void VerifyNoIssueReported(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
             IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
-            params MetadataReference[] additionalReferences)
+            IEnumerable<MetadataReference> additionalReferences = null)
         {
             var projectBuilder = SolutionBuilder.Create()
                 .AddProject(AnalyzerLanguage.FromPath(path))
@@ -175,7 +176,7 @@ namespace SonarAnalyzer.UnitTest
 
         public static void VerifyCodeFix(string path, string pathToExpected,
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider,
-            IEnumerable<ParseOptions> options = null, params MetadataReference[] additionalReferences)
+            IEnumerable<ParseOptions> options = null, IEnumerable<MetadataReference> additionalReferences = null)
         {
             CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider,
                 null, options, additionalReferences);
@@ -183,7 +184,7 @@ namespace SonarAnalyzer.UnitTest
 
         public static void VerifyCodeFix(string path, string pathToExpected, string pathToBatchExpected,
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider,
-            IEnumerable<ParseOptions> options = null, params MetadataReference[] additionalReferences)
+            IEnumerable<ParseOptions> options = null, IEnumerable<MetadataReference> additionalReferences = null)
         {
             CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToBatchExpected, diagnosticAnalyzer, codeFixProvider,
                 null, options, additionalReferences);
@@ -191,7 +192,7 @@ namespace SonarAnalyzer.UnitTest
 
         public static void VerifyCodeFix(string path, string pathToExpected,
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider, string codeFixTitle,
-            IEnumerable<ParseOptions> options = null, params MetadataReference[] additionalReferences)
+            IEnumerable<ParseOptions> options = null, IEnumerable<MetadataReference> additionalReferences = null)
         {
             CodeFixVerifier.VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider,
                 codeFixTitle, options, additionalReferences);
