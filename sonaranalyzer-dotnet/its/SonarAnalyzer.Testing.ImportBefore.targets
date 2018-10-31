@@ -3,14 +3,21 @@
           AfterTargets="ResolveCodeAnalysisRuleSet"
           BeforeTargets="CoreCompile">
 
+    <!-- Copy project-specific SonarLint.xml to enable project-specific settings, such as file headers -->
+    <PropertyGroup>
+      <ProjectSpecificSonarLintXml Condition="Exists('$(MSBuildStartupDirectory)\config\$(PROJECT)\SonarLint.xml')">
+        $(MSBuildStartupDirectory)\config\$(PROJECT)\SonarLint.xml
+      </ProjectSpecificSonarLintXml>
+      <ProjectSpecificSonarLintXml Condition="!Exists('$(MSBuildStartupDirectory)\config\$(PROJECT)\SonarLint.xml')">
+        $(MSBuildStartupDirectory)\config\SonarLint.xml
+      </ProjectSpecificSonarLintXml>
+    </PropertyGroup>
+
     <PropertyGroup>
       <SonarAnalyzerRegressionTestRunning Condition="Exists('$(MSBuildStartupDirectory)\binaries\SonarAnalyzer.dll')">true</SonarAnalyzerRegressionTestRunning>
       <SonarAnalyzerRegressionTestRunning Condition="$(SonarAnalyzerRegressionTestRunning) == ''">false</SonarAnalyzerRegressionTestRunning>
-      <ProjectConfFilePath Condition="!Exists('$(MSBuildStartupDirectory)\sources\$(PROJECT)\SonarLint.xml')">
-        $(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)\ProjectOutFolderPath.txt;$(MSBuildStartupDirectory)\SonarLint.xml
-      </ProjectConfFilePath>
-      <ProjectConfFilePath Condition="Exists('$(MSBuildStartupDirectory)\sources\$(PROJECT)\SonarLint.xml')">
-        $(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)\ProjectOutFolderPath.txt;$(MSBuildStartupDirectory)\sources\$(PROJECT)\SonarLint.xml
+      <ProjectConfFilePath>
+        $(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)\ProjectOutFolderPath.txt;$(ProjectSpecificSonarLintXml)
       </ProjectConfFilePath>
     </PropertyGroup>
 
