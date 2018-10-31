@@ -26,22 +26,11 @@ namespace SonarAnalyzer.Helpers
 {
     public static class MethodSignatureHelper
     {
-        public static Func<MethodSignature, bool> IsSameMethod(SimpleNameSyntax identifierName, SemanticModel semanticModel)
+        public static Func<MethodSignature, bool> IsSame<TSymbolType>(SimpleNameSyntax identifierName, SemanticModel semanticModel)
+            where TSymbolType : class, ISymbol
         {
             var identifierText = identifierName.Identifier.ValueText;
-            var identifierSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(identifierName).Symbol as IMethodSymbol);
-            // This function will be called multiple times for each tracked MethodSignature,
-            // hence we cache as much as possible before.
-            return (methodSignature) =>
-                identifierText == methodSignature.Name &&
-                identifierSymbol.Value != null &&
-                identifierSymbol.Value.ContainingType.Is(methodSignature.ContainingType);
-        }
-
-        public static Func<MethodSignature, bool> IsSameProperty(SimpleNameSyntax identifierName, SemanticModel semanticModel)
-        {
-            var identifierText = identifierName.Identifier.ValueText;
-            var identifierSymbol = new Lazy<IPropertySymbol>(() => semanticModel.GetSymbolInfo(identifierName).Symbol as IPropertySymbol);
+            var identifierSymbol = new Lazy<TSymbolType>(() => semanticModel.GetSymbolInfo(identifierName).Symbol as TSymbolType);
             // This function will be called multiple times for each tracked MethodSignature,
             // hence we cache as much as possible before.
             return (methodSignature) =>

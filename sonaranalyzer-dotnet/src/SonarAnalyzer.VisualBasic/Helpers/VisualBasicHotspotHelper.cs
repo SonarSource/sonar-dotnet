@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Helpers
             {
                 var identifier = invocation.Expression.GetIdentifier();
                 return identifier != null &&
-                    trackedMethods.Any(MethodSignatureHelper.IsSameMethod(identifier, semanticModel));
+                    trackedMethods.Any(MethodSignatureHelper.IsSame<IMethodSymbol>(identifier, semanticModel));
             }
         }
 
@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Helpers
 
                 var identifier = expression.GetIdentifier();
                 return identifier != null &&
-                    trackedProperties.Any(MethodSignatureHelper.IsSameProperty(identifier, semanticModel));
+                    trackedProperties.Any(MethodSignatureHelper.IsSame<IMethodSymbol>(identifier, semanticModel));
             }
         }
     }
