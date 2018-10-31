@@ -31,12 +31,14 @@ namespace SonarAnalyzer.Helpers
 {
     public class VisualBasicHotspotHelper : HotspotHelper
     {
-        public VisualBasicHotspotHelper(IAnalyzerConfiguration analysisConfiguration, ImmutableArray<DiagnosticDescriptor> supportedDiagnostics)
+        public VisualBasicHotspotHelper(IAnalyzerConfiguration analysisConfiguration,
+            ImmutableArray<DiagnosticDescriptor> supportedDiagnostics)
             : base(analysisConfiguration, supportedDiagnostics)
         {
         }
 
-        public override void TrackMethodInvocations(SonarAnalysisContext context, DiagnosticDescriptor rule, params MethodSignature[] trackedMethods)
+        public override void TrackMethodInvocations(SonarAnalysisContext context, DiagnosticDescriptor rule,
+            params MethodSignature[] trackedMethods)
         {
             context.RegisterCompilationStartAction(
                 c =>
@@ -66,7 +68,8 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public override void TrackPropertyAccess(SonarAnalysisContext context, DiagnosticDescriptor rule, params MethodSignature[] trackedProperties)
+        public override void TrackPropertyAccess(SonarAnalysisContext context, DiagnosticDescriptor rule,
+            params MethodSignature[] trackedProperties)
         {
             context.RegisterCompilationStartAction(
                 c =>

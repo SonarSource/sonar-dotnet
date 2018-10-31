@@ -24,7 +24,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Helpers
 {
-    public class MethodSignatureHelper
+    public static class MethodSignatureHelper
     {
         public static Func<MethodSignature, bool> IsSameMethod(SimpleNameSyntax identifierName, SemanticModel semanticModel)
         {

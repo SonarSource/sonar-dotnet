@@ -31,7 +31,8 @@ namespace SonarAnalyzer.Helpers
         private readonly IAnalyzerConfiguration analysisConfiguration;
         private readonly ImmutableArray<DiagnosticDescriptor> supportedDiagnostics;
 
-        public HotspotHelper(IAnalyzerConfiguration analysisConfiguration, ImmutableArray<DiagnosticDescriptor> supportedDiagnostics)
+        protected HotspotHelper(IAnalyzerConfiguration analysisConfiguration,
+            ImmutableArray<DiagnosticDescriptor> supportedDiagnostics)
         {
             this.analysisConfiguration = analysisConfiguration;
             this.supportedDiagnostics = supportedDiagnostics;
@@ -52,8 +53,10 @@ namespace SonarAnalyzer.Helpers
             return supportedDiagnostics.Any(d => analysisConfiguration.IsEnabled(d.Id));
         }
 
-        public abstract void TrackMethodInvocations(SonarAnalysisContext context, DiagnosticDescriptor rule, params MethodSignature[] trackedMethods);
+        public abstract void TrackMethodInvocations(SonarAnalysisContext context, DiagnosticDescriptor rule,
+            params MethodSignature[] trackedMethods);
 
-        public abstract void TrackPropertyAccess(SonarAnalysisContext context, DiagnosticDescriptor rule, params MethodSignature[] trackedMethods);
+        public abstract void TrackPropertyAccess(SonarAnalysisContext context, DiagnosticDescriptor rule,
+            params MethodSignature[] trackedProperties);
     }
 }
