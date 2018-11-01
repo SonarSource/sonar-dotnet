@@ -18,24 +18,28 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
-    public abstract class HotspotHelper
+    public abstract class SyntaxTrackerBase<TSyntaxKind>
+        where TSyntaxKind : struct
     {
         private readonly IAnalyzerConfiguration analysisConfiguration;
-        private readonly ImmutableArray<DiagnosticDescriptor> supportedDiagnostics;
 
-        protected HotspotHelper(IAnalyzerConfiguration analysisConfiguration,
-            ImmutableArray<DiagnosticDescriptor> supportedDiagnostics)
+        protected DiagnosticDescriptor Rule { get; }
+
+        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+
+        protected abstract TSyntaxKind[] TrackedSyntaxKinds { get; }
+
+        protected SyntaxTrackerBase(IAnalyzerConfiguration analysisConfiguration,
+            DiagnosticDescriptor rule)
         {
             this.analysisConfiguration = analysisConfiguration;
-            this.supportedDiagnostics = supportedDiagnostics;
+            this.Rule = rule;
         }
 
         protected bool IsEnabled(AnalyzerOptions options)
@@ -50,13 +54,7 @@ namespace SonarAnalyzer.Helpers
                 return false;
             }
 
-            return supportedDiagnostics.Any(d => analysisConfiguration.IsEnabled(d.Id));
+            return analysisConfiguration.IsEnabled(Rule.Id);
         }
-
-        public abstract void TrackMethodInvocations(SonarAnalysisContext context, DiagnosticDescriptor rule,
-            params MethodSignature[] trackedMethods);
-
-        public abstract void TrackPropertyAccess(SonarAnalysisContext context, DiagnosticDescriptor rule,
-            params MethodSignature[] trackedProperties);
     }
 }
