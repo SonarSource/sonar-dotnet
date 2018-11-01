@@ -293,6 +293,8 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Windows_Markup_ConstructorArgumentAttribute = new KnownType("System.Windows.Markup.ConstructorArgumentAttribute");
         internal static readonly KnownType System_Xml_XmlDocument = new KnownType("System.Xml.XmlDocument");
         internal static readonly KnownType System_Xml_XmlNode = new KnownType("System.Xml.XmlNode");
+        internal static readonly KnownType System_Xml_XPath_XPathNavigator = new KnownType("System.Xml.XPath.XPathNavigator");
+        internal static readonly KnownType System_Xml_XPath_XPathExpression = new KnownType("System.Xml.XPath.XPathExpression");
         internal static readonly ImmutableArray<KnownType> SystemActionVariants =
             ImmutableArray.Create(
                 new KnownType("System.Action"),
