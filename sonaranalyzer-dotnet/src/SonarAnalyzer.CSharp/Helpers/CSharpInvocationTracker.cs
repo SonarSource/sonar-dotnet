@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -42,7 +42,31 @@ namespace SonarAnalyzer.Helpers
         protected override SyntaxNode GetIdentifier(SyntaxNode invocationExpression) =>
             ((InvocationExpressionSyntax)invocationExpression).Expression.GetIdentifier();
 
-        protected override Func<MethodSignature, bool> IsSame<TSymbolType>(SyntaxNode identifier, SemanticModel semanticModel) =>
-            MethodSignatureHelper.IsSame<TSymbolType>((SimpleNameSyntax)identifier, semanticModel);
+        #region Syntax-level checking methods
+
+        public override InvocationCondition MatchSimpleNames(params MethodSignature[] methods)
+        {
+            return Check;
+
+            bool Check(InvocationContext invocationContext)
+            {
+                if (!(invocationContext.Identifier is SimpleNameSyntax))
+                {
+                    return false;
+                }
+
+                var identifierName = (SimpleNameSyntax)invocationContext.Identifier;
+                var identifierText = identifierName.Identifier.ValueText;
+
+                // This function will be called multiple times for each tracked MethodSignature,
+                // hence we cache as much as possible before.
+                return methods.Any(m =>
+                    identifierText == m.Name &&
+                    invocationContext.InvokedMethodSymbol.Value != null &&
+                    invocationContext.InvokedMethodSymbol.Value.ContainingType.Is(m.ContainingType));
+            }
+        }
+
+        #endregion
     }
 }
