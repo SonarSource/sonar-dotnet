@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -26,6 +25,8 @@ using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
+    public delegate bool InvocationCondition(InvocationContext invocationContext);
+
     public abstract class InvocationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind>
         where TSyntaxKind : struct
     {
@@ -36,10 +37,7 @@ namespace SonarAnalyzer.Helpers
 
         protected abstract SyntaxNode GetIdentifier(SyntaxNode invocationExpression);
 
-        protected abstract Func<MethodSignature, bool> IsSame<TSymbolType>(SyntaxNode identifier, SemanticModel semanticModel)
-            where TSymbolType : class, ISymbol;
-
-        public void Track(SonarAnalysisContext context, params MethodSignature[] methods)
+        public void Track(SonarAnalysisContext context, params InvocationCondition[] conditions)
         {
             context.RegisterCompilationStartAction(
                 c =>
@@ -64,9 +62,43 @@ namespace SonarAnalyzer.Helpers
             bool IsTrackedMethod(SyntaxNode invocation, SemanticModel semanticModel)
             {
                 var identifier = GetIdentifier(invocation);
-                return identifier != null &&
-                    methods.Any(IsSame<IMethodSymbol>(identifier, semanticModel));
+                if (identifier == null)
+                {
+                    return false;
+                }
+
+                var conditionContext = new InvocationContext(invocation, identifier, semanticModel);
+                return conditions.All(c => c(conditionContext));
             }
         }
+
+        #region Syntax-level standard conditions
+
+        public abstract InvocationCondition MatchSimpleNames(params MethodSignature[] methods);
+
+        #endregion
+
+        #region Symbol-level standard conditions
+
+        // Example symbol methods
+        public bool FirstParameterIsString(InvocationContext context)
+        {
+            var firstParam = context.InvokedMethodSymbol.Value?.Parameters.FirstOrDefault();
+
+            return firstParam != null &&
+                firstParam.IsType(KnownType.System_String);
+        }
+
+        internal InvocationCondition FirstParameterIsOfType(KnownType requiredType)
+        {
+            return Check;
+
+            bool Check(InvocationContext context) =>
+                context.InvokedMethodSymbol.Value != null &&
+                context.InvokedMethodSymbol.Value.Parameters.Length > 0 &&
+                context.InvokedMethodSymbol.Value.Parameters[0].IsType(requiredType);
+        }
+
+        #endregion
     }
 }
