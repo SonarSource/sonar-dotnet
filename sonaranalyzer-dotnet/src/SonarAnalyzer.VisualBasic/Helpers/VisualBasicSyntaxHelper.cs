@@ -137,5 +137,18 @@ namespace SonarAnalyzer.Helpers.VisualBasic
                     return false;
             }
         }
+
+        public static SimpleNameSyntax GetIdentifier(this ExpressionSyntax expression)
+        {
+            switch (expression?.Kind())
+            {
+                case SyntaxKind.SimpleMemberAccessExpression:
+                    return ((MemberAccessExpressionSyntax)expression).Name;
+                case SyntaxKind.IdentifierName:
+                    return (IdentifierNameSyntax)expression;
+                default:
+                    return null;
+            }
+        }
     }
 }
