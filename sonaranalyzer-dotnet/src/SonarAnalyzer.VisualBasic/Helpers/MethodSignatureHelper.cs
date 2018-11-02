@@ -22,9 +22,15 @@ using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
+
+    /**********************************************************
+    * When maintaining this class, don't forget to change the
+    * corresponding class in the C# analyzer
+    *********************************************************/
+
 namespace SonarAnalyzer.Helpers
 {
-    public static class MethodSignatureHelper
+    internal static class MethodSignatureHelper
     {
         public static bool IsMatch<TSymbolType>(SimpleNameSyntax identifierName, SemanticModel semanticModel,
             Lazy<TSymbolType> symbolFetcher, MethodSignature[] methods)

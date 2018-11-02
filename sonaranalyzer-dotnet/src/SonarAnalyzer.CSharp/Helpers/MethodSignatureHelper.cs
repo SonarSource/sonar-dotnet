@@ -19,13 +19,18 @@
  */
 
 using System;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
+
+    /**********************************************************
+    * When maintaining this class, don't forget to change the
+    * corresponding class in the Visual Basic analyzer
+    *********************************************************/
+
 namespace SonarAnalyzer.Helpers
 {
-    public static class MethodSignatureHelper
+    internal static class MethodSignatureHelper
     {
         public static bool IsMatch<TSymbolType>(SimpleNameSyntax identifierName, SemanticModel semanticModel,
             Lazy<TSymbolType> symbolFetcher, MethodSignature[] methods)
@@ -37,10 +42,22 @@ namespace SonarAnalyzer.Helpers
             }
 
             var identifierText = identifierName.Identifier.ValueText;
-            return methods.Any(m =>
-                identifierText == m.Name &&
-                symbolFetcher.Value != null &&
-                symbolFetcher.Value.ContainingType.Is(m.ContainingType));
+            foreach (var m in methods)
+            {
+                if (identifierText != m.Name)
+                {
+                    continue;
+                }
+                if (symbolFetcher.Value == null)
+                {
+                    return false; // No need to continue looping if the symbol is null
+                }
+                if (symbolFetcher.Value.ContainingType.ConstructedFrom.Is(m.ContainingType))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
