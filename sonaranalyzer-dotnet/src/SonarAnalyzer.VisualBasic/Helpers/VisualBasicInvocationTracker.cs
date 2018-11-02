@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
@@ -51,6 +50,48 @@ namespace SonarAnalyzer.Helpers
             return (context) => MethodSignatureHelper.IsMatch(context.Identifier as SimpleNameSyntax,
                 context.Model, context.InvokedMethodSymbol, methods);
         }
+
+        public override bool FirstParameterIsStringAndIsNotConstant(InvocationContext context)
+        {
+            if (!base.FirstParameterIsString(context))
+            {
+                return false;
+            }
+
+            var argumentsSyntax = (context.Invocation as InvocationExpressionSyntax)?
+                .ArgumentList?.Arguments.FirstOrDefault();
+
+            return !IsConstantExpression(argumentsSyntax?.GetExpression(), context.Model);
+        }
+
+        private static bool IsConstantExpression(ExpressionSyntax expression, SemanticModel semanticModel)
+        {
+            if (expression == null)
+            {
+                return false;
+            }
+
+            var strippedExpression = expression.RemoveParentheses();
+            if (strippedExpression is LiteralExpressionSyntax)
+            {
+                return true;
+            }
+
+            var argumentSymbol = semanticModel.GetSymbolInfo(strippedExpression).Symbol;
+            if (argumentSymbol == null)
+            {
+                return false; // can't tell - assume not constant
+            }
+
+            if ((argumentSymbol is ILocalSymbol local && local.IsConst) ||
+                (argumentSymbol is IFieldSymbol field && field.IsConst))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
 
         #endregion
     }
