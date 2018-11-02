@@ -51,7 +51,6 @@ namespace SonarAnalyzer.Helpers
             expression.IsKind(SyntaxKind.IdentifierName) &&
             expression.Parent.IsKind(SyntaxKind.SimpleMemberAccessExpression);
 
-
         #region Syntax-level checking methods
 
         public override PropertyAccessCondition MatchSimpleNames(params MethodSignature[] methods)
@@ -59,6 +58,12 @@ namespace SonarAnalyzer.Helpers
             return (context) => MethodSignatureHelper.IsMatch(context.Identifier as SimpleNameSyntax,
                     context.Model, context.InvokedPropertySymbol, methods);
         }
+
+        public override PropertyAccessCondition MatchGet() =>
+            (context) => !((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
+
+        public override PropertyAccessCondition MatchSet() =>
+            (context) => ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
 
         #endregion
     }
