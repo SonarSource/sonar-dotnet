@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -26,6 +25,8 @@ using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
+    public delegate bool PropertyAccessCondition(PropertyAccessContext invocationContext);
+
     public abstract class PropertyAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind>
         where TSyntaxKind : struct
     {
@@ -38,10 +39,7 @@ namespace SonarAnalyzer.Helpers
 
         protected abstract SyntaxNode GetIdentifier(SyntaxNode expression);
 
-        protected abstract Func<MethodSignature, bool> IsSame<TSymbolType>(SyntaxNode identifier, SemanticModel semanticModel)
-            where TSymbolType : class, ISymbol;
-
-        public void Track(SonarAnalysisContext context, params MethodSignature[] properties)
+        public void Track(SonarAnalysisContext context, params PropertyAccessCondition[] conditions)
         {
             context.RegisterCompilationStartAction(
                 c =>
@@ -73,9 +71,27 @@ namespace SonarAnalyzer.Helpers
                 }
 
                 var identifier = GetIdentifier(expression);
-                return identifier != null &&
-                    properties.Any(IsSame<IPropertySymbol>(identifier, semanticModel));
+                if (identifier == null)
+                {
+                    return false;
+                }
+
+                var conditionContext = new PropertyAccessContext(expression, identifier, semanticModel);
+                return conditions.All(c => c(conditionContext));
             }
         }
+
+
+        #region Syntax-level standard conditions
+
+        public abstract PropertyAccessCondition MatchSimpleNames(params MethodSignature[] methods);
+
+        #endregion
+
+        #region Symbol-level standard conditions
+
+        // Add any common symbol-level checks here...
+
+        #endregion
     }
 }

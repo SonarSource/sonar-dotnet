@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
@@ -51,7 +51,27 @@ namespace SonarAnalyzer.Helpers
             expression.IsKind(SyntaxKind.IdentifierName) &&
             expression.Parent.IsKind(SyntaxKind.SimpleMemberAccessExpression);
 
-        protected override Func<MethodSignature, bool> IsSame<TSymbolType>(SyntaxNode identifier, SemanticModel semanticModel) =>
-            MethodSignatureHelper.IsSame<TSymbolType>((SimpleNameSyntax)identifier, semanticModel);
+
+        #region Syntax-level checking methods
+
+        public override PropertyAccessCondition MatchSimpleNames(params MethodSignature[] methods)
+        {
+            return (propertyContext) =>
+            {
+                var identifierName = propertyContext.Identifier as SimpleNameSyntax;
+                if (identifierName == null)
+                {
+                    return false;
+                }
+
+                var identifierText = identifierName.Identifier.ValueText;
+                return methods.Any(m =>
+                    identifierText == m.Name &&
+                    propertyContext.InvokedPropertySymbol.Value != null &&
+                    propertyContext.InvokedPropertySymbol.Value.ContainingType.Is(m.ContainingType));
+            };
+        }
+
+        #endregion
     }
 }

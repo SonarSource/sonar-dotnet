@@ -48,25 +48,21 @@ namespace SonarAnalyzer.Helpers
 
         public override InvocationCondition MatchSimpleNames(params MethodSignature[] methods)
         {
-            return Check;
-
-            bool Check(InvocationContext invocationContext)
+            return (invocationContext) =>
             {
-                if (!(invocationContext.Identifier is SimpleNameSyntax))
+                var identifierName = invocationContext.Identifier as SimpleNameSyntax;
+                if (identifierName == null)
                 {
                     return false;
                 }
 
-                var identifierName = (SimpleNameSyntax)invocationContext.Identifier;
                 var identifierText = identifierName.Identifier.ValueText;
 
-                // This function will be called multiple times for each tracked MethodSignature,
-                // hence we cache as much as possible before.
                 return methods.Any(m =>
                     identifierText == m.Name &&
                     invocationContext.InvokedMethodSymbol.Value != null &&
                     invocationContext.InvokedMethodSymbol.Value.ContainingType.Is(m.ContainingType));
-            }
+            };
         }
 
         #endregion
