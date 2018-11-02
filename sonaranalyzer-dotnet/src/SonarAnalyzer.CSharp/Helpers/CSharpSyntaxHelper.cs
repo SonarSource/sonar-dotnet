@@ -314,5 +314,13 @@ namespace SonarAnalyzer.Helpers
                     return null;
             }
         }
+
+        public static bool IsLeftSideOfAssignment(this ExpressionSyntax expression)
+        {
+            var topParenthesizedExpression = expression.GetSelfOrTopParenthesizedExpression();
+            return topParenthesizedExpression.Parent.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
+                topParenthesizedExpression.Parent is AssignmentExpressionSyntax assignment &&
+                assignment.Left == topParenthesizedExpression;
+        }
     }
 }
