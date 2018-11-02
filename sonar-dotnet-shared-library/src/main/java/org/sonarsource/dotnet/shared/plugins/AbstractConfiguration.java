@@ -160,7 +160,7 @@ public abstract class AbstractConfiguration {
       // fallback to old property
       Optional<Path> path = configuration.get(getOldRoslynJsonReportPathProperty()).map(Paths::get);
       if (!path.isPresent()) {
-        LOG.warn("No roslyn issues report not found for this project.");
+        LOG.warn("No Roslyn issues report found for this project.");
         return Collections.emptyList();
       } else {
         LOG.debug("Found Roslyn issues report");
