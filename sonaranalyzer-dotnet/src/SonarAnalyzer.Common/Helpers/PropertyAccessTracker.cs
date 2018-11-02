@@ -81,10 +81,13 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-
         #region Syntax-level standard conditions
 
         public abstract PropertyAccessCondition MatchSimpleNames(params MethodSignature[] methods);
+
+        public abstract PropertyAccessCondition MatchGet();
+
+        public abstract PropertyAccessCondition MatchSet();
 
         #endregion
 

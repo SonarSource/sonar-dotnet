@@ -150,5 +150,13 @@ namespace SonarAnalyzer.Helpers.VisualBasic
                     return null;
             }
         }
+
+        public static bool IsLeftSideOfAssignment(this ExpressionSyntax expression)
+        {
+            var topParenthesizedExpression = expression.GetSelfOrTopParenthesizedExpression();
+            return topParenthesizedExpression.Parent.IsKind(SyntaxKind.SimpleAssignmentStatement) &&
+                topParenthesizedExpression.Parent is AssignmentStatementSyntax assignment &&
+                assignment.Left == topParenthesizedExpression;
+        }
     }
 }
