@@ -57,17 +57,8 @@ namespace SonarAnalyzer.Helpers
         {
             return (context) =>
             {
-                var identifierName = context.Identifier as SimpleNameSyntax;
-                if (identifierName == null)
-                {
-                    return false;
-                }
-
-                var identifierText = identifierName.Identifier.ValueText;
-                return methods.Any(m =>
-                    identifierText == m.Name &&
-                    context.InvokedPropertySymbol.Value != null &&
-                    context.InvokedPropertySymbol.Value.ContainingType.Is(m.ContainingType));
+                return MethodSignatureHelper.IsMatch(context.Identifier as SimpleNameSyntax,
+                    context.Model, context.InvokedPropertySymbol, methods);
             };
         }
 

@@ -19,25 +19,28 @@
  */
 
 using System;
+using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.Helpers
 {
     public static class MethodSignatureHelper
     {
-        public static Func<MethodSignature, bool> IsSame<TSymbolType>(SimpleNameSyntax identifierName, SemanticModel semanticModel)
+        public static bool IsMatch<TSymbolType>(SimpleNameSyntax identifierName, SemanticModel semanticModel,
+            Lazy<TSymbolType> symbolFetcher, MethodSignature[] methods)
             where TSymbolType : class, ISymbol
         {
+            if (identifierName == null)
+            {
+                return false;
+            }
+
             var identifierText = identifierName.Identifier.ValueText;
-            var identifierSymbol = new Lazy<TSymbolType>(() => semanticModel.GetSymbolInfo(identifierName).Symbol as TSymbolType);
-            // This function will be called multiple times for each tracked MethodSignature,
-            // hence we cache as much as possible before.
-            return (methodSignature) =>
-                identifierText == methodSignature.Name &&
-                identifierSymbol.Value != null &&
-                identifierSymbol.Value.ContainingType.Is(methodSignature.ContainingType);
+            return methods.Any(m =>
+                identifierText == m.Name &&
+                symbolFetcher.Value != null &&
+                symbolFetcher.Value.ContainingType.Is(m.ContainingType));
         }
     }
 }

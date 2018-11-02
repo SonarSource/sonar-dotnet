@@ -56,20 +56,8 @@ namespace SonarAnalyzer.Helpers
 
         public override PropertyAccessCondition MatchSimpleNames(params MethodSignature[] methods)
         {
-            return (propertyContext) =>
-            {
-                var identifierName = propertyContext.Identifier as SimpleNameSyntax;
-                if (identifierName == null)
-                {
-                    return false;
-                }
-
-                var identifierText = identifierName.Identifier.ValueText;
-                return methods.Any(m =>
-                    identifierText == m.Name &&
-                    propertyContext.InvokedPropertySymbol.Value != null &&
-                    propertyContext.InvokedPropertySymbol.Value.ContainingType.Is(m.ContainingType));
-            };
+            return (context) => MethodSignatureHelper.IsMatch(context.Identifier as SimpleNameSyntax,
+                    context.Model, context.InvokedPropertySymbol, methods);
         }
 
         #endregion
