@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -52,6 +51,12 @@ namespace SonarAnalyzer.Helpers
             expression.Parent.IsKind(SyntaxKind.SimpleMemberAccessExpression);
 
         #region Syntax-level checking methods
+
+        public override PropertyAccessCondition MatchGet() =>
+            (context) => !((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
+
+        public override PropertyAccessCondition MatchSet() =>
+            (context) => ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
 
         public override PropertyAccessCondition MatchSimpleNames(params MethodSignature[] methods)
         {
