@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
@@ -37,10 +36,22 @@ namespace SonarAnalyzer.Helpers
             }
 
             var identifierText = identifierName.Identifier.ValueText;
-            return methods.Any(m =>
-                identifierText == m.Name &&
-                symbolFetcher.Value != null &&
-                symbolFetcher.Value.ContainingType.Is(m.ContainingType));
+            foreach (var m in methods)
+            {
+                if (identifierText != m.Name)
+                {
+                    continue;
+                }
+                if (symbolFetcher.Value == null)
+                {
+                    return false; // No need to continue looping if the symbol is null
+                }
+                if (symbolFetcher.Value.ContainingType.ConstructedFrom.Is(m.ContainingType))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
