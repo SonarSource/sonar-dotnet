@@ -72,6 +72,11 @@ namespace SonarAnalyzer.Helpers
             }
 
             var strippedExpression = expression.RemoveParentheses();
+            if (strippedExpression is CastExpressionSyntax castExpression)
+            {
+                strippedExpression = castExpression.Expression.RemoveParentheses();
+            }
+
             if (strippedExpression is LiteralExpressionSyntax)
             {
                 return true;
