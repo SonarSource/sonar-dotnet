@@ -55,44 +55,12 @@ namespace SonarAnalyzer.Helpers
             {
                 return false;
             }
-
+            IMethodSymbol m;
+            
             var argumentsSyntax = (context.Invocation as InvocationExpressionSyntax)?
                 .ArgumentList?.Arguments.FirstOrDefault();
 
-            return !IsConstantExpression(argumentsSyntax?.Expression, context.Model);
-        }
-
-        private static bool IsConstantExpression(ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            if (expression == null)
-            {
-                return false;
-            }
-
-            var strippedExpression = expression.RemoveParentheses();
-            if (strippedExpression is CastExpressionSyntax castExpression)
-            {
-                strippedExpression = castExpression.Expression.RemoveParentheses();
-            }
-
-            if (strippedExpression is LiteralExpressionSyntax)
-            {
-                return true;
-            }
-
-            var argumentSymbol = semanticModel.GetSymbolInfo(strippedExpression).Symbol;
-            if (argumentSymbol == null)
-            {
-                return false; // can't tell - assume not constant
-            }
-
-            if ((argumentSymbol is ILocalSymbol local && local.IsConst) ||
-                (argumentSymbol is IFieldSymbol field && field.IsConst))
-            {
-                return true; // is constant
-            }
-
-            return false;
+            return !(argumentsSyntax?.Expression.IsConstant(context.Model) ?? false);
         }
 
         #endregion
