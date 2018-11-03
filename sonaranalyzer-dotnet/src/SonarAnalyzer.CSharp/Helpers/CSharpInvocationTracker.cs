@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Helpers
 
         public override InvocationCondition MatchSimpleNames(params MethodSignature[] methods)
         {
-            return (context) => MethodSignatureHelper.IsMatch(context.Identifier as SimpleNameSyntax,
+            return (context) => MethodSignatureHelper.IsExactMatch(context.Identifier as SimpleNameSyntax,
                     context.Model, context.InvokedMethodSymbol, methods);
         }
 
@@ -55,8 +55,6 @@ namespace SonarAnalyzer.Helpers
             {
                 return false;
             }
-            IMethodSymbol m;
-            
             var argumentsSyntax = (context.Invocation as InvocationExpressionSyntax)?
                 .ArgumentList?.Arguments.FirstOrDefault();
 

@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class MethodSignatureHelper
     {
-        public static bool IsMatch<TSymbolType>(SimpleNameSyntax identifierName, SemanticModel semanticModel,
+        public static bool IsExactMatch<TSymbolType>(SimpleNameSyntax identifierName, SemanticModel semanticModel,
             Lazy<TSymbolType> symbolFetcher, MethodSignature[] methods)
             where TSymbolType : class, ISymbol
         {
