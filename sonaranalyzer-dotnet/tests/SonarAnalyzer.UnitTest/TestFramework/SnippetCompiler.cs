@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
@@ -31,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     /// </summary>
     internal class SnippetCompiler
     {
-        private readonly SyntaxTree syntaxTree;
+        public SyntaxTree SyntaxTree { get; private set; }
         public SemanticModel SemanticModel { get; private set; }
 
         public SnippetCompiler(string code)
@@ -41,15 +42,23 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             .AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
             .AddSnippet(code)
             .GetCompilation();
-            this.syntaxTree = compilation.SyntaxTrees.First();
-            this.SemanticModel = compilation.GetSemanticModel(this.syntaxTree);
+            this.SyntaxTree = compilation.SyntaxTrees.First();
+            this.SemanticModel = compilation.GetSemanticModel(this.SyntaxTree);
         }
+
+        public IEnumerable<TSyntaxNodeType> GetNodes<TSyntaxNodeType>()
+            where TSyntaxNodeType : SyntaxNode =>
+            this.SyntaxTree.GetRoot().DescendantNodes().OfType<TSyntaxNodeType>();
+ 
+        public TSymbolType GetSymbol<TSymbolType>(SyntaxNode node)
+            where TSymbolType : class, ISymbol =>
+            this.SemanticModel.GetSymbolInfo(node).Symbol as TSymbolType;
 
         public MethodDeclarationSyntax GetMethodDeclaration(string typeDotMethodName)
         {
             var nameParts = typeDotMethodName.Split('.');
 
-            var type = this.syntaxTree.GetRoot().DescendantNodes().OfType<TypeDeclarationSyntax>()
+            var type = this.GetNodes<TypeDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == nameParts[0]);
 
             var method = type.DescendantNodes().OfType<MethodDeclarationSyntax>()
@@ -63,7 +72,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public INamespaceSymbol GetNamespaceSymbol(string name)
         {
-            var symbol = this.syntaxTree.GetRoot().DescendantNodes().OfType<NamespaceDeclarationSyntax>()
+            var symbol = this.GetNodes<NamespaceDeclarationSyntax>()
                 .Select(s => this.SemanticModel.GetDeclaredSymbol(s))
                 .First( s=> s.Name == name) as INamespaceSymbol;
 
@@ -74,7 +83,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public ITypeSymbol GetTypeSymbol(string typeName)
         {
-            var type = this.syntaxTree.GetRoot().DescendantNodes().OfType<TypeDeclarationSyntax>()
+            var type = this.GetNodes<TypeDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == typeName);
 
             var symbol = this.SemanticModel.GetDeclaredSymbol(type) as ITypeSymbol;
@@ -94,7 +103,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public IPropertySymbol GetPropertySymbol(string typeDotMethodName)
         {
             var nameParts = typeDotMethodName.Split('.');
-            var type = this.syntaxTree.GetRoot().DescendantNodes().OfType<TypeDeclarationSyntax>()
+            var type = this.SyntaxTree.GetRoot().DescendantNodes().OfType<TypeDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == nameParts[0]);
 
             var method = type.DescendantNodes().OfType<PropertyDeclarationSyntax>()
