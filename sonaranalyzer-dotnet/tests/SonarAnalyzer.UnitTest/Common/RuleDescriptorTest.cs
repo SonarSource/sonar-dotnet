@@ -82,8 +82,7 @@ namespace SonarAnalyzer.UnitTest.Common
                 ruleDetail.Title.Should().NotBeNull();
             }
 
-            ruleDetails.Should().HaveSameCount(
-                ruleDetails.Select(descriptor => descriptor.Key).Distinct());
+            ruleDetails.Should().OnlyHaveUniqueItems();
         }
     }
 }

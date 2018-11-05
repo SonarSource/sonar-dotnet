@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void SonarAnalysis_WhenAnalysisDisabledBaseOnSyntaxTree_ReportIssuesForEnabledRules()
         {
-            this.TestCases.Count.Should().BeGreaterThan(2);
+            this.TestCases.Should().HaveCountGreaterThan(2);
 
             try
             {

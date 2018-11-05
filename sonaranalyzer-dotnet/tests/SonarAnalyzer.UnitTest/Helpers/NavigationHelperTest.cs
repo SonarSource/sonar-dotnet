@@ -86,7 +86,7 @@ namespace Test
 
             var ifStatement2 = this.ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
             var preceding = ifStatement2.GetPrecedingIfsInConditionChain();
-            preceding.Should().HaveCount(1);
+            preceding.Should().ContainSingle();
 
             ifStatement1.Should().BeEquivalentTo(preceding[0]);
         }
@@ -100,7 +100,7 @@ namespace Test
 
             var ifStatement2 = this.ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
             var preceding = ifStatement2.GetPrecedingStatementsInConditionChain().ToList();
-            preceding.Should().HaveCount(1);
+            preceding.Should().ContainSingle();
 
             ifStatement1.Statement.Should().BeEquivalentTo(preceding[0]);
         }
@@ -114,7 +114,7 @@ namespace Test
 
             var ifStatement2 = this.ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
             var preceding = ifStatement2.GetPrecedingConditionsInConditionChain().ToList();
-            preceding.Should().HaveCount(1);
+            preceding.Should().ContainSingle();
 
             ifStatement1.Condition.Should().BeEquivalentTo(preceding[0]);
         }

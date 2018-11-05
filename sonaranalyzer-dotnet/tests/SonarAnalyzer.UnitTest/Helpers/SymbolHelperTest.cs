@@ -244,15 +244,15 @@ namespace NS
         {
             var objectType = this.semanticModel.Compilation.GetTypeByMetadataName("System.Object");
             var baseTypes = objectType.GetSelfAndBaseTypes().ToList();
-            baseTypes.Should().HaveCount(1);
+            baseTypes.Should().ContainSingle();
             baseTypes.First().Should().Be(objectType);
 
             var derived1Type = this.semanticModel.GetDeclaredSymbol(this.derivedClassDeclaration1) as INamedTypeSymbol;
             baseTypes = derived1Type.GetSelfAndBaseTypes().ToList();
             baseTypes.Should().HaveCount(3);
-            baseTypes[0].Should().Be(derived1Type);
-            baseTypes[1].Should().Be(this.semanticModel.GetDeclaredSymbol(this.baseClassDeclaration) as INamedTypeSymbol);
-            baseTypes[2].Should().Be(objectType);
+            baseTypes.Should().HaveElementAt(0, derived1Type);
+            baseTypes.Should().HaveElementAt(1, this.semanticModel.GetDeclaredSymbol(this.baseClassDeclaration) as INamedTypeSymbol);
+            baseTypes.Should().HaveElementAt(2, objectType);
         }
 
         [TestMethod]

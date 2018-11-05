@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 }");
             var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
 
-            result.Should().HaveCount(1);
+            result.Should().ContainSingle();
 
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { true },
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 }");
             var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
 
-            result.Should().HaveCount(1);
+            result.Should().ContainSingle();
 
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { true },
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 }");
             var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
 
-            result.Should().HaveCount(1);
+            result.Should().ContainSingle();
 
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { false },
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 }");
             var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
 
-            result.Should().HaveCount(1);
+            result.Should().ContainSingle();
 
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { false },
@@ -210,7 +210,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 }");
             var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
 
-            result.Should().HaveCount(1);
+            result.Should().ContainSingle();
 
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { true },
@@ -229,7 +229,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 }");
             var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
 
-            result.Should().HaveCount(1);
+            result.Should().ContainSingle();
 
             VerifyIssueLocations(result,
                 expectedIsPrimary: new[] { false },
