@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
     [TestClass]
     public class GeneratedResourcesTest
     {
-        private const string RspecRelativeFolderPath = @"..\..\..\..\rspec\";
+        private const string RspecRelativeFolderPath = @"..\..\..\..\..\rspec\";
 
         [TestMethod]
         public void AnalyzersHaveCorrespondingResource_CSharp()
