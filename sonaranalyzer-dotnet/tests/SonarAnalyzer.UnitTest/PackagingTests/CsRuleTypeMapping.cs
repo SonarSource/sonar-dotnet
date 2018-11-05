@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -4815,7 +4815,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["4815"],
             //["4816"],
             //["4817"],
-            //["4818"],
+            ["4818"] = "SECURITY_HOTSPOT",
             //["4819"],
             //["4820"],
             //["4821"],
