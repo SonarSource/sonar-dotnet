@@ -45,7 +45,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.True, ps).ToList();
 
-            newProgramStates.Should().HaveCount(1);
+            newProgramStates.Should().ContainSingle();
             ShouldHaveConstraint(newProgramStates[0], this.sv_0, NullableValueConstraint.HasValue);
             ShouldHaveConstraint(newProgramStates[0], this.sv_w, BoolConstraint.True);
         }
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.False, ps).ToList();
 
-            newProgramStates.Should().HaveCount(1);
+            newProgramStates.Should().ContainSingle();
             ShouldHaveConstraint(newProgramStates[0], this.sv_0, NullableValueConstraint.HasValue);
             ShouldHaveConstraint(newProgramStates[0], this.sv_w, BoolConstraint.False);
         }
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, ps).ToList();
 
-            newProgramStates.Should().HaveCount(1);
+            newProgramStates.Should().ContainSingle();
             ShouldHaveConstraint(newProgramStates[0], this.sv_0, NullableValueConstraint.NoValue);
         }
 
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, ps).ToList();
 
-            newProgramStates.Should().HaveCount(1);
+            newProgramStates.Should().ContainSingle();
             ShouldHaveConstraint(newProgramStates[0], this.sv_0, NullableValueConstraint.HasValue);
         }
 
@@ -91,7 +91,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.Null, ps).ToList();
 
-            newProgramStates.Should().HaveCount(1);
+            newProgramStates.Should().ContainSingle();
             ShouldHaveConstraint(newProgramStates[0], this.sv_0, NullableValueConstraint.NoValue);
         }
 
@@ -102,7 +102,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, ps).ToList();
 
-            newProgramStates.Should().HaveCount(1);
+            newProgramStates.Should().ContainSingle();
             ShouldHaveConstraint(newProgramStates[0], this.sv_0, NullableValueConstraint.HasValue);
         }
 
@@ -133,7 +133,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.False, ps).ToList();
 
-            newProgramStates.Should().HaveCount(0);
+            newProgramStates.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -143,7 +143,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, ps).ToList();
 
-            newProgramStates.Should().HaveCount(0);
+            newProgramStates.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -163,7 +163,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.Null, ps).ToList();
 
-            newProgramStates.Should().HaveCount(0);
+            newProgramStates.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -193,7 +193,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.True, ps).ToList();
 
-            newProgramStates.Should().HaveCount(0);
+            newProgramStates.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -213,7 +213,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, ps).ToList();
 
-            newProgramStates.Should().HaveCount(0);
+            newProgramStates.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -233,7 +233,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.Null, ps).ToList();
 
-            newProgramStates.Should().HaveCount(0);
+            newProgramStates.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -263,7 +263,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.True, ps).ToList();
 
-            newProgramStates.Should().HaveCount(0);
+            newProgramStates.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -273,7 +273,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.False, ps).ToList();
 
-            newProgramStates.Should().HaveCount(0);
+            newProgramStates.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -293,7 +293,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, ps).ToList();
 
-            newProgramStates.Should().HaveCount(0);
+            newProgramStates.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -313,7 +313,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, ps).ToList();
 
-            newProgramStates.Should().HaveCount(0);
+            newProgramStates.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -333,7 +333,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.True, ps).ToList();
 
-            newProgramStates.Should().HaveCount(1);
+            newProgramStates.Should().ContainSingle();
             ShouldHaveConstraint(newProgramStates[0], this.sv_0, NullableValueConstraint.HasValue);
             ShouldHaveConstraint(newProgramStates[0], this.sv_w, BoolConstraint.True);
         }
@@ -345,7 +345,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.False, ps).ToList();
 
-            newProgramStates.Should().HaveCount(1);
+            newProgramStates.Should().ContainSingle();
             ShouldHaveConstraint(newProgramStates[0], this.sv_0, NullableValueConstraint.HasValue);
             ShouldHaveConstraint(newProgramStates[0], this.sv_w, BoolConstraint.False);
         }
@@ -357,7 +357,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, ps).ToList();
 
-            newProgramStates.Should().HaveCount(0);
+            newProgramStates.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -377,7 +377,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.Null, ps).ToList();
 
-            newProgramStates.Should().HaveCount(0);
+            newProgramStates.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -407,7 +407,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.True, ps).ToList();
 
-            newProgramStates.Should().HaveCount(0);
+            newProgramStates.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -417,7 +417,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.False, ps).ToList();
 
-            newProgramStates.Should().HaveCount(0);
+            newProgramStates.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -437,7 +437,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.HasValue, ps).ToList();
 
-            newProgramStates.Should().HaveCount(0);
+            newProgramStates.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -457,7 +457,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.NotNull, ps).ToList();
 
-            newProgramStates.Should().HaveCount(0);
+            newProgramStates.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -477,7 +477,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.True, ps).ToList();
 
-            newProgramStates.Should().HaveCount(1);
+            newProgramStates.Should().ContainSingle();
             ShouldHaveConstraint(newProgramStates[0], this.sv_0, NullableValueConstraint.HasValue);
             ShouldHaveConstraint(newProgramStates[0], this.sv_w, BoolConstraint.True);
         }
@@ -489,7 +489,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(BoolConstraint.False, ps).ToList();
 
-            newProgramStates.Should().HaveCount(1);
+            newProgramStates.Should().ContainSingle();
             ShouldHaveConstraint(newProgramStates[0], this.sv_0, NullableValueConstraint.HasValue);
             ShouldHaveConstraint(newProgramStates[0], this.sv_w, BoolConstraint.False);
         }
@@ -501,7 +501,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(NullableValueConstraint.NoValue, ps).ToList();
 
-            newProgramStates.Should().HaveCount(0);
+            newProgramStates.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -521,7 +521,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
             var newProgramStates = this.sv_0.TrySetConstraint(ObjectConstraint.Null, ps).ToList();
 
-            newProgramStates.Should().HaveCount(0);
+            newProgramStates.Should().BeEmpty();
         }
 
         [TestMethod]

@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Common
             mvd.Add(42, 42);
 
             mvd.Keys.Should().HaveCount(2);
-            mvd[5].Should().HaveCount(1);
+            mvd[5].Should().ContainSingle();
         }
 
         [TestMethod]

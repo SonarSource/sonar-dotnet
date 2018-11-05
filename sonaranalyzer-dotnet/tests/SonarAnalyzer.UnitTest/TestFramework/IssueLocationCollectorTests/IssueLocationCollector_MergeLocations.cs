@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
                 new[] { new IssueLocation { LineNumber = 3, Message = "message 1" } },
                 new[] { new IssueLocation { LineNumber = 3, Start = 10, Length = 5, Message = "message 2" } });
 
-            result.Should().HaveCount(1);
+            result.Should().ContainSingle();
 
             result[0].Message.Should().Be("message 1");
 
@@ -94,7 +94,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
                 Enumerable.Empty<IssueLocation>(),
                 new[] { new IssueLocation { LineNumber = 3 } });
 
-            result.Should().HaveCount(1);
+            result.Should().ContainSingle();
         }
 
         [TestMethod]
@@ -104,7 +104,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
                 new[] { new IssueLocation { LineNumber = 3 } },
                 Enumerable.Empty<IssueLocation>());
 
-            result.Should().HaveCount(1);
+            result.Should().ContainSingle();
         }
     }
 }

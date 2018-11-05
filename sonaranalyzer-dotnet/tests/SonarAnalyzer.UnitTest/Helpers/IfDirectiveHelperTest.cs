@@ -55,7 +55,7 @@ namespace Test
 
             // Assert
             activeSections.Should().NotBeNull();
-            activeSections.Count().Should().Be(0);
+            activeSections.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -99,7 +99,7 @@ namespace Test
 
             // Assert
             activeSections.Should().NotBeNull();
-            activeSections.Count().Should().Be(1);
+            activeSections.Should().ContainSingle();
             activeSections.Should().BeEquivalentTo(new[] { "BLOCK3" });
         }
 
@@ -142,7 +142,7 @@ namespace Test
 
             // Assert
             activeSections.Should().NotBeNull();
-            activeSections.Count().Should().Be(3);
+            activeSections.Should().HaveCount(3);
             activeSections.Should().BeEquivalentTo(new[] { "BLOCK1", "BLOCK2", "BLOCK3" });
         }
 
@@ -249,7 +249,7 @@ namespace Test
 
             // Assert
             activeSections.Should().NotBeNull();
-            activeSections.Count().Should().Be(0);
+            activeSections.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -277,7 +277,7 @@ namespace Test
 
             // Assert
             activeSections.Should().NotBeNull();
-            activeSections.Count().Should().Be(0);
+            activeSections.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -335,7 +335,7 @@ namespace Test
 
             // Assert
             activeSections.Should().NotBeNull();
-            activeSections.Count().Should().Be(0);
+            activeSections.Should().BeEmpty();
         }
 
         [TestMethod]

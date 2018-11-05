@@ -1381,7 +1381,7 @@ namespace NS
             dBlock.SuccessorBlocks.Should().OnlyContain(bcdBlock);
             bcdBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
 
-            bcdBlock.Instructions.Should().HaveCount(1);
+            bcdBlock.Instructions.Should().ContainSingle();
             bcdBlock.Instructions.Should().Contain(i => i.ToString() == "a = b ?? c ?? d");
         }
 
@@ -1502,7 +1502,7 @@ namespace NS
                 .SuccessorBlocks.First().Should().Be(cfg.ExitBlock);
 
             var assignmentBlock = cfg.ExitBlock.PredecessorBlocks.First();
-            assignmentBlock.Instructions.Should().HaveCount(1);
+            assignmentBlock.Instructions.Should().ContainSingle();
             assignmentBlock.Instructions.Should().Contain(i => i.ToString() == "a = cond1 ? (cond2?x:y) : (cond3?p:q)");
         }
 
@@ -1529,7 +1529,7 @@ namespace NS
 
             branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ConditionalAccessExpression);
 
-            branchBlock.Instructions.Should().HaveCount(1);
+            branchBlock.Instructions.Should().ContainSingle();
             branchBlock.Instructions.Should().Contain(i => i.ToString() == "o");
 
             VerifyAllInstructions(branchBlock, "o");
@@ -3312,7 +3312,7 @@ namespace NS
 
         private void VerifyInstructions(Block block, int fromIndex, params string[] instructions)
         {
-            block.Instructions.Count.Should().BeGreaterOrEqualTo(fromIndex + instructions.Length);
+            block.Instructions.Should().HaveCountGreaterOrEqualTo(fromIndex + instructions.Length);
             for (var i = 0; i < instructions.Length; i++)
             {
                 block.Instructions[fromIndex + i].ToString().Should().Be(instructions[i]);

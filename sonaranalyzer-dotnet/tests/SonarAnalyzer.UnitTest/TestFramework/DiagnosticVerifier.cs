@@ -160,7 +160,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         private static void VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics) =>
-            diagnostics.Where(d => d.Id == AnalyzerFailedDiagnosticId).Should().BeEmpty();
+            diagnostics.Should().NotContain(d => d.Id == AnalyzerFailedDiagnosticId);
 
         private static void VerifyIssue(IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
             Location location, string message, string extraInfo, out string issueId)

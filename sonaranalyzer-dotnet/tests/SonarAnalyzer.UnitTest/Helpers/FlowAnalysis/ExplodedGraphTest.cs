@@ -353,7 +353,7 @@ namespace NS
                 "and thus should be processed only once.");
             numberOfLastInstructionVisits.Should().Be(2);
 
-            visitedBlocks.Count.Should().Be(cfg.Blocks.Count() - 1 /* Exit block*/);
+            visitedBlocks.Should().HaveCount(cfg.Blocks.Count() - 1 /* Exit block*/);
         }
 
         [TestMethod]
@@ -427,7 +427,7 @@ namespace NS
             explodedGraph.Walk();
 
             explorationEnded.Should().BeTrue();
-            visitedBlocks.Count.Should().Be(cfg.Blocks.Count() - 1 /* Exit block */);
+            visitedBlocks.Should().HaveCount(cfg.Blocks.Count() - 1 /* Exit block */);
             countConditionEvaluated.Should().Be(0);
         }
 
