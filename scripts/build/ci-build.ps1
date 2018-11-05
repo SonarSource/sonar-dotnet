@@ -335,7 +335,7 @@ function Invoke-JavaBuild() {
             "-Dsonar.analysis.sha1=${githubSha1}" `
             "-Dsonar.host.url=${sonarCloudUrl}" `
             "-Dsonar.login=${sonarCloudToken}" `
-            "-Dsonar.organization=sonarcloud" `
+            "-Dsonar.organization=sonarsource" `
             "-Dsonar.pullrequest.github.token=foo" `
             "-Dsonar.pullrequest.key=${githubPullRequest}" `
             "-Dsonar.pullrequest.branch=${githubPRBaseBranch}" `
@@ -360,7 +360,7 @@ function Invoke-JavaBuild() {
             "-Dsonar.analysis.sha1=${githubSha1}" `
             "-Dsonar.host.url=${sonarCloudUrl}" `
             "-Dsonar.login=${sonarCloudToken}" `
-            "-Dsonar.organization=sonarcloud" `
+            "-Dsonar.organization=sonarsource" `
             "-Dsonar.projectVersion=${currentVersion}" `
             -B -e -V `
         } -errorMessage "ERROR: Maven build deploy sonar FAILED."
@@ -389,7 +389,7 @@ function Invoke-JavaBuild() {
             "-Dsonar.branch.name=${branchName}" `
             "-Dsonar.host.url=${sonarCloudUrl}" `
             "-Dsonar.login=${sonarCloudToken}" `
-            "-Dsonar.organization=sonarcloud" `
+            "-Dsonar.organization=sonarsource" `
             "-Dsonar.projectVersion=${currentVersion}" `
             -B -e -V `
         } -errorMessage "ERROR: Maven build deploy sonar FAILED."
