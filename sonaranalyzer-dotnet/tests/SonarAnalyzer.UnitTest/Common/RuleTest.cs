@@ -218,16 +218,6 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void SecurityHotspots_Inherit_From_Same_Base_Class()
-        {
-            new RuleFinder().AllAnalyzerTypes
-                .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
-                .Where(analyzer => analyzer.SupportedDiagnostics.Any(IsSecurityHotspot))
-                .Should()
-                .AllBeAssignableTo<HotspotDiagnosticAnalyzer>();
-        }
-
-        [TestMethod]
         public void SecurityHotspots_Rules_Not_Configurable()
         {
             var hotspotDiagnosticDescriptors = new RuleFinder()
