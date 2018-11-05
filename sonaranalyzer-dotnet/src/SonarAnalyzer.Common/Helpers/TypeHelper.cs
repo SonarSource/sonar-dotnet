@@ -67,6 +67,25 @@ namespace SonarAnalyzer.Helpers
             return typeSymbol != null && IsMatch(typeSymbol, type);
         }
 
+        public static bool IsAny(this ITypeSymbol typeSymbol, params KnownType[] types)
+        {
+            if (typeSymbol == null)
+            {
+                return false;
+            }
+
+            // For is twice as fast as foreach on ImmutableArray so don't use Linq here
+            for (int i = 0; i < types.Length; i++)
+            {
+                if (IsMatch(typeSymbol, types[i]))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public static bool IsAny(this ITypeSymbol typeSymbol, ImmutableArray<KnownType> types)
         {
             if (typeSymbol == null)
