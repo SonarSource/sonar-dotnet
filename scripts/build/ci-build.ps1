@@ -132,7 +132,7 @@ function Invoke-SonarBeginAnalysis([array][parameter(ValueFromRemainingArguments
 
     Exec { & (Get-ScannerMsBuildPath) begin `
         /k:sonaranalyzer-csharp-vbnet `
-        /n:"SonarAnalyzer for C#" `
+        /n:"SonarAnalyzer .Net" `
         /d:sonar.host.url=${sonarQubeUrl} `
         /d:sonar.login=$sonarQubeToken $remainingArgs `
     } -errorMessage "ERROR: SonarQube Analysis begin step FAILED."
@@ -311,8 +311,10 @@ function Invoke-JavaBuild() {
         Remove-Item Env:\CI_PRODUCT
     }
 
+    $sonarqubePluginName = "SonarC# and SonarVB plugins"
+
     if ($isPullRequest) {
-        Write-Header "Building and analyzing SonarC# for PR" $githubPullRequest
+        Write-Header "Building and analyzing SonarC# and SonarVB for PR" $githubPullRequest
 
         # Do not deploy a SNAPSHOT version but the release version related to this build and PR
         Set-MavenBuildVersion
@@ -321,11 +323,12 @@ function Invoke-JavaBuild() {
 
         # No need for Maven phase "install" as the generated JAR files do not need to be installed
         # in Maven local repository. Phase "verify" is enough.
-        Write-Host "SonarC# will be deployed"
+        Write-Host "SonarC# and SonarVB will be deployed"
 
         Exec { & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
             "-Pdeploy-sonarsource,sonaranalyzer" `
             "-Dmaven.test.redirectTestOutputToFile=false" `
+            "-Dsonar.projectName=${sonarqubePluginName}" `
             "-Dsonar.analysis.prNumber=${githubPullRequest}" `
             "-Dsonar.analysis.sha1=${githubSha1}" `
             "-Dsonar.host.url=${sonarQubeUrl}" `
@@ -339,7 +342,7 @@ function Invoke-JavaBuild() {
         } -errorMessage "ERROR: Maven build deploy sonar FAILED."
     }
     elseif ($isMaster) {
-        Write-Header "Building, deploying and analyzing SonarC# for master"
+        Write-Header "Building, deploying and analyzing SonarC# and SonarVB for master"
 
         $currentVersion = Get-MavenExpression "project.version"
         Set-MavenBuildVersion
@@ -349,6 +352,7 @@ function Invoke-JavaBuild() {
         Exec { & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
             "-Pcoverage-per-test,deploy-sonarsource,release,sonaranalyzer" `
             "-Dmaven.test.redirectTestOutputToFile=false" `
+            "-Dsonar.projectName=${sonarqubePluginName}" `
             "-Dsonar.analysis.sha1=${githubSha1}" `
             "-Dsonar.host.url=${sonarQubeUrl}" `
             "-Dsonar.login=${sonarQubeToken}" `
@@ -357,7 +361,7 @@ function Invoke-JavaBuild() {
         } -errorMessage "ERROR: Maven build deploy sonar FAILED."
     }
     elseif ($isMaintenanceBranch -or $isFeatureBranch) {
-        Write-Header "Building and analyzing SonarC# for maitenance/feature branch" $branchName
+        Write-Header "Building and analyzing SonarC# and SonarVB for maitenance/feature branch" $branchName
 
         # Do not deploy a SNAPSHOT version but the release version related to this build and PR
         $currentVersion = Get-MavenExpression "project.version"
@@ -367,11 +371,12 @@ function Invoke-JavaBuild() {
 
         # No need for Maven phase "install" as the generated JAR files do not need to be installed
         # in Maven local repository. Phase "verify" is enough.
-        Write-Host "SonarC# will be deployed"
+        Write-Host "SonarC# and SonarVB will be deployed"
 
         Exec { & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
             "-Pdeploy-sonarsource,sonaranalyzer" `
             "-Dmaven.test.redirectTestOutputToFile=false" `
+            "-Dsonar.projectName=${sonarqubePluginName}" `
             "-Dsonar.analysis.buildNumber=${buildNumber}" `
             "-Dsonar.analysis.pipeline=${buildNumber}" `
             "-Dsonar.analysis.sha1=${githubSha1}" `
@@ -384,7 +389,7 @@ function Invoke-JavaBuild() {
         } -errorMessage "ERROR: Maven build deploy sonar FAILED."
     }
     else {
-        Write-Header "Building SonarC# for branch" $branchName
+        Write-Header "Building SonarC# and SonarVB for branch" $branchName
 
         Set-MavenBuildVersion
 
