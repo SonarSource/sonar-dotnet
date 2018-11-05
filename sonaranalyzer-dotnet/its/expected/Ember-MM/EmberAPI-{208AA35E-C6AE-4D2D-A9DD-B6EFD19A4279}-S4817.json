@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4817",
+"message":  "Make sure that using the XPath expression is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  871,
+"startColumn":  36,
+"endLine":  871,
+"endColumn":  68
+}
+}
+}
+]
+}
