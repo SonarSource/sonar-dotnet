@@ -4718,7 +4718,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["4718"],
             //["4719"],
             //["4720"],
-            //["4721"],
+            ["4721"] = "SECURITY_HOTSPOT",
             //["4722"],
             //["4723"],
             //["4724"],

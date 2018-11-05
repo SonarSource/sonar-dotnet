@@ -142,6 +142,8 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Diagnostics_Contracts_PureAttribute = new KnownType("System.Diagnostics.Contracts.PureAttribute");
         internal static readonly KnownType System_Diagnostics_Debug = new KnownType("System.Diagnostics.Debug");
         internal static readonly KnownType System_Diagnostics_DebuggerDisplayAttribute = new KnownType("System.Diagnostics.DebuggerDisplayAttribute");
+        internal static readonly KnownType System_Diagnostics_Process = new KnownType("System.Diagnostics.Process");
+        internal static readonly KnownType System_Diagnostics_ProcessStartInfo = new KnownType("System.Diagnostics.ProcessStartInfo");
         internal static readonly KnownType System_Diagnostics_Trace = new KnownType("System.Diagnostics.Trace");
         internal static readonly KnownType System_Diagnostics_TraceSource = new KnownType("System.Diagnostics.TraceSource");
         internal static readonly KnownType System_DirectoryServices_DirectoryEntry = new KnownType("System.DirectoryServices.DirectoryEntry");
