@@ -336,8 +336,7 @@ function Invoke-JavaBuild() {
             "-Dsonar.host.url=${sonarCloudUrl}" `
             "-Dsonar.login=${sonarCloudToken}" `
             "-Dsonar.organization=sonarsource" `
-            "-Dsonar.pullrequest.github.token=foo" `
-            "-Dsonar.pullrequest.key=${githubPullRequest}" `
+            "-Dsonar.pullrequest.key=0" `
             "-Dsonar.pullrequest.branch=${githubPRBaseBranch}" `
             "-Dsonar.pullrequest.base=${githubPRTargetBranch}" `
             "-Dsonar.pullrequest.provider=github" `
