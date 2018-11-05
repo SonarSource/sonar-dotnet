@@ -1,0 +1,207 @@
+<html><HEAD><META http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="StyleSheet" type="text/css" href="theme.css"></link>
+
+<a tvid="red" href="Other_TV Shows_1.html"/>
+<a tvid="green" href="movieindex.htm"/>
+<a tvid="yellow" href="Other_All_1.html"/>
+<a tvid="blue" href="Categories.html"/>
+<a tvid="tab" href=""/><!-- This is the "MENU" button. -->
+
+<script>
+// CUSTOMIZE YOUR MENU HERE
+//-------------------------
+// Syntax: "url,TITLE,imagefilename.jpg",
+// The 1st entry on the list is the selected item (center), and wraps to the right. The last 2 entries are the left 2 items on-screen.
+// *** The last item must NOT have a comma at the end of it. ***
+
+var menu=[
+{$MainMenuMovie}"movieindex.htm,MOVIES,movies.jpg",
+{$MainMenuTVShow}"tvindex.htm,TV SHOWS,tvshows.jpg",
+//"http://localhost.drives:8883/HARD_DISK/Video/?filter=3,VIDEOS,videos.jpg",
+{$MainMenuWeather}"http://www.mspportal.com/action/showservice.jsp?serviceid=weatherbug&res=1280x720&portalcat=0&from=&nmtpg=1&nmtpgend=1&serviceno=7&token=&mspuserf=&homePath=http://www.mspportal.com/nmt,WEATHER,weather.jpg",
+{$MainMenuRadio}"http://hdd-player.de/pchweb/FLaSH/FLaSH_Hours/page-1280x720/a_hdtv.html,RADIO,radio.jpg",
+{$MainMenuNetwork}"file:///opt/sybhttpd/localhost.drives/NETWORK_SHARE/,NETWORK,network.jpg",
+{$MainMenuOnline}"http://www.mspportal.com,ONLINE,online.jpg",
+{$MainMenuBrowser}"http://localhost.drives:8883/HARD_DISK/,BROWSER,browse.jpg",
+"file:///opt/sybhttpd/default/preferences.htm,SETUP,settings.jpg",
+{$MainMenuShutdown}"shutdown.cgi,SHUTDOWN,exit.jpg",
+//"http://localhost.drives:8883/CDROM/,DVD,playdisc.jpg",
+{$MainMenuYoutube}"http://andboson.net/yt/,YOUTUBE,youtube.jpg",
+//"http://plugin.mspsite.com/action/showservice.jsp?homePath=http://plugin.mspsite.com/nmt&serviceid=appletrailer_felix_buenemann&portalcat=0&start=1&end=1&serviceno=1&res=1280x720,TRAILERS,appletrailers.jpg",
+//"http://localhost.drives:8883/USB_DRIVE_A/,USB,usb.jpg",
+//"http://localhost.drives:8883/USB_DRIVE_B/,USB,usb.jpg",
+{$MainMenuPictures}"http://localhost.drives:8883/HARD_DISK/Photo/?filter=2,PICTURES,pictures.jpg",
+{$MainMenuMusic}"http://localhost.drives:8883/HARD_DISK/Music/?filter=1,MUSIC,music.jpg",
+"info.htm,INFO,info.jpg"
+];
+
+// END
+//-------------------
+
+
+
+
+
+
+//Don't change 
+	var position=0
+	
+	function $(me){
+		return document.getElementById(me);
+	}
+	
+	function circularArray(p, arr){
+		var loopcorection;
+		var max = arr.length - 1;
+		
+		if (p < 0)
+			loopcorection = max + p + 1;
+		else if(p > max)
+			loopcorection = p - arr.length;
+		else
+			loopcorection = p;
+		
+		return loopcorection;
+	}
+	
+	function loadScreen(mymenu, pos){
+		var firstItems = mymenu[circularArray(pos-2, mymenu)].split(",");
+		var prevItems = mymenu[circularArray(pos-1, mymenu)].split(",");
+		var currentItem = mymenu[circularArray(pos, mymenu)].split(",");
+		var nextItems = mymenu[circularArray(pos+1, mymenu)].split(",");
+		var lastItems = mymenu[circularArray(pos+2, mymenu)].split(",");
+
+		$('firstlink').attributes[0].nodeValue = firstItems[0];
+		$('firstlink').firstChild.nodeValue = firstItems[1];
+		$('imagechangem2').attributes[0].nodeValue = "home/"+ firstItems[2];
+		
+		$('previlink').attributes[0].nodeValue = prevItems[0];
+		$('previlink').firstChild.nodeValue = prevItems[1];
+		$('imagechangem1').attributes[0].nodeValue = "home/"+ prevItems[2];
+		
+		$('changelink').attributes[0].nodeValue = currentItem[0];
+		$('changelink').firstChild.nodeValue = currentItem[1];
+		$('imagechange').attributes[0].nodeValue = "home/"+ currentItem[2];
+		
+		$('nextlink').attributes[0].nodeValue = nextItems[0];
+		$('nextlink').firstChild.nodeValue = nextItems[1];
+		$('imagechangep1').attributes[0].nodeValue = "home/"+ nextItems[2];
+		
+		$('lastlink').attributes[0].nodeValue = lastItems[0];
+		$('lastlink').firstChild.nodeValue = lastItems[1];
+		$('imagechangep2').attributes[0].nodeValue = "home/"+ lastItems[2];
+	}
+
+	function loadMenu(offset){
+		var end = menu.length - 1;
+		
+		if (position + offset > end)
+			position = 0;
+		else if (position + offset < 0)
+			position = end;
+		else
+			position = position + offset;	
+		
+		loadScreen(menu, position);	
+		return true;
+	}
+
+	function initpage(){
+		loadScreen(menu, position);
+	}
+	</script>
+	<script>
+	function initClock() {updateClock(); setInterval('updateClock();', 1000);}
+	function updateClock() {
+		var TimezoneOffset = +0;
+		var localTime = new Date();
+		var ms = localTime.getTime()+(TimezoneOffset*3600);
+		var time =  new Date(ms);
+		var hour = time.getHours();
+		var minute = time.getMinutes();
+		var second = time.getSeconds();
+		if ("{$TimeFormat}" == "24") {
+			var curTime = "" + hour;
+			var suffix = "";
+		} else {
+			var curTime = "" + ((hour > 12) ? hour - 12 : hour);
+			var suffix = "AM";
+			if(hour>=12) {suffix = "PM";}
+			if(hour==0) curTime = "12";
+		}
+		curTime += ((minute < 10) ? ":0" : ":") + minute;
+		document.getElementById('time').firstChild.nodeValue = curTime;
+		document.getElementById('suffix').firstChild.nodeValue = suffix;
+		document.getElementById('date').firstChild.nodeValue = time.toDateString();
+	}</script>
+</HEAD>
+<style>
+#imgm2 {position:absolute; top:227px; left:7px; z-index:-1;margin-left:92px;margin-top:38px;}
+#imgm1 {position:absolute; top:227px; left:232px; z-index:-1;margin-left:92px;margin-top:38px;}
+#img0 {position:absolute; top:207px; left:435px; z-index:-1;margin-left:92px;margin-top:38px;}
+#imgp1 {position:absolute; top:227px; left:683px; z-index:-1;margin-left:92px;margin-top:38px;}
+#imgp2 {position:absolute; top:227px; left:908px; z-index:-1;margin-left:92px;margin-top:38px;}
+#framem2 {position:absolute; top:221px; left:1px; z-index:-1;margin-left:92px;margin-top:38px;}
+#framem1 {position:absolute; top:221px; left:226px; z-index:-1;margin-left:92px;margin-top:38px;}
+#frame0 {position:absolute; top:199px; left:427px; z-index:-1;margin-left:92px;margin-top:38px;}
+#framep1 {position:absolute; top:221px; left:677px; z-index:-1;margin-left:92px;margin-top:38px;}
+#framep2 {position:absolute; top:221px; left:902px; z-index:-1;margin-left:92px;margin-top:38px;}
+.sorting {font-family: arial; font-size: 14pt;}
+.mainsorting {font-family: arial; font-size: 20pt;}
+.header {font-family: arial; font-size: 27pt; font-weight : bold; }
+a:link {text-decoration: none;}
+a:visited {text-decoration: none;}
+body {margin-left:92px;margin-top:38px}
+</style>
+<BODY FOCUSCOLOR="transparent" background="diffuse_background.png" FOCUSTEXT="transparent" onloadset="change" onload="initClock();initpage();">
+
+<div id="imgm2"><img src="1x1.png" width="178" height="134" id="imagechangem2"/></div>
+<div id="imgm1"><img src="1x1.png" width="178" height="134" id="imagechangem1"/></div>
+<div id="img0"><img src="1x1.png" width="222" height="167" id="imagechange"/></div>
+<div id="imgp1"><img src="1x1.png" width="178" height="134" id="imagechangep1"/></div>
+<div id="imgp2"><img src="1x1.png" width="178" height="134" id="imagechangep2"/></div>
+
+<div id="framem2"><img src="home/frame.png" width="191"/></div>
+<div id="framem1"><img src="home/frame.png" width="191"/></div>
+<div id="frame0"><img src="home/frame.png"/></div>
+<div id="framep1"><img src="home/frame.png" width="191"/></div>
+<div id="framep2"><img src="home/frame.png" width="191"/></div>
+
+<a href="#change" onfocusload onfocus="return loadMenu(1)" onclick="return loadMenu(1)" name="right"/>
+<a href="#change" onfocusload onfocus="return loadMenu(-1)" onclick="return loadMenu(-1)" name="left"/>
+
+<table border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td height="100" colspan="5" align="right" valign="top">
+			<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td id="time" class="indexhometext header" width="1">&nbsp;</td>
+					<td class="header">&nbsp;&nbsp;</td>
+					<td id="suffix" class="flagtext2 header" width="1">&nbsp;</td>
+				</tr>
+				<tr><td id="date" class="flagtext2 sorting" colspan="3" align="right">&nbsp;</td></tr>
+			</table>
+		</td>
+	</tr>
+	<tr><td height="260"/></tr>
+	<tr>
+		<td valign="top" height="40" width="185" align="right">
+			<a href="#" id="firstlink" class="sorting indexhometext">&nbsp;</a>
+		</td>
+		<td valign="top" width="225" align="right">
+			<a href="#" id="previlink" class="sorting indexhometext">&nbsp;</a>
+		</td>
+		<td valign="bottom" width="247" align="right">
+			<a href="#" id="changelink" name="change" onkeyleftset="left" onkeyrightset="right" class="mainsorting indexhometext">&nbsp;</a>
+		</td>
+		<td valign="top" width="204" align="right">
+			<a href="#" id="nextlink" class="sorting indexhometext">&nbsp;</a>
+		</td>
+		<td valign="top" width="224" align="right">
+			<a href="#" id="lastlink" class="sorting indexhometext">&nbsp;</a>
+		</td>
+	</tr>
+</table>
+
+</BODY>
+</html>

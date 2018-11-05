@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<string id="1">Quellverzeichnis</string>
+	<string id="2">Video Flag</string>
+	<string id="3">Audio Flag</string>
+	<string id="4">Bereite Vorschau vor, bitte warten...</string>
+	<string id="5">Quellverzeichnis</string>
+	<string id="6">Lade, bitte warten...</string>
+	<string id="7">Speichere allen Dateien, bitte warten...</string>
+	<string id="8">Filme exportieren</string>
+	<string id="9">Zurücksetzen</string>
+	<string id="10">Filter</string>
+	<string id="11">in</string>
+	<string id="12">Stelle Filmliste zusammen...</string>
+	<string id="13">Zusammenstellung abbrechen...</string>
+	<string id="14">Template</string>
+	<string id="15">Export Film Liste</string>
+</strings>
+<!-- Edit by F089 Rev.2384-->

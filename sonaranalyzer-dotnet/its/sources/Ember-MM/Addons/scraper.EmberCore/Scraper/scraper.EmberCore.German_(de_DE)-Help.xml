@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<string control="NativeMovieInfo_cbEnabled">Aktiviert dieses Modul.</string>
+	<string control="NativeMovieInfo_btnUp">Verschiebt diesen Scraper in der Reihenfolge einen nach oben (Scrape Module werden von oben nach unten abgearbeitet.)</string>
+	<string control="NativeMovieInfo_btnDown">Verschiebt diesen Scraper in der Reihenfolge einen nach unten (Scrape Module werden von oben nach unten abgearbeitet.)</string>
+	<string control="NativeMovieInfo_txtIMDBURL">Gib den Mirror ein über den Ember mit der IMDB kommunizieren soll.</string>
+	<string control="NativeMovieInfo_chkOFDBTitle">Wenn aktiviert versucht Ember den Titel von der deutschen Seite OFDB.DE zu scrapen.</string>
+	<string control="NativeMovieInfo_chkOFDBOutline">Wenn aktiviert versucht Ember die Kurzebschreibung von der deutschen Seite OFDB.DE zu scrapen.</string>
+	<string control="NativeMovieInfo_chkOFDBPlot">Wenn aktiviert versucht Ember die Inhaltsangabe von der deutschen Seite OFDB.DE zu scrapen.</string>
+	<string control="NativeMovieInfo_chkOFDBGenre">Wenn aktiviert versucht Ember die Genres von der deutschen Seite OFDB.DE zu scrapen.</string>
+	<string control="NativeMovieInfo_chkCertification">Aktiviert das scrapen der Altersbeschränkung (=Certification) mit diesem Modul.</string>
+	<string control="NativeMovieInfo_chkTop250">Aktiviert das scrapen der IMDB Top250 mit diesem Modul.</string>
+	<string control="NativeMovieInfo_txtGenreLimit">Die Anzahl der gescrapten Genres limitieren.</string>
+	<string control="NativeMovieInfo_txtActorLimit">Die Anzahl der gescrapten Schauspieler limitieren.</string>
+	<string control="NativeMovieInfo_chkCrew">Aktiviert das scrapen der Sonstigen Crew mit diesem Modul. (Die Gesamte Crew scrapen muss aktiviert sein!)</string>
+	<string control="NativeMovieInfo_chkMusicBy">Aktiviert das scrapen der Musiker mit diesem Modul. (Die Gesamte Crew scrapen muss aktiviert sein!)</string>
+	<string control="NativeMovieInfo_chkProducers">Aktiviert das scrapen der Produzenten mit diesem Modul. (Die Gesamte Crew scrapen muss aktiviert sein!)</string>
+	<string control="NativeMovieInfo_chkWriters">Aktiviert das scrapen der Autoren mit diesem Modul.</string>
+	<string control="NativeMovieInfo_chkStudio">Aktiviert das scrapen des Studios mit diesem Modul.</string>
+	<string control="NativeMovieInfo_chkRuntime">Aktiviert das scrapen der Spielzeit mit diesem Modul.</string>
+	<string control="NativeMovieInfo_chkPlot">Aktiviert das scrapen des Inhalts (=Plot)) mit diesem Modul.</string>
+	<string control="NativeMovieInfo_chkOutline">Aktiviert das scrapen der Kurzbeschreibung mit diesem Modul.</string>
+	<string control="NativeMovieInfo_chkGenre">Aktiviert das scrapen von Genre mit diesem Modul.</string>
+	<string control="NativeMovieInfo_chkDirector">Aktiviert das scrapen des Regisseurs mit diesem Modul.</string>
+	<string control="NativeMovieInfo_chkTagline">Aktiviert das scrapen der Tagline mit diesem Modul.</string>
+	<string control="NativeMovieInfo_chkCast">Aktiviert das scrapen der Schauspieler mit diesem Modul.</string>
+	<string control="NativeMovieInfo_chkVotes">Aktiviert das scrapen der Anzahl Bewertungen (=Stimmen) mit diesem Modul.</string>
+	<string control="NativeMovieInfo_chkTrailer">Aktiviert das scrapen von Trailern mit diesem Modul.</string>
+	<string control="NativeMovieInfo_chkRating">Aktiviert das scrapen der Bewertung mit diesem Modul.</string>
+	<string control="NativeMovieInfo_chkRelease">Aktiviert das scrapen des Premiere Datums mit diesem Modul.</string>
+	<string control="NativeMovieInfo_chkMPAA">Aktiviert das scrapen der MPAA Bewertung mit diesem Modul.</string>
+	<string control="NativeMovieInfo_chkYear">Aktiviert das scrapen des Jahres mit diesem Modul.</string>
+	<string control="NativeMovieInfo_chkTitle">Aktiviert das scrapen des Titels mit diesem Modul.</string>
+	<string control="NativeMovieMedia_cbEnabled">Aktiviert dieses Modul.</string>
+	<string control="NativeMovieMedia_btnUp">Verschiebt diesen Scraper in der Reihenfolge einen nach oben (Scrape Module werden von oben nach unten abgearbeitet.)</string>
+	<string control="NativeMovieMedia_btnDown">Verschiebt diesen Scraper in der Reihenfolge einen nach unten (Scrape Module werden von oben nach unten abgearbeitet.)</string>
+	<string control="NativeMovieMedia_chkScrapePoster">Aktiviert das Laden von Postern mit diesem Modul. (Schau auch in die Globale Konfiguration!)</string>
+	<string control="NativeMovieMedia_chkScrapeFanart">Aktiviert das Laden von Fanart mit diesem Modul. (Schau auch in die Globale Konfiguration!)</string>
+	<string control="NativeMovieMedia_chkUseTMDB">Aktiviert das Laden von Bildern von TheMovieDB.org.</string>
+	<string control="NativeMovieMedia_chkUseIMPA">Aktiviert das Laden von Bildern von IMPA </string>
+	<string control="NativeMovieMedia_chkUseMPDB">Aktiviert das Laden von Bildern von MoviePosterDB.com.</string>
+	<string control="NativeMovieMedia_chkAutoThumbs">Automatische Frame extraktion mit diesem Modul aktivieren. (Schau auch in die Globale Konfiguration!)</string>
+	<string control="NativeMovieMedia_chkDownloadTrailer">Trailer laden mit diesem Modul aktivieren. (Schau auch in die Globale Konfiguration!)</string>
+	<string control="NativeMovieMedia_txtTimeout">Wähle die Zeit (in Sekunden) die auf Trailerseiten gewartet werden soll. (Wenn die Zeite in dieser Zeit nicht geantwortet hat wird sie übersprungen)</string>
+	<string control="NativeMovieMedia_lbTrailerSites">Wähle die Seite von der Trailer URLS/Dateien geladen werden sollen.</string>
+</strings>
+<!-- Rev2123-->

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<string id="0">XBMC Controller</string>
+	<string id="1">The name you are attempting to use for this XBMC installation is already in use. Please choose another.</string>
+	<string id="2">Each name must be unique</string>
+	<string id="3">You must enter a port for this XBMC installation.</string>
+	<string id="4">Please Enter a Port</string>
+	<string id="5">You must enter an IP for this XBMC installation.</string>
+	<string id="6">Please Enter an IP</string>
+	<string id="7">You must enter a name for this XBMC installation.</string>
+	<string id="8">Please Enter a Unique Name</string>
+	<string id="9">XBMC Communication</string>
+	<string id="10">Edit</string>
+	<string id="11">Name:</string>
+	<string id="12">Add</string>
+	<string id="13">XBMC IP:</string>
+	<string id="14">XBMC Port:</string>
+	<string id="15">Remove Selected</string>
+	<string id="16">Unable to Start XBMC Update</string>
+	<string id="17">There was a problem communicating with {0}{1}.</string>
+	<string id="18">XBMC</string>
+	<string id="19">XBMC Controller</string>
+	<string id="20">Enable Real Time synchronization</string>
+	<string id="21">Real Time synchronization</string>
+	<string id="22">Searching ...</string>
+	<string id="23">Populate Sources</string>
+	<string id="24">Ember Source</string>
+	<string id="25">XBMC Source</string>
+	<string id="26">XBMC Source type</string>
+	<string id="27">Windows Drive Letter (X:\)</string>
+	<string id="28">Windows UNC/Linux/MacOS X</string>
+	<string id="29">XBMC Host</string>
+	<string id="30">Send Notifications</string>
+	<string id="31">Retrieve PlayCount from:</string>
+</strings>

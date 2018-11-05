@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<string control="NativeMovieInfo_cbEnabled">Enable or disable this module.</string>
+	<string control="NativeMovieInfo_btnUp">Move this scraper module up in order. (Scraper modules will be processed in order from top to bottom)</string>
+	<string control="NativeMovieInfo_btnDown">Move this scraper module down in order. (Scraper modules will be processed in order from top to bottom)</string>
+	<string control="NativeMovieInfo_txtIMDBURL">Enter the mirror to use when retrieving information from IMDB.</string>
+	<string control="NativeMovieInfo_chkOFDBTitle">If enabled, Ember will attempt to retreive the movie title from OFDB (a German language site) when scraping.</string>
+	<string control="NativeMovieInfo_chkOFDBOutline">If enabled, Ember will attempt to retreive the movie outline from OFDB (a German language site) when scraping.</string>
+	<string control="NativeMovieInfo_chkOFDBPlot">If enabled, Ember will attempt to retreive the movie plot from OFDB (a German language site) when scraping.</string>
+	<string control="NativeMovieInfo_chkOFDBGenre">If enabled, Ember will attempt to retreive the movie genre from OFDB (a German language site) when scraping.</string>
+	<string control="NativeMovieInfo_chkCertification">Enable scraping movie certification.</string>
+	<string control="NativeMovieInfo_chkTop250">Enable scraping movie Top 250 ranking.</string>
+	<string control="NativeMovieInfo_txtGenreLimit">Limit the number of scraped genres to the entered value.</string>
+	<string control="NativeMovieInfo_txtActorLimit">Limit the number of scraped actors to the entered value.</string>
+	<string control="NativeMovieInfo_chkCrew">Enable scraping movie other crew. (Scrape Full Crew must be enabled)</string>
+	<string control="NativeMovieInfo_chkMusicBy">Enable scraping movie musicians. (Scrape Full Crew must be enabled)</string>
+	<string control="NativeMovieInfo_chkProducers">Enable scraping movie producers. (Scrape Full Crew must be enabled)</string>
+	<string control="NativeMovieInfo_chkWriters">Enable scraping movie writers.</string>
+	<string control="NativeMovieInfo_chkStudio">Enable scraping movie studio.</string>
+	<string control="NativeMovieInfo_chkRuntime">Enable scraping movie runtime.</string>
+	<string control="NativeMovieInfo_chkPlot">Enable scraping movie plot.</string>
+	<string control="NativeMovieInfo_chkOutline">Enable scraping movie outline.</string>
+	<string control="NativeMovieInfo_chkGenre">Enable scraping movie genre.</string>
+	<string control="NativeMovieInfo_chkDirector">Enable scraping movie director.</string>
+	<string control="NativeMovieInfo_chkTagline">Enable scraping movie tagline.</string>
+	<string control="NativeMovieInfo_chkCast">Enable scraping movie cast.</string>
+	<string control="NativeMovieInfo_chkVotes">Enable scraping movie votes.</string>
+	<string control="NativeMovieInfo_chkTrailer">Enable scraping movie trailer url.</string>
+	<string control="NativeMovieInfo_chkRating">Enable scraping movie rating.</string>
+	<string control="NativeMovieInfo_chkRelease">Enable scraping movie release date.</string>
+	<string control="NativeMovieInfo_chkMPAA">Enable scraping movie MPAA.</string>
+	<string control="NativeMovieInfo_chkYear">Enable scraping movie year.</string>
+	<string control="NativeMovieInfo_chkTitle">Enable scraping movie title.</string>
+	<string control="NativeMovieMedia_cbEnabled">Enable or disable this module.</string>
+	<string control="NativeMovieMedia_btnUp">Move this scraper module up in order. (Scraper modules will be processed in order from top to bottom)</string>
+	<string control="NativeMovieMedia_btnDown">Move this scraper module down in order. (Scraper modules will be processed in order from top to bottom)</string>
+	<string control="NativeMovieMedia_chkScrapePoster">Enable scraping posters from this module. (Refer to global poster settings for more options)</string>
+	<string control="NativeMovieMedia_chkScrapeFanart">Enable scraping fanart from this module. (Refer to global fanart settings for more options)</string>
+	<string control="NativeMovieMedia_chkUseTMDB">Enable retrieving images from theMovieDB.org.</string>
+	<string control="NativeMovieMedia_chkUseIMPA">Enable retrieving images from </string>
+	<string control="NativeMovieMedia_chkUseMPDB">Enable retrieving images from MoviePosterDB.com.</string>
+	<string control="NativeMovieMedia_chkAutoThumbs">Enable automatic extraction of extrathumbs from this module. (Refer to global extrathumb settings for more options)</string>
+	<string control="NativeMovieMedia_chkDownloadTrailer">Enable trailer downloading from this module. (Refer to global trailer settings for more options)</string>
+	<string control="NativeMovieMedia_txtTimeout">Enter the time (in seconds) you wish to use as a time out for the trailer sites. (If there is no response in the given time frame, the trailer site will be temporarily skipped.)</string>
+	<string control="NativeMovieMedia_lbTrailerSites">Select the sites from which you would like to retrieve trailer URLs and/or files.</string>
+</strings>

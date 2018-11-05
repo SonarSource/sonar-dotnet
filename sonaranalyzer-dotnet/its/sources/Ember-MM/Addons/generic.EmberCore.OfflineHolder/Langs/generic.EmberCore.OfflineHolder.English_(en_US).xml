@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<string id="0">Offline Media Manager</string>
+	<string id="1">Insert DVD</string>
+	<string id="2">Preparing Data</string>
+	<string id="3">Creating Movie</string>
+	<string id="4">Building Movie</string>
+	<string id="5">Moving Files</string>
+	<string id="6">Renaming Files</string>
+	<string id="7">Offline movie place holder created!</string>
+	<string id="8">Source directory does not exist or could not be found: </string>
+	<string id="9">Source Folder</string>
+	<string id="10">Movie (Folder Name)</string>
+	<string id="11">Place Holder Image</string>
+	<string id="12">Offline Media Manager</string>
+	<string id="13">Add Offline movie</string>
+	<string id="14">Add to Source:</string>
+	<string id="15">Place Holder Folder/Movie Name:</string>
+	<string id="16">Search IMDB</string>
+	<string id="17">Bulk Creator</string>
+	<string id="18">Condition</string>
+	<string id="19">Create</string>
+	<string id="20">Use Fanart for Place Holder Video</string>
+	<string id="21">Place Holder Video Tagline:</string>
+	<string id="22">Text Color:</string>
+	<string id="23">Tagline Top:</string>
+	<string id="24">Place Holder Video Format:</string>
+	<string id="25">Use Tagline Background</string>
+	<string id="26">Tagline background Color:</string>
+	<string id="27">Use Ember Overlay</string>
+	<string id="28">Select Font...</string>
+	<string id="29">Information</string>
+	<string id="30">Offline Media Manager</string>
+
+</strings>

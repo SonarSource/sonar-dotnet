@@ -1,0 +1,327 @@
+/*++++++++++ Schrift/Farben (Color/Fonts) ++++++++++++*/
+/*++++++++++ Werte können frei angepasst werden! (Change values in this area to your liking!) ++++++++++++*/
+/* Titlestyle */
+
+html, body{
+  scrollbar-base-color:#555A5A;
+  scrollbar-3d-light-color:#C7C7C7;
+  scrollbar-arrow-color:#C7C7C7;
+  scrollbar-darkshadow-color:#000000;
+  scrollbar-face-color:#010101;
+  scrollbar-highlight-color:#C7C7C7;
+  scrollbar-shadow-color:#C7C7C7;
+  scrollbar-track-color:#C7C7C7;
+}
+
+fieldset {
+border:  none;
+}
+
+label {
+font-family: arial, verdana, sans-serif;
+color:white;
+font-size:0.8em; 
+}
+
+
+#pagetitleh1
+{
+margin: 0;
+padding: 0.2em;
+font-family: Lucida Sans, Lucida Sans Unicode, Lucida Grande, Verdana, Arial, Helvetica, sans-serif;
+color:white;
+font-size:1.6em;
+white-space:nowrap;
+}
+#pagetitleh2
+{
+margin: 0;
+padding: 0.2em;
+font-family: Lucida Sans, Lucida Sans Unicode, Lucida Grande, Verdana, Arial, Helvetica, sans-serif;
+color:white;
+font-size:1.2em;
+white-space:nowrap;
+}
+
+ul.nav li {
+	display: inline;
+	border-left: white 2px solid; 
+	padding-left: 1em;
+	padding-right: 1em;
+	margin: 0 -2px 0 0;
+	list-style-type: none;
+}
+ul.nav {
+	display: inline;
+	border-right: white 2px solid;
+	padding: 0;
+	margin: 0;
+}
+
+/* GeneralFontstyle */
+h2
+{
+margin: 0;
+padding: 0;
+font-family: arial, verdana, sans-serif;
+color:white;
+}
+
+.fontstil
+{
+font-family: arial, verdana, sans-serif;
+color:white;
+font-size:0.8em; 
+}
+
+p
+{
+margin: 0;
+padding: 0;
+font-family: arial, verdana, sans-serif;
+color:white;
+font-size:0.7em; 
+}
+h3
+{
+margin: 1em 0 0 0;
+}
+/* Linkstyle */
+a:link {color:white; text-decoration:none;}
+a:visited {color:white; text-decoration:none;}
+a:hover {color:#9AC536; text-decoration:underline;}
+a:active {color:#9AC536; text-decoration:none;}
+.menu:link {color: white;text-decoration:underline;}
+.menu:visited {color: white; text-decoration: underline;}
+.menu:hover {color: #9AC536;text-decoration: none;}
+.menu:active {color: #9AC536;text-decoration: none;}
+
+/* Navigationstyle */
+li
+{
+margin: 0;
+padding: 0;
+font-family: arial, verdana, sans-serif;
+color:white;
+font-size:0.8em; 
+}
+
+/* Background/Hintergrund */
+body { background:black; }
+#content { background: black; }
+#sidebar-left { background: black; }
+#sidebar-right { background: black; }
+#header { background: black; }
+#footer { background: black; }
+
+/*++++++++++ DIV-Styles/Seiteninhalte (DivStyles for Pagecontent)++++++++++++*/
+/*++++++++++ Folgende Einstellungen nur für Fortschgeschrittene! (Don't change following values if you aren't familar with CSS!) ++++++++++++*/
+div.divmain{
+background-repeat:no-repeat; 
+display:none; 	
+position: absolute;
+top: 21%;
+right: 21%;
+bottom: 11%;
+left: 17%;
+/* Exclude all previous props for Mac IE5 */
+margin: 21% 21% 1% 17%; /* Cater for Mac IE5 */
+/*\*/ margin: 0; /* Put back for all the rest */
+}
+div.page-background {position:absolute; top:0; left:0; width:100%; height:100%;}
+
+div.divmovietopbar{
+position: absolute;
+display:inline;
+top: 0px;
+padding:2px;
+right: 0px;
+left: 0px;
+height: 3.5em;
+background-color:black;
+/* for IE */
+filter:alpha(opacity=60);
+/* CSS3 standard */
+opacity:0.6;"
+}
+
+div.divmoviedetails{
+position: absolute;
+right: 0px;
+top: 5em;
+background-color:black;
+/* for IE */
+filter:alpha(opacity=60);
+/* CSS3 standard */
+opacity:0.6;"
+}
+/* Tabellenweite /Tablewidth */
+td.tab{
+width:220px;
+}
+tr.tabellenlinie td {
+border-top-width: 1px;
+border-top-style: solid;
+border-top-color: #999999;
+}
+
+div.divmoviebottompicture{
+float:left;
+width: 133px;
+position: absolute;
+left: 0px;
+top: 4em;
+padding:0.5em;
+}
+img.poster{
+border: 3px solid white;
+}
+IMG[alt] {
+font-family: arial, verdana, sans-serif;
+color:white;
+font-size:0.7em; 
+}
+
+div.divmoviebottominfo{
+padding:0.5em;
+position: absolute;
+bottom:0px;
+right: 0px;
+left: 0px;
+background-color:black;
+/* for IE */
+filter:alpha(opacity=80);
+/* CSS3 standard */
+opacity:0.8;
+}
+/* Size of Flags / Größe der Infobilder */
+.flags {height:25px;}
+
+/* Rechte Filmwand / Moviewall-Style - Value depend on size of posters! Werte abhängig von Postergröße! */
+div#moviewall {
+width: 73px;
+height: 111px;
+border: 1px;
+
+}
+* html div#moviewall { /* Für IE */
+width: 73px;
+}
+
+.img150
+{
+float: left;
+width: 73px;
+height: 111px;
+} 
+
+a.thumbs:hover{height: auto;}
+a.thumbs img { border: 2px solid black;}
+a.thumbs:hover img { border: 2px solid #FFFFFF;}
+
+/*++++++++++ Seiten-Layout/Layout of page (Color/Fonts) ++++++++++++*/
+/* RestEinstellungen, bitte nur ändern falls man Ahnung hat (Only change following values if you know what you do!) */
+body
+	{
+	margin: 0; /* margin and padding only necessary to cater for Mac IE5 */
+	padding: 0;
+	/*\*/	overflow: hidden; /* because Mac IE5 don't understand */
+	}
+div
+	{
+	margin: 0;
+	padding: 0;
+	}
+#content
+	{
+	/*\*/
+	position: absolute;
+	top: 21%;
+	right: 21%;
+	bottom: 11%;
+	left: 17%;
+	/* Exclude all previous props for Mac IE5 */
+	margin: 21% 21% 1% 17%; /* Cater for Mac IE5 */
+	/*\*/ margin: 0; /* Put back for all the rest */
+	/*\*/ overflow: auto; /* no need for Mac IE5 to see this */
+	}
+#sidebar-left
+	{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 16%;
+	overflow: auto;
+	}
+#sidebar-right
+	{
+	position: absolute;
+	top:  0;
+	right: 0;
+	bottom: 0;
+	overflow: auto;
+	width: 20%;
+	}
+#header
+	{
+	position: absolute;
+	top: 0;
+	/*\*/right: 21%;
+	left: 17%;   /* Exclude right and left props for Mac IE5 */
+	margin: 0 21% 0 17%;
+	/*\*/ margin: 0; /* */
+	height: 20%;
+	}
+#footer
+	{
+	/*\*/ position: absolute;  /* Exclude for Mac IE5 */
+	right: 21%;
+	bottom: 0;
+	left: 17%;
+	height: 10%;
+	margin: 0 21% 0 17%; /* Cater for Mac IE5 */
+	/*\*/ margin: 0; /* Put back for all the rest */
+	}
+
+/* convenience div for padding inside positioned divs */
+div.paddingwrap
+{
+margin: 0;
+padding: 1em;
+}
+
+ol
+{
+margin: 0 0 2em 1em;
+padding: 0;
+}
+
+
+/* DONT CHANGE THESE - FOR IE Compability!! NICHT ÄNDERN!*/
+<!--[if lt IE 7]>
+<style type="text/css" media="screen">
+/* let the IE expressions commence */
+#sidebar-left
+	{
+	height: expression(document.body.clientHeight + "px");
+	}
+#sidebar-right
+	{
+	height: expression(document.body.clientHeight + "px");
+	}
+#content
+	{
+	height: expression(document.body.clientHeight - ( (document.body.clientHeight * 10 / 100) + (document.body.clientHeight * 20 / 100) + (document.body.clientHeight * 1 / 100 * 2) ) + "px");
+	width: expression(document.body.clientWidth - ( (document.body.clientWidth * 16 / 100) + (document.body.clientWidth * 20 / 100) + (document.body.clientWidth * 1 / 100 * 2) ) + "px");
+	}
+#header
+	{
+	width: expression(document.body.clientWidth - ( (document.body.clientWidth * 16 / 100) + (document.body.clientWidth * 20 / 100) + (document.body.clientWidth * 1 / 100 * 2) ) + "px");
+	}
+#footer
+	{
+	width: expression(document.body.clientWidth - ( (document.body.clientWidth * 16 / 100) + (document.body.clientWidth * 20 / 100) + (document.body.clientWidth * 1 / 100 * 2) ) + "px");
+	}
+</style>
+<![endif]-->

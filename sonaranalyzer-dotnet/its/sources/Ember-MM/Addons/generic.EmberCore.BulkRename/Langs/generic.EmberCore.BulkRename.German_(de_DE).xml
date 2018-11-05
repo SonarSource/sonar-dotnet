@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <string id="0">Umbenenner</string>
+  <string id="1">Benenne um...</string>
+  <string id="2">Bulk Renamer</string>
+  <string id="3">Rename movies and files</string>
+  <string id="4">Stelle Liste zusammen...</string>
+  <string id="5">Breche Zusammenstellung ab...</string>
+  <string id="6">Benenne um</string>
+  <string id="7">Verzeichnis Schema (Ein Film pro Verzeichnis)</string>
+  <string id="8">Datei Schema</string>
+  <string id="9">Verzeichnis Schema  (Mehrere Filme pro Verzeichnis)</string>
+  <string id="10">Zeige nur Elemente die umbenannt werden</string>
+  <string id="11">$T = Titel{0}$X. (Leerzeichen durch Punkt ersetzen){0}$D = Verzeichnis{0}$F = Dateiname{0}$O = OriginalTitel{0}$Y = Jahr{0}$R = Auflösung{0}$A = Audio{0}$S = Quelle{0}$M = MPAA{0}$B = Base Pfad{0}$L = List Titel{0}$E = Sort Titel{0}{{}} = Optional{0}$?aaa?bbb? = Ersetze aaa mit bbb{0}$- = Entferne das vorherige Zeichen wenn die nächste Variable keinen Wert hat{0}$+ = Entferne das nächste Zeichen wenn die vorherige Variable keinen Wert hat{0}$^ = Entferne das nächste vorherige Zeichen wenn die nächste Variable keinen Wert hat</string>
+  <string id="12">Fehler beim umbenennen von:{0}{0}{1}{0}{0}Bitte prüfe, dass dieses Verzeichnis nicht geöffnet ist (z.B. im Explorer).</string>
+  <string id="13">Fehler beim umbenennen</string>
+  <string id="14">Fehler beim umbenennen von:{0}{0}{1}{0}{0}Bitte prüfe, dass diese Datei nicht geöffnet ist.</string>
+  <string id="15">Fehler beim umbenennen</string>
+  <string id="16">Manuell Umben.</string>
+  <string id="17">Verzeichnis</string>
+  <string id="18">Datei</string>
+  <string id="19">Titel:</string>
+  <string id="20">Benenne um...</string>
+  <string id="21">Automatisch Dateien beim Multi-Scrapen umbenennen</string>
+  <string id="22">Automatisch Dateien beim Einzel-Scrapen umbenennen</string>
+  <string id="23">Standard Umbenennungs Schema</string>
+  <string id="24">Datei Schema</string>
+  <string id="25">Verzeichnis Schema</string>
+  <string id="26">Bulk &amp;Renamer</string>
+  <string id="27">Benenne um</string>
+  <string id="28">Automatisch</string>
+  <string id="29">Manuell</string>
+  <string id="30">Neues Verz.</string>
+  <string id="31">Neuer Dateiname</string>
+  <string id="32">Umbenennungsmodul einschalten</string>
+  <string id="33">Mehrfach Umbenenner einschalten</string>
+</strings>
+<!-- Rev2142 -->

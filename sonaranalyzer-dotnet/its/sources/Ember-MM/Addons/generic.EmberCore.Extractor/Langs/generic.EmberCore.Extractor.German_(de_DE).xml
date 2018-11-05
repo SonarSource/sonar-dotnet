@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<string id="1">Auto-generieren</string>
+	<string id="2"># Anzahl</string>
+	<string id="3">Auto-Gen</string>
+	<string id="4">Extrathumb speichern</string>
+	<string id="5">Extrahiere Frame...</string>
+	<string id="6">Film laden</string>
+	<string id="7">Episode laden</string>
+	<string id="8">Als Poster speichern</string>
+</strings>
+<!-- Rev2123 -->

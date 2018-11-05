@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+### Anchor Help ###
+0 = none
+1 = Top
+2 = Bottom
+4 = Left
+8 = Right
+
+Can be combined by adding values. For example, the standard TopLeft anchor would
+be anchor code 5.
+
+### FontStyle Help ###
+0 = Regular
+1 = Bold
+2 = Italic
+4 = Underline
+8 = Strikeout
+
+Can be combined by adding values. For example, bold and underlined would be
+fontstyle code 5.
+-->
+
+<theme>
+  <toppanel>
+    <backcolor>-2302756</backcolor>
+    <forecolor>-16777216</forecolor>
+  </toppanel>
+ 
+  <images>
+    <fanartbackcolor>-9868951</fanartbackcolor>
+    <posterbackcolor>-2302756</posterbackcolor>
+    <postermaxwidth>160</postermaxwidth>
+    <postermaxheight>160</postermaxheight>
+    <mpaabackcolor>-2302756</mpaabackcolor>
+    <genrebackcolor>-2302756</genrebackcolor>
+  </images>
+   
+  <infopanel>
+    <backcolor>-2302756</backcolor>
+    <ipup>500</ipup> <!-- Must be in multiples of 5!! -->
+    <ipmid>280</ipmid> <!-- Must be in multiples of 5!! -->
+    
+    <object name="lblInfoPanelHeader">
+      <width>pnlInfoPanel.Width - 8</width>
+      <height>17</height>
+      <left>3</left>
+      <top>3</top>
+      <backcolor>-9868951</backcolor>
+      <forecolor>-1</forecolor>
+      <anchor>13</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>1</fontstyle>
+    </object>
+    
+    <object name="btnUp">
+      <width>30</width>
+      <height>22</height>
+      <left>pnlInfoPanel.Width - 104</left>
+      <top>1</top>
+      <anchor>9</anchor>
+    </object>
+    
+    <object name="btnMid">
+      <width>30</width>
+      <height>22</height>
+      <left>pnlInfoPanel.width - 71</left>
+      <top>1</top>
+      <anchor>9</anchor>
+    </object>
+    
+    <object name="btnDown">
+      <width>30</width>
+      <height>22</height>
+      <left>pnlInfoPanel.Width - 38</left>
+      <top>1</top>
+      <anchor>9</anchor>
+    </object>
+    
+    <object name="pnlActors">
+      <width>302</width>
+      <height>244</height>
+      <left>pnlInfoPanel.Width - 307</left>
+      <top>29</top>
+      <backcolor>-2302756</backcolor>
+      <anchor>9</anchor>
+    </object>
+    
+    <!-- BEGIN INTERNAL TO PNLACTORS -->
+    <object name="lblActorsHeader">
+      <width>301</width>
+      <height>17</height>
+      <left>0</left>
+      <top>0</top>
+      <backcolor>-9868951</backcolor>
+      <forecolor>-1</forecolor>
+      <anchor>5</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>1</fontstyle>
+    </object>
+    
+    <object name="lstActors">
+      <width>214</width>
+      <height>221</height>
+      <left>3</left>
+      <top>21</top>
+      <backcolor>-2302756</backcolor>
+      <forecolor>-16777216</forecolor>
+      <anchor>5</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>0</fontstyle>
+    </object>
+    
+    <object name="pbActors">
+      <width>81</width>
+      <height>106</height>
+      <left>220</left>
+      <top>75</top>
+      <backcolor>-2302756</backcolor>
+      <anchor>5</anchor>
+    </object>
+    
+    <object name="pbActLoad">
+      <width>41</width>
+      <height>39</height>
+      <left>240</left>
+      <top>111</top>
+      <backcolor>-2302756</backcolor>
+      <anchor>5</anchor>
+    </object>
+    <!-- END INTERNAL TO PNLACTORS -->
+
+    <object name="lblMetaDataHeader">
+      <width>302</width>
+      <height>17</height>
+      <left>pnlInfoPanel.Width - 307</left>
+      <top>282</top>
+      <backcolor>-9868951</backcolor>
+      <forecolor>-1</forecolor>
+      <anchor>9</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>1</fontstyle>
+    </object>
+    
+    <object name="btnMetaDataRefresh">
+      <width>75</width>
+      <height>23</height>
+      <left>lblMetaDataHeader.Left + 224</left>
+      <top>278</top>
+      <anchor>9</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>0</fontstyle>
+    </object>
+    
+    <object name="txtMetaData">
+      <width>302</width>
+      <height>184</height>
+      <left>lblMetaDataHeader.Left</left>
+      <top>303</top>
+      <backcolor>-2302756</backcolor>
+      <forecolor>-16777216</forecolor>
+      <anchor>9</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>0</fontstyle>
+    </object>
+
+	<object name="pbMILoading">
+      <width>41</width>
+      <height>39</height>
+      <left>txtMetaData.Left + (txtMetaData.Width / 2) - 20</left>
+      <top>txtMetaData.Top + (txtMetaData.Height / 2) - 20</top>
+      <anchor>9</anchor>
+    </object>
+	
+    <object name="lblPlotHeader">
+      <width>pnlInfoPanel.Width - 315</width>
+      <height>17</height>
+      <left>3</left>
+      <top>282</top>
+      <backcolor>-9868951</backcolor>
+      <forecolor>-1</forecolor>
+      <anchor>13</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>1</fontstyle>
+    </object>
+    
+    <object name="txtPlot">
+      <width>lblPlotHeader.Width</width>
+      <height>184</height>
+      <left>3</left>
+      <top>303</top>
+      <backcolor>-2302756</backcolor>
+      <forecolor>-16777216</forecolor>
+      <anchor>13</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>0</fontstyle>
+    </object>
+
+    <object name="lblFilePathHeader">
+      <width>lblPlotHeader.Width</width>
+      <height>17</height>
+      <left>3</left>
+      <top>234</top>
+      <backcolor>-9868951</backcolor>
+      <forecolor>-1</forecolor>
+      <anchor>13</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>1</fontstyle>
+    </object>
+    
+    <object name="txtFilePath">
+      <width>lblFilePathHeader.Width - 23</width>
+      <height>20</height>
+      <left>3</left>
+      <top>254</top>
+      <backcolor>-1</backcolor>
+      <forecolor>-16777216</forecolor>
+      <anchor>13</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>0</fontstyle>
+    </object>
+    
+    <object name="btnPlay">
+      <width>20</width>
+      <height>20</height>
+      <left>txtFilePath.Width + 6</left>
+      <top>254</top>
+      <anchor>9</anchor>
+    </object>
+
+    <object name="lblIMDBHeader">
+      <width>108</width>
+      <height>17</height>
+      <left>3</left>
+      <top>188</top>
+      <backcolor>-9868951</backcolor>
+      <forecolor>-1</forecolor>
+      <anchor>5</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>1</fontstyle>
+    </object>
+    
+    <object name="txtIMDBID">
+      <width>108</width>
+      <height>20</height>
+      <left>3</left>
+      <top>208</top>
+      <backcolor>-1</backcolor>
+      <forecolor>-16777216</forecolor>
+      <anchor>5</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>0</fontstyle>
+    </object>
+    
+    <object name="lblCertsHeader">
+      <width>pnlInfoPanel.Width - 428</width>
+      <height>17</height>
+      <left>116</left>
+      <top>188</top>
+      <backcolor>-9868951</backcolor>
+      <forecolor>-1</forecolor>
+      <anchor>13</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>1</fontstyle>
+    </object>
+    
+    <object name="txtCerts">
+      <width>lblCertsHeader.Width</width>
+      <height>20</height>
+      <left>116</left>
+      <top>208</top>
+      <backcolor>-1</backcolor>
+      <forecolor>-16777216</forecolor>
+      <anchor>13</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>0</fontstyle>
+    </object>
+
+    <object name="lblOutlineHeader">
+      <width>lblPlotHeader.Width</width>
+      <height>17</height>
+      <left>3</left>
+      <top>81</top>
+      <backcolor>-9868951</backcolor>
+      <forecolor>-1</forecolor>
+      <anchor>13</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>1</fontstyle>
+    </object>
+    
+    <object name="txtOutline">
+      <width>lblPlotHeader.Width</width>
+      <height>78</height>
+      <left>3</left>
+      <top>103</top>
+      <backcolor>-2302756</backcolor>
+      <forecolor>-16777216</forecolor>
+      <anchor>13</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>0</fontstyle>
+    </object>
+
+    <object name="pnlTop250">
+      <width>56</width>
+      <height>48</height>
+      <left>pnlInfoPanel.Width - 368</left>
+      <top>27</top>
+      <backcolor>-2302756</backcolor>
+      <anchor>9</anchor>
+    </object>
+    
+    <!-- BEGIN INTERNAL TO PNLTOP250 -->
+    <object name="pbTop250">
+      <width>54</width>
+      <height>30</height>
+      <left>1</left>
+      <top>1</top>
+      <backcolor>-2302756</backcolor>
+      <anchor>5</anchor>
+    </object>
+    
+    <object name="lblTop250">
+      <width>52</width>
+      <height>17</height>
+      <left>1</left>
+      <top>30</top>
+      <backcolor>-2302756</backcolor>
+      <forecolor>-16777216</forecolor>
+      <anchor>5</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>1</fontstyle>
+    </object>
+    <!-- END INTERNAL TO PNLTOP250 -->
+
+    <object name="lblReleaseDateHeader">
+      <width>105</width>
+      <height>17</height>
+      <left>pnlInfoPanel.Width - 479</left>
+      <top>27</top>
+      <backcolor>-9868951</backcolor>
+      <forecolor>-1</forecolor>
+      <anchor>9</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>1</fontstyle>
+    </object>
+    
+    <object name="lblReleaseDate">
+      <width>105</width>
+      <height>16</height>
+      <left>lblReleaseDateHeader.Left</left>
+      <top>48</top>
+      <backcolor>-2302756</backcolor>
+      <forecolor>-16777216</forecolor>
+      <anchor>9</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>0</fontstyle>
+    </object>
+
+    <object name="lblDirectorHeader">
+      <width>pnlInfoPanel.Width - 486</width>
+      <height>17</height>
+      <left>3</left>
+      <top>27</top>
+      <backcolor>-9868951</backcolor>
+      <forecolor>-1</forecolor>
+      <anchor>13</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>1</fontstyle>
+    </object>
+    
+    <object name="lblDirector">
+      <width>lblDirectorHeader.Width</width>
+      <height>16</height>
+      <left>3</left>
+      <top>48</top>
+      <backcolor>-2302756</backcolor>
+      <forecolor>-16777216</forecolor>
+      <anchor>13</anchor>
+      <font>Microsoft Sans Serif</font>
+      <fontsize>8</fontsize>
+      <fontstyle>0</fontstyle>
+    </object>
+    
+  </infopanel>
+</theme>
