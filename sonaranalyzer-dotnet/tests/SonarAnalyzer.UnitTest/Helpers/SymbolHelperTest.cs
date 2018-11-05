@@ -76,7 +76,7 @@ namespace NS
         [TestInitialize]
         public void Compile()
         {
-            this.testCode = new SnippetCompiler(TestInput);
+            this.testCode = new SnippetCompiler(TestInput, ignoreErrors: true);
         }
 
         [TestMethod]

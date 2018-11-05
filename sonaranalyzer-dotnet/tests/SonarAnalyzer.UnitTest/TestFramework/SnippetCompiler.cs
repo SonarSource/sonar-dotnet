@@ -18,10 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
 
@@ -35,13 +37,30 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public SyntaxTree SyntaxTree { get; private set; }
         public SemanticModel SemanticModel { get; private set; }
 
-        public SnippetCompiler(string code)
+        public SnippetCompiler(string code, params MetadataReference[] additionalReferences)
+            : this(code, false, (IEnumerable<MetadataReference>)additionalReferences)
+        {
+        }
+
+        public SnippetCompiler(string code, IEnumerable<MetadataReference> additionalReferences)
+            : this(code, false, additionalReferences)
+        {
+        }
+
+        public SnippetCompiler(string code, bool ignoreErrors, IEnumerable<MetadataReference> additionalReferences = null)
         {
             var compilation = SolutionBuilder
             .Create()
             .AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
             .AddSnippet(code)
-            .GetCompilation();
+            .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
+            .GetCompilation(compilationOptions: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+
+            if (!ignoreErrors && HasCompilationErrors(compilation))
+            {
+                throw new System.InvalidOperationException("Test setup error: test code snippet did not compile. See output window for details.");
+            }
+
             this.SyntaxTree = compilation.SyntaxTrees.First();
             this.SemanticModel = compilation.GetSemanticModel(this.SyntaxTree);
         }
@@ -120,5 +139,24 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             return this.SemanticModel.Compilation.GetTypeByMetadataName(metadataName);
         }
+
+
+        #region Private methods
+
+        private static bool HasCompilationErrors(Compilation compilation) =>
+            compilation.GetDiagnostics().Any(d => d.Id.StartsWith("CS") || d.Id.StartsWith("BC"));
+
+        private static void DumpCompilationErrors(Compilation compilation)
+        {
+            var diagnostics = compilation.GetDiagnostics();
+
+            Console.WriteLine("Diagnostic errors:");
+            foreach (var d in diagnostics)
+            {
+                Console.WriteLine($"  {d.Id} Line: {d.Location.GetMappedLineSpan().StartLinePosition.Line}: {d.GetMessage()}");
+            }
+        }
+
+        #endregion
     }
 }

@@ -67,9 +67,45 @@ namespace Test
                 targetMethodSignature,
                 new MethodSignature(KnownType.System_Data_DataSet, ".ctor"));
 
-            // 3. Should match if Console.WriteLine is in the list
+            // 3. Should match if Console.WriteLine is in the list of candidates
             CheckExactMethodIsNotMatched(callToDoStuffWriteLine, snippet, targetMethodSignature);
         }
+
+        [TestMethod]
+        public void ExactMatch_DoesNotMatchOverrides()
+        {
+            var code = @"
+namespace Test
+{
+    using System.Xml;
+
+    class Class1
+    {
+        public void DoStuff(XmlNode node, XmlDocument doc)
+        {
+            node.WriteTo(null);
+            doc.WriteTo(null);
+        }
+    }
+}
+";
+            var snippet = new SnippetCompiler(code, FrameworkMetadataReference.SystemXml);
+
+            // XmlDocument derives from XmlNode
+            var nodeWriteTo = new MethodSignature(KnownType.System_Xml_XmlNode, "WriteTo");
+            var docWriteTo = new MethodSignature(KnownType.System_Xml_XmlDocument, "WriteTo");
+
+            // 1. Call to node.WriteTo should only match for XmlNode
+            var callToNodeWriteTo = CreateContextForMethod("XmlNode.WriteTo", snippet);
+            CheckExactMethodIsMatched(callToNodeWriteTo, snippet, nodeWriteTo);
+            CheckExactMethodIsNotMatched(callToNodeWriteTo, snippet, docWriteTo);
+
+            // 2. Call to doc.WriteTo should only match for XmlDocument
+            var callToDocWriteTo = CreateContextForMethod("XmlDocument.WriteTo", snippet);
+            CheckExactMethodIsNotMatched(callToDocWriteTo, snippet, nodeWriteTo);
+            CheckExactMethodIsMatched(callToDocWriteTo, snippet, docWriteTo);
+        }
+
 
         private static InvocationContext CreateContextForMethod(string typeAndMethodName, SnippetCompiler snippet)
         {
@@ -110,6 +146,5 @@ namespace Test
 
             result.Should().Be(expectedOutcome);
         }
-
     }
 }
