@@ -18,9 +18,9 @@ param (
     [string]$githubPRBaseBranch = $env:GITHUB_BASE_BRANCH,
     [string]$githubPRTargetBranch = $env:GITHUB_TARGET_BRANCH,
 
-    # SonarQube related parameters
-    [string]$sonarQubeUrl = $env:SONAR_HOST_URL,
-    [string]$sonarQubeToken = $env:SONAR_TOKEN,
+    # SonarCloud related parameters
+    [string]$sonarCloudUrl = $env:SONARCLOUD_HOST_URL,
+    [string]$sonarCloudToken = $env:SONARCLOUD_TOKEN,
 
     # Build related parameters
     [string]$buildNumber = $env:BUILD_NUMBER,
@@ -107,7 +107,7 @@ function Get-ScannerMsBuildPath() {
         # This links always redirect to the latest released scanner
         $downloadLink = "https://repox.sonarsource.com/sonarsource-public-releases/org/sonarsource/scanner/msbuild/" +
             "sonar-scanner-msbuild/%5BRELEASE%5D/sonar-scanner-msbuild-%5BRELEASE%5D-net46.zip"
-        $scannerMsbuildZip = Join-Path $currentDir "\MSBuild.SonarQube.Runner.zip"
+        $scannerMsbuildZip = Join-Path $currentDir "\SonarScanner.MSBuild.zip"
 
         Write-Debug "Downloading scanner from '${downloadLink}' at '${currentDir}'"
         (New-Object System.Net.WebClient).DownloadFile($downloadLink, $scannerMsbuildZip)
@@ -124,7 +124,7 @@ function Get-ScannerMsBuildPath() {
 }
 
 function Invoke-SonarBeginAnalysis([array][parameter(ValueFromRemainingArguments = $true)]$remainingArgs) {
-    Write-Header "Running SonarQube Analysis begin step"
+    Write-Header "Running SonarCloud Analysis begin step"
 
     if (Test-Debug) {
         $remainingArgs += "/d:sonar.verbose=true"
@@ -133,17 +133,19 @@ function Invoke-SonarBeginAnalysis([array][parameter(ValueFromRemainingArguments
     Exec { & (Get-ScannerMsBuildPath) begin `
         /k:sonaranalyzer-csharp-vbnet `
         /n:"SonarAnalyzer .Net" `
-        /d:sonar.host.url=${sonarQubeUrl} `
-        /d:sonar.login=$sonarQubeToken $remainingArgs `
-    } -errorMessage "ERROR: SonarQube Analysis begin step FAILED."
+        /d:sonar.host.url=${sonarCloudUrl} `
+        /d:sonar.login=$sonarCloudToken `
+        /o:sonarsource
+        $remainingArgs `
+    } -errorMessage "ERROR: SonarCloud Analysis begin step FAILED."
 }
 
 function Invoke-SonarEndAnalysis() {
-    Write-Header "Running SonarQube Analysis end step"
+    Write-Header "Running SonarCloud Analysis end step"
 
     Exec { & (Get-ScannerMsBuildPath) end `
-        /d:sonar.login=$sonarQubeToken `
-    } -errorMessage "ERROR: SonarQube Analysis end step FAILED."
+        /d:sonar.login=$sonarCloudToken `
+    } -errorMessage "ERROR: SonarCloud Analysis end step FAILED."
 }
 
 function Initialize-NuGetConfig() {
@@ -331,8 +333,9 @@ function Invoke-JavaBuild() {
             "-Dsonar.projectName=${sonarqubePluginName}" `
             "-Dsonar.analysis.prNumber=${githubPullRequest}" `
             "-Dsonar.analysis.sha1=${githubSha1}" `
-            "-Dsonar.host.url=${sonarQubeUrl}" `
-            "-Dsonar.login=${sonarQubeToken}" `
+            "-Dsonar.host.url=${sonarCloudUrl}" `
+            "-Dsonar.login=${sonarCloudToken}" `
+            "-Dsonar.organization=sonarcloud" `
             "-Dsonar.pullrequest.key=${githubPullRequest}" `
             "-Dsonar.pullrequest.branch=${githubPRBaseBranch}" `
             "-Dsonar.pullrequest.base=${githubPRTargetBranch}" `
@@ -354,8 +357,9 @@ function Invoke-JavaBuild() {
             "-Dmaven.test.redirectTestOutputToFile=false" `
             "-Dsonar.projectName=${sonarqubePluginName}" `
             "-Dsonar.analysis.sha1=${githubSha1}" `
-            "-Dsonar.host.url=${sonarQubeUrl}" `
-            "-Dsonar.login=${sonarQubeToken}" `
+            "-Dsonar.host.url=${sonarCloudUrl}" `
+            "-Dsonar.login=${sonarCloudToken}" `
+            "-Dsonar.organization=sonarcloud" `
             "-Dsonar.projectVersion=${currentVersion}" `
             -B -e -V `
         } -errorMessage "ERROR: Maven build deploy sonar FAILED."
@@ -382,8 +386,9 @@ function Invoke-JavaBuild() {
             "-Dsonar.analysis.sha1=${githubSha1}" `
             "-Dsonar.analysis.repository=${githubRepo}" `
             "-Dsonar.branch.name=${branchName}" `
-            "-Dsonar.host.url=${sonarQubeUrl}" `
-            "-Dsonar.login=${sonarQubeToken}" `
+            "-Dsonar.host.url=${sonarCloudUrl}" `
+            "-Dsonar.login=${sonarCloudToken}" `
+            "-Dsonar.organization=sonarcloud" `
             "-Dsonar.projectVersion=${currentVersion}" `
             -B -e -V `
         } -errorMessage "ERROR: Maven build deploy sonar FAILED."
