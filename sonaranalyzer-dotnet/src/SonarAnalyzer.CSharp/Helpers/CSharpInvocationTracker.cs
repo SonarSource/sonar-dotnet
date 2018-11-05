@@ -45,8 +45,8 @@ namespace SonarAnalyzer.Helpers
 
         public override InvocationCondition MatchSimpleNames(params MethodSignature[] methods)
         {
-            return (context) => MethodSignatureHelper.IsExactMatch(context.Identifier as SimpleNameSyntax,
-                    context.Model, context.InvokedMethodSymbol, methods);
+            return (context) => MethodSignatureHelper.IsMatch(context.Identifier as SimpleNameSyntax,
+                    context.Model, context.InvokedMethodSymbol, true, methods);
         }
 
         public override bool FirstParameterIsStringAndIsNotConstant(InvocationContext context)

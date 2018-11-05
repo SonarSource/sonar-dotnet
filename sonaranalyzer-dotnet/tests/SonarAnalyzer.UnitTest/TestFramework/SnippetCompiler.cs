@@ -24,8 +24,10 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
+using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
+using Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
@@ -34,36 +36,46 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     /// </summary>
     internal class SnippetCompiler
     {
+        private readonly Compilation compilation;
+
         public SyntaxTree SyntaxTree { get; private set; }
         public SemanticModel SemanticModel { get; private set; }
 
         public SnippetCompiler(string code, params MetadataReference[] additionalReferences)
-            : this(code, false, (IEnumerable<MetadataReference>)additionalReferences)
+            : this(code, false, AnalyzerLanguage.CSharp, (IEnumerable<MetadataReference>)additionalReferences)
         {
         }
 
         public SnippetCompiler(string code, IEnumerable<MetadataReference> additionalReferences)
-            : this(code, false, additionalReferences)
+            : this(code, false, AnalyzerLanguage.CSharp, additionalReferences)
         {
         }
 
-        public SnippetCompiler(string code, bool ignoreErrors, IEnumerable<MetadataReference> additionalReferences = null)
+        public SnippetCompiler(string code, bool ignoreErrors, AnalyzerLanguage language, IEnumerable<MetadataReference> additionalReferences = null)
         {
-            var compilation = SolutionBuilder
+            CompilationOptions compilationOptions = language == AnalyzerLanguage.CSharp
+                ? (CompilationOptions) new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+                : (CompilationOptions) new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
+
+            this.compilation = SolutionBuilder
             .Create()
-            .AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
+            .AddProject(language, createExtraEmptyFile: false)
             .AddSnippet(code)
             .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
-            .GetCompilation(compilationOptions: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+            .GetCompilation(compilationOptions: compilationOptions);
 
             if (!ignoreErrors && HasCompilationErrors(compilation))
             {
+                DumpCompilationErrors(compilation);
                 throw new System.InvalidOperationException("Test setup error: test code snippet did not compile. See output window for details.");
             }
 
             this.SyntaxTree = compilation.SyntaxTrees.First();
             this.SemanticModel = compilation.GetSemanticModel(this.SyntaxTree);
         }
+
+        public bool IsCSharp() =>
+            this.compilation.Language == LanguageNames.CSharp;
 
         public IEnumerable<TSyntaxNodeType> GetNodes<TSyntaxNodeType>()
             where TSyntaxNodeType : SyntaxNode =>
@@ -73,15 +85,26 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             where TSymbolType : class, ISymbol =>
             this.SemanticModel.GetSymbolInfo(node).Symbol as TSymbolType;
 
-        public MethodDeclarationSyntax GetMethodDeclaration(string typeDotMethodName)
+        public SyntaxNode GetMethodDeclaration(string typeDotMethodName)
         {
             var nameParts = typeDotMethodName.Split('.');
 
-            var type = this.GetNodes<TypeDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == nameParts[0]);
+            SyntaxNode method = null;
 
-            var method = type.DescendantNodes().OfType<MethodDeclarationSyntax>()
-            .First(m => m.Identifier.ValueText == nameParts[1]);
+            if (IsCSharp())
+            {
+                var type = this.GetNodes<CSharpSyntax.TypeDeclarationSyntax>()
+                    .First(m => m.Identifier.ValueText == nameParts[0]);
+                method = type.DescendantNodes().OfType<CSharpSyntax.MethodDeclarationSyntax>()
+                    .First(m => m.Identifier.ValueText == nameParts[1]);
+            }
+            else
+            {
+                var type = this.GetNodes<VBSyntax.TypeStatementSyntax>()
+                    .First(m => m.Identifier.ValueText == nameParts[0]);
+                method = type.DescendantNodes().OfType<VBSyntax.MethodStatementSyntax>()
+                    .First(m => m.Identifier.ValueText == nameParts[1]);
+            }
 
             method.Should().NotBeNull("Test setup error: could not find method declaration in code snippet: " +
                 $" Type: {nameParts[0]}, Method: {nameParts[1]}");
@@ -91,7 +114,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public INamespaceSymbol GetNamespaceSymbol(string name)
         {
-            var symbol = this.GetNodes<NamespaceDeclarationSyntax>()
+            var symbol = (this.GetNodes<CSharpSyntax.NamespaceDeclarationSyntax>()
+                .Concat<SyntaxNode>(this.GetNodes<VBSyntax.NamespaceStatementSyntax>()))
                 .Select(s => this.SemanticModel.GetDeclaredSymbol(s))
                 .First( s=> s.Name == name) as INamespaceSymbol;
 
@@ -102,8 +126,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public ITypeSymbol GetTypeSymbol(string typeName)
         {
-            var type = this.GetNodes<TypeDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == typeName);
+            var type = (SyntaxNode)this.GetNodes<CSharpSyntax.TypeDeclarationSyntax>().FirstOrDefault(m => m.Identifier.ValueText == typeName)
+                ?? (this.GetNodes<VBSyntax.TypeStatementSyntax>().FirstOrDefault(m => m.Identifier.ValueText == typeName));
 
             var symbol = this.SemanticModel.GetDeclaredSymbol(type) as ITypeSymbol;
             symbol.Should().NotBeNull($"Test setup error: could not find type in code snippet: {type}");
@@ -122,13 +146,27 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public IPropertySymbol GetPropertySymbol(string typeDotMethodName)
         {
             var nameParts = typeDotMethodName.Split('.');
-            var type = this.SyntaxTree.GetRoot().DescendantNodes().OfType<TypeDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == nameParts[0]);
 
-            var method = type.DescendantNodes().OfType<PropertyDeclarationSyntax>()
-            .First(m => m.Identifier.ValueText == nameParts[1]);
+            SyntaxNode property = null;
 
-            var symbol = this.SemanticModel.GetDeclaredSymbol(method) as IPropertySymbol;
+            if (IsCSharp())
+            { 
+                var type = this.SyntaxTree.GetRoot().DescendantNodes().OfType<CSharpSyntax.TypeDeclarationSyntax>()
+                    .First(m => m.Identifier.ValueText == nameParts[0]);
+
+                property = type.DescendantNodes().OfType<CSharpSyntax.PropertyDeclarationSyntax>()
+                    .First(m => m.Identifier.ValueText == nameParts[1]);
+            }
+            else
+            {
+                var type = this.SyntaxTree.GetRoot().DescendantNodes().OfType<VBSyntax.TypeStatementSyntax>()
+                    .First(m => m.Identifier.ValueText == nameParts[0]);
+
+                property = type.DescendantNodes().OfType<VBSyntax.PropertyStatementSyntax>()
+                    .First(m => m.Identifier.ValueText == nameParts[1]);
+            }
+
+            var symbol = this.SemanticModel.GetDeclaredSymbol(property) as IPropertySymbol;
             symbol.Should().NotBeNull("Test setup error: could not find property in code snippet: " +
                 $" Type: {nameParts[0]}, Method: {nameParts[1]}");
 
@@ -142,7 +180,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
 
         #region Private methods
-
+        
         private static bool HasCompilationErrors(Compilation compilation) =>
             compilation.GetDiagnostics().Any(d => d.Id.StartsWith("CS") || d.Id.StartsWith("BC"));
 

@@ -21,7 +21,9 @@
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
 
@@ -76,7 +78,7 @@ namespace NS
         [TestInitialize]
         public void Compile()
         {
-            this.testCode = new SnippetCompiler(TestInput, ignoreErrors: true);
+            this.testCode = new SnippetCompiler(TestInput, ignoreErrors: true, language: AnalyzerLanguage.CSharp);
         }
 
         [TestMethod]
@@ -201,7 +203,7 @@ namespace NS
         [TestMethod]
         public void Symbol_IsKnownType()
         {
-            var method4 = this.testCode.GetMethodDeclaration("IInterface.Method4");
+            var method4 = (MethodDeclarationSyntax)this.testCode.GetMethodDeclaration("IInterface.Method4");
 
             method4.ParameterList
                 .Parameters[0]
