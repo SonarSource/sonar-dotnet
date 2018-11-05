@@ -327,6 +327,7 @@ function Invoke-JavaBuild() {
         # in Maven local repository. Phase "verify" is enough.
         Write-Host "SonarC# and SonarVB will be deployed"
 
+        # hardcode a PR number so that the PR decoration doesn't find the right PR
         Exec { & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
             "-Pdeploy-sonarsource,sonaranalyzer" `
             "-Dmaven.test.redirectTestOutputToFile=false" `
