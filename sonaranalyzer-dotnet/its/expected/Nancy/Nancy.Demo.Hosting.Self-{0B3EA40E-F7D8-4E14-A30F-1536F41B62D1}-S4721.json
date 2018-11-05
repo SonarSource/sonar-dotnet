@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4721",
+"message":  "Make sure that executing this OS command is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Self\Program.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  21,
+"endLine":  19,
+"endColumn":  66
+}
+}
+}
+]
+}
