@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4721",
+"message":  "Make sure that executing this OS command is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  83,
+"startColumn":  17,
+"endLine":  83,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S4721",
+"message":  "Make sure that executing this OS command is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  96,
+"startColumn":  21,
+"endLine":  96,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S4721",
+"message":  "Make sure that executing this OS command is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  241,
+"startColumn":  62,
+"endLine":  241,
+"endColumn":  130
+}
+}
+}
+]
+}

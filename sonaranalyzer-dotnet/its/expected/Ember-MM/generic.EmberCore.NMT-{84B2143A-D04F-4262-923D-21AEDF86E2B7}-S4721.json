@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4721",
+"message":  "Make sure that executing this OS command is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1040,
+"startColumn":  41,
+"endLine":  1040,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4721",
+"message":  "Make sure that executing this OS command is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1072,
+"startColumn":  41,
+"endLine":  1072,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4721",
+"message":  "Make sure that executing this OS command is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1119,
+"startColumn":  41,
+"endLine":  1119,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4721",
+"message":  "Make sure that executing this OS command is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1151,
+"startColumn":  41,
+"endLine":  1151,
+"endColumn":  67
+}
+}
+}
+]
+}
