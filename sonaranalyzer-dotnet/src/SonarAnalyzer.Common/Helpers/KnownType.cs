@@ -393,11 +393,6 @@ namespace SonarAnalyzer.Helpers
         private readonly bool isSpecialType;
         private readonly SpecialType specialType;
 
-        static internal KnownType CreateKnownTypeForTesting(string typeName)
-        {
-            return new KnownType(typeName);
-        }
-
         private KnownType(string typeName)
         {
             TypeName = typeName;

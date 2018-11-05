@@ -40,46 +40,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
     public class MethodSignatureHelperTest
     {
         [TestMethod]
-        public void ExactMatchOnly_OverridesAreNotMatched()
-        {
-            var code = @"
-namespace Test
-{
-  class Class1
-  {
-    public void DoStuff()
-    {
-        System.Console.WriteLine();
-        this.WriteLine();
-    }
-
-    private void WriteLine() {}
-  }
-}
-";
-            var snippet = new SnippetCompiler(code);
-
-            // Testing for calls to Console.WriteLine
-            var targetMethodSignature = new MethodSignature(KnownType.System_Console, "WriteLine");
-
-            // 1. Should match Console.WriteLine
-            var callToConsoleWriteLine = CreateContextForMethod("Console.WriteLine", snippet);
-            CheckExactMethod(true, callToConsoleWriteLine, snippet, targetMethodSignature);
-
-            // 2. Should not match call to xxx.WriteLine
-            var callToDoStuffWriteLine = CreateContextForMethod("Class1.WriteLine", snippet);
-            CheckExactMethod(false, callToDoStuffWriteLine, snippet,
-
-                new MethodSignature(KnownType.System_Console, "Foo"),
-                targetMethodSignature,
-                new MethodSignature(KnownType.System_Data_DataSet, ".ctor"));
-
-            // 3. Should match if Console.WriteLine is in the list of candidates
-            CheckExactMethod(false, callToDoStuffWriteLine, snippet, targetMethodSignature);
-        }
-
-
-        [TestMethod]
         public void ExactMatchOnly_OverridesAreNotMatched_CS()
         {
             var code = @"
@@ -137,48 +97,12 @@ End Namespace
             // 2. Should not match call to xxx.WriteLine
             var callToDoStuffWriteLine = CreateContextForMethod("Class1.WriteLine", snippet);
             CheckExactMethod(false, callToDoStuffWriteLine, snippet,
-
                 new MethodSignature(KnownType.System_Console, "Foo"),
                 targetMethodSignature,
                 new MethodSignature(KnownType.System_Data_DataSet, ".ctor"));
 
             // 3. Should match if Console.WriteLine is in the list of candidates
             CheckExactMethod(false, callToDoStuffWriteLine, snippet, targetMethodSignature);
-        }
-
-        [TestMethod]
-        public void ExactMatch_DoesNotMatchOverrides()
-        {
-            var code = @"
-namespace Test
-{
-    using System.Xml;
-
-    class Class1
-    {
-        public void DoStuff(XmlNode node, XmlDocument doc)
-        {
-            node.WriteTo(null);
-            doc.WriteTo(null);
-        }
-    }
-}
-";
-            var snippet = new SnippetCompiler(code, FrameworkMetadataReference.SystemXml);
-
-            // XmlDocument derives from XmlNode
-            var nodeWriteTo = new MethodSignature(KnownType.System_Xml_XmlNode, "WriteTo");
-            var docWriteTo = new MethodSignature(KnownType.System_Xml_XmlDocument, "WriteTo");
-
-            // 1. Call to node.WriteTo should only match for XmlNode
-            var callToNodeWriteTo = CreateContextForMethod("XmlNode.WriteTo", snippet);
-            CheckExactMethod(true, callToNodeWriteTo, snippet, nodeWriteTo);
-            CheckExactMethod(false, callToNodeWriteTo, snippet, docWriteTo);
-
-            // 2. Call to doc.WriteTo should only match for XmlDocument
-            var callToDocWriteTo = CreateContextForMethod("XmlDocument.WriteTo", snippet);
-            CheckExactMethod(false, callToDocWriteTo, snippet, nodeWriteTo);
-            CheckExactMethod(true, callToDocWriteTo, snippet, docWriteTo);
         }
 
         [TestMethod]
@@ -240,7 +164,7 @@ End Namespace
         }
 
         [TestMethod]
-        public void IsMatch_AndCheckingOverrides_DoesMatchOverrides()
+        public void IsMatch_AndCheckingOverrides_DoesMatchOverrides_CS()
         {
             var code = @"
 namespace Test
@@ -258,7 +182,29 @@ namespace Test
 }
 ";
             var snippet = new SnippetCompiler(code, FrameworkMetadataReference.SystemXml);
+            CheckIsMatch_AndCheckingOverrides_DoesMatchOverrides(snippet);
+        }
 
+        [TestMethod]
+        public void IsMatch_AndCheckingOverrides_DoesMatchOverrides_VB()
+        {
+            var code = @"
+Imports System.Xml
+Namespace Test
+    Class Class1
+        Public Sub DoStuff(node As XmlNode, doc As XmlDocument)
+            node.WriteTo(Nothing)
+            doc.WriteTo(Nothing)
+        End Sub
+    End Class
+End Namespace
+";
+            var snippet = new SnippetCompiler(code, false, AnalyzerLanguage.VisualBasic, FrameworkMetadataReference.SystemXml);
+            CheckIsMatch_AndCheckingOverrides_DoesMatchOverrides(snippet);
+        }
+
+        private void CheckIsMatch_AndCheckingOverrides_DoesMatchOverrides(SnippetCompiler snippet)
+        {
             // XmlDocument derives from XmlNode
             var nodeWriteTo = new MethodSignature(KnownType.System_Xml_XmlNode, "WriteTo");
             var docWriteTo = new MethodSignature(KnownType.System_Xml_XmlDocument, "WriteTo");
