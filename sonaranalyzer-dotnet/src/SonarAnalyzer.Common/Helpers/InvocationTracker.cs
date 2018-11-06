@@ -76,6 +76,8 @@ namespace SonarAnalyzer.Helpers
 
         public abstract InvocationCondition MatchSimpleNames(params MethodSignature[] methods);
 
+        public abstract bool FirstParameterIsStringAndIsNotConstant(InvocationContext context);
+
         #endregion
 
         #region Symbol-level standard conditions

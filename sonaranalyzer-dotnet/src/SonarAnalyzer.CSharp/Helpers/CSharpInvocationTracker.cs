@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -47,7 +46,19 @@ namespace SonarAnalyzer.Helpers
         public override InvocationCondition MatchSimpleNames(params MethodSignature[] methods)
         {
             return (context) => MethodSignatureHelper.IsMatch(context.Identifier as SimpleNameSyntax,
-                    context.Model, context.InvokedMethodSymbol, methods);
+                    context.Model, context.InvokedMethodSymbol, true, methods);
+        }
+
+        public override bool FirstParameterIsStringAndIsNotConstant(InvocationContext context)
+        {
+            if (!base.FirstParameterIsString(context))
+            {
+                return false;
+            }
+            var argumentsSyntax = (context.Invocation as InvocationExpressionSyntax)?
+                .ArgumentList?.Arguments.FirstOrDefault();
+
+            return !(argumentsSyntax?.Expression.IsConstant(context.Model) ?? false);
         }
 
         #endregion

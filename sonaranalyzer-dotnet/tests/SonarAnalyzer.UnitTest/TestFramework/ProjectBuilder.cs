@@ -49,10 +49,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public SolutionBuilder GetSolution() =>
             this.solutionWrapper.Value;
 
-        public Compilation GetCompilation(ParseOptions parseOptions = null) =>
-            parseOptions != null
-                ? Project.WithParseOptions(parseOptions).GetCompilationAsync().Result
-                : Project.GetCompilationAsync().Result;
+        public Compilation GetCompilation(ParseOptions parseOptions = null, CompilationOptions compilationOptions = null)
+        {
+            var project = parseOptions != null
+                ? Project.WithParseOptions(parseOptions)
+                : Project;
+
+            var compilation = project.GetCompilationAsync().Result;
+
+            return compilationOptions == null
+                ? compilation
+                : compilation.WithOptions(compilationOptions);
+        }
 
         public Document FindDocument(string name) =>
             Project.Documents.Single(d => d.Name == name);

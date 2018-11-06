@@ -73,181 +73,109 @@ namespace NS
 }
 ";
 
-        private ClassDeclarationSyntax baseClassDeclaration;
-        private ClassDeclarationSyntax derivedClassDeclaration1;
-        private ClassDeclarationSyntax derivedClassDeclaration2;
-        private InterfaceDeclarationSyntax interfaceDeclaration;
-        private SemanticModel semanticModel;
-        private SyntaxTree tree;
+        private SnippetCompiler testCode;
 
         [TestInitialize]
         public void Compile()
         {
-            var compilation = SolutionBuilder
-                .Create()
-                .AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
-                .AddSnippet(TestInput)
-                .GetCompilation();
-            this.tree = compilation.SyntaxTrees.First();
-            this.semanticModel = compilation.GetSemanticModel(this.tree);
-
-            this.baseClassDeclaration = this.tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Base");
-            this.derivedClassDeclaration1 = this.tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Derived1");
-            this.derivedClassDeclaration2 = this.tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Derived2");
-            this.interfaceDeclaration = this.tree.GetRoot().DescendantNodes().OfType<InterfaceDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "IInterface");
+            this.testCode = new SnippetCompiler(TestInput, ignoreErrors: true, language: AnalyzerLanguage.CSharp);
         }
 
         [TestMethod]
         public void Symbol_IsPublicApi()
         {
-            var method = this.baseClassDeclaration.DescendantNodes().OfType<MethodDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Method1");
-            var symbol = this.semanticModel.GetDeclaredSymbol(method);
-
+            ISymbol symbol = this.testCode.GetMethodSymbol("Base.Method1");
             SymbolHelper.IsPubliclyAccessible(symbol).Should().BeTrue();
 
-            method = this.baseClassDeclaration.DescendantNodes().OfType<MethodDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Method2");
-            symbol = this.semanticModel.GetDeclaredSymbol(method);
-
+            symbol = this.testCode.GetMethodSymbol("Base.Method2");
             symbol.IsPubliclyAccessible().Should().BeTrue();
 
-            var property = this.baseClassDeclaration.DescendantNodes().OfType<PropertyDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Property");
-            symbol = this.semanticModel.GetDeclaredSymbol(property);
-
+            symbol = this.testCode.GetPropertySymbol("Base.Property");
             symbol.IsPubliclyAccessible().Should().BeTrue();
 
-            property = this.interfaceDeclaration.DescendantNodes().OfType<PropertyDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Property2");
-            symbol = this.semanticModel.GetDeclaredSymbol(property);
-
+            symbol = this.testCode.GetPropertySymbol("IInterface.Property2");
             symbol.IsPubliclyAccessible().Should().BeTrue();
-
-            property = this.derivedClassDeclaration1.DescendantNodes().OfType<PropertyDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Property");
-            symbol = this.semanticModel.GetDeclaredSymbol(property);
-
+            
+            symbol = this.testCode.GetPropertySymbol("Derived1.Property");
             symbol.IsPubliclyAccessible().Should().BeFalse();
         }
 
         [TestMethod]
         public void Symbol_IsInterfaceImplementationOrMemberOverride()
         {
-            var method = this.baseClassDeclaration.DescendantNodes().OfType<MethodDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Method1");
-            var symbol = this.semanticModel.GetDeclaredSymbol(method);
+            ISymbol symbol = this.testCode.GetMethodSymbol("Base.Method1");
             symbol.GetInterfaceMember().Should().BeNull();
             symbol.GetOverriddenMember().Should().BeNull();
 
-            var property = this.derivedClassDeclaration2.DescendantNodes().OfType<PropertyDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Property");
-            symbol = this.semanticModel.GetDeclaredSymbol(property);
-
+            symbol = this.testCode.GetPropertySymbol("Derived2.Property");
             symbol.GetOverriddenMember().Should().NotBeNull();
 
-            property = this.derivedClassDeclaration2.DescendantNodes().OfType<PropertyDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Property2");
-            symbol = this.semanticModel.GetDeclaredSymbol(property);
-
+            symbol = this.testCode.GetPropertySymbol("Derived2.Property2");
             symbol.GetInterfaceMember().Should().NotBeNull();
 
-            method = this.derivedClassDeclaration2.DescendantNodes().OfType<MethodDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Method3");
-            symbol = this.semanticModel.GetDeclaredSymbol(method);
-
+            symbol = this.testCode.GetMethodSymbol("Derived2.Method3");
             symbol.GetInterfaceMember().Should().NotBeNull();
         }
 
         [TestMethod]
         public void Symbol_TryGetOverriddenOrInterfaceMember()
         {
-            var method = this.baseClassDeclaration.DescendantNodes().OfType<MethodDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Method1");
-            var methodSymbol = (IMethodSymbol)this.semanticModel.GetDeclaredSymbol(method);
-            var overriddenMethod = methodSymbol.GetOverriddenMember();
-            overriddenMethod.Should().BeNull();
+            var methodSymbol = this.testCode.GetMethodSymbol("Base.Method1");
+            var actualOverriddenMethod = methodSymbol.GetOverriddenMember();
+            actualOverriddenMethod.Should().BeNull();
 
-            var property = this.derivedClassDeclaration2.DescendantNodes().OfType<PropertyDeclarationSyntax>()
-                .First(p => p.Identifier.ValueText == "Property");
-            var propertySymbol = (IPropertySymbol)this.semanticModel.GetDeclaredSymbol(property);
 
-            var overriddenProperty = propertySymbol.GetOverriddenMember();
-            overriddenProperty.Should().NotBeNull();
+            var expectedOverriddenProperty = this.testCode.GetPropertySymbol("Base.Property");
+            var propertySymbol = this.testCode.GetPropertySymbol("Derived2.Property");
 
-            property = this.baseClassDeclaration.DescendantNodes().OfType<PropertyDeclarationSyntax>()
-                .First(p => p.Identifier.ValueText == "Property");
-            overriddenProperty.Should().Be((IPropertySymbol)this.semanticModel.GetDeclaredSymbol(property));
+            var actualOverriddenProperty = propertySymbol.GetOverriddenMember();
+            actualOverriddenProperty.Should().NotBeNull();
+            actualOverriddenProperty.Should().Be(expectedOverriddenProperty);
 
-            method = this.derivedClassDeclaration2.DescendantNodes().OfType<MethodDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Method3");
-            methodSymbol = (IMethodSymbol)this.semanticModel.GetDeclaredSymbol(method);
 
-            overriddenMethod = methodSymbol.GetInterfaceMember();
-            overriddenMethod.Should().NotBeNull();
+            var expectedOverriddenMethod = this.testCode.GetMethodSymbol("IInterface.Method3");
+            methodSymbol = this.testCode.GetMethodSymbol("Derived2.Method3");
 
-            method = this.interfaceDeclaration.DescendantNodes().OfType<MethodDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Method3");
-            overriddenMethod.Should().Be((IMethodSymbol)this.semanticModel.GetDeclaredSymbol(method));
+            actualOverriddenMethod = methodSymbol.GetInterfaceMember();
+            actualOverriddenMethod.Should().NotBeNull();
+            actualOverriddenMethod.Should().Be(expectedOverriddenMethod);
         }
 
         [TestMethod]
         public void Symbol_IsChangeable()
         {
-            var method = this.baseClassDeclaration.DescendantNodes().OfType<MethodDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Method1");
-            var symbol = this.semanticModel.GetDeclaredSymbol(method) as IMethodSymbol;
-
+            var symbol = this.testCode.GetMethodSymbol("Base.Method1");
             symbol.IsChangeable().Should().BeFalse();
 
-            method = this.baseClassDeclaration.DescendantNodes().OfType<MethodDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Method4");
-            symbol = this.semanticModel.GetDeclaredSymbol(method) as IMethodSymbol;
-
+            symbol = this.testCode.GetMethodSymbol("Base.Method4");
             symbol.IsChangeable().Should().BeTrue();
 
-            method = this.derivedClassDeclaration2.DescendantNodes().OfType<MethodDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Method5");
-            symbol = this.semanticModel.GetDeclaredSymbol(method) as IMethodSymbol;
-
+            symbol = this.testCode.GetMethodSymbol("Derived2.Method5");
             symbol.IsChangeable().Should().BeFalse();
 
-            method = this.derivedClassDeclaration2.DescendantNodes().OfType<MethodDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Method3");
-            symbol = this.semanticModel.GetDeclaredSymbol(method) as IMethodSymbol;
-
+            symbol = this.testCode.GetMethodSymbol("Derived2.Method3");
             symbol.IsChangeable().Should().BeFalse();
         }
 
         [TestMethod]
         public void Symbol_IsProbablyEventHandler()
         {
-            var method = this.derivedClassDeclaration2.DescendantNodes().OfType<MethodDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Method3");
-            var symbol = this.semanticModel.GetDeclaredSymbol(method) as IMethodSymbol;
-
+            var symbol = this.testCode.GetMethodSymbol("Derived2.Method3");
             symbol.IsEventHandler().Should().BeFalse();
 
-            method = this.derivedClassDeclaration2.DescendantNodes().OfType<MethodDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "EventHandler");
-            symbol = this.semanticModel.GetDeclaredSymbol(method) as IMethodSymbol;
-
+            symbol = this.testCode.GetMethodSymbol("Derived2.EventHandler");
             symbol.IsEventHandler().Should().BeTrue();
         }
 
         [TestMethod]
         public void Symbol_GetSelfAndBaseTypes()
         {
-            var objectType = this.semanticModel.Compilation.GetTypeByMetadataName("System.Object");
+            var objectType = this.testCode.GetTypeByMetadataName("System.Object");
             var baseTypes = objectType.GetSelfAndBaseTypes().ToList();
             baseTypes.Should().ContainSingle();
             baseTypes.First().Should().Be(objectType);
 
-            var derived1Type = this.semanticModel.GetDeclaredSymbol(this.derivedClassDeclaration1) as INamedTypeSymbol;
+            var derived1Type = this.testCode.GetTypeSymbol("Derived1") as INamedTypeSymbol;
             baseTypes = derived1Type.GetSelfAndBaseTypes().ToList();
             baseTypes.Should().HaveCount(3);
             baseTypes.Should().HaveElementAt(0, derived1Type);
@@ -258,8 +186,7 @@ namespace NS
         [TestMethod]
         public void Symbol_GetAllNamedTypes_Namespace()
         {
-            var ns = (NamespaceDeclarationSyntax)this.tree.GetRoot().ChildNodes().First();
-            var nsSymbol = this.semanticModel.GetDeclaredSymbol(ns) as INamespaceSymbol;
+            var nsSymbol = this.testCode.GetNamespaceSymbol("NS");
 
             var typeSymbols = nsSymbol.GetAllNamedTypes();
             typeSymbols.Should().HaveCount(6);
@@ -268,7 +195,7 @@ namespace NS
         [TestMethod]
         public void Symbol_GetAllNamedTypes_Type()
         {
-            var typeSymbol = this.semanticModel.GetDeclaredSymbol(this.baseClassDeclaration) as INamedTypeSymbol;
+            var typeSymbol = this.testCode.GetTypeSymbol("Base") as INamedTypeSymbol;
             var typeSymbols = typeSymbol.GetAllNamedTypes();
             typeSymbols.Should().HaveCount(3);
         }
@@ -276,33 +203,30 @@ namespace NS
         [TestMethod]
         public void Symbol_IsKnownType()
         {
-            var method4 = this.interfaceDeclaration
-                .DescendantNodes()
-                .OfType<MethodDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == "Method4");
+            var method4 = (MethodDeclarationSyntax)this.testCode.GetMethodDeclaration("IInterface.Method4");
 
             method4.ParameterList
                 .Parameters[0]
                 .Type
-                .IsKnownType(KnownType.System_Collections_Generic_List_T, this.semanticModel)
+                .IsKnownType(KnownType.System_Collections_Generic_List_T, this.testCode.SemanticModel)
                 .Should().BeTrue();
 
             method4.ParameterList
                 .Parameters[1]
                 .Type
-                .IsKnownType(KnownType.System_Collections_Generic_List_T, this.semanticModel)
+                .IsKnownType(KnownType.System_Collections_Generic_List_T, this.testCode.SemanticModel)
                 .Should().BeTrue();
 
             method4.ParameterList
                 .Parameters[2]
                 .Type
-                .IsKnownType(KnownType.System_Collections_Generic_List_T, this.semanticModel)
+                .IsKnownType(KnownType.System_Collections_Generic_List_T, this.testCode.SemanticModel)
                 .Should().BeTrue();
 
             method4.ParameterList
                 .Parameters[3]
                 .Type
-                .IsKnownType(KnownType.System_Collections_Generic_List_T, this.semanticModel)
+                .IsKnownType(KnownType.System_Collections_Generic_List_T, this.testCode.SemanticModel)
                 .Should().BeFalse();
         }
     }

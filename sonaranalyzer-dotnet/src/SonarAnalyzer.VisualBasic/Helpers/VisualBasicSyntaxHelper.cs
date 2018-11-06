@@ -151,6 +151,9 @@ namespace SonarAnalyzer.Helpers.VisualBasic
             }
         }
 
+        public static bool IsConstant(this ExpressionSyntax expression, SemanticModel semanticModel) =>
+            expression != null && semanticModel.GetConstantValue(expression).HasValue;
+
         public static bool IsLeftSideOfAssignment(this ExpressionSyntax expression)
         {
             var topParenthesizedExpression = expression.GetSelfOrTopParenthesizedExpression();
