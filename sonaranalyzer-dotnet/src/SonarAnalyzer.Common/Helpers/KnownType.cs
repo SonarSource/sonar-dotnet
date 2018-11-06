@@ -190,6 +190,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Linq_ImmutableArrayExtensions = new KnownType("System.Linq.ImmutableArrayExtensions");
         internal static readonly KnownType System_MarshalByRefObject = new KnownType("System.MarshalByRefObject");
         internal static readonly KnownType System_MTAThreadAttribute = new KnownType("System.MTAThreadAttribute");
+        internal static readonly KnownType System_Net_Sockets_Socket = new KnownType("System.Net.Sockets.Socket");
         internal static readonly KnownType System_Net_Sockets_TcpClient = new KnownType("System.Net.Sockets.TcpClient");
         internal static readonly KnownType System_Net_Sockets_UdpClient = new KnownType("System.Net.Sockets.UdpClient");
         internal static readonly KnownType System_Net_WebClient = new KnownType("System.Net.WebClient");
