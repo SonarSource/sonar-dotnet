@@ -11,7 +11,8 @@ namespace Tests.Diagnostics
             int code;
             ConsoleKeyInfo key;
 
-            code = System.Console.Read(); // Noncompliant
+            code = System.Console.Read(); // Noncompliant {{Make sure that reading the standard input is safe here.}}
+//                 ^^^^^^^^^^^^^^^^^^^^^
             code = Con.Read(); // Noncompliant
 
             value = Console.ReadLine(); // Noncompliant
@@ -28,6 +29,7 @@ namespace Tests.Diagnostics
             Console.OpenStandardInput(100); // Noncompliant
 
             var x = System.Console.In; // Noncompliant
+//                  ^^^^^^^^^^^^^^^^^
             x = Console.In; // Noncompliant
             x = Con.In; // Noncompliant
             Console.In.Read(); // Noncompliant
