@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4818",
+"message":  "Make sure that sockets are used safely here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Module.WebServer.vb",
+"region":  {
+"startLine":  163,
+"startColumn":  28,
+"endLine":  163,
+"endColumn":  103
+}
+}
+}
+]
+}
