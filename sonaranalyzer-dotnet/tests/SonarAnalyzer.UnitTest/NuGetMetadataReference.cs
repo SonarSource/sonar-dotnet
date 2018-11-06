@@ -96,15 +96,18 @@ namespace SonarAnalyzer.UnitTest
 
             return aggregateRepository;
         }
-        private static string GetNuGetPackageDirectory(string packageId, string packageVersion) =>
-            $@"{PackagesFolderRelativePath}{packageId}.{GetRealVersionFolder(packageId, packageVersion)}\lib";
+        private static string GetNuGetPackageDirectory(string packageId, string packageVersion)
+        {
+            var x = $@"{PackagesFolderRelativePath}{packageId}.{GetRealVersionFolder(packageId, packageVersion)}\lib";
+            return x;
+        }
 
         private static string GetRealVersionFolder(string packageId, string packageVersion) =>
             packageVersion != Constants.NuGetLatestVersion
                 ? packageVersion.ToString()
                 : Directory.GetDirectories(PackagesFolderRelativePath, $"{packageId}*", SearchOption.TopDirectoryOnly)
-                    .Last()
-                    .Substring(PackagesFolderRelativePath.Length + packageId.Length + 1);
+                    .Select(path => path.Substring(PackagesFolderRelativePath.Length + packageId.Length + 1))
+                    .Last(path => char.IsNumber(path[0]));
 
         #endregion Helpers
 
