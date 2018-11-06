@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4829",
+"message":  "Make sure that reading the standard input is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  33,
+"endLine":  48,
+"endColumn":  51
+}
+}
+}
+]
+}
