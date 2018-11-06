@@ -1,0 +1,46 @@
+<p>Reading Standard Input is security-sensitive. It has led in the past to the following vulnerabilities:</p>
+<ul>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-2337">CVE-2005-2337</a> </li>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-11449">CVE-2017-11449</a> </li>
+</ul>
+<p>It is common for attackers to craft inputs enabling them to exploit software vulnerabilities. Thus any data read from the standard input (stdin)
+can be dangerous and should be validated.</p>
+<p>This rule flags code that reads from the standard input.</p>
+<h2>Ask Yourself Whether</h2>
+<ul>
+  <li> data read from the standard input is not sanitized before being used. </li>
+</ul>
+<p>You are at risk if you answered yes to this question.</p>
+<h2>Recommended Secure Coding Practices</h2>
+<p><a href="https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet">Sanitize</a> all data read from the standard input before using it.</p>
+<h2>Questionable Code Example</h2>
+<pre>
+Imports System
+Public Class C
+    Public Sub Main()
+        Dim x = Console.[In] ' Questionable
+        Console.Read() ' Questionable
+        Console.ReadKey() ' Questionable
+        Console.ReadLine() ' Questionable
+        Console.OpenStandardInput() ' Questionable
+    End Sub
+End Class
+</pre>
+<h2>Exceptions</h2>
+<p>This rule does not raise issues when the return value of the <code>Console.Read</code> <code>Console.ReadKey</code> or
+<code>Console.ReadLine</code> methods is ignored.</p>
+<pre>
+Imports System
+
+Public Class C
+    Public Sub Main()
+        Console.ReadKey() ' Return value is ignored
+        Console.ReadLine() ' Return value is ignored
+    End Sub
+End Class
+</pre>
+<h2>See:</h2>
+<ul>
+  <li> <a href="https://cwe.mitre.org/data/definitions/20.html">MITRE, CWE-20</a> - Improper Input Validation </li>
+</ul>
+
