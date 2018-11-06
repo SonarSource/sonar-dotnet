@@ -20,7 +20,9 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -36,5 +38,14 @@ namespace SonarAnalyzer.Helpers
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
             VisualBasic.GeneratedCodeRecognizer.Instance;
+
+        internal override ObjectCreationCondition FirstArgumentIsConstant() =>
+            (context) =>
+            {
+                var argumentList = ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList;
+                return argumentList != null &&
+                    argumentList.Arguments.Count > 0 &&
+                    argumentList.Arguments[0].GetExpression().IsConstant(context.Model);
+            };
     }
 }

@@ -51,18 +51,13 @@ namespace SonarAnalyzer.Rules
             ObjectCreationTracker.Track(context,
                 ObjectCreationTracker.MatchConstructors(
                     KnownType.System_Diagnostics_ProcessStartInfo),
-                WhenFirstArgumentIs(KnownType.System_String));
+                ObjectCreationTracker.FirstArgumentIs(KnownType.System_String));
         }
 
         private InvocationCondition WhenThereAreArguments() =>
             (context) =>
                 context.InvokedMethodSymbol.Value != null &&
                 context.InvokedMethodSymbol.Value.Parameters.Length > 0;
-
-        private ObjectCreationCondition WhenFirstArgumentIs(KnownType type) =>
-            (context) =>
-                context.InvokedConstructorSymbol.Value != null &&
-                context.InvokedConstructorSymbol.Value.ArgumentAtIndexIs(0, type);
 
         private InvocationCondition WhenFirstArgumentIsNot(KnownType type) =>
             (context) =>
