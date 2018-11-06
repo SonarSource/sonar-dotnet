@@ -52,29 +52,14 @@ namespace SonarAnalyzer.Helpers
                 {
                     return false; // No need to continue looping if the symbol is null
                 }
-                if (symbolFetcher.Value.ContainingType.ConstructedFrom.Is(m.ContainingType))
+                if (!checkOverriddenMethods && symbolFetcher.Value.ContainingType.ConstructedFrom.Is(m.ContainingType))
                 {
                     return true;
                 }
-                if (checkOverriddenMethods && IsOverride(m))
+                if (checkOverriddenMethods && symbolFetcher.Value.ContainingType.ConstructedFrom.DerivesOrImplements(m.ContainingType))
                 {
                     return true;
                 }
-            }
-
-            bool IsOverride(MethodSignature signature)
-            {
-                var currentMethod = symbolFetcher.Value.GetOverriddenMember();
-
-                while (currentMethod != null)
-                {
-                    if (currentMethod.ContainingType.ConstructedFrom.Is(signature.ContainingType))
-                    {
-                        return true;
-                    }
-                    currentMethod = currentMethod.GetOverriddenMember();
-                }
-                return false;
             }
 
             return false;

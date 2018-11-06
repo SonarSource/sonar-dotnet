@@ -315,16 +315,8 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static bool IsConstant(this ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            if (expression == null)
-            {
-                return false;
-            }
-
-            var strippedExpression = expression.RemoveParentheses();
-            return semanticModel.GetConstantValue(strippedExpression).HasValue;
-        }
+        public static bool IsConstant(this ExpressionSyntax expression, SemanticModel semanticModel) => 
+            expression != null && semanticModel.GetConstantValue(expression).HasValue;
 
         public static bool IsLeftSideOfAssignment(this ExpressionSyntax expression)
         {

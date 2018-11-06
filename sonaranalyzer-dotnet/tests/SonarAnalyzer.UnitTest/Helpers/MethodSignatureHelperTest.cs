@@ -220,6 +220,111 @@ End Namespace
             CheckIsMethodOrDerived(true, callToDocWriteTo, snippet, docWriteTo);
         }
 
+        [TestMethod]
+        public void CheckMatch_InterfaceMethods_CS()
+        {
+            var code = @"
+namespace Test
+{
+    sealed class Class1 : System.IDisposable
+    {
+        public void Test()
+        {
+            this.Dispose();
+        }
+
+        public void Dispose() { /* no-op */ }
+    }
+}
+";
+
+            var snippet = new SnippetCompiler(code);
+            DoCheckMatch_InterfaceMethods(snippet);
+        }
+
+        [TestMethod]
+        public void CheckMatch_InterfaceMethods_VB()
+        {
+            var code = @"
+Namespace Test
+    NotInheritable Class Class1
+        Implements System.IDisposable
+
+        Public Sub Test()
+            Dispose()
+        End Sub
+
+        Public Sub Dispose() Implements System.IDisposable.Dispose
+            ' no-op
+        End Sub
+    End Class
+End Namespace
+";
+
+            var snippet = new SnippetCompiler(code, false, AnalyzerLanguage.VisualBasic);
+            DoCheckMatch_InterfaceMethods(snippet);
+        }
+
+        private void DoCheckMatch_InterfaceMethods(SnippetCompiler snippet)
+        {
+            var dispose = new MethodSignature(KnownType.System_IDisposable, "Dispose");
+            var callToDispose = CreateContextForMethod("Class1.Dispose", snippet);
+
+            // Exact match should not match, but matching "derived" methods should
+            CheckExactMethod(false, callToDispose, snippet, dispose);
+            CheckIsMethodOrDerived(true, callToDispose, snippet, dispose);
+        }
+
+        [TestMethod]
+        public void CheckMatch_InterfaceMethods_NameMatchButNotOverride_CS()
+        {
+            var code = @"
+namespace Test
+{
+    sealed class Class1 : System.IDisposable
+    {
+        public void Test()
+        {
+            Dispose(42);      // <-- FALSE POSITIVE: shouldn't match since not implementing IDisposable.Dispose
+        }
+
+        public void Dispose(int data) {  /* no-op */ }
+
+        void System.IDisposable.Dispose() { /* no-op */ }
+    }
+}
+";
+            var snippet = new SnippetCompiler(code);
+            DoCheckMatch_InterfaceMethods(snippet);
+        }
+
+        [TestMethod]
+        public void CheckMatch_InterfaceMethods_NameMatchButNotOverride_VB()
+        {
+            var code = @"
+Namespace Test
+    NotInheritable Class Class1
+        Implements System.IDisposable
+
+        Public Sub Test()
+            Dispose(42)     ' <-- FALSE POSITIVE: shouldn't match since not implementing IDisposable.Dispose
+        End Sub
+
+        Public Sub Dispose(Data As Integer)
+            ' no-op
+        End Sub
+
+        Private Sub Dispose() Implements System.IDisposable.Dispose
+            ' no-op
+        End Sub
+    End Class
+End Namespace
+";
+
+            var snippet = new SnippetCompiler(code, false, AnalyzerLanguage.VisualBasic);
+            DoCheckMatch_InterfaceMethods(snippet);
+        }
+
         private static InvocationContext CreateContextForMethod(string typeAndMethodName, SnippetCompiler snippet)
         {
             var nameParts = typeAndMethodName.Split('.');
