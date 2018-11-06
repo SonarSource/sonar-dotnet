@@ -393,6 +393,7 @@ namespace SonarAnalyzer.Helpers
 
         private readonly bool isSpecialType;
         private readonly SpecialType specialType;
+
         private KnownType(string typeName)
         {
             TypeName = typeName;
