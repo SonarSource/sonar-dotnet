@@ -59,6 +59,9 @@ namespace SonarAnalyzer.UnitTest
         internal static IEnumerable<MetadataReference> SystemData { get; }
             = Create("System.Data.dll");
 
+        internal static IEnumerable<MetadataReference> SystemDataOracleClient { get; }
+            = Create("System.Data.OracleClient.dll");
+
         internal static IEnumerable<MetadataReference> SystemDirectoryServices { get; }
             = Create("System.DirectoryServices.dll");
 

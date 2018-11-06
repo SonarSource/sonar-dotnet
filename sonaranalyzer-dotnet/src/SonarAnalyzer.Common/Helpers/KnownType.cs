@@ -34,6 +34,9 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_NonControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.NonControllerAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_VirtualFileResult = new KnownType("Microsoft.AspNetCore.Mvc.VirtualFileResult");
         internal static readonly KnownType Microsoft_AspNetCore_Routing_VirtualPathData = new KnownType("Microsoft.AspNetCore.Routing.VirtualPathData");
+        internal static readonly KnownType Microsoft_EntityFrameworkCore_RawSqlString = new KnownType("Microsoft.EntityFrameworkCore.RawSqlString");
+        internal static readonly KnownType Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions = new KnownType("Microsoft.EntityFrameworkCore.RelationalDatabaseFacadeExtensions");
+        internal static readonly KnownType Microsoft_EntityFrameworkCore_RelationalQueryableExtensions = new KnownType("Microsoft.EntityFrameworkCore.RelationalQueryableExtensions");
         internal static readonly KnownType Microsoft_VisualBasic_Interaction = new KnownType("Microsoft.VisualBasic.Interaction");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_Assert = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.Assert");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_ExpectedExceptionAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.ExpectedExceptionAttribute");
@@ -134,6 +137,14 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Data_Common_CommandTrees_DbExpression = new KnownType("System.Data.Common.CommandTrees.DbExpression");
         internal static readonly KnownType System_Data_DataSet = new KnownType("System.Data.DataSet");
         internal static readonly KnownType System_Data_DataTable = new KnownType("System.Data.DataTable");
+        internal static readonly KnownType System_Data_Odbc_OdbcCommand = new KnownType("System.Data.Odbc.OdbcCommand");
+        internal static readonly KnownType System_Data_Odbc_OdbcDataAdapter = new KnownType("System.Data.Odbc.OdbcDataAdapter");
+        internal static readonly KnownType System_Data_OracleClient_OracleCommand = new KnownType("System.Data.OracleClient.OracleCommand");
+        internal static readonly KnownType System_Data_OracleClient_OracleDataAdapter = new KnownType("System.Data.OracleClient.OracleDataAdapter");
+        internal static readonly KnownType System_Data_SqlClient_SqlCommand = new KnownType("System.Data.SqlClient.SqlCommand");
+        internal static readonly KnownType System_Data_SqlClient_SqlDataAdapter = new KnownType("System.Data.SqlClient.SqlDataAdapter");
+        internal static readonly KnownType System_Data_SqlServerCe_SqlCeCommand = new KnownType("System.Data.SqlServerCe.SqlCeCommand");
+        internal static readonly KnownType System_Data_SqlServerCe_SqlCeDataAdapter = new KnownType("System.Data.SqlServerCe.SqlCeDataAdapter");
         internal static readonly KnownType System_DateTime = new KnownType(SpecialType.System_DateTime, "DateTime");
         internal static readonly KnownType System_Decimal = new KnownType(SpecialType.System_Decimal, "decimal");
         internal static readonly KnownType System_Delegate = new KnownType("System.Delegate");
@@ -159,6 +170,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Exception = new KnownType("System.Exception");
         internal static readonly KnownType System_ExecutionEngineException = new KnownType("System.ExecutionEngineException");
         internal static readonly KnownType System_FlagsAttribute = new KnownType("System.FlagsAttribute");
+        internal static readonly KnownType System_FormattableString = new KnownType("System.FormattableString");
         internal static readonly KnownType System_Func_TResult = new KnownType("System.Func<TResult>");
         internal static readonly KnownType System_Func_T_TResult = new KnownType("System.Func<T, TResult>");
         internal static readonly KnownType System_Func_T1_T2_TResult = new KnownType("System.Func<T1, T2, TResult>");
