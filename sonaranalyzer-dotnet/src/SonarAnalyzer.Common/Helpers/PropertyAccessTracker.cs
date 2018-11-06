@@ -89,6 +89,8 @@ namespace SonarAnalyzer.Helpers
 
         public abstract PropertyAccessCondition MatchSet();
 
+        public abstract PropertyAccessCondition AssignedValueIsConstant();
+
         #endregion
 
         #region Symbol-level standard conditions

@@ -51,18 +51,15 @@ namespace SonarAnalyzer.Helpers
                 context.Model, context.InvokedMethodSymbol, true, methods);
         }
 
-        public override bool FirstParameterIsStringAndIsNotConstant(InvocationContext context)
-        {
-            if (!base.FirstParameterIsString(context))
+        public override InvocationCondition FirstParameterIsConstant() =>
+            (context) =>
             {
-                return false;
-            }
+                var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
+                return argumentList != null &&
+                    argumentList.Arguments.Count > 0 &&
+                    argumentList.Arguments[0].GetExpression().IsConstant(context.Model);
+            };
 
-            var argumentsSyntax = (context.Invocation as InvocationExpressionSyntax)?
-                .ArgumentList?.Arguments.FirstOrDefault();
-
-            return !(argumentsSyntax?.GetExpression().IsConstant(context.Model) ?? false);
-        }
 
         #endregion
     }

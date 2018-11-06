@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -63,6 +64,13 @@ namespace SonarAnalyzer.Helpers
                 return conditions.All(c => c(objectCreationContext));
             }
         }
+
+        internal ObjectCreationCondition FirstArgumentIs(KnownType type) =>
+            (context) =>
+                context.InvokedConstructorSymbol.Value != null &&
+                context.InvokedConstructorSymbol.Value.ArgumentAtIndexIs(0, type);
+
+        internal abstract ObjectCreationCondition FirstArgumentIsConstant();
 
         internal ObjectCreationCondition MatchConstructors(params KnownType[] types)
         {
