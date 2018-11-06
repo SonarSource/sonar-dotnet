@@ -250,6 +250,15 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> MicrosoftAspNetMvc(string packageVersion) =>
             Create("Microsoft.AspNet.Mvc", packageVersion);
 
+        public static IEnumerable<MetadataReference> SystemDataSqlServerCe(string packageVersion) =>
+            Create("Microsoft.SqlServer.Compact", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftEntityFrameworkCore(string packageVersion) =>
+            Create("Microsoft.EntityFrameworkCore", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftEntityFrameworkCoreRelational(string packageVersion) =>
+            Create("Microsoft.EntityFrameworkCore.Relational", packageVersion);
+
         public static IEnumerable<MetadataReference> MicrosoftNetHttpHeaders(string packageVersion) =>
             Create("Microsoft.Net.Http.Headers", packageVersion);
 
