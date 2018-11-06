@@ -25,12 +25,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class ExecutingXPathTest
+    public class ExecutingXPathTest_CS
     {
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void ExecutingXPath()
+        public void ExecutingXPath_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingXPath.cs",
                 new ExecutingXPath(new TestAnalyzerConfiguration(null, "S4817")),
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void ExecutingXPath_RuleDisabled()
+        public void ExecutingXPath_CS_RuleDisabled()
         {
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\ExecutingXPath.cs",
                 new ExecutingXPath(),

@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4817";
-        protected const string MessageFormat = "Make sure that using the XPath expression is safe here.";
+        protected const string MessageFormat = "Make sure that executing this XPATH expression is safe.";
 
         protected abstract DiagnosticDescriptor Rule { get; }
 

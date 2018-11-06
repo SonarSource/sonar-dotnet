@@ -13,7 +13,7 @@
             var xpathNavigator = new XPathDocument("http://uri").CreateNavigator();
 
             var expression = "/users/user[@name='" + user + "' and @pass='" + pass + "']";
-            xpathNavigator.Evaluate(expression);             // Noncompliant {{Make sure that using the XPath expression is safe here.}}
+            xpathNavigator.Evaluate(expression);             // Noncompliant {{Make sure that executing this XPATH expression is safe.}}
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         }
 

@@ -10,7 +10,7 @@ Namespace Tests.TestCases
             Dim xpathNavigator = New XPathDocument("http://uri").CreateNavigator()
 
             Dim expression = "/users/user[@name='" + user + "' and @pass='" + pass + "']"
-            xpathNavigator.Evaluate(expression)     ' Noncompliant {{Make sure that using the XPath expression is safe here.}}
+            xpathNavigator.Evaluate(expression)     ' Noncompliant {{Make sure that executing this XPATH expression is safe.}}
 '           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         End Sub
 
