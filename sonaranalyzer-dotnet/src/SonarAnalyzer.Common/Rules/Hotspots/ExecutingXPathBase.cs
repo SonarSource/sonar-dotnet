@@ -50,8 +50,8 @@ namespace SonarAnalyzer.Rules
                     new MethodSignature(KnownType.System_Xml_XPath_XPathNavigator, "Select"),
                     new MethodSignature(KnownType.System_Xml_XPath_XPathNavigator, "SelectSingleNode")),
 
-                InvocationTracker.FirstParameterIsStringAndIsNotConstant
-
+                InvocationTracker.FirstParameterIsString,
+                Conditions.ExceptWhen(InvocationTracker.FirstParameterIsConstant())
             );
         }
     }
