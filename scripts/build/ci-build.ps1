@@ -135,7 +135,9 @@ function Invoke-SonarBeginAnalysis([array][parameter(ValueFromRemainingArguments
         /n:"SonarAnalyzer .Net" `
         /d:sonar.host.url=${sonarCloudUrl} `
         /d:sonar.login=$sonarCloudToken `
-        /o:sonarsource
+        /o:sonarsource `
+        /d:sonar.cs.vstest.reportsPaths="**\*.trx" `
+        /d:sonar.cs.vscoveragexml.reportsPaths="**\*.coveragexml" `
         $remainingArgs `
     } -errorMessage "ERROR: SonarCloud Analysis begin step FAILED."
 }
@@ -217,7 +219,7 @@ function Invoke-DotNetBuild() {
             /d:sonar.pullrequest.base=$githubPRTargetBranch `
             /d:sonar.pullrequest.provider=github `
             /d:sonar.pullrequest.github.repository=$githubRepo `
-            /v:$leakPeriodVersion `
+            /v:$leakPeriodVersion
     }
     elseif ($isMaster) {
         Invoke-SonarBeginAnalysis `
@@ -225,9 +227,7 @@ function Invoke-DotNetBuild() {
             /d:sonar.analysis.buildNumber=$buildNumber `
             /d:sonar.analysis.pipeline=$buildNumber `
             /d:sonar.analysis.sha1=$githubSha1 `
-            /d:sonar.analysis.repository=$githubRepo `
-            /d:sonar.cs.vstest.reportsPaths="**\*.trx" `
-            /d:sonar.cs.vscoveragexml.reportsPaths="**\*.coveragexml"
+            /d:sonar.analysis.repository=$githubRepo
     }
     elseif ($isMaintenanceBranch -or $isFeatureBranch) {
         Invoke-SonarBeginAnalysis `
@@ -236,9 +236,7 @@ function Invoke-DotNetBuild() {
             /d:sonar.analysis.pipeline=$buildNumber `
             /d:sonar.analysis.sha1=$githubSha1 `
             /d:sonar.analysis.repository=$githubRepo `
-            /d:sonar.branch.name=$branchName `
-            /d:sonar.cs.vstest.reportsPaths="**\*.trx" `
-            /d:sonar.cs.vscoveragexml.reportsPaths="**\*.coveragexml"
+            /d:sonar.branch.name=$branchName
     }
     else {
         $skippedAnalysis = $true
@@ -257,10 +255,7 @@ function Invoke-DotNetBuild() {
         /p:AssemblyOriginatorKeyFile=$certificatePath
 
     Invoke-UnitTests $binPath $true
-
-    if (-Not $isPullRequest) {
-        Invoke-CodeCoverage
-    }
+    Invoke-CodeCoverage
 
     if (-Not $skippedAnalysis) {
         Invoke-SonarEndAnalysis
