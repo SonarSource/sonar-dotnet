@@ -1,0 +1,80 @@
+<p>Executing SQL queries is security-sensitive. It has led in the past to the following vulnerabilities:</p>
+<ul>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-9019">CVE-2018-9019</a> </li>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7318">CVE-2018-7318</a> </li>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-5611">CVE-2017-5611</a> </li>
+</ul>
+<p><a href="https://www.owasp.org/index.php/SQL_Injection">SQL injection</a> is still one of the top 10 security vulnerabilities. Applications that
+execute SQL commands should neutralize any externally-provided values used in those commands. Failure to do so could allow an attacker to include
+input that changes the query so that unintended commands are executed, or sensitive data is exposed. Instead of trying to sanitize data by hand, SQL
+binding mechanisms should be used; they can be relied on to automatically perform a full sanitization.</p>
+<p>This rule checks a variety of methods which are susceptible to SQL injection if not used properly. Any SQL query built by concatenating or
+formatting Strings is considered susceptible. The goal is to guide security code reviews.</p>
+<p>The following specific method signatures are tested:</p>
+<ul>
+  <li> <code>System.Data.SqlClient.SqlCommand.SqlCommand(string, ...)</code> </li>
+  <li> <code>System.Data.SqlClient.SqlDataAdapter.SqlDataAdapter(string, ...)</code> </li>
+  <li> <code>System.Data.Odbc.OdbcCommand.OdbcCommand(string, ...)</code> </li>
+  <li> <code>System.Data.Odbc.OdbcDataAdapter.OdbcDataAdapter(string, ...)</code> </li>
+  <li> <code>System.Data.SqlServerCe.SqlCeCommand.SqlCeCommand(string, ...)</code> </li>
+  <li> <code>System.Data.SqlServerCe.SqlCeDataAdapter.SqlCeDataAdapter(string, ...)</code> </li>
+  <li> <code>System.Data.OracleClient.OracleCommand.OracleCommand(string, ...)</code> </li>
+  <li> <code>System.Data.OracleClient.OracleDataAdapter.OracleDataAdapter(string, ...)</code> </li>
+  <li> <code>Microsoft.EntityFrameworkCore.RelationalDatabaseFacadeExtensions.ExecuteSqlCommand(...)</code> </li>
+  <li> <code>Microsoft.EntityFrameworkCore.RelationalDatabaseFacadeExtensions.ExecuteSqlCommandAsync(...)</code> </li>
+  <li> <code>Microsoft.EntityFrameworkCore.RelationalQueryableExtensions.FromSql&lt;TEntity&gt;(System.Linq.IQueryable&lt;TEntity&gt;,
+  System.FormattableString)</code> </li>
+  <li> <code>System.Data.SqlClient.SqlCommand.CommandText.set</code> </li>
+  <li> <code>System.Data.Odbc.OdbcCommand.CommandText.set</code> </li>
+  <li> <code>System.Data.SqlServerCe.SqlCeCommand.CommandText.set</code> </li>
+  <li> <code>System.Data.OracleClient.OracleCommand.CommandText.set</code> </li>
+</ul>
+<h2>Ask Yourself Whether</h2>
+<ul>
+  <li> the SQL query contains any non sanitized input from a user or another untrusted source. </li>
+</ul>
+<p>You are at risk if you answered yes to this question.</p>
+<h2>Recommended Secure Coding Practices</h2>
+<ul>
+  <li> Avoid building queries manually using concatenation or formatting. If you do it anyway, do not include user input in this building process.
+  </li>
+  <li> Use <a href="https://www.owasp.org/index.php/Query_Parameterization_Cheat_Sheet">parameterized queries, prepared statements, or stored
+  procedures</a> whenever possible. </li>
+  <li> You may also use libraries such as Hibernate which, if used correctly, reduce injection risks. </li>
+  <li> Avoid executing SQL queries containing unsafe input in stored procedures or functions. </li>
+  <li> <a href="https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet">Sanitize</a> every unsafe input. </li>
+</ul>
+<p>You can also reduce the impact of an attack by using a database account with low privileges.</p>
+<h2>Questionable Code Example</h2>
+<pre>
+Public Sub SqlCommands(ByVal connection As SqlConnection, ByVal query As String)
+    Dim command As SqlCommand
+    command = New SqlCommand(query) ' Questionable
+
+    command.CommandText = query ' Questionable
+
+    Dim adapter As SqlDataAdapter
+    adapter = New SqlDataAdapter(query, connection) ' Questionable
+End Sub
+
+Public Sub Foo(ByVal context As DbContext, ByVal query As String)
+    context.Database.ExecuteSqlCommand(query) ' Questionable
+
+    context.Query(Of User)().FromSql(query) ' Questionable
+End Sub
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="http://cwe.mitre.org/data/definitions/89">MITRE, CWE-89</a> - Improper Neutralization of Special Elements used in an SQL Command </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/564.html">MITRE, CWE-564</a> - SQL Injection: Hibernate </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/20.html">MITRE, CWE-20</a> - Improper Input Validation </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/943.html">MITRE, CWE-943</a> - Improper Neutralization of Special Elements in Data Query Logic
+  </li>
+  <li> OWASP Top 10 2017 Category A1 - Injection </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/PgIRAg">CERT, IDS00-J.</a> - Prevent SQL injection </li>
+  <li> <a href="https://www.sans.org/top25-software-errors/#cat1">SANS Top 25</a> - Insecure Interaction Between Components </li>
+  <li> Derived from FindSecBugs rules <a href="http://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_JPA">Potential SQL/JPQL Injection
+  (JPA)</a>, <a href="http://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_JDO">Potential SQL/JDOQL Injection (JDO)</a>, <a
+  href="http://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_HIBERNATE">Potential SQL/HQL Injection (Hibernate)</a> </li>
+</ul>
+
