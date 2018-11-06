@@ -123,7 +123,7 @@ function Invoke-MSBuild (
 function Invoke-UnitTests([string]$binPath, [bool]$failsIfNotTest) {
     Write-Header "Running unit tests"
 
-    $escapedPath = $binPath -Replace '\\', '\\'
+    $escapedPath = (Join-Path $binPath "net46") -Replace '\\', '\\'
 
     Write-Debug "Running unit tests for"
     $testFiles = @()
@@ -138,8 +138,7 @@ function Invoke-UnitTests([string]$binPath, [bool]$failsIfNotTest) {
         }
     $testDirs = $testDirs | Select-Object -Uniq
 
-    & (Get-VsTestPath) $testFiles /Parallel /Enablecodecoverage /InIsolation /Logger:trx /UseVsixExtensions:true `
-        /TestAdapterPath:$testDirs
+    & (Get-VsTestPath) $testFiles /Parallel /Enablecodecoverage /InIsolation /Logger:trx /TestAdapterPath:$testDirs
     Test-ExitCode "ERROR: Unit Tests execution FAILED."
 }
 
