@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4818",
+"message":  "Make sure that sockets are used safely here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\DatagramChannel.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  40,
+"endLine":  22,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S4818",
+"message":  "Make sure that sockets are used safely here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\SocketChannel.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  38,
+"endLine":  35,
+"endColumn":  85
+}
+}
+}
+]
+}
