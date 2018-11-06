@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -76,7 +77,7 @@ namespace SonarAnalyzer.Helpers
 
         public abstract InvocationCondition MatchSimpleNames(params MethodSignature[] methods);
 
-        public abstract bool FirstParameterIsStringAndIsNotConstant(InvocationContext context);
+        public abstract InvocationCondition FirstParameterIsConstant();
 
         #endregion
 

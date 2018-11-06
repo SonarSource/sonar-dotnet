@@ -43,6 +43,17 @@ namespace SonarAnalyzer.Helpers
         public static readonly string NameOfKeywordText =
             SyntaxFacts.GetText(SyntaxKind.NameOfKeyword);
 
+        private static readonly SyntaxKind[] LiteralSyntaxKinds =
+            new[]
+            {
+                SyntaxKind.CharacterLiteralExpression,
+                SyntaxKind.FalseLiteralExpression,
+                SyntaxKind.NullLiteralExpression,
+                SyntaxKind.NumericLiteralExpression,
+                SyntaxKind.StringLiteralExpression,
+                SyntaxKind.TrueLiteralExpression,
+            };
+
         public static bool AnyOfKind(this IEnumerable<SyntaxNode> nodes, SyntaxKind kind) =>
             nodes.Any(n => n.RawKind == (int)kind);
 
@@ -162,6 +173,9 @@ namespace SonarAnalyzer.Helpers
                    nameSymbolInfo.Symbol.IsInType(KnownType.System_String) &&
                    nameSymbolInfo.Symbol.Name == nameof(string.Empty);
         }
+
+        public static bool IsAnyKind(this SyntaxNode syntaxNode, params SyntaxKind[] syntaxKinds) =>
+            syntaxNode != null && syntaxKinds.Contains((SyntaxKind)syntaxNode.RawKind);
 
         public static bool IsAnyKind(this SyntaxNode syntaxNode, ISet<SyntaxKind> syntaxKinds) =>
             syntaxNode != null && syntaxKinds.Contains((SyntaxKind)syntaxNode.RawKind);
@@ -315,8 +329,15 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static bool IsConstant(this ExpressionSyntax expression, SemanticModel semanticModel) => 
-            expression != null && semanticModel.GetConstantValue(expression).HasValue;
+        public static bool IsConstant(this ExpressionSyntax expression, SemanticModel semanticModel)
+        {
+            if (expression == null)
+            {
+                return false;
+            }
+            return expression.RemoveParentheses().IsAnyKind(LiteralSyntaxKinds) ||
+                semanticModel.GetConstantValue(expression).HasValue;
+        }
 
         public static bool IsLeftSideOfAssignment(this ExpressionSyntax expression)
         {

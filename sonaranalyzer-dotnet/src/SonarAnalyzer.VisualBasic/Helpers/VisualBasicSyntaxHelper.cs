@@ -28,6 +28,17 @@ namespace SonarAnalyzer.Helpers.VisualBasic
 {
     internal static class VisualBasicSyntaxHelper
     {
+        private static readonly SyntaxKind[] LiteralSyntaxKinds =
+            new[]
+            {
+                SyntaxKind.CharacterLiteralExpression,
+                SyntaxKind.FalseLiteralExpression,
+                SyntaxKind.NothingLiteralExpression,
+                SyntaxKind.NumericLiteralExpression,
+                SyntaxKind.StringLiteralExpression,
+                SyntaxKind.TrueLiteralExpression,
+            };
+
         public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
         {
             var currentExpression = expression;
@@ -74,6 +85,9 @@ namespace SonarAnalyzer.Helpers.VisualBasic
         }
 
         #endregion Statement
+
+        public static bool IsAnyKind(this SyntaxNode syntaxNode, params SyntaxKind[] syntaxKinds) =>
+           syntaxNode != null && syntaxKinds.Contains((SyntaxKind)syntaxNode.RawKind);
 
         public static bool IsAnyKind(this SyntaxToken syntaxToken, ISet<SyntaxKind> collection) =>
             collection.Contains((SyntaxKind)syntaxToken.RawKind);
@@ -151,8 +165,15 @@ namespace SonarAnalyzer.Helpers.VisualBasic
             }
         }
 
-        public static bool IsConstant(this ExpressionSyntax expression, SemanticModel semanticModel) =>
-            expression != null && semanticModel.GetConstantValue(expression).HasValue;
+        public static bool IsConstant(this ExpressionSyntax expression, SemanticModel semanticModel)
+        {
+            if (expression == null)
+            {
+                return false;
+            }
+            return expression.RemoveParentheses().IsAnyKind(LiteralSyntaxKinds) ||
+                semanticModel.GetConstantValue(expression).HasValue;
+        }
 
         public static bool IsLeftSideOfAssignment(this ExpressionSyntax expression)
         {
