@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Helpers
             return (context) =>
             {
                 return MethodSignatureHelper.IsMatch(context.Identifier as SimpleNameSyntax,
-                    context.Model, context.InvokedPropertySymbol, methods);
+                    context.Model, context.InvokedPropertySymbol, false, methods);
             };
         }
 

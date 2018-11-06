@@ -23,17 +23,17 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 
-    /**********************************************************
-    * When maintaining this class, don't forget to change the
-    * corresponding class in the Visual Basic analyzer
-    *********************************************************/
+/**********************************************************
+* When maintaining this class, don't forget to change the
+* corresponding class in the Visual Basic analyzer
+*********************************************************/
 
 namespace SonarAnalyzer.Helpers
 {
     internal static class MethodSignatureHelper
     {
         public static bool IsMatch<TSymbolType>(SimpleNameSyntax identifierName, SemanticModel semanticModel,
-            Lazy<TSymbolType> symbolFetcher, MethodSignature[] methods)
+            Lazy<TSymbolType> symbolFetcher, bool checkOverriddenMethods, MethodSignature[] methods)
             where TSymbolType : class, ISymbol
         {
             if (identifierName == null)
@@ -52,11 +52,16 @@ namespace SonarAnalyzer.Helpers
                 {
                     return false; // No need to continue looping if the symbol is null
                 }
-                if (symbolFetcher.Value.ContainingType.ConstructedFrom.Is(m.ContainingType))
+                if (!checkOverriddenMethods && symbolFetcher.Value.ContainingType.ConstructedFrom.Is(m.ContainingType))
+                {
+                    return true;
+                }
+                if (checkOverriddenMethods && symbolFetcher.Value.ContainingType.ConstructedFrom.DerivesOrImplements(m.ContainingType))
                 {
                     return true;
                 }
             }
+
             return false;
         }
     }

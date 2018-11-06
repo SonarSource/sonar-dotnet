@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
+    [System.Diagnostics.DebuggerStepThrough]
     public class MethodSignature
     {
         internal MethodSignature(KnownType containingType, string name)
