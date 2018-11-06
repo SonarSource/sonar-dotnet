@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
@@ -36,5 +37,14 @@ namespace SonarAnalyzer.Helpers
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
             CSharp.GeneratedCodeRecognizer.Instance;
+
+        internal override ObjectCreationCondition FirstArgumentIsConstant() =>
+            (context) =>
+            {
+                var argumentList = ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList;
+                return argumentList != null &&
+                    argumentList.Arguments.Count > 0 &&
+                    argumentList.Arguments[0].Expression.IsConstant(context.Model);
+            };
     }
 }

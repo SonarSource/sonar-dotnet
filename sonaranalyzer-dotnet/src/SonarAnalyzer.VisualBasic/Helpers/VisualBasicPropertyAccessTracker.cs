@@ -65,6 +65,16 @@ namespace SonarAnalyzer.Helpers
         public override PropertyAccessCondition MatchSet() =>
             (context) => ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
 
+        public override PropertyAccessCondition AssignedValueIsConstant() =>
+            (context) =>
+            {
+                var assignment = (AssignmentStatementSyntax)context.Expression.Ancestors()
+                    .FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentStatement));
+
+                return assignment != null &&
+                    assignment.Right.IsConstant(context.Model);
+            };
+
         #endregion
     }
 }
