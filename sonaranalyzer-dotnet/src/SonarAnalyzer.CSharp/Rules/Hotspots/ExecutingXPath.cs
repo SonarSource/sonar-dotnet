@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override InvocationTracker<SyntaxKind> Tracker { get; }
+        protected override InvocationTracker<SyntaxKind> InvocationTracker { get; }
 
         protected override DiagnosticDescriptor Rule { get; } = rule;
 
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal /*for testing*/ ExecutingXPath(IAnalyzerConfiguration analysisConfiguration)
         {
-            Tracker = new CSharpInvocationTracker(analysisConfiguration, Rule);
+            InvocationTracker = new CSharpInvocationTracker(analysisConfiguration, Rule);
         }
     }
 }

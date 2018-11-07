@@ -35,13 +35,12 @@ namespace SonarAnalyzer.Rules
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
             ImmutableArray.Create(Rule);
 
-        protected abstract InvocationTracker<TSyntaxKind> Tracker { get; }
+        protected abstract InvocationTracker<TSyntaxKind> InvocationTracker { get; }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            Tracker.Track(context,
-
-                Tracker.MatchSimpleNames(
+            InvocationTracker.Track(context,
+                InvocationTracker.MatchSimpleNames(
                     new MethodSignature(KnownType.System_Xml_XmlNode, "SelectNodes"),
                     new MethodSignature(KnownType.System_Xml_XmlNode, "SelectSingleNode"),
                     new MethodSignature(KnownType.System_Xml_XPath_XPathExpression, "Compile"),
@@ -51,7 +50,7 @@ namespace SonarAnalyzer.Rules
                     new MethodSignature(KnownType.System_Xml_XPath_XPathNavigator, "Select"),
                     new MethodSignature(KnownType.System_Xml_XPath_XPathNavigator, "SelectSingleNode")),
 
-                Tracker.FirstParameterIsStringAndIsNotConstant
+                InvocationTracker.FirstParameterIsStringAndIsNotConstant
 
             );
         }

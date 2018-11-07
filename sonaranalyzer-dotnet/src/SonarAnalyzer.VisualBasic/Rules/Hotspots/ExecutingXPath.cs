@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override InvocationTracker<SyntaxKind> Tracker { get; }
+        protected override InvocationTracker<SyntaxKind> InvocationTracker { get; }
 
         protected override DiagnosticDescriptor Rule { get; } = rule;
 
@@ -45,9 +45,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
             : this(new DefaultAnalyzerConfiguration())
         {
         }
+
         internal /*for testing*/ ExecutingXPath(IAnalyzerConfiguration analysisConfiguration)
         {
-            Tracker = new VisualBasicInvocationTracker(analysisConfiguration, Rule);
+            InvocationTracker = new VisualBasicInvocationTracker(analysisConfiguration, Rule);
         }
     }
 }
