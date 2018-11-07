@@ -40,22 +40,19 @@ namespace SonarAnalyzer.Helpers
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
             VisualBasic.GeneratedCodeRecognizer.Instance;
 
-        protected override BaseTypeContext CreateContext(SyntaxNode baseTypeList, SemanticModel semanticModel) =>
-            new BaseTypeContext(baseTypeList, GetBaseTypeNodes(baseTypeList), semanticModel);
-
-        private static IEnumerable<SyntaxNode> GetBaseTypeNodes(SyntaxNode contextNode)
+        protected override IEnumerable<SyntaxNode> GetBaseTypeNodes(SyntaxNode contextNode)
         {
             // VB has separate Inherits and Implements keywords so the base types
             // are in separate lists under different types of syntax node.
             // If a class both inherits and implements then this tracker will check
             // the conditions against Inherits and Implements *separately*
             // i.e. the conditions will be called twice
-            switch (contextNode)
+            switch (contextNode.RawKind)
             {
-                case InheritsStatementSyntax inherits:
-                    return inherits.Types;
-                case ImplementsStatementSyntax implements:
-                    return implements.Types;
+                case (int)SyntaxKind.InheritsStatement:
+                    return ((InheritsStatementSyntax)contextNode).Types;
+                case (int)SyntaxKind.ImplementsStatement:
+                    return ((ImplementsStatementSyntax)contextNode).Types;
                 default:
                     return Enumerable.Empty<SyntaxNode>();
             }

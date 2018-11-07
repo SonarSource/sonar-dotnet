@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4790",
+"message":  "Make sure that hashing data is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHashing.vb",
+"region":  {
+"startLine":  96,
+"startColumn":  26,
+"endLine":  96,
+"endColumn":  54
+}
+}
+}
+]
+}

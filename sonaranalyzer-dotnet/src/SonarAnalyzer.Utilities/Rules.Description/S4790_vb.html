@@ -1,0 +1,62 @@
+<p>Hashing data is security-sensitive. It has led in the past to the following vulnerabilities:</p>
+<ul>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-9233">CVE-2018-9233</a> </li>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-5097">CVE-2013-5097</a> </li>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-1051">CVE-2007-1051</a> </li>
+</ul>
+<p>Cryptographic hash functions are used to uniquely identify information without storing their original form. When not done properly, an attacker can
+steal the original information by guessing it (ex: with a <a href="https://en.wikipedia.org/wiki/Rainbow_table">rainbow table</a>), or replace the
+original data with another one having the same hash.</p>
+<p>This rule flags code that initiates hashing.</p>
+<h2>Ask Yourself Whether</h2>
+<ul>
+  <li> the hashed value is used for security purpose. </li>
+  <li> the hashing algorithm you are using is known to have vulnerabilities. </li>
+  <li> a <a href="https://en.wikipedia.org/wiki/Salt_(cryptography)">"salt"</a> is not added to the input before hashing. </li>
+  <li> the salt value is always the same, or it is not random, or it is reused. </li>
+  <li> the salt is shorter than the resulting hash value. </li>
+</ul>
+<p>You are at risk if you answered yes to the first question and any of the following ones.</p>
+<h2>Recommended Secure Coding Practices</h2>
+<ul>
+  <li> use only hashing algorithms which are <a href="https://en.wikipedia.org/wiki/Hash_function_security_summary">known to be strong</a>. Check
+  regularly that this is still the case as hashing algorithms strength change with time. Do not define your own Hashing algorithms as they will most
+  probably have flaws. </li>
+  <li> generate a long random salt. </li>
+  <li> the salt is at least as long as the resulting hash value. </li>
+  <li> append the value being hashed to the salt and pass the whole thing into a standard hash function such as SHA256. </li>
+  <li> save both the salt and the hashed value in the relevant database record; during future validation operations, the salt and hash can then be
+  retrieved from the database. The hash is recalculated with the stored salt and the value being validated, and the result compared to the stored
+  hash. </li>
+</ul>
+<h2>Questionable Code Example</h2>
+<pre>
+Imports System.Security.Cryptography
+
+Sub ComputeHash()
+
+    ' Review all instantiations of classes that inherit from HashAlgorithm, for example:
+    Dim hashAlgo As HashAlgorithm = HashAlgorithm.Create() ' Questionable
+    Dim hashAlgo2 As HashAlgorithm = HashAlgorithm.Create("SHA1") ' Questionable
+    Dim sha As SHA1 = New SHA1CryptoServiceProvider() ' Questionable
+    Dim md5 As MD5 = New MD5CryptoServiceProvider() ' Questionable
+
+    ' ...
+End Sub
+
+Class MyHashAlgorithm
+    Inherits HashAlgorithm ' Questionable
+
+    ' ...
+End Class
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://cwe.mitre.org/data/definitions/916.html">MITRE, CWE-916</a> - Use of Password Hash With Insufficient Computational Effort
+  </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/759.html">MITRE, CWE-759</a> - Use of a One-Way Hash without a Salt </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/760.html">MITRE, CWE-760</a> - Use of a One-Way Hash with a Predictable Salt </li>
+  <li> OWASP Top 10 2017 Category A3 - Sensitive Data Exposure </li>
+  <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
+</ul>
+
