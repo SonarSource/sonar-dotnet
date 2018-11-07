@@ -61,6 +61,9 @@ namespace SonarAnalyzer.Helpers
             };
 
 
+        public override InvocationCondition WhenMethodNameIs(string methodName) =>
+               (context) => context.Identifier is SimpleNameSyntax nameSyntax
+                            && nameSyntax.Identifier.ValueText == methodName;
         #endregion
     }
 }

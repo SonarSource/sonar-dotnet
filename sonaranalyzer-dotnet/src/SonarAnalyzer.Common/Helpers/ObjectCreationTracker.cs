@@ -82,5 +82,11 @@ namespace SonarAnalyzer.Helpers
                 context.InvokedConstructorSymbol.Value.IsConstructor() &&
                 context.InvokedConstructorSymbol.Value.ContainingType.IsAny(types);
         }
+
+        internal ObjectCreationCondition WhenDerivesFrom(KnownType baseType) =>
+            (context) =>
+                context.InvokedConstructorSymbol.Value != null &&
+                context.InvokedConstructorSymbol.Value.IsConstructor() &&
+                context.InvokedConstructorSymbol.Value.ContainingType.DerivesFrom(baseType);
     }
 }
