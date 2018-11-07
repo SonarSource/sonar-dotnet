@@ -69,6 +69,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private static void CompareActualToExpected(IEnumerable<Diagnostic> diagnostics, List<IIssueLocation> expectedIssues, bool compareIdToMessage)
         {
+            DumpActualDiagnostics(diagnostics);
+
             foreach (var diagnostic in diagnostics)
             {
                 VerifyIssue(expectedIssues,
@@ -98,6 +100,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 Execute.Assertion.FailWith($"Issue expected but not raised on line(s) " +
                     $"{string.Join(",", expectedIssues.Select(i => i.LineNumber))}.");
+            }
+        }
+
+        private static void DumpActualDiagnostics(IEnumerable<Diagnostic> diagnostics)
+        {
+            Console.WriteLine($"Actual diagnostics: {diagnostics.Count()}");
+            foreach(var d in diagnostics.OrderBy(x => x.GetLineNumberToReport()))
+            {
+                var lineSpan = d.Location.GetLineSpan();
+                Console.WriteLine($"  Id: {d.Id}, Line: {d.Location.GetLineNumberToReport()}, " +
+                    $"[{lineSpan.StartLinePosition.Character}, {lineSpan.EndLinePosition.Character}]");
             }
         }
 
