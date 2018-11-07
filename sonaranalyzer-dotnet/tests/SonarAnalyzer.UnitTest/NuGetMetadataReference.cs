@@ -232,6 +232,18 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> FluentAssertions(string packageVersion) =>
             Create("FluentAssertions", packageVersion);
 
+        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreDiagnostics(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Diagnostics", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreHostingAbstractions(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Hosting.Abstractions", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreHttpAbstractions(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Http.Abstractions", packageVersion);
+
         public static IEnumerable<MetadataReference> MicrosoftAspNetCoreMvcAbstractions(string packageVersion) =>
             Create("Microsoft.AspNetCore.Mvc.Abstractions", packageVersion);
 
