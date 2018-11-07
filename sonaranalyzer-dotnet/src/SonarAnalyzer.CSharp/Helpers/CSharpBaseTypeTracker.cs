@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -39,9 +40,7 @@ namespace SonarAnalyzer.Helpers
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
             CSharp.GeneratedCodeRecognizer.Instance;
 
-        protected override BaseTypeContext CreateContext(SyntaxNode baseTypeList, SemanticModel semanticModel) =>
-            new BaseTypeContext(baseTypeList,
-                ((BaseListSyntax)baseTypeList)?.Types.Select(t => t.Type).ToArray(), semanticModel);
-        
+        protected override IEnumerable<SyntaxNode> GetBaseTypeNodes(SyntaxNode contextNode) =>
+            ((BaseListSyntax)contextNode)?.Types.Select(t => t.Type).ToArray();
     }
 }

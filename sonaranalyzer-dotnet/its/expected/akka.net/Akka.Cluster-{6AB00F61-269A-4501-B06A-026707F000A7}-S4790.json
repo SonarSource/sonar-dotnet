@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4790",
+"message":  "Make sure that hashing data is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  27,
+"endLine":  65,
+"endColumn":  68
+}
+}
+}
+]
+}
