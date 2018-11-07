@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -66,9 +67,16 @@ namespace SonarAnalyzer.Helpers
                 }
             }
 
-            bool IsTrackedRelationship(SyntaxNode objectCreationExpression, SemanticModel semanticModel, out Location issueLocation)
+            bool IsTrackedRelationship(SyntaxNode contextNode, SemanticModel semanticModel, out Location issueLocation)
             {
-                var baseClassContext = CreateContext(objectCreationExpression, semanticModel);
+                var baseTypeList = GetBaseTypeNodes(contextNode);
+                if (baseTypeList == null || !baseTypeList.Any())
+                {
+                    issueLocation = Location.None;
+                    return false;
+                }
+
+                var baseClassContext = new BaseTypeContext(contextNode, baseTypeList, semanticModel);
 
                 // We can't pass the issueLocation to the lambda directly so we need a temporary variable
                 Location locationToReport = null;
@@ -82,7 +90,10 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        protected abstract BaseTypeContext CreateContext(SyntaxNode baseTypeList, SemanticModel semanticModel);
+        /// <summary>
+        /// Extract the list of type syntax nodes for the base types/interface types
+        /// </summary>
+        protected abstract IEnumerable<SyntaxNode> GetBaseTypeNodes(SyntaxNode contextNode);
 
         #region Language-agnostic conditions
 
