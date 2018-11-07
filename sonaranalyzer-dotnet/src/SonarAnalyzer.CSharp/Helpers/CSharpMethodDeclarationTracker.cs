@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Helpers
                     {
                         return node.IsKind(SyntaxKind.IdentifierName) &&
                             ((IdentifierNameSyntax)node).Identifier.ValueText == parameterSymbol.Name &&
-                            parameterSymbol == semanticModel.GetSymbolInfo(node).Symbol;
+                            parameterSymbol.Equals(semanticModel.GetSymbolInfo(node).Symbol);
                     });
             };
 
