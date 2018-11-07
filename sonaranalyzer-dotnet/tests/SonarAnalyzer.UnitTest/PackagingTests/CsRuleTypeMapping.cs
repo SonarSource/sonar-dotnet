@@ -4820,7 +4820,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["4820"],
             //["4821"],
             //["4822"],
-            //["4823"],
+            ["4823"] = "SECURITY_HOTSPOT",
             //["4824"],
             //["4825"],
             //["4826"],
