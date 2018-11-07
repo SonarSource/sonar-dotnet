@@ -28,6 +28,9 @@ namespace SonarAnalyzer.Helpers
         #region Known types
 
         internal static readonly KnownType Void = new KnownType(SpecialType.System_Void, "void");
+        internal static readonly KnownType Microsoft_AspNetCore_Builder_DeveloperExceptionPageExtensions = new KnownType("Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions");
+        internal static readonly KnownType Microsoft_AspNetCore_Builder_DatabaseErrorPageExtensions = new KnownType("Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions");
+        internal static readonly KnownType Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions = new KnownType("Microsoft.AspNetCore.Hosting.HostingEnvironmentExtensions");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_Controller = new KnownType("Microsoft.AspNetCore.Mvc.Controller");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerBase = new KnownType("Microsoft.AspNetCore.Mvc.ControllerBase");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.ControllerAttribute");
@@ -414,7 +417,6 @@ namespace SonarAnalyzer.Helpers
                 System_UInt32,
                 System_UInt16
             );
-
         #endregion Known types
 
         private readonly bool isSpecialType;
