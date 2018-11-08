@@ -83,7 +83,11 @@ namespace SonarAnalyzer.Helpers
 
         #region Symbol-level standard conditions
 
-        // Example symbol methods
+        public InvocationCondition IsStatic() =>
+            (context) =>
+                context.InvokedMethodSymbol.Value != null &&
+                context.InvokedMethodSymbol.Value.IsStatic;
+
         public bool FirstParameterIsString(InvocationContext context)
         {
             var firstParam = context.InvokedMethodSymbol.Value?.Parameters.FirstOrDefault();
