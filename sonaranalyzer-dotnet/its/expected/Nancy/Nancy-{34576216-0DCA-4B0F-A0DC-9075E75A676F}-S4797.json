@@ -1,0 +1,238 @@
+{
+"issues":  [
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  17,
+"endLine":  174,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  42,
+"endLine":  230,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  24,
+"endLine":  80,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  20,
+"endLine":  98,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  22,
+"endLine":  167,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  353,
+"startColumn":  41,
+"endLine":  353,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  355,
+"startColumn":  20,
+"endLine":  361,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  380,
+"startColumn":  52,
+"endLine":  380,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  387,
+"startColumn":  17,
+"endLine":  387,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  35,
+"endLine":  78,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  18,
+"endLine":  87,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  22,
+"endLine":  136,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  100,
+"endLine":  24,
+"endColumn":  173
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  20,
+"endLine":  35,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  107,
+"endLine":  48,
+"endColumn":  180
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  20,
+"endLine":  54,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  20,
+"endLine":  72,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\FileSystemViewLocationProvider.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  18,
+"endLine":  73,
+"endColumn":  40
+}
+}
+}
+]
+}

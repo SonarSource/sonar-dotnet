@@ -41,13 +41,9 @@ namespace SonarAnalyzer.Helpers
         protected override SyntaxNode GetIdentifier(SyntaxNode invocationExpression) =>
             ((InvocationExpressionSyntax)invocationExpression).Expression.GetIdentifier();
 
-        #region Syntax-level checking methods
-
-        public override InvocationCondition MatchSimpleNames(params MethodSignature[] methods)
-        {
-            return (context) => MethodSignatureHelper.IsMatch(context.Identifier as SimpleNameSyntax,
-                    context.Model, context.InvokedMethodSymbol, true, methods);
-        }
+        public override InvocationCondition MatchSimpleNames(params MethodSignature[] methods) =>
+            (context) => MethodSignatureHelper.IsMatch(context.Identifier as SimpleNameSyntax,
+                context.Model, context.InvokedMethodSymbol, true, methods);
 
         public override InvocationCondition FirstParameterIsConstant() =>
             (context) =>
@@ -58,10 +54,8 @@ namespace SonarAnalyzer.Helpers
                     argumentList.Arguments[0].Expression.IsConstant(context.Model);
             };
 
-        public override InvocationCondition WhenMethodNameIs(string methodName) =>
-            (context) => context.Identifier is SimpleNameSyntax nameSyntax
-                        && nameSyntax.Identifier.ValueText == methodName;
-   
-        #endregion
+        public override InvocationCondition MethodNameIs(string methodName) =>
+            (context) =>
+                ((SimpleNameSyntax)context.Identifier).Identifier.ValueText == methodName;
     }
 }

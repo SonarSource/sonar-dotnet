@@ -1,0 +1,1213 @@
+{
+"issues":  [
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  43,
+"startColumn":  20,
+"endLine":  43,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  44,
+"startColumn":  17,
+"endLine":  44,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  46,
+"startColumn":  27,
+"endLine":  46,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  100,
+"startColumn":  24,
+"endLine":  100,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  101,
+"startColumn":  21,
+"endLine":  101,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  131,
+"startColumn":  38,
+"endLine":  131,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  131,
+"startColumn":  58,
+"endLine":  131,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  38,
+"endLine":  133,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  58,
+"endLine":  133,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  78,
+"endLine":  133,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  135,
+"startColumn":  38,
+"endLine":  135,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  141,
+"startColumn":  16,
+"endLine":  141,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  142,
+"startColumn":  13,
+"endLine":  142,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  153,
+"startColumn":  40,
+"endLine":  153,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  155,
+"startColumn":  89,
+"endLine":  155,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  158,
+"startColumn":  28,
+"endLine":  158,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  160,
+"startColumn":  21,
+"endLine":  160,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  178,
+"startColumn":  33,
+"endLine":  178,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  185,
+"startColumn":  35,
+"endLine":  185,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  54,
+"startColumn":  33,
+"endLine":  54,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  58,
+"startColumn":  16,
+"endLine":  58,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  59,
+"startColumn":  17,
+"endLine":  59,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  60,
+"startColumn":  20,
+"endLine":  60,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  61,
+"startColumn":  17,
+"endLine":  61,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  62,
+"startColumn":  20,
+"endLine":  62,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  63,
+"startColumn":  17,
+"endLine":  63,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  64,
+"startColumn":  20,
+"endLine":  64,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  65,
+"startColumn":  17,
+"endLine":  65,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  401,
+"startColumn":  27,
+"endLine":  401,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  404,
+"startColumn":  24,
+"endLine":  404,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  405,
+"startColumn":  21,
+"endLine":  405,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  458,
+"startColumn":  56,
+"endLine":  458,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  459,
+"startColumn":  21,
+"endLine":  459,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  482,
+"startColumn":  27,
+"endLine":  482,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  484,
+"startColumn":  24,
+"endLine":  484,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  485,
+"startColumn":  21,
+"endLine":  485,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  668,
+"startColumn":  54,
+"endLine":  668,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  668,
+"startColumn":  74,
+"endLine":  668,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  670,
+"startColumn":  54,
+"endLine":  670,
+"endColumn":  150
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  670,
+"startColumn":  74,
+"endLine":  670,
+"endColumn":  140
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  670,
+"startColumn":  94,
+"endLine":  670,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  672,
+"startColumn":  54,
+"endLine":  672,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  678,
+"startColumn":  28,
+"endLine":  678,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  679,
+"startColumn":  25,
+"endLine":  679,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  685,
+"startColumn":  36,
+"endLine":  685,
+"endColumn":  152
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  73,
+"startColumn":  57,
+"endLine":  73,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  75,
+"startColumn":  40,
+"endLine":  75,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  78,
+"startColumn":  17,
+"endLine":  78,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  88,
+"startColumn":  98,
+"endLine":  88,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  90,
+"startColumn":  44,
+"endLine":  90,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  128,
+"startColumn":  37,
+"endLine":  128,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  158,
+"startColumn":  98,
+"endLine":  158,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  172,
+"startColumn":  40,
+"endLine":  172,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  173,
+"startColumn":  17,
+"endLine":  173,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  282,
+"startColumn":  75,
+"endLine":  282,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  283,
+"startColumn":  13,
+"endLine":  283,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  248,
+"startColumn":  59,
+"endLine":  248,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  248,
+"startColumn":  79,
+"endLine":  248,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  250,
+"startColumn":  59,
+"endLine":  250,
+"endColumn":  156
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  250,
+"startColumn":  79,
+"endLine":  250,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  250,
+"startColumn":  99,
+"endLine":  250,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  252,
+"startColumn":  80,
+"endLine":  252,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  270,
+"startColumn":  40,
+"endLine":  270,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  298,
+"startColumn":  59,
+"endLine":  298,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  298,
+"startColumn":  79,
+"endLine":  298,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  300,
+"startColumn":  59,
+"endLine":  300,
+"endColumn":  156
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  300,
+"startColumn":  79,
+"endLine":  300,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  300,
+"startColumn":  99,
+"endLine":  300,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  302,
+"startColumn":  80,
+"endLine":  302,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  320,
+"startColumn":  40,
+"endLine":  320,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  419,
+"startColumn":  60,
+"endLine":  419,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  419,
+"startColumn":  80,
+"endLine":  419,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  421,
+"startColumn":  60,
+"endLine":  421,
+"endColumn":  157
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  421,
+"startColumn":  80,
+"endLine":  421,
+"endColumn":  147
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  421,
+"startColumn":  100,
+"endLine":  421,
+"endColumn":  137
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  424,
+"startColumn":  64,
+"endLine":  424,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  526,
+"startColumn":  47,
+"endLine":  526,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  908,
+"startColumn":  20,
+"endLine":  908,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  909,
+"startColumn":  17,
+"endLine":  909,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  911,
+"startColumn":  20,
+"endLine":  911,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  912,
+"startColumn":  17,
+"endLine":  912,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\IncludeManager.vb",
+"region":  {
+"startLine":  104,
+"startColumn":  27,
+"endLine":  104,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  514,
+"startColumn":  41,
+"endLine":  514,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  225,
+"startColumn":  20,
+"endLine":  225,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  226,
+"startColumn":  39,
+"endLine":  226,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  252,
+"startColumn":  20,
+"endLine":  252,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  253,
+"startColumn":  39,
+"endLine":  253,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  45,
+"startColumn":  20,
+"endLine":  45,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  46,
+"startColumn":  35,
+"endLine":  46,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  57,
+"startColumn":  40,
+"endLine":  57,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  81,
+"startColumn":  28,
+"endLine":  81,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  82,
+"startColumn":  43,
+"endLine":  82,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  147,
+"startColumn":  39,
+"endLine":  147,
+"endColumn":  95
+}
+}
+}
+]
+}

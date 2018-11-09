@@ -77,9 +77,9 @@ namespace SonarAnalyzer.Helpers
 
         public abstract InvocationCondition MatchSimpleNames(params MethodSignature[] methods);
 
-        public abstract InvocationCondition WhenMethodNameIs(string methodName);
-
         public abstract InvocationCondition FirstParameterIsConstant();
+
+        public abstract InvocationCondition MethodNameIs(string methodName);
 
         #endregion
 
@@ -112,6 +112,11 @@ namespace SonarAnalyzer.Helpers
             (context) =>
                 context.InvokedMethodSymbol.Value != null &&
                 context.InvokedMethodSymbol.Value.ReturnType.DerivesFrom(returnType);
+
+        public InvocationCondition IsExtern() =>
+            (context) =>
+                context.InvokedMethodSymbol.Value != null &&
+                context.InvokedMethodSymbol.Value.IsExtern;
 
         #endregion
     }
