@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  280,
+"startColumn":  46,
+"endLine":  280,
+"endColumn":  110
+}
+}
+}
+]
+}

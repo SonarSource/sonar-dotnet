@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  55,
+"endLine":  51,
+"endColumn":  118
+}
+}
+}
+]
+}
