@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -75,7 +76,7 @@ namespace SonarAnalyzer.Helpers
         private static bool HasImplementation(MethodBlockSyntax methodBlock) =>
             methodBlock.Statements.Count > 0;
 
-        protected override SyntaxToken GetMethodIdentifier(SyntaxNode methodDeclaration) =>
-            ((MethodStatementSyntax)methodDeclaration).Identifier;
+        protected override SyntaxToken? GetMethodIdentifier(SyntaxNode methodDeclaration) =>
+            ((MethodBaseSyntax)methodDeclaration).GetIdentifierOrDefault();
     }
 }

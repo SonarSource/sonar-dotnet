@@ -86,6 +86,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Action_T1_T2_T3_T4 = new KnownType("System.Action<T1, T2, T3, T4>");
         internal static readonly KnownType System_Activator = new KnownType("System.Activator");
         internal static readonly KnownType System_ApplicationException = new KnownType("System.ApplicationException");
+        internal static readonly KnownType System_AppDomain = new KnownType("System.AppDomain");
         internal static readonly KnownType System_ArgumentException = new KnownType("System.ArgumentException");
         internal static readonly KnownType System_ArgumentNullException = new KnownType("System.ArgumentNullException");
         internal static readonly KnownType System_ArgumentOutOfRangeException = new KnownType("System.ArgumentOutOfRangeException");
@@ -202,6 +203,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Guid = new KnownType("System.Guid");
         internal static readonly KnownType System_IComparable = new KnownType("System.IComparable");
         internal static readonly KnownType System_IComparable_T = new KnownType("System.IComparable<T>");
+        internal static readonly KnownType System_IdentityModel_Tokens_SecurityTokenHandler = new KnownType("System.IdentityModel.Tokens.SecurityTokenHandler");
         internal static readonly KnownType System_IDisposable = new KnownType(SpecialType.System_IDisposable, "System.IDisposable");
         internal static readonly KnownType System_IEquatable_T = new KnownType("System.IEquatable<T>");
         internal static readonly KnownType System_IFormatProvider = new KnownType("System.IFormatProvider");
@@ -297,7 +299,12 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Security_Cryptography_SymmetricAlgorithm = new KnownType("System.Security.Cryptography.SymmetricAlgorithm");
         internal static readonly KnownType System_Security_Cryptography_TripleDES = new KnownType("System.Security.Cryptography.TripleDES");
         internal static readonly KnownType System_Security_Permissions_CodeAccessSecurityAttribute = new KnownType("System.Security.Permissions.CodeAccessSecurityAttribute");
+        internal static readonly KnownType System_Security_Permissions_PrincipalPermission = new KnownType("System.Security.Permissions.PrincipalPermission");
+        internal static readonly KnownType System_Security_Permissions_PrincipalPermissionAttribute = new KnownType("System.Security.Permissions.PrincipalPermissionAttribute");
         internal static readonly KnownType System_Security_PermissionSet = new KnownType("System.Security.PermissionSet");
+        internal static readonly KnownType System_Security_Principal_IIdentity = new KnownType("System.Security.Principal.IIdentity");
+        internal static readonly KnownType System_Security_Principal_IPrincipal = new KnownType("System.Security.Principal.IPrincipal");
+        internal static readonly KnownType System_Security_Principal_WindowsIdentity = new KnownType("System.Security.Principal.WindowsIdentity");
         internal static readonly KnownType System_Security_SecurityCriticalAttribute = new KnownType("System.Security.SecurityCriticalAttribute");
         internal static readonly KnownType System_Security_SecuritySafeCriticalAttribute = new KnownType("System.Security.SecuritySafeCriticalAttribute");
         internal static readonly KnownType System_SerializableAttribute = new KnownType("System.SerializableAttribute");
@@ -328,6 +335,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_ValueType = new KnownType(SpecialType.System_ValueType, "ValueType");
         internal static readonly KnownType System_Web_HttpApplication = new KnownType("System.Web.HttpApplication");
         internal static readonly KnownType System_Web_HttpCookie = new KnownType("System.Web.HttpCookie");
+        internal static readonly KnownType System_Web_HttpContext = new KnownType("System.Web.HttpContext");
         internal static readonly KnownType System_Web_Http_ApiController = new KnownType("System.Web.Http.ApiController");
         internal static readonly KnownType System_Web_HttpRequestBase = new KnownType("System.Web.HttpRequestBase");
         internal static readonly KnownType System_Web_HttpResponseBase = new KnownType("System.Web.HttpResponseBase");

@@ -51,7 +51,8 @@ namespace SonarAnalyzer.Helpers
                 }
 
                 var methodDeclaration = context.MethodSymbol.DeclaringSyntaxReferences
-                    .Select(r => (MethodDeclarationSyntax)r.GetSyntax())
+                    .Select(r => r.GetSyntax())
+                    .OfType<BaseMethodDeclarationSyntax>()
                     .FirstOrDefault(declaration => declaration.HasBodyOrExpressionBody());
 
                 if (methodDeclaration == null)
@@ -74,8 +75,7 @@ namespace SonarAnalyzer.Helpers
                     });
             };
 
-
-        protected override SyntaxToken GetMethodIdentifier(SyntaxNode methodDeclaration) =>
-            ((MethodDeclarationSyntax)methodDeclaration).Identifier;
+        protected override SyntaxToken? GetMethodIdentifier(SyntaxNode methodDeclaration) =>
+            ((BaseMethodDeclarationSyntax)methodDeclaration).GetIdentifierOrDefault();
     }
 }
