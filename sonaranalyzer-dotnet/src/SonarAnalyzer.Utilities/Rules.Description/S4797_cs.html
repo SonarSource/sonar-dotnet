@@ -66,6 +66,15 @@ using System.IO.Compression;
 using System.IO.IsolatedStorage;
 using System.IO.MemoryMappedFiles;
 
+// Use interop to call the CreateFile function.
+// For more information about CreateFile,
+// see the unmanaged MSDN reference library.
+[DllImport("kernel32.dll", SetLastError = true, CharSet=CharSet.Unicode)]
+static extern SafeFileHandle CreateFile(string lpFileName, uint dwDesiredAccess,
+uint dwShareMode, IntPtr lpSecurityAttributes, uint dwCreationDisposition,
+uint dwFlagsAndAttributes, IntPtr hTemplateFile);
+
+
 // Review any static method call of File and Directory
 File.Exists("test.txt"); // Questionable
 Directory.Exists("test"); // Questionable
@@ -74,7 +83,7 @@ Directory.Exists("test"); // Questionable
 new FileInfo("test.txt"); // Questionable
 new DirectoryInfo("test"); // Questionable
 
-// Review the creation of SafeFileHandle and how it is used
+// Review the creation of SafeFileHandle and how it is used.
 SafeFileHandle handle = CreateFile(...) // Questionable
 new SafeFileHandle(IntPtr.Zero, false); // Questionable
 

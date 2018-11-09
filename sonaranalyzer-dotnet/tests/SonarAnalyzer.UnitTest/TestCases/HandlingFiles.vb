@@ -38,13 +38,13 @@ Namespace Tests.Diagnostics
             ' All constructors of FileStream
             Dim fileStream As FileStream
             fileStream = New FileStream(IntPtr.Zero, FileAccess.Read) ' Noncompliant
-            fileStream = New FileStream(handle, FileAccess.Read) ' Noncompliant
+            fileStream = New FileStream(handle, FileAccess.Read) ' Compliant, created from SafeFileHandle, which should be already reported
             fileStream = New FileStream("", FileMode.Append) ' Noncompliant
             fileStream = New FileStream(IntPtr.Zero, FileAccess.Read, True) ' Noncompliant
-            fileStream = New FileStream(handle, FileAccess.Read, 0) ' Noncompliant
+            fileStream = New FileStream(handle, FileAccess.Read, 0) ' Compliant, created from SafeFileHandle, which should be already reported
             fileStream = New FileStream("", FileMode.Append, FileAccess.Read) ' Noncompliant
             fileStream = New FileStream(IntPtr.Zero, FileAccess.Read, True, 0) ' Noncompliant
-            fileStream = New FileStream(handle, FileAccess.Read, 0, True) ' Noncompliant
+            fileStream = New FileStream(handle, FileAccess.Read, 0, True) ' Compliant, created from SafeFileHandle, which should be already reported
             fileStream = New FileStream("", FileMode.Append, FileAccess.Read, FileShare.Read) ' Noncompliant
             fileStream = New FileStream(IntPtr.Zero, FileAccess.Read, True, 0, True) ' Noncompliant
             fileStream = New FileStream("", FileMode.Append, FileAccess.Read, FileShare.Read, 0) ' Noncompliant

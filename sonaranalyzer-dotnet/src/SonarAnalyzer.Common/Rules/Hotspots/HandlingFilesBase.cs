@@ -145,9 +145,13 @@ namespace SonarAnalyzer.Rules
                 ObjectCreationTracker.MatchConstructors(
                     KnownType.System_IO_FileInfo,
                     KnownType.System_IO_DirectoryInfo,
-                    KnownType.System_IO_FileStream,
                     KnownType.System_IO_IsolatedStorage_IsolatedStorageFileStream,
                     KnownType.Microsoft_Win32_SafeHandles_SafeFileHandle));
+
+            ObjectCreationTracker.Track(context,
+                ObjectCreationTracker.MatchConstructors(
+                    KnownType.System_IO_FileStream),
+                Conditions.ExceptWhen(ObjectCreationTracker.FirstArgumentIs(KnownType.Microsoft_Win32_SafeHandles_SafeFileHandle)));
         }
     }
 }

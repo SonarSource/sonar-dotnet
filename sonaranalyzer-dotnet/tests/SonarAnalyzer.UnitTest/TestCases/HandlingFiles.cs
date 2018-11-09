@@ -41,13 +41,13 @@ namespace Tests.Diagnostics
             // All constructors of FileStream
             FileStream fileStream;
             fileStream = new FileStream(IntPtr.Zero, FileAccess.Read); // Noncompliant
-            fileStream = new FileStream(handle, FileAccess.Read); // Noncompliant
+            fileStream = new FileStream(handle, FileAccess.Read); // Compliant, created from SafeFileHandle, which should be already reported
             fileStream = new FileStream("", FileMode.Append); // Noncompliant
             fileStream = new FileStream(IntPtr.Zero, FileAccess.Read, true); // Noncompliant
-            fileStream = new FileStream(handle, FileAccess.Read, 0); // Noncompliant
+            fileStream = new FileStream(handle, FileAccess.Read, 0); // Compliant, created from SafeFileHandle, which should be already reported
             fileStream = new FileStream("", FileMode.Append, FileAccess.Read); // Noncompliant
             fileStream = new FileStream(IntPtr.Zero, FileAccess.Read, true, 0); // Noncompliant
-            fileStream = new FileStream(handle, FileAccess.Read, 0, true); // Noncompliant
+            fileStream = new FileStream(handle, FileAccess.Read, 0, true); // Compliant, created from SafeFileHandle, which should be already reported
             fileStream = new FileStream("", FileMode.Append, FileAccess.Read, FileShare.Read); // Noncompliant
             fileStream = new FileStream(IntPtr.Zero, FileAccess.Read, true, 0, true); // Noncompliant
             fileStream = new FileStream("", FileMode.Append, FileAccess.Read, FileShare.Read, 0); // Noncompliant

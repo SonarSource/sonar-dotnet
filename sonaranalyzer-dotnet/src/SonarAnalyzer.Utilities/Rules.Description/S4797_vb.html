@@ -57,6 +57,65 @@ file but is still able to modify it via the inherited file descriptor. Check you
 flags <code>O_CLOEXEC</code>, <code>FD_CLOEXEC</code>, or <code>bInheritHandles</code>. File descriptors can be inherited in the following languages:
 C, C++, C#, Objective-C, Swift, Go (but disabled by default), some JVM versions, Javascript and TypeScript in Nodejs, Some PHP versions, Python, Ruby,
 Rust, VB6 and VB.NET.</p>
+<h2>Questionable Code Example</h2>
+<pre>
+Imports System.IO
+Imports Microsoft.Win32.SafeHandles
+Imports System.Security.AccessControl
+Imports System.IO.Compression
+Imports System.IO.IsolatedStorage
+Imports System.IO.MemoryMappedFiles
+
+' Use interop to call the CreateFile function.
+' For more information about CreateFile,
+' see the unmanaged MSDN reference library.
+&lt;DllImport("kernel32.dll", SetLastError:=True, CharSet:=CharSet.Unicode)&gt;
+Private Shared Function CreateFile(ByVal lpFileName As String, ByVal dwDesiredAccess As UInteger,
+    ByVal dwShareMode As UInteger, ByVal lpSecurityAttributes As IntPtr, ByVal dwCreationDisposition As UInteger,
+    ByVal dwFlagsAndAttributes As UInteger, ByVal hTemplateFile As IntPtr) As SafeFileHandle
+End Function
+
+
+' Review any static method call of File and Directory
+File.Exists("test.txt") ' Questionable
+Directory.Exists("test") ' Questionable
+
+' Review any instantiation of FileInfo and DirectoryInfo and check how they are used
+new FileInfo("test.txt") ' Questionable
+new DirectoryInfo("test") ' Questionable
+
+' Review the creation of SafeFileHandle and how it is used.
+SafeFileHandle handle = CreateFile(...) ' Questionable, using the imported function
+new SafeFileHandle(IntPtr.Zero, false) ' Questionable
+
+' Questionable: review the creation of FileStream and other Streams accepting a file path.
+new FileStream("test.txt", FileMode.Create)
+
+new StreamWriter("test.txt", ...) ' Questionable
+new StreamReader("test.txt", ...) ' Questionable
+
+' Review those two methods as they create file and directories.
+Path.GetTempFileName() ' Questionable
+Path.GetTempPath() ' Questionable
+
+new FileSecurity("test.txt", AccessControlSections.All) ' Questionable
+
+' Review all calls to static methods of ZipFile as they create file and/or directories
+ZipFile.CreateFromDirectory("test.txt", "test.zip") ' Questionable
+
+' Review all calls to static methods of IsolatedStorageFile
+IsolatedStorageFile.GetMachineStoreForApplication() ' Questionable
+
+' Review all instantiation of IsolatedStorageFileStream and how they are used
+new IsolatedStorageFileStream("test.txt", ...) ' Questionable
+
+' Review all Create* and Open* static methods of MemoryMappedFile and how the resulting file is used
+MemoryMappedFile.CreateFromFile("test.txt") ' Questionable
+</pre>
+<h2>Exceptions</h2>
+<p>The creation of <code>FileStream</code> from a <code>SafeFileHandle</code> won't raise an issue as the creation of <code>SafeFileHandle</code>
+already raised one.</p>
+<p>Only the creation of <code>StreamWriter</code> or <code>StreamReader</code> from a string path will raise an issue for the same reason.</p>
 <h2>See</h2>
 <ul>
   <li> <a href="http://cwe.mitre.org/data/definitions/732">MITRE, CWE-732</a> - Incorrect Permission Assignment for Critical Resource </li>
