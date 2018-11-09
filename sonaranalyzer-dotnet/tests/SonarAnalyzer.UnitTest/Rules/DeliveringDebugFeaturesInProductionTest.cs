@@ -19,11 +19,13 @@
  */
 
 extern alias csharp;
+extern alias vbnet;
 using System.Collections.Generic;
 using System.Linq;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
+using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -35,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DeliveringDebugFeaturesInProduction_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.cs",
-                new DeliveringDebugFeaturesInProduction(new TestAnalyzerConfiguration(null, "S4507")),
+                new CSharp.DeliveringDebugFeaturesInProduction(new TestAnalyzerConfiguration(null, "S4507")),
                 additionalReferences: AdditionalReferences);
         }
 
@@ -44,7 +46,25 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DeliveringDebugFeaturesInProduction_CS_Disabled()
         {
             Verifier.VerifyNoIssueReported(@"TestCases\DeliveringDebugFeaturesInProduction.cs",
-                new DeliveringDebugFeaturesInProduction(),
+                new CSharp.DeliveringDebugFeaturesInProduction(),
+                additionalReferences: AdditionalReferences);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DeliveringDebugFeaturesInProduction_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.vb",
+                new VisualBasic.DeliveringDebugFeaturesInProduction(new TestAnalyzerConfiguration(null, "S4507")),
+                additionalReferences: AdditionalReferences);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DeliveringDebugFeaturesInProduction_VB_Disabled()
+        {
+            Verifier.VerifyNoIssueReported(@"TestCases\DeliveringDebugFeaturesInProduction.vb",
+                new VisualBasic.DeliveringDebugFeaturesInProduction(),
                 additionalReferences: AdditionalReferences);
         }
 
