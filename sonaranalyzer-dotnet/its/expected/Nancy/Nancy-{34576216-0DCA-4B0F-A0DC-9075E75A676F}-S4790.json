@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4790",
+"message":  "Make sure that hashing data is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\DefaultHmacProvider.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  43,
+"endLine":  14,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4790",
+"message":  "Make sure that hashing data is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\DefaultHmacProvider.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  33,
+"endLine":  60,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4790",
+"message":  "Make sure that hashing data is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsSession.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  29,
+"endLine":  28,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4790",
+"message":  "Make sure that hashing data is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  31,
+"endLine":  66,
+"endColumn":  62
+}
+}
+}
+]
+}
