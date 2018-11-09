@@ -1,0 +1,316 @@
+{
+"issues":  [
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  55,
+"startColumn":  20,
+"endLine":  55,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  76,
+"startColumn":  42,
+"endLine":  76,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  77,
+"startColumn":  40,
+"endLine":  77,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  108,
+"startColumn":  28,
+"endLine":  108,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  152,
+"startColumn":  20,
+"endLine":  152,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  155,
+"startColumn":  20,
+"endLine":  155,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  158,
+"startColumn":  23,
+"endLine":  158,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  389,
+"startColumn":  21,
+"endLine":  389,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  412,
+"startColumn":  20,
+"endLine":  412,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  413,
+"startColumn":  21,
+"endLine":  413,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  416,
+"startColumn":  38,
+"endLine":  416,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  495,
+"startColumn":  35,
+"endLine":  495,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  544,
+"startColumn":  13,
+"endLine":  544,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  548,
+"startColumn":  24,
+"endLine":  548,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  550,
+"startColumn":  25,
+"endLine":  550,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  569,
+"startColumn":  13,
+"endLine":  569,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  573,
+"startColumn":  24,
+"endLine":  573,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  580,
+"startColumn":  29,
+"endLine":  580,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  683,
+"startColumn":  40,
+"endLine":  683,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  683,
+"startColumn":  59,
+"endLine":  683,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  688,
+"startColumn":  40,
+"endLine":  688,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  688,
+"startColumn":  59,
+"endLine":  688,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  693,
+"startColumn":  40,
+"endLine":  693,
+"endColumn":  160
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  693,
+"startColumn":  59,
+"endLine":  693,
+"endColumn":  85
+}
+}
+}
+]
+}

@@ -1,0 +1,2708 @@
+{
+"issues":  [
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  214,
+"startColumn":  12,
+"endLine":  214,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  111,
+"startColumn":  57,
+"endLine":  111,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  119,
+"startColumn":  58,
+"endLine":  119,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  217,
+"startColumn":  63,
+"endLine":  217,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  242,
+"startColumn":  84,
+"endLine":  242,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  244,
+"startColumn":  91,
+"endLine":  244,
+"endColumn":  176
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  244,
+"startColumn":  112,
+"endLine":  244,
+"endColumn":  166
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  245,
+"startColumn":  85,
+"endLine":  245,
+"endColumn":  139
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  246,
+"startColumn":  64,
+"endLine":  246,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  246,
+"startColumn":  119,
+"endLine":  246,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  247,
+"startColumn":  85,
+"endLine":  247,
+"endColumn":  139
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  248,
+"startColumn":  64,
+"endLine":  248,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  248,
+"startColumn":  119,
+"endLine":  248,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  249,
+"startColumn":  85,
+"endLine":  249,
+"endColumn":  139
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  250,
+"startColumn":  64,
+"endLine":  250,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  250,
+"startColumn":  119,
+"endLine":  250,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  251,
+"startColumn":  85,
+"endLine":  251,
+"endColumn":  139
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  252,
+"startColumn":  64,
+"endLine":  252,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  252,
+"startColumn":  119,
+"endLine":  252,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  259,
+"startColumn":  85,
+"endLine":  259,
+"endColumn":  139
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  260,
+"startColumn":  89,
+"endLine":  260,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  261,
+"startColumn":  64,
+"endLine":  261,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  261,
+"startColumn":  142,
+"endLine":  261,
+"endColumn":  187
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  262,
+"startColumn":  64,
+"endLine":  262,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  262,
+"startColumn":  142,
+"endLine":  262,
+"endColumn":  187
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  263,
+"startColumn":  64,
+"endLine":  263,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  263,
+"startColumn":  142,
+"endLine":  263,
+"endColumn":  187
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  264,
+"startColumn":  64,
+"endLine":  264,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  264,
+"startColumn":  149,
+"endLine":  264,
+"endColumn":  201
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  265,
+"startColumn":  64,
+"endLine":  265,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  265,
+"startColumn":  149,
+"endLine":  265,
+"endColumn":  201
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  266,
+"startColumn":  85,
+"endLine":  266,
+"endColumn":  139
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  267,
+"startColumn":  64,
+"endLine":  267,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  267,
+"startColumn":  119,
+"endLine":  267,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  268,
+"startColumn":  85,
+"endLine":  268,
+"endColumn":  139
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  269,
+"startColumn":  64,
+"endLine":  269,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  269,
+"startColumn":  119,
+"endLine":  269,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  270,
+"startColumn":  85,
+"endLine":  270,
+"endColumn":  139
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  271,
+"startColumn":  64,
+"endLine":  271,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  271,
+"startColumn":  119,
+"endLine":  271,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  272,
+"startColumn":  85,
+"endLine":  272,
+"endColumn":  139
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  273,
+"startColumn":  64,
+"endLine":  273,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  273,
+"startColumn":  119,
+"endLine":  273,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  303,
+"startColumn":  69,
+"endLine":  303,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  304,
+"startColumn":  73,
+"endLine":  304,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  305,
+"startColumn":  48,
+"endLine":  305,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  305,
+"startColumn":  126,
+"endLine":  305,
+"endColumn":  171
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  306,
+"startColumn":  48,
+"endLine":  306,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  306,
+"startColumn":  126,
+"endLine":  306,
+"endColumn":  171
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  307,
+"startColumn":  48,
+"endLine":  307,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  307,
+"startColumn":  126,
+"endLine":  307,
+"endColumn":  171
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  308,
+"startColumn":  48,
+"endLine":  308,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  308,
+"startColumn":  133,
+"endLine":  308,
+"endColumn":  185
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  309,
+"startColumn":  48,
+"endLine":  309,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  309,
+"startColumn":  133,
+"endLine":  309,
+"endColumn":  185
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  201,
+"startColumn":  16,
+"endLine":  201,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  202,
+"startColumn":  17,
+"endLine":  202,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  205,
+"startColumn":  16,
+"endLine":  205,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  206,
+"startColumn":  17,
+"endLine":  206,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  209,
+"startColumn":  16,
+"endLine":  209,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  210,
+"startColumn":  17,
+"endLine":  210,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  617,
+"startColumn":  37,
+"endLine":  617,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  653,
+"startColumn":  37,
+"endLine":  653,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  113,
+"startColumn":  16,
+"endLine":  113,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  253,
+"startColumn":  53,
+"endLine":  253,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  264,
+"startColumn":  37,
+"endLine":  264,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  309,
+"startColumn":  53,
+"endLine":  309,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  320,
+"startColumn":  37,
+"endLine":  320,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  457,
+"startColumn":  16,
+"endLine":  457,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  458,
+"startColumn":  17,
+"endLine":  458,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  461,
+"startColumn":  16,
+"endLine":  461,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  462,
+"startColumn":  17,
+"endLine":  462,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  465,
+"startColumn":  16,
+"endLine":  465,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  466,
+"startColumn":  17,
+"endLine":  466,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  469,
+"startColumn":  16,
+"endLine":  469,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  780,
+"startColumn":  24,
+"endLine":  780,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  823,
+"startColumn":  44,
+"endLine":  823,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  824,
+"startColumn":  12,
+"endLine":  824,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  825,
+"startColumn":  23,
+"endLine":  825,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  838,
+"startColumn":  46,
+"endLine":  838,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1090,
+"startColumn":  38,
+"endLine":  1090,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1090,
+"startColumn":  58,
+"endLine":  1090,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1092,
+"startColumn":  38,
+"endLine":  1092,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1092,
+"startColumn":  58,
+"endLine":  1092,
+"endColumn":  134
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1092,
+"startColumn":  78,
+"endLine":  1092,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1094,
+"startColumn":  38,
+"endLine":  1094,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1103,
+"startColumn":  21,
+"endLine":  1103,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1381,
+"startColumn":  20,
+"endLine":  1381,
+"endColumn":  150
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1396,
+"startColumn":  16,
+"endLine":  1396,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1399,
+"startColumn":  42,
+"endLine":  1399,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1399,
+"startColumn":  62,
+"endLine":  1399,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1401,
+"startColumn":  42,
+"endLine":  1401,
+"endColumn":  148
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1401,
+"startColumn":  62,
+"endLine":  1401,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1401,
+"startColumn":  82,
+"endLine":  1401,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1403,
+"startColumn":  42,
+"endLine":  1403,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1417,
+"startColumn":  36,
+"endLine":  1417,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1424,
+"startColumn":  25,
+"endLine":  1424,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  148,
+"startColumn":  16,
+"endLine":  148,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  149,
+"startColumn":  17,
+"endLine":  149,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  152,
+"startColumn":  16,
+"endLine":  152,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  153,
+"startColumn":  17,
+"endLine":  153,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  324,
+"startColumn":  16,
+"endLine":  324,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  325,
+"startColumn":  17,
+"endLine":  325,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  328,
+"startColumn":  16,
+"endLine":  328,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  329,
+"startColumn":  17,
+"endLine":  329,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  332,
+"startColumn":  16,
+"endLine":  332,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  333,
+"startColumn":  17,
+"endLine":  333,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgErrorViewer.vb",
+"region":  {
+"startLine":  93,
+"startColumn":  12,
+"endLine":  93,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgErrorViewer.vb",
+"region":  {
+"startLine":  94,
+"startColumn":  38,
+"endLine":  94,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  93,
+"startColumn":  17,
+"endLine":  93,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  113,
+"startColumn":  12,
+"endLine":  113,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  114,
+"startColumn":  33,
+"endLine":  114,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  129,
+"startColumn":  13,
+"endLine":  129,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  25,
+"endLine":  133,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  134,
+"startColumn":  25,
+"endLine":  134,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  310,
+"startColumn":  9,
+"endLine":  310,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  324,
+"startColumn":  9,
+"endLine":  324,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgMovieSource.vb",
+"region":  {
+"startLine":  93,
+"startColumn":  68,
+"endLine":  93,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgNewVersion.vb",
+"region":  {
+"startLine":  56,
+"startColumn":  12,
+"endLine":  56,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgNewVersion.vb",
+"region":  {
+"startLine":  72,
+"startColumn":  12,
+"endLine":  72,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgNewVersion.vb",
+"region":  {
+"startLine":  73,
+"startColumn":  13,
+"endLine":  73,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  443,
+"startColumn":  77,
+"endLine":  443,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2686,
+"startColumn":  12,
+"endLine":  2686,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2690,
+"startColumn":  30,
+"endLine":  2690,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2740,
+"startColumn":  12,
+"endLine":  2740,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2745,
+"startColumn":  29,
+"endLine":  2745,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2750,
+"startColumn":  29,
+"endLine":  2750,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2755,
+"startColumn":  29,
+"endLine":  2755,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSortFiles.vb",
+"region":  {
+"startLine":  51,
+"startColumn":  62,
+"endLine":  51,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVSource.vb",
+"region":  {
+"startLine":  88,
+"startColumn":  68,
+"endLine":  88,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"region":  {
+"startLine":  180,
+"startColumn":  6,
+"endLine":  180,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"region":  {
+"startLine":  184,
+"startColumn":  18,
+"endLine":  184,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  188,
+"startColumn":  32,
+"endLine":  188,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  188,
+"startColumn":  55,
+"endLine":  188,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  189,
+"startColumn":  36,
+"endLine":  189,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  190,
+"startColumn":  33,
+"endLine":  190,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  192,
+"startColumn":  29,
+"endLine":  192,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  195,
+"startColumn":  28,
+"endLine":  195,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  195,
+"startColumn":  66,
+"endLine":  195,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  198,
+"startColumn":  28,
+"endLine":  198,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  648,
+"startColumn":  20,
+"endLine":  648,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1336,
+"startColumn":  157,
+"endLine":  1336,
+"endColumn":  213
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1336,
+"startColumn":  177,
+"endLine":  1336,
+"endColumn":  203
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1336,
+"startColumn":  224,
+"endLine":  1336,
+"endColumn":  280
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1336,
+"startColumn":  244,
+"endLine":  1336,
+"endColumn":  270
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1339,
+"startColumn":  148,
+"endLine":  1339,
+"endColumn":  204
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1339,
+"startColumn":  168,
+"endLine":  1339,
+"endColumn":  194
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1346,
+"startColumn":  157,
+"endLine":  1346,
+"endColumn":  243
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1346,
+"startColumn":  177,
+"endLine":  1346,
+"endColumn":  233
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1346,
+"startColumn":  197,
+"endLine":  1346,
+"endColumn":  223
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1346,
+"startColumn":  254,
+"endLine":  1346,
+"endColumn":  340
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1346,
+"startColumn":  274,
+"endLine":  1346,
+"endColumn":  330
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1346,
+"startColumn":  294,
+"endLine":  1346,
+"endColumn":  320
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1349,
+"startColumn":  148,
+"endLine":  1349,
+"endColumn":  234
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1349,
+"startColumn":  168,
+"endLine":  1349,
+"endColumn":  224
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1349,
+"startColumn":  188,
+"endLine":  1349,
+"endColumn":  214
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1716,
+"startColumn":  12,
+"endLine":  1716,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1717,
+"startColumn":  26,
+"endLine":  1717,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1726,
+"startColumn":  13,
+"endLine":  1726,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4161,
+"startColumn":  42,
+"endLine":  4161,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4161,
+"startColumn":  62,
+"endLine":  4161,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4163,
+"startColumn":  42,
+"endLine":  4163,
+"endColumn":  153
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4163,
+"startColumn":  62,
+"endLine":  4163,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4163,
+"startColumn":  82,
+"endLine":  4163,
+"endColumn":  133
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4166,
+"startColumn":  46,
+"endLine":  4166,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5306,
+"startColumn":  16,
+"endLine":  5306,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5329,
+"startColumn":  16,
+"endLine":  5329,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5330,
+"startColumn":  20,
+"endLine":  5330,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5330,
+"startColumn":  83,
+"endLine":  5330,
+"endColumn":  140
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5332,
+"startColumn":  17,
+"endLine":  5332,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5337,
+"startColumn":  20,
+"endLine":  5337,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5338,
+"startColumn":  17,
+"endLine":  5338,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5341,
+"startColumn":  20,
+"endLine":  5341,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5342,
+"startColumn":  17,
+"endLine":  5342,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5393,
+"startColumn":  20,
+"endLine":  5393,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5393,
+"startColumn":  59,
+"endLine":  5393,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5443,
+"startColumn":  40,
+"endLine":  5443,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5455,
+"startColumn":  40,
+"endLine":  5455,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5557,
+"startColumn":  75,
+"endLine":  5557,
+"endColumn":  135
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5557,
+"startColumn":  95,
+"endLine":  5557,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5559,
+"startColumn":  75,
+"endLine":  5559,
+"endColumn":  165
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5559,
+"startColumn":  95,
+"endLine":  5559,
+"endColumn":  155
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5559,
+"startColumn":  115,
+"endLine":  5559,
+"endColumn":  145
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5561,
+"startColumn":  88,
+"endLine":  5561,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5580,
+"startColumn":  101,
+"endLine":  5580,
+"endColumn":  166
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5580,
+"startColumn":  121,
+"endLine":  5580,
+"endColumn":  156
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5582,
+"startColumn":  101,
+"endLine":  5582,
+"endColumn":  196
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5582,
+"startColumn":  121,
+"endLine":  5582,
+"endColumn":  186
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5582,
+"startColumn":  141,
+"endLine":  5582,
+"endColumn":  176
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5585,
+"startColumn":  105,
+"endLine":  5585,
+"endColumn":  140
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6430,
+"startColumn":  51,
+"endLine":  6430,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6840,
+"startColumn":  16,
+"endLine":  6840,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6939,
+"startColumn":  16,
+"endLine":  6939,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6939,
+"startColumn":  33,
+"endLine":  6939,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6961,
+"startColumn":  71,
+"endLine":  6961,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6961,
+"startColumn":  91,
+"endLine":  6961,
+"endColumn":  131
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6962,
+"startColumn":  73,
+"endLine":  6962,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6962,
+"startColumn":  93,
+"endLine":  6962,
+"endColumn":  133
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6964,
+"startColumn":  71,
+"endLine":  6964,
+"endColumn":  171
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6964,
+"startColumn":  91,
+"endLine":  6964,
+"endColumn":  161
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6964,
+"startColumn":  111,
+"endLine":  6964,
+"endColumn":  151
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6965,
+"startColumn":  73,
+"endLine":  6965,
+"endColumn":  173
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6965,
+"startColumn":  93,
+"endLine":  6965,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6965,
+"startColumn":  113,
+"endLine":  6965,
+"endColumn":  153
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6968,
+"startColumn":  75,
+"endLine":  6968,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6969,
+"startColumn":  77,
+"endLine":  6969,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7162,
+"startColumn":  16,
+"endLine":  7162,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7733,
+"startColumn":  83,
+"endLine":  7733,
+"endColumn":  108
+}
+}
+}
+]
+}
