@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules
                 ObjectCreationTracker.WhenDerivesFrom(KnownType.System_Security_Cryptography_HashAlgorithm));
 
             InvocationTracker.Track(context,
-                InvocationTracker.WhenMethodNameIs("Create"),
+                InvocationTracker.MethodNameIs("Create"),
                 InvocationTracker.WhenReturnTypeIs(KnownType.System_Security_Cryptography_HashAlgorithm)
                 );
 

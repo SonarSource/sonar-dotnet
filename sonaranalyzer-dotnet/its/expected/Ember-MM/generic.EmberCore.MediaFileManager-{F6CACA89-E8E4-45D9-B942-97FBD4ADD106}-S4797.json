@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  101,
+"startColumn":  48,
+"endLine":  101,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  102,
+"startColumn":  57,
+"endLine":  102,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  178,
+"startColumn":  36,
+"endLine":  178,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  227,
+"startColumn":  54,
+"endLine":  227,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  337,
+"startColumn":  20,
+"endLine":  337,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  343,
+"startColumn":  16,
+"endLine":  343,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  344,
+"startColumn":  13,
+"endLine":  344,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4797",
+"message":  "Make sure this file handling is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  357,
+"startColumn":  21,
+"endLine":  357,
+"endColumn":  85
+}
+}
+}
+]
+}
