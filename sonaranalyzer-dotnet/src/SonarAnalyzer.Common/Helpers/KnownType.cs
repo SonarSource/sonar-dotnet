@@ -51,6 +51,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_ClassInitializeAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_TestCleanupAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_TestInitializeAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute");
+        internal static readonly KnownType Microsoft_Win32_SafeHandles_SafeFileHandle = new KnownType("Microsoft.Win32.SafeHandles.SafeFileHandle");
         internal static readonly KnownType NUnit_Framework_Assert = new KnownType("NUnit.Framework.Assert");
         internal static readonly KnownType NUnit_Framework_ExpectedExceptionAttribute = new KnownType("NUnit.Framework.ExpectedExceptionAttribute");
         internal static readonly KnownType NUnit_Framework_IgnoreAttribute = new KnownType("NUnit.Framework.IgnoreAttribute");
@@ -191,7 +192,16 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Int64 = new KnownType(SpecialType.System_Int64, "long");
         internal static readonly KnownType System_IntPtr = new KnownType(SpecialType.System_IntPtr, "IntPtr");
         internal static readonly KnownType System_InvalidOperationException = new KnownType("System.InvalidOperationException");
+        internal static readonly KnownType System_IO_Compression_ZipFile = new KnownType("System.IO.Compression.ZipFile");
+        internal static readonly KnownType System_IO_Directory = new KnownType("System.IO.Directory");
+        internal static readonly KnownType System_IO_DirectoryInfo = new KnownType("System.IO.DirectoryInfo");
+        internal static readonly KnownType System_IO_File = new KnownType("System.IO.File");
+        internal static readonly KnownType System_IO_FileInfo = new KnownType("System.IO.FileInfo");
         internal static readonly KnownType System_IO_FileStream = new KnownType("System.IO.FileStream");
+        internal static readonly KnownType System_IO_IsolatedStorage_IsolatedStorageFile = new KnownType("System.IO.IsolatedStorage.IsolatedStorageFile");
+        internal static readonly KnownType System_IO_IsolatedStorage_IsolatedStorageFileStream = new KnownType("System.IO.IsolatedStorage.IsolatedStorageFileStream");
+        internal static readonly KnownType System_IO_MemoryMappedFiles_MemoryMappedFile = new KnownType("System.IO.MemoryMappedFiles.MemoryMappedFile");
+        internal static readonly KnownType System_IO_Path = new KnownType("System.IO.Path");
         internal static readonly KnownType System_IO_Stream = new KnownType("System.IO.Stream");
         internal static readonly KnownType System_IO_StreamReader = new KnownType("System.IO.StreamReader");
         internal static readonly KnownType System_IO_StreamWriter = new KnownType("System.IO.StreamWriter");
@@ -246,6 +256,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Runtime_Serialization_SerializationInfo = new KnownType("System.Runtime.Serialization.SerializationInfo");
         internal static readonly KnownType System_Runtime_Serialization_StreamingContext = new KnownType("System.Runtime.Serialization.StreamingContext");
         internal static readonly KnownType System_SByte = new KnownType(SpecialType.System_SByte, "sbyte");
+        internal static readonly KnownType System_Security_AccessControl_FileSecurity = new KnownType("System.Security.AccessControl.FileSecurity");
         internal static readonly KnownType System_Security_AllowPartiallyTrustedCallersAttribute = new KnownType("System.Security.AllowPartiallyTrustedCallersAttribute");
         internal static readonly KnownType System_Security_Cryptography_AesManaged = new KnownType("System.Security.Cryptography.AesManaged");
         internal static readonly KnownType System_Security_Cryptography_DES = new KnownType("System.Security.Cryptography.DES");
