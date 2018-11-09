@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\LowerUnderscoreNamingConvention.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  53,
+"endLine":  7,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PascalCaseNamingConvention.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  53,
+"endLine":  7,
+"endColumn":  119
+}
+}
+}
+]
+}
