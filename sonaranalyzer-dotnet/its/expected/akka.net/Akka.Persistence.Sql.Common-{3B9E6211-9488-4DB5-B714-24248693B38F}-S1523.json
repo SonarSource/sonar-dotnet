@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  24,
+"endLine":  280,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryMapper.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  24,
+"endLine":  60,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryMapper.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  24,
+"endLine":  47,
+"endColumn":  63
+}
+}
+}
+]
+}

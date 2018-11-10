@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  28,
+"endLine":  169,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  32,
+"endLine":  238,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  30,
+"endLine":  159,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\MessageSerializer.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  19,
+"endLine":  93,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  19,
+"endLine":  91,
+"endColumn":  48
+}
+}
+}
+]
+}
