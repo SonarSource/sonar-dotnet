@@ -55,11 +55,22 @@ namespace SonarAnalyzer.Rules
                     Conditions.And(tracker2.FirstParameterIsString,
                     tracker2.FirstParameterIsConstant())));
 
-            // All other method invocation
+            // Special case - Activator.CreateXXX
             var tracker3 = CreateInvocationTracker();
             tracker3.Track(context,
-                Conditions.ExceptWhen(tracker3.IsTypeOfExpression()),
                 tracker3.MatchSimpleNames(
+                    new MethodSignature(KnownType.System_Activator, "CreateComInstanceFrom"),
+                    new MethodSignature(KnownType.System_Activator, "CreateInstance"),
+                    new MethodSignature(KnownType.System_Activator, "CreateInstanceFrom")),
+                tracker3.IsStatic(),
+                tracker3.HasParameters(),
+                Conditions.ExceptWhen(tracker3.FirstParameterIsOfType(KnownType.System_Type)));
+
+            // All other method invocation
+            var tracker4 = CreateInvocationTracker();
+            tracker4.Track(context,
+                Conditions.ExceptWhen(tracker4.IsTypeOfExpression()),
+                tracker4.MatchSimpleNames(
                     // Methods on assembly that are safe to call with constants
                     new MethodSignature(KnownType.System_Reflection_Assembly, "GetType"),
                     new MethodSignature(KnownType.System_Reflection_Assembly, "GetTypes"),
@@ -86,8 +97,8 @@ namespace SonarAnalyzer.Rules
                     new MethodSignature(KnownType.System_Type, "GetDefaultMembers"),
                     new MethodSignature(KnownType.System_Type, "InvokeMember")),
                 Conditions.ExceptWhen(
-                    Conditions.And(tracker3.FirstParameterIsString,
-                    tracker3.FirstParameterIsConstant())));
+                    Conditions.And(tracker4.FirstParameterIsString,
+                    tracker4.FirstParameterIsConstant())));
         }
     }
 }

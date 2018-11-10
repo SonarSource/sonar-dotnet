@@ -63,6 +63,5 @@ namespace SonarAnalyzer.Helpers
                         && invocation.Expression is MemberAccessExpressionSyntax memberAccessSyntax
                         && memberAccessSyntax.Expression != null
                         && memberAccessSyntax.Expression.RawKind == (int)SyntaxKind.TypeOfExpression;
-        #endregion
     }
 }

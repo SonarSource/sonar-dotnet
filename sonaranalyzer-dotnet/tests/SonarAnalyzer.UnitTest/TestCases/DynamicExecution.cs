@@ -1,6 +1,7 @@
 ﻿namespace Test
 {
     using System;
+    using System.Configuration.Assemblies;
     using System.Globalization;
     using System.Reflection;
     using System.Security;
@@ -103,6 +104,26 @@
             assembly.CreateInstance(typeName, false, BindingFlags.Public, null, null, CultureInfo.CurrentCulture, null); // Noncompliant
 
             type = Type.ReflectionOnlyGetType(typeName, true, true); // This is OK as the resulting type is not executable.
+        }
+
+        public void ActivatorTests(string name, ActivationContext activationContext)
+        {
+            const string fixedType = "fixedType";
+            Activator.CreateComInstanceFrom(name, fixedType);       // Noncompliant
+            Activator.CreateComInstanceFrom(name, fixedType, new byte[] { }, AssemblyHashAlgorithm.MD5); // Noncompliant
+
+            var type = typeof(Exception);
+            Activator.CreateInstance(type); // Don't report - constructed from type
+            Activator.CreateInstance(type, null); // Don't report - constructed from type
+            Activator.CreateInstance(activationContext);        // Noncompliant
+            Activator.CreateInstance(name, fixedType);          // Noncompliant
+            Activator.CreateInstance(name, fixedType, null);    // Noncompliant
+
+            Activator.CreateInstanceFrom(name, fixedType);      // Noncompliant
+            Activator.CreateInstanceFrom(AppDomain.CurrentDomain, name, fixedType); // Noncompliant
+            Activator.CreateInstance(activationContext);        // Noncompliant
+
+            Activator.CreateInstance<Exception>(); // OK - known type
         }
 
         public void AdditionalTests(Assembly assembly, Evidence evidence)

@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports Config = System.Configuration.Assemblies
 Imports System.Globalization
 Imports System.Reflection
 Imports System.Security
@@ -104,6 +105,26 @@ Namespace Test
 
             type = Type.ReflectionOnlyGetType(typeName, True, True) ' This is OK as the resulting type is not executable.
         End Sub
+
+        Public Sub ActivatorTests(name As String, activationContext As System.ActivationContext)
+            Const fixedType As String = "fixedType"
+            Activator.CreateComInstanceFrom(name, fixedType)       ' Noncompliant
+            Activator.CreateComInstanceFrom(name, fixedType, New Byte() {}, Config.AssemblyHashAlgorithm.MD5) ' Noncompliant
+
+            Dim t = GetType(Exception)
+            Activator.CreateInstance(t) ' Don't report - constructed from type
+            Activator.CreateInstance(t, Nothing, Nothing) ' Don't report - constructed from type
+            Activator.CreateInstance(activationContext)        ' Noncompliant
+            Activator.CreateInstance(name, fixedType)          ' Noncompliant
+            Activator.CreateInstance(name, fixedType, Nothing) ' Noncompliant
+
+            Activator.CreateInstanceFrom(name, fixedType)      ' Noncompliant
+            Activator.CreateInstanceFrom(AppDomain.CurrentDomain, name, fixedType) ' Noncompliant
+            Activator.CreateInstance(activationContext)        ' Noncompliant
+
+            Activator.CreateInstance(Of Exception)() ' OK - known type
+        End Sub
+
 
         Public Sub AdditionalTests(evidence As Evidence)
 

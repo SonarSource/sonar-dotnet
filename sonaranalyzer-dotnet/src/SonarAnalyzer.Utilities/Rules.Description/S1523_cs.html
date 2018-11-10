@@ -82,6 +82,11 @@ class TestReflection
 
 
         type = Type.ReflectionOnlyGetType(typeName,true, true); // This is OK as the resulting type is not executable.
+
+        Activator.CreateComInstanceFrom(...); // Questionable
+        Activator.CreateInstance(...); // Questionable
+        Activator.CreateInstanceFrom(...); // Questionable
+        Activator.CreateInstance&lt;&gt;(); // OK - can only be created from a referenced type
     }
 }
 </pre>

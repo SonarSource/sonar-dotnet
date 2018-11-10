@@ -79,6 +79,12 @@ Class TestReflection
         asm.CreateInstance(typeName) ' Questionable
 
         type = Type.ReflectionOnlyGetType(typeName, True, True) ' This is OK as the resulting type is not executable.
+
+        Activator.CreateComInstanceFrom(...) ' Questionable
+        Activator.CreateInstance(...) ' Questionable
+        Activator.CreateInstanceFrom(...) ' Questionable
+        Activator.CreateInstance(Of ...)() ' OK - can only be created from a referenced type
+
     End Sub
 End Class
 </pre>
