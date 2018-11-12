@@ -28,49 +28,45 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S1523";
         protected const string MessageFormat = "Make sure that this dynamic injection or execution of code is safe.";
 
-        protected abstract InvocationTracker<TSyntaxKind> CreateInvocationTracker();
+        protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             // Special case - Assembly.Load
-            var tracker1 = CreateInvocationTracker();
-            tracker1.Track(context,
-                tracker1.MatchSimpleNames(
+            InvocationTracker.Track(context,
+                InvocationTracker.MatchSimpleNames(
                     new MethodSignature(KnownType.System_Reflection_Assembly, "Load"),
                     new MethodSignature(KnownType.System_Reflection_Assembly, "LoadFile"),
                     new MethodSignature(KnownType.System_Reflection_Assembly, "LoadFrom"),
                     new MethodSignature(KnownType.System_Reflection_Assembly, "LoadWithPartialName")),
-                tracker1.IsStatic()
+                InvocationTracker.IsStatic()
                 );
 
             // Special case - Type.GetType() without paramters is ok, but
             // and Type.GetType(...) with parameters is not ok
-            var tracker2 = CreateInvocationTracker();
-            tracker2.Track(context,
-                tracker2.MatchSimpleNames(
+            InvocationTracker.Track(context,
+                InvocationTracker.MatchSimpleNames(
                     new MethodSignature(KnownType.System_Type, "GetType")),
-                tracker2.IsStatic(),
-                tracker2.HasParameters(),
+                InvocationTracker.IsStatic(),
+                InvocationTracker.HasParameters(),
                 Conditions.ExceptWhen(
-                    Conditions.And(tracker2.FirstParameterIsString,
-                    tracker2.FirstParameterIsConstant())));
+                    Conditions.And(InvocationTracker.FirstParameterIsString,
+                    InvocationTracker.FirstParameterIsConstant())));
 
             // Special case - Activator.CreateXXX
-            var tracker3 = CreateInvocationTracker();
-            tracker3.Track(context,
-                tracker3.MatchSimpleNames(
+            InvocationTracker.Track(context,
+                InvocationTracker.MatchSimpleNames(
                     new MethodSignature(KnownType.System_Activator, "CreateComInstanceFrom"),
                     new MethodSignature(KnownType.System_Activator, "CreateInstance"),
                     new MethodSignature(KnownType.System_Activator, "CreateInstanceFrom")),
-                tracker3.IsStatic(),
-                tracker3.HasParameters(),
-                Conditions.ExceptWhen(tracker3.FirstParameterIsOfType(KnownType.System_Type)));
+                InvocationTracker.IsStatic(),
+                InvocationTracker.HasParameters(),
+                Conditions.ExceptWhen(InvocationTracker.FirstParameterIsOfType(KnownType.System_Type)));
 
-            // All other method invocation
-            var tracker4 = CreateInvocationTracker();
-            tracker4.Track(context,
-                Conditions.ExceptWhen(tracker4.IsTypeOfExpression()),
-                tracker4.MatchSimpleNames(
+            // All other method invocations
+            InvocationTracker.Track(context,
+                Conditions.ExceptWhen(InvocationTracker.IsTypeOfExpression()),
+                InvocationTracker.MatchSimpleNames(
                     // Methods on assembly that are safe to call with constants
                     new MethodSignature(KnownType.System_Reflection_Assembly, "GetType"),
                     new MethodSignature(KnownType.System_Reflection_Assembly, "GetTypes"),
@@ -97,8 +93,8 @@ namespace SonarAnalyzer.Rules
                     new MethodSignature(KnownType.System_Type, "GetDefaultMembers"),
                     new MethodSignature(KnownType.System_Type, "InvokeMember")),
                 Conditions.ExceptWhen(
-                    Conditions.And(tracker4.FirstParameterIsString,
-                    tracker4.FirstParameterIsConstant())));
+                    Conditions.And(InvocationTracker.FirstParameterIsString,
+                    InvocationTracker.FirstParameterIsConstant())));
         }
     }
 }

@@ -38,8 +38,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
             ImmutableArray.Create(rule);
 
-        private readonly IAnalyzerConfiguration configuration;
-
         public DynamicExecution()
             : this(new DefaultAnalyzerConfiguration())
         {
@@ -47,12 +45,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         internal /*for testing*/ DynamicExecution(IAnalyzerConfiguration analysisConfiguration)
         {
-            configuration = analysisConfiguration;
-        }
-
-        protected override InvocationTracker<SyntaxKind> CreateInvocationTracker()
-        {
-            return new VisualBasicInvocationTracker(configuration, rule);
+            InvocationTracker = new VisualBasicInvocationTracker(analysisConfiguration, rule);
         }
     }
 }

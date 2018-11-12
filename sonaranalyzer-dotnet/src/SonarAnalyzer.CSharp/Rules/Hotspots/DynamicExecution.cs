@@ -38,9 +38,6 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
             ImmutableArray.Create(rule);
 
-
-        private readonly IAnalyzerConfiguration configuration;
-
         public DynamicExecution()
             : this(new DefaultAnalyzerConfiguration())
         {
@@ -48,12 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal /*for testing*/ DynamicExecution(IAnalyzerConfiguration analysisConfiguration)
         {
-            configuration = analysisConfiguration;
-        }
-
-        protected override InvocationTracker<SyntaxKind> CreateInvocationTracker()
-        {
-            return new CSharpInvocationTracker(configuration, rule);
+            InvocationTracker = new CSharpInvocationTracker(analysisConfiguration, rule);
         }
     }
 }
