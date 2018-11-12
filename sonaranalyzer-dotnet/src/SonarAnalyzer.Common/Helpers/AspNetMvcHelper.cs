@@ -21,9 +21,8 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.ControlFlowGraph.CSharp
+namespace SonarAnalyzer.Helpers
 {
     public static class AspNetMvcHelper
     {

@@ -18,14 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-
 using System.Linq;
-using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.UnitTest.ControlFlowGraph
+namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
     public class AspNetMvcHelper_IsControllerMethod
