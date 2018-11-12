@@ -81,6 +81,8 @@ namespace SonarAnalyzer.Helpers
 
         public abstract InvocationCondition MethodNameIs(string methodName);
 
+        public abstract InvocationCondition IsTypeOfExpression();
+
         #endregion
 
         #region Symbol-level standard conditions
@@ -89,6 +91,11 @@ namespace SonarAnalyzer.Helpers
             (context) =>
                 context.InvokedMethodSymbol.Value != null &&
                 context.InvokedMethodSymbol.Value.IsStatic;
+
+        public InvocationCondition HasParameters() =>
+            (context) =>
+                context.InvokedMethodSymbol.Value != null &&
+                context.InvokedMethodSymbol.Value.Parameters.Any();
 
         public bool FirstParameterIsString(InvocationContext context)
         {
