@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  712,
+"startColumn":  46,
+"endLine":  712,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\FailureDetectorRegistry.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  40,
+"endLine":  68,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\MessageSerializer.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  19,
+"endLine":  29,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\DaemonMsgCreateSerializer.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  25,
+"endLine":  152,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\DaemonMsgCreateSerializer.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  29,
+"endLine":  219,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MessageContainerSerializer.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  27,
+"endLine":  120,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  43,
+"endLine":  69,
+"endColumn":  70
+}
+}
+}
+]
+}

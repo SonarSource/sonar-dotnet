@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  138,
+"startColumn":  32,
+"endLine":  138,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  201,
+"startColumn":  32,
+"endLine":  201,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  271,
+"startColumn":  32,
+"endLine":  271,
+"endColumn":  73
+}
+}
+}
+]
+}

@@ -1,0 +1,225 @@
+{
+"issues":  [
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deployer.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  30,
+"endLine":  103,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  33,
+"endLine":  135,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  37,
+"endLine":  147,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"region":  {
+"startLine":  271,
+"startColumn":  33,
+"endLine":  271,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  308,
+"startColumn":  39,
+"endLine":  308,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  32,
+"endLine":  63,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"region":  {
+"startLine":  308,
+"startColumn":  43,
+"endLine":  308,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  28,
+"endLine":  43,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  31,
+"endLine":  59,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  30,
+"endLine":  80,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  35,
+"endLine":  90,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  31,
+"endLine":  114,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\LoggingBus.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  34,
+"endLine":  92,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Dns.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  64,
+"endLine":  130,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  38,
+"endLine":  57,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  35,
+"endLine":  73,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serializer.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  39,
+"endLine":  124,
+"endColumn":  67
+}
+}
+}
+]
+}

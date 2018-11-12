@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  39,
+"endLine":  73,
+"endColumn":  62
+}
+}
+}
+]
+}
