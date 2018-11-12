@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4787",
+"message":  "Make sure that encrypting data is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\RijndaelEncryptionProvider.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  36,
+"endLine":  34,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S4787",
+"message":  "Make sure that encrypting data is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\RijndaelEncryptionProvider.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  40,
+"endLine":  53,
+"endColumn":  83
+}
+}
+}
+]
+}

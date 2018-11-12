@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -112,8 +113,24 @@ namespace SonarAnalyzer.Helpers
                 issueLocation = null;
                 return false;
             };
-        
-        
+
+        internal BaseClassCondition WhenDerivesFrom(ImmutableArray<KnownType> types) =>
+            (BaseTypeContext context, out Location issueLocation) =>
+            {
+                foreach (var baseTypeNode in context.AllBaseTypeNodes)
+                {
+                    if (context.Model.GetTypeInfo(baseTypeNode).Type?.DerivesFromAny(types) ?? false)
+                    {
+                        issueLocation = baseTypeNode.GetLocation();
+                        return true; // assume there won't be more than one matching node
+                    }
+                }
+
+                issueLocation = null;
+                return false;
+            };
+
+
         #endregion
     }
 }
