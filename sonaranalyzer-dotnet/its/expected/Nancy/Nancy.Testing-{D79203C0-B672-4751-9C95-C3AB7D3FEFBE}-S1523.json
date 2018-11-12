@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"region":  {
+"startLine":  839,
+"startColumn":  24,
+"endLine":  839,
+"endColumn":  44
+}
+}
+}
+]
+}

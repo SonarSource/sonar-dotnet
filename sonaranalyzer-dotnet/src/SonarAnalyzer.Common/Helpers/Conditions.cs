@@ -30,5 +30,14 @@ namespace SonarAnalyzer.Helpers
 
         public static ObjectCreationCondition ExceptWhen(ObjectCreationCondition condition) =>
             (value) => !condition(value);
+
+        public static PropertyAccessCondition And(PropertyAccessCondition condition1, PropertyAccessCondition condition2) =>
+            (value) => condition1(value) && condition2(value);
+
+        public static InvocationCondition And(InvocationCondition condition1, InvocationCondition condition2) =>
+            (value) => condition1(value) && condition2(value);
+
+        public static ObjectCreationCondition And(ObjectCreationCondition condition1, ObjectCreationCondition condition2) =>
+            (value) => condition1(value) && condition2(value);
     }
 }

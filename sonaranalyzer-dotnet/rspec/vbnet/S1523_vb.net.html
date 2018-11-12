@@ -1,0 +1,113 @@
+<p>Executing code dynamically is security-sensitive. It has led in the past to the following vulnerabilities:</p>
+<ul>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-9807">CVE-2017-9807</a> </li>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-9802">CVE-2017-9802</a> </li>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9182">CVE-2016-9182</a> </li>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1000210">CVE-2018-1000210</a> </li>
+</ul>
+<p>It is dangerous to let external sources either:</p>
+<ul>
+  <li> execute unknown code in your process. Such <a href="https://www.owasp.org/index.php/Code_Injection">Injected Code</a> can either run on the
+  server or in the client (exemple: XSS attack). </li>
+  <li> select the code which will be executed via reflection. </li>
+</ul>
+<p>This rule marks for review each occurence of such dynamic code execution. The goal is to guide security code reviews.</p>
+<h2>Ask Yourself Whether</h2>
+<ul>
+  <li> the executed code may come from a untrusted source and hasn't been sanitized. </li>
+  <li> the code to run is dynamically chosen via reflection, and an untrusted source can use it to choose which code to run. For example a class could
+  be retrieved by its name and this name comes from a user input. </li>
+</ul>
+<p>You are at risk if you answered yes to any of these questions.</p>
+<h2>Recommended Secure Coding Practices</h2>
+<p>Regarding the execution of unknown code, the best solution is to not run code provided by an untrusted source. If you really need to do it, run the
+code in a <a href="https://en.wikipedia.org/wiki/Sandbox_(computer_security)">sandboxed</a> environment. Use jails, firewalls and whatever means your
+operating system and programming language provide (example: <a
+href="https://wiki.sei.cmu.edu/confluence/display/java/SEC54-J.+Create+a+secure+sandbox+using+a+security+manager">Security Managers</a> in java, <a
+href="https://www.w3schools.com/tags/att_iframe_sandbox.asp">iframes</a> and <a href="https://en.wikipedia.org/wiki/Same-origin_policy">same-origin
+policy</a> for javascript in a web browser).</p>
+<p>Do not try to create a blacklist of dangerous code. It is impossible to cover all attacks that way.</p>
+<p>As for the use of reflection, it should be strictly controlled as it can lead to many vulnerabilities. Never let an untrusted source decide what
+code to run. If you have to do it anyway, create a list of allowed code and choose among this list.</p>
+<h2>Questionable Code Example</h2>
+<pre>
+Imports System
+Imports System.Reflection
+
+Class TestReflection
+
+    Public Shared Sub Run(typeName As String, methodName As String, fieldName As String, propertyName As String, moduleName As String)
+
+        Assembly.Load(...) ' Questionable
+        Assembly.LoadFile(...) ' Questionable
+        Assembly.LoadFrom(...) ' Questionable
+        Assembly.LoadWithPartialName(...) ' Questionable + deprecated
+
+        Assembly.ReflectionOnlyLoad(...)  ' This is OK as the resulting type is not executable.
+        Assembly.ReflectionOnlyLoadFrom(...) ' This is OK as the resulting type is not executable.
+        Dim asm = GetType(TestReflection).Assembly
+
+        ' Review this code to make sure that the module, type, method And field are safe
+        Dim type As Type = asm.GetType(typeName) ' Questionable
+        Dim [module] As [Module] = asm.GetModule(moduleName) ' Questionable
+
+        type = System.Type.GetType(typeName) ' Questionable
+        type = type.GetNestedType(typeName) ' Questionable
+        type = type.GetInterface(typeName) ' Questionable
+        Dim method As MethodInfo = type.GetMethod(methodName) ' Questionable
+        Dim field As FieldInfo = type.GetField(fieldName) ' Questionable
+        Dim prop as PropertyInfo = type.GetProperty(propertyName) ' Questionable
+
+
+        ' Review this code to make sure that the modules, types, methods And fields are used safely
+        Dim modules = asm.GetModules() ' Questionable
+        modules = asm.GetLoadedModules() ' Questionable
+
+        Dim types = asm.GetTypes() ' Questionable
+        types = asm.GetExportedTypes() ' Questionable
+        types = asm.GetForwardedTypes() ' Questionable
+
+        types = type.GetNestedTypes() ' Questionable
+        Dim methods = type.GetMethods() ' Questionable
+        Dim fields = type.GetFields() ' Questionable
+        Dim properties = type.GetProperties() ' Questionable
+        Dim members = type.GetMembers() ' Questionable
+        members = type.GetMember(methodName) ' Questionable
+        members = type.GetDefaultMembers() ' Questionable
+
+        type.InvokeMember(...) ' Questionable
+        asm.CreateInstance(typeName) ' Questionable
+
+        type = Type.ReflectionOnlyGetType(typeName, True, True) ' This is OK as the resulting type is not executable.
+
+        Activator.CreateComInstanceFrom(...) ' Questionable
+        Activator.CreateInstance(...) ' Questionable
+        Activator.CreateInstanceFrom(...) ' Questionable
+        Activator.CreateInstance(Of ...)() ' OK - can only be created from a referenced type
+
+    End Sub
+End Class
+</pre>
+<h2>Exceptions</h2>
+<p>No issue will be created if one of the methods above is called with a hard-coded type/method/field/property/interface/module name. There can be no
+injection in this specific scenario.</p>
+<p>Example:</p>
+<pre>
+assembly.GetType("MyHardcodedType")
+</pre>
+<p>No issue will be created if one of the methods is called on an instance of <em>Type</em> created using <em>GetType</em> operator. There can be no
+injection in this specific scenario.</p>
+<p>Example:</p>
+<pre>
+typeof(CustomType).GetMethods();
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="http://cwe.mitre.org/data/definitions/95.html">MITRE CWE-95</a> - Improper Neutralization of Directives in Dynamically Evaluated Code
+  ('Eval Injection') </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/470.html">MITRE CWE-470</a> - Use of Externally-Controlled Input to Select Classes or Code
+  ('Unsafe Reflection') </li>
+  <li> OWASP Top 10 2017 Category A1 - Injection </li>
+  <li> OWASP Top 10 2017 Category A7 - Cross-Site Scripting (XSS) </li>
+</ul>
+

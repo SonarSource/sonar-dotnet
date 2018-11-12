@@ -1,0 +1,433 @@
+{
+"issues":  [
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  17,
+"endLine":  180,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  29,
+"endLine":  253,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  27,
+"endLine":  101,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  28,
+"endLine":  144,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  28,
+"endLine":  166,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"region":  {
+"startLine":  187,
+"startColumn":  26,
+"endLine":  187,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  46,
+"endLine":  38,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\SettingsModule.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  56,
+"endLine":  21,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\SettingsModule.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  42,
+"endLine":  58,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\AssemblyExtensions.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  25,
+"endLine":  24,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  44,
+"endLine":  65,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  20,
+"endLine":  121,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  36,
+"endLine":  81,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  29,
+"endLine":  133,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  285,
+"startColumn":  36,
+"endLine":  285,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  288,
+"startColumn":  23,
+"endLine":  288,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  87,
+"endLine":  332,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  379,
+"startColumn":  49,
+"endLine":  379,
+"endColumn":  145
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  276,
+"startColumn":  26,
+"endLine":  276,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  352,
+"startColumn":  34,
+"endLine":  352,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  353,
+"startColumn":  37,
+"endLine":  353,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  34,
+"endLine":  169,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  30,
+"endLine":  173,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  25,
+"endLine":  81,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  250,
+"startColumn":  30,
+"endLine":  251,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  30,
+"endLine":  185,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  18,
+"endLine":  293,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  17,
+"endLine":  402,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3744,
+"startColumn":  47,
+"endLine":  3744,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewFactory.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  42,
+"endLine":  134,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ResourceViewLocationProvider.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  29,
+"endLine":  153,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  30,
+"endLine":  218,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  26,
+"endLine":  229,
+"endColumn":  107
+}
+}
+}
+]
+}

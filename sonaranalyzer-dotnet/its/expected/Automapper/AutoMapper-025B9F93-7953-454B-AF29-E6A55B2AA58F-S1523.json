@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  67,
+"endLine":  53,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  67,
+"endLine":  56,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S1523",
+"message":  "Make sure that this dynamic injection or execution of code is safe.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyGenerator.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  41,
+"endLine":  104,
+"endColumn":  61
+}
+}
+}
+]
+}

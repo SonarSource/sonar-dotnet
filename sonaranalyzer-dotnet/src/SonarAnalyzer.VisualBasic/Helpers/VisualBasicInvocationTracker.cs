@@ -60,5 +60,11 @@ namespace SonarAnalyzer.Helpers
         public override InvocationCondition MethodNameIs(string methodName) =>
             (context) =>
                 ((SimpleNameSyntax)context.Identifier).Identifier.ValueText == methodName;
+
+        public override InvocationCondition IsTypeOfExpression() =>
+            (context) => context.Invocation is InvocationExpressionSyntax invocation
+                        && invocation.Expression is MemberAccessExpressionSyntax memberAccessSyntax
+                        && memberAccessSyntax.Expression != null        
+                        && memberAccessSyntax.Expression.RawKind == (int)SyntaxKind.GetTypeExpression;
     }
 }
