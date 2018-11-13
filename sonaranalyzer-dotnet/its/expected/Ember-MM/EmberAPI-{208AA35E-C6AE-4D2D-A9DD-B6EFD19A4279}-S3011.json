@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  805,
+"startColumn":  133,
+"endLine":  805,
+"endColumn":  173
+}
+}
+},
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  943,
+"startColumn":  133,
+"endLine":  943,
+"endColumn":  173
+}
+}
+}
+]
+}
