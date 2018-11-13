@@ -31,6 +31,8 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNetCore_Builder_DeveloperExceptionPageExtensions = new KnownType("Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions");
         internal static readonly KnownType Microsoft_AspNetCore_Builder_DatabaseErrorPageExtensions = new KnownType("Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions");
         internal static readonly KnownType Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions = new KnownType("Microsoft.AspNetCore.Hosting.HostingEnvironmentExtensions");
+        internal static readonly KnownType Microsoft_AspNetCore_Hosting_WebHostBuilderExtensions = new KnownType("Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions");
+
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_Controller = new KnownType("Microsoft.AspNetCore.Mvc.Controller");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerBase = new KnownType("Microsoft.AspNetCore.Mvc.ControllerBase");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.ControllerAttribute");
@@ -40,6 +42,13 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_EntityFrameworkCore_RawSqlString = new KnownType("Microsoft.EntityFrameworkCore.RawSqlString");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions = new KnownType("Microsoft.EntityFrameworkCore.RelationalDatabaseFacadeExtensions");
         internal static readonly KnownType Microsoft_EntityFrameworkCore_RelationalQueryableExtensions = new KnownType("Microsoft.EntityFrameworkCore.RelationalQueryableExtensions");
+        internal static readonly KnownType Microsoft_Extensions_DependencyInjection_LoggingServiceCollectionExtensions = new KnownType("Microsoft.Extensions.DependencyInjection.LoggingServiceCollectionExtensions");
+        internal static readonly KnownType Microsoft_Extensions_Logging_AzureAppServicesLoggerFactoryExtensions = new KnownType("Microsoft.Extensions.Logging.AzureAppServicesLoggerFactoryExtensions");
+        internal static readonly KnownType Microsoft_Extensions_Logging_ConsoleLoggerExtensions = new KnownType("Microsoft.Extensions.Logging.ConsoleLoggerExtensions");
+        internal static readonly KnownType Microsoft_Extensions_Logging_DebugLoggerFactoryExtensions = new KnownType("Microsoft.Extensions.Logging.DebugLoggerFactoryExtensions");
+        internal static readonly KnownType Microsoft_Extensions_Logging_EventLoggerFactoryExtensions = new KnownType("Microsoft.Extensions.Logging.EventLoggerFactoryExtensions");
+        internal static readonly KnownType Microsoft_Extensions_Logging_EventSourceLoggerFactoryExtensions = new KnownType("Microsoft.Extensions.Logging.EventSourceLoggerFactoryExtensions");
+        internal static readonly KnownType Microsoft_Extensions_Logging_ILoggerFactory = new KnownType("Microsoft.Extensions.Logging.ILoggerFactory");
         internal static readonly KnownType Microsoft_VisualBasic_Interaction = new KnownType("Microsoft.VisualBasic.Interaction");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_Assert = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.Assert");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_ExpectedExceptionAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.ExpectedExceptionAttribute");

@@ -89,6 +89,13 @@ namespace SonarAnalyzer.Helpers
                 context.InvokedConstructorSymbol.Value.IsConstructor() &&
                 context.InvokedConstructorSymbol.Value.ContainingType.DerivesFrom(baseType);
 
+        internal ObjectCreationCondition WhenImplements(KnownType baseType) =>
+            (context) =>
+                context.InvokedConstructorSymbol.Value != null &&
+                context.InvokedConstructorSymbol.Value.IsConstructor() &&
+                context.InvokedConstructorSymbol.Value.ContainingType.Implements(baseType);
+
+
         internal ObjectCreationCondition WhenDerivesOrImplements(KnownType baseType) =>
             (context) =>
                 context.InvokedConstructorSymbol.Value != null &&

@@ -1,0 +1,204 @@
+<p>Configuring loggers is security-sensitive. It has led in the past to the following vulnerabilities:</p>
+<ul>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0285">CVE-2018-0285</a> </li>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2000-1127">CVE-2000-1127</a> </li>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-15113">CVE-2017-15113</a> </li>
+  <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5742">CVE-2015-5742</a> </li>
+</ul>
+<p>Logs are useful before, during and after a security incident.</p>
+<ul>
+  <li> Attackers will most of the time start their nefarious work by probing the system for vulnerabilities. Monitoring this activity and stopping it
+  is the first step to prevent an attack from ever happening. </li>
+  <li> In case of a successful attack, logs should contain enough information to understand what damage an attacker may have inflicted. </li>
+</ul>
+<p>Logs are also a target for attackers because they might contain sensitive information. Configuring loggers has an impact on the type of information
+logged and how they are logged.</p>
+<p>This rule flags for review code that initiates loggers configuration. The goal is to guide security code reviews.</p>
+<h2>Ask Yourself Whether</h2>
+<ul>
+  <li> unauthorized users might have access to the logs, either because they are stored in an insecure location or because the application gives
+  access to them. </li>
+  <li> the logs contain sensitive information on a production server. This can happen when the logger is in debug mode. </li>
+  <li> the log can grow without limit. This can happen when additional information is written into logs every time a user performs an action and the
+  user can perform the action as many times as he/she wants. </li>
+  <li> the logs do not contain enough information to understand the damage an attacker might have inflicted. The loggers mode (info, warn, error)
+  might filter out important information. They might not print contextual information like the precise time of events or the server hostname. </li>
+  <li> the logs are only stored locally instead of being backuped or replicated. </li>
+</ul>
+<p>You are at risk if you answered yes to any of those questions.</p>
+<h2>Recommended Secure Coding Practices</h2>
+<ul>
+  <li> Check that your production deployment doesn't have its loggers in "debug" mode as it might write sensitive information in logs. </li>
+  <li> Production logs should be stored in a secure location which is only accessible to system administrators. </li>
+  <li> Configure the loggers to display all warnings, info and error messages. Write relevant information such as the precise time of events and the
+  hostname. </li>
+  <li> Choose log format which is easy to parse and process automatically. It is important to process logs rapidly in case of an attack so that the
+  impact is known and limited. </li>
+  <li> Check that the permissions of the log files are correct. If you index the logs in some other service, make sure that the transfer and the
+  service are secure too. </li>
+  <li> Add limits to the size of the logs and make sure that no user can fill the disk with logs. This can happen even when the user does not control
+  the logged information. An attacker could just repeat a logged action many times. </li>
+</ul>
+<p>Remember that configuring loggers properly doesn't make them bullet-proof. Here is a list of recommendations explaining on how to use your
+logs:</p>
+<ul>
+  <li> Don't log any sensitive information. This obviously includes passwords and credit card numbers but also any personal information such as user
+  names, locations, etc... Usually any information which is protected by law is good candidate for removal. </li>
+  <li> Sanitize all user inputs before writing them in the logs. This includes checking its size, content, encoding, syntax, etc... As for any user
+  input, validate using whitelists whenever possible. Enabling users to write what they want in your logs can have many impacts. It could for example
+  use all your storage space or compromise your log indexing service. </li>
+  <li> Log enough information to monitor suspicious activities and evaluate the impact an attacker might have on your systems. Register events such as
+  failed logins, successful logins, server side input validation failures, access denials and any important transaction. </li>
+  <li> Monitor the logs for any suspicious activity. </li>
+</ul>
+<p>See</p>
+<ul>
+  <li> <a href="https://cwe.mitre.org/data/definitions/532.html">MITRE, CWE-532</a> - Information Exposure Through Log Files </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/117.html">MITRE, CWE-117</a> - Improper Output Neutralization for Logs </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/778.html">MITRE, CWE-778</a> - Insufficient Logging </li>
+  <li> [OWASP Top 10 2017 Category A3 - Sensitive Data Exposure </li>
+  <li> [OWASP Top 10 2017 Category A10 - Insufficient Logging &amp; Monitoring </li>
+  <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
+</ul>
+<h2>Questionable Code Example</h2>
+<p><strong>.Net Core</strong>: configure programmatically</p>
+<pre>
+Imports System
+Imports System.Collections
+Imports System.Collections.Generic
+Imports Microsoft.AspNetCore
+Imports Microsoft.AspNetCore.Builder
+Imports Microsoft.AspNetCore.Hosting
+Imports Microsoft.Extensions.Configuration
+Imports Microsoft.Extensions.DependencyInjection
+Imports Microsoft.Extensions.Logging
+Imports Microsoft.Extensions.Options
+
+Namespace MvcApp
+
+    Public Class ProgramLogging
+
+        Public Shared Function CreateWebHostBuilder(args As String()) As IWebHostBuilder
+
+            WebHost.CreateDefaultBuilder(args) _
+                .ConfigureLogging(Function(hostingContext, Logging) ' Questionable
+                                      ' ...
+                                  End Function) _
+            .UseStartup(Of StartupLogging)()
+
+            '...
+        End Function
+    End Class
+
+
+    Public Class StartupLogging
+
+        Public Sub ConfigureServices(services As IServiceCollection)
+
+            services.AddLogging(Function(logging) ' Questionable
+                                    '...
+                                End Function)
+        End Sub
+
+        Public Sub Configure(app As IApplicationBuilder, env As IHostingEnvironment, loggerFactory As ILoggerFactory)
+
+            Dim config As IConfiguration = Nothing
+            Dim level As LogLevel = LogLevel.Critical
+            Dim includeScopes As Boolean = False
+            Dim filter As Func(Of String, Microsoft.Extensions.Logging.LogLevel, Boolean) = Nothing
+            Dim consoleSettings As Microsoft.Extensions.Logging.Console.IConsoleLoggerSettings = Nothing
+            Dim azureSettings As Microsoft.Extensions.Logging.AzureAppServices.AzureAppServicesDiagnosticsSettings = Nothing
+            Dim eventLogSettings As Microsoft.Extensions.Logging.EventLog.EventLogSettings = Nothing
+
+            ' An issue will be raised for each call to an ILoggerFactory extension methods adding loggers.
+            loggerFactory.AddAzureWebAppDiagnostics() ' Questionable
+            loggerFactory.AddAzureWebAppDiagnostics(azureSettings) ' Questionable
+            loggerFactory.AddConsole() ' Questionable
+            loggerFactory.AddConsole(level) ' Questionable
+            loggerFactory.AddConsole(level, includeScopes) ' Questionable
+            loggerFactory.AddConsole(filter) ' Questionable
+            loggerFactory.AddConsole(filter, includeScopes) ' Questionable
+            loggerFactory.AddConsole(config) ' Questionable
+            loggerFactory.AddConsole(consoleSettings) ' Questionable
+            loggerFactory.AddDebug() ' Questionable
+            loggerFactory.AddDebug(level) ' Questionable
+            loggerFactory.AddDebug(filter) ' Questionable
+            loggerFactory.AddEventLog() ' Questionable
+            loggerFactory.AddEventLog(eventLogSettings) ' Questionable
+            loggerFactory.AddEventLog(level) ' Questionable
+            ' Only available for NET Standard 2.0 and above
+            'loggerFactory.AddEventSourceLogger() ' Questionable
+
+            Dim providers As IEnumerable(Of ILoggerProvider) = Nothing
+            Dim filterOptions1 As LoggerFilterOptions = Nothing
+            Dim filterOptions2 As IOptionsMonitor(Of LoggerFilterOptions) = Nothing
+
+            Dim factory As LoggerFactory = New LoggerFactory() ' Questionable
+            factory = New LoggerFactory(providers) ' Questionable
+            factory = New LoggerFactory(providers, filterOptions1) ' Questionable
+            factory = New LoggerFactory(providers, filterOptions2) ' Questionable
+        End Sub
+    End Class
+End Namespace
+</pre>
+<p><strong>Log4Net</strong></p>
+<pre>
+Imports System
+Imports System.IO
+Imports System.Xml
+Imports log4net.Appender
+Imports log4net.Config
+Imports log4net.Repository
+
+Namespace MvcApp
+    Class Log4netLogging
+        Private Sub foo(ByVal repository As ILoggerRepository, ByVal element As XmlElement, ByVal configFile As FileInfo, ByVal configUri As Uri, ByVal configStream As Stream, ByVal appender As IAppender, ParamArray appenders As IAppender())
+            log4net.Config.XmlConfigurator.Configure(repository) ' Questionable
+            log4net.Config.XmlConfigurator.Configure(repository, element) ' Questionable
+            log4net.Config.XmlConfigurator.Configure(repository, configFile) ' Questionable
+            log4net.Config.XmlConfigurator.Configure(repository, configUri) ' Questionable
+            log4net.Config.XmlConfigurator.Configure(repository, configStream) ' Questionable
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(repository, configFile) ' Questionable
+
+            log4net.Config.DOMConfigurator.Configure() ' Questionable
+            log4net.Config.DOMConfigurator.Configure(repository) ' Questionable
+            log4net.Config.DOMConfigurator.Configure(element) ' Questionable
+            log4net.Config.DOMConfigurator.Configure(repository, element) ' Questionable
+            log4net.Config.DOMConfigurator.Configure(configFile) ' Questionable
+            log4net.Config.DOMConfigurator.Configure(repository, configFile) ' Questionable
+            log4net.Config.DOMConfigurator.Configure(configStream) ' Questionable
+            log4net.Config.DOMConfigurator.Configure(repository, configStream) ' Questionable
+            log4net.Config.DOMConfigurator.ConfigureAndWatch(configFile) ' Questionable
+            log4net.Config.DOMConfigurator.ConfigureAndWatch(repository, configFile) ' Questionable
+
+            log4net.Config.BasicConfigurator.Configure() ' Questionable
+            log4net.Config.BasicConfigurator.Configure(appender) ' Questionable
+            log4net.Config.BasicConfigurator.Configure(appenders) ' Questionable
+            log4net.Config.BasicConfigurator.Configure(repository) ' Questionable
+            log4net.Config.BasicConfigurator.Configure(repository, appender) ' Questionable
+            log4net.Config.BasicConfigurator.Configure(repository, appenders) ' Questionable
+        End Sub
+    End Class
+End Namespace
+</pre>
+<p><strong>NLog</strong>: configure programmatically</p>
+<pre>
+Namespace MvcApp
+    Class NLogLogging
+        Private Sub Foo(ByVal config As NLog.Config.LoggingConfiguration)
+            NLog.LogManager.Configuration = config ' Questionable
+        End Sub
+    End Class
+End Namespace
+</pre>
+<p><strong>Serilog</strong></p>
+<pre>
+Namespace MvcApp
+    Class SeriLogLogging
+        Private Sub Foo()
+            Dim config As Serilog.LoggerConfiguration = New Serilog.LoggerConfiguration() ' Questionable
+        End Sub
+    End Class
+End Namespace
+</pre>
+

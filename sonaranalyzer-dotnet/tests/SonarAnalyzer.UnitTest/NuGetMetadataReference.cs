@@ -232,11 +232,17 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> FluentAssertions(string packageVersion) =>
             Create("FluentAssertions", packageVersion);
 
+        public static IEnumerable<MetadataReference> MicrosoftAspNetCore(string packageVersion) =>
+            Create("Microsoft.AspNetCore", packageVersion);
+
         public static IEnumerable<MetadataReference> MicrosoftAspNetCoreDiagnostics(string packageVersion) =>
             Create("Microsoft.AspNetCore.Diagnostics", packageVersion);
 
         public static IEnumerable<MetadataReference> MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(string packageVersion) =>
             Create("Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreHosting(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Hosting", packageVersion);
 
         public static IEnumerable<MetadataReference> MicrosoftAspNetCoreHostingAbstractions(string packageVersion) =>
             Create("Microsoft.AspNetCore.Hosting.Abstractions", packageVersion);
@@ -261,6 +267,23 @@ namespace SonarAnalyzer.UnitTest
 
         public static IEnumerable<MetadataReference> MicrosoftAspNetMvc(string packageVersion) =>
             Create("Microsoft.AspNet.Mvc", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftExtensionsConfigurationAbstractions(string packageVersion) =>
+            Create("Microsoft.Extensions.Configuration.Abstractions", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftExtensionsDependencyInjectionAbstractions(string packageVersion) =>
+            Create("Microsoft.Extensions.DependencyInjection.Abstractions", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftExtensionsLoggingPackages(string packageVersion) =>
+            Create("Microsoft.Extensions.Logging", packageVersion)
+            .Concat(Create("Microsoft.Extensions.Logging.AzureAppServices", packageVersion))
+            .Concat(Create("Microsoft.Extensions.Logging.Abstractions", packageVersion))
+            .Concat(Create("Microsoft.Extensions.Logging.Console", packageVersion))
+            .Concat(Create("Microsoft.Extensions.Logging.Debug", packageVersion))
+            .Concat(Create("Microsoft.Extensions.Logging.EventLog", packageVersion));
+
+        public static IEnumerable<MetadataReference> MicrosoftExtensionsOptions(string packageVersion) =>
+            Create("Microsoft.Extensions.Options", packageVersion);
 
         public static IEnumerable<MetadataReference> SystemDataSqlServerCe(string packageVersion) =>
             Create("Microsoft.SqlServer.Compact", packageVersion);
