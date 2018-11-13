@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4825",
+"message":  "Make sure that this http request is sent safely.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgErrorViewer.vb",
+"region":  {
+"startLine":  60,
+"startColumn":  68,
+"endLine":  60,
+"endColumn":  137
+}
+}
+}
+]
+}
