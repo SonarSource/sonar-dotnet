@@ -92,6 +92,11 @@ namespace SonarAnalyzer.Helpers
                 context.InvokedMethodSymbol.Value != null &&
                 context.InvokedMethodSymbol.Value.IsStatic;
 
+        public InvocationCondition IsExtensionMethod() =>
+            (context) =>
+                context.InvokedMethodSymbol.Value != null &&
+                context.InvokedMethodSymbol.Value.IsExtensionMethod;
+
         public InvocationCondition HasParameters() =>
             (context) =>
                 context.InvokedMethodSymbol.Value != null &&
