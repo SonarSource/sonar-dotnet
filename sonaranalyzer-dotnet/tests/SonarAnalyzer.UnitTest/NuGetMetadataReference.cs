@@ -35,9 +35,8 @@ namespace SonarAnalyzer.UnitTest
 
         private const string PackagesFolderRelativePath = @"..\..\..\..\packages\";
 
-        private static readonly List<string> allowedNugetLibDirectories =
-            new List<string>
-            {
+        private static readonly string[] allowedNugetLibDirectoriesInOrderOfPreference =
+            new string[] {
                 "netstandard2.0",
                 "net47",
                 "net461",
@@ -45,8 +44,8 @@ namespace SonarAnalyzer.UnitTest
                 "netstandard1.3",
                 "netstandard1.1",
                 "netstandard1.0",
-                "net45",
                 "net451",
+                "net45",
                 "net40",
                 "net20",
                 "portable-net45",
@@ -58,10 +57,20 @@ namespace SonarAnalyzer.UnitTest
 
         public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion)
         {
+            return Create(packageId, packageVersion, allowedNugetLibDirectoriesInOrderOfPreference);
+        }
+
+        public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string targetFramework)
+        {
+            return Create(packageId, packageVersion, new string[] { targetFramework });
+        }
+
+        private static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string[] allowedTargetFrameworks)
+        {
             EnsurePackageIsInstalled(packageId, packageVersion);
 
-            var allowedNugetLibDirectoriesByPreference = allowedNugetLibDirectories.
-                Zip(Enumerable.Range(0, allowedNugetLibDirectories.Count), (folder, priority) => new { folder, priority });
+            var allowedNugetLibDirectoriesByPreference = allowedTargetFrameworks.
+                Zip(Enumerable.Range(0, allowedTargetFrameworks.Length), (folder, priority) => new { folder, priority });
             var packageDirectory = GetNuGetPackageDirectory(packageId, packageVersion);
             var matchingDllsGroups = Directory.GetFiles(packageDirectory, "*.dll", SearchOption.AllDirectories)
                 .Select(path => new FileInfo(path))
@@ -78,8 +87,19 @@ namespace SonarAnalyzer.UnitTest
                 .First()
                 .group;
 
+            DumpSelectedGroup(packageId, packageVersion, selectedGroup);
+
             return selectedGroup.Select(file => (MetadataReference)MetadataReference.CreateFromFile(file.FullName))
                 .ToImmutableArray();
+        }
+
+        private static void DumpSelectedGroup(string packageId, string packageVersion, IGrouping<string, FileInfo> fileGroup)
+        {
+            Console.WriteLine($"Package: {packageId}, version: {packageVersion}, chosen targetFramework: {fileGroup.Key}");
+            foreach (var file in fileGroup)
+            {
+                Console.WriteLine($"\\File: {file.FullName}");
+            }
         }
 
         private static IPackageRepository CreatePackageRepository()
@@ -232,11 +252,20 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> FluentAssertions(string packageVersion) =>
             Create("FluentAssertions", packageVersion);
 
+        public static IEnumerable<MetadataReference> MicrosoftAspNetCore(string packageVersion) =>
+            Create("Microsoft.AspNetCore", packageVersion);
+
+        public static IEnumerable<MetadataReference> Log4Net(string packageVersion, string targetFramework) =>
+            Create("log4net", packageVersion, targetFramework);
+
         public static IEnumerable<MetadataReference> MicrosoftAspNetCoreDiagnostics(string packageVersion) =>
             Create("Microsoft.AspNetCore.Diagnostics", packageVersion);
 
         public static IEnumerable<MetadataReference> MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(string packageVersion) =>
             Create("Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreHosting(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Hosting", packageVersion);
 
         public static IEnumerable<MetadataReference> MicrosoftAspNetCoreHostingAbstractions(string packageVersion) =>
             Create("Microsoft.AspNetCore.Hosting.Abstractions", packageVersion);
@@ -261,6 +290,30 @@ namespace SonarAnalyzer.UnitTest
 
         public static IEnumerable<MetadataReference> MicrosoftAspNetMvc(string packageVersion) =>
             Create("Microsoft.AspNet.Mvc", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftExtensionsConfigurationAbstractions(string packageVersion) =>
+            Create("Microsoft.Extensions.Configuration.Abstractions", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftExtensionsDependencyInjectionAbstractions(string packageVersion) =>
+            Create("Microsoft.Extensions.DependencyInjection.Abstractions", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftExtensionsLoggingPackages(string packageVersion) =>
+            Create("Microsoft.Extensions.Logging", packageVersion)
+            .Concat(Create("Microsoft.Extensions.Logging.AzureAppServices", packageVersion))
+            .Concat(Create("Microsoft.Extensions.Logging.Abstractions", packageVersion))
+            .Concat(Create("Microsoft.Extensions.Logging.Console", packageVersion))
+            .Concat(Create("Microsoft.Extensions.Logging.Debug", packageVersion))
+            .Concat(Create("Microsoft.Extensions.Logging.EventLog", packageVersion));
+
+        public static IEnumerable<MetadataReference> MicrosoftExtensionsOptions(string packageVersion) =>
+            Create("Microsoft.Extensions.Options", packageVersion);
+
+        public static IEnumerable<MetadataReference> NLog(string packageVersion) =>
+            Create("NLog", packageVersion);
+
+        public static IEnumerable<MetadataReference> SerilogPackages(string packageVersion) =>
+            Create("Serilog", packageVersion)
+            .Concat(Create("Serilog.Sinks.Console", packageVersion));
 
         public static IEnumerable<MetadataReference> SystemDataSqlServerCe(string packageVersion) =>
             Create("Microsoft.SqlServer.Compact", packageVersion);
