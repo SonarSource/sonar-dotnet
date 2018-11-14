@@ -308,6 +308,9 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> MicrosoftExtensionsOptions(string packageVersion) =>
             Create("Microsoft.Extensions.Options", packageVersion);
 
+        public static IEnumerable<MetadataReference> NLog(string packageVersion) =>
+            Create("NLog", packageVersion);
+
         public static IEnumerable<MetadataReference> SystemDataSqlServerCe(string packageVersion) =>
             Create("Microsoft.SqlServer.Compact", packageVersion);
 

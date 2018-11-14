@@ -47,6 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             InvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, rule);
             ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, rule);
+            PropertyAccessTracker = new CSharpPropertyAccessTracker(analyzerConfiguration, rule);
         }
     }
 }

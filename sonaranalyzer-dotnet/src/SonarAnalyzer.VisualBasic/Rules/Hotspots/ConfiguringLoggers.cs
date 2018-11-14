@@ -47,6 +47,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
             ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, rule);
+            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, rule);
         }
     }
 }

@@ -73,6 +73,26 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
+        public void ConfiguringLoggers_NLog_CS()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_NLog.cs",
+                new ConfiguringLoggers(new TestAnalyzerConfiguration(null, "S4792")),
+                additionalReferences: NLogReferences);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
+        public void ConfiguringLoggers_NLog_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_NLog.vb",
+                new SonarAnalyzer.Rules.VisualBasic.ConfiguringLoggers(new TestAnalyzerConfiguration(null, "S4792")),
+                additionalReferences: NLogReferences);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void ConfiguringLoggers_CS_RuleDisabled()
         {
             Verifier.VerifyNoIssueReported(@"TestCases\ConfiguringLoggers_AspNetCore.cs",
@@ -105,6 +125,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         private static IEnumerable<MetadataReference> Log4NetReferences =>
             NuGetMetadataReference.Log4Net(Constants.NuGetLatestVersion, "net45-full")
             .Concat(FrameworkMetadataReference.SystemXml);
+
+        private static IEnumerable<MetadataReference> NLogReferences =>
+            NuGetMetadataReference.NLog(Constants.NuGetLatestVersion);
+
     }
 }
 

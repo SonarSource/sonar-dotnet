@@ -30,6 +30,7 @@ namespace SonarAnalyzer.Rules
 
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
         protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
+        protected PropertyAccessTracker<TSyntaxKind> PropertyAccessTracker { get; set; }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -62,6 +63,11 @@ namespace SonarAnalyzer.Rules
 
                     new MethodSignature(KnownType.log4net_Config_BasicConfigurator, "Configure")));
 
+            // NLog
+            PropertyAccessTracker.Track(context,
+                PropertyAccessTracker.MatchSimpleNames(
+                    new MethodSignature(KnownType.NLog_LogManager, "Configuration")),
+                PropertyAccessTracker.MatchSet());
         }
     }
 }
