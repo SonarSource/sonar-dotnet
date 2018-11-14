@@ -51,7 +51,8 @@ namespace SonarAnalyzer.Helpers
                 }
 
                 var methodDeclaration = context.MethodSymbol.DeclaringSyntaxReferences
-                    .Select(r => (MethodDeclarationSyntax)r.GetSyntax())
+                    .Select(r => r.GetSyntax())
+                    .OfType<BaseMethodDeclarationSyntax>()
                     .FirstOrDefault(declaration => declaration.HasBodyOrExpressionBody());
 
                 if (methodDeclaration == null)
@@ -74,8 +75,27 @@ namespace SonarAnalyzer.Helpers
                     });
             };
 
-
-        protected override SyntaxToken GetMethodIdentifier(SyntaxNode methodDeclaration) =>
-            ((MethodDeclarationSyntax)methodDeclaration).Identifier;
+        protected override SyntaxToken? GetMethodIdentifier(SyntaxNode methodDeclaration)
+        {
+            switch (methodDeclaration?.Kind())
+            {
+                case SyntaxKind.MethodDeclaration:
+                    return ((MethodDeclarationSyntax)methodDeclaration).Identifier;
+                case SyntaxKind.ConstructorDeclaration:
+                    return ((ConstructorDeclarationSyntax)methodDeclaration).Identifier;
+                case SyntaxKind.DestructorDeclaration:
+                    return ((DestructorDeclarationSyntax)methodDeclaration).Identifier;
+                case SyntaxKind.AddAccessorDeclaration:
+                case SyntaxKind.RemoveAccessorDeclaration:
+                    return ((EventDeclarationSyntax)methodDeclaration.Parent.Parent).Identifier;
+                case SyntaxKind.GetAccessorDeclaration:
+                case SyntaxKind.SetAccessorDeclaration:
+                    return ((PropertyDeclarationSyntax)methodDeclaration.Parent.Parent).Identifier;
+                case SyntaxKind.OperatorDeclaration:
+                    return ((OperatorDeclarationSyntax)methodDeclaration).OperatorToken;
+                default:
+                    return null;
+            }
+        }
     }
 }

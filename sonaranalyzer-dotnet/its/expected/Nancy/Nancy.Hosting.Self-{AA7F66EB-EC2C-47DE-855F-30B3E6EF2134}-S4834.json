@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4834",
+"message":  "Make sure that permissions are controlled safely here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  19,
+"endLine":  213,
+"endColumn":  47
+}
+}
+}
+]
+}
