@@ -75,7 +75,26 @@ namespace SonarAnalyzer.Helpers
         private static bool HasImplementation(MethodBlockSyntax methodBlock) =>
             methodBlock.Statements.Count > 0;
 
-        protected override SyntaxToken GetMethodIdentifier(SyntaxNode methodDeclaration) =>
-            ((MethodStatementSyntax)methodDeclaration).Identifier;
+        protected override SyntaxToken? GetMethodIdentifier(SyntaxNode methodDeclaration)
+        {
+            switch (methodDeclaration?.Kind())
+            {
+                case SyntaxKind.SubStatement:
+                case SyntaxKind.FunctionStatement:
+                    return ((MethodStatementSyntax)methodDeclaration).Identifier;
+                case SyntaxKind.SubNewStatement:
+                    return ((SubNewStatementSyntax)methodDeclaration).NewKeyword;
+                case SyntaxKind.AddHandlerAccessorBlock:
+                case SyntaxKind.RemoveHandlerAccessorBlock:
+                    return ((EventBlockSyntax)methodDeclaration.Parent.Parent).EventStatement?.Identifier;
+                case SyntaxKind.GetAccessorBlock:
+                case SyntaxKind.SetAccessorBlock:
+                    return ((PropertyBlockSyntax)methodDeclaration.Parent.Parent).PropertyStatement?.Identifier;
+                case SyntaxKind.OperatorStatement:
+                    return ((OperatorStatementSyntax)methodDeclaration).OperatorToken;
+                default:
+                    return null;
+            }
+        }
     }
 }

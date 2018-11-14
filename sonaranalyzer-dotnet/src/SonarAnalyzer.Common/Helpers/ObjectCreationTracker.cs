@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -71,6 +72,15 @@ namespace SonarAnalyzer.Helpers
                 context.InvokedConstructorSymbol.Value.ArgumentAtIndexIs(0, type);
 
         internal abstract ObjectCreationCondition FirstArgumentIsConstant();
+
+        internal ObjectCreationCondition MatchAnyTypeThatImplements(params KnownType[] types)
+        {
+            var typesArray = types.ToImmutableArray();
+            return (context) =>
+                context.InvokedConstructorSymbol.Value != null &&
+                context.InvokedConstructorSymbol.Value.IsConstructor() &&
+                context.InvokedConstructorSymbol.Value.ContainingType.DerivesOrImplementsAny(typesArray);
+        }
 
         internal ObjectCreationCondition MatchConstructors(params KnownType[] types)
         {
