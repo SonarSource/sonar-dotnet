@@ -3008,7 +3008,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["3008"],
             //["3009"],
             ["3010"] = "CODE_SMELL",
-            //["3011"],
+            ["3011"] = "SECURITY_HOTSPOT",
             //["3012"],
             //["3013"],
             //["3014"],
