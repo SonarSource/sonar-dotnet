@@ -19,15 +19,13 @@
  */
 package org.sonar.plugins.vbnet;
 
-import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
-import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
+import org.sonar.api.SonarRuntime;
+import org.sonarsource.dotnet.shared.plugins.AbstractSonarWayProfile;
 
-public class VbNetSonarWayProfile implements BuiltInQualityProfilesDefinition {
+import javax.annotation.Nullable;
 
-  @Override
-  public void define(Context context) {
-    NewBuiltInQualityProfile sonarWay = context.createBuiltInQualityProfile("Sonar way", VbNetPlugin.LANGUAGE_KEY);
-    BuiltInQualityProfileJsonLoader.load(sonarWay, VbNetPlugin.REPOSITORY_KEY, "org/sonar/plugins/vbnet/Sonar_way_profile.json");
-    sonarWay.done();
+class VbNetSonarWayProfile extends AbstractSonarWayProfile {
+  VbNetSonarWayProfile(@Nullable SonarRuntime sonarRuntime) {
+    super(sonarRuntime, VbNetPlugin.LANGUAGE_KEY, VbNetPlugin.PLUGIN_KEY, VbNetPlugin.REPOSITORY_KEY);
   }
 }
