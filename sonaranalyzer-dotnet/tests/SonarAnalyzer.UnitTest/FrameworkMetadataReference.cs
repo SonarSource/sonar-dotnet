@@ -80,6 +80,9 @@ namespace SonarAnalyzer.UnitTest
         internal static IEnumerable<MetadataReference> SystemGlobalization { get; }
             = Create("System.Globalization.dll");
 
+        internal static IEnumerable<MetadataReference> SystemIdentityModel { get; }
+            = Create("System.IdentityModel.dll");
+
         internal static IEnumerable<MetadataReference> SystemReflection { get; }
             = Create("System.Reflection.dll");
 

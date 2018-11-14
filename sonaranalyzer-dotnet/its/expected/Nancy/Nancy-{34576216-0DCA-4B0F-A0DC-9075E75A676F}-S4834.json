@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S4834",
+"message":  "Make sure that permissions are controlled safely here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Owin\NancyMiddleware.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  57,
+"endLine":  253,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure that permissions are controlled safely here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  28,
+"endLine":  18,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure that permissions are controlled safely here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  28,
+"endLine":  29,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure that permissions are controlled safely here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  28,
+"endLine":  40,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure that permissions are controlled safely here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  28,
+"endLine":  52,
+"endColumn":  42
+}
+}
+}
+]
+}

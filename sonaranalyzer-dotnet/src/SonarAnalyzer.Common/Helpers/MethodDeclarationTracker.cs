@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -35,7 +36,7 @@ namespace SonarAnalyzer.Helpers
         {
         }
 
-        protected abstract SyntaxToken GetMethodIdentifier(SyntaxNode methodDeclaration);
+        protected abstract SyntaxToken? GetMethodIdentifier(SyntaxNode methodDeclaration);
 
         public void Track(SonarAnalysisContext context, params MethodDeclarationCondition[] conditions)
         {
@@ -55,7 +56,10 @@ namespace SonarAnalyzer.Helpers
                     foreach (var declaration in c.Symbol.DeclaringSyntaxReferences)
                     {
                         var methodIdentifier = GetMethodIdentifier(declaration.GetSyntax());
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodIdentifier.GetLocation()));
+                        if (methodIdentifier.HasValue)
+                        {
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, methodIdentifier.Value.GetLocation()));
+                        }
                     }
                 }
             }
@@ -67,11 +71,27 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
+        internal MethodDeclarationCondition AnyParameterIsOfType(params KnownType[] types)
+        {
+            var typesArray = types.ToImmutableArray();
+            return (context) =>
+                context.MethodSymbol.Parameters.Length > 0 &&
+                context.MethodSymbol.Parameters.Any(parameter => parameter.Type.DerivesOrImplementsAny(typesArray));
+        }
+
         public abstract MethodDeclarationCondition ParameterAtIndexIsUsed(int index);
+
+        internal MethodDeclarationCondition DecoratedWithAnyAttribute(params KnownType[] attributeTypes) =>
+            (context) =>
+                context.MethodSymbol.GetAttributes().Any(a => a.AttributeClass.IsAny(attributeTypes));
 
         public MethodDeclarationCondition MatchSimpleNames(params string[] methodNames) =>
             (context) =>
                 methodNames.Contains(context.MethodSymbol.Name);
+
+        public MethodDeclarationCondition IsOrdinaryMethod() =>
+            (context) =>
+                context.MethodSymbol.MethodKind == MethodKind.Ordinary;
 
         public MethodDeclarationCondition IsMainMethod() =>
             (context) =>

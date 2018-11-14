@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4834",
+"message":  "Make sure that permissions are controlled safely here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication.Forms\UserDatabase.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  26,
+"endLine":  27,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure that permissions are controlled safely here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication.Forms\UserDatabase.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  46,
+"endLine":  27,
+"endColumn":  83
+}
+}
+}
+]
+}
