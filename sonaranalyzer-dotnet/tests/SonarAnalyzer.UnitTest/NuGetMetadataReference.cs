@@ -24,6 +24,7 @@ using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using NuGet;
 
@@ -95,10 +96,12 @@ namespace SonarAnalyzer.UnitTest
 
         private static void DumpSelectedGroup(string packageId, string packageVersion, IGrouping<string, FileInfo> fileGroup)
         {
-            Console.WriteLine($"Package: {packageId}, version: {packageVersion}, chosen targetFramework: {fileGroup.Key}");
+            Console.WriteLine();
+            Console.WriteLine($"Package: {packageId}");
+            Console.WriteLine($"Version: {packageVersion}, chosen targetFramework: {fileGroup.Key}");
             foreach (var file in fileGroup)
             {
-                Console.WriteLine($"\\File: {file.FullName}");
+                Console.WriteLine($"File: {file.FullName}");
             }
         }
 
@@ -125,8 +128,8 @@ namespace SonarAnalyzer.UnitTest
         private static string GetRealVersionFolder(string packageId, string packageVersion) =>
             packageVersion != Constants.NuGetLatestVersion
                 ? packageVersion.ToString()
-                : Directory.GetDirectories(PackagesFolderRelativePath, $"{packageId}*", SearchOption.TopDirectoryOnly)
-                    .Select(path => path.Substring(PackagesFolderRelativePath.Length + packageId.Length + 1))
+                : GetSortedPackageFolders(packageId)
+                    .Select(path => Path.GetFileName(path).Substring(packageId.Length + 1))
                     .Last(path => char.IsNumber(path[0]));
 
         #endregion Helpers
@@ -163,19 +166,41 @@ namespace SonarAnalyzer.UnitTest
                 }
             }
         }
+        
+        /// <summary>
+        /// Returns the list of folders containing installed versions of the specified package,
+        /// or an empty list if the package is not installed.
+        /// </summary>
+        /// <remarks>
+        /// Package directory names are in the form "{package id}.{package version}".
+        /// The list is sorted in ascending order, so the most recent version will be last.
+        /// </remarks>
+        private static IEnumerable<string> GetSortedPackageFolders(string packageId)
+        {
+            // The package will be in a folder called "\packages\{packageId}.{version}", but:
+            // : the package might not be installed
+            // : there might be multiple versions installed
+            // : there might be a package that starts with the same package id
+            //      e.g. Microsoft.AspNetCore.Core and Microsoft.AspNetCore.Core.Diagnostics
+            // Most packages have a three-part version, but some have four. We don't check
+            // the actual number of parts, as long as there is at least one.
+            var matcher = new Regex($"{packageId}(.\\d+)+$");
 
+            var directories = Directory.GetDirectories(PackagesFolderRelativePath, $"{packageId}.*", SearchOption.TopDirectoryOnly)
+                .Where(path => matcher.IsMatch(path))
+                .OrderBy(name => name)
+                .ToArray();
+            return directories;
+        }
+        
         private static string GetLastCheckFilePath(string packageId)
         {
             // The file containing the last-check timestamp is stored in folder of the
             // latest version of the package.
-            // Package directory names are in the form "{package id}.{package version}".
-            // Sorting the names orders them by version.
-
             const string LastUpdateFileName = "LastCheckedForUpdate.txt";
 
-            var directory = Directory.GetDirectories(PackagesFolderRelativePath, $"{packageId}.*")
-                .OrderByDescending(name => name)
-                .FirstOrDefault();
+            var directory = GetSortedPackageFolders(packageId)
+                .LastOrDefault();
 
             if (directory == null)
             {
@@ -227,6 +252,7 @@ namespace SonarAnalyzer.UnitTest
             LogMessage($"Last check for latest NuGets: {lastCheck}");
             return (DateTime.Now.Subtract(lastCheck).TotalDays > VersionCheckDelayInDays);
         }
+
         private static void LogMessage(string message)
         {
             Console.WriteLine($"[{DateTime.Now}] Test setup: {message}");
