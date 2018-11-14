@@ -146,11 +146,11 @@ using log4net.Appender;
 using log4net.Config;
 using log4net.Repository;
 
-namespace MvcApp
+namespace Logging
 {
     class Log4netLogging
     {
-        void foo(ILoggerRepository repository, XmlElement element, FileInfo configFile, Uri configUri, Stream configStream,
+        void Foo(ILoggerRepository repository, XmlElement element, FileInfo configFile, Uri configUri, Stream configStream,
         IAppender appender, params IAppender[] appenders) {
             log4net.Config.XmlConfigurator.Configure(repository); // Questionable
             log4net.Config.XmlConfigurator.Configure(repository, element); // Questionable
@@ -182,7 +182,7 @@ namespace MvcApp
 </pre>
 <p><strong>NLog</strong>: configure programmatically</p>
 <pre>
-namespace MvcApp
+namespace Logging
 {
     class NLogLogging
     {
@@ -194,9 +194,9 @@ namespace MvcApp
 </pre>
 <p><strong>Serilog</strong></p>
 <pre>
-namespace MvcApp
+namespace Logging
 {
-    class SeriLogLogging
+    class SerilogLogging
     {
         void Foo() {
             new Serilog.LoggerConfiguration(); // Questionable

@@ -93,6 +93,26 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
+        public void ConfiguringLoggers_Serilog_CS()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_Serilog.cs",
+                new ConfiguringLoggers(new TestAnalyzerConfiguration(null, "S4792")),
+                additionalReferences: SeriLogReferences);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
+        public void ConfiguringLoggers_Serilog_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_Serilog.vb",
+                new SonarAnalyzer.Rules.VisualBasic.ConfiguringLoggers(new TestAnalyzerConfiguration(null, "S4792")),
+                additionalReferences: SeriLogReferences);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
         public void ConfiguringLoggers_CS_RuleDisabled()
         {
             Verifier.VerifyNoIssueReported(@"TestCases\ConfiguringLoggers_AspNetCore.cs",
@@ -128,6 +148,9 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         private static IEnumerable<MetadataReference> NLogReferences =>
             NuGetMetadataReference.NLog(Constants.NuGetLatestVersion);
+
+        private static IEnumerable<MetadataReference> SeriLogReferences =>
+            NuGetMetadataReference.SerilogPackages(Constants.NuGetLatestVersion);
 
     }
 }

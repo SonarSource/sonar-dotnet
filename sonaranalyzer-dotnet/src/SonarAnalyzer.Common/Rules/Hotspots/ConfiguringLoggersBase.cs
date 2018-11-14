@@ -68,6 +68,10 @@ namespace SonarAnalyzer.Rules
                 PropertyAccessTracker.MatchSimpleNames(
                     new MethodSignature(KnownType.NLog_LogManager, "Configuration")),
                 PropertyAccessTracker.MatchSet());
+
+            // Serilog
+            ObjectCreationTracker.Track(context,
+                ObjectCreationTracker.WhenDerivesFrom(KnownType.Serilog_LoggerConfiguration));
         }
     }
 }

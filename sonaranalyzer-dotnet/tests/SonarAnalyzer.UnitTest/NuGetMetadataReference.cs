@@ -311,6 +311,10 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> NLog(string packageVersion) =>
             Create("NLog", packageVersion);
 
+        public static IEnumerable<MetadataReference> SerilogPackages(string packageVersion) =>
+            Create("Serilog", packageVersion)
+            .Concat(Create("Serilog.Sinks.Console", packageVersion));
+
         public static IEnumerable<MetadataReference> SystemDataSqlServerCe(string packageVersion) =>
             Create("Microsoft.SqlServer.Compact", packageVersion);
 

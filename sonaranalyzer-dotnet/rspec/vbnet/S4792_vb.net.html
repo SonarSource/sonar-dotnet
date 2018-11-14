@@ -150,9 +150,9 @@ Imports log4net.Appender
 Imports log4net.Config
 Imports log4net.Repository
 
-Namespace MvcApp
+Namespace Logging
     Class Log4netLogging
-        Private Sub foo(ByVal repository As ILoggerRepository, ByVal element As XmlElement, ByVal configFile As FileInfo, ByVal configUri As Uri, ByVal configStream As Stream, ByVal appender As IAppender, ParamArray appenders As IAppender())
+        Private Sub Foo(ByVal repository As ILoggerRepository, ByVal element As XmlElement, ByVal configFile As FileInfo, ByVal configUri As Uri, ByVal configStream As Stream, ByVal appender As IAppender, ParamArray appenders As IAppender())
             log4net.Config.XmlConfigurator.Configure(repository) ' Questionable
             log4net.Config.XmlConfigurator.Configure(repository, element) ' Questionable
             log4net.Config.XmlConfigurator.Configure(repository, configFile) ' Questionable
@@ -183,7 +183,7 @@ End Namespace
 </pre>
 <p><strong>NLog</strong>: configure programmatically</p>
 <pre>
-Namespace MvcApp
+Namespace Logging
     Class NLogLogging
         Private Sub Foo(ByVal config As NLog.Config.LoggingConfiguration)
             NLog.LogManager.Configuration = config ' Questionable
@@ -193,8 +193,8 @@ End Namespace
 </pre>
 <p><strong>Serilog</strong></p>
 <pre>
-Namespace MvcApp
-    Class SeriLogLogging
+Namespace Logging
+    Class SerilogLogging
         Private Sub Foo()
             Dim config As Serilog.LoggerConfiguration = New Serilog.LoggerConfiguration() ' Questionable
         End Sub

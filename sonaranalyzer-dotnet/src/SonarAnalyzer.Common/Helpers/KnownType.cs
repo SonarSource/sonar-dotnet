@@ -78,6 +78,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType NUnit_Framework_TestFixtureAttribute = new KnownType("NUnit.Framework.TestFixtureAttribute");
         internal static readonly KnownType NUnit_Framework_TheoryAttribute = new KnownType("NUnit.Framework.TheoryAttribute");
         internal static readonly KnownType RestSharp_IRestRequest = new KnownType("RestSharp.IRestRequest");
+        internal static readonly KnownType Serilog_LoggerConfiguration = new KnownType("Serilog.LoggerConfiguration");
         internal static readonly KnownType System_Action = new KnownType("System.Action");
         internal static readonly KnownType System_Action_T = new KnownType("System.Action<T>");
         internal static readonly KnownType System_Action_T1_T2 = new KnownType("System.Action<T1, T2>");
