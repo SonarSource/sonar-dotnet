@@ -51,7 +51,6 @@ public class VbNetPluginTest {
     Class<?>[] expectedExtensions = new Class<?>[] {
       VbNet.class,
       VbNetSonarRulesDefinition.class,
-      VbNetSonarWayProfile.class,
       VbNetSensor.class,
       VbNetConfiguration.class,
       WrongEncodingFileFilter.class,
@@ -70,6 +69,7 @@ public class VbNetPluginTest {
 
     assertThat(extensions).hasSize(
       expectedExtensions.length
+        + 1 // VbNetSonarWayProfile
         + VbNetCodeCoverageProvider.extensions().size()
         + VbNetUnitTestResultsProvider.extensions().size()
         + RoslynProfileExporter.sonarLintRepositoryProperties().size()

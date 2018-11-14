@@ -79,6 +79,12 @@
       <version>2.21.0</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.sonarsource.analyzer-commons</groupId>
+      <artifactId>sonar-analyzer-commons</artifactId>
+      <version>1.7.0.243</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
 
   <build>

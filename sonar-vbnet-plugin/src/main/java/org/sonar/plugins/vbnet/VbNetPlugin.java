@@ -48,7 +48,6 @@ public class VbNetPlugin implements Plugin {
       VbNet.class,
       ReportPathCollector.class,
       VbNetSonarRulesDefinition.class,
-      VbNetSonarWayProfile.class,
       VbNetSensor.class,
       VbNetConfiguration.class,
       WrongEncodingFileFilter.class,
@@ -62,6 +61,7 @@ public class VbNetPlugin implements Plugin {
       RoslynProfileExporter.class);
 
     context.addExtensions(new VbNetPropertyDefinitions(context.getRuntime()).create());
+    context.addExtension(new VbNetSonarWayProfile(context.getRuntime()));
     context.addExtensions(VbNetCodeCoverageProvider.extensions());
     context.addExtensions(VbNetUnitTestResultsProvider.extensions());
     context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties());
