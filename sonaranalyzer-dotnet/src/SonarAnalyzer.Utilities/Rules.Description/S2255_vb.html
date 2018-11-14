@@ -25,33 +25,6 @@ original information will be exposed.</p>
 <p><a href="https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet">Sanitize</a> every information read from a cookie before using them.</p>
 <p>Using cookies only for session IDs doesn't make them secure. Follow <a
 href="https://www.owasp.org/index.php/Session_Management_Cheat_Sheet#Cookies">OWASP best practices</a> when you configure your cookies.</p>
-<h2>Questionable Code Example</h2>
-<pre>
-// === .Net Framework ===
-
-HttpCookie myCookie = new HttpCookie("UserSettings");
-myCookie["CreditCardNumber"] = "1234 1234 1234 1234"; // Noncompliant; sensitive data stored
-myCookie.Values["password"] = "5678"; // Noncompliant
-myCookie.Value = "mysecret"; // Noncompliant
-...
-Response.Cookies.Add(myCookie);
-
-if (Request.Cookies["myCookie"] != null &amp;&amp; Request.Cookies["myCookie"]["myValue"] != null) // Questionable; reading a cookie's value
-{
-    string value = Request.Cookies["myCookie"]["myValue"]; // Questionable
-    value = Request.Cookies["myCookie"].Values["myValue"]; // Questionable
-}
-
-string value2 = Request.Cookies["myCookie2"].Value; // Questionable
-
-
-// === .Net Core ===
-
-Response.Headers.Add("Set-Cookie", ...); // Questionable
-Response.Cookies.Append("mykey", "myValue"); // Questionable
-
-Request.Cookies; // Questionable
-</pre>
 <h2>See</h2>
 <ul>
   <li> <a href="http://cwe.mitre.org/data/definitions/312.html">MITRE, CWE-312</a> - Cleartext Storage of Sensitive Information </li>

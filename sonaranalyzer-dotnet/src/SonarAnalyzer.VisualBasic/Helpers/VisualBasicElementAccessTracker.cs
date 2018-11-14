@@ -22,30 +22,38 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Helpers
 {
-    public class VisualBasicObjectCreationTracker : ObjectCreationTracker<SyntaxKind>
+    public class VisualBasicElementAccessTracker : ElementAccessTracker<SyntaxKind>
     {
-        public VisualBasicObjectCreationTracker(IAnalyzerConfiguration analysisConfiguration, DiagnosticDescriptor rule)
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
+            VisualBasic.GeneratedCodeRecognizer.Instance;
+
+        protected override SyntaxKind[] TrackedSyntaxKinds { get; } =
+            new[]
+            {
+                SyntaxKind.InvocationExpression,
+            };
+
+        public VisualBasicElementAccessTracker(IAnalyzerConfiguration analysisConfiguration, DiagnosticDescriptor rule)
             : base(analysisConfiguration, rule)
         {
         }
 
-        protected override SyntaxKind[] TrackedSyntaxKinds { get; } =
-            new[] { SyntaxKind.ObjectCreationExpression };
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            VisualBasic.GeneratedCodeRecognizer.Instance;
-
-        internal override ObjectCreationCondition ArgumentAtIndexIsConst(int index) =>
+        public override ElementAccessCondition IndexerIsString(string value) =>
             (context) =>
             {
-                var argumentList = ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList;
-                return argumentList != null &&
-                    argumentList.Arguments.Count > index &&
-                    argumentList.Arguments[index].GetExpression().IsConstant(context.Model);
+                var argumentList = ((InvocationExpressionSyntax)context.Expression).ArgumentList;
+                if (argumentList == null ||
+                    argumentList.Arguments.Count == 0)
+                {
+                    return false;
+                }
+                var constantValue = context.Model.GetConstantValue(argumentList.Arguments[0].GetExpression());
+                return constantValue.HasValue &&
+                    constantValue.Value is string constant &&
+                    constant == value;
             };
     }
 }

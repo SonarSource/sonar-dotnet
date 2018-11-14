@@ -77,9 +77,14 @@ namespace SonarAnalyzer.Helpers
 
         public abstract InvocationCondition MatchSimpleNames(params MethodSignature[] methods);
 
-        public abstract InvocationCondition FirstParameterIsConstant();
+        public InvocationCondition FirstParameterIsConstant() =>
+            ParameterAtIndexIsConstant(0);
 
         public abstract InvocationCondition MethodNameIs(string methodName);
+
+        public abstract InvocationCondition ParameterAtIndexIsConstant(int index);
+
+        public abstract InvocationCondition ParameterAtIndexIsString(int index, string value);
 
         public abstract InvocationCondition IsTypeOfExpression();
 
@@ -100,7 +105,12 @@ namespace SonarAnalyzer.Helpers
         public InvocationCondition HasParameters() =>
             (context) =>
                 context.InvokedMethodSymbol.Value != null &&
-                context.InvokedMethodSymbol.Value.Parameters.Any();
+                context.InvokedMethodSymbol.Value.Parameters.Length > 0;
+
+        public InvocationCondition HasParameters(int count) =>
+            (context) =>
+                context.InvokedMethodSymbol.Value != null &&
+                context.InvokedMethodSymbol.Value.Parameters.Length == count;
 
         public bool FirstParameterIsString(InvocationContext context)
         {

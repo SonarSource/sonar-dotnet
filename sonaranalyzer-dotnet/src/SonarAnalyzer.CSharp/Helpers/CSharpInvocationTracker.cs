@@ -45,13 +45,13 @@ namespace SonarAnalyzer.Helpers
             (context) => MethodSignatureHelper.IsMatch(context.Identifier as SimpleNameSyntax,
                 context.Model, context.InvokedMethodSymbol, true, methods);
 
-        public override InvocationCondition FirstParameterIsConstant() =>
+        public override InvocationCondition ParameterAtIndexIsConstant(int index) =>
             (context) =>
             {
                 var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
                 return argumentList != null &&
-                    argumentList.Arguments.Count > 0 &&
-                    argumentList.Arguments[0].Expression.IsConstant(context.Model);
+                    argumentList.Arguments.Count > index &&
+                    argumentList.Arguments[index].Expression.IsConstant(context.Model);
             };
 
         public override InvocationCondition MethodNameIs(string methodName) =>
@@ -63,5 +63,20 @@ namespace SonarAnalyzer.Helpers
                         && invocation.Expression is MemberAccessExpressionSyntax memberAccessSyntax
                         && memberAccessSyntax.Expression != null
                         && memberAccessSyntax.Expression.RawKind == (int)SyntaxKind.TypeOfExpression;
+
+        public override InvocationCondition ParameterAtIndexIsString(int index, string value) =>
+            (context) =>
+            {
+                var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
+                if (argumentList == null ||
+                    argumentList.Arguments.Count <= index)
+                {
+                    return false;
+                }
+                var constantValue = context.Model.GetConstantValue(argumentList.Arguments[index].Expression);
+                return constantValue.HasValue &&
+                    constantValue.Value is string constant &&
+                    constant == value;
+            };
     }
 }
