@@ -63,6 +63,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType NUnit_Framework_TestCaseSourceAttribute = new KnownType("NUnit.Framework.TestCaseSourceAttribute");
         internal static readonly KnownType NUnit_Framework_TestFixtureAttribute = new KnownType("NUnit.Framework.TestFixtureAttribute");
         internal static readonly KnownType NUnit_Framework_TheoryAttribute = new KnownType("NUnit.Framework.TheoryAttribute");
+        internal static readonly KnownType RestSharp_IRestRequest = new KnownType("RestSharp.IRestRequest");
         internal static readonly KnownType System_Action = new KnownType("System.Action");
         internal static readonly KnownType System_Action_T = new KnownType("System.Action<T>");
         internal static readonly KnownType System_Action_T1_T2 = new KnownType("System.Action<T1, T2>");
@@ -215,10 +216,12 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Linq_ImmutableArrayExtensions = new KnownType("System.Linq.ImmutableArrayExtensions");
         internal static readonly KnownType System_MarshalByRefObject = new KnownType("System.MarshalByRefObject");
         internal static readonly KnownType System_MTAThreadAttribute = new KnownType("System.MTAThreadAttribute");
+        internal static readonly KnownType System_Net_Http_HttpClient = new KnownType("System.Net.Http.HttpClient");
         internal static readonly KnownType System_Net_Sockets_Socket = new KnownType("System.Net.Sockets.Socket");
         internal static readonly KnownType System_Net_Sockets_TcpClient = new KnownType("System.Net.Sockets.TcpClient");
         internal static readonly KnownType System_Net_Sockets_UdpClient = new KnownType("System.Net.Sockets.UdpClient");
         internal static readonly KnownType System_Net_WebClient = new KnownType("System.Net.WebClient");
+        internal static readonly KnownType System_Net_WebRequest = new KnownType("System.Net.WebRequest");
         internal static readonly KnownType System_NonSerializedAttribute = new KnownType("System.NonSerializedAttribute");
         internal static readonly KnownType System_NotImplementedException = new KnownType("System.NotImplementedException");
         internal static readonly KnownType System_NotSupportedException = new KnownType("System.NotSupportedException");
