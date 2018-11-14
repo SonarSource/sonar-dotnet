@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4825",
+"message":  "Make sure that this http request is sent safely.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  94,
+"startColumn":  41,
+"endLine":  94,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4825",
+"message":  "Make sure that this http request is sent safely.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  115,
+"startColumn":  63,
+"endLine":  115,
+"endColumn":  87
+}
+}
+}
+]
+}

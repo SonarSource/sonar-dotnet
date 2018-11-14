@@ -53,6 +53,9 @@ namespace SonarAnalyzer.UnitTest
         internal static IEnumerable<MetadataReference> SystemComponentModelComposition { get; }
             = Create("System.ComponentModel.Composition.dll");
 
+        internal static IEnumerable<MetadataReference> SystemNetHttp { get; }
+            = Create("System.Net.Http.dll");
+
         internal static IEnumerable<MetadataReference> SystemIOCompression { get; }
             = Create("System.IO.Compression.dll");
 

@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S4825",
+"message":  "Make sure that this http request is sent safely.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  95,
+"startColumn":  39,
+"endLine":  95,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4825",
+"message":  "Make sure that this http request is sent safely.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  163,
+"startColumn":  39,
+"endLine":  163,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4825",
+"message":  "Make sure that this http request is sent safely.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  220,
+"startColumn":  39,
+"endLine":  220,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4825",
+"message":  "Make sure that this http request is sent safely.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  291,
+"startColumn":  43,
+"endLine":  291,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4825",
+"message":  "Make sure that this http request is sent safely.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  324,
+"startColumn":  35,
+"endLine":  324,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4825",
+"message":  "Make sure that this http request is sent safely.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  356,
+"startColumn":  39,
+"endLine":  356,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4825",
+"message":  "Make sure that this http request is sent safely.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  477,
+"startColumn":  6,
+"endLine":  477,
+"endColumn":  51
+}
+}
+}
+]
+}
