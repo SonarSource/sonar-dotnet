@@ -19,24 +19,42 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import org.sonar.api.profiles.ProfileDefinition;
-import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.profiles.XMLProfileParser;
-import org.sonar.api.utils.ValidationMessages;
+import org.sonar.api.SonarRuntime;
+import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
+import org.sonar.api.utils.Version;
+import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
-public class AbstractSonarWayProfile extends ProfileDefinition {
-  private final XMLProfileParser xmlParser;
-  private final String profileXmlPath;
+import javax.annotation.Nullable;
 
-  public AbstractSonarWayProfile(XMLProfileParser xmlParser, String profileXmlPath) {
-    this.xmlParser = xmlParser;
-    this.profileXmlPath = profileXmlPath;
+public abstract class AbstractSonarWayProfile implements BuiltInQualityProfilesDefinition {
+  private final boolean supportsSecurityHotspots;
+  private static final Version SQ_7_3 = Version.create(7, 3);
+  private final String languageKey;
+  private final String pluginKey;
+  private final String repositoryKey;
+
+  protected AbstractSonarWayProfile(@Nullable SonarRuntime sonarRuntime, String languageKey, String pluginKey, String repositoryKey) {
+    this.supportsSecurityHotspots = sonarRuntime != null && sonarRuntime.getApiVersion().isGreaterThanOrEqual(SQ_7_3);
+    this.languageKey = languageKey;
+    this.pluginKey = pluginKey;
+    this.repositoryKey = repositoryKey;
   }
 
   @Override
-  public RulesProfile createProfile(ValidationMessages validation) {
-    return xmlParser.parse(new InputStreamReader(getClass().getResourceAsStream(profileXmlPath), StandardCharsets.UTF_8), validation);
+  public void define(Context context) {
+    NewBuiltInQualityProfile sonarWay = context.createBuiltInQualityProfile("Sonar way", languageKey);
+    String sonarWayJsonPath = getSonarWayJsonPath();
+    BuiltInQualityProfileJsonLoader.load(sonarWay, repositoryKey, sonarWayJsonPath);
+    activateSecurityRules(sonarWay);
+    sonarWay.done();
+  }
+
+  private String getSonarWayJsonPath() {
+    return supportsSecurityHotspots
+      ? "org/sonar/plugins/" + pluginKey + "/Sonar_way_profile.json"
+      : "org/sonar/plugins/" + pluginKey + "/Sonar_way_profile_no_hotspot.json";
+  }
+
+  protected void activateSecurityRules(NewBuiltInQualityProfile sonarWay) {
   }
 }
