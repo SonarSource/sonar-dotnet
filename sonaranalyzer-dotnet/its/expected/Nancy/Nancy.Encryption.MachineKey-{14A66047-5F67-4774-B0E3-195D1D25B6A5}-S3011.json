@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Encryption.MachineKey\MachineKeyHmacProvider.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  69,
+"endLine":  66,
+"endColumn":  91
+}
+}
+}
+]
+}

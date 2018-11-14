@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  90,
+"endLine":  14,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  128,
+"endLine":  46,
+"endColumn":  150
+}
+}
+}
+]
+}
