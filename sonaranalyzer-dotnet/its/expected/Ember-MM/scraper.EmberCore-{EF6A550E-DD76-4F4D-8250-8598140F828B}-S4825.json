@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4825",
+"message":  "Make sure that this http request is sent safely.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  893,
+"startColumn":  6,
+"endLine":  893,
+"endColumn":  51
+}
+}
+}
+]
+}

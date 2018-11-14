@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4825",
+"message":  "Make sure that this http request is sent safely.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  388,
+"startColumn":  33,
+"endLine":  388,
+"endColumn":  134
+}
+}
+}
+]
+}
