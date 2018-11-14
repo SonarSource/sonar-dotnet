@@ -35,9 +35,8 @@ namespace SonarAnalyzer.UnitTest
 
         private const string PackagesFolderRelativePath = @"..\..\..\..\packages\";
 
-        private static readonly List<string> allowedNugetLibDirectories =
-            new List<string>
-            {
+        private static readonly string[] allowedNugetLibDirectoriesInOrderOfPreference =
+            new string[] {
                 "netstandard2.0",
                 "net47",
                 "net461",
@@ -45,8 +44,8 @@ namespace SonarAnalyzer.UnitTest
                 "netstandard1.3",
                 "netstandard1.1",
                 "netstandard1.0",
-                "net45",
                 "net451",
+                "net45",
                 "net40",
                 "net20",
                 "portable-net45",
@@ -58,10 +57,20 @@ namespace SonarAnalyzer.UnitTest
 
         public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion)
         {
+            return Create(packageId, packageVersion, allowedNugetLibDirectoriesInOrderOfPreference);
+        }
+
+        public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string targetFramework)
+        {
+            return Create(packageId, packageVersion, new string[] { targetFramework });
+        }
+
+        private static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string[] allowedTargetFrameworks)
+        {
             EnsurePackageIsInstalled(packageId, packageVersion);
 
-            var allowedNugetLibDirectoriesByPreference = allowedNugetLibDirectories.
-                Zip(Enumerable.Range(0, allowedNugetLibDirectories.Count), (folder, priority) => new { folder, priority });
+            var allowedNugetLibDirectoriesByPreference = allowedTargetFrameworks.
+                Zip(Enumerable.Range(0, allowedTargetFrameworks.Length), (folder, priority) => new { folder, priority });
             var packageDirectory = GetNuGetPackageDirectory(packageId, packageVersion);
             var matchingDllsGroups = Directory.GetFiles(packageDirectory, "*.dll", SearchOption.AllDirectories)
                 .Select(path => new FileInfo(path))
@@ -78,8 +87,19 @@ namespace SonarAnalyzer.UnitTest
                 .First()
                 .group;
 
+            DumpSelectedGroup(packageId, packageVersion, selectedGroup);
+
             return selectedGroup.Select(file => (MetadataReference)MetadataReference.CreateFromFile(file.FullName))
                 .ToImmutableArray();
+        }
+
+        private static void DumpSelectedGroup(string packageId, string packageVersion, IGrouping<string, FileInfo> fileGroup)
+        {
+            Console.WriteLine($"Package: {packageId}, version: {packageVersion}, chosen targetFramework: {fileGroup.Key}");
+            foreach (var file in fileGroup)
+            {
+                Console.WriteLine($"\\File: {file.FullName}");
+            }
         }
 
         private static IPackageRepository CreatePackageRepository()
@@ -234,6 +254,9 @@ namespace SonarAnalyzer.UnitTest
 
         public static IEnumerable<MetadataReference> MicrosoftAspNetCore(string packageVersion) =>
             Create("Microsoft.AspNetCore", packageVersion);
+
+        public static IEnumerable<MetadataReference> Log4Net(string packageVersion, string targetFramework) =>
+            Create("log4net", packageVersion, targetFramework);
 
         public static IEnumerable<MetadataReference> MicrosoftAspNetCoreDiagnostics(string packageVersion) =>
             Create("Microsoft.AspNetCore.Diagnostics", packageVersion);

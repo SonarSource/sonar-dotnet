@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void ConfiguringLoggers_CS()
+        public void ConfiguringLoggers_AspNetCore_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_AspNetCore.cs",
                 new ConfiguringLoggers(new TestAnalyzerConfiguration(null, "S4792")),
@@ -43,11 +43,31 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
-        public void ConfiguringLoggers_VB()
+        public void ConfiguringLoggers_AspNetCore_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_AspNetCore.vb",
                 new SonarAnalyzer.Rules.VisualBasic.ConfiguringLoggers(new TestAnalyzerConfiguration(null, "S4792")),
                 additionalReferences: AspNetCoreLoggingReferences);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
+        public void ConfiguringLoggers_Log4Net_CS()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_Log4Net.cs",
+                new ConfiguringLoggers(new TestAnalyzerConfiguration(null, "S4792")),
+                additionalReferences: Log4NetReferences);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        [TestCategory("Hotspot")]
+        public void ConfiguringLoggers_Log4Net_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_Log4Net.vb",
+                new SonarAnalyzer.Rules.VisualBasic.ConfiguringLoggers(new TestAnalyzerConfiguration(null, "S4792")),
+                additionalReferences: Log4NetReferences);
         }
 
         [TestMethod]
@@ -81,7 +101,10 @@ namespace SonarAnalyzer.UnitTest.Rules
             .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(Constants.NuGetLatestVersion))
             .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.NuGetLatestVersion))
         ;
-        
+
+        private static IEnumerable<MetadataReference> Log4NetReferences =>
+            NuGetMetadataReference.Log4Net(Constants.NuGetLatestVersion, "net45-full")
+            .Concat(FrameworkMetadataReference.SystemXml);
     }
 }
 

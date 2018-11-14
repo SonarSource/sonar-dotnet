@@ -33,6 +33,7 @@ namespace SonarAnalyzer.Rules
 
         protected override void Initialize(SonarAnalysisContext context)
         {
+            // ASP.NET Core
             InvocationTracker.Track(context,
                 InvocationTracker.MatchSimpleNames(
                     new MethodSignature(KnownType.Microsoft_AspNetCore_Hosting_WebHostBuilderExtensions, "ConfigureLogging"),
@@ -43,12 +44,24 @@ namespace SonarAnalyzer.Rules
                     new MethodSignature(KnownType.Microsoft_Extensions_Logging_EventLoggerFactoryExtensions, "AddEventLog"),
                     new MethodSignature(KnownType.Microsoft_Extensions_Logging_EventLoggerFactoryExtensions, "AddEventSourceLogger"),
                     new MethodSignature(KnownType.Microsoft_Extensions_Logging_EventSourceLoggerFactoryExtensions, "AddEventSourceLogger"),
-                    new MethodSignature(KnownType.Microsoft_Extensions_Logging_AzureAppServicesLoggerFactoryExtensions, "AddAzureWebAppDiagnostics")
-                    ),
+                    new MethodSignature(KnownType.Microsoft_Extensions_Logging_AzureAppServicesLoggerFactoryExtensions, "AddAzureWebAppDiagnostics")),
                 InvocationTracker.IsExtensionMethod());
 
             ObjectCreationTracker.Track(context,
                 ObjectCreationTracker.WhenImplements(KnownType.Microsoft_Extensions_Logging_ILoggerFactory));
+
+
+            // log4net
+            InvocationTracker.Track(context,
+                InvocationTracker.MatchSimpleNames(
+                    new MethodSignature(KnownType.log4net_Config_XmlConfigurator, "Configure"),
+                    new MethodSignature(KnownType.log4net_Config_XmlConfigurator, "ConfigureAndWatch"),
+
+                    new MethodSignature(KnownType.log4net_Config_DOMConfigurator, "Configure"),
+                    new MethodSignature(KnownType.log4net_Config_DOMConfigurator, "ConfigureAndWatch"),
+
+                    new MethodSignature(KnownType.log4net_Config_BasicConfigurator, "Configure")));
+
         }
     }
 }
