@@ -165,22 +165,6 @@ namespace SonarAnalyzer.Helpers.VisualBasic
             }
         }
 
-        public static SyntaxToken? GetIdentifierOrDefault(this MethodBaseSyntax methodDeclaration)
-        {
-            switch (methodDeclaration.Kind())
-            {
-                case SyntaxKind.SubNewStatement:
-                    return ((SubNewStatementSyntax)methodDeclaration).NewKeyword;
-
-                case SyntaxKind.SubStatement:
-                case SyntaxKind.FunctionStatement:
-                    return ((MethodStatementSyntax)methodDeclaration).Identifier;
-
-                default:
-                    return null;
-            }
-        }
-
         public static bool IsConstant(this ExpressionSyntax expression, SemanticModel semanticModel)
         {
             if (expression == null)

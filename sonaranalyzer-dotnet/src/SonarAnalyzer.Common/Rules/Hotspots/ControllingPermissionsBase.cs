@@ -60,7 +60,8 @@ namespace SonarAnalyzer.Rules
             MethodDeclarationTracker.Track(context,
                 MethodDeclarationTracker.AnyParameterIsOfType(
                     KnownType.System_Security_Principal_IIdentity,
-                    KnownType.System_Security_Principal_IPrincipal));
+                    KnownType.System_Security_Principal_IPrincipal),
+                MethodDeclarationTracker.IsOrdinaryMethod());
 
             MethodDeclarationTracker.Track(context,
                 MethodDeclarationTracker.DecoratedWithAnyAttribute(

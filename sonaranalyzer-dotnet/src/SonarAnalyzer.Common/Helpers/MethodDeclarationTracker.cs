@@ -66,11 +66,6 @@ namespace SonarAnalyzer.Helpers
 
             bool IsTrackedMethod(IMethodSymbol methodSymbol, Compilation compilation)
             {
-                if (methodSymbol.MethodKind != MethodKind.Ordinary &&
-                    methodSymbol.MethodKind != MethodKind.ReducedExtension) // Just methods
-                {
-                    return false;
-                }
                 var conditionContext = new MethodDeclarationContext(methodSymbol, compilation);
                 return conditions.All(c => c(conditionContext));
             }
@@ -93,6 +88,10 @@ namespace SonarAnalyzer.Helpers
         public MethodDeclarationCondition MatchSimpleNames(params string[] methodNames) =>
             (context) =>
                 methodNames.Contains(context.MethodSymbol.Name);
+
+        public MethodDeclarationCondition IsOrdinaryMethod() =>
+            (context) =>
+                context.MethodSymbol.MethodKind == MethodKind.Ordinary;
 
         public MethodDeclarationCondition IsMainMethod() =>
             (context) =>

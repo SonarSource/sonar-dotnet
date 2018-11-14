@@ -75,7 +75,27 @@ namespace SonarAnalyzer.Helpers
                     });
             };
 
-        protected override SyntaxToken? GetMethodIdentifier(SyntaxNode methodDeclaration) =>
-            ((BaseMethodDeclarationSyntax)methodDeclaration).GetIdentifierOrDefault();
+        protected override SyntaxToken? GetMethodIdentifier(SyntaxNode methodDeclaration)
+        {
+            switch (methodDeclaration?.Kind())
+            {
+                case SyntaxKind.MethodDeclaration:
+                    return ((MethodDeclarationSyntax)methodDeclaration).Identifier;
+                case SyntaxKind.ConstructorDeclaration:
+                    return ((ConstructorDeclarationSyntax)methodDeclaration).Identifier;
+                case SyntaxKind.DestructorDeclaration:
+                    return ((DestructorDeclarationSyntax)methodDeclaration).Identifier;
+                case SyntaxKind.AddAccessorDeclaration:
+                case SyntaxKind.RemoveAccessorDeclaration:
+                    return ((EventDeclarationSyntax)methodDeclaration.Parent.Parent).Identifier;
+                case SyntaxKind.GetAccessorDeclaration:
+                case SyntaxKind.SetAccessorDeclaration:
+                    return ((PropertyDeclarationSyntax)methodDeclaration.Parent.Parent).Identifier;
+                case SyntaxKind.OperatorDeclaration:
+                    return ((OperatorDeclarationSyntax)methodDeclaration).OperatorToken;
+                default:
+                    return null;
+            }
+        }
     }
 }
