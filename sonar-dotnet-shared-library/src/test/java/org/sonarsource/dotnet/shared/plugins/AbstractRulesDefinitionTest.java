@@ -34,6 +34,11 @@ public class AbstractRulesDefinitionTest {
     TestRulesDefinition() {
       super("test", "test", "test", "test");
     }
+
+    @Override
+    protected String getRuleJson(String ruleKey) {
+      return "/org/sonar/plugins/test/" + ruleKey + "_test.json";
+    }
   }
 }
 
