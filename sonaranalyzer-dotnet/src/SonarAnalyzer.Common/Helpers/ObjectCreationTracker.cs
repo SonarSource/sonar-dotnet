@@ -66,12 +66,18 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
+        internal abstract ObjectCreationCondition ArgumentAtIndexIsConst(int index);
+
         internal ObjectCreationCondition FirstArgumentIs(KnownType type) =>
+            ArgumentAtIndexIs(0, type);
+
+        internal ObjectCreationCondition ArgumentAtIndexIs(int index, KnownType type) =>
             (context) =>
                 context.InvokedConstructorSymbol.Value != null &&
-                context.InvokedConstructorSymbol.Value.ArgumentAtIndexIs(0, type);
+                context.InvokedConstructorSymbol.Value.ArgumentAtIndexIs(index, type);
 
-        internal abstract ObjectCreationCondition FirstArgumentIsConstant();
+        internal ObjectCreationCondition FirstArgumentIsConstant() =>
+            ArgumentAtIndexIsConst(0);
 
         internal ObjectCreationCondition MatchAnyTypeThatImplements(params KnownType[] types)
         {

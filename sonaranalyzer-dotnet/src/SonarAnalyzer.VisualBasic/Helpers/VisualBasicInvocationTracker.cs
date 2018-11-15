@@ -48,13 +48,28 @@ namespace SonarAnalyzer.Helpers
                 context.Model, context.InvokedMethodSymbol, true, methods);
         }
 
-        public override InvocationCondition FirstParameterIsConstant() =>
+        public override InvocationCondition ParameterAtIndexIsConstant(int index) =>
             (context) =>
             {
                 var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
                 return argumentList != null &&
-                    argumentList.Arguments.Count > 0 &&
-                    argumentList.Arguments[0].GetExpression().IsConstant(context.Model);
+                    argumentList.Arguments.Count > index &&
+                    argumentList.Arguments[index].GetExpression().IsConstant(context.Model);
+            };
+
+        public override InvocationCondition ParameterAtIndexIsString(int index, string value) =>
+            (context) =>
+            {
+                var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
+                if (argumentList == null ||
+                    argumentList.Arguments.Count <= index)
+                {
+                    return false;
+                }
+                var constantValue = context.Model.GetConstantValue(argumentList.Arguments[index].GetExpression());
+                return constantValue.HasValue &&
+                    constantValue.Value is string constant &&
+                    constant == value;
             };
 
         public override InvocationCondition MethodNameIs(string methodName) =>
@@ -64,7 +79,7 @@ namespace SonarAnalyzer.Helpers
         public override InvocationCondition IsTypeOfExpression() =>
             (context) => context.Invocation is InvocationExpressionSyntax invocation
                         && invocation.Expression is MemberAccessExpressionSyntax memberAccessSyntax
-                        && memberAccessSyntax.Expression != null        
+                        && memberAccessSyntax.Expression != null
                         && memberAccessSyntax.Expression.RawKind == (int)SyntaxKind.GetTypeExpression;
     }
 }
