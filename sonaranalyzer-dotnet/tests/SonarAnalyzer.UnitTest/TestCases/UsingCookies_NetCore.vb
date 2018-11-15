@@ -21,6 +21,9 @@ Namespace Tests.Diagnostics
             responseHeaders("Set-Cookie") = "" ' Noncompliant
             value = responseHeaders("Set-Cookie") ' Noncompliant
 
+            responseHeaders.Remove("Set-Cookie") ' Compliant
+            responseHeaders.Remove("") ' Compliant
+
             ' Response headers as variable
             response.Cookies.Append("", "") ' Noncompliant
             response.Cookies.Append("", "", New CookieOptions()) ' Noncompliant
@@ -29,6 +32,8 @@ Namespace Tests.Diagnostics
             Dim responseCookies = response.Cookies
             responseCookies.Append("", "") ' Noncompliant
             responseCookies.Append("", "", New CookieOptions()) ' Noncompliant
+
+            responseCookies.Delete("") ' Compliant
         End Sub
 
         Private Sub Requests(ByVal request As HttpRequest)

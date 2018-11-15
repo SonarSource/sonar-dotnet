@@ -25,6 +25,9 @@ namespace Tests.Diagnostics
             responseHeaders["Set-Cookie"] = ""; // Noncompliant
             value = responseHeaders["Set-Cookie"]; // Noncompliant
 
+            responseHeaders.Remove("Set-Cookie"); // Compliant
+            responseHeaders.Remove(""); // Compliant
+
             // Response cookies as property
             response.Cookies.Append("", ""); // Noncompliant
             response.Cookies.Append("", "", new CookieOptions { }); // Noncompliant
@@ -33,6 +36,8 @@ namespace Tests.Diagnostics
             var responseCookies = response.Cookies;
             responseCookies.Append("", ""); // Noncompliant
             responseCookies.Append("", "", new CookieOptions { }); // Noncompliant
+
+            responseCookies.Delete(""); // Compliant
         }
 
         void Requests(HttpRequest request)
@@ -54,6 +59,9 @@ namespace Tests.Diagnostics
             requestHeaders.Add("Set-Cookie", ""); // Noncompliant
             requestHeaders["Set-Cookie"] = value; // Noncompliant
             value = requestHeaders["Set-Cookie"]; // Noncompliant
+
+            requestHeaders.Remove("Set-Cookie"); // Compliant
+            requestHeaders.Remove(""); // Compliant
 
             // Request cookies as property
             value = request.Cookies[""]; // Noncompliant

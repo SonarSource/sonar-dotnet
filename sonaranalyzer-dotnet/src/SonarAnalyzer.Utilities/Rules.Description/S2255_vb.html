@@ -25,6 +25,27 @@ original information will be exposed.</p>
 <p><a href="https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet">Sanitize</a> every information read from a cookie before using them.</p>
 <p>Using cookies only for session IDs doesn't make them secure. Follow <a
 href="https://www.owasp.org/index.php/Session_Management_Cheat_Sheet#Cookies">OWASP best practices</a> when you configure your cookies.</p>
+<h2>Questionable Code Example</h2>
+<pre>
+' === .NET Framework ===
+Dim myCookie As HttpCookie = New HttpCookie("UserSettings")
+myCookie("CreditCardNumber") = "1234 1234 1234 1234" ' Questionable
+myCookie.Values("password") = "5678" ' Questionable
+myCookie.Value = "mysecret" ' Questionable
+...
+Response.Cookies.Add(myCookie)
+
+If Request.Cookies("myCookie") IsNot Nothing AndAlso Request.Cookies("myCookie")("myValue") IsNot Nothing Then ' Questionable
+    Dim value As String = Request.Cookies("myCookie")("myValue") ' Questionable
+    value = Request.Cookies("myCookie").Values("myValue") ' Questionable
+End If
+
+Dim value2 As String = Request.Cookies("myCookie2").Value ' Questionable
+
+' === .NET Core ===
+Response.Headers.Add("Set-Cookie", ...) ' Questionable
+Response.Cookies.Append("mykey", "myValue") ' Questionable
+</pre>
 <h2>See</h2>
 <ul>
   <li> <a href="http://cwe.mitre.org/data/definitions/312.html">MITRE, CWE-312</a> - Cleartext Storage of Sensitive Information </li>
