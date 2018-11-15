@@ -33,4 +33,9 @@ public class CSharpSonarRulesDefinition extends AbstractRulesDefinition {
   public CSharpSonarRulesDefinition(SonarRuntime sonarRuntime) {
     super(REPOSITORY_KEY, REPOSITORY_NAME, CSharpPlugin.LANGUAGE_KEY, RULES_XML, sonarRuntime);
   }
+
+  @Override
+  protected String getRuleJson(String ruleKey) {
+    return "/org/sonar/plugins/csharp/" + ruleKey + "_c#.json";
+  }
 }
