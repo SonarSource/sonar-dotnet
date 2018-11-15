@@ -37,6 +37,11 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNetCore_Builder_DatabaseErrorPageExtensions = new KnownType("Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions");
         internal static readonly KnownType Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions = new KnownType("Microsoft.AspNetCore.Hosting.HostingEnvironmentExtensions");
         internal static readonly KnownType Microsoft_AspNetCore_Hosting_WebHostBuilderExtensions = new KnownType("Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions");
+        internal static readonly KnownType Microsoft_AspNetCore_Http_HttpRequest = new KnownType("Microsoft.AspNetCore.Http.HttpRequest");
+        internal static readonly KnownType Microsoft_AspNetCore_Http_HttpResponse = new KnownType("Microsoft.AspNetCore.Http.HttpResponse");
+        internal static readonly KnownType Microsoft_AspNetCore_Http_IHeaderDictionary = new KnownType("Microsoft.AspNetCore.Http.IHeaderDictionary");
+        internal static readonly KnownType Microsoft_AspNetCore_Http_IRequestCookieCollection = new KnownType("Microsoft.AspNetCore.Http.IRequestCookieCollection");
+        internal static readonly KnownType Microsoft_AspNetCore_Http_IResponseCookies = new KnownType("Microsoft.AspNetCore.Http.IResponseCookies");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_Controller = new KnownType("Microsoft.AspNetCore.Mvc.Controller");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerBase = new KnownType("Microsoft.AspNetCore.Mvc.ControllerBase");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.ControllerAttribute");
@@ -53,6 +58,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_Extensions_Logging_EventLoggerFactoryExtensions = new KnownType("Microsoft.Extensions.Logging.EventLoggerFactoryExtensions");
         internal static readonly KnownType Microsoft_Extensions_Logging_EventSourceLoggerFactoryExtensions = new KnownType("Microsoft.Extensions.Logging.EventSourceLoggerFactoryExtensions");
         internal static readonly KnownType Microsoft_Extensions_Logging_ILoggerFactory = new KnownType("Microsoft.Extensions.Logging.ILoggerFactory");
+        internal static readonly KnownType Microsoft_Extensions_Primitives_StringValues = new KnownType("Microsoft.Extensions.Primitives.StringValues");
         internal static readonly KnownType Microsoft_VisualBasic_Interaction = new KnownType("Microsoft.VisualBasic.Interaction");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_Assert = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.Assert");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_ExpectedExceptionAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.ExpectedExceptionAttribute");

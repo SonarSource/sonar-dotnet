@@ -273,6 +273,9 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> MicrosoftAspNetCoreHttpAbstractions(string packageVersion) =>
             Create("Microsoft.AspNetCore.Http.Abstractions", packageVersion);
 
+        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreHttpFeatures(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Http.Features", packageVersion);
+
         public static IEnumerable<MetadataReference> MicrosoftAspNetCoreMvcAbstractions(string packageVersion) =>
             Create("Microsoft.AspNetCore.Mvc.Abstractions", packageVersion);
 
@@ -314,6 +317,9 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> SerilogPackages(string packageVersion) =>
             Create("Serilog", packageVersion)
             .Concat(Create("Serilog.Sinks.Console", packageVersion));
+
+        public static IEnumerable<MetadataReference> MicrosoftExtensionsPrimitives(string packageVersion) =>
+            Create("Microsoft.Extensions.Primitives", packageVersion);
 
         public static IEnumerable<MetadataReference> SystemDataSqlServerCe(string packageVersion) =>
             Create("Microsoft.SqlServer.Compact", packageVersion);
