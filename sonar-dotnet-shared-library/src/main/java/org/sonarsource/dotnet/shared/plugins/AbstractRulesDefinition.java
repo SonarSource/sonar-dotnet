@@ -126,8 +126,8 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
     rule.addCwe(ruleMetadata.securityStandards.CWE);
   }
 
-  private static RuleMetadata readRuleMetadata(String ruleKey) {
-    String resourcePath = "/org/sonar/plugins/csharp/" + ruleKey + "_c#.json";
+  private RuleMetadata readRuleMetadata(String ruleKey) {
+    String resourcePath = getRuleJson(ruleKey);
     try (InputStream stream = AbstractRulesDefinition.class.getResourceAsStream(resourcePath)) {
       return  stream != null
         ? GSON.fromJson(new InputStreamReader(stream, StandardCharsets.UTF_8), RuleMetadata.class)
@@ -136,6 +136,8 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
       throw new IllegalStateException("Failed to read: " + resourcePath, e);
     }
   }
+
+  protected abstract String getRuleJson(String ruleKey);
 
   private static class RuleMetadata {
     private static final String SECURITY_HOTSPOT = "SECURITY_HOTSPOT";
