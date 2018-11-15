@@ -170,7 +170,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private static void VerifyBuildErrors(ImmutableArray<Diagnostic> diagnostics, Compilation compilation)
         {
-            //            var buildErrors = diagnostics.Where(d => d.Id.StartsWith("CS") && d.Severity == DiagnosticSeverity.Error);
             var buildErrors = GetBuildErrors(diagnostics);
 
             var expectedBuildErrors = new IssueLocationCollector()
