@@ -33,4 +33,9 @@ public class VbNetSonarRulesDefinition extends AbstractRulesDefinition {
   public VbNetSonarRulesDefinition(SonarRuntime sonarRuntime) {
     super(REPOSITORY_KEY, REPOSITORY_NAME, VbNetPlugin.LANGUAGE_KEY, RULES_XML, sonarRuntime);
   }
+
+  @Override
+  protected String getRuleJson(String ruleKey) {
+    return "/org/sonar/plugins/vbnet/" + ruleKey + "_vb.net.json";
+  }
 }
