@@ -1,4 +1,4 @@
-Namespace Tests.Diagnostics
+﻿Namespace Tests.Diagnostics
     Interface IA
     End Interface
     Class A
@@ -7,6 +7,8 @@ Namespace Tests.Diagnostics
 
     Class Foo
         Public Sub Foo2(a As Decimal, b As Decimal)
+        End Sub
+        Public Sub Foo2(a As Double, b As Double)
         End Sub
         Public Sub Foo2(a As Boolean, b As Boolean)
         End Sub
@@ -23,6 +25,9 @@ Namespace Tests.Diagnostics
         Public Sub Foo5(a As Integer, b As Integer, c As Integer, d As Integer, e As Integer)
         End Sub
         Public Sub Bar(a As String, b As Integer)
+        End Sub
+
+        Public Sub FooInt(x As Integer, y As Integer)
         End Sub
 
         Public Sub Parameterless()

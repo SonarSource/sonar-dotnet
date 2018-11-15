@@ -255,14 +255,14 @@ Namespace Tests.Diagnostics
       End Set
     End Property
 
-    Private foo As String
+    Private _foo As String
 
     Private Property Foo As String
       Get
-        Return Me.foo
+        Return Me._foo
       End Get
       Set
-        Me.foo = Value
+        Me._foo = Value
       End Set
     End Property
 
@@ -307,15 +307,17 @@ Namespace Tests.Diagnostics
       MyBase.New
       If (foo Is Nothing) Then
 '     ^^ Secondary {{+1}}
-        Throw ArgumentNullException
+        Throw New ArgumentNullException()
       End If
 
     End Sub
   End Class
 
-  Class DestructorsComplexity
+  Class DestructorsComplexity1
     Protected Overrides Sub Finalize()
     End Sub
+  End Class
+  Class DestructorsComplexity2
     Protected Overrides Sub Finalize() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
       If (True) Then
 '     ^^ Secondary {{+1}}
@@ -323,13 +325,13 @@ Namespace Tests.Diagnostics
     End Sub
   End Class
 
-  Class OperatorsComplexity
-
-    Public Shared Operator +(ByVal left As OperatorsComplexity, ByVal right As OperatorsComplexity) As OperatorsComplexity
+  Class OperatorsComplexity1
+    Public Shared Operator +(ByVal left As OperatorsComplexity1, ByVal right As OperatorsComplexity1) As OperatorsComplexity1
       Return Nothing
     End Operator
-
-    Public Shared Operator +(ByVal left As OperatorsComplexity, ByVal right As OperatorsComplexity) As OperatorsComplexity ' Noncompliant {{Refactor this operator to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+  End Class
+  Class OperatorsComplexity2
+    Public Shared Operator +(ByVal left As OperatorsComplexity2, ByVal right As OperatorsComplexity2) As OperatorsComplexity2 ' Noncompliant {{Refactor this operator to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
       If (True) Then
 '     ^^ Secondary {{+1}}
       End If
@@ -373,12 +375,12 @@ Namespace Tests.Diagnostics
       Return Me
     End Function
 
-    Private Sub IndirectRecursionFromLocalLambda()
-'               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
-'               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary@-1 {{+1 (recursion)}}
+    Private Function IndirectRecursionFromLocalLambda()
+'                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+'                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary@-1 {{+1 (recursion)}}
       Dim act = Function() IndirectRecursionFromLocalLambda()
       act
-    End Sub
+    End Function
   End Class
 
 
@@ -425,6 +427,7 @@ Namespace Tests.Diagnostics
     End Sub
 
     Private Sub AndOrIf() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 4 to the 0 allowed.}}
+      Dim a, b, c, d, e, f As Boolean
       If (a And b And c Or d Or e And f) Then
 '     ^^ Secondary {{+1}}
 '           ^^^ Secondary@-1 {{+1}}
@@ -434,6 +437,7 @@ Namespace Tests.Diagnostics
     End Sub
 
     Private Sub AndAlsoOrElseIf() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 4 to the 0 allowed.}}
+      Dim a, b, c, d, e, f As Boolean
       If (a AndAlso b AndAlso c OrElse d OrElse e AndAlso f) Then
 '     ^^ Secondary {{+1}}
 '           ^^^^^^^ Secondary@-1 {{+1}}
@@ -443,18 +447,21 @@ Namespace Tests.Diagnostics
     End Sub
 
     Private Sub AndNot() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
+      Dim a, b, c, d As Boolean
       Dim res = a And Not (b And c) And d
 '                 ^^^ Secondary {{+1}}
 '                            ^^^ Secondary@-1 {{+1}}
     End Sub
 
     Private Sub AndAlsoNot() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
+      Dim a, b, c, d As Boolean
       Dim res = a AndAlso Not (b AndAlso c) AndAlso d
 '                 ^^^^^^^ Secondary {{+1}}
 '                                ^^^^^^^ Secondary@-1 {{+1}}
     End Sub
 
     Private Sub OrAndNotOr() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
+      Dim a, b, c, d As Boolean
       Dim res = d Or a And (Not b Or Not c)
 '                 ^^ Secondary {{+1}}
 '                      ^^^ Secondary@-1 {{+1}}
@@ -462,6 +469,7 @@ Namespace Tests.Diagnostics
     End Sub
 
     Private Sub OrElseAndNot() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
+      Dim a, b, c, d As Boolean
       Dim res = d OrElse a And (Not b OrElse Not c)
 '                 ^^^^^^ Secondary {{+1}}
 '                          ^^^ Secondary@-1 {{+1}}
@@ -469,6 +477,7 @@ Namespace Tests.Diagnostics
     End Sub
 
     Private Sub AndOrNot2() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
+      Dim a, b, c, d As Boolean
       Dim res = a And (Not b Or Not c) Or d
 '                 ^^^ Secondary {{+1}}
 '                            ^^ Secondary@-1 {{+1}}
@@ -476,18 +485,21 @@ Namespace Tests.Diagnostics
     End Sub
 
     Private Sub AndNot3() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
+      Dim a, b, c, d As Boolean
       Dim res = a And d And Not (b And c)
 '                 ^^^ Secondary {{+1}}
 '                                  ^^^ Secondary@-1 {{+1}}
     End Sub
 
     Private Sub AndNotParenthesis() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
+      Dim a, b, c As Boolean
       Dim res = a And Not (((b And c)))
 '                 ^^^ Secondary {{+1}}
 '                              ^^^ Secondary@-1 {{+1}}
     End Sub
 
     Private Sub ChainedConditionsWithParentheses() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+      Dim a, b, c, d As Boolean
       Dim res = a AndAlso b AndAlso (c AndAlso d)
 '                 ^^^^^^^ Secondary {{+1}}
     End Sub
@@ -517,13 +529,13 @@ Namespace Tests.Diagnostics
 
   Class LambdasComplexity
 
-    Private act As Action(Of Integer) = Function(x As Integer) ' Noncompliant {{Refactor this field to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
+    Private act1 As Action(Of Integer) = Function(x As Integer) ' Noncompliant {{Refactor this field to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
                                             If (x > 5)
 '                                           ^^ Secondary {{+2 (incl 1 for nesting)}}
                                             End If
                                         End Function
 
-    Private act As Func(Of Integer, String) = Function(x As Integer) ' Noncompliant {{Refactor this field to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
+    Private act2 As Func(Of Integer, String) = Function(x As Integer) ' Noncompliant {{Refactor this field to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
                                                 If (x > 5)
 '                                               ^^ Secondary {{+2 (incl 1 for nesting)}}
                                                 End If

@@ -6,7 +6,7 @@ Namespace Tests.Diagnostics
             Dim passWord As String = "foo"
             Dim passKode As String = "a" 'Noncompliant {{Remove hard-coded password(s): 'kode'.}}
             Dim passKodeKode As String = "a" 'Noncompliant {{Remove hard-coded password(s): 'kode'.}}
-            Dim passKoDe As String = "a"
+            Dim passKoDe As String = "a"    ' Error [BC30288] Local variable 'passKoDe' is already declared in the current block
             Dim x As String = "kode=a;kode=a" 'Noncompliant {{Remove hard-coded password(s): 'kode'.}}
             Dim x2 As String = "facal-faire=a;kode=a" 'Noncompliant {{Remove hard-coded password(s): 'facal-faire, kode'.}}
         End Sub

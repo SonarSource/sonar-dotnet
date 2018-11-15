@@ -1,4 +1,5 @@
-﻿Imports System.Diagnostics
+﻿Imports System
+Imports System.Diagnostics
 Imports System.Runtime.InteropServices
 
 Module Foo
@@ -21,7 +22,7 @@ Module Foo
   End Function
 
   Function Exception3()
-    Throw
+    Throw            ' Error [BC30666] 'Throw' statement cannot omit operand outside a 'Catch' statement or inside a 'Finally' statement.' 
   End Function
 
   Sub Comment1()
@@ -41,16 +42,16 @@ Module Foo
   End Function
 
 ' Noncompliant@+1
-  Function Incomplete1()
+  Function Incomplete1()        ' Error ['BC30027] 'End Function' expected.
 
-  Function Incomplete2()
+  Function Incomplete2()        ' Error [BC30289, BC30027] Statement cannot appear within a method body. End of method assumed
     Return "bar"
 
 ' Noncompliant@+1
-  Sub Incomplete3()
+  Sub Incomplete3()             ' Error [BC30026, BC30289] 'End Sub' expected.
 
-  Function Incomplete4()
-    Thr
+  Function Incomplete4()        ' Error [BC30027] 'End Function' expected.
+    Thr                         ' Error [BC30451] 'Thr' is not declared. It may be inaccessible due to its protection level
   End Function
 
 End Module
@@ -90,24 +91,27 @@ Module Bar
     End Function
   End Class
 
-  <DllImport("FOO.DLL")> _
-  Private Shared Function External1(ByVal Handle As IntPtr) As IntPtr
-  End Function
+   Public Class Externals
 
-  <DllImport("FOO.DLL")> _
-  Private Shared Sub External2(ByVal Handle As IntPtr)
-  End Sub
+      <DllImport("FOO.DLL")> _
+      Private Shared Function External1(ByVal Handle As IntPtr) As IntPtr
+      End Function
 
-  Declare Function External3 Lib "foo.dll" Alias "FooBar" (ByVal lpBuffer As String) As Integer
+      <DllImport("FOO.DLL")> _
+      Private Shared Sub External2(ByVal Handle As IntPtr)
+      End Sub
 
-' Noncompliant@+2
-  <Conditional("DEBUG"), Conditional("TEST1")>
-  Sub OtherAttribute1()
-  End Sub
+      Declare Function External3 Lib "foo.dll" Alias "FooBar" (ByVal lpBuffer As String) As Integer
 
-' Noncompliant@+2
-  <DllI
-  Private Shared Sub OtherAttribute2(ByVal Handle As IntPtr)
-  End Sub
+    ' Noncompliant@+2
+      <Conditional("DEBUG"), Conditional("TEST1")>
+      Sub OtherAttribute1()
+      End Sub
 
+    ' Noncompliant@+2
+      <DllI         ' Error [BC30636] >' expected.' 
+      Private Shared Sub OtherAttribute2(ByVal Handle As IntPtr)
+      End Sub
+
+    End Class
 End Module

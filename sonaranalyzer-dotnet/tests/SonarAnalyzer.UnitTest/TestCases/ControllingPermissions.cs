@@ -84,7 +84,7 @@ namespace Tests.Diagnostics
             principal = new WindowsPrincipal(windowsIdentity); // Noncompliant
         }
 
-        // Method declarations that accept IIdentiry or IPrincipal
+        // Method declarations that accept IIdentity or IPrincipal
         void AcceptIdentity(MyIdentity identity) { } // Noncompliant
 //           ^^^^^^^^^^^^^^
         void AcceptIdentity(IIdentity identity) { } // Noncompliant
