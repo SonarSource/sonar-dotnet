@@ -46,7 +46,7 @@ Namespace Tests.Diagnostics
         End Property
         Public ReadOnly Property Foo7() As Integer
             Get
-                Throw New ObjectDisposedException() ' Compliant
+                Throw New ObjectDisposedException("foo") ' Compliant
             End Get
         End Property
         Public Property Item(ByVal index As Long) As Byte ' Indexed properties are ignored

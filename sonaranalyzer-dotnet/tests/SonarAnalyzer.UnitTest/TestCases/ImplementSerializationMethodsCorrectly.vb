@@ -21,7 +21,7 @@ Namespace Tests.Diagnostics
         Private Sub OnDeserialized(ByVal context As StreamingContext, ByVal str As String) ' Noncompliant {{Make this method have a single parameter of type 'StreamingContext'.}}
         End Sub
 
-        Private Sub OnDeserialized(ByVal context As StreamingContext, ByVal str As String)
+        Private Sub OnDeserialized2(ByVal context As StreamingContext, ByVal str As String)
         End Sub
 
         <OnDeserialized>
@@ -49,7 +49,7 @@ Namespace Tests.Diagnostics
         End Function
 
         <OnDeserializing>
-        Public Function () As String ' Noncompliant
+        Public Function () As String ' Noncompliant ' Error [BC30203]
             Throw New NotImplementedException()
         End Function
     End Class

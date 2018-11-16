@@ -25,8 +25,8 @@ Namespace Tests.Diagnostics
     End Class
 
     Structure NonCompliantStruct_FromRspec
-        Private x As Integer
-        Private y As Integer
+        Private x_ As Integer
+        Private y_ As Integer
 
         Public Property X As Integer
             Get
@@ -68,7 +68,7 @@ Namespace Tests.Diagnostics
     End Class
 
     Class NonCompliant_FieldTypeIsIgnored
-        Private aaa As Integer
+        Private aaa_ As Integer
         Private aString As String
 
         Public Property AAA As String
@@ -82,7 +82,7 @@ Namespace Tests.Diagnostics
     End Class
 
     Class NonCompliant_AssigningToExpression
-        Private aaa As Integer
+        Private aaa_ As Integer
         Private aString As String
 
         Public WriteOnly Property AAA As String
@@ -93,7 +93,7 @@ Namespace Tests.Diagnostics
     End Class
 
     Partial Class NonCompliant_PartialClass
-        Private myProperty As Object
+        Private myProperty_ As Object
     End Class
 
     Partial Class NonCompliant_PartialClass
@@ -176,7 +176,7 @@ Namespace Tests.Diagnostics
 
     Structure Compliant_Indexer
         ' Declare an array to store the data elements.
-        Private ReadOnly arr As Integer() = New Integer(99) {}
+        Private Shared ReadOnly arr As Integer() = New Integer(99) {}
 
         ' Define the indexer to allow client code to use [] notation.
         Default Public Property Item(ByVal i As Integer) As Integer
@@ -214,7 +214,7 @@ Namespace Tests.Diagnostics
         Private abc As String
         Private yyy As String
 
-        Public Property Abc As String
+        Public Property Abc2 As String
             Get
                 Return yyy ' Compliant - multiple possible matching field names, so don't raise
             End Get
@@ -227,8 +227,8 @@ Namespace Tests.Diagnostics
     Class Compliant_ImplicitProperties
         Private firstName As String
         Private secondName As String
-        Public Property FirstName As String = "Jane"
-        Public Property SecondName As String
+        Public Property FirstName2 As String = "Jane"
+        Public Property SecondName2 As String
     End Class
 
     Class WrappedClass
@@ -243,9 +243,9 @@ Namespace Tests.Diagnostics
             Get
                 Return wrapped.field1
             End Get
-            Get
+            Set
                 wrapped.field1 = value
-            End Get
+            End Set
         End Property
     End Class
 

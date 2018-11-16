@@ -20,7 +20,6 @@ Namespace SonarAnalyzer.UnitTest.TestCases
             Dim e = New OutOfMemoryException() ' Compliant
             Throw New ArgumentNullException() ' Compliant
 
-            Dim e As OutOfMemoryException = DirectCast(New ArgumentException(), OutOfMemoryException) ' Compliant
             Try
                 Dim a = New Integer(-1) {}
                 ' Throw exception

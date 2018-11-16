@@ -14,7 +14,7 @@
             Return 42
         End Function
 
-        Sub subject__SomeEvent() Handles Obj.Ev_Event
+        Sub subject__SomeEvent() Handles Obj.Ev_Event ' Error [BC30506]
         End Sub
 
         Sub subject__SomeEvent22(sender As Object, args As System.EventArgs) ' Might be event handler

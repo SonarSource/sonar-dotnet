@@ -6,7 +6,7 @@ Namespace Tests.Diagnostics
 '           ^^^^^^^
     End Interface
 
-    Public Class Base
+    Public MustInherit Class Base
         MustOverride Sub Method5(a As Integer()()) ' Noncompliant
     End Class
 

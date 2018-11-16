@@ -4,10 +4,6 @@ Imports System.Threading.Tasks
 Namespace Tests.Diagnostics
     Public Class CompliantUseCases
 
-        Public Async Function GetTaskAsync1() As Task
-            Return Nothing
-        End Function
-
         Public Async Function GetTaskAsync2() As Task(Of Object)
             Return Nothing
         End Function

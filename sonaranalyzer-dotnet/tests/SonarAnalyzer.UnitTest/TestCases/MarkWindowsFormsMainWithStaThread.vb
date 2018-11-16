@@ -4,7 +4,7 @@ Imports System.Windows.Forms
 Namespace Tests.TestCases
 
   Class Program_00
-    <Nonsense>
+    <Nonsense> ' Error [BC30002] Attribute doesn't exist
     Shared Sub Main() ' Noncompliant
     End Sub
   End Class
@@ -57,7 +57,7 @@ Namespace Tests.TestCases
   End Class
 
   Class Program_09
-    <STAThread("random", 1)> ' Invalid code
+    <STAThread("random", 1)> ' Error [BC30057] Invalid code
     Shared Sub Main()
     End Sub
   End Class

@@ -5,6 +5,10 @@ Namespace Tests.Diagnostics
     Public Class MyExtension1
         Inherits MarkupExtension
 
+        Public Overrides Function ProvideValue(serviceProvider As IServiceProvider) As Object
+            Return Nothing
+        End Function
+
         Public Sub New(ByVal value1 As Object)
             Value1 = value1
         End Sub
@@ -15,6 +19,10 @@ Namespace Tests.Diagnostics
 
     Public Class MyExtension2
         Inherits MarkupExtension
+
+        Public Overrides Function ProvideValue(serviceProvider As IServiceProvider) As Object
+            Return Nothing
+        End Function
 
         Public Sub New(ByVal value1 As Object)
             Value1 = value1
@@ -27,6 +35,10 @@ Namespace Tests.Diagnostics
     Public Class MyExtension3
         Inherits MarkupExtension
 
+        Public Overrides Function ProvideValue(serviceProvider As IServiceProvider) As Object
+            Return Nothing
+        End Function
+
         Public Sub New(ByVal value1 As Object)
             Value1 = value1
         End Sub
@@ -38,6 +50,10 @@ Namespace Tests.Diagnostics
 
     Public Class MyExtension4
         Inherits MarkupExtension
+
+        Public Overrides Function ProvideValue(serviceProvider As IServiceProvider) As Object
+            Return Nothing
+        End Function
 
         Public Sub New(ByVal value1 As Object)
             Value1 = value1
@@ -52,23 +68,31 @@ Namespace Tests.Diagnostics
     Public Class MyExtension5
         Inherits MarkupExtension
 
+        Public Overrides Function ProvideValue(serviceProvider As IServiceProvider) As Object
+            Return Nothing
+        End Function
+
         Public Sub New(ByVal value1 As Object)
             Value1 = value1
         End Sub
 
-        <ConstructorArgument> ' Invalid syntax - argument is mandatory - do not raise
+        <ConstructorArgument> ' Error [BC30455] Invalid syntax - argument is mandatory - do not raise
         Public Property Value1 As Object
     End Class
 
     Public Class MyExtension6
         Inherits MarkupExtension
 
+        Public Overrides Function ProvideValue(serviceProvider As IServiceProvider) As Object
+            Return Nothing
+        End Function
+
         Public Sub New(ByVal value1 As Object)
             Value1 = value1
         End Sub
 
         <ConstructorArgument("foo")>
-        <ConstructorArgument("bar")> ' Invalid syntax - only 1 attribute allowed - do not raise
+        <ConstructorArgument("bar")> ' Error [BC30663] Invalid syntax - only 1 attribute allowed - do not raise
         Public Property Value1 As Object
     End Class
 End Namespace

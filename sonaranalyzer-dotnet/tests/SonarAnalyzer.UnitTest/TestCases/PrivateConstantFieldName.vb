@@ -9,8 +9,8 @@
     Private Const _fooFooFFFoooFF = 10, __fooFooFFFoooFF = 42  ' Noncompliant
 '                                       ^^^^^^^^^^^^^^^^
 
-    Private Const _fooFooFFFFoooFF As Integer ' Noncompliant
-    Private Const _fooFooFFFoooF As Integer ' Noncompliant
+    Private Const _fooFooFFFFoooFF As Integer = 1 ' Noncompliant
+    Private Const _fooFooFFFoooF As Integer = 2 ' Noncompliant
     Private Shared ReadOnly _fooFooFFFoooFFF As Integer
 
 End Class

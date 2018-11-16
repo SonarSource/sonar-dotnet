@@ -3,6 +3,8 @@
         Public Property FooFoo As Integer
         Public Property FooFoo2() As Integer
 
+        Dim array As String()
+
         ReadOnly Property foooo(ByVal index As Integer) ' Noncompliant
             Get
                 Return array(index)

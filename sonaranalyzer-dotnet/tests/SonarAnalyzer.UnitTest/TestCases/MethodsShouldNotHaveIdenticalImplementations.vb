@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 
 Namespace Tests.Diagnostics
     Class Program
@@ -42,8 +42,8 @@ Namespace Tests.Diagnostics
             Return s
         End Function
 
-        Function Foo2() As String ' Noncompliant {{Update this method so that its implementation is not identical to 'Func1'.}}
-'                ^^^^
+        Function Func2() As String ' Noncompliant {{Update this method so that its implementation is not identical to 'Func1'.}}
+'                ^^^^^
             Dim s As String = "test"
             Console.WriteLine("Result: {0}", s)
             Return s
@@ -53,13 +53,13 @@ Namespace Tests.Diagnostics
         Function DiffBySignature1(arg1 As Integer) As Integer
 '                ^^^^^^^^^^^^^^^^ Secondary
             Console.WriteLine(arg1)
-            Return val
+            Return arg1
         End Function
 
         Function DiffBySignature2(arg1 As String) As String ' Noncompliant {{Update this method so that its implementation is not identical to 'DiffBySignature1'.}}
 '                ^^^^^^^^^^^^^^^^
             Console.WriteLine(arg1)
-            Return val
+            Return arg1
         End Function
 
 
