@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Helpers
             {
                 foreach(var baseTypeNode in context.AllBaseTypeNodes)
                 {
-                    if (context.Model.GetTypeInfo(baseTypeNode).Type?.DerivesOrImplements(type) ?? false)
+                    if (context.SemanticModel.GetTypeInfo(baseTypeNode).Type?.DerivesOrImplements(type) ?? false)
                     {
                         issueLocation = baseTypeNode.GetLocation();
                         return true; // assume there won't be more than one matching node
@@ -119,7 +119,7 @@ namespace SonarAnalyzer.Helpers
             {
                 foreach (var baseTypeNode in context.AllBaseTypeNodes)
                 {
-                    if (context.Model.GetTypeInfo(baseTypeNode).Type?.DerivesFromAny(types) ?? false)
+                    if (context.SemanticModel.GetTypeInfo(baseTypeNode).Type?.DerivesFromAny(types) ?? false)
                     {
                         issueLocation = baseTypeNode.GetLocation();
                         return true; // assume there won't be more than one matching node

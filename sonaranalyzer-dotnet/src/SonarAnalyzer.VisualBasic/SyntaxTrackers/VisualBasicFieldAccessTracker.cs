@@ -44,20 +44,14 @@ namespace SonarAnalyzer.Helpers
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
             VisualBasic.GeneratedCodeRecognizer.Instance;
 
-        protected override SyntaxNode GetIdentifier(SyntaxNode expression) =>
-            ((ExpressionSyntax)expression).GetIdentifier();
+        protected override string GetFieldName(SyntaxNode expression) =>
+            ((ExpressionSyntax)expression).GetIdentifier()?.Identifier.ValueText;
 
         protected override bool IsIdentifierWithinMemberAccess(SyntaxNode expression) =>
             expression.IsKind(SyntaxKind.IdentifierName) &&
             expression.Parent.IsKind(SyntaxKind.SimpleMemberAccessExpression);
 
         #region Syntax-level checking methods
-
-        public override FieldAccessCondition MatchSimpleNames(params MethodSignature[] methods)
-        {
-            return (context) => MethodSignatureHelper.IsMatch(context.Identifier as SimpleNameSyntax,
-                    context.Model, context.InvokedFieldSymbol, false, methods);
-        }
 
         public override FieldAccessCondition MatchGet() =>
             (context) => !((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
@@ -72,7 +66,7 @@ namespace SonarAnalyzer.Helpers
                     .FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentStatement));
 
                 return assignment != null &&
-                    assignment.Right.IsConstant(context.Model);
+                    assignment.Right.IsConstant(context.SemanticModel);
             };
 
         #endregion

@@ -56,12 +56,12 @@ namespace SonarAnalyzer.Rules
 
         private InvocationCondition WhenThereAreArguments() =>
             (context) =>
-                context.InvokedMethodSymbol.Value != null &&
-                context.InvokedMethodSymbol.Value.Parameters.Length > 0;
+                context.MethodSymbol.Value != null &&
+                context.MethodSymbol.Value.Parameters.Length > 0;
 
         private InvocationCondition WhenFirstArgumentIsNot(KnownType type) =>
             (context) =>
-                context.InvokedMethodSymbol.Value != null &&
-                !context.InvokedMethodSymbol.Value.ArgumentAtIndexIs(0, type);
+                context.MethodSymbol.Value != null &&
+                !context.MethodSymbol.Value.ArgumentAtIndexIs(0, type);
     }
 }

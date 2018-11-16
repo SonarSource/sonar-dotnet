@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Helpers
 
         protected abstract bool IsIdentifierWithinMemberAccess(SyntaxNode expression);
 
-        protected abstract SyntaxNode GetIdentifier(SyntaxNode expression);
+        protected abstract string GetFieldName(SyntaxNode expression);
 
         public void Track(SonarAnalysisContext context, params FieldAccessCondition[] conditions)
         {
@@ -70,20 +70,22 @@ namespace SonarAnalyzer.Helpers
                     return false;
                 }
 
-                var identifier = GetIdentifier(expression);
-                if (identifier == null)
+                var fieldName = GetFieldName(expression);
+                if (fieldName == null)
                 {
                     return false;
                 }
 
-                var conditionContext = new FieldAccessContext(expression, identifier, semanticModel);
+                var conditionContext = new FieldAccessContext(expression, fieldName, semanticModel);
                 return conditions.All(c => c(conditionContext));
             }
         }
 
-        #region Syntax-level standard conditions
+        public FieldAccessCondition MatchSimpleNames(params MethodSignature[] fields) =>
+            (context) =>
+                MethodSignatureHelper.IsMatch(context.FieldName, context.InvokedFieldSymbol, false, fields);
 
-        public abstract FieldAccessCondition MatchSimpleNames(params MethodSignature[] methods);
+        #region Syntax-level standard conditions
 
         public abstract FieldAccessCondition MatchGet();
 

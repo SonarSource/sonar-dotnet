@@ -44,8 +44,8 @@ namespace SonarAnalyzer.Helpers
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
             CSharp.GeneratedCodeRecognizer.Instance;
 
-        protected override SyntaxNode GetIdentifier(SyntaxNode expression) =>
-            ((ExpressionSyntax)expression).GetIdentifier();
+        protected override string GetFieldName(SyntaxNode expression) =>
+            ((ExpressionSyntax)expression).GetIdentifier()?.Identifier.ValueText;
 
         protected override bool IsIdentifierWithinMemberAccess(SyntaxNode expression) =>
             expression.IsKind(SyntaxKind.IdentifierName) &&
@@ -59,11 +59,6 @@ namespace SonarAnalyzer.Helpers
         public override FieldAccessCondition MatchSet() =>
             (context) => ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
 
-        public override FieldAccessCondition MatchSimpleNames(params MethodSignature[] methods) =>
-            (context) =>
-                MethodSignatureHelper.IsMatch(context.Identifier as SimpleNameSyntax, context.Model,
-                    context.InvokedFieldSymbol, false, methods);
-
         public override FieldAccessCondition AssignedValueIsConstant() =>
             (context) =>
             {
@@ -71,7 +66,7 @@ namespace SonarAnalyzer.Helpers
                     .FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentExpression));
 
                 return assignment != null &&
-                    assignment.Right.IsConstant(context.Model);
+                    assignment.Right.IsConstant(context.SemanticModel);
             };
 
         #endregion

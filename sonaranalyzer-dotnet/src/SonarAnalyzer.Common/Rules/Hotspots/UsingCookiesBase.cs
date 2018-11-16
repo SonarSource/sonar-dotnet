@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules
                 InvocationTracker.MatchSimpleNames(
                     new MethodSignature(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Add"),
                     new MethodSignature(KnownType.System_Collections_Generic_IDictionary_TKey_TValue_VB, "Add")),
-                InvocationTracker.ParameterAtIndexIsString(0, "Set-Cookie"),
+                InvocationTracker.ArgumentAtIndexIsString(0, "Set-Cookie"),
                 IsIHeadersDictionary(),
                 InvocationTracker.HasParameters(2));
         }
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules
         private static InvocationCondition IsIHeadersDictionary() =>
             (context) =>
             {
-                var containingType = context.InvokedMethodSymbol.Value.ContainingType;
+                var containingType = context.MethodSymbol.Value.ContainingType;
                 // We already checked if ContainingType is IDictionary, but be defensive and check TypeArguments.Count
                 return containingType.TypeArguments.Length == 2
                     && containingType.TypeArguments[0].Is(KnownType.System_String)

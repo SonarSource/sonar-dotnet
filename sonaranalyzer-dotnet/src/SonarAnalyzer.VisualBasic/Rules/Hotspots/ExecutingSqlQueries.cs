@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 var onlyArgument = argumentList.Arguments[0].GetExpression().RemoveParentheses();
 
                 return onlyArgument.IsAnyKind(SyntaxKind.InterpolatedStringExpression) ||
-                    onlyArgument.IsConstant(context.Model);
+                    onlyArgument.IsConstant(context.SemanticModel);
             };
     }
 }

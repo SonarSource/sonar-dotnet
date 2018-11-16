@@ -20,7 +20,6 @@
 
 extern alias csharp;
 extern alias vbnet;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
@@ -29,9 +28,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CSharpHelpers = csharp::SonarAnalyzer.Helpers;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
-using VBHelpers = vbnet::SonarAnalyzer.Helpers;
 using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.UnitTest.Helpers
@@ -329,32 +326,32 @@ End Namespace
         {
             var nameParts = typeAndMethodName.Split('.');
 
-            IEnumerable<ValueTuple<SyntaxNode, SyntaxNode>> invocation_identifierPairs = null;
+            IEnumerable<(SyntaxNode node, string name)> invocation_identifierPairs = null;
             if (snippet.IsCSharp())
             {
                 invocation_identifierPairs = snippet.GetNodes<CSharpSyntax.InvocationExpressionSyntax>()
-                    .Select(n => ((SyntaxNode)n, (SyntaxNode)n.Expression.GetIdentifier()));
+                    .Select(n => ((SyntaxNode)n, n.Expression.GetIdentifier()?.Identifier.ValueText));
             }
             else
             {
                 invocation_identifierPairs = snippet.GetNodes<VBSyntax.InvocationExpressionSyntax>()
-                    .Select(n => ((SyntaxNode)n, (SyntaxNode)vbnet::SonarAnalyzer.Helpers.VisualBasic.VisualBasicSyntaxHelper.GetIdentifier(n.Expression)));                
+                    .Select(n => ((SyntaxNode)n, vbnet::SonarAnalyzer.Helpers.VisualBasic.VisualBasicSyntaxHelper.GetIdentifier(n.Expression)?.Identifier.ValueText));
             }
 
-            foreach (var (invocation, identifier) in invocation_identifierPairs)
+            foreach (var (invocation, methodName) in invocation_identifierPairs)
             {
-                var symbol = snippet.GetSymbol<IMethodSymbol>(identifier);
+                var symbol = snippet.GetSymbol<IMethodSymbol>(invocation);
                 if (symbol.Name == nameParts[1] &&
                     symbol.ContainingType.Name == nameParts[0])
                 {
-                    return new InvocationContext(invocation, identifier, snippet.SemanticModel);
+                    return new InvocationContext(invocation, methodName, snippet.SemanticModel);
                 }
             }
 
             Assert.Fail($"Test setup error: could not find method call in test code snippet: {typeAndMethodName}");
             return null;
         }
-       
+
         private static void CheckExactMethod(bool expectedOutcome, InvocationContext invocationContext,
             SnippetCompiler snippet, params MethodSignature[] targetMethodSignatures) =>
                 CheckMatch(false, expectedOutcome, invocationContext, snippet, targetMethodSignatures);
@@ -366,19 +363,8 @@ End Namespace
         private static void CheckMatch(bool checkDerived, bool expectedOutcome, InvocationContext invocationContext,
             SnippetCompiler snippet, params MethodSignature[] targetMethodSignatures)
         {
-            bool result;
-            if (snippet.IsCSharp())
-            {
-                result = CSharpHelpers.MethodSignatureHelper.IsMatch(invocationContext.Identifier as CSharpSyntax.SimpleNameSyntax,
-                    snippet.SemanticModel, invocationContext.InvokedMethodSymbol, checkDerived,
-                    targetMethodSignatures);
-            }
-            else
-            {
-                result = VBHelpers.MethodSignatureHelper.IsMatch(invocationContext.Identifier as VBSyntax.SimpleNameSyntax,
-                    snippet.SemanticModel, invocationContext.InvokedMethodSymbol, checkDerived,
-                    targetMethodSignatures);
-            }
+            var result = MethodSignatureHelper.IsMatch(invocationContext.MethodName,
+                invocationContext.MethodSymbol, checkDerived, targetMethodSignatures);
 
             result.Should().Be(expectedOutcome);
         }

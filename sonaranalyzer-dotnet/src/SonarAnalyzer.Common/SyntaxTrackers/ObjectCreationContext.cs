@@ -29,13 +29,13 @@ namespace SonarAnalyzer.Helpers
     public class ObjectCreationContext
     {
         public SyntaxNode Expression { get; }
-        public SemanticModel Model { get; }
+        public SemanticModel SemanticModel { get; }
         public Lazy<IMethodSymbol> InvokedConstructorSymbol { get; }
 
         public ObjectCreationContext(SyntaxNode invocation, SemanticModel semanticModel)
         {
             Expression = invocation;
-            Model = semanticModel;
+            SemanticModel = semanticModel;
             InvokedConstructorSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol);
         }
     }

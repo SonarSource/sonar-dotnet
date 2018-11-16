@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Helpers
         /// The node being analyzed - the base list syntax node
         /// </summary>
         public SyntaxNode ContextNode { get; }
-        public SemanticModel Model { get; }
+        public SemanticModel SemanticModel { get; }
 
         /// <summary>
         /// A list of all type syntax nodes for node being analyzed
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Helpers
         {
             ContextNode = contextNode;
             AllBaseTypeNodes = allBaseTypeNodes ?? Enumerable.Empty<SyntaxNode>();
-            Model = semanticModel;
+            SemanticModel = semanticModel;
         }
     }
 }

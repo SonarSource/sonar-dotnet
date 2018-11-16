@@ -29,16 +29,16 @@ namespace SonarAnalyzer.Helpers
     public class PropertyAccessContext
     {
         public SyntaxNode Expression { get; }
-        public SyntaxNode Identifier { get; }
-        public SemanticModel Model { get; }
-        public Lazy<IPropertySymbol> InvokedPropertySymbol { get; }
+        public string PropertyName { get; }
+        public SemanticModel SemanticModel { get; }
+        public Lazy<IPropertySymbol> PropertySymbol { get; }
 
-        public PropertyAccessContext(SyntaxNode invocation, SyntaxNode identifier, SemanticModel semanticModel)
+        public PropertyAccessContext(SyntaxNode expression, string propertyName, SemanticModel semanticModel)
         {
-            Expression = invocation;
-            Identifier = identifier;
-            Model = semanticModel;
-            InvokedPropertySymbol = new Lazy<IPropertySymbol>(() => semanticModel.GetSymbolInfo(identifier).Symbol as IPropertySymbol);
+            Expression = expression;
+            PropertyName = propertyName;
+            SemanticModel = semanticModel;
+            PropertySymbol = new Lazy<IPropertySymbol>(() => semanticModel.GetSymbolInfo(expression).Symbol as IPropertySymbol);
         }
     }
 }

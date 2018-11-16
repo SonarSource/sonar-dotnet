@@ -29,16 +29,16 @@ namespace SonarAnalyzer.Helpers
     public class FieldAccessContext
     {
         public SyntaxNode Expression { get; }
-        public SyntaxNode Identifier { get; }
-        public SemanticModel Model { get; }
+        public string FieldName { get; }
+        public SemanticModel SemanticModel { get; }
         public Lazy<IFieldSymbol> InvokedFieldSymbol { get; }
 
-        public FieldAccessContext(SyntaxNode invocation, SyntaxNode identifier, SemanticModel semanticModel)
+        public FieldAccessContext(SyntaxNode expression, string fieldName, SemanticModel semanticModel)
         {
-            Expression = invocation;
-            Identifier = identifier;
-            Model = semanticModel;
-            InvokedFieldSymbol = new Lazy<IFieldSymbol>(() => semanticModel.GetSymbolInfo(identifier).Symbol as IFieldSymbol);
+            Expression = expression;
+            FieldName = fieldName;
+            SemanticModel = semanticModel;
+            InvokedFieldSymbol = new Lazy<IFieldSymbol>(() => semanticModel.GetSymbolInfo(Expression).Symbol as IFieldSymbol);
         }
     }
 }

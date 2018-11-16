@@ -44,8 +44,8 @@ namespace SonarAnalyzer.Helpers
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
             VisualBasic.GeneratedCodeRecognizer.Instance;
 
-        protected override SyntaxNode GetIdentifier(SyntaxNode expression) =>
-            ((ExpressionSyntax)expression).GetIdentifier();
+        protected override string GetPropertyName(SyntaxNode expression) =>
+            ((ExpressionSyntax)expression).GetIdentifier()?.Identifier.ValueText;
 
         protected override bool IsIdentifierWithinMemberAccess(SyntaxNode expression) =>
             expression.IsKind(SyntaxKind.IdentifierName) &&
@@ -53,17 +53,13 @@ namespace SonarAnalyzer.Helpers
 
         #region Syntax-level checking methods
 
-        public override PropertyAccessCondition MatchSimpleNames(params MethodSignature[] methods)
-        {
-            return (context) => MethodSignatureHelper.IsMatch(context.Identifier as SimpleNameSyntax,
-                    context.Model, context.InvokedPropertySymbol, false, methods);
-        }
-
         public override PropertyAccessCondition MatchGet() =>
-            (context) => !((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
+            (context) =>
+                !((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
 
         public override PropertyAccessCondition MatchSet() =>
-            (context) => ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
+            (context) =>
+                ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
 
         public override PropertyAccessCondition AssignedValueIsConstant() =>
             (context) =>
@@ -72,7 +68,7 @@ namespace SonarAnalyzer.Helpers
                     .FirstOrDefault(ancestor => ancestor.IsKind(SyntaxKind.SimpleAssignmentStatement));
 
                 return assignment != null &&
-                    assignment.Right.IsConstant(context.Model);
+                    assignment.Right.IsConstant(context.SemanticModel);
             };
 
         #endregion

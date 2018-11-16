@@ -38,25 +38,17 @@ namespace SonarAnalyzer.Helpers
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
             CSharp.GeneratedCodeRecognizer.Instance;
 
-        protected override SyntaxNode GetIdentifier(SyntaxNode invocationExpression) =>
-            ((InvocationExpressionSyntax)invocationExpression).Expression.GetIdentifier();
+        protected override string GetMethodName(SyntaxNode invocationExpression) =>
+            ((InvocationExpressionSyntax)invocationExpression).Expression.GetIdentifier()?.Identifier.ValueText;
 
-        public override InvocationCondition MatchSimpleNames(params MethodSignature[] methods) =>
-            (context) => MethodSignatureHelper.IsMatch(context.Identifier as SimpleNameSyntax,
-                context.Model, context.InvokedMethodSymbol, true, methods);
-
-        public override InvocationCondition ParameterAtIndexIsConstant(int index) =>
+        public override InvocationCondition ArgumentAtIndexIsConstant(int index) =>
             (context) =>
             {
                 var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
                 return argumentList != null &&
                     argumentList.Arguments.Count > index &&
-                    argumentList.Arguments[index].Expression.IsConstant(context.Model);
+                    argumentList.Arguments[index].Expression.IsConstant(context.SemanticModel);
             };
-
-        public override InvocationCondition MethodNameIs(string methodName) =>
-            (context) =>
-                ((SimpleNameSyntax)context.Identifier).Identifier.ValueText == methodName;
 
         public override InvocationCondition IsTypeOfExpression() =>
             (context) => context.Invocation is InvocationExpressionSyntax invocation
@@ -64,7 +56,7 @@ namespace SonarAnalyzer.Helpers
                         && memberAccessSyntax.Expression != null
                         && memberAccessSyntax.Expression.RawKind == (int)SyntaxKind.TypeOfExpression;
 
-        public override InvocationCondition ParameterAtIndexIsString(int index, string value) =>
+        public override InvocationCondition ArgumentAtIndexIsString(int index, string value) =>
             (context) =>
             {
                 var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
@@ -73,7 +65,7 @@ namespace SonarAnalyzer.Helpers
                 {
                     return false;
                 }
-                var constantValue = context.Model.GetConstantValue(argumentList.Arguments[index].Expression);
+                var constantValue = context.SemanticModel.GetConstantValue(argumentList.Arguments[index].Expression);
                 return constantValue.HasValue &&
                     constantValue.Value is string constant &&
                     constant == value;

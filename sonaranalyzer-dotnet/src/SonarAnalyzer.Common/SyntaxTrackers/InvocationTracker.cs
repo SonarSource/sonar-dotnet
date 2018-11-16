@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Helpers
         {
         }
 
-        protected abstract SyntaxNode GetIdentifier(SyntaxNode invocationExpression);
+        protected abstract string GetMethodName(SyntaxNode invocationExpression);
 
         public void Track(SonarAnalysisContext context, params InvocationCondition[] conditions)
         {
@@ -62,29 +62,25 @@ namespace SonarAnalyzer.Helpers
 
             bool IsTrackedMethod(SyntaxNode invocation, SemanticModel semanticModel)
             {
-                var identifier = GetIdentifier(invocation);
-                if (identifier == null)
+                var methodName = GetMethodName(invocation);
+                if (methodName == null)
                 {
                     return false;
                 }
 
-                var conditionContext = new InvocationContext(invocation, identifier, semanticModel);
+                var conditionContext = new InvocationContext(invocation, methodName, semanticModel);
                 return conditions.All(c => c(conditionContext));
             }
         }
 
         #region Syntax-level standard conditions
 
-        public abstract InvocationCondition MatchSimpleNames(params MethodSignature[] methods);
-
         public InvocationCondition FirstParameterIsConstant() =>
-            ParameterAtIndexIsConstant(0);
+            ArgumentAtIndexIsConstant(0);
 
-        public abstract InvocationCondition MethodNameIs(string methodName);
+        public abstract InvocationCondition ArgumentAtIndexIsConstant(int index);
 
-        public abstract InvocationCondition ParameterAtIndexIsConstant(int index);
-
-        public abstract InvocationCondition ParameterAtIndexIsString(int index, string value);
+        public abstract InvocationCondition ArgumentAtIndexIsString(int index, string value);
 
         public abstract InvocationCondition IsTypeOfExpression();
 
@@ -92,29 +88,37 @@ namespace SonarAnalyzer.Helpers
 
         #region Symbol-level standard conditions
 
+        public InvocationCondition MatchSimpleNames(params MethodSignature[] methods) =>
+            (context) =>
+                MethodSignatureHelper.IsMatch(context.MethodName, context.MethodSymbol, true, methods);
+
+        public InvocationCondition MethodNameIs(string methodName) =>
+            (context) =>
+                context.MethodName == methodName;
+
         public InvocationCondition IsStatic() =>
             (context) =>
-                context.InvokedMethodSymbol.Value != null &&
-                context.InvokedMethodSymbol.Value.IsStatic;
+                context.MethodSymbol.Value != null &&
+                context.MethodSymbol.Value.IsStatic;
 
         public InvocationCondition IsExtensionMethod() =>
             (context) =>
-                context.InvokedMethodSymbol.Value != null &&
-                context.InvokedMethodSymbol.Value.IsExtensionMethod;
+                context.MethodSymbol.Value != null &&
+                context.MethodSymbol.Value.IsExtensionMethod;
 
         public InvocationCondition HasParameters() =>
             (context) =>
-                context.InvokedMethodSymbol.Value != null &&
-                context.InvokedMethodSymbol.Value.Parameters.Length > 0;
+                context.MethodSymbol.Value != null &&
+                context.MethodSymbol.Value.Parameters.Length > 0;
 
         public InvocationCondition HasParameters(int count) =>
             (context) =>
-                context.InvokedMethodSymbol.Value != null &&
-                context.InvokedMethodSymbol.Value.Parameters.Length == count;
+                context.MethodSymbol.Value != null &&
+                context.MethodSymbol.Value.Parameters.Length == count;
 
         public bool FirstParameterIsString(InvocationContext context)
         {
-            var firstParam = context.InvokedMethodSymbol.Value?.Parameters.FirstOrDefault();
+            var firstParam = context.MethodSymbol.Value?.Parameters.FirstOrDefault();
 
             return firstParam != null &&
                 firstParam.IsType(KnownType.System_String);
@@ -125,20 +129,20 @@ namespace SonarAnalyzer.Helpers
             return Check;
 
             bool Check(InvocationContext context) =>
-                context.InvokedMethodSymbol.Value != null &&
-                context.InvokedMethodSymbol.Value.Parameters.Length > 0 &&
-                context.InvokedMethodSymbol.Value.Parameters[0].IsType(requiredType);
+                context.MethodSymbol.Value != null &&
+                context.MethodSymbol.Value.Parameters.Length > 0 &&
+                context.MethodSymbol.Value.Parameters[0].IsType(requiredType);
         }
 
         internal InvocationCondition WhenReturnTypeIs(KnownType returnType) =>
             (context) =>
-                context.InvokedMethodSymbol.Value != null &&
-                context.InvokedMethodSymbol.Value.ReturnType.DerivesFrom(returnType);
+                context.MethodSymbol.Value != null &&
+                context.MethodSymbol.Value.ReturnType.DerivesFrom(returnType);
 
         public InvocationCondition IsExtern() =>
             (context) =>
-                context.InvokedMethodSymbol.Value != null &&
-                context.InvokedMethodSymbol.Value.IsExtern;
+                context.MethodSymbol.Value != null &&
+                context.MethodSymbol.Value.IsExtern;
 
         #endregion
     }

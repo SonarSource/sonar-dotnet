@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 var invocationStatement = context.Invocation.FirstAncestorOrSelf<StatementSyntax>();
                 return invocationStatement != null &&
-                    invocationStatement.Ancestors().Any(node => IsDevelopmentCheck(node, context.Model));
+                    invocationStatement.Ancestors().Any(node => IsDevelopmentCheck(node, context.SemanticModel));
             };
 
         private bool IsDevelopmentCheck(SyntaxNode node, SemanticModel semanticModel)
@@ -81,10 +81,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 return false;
             }
 
-            var methodIdentifier = ((InvocationExpressionSyntax)condition).Expression.GetIdentifier();
+            var methodName = ((InvocationExpressionSyntax)condition).Expression.GetIdentifier()?.Identifier.ValueText;
             var methodSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(condition).Symbol as IMethodSymbol);
 
-            return MethodSignatureHelper.IsMatch(methodIdentifier, semanticModel, methodSymbol, true,
+            return MethodSignatureHelper.IsMatch(methodName, methodSymbol, true,
                 new[] { new MethodSignature(KnownType.Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions, "IsDevelopment") });
         }
     }

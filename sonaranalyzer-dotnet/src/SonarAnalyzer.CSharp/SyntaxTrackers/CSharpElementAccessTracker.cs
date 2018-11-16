@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Helpers
                 {
                     return false;
                 }
-                var constantValue = context.Model.GetConstantValue(argumentList.Arguments[0].Expression);
+                var constantValue = context.SemanticModel.GetConstantValue(argumentList.Arguments[0].Expression);
                 return constantValue.HasValue &&
                     constantValue.Value is string constant &&
                     constant == value;

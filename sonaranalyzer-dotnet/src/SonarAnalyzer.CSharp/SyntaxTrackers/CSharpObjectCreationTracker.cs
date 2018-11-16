@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Helpers
                 var argumentList = ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList;
                 return argumentList != null &&
                     argumentList.Arguments.Count > index &&
-                    argumentList.Arguments[index].Expression.IsConstant(context.Model);
+                    argumentList.Arguments[index].Expression.IsConstant(context.SemanticModel);
             };
     }
 }

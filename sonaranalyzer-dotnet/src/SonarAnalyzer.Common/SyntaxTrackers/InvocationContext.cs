@@ -29,16 +29,16 @@ namespace SonarAnalyzer.Helpers
     public class InvocationContext
     {
         public SyntaxNode Invocation { get; }
-        public SyntaxNode Identifier { get; }
-        public SemanticModel Model { get; }
-        public Lazy<IMethodSymbol> InvokedMethodSymbol { get; }
+        public string MethodName { get; }
+        public SemanticModel SemanticModel { get; }
+        public Lazy<IMethodSymbol> MethodSymbol { get; }
 
-        public InvocationContext(SyntaxNode invocation, SyntaxNode identifier, SemanticModel semanticModel)
+        public InvocationContext(SyntaxNode invocation, string methodName, SemanticModel semanticModel)
         {
             Invocation = invocation;
-            Identifier = identifier;
-            Model = semanticModel;
-            InvokedMethodSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(identifier).Symbol as IMethodSymbol);
+            MethodName = methodName;
+            SemanticModel = semanticModel;
+            MethodSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol);
         }
     }
 }

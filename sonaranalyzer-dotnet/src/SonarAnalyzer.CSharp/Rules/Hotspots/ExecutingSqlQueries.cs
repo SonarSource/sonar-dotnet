@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var onlyArgument = argumentList.Arguments[0].Expression.RemoveParentheses();
 
                 return onlyArgument.IsAnyKind(SyntaxKind.InterpolatedStringExpression) ||
-                    onlyArgument.IsConstant(context.Model);
+                    onlyArgument.IsConstant(context.SemanticModel);
             };
     }
 }
