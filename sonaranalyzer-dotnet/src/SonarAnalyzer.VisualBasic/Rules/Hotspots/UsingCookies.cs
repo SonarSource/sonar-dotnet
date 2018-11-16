@@ -39,16 +39,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
             ImmutableArray.Create(rule);
 
         public UsingCookies()
-            : this(new DefaultAnalyzerConfiguration())
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        public UsingCookies(IAnalyzerConfiguration analysisConfiguration)
+        public UsingCookies(IAnalyzerConfiguration analyzerConfiguration)
         {
-            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analysisConfiguration, rule);
-            ElementAccessTracker = new VisualBasicElementAccessTracker(analysisConfiguration, rule);
-            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analysisConfiguration, rule);
-            InvocationTracker = new VisualBasicInvocationTracker(analysisConfiguration, rule);
+            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, rule);
+            ElementAccessTracker = new VisualBasicElementAccessTracker(analyzerConfiguration, rule);
+            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, rule);
+            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
         }
     }
 }

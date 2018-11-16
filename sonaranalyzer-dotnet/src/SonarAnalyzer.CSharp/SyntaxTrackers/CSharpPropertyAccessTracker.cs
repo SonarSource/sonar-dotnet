@@ -28,8 +28,8 @@ namespace SonarAnalyzer.Helpers
 {
     public class CSharpPropertyAccessTracker : PropertyAccessTracker<SyntaxKind>
     {
-        public CSharpPropertyAccessTracker(IAnalyzerConfiguration analysisConfiguration, DiagnosticDescriptor rule)
-            : base(analysisConfiguration, rule)
+        public CSharpPropertyAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
+            : base(analyzerConfiguration, rule)
         {
         }
 

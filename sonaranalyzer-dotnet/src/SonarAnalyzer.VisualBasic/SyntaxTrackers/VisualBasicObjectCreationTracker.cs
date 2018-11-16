@@ -28,8 +28,8 @@ namespace SonarAnalyzer.Helpers
 {
     public class VisualBasicObjectCreationTracker : ObjectCreationTracker<SyntaxKind>
     {
-        public VisualBasicObjectCreationTracker(IAnalyzerConfiguration analysisConfiguration, DiagnosticDescriptor rule)
-            : base(analysisConfiguration, rule)
+        public VisualBasicObjectCreationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
+            : base(analyzerConfiguration, rule)
         {
         }
 

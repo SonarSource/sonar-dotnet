@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
@@ -44,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExposingEndpoints_CS_Net46()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ExposingEndpoints_Net46.cs",
-                new CSharp.ExposingEndpoints(new TestAnalyzerConfiguration(null, "S4529")),
+                new CSharp.ExposingEndpoints(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferences_Net46(Constants.NuGetLatestVersion));
         }
 
@@ -53,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExposingEndpoints_CS_NetCore()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ExposingEndpoints_NetCore.cs",
-                new CSharp.ExposingEndpoints(new TestAnalyzerConfiguration(null, "S4529")),
+                new CSharp.ExposingEndpoints(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferences_NetCore(Constants.NuGetLatestVersion));
         }
 
@@ -71,7 +72,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExposingEndpoints_VB_Net46()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ExposingEndpoints_Net46.vb",
-                new VisualBasic.ExposingEndpoints(new TestAnalyzerConfiguration(null, "S4529")),
+                new VisualBasic.ExposingEndpoints(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferences_Net46(Constants.NuGetLatestVersion));
         }
 
@@ -80,7 +81,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExposingEndpoints_VB_NetCore()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ExposingEndpoints_NetCore.vb",
-                new VisualBasic.ExposingEndpoints(new TestAnalyzerConfiguration(null, "S4529")),
+                new VisualBasic.ExposingEndpoints(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferences_NetCore(Constants.NuGetLatestVersion));
         }
 

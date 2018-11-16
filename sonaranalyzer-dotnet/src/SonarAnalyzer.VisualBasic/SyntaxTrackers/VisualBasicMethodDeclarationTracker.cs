@@ -29,8 +29,8 @@ namespace SonarAnalyzer.Helpers
 {
     public class VisualBasicMethodDeclarationTracker : MethodDeclarationTracker<SyntaxKind>
     {
-        public VisualBasicMethodDeclarationTracker(IAnalyzerConfiguration analysisConfiguration, DiagnosticDescriptor rule)
-            : base(analysisConfiguration, rule)
+        public VisualBasicMethodDeclarationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
+            : base(analyzerConfiguration, rule)
         {
         }
 

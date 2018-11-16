@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UsingRegularExpressions_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\UsingRegularExpressions.cs",
-                new CSharp.UsingRegularExpressions(new TestAnalyzerConfiguration(null, "S4784")));
+                new CSharp.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UsingRegularExpressions_CS_Disabled()
         {
             Verifier.VerifyNoIssueReported(@"TestCases\UsingRegularExpressions.cs",
-                new CSharp.UsingRegularExpressions(new DefaultAnalyzerConfiguration()));
+                new CSharp.UsingRegularExpressions());
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UsingRegularExpressions_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\UsingRegularExpressions.vb",
-                new VisualBasic.UsingRegularExpressions(new TestAnalyzerConfiguration(null, "S4784")));
+                new VisualBasic.UsingRegularExpressions(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UsingRegularExpressions_VB_Disabled()
         {
             Verifier.VerifyNoIssueReported(@"TestCases\UsingRegularExpressions.vb",
-                new VisualBasic.UsingRegularExpressions(new DefaultAnalyzerConfiguration()));
+                new VisualBasic.UsingRegularExpressions());
         }
     }
 }

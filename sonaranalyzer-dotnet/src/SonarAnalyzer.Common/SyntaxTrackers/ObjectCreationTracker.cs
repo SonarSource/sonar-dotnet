@@ -32,8 +32,8 @@ namespace SonarAnalyzer.Helpers
     public abstract class ObjectCreationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind>
         where TSyntaxKind : struct
     {
-        protected ObjectCreationTracker(IAnalyzerConfiguration analysisConfiguration, DiagnosticDescriptor rule)
-            : base(analysisConfiguration, rule)
+        protected ObjectCreationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
+            : base(analyzerConfiguration, rule)
         {
         }
 

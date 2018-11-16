@@ -28,8 +28,8 @@ namespace SonarAnalyzer.Helpers
 {
     public class CSharpFieldAccessTracker : FieldAccessTracker<SyntaxKind>
     {
-        public CSharpFieldAccessTracker(IAnalyzerConfiguration analysisConfiguration, DiagnosticDescriptor rule)
-            : base(analysisConfiguration, rule)
+        public CSharpFieldAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
+            : base(analyzerConfiguration, rule)
         {
         }
 

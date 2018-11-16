@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
@@ -37,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DeliveringDebugFeaturesInProduction_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.cs",
-                new CSharp.DeliveringDebugFeaturesInProduction(new TestAnalyzerConfiguration(null, "S4507")),
+                new CSharp.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: AdditionalReferences);
         }
 
@@ -55,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DeliveringDebugFeaturesInProduction_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DeliveringDebugFeaturesInProduction.vb",
-                new VisualBasic.DeliveringDebugFeaturesInProduction(new TestAnalyzerConfiguration(null, "S4507")),
+                new VisualBasic.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: AdditionalReferences);
         }
 

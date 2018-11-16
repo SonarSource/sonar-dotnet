@@ -43,13 +43,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
             ImmutableArray.Create(rule);
 
         public DeliveringDebugFeaturesInProduction()
-            : this(new DefaultAnalyzerConfiguration())
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        internal /*for testing*/ DeliveringDebugFeaturesInProduction(IAnalyzerConfiguration analysisConfiguration)
+        internal /*for testing*/ DeliveringDebugFeaturesInProduction(IAnalyzerConfiguration analyzerConfiguration)
         {
-            InvocationTracker = new VisualBasicInvocationTracker(analysisConfiguration, rule);
+            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
         }
 
         protected override InvocationCondition IsInvokedConditionally() =>

@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void BypassingAccessibility_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\BypassingAccessibility.cs",
-                new BypassingAccessibility(new TestAnalyzerConfiguration(null, "S3011")));
+                new BypassingAccessibility(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]
@@ -42,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void BypassingAccessibility_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\BypassingAccessibility.vb",
-                new SonarAnalyzer.Rules.VisualBasic.BypassingAccessibility(new TestAnalyzerConfiguration(null, "S3011")));
+                new SonarAnalyzer.Rules.VisualBasic.BypassingAccessibility(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]

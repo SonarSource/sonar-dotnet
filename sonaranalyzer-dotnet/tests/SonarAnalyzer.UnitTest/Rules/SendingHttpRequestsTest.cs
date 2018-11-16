@@ -24,6 +24,7 @@ using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis;
 using System.Linq;
 using System.Collections.Generic;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -40,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SendingHttpRequests_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\SendingHttpRequests.cs",
-                new SendingHttpRequests(new TestAnalyzerConfiguration(null, "S4825")),
+                new SendingHttpRequests(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: WebComponentReferences);
         }
 
@@ -50,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SendingHttpRequests_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\SendingHttpRequests.vb",
-                new SonarAnalyzer.Rules.VisualBasic.SendingHttpRequests(new TestAnalyzerConfiguration(null, "S4825")),
+                new SonarAnalyzer.Rules.VisualBasic.SendingHttpRequests(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: WebComponentReferences);
         }
 

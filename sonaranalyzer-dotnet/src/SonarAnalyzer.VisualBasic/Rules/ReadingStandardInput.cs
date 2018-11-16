@@ -39,14 +39,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
             ImmutableArray.Create(rule);
 
         public ReadingStandardInput()
-            : this(new DefaultAnalyzerConfiguration())
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        internal /*for testing*/ ReadingStandardInput(IAnalyzerConfiguration analysisConfiguration)
+        internal /*for testing*/ ReadingStandardInput(IAnalyzerConfiguration analyzerConfiguration)
         {
-            InvocationTracker = new VisualBasicInvocationTracker(analysisConfiguration, rule);
-            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analysisConfiguration, rule);
+            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
+            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, rule);
         }
 
         protected override bool WhenResultIsNotIgnored(InvocationContext context) =>

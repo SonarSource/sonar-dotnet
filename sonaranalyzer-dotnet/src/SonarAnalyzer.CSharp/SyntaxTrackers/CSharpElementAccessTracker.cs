@@ -36,8 +36,8 @@ namespace SonarAnalyzer.Helpers
                 SyntaxKind.ElementAccessExpression,
             };
 
-        public CSharpElementAccessTracker(IAnalyzerConfiguration analysisConfiguration, DiagnosticDescriptor rule)
-            : base(analysisConfiguration, rule)
+        public CSharpElementAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
+            : base(analyzerConfiguration, rule)
         {
         }
 

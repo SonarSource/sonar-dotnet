@@ -42,15 +42,15 @@ namespace SonarAnalyzer.Rules.CSharp
             ImmutableArray.Create(rule);
 
         public ExecutingSqlQueries()
-            : this(new DefaultAnalyzerConfiguration())
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        internal /*for testing*/ ExecutingSqlQueries(IAnalyzerConfiguration analysisConfiguration)
+        internal /*for testing*/ ExecutingSqlQueries(IAnalyzerConfiguration analyzerConfiguration)
         {
-            InvocationTracker = new CSharpInvocationTracker(analysisConfiguration, rule);
-            PropertyAccessTracker = new CSharpPropertyAccessTracker(analysisConfiguration, rule);
-            ObjectCreationTracker = new CSharpObjectCreationTracker(analysisConfiguration, rule);
+            InvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, rule);
+            PropertyAccessTracker = new CSharpPropertyAccessTracker(analyzerConfiguration, rule);
+            ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, rule);
         }
 
         protected override InvocationCondition OnlyParameterIsConstantOrInterpolatedString() =>

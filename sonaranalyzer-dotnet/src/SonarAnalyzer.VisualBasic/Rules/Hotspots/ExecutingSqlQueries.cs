@@ -43,15 +43,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
             ImmutableArray.Create(rule);
 
         public ExecutingSqlQueries()
-            : this(new DefaultAnalyzerConfiguration())
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        internal /*for testing*/ ExecutingSqlQueries(IAnalyzerConfiguration analysisConfiguration)
+        internal /*for testing*/ ExecutingSqlQueries(IAnalyzerConfiguration analyzerConfiguration)
         {
-            InvocationTracker = new VisualBasicInvocationTracker(analysisConfiguration, rule);
-            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analysisConfiguration, rule);
-            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analysisConfiguration, rule);
+            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
+            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, rule);
+            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, rule);
         }
 
         protected override InvocationCondition OnlyParameterIsConstantOrInterpolatedString() =>

@@ -21,6 +21,7 @@
 extern alias csharp;
 extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
@@ -34,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ReadingStandardInput_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ReadingStandardInput.cs",
-                new CSharp.ReadingStandardInput(new TestAnalyzerConfiguration(null, "S4829")));
+                new CSharp.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]
@@ -42,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ReadingStandardInput_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ReadingStandardInput.vb",
-                new VisualBasic.ReadingStandardInput(new TestAnalyzerConfiguration(null, "S4829")));
+                new VisualBasic.ReadingStandardInput(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]
@@ -50,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ReadingStandardInput_CS_Disabled()
         {
             Verifier.VerifyNoIssueReported(@"TestCases\ReadingStandardInput.cs",
-                new CSharp.ReadingStandardInput()); // Since there is no SonarLint.xml the rule is disabled
+                new CSharp.ReadingStandardInput());
         }
 
         [TestMethod]
@@ -58,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ReadingStandardInput_VB_Disabled()
         {
             Verifier.VerifyNoIssueReported(@"TestCases\ReadingStandardInput.vb",
-                new VisualBasic.ReadingStandardInput()); // Since there is no SonarLint.xml the rule is disabled
+                new VisualBasic.ReadingStandardInput());
         }
     }
 }

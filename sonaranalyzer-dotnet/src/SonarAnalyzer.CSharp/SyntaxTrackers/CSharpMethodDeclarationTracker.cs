@@ -30,8 +30,8 @@ namespace SonarAnalyzer.Helpers
 {
     public class CSharpMethodDeclarationTracker : MethodDeclarationTracker<SyntaxKind>
     {
-        public CSharpMethodDeclarationTracker(IAnalyzerConfiguration analysisConfiguration, DiagnosticDescriptor rule)
-            : base(analysisConfiguration, rule)
+        public CSharpMethodDeclarationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
+            : base(analyzerConfiguration, rule)
         {
         }
 

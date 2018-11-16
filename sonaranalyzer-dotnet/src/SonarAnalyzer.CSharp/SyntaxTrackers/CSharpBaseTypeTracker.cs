@@ -29,8 +29,8 @@ namespace SonarAnalyzer.Helpers
 {
     public class CSharpBaseTypeTracker : BaseTypeTracker<SyntaxKind>
     {
-        public CSharpBaseTypeTracker(IAnalyzerConfiguration analysisConfiguration, DiagnosticDescriptor rule)
-            : base(analysisConfiguration, rule)
+        public CSharpBaseTypeTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
+            : base(analyzerConfiguration, rule)
         {
         }
 

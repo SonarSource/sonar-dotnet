@@ -27,8 +27,8 @@ namespace SonarAnalyzer.Helpers
 {
     public class CSharpObjectCreationTracker : ObjectCreationTracker<SyntaxKind>
     {
-        public CSharpObjectCreationTracker(IAnalyzerConfiguration analysisConfiguration, DiagnosticDescriptor rule)
-            : base(analysisConfiguration, rule)
+        public CSharpObjectCreationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
+            : base(analyzerConfiguration, rule)
         {
         }
 

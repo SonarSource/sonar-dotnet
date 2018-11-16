@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Helpers
     public abstract class SyntaxTrackerBase<TSyntaxKind>
         where TSyntaxKind : struct
     {
-        private readonly IAnalyzerConfiguration analysisConfiguration;
+        private readonly IAnalyzerConfiguration analyzerConfiguration;
 
         protected DiagnosticDescriptor Rule { get; }
 
@@ -35,26 +35,18 @@ namespace SonarAnalyzer.Helpers
 
         protected abstract TSyntaxKind[] TrackedSyntaxKinds { get; }
 
-        protected SyntaxTrackerBase(IAnalyzerConfiguration analysisConfiguration,
+        protected SyntaxTrackerBase(IAnalyzerConfiguration analyzerConfiguration,
             DiagnosticDescriptor rule)
         {
-            this.analysisConfiguration = analysisConfiguration;
+            this.analyzerConfiguration = analyzerConfiguration;
             this.Rule = rule;
         }
 
         protected bool IsEnabled(AnalyzerOptions options)
         {
-            if (analysisConfiguration.EnabledRules == null)
-            {
-                analysisConfiguration.Read(options);
-            }
+            analyzerConfiguration.Initialize(options);
 
-            if (analysisConfiguration.EnabledRules == null)
-            {
-                return false;
-            }
-
-            return analysisConfiguration.IsEnabled(Rule.Id);
+            return analyzerConfiguration.IsEnabled(Rule.Id);
         }
     }
 }

@@ -39,13 +39,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
             ImmutableArray.Create(rule);
 
         public DynamicExecution()
-            : this(new DefaultAnalyzerConfiguration())
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        internal /*for testing*/ DynamicExecution(IAnalyzerConfiguration analysisConfiguration)
+        internal /*for testing*/ DynamicExecution(IAnalyzerConfiguration analyzerConfiguration)
         {
-            InvocationTracker = new VisualBasicInvocationTracker(analysisConfiguration, rule);
+            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
         }
     }
 }

@@ -42,13 +42,13 @@ namespace SonarAnalyzer.Rules.CSharp
             ImmutableArray.Create(rule);
 
         public DeliveringDebugFeaturesInProduction()
-            : this(new DefaultAnalyzerConfiguration())
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        internal /*for testing*/ DeliveringDebugFeaturesInProduction(IAnalyzerConfiguration analysisConfiguration)
+        internal /*for testing*/ DeliveringDebugFeaturesInProduction(IAnalyzerConfiguration analyzerConfiguration)
         {
-            InvocationTracker = new CSharpInvocationTracker(analysisConfiguration, rule);
+            InvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, rule);
         }
 
         protected override InvocationCondition IsInvokedConditionally() =>

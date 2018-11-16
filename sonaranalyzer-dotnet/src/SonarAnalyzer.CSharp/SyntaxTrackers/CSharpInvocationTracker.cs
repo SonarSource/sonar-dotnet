@@ -27,8 +27,8 @@ namespace SonarAnalyzer.Helpers
 {
     public class CSharpInvocationTracker : InvocationTracker<SyntaxKind>
     {
-        public CSharpInvocationTracker(IAnalyzerConfiguration analysisConfiguration, DiagnosticDescriptor rule)
-            : base(analysisConfiguration, rule)
+        public CSharpInvocationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
+            : base(analyzerConfiguration, rule)
         {
         }
 

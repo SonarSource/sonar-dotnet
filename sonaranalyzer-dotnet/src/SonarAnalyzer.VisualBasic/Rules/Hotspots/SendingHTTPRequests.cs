@@ -39,14 +39,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
             ImmutableArray.Create(rule);
 
         public SendingHttpRequests()
-            : this(new DefaultAnalyzerConfiguration())
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        internal /*for testing*/ SendingHttpRequests(IAnalyzerConfiguration analysisConfiguration)
+        internal /*for testing*/ SendingHttpRequests(IAnalyzerConfiguration analyzerConfiguration)
         {
-            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analysisConfiguration, rule);
-            InvocationTracker = new VisualBasicInvocationTracker(analysisConfiguration, rule);
+            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, rule);
+            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
         }
     }
 }

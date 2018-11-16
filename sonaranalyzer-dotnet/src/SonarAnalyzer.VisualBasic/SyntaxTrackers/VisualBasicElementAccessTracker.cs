@@ -36,8 +36,8 @@ namespace SonarAnalyzer.Helpers
                 SyntaxKind.InvocationExpression,
             };
 
-        public VisualBasicElementAccessTracker(IAnalyzerConfiguration analysisConfiguration, DiagnosticDescriptor rule)
-            : base(analysisConfiguration, rule)
+        public VisualBasicElementAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
+            : base(analyzerConfiguration, rule)
         {
         }
 

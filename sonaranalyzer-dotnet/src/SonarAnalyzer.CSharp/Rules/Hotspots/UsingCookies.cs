@@ -39,16 +39,16 @@ namespace SonarAnalyzer.Rules.CSharp
             ImmutableArray.Create(rule);
 
         public UsingCookies()
-            : this(new DefaultAnalyzerConfiguration())
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        public UsingCookies(IAnalyzerConfiguration analysisConfiguration)
+        public UsingCookies(IAnalyzerConfiguration analyzerConfiguration)
         {
-            PropertyAccessTracker = new CSharpPropertyAccessTracker(analysisConfiguration, rule);
-            ElementAccessTracker = new CSharpElementAccessTracker(analysisConfiguration, rule);
-            ObjectCreationTracker = new CSharpObjectCreationTracker(analysisConfiguration, rule);
-            InvocationTracker = new CSharpInvocationTracker(analysisConfiguration, rule);
+            PropertyAccessTracker = new CSharpPropertyAccessTracker(analyzerConfiguration, rule);
+            ElementAccessTracker = new CSharpElementAccessTracker(analyzerConfiguration, rule);
+            ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, rule);
+            InvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, rule);
         }
     }
 }

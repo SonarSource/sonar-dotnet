@@ -38,13 +38,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
             ImmutableArray.Create(rule);
         public SocketsCreation()
-            : this(new DefaultAnalyzerConfiguration())
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        internal /*for testing*/ SocketsCreation(IAnalyzerConfiguration analysisConfiguration)
+        internal /*for testing*/ SocketsCreation(IAnalyzerConfiguration analyzerConfiguration)
         {
-            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analysisConfiguration, rule);
+            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, rule);
         }
     }
 }

@@ -28,8 +28,8 @@ namespace SonarAnalyzer.Helpers
 {
     public class VisualBasicInvocationTracker : InvocationTracker<SyntaxKind>
     {
-        public VisualBasicInvocationTracker(IAnalyzerConfiguration analysisConfiguration, DiagnosticDescriptor rule)
-            : base(analysisConfiguration, rule)
+        public VisualBasicInvocationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
+            : base(analyzerConfiguration, rule)
         {
         }
 

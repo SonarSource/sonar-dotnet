@@ -29,8 +29,8 @@ namespace SonarAnalyzer.Helpers
 {
     public class VisualBasicFieldAccessTracker : FieldAccessTracker<SyntaxKind>
     {
-        public VisualBasicFieldAccessTracker(IAnalyzerConfiguration analysisConfiguration, DiagnosticDescriptor rule)
-            : base(analysisConfiguration, rule)
+        public VisualBasicFieldAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
+            : base(analyzerConfiguration, rule)
         {
         }
 
