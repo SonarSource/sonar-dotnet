@@ -36,18 +36,18 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context)
         {
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
+                InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.System_Console, nameof(Console.OpenStandardInput))));
 
             InvocationTracker.Track(context,
                 WhenResultIsNotIgnored, // This is syntax-only check and we can execute it first
-                InvocationTracker.MatchSimpleNames(
+                InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.System_Console, nameof(Console.Read)),
                     new MemberDescriptor(KnownType.System_Console, nameof(Console.ReadKey)),
                     new MemberDescriptor(KnownType.System_Console, nameof(Console.ReadLine))));
 
             PropertyAccessTracker.Track(context,
-                PropertyAccessTracker.MatchSimpleNames(
+                PropertyAccessTracker.MatchProperty(
                     new MemberDescriptor(KnownType.System_Console, nameof(Console.In))));
         }
 

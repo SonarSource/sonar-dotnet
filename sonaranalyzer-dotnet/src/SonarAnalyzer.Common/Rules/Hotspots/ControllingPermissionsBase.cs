@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context)
         {
             ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructors(
+                ObjectCreationTracker.MatchConstructor(
                     KnownType.System_Security_Permissions_PrincipalPermission));
 
             ObjectCreationTracker.Track(context,
@@ -46,14 +46,14 @@ namespace SonarAnalyzer.Rules
                     KnownType.System_Security_Principal_IPrincipal));
 
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
+                InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.System_Security_Principal_WindowsIdentity, "GetCurrent"),
                     new MemberDescriptor(KnownType.System_IdentityModel_Tokens_SecurityTokenHandler, "ValidateToken"),
                     new MemberDescriptor(KnownType.System_AppDomain, "SetPrincipalPolicy"),
                     new MemberDescriptor(KnownType.System_AppDomain, "SetThreadPrincipal")));
 
             PropertyAccessTracker.Track(context,
-                PropertyAccessTracker.MatchSimpleNames(
+                PropertyAccessTracker.MatchProperty(
                     new MemberDescriptor(KnownType.System_Web_HttpContext, "User"),
                     new MemberDescriptor(KnownType.System_Threading_Thread, "CurrentPrincipal")));
 
@@ -69,10 +69,7 @@ namespace SonarAnalyzer.Rules
 
             BaseTypeTracker.Track(context,
                 BaseTypeTracker.WhenDerivesFrom(
-                    KnownType.System_Security_Principal_IIdentity));
-
-            BaseTypeTracker.Track(context,
-                BaseTypeTracker.WhenDerivesFrom(
+                    KnownType.System_Security_Principal_IIdentity,
                     KnownType.System_Security_Principal_IPrincipal));
         }
     }

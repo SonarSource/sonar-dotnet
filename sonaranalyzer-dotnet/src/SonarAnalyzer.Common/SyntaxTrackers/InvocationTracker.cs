@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Helpers
 
         #region Symbol-level standard conditions
 
-        public InvocationCondition MatchSimpleNames(params MemberDescriptor[] methods) =>
+        public InvocationCondition MatchMethod(params MemberDescriptor[] methods) =>
             (context) =>
                 MemberDescriptorHelper.IsMatch(context.MethodName, context.MethodSymbol, true, methods);
 

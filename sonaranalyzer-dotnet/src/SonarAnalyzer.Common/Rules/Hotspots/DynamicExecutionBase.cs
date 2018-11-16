@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules
         {
             // Special case - Assembly.Load
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
+                InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.System_Reflection_Assembly, "Load"),
                     new MemberDescriptor(KnownType.System_Reflection_Assembly, "LoadFile"),
                     new MemberDescriptor(KnownType.System_Reflection_Assembly, "LoadFrom"),
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules
             // Special case - Type.GetType() without paramters is ok, but
             // and Type.GetType(...) with parameters is not ok
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
+                InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.System_Type, "GetType")),
                 InvocationTracker.IsStatic(),
                 InvocationTracker.HasParameters(),
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules
 
             // Special case - Activator.CreateXXX
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
+                InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.System_Activator, "CreateComInstanceFrom"),
                     new MemberDescriptor(KnownType.System_Activator, "CreateInstance"),
                     new MemberDescriptor(KnownType.System_Activator, "CreateInstanceFrom")),
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules
             // All other method invocations
             InvocationTracker.Track(context,
                 Conditions.ExceptWhen(InvocationTracker.IsTypeOfExpression()),
-                InvocationTracker.MatchSimpleNames(
+                InvocationTracker.MatchMethod(
                     // Methods on assembly that are safe to call with constants
                     new MemberDescriptor(KnownType.System_Reflection_Assembly, "GetType"),
                     new MemberDescriptor(KnownType.System_Reflection_Assembly, "GetTypes"),

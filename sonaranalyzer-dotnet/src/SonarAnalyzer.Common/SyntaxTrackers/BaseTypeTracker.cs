@@ -96,30 +96,14 @@ namespace SonarAnalyzer.Helpers
         /// </summary>
         protected abstract IEnumerable<SyntaxNode> GetBaseTypeNodes(SyntaxNode contextNode);
 
-        #region Language-agnostic conditions
-
-        internal BaseClassCondition WhenDerivesFrom(KnownType type) =>
-            (BaseTypeContext context, out Location issueLocation) =>
-            {
-                foreach(var baseTypeNode in context.AllBaseTypeNodes)
-                {
-                    if (context.SemanticModel.GetTypeInfo(baseTypeNode).Type?.DerivesOrImplements(type) ?? false)
-                    {
-                        issueLocation = baseTypeNode.GetLocation();
-                        return true; // assume there won't be more than one matching node
-                    }
-                }
-
-                issueLocation = null;
-                return false;
-            };
-
-        internal BaseClassCondition WhenDerivesFrom(ImmutableArray<KnownType> types) =>
-            (BaseTypeContext context, out Location issueLocation) =>
+        internal BaseClassCondition WhenDerivesFrom(params KnownType[] types)
+        {
+            var immutableTypes = types.ToImmutableArray();
+            return (BaseTypeContext context, out Location issueLocation) =>
             {
                 foreach (var baseTypeNode in context.AllBaseTypeNodes)
                 {
-                    if (context.SemanticModel.GetTypeInfo(baseTypeNode).Type?.DerivesFromAny(types) ?? false)
+                    if (context.SemanticModel.GetTypeInfo(baseTypeNode).Type?.DerivesOrImplementsAny(immutableTypes) ?? false)
                     {
                         issueLocation = baseTypeNode.GetLocation();
                         return true; // assume there won't be more than one matching node
@@ -129,8 +113,6 @@ namespace SonarAnalyzer.Helpers
                 issueLocation = null;
                 return false;
             };
-
-
-        #endregion
+        }
     }
 }

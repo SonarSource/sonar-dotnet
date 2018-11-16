@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context)
         {
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
+                InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.System_IO_File, "AppendAllLines"),
                     new MemberDescriptor(KnownType.System_IO_File, "AppendAllText"),
                     new MemberDescriptor(KnownType.System_IO_File, "AppendText"),
@@ -135,23 +135,26 @@ namespace SonarAnalyzer.Rules
                 InvocationTracker.IsExtern());
 
             ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructors(
+                ObjectCreationTracker.MatchConstructor(
                     KnownType.System_IO_StreamWriter,
                     KnownType.System_IO_StreamReader,
                     KnownType.System_Security_AccessControl_FileSecurity),
-                ObjectCreationTracker.FirstArgumentIs(KnownType.System_String));
+                ObjectCreationTracker.FirstArgumentIs(
+                    KnownType.System_String));
 
             ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructors(
+                ObjectCreationTracker.MatchConstructor(
                     KnownType.System_IO_FileInfo,
                     KnownType.System_IO_DirectoryInfo,
                     KnownType.System_IO_IsolatedStorage_IsolatedStorageFileStream,
                     KnownType.Microsoft_Win32_SafeHandles_SafeFileHandle));
 
             ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructors(
+                ObjectCreationTracker.MatchConstructor(
                     KnownType.System_IO_FileStream),
-                Conditions.ExceptWhen(ObjectCreationTracker.FirstArgumentIs(KnownType.Microsoft_Win32_SafeHandles_SafeFileHandle)));
+                Conditions.ExceptWhen(
+                    ObjectCreationTracker.FirstArgumentIs(
+                        KnownType.Microsoft_Win32_SafeHandles_SafeFileHandle)));
         }
     }
 }

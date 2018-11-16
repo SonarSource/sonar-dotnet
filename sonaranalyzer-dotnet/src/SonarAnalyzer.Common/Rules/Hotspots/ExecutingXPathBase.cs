@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context)
         {
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
+                InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.System_Xml_XmlNode, "SelectNodes"),
                     new MemberDescriptor(KnownType.System_Xml_XmlNode, "SelectSingleNode"),
                     new MemberDescriptor(KnownType.System_Xml_XPath_XPathExpression, "Compile"),

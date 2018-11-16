@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Helpers
                     .Select((p, index) => p.Type.DerivesOrImplements(types[index]))
                     .All(ValueIsTrue);
 
-        internal ElementAccessCondition MatchIndexersOn(params KnownType[] types)
+        internal ElementAccessCondition MatchIndexerIn(params KnownType[] types)
         {
             var immutableTypes = types.ToImmutableArray();
             return (context) =>
@@ -84,6 +84,6 @@ namespace SonarAnalyzer.Helpers
 
         private static bool ValueIsTrue(bool value) => value;
 
-        public abstract ElementAccessCondition IndexerIsString(string value);
+        public abstract ElementAccessCondition FirstArgumentIsString(string value);
     }
 }

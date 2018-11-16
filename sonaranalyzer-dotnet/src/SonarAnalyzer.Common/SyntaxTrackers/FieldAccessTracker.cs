@@ -81,13 +81,13 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public FieldAccessCondition MatchSimpleNames(params MemberDescriptor[] fields) =>
+        public FieldAccessCondition MatchField(params MemberDescriptor[] fields) =>
             (context) =>
                 MemberDescriptorHelper.IsMatch(context.FieldName, context.InvokedFieldSymbol, false, fields);
 
         #region Syntax-level standard conditions
 
-        public abstract FieldAccessCondition MatchGet();
+        public abstract FieldAccessCondition WhenRead();
 
         public abstract FieldAccessCondition MatchSet();
 

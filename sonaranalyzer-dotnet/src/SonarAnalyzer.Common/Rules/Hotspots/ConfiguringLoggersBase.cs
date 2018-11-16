@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules
         {
             // ASP.NET Core
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
+                InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.Microsoft_AspNetCore_Hosting_WebHostBuilderExtensions, "ConfigureLogging"),
                     new MemberDescriptor(KnownType.Microsoft_Extensions_DependencyInjection_LoggingServiceCollectionExtensions, "AddLogging"),
 
@@ -53,20 +53,18 @@ namespace SonarAnalyzer.Rules
 
             // log4net
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
+                InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.log4net_Config_XmlConfigurator, "Configure"),
                     new MemberDescriptor(KnownType.log4net_Config_XmlConfigurator, "ConfigureAndWatch"),
-
                     new MemberDescriptor(KnownType.log4net_Config_DOMConfigurator, "Configure"),
                     new MemberDescriptor(KnownType.log4net_Config_DOMConfigurator, "ConfigureAndWatch"),
-
                     new MemberDescriptor(KnownType.log4net_Config_BasicConfigurator, "Configure")));
 
             // NLog
             PropertyAccessTracker.Track(context,
-                PropertyAccessTracker.MatchSimpleNames(
-                    new MemberDescriptor(KnownType.NLog_LogManager, "Configuration")),
-                PropertyAccessTracker.MatchSet());
+                PropertyAccessTracker.WhenSet(),
+                PropertyAccessTracker.MatchProperty(
+                    new MemberDescriptor(KnownType.NLog_LogManager, "Configuration")));
 
             // Serilog
             ObjectCreationTracker.Track(context,

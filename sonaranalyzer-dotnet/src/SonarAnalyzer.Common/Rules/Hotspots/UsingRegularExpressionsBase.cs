@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context)
         {
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
+                InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.System_Text_RegularExpressions_Regex, "IsMatch"),
                     new MemberDescriptor(KnownType.System_Text_RegularExpressions_Regex, "Match"),
                     new MemberDescriptor(KnownType.System_Text_RegularExpressions_Regex, "Matches"),
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules
                 InvocationTracker.IsStatic());
 
             ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructors(
+                ObjectCreationTracker.MatchConstructor(
                     KnownType.System_Text_RegularExpressions_Regex));
         }
     }

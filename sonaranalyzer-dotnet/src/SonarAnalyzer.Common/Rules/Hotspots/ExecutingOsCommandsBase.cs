@@ -38,18 +38,18 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context)
         {
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
+                InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.System_Diagnostics_Process, "Start")),
                 WhenFirstArgumentIsNot(KnownType.System_Diagnostics_ProcessStartInfo),
                 WhenThereAreArguments());
 
             PropertyAccessTracker.Track(context,
-                PropertyAccessTracker.MatchSimpleNames(
+                PropertyAccessTracker.MatchProperty(
                     new MemberDescriptor(KnownType.System_Diagnostics_ProcessStartInfo, "FileName")),
-                PropertyAccessTracker.MatchSet());
+                PropertyAccessTracker.WhenSet());
 
             ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructors(
+                ObjectCreationTracker.MatchConstructor(
                     KnownType.System_Diagnostics_ProcessStartInfo),
                 ObjectCreationTracker.FirstArgumentIs(KnownType.System_String));
         }

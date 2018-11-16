@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Helpers
         public override PropertyAccessCondition MatchGet() =>
             (context) => !((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
 
-        public override PropertyAccessCondition MatchSet() =>
+        public override PropertyAccessCondition WhenSet() =>
             (context) => ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
 
         public override PropertyAccessCondition AssignedValueIsConstant() =>

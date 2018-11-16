@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context)
         {
             ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructors(
+                ObjectCreationTracker.MatchConstructor(
                     KnownType.System_Net_Sockets_Socket,
                     KnownType.System_Net_Sockets_TcpClient,
                     KnownType.System_Net_Sockets_UdpClient)

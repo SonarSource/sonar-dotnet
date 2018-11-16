@@ -37,28 +37,28 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context)
         {
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
+                InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSql")),
                 Conditions.ExceptWhen(OnlyParameterIsConstantOrInterpolatedString()),
                 Conditions.ExceptWhen(InvocationTracker.FirstParameterIsConstant()));
 
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
+                InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommandAsync"),
                     new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommand")),
                 Conditions.ExceptWhen(OnlyParameterIsConstantOrInterpolatedString()));
 
             PropertyAccessTracker.Track(context,
-                PropertyAccessTracker.MatchSimpleNames(
+                PropertyAccessTracker.MatchProperty(
                     new MemberDescriptor(KnownType.System_Data_Odbc_OdbcCommand, "CommandText"),
                     new MemberDescriptor(KnownType.System_Data_OracleClient_OracleCommand, "CommandText"),
                     new MemberDescriptor(KnownType.System_Data_SqlClient_SqlCommand, "CommandText"),
                     new MemberDescriptor(KnownType.System_Data_SqlServerCe_SqlCeCommand, "CommandText")),
-                PropertyAccessTracker.MatchSet(),
+                PropertyAccessTracker.WhenSet(),
                 Conditions.ExceptWhen(PropertyAccessTracker.AssignedValueIsConstant()));
 
             ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructors(
+                ObjectCreationTracker.MatchConstructor(
                     KnownType.Microsoft_EntityFrameworkCore_RawSqlString,
                     KnownType.System_Data_SqlClient_SqlCommand,
                     KnownType.System_Data_SqlClient_SqlDataAdapter,

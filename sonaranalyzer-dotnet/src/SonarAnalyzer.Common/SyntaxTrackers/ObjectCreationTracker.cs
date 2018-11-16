@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Helpers
                 context.InvokedConstructorSymbol.Value.ContainingType.DerivesOrImplementsAny(typesArray);
         }
 
-        internal ObjectCreationCondition MatchConstructors(params KnownType[] types)
+        internal ObjectCreationCondition MatchConstructor(params KnownType[] types)
         {
             // We cannot do a syntax check first because a type name can be aliased with
             // a using Alias = Fully.Qualified.Name and we will generate false negative

@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Helpers
         {
         }
 
-        public override ElementAccessCondition IndexerIsString(string value) =>
+        public override ElementAccessCondition FirstArgumentIsString(string value) =>
             (context) =>
             {
                 var argumentList = ((InvocationExpressionSyntax)context.Expression).ArgumentList;

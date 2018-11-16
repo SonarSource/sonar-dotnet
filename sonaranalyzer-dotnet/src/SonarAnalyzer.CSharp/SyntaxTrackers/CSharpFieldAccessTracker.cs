@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Helpers
 
         #region Syntax-level checking methods
 
-        public override FieldAccessCondition MatchGet() =>
+        public override FieldAccessCondition WhenRead() =>
             (context) => !((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
 
         public override FieldAccessCondition MatchSet() =>

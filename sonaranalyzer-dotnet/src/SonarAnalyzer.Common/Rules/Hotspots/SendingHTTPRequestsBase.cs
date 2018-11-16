@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules
                 ObjectCreationTracker.WhenDerivesOrImplements(KnownType.RestSharp_IRestRequest));
 
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
+                InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.System_Net_Http_HttpClient, "GetAsync"),
                     new MemberDescriptor(KnownType.System_Net_Http_HttpClient, "GetByteArrayAsync"),
                     new MemberDescriptor(KnownType.System_Net_Http_HttpClient, "GetStreamAsync"),

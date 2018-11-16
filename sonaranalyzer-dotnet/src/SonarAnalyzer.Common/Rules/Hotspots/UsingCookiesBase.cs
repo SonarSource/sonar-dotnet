@@ -39,40 +39,40 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context)
         {
             PropertyAccessTracker.Track(context,
-                PropertyAccessTracker.MatchSimpleNames(
+                PropertyAccessTracker.MatchProperty(
                     new MemberDescriptor(KnownType.System_Web_HttpRequestBase, "Cookies"),
                     new MemberDescriptor(KnownType.System_Web_HttpCookie, "Value"),
                     new MemberDescriptor(KnownType.System_Web_HttpCookie, "Values")));
 
             ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructors(KnownType.System_Web_HttpCookie),
+                ObjectCreationTracker.MatchConstructor(KnownType.System_Web_HttpCookie),
                 ObjectCreationTracker.ArgumentAtIndexIs(1, KnownType.System_String));
 
             ElementAccessTracker.Track(context,
-                ElementAccessTracker.MatchIndexersOn(KnownType.System_Web_HttpCookie),
+                ElementAccessTracker.MatchIndexerIn(KnownType.System_Web_HttpCookie),
                 ElementAccessTracker.WithArguments(KnownType.System_String));
 
             ElementAccessTracker.Track(context,
-                ElementAccessTracker.MatchIndexersOn(KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary),
-                ElementAccessTracker.IndexerIsString("Set-Cookie"));
+                ElementAccessTracker.MatchIndexerIn(KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary),
+                ElementAccessTracker.FirstArgumentIsString("Set-Cookie"));
 
             ElementAccessTracker.Track(context,
-                ElementAccessTracker.MatchIndexersOn(
+                ElementAccessTracker.MatchIndexerIn(
                     KnownType.Microsoft_AspNetCore_Http_IRequestCookieCollection,
                     KnownType.Microsoft_AspNetCore_Http_IResponseCookies));
 
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
+                InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.Microsoft_AspNetCore_Http_IRequestCookieCollection, "TryGetValue"),
                     new MemberDescriptor(KnownType.Microsoft_AspNetCore_Http_IResponseCookies, "Append")));
 
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
+                InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Add"),
                     new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue_VB, "Add")),
                 InvocationTracker.ArgumentAtIndexIsString(0, "Set-Cookie"),
-                IsIHeadersDictionary(),
-                InvocationTracker.HasParameters(2));
+                InvocationTracker.HasParameters(2),
+                IsIHeadersDictionary());
         }
 
         private static InvocationCondition IsIHeadersDictionary() =>
