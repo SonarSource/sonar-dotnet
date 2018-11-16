@@ -67,16 +67,22 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var condition = ((IfStatementSyntax)node).Condition.RemoveParentheses();
-            if (condition == null || !condition.IsKind(SyntaxKind.InvocationExpression))
+
+            if (condition != null && condition.IsKind(SyntaxKind.InvocationExpression))
             {
-                return false;
+                return IsMatch(semanticModel, (InvocationExpressionSyntax)condition);
             }
 
-            var methodName = ((InvocationExpressionSyntax)condition).Expression.GetIdentifier()?.Identifier.ValueText;
+            return false;
+        }
+
+        private static bool IsMatch(SemanticModel semanticModel, InvocationExpressionSyntax condition)
+        {
+            var methodName = condition.Expression.GetIdentifier()?.Identifier.ValueText;
+
             var methodSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(condition).Symbol as IMethodSymbol);
 
-            return MethodSignatureHelper.IsMatch(methodName, methodSymbol, true,
-                new[] { new MethodSignature(KnownType.Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions, "IsDevelopment") });
+            return isDevelopmentMethod.IsMatch(methodName, methodSymbol, true);
         }
     }
 }

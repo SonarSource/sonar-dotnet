@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -88,9 +87,9 @@ namespace SonarAnalyzer.Helpers
 
         #region Symbol-level standard conditions
 
-        public InvocationCondition MatchSimpleNames(params MethodSignature[] methods) =>
+        public InvocationCondition MatchSimpleNames(params MemberDescriptor[] methods) =>
             (context) =>
-                MethodSignatureHelper.IsMatch(context.MethodName, context.MethodSymbol, true, methods);
+                MemberDescriptorHelper.IsMatch(context.MethodName, context.MethodSymbol, true, methods);
 
         public InvocationCondition MethodNameIs(string methodName) =>
             (context) =>
@@ -119,20 +118,15 @@ namespace SonarAnalyzer.Helpers
         public bool FirstParameterIsString(InvocationContext context)
         {
             var firstParam = context.MethodSymbol.Value?.Parameters.FirstOrDefault();
-
             return firstParam != null &&
                 firstParam.IsType(KnownType.System_String);
         }
 
-        internal InvocationCondition FirstParameterIsOfType(KnownType requiredType)
-        {
-            return Check;
-
-            bool Check(InvocationContext context) =>
+        internal InvocationCondition FirstParameterIsOfType(KnownType requiredType) =>
+            (context) =>
                 context.MethodSymbol.Value != null &&
                 context.MethodSymbol.Value.Parameters.Length > 0 &&
                 context.MethodSymbol.Value.Parameters[0].IsType(requiredType);
-        }
 
         internal InvocationCondition WhenReturnTypeIs(KnownType returnType) =>
             (context) =>

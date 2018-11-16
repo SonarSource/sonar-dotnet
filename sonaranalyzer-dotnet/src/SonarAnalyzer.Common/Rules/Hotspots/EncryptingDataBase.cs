@@ -44,18 +44,18 @@ namespace SonarAnalyzer.Rules
             InvocationTracker.Track(context,
                 InvocationTracker.MatchSimpleNames(
                     // "RSA" is the base class for all RSA algorithm implementations
-                    new MethodSignature(KnownType.System_Security_Cryptography_RSA, "Encrypt"),
-                    new MethodSignature(KnownType.System_Security_Cryptography_RSA, "EncryptValue"),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "Encrypt"),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "EncryptValue"),
 
-                    new MethodSignature(KnownType.System_Security_Cryptography_RSA, "Decrypt"),
-                    new MethodSignature(KnownType.System_Security_Cryptography_RSA, "DecryptValue"),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "Decrypt"),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "DecryptValue"),
 
                     // RSA methods added in NET Core 2.1
-                    new MethodSignature(KnownType.System_Security_Cryptography_RSA, "TryEncrypt"),
-                    new MethodSignature(KnownType.System_Security_Cryptography_RSA, "TryDecrypt"),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "TryEncrypt"),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "TryDecrypt"),
 
-                    new MethodSignature(KnownType.System_Security_Cryptography_SymmetricAlgorithm, "CreateEncryptor"),
-                    new MethodSignature(KnownType.System_Security_Cryptography_SymmetricAlgorithm, "CreateDecryptor"))
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_SymmetricAlgorithm, "CreateEncryptor"),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_SymmetricAlgorithm, "CreateDecryptor"))
                     );
 
             BaseTypeTracker.Track(context,

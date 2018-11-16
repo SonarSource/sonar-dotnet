@@ -18,35 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
-using Microsoft.CodeAnalysis;
-
 namespace SonarAnalyzer.Helpers
 {
-    [System.Diagnostics.DebuggerStepThrough]
-    public class MethodSignature
+    public class MemberDescriptor
     {
-        internal MethodSignature(KnownType containingType, string name)
+        internal MemberDescriptor(KnownType containingType, string name)
         {
             ContainingType = containingType;
             Name = name;
         }
 
         internal KnownType ContainingType { get; }
+
         internal string Name { get; }
-
-        internal string ToShortName()
-        {
-            var containingTypeName = ContainingType.TypeName.Split('.').Last();
-            return string.Concat(containingTypeName, ".", Name);
-        }
-
-        internal bool Is(ITypeSymbol knownType, string methodName)
-        {
-            return knownType != null &&
-                methodName != null &&
-                knownType.Is(ContainingType) &&
-                methodName == Name;
-        }
     }
 }

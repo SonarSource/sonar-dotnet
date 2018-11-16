@@ -37,36 +37,35 @@ namespace SonarAnalyzer.Rules
             // ASP.NET Core
             InvocationTracker.Track(context,
                 InvocationTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.Microsoft_AspNetCore_Hosting_WebHostBuilderExtensions, "ConfigureLogging"),
-                    new MethodSignature(KnownType.Microsoft_Extensions_DependencyInjection_LoggingServiceCollectionExtensions, "AddLogging"),
+                    new MemberDescriptor(KnownType.Microsoft_AspNetCore_Hosting_WebHostBuilderExtensions, "ConfigureLogging"),
+                    new MemberDescriptor(KnownType.Microsoft_Extensions_DependencyInjection_LoggingServiceCollectionExtensions, "AddLogging"),
 
-                    new MethodSignature(KnownType.Microsoft_Extensions_Logging_ConsoleLoggerExtensions, "AddConsole"),
-                    new MethodSignature(KnownType.Microsoft_Extensions_Logging_DebugLoggerFactoryExtensions, "AddDebug"),
-                    new MethodSignature(KnownType.Microsoft_Extensions_Logging_EventLoggerFactoryExtensions, "AddEventLog"),
-                    new MethodSignature(KnownType.Microsoft_Extensions_Logging_EventLoggerFactoryExtensions, "AddEventSourceLogger"),
-                    new MethodSignature(KnownType.Microsoft_Extensions_Logging_EventSourceLoggerFactoryExtensions, "AddEventSourceLogger"),
-                    new MethodSignature(KnownType.Microsoft_Extensions_Logging_AzureAppServicesLoggerFactoryExtensions, "AddAzureWebAppDiagnostics")),
+                    new MemberDescriptor(KnownType.Microsoft_Extensions_Logging_ConsoleLoggerExtensions, "AddConsole"),
+                    new MemberDescriptor(KnownType.Microsoft_Extensions_Logging_DebugLoggerFactoryExtensions, "AddDebug"),
+                    new MemberDescriptor(KnownType.Microsoft_Extensions_Logging_EventLoggerFactoryExtensions, "AddEventLog"),
+                    new MemberDescriptor(KnownType.Microsoft_Extensions_Logging_EventLoggerFactoryExtensions, "AddEventSourceLogger"),
+                    new MemberDescriptor(KnownType.Microsoft_Extensions_Logging_EventSourceLoggerFactoryExtensions, "AddEventSourceLogger"),
+                    new MemberDescriptor(KnownType.Microsoft_Extensions_Logging_AzureAppServicesLoggerFactoryExtensions, "AddAzureWebAppDiagnostics")),
                 InvocationTracker.IsExtensionMethod());
 
             ObjectCreationTracker.Track(context,
                 ObjectCreationTracker.WhenImplements(KnownType.Microsoft_Extensions_Logging_ILoggerFactory));
 
-
             // log4net
             InvocationTracker.Track(context,
                 InvocationTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.log4net_Config_XmlConfigurator, "Configure"),
-                    new MethodSignature(KnownType.log4net_Config_XmlConfigurator, "ConfigureAndWatch"),
+                    new MemberDescriptor(KnownType.log4net_Config_XmlConfigurator, "Configure"),
+                    new MemberDescriptor(KnownType.log4net_Config_XmlConfigurator, "ConfigureAndWatch"),
 
-                    new MethodSignature(KnownType.log4net_Config_DOMConfigurator, "Configure"),
-                    new MethodSignature(KnownType.log4net_Config_DOMConfigurator, "ConfigureAndWatch"),
+                    new MemberDescriptor(KnownType.log4net_Config_DOMConfigurator, "Configure"),
+                    new MemberDescriptor(KnownType.log4net_Config_DOMConfigurator, "ConfigureAndWatch"),
 
-                    new MethodSignature(KnownType.log4net_Config_BasicConfigurator, "Configure")));
+                    new MemberDescriptor(KnownType.log4net_Config_BasicConfigurator, "Configure")));
 
             // NLog
             PropertyAccessTracker.Track(context,
                 PropertyAccessTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.NLog_LogManager, "Configuration")),
+                    new MemberDescriptor(KnownType.NLog_LogManager, "Configuration")),
                 PropertyAccessTracker.MatchSet());
 
             // Serilog

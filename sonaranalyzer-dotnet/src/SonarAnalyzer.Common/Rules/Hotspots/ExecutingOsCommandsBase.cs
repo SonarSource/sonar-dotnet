@@ -39,13 +39,13 @@ namespace SonarAnalyzer.Rules
         {
             InvocationTracker.Track(context,
                 InvocationTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.System_Diagnostics_Process, "Start")),
+                    new MemberDescriptor(KnownType.System_Diagnostics_Process, "Start")),
                 WhenFirstArgumentIsNot(KnownType.System_Diagnostics_ProcessStartInfo),
                 WhenThereAreArguments());
 
             PropertyAccessTracker.Track(context,
                 PropertyAccessTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.System_Diagnostics_ProcessStartInfo, "FileName")),
+                    new MemberDescriptor(KnownType.System_Diagnostics_ProcessStartInfo, "FileName")),
                 PropertyAccessTracker.MatchSet());
 
             ObjectCreationTracker.Track(context,

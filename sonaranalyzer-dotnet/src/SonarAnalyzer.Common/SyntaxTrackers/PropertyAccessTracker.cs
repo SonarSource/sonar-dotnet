@@ -83,9 +83,9 @@ namespace SonarAnalyzer.Helpers
 
         #region Syntax-level standard conditions
 
-        public PropertyAccessCondition MatchSimpleNames(params MethodSignature[] properties) =>
+        public PropertyAccessCondition MatchSimpleNames(params MemberDescriptor[] properties) =>
             (context) =>
-                MethodSignatureHelper.IsMatch(context.PropertyName, context.PropertySymbol, false, properties);
+                MemberDescriptorHelper.IsMatch(context.PropertyName, context.PropertySymbol, false, properties);
 
         public abstract PropertyAccessCondition MatchGet();
 

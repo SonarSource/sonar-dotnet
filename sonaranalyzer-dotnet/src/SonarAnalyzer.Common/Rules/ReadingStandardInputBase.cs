@@ -37,18 +37,18 @@ namespace SonarAnalyzer.Rules
         {
             InvocationTracker.Track(context,
                 InvocationTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.System_Console, nameof(Console.OpenStandardInput))));
+                    new MemberDescriptor(KnownType.System_Console, nameof(Console.OpenStandardInput))));
 
             InvocationTracker.Track(context,
                 WhenResultIsNotIgnored, // This is syntax-only check and we can execute it first
                 InvocationTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.System_Console, nameof(Console.Read)),
-                    new MethodSignature(KnownType.System_Console, nameof(Console.ReadKey)),
-                    new MethodSignature(KnownType.System_Console, nameof(Console.ReadLine))));
+                    new MemberDescriptor(KnownType.System_Console, nameof(Console.Read)),
+                    new MemberDescriptor(KnownType.System_Console, nameof(Console.ReadKey)),
+                    new MemberDescriptor(KnownType.System_Console, nameof(Console.ReadLine))));
 
             PropertyAccessTracker.Track(context,
                 PropertyAccessTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.System_Console, nameof(Console.In))));
+                    new MemberDescriptor(KnownType.System_Console, nameof(Console.In))));
         }
 
         protected abstract bool WhenResultIsNotIgnored(InvocationContext context);

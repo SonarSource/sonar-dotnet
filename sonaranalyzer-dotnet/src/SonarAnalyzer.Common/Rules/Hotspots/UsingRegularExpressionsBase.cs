@@ -36,11 +36,11 @@ namespace SonarAnalyzer.Rules
         {
             InvocationTracker.Track(context,
                 InvocationTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.System_Text_RegularExpressions_Regex, "IsMatch"),
-                    new MethodSignature(KnownType.System_Text_RegularExpressions_Regex, "Match"),
-                    new MethodSignature(KnownType.System_Text_RegularExpressions_Regex, "Matches"),
-                    new MethodSignature(KnownType.System_Text_RegularExpressions_Regex, "Replace"),
-                    new MethodSignature(KnownType.System_Text_RegularExpressions_Regex, "Split")),
+                    new MemberDescriptor(KnownType.System_Text_RegularExpressions_Regex, "IsMatch"),
+                    new MemberDescriptor(KnownType.System_Text_RegularExpressions_Regex, "Match"),
+                    new MemberDescriptor(KnownType.System_Text_RegularExpressions_Regex, "Matches"),
+                    new MemberDescriptor(KnownType.System_Text_RegularExpressions_Regex, "Replace"),
+                    new MemberDescriptor(KnownType.System_Text_RegularExpressions_Regex, "Split")),
                 InvocationTracker.IsStatic());
 
             ObjectCreationTracker.Track(context,

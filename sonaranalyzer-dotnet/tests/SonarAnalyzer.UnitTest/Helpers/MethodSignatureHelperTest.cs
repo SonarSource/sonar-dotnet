@@ -85,7 +85,7 @@ End Namespace
         private void CheckExactMatchOnly_OverridesAreNotMatched(SnippetCompiler snippet)
         {
             // Testing for calls to Console.WriteLine
-            var targetMethodSignature = new MethodSignature(KnownType.System_Console, "WriteLine");
+            var targetMethodSignature = new MemberDescriptor(KnownType.System_Console, "WriteLine");
 
             // 1. Should match Console.WriteLine
             var callToConsoleWriteLine = CreateContextForMethod("Console.WriteLine", snippet);
@@ -94,9 +94,9 @@ End Namespace
             // 2. Should not match call to xxx.WriteLine
             var callToDoStuffWriteLine = CreateContextForMethod("Class1.WriteLine", snippet);
             CheckExactMethod(false, callToDoStuffWriteLine, snippet,
-                new MethodSignature(KnownType.System_Console, "Foo"),
+                new MemberDescriptor(KnownType.System_Console, "Foo"),
                 targetMethodSignature,
-                new MethodSignature(KnownType.System_Data_DataSet, ".ctor"));
+                new MemberDescriptor(KnownType.System_Data_DataSet, ".ctor"));
 
             // 3. Should match if Console.WriteLine is in the list of candidates
             CheckExactMethod(false, callToDoStuffWriteLine, snippet, targetMethodSignature);
@@ -146,8 +146,8 @@ End Namespace
         private static void CheckExactMatch_DoesNotMatchOverrides(SnippetCompiler snippet)
         {
             // XmlDocument derives from XmlNode
-            var nodeWriteTo = new MethodSignature(KnownType.System_Xml_XmlNode, "WriteTo");
-            var docWriteTo = new MethodSignature(KnownType.System_Xml_XmlDocument, "WriteTo");
+            var nodeWriteTo = new MemberDescriptor(KnownType.System_Xml_XmlNode, "WriteTo");
+            var docWriteTo = new MemberDescriptor(KnownType.System_Xml_XmlDocument, "WriteTo");
 
             // 1. Call to node.WriteTo should only match for XmlNode
             var callToNodeWriteTo = CreateContextForMethod("XmlNode.WriteTo", snippet);
@@ -203,8 +203,8 @@ End Namespace
         private void CheckIsMatch_AndCheckingOverrides_DoesMatchOverrides(SnippetCompiler snippet)
         {
             // XmlDocument derives from XmlNode
-            var nodeWriteTo = new MethodSignature(KnownType.System_Xml_XmlNode, "WriteTo");
-            var docWriteTo = new MethodSignature(KnownType.System_Xml_XmlDocument, "WriteTo");
+            var nodeWriteTo = new MemberDescriptor(KnownType.System_Xml_XmlNode, "WriteTo");
+            var docWriteTo = new MemberDescriptor(KnownType.System_Xml_XmlDocument, "WriteTo");
 
             // 1. Call to node.WriteTo should only match for XmlNode
             var callToNodeWriteTo = CreateContextForMethod("XmlNode.WriteTo", snippet);
@@ -264,7 +264,7 @@ End Namespace
 
         private void DoCheckMatch_InterfaceMethods(SnippetCompiler snippet)
         {
-            var dispose = new MethodSignature(KnownType.System_IDisposable, "Dispose");
+            var dispose = new MemberDescriptor(KnownType.System_IDisposable, "Dispose");
             var callToDispose = CreateContextForMethod("Class1.Dispose", snippet);
 
             // Exact match should not match, but matching "derived" methods should
@@ -353,17 +353,17 @@ End Namespace
         }
 
         private static void CheckExactMethod(bool expectedOutcome, InvocationContext invocationContext,
-            SnippetCompiler snippet, params MethodSignature[] targetMethodSignatures) =>
+            SnippetCompiler snippet, params MemberDescriptor[] targetMethodSignatures) =>
                 CheckMatch(false, expectedOutcome, invocationContext, snippet, targetMethodSignatures);
 
         private static void CheckIsMethodOrDerived(bool expectedOutcome, InvocationContext invocationContext, SnippetCompiler snippet,
-            params MethodSignature[] targetMethodSignatures) =>
+            params MemberDescriptor[] targetMethodSignatures) =>
             CheckMatch(true, expectedOutcome, invocationContext, snippet, targetMethodSignatures);
 
         private static void CheckMatch(bool checkDerived, bool expectedOutcome, InvocationContext invocationContext,
-            SnippetCompiler snippet, params MethodSignature[] targetMethodSignatures)
+            SnippetCompiler snippet, params MemberDescriptor[] targetMethodSignatures)
         {
-            var result = MethodSignatureHelper.IsMatch(invocationContext.MethodName,
+            var result = MemberDescriptorHelper.IsMatch(invocationContext.MethodName,
                 invocationContext.MethodSymbol, checkDerived, targetMethodSignatures);
 
             result.Should().Be(expectedOutcome);

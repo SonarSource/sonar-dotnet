@@ -41,14 +41,14 @@ namespace SonarAnalyzer.Rules
         {
             InvocationTracker.Track(context,
                 InvocationTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.System_Xml_XmlNode, "SelectNodes"),
-                    new MethodSignature(KnownType.System_Xml_XmlNode, "SelectSingleNode"),
-                    new MethodSignature(KnownType.System_Xml_XPath_XPathExpression, "Compile"),
-                    new MethodSignature(KnownType.System_Xml_XPath_XPathNavigator, "Compile"),
-                    new MethodSignature(KnownType.System_Xml_XPath_XPathNavigator, "Evaluate"),
-                    new MethodSignature(KnownType.System_Xml_XPath_XPathNavigator, "Matches"),
-                    new MethodSignature(KnownType.System_Xml_XPath_XPathNavigator, "Select"),
-                    new MethodSignature(KnownType.System_Xml_XPath_XPathNavigator, "SelectSingleNode")),
+                    new MemberDescriptor(KnownType.System_Xml_XmlNode, "SelectNodes"),
+                    new MemberDescriptor(KnownType.System_Xml_XmlNode, "SelectSingleNode"),
+                    new MemberDescriptor(KnownType.System_Xml_XPath_XPathExpression, "Compile"),
+                    new MemberDescriptor(KnownType.System_Xml_XPath_XPathNavigator, "Compile"),
+                    new MemberDescriptor(KnownType.System_Xml_XPath_XPathNavigator, "Evaluate"),
+                    new MemberDescriptor(KnownType.System_Xml_XPath_XPathNavigator, "Matches"),
+                    new MemberDescriptor(KnownType.System_Xml_XPath_XPathNavigator, "Select"),
+                    new MemberDescriptor(KnownType.System_Xml_XPath_XPathNavigator, "SelectSingleNode")),
 
                 InvocationTracker.FirstParameterIsString,
                 Conditions.ExceptWhen(InvocationTracker.FirstParameterIsConstant())

@@ -38,22 +38,22 @@ namespace SonarAnalyzer.Rules
         {
             InvocationTracker.Track(context,
                 InvocationTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSql")),
+                    new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSql")),
                 Conditions.ExceptWhen(OnlyParameterIsConstantOrInterpolatedString()),
                 Conditions.ExceptWhen(InvocationTracker.FirstParameterIsConstant()));
 
             InvocationTracker.Track(context,
                 InvocationTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommandAsync"),
-                    new MethodSignature(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommand")),
+                    new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommandAsync"),
+                    new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommand")),
                 Conditions.ExceptWhen(OnlyParameterIsConstantOrInterpolatedString()));
 
             PropertyAccessTracker.Track(context,
                 PropertyAccessTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.System_Data_Odbc_OdbcCommand, "CommandText"),
-                    new MethodSignature(KnownType.System_Data_OracleClient_OracleCommand, "CommandText"),
-                    new MethodSignature(KnownType.System_Data_SqlClient_SqlCommand, "CommandText"),
-                    new MethodSignature(KnownType.System_Data_SqlServerCe_SqlCeCommand, "CommandText")),
+                    new MemberDescriptor(KnownType.System_Data_Odbc_OdbcCommand, "CommandText"),
+                    new MemberDescriptor(KnownType.System_Data_OracleClient_OracleCommand, "CommandText"),
+                    new MemberDescriptor(KnownType.System_Data_SqlClient_SqlCommand, "CommandText"),
+                    new MemberDescriptor(KnownType.System_Data_SqlServerCe_SqlCeCommand, "CommandText")),
                 PropertyAccessTracker.MatchSet(),
                 Conditions.ExceptWhen(PropertyAccessTracker.AssignedValueIsConstant()));
 

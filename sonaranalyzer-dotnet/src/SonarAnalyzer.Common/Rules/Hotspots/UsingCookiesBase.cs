@@ -40,9 +40,9 @@ namespace SonarAnalyzer.Rules
         {
             PropertyAccessTracker.Track(context,
                 PropertyAccessTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.System_Web_HttpRequestBase, "Cookies"),
-                    new MethodSignature(KnownType.System_Web_HttpCookie, "Value"),
-                    new MethodSignature(KnownType.System_Web_HttpCookie, "Values")));
+                    new MemberDescriptor(KnownType.System_Web_HttpRequestBase, "Cookies"),
+                    new MemberDescriptor(KnownType.System_Web_HttpCookie, "Value"),
+                    new MemberDescriptor(KnownType.System_Web_HttpCookie, "Values")));
 
             ObjectCreationTracker.Track(context,
                 ObjectCreationTracker.MatchConstructors(KnownType.System_Web_HttpCookie),
@@ -63,13 +63,13 @@ namespace SonarAnalyzer.Rules
 
             InvocationTracker.Track(context,
                 InvocationTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.Microsoft_AspNetCore_Http_IRequestCookieCollection, "TryGetValue"),
-                    new MethodSignature(KnownType.Microsoft_AspNetCore_Http_IResponseCookies, "Append")));
+                    new MemberDescriptor(KnownType.Microsoft_AspNetCore_Http_IRequestCookieCollection, "TryGetValue"),
+                    new MemberDescriptor(KnownType.Microsoft_AspNetCore_Http_IResponseCookies, "Append")));
 
             InvocationTracker.Track(context,
                 InvocationTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Add"),
-                    new MethodSignature(KnownType.System_Collections_Generic_IDictionary_TKey_TValue_VB, "Add")),
+                    new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Add"),
+                    new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue_VB, "Add")),
                 InvocationTracker.ArgumentAtIndexIsString(0, "Set-Cookie"),
                 IsIHeadersDictionary(),
                 InvocationTracker.HasParameters(2));

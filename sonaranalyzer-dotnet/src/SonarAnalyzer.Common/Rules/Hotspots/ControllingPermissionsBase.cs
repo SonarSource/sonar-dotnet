@@ -47,15 +47,15 @@ namespace SonarAnalyzer.Rules
 
             InvocationTracker.Track(context,
                 InvocationTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.System_Security_Principal_WindowsIdentity, "GetCurrent"),
-                    new MethodSignature(KnownType.System_IdentityModel_Tokens_SecurityTokenHandler, "ValidateToken"),
-                    new MethodSignature(KnownType.System_AppDomain, "SetPrincipalPolicy"),
-                    new MethodSignature(KnownType.System_AppDomain, "SetThreadPrincipal")));
+                    new MemberDescriptor(KnownType.System_Security_Principal_WindowsIdentity, "GetCurrent"),
+                    new MemberDescriptor(KnownType.System_IdentityModel_Tokens_SecurityTokenHandler, "ValidateToken"),
+                    new MemberDescriptor(KnownType.System_AppDomain, "SetPrincipalPolicy"),
+                    new MemberDescriptor(KnownType.System_AppDomain, "SetThreadPrincipal")));
 
             PropertyAccessTracker.Track(context,
                 PropertyAccessTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.System_Web_HttpContext, "User"),
-                    new MethodSignature(KnownType.System_Threading_Thread, "CurrentPrincipal")));
+                    new MemberDescriptor(KnownType.System_Web_HttpContext, "User"),
+                    new MemberDescriptor(KnownType.System_Threading_Thread, "CurrentPrincipal")));
 
             MethodDeclarationTracker.Track(context,
                 MethodDeclarationTracker.AnyParameterIsOfType(

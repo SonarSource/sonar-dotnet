@@ -34,8 +34,8 @@ namespace SonarAnalyzer.Rules
         {
             FieldAccessTracker.Track(context,
                 FieldAccessTracker.MatchGet(),
-                FieldAccessTracker.MatchSimpleNames(new MethodSignature(KnownType.System_Reflection_BindingFlags, "NonPublic"))
-                );
+                FieldAccessTracker.MatchSimpleNames(
+                    new MemberDescriptor(KnownType.System_Reflection_BindingFlags, "NonPublic")));
         }
     }
 }

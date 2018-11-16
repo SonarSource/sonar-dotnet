@@ -28,14 +28,17 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4507";
         protected const string MessageFormat = "Make sure this debug feature is deactivated before delivering the code in production.";
 
+        protected static readonly MemberDescriptor isDevelopmentMethod =
+            new MemberDescriptor(KnownType.Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions, "IsDevelopment");
+
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             InvocationTracker.Track(context,
                 InvocationTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.Microsoft_AspNetCore_Builder_DeveloperExceptionPageExtensions, "UseDeveloperExceptionPage"),
-                    new MethodSignature(KnownType.Microsoft_AspNetCore_Builder_DatabaseErrorPageExtensions, "UseDatabaseErrorPage")),
+                    new MemberDescriptor(KnownType.Microsoft_AspNetCore_Builder_DeveloperExceptionPageExtensions, "UseDeveloperExceptionPage"),
+                    new MemberDescriptor(KnownType.Microsoft_AspNetCore_Builder_DatabaseErrorPageExtensions, "UseDatabaseErrorPage")),
                 Conditions.ExceptWhen(IsInvokedConditionally()));
         }
 
