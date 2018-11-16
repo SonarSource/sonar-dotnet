@@ -29,9 +29,13 @@ namespace SonarAnalyzer.Rules
         protected const string MessageFormat = "Make sure that permissions are controlled safely here.";
 
         protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
+
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
+
         protected PropertyAccessTracker<TSyntaxKind> PropertyAccessTracker { get; set; }
+
         protected MethodDeclarationTracker<TSyntaxKind> MethodDeclarationTracker { get; set; }
+
         protected BaseTypeTracker<TSyntaxKind> BaseTypeTracker { get; set; }
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -41,7 +45,7 @@ namespace SonarAnalyzer.Rules
                     KnownType.System_Security_Permissions_PrincipalPermission));
 
             ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchAnyTypeThatImplements(
+                ObjectCreationTracker.WhenDerivesOrImplementsAny(
                     KnownType.System_Security_Principal_IIdentity,
                     KnownType.System_Security_Principal_IPrincipal));
 
@@ -68,7 +72,7 @@ namespace SonarAnalyzer.Rules
                     KnownType.System_Security_Permissions_PrincipalPermissionAttribute));
 
             BaseTypeTracker.Track(context,
-                BaseTypeTracker.WhenDerivesFrom(
+                BaseTypeTracker.MatchSubclassesOf(
                     KnownType.System_Security_Principal_IIdentity,
                     KnownType.System_Security_Principal_IPrincipal));
         }

@@ -87,9 +87,9 @@ namespace SonarAnalyzer.Helpers
             (context) =>
                 MemberDescriptorHelper.IsMatch(context.PropertyName, context.PropertySymbol, false, properties);
 
-        public abstract PropertyAccessCondition MatchGet();
+        public abstract PropertyAccessCondition MatchGetter();
 
-        public abstract PropertyAccessCondition WhenSet();
+        public abstract PropertyAccessCondition MatchSetter();
 
         public abstract PropertyAccessCondition AssignedValueIsConstant();
 

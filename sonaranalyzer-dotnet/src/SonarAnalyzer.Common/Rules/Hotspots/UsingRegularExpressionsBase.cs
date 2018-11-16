@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules
                     new MemberDescriptor(KnownType.System_Text_RegularExpressions_Regex, "Matches"),
                     new MemberDescriptor(KnownType.System_Text_RegularExpressions_Regex, "Replace"),
                     new MemberDescriptor(KnownType.System_Text_RegularExpressions_Regex, "Split")),
-                InvocationTracker.IsStatic());
+                InvocationTracker.MethodIsStatic());
 
             ObjectCreationTracker.Track(context,
                 ObjectCreationTracker.MatchConstructor(

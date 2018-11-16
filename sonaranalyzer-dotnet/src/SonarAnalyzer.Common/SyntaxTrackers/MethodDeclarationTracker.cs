@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Helpers
             (context) =>
                 context.MethodSymbol.GetAttributes().Any(a => a.AttributeClass.IsAny(attributeTypes));
 
-        public MethodDeclarationCondition MatchSimpleNames(params string[] methodNames) =>
+        public MethodDeclarationCondition MatchMethodName(params string[] methodNames) =>
             (context) =>
                 methodNames.Contains(context.MethodSymbol.Name);
 

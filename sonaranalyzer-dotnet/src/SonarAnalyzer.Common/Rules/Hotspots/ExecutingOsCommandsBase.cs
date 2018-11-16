@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -38,30 +37,19 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context)
         {
             InvocationTracker.Track(context,
-                InvocationTracker.MatchMethod(
-                    new MemberDescriptor(KnownType.System_Diagnostics_Process, "Start")),
-                WhenFirstArgumentIsNot(KnownType.System_Diagnostics_ProcessStartInfo),
-                WhenThereAreArguments());
+                InvocationTracker.MatchMethod(new MemberDescriptor(KnownType.System_Diagnostics_Process, "Start")),
+                Conditions.ExceptWhen(
+                    InvocationTracker.ArgumentAtIndexIs(0, KnownType.System_Diagnostics_ProcessStartInfo)),
+                InvocationTracker.MethodHasParameters());
 
             PropertyAccessTracker.Track(context,
                 PropertyAccessTracker.MatchProperty(
                     new MemberDescriptor(KnownType.System_Diagnostics_ProcessStartInfo, "FileName")),
-                PropertyAccessTracker.WhenSet());
+                PropertyAccessTracker.MatchSetter());
 
             ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructor(
-                    KnownType.System_Diagnostics_ProcessStartInfo),
-                ObjectCreationTracker.FirstArgumentIs(KnownType.System_String));
+                ObjectCreationTracker.MatchConstructor(KnownType.System_Diagnostics_ProcessStartInfo),
+                ObjectCreationTracker.ArgumentAtIndexIs(0, KnownType.System_String));
         }
-
-        private InvocationCondition WhenThereAreArguments() =>
-            (context) =>
-                context.MethodSymbol.Value != null &&
-                context.MethodSymbol.Value.Parameters.Length > 0;
-
-        private InvocationCondition WhenFirstArgumentIsNot(KnownType type) =>
-            (context) =>
-                context.MethodSymbol.Value != null &&
-                !context.MethodSymbol.Value.ArgumentAtIndexIs(0, type);
     }
 }

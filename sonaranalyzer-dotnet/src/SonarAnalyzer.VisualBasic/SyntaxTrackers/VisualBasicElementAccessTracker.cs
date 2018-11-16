@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Helpers
         {
         }
 
-        public override ElementAccessCondition FirstArgumentIsString(string value) =>
+        public override ElementAccessCondition ArgumentAtIndexIsString(int index, string value) =>
             (context) =>
             {
                 var argumentList = ((InvocationExpressionSyntax)context.Expression).ArgumentList;
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Helpers
                 {
                     return false;
                 }
-                var constantValue = context.SemanticModel.GetConstantValue(argumentList.Arguments[0].GetExpression());
+                var constantValue = context.SemanticModel.GetConstantValue(argumentList.Arguments[index].GetExpression());
                 return constantValue.HasValue &&
                     constantValue.Value is string constant &&
                     constant == value;

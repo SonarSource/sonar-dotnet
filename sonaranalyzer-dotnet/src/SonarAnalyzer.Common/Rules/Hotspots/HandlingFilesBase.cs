@@ -132,15 +132,14 @@ namespace SonarAnalyzer.Rules
 
             InvocationTracker.Track(context,
                 InvocationTracker.MethodNameIs("CreateFile"),
-                InvocationTracker.IsExtern());
+                InvocationTracker.MethodIsExtern());
 
             ObjectCreationTracker.Track(context,
                 ObjectCreationTracker.MatchConstructor(
                     KnownType.System_IO_StreamWriter,
                     KnownType.System_IO_StreamReader,
                     KnownType.System_Security_AccessControl_FileSecurity),
-                ObjectCreationTracker.FirstArgumentIs(
-                    KnownType.System_String));
+                ObjectCreationTracker.ArgumentAtIndexIs(0, KnownType.System_String));
 
             ObjectCreationTracker.Track(context,
                 ObjectCreationTracker.MatchConstructor(
@@ -153,8 +152,7 @@ namespace SonarAnalyzer.Rules
                 ObjectCreationTracker.MatchConstructor(
                     KnownType.System_IO_FileStream),
                 Conditions.ExceptWhen(
-                    ObjectCreationTracker.FirstArgumentIs(
-                        KnownType.Microsoft_Win32_SafeHandles_SafeFileHandle)));
+                    ObjectCreationTracker.ArgumentAtIndexIs(0, KnownType.Microsoft_Win32_SafeHandles_SafeFileHandle)));
         }
     }
 }

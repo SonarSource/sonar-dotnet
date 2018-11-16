@@ -66,13 +66,11 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        internal ElementAccessCondition WithArguments(params KnownType[] types) =>
+        internal ElementAccessCondition ArgumentAtIndexIs(int index, params KnownType[] types) =>
             (context) =>
                 context.InvokedPropertySymbol.Value != null &&
-                context.InvokedPropertySymbol.Value.Parameters.Length == types.Length &&
-                context.InvokedPropertySymbol.Value.Parameters
-                    .Select((p, index) => p.Type.DerivesOrImplements(types[index]))
-                    .All(ValueIsTrue);
+                context.InvokedPropertySymbol.Value.Parameters.Length > index &&
+                context.InvokedPropertySymbol.Value.Parameters[0].Type.DerivesOrImplements(types[index]);
 
         internal ElementAccessCondition MatchIndexerIn(params KnownType[] types)
         {
@@ -82,8 +80,6 @@ namespace SonarAnalyzer.Helpers
                 context.InvokedPropertySymbol.Value.ContainingType.DerivesOrImplementsAny(immutableTypes);
         }
 
-        private static bool ValueIsTrue(bool value) => value;
-
-        public abstract ElementAccessCondition FirstArgumentIsString(string value);
+        public abstract ElementAccessCondition ArgumentAtIndexIsString(int index, string value);
     }
 }

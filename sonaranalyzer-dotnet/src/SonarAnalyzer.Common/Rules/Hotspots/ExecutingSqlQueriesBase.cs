@@ -39,14 +39,17 @@ namespace SonarAnalyzer.Rules
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSql")),
-                Conditions.ExceptWhen(OnlyParameterIsConstantOrInterpolatedString()),
-                Conditions.ExceptWhen(InvocationTracker.FirstParameterIsConstant()));
+                Conditions.ExceptWhen(
+                    OnlyParameterIsConstantOrInterpolatedString()),
+                Conditions.ExceptWhen(
+                    InvocationTracker.ArgumentAtIndexIsConstant(0)));
 
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommandAsync"),
                     new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommand")),
-                Conditions.ExceptWhen(OnlyParameterIsConstantOrInterpolatedString()));
+                Conditions.ExceptWhen(
+                    OnlyParameterIsConstantOrInterpolatedString()));
 
             PropertyAccessTracker.Track(context,
                 PropertyAccessTracker.MatchProperty(
@@ -54,8 +57,9 @@ namespace SonarAnalyzer.Rules
                     new MemberDescriptor(KnownType.System_Data_OracleClient_OracleCommand, "CommandText"),
                     new MemberDescriptor(KnownType.System_Data_SqlClient_SqlCommand, "CommandText"),
                     new MemberDescriptor(KnownType.System_Data_SqlServerCe_SqlCeCommand, "CommandText")),
-                PropertyAccessTracker.WhenSet(),
-                Conditions.ExceptWhen(PropertyAccessTracker.AssignedValueIsConstant()));
+                PropertyAccessTracker.MatchSetter(),
+                Conditions.ExceptWhen(
+                    PropertyAccessTracker.AssignedValueIsConstant()));
 
             ObjectCreationTracker.Track(context,
                 ObjectCreationTracker.MatchConstructor(
@@ -68,8 +72,9 @@ namespace SonarAnalyzer.Rules
                     KnownType.System_Data_SqlServerCe_SqlCeDataAdapter,
                     KnownType.System_Data_OracleClient_OracleCommand,
                     KnownType.System_Data_OracleClient_OracleDataAdapter),
-                ObjectCreationTracker.FirstArgumentIs(KnownType.System_String),
-                Conditions.ExceptWhen(ObjectCreationTracker.FirstArgumentIsConstant()));
+                ObjectCreationTracker.ArgumentAtIndexIs(0, KnownType.System_String),
+                Conditions.ExceptWhen(
+                    ObjectCreationTracker.ArgumentAtIndexIsConst(0)));
         }
 
         protected abstract InvocationCondition OnlyParameterIsConstantOrInterpolatedString();

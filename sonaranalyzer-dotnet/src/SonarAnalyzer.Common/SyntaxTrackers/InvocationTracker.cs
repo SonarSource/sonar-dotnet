@@ -72,20 +72,11 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        #region Syntax-level standard conditions
-
-        public InvocationCondition FirstParameterIsConstant() =>
-            ArgumentAtIndexIsConstant(0);
-
         public abstract InvocationCondition ArgumentAtIndexIsConstant(int index);
 
         public abstract InvocationCondition ArgumentAtIndexIsString(int index, string value);
 
         public abstract InvocationCondition IsTypeOfExpression();
-
-        #endregion
-
-        #region Symbol-level standard conditions
 
         public InvocationCondition MatchMethod(params MemberDescriptor[] methods) =>
             (context) =>
@@ -95,49 +86,40 @@ namespace SonarAnalyzer.Helpers
             (context) =>
                 context.MethodName == methodName;
 
-        public InvocationCondition IsStatic() =>
+        public InvocationCondition MethodIsStatic() =>
             (context) =>
                 context.MethodSymbol.Value != null &&
                 context.MethodSymbol.Value.IsStatic;
 
-        public InvocationCondition IsExtensionMethod() =>
+        public InvocationCondition MethodIsExtension() =>
             (context) =>
                 context.MethodSymbol.Value != null &&
                 context.MethodSymbol.Value.IsExtensionMethod;
 
-        public InvocationCondition HasParameters() =>
+        public InvocationCondition MethodHasParameters() =>
             (context) =>
                 context.MethodSymbol.Value != null &&
                 context.MethodSymbol.Value.Parameters.Length > 0;
 
-        public InvocationCondition HasParameters(int count) =>
+        public InvocationCondition MethodHasParameters(int count) =>
             (context) =>
                 context.MethodSymbol.Value != null &&
                 context.MethodSymbol.Value.Parameters.Length == count;
 
-        public bool FirstParameterIsString(InvocationContext context)
-        {
-            var firstParam = context.MethodSymbol.Value?.Parameters.FirstOrDefault();
-            return firstParam != null &&
-                firstParam.IsType(KnownType.System_String);
-        }
-
-        internal InvocationCondition FirstParameterIsOfType(KnownType requiredType) =>
+        internal InvocationCondition ArgumentAtIndexIs(int index, KnownType requiredType) =>
             (context) =>
                 context.MethodSymbol.Value != null &&
-                context.MethodSymbol.Value.Parameters.Length > 0 &&
-                context.MethodSymbol.Value.Parameters[0].IsType(requiredType);
+                context.MethodSymbol.Value.Parameters.Length > index &&
+                context.MethodSymbol.Value.Parameters[index].IsType(requiredType);
 
-        internal InvocationCondition WhenReturnTypeIs(KnownType returnType) =>
+        internal InvocationCondition MethodReturnTypeIs(KnownType returnType) =>
             (context) =>
                 context.MethodSymbol.Value != null &&
                 context.MethodSymbol.Value.ReturnType.DerivesFrom(returnType);
 
-        public InvocationCondition IsExtern() =>
+        public InvocationCondition MethodIsExtern() =>
             (context) =>
                 context.MethodSymbol.Value != null &&
                 context.MethodSymbol.Value.IsExtern;
-
-        #endregion
     }
 }

@@ -68,18 +68,13 @@ namespace SonarAnalyzer.Helpers
 
         internal abstract ObjectCreationCondition ArgumentAtIndexIsConst(int index);
 
-        internal ObjectCreationCondition FirstArgumentIs(KnownType type) =>
-            ArgumentAtIndexIs(0, type);
-
         internal ObjectCreationCondition ArgumentAtIndexIs(int index, KnownType type) =>
             (context) =>
                 context.InvokedConstructorSymbol.Value != null &&
-                context.InvokedConstructorSymbol.Value.ArgumentAtIndexIs(index, type);
+                context.InvokedConstructorSymbol.Value.Parameters.Length > index &&
+                context.InvokedConstructorSymbol.Value.Parameters[index].Type.Is(type);
 
-        internal ObjectCreationCondition FirstArgumentIsConstant() =>
-            ArgumentAtIndexIsConst(0);
-
-        internal ObjectCreationCondition MatchAnyTypeThatImplements(params KnownType[] types)
+        internal ObjectCreationCondition WhenDerivesOrImplementsAny(params KnownType[] types)
         {
             var typesArray = types.ToImmutableArray();
             return (context) =>
@@ -110,7 +105,6 @@ namespace SonarAnalyzer.Helpers
                 context.InvokedConstructorSymbol.Value != null &&
                 context.InvokedConstructorSymbol.Value.IsConstructor() &&
                 context.InvokedConstructorSymbol.Value.ContainingType.Implements(baseType);
-
 
         internal ObjectCreationCondition WhenDerivesOrImplements(KnownType baseType) =>
             (context) =>

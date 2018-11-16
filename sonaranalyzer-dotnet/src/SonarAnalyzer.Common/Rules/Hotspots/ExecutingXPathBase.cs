@@ -49,9 +49,9 @@ namespace SonarAnalyzer.Rules
                     new MemberDescriptor(KnownType.System_Xml_XPath_XPathNavigator, "Matches"),
                     new MemberDescriptor(KnownType.System_Xml_XPath_XPathNavigator, "Select"),
                     new MemberDescriptor(KnownType.System_Xml_XPath_XPathNavigator, "SelectSingleNode")),
-
-                InvocationTracker.FirstParameterIsString,
-                Conditions.ExceptWhen(InvocationTracker.FirstParameterIsConstant())
+                InvocationTracker.ArgumentAtIndexIs(0, KnownType.System_String),
+                Conditions.ExceptWhen(
+                    InvocationTracker.ArgumentAtIndexIsConstant(0))
             );
         }
     }

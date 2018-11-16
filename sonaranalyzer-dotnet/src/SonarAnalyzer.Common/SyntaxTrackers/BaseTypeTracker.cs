@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Helpers
         /// </summary>
         protected abstract IEnumerable<SyntaxNode> GetBaseTypeNodes(SyntaxNode contextNode);
 
-        internal BaseClassCondition WhenDerivesFrom(params KnownType[] types)
+        internal BaseClassCondition MatchSubclassesOf(params KnownType[] types)
         {
             var immutableTypes = types.ToImmutableArray();
             return (BaseTypeContext context, out Location issueLocation) =>

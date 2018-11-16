@@ -29,6 +29,7 @@ namespace SonarAnalyzer.Rules
         protected const string MessageFormat = "Make sure that this http request is sent safely.";
 
         protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
+
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set;  }
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -79,12 +80,5 @@ namespace SonarAnalyzer.Rules
                     new MemberDescriptor(KnownType.System_Net_WebRequest, "CreateDefault"),
                     new MemberDescriptor(KnownType.System_Net_WebRequest, "CreateHttp")));
         }
-
-
-        #region Syntax-specific abstract methods
-
-        // Add abstract methods for language-specific checks here...
-
-        #endregion
     }
 }

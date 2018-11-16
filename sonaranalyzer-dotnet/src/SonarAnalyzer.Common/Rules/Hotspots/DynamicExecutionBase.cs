@@ -39,19 +39,19 @@ namespace SonarAnalyzer.Rules
                     new MemberDescriptor(KnownType.System_Reflection_Assembly, "LoadFile"),
                     new MemberDescriptor(KnownType.System_Reflection_Assembly, "LoadFrom"),
                     new MemberDescriptor(KnownType.System_Reflection_Assembly, "LoadWithPartialName")),
-                InvocationTracker.IsStatic()
-                );
+                InvocationTracker.MethodIsStatic());
 
             // Special case - Type.GetType() without paramters is ok, but
             // and Type.GetType(...) with parameters is not ok
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.System_Type, "GetType")),
-                InvocationTracker.IsStatic(),
-                InvocationTracker.HasParameters(),
+                InvocationTracker.MethodIsStatic(),
+                InvocationTracker.MethodHasParameters(),
                 Conditions.ExceptWhen(
-                    Conditions.And(InvocationTracker.FirstParameterIsString,
-                    InvocationTracker.FirstParameterIsConstant())));
+                    Conditions.And(
+                        InvocationTracker.ArgumentAtIndexIs(0, KnownType.System_String),
+                        InvocationTracker.ArgumentAtIndexIsConstant(0))));
 
             // Special case - Activator.CreateXXX
             InvocationTracker.Track(context,
@@ -59,13 +59,15 @@ namespace SonarAnalyzer.Rules
                     new MemberDescriptor(KnownType.System_Activator, "CreateComInstanceFrom"),
                     new MemberDescriptor(KnownType.System_Activator, "CreateInstance"),
                     new MemberDescriptor(KnownType.System_Activator, "CreateInstanceFrom")),
-                InvocationTracker.IsStatic(),
-                InvocationTracker.HasParameters(),
-                Conditions.ExceptWhen(InvocationTracker.FirstParameterIsOfType(KnownType.System_Type)));
+                InvocationTracker.MethodIsStatic(),
+                InvocationTracker.MethodHasParameters(),
+                Conditions.ExceptWhen(
+                    InvocationTracker.ArgumentAtIndexIs(0, KnownType.System_Type)));
 
             // All other method invocations
             InvocationTracker.Track(context,
-                Conditions.ExceptWhen(InvocationTracker.IsTypeOfExpression()),
+                Conditions.ExceptWhen(
+                    InvocationTracker.IsTypeOfExpression()),
                 InvocationTracker.MatchMethod(
                     // Methods on assembly that are safe to call with constants
                     new MemberDescriptor(KnownType.System_Reflection_Assembly, "GetType"),
@@ -93,8 +95,9 @@ namespace SonarAnalyzer.Rules
                     new MemberDescriptor(KnownType.System_Type, "GetDefaultMembers"),
                     new MemberDescriptor(KnownType.System_Type, "InvokeMember")),
                 Conditions.ExceptWhen(
-                    Conditions.And(InvocationTracker.FirstParameterIsString,
-                    InvocationTracker.FirstParameterIsConstant())));
+                    Conditions.And(
+                        InvocationTracker.ArgumentAtIndexIs(0, KnownType.System_String),
+                        InvocationTracker.ArgumentAtIndexIsConstant(0))));
         }
     }
 }

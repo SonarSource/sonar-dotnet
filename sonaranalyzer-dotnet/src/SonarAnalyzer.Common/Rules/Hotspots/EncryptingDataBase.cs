@@ -39,19 +39,17 @@ namespace SonarAnalyzer.Rules
                     // "RSA" is the base class for all RSA algorithm implementations
                     new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "Encrypt"),
                     new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "EncryptValue"),
-
                     new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "Decrypt"),
                     new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "DecryptValue"),
 
                     // RSA methods added in NET Core 2.1
                     new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "TryEncrypt"),
                     new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "TryDecrypt"),
-
                     new MemberDescriptor(KnownType.System_Security_Cryptography_SymmetricAlgorithm, "CreateEncryptor"),
                     new MemberDescriptor(KnownType.System_Security_Cryptography_SymmetricAlgorithm, "CreateDecryptor")));
 
             BaseTypeTracker.Track(context,
-                BaseTypeTracker.WhenDerivesFrom(
+                BaseTypeTracker.MatchSubclassesOf(
                     KnownType.System_Security_Cryptography_AsymmetricAlgorithm,
                     KnownType.System_Security_Cryptography_SymmetricAlgorithm));
         }
