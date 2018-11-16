@@ -29,8 +29,13 @@ namespace SonarAnalyzer.Helpers
         private static readonly ImmutableArray<KnownType> controllerTypes =
             ImmutableArray.Create(
                 KnownType.Microsoft_AspNetCore_Mvc_ControllerBase,
-                KnownType.System_Web_Mvc_Controller
-            );
+                KnownType.System_Web_Mvc_Controller);
+
+        private static readonly ImmutableArray<KnownType> nonactionTypes =
+            ImmutableArray.Create(
+                KnownType.Microsoft_AspNetCore_Mvc_NonActionAttribute,
+                KnownType.System_Web_Mvc_NonActionAttribute);
+
 
         private static readonly ImmutableArray<KnownType> nonControllerAttributeTypes =
             ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_NonControllerAttribute);
@@ -44,6 +49,8 @@ namespace SonarAnalyzer.Helpers
         /// </summary>
         public static bool IsControllerMethod(this IMethodSymbol methodSymbol) =>
             methodSymbol.GetEffectiveAccessibility() == Accessibility.Public &&
+            methodSymbol.MethodKind == MethodKind.Ordinary &&
+            !methodSymbol.GetAttributes().Any(d => d.AttributeClass.IsAny(nonactionTypes)) &&
             IsControllerType(methodSymbol?.ContainingType);
 
         /// <summary>

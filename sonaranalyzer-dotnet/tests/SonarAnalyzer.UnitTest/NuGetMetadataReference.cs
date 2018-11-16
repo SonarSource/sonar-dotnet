@@ -294,6 +294,9 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> MicrosoftAspNetMvc(string packageVersion) =>
             Create("Microsoft.AspNet.Mvc", packageVersion);
 
+        public static IEnumerable<MetadataReference> MicrosoftAspNetMvcCore(string packageVersion) =>
+            Create("Microsoft.AspNet.Mvc.Core", packageVersion);
+
         public static IEnumerable<MetadataReference> MicrosoftExtensionsConfigurationAbstractions(string packageVersion) =>
             Create("Microsoft.Extensions.Configuration.Abstractions", packageVersion);
 

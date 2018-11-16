@@ -3,6 +3,17 @@
 Public Class Foo
     Inherits Controller
 
+    Public sub New () ' Compliant, ctors should not be highlighted
+    End sub
+
+    Public Property MyProperty As Integer  ' Compliant, properties should not be highlighted
+        Get
+            Return 0
+        End Get
+        Set(ByVal value As Integer)
+        End Set
+    End Property
+
     Public Sub PublicFoo() ' Noncompliant {{Make sure that exposing this HTTP endpoint is safe here.}}
 '              ^^^^^^^^^
     End Sub
@@ -14,6 +25,10 @@ Public Class Foo
     End Sub
 
     Private Sub PrivateFoo()
+    End Sub
+
+    <NonAction>
+    Public Sub PublicNonAction() ' Compliant, methods decorated with NonAction are not entrypoints
     End Sub
 
     Private Class Bar
