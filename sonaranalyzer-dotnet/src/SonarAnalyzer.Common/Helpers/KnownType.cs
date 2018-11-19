@@ -45,6 +45,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_Controller = new KnownType("Microsoft.AspNetCore.Mvc.Controller");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerBase = new KnownType("Microsoft.AspNetCore.Mvc.ControllerBase");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.ControllerAttribute");
+        internal static readonly KnownType Microsoft_AspNetCore_Mvc_NonActionAttribute = new KnownType("Microsoft.AspNetCore.Mvc.NonActionAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_NonControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.NonControllerAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_VirtualFileResult = new KnownType("Microsoft.AspNetCore.Mvc.VirtualFileResult");
         internal static readonly KnownType Microsoft_AspNetCore_Routing_VirtualPathData = new KnownType("Microsoft.AspNetCore.Routing.VirtualPathData");
@@ -346,6 +347,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Web_HttpRequestBase = new KnownType("System.Web.HttpRequestBase");
         internal static readonly KnownType System_Web_HttpResponseBase = new KnownType("System.Web.HttpResponseBase");
         internal static readonly KnownType System_Web_HttpServerUtilityBase = new KnownType("System.Web.HttpServerUtilityBase");
+        internal static readonly KnownType System_Web_Mvc_NonActionAttribute = new KnownType("System.Web.Mvc.NonActionAttribute");
         internal static readonly KnownType System_Web_Mvc_Controller = new KnownType("System.Web.Mvc.Controller");
         internal static readonly KnownType System_Web_Mvc_HttpPostAttribute = new KnownType("System.Web.Mvc.HttpPostAttribute");
         internal static readonly KnownType System_Web_Mvc_UrlHelper = new KnownType("System.Web.Mvc.UrlHelper");
