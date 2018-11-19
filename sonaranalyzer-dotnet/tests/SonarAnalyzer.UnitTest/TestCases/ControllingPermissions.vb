@@ -10,19 +10,19 @@ Namespace Tests.Diagnostics
         Class MyIdentity
             Implements IIdentity ' Noncompliant {{Make sure that permissions are controlled safely here.}}
 '                      ^^^^^^^^^
-            Public ReadOnly Property Name As String
+            Public ReadOnly Property Name As String Implements IIdentity.Name
                 Get
                     Throw New NotImplementedException()
                 End Get
             End Property
 
-            Public ReadOnly Property AuthenticationType As String
+            Public ReadOnly Property AuthenticationType As String Implements IIdentity.AuthenticationType
                 Get
                     Throw New NotImplementedException()
                 End Get
             End Property
 
-            Public ReadOnly Property IsAuthenticated As Boolean
+            Public ReadOnly Property IsAuthenticated As Boolean Implements IIdentity.IsAuthenticated
                 Get
                     Throw New NotImplementedException()
                 End Get
@@ -32,13 +32,13 @@ Namespace Tests.Diagnostics
         Class MyPrincipal
             Implements IPrincipal ' Noncompliant
 
-            Public ReadOnly Property Identity As IIdentity
+            Public ReadOnly Property Identity As IIdentity Implements IPrincipal.Identity
                 Get
                     Throw New NotImplementedException()
                 End Get
             End Property
 
-            Public Function IsInRole(ByVal role As String) As Boolean
+            Public Function IsInRole(ByVal role As String) As Boolean Implements IPrincipal.IsInRole
                 Throw New NotImplementedException()
             End Function
         End Class
@@ -96,7 +96,7 @@ Namespace Tests.Diagnostics
             principal = New WindowsPrincipal(windowsIdentity) ' Noncompliant
         End Sub
 
-        ' Method declarations that accept IIdentiry or IPrincipal
+        ' Method declarations that accept IIdentity or IPrincipal
         Private Sub AcceptIdentity(ByVal identity As MyIdentity) ' Noncompliant
         End Sub
 
@@ -111,14 +111,14 @@ Namespace Tests.Diagnostics
     End Class
 
     Public Class Properties
-        Private identity As IIdentity
+        Private id As IIdentity
 
         Public Property Identity As IIdentity
             Get
-                Return identity
+                Return id
             End Get
             Set(ByVal value As IIdentity) ' Compliant, we do not raise for property accessors
-                identity = value
+                id = value
             End Set
         End Property
     End Class

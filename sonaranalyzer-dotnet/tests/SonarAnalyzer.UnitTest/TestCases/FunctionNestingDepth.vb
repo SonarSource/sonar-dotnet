@@ -9,7 +9,7 @@ Namespace Tests.Diagnostics
                     While True
                         If (True) Then  ' Noncompliant {{Refactor this code to not nest more than 3 control flow statements.}}
 '                       ^^
-                            Console.Write()
+                            Console.WriteLine()
                         End If
                     End While
 
@@ -43,7 +43,7 @@ Namespace Tests.Diagnostics
 
                 ElseIf (True) Then
                     If (True) Then
-                        Console.Write()
+                        Console.WriteLine()
                     End If
 
                 ElseIf (True) Then
@@ -117,8 +117,8 @@ Namespace Tests.Diagnostics
             End Set
         End Property
 
-        Public Custom Event OnSomething As EventHandler
-            AddHandler()
+        Public Custom Event OnSomething As EventHandler ' Error [BC31132]
+            AddHandler() ' Error [BC31133]
                 If (True) Then
                     If (True) Then
                         If (True) Then
@@ -129,7 +129,7 @@ Namespace Tests.Diagnostics
                     End If
                 End If
             End AddHandler
-            RemoveHandler()
+            RemoveHandler() ' Error [BC31133]
                 If (True) Then
                     If (True) Then
                         If (True) Then

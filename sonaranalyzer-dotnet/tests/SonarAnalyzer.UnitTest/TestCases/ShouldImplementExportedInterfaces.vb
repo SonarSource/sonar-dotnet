@@ -16,12 +16,6 @@ Namespace Classes
 '    ^^^^^^^^^^^^^^^^^^^^^^^^^ @-2
     End Class
 
-    <Export(contractType:=GetType(IComparable), contractName:="asdasd")> ' Noncompliant
-    <Export(contractType:=GetType(MyInterface), contractName:="asdasd")>
-    class NotExported_NamedArgs_ReverseOrder
-        Implements MyInterface
-    End Class
-
     <Export("something", GetType(MyInterface))> ' Noncompliant
     <Export(Constants.ContractName, GetType(IDisposable))> ' Noncompliant
     class NotExported_MultipleArgs
@@ -31,8 +25,8 @@ Namespace Classes
     Class NotExported_Multiple
 '    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ @-1 {{Implement 'MyInterface' on 'NotExported_Multiple' or remove this export attribute.}}
 '                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ @-2 {{Implement 'IComparable' on 'NotExported_Multiple' or remove this export attribute.}}
-        Implements IDisposable
-        Public Sub Dispose()
+        Implements IDisposable ' Error [BC30149]
+        Sub Dispose()
         End Sub
     End Class
 
@@ -52,14 +46,6 @@ Namespace Classes
     Class Exporting_Ourselves
     End Class
 
-    <Export(1)>
-    <Export(1, GetType(IComparable))>
-    <Export(GetType(ASDASD))>
-    <Export(GetType(MyInterface), GetType(IComparable))>
-    Class InvalidSyntax
-    End Class
-
-    <Import(GetType(MyInterface))>
     <InheritedExport(GetType(MyInterface))> ' Noncompliant
     <InheritedExport(GetType(OtherAttributes))>
     Class OtherAttributes
@@ -109,7 +95,7 @@ Namespace Classes
     End Class
 
     <Export(GetType(ISomething(Of)))> ' Noncompliant
-    Public Class Something(Of T)
+    Public Class OtherSomething(Of T)
         Implements ISomething(Of T)
     End Class
 End Namespace

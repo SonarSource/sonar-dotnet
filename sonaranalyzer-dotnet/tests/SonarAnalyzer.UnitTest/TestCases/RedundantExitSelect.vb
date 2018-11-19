@@ -1,4 +1,6 @@
-﻿Module Module1
+﻿Imports System
+
+Module Module1
     Sub Main()
         Dim x = 0
         Select Case x

@@ -7,6 +7,8 @@
 '                                          ^^^^
     End Sub
 
+    Dim array As String()
+
     ReadOnly Property Foo(ByVal Index As Integer)  ' Noncompliant
 '                               ^^^^^
         Get

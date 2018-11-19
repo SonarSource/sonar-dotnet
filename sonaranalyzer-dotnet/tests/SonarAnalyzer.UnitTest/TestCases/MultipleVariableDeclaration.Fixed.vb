@@ -5,11 +5,11 @@
         Public Const BBB = 42
         Public Const DDD As String = "foo"
         Public Sub New(n As Integer)
-            Dim Const AAA As Integer
-            Dim Const B As Integer = 5
-            Dim Const BBB = 42
-            Dim Const CCC As String = "foo"
-            Dim Const DDD As String = "foo"
+            Dim AAA = 1
+            Dim B As Integer = 5
+            Dim BBB = 42
+            Dim CCC As String = "foo"
+            Dim DDD As String = "foo"
         End Sub
     End Class
 End Namespace

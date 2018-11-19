@@ -11,7 +11,6 @@ Namespace Tests.Diagnostics
         Private Shared Sub WriteAssemblyInfo(ByVal assemblyName As String, ByVal version As String, ByVal author As String, ByVal description As String, ByVal title As String)
         End Sub
 
-        <SomeAttribute("127.0.0.1")>
         Public Sub Foo()
             Dim ip As String = "192.168.0.1" 'Noncompliant {{Make sure using this hardcoded IP address '192.168.0.1' is safe here.}}
 '                              ^^^^^^^^^^^^^

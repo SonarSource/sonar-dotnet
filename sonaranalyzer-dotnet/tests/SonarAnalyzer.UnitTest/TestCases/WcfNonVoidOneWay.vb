@@ -25,7 +25,7 @@ Namespace Tests.Diagnostics
         <My(IsOneWay:=True)>
         Function MyServiceMethod4() As Integer
 
-        <OperationContract(Action:="Action", IsOneWay:="mistake")>
+        <OperationContract(Action:="Action", IsOneWay:="mistake")> ' Error [BC30934] - Conversion from 'String' to 'Boolean' cannot occur in a constant expression used as an argument to an attribute.
         Function MyServiceMethod5() As Integer
 
         <OperationContract(IsOneWay:=True, AsyncPattern:=True)>

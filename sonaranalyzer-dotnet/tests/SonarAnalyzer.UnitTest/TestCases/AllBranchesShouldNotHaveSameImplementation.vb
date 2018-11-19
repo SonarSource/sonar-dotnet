@@ -2,7 +2,7 @@
 
 Namespace Tests.Diagnostics
     Public Class Program
-        Public Sub IfElseCases()
+        Public Sub IfElseCases(b As Integer, c As Integer)
             If b = 0 Then 'Noncompliant
                 DoSomething()
             ElseIf b = 1 Then
@@ -38,7 +38,7 @@ Namespace Tests.Diagnostics
             End If
         End Sub
 
-        Public Sub SwitchCases()
+        Public Sub SwitchCases(i As Integer)
             Select Case i ' Noncompliant {{Remove this 'Select Case' or edit its sections so that they are not all the same.}}
                 Case 1
                     DoSomething()
@@ -83,9 +83,10 @@ Namespace Tests.Diagnostics
         End Sub
 
         Public Sub TernaryCases(ByVal c As Boolean)
+            Dim a As Integer = 1
             Dim b As Integer = If(a > 12, 4, 4) 'Noncompliant {{Remove this ternary operator or edit it so that when true and when false blocks are not the same.}}
             Dim x = If(1 > 18, True, True) 'Noncompliant
-            Dim y = If(1 > 18, True, False) 
+            Dim y = If(1 > 18, True, False)
             y = If(1 > 18, (True), True) 'Noncompliant
             TernaryCases(If(1 > 18, (True), True)) 'Noncompliant
         End Sub

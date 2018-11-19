@@ -1,6 +1,9 @@
-﻿Module Module1
+﻿Imports System
+
+Module Module1
     Sub Main()
         Dim i = 1
+        Dim ctrl = New Object()
 
         Do                        ' Noncompliant {{Use a structured loop instead.}}
             If i = 10 Then

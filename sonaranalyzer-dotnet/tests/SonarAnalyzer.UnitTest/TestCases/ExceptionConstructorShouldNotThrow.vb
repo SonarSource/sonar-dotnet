@@ -47,7 +47,11 @@ Namespace Tests.Diagnostics
         Inherits Exception
 
         Public Sub New()
-            Throw ' Noncompliant
+            Try
+
+            Catch ex As Exception
+                Throw ' Noncompliant
+            End Try
         End Sub
     End Class
 

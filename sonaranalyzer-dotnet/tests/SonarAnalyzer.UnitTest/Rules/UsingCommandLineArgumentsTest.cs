@@ -90,7 +90,7 @@ partial class Program1
                 .AddProject(AnalyzerLanguage.VisualBasic)
                 .AddSnippet(@"
 Partial Class Program1
-    Private Shared Partial Sub Main(ParamArray args As String()) ' Noncompliant
+    Private Shared Sub Main(ParamArray args As String()) ' Noncompliant
         System.Console.WriteLine(args)
     End Sub
 End Class
@@ -98,6 +98,7 @@ End Class
                 .AddSnippet(@"
 Partial Class Program1
     Private Shared Partial Sub Main(ParamArray args As String()) ' Compliant, we raise only on methods with implementation
+    End Sub
 End Class
 ")
                 .GetCompilation();

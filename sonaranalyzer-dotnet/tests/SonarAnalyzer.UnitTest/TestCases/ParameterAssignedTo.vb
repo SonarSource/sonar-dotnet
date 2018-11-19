@@ -3,9 +3,9 @@
 Namespace Tests.Diagnostics
 
     Module ParameterAssignedToStatic
-
+        ' Error@+1 [BC30002]
         <Extension()>
-        Static Sub MySub(ByVal a As Integer)
+        Static Sub MySub(ByVal a As Integer) ' Error [BC30242] Static is not valid
             a = 42 ' Noncompliant {{Introduce a new variable instead of reusing the parameter 'a'.}}
 '           ^
             Try

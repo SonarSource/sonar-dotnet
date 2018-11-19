@@ -6,7 +6,7 @@ Imports System.Text
 Namespace Tests.TestCases
     Class Foo
         Public Function Foo() As Boolean
-            Dim b = System.Environment?.NewLine
+            Dim b = System.Environment.NewLine
             Return If(True, FooImpl(True, False), True)
         End Function
 

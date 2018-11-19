@@ -38,6 +38,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     {
         private const string AnalyzerFailedDiagnosticId = "AD0001";
 
+        private static readonly string[] BuildErrorsToIgnore = new string[]
+        {
+            "BC36716" // VB12 does not support line continuation comments" i.e. a comment at the end of a multi-line statement.
+        };
+
         public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode)
         {
             try
@@ -165,12 +170,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private static void VerifyBuildErrors(ImmutableArray<Diagnostic> diagnostics, Compilation compilation)
         {
-            var buildErrors = diagnostics.Where(d => d.Id.StartsWith("CS") && d.Severity == DiagnosticSeverity.Error);
+            var buildErrors = GetBuildErrors(diagnostics);
+
             var expectedBuildErrors = new IssueLocationCollector()
                 .GetExpectedBuildErrors(compilation.SyntaxTrees.Skip(1).FirstOrDefault()?.GetText().Lines)
                 .ToList();
             CompareActualToExpected(buildErrors, expectedBuildErrors, true);
         }
+
+        private static IEnumerable<Diagnostic> GetBuildErrors(IEnumerable<Diagnostic> diagnostics) =>
+            diagnostics.Where(d => d.Severity == DiagnosticSeverity.Error
+                && (d.Id.StartsWith("CS") || d.Id.StartsWith("BC"))
+                && !BuildErrorsToIgnore.Contains(d.Id));
 
         private static void VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics) =>
             diagnostics.Should().NotContain(d => d.Id == AnalyzerFailedDiagnosticId);

@@ -26,7 +26,7 @@ Namespace Tests.Diagnostics
             Dim c = True AndAlso Not (New Integer(-1) {}.Length = 0) 'Noncompliant
 
             Dim args As Integer() = {}
-            Dim a = Not Not (args.Length = 0) 'Noncompliant
+            Dim d = Not Not (args.Length = 0) 'Noncompliant
 
             SomeFunc(Not (a >= 10)) 'Noncompliant
         End Sub
