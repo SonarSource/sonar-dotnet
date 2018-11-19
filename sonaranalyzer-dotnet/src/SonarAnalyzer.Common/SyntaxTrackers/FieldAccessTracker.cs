@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Helpers
 
         public FieldAccessCondition MatchField(params MemberDescriptor[] fields) =>
             (context) =>
-                MemberDescriptorHelper.IsMatch(context.FieldName, context.InvokedFieldSymbol, false, fields);
+                MemberDescriptor.MatchesAny(context.FieldName, context.InvokedFieldSymbol, false, fields);
 
         #region Syntax-level standard conditions
 

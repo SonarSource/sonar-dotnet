@@ -74,13 +74,13 @@ namespace SonarAnalyzer.Helpers
 
         public abstract InvocationCondition ArgumentAtIndexIsConstant(int index);
 
-        public abstract InvocationCondition ArgumentAtIndexIsString(int index, string value);
+        public abstract InvocationCondition ArgumentAtIndexEquals(int index, string value);
 
         public abstract InvocationCondition IsTypeOfExpression();
 
         public InvocationCondition MatchMethod(params MemberDescriptor[] methods) =>
             (context) =>
-                MemberDescriptorHelper.IsMatch(context.MethodName, context.MethodSymbol, true, methods);
+                MemberDescriptor.MatchesAny(context.MethodName, context.MethodSymbol, true, methods);
 
         public InvocationCondition MethodNameIs(string methodName) =>
             (context) =>

@@ -53,19 +53,19 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
             ImmutableArray.Create(bugRule, codeSmellRule);
 
-        private static readonly ISet<MethodSignature> HandledFormatMethods = new HashSet<MethodSignature>
+        private static readonly ISet<MemberDescriptor> HandledFormatMethods = new HashSet<MemberDescriptor>
         {
-            new MethodSignature(KnownType.System_String, "Format"),
-            new MethodSignature(KnownType.System_Console, "Write"),
-            new MethodSignature(KnownType.System_Console, "WriteLine"),
-            new MethodSignature(KnownType.System_Text_StringBuilder, "AppendFormat"),
-            new MethodSignature(KnownType.System_IO_TextWriter, "Write"),
-            new MethodSignature(KnownType.System_IO_TextWriter, "WriteLine"),
-            new MethodSignature(KnownType.System_Diagnostics_Debug, "WriteLine"),
-            new MethodSignature(KnownType.System_Diagnostics_Trace, "TraceError"),
-            new MethodSignature(KnownType.System_Diagnostics_Trace, "TraceInformation"),
-            new MethodSignature(KnownType.System_Diagnostics_Trace, "TraceWarning"),
-            new MethodSignature(KnownType.System_Diagnostics_TraceSource, "TraceInformation")
+            new MemberDescriptor(KnownType.System_String, "Format"),
+            new MemberDescriptor(KnownType.System_Console, "Write"),
+            new MemberDescriptor(KnownType.System_Console, "WriteLine"),
+            new MemberDescriptor(KnownType.System_Text_StringBuilder, "AppendFormat"),
+            new MemberDescriptor(KnownType.System_IO_TextWriter, "Write"),
+            new MemberDescriptor(KnownType.System_IO_TextWriter, "WriteLine"),
+            new MemberDescriptor(KnownType.System_Diagnostics_Debug, "WriteLine"),
+            new MemberDescriptor(KnownType.System_Diagnostics_Trace, "TraceError"),
+            new MemberDescriptor(KnownType.System_Diagnostics_Trace, "TraceInformation"),
+            new MemberDescriptor(KnownType.System_Diagnostics_Trace, "TraceWarning"),
+            new MemberDescriptor(KnownType.System_Diagnostics_TraceSource, "TraceInformation")
         };
 
         private static readonly ISet<ValidationFailure> bugRelatedFailures = new HashSet<ValidationFailure>

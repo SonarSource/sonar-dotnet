@@ -39,11 +39,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly IEnumerable<MethodSignature> checkedMethods = new List<MethodSignature>
+        private static readonly IEnumerable<MemberDescriptor> checkedMethods = new List<MemberDescriptor>
         {
-            new MethodSignature(KnownType.System_Reflection_Assembly, "GetExecutingAssembly")
+            new MemberDescriptor(KnownType.System_Reflection_Assembly, "GetExecutingAssembly")
         };
 
-        internal override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
+        internal override IEnumerable<MemberDescriptor> CheckedMethods => checkedMethods;
     }
 }

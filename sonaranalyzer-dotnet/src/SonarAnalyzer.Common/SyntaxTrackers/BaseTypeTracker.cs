@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Helpers
             {
                 foreach (var baseTypeNode in context.AllBaseTypeNodes)
                 {
-                    if (context.SemanticModel.GetTypeInfo(baseTypeNode).Type?.DerivesOrImplementsAny(immutableTypes) ?? false)
+                    if (context.SemanticModel.GetTypeInfo(baseTypeNode).Type.DerivesOrImplementsAny(immutableTypes))
                     {
                         issueLocation = baseTypeNode.GetLocation();
                         return true; // assume there won't be more than one matching node

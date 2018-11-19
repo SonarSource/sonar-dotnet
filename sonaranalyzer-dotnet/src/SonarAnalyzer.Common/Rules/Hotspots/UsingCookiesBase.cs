@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules
 
             ElementAccessTracker.Track(context,
                 ElementAccessTracker.MatchIndexerIn(KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary),
-                ElementAccessTracker.ArgumentAtIndexIsString(0, "Set-Cookie"));
+                ElementAccessTracker.ArgumentAtIndexEquals(0, "Set-Cookie"));
 
             ElementAccessTracker.Track(context,
                 ElementAccessTracker.MatchIndexerIn(
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules
                 InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Add"),
                     new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue_VB, "Add")),
-                InvocationTracker.ArgumentAtIndexIsString(0, "Set-Cookie"),
+                InvocationTracker.ArgumentAtIndexEquals(0, "Set-Cookie"),
                 InvocationTracker.MethodHasParameters(2),
                 IsIHeadersDictionary());
         }

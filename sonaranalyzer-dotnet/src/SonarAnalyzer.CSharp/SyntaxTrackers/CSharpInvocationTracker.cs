@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Helpers
                         && memberAccessSyntax.Expression != null
                         && memberAccessSyntax.Expression.RawKind == (int)SyntaxKind.TypeOfExpression;
 
-        public override InvocationCondition ArgumentAtIndexIsString(int index, string value) =>
+        public override InvocationCondition ArgumentAtIndexEquals(int index, string value) =>
             (context) =>
             {
                 var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;

@@ -41,12 +41,12 @@ namespace SonarAnalyzer.Helpers
         {
         }
 
-        public override ElementAccessCondition ArgumentAtIndexIsString(int index, string value) =>
+        public override ElementAccessCondition ArgumentAtIndexEquals(int index, string value) =>
             (context) =>
             {
                 var argumentList = ((InvocationExpressionSyntax)context.Expression).ArgumentList;
                 if (argumentList == null ||
-                    argumentList.Arguments.Count == 0)
+                    argumentList.Arguments.Count <= index)
                 {
                     return false;
                 }

@@ -29,66 +29,83 @@ namespace SonarAnalyzer.Common
 {
     public class AnalyzerConfiguration
     {
-        private static readonly Lazy<HotspotConfiguration> hotspotConfiguration =
-            new Lazy<HotspotConfiguration>(() => new HotspotConfiguration());
+        /// <summary>
+        /// Hotspot rules are not configurable (from ruleset) to prevent them from appearing in SonarLint.
+        /// They are enabled by default and we check if SonarLint.xml contains the rule key on CompilationStart
+        /// to determine whether to run the analysis or not. SonarLint.xml is added by Scanner for MSBuild
+        /// and not by SonarLint, hence the hotspots run only when run through the CLI.
+        /// </summary>
+        public static IAnalyzerConfiguration Hotspot { get; } =
+            new HotspotConfiguration();
 
-        private static readonly Lazy<IAnalyzerConfiguration> alwaysEnabledConfiguration =
-            new Lazy<IAnalyzerConfiguration>(() => new AlwaysEnabledConfiguration());
-
-        public static IAnalyzerConfiguration Hotspot =>
-            hotspotConfiguration.Value;
-
-        public static IAnalyzerConfiguration AlwaysEnabled =>
-            alwaysEnabledConfiguration.Value;
+        public static IAnalyzerConfiguration AlwaysEnabled { get; } =
+            new AlwaysEnabledConfiguration();
 
         private class AlwaysEnabledConfiguration : IAnalyzerConfiguration
         {
-            public void Initialize(AnalyzerOptions options) { }
+            public void Initialize(AnalyzerOptions options)
+            {
+                // Ignore options because we always return true for IsEnabled
+            }
 
             public bool IsEnabled(string ruleKey) => true;
         }
 
+        /// <summary>
+        /// Singleton to hold the configuration for hotspot rules.
+        /// </summary>
         private class HotspotConfiguration : IAnalyzerConfiguration
         {
+            private bool isInitialized = false;
             private HashSet<string> enabledRules;
 
-            // This class is a singleton and there could be many rules that check if they are
-            // enabled simultaneously and since the XML loading is an IO operation (e.g. slow)
-            // we lock until it completes to prevent rules from wrongly deciding that they are
-            // disabled while the XML is loaded.
+            /// <summary>
+            /// There could be many rules that check if they are enabled simultaneously and since
+            /// the XML loading is an IO operation (e.g. slow) we lock until it completes to prevent
+            /// rules from wrongly deciding that they are disabled while the XML is loaded.
+            /// </summary>
             private static readonly object @lock = new object();
 
-            public bool IsEnabled(string ruleKey) =>
-                enabledRules.Contains(ruleKey);
+            public bool IsEnabled(string ruleKey)
+            {
+                if (!isInitialized)
+                {
+                    throw new InvalidOperationException("Call Initialize() before calling IsEnabled().");
+                }
+                return enabledRules != null
+                    && enabledRules.Contains(ruleKey);
+            }
 
             public void Initialize(AnalyzerOptions options)
             {
-                if (enabledRules != null)
+                if (isInitialized)
                 {
                     return;
                 }
 
                 lock (@lock)
                 {
-                    if (enabledRules != null)
+                    if (isInitialized)
                     {
                         return;
                     }
 
-                    enabledRules = new HashSet<string>();
+                    isInitialized = true;
 
-                    var sonarLintAdditionalFile = options.AdditionalFiles
-                        .FirstOrDefault(f => ParameterLoader.ConfigurationFilePathMatchesExpected(f.Path));
-                    if (sonarLintAdditionalFile != null)
+                    var sonarLintXml = options.AdditionalFiles
+                        .FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path));
+
+                    if (sonarLintXml == null)
                     {
-                        var sonarLintXml = XDocument.Load(sonarLintAdditionalFile.Path);
-
-                        var rulesInXml = sonarLintXml.Descendants("Rule")
-                            .Select(r => r.Element("Key")?.Value)
-                            .WhereNotNull();
-
-                        enabledRules.UnionWith(rulesInXml);
+                        return;
                     }
+
+                    var document = XDocument.Load(sonarLintXml.Path);
+
+                    enabledRules = document.Descendants("Rule")
+                        .Select(r => r.Element("Key")?.Value)
+                        .WhereNotNull()
+                        .ToHashSet();
                 }
             }
         }

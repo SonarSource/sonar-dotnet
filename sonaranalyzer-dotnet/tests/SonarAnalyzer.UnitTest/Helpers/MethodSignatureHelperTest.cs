@@ -363,7 +363,7 @@ End Namespace
         private static void CheckMatch(bool checkDerived, bool expectedOutcome, InvocationContext invocationContext,
             SnippetCompiler snippet, params MemberDescriptor[] targetMethodSignatures)
         {
-            var result = MemberDescriptorHelper.IsMatch(invocationContext.MethodName,
+            var result = MemberDescriptor.MatchesAny(invocationContext.MethodName,
                 invocationContext.MethodSymbol, checkDerived, targetMethodSignatures);
 
             result.Should().Be(expectedOutcome);

@@ -80,6 +80,6 @@ namespace SonarAnalyzer.Helpers
                 context.InvokedPropertySymbol.Value.ContainingType.DerivesOrImplementsAny(immutableTypes);
         }
 
-        public abstract ElementAccessCondition ArgumentAtIndexIsString(int index, string value);
+        public abstract ElementAccessCondition ArgumentAtIndexEquals(int index, string value);
     }
 }
