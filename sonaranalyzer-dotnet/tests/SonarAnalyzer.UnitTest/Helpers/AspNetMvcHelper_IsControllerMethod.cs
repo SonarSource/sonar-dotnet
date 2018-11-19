@@ -40,10 +40,12 @@ public class Foo : System.Web.Mvc.Controller
     protected void ProtectedFoo() { }
     internal void InternalFoo() { }
     private void PrivateFoo() { }
-    private class Bar : System.Web.Mvb.Controller
+    private class Bar : System.Web.Mvc.Controller
     {
         public void InnerFoo() { }
     }
+    [System.Web.Mvc.NonActionAttribute]
+    public void PublicNonAction() { }
 }
 ";
             var compilation = TestHelper.Compile(code,
@@ -54,12 +56,14 @@ public class Foo : System.Web.Mvc.Controller
             var internalFoo = compilation.GetMethodSymbol("InternalFoo");
             var privateFoo = compilation.GetMethodSymbol("PrivateFoo");
             var innerFoo = compilation.GetMethodSymbol("InnerFoo");
+            var publicNonAction = compilation.GetMethodSymbol("PublicNonAction");
 
             AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(true);
             AspNetMvcHelper.IsControllerMethod(protectedFoo).Should().Be(false);
             AspNetMvcHelper.IsControllerMethod(internalFoo).Should().Be(false);
             AspNetMvcHelper.IsControllerMethod(privateFoo).Should().Be(false);
             AspNetMvcHelper.IsControllerMethod(innerFoo).Should().Be(false);
+            AspNetMvcHelper.IsControllerMethod(publicNonAction).Should().Be(false);
         }
 
         [DataTestMethod]
@@ -71,6 +75,8 @@ public class Foo : System.Web.Mvc.Controller
 public class Foo : System.Web.Mvc.Controller
 {
     public void PublicFoo() { }
+    [System.Web.Mvc.NonActionAttribute]
+    public void PublicNonAction() { }
 }
 public class Controller
 {
@@ -87,44 +93,47 @@ public class MyController : Controller
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
             var publicBar = compilation.GetMethodSymbol("PublicBar");
             var publicDiz = compilation.GetMethodSymbol("PublicDiz");
+            var publicNonAction = compilation.GetMethodSymbol("PublicNonAction");
 
             AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(true);
             AspNetMvcHelper.IsControllerMethod(publicBar).Should().Be(false);
             AspNetMvcHelper.IsControllerMethod(publicDiz).Should().Be(false);
+            AspNetMvcHelper.IsControllerMethod(publicNonAction).Should().Be(false);
         }
 
         [DataTestMethod]
-        [DataRow("3.0.20105.1")]
+        [DataRow("2.1.3")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void Methods_In_Classes_With_ControllerAttribute_Are_EntryPoints(string aspNetMvcVersion)
         {
             const string code = @"
-// The Attribute suffix is required because we don't have a reference
-// to ASP.NET Core and we cannot do type checking in the test project.
-// We will need to convert this test project to .NET Core to do that.
 [Microsoft.AspNetCore.Mvc.ControllerAttribute]
 public class Foo
 {
     public void PublicFoo() { }
+    [Microsoft.AspNetCore.Mvc.NonActionAttribute]
+    public void PublicNonAction() { }
 }
 ";
             var compilation = TestHelper.Compile(code,
-                additionalReferences:  NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion).ToArray());
+                additionalReferences:
+                    FrameworkMetadataReference.Netstandard
+                        .Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion))
+                        .ToArray());
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
+            var publicNonAction = compilation.GetMethodSymbol("PublicNonAction");
 
             AspNetMvcHelper.IsControllerMethod(publicFoo).Should().Be(true);
+            AspNetMvcHelper.IsControllerMethod(publicNonAction).Should().Be(false);
         }
 
         [DataTestMethod]
-        [DataRow("3.0.20105.1")]
+        [DataRow("2.1.3")]
         [DataRow(Constants.NuGetLatestVersion)]
         public void Methods_In_Classes_With_NonControllerAttribute_Are_Not_EntryPoints(string aspNetMvcVersion)
         {
             const string code = @"
-// The Attribute suffix is required because we don't have a reference
-// to ASP.NET Core and we cannot do type checking in the test project.
-// We will need to convert this test project to .NET Core to do that.
 [Microsoft.AspNetCore.Mvc.NonControllerAttribute]
 public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
 {
@@ -132,7 +141,10 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
 }
 ";
             var compilation = TestHelper.Compile(code,
-                additionalReferences:  NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion).ToArray());
+                additionalReferences:
+                    FrameworkMetadataReference.Netstandard
+                        .Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion))
+                        .ToArray());
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
 
