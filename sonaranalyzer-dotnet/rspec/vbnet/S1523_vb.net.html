@@ -65,7 +65,6 @@ Class TestReflection
 
         Dim types = asm.GetTypes() ' Questionable
         types = asm.GetExportedTypes() ' Questionable
-        types = asm.GetForwardedTypes() ' Questionable
 
         types = type.GetNestedTypes() ' Questionable
         Dim methods = type.GetMethods() ' Questionable
@@ -75,14 +74,14 @@ Class TestReflection
         members = type.GetMember(methodName) ' Questionable
         members = type.GetDefaultMembers() ' Questionable
 
-        type.InvokeMember(...) ' Questionable
+        type.InvokeMember(...) ' Questionable, when the method name is provided as a string
         asm.CreateInstance(typeName) ' Questionable
 
         type = Type.ReflectionOnlyGetType(typeName, True, True) ' This is OK as the resulting type is not executable.
 
-        Activator.CreateComInstanceFrom(...) ' Questionable
-        Activator.CreateInstance(...) ' Questionable
-        Activator.CreateInstanceFrom(...) ' Questionable
+        Activator.CreateComInstanceFrom(...) ' Questionable, when the type name is provided as a string
+        Activator.CreateInstance(...) ' Questionable, when the type name is provided as a string
+        Activator.CreateInstanceFrom(...) ' Questionable, when the type name is provided as a string
         Activator.CreateInstance(Of ...)() ' OK - can only be created from a referenced type
 
     End Sub

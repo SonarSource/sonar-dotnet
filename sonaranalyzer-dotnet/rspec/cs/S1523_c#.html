@@ -38,13 +38,13 @@ class TestReflection
 {
     public static void Run(string typeName, string methodName, string fieldName, string propertyName, string moduleName)
     {
-        Assembly.Load(...) // Questionable
-        Assembly.LoadFile(...) // Questionable
-        Assembly.LoadFrom(...) // Questionable
-        Assembly.LoadWithPartialName(...) // Questionable + deprecated
+        Assembly.Load(...); // Questionable
+        Assembly.LoadFile(...); // Questionable
+        Assembly.LoadFrom(...); // Questionable
+        Assembly.LoadWithPartialName(...); // Questionable + deprecated
 
-        Assembly.ReflectionOnlyLoad(...)  // This is OK as the resulting type is not executable.
-        Assembly.ReflectionOnlyLoadFrom(...) // This is OK as the resulting type is not executable.
+        Assembly.ReflectionOnlyLoad(...);  // This is OK as the resulting type is not executable.
+        Assembly.ReflectionOnlyLoadFrom(...); // This is OK as the resulting type is not executable.
 
         Assembly assembly = typeof(TestReflection).Assembly;
 
@@ -66,7 +66,6 @@ class TestReflection
 
         Type[] types = assembly.GetTypes(); // Questionable
         types = assembly.GetExportedTypes(); // Questionable
-        types = assembly.GetForwardedTypes(); // Questionable
 
         types = type.GetNestedTypes(); // Questionable
         MethodInfo[] methods = type.GetMethods(); // Questionable
@@ -76,16 +75,16 @@ class TestReflection
         members = type.GetMember(methodName); // Questionable
         members = type.GetDefaultMembers(); // Questionable
 
-        type.InvokeMember(...); // Questionable
+        type.InvokeMember(...); // Questionable, when the method name is provided as a string
 
         assembly.CreateInstance(typeName); // Questionable
 
 
         type = Type.ReflectionOnlyGetType(typeName,true, true); // This is OK as the resulting type is not executable.
 
-        Activator.CreateComInstanceFrom(...); // Questionable
-        Activator.CreateInstance(...); // Questionable
-        Activator.CreateInstanceFrom(...); // Questionable
+        Activator.CreateComInstanceFrom(...); // Questionable, when the type name is provided as a string
+        Activator.CreateInstance(...); // Questionable, when the type name is provided as a string
+        Activator.CreateInstanceFrom(...); // Questionable, when the type name is provided as a string
         Activator.CreateInstance&lt;&gt;(); // OK - can only be created from a referenced type
     }
 }
