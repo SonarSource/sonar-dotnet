@@ -34,67 +34,70 @@ namespace SonarAnalyzer.Rules
         {
             // Special case - Assembly.Load
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.System_Reflection_Assembly, "Load"),
-                    new MethodSignature(KnownType.System_Reflection_Assembly, "LoadFile"),
-                    new MethodSignature(KnownType.System_Reflection_Assembly, "LoadFrom"),
-                    new MethodSignature(KnownType.System_Reflection_Assembly, "LoadWithPartialName")),
-                InvocationTracker.IsStatic()
-                );
+                InvocationTracker.MatchMethod(
+                    new MemberDescriptor(KnownType.System_Reflection_Assembly, "Load"),
+                    new MemberDescriptor(KnownType.System_Reflection_Assembly, "LoadFile"),
+                    new MemberDescriptor(KnownType.System_Reflection_Assembly, "LoadFrom"),
+                    new MemberDescriptor(KnownType.System_Reflection_Assembly, "LoadWithPartialName")),
+                InvocationTracker.MethodIsStatic());
 
             // Special case - Type.GetType() without paramters is ok, but
             // and Type.GetType(...) with parameters is not ok
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.System_Type, "GetType")),
-                InvocationTracker.IsStatic(),
-                InvocationTracker.HasParameters(),
+                InvocationTracker.MatchMethod(
+                    new MemberDescriptor(KnownType.System_Type, "GetType")),
+                InvocationTracker.MethodIsStatic(),
+                InvocationTracker.MethodHasParameters(),
                 Conditions.ExceptWhen(
-                    Conditions.And(InvocationTracker.FirstParameterIsString,
-                    InvocationTracker.FirstParameterIsConstant())));
+                    Conditions.And(
+                        InvocationTracker.ArgumentAtIndexIs(0, KnownType.System_String),
+                        InvocationTracker.ArgumentAtIndexIsConstant(0))));
 
             // Special case - Activator.CreateXXX
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.System_Activator, "CreateComInstanceFrom"),
-                    new MethodSignature(KnownType.System_Activator, "CreateInstance"),
-                    new MethodSignature(KnownType.System_Activator, "CreateInstanceFrom")),
-                InvocationTracker.IsStatic(),
-                InvocationTracker.HasParameters(),
-                Conditions.ExceptWhen(InvocationTracker.FirstParameterIsOfType(KnownType.System_Type)));
+                InvocationTracker.MatchMethod(
+                    new MemberDescriptor(KnownType.System_Activator, "CreateComInstanceFrom"),
+                    new MemberDescriptor(KnownType.System_Activator, "CreateInstance"),
+                    new MemberDescriptor(KnownType.System_Activator, "CreateInstanceFrom")),
+                InvocationTracker.MethodIsStatic(),
+                InvocationTracker.MethodHasParameters(),
+                Conditions.ExceptWhen(
+                    InvocationTracker.ArgumentAtIndexIs(0, KnownType.System_Type)));
 
             // All other method invocations
             InvocationTracker.Track(context,
-                Conditions.ExceptWhen(InvocationTracker.IsTypeOfExpression()),
-                InvocationTracker.MatchSimpleNames(
-                    // Methods on assembly that are safe to call with constants
-                    new MethodSignature(KnownType.System_Reflection_Assembly, "GetType"),
-                    new MethodSignature(KnownType.System_Reflection_Assembly, "GetTypes"),
-                    new MethodSignature(KnownType.System_Reflection_Assembly, "GetModule"),
-                    new MethodSignature(KnownType.System_Reflection_Assembly, "GetLoadedModules"),
-                    new MethodSignature(KnownType.System_Reflection_Assembly, "GetModules"),
-                    new MethodSignature(KnownType.System_Reflection_Assembly, "CreateInstance"),
-                    new MethodSignature(KnownType.System_Reflection_Assembly, "GetExportedTypes"),
-
-                    new MethodSignature(KnownType.System_Type, "GetInterface"),
-                    new MethodSignature(KnownType.System_Type, "GetNestedType"),
-                    new MethodSignature(KnownType.System_Type, "GetNestedTypes"),
-                    new MethodSignature(KnownType.System_Type, "GetInterfaces"),
-                    new MethodSignature(KnownType.System_Type, "GetMethod"),
-                    new MethodSignature(KnownType.System_Type, "GetField"),
-                    new MethodSignature(KnownType.System_Type, "GetProperty"),
-                    new MethodSignature(KnownType.System_Type, "GetMember"),
-
-                    new MethodSignature(KnownType.System_Type, "GetMethods"),
-                    new MethodSignature(KnownType.System_Type, "GetFields"),
-                    new MethodSignature(KnownType.System_Type, "GetProperties"),
-                    new MethodSignature(KnownType.System_Type, "GetMembers"),
-
-                    new MethodSignature(KnownType.System_Type, "GetDefaultMembers"),
-                    new MethodSignature(KnownType.System_Type, "InvokeMember")),
                 Conditions.ExceptWhen(
-                    Conditions.And(InvocationTracker.FirstParameterIsString,
-                    InvocationTracker.FirstParameterIsConstant())));
+                    InvocationTracker.IsTypeOfExpression()),
+                InvocationTracker.MatchMethod(
+                    // Methods on assembly that are safe to call with constants
+                    new MemberDescriptor(KnownType.System_Reflection_Assembly, "GetType"),
+                    new MemberDescriptor(KnownType.System_Reflection_Assembly, "GetTypes"),
+                    new MemberDescriptor(KnownType.System_Reflection_Assembly, "GetModule"),
+                    new MemberDescriptor(KnownType.System_Reflection_Assembly, "GetLoadedModules"),
+                    new MemberDescriptor(KnownType.System_Reflection_Assembly, "GetModules"),
+                    new MemberDescriptor(KnownType.System_Reflection_Assembly, "CreateInstance"),
+                    new MemberDescriptor(KnownType.System_Reflection_Assembly, "GetExportedTypes"),
+
+                    new MemberDescriptor(KnownType.System_Type, "GetInterface"),
+                    new MemberDescriptor(KnownType.System_Type, "GetNestedType"),
+                    new MemberDescriptor(KnownType.System_Type, "GetNestedTypes"),
+                    new MemberDescriptor(KnownType.System_Type, "GetInterfaces"),
+                    new MemberDescriptor(KnownType.System_Type, "GetMethod"),
+                    new MemberDescriptor(KnownType.System_Type, "GetField"),
+                    new MemberDescriptor(KnownType.System_Type, "GetProperty"),
+                    new MemberDescriptor(KnownType.System_Type, "GetMember"),
+
+                    new MemberDescriptor(KnownType.System_Type, "GetMethods"),
+                    new MemberDescriptor(KnownType.System_Type, "GetFields"),
+                    new MemberDescriptor(KnownType.System_Type, "GetProperties"),
+                    new MemberDescriptor(KnownType.System_Type, "GetMembers"),
+
+                    new MemberDescriptor(KnownType.System_Type, "GetDefaultMembers"),
+                    new MemberDescriptor(KnownType.System_Type, "InvokeMember")),
+                Conditions.ExceptWhen(
+                    Conditions.And(
+                        InvocationTracker.ArgumentAtIndexIs(0, KnownType.System_String),
+                        InvocationTracker.ArgumentAtIndexIsConstant(0))));
         }
     }
 }

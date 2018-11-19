@@ -27,16 +27,16 @@ namespace SonarAnalyzer.Rules
     {
         protected const string DiagnosticId = "S4818";
         protected const string MessageFormat = "Make sure that sockets are used safely here.";
+
         protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructors(
+                ObjectCreationTracker.MatchConstructor(
                     KnownType.System_Net_Sockets_Socket,
                     KnownType.System_Net_Sockets_TcpClient,
-                    KnownType.System_Net_Sockets_UdpClient)
-                );
+                    KnownType.System_Net_Sockets_UdpClient));
         }
     }
 }

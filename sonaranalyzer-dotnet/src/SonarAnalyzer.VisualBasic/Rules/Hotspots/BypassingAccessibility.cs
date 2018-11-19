@@ -39,13 +39,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
             ImmutableArray.Create(rule);
 
         public BypassingAccessibility()
-            : this(new DefaultAnalyzerConfiguration())
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        internal /*for testing*/ BypassingAccessibility(IAnalyzerConfiguration analysisConfiguration)
+        internal /*for testing*/ BypassingAccessibility(IAnalyzerConfiguration analyzerConfiguration)
         {
-            FieldAccessTracker = new VisualBasicFieldAccessTracker(analysisConfiguration, rule);
+            FieldAccessTracker = new VisualBasicFieldAccessTracker(analyzerConfiguration, rule);
         }
     }
 }

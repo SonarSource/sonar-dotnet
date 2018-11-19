@@ -39,17 +39,17 @@ namespace SonarAnalyzer.Rules.VisualBasic
             ImmutableArray.Create(rule);
 
         public ControllingPermissions()
-            : this(new DefaultAnalyzerConfiguration())
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        internal /*for testing*/ ControllingPermissions(IAnalyzerConfiguration analysisConfiguration)
+        internal /*for testing*/ ControllingPermissions(IAnalyzerConfiguration analyzerConfiguration)
         {
-            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analysisConfiguration, rule);
-            InvocationTracker = new VisualBasicInvocationTracker(analysisConfiguration, rule);
-            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analysisConfiguration, rule);
-            MethodDeclarationTracker = new VisualBasicMethodDeclarationTracker(analysisConfiguration, rule);
-            BaseTypeTracker = new VisualBasicBaseTypeTracker(analysisConfiguration, rule);
+            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, rule);
+            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
+            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, rule);
+            MethodDeclarationTracker = new VisualBasicMethodDeclarationTracker(analyzerConfiguration, rule);
+            BaseTypeTracker = new VisualBasicBaseTypeTracker(analyzerConfiguration, rule);
         }
     }
 }

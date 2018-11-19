@@ -40,14 +40,14 @@ namespace SonarAnalyzer.Rules.CSharp
             ImmutableArray.Create(rule);
 
         public EncryptingData()
-            : this(new DefaultAnalyzerConfiguration())
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        internal /*for testing*/ EncryptingData(IAnalyzerConfiguration analysisConfiguration)
+        internal /*for testing*/ EncryptingData(IAnalyzerConfiguration analyzerConfiguration)
         {
-            InvocationTracker = new CSharpInvocationTracker(analysisConfiguration, rule);
-            BaseTypeTracker = new CSharpBaseTypeTracker(analysisConfiguration, rule);
+            InvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, rule);
+            BaseTypeTracker = new CSharpBaseTypeTracker(analyzerConfiguration, rule);
         }
     }
 }

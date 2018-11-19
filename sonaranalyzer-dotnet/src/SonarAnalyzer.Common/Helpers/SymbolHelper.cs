@@ -274,12 +274,5 @@ namespace SonarAnalyzer.Helpers
             var symbolType = semanticModel.GetDeclaredSymbol(syntaxNode)?.GetSymbolType();
             return symbolType.Is(knownType);
         }
-
-        public static bool ArgumentAtIndexIs(this IMethodSymbol method, int index, KnownType type) =>
-            method.Parameters.Length > index &&
-            method.Parameters[index].Type.Is(type);
-
-        public static bool HasArgumentOfType(this IMethodSymbol method, params KnownType[] types) =>
-            method.Parameters.Any(p => p.Type.IsAny(types));
     }
 }

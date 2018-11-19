@@ -30,12 +30,12 @@ namespace SonarAnalyzer.Rules
         internal const string DiagnosticId = "S3889";
         protected const string MessageFormat = "Refactor the code to remove this use of '{0}'.";
 
-        private readonly IEnumerable<MethodSignature> invalidMethods = new List<MethodSignature>
+        private readonly IEnumerable<MemberDescriptor> invalidMethods = new List<MemberDescriptor>
         {
-            new MethodSignature(KnownType.System_Threading_Thread, "Suspend"),
-            new MethodSignature(KnownType.System_Threading_Thread, "Resume")
+            new MemberDescriptor(KnownType.System_Threading_Thread, "Suspend"),
+            new MemberDescriptor(KnownType.System_Threading_Thread, "Resume")
         };
 
-        internal override IEnumerable<MethodSignature> CheckedMethods => invalidMethods;
+        internal override IEnumerable<MemberDescriptor> CheckedMethods => invalidMethods;
     }
 }

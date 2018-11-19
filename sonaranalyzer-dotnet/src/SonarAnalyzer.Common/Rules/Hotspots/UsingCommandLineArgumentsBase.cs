@@ -33,7 +33,6 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context)
         {
             MethodDeclarationTracker.Track(context,
-                MethodDeclarationTracker.MatchSimpleNames("Main"),
                 MethodDeclarationTracker.IsMainMethod(),
                 MethodDeclarationTracker.ParameterAtIndexIsUsed(0));
         }

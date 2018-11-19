@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
@@ -42,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void HandlingFiles_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\HandlingFiles.cs",
-                new CSharp.HandlingFiles(new TestAnalyzerConfiguration(null, "S4797")),
+                new CSharp.HandlingFiles(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: AdditionalReferences);
         }
 
@@ -60,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void HandlingFiles_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\HandlingFiles.vb",
-                new VisualBasic.HandlingFiles(new TestAnalyzerConfiguration(null, "S4797")),
+                new VisualBasic.HandlingFiles(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: AdditionalReferences);
         }
 

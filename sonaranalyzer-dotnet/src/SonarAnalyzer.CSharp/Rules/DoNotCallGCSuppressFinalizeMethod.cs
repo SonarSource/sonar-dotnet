@@ -40,14 +40,14 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly IEnumerable<MethodSignature> checkedMethods = new List<MethodSignature>
+        private static readonly IEnumerable<MemberDescriptor> checkedMethods = new List<MemberDescriptor>
         {
-            new MethodSignature(KnownType.System_GC, "SuppressFinalize")
+            new MemberDescriptor(KnownType.System_GC, "SuppressFinalize")
         };
-        internal override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
+        internal override IEnumerable<MemberDescriptor> CheckedMethods => checkedMethods;
 
         protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation,
-            SemanticModel semanticModel, MethodSignature methodSignature)
+            SemanticModel semanticModel, MemberDescriptor memberDescriptor)
         {
             var methodDeclaration = invocation.FirstAncestorOrSelf<MethodDeclarationSyntax>();
             if (methodDeclaration == null)

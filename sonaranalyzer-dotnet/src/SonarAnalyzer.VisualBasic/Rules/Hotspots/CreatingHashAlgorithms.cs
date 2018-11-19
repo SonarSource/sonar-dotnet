@@ -39,15 +39,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
             ImmutableArray.Create(rule);
 
         public CreatingHashAlgorithms()
-            : this(new DefaultAnalyzerConfiguration())
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        internal /*for testing*/ CreatingHashAlgorithms(IAnalyzerConfiguration analysisConfiguration)
+        internal /*for testing*/ CreatingHashAlgorithms(IAnalyzerConfiguration analyzerConfiguration)
         {
-            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analysisConfiguration, rule);
-            InvocationTracker = new VisualBasicInvocationTracker(analysisConfiguration, rule);
-            BaseTypeTracker = new VisualBasicBaseTypeTracker(analysisConfiguration, rule);
+            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, rule);
+            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
+            BaseTypeTracker = new VisualBasicBaseTypeTracker(analyzerConfiguration, rule);
         }
     }
 }

@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
             ImmutableArray.Create(rule);
 
         public UsingRegularExpressions() :
-            this(new DefaultAnalyzerConfiguration())
+            this(AnalyzerConfiguration.Hotspot)
         {
         }
 

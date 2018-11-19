@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UsingCommandLineArguments_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\UsingCommandLineArguments.cs",
-                new CSharp.UsingCommandLineArguments(new TestAnalyzerConfiguration(null, "S4823")));
+                new CSharp.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]
@@ -62,7 +62,7 @@ partial class Program1
 
             DiagnosticVerifier.Verify(
                 compilation,
-                new CSharp.UsingCommandLineArguments(new TestAnalyzerConfiguration(null, "S4823")),
+                new CSharp.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled),
                 CompilationErrorBehavior.Default);
         }
 
@@ -79,7 +79,7 @@ partial class Program1
         public void UsingCommandLineArguments_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\UsingCommandLineArguments.vb",
-                new VisualBasic.UsingCommandLineArguments(new TestAnalyzerConfiguration(null, "S4823")));
+                new VisualBasic.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]
@@ -104,7 +104,7 @@ End Class
 
             DiagnosticVerifier.Verify(
                 compilation,
-                new VisualBasic.UsingCommandLineArguments(new TestAnalyzerConfiguration(null, "S4823")),
+                new VisualBasic.UsingCommandLineArguments(AnalyzerConfiguration.AlwaysEnabled),
                 CompilationErrorBehavior.Default);
         }
 

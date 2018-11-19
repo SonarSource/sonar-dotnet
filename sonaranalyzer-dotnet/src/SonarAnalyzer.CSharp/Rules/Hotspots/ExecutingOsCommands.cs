@@ -39,15 +39,15 @@ namespace SonarAnalyzer.Rules.CSharp
             ImmutableArray.Create(rule);
 
         public ExecutingOsCommands()
-            : this(new DefaultAnalyzerConfiguration())
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        internal /*for testing*/ ExecutingOsCommands(IAnalyzerConfiguration analysisConfiguration)
+        internal /*for testing*/ ExecutingOsCommands(IAnalyzerConfiguration analyzerConfiguration)
         {
-            InvocationTracker = new CSharpInvocationTracker(analysisConfiguration, rule);
-            PropertyAccessTracker = new CSharpPropertyAccessTracker(analysisConfiguration, rule);
-            ObjectCreationTracker = new CSharpObjectCreationTracker(analysisConfiguration, rule);
+            InvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, rule);
+            PropertyAccessTracker = new CSharpPropertyAccessTracker(analyzerConfiguration, rule);
+            ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, rule);
         }
     }
 }

@@ -21,6 +21,7 @@
 extern alias csharp;
 extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
@@ -34,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExecutingOsCommands_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingOsCommands.cs",
-                new CSharp.ExecutingOsCommands(new TestAnalyzerConfiguration(null, "S4721")));
+                new CSharp.ExecutingOsCommands(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]
@@ -50,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExecutingOsCommands_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingOsCommands.vb",
-                new VisualBasic.ExecutingOsCommands(new TestAnalyzerConfiguration(null, "S4721")));
+                new VisualBasic.ExecutingOsCommands(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]

@@ -29,12 +29,12 @@ namespace SonarAnalyzer.Rules
     public abstract class DoNotCallMethodsBase<TInvocationExpressionSyntax> : SonarDiagnosticAnalyzer
         where TInvocationExpressionSyntax : SyntaxNode
     {
-        internal abstract IEnumerable<MethodSignature> CheckedMethods { get; }
+        internal abstract IEnumerable<MemberDescriptor> CheckedMethods { get; }
 
         protected abstract SyntaxToken? GetMethodCallIdentifier(TInvocationExpressionSyntax invocation);
 
         protected virtual bool ShouldReportOnMethodCall(TInvocationExpressionSyntax invocation,
-            SemanticModel semanticModel, MethodSignature methodSignature) => true;
+            SemanticModel semanticModel, MemberDescriptor memberDescriptor) => true;
 
         protected void AnalyzeInvocation(SyntaxNodeAnalysisContext analysisContext)
         {
@@ -66,14 +66,14 @@ namespace SonarAnalyzer.Rules
             if (ShouldReportOnMethodCall(invocation, analysisContext.SemanticModel, disallowedMethodSignature))
             {
                 analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], identifier.Value.GetLocation(),
-                    disallowedMethodSignature.ToShortName()));
+                    disallowedMethodSignature.ToString()));
             }
         }
 
         protected virtual bool IsInValidContext(TInvocationExpressionSyntax invocationSyntax,
             SemanticModel semanticModel) => true;
 
-        private MethodSignature FindDisallowedMethodSignature(SyntaxToken identifier, ISymbol methodCallSymbol)
+        private MemberDescriptor FindDisallowedMethodSignature(SyntaxToken identifier, ISymbol methodCallSymbol)
         {
             return CheckedMethods
                 .Where(method => method.Name.Equals(identifier.ValueText))

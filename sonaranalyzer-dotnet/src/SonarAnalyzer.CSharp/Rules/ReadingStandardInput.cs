@@ -39,14 +39,14 @@ namespace SonarAnalyzer.Rules.CSharp
             ImmutableArray.Create(rule);
 
         public ReadingStandardInput()
-            : this (new DefaultAnalyzerConfiguration())
+            : this (AnalyzerConfiguration.Hotspot)
         {
         }
 
-        internal /*for testing*/ ReadingStandardInput(IAnalyzerConfiguration analysisConfiguration)
+        internal /*for testing*/ ReadingStandardInput(IAnalyzerConfiguration analyzerConfiguration)
         {
-            InvocationTracker = new CSharpInvocationTracker(analysisConfiguration, rule);
-            PropertyAccessTracker = new CSharpPropertyAccessTracker(analysisConfiguration, rule); 
+            InvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, rule);
+            PropertyAccessTracker = new CSharpPropertyAccessTracker(analyzerConfiguration, rule); 
         }
 
         protected override bool WhenResultIsNotIgnored(InvocationContext context) =>

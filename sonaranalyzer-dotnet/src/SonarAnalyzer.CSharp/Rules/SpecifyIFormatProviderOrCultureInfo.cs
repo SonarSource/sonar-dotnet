@@ -53,17 +53,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Object
             );
 
-        private static readonly ISet<MethodSignature> whitelistMethods = new HashSet<MethodSignature>
+        private static readonly ISet<MemberDescriptor> whitelistMethods = new HashSet<MemberDescriptor>
         {
-            new MethodSignature(KnownType.System_Activator, "CreateInstance"),
-            new MethodSignature(KnownType.Sytem_Resources_ResourceManager, "GetObject"),
-            new MethodSignature(KnownType.Sytem_Resources_ResourceManager, "GetString"),
+            new MemberDescriptor(KnownType.System_Activator, "CreateInstance"),
+            new MemberDescriptor(KnownType.Sytem_Resources_ResourceManager, "GetObject"),
+            new MemberDescriptor(KnownType.Sytem_Resources_ResourceManager, "GetString"),
         };
 
-        private static readonly ISet<MethodSignature> blacklistMethods = new HashSet<MethodSignature>
+        private static readonly ISet<MemberDescriptor> blacklistMethods = new HashSet<MemberDescriptor>
         {
-            new MethodSignature(KnownType.System_Char, "ToUpper"),
-            new MethodSignature(KnownType.System_Char, "ToLower"),
+            new MemberDescriptor(KnownType.System_Char, "ToUpper"),
+            new MemberDescriptor(KnownType.System_Char, "ToLower"),
         };
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -105,9 +105,9 @@ namespace SonarAnalyzer.Rules.CSharp
         public static bool HasAnyFormatOrCultureParameter(ISymbol method) =>
             method.GetParameters().Any(p => p.Type.IsAny(formatAndClutureTypes));
 
-        private static bool Matches(MethodSignature methodSignature, IMethodSymbol methodSymbol) =>
+        private static bool Matches(MemberDescriptor memberDescriptor, IMethodSymbol methodSymbol) =>
             methodSymbol != null &&
-            methodSymbol.ContainingType.Is(methodSignature.ContainingType) &&
-            methodSymbol.Name == methodSignature.Name;
+            methodSymbol.ContainingType.Is(memberDescriptor.ContainingType) &&
+            methodSymbol.Name == memberDescriptor.Name;
     }
 }

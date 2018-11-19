@@ -18,13 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -33,12 +31,12 @@ namespace SonarAnalyzer.Rules
     public abstract class ObjectShouldBeInitializedCorrectlyBase : HotspotDiagnosticAnalyzer
     {
         protected ObjectShouldBeInitializedCorrectlyBase()
-            : base(new AlwaysEnabledAnalyzerConfiguration())
+            : base(AnalyzerConfiguration.AlwaysEnabled)
         {
         }
 
-        protected ObjectShouldBeInitializedCorrectlyBase(IAnalyzerConfiguration analysisConfiguration)
-            : base(analysisConfiguration)
+        protected ObjectShouldBeInitializedCorrectlyBase(IAnalyzerConfiguration analyzerConfiguration)
+            : base(analyzerConfiguration)
         {
         }
 
@@ -219,19 +217,5 @@ namespace SonarAnalyzer.Rules
 
         private static IEnumerable<StatementSyntax> GetNextStatements(StatementSyntax statement) =>
             statement.Parent.ChildNodes().OfType<StatementSyntax>().SkipWhile(x => x != statement).Skip(1);
-
-        private class AlwaysEnabledAnalyzerConfiguration : IAnalyzerConfiguration
-        {
-            public string ProjectOutputPath => string.Empty;
-
-            public IReadOnlyCollection<string> EnabledRules { get; } = Array.Empty<string>();
-
-            public bool IsEnabled(string ruleKey) => true;
-
-            public void Read(AnalyzerOptions options)
-            {
-                // Do nothing
-            }
-        }
     }
 }

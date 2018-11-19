@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             ImmutableArray.Create(rule);
 
         public ConfiguringLoggers() :
-            this(new DefaultAnalyzerConfiguration())
+            this(AnalyzerConfiguration.Hotspot)
         {
         }
 

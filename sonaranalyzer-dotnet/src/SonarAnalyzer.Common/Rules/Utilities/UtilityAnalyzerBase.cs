@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules
         protected void ReadParameters(AnalyzerOptions options, string language)
         {
             var sonarLintAdditionalFile = options.AdditionalFiles
-                .FirstOrDefault(f => ParameterLoader.ConfigurationFilePathMatchesExpected(f.Path));
+                .FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path));
 
             var projectOutputAdditionalFile = options.AdditionalFiles
                 .FirstOrDefault(IsProjectOutput);

@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -29,12 +28,6 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4787";
         protected const string MessageFormat = "Make sure that encrypting data is safe here.";
 
-        private static readonly ImmutableArray<KnownType> forbiddenBaseTypes =
-            ImmutableArray.Create(
-                KnownType.System_Security_Cryptography_AsymmetricAlgorithm,
-                KnownType.System_Security_Cryptography_SymmetricAlgorithm
-            );
-
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
 
         protected BaseTypeTracker<TSyntaxKind> BaseTypeTracker { get; set; }
@@ -42,24 +35,23 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context)
         {
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
+                InvocationTracker.MatchMethod(
                     // "RSA" is the base class for all RSA algorithm implementations
-                    new MethodSignature(KnownType.System_Security_Cryptography_RSA, "Encrypt"),
-                    new MethodSignature(KnownType.System_Security_Cryptography_RSA, "EncryptValue"),
-
-                    new MethodSignature(KnownType.System_Security_Cryptography_RSA, "Decrypt"),
-                    new MethodSignature(KnownType.System_Security_Cryptography_RSA, "DecryptValue"),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "Encrypt"),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "EncryptValue"),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "Decrypt"),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "DecryptValue"),
 
                     // RSA methods added in NET Core 2.1
-                    new MethodSignature(KnownType.System_Security_Cryptography_RSA, "TryEncrypt"),
-                    new MethodSignature(KnownType.System_Security_Cryptography_RSA, "TryDecrypt"),
-
-                    new MethodSignature(KnownType.System_Security_Cryptography_SymmetricAlgorithm, "CreateEncryptor"),
-                    new MethodSignature(KnownType.System_Security_Cryptography_SymmetricAlgorithm, "CreateDecryptor"))
-                    );
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "TryEncrypt"),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "TryDecrypt"),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_SymmetricAlgorithm, "CreateEncryptor"),
+                    new MemberDescriptor(KnownType.System_Security_Cryptography_SymmetricAlgorithm, "CreateDecryptor")));
 
             BaseTypeTracker.Track(context,
-                BaseTypeTracker.WhenDerivesFrom(forbiddenBaseTypes));
+                BaseTypeTracker.MatchSubclassesOf(
+                    KnownType.System_Security_Cryptography_AsymmetricAlgorithm,
+                    KnownType.System_Security_Cryptography_SymmetricAlgorithm));
         }
     }
 }

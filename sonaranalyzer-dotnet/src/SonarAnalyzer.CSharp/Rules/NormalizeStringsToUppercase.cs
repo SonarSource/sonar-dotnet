@@ -40,18 +40,18 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly List<MethodSignature> checkedMethods = new List<MethodSignature>
+        private static readonly List<MemberDescriptor> checkedMethods = new List<MemberDescriptor>
         {
-            new MethodSignature(KnownType.System_Char, "ToLower"),
-            new MethodSignature(KnownType.System_String, "ToLower"),
-            new MethodSignature(KnownType.System_Char, "ToLowerInvariant"),
-            new MethodSignature(KnownType.System_String, "ToLowerInvariant"),
+            new MemberDescriptor(KnownType.System_Char, "ToLower"),
+            new MemberDescriptor(KnownType.System_String, "ToLower"),
+            new MemberDescriptor(KnownType.System_Char, "ToLowerInvariant"),
+            new MemberDescriptor(KnownType.System_String, "ToLowerInvariant"),
         };
 
-        internal override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
+        internal override IEnumerable<MemberDescriptor> CheckedMethods => checkedMethods;
 
         protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation,
-            SemanticModel semanticModel, MethodSignature methodSignature)
+            SemanticModel semanticModel, MemberDescriptor memberDescriptor)
         {
             var identifier = GetMethodCallIdentifier(invocation).Value.ValueText; // never null when we get here
             if (identifier == "ToLowerInvariant")
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             // ToLower and ToLowerInvariant are extension methods for string but not for char
-            var isExtensionMethod = methodSignature.ContainingType == KnownType.System_String;
+            var isExtensionMethod = memberDescriptor.ContainingType == KnownType.System_String;
 
             return invocation.ArgumentList != null &&
                 invocation.ArgumentList.Arguments.Count == (isExtensionMethod ? 1 : 2) &&

@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
@@ -459,22 +461,25 @@ namespace SonarAnalyzer.Helpers
 
         private readonly bool isSpecialType;
         private readonly SpecialType specialType;
+        private readonly Lazy<string> shortName;
 
         private KnownType(string typeName)
+            : this(SpecialType.None, typeName)
         {
-            TypeName = typeName;
-            this.specialType = SpecialType.None;
-            this.isSpecialType = false;
         }
 
         private KnownType(SpecialType specialType, string typeName)
         {
             TypeName = typeName;
+            this.shortName = new Lazy<string>(() => typeName.Split('.').Last());
             this.specialType = specialType;
-            this.isSpecialType = true;
+            this.isSpecialType = specialType != SpecialType.None;
         }
 
         public string TypeName { get; }
+
+        public string ShortName => shortName.Value;
+
         internal bool Matches(string type)
         {
             return !this.isSpecialType && TypeName == type;

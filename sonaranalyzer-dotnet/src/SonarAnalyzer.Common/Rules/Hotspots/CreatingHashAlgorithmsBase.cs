@@ -29,7 +29,9 @@ namespace SonarAnalyzer.Rules
         protected const string MessageFormat = "Make sure that hashing data is safe here.";
 
         protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
+
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set;  }
+
         protected BaseTypeTracker<TSyntaxKind> BaseTypeTracker { get; set; }
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -39,18 +41,10 @@ namespace SonarAnalyzer.Rules
 
             InvocationTracker.Track(context,
                 InvocationTracker.MethodNameIs("Create"),
-                InvocationTracker.WhenReturnTypeIs(KnownType.System_Security_Cryptography_HashAlgorithm)
-                );
+                InvocationTracker.MethodReturnTypeIs(KnownType.System_Security_Cryptography_HashAlgorithm));
 
             BaseTypeTracker.Track(context,
-                BaseTypeTracker.WhenDerivesFrom(KnownType.System_Security_Cryptography_HashAlgorithm));
+                BaseTypeTracker.MatchSubclassesOf(KnownType.System_Security_Cryptography_HashAlgorithm));
         }
-
-
-        #region Syntax-specific abstract methods
-
-        // Add abstract methods for language-specific checks here...
-
-        #endregion
     }
 }
