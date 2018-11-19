@@ -95,7 +95,7 @@ namespace NS
 
             symbol = this.testCode.GetPropertySymbol("IInterface.Property2");
             symbol.IsPubliclyAccessible().Should().BeTrue();
-            
+
             symbol = this.testCode.GetPropertySymbol("Derived1.Property");
             symbol.IsPubliclyAccessible().Should().BeFalse();
         }
@@ -179,7 +179,7 @@ namespace NS
             baseTypes = derived1Type.GetSelfAndBaseTypes().ToList();
             baseTypes.Should().HaveCount(3);
             baseTypes.Should().HaveElementAt(0, derived1Type);
-            baseTypes.Should().HaveElementAt(1, this.semanticModel.GetDeclaredSymbol(this.baseClassDeclaration) as INamedTypeSymbol);
+            baseTypes.Should().HaveElementAt(1, this.testCode.GetTypeSymbol("Base"));
             baseTypes.Should().HaveElementAt(2, objectType);
         }
 
