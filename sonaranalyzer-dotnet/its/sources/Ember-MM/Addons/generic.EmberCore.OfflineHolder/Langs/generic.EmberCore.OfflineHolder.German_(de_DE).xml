@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<string id="1">Lege eine DVD ein</string>
+	<string id="2">Bereite Daten vor</string>
+	<string id="3">Erzeuge Film</string>
+	<string id="4">Erzeuge Film</string>
+	<string id="5">Verschiebe Dateien</string>
+	<string id="6">Benenne Dateien um</string>
+	<string id="7">Offline Film Platzhalter erzeugt!</string>
+	<string id="8">Quellverzeichnis existiert nicht oder kann nicht gelesen werden: </string>
+	<string id="9">Quellverzeichnis</string>
+	<string id="10">Film (Verzeichn. Name)</string>
+	<string id="11">Platzhalter Bild</string>
+	<string id="12">Offline Medien Manager</string>
+	<string id="13">Offline Video hinzufügemn</string>
+	<string id="14">Zu Quelle hinzufügen:</string>
+	<string id="15">Platzhalter Verzeichn./Film Name:</string>
+	<string id="16">Suche auf IMDB</string>
+	<string id="17">Bulk Creator</string>
+	<string id="18">Kondition</string>
+	<string id="19">Anlegen</string>
+	<string id="20">Fanart als Platzhaltervideo benutzen</string>
+	<string id="21">Platzhalter Video Tagline:</string>
+	<string id="22">Text Farbe:</string>
+	<string id="23">Tagline Top:</string>
+	<string id="24">Platzhalter Video Format:</string>
+	<string id="25">Tagline Hintergrund benutzen</string>
+	<string id="26">Tagline Hintergrund Farbe:</string>
+	<string id="27">Ember Overlay benutzen</string>
+	<string id="28">Wähle Schriftart...</string>
+	<string id="29">Information</string>
+	<string id="30">Offline Media Manager</string>
+</strings>
+<!-- Rev2292 Edit by F089-->

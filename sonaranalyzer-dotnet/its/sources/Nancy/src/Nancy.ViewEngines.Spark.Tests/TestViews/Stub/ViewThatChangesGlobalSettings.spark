@@ -1,0 +1,6 @@
+﻿<use master="" />
+<div>default: ${title}</div>
+<set title='2+5'/>
+<div>7==${title}</div>
+
+<global title='"Global set test"'/>

@@ -1,0 +1,351 @@
+#place-5 {
+	visibility:visible;
+	left:25px;
+	top:400px;
+
+}
+#place-4 {
+	visibility:visible;
+	left:115px;
+	top:420px;
+
+}
+#place-3 {
+	visibility:visible;
+	left:205px;
+	top:430px;
+
+}
+#place-2 {
+	visibility:visible;
+	left:295px;
+	top:440px;
+
+}
+#place-1 {
+	visibility:visible;
+	left:385px;
+	top:450px;
+
+}
+#place0 {
+	visibility:visible;
+	left:465px;
+	top:360px;
+}
+
+#place1 {
+	visibility:visible;
+	left:615px;
+	top:450px;
+
+}
+#place2 {
+	visibility:visible;
+	left:705px;
+	top:440px;
+
+}
+#place3 {
+	visibility:visible;
+	left:795px;
+	top:430px;
+
+}
+#place4 {
+	visibility:visible;
+	left:885px;
+	top:420px;
+
+}
+#place5 {
+	visibility:visible;
+	left:975px;
+	top:400px;
+}
+
+
+#box0 {
+	visibility:visible;
+	left:465px;
+	top:377px;
+	width:150px;
+	height:211px;
+	position:absolute;
+}
+
+
+.letterbar {
+	visibility:hidden;
+}
+
+.genresbar-4 {
+	visibility:hidden;
+	top:300px;
+	left:20px;
+	position:absolute;
+	text-align:center;
+	color:white;
+	font-size:20px;
+	width:100px;
+}
+.genresbar-3 {
+	visibility:hidden;
+	top:300px;
+	left:140px;
+	position:absolute;
+	text-align:center;
+	color:white;
+	font-size:20px;
+	width:100px;
+}
+.genresbar-2 {
+	visibility:hidden;
+	top:300px;
+	left:260px;
+	position:absolute;
+	text-align:center;
+	color:white;
+	font-size:20px;
+	width:100px;
+}
+.genresbar-1 {
+	visibility:hidden;
+	top:300px;
+	left:380px;
+	position:absolute;
+	text-align:center;
+	color:white;
+	font-size:20px;
+	width:100px;
+}
+.genresbar0 {
+	visibility:hidden;
+	top:300px;
+	left:500px;
+	position:absolute;
+	text-align:center;
+	color:white;
+	font-size:20px;
+	width:100px;
+}
+.genresbar1 {
+	visibility:hidden;
+	top:300px;
+	left:620px;
+	position:absolute;
+	text-align:center;
+	color:white;
+	font-size:20px;
+	width:100px;
+}
+.genresbar2 {
+	visibility:hidden;
+	top:300px;
+	left:740px;
+	position:absolute;
+	text-align:center;
+	color:white;
+	font-size:20px;
+	width:100px;
+}
+.genresbar3 {
+	visibility:hidden;
+	top:300px;
+	left:860px;
+	position:absolute;
+	text-align:center;
+	color:white;
+	font-size:20px;
+	width:100px;
+}
+.genresbar4 {
+	visibility:hidden;
+	top:300px;
+	left:980px;
+	position:absolute;
+	text-align:center;
+	color:white;
+	font-size:20px;
+	width:100px;
+}
+
+.moviename { 
+	color:white;
+	font-size:28px;
+}
+.year { 
+	color:white;
+	font-size:20px;
+}
+.infotextspacer {
+	color:white;
+	font-size:22px;
+	width:1080px;
+	height:50px;
+}
+
+.menubar { 
+}
+
+.letterbar tr {
+	text-align:center;
+	color:white;
+}
+
+.letterbar td {
+	width:20px;
+}
+
+.letterbar a {
+	color:white;
+	font-size:20px;
+}
+
+
+.genre {
+	text-align:center;
+	color:white;
+	font-size:20px;
+	width:100px;
+	align:center;
+}
+
+.tabela {
+	align:center;
+	width:1080px;
+}
+
+.main {
+	height:210px;
+	width:1080px;
+}
+
+
+.place { 
+	width:80px;
+	height:118px;
+	position:absolute;
+	#top:470px;
+	background-color:black;
+}
+.place img {
+	width:80px;
+	height:118px;
+}
+
+.placefocus { 
+	width:160px;
+	height:232px;
+	position:absolute;
+	#top:455px;
+	background-color:black;
+}
+.placefocus img {
+	width:158px;
+	height:230px;
+}
+
+
+.placebox { 
+	width:1280px;
+	height:119px;
+	position:absolute;
+	top:420px;
+	left:0;
+	#background-color:Black-alpha2;
+}
+
+.infobox { 
+	width:698px;
+	height:100px;
+	position:absolute;
+	top:373px;
+	left:341;
+	background-color:Black-alpha2;
+	color:white;
+	font-size:20px;
+
+}
+
+
+.flagbox { 
+	width:998px;
+	height:50px;
+	position:absolute;
+	top:290px;
+	left:41;
+	background-color:Black-alpha2;
+}
+
+.title { 
+	height:24px;
+	width:998px;
+	text-align:center;
+	color:white;
+	font-size:22px;
+	// background-color:Black-alpha2;
+}
+.cmdPlay { 
+	text-align:center;
+	color:white;
+	font-size:20px;
+	position:absolute;
+	top:350px;
+	left:510;
+}
+
+
+.backg {
+	width:100%;
+	height:200px;
+	position:absolute;
+	top:0px;
+	left:0px;
+}
+
+.test {
+	color:red;
+}
+
+.spacer {
+	height:175px;
+	width:1080px;
+}
+
+.genrePlace {
+	background-color:Black-alpha2;
+}
+
+
+.genrePlace a {
+	text-align:center;
+	color:white;
+	background-color:Black-alpha2;
+}
+
+.tablebar {
+	left:40px;
+}
+
+.cmdbar {
+	color:#666666;
+	font-size:20px;
+	width:90px;
+	text-align:center;
+}
+.cmdbar a {
+	text-align:center;
+	color:#777777;
+}
+
+.divback {
+	position:absolute;
+	top:10px;
+	height:350px;
+	width:1080px;
+{$UseFanartInIndex}	background-color:Black-alpha2;
+}
+
+.mybodytv {background-color: #6c4d00;}
+.lines {background-color: #1c8894;}

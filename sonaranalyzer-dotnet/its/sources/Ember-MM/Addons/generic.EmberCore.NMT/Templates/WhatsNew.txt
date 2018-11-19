@@ -1,0 +1,17 @@
+Version 1.0.18
+ - Fix return to Main Tv Show Index not being position in the correct Show
+ 
+Version 1.0.17
+ - Implemented TV Shows Index
+ - Implemented TV Shows/Seasons/Episodes Menu
+
+Version 1.0.15
+ - Skeleton for TV Shows
+
+Version 1.0.13
+ - Fix return to Main Movie Index not being position in the correct Movie
+ - Fix Video Flags not being processed.
+
+Version 1.0.12
+ - Fix issues with international characters.
+ - New Main Menu Item with Skin Info.

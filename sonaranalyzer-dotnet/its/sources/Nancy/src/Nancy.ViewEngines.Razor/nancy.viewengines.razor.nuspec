@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>Nancy.Viewengines.Razor</id>
+    <version>0.0.0</version> <!-- The real version will be added by rake -->
+    <authors>Andreas Håkansson, Steven Robbins and contributors</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Enables using the Razor view engine with nancy</description>
+    <summary>Nancy is a lightweight web framework for the .Net platform, inspired by Sinatra. Nancy aim at delivering a low ceremony approach to building light, fast web applications.</summary>
+    <language>en-US</language>
+    <copyright>Andreas Håkansson, Steven Robbins and contributors</copyright>
+    <iconUrl>http://nancyfx.org/nancy-nuget.png</iconUrl>
+    <licenseUrl>https://github.com/NancyFx/Nancy/blob/master/license.txt</licenseUrl>
+    <projectUrl>http://nancyfx.org</projectUrl>
+    <dependencies>
+      <group>
+        <dependency id="Nancy" />
+        <dependency id="Microsoft.AspNet.Razor" />
+      </group>
+      <group targetFramework="net40">
+        <dependency id="Nancy" />
+        <dependency id="Microsoft.AspNet.Razor" version="2.0.30506" />
+      </group>
+    </dependencies>
+    <tags>Nancy Viewengine Razor</tags>
+  </metadata>
+  <files>
+    <file src="build\binaries\Nancy.Viewengines.Razor.dll" target="lib\net45" />
+    <file src="build\binaries\Nancy.Viewengines.Razor.pdb" target="lib\net45" />
+    <file src="build\binaries\Nancy.Viewengines.Razor.XML" target="lib\net45" />
+    <file src="build\binaries\Nancy.Viewengines.Razor.BuildProviders.dll" target="BuildProviders" />
+    <file src="build\binaries\Nancy.Viewengines.Razor.BuildProviders.pdb" target="BuildProviders" />
+    <file src="build\binaries\Nancy.Viewengines.Razor.BuildProviders.XML" target="BuildProviders" />
+    <file src="src\Nancy.Viewengines.Razor\web.config.transform" target="content" />
+    <file src="src\Nancy.Viewengines.Razor\app.config.transform" target="content" />
+    <file src="src\Nancy.Viewengines.Razor\targets\*.*" target="build" />
+  </files>
+</package>

@@ -1,0 +1,46 @@
+<html>
+<body background="<$BACKDROP_THUMB>" BGCOLOR="#222222">
+<center>
+<link rel="stylesheet" type="text/css" href="../standalone.css" />
+<a href="../movieindex.htm?idx=<$ID>" TVID="BACK" ></a>
+<table><tr>
+    <td width="450px" valign="bottom" align="center">
+	<img height="300px" src="<$THUMB_PATH>cover-<$ID>.png" /><br>
+					    <div class="flags">
+					        <img class="flags" src="<$FLAG_VSOURCE>" />
+					        <img class="flags" src="<$FLAG_VRES>" />
+					        <img class="flags" src="<$FLAG_VTYPE>" />
+					        <img class="flags" src="<$FLAG_ATYPE>" />
+					        <img class="flags" src="<$FLAG_ACHAN>" />
+					    </div>
+    </td>
+    <td width="700px" align="top">
+	<div class="box">
+			<table>
+			    <tr>
+				    <td width="700px" height="600px" valign="top">
+					<div style="padding:10px 10px 10px 10px">
+					    <font class="txttitle"><u><$MOVIENAME> (<$YEAR>)<u></font><br><br>
+					    <font class="txtDirector">By: <$DIRECTOR> </font><br>
+					    <font class="txtRuntime">Runtime:<$RUNTIME></font><br>
+					    <font class="txtRuntime">Genre(s):<$GENRES></font><br>
+					    <br>
+					    <font class="txttagline">"<$TAGLINE>"</font>
+					    <br>
+					    <br>
+					    <div align="justify" ><font class="txtplot"><$PLOT></font></div><br>
+					</div>
+				    </td>
+				</tr><tr>
+					<td width="700px" height="20px" align="center">
+					<font class="txtcmds"><a class="txtcmds" id="play" href="<$MOVIE_PATH>" TVID="Play" vod>&nbsp;PLAY&nbsp;</a></font>
+			        </td>
+			    <tr>
+            		</table>
+        </div>
+    </td>
+</tr></table>
+
+</center>
+</body>
+</html>

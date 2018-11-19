@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<AnalysisInput>
+  <Settings>
+    <Setting>
+      <Key>sonar.cs.ignoreHeaderComments</Key>
+      <Value>true</Value>
+    </Setting>
+    <Setting>
+      <Key>sonar.vbnet.ignoreHeaderComments</Key>
+      <Value>true</Value>
+    </Setting>
+  </Settings>
+  <Rules>
+    <!-- Temporary workaround to enable security hotspot rules so that we could get issues -->
+    <Rule>
+      <Key>S1313</Key>
+    </Rule>
+    <Rule>
+      <Key>S2092</Key>
+    </Rule>
+    <Rule>
+      <Key>S2245</Key>
+    </Rule>
+    <Rule>
+      <Key>S2255</Key>
+    </Rule>
+    <!-- End of workaround -->
+    
+    <Rule>
+      <Key>S1451</Key>
+      <Parameters>
+        <Parameter>
+          <Key>headerFormat</Key>
+          <Value><![CDATA[//-----------------------------------------------------------------------
+// <copyright file=".*" company="Akka\.NET Project">
+//     Copyright \(C\) 2009-2015 Typesafe Inc\. <http://www\.typesafe\.com>
+//     Copyright \(C\) 2013-2015 Akka\.NET project <https://github\.com/akkadotnet/akka\.net>
+// </copyright>
+//-----------------------------------------------------------------------
+]]></Value>
+        </Parameter>
+        <Parameter>
+          <Key>isRegularExpression</Key>
+          <Value>true</Value>
+        </Parameter>
+      </Parameters>
+    </Rule>
+  </Rules></AnalysisInput>

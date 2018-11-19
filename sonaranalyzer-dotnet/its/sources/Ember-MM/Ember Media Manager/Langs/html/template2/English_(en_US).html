@@ -1,0 +1,100 @@
+<head>
+<script src="jquery.js" type="text/javascript" language="javascript"></script>
+<style>
+.boldrow td {border-top: 1px solid #000; border-bottom: 0px solid #000;border-spacing:0px;  margin: 0px; padding: 0em; }
+.botowmrow td {border-top: 0px solid #000; border-bottom: 1px solid #000;border-spacing:0px;  margin: 0px; padding: 0em; }
+.boldleft { border-left: 5px solid #000; padding: 0.4em; }
+.boldright { border-right: 5px solid #000; padding: 0.4em; } 
+.boldrownone {border-top: 0px solid #000; border-bottom: 0px solid #000;border-spacing:0px;  margin: 0px; padding: 0em; } 
+.detail {font-size:10px}
+.header {display: inline;cursor:pointer;width:500px;}
+.top {position:relative;width:550px;}
+.header a {text-decoration:none; color:black;}
+.header a:hover {color:#1010f0;}
+.details {position:relative;display:none;border-top: 0px solid #000;background: silver;width:530px; padding-left: 10px; padding-right: 10px; text-align: justify; }
+</style>
+<script type="text/javascript">
+var previd;
+function ShowDetails2(id) {
+	if (document.getElementById) { // DOM3 = IE5, NS6
+		if (id.style.display == 'block') {
+			$(id).hide("slow");
+			//$(id).slideUp("slow");
+		} else {
+	      		hiddiv2(id);
+			$(id).show("slow");
+			//$(id).slideDown("slow");
+			previd = id;
+		}
+	
+	}
+
+}
+function ShowDetails(id) {
+	if (document.getElementById) { // DOM3 = IE5, NS6
+		if (id.style.display == 'block') {
+			id.style.display = 'none';
+		} else {
+			 hiddiv();
+			id.style.display = 'block';
+			previd = id;
+		}
+	
+	}
+}
+function hiddiv2(id) {
+	//safe function to show an element with a specified id
+		  
+	if (document.getElementById) { // DOM3 = IE5, NS6
+		if (previd) {
+		    if (previd != id) {
+			$(previd).hide("slow");
+			//$(previd).slideUp("slow");
+                    }
+		} 
+	}
+}
+function hiddiv() {
+	//safe function to show an element with a specified id
+		  
+	if (document.getElementById) { // DOM3 = IE5, NS6
+		if (previd) {
+			previd.style.display = 'none';
+		} 
+	}
+}
+
+
+</script>
+</head>
+<center>
+<div style="width:550px;">
+<br>
+Movie List<br><br>
+
+<table style="font-size:13px;border-collapse: collapse;">
+<$MOVIE>
+  <tr class="boldrow">
+   <td>
+    <div class="top">
+      <div id="name<$COUNT>" class="header"><a onclick="ShowDetails2(det<$COUNT>)" href="javascript:"><b><$MOVIENAME></b></a>
+              <div style="font-size:11px;position:absolute;top:0;right:0;"><b><$YEAR></b></div>
+      </div><br>
+    <div id="$i" class="detail">Filename: <$FILENAME></div>
+    </div>
+    <div class="details" id="det<$COUNT>">
+         <b>Genres:</b>&nbsp;<$GENRES><br>
+         <b>Plot:</b><br><$PLOT><br>&nbsp;
+
+    </div>
+   </td>
+  </tr>
+<$/MOVIE>
+  <tr class="boldrow">
+   <td style="text-align:center;">
+	<p><br>Created by: Ember Media Manager
+   </td>
+  </tr>
+</table>
+</div>
+</center>

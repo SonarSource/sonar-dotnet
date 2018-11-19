@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <string id="1">Breche ab...</string>
+  <string id="2">Ember Media Manager Verzeichnis:{0}"{1}"</string>
+  <string id="3">Installation abgebrochen</string>
+  <string id="4">Vom Benutzer abgebrochen</string>
+  <string id="5">Installation abgeschlossen</string>
+  <string id="6">Suche Ember Installationsverzeichnis</string>
+  <string id="7">Lade Versionsliste herunter</string>
+  <string id="8">Keine Plattform gewählt</string>
+  <string id="9">Die Ember Downloadseite ist nicht verfügbar.{0}Bitte versuche es später noch einmal.</string>
+  <string id="10">Keine neuere Version zum installieren vorhanden</string>
+  <string id="11">Lade Versionsdateien herunter</string>
+  <string id="12">Lade Updatescriptdateien herunter</string>
+  <string id="13">Prüfe installierte Dateien</string>
+  <string id="14">Lade Dateien herunter</string>
+  <string id="15">Im Cache: {0}</string>
+  <string id="16">Lade herunter: {0}</string>
+  <string id="17">Fehler beim Herunterladen: {0}</string>
+  <string id="18">Installiere Dateien</string>
+  <string id="19">Installiere Mono spezifische Dateien</string>
+  <string id="20">WARNUNG Datei Hash nicht korrekt</string>
+  <string id="21">Fehler: {0} {1}</string>
+  <string id="22">Installiert: {0}</string>
+  <string id="23">Fehler: {0}</string>
+  <string id="24">Bereite Ember Konfiguration vor</string>
+  <string id="25">Stelle Update zusammen</string>
+  <string id="26">Führe Skripte für Version {0} aus</string>
+  <string id="27">Lade Einstellungen</string>
+  <string id="28">Es darf nur EINE Instanz von EmberSetup laufen!</string>
+  <string id="29">Wir haben eine Ember Installation gefunden: {0}</string>
+  <string id="30">Wenn du dies ändern möchstest, wähle bitte [Einstellungen]</string>
+  <string id="31">Keine Ember Installation gefunden{0}</string>
+  <string id="32">Standard Installationsverzeichnis{0}</string>
+  <string id="33">Bitte wähle mit [Einstellungen] das Installationsverzeichnis</string>
+  <string id="34">Willkommen bei der Ember Media Manager Installation</string>
+  <string id="35">Zurück</string>
+  <string id="36">About</string>
+  <string id="37">Abbrechen</string>
+  <string id="38">Exit</string>
+  <string id="39">Installieren</string>
+  <string id="40">Einstellungen</string>
+  <string id="41">EmberMM Setup</string>
+  <string id="42">Ember Media Manager starten</string>
+  <string id="43">Setup - Ember Media Manager</string>
+  <string id="44">Wähle die Sprache für die Ember Installation</string>
+  <string id="45">Sprachauswahl</string>
+  <string id="46">Gefundene Ember Media Manager Pfade</string>
+  <string id="47">Suche nach möglichen Ember Media Manager Installationen...</string>
+  <string id="48">Unterverzeichnis anlegen</string>
+  <string id="49">EMM suchen</string>
+  <string id="50">OK</string>
+  <string id="51">Plattform</string>
+  <string id="52">Eine neue Version wird gerade hochgeladen. {0}Bitte versuche es in später noch einmal.</string>
+  <string id="53">Executing Commands for Base</string>
+</strings>
+<!-- Rev2123 --> 

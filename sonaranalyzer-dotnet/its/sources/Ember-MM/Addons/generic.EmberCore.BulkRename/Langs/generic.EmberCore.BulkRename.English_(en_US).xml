@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<string id="0">Renamer</string>
+	<string id="1">Renaming...</string>
+	<string id="2">Bulk Renamer</string>
+	<string id="3">Rename movies and files</string>
+	<string id="4">Compiling Movie List...</string>
+	<string id="5">Canceling Compilation...</string>
+	<string id="6">Rename</string>
+	<string id="7">Folder Pattern (for Single movie in Folder)</string>
+	<string id="8">File Pattern</string>
+	<string id="9">Folder Pattern (for Multiple movies in Folder)</string>
+	<string id="10">Display Only Movies That Will Be Renamed</string>
+	<string id="11">$T = Title{0}$X. (Replace Space with .){0}$D = Directory{0}$F = File Name{0}$O = OriginalTitle{0}$Y = Year{0}$I = IMDB ID{0}$R = Resolution{0}$A = Audio{0}$S = Source{0}$M = MPAA{0}$B = Base Path{0}$L = List Title{0}{{}} = Optional{0}$?aaa?bbb? = Replace aaa with bbb{0}$- = Remove previous char if next pattern does not have a value{0}$+ = Remove next char if previous pattern does not have a value{0}$^ = Remove previous and next char if next pattern does not have a value</string>
+	<string id="12">An error occured while attempting to rename the folder:{0}{0}{1}{0}{0}Please ensure that you are not accessing this folder or any of its files from another program (including browsing via Windows Explorer</string>
+	<string id="13">Unable to Rename Folder</string>
+	<string id="14">An error occured while attempting to rename a file:{0}{0}{1}{0}{0}Please ensure that you are not accessing this file from another program.</string>
+	<string id="15">Unable to Rename File</string>
+	<string id="16">Manual Rename</string>
+	<string id="17">Folder Name</string>
+	<string id="18">File Name</string>
+	<string id="19">Title:</string>
+	<string id="20">Renaming Folder/Files...</string>
+	<string id="21">Automatically Rename Files During Multi-Scraper</string>
+	<string id="22">Automatically Rename Files During Single-Scraper</string>
+	<string id="23">Default Renaming Patterns</string>
+	<string id="24">Files Pattern</string>
+	<string id="25">Folders Pattern</string>
+	<string id="26">Bulk &amp;Renamer</string>
+	<string id="27">Rename</string>
+	<string id="28">Auto</string>
+	<string id="29">Manual</string>
+	<string id="30">New Path</string>
+	<string id="31">New File Name</string>
+	<string id="32">Enable Generic Rename Module</string>
+	<string id="33">Enable Bulk Renamer Tool</string>
+</strings>

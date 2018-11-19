@@ -1,0 +1,34 @@
+﻿<viewdata model="Nancy.Demo.ModelBinding.Models.Event[]"/>
+<html>
+  <head>
+    <title>Events</title>
+  </head>
+  <body>
+    <h1>Events</h1>
+    <p>Event is added twice, one using the dynamic binder adapter, the other using the generic one.</p>
+    <p>The second one has 'Location' marked as blacklisted so should appear as 'Default'</p>
+    <p>Current events:</p>
+    <ul>
+      <li each="var v in Model">
+        <a href="event/${v.Id}"> ${v.Title} - ${v.Location} </a> ${v.Time}
+      </li>
+    </ul>
+
+    <h2>Add another</h2>
+    <form method="POST" action="/events">
+      <label for="Name">Title</label>
+      <input type="text" name="Title" />
+      <label for="Location">Location</label>
+      <input type="text" name="Location" />
+
+      <input type="checkbox" name="Venues" value="1">Venue 1</input>
+      <input type="checkbox" name="Venues" value="2">Venue 2</input>
+      <input type="checkbox" name="Venues" value="3">Venue 3</input>
+      <input type="checkbox" name="Venues" value="4">Venue 4</input>
+
+      <label for="EventDate">Time</label>
+      <input type="text" name="Time" value="${System.DateTime.Now}"/>
+      <input type="submit"/>
+    </form>
+  </body>
+</html>

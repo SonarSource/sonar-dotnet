@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<string id="0">XBMC Controller</string>
+	<string id="1">Dieser XBMC Name ist bereits vergeben.</string>
+	<string id="2">Jeder Name muss eindeutig sein.</string>
+	<string id="3">Du musst einen Port eingeben.</string>
+	<string id="4">Gib einen Port ein.</string>
+	<string id="5">Du musst eine IP eingeben.</string>
+	<string id="6">Gib eine IP ein.</string>
+	<string id="7">Du musst einen XBMC Namen eingeben.</string>
+	<string id="8">Gib einen Namen ein.</string>
+	<string id="9">XBMC Kommunikation</string>
+	<string id="10">Übernehmen.</string>
+	<string id="11">Name:</string>
+	<string id="12">Neu</string>
+	<string id="13">XBMC IP:</string>
+	<string id="14">XBMC Port:</string>
+	<string id="15">Entfernen</string>
+	<string id="16">XBMC Update konnte nicht gestartet werden.</string>
+	<string id="17">Bei der Kommunikation mit {0}{1} gab es ein Problem</string>
+	<string id="18">XBMC</string>
+	<string id="19">XBMC Controller</string>
+	<string id="20">Echtzeit Synchronisierung einschalten</string>
+	<string id="21">Echtzeit Synchronisierung</string>
+	<string id="22">Suche ...</string>
+	<string id="23">Setze Quellen</string>
+	<string id="24">Ember Quelle</string>
+	<string id="25">XBMC Quelle</string>
+	<string id="26">XBMC Host OS</string>
+	<string id="27">Windows</string>
+	<string id="28">Linux/MacOS X</string>
+	<string id="29">XBMC Host</string>
+	<string id="30">Benachrichtigungen</string>
+</strings>
+<!-- Edit by F089 Rev.2292-->

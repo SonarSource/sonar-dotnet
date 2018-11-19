@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<string control="Notify_chkEnabled">Ein oder ausschalten des Moduls.</string>
+	<string control="Notify_chkOnError">Wenn eingeschalten, wird ein Hinweis angezeigt falls Fehler auftreten.</string>
+	<string control="Notify_chkOnNewMovie">Wenn eingeschalten, wird ein Hinweis angezeigt wenn ein Film zur Datenbank hinzugefuegt wird.</string>
+	<string control="Notify_chkOnMovieScraped">Wenn eingeschalten, wird ein Hinweis angezeigt wenn ein Film gescrapt wird.</string>
+	<string control="Notify_chkOnNewEp">Wenn eingeschalten, wird ein Hinweis angezeigt wenn eine Episode der Datenbank hinzugefuegt wird.</string>
+</strings>
+<!-- Rev2292 created by F089-->

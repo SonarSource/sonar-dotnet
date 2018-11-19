@@ -1,0 +1,160 @@
+<html>
+<body id="mybody" background="diffuse_background2.png" ONLOADSET="zeropos" class="parent" BGCOLOR="#552222">
+<link rel="stylesheet" type="text/css" href="default-tv.css" />
+<center>
+<div id="showname" class="showname">&nbsp;</div>
+<br>
+<div class="infotextspacer">
+<span id="infotext">
+&nbsp;
+</span>
+</div>
+</center>
+
+    <a href="../index.htm?idx=<$ID>" TVID="BACK" ></a>
+
+<div id="place-5" class="place">
+	 <img id="image-5" src="blank.jpg"></div>
+</div>
+<div id="place-4" class="place">
+	 <img id="image-4" src="blank.jpg"></div>
+</div>
+<div id="place-3" class="place">
+	 <img id="image-3" src="blank.jpg"></div>
+</div>
+<div id="place-2" class="place">
+	 <img id="image-2" src="blank.jpg"></div>
+</div>
+<div id="place-1" class="place">
+	<a onFocus="MovePrev();" ONFOCUSSET="zeropos" href="#"> <img id="image-1" src="blank.jpg"></a></div>
+</div>
+
+<div id="place1" class="place" >
+	<a onFocus="MoveNext();" ONFOCUSSET="zeropos" href="#"> <img id="image1" src="blank.jpg"></a></div>
+</div>
+<div id="place2" class="place" >
+	 <img id="image2" src="blank.jpg"></div>
+</div>
+<div id="place3" class="place">
+	<img id="image3" src="blank.jpg"></div></div>
+</div>
+<div id="place4" class="place">
+	<img id="image4" src="blank.jpg"></div></div>
+</div>
+<div id="place5" class="place">
+	 <img id="image5" src="blank.jpg"></div></div>
+</div>
+<div id="place0" class="placefocus">
+	<a onFocus="HideAll();" name="zeropos" id="asel" href="#" ONKEYDOWNSET="zeropos"> <img id="image0" src="blank.jpg"></a>
+</div>
+
+
+<script>
+var imgSrc=new Array(); 
+var tvshowIDs=new Array();
+var tvshowTitles=new Array(); 
+var tvshowYears=new Array(); 
+var tvshowGenres=new Array(); 
+var tvshowPlot=new Array(); 
+var fanart=new Array(); 
+var tvshowFile=new Array();
+var backdrop=new Array(); 
+var extrathumbs=new Array(); 
+var barvisible=0;
+</script>
+<$TVSHOW> 
+<script>
+imgSrc[<$SHOWCOUNTER>]="<$TVPOSTER_THUMB>";
+tvshowIDs[<$SHOWCOUNTER>]="<$SHOWID>";
+tvshowTitles[<$SHOWCOUNTER>]="<$SHOWNAME>";
+tvshowPlot[<$SHOWCOUNTER>]="<$SHOWPLOT>";
+backdrop[<$SHOWCOUNTER>]="<$TVBACKDROP_THUMB>";
+fanart[<$SHOWCOUNTER>]="<$TVFANART_FILE>";
+//tvshowGenres[<$SHOWCOUNTER>]="<$SHOWGENRES>";
+//tvshowYears[<$SHOWCOUNTER>]="<$YEAR>";
+//tvshowFile[<$SHOWCOUNTER>]="<$TVSHOW_PATH>";
+//extrathumbs[<$SHOWCOUNTER>]=<$EXTRATHUMB>;
+</script>
+<$/TVSHOW> 
+<script>
+
+  var FilderIds = new Array();
+  for(x=1;x<tvshowIDs.length;x++) {
+	FilderIds[x]=x;
+  }
+  var MyIdx = 1;
+  queryString = location.search;
+  var arr1 = new Array();
+  arr1 = queryString.split("=");
+  if(arr1.length == 2) {
+	var MyId= arr1[1];
+	var x=-5;
+	for(x=-1;x<=FilderIds.length;x++) {
+	   if(tvshowIDs[FilderIds[x]] == MyId) {
+		MyIdx = x;
+		break;
+	   }
+	}
+  }
+  
+
+  ShowPosters();
+function MovePrev() {
+    if (MyIdx > 1) {
+	MyIdx -= 1;
+	ShowPosters();
+    } else {
+	MyIdx = FilderIds.length - 1;
+	ShowPosters();
+    } 
+
+}
+
+function MoveNext() {
+    if (MyIdx < FilderIds.length -1) {
+	MyIdx += 1;
+	ShowPosters();
+    } else {
+	MyIdx = 1;
+	ShowPosters();
+    } 
+}
+function ShowPosters() {
+
+	var x=-5;
+	for(x=-5;x<=5;x++) {
+		document.styleSheets[0].cssRules[x+5].style.visibility='hidden'; 
+		if(MyIdx + x > 0 && MyIdx + x < FilderIds.length) { 
+			document.getElementById('image' + x).setAttribute('src', imgSrc[FilderIds[MyIdx + x]]);
+			document.styleSheets[0].cssRules[x+5].style.visibility='visible';
+		} else {
+			var pos = 0;
+			if(MyIdx + x <= 0) {
+				var lidx = FilderIds.length + MyIdx + x - 1;
+				while (lidx<=0) {lidx = FilderIds.length + lidx - 1;}
+				pos=FilderIds[lidx];
+			} else {
+				var lidx = (MyIdx + x) - FilderIds.length + 1;
+				while (lidx >= FilderIds.length) {lidx = lidx - FilderIds.length + 1;}
+				pos=FilderIds[lidx];
+				
+			}
+			document.getElementById('image' + x).setAttribute('src', imgSrc[pos]);
+			if(pos > 0 && pos < tvshowIDs.length) document.styleSheets[0].cssRules[x+5].style.visibility='visible';
+		}
+
+	}
+
+	document.getElementById('asel').setAttribute('href', 'html/Show' + tvshowIDs[FilderIds[MyIdx]]+'.htm');
+//	document.getElementById('play').setAttribute('href', movieFile[FilderIds[MyIdx]]);
+	document.getElementById('showname').firstChild.nodeValue=tvshowTitles[FilderIds[MyIdx]];
+//	document.getElementById('year').firstChild.nodeValue=movieYears[FilderIds[MyIdx]];
+	document.getElementById('infotext').firstChild.nodeValue=tvshowPlot[FilderIds[MyIdx]];
+//{$UseFanartInIndex}	document.getElementById('mybody').setAttribute('background', backdrop[FilderIds[MyIdx]]);
+}
+
+function HideAll() {
+}
+</script>
+</body>
+</html>

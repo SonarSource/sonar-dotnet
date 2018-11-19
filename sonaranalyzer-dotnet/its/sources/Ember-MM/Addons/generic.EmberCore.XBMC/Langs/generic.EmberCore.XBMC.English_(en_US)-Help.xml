@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<strings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<string control="XBMCCom_cbEnabled">Enable or disable this module.</string>
+	<string control="XBMCCom_lbXBMCCom">The list of all entered XBMC installations with which Ember will communicate.</string>
+	<string control="XBMCCom_btnRemoveCom">Remove the selected XBMC installation from the list.</string>
+	<string control="XBMCCom_txtName">Enter a unique name to identify this XBMC installation.</string>
+	<string control="XBMCCom_txtIP">Enter the IP of the computer running XBMC.</string>
+	<string control="XBMCCom_txtPort">Enter the port number of the computer running XBMC.</string>
+	<string control="XBMCCom_txtUsername">Enter the username that will be used to access this XBMC installation.</string>
+	<string control="XBMCCom_txtPassword">Enter the password that will be used to access this XBMC installation.</string>
+	<string control="XBMCCom_btnEditCom">Change the selected XBMC installation to use the newly entered information.</string>
+	<string control="XBMCCom_btnAddCom">Add the entered information as a new XBMC installation.</string>
+</strings>

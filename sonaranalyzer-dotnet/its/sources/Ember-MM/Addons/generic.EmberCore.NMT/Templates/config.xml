@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>Default Template</Name>
+  <Description>Ember Default Template for 
+  Networked Media Tank Jukebox Builder 
+  Nuno (nfnovais@gmail.com)</Description>
+  <Author></Author>
+  <Version>1.0.18</Version>
+  <DesignVersion>1.2</DesignVersion>
+  <WhatsNew>true</WhatsNew>
+  <Files>
+    <File>
+      <Name>index.htm</Name>
+      <DestPath>./</DestPath>
+      <Process>false</Process>
+      <Type>other</Type>
+    </File>
+    <File>
+      <Name>home.htm</Name>
+      <DestPath>.Ember/</DestPath>
+      <Process>true</Process>
+      <Type>other</Type>
+    </File>
+    <File>
+      <Name>info.htm</Name>
+      <DestPath>.Ember/</DestPath>
+      <Process>true</Process>
+      <Type>other</Type>
+    </File>
+    <File>
+      <Name>table.png</Name>
+      <DestPath>.Ember/</DestPath>
+      <Process>false</Process>
+      <Type>other</Type>
+    </File>
+    <File>
+      <Name>home</Name>
+      <DestPath>.Ember/</DestPath>
+      <Process>false</Process>
+      <Type>folder</Type>
+    </File>
+    <File>
+      <Name>movieindex.htm</Name>
+      <DestPath>.Ember/</DestPath>
+      <Process>true</Process>
+      <Type>movieindex</Type>
+    </File>
+    <File>
+      <Name>moviedetails.htm</Name>
+      <DestPath>.Ember/html/</DestPath>
+      <Process>true</Process>
+      <Type>movie</Type>
+    </File>
+    <File>
+      <Name>tvindex.htm</Name>
+      <DestPath>.Ember/</DestPath>
+      <Process>true</Process>
+      <Type>tvindex</Type>
+    </File>
+    <File>
+      <Name>tvshow.htm</Name>
+      <DestPath>.Ember/html/</DestPath>
+      <Process>true</Process>
+      <Type>tvshow</Type>
+    </File>
+    <File>
+      <Name>tvseason.htm</Name>
+      <DestPath>.Ember/html/</DestPath>
+      <Process>true</Process>
+      <Type>tvseason</Type>
+    </File>
+    <File>
+      <Name>tvepisode.htm</Name>
+      <DestPath>.Ember/html/</DestPath>
+      <Process>true</Process>
+      <Type>tvepisode</Type>
+    </File>
+    <File>
+      <Name>default.css</Name>
+      <DestPath>.Ember/</DestPath>
+      <Process>true</Process>
+      <Type>other</Type>
+    </File>
+    <File>
+      <Name>default-tv.css</Name>
+      <DestPath>.Ember/</DestPath>
+      <Process>true</Process>
+      <Type>other</Type>
+    </File>
+    <File>
+      <Name>theme.css</Name>
+      <DestPath>.Ember/</DestPath>
+      <Process>false</Process>
+      <Type>other</Type>
+    </File>
+    <File>
+      <Name>standalone.css</Name>
+      <DestPath>.Ember/</DestPath>
+      <Process>false</Process>
+      <Type>other</Type>
+    </File>
+    <File>
+      <Name>blank.jpg</Name>
+      <DestPath>.Ember/</DestPath>
+      <Process>false</Process>
+      <Type>other</Type>
+    </File>
+    <File>
+      <Name>diffuse_background.png</Name>
+      <DestPath>.Ember/</DestPath>
+      <Process>false</Process>
+      <Type>other</Type>
+    </File>
+    <File>
+      <Name>diffuse_background2.png</Name>
+      <DestPath>.Ember/</DestPath>
+      <Process>false</Process>
+      <Type>other</Type>
+    </File>
+  </Files>
+  <Params>
+    <Param>
+      <name>CleanBasePath</name>
+      <type>bool</type>
+      <value>true</value>
+      <access>user</access>
+      <description>Clean output folder before export</description>
+    </Param>
+    <Param>
+      <name>ExportPosters</name>
+      <type>bool</type>
+      <value>true</value>
+      <access>internal</access>
+      <description />
+    </Param>
+    <Param>
+      <name>ExportBackdrops</name>
+      <type>bool</type>
+      <value>true</value>
+      <access>internal</access>
+      <description />
+    </Param>
+    <Param>
+      <name>ExportTVPosters</name>
+      <type>bool</type>
+      <value>true</value>
+      <access>internal</access>
+      <description />
+    </Param>
+    <Param>
+      <name>ExportTVBackdrops</name>
+      <type>bool</type>
+      <value>true</value>
+      <access>internal</access>
+      <description />
+    </Param>
+    <Param>
+      <name>ExportFlags</name>
+      <type>bool</type>
+      <value>true</value>
+      <access>internal</access>
+      <description />
+    </Param>
+    <Param>
+      <name>BasePath</name>
+      <type>path</type>
+      <value>.Ember/</value>
+      <access>internal</access>
+      <description />
+    </Param>
+    <Param>
+      <name>ThumbsPath</name>
+      <type>path</type>
+      <value>.Ember/Thumbs/</value>
+      <access>internal</access>
+      <description />
+    </Param>
+    <Param>
+      <name>BackdropPath</name>
+      <type>path</type>
+      <value>.Ember/Thumbs/</value>
+      <access>internal</access>
+      <description />
+    </Param>
+    <Param>
+      <name>TVThumbsPath</name>
+      <type>path</type>
+      <value>.Ember/TVThumbs/</value>
+      <access>internal</access>
+      <description />
+    </Param>
+    <Param>
+      <name>TVBackdropPath</name>
+      <type>path</type>
+      <value>.Ember/TVThumbs/</value>
+      <access>internal</access>
+      <description />
+    </Param>
+    <Param>
+      <name>FlagsPath</name>
+      <type>path</type>
+      <value>.Ember/Flags/</value>
+      <access>internal</access>
+      <description />
+    </Param>
+    <Param>
+      <name>MoviesDetailsPath</name>
+      <type>path</type>
+      <value>.Ember/html/</value>
+      <access>internal</access>
+      <description />
+    </Param>
+    <Param>
+      <name>TVDetailsPath</name>
+      <type>path</type>
+      <value>.Ember/html/</value>
+      <access>internal</access>
+      <description />
+    </Param>
+    <Param>
+      <name>PostersThumbWidth</name>
+      <type>integer</type>
+      <value>350</value>
+      <access>internal</access>
+      <description>Width of the thumbs, height will be calculated to keep porpotion</description>
+    </Param>
+    <Param>
+      <name>BackdropWidth</name>
+      <type>integer</type>
+      <value>1280</value>
+      <access>internal</access>
+      <description>Width of the backdrop, height will be calculated to keep porpotion</description>
+    </Param>
+  </Params>
+  <Properties>
+    <Property>
+      <name>TimeFormat</name>
+      <label>Use Time Format</label>
+      <description>Time Format to Use</description>
+      <type>list</type>
+      <values>
+        <value label="AM/PM">AMPM</value>
+        <value label="24 Hours">24</value>
+      </values>
+    </Property>
+    <Property>
+      <name>UseFanartInIndex</name>
+      <label>Show fanart as Background</label>
+      <description>Show fanart as Backgorund in Index</description>
+      <type>list</type>
+      <values>
+        <value label="No">//</value>
+        <value label="Yes"></value>
+      </values>
+    </Property>
+    <Property>
+      <name>MainMenuMovie</name>
+      <label>Main Menu Movie Enabled</label>
+      <description>Show Movies option in Main Menu</description>
+      <type>list</type>
+      <values>
+        <value label="Yes"></value>
+        <value label="No">//</value>
+      </values>
+    </Property>
+    <Property>
+      <name>MainMenuTVShow</name>
+      <label>Main Menu TVShow Enabled</label>
+      <description>Show TV Shows option in Main Menu</description>
+      <type>list</type>
+      <values>
+        <value label="Yes"></value>
+        <value label="No">//</value>
+      </values>
+    </Property>
+    <Property>
+      <name>MainMenuMusic</name>
+      <label>Main Menu Music Enabled</label>
+      <description>Show Music option in Main Menu</description>
+      <type>list</type>
+      <values>
+        <value label="No">//</value>
+        <value label="Yes"></value>
+      </values>
+    </Property>
+    <Property>
+      <name>MainMenuPictures</name>
+      <label>Main Menu Pictures Enabled</label>
+      <description>Show Pictures option in Main Menu</description>
+      <type>list</type>
+      <values>
+        <value label="No">//</value>
+        <value label="Yes"></value>
+      </values>
+    </Property>
+    <Property>
+      <name>MainMenuNetwork</name>
+      <label>Main Menu Network Enabled</label>
+      <description>Show Network option in Main Menu</description>
+      <type>list</type>
+      <values>
+        <value label="No">//</value>
+        <value label="Yes"></value>
+      </values>
+    </Property>
+    <Property>
+      <name>MainMenuBrowser</name>
+      <label>Main Menu Browser Enabled</label>
+      <description>Show Browser option in Main Menu</description>
+      <type>list</type>
+      <values>
+        <value label="No">//</value>
+        <value label="Yes"></value>
+      </values>
+    </Property>
+    <Property>
+      <name>MainMenuShutdown</name>
+      <label>Main Menu Shutdown Enabled</label>
+      <description>Show Shutdown option in Main Menu</description>
+      <type>list</type>
+      <values>
+        <value label="No">//</value>
+        <value label="Yes"></value>
+      </values>
+    </Property>
+    <Property>
+      <name>MainMenuOnline</name>
+      <label>Main Menu Online Enabled</label>
+      <description>Show Online option in Main Menu</description>
+      <type>list</type>
+      <values>
+        <value label="Yes"></value>
+        <value label="No">//</value>
+      </values>
+    </Property>
+    <Property>
+      <name>MainMenuYoutube</name>
+      <label>Main Menu Youtube Enabled</label>
+      <description>Show Youtube option in Main Menu</description>
+      <type>list</type>
+      <values>
+        <value label="Yes"></value>
+        <value label="No">//</value>
+      </values>
+    </Property>
+    <Property>
+      <name>MainMenuWeather</name>
+      <label>Main Menu Weather Enabled</label>
+      <description>Show Weather option in Main Menu</description>
+      <type>list</type>
+      <values>
+        <value label="Yes"></value>
+        <value label="No">//</value>
+      </values>
+    </Property>
+    <Property>
+      <name>MainMenuRadio</name>
+      <label>Main Menu Radio Enabled</label>
+      <description>Show Radio option in Main Menu</description>
+      <type>list</type>
+      <values>
+        <value label="Yes"></value>
+        <value label="No">//</value>
+      </values>
+    </Property>
+  </Properties>
+  <ImageProcessing>
+    <Image>
+      <Type>Poster</Type>
+      <Commands>
+        <Command>
+          <execute>convert.exe</execute>
+          <params>$1 -resize 202x330 -alpha on -virtual-pixel transparent -filter point -append +distort Perspective "0,0,0,0 0,330,0,330 202,0,202,10 202,330,202,310" -gravity North -background none -compose Over -flatten $2</params>
+          <prefix>cover-</prefix>
+          <sufix>.png</sufix>
+        </Command>
+      </Commands>
+    </Image>
+  </ImageProcessing>
+</Config>
