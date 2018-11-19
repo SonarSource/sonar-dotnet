@@ -1,10 +1,11 @@
 ﻿Imports System
+Imports System.Collections.Generic
 
 Namespace NS
     Class CL
         Sub Method(b As Boolean)
-            Dim x = True Or False Or True
-            x = True Or False Or True OrElse False Xor False ' Noncompliant {{Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).}}
+            Dim xx = True Or False Or True
+            xx = True Or False Or True OrElse False Xor False ' Noncompliant {{Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).}}
 
             Method(
                 True Or False Or True OrElse False Xor False) ' Noncompliant
@@ -37,10 +38,11 @@ Namespace NS
                 .IsMale = True Or False Or True OrElse False Xor False, ' Noncompliant
                 .IsFemale = False Or True
             }
-
-            Dim menuOptions = New List(Of Boolean) From {
-                {1, True Or False Or True OrElse False Xor False}, ' Noncompliant
-                {2, rue Or False Or True OrElse False}}
         End Sub
+    End Class
+
+    Class Customer
+        Property IsMale As Boolean
+        Property IsFemale As Boolean
     End Class
 End Namespace

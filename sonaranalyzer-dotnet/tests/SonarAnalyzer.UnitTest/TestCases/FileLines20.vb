@@ -2,17 +2,17 @@
 Namespace Tests.Diagnostics
     Class FooBar
         Sub New()
-            System.Collections.Generic.List(Of Integer).Enumerator.Equals(Nothing)
-            System.Collections.Generic.List(Of Integer).Enumerator.Equals(Nothing)
-            System.Collections.Generic.List(Of Integer).Enumerator.Equals(Nothing)
-            System.Collections.Generic.List(Of Integer).Enumerator.Equals(Nothing)
-            System.Collections.Generic.List(Of Integer).Enumerator.Equals(Nothing)
-            System.Collections.Generic.List(Of Integer).Enumerator.Equals(Nothing)
-            System.Collections.Generic.List(Of Integer).Enumerator.Equals(Nothing)
-            System.Collections.Generic.List(Of Integer).Enumerator.Equals(Nothing)
-            System.Collections.Generic.List(Of Integer).Enumerator.Equals(Nothing)
-            System.Collections.Generic.List(Of Integer).Enumerator.Equals(Nothing)
-            System.Collections.Generic.List(Of Integer).Enumerator.Equals(Nothing)
+            Dim x = New System.Collections.Generic.List(Of Integer)().Equals(Nothing)
+            x = New System.Collections.Generic.List(Of Integer)().Equals(Nothing)
+            x = New System.Collections.Generic.List(Of Integer)().Equals(Nothing)
+            x = New System.Collections.Generic.List(Of Integer)().Equals(Nothing)
+            x = New System.Collections.Generic.List(Of Integer)().Equals(Nothing)
+            x = New System.Collections.Generic.List(Of Integer)().Equals(Nothing)
+            x = New System.Collections.Generic.List(Of Integer)().Equals(Nothing)
+            x = New System.Collections.Generic.List(Of Integer)().Equals(Nothing)
+            x = New System.Collections.Generic.List(Of Integer)().Equals(Nothing)
+            x = New System.Collections.Generic.List(Of Integer)().Equals(Nothing)
+            x = New System.Collections.Generic.List(Of Integer)().Equals(Nothing)
 
             Dim s As String = "a
                 b

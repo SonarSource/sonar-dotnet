@@ -1,5 +1,5 @@
 ﻿Namespace Tests.TestCases
-    Public Class MyClass
+    Public Class SomeClass
         Public Shared Pi As Double = 3.14
         Public Const Pi2 As Double = 3.14
         Public ReadOnly Pi3 As Double = 3.14 ' Noncompliant {{Make 'Pi3' private.}}

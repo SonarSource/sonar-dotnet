@@ -44,8 +44,8 @@ Namespace Test
             Dim asm = GetType(TestReflection).Assembly
 
             ' Review this code to make sure that the module, type, method and field are safe
-            Dim type = assembly.GetType(typeName)
-'                      ^^^^^^^^^^^^^^^^^^^^^^^^^^     {{Make sure that this dynamic injection or execution of code is safe.}}
+            Dim type = asm.GetType(typeName)
+'                      ^^^^^^^^^^^^^^^^^^^^^     {{Make sure that this dynamic injection or execution of code is safe.}}
 
 
             type = asm.GetType(typeName, False)                   ' Noncompliant

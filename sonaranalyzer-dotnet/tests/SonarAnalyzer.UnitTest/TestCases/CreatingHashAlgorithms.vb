@@ -1,4 +1,5 @@
-﻿Imports System.Security.Cryptography
+﻿Imports System
+Imports System.Security.Cryptography
 
 Namespace NS
 
@@ -37,7 +38,7 @@ Namespace NS
 
 
             '  Other methods are not checked
-            Dim hash = sha.ComputeHash(null)
+            Dim hash = sha.ComputeHash(CType(Nothing, Byte()))
             hash = sha.Hash
             Dim canReuse = sha.CanReuseTransform
             sha.Clear()
@@ -47,8 +48,9 @@ Namespace NS
     End Class
 
     Public Class MyHashAlgorithm
-        Inherits System.Security.Cryptography.HashAlgorithm, System.IDisposable
+        Inherits System.Security.Cryptography.HashAlgorithm
 '                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        Implements System.IDisposable
 
         Public Sub New()
         End Sub

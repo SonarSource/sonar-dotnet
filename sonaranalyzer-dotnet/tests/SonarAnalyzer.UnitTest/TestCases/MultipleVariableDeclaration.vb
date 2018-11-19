@@ -6,10 +6,10 @@
 '           ^^^
         Public Const DDD As String = "foo"
         Public Sub New(n As Integer)
-            Dim Const AAA, B As Integer = 5, ' Noncompliant
+            Dim AAA = 1, B As Integer = 5, ' Noncompliant
                 BBB = 42, ' Noncompliant
                 CCC As String = "foo"  ' Noncompliant
-            Dim Const DDD As String = "foo"
+            Dim DDD As String = "foo"
         End Sub
     End Class
 End Namespace

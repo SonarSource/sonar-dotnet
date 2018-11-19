@@ -12,8 +12,7 @@ Namespace Tests.TestCases
         Sub New(Prop1 As Integer)
         End Sub
 
-        Public Property Prop1() As Integer
-        End Property
+        Public Property Prop1 As Integer
 
         Public Sub Test()
             Prop1 = 5

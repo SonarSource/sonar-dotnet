@@ -1,6 +1,6 @@
 ﻿Module Module1
     Sub Main()
-        Dim Const i As Integer = 0
+        Const i As Integer = 0
         Dim f2(i) As String ' Noncompliant {{Refactor this code to use the '... = {}' syntax.}}
 '       ^^^^^^^^^^^^^^^^^^^
         f2(0) = "foo"
@@ -10,7 +10,7 @@
         foo(1) = "bar"
         foo = {"foo", "bar"}  ' Compliant
 
-        Dim foo2, foo4 As String() = {},
+        Dim foo2 As String(), foo4 As String() = {},
             foo3(1) As String   'compliant, not a single VarDeclarator in the declaration
         foo3(0) = "foo"
         foo2(0) = "foo"

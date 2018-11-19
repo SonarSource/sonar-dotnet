@@ -1,7 +1,8 @@
 ﻿Imports System
 Imports System.Collections
-Imports System.IO
 Imports System.Collections.Generic
+Imports System.IO
+Imports System.Linq
 
 Namespace Tests.Diagnostics
     Public Class VariableUnused

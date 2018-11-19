@@ -7,6 +7,12 @@ Imports System.Threading.Tasks
 Namespace Tests.TestCases
     Class ConditionalStructureSameCondition1
         Public Property condition As Boolean
+            Get
+
+            End Get
+            Set(value As Boolean)
+
+            End Set
         End Property
         Public Sub Test()
             Dim b = True
@@ -15,7 +21,7 @@ Namespace Tests.TestCases
 
             If (b AndAlso condition) Then
                 ' empty
-            ElseIf b AndAlso condition Then ' Noncompliant {{This branch duplicates the one on line 16.}}
+            ElseIf b AndAlso condition Then ' Noncompliant {{This branch duplicates the one on line 22.}}
                 ' empty
             ElseIf b AndAlso condition Then ' Noncompliant
                 ' empty

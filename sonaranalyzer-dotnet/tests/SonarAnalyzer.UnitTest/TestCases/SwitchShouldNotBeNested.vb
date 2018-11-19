@@ -6,6 +6,9 @@ Imports System.Text
 Namespace Tests.TestCases
 Public Class Program
     Public Sub New()
+        Dim choice As String = "Foo"
+        Dim value As Integer = 1
+
         Select Case choice
             Case "Y"c
                 Console.WriteLine("Yes")

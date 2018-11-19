@@ -7,7 +7,7 @@
             Dim message As String = "Error in {0}.{1}.{2} : {3} Authorization error : {4}   text" : Dim number As Integer = 8
             ' Do not report on the previous line as it contains the VBC error pattern
         End Sub
-        Sub New()
+        Sub New(someCondition As Boolean)
             If someCondition Then : doSomething() ' Noncompliant
             End If
             If someCondition Then : doSomething() ' Noncompliant
@@ -18,11 +18,6 @@
             Dim i As Integer = 5
             i = 6 : i = 7 ' Noncompliant
 
-            If Me.CurrentDataSource.Person.Any(Function(i) i.PersonID = ID And
-                                               i.PersonCategory = 2) Then
-
-            End If
-
             Dim increment1 = Function(x) x + 1 'Compliant
             Dim increment2 = Function(x)
                                  Return x + 2 'Compliant
@@ -32,6 +27,9 @@
                                  Return x + 2 : Return x + 2 'Noncompliant
                              End Function
 
+        End Sub
+
+        Sub doSomething()
         End Sub
     End Class
 

@@ -1,4 +1,5 @@
-﻿Imports System.Xml
+﻿Imports System
+Imports System.Xml
 Imports System.Xml.XPath
 
 Namespace Tests.TestCases
@@ -122,7 +123,7 @@ Namespace Tests.TestCases
         Public Sub XmlNodeDerivedTypes(attNode As XmlAttribute, nsMgr As XmlNamespaceManager, node2 As XmlNode, path As String)
             ' Fixed paths are ok
             attNode.SelectNodes("fixed")
-            attNode.SelectSingleNode(FixedPath)
+            attNode.SelectSingleNode(FixedPath) ' Error [BC30451]
 
             attNode.SelectNodes(path)                      ' Noncompliant
             attNode.SelectNodes(path, nsMgr)               ' Noncompliant

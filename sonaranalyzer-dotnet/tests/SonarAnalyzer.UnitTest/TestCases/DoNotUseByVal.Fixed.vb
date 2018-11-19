@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.Linq
 Imports System.Text
@@ -6,11 +6,11 @@ Imports System.Text
 Namespace Tests.TestCases
     Class Foo
         Public Function NoByVal(parameter As String) As String ' Compliant
-            Return byValParameter
+            Return parameter
         End Function
 
         Public Function OptionalNoByVal(Optional parameter As String = "Default") As String ' Compliant
-            Return byValParameter
+            Return parameter
         End Function
 
         Public Function WithByVal(byValParameter As String) As String ' Fixed
@@ -25,12 +25,12 @@ Namespace Tests.TestCases
             Return byValParameter
         End Function
 
-        Public Function NoByVal(ByRef parameter As String) As String ' Compliant
-            Return byValParameter
+        Public Function NoByRef(ByRef parameter As String) As String ' Compliant
+            Return parameter
         End Function
 
-        Public Function OptionalNoByVal(Optional ByRef parameter As String = "Default") As String ' Compliant
-            Return byValParameter
+        Public Function OptionalNoByRef(Optional ByRef parameter As String = "Default") As String ' Compliant
+            Return parameter
         End Function
     End Class
 End Namespace

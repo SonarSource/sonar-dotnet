@@ -1,4 +1,6 @@
-﻿Module Module1
+﻿Imports System
+
+Module Module1
     Sub Main()
         Console.WriteLine("1" & ' Fixed
                           2 & "3") ' Fixed

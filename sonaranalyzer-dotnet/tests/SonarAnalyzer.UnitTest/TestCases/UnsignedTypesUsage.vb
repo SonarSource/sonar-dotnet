@@ -13,10 +13,8 @@ Module Module1
 '                   ^^^^^^
         Dim foo7 As UInt64? ' Noncompliant
 '                   ^^^^^^
-        Dim foo7 As Nullable(Of UInt64) ' Noncompliant
+        Dim foo8 As Nullable(Of UInt64) ' Noncompliant
 '                               ^^^^^^
-        UInt32.MaxValue ' Noncompliant
-'       ^^^^^^
     End Sub
 
     Sub Main2()
@@ -27,6 +25,6 @@ Module Module1
         Dim foo5 As Int64
         Dim foo6 As Int64()
         Dim foo7 As Int64?
-        Dim foo7 As Nullable(Of Int64)
+        Dim foo8 As Nullable(Of Int64)
     End Sub
 End Module

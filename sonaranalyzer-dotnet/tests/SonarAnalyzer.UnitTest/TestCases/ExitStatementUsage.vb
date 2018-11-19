@@ -1,5 +1,8 @@
-﻿Class MyClass1
-    Public Sub MySub()
+﻿Imports System
+Imports System.Diagnostics
+
+Class MyClass1
+    Public Sub MySub(condition As Boolean)
         If condition Then
             Exit Sub                  ' Noncompliant {{Remove this 'Exit' statement.}}
 '           ^^^^^^^^
@@ -8,6 +11,7 @@
             Return
         End If
 
+        Dim number As Integer = 2
         Select Case number
             Case 1 To 5
                 Exit Select           ' compliant

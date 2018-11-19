@@ -49,6 +49,6 @@ Namespace Tests.Diagnostics
             Return 1
         End Function
 
-        Public Shared ReadOnly Property [In] As System.IO.TextReader
+        Public ReadOnly Property [In] As System.IO.TextReader
     End Module
 End Namespace

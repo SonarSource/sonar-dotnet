@@ -56,7 +56,7 @@
             Return 0
         End Function
 
-        Public Shared Operator ^() As Integer  ' Compliant
+        Public Shared Operator ^(ByVal left As FunctionComplexityVisualBasic, ByVal right As FunctionComplexityVisualBasic) As Integer  ' Compliant
             If False Then
 
             End If
@@ -66,7 +66,7 @@
             Return 0
         End Operator
 
-        Public Shared Operator &() As Integer  ' Noncompliant
+        Public Shared Operator &(ByVal left As FunctionComplexityVisualBasic, ByVal right As FunctionComplexityVisualBasic) As Integer  ' Noncompliant
             If False Then
 
             End If

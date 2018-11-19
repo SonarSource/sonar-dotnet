@@ -58,7 +58,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MarkWindowsFormsMainWithStaThread_VB_NoWindowsForms()
         {
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.vb",
-                new vbnet.MarkWindowsFormsMainWithStaThread());
+                new vbnet.MarkWindowsFormsMainWithStaThread(),
+                checkMode: CompilationErrorBehavior.Ignore);
         }
     }
 }
