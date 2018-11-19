@@ -24,6 +24,7 @@ using csharp::SonarAnalyzer.Rules.CSharp;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -36,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_AspNetCore_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_AspNetCore.cs",
-                new ConfiguringLoggers(new TestAnalyzerConfiguration(null, "S4792")),
+                new ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: AspNetCoreLoggingReferences);
         }
 
@@ -46,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_AspNetCore_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_AspNetCore.vb",
-                new SonarAnalyzer.Rules.VisualBasic.ConfiguringLoggers(new TestAnalyzerConfiguration(null, "S4792")),
+                new SonarAnalyzer.Rules.VisualBasic.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: AspNetCoreLoggingReferences);
         }
 
@@ -56,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_Log4Net_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_Log4Net.cs",
-                new ConfiguringLoggers(new TestAnalyzerConfiguration(null, "S4792")),
+                new ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: Log4NetReferences);
         }
 
@@ -66,7 +67,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_Log4Net_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_Log4Net.vb",
-                new SonarAnalyzer.Rules.VisualBasic.ConfiguringLoggers(new TestAnalyzerConfiguration(null, "S4792")),
+                new SonarAnalyzer.Rules.VisualBasic.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: Log4NetReferences);
         }
 
@@ -76,7 +77,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_NLog_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_NLog.cs",
-                new ConfiguringLoggers(new TestAnalyzerConfiguration(null, "S4792")),
+                new ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: NLogReferences);
         }
 
@@ -86,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_NLog_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_NLog.vb",
-                new SonarAnalyzer.Rules.VisualBasic.ConfiguringLoggers(new TestAnalyzerConfiguration(null, "S4792")),
+                new SonarAnalyzer.Rules.VisualBasic.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: NLogReferences);
         }
 
@@ -96,7 +97,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_Serilog_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_Serilog.cs",
-                new ConfiguringLoggers(new TestAnalyzerConfiguration(null, "S4792")),
+                new ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: SeriLogReferences);
         }
 
@@ -106,7 +107,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ConfiguringLoggers_Serilog_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ConfiguringLoggers_Serilog.vb",
-                new SonarAnalyzer.Rules.VisualBasic.ConfiguringLoggers(new TestAnalyzerConfiguration(null, "S4792")),
+                new SonarAnalyzer.Rules.VisualBasic.ConfiguringLoggers(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: SeriLogReferences);
         }
 
@@ -129,8 +130,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new SonarAnalyzer.Rules.VisualBasic.ConfiguringLoggers(),
                 additionalReferences: AspNetCoreLoggingReferences);
         }
-        
-        private static IEnumerable<MetadataReference> AspNetCoreLoggingReferences =>   
+
+        private static IEnumerable<MetadataReference> AspNetCoreLoggingReferences =>
             FrameworkMetadataReference.Netstandard
             .Concat(NuGetMetadataReference.MicrosoftAspNetCore(Constants.NuGetLatestVersion))
             .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHosting(Constants.NuGetLatestVersion))

@@ -21,6 +21,7 @@
 extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeSecure()
         {
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure.cs",
-                new CookieShouldBeSecure(new TestAnalyzerConfiguration(null, "S2092")),
+                new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: FrameworkMetadataReference.SystemWeb);
         }
 
@@ -41,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeSecure_Not_Enabled()
         {
             Verifier.VerifyNoIssueReported(@"TestCases\CookieShouldBeSecure.cs",
-                new CookieShouldBeSecure(new TestAnalyzerConfiguration(null)),
+                new CookieShouldBeSecure(),
                 additionalReferences: FrameworkMetadataReference.SystemWeb);
         }
     }

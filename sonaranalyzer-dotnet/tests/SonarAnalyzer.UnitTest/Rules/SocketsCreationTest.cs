@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SocketsCreation_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\SocketsCreation.cs",
-                new SocketsCreation(new TestAnalyzerConfiguration(null, "S4818")));
+                new SocketsCreation(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]
@@ -40,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SocketsCreation_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\SocketsCreation.vb",
-                new SonarAnalyzer.Rules.VisualBasic.SocketsCreation(new TestAnalyzerConfiguration(null, "S4818")));
+                new SonarAnalyzer.Rules.VisualBasic.SocketsCreation(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]

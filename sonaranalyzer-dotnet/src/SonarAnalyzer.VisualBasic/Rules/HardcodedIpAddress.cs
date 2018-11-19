@@ -37,12 +37,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public HardcodedIpAddress()
-            : base(new DefaultAnalyzerConfiguration())
+            : base(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        public HardcodedIpAddress(IAnalyzerConfiguration analysisConfiguration)
-            : base(analysisConfiguration)
+        public HardcodedIpAddress(IAnalyzerConfiguration analyzerConfiguration)
+            : base(analyzerConfiguration)
         {
         }
 

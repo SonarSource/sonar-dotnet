@@ -20,7 +20,6 @@
 
 extern alias csharp;
 extern alias vbnet;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
@@ -29,9 +28,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
-using CSharpHelpers = csharp::SonarAnalyzer.Helpers;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
-using VBHelpers = vbnet::SonarAnalyzer.Helpers;
 using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.UnitTest.Helpers
@@ -88,7 +85,7 @@ End Namespace
         private void CheckExactMatchOnly_OverridesAreNotMatched(SnippetCompiler snippet)
         {
             // Testing for calls to Console.WriteLine
-            var targetMethodSignature = new MethodSignature(KnownType.System_Console, "WriteLine");
+            var targetMethodSignature = new MemberDescriptor(KnownType.System_Console, "WriteLine");
 
             // 1. Should match Console.WriteLine
             var callToConsoleWriteLine = CreateContextForMethod("Console.WriteLine", snippet);
@@ -97,9 +94,9 @@ End Namespace
             // 2. Should not match call to xxx.WriteLine
             var callToDoStuffWriteLine = CreateContextForMethod("Class1.WriteLine", snippet);
             CheckExactMethod(false, callToDoStuffWriteLine, snippet,
-                new MethodSignature(KnownType.System_Console, "Foo"),
+                new MemberDescriptor(KnownType.System_Console, "Foo"),
                 targetMethodSignature,
-                new MethodSignature(KnownType.System_Data_DataSet, ".ctor"));
+                new MemberDescriptor(KnownType.System_Data_DataSet, ".ctor"));
 
             // 3. Should match if Console.WriteLine is in the list of candidates
             CheckExactMethod(false, callToDoStuffWriteLine, snippet, targetMethodSignature);
@@ -149,8 +146,8 @@ End Namespace
         private static void CheckExactMatch_DoesNotMatchOverrides(SnippetCompiler snippet)
         {
             // XmlDocument derives from XmlNode
-            var nodeWriteTo = new MethodSignature(KnownType.System_Xml_XmlNode, "WriteTo");
-            var docWriteTo = new MethodSignature(KnownType.System_Xml_XmlDocument, "WriteTo");
+            var nodeWriteTo = new MemberDescriptor(KnownType.System_Xml_XmlNode, "WriteTo");
+            var docWriteTo = new MemberDescriptor(KnownType.System_Xml_XmlDocument, "WriteTo");
 
             // 1. Call to node.WriteTo should only match for XmlNode
             var callToNodeWriteTo = CreateContextForMethod("XmlNode.WriteTo", snippet);
@@ -206,8 +203,8 @@ End Namespace
         private void CheckIsMatch_AndCheckingOverrides_DoesMatchOverrides(SnippetCompiler snippet)
         {
             // XmlDocument derives from XmlNode
-            var nodeWriteTo = new MethodSignature(KnownType.System_Xml_XmlNode, "WriteTo");
-            var docWriteTo = new MethodSignature(KnownType.System_Xml_XmlDocument, "WriteTo");
+            var nodeWriteTo = new MemberDescriptor(KnownType.System_Xml_XmlNode, "WriteTo");
+            var docWriteTo = new MemberDescriptor(KnownType.System_Xml_XmlDocument, "WriteTo");
 
             // 1. Call to node.WriteTo should only match for XmlNode
             var callToNodeWriteTo = CreateContextForMethod("XmlNode.WriteTo", snippet);
@@ -267,7 +264,7 @@ End Namespace
 
         private void DoCheckMatch_InterfaceMethods(SnippetCompiler snippet)
         {
-            var dispose = new MethodSignature(KnownType.System_IDisposable, "Dispose");
+            var dispose = new MemberDescriptor(KnownType.System_IDisposable, "Dispose");
             var callToDispose = CreateContextForMethod("Class1.Dispose", snippet);
 
             // Exact match should not match, but matching "derived" methods should
@@ -329,56 +326,45 @@ End Namespace
         {
             var nameParts = typeAndMethodName.Split('.');
 
-            IEnumerable<ValueTuple<SyntaxNode, SyntaxNode>> invocation_identifierPairs = null;
+            IEnumerable<(SyntaxNode node, string name)> invocation_identifierPairs = null;
             if (snippet.IsCSharp())
             {
                 invocation_identifierPairs = snippet.GetNodes<CSharpSyntax.InvocationExpressionSyntax>()
-                    .Select(n => ((SyntaxNode)n, (SyntaxNode)n.Expression.GetIdentifier()));
+                    .Select(n => ((SyntaxNode)n, n.Expression.GetIdentifier()?.Identifier.ValueText));
             }
             else
             {
                 invocation_identifierPairs = snippet.GetNodes<VBSyntax.InvocationExpressionSyntax>()
-                    .Select(n => ((SyntaxNode)n, (SyntaxNode)vbnet::SonarAnalyzer.Helpers.VisualBasic.VisualBasicSyntaxHelper.GetIdentifier(n.Expression)));                
+                    .Select(n => ((SyntaxNode)n, vbnet::SonarAnalyzer.Helpers.VisualBasic.VisualBasicSyntaxHelper.GetIdentifier(n.Expression)?.Identifier.ValueText));
             }
 
-            foreach (var (invocation, identifier) in invocation_identifierPairs)
+            foreach (var (invocation, methodName) in invocation_identifierPairs)
             {
-                var symbol = snippet.GetSymbol<IMethodSymbol>(identifier);
+                var symbol = snippet.GetSymbol<IMethodSymbol>(invocation);
                 if (symbol.Name == nameParts[1] &&
                     symbol.ContainingType.Name == nameParts[0])
                 {
-                    return new InvocationContext(invocation, identifier, snippet.SemanticModel);
+                    return new InvocationContext(invocation, methodName, snippet.SemanticModel);
                 }
             }
 
             Assert.Fail($"Test setup error: could not find method call in test code snippet: {typeAndMethodName}");
             return null;
         }
-       
+
         private static void CheckExactMethod(bool expectedOutcome, InvocationContext invocationContext,
-            SnippetCompiler snippet, params MethodSignature[] targetMethodSignatures) =>
+            SnippetCompiler snippet, params MemberDescriptor[] targetMethodSignatures) =>
                 CheckMatch(false, expectedOutcome, invocationContext, snippet, targetMethodSignatures);
 
         private static void CheckIsMethodOrDerived(bool expectedOutcome, InvocationContext invocationContext, SnippetCompiler snippet,
-            params MethodSignature[] targetMethodSignatures) =>
+            params MemberDescriptor[] targetMethodSignatures) =>
             CheckMatch(true, expectedOutcome, invocationContext, snippet, targetMethodSignatures);
 
         private static void CheckMatch(bool checkDerived, bool expectedOutcome, InvocationContext invocationContext,
-            SnippetCompiler snippet, params MethodSignature[] targetMethodSignatures)
+            SnippetCompiler snippet, params MemberDescriptor[] targetMethodSignatures)
         {
-            bool result;
-            if (snippet.IsCSharp())
-            {
-                result = CSharpHelpers.MethodSignatureHelper.IsMatch(invocationContext.Identifier as CSharpSyntax.SimpleNameSyntax,
-                    snippet.SemanticModel, invocationContext.InvokedMethodSymbol, checkDerived,
-                    targetMethodSignatures);
-            }
-            else
-            {
-                result = VBHelpers.MethodSignatureHelper.IsMatch(invocationContext.Identifier as VBSyntax.SimpleNameSyntax,
-                    snippet.SemanticModel, invocationContext.InvokedMethodSymbol, checkDerived,
-                    targetMethodSignatures);
-            }
+            var result = MemberDescriptor.MatchesAny(invocationContext.MethodName,
+                invocationContext.MethodSymbol, checkDerived, targetMethodSignatures);
 
             result.Should().Be(expectedOutcome);
         }

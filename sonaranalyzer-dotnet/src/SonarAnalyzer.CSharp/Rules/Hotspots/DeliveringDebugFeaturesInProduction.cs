@@ -42,13 +42,13 @@ namespace SonarAnalyzer.Rules.CSharp
             ImmutableArray.Create(rule);
 
         public DeliveringDebugFeaturesInProduction()
-            : this(new DefaultAnalyzerConfiguration())
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        internal /*for testing*/ DeliveringDebugFeaturesInProduction(IAnalyzerConfiguration analysisConfiguration)
+        internal /*for testing*/ DeliveringDebugFeaturesInProduction(IAnalyzerConfiguration analyzerConfiguration)
         {
-            InvocationTracker = new CSharpInvocationTracker(analysisConfiguration, rule);
+            InvocationTracker = new CSharpInvocationTracker(analyzerConfiguration, rule);
         }
 
         protected override InvocationCondition IsInvokedConditionally() =>
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var invocationStatement = context.Invocation.FirstAncestorOrSelf<StatementSyntax>();
                 return invocationStatement != null &&
-                    invocationStatement.Ancestors().Any(node => IsDevelopmentCheck(node, context.Model));
+                    invocationStatement.Ancestors().Any(node => IsDevelopmentCheck(node, context.SemanticModel));
             };
 
         private bool IsDevelopmentCheck(SyntaxNode node, SemanticModel semanticModel)
@@ -67,16 +67,22 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var condition = ((IfStatementSyntax)node).Condition.RemoveParentheses();
-            if (condition == null || !condition.IsKind(SyntaxKind.InvocationExpression))
+
+            if (condition != null && condition.IsKind(SyntaxKind.InvocationExpression))
             {
-                return false;
+                return IsMatch(semanticModel, (InvocationExpressionSyntax)condition);
             }
 
-            var methodIdentifier = ((InvocationExpressionSyntax)condition).Expression.GetIdentifier();
+            return false;
+        }
+
+        private static bool IsMatch(SemanticModel semanticModel, InvocationExpressionSyntax condition)
+        {
+            var methodName = condition.Expression.GetIdentifier()?.Identifier.ValueText;
+
             var methodSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(condition).Symbol as IMethodSymbol);
 
-            return MethodSignatureHelper.IsMatch(methodIdentifier, semanticModel, methodSymbol, true,
-                new[] { new MethodSignature(KnownType.Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions, "IsDevelopment") });
+            return isDevelopmentMethod.IsMatch(methodName, methodSymbol, true);
         }
     }
 }

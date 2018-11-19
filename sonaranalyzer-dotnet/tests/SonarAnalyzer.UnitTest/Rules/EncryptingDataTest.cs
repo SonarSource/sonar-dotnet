@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EncryptingData_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\EncryptingData.cs",
-                new EncryptingData(new TestAnalyzerConfiguration(null, "S4787")));
+                new EncryptingData(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]
@@ -40,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EncryptingData_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\EncryptingData.vb",
-                new SonarAnalyzer.Rules.VisualBasic.EncryptingData(new TestAnalyzerConfiguration(null, "S4787")));
+                new SonarAnalyzer.Rules.VisualBasic.EncryptingData(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]

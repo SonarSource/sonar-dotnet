@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CreatingHashAlgorithms_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.cs",
-                new CreatingHashAlgorithms(new TestAnalyzerConfiguration(null, "S4790")));
+                new CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]
@@ -42,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CreatingHashAlgorithms_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\CreatingHashAlgorithms.vb",
-                new SonarAnalyzer.Rules.VisualBasic.CreatingHashAlgorithms(new TestAnalyzerConfiguration(null, "S4790")));
+                new SonarAnalyzer.Rules.VisualBasic.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]

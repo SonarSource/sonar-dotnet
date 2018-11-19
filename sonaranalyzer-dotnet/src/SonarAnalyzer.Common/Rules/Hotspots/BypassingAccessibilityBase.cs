@@ -33,9 +33,9 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context)
         {
             FieldAccessTracker.Track(context,
-                FieldAccessTracker.MatchGet(),
-                FieldAccessTracker.MatchSimpleNames(new MethodSignature(KnownType.System_Reflection_BindingFlags, "NonPublic"))
-                );
+                FieldAccessTracker.WhenRead(),
+                FieldAccessTracker.MatchField(
+                    new MemberDescriptor(KnownType.System_Reflection_BindingFlags, "NonPublic")));
         }
     }
 }

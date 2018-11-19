@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Helpers
             }
 
             var additionalFile = options.AdditionalFiles
-                .FirstOrDefault(f => ConfigurationFilePathMatchesExpected(f.Path));
+                .FirstOrDefault(f => IsSonarLintXml(f.Path));
 
             if (additionalFile == null)
             {
@@ -150,7 +150,7 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static bool ConfigurationFilePathMatchesExpected(string path)
+        public static bool IsSonarLintXml(string path)
         {
             return ConfigurationFilePathMatchesExpected(path, ParameterConfigurationFileName);
         }

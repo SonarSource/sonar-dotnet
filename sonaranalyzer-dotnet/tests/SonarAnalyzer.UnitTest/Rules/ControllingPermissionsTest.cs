@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
@@ -43,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ControllingPermissions_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ControllingPermissions.cs",
-                new CSharp.ControllingPermissions(new TestAnalyzerConfiguration(null, "S4834")),
+                new CSharp.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: AdditionalReferences);
         }
 
@@ -61,7 +62,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ControllingPermissions_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ControllingPermissions.vb",
-                new VisualBasic.ControllingPermissions(new TestAnalyzerConfiguration(null, "S4834")),
+                new VisualBasic.ControllingPermissions(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: AdditionalReferences);
         }
 

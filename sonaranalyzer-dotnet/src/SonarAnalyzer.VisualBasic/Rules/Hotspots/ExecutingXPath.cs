@@ -42,13 +42,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override DiagnosticDescriptor Rule { get; } = rule;
 
         public ExecutingXPath()
-            : this(new DefaultAnalyzerConfiguration())
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        internal /*for testing*/ ExecutingXPath(IAnalyzerConfiguration analysisConfiguration)
+        internal /*for testing*/ ExecutingXPath(IAnalyzerConfiguration analyzerConfiguration)
         {
-            InvocationTracker = new VisualBasicInvocationTracker(analysisConfiguration, Rule);
+            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, Rule);
         }
     }
 }

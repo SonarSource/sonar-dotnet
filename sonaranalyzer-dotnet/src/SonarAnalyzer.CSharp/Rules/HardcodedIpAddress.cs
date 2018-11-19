@@ -37,12 +37,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 .WithNotConfigurable();
 
         public HardcodedIpAddress()
-            : base(new DefaultAnalyzerConfiguration())
+            : base(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        public HardcodedIpAddress(IAnalyzerConfiguration analysisConfiguration)
-            : base(analysisConfiguration)
+        public HardcodedIpAddress(IAnalyzerConfiguration analyzerConfiguration)
+            : base(analyzerConfiguration)
         {
         }
 

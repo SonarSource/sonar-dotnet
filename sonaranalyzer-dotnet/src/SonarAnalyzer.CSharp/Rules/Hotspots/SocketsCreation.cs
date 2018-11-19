@@ -39,13 +39,13 @@ namespace SonarAnalyzer.Rules.CSharp
             ImmutableArray.Create(rule);
 
         public SocketsCreation()
-            : this(new DefaultAnalyzerConfiguration())
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        internal /*for testing*/ SocketsCreation(IAnalyzerConfiguration analysisConfiguration)
+        internal /*for testing*/ SocketsCreation(IAnalyzerConfiguration analyzerConfiguration)
         {
-            ObjectCreationTracker = new CSharpObjectCreationTracker(analysisConfiguration, rule);
+            ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, rule);
         }
     }
 }

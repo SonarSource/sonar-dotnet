@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules
         protected abstract string GetValueText(TLiteralExpression literalExpression);
         protected abstract bool HasAttributes(TLiteralExpression literalExpression);
 
-        protected HardcodedIpAddressBase(IAnalyzerConfiguration analysisConfiguration) : base(analysisConfiguration)
+        protected HardcodedIpAddressBase(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration)
         {
         }
 

@@ -42,12 +42,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly IEnumerable<MethodSignature> checkedMethods = new List<MethodSignature>
+        private static readonly IEnumerable<MemberDescriptor> checkedMethods = new List<MemberDescriptor>
         {
-            new MethodSignature(KnownType.System_Environment, "Exit"),
-            new MethodSignature(KnownType.System_Windows_Forms_Application, "Exit")
+            new MemberDescriptor(KnownType.System_Environment, "Exit"),
+            new MemberDescriptor(KnownType.System_Windows_Forms_Application, "Exit")
         };
-        internal override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
+        internal override IEnumerable<MemberDescriptor> CheckedMethods => checkedMethods;
 
         protected override bool IsInValidContext(InvocationExpressionSyntax invocationSyntax,
             SemanticModel semanticModel)

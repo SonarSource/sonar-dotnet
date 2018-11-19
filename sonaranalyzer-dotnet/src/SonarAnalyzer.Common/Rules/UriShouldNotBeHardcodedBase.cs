@@ -61,14 +61,14 @@ namespace SonarAnalyzer.Rules
                 "STREAM"
             };
 
-        internal static readonly ISet<MethodSignature> MethodsWithVirtualPaths = new HashSet<MethodSignature>
+        internal static readonly ISet<MemberDescriptor> MethodsWithVirtualPaths = new HashSet<MemberDescriptor>
         {
-            new MethodSignature(KnownType.Microsoft_AspNetCore_Mvc_VirtualFileResult, ".ctor"),
-            new MethodSignature(KnownType.Microsoft_AspNetCore_Routing_VirtualPathData, ".ctor"),
-            new MethodSignature(KnownType.System_Web_HttpServerUtilityBase, "MapPath"),
-            new MethodSignature(KnownType.System_Web_HttpRequestBase, "MapPath"),
-            new MethodSignature(KnownType.System_Web_HttpResponseBase, "ApplyAppPathModifier"),
-            new MethodSignature(KnownType.System_Web_Mvc_UrlHelper, "Content"),
+            new MemberDescriptor(KnownType.Microsoft_AspNetCore_Mvc_VirtualFileResult, ".ctor"),
+            new MemberDescriptor(KnownType.Microsoft_AspNetCore_Routing_VirtualPathData, ".ctor"),
+            new MemberDescriptor(KnownType.System_Web_HttpServerUtilityBase, "MapPath"),
+            new MemberDescriptor(KnownType.System_Web_HttpRequestBase, "MapPath"),
+            new MemberDescriptor(KnownType.System_Web_HttpResponseBase, "ApplyAppPathModifier"),
+            new MemberDescriptor(KnownType.System_Web_Mvc_UrlHelper, "Content"),
         };
     }
 
@@ -181,7 +181,7 @@ namespace SonarAnalyzer.Rules
             return baseType != null &&
                 expression is TLiteralExpressionSyntax &&
                 VirtualPathRegex.IsMatch(GetLiteralText((TLiteralExpressionSyntax)expression)) &&
-                (MethodsWithVirtualPaths.Any(m => m.Is(baseType, methodSymbol.Name)) || baseType.Is(KnownType.System_Web_VirtualPathUtility));
+                (MethodsWithVirtualPaths.Any(m => m.IsMatch(methodSymbol.Name, baseType, false)) || baseType.Is(KnownType.System_Web_VirtualPathUtility));
         }
     }
 }

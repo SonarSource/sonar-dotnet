@@ -40,12 +40,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 .WithNotConfigurable();
 
         public DoNotUseRandom()
-            : base(new DefaultAnalyzerConfiguration())
+            : base(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        public DoNotUseRandom(IAnalyzerConfiguration analysisConfiguration)
-            : base(analysisConfiguration)
+        public DoNotUseRandom(IAnalyzerConfiguration analyzerConfiguration)
+            : base(analyzerConfiguration)
         {
         }
 

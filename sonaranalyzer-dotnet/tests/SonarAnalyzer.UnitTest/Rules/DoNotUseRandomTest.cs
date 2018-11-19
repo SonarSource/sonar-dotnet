@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotUseRandom()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseRandom.cs",
-                new DoNotUseRandom(new TestAnalyzerConfiguration(null, "S2245")));
+                new DoNotUseRandom(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]
@@ -40,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotUseRandom_Not_Enabled()
         {
             Verifier.VerifyNoIssueReported(@"TestCases\DoNotUseRandom.cs",
-                new DoNotUseRandom(new TestAnalyzerConfiguration(null)));
+                new DoNotUseRandom());
         }
     }
 }

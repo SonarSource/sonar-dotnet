@@ -21,6 +21,7 @@
 extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExecutingXPath_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingXPath.cs",
-                new ExecutingXPath(new TestAnalyzerConfiguration(null, "S4817")),
+                new ExecutingXPath(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: FrameworkMetadataReference.SystemXml);
         }
 
@@ -43,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExecutingXPath_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingXPath.vb",
-                new SonarAnalyzer.Rules.VisualBasic.ExecutingXPath(new TestAnalyzerConfiguration(null, "S4817")),
+                new SonarAnalyzer.Rules.VisualBasic.ExecutingXPath(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: FrameworkMetadataReference.SystemXml);
         }
 

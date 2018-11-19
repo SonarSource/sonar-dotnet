@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -38,30 +37,19 @@ namespace SonarAnalyzer.Rules
         protected override void Initialize(SonarAnalysisContext context)
         {
             InvocationTracker.Track(context,
-                InvocationTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.System_Diagnostics_Process, "Start")),
-                WhenFirstArgumentIsNot(KnownType.System_Diagnostics_ProcessStartInfo),
-                WhenThereAreArguments());
+                InvocationTracker.MatchMethod(new MemberDescriptor(KnownType.System_Diagnostics_Process, "Start")),
+                Conditions.ExceptWhen(
+                    InvocationTracker.ArgumentAtIndexIs(0, KnownType.System_Diagnostics_ProcessStartInfo)),
+                InvocationTracker.MethodHasParameters());
 
             PropertyAccessTracker.Track(context,
-                PropertyAccessTracker.MatchSimpleNames(
-                    new MethodSignature(KnownType.System_Diagnostics_ProcessStartInfo, "FileName")),
-                PropertyAccessTracker.MatchSet());
+                PropertyAccessTracker.MatchProperty(
+                    new MemberDescriptor(KnownType.System_Diagnostics_ProcessStartInfo, "FileName")),
+                PropertyAccessTracker.MatchSetter());
 
             ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructors(
-                    KnownType.System_Diagnostics_ProcessStartInfo),
-                ObjectCreationTracker.FirstArgumentIs(KnownType.System_String));
+                ObjectCreationTracker.MatchConstructor(KnownType.System_Diagnostics_ProcessStartInfo),
+                ObjectCreationTracker.ArgumentAtIndexIs(0, KnownType.System_String));
         }
-
-        private InvocationCondition WhenThereAreArguments() =>
-            (context) =>
-                context.InvokedMethodSymbol.Value != null &&
-                context.InvokedMethodSymbol.Value.Parameters.Length > 0;
-
-        private InvocationCondition WhenFirstArgumentIsNot(KnownType type) =>
-            (context) =>
-                context.InvokedMethodSymbol.Value != null &&
-                !context.InvokedMethodSymbol.Value.ArgumentAtIndexIs(0, type);
     }
 }

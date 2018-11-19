@@ -26,6 +26,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.CodeAnalysis;
 using System.Linq;
 using System.Collections.Generic;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -46,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UsingCookies_CS_Net46()
         {
             Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_Net46.cs",
-                new CSharp.UsingCookies(new TestAnalyzerConfiguration(null, "S2255")),
+                new CSharp.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferences_Net46());
         }
 
@@ -55,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UsingCookies_CS_NetCore()
         {
             Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_NetCore.cs",
-                new CSharp.UsingCookies(new TestAnalyzerConfiguration(null, "S2255")),
+                new CSharp.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferences_NetCore());
         }
 
@@ -73,7 +74,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UsingCookies_VB_Net46()
         {
             Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_Net46.vb",
-                new VisualBasic.UsingCookies(new TestAnalyzerConfiguration(null, "S2255")),
+                new VisualBasic.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferences_Net46());
         }
 
@@ -82,7 +83,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UsingCookies_VB_NetCore()
         {
             Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_NetCore.vb",
-                new VisualBasic.UsingCookies(new TestAnalyzerConfiguration(null, "S2255")),
+                new VisualBasic.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: GetAdditionalReferences_NetCore());
 
         }

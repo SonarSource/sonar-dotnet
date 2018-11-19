@@ -24,6 +24,7 @@ using csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
 using System.Reflection.Metadata;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -36,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DynamicExecution_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DynamicExecution.cs",
-                new DynamicExecution(new TestAnalyzerConfiguration(null, "S1523")));
+                new DynamicExecution(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]
@@ -45,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DynamicExecution_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DynamicExecution.vb",
-                new SonarAnalyzer.Rules.VisualBasic.DynamicExecution(new TestAnalyzerConfiguration(null, "S1523")));
+                new SonarAnalyzer.Rules.VisualBasic.DynamicExecution(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]

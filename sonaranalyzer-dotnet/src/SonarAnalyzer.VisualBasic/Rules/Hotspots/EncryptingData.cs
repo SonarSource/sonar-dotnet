@@ -39,14 +39,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
             ImmutableArray.Create(rule);
 			
         public EncryptingData()
-            : this(new DefaultAnalyzerConfiguration())
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        internal /*for testing*/ EncryptingData(IAnalyzerConfiguration analysisConfiguration)
+        internal /*for testing*/ EncryptingData(IAnalyzerConfiguration analyzerConfiguration)
         {
-            InvocationTracker = new VisualBasicInvocationTracker(analysisConfiguration, rule);
-            BaseTypeTracker = new VisualBasicBaseTypeTracker(analysisConfiguration, rule);
+            InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
+            BaseTypeTracker = new VisualBasicBaseTypeTracker(analyzerConfiguration, rule);
         }
     }
 }
