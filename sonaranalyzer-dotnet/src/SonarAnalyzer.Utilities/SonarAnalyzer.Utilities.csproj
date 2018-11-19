@@ -24,7 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\*.html" />
+    <EmbeddedResource Include="Rules.Description\*.html">
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </EmbeddedResource>
   </ItemGroup>
 
   <!--
