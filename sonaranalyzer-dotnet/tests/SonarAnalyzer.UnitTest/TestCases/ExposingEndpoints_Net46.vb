@@ -6,6 +6,9 @@ Public Class Foo
     Public sub New () ' Compliant, ctors should not be highlighted
     End sub
 
+    Protected Overrides Sub Finalize() ' Compliant, desctructors should not be highlighted; in addition, this protected and will not be highlighted anyway
+    End Sub
+
     Public Property MyProperty As Integer  ' Compliant, properties should not be highlighted
         Get
             Return 0
