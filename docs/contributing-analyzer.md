@@ -4,7 +4,7 @@ All C# and VB .NET analyzers present in SonarLint for Visual Studio, in the Sona
 
 ## Working with the code
 
-1. Clone [this repository](https://github.com/SonarSource/sonar-csharp.git)
+1. Clone [this repository](https://github.com/SonarSource/sonar-dotnet.git)
 1. Download sub-modules `git submodule update --init --recursive`
 1. Run `.\scripts\build\dev-build.ps1 -restore -build -test -metadata`
 

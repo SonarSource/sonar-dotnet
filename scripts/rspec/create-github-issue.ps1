@@ -122,7 +122,7 @@ function New-Issue() {
     }
 
     Invoke-WebRequest `
-        -Uri "https://api.github.com/repos/SonarSource/sonar-csharp/issues" `
+        -Uri "https://api.github.com/repos/SonarSource/sonar-dotnet/issues" `
         -Method "POST" `
         -Headers $headers `
         -Body ($payload | ConvertTo-Json) `

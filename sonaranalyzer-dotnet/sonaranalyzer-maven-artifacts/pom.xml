@@ -33,15 +33,15 @@
   </modules>
 
   <scm> 
-    <connection>scm:git:git@github.com:SonarSource/sonar-csharp.git</connection>
-    <developerConnection>scm:git:git@github.com:SonarSource/sonar-csharp.git</developerConnection>
-    <url>https://github.com/SonarSource/sonar-csharp</url>
+    <connection>scm:git:git@github.com:SonarSource/sonar-dotnet.git</connection>
+    <developerConnection>scm:git:git@github.com:SonarSource/sonar-dotnet.git</developerConnection>
+    <url>https://github.com/SonarSource/sonar-dotnet</url>
     <tag>HEAD</tag>
   </scm>
 
   <issueManagement>
     <system>GitHub Issues</system>
-    <url>https://github.com/SonarSource/sonar-csharp/issues</url>
+    <url>https://github.com/SonarSource/sonar-dotnet/issues</url>
   </issueManagement>
 
   <properties>

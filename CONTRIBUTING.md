@@ -7,7 +7,7 @@ outlined in our [Code of Conduct](./CODE_OF_CONDUCT.md).
 ## Easy Ways to Contribute
 
 One of the easiest ways to contribute is to participate in discussions and discuss issues here on this
-[GitHub project](https://github.com/SonarSource/sonar-csharp/issues), on
+[GitHub project](https://github.com/SonarSource/sonar-dotnet/issues), on
 [StackOverflow](https://stackoverflow.com/search?q=sonarqube+c%23) or on our
 [Community Forum](https://community.sonarsource.com/).
 

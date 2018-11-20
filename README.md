@@ -1,6 +1,6 @@
 # SonarC\#
 
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/SonarSource/sonar-csharp.svg?columns=all)](https://waffle.io/SonarSource/sonar-csharp?source=SonarSource%2Fsonar-csharp)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/SonarSource/sonar-dotnet.svg?columns=all)](https://waffle.io/SonarSource/sonar-dotnet?source=SonarSource%2Fsonar-dotnet)
 
 [![Build Status](https://sonarsource.visualstudio.com/_apis/public/build/definitions/399fb241-ecc7-4802-8697-dcdd01fbb832/8/badge)](https://sonarsource.visualstudio.com/DotNetTeam%20Project/_build/index?definitionId=8)
 
@@ -28,14 +28,14 @@ supported code by helping you to find and to correct bugs, vulnerabilities and s
 ## Useful links
 
 * [Project homepage](https://redirect.sonarsource.com/plugins/csharp.html)
-* [Issue tracking](https://github.com/SonarSource/sonar-csharp/issues)
+* [Issue tracking](https://github.com/SonarSource/sonar-dotnet/issues)
 * [C# rules](https://rules.sonarsource.com/csharp)
 * [VB.Net rules](https://rules.sonarsource.com/vbnet)
 
 ## Have question or feedback?
 
 To provide feedback (request a feature, report a bug etc.), simply
-[create a GitHub Issue](https://github.com/SonarSource/sonar-csharp/issues/new).
+[create a GitHub Issue](https://github.com/SonarSource/sonar-dotnet/issues/new).
 
 ## Get started
 

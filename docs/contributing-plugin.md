@@ -2,7 +2,7 @@
 
 ## Working with the code
 
-1. Clone [this repository](https://github.com/SonarSource/sonar-csharp.git)
+1. Clone [this repository](https://github.com/SonarSource/sonar-dotnet.git)
 1. Download sub-modules `git submodule update --init --recursive`
 1. Build the plugin
     * To build the plugin while embedding a local build of the analyzer you can either:
