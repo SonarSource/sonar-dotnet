@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -34,7 +35,7 @@ namespace SonarAnalyzer.UnitTest
     {
         #region Helpers
 
-        private const string PackagesFolderRelativePath = @"..\..\..\..\packages\";
+        private const string PackagesFolderRelativePath = @"..\..\..\..\..\packages\";
 
         private static readonly string[] allowedNugetLibDirectoriesInOrderOfPreference =
             new string[] {
@@ -58,17 +59,22 @@ namespace SonarAnalyzer.UnitTest
 
         public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion)
         {
-            return Create(packageId, packageVersion, allowedNugetLibDirectoriesInOrderOfPreference);
+            return Create(packageId, packageVersion, allowedNugetLibDirectoriesInOrderOfPreference, InstallPackage);
         }
 
         public static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string targetFramework)
         {
-            return Create(packageId, packageVersion, new string[] { targetFramework });
+            return Create(packageId, packageVersion, new string[] { targetFramework }, InstallPackage);
         }
 
-        private static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string[] allowedTargetFrameworks)
+        public static IEnumerable<MetadataReference> CreateWithCommandLine(string packageId, string packageVersion)
         {
-            EnsurePackageIsInstalled(packageId, packageVersion);
+            return Create(packageId, packageVersion, allowedNugetLibDirectoriesInOrderOfPreference, InstallWithCommandLine);
+        }
+
+        private static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string[] allowedTargetFrameworks, Action<string, string> installPackage)
+        {
+            EnsurePackageIsInstalled(packageId, packageVersion, installPackage);
 
             var allowedNugetLibDirectoriesByPreference = allowedTargetFrameworks.
                 Zip(Enumerable.Range(0, allowedTargetFrameworks.Length), (folder, priority) => new { folder, priority });
@@ -119,6 +125,7 @@ namespace SonarAnalyzer.UnitTest
 
             return aggregateRepository;
         }
+
         private static string GetNuGetPackageDirectory(string packageId, string packageVersion)
         {
             var x = $@"{PackagesFolderRelativePath}{packageId}.{GetRealVersionFolder(packageId, packageVersion)}\lib";
@@ -136,14 +143,14 @@ namespace SonarAnalyzer.UnitTest
 
         #region Package installation and update helpers
 
-        private static void EnsurePackageIsInstalled(string packageId, string packageVersion)
+        private static void EnsurePackageIsInstalled(string packageId, string packageVersion, Action<string, string> installPackage)
         {
             if (packageVersion == Constants.NuGetLatestVersion)
             {
                 if (IsCheckForLatestPackageRequired(packageId))
                 {
                     LogMessage($"Checking for newer version of package: {packageId}");
-                    InstallPackage(packageId, packageVersion);
+                    installPackage(packageId, packageVersion);
                     WriteLastUpdateFile(packageId);
                 }
                 else
@@ -162,11 +169,11 @@ namespace SonarAnalyzer.UnitTest
                 else
                 {
                     LogMessage($"Package not found at {packageDir}");
-                    InstallPackage(packageId, packageVersion);
+                    installPackage(packageId, packageVersion);
                 }
             }
         }
-        
+
         /// <summary>
         /// Returns the list of folders containing installed versions of the specified package,
         /// or an empty list if the package is not installed.
@@ -186,13 +193,18 @@ namespace SonarAnalyzer.UnitTest
             // the actual number of parts, as long as there is at least one.
             var matcher = new Regex($"{packageId}(.\\d+)+$");
 
+            if (!Directory.Exists(PackagesFolderRelativePath))
+            {
+                return Enumerable.Empty<string>();
+            }
+
             var directories = Directory.GetDirectories(PackagesFolderRelativePath, $"{packageId}.*", SearchOption.TopDirectoryOnly)
                 .Where(path => matcher.IsMatch(path))
                 .OrderBy(name => name)
                 .ToArray();
             return directories;
         }
-        
+
         private static string GetLastCheckFilePath(string packageId)
         {
             // The file containing the last-check timestamp is stored in folder of the
@@ -233,6 +245,22 @@ namespace SonarAnalyzer.UnitTest
                 ignoreDependencies: true, allowPrereleaseVersions: false);
         }
 
+        private static void InstallWithCommandLine(string packageId, string packageVersion)
+        {
+            var versionArgument = packageVersion == Constants.NuGetLatestVersion
+                ? string.Empty
+                : $"-Version {packageVersion}";
+
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = "nuget.exe",
+                Arguments = $"install {packageId} {versionArgument} -OutputDirectory {Path.GetFullPath(PackagesFolderRelativePath)} -NonInteractive -ForceEnglishOutput",
+            };
+
+            var process = Process.Start(startInfo);
+            process.WaitForExit();
+        }
+
         private static bool IsCheckForLatestPackageRequired(string packageId)
         {
             // Install new nugets only once per day to improve the performance when running tests locally.
@@ -261,6 +289,10 @@ namespace SonarAnalyzer.UnitTest
         private static void WriteLastUpdateFile(string packageId)
         {
             var filePath = GetLastCheckFilePath(packageId);
+            if (filePath == null)
+            {
+                return;
+            }
             File.WriteAllText(filePath, DateTime.Now.ToString("d")); // short date pattern
         }
         #endregion
@@ -354,10 +386,10 @@ namespace SonarAnalyzer.UnitTest
             Create("Microsoft.SqlServer.Compact", packageVersion);
 
         public static IEnumerable<MetadataReference> MicrosoftEntityFrameworkCore(string packageVersion) =>
-            Create("Microsoft.EntityFrameworkCore", packageVersion);
+            CreateWithCommandLine("Microsoft.EntityFrameworkCore", packageVersion);
 
         public static IEnumerable<MetadataReference> MicrosoftEntityFrameworkCoreRelational(string packageVersion) =>
-            Create("Microsoft.EntityFrameworkCore.Relational", packageVersion);
+            CreateWithCommandLine("Microsoft.EntityFrameworkCore.Relational", packageVersion);
 
         public static IEnumerable<MetadataReference> MicrosoftNetHttpHeaders(string packageVersion) =>
             Create("Microsoft.Net.Http.Headers", packageVersion);

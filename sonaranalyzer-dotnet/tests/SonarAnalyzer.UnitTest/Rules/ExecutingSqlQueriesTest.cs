@@ -33,7 +33,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ExecutingSqlQueriesTest
     {
-        [Ignore("Requires NuGet v3.6+ which requires to refactor our NuGetMetadataReference class.")]
         [TestMethod]
         [TestCategory("Rule")]
         public void ExecutingSqlQueries_CS_NetCore()
@@ -52,7 +51,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 additionalReferences: GetReferencesNet46(Constants.NuGetLatestVersion));
         }
 
-        [Ignore("Requires NuGet v3.6+ which requires to refactor our NuGetMetadataReference class.")]
         [TestMethod]
         [TestCategory("Rule")]
         public void ExecutingSqlQueries_CS_Disabled()
@@ -62,7 +60,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 additionalReferences: GetReferencesNetCore(Constants.NuGetLatestVersion));
         }
 
-        [Ignore("Requires NuGet v3.6+ which requires to refactor our NuGetMetadataReference class.")]
         [TestMethod]
         [TestCategory("Rule")]
         public void ExecutingSqlQueries_VB_NetCore()
@@ -81,7 +78,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 additionalReferences: GetReferencesNet46(Constants.NuGetLatestVersion));
         }
 
-        [Ignore("Requires NuGet v3.6+ which requires to refactor our NuGetMetadataReference class.")]
         [TestMethod]
         [TestCategory("Rule")]
         public void ExecutingSqlQueries_VB_Disabled()
