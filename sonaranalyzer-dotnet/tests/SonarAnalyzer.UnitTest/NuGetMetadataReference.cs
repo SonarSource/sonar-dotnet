@@ -142,5 +142,8 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> XunitFramework(string packageVersion) =>
             NugetMetadataFactory.Create("xunit.assert", packageVersion)
             .Concat(NugetMetadataFactory.Create("xunit.extensibility.core", packageVersion));
+
+        public static IEnumerable<MetadataReference> RestSharp(string packageVersion) =>
+            NugetMetadataFactory.Create("RestSharp", packageVersion);
     }
 }
