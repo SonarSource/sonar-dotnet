@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         private readonly IEnumerable<MetadataReference> WebComponentReferences =
             FrameworkMetadataReference.SystemNetHttp
             .Concat(FrameworkMetadataReference.Netstandard)
-            .Concat(NuGetMetadataReference.Create("RestSharp", Constants.NuGetLatestVersion));
+            .Concat(NuGetMetadataReference.RestSharp(Constants.NuGetLatestVersion));
 
         [TestMethod]
         [TestCategory("Rule")]
