@@ -20,38 +20,33 @@
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import com.google.protobuf.Parser;
-import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileMetadataInfo;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
+import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileMetadataInfo;
 
 public class FileMetadataImporter extends RawProtobufImporter<FileMetadataInfo> {
 
-  private final Map<Path, FileMetadataInfo> fileMetadata = new HashMap<>();
+  private final Set<Path> generatedFilePaths = new HashSet<>();
 
   // For testing
   FileMetadataImporter(Parser<FileMetadataInfo> parser) {
     super(parser);
   }
 
-  FileMetadataImporter() {
+  public FileMetadataImporter() {
     this(FileMetadataInfo.parser());
   }
 
   @Override
   void consume(FileMetadataInfo message) {
-    fileMetadata.put(Paths.get(message.getFilePath()), message);
+    if (message.getIsGenerated()) {
+      generatedFilePaths.add(Paths.get(message.getFilePath()));
+    }
   }
 
   public Set<Path> getGeneratedFilePaths() {
-    return fileMetadata.entrySet()
-            .stream()
-            .filter(entry -> entry.getValue().getIsGenerated())
-            .map(Map.Entry::getKey)
-            .collect(Collectors.toSet());
+    return generatedFilePaths;
   }
 }
