@@ -22,47 +22,31 @@ package org.sonarsource.dotnet.shared.plugins;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.util.Collections;
-import java.util.Map;
+import org.sonar.api.batch.InstantiationStrategy;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-import org.sonarsource.dotnet.shared.plugins.protobuf.EncodingImporter;
-import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters;
-
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.ENCODING_OUTPUT_PROTOBUF_NAME;
 
 @ScannerSide
+@InstantiationStrategy(InstantiationStrategy.PER_BATCH)
 public class EncodingPerFile {
   private static final Logger LOG = Loggers.get(EncodingPerFile.class);
+  private final AbstractGlobalProtobufFileProcessor globalReportProcessor;
 
-  // Lazy initialized
-  private Map<Path, Charset> roslynEncodingPerPath;
-
-  void init(Path protobufDir) {
-    Path encodingReportProtobuf = protobufDir.resolve(ENCODING_OUTPUT_PROTOBUF_NAME);
-    if (encodingReportProtobuf.toFile().exists()) {
-      EncodingImporter encodingImporter = ProtobufImporters.encodingImporter();
-      encodingImporter.accept(encodingReportProtobuf);
-      this.roslynEncodingPerPath = encodingImporter.getEncodingPerPath();
-      return;
-    }
-
-    this.roslynEncodingPerPath = Collections.emptyMap();
-    LOG.warn("Protobuf file with encoding not found");
-
+  public EncodingPerFile(AbstractGlobalProtobufFileProcessor globalReportProcessor) {
+    this.globalReportProcessor = globalReportProcessor;
   }
 
   boolean encodingMatch(InputFile inputFile) {
     Path inputFilePath = inputFile.path().toAbsolutePath();
 
-    if (!roslynEncodingPerPath.containsKey(inputFilePath)) {
+    if (!globalReportProcessor.getRoslynEncodingPerPath().containsKey(inputFilePath)) {
       // When there is no entry for a file, it means it was not processed by Roslyn. So we consider encoding to be ok.
       return true;
     }
 
-    Charset roslynEncoding = roslynEncodingPerPath.get(inputFilePath);
+    Charset roslynEncoding = globalReportProcessor.getRoslynEncodingPerPath().get(inputFilePath);
     if (roslynEncoding == null) {
       LOG.warn("File '{}' does not have encoding information. Skip it.", inputFilePath);
       return false;

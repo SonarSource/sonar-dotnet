@@ -22,17 +22,15 @@ package org.sonarsource.dotnet.shared.plugins;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonarsource.dotnet.protobuf.SonarAnalyzer.EncodingInfo;
-import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -50,23 +48,20 @@ public class EncodingPerFileTest {
   }
 
   @Test
-  public void should_treat_as_match_when_proto_file_not_found() throws IOException {
-    assertEncodingMatch(Paths.get("non-existing"), Paths.get("any-file"), StandardCharsets.UTF_8, true);
-  }
-
-  @Test
   public void should_treat_as_match_when_roslyn_entry_missing_for_file() throws IOException {
     Charset roslynCharset = StandardCharsets.UTF_8;
     Charset sqCharset = StandardCharsets.UTF_16;
 
-    Path protobufFile = createProtobuf(roslynCharset);
-    assertEncodingMatch(protobufFile.getParent(), Paths.get("dummy"), sqCharset, true);
+    HashMap<Path, Charset> encodingByPath = new HashMap<>();
+    encodingByPath.put(filePath, roslynCharset);
+    assertEncodingMatch(encodingByPath, Paths.get("dummy"), sqCharset, true);
   }
 
   @Test
   public void should_treat_as_mismatch_when_roslyn_encoding_missing() throws IOException {
-    Path protobufFile = createProtobuf(null);
-    assertEncodingMatch(protobufFile.getParent(), filePath, null, false);
+    HashMap<Path, Charset> encodingByPath = new HashMap<>();
+    encodingByPath.put(filePath, null);
+    assertEncodingMatch(encodingByPath, filePath, null, false);
   }
 
   @Test
@@ -74,8 +69,9 @@ public class EncodingPerFileTest {
     Charset roslynCharset = StandardCharsets.UTF_8;
     Charset sqCharset = StandardCharsets.UTF_16;
 
-    Path protobufFile = createProtobuf(roslynCharset);
-    assertEncodingMatch(protobufFile.getParent(), filePath, sqCharset, false);
+    HashMap<Path, Charset> encodingByPath = new HashMap<>();
+    encodingByPath.put(filePath, roslynCharset);
+    assertEncodingMatch(encodingByPath, filePath, sqCharset, false);
   }
 
   @Test
@@ -83,27 +79,17 @@ public class EncodingPerFileTest {
     Charset roslynCharset = StandardCharsets.UTF_16;
     Charset sqCharset = StandardCharsets.UTF_16LE;
 
-    Path protobufFile = createProtobuf(roslynCharset);
-    assertEncodingMatch(protobufFile.getParent(), filePath, sqCharset, true);
+    HashMap<Path, Charset> encodingByPath = new HashMap<>();
+    encodingByPath.put(filePath, roslynCharset);
+    assertEncodingMatch(encodingByPath, filePath, sqCharset, true);
   }
 
-  private void assertEncodingMatch(Path protobufDir, Path filePath, Charset sqCharset, boolean result) throws IOException {
-    EncodingPerFile encodingPerFile = new EncodingPerFile();
-    encodingPerFile.init(protobufDir);
+  private void assertEncodingMatch(Map<Path, Charset> encodingByPath, Path filePath, Charset sqCharset, boolean result) throws IOException {
+    AbstractGlobalProtobufFileProcessor processor = mock(AbstractGlobalProtobufFileProcessor.class);
+    when(processor.getRoslynEncodingPerPath()).thenReturn(encodingByPath);
+    EncodingPerFile encodingPerFile = new EncodingPerFile(processor);
     InputFile inputFile = newInputFile(filePath, sqCharset);
     assertThat(encodingPerFile.encodingMatch(inputFile)).isEqualTo(result);
-  }
-
-  private Path createProtobuf(@Nullable Charset roslynCharset) throws IOException {
-    Path path = temp.newFolder("proto").toPath().resolve(ProtobufImporters.ENCODING_OUTPUT_PROTOBUF_NAME);
-    EncodingInfo.Builder infoBuilder = EncodingInfo.newBuilder()
-      .setFilePath(filePath.toAbsolutePath().toString());
-
-    if (roslynCharset != null) {
-      infoBuilder.setEncoding(roslynCharset.name());
-    }
-    infoBuilder.build().writeDelimitedTo(Files.newOutputStream(path));
-    return path;
   }
 
   private InputFile newInputFile(Path path, Charset charset) {

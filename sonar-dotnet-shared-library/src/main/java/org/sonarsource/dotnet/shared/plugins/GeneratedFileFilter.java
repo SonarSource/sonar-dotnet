@@ -19,38 +19,23 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import java.nio.file.Path;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFileFilter;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-import org.sonarsource.dotnet.shared.plugins.protobuf.FileMetadataImporter;
-
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.FILEMETADATA_OUTPUT_PROTOBUF_NAME;
 
 public class GeneratedFileFilter implements InputFileFilter {
   private static final Logger LOG = Loggers.get(GeneratedFileFilter.class);
 
-  private Set<Path> generatedFilePaths = Collections.emptySet();
+  private final AbstractGlobalProtobufFileProcessor globalReportProcessor;
 
-  public GeneratedFileFilter(AbstractConfiguration config) {
-    List<Path> protobufPath = config.protobufReportPathsSilent();
-    if (!protobufPath.isEmpty()) {
-      Path metadataPath = protobufPath.get(0).resolve(FILEMETADATA_OUTPUT_PROTOBUF_NAME);
-      if (metadataPath.toFile().exists()) {
-        FileMetadataImporter fileMetadataImporter = new FileMetadataImporter();
-        fileMetadataImporter.accept(metadataPath);
-        generatedFilePaths = fileMetadataImporter.getGeneratedFilePaths();
-      }
-    }
+  public GeneratedFileFilter(AbstractGlobalProtobufFileProcessor globalReportProcessor) {
+    this.globalReportProcessor = globalReportProcessor;
   }
 
   @Override
   public boolean accept(InputFile inputFile) {
-    boolean isGenerated = generatedFilePaths.contains(inputFile.path());
+    boolean isGenerated = globalReportProcessor.getGeneratedFilePaths().contains(inputFile.path());
     if (isGenerated) {
       LOG.debug("Skipping auto generated file: {}", inputFile);
     }

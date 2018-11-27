@@ -50,6 +50,7 @@ public class VbNetPlugin implements Plugin {
       VbNetSonarRulesDefinition.class,
       VbNetSensor.class,
       VbNetConfiguration.class,
+      VbNetGlobalProtobufFileProcessor.class,
       WrongEncodingFileFilter.class,
       EncodingPerFile.class,
       GeneratedFileFilter.class,

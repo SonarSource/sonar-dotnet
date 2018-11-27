@@ -59,7 +59,4 @@ public class ProtobufImporters {
     return new MetricsImporter(context, fileLinesContextFactory, noSonarFilter, toRealPath);
   }
 
-  public static EncodingImporter encodingImporter() {
-    return new EncodingImporter();
-  }
 }
