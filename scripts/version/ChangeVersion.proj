@@ -29,37 +29,28 @@
       <ExpectedMatchCount>1</ExpectedMatchCount>
     </VsixVersion>
     <VsixReleaseNotes Include="$(SolutionRoot)\src\SonarAnalyzer.Vsix\source.extension.vsixmanifest">
-      <Find>(?&lt;=&lt;ReleaseNotes&gt;https:\/\/github.com\/SonarSource\/sonar-csharp\/issues\?q=is:issue\+-label:Task\+milestone:)([^&lt;]*)</Find>
-      <ReplaceWith>$(MilestoneVersion)</ReplaceWith>
+      <Find>(?&lt;=&lt;ReleaseNotes&gt;https:\/\/github.com\/SonarSource\/sonar-dotnet\/releases\/tag\/)([^&lt;]*)</Find>
+      <ReplaceWith>$(NugetVersion)</ReplaceWith>
       <ExpectedMatchCount>1</ExpectedMatchCount>
     </VsixReleaseNotes>
 
-    <NugetAnalyzer Include="$(SolutionRoot)\src\SonarAnalyzer.Vsix\SonarAnalyzer.CSharp.nuspec">
-      <Find>(?&lt;=&lt;version&gt;)([^&lt;]*)</Find>
-      <ReplaceWith>$(NugetVersion)</ReplaceWith>
-      <ExpectedMatchCount>1</ExpectedMatchCount>
-    </NugetAnalyzer>
-    <NugetReleaseNotes Include="$(SolutionRoot)\src\SonarAnalyzer.Vsix\SonarAnalyzer.CSharp.nuspec">
-      <Find>(?&lt;=&lt;releaseNotes&gt;https:\/\/github.com\/SonarSource\/sonar-csharp\/issues\?q=is:issue\+-label:Task\+milestone:)([^&lt;]*)</Find>
-      <ReplaceWith>$(MilestoneVersion)</ReplaceWith>
-      <ExpectedMatchCount>1</ExpectedMatchCount>
-    </NugetReleaseNotes>
-    <NugetAnalyzer Include="$(SolutionRoot)\src\SonarAnalyzer.Vsix\SonarAnalyzer.VisualBasic.nuspec">
+    <NugetAnalyzer Include="$(SolutionRoot)\src\SonarAnalyzer.Vsix\SonarAnalyzer.*.nuspec">
       <Find>(?&lt;=&lt;version&gt;)([^&lt;]*)</Find>
       <ReplaceWith>$(NugetVersion)</ReplaceWith>
       <ExpectedMatchCount>1</ExpectedMatchCount>
     </NugetAnalyzer>
 
-    <NugetDescriptorCs Include="$(SolutionRoot)\src\SonarAnalyzer.RuleDescriptorGenerator\Descriptor.cs.nuspec">
+    <NugetReleaseNotes Include="$(SolutionRoot)\src\SonarAnalyzer.Vsix\SonarAnalyzer.*.nuspec">
+      <Find>(?&lt;=&lt;releaseNotes&gt;https:\/\/github.com\/SonarSource\/sonar-dotnet\/releases\/tag\/)([^&lt;]*)</Find>
+      <ReplaceWith>$(NugetVersion)</ReplaceWith>
+      <ExpectedMatchCount>1</ExpectedMatchCount>
+    </NugetReleaseNotes>
+
+    <NugetDescriptor Include="$(SolutionRoot)\src\SonarAnalyzer.RuleDescriptorGenerator\Descriptor.*.nuspec">
       <Find>(?&lt;=&lt;version&gt;)([^&lt;]*)</Find>
       <ReplaceWith>$(NugetVersion)</ReplaceWith>
       <ExpectedMatchCount>1</ExpectedMatchCount>
-    </NugetDescriptorCs>
-	  <NugetDescriptorVbNet Include="$(SolutionRoot)\src\SonarAnalyzer.RuleDescriptorGenerator\Descriptor.vbnet.nuspec">
-      <Find>(?&lt;=&lt;version&gt;)([^&lt;]*)</Find>
-      <ReplaceWith>$(NugetVersion)</ReplaceWith>
-      <ExpectedMatchCount>1</ExpectedMatchCount>
-    </NugetDescriptorVbNet>
+    </NugetDescriptor>
   </ItemGroup>
 
   <Target Name="UpdateAssemblyVersion">
@@ -70,7 +61,6 @@
     <RegexTransform Items="@(VsixReleaseNotes)" />
     <RegexTransform Items="@(NugetAnalyzer)" />
     <RegexTransform Items="@(NugetReleaseNotes)" />
-    <RegexTransform Items="@(NugetDescriptorCs)" />
-    <RegexTransform Items="@(NugetDescriptorVbNet)" />
+    <RegexTransform Items="@(NugetDescriptor)" />
   </Target>
 </Project>
