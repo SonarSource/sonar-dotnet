@@ -1,5 +1,5 @@
 /*
- * SonarSource :: .NET :: Shared library
+ * SonarC#
  * Copyright (C) 2014-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
@@ -17,22 +17,12 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonarsource.dotnet.shared.plugins;
+package org.sonar.plugins.csharp;
 
-import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.fs.InputFileFilter;
+import org.sonarsource.dotnet.shared.plugins.AbstractGlobalProtobufFileProcessor;
 
-public class WrongEncodingFileFilter implements InputFileFilter {
-
-  private final EncodingPerFile encodingPerFile;
-
-  public WrongEncodingFileFilter(EncodingPerFile encodingPerFile) {
-    this.encodingPerFile = encodingPerFile;
+public class CSharpGlobalProtobufFileProcessor extends AbstractGlobalProtobufFileProcessor {
+  public CSharpGlobalProtobufFileProcessor() {
+    super(CSharpPlugin.LANGUAGE_KEY);
   }
-
-  @Override
-  public boolean accept(InputFile inputFile) {
-    return encodingPerFile.encodingMatch(inputFile);
-  }
-
 }

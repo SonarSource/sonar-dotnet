@@ -50,6 +50,7 @@ public class CSharpPlugin implements Plugin {
       CSharpSonarRulesDefinition.class,
       CSharpSensor.class,
       CSharpConfiguration.class,
+      CSharpGlobalProtobufFileProcessor.class,
       WrongEncodingFileFilter.class,
       EncodingPerFile.class,
       GeneratedFileFilter.class,

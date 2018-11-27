@@ -19,8 +19,6 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import java.nio.file.Paths;
-import java.util.Collections;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
@@ -32,18 +30,15 @@ import static org.mockito.Mockito.when;
 public class WrongEncodingFileFilterTest {
   private WrongEncodingFileFilter filter;
   private EncodingPerFile encodingPerFile;
-  private AbstractConfiguration config;
 
   @Before
   public void setUp() {
     encodingPerFile = mock(EncodingPerFile.class);
-    config = mock(AbstractConfiguration.class);
-    filter = new WrongEncodingFileFilter(encodingPerFile, config);
+    filter = new WrongEncodingFileFilter(encodingPerFile);
   }
 
   @Test
   public void should_exclude_files_with_mismatching_encoding() {
-    when(config.protobufReportPathsSilent()).thenReturn(Collections.singletonList(Paths.get("report")));
     InputFile file = mock(InputFile.class);
     when(encodingPerFile.encodingMatch(file)).thenReturn(true);
     assertThat(filter.accept(file)).isTrue();
@@ -51,16 +46,9 @@ public class WrongEncodingFileFilterTest {
 
   @Test
   public void should_accept_files_with_matching_encoding() {
-    when(config.protobufReportPathsSilent()).thenReturn(Collections.singletonList(Paths.get("report")));
     InputFile file = mock(InputFile.class);
     when(encodingPerFile.encodingMatch(file)).thenReturn(false);
     assertThat(filter.accept(file)).isFalse();
-  }
-
-  @Test
-  public void should_be_skipped_if_no_proto_file_found() {
-    when(config.protobufReportPathsSilent()).thenReturn(Collections.emptyList());
-    assertThat(filter.accept(mock(InputFile.class))).isTrue();
   }
 
 }

@@ -36,7 +36,7 @@ public class EncodingImporter extends RawProtobufImporter<EncodingInfo> {
 
   private final Map<String, Charset> encodingPerPath = new HashMap<>();
 
-  EncodingImporter() {
+  public EncodingImporter() {
     super(SonarAnalyzer.EncodingInfo.parser());
   }
 

@@ -65,11 +65,11 @@ public abstract class AbstractConfiguration {
   /**
    * To support Scanner for MSBuild <= 3.0
    */
-  private String getOldAnalyzerWorkDirProperty() {
+  static String getOldAnalyzerWorkDirProperty(String languageKey) {
     return PROP_PREFIX + languageKey + ".analyzer.projectOutPath";
   }
 
-  private String getAnalyzerReportDir() {
+  static String getAnalyzerReportDir(String languageKey) {
     return "output-" + languageKey;
   }
 
@@ -80,53 +80,43 @@ public abstract class AbstractConfiguration {
    * - The directory contains at least one protobuf
    */
   public List<Path> protobufReportPaths() {
-    return protobufReportPaths(false);
-  }
-
-  /**
-   * See {@link #protobufReportPath}. This method won't log anything.
-   */
-  public List<Path> protobufReportPathsSilent() {
-    return protobufReportPaths(true);
-  }
-
-  private List<Path> protobufReportPaths(boolean silent) {
     List<Path> analyzerWorkDirPaths = Arrays.stream(configuration.getStringArray(getAnalyzerWorkDirProperty(languageKey)))
       .map(Paths::get)
       .collect(Collectors.toList());
 
     if (analyzerWorkDirPaths.isEmpty()) {
       // fallback to old property
-      Optional<String> oldValue = configuration.get(getOldAnalyzerWorkDirProperty());
+      Optional<String> oldValue = configuration.get(getOldAnalyzerWorkDirProperty(languageKey));
       if (oldValue.isPresent()) {
         analyzerWorkDirPaths = Collections.singletonList(Paths.get(oldValue.get()));
       } else {
-        return empty("Property missing: '" + getAnalyzerWorkDirProperty(languageKey) + "'. No protobuf files will be loaded for this project.", silent);
+        LOG.warn("Property missing: '" + getAnalyzerWorkDirProperty(languageKey) + "'. No protobuf files will be loaded for this project.");
+        return Collections.emptyList();
       }
     }
 
     return analyzerWorkDirPaths.stream()
-      .map(x -> x.resolve(getAnalyzerReportDir()))
-      .filter(p -> AbstractConfiguration.validateOutputDir(p, silent))
+      .map(x -> x.resolve(getAnalyzerReportDir(languageKey)))
+      .filter(AbstractConfiguration::validateOutputDir)
       .collect(Collectors.toList());
   }
 
-  private static boolean validateOutputDir(Path analyzerOutputDir, boolean silent) {
+  private static boolean validateOutputDir(Path analyzerOutputDir) {
     String path = analyzerOutputDir.toString();
     try {
       if (!analyzerOutputDir.toFile().exists()) {
-        ifNotSilent(silent, () -> LOG.warn("Analyzer working directory does not exist: '{}'. {}", path, MSG_SUFFIX));
+        LOG.warn("Analyzer working directory does not exist: '{}'. {}", path, MSG_SUFFIX);
         return false;
       }
 
       try (DirectoryStream<Path> files = Files.newDirectoryStream(analyzerOutputDir, protoFileFilter())) {
         long count = StreamSupport.stream(files.spliterator(), false).count();
         if (count == 0) {
-          ifNotSilent(silent, () -> LOG.warn("Analyzer working directory '{}' contains no .pb file(s). {}", path, MSG_SUFFIX));
+          LOG.warn("Analyzer working directory '{}' contains no .pb file(s). {}", path, MSG_SUFFIX);
           return false;
         }
 
-        ifNotSilent(silent, () -> LOG.debug("Analyzer working directory '{}' contains {} .pb file(s)", path, count));
+        LOG.debug("Analyzer working directory '{}' contains {} .pb file(s)", path, count);
         return true;
       }
     } catch (IOException e) {
@@ -134,19 +124,8 @@ public abstract class AbstractConfiguration {
     }
   }
 
-  private static void ifNotSilent(boolean silent, Runnable r) {
-    if (!silent) {
-      r.run();
-    }
-  }
-
   private static DirectoryStream.Filter<Path> protoFileFilter() {
     return p -> p.getFileName().toString().toLowerCase().endsWith(".pb");
-  }
-
-  private static List<Path> empty(String msg, boolean silent) {
-    ifNotSilent(silent, () -> LOG.warn(msg));
-    return Collections.emptyList();
   }
 
   public List<Path> roslynReportPaths() {

@@ -90,7 +90,7 @@ public class AbstractConfigurationTest {
     createRoslynOut();
     config = new AbstractConfiguration(settings.asConfig(), "cs") {
     };
-    assertThat(config.protobufReportPathsSilent()).isEmpty();
+    assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(config.roslynReportPaths()).containsOnly(workDir.resolve("roslyn-report.json"), workDir.resolve("roslyn-report2.json"));
   }
 
@@ -99,7 +99,7 @@ public class AbstractConfigurationTest {
     createOldRoslynOut();
     config = new AbstractConfiguration(settings.asConfig(), "cs") {
     };
-    assertThat(config.protobufReportPathsSilent()).isEmpty();
+    assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(config.roslynReportPaths()).containsOnly(workDir.resolve("roslyn-report.json"));
   }
 
@@ -161,9 +161,9 @@ public class AbstractConfigurationTest {
     setProtobufOut();
     config = new AbstractConfiguration(settings.asConfig(), "cs") {
     };
-    assertThat(config.protobufReportPathsSilent()).isNotEmpty();
+    assertThat(config.protobufReportPaths()).isNotEmpty();
     assertThat(config.roslynReportPaths()).isEmpty();
-    assertThat(config.protobufReportPathsSilent()).containsOnly(workDir.resolve("report1").resolve("output-cs"), workDir.resolve("report2").resolve("output-cs"));
+    assertThat(config.protobufReportPaths()).containsOnly(workDir.resolve("report1").resolve("output-cs"), workDir.resolve("report2").resolve("output-cs"));
   }
 
   @Test
@@ -171,9 +171,9 @@ public class AbstractConfigurationTest {
     setOldProtobufOut();
     config = new AbstractConfiguration(settings.asConfig(), "cs") {
     };
-    assertThat(config.protobufReportPathsSilent()).isNotEmpty();
+    assertThat(config.protobufReportPaths()).isNotEmpty();
     assertThat(config.roslynReportPaths()).isEmpty();
-    assertThat(config.protobufReportPathsSilent()).containsOnly(workDir.resolve("report").resolve("output-cs"));
+    assertThat(config.protobufReportPaths()).containsOnly(workDir.resolve("report").resolve("output-cs"));
   }
 
   @Test

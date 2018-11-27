@@ -1,0 +1,126 @@
+/*
+ * SonarSource :: .NET :: Shared library
+ * Copyright (C) 2014-2018 SonarSource SA
+ * mailto:info AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+package org.sonarsource.dotnet.shared.plugins;
+
+import java.nio.charset.Charset;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+import org.sonar.api.batch.Phase;
+import org.sonar.api.batch.Phase.Name;
+import org.sonar.api.batch.bootstrap.ProjectBuilder;
+import org.sonar.api.batch.bootstrap.ProjectDefinition;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
+import org.sonarsource.dotnet.shared.plugins.protobuf.EncodingImporter;
+import org.sonarsource.dotnet.shared.plugins.protobuf.FileMetadataImporter;
+
+import static java.util.Optional.ofNullable;
+import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getAnalyzerWorkDirProperty;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.ENCODING_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.FILEMETADATA_OUTPUT_PROTOBUF_NAME;
+
+/**
+ * Since SonarQube 7.5, InputFileFilter can only access to global configuration. Use this ProjectBuilder to collect 
+ * various data in protobuf files that are in every modules.
+ */
+@Phase(name = Name.POST)
+public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder {
+
+  private static final Logger LOG = Loggers.get(AbstractGlobalProtobufFileProcessor.class);
+
+  private final String languageKey;
+
+  private final Map<Path, Charset> roslynEncodingPerPath = new HashMap<>();
+  private final Set<Path> generatedFilePaths = new HashSet<>();
+
+  public AbstractGlobalProtobufFileProcessor(String languageKey) {
+    this.languageKey = languageKey;
+  }
+
+  @Override
+  public void build(Context context) {
+    for (ProjectDefinition p : context.projectReactor().getProjects()) {
+      for (Path reportPath : protobufReportPaths(p.properties())) {
+        processEncodingReportIfPresent(reportPath);
+        processMetadataReportIfPresent(reportPath);
+      }
+    }
+  }
+
+  private void processEncodingReportIfPresent(Path reportPath) {
+    Path encodingReportProtobuf = reportPath.resolve(ENCODING_OUTPUT_PROTOBUF_NAME);
+    if (encodingReportProtobuf.toFile().exists()) {
+      LOG.debug("Processing {}", encodingReportProtobuf);
+      EncodingImporter encodingImporter = new EncodingImporter();
+      encodingImporter.accept(encodingReportProtobuf);
+      this.roslynEncodingPerPath.putAll(encodingImporter.getEncodingPerPath());
+    }
+  }
+
+  private void processMetadataReportIfPresent(Path reportPath) {
+    Path metadataReportProtobuf = reportPath.resolve(FILEMETADATA_OUTPUT_PROTOBUF_NAME);
+    if (metadataReportProtobuf.toFile().exists()) {
+      LOG.debug("Processing {}", metadataReportProtobuf);
+      FileMetadataImporter fileMetadataImporter = new FileMetadataImporter();
+      fileMetadataImporter.accept(metadataReportProtobuf);
+      this.generatedFilePaths.addAll(fileMetadataImporter.getGeneratedFilePaths());
+    }
+  }
+
+  public Map<Path, Charset> getRoslynEncodingPerPath() {
+    return Collections.unmodifiableMap(roslynEncodingPerPath);
+  }
+
+  public Set<Path> getGeneratedFilePaths() {
+    return Collections.unmodifiableSet(generatedFilePaths);
+  }
+
+  private List<Path> protobufReportPaths(Map<String, String> moduleProps) {
+    List<Path> analyzerWorkDirPaths = Arrays.stream(
+      ofNullable(moduleProps.get(getAnalyzerWorkDirProperty(languageKey)))
+        .map(v -> v.split(","))
+        .orElse(new String[0]))
+      .map(Paths::get)
+      .collect(Collectors.toList());
+
+    if (analyzerWorkDirPaths.isEmpty()) {
+      // fallback to old property
+      Optional<String> oldValue = ofNullable(moduleProps.get(AbstractConfiguration.getOldAnalyzerWorkDirProperty(languageKey)));
+      analyzerWorkDirPaths = oldValue
+        .map(Paths::get)
+        .map(Collections::singletonList)
+        .orElse(Collections.emptyList());
+    }
+
+    return analyzerWorkDirPaths.stream()
+      .map(x -> x.resolve(AbstractConfiguration.getAnalyzerReportDir(languageKey)))
+      .collect(Collectors.toList());
+  }
+
+}

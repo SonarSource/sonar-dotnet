@@ -53,6 +53,7 @@ public class VbNetPluginTest {
       VbNetSonarRulesDefinition.class,
       VbNetSensor.class,
       VbNetConfiguration.class,
+      VbNetGlobalProtobufFileProcessor.class,
       WrongEncodingFileFilter.class,
       EncodingPerFile.class,
       ReportPathCollector.class,
