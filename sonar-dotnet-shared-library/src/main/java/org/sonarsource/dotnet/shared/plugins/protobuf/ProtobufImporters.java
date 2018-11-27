@@ -19,6 +19,7 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
+import java.util.function.Function;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.issue.NoSonarFilter;
@@ -27,9 +28,6 @@ import org.sonarsource.dotnet.protobuf.SonarAnalyzer.CopyPasteTokenInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.MetricsInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.SymbolReferenceInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.TokenTypeInfo;
-import org.sonarsource.dotnet.shared.plugins.RealPathProvider;
-
-import java.util.function.Function;
 
 @ScannerSide
 public class ProtobufImporters {
@@ -63,9 +61,5 @@ public class ProtobufImporters {
 
   public static EncodingImporter encodingImporter() {
     return new EncodingImporter();
-  }
-
-  public FileMetadataImporter fileMetadataImporter() {
-    return new FileMetadataImporter();
   }
 }

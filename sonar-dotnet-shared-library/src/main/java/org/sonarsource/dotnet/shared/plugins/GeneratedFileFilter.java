@@ -20,7 +20,7 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import java.nio.file.Path;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.sonar.api.batch.fs.InputFile;
@@ -28,32 +28,28 @@ import org.sonar.api.batch.fs.InputFileFilter;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.protobuf.FileMetadataImporter;
-import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters;
 
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.FILEMETADATA_OUTPUT_PROTOBUF_NAME;
 
 public class GeneratedFileFilter implements InputFileFilter {
   private static final Logger LOG = Loggers.get(GeneratedFileFilter.class);
 
-  private final AbstractConfiguration config;
-  private final ProtobufImporters protobufImporters;
-
-  private final Set<Path> generatedFilePaths = new HashSet<>();
-  private boolean initialized;
+  private Set<Path> generatedFilePaths = Collections.emptySet();
 
   public GeneratedFileFilter(AbstractConfiguration config) {
-    this(config, new ProtobufImporters());
-  }
-
-  GeneratedFileFilter(AbstractConfiguration config, ProtobufImporters protobufImporters) {
-    this.config = config;
-    this.protobufImporters = protobufImporters;
+    List<Path> protobufPath = config.protobufReportPathsSilent();
+    if (!protobufPath.isEmpty()) {
+      Path metadataPath = protobufPath.get(0).resolve(FILEMETADATA_OUTPUT_PROTOBUF_NAME);
+      if (metadataPath.toFile().exists()) {
+        FileMetadataImporter fileMetadataImporter = new FileMetadataImporter();
+        fileMetadataImporter.accept(metadataPath);
+        generatedFilePaths = fileMetadataImporter.getGeneratedFilePaths();
+      }
+    }
   }
 
   @Override
   public boolean accept(InputFile inputFile) {
-    initOnce();
-
     boolean isGenerated = generatedFilePaths.contains(inputFile.path());
     if (isGenerated) {
       LOG.debug("Skipping auto generated file: {}", inputFile);
@@ -61,23 +57,4 @@ public class GeneratedFileFilter implements InputFileFilter {
     return !isGenerated;
   }
 
-  /**
-   * synchronized because InputFileFilter are executed in parallel
-   */
-  private synchronized void initOnce() {
-    if (initialized) {
-      return;
-    }
-    initialized = true;
-
-    List<Path> protobufPath = config.protobufReportPathsSilent();
-    if (!protobufPath.isEmpty()) {
-      Path metadataPath = protobufPath.get(0).resolve(FILEMETADATA_OUTPUT_PROTOBUF_NAME);
-      if (metadataPath.toFile().exists()) {
-        FileMetadataImporter fileMetadataImporter = protobufImporters.fileMetadataImporter();
-        fileMetadataImporter.accept(metadataPath);
-        generatedFilePaths.addAll(fileMetadataImporter.getGeneratedFilePaths());
-      }
-    }
-  }
 }
