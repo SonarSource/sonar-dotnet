@@ -6,7 +6,7 @@
     <Description xml:space="preserve">This extension provides on-the-fly feedback to developers on new bugs and quality issues injected into C# and VB.Net code.</Description>
     <MoreInfo>http://vs.sonarlint.org</MoreInfo>
     <License>License.txt</License>
-    <ReleaseNotes>https://github.com/SonarSource/sonar-csharp/issues?q=is:issue+-label:Task+milestone:7.9</ReleaseNotes>
+    <ReleaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/7.9.0.0</ReleaseNotes>
     <Icon>logos\sonarlint_32.png</Icon>
   </Metadata>
   <Installation>
