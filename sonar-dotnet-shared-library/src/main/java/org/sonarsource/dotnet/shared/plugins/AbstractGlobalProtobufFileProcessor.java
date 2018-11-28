@@ -31,6 +31,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.annotation.Nullable;
 import org.sonar.api.batch.Phase;
 import org.sonar.api.batch.Phase.Name;
 import org.sonar.api.batch.bootstrap.ProjectBuilder;
@@ -102,10 +103,7 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
   }
 
   private List<Path> protobufReportPaths(Map<String, String> moduleProps) {
-    List<Path> analyzerWorkDirPaths = Arrays.stream(
-      ofNullable(moduleProps.get(getAnalyzerWorkDirProperty(languageKey)))
-        .map(v -> v.split(","))
-        .orElse(new String[0]))
+    List<Path> analyzerWorkDirPaths = Arrays.stream(parseAsStringArray(moduleProps.get(getAnalyzerWorkDirProperty(languageKey))))
       .map(Paths::get)
       .collect(Collectors.toList());
 
@@ -123,4 +121,27 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
       .collect(Collectors.toList());
   }
 
+  /**
+   * A very simplified CSV parser, assuming there is no commas nor quotes in the protobuf paths
+   */
+  private String[] parseAsStringArray(@Nullable String value) {
+    if (value == null) {
+      return new String[0];
+    }
+    List<String> escapedValues = Arrays.asList(value.split(","));
+    return escapedValues
+      .stream()
+      .map(String::trim)
+      .map(s -> removeStart(s, "\""))
+      .map(s -> removeEnd(s, "\""))
+      .toArray(String[]::new);
+  }
+
+  private static String removeStart(String s, String start) {
+    return s.startsWith(start) ? s.substring(start.length()) : s;
+  }
+
+  private static String removeEnd(String s, String end) {
+    return s.endsWith(end) ? s.substring(0, s.length() - end.length()) : s;
+  }
 }
