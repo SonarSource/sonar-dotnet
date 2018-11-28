@@ -122,6 +122,17 @@ public class AbstractGlobalProtobufFileProcessorTest {
   }
 
   @Test
+  public void process_generated_new_prop_escaped_csv() throws IOException {
+    project1.setProperty("sonar.foo.analyzer.projectOutPaths",
+      "\"" + mockMetadataProtoReport("generated11").toString() + "\",\"" + mockMetadataProtoReport("generated12").toString() + "\"");
+    project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockMetadataProtoReport("generated2").toString());
+
+    underTest.build(context);
+    assertThat(underTest.getGeneratedFilePaths()).containsExactlyInAnyOrder(Paths.get("generated11"), Paths.get("generated12"), Paths.get("generated2"));
+    assertThat(underTest.getRoslynEncodingPerPath()).isEmpty();
+  }
+
+  @Test
   public void process_encoding_new_prop() throws IOException {
     project2.setProperty("sonar.foo.analyzer.projectOutPaths", mockEncodingProtoReport("UTF-8", "encodingutf8").toString());
 
