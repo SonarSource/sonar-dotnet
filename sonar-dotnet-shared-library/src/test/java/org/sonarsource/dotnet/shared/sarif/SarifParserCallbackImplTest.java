@@ -93,10 +93,13 @@ public class SarifParserCallbackImplTest {
 
     callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
     callback.onFileIssue("rule45", "warning", absoluteFilePath, "msg");
+    callback.onFileIssue("S1234", "warning", absoluteFilePath, "msg"); // sonar rule, ignored
 
     assertThat(ctx.allIssues()).isEmpty();
-    assertThat(ctx.allExternalIssues()).hasSize(1);
-
+    assertThat(ctx.allExternalIssues())
+      .extracting(ExternalIssue::ruleId, ExternalIssue::type, ExternalIssue::severity)
+      .containsExactlyInAnyOrder(
+        tuple("rule45", RuleType.CODE_SMELL, Severity.MAJOR));
   }
 
   @Test
@@ -138,9 +141,13 @@ public class SarifParserCallbackImplTest {
     callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
 
     callback.onIssue("rule45", "warning", createLocation("file1", 2, 3), Collections.emptyList());
+    callback.onIssue("S1234", "warning", createLocation("file1", 2, 3), Collections.emptyList()); // sonar rule, ignored
 
     assertThat(ctx.allIssues()).isEmpty();
-    assertThat(ctx.allExternalIssues()).hasSize(1);
+    assertThat(ctx.allExternalIssues())
+      .extracting(ExternalIssue::ruleId, ExternalIssue::type, ExternalIssue::severity)
+      .containsExactlyInAnyOrder(
+        tuple("rule45", RuleType.CODE_SMELL, Severity.MAJOR));
   }
 
   @Test
@@ -196,11 +203,31 @@ public class SarifParserCallbackImplTest {
   @Test
   public void should_register_adhoc_rule() {
     callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
-    callback.onRule("S12345", "My rule", "Rule description", "Error", "Foo");
+    callback.onRule("rule123", "My rule", "Rule description", "Error", "Foo");
 
     assertThat(ctx.allAdHocRules())
       .extracting(AdHocRule::engineId, AdHocRule::ruleId, AdHocRule::name, AdHocRule::description, AdHocRule::severity, AdHocRule::type)
-      .containsExactlyInAnyOrder(tuple("roslyn", "S12345", "My rule", "Rule description", Severity.CRITICAL, RuleType.BUG));
+      .containsExactlyInAnyOrder(tuple("roslyn", "rule123", "My rule", "Rule description", Severity.CRITICAL, RuleType.BUG));
+  }
+
+  @Test
+  public void should_ignore_adhoc_rule_matching_sonar_key() {
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
+    callback.onRule("SS1234", "My rule", "Rule description", "Error", "Foo"); // does not start with single S
+    callback.onRule("S123456", "My rule", "Rule description", "Error", "Foo"); // too long
+    callback.onRule("S12345", "My rule", "Rule description", "Error", "Foo"); // sonar rule
+    callback.onRule("S1234", "My rule", "Rule description", "Error", "Foo"); // sonar rule
+    callback.onRule("S123", "My rule", "Rule description", "Error", "Foo"); // sonar rule
+    callback.onRule("S12", "My rule", "Rule description", "Error", "Foo"); // too short
+    callback.onRule("S123x", "My rule", "Rule description", "Error", "Foo"); // does not have only digits after S
+
+    assertThat(ctx.allAdHocRules())
+      .extracting(AdHocRule::engineId, AdHocRule::ruleId, AdHocRule::name, AdHocRule::description, AdHocRule::severity, AdHocRule::type)
+      .containsExactlyInAnyOrder(
+        tuple("roslyn", "SS1234", "My rule", "Rule description", Severity.CRITICAL, RuleType.BUG),
+        tuple("roslyn", "S123456", "My rule", "Rule description", Severity.CRITICAL, RuleType.BUG),
+        tuple("roslyn", "S12", "My rule", "Rule description", Severity.CRITICAL, RuleType.BUG),
+        tuple("roslyn", "S123x", "My rule", "Rule description", Severity.CRITICAL, RuleType.BUG));
   }
 
   @Test
