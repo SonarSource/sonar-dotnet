@@ -215,7 +215,7 @@ public class SarifParserCallbackImplTest {
     callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
     callback.onRule("SS1234", "My rule", "Rule description", "Error", "Foo"); // does not start with single S
     callback.onRule("S123456", "My rule", "Rule description", "Error", "Foo"); // too long
-    callback.onRule("S12345", "My rule", "Rule description", "Error", "Foo"); // sonar rule
+    callback.onRule("S12345", "My rule", "Rule description", "Error", "Foo"); // too long
     callback.onRule("S1234", "My rule", "Rule description", "Error", "Foo"); // sonar rule
     callback.onRule("S123", "My rule", "Rule description", "Error", "Foo"); // sonar rule
     callback.onRule("S12", "My rule", "Rule description", "Error", "Foo"); // too short
@@ -226,6 +226,7 @@ public class SarifParserCallbackImplTest {
       .containsExactlyInAnyOrder(
         tuple("roslyn", "SS1234", "My rule", "Rule description", Severity.CRITICAL, RuleType.BUG),
         tuple("roslyn", "S123456", "My rule", "Rule description", Severity.CRITICAL, RuleType.BUG),
+        tuple("roslyn", "S12345", "My rule", "Rule description", Severity.CRITICAL, RuleType.BUG),
         tuple("roslyn", "S12", "My rule", "Rule description", Severity.CRITICAL, RuleType.BUG),
         tuple("roslyn", "S123x", "My rule", "Rule description", Severity.CRITICAL, RuleType.BUG));
   }

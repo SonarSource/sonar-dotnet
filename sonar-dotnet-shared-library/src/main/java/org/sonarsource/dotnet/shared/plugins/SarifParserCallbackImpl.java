@@ -254,7 +254,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   }
 
   private boolean shouldCreateExternalIssue(String ruleId) {
-    return !ignoreThirdPartyIssues && !ruleId.matches("^S\\d{3,5}$");
+    return !ignoreThirdPartyIssues && !ruleId.matches("^S\\d{3,4}$");
   }
 
   private RuleType mapRuleType(@Nullable String category, String defaultLevel) {
