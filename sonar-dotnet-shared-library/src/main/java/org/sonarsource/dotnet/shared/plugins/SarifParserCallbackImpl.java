@@ -111,7 +111,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
     if (repositoryKey != null) {
       createFileLevelIssue(ruleId, message, repositoryKey, inputFile);
-    } else if (!ignoreThirdPartyIssues) {
+    } else if (shouldCreateExternalIssue(ruleId)) {
       createFileLevelExternalIssue(ruleId, level, message, inputFile);
     }
   }
@@ -152,7 +152,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
     if (repositoryKey != null) {
       createIssue(inputFile, ruleId, primaryLocation, secondaryLocations, repositoryKey);
-    } else if (!ignoreThirdPartyIssues) {
+    } else if (shouldCreateExternalIssue(ruleId)) {
       createExternalIssue(inputFile, ruleId, level, primaryLocation, secondaryLocations);
     }
   }
@@ -236,7 +236,7 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
 
   @Override
   public void onRule(String ruleId, @Nullable String shortDescription, @Nullable String fullDescription, String defaultLevel, @Nullable String category) {
-    if (ignoreThirdPartyIssues || repositoryKeyByRoslynRuleKey.containsKey(ruleId)) {
+    if (repositoryKeyByRoslynRuleKey.containsKey(ruleId) || !shouldCreateExternalIssue(ruleId)) {
       // This is not an external rule
       return;
     }
@@ -248,9 +248,13 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
       .ruleId(ruleId)
       .severity(mapSeverity(defaultLevel))
       .name(shortDescription != null ? shortDescription : ruleId)
-      .description(fullDescription != null ? fullDescription : null)
+      .description(fullDescription)
       .type(ruleType)
       .save();
+  }
+
+  private boolean shouldCreateExternalIssue(String ruleId) {
+    return !ignoreThirdPartyIssues && !ruleId.matches("^S\\d{3,4}$");
   }
 
   private RuleType mapRuleType(@Nullable String category, String defaultLevel) {
