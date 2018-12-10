@@ -526,7 +526,7 @@ namespace SonarAnalyzer.UnitTest.Common
         public void Test_26_PartialClasses_ExcludeFromCodeCoverage()
         {
             AssertLinesOfCode(
-              @"[ExcludeFromCodeCoverage]
+              @"[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
                 partial class Program
                 {
                     int FooProperty { get { return 1; } }   // excluded
@@ -556,7 +556,7 @@ namespace SonarAnalyzer.UnitTest.Common
             AssertLinesOfCode(
               @"partial class Program
                 {
-                    [ExcludeFromCodeCoverage]
+                    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
                     partial void Method1();
                 }
 
@@ -575,7 +575,7 @@ namespace SonarAnalyzer.UnitTest.Common
 
                 partial class AnotherClass
                 {
-                    [ExcludeFromCodeCoverage]
+                    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
                     partial void Method2()
                     {
                         System.Console.WriteLine();         // excluded

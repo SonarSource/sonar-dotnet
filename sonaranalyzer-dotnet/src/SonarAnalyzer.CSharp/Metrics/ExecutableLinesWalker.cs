@@ -18,12 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Metrics.CSharp
@@ -98,36 +96,28 @@ namespace SonarAnalyzer.Metrics.CSharp
 
                 case SyntaxKind.StructDeclaration:
                 case SyntaxKind.ClassDeclaration:
-                    return !HasExcludedCodeAttribute((BaseTypeDeclarationSyntax)node, btdc => btdc.AttributeLists,
-                        canBePartial: true);
-
                 case SyntaxKind.MethodDeclaration:
                 case SyntaxKind.ConstructorDeclaration:
-                    return !HasExcludedCodeAttribute((BaseMethodDeclarationSyntax)node, bmds => bmds.AttributeLists,
-                        canBePartial: true);
+                    return !IsExcludedFromCoverage(node, canBePartial: true);
 
                 case SyntaxKind.PropertyDeclaration:
                 case SyntaxKind.EventDeclaration:
-                    return !HasExcludedCodeAttribute((BasePropertyDeclarationSyntax)node, bpds => bpds.AttributeLists);
-
                 case SyntaxKind.AddAccessorDeclaration:
                 case SyntaxKind.RemoveAccessorDeclaration:
                 case SyntaxKind.SetAccessorDeclaration:
                 case SyntaxKind.GetAccessorDeclaration:
-                    return !HasExcludedCodeAttribute((AccessorDeclarationSyntax)node, ads => ads.AttributeLists);
+                    return !IsExcludedFromCoverage(node, canBePartial: false);
 
                 default:
                     return true;
             }
         }
 
-        private bool HasExcludedCodeAttribute<T>(T node, Func<T, SyntaxList<AttributeListSyntax>> getAttributeLists,
-            bool canBePartial = false)
-            where T : SyntaxNode
+        private bool IsExcludedFromCoverage(SyntaxNode node, bool canBePartial = false)
         {
-            var hasExcludeFromCodeCoverageAttribute = getAttributeLists(node)
-                .SelectMany(attributeList => attributeList.Attributes)
-                .Any(HasExcludedAttribute);
+            var hasExcludeFromCodeCoverageAttribute = node.GetAttributeLists()
+                .GetAttributes(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute)
+                .Any();
 
             if (!canBePartial)
             {
@@ -138,32 +128,13 @@ namespace SonarAnalyzer.Metrics.CSharp
             switch (nodeSymbol?.Kind)
             {
                 case SymbolKind.Method:
-                    return hasExcludeFromCodeCoverageAttribute ||
-                        nodeSymbol.GetAttributes().Any(HasExcludedAttribute);
-
                 case SymbolKind.NamedType:
                     return hasExcludeFromCodeCoverageAttribute ||
-                        nodeSymbol.GetAttributes().Any(HasExcludedAttribute);
+                        nodeSymbol.GetAttributes(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute).Any();
 
                 default:
                     return hasExcludeFromCodeCoverageAttribute;
             }
         }
-
-        private static bool HasExcludedAttribute(AttributeSyntax attribute)
-        {
-            var attributeName = attribute?.Name?.ToString() ?? string.Empty;
-            return IsExcludedAttribute(attributeName);
-        }
-
-        private static bool HasExcludedAttribute(AttributeData attribute)
-        {
-            var attributeName = attribute?.AttributeClass?.Name ?? string.Empty;
-            return IsExcludedAttribute(attributeName);
-        }
-
-        private static bool IsExcludedAttribute(string attributeName) =>
-            attributeName.EndsWith("ExcludeFromCodeCoverage", StringComparison.Ordinal) ||
-            attributeName.EndsWith("ExcludeFromCodeCoverageAttribute", StringComparison.Ordinal);
     }
 }

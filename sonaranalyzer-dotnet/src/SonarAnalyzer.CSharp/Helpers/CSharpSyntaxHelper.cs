@@ -96,16 +96,6 @@ namespace SonarAnalyzer.Helpers
         public static SyntaxNode GetFirstNonParenthesizedParent(this SyntaxNode node) =>
             node.GetSelfOrTopParenthesizedExpression().Parent;
 
-        public static IEnumerable<AttributeSyntax> GetAttributes(this SyntaxList<AttributeListSyntax> attributeLists,
-            KnownType attributeKnownType, SemanticModel semanticModel) =>
-            attributeLists.SelectMany(list => list.Attributes)
-                .Where(a => semanticModel.GetTypeInfo(a).Type.Is(attributeKnownType));
-
-        public static IEnumerable<AttributeSyntax> GetAttributes(this SyntaxList<AttributeListSyntax> attributeLists,
-            ImmutableArray<KnownType> attributeKnownTypes, SemanticModel semanticModel) =>
-            attributeLists.SelectMany(list => list.Attributes)
-                .Where(a => semanticModel.GetTypeInfo(a).Type.IsAny(attributeKnownTypes));
-
         public static bool IsOnThis(this ExpressionSyntax expression) =>
             IsOn(expression, SyntaxKind.ThisExpression);
 
@@ -346,5 +336,56 @@ namespace SonarAnalyzer.Helpers
                 topParenthesizedExpression.Parent is AssignmentExpressionSyntax assignment &&
                 assignment.Left == topParenthesizedExpression;
         }
+
+        public static SyntaxList<AttributeListSyntax> GetAttributeLists(this SyntaxNode node)
+        {
+            switch (node.Kind())
+            {
+                case SyntaxKind.StructDeclaration:
+                case SyntaxKind.ClassDeclaration:
+                    return ((BaseTypeDeclarationSyntax)node).AttributeLists;
+
+                case SyntaxKind.MethodDeclaration:
+                case SyntaxKind.ConstructorDeclaration:
+                    return ((BaseMethodDeclarationSyntax)node).AttributeLists;
+
+                case SyntaxKind.PropertyDeclaration:
+                case SyntaxKind.EventDeclaration:
+                    return ((BasePropertyDeclarationSyntax)node).AttributeLists;
+
+                case SyntaxKind.AddAccessorDeclaration:
+                case SyntaxKind.RemoveAccessorDeclaration:
+                case SyntaxKind.SetAccessorDeclaration:
+                case SyntaxKind.GetAccessorDeclaration:
+                    return ((AccessorDeclarationSyntax)node).AttributeLists;
+
+                default:
+                    return default(SyntaxList<AttributeListSyntax>);
+            }
+        }
+
+        public static bool IsKnownType(this AttributeSyntax attributeSyntax, KnownType knownType)
+        {
+            var attributeName = attributeSyntax?.Name?.ToString();
+
+            if (attributeName == null)
+            {
+                return false;
+            }
+
+            // Check the attribute name without the attribute suffix OR the full name of the attribute
+            return attributeName.EndsWith(knownType.ShortName.Substring(0, knownType.ShortName.Length - 9), StringComparison.Ordinal) ||
+                attributeName.EndsWith(knownType.ShortName, StringComparison.Ordinal);
+        }
+
+        public static IEnumerable<AttributeSyntax> GetAttributes(this SyntaxList<AttributeListSyntax> attributeLists,
+            KnownType attributeKnownType, SemanticModel semanticModel = null) =>
+            attributeLists.SelectMany(list => list.Attributes)
+                .Where(a => a.IsKnownType(attributeKnownType) || semanticModel.GetTypeInfo(a).Type.Is(attributeKnownType));
+
+        public static IEnumerable<AttributeSyntax> GetAttributes(this SyntaxList<AttributeListSyntax> attributeLists,
+            ImmutableArray<KnownType> attributeKnownTypes, SemanticModel semanticModel) =>
+            attributeLists.SelectMany(list => list.Attributes)
+                .Where(a => semanticModel.GetTypeInfo(a).Type.IsAny(attributeKnownTypes));
     }
 }

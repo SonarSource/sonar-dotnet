@@ -36,5 +36,18 @@ namespace SonarAnalyzer.Helpers
 
             return Enumerable.Range(start, end - start + 1);
         }
+
+        internal static bool IsKnownType(this SyntaxNode syntaxNode, KnownType knownType, SemanticModel semanticModel)
+        {
+            var symbolType = semanticModel.GetSymbolInfo(syntaxNode).Symbol.GetSymbolType();
+
+            return symbolType.Is(knownType) || symbolType?.OriginalDefinition?.Is(knownType) == true;
+        }
+
+        internal static bool IsDeclarationKnownType(this SyntaxNode syntaxNode, KnownType knownType, SemanticModel semanticModel)
+        {
+            var symbolType = semanticModel.GetDeclaredSymbol(syntaxNode)?.GetSymbolType();
+            return symbolType.Is(knownType);
+        }
     }
 }
