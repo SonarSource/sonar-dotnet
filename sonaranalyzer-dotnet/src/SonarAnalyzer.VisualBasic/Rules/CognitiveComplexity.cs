@@ -25,7 +25,7 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Common.VisualBasic;
+using SonarAnalyzer.Metrics.VisualBasic;
 using System;
 
 namespace SonarAnalyzer.Rules.VisualBasic

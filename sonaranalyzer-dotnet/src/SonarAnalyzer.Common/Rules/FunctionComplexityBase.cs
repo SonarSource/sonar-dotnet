@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            var complexity = GetComplexity(nodeToAnalyze);
+            var complexity = GetComplexity(nodeToAnalyze, context.SemanticModel);
             if (complexity > Maximum)
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], location(syntax), Maximum, complexity, declarationType));
@@ -66,6 +66,6 @@ namespace SonarAnalyzer.Rules
             CheckComplexity(context, t => t, location, declarationType);
         }
 
-        protected abstract int GetComplexity(SyntaxNode node);
+        protected abstract int GetComplexity(SyntaxNode node, SemanticModel semanticModel);
     }
 }

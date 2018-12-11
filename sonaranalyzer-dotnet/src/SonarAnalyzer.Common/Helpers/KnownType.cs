@@ -178,6 +178,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_DateTime = new KnownType(SpecialType.System_DateTime, "DateTime");
         internal static readonly KnownType System_Decimal = new KnownType(SpecialType.System_Decimal, "decimal");
         internal static readonly KnownType System_Delegate = new KnownType("System.Delegate");
+        internal static readonly KnownType System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute = new KnownType("System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute");
         internal static readonly KnownType System_Diagnostics_CodeAnalysis_SuppressMessageAttribute = new KnownType("System.Diagnostics.CodeAnalysis.SuppressMessageAttribute");
         internal static readonly KnownType System_Diagnostics_ConditionalAttribute = new KnownType("System.Diagnostics.ConditionalAttribute");
         internal static readonly KnownType System_Diagnostics_Contracts_PureAttribute = new KnownType("System.Diagnostics.Contracts.PureAttribute");

@@ -35,6 +35,7 @@ namespace SonarAnalyzer.Metrics.CSharp
     {
         private readonly SemanticModel semanticModel;
         private readonly Lazy<ImmutableArray<SyntaxNode>> publicApiNodes;
+        private readonly Lazy<ImmutableArray<int>> lazyExecutableLines;
 
         public Metrics(SyntaxTree tree, SemanticModel semanticModel)
             : base(tree)
@@ -48,17 +49,11 @@ namespace SonarAnalyzer.Metrics.CSharp
             this.semanticModel = semanticModel;
 
             this.publicApiNodes = new Lazy<ImmutableArray<SyntaxNode>>(() => CSharpPublicApiMetric.GetMembers(tree));
+            this.lazyExecutableLines = new Lazy<ImmutableArray<int>>(() => ExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
         }
 
-        public override ICollection<int> ExecutableLines
-        {
-            get
-            {
-                var walker = new ExecutableLinesWalker(this.semanticModel);
-                walker.Visit(this.tree.GetRoot());
-                return walker.ExecutableLines;
-            }
-        }
+        public override ImmutableArray<int> ExecutableLines =>
+            this.lazyExecutableLines.Value;
 
         protected override bool IsEndOfFile(SyntaxToken token) =>
             token.IsKind(SyntaxKind.EndOfFileToken);

@@ -22,9 +22,10 @@ using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers.VisualBasic;
 
-namespace SonarAnalyzer.Common.VisualBasic
+namespace SonarAnalyzer.Metrics.VisualBasic
 {
     public sealed class CognitiveComplexityWalker : CognitiveComplexityWalkerBase<MethodStatementSyntax>
     {

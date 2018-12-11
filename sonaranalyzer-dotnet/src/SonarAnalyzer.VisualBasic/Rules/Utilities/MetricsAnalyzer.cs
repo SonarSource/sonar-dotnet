@@ -21,7 +21,6 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Common.VisualBasic;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
@@ -32,6 +31,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
 
         protected override MetricsBase GetMetrics(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
-            new Metrics(syntaxTree);
+            new Metrics.VisualBasic.Metrics(syntaxTree, semanticModel);
     }
 }
