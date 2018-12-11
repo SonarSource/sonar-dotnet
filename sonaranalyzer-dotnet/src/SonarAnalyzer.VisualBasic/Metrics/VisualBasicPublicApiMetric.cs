@@ -24,7 +24,7 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Helpers.VisualBasic;
 
-namespace SonarAnalyzer.Common.VisualBasic
+namespace SonarAnalyzer.Metrics.VisualBasic
 {
     public static class VisualBasicPublicApiMetric
     {
