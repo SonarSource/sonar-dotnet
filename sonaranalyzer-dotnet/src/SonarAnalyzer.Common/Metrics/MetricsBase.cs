@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
@@ -126,6 +127,8 @@ namespace SonarAnalyzer.Common
 
         protected abstract bool IsCommentTrivia(SyntaxTrivia trivia);
 
+        protected abstract bool IsDocumentationCommentTrivia(SyntaxTrivia trivia);
+
         #endregion Comments
 
         #region Classes, Accessors, Functions, Statements
@@ -152,9 +155,9 @@ namespace SonarAnalyzer.Common
 
         public int PublicApiCount => PublicApiNodes.Count();
 
-        public int PublicUndocumentedApiCount => PublicApiNodes.Count(n => !n.GetLeadingTrivia().Any(IsCommentTrivia));
+        public int PublicUndocumentedApiCount => PublicApiNodes.Count(n => !n.GetLeadingTrivia().Any(IsDocumentationCommentTrivia));
 
-        protected abstract IEnumerable<SyntaxNode> PublicApiNodes { get; }
+        protected abstract ImmutableArray<SyntaxNode> PublicApiNodes { get; }
 
         #endregion PublicApi
 

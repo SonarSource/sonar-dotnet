@@ -415,11 +415,26 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             PublicUndocumentedApi(AnalyzerLanguage.CSharp, "").Should().Be(0);
             PublicUndocumentedApi(AnalyzerLanguage.CSharp, "class MyClass { }").Should().Be(0);
             PublicUndocumentedApi(AnalyzerLanguage.CSharp, "public class MyClass { }").Should().Be(1);
-            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "/* ... */ public class MyClass { }").Should().Be(0);
-            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "// ... \n public class MyClass { }").Should().Be(0);
+            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "//... \n public class MyClass { }").Should().Be(1);
+            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "/* ... */ public class MyClass { }").Should().Be(1);
+            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "///... \n public class MyClass { }").Should().Be(0); // Count regular comments starting with /// as documentation comments
+            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "/// <summary>...</summary> \n public class MyClass { }").Should().Be(0);
             PublicUndocumentedApi(AnalyzerLanguage.CSharp, "public class MyClass { \n public int MyField; }").Should().Be(2);
-            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "public class MyClass { \n /* ... */ public int MyField; }").Should().Be(1);
-            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "/// ... \n public class MyClass { \n /* ... */ public int MyField; }").Should().Be(0);
+            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "public class MyClass { \n /*...*/ \n public int MyField; }").Should().Be(2);
+            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "public class MyClass { \n //... \n public int MyField; }").Should().Be(2);
+            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "public class MyClass { \n /// <summary>...</summary> \n public int MyField; }").Should().Be(1);
+            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "public class MyClass { \n /// ... \n public int MyField; }").Should().Be(1);
+            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "/// <summary>...</summary> \n public class MyClass { \n /// <summary>...</summary> \n public int MyField; }").Should().Be(0);
+
+            PublicUndocumentedApi(AnalyzerLanguage.VisualBasic, "").Should().Be(0);
+            PublicUndocumentedApi(AnalyzerLanguage.VisualBasic, "Class [MyClass] \n End Class").Should().Be(0);
+            PublicUndocumentedApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n End Class").Should().Be(1);
+            PublicUndocumentedApi(AnalyzerLanguage.VisualBasic, "'... \n Public Class [MyClass] \n End Class").Should().Be(1);
+            PublicUndocumentedApi(AnalyzerLanguage.VisualBasic, "REM... \n Public Class [MyClass] \n End Class").Should().Be(1);
+            PublicUndocumentedApi(AnalyzerLanguage.VisualBasic, "'''<summary>...</summary> \n Public Class [MyClass] \n End Class").Should().Be(0);
+            PublicUndocumentedApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Public MyField As Integer \n End Class").Should().Be(2);
+            PublicUndocumentedApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n '''<summary>...</summary> \n Public MyField As Integer \n End Class").Should().Be(1);
+            PublicUndocumentedApi(AnalyzerLanguage.VisualBasic, "'''<summary>...</summary> \n Public Class [MyClass] \n '''<summary>...</summary> \n Public MyField As Integer \n End Class").Should().Be(0);
         }
 
         private static int PublicUndocumentedApi(AnalyzerLanguage language, string text) => MetricsFor(language, text).PublicUndocumentedApiCount;
