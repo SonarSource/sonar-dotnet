@@ -245,20 +245,20 @@ public class MetricsTest {
 
   @Test
   public void publicApiAtProjectLevel() {
-    assertThat(getProjectMeasureAsInt("public_api")).isEqualTo(0);
-    assertThat(getProjectMeasureAsInt("public_undocumented_api")).isEqualTo(0);
+    assertThat(getProjectMeasureAsInt("public_api")).isEqualTo(9);
+    assertThat(getProjectMeasureAsInt("public_undocumented_api")).isEqualTo(6);
   }
 
   @Test
   public void publicApiAtDirectoryLevel() {
-    assertThat(getDirectoryMeasureAsInt("public_api")).isEqualTo(0);
-    assertThat(getDirectoryMeasureAsInt("public_undocumented_api")).isEqualTo(0);
+    assertThat(getDirectoryMeasureAsInt("public_api")).isEqualTo(6);
+    assertThat(getDirectoryMeasureAsInt("public_undocumented_api")).isEqualTo(4);
   }
 
   @Test
   public void publicApiAtFileLevel() {
-    assertThat(getFileMeasureAsInt("public_api")).isEqualTo(0);
-    assertThat(getFileMeasureAsInt("public_undocumented_api")).isEqualTo(0);
+    assertThat(getFileMeasureAsInt("public_api")).isEqualTo(3);
+    assertThat(getFileMeasureAsInt("public_undocumented_api")).isEqualTo(2);
   }
 
   @Test

@@ -383,6 +383,27 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             PublicApi(AnalyzerLanguage.CSharp, "public class MyClass { void MyMethod() { } }").Should().Be(1);
             PublicApi(AnalyzerLanguage.CSharp, "public class MyClass { private void MyMethod() { } }").Should().Be(1);
             PublicApi(AnalyzerLanguage.CSharp, "public class MyClass { protected MyMethod() { } }").Should().Be(1);
+
+            PublicApi(AnalyzerLanguage.VisualBasic, "").Should().Be(0);
+            PublicApi(AnalyzerLanguage.VisualBasic, "Class [MyClass] \n End Class").Should().Be(0);
+            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n End Class").Should().Be(1);
+            PublicApi(AnalyzerLanguage.VisualBasic, "Namespace MyNS \n End Namespace").Should().Be(0);
+            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Public Sub MyMethod() \n End Sub \n End Class").Should().Be(2);
+            PublicApi(AnalyzerLanguage.VisualBasic, "Private Class [MyClass] \n Public Sub MyMethod() \n End Sub \n End Class").Should().Be(0);
+            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Public MyField As Integer \n End Class").Should().Be(2);
+            PublicApi(AnalyzerLanguage.VisualBasic, "Public Interface MyInterface \n Class[MyClass] \n End Class \n End Interface").Should().Be(2);
+            PublicApi(AnalyzerLanguage.VisualBasic, "Namespace MyNS \n Public Class[MyClass] \n End Class \n End Namespace").Should().Be(1);
+            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Public Event OnSomething As EventHandler \n End Class").Should().Be(2);
+            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Public Delegate Sub Foo() \n End Class").Should().Be(2);
+            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Public Shared Operator +(ByVal a As [MyClass]) As [MyClass] \n Return a \n End Operator \n End Class").Should().Be(2);
+            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Public Class MyClass2 \n Public MyField As Integer \n End Class \n End Class").Should().Be(3);
+            PublicApi(AnalyzerLanguage.VisualBasic, "Public Enum MyEnum \n MyValue1 \n MyValue2 \n End Enum").Should().Be(1);
+            PublicApi(AnalyzerLanguage.VisualBasic, "Public Structure MyStruct \n Public MyField As Integer \n End Structure").Should().Be(2);
+            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Default Public ReadOnly Property Item(ByVal i As Integer) As[MyClass] \n Get \n Return Nothing \n End Get \n End Property \n End Class").Should().Be(2);
+            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Public Property MyProperty As Integer \n End Class").Should().Be(2);
+            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Private Sub MyMethod() \n End Sub \n End Class").Should().Be(1);
+            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Private Sub MyMethod() \n End Sub \n End Class").Should().Be(1);
+            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Protected Sub New() \n End Sub \n End Class").Should().Be(1);
         }
 
         private static int PublicApi(AnalyzerLanguage language, string text) => MetricsFor(language, text).PublicApiCount;
