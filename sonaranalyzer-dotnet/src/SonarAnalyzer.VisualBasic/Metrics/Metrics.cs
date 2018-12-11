@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -29,6 +30,8 @@ namespace SonarAnalyzer.Common.VisualBasic
 {
     public sealed class Metrics : MetricsBase
     {
+        private readonly Lazy<ImmutableArray<SyntaxNode>> publicApis;
+
         public Metrics(SyntaxTree tree)
             : base(tree)
         {
@@ -37,6 +40,8 @@ namespace SonarAnalyzer.Common.VisualBasic
             {
                 throw new ArgumentException(InitalizationErrorTextPattern, nameof(tree));
             }
+
+            publicApis = new Lazy<ImmutableArray<SyntaxNode>>(GetPublicApiFactory(tree.GetRoot()));
         }
 
         protected override bool IsEndOfFile(SyntaxToken token) =>
@@ -95,7 +100,15 @@ namespace SonarAnalyzer.Common.VisualBasic
         }
 
         protected override IEnumerable<SyntaxNode> PublicApiNodes =>
-            Enumerable.Empty<SyntaxNode>(); // Not calculated for VB.Net
+            publicApis.Value;
+
+        private static Func<ImmutableArray<SyntaxNode>> GetPublicApiFactory(SyntaxNode root) =>
+            () =>
+            {
+                var walker = new PublicApiWalker();
+                walker.Visit(root);
+                return walker.PublicApi;
+            };
 
         private bool IsComplexityIncreasingKind(SyntaxNode node)
         {
