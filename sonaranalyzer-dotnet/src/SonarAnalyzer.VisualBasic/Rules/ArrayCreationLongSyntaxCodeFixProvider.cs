@@ -24,6 +24,7 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Helpers;
 
@@ -51,20 +52,39 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var arrayCreation = (ArrayCreationExpressionSyntax)root.FindNode(diagnosticSpan);
+            var node = root.FindNode(diagnosticSpan);
 
-            context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c =>
-                    {
-                        var newRoot = root.ReplaceNode(
-                            arrayCreation,
-                            arrayCreation.Initializer);
+            ArrayCreationExpressionSyntax arrayCreation;
+            switch (node.Kind())
+            {
+                case SyntaxKind.SimpleArgument:
+                    arrayCreation = ((SimpleArgumentSyntax)node).Expression as ArrayCreationExpressionSyntax;
+                    break;
 
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }),
-                context.Diagnostics);
+                case SyntaxKind.ArrayCreationExpression:
+                    arrayCreation = (ArrayCreationExpressionSyntax)node;
+                    break;
+
+                default:
+                    arrayCreation = null;
+                    break;
+            }
+
+            if (arrayCreation != null)
+            {
+                context.RegisterCodeFix(
+                    CodeAction.Create(
+                        Title,
+                        c =>
+                        {
+                            var newRoot = root.ReplaceNode(
+                                arrayCreation,
+                                arrayCreation.Initializer);
+
+                            return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                        }),
+                    context.Diagnostics);
+            }
 
             return TaskHelper.CompletedTask;
         }

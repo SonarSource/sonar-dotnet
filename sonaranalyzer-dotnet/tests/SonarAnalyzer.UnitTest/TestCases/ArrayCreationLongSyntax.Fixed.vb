@@ -8,6 +8,10 @@
         foo3 = {New B(), New A()} ' Fixed
 
         Dim myObjects As Object() = New Object(3) {} ' Compliant
+
+        Dim guidStrings As String
+        For Each guidString As String In guidStrings.Split({";"c}) ' Fixed
+        Next
     End Sub
 
 End Module
