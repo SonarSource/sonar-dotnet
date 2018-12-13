@@ -9,6 +9,10 @@
         foo3 = New A() {New B(), New A()} ' Noncompliant
 
         Dim myObjects As Object() = New Object(3) {} ' Compliant
+
+        Dim guidStrings As String
+        For Each guidString As String In guidStrings.Split(New Char() {";"c}) ' Noncompliant
+        Next
     End Sub
 
 End Module
