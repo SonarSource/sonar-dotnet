@@ -69,6 +69,12 @@ namespace Tests.Diagnostics
         private event Delegate Event; //Noncompliant {{Remove the unused private event 'Event'.}}
         private event Delegate MyEvent;
 
+        private event EventHandler<EventArgs> MyOtherEvent //Noncompliant {{Remove the unused private event 'MyOtherEvent'.}}
+        {
+            add { }
+            remove { }
+        }
+
         private int MyProperty
         {
             get;
