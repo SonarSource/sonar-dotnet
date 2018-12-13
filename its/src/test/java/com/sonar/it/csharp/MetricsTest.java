@@ -119,78 +119,95 @@ public class MetricsTest {
 
   @Test
   public void statementsAtProjectLevel() {
-    assertThat(getProjectMeasureAsInt("statements")).isEqualTo(12);
+    assertThat(getProjectMeasureAsInt("statements")).isEqualTo(15);
   }
 
   @Test
   public void statementsAtDirectoryLevel() {
-    assertThat(getDirectoryMeasureAsInt("statements")).isEqualTo(8);
+    assertThat(getDirectoryMeasureAsInt("statements")).isEqualTo(10);
   }
 
   @Test
   public void statementsAtFileLevel() {
-    assertThat(getFileMeasureAsInt("statements")).isEqualTo(4);
+    assertThat(getFileMeasureAsInt("statements")).isEqualTo(5);
   }
 
   /* Complexity */
 
   @Test
   public void complexityAtProjectLevel() {
-    assertThat(getProjectMeasureAsInt("complexity")).isEqualTo(6);
+    assertThat(getProjectMeasureAsInt("complexity")).isEqualTo(9);
   }
 
   @Test
   public void complexityAtDirectoryLevel() {
-    assertThat(getDirectoryMeasureAsInt("complexity")).isEqualTo(4);
+    assertThat(getDirectoryMeasureAsInt("complexity")).isEqualTo(6);
   }
 
   @Test
   public void complexityAtFileLevel() {
-    assertThat(getFileMeasureAsInt("complexity")).isEqualTo(2);
+    assertThat(getFileMeasureAsInt("complexity")).isEqualTo(3);
   }
 
   @Test
   public void complexityInClassesAtFileLevel() {
-    assertThat(getFileMeasureAsInt("complexity_in_classes")).isEqualTo(2);
+    assertThat(getFileMeasureAsInt("complexity_in_classes")).isEqualTo(3);
   }
 
   @Test
   public void complexityInFunctionsAtFileLevel() {
-    assertThat(getFileMeasureAsInt("complexity_in_functions")).isEqualTo(2);
+    assertThat(getFileMeasureAsInt("complexity_in_functions")).isEqualTo(3);
+  }
+
+  /* Cognitive Complexity */
+
+  @Test
+  public void cognitiveComplexityAtFileLevel() {
+    assertThat(getFileMeasureAsInt("cognitive_complexity")).isEqualTo(1);
+  }
+
+  @Test
+  public void cognitiveComplexityAtDirectoryLevel() {
+    assertThat(getDirectoryMeasureAsInt("cognitive_complexity")).isEqualTo(2);
+  }
+
+  @Test
+  public void cognitiveComplexityAtProjectLevel() {
+    assertThat(getProjectMeasureAsInt("cognitive_complexity")).isEqualTo(3);
   }
 
   /* Lines */
 
   @Test
   public void linesAtProjectLevel() {
-    assertThat(getProjectMeasureAsInt("lines")).isEqualTo(105);
+    assertThat(getProjectMeasureAsInt("lines")).isEqualTo(114);
   }
 
   @Test
   public void linesAtDirectoryLevel() {
-    assertThat(getDirectoryMeasureAsInt("lines")).isEqualTo(70);
+    assertThat(getDirectoryMeasureAsInt("lines")).isEqualTo(76);
   }
 
   @Test
   public void linesAtFileLevel() {
-    assertThat(getFileMeasureAsInt("lines")).isEqualTo(35);
+    assertThat(getFileMeasureAsInt("lines")).isEqualTo(38);
   }
 
   /* Lines of code */
 
   @Test
   public void linesOfCodeAtProjectLevel() {
-    assertThat(getProjectMeasureAsInt("ncloc")).isEqualTo(81);
+    assertThat(getProjectMeasureAsInt("ncloc")).isEqualTo(90);
   }
 
   @Test
   public void linesOfCodeAtDirectoryLevel() {
-    assertThat(getDirectoryMeasureAsInt("ncloc")).isEqualTo(54);
+    assertThat(getDirectoryMeasureAsInt("ncloc")).isEqualTo(60);
   }
 
   @Test
   public void linesOfCodeAtFileLevel() {
-    assertThat(getFileMeasureAsInt("ncloc")).isEqualTo(27);
+    assertThat(getFileMeasureAsInt("ncloc")).isEqualTo(30);
   }
 
   /* Comment lines */
@@ -268,13 +285,13 @@ public class MetricsTest {
 
   @Test
   public void complexityDistributionAtProjectLevel() {
-    assertThat(getProjectMeasure("function_complexity_distribution").getValue()).isEqualTo("1=6;2=0;4=0;6=0;8=0;10=0;12=0");
+    assertThat(getProjectMeasure("function_complexity_distribution").getValue()).isEqualTo("1=3;2=3;4=0;6=0;8=0;10=0;12=0");
     assertThat(getDirectoryMeasure("file_complexity_distribution").getValue()).isEqualTo("0=2;5=0;10=0;20=0;30=0;60=0;90=0");
   }
 
   @Test
   public void complexityDistributionAtDirectoryLevel() {
-    assertThat(getDirectoryMeasure("function_complexity_distribution").getValue()).isEqualTo("1=4;2=0;4=0;6=0;8=0;10=0;12=0");
+    assertThat(getDirectoryMeasure("function_complexity_distribution").getValue()).isEqualTo("1=2;2=2;4=0;6=0;8=0;10=0;12=0");
     assertThat(getDirectoryMeasure("file_complexity_distribution").getValue()).isEqualTo("0=2;5=0;10=0;20=0;30=0;60=0;90=0");
   }
 
@@ -319,7 +336,7 @@ public class MetricsTest {
     assertThat(value).contains("33=1");
     assertThat(value).contains("34=1");
 
-    assertThat(value.length()).isEqualTo(128); // No other line
+    assertThat(value.length()).isEqualTo(143); // No other line
   }
 
   /* Executable lines */
@@ -331,9 +348,10 @@ public class MetricsTest {
 
     assertThat(value).contains("20=1");
     assertThat(value).contains("30=1");
-    assertThat(value).contains("31=1");
+    assertThat(value).contains("32=1");
+    assertThat(value).contains("33=1");
 
-    assertThat(value.length()).isEqualTo(14); // No other lines
+    assertThat(value.length()).isEqualTo(19); // No other lines
   }
 
   /* Helper methods */

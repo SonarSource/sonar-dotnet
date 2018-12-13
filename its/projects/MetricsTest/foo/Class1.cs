@@ -24,11 +24,14 @@ namespace CSLib.foo
 
     class Class1
     {
-        public void Main()
+        public void Main(bool condition)
         {
             MyClazz myClazz = new MyClazz();
-            Console.WriteLine("Hello, world! " + myClazz.MyProperty);
-            Console.ReadLine();
+            if (condition)
+            {
+                Console.WriteLine("Hello, world! " + myClazz.MyProperty);
+                Console.ReadLine();
+            }
         }
     }
 }

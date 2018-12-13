@@ -116,39 +116,56 @@ public class MetricsTest {
 
   @Test
   public void statementsAtProjectLevel() {
-    assertThat(getProjectMeasureAsInt("statements")).isEqualTo(12);
+    assertThat(getProjectMeasureAsInt("statements")).isEqualTo(15);
   }
 
   @Test
   public void statementsAtDirectoryLevel() {
-    assertThat(getDirectoryMeasureAsInt("statements")).isEqualTo(8);
+    assertThat(getDirectoryMeasureAsInt("statements")).isEqualTo(10);
   }
 
   @Test
   public void statementsAtFileLevel() {
-    assertThat(getFileMeasureAsInt("statements")).isEqualTo(4);
+    assertThat(getFileMeasureAsInt("statements")).isEqualTo(5);
   }
 
   @Test
   public void complexityAtProjectLevel() {
-    assertThat(getProjectMeasureAsInt("complexity")).isEqualTo(6);
+    assertThat(getProjectMeasureAsInt("complexity")).isEqualTo(9);
   }
 
   @Test
   public void complexityAtDirectoryLevel() {
-    assertThat(getDirectoryMeasureAsInt("complexity")).isEqualTo(4);
+    assertThat(getDirectoryMeasureAsInt("complexity")).isEqualTo(6);
+  }
+
+  /* Cognitive Complexity */
+
+  @Test
+  public void cognitiveComplexityAtFileLevel() {
+    assertThat(getFileMeasureAsInt("cognitive_complexity")).isEqualTo(1);
+  }
+
+  @Test
+  public void cognitiveComplexityAtDirectoryLevel() {
+    assertThat(getDirectoryMeasureAsInt("cognitive_complexity")).isEqualTo(2);
+  }
+
+  @Test
+  public void cognitiveComplexityAtProjectLevel() {
+    assertThat(getProjectMeasureAsInt("cognitive_complexity")).isEqualTo(3);
   }
 
   /* Lines */
 
   @Test
   public void complexityAtFileLevel() {
-    assertThat(getFileMeasureAsInt("complexity")).isEqualTo(2);
+    assertThat(getFileMeasureAsInt("complexity")).isEqualTo(3);
   }
 
   @Test
   public void complexityInClassesAtFileLevel() {
-    assertThat(getFileMeasureAsInt("complexity_in_classes")).isEqualTo(3);
+    assertThat(getFileMeasureAsInt("complexity_in_classes")).isEqualTo(4);
   }
 
   @Test
@@ -160,34 +177,34 @@ public class MetricsTest {
 
   @Test
   public void linesAtProjectLevel() {
-    assertThat(getProjectMeasureAsInt("lines")).isEqualTo(69);
+    assertThat(getProjectMeasureAsInt("lines")).isEqualTo(75);
   }
 
   @Test
   public void linesAtDirectoryLevel() {
-    assertThat(getDirectoryMeasureAsInt("lines")).isEqualTo(46);
+    assertThat(getDirectoryMeasureAsInt("lines")).isEqualTo(50);
   }
 
   @Test
   public void linesAtFileLevel() {
-    assertThat(getFileMeasureAsInt("lines")).isEqualTo(23);
+    assertThat(getFileMeasureAsInt("lines")).isEqualTo(25);
   }
 
   /* Comment lines */
 
   @Test
   public void linesOfCodeAtProjectLevel() {
-    assertThat(getProjectMeasureAsInt("ncloc")).isEqualTo(45);
+    assertThat(getProjectMeasureAsInt("ncloc")).isEqualTo(51);
   }
 
   @Test
   public void linesOfCodeAtDirectoryLevel() {
-    assertThat(getDirectoryMeasureAsInt("ncloc")).isEqualTo(30);
+    assertThat(getDirectoryMeasureAsInt("ncloc")).isEqualTo(34);
   }
 
   @Test
   public void linesOfCodeAtFileLevel() {
-    assertThat(getFileMeasureAsInt("ncloc")).isEqualTo(15);
+    assertThat(getFileMeasureAsInt("ncloc")).isEqualTo(17);
   }
 
   /* Functions */
@@ -310,7 +327,7 @@ public class MetricsTest {
     assertThat(value).contains("22=1");
 
 
-    assertThat(value.length()).isEqualTo(71); // No other line
+    assertThat(value.length()).isEqualTo(81); // No other line
   }
 
   private Measure getFileMeasure(String metricKey) {
