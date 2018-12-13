@@ -468,7 +468,7 @@ public class Self // Compliant, attributes are not counted
         public void AvoidExcessiveClassCoupling_Nameof()
         {
             Verifier.VerifyCSharpAnalyzer(@"
-public class A // Compliant, attributes are not counted
+public class A // Compliant, types referenced by the nameof expression are not counted
 {
     public A()
     {
