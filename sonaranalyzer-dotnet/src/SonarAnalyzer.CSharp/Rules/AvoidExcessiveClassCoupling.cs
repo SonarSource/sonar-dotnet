@@ -257,6 +257,20 @@ namespace SonarAnalyzer.Rules.CSharp
                 AddDependentType(node);
                 base.VisitIdentifierName(node);
             }
+
+            public override void VisitInvocationExpression(InvocationExpressionSyntax node)
+            {
+                // We don't use the helper method CSharpSyntaxHelper.IsNameof because it will do some extra
+                // semantic checks to ensure this is the real `nameof` and not a user made method.
+                // Here we prefer to favor fast results over accuracy (at worst we have FNs not FPs).
+                var isNameof = node.Expression.IsKind(SyntaxKind.IdentifierName) &&
+                    ((IdentifierNameSyntax)node.Expression).Identifier.ToString() == CSharpSyntaxHelper.NameOfKeywordText;
+
+                if (!isNameof)
+                {
+                    base.VisitInvocationExpression(node);
+                }
+            }
         }
     }
 }

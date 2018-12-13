@@ -444,6 +444,7 @@ public class Self // Noncompliant {{Split this class into smaller and more speci
 ",
                 new AvoidExcessiveClassCoupling { Threshold = 0 });
         }
+
         [TestMethod]
         [TestCategory("Rule")]
         public void AvoidExcessiveClassCoupling_Attributes()
@@ -456,6 +457,23 @@ public class Self // Compliant, attributes are not counted
     [Obsolete]
     void M1()
     {
+    }
+}
+",
+                new AvoidExcessiveClassCoupling { Threshold = 0 });
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void AvoidExcessiveClassCoupling_Nameof()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+public class A // Compliant, types referenced by the nameof expression are not counted
+{
+    public A()
+    {
+        var s1 = nameof(System.Type);
+        var s2 = nameof(System.Action);
     }
 }
 ",
