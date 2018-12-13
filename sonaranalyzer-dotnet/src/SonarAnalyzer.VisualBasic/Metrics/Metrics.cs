@@ -68,6 +68,7 @@ namespace SonarAnalyzer.Common.VisualBasic
         {
             switch (trivia.Kind())
             {
+                // Contrary to C#, VB.NET seems to always recognize the documentation comments.
                 case SyntaxKind.DocumentationCommentExteriorTrivia:
                 case SyntaxKind.DocumentationCommentTrivia:
                     return true;

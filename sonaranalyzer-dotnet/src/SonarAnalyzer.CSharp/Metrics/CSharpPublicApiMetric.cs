@@ -36,12 +36,7 @@ namespace SonarAnalyzer.Metrics
             var publicNodes = ImmutableArray.CreateBuilder<SyntaxNode>();
             var toVisit = new Stack<SyntaxNode>();
 
-            var members = root.ChildNodes()
-                .Where(childNode => childNode is MemberDeclarationSyntax);
-            foreach (var member in members)
-            {
-                toVisit.Push(member);
-            }
+            PushChildMembers(root, toVisit);
 
             while (toVisit.Any())
             {
@@ -52,22 +47,24 @@ namespace SonarAnalyzer.Metrics
                 {
                     publicNodes.Add(member);
                 }
-
-                if (!isPublic &&
-                    !member.IsKind(SyntaxKind.NamespaceDeclaration))
+                else if (!member.IsKind(SyntaxKind.NamespaceDeclaration))
                 {
                     continue;
                 }
 
-                members = member.ChildNodes()
-                    .Where(childNode => childNode is MemberDeclarationSyntax);
-                foreach (var child in members)
-                {
-                    toVisit.Push(child);
-                }
+                PushChildMembers(member, toVisit);
             }
 
             return publicNodes.ToImmutable();
+        }
+
+        private static void PushChildMembers(SyntaxNode syntaxNode, Stack<SyntaxNode> stack)
+        {
+            var members = syntaxNode.ChildNodes().OfType<MemberDeclarationSyntax>();
+            foreach (var member in members)
+            {
+                stack.Push(member);
+            }
         }
     }
 }

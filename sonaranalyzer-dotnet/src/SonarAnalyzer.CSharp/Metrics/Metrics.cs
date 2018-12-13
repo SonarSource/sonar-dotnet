@@ -86,7 +86,10 @@ namespace SonarAnalyzer.Metrics.CSharp
             switch (trivia.Kind())
             {
                 case SyntaxKind.SingleLineCommentTrivia:
-                case SyntaxKind.MultiLineCommentTrivia:
+                    // Roslyn does not recognize the C# "documentation" comment trivia as such
+                    // unless you provide "/p:DocumentationFile=foo.xml" parameter to MSBuild.
+                    // In case the documentation is not generated, we try to guess if some of
+                    // the existing "normal" comments are actually documentation.
                     return trivia.ToString().TrimStart().StartsWith("///");
 
                 case SyntaxKind.SingleLineDocumentationCommentTrivia:
