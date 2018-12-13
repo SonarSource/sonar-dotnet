@@ -68,8 +68,6 @@ namespace SonarAnalyzer.Metrics.VisualBasic
                     // - unchecked
                     // - fixed
                     // - unsafe
-                    // - yield break
-                    // - yield return
 
                     case SyntaxKind.AttributeList:
                         return false;
@@ -98,9 +96,17 @@ namespace SonarAnalyzer.Metrics.VisualBasic
                     case SyntaxKind.ReturnStatement:
                     case SyntaxKind.ExitDoStatement:
                     case SyntaxKind.ExitForStatement:
+                    case SyntaxKind.ExitFunctionStatement:
+                    case SyntaxKind.ExitOperatorStatement:
+                    case SyntaxKind.ExitPropertyStatement:
+                    case SyntaxKind.ExitSelectStatement:
+                    case SyntaxKind.ExitSubStatement:
+                    case SyntaxKind.ExitTryStatement:
                     case SyntaxKind.ExitWhileStatement:
                     case SyntaxKind.ContinueDoStatement:
                     case SyntaxKind.ContinueForStatement:
+
+                    case SyntaxKind.YieldStatement:
 
                     case SyntaxKind.SimpleMemberAccessExpression:
                     case SyntaxKind.InvocationExpression:

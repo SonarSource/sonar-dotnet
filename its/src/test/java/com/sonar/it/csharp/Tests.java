@@ -91,8 +91,7 @@ public class Tests {
   }
 
   private static Path getNuGetPath(Orchestrator orch) {
-    String toolsFolder = Paths.get("tools").resolve("nuget.exe").toAbsolutePath().toString();
-    String nugetPathStr = orch.getConfiguration().getString(NUGET_PATH, toolsFolder);
+    String nugetPathStr = orch.getConfiguration().getString(NUGET_PATH);
     Path nugetPath = Paths.get(nugetPathStr).toAbsolutePath();
     if (!Files.exists(nugetPath)) {
       throw new IllegalStateException("Unable to find NuGet at '" + nugetPath.toString() +
