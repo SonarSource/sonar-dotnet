@@ -25,18 +25,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SonarAnalyzer.UnitTest.Common
 {
     [TestClass]
-    public class ExecutableLinesWalkerTest
+    public class CSharpExecutableLinesMetricTest
     {
-        private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
-        {
-            (var syntaxTree, var semanticModel) = TestHelper.Compile(code);
-            var walker = new Metrics.CSharp.ExecutableLinesWalker(semanticModel);
-            walker.Visit(syntaxTree.GetRoot());
-            walker.ExecutableLines.Should().BeEquivalentTo(expectedExecutableLines);
-        }
-
         [TestMethod]
-        public void Test_01_No_Executable_Lines()
+        public void No_Executable_Lines()
         {
             AssertLinesOfCode(
               @"using System;
@@ -54,7 +46,16 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_02_Checked_Unchecked()
+        public void Class()
+        {
+            AssertLinesOfCode(@"
+class Program
+{
+}");
+        }
+
+        [TestMethod]
+        public void Checked_Unchecked()
         {
             AssertLinesOfCode(
               @"
@@ -71,7 +72,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_03_Blocks()
+        public void Blocks()
         {
             AssertLinesOfCode(
               @"
@@ -86,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_04_Statements()
+        public void Statements()
         {
             AssertLinesOfCode(
               @"
@@ -99,7 +100,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_06_Loops()
+        public void Loops()
         {
             AssertLinesOfCode(
               @"
@@ -116,7 +117,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_07_Conditionals()
+        public void Conditionals()
         {
             AssertLinesOfCode(
               @"
@@ -138,7 +139,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_08_Conditionals()
+        public void Conditionals2()
         {
             AssertLinesOfCode(
               @"
@@ -159,7 +160,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_09_Yields()
+        public void Yields()
         {
             AssertLinesOfCode(
               @"
@@ -182,7 +183,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_10_AccessAndInvocation()
+        public void AccessAndInvocation()
         {
             AssertLinesOfCode(
               @"
@@ -195,7 +196,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_11_Initialization()
+        public void Initialization()
         {
             AssertLinesOfCode(
               @"
@@ -216,7 +217,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_12_Property_Set()
+        public void Property_Set()
         {
             AssertLinesOfCode(
               @"
@@ -233,7 +234,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_13_Property_Get()
+        public void Property_Get()
         {
             AssertLinesOfCode(
               @"
@@ -249,7 +250,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_14_Lambdas()
+        public void Lambdas()
         {
             AssertLinesOfCode(
               @"
@@ -270,7 +271,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_15_TryCatch()
+        public void TryCatch()
         {
             AssertLinesOfCode(
               @"
@@ -331,7 +332,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_18_ExcludeFromTestCoverage()
+        public void ExcludeFromTestCoverage()
         {
             AssertLinesOfCode(
               @"using System.Diagnostics.CodeAnalysis;
@@ -355,7 +356,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_19_ExcludeFromTestCoverage_Variants()
+        public void ExcludeFromTestCoverage_Variants()
         {
             var attributeVariants = new List<string>
             {
@@ -385,7 +386,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_20_ExcludeClassFromTestCoverage()
+        public void ExcludeClassFromTestCoverage()
         {
             AssertLinesOfCode(
               @"
@@ -401,7 +402,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_21_ExcludeStructFromTestCoverage()
+        public void ExcludeStructFromTestCoverage()
         {
             AssertLinesOfCode(
               @"namespace project_1
@@ -418,7 +419,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_22_ExcludePropertyFromTestCoverage()
+        public void ExcludePropertyFromTestCoverage()
         {
             AssertLinesOfCode(
               @"[ExcludeFromCodeCoverage]
@@ -435,7 +436,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_23_Constructor_ExcludeFromCodeCoverage()
+        public void Constructor_ExcludeFromCodeCoverage()
         {
             AssertLinesOfCode(
               @"using System.Diagnostics.CodeAnalysis;
@@ -458,7 +459,7 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_24_Property_ExcludeFromCodeCoverage()
+        public void Property_ExcludeFromCodeCoverage()
         {
             AssertLinesOfCode(
               @"using System.Diagnostics.CodeAnalysis;
@@ -491,7 +492,7 @@ namespace SonarAnalyzer.UnitTest.Common
 
 
         [TestMethod]
-        public void Test_25_Event_ExcludeFromCodeCoverage()
+        public void Event_ExcludeFromCodeCoverage()
         {
             AssertLinesOfCode(
               @"using System.Diagnostics.CodeAnalysis;
@@ -523,10 +524,11 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void Test_26_PartialClasses_ExcludeFromCodeCoverage()
+        public void PartialClasses_ExcludeFromCodeCoverage()
         {
             AssertLinesOfCode(
-              @"[ExcludeFromCodeCoverage]
+              @"using System.Diagnostics.CodeAnalysis;
+                [ExcludeFromCodeCoverage]
                 partial class Program
                 {
                     int FooProperty { get { return 1; } }   // excluded
@@ -547,14 +549,15 @@ namespace SonarAnalyzer.UnitTest.Common
                         System.Console.WriteLine();         // +1
                     }
                 } ",
-                19);
+                20);
         }
 
         [TestMethod]
-        public void Test_27_PartialMethods_ExcludeFromCodeCoverage()
+        public void PartialMethods_ExcludeFromCodeCoverage()
         {
             AssertLinesOfCode(
-              @"partial class Program
+              @"using System.Diagnostics.CodeAnalysis;
+                partial class Program
                 {
                     [ExcludeFromCodeCoverage]
                     partial void Method1();
@@ -609,6 +612,12 @@ namespace SonarAnalyzer.UnitTest.Common
                     }
                 }",
                 8);
+        }
+
+        private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
+        {
+            (var syntaxTree, var semanticModel) = TestHelper.Compile(code);
+            Metrics.CSharp.ExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel).Should().BeEquivalentTo(expectedExecutableLines);
         }
     }
 }

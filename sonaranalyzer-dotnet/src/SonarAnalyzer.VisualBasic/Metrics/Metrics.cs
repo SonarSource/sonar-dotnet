@@ -25,14 +25,16 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Common;
 
-namespace SonarAnalyzer.Common.VisualBasic
+namespace SonarAnalyzer.Metrics.VisualBasic
 {
     public sealed class Metrics : MetricsBase
     {
+        private readonly Lazy<ImmutableArray<int>> lazyExecutableLines;
         private readonly Lazy<ImmutableArray<SyntaxNode>> publicApiNodes;
 
-        public Metrics(SyntaxTree tree)
+        public Metrics(SyntaxTree tree, SemanticModel semanticModel)
             : base(tree)
         {
             var root = tree.GetRoot();
@@ -41,7 +43,8 @@ namespace SonarAnalyzer.Common.VisualBasic
                 throw new ArgumentException(InitalizationErrorTextPattern, nameof(tree));
             }
 
-            publicApiNodes = new Lazy<ImmutableArray<SyntaxNode>>(() => VisualBasicPublicApiMetric.GetMembers(tree));
+            this.lazyExecutableLines = new Lazy<ImmutableArray<int>>(() => ExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
+            this.publicApiNodes = new Lazy<ImmutableArray<SyntaxNode>>(() => VisualBasicPublicApiMetric.GetMembers(tree));
         }
 
         protected override bool IsEndOfFile(SyntaxToken token) =>
@@ -114,7 +117,7 @@ namespace SonarAnalyzer.Common.VisualBasic
         }
 
         protected override ImmutableArray<SyntaxNode> PublicApiNodes =>
-            publicApiNodes.Value;
+            this.publicApiNodes.Value;
 
         private bool IsComplexityIncreasingKind(SyntaxNode node)
         {
@@ -186,8 +189,8 @@ namespace SonarAnalyzer.Common.VisualBasic
             return 0; // Not implemented
         }
 
-        public override ICollection<int> ExecutableLines =>
-            new List<int>(); // Not implemented
+        public override ImmutableArray<int> ExecutableLines =>
+            this.lazyExecutableLines.Value;
 
         private static readonly ISet<SyntaxKind> FunctionKinds = new HashSet<SyntaxKind>
         {

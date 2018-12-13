@@ -24,7 +24,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Common.VisualBasic;
+using SonarAnalyzer.Metrics.VisualBasic;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
@@ -64,8 +64,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.RemoveHandlerAccessorBlock);
         }
 
-        protected override int GetComplexity(SyntaxNode node) =>
-            new Metrics(node.SyntaxTree).GetComplexity(node);
+        protected override int GetComplexity(SyntaxNode node, SemanticModel semanticModel) =>
+            new Metrics.VisualBasic.Metrics(node.SyntaxTree, semanticModel).GetComplexity(node);
 
         protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
             Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;

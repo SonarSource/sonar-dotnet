@@ -49,11 +49,11 @@ public class CoverageTest {
   }
 
   @Test
-  public void should_not_import_coverage_without_report() throws Exception {
+  public void without_coverage_report_still_count_lines_to_cover() throws Exception {
     analyzeCoverageTestProject();
 
-    assertThat(getMeasure("VbCoverageTest", "lines_to_cover")).isNull();
-    assertThat(getMeasure("VbCoverageTest", "uncovered_lines")).isNull();
+    assertThat(getMeasureAsInt("VbCoverageTest", "lines_to_cover")).isEqualTo(4);
+    assertThat(getMeasureAsInt("VbCoverageTest", "uncovered_lines")).isEqualTo(4);
   }
 
   private void analyzeCoverageTestProject(String... keyValues) throws IOException {
