@@ -52,8 +52,8 @@ public class CoverageTest {
   public void without_coverage_report_still_count_lines_to_cover() throws Exception {
     analyzeCoverageTestProject();
 
-    assertThat(getMeasure("VbCoverageTest", "lines_to_cover")).isEqualTo(4);
-    assertThat(getMeasure("VbCoverageTest", "uncovered_lines")).isEqualTo(4);
+    assertThat(getMeasureAsInt("VbCoverageTest", "lines_to_cover")).isEqualTo(4);
+    assertThat(getMeasureAsInt("VbCoverageTest", "uncovered_lines")).isEqualTo(4);
   }
 
   private void analyzeCoverageTestProject(String... keyValues) throws IOException {

@@ -318,11 +318,11 @@ public class MetricsTest {
 
     String value = getFileMeasure("executable_lines_data").getValue();
 
-    assertThat(value).contains("16=1");
-    assertThat(value).contains("17=1");
-    assertThat(value).contains("9=1");
+    assertThat(value).contains("19=1");
+    assertThat(value).contains("20=1");
+    assertThat(value).contains("12=1");
 
-    assertThat(value.length()).isEqualTo(13); // No other lines
+    assertThat(value.length()).isEqualTo(14); // No other lines
   }
 
   private Measure getFileMeasure(String metricKey) {

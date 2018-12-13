@@ -33,7 +33,6 @@ namespace SonarAnalyzer.Metrics.CSharp
 {
     public class Metrics : MetricsBase
     {
-        private readonly SemanticModel semanticModel;
         private readonly Lazy<ImmutableArray<SyntaxNode>> publicApiNodes;
         private readonly Lazy<ImmutableArray<int>> lazyExecutableLines;
 
@@ -45,8 +44,6 @@ namespace SonarAnalyzer.Metrics.CSharp
             {
                 throw new ArgumentException(InitalizationErrorTextPattern, nameof(tree));
             }
-
-            this.semanticModel = semanticModel;
 
             this.publicApiNodes = new Lazy<ImmutableArray<SyntaxNode>>(() => CSharpPublicApiMetric.GetMembers(tree));
             this.lazyExecutableLines = new Lazy<ImmutableArray<int>>(() => ExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
