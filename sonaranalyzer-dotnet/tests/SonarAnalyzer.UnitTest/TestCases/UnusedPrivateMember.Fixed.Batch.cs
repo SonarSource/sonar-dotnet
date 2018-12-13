@@ -36,7 +36,13 @@ namespace Tests.Diagnostics
         {
             MyProperty = 5;
             MyEvent += UnusedPrivateMember_MyEvent;
+            MyUsedEvent += UnusedPrivateMember_MyUsedEvent;
             new Gen<int>();
+        }
+
+        private void UnusedPrivateMember_MyUsedEvent(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void UnusedPrivateMember_MyEvent()
@@ -48,6 +54,12 @@ namespace Tests.Diagnostics
             int field3; // Fixed
         private delegate void Delegate();
         private event Delegate MyEvent;
+
+        private event EventHandler<EventArgs> MyUsedEvent
+        {
+            add { }
+            remove { }
+        }
 
         private int MyProperty
         {
