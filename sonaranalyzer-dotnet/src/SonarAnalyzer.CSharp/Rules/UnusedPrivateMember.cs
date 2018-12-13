@@ -170,16 +170,16 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var syntaxForLocation = unused.Syntax;
 
-                // Report the whole field or event declaration when all variables in it are unused.
-                var fieldOrEvent = unused.Symbol is IFieldSymbol || unused.Symbol is IEventSymbol;
-                if (fieldOrEvent)
+                var isFieldOrEvent = unused.Symbol.Kind == SymbolKind.Field || unused.Symbol.Kind == SymbolKind.Event;
+                if (isFieldOrEvent &&
+                    unused.Syntax.IsKind(SyntaxKind.VariableDeclarator))
                 {
                     if (alreadyReportedFieldLikeSymbols.Contains(unused.Symbol))
                     {
                         continue;
                     }
 
-                    var declarations = GetSiblingDeclarators((VariableDeclaratorSyntax)unused.Syntax)
+                    var declarations = GetSiblingDeclarators(unused.Syntax)
                         .Select(fieldLikeSymbols.GetByB)
                         .ToList();
 
@@ -194,6 +194,23 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             return diagnostics;
+
+            IEnumerable<VariableDeclaratorSyntax> GetSiblingDeclarators(SyntaxNode variableDeclarator)
+            {
+                var nodeGrandParent = variableDeclarator.Parent.Parent;
+
+                switch (nodeGrandParent.Kind())
+                {
+                    case SyntaxKind.FieldDeclaration:
+                        return ((FieldDeclarationSyntax)nodeGrandParent).Declaration.Variables;
+
+                    case SyntaxKind.EventFieldDeclaration:
+                        return ((EventFieldDeclarationSyntax)nodeGrandParent).Declaration.Variables;
+
+                    default:
+                        return Enumerable.Empty<VariableDeclaratorSyntax>();
+                }
+            }
         }
 
         private static IEnumerable<Diagnostic> GetDiagnosticsForProperty(IPropertySymbol property,
@@ -218,6 +235,10 @@ namespace SonarAnalyzer.Rules.CSharp
                         "get accessor in property", property.Name);
                 }
             }
+            else
+            {
+                // do nothing
+            }
 
             AccessorDeclarationSyntax GetAccessorSyntax(IMethodSymbol methodSymbol) =>
                 methodSymbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as AccessorDeclarationSyntax;
@@ -237,8 +258,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 case SymbolKind.Method:
                 case SymbolKind.Property:
                     return symbol.Kind.ToString().ToLowerInvariant();
+
                 case SymbolKind.NamedType:
                     return "type";
+
                 default:
                     return "member";
             }
@@ -254,22 +277,6 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var reference in namedType.DeclaringSyntaxReferences)
             {
                 visitor.Visit(reference.GetSyntax());
-            }
-        }
-
-        private static IEnumerable<VariableDeclaratorSyntax> GetSiblingDeclarators(VariableDeclaratorSyntax variableDeclarator)
-        {
-            if (variableDeclarator.Parent.Parent is FieldDeclarationSyntax fieldDeclaration)
-            {
-                return fieldDeclaration.Declaration.Variables;
-            }
-            else if (variableDeclarator.Parent.Parent is EventFieldDeclarationSyntax eventDeclaration)
-            {
-                return eventDeclaration.Declaration.Variables;
-            }
-            else
-            {
-                return Enumerable.Empty<VariableDeclaratorSyntax>();
             }
         }
 
