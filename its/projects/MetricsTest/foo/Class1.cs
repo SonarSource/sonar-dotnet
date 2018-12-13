@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 
 namespace CSLib.foo
 {
-    // Commented public API
     public class MyClazz
     {
+        /// <summary>
+        /// Documented public API
+        /// </summary>
         public int MyProperty
         {
             get

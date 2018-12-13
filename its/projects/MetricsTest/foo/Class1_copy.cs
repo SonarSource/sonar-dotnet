@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 
 namespace CSLib.foo2
 {
-    // Commented public API
     public class MyClazz
     {
+        /// <summary>
+        /// Documented public API
+        /// </summary>
         public int MyProperty
         {
             get
@@ -25,7 +27,7 @@ namespace CSLib.foo2
         public void Main()
         {
             MyClazz myClazz = new MyClazz();
-            Console.WriteLine("Hello, world! " + myClazz.MyProperty);
+            Console.WriteLine(myClazz.MyProperty);
             Console.ReadLine();
         }
     }

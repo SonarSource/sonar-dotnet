@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace CSLib.bar
 {
-    // Commented public API
+    /// <summary>
+    /// Documented public API
+    /// </summary>
     public class MyClazz
     {
         public int MyProperty

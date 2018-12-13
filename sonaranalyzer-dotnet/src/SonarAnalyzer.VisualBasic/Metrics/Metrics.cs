@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Common.VisualBasic
 {
     public sealed class Metrics : MetricsBase
     {
-        private readonly Lazy<ImmutableArray<SyntaxNode>> publicApis;
+        private readonly Lazy<ImmutableArray<SyntaxNode>> publicApiNodes;
 
         public Metrics(SyntaxTree tree)
             : base(tree)
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Common.VisualBasic
                 throw new ArgumentException(InitalizationErrorTextPattern, nameof(tree));
             }
 
-            publicApis = new Lazy<ImmutableArray<SyntaxNode>>(() => PublicApiMetric.GetMembers(tree));
+            publicApiNodes = new Lazy<ImmutableArray<SyntaxNode>>(() => VisualBasicPublicApiMetric.GetMembers(tree));
         }
 
         protected override bool IsEndOfFile(SyntaxToken token) =>
@@ -55,6 +55,20 @@ namespace SonarAnalyzer.Common.VisualBasic
             switch (trivia.Kind())
             {
                 case SyntaxKind.CommentTrivia:
+                case SyntaxKind.DocumentationCommentExteriorTrivia:
+                case SyntaxKind.DocumentationCommentTrivia:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
+        protected override bool IsDocumentationCommentTrivia(SyntaxTrivia trivia)
+        {
+            switch (trivia.Kind())
+            {
+                // Contrary to C#, VB.NET seems to always recognize the documentation comments.
                 case SyntaxKind.DocumentationCommentExteriorTrivia:
                 case SyntaxKind.DocumentationCommentTrivia:
                     return true;
@@ -99,8 +113,8 @@ namespace SonarAnalyzer.Common.VisualBasic
             return true;
         }
 
-        protected override IEnumerable<SyntaxNode> PublicApiNodes =>
-            publicApis.Value;
+        protected override ImmutableArray<SyntaxNode> PublicApiNodes =>
+            publicApiNodes.Value;
 
         private bool IsComplexityIncreasingKind(SyntaxNode node)
         {

@@ -26,7 +26,7 @@ using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Common.VisualBasic
 {
-    public static class PublicApiMetric
+    public static class VisualBasicPublicApiMetric
     {
         public static ImmutableArray<SyntaxNode> GetMembers(SyntaxTree syntaxTree)
         {

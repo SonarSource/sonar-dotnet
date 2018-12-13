@@ -34,6 +34,7 @@ namespace SonarAnalyzer.Metrics.CSharp
     public class Metrics : MetricsBase
     {
         private readonly SemanticModel semanticModel;
+        private readonly Lazy<ImmutableArray<SyntaxNode>> publicApiNodes;
 
         public Metrics(SyntaxTree tree, SemanticModel semanticModel)
             : base(tree)
@@ -45,6 +46,8 @@ namespace SonarAnalyzer.Metrics.CSharp
             }
 
             this.semanticModel = semanticModel;
+
+            this.publicApiNodes = new Lazy<ImmutableArray<SyntaxNode>>(() => CSharpPublicApiMetric.GetMembers(tree));
         }
 
         public override ICollection<int> ExecutableLines
@@ -69,6 +72,26 @@ namespace SonarAnalyzer.Metrics.CSharp
             {
                 case SyntaxKind.SingleLineCommentTrivia:
                 case SyntaxKind.MultiLineCommentTrivia:
+                case SyntaxKind.SingleLineDocumentationCommentTrivia:
+                case SyntaxKind.MultiLineDocumentationCommentTrivia:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
+        protected override bool IsDocumentationCommentTrivia(SyntaxTrivia trivia)
+        {
+            switch (trivia.Kind())
+            {
+                case SyntaxKind.SingleLineCommentTrivia:
+                    // Roslyn does not recognize the C# "documentation" comment trivia as such
+                    // unless you provide "/p:DocumentationFile=foo.xml" parameter to MSBuild.
+                    // In case the documentation is not generated, we try to guess if some of
+                    // the existing "normal" comments are actually documentation.
+                    return trivia.ToString().TrimStart().StartsWith("///");
+
                 case SyntaxKind.SingleLineDocumentationCommentTrivia:
                 case SyntaxKind.MultiLineDocumentationCommentTrivia:
                     return true;
@@ -177,48 +200,8 @@ namespace SonarAnalyzer.Metrics.CSharp
             }
         }
 
-        protected override IEnumerable<SyntaxNode> PublicApiNodes
-        {
-            get
-            {
-                var root = this.tree.GetRoot();
-                var publicNodes = ImmutableArray.CreateBuilder<SyntaxNode>();
-                var toVisit = new Stack<SyntaxNode>();
-
-                var members = root.ChildNodes()
-                    .Where(childNode => childNode is MemberDeclarationSyntax);
-                foreach (var member in members)
-                {
-                    toVisit.Push(member);
-                }
-
-                while (toVisit.Any())
-                {
-                    var member = toVisit.Pop();
-
-                    var isPublic = member.ChildTokens().AnyOfKind(SyntaxKind.PublicKeyword);
-                    if (isPublic)
-                    {
-                        publicNodes.Add(member);
-                    }
-
-                    if (!isPublic &&
-                        !member.IsKind(SyntaxKind.NamespaceDeclaration))
-                    {
-                        continue;
-                    }
-
-                    members = member.ChildNodes()
-                        .Where(childNode => childNode is MemberDeclarationSyntax);
-                    foreach (var child in members)
-                    {
-                        toVisit.Push(child);
-                    }
-                }
-
-                return publicNodes.ToImmutable();
-            }
-        }
+        protected override ImmutableArray<SyntaxNode> PublicApiNodes =>
+            publicApiNodes.Value;
 
         public override int GetComplexity(SyntaxNode node)
         {

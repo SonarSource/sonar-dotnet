@@ -163,17 +163,17 @@ public class MetricsTest {
 
   @Test
   public void linesAtProjectLevel() {
-    assertThat(getProjectMeasureAsInt("lines")).isEqualTo(99);
+    assertThat(getProjectMeasureAsInt("lines")).isEqualTo(105);
   }
 
   @Test
   public void linesAtDirectoryLevel() {
-    assertThat(getDirectoryMeasureAsInt("lines")).isEqualTo(66);
+    assertThat(getDirectoryMeasureAsInt("lines")).isEqualTo(70);
   }
 
   @Test
   public void linesAtFileLevel() {
-    assertThat(getFileMeasureAsInt("lines")).isEqualTo(33);
+    assertThat(getFileMeasureAsInt("lines")).isEqualTo(35);
   }
 
   /* Lines of code */
@@ -197,17 +197,17 @@ public class MetricsTest {
 
   @Test
   public void commentLinesAtProjectLevel() {
-    assertThat(getProjectMeasureAsInt("comment_lines")).isEqualTo(6);
+    assertThat(getProjectMeasureAsInt("comment_lines")).isEqualTo(12);
   }
 
   @Test
   public void commentLinesAtDirectoryLevel() {
-    assertThat(getDirectoryMeasureAsInt("comment_lines")).isEqualTo(4);
+    assertThat(getDirectoryMeasureAsInt("comment_lines")).isEqualTo(8);
   }
 
   @Test
   public void commentLinesAtFileLevel() {
-    assertThat(getFileMeasureAsInt("comment_lines")).isEqualTo(2);
+    assertThat(getFileMeasureAsInt("comment_lines")).isEqualTo(4);
   }
 
   /* Functions */
@@ -296,20 +296,18 @@ public class MetricsTest {
 
     assertThat(value).contains("9=1");
     assertThat(value).contains("10=1");
-
+    assertThat(value).contains("11=1");
     assertThat(value).contains("12=1");
-    assertThat(value).contains("13=1");
-    assertThat(value).contains("14=1");
-    assertThat(value).contains("15=1");
+
     assertThat(value).contains("16=1");
     assertThat(value).contains("17=1");
     assertThat(value).contains("18=1");
     assertThat(value).contains("19=1");
     assertThat(value).contains("20=1");
     assertThat(value).contains("21=1");
-
+    assertThat(value).contains("22=1");
     assertThat(value).contains("23=1");
-    assertThat(value).contains("24=1");
+
     assertThat(value).contains("25=1");
     assertThat(value).contains("26=1");
     assertThat(value).contains("27=1");
@@ -318,6 +316,8 @@ public class MetricsTest {
     assertThat(value).contains("30=1");
     assertThat(value).contains("31=1");
     assertThat(value).contains("32=1");
+    assertThat(value).contains("33=1");
+    assertThat(value).contains("34=1");
 
     assertThat(value.length()).isEqualTo(128); // No other line
   }
@@ -329,9 +329,9 @@ public class MetricsTest {
 
     String value = getFileMeasure("executable_lines_data").getValue();
 
-    assertThat(value).contains("18=1");
-    assertThat(value).contains("28=1");
-    assertThat(value).contains("29=1");
+    assertThat(value).contains("20=1");
+    assertThat(value).contains("30=1");
+    assertThat(value).contains("31=1");
 
     assertThat(value.length()).isEqualTo(14); // No other lines
   }

@@ -3,6 +3,9 @@
 REM This is a comment!
 
 Public Module foo2
+    ''' <summary>
+    ''' Documented public API
+    ''' </summary>
     Public Class MyClazz
         Public ReadOnly Property MyProperty As Integer
             Get
