@@ -14,9 +14,11 @@ Public Module foo
         End Property
     End Class
 
-    Sub Main()
+    Sub Main(ByVal condition As Boolean)
         Dim myClazz As New MyClazz
-        Console.WriteLine("Hello, world! " & myClazz.MyProperty)
-        Console.ReadLine()
+        If condition Then
+            Console.WriteLine("Hello, world! " & myClazz.MyProperty)
+            Console.ReadLine()
+        End If
     End Sub
 End Module

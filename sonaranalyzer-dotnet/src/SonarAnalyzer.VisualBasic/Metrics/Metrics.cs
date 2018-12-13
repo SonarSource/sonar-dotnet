@@ -186,7 +186,10 @@ namespace SonarAnalyzer.Metrics.VisualBasic
 
         public override int GetCognitiveComplexity(SyntaxNode node)
         {
-            return 0; // Not implemented
+            var walker = new CognitiveComplexityWalker();
+            walker.Walk(node);
+            // nesting level should be 0 at the end of the analysis, otherwise there is a bug
+            return walker.NestingLevel == 0 ? walker.Complexity : -1;
         }
 
         public override ImmutableArray<int> ExecutableLines =>
