@@ -33,7 +33,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     {
         private static readonly IEnumerable<ParseOptions> defaultParseOptions =
             ImmutableArray.Create<ParseOptions>(
-
                 new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7),
                 new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7_1),
                 new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7_2),
