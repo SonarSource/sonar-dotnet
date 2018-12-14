@@ -93,5 +93,27 @@ namespace Tests.Diagnostics
         {
             get => null; // Noncompliant
         }
+
+        public IEnumerable<string> GetSomeStrings()
+        {
+            var list = new List<string>();
+            return list;
+
+            int? LocalFunc()
+            {
+                return null;
+            }
+        }
+
+        public IEnumerable<string> GetSomeStrings2()
+        {
+            var list = new List<string>();
+            return list;
+
+            IEnumerable<string> LocalFunc()
+            {
+                return null; // Noncompliant
+            }
+        }
     }
 }

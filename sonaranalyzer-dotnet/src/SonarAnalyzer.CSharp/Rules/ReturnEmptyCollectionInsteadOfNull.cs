@@ -51,7 +51,9 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(ReportIfReturnsNull,
-                SyntaxKind.MethodDeclaration, SyntaxKind.PropertyDeclaration);
+                SyntaxKind.MethodDeclaration,
+                SyntaxKindEx.LocalFunctionStatement,
+                SyntaxKind.PropertyDeclaration);
         }
 
         private static void ReportIfReturnsNull(SyntaxNodeAnalysisContext context)
@@ -61,16 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var propertyDeclaration = context.Node as PropertyDeclarationSyntax;
-            var methodDeclaration = context.Node as MethodDeclarationSyntax;
-
-            var propertyGetAccessor = propertyDeclaration?.AccessorList?.Accessors
-                .FirstOrDefault(accessor => accessor.IsKind(SyntaxKind.GetAccessorDeclaration));
-
-            var expressionBody = methodDeclaration?.ExpressionBody
-                ?? propertyDeclaration?.ExpressionBody
-                ?? propertyGetAccessor?.ExpressionBody();
-
+            var expressionBody = GetExpressionBody(context.Node);
             if (expressionBody != null)
             {
                 var arrowedNullLiteral = GetNullLiteralOrDefault(expressionBody);
@@ -82,11 +75,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var methodBody = methodDeclaration?.Body
-                ?? propertyGetAccessor?.Body;
-            if (methodBody != null)
+            var body = GetBody(context.Node);
+            if (body != null)
             {
-                var returnNullStatements = GetReturnNullStatements(methodBody)
+                var returnNullStatements = GetReturnNullStatements(body)
                     .Select(returnStatement => returnStatement.GetLocation())
                     .ToList();
                 if (returnNullStatements.Count > 0)
@@ -109,6 +101,53 @@ namespace SonarAnalyzer.Rules.CSharp
                 !methodSymbol.ReturnType.DerivesFrom(KnownType.System_Xml_XmlNode);
         }
 
+        private static ArrowExpressionClauseSyntax GetExpressionBody(SyntaxNode node)
+        {
+            switch (node.Kind())
+            {
+                case SyntaxKind.MethodDeclaration:
+                    return ((MethodDeclarationSyntax)node).ExpressionBody;
+
+                case SyntaxKind.PropertyDeclaration:
+                    var property = (PropertyDeclarationSyntax)node;
+
+                    if (property.ExpressionBody != null)
+                    {
+                        return property.ExpressionBody;
+                    }
+
+                    return property.AccessorList?.Accessors
+                        .FirstOrDefault(accessor => accessor.IsKind(SyntaxKind.GetAccessorDeclaration))
+                        ?.ExpressionBody();
+
+                case SyntaxKindEx.LocalFunctionStatement:
+                    return ((LocalFunctionStatementSyntaxWrapper)node).ExpressionBody;
+
+                default:
+                    return null;
+            }
+        }
+
+        private static BlockSyntax GetBody(SyntaxNode node)
+        {
+            switch (node.Kind())
+            {
+                case SyntaxKind.MethodDeclaration:
+                    return ((MethodDeclarationSyntax)node).Body;
+
+                case SyntaxKind.PropertyDeclaration:
+                    return ((PropertyDeclarationSyntax)node).AccessorList?.Accessors
+                        .FirstOrDefault(accessor => accessor.IsKind(SyntaxKind.GetAccessorDeclaration))
+                        ?.Body;
+
+                case SyntaxKindEx.LocalFunctionStatement:
+                    return ((LocalFunctionStatementSyntaxWrapper)node).Body;
+
+                default:
+                    return null;
+            }
+        }
+
         private static LiteralExpressionSyntax GetNullLiteralOrDefault(ArrowExpressionClauseSyntax expressionBody)
         {
             return expressionBody.Expression.IsKind(SyntaxKind.NullLiteralExpression)
@@ -118,7 +157,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static IEnumerable<ReturnStatementSyntax> GetReturnNullStatements(BlockSyntax methodBlock)
         {
-            return methodBlock.DescendantNodes()
+            return methodBlock.DescendantNodes(n => !n.IsKind(SyntaxKindEx.LocalFunctionStatement))
                 .OfType<ReturnStatementSyntax>()
                 .Where(returnStatement =>
                     returnStatement.Expression.IsKind(SyntaxKind.NullLiteralExpression) &&
