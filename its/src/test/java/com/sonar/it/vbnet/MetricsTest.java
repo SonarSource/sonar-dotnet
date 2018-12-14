@@ -337,9 +337,10 @@ public class MetricsTest {
 
     assertThat(value).contains("19=1");
     assertThat(value).contains("20=1");
+    assertThat(value).contains("21=1");
     assertThat(value).contains("12=1");
 
-    assertThat(value.length()).isEqualTo(14); // No other lines
+    assertThat(value.length()).isEqualTo(19); // No other lines
   }
 
   private Measure getFileMeasure(String metricKey) {
