@@ -73,6 +73,17 @@ namespace Tests.Diagnostics
         public FooCompliant Plus(FooCompliant x) => null;
     }
 
+    // For comparison operators we allow "CompareTo" in addition to "Compare"
+    public class FooCompliant_OtherNames
+    {
+        public static FooCompliant operator >(FooCompliant_OtherNames x, FooCompliant_OtherNames y) => null;
+        public static FooCompliant operator <(FooCompliant_OtherNames x, FooCompliant_OtherNames y) => null;
+        public static FooCompliant operator >=(FooCompliant_OtherNames x, FooCompliant_OtherNames y) => null;
+        public static FooCompliant operator <=(FooCompliant_OtherNames x, FooCompliant_OtherNames y) => null;
+
+        public FooCompliant CompareTo(FooCompliant x, FooCompliant y) => null;
+    }
+
     public class FooCompliant_Static
     {
         public static FooCompliant_Static operator +(FooCompliant_Static x, FooCompliant_Static y) => null;

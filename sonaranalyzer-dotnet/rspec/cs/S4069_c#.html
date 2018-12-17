@@ -80,5 +80,8 @@ language you need to provide an alternate named method following the convention:
     </tr>
   </tbody>
 </table>
-<p>This rule raises an exception when there is an operator overload without the expected named alternative method.</p>
+<p>This rule raises an issue when there is an operator overload without the expected named alternative method.</p>
+<h2>Exceptions</h2>
+<p>This rule does not raise an issue when the class implementing the comparison operators <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code> and
+<code>&lt;=</code> contains a method named <code>CompareTo</code>.</p>
 

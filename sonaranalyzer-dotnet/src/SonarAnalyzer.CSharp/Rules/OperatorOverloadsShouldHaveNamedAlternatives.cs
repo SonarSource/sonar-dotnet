@@ -63,6 +63,14 @@ namespace SonarAnalyzer.Rules.CSharp
             ["op_UnaryPlus"] = "Plus"
         };
 
+        private static readonly Dictionary<string, string> otherOperatorAlternatives = new Dictionary<string, string>
+        {
+            ["op_GreaterThan"] = "CompareTo",
+            ["op_LessThan"] = "CompareTo",
+            ["op_GreaterThanOrEqual"] = "CompareTo",
+            ["op_LessThanOrEqual"] = "CompareTo",
+        };
+
         private static readonly Dictionary<string, string> operatorNames = new Dictionary<string, string>
         {
             ["op_Addition"] = "+",
@@ -106,10 +114,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                var operatorAlternativeMethodName = operatorAlternatives.GetValueOrDefault(operatorSymbol.Name);
                 var operatorName = operatorNames.GetValueOrDefault(operatorSymbol.Name);
                 if (operatorName != null &&
-                    !HasAlternativeMethod(operatorSymbol, operatorAlternativeMethodName))
+                    !HasAlternativeMethod(operatorSymbol, out var operatorAlternativeMethodName))
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, operatorDeclaration.OperatorToken.GetLocation(),
                         operatorAlternativeMethodName, operatorName));
@@ -118,11 +125,34 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.OperatorDeclaration);
         }
 
-        private static bool HasAlternativeMethod(IMethodSymbol operatorMethod, string operatorAlternativeMethodName)
+        /// <summary>
+        /// Checks if the class containing the given operator overload contains a method with an alternative name for
+        /// the operator. Will return false if no methods with alternative name are present, or when the operator has
+        /// no alternative names.
+        /// </summary>
+        /// <returns>
+        /// True when the class contains at least one alternative method for the given operator, otherwise false. The
+        /// <see cref="operatorAlternativeMethodName" /> returns the name of the method to be added as an alternative to
+        /// the operator of it does not exist.
+        /// </returns>
+        private static bool HasAlternativeMethod(IMethodSymbol operatorSymbol, out string operatorAlternativeMethodName)
         {
-            return operatorAlternativeMethodName == null ||
-                operatorMethod.ContainingType
-                    .GetMembers(operatorAlternativeMethodName)
+            operatorAlternativeMethodName = operatorAlternatives.GetValueOrDefault(operatorSymbol.Name);
+            if (operatorAlternativeMethodName == null ||
+                HasMethodWithName(operatorAlternativeMethodName))
+            {
+                return true;
+            }
+
+            // Suggest only the "main" alternatives, the "other" alternatives are to loosen the rule
+            var otherOperatorAlternativeMethodName = otherOperatorAlternatives.GetValueOrDefault(operatorSymbol.Name);
+
+            return otherOperatorAlternativeMethodName != null &&
+                HasMethodWithName(otherOperatorAlternativeMethodName);
+
+            bool HasMethodWithName(string name) =>
+                operatorSymbol.ContainingType
+                    .GetMembers(name)
                     .OfType<IMethodSymbol>()
                     .Any();
         }
