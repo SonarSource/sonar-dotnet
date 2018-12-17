@@ -58,7 +58,7 @@ public class MultiTargetAppTest {
       .setProjectName("MultiTargetConsoleApp")
       .setProjectVersion("1.0"));
 
-    Tests.runNuGet(orchestrator, projectDir, "restore");
+    TestUtils.runNuGet(orchestrator, projectDir, "restore");
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
     orchestrator.executeBuild(TestUtils.newScanner(projectDir)

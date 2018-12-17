@@ -56,6 +56,7 @@ public class TestUtils {
 
   final private static Logger LOG = LoggerFactory.getLogger(TestUtils.class);
   private static final String MSBUILD_PATH = "MSBUILD_PATH";
+  private static final String NUGET_PATH = "NUGET_PATH";
 
   public static Location getPluginLocation (String pluginName) {
     Location pluginLocation;
@@ -100,6 +101,25 @@ public class TestUtils {
         "'. Please configure property '" + MSBUILD_PATH + "'");
     }
     return msBuildPath;
+  }
+
+  public static void runNuGet(Orchestrator orch, Path projectDir, String... arguments) {
+    Path nugetPath = getNuGetPath(orch);
+
+    int r = CommandExecutor.create().execute(Command.create(nugetPath.toString())
+      .addArguments(arguments)
+      .setDirectory(projectDir.toFile()), 60 * 1000);
+    assertThat(r).isEqualTo(0);
+  }
+
+  private static Path getNuGetPath(Orchestrator orch) {
+    String nugetPathStr = orch.getConfiguration().getString(NUGET_PATH);
+    Path nugetPath = Paths.get(nugetPathStr).toAbsolutePath();
+    if (!Files.exists(nugetPath)) {
+      throw new IllegalStateException("Unable to find NuGet at '" + nugetPath.toString() +
+        "'. Please configure property '" + NUGET_PATH + "'");
+    }
+    return nugetPath;
   }
 
   @CheckForNull

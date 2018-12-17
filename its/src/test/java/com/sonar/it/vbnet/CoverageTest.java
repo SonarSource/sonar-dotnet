@@ -185,6 +185,7 @@ public class CoverageTest {
       .setProjectVersion("1.0")
       .setProperties(keyValues));
 
+    TestUtils.runNuGet(orchestrator, projectDir, "restore");
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
     orchestrator.executeBuild(TestUtils.newScanner(projectDir)

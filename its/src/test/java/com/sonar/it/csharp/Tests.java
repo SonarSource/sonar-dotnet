@@ -59,8 +59,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 })
 public class Tests {
 
-  private static final String NUGET_PATH = "NUGET_PATH";
-
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
     .setSonarVersion(TestUtils.replaceLtsVersion(System.getProperty("sonar.runtimeVersion", "LATEST_RELEASE")))
@@ -79,25 +77,6 @@ public class Tests {
     Path tmpProjectDir = temp.newFolder(projectName).toPath();
     FileUtils.copyDirectory(projectDir.toFile(), tmpProjectDir.toFile());
     return tmpProjectDir;
-  }
-
-  public static void runNuGet(Orchestrator orch, Path projectDir, String... arguments) {
-    Path nugetPath = getNuGetPath(orch);
-
-    int r = CommandExecutor.create().execute(Command.create(nugetPath.toString())
-      .addArguments(arguments)
-      .setDirectory(projectDir.toFile()), 60 * 1000);
-    assertThat(r).isEqualTo(0);
-  }
-
-  private static Path getNuGetPath(Orchestrator orch) {
-    String nugetPathStr = orch.getConfiguration().getString(NUGET_PATH);
-    Path nugetPath = Paths.get(nugetPathStr).toAbsolutePath();
-    if (!Files.exists(nugetPath)) {
-      throw new IllegalStateException("Unable to find NuGet at '" + nugetPath.toString() +
-        "'. Please configure property '" + NUGET_PATH + "'");
-    }
-    return nugetPath;
   }
 
   static WsComponents.Component getComponent(String componentKey) {
