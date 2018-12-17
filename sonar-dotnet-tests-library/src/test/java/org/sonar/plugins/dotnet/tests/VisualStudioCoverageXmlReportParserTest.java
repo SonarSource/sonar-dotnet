@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.util.function.Predicate;
 import org.assertj.core.api.Assertions;
 import org.junit.Rule;
 import org.junit.Test;
@@ -33,19 +34,20 @@ public class VisualStudioCoverageXmlReportParserTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
+  private Predicate<String> alwaysTrue = s -> true;
 
   @Test
   public void invalid_root() {
     thrown.expect(RuntimeException.class);
     thrown.expectMessage("<results>");
-    new VisualStudioCoverageXmlReportParser().accept(new File("src/test/resources/visualstudio_coverage_xml/invalid_root.coveragexml"), mock(Coverage.class));
+    new VisualStudioCoverageXmlReportParser(alwaysTrue).accept(new File("src/test/resources/visualstudio_coverage_xml/invalid_root.coveragexml"), mock(Coverage.class));
   }
 
   @Test
   public void non_existing_file() {
     thrown.expect(RuntimeException.class);
     thrown.expectMessage("non_existing_file.coveragexml");
-    new VisualStudioCoverageXmlReportParser().accept(new File("src/test/resources/visualstudio_coverage_xml/non_existing_file.coveragexml"), mock(Coverage.class));
+    new VisualStudioCoverageXmlReportParser(alwaysTrue).accept(new File("src/test/resources/visualstudio_coverage_xml/non_existing_file.coveragexml"), mock(Coverage.class));
   }
 
   @Test
@@ -54,13 +56,13 @@ public class VisualStudioCoverageXmlReportParserTest {
     thrown.expectMessage("Unsupported \"covered\" value \"foo\", expected one of \"yes\", \"partial\" or \"no\"");
     thrown.expectMessage("wrong_covered.coveragexml");
     thrown.expectMessage("line 40");
-    new VisualStudioCoverageXmlReportParser().accept(new File("src/test/resources/visualstudio_coverage_xml/wrong_covered.coveragexml"), mock(Coverage.class));
+    new VisualStudioCoverageXmlReportParser(alwaysTrue).accept(new File("src/test/resources/visualstudio_coverage_xml/wrong_covered.coveragexml"), mock(Coverage.class));
   }
 
   @Test
-  public void valid() throws Exception {
+  public void valid_with_correct_file_language() throws Exception {
     Coverage coverage = new Coverage();
-    new VisualStudioCoverageXmlReportParser().accept(new File("src/test/resources/visualstudio_coverage_xml/valid.coveragexml"), coverage);
+    new VisualStudioCoverageXmlReportParser(alwaysTrue).accept(new File("src/test/resources/visualstudio_coverage_xml/valid.coveragexml"), coverage);
 
     assertThat(coverage.files()).containsOnly(
       new File("CalcMultiplyTest\\MultiplyTest.cs").getCanonicalPath(),
@@ -88,8 +90,19 @@ public class VisualStudioCoverageXmlReportParserTest {
   }
 
   @Test
+  public void valid_with_wrong_file_language() throws Exception {
+    Coverage coverage = new Coverage();
+    new VisualStudioCoverageXmlReportParser(s -> false).accept(new File("src/test/resources/visualstudio_coverage_xml/valid.coveragexml"), coverage);
+
+    assertThat(coverage.files()).isEmpty();
+
+    assertThat(coverage.hits(new File("MyLibrary\\Calc.cs").getCanonicalPath()))
+      .hasSize(0);
+  }
+
+  @Test
   public void should_not_fail_with_invalid_path() {
-    new VisualStudioCoverageXmlReportParser().accept(new File("src/test/resources/visualstudio_coverage_xml/invalid_path.coveragexml"), mock(Coverage.class));
+    new VisualStudioCoverageXmlReportParser(alwaysTrue).accept(new File("src/test/resources/visualstudio_coverage_xml/invalid_path.coveragexml"), mock(Coverage.class));
   }
 
 }

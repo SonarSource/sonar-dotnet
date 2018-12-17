@@ -20,10 +20,12 @@
 package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableSet;
+import java.io.File;
 import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.Set;
 import org.junit.Test;
+import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.plugins.csharp.CSharpCodeCoverageProvider.CSharpCoverageAggregator;
@@ -59,12 +61,12 @@ public class CSharpCodeCoverageProviderTest {
 
   @Test
   public void createInstance_CoverageReport() {
-    new CSharpCoverageReportImportSensor(new CSharpCoverageAggregator(new MapSettings().asConfig()));
+    new CSharpCoverageReportImportSensor(new CSharpCoverageAggregator(new MapSettings().asConfig(), new DefaultFileSystem(new File(""))));
   }
 
   @Test
   public void createInstance_IntegrationCoverageReport() {
-    new CSharpIntegrationCoverageReportImportSensor(new CSharpIntegrationCoverageAggregator(new MapSettings().asConfig()));
+    new CSharpIntegrationCoverageReportImportSensor(new CSharpIntegrationCoverageAggregator(new MapSettings().asConfig(), new DefaultFileSystem(new File(""))));
   }
 
   private static Set<Object> nonProperties(List extensions) {

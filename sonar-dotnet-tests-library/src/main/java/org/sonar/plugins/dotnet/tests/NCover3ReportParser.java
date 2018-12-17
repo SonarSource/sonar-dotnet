@@ -19,6 +19,9 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -30,6 +33,11 @@ import java.util.Map;
 public class NCover3ReportParser implements CoverageParser {
 
   private static final Logger LOG = Loggers.get(NCover3ReportParser.class);
+  private final Predicate<String> isSupportedLanguage;
+
+  public NCover3ReportParser(Predicate<String> isSupportedLanguage) {
+    this.isSupportedLanguage = isSupportedLanguage;
+  }
 
   @Override
   public void accept(File file, Coverage coverage) {
@@ -37,7 +45,7 @@ public class NCover3ReportParser implements CoverageParser {
     new Parser(file, coverage).parse();
   }
 
-  private static class Parser {
+  private class Parser {
 
     private final File file;
     private final Map<String, String> documents = new HashMap<>();
@@ -82,7 +90,7 @@ public class NCover3ReportParser implements CoverageParser {
       }
     }
 
-    private static boolean isExcludedId(String id) {
+    private boolean isExcludedId(String id) {
       return "0".equals(id);
     }
 
@@ -92,15 +100,18 @@ public class NCover3ReportParser implements CoverageParser {
       int vc = xmlParserHelper.getRequiredIntAttribute("vc");
 
       if (documents.containsKey(doc) && !isExcludedLine(line)) {
-        coverage.addHits(documents.get(doc), line, vc);
+        String path = documents.get(doc);
+        if (isSupportedLanguage.test(path)) {
+          coverage.addHits(path, line, vc);
+        }
       }
     }
 
-    private static boolean isExcludedLine(Integer line) {
+    private boolean isExcludedLine(Integer line) {
       return 0 == line;
     }
 
-    private static void checkRootTag(XmlParserHelper xmlParserHelper) {
+    private void checkRootTag(XmlParserHelper xmlParserHelper) {
       xmlParserHelper.checkRootTag("coverage");
       xmlParserHelper.checkRequiredAttribute("exportversion", 3);
     }

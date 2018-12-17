@@ -57,7 +57,7 @@ public class SharedFilesTest {
       .setProjectVersion("1.0")
       .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml"));
 
-    Tests.runNuGet(orchestrator, projectDir, "restore");
+    TestUtils.runNuGet(orchestrator, projectDir, "restore");
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
     orchestrator.executeBuild(TestUtils.newScanner(projectDir)

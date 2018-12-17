@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.util.function.Predicate;
 import org.assertj.core.api.Assertions;
 import org.junit.Rule;
 import org.junit.Test;
@@ -33,12 +34,13 @@ public class DotCoverReportParserTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
+  private Predicate<String> alwaysTrue = s -> true;
 
   @Test
   public void no_title() {
     thrown.expect(IllegalArgumentException.class);
     thrown.expectMessage("The report contents does not match the following regular expression: .*?<title>(.*?)</title>.*");
-    new DotCoverReportParser().accept(new File("src/test/resources/dotcover/no_title.html"), mock(Coverage.class));
+    new DotCoverReportParser(alwaysTrue).accept(new File("src/test/resources/dotcover/no_title.html"), mock(Coverage.class));
   }
 
   @Test
@@ -46,13 +48,13 @@ public class DotCoverReportParserTest {
     thrown.expect(IllegalArgumentException.class);
     thrown.expectMessage("The report contents does not match the following regular expression: "
       + ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[(.*?)\\]\\);\\s*+</script>.*");
-    new DotCoverReportParser().accept(new File("src/test/resources/dotcover/no_highlight.html"), mock(Coverage.class));
+    new DotCoverReportParser(alwaysTrue).accept(new File("src/test/resources/dotcover/no_highlight.html"), mock(Coverage.class));
   }
 
   @Test
   public void valid() throws Exception {
     Coverage coverage = new Coverage();
-    new DotCoverReportParser().accept(new File("src/test/resources/dotcover/valid.html"), coverage);
+    new DotCoverReportParser(alwaysTrue).accept(new File("src/test/resources/dotcover/valid.html"), coverage);
 
     assertThat(coverage.files()).containsOnly(
       new File("mylibrary\\calc.cs").getCanonicalPath());
@@ -80,7 +82,7 @@ public class DotCoverReportParserTest {
 
   @Test
   public void should_not_fail_with_invalid_path() {
-    new DotCoverReportParser().accept(new File("src/test/resources/dotcover/invalid_path.html"), mock(Coverage.class));
+    new DotCoverReportParser(alwaysTrue).accept(new File("src/test/resources/dotcover/invalid_path.html"), mock(Coverage.class));
   }
 
 }

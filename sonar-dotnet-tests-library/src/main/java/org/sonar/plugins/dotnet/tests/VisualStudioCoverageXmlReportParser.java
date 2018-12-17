@@ -25,12 +25,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
 public class VisualStudioCoverageXmlReportParser implements CoverageParser {
 
   private static final Logger LOG = Loggers.get(VisualStudioCoverageXmlReportParser.class);
+  private final Predicate<String> isSupportedLanguage;
+
+  public  VisualStudioCoverageXmlReportParser(Predicate<String> isSupportedLanguage) {
+    this.isSupportedLanguage = isSupportedLanguage;
+  }
 
   @Override
   public void accept(File file, Coverage coverage) {
@@ -38,7 +45,7 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
     new Parser(file, coverage).parse();
   }
 
-  private static class Parser {
+  private class Parser {
 
     private final File file;
     private final Map<Integer, List<Integer>> coveredLines = new HashMap<>();
@@ -107,6 +114,10 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
         return;
       }
 
+      if (!isSupportedLanguage.test(canonicalPath)) {
+        return;
+      }
+
       if (coveredLines.containsKey(id)) {
         for (Integer line : coveredLines.get(id)) {
           coverage.addHits(canonicalPath, line, 1);
@@ -120,7 +131,7 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
       }
     }
 
-    private static void checkRootTag(XmlParserHelper xmlParserHelper) {
+    private void checkRootTag(XmlParserHelper xmlParserHelper) {
       xmlParserHelper.checkRootTag("results");
     }
 

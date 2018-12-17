@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<results>
+  <modules>
+    <module name="vbnetconsoleapp.test.dll" path="vbnetconsoleapp.test.dll" id="0F9CAA666552B64E98D28FBFF131C82A01000000" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+      <functions>
+        <function id="8296" token="0x6000004" name="TestSub()" type_name="UnitTest1" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="7" start_column="9" end_line="7" end_column="22" />
+            <range source_id="0" covered="yes" start_line="8" start_column="13" end_line="8" end_column="57" />
+            <range source_id="0" covered="yes" start_line="9" start_column="9" end_line="9" end_column="16" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="VBNetConsoleApp.Test\UnitTest1.vb" checksum_type="SHA1" checksum="823FB6D3E91B7738183055B4D694EBB5598A2D8C">
+        </source_file>
+      </source_files>
+    </module>
+    <module name="vbnetconsoleapp.exe" path="vbnetconsoleapp.exe" id="85EA36F4F1615143883475EABB7B390701000000" block_coverage="25.00" line_coverage="33.33" blocks_covered="2" blocks_not_covered="6" lines_covered="3" lines_partially_covered="0" lines_not_covered="6">
+      <functions>
+        <function id="8548" token="0x600000b" name="New()" type_name="MySettings" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="3" lines_covered="0" lines_partially_covered="0" lines_not_covered="1">
+          <ranges>
+            <range source_id="1" covered="no" start_line="23" start_column="24" end_line="23" end_column="155" />
+          </ranges>
+        </function>
+        <function id="8580" token="0x600000d" name="get_Default()" type_name="MySettings" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="3">
+          <ranges>
+            <range source_id="1" covered="no" start_line="41" start_column="13" end_line="41" end_column="16" />
+            <range source_id="1" covered="no" start_line="53" start_column="17" end_line="53" end_column="39" />
+            <range source_id="1" covered="no" start_line="54" start_column="13" end_line="54" end_column="20" />
+          </ranges>
+        </function>
+        <function id="8627" token="0x600000f" name="Main()" type_name="Module1" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="2">
+          <ranges>
+            <range source_id="0" covered="no" start_line="3" start_column="5" end_line="3" end_column="15" />
+            <range source_id="0" covered="no" start_line="5" start_column="5" end_line="5" end_column="12" />
+          </ranges>
+        </function>
+        <function id="8632" token="0x6000010" name="Passthrough(Integer)" type_name="Module1" block_coverage="100.00" line_coverage="100.00" blocks_covered="2" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="7" start_column="5" end_line="7" end_column="67" />
+            <range source_id="0" covered="yes" start_line="8" start_column="9" end_line="8" end_column="21" />
+            <range source_id="0" covered="yes" start_line="9" start_column="5" end_line="9" end_column="17" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="VBNetConsoleApp\Module1.vb">
+        </source_file>
+        <source_file id="1" path="VBNetConsoleApp\My Project\Settings.Designer.vb">
+        </source_file>
+      </source_files>
+    </module>
+    <module name="csharpconsoleapp.test.dll" path="csharpconsoleapp.test.dll" id="EBC767EDC7F73D498736D7B00FE3FA0D01000000" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+      <functions>
+        <function id="8284" token="0x6000003" name="TestMethod1()" type_name="UnitTest1" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="10" start_column="9" end_line="10" end_column="10" />
+            <range source_id="0" covered="yes" start_line="11" start_column="13" end_line="11" end_column="58" />
+            <range source_id="0" covered="yes" start_line="12" start_column="9" end_line="12" end_column="10" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="CSharpConsoleApp.Test\UnitTest1.cs" checksum_type="SHA1" checksum="E80B0F38A590DD93AD22AF14DBCC5E1D2C1965D2">
+        </source_file>
+      </source_files>
+    </module>
+    <module name="csharpconsoleapp.exe" path="csharpconsoleapp.exe" id="F547883777DCCC4CBBA747315A8125C501000000" block_coverage="66.67" line_coverage="60.00" blocks_covered="2" blocks_not_covered="1" lines_covered="3" lines_partially_covered="0" lines_not_covered="2">
+      <functions>
+        <function id="8272" token="0x6000001" name="Main(string[])" type_name="Program" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="2">
+          <ranges>
+            <range source_id="0" covered="no" start_line="12" start_column="9" end_line="12" end_column="10" />
+            <range source_id="0" covered="no" start_line="13" start_column="9" end_line="13" end_column="10" />
+          </ranges>
+        </function>
+        <function id="8276" token="0x6000002" name="Passthrough(int)" type_name="Program" block_coverage="100.00" line_coverage="100.00" blocks_covered="2" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="16" start_column="9" end_line="16" end_column="10" />
+            <range source_id="0" covered="yes" start_line="17" start_column="13" end_line="17" end_column="26" />
+            <range source_id="0" covered="yes" start_line="18" start_column="9" end_line="18" end_column="10" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="CSharpConsoleApp\Program.cs">
+        </source_file>
+      </source_files>
+    </module>
+  </modules>
+</results>
