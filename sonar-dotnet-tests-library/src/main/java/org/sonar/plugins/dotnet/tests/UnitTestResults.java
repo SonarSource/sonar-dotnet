@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 
@@ -29,6 +31,8 @@ public class UnitTestResults {
   private int failures;
   private int errors;
   private Long executionTime;
+
+  private List<UnitTestResult> testResults = new ArrayList<>();
 
   public void add(int tests, int skipped, int failures, int errors, @Nullable Long executionTime) {
     this.tests += tests;
@@ -65,4 +69,8 @@ public class UnitTestResults {
     return executionTime;
   }
 
+  public List<UnitTestResult> getTestResults() {
+    return testResults;
+  }
 }
+

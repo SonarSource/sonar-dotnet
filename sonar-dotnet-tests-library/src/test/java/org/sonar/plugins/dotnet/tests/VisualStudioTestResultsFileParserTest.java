@@ -24,6 +24,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.File;
+import org.sonar.plugins.dotnet.tests.UnitTestResult.Status;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -51,6 +52,18 @@ public class VisualStudioTestResultsFileParserTest {
     assertThat(results.tests()).isEqualTo(43);
     assertThat(results.skipped()).isEqualTo(12); // 43 - 31
     assertThat(results.executionTime()).isEqualTo(816l);
+
+    assertThat(results.getTestResults().get(0).getStatus()).isEqualTo(Status.PASSED);
+    assertThat(results.getTestResults().get(1).getStatus()).isEqualTo(Status.ERROR);
+    assertThat(results.getTestResults().get(2).getStatus()).isEqualTo(Status.SKIPPED);
+
+    assertThat(results.getTestResults().get(0).getDurationInMs()).isEqualTo(1L);
+    assertThat(results.getTestResults().get(2).getDurationInMs()).isEqualTo(0L);
+    assertThat(results.getTestResults().get(1).getDurationInMs()).isEqualTo(0L);
+
+    assertThat(results.getTestResults().get(0).getFullyQualifiedName()).isEqualTo("SonarAnalyzer.UnitTest.Common.VisualBasicExecutableLinesMetricTest.TernaryConditionalExpression");
+    assertThat(results.getTestResults().get(1).getFullyQualifiedName()).isEqualTo("SonarAnalyzer.SymbolicExecution.SymbolicValues.NullableSymbolicValue_TrySetConstraint.TrySetConstraint_Existing_HasValue_Set_HasValue");
+    assertThat(results.getTestResults().get(2).getFullyQualifiedName()).isEqualTo("SonarAnalyzer.UnitTest.Common.AnalyzerLanguageTest.AnalyzerLanguage_GetQualityProfileRepositoryKey");
   }
 
   @Test
