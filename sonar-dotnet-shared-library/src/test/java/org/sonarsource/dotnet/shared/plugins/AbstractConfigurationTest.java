@@ -112,6 +112,16 @@ public class AbstractConfigurationTest {
   }
 
   @Test
+  public void noWarningsWhenGettingProtobufPathAndNoPropertyAvailable_TestProject() {
+    // Test projects have sonar.tests property set, main projects don't
+    settings.setProperty("sonar.tests", "");
+    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    };
+    assertThat(config.protobufReportPaths()).isEmpty();
+    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+  }
+
+  @Test
   public void giveWarningsWhenGettingProtobufPathAndNoFolderAvailable() throws IOException {
     Path path1 = createProtobufOut("report");
     settings.setProperty("sonar.cs.analyzer.projectOutPaths", new String[] {path1.toString(), "non-existing"});

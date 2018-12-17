@@ -90,7 +90,11 @@ public abstract class AbstractConfiguration {
       if (oldValue.isPresent()) {
         analyzerWorkDirPaths = Collections.singletonList(Paths.get(oldValue.get()));
       } else {
-        LOG.warn("Property missing: '" + getAnalyzerWorkDirProperty(languageKey) + "'. No protobuf files will be loaded for this project.");
+        // we don't generate sonar.cs.analyzer.projectOutPaths for test projects on purpose
+        boolean isTestProject = configuration.hasKey("sonar.tests");
+        if (!isTestProject) {
+          LOG.warn("Property missing: '" + getAnalyzerWorkDirProperty(languageKey) + "'. No protobuf files will be loaded for this project.");
+        }
         return Collections.emptyList();
       }
     }
