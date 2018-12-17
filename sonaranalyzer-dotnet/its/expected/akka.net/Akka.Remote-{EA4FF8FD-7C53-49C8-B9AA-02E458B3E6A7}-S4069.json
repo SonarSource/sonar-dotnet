@@ -2,58 +2,6 @@
 "issues":  [
 {
 "id":  "S4069",
-"message":  "Implement alternative method 'Compare' for the operator '<'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  61,
-"startColumn":  37,
-"endLine":  61,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S4069",
-"message":  "Implement alternative method 'Compare' for the operator '<='.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  66,
-"startColumn":  37,
-"endLine":  66,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S4069",
-"message":  "Implement alternative method 'Compare' for the operator '>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  88,
-"startColumn":  37,
-"endLine":  88,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S4069",
-"message":  "Implement alternative method 'Compare' for the operator '>='.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
-"region":  {
-"startLine":  93,
-"startColumn":  37,
-"endLine":  93,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Deadline.cs",
