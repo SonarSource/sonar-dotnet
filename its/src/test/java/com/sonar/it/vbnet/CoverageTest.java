@@ -56,22 +56,6 @@ public class CoverageTest {
     assertThat(getMeasureAsInt("VbCoverageTest", "uncovered_lines")).isEqualTo(4);
   }
 
-  private void analyzeCoverageTestProject(String... keyValues) throws IOException {
-    Path projectDir = Tests.projectDir(temp, "VbCoverageTest");
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("begin")
-      .setProjectKey("VbCoverageTest")
-      .setProjectName("VbCoverageTest")
-      .setProjectVersion("1.0")
-      .setProfile("vbnet_no_rule")
-      .setProperties(keyValues));
-
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
-
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("end"));
-  }
-
   @Test
   public void ncover3() throws Exception {
     analyzeCoverageTestProject("sonar.vbnet.ncover3.reportsPaths", "reports/ncover3.nccov");
@@ -133,4 +117,43 @@ public class CoverageTest {
     assertThat(getMeasureAsInt("VbCoverageTest", "lines_to_cover")).isEqualTo(6);
   }
 
+  private void analyzeCoverageTestProject(String... keyValues) throws IOException {
+    Path projectDir = Tests.projectDir(temp, "VbCoverageTest");
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+      .addArgument("begin")
+      .setProjectKey("VbCoverageTest")
+      .setProjectName("VbCoverageTest")
+      .setProjectVersion("1.0")
+      .setProfile("vbnet_no_rule")
+      .setProperties(keyValues));
+
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+      .addArgument("end"));
+  }
+
+  @Test
+  public void mix_vscoverage() throws IOException {
+    analyzeMixCoverage("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml",
+      "sonar.vbnet.vscoveragexml.reportsPaths", "**/visualstudio.coveragexml");
+
+    assertThat(getMeasureAsInt("VbCoverageTest", "lines_to_cover")).isEqualTo(5);
+    assertThat(getMeasureAsInt("VbCoverageTest", "uncovered_lines")).isEqualTo(1);
+  }
+
+  private void analyzeMixCoverage(String... keyValues) throws IOException {
+    Path projectDir = Tests.projectDir(temp, "CSharpVBNetCoverage");
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+      .addArgument("begin")
+      .setProjectKey("CSharpVBNetCoverage")
+      .setProjectName("CSharpVBNetCoverage")
+      .setProjectVersion("1.0")
+      .setProperties(keyValues));
+
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+      .addArgument("end"));
+  }
 }
