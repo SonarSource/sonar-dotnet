@@ -69,12 +69,35 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
     private void dispatchTags(XmlParserHelper xmlParserHelper) {
       String tagName;
       while ((tagName = xmlParserHelper.nextStartTag()) != null) {
-        if ("Counters".equals(tagName)) {
-          handleCountersTag(xmlParserHelper);
-        } else if ("Times".equals(tagName)) {
-          handleTimesTag(xmlParserHelper);
+        if ("UnitTestResult".equals(tagName)) {
+          handleUnitTestResultTag(xmlParserHelper);
+        } else if ("UnitTest".equals(tagName)) {
+          handleUnitTestTag(xmlParserHelper);
+        } else if ("TestMethod".equals(tagName)) {
+          handleTestMethodTag(xmlParserHelper);
         }
+        //if ("Counters".equals(tagName)) {
+        //  handleCountersTag(xmlParserHelper);
+        //} else if ("Times".equals(tagName)) {
+        //  handleTimesTag(xmlParserHelper);
+        //}
       }
+    }
+
+    private void handleUnitTestResultTag(XmlParserHelper xmlParserHelper) {
+      String testId = xmlParserHelper.getAttribute("testId");
+      String testName = xmlParserHelper.getAttribute("testName");
+      String outcome = xmlParserHelper.getAttribute("outcome"); // Passed, Failed, NotExecuted
+      String duration = xmlParserHelper.getAttribute("duration");
+    }
+
+    private void handleUnitTestTag(XmlParserHelper xmlParserHelper) {
+      String id = xmlParserHelper.getAttribute("id");
+      // find object in the dictionary matching this id and put it as current object
+    }
+
+    private void handleTestMethodTag(XmlParserHelper xmlParserHelper) {
+      String className = xmlParserHelper.getAttribute("className");
     }
 
     private void handleCountersTag(XmlParserHelper xmlParserHelper) {
