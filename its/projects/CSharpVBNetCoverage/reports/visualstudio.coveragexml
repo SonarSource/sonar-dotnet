@@ -12,7 +12,7 @@
         </function>
       </functions>
       <source_files>
-        <source_file id="0" path="C:\Src\SonarSource\dotnet\its\projects\CSharpVBNetCoverage\VBNetConsoleApp.Test\UnitTest1.vb" checksum_type="SHA1" checksum="823FB6D3E91B7738183055B4D694EBB5598A2D8C">
+        <source_file id="0" path="VBNetConsoleApp.Test\UnitTest1.vb" checksum_type="SHA1" checksum="823FB6D3E91B7738183055B4D694EBB5598A2D8C">
         </source_file>
       </source_files>
     </module>
@@ -45,9 +45,9 @@
         </function>
       </functions>
       <source_files>
-        <source_file id="0" path="C:\Src\SonarSource\dotnet\its\projects\CSharpVBNetCoverage\VBNetConsoleApp\Module1.vb">
+        <source_file id="0" path="VBNetConsoleApp\Module1.vb">
         </source_file>
-        <source_file id="1" path="C:\Src\SonarSource\dotnet\its\projects\CSharpVBNetCoverage\VBNetConsoleApp\My Project\Settings.Designer.vb">
+        <source_file id="1" path="VBNetConsoleApp\My Project\Settings.Designer.vb">
         </source_file>
       </source_files>
     </module>
@@ -62,7 +62,7 @@
         </function>
       </functions>
       <source_files>
-        <source_file id="0" path="C:\Src\SonarSource\dotnet\its\projects\CSharpVBNetCoverage\CSharpConsoleApp.Test\UnitTest1.cs" checksum_type="SHA1" checksum="E80B0F38A590DD93AD22AF14DBCC5E1D2C1965D2">
+        <source_file id="0" path="CSharpConsoleApp.Test\UnitTest1.cs" checksum_type="SHA1" checksum="E80B0F38A590DD93AD22AF14DBCC5E1D2C1965D2">
         </source_file>
       </source_files>
     </module>
@@ -83,7 +83,7 @@
         </function>
       </functions>
       <source_files>
-        <source_file id="0" path="C:\Src\SonarSource\dotnet\its\projects\CSharpVBNetCoverage\CSharpConsoleApp\Program.cs">
+        <source_file id="0" path="CSharpConsoleApp\Program.cs">
         </source_file>
       </source_files>
     </module>

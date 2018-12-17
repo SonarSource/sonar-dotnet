@@ -21,6 +21,7 @@ package org.sonar.plugins.vbnet;
 
 import java.util.Arrays;
 import java.util.List;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
@@ -133,8 +134,8 @@ public class VbNetCodeCoverageProvider {
 
   public static class VbNetCoverageAggregator extends CoverageAggregator {
 
-    public VbNetCoverageAggregator(Configuration configuration) {
-      super(COVERAGE_CONF, configuration);
+    public VbNetCoverageAggregator(Configuration configuration, FileSystem fileSystem) {
+      super(COVERAGE_CONF, configuration, fileSystem);
     }
 
   }
@@ -149,8 +150,8 @@ public class VbNetCodeCoverageProvider {
 
   public static class VbNetIntegrationCoverageAggregator extends CoverageAggregator {
 
-    public VbNetIntegrationCoverageAggregator(Configuration configuration) {
-      super(IT_COVERAGE_CONF, configuration);
+    public VbNetIntegrationCoverageAggregator(Configuration configuration, FileSystem fileSystem) {
+      super(IT_COVERAGE_CONF, configuration, fileSystem);
     }
 
   }

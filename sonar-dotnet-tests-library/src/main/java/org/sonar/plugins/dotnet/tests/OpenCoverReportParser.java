@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.util.function.Function;
+import java.util.function.Predicate;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -30,6 +32,11 @@ import java.util.Map;
 public class OpenCoverReportParser implements CoverageParser {
 
   private static final Logger LOG = Loggers.get(OpenCoverReportParser.class);
+  private final Predicate<String> isSupportedLanguage;
+
+  public OpenCoverReportParser(Predicate<String> isSupportedLanguage) {
+    this.isSupportedLanguage = isSupportedLanguage;
+  }
 
   @Override
   public void accept(File file, Coverage coverage) {
@@ -37,7 +44,7 @@ public class OpenCoverReportParser implements CoverageParser {
     new Parser(file, coverage).parse();
   }
 
-  private static class Parser {
+  private class Parser {
 
     private final File file;
     private final Map<String, String> files = new HashMap<>();
@@ -97,7 +104,11 @@ public class OpenCoverReportParser implements CoverageParser {
       }
 
       if (files.containsKey(fileId)) {
-        coverage.addHits(files.get(fileId), line, vc);
+        String file = files.get(fileId);
+
+        if (isSupportedLanguage.test(file)) {
+          coverage.addHits(file, line, vc);
+        }
       }
     }
 

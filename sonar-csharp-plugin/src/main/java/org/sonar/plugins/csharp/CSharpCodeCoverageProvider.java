@@ -21,6 +21,7 @@ package org.sonar.plugins.csharp;
 
 import java.util.Arrays;
 import java.util.List;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
@@ -133,8 +134,8 @@ public class CSharpCodeCoverageProvider {
 
   public static class CSharpCoverageAggregator extends CoverageAggregator {
 
-    public CSharpCoverageAggregator(Configuration configuration) {
-      super(COVERAGE_CONF, configuration);
+    public CSharpCoverageAggregator(Configuration configuration, FileSystem fileSystem) {
+      super(COVERAGE_CONF, configuration, fileSystem);
     }
 
   }
@@ -149,8 +150,8 @@ public class CSharpCodeCoverageProvider {
 
   public static class CSharpIntegrationCoverageAggregator extends CoverageAggregator {
 
-    public CSharpIntegrationCoverageAggregator(Configuration configuration) {
-      super(IT_COVERAGE_CONF, configuration);
+    public CSharpIntegrationCoverageAggregator(Configuration configuration, FileSystem fileSystem) {
+      super(IT_COVERAGE_CONF, configuration, fileSystem);
     }
 
   }

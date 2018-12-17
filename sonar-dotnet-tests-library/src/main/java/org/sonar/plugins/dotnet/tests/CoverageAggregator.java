@@ -21,9 +21,12 @@ package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import org.sonar.api.batch.ScannerSide;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Configuration;
+import org.sonar.api.internal.google.common.annotations.VisibleForTesting;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -40,16 +43,22 @@ public class CoverageAggregator {
   private final DotCoverReportsAggregator dotCoverReportsAggregator;
   private final VisualStudioCoverageXmlReportParser visualStudioCoverageXmlReportParser;
 
-  public CoverageAggregator(CoverageConfiguration coverageConf, Configuration configuration) {
-    this(coverageConf, configuration,
-      new CoverageCache(),
-      new NCover3ReportParser(),
-      new OpenCoverReportParser(),
-      new DotCoverReportsAggregator(new DotCoverReportParser()),
-      new VisualStudioCoverageXmlReportParser());
+  public CoverageAggregator(CoverageConfiguration coverageConf, Configuration configuration, FileSystem fs) {
+
+    Predicate<String> isSupportedLanguage = absolutePath -> fs.hasFiles(fs.predicates().and(fs.predicates().hasAbsolutePath(absolutePath),
+      fs.predicates().hasLanguage(coverageConf.languageKey())));
+
+    this.coverageConf = coverageConf;
+    this.configuration = configuration;
+    this.coverageCache = new CoverageCache();
+    this.ncover3ReportParser = new NCover3ReportParser(isSupportedLanguage);
+    this.openCoverReportParser = new OpenCoverReportParser(isSupportedLanguage);
+    this.dotCoverReportsAggregator = new DotCoverReportsAggregator(new DotCoverReportParser(isSupportedLanguage));
+    this.visualStudioCoverageXmlReportParser = new VisualStudioCoverageXmlReportParser(isSupportedLanguage);
   }
 
-  public CoverageAggregator(CoverageConfiguration coverageConf, Configuration configuration,
+  @VisibleForTesting
+  CoverageAggregator(CoverageConfiguration coverageConf, Configuration configuration,
     CoverageCache coverageCache,
     NCover3ReportParser ncover3ReportParser,
     OpenCoverReportParser openCoverReportParser,

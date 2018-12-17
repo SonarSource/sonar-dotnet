@@ -135,14 +135,48 @@ public class CoverageTest {
 
   @Test
   public void mix_vscoverage() throws IOException {
-    analyzeMixCoverage("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml",
-      "sonar.vbnet.vscoveragexml.reportsPaths", "**/visualstudio.coveragexml");
+    analyzeCoverageMixProject("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml",
+      "sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
-    assertThat(getMeasureAsInt("VbCoverageTest", "lines_to_cover")).isEqualTo(5);
-    assertThat(getMeasureAsInt("VbCoverageTest", "uncovered_lines")).isEqualTo(1);
+    assertThat(getMeasureAsInt("CSharpVBNetCoverage", "lines_to_cover")).isEqualTo(10);
+    assertThat(getMeasureAsInt("CSharpVBNetCoverage", "uncovered_lines")).isEqualTo(4);
+
+    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:2EC3A59D-240B-498F-BF1F-EB2A84092718:Program.cs", "lines_to_cover")).isEqualTo(5);
+    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:2EC3A59D-240B-498F-BF1F-EB2A84092718:Program.cs", "uncovered_lines")).isEqualTo(2);
+
+    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:4745F19D-A6DB-4FBB-8A15-DDCA487A035E:Module1.vb", "lines_to_cover")).isEqualTo(5);
+    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:4745F19D-A6DB-4FBB-8A15-DDCA487A035E:Module1.vb", "uncovered_lines")).isEqualTo(2);
   }
 
-  private void analyzeMixCoverage(String... keyValues) throws IOException {
+  @Test
+  public void mix_only_cs_vscoverage() throws IOException {
+    analyzeCoverageMixProject("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
+
+    assertThat(getMeasureAsInt("CSharpVBNetCoverage", "lines_to_cover")).isEqualTo(6);
+    assertThat(getMeasureAsInt("CSharpVBNetCoverage", "uncovered_lines")).isEqualTo(3);
+
+    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:2EC3A59D-240B-498F-BF1F-EB2A84092718:Program.cs", "lines_to_cover")).isEqualTo(5);
+    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:2EC3A59D-240B-498F-BF1F-EB2A84092718:Program.cs", "uncovered_lines")).isEqualTo(2);
+
+    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:4745F19D-A6DB-4FBB-8A15-DDCA487A035E:Module1.vb", "lines_to_cover")).isEqualTo(1);
+    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:4745F19D-A6DB-4FBB-8A15-DDCA487A035E:Module1.vb", "uncovered_lines")).isEqualTo(1);
+  }
+
+  @Test
+  public void mix_only_vbnet_vscoverage() throws IOException {
+    analyzeCoverageMixProject("sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
+
+    assertThat(getMeasureAsInt("CSharpVBNetCoverage", "lines_to_cover")).isEqualTo(6);
+    assertThat(getMeasureAsInt("CSharpVBNetCoverage", "uncovered_lines")).isEqualTo(3);
+
+    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:2EC3A59D-240B-498F-BF1F-EB2A84092718:Program.cs", "lines_to_cover")).isEqualTo(1);
+    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:2EC3A59D-240B-498F-BF1F-EB2A84092718:Program.cs", "uncovered_lines")).isEqualTo(1);
+
+    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:4745F19D-A6DB-4FBB-8A15-DDCA487A035E:Module1.vb", "lines_to_cover")).isEqualTo(5);
+    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:4745F19D-A6DB-4FBB-8A15-DDCA487A035E:Module1.vb", "uncovered_lines")).isEqualTo(2);
+  }
+
+  private void analyzeCoverageMixProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "CSharpVBNetCoverage");
     orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("begin")

@@ -27,6 +27,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
+import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.utils.log.LogTester;
@@ -56,38 +57,42 @@ public class CoverageAggregatorTest {
     when(configuration.hasKey("opencover")).thenReturn(false);
     when(configuration.hasKey("dotcover")).thenReturn(false);
     when(configuration.hasKey("visualstudio")).thenReturn(false);
-    assertThat(new CoverageAggregator(coverageConf, configuration).hasCoverageProperty()).isFalse();
+    assertThat(getCoverageAggregator(configuration, coverageConf).hasCoverageProperty()).isFalse();
 
     when(configuration.hasKey("ncover")).thenReturn(false);
     when(configuration.hasKey("opencover")).thenReturn(true);
     when(configuration.hasKey("dotcover")).thenReturn(false);
     when(configuration.hasKey("visualstudio")).thenReturn(false);
-    assertThat(new CoverageAggregator(coverageConf, configuration).hasCoverageProperty()).isTrue();
+    assertThat(getCoverageAggregator(configuration, coverageConf).hasCoverageProperty()).isTrue();
 
     when(configuration.hasKey("ncover")).thenReturn(false);
     when(configuration.hasKey("opencover")).thenReturn(false);
     when(configuration.hasKey("dotcover")).thenReturn(true);
     when(configuration.hasKey("visualstudio")).thenReturn(false);
-    assertThat(new CoverageAggregator(coverageConf, configuration).hasCoverageProperty()).isTrue();
+    assertThat(getCoverageAggregator(configuration, coverageConf).hasCoverageProperty()).isTrue();
 
     when(configuration.hasKey("ncover")).thenReturn(false);
     when(configuration.hasKey("opencover")).thenReturn(false);
     when(configuration.hasKey("dotcover")).thenReturn(false);
     when(configuration.hasKey("visualstudio")).thenReturn(true);
-    assertThat(new CoverageAggregator(coverageConf, configuration).hasCoverageProperty()).isTrue();
+    assertThat(getCoverageAggregator(configuration, coverageConf).hasCoverageProperty()).isTrue();
 
     when(configuration.hasKey("ncover")).thenReturn(true);
     when(configuration.hasKey("opencover")).thenReturn(true);
     when(configuration.hasKey("dotcover")).thenReturn(true);
     when(configuration.hasKey("visualstudio")).thenReturn(true);
-    assertThat(new CoverageAggregator(coverageConf, configuration).hasCoverageProperty()).isTrue();
+    assertThat(getCoverageAggregator(configuration, coverageConf).hasCoverageProperty()).isTrue();
 
     coverageConf = new CoverageConfiguration("", "ncover2", "opencover2", "dotcover2", "visualstudio2");
     when(configuration.hasKey("ncover")).thenReturn(true);
     when(configuration.hasKey("opencover")).thenReturn(true);
     when(configuration.hasKey("dotcover")).thenReturn(true);
     when(configuration.hasKey("visualstudio")).thenReturn(true);
-    assertThat(new CoverageAggregator(coverageConf, configuration).hasCoverageProperty()).isFalse();
+    assertThat(getCoverageAggregator(configuration, coverageConf).hasCoverageProperty()).isFalse();
+  }
+
+  private CoverageAggregator getCoverageAggregator(Configuration configuration, CoverageConfiguration coverageConf) {
+    return new CoverageAggregator(coverageConf, configuration, new DefaultFileSystem(new File("")));
   }
 
   @Test

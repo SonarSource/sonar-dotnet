@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
@@ -32,6 +33,11 @@ import org.sonar.api.utils.log.Loggers;
 public class DotCoverReportParser implements CoverageParser {
 
   private static final Logger LOG = Loggers.get(DotCoverReportParser.class);
+  private final Predicate<String> isSupportedLanguage;
+
+  public DotCoverReportParser(Predicate<String> isSupportedLanguage) {
+    this.isSupportedLanguage = isSupportedLanguage;
+  }
 
   @Override
   public void accept(File file, Coverage coverage) {
@@ -39,13 +45,13 @@ public class DotCoverReportParser implements CoverageParser {
     new Parser(file, coverage).parse();
   }
 
-  private static class Parser {
+  private class Parser {
 
-    private static final Pattern TITLE_PATTERN = Pattern.compile(".*?<title>(.*?)</title>.*", Pattern.DOTALL);
-    private static final Pattern COVERED_LINES_PATTERN_1 = Pattern.compile(
+    private final Pattern TITLE_PATTERN = Pattern.compile(".*?<title>(.*?)</title>.*", Pattern.DOTALL);
+    private final Pattern COVERED_LINES_PATTERN_1 = Pattern.compile(
       ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[(.*?)\\]\\);\\s*+</script>.*",
       Pattern.DOTALL);
-    private static final Pattern COVERED_LINES_PATTERN_2 = Pattern.compile("\\[(\\d++),\\d++,\\d++,\\d++,(\\d++)\\]");
+    private final Pattern COVERED_LINES_PATTERN_2 = Pattern.compile("\\[(\\d++),\\d++,\\d++,\\d++,(\\d++)\\]");
 
     private final File file;
     private final Coverage coverage;
@@ -64,13 +70,13 @@ public class DotCoverReportParser implements CoverageParser {
       }
 
       String fileCanonicalPath = extractFileCanonicalPath(contents);
-      if (fileCanonicalPath != null) {
+      if (fileCanonicalPath != null && isSupportedLanguage.test(fileCanonicalPath)) {
         collectCoverage(fileCanonicalPath, contents);
       }
     }
 
     @Nullable
-    private static String extractFileCanonicalPath(String contents) {
+    private String extractFileCanonicalPath(String contents) {
       Matcher matcher = TITLE_PATTERN.matcher(contents);
       checkMatches(matcher);
 
@@ -98,7 +104,7 @@ public class DotCoverReportParser implements CoverageParser {
       }
     }
 
-    private static void checkMatches(Matcher matcher) {
+    private void checkMatches(Matcher matcher) {
       if (!matcher.matches()) {
         throw new IllegalArgumentException("The report contents does not match the following regular expression: " + matcher.pattern().pattern());
       }

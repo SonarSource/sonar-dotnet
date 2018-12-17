@@ -20,10 +20,12 @@
 package org.sonar.plugins.vbnet;
 
 import com.google.common.collect.ImmutableSet;
+import java.io.File;
 import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.Set;
 import org.junit.Test;
+import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.plugins.vbnet.VbNetCodeCoverageProvider.VbNetCoverageAggregator;
@@ -59,12 +61,12 @@ public class VbNetCodeCoverageProviderTest {
 
   @Test
   public void createInstance_CoverageReport() {
-    new VbNetCoverageReportImportSensor(new VbNetCoverageAggregator(new MapSettings().asConfig()));
+    new VbNetCoverageReportImportSensor(new VbNetCoverageAggregator(new MapSettings().asConfig(), new DefaultFileSystem(new File(""))));
   }
 
   @Test
   public void createInstance_IntegrationCoverageReport() {
-    new VbNetIntegrationCoverageReportImportSensor(new VbNetIntegrationCoverageAggregator(new MapSettings().asConfig()));
+    new VbNetIntegrationCoverageReportImportSensor(new VbNetIntegrationCoverageAggregator(new MapSettings().asConfig(), new DefaultFileSystem(new File(""))));
   }
 
   private static Set<Object> nonProperties(List extensions) {
