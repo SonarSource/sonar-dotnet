@@ -57,13 +57,13 @@ public class VisualStudioTestResultsFileParserTest {
     assertThat(results.getTestResults().get(1).getStatus()).isEqualTo(Status.ERROR);
     assertThat(results.getTestResults().get(2).getStatus()).isEqualTo(Status.SKIPPED);
 
-    assertThat(results.getTestResults().get(0).getDurationInMs()).isEqualTo(1L);
-    assertThat(results.getTestResults().get(2).getDurationInMs()).isEqualTo(0L);
-    assertThat(results.getTestResults().get(1).getDurationInMs()).isEqualTo(0L);
+    assertThat(results.getTestResults().get(0).getDurationInMs()).isEqualTo(1200400L);
+    assertThat(results.getTestResults().get(2).getDurationInMs()).isEqualTo(601500L);
+    assertThat(results.getTestResults().get(1).getDurationInMs()).isEqualTo(1000627100L);
 
-    assertThat(results.getTestResults().get(0).getFullyQualifiedName()).isEqualTo("SonarAnalyzer.UnitTest.Common.VisualBasicExecutableLinesMetricTest.TernaryConditionalExpression");
-    assertThat(results.getTestResults().get(1).getFullyQualifiedName()).isEqualTo("SonarAnalyzer.SymbolicExecution.SymbolicValues.NullableSymbolicValue_TrySetConstraint.TrySetConstraint_Existing_HasValue_Set_HasValue");
-    assertThat(results.getTestResults().get(2).getFullyQualifiedName()).isEqualTo("SonarAnalyzer.UnitTest.Common.AnalyzerLanguageTest.AnalyzerLanguage_GetQualityProfileRepositoryKey");
+    assertThat(results.getTestResults().get(0).getFullyQualifiedName()).isEqualTo("MyCompany.MyProduct.MyClassTest.TestMethod1");
+    assertThat(results.getTestResults().get(1).getFullyQualifiedName()).isEqualTo("MyCompany.MyProduct.MyClassTest.TestMethod2");
+    assertThat(results.getTestResults().get(2).getFullyQualifiedName()).isEqualTo("MyCompany.MyProduct.MyOtherClassTest.SuperMethod");
   }
 
   @Test

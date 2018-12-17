@@ -124,7 +124,7 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
           break;
       }
 
-      this.unitTestResults.getTestResults().add(new UnitTestResult(duration.getLong(MILLI_OF_SECOND), status, testId));
+      this.unitTestResults.getTestResults().add(new UnitTestResult(duration.toNanoOfDay(), status, testId));
     }
 
     private void handleUnitTestTag(XmlParserHelper xmlParserHelper) {

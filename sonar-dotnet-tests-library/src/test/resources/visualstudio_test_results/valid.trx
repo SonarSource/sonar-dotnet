@@ -2,22 +2,22 @@
 <TestRun id="0ecff956-7215-452f-9ce6-2b6d45870188" name="vagrant@WIN7PRO64 2014-06-11 15:48:58" runUser="WIN7PRO64\vagrant" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
   <Times creation="2016-03-14T17:04:31.0752743+01:00" queuing="2016-03-14T17:04:31.4447480+01:00" start="2016-03-14T17:04:31.1+01:00" finish="2016-03-14T17:04:31.9162137+01:00" />
   <Results>
-    <UnitTestResult executionId="6f0ef9f4-6cc7-48e9-b0ed-d81b5f7aba3d" testId="38f9574d-d7b5-3d61-98a2-dab46dfc887b" testName="TernaryConditionalExpression" computerName="AMMOPC" duration="00:00:00.0012004" startTime="2018-12-17T11:25:54.1113865+01:00" endTime="2018-12-17T11:25:54.1123864+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6f0ef9f4-6cc7-48e9-b0ed-d81b5f7aba3d" />
-    <UnitTestResult executionId="a48079bb-87c3-47a2-8d0a-285a1eafff7f" testId="fde1e5ea-bec5-4377-57cb-2641faf6f9e6" testName="TrySetConstraint_Existing_HasValue_Set_HasValue" computerName="AMMOPC" duration="00:00:00.0006271" startTime="2018-12-17T11:24:27.7821152+01:00" endTime="2018-12-17T11:24:27.7831141+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a48079bb-87c3-47a2-8d0a-285a1eafff7f" />
-    <UnitTestResult executionId="9ca46a78-ba0c-4160-b59a-82a0d41a97df" testId="b2f06ec1-33c7-5ee4-b5b6-64a0e9b82e55" testName="AnalyzerLanguage_GetQualityProfileRepositoryKey" computerName="AMMOPC" duration="00:00:00.0006015" startTime="2018-12-17T11:25:52.5462901+01:00" endTime="2018-12-17T11:25:52.5472898+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9ca46a78-ba0c-4160-b59a-82a0d41a97df" />
+    <UnitTestResult executionId="6f0ef9f4-6cc7-48e9-b0ed-d81b5f7aba3d" testId="38f9574d-d7b5-3d61-98a2-dab46dfc887b" testName="TestMethod1" computerName="AMMOPC" duration="00:00:00.0012004" startTime="2018-12-17T11:25:54.1113865+01:00" endTime="2018-12-17T11:25:54.1123864+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6f0ef9f4-6cc7-48e9-b0ed-d81b5f7aba3d" />
+    <UnitTestResult executionId="a48079bb-87c3-47a2-8d0a-285a1eafff7f" testId="fde1e5ea-bec5-4377-57cb-2641faf6f9e6" testName="TestMethod2" computerName="AMMOPC" duration="00:00:01.0006271" startTime="2018-12-17T11:24:27.7821152+01:00" endTime="2018-12-17T11:24:27.7831141+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a48079bb-87c3-47a2-8d0a-285a1eafff7f" />
+    <UnitTestResult executionId="9ca46a78-ba0c-4160-b59a-82a0d41a97df" testId="b2f06ec1-33c7-5ee4-b5b6-64a0e9b82e55" testName="SuperMethod" computerName="AMMOPC" duration="00:00:00.0006015" startTime="2018-12-17T11:25:52.5462901+01:00" endTime="2018-12-17T11:25:52.5472898+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9ca46a78-ba0c-4160-b59a-82a0d41a97df" />
   </Results>
   <TestDefinitions>
-    <UnitTest name="TernaryConditionalExpression" storage="c:\src\sonarsource\dotnet\sonaranalyzer-dotnet\tests\sonaranalyzer.unittest\bin\debug\net46\sonaranalyzer.unittest.dll" id="38f9574d-d7b5-3d61-98a2-dab46dfc887b">
+    <UnitTest name="TernaryConditionalExpression" storage="C:\foo\bin\MyCompany.MyProduct.MyProductTest.dll" id="38f9574d-d7b5-3d61-98a2-dab46dfc887b">
       <Execution id="6f0ef9f4-6cc7-48e9-b0ed-d81b5f7aba3d" />
-      <TestMethod codeBase="C:\Src\SonarSource\dotnet\sonaranalyzer-dotnet\tests\SonarAnalyzer.UnitTest\bin\Debug\net46\SonarAnalyzer.UnitTest.dll" adapterTypeName="executor://mstestadapter/v2" className="SonarAnalyzer.UnitTest.Common.VisualBasicExecutableLinesMetricTest" name="TernaryConditionalExpression" />
+      <TestMethod codeBase="C:\foo\bin\MyCompany.MyProduct.MyProductTest.dll" adapterTypeName="executor://mstestadapter/v2" className="MyCompany.MyProduct.MyClassTest" name="TestMethod1" />
     </UnitTest>
-    <UnitTest name="TrySetConstraint_Existing_HasValue_Set_HasValue" storage="c:\src\sonarsource\dotnet\sonaranalyzer-dotnet\tests\sonaranalyzer.unittest\bin\debug\net46\sonaranalyzer.unittest.dll" id="fde1e5ea-bec5-4377-57cb-2641faf6f9e6">
+    <UnitTest name="TrySetConstraint_Existing_HasValue_Set_HasValue" storage="C:\foo\bin\MyCompany.MyProduct.MyProductTest.dll" id="fde1e5ea-bec5-4377-57cb-2641faf6f9e6">
       <Execution id="a48079bb-87c3-47a2-8d0a-285a1eafff7f" />
-      <TestMethod codeBase="C:\Src\SonarSource\dotnet\sonaranalyzer-dotnet\tests\SonarAnalyzer.UnitTest\bin\Debug\net46\SonarAnalyzer.UnitTest.dll" adapterTypeName="executor://mstestadapter/v2" className="SonarAnalyzer.SymbolicExecution.SymbolicValues.NullableSymbolicValue_TrySetConstraint" name="TrySetConstraint_Existing_HasValue_Set_HasValue" />
+      <TestMethod codeBase="C:\foo\bin\MyCompany.MyProduct.MyProductTest.dll" adapterTypeName="executor://mstestadapter/v2" className="MyCompany.MyProduct.MyClassTest" name="TestMethod2" />
     </UnitTest>
-    <UnitTest name="AnalyzerLanguage_GetQualityProfileRepositoryKey" storage="c:\src\sonarsource\dotnet\sonaranalyzer-dotnet\tests\sonaranalyzer.unittest\bin\debug\net46\sonaranalyzer.unittest.dll" id="b2f06ec1-33c7-5ee4-b5b6-64a0e9b82e55">
+    <UnitTest name="AnalyzerLanguage_GetQualityProfileRepositoryKey" storage="C:\foo\bin\MyCompany.MyProduct.MyProductTest.dll" id="b2f06ec1-33c7-5ee4-b5b6-64a0e9b82e55">
       <Execution id="9ca46a78-ba0c-4160-b59a-82a0d41a97df" />
-      <TestMethod codeBase="C:\Src\SonarSource\dotnet\sonaranalyzer-dotnet\tests\SonarAnalyzer.UnitTest\bin\Debug\net46\SonarAnalyzer.UnitTest.dll" adapterTypeName="executor://mstestadapter/v2" className="SonarAnalyzer.UnitTest.Common.AnalyzerLanguageTest" name="AnalyzerLanguage_GetQualityProfileRepositoryKey" />
+      <TestMethod codeBase="C:\foo\bin\MyCompany.MyProduct.MyProductTest.dll" adapterTypeName="executor://mstestadapter/v2" className="MyCompany.MyProduct.MyOtherClassTest" name="SuperMethod" />
     </UnitTest>
   </TestDefinitions>
   <ResultSummary outcome="Failed">
