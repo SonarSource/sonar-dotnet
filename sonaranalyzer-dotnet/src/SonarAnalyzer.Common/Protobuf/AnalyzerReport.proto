@@ -119,3 +119,8 @@ message FileMetadataInfo {
   string file_path = 1;
   bool is_generated = 2;
 }
+
+message TestLocation {
+  repeated string test_names = 1;
+  string file_path = 2;
+}

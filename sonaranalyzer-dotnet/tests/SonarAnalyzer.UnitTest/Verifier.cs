@@ -100,14 +100,14 @@ namespace SonarAnalyzer.UnitTest
         }
 
         public static void VerifyUtilityAnalyzer<TMessage>(IEnumerable<string> paths, UtilityAnalyzerBase diagnosticAnalyzer,
-            string protobufPath, Action<IList<TMessage>> verifyProtobuf, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default)
+            string protobufPath, Action<IList<TMessage>> verifyProtobuf, IEnumerable<MetadataReference> additionalReferences = null)
             where TMessage : IMessage<TMessage>, new()
         {
-            var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths);
+            var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths, additionalReferences);
 
             foreach (var compilation in solutionBuilder.Compile())
             {
-                DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, checkMode);
+                DiagnosticVerifier.VerifyNoIssueReported(compilation, diagnosticAnalyzer, CompilationErrorBehavior.Default);
 
                 verifyProtobuf(ReadProtobuf(protobufPath).ToList());
             }
