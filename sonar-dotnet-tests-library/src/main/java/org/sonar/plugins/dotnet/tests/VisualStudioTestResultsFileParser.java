@@ -24,11 +24,20 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalField;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.sonar.api.utils.Duration;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonar.plugins.dotnet.tests.UnitTestResult.Status;
+
+import static java.time.temporal.ChronoField.MILLI_OF_SECOND;
 
 public class VisualStudioTestResultsFileParser implements UnitTestResultsParser {
 
@@ -48,8 +57,9 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
     private Pattern millisecondsPattern = Pattern.compile("(\\.([0-9]{0,3}))[0-9]*+");
 
     private boolean foundCounters;
+    private UnitTestResult currentTestResult;
 
-    Parser(File file, UnitTestResults unitTestResults) {
+    public Parser(File file, UnitTestResults unitTestResults) {
       this.file = file;
       this.unitTestResults = unitTestResults;
     }
@@ -58,6 +68,7 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
       try (XmlParserHelper xmlParserHelper = new XmlParserHelper(file)) {
         checkRootTag(xmlParserHelper);
         dispatchTags(xmlParserHelper);
+
         if (!foundCounters) {
           throw new IllegalArgumentException("The mandatory <Counters> tag is missing in " + file.getAbsolutePath());
         }
@@ -69,35 +80,68 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
     private void dispatchTags(XmlParserHelper xmlParserHelper) {
       String tagName;
       while ((tagName = xmlParserHelper.nextStartTag()) != null) {
-        if ("UnitTestResult".equals(tagName)) {
+        if ("Counters".equals(tagName)) {
+          this.currentTestResult = null;
+          handleCountersTag(xmlParserHelper);
+        } else if ("Times".equals(tagName)) {
+          this.currentTestResult = null;
+          handleTimesTag(xmlParserHelper);
+        } else if ("UnitTestResult".equals(tagName)) {
+          this.currentTestResult = null;
           handleUnitTestResultTag(xmlParserHelper);
         } else if ("UnitTest".equals(tagName)) {
+          this.currentTestResult = null;
           handleUnitTestTag(xmlParserHelper);
         } else if ("TestMethod".equals(tagName)) {
           handleTestMethodTag(xmlParserHelper);
         }
-        //if ("Counters".equals(tagName)) {
-        //  handleCountersTag(xmlParserHelper);
-        //} else if ("Times".equals(tagName)) {
-        //  handleTimesTag(xmlParserHelper);
-        //}
       }
     }
 
     private void handleUnitTestResultTag(XmlParserHelper xmlParserHelper) {
       String testId = xmlParserHelper.getAttribute("testId");
-      String testName = xmlParserHelper.getAttribute("testName");
+
+      String durationText = xmlParserHelper.getAttribute("duration");
+      LocalTime duration = LocalTime.parse(durationText, DateTimeFormatter.ofPattern("HH:mm:ss.SSSSSSS"));
+
       String outcome = xmlParserHelper.getAttribute("outcome"); // Passed, Failed, NotExecuted
-      String duration = xmlParserHelper.getAttribute("duration");
+      UnitTestResult.Status status;
+      switch (outcome) {
+        case "PASSED":
+          status = Status.PASSED;
+          break;
+
+        case "NotExecuted":
+          status = Status.SKIPPED;
+          break;
+
+        case "Failed":
+          status = Status.ERROR;
+          break;
+
+        default:
+          status = Status.PASSED;
+          break;
+      }
+
+      this.unitTestResults.getTestResults().add(new UnitTestResult(duration.getLong(MILLI_OF_SECOND), status, testId));
     }
 
     private void handleUnitTestTag(XmlParserHelper xmlParserHelper) {
       String id = xmlParserHelper.getAttribute("id");
-      // find object in the dictionary matching this id and put it as current object
+
+      this.currentTestResult = this.unitTestResults.getTestResults()
+        .stream()
+        .filter(test -> test.getFullyQualifiedName().equals(id))
+        .findFirst()
+        .orElse(null);
     }
 
     private void handleTestMethodTag(XmlParserHelper xmlParserHelper) {
       String className = xmlParserHelper.getAttribute("className");
+      String testName = xmlParserHelper.getAttribute("name");
+
+      this.currentTestResult.setFullyQualifiedName(className + "." + testName);
     }
 
     private void handleCountersTag(XmlParserHelper xmlParserHelper) {
