@@ -30,6 +30,11 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.sonarsource.dotnet</groupId>
+      <artifactId>sonar-dotnet-shared-library</artifactId>
+      <version>${version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
       <artifactId>sonar-plugin-api</artifactId>
       <scope>provided</scope>
