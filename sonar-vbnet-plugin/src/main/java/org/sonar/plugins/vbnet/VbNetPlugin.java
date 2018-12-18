@@ -48,6 +48,7 @@ public class VbNetPlugin implements Plugin {
   @Override
   public void define(Context context) {
     context.addExtensions(
+      METADATA,
       VbNet.class,
       ReportPathCollector.class,
       VbNetSonarRulesDefinition.class,

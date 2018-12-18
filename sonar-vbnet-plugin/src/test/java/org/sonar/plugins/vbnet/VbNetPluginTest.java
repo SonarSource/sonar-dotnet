@@ -49,7 +49,8 @@ public class VbNetPluginTest {
 
     List extensions = context.getExtensions();
 
-    Class<?>[] expectedExtensions = new Class<?>[] {
+    Object[] expectedExtensions = new Object[] {
+      VbNetPlugin.METADATA,
       VbNet.class,
       VbNetSonarRulesDefinition.class,
       VbNetSensor.class,

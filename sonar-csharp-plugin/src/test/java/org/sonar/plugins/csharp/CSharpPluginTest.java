@@ -49,7 +49,8 @@ public class CSharpPluginTest {
 
     List extensions = context.getExtensions();
 
-    Class<?>[] expectedExtensions = new Class<?>[] {
+    Object[] expectedExtensions = new Object[] {
+      CSharpPlugin.METADATA,
       CSharp.class,
       CSharpSonarRulesDefinition.class,
       CSharpSensor.class,

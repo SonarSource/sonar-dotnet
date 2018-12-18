@@ -48,6 +48,7 @@ public class CSharpPlugin implements Plugin {
   @Override
   public void define(Context context) {
     context.addExtensions(
+      METADATA,
       CSharp.class,
       ReportPathCollector.class,
       CSharpSonarRulesDefinition.class,

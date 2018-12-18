@@ -19,6 +19,13 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import org.sonar.api.ExtensionPoint;
+import org.sonar.api.batch.ScannerSide;
+import org.sonar.api.server.ServerSide;
+
+@ScannerSide
+@ServerSide
+@ExtensionPoint
 public interface DotNetPluginMetadata {
 
   String languageKey();
