@@ -25,6 +25,7 @@ import org.sonar.api.utils.log.Loggers;
 import javax.annotation.CheckForNull;
 import java.io.File;
 import java.io.IOException;
+import org.sonar.plugins.dotnet.tests.UnitTestResult.Status;
 
 public class NUnitTestResultsFileParser implements UnitTestResultsParser {
 
@@ -48,18 +49,68 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
 
     public void parse() {
       try (XmlParserHelper xmlParserHelper = new XmlParserHelper(file)) {
-        String rootTag = xmlParserHelper.nextStartTag();
+
+        boolean rootFound = false;
+        String tagName;
+        while ((tagName = xmlParserHelper.nextStartTag()) != null) {
+          if ("test-results".equals(tagName)) {
+            rootFound = true;
+            handleTestResultsTag(xmlParserHelper);
+          } else if ("test-run".equals(tagName)) {
+            rootFound = true;
+            handleTestRunTag(xmlParserHelper);
+          } else if (!rootFound) {
+            throw xmlParserHelper.parseError("Unrecognized root element <" + tagName + ">");
+          } else if ("test-case".equals(tagName)) {
+            handleTestCaseTag(xmlParserHelper);
+          } else {
+
+          }
+        }
+
+       /* String rootTag = xmlParserHelper.nextStartTag();
         if ("test-results".equals(rootTag)) {
           handleTestResultsTag(xmlParserHelper);
+          dispatchTags(xmlParserHelper);
         } else if ("test-run".equals(rootTag)) {
           handleTestRunTag(xmlParserHelper);
+          dispatchTags(xmlParserHelper);
         } else {
           throw xmlParserHelper.parseError("Unrecognized root element <" + rootTag + ">");
-        }
+        }*/
 
       } catch (IOException e) {
         throw new IllegalStateException("Unable to close report", e);
       }
+    }
+
+    private void handleTestCaseTag(XmlParserHelper xmlParserHelper) {
+      String fullName = xmlParserHelper.getAttribute("fullname");
+      String result = xmlParserHelper.getAttribute("result");
+
+      Status status;
+      switch (result) {
+        case "Passed":
+          status = Status.PASSED;
+          break;
+
+        case "Failed":
+          status = Status.ERROR;
+          break;
+
+        case "Skipped":
+          status = Status.SKIPPED;
+          break;
+
+        default:
+          status = Status.PASSED;
+          break;
+      }
+
+      Double time = xmlParserHelper.getDoubleAttribute("time"); // time is the duration in seconds, expressed as a real number
+      Long duration = time != null ? (long) (time * 1000) : 0L;
+
+      this.unitTestResults.getTestResults().add(new UnitTestResult(duration, status, fullName));
     }
 
     private void handleTestResultsTag(XmlParserHelper xmlParserHelper) {
@@ -72,7 +123,7 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
 
       int totalSkipped = skipped + inconclusive + ignored;
 
-      Double duration = readExecutionTimeFromDirectlyNestedTestSuiteTags(xmlParserHelper);
+      Double duration = null;//readExecutionTimeFromDirectlyNestedTestSuiteTags(xmlParserHelper);
       Long executionTime = duration != null ? (long) duration.doubleValue() : null;
 
       unitTestResults.add(total, totalSkipped, failures, errors, executionTime);

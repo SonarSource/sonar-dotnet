@@ -9,7 +9,7 @@
         <results>
           <test-suite type="TestFixture" name="NUnitTest1" executed="True" result="Success" success="True" time="0.045" asserts="0">
             <results>
-              <test-case name="NUnitTestProject1.NUnitTest1.NUnitTestMethod1" executed="True" result="Success" success="True" time="0.041" asserts="2" />
+              <test-case fullname="NUnitTestProject1.NUnitTest1.NUnitTestMethod1" executed="True" result="Success" success="True" time="0.041" asserts="2" />
             </results>
           </test-suite>
         </results>
