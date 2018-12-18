@@ -22,6 +22,7 @@ package org.sonar.plugins.csharp;
 import org.sonar.api.Plugin;
 import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
 import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
+import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
@@ -52,7 +53,7 @@ public class CSharpPlugin implements Plugin {
       CSharp.class,
       ReportPathCollector.class,
       CSharpSonarRulesDefinition.class,
-      CSharpSensor.class,
+      DotNetSensor.class,
       CSharpConfiguration.class,
       CSharpGlobalProtobufFileProcessor.class,
       WrongEncodingFileFilter.class,
@@ -82,6 +83,11 @@ public class CSharpPlugin implements Plugin {
     @Override
     public String pluginKey() {
       return PLUGIN_KEY;
+    }
+
+    @Override
+    public String shortLanguageName() {
+      return LANGUAGE_NAME;
     }
 
     @Override

@@ -22,6 +22,7 @@ package org.sonar.plugins.vbnet;
 import org.sonar.api.Plugin;
 import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
 import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
+import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
@@ -52,7 +53,7 @@ public class VbNetPlugin implements Plugin {
       VbNet.class,
       ReportPathCollector.class,
       VbNetSonarRulesDefinition.class,
-      VbNetSensor.class,
+      DotNetSensor.class,
       VbNetConfiguration.class,
       VbNetGlobalProtobufFileProcessor.class,
       WrongEncodingFileFilter.class,
@@ -82,6 +83,11 @@ public class VbNetPlugin implements Plugin {
     @Override
     public String pluginKey() {
       return PLUGIN_KEY;
+    }
+
+    @Override
+    public String shortLanguageName() {
+      return "VB.NET";
     }
 
     @Override

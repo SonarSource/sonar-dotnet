@@ -1,5 +1,5 @@
 /*
- * SonarC#
+ * SonarSource :: .NET :: Shared library
  * Copyright (C) 2014-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.csharp;
+package org.sonarsource.dotnet.shared.plugins;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -39,11 +39,6 @@ import org.sonar.api.internal.google.common.collect.ImmutableMap;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
-import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
-import org.sonarsource.dotnet.shared.plugins.RealPathProvider;
-import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
-import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
-import org.sonarsource.dotnet.shared.plugins.RoslynReport;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -53,7 +48,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
-public class CSharpSensorTest {
+public class DotNetSensorTest {
+
+  public static final String REPO_KEY = "repoKey";
+  public static final String LANG_KEY = "langKey";
+
   @Rule
   public LogTester logTester = new LogTester();
   @Rule
@@ -67,7 +66,7 @@ public class CSharpSensorTest {
   private ReportPathCollector reportPathCollector = mock(ReportPathCollector.class);
 
   private SensorContextTester tester;
-  private CSharpSensor sensor;
+  private DotNetSensor sensor;
   private Path workDir;
 
   @Before
@@ -77,11 +76,15 @@ public class CSharpSensorTest {
     tester = SensorContextTester.create(new File("src/test/resources"));
     tester.fileSystem().setWorkDir(workDir);
     when(reportPathCollector.protobufDirs()).thenReturn(reportPaths);
-    sensor = new CSharpSensor(reportPathCollector, protobufDataImporter, roslynDataImporter);
+    DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
+    when(pluginMetadata.languageKey()).thenReturn(LANG_KEY);
+    when(pluginMetadata.repositoryKey()).thenReturn(REPO_KEY);
+    when(pluginMetadata.shortLanguageName()).thenReturn("LangName");
+    sensor = new DotNetSensor(pluginMetadata, reportPathCollector, protobufDataImporter, roslynDataImporter);
   }
 
   private void addFileToFs() {
-    DefaultInputFile inputFile = new TestInputFileBuilder("mod", "file.cs").setLanguage(CSharpPlugin.LANGUAGE_KEY).build();
+    DefaultInputFile inputFile = new TestInputFileBuilder("mod", "file.vb").setLanguage(LANG_KEY).build();
     tester.fileSystem().add(inputFile);
   }
 
@@ -90,8 +93,8 @@ public class CSharpSensorTest {
     DefaultSensorDescriptor sensorDescriptor = new DefaultSensorDescriptor();
     sensor.describe(sensorDescriptor);
     assertThat(sensorDescriptor.isGlobal()).isTrue();
-    assertThat(sensorDescriptor.languages()).containsOnly("cs");
-    assertThat(sensorDescriptor.name()).isEqualTo("C#");
+    assertThat(sensorDescriptor.languages()).containsOnly(LANG_KEY);
+    assertThat(sensorDescriptor.name()).isEqualTo("LangName");
   }
 
   @Test
@@ -100,9 +103,9 @@ public class CSharpSensorTest {
     when(reportPathCollector.protobufDirs()).thenReturn(Collections.emptyList());
     when(reportPathCollector.roslynDirs()).thenReturn(Collections.singletonList(new RoslynReport(null, workDir.getRoot())));
     tester.setActiveRules(new ActiveRulesBuilder()
-      .create(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S1186"))
+      .create(RuleKey.of(REPO_KEY, "S1186"))
       .activate()
-      .create(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "[parameters_key]"))
+      .create(RuleKey.of(REPO_KEY, "[parameters_key]"))
       .activate()
       .create(RuleKey.of("roslyn.foo", "custom-roslyn"))
       .activate()
@@ -112,9 +115,8 @@ public class CSharpSensorTest {
 
     verify(reportPathCollector).protobufDirs();
     verifyZeroInteractions(protobufDataImporter);
-    // {"sonaranalyzer-cs" = [csharpsquid:S1186, csharpsquid:[parameters_key]], "foo" = [roslyn.foo:custom-roslyn]}
     ImmutableMap<String, List<RuleKey>> expectedMap = ImmutableMap.of(
-      "sonaranalyzer-cs", ImmutableList.of(RuleKey.of("csharpsquid", "S1186"), RuleKey.of("csharpsquid", "[parameters_key]")),
+      "sonaranalyzer-langKey", ImmutableList.of(RuleKey.of(REPO_KEY, "S1186"), RuleKey.of(REPO_KEY, "[parameters_key]")),
       "foo", ImmutableList.of(RuleKey.of("roslyn.foo", "custom-roslyn")));
     verify(roslynDataImporter).importRoslynReports(eq(Collections.singletonList(new RoslynReport(null, workDir.getRoot()))), eq(tester), eq(expectedMap), any(RealPathProvider.class));
   }

@@ -28,6 +28,7 @@ import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
+import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
@@ -53,7 +54,7 @@ public class VbNetPluginTest {
       VbNetPlugin.METADATA,
       VbNet.class,
       VbNetSonarRulesDefinition.class,
-      VbNetSensor.class,
+      DotNetSensor.class,
       VbNetConfiguration.class,
       VbNetGlobalProtobufFileProcessor.class,
       WrongEncodingFileFilter.class,
