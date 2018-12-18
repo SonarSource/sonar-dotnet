@@ -19,12 +19,12 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
-
-import javax.annotation.CheckForNull;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.dotnet.tests.UnitTestResult.Status;
 
 public class NUnitTestResultsFileParser implements UnitTestResultsParser {
@@ -32,163 +32,63 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
   private static final Logger LOG = Loggers.get(NUnitTestResultsFileParser.class);
 
   @Override
-  public void accept(File file, UnitTestResults unitTestResults) {
+  public List<UnitTestResult> apply(File file) {
     LOG.info("Parsing the NUnit Test Results file " + file.getAbsolutePath());
-    new Parser(file, unitTestResults).parse();
+    return Parser.parse(file);
   }
 
   private static class Parser {
 
-    private final File file;
-    private final UnitTestResults unitTestResults;
+    public static List<UnitTestResult> parse(File file) {
 
-    Parser(File file, UnitTestResults unitTestResults) {
-      this.file = file;
-      this.unitTestResults = unitTestResults;
-    }
+      List<UnitTestResult> testResults = new ArrayList<>();
 
-    public void parse() {
       try (XmlParserHelper xmlParserHelper = new XmlParserHelper(file)) {
 
-        boolean rootFound = false;
-        String tagName;
-        while ((tagName = xmlParserHelper.nextStartTag()) != null) {
-          if ("test-results".equals(tagName)) {
-            rootFound = true;
-            handleTestResultsTag(xmlParserHelper);
-          } else if ("test-run".equals(tagName)) {
-            rootFound = true;
-            handleTestRunTag(xmlParserHelper);
-          } else if (!rootFound) {
-            throw xmlParserHelper.parseError("Unrecognized root element <" + tagName + ">");
-          } else if ("test-case".equals(tagName)) {
-            handleTestCaseTag(xmlParserHelper);
-          } else {
-
-          }
+        String tagName = xmlParserHelper.nextStartTag();
+        if (!"test-results".equals(tagName) && !"test-run".equals(tagName)) {
+          throw xmlParserHelper.parseError("Expected either an <test-results> or an <test-run> root tag, but got <" + tagName + "> instead.");
         }
 
-       /* String rootTag = xmlParserHelper.nextStartTag();
-        if ("test-results".equals(rootTag)) {
-          handleTestResultsTag(xmlParserHelper);
-          dispatchTags(xmlParserHelper);
-        } else if ("test-run".equals(rootTag)) {
-          handleTestRunTag(xmlParserHelper);
-          dispatchTags(xmlParserHelper);
-        } else {
-          throw xmlParserHelper.parseError("Unrecognized root element <" + rootTag + ">");
-        }*/
-
+        while ((tagName = xmlParserHelper.nextStartTag()) != null) {
+          if ("test-case".equals(tagName)) {
+            testResults.add(handleTestCaseTag(xmlParserHelper));
+          }
+        }
       } catch (IOException e) {
         throw new IllegalStateException("Unable to close report", e);
       }
+
+      return testResults;
     }
 
-    private void handleTestCaseTag(XmlParserHelper xmlParserHelper) {
+    private static UnitTestResult handleTestCaseTag(XmlParserHelper xmlParserHelper) {
       String fullName = xmlParserHelper.getAttribute("fullname");
-      String result = xmlParserHelper.getAttribute("result");
+      Status status = getStatus(xmlParserHelper);
 
-      Status status;
-      switch (result) {
-        case "Passed":
-          status = Status.PASSED;
-          break;
-
-        case "Failed":
-          status = Status.FAILED;
-          break;
-
-        case "Skipped":
-          status = Status.SKIPPED;
-          break;
-
-        default:
-          status = Status.PASSED;
-          break;
-      }
-
-      Double time = xmlParserHelper.getDoubleAttribute("time"); // time is the duration in seconds, expressed as a real number
+      // time is the duration in seconds, expressed as a real number
+      Double time = xmlParserHelper.getDoubleAttribute("time");
       Long duration = time != null ? (long) (time * 1000) : 0L;
 
-      this.unitTestResults.getTestResults().add(new UnitTestResult(duration, status, fullName));
+      return new UnitTestResult(duration, status, fullName);
     }
 
-    private void handleTestResultsTag(XmlParserHelper xmlParserHelper) {
-      int total = xmlParserHelper.getRequiredIntAttribute("total");
-      int errors = xmlParserHelper.getRequiredIntAttribute("errors");
-      int failures = xmlParserHelper.getRequiredIntAttribute("failures");
-      int inconclusive = xmlParserHelper.getRequiredIntAttribute("inconclusive");
-      int ignored = xmlParserHelper.getRequiredIntAttribute("ignored");
-      int skipped = xmlParserHelper.getRequiredIntAttribute("skipped");
+    private static Status getStatus(XmlParserHelper xmlParserHelper) {
+      String result = xmlParserHelper.getAttribute("result");
 
-      int totalSkipped = skipped + inconclusive + ignored;
+      switch (result) {
+        case "Passed":
+          return Status.PASSED;
 
-      Double duration = null;//readExecutionTimeFromDirectlyNestedTestSuiteTags(xmlParserHelper);
-      Long executionTime = duration != null ? (long) duration.doubleValue() : null;
+        case "Failed":
+          return Status.FAILED;
 
-      unitTestResults.add(total, totalSkipped, failures, errors, executionTime);
-    }
+        case "Skipped":
+          return Status.SKIPPED;
 
-    private void handleTestRunTag(XmlParserHelper xmlParserHelper) {
-      int total = xmlParserHelper.getRequiredIntAttribute("total");
-      int failures = xmlParserHelper.getRequiredIntAttribute("failed");
-      int inconclusive = xmlParserHelper.getRequiredIntAttribute("inconclusive");
-      int skipped = xmlParserHelper.getRequiredIntAttribute("skipped");
-
-      int totalSkipped = skipped + inconclusive;
-
-      Double duration = xmlParserHelper.getDoubleAttribute("duration");
-      Long executionTime = duration != null ? (long) (duration * 1000) : null;
-
-      int errors = readErrorCountFromNestedTestCaseTags(xmlParserHelper);
-
-      unitTestResults.add(total, totalSkipped, failures, errors, executionTime);
-    }
-
-    @CheckForNull
-    private static Double readExecutionTimeFromDirectlyNestedTestSuiteTags(XmlParserHelper xmlParserHelper) {
-      Double executionTime = null;
-
-      String tag;
-      int level = 0;
-      while ((tag = xmlParserHelper.nextStartOrEndTag()) != null) {
-        if ("<test-suite>".equals(tag)) {
-          level++;
-          Double time = xmlParserHelper.getDoubleAttribute("time");
-
-          if (level == 1 && time != null) {
-            if (executionTime == null) {
-              executionTime = 0d;
-            }
-            executionTime += time * 1000;
-          }
-        } else if ("</test-suite>".equals(tag)) {
-          level--;
-        }
+        default:
+          return Status.PASSED;
       }
-
-      return executionTime;
-    }
-
-    private static int readErrorCountFromNestedTestCaseTags(XmlParserHelper xmlParserHelper) {
-      int errors = 0;
-
-      String tag;
-      int level = 0;
-      while ((tag = xmlParserHelper.nextStartOrEndTag()) != null) {
-        if ("<test-case>".equals(tag)) {
-          level++;
-          String label = xmlParserHelper.getAttribute("label");
-
-          if (level == 1 && "Error".equals(label)) {
-            errors++;
-          }
-        } else if ("</test-case>".equals(tag)) {
-          level--;
-        }
-      }
-
-      return errors;
     }
   }
 

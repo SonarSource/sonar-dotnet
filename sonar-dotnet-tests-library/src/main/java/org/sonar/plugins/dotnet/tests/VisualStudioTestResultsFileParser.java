@@ -21,14 +21,10 @@ package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.List;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.dotnet.tests.UnitTestResult.Status;
@@ -38,94 +34,74 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
   private static final Logger LOG = Loggers.get(VisualStudioTestResultsFileParser.class);
 
   @Override
-  public void accept(File file, UnitTestResults unitTestResults) {
+  public List<UnitTestResult> apply(File file) {
     LOG.info("Parsing the Visual Studio Test Results file " + file.getAbsolutePath());
-    new Parser(file, unitTestResults).parse();
+    return new Parser().parse(file);
   }
 
   private static class Parser {
 
-    private final File file;
-    private final UnitTestResults unitTestResults;
-    private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-    private Pattern millisecondsPattern = Pattern.compile("(\\.([0-9]{0,3}))[0-9]*+");
-
-    private boolean foundCounters;
     private UnitTestResult currentTestResult;
 
-    public Parser(File file, UnitTestResults unitTestResults) {
-      this.file = file;
-      this.unitTestResults = unitTestResults;
-    }
+    public List<UnitTestResult> parse(File file) {
 
-    public void parse() {
+      List<UnitTestResult> testResults = new ArrayList<>();
+
       try (XmlParserHelper xmlParserHelper = new XmlParserHelper(file)) {
-        checkRootTag(xmlParserHelper);
-        dispatchTags(xmlParserHelper);
+        xmlParserHelper.checkRootTag("TestRun");
 
-        if (!foundCounters) {
-          throw new IllegalArgumentException("The mandatory <Counters> tag is missing in " + file.getAbsolutePath());
+        String tagName;
+        while ((tagName = xmlParserHelper.nextStartTag()) != null) {
+          if ("UnitTestResult".equals(tagName)) {
+            this.currentTestResult = null;
+            testResults.add(handleUnitTestResultTag(xmlParserHelper));
+          } else if ("UnitTest".equals(tagName)) {
+            this.currentTestResult = null;
+            handleUnitTestTag(xmlParserHelper, testResults);
+          } else if ("TestMethod".equals(tagName)) {
+            handleTestMethodTag(xmlParserHelper);
+          }
         }
       } catch (IOException e) {
         throw new IllegalStateException("Unable to close report", e);
       }
+
+      return testResults;
     }
 
-    private void dispatchTags(XmlParserHelper xmlParserHelper) {
-      String tagName;
-      while ((tagName = xmlParserHelper.nextStartTag()) != null) {
-        if ("Counters".equals(tagName)) {
-          this.currentTestResult = null;
-          handleCountersTag(xmlParserHelper);
-        } else if ("Times".equals(tagName)) {
-          this.currentTestResult = null;
-          handleTimesTag(xmlParserHelper);
-        } else if ("UnitTestResult".equals(tagName)) {
-          this.currentTestResult = null;
-          handleUnitTestResultTag(xmlParserHelper);
-        } else if ("UnitTest".equals(tagName)) {
-          this.currentTestResult = null;
-          handleUnitTestTag(xmlParserHelper);
-        } else if ("TestMethod".equals(tagName)) {
-          handleTestMethodTag(xmlParserHelper);
-        }
-      }
-    }
-
-    private void handleUnitTestResultTag(XmlParserHelper xmlParserHelper) {
+    private UnitTestResult handleUnitTestResultTag(XmlParserHelper xmlParserHelper) {
       String testId = xmlParserHelper.getAttribute("testId");
 
       String durationText = xmlParserHelper.getAttribute("duration");
       LocalTime duration = LocalTime.parse(durationText, DateTimeFormatter.ofPattern("HH:mm:ss.SSSSSSS"));
 
-      String outcome = xmlParserHelper.getAttribute("outcome"); // Passed, Failed, NotExecuted
-      UnitTestResult.Status status;
-      switch (outcome) {
-        case "PASSED":
-          status = Status.PASSED;
-          break;
+      Status status = getStatus(xmlParserHelper);
 
-        case "NotExecuted":
-          status = Status.SKIPPED;
-          break;
-
-        case "Failed":
-          status = Status.FAILED;
-          break;
-
-        default:
-          status = Status.PASSED;
-          break;
-      }
-
-      this.unitTestResults.getTestResults().add(new UnitTestResult(duration.toNanoOfDay(), status, testId));
+      return new UnitTestResult(duration.toNanoOfDay(), status, testId);
     }
 
-    private void handleUnitTestTag(XmlParserHelper xmlParserHelper) {
+    private Status getStatus(XmlParserHelper xmlParserHelper) {
+      String outcome = xmlParserHelper.getAttribute("outcome"); // Passed, Failed, NotExecuted
+
+      switch (outcome) {
+        case "PASSED":
+          return Status.PASSED;
+
+        case "NotExecuted":
+          return Status.SKIPPED;
+
+        case "Failed":
+          return Status.FAILED;
+
+        default:
+          return Status.PASSED;
+      }
+    }
+
+    private void handleUnitTestTag(XmlParserHelper xmlParserHelper, List<UnitTestResult> testResults) {
       String id = xmlParserHelper.getAttribute("id");
 
-      this.currentTestResult = this.unitTestResults.getTestResults()
-        .stream()
+      this.currentTestResult = testResults.stream()
         .filter(test -> test.getFullyQualifiedName().equals(id))
         .findFirst()
         .orElse(null);
@@ -137,66 +113,6 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
 
       this.currentTestResult.setFullyQualifiedName(className + "." + testName);
     }
-
-    private void handleCountersTag(XmlParserHelper xmlParserHelper) {
-      foundCounters = true;
-
-      int total = xmlParserHelper.getIntAttributeOrZero("total");
-      int failed = xmlParserHelper.getIntAttributeOrZero("failed");
-      int errors = xmlParserHelper.getIntAttributeOrZero("error");
-      int timeout = xmlParserHelper.getIntAttributeOrZero("timeout");
-      int aborted = xmlParserHelper.getIntAttributeOrZero("aborted");
-      int executed = xmlParserHelper.getIntAttributeOrZero("executed");
-
-      // IgnoreAttribute and Assert.Inconclusive do not appear in the trx (xml attributes are always 0).
-      // There is no official documentation but it seems like the only way to get skipped tests is to do the following
-      // maths.
-      int skipped = total - executed;
-      int failures = timeout + failed + aborted;
-
-      unitTestResults.add(total, skipped, failures, errors, null);
-    }
-
-    private void handleTimesTag(XmlParserHelper xmlParserHelper) {
-      Date start = getRequiredDateAttribute(xmlParserHelper, "start");
-      Date finish = getRequiredDateAttribute(xmlParserHelper, "finish");
-      long duration = finish.getTime() - start.getTime();
-
-      unitTestResults.add(0, 0, 0, 0, duration);
-    }
-
-    private Date getRequiredDateAttribute(XmlParserHelper xmlParserHelper, String name) {
-      String value = xmlParserHelper.getRequiredAttribute(name);
-      try {
-        value = keepOnlyMilliseconds(value);
-        return dateFormat.parse(value);
-      } catch (ParseException e) {
-        throw xmlParserHelper.parseError("Expected an valid date and time instead of \"" + value + "\" for the attribute \"" + name + "\". " + e.getMessage());
-      }
-    }
-
-    private String keepOnlyMilliseconds(String value) {
-      StringBuffer sb = new StringBuffer();
-
-      Matcher matcher = millisecondsPattern.matcher(value);
-      StringBuilder trailingZeros = new StringBuilder();
-      while (matcher.find()) {
-        String milliseconds = matcher.group(2);
-        trailingZeros.setLength(0);
-        for (int i = 0; i < 3 - milliseconds.length(); i++) {
-          trailingZeros.append("0");
-        }
-        matcher.appendReplacement(sb, "$1" + trailingZeros);
-      }
-      matcher.appendTail(sb);
-
-      return sb.toString();
-    }
-
-    private static void checkRootTag(XmlParserHelper xmlParserHelper) {
-      xmlParserHelper.checkRootTag("TestRun");
-    }
-
   }
 
 }

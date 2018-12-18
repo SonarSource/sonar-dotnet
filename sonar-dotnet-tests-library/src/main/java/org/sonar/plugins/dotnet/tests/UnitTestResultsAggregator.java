@@ -20,6 +20,8 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.config.Configuration;
@@ -70,31 +72,38 @@ public class UnitTestResultsAggregator {
     return hasKeyPredicate.test(unitTestConf.xunitTestResultsFilePropertyKey());
   }
 
-  UnitTestResults aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, UnitTestResults unitTestResults) {
+  List<UnitTestResult> aggregate(WildcardPatternFileProvider wildcardPatternFileProvider) {
+
+    List<UnitTestResult> unitTestResults = new ArrayList<>();
+
     if (hasVisualStudioTestResultsFile(configuration::hasKey)) {
-      aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.visualStudioTestResultsFilePropertyKey()), visualStudioTestResultsFileParser,
-        unitTestResults);
+      unitTestResults.addAll(aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.visualStudioTestResultsFilePropertyKey()), visualStudioTestResultsFileParser));
     }
 
     if (hasNUnitTestResultsFile(configuration::hasKey)) {
-      aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.nunitTestResultsFilePropertyKey()), nunitTestResultsFileParser, unitTestResults);
+      unitTestResults.addAll(aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.nunitTestResultsFilePropertyKey()), nunitTestResultsFileParser));
     }
 
     if (hasXUnitTestResultsFile(configuration::hasKey)) {
-      aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.xunitTestResultsFilePropertyKey()), xunitTestResultsFileParser, unitTestResults);
+      unitTestResults.addAll(aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.xunitTestResultsFilePropertyKey()), xunitTestResultsFileParser));
     }
 
     return unitTestResults;
   }
 
-  private static void aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, String[] reportPaths, UnitTestResultsParser parser, UnitTestResults unitTestResults) {
+  private static List<UnitTestResult> aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, String[] reportPaths, UnitTestResultsParser parser) {
+
+    List<UnitTestResult> aggregatedResults = new ArrayList<>();
+
     for (String reportPathPattern : reportPaths) {
       if (!reportPathPattern.isEmpty()) {
         for (File reportFile : wildcardPatternFileProvider.listFiles(reportPathPattern)) {
-          parser.accept(reportFile, unitTestResults);
+          aggregatedResults.addAll(parser.apply(reportFile));
         }
       }
     }
+
+    return aggregatedResults;
   }
 
 }

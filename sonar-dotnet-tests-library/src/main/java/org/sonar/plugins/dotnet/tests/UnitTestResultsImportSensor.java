@@ -20,6 +20,7 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
+import java.util.List;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -61,43 +62,44 @@ public class UnitTestResultsImportSensor implements Sensor {
       LOG.debug("No unit test results property. Skip Sensor");
       return;
     }
+
     if (projectDef.getParent() == null) {
-      analyze(context, new UnitTestResults());
+      analyze(context);
     }
   }
 
-  void analyze(SensorContext context, UnitTestResults unitTestResults) {
-    UnitTestResults aggregatedResults = unitTestResultsAggregator.aggregate(wildcardPatternFileProvider, unitTestResults);
+  void analyze(SensorContext context) {
+    List<UnitTestResult> aggregatedResults = unitTestResultsAggregator.aggregate(wildcardPatternFileProvider);
 
-    context.<Integer>newMeasure()
-      .forMetric(CoreMetrics.TESTS)
-      .on(context.module())
-      .withValue(aggregatedResults.tests())
-      .save();
-    context.<Integer>newMeasure()
-      .forMetric(CoreMetrics.TEST_ERRORS)
-      .on(context.module())
-      .withValue(aggregatedResults.errors())
-      .save();
-    context.<Integer>newMeasure()
-      .forMetric(CoreMetrics.TEST_FAILURES)
-      .on(context.module())
-      .withValue(aggregatedResults.failures())
-      .save();
-    context.<Integer>newMeasure()
-      .forMetric(CoreMetrics.SKIPPED_TESTS)
-      .on(context.module())
-      .withValue(aggregatedResults.skipped())
-      .save();
-
-    Long executionTime = aggregatedResults.executionTime();
-    if (executionTime != null) {
-      context.<Long>newMeasure()
-        .forMetric(CoreMetrics.TEST_EXECUTION_TIME)
-        .on(context.module())
-        .withValue(executionTime)
-        .save();
-    }
+//    context.<Integer>newMeasure()
+//      .forMetric(CoreMetrics.TESTS)
+//      .on(context.module())
+//      .withValue(aggregatedResults.tests())
+//      .save();
+//    context.<Integer>newMeasure()
+//      .forMetric(CoreMetrics.TEST_ERRORS)
+//      .on(context.module())
+//      .withValue(aggregatedResults.errors())
+//      .save();
+//    context.<Integer>newMeasure()
+//      .forMetric(CoreMetrics.TEST_FAILURES)
+//      .on(context.module())
+//      .withValue(aggregatedResults.failures())
+//      .save();
+//    context.<Integer>newMeasure()
+//      .forMetric(CoreMetrics.SKIPPED_TESTS)
+//      .on(context.module())
+//      .withValue(aggregatedResults.skipped())
+//      .save();
+//
+//    Long executionTime = aggregatedResults.executionTime();
+//    if (executionTime != null) {
+//      context.<Long>newMeasure()
+//        .forMetric(CoreMetrics.TEST_EXECUTION_TIME)
+//        .on(context.module())
+//        .withValue(executionTime)
+//        .save();
+//    }
   }
 
 }
