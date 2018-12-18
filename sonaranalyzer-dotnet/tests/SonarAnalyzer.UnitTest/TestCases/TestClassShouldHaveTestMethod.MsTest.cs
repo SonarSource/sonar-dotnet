@@ -63,7 +63,7 @@ namespace Tests.Diagnostics
 
     // See https://github.com/SonarSource/sonar-csharp/issues/1196
     [TestClass]
-    public class TestSubFoo : TestFooBase // Compliant - base abstract and at least 1 test in base
+    public class Foo_WhenFoo_ExpectsFoo : TestFooBase // Compliant - base abstract and at least 1 test in base
     {
 
     }
