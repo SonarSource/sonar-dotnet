@@ -28,23 +28,21 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 
 @ScannerSide
-public abstract class AbstractPropertiesSensor implements Sensor {
+public class PropertiesSensor implements Sensor {
   private final AbstractConfiguration configuration;
   private final ReportPathCollector reportPathCollector;
-  private final String sensorName;
-  private final String languageKey;
+  private final DotNetPluginMetadata pluginMetadata;
 
-  public AbstractPropertiesSensor(AbstractConfiguration configuration, ReportPathCollector reportPathCollector, String sensorName, String languageKey) {
+  public PropertiesSensor(AbstractConfiguration configuration, ReportPathCollector reportPathCollector, DotNetPluginMetadata pluginMetadata) {
     this.configuration = configuration;
     this.reportPathCollector = reportPathCollector;
-    this.sensorName = sensorName;
-    this.languageKey = languageKey;
+    this.pluginMetadata = pluginMetadata;
   }
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    descriptor.name(sensorName)
-      .onlyOnLanguage(languageKey);
+    descriptor.name(pluginMetadata.shortLanguageName() + " Properties")
+      .onlyOnLanguage(pluginMetadata.languageKey());
   }
 
   @Override

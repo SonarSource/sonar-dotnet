@@ -1,5 +1,5 @@
 /*
- * SonarC#
+ * SonarSource :: .NET :: Shared library
  * Copyright (C) 2014-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
@@ -17,16 +17,25 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.csharp;
+package org.sonarsource.dotnet.shared.plugins;
 
-import org.sonar.api.rules.RuleFinder;
-import org.sonarsource.dotnet.shared.plugins.AbstractSonarLintProfileExporter;
+import org.sonar.api.ExtensionPoint;
+import org.sonar.api.batch.ScannerSide;
+import org.sonar.api.server.ServerSide;
 
-public class SonarLintProfileExporter extends AbstractSonarLintProfileExporter {
-  private static final String PROFILE_KEY = "sonarlint-vs-cs";
-  private static final String PROFILE_NAME = "SonarLint for Visual Studio Rule Set";
+@ScannerSide
+@ServerSide
+@ExtensionPoint
+public interface DotNetPluginMetadata {
 
-  public SonarLintProfileExporter(RuleFinder ruleFinder) {
-    super(PROFILE_KEY, PROFILE_NAME, CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.SONARANALYZER_NAME, CSharpPlugin.REPOSITORY_KEY, ruleFinder);
+  String languageKey();
+  String pluginKey();
+  String shortLanguageName();
+  String sonarAnalyzerName();
+  String repositoryKey();
+
+  default String ignoreHeaderCommentPropertyKey() {
+    return AbstractPropertyDefinitions.getIgnoreHeaderCommentsProperty(languageKey());
   }
+
 }

@@ -33,12 +33,18 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
-public class AbstractPropertiesSensorTest {
+public class PropertiesSensorTest {
   private AbstractConfiguration config = mock(AbstractConfiguration.class);
   private ReportPathCollector reportPathCollector = mock(ReportPathCollector.class);
 
-  AbstractPropertiesSensor underTest = new AbstractPropertiesSensor(config, reportPathCollector, "sensor", "languageKey") {
-  };
+  PropertiesSensor underTest = new PropertiesSensor(config, reportPathCollector, pluginMetadata());
+
+  private DotNetPluginMetadata pluginMetadata() {
+    DotNetPluginMetadata metadata = mock(DotNetPluginMetadata.class);
+    when(metadata.languageKey()).thenReturn("languageKey");
+    when(metadata.shortLanguageName()).thenReturn("Lang Name");
+    return metadata;
+  }
 
   @Test
   public void should_collect_properties_from_multiple_modules() {
@@ -69,7 +75,7 @@ public class AbstractPropertiesSensorTest {
 
     underTest.describe(desc);
 
-    verify(desc).name("sensor");
+    verify(desc).name("Lang Name Properties");
     verify(desc).onlyOnLanguage("languageKey");
   }
 

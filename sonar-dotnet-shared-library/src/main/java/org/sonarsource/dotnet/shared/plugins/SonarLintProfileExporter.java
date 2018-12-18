@@ -1,6 +1,6 @@
 /*
- * SonarVB
- * Copyright (C) 2012-2018 SonarSource SA
+ * SonarSource :: .NET :: Shared library
+ * Copyright (C) 2014-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -17,17 +17,15 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.vbnet;
+package org.sonarsource.dotnet.shared.plugins;
 
-import org.sonar.api.batch.ScannerSide;
-import org.sonarsource.dotnet.shared.plugins.AbstractPropertiesSensor;
-import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
+import org.sonar.api.rules.RuleFinder;
 
-@ScannerSide
-public class VbNetPropertiesSensor extends AbstractPropertiesSensor {
-  private static final String SENSOR_NAME = "VB.NET Properties";
+public class SonarLintProfileExporter extends AbstractSonarLintProfileExporter {
+  private static final String PROFILE_NAME = "SonarLint for Visual Studio Rule Set";
 
-  public VbNetPropertiesSensor(VbNetConfiguration configuration, ReportPathCollector reportPathCollector) {
-    super(configuration, reportPathCollector, SENSOR_NAME, VbNetPlugin.LANGUAGE_KEY);
+  public SonarLintProfileExporter(RuleFinder ruleFinder, DotNetPluginMetadata pluginMetadata) {
+    super("sonarlint-vs-" + pluginMetadata.languageKey(), PROFILE_NAME, pluginMetadata.languageKey(),
+      pluginMetadata.sonarAnalyzerName(), pluginMetadata.repositoryKey(), ruleFinder);
   }
 }

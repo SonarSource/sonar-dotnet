@@ -28,11 +28,15 @@ import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
+import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
+import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
 import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
+import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
+import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -48,16 +52,17 @@ public class VbNetPluginTest {
 
     List extensions = context.getExtensions();
 
-    Class<?>[] expectedExtensions = new Class<?>[] {
+    Object[] expectedExtensions = new Object[] {
+      VbNetPlugin.METADATA,
       VbNet.class,
       VbNetSonarRulesDefinition.class,
-      VbNetSensor.class,
+      DotNetSensor.class,
       VbNetConfiguration.class,
       VbNetGlobalProtobufFileProcessor.class,
       WrongEncodingFileFilter.class,
       EncodingPerFile.class,
       ReportPathCollector.class,
-      VbNetPropertiesSensor.class,
+      PropertiesSensor.class,
       GeneratedFileFilter.class,
       SonarLintProfileExporter.class,
       SonarLintFakeProfileImporter.class,
@@ -73,7 +78,7 @@ public class VbNetPluginTest {
         + 1 // VbNetSonarWayProfile
         + VbNetCodeCoverageProvider.extensions().size()
         + VbNetUnitTestResultsProvider.extensions().size()
-        + RoslynProfileExporter.sonarLintRepositoryProperties().size()
+        + RoslynProfileExporter.sonarLintRepositoryProperties(VbNetPlugin.METADATA).size()
         + new VbNetPropertyDefinitions(sonarRuntime).create().size());
   }
 
