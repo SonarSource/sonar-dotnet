@@ -1,5 +1,5 @@
 /*
- * SonarC#
+ * SonarSource :: .NET :: Shared library
  * Copyright (C) 2014-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
@@ -17,16 +17,15 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.csharp;
+package org.sonarsource.dotnet.shared.plugins;
 
 import org.sonar.api.rules.RuleFinder;
-import org.sonarsource.dotnet.shared.plugins.AbstractSonarLintProfileExporter;
 
 public class SonarLintProfileExporter extends AbstractSonarLintProfileExporter {
-  private static final String PROFILE_KEY = "sonarlint-vs-cs";
   private static final String PROFILE_NAME = "SonarLint for Visual Studio Rule Set";
 
-  public SonarLintProfileExporter(RuleFinder ruleFinder) {
-    super(PROFILE_KEY, PROFILE_NAME, CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.SONARANALYZER_NAME, CSharpPlugin.REPOSITORY_KEY, ruleFinder);
+  public SonarLintProfileExporter(RuleFinder ruleFinder, DotNetPluginMetadata pluginMetadata) {
+    super("sonarlint-vs-" + pluginMetadata.languageKey(), PROFILE_NAME, pluginMetadata.languageKey(),
+      pluginMetadata.sonarAnalyzerName(), pluginMetadata.repositoryKey(), ruleFinder);
   }
 }
