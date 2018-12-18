@@ -1,5 +1,5 @@
 /*
- * SonarC#
+ * SonarSource :: .NET :: Shared library
  * Copyright (C) 2014-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.csharp;
+package org.sonarsource.dotnet.shared.plugins;
 
 import com.google.common.io.Files;
 import java.io.File;
@@ -41,14 +41,16 @@ import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleParam;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.utils.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter.activeRoslynRulesByPartialRepoKey;
 
 public class RoslynProfileExporterTest {
+
+  public static final String SONAR_ANALYZER_NAME = "SonarAnalyzer.CSharp";
 
   @org.junit.Rule
   public ExpectedException thrown = ExpectedException.none();
@@ -56,9 +58,19 @@ public class RoslynProfileExporterTest {
   @org.junit.Rule
   public LogTester logs = new LogTester();
 
+  private DotNetPluginMetadata pluginMetadata = csPluginMetadata();
+
+  private static DotNetPluginMetadata csPluginMetadata() {
+    DotNetPluginMetadata metadata = mock(DotNetPluginMetadata.class);
+    when(metadata.languageKey()).thenReturn("cs");
+    when(metadata.repositoryKey()).thenReturn("csharpsquid");
+    when(metadata.sonarAnalyzerName()).thenReturn(SONAR_ANALYZER_NAME);
+    return metadata;
+  }
+
   @Test
   public void no_rules() throws Exception {
-    RoslynProfileExporter exporter = new RoslynProfileExporter(mock(Configuration.class), new RulesDefinition[0]);
+    RoslynProfileExporter exporter = new RoslynProfileExporter(pluginMetadata, mock(Configuration.class), new RulesDefinition[0]);
     assertThat(exporter.getKey()).isEqualTo("roslyn-cs");
     assertThat(exporter.getName()).isEqualTo("Technical exporter for the MSBuild SonarQube Scanner");
     assertThat(exporter.getSupportedLanguages()).containsOnly("cs");
@@ -107,9 +119,9 @@ public class RoslynProfileExporterTest {
     when(configuration.get("sonaranalyzer-cs.pluginKey")).thenReturn(Optional.of("csharp"));
     when(configuration.get("sonaranalyzer-cs.pluginVersion")).thenReturn(Optional.of("1.7.0"));
     when(configuration.get("sonaranalyzer-cs.staticResourceName")).thenReturn(Optional.of("SonarAnalyzer.zip"));
-    when(configuration.get("sonaranalyzer-cs.analyzerId")).thenReturn(Optional.of(CSharpPlugin.SONARANALYZER_NAME));
-    when(configuration.get("sonaranalyzer-cs.ruleNamespace")).thenReturn(Optional.of(CSharpPlugin.SONARANALYZER_NAME));
-    when(configuration.get("sonaranalyzer-cs.nuget.packageId")).thenReturn(Optional.of(CSharpPlugin.SONARANALYZER_NAME));
+    when(configuration.get("sonaranalyzer-cs.analyzerId")).thenReturn(Optional.of(SONAR_ANALYZER_NAME));
+    when(configuration.get("sonaranalyzer-cs.ruleNamespace")).thenReturn(Optional.of(SONAR_ANALYZER_NAME));
+    when(configuration.get("sonaranalyzer-cs.nuget.packageId")).thenReturn(Optional.of(SONAR_ANALYZER_NAME));
     when(configuration.get("sonaranalyzer-cs.nuget.packageVersion")).thenReturn(Optional.of("1.10.0"));
 
     RulesDefinition sonarLintRepo = context -> {
@@ -118,7 +130,7 @@ public class RoslynProfileExporterTest {
       repo.done();
     };
 
-    RoslynProfileExporter exporter = new RoslynProfileExporter(configuration, new RulesDefinition[] {sonarLintRepo});
+    RoslynProfileExporter exporter = new RoslynProfileExporter(pluginMetadata, configuration, new RulesDefinition[] {sonarLintRepo});
     assertThat(exporter.getKey()).isEqualTo("roslyn-cs");
     assertThat(exporter.getName()).isEqualTo("Technical exporter for the MSBuild SonarQube Scanner");
     assertThat(exporter.getSupportedLanguages()).containsOnly("cs");
@@ -160,9 +172,9 @@ public class RoslynProfileExporterTest {
     when(configuration.get("sonaranalyzer-cs.pluginKey")).thenReturn(Optional.of("csharp"));
     when(configuration.get("sonaranalyzer-cs.pluginVersion")).thenReturn(Optional.of("1.7.0"));
     when(configuration.get("sonaranalyzer-cs.staticResourceName")).thenReturn(Optional.of("SonarAnalyzer.zip"));
-    when(configuration.get("sonaranalyzer-cs.analyzerId")).thenReturn(Optional.of(CSharpPlugin.SONARANALYZER_NAME));
-    when(configuration.get("sonaranalyzer-cs.ruleNamespace")).thenReturn(Optional.of(CSharpPlugin.SONARANALYZER_NAME));
-    when(configuration.get("sonaranalyzer-cs.nuget.packageId")).thenReturn(Optional.of(CSharpPlugin.SONARANALYZER_NAME));
+    when(configuration.get("sonaranalyzer-cs.analyzerId")).thenReturn(Optional.of(SONAR_ANALYZER_NAME));
+    when(configuration.get("sonaranalyzer-cs.ruleNamespace")).thenReturn(Optional.of(SONAR_ANALYZER_NAME));
+    when(configuration.get("sonaranalyzer-cs.nuget.packageId")).thenReturn(Optional.of(SONAR_ANALYZER_NAME));
     when(configuration.get("sonaranalyzer-cs.nuget.packageVersion")).thenReturn(Optional.of("1.10.0"));
 
     when(configuration.get("custom.pluginKey")).thenReturn(Optional.of("customPluginKey"));
@@ -199,7 +211,8 @@ public class RoslynProfileExporterTest {
       repo.done();
     };
 
-    RoslynProfileExporter exporter = new RoslynProfileExporter(configuration, new RulesDefinition[] {sonarLintRepo, customRoslynRepo, fxcopRepo, stylecopRepo});
+    RulesDefinition[] rulesDefinitions = {sonarLintRepo, customRoslynRepo, fxcopRepo, stylecopRepo};
+    RoslynProfileExporter exporter = new RoslynProfileExporter(pluginMetadata, configuration, rulesDefinitions);
     assertThat(exporter.getKey()).isEqualTo("roslyn-cs");
     assertThat(exporter.getName()).isEqualTo("Technical exporter for the MSBuild SonarQube Scanner");
     assertThat(exporter.getSupportedLanguages()).containsOnly("cs");
@@ -223,7 +236,7 @@ public class RoslynProfileExporterTest {
     RulesProfile rulesProfile = mock(RulesProfile.class);
     when(rulesProfile.getActiveRules()).thenReturn(Collections.singletonList(activeRule));
 
-    RoslynProfileExporter exporter = new RoslynProfileExporter(mock(Configuration.class), new RulesDefinition[0]);
+    RoslynProfileExporter exporter = new RoslynProfileExporter(pluginMetadata, mock(Configuration.class), new RulesDefinition[0]);
 
     try {
       exporter.exportProfile(rulesProfile, new StringWriter());
@@ -240,9 +253,9 @@ public class RoslynProfileExporterTest {
     when(configuration.get("sonaranalyzer-cs.pluginKey")).thenReturn(Optional.of("csharp"));
     when(configuration.get("sonaranalyzer-cs.pluginVersion")).thenReturn(Optional.of("1.7.0"));
     when(configuration.get("sonaranalyzer-cs.staticResourceName")).thenReturn(Optional.of("SonarAnalyzer.zip"));
-    when(configuration.get("sonaranalyzer-cs.analyzerId")).thenReturn(Optional.of(CSharpPlugin.SONARANALYZER_NAME));
-    when(configuration.get("sonaranalyzer-cs.ruleNamespace")).thenReturn(Optional.of(CSharpPlugin.SONARANALYZER_NAME));
-    when(configuration.get("sonaranalyzer-cs.nuget.packageId")).thenReturn(Optional.of(CSharpPlugin.SONARANALYZER_NAME));
+    when(configuration.get("sonaranalyzer-cs.analyzerId")).thenReturn(Optional.of(SONAR_ANALYZER_NAME));
+    when(configuration.get("sonaranalyzer-cs.ruleNamespace")).thenReturn(Optional.of(SONAR_ANALYZER_NAME));
+    when(configuration.get("sonaranalyzer-cs.nuget.packageId")).thenReturn(Optional.of(SONAR_ANALYZER_NAME));
     when(configuration.get("sonaranalyzer-cs.nuget.packageVersion")).thenReturn(Optional.of("1.10.0"));
 
     RulesDefinition sonarLintRepo = context -> {
@@ -270,7 +283,7 @@ public class RoslynProfileExporterTest {
     when(rulesProfile.getLanguage()).thenReturn("csharp");
     when(rulesProfile.getName()).thenReturn("myprofile");
 
-    RoslynProfileExporter exporter = new RoslynProfileExporter(configuration, new RulesDefinition[] {sonarLintRepo});
+    RoslynProfileExporter exporter = new RoslynProfileExporter(pluginMetadata, configuration, new RulesDefinition[] {sonarLintRepo});
     StringWriter writer = new StringWriter();
     exporter.exportProfile(rulesProfile, writer);
 
@@ -281,28 +294,28 @@ public class RoslynProfileExporterTest {
 
   @Test
   public void activeRoslynRulesByPluginKey() {
-    assertThat(RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(Collections.emptyList()).size()).isEqualTo(0);
+    assertThat(activeRoslynRulesByPartialRepoKey(pluginMetadata, Collections.emptyList()).size()).isEqualTo(0);
 
     RuleKey randomActiveRuleKey = mock(RuleKey.class);
     when(randomActiveRuleKey.rule()).thenReturn("1");
     when(randomActiveRuleKey.repository()).thenReturn("1");
-    assertThat(RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(Collections.singletonList(randomActiveRuleKey)).size()).isEqualTo(0);
+    assertThat(activeRoslynRulesByPartialRepoKey(pluginMetadata, Collections.singletonList(randomActiveRuleKey)).size()).isEqualTo(0);
 
     RuleKey sonarLintActiveRuleKey = mock(RuleKey.class);
     when(sonarLintActiveRuleKey.rule()).thenReturn("2");
     when(sonarLintActiveRuleKey.repository()).thenReturn("csharpsquid");
-    Map<String, List<RuleKey>> activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(Collections.singletonList(sonarLintActiveRuleKey));
+    Map<String, List<RuleKey>> activeRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata, Collections.singletonList(sonarLintActiveRuleKey));
     assertThat(activeRulesByPartialRepoKey.size()).isEqualTo(1);
     assertThat(activeRulesByPartialRepoKey.get("sonaranalyzer-cs")).containsOnly(sonarLintActiveRuleKey);
 
     RuleKey customRoslynActiveRuleKey = mock(RuleKey.class);
     when(customRoslynActiveRuleKey.rule()).thenReturn("3");
     when(customRoslynActiveRuleKey.repository()).thenReturn("roslyn.foo");
-    activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(Collections.singletonList(customRoslynActiveRuleKey));
+    activeRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata, Collections.singletonList(customRoslynActiveRuleKey));
     assertThat(activeRulesByPartialRepoKey.size()).isEqualTo(1);
     assertThat(activeRulesByPartialRepoKey.get("foo")).containsOnly(customRoslynActiveRuleKey);
 
-    activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(
+    activeRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata,
       Arrays.asList(
         randomActiveRuleKey,
         sonarLintActiveRuleKey,

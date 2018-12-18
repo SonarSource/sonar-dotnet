@@ -21,11 +21,13 @@ package org.sonar.plugins.csharp;
 
 import org.sonar.api.Plugin;
 import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
+import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
 import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
+import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
 public class CSharpPlugin implements Plugin {
@@ -40,7 +42,8 @@ public class CSharpPlugin implements Plugin {
 
   static final String FILE_SUFFIXES_KEY = AbstractPropertyDefinitions.getFileSuffixProperty(LANGUAGE_KEY);
   static final String FILE_SUFFIXES_DEFVALUE = ".cs";
-  static final String IGNORE_HEADER_COMMENTS = AbstractPropertyDefinitions.getIgnoreHeaderCommentsProperty(LANGUAGE_KEY);
+
+  static final DotNetPluginMetadata METADATA = new CSharpPluginMetadata();
 
   @Override
   public void define(Context context) {
@@ -65,6 +68,29 @@ public class CSharpPlugin implements Plugin {
     context.addExtension(new CSharpSonarWayProfile(context.getRuntime()));
     context.addExtensions(CSharpCodeCoverageProvider.extensions());
     context.addExtensions(CSharpUnitTestResultsProvider.extensions());
-    context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties());
+    context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties(METADATA));
+  }
+
+  private static class CSharpPluginMetadata implements DotNetPluginMetadata {
+
+    @Override
+    public String languageKey() {
+      return LANGUAGE_KEY;
+    }
+
+    @Override
+    public String pluginKey() {
+      return PLUGIN_KEY;
+    }
+
+    @Override
+    public String sonarAnalyzerName() {
+      return SONARANALYZER_NAME;
+    }
+
+    @Override
+    public String repositoryKey() {
+      return REPOSITORY_KEY;
+    }
   }
 }

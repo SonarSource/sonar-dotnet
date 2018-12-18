@@ -23,7 +23,6 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -41,6 +40,7 @@ import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 import org.sonarsource.dotnet.shared.plugins.RoslynReport;
 
 import static java.util.stream.Collectors.toList;
+import static org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter.activeRoslynRulesByPartialRepoKey;
 
 public class VbNetSensor implements Sensor {
 
@@ -93,7 +93,7 @@ public class VbNetSensor implements Sensor {
 
     List<RoslynReport> roslynDirs = reportPathCollector.roslynDirs();
     if (!roslynDirs.isEmpty()) {
-      Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
+      Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(VbNetPlugin.METADATA, context.activeRules()
         .findAll()
         .stream()
         .map(ActiveRule::ruleKey)
