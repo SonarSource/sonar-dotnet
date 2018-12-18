@@ -31,6 +31,7 @@ import org.sonar.api.utils.Version;
 import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
+import org.sonarsource.dotnet.shared.plugins.PropertiesSensor;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
 import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
@@ -61,7 +62,7 @@ public class VbNetPluginTest {
       WrongEncodingFileFilter.class,
       EncodingPerFile.class,
       ReportPathCollector.class,
-      VbNetPropertiesSensor.class,
+      PropertiesSensor.class,
       GeneratedFileFilter.class,
       SonarLintProfileExporter.class,
       SonarLintFakeProfileImporter.class,
