@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -31,22 +33,17 @@ public class XUnitTestResultsFileParser implements UnitTestResultsParser {
   private static final Logger LOG = Loggers.get(XUnitTestResultsFileParser.class);
 
   @Override
-  public void accept(File file, UnitTestResults unitTestResults) {
+  public List<UnitTestResult> apply(File file) {
     LOG.info("Parsing the XUnit Test Results file " + file.getAbsolutePath());
-    new Parser(file, unitTestResults).parse();
+    return Parser.parse(file);
   }
 
   private static class Parser {
 
-    private final File file;
-    private final UnitTestResults unitTestResults;
+    public static List<UnitTestResult> parse(File file) {
 
-    Parser(File file, UnitTestResults unitTestResults) {
-      this.file = file;
-      this.unitTestResults = unitTestResults;
-    }
+      List<UnitTestResult> testResults = new ArrayList<>();
 
-    public void parse() {
       try (XmlParserHelper xmlParserHelper = new XmlParserHelper(file)) {
 
         String tagName = xmlParserHelper.nextStartTag();
@@ -54,65 +51,46 @@ public class XUnitTestResultsFileParser implements UnitTestResultsParser {
           throw xmlParserHelper.parseError("Expected either an <assemblies> or an <assembly> root tag, but got <" + tagName + "> instead.");
         }
 
-        do {
-          if ("assembly".equals(tagName)) {
-            handleAssemblyTag(xmlParserHelper);
-          } else if ("test".equals(tagName)) {
-            handleTestTag(xmlParserHelper);
+        while ((tagName = xmlParserHelper.nextStartTag()) != null) {
+          if ("test".equals(tagName)) {
+            testResults.add(handleTestTag(xmlParserHelper));
           }
-        } while ((tagName = xmlParserHelper.nextStartTag()) != null);
+        }
       } catch (IOException e) {
         throw new IllegalStateException("Unable to close report", e);
       }
+
+      return testResults;
     }
 
-    private void handleAssemblyTag(XmlParserHelper xmlParserHelper) {
-
-      String totalString = xmlParserHelper.getAttribute("total");
-      if (totalString == null) {
-        LOG.warn("One of the assemblies contains no test result, please make sure this is expected.");
-        return;
-      }
-
-      int total = xmlParserHelper.tagToIntValue("total", totalString);
-      int failed = xmlParserHelper.getRequiredIntAttribute("failed");
-      int skipped = xmlParserHelper.getRequiredIntAttribute("skipped");
-      int errors = xmlParserHelper.getIntAttributeOrZero("errors");
-
+    private static UnitTestResult handleTestTag(XmlParserHelper xmlParserHelper) {
       Double time = xmlParserHelper.getDoubleAttribute("time");
       Long executionTime = time != null ? (long) (time * 1000) : null;
 
-      unitTestResults.add(total, skipped, failed, errors, executionTime);
-    }
-
-    private void handleTestTag(XmlParserHelper xmlParserHelper) {
-      Double time = xmlParserHelper.getDoubleAttribute("time");
-      Long executionTime = time != null ? (long) (time * 1000) : null;
-
-      String result = xmlParserHelper.getAttribute("result");
-      Status status;
-      switch (result) {
-        case "Pass":
-          status = Status.PASSED;
-          break;
-
-        case "Fail":
-          status = Status.FAILED;
-          break;
-
-        case "Skip":
-          status = Status.SKIPPED;
-          break;
-
-        default:
-          status = Status.PASSED;
-          break;
-      }
+      Status status = getStatus(xmlParserHelper);
 
       String testName = xmlParserHelper.getAttribute("method");
       String typeName = xmlParserHelper.getAttribute("type");
 
-      this.unitTestResults.getTestResults().add(new UnitTestResult(executionTime, status, typeName + "." + testName));
+      return new UnitTestResult(executionTime, status, typeName + "." + testName);
+    }
+
+    private static Status getStatus(XmlParserHelper xmlParserHelper) {
+      String result = xmlParserHelper.getAttribute("result");
+
+      switch (result) {
+        case "Pass":
+          return Status.PASSED;
+
+        case "Fail":
+          return Status.FAILED;
+
+        case "Skip":
+          return Status.SKIPPED;
+
+        default:
+          return Status.PASSED;
+      }
     }
 
   }

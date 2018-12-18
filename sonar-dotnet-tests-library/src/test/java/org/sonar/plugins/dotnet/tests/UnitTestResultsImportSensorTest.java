@@ -77,7 +77,7 @@ public class UnitTestResultsImportSensorTest {
       .thenReturn(results);
 
     new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#")
-      .analyze(context, results);
+      .analyze(context);
 
     verify(unitTestResultsAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(results));
 
@@ -105,7 +105,7 @@ public class UnitTestResultsImportSensorTest {
     when(unitTestResultsAggregator.aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.any(UnitTestResults.class))).thenReturn(results);
 
     new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#")
-      .analyze(context, results);
+      .analyze(context);
 
     verify(unitTestResultsAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(results));
 
