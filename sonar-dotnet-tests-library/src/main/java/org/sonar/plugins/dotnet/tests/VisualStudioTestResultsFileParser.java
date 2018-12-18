@@ -24,20 +24,14 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalField;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.sonar.api.utils.Duration;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonar.plugins.dotnet.tests.UnitTestResult.Status;
-
-import static java.time.temporal.ChronoField.MILLI_OF_SECOND;
 
 public class VisualStudioTestResultsFileParser implements UnitTestResultsParser {
 
@@ -116,7 +110,7 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
           break;
 
         case "Failed":
-          status = Status.ERROR;
+          status = Status.FAILED;
           break;
 
         default:

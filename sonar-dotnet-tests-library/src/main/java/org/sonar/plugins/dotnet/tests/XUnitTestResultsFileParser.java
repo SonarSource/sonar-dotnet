@@ -24,6 +24,7 @@ import org.sonar.api.utils.log.Loggers;
 
 import java.io.File;
 import java.io.IOException;
+import org.sonar.plugins.dotnet.tests.UnitTestResult.Status;
 
 public class XUnitTestResultsFileParser implements UnitTestResultsParser {
 
@@ -48,16 +49,18 @@ public class XUnitTestResultsFileParser implements UnitTestResultsParser {
     public void parse() {
       try (XmlParserHelper xmlParserHelper = new XmlParserHelper(file)) {
 
-        String tag = xmlParserHelper.nextStartTag();
-        if (!"assemblies".equals(tag) && !"assembly".equals(tag)) {
-          throw xmlParserHelper.parseError("Expected either an <assemblies> or an <assembly> root tag, but got <" + tag + "> instead.");
+        String tagName = xmlParserHelper.nextStartTag();
+        if (!"assemblies".equals(tagName) && !"assembly".equals(tagName)) {
+          throw xmlParserHelper.parseError("Expected either an <assemblies> or an <assembly> root tag, but got <" + tagName + "> instead.");
         }
 
         do {
-          if ("assembly".equals(tag)) {
+          if ("assembly".equals(tagName)) {
             handleAssemblyTag(xmlParserHelper);
+          } else if ("test".equals(tagName)) {
+            handleTestTag(xmlParserHelper);
           }
-        } while ((tag = xmlParserHelper.nextStartTag()) != null);
+        } while ((tagName = xmlParserHelper.nextStartTag()) != null);
       } catch (IOException e) {
         throw new IllegalStateException("Unable to close report", e);
       }
@@ -80,6 +83,36 @@ public class XUnitTestResultsFileParser implements UnitTestResultsParser {
       Long executionTime = time != null ? (long) (time * 1000) : null;
 
       unitTestResults.add(total, skipped, failed, errors, executionTime);
+    }
+
+    private void handleTestTag(XmlParserHelper xmlParserHelper) {
+      Double time = xmlParserHelper.getDoubleAttribute("time");
+      Long executionTime = time != null ? (long) (time * 1000) : null;
+
+      String result = xmlParserHelper.getAttribute("result");
+      Status status;
+      switch (result) {
+        case "Pass":
+          status = Status.PASSED;
+          break;
+
+        case "Fail":
+          status = Status.FAILED;
+          break;
+
+        case "Skip":
+          status = Status.SKIPPED;
+          break;
+
+        default:
+          status = Status.PASSED;
+          break;
+      }
+
+      String testName = xmlParserHelper.getAttribute("method");
+      String typeName = xmlParserHelper.getAttribute("type");
+
+      this.unitTestResults.getTestResults().add(new UnitTestResult(executionTime, status, typeName + "." + testName));
     }
 
   }
