@@ -95,7 +95,7 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
           break;
 
         case "Failed":
-          status = Status.ERROR;
+          status = Status.FAILED;
           break;
 
         case "Skipped":

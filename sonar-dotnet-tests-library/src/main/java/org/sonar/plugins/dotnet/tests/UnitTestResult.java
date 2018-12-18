@@ -4,7 +4,7 @@ public class UnitTestResult {
 
   public enum Status {
     PASSED,
-    ERROR,
+    FAILED,
     SKIPPED
   }
 

@@ -54,7 +54,7 @@ public class VisualStudioTestResultsFileParserTest {
     assertThat(results.executionTime()).isEqualTo(816l);
 
     assertThat(results.getTestResults().get(0).getStatus()).isEqualTo(Status.PASSED);
-    assertThat(results.getTestResults().get(1).getStatus()).isEqualTo(Status.ERROR);
+    assertThat(results.getTestResults().get(1).getStatus()).isEqualTo(Status.FAILED);
     assertThat(results.getTestResults().get(2).getStatus()).isEqualTo(Status.SKIPPED);
 
     assertThat(results.getTestResults().get(0).getDurationInMs()).isEqualTo(1200400L);

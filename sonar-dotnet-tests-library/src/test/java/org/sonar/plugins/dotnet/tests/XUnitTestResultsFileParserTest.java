@@ -26,6 +26,7 @@ import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import java.io.File;
+import org.sonar.plugins.dotnet.tests.UnitTestResult.Status;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -77,6 +78,18 @@ public class XUnitTestResultsFileParserTest {
     assertThat(results.tests()).isEqualTo(17);
     assertThat(results.skipped()).isEqualTo(4);
     assertThat(results.executionTime()).isEqualTo(227 + 228);
+
+    assertThat(results.getTestResults().get(0).getStatus()).isEqualTo(Status.PASSED);
+    assertThat(results.getTestResults().get(1).getStatus()).isEqualTo(Status.FAILED);
+    assertThat(results.getTestResults().get(2).getStatus()).isEqualTo(Status.SKIPPED);
+
+    assertThat(results.getTestResults().get(0).getDurationInMs()).isEqualTo(100L);
+    assertThat(results.getTestResults().get(1).getDurationInMs()).isEqualTo(1L);
+    assertThat(results.getTestResults().get(2).getDurationInMs()).isEqualTo(10L);
+
+    assertThat(results.getTestResults().get(0).getFullyQualifiedName()).isEqualTo("MyCompany.MyProject.MyClassTest.Method1");
+    assertThat(results.getTestResults().get(1).getFullyQualifiedName()).isEqualTo("MyCompany.MyProject.MyOtherClassTest.Method1");
+    assertThat(results.getTestResults().get(2).getFullyQualifiedName()).isEqualTo("MyCompany.MyProject.MyClassTest.Method2");
   }
 
   @Test
