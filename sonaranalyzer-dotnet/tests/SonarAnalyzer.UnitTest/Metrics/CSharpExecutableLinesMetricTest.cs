@@ -614,6 +614,21 @@ class Program
                 8);
         }
 
+        [TestMethod]
+        public void ExpressionsAreCounted()
+        {
+            AssertLinesOfCode(
+                @"
+                public void Foo(bool flag)
+                {
+                    if (flag) // +1
+                    {
+                        flag = true; flag = false; flag = true; // +1
+                    }
+                }",
+                4, 6);
+        }
+
         private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
         {
             (var syntaxTree, var semanticModel) = TestHelper.Compile(code);

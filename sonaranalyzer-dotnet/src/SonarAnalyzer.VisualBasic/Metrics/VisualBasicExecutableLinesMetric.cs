@@ -88,6 +88,7 @@ namespace SonarAnalyzer.Metrics.VisualBasic
 
                     case SyntaxKind.EmptyStatement:
                     case SyntaxKind.ExpressionStatement:
+                    case SyntaxKind.SimpleAssignmentStatement:
 
                     case SyntaxKind.DoUntilStatement:
                     case SyntaxKind.DoWhileStatement:

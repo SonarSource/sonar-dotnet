@@ -118,7 +118,7 @@ ElseIf count = 1 Then
 Else
     message = $""There are many items.""
 End If",
-            2);
+            2, 3, 5, 7);
         }
 
         [TestMethod]
@@ -370,7 +370,8 @@ Property quoteForTheDay() As String
     Set(ByVal value As String)
         quoteValue = value
     End Set
-End Property");
+End Property",
+            4);
         }
 
         [TestMethod]
@@ -381,6 +382,20 @@ ReadOnly Property quoteForTheDay() As String
     Get
     End Get
 End Property");
+        }
+
+        [TestMethod]
+        public void Assignments()
+        {
+            AssertLinesOfCode(@"
+Public Sub Foo(ByVal flag _
+                As Boolean)
+    If flag _
+        Then
+        flag = True : flag = False : flag = True
+    End If
+End Sub",
+            4, 6);
         }
 
         private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
