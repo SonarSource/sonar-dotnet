@@ -36,12 +36,11 @@ namespace SonarAnalyzer.Metrics.CSharp
             var walker = new ExecutableLinesWalker(semanticModel);
             walker.SafeVisit(syntaxTree.GetRoot());
 
-            return walker.ExecutableLines.ToImmutableArray();
+            return walker.ExecutableLineNumbers.ToImmutableArray();
         }
 
         private class ExecutableLinesWalker : CSharpSyntaxWalker
         {
-            private readonly HashSet<int> executableLineNumbers = new HashSet<int>();
             private readonly SemanticModel semanticModel;
 
             public ExecutableLinesWalker(SemanticModel semanticModel)
@@ -49,7 +48,8 @@ namespace SonarAnalyzer.Metrics.CSharp
                 this.semanticModel = semanticModel;
             }
 
-            public IEnumerable<int> ExecutableLines => this.executableLineNumbers;
+            public HashSet<int> ExecutableLineNumbers { get; }
+                 = new HashSet<int>();
 
             public override void DefaultVisit(SyntaxNode node)
             {
@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                     case SyntaxKind.ParenthesizedLambdaExpression:
 
                     case SyntaxKind.ArrayInitializerExpression:
-                        this.executableLineNumbers.Add(node.GetLocation().GetLineNumberToReport());
+                        ExecutableLineNumbers.Add(node.GetLocation().GetLineNumberToReport());
                         return true;
 
                     case SyntaxKind.StructDeclaration:

@@ -31,6 +31,34 @@ namespace SonarAnalyzer.Metrics.VisualBasic
 {
     public sealed class VisualBasicMetrics : MetricsBase
     {
+        private static readonly ISet<SyntaxKind> FunctionKinds = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.SubNewStatement,
+            SyntaxKind.SubStatement,
+            SyntaxKind.FunctionStatement,
+            SyntaxKind.OperatorStatement,
+            SyntaxKind.GetAccessorStatement,
+            SyntaxKind.SetAccessorStatement,
+            SyntaxKind.RaiseEventAccessorStatement,
+            SyntaxKind.AddHandlerAccessorStatement,
+            SyntaxKind.RemoveHandlerAccessorStatement,
+            SyntaxKind.DeclareSubStatement,
+            SyntaxKind.DeclareFunctionStatement
+        };
+
+        private static readonly ISet<SyntaxKind> MethodBlocks = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.ConstructorBlock,
+            SyntaxKind.FunctionBlock,
+            SyntaxKind.SubBlock,
+            SyntaxKind.OperatorBlock,
+            SyntaxKind.GetAccessorBlock,
+            SyntaxKind.SetAccessorBlock,
+            SyntaxKind.RaiseEventAccessorBlock,
+            SyntaxKind.AddHandlerAccessorBlock,
+            SyntaxKind.RemoveHandlerAccessorBlock
+        };
+
         private readonly Lazy<ImmutableArray<int>> lazyExecutableLines;
         private readonly Lazy<ImmutableArray<SyntaxNode>> publicApiNodes;
 
@@ -47,11 +75,35 @@ namespace SonarAnalyzer.Metrics.VisualBasic
             this.publicApiNodes = new Lazy<ImmutableArray<SyntaxNode>>(() => VisualBasicPublicApiMetric.GetMembers(tree));
         }
 
-        protected override bool IsEndOfFile(SyntaxToken token) =>
-            token.IsKind(SyntaxKind.EndOfFileToken);
+        public override ImmutableArray<int> ExecutableLines =>
+            this.lazyExecutableLines.Value;
 
-        protected override bool IsNoneToken(SyntaxToken token) =>
-            token.IsKind(SyntaxKind.None);
+        protected override ImmutableArray<SyntaxNode> PublicApiNodes =>
+            this.publicApiNodes.Value;
+
+        public override int GetCognitiveComplexity(SyntaxNode node) =>
+            VisualBasicCognitiveComplexityMetric.GetComplexity(node).Complexity;
+
+        public override int GetCyclomaticComplexity(SyntaxNode node) =>
+            node.DescendantNodesAndSelf()
+                .Count(n =>
+                    IsComplexityIncreasingKind(n) ||
+                    IsFunction(n));
+
+        protected override bool IsClass(SyntaxNode node)
+        {
+            switch (node.Kind())
+            {
+                case SyntaxKind.ClassBlock:
+                case SyntaxKind.StructureBlock:
+                case SyntaxKind.InterfaceBlock:
+                case SyntaxKind.ModuleBlock:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
 
         protected override bool IsCommentTrivia(SyntaxTrivia trivia)
         {
@@ -81,23 +133,8 @@ namespace SonarAnalyzer.Metrics.VisualBasic
             }
         }
 
-        protected override bool IsClass(SyntaxNode node)
-        {
-            switch (node.Kind())
-            {
-                case SyntaxKind.ClassBlock:
-                case SyntaxKind.StructureBlock:
-                case SyntaxKind.InterfaceBlock:
-                case SyntaxKind.ModuleBlock:
-                    return true;
-
-                default:
-                    return false;
-            }
-        }
-
-        protected override bool IsStatement(SyntaxNode node) =>
-            node is ExecutableStatementSyntax;
+        protected override bool IsEndOfFile(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.EndOfFileToken);
 
         protected override bool IsFunction(SyntaxNode node)
         {
@@ -116,8 +153,11 @@ namespace SonarAnalyzer.Metrics.VisualBasic
             return true;
         }
 
-        protected override ImmutableArray<SyntaxNode> PublicApiNodes =>
-            this.publicApiNodes.Value;
+        protected override bool IsNoneToken(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.None);
+
+        protected override bool IsStatement(SyntaxNode node) =>
+            node is ExecutableStatementSyntax;
 
         private bool IsComplexityIncreasingKind(SyntaxNode node)
         {
@@ -177,50 +217,5 @@ namespace SonarAnalyzer.Metrics.VisualBasic
                     return false;
             }
         }
-
-        public override int GetComplexity(SyntaxNode node) =>
-            node.DescendantNodesAndSelf()
-                .Count(n =>
-                    IsComplexityIncreasingKind(n) ||
-                    IsFunction(n));
-
-        public override int GetCognitiveComplexity(SyntaxNode node)
-        {
-            var walker = new VisualBasicCognitiveComplexityWalker();
-            walker.Walk(node);
-            // nesting level should be 0 at the end of the analysis, otherwise there is a bug
-            return walker.NestingLevel == 0 ? walker.Complexity : -1;
-        }
-
-        public override ImmutableArray<int> ExecutableLines =>
-            this.lazyExecutableLines.Value;
-
-        private static readonly ISet<SyntaxKind> FunctionKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.SubNewStatement,
-            SyntaxKind.SubStatement,
-            SyntaxKind.FunctionStatement,
-            SyntaxKind.OperatorStatement,
-            SyntaxKind.GetAccessorStatement,
-            SyntaxKind.SetAccessorStatement,
-            SyntaxKind.RaiseEventAccessorStatement,
-            SyntaxKind.AddHandlerAccessorStatement,
-            SyntaxKind.RemoveHandlerAccessorStatement,
-            SyntaxKind.DeclareSubStatement,
-            SyntaxKind.DeclareFunctionStatement
-        };
-
-        private static readonly ISet<SyntaxKind> MethodBlocks = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.ConstructorBlock,
-            SyntaxKind.FunctionBlock,
-            SyntaxKind.SubBlock,
-            SyntaxKind.OperatorBlock,
-            SyntaxKind.GetAccessorBlock,
-            SyntaxKind.SetAccessorBlock,
-            SyntaxKind.RaiseEventAccessorBlock,
-            SyntaxKind.AddHandlerAccessorBlock,
-            SyntaxKind.RemoveHandlerAccessorBlock
-        };
     }
 }
