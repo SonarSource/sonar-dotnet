@@ -58,7 +58,6 @@
   </developers>
 
   <modules>
-    <module>sonar-dotnet-tests-library</module>
     <module>sonar-dotnet-shared-library</module>
     <module>sonar-csharp-plugin</module>
     <module>sonar-vbnet-plugin</module>

@@ -72,11 +72,6 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>sonar-dotnet-tests-library</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
       <artifactId>sonar-dotnet-shared-library</artifactId>
       <version>${project.version}</version>
     </dependency>
