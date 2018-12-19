@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (CheckedWalker.IsTopLevel(c.Node))
                     {
-                        new CheckedWalker(c).Visit(c.Node);
+                        new CheckedWalker(c).SafeVisit(c.Node);
                     }
                 },
                 SyntaxKind.CheckedStatement,

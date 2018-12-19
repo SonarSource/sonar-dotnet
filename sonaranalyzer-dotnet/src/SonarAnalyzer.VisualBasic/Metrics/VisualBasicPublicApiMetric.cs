@@ -22,6 +22,7 @@ using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Metrics.VisualBasic
@@ -31,7 +32,7 @@ namespace SonarAnalyzer.Metrics.VisualBasic
         public static ImmutableArray<SyntaxNode> GetMembers(SyntaxTree syntaxTree)
         {
             var walker = new PublicApiWalker();
-            walker.Visit(syntaxTree.GetRoot());
+            walker.SafeVisit(syntaxTree.GetRoot());
             return walker.PublicApi;
         }
 

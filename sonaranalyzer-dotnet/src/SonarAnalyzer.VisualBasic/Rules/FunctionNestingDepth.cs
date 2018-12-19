@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private void CheckFunctionNestingDepth(SyntaxNodeAnalysisContext context)
         {
             var walker = new NestingDepthWalker(Maximum, token => context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, token.GetLocation(), Maximum)));
-            walker.Visit(context.Node);
+            walker.SafeVisit(context.Node);
         }
 
         private class NestingDepthWalker : VisualBasicSyntaxWalker

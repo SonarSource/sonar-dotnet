@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
 
                     var walker = new ParameterValidationInYieldWalker(c.SemanticModel);
-                    walker.Visit(methodDeclaration);
+                    walker.SafeVisit(methodDeclaration);
 
                     if (walker.HasYieldStatement &&
                         walker.ArgumentExceptionLocations.Any())

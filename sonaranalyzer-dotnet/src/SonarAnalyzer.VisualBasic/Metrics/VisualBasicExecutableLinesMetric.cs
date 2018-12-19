@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Metrics.VisualBasic
         public static ImmutableArray<int> GetLineNumbers(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             var walker = new ExecutableLinesWalker(semanticModel);
-            walker.Visit(syntaxTree.GetRoot());
+            walker.SafeVisit(syntaxTree.GetRoot());
 
             return walker.ExecutableLines.ToImmutableArray();
         }

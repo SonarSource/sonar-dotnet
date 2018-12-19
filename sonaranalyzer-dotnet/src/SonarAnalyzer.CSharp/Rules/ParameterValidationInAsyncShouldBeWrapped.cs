@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var walker = new ParameterValidationInMethodWalker(c.SemanticModel);
-                    walker.Visit(methodDeclaration);
+                    walker.SafeVisit(methodDeclaration);
 
                     if (walker.ArgumentExceptionLocations.Any())
                     {

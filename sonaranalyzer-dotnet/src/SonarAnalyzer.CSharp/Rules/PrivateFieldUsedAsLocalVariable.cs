@@ -64,7 +64,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     var privateFields = GetPrivateFields(c.SemanticModel, typeDeclaration);
 
                     var collector = new FieldAccessCollector(c.SemanticModel, privateFields);
-                    collector.Visit(typeDeclaration);
+
+                    if (!collector.SafeVisit(typeDeclaration))
+                    {
+                        // We couldn't finish the exploration so we cannot take any decision
+                        return;
+                    }
 
                     privateFields.Keys
                         .Where(collector.IsRemovableField)

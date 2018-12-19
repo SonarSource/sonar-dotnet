@@ -103,8 +103,10 @@ namespace SonarAnalyzer.Helpers
         private static IList<DirectiveTriviaSyntax> CollectPrecedingDirectiveSyntax(SyntaxNode node)
         {
             var walker = new BranchingDirectiveCollector(node);
-            walker.Visit(node.SyntaxTree.GetRoot());
-            return walker.CollectedDirectives;
+
+            return walker.SafeVisit(node.SyntaxTree.GetRoot())
+                ? walker.CollectedDirectives
+                : new List<DirectiveTriviaSyntax>();
         }
 
         /// <summary>
@@ -117,7 +119,7 @@ namespace SonarAnalyzer.Helpers
             private bool found;
 
             public BranchingDirectiveCollector(SyntaxNode terminatingNode)
-                :base(SyntaxWalkerDepth.StructuredTrivia)
+                : base(SyntaxWalkerDepth.StructuredTrivia)
             {
                 this.terminatingNode = terminatingNode;
                 this.found = false;

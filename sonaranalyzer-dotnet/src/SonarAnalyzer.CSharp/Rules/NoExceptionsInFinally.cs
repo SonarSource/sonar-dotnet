@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var finallyClauseSyntaxBlock = ((FinallyClauseSyntax)c.Node).Block;
-                    new ThrowInFinallyWalker(c).Visit(finallyClauseSyntaxBlock);
+                    new ThrowInFinallyWalker(c).SafeVisit(finallyClauseSyntaxBlock);
                 }, SyntaxKind.FinallyClause);
         }
 

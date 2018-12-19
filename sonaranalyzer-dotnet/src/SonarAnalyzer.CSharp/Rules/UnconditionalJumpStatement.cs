@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public override void Visit()
             {
                 var csWalker = new CsLoopwalker(this);
-                csWalker.Visit(this.rootExpression);
+                csWalker.SafeVisit(this.rootExpression);
             }
 
             private class CsLoopwalker : CSharpSyntaxWalker

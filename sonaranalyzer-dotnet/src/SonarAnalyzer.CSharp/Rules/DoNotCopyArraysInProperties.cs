@@ -56,9 +56,9 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var walker = new Walker(c.SemanticModel);
+                    var walker = new PropertyWalker(c.SemanticModel);
 
-                    walker.Visit(body);
+                    walker.SafeVisit(body);
 
                     foreach (var location in walker.Locations)
                     {
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     .FirstOrDefault();
         }
 
-        private class Walker : CSharpSyntaxWalker
+        private class PropertyWalker : CSharpSyntaxWalker
         {
             private readonly SemanticModel semanticModel;
             private readonly List<Location> locations = new List<Location>();
@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public IEnumerable<Location> Locations => this.locations;
 
-            public Walker(SemanticModel semanticModel)
+            public PropertyWalker(SemanticModel semanticModel)
             {
                 this.semanticModel = semanticModel;
             }
