@@ -69,8 +69,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var eqRight = EquivalenceChecker.AreEquivalent(right.Right, left.Right);
-            var eqLeft = EquivalenceChecker.AreEquivalent(right.Left, left.Left);
+            var eqRight = CSharpEquivalenceChecker.AreEquivalent(right.Right, left.Right);
+            var eqLeft = CSharpEquivalenceChecker.AreEquivalent(right.Left, left.Left);
             if (!eqRight || !eqLeft)
             {
                 return;

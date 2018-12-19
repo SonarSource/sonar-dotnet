@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 isEnabledByDefault: false);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
         protected override bool IsEndOfFileToken(SyntaxToken token) => token.IsKind(SyntaxKind.EndOfFileToken);
     }

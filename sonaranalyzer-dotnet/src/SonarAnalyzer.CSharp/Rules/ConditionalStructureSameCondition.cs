@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var precedingCondition = ifStatement
                         .GetPrecedingConditionsInConditionChain()
                         .FirstOrDefault(
-                            preceding => EquivalenceChecker.AreEquivalent(currentCondition, preceding));
+                            preceding => CSharpEquivalenceChecker.AreEquivalent(currentCondition, preceding));
 
                     if (precedingCondition != null)
                     {

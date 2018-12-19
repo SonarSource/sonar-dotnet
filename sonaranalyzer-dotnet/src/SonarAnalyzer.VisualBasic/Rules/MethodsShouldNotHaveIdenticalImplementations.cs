@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-        protected override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override SyntaxKind ClassDeclarationSyntaxKind => SyntaxKind.ClassBlock;
 
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             return firstMethod.Statements.Count >= 2 &&
                 firstMethod.SubOrFunctionStatement.Identifier.ValueText != secondMethod.SubOrFunctionStatement.Identifier.ValueText &&
-                EquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);
+                VisualBasicEquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);
         }
 
         protected override SyntaxToken GetMethodIdentifier(MethodBlockSyntax method) => method.SubOrFunctionStatement.Identifier;

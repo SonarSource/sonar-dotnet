@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var precedingSection = switchSection
                         .GetPrecedingSections()
                         .FirstOrDefault(
-                            preceding => EquivalenceChecker.AreEquivalent(switchSection.Statements, preceding.Statements));
+                            preceding => CSharpEquivalenceChecker.AreEquivalent(switchSection.Statements, preceding.Statements));
 
                     if (precedingSection != null)
                     {
@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var precedingStatement = precedingStatements
-                .FirstOrDefault(preceding => EquivalenceChecker.AreEquivalent(statement, preceding));
+                .FirstOrDefault(preceding => CSharpEquivalenceChecker.AreEquivalent(statement, preceding));
 
             if (precedingStatement != null)
             {

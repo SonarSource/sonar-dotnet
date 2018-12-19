@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
             new[] { SyntaxKind.SwitchStatement };
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+            Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
         protected override SyntaxNode GetExpression(SwitchStatementSyntax statement) =>
             statement.Expression;

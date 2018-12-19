@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Helpers
     public class VisualBasicElementAccessTracker : ElementAccessTracker<SyntaxKind>
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            VisualBasic.GeneratedCodeRecognizer.Instance;
+            VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } =
             new[]

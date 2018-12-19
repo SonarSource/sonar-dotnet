@@ -50,8 +50,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (methodSymbol != null &&
                         methodSymbol.IsInType(KnownType.System_Console) &&
                         BannedConsoleMembers.Contains(methodSymbol.Name) &&
-                        !DebugOnlyCodeHelper.IsInDebugBlock(c.Node) &&
-                        !DebugOnlyCodeHelper.IsCallerInConditionalDebug(methodCall, c.SemanticModel))
+                        !CSharpDebugOnlyCodeHelper.IsInDebugBlock(c.Node) &&
+                        !CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(methodCall, c.SemanticModel))
 
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0],

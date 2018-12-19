@@ -89,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var node = (TSyntax)context.Node;
 
-            var walker = new CyclomaticComplexityWalker();
+            var walker = new CSharpCyclomaticComplexityWalker();
 
             var nodeToCheck = getNodeToCheck(node);
             if (nodeToCheck == null)

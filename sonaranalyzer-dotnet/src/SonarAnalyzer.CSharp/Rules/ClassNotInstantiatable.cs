@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var typeDeclarations = new RemovableDeclarationCollector(namedType, context.Compilation).TypeDeclarations;
+            var typeDeclarations = new CSharpRemovableDeclarationCollector(namedType, context.Compilation).TypeDeclarations;
 
             if (!IsAnyConstructorCalled<BaseTypeDeclarationSyntax, ObjectCreationExpressionSyntax, ClassDeclarationSyntax>
                 (namedType, typeDeclarations))

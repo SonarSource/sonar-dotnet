@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
-            var methodParameterLookup = new MethodParameterLookup(invocation, semanticModel);
+            var methodParameterLookup = new CSharpMethodParameterLookup(invocation, semanticModel);
             var argumentMappings = methodParameterLookup.GetAllArgumentParameterMappings()
                 .ToList();
 
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var argumentsCanBeRemovedWithoutNamed = new List<ArgumentSyntax>();
             var canBeRemovedWithoutNamed = true;
 
-            var reversedMappings = new List<MethodParameterLookup.ArgumentParameterMapping>(argumentMappings);
+            var reversedMappings = new List<CSharpMethodParameterLookup.ArgumentParameterMapping>(argumentMappings);
             reversedMappings.Reverse();
             foreach (var argumentMapping in reversedMappings)
             {
@@ -123,7 +123,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static async Task<Document> RemoveArgumentsAndAddNecessaryNamesAsync(Document document, ArgumentListSyntax argumentList,
-            List<MethodParameterLookup.ArgumentParameterMapping> argumentMappings, List<ArgumentSyntax> argumentsToRemove,
+            List<CSharpMethodParameterLookup.ArgumentParameterMapping> argumentMappings, List<ArgumentSyntax> argumentsToRemove,
             SemanticModel semanticModel, CancellationToken cancellationToken)
         {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
@@ -169,7 +169,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static ArgumentListSyntax AddParamsArguments(SemanticModel semanticModel,
-            ICollection<MethodParameterLookup.ArgumentParameterMapping> paramsArguments, ArgumentListSyntax argumentList)
+            ICollection<CSharpMethodParameterLookup.ArgumentParameterMapping> paramsArguments, ArgumentListSyntax argumentList)
         {
             var firstParamsMapping = paramsArguments.First();
             var firstParamsArgument = firstParamsMapping.Argument;

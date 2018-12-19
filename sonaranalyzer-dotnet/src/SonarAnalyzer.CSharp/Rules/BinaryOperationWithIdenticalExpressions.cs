@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var operands = GetOperands(invocation, methodSymbol);
             if (operands != null &&
-                EquivalenceChecker.AreEquivalent(RemoveParantheses(operands.Item1), RemoveParantheses(operands.Item2)))
+                CSharpEquivalenceChecker.AreEquivalent(RemoveParantheses(operands.Item1), RemoveParantheses(operands.Item2)))
             {
                 var message = string.Format(EqualsMessage, operands.Item2);
 
@@ -130,7 +130,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportIfOperatorExpressionsMatch(SyntaxNodeAnalysisContext context, ExpressionSyntax left, ExpressionSyntax right,
             SyntaxToken operatorToken)
         {
-            if (EquivalenceChecker.AreEquivalent(left.RemoveParentheses(), right.RemoveParentheses()))
+            if (CSharpEquivalenceChecker.AreEquivalent(left.RemoveParentheses(), right.RemoveParentheses()))
             {
                 var message = string.Format(OperatorMessageFormat, operatorToken);
 

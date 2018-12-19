@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private void RaiseOnArrayCovarianceInInvocationExpression(SyntaxNodeAnalysisContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
-            var methodParameterLookup = new MethodParameterLookup(invocation, context.SemanticModel);
+            var methodParameterLookup = new CSharpMethodParameterLookup(invocation, context.SemanticModel);
 
             foreach (var argument in invocation.ArgumentList.Arguments)
             {

@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         }.ToImmutableDictionary();
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-             Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+             Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => ImmutableArray.Create<SyntaxKind>(
             SyntaxKind.AndExpression,

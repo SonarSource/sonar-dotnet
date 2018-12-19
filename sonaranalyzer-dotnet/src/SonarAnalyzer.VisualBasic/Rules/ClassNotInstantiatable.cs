@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 return;
             }
 
-            var typeDeclarations = new RemovableDeclarationCollector(namedType, context.Compilation).TypeDeclarations;
+            var typeDeclarations = new VisualBasicRemovableDeclarationCollector(namedType, context.Compilation).TypeDeclarations;
 
             if (!IsAnyConstructorCalled<TypeBlockSyntax, ObjectCreationExpressionSyntax, ClassBlockSyntax>
                 (namedType, typeDeclarations))

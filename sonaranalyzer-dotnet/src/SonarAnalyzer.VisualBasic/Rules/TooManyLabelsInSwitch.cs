@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             new[] { SyntaxKind.SelectStatement };
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+            Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override SyntaxNode GetExpression(SelectStatementSyntax statement) =>
             statement.Expression;

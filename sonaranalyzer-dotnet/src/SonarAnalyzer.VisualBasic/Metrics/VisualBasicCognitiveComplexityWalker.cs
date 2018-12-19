@@ -27,7 +27,7 @@ using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Metrics.VisualBasic
 {
-    public sealed class CognitiveComplexityWalker : CognitiveComplexityWalkerBase<MethodStatementSyntax>
+    public sealed class VisualBasicCognitiveComplexityWalker : CognitiveComplexityWalkerBase<MethodStatementSyntax>
     {
         public override void Visit(SyntaxNode node)
         {
@@ -36,8 +36,8 @@ namespace SonarAnalyzer.Metrics.VisualBasic
 
         private class InnerWalker : VisualBasicSyntaxWalker
         {
-            private readonly CognitiveComplexityWalker parent;
-            public InnerWalker(CognitiveComplexityWalker parent)
+            private readonly VisualBasicCognitiveComplexityWalker parent;
+            public InnerWalker(VisualBasicCognitiveComplexityWalker parent)
             {
                 this.parent = parent;
             }

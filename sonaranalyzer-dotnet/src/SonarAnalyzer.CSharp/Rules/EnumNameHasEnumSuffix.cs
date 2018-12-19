@@ -40,6 +40,6 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => kindsOfInterest;
         protected override SyntaxToken GetIdentifier(SyntaxNode node) => ((EnumDeclarationSyntax)node).Identifier;
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
     }
 }

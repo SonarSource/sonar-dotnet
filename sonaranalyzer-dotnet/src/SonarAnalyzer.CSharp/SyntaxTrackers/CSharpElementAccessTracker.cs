@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Helpers
     public class CSharpElementAccessTracker : ElementAccessTracker<SyntaxKind>
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            CSharp.GeneratedCodeRecognizer.Instance;
+            CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
         protected override SyntaxKind[] TrackedSyntaxKinds { get; } =
             new[]

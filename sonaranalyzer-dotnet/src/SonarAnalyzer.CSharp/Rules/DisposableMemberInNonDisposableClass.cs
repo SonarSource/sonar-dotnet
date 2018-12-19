@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (!string.IsNullOrEmpty(message))
                     {
-                        var typeDeclarations = new RemovableDeclarationCollector(namedType, analysisContext.Compilation).TypeDeclarations;
+                        var typeDeclarations = new CSharpRemovableDeclarationCollector(namedType, analysisContext.Compilation).TypeDeclarations;
                         foreach (var classDeclaration in typeDeclarations)
                         {
                             analysisContext.ReportDiagnosticIfNonGenerated(

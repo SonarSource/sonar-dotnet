@@ -238,7 +238,7 @@ End Module";
     }
 }";
 
-            var result = IsGenerated(source, SonarAnalyzer.Helpers.CSharp.GeneratedCodeRecognizer.Instance);
+            var result = IsGenerated(source, SonarAnalyzer.Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance);
             result.Should().BeTrue();
         }
 
@@ -253,7 +253,7 @@ End Module";
     }
 }";
 
-            var result = IsGenerated(source, SonarAnalyzer.Helpers.CSharp.GeneratedCodeRecognizer.Instance);
+            var result = IsGenerated(source, SonarAnalyzer.Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance);
             result.Should().BeFalse();
         }
     }

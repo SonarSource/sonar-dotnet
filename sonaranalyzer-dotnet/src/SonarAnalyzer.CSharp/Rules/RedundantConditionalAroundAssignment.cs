@@ -103,8 +103,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool AreMatchingExpressions(ExpressionSyntax condition1, ExpressionSyntax condition2,
             ExpressionSyntax assignment1, ExpressionSyntax assignment2)
         {
-            return EquivalenceChecker.AreEquivalent(condition1, assignment1) &&
-                EquivalenceChecker.AreEquivalent(condition2, assignment2);
+            return CSharpEquivalenceChecker.AreEquivalent(condition1, assignment1) &&
+                CSharpEquivalenceChecker.AreEquivalent(condition2, assignment2);
         }
     }
 }

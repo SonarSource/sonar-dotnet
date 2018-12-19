@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Helpers
             new[] { SyntaxKind.BaseList };
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            CSharp.GeneratedCodeRecognizer.Instance;
+            CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
         protected override IEnumerable<SyntaxNode> GetBaseTypeNodes(SyntaxNode contextNode) =>
             ((BaseListSyntax)contextNode)?.Types.Select(t => t.Type).ToArray();

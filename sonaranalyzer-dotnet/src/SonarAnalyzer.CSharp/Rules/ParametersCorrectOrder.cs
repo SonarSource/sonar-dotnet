@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var methodParameterLookup = new MethodParameterLookup(argumentList, analysisContext.SemanticModel);
+            var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, analysisContext.SemanticModel);
             var argumentParameterMappings = methodParameterLookup.GetAllArgumentParameterMappings()
                 .ToDictionary(pair => pair.Argument, pair => pair.Parameter);
 

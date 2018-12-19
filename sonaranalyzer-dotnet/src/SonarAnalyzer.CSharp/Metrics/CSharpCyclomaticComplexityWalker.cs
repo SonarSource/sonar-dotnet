@@ -28,7 +28,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Metrics.CSharp
 {
-    public class CyclomaticComplexityWalker : CSharpSyntaxWalker
+    public class CSharpCyclomaticComplexityWalker : CSharpSyntaxWalker
     {
         private readonly IList<SecondaryLocation> incrementLocations = new List<SecondaryLocation>();
 

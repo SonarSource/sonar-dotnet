@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }.ToImmutableDictionary();
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-             Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+             Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
         protected override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => ImmutableArray.Create<SyntaxKind>(
             SyntaxKind.BitwiseAndExpression,

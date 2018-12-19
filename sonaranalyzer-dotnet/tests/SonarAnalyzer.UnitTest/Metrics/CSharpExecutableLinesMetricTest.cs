@@ -617,7 +617,7 @@ class Program
         private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
         {
             (var syntaxTree, var semanticModel) = TestHelper.Compile(code);
-            Metrics.CSharp.ExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel).Should().BeEquivalentTo(expectedExecutableLines);
+            Metrics.CSharp.CSharpExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel).Should().BeEquivalentTo(expectedExecutableLines);
         }
     }
 }

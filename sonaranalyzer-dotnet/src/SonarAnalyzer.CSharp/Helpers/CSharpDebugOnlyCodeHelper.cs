@@ -25,7 +25,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal static class DebugOnlyCodeHelper
+    internal static class CSharpDebugOnlyCodeHelper
     {
         // Looking for an exact case-sensitive match
         public static bool IsDebugString(string text) =>
@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Helpers
         #region DEBUG directive blocks
 
         public static bool IsInDebugBlock(this SyntaxNode node) =>
-            IfDirectiveHelper.GetActiveConditionalCompilationSections(node)
+            CSharpIfDirectiveHelper.GetActiveConditionalCompilationSections(node)
             .Any(IsDebugString);
 
         #endregion

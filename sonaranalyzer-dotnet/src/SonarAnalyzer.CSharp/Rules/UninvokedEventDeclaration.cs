@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var removableDeclarationCollector = new RemovableDeclarationCollector(namedType, context.Compilation);
+            var removableDeclarationCollector = new CSharpRemovableDeclarationCollector(namedType, context.Compilation);
 
             var removableEventFields = removableDeclarationCollector
                 .GetRemovableFieldLikeDeclarations(eventSyntax, maxAccessibility)
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 !possiblyCopiedSymbols.Contains(tuple.Symbol);
         }
 
-        private static ISet<ISymbol> GetInvokedEventSymbols(RemovableDeclarationCollector removableDeclarationCollector)
+        private static ISet<ISymbol> GetInvokedEventSymbols(CSharpRemovableDeclarationCollector removableDeclarationCollector)
         {
             var delegateInvocations = removableDeclarationCollector.TypeDeclarations
                 .SelectMany(container => container.SyntaxNode.DescendantNodes()
@@ -133,7 +133,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return new HashSet<ISymbol>(invokedEventSymbols);
         }
 
-        private static ISet<ISymbol> GetPossiblyCopiedSymbols(RemovableDeclarationCollector removableDeclarationCollector)
+        private static ISet<ISymbol> GetPossiblyCopiedSymbols(CSharpRemovableDeclarationCollector removableDeclarationCollector)
         {
             var usedSymbols = new HashSet<ISymbol>();
 

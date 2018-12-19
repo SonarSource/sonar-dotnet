@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var operands = GetOperandsToCheckIfTrackedMethod(invocation, c.SemanticModel);
                     if (operands != null &&
-                        EquivalenceChecker.AreEquivalent(operands.Left, operands.Right))
+                        CSharpEquivalenceChecker.AreEquivalent(operands.Left, operands.Right))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, operands.Left.GetLocation(),
                             additionalLocations: new[] { operands.Right.GetLocation() },

@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Helpers
             new[] { SyntaxKind.InheritsStatement, SyntaxKind.ImplementsStatement };
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            VisualBasic.GeneratedCodeRecognizer.Instance;
+            VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override IEnumerable<SyntaxNode> GetBaseTypeNodes(SyntaxNode contextNode)
         {

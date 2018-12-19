@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var expression = (ConditionalExpressionSyntax) c.Node;
 
-                    if (EquivalenceChecker.AreEquivalent(
+                    if (CSharpEquivalenceChecker.AreEquivalent(
                         expression.WhenTrue.RemoveParentheses(),
                         expression.WhenFalse.RemoveParentheses()))
                     {

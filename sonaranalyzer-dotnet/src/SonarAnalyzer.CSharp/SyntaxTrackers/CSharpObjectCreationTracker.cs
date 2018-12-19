@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Helpers
             new[] { SyntaxKind.ObjectCreationExpression };
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            CSharp.GeneratedCodeRecognizer.Instance;
+            CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
         internal override ObjectCreationCondition ArgumentAtIndexIsConst(int index) =>
             (context) =>

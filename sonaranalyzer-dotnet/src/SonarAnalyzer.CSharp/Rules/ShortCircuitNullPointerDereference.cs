@@ -118,13 +118,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 var descendantNodes = expressionsInChain[j].DescendantNodes()
                     .Where(descendant =>
                         descendant.IsKind(expressionComparedToNull.Kind()) &&
-                        EquivalenceChecker.AreEquivalent(expressionComparedToNull, descendant))
+                        CSharpEquivalenceChecker.AreEquivalent(expressionComparedToNull, descendant))
                         .Where(descendant =>
                     (descendant.Parent is MemberAccessExpressionSyntax &&
-                        EquivalenceChecker.AreEquivalent(expressionComparedToNull,
+                        CSharpEquivalenceChecker.AreEquivalent(expressionComparedToNull,
                             ((MemberAccessExpressionSyntax) descendant.Parent).Expression)) ||
                     (descendant.Parent is ElementAccessExpressionSyntax &&
-                        EquivalenceChecker.AreEquivalent(expressionComparedToNull,
+                        CSharpEquivalenceChecker.AreEquivalent(expressionComparedToNull,
                             ((ElementAccessExpressionSyntax) descendant.Parent).Expression)))
                     .ToList();
 

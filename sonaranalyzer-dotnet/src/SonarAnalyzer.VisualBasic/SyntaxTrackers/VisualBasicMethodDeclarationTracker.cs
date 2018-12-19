@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Helpers
             throw new NotSupportedException("MethodDeclarationTracker uses symbols, not syntax");
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            VisualBasic.GeneratedCodeRecognizer.Instance;
+            VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
 
         public override MethodDeclarationCondition ParameterAtIndexIsUsed(int index) =>
             (context) =>

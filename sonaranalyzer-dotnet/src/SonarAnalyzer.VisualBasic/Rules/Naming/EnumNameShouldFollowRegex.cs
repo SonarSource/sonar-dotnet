@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 isEnabledByDefault: false);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
         protected override SyntaxKind EnumStatementSyntaxKind => SyntaxKind.EnumStatement;
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override SyntaxToken GetIdentifier(EnumStatementSyntax declaration) => declaration.Identifier;
     }

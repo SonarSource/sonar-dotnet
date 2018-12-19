@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var methodCall = (InvocationExpressionSyntax)c.Node;
-                    var methodParameterLookup = new MethodParameterLookup(methodCall, c.SemanticModel);
+                    var methodParameterLookup = new CSharpMethodParameterLookup(methodCall, c.SemanticModel);
 
                     var methodSymbol = methodParameterLookup.MethodSymbol;
                     if (methodSymbol == null)

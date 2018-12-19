@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 isEnabledByDefault: false);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        public override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+        public override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
         private static readonly ISet<SyntaxKind> CompoundExpressionKinds = new HashSet<SyntaxKind>
         {

@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public class TokenTypeAnalyzer : TokenTypeAnalyzerBase
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+            Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
         protected override TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel) =>
             new TokenClassifier(token, semanticModel);

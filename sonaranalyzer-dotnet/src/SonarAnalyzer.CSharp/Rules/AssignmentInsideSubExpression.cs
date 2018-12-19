@@ -111,7 +111,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return assignment.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
                 TryGetCoalesceExpressionParent(parentExpression, out var coalesceExpression) &&
-                EquivalenceChecker.AreEquivalent(assignment.Left.RemoveParentheses(), coalesceExpression.Left.RemoveParentheses());
+                CSharpEquivalenceChecker.AreEquivalent(assignment.Left.RemoveParentheses(), coalesceExpression.Left.RemoveParentheses());
         }
 
         private static bool TryGetCoalesceExpressionParent(ExpressionSyntax parent, out BinaryExpressionSyntax coalesceExpression)

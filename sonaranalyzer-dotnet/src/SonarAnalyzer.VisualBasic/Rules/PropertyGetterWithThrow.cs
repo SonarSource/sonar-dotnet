@@ -58,6 +58,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
             ((ThrowStatementSyntax)syntaxNode).Expression;
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+            Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
     }
 }

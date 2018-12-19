@@ -386,7 +386,7 @@ End Property");
         private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
         {
             (var syntaxTree, var semanticModel) = TestHelper.Compile(code, false);
-            Metrics.VisualBasic.ExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel).Should().BeEquivalentTo(expectedExecutableLines);
+            Metrics.VisualBasic.VisualBasicExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel).Should().BeEquivalentTo(expectedExecutableLines);
         }
     }
 }

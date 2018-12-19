@@ -116,7 +116,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (symbol.DeclaringSyntaxReferences.Length > 1 &&
                 symbol.DeclaringSyntaxReferences.Any(syntax =>
-                    Helpers.CSharp.GeneratedCodeRecognizer.Instance.IsGenerated(syntax.SyntaxTree)))
+                    Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance.IsGenerated(syntax.SyntaxTree)))
             {
                 return;
             }

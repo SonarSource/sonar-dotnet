@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         protected override bool ContainsOnlyThrow(CatchBlockSyntax currentCatch) =>
-            EquivalenceChecker.AreEquivalent(currentCatch.Statements, ThrowBlock);
+            VisualBasicEquivalenceChecker.AreEquivalent(currentCatch.Statements, ThrowBlock);
 
         protected override IReadOnlyList<CatchBlockSyntax> GetCatches(SyntaxNode syntaxNode) =>
             ((TryBlockSyntax)syntaxNode).CatchBlocks;

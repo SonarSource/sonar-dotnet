@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var lookup = new MethodParameterLookup(invocation, semanticModel);
+            var lookup = new CSharpMethodParameterLookup(invocation, semanticModel);
             if (!lookup.TryGetParameterSymbol(argument, out var parameter))
             {
                 type = null;
