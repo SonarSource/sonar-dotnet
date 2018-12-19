@@ -28,9 +28,9 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class MetricsAnalyzer : MetricsAnalyzerBase
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
         protected override MetricsBase GetMetrics(SyntaxTree syntaxTree, SemanticModel semanticModel)
-            => new Metrics.CSharp.Metrics(syntaxTree, semanticModel);
+            => new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel);
     }
 }

@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 isEnabledByDefault: false);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        public override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        public override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
 
         private static readonly ISet<SyntaxKind> CompoundExpressionKinds = new HashSet<SyntaxKind>
         {

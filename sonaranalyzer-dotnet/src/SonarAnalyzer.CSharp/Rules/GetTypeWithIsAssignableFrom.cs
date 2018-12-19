@@ -112,7 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckAsOperatorComparedToNull(ExpressionSyntax sideA, ExpressionSyntax sideB, Location location,
             SyntaxNodeAnalysisContext context)
         {
-            if (!EquivalenceChecker.AreEquivalent(sideA.RemoveParentheses(), CSharpSyntaxHelper.NullLiteralExpression))
+            if (!CSharpEquivalenceChecker.AreEquivalent(sideA.RemoveParentheses(), CSharpSyntaxHelper.NullLiteralExpression))
             {
                 return;
             }

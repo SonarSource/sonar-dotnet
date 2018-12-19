@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var ifStatement = (SingleLineIfStatementSyntax)c.Node;
 
                     if (ifStatement.ElseClause != null &&
-                        EquivalenceChecker.AreEquivalent(ifStatement.ElseClause.Statements, ifStatement.Statements))
+                        VisualBasicEquivalenceChecker.AreEquivalent(ifStatement.ElseClause.Statements, ifStatement.Statements))
                     {
                         ReportIssue(ifStatement.ElseClause.Statements, ifStatement.Statements, c, "branch");
                     }
@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             for (var j = 0; j < currentIndex; j++)
             {
-                if (EquivalenceChecker.AreEquivalent(currentBlockStatements, statements[j]))
+                if (VisualBasicEquivalenceChecker.AreEquivalent(currentBlockStatements, statements[j]))
                 {
                     ReportIssue(currentBlockStatements, statements[j], context, constructType);
                     return;

@@ -28,10 +28,10 @@ namespace SonarAnalyzer.Helpers
 {
     using SyntaxNodeSymbolSemanticModelTuple = SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol>;
 
-    internal class RemovableDeclarationCollector :
+    internal class VisualBasicRemovableDeclarationCollector :
         RemovableDeclarationCollectorBase<TypeBlockSyntax, TypeStatementSyntax, SyntaxKind>
     {
-        public RemovableDeclarationCollector(INamedTypeSymbol namedType, Compilation compilation)
+        public VisualBasicRemovableDeclarationCollector(INamedTypeSymbol namedType, Compilation compilation)
             : base(namedType, compilation)
         {
         }

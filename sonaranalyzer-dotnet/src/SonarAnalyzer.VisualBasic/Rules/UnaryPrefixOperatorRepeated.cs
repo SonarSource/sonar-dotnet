@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+            Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override SyntaxNode GetOperand(UnaryExpressionSyntax unarySyntax) =>
              unarySyntax.Operand;

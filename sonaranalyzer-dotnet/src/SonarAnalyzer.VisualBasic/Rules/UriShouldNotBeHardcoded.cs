@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.AddExpression,
             SyntaxKind.ConcatenateExpression };
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override string GetLiteralText(LiteralExpressionSyntax literalExpression) => literalExpression?.Token.ValueText;
 

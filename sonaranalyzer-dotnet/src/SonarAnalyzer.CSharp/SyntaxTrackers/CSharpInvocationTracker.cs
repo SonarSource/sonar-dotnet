@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Helpers
             new[] { SyntaxKind.InvocationExpression };
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            CSharp.GeneratedCodeRecognizer.Instance;
+            CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
         protected override string GetMethodName(SyntaxNode invocationExpression) =>
             ((InvocationExpressionSyntax)invocationExpression).Expression.GetIdentifier()?.Identifier.ValueText;

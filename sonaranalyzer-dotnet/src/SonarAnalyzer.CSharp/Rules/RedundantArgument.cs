@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var methodCall = (InvocationExpressionSyntax) c.Node;
-                    var methodParameterLookup = new MethodParameterLookup(methodCall, c.SemanticModel);
+                    var methodParameterLookup = new CSharpMethodParameterLookup(methodCall, c.SemanticModel);
                     var argumentMappings = methodParameterLookup.GetAllArgumentParameterMappings()
                         .ToList();
 
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         internal static bool ArgumentHasDefaultValue(
-            MethodParameterLookup.ArgumentParameterMapping argumentMapping,
+            CSharpMethodParameterLookup.ArgumentParameterMapping argumentMapping,
             SemanticModel semanticModel)
         {
             var argument = argumentMapping.Argument;

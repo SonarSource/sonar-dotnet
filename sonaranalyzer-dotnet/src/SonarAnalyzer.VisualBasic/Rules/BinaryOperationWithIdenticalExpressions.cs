@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static void ReportIfExpressionsMatch(SyntaxNodeAnalysisContext context, ExpressionSyntax left, ExpressionSyntax right,
             SyntaxToken operatorToken)
         {
-            if (EquivalenceChecker.AreEquivalent(left.RemoveParentheses(), right.RemoveParentheses()))
+            if (VisualBasicEquivalenceChecker.AreEquivalent(left.RemoveParentheses(), right.RemoveParentheses()))
             {
                 var message = string.Format(OperatorMessageFormat, operatorToken);
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, context.Node.GetLocation(), message));

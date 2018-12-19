@@ -29,7 +29,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Metrics.VisualBasic
 {
-    public static class ExecutableLinesMetric
+    public static class VisualBasicExecutableLinesMetric
     {
         public static ImmutableArray<int> GetLineNumbers(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {

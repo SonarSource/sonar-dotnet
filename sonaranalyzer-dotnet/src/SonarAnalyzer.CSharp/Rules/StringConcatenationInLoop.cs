@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override bool IsInLoop(SyntaxNode node) => LoopKinds.Contains(node.Kind());
 
         protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) =>
-            EquivalenceChecker.AreEquivalent(node1, node2);
+            CSharpEquivalenceChecker.AreEquivalent(node1, node2);
 
         private static readonly ISet<SyntaxKind> LoopKinds = new HashSet<SyntaxKind>
         {
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override ImmutableArray<SyntaxKind> CompoundAssignmentKinds => compoundAssignmentKinds;
 
-        protected override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+        protected override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
         protected override bool IsAddExpression(BinaryExpressionSyntax rightExpression) =>
             rightExpression != null &&

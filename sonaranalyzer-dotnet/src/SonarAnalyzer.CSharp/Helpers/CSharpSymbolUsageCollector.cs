@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Helpers
     /// Collects all symbol usages from a class declaration. Ignores symbols whose names are not present
     /// in the knownSymbolNames collection for performance reasons.
     /// </summary>
-    internal class SymbolUsageCollector : CSharpSyntaxWalker
+    internal class CSharpSymbolUsageCollector : CSharpSyntaxWalker
     {
         private static readonly ISet<SyntaxKind> IncrementKinds = new HashSet<SyntaxKind>
         {
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Helpers
         public Dictionary<IPropertySymbol, AccessorAccess> PropertyAccess { get; } =
             new Dictionary<IPropertySymbol, AccessorAccess>();
 
-        public SymbolUsageCollector(Func<SyntaxTree, bool, SemanticModel> getSemanticModel, HashSet<string> knownSymbolNames)
+        public CSharpSymbolUsageCollector(Func<SyntaxTree, bool, SemanticModel> getSemanticModel, HashSet<string> knownSymbolNames)
         {
             this.getSemanticModel = node => getSemanticModel(node.SyntaxTree, false);
             this.knownSymbolNames = knownSymbolNames;

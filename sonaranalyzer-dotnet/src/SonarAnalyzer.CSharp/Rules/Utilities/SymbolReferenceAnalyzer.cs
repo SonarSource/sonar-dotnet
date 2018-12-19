@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class SymbolReferenceAnalyzer : SymbolReferenceAnalyzerBase
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
         protected override bool IsIdentifier(SyntaxToken token) => token.IsKind(SyntaxKind.IdentifierToken);
 

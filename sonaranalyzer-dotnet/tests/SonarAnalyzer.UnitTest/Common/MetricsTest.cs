@@ -634,8 +634,8 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             (var syntaxTree, var semanticModel) = TestHelper.Compile(text);
 
             return language == AnalyzerLanguage.CSharp
-                ? (MetricsBase)new Metrics.CSharp.Metrics(syntaxTree, semanticModel)
-                : new Metrics.VisualBasic.Metrics(VisualBasicSyntaxTree.ParseText(text), semanticModel);
+                ? (MetricsBase)new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel)
+                : new Metrics.VisualBasic.VisualBasicMetrics(VisualBasicSyntaxTree.ParseText(text), semanticModel);
         }
 
         [TestMethod]
@@ -644,7 +644,7 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         public void WrongMetrics_CSharp()
         {
             (var syntaxTree, var semanticModel) = TestHelper.Compile("", isCSharp: false);
-            new Metrics.CSharp.Metrics(syntaxTree, semanticModel);
+            new Metrics.CSharp.CSharpMetrics(syntaxTree, semanticModel);
         }
 
         [TestMethod]
@@ -653,7 +653,7 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         public void WrongMetrics_VisualBasic()
         {
             (var syntaxTree, var semanticModel) = TestHelper.Compile("", isCSharp: true);
-            new Metrics.VisualBasic.Metrics(syntaxTree, semanticModel);
+            new Metrics.VisualBasic.VisualBasicMetrics(syntaxTree, semanticModel);
         }
 
         private static ICollection<int> ExecutableLines(AnalyzerLanguage language, string text) =>

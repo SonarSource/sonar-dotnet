@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         protected override bool ContainsOnlyThrow(CatchClauseSyntax currentCatch) =>
-            EquivalenceChecker.AreEquivalent(currentCatch.Block, ThrowBlock);
+            CSharpEquivalenceChecker.AreEquivalent(currentCatch.Block, ThrowBlock);
 
         protected override IReadOnlyList<CatchClauseSyntax> GetCatches(SyntaxNode syntaxNode) =>
             ((TryStatementSyntax)syntaxNode).Catches;

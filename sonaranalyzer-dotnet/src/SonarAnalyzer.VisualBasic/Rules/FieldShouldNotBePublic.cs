@@ -48,6 +48,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override IEnumerable<ModifiedIdentifierSyntax> GetVariables(FieldDeclarationSyntax fieldDeclaration) =>
             fieldDeclaration.Declarators.SelectMany(d => d.Names);
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
     }
 }

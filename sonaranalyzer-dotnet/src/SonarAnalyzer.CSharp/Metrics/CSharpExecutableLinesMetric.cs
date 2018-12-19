@@ -29,7 +29,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Metrics.CSharp
 {
-    public static class ExecutableLinesMetric
+    public static class CSharpExecutableLinesMetric
     {
         public static ImmutableArray<int> GetLineNumbers(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {

@@ -28,9 +28,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class MetricsAnalyzer : MetricsAnalyzerBase
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override MetricsBase GetMetrics(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
-            new Metrics.VisualBasic.Metrics(syntaxTree, semanticModel);
+            new Metrics.VisualBasic.VisualBasicMetrics(syntaxTree, semanticModel);
     }
 }

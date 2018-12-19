@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (EquivalenceChecker.AreEquivalent(expression.Left, expression.Right))
+                    if (CSharpEquivalenceChecker.AreEquivalent(expression.Left, expression.Right))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
                     }

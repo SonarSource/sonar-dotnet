@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
             = ImmutableArray.Create(rule);
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+            Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
         protected override string MethodShouldBePrivateMessage =>
             problemMakePrivateText;

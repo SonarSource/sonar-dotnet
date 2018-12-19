@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             allNamedTypes.Add(namedType);
 
                             // Collect symbols of private members that could potentially be removed
-                            var removableSymbolsCollector = new RemovableSymbolCollector(c.Compilation.GetSemanticModel);
+                            var removableSymbolsCollector = new CSharpRemovableSymbolCollector(c.Compilation.GetSemanticModel);
 
                             VisitDeclaringReferences(namedType, removableSymbolsCollector);
 
@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 removableInternalTypes.Add(internalSymbol);
                             }
 
-                            var usageCollector = new SymbolUsageCollector(
+                            var usageCollector = new CSharpSymbolUsageCollector(
                                 c.Compilation.GetSemanticModel,
                                 removableSymbolsCollector.PrivateSymbols.Select(s => s.Name).ToHashSet());
 
@@ -116,7 +116,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 return;
                             }
 
-                            var usageCollector = new SymbolUsageCollector(
+                            var usageCollector = new CSharpSymbolUsageCollector(
                                 c.Compilation.GetSemanticModel,
                                 removableInternalTypes.Select(s => s.Name).ToHashSet());
 
@@ -135,7 +135,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 });
         }
 
-        private static IEnumerable<Diagnostic> GetDiagnostics(SymbolUsageCollector usageCollector, ISet<ISymbol> removableSymbols,
+        private static IEnumerable<Diagnostic> GetDiagnostics(CSharpSymbolUsageCollector usageCollector, ISet<ISymbol> removableSymbols,
             string accessibility, BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
         {
             var unusedSymbols = removableSymbols

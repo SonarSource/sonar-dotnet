@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (increment.Parent is AssignmentExpressionSyntax assignment &&
                         assignment.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
                         assignment.Right == increment &&
-                        EquivalenceChecker.AreEquivalent(assignment.Left, increment.Operand))
+                        CSharpEquivalenceChecker.AreEquivalent(assignment.Left, increment.Operand))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, increment.GetLocation(), operatorText));
                     }

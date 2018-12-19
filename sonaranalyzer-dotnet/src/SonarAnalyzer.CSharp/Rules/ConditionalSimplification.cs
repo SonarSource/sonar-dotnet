@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (whenTrue == null ||
                 whenFalse == null ||
-                EquivalenceChecker.AreEquivalent(whenTrue, whenFalse))
+                CSharpEquivalenceChecker.AreEquivalent(whenTrue, whenFalse))
             {
                 /// Equivalence handled by S1871, <see cref="ConditionalStructureSameImplementation"/>
                 return;
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var whenTrue = conditional.WhenTrue.RemoveParentheses();
             var whenFalse = conditional.WhenFalse.RemoveParentheses();
 
-            if (EquivalenceChecker.AreEquivalent(whenTrue, whenFalse))
+            if (CSharpEquivalenceChecker.AreEquivalent(whenTrue, whenFalse))
             {
                 /// handled by S2758, <see cref="TernaryOperatorPointless"/>
                 return;
@@ -203,7 +203,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var canBeSimplified =
                 assignment1 != null &&
                 assignment2 != null &&
-                EquivalenceChecker.AreEquivalent(assignment1.Left, assignment2.Left) &&
+                CSharpEquivalenceChecker.AreEquivalent(assignment1.Left, assignment2.Left) &&
                 assignment1.Kind() == assignment2.Kind();
 
             if (!canBeSimplified)
@@ -285,14 +285,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 var arg1 = methodCall1.ArgumentList.Arguments[i]?.Expression.RemoveParentheses();
                 var arg2 = methodCall2.ArgumentList.Arguments[i]?.Expression.RemoveParentheses();
 
-                if (!EquivalenceChecker.AreEquivalent(arg1, arg2))
+                if (!CSharpEquivalenceChecker.AreEquivalent(arg1, arg2))
                 {
                     numberOfDifferences++;
 
                     if (comparedToNull != null)
                     {
-                        var arg1IsComparedToNull = EquivalenceChecker.AreEquivalent(arg1, comparedToNull);
-                        var arg2IsComparedToNull = EquivalenceChecker.AreEquivalent(arg2, comparedToNull);
+                        var arg1IsComparedToNull = CSharpEquivalenceChecker.AreEquivalent(arg1, comparedToNull);
+                        var arg2IsComparedToNull = CSharpEquivalenceChecker.AreEquivalent(arg2, comparedToNull);
 
                         if (arg1IsComparedToNull && !comparedIsNullInTrue)
                         {
@@ -312,7 +312,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 else
                 {
-                    if (comparedToNull != null && EquivalenceChecker.AreEquivalent(arg1, comparedToNull))
+                    if (comparedToNull != null && CSharpEquivalenceChecker.AreEquivalent(arg1, comparedToNull))
                     {
                         return false;
                     }
@@ -325,12 +325,12 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool CanExpressionBeNullCoalescing(ExpressionSyntax whenTrue, ExpressionSyntax whenFalse,
             ExpressionSyntax comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue)
         {
-            if (EquivalenceChecker.AreEquivalent(whenTrue, comparedToNull))
+            if (CSharpEquivalenceChecker.AreEquivalent(whenTrue, comparedToNull))
             {
                 return !comparedIsNullInTrue;
             }
 
-            if (EquivalenceChecker.AreEquivalent(whenFalse, comparedToNull))
+            if (CSharpEquivalenceChecker.AreEquivalent(whenFalse, comparedToNull))
             {
                 return comparedIsNullInTrue;
             }
@@ -352,13 +352,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
             comparedIsNullInTrue = binary.IsKind(SyntaxKind.EqualsExpression);
 
-            if (EquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.NullLiteralExpression))
+            if (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.NullLiteralExpression))
             {
                 compared = binary.Right;
                 return true;
             }
 
-            if (EquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.NullLiteralExpression))
+            if (CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.NullLiteralExpression))
             {
                 compared = binary.Left;
                 return true;

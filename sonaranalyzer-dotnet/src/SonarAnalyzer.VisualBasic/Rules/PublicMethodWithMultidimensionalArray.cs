@@ -43,6 +43,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override SyntaxToken GetIdentifier(MethodStatementSyntax method) => method.Identifier;
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
     }
 }

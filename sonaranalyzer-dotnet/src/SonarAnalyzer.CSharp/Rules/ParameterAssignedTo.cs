@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxNode GetAssignedNode(AssignmentExpressionSyntax assignment) => assignment.Left;
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
         /// <summary>
         /// Returns all statements before the specified statement within the containing method.

@@ -63,6 +63,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool StatementIsBlock(StatementSyntax st) => st is BlockSyntax;
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
     }
 }

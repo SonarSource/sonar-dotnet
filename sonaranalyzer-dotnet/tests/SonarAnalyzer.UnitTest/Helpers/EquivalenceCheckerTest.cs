@@ -70,12 +70,12 @@ namespace Test
         [TestMethod]
         public void AreEquivalent_Node()
         {
-            var result = EquivalenceChecker.AreEquivalent(
+            var result = CSharpEquivalenceChecker.AreEquivalent(
                 this.methods.First(m => m.Identifier.ValueText == "Method1").Body,
                 this.methods.First(m => m.Identifier.ValueText == "Method2").Body);
             result.Should().BeTrue();
 
-            result = EquivalenceChecker.AreEquivalent(
+            result = CSharpEquivalenceChecker.AreEquivalent(
                 this.methods.First(m => m.Identifier.ValueText == "Method1").Body,
                 this.methods.First(m => m.Identifier.ValueText == "Method3").Body);
             result.Should().BeFalse();
@@ -84,12 +84,12 @@ namespace Test
         [TestMethod]
         public void AreEquivalent_List()
         {
-            var result = EquivalenceChecker.AreEquivalent(
+            var result = CSharpEquivalenceChecker.AreEquivalent(
                 this.methods.First(m => m.Identifier.ValueText == "Method1").Body.Statements,
                 this.methods.First(m => m.Identifier.ValueText == "Method2").Body.Statements);
             result.Should().BeTrue();
 
-            result = EquivalenceChecker.AreEquivalent(
+            result = CSharpEquivalenceChecker.AreEquivalent(
                 this.methods.First(m => m.Identifier.ValueText == "Method1").Body.Statements,
                 this.methods.First(m => m.Identifier.ValueText == "Method3").Body.Statements);
             result.Should().BeFalse();

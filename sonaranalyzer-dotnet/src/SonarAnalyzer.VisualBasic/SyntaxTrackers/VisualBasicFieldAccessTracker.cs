@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Helpers
             };
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
-            VisualBasic.GeneratedCodeRecognizer.Instance;
+            VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override string GetFieldName(SyntaxNode expression) =>
             ((ExpressionSyntax)expression).GetIdentifier()?.Identifier.ValueText;

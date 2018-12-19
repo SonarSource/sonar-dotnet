@@ -43,6 +43,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override SyntaxToken GetIdentifier(SyntaxNode node) => ((EnumStatementSyntax)node).Identifier;
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
     }
 }

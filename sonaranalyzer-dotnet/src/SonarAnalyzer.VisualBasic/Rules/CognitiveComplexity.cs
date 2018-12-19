@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
              DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
                  isEnabledByDefault: false);
 
-        private static readonly Func<ICognitiveComplexityWalker> walkerFactory = () => new CognitiveComplexityWalker();
+        private static readonly Func<ICognitiveComplexityWalker> walkerFactory = () => new VisualBasicCognitiveComplexityWalker();
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 

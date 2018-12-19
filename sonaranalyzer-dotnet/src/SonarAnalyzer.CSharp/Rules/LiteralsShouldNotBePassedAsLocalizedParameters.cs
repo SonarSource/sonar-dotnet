@@ -64,8 +64,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     // Calling to/from debug-only code
                     if (methodSymbol.IsDiagnosticDebugMethod() ||
-                        DebugOnlyCodeHelper.IsConditionalDebugMethod(methodSymbol) ||
-                        DebugOnlyCodeHelper.IsCallerInConditionalDebug(invocationSyntax, c.SemanticModel))
+                        CSharpDebugOnlyCodeHelper.IsConditionalDebugMethod(methodSymbol) ||
+                        CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(invocationSyntax, c.SemanticModel))
                     {
                         return;
                     }
@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (c.SemanticModel.GetSymbolInfo(assignmentSyntax.Left).Symbol is IPropertySymbol propertySymbol &&
                         IsLocalizable(propertySymbol) &&
                         IsStringLiteral(assignmentSyntax.Right, c.SemanticModel) &&
-                        !DebugOnlyCodeHelper.IsCallerInConditionalDebug(assignmentSyntax, c.SemanticModel))
+                        !CSharpDebugOnlyCodeHelper.IsCallerInConditionalDebug(assignmentSyntax, c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignmentSyntax.GetLocation()));
                     }

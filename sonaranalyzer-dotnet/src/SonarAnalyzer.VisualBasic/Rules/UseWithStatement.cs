@@ -174,7 +174,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return contained != null &&
                 container.DescendantNodes()
                     .OfType<MemberAccessExpressionSyntax>()
-                    .Any(m => m.Expression != null && EquivalenceChecker.AreEquivalent(contained, m.Expression));
+                    .Any(m => m.Expression != null && VisualBasicEquivalenceChecker.AreEquivalent(contained, m.Expression));
         }
     }
 }

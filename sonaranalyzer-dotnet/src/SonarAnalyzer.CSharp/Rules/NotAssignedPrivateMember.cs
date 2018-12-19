@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var removableDeclarationCollector = new RemovableDeclarationCollector(namedType, c.Compilation);
+                    var removableDeclarationCollector = new CSharpRemovableDeclarationCollector(namedType, c.Compilation);
 
                     var candidateFields = removableDeclarationCollector.GetRemovableFieldLikeDeclarations(
                         new HashSet<SyntaxKind> { SyntaxKind.FieldDeclaration }, maxAccessibility)
@@ -130,7 +130,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 declaration.AccessorList.Accessors.All(acc => acc.Body == null);
         }
 
-        private static IList<MemberUsage> GetMemberUsages(RemovableDeclarationCollector removableDeclarationCollector,
+        private static IList<MemberUsage> GetMemberUsages(CSharpRemovableDeclarationCollector removableDeclarationCollector,
             HashSet<ISymbol> declaredPrivateSymbols)
         {
             var symbolNames = declaredPrivateSymbols.Select(s => s.Name).ToHashSet();

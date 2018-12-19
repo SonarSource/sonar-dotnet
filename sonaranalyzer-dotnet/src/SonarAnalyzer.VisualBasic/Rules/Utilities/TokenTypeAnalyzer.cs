@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class TokenTypeAnalyzer : TokenTypeAnalyzerBase
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+            Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override TokenClassifierBase GetTokenClassifier(SyntaxToken token, SemanticModel semanticModel) =>
             new TokenClassifier(token, semanticModel);

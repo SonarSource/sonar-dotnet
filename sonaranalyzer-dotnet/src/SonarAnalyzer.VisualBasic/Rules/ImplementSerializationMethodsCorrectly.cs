@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             = ImmutableArray.Create(rule);
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+            Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override string MethodShouldBePrivateMessage =>
             problemMakePrivateText;

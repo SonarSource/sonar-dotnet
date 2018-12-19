@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Helpers
     /// Collects private or internal member symbols that could potentially be removed if they are not used.
     /// Members that are overriden, overridable, have specific use, etc. are not removable.
     /// </summary>
-    internal class RemovableSymbolCollector : CSharpSyntaxWalker
+    internal class CSharpRemovableSymbolCollector : CSharpSyntaxWalker
     {
         private static readonly ISet<MethodKind> RemovableMethodKinds = new HashSet<MethodKind>
         {
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Helpers
         public BidirectionalDictionary<ISymbol, SyntaxNode> FieldLikeSymbols { get; } =
             new BidirectionalDictionary<ISymbol, SyntaxNode>();
 
-        public RemovableSymbolCollector(Func<SyntaxTree, bool, SemanticModel> getSemanticModel)
+        public CSharpRemovableSymbolCollector(Func<SyntaxTree, bool, SemanticModel> getSemanticModel)
         {
             this.getSemanticModel = node => getSemanticModel(node.SyntaxTree, false);
         }

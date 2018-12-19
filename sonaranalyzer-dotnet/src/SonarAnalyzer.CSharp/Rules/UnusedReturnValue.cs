@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var removableDeclarationCollector = new RemovableDeclarationCollector(namedType, c.Compilation);
+                    var removableDeclarationCollector = new CSharpRemovableDeclarationCollector(namedType, c.Compilation);
 
                     var declaredPrivateMethodsWithReturn = CollectRemovableMethods(removableDeclarationCollector).ToList();
                     if (!declaredPrivateMethodsWithReturn.Any())
@@ -124,10 +124,10 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static IEnumerable<SyntaxNodeSymbolSemanticModelTuple<MethodDeclarationSyntax, IMethodSymbol>> CollectRemovableMethods(
-            RemovableDeclarationCollector removableDeclarationCollector)
+            CSharpRemovableDeclarationCollector removableDeclarationCollector)
         {
             return removableDeclarationCollector.TypeDeclarations
-                .SelectMany(container => container.SyntaxNode.DescendantNodes(RemovableDeclarationCollector.IsNodeContainerTypeDeclaration)
+                .SelectMany(container => container.SyntaxNode.DescendantNodes(CSharpRemovableDeclarationCollector.IsNodeContainerTypeDeclaration)
                     .OfType<MethodDeclarationSyntax>()
                     .Select(node =>
                         new SyntaxNodeSymbolSemanticModelTuple<MethodDeclarationSyntax, IMethodSymbol>
@@ -139,7 +139,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Where(node =>
                         node.Symbol != null &&
                         !node.Symbol.ReturnsVoid &&
-                        RemovableDeclarationCollector.IsRemovable(node.Symbol, Accessibility.Private));
+                        CSharpRemovableDeclarationCollector.IsRemovable(node.Symbol, Accessibility.Private));
         }
     }
 }

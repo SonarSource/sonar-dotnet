@@ -47,6 +47,6 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override IEnumerable<VariableDeclaratorSyntax> GetVariables(FieldDeclarationSyntax node) =>
             node.Declaration.Variables;
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
     }
 }

@@ -28,7 +28,7 @@ using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Metrics.CSharp
 {
-    public sealed class CognitiveComplexityWalker : CognitiveComplexityWalkerBase<MethodDeclarationSyntax>
+    public sealed class CSharpCognitiveComplexityWalker : CognitiveComplexityWalkerBase<MethodDeclarationSyntax>
     {
         public override void Visit(SyntaxNode node)
         {
@@ -37,8 +37,8 @@ namespace SonarAnalyzer.Metrics.CSharp
 
         private class InnerWalker : CSharpSyntaxWalker
         {
-            private readonly CognitiveComplexityWalker parent;
-            public InnerWalker(CognitiveComplexityWalker parent)
+            private readonly CSharpCognitiveComplexityWalker parent;
+            public InnerWalker(CSharpCognitiveComplexityWalker parent)
             {
                 this.parent = parent;
             }

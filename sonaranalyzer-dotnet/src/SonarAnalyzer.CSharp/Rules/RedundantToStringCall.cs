@@ -119,7 +119,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var parameterLookup = new MethodParameterLookup(stringFormatInvocation, c.SemanticModel);
+                    var parameterLookup = new CSharpMethodParameterLookup(stringFormatInvocation, c.SemanticModel);
                     if (parameterLookup.TryGetParameterSymbol(stringFormatArgument, out var argParameter) &&
                         argParameter.Name.StartsWith("arg", StringComparison.Ordinal))
                     {

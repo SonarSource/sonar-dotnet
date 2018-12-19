@@ -167,7 +167,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var canBeSimplified =
                 assignment1 != null &&
                 assignment2 != null &&
-                EquivalenceChecker.AreEquivalent(assignment1.Left, assignment2.Left) &&
+                CSharpEquivalenceChecker.AreEquivalent(assignment1.Left, assignment2.Left) &&
                 assignment1.Kind() == assignment2.Kind();
 
             if (!canBeSimplified)
@@ -188,7 +188,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ExpressionSyntax GetNullCoalescing(ExpressionSyntax whenTrue, ExpressionSyntax whenFalse,
             ExpressionSyntax compared, SemanticModel semanticModel, SyntaxAnnotation annotation)
         {
-            if (EquivalenceChecker.AreEquivalent(whenTrue, compared))
+            if (CSharpEquivalenceChecker.AreEquivalent(whenTrue, compared))
             {
                 var createdExpression = SyntaxFactory.BinaryExpression(
                     SyntaxKind.CoalesceExpression,
@@ -198,7 +198,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return createdExpression;
             }
 
-            if (EquivalenceChecker.AreEquivalent(whenFalse, compared))
+            if (CSharpEquivalenceChecker.AreEquivalent(whenFalse, compared))
             {
                 var createdExpression = SyntaxFactory.BinaryExpression(
                     SyntaxKind.CoalesceExpression,
@@ -242,12 +242,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 var expr1 = arg1.Expression.RemoveParentheses();
                 var expr2 = arg2.Expression.RemoveParentheses();
 
-                if (!EquivalenceChecker.AreEquivalent(expr1, expr2))
+                if (!CSharpEquivalenceChecker.AreEquivalent(expr1, expr2))
                 {
                     ExpressionSyntax createdExpression;
                     if (isNullCoalescing)
                     {
-                        var arg1IsCompared = EquivalenceChecker.AreEquivalent(expr1, compared);
+                        var arg1IsCompared = CSharpEquivalenceChecker.AreEquivalent(expr1, compared);
                         var expression = arg1IsCompared ? expr2 : expr1;
 
                         createdExpression = SyntaxFactory.BinaryExpression(SyntaxKind.CoalesceExpression, compared, expression);

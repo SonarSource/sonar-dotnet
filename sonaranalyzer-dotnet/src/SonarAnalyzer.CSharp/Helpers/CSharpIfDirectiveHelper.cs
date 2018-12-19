@@ -27,7 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal static class IfDirectiveHelper
+    internal static class CSharpIfDirectiveHelper
     {
         /// <summary>
         /// Returns a list of the names of #if [NAME] sections that the specified
@@ -187,6 +187,6 @@ namespace SonarAnalyzer.Helpers
                     CollectedDirectives.Add(node);
                 }
             }
-        }        
+        }
     }
 }

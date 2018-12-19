@@ -51,6 +51,6 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override Location GetReportLocation(ParameterSyntax parameter) =>
             parameter.Default.GetLocation();
 
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
     }
 }
