@@ -155,6 +155,7 @@ namespace SonarAnalyzer.Metrics.VisualBasic
 
                 if (State.HasDirectRecursiveCall)
                 {
+                    State.HasDirectRecursiveCall = false;
                     State.IncreaseComplexity(node.SubOrFunctionStatement.Identifier, 1, "+1 (recursion)");
                 }
             }

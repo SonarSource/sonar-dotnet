@@ -63,6 +63,7 @@ namespace SonarAnalyzer.Metrics.CSharp
 
                 if (State.HasDirectRecursiveCall)
                 {
+                    State.HasDirectRecursiveCall = false;
                     State.IncreaseComplexity(node.Identifier, 1, "+1 (recursion)");
                 }
             }
