@@ -162,36 +162,10 @@
 "location":  {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
 "region":  {
-"startLine":  259,
-"startColumn":  9,
-"endLine":  259,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
-"region":  {
 "startLine":  288,
 "startColumn":  9,
 "endLine":  288,
 "endColumn":  157
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
-"region":  {
-"startLine":  592,
-"startColumn":  29,
-"endLine":  592,
-"endColumn":  51
 }
 }
 }

@@ -40,8 +40,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool StatementShouldBeExcluded(StatementSyntax statement)
         {
-            return //statement == null ||
-                StatementIsBlock(statement) ||
+            return StatementIsBlock(statement) ||
                 StatementIsSingleInLambda(statement);
         }
 
@@ -79,7 +78,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             st is UsingBlockSyntax ||
             st is WithBlockSyntax ||
             st is MethodBaseSyntax ||
-            st is InheritsOrImplementsStatementSyntax;
+            st is InheritsOrImplementsStatementSyntax ||
+            st is SelectBlockSyntax;
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
     }

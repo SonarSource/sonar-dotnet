@@ -71,19 +71,6 @@
 "location":  {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
 "region":  {
-"startLine":  131,
-"startColumn":  25,
-"endLine":  131,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
 "startLine":  143,
 "startColumn":  33,
 "endLine":  143,
@@ -101,19 +88,6 @@
 "startColumn":  33,
 "endLine":  147,
 "endColumn":  324
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
-"region":  {
-"startLine":  200,
-"startColumn":  33,
-"endLine":  200,
-"endColumn":  57
 }
 }
 },

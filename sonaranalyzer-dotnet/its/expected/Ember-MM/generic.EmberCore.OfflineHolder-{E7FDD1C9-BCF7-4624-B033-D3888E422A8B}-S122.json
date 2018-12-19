@@ -6,19 +6,6 @@
 "location":  {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
 "region":  {
-"startLine":  251,
-"startColumn":  9,
-"endLine":  251,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
-"region":  {
 "startLine":  404,
 "startColumn":  9,
 "endLine":  404,

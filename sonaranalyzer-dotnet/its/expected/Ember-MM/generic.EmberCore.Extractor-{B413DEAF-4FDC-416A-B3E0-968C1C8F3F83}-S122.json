@@ -64,19 +64,6 @@
 "endColumn":  44
 }
 }
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\Module.Extractor.vb",
-"region":  {
-"startLine":  114,
-"startColumn":  9,
-"endLine":  114,
-"endColumn":  26
-}
-}
 }
 ]
 }

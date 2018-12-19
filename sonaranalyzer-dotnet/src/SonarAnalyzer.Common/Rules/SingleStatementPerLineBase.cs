@@ -44,7 +44,10 @@ namespace SonarAnalyzer.Rules.Common
                 GeneratedCodeRecognizer,
                 c =>
                 {
-                    var statements = GetStatements(c.Tree);
+                    var statements = c.Tree.GetRoot()
+                        .DescendantNodesAndSelf()
+                        .OfType<TStatementSyntax>()
+                        .Where(st => !StatementShouldBeExcluded(st));
 
                     var statementsByLines = MultiValueDictionary<int, TStatementSyntax>.Create<HashSet<TStatementSyntax>>();
                     foreach (var statement in statements)
@@ -60,29 +63,7 @@ namespace SonarAnalyzer.Rules.Common
                     }
                 });
         }
-
-        private IEnumerable<TStatementSyntax> GetStatements(SyntaxTree tree)
-        {
-            return tree.GetRoot()
-                    .DescendantNodesAndSelf()
-                    .OfType<TStatementSyntax>()
-                    .Where(st => !StatementShouldBeExcluded(st));
-        }
-
         protected abstract bool StatementShouldBeExcluded(TStatementSyntax statement);
-
-        private TStatementSyntax GetContainingStatement(SyntaxToken token)
-        {
-            var node = token.Parent;
-            var statement = node as TStatementSyntax;
-            while (node != null &&
-                (statement == null || !StatementShouldBeExcluded(statement)))
-            {
-                node = node.Parent;
-                statement = node as TStatementSyntax;
-            }
-            return statement;
-        }
 
         private static Location CalculateLocationForLine(TextLine line, SyntaxTree tree,
             ICollection<TStatementSyntax> statements)
@@ -98,21 +79,28 @@ namespace SonarAnalyzer.Rules.Common
         private void AddStatementToLineCache(TStatementSyntax statement, MultiValueDictionary<int, TStatementSyntax> statementsByLines)
         {
             var startLine = statement.GetLocation().GetLineSpan().StartLinePosition.Line;
-            AddStatementWithLine(statement, startLine, statementsByLines);
+            statementsByLines.AddWithKey(startLine, statement);
 
             var lastToken = statement.GetLastToken();
             var tokenBelonsTo = GetContainingStatement(lastToken);
             if (tokenBelonsTo == statement)
             {
                 var endLine = statement.GetLocation().GetLineSpan().EndLinePosition.Line;
-                AddStatementWithLine(statement, endLine, statementsByLines);
+                statementsByLines.AddWithKey(endLine, statement);
             }
         }
 
-        private static void AddStatementWithLine(TStatementSyntax statement, int line,
-            MultiValueDictionary<int, TStatementSyntax> statementsByLines)
+        private TStatementSyntax GetContainingStatement(SyntaxToken token)
         {
-            statementsByLines.AddWithKey(line, statement);
+            var node = token.Parent;
+            var statement = node as TStatementSyntax;
+            while (node != null &&
+                (statement == null || !StatementShouldBeExcluded(statement)))
+            {
+                node = node.Parent;
+                statement = node as TStatementSyntax;
+            }
+            return statement;
         }
     }
 }
