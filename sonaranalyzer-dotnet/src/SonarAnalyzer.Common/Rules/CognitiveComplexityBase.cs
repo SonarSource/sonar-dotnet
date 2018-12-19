@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules
         public abstract DiagnosticDescriptor Rule { get; }
 
         protected void CheckComplexity<TSyntax>(SyntaxNodeAnalysisContext context, Func<TSyntax, SyntaxNode> nodeSelector,
-                Func<TSyntax, Location> getLocationToReport, Func<ICognitiveComplexityWalker> walkerFactory,
+                Func<TSyntax, Location> getLocationToReport, Func<SyntaxNode, CognitiveComplexity> getComplexity,
                 string declarationType, int threshold)
             where TSyntax : SyntaxNode
         {
@@ -53,23 +53,17 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            var cognitiveWalker = walkerFactory();
-            cognitiveWalker.Walk(nodeToAnalyze);
-            if (cognitiveWalker.NestingLevel != 0)
-            {
-                throw new InvalidOperationException("There is a problem with the cognitive complexity walker. " +
-                    $"Expecting ending nesting to be '0' got '{cognitiveWalker.NestingLevel}'");
-            }
+            var metric = getComplexity(nodeToAnalyze);
 
-            if (cognitiveWalker.Complexity > Threshold)
+            if (metric.Complexity > Threshold)
             {
                 context.ReportDiagnosticWhenActive(
                     Diagnostic.Create(
                         Rule,
                         getLocationToReport(syntax),
-                        cognitiveWalker.IncrementLocations.ToAdditionalLocations(),
-                        cognitiveWalker.IncrementLocations.ToProperties(),
-                        new object[] { declarationType, cognitiveWalker.Complexity, threshold }));
+                        metric.Locations.ToAdditionalLocations(),
+                        metric.Locations.ToProperties(),
+                        new object[] { declarationType, metric.Complexity, threshold }));
             }
         }
     }

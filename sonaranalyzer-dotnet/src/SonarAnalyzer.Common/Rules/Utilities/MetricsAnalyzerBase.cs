@@ -64,8 +64,8 @@ namespace SonarAnalyzer.Rules
                 PublicUndocumentedApiCount = metrics.PublicUndocumentedApiCount,
 
                 Complexity = complexity,
-                ComplexityInClasses = metrics.ClassNodes.Sum(metrics.GetComplexity),
-                ComplexityInFunctions = metrics.FunctionNodes.Sum(metrics.GetComplexity),
+                ComplexityInClasses = metrics.ClassNodes.Sum(metrics.GetCyclomaticComplexity),
+                ComplexityInFunctions = metrics.FunctionNodes.Sum(metrics.GetCyclomaticComplexity),
 
                 CognitiveComplexity = metrics.CognitiveComplexity,
 

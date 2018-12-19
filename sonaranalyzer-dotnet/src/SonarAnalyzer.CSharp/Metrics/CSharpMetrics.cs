@@ -19,7 +19,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -33,8 +32,8 @@ namespace SonarAnalyzer.Metrics.CSharp
 {
     public class CSharpMetrics : MetricsBase
     {
-        private readonly Lazy<ImmutableArray<SyntaxNode>> publicApiNodes;
         private readonly Lazy<ImmutableArray<int>> lazyExecutableLines;
+        private readonly Lazy<ImmutableArray<SyntaxNode>> publicApiNodes;
 
         public CSharpMetrics(SyntaxTree tree, SemanticModel semanticModel)
             : base(tree)
@@ -52,11 +51,28 @@ namespace SonarAnalyzer.Metrics.CSharp
         public override ImmutableArray<int> ExecutableLines =>
             this.lazyExecutableLines.Value;
 
-        protected override bool IsEndOfFile(SyntaxToken token) =>
-            token.IsKind(SyntaxKind.EndOfFileToken);
+        protected override ImmutableArray<SyntaxNode> PublicApiNodes =>
+            publicApiNodes.Value;
 
-        protected override bool IsNoneToken(SyntaxToken token) =>
-            token.IsKind(SyntaxKind.None);
+        public override int GetCognitiveComplexity(SyntaxNode node) =>
+            CSharpCognitiveComplexityMetric.GetComplexity(node).Complexity;
+
+        public override int GetCyclomaticComplexity(SyntaxNode node) =>
+            CSharpCyclomaticComplexityMetric.GetComplexity(node).Complexity;
+
+        protected override bool IsClass(SyntaxNode node)
+        {
+            switch (node.Kind())
+            {
+                case SyntaxKind.ClassDeclaration:
+                case SyntaxKind.StructDeclaration:
+                case SyntaxKind.InterfaceDeclaration:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
 
         protected override bool IsCommentTrivia(SyntaxTrivia trivia)
         {
@@ -93,57 +109,8 @@ namespace SonarAnalyzer.Metrics.CSharp
             }
         }
 
-        protected override bool IsClass(SyntaxNode node)
-        {
-            switch (node.Kind())
-            {
-                case SyntaxKind.ClassDeclaration:
-                case SyntaxKind.StructDeclaration:
-                case SyntaxKind.InterfaceDeclaration:
-                    return true;
-
-                default:
-                    return false;
-            }
-        }
-
-        protected override bool IsStatement(SyntaxNode node)
-        {
-            switch (node.Kind())
-            {
-                case SyntaxKind.BreakStatement:
-                case SyntaxKind.CheckedStatement:
-                case SyntaxKind.ContinueStatement:
-                case SyntaxKind.DoStatement:
-                case SyntaxKind.EmptyStatement:
-                case SyntaxKind.ExpressionStatement:
-                case SyntaxKind.FixedStatement:
-                case SyntaxKind.ForEachStatement:
-                case SyntaxKind.ForStatement:
-                case SyntaxKind.GlobalStatement:
-                case SyntaxKind.GotoCaseStatement:
-                case SyntaxKind.GotoDefaultStatement:
-                case SyntaxKind.GotoStatement:
-                case SyntaxKind.IfStatement:
-                case SyntaxKind.LabeledStatement:
-                case SyntaxKind.LocalDeclarationStatement:
-                case SyntaxKind.LockStatement:
-                case SyntaxKind.ReturnStatement:
-                case SyntaxKind.SwitchStatement:
-                case SyntaxKind.ThrowStatement:
-                case SyntaxKind.TryStatement:
-                case SyntaxKind.UncheckedStatement:
-                case SyntaxKind.UnsafeStatement:
-                case SyntaxKind.UsingStatement:
-                case SyntaxKind.WhileStatement:
-                case SyntaxKind.YieldBreakStatement:
-                case SyntaxKind.YieldReturnStatement:
-                    return true;
-
-                default:
-                    return false;
-            }
-        }
+        protected override bool IsEndOfFile(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.EndOfFileToken);
 
         protected override bool IsFunction(SyntaxNode node)
         {
@@ -192,22 +159,45 @@ namespace SonarAnalyzer.Metrics.CSharp
             }
         }
 
-        protected override ImmutableArray<SyntaxNode> PublicApiNodes =>
-            publicApiNodes.Value;
+        protected override bool IsNoneToken(SyntaxToken token) =>
+                    token.IsKind(SyntaxKind.None);
 
-        public override int GetComplexity(SyntaxNode node)
+        protected override bool IsStatement(SyntaxNode node)
         {
-            var walker = new CSharpCyclomaticComplexityWalker();
-            walker.Walk(node);
-            return walker.CyclomaticComplexity;
-        }
+            switch (node.Kind())
+            {
+                case SyntaxKind.BreakStatement:
+                case SyntaxKind.CheckedStatement:
+                case SyntaxKind.ContinueStatement:
+                case SyntaxKind.DoStatement:
+                case SyntaxKind.EmptyStatement:
+                case SyntaxKind.ExpressionStatement:
+                case SyntaxKind.FixedStatement:
+                case SyntaxKind.ForEachStatement:
+                case SyntaxKind.ForStatement:
+                case SyntaxKind.GlobalStatement:
+                case SyntaxKind.GotoCaseStatement:
+                case SyntaxKind.GotoDefaultStatement:
+                case SyntaxKind.GotoStatement:
+                case SyntaxKind.IfStatement:
+                case SyntaxKind.LabeledStatement:
+                case SyntaxKind.LocalDeclarationStatement:
+                case SyntaxKind.LockStatement:
+                case SyntaxKind.ReturnStatement:
+                case SyntaxKind.SwitchStatement:
+                case SyntaxKind.ThrowStatement:
+                case SyntaxKind.TryStatement:
+                case SyntaxKind.UncheckedStatement:
+                case SyntaxKind.UnsafeStatement:
+                case SyntaxKind.UsingStatement:
+                case SyntaxKind.WhileStatement:
+                case SyntaxKind.YieldBreakStatement:
+                case SyntaxKind.YieldReturnStatement:
+                    return true;
 
-        public override int GetCognitiveComplexity(SyntaxNode node)
-        {
-            var walker = new CSharpCognitiveComplexityWalker();
-            walker.Walk(node);
-            // nesting level should be 0 at the end of the analysis, otherwise there is a bug
-            return walker.NestingLevel == 0 ? walker.Complexity : -1;
+                default:
+                    return false;
+            }
         }
     }
 }

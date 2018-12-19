@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -28,26 +29,26 @@ using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Metrics.CSharp
 {
-    public sealed class CSharpCognitiveComplexityWalker : CognitiveComplexityWalkerBase<MethodDeclarationSyntax>
+    public static class CSharpCognitiveComplexityMetric
     {
-        public override bool Visit(SyntaxNode node)
+        public static CognitiveComplexity GetComplexity(SyntaxNode node)
         {
-            return new InnerWalker(this).SafeVisit(node);
+            var walker = new CognitiveWalker();
+            walker.SafeVisit(node);
+
+            return new CognitiveComplexity(walker.State.Complexity, walker.State.IncrementLocations.ToImmutableArray());
         }
 
-        private class InnerWalker : CSharpSyntaxWalker
+        private class CognitiveWalker : CSharpSyntaxWalker
         {
-            private readonly CSharpCognitiveComplexityWalker parent;
-            public InnerWalker(CSharpCognitiveComplexityWalker parent)
-            {
-                this.parent = parent;
-            }
+            public CognitiveComplexityWalkerState<MethodDeclarationSyntax> State { get; }
+                = new CognitiveComplexityWalkerState<MethodDeclarationSyntax>();
 
             public override void Visit(SyntaxNode node)
             {
                 if (node.IsKind(SyntaxKindEx.LocalFunctionStatement))
                 {
-                    parent.VisitWithNesting(node, base.Visit);
+                    State.VisitWithNesting(node, base.Visit);
                 }
                 else
                 {
@@ -57,12 +58,12 @@ namespace SonarAnalyzer.Metrics.CSharp
 
             public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
             {
-                parent.currentMethod = node;
+                State.CurrentMethod = node;
                 base.VisitMethodDeclaration(node);
 
-                if (parent.hasDirectRecursiveCall)
+                if (State.HasDirectRecursiveCall)
                 {
-                    parent.IncreaseComplexity(node.Identifier, 1, "+1 (recursion)");
+                    State.IncreaseComplexity(node.Identifier, 1, "+1 (recursion)");
                 }
             }
 
@@ -74,69 +75,69 @@ namespace SonarAnalyzer.Metrics.CSharp
                 }
                 else
                 {
-                    parent.IncreaseComplexityByNestingPlusOne(node.IfKeyword);
-                    parent.VisitWithNesting(node, base.VisitIfStatement);
+                    State.IncreaseComplexityByNestingPlusOne(node.IfKeyword);
+                    State.VisitWithNesting(node, base.VisitIfStatement);
                 }
             }
 
             public override void VisitElseClause(ElseClauseSyntax node)
             {
-                parent.IncreaseComplexityByOne(node.ElseKeyword);
+                State.IncreaseComplexityByOne(node.ElseKeyword);
                 base.VisitElseClause(node);
             }
 
             public override void VisitConditionalExpression(ConditionalExpressionSyntax node)
             {
-                parent.IncreaseComplexityByNestingPlusOne(node.QuestionToken);
-                parent.VisitWithNesting(node, base.VisitConditionalExpression);
+                State.IncreaseComplexityByNestingPlusOne(node.QuestionToken);
+                State.VisitWithNesting(node, base.VisitConditionalExpression);
             }
 
             public override void VisitSwitchStatement(SwitchStatementSyntax node)
             {
-                parent.IncreaseComplexityByNestingPlusOne(node.SwitchKeyword);
-                parent.VisitWithNesting(node, base.VisitSwitchStatement);
+                State.IncreaseComplexityByNestingPlusOne(node.SwitchKeyword);
+                State.VisitWithNesting(node, base.VisitSwitchStatement);
             }
 
             public override void VisitForStatement(ForStatementSyntax node)
             {
-                parent.IncreaseComplexityByNestingPlusOne(node.ForKeyword);
-                parent.VisitWithNesting(node, base.VisitForStatement);
+                State.IncreaseComplexityByNestingPlusOne(node.ForKeyword);
+                State.VisitWithNesting(node, base.VisitForStatement);
             }
 
             public override void VisitWhileStatement(WhileStatementSyntax node)
             {
-                parent.IncreaseComplexityByNestingPlusOne(node.WhileKeyword);
-                parent.VisitWithNesting(node, base.VisitWhileStatement);
+                State.IncreaseComplexityByNestingPlusOne(node.WhileKeyword);
+                State.VisitWithNesting(node, base.VisitWhileStatement);
             }
 
             public override void VisitDoStatement(DoStatementSyntax node)
             {
-                parent.IncreaseComplexityByNestingPlusOne(node.DoKeyword);
-                parent.VisitWithNesting(node, base.VisitDoStatement);
+                State.IncreaseComplexityByNestingPlusOne(node.DoKeyword);
+                State.VisitWithNesting(node, base.VisitDoStatement);
             }
 
             public override void VisitForEachStatement(ForEachStatementSyntax node)
             {
-                parent.IncreaseComplexityByNestingPlusOne(node.ForEachKeyword);
-                parent.VisitWithNesting(node, base.VisitForEachStatement);
+                State.IncreaseComplexityByNestingPlusOne(node.ForEachKeyword);
+                State.VisitWithNesting(node, base.VisitForEachStatement);
             }
 
             public override void VisitCatchClause(CatchClauseSyntax node)
             {
-                parent.IncreaseComplexityByNestingPlusOne(node.CatchKeyword);
-                parent.VisitWithNesting(node, base.VisitCatchClause);
+                State.IncreaseComplexityByNestingPlusOne(node.CatchKeyword);
+                State.VisitWithNesting(node, base.VisitCatchClause);
             }
 
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
                 var identifierNameSyntax = node.Expression as IdentifierNameSyntax;
-                if (parent.currentMethod != null &&
+                if (State.CurrentMethod != null &&
                     identifierNameSyntax != null &&
-                    node.HasExactlyNArguments(parent.currentMethod.ParameterList.Parameters.Count) &&
+                    node.HasExactlyNArguments(State.CurrentMethod.ParameterList.Parameters.Count) &&
                     string.Equals(identifierNameSyntax.Identifier.ValueText,
-                        parent.currentMethod.Identifier.ValueText, StringComparison.Ordinal))
+                        State.CurrentMethod.Identifier.ValueText, StringComparison.Ordinal))
                 {
-                    parent.hasDirectRecursiveCall = true;
+                    State.HasDirectRecursiveCall = true;
                 }
 
                 base.VisitInvocationExpression(node);
@@ -145,20 +146,20 @@ namespace SonarAnalyzer.Metrics.CSharp
             public override void VisitBinaryExpression(BinaryExpressionSyntax node)
             {
                 var nodeKind = node.Kind();
-                if (!parent.logicalOperationsToIgnore.Contains(node) &&
+                if (!State.LogicalOperationsToIgnore.Contains(node) &&
                     (nodeKind == SyntaxKind.LogicalAndExpression ||
                      nodeKind == SyntaxKind.LogicalOrExpression))
                 {
                     var left = node.Left.RemoveParentheses();
                     if (!left.IsKind(nodeKind))
                     {
-                        parent.IncreaseComplexityByOne(node.OperatorToken);
+                        State.IncreaseComplexityByOne(node.OperatorToken);
                     }
 
                     var right = node.Right.RemoveParentheses();
                     if (right.IsKind(nodeKind))
                     {
-                        parent.logicalOperationsToIgnore.Add(right);
+                        State.LogicalOperationsToIgnore.Add(right);
                     }
                 }
 
@@ -167,18 +168,18 @@ namespace SonarAnalyzer.Metrics.CSharp
 
             public override void VisitGotoStatement(GotoStatementSyntax node)
             {
-                parent.IncreaseComplexityByNestingPlusOne(node.GotoKeyword);
+                State.IncreaseComplexityByNestingPlusOne(node.GotoKeyword);
                 base.VisitGotoStatement(node);
             }
 
             public override void VisitSimpleLambdaExpression(SimpleLambdaExpressionSyntax node)
             {
-                parent.VisitWithNesting(node, base.VisitSimpleLambdaExpression);
+                State.VisitWithNesting(node, base.VisitSimpleLambdaExpression);
             }
 
             public override void VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node)
             {
-                parent.VisitWithNesting(node, base.VisitParenthesizedLambdaExpression);
+                State.VisitWithNesting(node, base.VisitParenthesizedLambdaExpression);
             }
         }
     }

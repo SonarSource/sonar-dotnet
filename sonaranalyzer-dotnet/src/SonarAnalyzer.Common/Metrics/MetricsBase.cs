@@ -163,11 +163,11 @@ namespace SonarAnalyzer.Common
 
         #region Complexity
 
-        public int Complexity => GetComplexity(this.tree.GetRoot());
+        public int Complexity => GetCyclomaticComplexity(this.tree.GetRoot());
 
         public int CognitiveComplexity => GetCognitiveComplexity(this.tree.GetRoot());
 
-        public abstract int GetComplexity(SyntaxNode node);
+        public abstract int GetCyclomaticComplexity(SyntaxNode node);
 
         public abstract int GetCognitiveComplexity(SyntaxNode node);
 
@@ -178,7 +178,7 @@ namespace SonarAnalyzer.Common
                 var distribution = new Distribution(Distribution.FunctionComplexityRange);
                 foreach (var node in FunctionNodes)
                 {
-                    distribution.Add(GetComplexity(node));
+                    distribution.Add(GetCyclomaticComplexity(node));
                 }
                 return distribution;
             }

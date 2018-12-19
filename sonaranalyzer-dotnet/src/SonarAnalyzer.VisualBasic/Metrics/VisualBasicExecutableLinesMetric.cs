@@ -59,6 +59,17 @@ namespace SonarAnalyzer.Metrics.VisualBasic
                 }
             }
 
+            private static bool HasExcludedAttribute(AttributeSyntax attribute)
+            {
+                var attributeName = attribute?.Name?.ToString() ?? string.Empty;
+
+                // Check the attribute name without the attribute suffix OR the full name of the attribute
+                return attributeName.EndsWith(
+                        KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute.ShortName.Substring(0,
+                            KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute.ShortName.Length - 9), StringComparison.Ordinal) ||
+                    attributeName.EndsWith(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute.ShortName, StringComparison.Ordinal);
+            }
+
             private bool FindExecutableLines(SyntaxNode node)
             {
                 switch (node.Kind())
@@ -171,17 +182,6 @@ namespace SonarAnalyzer.Metrics.VisualBasic
                     default:
                         return hasExcludeFromCodeCoverageAttribute;
                 }
-            }
-
-            private static bool HasExcludedAttribute(AttributeSyntax attribute)
-            {
-                var attributeName = attribute?.Name?.ToString() ?? string.Empty;
-
-                // Check the attribute name without the attribute suffix OR the full name of the attribute
-                return attributeName.EndsWith(
-                        KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute.ShortName.Substring(0,
-                            KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute.ShortName.Length - 9), StringComparison.Ordinal) ||
-                    attributeName.EndsWith(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute.ShortName, StringComparison.Ordinal);
             }
         }
     }

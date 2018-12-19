@@ -89,25 +89,22 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var node = (TSyntax)context.Node;
 
-            var walker = new CSharpCyclomaticComplexityWalker();
-
             var nodeToCheck = getNodeToCheck(node);
             if (nodeToCheck == null)
             {
                 return;
             }
 
-            walker.Walk(nodeToCheck);
-
-            if (walker.CyclomaticComplexity > Maximum)
+            var complexityMetric = CSharpCyclomaticComplexityMetric.GetComplexity(nodeToCheck);
+            if (complexityMetric.Complexity > Maximum)
             {
                 context.ReportDiagnosticWhenActive(
                     Diagnostic.Create(
                         rule,
                         getLocation(node),
-                        walker.IncrementLocations.ToAdditionalLocations(),
-                        walker.IncrementLocations.ToProperties(),
-                        new object[] { Maximum, walker.CyclomaticComplexity, declarationType}));
+                        complexityMetric.Locations.ToAdditionalLocations(),
+                        complexityMetric.Locations.ToProperties(),
+                        new object[] { Maximum, complexityMetric.Complexity, declarationType}));
             }
         }
     }
