@@ -23,15 +23,16 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Metrics.VisualBasic
 {
     public sealed class VisualBasicCognitiveComplexityWalker : CognitiveComplexityWalkerBase<MethodStatementSyntax>
     {
-        public override void Visit(SyntaxNode node)
+        public override bool Visit(SyntaxNode node)
         {
-            new InnerWalker(this).Visit(node);
+            return new InnerWalker(this).SafeVisit(node);
         }
 
         private class InnerWalker : VisualBasicSyntaxWalker

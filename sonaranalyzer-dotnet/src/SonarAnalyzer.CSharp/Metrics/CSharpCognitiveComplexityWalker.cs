@@ -30,9 +30,9 @@ namespace SonarAnalyzer.Metrics.CSharp
 {
     public sealed class CSharpCognitiveComplexityWalker : CognitiveComplexityWalkerBase<MethodDeclarationSyntax>
     {
-        public override void Visit(SyntaxNode node)
+        public override bool Visit(SyntaxNode node)
         {
-            new InnerWalker(this).Visit(node);
+            return new InnerWalker(this).SafeVisit(node);
         }
 
         private class InnerWalker : CSharpSyntaxWalker

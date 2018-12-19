@@ -80,7 +80,10 @@ namespace SonarAnalyzer.Rules.CSharp
                             // Collect symbols of private members that could potentially be removed
                             var removableSymbolsCollector = new CSharpRemovableSymbolCollector(c.Compilation.GetSemanticModel);
 
-                            VisitDeclaringReferences(namedType, removableSymbolsCollector);
+                            if (!VisitDeclaringReferences(namedType, removableSymbolsCollector))
+                            {
+                                return;
+                            }
 
                             // Keep the removable internal types for when the compilation ends
                             foreach (var internalSymbol in removableSymbolsCollector.InternalSymbols.OfType<INamedTypeSymbol>())
@@ -92,7 +95,10 @@ namespace SonarAnalyzer.Rules.CSharp
                                 c.Compilation.GetSemanticModel,
                                 removableSymbolsCollector.PrivateSymbols.Select(s => s.Name).ToHashSet());
 
-                            VisitDeclaringReferences(namedType, usageCollector);
+                            if (!VisitDeclaringReferences(namedType, usageCollector))
+                            {
+                                return;
+                            }
 
                             var diagnostics = GetDiagnostics(usageCollector, removableSymbolsCollector.PrivateSymbols, "private",
                                 removableSymbolsCollector.FieldLikeSymbols);
@@ -122,7 +128,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
                             foreach (var symbol in allNamedTypes)
                             {
-                                VisitDeclaringReferences(symbol, usageCollector);
+                                if (!VisitDeclaringReferences(symbol, usageCollector))
+                                {
+                                    return;
+                                }
                             }
 
                             var diagnostics = GetDiagnostics(usageCollector, removableInternalTypes.ToHashSet(), "internal",
@@ -272,12 +281,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? symbol.ContainingType.Name
                 : symbol.Name;
 
-        private static void VisitDeclaringReferences(INamedTypeSymbol namedType, CSharpSyntaxVisitor visitor)
+        private static bool VisitDeclaringReferences(INamedTypeSymbol namedType, CSharpSyntaxWalker visitor)
         {
             foreach (var reference in namedType.DeclaringSyntaxReferences)
             {
-                visitor.Visit(reference.GetSyntax());
+                if (!visitor.SafeVisit(reference.GetSyntax()))
+                {
+                    return false;
+                }
             }
+
+            return true;
         }
 
         private static Diagnostic CreateDiagnostic(SyntaxNode syntaxNode, ISymbol symbol, string accessibility)

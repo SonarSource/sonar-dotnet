@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             public override void Visit()
             {
                 var vbWalker = new VbLoopwalker(this);
-                vbWalker.Visit(this.rootExpression);
+                vbWalker.SafeVisit(this.rootExpression);
             }
 
             private class VbLoopwalker : VisualBasicSyntaxWalker
