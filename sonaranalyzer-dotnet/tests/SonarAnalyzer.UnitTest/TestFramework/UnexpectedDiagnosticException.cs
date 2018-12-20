@@ -64,6 +64,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             string.Format(stackTraceFormat, testCasePath, testCaseLine);
 
         private static string GetTestCasePath(string path) =>
-            Path.GetFullPath(Path.Combine(@"..\..\TestCases", path));
+            Path.GetFullPath(Path.Combine(@"..\..\..\TestCases", path));
     }
 }
