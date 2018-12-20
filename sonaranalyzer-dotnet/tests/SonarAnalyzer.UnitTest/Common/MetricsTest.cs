@@ -20,6 +20,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using FluentAssertions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -589,10 +591,10 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         public void CognitiveComplexity()
         {
             var csharpText = System.IO.File.ReadAllText(@"TestCases\CognitiveComplexity.cs");
-            CognitiveComplexity(AnalyzerLanguage.CSharp, csharpText).Should().Be(127);
+            CognitiveComplexity(AnalyzerLanguage.CSharp, csharpText).Should().Be(103);
 
             var visualBasicCode = System.IO.File.ReadAllText(@"TestCases\CognitiveComplexity.vb");
-            CognitiveComplexity(AnalyzerLanguage.VisualBasic, visualBasicCode).Should().Be(139);
+            CognitiveComplexity(AnalyzerLanguage.VisualBasic, visualBasicCode).Should().Be(119);
         }
 
         private static int CognitiveComplexity(AnalyzerLanguage language, string text) =>
