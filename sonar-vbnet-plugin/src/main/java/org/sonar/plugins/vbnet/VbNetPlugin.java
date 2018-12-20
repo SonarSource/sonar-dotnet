@@ -32,6 +32,7 @@ import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
+import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
 public class VbNetPlugin implements Plugin {
@@ -72,7 +73,7 @@ public class VbNetPlugin implements Plugin {
     context.addExtensions(new VbNetPropertyDefinitions(context.getRuntime()).create());
     context.addExtension(new VbNetSonarWayProfile(context.getRuntime()));
     context.addExtensions(new CodeCoverageProvider(METADATA).extensions());
-    context.addExtensions(VbNetUnitTestResultsProvider.extensions());
+    context.addExtensions(new UnitTestResultsProvider(METADATA).extensions());
     context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties(METADATA));
   }
 

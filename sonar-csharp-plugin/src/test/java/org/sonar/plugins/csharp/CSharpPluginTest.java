@@ -38,6 +38,7 @@ import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
+import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -78,7 +79,7 @@ public class CSharpPluginTest {
       expectedExtensions.length
         + 1 // CSharpSonarWayProfile
         + new CodeCoverageProvider(CSharpPlugin.METADATA).extensions().size()
-        + CSharpUnitTestResultsProvider.extensions().size()
+        + new UnitTestResultsProvider(CSharpPlugin.METADATA).extensions().size()
         + RoslynProfileExporter.sonarLintRepositoryProperties(CSharpPlugin.METADATA).size()
         + new CSharpPropertyDefinitions(sonarRuntime).create().size());
   }

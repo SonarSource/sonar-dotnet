@@ -1,5 +1,5 @@
 /*
- * SonarC#
+ * SonarSource :: .NET :: Shared library
  * Copyright (C) 2014-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
@@ -17,35 +17,49 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.csharp;
+package org.sonarsource.dotnet.shared.plugins;
 
 import com.google.common.collect.ImmutableSet;
 import java.util.List;
 import java.util.Set;
 import org.junit.Test;
-import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.config.PropertyDefinition;
-import org.sonar.api.config.internal.MapSettings;
-import org.sonar.plugins.csharp.CSharpUnitTestResultsProvider.CSharpUnitTestResultsAggregator;
-import org.sonar.plugins.csharp.CSharpUnitTestResultsProvider.CSharpUnitTestResultsImportSensor;
+import org.sonar.plugins.dotnet.tests.UnitTestResultsImportSensor;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-public class CSharpUnitTestResultsProviderTest {
+public class UnitTestResultsProviderTest {
 
   @Test
-  public void test() {
-    assertThat(nonProperties(CSharpUnitTestResultsProvider.extensions())).containsOnly(
-      CSharpUnitTestResultsAggregator.class,
-      CSharpUnitTestResultsImportSensor.class);
-    assertThat(propertyKeys(CSharpUnitTestResultsProvider.extensions())).containsOnly(
-      "sonar.cs.vstest.reportsPaths",
-      "sonar.cs.nunit.reportsPaths");
+  public void vbnet() {
+    DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
+    when(pluginMetadata.languageKey()).thenReturn("vbnet");
+    UnitTestResultsProvider provider = new UnitTestResultsProvider(pluginMetadata);
+    List extensions = provider.extensions();
+    assertThat(nonProperties(extensions)).containsOnly(
+      provider,
+      UnitTestResultsProvider.DotNetUnitTestResultsAggregator.class,
+      UnitTestResultsImportSensor.class);
+    assertThat(propertyKeys(extensions)).containsOnly(
+      "sonar.vbnet.vstest.reportsPaths",
+      "sonar.vbnet.nunit.reportsPaths");
   }
 
   @Test
-  public void createInstance_CSharpUnitTestResultsImportSensor() {
-    new CSharpUnitTestResultsImportSensor(new CSharpUnitTestResultsAggregator(new MapSettings().asConfig()), ProjectDefinition.create());
+  public void csharp() {
+    DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
+    when(pluginMetadata.languageKey()).thenReturn("cs");
+    UnitTestResultsProvider provider = new UnitTestResultsProvider(pluginMetadata);
+    List extensions = provider.extensions();
+    assertThat(nonProperties(extensions)).containsOnly(
+      provider,
+      UnitTestResultsProvider.DotNetUnitTestResultsAggregator.class,
+      UnitTestResultsImportSensor.class);
+    assertThat(propertyKeys(extensions)).containsOnly(
+      "sonar.cs.vstest.reportsPaths",
+      "sonar.cs.nunit.reportsPaths");
   }
 
   private static Set<Object> nonProperties(List extensions) {

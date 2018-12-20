@@ -1,5 +1,5 @@
 /*
- * SonarC#
+ * SonarSource :: .NET :: Shared library
  * Copyright (C) 2014-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
@@ -17,11 +17,11 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.csharp;
+package org.sonarsource.dotnet.shared.plugins;
 
 import java.util.Arrays;
 import java.util.List;
-import org.sonar.api.batch.bootstrap.ProjectDefinition;
+import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
@@ -29,55 +29,51 @@ import org.sonar.plugins.dotnet.tests.UnitTestConfiguration;
 import org.sonar.plugins.dotnet.tests.UnitTestResultsAggregator;
 import org.sonar.plugins.dotnet.tests.UnitTestResultsImportSensor;
 
-public class CSharpUnitTestResultsProvider {
+@ScannerSide
+public class UnitTestResultsProvider {
 
-  private static final String CATEGORY = "C#";
   private static final String SUBCATEGORY = "Unit Tests";
 
-  private static final String VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY = "sonar.cs.vstest.reportsPaths";
-  private static final String NUNIT_TEST_RESULTS_PROPERTY_KEY = "sonar.cs.nunit.reportsPaths";
-  private static final String XUNIT_TEST_RESULTS_PROPERTY_KEY = "sonar.cs.xunit.reportsPaths";
+  private final DotNetPluginMetadata pluginMetadata;
+  private final UnitTestConfiguration unitTestConfiguration;
 
-  private static final UnitTestConfiguration UNIT_TEST_CONF = new UnitTestConfiguration(VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY, NUNIT_TEST_RESULTS_PROPERTY_KEY,
-    XUNIT_TEST_RESULTS_PROPERTY_KEY);
-
-  private CSharpUnitTestResultsProvider() {
+  public UnitTestResultsProvider(DotNetPluginMetadata pluginMetadata) {
+    this.pluginMetadata = pluginMetadata;
+    this.unitTestConfiguration = new UnitTestConfiguration(propertyKey("vstest"), propertyKey("nunit"), propertyKey("xunit"));
   }
 
-  public static List extensions() {
+  private String propertyKey(String testType) {
+    return "sonar." + pluginMetadata.languageKey() + "." + testType + ".reportsPaths";
+  }
+
+  public List extensions() {
+    String category = pluginMetadata.shortLanguageName();
     return Arrays.asList(
-      CSharpUnitTestResultsAggregator.class,
-      CSharpUnitTestResultsImportSensor.class,
-      PropertyDefinition.builder(VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY)
+      this,
+      DotNetUnitTestResultsAggregator.class,
+      UnitTestResultsImportSensor.class,
+      PropertyDefinition.builder(unitTestConfiguration.visualStudioTestResultsFilePropertyKey())
         .name("Visual Studio Test Reports Paths")
         .description("Example: \"report.trx\", \"report1.trx,report2.trx\" or \"C:/report.trx\"")
-        .category(CATEGORY)
+        .category(category)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .multiValues(true)
         .build(),
-      PropertyDefinition.builder(NUNIT_TEST_RESULTS_PROPERTY_KEY)
+      PropertyDefinition.builder(unitTestConfiguration.nunitTestResultsFilePropertyKey())
         .name("NUnit Test Reports Paths")
         .description("Example: \"TestResult.xml\", \"TestResult1.xml,TestResult2.xml\" or \"C:/TestResult.xml\"")
-        .category(CATEGORY)
+        .category(category)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .multiValues(true)
         .build());
   }
 
-  public static class CSharpUnitTestResultsAggregator extends UnitTestResultsAggregator {
+  public class DotNetUnitTestResultsAggregator extends UnitTestResultsAggregator {
 
-    public CSharpUnitTestResultsAggregator(Configuration configuration) {
-      super(UNIT_TEST_CONF, configuration);
-    }
-
-  }
-
-  public static class CSharpUnitTestResultsImportSensor extends UnitTestResultsImportSensor {
-
-    public CSharpUnitTestResultsImportSensor(CSharpUnitTestResultsAggregator unitTestResultsAggregator, ProjectDefinition projectDef) {
-      super(unitTestResultsAggregator, projectDef, CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME);
+    public DotNetUnitTestResultsAggregator(Configuration configuration) {
+      super(unitTestConfiguration, configuration);
     }
 
   }
