@@ -28,6 +28,7 @@ import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
+import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
@@ -76,7 +77,7 @@ public class VbNetPluginTest {
     assertThat(extensions).hasSize(
       expectedExtensions.length
         + 1 // VbNetSonarWayProfile
-        + VbNetCodeCoverageProvider.extensions().size()
+        + new CodeCoverageProvider(VbNetPlugin.METADATA).extensions().size()
         + VbNetUnitTestResultsProvider.extensions().size()
         + RoslynProfileExporter.sonarLintRepositoryProperties(VbNetPlugin.METADATA).size()
         + new VbNetPropertyDefinitions(sonarRuntime).create().size());

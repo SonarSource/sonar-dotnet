@@ -21,6 +21,7 @@ package org.sonar.plugins.vbnet;
 
 import org.sonar.api.Plugin;
 import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
+import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
@@ -70,7 +71,7 @@ public class VbNetPlugin implements Plugin {
 
     context.addExtensions(new VbNetPropertyDefinitions(context.getRuntime()).create());
     context.addExtension(new VbNetSonarWayProfile(context.getRuntime()));
-    context.addExtensions(VbNetCodeCoverageProvider.extensions());
+    context.addExtensions(new CodeCoverageProvider(METADATA).extensions());
     context.addExtensions(VbNetUnitTestResultsProvider.extensions());
     context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties(METADATA));
   }
@@ -85,6 +86,11 @@ public class VbNetPlugin implements Plugin {
     @Override
     public String pluginKey() {
       return PLUGIN_KEY;
+    }
+
+    @Override
+    public String languageName() {
+      return LANGUAGE_NAME;
     }
 
     @Override

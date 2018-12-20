@@ -28,6 +28,7 @@ import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
+import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
@@ -76,7 +77,7 @@ public class CSharpPluginTest {
     assertThat(extensions).hasSize(
       expectedExtensions.length
         + 1 // CSharpSonarWayProfile
-        + CSharpCodeCoverageProvider.extensions().size()
+        + new CodeCoverageProvider(CSharpPlugin.METADATA).extensions().size()
         + CSharpUnitTestResultsProvider.extensions().size()
         + RoslynProfileExporter.sonarLintRepositoryProperties(CSharpPlugin.METADATA).size()
         + new CSharpPropertyDefinitions(sonarRuntime).create().size());

@@ -35,23 +35,23 @@ public class CoverageConfiguration {
     this.visualStudioCoverageXmlPropertyKey = visualStudioCoverageXmlPropertyKey;
   }
 
-  String languageKey() {
+  public String languageKey() {
     return languageKey;
   }
 
-  String ncover3PropertyKey() {
+  public String ncover3PropertyKey() {
     return ncover3PropertyKey;
   }
 
-  String openCoverPropertyKey() {
+  public String openCoverPropertyKey() {
     return openCoverPropertyKey;
   }
 
-  String dotCoverPropertyKey() {
+  public String dotCoverPropertyKey() {
     return dotCoverPropertyKey;
   }
 
-  String visualStudioCoverageXmlPropertyKey() {
+  public String visualStudioCoverageXmlPropertyKey() {
     return visualStudioCoverageXmlPropertyKey;
   }
 
