@@ -111,13 +111,25 @@ namespace Tests.Diagnostics
             }
         }
 
-        public static void TestFoo(Foo x)
+        public static void TestFoo1(Foo x)
         {
             x.Test("hello");
             x.Test("world");
         }
 
-        public static void TestBar(Bar x)
+        public static void TestFoo2(Foo x, string s)
+        {
+            x.Test("hello");
+            x.Test("world");
+        }
+
+        public static void TestFoo3(string s, Foo x)
+        {
+            x.Test("hello");
+            x.Test("world");
+        }
+
+        public static void TestBar1(Bar x)
         {
             x.Test("hello");
             x.Test("world");
