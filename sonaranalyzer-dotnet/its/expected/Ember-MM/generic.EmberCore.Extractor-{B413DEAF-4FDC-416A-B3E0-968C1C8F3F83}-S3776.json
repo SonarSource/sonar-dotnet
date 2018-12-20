@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 64 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 68 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",

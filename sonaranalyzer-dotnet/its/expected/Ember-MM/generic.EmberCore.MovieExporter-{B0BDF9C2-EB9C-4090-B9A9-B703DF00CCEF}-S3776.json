@@ -407,7 +407,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
@@ -575,7 +575,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 46 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 57 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",

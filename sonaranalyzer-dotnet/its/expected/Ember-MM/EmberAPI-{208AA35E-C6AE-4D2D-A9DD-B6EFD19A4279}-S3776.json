@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
@@ -128,6 +128,102 @@
 "startColumn":  9,
 "endLine":  234,
 "endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  888,
+"startColumn":  28,
+"endLine":  888,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  889,
+"startColumn":  9,
+"endLine":  889,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  892,
+"startColumn":  13,
+"endLine":  892,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  893,
+"startColumn":  17,
+"endLine":  893,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  894,
+"startColumn":  21,
+"endLine":  894,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  896,
+"startColumn":  29,
+"endLine":  896,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  896,
+"startColumn":  140,
+"endLine":  896,
+"endColumn":  146
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  896,
+"startColumn":  74,
+"endLine":  896,
+"endColumn":  81
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  896,
+"startColumn":  231,
+"endLine":  896,
+"endColumn":  238
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  899,
+"startColumn":  25,
+"endLine":  899,
+"endColumn":  30
 }
 }
 ]
@@ -1154,7 +1250,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 53 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 60 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
@@ -1448,7 +1544,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 51 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 65 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
@@ -1796,7 +1892,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 71 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 92 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
@@ -2750,7 +2846,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 200 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 218 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
@@ -3716,7 +3812,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
@@ -3875,7 +3971,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
@@ -4061,7 +4157,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
@@ -4733,7 +4829,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
@@ -4919,7 +5015,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
@@ -5105,7 +5201,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
@@ -5291,7 +5387,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
@@ -5780,7 +5876,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 74 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 76 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
@@ -6101,7 +6197,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 78 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 80 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
@@ -8261,7 +8357,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 40 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
@@ -8492,7 +8588,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 107 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 120 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
@@ -8903,7 +8999,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 41 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
@@ -9026,7 +9122,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 38 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
@@ -9167,7 +9263,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 41 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
@@ -9425,6 +9521,111 @@
 "startColumn":  13,
 "endLine":  689,
 "endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  106,
+"startColumn":  28,
+"endLine":  106,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  120,
+"startColumn":  13,
+"endLine":  120,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  121,
+"startColumn":  17,
+"endLine":  121,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  123,
+"startColumn":  21,
+"endLine":  123,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  131,
+"startColumn":  17,
+"endLine":  131,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  132,
+"startColumn":  21,
+"endLine":  132,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  132,
+"startColumn":  78,
+"endLine":  132,
+"endColumn":  85
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  17,
+"endLine":  133,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  134,
+"startColumn":  21,
+"endLine":  134,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  134,
+"startColumn":  76,
+"endLine":  134,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  138,
+"startColumn":  9,
+"endLine":  138,
+"endColumn":  14
 }
 }
 ]
@@ -9809,7 +10010,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
@@ -9950,7 +10151,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 32 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
@@ -10091,7 +10292,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
@@ -10241,7 +10442,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 58 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 68 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
@@ -11615,7 +11816,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
@@ -11729,7 +11930,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 41 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 45 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
@@ -11897,7 +12098,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 36 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 44 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
@@ -12554,7 +12755,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 61 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 115 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
@@ -12884,7 +13085,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 126 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 174 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
@@ -13232,7 +13433,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 93 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 103 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
@@ -14045,7 +14246,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 105 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 118 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
@@ -15122,6 +15323,243 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
 "location":  [
 {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  186,
+"startColumn":  28,
+"endLine":  186,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  192,
+"startColumn":  13,
+"endLine":  192,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  197,
+"startColumn":  13,
+"endLine":  197,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  198,
+"startColumn":  17,
+"endLine":  198,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  201,
+"startColumn":  21,
+"endLine":  201,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  203,
+"startColumn":  21,
+"endLine":  203,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  206,
+"startColumn":  21,
+"endLine":  206,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  214,
+"startColumn":  13,
+"endLine":  214,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  217,
+"startColumn":  13,
+"endLine":  217,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  217,
+"startColumn":  46,
+"endLine":  217,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  221,
+"startColumn":  13,
+"endLine":  221,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  225,
+"startColumn":  9,
+"endLine":  225,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  123,
+"startColumn":  28,
+"endLine":  123,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  129,
+"startColumn":  13,
+"endLine":  129,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  135,
+"startColumn":  17,
+"endLine":  135,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  136,
+"startColumn":  21,
+"endLine":  136,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  139,
+"startColumn":  25,
+"endLine":  139,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  141,
+"startColumn":  25,
+"endLine":  141,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  144,
+"startColumn":  25,
+"endLine":  144,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  153,
+"startColumn":  17,
+"endLine":  153,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  153,
+"startColumn":  48,
+"endLine":  153,
+"endColumn":  55
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  157,
+"startColumn":  13,
+"endLine":  157,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  161,
+"startColumn":  13,
+"endLine":  161,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  162,
+"startColumn":  13,
+"endLine":  162,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  166,
+"startColumn":  9,
+"endLine":  166,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"location":  [
+{
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
 "region":  {
 "startLine":  396,
@@ -15320,7 +15758,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
@@ -15434,7 +15872,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
