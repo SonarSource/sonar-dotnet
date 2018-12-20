@@ -58,7 +58,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             bool HaveSameParameters(SeparatedSyntaxList<ParameterSyntax>? leftParameters, SeparatedSyntaxList<ParameterSyntax>? rightParameters)
             {
                 if ((leftParameters == null && rightParameters != null) ||
-                    (leftParameters != null && rightParameters == null))
+                    (leftParameters != null && rightParameters == null) ||
+                    leftParameters.Value.Count != rightParameters.Value.Count)
                 {
                     return false;
                 }
