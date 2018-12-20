@@ -324,58 +324,6 @@
 "endColumn":  44
 }
 }
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
-"region":  {
-"startLine":  92,
-"startColumn":  9,
-"endLine":  92,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
-"region":  {
-"startLine":  108,
-"startColumn":  21,
-"endLine":  108,
-"endColumn":  59
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
-"region":  {
-"startLine":  131,
-"startColumn":  13,
-"endLine":  131,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
-"region":  {
-"startLine":  222,
-"startColumn":  9,
-"endLine":  222,
-"endColumn":  76
-}
-}
 }
 ]
 }

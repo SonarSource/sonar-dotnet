@@ -31,6 +31,23 @@
 
         Sub doSomething()
         End Sub
+
+        Sub Test()
+            Dim test As TestEnum = TestEnum.Value1
+            Select Case test
+                Case TestEnum.Value1
+                    test = TestEnum.Value1 : test = TestEnum.Value2 ' Noncompliant
+                Case TestEnum.Value2
+                    ' action2
+                Case Else
+                    ' else
+            End Select
+        End Sub
+
+        Public Enum TestEnum
+            Value1
+            Value2
+        End Enum
     End Class
 
 End Namespace

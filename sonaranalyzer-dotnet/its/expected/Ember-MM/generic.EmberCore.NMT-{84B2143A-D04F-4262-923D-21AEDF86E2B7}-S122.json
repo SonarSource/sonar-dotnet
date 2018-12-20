@@ -773,75 +773,10 @@
 "location":  {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
 "region":  {
-"startLine":  111,
-"startColumn":  25,
-"endLine":  111,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
-"region":  {
-"startLine":  146,
-"startColumn":  25,
-"endLine":  146,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
-"region":  {
 "startLine":  186,
 "startColumn":  25,
 "endLine":  186,
 "endColumn":  129
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
-"region":  {
-"startLine":  213,
-"startColumn":  17,
-"endLine":  213,
-"endColumn":  75
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
-"region":  {
-"startLine":  226,
-"startColumn":  13,
-"endLine":  226,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
-"region":  {
-"startLine":  247,
-"startColumn":  13,
-"endLine":  247,
-"endColumn":  71
 }
 }
 },
@@ -868,19 +803,6 @@
 "startColumn":  13,
 "endLine":  64,
 "endColumn":  44
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
-"region":  {
-"startLine":  93,
-"startColumn":  13,
-"endLine":  93,
-"endColumn":  30
 }
 }
 },

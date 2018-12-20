@@ -6,19 +6,6 @@
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
 "region":  {
-"startLine":  56,
-"startColumn":  21,
-"endLine":  56,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
-"region":  {
 "startLine":  151,
 "startColumn":  13,
 "endLine":  151,
@@ -36,19 +23,6 @@
 "startColumn":  17,
 "endLine":  185,
 "endColumn":  66
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
-"region":  {
-"startLine":  186,
-"startColumn":  13,
-"endLine":  186,
-"endColumn":  29
 }
 }
 },
@@ -108,71 +82,6 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
-"region":  {
-"startLine":  422,
-"startColumn":  29,
-"endLine":  422,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
-"region":  {
-"startLine":  503,
-"startColumn":  25,
-"endLine":  503,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
-"region":  {
-"startLine":  611,
-"startColumn":  17,
-"endLine":  611,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
-"region":  {
-"startLine":  862,
-"startColumn":  13,
-"endLine":  862,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
-"region":  {
-"startLine":  883,
-"startColumn":  13,
-"endLine":  883,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
 "region":  {
 "startLine":  53,
@@ -205,45 +114,6 @@
 "startColumn":  9,
 "endLine":  249,
 "endColumn":  79
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
-"region":  {
-"startLine":  130,
-"startColumn":  9,
-"endLine":  130,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
-"region":  {
-"startLine":  255,
-"startColumn":  17,
-"endLine":  255,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
-"region":  {
-"startLine":  305,
-"startColumn":  17,
-"endLine":  305,
-"endColumn":  39
 }
 }
 },
@@ -474,100 +344,9 @@
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
 "region":  {
-"startLine":  717,
-"startColumn":  33,
-"endLine":  717,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
-"region":  {
 "startLine":  886,
 "startColumn":  9,
 "endLine":  886,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MediaTag.vb",
-"region":  {
-"startLine":  138,
-"startColumn":  17,
-"endLine":  138,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\IncludeManager.vb",
-"region":  {
-"startLine":  92,
-"startColumn":  17,
-"endLine":  92,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
-"region":  {
-"startLine":  364,
-"startColumn":  17,
-"endLine":  364,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
-"region":  {
-"startLine":  228,
-"startColumn":  17,
-"endLine":  228,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
-"region":  {
-"startLine":  479,
-"startColumn":  21,
-"endLine":  479,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
-"region":  {
-"startLine":  536,
-"startColumn":  17,
-"endLine":  536,
 "endColumn":  41
 }
 }
@@ -602,45 +381,6 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
-"region":  {
-"startLine":  228,
-"startColumn":  17,
-"endLine":  228,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
-"region":  {
-"startLine":  328,
-"startColumn":  17,
-"endLine":  328,
-"endColumn":  48
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
-"region":  {
-"startLine":  185,
-"startColumn":  17,
-"endLine":  185,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
 "region":  {
 "startLine":  333,
@@ -660,19 +400,6 @@
 "startColumn":  17,
 "endLine":  335,
 "endColumn":  78
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
-"region":  {
-"startLine":  178,
-"startColumn":  17,
-"endLine":  178,
-"endColumn":  33
 }
 }
 }

@@ -6,19 +6,6 @@
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
 "region":  {
-"startLine":  78,
-"startColumn":  8,
-"endLine":  78,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
-"region":  {
 "startLine":  91,
 "startColumn":  8,
 "endLine":  91,
@@ -36,19 +23,6 @@
 "startColumn":  9,
 "endLine":  111,
 "endColumn":  92
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
-"region":  {
-"startLine":  156,
-"startColumn":  9,
-"endLine":  156,
-"endColumn":  57
 }
 }
 },
@@ -123,36 +97,10 @@
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
 "region":  {
-"startLine":  199,
-"startColumn":  12,
-"endLine":  199,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
-"region":  {
 "startLine":  243,
 "startColumn":  11,
 "endLine":  243,
 "endColumn":  91
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
-"region":  {
-"startLine":  247,
-"startColumn":  12,
-"endLine":  247,
-"endColumn":  31
 }
 }
 },
@@ -205,110 +153,6 @@
 "startColumn":  10,
 "endLine":  306,
 "endColumn":  57
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
-"region":  {
-"startLine":  400,
-"startColumn":  9,
-"endLine":  400,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
-"region":  {
-"startLine":  443,
-"startColumn":  12,
-"endLine":  443,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
-"region":  {
-"startLine":  536,
-"startColumn":  10,
-"endLine":  536,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
-"region":  {
-"startLine":  581,
-"startColumn":  9,
-"endLine":  581,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
-"region":  {
-"startLine":  691,
-"startColumn":  7,
-"endLine":  691,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
-"region":  {
-"startLine":  727,
-"startColumn":  10,
-"endLine":  727,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
-"region":  {
-"startLine":  764,
-"startColumn":  7,
-"endLine":  764,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
-"region":  {
-"startLine":  815,
-"startColumn":  4,
-"endLine":  815,
-"endColumn":  21
 }
 }
 },
@@ -955,45 +799,6 @@
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
 "region":  {
-"startLine":  645,
-"startColumn":  17,
-"endLine":  645,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
-"region":  {
-"startLine":  759,
-"startColumn":  17,
-"endLine":  759,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
-"region":  {
-"startLine":  776,
-"startColumn":  17,
-"endLine":  776,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
-"region":  {
 "startLine":  792,
 "startColumn":  17,
 "endLine":  792,
@@ -1343,19 +1148,6 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
-"region":  {
-"startLine":  107,
-"startColumn":  29,
-"endLine":  107,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
 "region":  {
 "startLine":  60,
@@ -1410,19 +1202,6 @@
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
 "region":  {
-"startLine":  171,
-"startColumn":  25,
-"endLine":  171,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
-"region":  {
 "startLine":  254,
 "startColumn":  29,
 "endLine":  254,
@@ -1462,19 +1241,6 @@
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
 "region":  {
-"startLine":  211,
-"startColumn":  13,
-"endLine":  211,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
-"region":  {
 "startLine":  269,
 "startColumn":  17,
 "endLine":  269,
@@ -1492,19 +1258,6 @@
 "startColumn":  21,
 "endLine":  320,
 "endColumn":  118
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
-"region":  {
-"startLine":  417,
-"startColumn":  37,
-"endLine":  417,
-"endColumn":  79
 }
 }
 },
@@ -1579,45 +1332,6 @@
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
 "region":  {
-"startLine":  645,
-"startColumn":  29,
-"endLine":  645,
-"endColumn":  45
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
-"region":  {
-"startLine":  733,
-"startColumn":  25,
-"endLine":  733,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
-"region":  {
-"startLine":  916,
-"startColumn":  17,
-"endLine":  916,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
-"region":  {
 "startLine":  1156,
 "startColumn":  13,
 "endLine":  1156,
@@ -1635,45 +1349,6 @@
 "startColumn":  13,
 "endLine":  1164,
 "endColumn":  71
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
-"region":  {
-"startLine":  1190,
-"startColumn":  17,
-"endLine":  1190,
-"endColumn":  51
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
-"region":  {
-"startLine":  1234,
-"startColumn":  13,
-"endLine":  1234,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
-"region":  {
-"startLine":  1255,
-"startColumn":  13,
-"endLine":  1255,
-"endColumn":  34
 }
 }
 },
@@ -1713,19 +1388,6 @@
 "startColumn":  9,
 "endLine":  334,
 "endColumn":  79
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
-"region":  {
-"startLine":  116,
-"startColumn":  9,
-"endLine":  116,
-"endColumn":  24
 }
 }
 },
@@ -1787,19 +1449,6 @@
 "location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
 "region":  {
-"startLine":  572,
-"startColumn":  13,
-"endLine":  572,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
-"region":  {
 "startLine":  616,
 "startColumn":  13,
 "endLine":  616,
@@ -1830,19 +1479,6 @@
 "startColumn":  13,
 "endLine":  220,
 "endColumn":  55
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
-"region":  {
-"startLine":  246,
-"startColumn":  17,
-"endLine":  246,
-"endColumn":  58
 }
 }
 },
@@ -1908,19 +1544,6 @@
 "startColumn":  41,
 "endLine":  360,
 "endColumn":  163
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
-"region":  {
-"startLine":  547,
-"startColumn":  25,
-"endLine":  547,
-"endColumn":  41
 }
 }
 },
@@ -2038,32 +1661,6 @@
 "startColumn":  33,
 "endLine":  632,
 "endColumn":  118
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
-"region":  {
-"startLine":  742,
-"startColumn":  17,
-"endLine":  742,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
-"region":  {
-"startLine":  772,
-"startColumn":  17,
-"endLine":  772,
-"endColumn":  37
 }
 }
 },
@@ -2578,64 +2175,12 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
-"region":  {
-"startLine":  1196,
-"startColumn":  33,
-"endLine":  1196,
-"endColumn":  79
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
-"region":  {
-"startLine":  1235,
-"startColumn":  13,
-"endLine":  1235,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
-"region":  {
-"startLine":  1246,
-"startColumn":  13,
-"endLine":  1246,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
 "region":  {
 "startLine":  182,
 "startColumn":  13,
 "endLine":  182,
 "endColumn":  116
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
-"region":  {
-"startLine":  314,
-"startColumn":  9,
-"endLine":  314,
-"endColumn":  26
 }
 }
 },
@@ -2935,19 +2480,6 @@
 "startColumn":  9,
 "endLine":  361,
 "endColumn":  69
-}
-}
-},
-{
-"id":  "S122",
-"message":  "Reformat the code to have only one statement per line.",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
-"region":  {
-"startLine":  454,
-"startColumn":  9,
-"endLine":  454,
-"endColumn":  29
 }
 }
 },
