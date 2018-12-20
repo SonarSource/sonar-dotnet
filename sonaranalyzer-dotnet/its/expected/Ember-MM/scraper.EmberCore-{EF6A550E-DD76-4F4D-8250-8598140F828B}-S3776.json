@@ -152,7 +152,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 209 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 235 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
@@ -563,7 +563,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 1110 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 1194 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
@@ -2378,7 +2378,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 36 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
@@ -2900,7 +2900,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 362 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 368 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
@@ -4793,7 +4793,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 44 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 46 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
@@ -4952,7 +4952,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 51 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 57 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
@@ -5564,7 +5564,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
@@ -5942,7 +5942,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
@@ -6083,7 +6083,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
@@ -6233,7 +6233,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
@@ -6392,7 +6392,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 43 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 56 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
@@ -6587,7 +6587,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 63 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 71 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
@@ -6800,7 +6800,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 89 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 91 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
@@ -9089,7 +9089,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 56 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 75 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
@@ -9383,7 +9383,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 67 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 89 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
@@ -9677,7 +9677,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 130 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 151 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
@@ -10133,7 +10133,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 387 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 426 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
@@ -11129,7 +11129,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 67 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 70 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
@@ -11537,7 +11537,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
@@ -11633,7 +11633,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
@@ -12164,7 +12164,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 82 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 95 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
@@ -12440,7 +12440,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 90 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 115 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
@@ -12860,7 +12860,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 103 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 110 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
@@ -13298,7 +13298,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 162 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 174 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",

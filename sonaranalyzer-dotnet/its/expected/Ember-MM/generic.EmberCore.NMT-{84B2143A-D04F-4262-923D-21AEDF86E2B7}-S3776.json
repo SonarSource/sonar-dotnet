@@ -125,7 +125,139 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.",
+"message":  "Refactor this constructor to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  75,
+"startColumn":  12,
+"endLine":  75,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  104,
+"startColumn":  13,
+"endLine":  104,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  105,
+"startColumn":  17,
+"endLine":  105,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  105,
+"startColumn":  38,
+"endLine":  105,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  108,
+"startColumn":  21,
+"endLine":  108,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  108,
+"startColumn":  60,
+"endLine":  108,
+"endColumn":  67
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  112,
+"startColumn":  21,
+"endLine":  112,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  117,
+"startColumn":  13,
+"endLine":  117,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  119,
+"startColumn":  17,
+"endLine":  119,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  121,
+"startColumn":  17,
+"endLine":  121,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  126,
+"startColumn":  13,
+"endLine":  126,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  132,
+"startColumn":  13,
+"endLine":  132,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  138,
+"startColumn":  13,
+"endLine":  138,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  146,
+"startColumn":  9,
+"endLine":  146,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 34 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
@@ -284,7 +416,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
@@ -611,7 +743,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
@@ -779,7 +911,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 39 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 44 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
@@ -947,7 +1079,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 37 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
@@ -1115,7 +1247,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
@@ -1283,7 +1415,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
@@ -1469,7 +1601,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 35 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
@@ -1655,7 +1787,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 42 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 67 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
@@ -1850,7 +1982,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 42 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 67 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
@@ -2045,7 +2177,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 47 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
@@ -2240,7 +2372,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",

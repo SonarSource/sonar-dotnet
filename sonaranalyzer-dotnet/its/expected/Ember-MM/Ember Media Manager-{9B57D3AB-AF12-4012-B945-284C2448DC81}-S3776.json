@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
@@ -107,7 +107,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
@@ -266,7 +266,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 69 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 82 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
@@ -587,7 +587,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
@@ -719,7 +719,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 48 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
@@ -869,7 +869,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 119 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 172 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
@@ -1253,7 +1253,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
@@ -1481,7 +1481,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 52 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 53 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
@@ -2069,7 +2069,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 67 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 68 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
@@ -2684,7 +2684,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
@@ -2843,7 +2843,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
@@ -3611,7 +3611,121 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 49 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  316,
+"startColumn":  17,
+"endLine":  316,
+"endColumn":  26
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  317,
+"startColumn":  9,
+"endLine":  317,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  331,
+"startColumn":  61,
+"endLine":  331,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  332,
+"startColumn":  61,
+"endLine":  332,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  340,
+"startColumn":  9,
+"endLine":  340,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  342,
+"startColumn":  17,
+"endLine":  342,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  346,
+"startColumn":  13,
+"endLine":  346,
+"endColumn":  18
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  352,
+"startColumn":  21,
+"endLine":  352,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  356,
+"startColumn":  21,
+"endLine":  356,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  362,
+"startColumn":  17,
+"endLine":  362,
+"endColumn":  22
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  376,
+"startColumn":  9,
+"endLine":  376,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  378,
+"startColumn":  9,
+"endLine":  378,
+"endColumn":  13
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 62 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
@@ -3833,7 +3947,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
@@ -3920,7 +4034,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
@@ -4025,7 +4139,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
@@ -4565,7 +4679,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 79 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 86 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
@@ -5540,7 +5654,241 @@
 },
 {
 "id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1786,
+"startColumn":  17,
+"endLine":  1786,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1787,
+"startColumn":  9,
+"endLine":  1787,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1789,
+"startColumn":  13,
+"endLine":  1789,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1790,
+"startColumn":  17,
+"endLine":  1790,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1793,
+"startColumn":  13,
+"endLine":  1793,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1794,
+"startColumn":  17,
+"endLine":  1794,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1797,
+"startColumn":  25,
+"endLine":  1797,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1800,
+"startColumn":  25,
+"endLine":  1800,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S3776",
 "message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  180,
+"startColumn":  16,
+"endLine":  180,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  182,
+"startColumn":  9,
+"endLine":  182,
+"endColumn":  12
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  184,
+"startColumn":  17,
+"endLine":  184,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  187,
+"startColumn":  25,
+"endLine":  187,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  188,
+"startColumn":  29,
+"endLine":  188,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  189,
+"startColumn":  29,
+"endLine":  189,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  195,
+"startColumn":  25,
+"endLine":  195,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  197,
+"startColumn":  13,
+"endLine":  197,
+"endColumn":  18
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6645,
+"startColumn":  17,
+"endLine":  6645,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6646,
+"startColumn":  9,
+"endLine":  6646,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6648,
+"startColumn":  13,
+"endLine":  6648,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6649,
+"startColumn":  17,
+"endLine":  6649,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6652,
+"startColumn":  13,
+"endLine":  6652,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6653,
+"startColumn":  17,
+"endLine":  6653,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6656,
+"startColumn":  25,
+"endLine":  6656,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6659,
+"startColumn":  25,
+"endLine":  6659,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -5708,6 +6056,294 @@
 "startColumn":  17,
 "endLine":  5815,
 "endColumn":  22
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3416,
+"startColumn":  17,
+"endLine":  3416,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3418,
+"startColumn":  13,
+"endLine":  3418,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3421,
+"startColumn":  17,
+"endLine":  3421,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3422,
+"startColumn":  21,
+"endLine":  3422,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3428,
+"startColumn":  13,
+"endLine":  3428,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3429,
+"startColumn":  17,
+"endLine":  3429,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3429,
+"startColumn":  39,
+"endLine":  3429,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3437,
+"startColumn":  21,
+"endLine":  3437,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3439,
+"startColumn":  29,
+"endLine":  3439,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3446,
+"startColumn":  9,
+"endLine":  3446,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3740,
+"startColumn":  17,
+"endLine":  3740,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3742,
+"startColumn":  13,
+"endLine":  3742,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3745,
+"startColumn":  17,
+"endLine":  3745,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3746,
+"startColumn":  21,
+"endLine":  3746,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3752,
+"startColumn":  13,
+"endLine":  3752,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3753,
+"startColumn":  17,
+"endLine":  3753,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3753,
+"startColumn":  39,
+"endLine":  3753,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3762,
+"startColumn":  21,
+"endLine":  3762,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3763,
+"startColumn":  25,
+"endLine":  3763,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3769,
+"startColumn":  9,
+"endLine":  3769,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4004,
+"startColumn":  17,
+"endLine":  4004,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4006,
+"startColumn":  13,
+"endLine":  4006,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4009,
+"startColumn":  17,
+"endLine":  4009,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4010,
+"startColumn":  21,
+"endLine":  4010,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4016,
+"startColumn":  13,
+"endLine":  4016,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4017,
+"startColumn":  17,
+"endLine":  4017,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4017,
+"startColumn":  39,
+"endLine":  4017,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4026,
+"startColumn":  21,
+"endLine":  4026,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4029,
+"startColumn":  29,
+"endLine":  4029,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4036,
+"startColumn":  9,
+"endLine":  4036,
+"endColumn":  14
 }
 }
 ]
@@ -5906,7 +6542,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -6011,7 +6647,226 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4147,
+"startColumn":  17,
+"endLine":  4147,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4157,
+"startColumn":  21,
+"endLine":  4157,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4159,
+"startColumn":  25,
+"endLine":  4159,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4160,
+"startColumn":  29,
+"endLine":  4160,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4162,
+"startColumn":  29,
+"endLine":  4162,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4164,
+"startColumn":  29,
+"endLine":  4164,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4165,
+"startColumn":  33,
+"endLine":  4165,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4165,
+"startColumn":  78,
+"endLine":  4165,
+"endColumn":  85
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4167,
+"startColumn":  33,
+"endLine":  4167,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4177,
+"startColumn":  25,
+"endLine":  4177,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4190,
+"startColumn":  9,
+"endLine":  4190,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2457,
+"startColumn":  17,
+"endLine":  2457,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2460,
+"startColumn":  13,
+"endLine":  2460,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2461,
+"startColumn":  17,
+"endLine":  2461,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2464,
+"startColumn":  21,
+"endLine":  2464,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2476,
+"startColumn":  21,
+"endLine":  2476,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2477,
+"startColumn":  41,
+"endLine":  2477,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2487,
+"startColumn":  13,
+"endLine":  2487,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2488,
+"startColumn":  17,
+"endLine":  2488,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2493,
+"startColumn":  34,
+"endLine":  2493,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2495,
+"startColumn":  13,
+"endLine":  2495,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2498,
+"startColumn":  17,
+"endLine":  2498,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2503,
+"startColumn":  9,
+"endLine":  2503,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -6248,7 +7103,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -6617,7 +7472,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -6749,7 +7604,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -7835,7 +8690,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 41 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 54 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -8561,7 +9416,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 55 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 59 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -8756,7 +9611,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 55 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 59 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -9146,7 +10001,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 57 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 61 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -9554,7 +10409,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 39 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -9962,7 +10817,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 44 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 45 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -10601,7 +11456,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -10841,7 +11696,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 76 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 90 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -11099,7 +11954,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 86 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 91 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -11918,7 +12773,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 47 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -12248,7 +13103,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 62 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 63 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -12578,7 +13433,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 51 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 54 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -12944,7 +13799,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 55 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 58 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -13319,7 +14174,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 64 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 67 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
@@ -13802,7 +14657,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 205 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 214 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",

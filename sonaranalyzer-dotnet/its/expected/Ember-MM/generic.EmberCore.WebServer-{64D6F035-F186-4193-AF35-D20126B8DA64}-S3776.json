@@ -347,7 +347,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 35 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
@@ -737,7 +737,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 68 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 93 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",

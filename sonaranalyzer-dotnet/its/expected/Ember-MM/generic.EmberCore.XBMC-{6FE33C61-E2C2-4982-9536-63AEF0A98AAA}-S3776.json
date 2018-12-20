@@ -2,7 +2,103 @@
 "issues":  [
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  110,
+"startColumn":  9,
+"endLine":  110,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  115,
+"startColumn":  13,
+"endLine":  115,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  122,
+"startColumn":  21,
+"endLine":  122,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  123,
+"startColumn":  25,
+"endLine":  123,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  124,
+"startColumn":  29,
+"endLine":  124,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  124,
+"startColumn":  70,
+"endLine":  124,
+"endColumn":  77
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  128,
+"startColumn":  21,
+"endLine":  128,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  128,
+"startColumn":  50,
+"endLine":  128,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  132,
+"startColumn":  17,
+"endLine":  132,
+"endColumn":  22
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  136,
+"startColumn":  9,
+"endLine":  136,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 34 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
@@ -161,7 +257,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 54 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",

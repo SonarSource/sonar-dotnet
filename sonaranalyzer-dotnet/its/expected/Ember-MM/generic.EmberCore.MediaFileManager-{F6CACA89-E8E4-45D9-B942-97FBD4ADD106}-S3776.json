@@ -2,7 +2,103 @@
 "issues":  [
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  336,
+"startColumn":  17,
+"endLine":  336,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  339,
+"startColumn":  9,
+"endLine":  339,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  343,
+"startColumn":  9,
+"endLine":  343,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  351,
+"startColumn":  9,
+"endLine":  351,
+"endColumn":  14
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  354,
+"startColumn":  9,
+"endLine":  354,
+"endColumn":  12
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  355,
+"startColumn":  13,
+"endLine":  355,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  358,
+"startColumn":  17,
+"endLine":  358,
+"endColumn":  22
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  359,
+"startColumn":  21,
+"endLine":  359,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  363,
+"startColumn":  13,
+"endLine":  363,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  364,
+"startColumn":  17,
+"endLine":  364,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",

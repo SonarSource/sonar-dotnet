@@ -239,7 +239,148 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 45 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  579,
+"startColumn":  16,
+"endLine":  579,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  582,
+"startColumn":  13,
+"endLine":  582,
+"endColumn":  16
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  584,
+"startColumn":  17,
+"endLine":  584,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  586,
+"startColumn":  17,
+"endLine":  586,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  591,
+"startColumn":  26,
+"endLine":  591,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  593,
+"startColumn":  17,
+"endLine":  593,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  595,
+"startColumn":  17,
+"endLine":  595,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  597,
+"startColumn":  17,
+"endLine":  597,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  601,
+"startColumn":  17,
+"endLine":  601,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  603,
+"startColumn":  17,
+"endLine":  603,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  606,
+"startColumn":  29,
+"endLine":  606,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  608,
+"startColumn":  109,
+"endLine":  608,
+"endColumn":  116
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  609,
+"startColumn":  79,
+"endLine":  609,
+"endColumn":  86
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  611,
+"startColumn":  54,
+"endLine":  611,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  613,
+"startColumn":  9,
+"endLine":  613,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
@@ -560,7 +701,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 60 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 72 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
@@ -890,7 +1031,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 106 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 111 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
@@ -1229,7 +1370,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 150 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 183 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
@@ -1622,7 +1763,112 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 128 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  266,
+"startColumn":  17,
+"endLine":  266,
+"endColumn":  37
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  269,
+"startColumn":  9,
+"endLine":  269,
+"endColumn":  11
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  270,
+"startColumn":  13,
+"endLine":  270,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  272,
+"startColumn":  17,
+"endLine":  272,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  274,
+"startColumn":  17,
+"endLine":  274,
+"endColumn":  21
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  277,
+"startColumn":  17,
+"endLine":  277,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  281,
+"startColumn":  13,
+"endLine":  281,
+"endColumn":  17
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  285,
+"startColumn":  9,
+"endLine":  285,
+"endColumn":  13
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  291,
+"startColumn":  9,
+"endLine":  291,
+"endColumn":  12
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  292,
+"startColumn":  13,
+"endLine":  292,
+"endColumn":  15
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  294,
+"startColumn":  13,
+"endLine":  294,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 155 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",

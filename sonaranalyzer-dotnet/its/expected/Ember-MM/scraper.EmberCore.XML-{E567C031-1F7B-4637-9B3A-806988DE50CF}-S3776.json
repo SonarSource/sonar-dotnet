@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 90 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 103 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
@@ -533,7 +533,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
@@ -629,7 +629,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
@@ -788,7 +788,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 60 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 68 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
@@ -992,7 +992,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 65 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 67 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
@@ -1454,7 +1454,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
@@ -1532,7 +1532,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
@@ -2981,7 +2981,163 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 45 to the 15 allowed.",
+"message":  "Refactor this accessor to reduce its Cognitive Complexity from 22 to the 3 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  112,
+"startColumn":  17,
+"endLine":  112,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  115,
+"startColumn":  21,
+"endLine":  115,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  116,
+"startColumn":  25,
+"endLine":  116,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  119,
+"startColumn":  29,
+"endLine":  119,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  121,
+"startColumn":  33,
+"endLine":  121,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  122,
+"startColumn":  37,
+"endLine":  122,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  123,
+"startColumn":  41,
+"endLine":  123,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  129,
+"startColumn":  25,
+"endLine":  129,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this accessor to reduce its Cognitive Complexity from 22 to the 3 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  85,
+"startColumn":  17,
+"endLine":  85,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  88,
+"startColumn":  21,
+"endLine":  88,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  89,
+"startColumn":  25,
+"endLine":  89,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  92,
+"startColumn":  29,
+"endLine":  92,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  94,
+"startColumn":  33,
+"endLine":  94,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  95,
+"startColumn":  37,
+"endLine":  95,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  96,
+"startColumn":  41,
+"endLine":  96,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  102,
+"startColumn":  25,
+"endLine":  102,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 47 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
@@ -3194,7 +3350,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 38 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 41 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
@@ -4448,7 +4604,181 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 55 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  401,
+"startColumn":  39,
+"endLine":  401,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  403,
+"startColumn":  17,
+"endLine":  403,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  404,
+"startColumn":  21,
+"endLine":  404,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  405,
+"startColumn":  25,
+"endLine":  405,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  406,
+"startColumn":  29,
+"endLine":  406,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  408,
+"startColumn":  29,
+"endLine":  408,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  411,
+"startColumn":  25,
+"endLine":  411,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  412,
+"startColumn":  29,
+"endLine":  412,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  401,
+"startColumn":  39,
+"endLine":  401,
+"endColumn":  63
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  421,
+"startColumn":  39,
+"endLine":  421,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  423,
+"startColumn":  17,
+"endLine":  423,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  424,
+"startColumn":  21,
+"endLine":  424,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  425,
+"startColumn":  25,
+"endLine":  425,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  426,
+"startColumn":  29,
+"endLine":  426,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  428,
+"startColumn":  29,
+"endLine":  428,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  431,
+"startColumn":  25,
+"endLine":  431,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  432,
+"startColumn":  29,
+"endLine":  432,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  421,
+"startColumn":  39,
+"endLine":  421,
+"endColumn":  59
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 61 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
@@ -4679,7 +5009,139 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  545,
+"startColumn":  39,
+"endLine":  545,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  552,
+"startColumn":  17,
+"endLine":  552,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  556,
+"startColumn":  21,
+"endLine":  556,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  562,
+"startColumn":  17,
+"endLine":  562,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  563,
+"startColumn":  21,
+"endLine":  563,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  565,
+"startColumn":  21,
+"endLine":  565,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  570,
+"startColumn":  17,
+"endLine":  570,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  571,
+"startColumn":  21,
+"endLine":  571,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  572,
+"startColumn":  25,
+"endLine":  572,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  573,
+"startColumn":  29,
+"endLine":  573,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  575,
+"startColumn":  29,
+"endLine":  575,
+"endColumn":  33
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  578,
+"startColumn":  25,
+"endLine":  578,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  579,
+"startColumn":  29,
+"endLine":  579,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  545,
+"startColumn":  39,
+"endLine":  545,
+"endColumn":  59
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
@@ -4970,7 +5432,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 34 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
@@ -5147,7 +5609,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 38 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 42 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
@@ -5660,7 +6122,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 32 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
@@ -5792,7 +6254,94 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  575,
+"startColumn":  25,
+"endLine":  575,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  579,
+"startColumn":  17,
+"endLine":  579,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  580,
+"startColumn":  21,
+"endLine":  580,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  585,
+"startColumn":  17,
+"endLine":  585,
+"endColumn":  22
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  586,
+"startColumn":  21,
+"endLine":  586,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  589,
+"startColumn":  25,
+"endLine":  589,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  593,
+"startColumn":  25,
+"endLine":  593,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  594,
+"startColumn":  29,
+"endLine":  594,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  598,
+"startColumn":  21,
+"endLine":  598,
+"endColumn":  25
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
@@ -5897,7 +6446,94 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  221,
+"startColumn":  24,
+"endLine":  221,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  225,
+"startColumn":  17,
+"endLine":  225,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  228,
+"startColumn":  21,
+"endLine":  228,
+"endColumn":  24
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  230,
+"startColumn":  25,
+"endLine":  230,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  230,
+"startColumn":  68,
+"endLine":  230,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  232,
+"startColumn":  29,
+"endLine":  232,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  233,
+"startColumn":  33,
+"endLine":  233,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  238,
+"startColumn":  25,
+"endLine":  238,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  240,
+"startColumn":  25,
+"endLine":  240,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
@@ -5993,7 +6629,7 @@
 },
 {
 "id":  "S3776",
-"message":  "Refactor this method to reduce its Cognitive Complexity from 57 to the 15 allowed.",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 71 to the 15 allowed.",
 "location":  [
 {
 "uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
