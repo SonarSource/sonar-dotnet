@@ -185,6 +185,12 @@ namespace Tests.Diagnostics
 
     public class RegressionTests
     {
+        private RegressionTests instance1;
+        private RegressionTests instance2;
+        private RegressionTests instance3;
+
+        public Dictionary<string, string> Map { get; }
+
         // See https://github.com/SonarSource/sonar-csharp/issues/1967
         public void NullReference()
         {
@@ -195,6 +201,34 @@ namespace Tests.Diagnostics
             dict.Add(0, 0); // Secondary
             dict.Add(0, 1); // Noncompliant
         }
+
+        public void Foo()
+        {
+            instance1.Map.Add("currentColor", "#FFFF0000");
+            instance2.Map.Add("currentColor", "#FF00FF00");
+        }
+
+        public void Bar()
+        {
+            Map.Add("currentColor", "#FFFF0000"); // Secondary
+            Map.Add("currentColor", "#FF00FF00"); // Noncompliant
+        }
+
+        public void FooBar()
+        {
+            MyTestClass1.Map.Add("currentColor", "#FFFF0000");
+            MyTestClass2.Map.Add("currentColor", "#FF00FF00");
+        }
+    }
+
+    public static class MyTestClass1
+    {
+        public static Dictionary<string, string> Map { get; }
+    }
+
+    public static class MyTestClass2
+    {
+        public static Dictionary<string, string> Map { get; }
     }
 
     public class CustomIndexerOneArg
