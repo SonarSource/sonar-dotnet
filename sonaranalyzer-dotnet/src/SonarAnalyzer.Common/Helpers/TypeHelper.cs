@@ -59,7 +59,10 @@ namespace SonarAnalyzer.Helpers
 
         private static bool IsMatch(ITypeSymbol typeSymbol, KnownType type)
         {
-            return type.Matches(typeSymbol.SpecialType) || type.Matches(typeSymbol.ToDisplayString());
+            return type.Matches(typeSymbol.SpecialType) ||
+                type.Matches(typeSymbol.OriginalDefinition.SpecialType) ||
+                type.Matches(typeSymbol.ToDisplayString()) ||
+                type.Matches(typeSymbol.OriginalDefinition.ToDisplayString());
         }
 
         public static bool Is(this ITypeSymbol typeSymbol, KnownType type)
