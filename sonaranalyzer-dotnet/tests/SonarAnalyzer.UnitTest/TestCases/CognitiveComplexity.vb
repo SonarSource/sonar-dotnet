@@ -141,12 +141,12 @@ Namespace Tests.Diagnostics
     End Sub
 
     Private Sub NestedWhile() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
-      If True Then
-'     ^^ Secondary {{+1}}
+      While True
+'     ^^^^^ Secondary {{+1}}
         While True
 '       ^^^^^ Secondary {{+2 (incl 1 for nesting)}}
         End While
-      End If
+      End While
     End Sub
 
     Private Sub Forr() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
@@ -156,12 +156,12 @@ Namespace Tests.Diagnostics
     End Sub
 
     Private Sub NestedFor() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
-      If True Then
-'     ^^ Secondary {{+1}}
-        For i As Integer = 1 To 10
+      For i As Integer = 1 To 10
+'     ^^^ Secondary {{+1}}
+        For j As Integer = 1 To 10
 '       ^^^ Secondary {{+2 (incl 1 for nesting)}}
         Next
-      End If
+      Next
     End Sub
 
     Private Function Foreach() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
@@ -171,12 +171,12 @@ Namespace Tests.Diagnostics
     End Function
 
     Private Sub NestedForeach() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
-      If True Then
-'     ^^ Secondary {{+1}}
-        For Each item In Enumerable.Empty(Of Integer)
+      For Each item1 In Enumerable.Empty(Of Integer)
+'     ^^^ Secondary {{+1}}
+        For Each item2 In Enumerable.Empty(Of Integer)
 '       ^^^ Secondary {{+2 (incl 1 for nesting)}}
         Next
-      End If
+      Next
     End Sub
 
     Private Sub DoUntil() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
@@ -185,13 +185,13 @@ Namespace Tests.Diagnostics
       Loop
     End Sub
 
-    Private Sub NestedDoWhile() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
-      If True Then
+    Private Sub NestedDoUntil() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
+      Do Until True
 '     ^^ Secondary {{+1}}
         Do Until True
 '       ^^ Secondary {{+2 (incl 1 for nesting)}}
         Loop
-      End If
+      Loop
     End Sub
 
     Private Sub TryCatch() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}

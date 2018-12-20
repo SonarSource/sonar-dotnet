@@ -81,10 +81,10 @@ namespace SonarAnalyzer.Metrics.VisualBasic
                 State.VisitWithNesting(node, base.VisitCatchBlock);
             }
 
-            public override void VisitDoStatement(DoStatementSyntax node)
+            public override void VisitDoLoopBlock(DoLoopBlockSyntax node)
             {
-                State.IncreaseComplexityByNestingPlusOne(node.DoKeyword);
-                State.VisitWithNesting(node, base.VisitDoStatement);
+                State.IncreaseComplexityByNestingPlusOne(node.DoStatement.DoKeyword);
+                State.VisitWithNesting(node, base.VisitDoLoopBlock);
             }
 
             public override void VisitElseIfStatement(ElseIfStatementSyntax node)
@@ -99,16 +99,16 @@ namespace SonarAnalyzer.Metrics.VisualBasic
                 base.VisitElseStatement(node);
             }
 
-            public override void VisitForEachStatement(ForEachStatementSyntax node)
+            public override void VisitForEachBlock(ForEachBlockSyntax node)
             {
-                State.IncreaseComplexityByNestingPlusOne(node.ForKeyword);
-                State.VisitWithNesting(node, base.VisitForEachStatement);
+                State.IncreaseComplexityByNestingPlusOne(node.ForEachStatement.ForKeyword);
+                State.VisitWithNesting(node, base.VisitForEachBlock);
             }
 
-            public override void VisitForStatement(ForStatementSyntax node)
+            public override void VisitForBlock(ForBlockSyntax node)
             {
-                State.IncreaseComplexityByNestingPlusOne(node.ForKeyword);
-                State.VisitWithNesting(node, base.VisitForStatement);
+                State.IncreaseComplexityByNestingPlusOne(node.ForStatement.ForKeyword);
+                State.VisitWithNesting(node, base.VisitForBlock);
             }
 
             public override void VisitGoToStatement(GoToStatementSyntax node)
@@ -194,10 +194,10 @@ namespace SonarAnalyzer.Metrics.VisualBasic
                 State.VisitWithNesting(node, base.VisitTernaryConditionalExpression);
             }
 
-            public override void VisitWhileStatement(WhileStatementSyntax node)
+            public override void VisitWhileBlock(WhileBlockSyntax node)
             {
-                State.IncreaseComplexityByNestingPlusOne(node.WhileKeyword);
-                State.VisitWithNesting(node, base.VisitWhileStatement);
+                State.IncreaseComplexityByNestingPlusOne(node.WhileStatement.WhileKeyword);
+                State.VisitWithNesting(node, base.VisitWhileBlock);
             }
         }
     }
