@@ -52,7 +52,20 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             return firstMethod.Statements.Count >= 2 &&
                 firstMethod.SubOrFunctionStatement.Identifier.ValueText != secondMethod.SubOrFunctionStatement.Identifier.ValueText &&
+                HaveSameParameters(firstMethod?.BlockStatement?.ParameterList.Parameters, secondMethod?.BlockStatement?.ParameterList.Parameters) &&
                 VisualBasicEquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);
+
+            bool HaveSameParameters(SeparatedSyntaxList<ParameterSyntax>? leftParameters, SeparatedSyntaxList<ParameterSyntax>? rightParameters)
+            {
+                if ((leftParameters == null && rightParameters != null) ||
+                    (leftParameters != null && rightParameters == null))
+                {
+                    return false;
+                }
+
+                return leftParameters.Value.Zip(rightParameters.Value, (p1, p2) => new { p1, p2 })
+                    .All(tuple => tuple.p1.IsEquivalentTo(tuple.p2, false));
+            }
         }
 
         protected override SyntaxToken GetMethodIdentifier(MethodBlockSyntax method) => method.SubOrFunctionStatement.Identifier;
