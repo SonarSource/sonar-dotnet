@@ -722,6 +722,10 @@ public static class Foo
 using System;
 public class NewClass
 {
+    private void Handler(object sender, EventArgs e) { } // Noncompliant
+}
+public partial class PartialClass
+{
     private void Handler(object sender, EventArgs e) { } // intentional False Negative
 }
 ", new UnusedPrivateMember());
