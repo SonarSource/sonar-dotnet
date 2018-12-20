@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -41,14 +41,12 @@ namespace Tests.Diagnostics
 
 
         int DiffBySignature1(int arg1)
-//          ^^^^^^^^^^^^^^^^ Secondary
         {
             Console.WriteLine(arg1);
             return arg1;
         }
 
-        string DiffBySignature2(string arg1) // Noncompliant {{Update this method so that its implementation is not identical to 'DiffBySignature1'.}}
-//             ^^^^^^^^^^^^^^^^
+        string DiffBySignature2(string arg1)
         {
             Console.WriteLine(arg1);
             return arg1;
@@ -96,5 +94,45 @@ namespace Tests.Diagnostics
         }
 
         string Qux3(int val) => val.ToString(); // Compliant we ignore expression body
+
+        public class Foo
+        {
+            public void Test(string str)
+            {
+                Console.WriteLine(str);
+            }
+        }
+
+        public class Bar
+        {
+            public void Test(string str)
+            {
+                throw new Exception(str);
+            }
+        }
+
+        public static void TestFoo1(Foo x)
+        {
+            x.Test("hello");
+            x.Test("world");
+        }
+
+        public static void TestFoo2(Foo x, string s)
+        {
+            x.Test("hello");
+            x.Test("world");
+        }
+
+        public static void TestFoo3(string s, Foo x)
+        {
+            x.Test("hello");
+            x.Test("world");
+        }
+
+        public static void TestBar1(Bar x)
+        {
+            x.Test("hello");
+            x.Test("world");
+        }
     }
 }

@@ -53,7 +53,21 @@ namespace SonarAnalyzer.Rules.CSharp
                 secondMethod.Body != null &&
                 firstMethod.Body.Statements.Count >= 2 &&
                 firstMethod.Identifier.ValueText != secondMethod.Identifier.ValueText &&
+                HaveSameParameters(firstMethod.ParameterList?.Parameters, secondMethod.ParameterList?.Parameters) &&
                 firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
+
+            bool HaveSameParameters(SeparatedSyntaxList<ParameterSyntax>? leftParameters, SeparatedSyntaxList<ParameterSyntax>? rightParameters)
+            {
+                if ((leftParameters == null && rightParameters != null) ||
+                    (leftParameters != null && rightParameters == null) ||
+                    leftParameters.Value.Count != rightParameters.Value.Count)
+                {
+                    return false;
+                }
+
+                return leftParameters.Value.Zip(rightParameters.Value, (p1, p2) => new { p1, p2 })
+                    .All(tuple => tuple.p1.IsEquivalentTo(tuple.p2, false));
+            }
         }
 
         protected override SyntaxToken GetMethodIdentifier(MethodDeclarationSyntax method)

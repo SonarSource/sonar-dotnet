@@ -51,13 +51,11 @@ Namespace Tests.Diagnostics
 
 
         Function DiffBySignature1(arg1 As Integer) As Integer
-'                ^^^^^^^^^^^^^^^^ Secondary
             Console.WriteLine(arg1)
             Return arg1
         End Function
 
-        Function DiffBySignature2(arg1 As String) As String ' Noncompliant {{Update this method so that its implementation is not identical to 'DiffBySignature1'.}}
-'                ^^^^^^^^^^^^^^^^
+        Function DiffBySignature2(arg1 As String) As String
             Console.WriteLine(arg1)
             Return arg1
         End Function
