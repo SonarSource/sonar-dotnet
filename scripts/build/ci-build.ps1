@@ -29,6 +29,7 @@ param (
     # Artifactory related parameters
     [string]$repoxUserName = $env:ARTIFACTORY_DEPLOY_USERNAME,
     [string]$repoxPassword = $env:ARTIFACTORY_DEPLOY_PASSWORD,
+    [string]$repoxUrl = $env:ARTIFACTORY_URL,
 
     # Others
     [string]$appDataPath = $env:APPDATA
@@ -159,7 +160,7 @@ function Initialize-NuGetConfig() {
 
     $nugetExe = Get-NuGetPath
     Write-Debug "Adding repox source to NuGet config"
-    Exec { & $nugetExe Sources Add -Name "repox" -Source "https://repox.sonarsource.com/api/nuget/sonarsource-nuget-qa" }
+    Exec { & $nugetExe Sources Add -Name "repox" -Source "${repoxUrl}" }
 
     Write-Debug "Adding repox API key to NuGet config"
     Exec { & $nugetExe SetApiKey "${repoxUserName}:${repoxPassword}" -Source "repox" }
