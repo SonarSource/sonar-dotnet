@@ -29,10 +29,7 @@ param (
     # Artifactory related parameters
     [string]$repoxUserName = $env:ARTIFACTORY_DEPLOY_USERNAME,
     [string]$repoxPassword = $env:ARTIFACTORY_DEPLOY_PASSWORD,
-    [string]$repoxUrl = $env:ARTIFACTORY_URL,
-
-    # Others
-    [string]$appDataPath = $env:APPDATA
+    [string]$repoxUrl = $env:ARTIFACTORY_URL
 )
 
 Set-StrictMode -version 2.0
@@ -154,16 +151,18 @@ function Invoke-SonarEndAnalysis() {
 function Initialize-NuGetConfig() {
     Write-Header "Setting up nuget.config"
 
-    $nugetFile = "${appDataPath}\NuGet\NuGet.Config"
-    Write-Debug "Deleting '${nugetFile}'"
-    Remove-Item $nugetFile
+    $nugetFile = "nuget.config"
+    New-Item $nugetFile
+    Add-Content -Path $nugetFile -Value "<?xml version="1.0" encoding="utf-8"?>"
+    Add-Content -Path $nugetFile -Value "<configuration>"
+    Add-Content -Path $nugetFile -Value "</configuration>"
 
     $nugetExe = Get-NuGetPath
     Write-Debug "Adding repox source to NuGet config"
-    Exec { & $nugetExe Sources Add -Name "repox" -Source "${repoxUrl}" }
+    Exec { & $nugetExe Sources Add -Name "repox" -Source "${repoxUrl}/api/nuget/sonarsource-nuget-qa" -ConfigFile $nugetFile }
 
     Write-Debug "Adding repox API key to NuGet config"
-    Exec { & $nugetExe SetApiKey "${repoxUserName}:${repoxPassword}" -Source "repox" }
+    Exec { & $nugetExe SetApiKey "${repoxUserName}:${repoxPassword}" -Source "repox" -ConfigFile $nugetFile }
 }
 
 function Publish-NuGetPackages {
