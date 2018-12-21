@@ -431,8 +431,21 @@ namespace SonarAnalyzer.Rules.CSharp
                 IsRemovableMember(methodSymbol) &&
                 (methodSymbol.MethodKind == MethodKind.Ordinary || methodSymbol.MethodKind == MethodKind.Constructor) &&
                 !methodSymbol.IsMainMethod() &&
-                !methodSymbol.IsEventHandler() && // Event handlers could be added in XAML and no method reference will be generated in the .g.cs file.
+                (!methodSymbol.IsEventHandler() || !IsDeclaredInPartialClass(methodSymbol)) && // Event handlers could be added in XAML and no method reference will be generated in the .g.cs file.
                 !methodSymbol.IsSerializationConstructor();
+
+            private bool IsDeclaredInPartialClass(IMethodSymbol methodSymbol)
+            {
+                return methodSymbol.DeclaringSyntaxReferences
+                    .Select(GetContainingTypeDeclaration)
+                    .Any(IsPartial);
+
+                TypeDeclarationSyntax GetContainingTypeDeclaration(SyntaxReference syntaxReference) =>
+                    syntaxReference.GetSyntax().FirstAncestorOrSelf<TypeDeclarationSyntax>();
+
+                bool IsPartial(TypeDeclarationSyntax typeDeclaration) =>
+                    typeDeclaration.Modifiers.AnyOfKind(SyntaxKind.PartialKeyword);
+            }
 
             private bool IsRemovableType(ISymbol typeSymbol)
             {

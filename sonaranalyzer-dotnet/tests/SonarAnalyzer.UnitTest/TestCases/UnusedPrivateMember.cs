@@ -199,7 +199,12 @@ namespace Tests.Diagnostics
 
     public class EventHandlerSample
     {
-        private void MyOnClick(object sender, EventArgs args) { }
+        private void MyOnClick(object sender, EventArgs args) { } // Noncompliant
+    }
+
+    public partial class EventHandlerSample1
+    {
+        private void MyOnClick(object sender, EventArgs args) { } // Compliant, event handlers in partial classes are not reported
     }
 
     public class PropertyAccess
