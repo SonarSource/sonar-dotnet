@@ -28,7 +28,7 @@ param (
 
     # Artifactory related parameters
     [string]$repoxUserName = $env:ARTIFACTORY_DEPLOY_USERNAME,
-    [string]$repoxPassword = $env:ARTIFACTORY_DEPLOY_PASSWORD,
+    [string]$repoxPassword = $env:ARTIFACTORY_DEPLOY_PASSWORD
 )
 
 Set-StrictMode -version 2.0
