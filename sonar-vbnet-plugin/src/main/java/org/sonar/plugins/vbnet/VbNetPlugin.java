@@ -36,7 +36,7 @@ import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 public class VbNetPlugin implements Plugin {
 
   static final String LANGUAGE_KEY = "vbnet";
-  static final String LANGUAGE_NAME = "Visual Basic .NET";
+  static final String LANGUAGE_NAME = "VB.NET";
 
   static final String REPOSITORY_KEY = "vbnet";
   static final String REPOSITORY_NAME = "SonarAnalyzer";
