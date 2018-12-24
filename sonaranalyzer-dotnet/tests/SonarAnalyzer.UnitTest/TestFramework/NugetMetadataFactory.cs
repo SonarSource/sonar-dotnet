@@ -34,6 +34,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     public static class NugetMetadataFactory
     {
         private const string PackagesFolderRelativePath = @"..\..\..\..\..\packages\";
+        private const string NuGetConfigFileRelativePath = @"..\..\..\nuget.config";
 
         private static readonly string[] allowedNugetLibDirectoriesInOrderOfPreference =
             new string[] {
@@ -251,7 +252,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 ? string.Empty
                 : $"-Version {packageVersion}";
 
-            var args = $"install {packageId} {versionArgument} -OutputDirectory {Path.GetFullPath(PackagesFolderRelativePath)} -NonInteractive -ForceEnglishOutput";
+            var nugetConfigPath = GetValidatedNuGetConfigPath();
+
+            var args = $"install {packageId} {versionArgument} -OutputDirectory {Path.GetFullPath(PackagesFolderRelativePath)} -NonInteractive -ForceEnglishOutput" +
+                // Explicitly specify the NuGet config to use to avoid being impacted by
+                // the NuGet config on the machine running the tests
+                $" -ConfigFile {nugetConfigPath}" ;
             LogMessage("Installing package using nuget.exe:");
             LogMessage($"\tArgs: {args}");
 
@@ -289,6 +295,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     LogMessage($"  nuget.exe: ERROR: {e.Data}");
                 }
             }
+        }
+
+        private static string GetValidatedNuGetConfigPath()
+        {
+            var path = Path.GetFullPath(NuGetConfigFileRelativePath);
+            if (!File.Exists(path))
+            {
+                throw new ApplicationException($"Test setup error: failed to find nuget.config file at \"{path}\"");
+            }
+            LogMessage($"Path to nuget.config: {path}");
+            return path;
         }
 
         private static bool IsCheckForLatestPackageRequired(string packageId)
