@@ -31,7 +31,7 @@ using NuGet;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
-    public class NugetMetadataFactory
+    public static class NugetMetadataFactory
     {
         private const string PackagesFolderRelativePath = @"..\..\..\..\..\packages\";
 
@@ -77,6 +77,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var allowedNugetLibDirectoriesByPreference = allowedTargetFrameworks.
                 Zip(Enumerable.Range(0, allowedTargetFrameworks.Length), (folder, priority) => new { folder, priority });
             var packageDirectory = GetNuGetPackageDirectory(packageId, packageVersion);
+            LogMessage($"Download package directory: {packageDirectory}");
+            if (!Directory.Exists(packageDirectory))
+            {
+                throw new ApplicationException($"Test setup error: folder for downloaded package does not exist. Folder: {packageDirectory}");
+            }
+
             var matchingDllsGroups = Directory.GetFiles(packageDirectory, "*.dll", SearchOption.AllDirectories)
                 .Select(path => new FileInfo(path))
                 .GroupBy(file => file.Directory.Name).ToArray();
@@ -127,7 +133,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static string GetNuGetPackageDirectory(string packageId, string packageVersion)
         {
             var x = $@"{PackagesFolderRelativePath}{packageId}.{GetRealVersionFolder(packageId, packageVersion)}\lib";
-            return x;
+            return Path.GetFullPath(x);
         }
 
         private static string GetRealVersionFolder(string packageId, string packageVersion) =>
@@ -245,14 +251,44 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 ? string.Empty
                 : $"-Version {packageVersion}";
 
+            var args = $"install {packageId} {versionArgument} -OutputDirectory {Path.GetFullPath(PackagesFolderRelativePath)} -NonInteractive -ForceEnglishOutput";
+            LogMessage("Installing package using nuget.exe:");
+            LogMessage($"\tArgs: {args}");
+
             var startInfo = new ProcessStartInfo
             {
                 FileName = "nuget.exe",
-                Arguments = $"install {packageId} {versionArgument} -OutputDirectory {Path.GetFullPath(PackagesFolderRelativePath)} -NonInteractive -ForceEnglishOutput",
+                Arguments = args,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                RedirectStandardError = true,
+                RedirectStandardOutput = true
             };
 
-            var process = Process.Start(startInfo);
-            process.WaitForExit();
+            using (var process = new Process())
+            {
+                process.StartInfo = startInfo;
+                process.OutputDataReceived += (s, e) => LogMessage($"  nuget.exe: {e.Data}");
+                process.ErrorDataReceived += OnErrorDataReceived;
+
+                process.Start();
+                process.BeginErrorReadLine();
+                process.BeginOutputReadLine();
+
+                process.WaitForExit();
+                if (process.ExitCode != 0)
+                {
+                    throw new ApplicationException($"Test setup error: failed to download package using nuget.exe. Exit code: {process.ExitCode}");
+                }
+            }
+
+            void OnErrorDataReceived(object sender, DataReceivedEventArgs e)
+            {
+                if (e.Data != null)
+                {
+                    LogMessage($"  nuget.exe: ERROR: {e.Data}");
+                }
+            }
         }
 
         private static bool IsCheckForLatestPackageRequired(string packageId)
