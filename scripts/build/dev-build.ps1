@@ -97,8 +97,12 @@ try {
     }
 
     if ($buildJava) {
+        $skipTests = "-DskipTests"
+        if ($test) {
+            $skipTests = ""
+        }
         Invoke-InLocation ".." {
-            Exec { & mvn clean install -P local-analyzer -D analyzer.configuration=$buildConfiguration }
+            Exec { & mvn clean install -P local-analyzer -D analyzer.configuration=$buildConfiguration $skipTests }
         }
     }
 
