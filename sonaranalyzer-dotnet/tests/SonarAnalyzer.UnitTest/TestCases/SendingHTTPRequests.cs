@@ -150,7 +150,7 @@
             restRequest = new RestSharp.RestRequest(uriAddress, RestSharp.Method.GET, RestSharp.DataFormat.Json);
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-            new DerivedRestRequest(); 
+            new DerivedRestRequest();
 //          ^^^^^^^^^^^^^^^^^^^^^^^^    {{Make sure that this http request is sent safely.}}
             restRequest = new DerivedRestRequest(address);  // Noncompliant
             new RestRequestImpl();                          // Noncompliant
