@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -40,6 +41,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+
+        private static readonly ImmutableHashSet<char> NumericTypeSuffix =
+            ImmutableHashSet.Create('L', 'D', 'F', 'U', 'M');
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -78,13 +82,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static string ClearNumberTypeSuffix(string numberLiteral)
         {
-            if (numberLiteral.EndsWith("UL"))
+            if (numberLiteral.EndsWith("UL", StringComparison.OrdinalIgnoreCase))
             {
                 return numberLiteral.Substring(0, numberLiteral.Length - 2);
             }
 
-            var lastChar = numberLiteral[numberLiteral.Length - 1];
-            if (lastChar == 'L' || lastChar == 'D' || lastChar == 'F' || lastChar == 'U' || lastChar == 'M')
+            if (NumericTypeSuffix.Contains(char.ToUpperInvariant(numberLiteral[numberLiteral.Length - 1])))
             {
                 return numberLiteral.Substring(0, numberLiteral.Length - 1);
             }
