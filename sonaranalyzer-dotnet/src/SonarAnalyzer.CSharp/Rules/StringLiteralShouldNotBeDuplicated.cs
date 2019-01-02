@@ -77,7 +77,8 @@ namespace SonarAnalyzer.Rules.CSharp
             var stringWithLiterals = new Dictionary<string, List<LiteralExpressionSyntax>>();
             foreach (var literal in stringLiterals)
             {
-                var stringValue = literal.Token.ValueText;
+                // Remove leading and trailing double quotes
+                var stringValue = ExtractStringContent(literal.Token.Text);
 
                 if (stringValue != null &&
                     stringValue.Length >= MinimumStringLength &&
@@ -104,11 +105,23 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>
+        private static bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>
             literalExpression.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>()
                 ?.ParameterList
                 ?.Parameters
                 .Any(p => p.Identifier.ValueText == literalExpression.Token.ValueText)
                 ?? false;
+
+        private static string ExtractStringContent(string literal)
+        {
+            if (literal.StartsWith("@\""))
+            {
+                return literal.Substring(2, literal.Length - 3);
+            }
+            else
+            {
+                return literal.Substring(1, literal.Length - 2);
+            }
+        }
     }
 }
