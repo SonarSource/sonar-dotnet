@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -41,6 +42,9 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
+        private static readonly ImmutableHashSet<char> NumericTypeSuffix =
+            ImmutableHashSet.Create('L', 'D', 'F', 'U', 'M');
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -53,14 +57,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var literal = (LiteralExpressionSyntax)c.Node;
 
-                    var decimalParts = literal.Token.Text.Split('.');
+                    var numberWithoutSuffix = ClearNumberTypeSuffix(literal.Token.Text);
+
+                    var decimalParts = numberWithoutSuffix.Split('.');
                     if (decimalParts.Length > 2)
                     {
                         return;
                     }
 
                     var hasIrregularPattern = decimalParts
-                        .SelectMany(x => x.Split('_'))
+                        .SelectMany(part => part.Split('_'))
                         .Select(x => x.Length)
                         .Skip(1) // skip the first part (1_234 => 234)
                         .Reverse().Skip(decimalParts.Length == 2 ? 1 : 0) // skip the last if there is a decimal (.234_5 => 234)
@@ -72,6 +78,21 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.NumericLiteralExpression);
+        }
+
+        private static string ClearNumberTypeSuffix(string numberLiteral)
+        {
+            if (numberLiteral.EndsWith("UL", StringComparison.OrdinalIgnoreCase))
+            {
+                return numberLiteral.Substring(0, numberLiteral.Length - 2);
+            }
+
+            if (NumericTypeSuffix.Contains(char.ToUpperInvariant(numberLiteral[numberLiteral.Length - 1])))
+            {
+                return numberLiteral.Substring(0, numberLiteral.Length - 1);
+            }
+
+            return numberLiteral;
         }
     }
 }

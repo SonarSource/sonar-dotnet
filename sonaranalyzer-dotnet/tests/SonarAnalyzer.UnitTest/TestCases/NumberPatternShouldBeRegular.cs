@@ -24,6 +24,21 @@ namespace Tests.Diagnostics
             balance += 227_652;
 
             Console.WriteLine(1_234);
+
+            // number types suffixes
+            ulong ulong1 = 1_000_000UL;
+            ulong ulong2 = 1_000_000ul;
+            ulong ulong3 = 1_000_000uL;
+            long long1 = 10_000L;
+            long long2 = 10_000l;
+            double double1 = 123.456D;
+            double double2 = 123.456d;
+            float float1 = 100.50F;
+            float float2 = 100.50f;
+            uint uint1 = 1_000U;
+            uint uint2 = 1_000u;
+            decimal decimal1 = 1_000.123M;
+            decimal decimal2 = 1_000.123m;
         }
 
         public void NonCompliantCases()
