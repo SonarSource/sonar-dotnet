@@ -53,14 +53,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var literal = (LiteralExpressionSyntax)c.Node;
 
-                    var decimalParts = literal.Token.Text.Split('.');
+                    var numberWithoutSuffix = ClearNumberTypeSuffix(literal.Token.Text);
+
+                    var decimalParts = numberWithoutSuffix.Split('.');
                     if (decimalParts.Length > 2)
                     {
                         return;
                     }
 
                     var hasIrregularPattern = decimalParts
-                        .SelectMany(x => x.Split('_'))
+                        .SelectMany(part => part.Split('_'))
                         .Select(x => x.Length)
                         .Skip(1) // skip the first part (1_234 => 234)
                         .Reverse().Skip(decimalParts.Length == 2 ? 1 : 0) // skip the last if there is a decimal (.234_5 => 234)
@@ -72,6 +74,22 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.NumericLiteralExpression);
+        }
+
+        private static string ClearNumberTypeSuffix(string numberLiteral)
+        {
+            if (numberLiteral.EndsWith("UL"))
+            {
+                return numberLiteral.Substring(0, numberLiteral.Length - 3);
+            }
+
+            var lastChar = numberLiteral[numberLiteral.Length - 1];
+            if (lastChar == 'L' || lastChar == 'D' || lastChar == 'F' || lastChar == 'U' || lastChar == 'M')
+            {
+                return numberLiteral.Substring(0, numberLiteral.Length - 2);
+            }
+
+            return numberLiteral;
         }
     }
 }
