@@ -39,13 +39,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void StringLiteralShouldNotBeDuplicated_Attributes()
         {
-            var analyzer = new StringLiteralShouldNotBeDuplicated
-            {
-                Threshold = 2
-            };
-
             Verifier.VerifyAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated_Attributes.cs",
-                analyzer);
+                new StringLiteralShouldNotBeDuplicated { Threshold = 2 });
         }
 
     }

@@ -4,6 +4,8 @@ namespace Tests.Diagnostics
 {
     public class Program
     {
+        private string empty = "";
+
         public const string NameConst = "foobar"; // Noncompliant {{Define a constant instead of using this literal 'foobar' 8 times.}}
 //                                      ^^^^^^^^
         public static readonly string NameReadonly = "foobar";
@@ -77,5 +79,20 @@ namespace Tests.Diagnostics
                 name4 = "foobar"; // Secondary
             }
         }
+    }
+
+    public class SpecialChar
+    {
+        // See https://github.com/SonarSource/sonar-dotnet/issues/2191
+        private string ZZ_TRANS_PACKED_0 =
+            "\x0001\u0124\x0001\x0000\x0001\u0125\x0002\x0000\x0001\u0126\x0001\x0000\x0001\u0127\x0005\x0000" + // Noncompliant {{Define a constant instead of using this literal '\x0001\u0124\x0001\x0000\x0001\u0125\x0002\x0000\x0001\u0126\x0001\x0000\x0001\u0127\x0005\x0000' 4 times.}}
+            "\x0001\u0124\x0001\x0000\x0001\u0125\x0002\x0000\x0001\u0126\x0001\x0000\x0001\u0127\x0005\x0000" + // Secondary
+            "\x0001\u0124\x0001\x0000\x0001\u0125\x0002\x0000\x0001\u0126\x0001\x0000\x0001\u0127\x0005\x0000" + // Secondary
+            "\x0001\u0124\x0001\x0000\x0001\u0125\x0002\x0000\x0001\u0126\x0001\x0000\x0001\u0127\x0005\x0000";  // Secondary
+
+        private string someString = @"cheese" // Noncompliant
+            + "cheese"      // Secondary
+            + "cheese"      // Secondary
+            + @"cheese";    // Secondary
     }
 }
