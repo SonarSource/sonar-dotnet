@@ -80,13 +80,13 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (numberLiteral.EndsWith("UL"))
             {
-                return numberLiteral.Substring(0, numberLiteral.Length - 3);
+                return numberLiteral.Substring(0, numberLiteral.Length - 2);
             }
 
             var lastChar = numberLiteral[numberLiteral.Length - 1];
             if (lastChar == 'L' || lastChar == 'D' || lastChar == 'F' || lastChar == 'U' || lastChar == 'M')
             {
-                return numberLiteral.Substring(0, numberLiteral.Length - 2);
+                return numberLiteral.Substring(0, numberLiteral.Length - 1);
             }
 
             return numberLiteral;
