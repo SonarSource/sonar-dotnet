@@ -44,22 +44,22 @@ namespace SonarAnalyzer.Helpers
                 customTags: BuildUtilityCustomTags(sourceScope));
 
         public static DiagnosticDescriptor GetDescriptor(string diagnosticId, string messageFormat,
-            ResourceManager resourceManager, bool? isEnabledByDefault = null) =>
+            ResourceManager resourceManager, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
             new DiagnosticDescriptor(
                 diagnosticId,
                 resourceManager.GetString($"{diagnosticId}_Title"),
                 messageFormat,
                 resourceManager.GetString($"{diagnosticId}_Category"),
-                DiagnosticSeverity.Warning, // We want all rules to be warning by default
+                fadeOutCode ? DiagnosticSeverity.Info : DiagnosticSeverity.Warning,
                 isEnabledByDefault ?? bool.Parse(resourceManager.GetString($"{diagnosticId}_IsActivatedByDefault")),
                 helpLinkUri: GetHelpLink(resourceManager, diagnosticId),
                 description: resourceManager.GetString($"{diagnosticId}_Description"),
-                customTags: BuildCustomTags(diagnosticId, resourceManager));
+                customTags: BuildCustomTags(diagnosticId, resourceManager, fadeOutCode));
 
         public static string GetHelpLink(ResourceManager resourceManager, string diagnosticId) =>
             string.Format(resourceManager.GetString("HelpLinkFormat"), diagnosticId.Substring(1));
 
-        private static string[] BuildCustomTags(string diagnosticId, ResourceManager resourceManager)
+        private static string[] BuildCustomTags(string diagnosticId, ResourceManager resourceManager, bool fadeOutCode)
         {
             var tags = new List<string> { resourceManager.GetString("RoslynLanguage") };
 
@@ -71,6 +71,11 @@ namespace SonarAnalyzer.Helpers
             if (Enum.TryParse<SourceScope>(resourceManager.GetString($"{diagnosticId}_Scope"), out var sourceScope))
             {
                 tags.AddRange(sourceScope.ToCustomTags());
+            }
+
+            if (fadeOutCode)
+            {
+                tags.Add(WellKnownDiagnosticTags.Unnecessary);
             }
 
             return tags.ToArray();
