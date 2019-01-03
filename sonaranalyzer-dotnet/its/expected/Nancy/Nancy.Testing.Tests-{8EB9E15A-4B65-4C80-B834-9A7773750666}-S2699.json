@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperFixture.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  21,
+"endLine":  94,
+"endColumn":  73
+}
+}
+}
+]
+}

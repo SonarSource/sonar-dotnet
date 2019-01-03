@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var hasAnyAssertion = methodDeclaration.DescendantNodes()
                         .OfType<InvocationExpressionSyntax>()
-                        .Any(invocation => IsAssertion(invocation, c.SemanticModel));
+                        .Any(invocation => IsAssertion(invocation));
                     if (!hasAnyAssertion)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
@@ -87,19 +87,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 factAttributeSyntax.ArgumentList.Arguments.Any(x => x.NameEquals.Name.Identifier.ValueText == "Skip");
         }
 
-        private static bool IsAssertion(InvocationExpressionSyntax invocation, SemanticModel model)
-        {
-            var symbolInfo = model.GetSymbolInfo(invocation);
-
-            // We try the CandidateSymbols to handle dynamic variable (with a late binding to the semantic model)
-            // and also for some framework that do not always resolve well in tests.
-            var symbol = symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault();
-            if (symbol == null)
-            {
-                return false;
-            }
-
-            return UnitTestHelper.IsAssertionMethodName(symbol.Name);
-        }
+        private static bool IsAssertion(InvocationExpressionSyntax invocation) =>
+            invocation.Expression
+                .ToString()
+                .SplitCamelCaseToWords()
+                .Intersect(UnitTestHelper.KnownAssertionMethodParts)
+                .Any();
     }
 }

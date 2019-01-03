@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.NUnit.Tests\TestKitTestFixtureTest.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  21,
+"endLine":  19,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.NUnit.Tests\TestKitTestFixtureTest.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  21,
+"endLine":  25,
+"endColumn":  94
+}
+}
+}
+]
+}
