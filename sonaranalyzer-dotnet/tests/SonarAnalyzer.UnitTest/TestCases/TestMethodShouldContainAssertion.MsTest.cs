@@ -267,4 +267,19 @@
             Assert.IsTrue(true);
         }
     }
+
+    public class Class1
+    {
+        public int Add(int a, int b) => a + b;
+    }
+
+    [TestClass]
+    public class UnitTest1
+    {
+        [TestMethod]
+        public void TestMethod1() // Noncompliant
+        {
+            var result = new Class1().Add(1, 2);
+        }
+    }
 }

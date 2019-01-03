@@ -77,16 +77,16 @@ namespace SonarAnalyzer.Helpers
         /// <summary>
         /// List of partial names that are assumed to indicate an assertion method
         /// </summary>
-        private static readonly IEnumerable<string> AssertionPartialMethodName =
-            new List<string>
-            {
+        public static readonly ImmutableArray<string> KnownAssertionMethodParts =
+            ImmutableArray.Create(
                 "ASSERT",
-                "SHOULD",
+                "CHECK",
                 "EXPECT",
                 "MUST",
+                "SHOULD",
                 "VERIFY",
                 "VALIDATE"
-            };
+            );
 
         private static readonly ImmutableArray<KnownType> KnownTestClassAttributes =
             ImmutableArray.Create(
@@ -107,9 +107,6 @@ namespace SonarAnalyzer.Helpers
 
         public static bool HasExpectedExceptionAttribute(this IMethodSymbol method) =>
             method.GetAttributes().Any(a => a.AttributeClass.IsAny(KnownExpectedExceptionAttributes));
-
-        public static bool IsAssertionMethodName(string name) =>
-            name.SplitCamelCaseToWords().Union(AssertionPartialMethodName).Any();
 
         public static bool IsMsTestOrNUnitTestIgnored(this IMethodSymbol method)
         {

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  27,
+"endLine":  162,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  27,
+"endLine":  176,
+"endColumn":  113
+}
+}
+}
+]
+}

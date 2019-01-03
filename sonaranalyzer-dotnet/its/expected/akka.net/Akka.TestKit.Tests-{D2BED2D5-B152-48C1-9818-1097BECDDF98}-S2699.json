@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestKitBaseTests\ReceiveTests.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  21,
+"endLine":  29,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestKitBaseTests\ReceiveTests.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  21,
+"endLine":  35,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestKitBaseTests\ReceiveTests.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  21,
+"endLine":  54,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestKitBaseTests\ReceiveTests.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  21,
+"endLine":  60,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\Xunit2\TestEventListenerTests\AllTestForEventFilterBase.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  21,
+"endLine":  140,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\Xunit2\TestEventListenerTests\AllTestForEventFilterBase.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  21,
+"endLine":  152,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\Xunit2\TestEventListenerTests\AllTestForEventFilterBase.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  21,
+"endLine":  162,
+"endColumn":  57
+}
+}
+}
+]
+}
