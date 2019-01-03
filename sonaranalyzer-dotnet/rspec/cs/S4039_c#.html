@@ -5,64 +5,60 @@ inaccessible.</p>
 and does not provide an alternate, externally visible method with the same name.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
-
-namespace MyLibrary
+public interface IMyInterface
 {
-  public interface IMyInterface
-  {
     void MyMethod();
-  }
+}
 
-  public class Foo : IMyInterface
-  {
-    void IMyInterface.MyMethod()  // Noncompliant
+public class Foo : IMyInterface
+{
+    void IMyInterface.MyMethod() // Noncompliant
     {
-      // Do something ...
+        MyMethod();
     }
-  }
 
-  public class Bar : Foo, IMyInterface
-  {
+    void MyMethod()
+    {
+        // Do something ...
+    }
+}
+
+public class Bar : Foo, IMyInterface
+{
     public void MyMethod()
-   {
-     // Can't access base.MyMethod()
-    // ((IMyInterface)this).MyMethod() would be a recursive call
-   }
-  }
+    {
+        // Can't access base.MyMethod()
+        // ((IMyInterface)this).MyMethod() would be a recursive call
+    }
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-using System;
-
-namespace MyLibrary
+public interface IMyInterface
 {
-  public interface IMyInterface
-  {
     void MyMethod();
-  }
+}
 
-  public class Foo : IMyInterface
-  {
+public class Foo : IMyInterface
+{
     void IMyInterface.MyMethod()
     {
-      MyMethod();
+        MyMethod();
     }
-    void MyMethod()
-    {
-      // Do something ...
-    }
-  }
 
-  public class Bar : Foo, IMyInterface
-  {
+    protected void MyMethod() // or public
+    {
+        // Do something ...
+    }
+}
+
+public class Bar : Foo, IMyInterface
+{
     public void MyMethod()
-   {
-      // Do something
-      base.MyMethod();
-   }
-  }
+    {
+        // Do something
+        base.MyMethod();
+    }
 }
 </pre>
 <h2>Exceptions</h2>
