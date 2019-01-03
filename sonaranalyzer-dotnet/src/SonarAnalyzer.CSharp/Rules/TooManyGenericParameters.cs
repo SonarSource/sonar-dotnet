@@ -19,7 +19,7 @@
  */
 
 using System.Collections.Immutable;
-using System.Linq;
+using System.Diagnostics;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -57,18 +57,20 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var classDeclaration = (ClassDeclarationSyntax)c.Node;
+                    var typeDeclaration = (TypeDeclarationSyntax)c.Node;
 
-                    if (classDeclaration.TypeParameterList == null ||
-                        classDeclaration.TypeParameterList.Parameters.Count <= MaxNumberOfGenericParametersInClass)
+                    if (typeDeclaration.TypeParameterList == null ||
+                        typeDeclaration.TypeParameterList.Parameters.Count <= MaxNumberOfGenericParametersInClass)
                     {
                         return;
                     }
 
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
-                        classDeclaration.Identifier.ValueText, "class", MaxNumberOfGenericParametersInClass));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, typeDeclaration.Identifier.GetLocation(),
+                        typeDeclaration.Identifier.ValueText, GetTypeKeyword(typeDeclaration), MaxNumberOfGenericParametersInClass));
                 },
-                SyntaxKind.ClassDeclaration);
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.StructDeclaration,
+                SyntaxKind.InterfaceDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
