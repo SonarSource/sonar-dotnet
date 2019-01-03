@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -53,39 +54,64 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var classDeclaration = (ClassDeclarationSyntax)c.Node;
-
-                var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
-
-                if (classSymbol == null ||
-                    classSymbol.TypeArguments.Length <= MaxNumberOfGenericParametersInClass)
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
-                    return;
-                }
+                    var classDeclaration = (ClassDeclarationSyntax)c.Node;
 
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
-                    classSymbol.Name, "class", MaxNumberOfGenericParametersInClass));
-            },
-            SyntaxKind.ClassDeclaration);
+                    if (classDeclaration.TypeParameterList == null ||
+                        classDeclaration.TypeParameterList.Parameters.Count <= MaxNumberOfGenericParametersInClass)
+                    {
+                        return;
+                    }
 
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var methodDeclaration = (MethodDeclarationSyntax)c.Node;
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
+                        classDeclaration.Identifier.ValueText, "class", MaxNumberOfGenericParametersInClass));
+                },
+                SyntaxKind.ClassDeclaration);
 
-                var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
-
-                if (methodSymbol == null ||
-                    methodSymbol.TypeArguments.Length <= MaxNumberOfGenericParametersInMethod)
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
-                    return;
-                }
+                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
 
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
-                    $"{methodSymbol.ContainingType.Name}.{methodSymbol.Name}", "method", MaxNumberOfGenericParametersInMethod));
-            },
-            SyntaxKind.MethodDeclaration);
+                    if (methodDeclaration.TypeParameterList == null ||
+                        methodDeclaration.TypeParameterList.Parameters.Count <= MaxNumberOfGenericParametersInMethod)
+                    {
+                        return;
+                    }
+
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
+                        $"{GetEnclosingTypeName(methodDeclaration)}.{methodDeclaration.Identifier.ValueText}", "method",
+                        MaxNumberOfGenericParametersInMethod));
+                },
+                SyntaxKind.MethodDeclaration);
+        }
+
+        private string GetEnclosingTypeName(MethodDeclarationSyntax methodDeclaration)
+        {
+            var parent = methodDeclaration.Parent;
+
+            while (parent != null)
+            {
+                switch (parent.Kind())
+                {
+                    case SyntaxKind.ClassDeclaration:
+                        return ((ClassDeclarationSyntax)parent).Identifier.ValueText;
+
+                    case SyntaxKind.StructDeclaration:
+                        return ((StructDeclarationSyntax)parent).Identifier.ValueText;
+
+                    case SyntaxKind.InterfaceDeclaration:
+                        return ((InterfaceDeclarationSyntax)parent).Identifier.ValueText;
+
+                    default:
+                        parent = methodDeclaration.Parent;
+                        break;
+                }
+            }
+
+            return null;
         }
     }
 }

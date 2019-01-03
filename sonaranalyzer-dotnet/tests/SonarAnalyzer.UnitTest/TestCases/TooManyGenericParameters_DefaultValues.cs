@@ -55,3 +55,21 @@ namespace Tests.Diagnostics
     {
     }
 }
+
+namespace MyLib
+{
+    public abstract class FrameworkBaseClass<T1, T2, T3> // Noncompliant
+    {
+
+    }
+}
+
+namespace TheProject
+{
+    using MyLib;
+
+    public class Impl : FrameworkBaseClass<int, double, bool>
+    {
+
+    }
+}
