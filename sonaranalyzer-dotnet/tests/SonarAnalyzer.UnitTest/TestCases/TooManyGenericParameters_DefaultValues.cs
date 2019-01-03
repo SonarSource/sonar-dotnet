@@ -54,4 +54,33 @@ namespace Tests.Diagnostics
 //        ^^^
     {
     }
+
+    struct Str<T1, T2, T3> // Noncompliant {{Reduce the number of generic parameters in the 'Str' struct to no more than the 2 authorized.}}
+//         ^^^
+    {
+
+    }
+
+    interface IFoo<T1, T2, T3> // Noncompliant {{Reduce the number of generic parameters in the 'IFoo' interface to no more than the 2 authorized.}}
+//            ^^^^
+    {
+    }
+}
+
+namespace MyLib
+{
+    public abstract class FrameworkBaseClass<T1, T2, T3> // Noncompliant
+    {
+
+    }
+}
+
+namespace TheProject
+{
+    using MyLib;
+
+    public class Impl : FrameworkBaseClass<int, double, bool>
+    {
+
+    }
 }
