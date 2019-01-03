@@ -88,7 +88,26 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration);
         }
 
-        private string GetEnclosingTypeName(MethodDeclarationSyntax methodDeclaration)
+        private static string GetTypeKeyword(TypeDeclarationSyntax typeDeclaration)
+        {
+            switch (typeDeclaration.Kind())
+            {
+                case SyntaxKind.ClassDeclaration:
+                    return "class";
+
+                case SyntaxKind.StructDeclaration:
+                    return "struct";
+
+                case SyntaxKind.InterfaceDeclaration:
+                    return "interface";
+
+                default:
+                    Debug.Fail($"Unexpected type: {typeDeclaration.ToString()}");
+                    return "type";
+            }
+        }
+
+        private static string GetEnclosingTypeName(MethodDeclarationSyntax methodDeclaration)
         {
             var parent = methodDeclaration.Parent;
 
