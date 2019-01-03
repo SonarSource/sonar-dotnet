@@ -61,8 +61,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     // the compilation is over, depending on whether InternalsVisibleTo attribute is present
                     // or not.
                     var removableInternalTypes = new ConcurrentBag<ISymbol>();
-                    // Collect here all named types from the project to look for internal member usages.
-                    var allNamedTypes = new ConcurrentBag<INamedTypeSymbol>();
 
                     c.RegisterSymbolAction(
                         cc =>
@@ -74,9 +72,6 @@ namespace SonarAnalyzer.Rules.CSharp
                             {
                                 return;
                             }
-
-                            // Collect all symbols to try to look for used internal members when the compilation ends
-                            allNamedTypes.Add(namedType);
 
                             // Collect symbols of private members that could potentially be removed
                             var removableSymbolsCollector = new CSharpRemovableSymbolWalker(c.Compilation.GetSemanticModel);
@@ -127,12 +122,9 @@ namespace SonarAnalyzer.Rules.CSharp
                                 c.Compilation.GetSemanticModel,
                                 removableInternalTypes.Select(s => s.Name).ToHashSet());
 
-                            foreach (var symbol in allNamedTypes)
+                            foreach (var syntaxTree in c.Compilation.SyntaxTrees)
                             {
-                                if (!VisitDeclaringReferences(symbol, usageCollector))
-                                {
-                                    return;
-                                }
+                                usageCollector.SafeVisit(syntaxTree.GetRoot());
                             }
 
                             var diagnostics = GetDiagnostics(usageCollector, removableInternalTypes.ToHashSet(), "internal",
