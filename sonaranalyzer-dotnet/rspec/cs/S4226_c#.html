@@ -2,8 +2,6 @@
 <p>This rule raises an issue when an extension is declared in the same namespace as the class it is extending.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-using System;
-
 namespace MyLibrary
 {
     public class Foo
@@ -11,7 +9,7 @@ namespace MyLibrary
         // ...
     }
 
-    public static MyExtensions
+    public static class MyExtensions
     {
         public static void Bar(this Foo a) // Noncompliant
         {
@@ -21,9 +19,29 @@ namespace MyLibrary
 }
 </pre>
 <h2>Compliant Solution</h2>
+<p>Using separate namespace:</p>
 <pre>
-using System;
+namespace MyLibrary
+{
+    public class Foo
+    {
+        // ...
+    }
+}
 
+namespace Helpers
+{
+    public static class MyExtensions
+    {
+        public void Bar()
+        {
+            // ...
+        }
+    }
+}
+</pre>
+<p>Merging the method in the class:</p>
+<pre>
 namespace MyLibrary
 {
     public class Foo

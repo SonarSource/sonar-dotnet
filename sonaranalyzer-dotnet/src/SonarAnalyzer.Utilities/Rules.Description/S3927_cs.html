@@ -35,16 +35,16 @@ public class Foo
 public class Foo
 {
     [OnSerializing]
-    void OnSerializing(StreamingContext context) {}
+    private void OnSerializing(StreamingContext context) {}
 
     [OnSerialized]
-    void OnSerialized(StreamingContext context) {}
+    private void OnSerialized(StreamingContext context) {}
 
     [OnDeserializing]
-    void OnDeserializing(StreamingContext context) {}
+    private void OnDeserializing(StreamingContext context) {}
 
     [OnDeserialized]
-    void OnDeserialized(StreamingContext context) {}
+    private void OnDeserialized(StreamingContext context) {}
 }
 </pre>
 

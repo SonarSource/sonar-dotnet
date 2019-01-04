@@ -3,12 +3,25 @@ accurately restored to their original characters.</p>
 <p>It is therefore strongly recommended to normalize characters and strings to uppercase instead.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-string s = myString.ToLower(CultureInfo.InvariantCulture);  // Noncompliant
-char c = char.ToLower('A', CultureInfo.InvariantCulture); // Noncompliant
+Thread.CurrentThread.CurrentCulture = new CultureInfo("tr-TR");
+var areStringEqual = "INTEGER".ToLower() == "integer"; // Noncompliant, the result is false as the ToLower will resolve to "ınteger"
+var areCharEqual = char.ToLower('I') == 'i'; // Noncompliant, the result is false as the ToLower will resolve to "ı"
+
+var incorrectRoundtrip = "İ".ToLowerInvariant().ToUpper() == "I".ToLowerInvariant().ToUpper(); // Noncompliant, because of the lower we lose the information about the correct uppercase character
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-string s = myString.ToUpperInvariant();
-char c = char.ToUpperInvariant('A');
+Thread.CurrentThread.CurrentCulture = new CultureInfo("tr-TR");
+var areStringEqual = "ınteger".ToUpperInvariant() == "ıNTEGER";
+var areCharEqual = char.ToUpperInvariant('ı') == 'ı';
+var correctRoundtrip = "İ".ToUpperInvariant().ToLower() != "I".ToUpperInvariant().ToLower();
 </pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="http://www.i18nguy.com/unicode/turkish-i18n.html">Internationalization for Turkish</a> </li>
+  <li> <a href="https://gingter.org/2018/07/10/how-to-correctly-normalize-strings-and-how-to-compare-them-in-net/">How to correctly normalize
+  strings</a> </li>
+  <li> [Best Practices for Using Strings in .NET|
+  https://docs.microsoft.com/en-us/dotnet/standard/base-types/best-practices-strings#recommendations-for-string-usage] </li>
+</ul>
 

@@ -3,7 +3,7 @@ If a class has an <code>IDisposable</code> field, there can be two situations:</
 <p>- The class observes a field that it under the responsibility of another class. </p>
 <p>- The class owns the field, and is therefore responsible for calling <code>Dispose</code> on it.</p>
 <p>In the second case, the safest way for the class to ensure <code>Dispose</code> is called is to call it in its own <code>Dispose</code> function,
-and therefore to be itself <code>IDisposable</code>. We consider that a class own a <code>IDisposable</code> field resource if it created the object
+and therefore to be itself <code>IDisposable</code>. A class is considered to own an <code>IDisposable</code> field resource if it created the object
 referenced by the field.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
