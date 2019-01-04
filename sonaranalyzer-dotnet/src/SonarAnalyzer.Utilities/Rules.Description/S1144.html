@@ -14,7 +14,7 @@ public class Foo
 <pre>
 public class Foo
 {
-  private Foo()
+  public Foo()
   {
     UsedPrivateMethod();
   }
@@ -28,10 +28,12 @@ public class Foo
 }
 </pre>
 <h2>Exceptions</h2>
-<p>This rule doesn't raise any issue on:</p>
+<p>This rule doesn't raise issues on:</p>
 <ul>
   <li> Empty constructors </li>
   <li> Attributed members </li>
+  <li> <code>Main</code> method </li>
+  <li> Methods with event handler signature <code>void Foo(object, EventArgs)</code> that are declared in partial class </li>
   <li> Empty serialization constructor on type with <code>System.SerializableAttribute</code> attribute. </li>
   <li> Internals in assemblies that have a <code>System.Runtime.CompilerServices.InternalsVisibleToAttribute</code> attribute. </li>
 </ul>
