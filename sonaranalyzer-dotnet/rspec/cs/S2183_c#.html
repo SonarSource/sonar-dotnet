@@ -1,18 +1,44 @@
-<p>Since an <code>int</code> is a 32-bit variable, shifting by more than +/-31 is confusing at best and an error at worst. Shifting an
-<code>int</code> by 32 is the same as shifting it by 0, and shifting it by 33 is the same as shifting it by 1.</p>
-<p>Similarly, shifting a <code>long</code> by +/-64 is the same as shifting it by 0, and shifting it by 65 is the same as shifting it by 1.</p>
+<p>Shifting an integral number by 0 is equivalent to doing nothing but makes the code confusing for maintainers.</p>
+<p>If the first operand is an <code>int</code> or <code>uint</code> (32-bit quantity), the shift count is given by the low-order five bits of the
+second operand. That is, the actual shift count is 0 to 31 bits.</p>
+<p>Note that integral number with a less than 32-bit quantity (e.g. <code>short</code>, <code>ushort</code>...) are implicitly converted to
+<code>int</code> before the shifting operation and so the rule for <code>int</code>/<code>uint</code> applies.</p>
+<p>If the first operand is a <code>long</code> or <code>ulong</code> (64-bit quantity), the shift count is given by the low-order six bits of the
+second operand. That is, the actual shift count is 0 to 63 bits.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public int Shift(int a)
+public void Main()
 {
-  return a &lt;&lt; 48;
+    short s = 1;
+    short shortShift1 = (short)(s &lt;&lt; 0); // Noncompliant
+    short shortShift1 = (short)(s &lt;&lt; 16); // Compliant as short will be cast to int (16 is between 0 and 31)
+    short shortShift3 = (short)(s &lt;&lt; 32); // Noncompliant, this is equivalent to shifting by 1
+
+    int i = 1;
+    int intShift1 = i &lt;&lt; 0; // Noncompliant
+    int intShift2 = i &lt;&lt; 32; // Noncompliant, this is equivalent to shifting by 1
+
+    long lg = 1;
+    long longShift1 = lg &lt;&lt; 0; // Noncompliant
+    long longShift2 = lg &lt;&lt; 64; // Noncompliant, this is equivalent to shifting by 1
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public int Shift(int a)
+public void Main()
 {
-  return a &lt;&lt; 16;
+    short s = 1;
+    short shortShift1 = s;
+    short shortShift1 = (short)(s &lt;&lt; 16);
+    short shortShift3 = (short)(s &lt;&lt; 1);
+
+    int i = 1;
+    var intShift1 = i;
+    var intShift2 = i &lt;&lt; 1;
+
+    long lg = 1;
+    var longShift1 = lg;
+    var longShift2 = lg &lt;&lt; 1;
 }
 </pre>
 <h2>Exceptions</h2>
@@ -25,4 +51,9 @@ public int Shift(int a)
 bytes[loc+0] = (byte)(value &gt;&gt; 8);
 bytes[loc+1] = (byte)(value &gt;&gt; 0);
 </pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/left-shift-operator">MSDN Left-shift operator</a> </li>
+  <li> <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/right-shift-operator">MSDN Right-shift operator</a> </li>
+</ul>
 
