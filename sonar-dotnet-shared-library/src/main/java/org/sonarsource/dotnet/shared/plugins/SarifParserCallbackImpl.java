@@ -159,10 +159,10 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
 
   private void createExternalIssue(InputFile inputFile, String ruleId, @Nullable String level, Location primaryLocation, Collection<Location> secondaryLocations) {
     NewExternalIssue newIssue = newExternalIssue(ruleId);
-    newIssue.at(createPrimaryLocation(inputFile, primaryLocation, newIssue::newLocation));
+    newIssue.at(createPrimaryLocation(inputFile, primaryLocation, newIssue::newLocation, true));
     setExternalIssueSeverityAndType(ruleId, level, newIssue);
 
-    populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation);
+    populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation, true);
 
     newIssue.save();
   }
@@ -192,27 +192,21 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     NewIssue newIssue = context.newIssue();
     newIssue
       .forRule(RuleKey.of(repositoryKey, ruleId))
-      .at(createPrimaryLocation(inputFile, primaryLocation, newIssue::newLocation));
+      .at(createPrimaryLocation(inputFile, primaryLocation, newIssue::newLocation, false));
 
-    populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation);
+    populateSecondaryLocations(secondaryLocations, newIssue::newLocation, newIssue::addLocation, false);
 
     newIssue.save();
   }
 
-  private static NewIssueLocation createPrimaryLocation(InputFile inputFile, Location primaryLocation, Supplier<NewIssueLocation> newIssueLocationSupplier) {
-    NewIssueLocation newIssueLocation = newIssueLocationSupplier.get()
-      .on(inputFile)
-      .at(inputFile.newRange(primaryLocation.getStartLine(), primaryLocation.getStartColumn(),
-        primaryLocation.getEndLine(), primaryLocation.getEndColumn()));
-    String message = primaryLocation.getMessage();
-    if (message != null) {
-      newIssueLocation.message(message);
-    }
-    return newIssueLocation;
+  private static NewIssueLocation createPrimaryLocation(InputFile inputFile, Location primaryLocation, Supplier<NewIssueLocation> newIssueLocationSupplier,
+    boolean isLocationResilient) {
+
+    return createIssueLocation(inputFile, primaryLocation, newIssueLocationSupplier, isLocationResilient);
   }
 
-  private void populateSecondaryLocations(Collection<Location> secondaryLocations, Supplier<NewIssueLocation> newIssueLocationProvider,
-    Consumer<NewIssueLocation> newIssueLocationConsumer) {
+  private void populateSecondaryLocations(Collection<Location> secondaryLocations, Supplier<NewIssueLocation> newIssueLocationSupplier,
+    Consumer<NewIssueLocation> newIssueLocationConsumer, boolean isLocationResilient) {
     for (Location secondaryLocation : secondaryLocations) {
       InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates()
         .hasAbsolutePath(secondaryLocation.getAbsolutePath()));
@@ -220,18 +214,43 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
         continue;
       }
 
-      NewIssueLocation newIssueLocation = newIssueLocationProvider.get()
-        .on(inputFile)
-        .at(inputFile.newRange(secondaryLocation.getStartLine(), secondaryLocation.getStartColumn(),
-          secondaryLocation.getEndLine(), secondaryLocation.getEndColumn()));
-
-      String secondaryLocationMessage = secondaryLocation.getMessage();
-      if (secondaryLocationMessage != null) {
-        newIssueLocation.message(secondaryLocationMessage);
-      }
-
+      NewIssueLocation newIssueLocation = createIssueLocation(inputFile, secondaryLocation, newIssueLocationSupplier, isLocationResilient);
       newIssueLocationConsumer.accept(newIssueLocation);
     }
+  }
+
+  private static NewIssueLocation createIssueLocation(InputFile inputFile, Location location, Supplier<NewIssueLocation> newIssueLocationSupplier,
+    boolean isLocationResilient) {
+
+    NewIssueLocation newIssueLocation = newIssueLocationSupplier.get()
+      .on(inputFile);
+
+    try {
+      // First, we try to report the issue with the precise location...
+      newIssueLocation = newIssueLocation.at(inputFile.newRange(location.getStartLine(), location.getStartColumn(),
+        location.getEndLine(), location.getEndColumn()));
+
+    } catch (IllegalArgumentException ex1) {
+
+      if (!isLocationResilient) {
+        throw ex1; // Our rules should fail if they report on an invalid location
+      }
+
+      try {
+        // Precise location failed, now try the line...
+        newIssueLocation = newIssueLocation.at(inputFile.selectLine(location.getStartLine()));
+      } catch (IllegalArgumentException ex2) {
+        // Line location failed so let's report at file level (we are sure the file exists).
+        // As the file was already registered previously, there is nothing to do here.
+      }
+    }
+
+    String message = location.getMessage();
+    if (message != null) {
+      newIssueLocation.message(message);
+    }
+
+    return newIssueLocation;
   }
 
   @Override
