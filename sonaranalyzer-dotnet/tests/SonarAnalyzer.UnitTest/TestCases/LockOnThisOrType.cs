@@ -23,7 +23,7 @@ namespace Tests.Diagnostics
             {
                 // ...
             }
-            lock ((new LockOnThisOrType()).GetType()) // Noncompliant {{Lock on a new 'object' instead.}}
+            lock ((new LockOnThisOrType()).GetType()) // Noncompliant {{Lock on a dedicated object instance instead.}}
             {
                 // ...
             }

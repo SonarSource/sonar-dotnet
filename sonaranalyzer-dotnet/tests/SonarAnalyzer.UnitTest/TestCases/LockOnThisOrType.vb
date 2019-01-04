@@ -4,7 +4,7 @@ Imports System.Collections.Generic
 Namespace Tests.Diagnostics
     Public Class LockOnThisOrType
         Public Sub MyLockingMethod()
-            SyncLock Me ' Noncompliant {{Lock on a new 'object' instead.}}
+            SyncLock Me ' Noncompliant {{Lock on a dedicated object instance instead.}}
 '                    ^^
             End SyncLock
 
