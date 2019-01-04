@@ -151,6 +151,55 @@ public class SarifParserCallbackImplTest {
   }
 
   @Test
+  public void external_issue_with_invalid_precise_location_reports_on_line() {
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
+
+    // We try to report an issue that contains an invalid startColumn (bigger than the line length) but with a valid start line
+    // So we expect the issue to be reported on the start line.
+    callback.onIssue("rule45", "warning", createLocation("file1", 2, 20, 4, 2), Collections.emptyList());
+
+    assertThat(ctx.allIssues()).isEmpty();
+    assertThat(ctx.allExternalIssues())
+      .extracting(ExternalIssue::ruleId,
+        i -> i.primaryLocation().textRange().start().line(),
+        i -> i.primaryLocation().textRange().start().lineOffset(),
+        i -> i.primaryLocation().textRange().end().line(),
+        i -> i.primaryLocation().textRange().end().lineOffset())
+      .containsExactlyInAnyOrder(
+        tuple("rule45", 2, 0, 2, 8));
+  }
+
+  @Test
+  public void external_issue_with_invalid_line_location_reports_on_file() {
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
+
+    // We try to report an issue that contains an invalid startLine (bigger than the file length)
+    // So we expect the issue to be reported on the file.
+    callback.onIssue("rule45", "warning", createLocation("file1", 10, 12), Collections.emptyList());
+
+    assertThat(ctx.allIssues()).isEmpty();
+    assertThat(ctx.allExternalIssues())
+      .extracting(ExternalIssue::ruleId, i -> i.primaryLocation().inputComponent().key(), i -> i.primaryLocation().textRange())
+      .containsExactlyInAnyOrder(
+        tuple("rule45", "module1:file1", null));
+  }
+
+  @Test
+  public void external_issue_with_invalid_precise_location_reports_on_file() {
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
+
+    // We try to report an issue that contains an invalid startLine (bigger than the file length)
+    // So we expect the issue to be reported on the file.
+    callback.onIssue("rule45", "warning", createLocation("file1", 10, 53, 80, 42), Collections.emptyList());
+
+    assertThat(ctx.allIssues()).isEmpty();
+    assertThat(ctx.allExternalIssues())
+      .extracting(ExternalIssue::ruleId, i -> i.primaryLocation().inputComponent().key(), i -> i.primaryLocation().textRange())
+      .containsExactlyInAnyOrder(
+        tuple("rule45", "module1:file1", null));
+  }
+
+  @Test
   public void should_add_issue_with_secondary_location() {
     callback.onIssue("rule1", "warning", createLocation("file1", 2, 3), Collections.singletonList(createLocation("file1", 4, 5)));
 
