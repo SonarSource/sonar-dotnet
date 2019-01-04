@@ -10,7 +10,7 @@ namespace Tests.Diagnostics
         {
             for (int i = 0; i < length; i++)
             {
-                break; // Noncompliant {{Remove this 'break' statement or make it conditional.}}
+                break; // Noncompliant {{Refactor the containing loop to do more than one iteration.}}
 //              ^^^^^^
             }
 
@@ -145,13 +145,13 @@ namespace Tests.Diagnostics
 
                 while (true)
                 {
-                    return; // Noncompliant {{Remove this 'return' statement or make it conditional.}}
+                    return; // Noncompliant {{Refactor the containing loop to do more than one iteration.}}
 //                  ^^^^^^^
                 }
 
                 while (true)
                 {
-                    throw new Exception(); // Noncompliant {{Remove this 'throw' statement or make it conditional.}}
+                    throw new Exception(); // Noncompliant {{Refactor the containing loop to do more than one iteration.}}
 //                  ^^^^^^^^^^^^^^^^^^^^^^
                 }
             }

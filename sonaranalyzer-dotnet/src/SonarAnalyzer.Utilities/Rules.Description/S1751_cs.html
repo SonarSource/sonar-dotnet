@@ -1,28 +1,20 @@
-<p>A loop with at most one iteration is equivalent to the use of an <code>if</code> statement to conditionally execute one piece of code. No developer
-expects to find such a use of a loop statement. If the initial intention of the author was really to conditionally execute one piece of code, an
-<code>if</code> statement should be used instead.</p>
-<p>At worst that was not the initial intention of the author and so the body of the loop should be fixed to use the nested <code>return</code>,
-<code>break</code> or <code>throw</code> statements in a more appropriate way.</p>
+<p>A loop with at most one iteration is equivalent to the use of an <code>if</code> statement to conditionally execute one piece of code. If the
+initial intention of the author was really to conditionally execute one piece of code, an <code>if</code> statement should be used instead. If that
+was not the initial intention of the author, the body of the loop should be fixed to use the nested <code>return</code>, <code>break</code> or
+<code>throw</code> statements in a more appropriate way.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-for (int i = 0; i &lt; 10; i++) // noncompliant, loop only executes once
+for (int i = 0; i &lt; 10; i++)
 {
     Console.WriteLine(i);
-    break;
+    break;  // Noncompliant, loop only executes once
 }
 ...
-for (int i = 0; i &lt; 10; i++) // noncompliant, loop only executes once
+foreach (var item in items)
 {
-    if (i == x)
-    {
-        break;
-    }
-    else
-    {
-        Console.WriteLine(i);
-        return;
-    }
+    return item;  // Noncompliant, loop only executes once
 }
+...
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
@@ -31,16 +23,11 @@ for (int i = 0; i &lt; 10; i++)
     Console.WriteLine(i);
 }
 ...
-for (int i = 0; i &lt; 10; i++)
+var item = items.FirstOrDefault();
+if (item != null)
 {
-    if (i == x)
-    {
-        break;
-    }
-    else
-    {
-        Console.WriteLine(i);
-    }
+    return item;
 }
+...
 </pre>
 

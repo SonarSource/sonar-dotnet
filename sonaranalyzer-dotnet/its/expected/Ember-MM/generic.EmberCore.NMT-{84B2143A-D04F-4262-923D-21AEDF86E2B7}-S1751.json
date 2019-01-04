@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1751",
-"message":  "Remove this 'Exit' statement or make it conditional.",
+"message":  "Refactor the containing loop to do more than one iteration.",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
 "region":  {

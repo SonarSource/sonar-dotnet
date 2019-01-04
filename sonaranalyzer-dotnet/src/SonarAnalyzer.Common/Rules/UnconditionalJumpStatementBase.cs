@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules
         where TLanguageKindEnum : struct
     {
         protected const string DiagnosticId = "S1751";
-        protected const string MessageFormat = "Remove this '{0}' statement or make it conditional.";
+        protected const string MessageFormat = "Refactor the containing loop to do more than one iteration.";
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
@@ -48,13 +48,11 @@ namespace SonarAnalyzer.Rules
                     walker.Visit();
                     foreach (var node in walker.GetRuleViolations())
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], node.GetLocation(), GetKeywordText(node)));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], node.GetLocation()));
                     }
                 },
                 LoopStatements.ToArray());
         }
-
-        protected abstract string GetKeywordText(TStatementSyntax statement);
     }
 
     public abstract class LoopWalkerBase<TStatementSyntax, TLanguageKindEnum>

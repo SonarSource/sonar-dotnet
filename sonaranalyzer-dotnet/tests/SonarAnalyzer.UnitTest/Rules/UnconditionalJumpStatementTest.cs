@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnconditionalJumpStatement()
+        public void UnconditionalJumpStatement_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\UnconditionalJumpStatement.cs",
                 new UnconditionalJumpStatement());
