@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, "{0}", RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static Dictionary<KnownType, int> mapKnownTypesToIntegerBitSize
+        private static ImmutableDictionary<KnownType, int> mapKnownTypesToIntegerBitSize
             = new Dictionary<KnownType, int>
             {
                 [KnownType.System_Int64] = 64,
@@ -56,12 +56,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 [KnownType.System_Int32] = 32,
                 [KnownType.System_UInt32] = 32,
 
-                [KnownType.System_Int16] = 16,
-                [KnownType.System_UInt16] = 16,
+                [KnownType.System_Int16] = 32,
+                [KnownType.System_UInt16] = 32,
 
-                [KnownType.System_Byte] = 8,
-                [KnownType.System_SByte] = 8
-            };
+                [KnownType.System_Byte] = 32,
+                [KnownType.System_SByte] = 32
+            }.ToImmutableDictionary();
 
         private enum Shift { Left, Right };
 
