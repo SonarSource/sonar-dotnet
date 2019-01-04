@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S2551",
-"message":  "Lock on a new 'object' instead.",
+"message":  "Lock on a dedicated object instance instead.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\StaticMapping.cs",
 "region":  {
