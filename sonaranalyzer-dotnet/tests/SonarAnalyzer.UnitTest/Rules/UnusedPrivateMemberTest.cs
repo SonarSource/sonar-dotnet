@@ -686,13 +686,13 @@ public class FieldUsages
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void Assembly_Level_Attributes_FalsePositive()
+        public void Assembly_Level_Attributes()
         {
             Verifier.VerifyCSharpAnalyzer(@"
 [assembly: System.Reflection.AssemblyCompany(Foo.Constants.AppCompany)]
 public static class Foo
 {
-    internal static class Constants // Noncompliant, False Positive; we cannot detect usages from assembly level attributes.
+    internal static class Constants // Compliant, detect usages from assembly level attributes.
     {
         public const string AppCompany = ""foo"";
     }
