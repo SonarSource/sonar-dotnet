@@ -31,15 +31,17 @@ use of http connections.</p>
 Imports System.Net.Sockets
 
 Public Class Sockets
-    ' Questionable
-    Dim socket As Socket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
 
-    ' TcpClient And UdpClient simply abstract the details of creating a Socket
-    Dim client As TcpClient = New TcpClient("example.com", 80) ' Questionable
-    Dim listener As UdpClient = New UdpClient(80)   ' Questionable
+    Public Shared Sub Run()
+        ' Questionable
+        Dim socket As Socket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+
+        ' TcpClient And UdpClient simply abstract the details of creating a Socket
+        Dim client As TcpClient = New TcpClient("example.com", 80) ' Questionable
+        Dim listener As UdpClient = New UdpClient(80)   ' Questionable
+    End Sub
 
 End Class
-
 </pre>
 <h2>See</h2>
 <ul>

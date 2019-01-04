@@ -8,8 +8,8 @@
 execute SQL commands should neutralize any externally-provided values used in those commands. Failure to do so could allow an attacker to include
 input that changes the query so that unintended commands are executed, or sensitive data is exposed. Instead of trying to sanitize data by hand, SQL
 binding mechanisms should be used; they can be relied on to automatically perform a full sanitization.</p>
-<p>This rule checks a variety of methods which are susceptible to SQL injection if not used properly. Any SQL query built by concatenating or
-formatting Strings is considered susceptible. The goal is to guide security code reviews.</p>
+<p>This rule checks a variety of methods which are susceptible to SQL injection if not used properly. Any SQL query built from a String or a
+RawSqlString is considered susceptible. The goal is to guide security code reviews.</p>
 <p>The following specific method signatures are tested:</p>
 <ul>
   <li> <code>System.Data.SqlClient.SqlCommand.SqlCommand(string, ...)</code> </li>
@@ -40,7 +40,7 @@ formatting Strings is considered susceptible. The goal is to guide security code
   </li>
   <li> Use <a href="https://www.owasp.org/index.php/Query_Parameterization_Cheat_Sheet">parameterized queries, prepared statements, or stored
   procedures</a> whenever possible. </li>
-  <li> You may also use libraries such as Hibernate which, if used correctly, reduce injection risks. </li>
+  <li> You may also use ORM frameworks such as Hibernate which, if used correctly, reduce injection risks. </li>
   <li> Avoid executing SQL queries containing unsafe input in stored procedures or functions. </li>
   <li> <a href="https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet">Sanitize</a> every unsafe input. </li>
 </ul>

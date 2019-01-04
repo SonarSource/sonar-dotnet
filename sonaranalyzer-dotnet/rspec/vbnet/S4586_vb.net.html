@@ -1,5 +1,5 @@
-<p>Returning <code>null</code> from a non-<code>async</code> <code>Task</code>/<code>Task&lt;T&gt;</code> method will cause a
-<code>NullReferenceException</code> at runtime. This problem can be avoided by returning <code>Task.FromResult&lt;T&gt;(null)</code> instead.</p>
+<p>Returning <code>Nothing</code> from a non-<code>async</code> <code>Task</code>/<code>Task(Of T)</code> method will cause a
+<code>NullReferenceException</code> at runtime. This problem can be avoided by returning <code>Task.FromResult(Of T)(Nothing)</code> instead.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 Public Function GetFooAsync() As Task(Of Object)

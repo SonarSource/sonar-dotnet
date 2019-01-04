@@ -48,7 +48,22 @@ the existence of a resource is sensitive.</p>
 Public Class Foo
     Inherits System.Web.Mvc.Controller
 
+    Public Property MyProperty As String
+        Get
+            Return "test"
+        End Get
+        Set(ByVal value As String)
+        End Set
+    End Property
+
+    Public Sub New()
+    End Sub
+
     Public Sub PublicFoo() ' Questionable. Public Controller methods are exposed as HTTP endpoints.
+    End Sub
+
+    &lt;System.Web.Mvc.NonAction&gt;
+    Public Sub NotAnEndpoint() ' This is not an endpoint because of the NonAction attribute.
     End Sub
 
     Protected Sub ProtectedFoo()
