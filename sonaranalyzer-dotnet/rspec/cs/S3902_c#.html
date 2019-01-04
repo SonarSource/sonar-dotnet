@@ -1,5 +1,9 @@
 <p>Using <code>Type.Assembly</code> to get the current assembly is nearly free in terms of performance; it's a simple property access. On the other
 hand, <code>Assembly.GetExecutingAssembly()</code> can take up to 30 times as long because it walks up the call stack to find the assembly.</p>
+<p>Note that <code>Assembly.GetExecutingAssembly()</code> is different than <code>Type.Assembly</code> because it dynamically returns the assembly
+that contains the startup object of the currently executed application. For example, if executed from an application it will return the application
+assembly, but if executed from a unit test project it could return the unit test assembly. <code>Type.Assembly</code> always returns the assembly that
+contains the specified type.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 public class Example

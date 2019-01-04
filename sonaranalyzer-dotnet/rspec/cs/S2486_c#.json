@@ -16,7 +16,7 @@
     "CWE",
     "OWASP Top Ten"
   ],
-  "defaultSeverity": "Minor",
+  "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-2486",
   "sqKey": "S2486",
   "scope": "Main",

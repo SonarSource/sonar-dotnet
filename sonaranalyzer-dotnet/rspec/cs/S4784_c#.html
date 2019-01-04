@@ -39,16 +39,55 @@ input if no anchors are used. In PHP for example <code>preg_match("/[A-Za-z0-9]+
 alphanumeric character because it has no anchors.</p>
 <h2>Questionable Code Example</h2>
 <pre>
-// Questionable. Validate the regular expression and matched input.
-new System.Text.RegularExpressions.Regex(...);
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
+using System.Web;
 
-// All the following static methods are Questionable.
-System.Text.RegularExpressions.Regex.IsMatch(...);
-System.Text.RegularExpressions.Regex.Match(...);
-System.Text.RegularExpressions.Regex.Matches(...);
-System.Text.RegularExpressions.Regex.Replace(...);
-System.Text.RegularExpressions.Regex.Split(...);
+namespace N
+{
+    public class RegularExpression
+    {
+        void Foo(string pattern, RegexOptions options, TimeSpan matchTimeout, string input,
+                 string replacement, MatchEvaluator evaluator)
+        {
+            // All the following instantiations are Questionable. Validate the regular expression and matched input.
+            new System.Text.RegularExpressions.Regex(pattern);
+            new System.Text.RegularExpressions.Regex(pattern, options);
+            new System.Text.RegularExpressions.Regex(pattern, options, matchTimeout);
+
+            // All the following static methods are Questionable.
+            System.Text.RegularExpressions.Regex.IsMatch(input, pattern);
+            System.Text.RegularExpressions.Regex.IsMatch(input, pattern, options);
+            System.Text.RegularExpressions.Regex.IsMatch(input, pattern, options, matchTimeout);
+
+            System.Text.RegularExpressions.Regex.Match(input, pattern);
+            System.Text.RegularExpressions.Regex.Match(input, pattern, options);
+            System.Text.RegularExpressions.Regex.Match(input, pattern, options, matchTimeout);
+
+            System.Text.RegularExpressions.Regex.Matches(input, pattern);
+            System.Text.RegularExpressions.Regex.Matches(input, pattern, options);
+            System.Text.RegularExpressions.Regex.Matches(input, pattern, options, matchTimeout);
+
+            System.Text.RegularExpressions.Regex.Replace(input, pattern, evaluator);
+            System.Text.RegularExpressions.Regex.Replace(input, pattern, evaluator, options);
+            System.Text.RegularExpressions.Regex.Replace(input, pattern, evaluator, options, matchTimeout);
+            System.Text.RegularExpressions.Regex.Replace(input, pattern, replacement);
+            System.Text.RegularExpressions.Regex.Replace(input, pattern, replacement, options);
+            System.Text.RegularExpressions.Regex.Replace(input, pattern, replacement, options, matchTimeout);
+
+            System.Text.RegularExpressions.Regex.Split(input, pattern);
+            System.Text.RegularExpressions.Regex.Split(input, pattern, options);
+            System.Text.RegularExpressions.Regex.Split(input, pattern, options, matchTimeout);
+        }
+    }
+}
 </pre>
+<h2>Exceptions</h2>
+<p>Regardless of the string being matched, a hardcoded regular expression pattern is not vulnerable to ReDoS attacks if it consists only of one
+character or only alphanumeric characters. No issue will be raised for these cases.</p>
 <h2>See</h2>
 <ul>
   <li> <a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">MITRA, CWE-624</a> - Executable Regular Expression Error

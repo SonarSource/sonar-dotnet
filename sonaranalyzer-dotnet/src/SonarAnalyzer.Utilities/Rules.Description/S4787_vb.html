@@ -35,10 +35,11 @@ regularly. However these are not the only means to defeat or weaken an encryptio
   <li> Always store the keys in a safe location and transfer them only over safe channels. </li>
   <li> If there is an exchange of cryptographic keys, check first the identity of the receiver. </li>
   <li> Only use strong encryption algorithms. Check regularly that the algorithm is still deemed secure. It is also imperative that they are
-  implemented correctly. Use only encryption libraries which are deemed secure. </li>
+  implemented correctly. Use only encryption libraries which are deemed secure. Do not define your own encryption algorithms are they will have most
+  probably flaws. </li>
   <li> When a nonce is used, generate it randomly every time. </li>
   <li> When using the RSA algorithm, incorporate an Optimal Asymmetric Encryption Padding (OAEP). </li>
-  <li> When CBC is used for encryption, the IV must be random an unpredictable. Otherwise it exposes the encrypted value to crypto-analysis attacks
+  <li> When CBC is used for encryption, the IV must be random and unpredictable. Otherwise it exposes the encrypted value to crypto-analysis attacks
   like "Chosen-Plaintext Attacks". Thus a secure random algorithm should be used. An IV value should be associated to one and only one encryption
   cycle, because the IV's purpose is to ensure that the same plaintext encrypted twice will yield two different ciphertexts. </li>
   <li> The Advanced Encryption Standard (AES) encryption algorithm can be used with various modes. Galois/Counter Mode (GCM) with no padding should be
@@ -50,6 +51,61 @@ regularly. However these are not the only means to defeat or weaken an encryptio
       <li> Cipher Block Chaining (CBC) with PKCS#5 padding (or PKCS#7) is susceptible to padding oracle attacks. </li>
     </ul> </li>
 </ul>
+<h2>Questionable Code Example</h2>
+<pre>
+Imports System
+Imports System.Security.Cryptography
+
+Namespace MyNamespace
+
+    Public Class Class1
+
+        Public Sub Main()
+
+            Dim data As Byte() = {1, 1, 1}
+
+            Dim myRSA As RSA = RSA.Create()
+            Dim padding As RSAEncryptionPadding = RSAEncryptionPadding.CreateOaep(HashAlgorithmName.SHA1)
+
+            ' Review all base RSA class' Encrypt/Decrypt calls
+            myRSA.Encrypt(data, padding)  ' Questionable
+            myRSA.EncryptValue(data)      ' Questionable
+            myRSA.Decrypt(data, padding)  ' Questionable
+            myRSA.DecryptValue(data)      ' Questionable
+
+            Dim myRSAC As RSACryptoServiceProvider = New RSACryptoServiceProvider()
+            ' Review the use of any TryEncrypt/TryDecrypt And specific Encrypt/Decrypt of RSA subclasses.
+            myRSAC.Encrypt(data, False)    ' Questionable
+            myRSAC.Decrypt(data, False)    ' Questionable
+
+            Dim written As Integer
+            myRSAC.TryEncrypt(data, Span&lt;byte&gt;.Empty, padding, out written) ' Questionable
+            myRSAC.TryDecrypt(data, Span&lt;byte&gt;.Empty, padding, out written) ' Questionable
+
+            Dim rgbKey As Byte() = {1, 2, 3}
+            Dim rgbIV As Byte() = {4, 5, 6}
+            Dim rijn = SymmetricAlgorithm.Create()
+
+            ' Review the creation of Encryptors from any SymmetricAlgorithm instance.
+            rijn.CreateEncryptor()   ' Questionable
+            rijn.CreateEncryptor(rgbKey, rgbIV)  ' Questionable
+            rijn.CreateDecryptor()  ' Questionable
+            rijn.CreateDecryptor(rgbKey, rgbIV)  ' Questionable
+        End Sub
+
+        Public Class MyCrypto
+            Inherits System.Security.Cryptography.AsymmetricAlgorithm ' Questionable
+            ' ...
+        End Class
+
+        Public Class MyCrypto2
+            Inherits System.Security.Cryptography.SymmetricAlgorithm ' Questionable
+            ' ...
+        End Class
+    End Class
+End Namespace
+
+</pre>
 <h2>See</h2>
 <ul>
   <li> <a href="http://cwe.mitre.org/data/definitions/321.html">MITRE, CWE-321</a> - Use of Hard-coded Cryptographic Key </li>

@@ -47,10 +47,20 @@ the existence of a resource is sensitive.</p>
 <pre>
 public class Foo : System.Web.Mvc.Controller
 {
+    public string MyProperty
+    {
+        get { return "test"; }
+        set { }
+    }
+    public Foo() { }
+
     public void PublicFoo() // Questionable. Public Controller methods are exposed as HTTP endpoints.
     {
         // ...
     }
+    [System.Web.Mvc.NonAction]
+    public void NotAnEndpoint() // This is not an endpoint because of the NonAction attribute.
+    { }
     protected void ProtectedFoo() { }
     internal void InternalFoo() { }
     private void PrivateFoo() { }

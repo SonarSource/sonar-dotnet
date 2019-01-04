@@ -30,9 +30,9 @@ href="https://www.owasp.org/index.php/Session_Management_Cheat_Sheet#Cookies">OW
 // === .Net Framework ===
 
 HttpCookie myCookie = new HttpCookie("UserSettings");
-myCookie["CreditCardNumber"] = "1234 1234 1234 1234"; // Noncompliant; sensitive data stored
-myCookie.Values["password"] = "5678"; // Noncompliant
-myCookie.Value = "mysecret"; // Noncompliant
+myCookie["CreditCardNumber"] = "1234 1234 1234 1234"; // Questionable; sensitive data stored
+myCookie.Values["password"] = "5678"; // Questionable
+myCookie.Value = "mysecret"; // Questionable
 ...
 Response.Cookies.Add(myCookie);
 
