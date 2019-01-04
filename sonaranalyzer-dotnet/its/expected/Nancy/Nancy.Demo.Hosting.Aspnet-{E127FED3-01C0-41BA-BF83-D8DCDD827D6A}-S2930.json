@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S2930",
-"message":  "'Dispose' of 'face'.",
+"message":  "Dispose 'face' when it is no longer needed.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\PngSerializer.cs",
 "region":  {

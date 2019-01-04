@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class DisposableNotDisposed : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2930";
-        private const string MessageFormat = "'Dispose' of '{0}'.";
+        private const string MessageFormat = "Dispose '{0}' when it is no longer needed.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
