@@ -130,6 +130,25 @@ namespace Tests.Diagnostics
         private event EventHandler Event { add { } remove { } }
     }
 
+    public class Foo8 : IFoo
+    {
+        void IFoo.Method() // Compliant
+        {
+        }
+
+        protected void Method() { }
+
+        int IFoo.Property // Compliant
+        { get; set; }
+
+        protected int Property { get; set; }
+
+        event EventHandler IFoo.Event // Compliant
+        { add { } remove { } }
+
+        protected event EventHandler Event { add { } remove { } }
+    }
+
     public class MyClass3 : IDisposable
     {
         void IDisposable.Dispose() // Compliant - Close is an allowed special case for IDisposable

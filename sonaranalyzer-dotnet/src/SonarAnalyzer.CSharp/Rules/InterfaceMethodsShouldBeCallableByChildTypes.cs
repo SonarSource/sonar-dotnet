@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
             MethodDeclarationSyntax targetedMethod)
         {
             return currentMethod != targetedMethod &&
-                currentMethod.Modifiers.Any(SyntaxKind.PublicKeyword) &&
+                currentMethod.Modifiers.Any(modifier => IsPublicOrProtected(modifier)) &&
                 (currentMethod.Identifier.ValueText == targetedMethod.Identifier.ValueText ||
                     (targetedMethod.Identifier.ValueText == nameof(IDisposable.Dispose) &&
                     currentMethod.Identifier.ValueText == "Close")); // Allows to replace IDisposable.Dispose() with Close()
@@ -120,7 +120,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return currentProperty != targetedProperty &&
                 currentProperty.Identifier.ValueText == targetedProperty.Identifier.ValueText &&
-                currentProperty.Modifiers.Any(SyntaxKind.PublicKeyword);
+                currentProperty.Modifiers.Any(modifier => IsPublicOrProtected(modifier));
         }
 
         private static bool AreEventsEquivalent(EventDeclarationSyntax currentEvent,
@@ -128,7 +128,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return currentEvent != targetedEvent &&
                 currentEvent.Identifier.ValueText == targetedEvent.Identifier.ValueText &&
-                currentEvent.Modifiers.Any(SyntaxKind.PublicKeyword);
+                currentEvent.Modifiers.Any(modifier => IsPublicOrProtected(modifier));
         }
+
+        private static bool IsPublicOrProtected(SyntaxToken modifier) =>
+            modifier.IsKind(SyntaxKind.PublicKeyword) ||
+            modifier.IsKind(SyntaxKind.ProtectedKeyword);
     }
 }
