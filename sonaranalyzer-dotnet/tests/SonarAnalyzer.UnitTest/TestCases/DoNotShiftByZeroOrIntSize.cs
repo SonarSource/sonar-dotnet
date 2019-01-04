@@ -6,13 +6,13 @@ namespace Tests.Diagnostics
     {
         private void Test()
         {
-            byte b = 1 << 10; // Noncompliant {{Either promote shift target to a larger integer type or shift by 2 instead.}} // Error [CS0266] - cannot cast int to bool
-//                   ^^^^^^^
-            b = 1 << 10; // Noncompliant {{Either promote shift target to a larger integer type or shift by 2 instead.}} // Error [CS0266] - cannot cast int to bool
-//              ^^^^^^^
+            byte b = 1;
+            b = (byte)(b << 10);
+            b = (byte)(b << 10);
             b = 1 << 0;
 
-            sbyte sb = 1 << 10; // Noncompliant // Error [CS0031]
+            sbyte sb = 1;
+            sb = (sbyte)(sb << 10);
 
             int i = 1 << 10;
             i = i << 32;  // Noncompliant
@@ -29,8 +29,8 @@ namespace Tests.Diagnostics
             ul <<= 0;
             ul <<= 1025; // Noncompliant {{Correct this shift; shift by 1 instead.}}
 
-            b <<= 16; // Noncompliant {{Either promote shift target to a larger integer type or shift by less than 8 instead.}}
-            b <<= 17; // Noncompliant {{Either promote shift target to a larger integer type or shift by 1 instead.}}
+            b <<= 16;
+            b <<= 17;
 
             int value =
                       (b & 0xff) << 56 // Noncompliant {{Either promote shift target to a larger integer type or shift by 24 instead.}}
@@ -117,6 +117,15 @@ namespace Tests.Diagnostics
             ul = ul >> 0;  // Compliant
 
             return 42;
+        }
+
+        // See https://github.com/SonarSource/sonar-dotnet/issues/2016
+        private void ImproveShiftingBehavior()
+        {
+            short x = 12;
+            short result_01 = (short)(x >> 1);
+            short result_17 = (short)(x >> 17);
+            short result_33 = (short)(x >> 33); // Noncompliant
         }
     }
 }
