@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.IO
 Imports System.Threading.Tasks
 
@@ -8,7 +8,7 @@ Namespace Tests.Diagnostics
             Dim length As Integer = Nothing
             For i As Integer = 0 To length - 1
                 Exit For
-'               ^^^^^^^^ Noncompliant {{Remove this 'Exit' statement or make it conditional.}}
+'               ^^^^^^^^ Noncompliant {{Refactor the containing loop to do more than one iteration.}}
             Next
 
             For i As Integer = 0 To length - 1
@@ -120,12 +120,12 @@ Namespace Tests.Diagnostics
 
                 While True
                     Return
-'                   ^^^^^^ Noncompliant {{Remove this 'Return' statement or make it conditional.}}
+'                   ^^^^^^ Noncompliant {{Refactor the containing loop to do more than one iteration.}}
                 End While
 
                 While True
                     Throw New Exception()
-'                   ^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Remove this 'Throw' statement or make it conditional.}}
+'                   ^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Refactor the containing loop to do more than one iteration.}}
                 End While
             End If
         End Sub

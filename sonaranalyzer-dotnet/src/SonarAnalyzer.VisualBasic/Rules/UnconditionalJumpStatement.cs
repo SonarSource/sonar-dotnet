@@ -51,12 +51,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.SimpleDoLoopBlock
         };
 
-        protected override string GetKeywordText(StatementSyntax statement) =>
-            (statement as ExitStatementSyntax)?.ExitKeyword.ToString() ??
-            (statement as ContinueStatementSyntax)?.ContinueKeyword.ToString() ??
-            (statement as ReturnStatementSyntax)?.ReturnKeyword.ToString() ??
-            (statement as ThrowStatementSyntax)?.ThrowKeyword.ToString();
-
         protected override LoopWalkerBase<StatementSyntax, SyntaxKind> GetWalker(SyntaxNodeAnalysisContext context)
             => new LoopWalker(context, LoopStatements);
 

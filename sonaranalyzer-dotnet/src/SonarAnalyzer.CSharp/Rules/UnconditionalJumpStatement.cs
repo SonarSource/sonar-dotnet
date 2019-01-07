@@ -47,12 +47,6 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.DoStatement
         };
 
-        protected override string GetKeywordText(StatementSyntax statement) =>
-            (statement as BreakStatementSyntax)?.BreakKeyword.ToString() ??
-            (statement as ContinueStatementSyntax)?.ContinueKeyword.ToString() ??
-            (statement as ReturnStatementSyntax)?.ReturnKeyword.ToString() ??
-            (statement as ThrowStatementSyntax)?.ThrowKeyword.ToString();
-
         protected override LoopWalkerBase<StatementSyntax, SyntaxKind> GetWalker(SyntaxNodeAnalysisContext context)
             => new LoopWalker(context, LoopStatements);
 

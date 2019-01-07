@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1751",
-"message":  "Remove this 'throw' statement or make it conditional.",
+"message":  "Refactor the containing loop to do more than one iteration.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
 "region":  {
