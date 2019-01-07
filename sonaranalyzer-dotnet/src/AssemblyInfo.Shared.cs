@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2018 SonarSource SA
+ * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -29,7 +29,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyInformationalVersion("Version:7.10.0.0 Branch:not-set Sha1:not-set")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SonarSource")]
-[assembly: AssemblyCopyright("Copyright © 2015-2018 SonarSource SA")]
+[assembly: AssemblyCopyright("Copyright © 2015-2019 SonarSource SA")]
 [assembly: AssemblyTrademark("SonarLint, SonarQube, SonarSource")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(false)]
