@@ -1,5 +1,5 @@
 /*
- * SonarC#
+ * SonarSource :: .NET :: Shared library
  * Copyright (C) 2014-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
@@ -17,10 +17,11 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.csharp;
+package org.sonarsource.dotnet.shared.plugins;
 
 import java.util.Arrays;
 import java.util.List;
+import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
@@ -29,137 +30,136 @@ import org.sonar.plugins.dotnet.tests.CoverageAggregator;
 import org.sonar.plugins.dotnet.tests.CoverageConfiguration;
 import org.sonar.plugins.dotnet.tests.CoverageReportImportSensor;
 
-public class CSharpCodeCoverageProvider {
+@ScannerSide
+public class CodeCoverageProvider {
 
-  private static final String CATEGORY = "C#";
   private static final String SUBCATEGORY = "Code Coverage";
 
-  private static final String NCOVER3_PROPERTY_KEY = "sonar.cs.ncover3.reportsPaths";
-  private static final String OPENCOVER_PROPERTY_KEY = "sonar.cs.opencover.reportsPaths";
-  private static final String DOTCOVER_PROPERTY_KEY = "sonar.cs.dotcover.reportsPaths";
-  private static final String VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY = "sonar.cs.vscoveragexml.reportsPaths";
+  private final DotNetPluginMetadata pluginMetadata;
+  private final CoverageConfiguration coverageConf;
+  private final CoverageConfiguration itCoverageConf;
 
-  private static final String IT_NCOVER3_PROPERTY_KEY = "sonar.cs.ncover3.it.reportsPaths";
-  private static final String IT_OPENCOVER_PROPERTY_KEY = "sonar.cs.opencover.it.reportsPaths";
-  private static final String IT_DOTCOVER_PROPERTY_KEY = "sonar.cs.dotcover.it.reportsPaths";
-  private static final String IT_VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY = "sonar.cs.vscoveragexml.it.reportsPaths";
+  public CodeCoverageProvider(DotNetPluginMetadata pluginMetadata) {
+    this.pluginMetadata = pluginMetadata;
+    String languageKey = pluginMetadata.languageKey();
 
-  private static final CoverageConfiguration COVERAGE_CONF = new CoverageConfiguration(
-    CSharpPlugin.LANGUAGE_KEY,
-    NCOVER3_PROPERTY_KEY,
-    OPENCOVER_PROPERTY_KEY,
-    DOTCOVER_PROPERTY_KEY,
-    VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY);
+    coverageConf = new CoverageConfiguration(
+      languageKey,
+      "sonar." + languageKey + ".ncover3.reportsPaths",
+      "sonar." + languageKey + ".opencover.reportsPaths",
+      "sonar." + languageKey + ".dotcover.reportsPaths",
+      "sonar." + languageKey + ".vscoveragexml.reportsPaths");
 
-  private static final CoverageConfiguration IT_COVERAGE_CONF = new CoverageConfiguration(
-    CSharpPlugin.LANGUAGE_KEY,
-    IT_NCOVER3_PROPERTY_KEY,
-    IT_OPENCOVER_PROPERTY_KEY,
-    IT_DOTCOVER_PROPERTY_KEY,
-    IT_VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY);
-
-  private CSharpCodeCoverageProvider() {
+    itCoverageConf = new CoverageConfiguration(
+      languageKey,
+      "sonar." + languageKey + ".ncover3.it.reportsPaths",
+      "sonar." + languageKey + ".opencover.it.reportsPaths",
+      "sonar." + languageKey + ".dotcover.it.reportsPaths",
+      "sonar." + languageKey + ".vscoveragexml.it.reportsPaths");
   }
 
-  public static List extensions() {
-    return Arrays.asList(
-      CSharpCoverageAggregator.class, CSharpIntegrationCoverageAggregator.class,
-      CSharpCoverageReportImportSensor.class, CSharpIntegrationCoverageReportImportSensor.class,
+  public List extensions() {
+    String category = pluginMetadata.shortLanguageName();
 
-      PropertyDefinition.builder(NCOVER3_PROPERTY_KEY)
+    return Arrays.asList(
+      this,
+      UnitTestCoverageAggregator.class, IntegrationTestCoverageAggregator.class,
+      UnitTestCoverageReportImportSensor.class, IntegrationTestCoverageReportImportSensor.class,
+
+      PropertyDefinition.builder(coverageConf.ncover3PropertyKey())
         .name("NCover3 Unit Tests Reports Paths")
         .description("Example: \"report.nccov\", \"report1.nccov,report2.nccov\" or \"C:/report.nccov\"")
-        .category(CATEGORY)
+        .category(category)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .multiValues(true)
         .build(),
-      PropertyDefinition.builder(IT_NCOVER3_PROPERTY_KEY)
+      PropertyDefinition.builder(itCoverageConf.ncover3PropertyKey())
         .name("NCover3 Integration Tests Reports Paths")
         .description("Example: \"report.nccov\", \"report1.nccov,report2.nccov\" or \"C:/report.nccov\"")
-        .category(CATEGORY)
+        .category(category)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .multiValues(true)
         .build(),
-      PropertyDefinition.builder(OPENCOVER_PROPERTY_KEY)
+      PropertyDefinition.builder(coverageConf.openCoverPropertyKey())
         .name("OpenCover Unit Tests Reports Paths")
         .description("Example: \"report.xml\", \"report1.xml,report2.xml\" or \"C:/report.xml\"")
-        .category(CATEGORY)
+        .category(category)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .multiValues(true)
         .build(),
-      PropertyDefinition.builder(IT_OPENCOVER_PROPERTY_KEY)
+      PropertyDefinition.builder(itCoverageConf.openCoverPropertyKey())
         .name("OpenCover Integration Tests Reports Paths")
         .description("Example: \"report.xml\", \"report1.xml,report2.xml\" or \"C:/report.xml\"")
-        .category(CATEGORY)
+        .category(category)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .multiValues(true)
         .build(),
-      PropertyDefinition.builder(DOTCOVER_PROPERTY_KEY)
+      PropertyDefinition.builder(coverageConf.dotCoverPropertyKey())
         .name("dotCover Unit Tests (HTML) Reports Paths")
         .description("Example: \"report.html\", \"report1.html,report2.html\" or \"C:/report.html\"")
-        .category(CATEGORY)
+        .category(category)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .multiValues(true)
         .build(),
-      PropertyDefinition.builder(IT_DOTCOVER_PROPERTY_KEY)
+      PropertyDefinition.builder(itCoverageConf.dotCoverPropertyKey())
         .name("dotCover Integration Tests (HTML) Reports Paths")
         .description("Example: \"report.html\", \"report1.html,report2.html\" or \"C:/report.html\"")
-        .category(CATEGORY)
+        .category(category)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .multiValues(true)
         .build(),
-      PropertyDefinition.builder(VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY)
+      PropertyDefinition.builder(coverageConf.visualStudioCoverageXmlPropertyKey())
         .name("Visual Studio Unit Tests (XML) Reports Paths")
         .description("Example: \"report.coveragexml\", \"report1.coveragexml,report2.coveragexml\" or \"C:/report.coveragexml\"")
-        .category(CATEGORY)
+        .category(category)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .multiValues(true)
         .build(),
-      PropertyDefinition.builder(IT_VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY)
+      PropertyDefinition.builder(itCoverageConf.visualStudioCoverageXmlPropertyKey())
         .name("Visual Studio Integration Tests (XML) Reports Paths")
         .description("Example: \"report.coveragexml\", \"report1.coveragexml,report2.coveragexml\" or \"C:/report.coveragexml\"")
-        .category(CATEGORY)
+        .category(category)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .multiValues(true)
         .build());
   }
 
-  public static class CSharpCoverageAggregator extends CoverageAggregator {
+  public class UnitTestCoverageAggregator extends CoverageAggregator {
 
-    public CSharpCoverageAggregator(Configuration configuration, FileSystem fileSystem) {
-      super(COVERAGE_CONF, configuration, fileSystem);
+    public UnitTestCoverageAggregator(Configuration configuration, FileSystem fileSystem) {
+      super(coverageConf, configuration, fileSystem);
     }
 
   }
 
-  public static class CSharpCoverageReportImportSensor extends CoverageReportImportSensor {
+  public class UnitTestCoverageReportImportSensor extends CoverageReportImportSensor {
 
-    public CSharpCoverageReportImportSensor(CSharpCoverageAggregator coverageAggregator) {
-      super(COVERAGE_CONF, coverageAggregator, CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME, false);
+    public UnitTestCoverageReportImportSensor(UnitTestCoverageAggregator coverageAggregator) {
+      super(coverageConf, coverageAggregator, pluginMetadata.languageKey(), pluginMetadata.languageName(), false);
     }
 
   }
 
-  public static class CSharpIntegrationCoverageAggregator extends CoverageAggregator {
+  public class IntegrationTestCoverageAggregator extends CoverageAggregator {
 
-    public CSharpIntegrationCoverageAggregator(Configuration configuration, FileSystem fileSystem) {
-      super(IT_COVERAGE_CONF, configuration, fileSystem);
+    public IntegrationTestCoverageAggregator(Configuration configuration, FileSystem fileSystem) {
+      super(itCoverageConf, configuration, fileSystem);
     }
 
   }
 
-  public static class CSharpIntegrationCoverageReportImportSensor extends CoverageReportImportSensor {
+  public class IntegrationTestCoverageReportImportSensor extends CoverageReportImportSensor {
 
-    public CSharpIntegrationCoverageReportImportSensor(CSharpIntegrationCoverageAggregator coverageAggregator) {
-      super(IT_COVERAGE_CONF, coverageAggregator, CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME, true);
+    public IntegrationTestCoverageReportImportSensor(IntegrationTestCoverageAggregator coverageAggregator) {
+      super(itCoverageConf, coverageAggregator, pluginMetadata.languageKey(), pluginMetadata.languageName(), true);
     }
 
   }

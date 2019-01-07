@@ -27,6 +27,7 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
 
 public class UnitTestResultsImportSensor implements Sensor {
 
@@ -37,6 +38,11 @@ public class UnitTestResultsImportSensor implements Sensor {
   private final ProjectDefinition projectDef;
   private final String languageKey;
   private final String languageName;
+
+  public UnitTestResultsImportSensor(UnitTestResultsAggregator unitTestResultsAggregator, ProjectDefinition projectDef,
+                                     DotNetPluginMetadata pluginMetadata) {
+    this(unitTestResultsAggregator, projectDef, pluginMetadata.languageKey(), pluginMetadata.languageName());
+  }
 
   public UnitTestResultsImportSensor(UnitTestResultsAggregator unitTestResultsAggregator, ProjectDefinition projectDef,
     String languageKey, String languageName) {

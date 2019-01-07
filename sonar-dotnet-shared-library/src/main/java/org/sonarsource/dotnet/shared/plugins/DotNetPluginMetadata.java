@@ -30,6 +30,7 @@ public interface DotNetPluginMetadata {
 
   String languageKey();
   String pluginKey();
+  String languageName();
   String shortLanguageName();
   String sonarAnalyzerName();
   String repositoryKey();

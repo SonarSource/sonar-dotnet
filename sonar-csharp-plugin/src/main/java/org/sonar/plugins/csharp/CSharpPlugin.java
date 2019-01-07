@@ -21,6 +21,7 @@ package org.sonar.plugins.csharp;
 
 import org.sonar.api.Plugin;
 import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
+import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.DotNetSensor;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
@@ -31,6 +32,7 @@ import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 import org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
+import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
 public class CSharpPlugin implements Plugin {
@@ -70,8 +72,8 @@ public class CSharpPlugin implements Plugin {
 
     context.addExtensions(new CSharpPropertyDefinitions(context.getRuntime()).create());
     context.addExtension(new CSharpSonarWayProfile(context.getRuntime()));
-    context.addExtensions(CSharpCodeCoverageProvider.extensions());
-    context.addExtensions(CSharpUnitTestResultsProvider.extensions());
+    context.addExtensions(new CodeCoverageProvider(METADATA).extensions());
+    context.addExtensions(new UnitTestResultsProvider(METADATA).extensions());
     context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties(METADATA));
   }
 
@@ -85,6 +87,11 @@ public class CSharpPlugin implements Plugin {
     @Override
     public String pluginKey() {
       return PLUGIN_KEY;
+    }
+
+    @Override
+    public String languageName() {
+      return LANGUAGE_NAME;
     }
 
     @Override

@@ -1,6 +1,6 @@
 /*
- * SonarVB
- * Copyright (C) 2012-2018 SonarSource SA
+ * SonarSource :: .NET :: Shared library
+ * Copyright (C) 2014-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -17,34 +17,32 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.vbnet;
+package org.sonarsource.dotnet.shared.plugins;
 
 import com.google.common.collect.ImmutableSet;
-import java.io.File;
-import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.Set;
 import org.junit.Test;
-import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.config.PropertyDefinition;
-import org.sonar.api.config.internal.MapSettings;
-import org.sonar.plugins.vbnet.VbNetCodeCoverageProvider.VbNetCoverageAggregator;
-import org.sonar.plugins.vbnet.VbNetCodeCoverageProvider.VbNetCoverageReportImportSensor;
-import org.sonar.plugins.vbnet.VbNetCodeCoverageProvider.VbNetIntegrationCoverageAggregator;
-import org.sonar.plugins.vbnet.VbNetCodeCoverageProvider.VbNetIntegrationCoverageReportImportSensor;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-public class VbNetCodeCoverageProviderTest {
+public class CodeCoverageProviderTest {
 
   @Test
-  public void test() {
-    assertThat(nonProperties(VbNetCodeCoverageProvider.extensions())).containsOnly(
-      VbNetCoverageAggregator.class,
-      VbNetIntegrationCoverageAggregator.class,
-      VbNetCoverageReportImportSensor.class,
-      VbNetIntegrationCoverageReportImportSensor.class);
-    assertThat(propertyKeys(VbNetCodeCoverageProvider.extensions())).containsOnly(
+  public void vbnet() {
+    DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
+    when(pluginMetadata.languageKey()).thenReturn("vbnet");
+    CodeCoverageProvider provider = new CodeCoverageProvider(pluginMetadata);
+    assertThat(nonProperties(provider.extensions())).containsOnly(
+      provider,
+      CodeCoverageProvider.UnitTestCoverageAggregator.class,
+      CodeCoverageProvider.IntegrationTestCoverageAggregator.class,
+      CodeCoverageProvider.UnitTestCoverageReportImportSensor.class,
+      CodeCoverageProvider.IntegrationTestCoverageReportImportSensor.class);
+    assertThat(propertyKeys(provider.extensions())).containsOnly(
       "sonar.vbnet.ncover3.reportsPaths", "sonar.vbnet.ncover3.it.reportsPaths",
       "sonar.vbnet.opencover.reportsPaths", "sonar.vbnet.opencover.it.reportsPaths",
       "sonar.vbnet.dotcover.reportsPaths", "sonar.vbnet.dotcover.it.reportsPaths",
@@ -52,21 +50,21 @@ public class VbNetCodeCoverageProviderTest {
   }
 
   @Test
-  public void for_coverage() throws Exception {
-    Constructor<VbNetCodeCoverageProvider> constructor = VbNetCodeCoverageProvider.class.getDeclaredConstructor();
-    assertThat(constructor.isAccessible()).isFalse();
-    constructor.setAccessible(true);
-    constructor.newInstance();
-  }
-
-  @Test
-  public void createInstance_CoverageReport() {
-    new VbNetCoverageReportImportSensor(new VbNetCoverageAggregator(new MapSettings().asConfig(), new DefaultFileSystem(new File(""))));
-  }
-
-  @Test
-  public void createInstance_IntegrationCoverageReport() {
-    new VbNetIntegrationCoverageReportImportSensor(new VbNetIntegrationCoverageAggregator(new MapSettings().asConfig(), new DefaultFileSystem(new File(""))));
+  public void csharp() {
+    DotNetPluginMetadata pluginMetadata = mock(DotNetPluginMetadata.class);
+    when(pluginMetadata.languageKey()).thenReturn("cs");
+    CodeCoverageProvider provider = new CodeCoverageProvider(pluginMetadata);
+    assertThat(nonProperties(provider.extensions())).containsOnly(
+      provider,
+      CodeCoverageProvider.UnitTestCoverageAggregator.class,
+      CodeCoverageProvider.IntegrationTestCoverageAggregator.class,
+      CodeCoverageProvider.UnitTestCoverageReportImportSensor.class,
+      CodeCoverageProvider.IntegrationTestCoverageReportImportSensor.class);
+    assertThat(propertyKeys(provider.extensions())).containsOnly(
+      "sonar.cs.ncover3.reportsPaths", "sonar.cs.ncover3.it.reportsPaths",
+      "sonar.cs.opencover.reportsPaths", "sonar.cs.opencover.it.reportsPaths",
+      "sonar.cs.dotcover.reportsPaths", "sonar.cs.dotcover.it.reportsPaths",
+      "sonar.cs.vscoveragexml.reportsPaths", "sonar.cs.vscoveragexml.it.reportsPaths");
   }
 
   private static Set<Object> nonProperties(List extensions) {
