@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             // Collect symbols of private members that could potentially be removed
                             var removableSymbolsCollector = new CSharpRemovableSymbolWalker(c.Compilation.GetSemanticModel);
 
-                            if (!VisitDeclaringReferences(namedType, removableSymbolsCollector))
+                            if (!VisitDeclaringReferences(namedType, removableSymbolsCollector, c.Compilation))
                             {
                                 return;
                             }
@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 c.Compilation.GetSemanticModel,
                                 removableSymbolsCollector.PrivateSymbols.Select(s => s.Name).ToHashSet());
 
-                            if (!VisitDeclaringReferences(namedType, usageCollector))
+                            if (!VisitDeclaringReferences(namedType, usageCollector, c.Compilation))
                             {
                                 return;
                             }
@@ -122,7 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 c.Compilation.GetSemanticModel,
                                 removableInternalTypes.Select(s => s.Name).ToHashSet());
 
-                            foreach (var syntaxTree in c.Compilation.SyntaxTrees)
+                            foreach (var syntaxTree in c.Compilation.SyntaxTrees.Where(tree => !tree.IsGenerated(c.Compilation)))
                             {
                                 usageCollector.SafeVisit(syntaxTree.GetRoot());
                             }
@@ -280,9 +280,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     return "member";
             }
         }
-        private static bool VisitDeclaringReferences(INamedTypeSymbol namedType, CSharpSyntaxWalker visitor)
+        private static bool VisitDeclaringReferences(INamedTypeSymbol namedType, CSharpSyntaxWalker visitor, Compilation compilation)
         {
-            foreach (var reference in namedType.DeclaringSyntaxReferences)
+            foreach (var reference in namedType.DeclaringSyntaxReferences.Where(r => !IsGenerated(r)))
             {
                 if (!visitor.SafeVisit(reference.GetSyntax()))
                 {
@@ -291,6 +291,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             return true;
+
+            bool IsGenerated(SyntaxReference syntaxReference) =>
+                syntaxReference.SyntaxTree.IsGenerated(compilation);
         }
         /// <summary>
         /// Collects private or internal member symbols that could potentially be removed if they are not used.
