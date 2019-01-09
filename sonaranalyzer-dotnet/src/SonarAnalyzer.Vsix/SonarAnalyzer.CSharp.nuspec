@@ -1,4 +1,4 @@
-﻿<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>SonarAnalyzer.CSharp</id>
@@ -6,7 +6,7 @@
     <title>SonarAnalyzer for C#</title>
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>
-    <licenseUrl>https://raw.githubusercontent.com/SonarSource-VisualStudio/sonaranalyzer-dotnet/master/LICENSE</licenseUrl>
+    <license type="file">License.txt</license>
     <projectUrl>http://vs.sonarlint.org</projectUrl>
     <iconUrl>http://dist.sonarsource.com/csharp/download/ico-sonarlint-64.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -27,5 +27,6 @@
     <file src="$binPath$\SonarAnalyzer.CSharp.dll" target="analyzers" />
     <file src="$binPath$\Google.Protobuf.dll" target="analyzers" />
     <file src="tools-cs\*.ps1" target="tools\" />
+    <file src="License.txt" />
   </files>
 </package>
