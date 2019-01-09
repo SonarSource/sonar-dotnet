@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.sonarsource.dotnet</groupId>
     <artifactId>sonaranalyzer-maven-artifacts</artifactId>
-    <version>7.10-SNAPSHOT</version>
+    <version>7.11-SNAPSHOT</version>
   </parent>
 
   <artifactId>SonarAnalyzer.RuleDocGenerator.CSharp</artifactId>
