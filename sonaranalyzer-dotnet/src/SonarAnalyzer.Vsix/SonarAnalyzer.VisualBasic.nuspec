@@ -27,5 +27,6 @@
     <file src="$binPath$\SonarAnalyzer.VisualBasic.dll" target="analyzers" />
     <file src="$binPath$\Google.Protobuf.dll" target="analyzers" />
     <file src="tools-vbnet\*.ps1" target="tools\" />
+    <file src="License.txt" />
   </files>
 </package>
