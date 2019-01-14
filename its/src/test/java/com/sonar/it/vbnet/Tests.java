@@ -78,8 +78,4 @@ public class Tests {
   static WsMeasures.Measure getMeasure(String componentKey, String metricKey) {
     return TestUtils.getMeasure(ORCHESTRATOR, componentKey, metricKey);
   }
-
-  static List<Issues.Issue> getIssues(String componentKey) {
-    return TestUtils.getIssues(ORCHESTRATOR, componentKey);
-  }
 }

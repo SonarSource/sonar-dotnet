@@ -33,6 +33,7 @@ import com.sonar.orchestrator.Orchestrator;
 import java.nio.file.Path;
 import java.util.List;
 
+import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getComponent;
 import static com.sonar.it.csharp.Tests.getIssues;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -64,9 +65,10 @@ public class MultiTargetAppTest {
     orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("end"));
 
-    assertThat(getComponent("MultiTargetConsoleApp:MultiTargetConsoleApp:9D7FB932-3B1E-446D-9D34-A63410458B88:Program.cs")).isNotNull();
+    String programCsComponentId = TestUtils.hasModules(ORCHESTRATOR) ? "MultiTargetConsoleApp:MultiTargetConsoleApp:9D7FB932-3B1E-446D-9D34-A63410458B88:Program.cs" : "MultiTargetConsoleApp:Program.cs";
+    assertThat(getComponent(programCsComponentId)).isNotNull();
 
-    List<Issues.Issue> issues = getIssues("MultiTargetConsoleApp:MultiTargetConsoleApp:9D7FB932-3B1E-446D-9D34-A63410458B88:Program.cs")
+    List<Issues.Issue> issues = getIssues(programCsComponentId)
       .stream()
       .filter(x -> x.getRule().startsWith("csharpsquid:"))
       .collect(Collectors.toList());

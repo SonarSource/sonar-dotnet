@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
+import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getComponent;
 import static com.sonar.it.csharp.Tests.getIssues;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
@@ -64,7 +65,7 @@ public class CasingAppTest {
     orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("end"));
 
-    String class1ComponentKey = "CasingApp:CasingApp:600E8C27-9AB2-48E9-AA48-2713E4B34288:SRC/Class1.cs";
+    String class1ComponentKey = TestUtils.hasModules(ORCHESTRATOR) ? "CasingApp:CasingApp:600E8C27-9AB2-48E9-AA48-2713E4B34288:SRC/Class1.cs" : "CasingApp:SRC/Class1.cs";
     assertThat(getComponent(class1ComponentKey)).isNotNull();
 
     assertThat(getMeasureAsInt(class1ComponentKey, "files")).isEqualTo(1);

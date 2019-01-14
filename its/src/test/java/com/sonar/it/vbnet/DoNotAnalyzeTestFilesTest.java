@@ -29,6 +29,7 @@ import org.junit.rules.TemporaryFolder;
 
 import java.nio.file.Path;
 
+import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -60,7 +61,8 @@ public class DoNotAnalyzeTestFilesTest {
     orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("end"));
 
-    assertThat(Tests.getComponent("VbDoNotAnalyzeTestFilesTest:VbDoNotAnalyzeTestFilesTest:039CD4D5-8C38-47EB-AE09-F2457DE61EFC:UnitTest1.vb")).isNotNull();
+    String unitTest1ComponentId = TestUtils.hasModules(ORCHESTRATOR) ? "VbDoNotAnalyzeTestFilesTest:VbDoNotAnalyzeTestFilesTest:039CD4D5-8C38-47EB-AE09-F2457DE61EFC:UnitTest1.vb" : "VbDoNotAnalyzeTestFilesTest:UnitTest1.vb";
+    assertThat(Tests.getComponent(unitTest1ComponentId)).isNotNull();
     assertThat(getMeasureAsInt("VbDoNotAnalyzeTestFilesTest", "files")).isNull();
     assertThat(getMeasureAsInt("VbDoNotAnalyzeTestFilesTest", "lines")).isNull();
     assertThat(getMeasureAsInt("VbDoNotAnalyzeTestFilesTest", "ncloc")).isNull();

@@ -45,8 +45,8 @@ public class MetricsTest {
   public static TemporaryFolder temp = new TemporaryFolder();
 
   private static final String PROJECT = "MetricsTest";
-  private static final String DIRECTORY = "MetricsTest:MetricsTest:1F026ECA-900A-488D-9D07-AD23216FA32B:foo";
-  private static final String FILE = "MetricsTest:MetricsTest:1F026ECA-900A-488D-9D07-AD23216FA32B:foo/Class1.cs";
+  private static final String DIRECTORY = TestUtils.hasModules(ORCHESTRATOR) ? "MetricsTest:MetricsTest:1F026ECA-900A-488D-9D07-AD23216FA32B:foo" : "MetricsTest:foo";
+  private static final String FILE = TestUtils.hasModules(ORCHESTRATOR) ? "MetricsTest:MetricsTest:1F026ECA-900A-488D-9D07-AD23216FA32B:foo/Class1.cs" : "MetricsTest:foo/Class1.cs";
 
   @ClassRule
   public static RuleChain chain = getRuleChain();
