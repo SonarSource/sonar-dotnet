@@ -31,6 +31,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getMeasure;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,7 +45,7 @@ public class CoverageTest {
   public TemporaryFolder temp = new TemporaryFolder();
 
   @Before
-  public void init() throws Exception {
+  public void init() {
     orchestrator.resetData();
   }
 
@@ -102,7 +103,6 @@ public class CoverageTest {
     orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("NoCoverageOnTests")
-      .setProjectName("NoCoverageOnTests")
       .setProjectVersion("1.0")
       .setProfile("no_rule")
       .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml"));
@@ -113,7 +113,8 @@ public class CoverageTest {
       .addArgument("end"));
 
     assertThat(getMeasureAsInt("NoCoverageOnTests", "files")).isEqualTo(2); // Only main files are counted
-    assertThat(Tests.getComponent("NoCoverageOnTests:NoCoverageOnTests:8A3B715A-6E95-4BC1-93C6-A59E9D3F5D5C:UnitTest1.cs")).isNotNull();
+    String unitTestComponentId = TestUtils.hasModules(ORCHESTRATOR) ? "NoCoverageOnTests:NoCoverageOnTests:8A3B715A-6E95-4BC1-93C6-A59E9D3F5D5C:UnitTest1.cs" : "NoCoverageOnTests:MyLib.Tests/UnitTest1.cs";
+    assertThat(Tests.getComponent(unitTestComponentId)).isNotNull();
     assertThat(getMeasureAsInt("NoCoverageOnTests", "lines_to_cover")).isNull();
     assertThat(getMeasureAsInt("NoCoverageOnTests", "uncovered_lines")).isNull();
   }

@@ -31,7 +31,7 @@ import com.sonar.orchestrator.Orchestrator;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import static com.sonar.it.vbnet.Tests.getMeasure;
+import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -94,7 +94,6 @@ public class CoverageTest {
     orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("VbNoCoverageOnTests")
-      .setProjectName("VbNoCoverageOnTests")
       .setProjectVersion("1.0")
       .setProfile("vbnet_no_rule")
       .setProperty("sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml"));
@@ -105,7 +104,8 @@ public class CoverageTest {
       .addArgument("end"));
 
     assertThat(getMeasureAsInt("VbNoCoverageOnTests", "files")).isEqualTo(2); // Only main files are counted
-    assertThat(Tests.getComponent("VbNoCoverageOnTests:VbNoCoverageOnTests:7E4004A5-75CF-475C-9922-589EF95517D8:Class1.vb")).isNotNull();
+    String class1VbComponentId = TestUtils.hasModules(ORCHESTRATOR) ? "VbNoCoverageOnTests:VbNoCoverageOnTests:7E4004A5-75CF-475C-9922-589EF95517D8:Class1.vb" : "VbNoCoverageOnTests:MyLib/Class1.vb";
+    assertThat(Tests.getComponent(class1VbComponentId)).isNotNull();
     assertThat(getMeasureAsInt("VbNoCoverageOnTests", "lines_to_cover")).isNull();
     assertThat(getMeasureAsInt("VbNoCoverageOnTests", "uncovered_lines")).isNull();
   }
@@ -122,7 +122,6 @@ public class CoverageTest {
     orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("VbCoverageTest")
-      .setProjectName("VbCoverageTest")
       .setProjectVersion("1.0")
       .setProfile("vbnet_no_rule")
       .setProperties(keyValues));
@@ -141,11 +140,11 @@ public class CoverageTest {
     assertThat(getMeasureAsInt("CSharpVBNetCoverage", "lines_to_cover")).isEqualTo(10);
     assertThat(getMeasureAsInt("CSharpVBNetCoverage", "uncovered_lines")).isEqualTo(4);
 
-    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:2EC3A59D-240B-498F-BF1F-EB2A84092718:Program.cs", "lines_to_cover")).isEqualTo(5);
-    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:2EC3A59D-240B-498F-BF1F-EB2A84092718:Program.cs", "uncovered_lines")).isEqualTo(2);
+    assertThat(getMeasureAsInt(getProgramCsComponentId(), "lines_to_cover")).isEqualTo(5);
+    assertThat(getMeasureAsInt(getProgramCsComponentId(), "uncovered_lines")).isEqualTo(2);
 
-    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:4745F19D-A6DB-4FBB-8A15-DDCA487A035E:Module1.vb", "lines_to_cover")).isEqualTo(5);
-    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:4745F19D-A6DB-4FBB-8A15-DDCA487A035E:Module1.vb", "uncovered_lines")).isEqualTo(2);
+    assertThat(getMeasureAsInt(getModule1VbComponentId(), "lines_to_cover")).isEqualTo(5);
+    assertThat(getMeasureAsInt(getModule1VbComponentId(), "uncovered_lines")).isEqualTo(2);
   }
 
   @Test
@@ -155,11 +154,11 @@ public class CoverageTest {
     assertThat(getMeasureAsInt("CSharpVBNetCoverage", "lines_to_cover")).isEqualTo(6);
     assertThat(getMeasureAsInt("CSharpVBNetCoverage", "uncovered_lines")).isEqualTo(3);
 
-    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:2EC3A59D-240B-498F-BF1F-EB2A84092718:Program.cs", "lines_to_cover")).isEqualTo(5);
-    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:2EC3A59D-240B-498F-BF1F-EB2A84092718:Program.cs", "uncovered_lines")).isEqualTo(2);
+    assertThat(getMeasureAsInt(getProgramCsComponentId(), "lines_to_cover")).isEqualTo(5);
+    assertThat(getMeasureAsInt(getProgramCsComponentId(), "uncovered_lines")).isEqualTo(2);
 
-    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:4745F19D-A6DB-4FBB-8A15-DDCA487A035E:Module1.vb", "lines_to_cover")).isEqualTo(1);
-    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:4745F19D-A6DB-4FBB-8A15-DDCA487A035E:Module1.vb", "uncovered_lines")).isEqualTo(1);
+    assertThat(getMeasureAsInt(getModule1VbComponentId(), "lines_to_cover")).isEqualTo(1);
+    assertThat(getMeasureAsInt(getModule1VbComponentId(), "uncovered_lines")).isEqualTo(1);
   }
 
   @Test
@@ -169,11 +168,11 @@ public class CoverageTest {
     assertThat(getMeasureAsInt("CSharpVBNetCoverage", "lines_to_cover")).isEqualTo(6);
     assertThat(getMeasureAsInt("CSharpVBNetCoverage", "uncovered_lines")).isEqualTo(3);
 
-    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:2EC3A59D-240B-498F-BF1F-EB2A84092718:Program.cs", "lines_to_cover")).isEqualTo(1);
-    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:2EC3A59D-240B-498F-BF1F-EB2A84092718:Program.cs", "uncovered_lines")).isEqualTo(1);
+    assertThat(getMeasureAsInt(getProgramCsComponentId(), "lines_to_cover")).isEqualTo(1);
+    assertThat(getMeasureAsInt(getProgramCsComponentId(), "uncovered_lines")).isEqualTo(1);
 
-    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:4745F19D-A6DB-4FBB-8A15-DDCA487A035E:Module1.vb", "lines_to_cover")).isEqualTo(5);
-    assertThat(getMeasureAsInt("CSharpVBNetCoverage:CSharpVBNetCoverage:4745F19D-A6DB-4FBB-8A15-DDCA487A035E:Module1.vb", "uncovered_lines")).isEqualTo(2);
+    assertThat(getMeasureAsInt(getModule1VbComponentId(), "lines_to_cover")).isEqualTo(5);
+    assertThat(getMeasureAsInt(getModule1VbComponentId(), "uncovered_lines")).isEqualTo(2);
   }
 
   private void analyzeCoverageMixProject(String... keyValues) throws IOException {
@@ -181,7 +180,6 @@ public class CoverageTest {
     orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("CSharpVBNetCoverage")
-      .setProjectName("CSharpVBNetCoverage")
       .setProjectVersion("1.0")
       .setProperties(keyValues));
 
@@ -191,4 +189,8 @@ public class CoverageTest {
     orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("end"));
   }
+
+  private static final String getProgramCsComponentId() { return TestUtils.hasModules(orchestrator) ? "CSharpVBNetCoverage:CSharpVBNetCoverage:2EC3A59D-240B-498F-BF1F-EB2A84092718:Program.cs" : "CSharpVBNetCoverage:CSharpConsoleApp/Program.cs"; }
+
+  private static final String getModule1VbComponentId() { return TestUtils.hasModules(orchestrator) ? "CSharpVBNetCoverage:CSharpVBNetCoverage:4745F19D-A6DB-4FBB-8A15-DDCA487A035E:Module1.vb" : "CSharpVBNetCoverage:VBNetConsoleApp/Module1.vb"; }
 }
