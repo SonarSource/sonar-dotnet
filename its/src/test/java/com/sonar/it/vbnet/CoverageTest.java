@@ -104,7 +104,7 @@ public class CoverageTest {
       .addArgument("end"));
 
     assertThat(getMeasureAsInt("VbNoCoverageOnTests", "files")).isEqualTo(2); // Only main files are counted
-    String class1VbComponentId = TestUtils.hasModules(ORCHESTRATOR) ? "VbNoCoverageOnTests:VbNoCoverageOnTests:7E4004A5-75CF-475C-9922-589EF95517D8:Class1.vb" : "VbNoCoverageOnTests:Class1.vb";
+    String class1VbComponentId = TestUtils.hasModules(ORCHESTRATOR) ? "VbNoCoverageOnTests:VbNoCoverageOnTests:7E4004A5-75CF-475C-9922-589EF95517D8:Class1.vb" : "VbNoCoverageOnTests:MyLib/Class1.vb";
     assertThat(Tests.getComponent(class1VbComponentId)).isNotNull();
     assertThat(getMeasureAsInt("VbNoCoverageOnTests", "lines_to_cover")).isNull();
     assertThat(getMeasureAsInt("VbNoCoverageOnTests", "uncovered_lines")).isNull();

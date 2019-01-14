@@ -103,7 +103,6 @@ public class CoverageTest {
     orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("NoCoverageOnTests")
-      .setProjectName("NoCoverageOnTests")
       .setProjectVersion("1.0")
       .setProfile("no_rule")
       .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml"));
