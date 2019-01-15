@@ -8,7 +8,7 @@ Namespace Tests.TestCases
 
     Public Shared dictionaryField As IDictionary(Of Integer, Integer)
     Public Shared dictionaryField2 As IDictionary(Of Integer, Integer)
-    Public fooList() As Foo 
+    Public fooList() As Foo
 
     Private Sub SameIndexOnDictionaryItem(ByVal dict As Dictionary(Of Integer, Integer))
       dict.Item(0) = 0 ' Secondary
@@ -48,12 +48,12 @@ Namespace Tests.TestCases
     End Sub
 
     Private Sub SameIndexOnArray3(ByVal obj As CustomIndexerOneArg)
-      obj("foo") = 0 
+      obj("foo") = 0
       obj("foo") = 1 ' Compliant, obj is not a collection
     End Sub
 
     Private Sub SameIndexOnArray4(ByVal obj As CustomIndexerMultiArg)
-      obj("s", 1, 1) = 0 
+      obj("s", 1, 1) = 0
       obj("s", 1, 1) = 1 ' Compliant obj is not a dictionary
     End Sub
 
@@ -199,4 +199,14 @@ Namespace Tests.TestCases
     Public Sub Add(ByVal a As Integer, ByVal b As Integer)
     End Sub
   End Class
+
+    'See https://github.com/SonarSource/sonar-dotnet/issues/2235
+    Class NullReferenceReproducer
+        Sub FooBar()
+            Bar ' AD0001 NullReferenceException in GetFirstArgumentExpression
+        End Sub
+
+        Public Sub Bar()
+        End Sub
+    End Class
 End Namespace

@@ -139,6 +139,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
         }
 
         private static ExpressionSyntax GetFirstArgumentExpression(InvocationExpressionSyntax invocation) =>
-            invocation.ArgumentList.Arguments.ElementAtOrDefault(0)?.GetExpression().RemoveParentheses();
+            invocation.ArgumentList?.Arguments.ElementAtOrDefault(0)?.GetExpression().RemoveParentheses();
     }
 }
