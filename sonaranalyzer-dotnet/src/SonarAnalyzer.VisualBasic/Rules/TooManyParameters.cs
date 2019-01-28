@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,16 +27,114 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Rules.Common;
+using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class TooManyParameters : TooManyParametersBase
+    public sealed class TooManyParameters : ParameterLoadingDiagnosticAnalyzer
     {
+        internal const string DiagnosticId = "S107";
+        private const string MessageFormat = "{2} has {1} parameters, which is greater than the {0} authorized.";
+
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
+                isEnabledByDefault: false);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+
+        private const int DefaultValueMaximum = 7;
+
+        [RuleParameter("max", PropertyType.Integer, "Maximum authorized number of parameters", DefaultValueMaximum)]
+        public int Maximum { get; set; } = DefaultValueMaximum;
+
+        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var parameterListNode = (ParameterListSyntax)c.Node;
+                    var parameters = parameterListNode.Parameters.Count;
+
+                    if (parameters > Maximum &&
+                        parameterListNode.Parent != null &&
+                        CanBeChanged(parameterListNode.Parent, c.SemanticModel) &&
+                        Mapping.TryGetValue(parameterListNode.Parent.Kind(), out var declarationName))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameterListNode.GetLocation(),
+                            Maximum, parameters, declarationName));
+                    }
+                },
+                SyntaxKind.ParameterList);
+        }
+
+        private bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel)
+        {
+            var declaredSymbol = semanticModel.GetDeclaredSymbol(node);
+            var symbol = semanticModel.GetSymbolInfo(node).Symbol;
+
+            if (node.IsAnyKind(LambdaHeaders))
+            {
+                return true;
+            }
+
+            if (declaredSymbol == null && symbol == null)
+            {
+                // no information
+                return false;
+            }
+
+            if (symbol != null)
+            {
+                // Not a declaration, such as Action
+                return true;
+            }
+
+            if ((node as SubNewStatementSyntax)?.ParameterList?.Parameters.Count is int parameterCount &&
+                parameterCount > Maximum &&
+                node.Parent is ConstructorBlockSyntax constructorBlock &&
+                ContainsMyBaseNewInvocation(constructorBlock, Maximum))
+            {
+                return false;
+            }
+
+            if (declaredSymbol.IsExtern &&
+                declaredSymbol.IsStatic &&
+                declaredSymbol.GetAttributes(KnownType.System_Runtime_InteropServices_DllImportAttribute).Any())
+            {
+                // P/Invoke method is defined externally.
+                // Do not raise
+                return false;
+            }
+
+            return declaredSymbol.GetOverriddenMember() == null &&
+                   declaredSymbol.GetInterfaceMember() == null;
+        }
+
+        private static bool ContainsMyBaseNewInvocation(ConstructorBlockSyntax constructorBlock, int maximum) =>
+                constructorBlock.Statements.Any(s => s is ExpressionStatementSyntax expression &&
+                    expression.Expression is InvocationExpressionSyntax invocation &&
+                    invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
+                    memberAccess.Expression is MyBaseExpressionSyntax myBase &&
+                    memberAccess.Name.Identifier.Text.Equals("New", System.StringComparison.OrdinalIgnoreCase) &&
+                    invocation.ArgumentList.Arguments.Count > maximum);
+
+        private static readonly Dictionary<SyntaxKind, string> Mapping = new Dictionary<SyntaxKind, string>
+        {
+            { SyntaxKind.SubNewStatement, "Constructor" },
+            { SyntaxKind.FunctionStatement, "Function" },
+            { SyntaxKind.SubStatement, "Sub" },
+            { SyntaxKind.DelegateFunctionStatement, "Delegate" },
+            { SyntaxKind.DelegateSubStatement, "Delegate" },
+            { SyntaxKind.SubLambdaHeader, "Lambda" },
+            { SyntaxKind.FunctionLambdaHeader, "Lambda" },
+        };
+
+        private static readonly SyntaxKind[] LambdaHeaders = new SyntaxKind[]
+        {
+            SyntaxKind.FunctionLambdaHeader,
+            SyntaxKind.SubLambdaHeader
+        };
     }
 }

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -19,8 +19,10 @@
  */
 
 extern alias csharp;
+extern alias vbnet;
+using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
+using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,10 +31,10 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void TooManyParameters()
+        public void TooManyParameters_CS()
         {
-            var diagnostic = new TooManyParameters { Maximum = 3 };
-            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters.cs", diagnostic);
+            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters.cs",
+                new CSharp.TooManyParameters { Maximum = 3 });
         }
 
         [TestMethod]
@@ -40,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TooManyParameters_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters.vb",
-                new SonarAnalyzer.Rules.VisualBasic.TooManyParameters());
+                new VisualBasic.TooManyParameters { Maximum = 3});
         }
     }
 }

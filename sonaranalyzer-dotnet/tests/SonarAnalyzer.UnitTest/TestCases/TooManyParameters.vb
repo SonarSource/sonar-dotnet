@@ -1,12 +1,109 @@
-Imports System
-Imports System.Collections.Generic
-Imports System.Linq
-Imports System.Text
+﻿Imports System
+Imports System.Runtime.InteropServices
 
-Namespace Tests.TestCases
-    Class Foo
-        Public Sub Test()
+Public Class TooManyParameters
+  Implements MyInterface
 
-		End Sub
-    End Class
-End Namespace
+  Public Sub New(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer)
+  End Sub
+
+  Public Sub New(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Noncompliant
+'               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  End Sub
+
+  Public Sub F1(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer) Implements MyInterface.F1
+  End Sub
+
+  Public Sub F2(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer)  Implements MyInterface.F2 ' Compliant, interface implementation
+  End Sub
+
+  Public Sub F1(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer)  ' Noncompliant
+  End Sub
+
+  Public Function F3(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer) Implements MyInterface.F3
+    Return p1
+  End Function
+
+  Public Function F4(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer)  Implements MyInterface.F4 ' Compliant, interface implementation
+    Return p1
+  End Function
+
+  Delegate Sub ThreeParametersSub( one As Integer,  two As Integer,  three As Integer)
+  Delegate Function ThreeParametersFunction(one As Integer,  two As Integer,  three As Integer) As Integer
+  Delegate Sub FourParametersSub( one As Integer,  two As Integer,  three As Integer,  four As String) ' Noncompliant
+'                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  Delegate Function FourParametersFunction( one As Integer,  two As Integer,  three As Integer,  four As String) As Integer ' Noncompliant
+'                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  Public Sub CallFunctionDelegate(ByVal first As ThreeParametersFunction, ByVal second As FourParametersFunction)
+  End Sub
+
+  Public Sub CallSubDelegate(ByVal first As ThreeParametersSub, ByVal second As FourParametersSub)
+  End Sub
+
+  Public Sub F()
+    Dim v1 = New Action(Of Integer, Integer, Integer)(
+      Function(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer)
+        Console.WriteLine()
+      End Function)
+    Dim v2 = New Action(Of Integer, Integer, Integer, Integer)(
+      Function(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Noncompliant
+'             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        Console.WriteLine()
+      End Function)
+    Dim v3 = New Action(Function()
+      End Function)
+
+    Dim v4 = Function(num As Integer, num2 As Integer, num3 As Integer) num + num2 + num3 + 1
+    Dim v5 = Function(num As Integer, num2 As Integer, num3 As Integer, num4 As Integer) num + num2 + num3 + num4 + 1 ' Noncompliant (FP because of below)
+    CallFunctionDelegate(v4, v5)
+ 
+    Dim v6 = Sub(num As Integer, num2 As Integer, num3 As Integer) Console.WriteLine()
+    Dim v7 = Sub(num As Integer, num2 As Integer, num3 As Integer, num4 As Integer) Console.WriteLine() ' Noncompliant (FP because of below)
+    CallSubDelegate(v6, v7)
+  End Sub
+
+' We should not raise for imported methods according to external definition.
+  <DllImport("foo.dll")>
+  Public Shared Sub Extern(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Compliant, external definition
+  End Sub
+End Class
+
+Interface MyInterface
+  Sub F1(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer)
+  Sub F2(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Noncompliant
+  Function F3(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer)
+  Function F4(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Noncompliant
+End Interface
+
+Public Class MyWrongClass
+  Public Sub New(ByVal a As String, ByVal b As String, ByVal c As String, ByVal d As String, ByVal e As String, ByVal f As String, ByVal g As String, ByVal h As String) ' Noncompliant
+  End Sub
+End Class
+
+Public Class SubClass
+  Inherits MyWrongClass
+
+' We should not raise when parent base class forces usage of too many args
+  Public Sub New(ByVal a As String, ByVal b As String, ByVal c As String, ByVal d As String, ByVal e As String, ByVal f As String, ByVal g As String, ByVal h As String) ' Compliant (base class requires them)
+    MyBase.New(a, b, c, d, e, f, g, h)
+  End Sub
+
+  Public Sub New()
+    MyBase.New("", "", "", "", "", "", "", "")
+  End Sub
+End Class
+
+Public Class SubClass2
+  Inherits TooManyParameters
+
+  Public Sub New(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal s1 As String, ByVal s2 As String) ' Noncompliant
+'               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    MyBase.New(p1, p2, p3)
+  End Sub
+
+  Public Sub New(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Compliant (needs arguments for base constructor)
+    MyBase.New(p1, p2, p3, p4)
+  End Sub
+
+End Class
