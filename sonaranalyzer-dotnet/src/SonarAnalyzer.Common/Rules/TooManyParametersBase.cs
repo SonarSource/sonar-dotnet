@@ -1,6 +1,6 @@
 /*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2019 SonarSource SA
+ * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -18,30 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules
 {
-    [TestClass]
-    public class TooManyParametersTest
+    public abstract class TooManyParametersBase : SonarDiagnosticAnalyzer
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void TooManyParameters()
-        {
-            var diagnostic = new TooManyParameters { Maximum = 3 };
-            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters.cs", diagnostic);
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void TooManyParameters_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters.vb",
-                new SonarAnalyzer.Rules.VisualBasic.TooManyParameters());
-        }
+        protected const string DiagnosticId = "S107";
+        protected const string MessageFormat = "";
     }
 }
-
