@@ -121,6 +121,24 @@ namespace Tests.Diagnostics
         }
     }
 
+    // implement interface using arrow syntax
+    public class Baz : IFoo
+    {
+        private int foo1;
+
+        public int Foo1
+        {
+            get => 42;
+            set => foo1 = 0; // Noncompliant
+        }
+
+        public event EventHandler Bar3
+        {
+            add => throw new Exception();
+            remove => throw new Exception();
+        }
+    }
+
     public class NewSyntax
     {
         public int ReadonlyGetter { get; }

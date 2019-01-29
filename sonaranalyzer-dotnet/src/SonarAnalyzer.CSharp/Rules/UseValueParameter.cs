@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var interfaceMember = c.SemanticModel.GetDeclaredSymbol(accessor).GetInterfaceMember();
                     if (interfaceMember != null &&
-                        accessor?.Body.Statements.Count == 0) // No need to check ExpressionBody, it can't be empty
+                        accessor.Body?.Statements.Count == 0) // No need to check ExpressionBody, it can't be empty
                     {
                         return;
                     }
