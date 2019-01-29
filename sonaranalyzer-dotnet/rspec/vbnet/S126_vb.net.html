@@ -5,27 +5,25 @@ should be followed by an <code>else</code> statement.</p>
 consistent with the requirement to have a final <code>default</code> clause in a <code>switch</code> statement.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-if (x == 0)
-{
-  doSomething();
-} else if (x == 1)
-{
-  doSomethingElse();
-}
+If x = 0 Then
+    doSomething()
+ElseIf x = 1 Then
+    doSomethingElse()
+End If
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-if (x == 0)
-{
-  doSomething();
-} else if (x == 1)
-{
-  doSomethingElse();
-} else
-{
-  throw new IllegalStateException();
-}
+If x = 0 Then
+    doSomething()
+ElseIf x = 1 Then
+    doSomethingElse()
+Else
+    Throw New ArgumentException("...")
+End If
 </pre>
+<h2>Exceptions</h2>
+<p>When all branches of an <code>if</code>-<code>else if</code> end with <code>return</code>, <code>break</code> or <code>throw</code>, the code that
+comes after the <code>if</code> implicitly behaves as if it was in an <code>else</code> clause. This rule will therefore ignore that case.</p>
 <h2>See</h2>
 <ul>
   <li> MISRA C:2004, 14.10 - All if...else if constructs shall be terminated with an else clause. </li>
