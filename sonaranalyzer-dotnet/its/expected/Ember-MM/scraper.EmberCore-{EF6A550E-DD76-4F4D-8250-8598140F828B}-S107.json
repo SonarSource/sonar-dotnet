@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S107",
+"message":  "Function has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  97,
+"startColumn":  35,
+"endLine":  97,
+"endColumn":  276
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Sub has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  113,
+"startColumn":  29,
+"endLine":  113,
+"endColumn":  259
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Sub has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  121,
+"startColumn":  28,
+"endLine":  121,
+"endColumn":  273
+}
+}
+}
+]
+}
