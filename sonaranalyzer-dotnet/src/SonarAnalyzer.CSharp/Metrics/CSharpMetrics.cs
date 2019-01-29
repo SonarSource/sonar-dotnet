@@ -74,20 +74,7 @@ namespace SonarAnalyzer.Metrics.CSharp
             }
         }
 
-        protected override bool IsCommentTrivia(SyntaxTrivia trivia)
-        {
-            switch (trivia.Kind())
-            {
-                case SyntaxKind.SingleLineCommentTrivia:
-                case SyntaxKind.MultiLineCommentTrivia:
-                case SyntaxKind.SingleLineDocumentationCommentTrivia:
-                case SyntaxKind.MultiLineDocumentationCommentTrivia:
-                    return true;
-
-                default:
-                    return false;
-            }
-        }
+        protected override bool IsCommentTrivia(SyntaxTrivia trivia) => trivia.IsComment();
 
         protected override bool IsDocumentationCommentTrivia(SyntaxTrivia trivia)
         {
