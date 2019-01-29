@@ -32,41 +32,31 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class TooManyParameters : ParameterLoadingDiagnosticAnalyzer
+    public class TooManyParameters : TooManyParametersBase<SyntaxKind, ParameterListSyntax>
     {
-        internal const string DiagnosticId = "S107";
-        private const string MessageFormat = "{2} has {1} parameters, which is greater than the {0} authorized.";
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
+        protected override SyntaxKind[] SyntaxKinds => new SyntaxKind[] { SyntaxKind.ParameterList };
+        protected override DiagnosticDescriptor Rule => rule;
+        protected override Dictionary<SyntaxKind, string> Mapping => mapping;
+        protected override SyntaxKind ParentType(ParameterListSyntax parameterList) => parameterList.Parent.Kind();
+        protected override int CountParameters(ParameterListSyntax parameterList) => parameterList.Parameters.Count;
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
                 isEnabledByDefault: false);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private const int DefaultValueMaximum = 7;
-        [RuleParameter("max", PropertyType.Integer, "Maximum authorized number of parameters", DefaultValueMaximum)]
-        public int Maximum { get; set; } = DefaultValueMaximum;
-
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        private static readonly Dictionary<SyntaxKind, string> mapping = new Dictionary<SyntaxKind, string>
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var parameterListNode = (ParameterListSyntax)c.Node;
-                    var parameters = parameterListNode.Parameters.Count;
+            { SyntaxKind.ConstructorDeclaration, "Constructor" },
+            { SyntaxKind.MethodDeclaration, "Method" },
+            { SyntaxKind.DelegateDeclaration, "Delegate" },
+            { SyntaxKind.AnonymousMethodExpression, "Delegate" },
+            { SyntaxKind.ParenthesizedLambdaExpression, "Lambda" },
+            { SyntaxKind.SimpleLambdaExpression, "Lambda" }
+        };
 
-                    if (parameters > Maximum &&
-                        parameterListNode.Parent != null &&
-                        CanBeChanged(parameterListNode.Parent, c.SemanticModel) &&
-                        Mapping.TryGetValue(parameterListNode.Parent.Kind(), out var declarationName))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameterListNode.GetLocation(),
-                            Maximum, parameters, declarationName));
-                    }
-                },
-                SyntaxKind.ParameterList);
-        }
-
-        private bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel)
+        protected override bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel)
         {
             var declaredSymbol = semanticModel.GetDeclaredSymbol(node);
             var symbol = semanticModel.GetSymbolInfo(node).Symbol;
@@ -104,14 +94,5 @@ namespace SonarAnalyzer.Rules.CSharp
                    declaredSymbol.GetInterfaceMember() == null;
         }
 
-        private static readonly Dictionary<SyntaxKind, string> Mapping = new Dictionary<SyntaxKind, string>
-        {
-            { SyntaxKind.ConstructorDeclaration, "Constructor" },
-            { SyntaxKind.MethodDeclaration, "Method" },
-            { SyntaxKind.DelegateDeclaration, "Delegate" },
-            { SyntaxKind.AnonymousMethodExpression, "Delegate" },
-            { SyntaxKind.ParenthesizedLambdaExpression, "Lambda" },
-            { SyntaxKind.SimpleLambdaExpression, "Lambda" }
-        };
     }
 }
