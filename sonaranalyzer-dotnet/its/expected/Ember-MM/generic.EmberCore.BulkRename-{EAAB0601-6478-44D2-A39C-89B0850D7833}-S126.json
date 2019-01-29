@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  416,
+"startColumn":  25,
+"endLine":  416,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  672,
+"startColumn":  17,
+"endLine":  672,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  307,
+"startColumn":  17,
+"endLine":  307,
+"endColumn":  23
+}
+}
+}
+]
+}

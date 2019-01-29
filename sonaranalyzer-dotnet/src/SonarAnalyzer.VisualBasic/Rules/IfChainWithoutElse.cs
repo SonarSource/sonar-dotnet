@@ -39,9 +39,23 @@ namespace SonarAnalyzer.Rules.VisualBasic
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
+        private const string MessageFormat = "Add the missing 'Else' clause.";
+
         protected override void Initialize(SonarAnalysisContext context)
         {
-            throw new System.NotImplementedException();
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var ifNode = (MultiLineIfBlockSyntax)c.Node;
+                    if (ifNode.ElseBlock != null || !ifNode.ElseIfBlocks.Any())
+                    {
+                        return;
+                    }
+
+                    var lastElseIf = ifNode.ElseIfBlocks.Last();
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, lastElseIf.ElseIfStatement.ElseIfKeyword.GetLocation()));
+                },
+                SyntaxKind.MultiLineIfBlock);
         }
     }
 }

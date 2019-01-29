@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,6 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class IfChainWithoutElseBase : SonarDiagnosticAnalyzer
     {
-        protected const string DiagnosticId = "S126";
-        protected const string MessageFormat = "";
+        internal const string DiagnosticId = "S126";
     }
 }

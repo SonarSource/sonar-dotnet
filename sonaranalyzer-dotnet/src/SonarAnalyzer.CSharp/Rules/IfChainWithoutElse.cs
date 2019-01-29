@@ -31,9 +31,8 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class IfChainWithoutElse : SonarDiagnosticAnalyzer
+    public sealed class IfChainWithoutElse : IfChainWithoutElseBase
     {
-        internal const string DiagnosticId = "S126";
         private const string MessageFormat = "Add the missing 'else' clause.";
 
         private static readonly DiagnosticDescriptor rule =
