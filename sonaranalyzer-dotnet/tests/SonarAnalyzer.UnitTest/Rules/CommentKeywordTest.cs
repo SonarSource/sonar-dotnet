@@ -19,19 +19,46 @@
  */
 
 extern alias csharp;
+extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
+using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class CommentTodoTest
+    public class CommentKeywordTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CommentTodo()
+        public void CommentTodo_CS()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\CommentTodo.cs", new CommentTodo());
+            Verifier.VerifyAnalyzer(@"TestCases\CommentTodo.cs",
+                new CSharp.CommentKeyword());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CommentFixme_CS()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\CommentFixme.cs",
+                new CSharp.CommentKeyword());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CommentTodo_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\CommentTodo.vb",
+                new VisualBasic.CommentKeyword());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CommentFixme_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\CommentFixme.vb",
+                new VisualBasic.CommentKeyword());
         }
     }
 }

@@ -31,4 +31,10 @@ fixMe - Noncompliant
 */
 namespace Tests.Diagnostics
 {
+    class FixMe
+    {
+        public FixMe()
+        {
+        }
+    }
 }

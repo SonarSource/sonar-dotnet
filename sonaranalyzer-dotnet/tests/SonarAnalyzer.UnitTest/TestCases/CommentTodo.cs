@@ -31,4 +31,10 @@ toDo - Noncompliant
 */
 namespace Tests.Diagnostics
 {
+    class Todo
+    {
+        public Todo()
+        {
+        }
+    }
 }

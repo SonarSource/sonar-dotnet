@@ -346,5 +346,20 @@ namespace SonarAnalyzer.Helpers
                 topParenthesizedExpression.Parent is AssignmentExpressionSyntax assignment &&
                 assignment.Left == topParenthesizedExpression;
         }
+
+        public static bool IsComment(this SyntaxTrivia trivia)
+        {
+            switch (trivia.Kind())
+            {
+                case SyntaxKind.SingleLineCommentTrivia:
+                case SyntaxKind.MultiLineCommentTrivia:
+                case SyntaxKind.SingleLineDocumentationCommentTrivia:
+                case SyntaxKind.MultiLineDocumentationCommentTrivia:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
     }
 }

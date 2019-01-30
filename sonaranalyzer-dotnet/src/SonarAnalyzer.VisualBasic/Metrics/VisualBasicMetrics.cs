@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Metrics.VisualBasic
 {
@@ -105,19 +106,7 @@ namespace SonarAnalyzer.Metrics.VisualBasic
             }
         }
 
-        protected override bool IsCommentTrivia(SyntaxTrivia trivia)
-        {
-            switch (trivia.Kind())
-            {
-                case SyntaxKind.CommentTrivia:
-                case SyntaxKind.DocumentationCommentExteriorTrivia:
-                case SyntaxKind.DocumentationCommentTrivia:
-                    return true;
-
-                default:
-                    return false;
-            }
-        }
+        protected override bool IsCommentTrivia(SyntaxTrivia trivia) => trivia.IsComment();
 
         protected override bool IsDocumentationCommentTrivia(SyntaxTrivia trivia)
         {
