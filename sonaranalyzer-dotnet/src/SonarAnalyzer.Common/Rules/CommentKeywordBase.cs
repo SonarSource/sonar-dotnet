@@ -30,23 +30,23 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class CommentKeywordBase : SonarDiagnosticAnalyzer
     {
-        private const string TODO_Keyword = "TODO";
-        protected const string TODO_DiagnosticId = "S1135";
-        protected const string TODO_MessageFormat = "Complete the task associated to this '" + TODO_Keyword + "' comment.";
+        private const string TodoKeyword = "TODO";
+        protected const string TodoDiagnosticId = "S1135";
+        protected const string TodoMessageFormat = "Complete the task associated to this '" + TodoKeyword + "' comment.";
 
-        private const string FIXME_Keyword = "FIXME";
-        protected const string FIXME_DiagnosticId = "S1134";
-        protected const string FIXME_MessageFormat = "Take the required action to fix the issue indicated by this '" + FIXME_Keyword + "' comment.";
+        private const string FixMeKeyword = "FIXME";
+        protected const string FixMeDiagnosticId = "S1134";
+        protected const string FixMeMessageFormat = "Take the required action to fix the issue indicated by this '" + FixMeKeyword + "' comment.";
 
-        protected abstract DiagnosticDescriptor TODO_Diagnostic { get; }
-        protected abstract DiagnosticDescriptor FIXME_Diagnostic { get; }
+        protected abstract DiagnosticDescriptor TodoDiagnostic { get; }
+        protected abstract DiagnosticDescriptor FixMeDiagnostic { get; }
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
         public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
 
         protected CommentKeywordBase()
         {
-            SupportedDiagnostics = ImmutableArray.Create(TODO_Diagnostic, FIXME_Diagnostic);
+            SupportedDiagnostics = ImmutableArray.Create(TodoDiagnostic, FixMeDiagnostic);
         }
 
         protected sealed override void Initialize(SonarAnalysisContext context)
@@ -60,14 +60,14 @@ namespace SonarAnalyzer.Rules
 
                     foreach (var comment in comments)
                     {
-                        foreach (var location in GetKeywordLocations(c.Tree, comment, TODO_Keyword))
+                        foreach (var location in GetKeywordLocations(c.Tree, comment, TodoKeyword))
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(TODO_Diagnostic, location));
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(TodoDiagnostic, location));
                         }
 
-                        foreach (var location in GetKeywordLocations(c.Tree, comment, FIXME_Keyword))
+                        foreach (var location in GetKeywordLocations(c.Tree, comment, FixMeKeyword))
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(FIXME_Diagnostic, location));
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(FixMeDiagnostic, location));
                         }
                     }
                 });

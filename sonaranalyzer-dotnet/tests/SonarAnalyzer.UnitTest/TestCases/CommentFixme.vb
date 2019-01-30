@@ -13,4 +13,10 @@ Namespace Tests.TestCases
 
 		End Sub
     End Class
+
+    Class FixMe
+        Sub FixMe()
+
+        End Sub
+    End Class
 End Namespace 'fixme ' Noncompliant

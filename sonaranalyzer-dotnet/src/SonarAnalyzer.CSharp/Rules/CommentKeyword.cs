@@ -27,17 +27,17 @@ using SonarAnalyzer.Helpers.CSharp;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(FIXME_DiagnosticId)]
-    [Rule(TODO_DiagnosticId)]
+    [Rule(FixMeDiagnosticId)]
+    [Rule(TodoDiagnosticId)]
     public sealed class CommentKeyword : CommentKeywordBase
     {
         internal static readonly DiagnosticDescriptor TODO_Descriptor =
-            DiagnosticDescriptorBuilder.GetDescriptor(TODO_DiagnosticId, TODO_MessageFormat, RspecStrings.ResourceManager);
-        protected override DiagnosticDescriptor TODO_Diagnostic { get; } = TODO_Descriptor;
+            DiagnosticDescriptorBuilder.GetDescriptor(TodoDiagnosticId, TodoMessageFormat, RspecStrings.ResourceManager);
+        protected override DiagnosticDescriptor TodoDiagnostic { get; } = TODO_Descriptor;
 
         internal static readonly DiagnosticDescriptor FIXME_Descriptor =
-            DiagnosticDescriptorBuilder.GetDescriptor(FIXME_DiagnosticId, FIXME_MessageFormat, RspecStrings.ResourceManager);
-        protected override DiagnosticDescriptor FIXME_Diagnostic { get; } = FIXME_Descriptor;
+            DiagnosticDescriptorBuilder.GetDescriptor(FixMeDiagnosticId, FixMeMessageFormat, RspecStrings.ResourceManager);
+        protected override DiagnosticDescriptor FixMeDiagnostic { get; } = FIXME_Descriptor;
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer
             => CSharpGeneratedCodeRecognizer.Instance;

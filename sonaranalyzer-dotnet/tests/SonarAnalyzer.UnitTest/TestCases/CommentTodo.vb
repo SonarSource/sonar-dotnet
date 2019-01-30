@@ -13,4 +13,9 @@ Namespace Tests.TestCases
 
 		End Sub
     End Class
+
+    Class Todo
+        Sub Todo() ' this is not a ctor
+        End Sub
+    End Class
 End Namespace 'todo ' Noncompliant
