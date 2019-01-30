@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 19 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  263,
+"startColumn":  21,
+"endLine":  263,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 19 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  313,
+"startColumn":  21,
+"endLine":  313,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 16 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  365,
+"startColumn":  21,
+"endLine":  365,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 20 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  387,
+"startColumn":  21,
+"endLine":  387,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 10 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  415,
+"startColumn":  21,
+"endLine":  415,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 12 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  229,
+"startColumn":  21,
+"endLine":  229,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 13 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  242,
+"startColumn":  21,
+"endLine":  242,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 13 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  256,
+"startColumn":  21,
+"endLine":  256,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 13 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  270,
+"startColumn":  21,
+"endLine":  270,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 13 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  284,
+"startColumn":  21,
+"endLine":  284,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 14 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  298,
+"startColumn":  21,
+"endLine":  298,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 13 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  314,
+"startColumn":  21,
+"endLine":  314,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 13 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  328,
+"startColumn":  21,
+"endLine":  328,
+"endColumn":  30
+}
+}
+}
+]
+}

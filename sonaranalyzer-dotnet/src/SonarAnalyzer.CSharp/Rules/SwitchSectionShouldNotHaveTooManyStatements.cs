@@ -32,20 +32,12 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class SwitchSectionShouldNotHaveTooManyStatements : ParameterLoadingDiagnosticAnalyzer
+    public sealed class SwitchSectionShouldNotHaveTooManyStatements : SwitchSectionShouldNotHaveTooManyStatementsBase
     {
-        internal const string DiagnosticId = "S1151";
-        private const string MessageFormat = "Reduce this 'switch/case' number of lines from {0} to at most {1}, " +
-            "for example by extracting code into a method.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
                 isEnabledByDefault: false);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        private const int ThresholdDefaultValue = 8;
-        [RuleParameter("max", PropertyType.Integer, "Maximum number of lines of code.", ThresholdDefaultValue)]
-        public int Threshold { get; set; } = ThresholdDefaultValue;
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
@@ -64,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (statementsCount > Threshold)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, switchSection.Labels.First().GetLocation(),
-                            statementsCount, Threshold));
+                            "switch section", statementsCount, Threshold, "method"));
                     }
                 },
                 SyntaxKind.SwitchSection);

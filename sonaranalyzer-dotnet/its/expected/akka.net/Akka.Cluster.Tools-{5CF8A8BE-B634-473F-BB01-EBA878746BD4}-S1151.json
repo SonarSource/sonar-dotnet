@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 9 to at most 8, for example by extracting code into a method.",
+"message":  "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
 "region":  {

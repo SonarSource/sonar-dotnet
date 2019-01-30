@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 21 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  198,
+"startColumn":  29,
+"endLine":  198,
+"endColumn":  173
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 10 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  201,
+"startColumn":  37,
+"endLine":  201,
+"endColumn":  77
+}
+}
+}
+]
+}

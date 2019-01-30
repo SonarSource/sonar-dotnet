@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 10 to at most 8, for example by extracting code into a method.",
+"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 9 to at most 8, for example by extracting code into a method.",
+"message":  "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 9 to at most 8, for example by extracting code into a method.",
+"message":  "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 10 to at most 8, for example by extracting code into a method.",
+"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 10 to at most 8, for example by extracting code into a method.",
+"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 21 to at most 8, for example by extracting code into a method.",
+"message":  "Reduce this switch section number of statements from 21 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 18 to at most 8, for example by extracting code into a method.",
+"message":  "Reduce this switch section number of statements from 18 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 15 to at most 8, for example by extracting code into a method.",
+"message":  "Reduce this switch section number of statements from 15 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {

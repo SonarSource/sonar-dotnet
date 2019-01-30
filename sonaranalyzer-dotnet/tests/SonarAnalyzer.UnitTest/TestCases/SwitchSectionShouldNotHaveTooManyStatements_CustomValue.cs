@@ -10,7 +10,7 @@ namespace Tests.Diagnostics
             {
                 case 0:
                     break;
-                case 1: // Noncompliant {{Reduce this 'switch/case' number of lines from 6 to at most 1, for example by extracting code into a method.}}
+                case 1: // Noncompliant {{Reduce this switch section number of statements from 6 to at most 1, for example by extracting code into a method.}}
 //              ^^^^^^^
                     Console.WriteLine("1");
                     Console.WriteLine("2");
