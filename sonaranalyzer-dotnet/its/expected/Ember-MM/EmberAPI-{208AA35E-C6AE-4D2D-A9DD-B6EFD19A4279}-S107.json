@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S107",
+"message":  "Function has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIInterfaces.vb",
+"region":  {
+"startLine":  170,
+"startColumn":  34,
+"endLine":  170,
+"endColumn":  286
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Function has 10 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIInterfaces.vb",
+"region":  {
+"startLine":  172,
+"startColumn":  32,
+"endLine":  172,
+"endColumn":  295
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Function has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIInterfaces.vb",
+"region":  {
+"startLine":  188,
+"startColumn":  31,
+"endLine":  188,
+"endColumn":  261
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Function has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIInterfaces.vb",
+"region":  {
+"startLine":  190,
+"startColumn":  25,
+"endLine":  190,
+"endColumn":  270
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Function has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  483,
+"startColumn":  36,
+"endLine":  483,
+"endColumn":  266
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Function has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  495,
+"startColumn":  33,
+"endLine":  495,
+"endColumn":  278
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Function has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  519,
+"startColumn":  38,
+"endLine":  519,
+"endColumn":  279
+}
+}
+}
+]
+}

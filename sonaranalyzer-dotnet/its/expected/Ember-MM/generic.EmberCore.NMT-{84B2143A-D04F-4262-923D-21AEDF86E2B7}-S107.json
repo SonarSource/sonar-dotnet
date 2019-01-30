@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S107",
+"message":  "Function has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  686,
+"startColumn":  33,
+"endLine":  686,
+"endColumn":  258
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Function has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  718,
+"startColumn":  34,
+"endLine":  718,
+"endColumn":  255
+}
+}
+}
+]
+}

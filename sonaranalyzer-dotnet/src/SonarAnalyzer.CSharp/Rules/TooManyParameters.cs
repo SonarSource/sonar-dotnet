@@ -20,69 +20,48 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class TooManyParameters : ParameterLoadingDiagnosticAnalyzer
+    public class TooManyParameters : TooManyParametersBase<SyntaxKind, ParameterListSyntax>
     {
-        internal const string DiagnosticId = "S107";
-        private const string MessageFormat = "{2} has {1} parameters, which is greater than the {0} authorized.";
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
+        protected override SyntaxKind[] SyntaxKinds { get; } = new[] { SyntaxKind.ParameterList };
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
                 isEnabledByDefault: false);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private const int DefaultValueMaximum = 7;
-        [RuleParameter("max", PropertyType.Integer, "Maximum authorized number of parameters", DefaultValueMaximum)]
-        public int Maximum { get; set; } = DefaultValueMaximum;
-
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        private static readonly ImmutableDictionary<SyntaxKind, string> nodeToDeclarationName = new Dictionary<SyntaxKind, string>
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var parameterListNode = (ParameterListSyntax)c.Node;
-                    var parameters = parameterListNode.Parameters.Count;
+            { SyntaxKind.ConstructorDeclaration, "Constructor" },
+            { SyntaxKind.MethodDeclaration, "Method" },
+            { SyntaxKind.DelegateDeclaration, "Delegate" },
+            { SyntaxKind.AnonymousMethodExpression, "Delegate" },
+            { SyntaxKind.ParenthesizedLambdaExpression, "Lambda" },
+            { SyntaxKind.SimpleLambdaExpression, "Lambda" }
+        }.ToImmutableDictionary();
 
-                    if (parameters > Maximum &&
-                        parameterListNode.Parent != null &&
-                        CanBeChanged(parameterListNode.Parent, c.SemanticModel) &&
-                        Mapping.TryGetValue(parameterListNode.Parent.Kind(), out var declarationName))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameterListNode.GetLocation(),
-                            Maximum, parameters, declarationName));
-                    }
-                },
-                SyntaxKind.ParameterList);
-        }
+        protected override string UserFriendlyNameForNode(SyntaxNode node) => nodeToDeclarationName[node.Kind()];
 
-        private bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel)
+        protected override int CountParameters(ParameterListSyntax parameterList) => parameterList.Parameters.Count;
+
+        protected override bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel)
         {
-            var declaredSymbol = semanticModel.GetDeclaredSymbol(node);
-            var symbol = semanticModel.GetSymbolInfo(node).Symbol;
-
-            if (declaredSymbol == null && symbol == null)
+            if (!nodeToDeclarationName.ContainsKey(node.Kind()))
             {
-                // No information
                 return false;
             }
-
-            if (symbol != null)
-            {
-                // Not a declaration, such as Action
-                return true;
-            }
-
             if ((node as ConstructorDeclarationSyntax)?.Initializer?.ArgumentList?.Arguments.Count > Maximum)
             {
                 // Base class is already not compliant so let's ignore current constructor.
@@ -91,27 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            if (declaredSymbol.IsExtern &&
-                declaredSymbol.IsStatic &&
-                declaredSymbol.GetAttributes(KnownType.System_Runtime_InteropServices_DllImportAttribute).Any())
-            {
-                // P/Invoke method is defined externally.
-                // Do not raise
-                return false;
-            }
-
-            return declaredSymbol.GetOverriddenMember() == null &&
-                   declaredSymbol.GetInterfaceMember() == null;
+            return VerifyCanBeChangedBySymbol(node, semanticModel);
         }
-
-        private static readonly Dictionary<SyntaxKind, string> Mapping = new Dictionary<SyntaxKind, string>
-        {
-            { SyntaxKind.ConstructorDeclaration, "Constructor" },
-            { SyntaxKind.MethodDeclaration, "Method" },
-            { SyntaxKind.DelegateDeclaration, "Delegate" },
-            { SyntaxKind.AnonymousMethodExpression, "Delegate" },
-            { SyntaxKind.ParenthesizedLambdaExpression, "Lambda" },
-            { SyntaxKind.SimpleLambdaExpression, "Lambda" }
-        };
     }
 }

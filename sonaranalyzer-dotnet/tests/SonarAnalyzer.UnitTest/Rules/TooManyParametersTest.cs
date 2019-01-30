@@ -19,8 +19,10 @@
  */
 
 extern alias csharp;
+extern alias vbnet;
+using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
+using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,10 +31,34 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void TooManyParameters()
+        public void TooManyParameters_CS_CustomValues()
         {
-            var diagnostic = new TooManyParameters { Maximum = 3 };
-            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters.cs", diagnostic);
+            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_CustomValues.cs",
+                new CSharp.TooManyParameters { Maximum = 3 });
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TooManyParameters_VB_CustomValues()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_CustomValues.vb",
+                new VisualBasic.TooManyParameters { Maximum = 3});
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TooManyParameters_CS_DefaultValues()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.cs", new CSharp.TooManyParameters());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TooManyParameters_VB_DefaultValues()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.vb", new VisualBasic.TooManyParameters());
+        }
+
     }
 }
+

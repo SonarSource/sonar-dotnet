@@ -1,0 +1,24 @@
+<p>A long parameter list can indicate that a new structure should be created to wrap the numerous parameters or that the procedure is doing too many
+things.</p>
+<h2>Noncompliant Code Example</h2>
+<p>With a maximum number of 4 parameters:</p>
+<pre>
+Public Sub Foo(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Noncompliant
+  ' ...
+End Sub
+
+Public Function Bar(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Noncompliant
+  ' ...
+End Function
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Public Sub Foo(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer)
+  ' ...
+End Sub
+
+Public Function Bar(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer)
+  ' ...
+End Function
+</pre>
+
