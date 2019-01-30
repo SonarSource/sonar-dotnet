@@ -19,21 +19,25 @@ Namespace Tests.Diagnostics
       Dim a = b
       Dim theCustomer As New Customer
 
-      With theCustomer ' Noncompliant
+      With theCustomer
       End With
+'     ^^^^^^^^^^^^^^^^ Noncompliant@-1 {{Either remove or fill this block of code.}}
+
       With theCustomer
         ' Some comment
       End With
+
       With theCustomer
         .Name = "Foo"
       End With
 
       For i As Integer = 0 To 42 - 1
-      Next ' Noncompliant {{Either remove or fill this block of code.}}
+      Next
+'     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant@-1 {{Either remove or fill this block of code.}}
 
-      For i As Integer = 0 To 42 - 1
+      For i As Integer = 0 To 42 - 1  ' Noncompliant
 
-      Next ' Noncompliant {{Either remove or fill this block of code.}}
+      Next
 
       For i As Integer = 0 To 42 - 1
         ' Comment
@@ -45,8 +49,9 @@ Namespace Tests.Diagnostics
 
       Dim numbers() As Integer = {1, 4, 7}
 
-      For Each number As Integer In numbers ' Noncompliant
+      For Each number As Integer In numbers
       Next
+'     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant@-1
 
       For Each number As Integer In numbers
         'Comment
@@ -56,15 +61,29 @@ Namespace Tests.Diagnostics
         Console.Write(number)
       Next
 
-      While a <= 10 ' Noncompliant
+      While a <= 10
       End While
+'     ^^^^^^^^^^^^^ Noncompliant@-1
 
       While a <= 10
         a = a + 1
       End While
 
-      Do While a <= 10 ' Noncompliant
+      Do
       Loop
+'     ^^ Noncompliant@-1
+
+      Do
+        ' Stuff
+      Loop
+
+      Do
+        a = a + 1
+      Loop
+
+      Do While a <= 10
+      Loop
+'     ^^^^^^^^^^^^^^^^ Noncompliant@-1
 
       Do While a <= 10
         a = a + 1
@@ -91,27 +110,67 @@ Namespace Tests.Diagnostics
         a = a + 1
       Loop Until a <= 10
 
-      Using reader As System.IO.TextReader = System.IO.File.OpenText("log.txt") ' Noncompliant
+      Using reader As System.IO.TextReader = System.IO.File.OpenText("log.txt")
 
       End Using
+'     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant@-2
 
-      Using reader As System.IO.TextReader = System.IO.File.OpenText("log.txt") ' Noncompliant
+      Using reader As System.IO.TextReader = System.IO.File.OpenText("log.txt")
         ' TODO
       End Using
 
-      Try
+      Try ' Noncompliant
       Catch e As ArgumentException
         ' Ignore as it has this comment
       Catch e As FormatException ' Noncompliant
-      Catch ' Noncompliant
+      Catch
+      Finally
+      End Try
+'     ^^^^^ Noncompliant@-2
+'     ^^^^^^^ Noncompliant@-2
+
+      Try
+        a = a + 1
       Finally  ' Noncompliant
+      End Try
+
+      Try ' Noncompliant
+      Catch
+        ' comment
+      End Try
+
+      Try
+        a = a + 1
+      Catch  ' Noncompliant
+      Catch
+        a = a + 1
+      Catch  ' Noncompliant
+      Catch  ' Noncompliant
+      End Try
+
+
+      Try
+        ' nothing
+      Finally
+        ' nothing
       End Try
 
       If a Then
         ' Ignore as it has this comment
       End If
 
+      If a Then ' Noncompliant
+      End If
+
+      If a Then ' Noncompliant
+
+      End If
+
       Select Case a ' Noncompliant
+      End Select
+
+      Select Case a ' Noncompliant
+        ' Comment does not matter
       End Select
 
       Select Case a
@@ -128,6 +187,23 @@ Namespace Tests.Diagnostics
     End Sub
 
     Private Sub F2()
+    End Sub
+
+    Private Sub InnerBlocks()
+      Dim a = True
+      If a Then
+        Select Case a ' Noncompliant
+        End Select
+        Try
+          Do ' Noncompliant
+          Loop
+        Finally
+          For i As Integer = 0 To 42 - 1
+            Do ' Noncompliant
+            Loop Until a <= 10
+          Next
+        End Try
+      End If
     End Sub
 
   End Class

@@ -1,6 +1,6 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2018 SonarSource SA
+ * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -27,7 +27,7 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Rules.Common;
+using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
@@ -37,6 +37,175 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var walker = new BlockWalker();
+                    walker.SafeVisit(c.Node);
+
+                    foreach (var node in walker.EmptySyntaxNodes)
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
+                    }
+                },
+                SyntaxKind.SimpleDoLoopBlock,
+                SyntaxKind.DoLoopUntilBlock,
+                SyntaxKind.DoLoopWhileBlock,
+                SyntaxKind.DoUntilLoopBlock,
+                SyntaxKind.DoWhileLoopBlock,
+                SyntaxKind.ForBlock,
+                SyntaxKind.ForEachBlock,
+                SyntaxKind.MultiLineIfBlock,
+                SyntaxKind.SelectBlock,
+                // The CatchBlock and FinallyBlock are handled by the TryBlock
+                SyntaxKind.TryBlock,
+                SyntaxKind.UsingBlock,
+                SyntaxKind.WhileBlock,
+                SyntaxKind.WithBlock);
+        }
+
+        /**
+         * The BlockWalker verifies that the given block has no statements and no comments inside
+         * (notable exception: the Select block)
+         *
+         * Note: Roslyn maps the comments which are inside a block as trivia of the following block
+         * e.g. in the below snippet, the comment will be part of the Finally block
+         *
+         * Try
+         *   ' my comment
+         * Finally
+         */
+        private class BlockWalker : VisualBasicSyntaxWalker
+        {
+            public IEnumerable<SyntaxNode> EmptySyntaxNodes => emptyInnerBlocks;
+
+            private readonly IList<SyntaxNode> emptyInnerBlocks = new List<SyntaxNode>();
+
+            // This handles SimpleDoLoopBlock, DoLoop*Block, Do*LoopBlock
+            public override void VisitDoLoopBlock(DoLoopBlockSyntax node)
+            {
+                if (!node.Statements.Any() && NoCommentsBefore(node.LoopStatement))
+                {
+                    emptyInnerBlocks.Add(node.DoStatement);
+                }
+            }
+
+            public override void VisitForBlock(ForBlockSyntax node)
+            {
+                if (!node.Statements.Any() && NoCommentsBefore(node.NextStatement))
+                {
+                    emptyInnerBlocks.Add(node.ForStatement);
+                }
+            }
+
+            public override void VisitForEachBlock(ForEachBlockSyntax node)
+            {
+                if (!node.Statements.Any() && NoCommentsBefore(node.NextStatement))
+                {
+                    emptyInnerBlocks.Add(node.ForEachStatement);
+                }
+            }
+
+            public override void VisitMultiLineIfBlock(MultiLineIfBlockSyntax node)
+            {
+                if (!node.Statements.Any() && NoCommentsBefore(node.EndIfStatement))
+                {
+                    emptyInnerBlocks.Add(node.IfStatement);
+                }
+            }
+
+            public override void VisitSelectBlock(SelectBlockSyntax node)
+            {
+                if (!node.CaseBlocks.Any())
+                {
+                    emptyInnerBlocks.Add(node.SelectStatement);
+                }
+            }
+
+            public override void VisitTryBlock(TryBlockSyntax node)
+            {
+                if (!node.CatchBlocks.Any())
+                {
+                    VerifyTryBlock(node, node.FinallyBlock);
+                    VerifyFinallyBlock(node.FinallyBlock, node.EndTryStatement);
+                }
+                else if (node.FinallyBlock == null)
+                {
+                    VerifyTryAndMostCatches(node);
+                    VerifyCatchBlock(node.CatchBlocks[node.CatchBlocks.Count - 1], node.EndTryStatement);
+                }
+                else
+                {
+                    VerifyTryAndMostCatches(node);
+                    VerifyCatchBlock(node.CatchBlocks[node.CatchBlocks.Count - 1], node.FinallyBlock);
+                    VerifyFinallyBlock(node.FinallyBlock, node.EndTryStatement);
+                }
+            }
+
+            public override void VisitUsingBlock(UsingBlockSyntax node)
+            {
+                if (!node.Statements.Any() && NoCommentsBefore(node.EndUsingStatement))
+                {
+                    emptyInnerBlocks.Add(node.UsingStatement);
+                }
+            }
+
+            public override void VisitWhileBlock(WhileBlockSyntax node)
+            {
+                if (!node.Statements.Any() && NoCommentsBefore(node.EndWhileStatement))
+                {
+                    emptyInnerBlocks.Add(node.WhileStatement);
+                }
+            }
+
+            public override void VisitWithBlock(WithBlockSyntax node)
+            {
+                if (!node.Statements.Any() && NoCommentsBefore(node.EndWithStatement))
+                {
+                    emptyInnerBlocks.Add(node.WithStatement);
+                }
+            }
+
+            private void VerifyTryAndMostCatches(TryBlockSyntax node)
+            {
+                VerifyTryBlock(node, node.CatchBlocks[0]);
+                // verify all catches except the last one
+                for (int i = 0; i < node.CatchBlocks.Count - 1; i++)
+                {
+                    VerifyCatchBlock(node.CatchBlocks[i], node.CatchBlocks[i + 1]);
+                }
+            }
+
+            private void VerifyTryBlock(TryBlockSyntax node, SyntaxNode nextBlock)
+            {
+                if (!node.Statements.Any() && NoCommentsBefore(nextBlock))
+                {
+                    emptyInnerBlocks.Add(node.TryStatement);
+                }
+            }
+
+            private void VerifyCatchBlock(CatchBlockSyntax node, SyntaxNode nextBlock)
+            {
+                if (!node.Statements.Any() && NoCommentsBefore(nextBlock))
+                {
+                    emptyInnerBlocks.Add(node.CatchStatement);
+                }
+            }
+
+            private void VerifyFinallyBlock(FinallyBlockSyntax node, SyntaxNode nextBlock)
+            {
+                if (!node.Statements.Any() && NoCommentsBefore(nextBlock))
+                {
+                    emptyInnerBlocks.Add(node.FinallyStatement);
+                }
+            }
+
+            private static bool NoCommentsBefore(SyntaxNode node) => !node.GetLeadingTrivia().Any(t => t.IsComment());
+        }
     }
 }
