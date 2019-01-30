@@ -1,5 +1,5 @@
 ﻿'SonarAnalyzer for .NET
-'Copyright(C) 2015-2017 SonarSource SA
+'Copyright(C) 2015-2019 SonarSource SA
 'mailto: contact AT sonarsource DOT com
 
 'This program Is free software; you can redistribute it And/Or
