@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
-        protected override SyntaxKind[] SyntaxKinds { get; } = new SyntaxKind[] { SyntaxKind.ParameterList };
+        protected override SyntaxKind[] SyntaxKinds { get; } = new[] { SyntaxKind.ParameterList };
 
         protected override string UserFriendlyNameForNode(SyntaxNode node) => nodeToDeclarationName[node.Kind()];
 

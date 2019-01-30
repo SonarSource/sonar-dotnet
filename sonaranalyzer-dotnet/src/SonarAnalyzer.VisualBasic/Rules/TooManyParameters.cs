@@ -49,6 +49,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 return false;
             }
+
             if ((node as SubNewStatementSyntax)?.ParameterList?.Parameters.Count is int parameterCount &&
                 parameterCount > Maximum &&
                 node.Parent is ConstructorBlockSyntax constructorBlock &&
@@ -56,10 +57,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 return false;
             }
+
             if (node.IsAnyKind(LambdaHeaders))
             {
                 return true;
             }
+
             return VerifyCanBeChangedBySymbol(node, semanticModel);
         }
 
@@ -78,7 +81,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             { SyntaxKind.FunctionLambdaHeader, "Lambda" },
         }.ToImmutableDictionary();
 
-        private static readonly SyntaxKind[] LambdaHeaders = new SyntaxKind[]
+        private static readonly SyntaxKind[] LambdaHeaders = new[]
         {
             SyntaxKind.FunctionLambdaHeader,
             SyntaxKind.SubLambdaHeader
