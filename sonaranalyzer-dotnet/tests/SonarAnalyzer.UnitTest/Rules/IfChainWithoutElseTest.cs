@@ -44,6 +44,3 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
     }
 }
-
-
-
