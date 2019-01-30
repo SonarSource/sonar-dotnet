@@ -20,13 +20,13 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -35,44 +35,19 @@ namespace SonarAnalyzer.Rules.CSharp
     public class TooManyParameters : TooManyParametersBase<SyntaxKind, ParameterListSyntax>
     {
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
-        protected override SyntaxKind[] SyntaxKinds => new SyntaxKind[] { SyntaxKind.ParameterList };
-        protected override DiagnosticDescriptor Rule => rule;
-        protected override Dictionary<SyntaxKind, string> Mapping => mapping;
-        protected override SyntaxKind ParentType(ParameterListSyntax parameterList) => parameterList.Parent.Kind();
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
+        protected override SyntaxKind[] SyntaxKinds { get; } = new SyntaxKind[] { SyntaxKind.ParameterList };
+
+        protected override string UserFriendlyNameForNode(SyntaxNode node) => nodeToDeclarationName[node.Kind()];
+
         protected override int CountParameters(ParameterListSyntax parameterList) => parameterList.Parameters.Count;
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                isEnabledByDefault: false);
-
-        private static readonly Dictionary<SyntaxKind, string> mapping = new Dictionary<SyntaxKind, string>
-        {
-            { SyntaxKind.ConstructorDeclaration, "Constructor" },
-            { SyntaxKind.MethodDeclaration, "Method" },
-            { SyntaxKind.DelegateDeclaration, "Delegate" },
-            { SyntaxKind.AnonymousMethodExpression, "Delegate" },
-            { SyntaxKind.ParenthesizedLambdaExpression, "Lambda" },
-            { SyntaxKind.SimpleLambdaExpression, "Lambda" }
-        };
 
         protected override bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel)
         {
-            var declaredSymbol = semanticModel.GetDeclaredSymbol(node);
-            var symbol = semanticModel.GetSymbolInfo(node).Symbol;
-
-            if (declaredSymbol == null && symbol == null)
+            if (!nodeToDeclarationName.ContainsKey(node.Kind()))
             {
-                // No information
                 return false;
             }
-
-            if (symbol != null)
-            {
-                // Not a declaration, such as Action
-                return true;
-            }
-
             if ((node as ConstructorDeclarationSyntax)?.Initializer?.ArgumentList?.Arguments.Count > Maximum)
             {
                 // Base class is already not compliant so let's ignore current constructor.
@@ -81,18 +56,21 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            if (declaredSymbol.IsExtern &&
-                declaredSymbol.IsStatic &&
-                declaredSymbol.GetAttributes(KnownType.System_Runtime_InteropServices_DllImportAttribute).Any())
-            {
-                // P/Invoke method is defined externally.
-                // Do not raise
-                return false;
-            }
-
-            return declaredSymbol.GetOverriddenMember() == null &&
-                   declaredSymbol.GetInterfaceMember() == null;
+            return VerifyCanBeChangedBySymbol(node, semanticModel);
         }
 
+        private static readonly DiagnosticDescriptor rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
+                isEnabledByDefault: false);
+
+        private static readonly ImmutableDictionary<SyntaxKind, string> nodeToDeclarationName = new Dictionary<SyntaxKind, string>
+        {
+            { SyntaxKind.ConstructorDeclaration, "Constructor" },
+            { SyntaxKind.MethodDeclaration, "Method" },
+            { SyntaxKind.DelegateDeclaration, "Delegate" },
+            { SyntaxKind.AnonymousMethodExpression, "Delegate" },
+            { SyntaxKind.ParenthesizedLambdaExpression, "Lambda" },
+            { SyntaxKind.SimpleLambdaExpression, "Lambda" }
+        }.ToImmutableDictionary();
     }
 }

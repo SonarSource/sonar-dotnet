@@ -28,6 +28,13 @@ Public Class TooManyParameters
     Return p1
   End Function
 
+  Sub F5(ByRef p1 As Integer, ByRef p2 As Integer, ByRef p3 As Integer, ByRef p4 As Integer)  Implements MyInterface.F5
+  End Sub
+
+  Function F6(ByRef p1 As Integer, ByRef p2 As Integer, ByRef p3 As Integer, ByRef p4 As Integer) Implements MyInterface.F6
+    Return p1
+  End Function
+
   Delegate Sub ThreeParametersSub( one As Integer,  two As Integer,  three As Integer)
   Delegate Function ThreeParametersFunction(one As Integer,  two As Integer,  three As Integer) As Integer
   Delegate Sub FourParametersSub( one As Integer,  two As Integer,  three As Integer,  four As String) ' Noncompliant
@@ -62,6 +69,8 @@ Public Class TooManyParameters
     Dim v6 = Sub(num As Integer, num2 As Integer, num3 As Integer) Console.WriteLine()
     Dim v7 = Sub(num As Integer, num2 As Integer, num3 As Integer, num4 As Integer) Console.WriteLine() ' Noncompliant (FP because of below)
     CallSubDelegate(v6, v7)
+
+    F2(1,2,3,4)
   End Sub
 
 ' We should not raise for imported methods according to external definition.
@@ -75,6 +84,8 @@ Interface MyInterface
   Sub F2(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Noncompliant
   Function F3(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer)
   Function F4(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Noncompliant {{Function has 4 parameters, which is greater than the 3 authorized.}}
+  Sub F5(ByRef p1 As Integer, ByRef p2 As Integer, ByRef p3 As Integer, ByRef p4 As Integer) ' Noncompliant
+  Function F6(ByRef p1 As Integer, ByRef p2 As Integer, ByRef p3 As Integer, ByRef p4 As Integer) ' Noncompliant
 End Interface
 
 Public Class MyWrongClass
@@ -105,6 +116,8 @@ Public Class SubClass2
 
   Public Sub New(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Compliant (needs arguments for base constructor)
     MyBase.New(p1, p2, p3, p4)
+    F5(p1, p2, p3, p4)
+    F2(p1, p2, p3, p4)
   End Sub
 
 End Class

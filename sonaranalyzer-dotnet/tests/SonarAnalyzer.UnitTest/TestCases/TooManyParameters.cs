@@ -5,6 +5,18 @@ namespace Tests.Diagnostics
 {
     public class TooManyParameters : If
     {
+        public int this[int a, int b, int c, int d]
+        {
+            get
+            {
+                return a;
+            }
+        }
+
+        ~TooManyParameters()
+        {
+        }
+
         public TooManyParameters(int p1, int p2, int p3) { }
         public TooManyParameters(int p1, int p2, int p3, int p4) { } // Noncompliant
 //                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -25,6 +37,7 @@ namespace Tests.Diagnostics
 //                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             var v6 = new Action<object, object, object>((p1, p2, p3) => Console.WriteLine());
             var v7 = new Action<object, object, object, object>((p1, p2, p3, p4) => Console.WriteLine()); // Noncompliant
+            F2(1, 2, 3, 4);
         }
 
         // see https://github.com/SonarSource/sonar-csharp/issues/1459

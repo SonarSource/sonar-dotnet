@@ -35,36 +35,20 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class TooManyParameters : TooManyParametersBase<SyntaxKind, ParameterListSyntax>
     {
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
-        protected override SyntaxKind[] SyntaxKinds => new SyntaxKind[] { SyntaxKind.ParameterList };
-        protected override DiagnosticDescriptor Rule => rule;
-        protected override Dictionary<SyntaxKind, string> Mapping => mapping;
-        protected override SyntaxKind ParentType(ParameterListSyntax parameterList) => parameterList.Parent.Kind();
-        protected override int CountParameters(ParameterListSyntax parameterList) => parameterList.Parameters.Count;
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override SyntaxKind[] SyntaxKinds { get; } = new SyntaxKind[] { SyntaxKind.ParameterList };
+
+        protected override string UserFriendlyNameForNode(SyntaxNode node) => nodeToDeclarationName[node.Kind()];
+
+        protected override int CountParameters(ParameterListSyntax parameterList) => parameterList.Parameters.Count;
 
         protected override bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel)
         {
-            var declaredSymbol = semanticModel.GetDeclaredSymbol(node);
-            var symbol = semanticModel.GetSymbolInfo(node).Symbol;
-
-            if (node.IsAnyKind(LambdaHeaders))
+            if (!nodeToDeclarationName.ContainsKey(node.Kind()))
             {
-                return true;
-            }
-
-            if (declaredSymbol == null && symbol == null)
-            {
-                // no information
                 return false;
             }
-
-            if (symbol != null)
-            {
-                // Not a declaration, such as Action
-                return true;
-            }
-
             if ((node as SubNewStatementSyntax)?.ParameterList?.Parameters.Count is int parameterCount &&
                 parameterCount > Maximum &&
                 node.Parent is ConstructorBlockSyntax constructorBlock &&
@@ -72,33 +56,18 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 return false;
             }
-
-            if (declaredSymbol.IsExtern &&
-                declaredSymbol.IsStatic &&
-                declaredSymbol.GetAttributes(KnownType.System_Runtime_InteropServices_DllImportAttribute).Any())
+            if (node.IsAnyKind(LambdaHeaders))
             {
-                // P/Invoke method is defined externally.
-                // Do not raise
-                return false;
+                return true;
             }
-
-            return declaredSymbol.GetOverriddenMember() == null &&
-                   declaredSymbol.GetInterfaceMember() == null;
+            return VerifyCanBeChangedBySymbol(node, semanticModel);
         }
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
                 isEnabledByDefault: false);
 
-        private static bool ContainsMyBaseNewInvocation(ConstructorBlockSyntax constructorBlock, int maximum) =>
-                constructorBlock.Statements.Any(s => s is ExpressionStatementSyntax expression &&
-                    expression.Expression is InvocationExpressionSyntax invocation &&
-                    invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
-                    memberAccess.Expression is MyBaseExpressionSyntax myBase &&
-                    memberAccess.Name.Identifier.Text.Equals("New", System.StringComparison.OrdinalIgnoreCase) &&
-                    invocation.ArgumentList.Arguments.Count > maximum);
-
-        private static readonly Dictionary<SyntaxKind, string> mapping = new Dictionary<SyntaxKind, string>
+        private static readonly ImmutableDictionary<SyntaxKind, string> nodeToDeclarationName = new Dictionary<SyntaxKind, string>
         {
             { SyntaxKind.SubNewStatement, "Constructor" },
             { SyntaxKind.FunctionStatement, "Function" },
@@ -107,12 +76,20 @@ namespace SonarAnalyzer.Rules.VisualBasic
             { SyntaxKind.DelegateSubStatement, "Delegate" },
             { SyntaxKind.SubLambdaHeader, "Lambda" },
             { SyntaxKind.FunctionLambdaHeader, "Lambda" },
-        };
+        }.ToImmutableDictionary();
 
         private static readonly SyntaxKind[] LambdaHeaders = new SyntaxKind[]
         {
             SyntaxKind.FunctionLambdaHeader,
             SyntaxKind.SubLambdaHeader
         };
+
+        private static bool ContainsMyBaseNewInvocation(ConstructorBlockSyntax constructorBlock, int maximum) =>
+                constructorBlock.Statements.Any(s => s is ExpressionStatementSyntax expression &&
+                    expression.Expression is InvocationExpressionSyntax invocation &&
+                    invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
+                    memberAccess.Expression is MyBaseExpressionSyntax myBase &&
+                    memberAccess.Name.Identifier.Text.Equals("New", System.StringComparison.OrdinalIgnoreCase) &&
+                    invocation.ArgumentList.Arguments.Count > maximum);
     }
 }
