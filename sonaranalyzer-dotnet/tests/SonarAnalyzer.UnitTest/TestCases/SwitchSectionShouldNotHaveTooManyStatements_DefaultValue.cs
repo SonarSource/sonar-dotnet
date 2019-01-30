@@ -11,7 +11,7 @@ namespace Tests.Diagnostics
             {
                 case 0:
                     break;
-                case 1: // Noncompliant {{Reduce this 'switch/case' number of lines from 9 to at most 8, for example by extracting code into a method.}}
+                case 1: // Noncompliant {{Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.}}
 //              ^^^^^^^
                     Console.WriteLine("1");
                     Console.WriteLine("2");
@@ -30,7 +30,7 @@ namespace Tests.Diagnostics
                         Console.WriteLine("4");
                         break;
                     }
-                case 3: // Noncompliant {{Reduce this 'switch/case' number of lines from 10 to at most 8, for example by extracting code into a method.}}
+                case 3: // Noncompliant {{Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.}}
                 case 4:
                     if (true)
                     {

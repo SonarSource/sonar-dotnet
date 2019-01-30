@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void SwitchSectionShouldNotHaveTooManyStatements_DefaultValue()
+        public void SwitchSectionShouldNotHaveTooManyStatements_DefaultValue_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.cs",
                 new SwitchSectionShouldNotHaveTooManyStatements());
@@ -37,10 +37,27 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue()
+        public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.cs",
                 new SwitchSectionShouldNotHaveTooManyStatements { Threshold = 1 });
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void SwitchSectionShouldNotHaveTooManyStatements_DefaultValue_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.vb",
+                new SonarAnalyzer.Rules.VisualBasic.SwitchSectionShouldNotHaveTooManyStatements());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.vb",
+                new SonarAnalyzer.Rules.VisualBasic.SwitchSectionShouldNotHaveTooManyStatements() { Threshold = 1 });
+        }
     }
 }
+

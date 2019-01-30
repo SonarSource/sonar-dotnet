@@ -4,35 +4,30 @@ clause contains too many statements this highly decreases the readability of the
 <h2>Noncompliant Code Example</h2>
 <p>With the default threshold of 3:</p>
 <pre>
-switch (myVariable)
-{
-    case 0: // Noncompliant: 5 statements in the case
-        methodCall1("");
-        methodCall2("");
-        methodCall3("");
-        methodCall4("");
-        break;
-    case 1:
-        ...
-}
+Select Case number
+    Case 1 To 5 // Noncompliant: 4 statements in the case
+        MethodCall1("")
+        MethodCall2("")
+        MethodCall3("")
+        MethodCall4("")
+    Case Else
+        ' ...
+End Select
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-switch (myVariable)
-{
-    case 0:
+Select Case number
+    Case 1 To 5
         DoSomething()
-        break;
-    case 1:
-        ...
-}
+    Case Else
+        ' ...
+End Select
 ...
-private void DoSomething()
-{
-    methodCall1("");
-    methodCall2("");
-    methodCall3("");
-    methodCall4("");
-}
+Sub DoSomething()
+    MethodCall1("")
+    MethodCall2("")
+    MethodCall3("")
+    MethodCall4("")
+End Sub
 </pre>
 

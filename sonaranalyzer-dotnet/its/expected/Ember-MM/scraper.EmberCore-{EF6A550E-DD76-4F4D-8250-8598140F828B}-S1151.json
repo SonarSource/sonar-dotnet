@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 17 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  646,
+"startColumn":  21,
+"endLine":  646,
+"endColumn":  157
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 9 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  669,
+"startColumn":  21,
+"endLine":  669,
+"endColumn":  193
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 45 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"region":  {
+"startLine":  315,
+"startColumn":  13,
+"endLine":  315,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 67 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  471,
+"startColumn":  13,
+"endLine":  471,
+"endColumn":  39
+}
+}
+}
+]
+}

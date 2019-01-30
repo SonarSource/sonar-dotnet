@@ -1,0 +1,225 @@
+{
+"issues":  [
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 24 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  166,
+"startColumn":  21,
+"endLine":  166,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 12 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  203,
+"startColumn":  21,
+"endLine":  203,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 50 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  222,
+"startColumn":  21,
+"endLine":  222,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 22 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  286,
+"startColumn":  21,
+"endLine":  286,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 13 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgErrorViewer.vb",
+"region":  {
+"startLine":  52,
+"startColumn":  13,
+"endLine":  52,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 23 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  436,
+"startColumn":  13,
+"endLine":  436,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 23 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  463,
+"startColumn":  13,
+"endLine":  463,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 13 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1303,
+"startColumn":  25,
+"endLine":  1303,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 31 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1324,
+"startColumn":  25,
+"endLine":  1324,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 9 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5438,
+"startColumn":  29,
+"endLine":  5438,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 9 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5450,
+"startColumn":  29,
+"endLine":  5450,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 19 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8419,
+"startColumn":  13,
+"endLine":  8419,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 20 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8442,
+"startColumn":  13,
+"endLine":  8442,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 27 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8796,
+"startColumn":  13,
+"endLine":  8796,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 12 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8800,
+"startColumn":  21,
+"endLine":  8800,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 11 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8817,
+"startColumn":  21,
+"endLine":  8817,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'Case' block number of statements from 9 to at most 8, for example by extracting code into a procedure.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8833,
+"startColumn":  13,
+"endLine":  8833,
+"endColumn":  51
+}
+}
+}
+]
+}
