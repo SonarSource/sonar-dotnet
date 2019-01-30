@@ -39,6 +39,27 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = VisualBasicGeneratedCodeRecognizer.Instance;
         protected override SyntaxKind[] SyntaxKinds { get; } = new SyntaxKind[] { SyntaxKind.ParameterList };
 
+        private static readonly DiagnosticDescriptor rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
+                isEnabledByDefault: false);
+
+        private static readonly ImmutableDictionary<SyntaxKind, string> nodeToDeclarationName = new Dictionary<SyntaxKind, string>
+        {
+            { SyntaxKind.SubNewStatement, "Constructor" },
+            { SyntaxKind.FunctionStatement, "Function" },
+            { SyntaxKind.SubStatement, "Sub" },
+            { SyntaxKind.DelegateFunctionStatement, "Delegate" },
+            { SyntaxKind.DelegateSubStatement, "Delegate" },
+            { SyntaxKind.SubLambdaHeader, "Lambda" },
+            { SyntaxKind.FunctionLambdaHeader, "Lambda" },
+        }.ToImmutableDictionary();
+
+        private static readonly SyntaxKind[] LambdaHeaders = new[]
+        {
+            SyntaxKind.FunctionLambdaHeader,
+            SyntaxKind.SubLambdaHeader
+        };
+
         protected override string UserFriendlyNameForNode(SyntaxNode node) => nodeToDeclarationName[node.Kind()];
 
         protected override int CountParameters(ParameterListSyntax parameterList) => parameterList.Parameters.Count;
@@ -65,27 +86,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             return VerifyCanBeChangedBySymbol(node, semanticModel);
         }
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                isEnabledByDefault: false);
-
-        private static readonly ImmutableDictionary<SyntaxKind, string> nodeToDeclarationName = new Dictionary<SyntaxKind, string>
-        {
-            { SyntaxKind.SubNewStatement, "Constructor" },
-            { SyntaxKind.FunctionStatement, "Function" },
-            { SyntaxKind.SubStatement, "Sub" },
-            { SyntaxKind.DelegateFunctionStatement, "Delegate" },
-            { SyntaxKind.DelegateSubStatement, "Delegate" },
-            { SyntaxKind.SubLambdaHeader, "Lambda" },
-            { SyntaxKind.FunctionLambdaHeader, "Lambda" },
-        }.ToImmutableDictionary();
-
-        private static readonly SyntaxKind[] LambdaHeaders = new[]
-        {
-            SyntaxKind.FunctionLambdaHeader,
-            SyntaxKind.SubLambdaHeader
-        };
 
         private static bool ContainsMyBaseNewInvocation(ConstructorBlockSyntax constructorBlock, int maximum) =>
                 constructorBlock.Statements.Any(s => s is ExpressionStatementSyntax expression &&

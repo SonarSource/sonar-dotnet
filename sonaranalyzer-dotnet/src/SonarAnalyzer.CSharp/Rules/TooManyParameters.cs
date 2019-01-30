@@ -38,6 +38,20 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } = CSharpGeneratedCodeRecognizer.Instance;
         protected override SyntaxKind[] SyntaxKinds { get; } = new[] { SyntaxKind.ParameterList };
 
+        private static readonly DiagnosticDescriptor rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
+                isEnabledByDefault: false);
+
+        private static readonly ImmutableDictionary<SyntaxKind, string> nodeToDeclarationName = new Dictionary<SyntaxKind, string>
+        {
+            { SyntaxKind.ConstructorDeclaration, "Constructor" },
+            { SyntaxKind.MethodDeclaration, "Method" },
+            { SyntaxKind.DelegateDeclaration, "Delegate" },
+            { SyntaxKind.AnonymousMethodExpression, "Delegate" },
+            { SyntaxKind.ParenthesizedLambdaExpression, "Lambda" },
+            { SyntaxKind.SimpleLambdaExpression, "Lambda" }
+        }.ToImmutableDictionary();
+
         protected override string UserFriendlyNameForNode(SyntaxNode node) => nodeToDeclarationName[node.Kind()];
 
         protected override int CountParameters(ParameterListSyntax parameterList) => parameterList.Parameters.Count;
@@ -58,19 +72,5 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return VerifyCanBeChangedBySymbol(node, semanticModel);
         }
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                isEnabledByDefault: false);
-
-        private static readonly ImmutableDictionary<SyntaxKind, string> nodeToDeclarationName = new Dictionary<SyntaxKind, string>
-        {
-            { SyntaxKind.ConstructorDeclaration, "Constructor" },
-            { SyntaxKind.MethodDeclaration, "Method" },
-            { SyntaxKind.DelegateDeclaration, "Delegate" },
-            { SyntaxKind.AnonymousMethodExpression, "Delegate" },
-            { SyntaxKind.ParenthesizedLambdaExpression, "Lambda" },
-            { SyntaxKind.SimpleLambdaExpression, "Lambda" }
-        }.ToImmutableDictionary();
     }
 }

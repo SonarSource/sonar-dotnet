@@ -31,19 +31,34 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void TooManyParameters_CS()
+        public void TooManyParameters_CS_CustomValues()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_CustomValues.cs",
                 new CSharp.TooManyParameters { Maximum = 3 });
         }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void TooManyParameters_VB()
+        public void TooManyParameters_VB_CustomValues()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters.vb",
+            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_CustomValues.vb",
                 new VisualBasic.TooManyParameters { Maximum = 3});
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TooManyParameters_CS_DefaultValues()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.cs", new CSharp.TooManyParameters());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TooManyParameters_VB_DefaultValues()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.vb", new VisualBasic.TooManyParameters());
+        }
+
     }
 }
 
