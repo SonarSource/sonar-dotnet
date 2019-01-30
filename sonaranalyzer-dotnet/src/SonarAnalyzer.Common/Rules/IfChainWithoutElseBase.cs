@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2015-2019 SonarSource SA
+ * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -18,29 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
-using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
-using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules
 {
-    [TestClass]
-    public class IfChainWithoutElseTest
+    public abstract class IfChainWithoutElseBase : SonarDiagnosticAnalyzer
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void IfChainWithoutElse_CS()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\IfChainWithoutElse.cs", new CSharp.IfChainWithoutElse());
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void IfChainWithoutElse_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\IfChainWithoutElse.vb", new VisualBasic.IfChainWithoutElse());
-        }
+        internal const string DiagnosticId = "S126";
     }
 }

@@ -1,0 +1,199 @@
+{
+"issues":  [
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  64,
+"startColumn":  13,
+"endLine":  64,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  90,
+"startColumn":  13,
+"endLine":  90,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  327,
+"startColumn":  13,
+"endLine":  327,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  288,
+"startColumn":  13,
+"endLine":  288,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  365,
+"startColumn":  13,
+"endLine":  365,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  195,
+"startColumn":  17,
+"endLine":  195,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\IncludeManager.vb",
+"region":  {
+"startLine":  111,
+"startColumn":  21,
+"endLine":  111,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  102,
+"startColumn":  25,
+"endLine":  102,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  129,
+"startColumn":  25,
+"endLine":  129,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  365,
+"startColumn":  25,
+"endLine":  365,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  645,
+"startColumn":  21,
+"endLine":  645,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  54,
+"startColumn":  21,
+"endLine":  54,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  142,
+"startColumn":  21,
+"endLine":  142,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  174,
+"startColumn":  21,
+"endLine":  174,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  130,
+"startColumn":  25,
+"endLine":  130,
+"endColumn":  31
+}
+}
+}
+]
+}

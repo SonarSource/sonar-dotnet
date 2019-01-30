@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -123,7 +123,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["123"],
             //["124"],
             //["125"],
-            //["126"],
+            ["126"] = "CODE_SMELL",
             //["127"],
             //["128"],
             //["129"],

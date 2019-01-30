@@ -1,0 +1,381 @@
+{
+"issues":  [
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  171,
+"startColumn":  13,
+"endLine":  171,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1147,
+"startColumn":  17,
+"endLine":  1147,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  97,
+"startColumn":  13,
+"endLine":  97,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  627,
+"startColumn":  9,
+"endLine":  627,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  871,
+"startColumn":  21,
+"endLine":  871,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2095,
+"startColumn":  25,
+"endLine":  2095,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2320,
+"startColumn":  25,
+"endLine":  2320,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2617,
+"startColumn":  13,
+"endLine":  2617,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2897,
+"startColumn":  25,
+"endLine":  2897,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2903,
+"startColumn":  13,
+"endLine":  2903,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3128,
+"startColumn":  13,
+"endLine":  3128,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3277,
+"startColumn":  17,
+"endLine":  3277,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3428,
+"startColumn":  13,
+"endLine":  3428,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3460,
+"startColumn":  21,
+"endLine":  3460,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3472,
+"startColumn":  21,
+"endLine":  3472,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3608,
+"startColumn":  17,
+"endLine":  3608,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3752,
+"startColumn":  13,
+"endLine":  3752,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3871,
+"startColumn":  17,
+"endLine":  3871,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4016,
+"startColumn":  13,
+"endLine":  4016,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4658,
+"startColumn":  13,
+"endLine":  4658,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6405,
+"startColumn":  21,
+"endLine":  6405,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6988,
+"startColumn":  17,
+"endLine":  6988,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7636,
+"startColumn":  17,
+"endLine":  7636,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7640,
+"startColumn":  13,
+"endLine":  7640,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8556,
+"startColumn":  13,
+"endLine":  8556,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8578,
+"startColumn":  17,
+"endLine":  8578,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8596,
+"startColumn":  17,
+"endLine":  8596,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8614,
+"startColumn":  17,
+"endLine":  8614,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8632,
+"startColumn":  17,
+"endLine":  8632,
+"endColumn":  23
+}
+}
+}
+]
+}

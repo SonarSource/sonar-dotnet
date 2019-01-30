@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  115,
+"startColumn":  41,
+"endLine":  115,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  357,
+"startColumn":  29,
+"endLine":  357,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  413,
+"startColumn":  41,
+"endLine":  413,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  221,
+"startColumn":  13,
+"endLine":  221,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  237,
+"startColumn":  21,
+"endLine":  237,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  257,
+"startColumn":  21,
+"endLine":  257,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  343,
+"startColumn":  21,
+"endLine":  343,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  624,
+"startColumn":  25,
+"endLine":  624,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  619,
+"startColumn":  13,
+"endLine":  619,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  738,
+"startColumn":  17,
+"endLine":  738,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  809,
+"startColumn":  25,
+"endLine":  809,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S126",
+"message":  "Add the missing 'Else' clause.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  1310,
+"startColumn":  49,
+"endLine":  1310,
+"endColumn":  55
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+  "title": "\"If ... ElseIf\" constructs should end with \"Else\" clauses",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "misra",
+    "cert"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-126",
+  "sqKey": "S126",
+  "scope": "All"
+}

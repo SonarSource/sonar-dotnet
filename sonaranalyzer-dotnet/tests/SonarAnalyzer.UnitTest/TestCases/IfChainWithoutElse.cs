@@ -29,18 +29,29 @@ namespace Tests.Diagnostics
             }
 
 
-            if (a)
+            if (a) { }
+            else if (a) { }
+            else if (a) { }
+            else if (a) { }
+            else if (a) { }
+            else if (a) // Noncompliant {{Add the missing 'else' clause.}}
+//          ^^^^^^^
             {
             }
-            else if (a)
-            {
-            }
-            else if (a)
-            {
-            }
-            else
-            {
-            }
+
+            if (a) { }
+            else if (a) { }
+            else if (a) { }
+            else { }
+
+            if (a) { }
+            else if (a) { }
+            else if (a) { }
+            else if (a) { }
+            else if (a) { }
+            else if (a) { }
+            else if (a) { }
+            else { }
 
             if (a)
             {
@@ -49,6 +60,12 @@ namespace Tests.Diagnostics
             {
                 if (a)
                 {
+                    if (a)
+                    {
+                    }
+                    else if (a) // Noncompliant
+                    {
+                    }
                 }
             }
         }
