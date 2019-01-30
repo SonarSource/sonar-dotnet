@@ -51,18 +51,18 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         return;
                     }
 
-                    var statementsCount = caseBlock.Statements.SelectMany(GetSubStatements).Count();
+                    var statementsCount = caseBlock.Statements.SelectMany(GetInnerStatements).Count();
                     if (statementsCount > Threshold)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, caseBlock.CaseStatement.GetLocation(),
-                            statementsCount, Threshold, "'Case' block", "procedure"));
+                            "'Case' block", statementsCount, Threshold, "procedure"));
                     }
                 },
                 SyntaxKind.CaseBlock,
                 SyntaxKind.CaseElseBlock);
         }
 
-        private IEnumerable<StatementSyntax> GetSubStatements(StatementSyntax statement)
+        private IEnumerable<StatementSyntax> GetInnerStatements(StatementSyntax statement)
         {
             return statement.DescendantNodesAndSelf()
                 .OfType<StatementSyntax>()

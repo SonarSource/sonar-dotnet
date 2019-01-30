@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules
     public abstract class SwitchSectionShouldNotHaveTooManyStatementsBase : ParameterLoadingDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S1151";
-        protected const string MessageFormat = "Reduce this {2} number of statements from {0} to at most {1}, for example by extracting code into a {3}.";
+        protected const string MessageFormat = "Reduce this {0} number of statements from {1} to at most {2}, for example by extracting code into a {3}.";
 
         private const int ThresholdDefaultValue = 8;
         [RuleParameter("max", PropertyType.Integer, "Maximum number of statements.", ThresholdDefaultValue)]
