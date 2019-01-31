@@ -14,10 +14,12 @@ namespace Tests.Diagnostics
 
         void F1(bool b)
         {
+            var a = b;
+
             for (int i = 0; i < 42; i++) { }  // Noncompliant
 //                                       ^^^
-            var a = b;
-            switch (a) { /* This commit doesn't count */ } // Noncompliant
+            for (int i = 0; i < 42; i++) ;
+            for (int i = 0; i < 42; i++) { Console.WriteLine(i); }
 
             try { } // Noncompliant {{Either remove or fill this block of code.}}
             catch (Exception e)
@@ -27,10 +29,14 @@ namespace Tests.Diagnostics
             catch { } // Noncompliant
             finally { } // Noncompliant
 
-            for (int i = 0; i < 42; i++) ;
-            for (int i = 0; i < 42; i++) { Console.WriteLine(i); }
-
             if (a) { /* Do nothing because of X and Y */ }
+            if (a)
+            {
+                // TODO
+            }
+            if (a) { } // Noncompliant
+
+            switch (a) { /* This commit doesn't count */ } // Noncompliant
 
             switch (a)
             {
@@ -40,11 +46,36 @@ namespace Tests.Diagnostics
                     break;
             }
 
+            while (a) { } // Noncompliant
+
+            while (a)
+            {
+                // FIXME
+            }
+
+            while (a)
+            {
+                a = false;
+            }
+
             unsafe { } // Noncompliant
 
             var foo1 = new Action<object>(x => { });
             var foo2 = new Action<object>((x) => { });
             var foo3 = new Action(delegate { });
+
+            if (a)
+            {
+                if (a)
+                {
+                    if (a) { } // Noncompliant
+                    switch (a) { /* This commit doesn't count */ } // Noncompliant
+                    while (a)
+                    {
+                        for (int i = 0; i < 42; i++) { }  // Noncompliant
+                    }
+                }
+            }
         }
 
         void F2()
