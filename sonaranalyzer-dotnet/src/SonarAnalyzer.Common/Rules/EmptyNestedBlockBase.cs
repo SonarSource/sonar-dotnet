@@ -18,29 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
+using SonarAnalyzer.Helpers;
 
-
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules
 {
-    [TestClass]
-    public class EmptyNestedBlockTest
+    public abstract class EmptyNestedBlockBase : SonarDiagnosticAnalyzer
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void EmptyNestedBlock_CS()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyNestedBlock.cs", new CS.EmptyNestedBlock());
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void EmptyNestedBlock_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyNestedBlock.vb", new VB.EmptyNestedBlock());
-        }
+        protected const string DiagnosticId = "S108";
+        protected const string MessageFormat = "Either remove or fill this block of code.";
     }
 }
-

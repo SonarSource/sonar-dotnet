@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  131,
+"startColumn":  9,
+"endLine":  131,
+"endColumn":  30
+}
+}
+}
+]
+}

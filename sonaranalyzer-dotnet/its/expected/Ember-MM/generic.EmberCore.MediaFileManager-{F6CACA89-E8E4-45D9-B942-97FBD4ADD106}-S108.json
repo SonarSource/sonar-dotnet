@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  351,
+"startColumn":  9,
+"endLine":  351,
+"endColumn":  14
+}
+}
+}
+]
+}
