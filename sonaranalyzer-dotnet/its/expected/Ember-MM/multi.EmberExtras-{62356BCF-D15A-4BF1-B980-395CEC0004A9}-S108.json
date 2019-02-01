@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  61,
+"startColumn":  9,
+"endLine":  61,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  79,
+"startColumn":  9,
+"endLine":  79,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  220,
+"startColumn":  9,
+"endLine":  220,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  264,
+"startColumn":  13,
+"endLine":  264,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  21,
+"startColumn":  9,
+"endLine":  21,
+"endColumn":  30
+}
+}
+}
+]
+}

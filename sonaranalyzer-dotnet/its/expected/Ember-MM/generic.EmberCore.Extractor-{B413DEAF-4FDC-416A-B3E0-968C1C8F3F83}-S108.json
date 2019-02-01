@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  234,
+"startColumn":  21,
+"endLine":  234,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\Module.Extractor.vb",
+"region":  {
+"startLine":  140,
+"startColumn":  9,
+"endLine":  140,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\Module.Extractor.vb",
+"region":  {
+"startLine":  142,
+"startColumn":  9,
+"endLine":  142,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\Module.Extractor.vb",
+"region":  {
+"startLine":  149,
+"startColumn":  9,
+"endLine":  149,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\Module.Extractor.vb",
+"region":  {
+"startLine":  150,
+"startColumn":  9,
+"endLine":  150,
+"endColumn":  30
+}
+}
+}
+]
+}

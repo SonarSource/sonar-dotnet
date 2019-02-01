@@ -1,0 +1,303 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  50,
+"startColumn":  17,
+"endLine":  50,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  247,
+"startColumn":  21,
+"endLine":  247,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  250,
+"startColumn":  13,
+"endLine":  250,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  409,
+"startColumn":  21,
+"endLine":  409,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  489,
+"startColumn":  21,
+"endLine":  489,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  710,
+"startColumn":  9,
+"endLine":  710,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  215,
+"startColumn":  9,
+"endLine":  215,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  58,
+"startColumn":  9,
+"endLine":  58,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  66,
+"startColumn":  9,
+"endLine":  66,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  79,
+"startColumn":  9,
+"endLine":  79,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  339,
+"startColumn":  9,
+"endLine":  339,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  518,
+"startColumn":  21,
+"endLine":  518,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  529,
+"startColumn":  9,
+"endLine":  529,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  749,
+"startColumn":  9,
+"endLine":  749,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  758,
+"startColumn":  9,
+"endLine":  758,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  812,
+"startColumn":  9,
+"endLine":  812,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  835,
+"startColumn":  17,
+"endLine":  835,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  848,
+"startColumn":  9,
+"endLine":  848,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  335,
+"startColumn":  21,
+"endLine":  335,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  50,
+"startColumn":  17,
+"endLine":  50,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  228,
+"startColumn":  17,
+"endLine":  228,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  236,
+"startColumn":  17,
+"endLine":  236,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  246,
+"startColumn":  17,
+"endLine":  246,
+"endColumn":  22
+}
+}
+}
+]
+}

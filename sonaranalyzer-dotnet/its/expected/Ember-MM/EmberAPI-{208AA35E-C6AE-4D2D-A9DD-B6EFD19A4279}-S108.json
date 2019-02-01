@@ -1,0 +1,1122 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"region":  {
+"startLine":  158,
+"startColumn":  9,
+"endLine":  158,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  703,
+"startColumn":  17,
+"endLine":  703,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  846,
+"startColumn":  17,
+"endLine":  846,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  198,
+"startColumn":  13,
+"endLine":  198,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  212,
+"startColumn":  21,
+"endLine":  212,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIErrorLog.vb",
+"region":  {
+"startLine":  50,
+"startColumn":  21,
+"endLine":  50,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIErrorLog.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  9,
+"endLine":  69,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  143,
+"startColumn":  21,
+"endLine":  143,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  154,
+"startColumn":  21,
+"endLine":  154,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  160,
+"startColumn":  25,
+"endLine":  160,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  204,
+"startColumn":  17,
+"endLine":  204,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  354,
+"startColumn":  29,
+"endLine":  354,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  359,
+"startColumn":  29,
+"endLine":  359,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  416,
+"startColumn":  21,
+"endLine":  416,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHashing.vb",
+"region":  {
+"startLine":  82,
+"startColumn":  13,
+"endLine":  82,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  129,
+"startColumn":  9,
+"endLine":  129,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  236,
+"startColumn":  13,
+"endLine":  236,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  282,
+"startColumn":  9,
+"endLine":  282,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  319,
+"startColumn":  9,
+"endLine":  319,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  343,
+"startColumn":  9,
+"endLine":  343,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  295,
+"startColumn":  13,
+"endLine":  295,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  315,
+"startColumn":  13,
+"endLine":  315,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  397,
+"startColumn":  9,
+"endLine":  397,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  681,
+"startColumn":  13,
+"endLine":  681,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  807,
+"startColumn":  13,
+"endLine":  807,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  998,
+"startColumn":  17,
+"endLine":  998,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  1093,
+"startColumn":  17,
+"endLine":  1093,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  216,
+"startColumn":  25,
+"endLine":  216,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  221,
+"startColumn":  25,
+"endLine":  221,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  226,
+"startColumn":  25,
+"endLine":  226,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  173,
+"startColumn":  25,
+"endLine":  173,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  176,
+"startColumn":  17,
+"endLine":  176,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  238,
+"startColumn":  17,
+"endLine":  238,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  310,
+"startColumn":  17,
+"endLine":  310,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  341,
+"startColumn":  13,
+"endLine":  341,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  355,
+"startColumn":  13,
+"endLine":  355,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  369,
+"startColumn":  17,
+"endLine":  369,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  421,
+"startColumn":  13,
+"endLine":  421,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  430,
+"startColumn":  13,
+"endLine":  430,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  438,
+"startColumn":  13,
+"endLine":  438,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  447,
+"startColumn":  13,
+"endLine":  447,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  456,
+"startColumn":  13,
+"endLine":  456,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  465,
+"startColumn":  13,
+"endLine":  465,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  476,
+"startColumn":  13,
+"endLine":  476,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  488,
+"startColumn":  13,
+"endLine":  488,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  500,
+"startColumn":  13,
+"endLine":  500,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  512,
+"startColumn":  13,
+"endLine":  512,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  525,
+"startColumn":  13,
+"endLine":  525,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  559,
+"startColumn":  13,
+"endLine":  559,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  576,
+"startColumn":  13,
+"endLine":  576,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  589,
+"startColumn":  13,
+"endLine":  589,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  602,
+"startColumn":  13,
+"endLine":  602,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  614,
+"startColumn":  13,
+"endLine":  614,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  626,
+"startColumn":  13,
+"endLine":  626,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  224,
+"startColumn":  13,
+"endLine":  224,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  228,
+"startColumn":  13,
+"endLine":  228,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  238,
+"startColumn":  13,
+"endLine":  238,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  242,
+"startColumn":  13,
+"endLine":  242,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  246,
+"startColumn":  13,
+"endLine":  246,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  250,
+"startColumn":  13,
+"endLine":  250,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  331,
+"startColumn":  13,
+"endLine":  331,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  565,
+"startColumn":  25,
+"endLine":  565,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  593,
+"startColumn":  21,
+"endLine":  593,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  686,
+"startColumn":  13,
+"endLine":  686,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  707,
+"startColumn":  13,
+"endLine":  707,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  979,
+"startColumn":  9,
+"endLine":  979,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINumUtils.vb",
+"region":  {
+"startLine":  38,
+"startColumn":  9,
+"endLine":  38,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  170,
+"startColumn":  13,
+"endLine":  170,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  228,
+"startColumn":  17,
+"endLine":  228,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  243,
+"startColumn":  17,
+"endLine":  243,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  260,
+"startColumn":  21,
+"endLine":  260,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  400,
+"startColumn":  13,
+"endLine":  400,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  442,
+"startColumn":  17,
+"endLine":  442,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  498,
+"startColumn":  17,
+"endLine":  498,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  530,
+"startColumn":  13,
+"endLine":  530,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  785,
+"startColumn":  13,
+"endLine":  785,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  917,
+"startColumn":  21,
+"endLine":  917,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  922,
+"startColumn":  21,
+"endLine":  922,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  986,
+"startColumn":  25,
+"endLine":  986,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  991,
+"startColumn":  25,
+"endLine":  991,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  1013,
+"startColumn":  29,
+"endLine":  1013,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  1018,
+"startColumn":  29,
+"endLine":  1018,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  109,
+"startColumn":  9,
+"endLine":  109,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  63,
+"startColumn":  17,
+"endLine":  63,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  75,
+"startColumn":  17,
+"endLine":  75,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  96,
+"startColumn":  17,
+"endLine":  96,
+"endColumn":  22
+}
+}
+}
+]
+}
