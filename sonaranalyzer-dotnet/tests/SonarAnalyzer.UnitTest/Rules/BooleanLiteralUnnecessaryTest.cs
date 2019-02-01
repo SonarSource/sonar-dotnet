@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,20 +29,29 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void BooleanLiteralUnnecessary()
+        public void BooleanLiteralUnnecessary_CS()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.cs", new BooleanLiteralUnnecessary());
+            Verifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.cs", new CS.BooleanLiteralUnnecessary());
         }
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void BooleanLiteralUnnecessary_CodeFix()
+        public void BooleanLiteralUnnecessary_CodeFix_CS()
         {
             Verifier.VerifyCodeFix(
                 @"TestCases\BooleanLiteralUnnecessary.cs",
                 @"TestCases\BooleanLiteralUnnecessary.Fixed.cs",
-                new BooleanLiteralUnnecessary(),
-                new BooleanLiteralUnnecessaryCodeFixProvider());
+                new CS.BooleanLiteralUnnecessary(),
+                new CS.BooleanLiteralUnnecessaryCodeFixProvider());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void BooleanLiteralUnnecessary_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.vb", new VB.BooleanLiteralUnnecessary());
+        }
+
     }
 }
+

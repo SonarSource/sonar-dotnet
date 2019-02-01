@@ -9,7 +9,7 @@ namespace Tests.Diagnostics
         {
             var z = true || ((true));   // Noncompliant {{Remove the unnecessary Boolean literal(s).}}
 //                       ^^^^^^^^^^^
-            z = false || false;     // Noncompliant
+            z = false || false;     // Noncompliant (also S2589 and S1764)
             z = true || false;      // Noncompliant
             z = false || true;      // Noncompliant
             z = false && false;     // Noncompliant
@@ -20,7 +20,7 @@ namespace Tests.Diagnostics
             z = false == true;      // Noncompliant
             z = false == false;     // Noncompliant
             z = true == false;      // Noncompliant
-            z = true != true;       // Noncompliant
+            z = true != true;       // Noncompliant (also S1764)
             z = false != true;      // Noncompliant
             z = false != false;     // Noncompliant
             z = true != false;      // Noncompliant
@@ -39,7 +39,21 @@ namespace Tests.Diagnostics
             x = false != a;                 // Noncompliant
             x = true != a;                  // Noncompliant
             x = false && Foo();             // Noncompliant
+//                    ^^^^^^^^
+            x = Foo() && false;             // Noncompliant
+//              ^^^^^^^^
+            x = true && Foo();             // Noncompliant
+//              ^^^^^^^
+            x = Foo() && true;             // Noncompliant
+//                    ^^^^^^^
+            x = Foo() || false;              // Noncompliant
+//                    ^^^^^^^^
+            x = false || Foo();              // Noncompliant
+//              ^^^^^^^^
             x = Foo() || true;              // Noncompliant
+//              ^^^^^^^^
+            x = true || Foo();              // Noncompliant
+//                   ^^^^^^^^
             x = a == true == b;             // Noncompliant
 
             x = a == Foo(((true)));             // Compliant
