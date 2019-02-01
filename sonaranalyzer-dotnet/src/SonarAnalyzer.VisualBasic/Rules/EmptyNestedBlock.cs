@@ -38,7 +38,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        private readonly List<SyntaxNode> emptyInnerBlocks = new List<SyntaxNode>();
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
@@ -47,9 +46,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    emptyInnerBlocks.Clear();
-                    VerifyEmptyBlocks(c.Node);
-                    emptyInnerBlocks.ForEach(node => c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation())));
+                    foreach (var node in VerifyEmptyBlocks(c.Node))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
+                    }
                 },
                 SyntaxKind.SimpleDoLoopBlock,
                 SyntaxKind.DoLoopUntilBlock,
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
          * End Try
          */
 
-        private void VerifyEmptyBlocks(SyntaxNode node)
+        private IEnumerable<SyntaxNode> VerifyEmptyBlocks(SyntaxNode node)
         {
             switch (node.Kind())
             {
@@ -90,221 +90,221 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 case SyntaxKind.DoLoopWhileBlock:
                 case SyntaxKind.DoUntilLoopBlock:
                 case SyntaxKind.DoWhileLoopBlock:
-                    VisitDoLoopBlock((DoLoopBlockSyntax)node);
-                    break;
+                    return VisitDoLoopBlock((DoLoopBlockSyntax)node);
 
                 case SyntaxKind.ForBlock:
-                    VisitForBlock((ForBlockSyntax)node);
-                    break;
+                    return VisitForBlock((ForBlockSyntax)node);
 
                 case SyntaxKind.ForEachBlock:
-                    VisitForEachBlock((ForEachBlockSyntax)node);
-                    break;
+                    return VisitForEachBlock((ForEachBlockSyntax)node);
 
                 case SyntaxKind.MultiLineIfBlock:
-                    VisitMultiLineIfBlock((MultiLineIfBlockSyntax)node);
-                    break;
+                    return VisitMultiLineIfBlock((MultiLineIfBlockSyntax)node);
 
                 case SyntaxKind.SelectBlock:
-                    VisitSelectBlock((SelectBlockSyntax)node);
-                    break;
+                    return VisitSelectBlock((SelectBlockSyntax)node);
 
                 case SyntaxKind.TryBlock:
-                    VisitTryBlock((TryBlockSyntax)node);
-                    break;
+                    return VisitTryBlock((TryBlockSyntax)node);
 
                 case SyntaxKind.UsingBlock:
-                    VisitUsingBlock((UsingBlockSyntax)node);
-                    break;
+                    return VisitUsingBlock((UsingBlockSyntax)node);
 
                 case SyntaxKind.WhileBlock:
-                    VisitWhileBlock((WhileBlockSyntax)node);
-                    break;
+                    return VisitWhileBlock((WhileBlockSyntax)node);
 
                 case SyntaxKind.WithBlock:
-                    VisitWithBlock((WithBlockSyntax)node);
-                    break;
+                    return VisitWithBlock((WithBlockSyntax)node);
 
                 default:
-                    throw new InvalidOperationException($"Did not expect this syntax kind: {node.Kind()}");
+                    // we do not throw an exception as the language can evolve over time
+                    return Enumerable.Empty<SyntaxNode>();
             }
         }
 
-        private void VisitDoLoopBlock(DoLoopBlockSyntax node)
+        private IEnumerable<SyntaxNode> VisitDoLoopBlock(DoLoopBlockSyntax node)
         {
             if (!node.Statements.Any() && NoCommentsBefore(node.LoopStatement))
             {
-                emptyInnerBlocks.Add(node.DoStatement);
+                yield return node.DoStatement;
             }
         }
 
-        private void VisitForBlock(ForBlockSyntax node)
+        private IEnumerable<SyntaxNode> VisitForBlock(ForBlockSyntax node)
         {
             if (!node.Statements.Any() && NoCommentsBefore(node.NextStatement))
             {
-                emptyInnerBlocks.Add(node.ForStatement);
+                yield return node.ForStatement;
             }
         }
 
-        private void VisitForEachBlock(ForEachBlockSyntax node)
+        private IEnumerable<SyntaxNode> VisitForEachBlock(ForEachBlockSyntax node)
         {
             if (!node.Statements.Any() && NoCommentsBefore(node.NextStatement))
             {
-                emptyInnerBlocks.Add(node.ForEachStatement);
+                yield return node.ForEachStatement;
             }
         }
 
-        private void VisitMultiLineIfBlock(MultiLineIfBlockSyntax node)
+        private IEnumerable<SyntaxNode> VisitMultiLineIfBlock(MultiLineIfBlockSyntax node)
         {
+            var result = new List<SyntaxNode>();
             if (node.ElseBlock == null)
             {
                 if (node.ElseIfBlocks.Any())
                 {
-                    VerifyIfAndMostElseIfBlocks(node);
-                    VerifyElseIfBlock(node.ElseIfBlocks[node.ElseIfBlocks.Count - 1], node.EndIfStatement);
+                    result.AddRange(VerifyIfAndMostElseIfBlocks(node));
+                    result.AddRange(VerifyElseIfBlock(node.ElseIfBlocks[node.ElseIfBlocks.Count - 1], node.EndIfStatement));
                 }
                 else
                 {
-                    VerifyIfBlock(node, node.EndIfStatement);
+                    result.AddRange(VerifyIfBlock(node, node.EndIfStatement));
                 }
             }
             else
             {
                 if (node.ElseIfBlocks.Any())
                 {
-                    VerifyIfAndMostElseIfBlocks(node);
-                    VerifyElseIfBlock(node.ElseIfBlocks[node.ElseIfBlocks.Count - 1], node.ElseBlock);
-                    VerifyElseBlock(node.ElseBlock, node.EndIfStatement);
+                    result.AddRange(VerifyIfAndMostElseIfBlocks(node));
+                    result.AddRange(VerifyElseIfBlock(node.ElseIfBlocks[node.ElseIfBlocks.Count - 1], node.ElseBlock));
+                    result.AddRange(VerifyElseBlock(node.ElseBlock, node.EndIfStatement));
                 }
                 else
                 {
-                    VerifyIfBlock(node, node.ElseBlock);
-                    VerifyElseBlock(node.ElseBlock, node.EndIfStatement);
+                    result.AddRange(VerifyIfBlock(node, node.ElseBlock));
+                    result.AddRange(VerifyElseBlock(node.ElseBlock, node.EndIfStatement));
                 }
             }
+            return result;
         }
 
-        private void VisitSelectBlock(SelectBlockSyntax node)
+        private IEnumerable<SyntaxNode> VisitSelectBlock(SelectBlockSyntax node)
         {
             if (!node.CaseBlocks.Any())
             {
-                emptyInnerBlocks.Add(node.SelectStatement);
+                yield return node.SelectStatement;
             }
         }
 
-        private void VisitTryBlock(TryBlockSyntax node)
+        private IEnumerable<SyntaxNode> VisitTryBlock(TryBlockSyntax node)
         {
+            var result = new List<SyntaxNode>();
             if (node.CatchBlocks.Any() && node.FinallyBlock != null)
             {
-                VerifyTryAndMostCatches(node);
-                VerifyCatchBlock(node.CatchBlocks[node.CatchBlocks.Count - 1], node.FinallyBlock);
-                VerifyFinallyBlock(node.FinallyBlock, node.EndTryStatement);
+                result.AddRange(VerifyTryAndMostCatches(node));
+                result.AddRange(VerifyCatchBlock(node.CatchBlocks[node.CatchBlocks.Count - 1], node.FinallyBlock));
+                result.AddRange(VerifyFinallyBlock(node.FinallyBlock, node.EndTryStatement));
             }
             else if (node.FinallyBlock != null)
             {
-                VerifyTryBlock(node, node.FinallyBlock);
-                VerifyFinallyBlock(node.FinallyBlock, node.EndTryStatement);
+                result.AddRange(VerifyTryBlock(node, node.FinallyBlock));
+                result.AddRange(VerifyFinallyBlock(node.FinallyBlock, node.EndTryStatement));
             }
             else if (node.CatchBlocks.Any())
             {
-                VerifyTryAndMostCatches(node);
-                VerifyCatchBlock(node.CatchBlocks[node.CatchBlocks.Count - 1], node.EndTryStatement);
+                result.AddRange(VerifyTryAndMostCatches(node));
+                result.AddRange(VerifyCatchBlock(node.CatchBlocks[node.CatchBlocks.Count - 1], node.EndTryStatement));
             }
             else
             {
                 throw new InvalidOperationException("Try block must be followed by at least one catch or one finally block");
             }
+            return result;
         }
 
-        private void VisitUsingBlock(UsingBlockSyntax node)
+        private IEnumerable<SyntaxNode> VisitUsingBlock(UsingBlockSyntax node)
         {
             if (!node.Statements.Any() && NoCommentsBefore(node.EndUsingStatement))
             {
-                emptyInnerBlocks.Add(node.UsingStatement);
+                yield return node.UsingStatement;
             }
         }
 
-        private void VisitWhileBlock(WhileBlockSyntax node)
+        private IEnumerable<SyntaxNode> VisitWhileBlock(WhileBlockSyntax node)
         {
             if (!node.Statements.Any() && NoCommentsBefore(node.EndWhileStatement))
             {
-                emptyInnerBlocks.Add(node.WhileStatement);
+                yield return node.WhileStatement;
             }
         }
 
-        private void VisitWithBlock(WithBlockSyntax node)
+        private IEnumerable<SyntaxNode> VisitWithBlock(WithBlockSyntax node)
         {
             if (!node.Statements.Any() && NoCommentsBefore(node.EndWithStatement))
             {
-                emptyInnerBlocks.Add(node.WithStatement);
+                yield return node.WithStatement;
             }
         }
 
-        private void VerifyIfAndMostElseIfBlocks(MultiLineIfBlockSyntax ifBlock)
+        private IEnumerable<SyntaxNode> VerifyIfAndMostElseIfBlocks(MultiLineIfBlockSyntax ifBlock)
         {
-            VerifyIfBlock(ifBlock, ifBlock.ElseIfBlocks[0]);
+            var result = new List<SyntaxNode>();
+            result.AddRange(VerifyIfBlock(ifBlock, ifBlock.ElseIfBlocks[0]));
             // verify all ElseIf except the last one
             for (int i = 0; i < ifBlock.ElseIfBlocks.Count - 1; i++)
             {
-                VerifyElseIfBlock(ifBlock.ElseIfBlocks[i], ifBlock.ElseIfBlocks[i + 1]);
+                result.AddRange(VerifyElseIfBlock(ifBlock.ElseIfBlocks[i], ifBlock.ElseIfBlocks[i + 1]));
             }
+            return result;
         }
 
-        private void VerifyIfBlock(MultiLineIfBlockSyntax ifBlock, SyntaxNode node)
+        private IEnumerable<SyntaxNode> VerifyIfBlock(MultiLineIfBlockSyntax ifBlock, SyntaxNode node)
         {
             if (!ifBlock.Statements.Any() && NoCommentsBefore(node))
             {
-                emptyInnerBlocks.Add(ifBlock.IfStatement);
+                yield return ifBlock.IfStatement;
             }
         }
 
-        private void VerifyElseIfBlock(ElseIfBlockSyntax elseIfBlock, SyntaxNode node)
+        private IEnumerable<SyntaxNode> VerifyElseIfBlock(ElseIfBlockSyntax elseIfBlock, SyntaxNode node)
         {
             if (!elseIfBlock.Statements.Any() && NoCommentsBefore(node))
             {
-                emptyInnerBlocks.Add(elseIfBlock.ElseIfStatement);
+                yield return elseIfBlock.ElseIfStatement;
             }
         }
 
-        private void VerifyElseBlock(ElseBlockSyntax elseBlock, SyntaxNode node)
+        private IEnumerable<SyntaxNode> VerifyElseBlock(ElseBlockSyntax elseBlock, SyntaxNode node)
         {
             if (!elseBlock.Statements.Any() && NoCommentsBefore(node))
             {
-                emptyInnerBlocks.Add(elseBlock.ElseStatement);
+                yield return elseBlock.ElseStatement;
             }
         }
 
-        private void VerifyTryAndMostCatches(TryBlockSyntax node)
+        private IEnumerable<SyntaxNode> VerifyTryAndMostCatches(TryBlockSyntax node)
         {
-            VerifyTryBlock(node, node.CatchBlocks[0]);
+            var result = new List<SyntaxNode>();
+            result.AddRange(VerifyTryBlock(node, node.CatchBlocks[0]));
             // verify all catches except the last one
             for (int i = 0; i < node.CatchBlocks.Count - 1; i++)
             {
-                VerifyCatchBlock(node.CatchBlocks[i], node.CatchBlocks[i + 1]);
+                result.AddRange(VerifyCatchBlock(node.CatchBlocks[i], node.CatchBlocks[i + 1]));
             }
+            return result;
         }
 
-        private void VerifyTryBlock(TryBlockSyntax node, SyntaxNode nextBlock)
+        private IEnumerable<SyntaxNode> VerifyTryBlock(TryBlockSyntax node, SyntaxNode nextBlock)
         {
             if (!node.Statements.Any() && NoCommentsBefore(nextBlock))
             {
-                emptyInnerBlocks.Add(node.TryStatement);
+                yield return node.TryStatement;
             }
         }
 
-        private void VerifyCatchBlock(CatchBlockSyntax node, SyntaxNode nextBlock)
+        private IEnumerable<SyntaxNode> VerifyCatchBlock(CatchBlockSyntax node, SyntaxNode nextBlock)
         {
             if (!node.Statements.Any() && NoCommentsBefore(nextBlock))
             {
-                emptyInnerBlocks.Add(node.CatchStatement);
+                yield return node.CatchStatement;
             }
         }
 
-        private void VerifyFinallyBlock(FinallyBlockSyntax node, SyntaxNode nextBlock)
+        private IEnumerable<SyntaxNode> VerifyFinallyBlock(FinallyBlockSyntax node, SyntaxNode nextBlock)
         {
             if (!node.Statements.Any() && NoCommentsBefore(nextBlock))
             {
-                emptyInnerBlocks.Add(node.FinallyStatement);
+                yield return node.FinallyStatement;
             }
         }
 
