@@ -119,6 +119,10 @@ Namespace Tests.Diagnostics
         ' TODO
       End Using
 
+      Using reader As System.IO.TextReader = System.IO.File.OpenText("log.txt")
+        a = a + 1
+      End Using
+
       Try ' Noncompliant
       Catch e As ArgumentException
         ' Ignore as it has this comment
@@ -171,6 +175,11 @@ Namespace Tests.Diagnostics
       Else ' Noncompliant
       End If
 
+      If a Then ' Noncompliant
+      Else
+        a = a + 1
+      End If
+
       If a Then
         ' Ignore as it has this comment
       ElseIf a Then
@@ -189,7 +198,7 @@ Namespace Tests.Diagnostics
       ElseIf a Then
         ' comment
       ElseIf a Then
-        ' comment
+        a = a + 1
       Else
         ' comment
       End If

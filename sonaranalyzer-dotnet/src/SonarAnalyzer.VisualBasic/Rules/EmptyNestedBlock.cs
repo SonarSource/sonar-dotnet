@@ -38,6 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private readonly List<SyntaxNode> emptyInnerBlocks = new List<SyntaxNode>();
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
@@ -46,27 +47,21 @@ namespace SonarAnalyzer.Rules.VisualBasic
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var walker = new BlockWalker();
-                    walker.SafeVisit(c.Node);
-
-                    foreach (var node in walker.EmptySyntaxNodes)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
-                    }
+                    emptyInnerBlocks.Clear();
+                    VerifyEmptyBlocks(c.Node);
+                    emptyInnerBlocks.ForEach(node => c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation())));
                 },
-                // All DoLoop blocks are handled together
                 SyntaxKind.SimpleDoLoopBlock,
                 SyntaxKind.DoLoopUntilBlock,
                 SyntaxKind.DoLoopWhileBlock,
                 SyntaxKind.DoUntilLoopBlock,
                 SyntaxKind.DoWhileLoopBlock,
-
                 SyntaxKind.ForBlock,
                 SyntaxKind.ForEachBlock,
-                // The Else and ElseIf blocks are handled by the MultiLineIfBlock
+                // The Else and ElseIf blocks are inside the MultiLineIfBlock
                 SyntaxKind.MultiLineIfBlock,
                 SyntaxKind.SelectBlock,
-                // The CatchBlock and FinallyBlock are handled by the TryBlock
+                // The CatchBlock and FinallyBlock are inside the TryBlock
                 SyntaxKind.TryBlock,
                 SyntaxKind.UsingBlock,
                 SyntaxKind.WhileBlock,
@@ -74,7 +69,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         }
 
         /**
-         * The BlockWalker verifies that the given block has no statements and no comments inside
+         * Verify that the given block has no statements and no comments inside
          * (notable exception: the Select block)
          *
          * Note: Roslyn maps the comments which are inside a block as trivia of the following block
@@ -83,194 +78,236 @@ namespace SonarAnalyzer.Rules.VisualBasic
          * Try
          *   ' my comment
          * Finally
+         * End Try
          */
 
-        private class BlockWalker : VisualBasicSyntaxWalker
+        private void VerifyEmptyBlocks(SyntaxNode node)
         {
-            public IEnumerable<SyntaxNode> EmptySyntaxNodes => emptyInnerBlocks;
-
-            private readonly IList<SyntaxNode> emptyInnerBlocks = new List<SyntaxNode>();
-
-            // This handles SimpleDoLoopBlock, DoLoop*Block, Do*LoopBlock
-            public override void VisitDoLoopBlock(DoLoopBlockSyntax node)
+            switch (node.Kind())
             {
-                if (!node.Statements.Any() && NoCommentsBefore(node.LoopStatement))
-                {
-                    emptyInnerBlocks.Add(node.DoStatement);
-                }
-            }
+                case SyntaxKind.SimpleDoLoopBlock:
+                case SyntaxKind.DoLoopUntilBlock:
+                case SyntaxKind.DoLoopWhileBlock:
+                case SyntaxKind.DoUntilLoopBlock:
+                case SyntaxKind.DoWhileLoopBlock:
+                    VisitDoLoopBlock((DoLoopBlockSyntax)node);
+                    break;
 
-            public override void VisitForBlock(ForBlockSyntax node)
-            {
-                if (!node.Statements.Any() && NoCommentsBefore(node.NextStatement))
-                {
-                    emptyInnerBlocks.Add(node.ForStatement);
-                }
-            }
+                case SyntaxKind.ForBlock:
+                    VisitForBlock((ForBlockSyntax)node);
+                    break;
 
-            public override void VisitForEachBlock(ForEachBlockSyntax node)
-            {
-                if (!node.Statements.Any() && NoCommentsBefore(node.NextStatement))
-                {
-                    emptyInnerBlocks.Add(node.ForEachStatement);
-                }
-            }
+                case SyntaxKind.ForEachBlock:
+                    VisitForEachBlock((ForEachBlockSyntax)node);
+                    break;
 
-            public override void VisitMultiLineIfBlock(MultiLineIfBlockSyntax node)
-            {
-                if (node.ElseBlock == null)
-                {
-                    if (node.ElseIfBlocks.Any())
-                    {
-                        VerifyIfAndMostElseIfBlocks(node);
-                        VerifyElseIfBlock(node.ElseIfBlocks[node.ElseIfBlocks.Count - 1], node.EndIfStatement);
-                    }
-                    else
-                    {
-                        VerifyIfBlock(node, node.EndIfStatement);
-                    }
-                }
-                else
-                {
-                    if (node.ElseIfBlocks.Any())
-                    {
-                        VerifyIfAndMostElseIfBlocks(node);
-                        VerifyElseIfBlock(node.ElseIfBlocks[node.ElseIfBlocks.Count - 1], node.ElseBlock);
-                        VerifyElseBlock(node.ElseBlock, node.EndIfStatement);
-                    }
-                    else
-                    {
-                        VerifyIfBlock(node, node.ElseBlock);
-                        VerifyElseBlock(node.ElseBlock, node.EndIfStatement);
-                    }
-                }
-            }
+                case SyntaxKind.MultiLineIfBlock:
+                    VisitMultiLineIfBlock((MultiLineIfBlockSyntax)node);
+                    break;
 
-            private void VerifyIfAndMostElseIfBlocks(MultiLineIfBlockSyntax ifBlock)
-            {
-                VerifyIfBlock(ifBlock, ifBlock.ElseIfBlocks[0]);
-                // verify all ElseIf except the last one
-                for (int i = 0; i < ifBlock.ElseIfBlocks.Count - 1; i++)
-                {
-                    VerifyElseIfBlock(ifBlock.ElseIfBlocks[i], ifBlock.ElseIfBlocks[i + 1]);
-                }
-            }
+                case SyntaxKind.SelectBlock:
+                    VisitSelectBlock((SelectBlockSyntax)node);
+                    break;
 
-            private void VerifyIfBlock(MultiLineIfBlockSyntax ifBlock, SyntaxNode node)
-            {
-                if (!ifBlock.Statements.Any() && NoCommentsBefore(node))
-                {
-                    emptyInnerBlocks.Add(ifBlock.IfStatement);
-                }
-            }
+                case SyntaxKind.TryBlock:
+                    VisitTryBlock((TryBlockSyntax)node);
+                    break;
 
-            private void VerifyElseIfBlock(ElseIfBlockSyntax elseIfBlock, SyntaxNode node)
-            {
-                if (!elseIfBlock.Statements.Any() && NoCommentsBefore(node))
-                {
-                    emptyInnerBlocks.Add(elseIfBlock.ElseIfStatement);
-                }
-            }
+                case SyntaxKind.UsingBlock:
+                    VisitUsingBlock((UsingBlockSyntax)node);
+                    break;
 
-            private void VerifyElseBlock(ElseBlockSyntax elseBlock, SyntaxNode node)
-            {
-                if (!elseBlock.Statements.Any() && NoCommentsBefore(node))
-                {
-                    emptyInnerBlocks.Add(elseBlock.ElseStatement);
-                }
-            }
+                case SyntaxKind.WhileBlock:
+                    VisitWhileBlock((WhileBlockSyntax)node);
+                    break;
 
-            public override void VisitSelectBlock(SelectBlockSyntax node)
-            {
-                if (!node.CaseBlocks.Any())
-                {
-                    emptyInnerBlocks.Add(node.SelectStatement);
-                }
-            }
+                case SyntaxKind.WithBlock:
+                    VisitWithBlock((WithBlockSyntax)node);
+                    break;
 
-            public override void VisitTryBlock(TryBlockSyntax node)
-            {
-                if (node.CatchBlocks.Any() && node.FinallyBlock != null)
-                {
-                    VerifyTryAndMostCatches(node);
-                    VerifyCatchBlock(node.CatchBlocks[node.CatchBlocks.Count - 1], node.FinallyBlock);
-                    VerifyFinallyBlock(node.FinallyBlock, node.EndTryStatement);
-                }
-                else if (node.FinallyBlock != null)
-                {
-                    VerifyTryBlock(node, node.FinallyBlock);
-                    VerifyFinallyBlock(node.FinallyBlock, node.EndTryStatement);
-                }
-                else if (node.CatchBlocks.Any())
-                {
-                    VerifyTryAndMostCatches(node);
-                    VerifyCatchBlock(node.CatchBlocks[node.CatchBlocks.Count - 1], node.EndTryStatement);
-                }
-                else
-                {
-                    throw new InvalidOperationException("Try block must be followed by at least one catch or one finally block");
-                }
+                default:
+                    throw new InvalidOperationException($"Did not expect this syntax kind: {node.Kind()}");
             }
-
-            public override void VisitUsingBlock(UsingBlockSyntax node)
-            {
-                if (!node.Statements.Any() && NoCommentsBefore(node.EndUsingStatement))
-                {
-                    emptyInnerBlocks.Add(node.UsingStatement);
-                }
-            }
-
-            public override void VisitWhileBlock(WhileBlockSyntax node)
-            {
-                if (!node.Statements.Any() && NoCommentsBefore(node.EndWhileStatement))
-                {
-                    emptyInnerBlocks.Add(node.WhileStatement);
-                }
-            }
-
-            public override void VisitWithBlock(WithBlockSyntax node)
-            {
-                if (!node.Statements.Any() && NoCommentsBefore(node.EndWithStatement))
-                {
-                    emptyInnerBlocks.Add(node.WithStatement);
-                }
-            }
-
-            private void VerifyTryAndMostCatches(TryBlockSyntax node)
-            {
-                VerifyTryBlock(node, node.CatchBlocks[0]);
-                // verify all catches except the last one
-                for (int i = 0; i < node.CatchBlocks.Count - 1; i++)
-                {
-                    VerifyCatchBlock(node.CatchBlocks[i], node.CatchBlocks[i + 1]);
-                }
-            }
-
-            private void VerifyTryBlock(TryBlockSyntax node, SyntaxNode nextBlock)
-            {
-                if (!node.Statements.Any() && NoCommentsBefore(nextBlock))
-                {
-                    emptyInnerBlocks.Add(node.TryStatement);
-                }
-            }
-
-            private void VerifyCatchBlock(CatchBlockSyntax node, SyntaxNode nextBlock)
-            {
-                if (!node.Statements.Any() && NoCommentsBefore(nextBlock))
-                {
-                    emptyInnerBlocks.Add(node.CatchStatement);
-                }
-            }
-
-            private void VerifyFinallyBlock(FinallyBlockSyntax node, SyntaxNode nextBlock)
-            {
-                if (!node.Statements.Any() && NoCommentsBefore(nextBlock))
-                {
-                    emptyInnerBlocks.Add(node.FinallyStatement);
-                }
-            }
-
-            private static bool NoCommentsBefore(SyntaxNode node) => !node.GetLeadingTrivia().Any(t => t.IsComment());
         }
+
+        private void VisitDoLoopBlock(DoLoopBlockSyntax node)
+        {
+            if (!node.Statements.Any() && NoCommentsBefore(node.LoopStatement))
+            {
+                emptyInnerBlocks.Add(node.DoStatement);
+            }
+        }
+
+        private void VisitForBlock(ForBlockSyntax node)
+        {
+            if (!node.Statements.Any() && NoCommentsBefore(node.NextStatement))
+            {
+                emptyInnerBlocks.Add(node.ForStatement);
+            }
+        }
+
+        private void VisitForEachBlock(ForEachBlockSyntax node)
+        {
+            if (!node.Statements.Any() && NoCommentsBefore(node.NextStatement))
+            {
+                emptyInnerBlocks.Add(node.ForEachStatement);
+            }
+        }
+
+        private void VisitMultiLineIfBlock(MultiLineIfBlockSyntax node)
+        {
+            if (node.ElseBlock == null)
+            {
+                if (node.ElseIfBlocks.Any())
+                {
+                    VerifyIfAndMostElseIfBlocks(node);
+                    VerifyElseIfBlock(node.ElseIfBlocks[node.ElseIfBlocks.Count - 1], node.EndIfStatement);
+                }
+                else
+                {
+                    VerifyIfBlock(node, node.EndIfStatement);
+                }
+            }
+            else
+            {
+                if (node.ElseIfBlocks.Any())
+                {
+                    VerifyIfAndMostElseIfBlocks(node);
+                    VerifyElseIfBlock(node.ElseIfBlocks[node.ElseIfBlocks.Count - 1], node.ElseBlock);
+                    VerifyElseBlock(node.ElseBlock, node.EndIfStatement);
+                }
+                else
+                {
+                    VerifyIfBlock(node, node.ElseBlock);
+                    VerifyElseBlock(node.ElseBlock, node.EndIfStatement);
+                }
+            }
+        }
+
+        private void VisitSelectBlock(SelectBlockSyntax node)
+        {
+            if (!node.CaseBlocks.Any())
+            {
+                emptyInnerBlocks.Add(node.SelectStatement);
+            }
+        }
+
+        private void VisitTryBlock(TryBlockSyntax node)
+        {
+            if (node.CatchBlocks.Any() && node.FinallyBlock != null)
+            {
+                VerifyTryAndMostCatches(node);
+                VerifyCatchBlock(node.CatchBlocks[node.CatchBlocks.Count - 1], node.FinallyBlock);
+                VerifyFinallyBlock(node.FinallyBlock, node.EndTryStatement);
+            }
+            else if (node.FinallyBlock != null)
+            {
+                VerifyTryBlock(node, node.FinallyBlock);
+                VerifyFinallyBlock(node.FinallyBlock, node.EndTryStatement);
+            }
+            else if (node.CatchBlocks.Any())
+            {
+                VerifyTryAndMostCatches(node);
+                VerifyCatchBlock(node.CatchBlocks[node.CatchBlocks.Count - 1], node.EndTryStatement);
+            }
+            else
+            {
+                throw new InvalidOperationException("Try block must be followed by at least one catch or one finally block");
+            }
+        }
+
+        private void VisitUsingBlock(UsingBlockSyntax node)
+        {
+            if (!node.Statements.Any() && NoCommentsBefore(node.EndUsingStatement))
+            {
+                emptyInnerBlocks.Add(node.UsingStatement);
+            }
+        }
+
+        private void VisitWhileBlock(WhileBlockSyntax node)
+        {
+            if (!node.Statements.Any() && NoCommentsBefore(node.EndWhileStatement))
+            {
+                emptyInnerBlocks.Add(node.WhileStatement);
+            }
+        }
+
+        private void VisitWithBlock(WithBlockSyntax node)
+        {
+            if (!node.Statements.Any() && NoCommentsBefore(node.EndWithStatement))
+            {
+                emptyInnerBlocks.Add(node.WithStatement);
+            }
+        }
+
+        private void VerifyIfAndMostElseIfBlocks(MultiLineIfBlockSyntax ifBlock)
+        {
+            VerifyIfBlock(ifBlock, ifBlock.ElseIfBlocks[0]);
+            // verify all ElseIf except the last one
+            for (int i = 0; i < ifBlock.ElseIfBlocks.Count - 1; i++)
+            {
+                VerifyElseIfBlock(ifBlock.ElseIfBlocks[i], ifBlock.ElseIfBlocks[i + 1]);
+            }
+        }
+
+        private void VerifyIfBlock(MultiLineIfBlockSyntax ifBlock, SyntaxNode node)
+        {
+            if (!ifBlock.Statements.Any() && NoCommentsBefore(node))
+            {
+                emptyInnerBlocks.Add(ifBlock.IfStatement);
+            }
+        }
+
+        private void VerifyElseIfBlock(ElseIfBlockSyntax elseIfBlock, SyntaxNode node)
+        {
+            if (!elseIfBlock.Statements.Any() && NoCommentsBefore(node))
+            {
+                emptyInnerBlocks.Add(elseIfBlock.ElseIfStatement);
+            }
+        }
+
+        private void VerifyElseBlock(ElseBlockSyntax elseBlock, SyntaxNode node)
+        {
+            if (!elseBlock.Statements.Any() && NoCommentsBefore(node))
+            {
+                emptyInnerBlocks.Add(elseBlock.ElseStatement);
+            }
+        }
+
+        private void VerifyTryAndMostCatches(TryBlockSyntax node)
+        {
+            VerifyTryBlock(node, node.CatchBlocks[0]);
+            // verify all catches except the last one
+            for (int i = 0; i < node.CatchBlocks.Count - 1; i++)
+            {
+                VerifyCatchBlock(node.CatchBlocks[i], node.CatchBlocks[i + 1]);
+            }
+        }
+
+        private void VerifyTryBlock(TryBlockSyntax node, SyntaxNode nextBlock)
+        {
+            if (!node.Statements.Any() && NoCommentsBefore(nextBlock))
+            {
+                emptyInnerBlocks.Add(node.TryStatement);
+            }
+        }
+
+        private void VerifyCatchBlock(CatchBlockSyntax node, SyntaxNode nextBlock)
+        {
+            if (!node.Statements.Any() && NoCommentsBefore(nextBlock))
+            {
+                emptyInnerBlocks.Add(node.CatchStatement);
+            }
+        }
+
+        private void VerifyFinallyBlock(FinallyBlockSyntax node, SyntaxNode nextBlock)
+        {
+            if (!node.Statements.Any() && NoCommentsBefore(nextBlock))
+            {
+                emptyInnerBlocks.Add(node.FinallyStatement);
+            }
+        }
+
+        private static bool NoCommentsBefore(SyntaxNode node) => !node.GetLeadingTrivia().Any(t => t.IsComment());
     }
 }
