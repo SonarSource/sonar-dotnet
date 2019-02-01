@@ -148,7 +148,6 @@ Namespace Tests.Diagnostics
       Catch  ' Noncompliant
       End Try
 
-
       Try
         ' nothing
       Finally
@@ -159,11 +158,40 @@ Namespace Tests.Diagnostics
         ' Ignore as it has this comment
       End If
 
+      If a Then
+      End If
+'     ^^^^^^^^^ Noncompliant@-1
+
       If a Then ' Noncompliant
+
       End If
 
-      If a Then ' Noncompliant
+      If a Then
+        ' Ignore as it has this comment
+      Else ' Noncompliant
+      End If
 
+      If a Then
+        ' Ignore as it has this comment
+      ElseIf a Then
+
+      End If
+'     ^^^^^^^^^^^^^ Noncompliant@-2
+
+      If a Then ' Noncompliant
+      ElseIf a Then ' Noncompliant
+      ElseIf a Then ' Noncompliant
+      Else ' Noncompliant
+      End If
+
+      If a Then
+        ' comment
+      ElseIf a Then
+        ' comment
+      ElseIf a Then
+        ' comment
+      Else
+        ' comment
       End If
 
       Select Case a ' Noncompliant

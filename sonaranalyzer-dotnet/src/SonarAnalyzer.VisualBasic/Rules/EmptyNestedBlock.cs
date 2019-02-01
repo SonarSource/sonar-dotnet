@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -53,13 +54,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
                     }
                 },
+                // All DoLoop blocks are handled together
                 SyntaxKind.SimpleDoLoopBlock,
                 SyntaxKind.DoLoopUntilBlock,
                 SyntaxKind.DoLoopWhileBlock,
                 SyntaxKind.DoUntilLoopBlock,
                 SyntaxKind.DoWhileLoopBlock,
+
                 SyntaxKind.ForBlock,
                 SyntaxKind.ForEachBlock,
+                // The Else and ElseIf blocks are handled by the MultiLineIfBlock
                 SyntaxKind.MultiLineIfBlock,
                 SyntaxKind.SelectBlock,
                 // The CatchBlock and FinallyBlock are handled by the TryBlock
@@ -80,6 +84,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
          *   ' my comment
          * Finally
          */
+
         private class BlockWalker : VisualBasicSyntaxWalker
         {
             public IEnumerable<SyntaxNode> EmptySyntaxNodes => emptyInnerBlocks;
@@ -113,9 +118,65 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             public override void VisitMultiLineIfBlock(MultiLineIfBlockSyntax node)
             {
-                if (!node.Statements.Any() && NoCommentsBefore(node.EndIfStatement))
+                if (node.ElseBlock == null)
                 {
-                    emptyInnerBlocks.Add(node.IfStatement);
+                    if (node.ElseIfBlocks.Any())
+                    {
+                        VerifyIfAndMostElseIfBlocks(node);
+                        VerifyElseIfBlock(node.ElseIfBlocks[node.ElseIfBlocks.Count - 1], node.EndIfStatement);
+                    }
+                    else
+                    {
+                        VerifyIfBlock(node, node.EndIfStatement);
+                    }
+                }
+                else
+                {
+                    if (node.ElseIfBlocks.Any())
+                    {
+                        VerifyIfAndMostElseIfBlocks(node);
+                        VerifyElseIfBlock(node.ElseIfBlocks[node.ElseIfBlocks.Count - 1], node.ElseBlock);
+                        VerifyElseBlock(node.ElseBlock, node.EndIfStatement);
+                    }
+                    else
+                    {
+                        VerifyIfBlock(node, node.ElseBlock);
+                        VerifyElseBlock(node.ElseBlock, node.EndIfStatement);
+                    }
+                }
+            }
+
+            private void VerifyIfAndMostElseIfBlocks(MultiLineIfBlockSyntax ifBlock)
+            {
+                VerifyIfBlock(ifBlock, ifBlock.ElseIfBlocks[0]);
+                // verify all ElseIf except the last one
+                for (int i = 0; i < ifBlock.ElseIfBlocks.Count - 1; i++)
+                {
+                    VerifyElseIfBlock(ifBlock.ElseIfBlocks[i], ifBlock.ElseIfBlocks[i + 1]);
+                }
+            }
+
+            private void VerifyIfBlock(MultiLineIfBlockSyntax ifBlock, SyntaxNode node)
+            {
+                if (!ifBlock.Statements.Any() && NoCommentsBefore(node))
+                {
+                    emptyInnerBlocks.Add(ifBlock.IfStatement);
+                }
+            }
+
+            private void VerifyElseIfBlock(ElseIfBlockSyntax elseIfBlock, SyntaxNode node)
+            {
+                if (!elseIfBlock.Statements.Any() && NoCommentsBefore(node))
+                {
+                    emptyInnerBlocks.Add(elseIfBlock.ElseIfStatement);
+                }
+            }
+
+            private void VerifyElseBlock(ElseBlockSyntax elseBlock, SyntaxNode node)
+            {
+                if (!elseBlock.Statements.Any() && NoCommentsBefore(node))
+                {
+                    emptyInnerBlocks.Add(elseBlock.ElseStatement);
                 }
             }
 
@@ -129,21 +190,25 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             public override void VisitTryBlock(TryBlockSyntax node)
             {
-                if (!node.CatchBlocks.Any())
+                if (node.CatchBlocks.Any() && node.FinallyBlock != null)
+                {
+                    VerifyTryAndMostCatches(node);
+                    VerifyCatchBlock(node.CatchBlocks[node.CatchBlocks.Count - 1], node.FinallyBlock);
+                    VerifyFinallyBlock(node.FinallyBlock, node.EndTryStatement);
+                }
+                else if (node.FinallyBlock != null)
                 {
                     VerifyTryBlock(node, node.FinallyBlock);
                     VerifyFinallyBlock(node.FinallyBlock, node.EndTryStatement);
                 }
-                else if (node.FinallyBlock == null)
+                else if (node.CatchBlocks.Any())
                 {
                     VerifyTryAndMostCatches(node);
                     VerifyCatchBlock(node.CatchBlocks[node.CatchBlocks.Count - 1], node.EndTryStatement);
                 }
                 else
                 {
-                    VerifyTryAndMostCatches(node);
-                    VerifyCatchBlock(node.CatchBlocks[node.CatchBlocks.Count - 1], node.FinallyBlock);
-                    VerifyFinallyBlock(node.FinallyBlock, node.EndTryStatement);
+                    throw new InvalidOperationException("Try block must be followed by at least one catch or one finally block");
                 }
             }
 
