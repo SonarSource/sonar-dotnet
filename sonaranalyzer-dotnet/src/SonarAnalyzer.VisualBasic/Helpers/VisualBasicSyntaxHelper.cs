@@ -198,24 +198,31 @@ namespace SonarAnalyzer.Helpers.VisualBasic
         }
 
         public static Location FindIdentifierLocation(this MethodBlockBaseSyntax methodBlockBase) =>
-            GetIdentifierOrDefault(methodBlockBase)?.GetLocation();
+            GetIdentifierOrDefault(methodBlockBase).GetLocation();
 
-        public static SyntaxToken? GetIdentifierOrDefault(this MethodBlockBaseSyntax methodBlockBase)
+        public static SyntaxToken GetIdentifierOrDefault(this MethodBlockBaseSyntax methodBlockBase)
         {
             var blockStatement = methodBlockBase.BlockStatement;
 
             switch (blockStatement.Kind())
             {
                 case SyntaxKind.SubNewStatement:
-                    return (blockStatement as SubNewStatementSyntax)?.NewKeyword;
+                    var subNewStatement = blockStatement as SubNewStatementSyntax;
+
+                    return subNewStatement != null
+                        ? subNewStatement.NewKeyword
+                        : default(SyntaxToken);
 
                 case SyntaxKind.FunctionStatement:
                 case SyntaxKind.SubStatement:
-                    var methodStatement = ((MethodBlockSyntax)methodBlockBase).BlockStatement as MethodStatementSyntax;
-                    return methodStatement?.Identifier;
+                    var methodStatement = blockStatement as MethodStatementSyntax;
+
+                    return methodStatement != null
+                        ? methodStatement.Identifier
+                        : default(SyntaxToken);
 
                 default:
-                    return null;
+                    return default(SyntaxToken);
             }
         }
     }

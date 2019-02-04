@@ -4,7 +4,7 @@ Imports System.Linq
 Imports System.Text
 
 Namespace Tests.TestCases
-    Class Foo
+    Class InvalidCases
         Public Sub Test() ' Noncompliant {{This method 'Test' has 6 lines, which is greater than the 2 lines authorized. Split it into smaller procedures.}}
 '                  ^^^^
             Dim i As Integer
@@ -50,5 +50,26 @@ Namespace Tests.TestCases
             i += 1
             i += 1
          End Sub
+    End Class
+
+    Class ValidCases
+        Public Sub Foo()
+
+        End Sub
+
+        Public Sub Bar()
+            Dim i = 0
+            i += 1
+        End Sub
+
+        Public Sub ' Error [BC30203]
+            Dim i As Integer
+
+            i += 1
+            i += 1
+            i += 1
+            i += 1
+            i += 1
+        End Sub
     End Class
 End Namespace

@@ -55,17 +55,17 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override string MethodKeyword { get; } = "methods";
 
         protected override IEnumerable<SyntaxToken> GetMethodTokens(BaseMethodDeclarationSyntax baseMethodDeclaration) =>
-            baseMethodDeclaration?.ExpressionBody()?.Expression?.DescendantTokens()
-                ?? baseMethodDeclaration?.Body?.Statements.SelectMany(s => s.DescendantTokens())
+            baseMethodDeclaration.ExpressionBody()?.Expression?.DescendantTokens()
+                ?? baseMethodDeclaration.Body?.Statements.SelectMany(s => s.DescendantTokens())
                 ?? Enumerable.Empty<SyntaxToken>();
 
-        protected override SyntaxToken? GetMethodIdentifierToken(BaseMethodDeclarationSyntax baseMethodDeclaration) =>
-            baseMethodDeclaration?.GetIdentifierOrDefault();
+        protected override SyntaxToken GetMethodIdentifierToken(BaseMethodDeclarationSyntax baseMethodDeclaration) =>
+            baseMethodDeclaration.GetIdentifierOrDefault();
 
         protected override string GetMethodKindAndName(SyntaxToken identifierToken)
         {
             var identifierName = identifierToken.ValueText;
-            if (identifierName == null)
+            if (string.IsNullOrEmpty(identifierName))
             {
                 return "method";
             }
