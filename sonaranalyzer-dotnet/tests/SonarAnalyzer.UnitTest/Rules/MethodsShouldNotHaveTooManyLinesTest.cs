@@ -29,15 +29,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodsShouldNotHaveTooManyLines()
+        public void MethodsShouldNotHaveTooManyLines_DefaultValues_CS()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.cs",
                 new MethodsShouldNotHaveTooManyLines());
         }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodsShouldNotHaveTooManyLines_CustomValues()
+        public void MethodsShouldNotHaveTooManyLines_CustomValues_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.cs",
                 new MethodsShouldNotHaveTooManyLines { Max = 2 });
@@ -45,10 +45,35 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodsShouldNotHaveTooManyLines_DoesntReportInTest()
+        public void MethodsShouldNotHaveTooManyLines_DoesntReportInTest_CS()
         {
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\MethodsShouldNotHaveTooManyLines.cs",
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.cs",
                 new MethodsShouldNotHaveTooManyLines());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MethodsShouldNotHaveTooManyLines_DefaultValues_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.vb",
+                new SonarAnalyzer.Rules.VisualBasic.MethodsShouldNotHaveTooManyLines());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MethodsShouldNotHaveTooManyLines_CustomValues_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveTooManyLines_CustomValues.vb",
+                new SonarAnalyzer.Rules.VisualBasic.MethodsShouldNotHaveTooManyLines { Max = 2 });
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MethodsShouldNotHaveTooManyLines_DoesntReportInTest_VB()
+        {
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\MethodsShouldNotHaveTooManyLines_DefaultValues.vb",
+                new SonarAnalyzer.Rules.VisualBasic.MethodsShouldNotHaveTooManyLines());
         }
     }
 }
+

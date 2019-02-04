@@ -135,7 +135,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["135"],
             //["136"],
             //["137"],
-            //["138"],
+            ["138"] = "CODE_SMELL",
             ["139"] = "CODE_SMELL",
             //["140"],
             //["141"],

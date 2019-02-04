@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This function 'ProccessPattern' has 154 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  76,
+"startColumn":  28,
+"endLine":  76,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'RenameSingle' has 105 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  241,
+"startColumn":  23,
+"endLine":  241,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'DoRename' has 118 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  398,
+"startColumn":  16,
+"endLine":  398,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'DoRenameSingle' has 97 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  662,
+"startColumn":  24,
+"endLine":  662,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'bwLoadInfo_DoWork' has 130 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  76,
+"startColumn":  17,
+"endLine":  76,
+"endColumn":  34
+}
+}
+}
+]
+}

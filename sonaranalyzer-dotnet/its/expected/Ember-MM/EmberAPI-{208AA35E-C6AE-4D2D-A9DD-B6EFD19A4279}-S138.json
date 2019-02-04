@@ -1,0 +1,303 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'Clean' has 100 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  58,
+"startColumn":  16,
+"endLine":  58,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'LoadMovieFromDB' has 152 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  574,
+"startColumn":  21,
+"endLine":  574,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'LoadTVEpFromDB' has 106 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  792,
+"startColumn":  21,
+"endLine":  792,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'SaveMovieToDB' has 305 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1087,
+"startColumn":  21,
+"endLine":  1087,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'SaveTVEpToDB' has 211 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1426,
+"startColumn":  16,
+"endLine":  1426,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'SaveTVShowToDB' has 113 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1704,
+"startColumn":  16,
+"endLine":  1704,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'GetItemsToDelete' has 183 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  178,
+"startColumn":  25,
+"endLine":  178,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'SaveAsFanart' has 114 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  671,
+"startColumn":  21,
+"endLine":  671,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'SaveAsPoster' has 146 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  799,
+"startColumn":  21,
+"endLine":  799,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'SaveAsSeasonPoster' has 102 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  1061,
+"startColumn":  21,
+"endLine":  1061,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GetMIFromPath' has 133 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  131,
+"startColumn":  16,
+"endLine":  131,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'ScanMI' has 91 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  424,
+"startColumn":  22,
+"endLine":  424,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'SaveMovieToNFO' has 127 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  697,
+"startColumn":  23,
+"endLine":  697,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'GetSeasons' has 81 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  49,
+"startColumn":  28,
+"endLine":  49,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GetMovieFolderContents' has 140 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  214,
+"startColumn":  16,
+"endLine":  214,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GetSeasonImages' has 113 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  378,
+"startColumn":  16,
+"endLine":  378,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'LoadMovie' has 82 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  658,
+"startColumn":  16,
+"endLine":  658,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'ScanForFiles' has 94 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  760,
+"startColumn":  16,
+"endLine":  760,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'bwPrelim_DoWork' has 108 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  1070,
+"startColumn":  17,
+"endLine":  1070,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'LoadShow' has 115 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  1210,
+"startColumn":  17,
+"endLine":  1210,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Clear' has 317 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
+"region":  {
+"startLine":  3225,
+"startColumn":  16,
+"endLine":  3225,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'SetDefaultsForLists' has 94 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
+"region":  {
+"startLine":  3585,
+"startColumn":  16,
+"endLine":  3585,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'GetAVImages' has 89 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  110,
+"startColumn":  28,
+"endLine":  110,
+"endColumn":  39
+}
+}
+}
+]
+}

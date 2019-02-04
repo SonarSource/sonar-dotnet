@@ -1,0 +1,238 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This function 'GetPreferredImage' has 537 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  30,
+"startColumn":  25,
+"endLine":  30,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GetPreferredFAasET' has 133 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  658,
+"startColumn":  20,
+"endLine":  658,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'GetMovieInfo' has 338 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  138,
+"startColumn":  25,
+"endLine":  138,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'DownloadSingleTrailer' has 88 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  90,
+"startColumn":  21,
+"endLine":  90,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'ParseYTFormats' has 115 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  26,
+"endLine":  133,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GetPosters' has 83 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"region":  {
+"startLine":  706,
+"startColumn":  17,
+"endLine":  706,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'OK_Button_Click' has 123 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"region":  {
+"startLine":  887,
+"startColumn":  17,
+"endLine":  887,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'BeginDownload' has 85 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgTrailer.vb",
+"region":  {
+"startLine":  65,
+"startColumn":  17,
+"endLine":  65,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'PostScraper' has 110 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"region":  {
+"startLine":  308,
+"startColumn":  14,
+"endLine":  308,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'Scraper' has 89 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"region":  {
+"startLine":  540,
+"startColumn":  14,
+"endLine":  540,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'GetListOfKnownEpisodes' has 85 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  300,
+"startColumn":  25,
+"endLine":  300,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'GetSingleImage' has 90 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  427,
+"startColumn":  25,
+"endLine":  427,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'SaveAllTVInfo' has 85 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  811,
+"startColumn":  21,
+"endLine":  811,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'ShowFromXML' has 157 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1051,
+"startColumn":  21,
+"endLine":  1051,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'SetDefaults' has 169 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  60,
+"startColumn":  21,
+"endLine":  60,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'bwLoadData_DoWork' has 118 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  436,
+"startColumn":  17,
+"endLine":  436,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'DownloadAllImages' has 136 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  707,
+"startColumn":  22,
+"endLine":  707,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'tvList_AfterSelect' has 102 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  1077,
+"startColumn":  17,
+"endLine":  1077,
+"endColumn":  35
+}
+}
+}
+]
+}
