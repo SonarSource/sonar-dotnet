@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S1110",
+"message":  "Remove these redundant parentheses.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  322,
+"startColumn":  21,
+"endLine":  322,
+"endColumn":  22
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  325,
+"startColumn":  130,
+"endLine":  325,
+"endColumn":  131
+}
+}
+]
+}
+]
+}
