@@ -33,14 +33,10 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class ParametersCorrectOrder : SonarDiagnosticAnalyzer
+    public sealed class ParametersCorrectOrder : ParametersCorrectOrderBase<ArgumentSyntax>
     {
-        internal const string DiagnosticId = "S2234";
-        private const string MessageFormat = "Parameters to '{0}' have the same names but not the same order as the method arguments.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -84,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, analysisContext.SemanticModel);
             var argumentParameterMappings = methodParameterLookup.GetAllArgumentParameterMappings()
-                .ToDictionary(pair => pair.Argument, pair => pair.Parameter);
+                .ToDictionary(pair => pair.SyntaxNode, pair => pair.Symbol);
 
             var methodSymbol = methodParameterLookup.MethodSymbol;
             if (methodSymbol == null)
@@ -141,7 +137,8 @@ namespace SonarAnalyzer.Rules.CSharp
             if (methodCallHasIssue)
             {
                 var secondaryLocations = methodSymbol.DeclaringSyntaxReferences
-                    .Select(s => GetIdentifierLocation(s.GetSyntax()))
+                    .Select(s => s.GetSyntax() as BaseMethodDeclarationSyntax)
+                    .Select(bmds => bmds.FindIdentifierLocation())
                     .WhereNotNull();
 
                 analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, getLocation(),
@@ -188,35 +185,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     return identifierArgument;
                 })
                 .ToList();
-        }
-
-        private static Location GetIdentifierLocation(SyntaxNode syntax)
-        {
-            if (syntax is MethodDeclarationSyntax methodDeclaration)
-            {
-                return methodDeclaration.Identifier.GetLocation();
-            }
-
-            if (syntax is ConstructorDeclarationSyntax constructorDeclaration)
-            {
-                return constructorDeclaration.Identifier.GetLocation();
-            }
-
-            return null;
-        }
-
-        internal class IdentifierArgument
-        {
-            public string IdentifierName { get; set; }
-            public ArgumentSyntax ArgumentSyntax { get; set; }
-        }
-        internal class PositionalIdentifierArgument : IdentifierArgument
-        {
-            public int Position { get; set; }
-        }
-        internal class NamedIdentifierArgument : IdentifierArgument
-        {
-            public string DeclaredName { get; set; }
         }
     }
 }

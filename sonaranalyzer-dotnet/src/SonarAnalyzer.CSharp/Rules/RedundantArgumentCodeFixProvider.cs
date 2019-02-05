@@ -75,11 +75,11 @@ namespace SonarAnalyzer.Rules.CSharp
             var argumentsCanBeRemovedWithoutNamed = new List<ArgumentSyntax>();
             var canBeRemovedWithoutNamed = true;
 
-            var reversedMappings = new List<CSharpMethodParameterLookup.ArgumentParameterMapping>(argumentMappings);
+            var reversedMappings = new List<SyntaxNodeSymbolSemanticModelTuple<ArgumentSyntax, IParameterSymbol>>(argumentMappings);
             reversedMappings.Reverse();
             foreach (var argumentMapping in reversedMappings)
             {
-                var argument = argumentMapping.Argument;
+                var argument = argumentMapping.SyntaxNode;
 
                 if (RedundantArgument.ArgumentHasDefaultValue(argumentMapping, semanticModel))
                 {
@@ -123,7 +123,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static async Task<Document> RemoveArgumentsAndAddNecessaryNamesAsync(Document document, ArgumentListSyntax argumentList,
-            List<CSharpMethodParameterLookup.ArgumentParameterMapping> argumentMappings, List<ArgumentSyntax> argumentsToRemove,
+            List<SyntaxNodeSymbolSemanticModelTuple<ArgumentSyntax, IParameterSymbol>> argumentMappings, List<ArgumentSyntax> argumentsToRemove,
             SemanticModel semanticModel, CancellationToken cancellationToken)
         {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
@@ -131,20 +131,20 @@ namespace SonarAnalyzer.Rules.CSharp
             var alreadyRemovedOne = false;
 
             foreach (var argumentMapping in argumentMappings
-                .Where(argumentMapping => !argumentMapping.Parameter.IsParams))
+                .Where(argumentMapping => !argumentMapping.Symbol.IsParams))
             {
-                var argument = argumentMapping.Argument;
+                var argument = argumentMapping.SyntaxNode;
                 if (argumentsToRemove.Contains(argument))
                 {
                     alreadyRemovedOne = true;
                     continue;
                 }
 
-                newArgumentList = AddArgument(newArgumentList, argumentMapping.Parameter.Name, argument, alreadyRemovedOne);
+                newArgumentList = AddArgument(newArgumentList, argumentMapping.Symbol.Name, argument, alreadyRemovedOne);
             }
 
             var paramsArguments = argumentMappings
-                .Where(mapping => mapping.Parameter.IsParams)
+                .Where(mapping => mapping.Symbol.IsParams)
                 .ToList();
 
             if (paramsArguments.Any())
@@ -169,11 +169,11 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static ArgumentListSyntax AddParamsArguments(SemanticModel semanticModel,
-            ICollection<CSharpMethodParameterLookup.ArgumentParameterMapping> paramsArguments, ArgumentListSyntax argumentList)
+            ICollection<SyntaxNodeSymbolSemanticModelTuple<ArgumentSyntax, IParameterSymbol>> paramsArguments, ArgumentListSyntax argumentList)
         {
             var firstParamsMapping = paramsArguments.First();
-            var firstParamsArgument = firstParamsMapping.Argument;
-            var paramsParameter = firstParamsMapping.Parameter;
+            var firstParamsArgument = firstParamsMapping.SyntaxNode;
+            var paramsParameter = firstParamsMapping.Symbol;
 
             if (firstParamsArgument.NameColon != null)
             {
@@ -201,7 +201,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         SyntaxFactory.InitializerExpression(
                             SyntaxKind.ArrayInitializerExpression,
                             SyntaxFactory.SeparatedList(
-                                paramsArguments.Select(arg => arg.Argument.Expression))
+                                paramsArguments.Select(arg => arg.SyntaxNode.Expression))
                             ))));
         }
 

@@ -19,28 +19,31 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.Rules
 {
-    internal class CSharpMethodParameterLookup : AbstractMethodParameterLookup<ArgumentSyntax>
+    public abstract class ParametersCorrectOrderBase<TArgumentSyntax> : SonarDiagnosticAnalyzer
+        where TArgumentSyntax : SyntaxNode
     {
-        public CSharpMethodParameterLookup(InvocationExpressionSyntax invocation, SemanticModel semanticModel) :
-            this(invocation.ArgumentList, semanticModel)
+        protected const string DiagnosticId = "S2234";
+        protected const string MessageFormat = "Parameters to '{0}' have the same names but not the same order as the method arguments.";
+
+        protected class IdentifierArgument
         {
+            public string IdentifierName { get; set; }
+            public TArgumentSyntax ArgumentSyntax { get; set; }
         }
 
-        public CSharpMethodParameterLookup(ArgumentListSyntax argumentList, SemanticModel semanticModel)
-            : base(argumentList.Arguments, semanticModel.GetSymbolInfo(argumentList.Parent).Symbol as IMethodSymbol)
+        protected class PositionalIdentifierArgument : IdentifierArgument
         {
+            public int Position { get; set; }
         }
 
-        public CSharpMethodParameterLookup(ArgumentListSyntax argumentList, IMethodSymbol methodSymbol)
-            : base(argumentList.Arguments, methodSymbol)
+        protected class NamedIdentifierArgument : IdentifierArgument
         {
+            public string DeclaredName { get; set; }
         }
-
-        protected override SyntaxToken? GetNameColonArgumentIdenfitier(ArgumentSyntax argument) =>
-            argument.NameColon?.Name.Identifier;
     }
 }
+
