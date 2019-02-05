@@ -1,0 +1,316 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'frmAbout_Load' has 106 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  39,
+"startColumn":  17,
+"endLine":  39,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Populate_FileList' has 152 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  155,
+"startColumn":  17,
+"endLine":  155,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'FillInfo' has 156 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  595,
+"startColumn":  17,
+"endLine":  595,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'SetInfo' has 103 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1182,
+"startColumn":  17,
+"endLine":  1182,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'LoadInfo' has 101 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  209,
+"startColumn":  17,
+"endLine":  209,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'ShowDialog' has 82 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"region":  {
+"startLine":  36,
+"startColumn":  31,
+"endLine":  36,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'IndentFormat' has 103 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  124,
+"startColumn":  17,
+"endLine":  124,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'FillSettings' has 373 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2173,
+"startColumn":  17,
+"endLine":  2173,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'SaveSettings' has 437 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  3236,
+"startColumn":  17,
+"endLine":  3236,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'SetUp' has 378 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  3702,
+"startColumn":  17,
+"endLine":  3702,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'ClearInfo' has 92 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  206,
+"startColumn":  16,
+"endLine":  206,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'FillList' has 152 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4312,
+"startColumn":  17,
+"endLine":  4312,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'fillScreenInfoWithEpisode' has 134 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4488,
+"startColumn":  17,
+"endLine":  4488,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'fillScreenInfoWithMovie' has 160 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4646,
+"startColumn":  17,
+"endLine":  4646,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'fillScreenInfoWithSeason' has 119 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4840,
+"startColumn":  17,
+"endLine":  4840,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'fillScreenInfoWithShow' has 141 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4983,
+"startColumn":  17,
+"endLine":  4983,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'frmMain_Load' has 396 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5282,
+"startColumn":  17,
+"endLine":  5282,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'MovieInfoDownloaded' has 109 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6354,
+"startColumn":  17,
+"endLine":  6354,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'RefreshMovie' has 134 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6918,
+"startColumn":  22,
+"endLine":  6918,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'RefreshShow' has 92 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7135,
+"startColumn":  22,
+"endLine":  7135,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'SetMenus' has 154 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7719,
+"startColumn":  17,
+"endLine":  7719,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'SettingsShow' has 81 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7917,
+"startColumn":  9,
+"endLine":  7917,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'SetUp' has 331 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8046,
+"startColumn":  17,
+"endLine":  8046,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'TVScraperEvent' has 88 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8752,
+"startColumn":  17,
+"endLine":  8752,
+"endColumn":  31
+}
+}
+}
+]
+}

@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'GetPreferredFAasET' has 81 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  29,
+"startColumn":  23,
+"endLine":  29,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'OK_Button_Click' has 103 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  585,
+"startColumn":  17,
+"endLine":  585,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'Scraper' has 119 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  215,
+"startColumn":  14,
+"endLine":  215,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'MapFields' has 84 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  343,
+"startColumn":  9,
+"endLine":  343,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'PostScraper' has 97 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  433,
+"startColumn":  21,
+"endLine":  433,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'Evaluate' has 85 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  361,
+"startColumn":  49,
+"endLine":  361,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This function 'BlankSerialize' has 162 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  211,
+"startColumn":  36,
+"endLine":  211,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'ParseExpression' has 135 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  129,
+"startColumn":  24,
+"endLine":  129,
+"endColumn":  39
+}
+}
+}
+]
+}

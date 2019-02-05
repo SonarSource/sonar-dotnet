@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'bwCreateHolder_DoWork' has 109 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  100,
+"startColumn":  17,
+"endLine":  100,
+"endColumn":  38
+}
+}
+}
+]
+}

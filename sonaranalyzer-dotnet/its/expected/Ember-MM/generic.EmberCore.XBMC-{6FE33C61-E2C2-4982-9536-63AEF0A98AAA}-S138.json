@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'bwRunUpdate_DoWork' has 97 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  155,
+"startColumn":  14,
+"endLine":  155,
+"endColumn":  32
+}
+}
+}
+]
+}

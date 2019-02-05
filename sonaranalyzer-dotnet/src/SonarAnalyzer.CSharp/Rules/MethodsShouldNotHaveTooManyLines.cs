@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -34,86 +33,60 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class MethodsShouldNotHaveTooManyLines : ParameterLoadingDiagnosticAnalyzer
+    public sealed class MethodsShouldNotHaveTooManyLines
+        : MethodsShouldNotHaveTooManyLinesBase<SyntaxKind, BaseMethodDeclarationSyntax>
     {
-        internal const string DiagnosticId = "S138";
-        private const string MessageFormat = "This {0} has {1} lines, which is greater than the {2} lines authorized. Split it into smaller methods.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
                 isEnabledByDefault: false);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private const int DefaultMaxMethodLines = 80;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
+            Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
-        [RuleParameter("max", PropertyType.Integer, "Maximum authorized lines of code in a method", DefaultMaxMethodLines)]
-        public int Max { get; set; } = DefaultMaxMethodLines;
-
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    if (Max < 2)
-                    {
-                        throw new ArgumentOutOfRangeException(
-                            $"Invalid rule parameter: maximum number of lines = {Max}. Must be at least 2.");
-                    }
-
-                    var baseMethodSyntax = (BaseMethodDeclarationSyntax)c.Node;
-
-                    var identifierLocation = baseMethodSyntax?.FindIdentifierLocation();
-                    if (identifierLocation == null)
-                    {
-                        return;
-                    }
-
-                    var linesCount = GetBodyTokens(baseMethodSyntax)
-                        .SelectMany(token => token.GetLineNumbers())
-                        .Distinct()
-                        .LongCount();
-
-                    if (linesCount > Max)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, identifierLocation,
-                            GetDescription(baseMethodSyntax), linesCount, Max));
-                    }
-                },
+        protected override SyntaxKind[] SyntaxKinds { get; } =
+            new[]
+            {
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration,
-                SyntaxKind.DestructorDeclaration);
-        }
+                SyntaxKind.DestructorDeclaration
+            };
 
-        private static IEnumerable<SyntaxToken> GetBodyTokens(BaseMethodDeclarationSyntax baseMethodSyntax) =>
-            baseMethodSyntax?.ExpressionBody()?.Expression?.DescendantTokens()
-            ?? baseMethodSyntax?.Body?.Statements.SelectMany(s => s.DescendantTokens())
-            ?? Enumerable.Empty<SyntaxToken>();
+        protected override string MethodKeyword { get; } = "methods";
 
-        private static string GetDescription(BaseMethodDeclarationSyntax baseMethodDeclaration)
+        protected override IEnumerable<SyntaxToken> GetMethodTokens(BaseMethodDeclarationSyntax baseMethodDeclaration) =>
+            baseMethodDeclaration.ExpressionBody()?.Expression?.DescendantTokens()
+                ?? baseMethodDeclaration.Body?.Statements.SelectMany(s => s.DescendantTokens())
+                ?? Enumerable.Empty<SyntaxToken>();
+
+        protected override SyntaxToken GetMethodIdentifierToken(BaseMethodDeclarationSyntax baseMethodDeclaration) =>
+            baseMethodDeclaration.GetIdentifierOrDefault();
+
+        protected override string GetMethodKindAndName(SyntaxToken identifierToken)
         {
-            var identifierName = baseMethodDeclaration.GetIdentifierOrDefault()?.ValueText;
-            if (identifierName == null)
+            var identifierName = identifierToken.ValueText;
+            if (string.IsNullOrEmpty(identifierName))
             {
                 return "method";
             }
 
-            if (baseMethodDeclaration is ConstructorDeclarationSyntax)
+            var declaration = identifierToken.Parent;
+            if (declaration.IsKind(SyntaxKind.ConstructorDeclaration))
             {
                 return $"constructor '{identifierName}'";
             }
 
-            if (baseMethodDeclaration is DestructorDeclarationSyntax)
+            if (declaration.IsKind(SyntaxKind.DestructorDeclaration))
             {
                 return $"finalizer '~{identifierName}'";
             }
 
-            if (baseMethodDeclaration is MethodDeclarationSyntax)
+            if (declaration is MethodDeclarationSyntax)
             {
                 return $"method '{identifierName}'";
             }
 
             return "method";
         }
-
     }
 }

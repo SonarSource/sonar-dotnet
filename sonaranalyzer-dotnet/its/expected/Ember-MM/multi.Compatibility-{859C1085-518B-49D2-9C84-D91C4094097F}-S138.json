@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This function 'RunGeneric' has 106 lines, which is greater than the 80 lines authorized. Split it into smaller procedures.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  118,
+"startColumn":  18,
+"endLine":  118,
+"endColumn":  28
+}
+}
+}
+]
+}

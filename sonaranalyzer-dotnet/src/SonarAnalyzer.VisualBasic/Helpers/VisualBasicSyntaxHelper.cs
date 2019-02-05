@@ -196,5 +196,34 @@ namespace SonarAnalyzer.Helpers.VisualBasic
                     return false;
             }
         }
+
+        public static Location FindIdentifierLocation(this MethodBlockBaseSyntax methodBlockBase) =>
+            GetIdentifierOrDefault(methodBlockBase).GetLocation();
+
+        public static SyntaxToken GetIdentifierOrDefault(this MethodBlockBaseSyntax methodBlockBase)
+        {
+            var blockStatement = methodBlockBase.BlockStatement;
+
+            switch (blockStatement.Kind())
+            {
+                case SyntaxKind.SubNewStatement:
+                    var subNewStatement = blockStatement as SubNewStatementSyntax;
+
+                    return subNewStatement != null
+                        ? subNewStatement.NewKeyword
+                        : default(SyntaxToken);
+
+                case SyntaxKind.FunctionStatement:
+                case SyntaxKind.SubStatement:
+                    var methodStatement = blockStatement as MethodStatementSyntax;
+
+                    return methodStatement != null
+                        ? methodStatement.Identifier
+                        : default(SyntaxToken);
+
+                default:
+                    return default(SyntaxToken);
+            }
+        }
     }
 }
