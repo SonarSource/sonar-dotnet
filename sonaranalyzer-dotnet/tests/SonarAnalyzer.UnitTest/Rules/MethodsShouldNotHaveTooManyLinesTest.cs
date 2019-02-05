@@ -53,6 +53,22 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CS.MethodsShouldNotHaveTooManyLines());
         }
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MethodsShouldNotHaveTooManyLines_InvalidSyntax_CS()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+public class Foo
+{
+    public string ()
+    {
+        return ""f"";
+    }
+}",
+                new CS.MethodsShouldNotHaveTooManyLines { Max = 2 },
+                checkMode: CompilationErrorBehavior.Ignore);
+        }
+
         [DataTestMethod]
         [DataRow(1)]
         [DataRow(0)]
