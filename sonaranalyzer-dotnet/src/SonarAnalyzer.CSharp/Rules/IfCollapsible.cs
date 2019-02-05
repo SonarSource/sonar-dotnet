@@ -30,14 +30,10 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class IfCollapsible : SonarDiagnosticAnalyzer
+    public sealed class IfCollapsible : IfCollapsibleBase
     {
-        internal const string DiagnosticId = "S1066";
-        private const string MessageFormat = "Merge this if statement with the enclosing one.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -57,12 +53,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (parentIfStatment != null &&
                         parentIfStatment.Else == null)
                     {
-                        var additionalLocations = new[] { parentIfStatment.IfKeyword.GetLocation() };
-
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(
                             rule,
                             ifStatement.IfKeyword.GetLocation(),
-                            additionalLocations: additionalLocations));
+                            additionalLocations: new[] { parentIfStatment.IfKeyword.GetLocation() }));
                     }
                 },
                 SyntaxKind.IfStatement);

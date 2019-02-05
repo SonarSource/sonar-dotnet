@@ -1,0 +1,16 @@
+<p>Merging collapsible <code>if</code> statements increases the code's readability.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+If condition1 Then
+    If condition2 Then
+        ' ...
+    End If
+End If
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+If condition1 AndAlso condition2 Then
+    ' ...
+End If
+</pre>
+
