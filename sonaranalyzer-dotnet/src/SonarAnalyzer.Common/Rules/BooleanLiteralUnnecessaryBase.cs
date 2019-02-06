@@ -49,6 +49,8 @@ namespace SonarAnalyzer.Rules
         protected abstract TSyntaxKind TrueLiteral { get; }
         protected abstract TSyntaxKind FalseLiteral { get; }
 
+        protected abstract bool IsBooleanLiteral(SyntaxNode node);
+
         protected abstract SyntaxNode Left(TBinaryExpression binaryExpression);
 
         protected abstract SyntaxNode Right(TBinaryExpression binaryExpression);
@@ -56,6 +58,8 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxToken OperatorToken(TBinaryExpression binaryExpression);
 
         protected abstract bool IsKind(SyntaxNode syntaxNode, TSyntaxKind syntaxKind);
+
+        protected abstract SyntaxNode RemoveParantheses(SyntaxNode syntaxNode);
 
         // LogicalAnd (C#) / AndAlso (VB)
         protected void CheckAndExpression(SyntaxNodeAnalysisContext context)
@@ -121,6 +125,34 @@ namespace SonarAnalyzer.Rules
 
             CheckForBooleanConstantOnRightReportOnExtendedLocation(binaryExpression, FalseLiteral, context);
             CheckForBooleanConstantOnRightReportOnNormalLocation(binaryExpression, TrueLiteral, context);
+        }
+
+        protected void CheckTernaryExpressionBranches(SyntaxNodeAnalysisContext context, SyntaxTree ternaryTree, SyntaxNode thenBranch, SyntaxNode elseBranch)
+        {
+            var thenNoParantheses = RemoveParantheses(thenBranch);
+            var elseNoParantheses = RemoveParantheses(elseBranch);
+
+            var thenIsBooleanLiteral = IsBooleanLiteral(thenNoParantheses);
+            var elseIsBooleanLiteral = IsBooleanLiteral(elseNoParantheses);
+
+            var bothSideBool = thenIsBooleanLiteral && elseIsBooleanLiteral;
+            var bothSideTrue = IsKind(thenNoParantheses, TrueLiteral) && IsKind(elseNoParantheses, TrueLiteral);
+            var bothSideFalse = IsKind(thenNoParantheses, FalseLiteral) && IsKind(elseNoParantheses, FalseLiteral);
+
+            if (bothSideBool && !bothSideFalse && !bothSideTrue)
+            {
+                var location = Location.Create(ternaryTree,
+                    new TextSpan(thenBranch.SpanStart, elseBranch.Span.End - thenBranch.SpanStart));
+
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
+            }
+            if (thenIsBooleanLiteral ^ elseIsBooleanLiteral)
+            {
+                // one side is boolean literal, the other is NOT boolean literal
+                var booleanLiteralSide = thenIsBooleanLiteral ? thenBranch : elseBranch;
+
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, booleanLiteralSide.GetLocation()));
+            }
         }
 
         protected bool CheckForNullabilityAndBooleanConstantsReport(TBinaryExpression binaryExpression,

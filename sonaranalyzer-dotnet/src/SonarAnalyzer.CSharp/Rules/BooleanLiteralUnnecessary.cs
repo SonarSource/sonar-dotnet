@@ -23,7 +23,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.CSharp;
@@ -42,6 +41,8 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override SyntaxKind TrueLiteral { get; } = SyntaxKind.TrueLiteralExpression;
         protected override SyntaxKind FalseLiteral { get; } = SyntaxKind.FalseLiteralExpression;
 
+        protected override bool IsBooleanLiteral(SyntaxNode node) => node.IsKind(TrueLiteral) || node.IsKind(FalseLiteral);
+
         protected override SyntaxNode Left(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left.RemoveParentheses();
 
         protected override SyntaxNode Right(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right.RemoveParentheses();
@@ -49,6 +50,8 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override SyntaxToken OperatorToken(BinaryExpressionSyntax binaryExpression) => binaryExpression.OperatorToken;
 
         protected override bool IsKind(SyntaxNode syntaxNode, SyntaxKind syntaxKind) => syntaxNode.IsKind(syntaxKind);
+
+        protected override SyntaxNode RemoveParantheses(SyntaxNode syntaxNode) => syntaxNode.RemoveParentheses();
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -92,50 +95,6 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckConditional(SyntaxNodeAnalysisContext context)
-        {
-            var conditional = (ConditionalExpressionSyntax)context.Node;
-            var typeLeft = context.SemanticModel.GetTypeInfo(conditional.WhenTrue).Type;
-            var typeRight = context.SemanticModel.GetTypeInfo(conditional.WhenFalse).Type;
-            if (ShouldNotReport(typeLeft, typeRight))
-            {
-                return;
-            }
-
-            var whenTrue = conditional.WhenTrue.RemoveParentheses();
-            var whenFalse = conditional.WhenFalse.RemoveParentheses();
-
-            var whenTrueIsTrue = whenTrue.IsKind(SyntaxKind.TrueLiteralExpression);
-            var whenTrueIsFalse = whenTrue.IsKind(SyntaxKind.FalseLiteralExpression);
-            var whenFalseIsTrue = whenFalse.IsKind(SyntaxKind.TrueLiteralExpression);
-            var whenFalseIsFalse = whenFalse.IsKind(SyntaxKind.FalseLiteralExpression);
-
-            var whenTrueIsBooleanConstant = whenTrueIsTrue || whenTrueIsFalse;
-            var whenFalseIsBooleanConstant = whenFalseIsTrue || whenFalseIsFalse;
-
-            if (whenTrueIsBooleanConstant ^ whenFalseIsBooleanConstant)
-            {
-                var side = whenTrueIsBooleanConstant
-                    ? conditional.WhenTrue
-                    : conditional.WhenFalse;
-
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, side.GetLocation()));
-                return;
-            }
-
-            var bothSideBool = whenTrueIsBooleanConstant && whenFalseIsBooleanConstant;
-            var bothSideTrue = whenTrueIsTrue && whenFalseIsTrue;
-            var bothSideFalse = whenTrueIsFalse && whenFalseIsFalse;
-
-            if (bothSideBool && !bothSideFalse && !bothSideTrue)
-            {
-                var location = Location.Create(conditional.SyntaxTree,
-                    new TextSpan(conditional.WhenTrue.SpanStart, conditional.WhenFalse.Span.End - conditional.WhenTrue.SpanStart));
-
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
-            }
-        }
-
         private void CheckLogicalNot(SyntaxNodeAnalysisContext context)
         {
             var logicalNot = (PrefixUnaryExpressionSyntax)context.Node;
@@ -146,6 +105,20 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             bool IsBooleanLiteral(SyntaxNode node) =>
                 node.IsKind(SyntaxKind.TrueLiteralExpression) || node.IsKind(SyntaxKind.FalseLiteralExpression);
+        }
+
+        private void CheckConditional(SyntaxNodeAnalysisContext context)
+        {
+            var conditional = (ConditionalExpressionSyntax)context.Node;
+            var whenTrue = conditional.WhenTrue;
+            var whenFalse = conditional.WhenFalse;
+            var typeLeft = context.SemanticModel.GetTypeInfo(whenTrue).Type;
+            var typeRight = context.SemanticModel.GetTypeInfo(whenFalse).Type;
+            if (ShouldNotReport(typeLeft, typeRight))
+            {
+                return;
+            }
+            CheckTernaryExpressionBranches(context, conditional.SyntaxTree, whenTrue, whenFalse);
         }
     }
 }

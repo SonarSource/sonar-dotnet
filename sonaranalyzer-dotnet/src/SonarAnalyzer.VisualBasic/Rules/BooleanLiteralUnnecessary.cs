@@ -21,7 +21,6 @@
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
@@ -42,6 +41,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override SyntaxKind TrueLiteral { get; } = SyntaxKind.TrueLiteralExpression;
         protected override SyntaxKind FalseLiteral { get; } = SyntaxKind.FalseLiteralExpression;
 
+        protected override bool IsBooleanLiteral(SyntaxNode node) => node.IsKind(TrueLiteral) || node.IsKind(FalseLiteral);
+
         protected override SyntaxNode Left(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left.RemoveParentheses();
 
         protected override SyntaxNode Right(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right.RemoveParentheses();
@@ -49,6 +50,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override SyntaxToken OperatorToken(BinaryExpressionSyntax binaryExpression) => binaryExpression.OperatorToken;
 
         protected override bool IsKind(SyntaxNode syntaxNode, SyntaxKind syntaxKind) => syntaxNode.IsKind(syntaxKind);
+
+        protected override SyntaxNode RemoveParantheses(SyntaxNode syntaxNode) => syntaxNode.RemoveParentheses();
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -85,53 +88,20 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, logicalNot.Operand.GetLocation()));
             }
-            bool IsBooleanLiteral(SyntaxNode node) =>
-                node.IsKind(SyntaxKind.TrueLiteralExpression) || node.IsKind(SyntaxKind.FalseLiteralExpression);
         }
 
         private void CheckConditional(SyntaxNodeAnalysisContext context)
         {
             var conditional = (TernaryConditionalExpressionSyntax)context.Node;
-            var typeLeft = context.SemanticModel.GetTypeInfo(conditional.WhenTrue).Type;
-            var typeRight = context.SemanticModel.GetTypeInfo(conditional.WhenFalse).Type;
+            var whenTrue = conditional.WhenTrue;
+            var whenFalse = conditional.WhenFalse;
+            var typeLeft = context.SemanticModel.GetTypeInfo(whenTrue).Type;
+            var typeRight = context.SemanticModel.GetTypeInfo(whenFalse).Type;
             if (ShouldNotReport(typeLeft, typeRight))
             {
                 return;
             }
-
-            var whenTrue = conditional.WhenTrue.RemoveParentheses();
-            var whenFalse = conditional.WhenFalse.RemoveParentheses();
-
-            var whenTrueIsTrue = whenTrue.IsKind(SyntaxKind.TrueLiteralExpression);
-            var whenTrueIsFalse = whenTrue.IsKind(SyntaxKind.FalseLiteralExpression);
-            var whenFalseIsTrue = whenFalse.IsKind(SyntaxKind.TrueLiteralExpression);
-            var whenFalseIsFalse = whenFalse.IsKind(SyntaxKind.FalseLiteralExpression);
-
-            var whenTrueIsBooleanConstant = whenTrueIsTrue || whenTrueIsFalse;
-            var whenFalseIsBooleanConstant = whenFalseIsTrue || whenFalseIsFalse;
-
-            // only one is boolean constant
-            if (whenTrueIsBooleanConstant ^ whenFalseIsBooleanConstant)
-            {
-                var side = whenTrueIsBooleanConstant
-                    ? conditional.WhenTrue
-                    : conditional.WhenFalse;
-
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, side.GetLocation()));
-                return;
-            }
-
-            var bothSideBool = whenTrueIsBooleanConstant && whenFalseIsBooleanConstant;
-            var bothSideTrue = whenTrueIsTrue && whenFalseIsTrue;
-            var bothSideFalse = whenTrueIsFalse && whenFalseIsFalse;
-
-            if (bothSideBool && !bothSideFalse && !bothSideTrue)
-            {
-                var location = Location.Create(conditional.SyntaxTree,
-                    new TextSpan(conditional.WhenTrue.SpanStart, conditional.WhenFalse.Span.End - conditional.WhenTrue.SpanStart));
-
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
-            }
+            CheckTernaryExpressionBranches(context, conditional.SyntaxTree, whenTrue, whenFalse);
         }
     }
 }
