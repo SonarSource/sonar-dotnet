@@ -228,12 +228,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CheckFileLicense { HeaderFormat = FailingSingleLineRegexHeader, IsRegularExpression = true });
 
             action.Should().Throw<AssertFailedException>()
-                .WithMessage("* error AD0001: Analyzer 'SonarAnalyzer.Rules.CSharp.CheckFileLicense' threw an exception of " +
-                    "type 'System.InvalidOperationException' with message 'Invalid regular expression: ['.} to not have any " +
-                    "items matching (d.Id == \"AD0001\"), but found {error AD0001: Analyzer " +
-                    "'SonarAnalyzer.Rules.CSharp.CheckFileLicense' threw an exception of type " +
-                    "'System.InvalidOperationException' with message 'Invalid regular expression: " +
-                    FailingSingleLineRegexHeader + "'.}.");
+                .WithMessage("*error AD0001:*'SonarAnalyzer.Rules.CSharp.CheckFileLicense'*System.InvalidOperationException*'Invalid regular expression: ['.*");
         }
 
         [TestMethod]
