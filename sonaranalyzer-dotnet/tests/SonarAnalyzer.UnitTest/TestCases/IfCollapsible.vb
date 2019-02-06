@@ -38,6 +38,12 @@ Namespace Tests.TestCases
 '               ^^ Noncompliant [1]
                 End If
             End If
+
+            If cond1 Then
+            ElseIf cond2 Then
+                If cond3 Then
+                End If
+            End If
 		End Sub
     End Class
 End Namespace
