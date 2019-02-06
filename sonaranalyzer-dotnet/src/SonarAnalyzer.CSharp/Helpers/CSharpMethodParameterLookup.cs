@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Helpers
         {
         }
 
-        protected override SyntaxToken? GetNameColonArgumentIdenfitier(ArgumentSyntax argument) =>
+        protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
             argument.NameColon?.Name.Identifier;
     }
 }

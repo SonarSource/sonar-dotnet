@@ -1,7 +1,10 @@
 ﻿Namespace Tests.TestCases
     Class Foo
-        Public Sub Test()
-            'Display("Mary", age:=19, #9/21/1998#)
+        Sub New(ByVal left As Integer, ByVal right As Integer)
+
+        End Sub
+
+        Public Sub Invocations()
             Dim divisor = 15
             Dim dividend = 5
 
@@ -13,6 +16,18 @@
 
             Divide(dividend:=dividend, divisor:= divisor)
 		End Sub
+
+        Public Sub ObjectCreations()
+            Dim left = 1
+            Dim right = 2
+
+            Dim x = New Foo(left, right)
+            x = New Foo(left, left)
+            x = New Foo(right, right)
+            x = New Foo(right:= right, left:= left)
+
+            x = New Foo(right, left) ' Noncompliant
+        End Sub
 
         Sub Display(ByVal name As String, Optional ByVal age As Short = 0, Optional ByVal birth As Date = #1/1/2000#)
         End Sub

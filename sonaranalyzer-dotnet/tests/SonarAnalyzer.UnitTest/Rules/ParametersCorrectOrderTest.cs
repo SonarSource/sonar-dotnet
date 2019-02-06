@@ -57,6 +57,19 @@ public class Foo
             Verifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.vb",
                 new VB.ParametersCorrectOrder());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ParametersCorrectOrder_InvalidCode_VB()
+        {
+            Verifier.VerifyVisualBasicAnalyzer(@"
+Public Class Foo
+    Public Sub Bar()
+        Dim x = New ()
+        Dim y = New System. ()
+    End Sub
+End Class", new VB.ParametersCorrectOrder(), checkMode: CompilationErrorBehavior.Ignore);
+        }
     }
 }
 

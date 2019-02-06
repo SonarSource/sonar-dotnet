@@ -56,48 +56,16 @@ namespace SonarAnalyzer.Rules
                 .Distinct()
                 .ToList();
 
-            var identifierArguments = GetIdentifierArguments(argumentList);
-            var identifierNames = identifierArguments
+            var argumentIdentifiers = argumentList
+                .Select((argument, index) => ConvertToArgumentIdentifier(argument, index))
+                .ToList();
+            var identifierNames = argumentIdentifiers
                 .Select(p => p.IdentifierName)
                 .ToList();
 
-            if (!parameterNames.Intersect(identifierNames).Any())
-            {
-                return;
-            }
-
-            var methodCallHasIssue = false;
-            for (var i = 0; i < identifierArguments.Count; i++)
-            {
-                var identifierArgument = identifierArguments[i];
-                var identifierName = identifierArgument.IdentifierName;
-                var parameter = argumentParameterMappings[identifierArgument.ArgumentSyntax];
-                var parameterName = parameter.Name;
-
-                if (string.IsNullOrEmpty(identifierName) ||
-                    !parameterNames.Contains(identifierName) ||
-                    !IdentifierWithSameNameAndTypeExists(parameter))
-                {
-                    continue;
-                }
-
-                if (identifierArgument is PositionalIdentifierArgument positional &&
-                    (parameter.IsParams || identifierName == parameterName))
-                {
-                    continue;
-                }
-
-                if (identifierArgument is NamedIdentifierArgument named &&
-                    (!identifierNames.Contains(named.DeclaredName) || named.DeclaredName == named.IdentifierName))
-                {
-                    continue;
-                }
-
-                methodCallHasIssue = true;
-                break;
-            }
-
-            if (methodCallHasIssue)
+            if (parameterNames.Intersect(identifierNames).Any() &&
+                HasIncorrectlyOrderedParameters(argumentIdentifiers, argumentParameterMappings, parameterNames, identifierNames,
+                    analysisContext.SemanticModel))
             {
                 var secondaryLocations = methodSymbol.DeclaringSyntaxReferences
                     .Select(s => GetMethodDeclarationIdentifierLocation(s.GetSyntax()))
@@ -107,54 +75,94 @@ namespace SonarAnalyzer.Rules
                     additionalLocations: secondaryLocations,
                     messageArgs: methodSymbol.Name));
             }
+        }
+
+        private bool HasIncorrectlyOrderedParameters(List<ArgumentIdentifier> argumentIdentifiers,
+            Dictionary<TArgumentSyntax, IParameterSymbol> argumentParameterMappings, List<string> parameterNames,
+            List<string> identifierNames, SemanticModel semanticModel)
+        {
+            for (var i = 0; i < argumentIdentifiers.Count; i++)
+            {
+                var argumentIdentifier = argumentIdentifiers[i];
+                var identifierName = argumentIdentifier.IdentifierName;
+                var parameter = argumentParameterMappings[argumentIdentifier.ArgumentSyntax];
+                var parameterName = parameter.Name;
+
+                if (string.IsNullOrEmpty(identifierName) ||
+                    !parameterNames.Contains(identifierName) ||
+                    !IdentifierWithSameNameAndTypeExists(parameter))
+                {
+                    continue;
+                }
+
+                if (argumentIdentifier is PositionalArgumentIdentifier positional &&
+                    (parameter.IsParams || identifierName == parameterName))
+                {
+                    continue;
+                }
+
+                if (argumentIdentifier is NamedArgumentIdentifier named &&
+                    (!identifierNames.Contains(named.DeclaredName) || named.DeclaredName == named.IdentifierName))
+                {
+                    continue;
+                }
+
+                return true;
+            }
+
+            return false;
 
             bool IdentifierWithSameNameAndTypeExists(IParameterSymbol parameter) =>
-                identifierArguments.Any(ia =>
+                argumentIdentifiers.Any(ia =>
                     ia.IdentifierName == parameter.Name &&
-                    GetArgumentTypeSymbolInfo(ia.ArgumentSyntax, analysisContext.SemanticModel).ConvertedType.DerivesOrImplements(parameter.Type));
+                    GetArgumentTypeSymbolInfo(ia.ArgumentSyntax, semanticModel).ConvertedType.DerivesOrImplements(parameter.Type));
         }
 
-        private List<IdentifierArgument> GetIdentifierArguments(SeparatedSyntaxList<TArgumentSyntax> argumentList)
+        private ArgumentIdentifier ConvertToArgumentIdentifier(TArgumentSyntax argument, int index)
         {
-            return argumentList.Select((argument, index) =>
-                {
-                    var identifierName = GetArgumentIdentifier(argument)?.Text;
-                    var nameColonIdentifier = GetNameColonArgumentIdentifier(argument);
+            var identifierName = GetArgumentIdentifier(argument)?.Text;
+            var nameColonIdentifier = GetNameColonArgumentIdentifier(argument);
 
-                    if (nameColonIdentifier == null)
-                    {
-                        return new PositionalIdentifierArgument
-                        {
-                            IdentifierName = identifierName,
-                            Position = index,
-                            ArgumentSyntax = argument
-                        };
-                    }
+            if (nameColonIdentifier == null)
+            {
+                return new PositionalArgumentIdentifier(identifierName, argument, index);
+            }
 
-                    return (IdentifierArgument)new NamedIdentifierArgument
-                    {
-                        IdentifierName = identifierName,
-                        DeclaredName = nameColonIdentifier.Value.Text,
-                        ArgumentSyntax = argument
-                    };
-                })
-                .ToList();
+            return new NamedArgumentIdentifier(identifierName, argument, nameColonIdentifier.Value.Text);
         }
 
-        private class IdentifierArgument
+        private class ArgumentIdentifier
         {
-            public string IdentifierName { get; set; }
-            public TArgumentSyntax ArgumentSyntax { get; set; }
+            public ArgumentIdentifier(string identifierName, TArgumentSyntax argumentSyntax)
+            {
+                IdentifierName = identifierName;
+                ArgumentSyntax = argumentSyntax;
+            }
+
+            public string IdentifierName { get; }
+            public TArgumentSyntax ArgumentSyntax { get; }
         }
 
-        private class PositionalIdentifierArgument : IdentifierArgument
+        private class PositionalArgumentIdentifier : ArgumentIdentifier
         {
-            public int Position { get; set; }
+            public PositionalArgumentIdentifier(string identifierName, TArgumentSyntax argumentSyntax, int position)
+                : base(identifierName, argumentSyntax)
+            {
+                Position = position;
+            }
+
+            public int Position { get; }
         }
 
-        private class NamedIdentifierArgument : IdentifierArgument
+        private class NamedArgumentIdentifier : ArgumentIdentifier
         {
-            public string DeclaredName { get; set; }
+            public NamedArgumentIdentifier(string identifierName, TArgumentSyntax argumentSyntax, string declaredName)
+                : base(identifierName, argumentSyntax)
+            {
+                DeclaredName = declaredName;
+            }
+
+            public string DeclaredName { get; }
         }
     }
 }

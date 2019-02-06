@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Helpers
                 return false;
             }
 
-            var nameColonArgumentIdenfitier = GetNameColonArgumentIdenfitier(argument);
+            var nameColonArgumentIdenfitier = GetNameColonArgumentIdentifier(argument);
             if (nameColonArgumentIdenfitier != null)
             {
                 parameter = MethodSymbol.Parameters
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Helpers
             return true;
         }
 
-        protected abstract SyntaxToken? GetNameColonArgumentIdenfitier(TArgumentSyntax argument);
+        protected abstract SyntaxToken? GetNameColonArgumentIdentifier(TArgumentSyntax argument);
 
         internal IEnumerable<SyntaxNodeSymbolSemanticModelTuple<TArgumentSyntax, IParameterSymbol>> GetAllArgumentParameterMappings()
         {
