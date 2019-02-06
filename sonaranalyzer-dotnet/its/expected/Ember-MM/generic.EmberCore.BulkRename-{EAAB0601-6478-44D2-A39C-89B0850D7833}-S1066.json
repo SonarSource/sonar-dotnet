@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  457,
+"startColumn":  29,
+"endLine":  457,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  456,
+"startColumn":  25,
+"endLine":  456,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  703,
+"startColumn":  21,
+"endLine":  703,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  702,
+"startColumn":  17,
+"endLine":  702,
+"endColumn":  19
+}
+}
+]
+}
+]
+}

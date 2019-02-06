@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  205,
+"startColumn":  45,
+"endLine":  205,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  204,
+"startColumn":  41,
+"endLine":  204,
+"endColumn":  43
+}
+}
+]
+}
+]
+}

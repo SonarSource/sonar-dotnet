@@ -18,30 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules
 {
-    [TestClass]
-    public class IfCollapsibleTest
+    public abstract class IfCollapsibleBase : SonarDiagnosticAnalyzer
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void IfCollapsible_CS()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\IfCollapsible.cs",
-                new CS.IfCollapsible());
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void IfCollapsible_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\IfCollapsible.vb",
-                new VB.IfCollapsible());
-        }
+        protected const string DiagnosticId = "S1066";
+        protected const string MessageFormat = "Merge this if statement with the enclosing one.";
     }
 }
 

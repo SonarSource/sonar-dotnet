@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  119,
+"startColumn":  8,
+"endLine":  119,
+"endColumn":  10
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  118,
+"startColumn":  7,
+"endLine":  118,
+"endColumn":  9
+}
+}
+]
+}
+]
+}

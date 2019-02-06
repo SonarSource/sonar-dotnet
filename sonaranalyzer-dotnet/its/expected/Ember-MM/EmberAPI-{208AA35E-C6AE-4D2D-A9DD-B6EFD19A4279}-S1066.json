@@ -1,0 +1,484 @@
+{
+"issues":  [
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  242,
+"startColumn":  29,
+"endLine":  242,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  241,
+"startColumn":  25,
+"endLine":  241,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  266,
+"startColumn":  33,
+"endLine":  266,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  265,
+"startColumn":  29,
+"endLine":  265,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  279,
+"startColumn":  33,
+"endLine":  279,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  278,
+"startColumn":  29,
+"endLine":  278,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  293,
+"startColumn":  33,
+"endLine":  293,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  292,
+"startColumn":  29,
+"endLine":  292,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  307,
+"startColumn":  33,
+"endLine":  307,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  306,
+"startColumn":  29,
+"endLine":  306,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  321,
+"startColumn":  33,
+"endLine":  321,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  320,
+"startColumn":  29,
+"endLine":  320,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  335,
+"startColumn":  33,
+"endLine":  335,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  334,
+"startColumn":  29,
+"endLine":  334,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  367,
+"startColumn":  29,
+"endLine":  367,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  366,
+"startColumn":  25,
+"endLine":  366,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  249,
+"startColumn":  33,
+"endLine":  249,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  248,
+"startColumn":  29,
+"endLine":  248,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  255,
+"startColumn":  33,
+"endLine":  255,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  254,
+"startColumn":  29,
+"endLine":  254,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  1039,
+"startColumn":  17,
+"endLine":  1039,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  1038,
+"startColumn":  13,
+"endLine":  1038,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  44,
+"startColumn":  17,
+"endLine":  44,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  42,
+"startColumn":  13,
+"endLine":  42,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  276,
+"startColumn":  21,
+"endLine":  276,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  275,
+"startColumn":  17,
+"endLine":  275,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  293,
+"startColumn":  21,
+"endLine":  293,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  292,
+"startColumn":  17,
+"endLine":  292,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  320,
+"startColumn":  21,
+"endLine":  320,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  319,
+"startColumn":  17,
+"endLine":  319,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  332,
+"startColumn":  21,
+"endLine":  332,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  331,
+"startColumn":  17,
+"endLine":  331,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  404,
+"startColumn":  17,
+"endLine":  404,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  403,
+"startColumn":  13,
+"endLine":  403,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  419,
+"startColumn":  17,
+"endLine":  419,
+"endColumn":  19
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  418,
+"startColumn":  13,
+"endLine":  418,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  791,
+"startColumn":  21,
+"endLine":  791,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  790,
+"startColumn":  17,
+"endLine":  790,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  837,
+"startColumn":  25,
+"endLine":  837,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  835,
+"startColumn":  21,
+"endLine":  835,
+"endColumn":  23
+}
+}
+]
+}
+]
+}
