@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  100,
+"startColumn":  82,
+"endLine":  100,
+"endColumn":  86
+}
+}
+}
+]
+}
