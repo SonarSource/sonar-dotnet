@@ -110,10 +110,12 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsInvocationWithExplicitArray(ArgumentListSyntax argumentList, IMethodSymbol invokedMethodSymbol,
             SemanticModel semanticModel)
         {
+            var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, invokedMethodSymbol);
+
             var allParameterMatches = new List<IParameterSymbol>();
             foreach (var argument in argumentList.Arguments)
             {
-                if (!CSharpMethodParameterLookup.TryGetParameterSymbol(argument, argumentList, invokedMethodSymbol, out var parameter))
+                if (!methodParameterLookup.TryGetParameterSymbol(argument, out var parameter))
                 {
                     return false;
                 }
@@ -138,12 +140,14 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool ArgumentsMatchParameters(ArgumentListSyntax argumentList, List<INamedTypeSymbol> argumentTypes,
             IMethodSymbol possibleOtherMethod, SemanticModel semanticModel)
         {
+            var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, possibleOtherMethod);
+
             var matchedParameters = new List<IParameterSymbol>();
             for (var i = 0; i < argumentList.Arguments.Count; i++)
             {
                 var argument = argumentList.Arguments[i];
                 var argumentType = argumentTypes[i];
-                if (!CSharpMethodParameterLookup.TryGetParameterSymbol(argument, argumentList, possibleOtherMethod, out var parameter))
+                if (!methodParameterLookup.TryGetParameterSymbol(argument, out var parameter))
                 {
                     return false;
                 }

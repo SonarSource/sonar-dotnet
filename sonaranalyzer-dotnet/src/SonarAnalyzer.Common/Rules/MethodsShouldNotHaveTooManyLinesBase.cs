@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules
         protected abstract string MethodKeyword { get; }
 
         protected abstract IEnumerable<SyntaxToken> GetMethodTokens(TBaseMethodSyntax baseMethodDeclaration);
-        protected abstract SyntaxToken GetMethodIdentifierToken(TBaseMethodSyntax baseMethodDeclaration);
+        protected abstract SyntaxToken? GetMethodIdentifierToken(TBaseMethodSyntax baseMethodDeclaration);
         protected abstract string GetMethodKindAndName(SyntaxToken identifierToken);
 
         protected sealed override void Initialize(ParameterLoadingAnalysisContext context)
@@ -70,10 +70,10 @@ namespace SonarAnalyzer.Rules
                     {
                         var identifierToken = GetMethodIdentifierToken(baseMethod);
 
-                        if (!string.IsNullOrEmpty(identifierToken.ValueText))
+                        if (!string.IsNullOrEmpty(identifierToken?.ValueText))
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], identifierToken.GetLocation(),
-                                GetMethodKindAndName(identifierToken), linesCount, Max, MethodKeyword));
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], identifierToken.Value.GetLocation(),
+                                GetMethodKindAndName(identifierToken.Value), linesCount, Max, MethodKeyword));
                         }
                     }
                 },

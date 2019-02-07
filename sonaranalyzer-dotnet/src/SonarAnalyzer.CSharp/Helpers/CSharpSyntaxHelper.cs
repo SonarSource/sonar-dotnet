@@ -203,9 +203,9 @@ namespace SonarAnalyzer.Helpers
                 .Any(symbolPredicate);
         }
 
-        public static SyntaxToken GetIdentifierOrDefault(this BaseMethodDeclarationSyntax methodDeclaration)
+        public static SyntaxToken? GetIdentifierOrDefault(this BaseMethodDeclarationSyntax methodDeclaration)
         {
-            switch (methodDeclaration.Kind())
+            switch (methodDeclaration?.Kind())
             {
                 case SyntaxKind.ConstructorDeclaration:
                     return ((ConstructorDeclarationSyntax)methodDeclaration).Identifier;
@@ -217,7 +217,7 @@ namespace SonarAnalyzer.Helpers
                     return ((MethodDeclarationSyntax)methodDeclaration).Identifier;
 
                 default:
-                    return default(SyntaxToken);
+                    return null;
             }
         }
 
@@ -247,10 +247,8 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static Location FindIdentifierLocation(this BaseMethodDeclarationSyntax methodDeclaration)
-        {
-            return GetIdentifierOrDefault(methodDeclaration).GetLocation();
-        }
+        public static Location FindIdentifierLocation(this BaseMethodDeclarationSyntax methodDeclaration) =>
+            GetIdentifierOrDefault(methodDeclaration)?.GetLocation();
 
         public static bool IsCatchingAllExceptions(this CatchClauseSyntax catchClause)
         {

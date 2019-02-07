@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ?? baseMethodDeclaration.Body?.Statements.SelectMany(s => s.DescendantTokens())
                 ?? Enumerable.Empty<SyntaxToken>();
 
-        protected override SyntaxToken GetMethodIdentifierToken(BaseMethodDeclarationSyntax baseMethodDeclaration) =>
+        protected override SyntaxToken? GetMethodIdentifierToken(BaseMethodDeclarationSyntax baseMethodDeclaration) =>
             baseMethodDeclaration.GetIdentifierOrDefault();
 
         protected override string GetMethodKindAndName(SyntaxToken identifierToken)

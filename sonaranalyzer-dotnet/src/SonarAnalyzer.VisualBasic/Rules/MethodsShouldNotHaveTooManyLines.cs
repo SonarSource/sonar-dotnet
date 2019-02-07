@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             baseMethodDeclaration.Statements.SelectMany(s => s.DescendantTokens())
                 ?? Enumerable.Empty<SyntaxToken>();
 
-        protected override SyntaxToken GetMethodIdentifierToken(MethodBlockBaseSyntax baseMethodDeclaration) =>
+        protected override SyntaxToken? GetMethodIdentifierToken(MethodBlockBaseSyntax baseMethodDeclaration) =>
             baseMethodDeclaration.GetIdentifierOrDefault();
 
         protected override string GetMethodKindAndName(SyntaxToken identifierToken)

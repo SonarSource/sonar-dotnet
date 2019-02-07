@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,25 +29,48 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ParametersCorrectOrder()
+        public void ParametersCorrectOrder_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.cs",
-                new ParametersCorrectOrder());
+                new CS.ParametersCorrectOrder());
         }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ParametersCorrectOrder_InvalidCode()
+        public void ParametersCorrectOrder_InvalidCode_CS()
         {
             Verifier.VerifyCSharpAnalyzer(@"
 public class Foo
 {
     public void Bar()
     {
+        new Foo
         new ()
         new System. ()
     }
-}", new ParametersCorrectOrder(), checkMode: CompilationErrorBehavior.Ignore);
+}", new CS.ParametersCorrectOrder(), checkMode: CompilationErrorBehavior.Ignore);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ParametersCorrectOrder_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.vb",
+                new VB.ParametersCorrectOrder());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ParametersCorrectOrder_InvalidCode_VB()
+        {
+            Verifier.VerifyVisualBasicAnalyzer(@"
+Public Class Foo
+    Public Sub Bar()
+        Dim x = New ()
+        Dim y = New System. ()
+    End Sub
+End Class", new VB.ParametersCorrectOrder(), checkMode: CompilationErrorBehavior.Ignore);
         }
     }
 }
+

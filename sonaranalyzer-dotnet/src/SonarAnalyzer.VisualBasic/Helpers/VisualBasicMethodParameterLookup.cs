@@ -1,4 +1,5 @@
-﻿/*
+﻿
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -19,28 +20,18 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal class CSharpMethodParameterLookup : AbstractMethodParameterLookup<ArgumentSyntax>
+    internal class VisualBasicMethodParameterLookup : AbstractMethodParameterLookup<ArgumentSyntax>
     {
-        public CSharpMethodParameterLookup(InvocationExpressionSyntax invocation, SemanticModel semanticModel) :
-            this(invocation.ArgumentList, semanticModel)
-        {
-        }
-
-        public CSharpMethodParameterLookup(ArgumentListSyntax argumentList, SemanticModel semanticModel)
+        public VisualBasicMethodParameterLookup(ArgumentListSyntax argumentList, SemanticModel semanticModel)
             : base(argumentList.Arguments, semanticModel.GetSymbolInfo(argumentList.Parent).Symbol as IMethodSymbol)
         {
         }
 
-        public CSharpMethodParameterLookup(ArgumentListSyntax argumentList, IMethodSymbol methodSymbol)
-            : base(argumentList.Arguments, methodSymbol)
-        {
-        }
-
         protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
-            argument.NameColon?.Name.Identifier;
+            (argument as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier;
     }
 }
