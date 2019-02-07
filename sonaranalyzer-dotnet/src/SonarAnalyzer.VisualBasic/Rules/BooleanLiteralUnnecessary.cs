@@ -37,21 +37,20 @@ namespace SonarAnalyzer.Rules.VisualBasic
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-        protected override DiagnosticDescriptor Rule { get; } = rule;
         protected override SyntaxKind TrueLiteral { get; } = SyntaxKind.TrueLiteralExpression;
         protected override SyntaxKind FalseLiteral { get; } = SyntaxKind.FalseLiteralExpression;
 
         protected override bool IsBooleanLiteral(SyntaxNode node) => node.IsKind(TrueLiteral) || node.IsKind(FalseLiteral);
 
-        protected override SyntaxNode Left(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left.RemoveParentheses();
+        protected override SyntaxNode GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left.RemoveParentheses();
 
-        protected override SyntaxNode Right(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right.RemoveParentheses();
+        protected override SyntaxNode GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right.RemoveParentheses();
 
-        protected override SyntaxToken OperatorToken(BinaryExpressionSyntax binaryExpression) => binaryExpression.OperatorToken;
+        protected override SyntaxToken GetOperatorToken(BinaryExpressionSyntax binaryExpression) => binaryExpression.OperatorToken;
 
         protected override bool IsKind(SyntaxNode syntaxNode, SyntaxKind syntaxKind) => syntaxNode.IsKind(syntaxKind);
 
-        protected override SyntaxNode RemoveParantheses(SyntaxNode syntaxNode) => syntaxNode.RemoveParentheses();
+        protected override SyntaxNode RemoveParentheses(SyntaxNode syntaxNode) => syntaxNode.RemoveParentheses();
 
         protected override void Initialize(SonarAnalysisContext context)
         {

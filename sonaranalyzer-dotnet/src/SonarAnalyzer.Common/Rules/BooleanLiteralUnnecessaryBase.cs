@@ -29,37 +29,23 @@ namespace SonarAnalyzer.Rules
         where TBinaryExpression : SyntaxNode
         where TSyntaxKind : struct
     {
-        protected enum ErrorLocation
-        {
-            // The BooleanLiteral node is highlighted
-            Normal,
-
-            // The BooleanLiteral node and the preceding operator are highlighted together
-            Extended,
-
-            // Inside a binary expression, the non-boolean literal is highlighted
-            // e.g. for 'a && True', 'a' will be highlighted
-            Inverted
-        }
-
-        protected internal const string DiagnosticId = "S1125";
+        internal const string DiagnosticId = "S1125";
         protected const string MessageFormat = "Remove the unnecessary Boolean literal(s).";
 
-        protected abstract DiagnosticDescriptor Rule { get; }
         protected abstract TSyntaxKind TrueLiteral { get; }
         protected abstract TSyntaxKind FalseLiteral { get; }
 
         protected abstract bool IsBooleanLiteral(SyntaxNode node);
 
-        protected abstract SyntaxNode Left(TBinaryExpression binaryExpression);
+        protected abstract SyntaxNode GetLeftNode(TBinaryExpression binaryExpression);
 
-        protected abstract SyntaxNode Right(TBinaryExpression binaryExpression);
+        protected abstract SyntaxNode GetRightNode(TBinaryExpression binaryExpression);
 
-        protected abstract SyntaxToken OperatorToken(TBinaryExpression binaryExpression);
+        protected abstract SyntaxToken GetOperatorToken(TBinaryExpression binaryExpression);
 
         protected abstract bool IsKind(SyntaxNode syntaxNode, TSyntaxKind syntaxKind);
 
-        protected abstract SyntaxNode RemoveParantheses(SyntaxNode syntaxNode);
+        protected abstract SyntaxNode RemoveParentheses(SyntaxNode syntaxNode);
 
         // LogicalAnd (C#) / AndAlso (VB)
         protected void CheckAndExpression(SyntaxNodeAnalysisContext context)
@@ -70,13 +56,17 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            // When we have 'foo() && true', 'true' is the redundant part
-            CheckForBooleanConstantOnLeftReportOnExtendedLocation(binaryExpression, TrueLiteral, context);
-            CheckForBooleanConstantOnRightReportOnExtendedLocation(binaryExpression, TrueLiteral, context);
+            // When we have 'EXPR And True', the true literal is the redundant part
+            CheckForBooleanConstantOnLeft(binaryExpression, TrueLiteral,
+                ErrorLocation.BoolLiteralAndOperator, context);
+            CheckForBooleanConstantOnRight(binaryExpression, TrueLiteral,
+                ErrorLocation.BoolLiteralAndOperator, context);
 
-            // When we have 'foo() && false', 'foo()' is the redundant part
-            CheckForBooleanConstantOnLeftReportOnInvertedLocation(binaryExpression, FalseLiteral, context);
-            CheckForBooleanConstantOnRightReportOnInvertedLocation(binaryExpression, FalseLiteral, context);
+            // 'EXPR And False' is always False, thus EXPR is the redundant part
+            CheckForBooleanConstantOnLeft(binaryExpression, FalseLiteral,
+                ErrorLocation.NonBoolLiteralExpression, context);
+            CheckForBooleanConstantOnRight(binaryExpression, FalseLiteral,
+                ErrorLocation.NonBoolLiteralExpression, context);
         }
 
         // LogicalOr (C#) / OrElse (VB)
@@ -88,13 +78,17 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            // When we have 'foo() || false', 'false' is the redundant part
-            CheckForBooleanConstantOnLeftReportOnExtendedLocation(binaryExpression, FalseLiteral, context);
-            CheckForBooleanConstantOnRightReportOnExtendedLocation(binaryExpression, FalseLiteral, context);
+            // When we have 'EXPR Or False', the false literal is the redundant part
+            CheckForBooleanConstantOnLeft(binaryExpression, FalseLiteral,
+                ErrorLocation.BoolLiteralAndOperator, context);
+            CheckForBooleanConstantOnRight(binaryExpression, FalseLiteral,
+                ErrorLocation.BoolLiteralAndOperator, context);
 
-            // When we have 'foo() || true', 'foo()' is the redundant part
-            CheckForBooleanConstantOnLeftReportOnInvertedLocation(binaryExpression, TrueLiteral, context);
-            CheckForBooleanConstantOnRightReportOnInvertedLocation(binaryExpression, TrueLiteral, context);
+            // 'EXPR Or True' is always True, thus EXPR is the redundant part
+            CheckForBooleanConstantOnLeft(binaryExpression, TrueLiteral,
+                ErrorLocation.NonBoolLiteralExpression, context);
+            CheckForBooleanConstantOnRight(binaryExpression, TrueLiteral,
+                ErrorLocation.NonBoolLiteralExpression, context);
         }
 
         protected void CheckEquals(SyntaxNodeAnalysisContext context)
@@ -105,11 +99,15 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            CheckForBooleanConstantOnLeftReportOnExtendedLocation(binaryExpression, TrueLiteral, context);
-            CheckForBooleanConstantOnLeftReportOnNormalLocation(binaryExpression, FalseLiteral, context);
+            CheckForBooleanConstantOnLeft(binaryExpression, TrueLiteral,
+                ErrorLocation.BoolLiteralAndOperator, context);
+            CheckForBooleanConstantOnLeft(binaryExpression, FalseLiteral,
+                ErrorLocation.BoolLiteral, context);
 
-            CheckForBooleanConstantOnRightReportOnExtendedLocation(binaryExpression, TrueLiteral, context);
-            CheckForBooleanConstantOnRightReportOnNormalLocation(binaryExpression, FalseLiteral, context);
+            CheckForBooleanConstantOnRight(binaryExpression, TrueLiteral,
+                ErrorLocation.BoolLiteralAndOperator, context);
+            CheckForBooleanConstantOnRight(binaryExpression, FalseLiteral,
+                ErrorLocation.BoolLiteral, context);
         }
 
         protected void CheckNotEquals(SyntaxNodeAnalysisContext context)
@@ -120,17 +118,22 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            CheckForBooleanConstantOnLeftReportOnExtendedLocation(binaryExpression, FalseLiteral, context);
-            CheckForBooleanConstantOnLeftReportOnNormalLocation(binaryExpression, TrueLiteral, context);
+            CheckForBooleanConstantOnLeft(binaryExpression, FalseLiteral,
+                ErrorLocation.BoolLiteralAndOperator, context);
+            CheckForBooleanConstantOnLeft(binaryExpression, TrueLiteral,
+                ErrorLocation.BoolLiteral, context);
 
-            CheckForBooleanConstantOnRightReportOnExtendedLocation(binaryExpression, FalseLiteral, context);
-            CheckForBooleanConstantOnRightReportOnNormalLocation(binaryExpression, TrueLiteral, context);
+            CheckForBooleanConstantOnRight(binaryExpression, FalseLiteral,
+                ErrorLocation.BoolLiteralAndOperator, context);
+            CheckForBooleanConstantOnRight(binaryExpression, TrueLiteral,
+                ErrorLocation.BoolLiteral, context);
         }
 
-        protected void CheckTernaryExpressionBranches(SyntaxNodeAnalysisContext context, SyntaxTree ternaryTree, SyntaxNode thenBranch, SyntaxNode elseBranch)
+        protected void CheckTernaryExpressionBranches(SyntaxNodeAnalysisContext context,
+            SyntaxTree ternaryTree, SyntaxNode thenBranch, SyntaxNode elseBranch)
         {
-            var thenNoParantheses = RemoveParantheses(thenBranch);
-            var elseNoParantheses = RemoveParantheses(elseBranch);
+            var thenNoParantheses = RemoveParentheses(thenBranch);
+            var elseNoParantheses = RemoveParentheses(elseBranch);
 
             var thenIsBooleanLiteral = IsBooleanLiteral(thenNoParantheses);
             var elseIsBooleanLiteral = IsBooleanLiteral(elseNoParantheses);
@@ -144,22 +147,22 @@ namespace SonarAnalyzer.Rules
                 var location = Location.Create(ternaryTree,
                     new TextSpan(thenBranch.SpanStart, elseBranch.Span.End - thenBranch.SpanStart));
 
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], location));
             }
             if (thenIsBooleanLiteral ^ elseIsBooleanLiteral)
             {
                 // one side is boolean literal, the other is NOT boolean literal
                 var booleanLiteralSide = thenIsBooleanLiteral ? thenBranch : elseBranch;
 
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, booleanLiteralSide.GetLocation()));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], booleanLiteralSide.GetLocation()));
             }
         }
 
         protected bool CheckForNullabilityAndBooleanConstantsReport(TBinaryExpression binaryExpression,
             SyntaxNodeAnalysisContext context, bool reportOnTrue)
         {
-            var binaryExpressionLeft = Left(binaryExpression);
-            var binaryExpressionRight = Right(binaryExpression);
+            var binaryExpressionLeft = GetLeftNode(binaryExpression);
+            var binaryExpressionRight = GetRightNode(binaryExpression);
 
             var typeLeft = context.SemanticModel.GetTypeInfo(binaryExpressionLeft).Type;
             var typeRight = context.SemanticModel.GetTypeInfo(binaryExpressionRight).Type;
@@ -183,19 +186,17 @@ namespace SonarAnalyzer.Rules
                     ? CalculateExtendedLocation(binaryExpression, false)
                     : CalculateExtendedLocation(binaryExpression, reportOnTrue == leftIsTrue);
 
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, errorLocation));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], errorLocation));
                 return true;
             }
             return false;
         }
 
-        protected static bool ShouldNotReport(ITypeSymbol typeLeft, ITypeSymbol typeRight)
-        {
-            return typeLeft == null
+        protected static bool ShouldNotReport(ITypeSymbol typeLeft, ITypeSymbol typeRight) =>
+            typeLeft == null
                 || typeRight == null
                 || IsNullableBoolean(typeLeft)
                 || IsNullableBoolean(typeRight);
-        }
 
         protected static bool IsNullableBoolean(ITypeSymbol type) =>
             type is INamedTypeSymbol namedType &&
@@ -203,84 +204,69 @@ namespace SonarAnalyzer.Rules
             namedType.TypeArguments.Length == 1 &&
             namedType.TypeArguments[0].Is(KnownType.System_Boolean);
 
-        protected void CheckForBooleanConstantOnLeftReportOnExtendedLocation(TBinaryExpression binaryExpression,
-            TSyntaxKind booleanSyntaxKind, SyntaxNodeAnalysisContext context)
-        {
-            CheckForBooleanConstant(binaryExpression, booleanSyntaxKind, ErrorLocation.Extended, context, leftSide: true);
-        }
+        protected void CheckForBooleanConstantOnLeft(TBinaryExpression binaryExpression,
+            TSyntaxKind booleanSyntaxKind, ErrorLocation errorLocation, SyntaxNodeAnalysisContext context) =>
+            CheckForBooleanConstant(binaryExpression, booleanSyntaxKind, errorLocation, context, isLeftSide: true);
 
-        protected void CheckForBooleanConstantOnRightReportOnExtendedLocation(TBinaryExpression binaryExpression,
-            TSyntaxKind booleanSyntaxKind, SyntaxNodeAnalysisContext context)
-        {
-            CheckForBooleanConstant(binaryExpression, booleanSyntaxKind, ErrorLocation.Extended, context, leftSide: false);
-        }
-
-        protected void CheckForBooleanConstantOnLeftReportOnInvertedLocation(TBinaryExpression binaryExpression,
-            TSyntaxKind booleanSyntaxKind, SyntaxNodeAnalysisContext context)
-        {
-            CheckForBooleanConstant(binaryExpression, booleanSyntaxKind, ErrorLocation.Inverted, context, leftSide: true);
-        }
-
-        protected void CheckForBooleanConstantOnRightReportOnInvertedLocation(TBinaryExpression binaryExpression,
-            TSyntaxKind booleanSyntaxKind, SyntaxNodeAnalysisContext context)
-        {
-            CheckForBooleanConstant(binaryExpression, booleanSyntaxKind, ErrorLocation.Inverted, context, leftSide: false);
-        }
-
-        protected void CheckForBooleanConstantOnLeftReportOnNormalLocation(TBinaryExpression binaryExpression,
-            TSyntaxKind booleanSyntaxKind, SyntaxNodeAnalysisContext context)
-        {
-            CheckForBooleanConstant(binaryExpression, booleanSyntaxKind, ErrorLocation.Normal, context, leftSide: true);
-        }
-
-        protected void CheckForBooleanConstantOnRightReportOnNormalLocation(TBinaryExpression binaryExpression,
-            TSyntaxKind booleanSyntaxKind, SyntaxNodeAnalysisContext context)
-        {
-            CheckForBooleanConstant(binaryExpression, booleanSyntaxKind, ErrorLocation.Normal, context, leftSide: false);
-        }
+        protected void CheckForBooleanConstantOnRight(TBinaryExpression binaryExpression,
+            TSyntaxKind booleanSyntaxKind, ErrorLocation errorLocation, SyntaxNodeAnalysisContext context) =>
+            CheckForBooleanConstant(binaryExpression, booleanSyntaxKind, errorLocation, context, isLeftSide: false);
 
         protected void CheckForBooleanConstant(TBinaryExpression binaryExpression, TSyntaxKind booleanSyntaxKind,
-            ErrorLocation errorLocation, SyntaxNodeAnalysisContext context, bool leftSide)
+            ErrorLocation errorLocation, SyntaxNodeAnalysisContext context, bool isLeftSide)
         {
-            var expression = leftSide ? Left(binaryExpression) : Right(binaryExpression);
+            var expression = isLeftSide
+                ? GetLeftNode(binaryExpression)
+                : GetRightNode(binaryExpression);
 
             if (!IsKind(expression, booleanSyntaxKind))
             {
                 return;
             }
 
-            Location location;
-            switch (errorLocation)
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], GetLocation()));
+
+            Location GetLocation()
             {
-                case ErrorLocation.Normal:
-                    location = expression.GetLocation();
-                    break;
+                switch (errorLocation)
+                {
+                    case ErrorLocation.BoolLiteral:
+                        return expression.GetLocation();
 
-                case ErrorLocation.Extended:
-                    location = CalculateExtendedLocation(binaryExpression, leftSide);
-                    break;
+                    case ErrorLocation.BoolLiteralAndOperator:
+                        return CalculateExtendedLocation(binaryExpression, isLeftSide);
 
-                case ErrorLocation.Inverted:
-                    location = CalculateExtendedLocation(binaryExpression, !leftSide);
-                    break;
+                    case ErrorLocation.NonBoolLiteralExpression:
+                        return CalculateExtendedLocation(binaryExpression, !isLeftSide);
 
-                default:
-                    location = null;
-                    break;
+                    default:
+                        return null;
+                }
             }
-
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
         }
 
-        protected Location CalculateExtendedLocation(TBinaryExpression binaryExpression, bool leftSide)
+        protected Location CalculateExtendedLocation(TBinaryExpression binaryExpression, bool isLeftSide)
         {
-            return leftSide
+            return isLeftSide
                 ? Location.Create(binaryExpression.SyntaxTree,
                         new TextSpan(binaryExpression.SpanStart,
-                            OperatorToken(binaryExpression).Span.End - binaryExpression.SpanStart))
+                            GetOperatorToken(binaryExpression).Span.End - binaryExpression.SpanStart))
                 : Location.Create(binaryExpression.SyntaxTree,
-                        new TextSpan(OperatorToken(binaryExpression).SpanStart,
-                            binaryExpression.Span.End - OperatorToken(binaryExpression).SpanStart));
+                        new TextSpan(GetOperatorToken(binaryExpression).SpanStart,
+                            binaryExpression.Span.End - GetOperatorToken(binaryExpression).SpanStart));
+        }
+
+        protected enum ErrorLocation
+        {
+            // The BooleanLiteral node is highlighted
+            BoolLiteral,
+
+            // The BooleanLiteral node and the operator are highlighted together
+            BoolLiteralAndOperator,
+
+            // Inside a binary expression, the expression that is not a boolean literal is highlighted
+            // e.g. for 'foo() && True', 'foo()' will be highlighted
+            NonBoolLiteralExpression
         }
     }
 }

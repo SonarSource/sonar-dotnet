@@ -25,7 +25,9 @@ Public Class BooleanLiteralUnnecessary
     z = False AndAlso True ' Noncompliant
     z = True AndAlso False ' Noncompliant
     z = False = True ' Noncompliant
+'             ^^^^^^
     z = True = False ' Noncompliant
+'       ^^^^^^
     z = False <> True ' Noncompliant
     z = True <> False ' Noncompliant
     Dim x = Not True ' Noncompliant
@@ -41,9 +43,12 @@ Public Class BooleanLiteralUnnecessary
     x = a <> False ' Noncompliant
     x = a <> True ' Noncompliant
     x = False = a ' Noncompliant
+'       ^^^^^
     x = True = a ' Noncompliant
     x = False <> a ' Noncompliant
+'       ^^^^^^^^
     x = True <> a ' Noncompliant
+'       ^^^^
     x = False AndAlso Foo() ' Noncompliant
 '             ^^^^^^^^^^^^^
     x = Foo() AndAlso False ' Noncompliant
