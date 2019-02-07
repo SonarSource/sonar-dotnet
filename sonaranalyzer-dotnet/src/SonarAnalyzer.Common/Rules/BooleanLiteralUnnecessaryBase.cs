@@ -25,15 +25,13 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class BooleanLiteralUnnecessaryBase<TBinaryExpression, TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class BooleanLiteralUnnecessaryBase<TBinaryExpression> : SonarDiagnosticAnalyzer
         where TBinaryExpression : SyntaxNode
-        where TSyntaxKind : struct
     {
         internal const string DiagnosticId = "S1125";
         protected const string MessageFormat = "Remove the unnecessary Boolean literal(s).";
 
-        protected abstract TSyntaxKind TrueLiteral { get; }
-        protected abstract TSyntaxKind FalseLiteral { get; }
+        protected delegate bool IsBooleanLiteralKind(SyntaxNode node);
 
         protected abstract bool IsBooleanLiteral(SyntaxNode node);
 
@@ -43,7 +41,9 @@ namespace SonarAnalyzer.Rules
 
         protected abstract SyntaxToken GetOperatorToken(TBinaryExpression binaryExpression);
 
-        protected abstract bool IsKind(SyntaxNode syntaxNode, TSyntaxKind syntaxKind);
+        protected abstract bool IsTrueLiteralKind(SyntaxNode syntaxNode);
+
+        protected abstract bool IsFalseLiteralKind(SyntaxNode syntaxNode);
 
         protected abstract SyntaxNode RemoveParentheses(SyntaxNode syntaxNode);
 
@@ -57,15 +57,15 @@ namespace SonarAnalyzer.Rules
             }
 
             // When we have 'EXPR And True', the true literal is the redundant part
-            CheckForBooleanConstantOnLeft(binaryExpression, TrueLiteral,
+            CheckForBooleanConstantOnLeft(binaryExpression, IsTrueLiteralKind,
                 ErrorLocation.BoolLiteralAndOperator, context);
-            CheckForBooleanConstantOnRight(binaryExpression, TrueLiteral,
+            CheckForBooleanConstantOnRight(binaryExpression, IsTrueLiteralKind,
                 ErrorLocation.BoolLiteralAndOperator, context);
 
             // 'EXPR And False' is always False, thus EXPR is the redundant part
-            CheckForBooleanConstantOnLeft(binaryExpression, FalseLiteral,
+            CheckForBooleanConstantOnLeft(binaryExpression, IsFalseLiteralKind,
                 ErrorLocation.NonBoolLiteralExpression, context);
-            CheckForBooleanConstantOnRight(binaryExpression, FalseLiteral,
+            CheckForBooleanConstantOnRight(binaryExpression, IsFalseLiteralKind,
                 ErrorLocation.NonBoolLiteralExpression, context);
         }
 
@@ -79,15 +79,15 @@ namespace SonarAnalyzer.Rules
             }
 
             // When we have 'EXPR Or False', the false literal is the redundant part
-            CheckForBooleanConstantOnLeft(binaryExpression, FalseLiteral,
+            CheckForBooleanConstantOnLeft(binaryExpression, IsFalseLiteralKind,
                 ErrorLocation.BoolLiteralAndOperator, context);
-            CheckForBooleanConstantOnRight(binaryExpression, FalseLiteral,
+            CheckForBooleanConstantOnRight(binaryExpression, IsFalseLiteralKind,
                 ErrorLocation.BoolLiteralAndOperator, context);
 
             // 'EXPR Or True' is always True, thus EXPR is the redundant part
-            CheckForBooleanConstantOnLeft(binaryExpression, TrueLiteral,
+            CheckForBooleanConstantOnLeft(binaryExpression, IsTrueLiteralKind,
                 ErrorLocation.NonBoolLiteralExpression, context);
-            CheckForBooleanConstantOnRight(binaryExpression, TrueLiteral,
+            CheckForBooleanConstantOnRight(binaryExpression, IsTrueLiteralKind,
                 ErrorLocation.NonBoolLiteralExpression, context);
         }
 
@@ -99,14 +99,14 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            CheckForBooleanConstantOnLeft(binaryExpression, TrueLiteral,
+            CheckForBooleanConstantOnLeft(binaryExpression, IsTrueLiteralKind,
                 ErrorLocation.BoolLiteralAndOperator, context);
-            CheckForBooleanConstantOnLeft(binaryExpression, FalseLiteral,
+            CheckForBooleanConstantOnLeft(binaryExpression, IsFalseLiteralKind,
                 ErrorLocation.BoolLiteral, context);
 
-            CheckForBooleanConstantOnRight(binaryExpression, TrueLiteral,
+            CheckForBooleanConstantOnRight(binaryExpression, IsTrueLiteralKind,
                 ErrorLocation.BoolLiteralAndOperator, context);
-            CheckForBooleanConstantOnRight(binaryExpression, FalseLiteral,
+            CheckForBooleanConstantOnRight(binaryExpression, IsFalseLiteralKind,
                 ErrorLocation.BoolLiteral, context);
         }
 
@@ -118,14 +118,14 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            CheckForBooleanConstantOnLeft(binaryExpression, FalseLiteral,
+            CheckForBooleanConstantOnLeft(binaryExpression, IsFalseLiteralKind,
                 ErrorLocation.BoolLiteralAndOperator, context);
-            CheckForBooleanConstantOnLeft(binaryExpression, TrueLiteral,
+            CheckForBooleanConstantOnLeft(binaryExpression, IsTrueLiteralKind,
                 ErrorLocation.BoolLiteral, context);
 
-            CheckForBooleanConstantOnRight(binaryExpression, FalseLiteral,
+            CheckForBooleanConstantOnRight(binaryExpression, IsFalseLiteralKind,
                 ErrorLocation.BoolLiteralAndOperator, context);
-            CheckForBooleanConstantOnRight(binaryExpression, TrueLiteral,
+            CheckForBooleanConstantOnRight(binaryExpression, IsTrueLiteralKind,
                 ErrorLocation.BoolLiteral, context);
         }
 
@@ -139,8 +139,8 @@ namespace SonarAnalyzer.Rules
             var elseIsBooleanLiteral = IsBooleanLiteral(elseNoParantheses);
 
             var bothSideBool = thenIsBooleanLiteral && elseIsBooleanLiteral;
-            var bothSideTrue = IsKind(thenNoParantheses, TrueLiteral) && IsKind(elseNoParantheses, TrueLiteral);
-            var bothSideFalse = IsKind(thenNoParantheses, FalseLiteral) && IsKind(elseNoParantheses, FalseLiteral);
+            var bothSideTrue = IsTrueLiteralKind(thenNoParantheses) && IsTrueLiteralKind(elseNoParantheses);
+            var bothSideFalse = IsFalseLiteralKind(thenNoParantheses) && IsFalseLiteralKind(elseNoParantheses);
 
             if (bothSideBool && !bothSideFalse && !bothSideTrue)
             {
@@ -171,10 +171,10 @@ namespace SonarAnalyzer.Rules
                 return true;
             }
 
-            var leftIsTrue = IsKind(binaryExpressionLeft, TrueLiteral);
-            var leftIsFalse = IsKind(binaryExpressionLeft, FalseLiteral);
-            var rightIsTrue = IsKind(binaryExpressionRight, TrueLiteral);
-            var rightIsFalse = IsKind(binaryExpressionRight, FalseLiteral);
+            var leftIsTrue = IsTrueLiteralKind(binaryExpressionLeft);
+            var leftIsFalse = IsFalseLiteralKind(binaryExpressionLeft);
+            var rightIsTrue = IsTrueLiteralKind(binaryExpressionRight);
+            var rightIsFalse = IsFalseLiteralKind(binaryExpressionRight);
 
             var leftIsBoolean = leftIsTrue || leftIsFalse;
             var rightIsBoolean = rightIsTrue || rightIsFalse;
@@ -193,21 +193,21 @@ namespace SonarAnalyzer.Rules
         }
 
         protected void CheckForBooleanConstantOnLeft(TBinaryExpression binaryExpression,
-            TSyntaxKind booleanSyntaxKind, ErrorLocation errorLocation, SyntaxNodeAnalysisContext context) =>
-            CheckForBooleanConstant(binaryExpression, booleanSyntaxKind, errorLocation, context, isLeftSide: true);
+            IsBooleanLiteralKind isBooleanLiteralKind, ErrorLocation errorLocation, SyntaxNodeAnalysisContext context) =>
+            CheckForBooleanConstant(binaryExpression, isBooleanLiteralKind, errorLocation, context, isLeftSide: true);
 
         protected void CheckForBooleanConstantOnRight(TBinaryExpression binaryExpression,
-            TSyntaxKind booleanSyntaxKind, ErrorLocation errorLocation, SyntaxNodeAnalysisContext context) =>
-            CheckForBooleanConstant(binaryExpression, booleanSyntaxKind, errorLocation, context, isLeftSide: false);
+            IsBooleanLiteralKind isBooleanLiteralKind, ErrorLocation errorLocation, SyntaxNodeAnalysisContext context) =>
+            CheckForBooleanConstant(binaryExpression, isBooleanLiteralKind, errorLocation, context, isLeftSide: false);
 
-        protected void CheckForBooleanConstant(TBinaryExpression binaryExpression, TSyntaxKind booleanSyntaxKind,
+        protected void CheckForBooleanConstant(TBinaryExpression binaryExpression, IsBooleanLiteralKind isBooleanLiteralKind,
             ErrorLocation errorLocation, SyntaxNodeAnalysisContext context, bool isLeftSide)
         {
             var expression = isLeftSide
                 ? RemoveParentheses(GetLeftNode(binaryExpression))
                 : RemoveParentheses(GetRightNode(binaryExpression));
 
-            if (!IsKind(expression, booleanSyntaxKind))
+            if (!isBooleanLiteralKind(expression))
             {
                 return;
             }
