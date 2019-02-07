@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules
                 .ToList();
 
             var argumentIdentifiers = argumentList
-                .Select((argument, index) => ConvertToArgumentIdentifier(argument, index))
+                .Select(argument => ConvertToArgumentIdentifier(argument))
                 .ToList();
             var identifierNames = argumentIdentifiers
                 .Select(p => p.IdentifierName)
@@ -118,14 +118,14 @@ namespace SonarAnalyzer.Rules
                     GetArgumentTypeSymbolInfo(ia.ArgumentSyntax, semanticModel).ConvertedType.DerivesOrImplements(parameter.Type));
         }
 
-        private ArgumentIdentifier ConvertToArgumentIdentifier(TArgumentSyntax argument, int index)
+        private ArgumentIdentifier ConvertToArgumentIdentifier(TArgumentSyntax argument)
         {
             var identifierName = GetArgumentIdentifier(argument)?.Text;
             var nameColonIdentifier = GetNameColonArgumentIdentifier(argument);
 
             if (nameColonIdentifier == null)
             {
-                return new PositionalArgumentIdentifier(identifierName, argument, index);
+                return new PositionalArgumentIdentifier(identifierName, argument);
             }
 
             return new NamedArgumentIdentifier(identifierName, argument, nameColonIdentifier.Value.Text);
@@ -133,7 +133,7 @@ namespace SonarAnalyzer.Rules
 
         private class ArgumentIdentifier
         {
-            public ArgumentIdentifier(string identifierName, TArgumentSyntax argumentSyntax)
+            protected ArgumentIdentifier(string identifierName, TArgumentSyntax argumentSyntax)
             {
                 IdentifierName = identifierName;
                 ArgumentSyntax = argumentSyntax;
@@ -145,13 +145,10 @@ namespace SonarAnalyzer.Rules
 
         private class PositionalArgumentIdentifier : ArgumentIdentifier
         {
-            public PositionalArgumentIdentifier(string identifierName, TArgumentSyntax argumentSyntax, int position)
+            public PositionalArgumentIdentifier(string identifierName, TArgumentSyntax argumentSyntax)
                 : base(identifierName, argumentSyntax)
             {
-                Position = position;
             }
-
-            public int Position { get; }
         }
 
         private class NamedArgumentIdentifier : ArgumentIdentifier

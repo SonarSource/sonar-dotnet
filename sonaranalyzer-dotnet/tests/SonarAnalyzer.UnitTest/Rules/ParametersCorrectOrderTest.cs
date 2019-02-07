@@ -44,6 +44,7 @@ public class Foo
 {
     public void Bar()
     {
+        new Foo
         new ()
         new System. ()
     }
