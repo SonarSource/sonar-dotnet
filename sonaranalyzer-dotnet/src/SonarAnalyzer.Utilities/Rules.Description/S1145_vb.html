@@ -1,0 +1,49 @@
+<p><code>if</code> statements with conditions that are always false have the effect of making blocks of code non-functional. <code>if</code>
+statements with conditions that are always true are completely redundant, and make the code less readable.</p>
+<p>There are three possible causes for the presence of such code: </p>
+<ul>
+  <li> An if statement was changed during debugging and that debug code has been committed. </li>
+  <li> Some value was left unset. </li>
+  <li> Some logic is not doing what the programmer thought it did. </li>
+</ul>
+<p>In any of these cases, unconditional <code>if</code> statements should be removed.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+    If True Then ' Noncompliant
+      DoSomething()
+    End If
+
+    If False Then ' Noncompliant
+      DoSomethingElse()
+    End If
+
+    If 2 &lt; 3 Then ' Noncompliant - always false
+    End If
+
+    Dim i As Integer = 0
+    Dim j As Integer = 0
+    j = Foo()
+
+    If j &gt; 0 AndAlso i &gt; 0 Then ' Noncompliant; always false - 'i' is never set after initialization
+      ' ...
+    End If
+
+    Dim b As Boolean = True
+    If b OrElse Not b Then ' Noncompliant
+      ' ...
+    End If
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+DoSomething();
+' ...
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="http://cwe.mitre.org/data/definitions/489.html">MITRE, CWE-489</a> - Leftover Debug Code </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/570.html">MITRE, CWE-570</a> - Expression is Always False </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/571.html">MITRE, CWE-571</a> - Expression is Always True </li>
+  <li> MISRA C:2004, 13.7 - Boolean operations whose results are invariant shall not be permitted. </li>
+  <li> MISRA C:2012, 14.3 - Controlling expressions shall not be invariant </li>
+</ul>
+
