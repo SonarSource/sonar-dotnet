@@ -1,0 +1,42 @@
+<p>Redundant Boolean literals should be removed from expressions to improve readability.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+If BooleanMethod() = True Then
+  ' ...
+End If
+If BooleanMethod() = False Then
+  ' ...
+End If
+If BooleanMethod() OrElse False Then
+  ' ...
+End If
+DoSomething(Not False)
+DoSomething(BooleanMethod() = True)
+
+Dim booleanVariable = If(BooleanMethod(), True, False)
+booleanVariable = If(BooleanMethod(), True, exp)
+booleanVariable = If(BooleanMethod(), False, exp)
+booleanVariable = If(BooleanMethod(), exp, True)
+booleanVariable = If(BooleanMethod(), exp, False)
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+If BooleanMethod() Then
+  ' ...
+End If
+If Not BooleanMethod() Then
+  ' ...
+End If
+If BooleanMethod() Then
+  ' ...
+End If
+DoSomething(True)
+DoSomething(BooleanMethod())
+
+Dim booleanVariable = BooleanMethod()
+booleanVariable = BooleanMethod() OrElse exp
+booleanVariable = Not BooleanMethod() AndAlso exp
+booleanVariable = Not BooleanMethod() OrElse exp
+booleanVariable = BooleanMethod() AndAlso exp
+</pre>
+

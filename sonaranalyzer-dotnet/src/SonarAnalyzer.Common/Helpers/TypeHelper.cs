@@ -131,6 +131,12 @@ namespace SonarAnalyzer.Helpers
 
         #endregion TypeName
 
+        public static bool IsNullableBoolean(this ITypeSymbol type) =>
+            type is INamedTypeSymbol namedType &&
+            namedType.OriginalDefinition.Is(KnownType.System_Nullable_T) &&
+            namedType.TypeArguments.Length == 1 &&
+            namedType.TypeArguments[0].Is(KnownType.System_Boolean);
+
         public static bool Implements(this ITypeSymbol typeSymbol, KnownType type)
         {
             return typeSymbol != null &&
@@ -152,7 +158,7 @@ namespace SonarAnalyzer.Helpers
         public static bool DerivesFrom(this ITypeSymbol typeSymbol, KnownType type)
         {
             var currentType = typeSymbol;
-            while(currentType != null)
+            while (currentType != null)
             {
                 if (currentType.Is(type))
                 {

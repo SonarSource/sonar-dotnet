@@ -37,6 +37,12 @@ namespace Tests.Diagnostics
             x = a;                 // Fixed
             x = !a;                  // Fixed
             x = false;             // Fixed
+            x = false;             // Fixed
+            x = Foo();             // Fixed
+            x = Foo();             // Fixed
+            x = Foo();              // Fixed
+            x = Foo();              // Fixed
+            x = true;              // Fixed
             x = true;              // Fixed
             x = a == b;             // Fixed
 

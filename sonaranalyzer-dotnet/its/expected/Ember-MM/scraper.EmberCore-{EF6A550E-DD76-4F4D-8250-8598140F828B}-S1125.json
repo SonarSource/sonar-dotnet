@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"region":  {
+"startLine":  326,
+"startColumn":  319,
+"endLine":  326,
+"endColumn":  330
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"region":  {
+"startLine":  359,
+"startColumn":  341,
+"endLine":  359,
+"endColumn":  352
+}
+}
+}
+]
+}

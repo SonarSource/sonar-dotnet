@@ -1,0 +1,16 @@
+{
+  "title": "Boolean literals should not be redundant",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "clumsy"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-1125",
+  "sqKey": "S1125",
+  "scope": "All"
+}

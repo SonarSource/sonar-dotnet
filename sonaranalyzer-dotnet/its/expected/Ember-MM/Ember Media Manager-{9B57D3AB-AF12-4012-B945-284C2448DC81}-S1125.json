@@ -1,0 +1,368 @@
+{
+"issues":  [
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  83,
+"startColumn":  50,
+"endLine":  83,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  142,
+"startColumn":  42,
+"endLine":  142,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  192,
+"startColumn":  50,
+"endLine":  192,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  89,
+"startColumn":  20,
+"endLine":  89,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  259,
+"startColumn":  24,
+"endLine":  259,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  376,
+"startColumn":  22,
+"endLine":  376,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4203,
+"startColumn":  90,
+"endLine":  4203,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5526,
+"startColumn":  33,
+"endLine":  5526,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5569,
+"startColumn":  72,
+"endLine":  5569,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5789,
+"startColumn":  131,
+"endLine":  5789,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6481,
+"startColumn":  37,
+"endLine":  6481,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6882,
+"startColumn":  117,
+"endLine":  6882,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6883,
+"startColumn":  117,
+"endLine":  6883,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6884,
+"startColumn":  119,
+"endLine":  6884,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6888,
+"startColumn":  108,
+"endLine":  6888,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6889,
+"startColumn":  108,
+"endLine":  6889,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6890,
+"startColumn":  110,
+"endLine":  6890,
+"endColumn":  121
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7107,
+"startColumn":  124,
+"endLine":  7107,
+"endColumn":  135
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7109,
+"startColumn":  128,
+"endLine":  7109,
+"endColumn":  139
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7113,
+"startColumn":  115,
+"endLine":  7113,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7115,
+"startColumn":  119,
+"endLine":  7115,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7194,
+"startColumn":  117,
+"endLine":  7194,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7195,
+"startColumn":  117,
+"endLine":  7195,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7196,
+"startColumn":  121,
+"endLine":  7196,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7200,
+"startColumn":  108,
+"endLine":  7200,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7201,
+"startColumn":  108,
+"endLine":  7201,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7202,
+"startColumn":  112,
+"endLine":  7202,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7728,
+"startColumn":  64,
+"endLine":  7728,
+"endColumn":  76
+}
+}
+}
+]
+}

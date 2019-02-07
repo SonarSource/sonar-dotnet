@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  893,
+"startColumn":  130,
+"endLine":  893,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  919,
+"startColumn":  122,
+"endLine":  919,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  1030,
+"startColumn":  77,
+"endLine":  1030,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  112,
+"startColumn":  64,
+"endLine":  112,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  65,
+"startColumn":  146,
+"endLine":  65,
+"endColumn":  152
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  78,
+"startColumn":  142,
+"endLine":  78,
+"endColumn":  148
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  641,
+"startColumn":  119,
+"endLine":  641,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  860,
+"startColumn":  175,
+"endLine":  860,
+"endColumn":  180
+}
+}
+}
+]
+}
