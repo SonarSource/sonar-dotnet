@@ -161,12 +161,12 @@ namespace SonarAnalyzer.Rules
         protected bool CheckForNullabilityAndBooleanConstantsReport(TBinaryExpression binaryExpression,
             SyntaxNodeAnalysisContext context, bool reportOnTrue)
         {
-            var binaryExpressionLeft = GetLeftNode(binaryExpression);
-            var binaryExpressionRight = GetRightNode(binaryExpression);
+            var binaryExpressionLeft = RemoveParentheses(GetLeftNode(binaryExpression));
+            var binaryExpressionRight = RemoveParentheses(GetRightNode(binaryExpression));
 
             var typeLeft = context.SemanticModel.GetTypeInfo(binaryExpressionLeft).Type;
             var typeRight = context.SemanticModel.GetTypeInfo(binaryExpressionRight).Type;
-            if (ShouldNotReport(typeLeft, typeRight))
+            if (typeLeft.IsNullableBoolean() || typeRight.IsNullableBoolean())
             {
                 return true;
             }
@@ -192,18 +192,6 @@ namespace SonarAnalyzer.Rules
             return false;
         }
 
-        protected static bool ShouldNotReport(ITypeSymbol typeLeft, ITypeSymbol typeRight) =>
-            typeLeft == null
-                || typeRight == null
-                || IsNullableBoolean(typeLeft)
-                || IsNullableBoolean(typeRight);
-
-        protected static bool IsNullableBoolean(ITypeSymbol type) =>
-            type is INamedTypeSymbol namedType &&
-            namedType.OriginalDefinition.Is(KnownType.System_Nullable_T) &&
-            namedType.TypeArguments.Length == 1 &&
-            namedType.TypeArguments[0].Is(KnownType.System_Boolean);
-
         protected void CheckForBooleanConstantOnLeft(TBinaryExpression binaryExpression,
             TSyntaxKind booleanSyntaxKind, ErrorLocation errorLocation, SyntaxNodeAnalysisContext context) =>
             CheckForBooleanConstant(binaryExpression, booleanSyntaxKind, errorLocation, context, isLeftSide: true);
@@ -216,8 +204,8 @@ namespace SonarAnalyzer.Rules
             ErrorLocation errorLocation, SyntaxNodeAnalysisContext context, bool isLeftSide)
         {
             var expression = isLeftSide
-                ? GetLeftNode(binaryExpression)
-                : GetRightNode(binaryExpression);
+                ? RemoveParentheses(GetLeftNode(binaryExpression))
+                : RemoveParentheses(GetRightNode(binaryExpression));
 
             if (!IsKind(expression, booleanSyntaxKind))
             {

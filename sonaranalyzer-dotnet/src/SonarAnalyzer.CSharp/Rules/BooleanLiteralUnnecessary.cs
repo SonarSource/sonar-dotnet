@@ -42,9 +42,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsBooleanLiteral(SyntaxNode node) => node.IsKind(TrueLiteral) || node.IsKind(FalseLiteral);
 
-        protected override SyntaxNode GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left.RemoveParentheses();
+        protected override SyntaxNode GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left;
 
-        protected override SyntaxNode GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right.RemoveParentheses();
+        protected override SyntaxNode GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right;
 
         protected override SyntaxToken GetOperatorToken(BinaryExpressionSyntax binaryExpression) => binaryExpression.OperatorToken;
 
@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var whenFalse = conditional.WhenFalse;
             var typeLeft = context.SemanticModel.GetTypeInfo(whenTrue).Type;
             var typeRight = context.SemanticModel.GetTypeInfo(whenFalse).Type;
-            if (ShouldNotReport(typeLeft, typeRight))
+            if (typeLeft.IsNullableBoolean() || typeRight.IsNullableBoolean())
             {
                 return;
             }

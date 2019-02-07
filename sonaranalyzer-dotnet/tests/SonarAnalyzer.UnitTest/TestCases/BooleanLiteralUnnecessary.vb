@@ -9,9 +9,12 @@ Public Class BooleanLiteralUnnecessary
     Dim exp2 = True
 
     Dim z = True OrElse ((True)) ' Noncompliant (also S1764)
+    z = True Or ((True)) ' Noncompliant (also S1764)
     z = False OrElse False ' Noncompliant (also S1764)
     z = False AndAlso False ' Noncompliant (also S1764)
+    z = False And False ' Noncompliant (also S1764)
     z = True AndAlso True ' Noncompliant (also S1764)
+    z = True And True ' Noncompliant (also S1764)
     z = True = True ' Noncompliant (also S1764)
     z = False = False ' Noncompliant (also S1764)
     z = True <> True ' Noncompliant (also S1764)
@@ -22,7 +25,9 @@ Public Class BooleanLiteralUnnecessary
     z = True OrElse False ' Noncompliant {{Remove the unnecessary Boolean literal(s).}}
 '            ^^^^^^^^^^^^
     z = False OrElse True ' Noncompliant
+    z = False Or True ' Noncompliant
     z = False AndAlso True ' Noncompliant
+    z = False And True ' Noncompliant
     z = True AndAlso False ' Noncompliant
     z = False = True ' Noncompliant
 '             ^^^^^^
@@ -53,12 +58,16 @@ Public Class BooleanLiteralUnnecessary
 '             ^^^^^^^^^^^^^
     x = Foo() AndAlso False ' Noncompliant
 '       ^^^^^^^^^^^^^
+    x = Foo() And False ' Noncompliant
+'       ^^^^^^^^^
     x = True AndAlso Foo() ' Noncompliant
 '       ^^^^^^^^^^^^
     x = Foo() AndAlso True ' Noncompliant
 '             ^^^^^^^^^^^^
     x = Foo() OrElse False ' Noncompliant
 '             ^^^^^^^^^^^^
+    x = Foo() Or False ' Noncompliant
+'             ^^^^^^^^
     x = False OrElse Foo() ' Noncompliant
 '       ^^^^^^^^^^^^
     x = Foo() OrElse True ' Noncompliant

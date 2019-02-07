@@ -31,7 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void BooleanLiteralUnnecessary_CS()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.cs", new CS.BooleanLiteralUnnecessary());
+            Verifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.cs",
+                new CS.BooleanLiteralUnnecessary());
         }
 
         [TestMethod]
@@ -49,7 +50,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void BooleanLiteralUnnecessary_VB()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.vb", new VB.BooleanLiteralUnnecessary());
+            Verifier.VerifyAnalyzer(@"TestCases\BooleanLiteralUnnecessary.vb",
+                new VB.BooleanLiteralUnnecessary());
         }
     }
 }
