@@ -1,23 +1,23 @@
 <p>Redundant Boolean literals should be removed from expressions to improve readability.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-If BooleanMethod() = True Then
+If BooleanMethod() = True Then ' Noncompliant
   ' ...
 End If
-If BooleanMethod() = False Then
+If BooleanMethod() = False Then ' Noncompliant
   ' ...
 End If
-If BooleanMethod() OrElse False Then
+If BooleanMethod() OrElse False Then ' Noncompliant
   ' ...
 End If
-DoSomething(Not False)
-DoSomething(BooleanMethod() = True)
+DoSomething(Not False) ' Noncompliant
+DoSomething(BooleanMethod() = True) ' Noncompliant
 
-Dim booleanVariable = If(BooleanMethod(), True, False)
-booleanVariable = If(BooleanMethod(), True, exp)
-booleanVariable = If(BooleanMethod(), False, exp)
-booleanVariable = If(BooleanMethod(), exp, True)
-booleanVariable = If(BooleanMethod(), exp, False)
+Dim booleanVariable = If(BooleanMethod(), True, False) ' Noncompliant
+booleanVariable = If(BooleanMethod(), True, exp) ' Noncompliant
+booleanVariable = If(BooleanMethod(), False, exp) ' Noncompliant
+booleanVariable = If(BooleanMethod(), exp, True) ' Noncompliant
+booleanVariable = If(BooleanMethod(), exp, False) ' Noncompliant
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
