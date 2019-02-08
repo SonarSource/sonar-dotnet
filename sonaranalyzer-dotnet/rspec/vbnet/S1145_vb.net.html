@@ -16,22 +16,6 @@ statements with conditions that are always true are completely redundant, and ma
     If False Then ' Noncompliant
       DoSomethingElse()
     End If
-
-    If 2 &lt; 3 Then ' Noncompliant - always false
-    End If
-
-    Dim i As Integer = 0
-    Dim j As Integer = 0
-    j = Foo()
-
-    If j &gt; 0 AndAlso i &gt; 0 Then ' Noncompliant; always false - 'i' is never set after initialization
-      ' ...
-    End If
-
-    Dim b As Boolean = True
-    If b OrElse Not b Then ' Noncompliant
-      ' ...
-    End If
 </pre>
 <h2>Compliant Solution</h2>
 <pre>

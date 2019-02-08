@@ -18,19 +18,6 @@ if (false)
 {
   DoSomethingElse();
 }
-
-if (2 &lt; 3 ) { ... }  // Noncompliant; always false
-
-int i = 0;
-int j = 0;
-// ...
-j = Foo();
-
-if (j &gt; 0 &amp;&amp; i &gt; 0) { ... }  // Noncompliant; always false - i never set after initialization
-
-bool b = true;
-//...
-if (b || !b) { ... }  // Noncompliant
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
