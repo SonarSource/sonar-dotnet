@@ -19,8 +19,12 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Text;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -28,16 +32,56 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class IfConditionalAlwaysTrueOrFalse : IfConditionalAlwaysTrueOrFalseBase
+    public sealed class IfConditionalAlwaysTrueOrFalse : IfConditionalAlwaysTrueOrFalseBase<MultiLineIfBlockSyntax>
     {
+        private const string ifStatementLiteral = "'If' statement";
+        private const string elseIfClauseLiteral = "'ElseIf' clause";
+        private const string elseClauseLiteral = "'Else' clause";
+
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(TreatNode, SyntaxKind.MultiLineIfBlock);
+
+        protected override bool ConditionIsTrueLiteral(MultiLineIfBlockSyntax ifSyntax) =>
+            ifSyntax.IfStatement.Condition.IsKind(SyntaxKind.TrueLiteralExpression);
+
+        protected override bool ConditionIsFalseLiteral(MultiLineIfBlockSyntax ifSyntax) =>
+            ifSyntax.IfStatement.Condition.IsKind(SyntaxKind.FalseLiteralExpression);
+
+        protected override void ReportIfFalse(MultiLineIfBlockSyntax ifSyntax, SyntaxNodeAnalysisContext context)
         {
-            throw new System.NotImplementedException();
+            var location = ifSyntax.ElseBlock == null
+                ? ifSyntax.GetLocation()
+                : Location.Create(
+                    ifSyntax.SyntaxTree,
+                    new TextSpan(ifSyntax.IfStatement.IfKeyword.SpanStart,
+                        ifSyntax.ElseBlock.ElseStatement.ElseKeyword.Span.End - ifSyntax.IfStatement.IfKeyword.SpanStart));
+
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, ifStatementLiteral));
+        }
+
+        protected override void ReportIfTrue(MultiLineIfBlockSyntax ifSyntax, SyntaxNodeAnalysisContext context)
+        {
+            var location = Location.Create(
+                ifSyntax.SyntaxTree,
+                new TextSpan(ifSyntax.IfStatement.IfKeyword.SpanStart,
+                    ifSyntax.IfStatement.Span.End - ifSyntax.IfStatement.IfKeyword.SpanStart));
+
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, ifStatementLiteral));
+
+            ifSyntax.ElseIfBlocks.ToList().ForEach(elseIfBlock =>
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, elseIfBlock.ElseIfStatement.GetLocation(), elseIfClauseLiteral));
+            }
+            );
+            if (ifSyntax.ElseBlock != null)
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, ifSyntax.ElseBlock.ElseStatement.GetLocation(), elseClauseLiteral));
+            }
         }
     }
 }

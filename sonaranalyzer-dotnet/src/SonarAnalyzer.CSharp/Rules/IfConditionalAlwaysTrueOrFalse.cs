@@ -31,10 +31,8 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class IfConditionalAlwaysTrueOrFalse : SonarDiagnosticAnalyzer
+    public sealed class IfConditionalAlwaysTrueOrFalse : IfConditionalAlwaysTrueOrFalseBase<IfStatementSyntax>
     {
-        internal const string DiagnosticId = "S1145";
-        private const string MessageFormat = "Remove this useless {0}.";
         private const string ifStatementLiteral = "'if' statement";
         private const string elseClauseLiteral = "'else' clause";
 
@@ -42,51 +40,37 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(TreatNode, SyntaxKind.IfStatement);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override bool ConditionIsTrueLiteral(IfStatementSyntax ifSyntax) =>
+            ifSyntax.Condition.IsKind(SyntaxKind.TrueLiteralExpression);
+
+        protected override bool ConditionIsFalseLiteral(IfStatementSyntax ifSyntax) =>
+            ifSyntax.Condition.IsKind(SyntaxKind.FalseLiteralExpression);
+
+        protected override void ReportIfFalse(IfStatementSyntax ifSyntax, SyntaxNodeAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var ifNode = (IfStatementSyntax)c.Node;
-
-                    var isTrue = ifNode.Condition.IsKind(SyntaxKind.TrueLiteralExpression);
-                    var isFalse = ifNode.Condition.IsKind(SyntaxKind.FalseLiteralExpression);
-
-                    if (!isTrue && !isFalse)
-                    {
-                        return;
-                    }
-
-                    if (isTrue)
-                    {
-                        ReportIfTrue(ifNode, c);
-                    }
-                    else
-                    {
-                        ReportIfFalse(ifNode, c);
-                    }
-                },
-                SyntaxKind.IfStatement);
-        }
-
-        private static void ReportIfFalse(IfStatementSyntax ifStatement, SyntaxNodeAnalysisContext context)
-        {
-            var location = ifStatement.Else == null
-                ? ifStatement.GetLocation()
-                : ifStatement.IfKeyword.CreateLocation(ifStatement.Else.ElseKeyword);
+            var location = ifSyntax.Else == null
+                ? ifSyntax.GetLocation()
+                : Location.Create(
+                    ifSyntax.SyntaxTree,
+                    new TextSpan(ifSyntax.IfKeyword.SpanStart, ifSyntax.Else.ElseKeyword.Span.End - ifSyntax.IfKeyword.SpanStart));
 
             context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, ifStatementLiteral));
         }
 
-        private static void ReportIfTrue(IfStatementSyntax ifStatement, SyntaxNodeAnalysisContext context)
+        protected override void ReportIfTrue(IfStatementSyntax ifSyntax, SyntaxNodeAnalysisContext context)
         {
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
-                ifStatement.IfKeyword.CreateLocation(ifStatement.CloseParenToken), ifStatementLiteral));
+            var location = Location.Create(
+                ifSyntax.SyntaxTree,
+                new TextSpan(ifSyntax.IfKeyword.SpanStart, ifSyntax.CloseParenToken.Span.End - ifSyntax.IfKeyword.SpanStart));
 
-            if (ifStatement.Else != null)
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, ifStatementLiteral));
+
+            if (ifSyntax.Else != null)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, ifStatement.Else.GetLocation(), elseClauseLiteral));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, ifSyntax.Else.GetLocation(), elseClauseLiteral));
             }
         }
     }

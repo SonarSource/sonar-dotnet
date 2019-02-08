@@ -18,13 +18,46 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class IfConditionalAlwaysTrueOrFalseBase : SonarDiagnosticAnalyzer
+    public abstract class IfConditionalAlwaysTrueOrFalseBase<TIfSyntax> : SonarDiagnosticAnalyzer
+        where TIfSyntax : SyntaxNode
     {
-        protected const string DiagnosticId = "S1145";
-        protected const string MessageFormat = "";
+        internal const string DiagnosticId = "S1145";
+        protected const string MessageFormat = "Remove this useless {0}.";
+
+        protected abstract void ReportIfTrue(TIfSyntax ifSyntax, SyntaxNodeAnalysisContext context);
+
+        protected abstract void ReportIfFalse(TIfSyntax ifSyntax, SyntaxNodeAnalysisContext context);
+
+        protected abstract bool ConditionIsTrueLiteral(TIfSyntax ifSyntax);
+
+        protected abstract bool ConditionIsFalseLiteral(TIfSyntax ifSyntax);
+
+        protected void TreatNode(SyntaxNodeAnalysisContext context)
+        {
+            var ifNode = (TIfSyntax)context.Node;
+
+            var isTrue = ConditionIsTrueLiteral(ifNode);
+            var isFalse = ConditionIsFalseLiteral(ifNode);
+
+            if (!isTrue && !isFalse)
+            {
+                return;
+            }
+
+            if (isTrue)
+            {
+                ReportIfTrue(ifNode, context);
+            }
+            else
+            {
+                ReportIfFalse(ifNode, context);
+            }
+        }
     }
 }
