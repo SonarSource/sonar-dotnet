@@ -1170,7 +1170,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["1169"],
             //["1170"],
             //["1171"],
-            //["1172"],
+            ["1172"] = "CODE_SMELL",
             //["1173"],
             //["1174"],
             //["1175"],

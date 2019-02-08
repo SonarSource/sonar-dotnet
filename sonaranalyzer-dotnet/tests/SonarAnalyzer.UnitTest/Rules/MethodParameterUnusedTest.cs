@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,31 +30,40 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodParameterUnused()
+        public void MethodParameterUnused_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.cs",
-                new MethodParameterUnused());
+                new CS.MethodParameterUnused());
         }
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void MethodParameterUnused_CodeFix()
+        public void MethodParameterUnused_CodeFix_CS()
         {
             Verifier.VerifyCodeFix(
                 @"TestCases\MethodParameterUnused.cs",
                 @"TestCases\MethodParameterUnused.Fixed.cs",
-                new MethodParameterUnused(),
-                new MethodParameterUnusedCodeFixProvider());
+                new CS.MethodParameterUnused(),
+                new CS.MethodParameterUnusedCodeFixProvider());
         }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodParameterUnused_FromCSharp7()
+        public void MethodParameterUnused_FromCSharp7_CS()
         {
             Verifier.VerifyNoIssueReported(@"TestCases\MethodParameterUnused.CSharp7.cs",
-                new MethodParameterUnused(),
+                new CS.MethodParameterUnused(),
                 ParseOptionsHelper.FromCSharp7,
                 additionalReferences: NuGetMetadataReference.SystemValueTuple("4.5.0"));
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MethodParameterUnused_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.vb",
+                new VB.MethodParameterUnused());
+        }
     }
 }
+

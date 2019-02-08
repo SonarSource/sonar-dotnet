@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused procedure parameter 'isChecked'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  1022,
+"startColumn":  66,
+"endLine":  1022,
+"endColumn":  92
+}
+}
+}
+]
+}

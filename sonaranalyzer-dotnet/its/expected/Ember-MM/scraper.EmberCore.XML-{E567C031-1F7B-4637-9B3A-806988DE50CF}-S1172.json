@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused procedure parameter '_fixamp'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  394,
+"startColumn":  113,
+"endLine":  394,
+"endColumn":  136
+}
+}
+}
+]
+}
