@@ -20,7 +20,8 @@
 
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using CS=SonarAnalyzer.Rules.CSharp;
+using VB=SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SwitchSectionShouldNotHaveTooManyStatements_DefaultValue_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.cs",
-                new SwitchSectionShouldNotHaveTooManyStatements());
+                new CS.SwitchSectionShouldNotHaveTooManyStatements());
         }
 
         [TestMethod]
@@ -40,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.cs",
-                new SwitchSectionShouldNotHaveTooManyStatements { Threshold = 1 });
+                new CS.SwitchSectionShouldNotHaveTooManyStatements { Threshold = 1 });
         }
 
         [TestMethod]
@@ -48,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SwitchSectionShouldNotHaveTooManyStatements_DefaultValue_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_DefaultValue.vb",
-                new SonarAnalyzer.Rules.VisualBasic.SwitchSectionShouldNotHaveTooManyStatements());
+                new VB.SwitchSectionShouldNotHaveTooManyStatements());
         }
 
         [TestMethod]
@@ -56,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.vb",
-                new SonarAnalyzer.Rules.VisualBasic.SwitchSectionShouldNotHaveTooManyStatements() { Threshold = 1 });
+                new VB.SwitchSectionShouldNotHaveTooManyStatements() { Threshold = 1 });
         }
     }
 }
