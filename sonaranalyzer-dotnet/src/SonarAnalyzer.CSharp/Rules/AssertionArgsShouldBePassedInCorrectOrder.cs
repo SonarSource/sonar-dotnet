@@ -24,7 +24,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -85,9 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (!(firstArgument.Expression is LiteralExpressionSyntax) &&
                         secondArgument.Expression is LiteralExpressionSyntax)
                     {
-                        var location = Location.Create(c.Node.SyntaxTree, new TextSpan(firstArgument.SpanStart,
-                            secondArgument.Span.End - firstArgument.SpanStart));
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, firstArgument.CreateLocation(secondArgument)));
                     }
                 }, SyntaxKind.InvocationExpression);
         }

@@ -24,7 +24,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -88,9 +87,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var pragmaWarning in pragmaWarnings)
             {
-                var location = Location.Create(pragmaWarning.SyntaxTree,
-                    TextSpan.FromBounds(pragmaWarning.SpanStart, pragmaWarning.DisableOrRestoreKeyword.Span.End));
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
+                    pragmaWarning.CreateLocation(pragmaWarning.DisableOrRestoreKeyword)));
             }
         }
     }

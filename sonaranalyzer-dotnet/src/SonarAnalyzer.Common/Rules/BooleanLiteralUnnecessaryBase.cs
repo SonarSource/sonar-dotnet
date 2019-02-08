@@ -20,7 +20,6 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -144,10 +143,7 @@ namespace SonarAnalyzer.Rules
 
             if (bothSideBool && !bothSideFalse && !bothSideTrue)
             {
-                var location = Location.Create(ternaryTree,
-                    new TextSpan(thenBranch.SpanStart, elseBranch.Span.End - thenBranch.SpanStart));
-
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], location));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], thenBranch.CreateLocation(elseBranch)));
             }
             if (thenIsBooleanLiteral ^ elseIsBooleanLiteral)
             {
@@ -236,12 +232,8 @@ namespace SonarAnalyzer.Rules
         protected Location CalculateExtendedLocation(TBinaryExpression binaryExpression, bool isLeftSide)
         {
             return isLeftSide
-                ? Location.Create(binaryExpression.SyntaxTree,
-                        new TextSpan(binaryExpression.SpanStart,
-                            GetOperatorToken(binaryExpression).Span.End - binaryExpression.SpanStart))
-                : Location.Create(binaryExpression.SyntaxTree,
-                        new TextSpan(GetOperatorToken(binaryExpression).SpanStart,
-                            binaryExpression.Span.End - GetOperatorToken(binaryExpression).SpanStart));
+                ? binaryExpression.CreateLocation(GetOperatorToken(binaryExpression))
+                : GetOperatorToken(binaryExpression).CreateLocation(binaryExpression);
         }
 
         protected enum ErrorLocation

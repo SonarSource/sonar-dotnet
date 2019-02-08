@@ -25,7 +25,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -237,10 +236,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            location = Location.Create(invocation.SyntaxTree,
-                TextSpan.FromBounds(
-                    memberAccess.OperatorToken.SpanStart,
-                    invocation.Span.End));
+            location = memberAccess.OperatorToken.CreateLocation(invocation);
             return true;
         }
 

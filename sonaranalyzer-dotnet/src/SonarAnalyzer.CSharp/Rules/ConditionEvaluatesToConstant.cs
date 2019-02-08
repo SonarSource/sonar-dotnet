@@ -26,7 +26,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
@@ -186,9 +185,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (unreachableExpressions.Count > 0)
             {
-                yield return Location.Create(
-                    constantExpression.SyntaxTree,
-                    GetSpan(unreachableExpressions.First(), unreachableExpressions.Last()));
+                yield return unreachableExpressions.First().CreateLocation(unreachableExpressions.Last());
             }
             else
             {
@@ -206,15 +203,6 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 yield return statement.GetLocation();
             }
-        }
-
-        private static TextSpan GetSpan(SyntaxNode startNode, SyntaxNode endNode)
-        {
-            if (startNode.Equals(endNode))
-            {
-                return startNode.Span;
-            }
-            return TextSpan.FromBounds(startNode.SpanStart, endNode.Span.End);
         }
 
         private static SyntaxNode GetUnreachableStatement(IEnumerable<ExpressionSyntax> unreachableExpressions, bool constantValue)

@@ -23,7 +23,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -71,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var location = assignment.Parent is StatementSyntax
                     ? assignment.Parent.GetLocation()
-                    : GetReportLocation(assignment.OperatorToken.Span, assignment.Right.Span, assignment.SyntaxTree);
+                    : assignment.OperatorToken.CreateLocation(assignment.Right);
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
             }
         }
@@ -82,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (ExpressionNumericConverter.TryGetConstantIntValue(binary.Left, out var constValue) &&
                 constValue == constValueToLookFor)
             {
-                var location = GetReportLocation(binary.Left.Span, binary.OperatorToken.Span, binary.SyntaxTree);
+                var location = binary.Left.CreateLocation(binary.OperatorToken);
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, true.ToString())));
                 return;
             }
@@ -90,14 +89,9 @@ namespace SonarAnalyzer.Rules.CSharp
             if (ExpressionNumericConverter.TryGetConstantIntValue(binary.Right, out constValue) &&
                 constValue == constValueToLookFor)
             {
-                var location = GetReportLocation(binary.OperatorToken.Span, binary.Right.Span, binary.SyntaxTree);
+                var location = binary.OperatorToken.CreateLocation(binary.Right);
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, false.ToString())));
             }
-        }
-
-        private static Location GetReportLocation(TextSpan start, TextSpan end, SyntaxTree tree)
-        {
-            return Location.Create(tree, new TextSpan(start.Start, end.End - start.Start));
         }
     }
 }

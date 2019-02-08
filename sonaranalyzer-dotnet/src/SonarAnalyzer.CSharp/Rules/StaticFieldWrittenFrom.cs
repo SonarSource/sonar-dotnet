@@ -24,7 +24,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -52,11 +51,7 @@ namespace SonarAnalyzer.Rules
                            var fieldSymbol = c.SemanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol;
                            if (fieldSymbol?.IsStatic == true)
                            {
-                               var location = Location.Create(expression.SyntaxTree,
-                                   new TextSpan(expression.SpanStart,
-                                       assignment.OperatorToken.Span.End - expression.SpanStart));
-
-                               AddFieldLocation(fieldSymbol, location, locationsForFields);
+                               AddFieldLocation(fieldSymbol, expression.CreateLocation(assignment.OperatorToken), locationsForFields);
                            }
                        },
                        SyntaxKind.SimpleAssignmentExpression,

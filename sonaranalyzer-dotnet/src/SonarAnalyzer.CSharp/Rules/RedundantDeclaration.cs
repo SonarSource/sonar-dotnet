@@ -452,11 +452,10 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportIssueOnRedundantObjectCreation(SyntaxNodeAnalysisContext context,
             ObjectCreationExpressionSyntax objectCreation, string message, RedundancyType redundancyType)
         {
-            var location = Location.Create(objectCreation.SyntaxTree,
-                TextSpan.FromBounds(objectCreation.SpanStart, objectCreation.Type.Span.End));
+            var location = objectCreation.CreateLocation(objectCreation.Type);
             context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location,
-                    ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, redundancyType.ToString()),
-                    message));
+                ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, redundancyType.ToString()),
+                message));
         }
 
         private static T ChangeSyntaxElement<T>(T originalNode, T newNode, SemanticModel originalSemanticModel,

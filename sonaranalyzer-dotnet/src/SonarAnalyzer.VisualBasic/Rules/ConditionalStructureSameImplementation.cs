@@ -23,7 +23,6 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
@@ -123,11 +122,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             var lastStatement = statementsToReport.Last();
 
-            var location = Location.Create(context.Node.SyntaxTree,
-                TextSpan.FromBounds(firstStatement.SpanStart, lastStatement.Span.End));
-
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
-                location, locationProvider.First().GetLineNumberToReport(), constructType));
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, firstStatement.CreateLocation(lastStatement),
+                locationProvider.First().GetLineNumberToReport(), constructType));
         }
 
         private static bool IsApprovedStatement(StatementSyntax statement)

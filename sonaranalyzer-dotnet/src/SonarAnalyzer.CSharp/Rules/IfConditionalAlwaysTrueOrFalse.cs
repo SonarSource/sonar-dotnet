@@ -74,20 +74,15 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var location = ifStatement.Else == null
                 ? ifStatement.GetLocation()
-                : Location.Create(
-                    ifStatement.SyntaxTree,
-                    new TextSpan(ifStatement.IfKeyword.SpanStart, ifStatement.Else.ElseKeyword.Span.End - ifStatement.IfKeyword.SpanStart));
+                : ifStatement.IfKeyword.CreateLocation(ifStatement.Else.ElseKeyword);
 
             context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, ifStatementLiteral));
         }
 
         private static void ReportIfTrue(IfStatementSyntax ifStatement, SyntaxNodeAnalysisContext context)
         {
-            var location = Location.Create(
-                ifStatement.SyntaxTree,
-                new TextSpan(ifStatement.IfKeyword.SpanStart, ifStatement.CloseParenToken.Span.End - ifStatement.IfKeyword.SpanStart));
-
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, ifStatementLiteral));
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
+                ifStatement.IfKeyword.CreateLocation(ifStatement.CloseParenToken), ifStatementLiteral));
 
             if (ifStatement.Else != null)
             {

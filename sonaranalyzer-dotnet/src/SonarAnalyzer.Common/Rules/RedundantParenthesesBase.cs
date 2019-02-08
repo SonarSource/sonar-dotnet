@@ -19,7 +19,6 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Helpers;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,22 +56,15 @@ namespace SonarAnalyzer.Rules
                             .Skip(1)
                             .First(); // There are always at least two parenthesized expressions
 
-                        var location = Location.Create(expression.SyntaxTree,
-                            GetSpan(GetOpenParenToken(expression), GetOpenParenToken(innermostExpression)));
+                        var location = GetOpenParenToken(expression).CreateLocation(GetOpenParenToken(innermostExpression));
 
-                        var secondaryLocation = Location.Create(expression.SyntaxTree,
-                            GetSpan(GetCloseParenToken(innermostExpression), GetCloseParenToken(expression)));
+                        var secondaryLocation = GetCloseParenToken(innermostExpression).CreateLocation(GetCloseParenToken(expression));
 
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0],
                             location, additionalLocations: new[] { secondaryLocation }));
                     }
                 },
                 ParenthesizedExpressionSyntaxKind);
-        }
-
-        protected static TextSpan GetSpan(SyntaxToken startToken, SyntaxToken endToken)
-        {
-            return TextSpan.FromBounds(startToken.Span.Start, endToken.Span.End);
         }
 
         protected IEnumerable<TParenthesizedExpression> GetSelfAndDescendantParenthesizedExpressions(TParenthesizedExpression expression)
