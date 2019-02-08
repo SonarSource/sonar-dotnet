@@ -32,6 +32,14 @@ Namespace Tests.TestCases
         Private Function GetSomething() As InvalidCodeStructure?
             Return Nothing
         End Function
+
+        Private Sub OnlyThrows1(ByVal a As Integer) ' Noncompliant
+            Throw New InvalidOperationException()
+		End Sub
+
+        Private Function OnlyThrows2(ByVal a As Integer) As Integer ' Noncompliant
+            Throw New InvalidOperationException()
+		End Function
     End Class
 
     Structure InvalidCodeStructure
@@ -155,7 +163,7 @@ Namespace Tests.TestCases
 		End Function
     End Module
 
-    MustInherit Class AbstractValidCode
+    Public MustInherit Class AbstractValidCode
         MustOverride Sub MyAbstractMethod(ByVal a As Integer)
     End Class
 
@@ -164,10 +172,19 @@ Namespace Tests.TestCases
     End Interface
 
     Public Class Person
+        Inherits AbstractValidCode
         Implements IPerson
 
         Public Function GetSomething(age As Integer) As Integer Implements IPerson.GetSomething ' Compliant because it's an interface implementation
             Return 42
+        End Function
+
+        Public Overrides Sub MyAbstractMethod(a As Integer) ' Compliant because it overrides
+            Console.WriteLine()
+        End Sub
+
+        Private Function GetFoo(ByVal s As String) ' Noncompliant
+            Return ""
         End Function
     End Class
 

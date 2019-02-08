@@ -106,21 +106,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static bool HasAnyAttribute(MethodBlockBaseSyntax method) =>
             method.BlockStatement.AttributeLists.Count > 0;
 
-        private static bool OnlyThrowsNotImplementedException(MethodBlockBaseSyntax method, SemanticModel semanticModel)
-        {
-            if (method.Statements.Count != 1)
-            {
-                return false;
-            }
-
-            return method.Statements
+        private static bool OnlyThrowsNotImplementedException(MethodBlockBaseSyntax method, SemanticModel semanticModel) =>
+            method.Statements.Count == 1
+            && method.Statements
                 .OfType<ThrowStatementSyntax>()
                 .Select(tss => tss.Expression)
                 .OfType<ObjectCreationExpressionSyntax>()
                 .Select(oces => semanticModel.GetSymbolInfo(oces).Symbol)
                 .OfType<IMethodSymbol>()
                 .Any(s => s != null && s.ContainingType.Is(KnownType.System_NotImplementedException));
-        }
 
         private static List<ParameterSyntax> GetUnusedParameters(MethodBlockBaseSyntax methodBlock)
         {
