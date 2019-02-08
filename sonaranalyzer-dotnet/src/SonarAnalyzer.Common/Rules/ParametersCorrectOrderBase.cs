@@ -67,6 +67,7 @@ namespace SonarAnalyzer.Rules
                 HasIncorrectlyOrderedParameters(argumentIdentifiers, argumentParameterMappings, parameterNames, identifierNames,
                     analysisContext.SemanticModel))
             {
+                // for VB the symbol does not contain the method syntax reference
                 var secondaryLocations = methodSymbol.DeclaringSyntaxReferences
                     .Select(s => GetMethodDeclarationIdentifierLocation(s.GetSyntax()))
                     .WhereNotNull();

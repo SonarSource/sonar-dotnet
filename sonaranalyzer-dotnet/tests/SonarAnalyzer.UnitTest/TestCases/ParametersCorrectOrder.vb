@@ -18,7 +18,7 @@
             Divide(divisor, divisor)
             Foo.GlobalDivide(divisor, dividend)
 
-            Divide(dividend, divisor) ' Noncompliant {{Parameters to 'Divide' have the same names but not the same order as the method arguments.}}
+            Divide(dividend, divisor) ' Noncompliant [1] {{Parameters to 'Divide' have the same names but not the same order as the method arguments.}}
             Foo.GlobalDivide(dividend, divisor) ' Noncompliant
 
             Divide(dividend:=dividend, divisor:= divisor)
@@ -53,7 +53,7 @@
         Sub FooBar(ByVal value As Integer, ByVal ParamArray args() As String)
         End Sub
 
-        Public Function Divide(ByVal divisor As Integer, ByVal dividend As Integer) As Double
+        Public Function Divide(ByVal divisor As Integer, ByVal dividend As Integer) As Double ' Should be secondary-location for [1], but does not work
             Return divisor / dividend
         End Function
 
