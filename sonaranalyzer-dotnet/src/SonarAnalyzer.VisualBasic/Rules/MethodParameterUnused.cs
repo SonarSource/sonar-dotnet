@@ -47,6 +47,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 {
                     var methodBlock = (MethodBlockBaseSyntax)c.Node;
 
+                    // Bail-out if this is not a method we want to report on
+                    // (only based on syntax checks)
                     if (methodBlock.BlockStatement == null ||
                         !HasAnyParameter(methodBlock) ||
                         IsEmptyMethod(methodBlock) ||
@@ -58,17 +60,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         return;
                     }
 
-                    var allUsedSimpleIdentifiers = methodBlock.Statements
-                        .SelectMany(statement => statement.DescendantNodes())
-                        .Where(node => node.IsKind(SyntaxKind.IdentifierName)
-                            && IsVarOrParameter(node))
-                        .Cast<IdentifierNameSyntax>()
-                        .Select(ins => ins.Identifier.ValueText)
-                        .WhereNotNull()
-                        .ToHashSet();
+                    var unusedParameters = GetUnusedParameters(methodBlock);
+                    if (unusedParameters.Count == 0)
+                    {
+                        return;
+                    }
 
-                    var unusedParameters = GetUnusedParameters(methodBlock, allUsedSimpleIdentifiers);
-
+                    // Bail-out if this is not a method we want to report on
+                    // (only based on symbols checks)
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodBlock);
                     if (methodSymbol == null ||
                         methodSymbol.IsAbstract ||
@@ -123,25 +122,42 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 .Any(s => s != null && s.ContainingType.Is(KnownType.System_NotImplementedException));
         }
 
-        private static bool IsVarOrParameter(SyntaxNode node)
+        private static List<ParameterSyntax> GetUnusedParameters(MethodBlockBaseSyntax methodBlock)
         {
-            if (node.Parent.IsKind(SyntaxKind.SimpleMemberAccessExpression))
-            {
-                return ((MemberAccessExpressionSyntax)node.Parent).Expression == node;
-            }
+            var usedIdentifiers = GetAllUsedVarOrParameterIdentifierNames();
 
-            if (node.Parent.IsKind(SyntaxKind.ConditionalAccessExpression))
-            {
-                return ((ConditionalAccessExpressionSyntax)node.Parent).Expression == node;
-            }
+            return methodBlock.BlockStatement
+                .ParameterList
+                .Parameters
+                .Where(p => p.Identifier?.Identifier.ValueText != null
+                    && !usedIdentifiers.Contains(p.Identifier.Identifier.ValueText))
+                .ToList();
 
-            return true;
+            HashSet<string> GetAllUsedVarOrParameterIdentifierNames() =>
+                methodBlock.Statements
+                    .SelectMany(statement => statement.DescendantNodes())
+                    .Where(node => node.IsKind(SyntaxKind.IdentifierName)
+                        && IsVarOrParameter(node))
+                    .Cast<IdentifierNameSyntax>()
+                    .Select(ins => ins.Identifier.ValueText)
+                    .WhereNotNull()
+                    .ToHashSet();
+
+            bool IsVarOrParameter(SyntaxNode node)
+            {
+                if (node.Parent.IsKind(SyntaxKind.SimpleMemberAccessExpression))
+                {
+                    return ((MemberAccessExpressionSyntax)node.Parent).Expression == node;
+                }
+
+                if (node.Parent.IsKind(SyntaxKind.ConditionalAccessExpression))
+                {
+                    return ((ConditionalAccessExpressionSyntax)node.Parent).Expression == node;
+                }
+
+                return true;
+            }
         }
-
-        private static IEnumerable<ParameterSyntax> GetUnusedParameters(MethodBlockBaseSyntax method, HashSet<string> usedIdentifiers) =>
-            method.BlockStatement.ParameterList.Parameters.Where(
-                p => p.Identifier?.Identifier.ValueText != null
-                    && !usedIdentifiers.Contains(p.Identifier.Identifier.ValueText));
     }
 }
 
