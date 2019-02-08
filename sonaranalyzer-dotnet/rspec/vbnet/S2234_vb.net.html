@@ -11,8 +11,8 @@ Public Sub DoTheThing()
     Dim divisor = 15
     Dim dividend = 5
 
-    Dim result = Divide(dividend, divisor)  // Noncompliant; operation succeeds, but result is unexpected
-    //...
+    Dim result = Divide(dividend, divisor)  ' Noncompliant; operation succeeds, but result is unexpected
+    '...
 End Sub
 </pre>
 <h2>Compliant Solution</h2>
@@ -26,7 +26,7 @@ Public Sub DoTheThing()
     Dim dividend = 5
 
     Dim result = Divide(divisor, dividend)
-    //...
+    '...
 End Sub
 </pre>
 

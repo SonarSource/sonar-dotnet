@@ -2,11 +2,11 @@
 redundant pairs of parentheses could be misleading, and should be removed. </p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-If a AndAlso ((x + y &gt; 0)) Then // Noncompliant
+If a AndAlso ((x + y &gt; 0)) Then ' Noncompliant
     ' ...
 End If
 
-Return ((x + 1))  // Noncompliant
+Return ((x + 1))  ' Noncompliant
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
