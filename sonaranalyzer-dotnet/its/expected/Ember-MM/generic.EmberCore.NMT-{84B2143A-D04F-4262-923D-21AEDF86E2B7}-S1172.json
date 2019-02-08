@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused procedure parameter 'filename'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1213,
+"startColumn":  90,
+"endLine":  1213,
+"endColumn":  114
+}
+}
+}
+]
+}

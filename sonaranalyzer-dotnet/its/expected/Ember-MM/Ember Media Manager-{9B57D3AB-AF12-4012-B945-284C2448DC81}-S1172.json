@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused procedure parameter 'Language'.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2994,
+"startColumn":  36,
+"endLine":  2994,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused procedure parameter 'iIndex'.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4312,
+"startColumn":  26,
+"endLine":  4312,
+"endColumn":  49
+}
+}
+}
+]
+}

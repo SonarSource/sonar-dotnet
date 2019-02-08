@@ -1,0 +1,44 @@
+<p>Unused parameters are misleading. Whatever the values passed to such parameters, the behavior will be the same.</p>
+<p>This rule raises an issue when a <code>private</code> procedure of a <code>Class</code>, <code>Module</code> or <code>Structure</code> takes a
+parameter without using it.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Private Sub DoSomething(ByVal a As Integer, ByVal b as Integer) ' "b" is unused
+    Compute(a)
+End Sub
+
+Private Function DoSomething2(ByVal a As Integer, ByVal b As Integer) As Integer ' "a" is unused
+    Compute(b)
+    Return b
+End Function
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Private Sub DoSomething(ByVal a As Integer)
+    Compute(a)
+End Sub
+
+Private Function DoSomething2(ByVal b As Integer) As Integer
+    Compute(b)
+    Return b
+End Function
+</pre>
+<h2>Exceptions</h2>
+<p>This rule doesn't raise any issue in the following contexts:</p>
+<ul>
+  <li> Procedures decorated with attributes. </li>
+  <li> Empty procedures. </li>
+  <li> Procedures which only throw <code>NotImplementedException</code>. </li>
+  <li> Main methods. </li>
+  <li> <code>virtual</code>, <code>override</code> procedures. </li>
+  <li> Interface implementations. </li>
+  <li> Event handlers. </li>
+</ul>
+<h2>See</h2>
+<ul>
+  <li> MISRA C++:2008, 0-1-11 - There shall be no unused parameters (named or unnamed) in nonvirtual functions. </li>
+  <li> MISRA C:2012, 2.7 - There should be no unused parameters in functions </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/NYA5">CERT, MSC12-C.</a> - Detect and remove code that has no effect or is never
+  executed </li>
+</ul>
+

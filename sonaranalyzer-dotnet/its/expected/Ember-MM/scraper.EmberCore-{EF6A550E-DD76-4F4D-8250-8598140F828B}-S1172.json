@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused procedure parameter 'doProgress'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  62,
+"endLine":  133,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused procedure parameter 'iProgress'.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"region":  {
+"startLine":  313,
+"startColumn":  73,
+"endLine":  313,
+"endColumn":  99
+}
+}
+}
+]
+}

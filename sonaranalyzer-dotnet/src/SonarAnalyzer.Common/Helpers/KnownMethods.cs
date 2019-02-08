@@ -260,9 +260,9 @@ namespace SonarAnalyzer.Helpers
                 methodSymbol.Parameters.Length == 2 &&
                 methodSymbol.Parameters[0].Type.Is(KnownType.System_Object) &&
                 (
-                    methodSymbol.Parameters[1].Type.DerivesFrom(KnownType.System_EventArgs) ||
                     // This is not enough for UWP as it uses other kind of event args (e.g. ILeavingBackgroundEventArgs)
-                    methodSymbol.Parameters[1].Type.ToString().EndsWith("EventArgs", StringComparison.Ordinal)
+                    methodSymbol.Parameters[1].Type.ToString().EndsWith("EventArgs", StringComparison.Ordinal) ||
+                    methodSymbol.Parameters[1].Type.DerivesFrom(KnownType.System_EventArgs)
                 );
         }
 
