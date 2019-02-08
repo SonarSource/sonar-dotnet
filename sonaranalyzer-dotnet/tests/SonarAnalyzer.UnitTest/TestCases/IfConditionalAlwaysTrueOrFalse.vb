@@ -27,6 +27,18 @@
       ' ...
     End If
 
+    If j > 1 AndAlso True Then
+    End If
+
+    If j > 1 OrElse True Then ' FN
+    End If
+
+    If j > 1 AndAlso False Then ' FN
+    End If
+
+    If j > 1 OrElse True Then
+    End If
+
     If True Then ' Noncompliant
       DoSomething()
     ElseIf True Then ' Noncompliant {{Remove this useless 'ElseIf' clause.}}

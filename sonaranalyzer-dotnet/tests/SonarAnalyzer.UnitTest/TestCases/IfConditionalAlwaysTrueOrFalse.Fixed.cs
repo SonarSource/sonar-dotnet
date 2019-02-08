@@ -8,7 +8,7 @@ namespace Tests.Diagnostics
         public void DoSomething2() { throw new NotSupportedException(); }
         public IfConditionalAlwaysTrueOrFalse(bool a, bool b)
         {
-            var someWronglyFormatted = 45;
+            var someWronglyFormatted =      45     ;
             if (a == b)
             {
                 DoSomething();

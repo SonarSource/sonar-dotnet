@@ -23,7 +23,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -40,6 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(TreatNode, SyntaxKind.IfStatement);
 
@@ -53,18 +53,14 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var location = ifSyntax.Else == null
                 ? ifSyntax.GetLocation()
-                : Location.Create(
-                    ifSyntax.SyntaxTree,
-                    new TextSpan(ifSyntax.IfKeyword.SpanStart, ifSyntax.Else.ElseKeyword.Span.End - ifSyntax.IfKeyword.SpanStart));
+                : ifSyntax.IfKeyword.CreateLocation(ifSyntax.Else.ElseKeyword);
 
             context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, ifStatementLiteral));
         }
 
         protected override void ReportIfTrue(IfStatementSyntax ifSyntax, SyntaxNodeAnalysisContext context)
         {
-            var location = Location.Create(
-                ifSyntax.SyntaxTree,
-                new TextSpan(ifSyntax.IfKeyword.SpanStart, ifSyntax.CloseParenToken.Span.End - ifSyntax.IfKeyword.SpanStart));
+            var location = ifSyntax.IfKeyword.CreateLocation(ifSyntax.CloseParenToken);
 
             context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, ifStatementLiteral));
 

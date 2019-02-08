@@ -42,19 +42,12 @@ namespace SonarAnalyzer.Rules
         {
             var ifNode = (TIfSyntax)context.Node;
 
-            var isTrue = ConditionIsTrueLiteral(ifNode);
-            var isFalse = ConditionIsFalseLiteral(ifNode);
-
-            if (!isTrue && !isFalse)
-            {
-                return;
-            }
-
-            if (isTrue)
+            if (ConditionIsTrueLiteral(ifNode))
             {
                 ReportIfTrue(ifNode, context);
             }
-            else
+
+            if (ConditionIsFalseLiteral(ifNode))
             {
                 ReportIfFalse(ifNode, context);
             }
