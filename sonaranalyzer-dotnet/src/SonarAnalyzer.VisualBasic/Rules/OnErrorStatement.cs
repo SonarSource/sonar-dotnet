@@ -21,7 +21,6 @@
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
@@ -47,8 +46,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 c =>
                 {
                     var node = (OnErrorGoToStatementSyntax)c.Node;
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
-                        Location.Create(node.SyntaxTree, TextSpan.FromBounds(node.OnKeyword.SpanStart, node.ErrorKeyword.Span.End))));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.OnKeyword.CreateLocation(node.ErrorKeyword)));
                 },
                 SyntaxKind.OnErrorGoToLabelStatement,
                 SyntaxKind.OnErrorGoToZeroStatement,
@@ -58,8 +56,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 c =>
                 {
                     var node = (OnErrorResumeNextStatementSyntax)c.Node;
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
-                        Location.Create(node.SyntaxTree, TextSpan.FromBounds(node.OnKeyword.SpanStart, node.ErrorKeyword.Span.End))));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.OnKeyword.CreateLocation(node.ErrorKeyword)));
                 },
                 SyntaxKind.OnErrorResumeNextStatement);
         }

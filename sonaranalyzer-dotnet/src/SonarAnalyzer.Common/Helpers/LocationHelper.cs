@@ -18,12 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Helpers;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Helpers
 {
-    public abstract class IfChainWithoutElseBase : SonarDiagnosticAnalyzer
+    public static class LocationHelper
     {
-        internal const string DiagnosticId = "S126";
+        public static Location CreateLocation(this SyntaxToken from, SyntaxToken to) =>
+            Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
+
+        public static Location CreateLocation(this SyntaxNode from, SyntaxNode to) =>
+            Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
+
+        public static Location CreateLocation(this SyntaxNode from, SyntaxToken to) =>
+            Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
+
+        public static Location CreateLocation(this SyntaxToken from, SyntaxNode to) =>
+            Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
     }
 }

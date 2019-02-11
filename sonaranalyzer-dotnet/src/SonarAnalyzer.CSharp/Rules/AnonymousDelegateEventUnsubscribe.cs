@@ -23,7 +23,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -52,10 +51,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol is IEventSymbol @event &&
                         assignment.Right is AnonymousFunctionExpressionSyntax)
                     {
-                        var location = Location.Create(c.Node.SyntaxTree,
-                            new TextSpan(assignment.OperatorToken.SpanStart, assignment.Span.End - assignment.OperatorToken.SpanStart));
-
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
+                            assignment.OperatorToken.CreateLocation(assignment)));
                     }
                 },
                 SyntaxKind.SubtractAssignmentExpression);

@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (!IsStatementIndentationOk(whileStatement, whileStatement.Statement))
             {
                 // Squiggle - "while (condition1 && condition2)"
-                var primaryLocation = GetLocationBetweenTokens(whileStatement.WhileKeyword, whileStatement.CloseParenToken);
+                var primaryLocation = whileStatement.WhileKeyword.CreateLocation(whileStatement.CloseParenToken);
                 ReportIssue(context, primaryLocation, whileStatement.Statement, "while");
             }
         }
@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (!IsStatementIndentationOk(forStatement, forStatement.Statement))
             {
                 // Squiggle - "for (...)"
-                var primaryLocation = GetLocationBetweenTokens(forStatement.ForKeyword, forStatement.CloseParenToken);
+                var primaryLocation = forStatement.ForKeyword.CreateLocation(forStatement.CloseParenToken);
                 ReportIssue(context, primaryLocation, forStatement.Statement, "for");
             }
         }
@@ -102,7 +102,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (!IsStatementIndentationOk(forEachStatement, forEachStatement.Statement))
             {
                 // Squiggle - "foreach (...)"
-                var primaryLocation = GetLocationBetweenTokens(forEachStatement.ForEachKeyword, forEachStatement.CloseParenToken);
+                var primaryLocation = forEachStatement.ForEachKeyword.CreateLocation(forEachStatement.CloseParenToken);
                 ReportIssue(context, primaryLocation, forEachStatement.Statement, "foreach");
             }
         }
@@ -133,8 +133,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             if (!IsStatementIndentationOk(controlNode, ifStatement.Statement))
-            {    
-                var primaryLocation = GetLocationBetweenTokens(startToken, ifStatement.CloseParenToken);
+            {
+                var primaryLocation = startToken.CreateLocation(ifStatement.CloseParenToken);
                 ReportIssue(context, primaryLocation, ifStatement.Statement, conditionLabelText);
             }
         }
@@ -161,9 +161,6 @@ namespace SonarAnalyzer.Rules.CSharp
                         primaryLocation,
                         new Location[] { GetFirstLineOfNode(secondaryLocationNode) },
                         conditionLabelText));
-
-        private static Location GetLocationBetweenTokens(SyntaxToken startToken, SyntaxToken endToken) =>
-            Location.Create(startToken.SyntaxTree, new TextSpan(startToken.SpanStart, endToken.Span.End - startToken.SpanStart));
 
         private static Location GetFirstLineOfNode(SyntaxNode node)
         {

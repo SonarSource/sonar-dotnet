@@ -22,7 +22,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -71,14 +70,8 @@ namespace SonarAnalyzer.Rules
                         return;
                     }
 
-                    var errorLocation = new TextSpan(
-                        topLevelUnary.SpanStart,
-                        GetOperatorToken(lastUnary).Span.End - topLevelUnary.SpanStart);
-
-                    c.ReportDiagnosticWhenActive(
-                        Diagnostic.Create(Rule,
-                            Location.Create(c.Node.SyntaxTree, errorLocation),
-                            GetOperatorToken(topLevelUnary).ToString()));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, topLevelUnary.CreateLocation(GetOperatorToken(lastUnary)),
+                        GetOperatorToken(topLevelUnary).ToString()));
                 }, SyntaxKinds.ToArray());
         }
 

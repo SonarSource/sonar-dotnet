@@ -23,7 +23,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -104,8 +103,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var location = Location.Create(memberCall.SyntaxTree, TextSpan.FromBounds(memberCall.OperatorToken.SpanStart, invocation.Span.End));
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, MessageGetType));
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberCall.OperatorToken.CreateLocation(invocation),
+                MessageGetType));
         }
 
         private static bool IsGetTypeCall(IMethodSymbol invokedMethod)

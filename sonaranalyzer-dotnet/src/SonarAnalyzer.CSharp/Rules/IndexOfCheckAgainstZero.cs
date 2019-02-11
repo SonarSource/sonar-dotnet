@@ -23,7 +23,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -59,8 +58,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         constValue == 0 &&
                         IsIndexOfCall(lessThan.Right, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, Location.Create(lessThan.SyntaxTree,
-                            TextSpan.FromBounds(lessThan.Left.SpanStart, lessThan.OperatorToken.Span.End))));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
+                            lessThan.Left.CreateLocation(lessThan.OperatorToken)));
                     }
                 },
                 SyntaxKind.LessThanExpression);
@@ -73,8 +72,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         constValue == 0 &&
                         IsIndexOfCall(greaterThan.Left, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, Location.Create(greaterThan.SyntaxTree,
-                            TextSpan.FromBounds(greaterThan.OperatorToken.SpanStart, greaterThan.Right.Span.End))));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
+                            greaterThan.OperatorToken.CreateLocation(greaterThan.Right)));
                     }
                 },
                 SyntaxKind.GreaterThanExpression);

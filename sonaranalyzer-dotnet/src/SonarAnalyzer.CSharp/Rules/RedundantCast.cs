@@ -25,7 +25,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -60,8 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var castExpression = (BinaryExpressionSyntax)c.Node;
                     CheckCastExpression(c, castExpression.Left, castExpression.Right,
-                        Location.Create(c.Node.SyntaxTree,
-                            TextSpan.FromBounds(castExpression.OperatorToken.SpanStart, castExpression.Right.Span.End)));
+                        castExpression.OperatorToken.CreateLocation(castExpression.Right));
                 },
                 SyntaxKind.AsExpression);
 
@@ -133,8 +131,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return methodCalledAsStatic
                 ? memberAccess.GetLocation()
-                : Location.Create(invocation.SyntaxTree,
-                    new TextSpan(memberAccess.OperatorToken.SpanStart, invocation.Span.End - memberAccess.OperatorToken.SpanStart));
+                : memberAccess.OperatorToken.CreateLocation(invocation);
         }
 
         private static ITypeSymbol GetElementType(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol,
