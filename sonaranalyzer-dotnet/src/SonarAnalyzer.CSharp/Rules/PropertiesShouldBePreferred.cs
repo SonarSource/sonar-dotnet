@@ -83,6 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
                    !method.ReturnsVoid &&
                    !method.ReturnType.Is(TypeKind.Array) &&
                    method.Name != "GetEnumerator" &&
+                   method.Name != "GetAwaiter" &&
                    NameStartsWithGet(method);
         }
 

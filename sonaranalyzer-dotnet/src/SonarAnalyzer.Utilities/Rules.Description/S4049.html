@@ -7,15 +7,15 @@ using System;
 
 namespace MyLibrary
 {
-  public class Foo
-  {
-    private string name;
-
-    public string GetName()  // Noncompliant
+    public class Foo
     {
-      return name;
+        private string name;
+
+        public string GetName()  // Noncompliant
+        {
+            return name;
+        }
     }
-  }
 }
 </pre>
 <h2>Compliant Solution</h2>
@@ -24,18 +24,28 @@ using System;
 
 namespace MyLibrary
 {
-  public class Foo
-  {
-    private string name;
-
-    public string Name
+    public class Foo
     {
-      get
-      {
-        return name;
-      }
+        private string name;
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+        }
     }
-  }
 }
 </pre>
+<h2>Exceptions</h2>
+<p>The rule doesn't raise an issue when the method:</p>
+<ul>
+  <li> Is a constructor </li>
+  <li> Is an <code>override</code> </li>
+  <li> Is an interface implementation </li>
+  <li> Is <code>async</code> </li>
+  <li> Returns <code>Task</code>, <code>Task&lt;T&gt;</code> </li>
+  <li> Is named <code>GetEnumerator</code>, <code>GetAwaiter</code> </li>
+</ul>
 
