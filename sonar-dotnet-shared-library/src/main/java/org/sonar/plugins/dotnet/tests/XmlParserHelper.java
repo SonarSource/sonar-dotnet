@@ -42,6 +42,9 @@ public class XmlParserHelper implements AutoCloseable {
       this.file = file;
       this.reader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
       XMLInputFactory xmlFactory = XMLInputFactory.newInstance();
+      // disable external entities
+      xmlFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, Boolean.FALSE);
+      xmlFactory.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.FALSE);
       this.stream = xmlFactory.createXMLStreamReader(reader);
 
     } catch (FileNotFoundException | XMLStreamException e) {
