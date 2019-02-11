@@ -73,6 +73,55 @@ namespace MyLibrary
         bool MoveNext();
     }
 
+    // See https://github.com/SonarSource/sonar-dotnet/issues/2238
+    #region GetAwaiter
+    public class CustomAwaiter
+    {
+        public CustomAwaiter(int simulateDelayMilliseconds)
+        {
+        }
+    }
+
+    public class CustomAwaiter<T> : CustomAwaiter
+    {
+        public CustomAwaiter(int simulateDelayMilliseconds, T result)
+            : base(simulateDelayMilliseconds)
+        {
+        }
+    }
+
+    public class CustomAwaitable
+    {
+        protected readonly int _simulateDelayMilliseconds;
+
+        public CustomAwaitable(int simulateDelayMilliseconds)
+        {
+            _simulateDelayMilliseconds = simulateDelayMilliseconds;
+        }
+
+        public CustomAwaiter GetAwaiter() // Compliant, name is excluded
+        {
+            return new CustomAwaiter(_simulateDelayMilliseconds);
+        }
+    }
+
+    public class CustomAwaitable<T> : CustomAwaitable
+    {
+        private readonly T _result;
+
+        public CustomAwaitable(int simulateDelayMilliseconds, T result)
+            : base(simulateDelayMilliseconds)
+        {
+            _result = result;
+        }
+
+        public new CustomAwaiter<T> GetAwaiter() // Compliant, name is excluded
+        {
+            return new CustomAwaiter<T>(_simulateDelayMilliseconds, _result);
+        }
+    }
+    #endregion // GetAwaiter
+
     public class AsyncTests
     {
         public async void GetResultAsync() // Compliant - use async
