@@ -109,7 +109,7 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
       try {
         canonicalPath = new File(path).getCanonicalPath();
       } catch (IOException e) {
-        LOG.debug("Skipping the import of Visual Studio XML code coverage for the invalid file path: " + path
+        LOG.warn("Skipping the import of Visual Studio XML code coverage for the invalid file path: " + path
           + " at line " + xmlParserHelper.stream().getLocation().getLineNumber(), e);
         return;
       }
