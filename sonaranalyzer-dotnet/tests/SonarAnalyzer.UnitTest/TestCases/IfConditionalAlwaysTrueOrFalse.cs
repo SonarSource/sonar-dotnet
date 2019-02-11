@@ -4,8 +4,8 @@ namespace Tests.Diagnostics
 {
     public class IfConditionalAlwaysTrueOrFalse
     {
-        public void DoSomething(  ) { throw new NotSupportedException(); }
-        public void DoSomething2(  ) { throw new NotSupportedException(); }
+        public void DoSomething() { throw new NotSupportedException(); }
+        public void DoSomething2() { throw new NotSupportedException(); }
         public IfConditionalAlwaysTrueOrFalse(bool a, bool b)
         {
             var someWronglyFormatted =      45     ;
@@ -41,7 +41,6 @@ namespace Tests.Diagnostics
             }
             else // Noncompliant {{Remove this useless 'else' clause.}}
             {
-
             }
 
             if (false) // Noncompliant

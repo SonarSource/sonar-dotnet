@@ -9,33 +9,18 @@ statements with conditions that are always true are completely redundant, and ma
 <p>In any of these cases, unconditional <code>if</code> statements should be removed.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-if (true)
-{
-  DoSomething();
-}
-...
-if (false)
-{
-  DoSomethingElse();
-}
+    If True Then ' Noncompliant
+      DoSomething()
+    End If
 
-if (2 &lt; 3 ) { ... }  // Noncompliant; always false
-
-int i = 0;
-int j = 0;
-// ...
-j = Foo();
-
-if (j &gt; 0 &amp;&amp; i &gt; 0) { ... }  // Noncompliant; always false - i never set after initialization
-
-bool b = true;
-//...
-if (b || !b) { ... }  // Noncompliant
+    If False Then ' Noncompliant
+      DoSomethingElse()
+    End If
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 DoSomething();
-...
+' ...
 </pre>
 <h2>See</h2>
 <ul>
@@ -45,6 +30,4 @@ DoSomething();
   <li> MISRA C:2004, 13.7 - Boolean operations whose results are invariant shall not be permitted. </li>
   <li> MISRA C:2012, 14.3 - Controlling expressions shall not be invariant </li>
 </ul>
-<h2>Deprecated</h2>
-<p>This rule is deprecated; use {rule:csharpsquid:S2583} instead.</p>
 

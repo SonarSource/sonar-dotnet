@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,20 +29,29 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void IfConditionalAlwaysTrueOrFalse()
+        public void IfConditionalAlwaysTrueOrFalse_CS()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\IfConditionalAlwaysTrueOrFalse.cs", new IfConditionalAlwaysTrueOrFalse());
+            Verifier.VerifyAnalyzer(@"TestCases\IfConditionalAlwaysTrueOrFalse.cs",
+                new CS.IfConditionalAlwaysTrueOrFalse());
         }
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void IfConditionalAlwaysTrueOrFalse_CodeFix()
+        public void IfConditionalAlwaysTrueOrFalse_CodeFix_CS()
         {
             Verifier.VerifyCodeFix(
                 @"TestCases\IfConditionalAlwaysTrueOrFalse.cs",
                 @"TestCases\IfConditionalAlwaysTrueOrFalse.Fixed.cs",
-                new IfConditionalAlwaysTrueOrFalse(),
-                new IfConditionalAlwaysTrueOrFalseCodeFixProvider());
+                new CS.IfConditionalAlwaysTrueOrFalse(),
+                new CS.IfConditionalAlwaysTrueOrFalseCodeFixProvider());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void IfConditionalAlwaysTrueOrFalse_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\IfConditionalAlwaysTrueOrFalse.vb",
+                new VB.IfConditionalAlwaysTrueOrFalse());
         }
     }
 }
