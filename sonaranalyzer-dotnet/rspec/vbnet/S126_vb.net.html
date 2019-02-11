@@ -1,29 +1,28 @@
-<p>This rule applies whenever an <code>if</code> statement is followed by one or more <code>else if</code> statements; the final <code>else if</code>
-should be followed by an <code>else</code> statement.</p>
-<p>The requirement for a final <code>else</code> statement is defensive programming.</p>
-<p>The <code>else</code> statement should either take appropriate action or contain a suitable comment as to why no action is taken. This is
-consistent with the requirement to have a final <code>default</code> clause in a <code>switch</code> statement.</p>
+<p>This rule applies whenever an <code>If</code> statement is followed by one or more <code>ElseIf</code> statements; the final <code>ElseIf</code>
+should be followed by an <code>Else</code> statement.</p>
+<p>The requirement for a final <code>Else</code> statement is defensive programming.</p>
+<p>The <code>Else</code> statement should either take appropriate action or contain a suitable comment as to why no action is taken. This is
+consistent with the requirement to have a final <code>Case Else</code> clause in a <code>Select Case</code> statement.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 If x = 0 Then
-    doSomething()
+    DoSomething()
 ElseIf x = 1 Then
-    doSomethingElse()
+    DoSomethingElse()
 End If
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 If x = 0 Then
-    doSomething()
+    DoSomething()
 ElseIf x = 1 Then
-    doSomethingElse()
+    DoSomethingElse()
 Else
     Throw New ArgumentException("...")
 End If
 </pre>
 <h2>Exceptions</h2>
-<p>When all branches of an <code>if</code>-<code>else if</code> end with <code>return</code>, <code>break</code> or <code>throw</code>, the code that
-comes after the <code>if</code> implicitly behaves as if it was in an <code>else</code> clause. This rule will therefore ignore that case.</p>
+<p>None</p>
 <h2>See</h2>
 <ul>
   <li> MISRA C:2004, 14.10 - All if...else if constructs shall be terminated with an else clause. </li>
