@@ -8,6 +8,7 @@
     End If
 
     If False Then ' Noncompliant
+'   ^^^^^^^^^^^^^
       DoSomethingElse()
     End If
 

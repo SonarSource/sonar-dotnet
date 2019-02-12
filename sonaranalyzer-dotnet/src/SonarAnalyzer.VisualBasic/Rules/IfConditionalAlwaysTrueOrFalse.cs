@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override void ReportIfFalse(MultiLineIfBlockSyntax ifSyntax, SyntaxNodeAnalysisContext context)
         {
             var location = ifSyntax.ElseBlock == null
-                ? ifSyntax.GetLocation()
+                ? ifSyntax.IfStatement.GetLocation()
                 : ifSyntax.IfStatement.IfKeyword.CreateLocation(ifSyntax.ElseBlock.ElseStatement.ElseKeyword);
 
             context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, ifStatementLiteral));
