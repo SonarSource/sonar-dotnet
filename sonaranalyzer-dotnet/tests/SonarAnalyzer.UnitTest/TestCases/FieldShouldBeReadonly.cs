@@ -107,7 +107,7 @@ namespace Tests.Diagnostics
     class MyClass
     {
         private X1Struct x; // Compliant
-        private X1Struct y; // Noncompliant
+        private X1Struct y; // Compliant
 
         private X1Class z; // Noncompliant
 

@@ -106,7 +106,7 @@ namespace Tests.Diagnostics
     class MyClass
     {
         private X1Struct x; // Compliant
-        private readonly X1Struct y; // Fixed
+        private X1Struct y; // Compliant
 
         private readonly X1Class z; // Fixed
 
