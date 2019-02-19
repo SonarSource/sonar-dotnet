@@ -30,6 +30,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import org.sonarsource.analyzer.commons.xml.SafetyFactory;
 
 public class XmlParserHelper implements AutoCloseable {
 
@@ -41,11 +42,7 @@ public class XmlParserHelper implements AutoCloseable {
     try {
       this.file = file;
       this.reader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
-      XMLInputFactory xmlFactory = XMLInputFactory.newInstance();
-      // disable external entities
-      xmlFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, Boolean.FALSE);
-      xmlFactory.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.FALSE);
-      this.stream = xmlFactory.createXMLStreamReader(reader);
+      this.stream = SafetyFactory.createXMLInputFactory().createXMLStreamReader(reader);
 
     } catch (FileNotFoundException | XMLStreamException e) {
       throw new IllegalStateException(e);
