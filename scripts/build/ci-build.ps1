@@ -105,7 +105,7 @@ function Get-ScannerMsBuildPath() {
         Write-Debug "Scanner for MSBuild not found, downloading it"
 
         # This links always redirect to the latest released scanner
-        $downloadLink = "https://repox.sonarsource.com/sonarsource-public-releases/org/sonarsource/scanner/msbuild/" +
+        $downloadLink = "$env:ARTIFACTORY_URL/sonarsource-public-releases/org/sonarsource/scanner/msbuild/" +
             "sonar-scanner-msbuild/%5BRELEASE%5D/sonar-scanner-msbuild-%5BRELEASE%5D-net46.zip"
         $scannerMsbuildZip = Join-Path $currentDir "\SonarScanner.MSBuild.zip"
 
@@ -159,7 +159,8 @@ function Initialize-NuGetConfig() {
 
     $nugetExe = Get-NuGetPath
     Write-Debug "Adding repox source to NuGet config"
-    Exec { & $nugetExe Sources Add -Name "repox" -Source "https://repox.sonarsource.com/api/nuget/sonarsource-nuget-qa" }
+    Write-Debug "ARTIFACTORY_URL: $env:ARTIFACTORY_URL"
+    Exec { & $nugetExe Sources Add -Name "repox" -Source "$env:ARTIFACTORY_URL/api/nuget/sonarsource-nuget-qa" }
 
     Write-Debug "Adding repox API key to NuGet config"
     Exec { & $nugetExe SetApiKey "${repoxUserName}:${repoxPassword}" -Source "repox" }

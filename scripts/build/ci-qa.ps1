@@ -34,7 +34,7 @@ function Get-BranchName() {
 }
 
 function Get-PackageUrl([string]$packageName) {
-    return "https://repox.sonarsource.com/api/nuget/sonarsource-nuget-qa/${packageName}"
+    return "$env:ARTIFACTORY_URL/api/nuget/sonarsource-nuget-qa/${packageName}"
 }
 
 function Get-AuthHeaders() {
