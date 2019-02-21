@@ -143,10 +143,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     this.allFields.AddRange(p.AllFields);
                 }
 
-                foreach (var attributedField in this.allFields.Where(f => f.Symbol.GetAttributes().Any()))
+                foreach (var attributedField in this.allFields.Where(f => ShouldBeExcluded(f)))
                 {
                     this.excludedFields.Add(attributedField.Symbol);
                 }
+
+                bool ShouldBeExcluded(FieldTuple fieldTuple) =>
+                    fieldTuple.Symbol.GetAttributes().Any() ||
+                    (fieldTuple.Symbol.Type.IsStruct() && fieldTuple.Symbol.Type.SpecialType == SpecialType.None);
             }
 
             private class PartialTypeDeclarationProcessor

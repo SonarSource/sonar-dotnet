@@ -106,7 +106,9 @@ namespace Tests.Diagnostics
     class MyClass
     {
         private X1Struct x; // Compliant
-        private readonly X1Struct y; // Fixed
+        // See https://github.com/SonarSource/sonar-dotnet/issues/2291
+        private X1Struct y; // Compliant - could be set as readonly but this changes the behavior of the field
+        private readonly IntPtr myPtr; // Fixed
 
         private readonly X1Class z; // Fixed
 
@@ -117,6 +119,7 @@ namespace Tests.Diagnostics
             x = new X1Struct();
             y = new X1Struct();
             z = new X1Class();
+            myPtr = new IntPtr(12);
             (this.y.y).z = "a";
             (this.z.y).z = "a";
             if (this.field)
