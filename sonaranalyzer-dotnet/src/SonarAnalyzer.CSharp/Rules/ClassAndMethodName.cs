@@ -37,8 +37,8 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(MethodNameDiagnosticId)]
     public sealed class ClassAndMethodName : SonarDiagnosticAnalyzer
     {
-        internal const string TypeNameDiagnosticId = "S101";
         internal const string MethodNameDiagnosticId = "S100";
+        internal const string TypeNameDiagnosticId = "S101";
 
         private const string MessageFormat = "Rename {0} '{1}' to match camel case naming rules, {2}.";
         internal const string MessageFormatNonUnderscore = "consider using '{0}'";
@@ -50,8 +50,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor typeNameRule =
             DiagnosticDescriptorBuilder.GetDescriptor(TypeNameDiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
-            => ImmutableArray.Create(methodNameRule, typeNameRule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
+            = ImmutableArray.Create(methodNameRule, typeNameRule);
 
         private static readonly Dictionary<SyntaxKind, string> TypeKindNameMapping =
             new Dictionary<SyntaxKind, string>
@@ -243,8 +243,8 @@ namespace SonarAnalyzer.Rules.CSharp
                    suggestion == identifierName;
         }
 
-        private static string HandleFirstPartOfTypeName(string input,
-            bool requireInitialI, bool allowInitialI, int maxUppercase)
+        private static string HandleFirstPartOfTypeName(string input, bool requireInitialI, bool allowInitialI,
+            int maxUppercase)
         {
             var startsWithI = input[0] == 'I';
 
@@ -254,21 +254,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 return prefix + SuggestFixedCaseName(FirstCharToUpper(input), maxUppercase + 1);
             }
 
-            string suggestionToProcess;
-            if (input.Length == 1 &&
+            var suggestionToProcess = ShouldExcludeFirstLetter()
+                ? FirstCharToUpper(input.Substring(1))
+                : FirstCharToUpper(input);
+
+            return SuggestFixedCaseName(suggestionToProcess, maxUppercase);
+
+            bool ShouldExcludeFirstLetter() =>
+                input.Length == 1 &&
                 !allowInitialI &&
                 startsWithI &&
                 IsCharUpper(input, 0) &&
-                !IsCharUpper(input, 1))
-            {
-                suggestionToProcess = FirstCharToUpper(input.Substring(1));
-            }
-            else
-            {
-                suggestionToProcess = FirstCharToUpper(input);
-            }
-
-            return SuggestFixedCaseName(suggestionToProcess, maxUppercase);
+                !IsCharUpper(input, 1);
         }
 
         private static string SuggestCapitalLetterAfterNonLetter(StringBuilder suggestion)
@@ -281,6 +278,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     suggestion[i] = char.ToUpperInvariant(suggestion[i]);
                 }
             }
+
             return suggestion.ToString();
         }
 
@@ -338,14 +336,13 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static string FirstCharToUpper(string input)
-        {
-            return input.Length > 0
+        private static string FirstCharToUpper(string input) =>
+            input.Length > 0
                 ? char.ToUpperInvariant(input[0]) + input.Substring(1)
                 : input;
-        }
 
-        private static bool IsCharUpper(string input, int idx) => idx >= 0
+        private static bool IsCharUpper(string input, int idx) =>
+            idx >= 0
             && idx < input.Length
             && char.IsUpper(input[idx]);
     }
