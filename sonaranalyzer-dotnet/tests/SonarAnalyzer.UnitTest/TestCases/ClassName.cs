@@ -118,3 +118,12 @@ namespace Tests.Diagnostics
 {
     public partial class ELN { } // Compliant because the other subpart is generated
 }
+
+namespace AnotherNamespace
+{
+    class IOStream { }
+    class MyIOStream { }
+    class AddUIIntegration { }
+    class TokenEOF { } // Noncompliant - 3 upper case letters
+    class EOFile { }  // Compliant because 2 upper case letters + 1 for the next word
+}

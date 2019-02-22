@@ -67,32 +67,6 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'PERatio' to match camel case naming rules, consider using 'PeRatio'.",
-"location":  {
-"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
-"region":  {
-"startLine":  76,
-"startColumn":  23,
-"endLine":  76,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S100",
-"message":  "Rename property 'PERatioRealtime' to match camel case naming rules, consider using 'PeRatioRealtime'.",
-"location":  {
-"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
-"region":  {
-"startLine":  78,
-"startColumn":  23,
-"endLine":  78,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S100",
 "message":  "Rename property 'PEGRatio' to match camel case naming rules, consider using 'PegRatio'.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",

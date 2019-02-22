@@ -25,58 +25,6 @@
 "endColumn":  33
 }
 }
-},
-{
-"id":  "S100",
-"message":  "Rename method 'LLCase' to match camel case naming rules, consider using 'LlCase'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Util\Internal\Collections\ImmutableAvlTreeTests.cs",
-"region":  {
-"startLine":  32,
-"startColumn":  21,
-"endLine":  32,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S100",
-"message":  "Rename method 'LRCase' to match camel case naming rules, consider using 'LrCase'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Util\Internal\Collections\ImmutableAvlTreeTests.cs",
-"region":  {
-"startLine":  62,
-"startColumn":  21,
-"endLine":  62,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S100",
-"message":  "Rename method 'RRCase' to match camel case naming rules, consider using 'RrCase'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Util\Internal\Collections\ImmutableAvlTreeTests.cs",
-"region":  {
-"startLine":  75,
-"startColumn":  21,
-"endLine":  75,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S100",
-"message":  "Rename method 'RLCase' to match camel case naming rules, consider using 'RlCase'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Util\Internal\Collections\ImmutableAvlTreeTests.cs",
-"region":  {
-"startLine":  88,
-"startColumn":  21,
-"endLine":  88,
-"endColumn":  27
-}
-}
 }
 ]
 }

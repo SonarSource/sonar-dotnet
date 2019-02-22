@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S100",
-"message":  "Rename property 'FileIODispatcher' to match camel case naming rules, consider using 'FileIoDispatcher'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
-"region":  {
-"startLine":  722,
-"startColumn":  27,
-"endLine":  722,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S100",
 "message":  "Rename method 'PeerSentEOF' to match camel case naming rules, consider using 'PeerSentEof'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
