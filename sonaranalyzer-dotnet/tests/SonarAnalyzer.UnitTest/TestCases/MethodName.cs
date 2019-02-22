@@ -29,7 +29,7 @@
         [System.Runtime.InteropServices.DllImport("User32.dll")]
         public static extern int ____MessageBox(int h, string m, string c, int type); // Compliant
 
-        public int MyPPProperty { get; set; } // Noncompliant {{Rename property 'MyPPProperty' to match camel case naming rules, consider using 'MyPpProperty'.}}
+        public int MyPPPProperty { get; set; } // Noncompliant {{Rename property 'MyPPPProperty' to match camel case naming rules, consider using 'MyPppProperty'.}}
 
         public void Should_define_convention_that_returns_metadata_module_type() { } // Compliant
 
@@ -78,6 +78,15 @@
         partial void MY_METHOD()
         {
         }
+    }
+
+    // See https://github.com/SonarSource/sonar-dotnet/issues/2290
+    public class AllowTwoLettersAcronyms
+    {
+        public void IOStream() { }
+        public void AddUIIntegrationTypes() { }
+        public void MyEOF() { } // Noncompliant
+        public void MyEOFile() { }
     }
 
     public class Invalid

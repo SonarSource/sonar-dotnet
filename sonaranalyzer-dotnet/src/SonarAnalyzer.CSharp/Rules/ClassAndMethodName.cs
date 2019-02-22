@@ -33,25 +33,25 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId_TypeName)]
-    [Rule(DiagnosticId_MethodName)]
+    [Rule(TypeNameDiagnosticId)]
+    [Rule(MethodNameDiagnosticId)]
     public sealed class ClassAndMethodName : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId_MethodName = "S101";
-        internal const string DiagnosticId_TypeName = "S100";
+        internal const string TypeNameDiagnosticId = "S101";
+        internal const string MethodNameDiagnosticId = "S100";
 
         private const string MessageFormat = "Rename {0} '{1}' to match camel case naming rules, {2}.";
         internal const string MessageFormatNonUnderscore = "consider using '{0}'";
         internal const string MessageFormatUnderscore = "trim underscores from the name";
 
-        private static readonly DiagnosticDescriptor rule_MethodName =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId_TypeName, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor methodNameRule =
+            DiagnosticDescriptorBuilder.GetDescriptor(MethodNameDiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        private static readonly DiagnosticDescriptor rule_TypeName =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId_MethodName, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor typeNameRule =
+            DiagnosticDescriptorBuilder.GetDescriptor(TypeNameDiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
-            => ImmutableArray.Create(rule_MethodName, rule_TypeName);
+            => ImmutableArray.Create(methodNameRule, typeNameRule);
 
         private static readonly Dictionary<SyntaxKind, string> TypeKindNameMapping =
             new Dictionary<SyntaxKind, string>
@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (identifier.ValueText.StartsWith("_", StringComparison.Ordinal) ||
                 identifier.ValueText.EndsWith("_", StringComparison.Ordinal))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_TypeName, identifier.GetLocation(),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(typeNameRule, identifier.GetLocation(),
                     TypeKindNameMapping[typeDeclaration.Kind()],
                     identifier.ValueText, MessageFormatUnderscore));
                 return;
@@ -130,7 +130,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (!isNameValid)
             {
                 var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_TypeName, identifier.GetLocation(),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(typeNameRule, identifier.GetLocation(),
                     TypeKindNameMapping[typeDeclaration.Kind()], identifier.ValueText, messageEnding));
             }
         }
@@ -156,7 +156,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (identifier.ValueText.StartsWith("_", StringComparison.Ordinal) ||
                 identifier.ValueText.EndsWith("_", StringComparison.Ordinal))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_MethodName, identifier.GetLocation(),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(methodNameRule, identifier.GetLocation(),
                     TypeKindNameMapping[member.Kind()],
                     identifier.ValueText, MessageFormatUnderscore));
                 return;
@@ -170,7 +170,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (!IsMemberNameValid(identifier.ValueText, out var suggestion))
             {
                 var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_MethodName, identifier.GetLocation(),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(methodNameRule, identifier.GetLocation(),
                     TypeKindNameMapping[member.Kind()],
                     identifier.ValueText, messageEnding));
             }
@@ -184,17 +184,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 return suggestion == identifierName;
             }
 
-            var suggestionBuilder = new StringBuilder(identifierName.Length);
+            var idealNameVariant = new StringBuilder(identifierName.Length);
+            var acceptableNameVariant = new StringBuilder(identifierName.Length);
 
             foreach (var part in SplitToParts(identifierName))
             {
-                suggestionBuilder.Append(SuggestFixedCaseName(part, 1));
+                idealNameVariant.Append(SuggestFixedCaseName(part, 1));
+                acceptableNameVariant.Append(SuggestFixedCaseName(part, 2));
             }
 
-            suggestionBuilder[0] = char.ToUpperInvariant(suggestionBuilder[0]);
-            suggestion = SuggestCapitalLetterAfterNonLetter(suggestionBuilder);
+            idealNameVariant[0] = char.ToUpperInvariant(idealNameVariant[0]);
+            suggestion = SuggestCapitalLetterAfterNonLetter(idealNameVariant);
 
-            return suggestion == identifierName;
+            acceptableNameVariant[0] = char.ToUpperInvariant(acceptableNameVariant[0]);
+            var acceptableSuggestion = SuggestCapitalLetterAfterNonLetter(acceptableNameVariant);
+
+            return acceptableSuggestion == identifierName ||
+                   suggestion == identifierName;
         }
 
         private static bool IsTypeNameValid(string identifierName, bool requireInitialI, bool allowInitialI,
