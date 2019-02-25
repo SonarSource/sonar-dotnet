@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S100",
-"message":  "Rename property 'lowercaseintproperty' to match camel case naming rules, consider using 'Lowercaseintproperty'.",
+"message":  "Rename property 'lowercaseintproperty' to match pascal case naming rules, consider using 'Lowercaseintproperty'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {

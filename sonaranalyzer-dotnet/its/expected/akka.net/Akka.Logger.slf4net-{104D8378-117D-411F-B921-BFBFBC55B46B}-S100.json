@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S100",
-"message":  "Rename method 'WithMDC' to match camel case naming rules, consider using 'WithMdc'.",
+"message":  "Rename method 'WithMDC' to match pascal case naming rules, consider using 'WithMdc'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.slf4net\Slf4NetLogger.cs",
 "region":  {

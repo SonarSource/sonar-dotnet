@@ -3,17 +3,25 @@ reduce noise, two consecutive upper case characters are allowed unless they form
 <code>XM</code> on its own is not.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public int doSomething(){...}
+public int doSomething() {...}
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public int DoSomething(){...}
+public int DoSomething() {...}
 </pre>
 <h2>Exceptions</h2>
-<p>The rule ignores members in types that are marked with <code>ComImportAttribute</code> or <code>InterfaceTypeAttribute</code>. <code>extern</code>
-methods are also excluded from the check. Furthermore, when <code>'_'</code> character is found in a name, the camel casing is not enforced.</p>
+<ul>
+  <li> The rule ignores members in types that are marked with <code>ComImportAttribute</code> or <code>InterfaceTypeAttribute</code>. </li>
+  <li> The rule ignores <code>extern</code> methods. </li>
+  <li> The rule allows for two-letter acronyms in which both letters are capitalized, as shown in the following identifier:
+  <code>ExecuteOnUIThread</code>. </li>
+  <li> Furthermore, when <code>'_'</code> character is found in a name, the camel casing is not enforced. </li>
+</ul>
 <pre>
 void My_method(){...} // valid
 void My_method_(){...} // invalid, leading and trailing underscores are reported
 </pre>
+<h2>See</h2>
+<p><a href="https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/capitalization-conventions">Microsoft Capitalization
+Conventions</a></p>
 

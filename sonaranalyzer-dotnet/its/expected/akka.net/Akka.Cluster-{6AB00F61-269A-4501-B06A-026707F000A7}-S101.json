@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S101",
-"message":  "Rename class 'EWMA' to match camel case naming rules, consider using 'Ewma'.",
+"message":  "Rename class 'EWMA' to match pascal case naming rules, consider using 'Ewma'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {

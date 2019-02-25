@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S101",
-"message":  "Rename class 'FSMSpecHelpers' to match camel case naming rules, consider using 'FsmSpecHelpers'.",
+"message":  "Rename class 'FSMSpecHelpers' to match pascal case naming rules, consider using 'FsmSpecHelpers'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\FSMSpecHelpers.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'TestFSMRef' to match camel case naming rules, consider using 'TestFsmRef'.",
+"message":  "Rename class 'TestFSMRef' to match pascal case naming rules, consider using 'TestFsmRef'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
 "region":  {

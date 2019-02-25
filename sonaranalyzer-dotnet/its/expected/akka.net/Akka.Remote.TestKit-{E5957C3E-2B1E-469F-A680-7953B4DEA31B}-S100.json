@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S100",
-"message":  "Rename method 'InitFSM' to match camel case naming rules, consider using 'InitFsm'.",
+"message":  "Rename method 'InitFSM' to match pascal case naming rules, consider using 'InitFsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename method 'InitFSM' to match camel case naming rules, consider using 'InitFsm'.",
+"message":  "Rename method 'InitFSM' to match pascal case naming rules, consider using 'InitFsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'FSM' to match camel case naming rules, consider using 'Fsm'.",
+"message":  "Rename property 'FSM' to match pascal case naming rules, consider using 'Fsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename method 'InitFSM' to match camel case naming rules, consider using 'InitFsm'.",
+"message":  "Rename method 'InitFSM' to match pascal case naming rules, consider using 'InitFsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {

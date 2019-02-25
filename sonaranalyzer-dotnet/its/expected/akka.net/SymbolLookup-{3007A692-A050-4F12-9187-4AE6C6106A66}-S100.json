@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S100",
-"message":  "Rename property 'symbol' to match camel case naming rules, consider using 'Symbol'.",
+"message":  "Rename property 'symbol' to match pascal case naming rules, consider using 'Symbol'.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'EPSEstimateCurrentYear' to match camel case naming rules, consider using 'EpsEstimateCurrentYear'.",
+"message":  "Rename property 'EPSEstimateCurrentYear' to match pascal case naming rules, consider using 'EpsEstimateCurrentYear'.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'EPSEstimateNextYear' to match camel case naming rules, consider using 'EpsEstimateNextYear'.",
+"message":  "Rename property 'EPSEstimateNextYear' to match pascal case naming rules, consider using 'EpsEstimateNextYear'.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'EPSEstimateNextQuarter' to match camel case naming rules, consider using 'EpsEstimateNextQuarter'.",
+"message":  "Rename property 'EPSEstimateNextQuarter' to match pascal case naming rules, consider using 'EpsEstimateNextQuarter'.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'EBITDA' to match camel case naming rules, consider using 'Ebitda'.",
+"message":  "Rename property 'EBITDA' to match pascal case naming rules, consider using 'Ebitda'.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'PEGRatio' to match camel case naming rules, consider using 'PegRatio'.",
+"message":  "Rename property 'PEGRatio' to match pascal case naming rules, consider using 'PegRatio'.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'PriceEPSEstimateCurrentYear' to match camel case naming rules, consider using 'PriceEpsEstimateCurrentYear'.",
+"message":  "Rename property 'PriceEPSEstimateCurrentYear' to match pascal case naming rules, consider using 'PriceEpsEstimateCurrentYear'.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'PriceEPSEstimateNextYear' to match camel case naming rules, consider using 'PriceEpsEstimateNextYear'.",
+"message":  "Rename property 'PriceEPSEstimateNextYear' to match pascal case naming rules, consider using 'PriceEpsEstimateNextYear'.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'quote' to match camel case naming rules, consider using 'Quote'.",
+"message":  "Rename property 'quote' to match pascal case naming rules, consider using 'Quote'.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'count' to match camel case naming rules, consider using 'Count'.",
+"message":  "Rename property 'count' to match pascal case naming rules, consider using 'Count'.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'created' to match camel case naming rules, consider using 'Created'.",
+"message":  "Rename property 'created' to match pascal case naming rules, consider using 'Created'.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'lang' to match camel case naming rules, consider using 'Lang'.",
+"message":  "Rename property 'lang' to match pascal case naming rules, consider using 'Lang'.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
 "region":  {
@@ -158,7 +158,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'results' to match camel case naming rules, consider using 'Results'.",
+"message":  "Rename property 'results' to match pascal case naming rules, consider using 'Results'.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'query' to match camel case naming rules, consider using 'Query'.",
+"message":  "Rename property 'query' to match pascal case naming rules, consider using 'Query'.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
 "region":  {

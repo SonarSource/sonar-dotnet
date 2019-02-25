@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S100",
-"message":  "Rename method 'InitializeFSM' to match camel case naming rules, consider using 'InitializeFsm'.",
+"message":  "Rename method 'InitializeFSM' to match pascal case naming rules, consider using 'InitializeFsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
 "region":  {

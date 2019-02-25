@@ -12,11 +12,20 @@ class MyClass {...}
 class SomeName42 {...}
 </pre>
 <h2>Exceptions</h2>
-<p>The rule ignores types that are marked with <code>ComImportAttribute</code> or <code>InterfaceTypeAttribute</code>. Furthermore, the rule allows to
-have <code>'_'</code> characters in class names inside test projects.</p>
+<ul>
+  <li> The rule ignores types that are marked with <code>ComImportAttribute</code> or <code>InterfaceTypeAttribute</code>. </li>
+  <li> The rule allows for two-letter acronyms in which both letters are capitalized, as shown in the following identifier: <code>IOStream</code>
+  </li>
+  <li> The rule allows having <code>'_'</code> characters in class names inside test projects. </li>
+</ul>
 <pre>
 class Some_Name___42 {...} // valid in test
 class Some_name___42 {...} // still not valid
 class Some_Name_XC {...} // invalid because of XC, should be Some_Name_Xc
 </pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/capitalization-conventions">Microsoft Capitalization
+  Conventions</a> </li>
+</ul>
 

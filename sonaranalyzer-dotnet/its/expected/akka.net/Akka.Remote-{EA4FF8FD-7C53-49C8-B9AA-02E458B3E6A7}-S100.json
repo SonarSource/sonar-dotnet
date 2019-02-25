@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S100",
-"message":  "Rename property 'state' to match camel case naming rules, consider using 'State'.",
+"message":  "Rename property 'state' to match pascal case naming rules, consider using 'State'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename method 'InitFSM' to match camel case naming rules, consider using 'InitFsm'.",
+"message":  "Rename method 'InitFSM' to match pascal case naming rules, consider using 'InitFsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'logRemoteLifeCycleEvents' to match camel case naming rules, consider using 'LogRemoteLifeCycleEvents'.",
+"message":  "Rename property 'logRemoteLifeCycleEvents' to match pascal case naming rules, consider using 'LogRemoteLifeCycleEvents'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\RemoteTransport.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'DISASSOCIATE' to match camel case naming rules, consider using 'Disassociate'.",
+"message":  "Rename property 'DISASSOCIATE' to match pascal case naming rules, consider using 'Disassociate'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename method 'InitializeFSM' to match camel case naming rules, consider using 'InitializeFsm'.",
+"message":  "Rename method 'InitializeFSM' to match pascal case naming rules, consider using 'InitializeFsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename method 'InitializeFSM' to match camel case naming rules, consider using 'InitializeFsm'.",
+"message":  "Rename method 'InitializeFSM' to match pascal case naming rules, consider using 'InitializeFsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {

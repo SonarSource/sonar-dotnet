@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S100",
-"message":  "Rename property 'channels' to match camel case naming rules, consider using 'Channels'.",
+"message":  "Rename property 'channels' to match pascal case naming rules, consider using 'Channels'.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Chat\ChatMessages\Messages.cs",
 "region":  {

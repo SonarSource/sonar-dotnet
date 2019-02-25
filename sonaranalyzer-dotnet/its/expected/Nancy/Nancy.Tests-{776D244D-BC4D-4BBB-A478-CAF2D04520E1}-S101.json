@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S101",
-"message":  "Rename class 'INancyEnvironmentExtensionsFixture' to match camel case naming rules, consider using 'NancyEnvironmentExtensionsFixture'.",
+"message":  "Rename class 'INancyEnvironmentExtensionsFixture' to match pascal case naming rules, consider using 'NancyEnvironmentExtensionsFixture'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\Configuration\INancyEnvironmentExtensionsFixture.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'SSLProxyFixture' to match camel case naming rules, consider using 'SslProxyFixture'.",
+"message":  "Rename class 'SSLProxyFixture' to match pascal case naming rules, consider using 'SslProxyFixture'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\Security\SSLProxyFixture.cs",
 "region":  {

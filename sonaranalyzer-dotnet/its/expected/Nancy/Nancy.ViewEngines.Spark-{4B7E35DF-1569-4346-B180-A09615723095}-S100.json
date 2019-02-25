@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S100",
-"message":  "Rename method 'HTML' to match camel case naming rules, consider using 'Html'.",
+"message":  "Rename method 'HTML' to match pascal case naming rules, consider using 'Html'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancySparkView.cs",
 "region":  {

@@ -2,7 +2,7 @@
 {
     public interface IMyInterface
     {
-        void foo(); // Noncompliant {{Rename method 'foo' to match camel case naming rules, consider using 'Foo'.}}
+        void foo(); // Noncompliant {{Rename method 'foo' to match pascal case naming rules, consider using 'Foo'.}}
 //           ^^^
         void Foo();
     }
@@ -23,13 +23,13 @@
 
         void Do_Some_Test() { }
         void Do_Some_Test_() { } // Noncompliant
-        void ____() { } // Noncompliant {{Rename method '____' to match camel case naming rules, trim underscores from the name.}}
+        void ____() { } // Noncompliant {{Rename method '____' to match pascal case naming rules, trim underscores from the name.}}
         protected void Application_Start() { }
 
         [System.Runtime.InteropServices.DllImport("User32.dll")]
         public static extern int ____MessageBox(int h, string m, string c, int type); // Compliant
 
-        public int MyPPPProperty { get; set; } // Noncompliant {{Rename property 'MyPPPProperty' to match camel case naming rules, consider using 'MyPppProperty'.}}
+        public int MyPPPProperty { get; set; } // Noncompliant {{Rename property 'MyPPPProperty' to match pascal case naming rules, consider using 'MyPppProperty'.}}
 
         public void Should_define_convention_that_returns_metadata_module_type() { } // Compliant
 

@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S100",
-"message":  "Rename property 'fsm' to match camel case naming rules, consider using 'Fsm'.",
+"message":  "Rename property 'fsm' to match pascal case naming rules, consider using 'Fsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTimingSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename method 'verifyLevel' to match camel case naming rules, consider using 'VerifyLevel'.",
+"message":  "Rename method 'verifyLevel' to match pascal case naming rules, consider using 'VerifyLevel'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
 "region":  {

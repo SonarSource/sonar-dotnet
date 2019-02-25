@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S101",
-"message":  "Rename class 'BaseDTO' to match camel case naming rules, consider using 'BaseDto'.",
+"message":  "Rename class 'BaseDTO' to match pascal case naming rules, consider using 'BaseDto'.",
 "location":  {
 "uri":  "sources\Automapper\src\IntegrationTests\ChildClassTests.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'SubDTO' to match camel case naming rules, consider using 'SubDto'.",
+"message":  "Rename class 'SubDTO' to match pascal case naming rules, consider using 'SubDto'.",
 "location":  {
 "uri":  "sources\Automapper\src\IntegrationTests\ChildClassTests.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'Class1DTO' to match camel case naming rules, consider using 'Class1Dto'.",
+"message":  "Rename class 'Class1DTO' to match pascal case naming rules, consider using 'Class1Dto'.",
 "location":  {
 "uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandMembersPath.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'Class2DTO' to match camel case naming rules, consider using 'Class2Dto'.",
+"message":  "Rename class 'Class2DTO' to match pascal case naming rules, consider using 'Class2Dto'.",
 "location":  {
 "uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandMembersPath.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'Class3DTO' to match camel case naming rules, consider using 'Class3Dto'.",
+"message":  "Rename class 'Class3DTO' to match pascal case naming rules, consider using 'Class3Dto'.",
 "location":  {
 "uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\ExpandMembersPath.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'Class1DTO' to match camel case naming rules, consider using 'Class1Dto'.",
+"message":  "Rename class 'Class1DTO' to match pascal case naming rules, consider using 'Class1Dto'.",
 "location":  {
 "uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\NestedExplicitExpand.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'Class2DTO' to match camel case naming rules, consider using 'Class2Dto'.",
+"message":  "Rename class 'Class2DTO' to match pascal case naming rules, consider using 'Class2Dto'.",
 "location":  {
 "uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\NestedExplicitExpand.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'Class3DTO' to match camel case naming rules, consider using 'Class3Dto'.",
+"message":  "Rename class 'Class3DTO' to match pascal case naming rules, consider using 'Class3Dto'.",
 "location":  {
 "uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\NestedExplicitExpand.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'Class1DTO' to match camel case naming rules, consider using 'Class1Dto'.",
+"message":  "Rename class 'Class1DTO' to match pascal case naming rules, consider using 'Class1Dto'.",
 "location":  {
 "uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\NestedExplicitExpandWithFields.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'Class2DTO' to match camel case naming rules, consider using 'Class2Dto'.",
+"message":  "Rename class 'Class2DTO' to match pascal case naming rules, consider using 'Class2Dto'.",
 "location":  {
 "uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\NestedExplicitExpandWithFields.cs",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'Class3DTO' to match camel case naming rules, consider using 'Class3Dto'.",
+"message":  "Rename class 'Class3DTO' to match pascal case naming rules, consider using 'Class3Dto'.",
 "location":  {
 "uri":  "sources\Automapper\src\IntegrationTests\ExplicitExpansion\NestedExplicitExpandWithFields.cs",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'ICollectionAggregateProjections' to match camel case naming rules, consider using 'CollectionAggregateProjections'.",
+"message":  "Rename class 'ICollectionAggregateProjections' to match pascal case naming rules, consider using 'CollectionAggregateProjections'.",
 "location":  {
 "uri":  "sources\Automapper\src\IntegrationTests\ICollectionAggregateProjections.cs",
 "region":  {
@@ -158,7 +158,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'IEnumerableAggregateProjections' to match camel case naming rules, consider using 'EnumerableAggregateProjections'.",
+"message":  "Rename class 'IEnumerableAggregateProjections' to match pascal case naming rules, consider using 'EnumerableAggregateProjections'.",
 "location":  {
 "uri":  "sources\Automapper\src\IntegrationTests\IEnumerableAggregateProjections.cs",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'CustDTO' to match camel case naming rules, consider using 'CustDto'.",
+"message":  "Rename class 'CustDTO' to match pascal case naming rules, consider using 'CustDto'.",
 "location":  {
 "uri":  "sources\Automapper\src\IntegrationTests\MaxDepth\NavigationPropertySO.cs",
 "region":  {
@@ -184,7 +184,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'CustomerDTO' to match camel case naming rules, consider using 'CustomerDto'.",
+"message":  "Rename class 'CustomerDTO' to match pascal case naming rules, consider using 'CustomerDto'.",
 "location":  {
 "uri":  "sources\Automapper\src\IntegrationTests\MaxDepth\NavigationPropertySO.cs",
 "region":  {

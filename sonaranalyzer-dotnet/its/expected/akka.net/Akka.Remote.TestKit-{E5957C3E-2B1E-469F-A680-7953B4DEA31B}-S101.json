@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S101",
-"message":  "Rename class 'ServerFSM' to match camel case naming rules, consider using 'ServerFsm'.",
+"message":  "Rename class 'ServerFSM' to match pascal case naming rules, consider using 'ServerFsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'CreateServerFSM' to match camel case naming rules, consider using 'CreateServerFsm'.",
+"message":  "Rename class 'CreateServerFSM' to match pascal case naming rules, consider using 'CreateServerFsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'WaitForClientFSMToConnect' to match camel case naming rules, consider using 'WaitForClientFsmToConnect'.",
+"message":  "Rename class 'WaitForClientFSMToConnect' to match pascal case naming rules, consider using 'WaitForClientFsmToConnect'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'ClientFSM' to match camel case naming rules, consider using 'ClientFsm'.",
+"message":  "Rename class 'ClientFSM' to match pascal case naming rules, consider using 'ClientFsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
