@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S100",
-"message":  "Rename method 'ActorOfAsTestFSMRef' to match camel case naming rules, consider using 'ActorOfAsTestFsmRef'.",
+"message":  "Rename method 'ActorOfAsTestFSMRef' to match pascal case naming rules, consider using 'ActorOfAsTestFsmRef'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename method 'ActorOfAsTestFSMRef' to match camel case naming rules, consider using 'ActorOfAsTestFsmRef'.",
+"message":  "Rename method 'ActorOfAsTestFSMRef' to match pascal case naming rules, consider using 'ActorOfAsTestFsmRef'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename method 'ActorOfAsTestFSMRef' to match camel case naming rules, consider using 'ActorOfAsTestFsmRef'.",
+"message":  "Rename method 'ActorOfAsTestFSMRef' to match pascal case naming rules, consider using 'ActorOfAsTestFsmRef'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename method 'ActorOfAsTestFSMRef' to match camel case naming rules, consider using 'ActorOfAsTestFsmRef'.",
+"message":  "Rename method 'ActorOfAsTestFSMRef' to match pascal case naming rules, consider using 'ActorOfAsTestFsmRef'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename method 'ActorOfAsTestFSMRef' to match camel case naming rules, consider using 'ActorOfAsTestFsmRef'.",
+"message":  "Rename method 'ActorOfAsTestFSMRef' to match pascal case naming rules, consider using 'ActorOfAsTestFsmRef'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename method 'ActorOfAsTestFSMRef' to match camel case naming rules, consider using 'ActorOfAsTestFsmRef'.",
+"message":  "Rename method 'ActorOfAsTestFSMRef' to match pascal case naming rules, consider using 'ActorOfAsTestFsmRef'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {

@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S100",
-"message":  "Rename property 'ISO8601DateFormat' to match camel case naming rules, consider using 'Iso8601DateFormat'.",
+"message":  "Rename property 'ISO8601DateFormat' to match pascal case naming rules, consider using 'Iso8601DateFormat'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'UseISO8601DateFormat' to match camel case naming rules, consider using 'UseIso8601DateFormat'.",
+"message":  "Rename property 'UseISO8601DateFormat' to match pascal case naming rules, consider using 'UseIso8601DateFormat'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonConfiguration.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'ISO8601DateFormat' to match camel case naming rules, consider using 'Iso8601DateFormat'.",
+"message":  "Rename property 'ISO8601DateFormat' to match pascal case naming rules, consider using 'Iso8601DateFormat'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\DefaultJsonSerializer.cs",
 "region":  {

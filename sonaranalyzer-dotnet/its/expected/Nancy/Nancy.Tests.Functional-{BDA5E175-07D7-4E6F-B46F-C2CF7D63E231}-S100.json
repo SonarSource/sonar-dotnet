@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S100",
-"message":  "Rename property 'key1' to match camel case naming rules, consider using 'Key1'.",
+"message":  "Rename property 'key1' to match pascal case naming rules, consider using 'Key1'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ModelBindingTests.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'key1' to match camel case naming rules, consider using 'Key1'.",
+"message":  "Rename property 'key1' to match pascal case naming rules, consider using 'Key1'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ModelBindingTests.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'key2' to match camel case naming rules, consider using 'Key2'.",
+"message":  "Rename property 'key2' to match pascal case naming rules, consider using 'Key2'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ModelBindingTests.cs",
 "region":  {

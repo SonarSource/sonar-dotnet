@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S101",
-"message":  "Rename class 'SSLProxy' to match camel case naming rules, consider using 'SslProxy'.",
+"message":  "Rename class 'SSLProxy' to match pascal case naming rules, consider using 'SslProxy'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Security\SSLProxy.cs",
 "region":  {

@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S100",
-"message":  "Rename method 'cdf' to match camel case naming rules, consider using 'Cdf'.",
+"message":  "Rename method 'cdf' to match pascal case naming rules, consider using 'Cdf'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AccrualFailureDetectorSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename method 'testDisassociate' to match camel case naming rules, consider using 'TestDisassociate'.",
+"message":  "Rename method 'testDisassociate' to match pascal case naming rules, consider using 'TestDisassociate'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename method 'testAssociate' to match camel case naming rules, consider using 'TestAssociate'.",
+"message":  "Rename method 'testAssociate' to match pascal case naming rules, consider using 'TestAssociate'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
 "region":  {

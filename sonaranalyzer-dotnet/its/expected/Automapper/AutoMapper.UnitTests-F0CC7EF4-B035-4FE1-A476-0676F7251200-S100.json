@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S100",
-"message":  "Rename property 'id' to match camel case naming rules, consider using 'Id'.",
+"message":  "Rename property 'id' to match pascal case naming rules, consider using 'Id'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\CaseSensitivityBug.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'prop1' to match camel case naming rules, consider using 'Prop1'.",
+"message":  "Rename property 'prop1' to match pascal case naming rules, consider using 'Prop1'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'prop2' to match camel case naming rules, consider using 'Prop2'.",
+"message":  "Rename property 'prop2' to match pascal case naming rules, consider using 'Prop2'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'prop3' to match camel case naming rules, consider using 'Prop3'.",
+"message":  "Rename property 'prop3' to match pascal case naming rules, consider using 'Prop3'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'prop4' to match camel case naming rules, consider using 'Prop4'.",
+"message":  "Rename property 'prop4' to match pascal case naming rules, consider using 'Prop4'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'prop1' to match camel case naming rules, consider using 'Prop1'.",
+"message":  "Rename property 'prop1' to match pascal case naming rules, consider using 'Prop1'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'prop2' to match camel case naming rules, consider using 'Prop2'.",
+"message":  "Rename property 'prop2' to match pascal case naming rules, consider using 'Prop2'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'prop3' to match camel case naming rules, consider using 'Prop3'.",
+"message":  "Rename property 'prop3' to match pascal case naming rules, consider using 'Prop3'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'prop4' to match camel case naming rules, consider using 'Prop4'.",
+"message":  "Rename property 'prop4' to match pascal case naming rules, consider using 'Prop4'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\InterfaceMultipleInheritance.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename method 'doMapping' to match camel case naming rules, consider using 'DoMapping'.",
+"message":  "Rename method 'doMapping' to match pascal case naming rules, consider using 'DoMapping'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\MultiThreadingIssues.cs",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename method 'createSource' to match camel case naming rules, consider using 'CreateSource'.",
+"message":  "Rename method 'createSource' to match pascal case naming rules, consider using 'CreateSource'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\MultiThreadingIssues.cs",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'cmok' to match camel case naming rules, consider using 'Cmok'.",
+"message":  "Rename property 'cmok' to match pascal case naming rules, consider using 'Cmok'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\NamingConventions.cs",
 "region":  {
@@ -158,7 +158,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'cmok' to match camel case naming rules, consider using 'Cmok'.",
+"message":  "Rename property 'cmok' to match pascal case naming rules, consider using 'Cmok'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\NamingConventions.cs",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'field' to match camel case naming rules, consider using 'Field'.",
+"message":  "Rename property 'field' to match pascal case naming rules, consider using 'Field'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\ParentChildResolversBug.cs",
 "region":  {
@@ -184,7 +184,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'field' to match camel case naming rules, consider using 'Field'.",
+"message":  "Rename property 'field' to match pascal case naming rules, consider using 'Field'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\ParentChildResolversBug.cs",
 "region":  {
@@ -197,7 +197,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'fieldCode' to match camel case naming rules, consider using 'FieldCode'.",
+"message":  "Rename property 'fieldCode' to match pascal case naming rules, consider using 'FieldCode'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Bug\ParentChildResolversBug.cs",
 "region":  {
@@ -210,7 +210,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'val' to match camel case naming rules, consider using 'Val'.",
+"message":  "Rename property 'val' to match pascal case naming rules, consider using 'Val'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\ConvensionTest.cs",
 "region":  {
@@ -223,7 +223,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'Value2fff' to match camel case naming rules, consider using 'Value2Fff'.",
+"message":  "Rename property 'Value2fff' to match pascal case naming rules, consider using 'Value2Fff'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\CustomMapping.cs",
 "region":  {
@@ -236,7 +236,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'BOM' to match camel case naming rules, consider using 'Bom'.",
+"message":  "Rename property 'BOM' to match pascal case naming rules, consider using 'Bom'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
 "region":  {
@@ -249,7 +249,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'value' to match camel case naming rules, consider using 'Value'.",
+"message":  "Rename property 'value' to match pascal case naming rules, consider using 'Value'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\ForAllOtherMembers.cs",
 "region":  {
@@ -262,7 +262,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'value1' to match camel case naming rules, consider using 'Value1'.",
+"message":  "Rename property 'value1' to match pascal case naming rules, consider using 'Value1'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\ForAllOtherMembers.cs",
 "region":  {
@@ -275,7 +275,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'value2' to match camel case naming rules, consider using 'Value2'.",
+"message":  "Rename property 'value2' to match pascal case naming rules, consider using 'Value2'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\ForAllOtherMembers.cs",
 "region":  {
@@ -288,7 +288,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'someValueWithPascalName' to match camel case naming rules, consider using 'SomeValueWithPascalName'.",
+"message":  "Rename property 'someValueWithPascalName' to match pascal case naming rules, consider using 'SomeValueWithPascalName'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
 "region":  {
@@ -301,7 +301,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'value' to match camel case naming rules, consider using 'Value'.",
+"message":  "Rename property 'value' to match pascal case naming rules, consider using 'Value'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
 "region":  {
@@ -314,7 +314,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'fooValue' to match camel case naming rules, consider using 'FooValue'.",
+"message":  "Rename property 'fooValue' to match pascal case naming rules, consider using 'FooValue'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\MemberResolution.cs",
 "region":  {
@@ -327,7 +327,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'position' to match camel case naming rules, consider using 'Position'.",
+"message":  "Rename property 'position' to match pascal case naming rules, consider using 'Position'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Projection\ParameterizedQueriesTests.cs",
 "region":  {
@@ -340,7 +340,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename property 'value' to match camel case naming rules, consider using 'Value'.",
+"message":  "Rename property 'value' to match pascal case naming rules, consider using 'Value'.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Tests\TypeMapFactorySpecs.cs",
 "region":  {

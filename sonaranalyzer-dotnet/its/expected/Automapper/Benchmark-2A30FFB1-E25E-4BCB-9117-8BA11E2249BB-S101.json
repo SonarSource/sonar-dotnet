@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S101",
-"message":  "Rename class 'AddressDTO' to match camel case naming rules, consider using 'AddressDto'.",
+"message":  "Rename class 'AddressDTO' to match pascal case naming rules, consider using 'AddressDto'.",
 "location":  {
 "uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'CustomerDTO' to match camel case naming rules, consider using 'CustomerDto'.",
+"message":  "Rename class 'CustomerDTO' to match pascal case naming rules, consider using 'CustomerDto'.",
 "location":  {
 "uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'AddressDTO' to match camel case naming rules, consider using 'AddressDto'.",
+"message":  "Rename class 'AddressDTO' to match pascal case naming rules, consider using 'AddressDto'.",
 "location":  {
 "uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'CustomerDTO' to match camel case naming rules, consider using 'CustomerDto'.",
+"message":  "Rename class 'CustomerDTO' to match pascal case naming rules, consider using 'CustomerDto'.",
 "location":  {
 "uri":  "sources\Automapper\src\Benchmark\FlatteningMapper.cs",
 "region":  {

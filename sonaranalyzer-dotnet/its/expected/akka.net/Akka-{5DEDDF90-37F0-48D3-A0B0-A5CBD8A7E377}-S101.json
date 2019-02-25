@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S101",
-"message":  "Rename class 'FSMBase' to match camel case naming rules, consider using 'FsmBase'.",
+"message":  "Rename class 'FSMBase' to match pascal case naming rules, consider using 'FsmBase'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'FSM' to match camel case naming rules, consider using 'Fsm'.",
+"message":  "Rename class 'FSM' to match pascal case naming rules, consider using 'Fsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename interface 'ILoggingFSM' to match camel case naming rules, consider using 'ILoggingFsm'.",
+"message":  "Rename interface 'ILoggingFSM' to match pascal case naming rules, consider using 'ILoggingFsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename interface 'IInternalSupportsTestFSMRef' to match camel case naming rules, consider using 'IInternalSupportsTestFsmRef'.",
+"message":  "Rename interface 'IInternalSupportsTestFSMRef' to match pascal case naming rules, consider using 'IInternalSupportsTestFsmRef'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Internal\InternalSupportsTestFSMRef.cs",
 "region":  {

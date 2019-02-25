@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string MethodNameDiagnosticId = "S100";
         internal const string TypeNameDiagnosticId = "S101";
 
-        private const string MessageFormat = "Rename {0} '{1}' to match camel case naming rules, {2}.";
+        private const string MessageFormat = "Rename {0} '{1}' to match pascal case naming rules, {2}.";
         internal const string MessageFormatNonUnderscore = "consider using '{0}'";
         internal const string MessageFormatUnderscore = "trim underscores from the name";
 
@@ -264,8 +264,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 input.Length == 1 &&
                 !allowInitialI &&
                 startsWithI &&
-                IsCharUpper(input, 0) &&
-                !IsCharUpper(input, 1);
+                IsCharUpper(input, 0);
         }
 
         private static string SuggestCapitalLetterAfterNonLetter(StringBuilder suggestion)

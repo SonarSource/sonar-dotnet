@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S101",
-"message":  "Rename class 'PersistentFSM' to match camel case naming rules, consider using 'PersistentFsm'.",
+"message":  "Rename class 'PersistentFSM' to match pascal case naming rules, consider using 'PersistentFsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'PersistentFSMBase' to match camel case naming rules, consider using 'PersistentFsmBase'.",
+"message":  "Rename class 'PersistentFSMBase' to match pascal case naming rules, consider using 'PersistentFsmBase'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {

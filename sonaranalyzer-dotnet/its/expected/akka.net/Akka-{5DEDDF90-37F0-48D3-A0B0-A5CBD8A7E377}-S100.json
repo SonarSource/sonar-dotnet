@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S100",
-"message":  "Rename method 'PeerSentEOF' to match camel case naming rules, consider using 'PeerSentEof'.",
+"message":  "Rename method 'PeerSentEOF' to match pascal case naming rules, consider using 'PeerSentEof'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename method 'checkRangeConvert' to match camel case naming rules, consider using 'CheckRangeConvert'.",
+"message":  "Rename method 'checkRangeConvert' to match pascal case naming rules, consider using 'CheckRangeConvert'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename method 'newBuilder' to match camel case naming rules, consider using 'NewBuilder'.",
+"message":  "Rename method 'newBuilder' to match pascal case naming rules, consider using 'NewBuilder'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
 "region":  {

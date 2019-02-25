@@ -1,6 +1,6 @@
 ﻿namespace t1
 {
-    class FSM // Noncompliant {{Rename class 'FSM' to match camel case naming rules, consider using 'Fsm'.}}
+    class FSM // Noncompliant {{Rename class 'FSM' to match pascal case naming rules, consider using 'Fsm'.}}
 //        ^^^
     {
     }
@@ -9,17 +9,17 @@
 
     }
 
-    class foo // Noncompliant {{Rename class 'foo' to match camel case naming rules, consider using 'Foo'.}}
+    class foo // Noncompliant {{Rename class 'foo' to match pascal case naming rules, consider using 'Foo'.}}
     {
     }
 }
 namespace t2
 {
-    interface foo // Noncompliant {{Rename interface 'foo' to match camel case naming rules, consider using 'IFoo'.}}
+    interface foo // Noncompliant {{Rename interface 'foo' to match pascal case naming rules, consider using 'IFoo'.}}
     {
     }
 
-    interface Foo // Noncompliant  {{Rename interface 'Foo' to match camel case naming rules, consider using 'IFoo'.}}
+    interface Foo // Noncompliant  {{Rename interface 'Foo' to match pascal case naming rules, consider using 'IFoo'.}}
     {
     }
 
@@ -56,7 +56,7 @@ namespace t3
         }
     }
 
-    class IFoo2 // Noncompliant {{Rename class 'IFoo2' to match camel case naming rules, consider using 'Foo2'.}}
+    class IFoo2 // Noncompliant {{Rename class 'IFoo2' to match pascal case naming rules, consider using 'Foo2'.}}
     {
     }
 
@@ -70,7 +70,7 @@ namespace t3
     }
 
     partial class
-    AbClass_Bar // Noncompliant {{Rename class 'AbClass_Bar' to match camel case naming rules, consider using 'AbClassBar'.}}
+    AbClass_Bar // Noncompliant {{Rename class 'AbClass_Bar' to match pascal case naming rules, consider using 'AbClassBar'.}}
     {
     }
 
@@ -85,7 +85,7 @@ namespace t3
     {
     }
 
-    class IILMarker { } // Noncompliant {{Rename class 'IILMarker' to match camel case naming rules, consider using 'IilMarker'.}}
+    class IILMarker { } // Noncompliant {{Rename class 'IILMarker' to match pascal case naming rules, consider using 'IilMarker'.}}
 }
 namespace t4
 {
@@ -98,9 +98,9 @@ namespace t4
 
     class AbcDEFgh { } // Compliant
     class Ab4DEFgh { } // Compliant
-    class Ab4DEFGh { } // Noncompliant {{Rename class 'Ab4DEFGh' to match camel case naming rules, consider using 'Ab4DefGh'.}}
+    class Ab4DEFGh { } // Noncompliant {{Rename class 'Ab4DEFGh' to match pascal case naming rules, consider using 'Ab4DefGh'.}}
 
-    class TTTestClassTTT { }// Noncompliant {{Rename class 'TTTestClassTTT' to match camel case naming rules, consider using 'TtTestClassTtt'.}}
+    class TTTestClassTTT { }// Noncompliant {{Rename class 'TTTestClassTTT' to match pascal case naming rules, consider using 'TtTestClassTtt'.}}
     class TTT44 { }// Noncompliant
     class ABCDEFGHIJK { }// Noncompliant
     class Abcd4a { }// Noncompliant
@@ -109,7 +109,7 @@ namespace t4
 
     class AB { } // Compliant
     class AbABaa { } // Compliant
-    class _AbABaa { } // Noncompliant {{Rename class '_AbABaa' to match camel case naming rules, trim underscores from the name.}}
+    class _AbABaa { } // Noncompliant {{Rename class '_AbABaa' to match pascal case naming rules, trim underscores from the name.}}
 
     class 你好 { } // Compliant
 }

@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S101",
-"message":  "Rename class 'PersistentFSMSpec' to match camel case naming rules, consider using 'PersistentFsmSpec'.",
+"message":  "Rename class 'PersistentFSMSpec' to match pascal case naming rules, consider using 'PersistentFsmSpec'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'WebStoreCustomerFSM' to match camel case naming rules, consider using 'WebStoreCustomerFsm'.",
+"message":  "Rename class 'WebStoreCustomerFSM' to match pascal case naming rules, consider using 'WebStoreCustomerFsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'SimpleTransitionFSM' to match camel case naming rules, consider using 'SimpleTransitionFsm'.",
+"message":  "Rename class 'SimpleTransitionFSM' to match pascal case naming rules, consider using 'SimpleTransitionFsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'DeferringMixedCallsPPADDPADPersistActor' to match camel case naming rules, consider using 'DeferringMixedCallsPpaddpadPersistActor'.",
+"message":  "Rename class 'DeferringMixedCallsPPADDPADPersistActor' to match pascal case naming rules, consider using 'DeferringMixedCallsPpaddpadPersistActor'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {

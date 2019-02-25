@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S101",
-"message":  "Rename class 'FSMTimingSpec' to match camel case naming rules, consider using 'FsmTimingSpec'.",
+"message":  "Rename class 'FSMTimingSpec' to match pascal case naming rules, consider using 'FsmTimingSpec'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTimingSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'FSMTransitionSpec' to match camel case naming rules, consider using 'FsmTransitionSpec'.",
+"message":  "Rename class 'FSMTransitionSpec' to match pascal case naming rules, consider using 'FsmTransitionSpec'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'MyFSM' to match camel case naming rules, consider using 'MyFsm'.",
+"message":  "Rename class 'MyFSM' to match pascal case naming rules, consider using 'MyFsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'OtherFSM' to match camel case naming rules, consider using 'OtherFsm'.",
+"message":  "Rename class 'OtherFSM' to match pascal case naming rules, consider using 'OtherFsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'LeakyFSM' to match camel case naming rules, consider using 'LeakyFsm'.",
+"message":  "Rename class 'LeakyFSM' to match pascal case naming rules, consider using 'LeakyFsm'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename interface 'AT' to match camel case naming rules, consider using 'IAT'.",
+"message":  "Rename interface 'AT' to match pascal case naming rules, consider using 'IAT'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename interface 'ATT' to match camel case naming rules, consider using 'IATt'.",
+"message":  "Rename interface 'ATT' to match pascal case naming rules, consider using 'IATt'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename interface 'BT' to match camel case naming rules, consider using 'IBT'.",
+"message":  "Rename interface 'BT' to match pascal case naming rules, consider using 'IBT'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename interface 'BTT' to match camel case naming rules, consider using 'IBTt'.",
+"message":  "Rename interface 'BTT' to match pascal case naming rules, consider using 'IBTt'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename class 'CCATBT' to match camel case naming rules, consider using 'Ccatbt'.",
+"message":  "Rename class 'CCATBT' to match pascal case naming rules, consider using 'Ccatbt'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
 "region":  {
