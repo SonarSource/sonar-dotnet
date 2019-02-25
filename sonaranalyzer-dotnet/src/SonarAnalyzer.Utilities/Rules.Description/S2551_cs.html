@@ -1,14 +1,21 @@
-<p>Locking on the current object instance (i.e. <code>this</code>), or on a <code>Type</code> object increases the chance of deadlocks because any
-other thread could acquire (or attempt to acquire) the same lock for another unrelated purpose. </p>
+<p>Shared resources should not be used for locking as it increases the chance of deadlocks. Any other thread could acquire (or attempt to acquire) the
+same lock for another unrelated purpose. </p>
 <p>Instead, a dedicated <code>object</code> instance should be used for each shared resource, to avoid deadlocks or lock contention.</p>
+<p>The following objects are considered as shared resources:</p>
+<ul>
+  <li> <code>this</code> </li>
+  <li> a <code>Type</code> object </li>
+  <li> a string literal </li>
+  <li> a string instance </li>
+</ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
 public void MyLockingMethod()
 {
-  lock (this) // Noncompliant
-  {
-    // ...
-  }
+    lock (this) // Noncompliant
+    {
+        // ...
+    }
 }
 </pre>
 <h2>Compliant Solution</h2>
@@ -17,10 +24,10 @@ private readonly object lockObj = new object();
 
 public void MyLockingMethod()
 {
-  lock (lockObj)
-  {
-    // ...
-  }
+    lock (lockObj)
+    {
+        // ...
+    }
 }
 </pre>
 <h2>See</h2>

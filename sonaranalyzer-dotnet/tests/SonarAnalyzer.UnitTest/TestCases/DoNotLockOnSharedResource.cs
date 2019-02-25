@@ -5,6 +5,8 @@ namespace Tests.Diagnostics
 {
     public class LockOnThisOrType
     {
+        private string myStringField;
+
         public void MyLockingMethod()
         {
             lock (this) // Noncompliant
@@ -26,6 +28,12 @@ namespace Tests.Diagnostics
             lock ((new LockOnThisOrType()).GetType()) // Noncompliant {{Lock on a dedicated object instance instead.}}
             {
                 // ...
+            }
+            lock ("foo") // Noncompliant
+            {
+            }
+            lock (myStringField) // Noncompliant
+            {
             }
         }
 

@@ -18,29 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules
 {
-    [TestClass]
-    public class LockOnThisOrTypeTest
+    public abstract class DoNotLockOnSharedResourceBase : SonarDiagnosticAnalyzer
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void LockOnThisOrType_CS()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\LockOnThisOrType.cs", new LockOnThisOrType());
-        }
+        protected const string DiagnosticId = "S2551";
+        protected const string MessageFormat = "Lock on a dedicated object instance instead.";
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void LockOnThisOrType_VB()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\LockOnThisOrType.vb",
-                new SonarAnalyzer.Rules.VisualBasic.LockOnThisOrType());
-        }
+        private static readonly ImmutableArray<KnownType> _invalidLockTypes =
+           ImmutableArray.Create(
+               KnownType.System_String,
+               KnownType.System_Type
+           );
+
+        protected static bool IsLockOnForbiddenKnownType(SyntaxNode expression, SemanticModel semanticModel) =>
+            semanticModel.GetTypeInfo(expression).Type.IsAny(_invalidLockTypes);
     }
 }
-
