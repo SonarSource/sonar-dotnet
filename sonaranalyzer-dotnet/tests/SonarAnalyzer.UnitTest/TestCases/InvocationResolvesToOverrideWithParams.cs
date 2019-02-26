@@ -89,6 +89,7 @@ namespace Tests.Diagnostics
             MyMethod(""); // Compliant
         }
     }
+
     public class Test2
     {
         public static implicit operator Test2(string s) { return null; }
