@@ -50,8 +50,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
                 fadeOutCode: true);
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterCompilationStartAction(
@@ -137,31 +137,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 });
         }
 
-        private static Diagnostic CreateDiagnostic(SyntaxNode syntaxNode, ISymbol symbol, string accessibility)
-        {
-            var memberType = GetMemberType(symbol);
-            var memberName = GetMemberName(symbol);
-            return Diagnostic.Create(rule, syntaxNode.GetLocation(), accessibility, memberType, memberName);
-        }
-
         private static IEnumerable<Diagnostic> GetDiagnostics(CSharpSymbolUsageCollector usageCollector, ISet<ISymbol> removableSymbols,
-                    string accessibility, BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
+            string accessibility, BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
         {
             var unusedSymbols = removableSymbols
                 .Except(usageCollector.UsedSymbols)
-                .Where(symbol => !MentionedInDebuggerDisplay(symbol))
+                .Where(symbol => !IsMentionedInDebuggerDisplay(symbol))
                 .ToHashSet();
 
             var propertiesWithUnusedAccessor = removableSymbols
                 .Intersect(usageCollector.UsedSymbols)
                 .OfType<IPropertySymbol>()
                 .Where(usageCollector.PropertyAccess.ContainsKey)
-                .Where(symbol => !MentionedInDebuggerDisplay(symbol));
+                .Where(symbol => !IsMentionedInDebuggerDisplay(symbol));
 
             return GetDiagnosticsForMembers(unusedSymbols, accessibility, fieldLikeSymbols)
                 .Concat(propertiesWithUnusedAccessor.SelectMany(propertySymbol => GetDiagnosticsForProperty(propertySymbol, usageCollector.PropertyAccess)));
 
-            bool MentionedInDebuggerDisplay(ISymbol symbol) =>
+            bool IsMentionedInDebuggerDisplay(ISymbol symbol) =>
                 usageCollector.DebuggerDisplayValues.Any(value => value.Contains(symbol.Name));
         }
 
@@ -199,7 +192,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 }
 
-                diagnostics.Add(CreateDiagnostic(syntaxForLocation, unused.Symbol, accessibility));
+                diagnostics.Add(CreateDiagnostic(syntaxForLocation, unused.Symbol));
             }
 
             return diagnostics;
@@ -220,6 +213,9 @@ namespace SonarAnalyzer.Rules.CSharp
                         return Enumerable.Empty<VariableDeclaratorSyntax>();
                 }
             }
+
+            Diagnostic CreateDiagnostic(SyntaxNode syntaxNode, ISymbol symbol) =>
+                Diagnostic.Create(rule, syntaxNode.GetLocation(), accessibility, GetMemberType(symbol), GetMemberName(symbol));
         }
 
         private static IEnumerable<Diagnostic> GetDiagnosticsForProperty(IPropertySymbol property,
@@ -280,6 +276,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return "member";
             }
         }
+
         private static bool VisitDeclaringReferences(INamedTypeSymbol namedType, CSharpSyntaxWalker visitor, Compilation compilation)
         {
             foreach (var reference in namedType.DeclaringSyntaxReferences.Where(r => !IsGenerated(r)))
@@ -297,7 +294,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
         /// <summary>
         /// Collects private or internal member symbols that could potentially be removed if they are not used.
-        /// Members that are overriden, overridable, have specific use, etc. are not removable.
+        /// Members that are overridden, overridable, have specific use, etc. are not removable.
         /// </summary>
         private class CSharpRemovableSymbolWalker : CSharpSyntaxWalker
         {
@@ -409,6 +406,19 @@ namespace SonarAnalyzer.Rules.CSharp
             private ISymbol GetDeclaredSymbol(SyntaxNode syntaxNode) =>
                 this.getSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
 
+            private bool IsDeclaredInPartialClass(IMethodSymbol methodSymbol)
+            {
+                return methodSymbol.DeclaringSyntaxReferences
+                    .Select(GetContainingTypeDeclaration)
+                    .Any(IsPartial);
+
+                TypeDeclarationSyntax GetContainingTypeDeclaration(SyntaxReference syntaxReference) =>
+                    syntaxReference.GetSyntax().FirstAncestorOrSelf<TypeDeclarationSyntax>();
+
+                bool IsPartial(TypeDeclarationSyntax typeDeclaration) =>
+                    typeDeclaration.Modifiers.AnyOfKind(SyntaxKind.PartialKeyword);
+            }
+
             private bool IsRemovable(ISymbol symbol) =>
                 symbol != null &&
                 !symbol.IsImplicitlyDeclared &&
@@ -429,19 +439,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 !methodSymbol.IsMainMethod() &&
                 (!methodSymbol.IsEventHandler() || !IsDeclaredInPartialClass(methodSymbol)) && // Event handlers could be added in XAML and no method reference will be generated in the .g.cs file.
                 !methodSymbol.IsSerializationConstructor();
-
-            private bool IsDeclaredInPartialClass(IMethodSymbol methodSymbol)
-            {
-                return methodSymbol.DeclaringSyntaxReferences
-                    .Select(GetContainingTypeDeclaration)
-                    .Any(IsPartial);
-
-                TypeDeclarationSyntax GetContainingTypeDeclaration(SyntaxReference syntaxReference) =>
-                    syntaxReference.GetSyntax().FirstAncestorOrSelf<TypeDeclarationSyntax>();
-
-                bool IsPartial(TypeDeclarationSyntax typeDeclaration) =>
-                    typeDeclaration.Modifiers.AnyOfKind(SyntaxKind.PartialKeyword);
-            }
 
             private bool IsRemovableType(ISymbol typeSymbol)
             {
