@@ -130,5 +130,41 @@ public class PrivateTypes
 }
 ", new CS.UnusedPrivateMember());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UnusedPrivateMember_SupportTypeKinds()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+public class PrivateTypes
+{
+    private class MyPrivateClass { } // Noncompliant
+    private struct MyPrivateStruct { } // Noncompliant
+    private enum MyPrivateEnum { } // Noncompliant
+    private interface MyPrivateInterface { } // Noncompliant
+    private delegate int MyPrivateDelegate(int x, int y); // Noncompliant
+
+    public class MyPublicClass { }
+    public struct MyPublicStruct { }
+    public enum MyPublicEnum { }
+    public interface MyPublicInterface { }
+    public delegate int MyPublicDelegate(int x, int y);
+
+    private class Something : MyPublicInterface {}
+
+    public void Foo()
+    {
+        new MyPublicClass();
+        new MyPublicStruct();
+        new MyPublicEnum();
+        new Something();
+
+        MyPublicDelegate handler = PerformCalculation;
+    }
+
+    public static int PerformCalculation(int x, int y) => x + y;
+}
+", new CS.UnusedPrivateMember());
+        }
     }
 }

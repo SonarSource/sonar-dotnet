@@ -66,8 +66,17 @@ namespace SonarAnalyzer.Rules.CSharp
                         cc =>
                         {
                             var namedType = (INamedTypeSymbol)cc.Symbol;
-                            if (!namedType.IsClassOrStruct() ||
-                                namedType.ContainingType != null ||
+
+                            if (namedType.TypeKind != TypeKind.Struct &&
+                                namedType.TypeKind != TypeKind.Class &&
+                                namedType.TypeKind != TypeKind.Delegate &&
+                                namedType.TypeKind != TypeKind.Enum &&
+                                namedType.TypeKind != TypeKind.Interface)
+                            {
+                                return;
+                            }
+
+                            if (namedType.ContainingType != null ||
                                 namedType.DerivesFromAny(IgnoredTypes))
                             {
                                 return;
@@ -312,7 +321,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 new HashSet<ISymbol>();
 
             public HashSet<ISymbol> PrivateSymbols { get; } =
-                                                    new HashSet<ISymbol>();
+                 new HashSet<ISymbol>();
+
             public override void VisitClassDeclaration(ClassDeclarationSyntax node)
             {
                 ConditionalStore(GetDeclaredSymbol(node), IsRemovableType);
@@ -332,6 +342,12 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 ConditionalStore(GetDeclaredSymbol(node), IsRemovableType);
                 base.VisitDelegateDeclaration(node);
+            }
+
+            public override void VisitEnumDeclaration(EnumDeclarationSyntax node)
+            {
+                ConditionalStore(GetDeclaredSymbol(node), IsRemovableType);
+                base.VisitEnumDeclaration(node);
             }
 
             public override void VisitEventDeclaration(EventDeclarationSyntax node)
@@ -422,7 +438,6 @@ namespace SonarAnalyzer.Rules.CSharp
             private bool IsRemovable(ISymbol symbol) =>
                 symbol != null &&
                 !symbol.IsImplicitlyDeclared &&
-                !symbol.IsAbstract &&
                 !symbol.IsVirtual &&
                 !symbol.GetAttributes().Any() &&
                 !symbol.ContainingType.IsInterface() &&

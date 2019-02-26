@@ -69,11 +69,6 @@ namespace Tests.Diagnostics
 
         [My]
         private class Class1 { }
-
-        private interface MyInterface
-        {
-            void Method();
-        }
     }
 
     class NewClass1
