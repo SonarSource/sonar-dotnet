@@ -76,7 +76,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var argumentTypes = argumentList.Arguments
-                .Select(arg => context.SemanticModel.GetTypeInfo(arg.Expression).Type)
+                .Select(arg => context.SemanticModel.GetTypeInfo(arg.Expression))
+                .Select(typeInfo => typeInfo.Type ?? typeInfo.ConvertedType) // Action and Func won't always resolve properly with Type
                 .ToList();
             if (argumentTypes.Any(type => type is IErrorTypeSymbol))
             {

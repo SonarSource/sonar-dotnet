@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
 {
@@ -101,5 +102,18 @@ namespace Tests.Diagnostics
         {
             MyMethod(""); // Noncompliant
         }
+    }
+
+    // See https://github.com/SonarSource/sonar-dotnet/issues/2234
+    public class FuncAndActionCases
+    {
+        static void Main(string[] args)
+        {
+            M1(() => Console.WriteLine("hi"));
+        }
+
+        public static void M1(params Action[] a) { }
+        public static void M1<T>(Func<T> f) { }
+        public static void M1(Func<Task> f) { }
     }
 }
