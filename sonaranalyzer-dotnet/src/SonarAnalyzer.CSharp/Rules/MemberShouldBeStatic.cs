@@ -43,13 +43,26 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly ISet<SymbolKind> InstanceSymbolKinds = new HashSet<SymbolKind>
-        {
-            SymbolKind.Field,
-            SymbolKind.Property,
-            SymbolKind.Event,
-            SymbolKind.Method
-        };
+        private static readonly ImmutableHashSet<string> MethodNameWhitelist =
+            ImmutableHashSet.Create(
+                "Application_AuthenticateRequest",
+                "Application_BeginRequest",
+                "Application_End",
+                "Application_EndRequest",
+                "Application_Error",
+                "Application_Init",
+                "Application_Start",
+                "Session_End",
+                "Session_Start"
+            );
+
+        private static readonly ImmutableHashSet<SymbolKind> InstanceSymbolKinds =
+            ImmutableHashSet.Create(
+                SymbolKind.Field,
+                SymbolKind.Property,
+                SymbolKind.Event,
+                SymbolKind.Method
+            );
 
         private static readonly ImmutableArray<KnownType> WebControllerTypes =
             ImmutableArray.Create(
@@ -70,25 +83,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration);
         }
 
-        private IEnumerable<SyntaxNode> GetPropertyDescendants(PropertyDeclarationSyntax propertyDeclaration)
-        {
-            if (propertyDeclaration.ExpressionBody != null)
-            {
-                return propertyDeclaration.ExpressionBody.DescendantNodes();
-            }
+        private IEnumerable<SyntaxNode> GetPropertyDescendants(PropertyDeclarationSyntax propertyDeclaration) =>
+            propertyDeclaration.ExpressionBody != null
+                ? propertyDeclaration.ExpressionBody.DescendantNodes()
+                : propertyDeclaration.AccessorList.Accessors.SelectMany(a => a.DescendantNodes());
 
-            return propertyDeclaration.AccessorList.Accessors.SelectMany(a => a.DescendantNodes());
-        }
-
-        private IEnumerable<SyntaxNode> GetMethodDescendants(MethodDeclarationSyntax methodDeclaration)
-        {
-            if (methodDeclaration.ExpressionBody != null)
-            {
-                return methodDeclaration.ExpressionBody.DescendantNodes();
-            }
-
-            return methodDeclaration.Body?.DescendantNodes();
-        }
+        private IEnumerable<SyntaxNode> GetMethodDescendants(MethodDeclarationSyntax methodDeclaration) =>
+            methodDeclaration.ExpressionBody != null
+                ? methodDeclaration.ExpressionBody.DescendantNodes()
+                : methodDeclaration.Body?.DescendantNodes();
 
         private static void CheckIssue<TDeclarationSyntax>(SyntaxNodeAnalysisContext context,
             Func<TDeclarationSyntax, IEnumerable<SyntaxNode>> getDescendants,
@@ -98,22 +101,23 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var declaration = (TDeclarationSyntax)context.Node;
 
-            var symbol = context.SemanticModel.GetDeclaredSymbol(declaration);
+            var methodOrPropertySymbol = context.SemanticModel.GetDeclaredSymbol(declaration);
 
-            if (symbol == null ||
-                symbol.IsStatic ||
-                symbol.IsVirtual ||
-                symbol.IsAbstract ||
-                symbol.IsOverride ||
-                symbol.ContainingType.IsInterface() ||
-                symbol.GetInterfaceMember() != null ||
-                symbol.GetOverriddenMember() != null ||
-                symbol.GetAttributes().Any(IsIgnoredAttribute) ||
-                IsNewMethod(symbol) ||
+            if (methodOrPropertySymbol == null ||
+                methodOrPropertySymbol.IsStatic ||
+                methodOrPropertySymbol.IsVirtual ||
+                methodOrPropertySymbol.IsAbstract ||
+                methodOrPropertySymbol.IsOverride ||
+                MethodNameWhitelist.Contains(methodOrPropertySymbol.Name) ||
+                methodOrPropertySymbol.ContainingType.IsInterface() ||
+                methodOrPropertySymbol.GetInterfaceMember() != null ||
+                methodOrPropertySymbol.GetOverriddenMember() != null ||
+                methodOrPropertySymbol.GetAttributes().Any(IsIgnoredAttribute) ||
+                IsNewMethod(methodOrPropertySymbol) ||
                 IsEmptyMethod(declaration) ||
-                IsNewProperty(symbol) ||
-                IsAutoProperty(symbol) ||
-                IsPublicControllerMethod(symbol))
+                IsNewProperty(methodOrPropertySymbol) ||
+                IsAutoProperty(methodOrPropertySymbol) ||
+                IsPublicControllerMethod(methodOrPropertySymbol))
             {
                 return;
             }
@@ -128,60 +132,42 @@ namespace SonarAnalyzer.Rules.CSharp
             context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, identifier.GetLocation(), identifier.Text, memberKind));
         }
 
-        private static bool IsIgnoredAttribute(AttributeData attribute)
-        {
-            return !attribute.AttributeClass.Is(KnownType.System_Diagnostics_CodeAnalysis_SuppressMessageAttribute);
-        }
+        private static bool IsIgnoredAttribute(AttributeData attribute) =>
+            !attribute.AttributeClass.Is(KnownType.System_Diagnostics_CodeAnalysis_SuppressMessageAttribute);
 
-        private static bool IsEmptyMethod(MemberDeclarationSyntax node)
-        {
-            return node is MethodDeclarationSyntax methodDeclarationSyntax &&
-                methodDeclarationSyntax.Body?.Statements.Count == 0 &&
-                methodDeclarationSyntax.ExpressionBody == null;
-        }
+        private static bool IsEmptyMethod(MemberDeclarationSyntax node) =>
+            node is MethodDeclarationSyntax methodDeclarationSyntax
+            && methodDeclarationSyntax.Body?.Statements.Count == 0
+            && methodDeclarationSyntax.ExpressionBody == null;
 
-        private static bool IsNewMethod(ISymbol symbol)
-        {
-            return symbol.DeclaringSyntaxReferences
+        private static bool IsNewMethod(ISymbol symbol) =>
+            symbol.DeclaringSyntaxReferences
                 .Select(r => r.GetSyntax())
                 .OfType<MethodDeclarationSyntax>()
                 .Any(s => s.Modifiers.Any(SyntaxKind.NewKeyword));
-        }
 
-        private static bool IsNewProperty(ISymbol symbol)
-        {
-            return symbol.DeclaringSyntaxReferences
+        private static bool IsNewProperty(ISymbol symbol) =>
+            symbol.DeclaringSyntaxReferences
                 .Select(r => r.GetSyntax())
                 .OfType<PropertyDeclarationSyntax>()
                 .Any(s => s.Modifiers.Any(SyntaxKind.NewKeyword));
-        }
 
-        private static bool IsAutoProperty(ISymbol symbol)
-        {
-            return symbol.DeclaringSyntaxReferences
+        private static bool IsAutoProperty(ISymbol symbol) =>
+            symbol.DeclaringSyntaxReferences
                 .Select(r => r.GetSyntax())
                 .OfType<PropertyDeclarationSyntax>()
                 .Any(s => s.AccessorList != null && s.AccessorList.Accessors.All(a => a.Body == null && a.ExpressionBody() == null));
-        }
 
-        private static bool IsPublicControllerMethod(ISymbol symbol)
-        {
-            if (symbol is IMethodSymbol methodSymbol)
-            {
-                return methodSymbol.DeclaredAccessibility == Accessibility.Public &&
-                    methodSymbol.ContainingType.DerivesFromAny(WebControllerTypes);
-            }
+        private static bool IsPublicControllerMethod(ISymbol symbol) =>
+            symbol is IMethodSymbol methodSymbol
+            && methodSymbol.GetEffectiveAccessibility() == Accessibility.Public
+            && methodSymbol.ContainingType.DerivesFromAny(WebControllerTypes);
 
-            return false;
-        }
-
-        private static bool HasInstanceReferences(IEnumerable<SyntaxNode> nodes, SemanticModel semanticModel)
-        {
-            return nodes.OfType<ExpressionSyntax>()
+        private static bool HasInstanceReferences(IEnumerable<SyntaxNode> nodes, SemanticModel semanticModel) =>
+            nodes.OfType<ExpressionSyntax>()
                 .Where(IsLeftmostIdentifierName)
                 .Where(n => !CSharpSyntaxHelper.IsInNameofCall(n, semanticModel))
                 .Any(n => IsInstanceMember(n, semanticModel));
-        }
 
         private static bool IsLeftmostIdentifierName(ExpressionSyntax node)
         {
@@ -199,10 +185,9 @@ namespace SonarAnalyzer.Rules.CSharp
             var conditional = node.Parent as ConditionalAccessExpressionSyntax;
             var memberBinding = node.Parent as MemberBindingExpressionSyntax;
 
-            return
-                memberAccess == null && conditional == null && memberBinding == null ||
-                memberAccess?.Expression == node ||
-                conditional?.Expression == node;
+            return (memberAccess == null && conditional == null && memberBinding == null)
+                || memberAccess?.Expression == node
+                || conditional?.Expression == node;
         }
 
         private static bool IsInstanceMember(ExpressionSyntax node, SemanticModel semanticModel)
