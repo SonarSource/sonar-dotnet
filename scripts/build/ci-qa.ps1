@@ -62,11 +62,14 @@ function Get-BuildArtifacts() {
         Remove-Item $tempFolder -Recurse -Force -ErrorAction Ignore
         New-Item $tempFolder -ItemType Directory
 
+        # NB: the WebClient class defaults to TLS v1, which is no longer supported by GitHub/Artifactory online
+        [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
+
         foreach ($packageName in $packagesToDownload) {
             $downloadUrl = Get-PackageUrl "${packageName}.${version}.nupkg"
             $zipPath = Join-Path $tempFolder "${packageName}.${version}.zip"
 
-            Write-Debug "Downloading '${downloadUrl}' at '${zipPath}'"
+            Write-Host "Downloading '${downloadUrl}' at '${zipPath}'"
             Invoke-WebRequest -UseBasicParsing -Uri $downloadUrl -Headers $authHeaders -OutFile $zipPath
 
             if (-Not (Test-Path $zipPath)) {

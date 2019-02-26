@@ -121,6 +121,8 @@ function New-Issue() {
         $payload.milestone = $milestoneKey
     }
 
+    # NB: the WebClient class defaults to TLS v1, which is no longer supported by GitHub/Artifactory online
+    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
     Invoke-WebRequest `
         -Uri "https://api.github.com/repos/SonarSource/sonar-dotnet/issues" `
         -Method "POST" `
