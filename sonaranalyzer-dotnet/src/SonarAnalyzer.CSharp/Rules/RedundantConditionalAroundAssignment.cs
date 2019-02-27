@@ -47,14 +47,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var ifStatement = (IfStatementSyntax)c.Node;
+
                     if (ifStatement.Else != null ||
-                        ifStatement.Parent is ElseClauseSyntax ||
-                        ifStatement.FirstAncestorOrSelf<PropertyDeclarationSyntax>() is PropertyDeclarationSyntax)
+                        ifStatement.Parent is ElseClauseSyntax)
                     {
                         return;
                     }
+
                     if (!TryGetNotEqualsCondition(ifStatement, out var condition) ||
                         !TryGetSingleAssignment(ifStatement, out var assignment))
+                    {
+                        return;
+                    }
+
+                    var isPropertyAssignment = c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol is IPropertySymbol;
+
+                    if (isPropertyAssignment)
                     {
                         return;
                     }
@@ -76,6 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool TryGetNotEqualsCondition(IfStatementSyntax ifStatement, out BinaryExpressionSyntax condition)
         {
             condition = ifStatement.Condition?.RemoveParentheses() as BinaryExpressionSyntax;
+
             return condition != null &&
                 condition.IsKind(SyntaxKind.NotEqualsExpression);
         }
@@ -85,6 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
             assignment = null;
 
             var statement = ifStatement.Statement;
+
             if (statement is BlockSyntax block &&
                 block.Statements.Count == 1)
             {
@@ -96,6 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             assignment = (statement as ExpressionStatementSyntax)?.Expression as AssignmentExpressionSyntax;
+
             return assignment != null &&
                 assignment.IsKind(SyntaxKind.SimpleAssignmentExpression);
         }

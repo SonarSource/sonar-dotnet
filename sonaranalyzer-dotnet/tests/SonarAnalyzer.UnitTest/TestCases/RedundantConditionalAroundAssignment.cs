@@ -59,28 +59,14 @@ namespace Tests.Diagnostics
             {
                 y += 2;
             }
-        }
 
-        private static int? f;
-        // Properties are not checked
-        public static int Property
-        {
-            get
+            // Properties are not checked
+            if (Property != default(int))
             {
-                if (f != null)
-                {
-                    f = null;
-                }
-
-                return 1;
-            }
-            set
-            {
-                if (f != null)
-                {
-                    f = null;
-                }
+                Property = default(int);
             }
         }
+
+        public static int Property { get; set; }
     }
 }
