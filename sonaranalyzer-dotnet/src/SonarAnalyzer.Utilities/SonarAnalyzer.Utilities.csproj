@@ -4,8 +4,6 @@
     <TargetFramework>net46</TargetFramework>
     <AssemblyName>SonarAnalyzer.Utilities</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
-    <CodeAnalysisRuleSet>..\SonarAnalyzer.ruleset</CodeAnalysisRuleSet>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,10 +15,6 @@
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.Shared.cs" Link="Properties\AssemblyInfo.Shared.cs" />
     <Compile Include="..\Signing.cs" Link="Properties\Signing.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <AdditionalFiles Include="..\SonarLint.xml" Link="Properties\SonarLint.xml" />
   </ItemGroup>
 
   <ItemGroup>

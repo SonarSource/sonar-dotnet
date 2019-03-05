@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
 
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)\.sonarlint\sonaranalyzer-dotnetCSharp.ruleset</CodeAnalysisRuleSet>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)\SonarLint.xml" Link="Properties\SonarLint.xml" />
+  </ItemGroup>
+
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
