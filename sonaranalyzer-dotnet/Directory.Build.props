@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
 
-  <PropertyGroup>
-    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)\.sonarlint\sonaranalyzer-dotnetCSharp.ruleset</CodeAnalysisRuleSet>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <AdditionalFiles Include="$(MSBuildThisFileDirectory)\SonarLint.xml" Link="Properties\SonarLint.xml" />
-  </ItemGroup>
+  <!-- NOTE: any settings in this file will apply to all projects i.e. product code,
+             test code, and also the third-party projects used by the ITs.
+             If a setting should only apply to certain projects then add it at a
+             lower level.
+   -->
 
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <DebugType>full</DebugType>
