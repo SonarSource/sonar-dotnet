@@ -3,26 +3,31 @@ only set in the constructor, it could cause confusion about the field's intended
 <code>readonly</code> to make their intended use explicit, and to prevent future maintainers from inadvertently changing their use.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-class Person
+public class Person
 {
-  int _birthYear;  // Noncompliant
-  Person(int birthYear)
-  {
-    _birthYear = birthYear;
-  }
+    private int _birthYear;  // Noncompliant
+
+    Person(int birthYear)
+    {
+        _birthYear = birthYear;
+    }
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-class Person
+public class Person
 {
-  readonly int _birthYear;
-  Person(int birthYear)
-  {
-    _birthYear = birthYear;
-  }
+    private readonly int _birthYear;
+
+    Person(int birthYear)
+    {
+        _birthYear = birthYear;
+    }
 }
 </pre>
 <h2>Exceptions</h2>
-<p>Fields with attributes are ignored.</p>
+<p> * Fields with attributes are ignored.</p>
+<p> * Fields of type <code>struct</code> that are not primitive or pointer types are also ignored because of possible unwanted behavior.</p>
+<h2>See</h2>
+<p> * <a href="https://ericlippert.com/2008/05/14/mutating-readonly-structs/">Mutating readonly structs</a></p>
 

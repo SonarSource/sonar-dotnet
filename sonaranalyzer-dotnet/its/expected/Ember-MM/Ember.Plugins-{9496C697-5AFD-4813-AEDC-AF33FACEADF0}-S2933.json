@@ -132,45 +132,6 @@
 },
 {
 "id":  "S2933",
-"message":  "Make 'dbMovie' 'readonly'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\IMovieImageScraper.cs",
-"region":  {
-"startLine":  29,
-"startColumn":  36,
-"endLine":  29,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2933",
-"message":  "Make 'dbMovie' 'readonly'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\IMovieInfoScraper.cs",
-"region":  {
-"startLine":  30,
-"startColumn":  36,
-"endLine":  30,
-"endColumn":  43
-}
-}
-},
-{
-"id":  "S2933",
-"message":  "Make 'options' 'readonly'.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\IMovieInfoScraper.cs",
-"region":  {
-"startLine":  31,
-"startColumn":  42,
-"endLine":  31,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S2933",
 "message":  "Make 'manager' 'readonly'.",
 "location":  {
 "uri":  "sources\Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",

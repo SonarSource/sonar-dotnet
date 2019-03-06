@@ -107,7 +107,9 @@ namespace Tests.Diagnostics
     class MyClass
     {
         private X1Struct x; // Compliant
-        private X1Struct y; // Noncompliant
+        // See https://github.com/SonarSource/sonar-dotnet/issues/2291
+        private X1Struct y; // Compliant - could be set as readonly but this changes the behavior of the field
+        private IntPtr myPtr; // Noncompliant
 
         private X1Class z; // Noncompliant
 
@@ -118,6 +120,7 @@ namespace Tests.Diagnostics
             x = new X1Struct();
             y = new X1Struct();
             z = new X1Class();
+            myPtr = new IntPtr(12);
             (this.y.y).z = "a";
             (this.z.y).z = "a";
             if (this.field)

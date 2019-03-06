@@ -67,19 +67,6 @@
 },
 {
 "id":  "S2933",
-"message":  "Make 'userGuid' 'readonly'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Forms.Tests\FormsAuthenticationFixture.cs",
-"region":  {
-"startLine":  21,
-"startColumn":  22,
-"endLine":  21,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S2933",
 "message":  "Make 'validCookieValue' 'readonly'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Authentication.Forms.Tests\FormsAuthenticationFixture.cs",
