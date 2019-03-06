@@ -1,65 +1,78 @@
-<p>Class methods and properties that don't access instance data can be <code>static</code> to prevent any misunderstanding about the contract of the
-method. </p>
+<p>Methods and properties that don't access instance data can be <code>static</code> to prevent any misunderstanding about the contract of the method.
+</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 public class Utilities
 {
-  public int MagicNum // Noncompliant
-  {
-    get
+    public int MagicNum // Noncompliant
     {
-      return 42;
+        get
+        {
+            return 42;
+        }
     }
+
+    private static string magicWord = "please";
+    public string MagicWord  // Noncompliant
+    {
+        get
+        {
+            return magicWord;
+        }
+        set
+        {
+            magicWord = value;
+        }
   }
 
-  private static string magicWord = "please";
-  public string MagicWord  // Noncompliant
-  {
-    get
+    public int Sum(int a, int b)  // Noncompliant
     {
-      return magicWord;
+        return a + b;
     }
-    set
-    {
-      magicWord = value;
-    }
-  }
-
-  public int Sum(int a, int b)  // Noncompliant
-  {
-    return a + b;
-  }
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 public class Utilities
 {
-  public static int MagicNum
-  {
-    get
+    public static int MagicNum
     {
-      return 42;
+        get
+        {
+            return 42;
+        }
     }
-  }
 
-  private static string magicWord = "please";
-  public static string MagicWord
-  {
-    get
+    private static string magicWord = "please";
+    public static string MagicWord
     {
-      return magicWord;
+        get
+        {
+            return magicWord;
+        }
+        set
+        {
+            magicWord = value;
+        }
     }
-    set
-    {
-      magicWord = value;
-    }
-  }
 
-  public static int Sum(int a, int b)
-  {
-    return a + b;
-  }
+    public static int Sum(int a, int b)
+    {
+        return a + b;
+    }
 }
 </pre>
+<h2>Exceptions</h2>
+<p>Methods with the following names are excluded because they can't be made <code>static</code>:</p>
+<ul>
+  <li> Application_AuthenticateRequest </li>
+  <li> Application_BeginRequest </li>
+  <li> Application_End </li>
+  <li> Application_EndRequest </li>
+  <li> Application_Error </li>
+  <li> Application_Init </li>
+  <li> Application_Start </li>
+  <li> Session_End </li>
+  <li> Session_Start </li>
+</ul>
 

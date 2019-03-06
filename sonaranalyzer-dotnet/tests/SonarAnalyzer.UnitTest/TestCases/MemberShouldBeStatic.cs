@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web;
 
 namespace Tests.Diagnostics
 {
@@ -206,5 +205,18 @@ namespace Tests.Diagnostics
         public int Foo() => 0;
 
         protected int FooFoo() => 0; // Noncompliant
+    }
+
+    public class Foo
+    {
+        protected void Application_AuthenticateRequest(Object sender, EventArgs e) { }
+        protected void Application_BeginRequest(object sender, EventArgs e) { }
+        protected void Application_End() { }
+        protected void Application_EndRequest(Object sender, EventArgs e) { }
+        protected void Application_Error(object sender, EventArgs e) { }
+        protected void Application_Init(object sender, EventArgs e) { }
+        protected void Application_Start() { }
+        protected void Session_End(object sender, EventArgs e) { }
+        protected void Session_Start(object sender, EventArgs e) { }
     }
 }
