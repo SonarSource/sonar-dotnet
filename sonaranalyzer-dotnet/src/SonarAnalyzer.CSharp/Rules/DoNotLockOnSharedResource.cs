@@ -20,42 +20,43 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.Rules.CSharp
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class LockOnThisOrType : LockOnThisOrTypeBase
+    public sealed class DoNotLockOnSharedResource : DoNotLockOnSharedResourceBase
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var lockStatement = (SyncLockStatementSyntax)c.Node;
+                    var lockStatement = (LockStatementSyntax)c.Node;
 
-                    if (LockOnThis(lockStatement.Expression) ||
-                        LockOnSystemType(lockStatement.Expression, c.SemanticModel))
+                    if (IsLockOnThis(lockStatement.Expression) ||
+                        IsLockOnStringLiteral(lockStatement.Expression) ||
+                        IsLockOnForbiddenKnownType(lockStatement.Expression, c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, lockStatement.Expression.GetLocation()));
                     }
                 },
-                SyntaxKind.SyncLockStatement);
+                SyntaxKind.LockStatement);
         }
 
-        private static bool LockOnSystemType(ExpressionSyntax expression, SemanticModel semanticModel) =>
-            semanticModel.GetTypeInfo(expression).Type.Is(KnownType.System_Type);
+        private static bool IsLockOnThis(ExpressionSyntax expression) =>
+            expression.IsKind(SyntaxKind.ThisExpression);
 
-        private static bool LockOnThis(ExpressionSyntax expression) =>
-            expression.IsKind(SyntaxKind.MeExpression);
+        private static bool IsLockOnStringLiteral(ExpressionSyntax expression) =>
+            expression.IsKind(SyntaxKind.StringLiteralExpression);
     }
 }

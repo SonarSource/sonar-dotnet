@@ -1,5 +1,5 @@
 {
-  "title": "Types and \"this\" should not be used for locking",
+  "title": "Shared resources should not be used for locking",
   "type": "BUG",
   "status": "ready",
   "remediation": {

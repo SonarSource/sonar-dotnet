@@ -18,13 +18,30 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Helpers;
+extern alias csharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using csharp::SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.UnitTest.Rules
 {
-    public abstract class LockOnThisOrTypeBase : SonarDiagnosticAnalyzer
+    [TestClass]
+    public class DoNotLockOnSharedResourceTest
     {
-        protected const string DiagnosticId = "S2551";
-        protected const string MessageFormat = "Lock on a dedicated object instance instead.";
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotLockOnSharedResource_CS()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotLockOnSharedResource.cs",
+                new DoNotLockOnSharedResource());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotLockOnSharedResource_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotLockOnSharedResource.vb",
+                new SonarAnalyzer.Rules.VisualBasic.DoNotLockOnSharedResource());
+        }
     }
 }
+
