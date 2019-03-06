@@ -190,5 +190,18 @@ namespace UnityEditor
                 new CS.UnusedPrivateMember(),
                 new CS.UnusedPrivateMemberCodeFixProvider());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UnusedPrivateMember_UsedInGeneratedFile()
+        {
+            Verifier.VerifyAnalyzer(
+                new[]
+                {
+                    @"TestCases\UnusedPrivateMember.CalledFromGenerated.cs",
+                    @"TestCases\UnusedPrivateMember.Generated.cs"
+                },
+                new CS.UnusedPrivateMember());
+        }
     }
 }
