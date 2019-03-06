@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             // Collect symbols of private members that could potentially be removed
                             var removableSymbolsCollector = new CSharpRemovableSymbolWalker(c.Compilation.GetSemanticModel);
 
-                            if (!VisitDeclaringReferences(namedType, removableSymbolsCollector, c.Compilation))
+                            if (!VisitDeclaringReferences(namedType, removableSymbolsCollector, c.Compilation, includeGeneratedFile: false))
                             {
                                 return;
                             }
@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 c.Compilation.GetSemanticModel,
                                 removableSymbolsCollector.PrivateSymbols.Select(s => s.Name).ToHashSet());
 
-                            if (!VisitDeclaringReferences(namedType, usageCollector, c.Compilation))
+                            if (!VisitDeclaringReferences(namedType, usageCollector, c.Compilation, includeGeneratedFile: true))
                             {
                                 return;
                             }
@@ -286,9 +286,14 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool VisitDeclaringReferences(INamedTypeSymbol namedType, CSharpSyntaxWalker visitor, Compilation compilation)
+        private static bool VisitDeclaringReferences(INamedTypeSymbol namedType, CSharpSyntaxWalker visitor, Compilation compilation,
+            bool includeGeneratedFile)
         {
-            foreach (var reference in namedType.DeclaringSyntaxReferences.Where(r => !IsGenerated(r)))
+            var syntaxReferencesToVisit = includeGeneratedFile
+                ? namedType.DeclaringSyntaxReferences
+                : namedType.DeclaringSyntaxReferences.Where(r => !IsGenerated(r));
+
+            foreach (var reference in syntaxReferencesToVisit)
             {
                 if (!visitor.SafeVisit(reference.GetSyntax()))
                 {
