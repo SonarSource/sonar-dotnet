@@ -51,6 +51,15 @@ namespace SonarAnalyzer.Rules.CSharp
             SymbolKind.Method
         };
 
+        public static int Method()
+        {
+            var x = 4;
+            string s = null;
+            var y = s.IsNormalized();
+            x = 5;
+            return x;
+        }
+
         private static readonly ImmutableArray<KnownType> WebControllerTypes =
             ImmutableArray.Create(
                 KnownType.System_Web_Mvc_Controller,
