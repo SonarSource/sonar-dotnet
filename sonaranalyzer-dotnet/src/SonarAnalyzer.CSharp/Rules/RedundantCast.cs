@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -83,7 +84,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (expressionType.Equals(castType))
+            if (expressionType.Equals(castType)
+                && !expression.IsKind(SyntaxKindEx.DefaultLiteralExpression))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location,
                     castType.ToMinimalDisplayString(context.SemanticModel, expression.SpanStart)));
