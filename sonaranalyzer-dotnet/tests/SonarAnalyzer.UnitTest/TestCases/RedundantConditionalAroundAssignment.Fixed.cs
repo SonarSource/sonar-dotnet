@@ -46,18 +46,20 @@ namespace Tests.Diagnostics
             {
                 y += 2;
             }
+
+            if (Property != 42)
+            {
+                Property = 42;
+            }
         }
 
         private static int? f;
-        // Properties are not checked
+        // Do not report issue on field check within a property accessor as it might be expensive to set again the value
         public static int Property
         {
             get
             {
-                if (f != null)
-                {
-                    f = null;
-                }
+                f = null;
 
                 return 1;
             }
