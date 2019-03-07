@@ -4,7 +4,7 @@ assignment.</p>
 <pre>
 if (x != a)  // Noncompliant; why bother?
 {
-  x = a;
+    x = a;
 }
 </pre>
 <h2>Compliant Solution</h2>
@@ -12,5 +12,29 @@ if (x != a)  // Noncompliant; why bother?
 x = a;
 </pre>
 <h2>Exceptions</h2>
-<p>Properties are excluded from this rule because they could have side effects and removing the check could lead to undesired side effects.</p>
+<p>Properties and checks inside setters are excluded from this rule because they could have side effects and removing the check could lead to
+undesired side effects.</p>
+<pre>
+if (MyProperty != a)
+{
+    MyProperty = a; // Compliant because the setter could be expensive call
+}
+</pre>
+<pre>
+private int myField;
+public int SomeProperty
+{
+    get
+    {
+        return myField;
+    }
+    set
+    {
+        if (myField != value)
+        {
+            myField = value;
+        }
+    }
+}
+</pre>
 

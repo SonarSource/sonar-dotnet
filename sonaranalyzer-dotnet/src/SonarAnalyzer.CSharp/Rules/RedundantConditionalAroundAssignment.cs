@@ -38,7 +38,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -47,13 +46,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var ifStatement = (IfStatementSyntax)c.Node;
+
                     if (ifStatement.Else != null ||
                         ifStatement.Parent is ElseClauseSyntax ||
-                        ifStatement.FirstAncestorOrSelf<PropertyDeclarationSyntax>() is PropertyDeclarationSyntax)
-                    {
-                        return;
-                    }
-                    if (!TryGetNotEqualsCondition(ifStatement, out var condition) ||
+                        (ifStatement.FirstAncestorOrSelf<AccessorDeclarationSyntax>()?.IsKind(SyntaxKind.SetAccessorDeclaration) ?? false) ||
+                        !TryGetNotEqualsCondition(ifStatement, out var condition) ||
                         !TryGetSingleAssignment(ifStatement, out var assignment))
                     {
                         return;
@@ -64,8 +61,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     var expression1Assignment = assignment.Left?.RemoveParentheses();
                     var expression2Assignment = assignment.Right?.RemoveParentheses();
 
-                    if (AreMatchingExpressions(expression1Condition, expression2Condition, expression2Assignment, expression1Assignment) ||
-                        AreMatchingExpressions(expression1Condition, expression2Condition, expression1Assignment, expression2Assignment))
+                    if (!AreMatchingExpressions(expression1Condition, expression2Condition, expression2Assignment, expression1Assignment) &&
+                        !AreMatchingExpressions(expression1Condition, expression2Condition, expression1Assignment, expression2Assignment))
+                    {
+                        return;
+                    }
+
+                    if (!(c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol is IPropertySymbol))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, condition.GetLocation()));
                     }
@@ -82,29 +84,25 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool TryGetSingleAssignment(IfStatementSyntax ifStatement, out AssignmentExpressionSyntax assignment)
         {
-            assignment = null;
-
             var statement = ifStatement.Statement;
-            if (statement is BlockSyntax block &&
-                block.Statements.Count == 1)
+
+            if (!(statement is BlockSyntax block) ||
+                block.Statements.Count != 1)
             {
-                statement = block.Statements.First();
-            }
-            else
-            {
+                assignment = null;
                 return false;
             }
 
+            statement = block.Statements.First();
             assignment = (statement as ExpressionStatementSyntax)?.Expression as AssignmentExpressionSyntax;
+
             return assignment != null &&
                 assignment.IsKind(SyntaxKind.SimpleAssignmentExpression);
         }
 
         private static bool AreMatchingExpressions(ExpressionSyntax condition1, ExpressionSyntax condition2,
-            ExpressionSyntax assignment1, ExpressionSyntax assignment2)
-        {
-            return CSharpEquivalenceChecker.AreEquivalent(condition1, assignment1) &&
-                CSharpEquivalenceChecker.AreEquivalent(condition2, assignment2);
-        }
+            ExpressionSyntax assignment1, ExpressionSyntax assignment2) =>
+            CSharpEquivalenceChecker.AreEquivalent(condition1, assignment1)
+            && CSharpEquivalenceChecker.AreEquivalent(condition2, assignment2);
     }
 }
