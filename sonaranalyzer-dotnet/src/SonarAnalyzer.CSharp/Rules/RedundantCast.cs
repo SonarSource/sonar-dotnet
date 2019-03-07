@@ -72,6 +72,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckCastExpression(SyntaxNodeAnalysisContext context, ExpressionSyntax expression,
             ExpressionSyntax type, Location location)
         {
+            if (expression.IsKind(SyntaxKindEx.DefaultLiteralExpression))
+            {
+                return;
+            }
+
             var expressionType = context.SemanticModel.GetTypeInfo(expression).Type;
             if (expressionType == null)
             {
@@ -84,8 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (expressionType.Equals(castType)
-                && !expression.IsKind(SyntaxKindEx.DefaultLiteralExpression))
+            if (expressionType.Equals(castType))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location,
                     castType.ToMinimalDisplayString(context.SemanticModel, expression.SpanStart)));
