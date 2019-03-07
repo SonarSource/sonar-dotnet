@@ -7,11 +7,15 @@ namespace Tests.Diagnostics
 
     class Program
     {
+        private object someField;
+
         public void Foo(Object x)
         {
             if (x is Fruit)  // Noncompliant
             {
                 var f1 = (Fruit)x;
+//                       ^^^^^^^^ Secondary
+                var f2 = (Fruit)x;
 //                       ^^^^^^^^ Secondary
             }
 
@@ -40,6 +44,22 @@ namespace Tests.Diagnostics
             if (x is int)
             {
                 var res = (int)x; // Compliant because we are casting to a ValueType
+            }
+        }
+
+        // See https://github.com/SonarSource/sonar-dotnet/issues/2314
+        public void TakeIdentifierIntoAccount(object x)
+        {
+            if (x is Fruit)
+            {
+                var f = new Fruit();
+                var c = (Fruit)f;
+            }
+
+            if (someField is Fruit) // Noncompliant
+            {
+                var fruit = (Fruit)this.someField;
+//                          ^^^^^^^^^^^^^^^^^^^^^ Secondary
             }
         }
 

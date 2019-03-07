@@ -38,42 +38,43 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(CheckForIssue, SyntaxKind.IsExpression);
-        }
 
         private void CheckForIssue(SyntaxNodeAnalysisContext analysisContext)
         {
             var isExpression = (BinaryExpressionSyntax)analysisContext.Node;
-            if (!(isExpression.Right is TypeSyntax castType))
-            {
-                return;
-            }
 
-            if (!(analysisContext.SemanticModel.GetSymbolInfo(castType).Symbol is INamedTypeSymbol castTypeSymbol) ||
+            if (!(isExpression.Right is TypeSyntax castType) ||
+                !(isExpression.GetFirstNonParenthesizedParent() is IfStatementSyntax parentIfStatement) ||
+                !(analysisContext.SemanticModel.GetSymbolInfo(castType).Symbol is INamedTypeSymbol castTypeSymbol) ||
                 castTypeSymbol.TypeKind == TypeKind.Struct)
             {
                 return;
             }
 
-            if (!(isExpression.GetFirstNonParenthesizedParent() is IfStatementSyntax parentIfStatement))
+            var isExpressionLeftSymbol = analysisContext.SemanticModel.GetSymbolInfo(isExpression.Left).Symbol;
+            if (isExpressionLeftSymbol == null)
             {
                 return;
             }
 
-            var castExpressionWithCorrectType = parentIfStatement.Statement
+            var duplicatedCastLocations = parentIfStatement.Statement
                 .DescendantNodes()
                 .OfType<CastExpressionSyntax>()
-                .FirstOrDefault(x => x.Type.IsEquivalentTo(castType));
-            if (castExpressionWithCorrectType != null)
+                .Where(x => x.Type.IsEquivalentTo(castType) && IsCastOnSameSymbol(x))
+                .Select(x => x.GetLocation());
+
+            if (duplicatedCastLocations.Any())
             {
                 analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, isExpression.GetLocation(),
-                    additionalLocations: new[] { castExpressionWithCorrectType.GetLocation() }));
+                    additionalLocations: duplicatedCastLocations));
             }
+
+            bool IsCastOnSameSymbol(CastExpressionSyntax castExpression) =>
+                analysisContext.SemanticModel.GetSymbolInfo(castExpression.Expression).Symbol == isExpressionLeftSymbol;
         }
     }
 }

@@ -16,10 +16,10 @@
 {
 "uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\Proto\ClusterMessageSerializerSpec.cs",
 "region":  {
-"startLine":  35,
+"startLine":  36,
 "startColumn":  34,
-"endLine":  35,
-"endColumn":  59
+"endLine":  36,
+"endColumn":  53
 }
 }
 ]

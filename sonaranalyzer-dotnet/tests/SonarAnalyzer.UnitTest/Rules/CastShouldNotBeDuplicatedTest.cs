@@ -31,7 +31,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CastShouldNotBeDuplicated()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\CastShouldNotBeDuplicated.cs", new CastShouldNotBeDuplicated());
+            Verifier.VerifyAnalyzer(
+                @"TestCases\CastShouldNotBeDuplicated.cs",
+                new CastShouldNotBeDuplicated());
         }
     }
 }
