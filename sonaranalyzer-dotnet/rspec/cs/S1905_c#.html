@@ -3,22 +3,29 @@
 <pre>
 public int Example(int i)
 {
-  return (int) (i + 42); // Noncompliant
+    return (int) (i + 42); // Noncompliant
 }
+
 public IEnumerable&lt;int&gt; ExampleCollection(IEnumerable&lt;int&gt; coll)
 {
-  return coll.Reverse().OfType&lt;int&gt;(); // Noncompliant
+    return coll.Reverse().OfType&lt;int&gt;(); // Noncompliant
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 public int Example(int i)
 {
-  return i + 42;
+    return i + 42;
 }
+
 public IEnumerable&lt;int&gt; ExampleCollection(IEnumerable&lt;int&gt; coll)
 {
-  return coll.Reverse();
+    return coll.Reverse();
 }
+</pre>
+<h2>Exceptions</h2>
+<p>Issues are not raised against C# 7.1 `default` literal.</p>
+<pre>
+bool b = (bool)default; // Doesn't raise an issue
 </pre>
 

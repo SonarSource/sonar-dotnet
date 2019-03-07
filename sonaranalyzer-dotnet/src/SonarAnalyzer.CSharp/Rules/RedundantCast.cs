@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -71,6 +72,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckCastExpression(SyntaxNodeAnalysisContext context, ExpressionSyntax expression,
             ExpressionSyntax type, Location location)
         {
+            if (expression.IsKind(SyntaxKindEx.DefaultLiteralExpression))
+            {
+                return;
+            }
+
             var expressionType = context.SemanticModel.GetTypeInfo(expression).Type;
             if (expressionType == null)
             {

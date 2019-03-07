@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +32,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void RedundantCast()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantCast.cs", new RedundantCast());
+            Verifier.VerifyAnalyzer(
+                @"TestCases\RedundantCast.cs",
+                new RedundantCast());
         }
 
         [TestMethod]
@@ -43,6 +46,27 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\RedundantCast.Fixed.cs",
                 new RedundantCast(),
                 new RedundantCastCodeFixProvider());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RedundantCast_DefaultLiteral()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+using System;
+public static class MyClass
+{
+    public static void RunAction(Action action)
+    {
+        bool myBool = (bool)default; // FN - the cast is unneeded
+        RunFunc(() => { action(); return default; }, (bool)default); // should not raise because of the generic the cast is mandatory
+        RunFunc<bool>(() => { action(); return default; }, (bool)default); // FN - the cast is unneeded
+    }
+
+     public static T RunFunc<T>(Func<T> func, T returnValue = default) => returnValue;
+}",
+                new RedundantCast(),
+                new[] { new CSharpParseOptions(LanguageVersion.CSharp7_1) });
         }
     }
 }
