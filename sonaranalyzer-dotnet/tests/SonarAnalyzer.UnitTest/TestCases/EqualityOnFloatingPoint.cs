@@ -46,6 +46,15 @@ namespace Tests.Diagnostics
             if (f <= 3.146 && true && f >= 3.146) // Not recognized
             {
             }
+
+            if (Math.Sign(f) == 0)
+            {
+            }
+
+            float f1 = 0.0F;
+            if ((System.Math.Sign(f1) == 0))
+            {
+            }
         }
     }
 }
