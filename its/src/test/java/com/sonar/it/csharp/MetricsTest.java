@@ -339,21 +339,6 @@ public class MetricsTest {
     assertThat(value.length()).isEqualTo(143); // No other line
   }
 
-  /* Executable lines */
-
-  @Test
-  public void executableLines() {
-
-    String value = getFileMeasure("executable_lines_data").getValue();
-
-    assertThat(value).contains("20=1");
-    assertThat(value).contains("30=1");
-    assertThat(value).contains("32=1");
-    assertThat(value).contains("33=1");
-
-    assertThat(value.length()).isEqualTo(19); // No other lines
-  }
-
   /* Helper methods */
 
   private Measure getProjectMeasure(String metricKey) {
