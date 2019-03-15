@@ -59,4 +59,24 @@ namespace Tests.Diagnostics
 
         public bool TryMethod2(out string value) { value = "a"; return true; }
     }
+
+    // See https://github.com/SonarSource/sonar-dotnet/issues/2344
+    public class S3874 : I3874
+    {
+        public void SetRef(ref I3874 obj) // compliant because this is interface implementation
+        {
+            obj = new S3874();
+        }
+
+        public void SetOut(out I3874 obj) // compliant because this is interface implementation
+        {
+            obj = new S3874();
+        }
+    }
+
+    public interface I3874
+    {
+        void SetRef(ref I3874 obj); // Noncompliant
+        void SetOut(out I3874 obj); // Noncompliant
+    }
 }
