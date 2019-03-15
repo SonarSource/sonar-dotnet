@@ -159,5 +159,20 @@ namespace Tests.Diagnostics
         {
             Generic2<int>();
         }
+
+        // (FN) False Negative
+        // See https://github.com/SonarSource/sonar-dotnet/issues/2342
+        int Power(int num, int exponent)
+        {
+            try
+            {
+                num = num * Power(num, exponent - 1);
+                return num;  // this is never reached
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
