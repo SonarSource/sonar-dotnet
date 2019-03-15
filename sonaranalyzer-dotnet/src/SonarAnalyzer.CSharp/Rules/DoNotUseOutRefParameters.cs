@@ -61,7 +61,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (!(parameterSymbol?.ContainingSymbol is IMethodSymbol containingMethod) ||
                         containingMethod.IsOverride ||
                         !containingMethod.IsPubliclyAccessible() ||
-                        IsTryPattern(containingMethod, modifier))
+                        IsTryPattern(containingMethod, modifier) ||
+                        containingMethod.GetInterfaceMember() != null)
                     {
                         return;
                     }
@@ -71,16 +72,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.Parameter);
         }
 
-        private bool IsTryPattern(IMethodSymbol method, SyntaxToken modifier)
-        {
-            return method.Name.StartsWith("Try", StringComparison.Ordinal) &&
-                method.ReturnType.Is(KnownType.System_Boolean) &&
-                modifier.IsKind(SyntaxKind.OutKeyword);
-        }
+        private bool IsTryPattern(IMethodSymbol method, SyntaxToken modifier) =>
+            method.Name.StartsWith("Try", StringComparison.Ordinal)
+            && method.ReturnType.Is(KnownType.System_Boolean)
+            && modifier.IsKind(SyntaxKind.OutKeyword);
 
-        private static bool IsRefOrOut(SyntaxToken token)
-        {
-            return token.IsKind(SyntaxKind.RefKeyword) || token.IsKind(SyntaxKind.OutKeyword);
-        }
+        private static bool IsRefOrOut(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.RefKeyword)
+            || token.IsKind(SyntaxKind.OutKeyword);
     }
 }
