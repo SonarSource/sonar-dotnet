@@ -31,7 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void EmptyCollectionsShouldNotBeEnumerated()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyCollectionsShouldNotBeEnumerated.cs",
+            Verifier.VerifyAnalyzer(
+                @"TestCases\EmptyCollectionsShouldNotBeEnumerated.cs",
                 new EmptyCollectionsShouldNotBeEnumerated());
         }
     }
