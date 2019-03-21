@@ -66,6 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
             nameof(Stack<object>.Push),
             nameof(HashSet<object>.Add),
             nameof(HashSet<object>.UnionWith),
+            "TryAdd" // This is a .NetCore 2.0+ method on Dictionary
         };
 
         private static readonly HashSet<string> IgnoredMethods = new HashSet<string>

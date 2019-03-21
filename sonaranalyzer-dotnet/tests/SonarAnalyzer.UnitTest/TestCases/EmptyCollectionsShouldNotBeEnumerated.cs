@@ -609,6 +609,14 @@ namespace Tests.Diagnostics
             dictionary.Add(1, 1);
             dictionary.Clear(); // Compliant, will normally raise
         }
+
+        public void TryAdd()
+        {
+            var dictionary = new NetCoreDictionary<string, object>();
+            if (dictionary.TryAdd("foo", new object()))
+            {
+            }
+        }
     }
 
     class Flows
@@ -772,6 +780,15 @@ namespace Tests.Diagnostics
             {
                 // silently do nothing
             }
+        }
+    }
+
+    // This class is here to simulate how the Dictionary from .NetCore 2.0+ behaves.
+    public class NetCoreDictionary<TKey, TValue> : Dictionary<TKey, TValue>
+    {
+        public bool TryAdd(TKey key, TValue value)
+        {
+            return true;
         }
     }
 }
