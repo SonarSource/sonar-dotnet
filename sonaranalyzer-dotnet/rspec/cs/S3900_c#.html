@@ -1,6 +1,7 @@
-<p>A public method can be called from anywhere, which means you should validate parameters to be within the expected constraints. In general, checking
-against <code>null</code> is recommended defensive programming.</p>
-<p>This rule raises an issue when a parameter of public method is not validated against <code>null</code> before being dereferenced.</p>
+<p>A publicly accessible method can be called from anywhere, which means you should validate parameters to be within the expected constraints. In
+general, checking against <code>null</code> is recommended defensive programming.</p>
+<p>This rule raises an issue when a parameter of a publicly accessible method is not validated against <code>null</code> before being
+dereferenced.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 public class MyClass
@@ -13,6 +14,11 @@ public class MyClass
     }
 
     public void Bar(MyOtherClass other)
+    {
+        this.other = other.Clone(); // Noncompliant
+    }
+
+    protected void FooBar(MyOtherClass other)
     {
         this.other = other.Clone(); // Noncompliant
     }
@@ -30,6 +36,14 @@ public class MyClass
     }
 
     public void Bar(MyOtherClass other)
+    {
+        if (other != null)
+        {
+            this.other = other.Clone();
+        }
+    }
+
+    protected void FooBar(MyOtherClass other)
     {
         if (other != null)
         {
