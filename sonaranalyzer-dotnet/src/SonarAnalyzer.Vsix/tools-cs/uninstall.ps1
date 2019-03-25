@@ -4,7 +4,7 @@ if ($project.Type -ne "C#") {
     return
 }
 
-if ('14.0', '15.0' -notcontains $project.DTE.Version) {
+if ('14.0', '15.0', '16.0' -notcontains $project.DTE.Version) {
     return
 }
 
