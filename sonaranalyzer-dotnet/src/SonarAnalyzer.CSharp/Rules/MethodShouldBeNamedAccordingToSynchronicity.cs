@@ -46,6 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
             ImmutableArray.Create(
                 KnownType.System_Threading_Tasks_Task,
                 KnownType.System_Threading_Tasks_Task_T,
+                KnownType.System_Threading_Tasks_ValueTask, // NetCore 2.2+
                 KnownType.System_Threading_Tasks_ValueTask_TResult
             );
 

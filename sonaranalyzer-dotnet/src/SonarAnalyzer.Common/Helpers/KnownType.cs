@@ -335,6 +335,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Threading_Tasks_Task = new KnownType("System.Threading.Tasks.Task");
         internal static readonly KnownType System_Threading_Tasks_Task_T = new KnownType("System.Threading.Tasks.Task<TResult>");
         internal static readonly KnownType System_Threading_Tasks_TaskFactory = new KnownType("System.Threading.Tasks.TaskFactory");
+        internal static readonly KnownType System_Threading_Tasks_ValueTask = new KnownType("System.Threading.Tasks.ValueTask");
         internal static readonly KnownType System_Threading_Tasks_ValueTask_TResult = new KnownType("System.Threading.Tasks.ValueTask<TResult>");
         internal static readonly KnownType System_Threading_Thread = new KnownType("System.Threading.Thread");
         internal static readonly KnownType System_ThreadStaticAttribute = new KnownType("System.ThreadStaticAttribute");
