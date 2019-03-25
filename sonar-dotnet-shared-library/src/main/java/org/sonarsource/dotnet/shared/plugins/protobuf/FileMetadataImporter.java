@@ -26,6 +26,9 @@ import java.util.HashSet;
 import java.util.Set;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileMetadataInfo;
 
+/**
+  This class is responsible of reading/importing the result of the analyzer detection of whether a file is considered as auto-generated or not.
+ */
 public class FileMetadataImporter extends RawProtobufImporter<FileMetadataInfo> {
 
   private final Set<Path> generatedFilePaths = new HashSet<>();

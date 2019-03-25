@@ -27,6 +27,11 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 
+/**
+ * This class is a non-global sensor used to collect all Roslyn reports and all protobufs resulting from the analysis of each and every C#/VB.NET project.
+ *
+ * Note that this is required because a global sensor cannot access to module specific properties.
+ */
 @ScannerSide
 public class PropertiesSensor implements Sensor {
   private final AbstractConfiguration configuration;

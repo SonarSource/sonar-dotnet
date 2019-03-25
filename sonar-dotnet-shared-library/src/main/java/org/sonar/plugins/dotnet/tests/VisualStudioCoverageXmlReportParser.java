@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;

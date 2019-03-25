@@ -21,6 +21,9 @@ package org.sonar.plugins.csharp;
 
 import org.sonarsource.dotnet.shared.plugins.AbstractFakeProfileImporter;
 
+/**
+ * TODO: Test whether this workaround is still needed when targeting a more recent SonarLint or SonarQube
+ */
 // SONARCS-558 workaround for SONAR-6969
 public class SonarLintFakeProfileImporter extends AbstractFakeProfileImporter {
 

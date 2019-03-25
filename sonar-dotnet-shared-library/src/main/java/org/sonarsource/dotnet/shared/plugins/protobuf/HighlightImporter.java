@@ -34,6 +34,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+  This class is responsible of reading/importing the highlight info that was processed by the C#/VB.NET analyzer.
+ */
 class HighlightImporter extends ProtobufImporter<SonarAnalyzer.TokenTypeInfo> {
 
   private final SensorContext context;

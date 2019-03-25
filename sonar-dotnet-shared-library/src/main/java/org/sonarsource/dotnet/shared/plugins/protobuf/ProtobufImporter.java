@@ -32,6 +32,12 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.RealPathProvider;
 import org.sonarsource.dotnet.shared.plugins.SensorContextUtils;
 
+/**
+  This class is the base class of all protobuf message importers whose data contain some file path.
+
+  Note that the file path provided by Roslyn might use a different path escaping than the one used by Java, that's why we take a function which transform a path into the
+  system real path (this method is OS dependent).
+ */
 public abstract class ProtobufImporter<T> extends RawProtobufImporter<T> {
   private final Logger LOG = Loggers.get(ProtobufImporter.class);
 

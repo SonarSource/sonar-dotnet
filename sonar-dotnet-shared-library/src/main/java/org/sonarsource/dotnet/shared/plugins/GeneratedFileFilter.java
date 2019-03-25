@@ -24,6 +24,10 @@ import org.sonar.api.batch.fs.InputFileFilter;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+/**
+ * This class allows to filter files to process based on whether or not they are auto-generated.
+ * This filter refuses (filters) all generated files.
+ */
 public class GeneratedFileFilter implements InputFileFilter {
   private static final Logger LOG = Loggers.get(GeneratedFileFilter.class);
 

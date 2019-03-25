@@ -31,6 +31,9 @@ import org.sonar.api.batch.sensor.coverage.NewCoverage;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+/**
+ * This class is responsible to handle all the C# and VB.NET code coverage reports (parse and report back to SonarQube).
+ */
 public class CoverageReportImportSensor implements Sensor {
 
   private static final Logger LOG = Loggers.get(CoverageReportImportSensor.class);

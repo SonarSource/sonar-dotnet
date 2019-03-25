@@ -24,6 +24,9 @@ import java.util.function.Predicate;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.config.Configuration;
 
+/**
+ * Aggregate the test results from different reports of potentially different tools (e.g. aggregate a NUnit report with a xUnit one and 3 Visual Studio ones).
+ */
 @ScannerSide
 public class UnitTestResultsAggregator {
 

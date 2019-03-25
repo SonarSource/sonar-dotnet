@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import java.util.function.Function;
 import java.util.function.Predicate;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;

@@ -30,6 +30,13 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.EncodingInfo;
 
+/**
+  This class is responsible of reading/importing the type of encoding that was detected by Roslyn for each and every compiled (C# or VB.NET) file.
+  The info about the encoding detected by Roslyn is really important because SonarQube auto-detects the file encoding (which could result in a different detected encoding) AND
+  because SonarQube only supports 1 encoding for ALL files (while Roslyn supports 1 encoding per file).
+
+  Note that we could have merged this class and the FileMetadataImporter into only 1 protobuf message because the encoding is one other file metadata.
+ */
 public class EncodingImporter extends RawProtobufImporter<EncodingInfo> {
 
   private static final Logger LOG = Loggers.get(EncodingImporter.class);

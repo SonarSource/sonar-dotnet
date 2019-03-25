@@ -37,6 +37,11 @@ import org.sonar.api.utils.log.Loggers;
 import static java.util.stream.Collectors.toList;
 import static org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter.activeRoslynRulesByPartialRepoKey;
 
+/**
+ * This class is the main sensor for C# and VB.NET which is going to process all Roslyn reports and protobuf contents and then push them to SonarQube.
+ *
+ * This sensor is global and so will execute once at the end.
+ */
 public class DotNetSensor implements Sensor {
 
   private static final Logger LOG = Loggers.get(DotNetSensor.class);
