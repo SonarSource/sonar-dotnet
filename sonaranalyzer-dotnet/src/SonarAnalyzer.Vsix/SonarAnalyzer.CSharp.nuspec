@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>SonarAnalyzer.CSharp</id>
-    <version>7.12.0.0</version>
+    <version>7.13.0.0</version>
     <title>SonarAnalyzer for C#</title>
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>
@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>Analyzers which spot bugs and code smells in your code. This package is best used together with SonarLint for Visual Studio and/or the SonarQube platform.</summary>
     <description>Analyzers which spot bugs and code smells in your code. This package is best used together with SonarLint for Visual Studio (http://vs.sonarlint.org) and/or the SonarQube platform (http://www.sonarqube.org).</description>
-    <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/7.12.0.0</releaseNotes>
+    <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/7.13.0.0</releaseNotes>
     <language>en-US</language>
     <copyright>Copyright © 2015-2019 SonarSource SA</copyright>
     <tags>Roslyn Analyzers Refactoring CodeAnalysis</tags>
