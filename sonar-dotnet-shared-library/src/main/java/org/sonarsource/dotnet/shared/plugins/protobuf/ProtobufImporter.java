@@ -24,12 +24,12 @@ import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import org.sonarsource.dotnet.shared.plugins.RealPathProvider;
 import org.sonarsource.dotnet.shared.plugins.SensorContextUtils;
 
 /**
@@ -39,15 +39,14 @@ import org.sonarsource.dotnet.shared.plugins.SensorContextUtils;
   system real path (this method is OS dependent).
  */
 public abstract class ProtobufImporter<T> extends RawProtobufImporter<T> {
-  private final Logger LOG = Loggers.get(ProtobufImporter.class);
+  private static final Logger LOG = Loggers.get(ProtobufImporter.class);
 
   private final Function<T, String> toFilePath;
-  private final Function<String, String> toRealPath;
+  private final UnaryOperator<String> toRealPath;
   private final SensorContext context;
   private final Set<Path> filesProcessed = new HashSet<>();
 
-  ProtobufImporter(Parser<T> parser, SensorContext context, Function<T, String> toFilePath, Function<String, String>
-    toRealPath) {
+  ProtobufImporter(Parser<T> parser, SensorContext context, Function<T, String> toFilePath, UnaryOperator<String> toRealPath) {
     super(parser);
     this.context = context;
     this.toFilePath = toFilePath;

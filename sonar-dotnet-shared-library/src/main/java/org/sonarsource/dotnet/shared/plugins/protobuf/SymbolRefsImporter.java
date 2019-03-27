@@ -21,6 +21,7 @@ package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toTextRange;
 
+import java.util.function.UnaryOperator;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.symbol.NewSymbol;
@@ -40,7 +41,7 @@ class SymbolRefsImporter extends ProtobufImporter<SonarAnalyzer.SymbolReferenceI
   private final SensorContext context;
   private final HashMap<InputFile, HashSet<SonarAnalyzer.SymbolReferenceInfo.SymbolReference>> fileSymbolReferences = new HashMap<>();
 
-  SymbolRefsImporter(SensorContext context, Function<String, String> toRealPath) {
+  SymbolRefsImporter(SensorContext context, UnaryOperator<String> toRealPath) {
     super(SonarAnalyzer.SymbolReferenceInfo.parser(), context, SonarAnalyzer.SymbolReferenceInfo::getFilePath, toRealPath);
     this.context = context;
   }

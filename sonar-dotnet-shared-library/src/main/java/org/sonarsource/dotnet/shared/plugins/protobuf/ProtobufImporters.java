@@ -19,7 +19,7 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
-import java.util.function.Function;
+import java.util.function.UnaryOperator;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.issue.NoSonarFilter;
@@ -32,6 +32,10 @@ import org.sonarsource.dotnet.protobuf.SonarAnalyzer.TokenTypeInfo;
 @ScannerSide
 public class ProtobufImporters {
 
+  private ProtobufImporters() {
+    // utility class
+  }
+
   public static final String HIGHLIGHT_OUTPUT_PROTOBUF_NAME = "token-type.pb";
   public static final String SYMBOLREFS_OUTPUT_PROTOBUF_NAME = "symrefs.pb";
   public static final String CPDTOKENS_OUTPUT_PROTOBUF_NAME = "token-cpd.pb";
@@ -40,22 +44,22 @@ public class ProtobufImporters {
   public static final String FILEMETADATA_OUTPUT_PROTOBUF_NAME = "file-metadata.pb";
 
   public static RawProtobufImporter<TokenTypeInfo> highlightImporter(SensorContext context,
-    Function<String, String> toRealPath) {
+    UnaryOperator<String> toRealPath) {
     return new HighlightImporter(context, toRealPath);
   }
 
   public static RawProtobufImporter<SymbolReferenceInfo> symbolRefsImporter(SensorContext context,
-    Function<String, String> toRealPath) {
+    UnaryOperator<String> toRealPath) {
     return new SymbolRefsImporter(context, toRealPath);
   }
 
   public static RawProtobufImporter<CopyPasteTokenInfo> cpdTokensImporter(SensorContext context,
-    Function<String, String> toRealPath) {
+    UnaryOperator<String> toRealPath) {
     return new CPDTokensImporter(context, toRealPath);
   }
 
   public static RawProtobufImporter<MetricsInfo> metricsImporter(SensorContext context,
-    FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, Function<String, String> toRealPath) {
+    FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, UnaryOperator<String> toRealPath) {
     return new MetricsImporter(context, fileLinesContextFactory, noSonarFilter, toRealPath);
   }
 

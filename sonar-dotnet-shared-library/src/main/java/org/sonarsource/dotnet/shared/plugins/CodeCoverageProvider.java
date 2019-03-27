@@ -34,6 +34,7 @@ import org.sonar.plugins.dotnet.tests.CoverageReportImportSensor;
 public class CodeCoverageProvider {
 
   private static final String SUBCATEGORY = "Code Coverage";
+  private static final String SONAR_PROPERTY_PREFIX = "sonar.";
 
   private final DotNetPluginMetadata pluginMetadata;
   private final CoverageConfiguration coverageConf;
@@ -45,17 +46,17 @@ public class CodeCoverageProvider {
 
     coverageConf = new CoverageConfiguration(
       languageKey,
-      "sonar." + languageKey + ".ncover3.reportsPaths",
-      "sonar." + languageKey + ".opencover.reportsPaths",
-      "sonar." + languageKey + ".dotcover.reportsPaths",
-      "sonar." + languageKey + ".vscoveragexml.reportsPaths");
+      SONAR_PROPERTY_PREFIX + languageKey + ".ncover3.reportsPaths",
+      SONAR_PROPERTY_PREFIX + languageKey + ".opencover.reportsPaths",
+      SONAR_PROPERTY_PREFIX + languageKey + ".dotcover.reportsPaths",
+      SONAR_PROPERTY_PREFIX + languageKey + ".vscoveragexml.reportsPaths");
 
     itCoverageConf = new CoverageConfiguration(
       languageKey,
-      "sonar." + languageKey + ".ncover3.it.reportsPaths",
-      "sonar." + languageKey + ".opencover.it.reportsPaths",
-      "sonar." + languageKey + ".dotcover.it.reportsPaths",
-      "sonar." + languageKey + ".vscoveragexml.it.reportsPaths");
+      SONAR_PROPERTY_PREFIX + languageKey + ".ncover3.it.reportsPaths",
+      SONAR_PROPERTY_PREFIX + languageKey + ".opencover.it.reportsPaths",
+      SONAR_PROPERTY_PREFIX + languageKey + ".dotcover.it.reportsPaths",
+      SONAR_PROPERTY_PREFIX + languageKey + ".vscoveragexml.it.reportsPaths");
   }
 
   public List extensions() {

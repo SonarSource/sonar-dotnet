@@ -23,6 +23,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -87,7 +88,7 @@ public class DotNetSensor implements Sensor {
   }
 
   private void executeInternal(SensorContext context) {
-    Function<String, String> toRealPath = new RealPathProvider();
+    UnaryOperator<String> toRealPath = new RealPathProvider();
 
     List<Path> protobufPaths = reportPathCollector.protobufDirs();
     if (!protobufPaths.isEmpty()) {

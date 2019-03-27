@@ -236,7 +236,8 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     } catch (IllegalArgumentException ex1) {
 
       if (!isLocationResilient) {
-        throw ex1; // Our rules should fail if they report on an invalid location
+        // Our rules should fail if they report on an invalid location
+        throw ex1;
       }
 
       try {

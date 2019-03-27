@@ -21,8 +21,8 @@ package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.function.Function;
 
+import java.util.function.UnaryOperator;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.measure.Metric;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -42,7 +42,7 @@ class MetricsImporter extends ProtobufImporter<MetricsInfo> {
   private final NoSonarFilter noSonarFilter;
 
   MetricsImporter(SensorContext context, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter,
-    Function<String, String> toRealPath) {
+    UnaryOperator<String> toRealPath) {
     super(MetricsInfo.parser(), context, MetricsInfo::getFilePath, toRealPath);
     this.context = context;
     this.fileLinesContextFactory = fileLinesContextFactory;
