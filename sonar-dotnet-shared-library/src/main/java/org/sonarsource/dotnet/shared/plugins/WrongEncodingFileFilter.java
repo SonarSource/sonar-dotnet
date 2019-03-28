@@ -22,6 +22,10 @@ package org.sonarsource.dotnet.shared.plugins;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFileFilter;
 
+/**
+ * This class allows to filter files to process based on whether or not the encoding detected by Roslyn and SonarQube match.
+ * This filter refuses (filters) all files with a different encoding.
+ */
 public class WrongEncodingFileFilter implements InputFileFilter {
 
   private final EncodingPerFile encodingPerFile;

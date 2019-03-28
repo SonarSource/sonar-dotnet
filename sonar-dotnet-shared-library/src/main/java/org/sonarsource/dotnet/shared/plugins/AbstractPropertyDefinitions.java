@@ -27,6 +27,9 @@ import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.api.utils.Version;
 
+/**
+ * This class is responsible to declare all the properties that can be set through SonarQube/SonarCloud UI (settings page).
+ */
 public abstract class AbstractPropertyDefinitions {
 
   private static final String PROP_PREFIX = "sonar.";

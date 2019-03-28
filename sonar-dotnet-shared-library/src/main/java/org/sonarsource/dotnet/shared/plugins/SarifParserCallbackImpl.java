@@ -45,6 +45,9 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.sarif.Location;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 
+/**
+ * This class is responsible to report to SonarQube each issue found in the Roslyn reports.
+ */
 public class SarifParserCallbackImpl implements SarifParserCallback {
 
   private static final Logger LOG = Loggers.get(SarifParserCallbackImpl.class);
@@ -233,7 +236,8 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     } catch (IllegalArgumentException ex1) {
 
       if (!isLocationResilient) {
-        throw ex1; // Our rules should fail if they report on an invalid location
+        // Our rules should fail if they report on an invalid location
+        throw ex1;
       }
 
       try {

@@ -21,7 +21,6 @@ package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.fs.FileSystem;
@@ -30,6 +29,9 @@ import org.sonar.api.internal.google.common.annotations.VisibleForTesting;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+/**
+ * Aggregate the coverage results from different reports of potentially different tools (e.g. aggregate a NCover 3 report with a DotCover one and 3 Visual Studio ones).
+ */
 @ScannerSide
 public class CoverageAggregator {
 

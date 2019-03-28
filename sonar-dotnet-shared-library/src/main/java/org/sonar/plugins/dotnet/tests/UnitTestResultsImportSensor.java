@@ -29,6 +29,9 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
 
+/**
+ * This class is responsible to handle all the C# and VB.NET unit test results reports (parse and report back to SonarQube).
+ */
 public class UnitTestResultsImportSensor implements Sensor {
 
   private static final Logger LOG = Loggers.get(CoverageReportImportSensor.class);

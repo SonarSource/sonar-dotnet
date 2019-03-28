@@ -51,8 +51,8 @@ public abstract class AbstractSonarWayProfile implements BuiltInQualityProfilesD
 
   private String getSonarWayJsonPath() {
     return supportsSecurityHotspots
-      ? "org/sonar/plugins/" + pluginKey + "/Sonar_way_profile.json"
-      : "org/sonar/plugins/" + pluginKey + "/Sonar_way_profile_no_hotspot.json";
+      ? ("org/sonar/plugins/" + pluginKey + "/Sonar_way_profile.json")
+      : ("org/sonar/plugins/" + pluginKey + "/Sonar_way_profile_no_hotspot.json");
   }
 
   protected void activateSecurityRules(NewBuiltInQualityProfile sonarWay) {

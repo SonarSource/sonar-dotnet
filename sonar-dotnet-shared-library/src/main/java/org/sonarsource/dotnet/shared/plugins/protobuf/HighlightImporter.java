@@ -21,6 +21,7 @@ package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toTextRange;
 
+import java.util.function.UnaryOperator;
 import javax.annotation.CheckForNull;
 
 import org.sonar.api.batch.fs.InputFile;
@@ -32,14 +33,16 @@ import org.sonarsource.dotnet.protobuf.SonarAnalyzer.TokenTypeInfo;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.function.Function;
 
+/**
+  This class is responsible of reading/importing the highlight info that was processed by the C#/VB.NET analyzer.
+ */
 class HighlightImporter extends ProtobufImporter<SonarAnalyzer.TokenTypeInfo> {
 
   private final SensorContext context;
   private final Map<InputFile, HashSet<TokenTypeInfo.TokenInfo>> fileHighlights = new HashMap<>();
 
-  HighlightImporter(SensorContext context, Function<String, String> toRealPath) {
+  HighlightImporter(SensorContext context, UnaryOperator<String> toRealPath) {
     super(SonarAnalyzer.TokenTypeInfo.parser(), context, SonarAnalyzer.TokenTypeInfo::getFilePath, toRealPath);
     this.context = context;
   }

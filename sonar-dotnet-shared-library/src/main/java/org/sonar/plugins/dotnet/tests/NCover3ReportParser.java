@@ -19,16 +19,13 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Predicate;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 public class NCover3ReportParser implements CoverageParser {
 

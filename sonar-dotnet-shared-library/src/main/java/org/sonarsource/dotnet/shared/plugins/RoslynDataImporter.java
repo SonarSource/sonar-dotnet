@@ -22,7 +22,7 @@ package org.sonarsource.dotnet.shared.plugins;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
+import java.util.function.UnaryOperator;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.rule.RuleKey;
@@ -42,7 +42,7 @@ public class RoslynDataImporter {
   }
 
   public void importRoslynReports(List<RoslynReport> reportPaths, final SensorContext context, Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey,
-    Function<String, String> toRealPath) {
+    UnaryOperator<String> toRealPath) {
     Map<String, String> repositoryKeyByRoslynRuleKey = getRepoKeyByRoslynRuleKey(activeRoslynRulesByPartialRepoKey);
     boolean ignoreThirdPartyIssues = config.ignoreThirdPartyIssues() || !context.runtime().getApiVersion().isGreaterThanOrEqual(Version.create(7, 4));
     SarifParserCallback callback = new SarifParserCallbackImpl(context, repositoryKeyByRoslynRuleKey, ignoreThirdPartyIssues, config.bugCategories(),

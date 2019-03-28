@@ -20,7 +20,6 @@
 package org.sonar.plugins.dotnet.tests;
 
 import javax.annotation.Nullable;
-import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;

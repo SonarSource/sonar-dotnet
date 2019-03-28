@@ -27,6 +27,7 @@ import java.util.function.Function;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.util.function.UnaryOperator;
 import org.sonarsource.dotnet.shared.plugins.RoslynReport;
 
 public class SarifParserFactory {
@@ -34,7 +35,7 @@ public class SarifParserFactory {
     // private
   }
 
-  public static SarifParser create(RoslynReport report, Function<String, String> toRealPath) {
+  public static SarifParser create(RoslynReport report, UnaryOperator<String> toRealPath) {
     try (InputStreamReader reader = new InputStreamReader(Files.newInputStream(report.getReportPath()), StandardCharsets.UTF_8)) {
 
       JsonParser parser = new JsonParser();

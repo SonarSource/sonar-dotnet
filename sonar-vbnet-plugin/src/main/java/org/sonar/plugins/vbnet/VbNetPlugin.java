@@ -96,7 +96,7 @@ public class VbNetPlugin implements Plugin {
 
     @Override
     public String shortLanguageName() {
-      return "VB.NET";
+      return LANGUAGE_NAME;
     }
 
     @Override
