@@ -109,13 +109,8 @@ message MetricsInfo {
   repeated int32 executable_lines = 16;
 }
 
-message EncodingInfo {
-  string file_path = 1;
-  string encoding = 2;
-}
-
-// Consider merging EncodingInfo and FileMetadataInfo
 message FileMetadataInfo {
   string file_path = 1;
   bool is_generated = 2;
+  string encoding = 3;
 }

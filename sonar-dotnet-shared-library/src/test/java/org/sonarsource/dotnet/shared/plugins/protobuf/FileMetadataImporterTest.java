@@ -20,7 +20,21 @@
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import com.google.protobuf.AbstractParser;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
+import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 
 import java.nio.file.Path;
@@ -29,10 +43,22 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.FILEMETADATA_OUTPUT_PROTOBUF_NAME;
 
 public class FileMetadataImporterTest {
+  @Rule
+  public LogTester logs = new LogTester();
+
+  // see src/test/resources/ProtobufImporterTest/README.md for explanation
+  private static final File TEST_DATA_DIR = new File("src/test/resources/ProtobufImporterTest");
+  private static final String TEST_FILE_PATH = "Program.cs";
+
   private AbstractParser<SonarAnalyzer.FileMetadataInfo> parser = mock(AbstractParser.class);
   private FileMetadataImporter fileMetadataImporter = new FileMetadataImporter(parser);
+  private SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
+
+  private File protobuf = new File(TEST_DATA_DIR, FILEMETADATA_OUTPUT_PROTOBUF_NAME);
+  private File invalidProtobuf = new File(TEST_DATA_DIR, "invalid-encoding.pb");
 
   @Test
   public void getGeneratedFilePaths_returns_only_generated_paths() {
@@ -67,5 +93,43 @@ public class FileMetadataImporterTest {
 
     // Assert
     assertThat(paths.isEmpty()).isTrue();
+  }
+
+  @Ignore("this can be used to regenerate the files in case of a change in the protobuf definition")
+  @Test
+  public void regenerate_test_files() throws IOException {
+    SonarAnalyzer.FileMetadataInfo.newBuilder()
+      .setFilePath(TEST_FILE_PATH).setIsGenerated(false).setEncoding("UTF-7")
+      .build().writeDelimitedTo(new FileOutputStream(invalidProtobuf));
+
+    SonarAnalyzer.FileMetadataInfo.newBuilder()
+      .setFilePath(TEST_FILE_PATH).setIsGenerated(false).setEncoding("UTF-8")
+      .build().writeDelimitedTo(new FileOutputStream(protobuf));
+  }
+
+  @Test
+  public void test_encoding_get_imported() throws FileNotFoundException {
+    DefaultInputFile inputFile = new TestInputFileBuilder("dummyKey", TEST_FILE_PATH)
+      .build();
+    tester.fileSystem().add(inputFile);
+
+    FileMetadataImporter metadataImporter = new FileMetadataImporter();
+    metadataImporter.accept(protobuf.toPath());
+
+    Map<Path, Charset> encodingPerPath = metadataImporter.getEncodingPerPath();
+    assertThat(encodingPerPath.size()).isEqualTo(1);
+    assertThat(encodingPerPath.get(Paths.get(TEST_FILE_PATH))).isEqualTo(StandardCharsets.UTF_8);
+  }
+
+  @Test
+  public void test_encoding_warns_for_invalid_encoding() {
+    DefaultInputFile inputFile = new TestInputFileBuilder("dummyKey", TEST_FILE_PATH)
+      .build();
+    tester.fileSystem().add(inputFile);
+
+    FileMetadataImporter metadataImporter = new FileMetadataImporter();
+    metadataImporter.accept(invalidProtobuf.toPath());
+
+    assertThat(logs.logs(LoggerLevel.WARN)).containsOnly("Unrecognized encoding UTF-7 for file Program.cs");
   }
 }

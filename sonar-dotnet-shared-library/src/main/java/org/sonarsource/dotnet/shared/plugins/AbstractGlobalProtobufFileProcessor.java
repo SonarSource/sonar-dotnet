@@ -38,12 +38,10 @@ import org.sonar.api.batch.bootstrap.ProjectBuilder;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-import org.sonarsource.dotnet.shared.plugins.protobuf.EncodingImporter;
 import org.sonarsource.dotnet.shared.plugins.protobuf.FileMetadataImporter;
 
 import static java.util.Optional.ofNullable;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getAnalyzerWorkDirProperty;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.ENCODING_OUTPUT_PROTOBUF_NAME;
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.FILEMETADATA_OUTPUT_PROTOBUF_NAME;
 
 /**
@@ -68,19 +66,8 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
   public void build(Context context) {
     for (ProjectDefinition p : context.projectReactor().getProjects()) {
       for (Path reportPath : protobufReportPaths(p.properties())) {
-        processEncodingReportIfPresent(reportPath);
         processMetadataReportIfPresent(reportPath);
       }
-    }
-  }
-
-  private void processEncodingReportIfPresent(Path reportPath) {
-    Path encodingReportProtobuf = reportPath.resolve(ENCODING_OUTPUT_PROTOBUF_NAME);
-    if (encodingReportProtobuf.toFile().exists()) {
-      LOG.debug("Processing {}", encodingReportProtobuf);
-      EncodingImporter encodingImporter = new EncodingImporter();
-      encodingImporter.accept(encodingReportProtobuf);
-      this.roslynEncodingPerPath.putAll(encodingImporter.getEncodingPerPath());
     }
   }
 
@@ -91,6 +78,7 @@ public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder
       FileMetadataImporter fileMetadataImporter = new FileMetadataImporter();
       fileMetadataImporter.accept(metadataReportProtobuf);
       this.generatedFilePaths.addAll(fileMetadataImporter.getGeneratedFilePaths());
+      this.roslynEncodingPerPath.putAll(fileMetadataImporter.getEncodingPerPath());
     }
   }
 

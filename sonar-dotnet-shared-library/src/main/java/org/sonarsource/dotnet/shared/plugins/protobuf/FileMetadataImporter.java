@@ -20,10 +20,16 @@
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import com.google.protobuf.Parser;
+import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileMetadataInfo;
 
 /**
@@ -31,6 +37,9 @@ import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileMetadataInfo;
  */
 public class FileMetadataImporter extends RawProtobufImporter<FileMetadataInfo> {
 
+  private static final Logger LOG = Loggers.get(FileMetadataImporter.class);
+
+  private final Map<String, Charset> encodingPerPath = new HashMap<>();
   private final Set<Path> generatedFilePaths = new HashSet<>();
 
   // For testing
@@ -47,6 +56,25 @@ public class FileMetadataImporter extends RawProtobufImporter<FileMetadataInfo> 
     if (message.getIsGenerated()) {
       generatedFilePaths.add(Paths.get(message.getFilePath()));
     }
+    String roslynEncoding = message.getEncoding();
+    Charset charset = null;
+    if (!roslynEncoding.isEmpty()) {
+      try {
+        charset = Charset.forName(roslynEncoding);
+      } catch (Exception e) {
+        LOG.warn(String.format("Unrecognized encoding %s for file %s", roslynEncoding, message.getFilePath()), e);
+      }
+    }
+    encodingPerPath.put(message.getFilePath(), charset);
+  }
+
+  public Map<Path, Charset> getEncodingPerPath() {
+    // stream collector can't handle null values
+    HashMap<Path, Charset> map = new HashMap<>();
+    for (Map.Entry<String, Charset> e : encodingPerPath.entrySet()) {
+      map.put(Paths.get(e.getKey()), e.getValue());
+    }
+    return Collections.unmodifiableMap(map);
   }
 
   public Set<Path> getGeneratedFilePaths() {
