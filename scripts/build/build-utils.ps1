@@ -173,16 +173,3 @@ function Invoke-CodeCoverage() {
         } -errorMessage "ERROR: Code coverage reports generation FAILED."
     }
 }
-
-# Metadata
-function New-Metadata([string]$binPath) {
-    Write-Header "Generating rules metadata"
-
-    #Generate the XML descriptor files for the SQ plugin
-    Invoke-InLocation "src\SonarAnalyzer.RuleDescriptorGenerator\${binPath}\net46" {
-        Exec { & .\SonarAnalyzer.RuleDescriptorGenerator.exe cs } | Out-Null
-        Write-Host "Sucessfully created metadata for C#"
-        Exec { & .\SonarAnalyzer.RuleDescriptorGenerator.exe vbnet } | Out-Null
-        Write-Host "Sucessfully created metadata for VB.Net"
-    }
-}

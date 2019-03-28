@@ -24,6 +24,10 @@
   <PropertyGroup>
     <WarningsAsErrors />
     <NoWarn>NU1605</NoWarn>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="cd $(OutDir)&#xD;&#xA;$(TargetFileName) cs&#xD;&#xA;$(TargetFileName) vbnet" />
+  </Target>
 
 </Project>
