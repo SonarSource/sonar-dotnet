@@ -275,7 +275,6 @@ function Invoke-DotNetBuild() {
         Invoke-SonarEndAnalysis
     }
 
-    New-Metadata $binPath
     New-NuGetPackages $binPath
 
     Initialize-NuGetConfig
