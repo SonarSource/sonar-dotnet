@@ -40,7 +40,6 @@ public class ProtobufImporters {
   public static final String SYMBOLREFS_OUTPUT_PROTOBUF_NAME = "symrefs.pb";
   public static final String CPDTOKENS_OUTPUT_PROTOBUF_NAME = "token-cpd.pb";
   public static final String METRICS_OUTPUT_PROTOBUF_NAME = "metrics.pb";
-  public static final String ENCODING_OUTPUT_PROTOBUF_NAME = "encoding.pb";
   public static final String FILEMETADATA_OUTPUT_PROTOBUF_NAME = "file-metadata.pb";
 
   public static RawProtobufImporter<TokenTypeInfo> highlightImporter(SensorContext context,

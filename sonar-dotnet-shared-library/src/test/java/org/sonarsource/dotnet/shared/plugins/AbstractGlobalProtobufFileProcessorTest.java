@@ -22,11 +22,14 @@ package org.sonarsource.dotnet.shared.plugins;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.junit.Before;
@@ -37,8 +40,6 @@ import org.sonar.api.batch.bootstrap.ProjectBuilder;
 import org.sonar.api.batch.bootstrap.ProjectBuilder.Context;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.bootstrap.ProjectReactor;
-import org.sonarsource.dotnet.protobuf.SonarAnalyzer.EncodingInfo;
-import org.sonarsource.dotnet.protobuf.SonarAnalyzer.EncodingInfo.Builder;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileMetadataInfo;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -89,7 +90,9 @@ public class AbstractGlobalProtobufFileProcessorTest {
 
     underTest.build(context);
     assertThat(underTest.getGeneratedFilePaths()).containsExactlyInAnyOrder(Paths.get("generated1"), Paths.get("generated2"));
-    assertThat(underTest.getRoslynEncodingPerPath()).isEmpty();
+    Map.Entry<Path, Charset> expected1 = new HashMap.SimpleEntry<>(Paths.get("generated1"), null);
+    Map.Entry<Path, Charset> expected2 = new HashMap.SimpleEntry<>(Paths.get("generated2"), null);
+    assertThat(underTest.getRoslynEncodingPerPath()).containsExactly(expected1, expected2);
   }
 
   @Test
@@ -99,7 +102,8 @@ public class AbstractGlobalProtobufFileProcessorTest {
 
     underTest.build(context);
     assertThat(underTest.getGeneratedFilePaths()).containsExactlyInAnyOrder(Paths.get("generated11"), Paths.get("generated12"), Paths.get("generated2"));
-    assertThat(underTest.getRoslynEncodingPerPath()).isEmpty();
+    Map.Entry<Path, Charset> expected = new HashMap.SimpleEntry<>(Paths.get("generated2"), null);
+    assertThat(underTest.getRoslynEncodingPerPath()).contains(expected);
   }
 
   @Test
@@ -110,7 +114,8 @@ public class AbstractGlobalProtobufFileProcessorTest {
 
     underTest.build(context);
     assertThat(underTest.getGeneratedFilePaths()).containsExactlyInAnyOrder(Paths.get("generated11"), Paths.get("generated12"), Paths.get("generated2"));
-    assertThat(underTest.getRoslynEncodingPerPath()).isEmpty();
+    Map.Entry<Path, Charset> expected = new HashMap.SimpleEntry<>(Paths.get("generated2"), null);
+    assertThat(underTest.getRoslynEncodingPerPath()).contains(expected);
   }
 
   @Test
@@ -138,7 +143,8 @@ public class AbstractGlobalProtobufFileProcessorTest {
 
     underTest.build(context);
     assertThat(underTest.getGeneratedFilePaths()).containsExactlyInAnyOrder(Paths.get("generated2"));
-    assertThat(underTest.getRoslynEncodingPerPath()).isEmpty();
+    Map.Entry<Path, Charset> expected = new HashMap.SimpleEntry<>(Paths.get("generated2"), null);
+    assertThat(underTest.getRoslynEncodingPerPath()).containsExactly(expected);
   }
 
   private File mockMetadataProtoReport(String... paths) throws IOException {
@@ -161,10 +167,10 @@ public class AbstractGlobalProtobufFileProcessorTest {
     File reportPath = temp.newFolder();
     Path analyzerPath = reportPath.toPath().resolve("output-foo");
     Files.createDirectories(analyzerPath);
-    try (OutputStream fos = Files.newOutputStream(analyzerPath.resolve("encoding.pb"), StandardOpenOption.CREATE)) {
+    try (OutputStream fos = Files.newOutputStream(analyzerPath.resolve("file-metadata.pb"), StandardOpenOption.CREATE)) {
       Stream.of(paths).forEach(p -> {
         try {
-          Builder builder = EncodingInfo.newBuilder().setFilePath(p.toString());
+          FileMetadataInfo.Builder builder = FileMetadataInfo.newBuilder().setFilePath(p);
           if (encoding != null) {
             builder.setEncoding(encoding);
           }
