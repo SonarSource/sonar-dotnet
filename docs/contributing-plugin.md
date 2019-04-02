@@ -6,9 +6,9 @@
 1. Download sub-modules `git submodule update --init --recursive`
 1. Build the plugin
     * To build the plugin while embedding a local build of the analyzer you can either:
-        * run `.\scripts\build\dev-build.ps1 -restore -build -test -metadata -buildJava`
+        * run `.\scripts\build\dev-build.ps1 -restore -build -test -buildJava`
 
-            The flags `-restore -build -test -metadata` need to be run only when you have changed the analyzer. Otherwise you can run only `-buildJava`
+            The flags `-restore -build -test` need to be run only when you have changed the analyzer. Otherwise you can run only `-buildJava`
 
         * or run the following commands:
             1. `msbuild /t:rebuild .\sonaranalyzer-dotnet\SonarAnalyzer.sln`
