@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports GalaSoft.MvvmLight
 
 Namespace Tests.Diagnostics
     Class NonCompliantClass_FromRspec
@@ -267,4 +268,62 @@ Namespace Tests.Diagnostics
             End Set
         End Property
     End Class
+
+    Class MultipleOperations
+        Private _foo As Integer
+        Private _bar As Integer
+
+        Public Property Foo As Integer
+            Get
+                Return _foo
+            End Get
+            Set(ByVal value As Integer)
+                _bar = 1
+                _foo = value ' Compliant
+                _bar = 0
+            End Set
+        End Property
+    End Class
+
+    ' this usage is specific to MVVM Light framework
+    Public Class FooViewModel
+        Inherits ViewModelBase
+
+        Private _foo As Integer
+        Private _bar As Integer
+
+        Public Property Foo As Integer
+            Get
+                Return Me._foo
+            End Get
+            Set(ByVal value As Integer)
+                If Me.[Set](Me._foo, 1) Then ' Compliant, it is assigned in the Set method
+                    Me._bar = 1
+                End If
+            End Set
+        End Property
+    End Class
+
+    Public Class FooViewModelWithoutSet
+        Inherits ViewModelBase
+
+        Private _foo As Integer
+        Private _bar As Integer
+
+        Public Function MySet(ByVal x As Integer, ByVal y As Integer) As Boolean
+            Return True
+        End Function
+
+        Public Property Foo As Integer
+            Get
+                Return Me._foo
+            End Get
+            Set(ByVal value As Integer)
+                If MySet(Me._foo, 1) Then
+                    Me._bar = 1 ' Noncompliant
+                End If
+            End Set
+        End Property
+    End Class
+
 End Namespace

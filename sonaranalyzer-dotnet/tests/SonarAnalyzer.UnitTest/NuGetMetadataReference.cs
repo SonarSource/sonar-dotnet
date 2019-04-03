@@ -48,7 +48,8 @@ namespace SonarAnalyzer.UnitTest
             NugetMetadataFactory.Create("log4net", packageVersion, targetFramework);
 
         public static IEnumerable<MetadataReference> MicrosoftAspNetCore(string packageVersion) =>
-                    NugetMetadataFactory.Create("Microsoft.AspNetCore", packageVersion);
+            NugetMetadataFactory.Create("Microsoft.AspNetCore", packageVersion);
+
         public static IEnumerable<MetadataReference> MicrosoftAspNetCoreDiagnostics(string packageVersion) =>
             NugetMetadataFactory.Create("Microsoft.AspNetCore.Diagnostics", packageVersion);
 
@@ -98,7 +99,7 @@ namespace SonarAnalyzer.UnitTest
             NugetMetadataFactory.CreateWithCommandLine("Microsoft.EntityFrameworkCore.Relational", packageVersion);
 
         public static IEnumerable<MetadataReference> MicrosoftExtensionsConfigurationAbstractions(string packageVersion) =>
-                            NugetMetadataFactory.Create("Microsoft.Extensions.Configuration.Abstractions", packageVersion);
+            NugetMetadataFactory.Create("Microsoft.Extensions.Configuration.Abstractions", packageVersion);
 
         public static IEnumerable<MetadataReference> MicrosoftExtensionsDependencyInjectionAbstractions(string packageVersion) =>
             NugetMetadataFactory.Create("Microsoft.Extensions.DependencyInjection.Abstractions", packageVersion);
@@ -123,8 +124,11 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> MSTestTestFramework(string packageVersion) =>
             NugetMetadataFactory.Create("MSTest.TestFramework", packageVersion);
 
+        public static IEnumerable<MetadataReference> MvvmLightLibs(string packageVersion) =>
+            NugetMetadataFactory.Create("MvvmLightLibs", packageVersion);
+
         public static IEnumerable<MetadataReference> NLog(string packageVersion) =>
-                                    NugetMetadataFactory.Create("NLog", packageVersion);
+            NugetMetadataFactory.Create("NLog", packageVersion);
 
         public static IEnumerable<MetadataReference> NUnit(string packageVersion) =>
             NugetMetadataFactory.Create("NUnit", packageVersion);
@@ -133,13 +137,15 @@ namespace SonarAnalyzer.UnitTest
             NugetMetadataFactory.Create("RestSharp", packageVersion);
 
         public static IEnumerable<MetadataReference> SerilogPackages(string packageVersion) =>
-                            NugetMetadataFactory.Create("Serilog", packageVersion)
-            .Concat(NugetMetadataFactory.Create("Serilog.Sinks.Console", packageVersion));
+            NugetMetadataFactory.Create("Serilog", packageVersion)
+                .Concat(NugetMetadataFactory.Create("Serilog.Sinks.Console", packageVersion));
+
         public static IEnumerable<MetadataReference> SystemCollectionsImmutable(string packageVersion) =>
             NugetMetadataFactory.Create("System.Collections.Immutable", packageVersion);
 
         public static IEnumerable<MetadataReference> SystemDataSqlServerCe(string packageVersion) =>
-                    NugetMetadataFactory.Create("Microsoft.SqlServer.Compact", packageVersion);
+            NugetMetadataFactory.Create("Microsoft.SqlServer.Compact", packageVersion);
+
         public static IEnumerable<MetadataReference> SystemThreadingTasksExtensions(string packageVersion) =>
             NugetMetadataFactory.Create("System.Threading.Tasks.Extensions", packageVersion);
 
@@ -148,6 +154,6 @@ namespace SonarAnalyzer.UnitTest
 
         public static IEnumerable<MetadataReference> XunitFramework(string packageVersion) =>
             NugetMetadataFactory.Create("xunit.assert", packageVersion)
-            .Concat(NugetMetadataFactory.Create("xunit.extensibility.core", packageVersion));
+                .Concat(NugetMetadataFactory.Create("xunit.extensibility.core", packageVersion));
     }
 }

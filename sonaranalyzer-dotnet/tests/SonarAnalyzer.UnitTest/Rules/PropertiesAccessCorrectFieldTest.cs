@@ -19,8 +19,12 @@
  */
 
 extern alias csharp;
+
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using System.Collections.Generic;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +36,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void PropertiesAccessCorrectField_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.cs",
-                new PropertiesAccessCorrectField());
+                new CS.PropertiesAccessCorrectField(),
+                additionalReferences: MvvmLightReference);
         }
 
         [TestMethod]
@@ -40,8 +45,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void PropertiesAccessCorrectField_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\PropertiesAccessCorrectField.vb",
-                new SonarAnalyzer.Rules.VisualBasic.PropertiesAccessCorrectField());
+                new VB.PropertiesAccessCorrectField(),
+                additionalReferences: MvvmLightReference);
         }
+
+        private static IEnumerable<MetadataReference> MvvmLightReference =>
+            NuGetMetadataReference.MvvmLightLibs("5.4.1.1");
+
     }
 }
 

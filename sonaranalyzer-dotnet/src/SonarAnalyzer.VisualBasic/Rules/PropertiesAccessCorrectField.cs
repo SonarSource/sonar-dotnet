@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -40,19 +41,26 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override DiagnosticDescriptor Rule => rule;
 
-        protected override FieldData? FindFieldAssignment(IPropertySymbol property, Compilation compilation)
+        protected override IEnumerable<FieldData?> FindFieldAssignments(IPropertySymbol property, Compilation compilation)
         {
-            if (property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax accessor &&
-                // We assume that if there are multiple field assignments in a property
-                // then they are all to the same field
-                // The ".Parent" is to go from the accessor statement to the accessor block
-                accessor.Parent.DescendantNodes().FirstOrDefault(n => n is AssignmentStatementSyntax) is AssignmentStatementSyntax assignment &&
-                assignment.IsKind(SyntaxKind.SimpleAssignmentStatement))
+            var assignments = new List<FieldData?>();
+            if (!(property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax setter))
             {
-                return ExtractFieldFromExpression(AccessorKind.Setter, assignment.Left, compilation);
+                return Enumerable.Empty<FieldData?>();
             }
-
-            return null;
+            // The ".Parent" is to go from the accessor statement to the accessor block
+            foreach (var node in setter.Parent.DescendantNodes())
+            {
+                if (node is AssignmentStatementSyntax assignment && assignment.IsKind(SyntaxKind.SimpleAssignmentStatement))
+                {
+                    assignments.Add(ExtractFieldFromExpression(AccessorKind.Setter, assignment.Left, compilation));
+                }
+                else if (node is ArgumentSyntax argument)
+                {
+                    assignments.Add(ExtractFieldFromRefArgument(argument, compilation));
+                }
+            }
+            return assignments;
         }
 
         protected override FieldData? FindReturnedField(IPropertySymbol property, Compilation compilation)
@@ -64,6 +72,22 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 returnStatement.Expression != null)
             {
                 return ExtractFieldFromExpression(AccessorKind.Getter, returnStatement.Expression, compilation);
+            }
+            return null;
+        }
+
+        private static FieldData? ExtractFieldFromRefArgument(ArgumentSyntax argument, Compilation compilation)
+        {
+            var semanticModel = compilation.GetSemanticModel(argument.SyntaxTree);
+            if (semanticModel != null && argument.Parent is ArgumentListSyntax argList)
+            {
+                var argumentIndex = argList.Arguments.IndexOf(argument);
+                if (semanticModel.GetSymbolInfo(argList.Parent).Symbol is IMethodSymbol methodSymbol &&
+                    argumentIndex < methodSymbol?.Parameters.Length &&
+                    methodSymbol?.Parameters[argumentIndex]?.RefKind == RefKind.Ref)
+                {
+                    return ExtractFieldFromExpression(AccessorKind.Setter, argument.GetExpression(), compilation);
+                }
             }
             return null;
         }

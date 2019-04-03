@@ -22,6 +22,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace SonarAnalyzer.Rules
@@ -71,8 +72,8 @@ namespace SonarAnalyzer.Rules
                 var expectedField = propertyToFieldMatcher.GetSingleMatchingFieldOrNull(data.PropertySymbol);
                 if (expectedField != null)
                 {
-                    CheckExpectedFieldIsUsed(expectedField, data.FieldUpdated, context);
-                    CheckExpectedFieldIsUsed(expectedField, data.FieldReturned, context);
+                    CheckExpectedFieldIsUsed(expectedField, data.UpdatedFields, context);
+                    CheckExpectedFieldIsUsed(expectedField, new []{ data.ReturnedField }, context);
                 }
             }
         }
@@ -83,16 +84,21 @@ namespace SonarAnalyzer.Rules
                 .OfType<IPropertySymbol>()
                 .Where(p => !p.IsImplicitlyDeclared);
 
-        protected void CheckExpectedFieldIsUsed(IFieldSymbol expectedField, FieldData? actualField, SymbolAnalysisContext context)
+        protected void CheckExpectedFieldIsUsed(IFieldSymbol expectedField, IEnumerable<FieldData?> actualFields, SymbolAnalysisContext context)
         {
-            if (actualField.HasValue && actualField.Value.Field != expectedField)
+            var expectedFieldIsUsed = actualFields.Any(a => a.HasValue && a.Value.Field == expectedField);
+            if (!expectedFieldIsUsed)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(
-                    Rule,
-                    actualField.Value.LocationNode.GetLocation(),
-                    actualField.Value.AccessorKind == AccessorKind.Getter ? "getter" : "setter",
-                    expectedField.Name
-                    ));
+                var fieldWithValue = actualFields.FirstOrDefault(a => a.HasValue);
+                if (fieldWithValue != null)
+                {
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(
+                        Rule,
+                        fieldWithValue.Value.LocationNode.GetLocation(),
+                        fieldWithValue.Value.AccessorKind == AccessorKind.Getter ? "getter" : "setter",
+                        expectedField.Name
+                        ));
+                }
             }
         }
 
@@ -104,30 +110,30 @@ namespace SonarAnalyzer.Rules
             foreach (var property in properties)
             {
                 var returned = FindReturnedField(property, compilation);
-                var updated = FindFieldAssignment(property, compilation);
+                var updated = FindFieldAssignments(property, compilation);
                 var data = new PropertyData(property, returned, updated);
                 allPropertyData.Add(data);
             }
             return allPropertyData;
         }
 
-        protected abstract FieldData? FindFieldAssignment(IPropertySymbol property, Compilation compilation);
+        protected abstract IEnumerable<FieldData?> FindFieldAssignments(IPropertySymbol property, Compilation compilation);
         protected abstract FieldData? FindReturnedField(IPropertySymbol property, Compilation compilation);
 
         protected struct PropertyData
         {
-            public PropertyData(IPropertySymbol propertySymbol, FieldData? returned, FieldData? updated)
+            public PropertyData(IPropertySymbol propertySymbol, FieldData? returned, IEnumerable<FieldData?> updated)
             {
                 PropertySymbol = propertySymbol;
-                FieldReturned = returned;
-                FieldUpdated = updated;
+                ReturnedField = returned;
+                UpdatedFields = updated;
             }
 
             public IPropertySymbol PropertySymbol { get; }
 
-            public FieldData? FieldReturned { get; }
+            public FieldData? ReturnedField { get; }
 
-            public FieldData? FieldUpdated { get; }
+            public IEnumerable<FieldData?> UpdatedFields { get; }
         }
 
         protected enum AccessorKind

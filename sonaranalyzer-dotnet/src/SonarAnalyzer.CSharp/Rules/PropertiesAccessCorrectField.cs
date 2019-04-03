@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -39,19 +40,32 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override DiagnosticDescriptor Rule => rule;
 
-        protected override FieldData? FindFieldAssignment(IPropertySymbol property, Compilation compilation)
+        protected override IEnumerable<FieldData?> FindFieldAssignments(IPropertySymbol property, Compilation compilation)
         {
-            if (property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor &&
-                // We assume that if there are multiple field assignments in a property
-                // then they are all to the same field
-                accessor.DescendantNodes().FirstOrDefault(n => n is ExpressionStatementSyntax) is ExpressionStatementSyntax expression &&
-                expression.Expression is AssignmentExpressionSyntax assignment &&
-                assignment.IsKind(SyntaxKind.SimpleAssignmentExpression))
+            var assignments = new List<FieldData?>();
+            if (!(property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax setter))
             {
-                return ExtractFieldFromExpression(AccessorKind.Setter, assignment.Left, compilation);
+                return Enumerable.Empty<FieldData?>();
             }
+            foreach (var node in setter.DescendantNodes())
+            {
+                if (GetSimpleAssignment(node) is AssignmentExpressionSyntax assignment)
+                {
+                    assignments.Add(ExtractFieldFromExpression(AccessorKind.Setter, assignment.Left, compilation));
+                }
+                else if (node is ArgumentSyntax argument && argument.RefOrOutKeyword.IsKind(SyntaxKind.RefKeyword))
+                {
+                    assignments.Add(ExtractFieldFromExpression(AccessorKind.Setter, argument.Expression, compilation));
+                }
+            }
+            return assignments;
 
-            return null;
+            AssignmentExpressionSyntax GetSimpleAssignment(SyntaxNode expr) =>
+                expr is ExpressionStatementSyntax ess &&
+                    ess.Expression is AssignmentExpressionSyntax assignment &&
+                    assignment.IsKind(SyntaxKind.SimpleAssignmentExpression)
+                ? assignment
+                : null;
         }
 
         protected override FieldData? FindReturnedField(IPropertySymbol property, Compilation compilation)

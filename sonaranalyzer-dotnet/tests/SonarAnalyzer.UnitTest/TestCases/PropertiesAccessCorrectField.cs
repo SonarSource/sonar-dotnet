@@ -1,4 +1,5 @@
 ﻿using System;
+using GalaSoft.MvvmLight;
 
 namespace Tests.Diagnostics
 {
@@ -253,4 +254,82 @@ namespace Tests.Diagnostics
             set { field2 = value; }     // Compliant
         }
     }
+
+    class MultipleOperations
+    {
+        private int _foo;
+        private int _bar;
+        public int Foo
+        {
+            get
+            {
+                return _foo;
+            }
+            set
+            {
+                _bar = 1;
+                _foo = value; // Compliant
+                _bar = 0;
+            }
+        }
+    }
+
+    struct MultipleOperationsStruct
+    {
+        private int _foo;
+        private int _bar;
+        public int Foo
+        {
+            get
+            {
+                return _foo;
+            }
+            set
+            {
+                _bar = 1;
+                _foo = value; // Compliant
+                _bar = 0;
+            }
+        }
+    }
+
+    // this usage is specific to MVVM Light framework
+    public class FooViewModel : ViewModelBase
+    {
+        private int _foo;
+        private int _bar;
+
+        public int Foo
+        {
+            get => this._foo;
+            set
+            {
+                if (this.Set(ref this._foo, 1)) // Compliant - the Set method does the assignment
+                {
+                    this._bar = 1;
+                }
+            }
+        }
+    }
+
+    public class FooViewModelWithoutSet : ViewModelBase
+    {
+        private int _foo;
+        private int _bar;
+
+        public bool MySet(int x, int y) => true;
+
+        public int Foo
+        {
+            get => this._foo;
+            set
+            {
+                if (MySet(this._foo, 1))
+                {
+                    this._bar = 1; // Noncompliant
+                }
+            }
+        }
+    }
+
 }
