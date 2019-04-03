@@ -34,8 +34,8 @@ To provide feedback (request a feature, report a bug etc.), simply
 
 ## Get started
 
-* [Building, testing and debugging the plugin](./docs/contributing-plugin.md)
-* [Building, testing and debugging the analyzer](./docs/contributing-analyzer.md)
+* [Building, testing and debugging the Java plugin](./docs/contributing-plugin.md)
+* [Building, testing and debugging the .NET analyzer](./docs/contributing-analyzer.md)
 * [Using the rspec.ps1 script](./scripts/rspec/README.md)
 
 ## How to contribute
