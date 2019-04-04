@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.IO;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Routing;
 
 namespace Tests.Diagnostics
 {
@@ -12,6 +15,19 @@ namespace Tests.Diagnostics
             new Microsoft.AspNetCore.Mvc.VirtualFileResult("/scripts/file.js", "text/javascript");
             new Microsoft.AspNetCore.Routing.VirtualPathData(router, "/my/path");
             return View();
+        }
+
+        public void Foo(IRouteBuilder routeBuilder)
+        {
+            routeBuilder.MapAreaRoute("/route/x", "area", "~/route/y");
+            System.Console.WriteLine("/unix/path"); // Compliant - we ignore generally ignore unix paths
+        }
+
+        public void Paths()
+        {
+            new System.IO.FileStream("/unix/path", FileMode.CreateNew); // FN
+            System.IO.File.Create("~/unix/path"); // FN
+            System.IO.Directory.Delete(@"C:\path\"); // Noncompliant
         }
     }
 }
