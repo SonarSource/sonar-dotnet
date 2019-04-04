@@ -7,7 +7,6 @@
     <groupId>org.sonarsource.parent</groupId>
     <artifactId>parent</artifactId>
     <version>49</version>
-    <relativePath></relativePath>
   </parent>
 
   <groupId>com.sonarsource.it</groupId>
@@ -30,7 +29,7 @@
     <dependency>
       <groupId>org.sonarsource.orchestrator</groupId>
       <artifactId>sonar-orchestrator</artifactId>
-      <version>3.22.0.1791</version>
+      <version>3.24.0.1993</version>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.scanner.msbuild</groupId>
