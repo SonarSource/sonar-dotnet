@@ -332,4 +332,76 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class NoFieldUsage
+    {
+        private int foo1;
+        public int Foo1 { get; }
+
+        private int foo2;
+        public int Foo2 { get; set; }
+
+        private int foo3;
+        public int Foo3
+        {
+            get
+            {
+                Bar();
+                return foo1; // Noncompliant
+            }
+            set // Noncompliant
+//          ^^^
+            {
+                Bar();
+            }
+        }
+
+        private int foo4;
+        public int Foo4 => 4;
+
+        private int foo5;
+        public int Foo5
+        {
+            get // Noncompliant
+//          ^^^
+            {
+                Bar();
+                return 1;
+            }
+        }
+
+        void Bar() { }
+    }
+
+    public class UpdateWithOut
+    {
+        private int foo;
+        public int Foo
+        {
+            set
+            {
+                Assign(value, out foo);
+            }
+        }
+        private void Assign(int value, out int result)
+        {
+            result = value;
+        }
+    }
+
+    public class UpdateWithOut2
+    {
+        private int foo;
+        private int bar;
+        public int Foo
+        {
+            set
+            {
+                Assign(value, out bar); // Noncompliant
+            }
+        }
+        private void Assign(int value, out int result)
+        {
+            result = value;
+        }
+    }
 }

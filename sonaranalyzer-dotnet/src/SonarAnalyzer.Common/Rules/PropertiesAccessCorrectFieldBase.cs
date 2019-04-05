@@ -72,23 +72,24 @@ namespace SonarAnalyzer.Rules
                 var expectedField = propertyToFieldMatcher.GetSingleMatchingFieldOrNull(data.PropertySymbol);
                 if (expectedField != null)
                 {
-                    CheckExpectedFieldIsUsed(expectedField, data.UpdatedFields, context);
-                    CheckExpectedFieldIsUsed(expectedField, new []{ data.ReturnedField }, context);
+                    CheckExpectedFieldIsUsed(data.PropertySymbol.SetMethod, expectedField, data.UpdatedFields, context);
+                    CheckExpectedFieldIsUsed(data.PropertySymbol.GetMethod, expectedField, new []{ data.ReturnedField }, context);
                 }
             }
         }
 
-        protected static IEnumerable<IPropertySymbol> GetExplictlyDeclaredProperties(INamedTypeSymbol symbol) =>
+        protected IEnumerable<IPropertySymbol> GetExplictlyDeclaredProperties(INamedTypeSymbol symbol) =>
             symbol.GetMembers()
                 .Where(m => m.Kind == SymbolKind.Property)
                 .OfType<IPropertySymbol>()
-                .Where(p => !p.IsImplicitlyDeclared);
+                .Where(p => ImplementsExplicitGetterOrSetter(p));
 
-        protected void CheckExpectedFieldIsUsed(IFieldSymbol expectedField, IEnumerable<FieldData?> actualFields, SymbolAnalysisContext context)
+        protected void CheckExpectedFieldIsUsed(IMethodSymbol methodSymbol, IFieldSymbol expectedField, IEnumerable<FieldData?> actualFields, SymbolAnalysisContext context)
         {
             var expectedFieldIsUsed = actualFields.Any(a => a.HasValue && a.Value.Field == expectedField);
-            if (!expectedFieldIsUsed)
+            if (!expectedFieldIsUsed || !actualFields.Any())
             {
+                // if we don't find what we expect, we raise the issue on the first field usage in the body
                 var fieldWithValue = actualFields.FirstOrDefault(a => a.HasValue);
                 if (fieldWithValue != null)
                 {
@@ -96,6 +97,16 @@ namespace SonarAnalyzer.Rules
                         Rule,
                         fieldWithValue.Value.LocationNode.GetLocation(),
                         fieldWithValue.Value.AccessorKind == AccessorKind.Getter ? "getter" : "setter",
+                        expectedField.Name
+                        ));
+                }
+                else if (methodSymbol != null)
+                {
+                    var syntax = methodSymbol.DeclaringSyntaxReferences.First().GetSyntax();
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(
+                        Rule,
+                        methodSymbol.Locations.First(),
+                        methodSymbol.MethodKind == MethodKind.PropertyGet ? "getter" : "setter",
                         expectedField.Name
                         ));
                 }
@@ -119,6 +130,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract IEnumerable<FieldData?> FindFieldAssignments(IPropertySymbol property, Compilation compilation);
         protected abstract FieldData? FindReturnedField(IPropertySymbol property, Compilation compilation);
+        protected abstract bool ImplementsExplicitGetterOrSetter(IPropertySymbol property);
 
         protected struct PropertyData
         {

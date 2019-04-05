@@ -31,19 +31,19 @@ Namespace Tests.Diagnostics
 
         Public Property X As Integer
             Get
-                Return x
+                Return x_
             End Get
             Set(ByVal value As Integer)
-                x = value
+                x_ = value
             End Set
         End Property
 
         Public Property Y As Integer
             Get
-                Return x
+                Return x_ ' Noncompliant
             End Get
             Set(ByVal value As Integer)
-                x = value
+                x_ = value ' Noncompliant
             End Set
         End Property
     End Structure

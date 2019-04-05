@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     assignments.Add(ExtractFieldFromExpression(AccessorKind.Setter, assignment.Left, compilation));
                 }
-                else if (node is ArgumentSyntax argument && argument.RefOrOutKeyword.IsKind(SyntaxKind.RefKeyword))
+                else if (node is ArgumentSyntax argument && IsRefOrOut(argument.RefOrOutKeyword))
                 {
                     assignments.Add(ExtractFieldFromExpression(AccessorKind.Setter, argument.Expression, compilation));
                 }
@@ -66,19 +66,35 @@ namespace SonarAnalyzer.Rules.CSharp
                     assignment.IsKind(SyntaxKind.SimpleAssignmentExpression)
                 ? assignment
                 : null;
+
+            bool IsRefOrOut(SyntaxToken node) => node.IsKind(SyntaxKind.RefKeyword) || node.IsKind(SyntaxKind.OutKeyword);
         }
 
         protected override FieldData? FindReturnedField(IPropertySymbol property, Compilation compilation)
         {
             // We don't handle properties with multiple returns that return different fields
-            if (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor &&
-                accessor.DescendantNodes().FirstOrDefault(n => n.RawKind == (int)SyntaxKind.ReturnStatement) is ReturnStatementSyntax returnStatement &&
+            if (!(property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor))
+            {
+                return null;
+            }
+            if (accessor.DescendantNodes().FirstOrDefault(n => n.RawKind == (int)SyntaxKind.ReturnStatement) is ReturnStatementSyntax returnStatement &&
                 returnStatement.Expression != null)
             {
                 return ExtractFieldFromExpression(AccessorKind.Getter, returnStatement.Expression, compilation);
             }
+            if (accessor.DescendantNodes().FirstOrDefault(n => n.RawKind == (int)SyntaxKind.ArrowExpressionClause) is ArrowExpressionClauseSyntax arrowExpression &&
+                arrowExpression.Expression != null)
+            {
+                return ExtractFieldFromExpression(AccessorKind.Getter, arrowExpression.Expression, compilation);
+            }
             return null;
         }
+
+        protected override bool ImplementsExplicitGetterOrSetter(IPropertySymbol property) =>
+            (property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax setter &&
+            setter.DescendantNodes().Any()) ||
+            (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax getter &&
+            getter.DescendantNodes().Any());
 
         private static FieldData? ExtractFieldFromExpression(AccessorKind accessorKind,
             ExpressionSyntax expression,

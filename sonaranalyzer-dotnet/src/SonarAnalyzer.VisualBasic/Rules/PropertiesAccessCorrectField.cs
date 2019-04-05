@@ -76,6 +76,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return null;
         }
 
+        protected override bool ImplementsExplicitGetterOrSetter(IPropertySymbol property) =>
+            (property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax setter &&
+            setter.Parent.DescendantNodes().Any()) ||
+            (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax getter &&
+            getter.Parent.DescendantNodes().Any());
+
         private static FieldData? ExtractFieldFromRefArgument(ArgumentSyntax argument, Compilation compilation)
         {
             var semanticModel = compilation.GetSemanticModel(argument.SyntaxTree);
@@ -84,7 +90,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 var argumentIndex = argList.Arguments.IndexOf(argument);
                 if (semanticModel.GetSymbolInfo(argList.Parent).Symbol is IMethodSymbol methodSymbol &&
                     argumentIndex < methodSymbol?.Parameters.Length &&
-                    methodSymbol?.Parameters[argumentIndex]?.RefKind == RefKind.Ref)
+                    methodSymbol?.Parameters[argumentIndex]?.RefKind != RefKind.None)
                 {
                     return ExtractFieldFromExpression(AccessorKind.Setter, argument.GetExpression(), compilation);
                 }
