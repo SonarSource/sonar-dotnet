@@ -41,39 +41,74 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override DiagnosticDescriptor Rule => rule;
 
-        protected override IEnumerable<FieldData?> FindFieldAssignments(IPropertySymbol property, Compilation compilation)
+        protected override IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation)
         {
-            var assignments = new List<FieldData?>();
             if (!(property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax setter))
             {
-                return Enumerable.Empty<FieldData?>();
+                return Enumerable.Empty<FieldData>();
             }
+
+            // we only keep information for the first location of the symbol
+            var assignments = new Dictionary<IFieldSymbol, FieldData>();
+
             // The ".Parent" is to go from the accessor statement to the accessor block
             foreach (var node in setter.Parent.DescendantNodes())
             {
+                FieldData? foundField = null;
                 if (node is AssignmentStatementSyntax assignment && assignment.IsKind(SyntaxKind.SimpleAssignmentStatement))
                 {
-                    assignments.Add(ExtractFieldFromExpression(AccessorKind.Setter, assignment.Left, compilation));
+                    foundField = ExtractFieldFromExpression(AccessorKind.Setter, assignment.Left, compilation);
                 }
                 else if (node is ArgumentSyntax argument)
                 {
-                    assignments.Add(ExtractFieldFromRefArgument(argument, compilation));
+                    foundField = ExtractFieldFromRefArgument(argument, compilation);
+                }
+                if (foundField.HasValue && !assignments.ContainsKey(foundField.Value.Field))
+                {
+                    assignments.Add(foundField.Value.Field, foundField.Value);
                 }
             }
-            return assignments;
+            return assignments.Values;
         }
 
-        protected override FieldData? FindReturnedField(IPropertySymbol property, Compilation compilation)
+        protected override IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation)
         {
             // We don't handle properties with multiple returns that return different fields
-            if (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax accessor &&
-                // The ".Parent" is to go from the accessor statement to the accessor block
-                accessor.Parent.DescendantNodes().FirstOrDefault(n => n.Kind() == SyntaxKind.ReturnStatement) is ReturnStatementSyntax returnStatement &&
-                returnStatement.Expression != null)
+            if (!(property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax getter))
             {
-                return ExtractFieldFromExpression(AccessorKind.Getter, returnStatement.Expression, compilation);
+                return Enumerable.Empty<FieldData>();
             }
-            return null;
+
+            var reads = new Dictionary<IFieldSymbol, FieldData>();
+            var notAssigned = getter.Parent.DescendantNodes().Select(n => n as ExpressionSyntax)
+                .WhereNotNull().Where(n => !IsLeftSideOfAssignment(n));
+            // The ".Parent" is to go from the accessor statement to the accessor block
+            foreach (var expression in notAssigned)
+            {
+                var readField = ExtractFieldFromExpression(AccessorKind.Getter, expression, compilation);
+                // we only keep information for the first location of the symbol
+                if (readField.HasValue && !reads.ContainsKey(readField.Value.Field))
+                {
+                    reads.Add(readField.Value.Field, readField.Value);
+
+                }
+            }
+            return reads.Values;
+        }
+
+        protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod)
+        {
+            if (!(accessorMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax accessor))
+            {
+                // no accessor
+                return true;
+            }
+            if (accessor.DescendantNodes(n => n is StatementSyntax).Count() > 1)
+            {
+                // more than one statement
+                return false;
+            }
+            return accessor.DescendantNodes(n => n is ThrowStatementSyntax).Count() == 1;
         }
 
         protected override bool ImplementsExplicitGetterOrSetter(IPropertySymbol property) =>
@@ -128,6 +163,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
 
             return null;
+        }
+
+        private static bool IsLeftSideOfAssignment(ExpressionSyntax expression)
+        {
+            var strippedExpression = expression.RemoveParentheses();
+            return strippedExpression.IsLeftSideOfAssignment() ||
+                // for Me.field
+                (strippedExpression.Parent is ExpressionSyntax parent && parent.IsLeftSideOfAssignment());
         }
     }
 }

@@ -114,7 +114,8 @@ namespace Tests.Diagnostics
 
         public int Field1
         {
-            get
+            get // Noncompliant {{Refactor this getter so that it actually refers to the field 'field1'.}}
+//          ^^^
             {
                 if (!this.initialized)
                 {
@@ -125,8 +126,7 @@ namespace Tests.Diagnostics
                     throw new ObjectDisposedException("object name");
                 }
 
-                return this.field2;  // Noncompliant
-//                          ^^^^^^
+                return this.field2;
             }
 
             set
@@ -150,6 +150,11 @@ namespace Tests.Diagnostics
         {
             get { return (((this.field1))); } // Noncompliant
 //                               ^^^^^^
+            set
+            {
+                (((field1))) = value; // Noncompliant
+//                 ^^^^^^
+            }
         }
     }
 
@@ -167,7 +172,7 @@ namespace Tests.Diagnostics
             public int FieldA
             {
                 get { return this.fieldb; }     // Noncompliant
-                set { this.fieldb = value ; }   // Noncompliant
+                set { this.fieldb = value; }   // Noncompliant
             }
         }
     }
@@ -402,6 +407,107 @@ namespace Tests.Diagnostics
         private void Assign(int value, out int result)
         {
             result = value;
+        }
+    }
+
+    public class MultipleStatements
+    {
+        private string foo;
+        private string bar;
+        public string Foo
+        {
+            get
+            {
+                if (true)
+                {
+                    throw new System.InvalidOperationException("");
+                }
+                foo = "stuff";
+                return bar; // Noncompliant {{Refactor this getter so that it actually refers to the field 'foo'.}}
+//                     ^^^
+            }
+            set
+            {
+                if (foo.Equals(foo))
+                {
+                    bar = value; // Noncompliant {{Refactor this setter so that it actually refers to the field 'foo'.}}
+//                  ^^^
+                }
+            }
+        }
+        public string Bar
+        {
+            get
+            {
+                if (true)
+                {
+                    throw new System.InvalidOperationException("");
+                }
+                this.bar = "stuff";
+                return this.foo; // Noncompliant {{Refactor this getter so that it actually refers to the field 'bar'.}}
+//                          ^^^
+            }
+            set
+            {
+                if (this.bar.Equals(foo))
+                {
+                    this.foo = value; // Noncompliant {{Refactor this setter so that it actually refers to the field 'bar'.}}
+//                       ^^^
+                }
+            }
+        }
+
+    }
+
+    public class SpecialUsages
+    {
+        private string _foo;
+
+        public string Foo
+        {
+            get
+            {
+                var foo = _foo; // Compliant, field is read
+                if (true)
+                {
+                    foo += foo;
+                }
+                return foo;
+            }
+        }
+
+        private object baz;
+        public object Baz
+        {
+            get => baz ?? throw new System.InvalidOperationException(""); // Compliant
+            set => baz = (baz == null) ? value : throw new System.InvalidOperationException(""); // Compliant
+        }
+
+        private int doNotSet;
+        public int DoNotSet
+        {
+            set
+            {
+                throw new System.InvalidOperationException(""); // Compliant, if it throws do not raise
+            }
+        }
+
+        private string tux;
+        public string Tux
+        {
+            get
+            {
+                return tux + "salt"; // Compliant
+            }
+        }
+
+        private string mux;
+        public string Mux
+        {
+            get
+            {
+                return mux.Replace('x', 'y');
+            }
         }
     }
 }

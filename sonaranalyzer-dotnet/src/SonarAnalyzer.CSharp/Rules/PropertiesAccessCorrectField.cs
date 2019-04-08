@@ -40,54 +40,72 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override DiagnosticDescriptor Rule => rule;
 
-        protected override IEnumerable<FieldData?> FindFieldAssignments(IPropertySymbol property, Compilation compilation)
+        protected override IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation)
         {
-            var assignments = new List<FieldData?>();
             if (!(property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax setter))
             {
-                return Enumerable.Empty<FieldData?>();
+                return Enumerable.Empty<FieldData>();
             }
+
+            // we only keep information for the first location of the symbol
+            var assignments = new Dictionary<IFieldSymbol, FieldData>();
             foreach (var node in setter.DescendantNodes())
             {
-                if (GetSimpleAssignment(node) is AssignmentExpressionSyntax assignment)
+                FieldData? foundField = null;
+                if (node is AssignmentExpressionSyntax assignment && node.IsKind(SyntaxKind.SimpleAssignmentExpression))
                 {
-                    assignments.Add(ExtractFieldFromExpression(AccessorKind.Setter, assignment.Left, compilation));
+                    foundField = ExtractFieldFromExpression(AccessorKind.Setter, assignment.Left, compilation);
                 }
                 else if (node is ArgumentSyntax argument && IsRefOrOut(argument.RefOrOutKeyword))
                 {
-                    assignments.Add(ExtractFieldFromExpression(AccessorKind.Setter, argument.Expression, compilation));
+                    foundField = ExtractFieldFromExpression(AccessorKind.Setter, argument.Expression, compilation);
+                }
+                if (foundField.HasValue && !assignments.ContainsKey(foundField.Value.Field))
+                {
+                    assignments.Add(foundField.Value.Field, foundField.Value);
                 }
             }
-            return assignments;
-
-            AssignmentExpressionSyntax GetSimpleAssignment(SyntaxNode expr) =>
-                expr is ExpressionStatementSyntax ess &&
-                    ess.Expression is AssignmentExpressionSyntax assignment &&
-                    assignment.IsKind(SyntaxKind.SimpleAssignmentExpression)
-                ? assignment
-                : null;
+            return assignments.Values;
 
             bool IsRefOrOut(SyntaxToken node) => node.IsKind(SyntaxKind.RefKeyword) || node.IsKind(SyntaxKind.OutKeyword);
         }
 
-        protected override FieldData? FindReturnedField(IPropertySymbol property, Compilation compilation)
+        protected override IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation)
         {
             // We don't handle properties with multiple returns that return different fields
-            if (!(property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor))
+            if (!(property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax getter))
             {
-                return null;
+                return Enumerable.Empty<FieldData>();
             }
-            if (accessor.DescendantNodes().FirstOrDefault(n => n.RawKind == (int)SyntaxKind.ReturnStatement) is ReturnStatementSyntax returnStatement &&
-                returnStatement.Expression != null)
+
+            var reads = new Dictionary<IFieldSymbol, FieldData>();
+            var notAssigned = getter.DescendantNodes().Select(n => n as ExpressionSyntax)
+                .WhereNotNull().Where(n => !IsLeftSideOfAssignment(n));
+            foreach (var expression in notAssigned)
             {
-                return ExtractFieldFromExpression(AccessorKind.Getter, returnStatement.Expression, compilation);
+                var readField = ExtractFieldFromExpression(AccessorKind.Getter, expression, compilation);
+                // we only keep information for the first location of the symbol
+                if (readField.HasValue && !reads.ContainsKey(readField.Value.Field))
+                {
+                    reads.Add(readField.Value.Field, readField.Value);
+                }
             }
-            if (accessor.DescendantNodes().FirstOrDefault(n => n.RawKind == (int)SyntaxKind.ArrowExpressionClause) is ArrowExpressionClauseSyntax arrowExpression &&
-                arrowExpression.Expression != null)
+            return reads.Values;
+        }
+
+        protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod)
+        {
+            if (!(accessorMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor))
             {
-                return ExtractFieldFromExpression(AccessorKind.Getter, arrowExpression.Expression, compilation);
+                // no accessor
+                return true;
             }
-            return null;
+            if (accessor.DescendantNodes().Count(n => n is StatementSyntax) > 2)
+            {
+                // more than one statement (with the block statement in makes 2)
+                return false;
+            }
+            return accessor.DescendantNodes().Count(n => n is ThrowStatementSyntax) == 1;
         }
 
         protected override bool ImplementsExplicitGetterOrSetter(IPropertySymbol property) =>
@@ -114,19 +132,23 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return new FieldData(accessorKind, field, strippedExpression);
             }
-            else
+            // Check for "this.foo"
+            else if (strippedExpression is MemberAccessExpressionSyntax member &&
+                member.Expression is ThisExpressionSyntax thisExpression &&
+                semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field2)
             {
-                // Check for "this.foo"
-                if (strippedExpression is MemberAccessExpressionSyntax member &&
-                    member.Expression is ThisExpressionSyntax thisExpression &&
-                    semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field2)
-                {
-                    return new FieldData(accessorKind, field2, member.Name);
-                }
+                return new FieldData(accessorKind, field2, member.Name);
             }
 
             return null;
         }
 
+        private static bool IsLeftSideOfAssignment(ExpressionSyntax expression)
+        {
+            var strippedExpression = expression.RemoveParentheses();
+            return strippedExpression.IsLeftSideOfAssignment() ||
+                // for this.field
+                (strippedExpression.Parent is ExpressionSyntax parent && parent.IsLeftSideOfAssignment());
+        }
     }
 }

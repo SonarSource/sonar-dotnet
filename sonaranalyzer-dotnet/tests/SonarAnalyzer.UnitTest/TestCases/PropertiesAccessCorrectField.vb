@@ -119,8 +119,8 @@ Namespace Tests.Diagnostics
         Private isDisposed As Boolean
 
         Public Property Field1 As Integer
-            Get
-
+            Get ' Noncompliant
+'           ^^^
                 If Not Me.initialized Then
                     Throw New InvalidOperationException()
                 End If
@@ -129,8 +129,7 @@ Namespace Tests.Diagnostics
                     Throw New ObjectDisposedException("object name")
                 End If
 
-                Return Me.field2_ ' Noncompliant
-'                         ^^^^^^^
+                Return Me.field2_
             End Get
             Set(ByVal value As Integer)
 
@@ -323,6 +322,85 @@ Namespace Tests.Diagnostics
                     Me._bar = 1 ' Noncompliant
                 End If
             End Set
+        End Property
+    End Class
+
+    Public Class MultipleStatements
+        Private _foo As String
+        Private _bar As String
+        
+        Public Property Foo As String
+            Get
+                If true Then
+                    Throw New System.InvalidOperationException("")
+                End If
+
+                _foo = "stuff"
+                Return _bar ' Noncompliant {{Refactor this getter so that it actually refers to the field '_foo'.}}
+'                      ^^^^
+            End Get
+            Set
+                If _foo.Equals(_foo) Then
+                    _bar = value ' Noncompliant {{Refactor this setter so that it actually refers to the field '_foo'.}}
+'                   ^^^^
+                End If
+
+            End Set
+        End Property
+
+        Public Property Bar As String
+            Get
+                If true Then
+                    Throw New System.InvalidOperationException("")
+                End If
+
+                Me._bar = "stuff"
+                Return Me._foo ' Noncompliant {{Refactor this getter so that it actually refers to the field '_bar'.}}
+'                         ^^^^
+            End Get
+            Set
+                If Me._bar.Equals(Me._foo) Then
+                    Me._foo = value ' Noncompliant {{Refactor this setter so that it actually refers to the field '_bar'.}}
+'                      ^^^^
+                End If
+
+            End Set
+        End Property
+    End Class
+
+    Public Class SpecialUsages
+        Private _foo As String
+
+        Public ReadOnly Property Foo As String
+            Get
+                Dim variable = Me._foo ' Compliant, field is read
+                If true Then
+                    variable = (variable + variable)
+                End If
+                Return variable
+            End Get
+        End Property
+
+        Public WriteOnly Property DoNotSet As Integer
+            Set
+                Throw New System.InvalidOperationException("") ' Compliant
+            End Set
+        End Property
+
+        Private _tux As String
+
+        Public ReadOnly Property Tux As String
+            Get
+                Return (_tux + "salt") ' Compliant
+            End Get
+        End Property
+
+        Private _mux As String
+
+        Public ReadOnly Property Mux As String
+            Get
+                Return _mux.Replace("x", "y") ' Compliant
+            End Get
         End Property
     End Class
 
