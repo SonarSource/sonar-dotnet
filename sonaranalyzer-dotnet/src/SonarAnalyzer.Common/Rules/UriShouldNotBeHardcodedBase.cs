@@ -40,13 +40,10 @@ namespace SonarAnalyzer.Rules
 
         private const string AbsoluteDiskUri = @"^[A-Za-z]:(/|\\)";
         private const string AbsoluteMappedDiskUri = @"^\\\\\w[ \w\.]*";
-        private const string AbsoluteUnixUri = @"^(~\\|~/|/)\w";
 
         protected static readonly Regex UriRegex =
             new Regex($"{UriScheme}|{AbsoluteDiskUri}|{AbsoluteMappedDiskUri}",
                 RegexOptions.Compiled);
-
-        protected static readonly Regex VirtualPathRegex = new Regex(AbsoluteUnixUri, RegexOptions.Compiled);
 
         protected static readonly Regex PathDelimiterRegex = new Regex(@"^(\\|/)$", RegexOptions.Compiled);
 
