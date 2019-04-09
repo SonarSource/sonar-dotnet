@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
@@ -225,5 +226,34 @@ namespace Tests.Diagnostics
             }
             return x;
         }
+    }
+
+    public class ExceptionHandling
+    {
+        void foo()
+        {
+            var list = new List<string>();
+            try { }
+            catch (Exception e)
+            {
+                while (e != null)
+                {
+                    list.Add(FormatMessage(e));
+                    e = e.InnerException;
+                }
+            }
+        }
+
+        void quix(Exception e)
+        {
+            var list = new List<string>();
+            if (e != null)
+            {
+                FormatMessage(e);
+                e = new Exception("");
+            }
+        }
+
+        private string FormatMessage(Exception e) => "";
     }
 }
