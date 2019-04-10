@@ -5,10 +5,11 @@
     "Name": "SonarSource"
   },
   "ProjectKey": "sonaranalyzer-dotnet",
+  "ProjectName": "SonarAnalyzer .Net",
   "Profiles": {
     "CSharp": {
       "ProfileKey": "AVxYKDdrFTbgxqUNcakm",
-      "ProfileTimestamp": "2019-01-14T09:58:53+00:00"
+      "ProfileTimestamp": "2019-03-26T06:47:46+01:00"
     }
   }
 }
