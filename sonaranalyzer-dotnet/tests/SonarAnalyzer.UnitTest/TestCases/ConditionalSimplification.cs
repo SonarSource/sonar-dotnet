@@ -168,6 +168,17 @@ namespace Tests.TestCases
             {
                 myAction = () => { Console.WriteLine(); };
             }
+
+            if (condition)
+            {
+                Task.Run(() => X());
+            }
+            else
+            {
+                Task.Run(() => Y());
+            }
+            void X() { }
+            void Y() { }
         }
     }
 
