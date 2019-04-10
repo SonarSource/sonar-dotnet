@@ -20,7 +20,7 @@ namespace Tests.Diagnostics
         public void Foo(IRouteBuilder routeBuilder)
         {
             routeBuilder.MapAreaRoute("/route/x", "area", "~/route/y");
-            System.Console.WriteLine("/unix/path"); // Compliant - we ignore generally ignore unix paths
+            System.Console.WriteLine("/unix/path"); // Compliant - we ignore unix paths
         }
 
         public void Paths()
