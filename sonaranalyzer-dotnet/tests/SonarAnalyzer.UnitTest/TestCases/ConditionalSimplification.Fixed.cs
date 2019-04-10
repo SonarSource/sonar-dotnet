@@ -91,7 +91,7 @@ namespace Tests.TestCases
         }
 
         // we ignore lambdas because of type resolution for conditional expressions, see CS0173
-        Action LambdasAreIgnored(bool condition, object a)
+        Action LambdasAreIgnored(bool condition, object a, Action action)
         {
             Action myAction;
             if (false)
@@ -141,9 +141,9 @@ namespace Tests.TestCases
             }
 
             Action x;
-            if (a != null)
+            if (action != null)
             {
-                x = () => X();
+                x = action;
             }
             else
             {
