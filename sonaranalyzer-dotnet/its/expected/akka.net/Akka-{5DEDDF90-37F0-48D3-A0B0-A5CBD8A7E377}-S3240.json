@@ -30,19 +30,6 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
-"region":  {
-"startLine":  184,
-"startColumn":  17,
-"endLine":  184,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S3240",
-"message":  "Use the '?:' operator here.",
-"location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
 "region":  {
 "startLine":  259,
