@@ -21,7 +21,9 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace SonarAnalyzer.Rules
@@ -71,28 +73,58 @@ namespace SonarAnalyzer.Rules
                 var expectedField = propertyToFieldMatcher.GetSingleMatchingFieldOrNull(data.PropertySymbol);
                 if (expectedField != null)
                 {
-                    CheckExpectedFieldIsUsed(expectedField, data.FieldUpdated, context);
-                    CheckExpectedFieldIsUsed(expectedField, data.FieldReturned, context);
+                    if (!data.IgnoreGetter)
+                    {
+                        CheckExpectedFieldIsUsed(data.PropertySymbol.GetMethod, expectedField, data.ReadFields, context);
+                    }
+                    if (!data.IgnoreSetter)
+                    {
+                        CheckExpectedFieldIsUsed(data.PropertySymbol.SetMethod, expectedField, data.UpdatedFields, context);
+                    }
                 }
             }
         }
 
-        protected static IEnumerable<IPropertySymbol> GetExplictlyDeclaredProperties(INamedTypeSymbol symbol) =>
+        protected IEnumerable<IPropertySymbol> GetExplictlyDeclaredProperties(INamedTypeSymbol symbol) =>
             symbol.GetMembers()
                 .Where(m => m.Kind == SymbolKind.Property)
                 .OfType<IPropertySymbol>()
-                .Where(p => !p.IsImplicitlyDeclared);
+                .Where(p => ImplementsExplicitGetterOrSetter(p));
 
-        protected void CheckExpectedFieldIsUsed(IFieldSymbol expectedField, FieldData? actualField, SymbolAnalysisContext context)
+        protected void CheckExpectedFieldIsUsed(IMethodSymbol methodSymbol, IFieldSymbol expectedField, IEnumerable<FieldData> actualFields, SymbolAnalysisContext context)
         {
-            if (actualField.HasValue && actualField.Value.Field != expectedField)
+            var expectedFieldIsUsed = actualFields.Any(a => a.Field == expectedField);
+            if (!expectedFieldIsUsed || !actualFields.Any())
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(
-                    Rule,
-                    actualField.Value.LocationNode.GetLocation(),
-                    actualField.Value.AccessorKind == AccessorKind.Getter ? "getter" : "setter",
-                    expectedField.Name
-                    ));
+                var locationAndAccessorType = GetLocationAndAccessor(actualFields, methodSymbol);
+                if (locationAndAccessorType.Item1 != null)
+                {
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(
+                        Rule,
+                        locationAndAccessorType.Item1,
+                        locationAndAccessorType.Item2,
+                        expectedField.Name
+                        ));
+                }
+            }
+
+            Tuple<Location, string> GetLocationAndAccessor(IEnumerable<FieldData> fields, IMethodSymbol method)
+            {
+                Location location = null;
+                string accessorType = null;
+                if (fields.Count() == 1)
+                {
+                    var fieldWithValue = fields.First();
+                    location = fieldWithValue.LocationNode.GetLocation();
+                    accessorType = fieldWithValue.AccessorKind == AccessorKind.Getter ? "getter" : "setter";
+                }
+                else
+                {
+                    Debug.Assert(method != null, "Method symbol should not be null at this point");
+                    location = method?.Locations.First();
+                    accessorType = method?.MethodKind == MethodKind.PropertyGet ? "getter" : "setter";
+                }
+                return Tuple.Create(location, accessorType);
             }
         }
 
@@ -103,31 +135,48 @@ namespace SonarAnalyzer.Rules
             // Collect the list of fields read/written by each property
             foreach (var property in properties)
             {
-                var returned = FindReturnedField(property, compilation);
-                var updated = FindFieldAssignment(property, compilation);
-                var data = new PropertyData(property, returned, updated);
+                var readFields = FindFieldReads(property, compilation);
+                var updatedFields = FindFieldAssignments(property, compilation);
+                var ignoreGetter = ShouldIgnoreAccessor(property.GetMethod);
+                var ignoreSetter = ShouldIgnoreAccessor(property.SetMethod);
+                var data = new PropertyData(property, readFields, updatedFields, ignoreGetter, ignoreSetter);
                 allPropertyData.Add(data);
             }
             return allPropertyData;
         }
 
-        protected abstract FieldData? FindFieldAssignment(IPropertySymbol property, Compilation compilation);
-        protected abstract FieldData? FindReturnedField(IPropertySymbol property, Compilation compilation);
+        /**
+         * Assignments can be done either
+         * - directly via an assignment
+         * - indirectly, when passed as 'out' or 'ref' parameter
+         */
+        protected abstract IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation);
+        protected abstract IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation);
+        protected abstract bool ImplementsExplicitGetterOrSetter(IPropertySymbol property);
+        protected abstract bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod);
+
 
         protected struct PropertyData
         {
-            public PropertyData(IPropertySymbol propertySymbol, FieldData? returned, FieldData? updated)
+            public PropertyData(IPropertySymbol propertySymbol, IEnumerable<FieldData> read, IEnumerable<FieldData> updated,
+                bool ignoreGetter, bool ignoreSetter)
             {
                 PropertySymbol = propertySymbol;
-                FieldReturned = returned;
-                FieldUpdated = updated;
+                ReadFields = read;
+                UpdatedFields = updated;
+                IgnoreGetter = ignoreGetter;
+                IgnoreSetter = ignoreSetter;
             }
 
             public IPropertySymbol PropertySymbol { get; }
 
-            public FieldData? FieldReturned { get; }
+            public IEnumerable<FieldData> ReadFields { get; }
 
-            public FieldData? FieldUpdated { get; }
+            public IEnumerable<FieldData> UpdatedFields { get; }
+
+            public bool IgnoreGetter { get; }
+
+            public bool IgnoreSetter { get; }
         }
 
         protected enum AccessorKind

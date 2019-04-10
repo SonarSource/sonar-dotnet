@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4275",
+"message":  "Refactor this getter so that it actually refers to the field '_children'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildrenContainerBase.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  13,
+"endLine":  34,
+"endColumn":  16
+}
+}
+}
+]
+}

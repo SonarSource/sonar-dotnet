@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports GalaSoft.MvvmLight
 
 Namespace Tests.Diagnostics
     Class NonCompliantClass_FromRspec
@@ -30,19 +31,19 @@ Namespace Tests.Diagnostics
 
         Public Property X As Integer
             Get
-                Return x
+                Return x_
             End Get
             Set(ByVal value As Integer)
-                x = value
+                x_ = value
             End Set
         End Property
 
         Public Property Y As Integer
             Get
-                Return x
+                Return x_ ' Noncompliant
             End Get
             Set(ByVal value As Integer)
-                x = value
+                x_ = value ' Noncompliant
             End Set
         End Property
     End Structure
@@ -118,8 +119,8 @@ Namespace Tests.Diagnostics
         Private isDisposed As Boolean
 
         Public Property Field1 As Integer
-            Get
-
+            Get ' Noncompliant
+'           ^^^
                 If Not Me.initialized Then
                     Throw New InvalidOperationException()
                 End If
@@ -128,8 +129,7 @@ Namespace Tests.Diagnostics
                     Throw New ObjectDisposedException("object name")
                 End If
 
-                Return Me.field2_ ' Noncompliant
-'                         ^^^^^^^
+                Return Me.field2_
             End Get
             Set(ByVal value As Integer)
 
@@ -267,4 +267,141 @@ Namespace Tests.Diagnostics
             End Set
         End Property
     End Class
+
+    Class MultipleOperations
+        Private _foo As Integer
+        Private _bar As Integer
+
+        Public Property Foo As Integer
+            Get
+                Return _foo
+            End Get
+            Set(ByVal value As Integer)
+                _bar = 1
+                _foo = value ' Compliant
+                _bar = 0
+            End Set
+        End Property
+    End Class
+
+    ' this usage is specific to MVVM Light framework
+    Public Class FooViewModel
+        Inherits ViewModelBase
+
+        Private _foo As Integer
+        Private _bar As Integer
+
+        Public Property Foo As Integer
+            Get
+                Return Me._foo
+            End Get
+            Set(ByVal value As Integer)
+                If Me.[Set](Me._foo, 1) Then ' Compliant, it is assigned in the Set method
+                    Me._bar = 1
+                End If
+            End Set
+        End Property
+    End Class
+
+    Public Class FooViewModelWithoutSet
+        Inherits ViewModelBase
+
+        Private _foo As Integer
+        Private _bar As Integer
+
+        Public Function MySet(ByVal x As Integer, ByVal y As Integer) As Boolean
+            Return True
+        End Function
+
+        Public Property Foo As Integer
+            Get
+                Return Me._foo
+            End Get
+            Set(ByVal value As Integer)
+                If MySet(Me._foo, 1) Then
+                    Me._bar = 1 ' Noncompliant
+                End If
+            End Set
+        End Property
+    End Class
+
+    Public Class MultipleStatements
+        Private _foo As String
+        Private _bar As String
+        
+        Public Property Foo As String
+            Get
+                If true Then
+                    Throw New System.InvalidOperationException("")
+                End If
+
+                _foo = "stuff"
+                Return _bar ' Noncompliant {{Refactor this getter so that it actually refers to the field '_foo'.}}
+'                      ^^^^
+            End Get
+            Set
+                If _foo.Equals(_foo) Then
+                    _bar = value ' Noncompliant {{Refactor this setter so that it actually refers to the field '_foo'.}}
+'                   ^^^^
+                End If
+
+            End Set
+        End Property
+
+        Public Property Bar As String
+            Get
+                If true Then
+                    Throw New System.InvalidOperationException("")
+                End If
+
+                Me._bar = "stuff"
+                Return Me._foo ' Noncompliant {{Refactor this getter so that it actually refers to the field '_bar'.}}
+'                         ^^^^
+            End Get
+            Set
+                If Me._bar.Equals(Me._foo) Then
+                    Me._foo = value ' Noncompliant {{Refactor this setter so that it actually refers to the field '_bar'.}}
+'                      ^^^^
+                End If
+
+            End Set
+        End Property
+    End Class
+
+    Public Class SpecialUsages
+        Private _foo As String
+
+        Public ReadOnly Property Foo As String
+            Get
+                Dim variable = Me._foo ' Compliant, field is read
+                If true Then
+                    variable = (variable + variable)
+                End If
+                Return variable
+            End Get
+        End Property
+
+        Public WriteOnly Property DoNotSet As Integer
+            Set
+                Throw New System.InvalidOperationException("") ' Compliant
+            End Set
+        End Property
+
+        Private _tux As String
+
+        Public ReadOnly Property Tux As String
+            Get
+                Return (_tux + "salt") ' Compliant
+            End Get
+        End Property
+
+        Private _mux As String
+
+        Public ReadOnly Property Mux As String
+            Get
+                Return _mux.Replace("x", "y") ' Compliant
+            End Get
+        End Property
+    End Class
+
 End Namespace

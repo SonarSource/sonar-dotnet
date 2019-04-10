@@ -1,4 +1,5 @@
 ﻿using System;
+using GalaSoft.MvvmLight;
 
 namespace Tests.Diagnostics
 {
@@ -113,7 +114,8 @@ namespace Tests.Diagnostics
 
         public int Field1
         {
-            get
+            get // Noncompliant {{Refactor this getter so that it actually refers to the field 'field1'.}}
+//          ^^^
             {
                 if (!this.initialized)
                 {
@@ -124,8 +126,7 @@ namespace Tests.Diagnostics
                     throw new ObjectDisposedException("object name");
                 }
 
-                return this.field2;  // Noncompliant
-//                          ^^^^^^
+                return this.field2;
             }
 
             set
@@ -149,6 +150,11 @@ namespace Tests.Diagnostics
         {
             get { return (((this.field1))); } // Noncompliant
 //                               ^^^^^^
+            set
+            {
+                (((field1))) = value; // Noncompliant
+//                 ^^^^^^
+            }
         }
     }
 
@@ -166,7 +172,7 @@ namespace Tests.Diagnostics
             public int FieldA
             {
                 get { return this.fieldb; }     // Noncompliant
-                set { this.fieldb = value ; }   // Noncompliant
+                set { this.fieldb = value; }   // Noncompliant
             }
         }
     }
@@ -251,6 +257,269 @@ namespace Tests.Diagnostics
         {
             get { return field2; }      // Compliant - aren't checking inherited fields
             set { field2 = value; }     // Compliant
+        }
+    }
+
+    class MultipleOperations
+    {
+        private int _foo;
+        private int _bar;
+        public int Foo
+        {
+            get
+            {
+                return _foo;
+            }
+            set
+            {
+                _bar = 1;
+                _foo = value; // Compliant
+                _bar = 0;
+            }
+        }
+    }
+
+    struct MultipleOperationsStruct
+    {
+        private int _foo;
+        private int _bar;
+        public int Foo
+        {
+            get
+            {
+                return _foo;
+            }
+            set
+            {
+                _bar = 1;
+                _foo = value; // Compliant
+                _bar = 0;
+            }
+        }
+    }
+
+    // this usage is specific to MVVM Light framework
+    public class FooViewModel : ViewModelBase
+    {
+        private int _foo;
+        private int _bar;
+
+        public int Foo
+        {
+            get => this._foo;
+            set
+            {
+                if (this.Set(ref this._foo, 1)) // Compliant - the Set method does the assignment
+                {
+                    this._bar = 1;
+                }
+            }
+        }
+    }
+
+    public class FooViewModelWithoutSet : ViewModelBase
+    {
+        private int _foo;
+        private int _bar;
+
+        public bool MySet(int x, int y) => true;
+
+        public int Foo
+        {
+            get => this._foo;
+            set
+            {
+                if (MySet(this._foo, 1))
+                {
+                    this._bar = 1; // Noncompliant
+                }
+            }
+        }
+    }
+
+    public class NoFieldUsage
+    {
+        private int foo1;
+        public int Foo1 { get; }
+
+        private int foo2;
+        public int Foo2 { get; set; }
+
+        private int foo3;
+        public int Foo3
+        {
+            get
+            {
+                Bar();
+                return foo1; // Noncompliant
+            }
+            set // Noncompliant
+//          ^^^
+            {
+                Bar();
+            }
+        }
+
+        private int foo4;
+        public int Foo4 => 4;
+
+        private int foo5;
+        public int Foo5
+        {
+            get // Noncompliant
+//          ^^^
+            {
+                Bar();
+                return 1;
+            }
+        }
+
+        void Bar() { }
+    }
+
+    public class UpdateWithOut
+    {
+        private int foo;
+        public int Foo
+        {
+            set
+            {
+                Assign(value, out foo);
+            }
+        }
+        private void Assign(int value, out int result)
+        {
+            result = value;
+        }
+    }
+
+    public class UpdateWithOut2
+    {
+        private int foo;
+        private int bar;
+        public int Foo
+        {
+            set
+            {
+                Assign(value, out bar); // Noncompliant
+            }
+        }
+        private void Assign(int value, out int result)
+        {
+            result = value;
+        }
+    }
+
+    public class MultipleStatements
+    {
+        private string foo;
+        private string bar;
+        public string Foo
+        {
+            get
+            {
+                if (true)
+                {
+                    throw new System.InvalidOperationException("");
+                }
+                foo = "stuff";
+                return bar; // Noncompliant {{Refactor this getter so that it actually refers to the field 'foo'.}}
+//                     ^^^
+            }
+            set
+            {
+                if (foo.Equals(foo))
+                {
+                    bar = value; // Noncompliant {{Refactor this setter so that it actually refers to the field 'foo'.}}
+//                  ^^^
+                }
+            }
+        }
+        public string Bar
+        {
+            get
+            {
+                if (true)
+                {
+                    throw new System.InvalidOperationException("");
+                }
+                this.bar = "stuff";
+                return this.foo; // Noncompliant {{Refactor this getter so that it actually refers to the field 'bar'.}}
+//                          ^^^
+            }
+            set
+            {
+                if (this.bar.Equals(foo))
+                {
+                    this.foo = value; // Noncompliant {{Refactor this setter so that it actually refers to the field 'bar'.}}
+//                       ^^^
+                }
+            }
+        }
+
+    }
+
+    public class SpecialUsages
+    {
+        private string _foo;
+
+        public string Foo
+        {
+            get
+            {
+                var foo = _foo; // Compliant, field is read
+                if (true)
+                {
+                    foo += foo;
+                }
+                return foo;
+            }
+        }
+
+        private object baz;
+        public object Baz
+        {
+            get => baz ?? throw new System.InvalidOperationException(""); // Compliant
+            set => baz = (baz == null) ? value : throw new System.InvalidOperationException(""); // Compliant
+        }
+
+        private int doNotSet;
+        public int DoNotSet
+        {
+            set
+            {
+                throw new System.InvalidOperationException(""); // Compliant, if it throws do not raise
+            }
+        }
+
+        private string tux;
+        public string Tux
+        {
+            get
+            {
+                return tux + "salt"; // Compliant
+            }
+        }
+
+        private string mux;
+        public string Mux
+        {
+            get
+            {
+                return mux.Replace('x', 'y');
+            }
+        }
+
+        private string MultipleFields
+        {
+            get => _foo == baz ? tux : mux;
+        }
+
+        private object baz2;
+        public object Baz2
+        {
+            get /* 123 */ => /* 456 */ throw new System.InvalidOperationException(""); // Compliant
+            set => throw new System.InvalidOperationException(""); // Compliant
         }
     }
 }
