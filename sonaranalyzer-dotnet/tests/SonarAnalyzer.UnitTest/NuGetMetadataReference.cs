@@ -76,6 +76,9 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> MicrosoftAspNetCoreMvcWebApiCompatShim(string packageVersion) =>
             NugetMetadataFactory.Create("Microsoft.AspNetCore.Mvc.WebApiCompatShim", packageVersion);
 
+        public static IEnumerable<MetadataReference> MicrosoftAspNetCoreRouting(string packageVersion) =>
+            NugetMetadataFactory.Create("Microsoft.AspNetCore.Routing", packageVersion);
+
         public static IEnumerable<MetadataReference> MicrosoftAspNetCoreRoutingAbstractions(string packageVersion) =>
             NugetMetadataFactory.Create("Microsoft.AspNetCore.Routing.Abstractions", packageVersion);
 

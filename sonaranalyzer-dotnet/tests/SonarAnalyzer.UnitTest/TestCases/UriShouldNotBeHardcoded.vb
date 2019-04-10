@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.IO
 
 Namespace Tests.Diagnostics
@@ -19,18 +19,20 @@ Namespace Tests.Diagnostics
             Dim windowsSharedDrivePath3 = "\\my-network-drive\folder\file.txt" ' Noncompliant
             Dim windowsSharedDrivePath4 = "\\my-network-drive\%foo%\file.txt" ' Noncompliant
             Dim windowsSharedDrivePath5 = "\\my-network-drive/folder/file.txt" ' Noncompliant
-            Dim unixPath1 = "/my/other/folder" ' Noncompliant
-            Dim unixPath2 = "~/blah/blah/blah.txt" ' Noncompliant
-            Dim unixPath3 = "~\blah\blah\blah.txt" ' Noncompliant
+            Dim unixPath1 = "/my/other/folder" ' Compliant - we ignore Unix paths by default
+            Dim unixPath2 = "~/blah/blah/blah.txt" ' Compliant - we ignore Unix paths
+            Dim unixPath3 = "~\blah\blah\blah.txt" ' Compliant - we ignore Unix paths
             Dim concatWithDelimiterUri2 = s1 & "\" & s2 ' Noncompliant
             Dim concatWithDelimiterUri3 = s1 & "/" & s2 ' Noncompliant
 '                                              ^^^
             Dim concatWithDelimiterUri4 = s1 + "\" + s2 ' Noncompliant
             Dim concatWithDelimiterUri5 = s1 + "/" + s2 ' Noncompliant
+            Dim concatWithDelimiterUriOnLeft = "/" + s2 ' Noncompliant
 
             Dim x = New Uri("C:/test.txt") ' Noncompliant
             Dim z = New Uri(New Uri("a"), ("C:/test.txt")) ' Noncompliant
             File.OpenRead("\\drive\foo.csv") ' Noncompliant
+            File.OpenRead("/etc/foo.csv") ' FN
         End Sub
 
         Private Sub ValidCases(s As String)

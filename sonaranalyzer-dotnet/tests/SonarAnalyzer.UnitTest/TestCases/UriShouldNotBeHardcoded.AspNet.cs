@@ -1,4 +1,4 @@
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using static System.Web.HttpContext;
 
@@ -8,7 +8,7 @@ namespace Tests.Diagnostics
     {
         public ActionResult Foo()
         {
-            string virtualPath = "~/scripts/relative.js"; // Noncompliant FP
+            string virtualPath = "~/scripts/relative.js"; // Compliant
             Server.MapPath(virtualPath);
 
             // System.Web.Mvc.HttpServerUtilityBase
@@ -42,6 +42,12 @@ namespace Tests.Diagnostics
             urlHelper.Content(@"C:\path\stuff.txt"); // Noncompliant
 
             return View();
+        }
+
+        public void Bar()
+        {
+            var scriptPath1 = "~/bundles/jquery"; // should not raise
+            var scriptPath2 = "~/Scripts/jquery-{version}.js"; // should not raise
         }
     }
 }

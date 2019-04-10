@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 
 namespace Tests.Diagnostics
@@ -26,20 +26,21 @@ namespace Tests.Diagnostics
             var windowsSharedDrivePath4 = @"\\my-network-drive\%foo%\file.txt"; // Noncompliant
             var windowsSharedDrivePath5 = @"\\my-network-drive/folder/file.txt"; // Noncompliant
 
-            var unixPath1 = "/my/other/folder"; // Noncompliant
-            var unixPath2 = "~/blah/blah/blah.txt"; // Noncompliant
-            var unixPath3 = "~\\blah\\blah\\blah.txt"; // Noncompliant
+            var unixPath1 = "/my/other/folder"; // Compliant - we ignore unix paths by default
+            var unixPath2 = "~/blah/blah/blah.txt"; // Compliant
+            var unixPath3 = "~\\blah\\blah\\blah.txt"; // Compliant
 
             var concatWithDelimiterPath1 = s1 + "\\" + s2; // Noncompliant {{Remove this hardcoded path-delimiter.}}
 //                                              ^^^^
             var concatWithDelimiterUri2 = s1 + @"\" + s2; // Noncompliant
             var concatWithDelimiterUri3 = s1 + "/" + s2; // Noncompliant
+            var concatWithDelimiterUriOnLeft = "/" + s2; // Noncompliant
 
             var x = new Uri("C:/test.txt"); // Noncompliant
             new Uri(new Uri("../stuff"), ("C:/test.txt")); // Noncompliant
             File.OpenRead(@"\\drive\foo.csv"); // Noncompliant
 
-            var unixChemin = "/my/other/folder"; // FN
+            var unixChemin = "/my/other/folder"; // Compliant - we ignore unix paths by default
             var webChemin = "http://www.mywebsite.com"; // FN
             var windowsChemin = "c:\\blah\\blah\\blah.txt"; // FN
         }
