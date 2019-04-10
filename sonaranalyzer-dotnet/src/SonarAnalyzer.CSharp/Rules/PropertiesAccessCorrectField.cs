@@ -100,12 +100,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 // no accessor
                 return true;
             }
-            if (accessor.DescendantNodes().Count(n => n is StatementSyntax) > 2)
+            // Special case: ignore the accessor if the only statement/expression is a throw.
+            if (accessor.Body == null)
             {
-                // more than one statement (with the block statement in makes 2)
-                return false;
+                // Expression-bodied syntax
+                return accessor.DescendantNodes().FirstOrDefault() is ArrowExpressionClauseSyntax arrowClause
+                    && ShimLayer.CSharp.ThrowExpressionSyntaxWrapper.IsInstance(arrowClause.Expression);
             }
-            return accessor.DescendantNodes().Count(n => n is ThrowStatementSyntax) == 1;
+            // Statement-bodied syntax
+            return (accessor.Body.DescendantNodes().Count(n => n is StatementSyntax) == 1 &&
+                accessor.Body.DescendantNodes().Count(n => n is ThrowStatementSyntax) == 1);
         }
 
         protected override bool ImplementsExplicitGetterOrSetter(IPropertySymbol property) =>

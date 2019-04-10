@@ -509,5 +509,17 @@ namespace Tests.Diagnostics
                 return mux.Replace('x', 'y');
             }
         }
+
+        private string MultipleFields
+        {
+            get => _foo == baz ? tux : mux;
+        }
+
+        private object baz2;
+        public object Baz2
+        {
+            get /* 123 */ => /* 456 */ throw new System.InvalidOperationException(""); // Compliant
+            set => throw new System.InvalidOperationException(""); // Compliant
+        }
     }
 }

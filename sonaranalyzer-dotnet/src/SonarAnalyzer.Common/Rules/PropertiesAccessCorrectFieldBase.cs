@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 
 namespace SonarAnalyzer.Rules
@@ -118,10 +118,11 @@ namespace SonarAnalyzer.Rules
                     location = fieldWithValue.LocationNode.GetLocation();
                     accessorType = fieldWithValue.AccessorKind == AccessorKind.Getter ? "getter" : "setter";
                 }
-                else if (method != null)
+                else
                 {
-                    location = method.Locations.First();
-                    accessorType = method.MethodKind == MethodKind.PropertyGet ? "getter" : "setter";
+                    Debug.Assert(method != null, "Method symbol should not be null at this point");
+                    location = method?.Locations.First();
+                    accessorType = method?.MethodKind == MethodKind.PropertyGet ? "getter" : "setter";
                 }
                 return Tuple.Create(location, accessorType);
             }

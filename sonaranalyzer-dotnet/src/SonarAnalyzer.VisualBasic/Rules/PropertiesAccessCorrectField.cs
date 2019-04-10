@@ -103,12 +103,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 // no accessor
                 return true;
             }
-            if (accessor.DescendantNodes(n => n is StatementSyntax).Count() > 1)
-            {
-                // more than one statement
-                return false;
-            }
-            return accessor.DescendantNodes(n => n is ThrowStatementSyntax).Count() == 1;
+            // Special case: ignore the accessor if the only statement/expression is a throw.
+            return accessor.DescendantNodes(n => n is StatementSyntax).Count() == 1 &&
+                accessor.DescendantNodes(n => n is ThrowStatementSyntax).Count() == 1;
         }
 
         protected override bool ImplementsExplicitGetterOrSetter(IPropertySymbol property) =>
