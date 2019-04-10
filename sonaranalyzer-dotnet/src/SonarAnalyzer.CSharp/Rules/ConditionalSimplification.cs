@@ -119,6 +119,11 @@ namespace SonarAnalyzer.Rules.CSharp
             var type1 = semanticModel.GetTypeInfo(expression1).Type;
             var type2 = semanticModel.GetTypeInfo(expression2).Type;
 
+            if (expression1 is AnonymousFunctionExpressionSyntax || expression2 is AnonymousFunctionExpressionSyntax)
+            {
+                return false;
+            }
+
             if (type1 is IErrorTypeSymbol || type2 is IErrorTypeSymbol)
             {
                 return false;

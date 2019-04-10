@@ -88,12 +88,74 @@ namespace Tests.TestCases
             }
 
             elem = false ? null : (null);
-
-            Action myAction;
-            myAction = false ? () => { }
-
-            : () => { Console.WriteLine(); };
         }
+
+        // we ignore lambdas because of type resolution for conditional expressions, see CS0173
+        Action LambdasAreIgnored(bool condition, object a)
+        {
+            Action myAction;
+            if (false)
+            {
+                myAction = () => { };
+            }
+            else
+            {
+                myAction = () => { Console.WriteLine(); };
+            }
+
+            if (condition)
+            {
+                return () => X();
+            }
+            else
+            {
+                return () => Y();
+            }
+
+            if (condition)
+            {
+                Task.Run(() => X());
+            }
+            else
+            {
+                Task.Run(() => Y());
+            }
+
+            if (condition)
+            {
+                Bar(s => true);
+            }
+            else
+            {
+                Bar(s => false);
+            }
+
+            // if one arg is lambda, ignore
+            if (condition)
+            {
+                Foo(1, "2", () => X());
+            }
+            else
+            {
+                Foo(1, "2", () => Y());
+            }
+
+            Action x;
+            if (a != null)
+            {
+                x = () => X();
+            }
+            else
+            {
+                x = () => Y();
+            }
+            return null;
+        }
+
+        void X() { }
+        void Y() { }
+        void Foo(int a, string b, Action c) { }
+        void Bar(Func<int, bool> func) { }
     }
 
     class X { }
