@@ -376,5 +376,10 @@
     <Rule Id="S2091" Action="Warning" />
     <Rule Id="S2631" Action="Warning" />
     <Rule Id="S3649" Action="Warning" />
+    <Rule Id="S5131" Action="Warning" />
+    <Rule Id="S5144" Action="Warning" />
+    <Rule Id="S5145" Action="Warning" />
+    <Rule Id="S5146" Action="Warning" />
+    <Rule Id="S5167" Action="Warning" />
   </Rules>
 </RuleSet>
