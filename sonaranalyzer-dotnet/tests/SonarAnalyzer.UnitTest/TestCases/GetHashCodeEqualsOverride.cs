@@ -132,6 +132,12 @@ namespace Tests.Diagnostics
         public override bool Equals(Object obj) => base.Equals(obj); // Noncompliant
     }
 
+
+    /**
+     * If the method has been annotated with an attribute, we should not raise, because the only way to annotate the
+     * base behavior with an attribute is by overriding it.
+     */
+
     class WithBrowsableAttribute
     {
         [Browsable(false)]
