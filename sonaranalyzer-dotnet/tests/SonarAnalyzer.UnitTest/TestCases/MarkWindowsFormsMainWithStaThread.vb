@@ -1,5 +1,7 @@
 ﻿Imports System
 Imports System.Windows.Forms
+Imports System.Threading
+Imports System.Threading.Tasks
 
 Namespace Tests.TestCases
 
@@ -66,6 +68,12 @@ Namespace Tests.TestCases
     <MTAThread>
     Shared Sub Pain()
     End Sub
+  End Class
+
+  Class Program_10
+    Public Shared Async Function Main() As Task
+      Await Task.CompletedTask
+    End Function
   End Class
 
 End Namespace

@@ -42,6 +42,7 @@ namespace SonarAnalyzer.Rules
 
             if (methodSymbol != null &&
                 methodSymbol.IsMainMethod() &&
+                !methodSymbol.IsAsync &&
                 !methodSymbol.GetAttributes(KnownType.System_STAThreadAttribute).Any() &&
                 IsAssemblyReferencingWindowsForms(c.SemanticModel.Compilation))
             {
