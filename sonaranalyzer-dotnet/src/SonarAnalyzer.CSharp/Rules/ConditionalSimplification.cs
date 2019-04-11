@@ -116,6 +116,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool AreTypesCompatible(ExpressionSyntax expression1, ExpressionSyntax expression2, SemanticModel semanticModel)
         {
+            if (expression1 is AnonymousFunctionExpressionSyntax || expression2 is AnonymousFunctionExpressionSyntax)
+            {
+                return false;
+            }
+
             var type1 = semanticModel.GetTypeInfo(expression1).Type;
             var type2 = semanticModel.GetTypeInfo(expression2).Type;
 
