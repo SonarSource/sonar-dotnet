@@ -117,7 +117,7 @@ namespace Tests.Diagnostics
             public uint dwLength;
             public uint dwMemoryLoad;
             public ulong ullTotalPhys;
-            public ulong ullAvailPhys;
+            public ulong ullAvailPhys { get; set; }
             public ulong ullTotalPageFile;
             public ulong ullAvailPageFile;
             public ulong ullTotalVirtual;
@@ -140,7 +140,7 @@ namespace Tests.Diagnostics
                 }
                 else
                 {
-                    return 0;
+                    return memStatus.ullAvailPhys;
                 }
             }
         }
