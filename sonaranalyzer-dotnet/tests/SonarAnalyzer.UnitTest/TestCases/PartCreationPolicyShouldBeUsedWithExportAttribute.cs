@@ -43,7 +43,7 @@ namespace Tests.Diagnostics
         public int Property { get; set; }
     }
 
-    [MyExportAttribute]
+    [MyExport]
     [PartCreationPolicy(CreationPolicy.Any)] // Compliant, custom Export is present
     class Program6 { }
 
@@ -54,7 +54,7 @@ namespace Tests.Diagnostics
     [PartCreationPolicy(CreationPolicy.Any)] // Compliant, MyInheritedExport is present in base
     class Program7 : Program2_Base { }
 
-    [MyAttribute]
+    [Foo]
     [PartCreationPolicy(CreationPolicy.Any)] // Noncompliant {{Add the 'ExportAttribute' or remove 'PartCreationPolicyAttribute' to/from this class definition.}}
     class Program8 { }
 
@@ -74,7 +74,7 @@ namespace Tests.Diagnostics
         public MyInheritedExportAttribute(System.Type type) { }
     }
 
-    class MyAttribute : Attribute { }
+    class FooAttribute : Attribute { }
 
     [InheritedExport(typeof(object))]
     interface IMyInheritedExportInterface { }
