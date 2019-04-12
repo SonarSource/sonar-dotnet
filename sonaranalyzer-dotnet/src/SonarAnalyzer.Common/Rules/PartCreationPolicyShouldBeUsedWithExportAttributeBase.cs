@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            TClassSyntax classDeclaration = GetClassDeclaration(attribute);
+            var classDeclaration = GetClassDeclaration(attribute);
             if (classDeclaration == null)
             {
                 return;
@@ -52,8 +52,10 @@ namespace SonarAnalyzer.Rules
 
             var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration) as ITypeSymbol;
             if (classSymbol == null ||
-                classSymbol.GetAttributes(KnownType.System_ComponentModel_Composition_ExportAttribute).Any() ||
-                classSymbol.GetSelfAndBaseTypes().Any(s => s.GetAttributes(KnownType.System_ComponentModel_Composition_InheritedExportAttribute).Any()))
+                classSymbol.AnyAttributeDerivesFrom(KnownType.System_ComponentModel_Composition_ExportAttribute) ||
+                classSymbol.GetSelfAndBaseTypes()
+                    .Union(classSymbol.AllInterfaces)
+                    .Any(s => s.AnyAttributeDerivesFrom(KnownType.System_ComponentModel_Composition_InheritedExportAttribute)))
             {
                 return;
             }
