@@ -43,5 +43,21 @@ namespace Tests.Diagnostics
         public int Property { get; set; }
     }
 
+    [MyExportAttribute]
+    [PartCreationPolicy(CreationPolicy.Any)] // Compliant, custom Export is present
+    class Program6 : Program1
+    {
+    }
+
+    [MyAttribute]
+    [PartCreationPolicy(CreationPolicy.Any)] // Noncompliant {{Add the 'ExportAttribute' or remove 'PartCreationPolicyAttribute' to/from this class definition.}}
+    class Program7 : Program1
+    {
+    }
+
+    class MyExportAttribute : ExportAttribute { }
+
+    class MyAttribute : Attribute { }
+
     [PartCreationPolicy(CreationPolicy.Any)] // Error [CS0116] - Compliant, illegal use, don't raise
 }
