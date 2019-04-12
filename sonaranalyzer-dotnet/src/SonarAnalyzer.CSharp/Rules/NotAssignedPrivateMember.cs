@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var namedType = (INamedTypeSymbol)c.Symbol;
                     if (!namedType.IsClassOrStruct() ||
-                        namedType.GetAttributes(KnownType.System_Runtime_InteropServices_StructLayoutAttribute).Any() ||
+                        HasStructLayoutAttribute(namedType) ||
                         namedType.ContainingType != null)
                     {
                         return;
@@ -69,11 +69,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var candidateFields = removableDeclarationCollector.GetRemovableFieldLikeDeclarations(
                         new HashSet<SyntaxKind> { SyntaxKind.FieldDeclaration }, maxAccessibility)
-                        .Where(tuple => !IsInitializedOrFixed(((VariableDeclaratorSyntax)tuple.SyntaxNode)));
+                        .Where(tuple => !IsInitializedOrFixed((VariableDeclaratorSyntax)tuple.SyntaxNode) &&
+                                        !HasStructLayoutAttribute(tuple.Symbol.ContainingType));
 
                     var candidateProperties = removableDeclarationCollector.GetRemovableDeclarations(
                         new HashSet<SyntaxKind> { SyntaxKind.PropertyDeclaration }, maxAccessibility)
-                        .Where(tuple => IsAutoPropertyWithNoInitializer((PropertyDeclarationSyntax)tuple.SyntaxNode));
+                        .Where(tuple => IsAutoPropertyWithNoInitializer((PropertyDeclarationSyntax)tuple.SyntaxNode) &&
+                                        !HasStructLayoutAttribute(tuple.Symbol.ContainingType));
 
                     var allCandidateMembers = candidateFields.Concat(candidateProperties).ToList();
                     if (!allCandidateMembers.Any())
@@ -111,6 +113,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SymbolKind.NamedType);
         }
+
+        private static bool HasStructLayoutAttribute(INamedTypeSymbol namedTypeSymbol) =>
+            namedTypeSymbol.GetAttributes(KnownType.System_Runtime_InteropServices_StructLayoutAttribute).Any();
 
         private static bool IsInitializedOrFixed(VariableDeclaratorSyntax declarator)
         {
