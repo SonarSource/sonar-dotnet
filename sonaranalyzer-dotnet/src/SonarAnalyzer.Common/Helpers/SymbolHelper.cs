@@ -54,6 +54,9 @@ namespace SonarAnalyzer.Helpers
             symbol?.GetAttributes().Where(a => a.AttributeClass.IsAny(attributeTypes))
                 ?? Enumerable.Empty<AttributeData>();
 
+        internal static bool AnyAttributeDerivesFrom(this ISymbol symbol, KnownType attributeType) =>
+            symbol?.GetAttributes().Any(a => a.AttributeClass.DerivesFrom(attributeType)) ?? false;
+
         public static IEnumerable<INamedTypeSymbol> GetAllNamedTypes(this INamedTypeSymbol type)
         {
             if (type == null)

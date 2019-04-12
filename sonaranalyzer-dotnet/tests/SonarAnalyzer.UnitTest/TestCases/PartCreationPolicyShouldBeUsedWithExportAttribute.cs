@@ -43,5 +43,45 @@ namespace Tests.Diagnostics
         public int Property { get; set; }
     }
 
+    [MyExport]
+    [PartCreationPolicy(CreationPolicy.Any)] // Compliant, custom Export is present
+    class Program6 { }
+
+    [MyInheritedExport(typeof(object))]
+    [PartCreationPolicy(CreationPolicy.Any)] // Compliant, MyInheritedExport is present
+    class Program7_Base { }
+
+    [PartCreationPolicy(CreationPolicy.Any)] // Compliant, MyInheritedExport is present in base
+    class Program7 : Program2_Base { }
+
+    [Foo]
+    [PartCreationPolicy(CreationPolicy.Any)] // Noncompliant {{Add the 'ExportAttribute' or remove 'PartCreationPolicyAttribute' to/from this class definition.}}
+    class Program8 { }
+
+    [PartCreationPolicy(CreationPolicy.NonShared)] // Compliant, InheritedExport is present on interface
+    class Program9 : IMyInheritedExportInterface { }
+
+    [PartCreationPolicy(CreationPolicy.Shared)] // Compliant, MyInheritedExport is present on interface MyInheritedExportInterface
+    class Program11 : IFoo, IBar, IMyInheritedExportInterface, IQix { }
+
+    [PartCreationPolicy(CreationPolicy.NonShared)] // Noncompliant
+    class Program12 : IFoo, IBar, IQix { }
+
+    class MyExportAttribute : ExportAttribute { }
+
+    class MyInheritedExportAttribute : InheritedExportAttribute
+    {
+        public MyInheritedExportAttribute(System.Type type) { }
+    }
+
+    class FooAttribute : Attribute { }
+
+    [InheritedExport(typeof(object))]
+    interface IMyInheritedExportInterface { }
+
+    interface IFoo { }
+    interface IBar { }
+    interface IQix { }
+
     [PartCreationPolicy(CreationPolicy.Any)] // Error [CS0116] - Compliant, illegal use, don't raise
 }
