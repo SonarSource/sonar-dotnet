@@ -64,15 +64,29 @@ Namespace Tests.TestCases
     End Sub
   End Class
 
-  Class Program_11
+  Class Program_10
     <MTAThread>
     Shared Sub Pain()
     End Sub
   End Class
 
-  Class Program_10
+  Class Program_11
     Public Shared Async Function Main() As Task
       Await Task.CompletedTask
+    End Function
+  End Class
+
+  Class Program_12
+    <STAThread>
+    Public Shared Async Function Main() As Task
+        Await Task.CompletedTask
+    End Function
+  End Class
+
+  Class Program_13
+    <MTAThread>
+    Public Shared Async Function Main() As Task
+        Await Task.CompletedTask
     End Function
   End Class
 
