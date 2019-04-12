@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Tests.Diagnostics
 {
@@ -124,4 +125,67 @@ namespace Tests.Diagnostics
             return base.GetHashCode(); //Noncompliant, calls object.GetHashCode()
         }
     }
+
+    class DerivedWithExpressionBody : Base
+    {
+        public override int GetHashCode() => base.GetHashCode(); //Noncompliant, calls object.GetHashCode()
+        public override bool Equals(Object obj) => base.Equals(obj); // Noncompliant
+    }
+
+
+    /**
+     * If the method has been annotated with an attribute, we should not raise, because the only way to annotate the
+     * base behavior with an attribute is by overriding it.
+     */
+
+    class WithBrowsableAttribute
+    {
+        [Browsable(false)]
+        public override int GetHashCode()
+        {
+            return base.GetHashCode(); // Compliant, it's decorating the base behavior
+        }
+
+        [Browsable(true)]
+        public override bool Equals(Object obj)
+        {
+            return base.Equals(obj); // FN - the attribute isn't changing the default behavior
+        }
+    }
+
+    class WithEditorBrowsableFalseAttribute
+    {
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        public override int GetHashCode()
+        {
+            return base.GetHashCode(); // FN - the attribute isn't changing the default behavior
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override bool Equals(Object obj)
+        {
+            return base.Equals(obj); // Compliant, it's decorating the base behavior
+        }
+    }
+
+    class WithBothAttributes
+    {
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override int GetHashCode() => base.GetHashCode(); // Compliant
+    }
+
+    class WithCustomAttribute
+    {
+        [MyAttribute]
+        public override int GetHashCode() => base.GetHashCode(); // Compliant, decorating the default behavior
+
+        [MyAttribute]
+        public override bool Equals(Object obj)
+        {
+            return base.Equals(obj); // Compliant, it's decorating the base behavior
+        }
+    }
+
+    public class MyAttribute : Attribute { }
 }

@@ -56,7 +56,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (!(cb.OwningSymbol is IMethodSymbol methodSymbol) ||
+                    if (methodDeclaration.AttributeLists.Any() ||
+                        !(cb.OwningSymbol is IMethodSymbol methodSymbol) ||
                         !MethodIsRelevant(methodSymbol, MethodNames))
                     {
                         return;
@@ -156,9 +157,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 CSharpEquivalenceChecker.AreEquivalent(returnStatement.Expression, CSharpSyntaxHelper.TrueLiteralExpression);
         }
 
-        internal static bool MethodIsRelevant(IMethodSymbol methodSymbol, ISet<string> methodNames)
-        {
-            return methodNames.Contains(methodSymbol.Name) && methodSymbol.IsOverride;
-        }
+        internal static bool MethodIsRelevant(IMethodSymbol methodSymbol, ISet<string> methodNames) =>
+            methodNames.Contains(methodSymbol.Name) && methodSymbol.IsOverride;
     }
 }
