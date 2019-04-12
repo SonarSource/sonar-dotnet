@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly ImmutableArray<KnownType> formatAndClutureTypes =
+        private static readonly ImmutableArray<KnownType> formatAndCultureType =
             ImmutableArray.Create(
                 KnownType.System_IFormatProvider,
                 KnownType.System_Globalization_CultureInfo
@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
             methodSymbol.GetParameters().Any(p => p.Type.IsAny(formattableTypes));
 
         public static bool HasAnyFormatOrCultureParameter(ISymbol method) =>
-            method.GetParameters().Any(p => p.Type.IsAny(formatAndClutureTypes));
+            method.GetParameters().Any(p => p.Type.IsAny(formatAndCultureType));
 
         private static bool Matches(MemberDescriptor memberDescriptor, IMethodSymbol methodSymbol) =>
             methodSymbol != null &&
