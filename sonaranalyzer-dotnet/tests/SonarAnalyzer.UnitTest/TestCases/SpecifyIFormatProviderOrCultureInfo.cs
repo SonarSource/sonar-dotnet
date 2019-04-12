@@ -35,6 +35,10 @@ namespace Tests.Diagnostics
 
         public static int DoStuff8(string foo, string bar, string quix) => 1;
         public static int DoStuff8(CultureInfo cultureInfo, string foo, IFormatProvider formatProvider, string bar, string quix) => 1;
+
+        public static int DoStuff9(string foo, string bar, string quix) => 1;
+        public static int DoStuff9(CultureInfo cultureInfo, IFormatProvider formatProvider, string bar, string quix) => 1;
+
     }
 
     class Program
@@ -52,7 +56,7 @@ namespace Tests.Diagnostics
 
             Convert.ToInt32("123"); // Noncompliant
             int result;
-            int.TryParse("123", out result); // Noncompliant, ToInt32(string, IFormatProvider)
+            int.TryParse("123", out result); // FN, TryParse(string, NumberStyles, IFormatProvider, out result) is difficult to tell if is real overload
 
             object number = 1.23;
             Convert.ToInt32(number); // Noncompliant, there is ToInt32(object, IFormatProvider)
@@ -99,11 +103,12 @@ namespace Tests.Diagnostics
             Methods.DoStuff7(CultureInfo.DefaultThreadCurrentCulture, "foo", "bar", "qix");
 
             Methods.DoStuff8("foo", "bar", "qix"); // Compliant, alternative has too many params
+            Methods.DoStuff9("foo", "bar", "qix"); // Compliant, alternative is not overload
         }
 
         class MyFormat : IFormatProvider
         {
-            public override object GetFormat(Type formatType) => null;
+            public object GetFormat(Type formatType) => null;
         }
     }
 }
