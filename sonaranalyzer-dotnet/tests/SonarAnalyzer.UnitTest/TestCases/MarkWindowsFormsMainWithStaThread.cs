@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
 {
@@ -87,4 +89,31 @@ namespace Tests.Diagnostics
             return 1;
         }
     }
+
+    class Program_10
+    {
+        public static async Task Main() // Compliant, async Main is always MTA
+        {
+            await Task.CompletedTask;
+        }
+    }
+
+    class Program_11
+    {
+        [STAThread]
+        public static async Task Main()
+        {
+            await Task.CompletedTask;
+        }
+    }
+
+    class Program_12
+    {
+        [MTAThread]
+        public static async Task Main()
+        {
+            await Task.CompletedTask;
+        }
+    }
+
 }
