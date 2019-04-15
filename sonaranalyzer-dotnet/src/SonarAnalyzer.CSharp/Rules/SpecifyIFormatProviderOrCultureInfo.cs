@@ -107,7 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
             // must have same number of arguments + 1 (the format or culture argument) OR is params argument
             bool IsCompatibleOverload(IMethodSymbol m) =>
                 (m.GetParameters().Count() - invocation.ArgumentList.Arguments.Count == 1) ||
-                m.GetParameters().Last().IsParams;
+                (m.GetParameters().Any() && m.GetParameters().Last().IsParams);
         }
 
         private static bool SameParametersExceptFormatOrCulture(IMethodSymbol possibleOverload, IEnumerable<IParameterSymbol> parameters)

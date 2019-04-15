@@ -41,6 +41,12 @@ namespace Tests.Diagnostics
 
         public static bool DoStuff10(string foo, bool @default = false) => true;
         public static bool DoStuff10(string foo) => true;
+
+        public static bool DoStuff11(string foo, params string[] args) => true;
+        public static bool DoStuff11(string foo, int bar, params string[] args) => true;
+
+        public static bool DoStuff12(string foo, IFormatProvider provider, int x, params string[] args) => true;
+        public static bool DoStuff12(string foo, params string[] args) => true;
     }
 
     class Program
@@ -69,9 +75,9 @@ namespace Tests.Diagnostics
             "asdasd".ToUpper(); // Noncompliant
 
             String.Format("%s %s", "foo", "bar", "quix", "hi", "bye"); // Noncompliant
-            String.Format("%s %s", "foo"); // FN, the signature is not params for this one
-            String.Format("%s %s", "foo", "bar"); // FN, the signature is not params for this one
-            String.Format("%s %s", "foo", "bar", "quix"); // FN, the signature is not params for this one
+            String.Format("%s %s", "foo"); // Noncompliant
+            String.Format("%s %s", "foo", "bar"); // Noncompliant
+            String.Format("%s %s", "foo", "bar", "quix"); // Noncompliant
 
             Methods.DoStuff5("foo", "bar", "qix"); // Noncompliant
             Methods.DoStuff6("foo", "bar", "qix"); // Noncompliant
@@ -113,6 +119,8 @@ namespace Tests.Diagnostics
             Methods.DoStuff9("foo", "bar", "qix"); // Compliant, alternative is not overload
 
             Methods.DoStuff10("foo"); // Compliant
+            Methods.DoStuff11("foo"); // Compliant
+            Methods.DoStuff12("foo"); // Compliant
         }
 
         class MyFormat : IFormatProvider
