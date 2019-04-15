@@ -4,90 +4,12 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\ClrTypeResolver.cs",
-"region":  {
-"startLine":  222,
-"startColumn":  51,
-"endLine":  222,
-"endColumn":  124
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CodeParserHelper.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  45,
 "endLine":  23,
 "endColumn":  86
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\HtmlHelpers.cs",
-"region":  {
-"startLine":  115,
-"startColumn":  45,
-"endLine":  115,
-"endColumn":  153
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\HtmlHelpersExtensions.cs",
-"region":  {
-"startLine":  18,
-"startColumn":  17,
-"endLine":  18,
-"endColumn":  107
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorErrorView.cs",
-"region":  {
-"startLine":  49,
-"startColumn":  97,
-"endLine":  49,
-"endColumn":  161
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
-"region":  {
-"startLine":  421,
-"startColumn":  51,
-"endLine":  421,
-"endColumn":  209
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
-"region":  {
-"startLine":  212,
-"startColumn":  50,
-"endLine":  212,
-"endColumn":  109
 }
 }
 },
@@ -123,36 +45,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
 "region":  {
-"startLine":  295,
-"startColumn":  29,
-"endLine":  295,
-"endColumn":  121
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
-"region":  {
 "startLine":  323,
 "startColumn":  43,
 "endLine":  328,
 "endColumn":  33
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
-"region":  {
-"startLine":  338,
-"startColumn":  48,
-"endLine":  338,
-"endColumn":  157
 }
 }
 }

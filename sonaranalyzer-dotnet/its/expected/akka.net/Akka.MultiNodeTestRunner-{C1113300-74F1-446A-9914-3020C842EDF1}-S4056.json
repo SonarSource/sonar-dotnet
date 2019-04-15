@@ -19,75 +19,10 @@
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
 "region":  {
-"startLine":  76,
-"startColumn":  34,
-"endLine":  76,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
-"region":  {
-"startLine":  89,
-"startColumn":  50,
-"endLine":  89,
-"endColumn":  160
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
-"region":  {
-"startLine":  93,
-"startColumn":  46,
-"endLine":  93,
-"endColumn":  111
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
-"region":  {
 "startLine":  107,
 "startColumn":  59,
 "endLine":  108,
 "endColumn":  149
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
-"region":  {
-"startLine":  134,
-"startColumn":  50,
-"endLine":  134,
-"endColumn":  121
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
-"region":  {
-"startLine":  34,
-"startColumn":  22,
-"endLine":  34,
-"endColumn":  42
 }
 }
 },

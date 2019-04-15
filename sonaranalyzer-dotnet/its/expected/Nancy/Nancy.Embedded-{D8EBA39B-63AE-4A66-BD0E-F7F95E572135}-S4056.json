@@ -6,36 +6,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
 "region":  {
-"startLine":  32,
-"startColumn":  18,
-"endLine":  32,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
-"region":  {
 "startLine":  121,
 "startColumn":  76,
 "endLine":  121,
 "endColumn":  114
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
-"region":  {
-"startLine":  145,
-"startColumn":  18,
-"endLine":  145,
-"endColumn":  45
 }
 }
 }

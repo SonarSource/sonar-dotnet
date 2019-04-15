@@ -19,45 +19,6 @@
 "location":  {
 "uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Hints.cs",
 "region":  {
-"startLine":  91,
-"startColumn":  20,
-"endLine":  91,
-"endColumn":  74
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Hints.cs",
-"region":  {
-"startLine":  128,
-"startColumn":  20,
-"endLine":  128,
-"endColumn":  103
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Hints.cs",
-"region":  {
-"startLine":  178,
-"startColumn":  20,
-"endLine":  180,
-"endColumn":  65
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Hints.cs",
-"region":  {
 "startLine":  179,
 "startColumn":  33,
 "endLine":  179,
@@ -75,58 +36,6 @@
 "startColumn":  31,
 "endLine":  180,
 "endColumn":  50
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Query.cs",
-"region":  {
-"startLine":  66,
-"startColumn":  20,
-"endLine":  66,
-"endColumn":  99
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Query.cs",
-"region":  {
-"startLine":  109,
-"startColumn":  20,
-"endLine":  109,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Query.cs",
-"region":  {
-"startLine":  145,
-"startColumn":  20,
-"endLine":  145,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Query.cs",
-"region":  {
-"startLine":  189,
-"startColumn":  20,
-"endLine":  189,
-"endColumn":  87
 }
 }
 }

@@ -4,32 +4,6 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
-"region":  {
-"startLine":  183,
-"startColumn":  71,
-"endLine":  183,
-"endColumn":  143
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
-"region":  {
-"startLine":  205,
-"startColumn":  71,
-"endLine":  205,
-"endColumn":  143
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
 "region":  {
 "startLine":  126,
@@ -49,97 +23,6 @@
 "startColumn":  35,
 "endLine":  130,
 "endColumn":  290
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
-"region":  {
-"startLine":  134,
-"startColumn":  31,
-"endLine":  134,
-"endColumn":  138
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
-"region":  {
-"startLine":  352,
-"startColumn":  48,
-"endLine":  352,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
-"region":  {
-"startLine":  137,
-"startColumn":  23,
-"endLine":  137,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
-"region":  {
-"startLine":  272,
-"startColumn":  47,
-"endLine":  272,
-"endColumn":  170
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
-"region":  {
-"startLine":  333,
-"startColumn":  104,
-"endLine":  333,
-"endColumn":  205
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestLatch.cs",
-"region":  {
-"startLine":  139,
-"startColumn":  74,
-"endLine":  139,
-"endColumn":  142
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestLatch.cs",
-"region":  {
-"startLine":  144,
-"startColumn":  17,
-"endLine":  144,
-"endColumn":  57
 }
 }
 }

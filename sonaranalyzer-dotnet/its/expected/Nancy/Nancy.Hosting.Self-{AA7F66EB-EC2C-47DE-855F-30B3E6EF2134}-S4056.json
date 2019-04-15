@@ -4,90 +4,12 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Self\AutomaticUrlReservationCreationFailureException.cs",
-"region":  {
-"startLine":  45,
-"startColumn":  46,
-"endLine":  45,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Self\HostConfiguration.cs",
-"region":  {
-"startLine":  64,
-"startColumn":  35,
-"endLine":  64,
-"endColumn":  70
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
-"region":  {
-"startLine":  249,
-"startColumn":  53,
-"endLine":  249,
-"endColumn":  124
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
-"region":  {
-"startLine":  283,
-"startColumn":  35,
-"endLine":  283,
-"endColumn":  106
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
 "uri":  "sources\Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
 "region":  {
 "startLine":  367,
 "startColumn":  17,
 "endLine":  367,
 "endColumn":  73
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NetSh.cs",
-"region":  {
-"startLine":  34,
-"startColumn":  20,
-"endLine":  34,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Self\UriExtensions.cs",
-"region":  {
-"startLine":  33,
-"startColumn":  18,
-"endLine":  33,
-"endColumn":  39
 }
 }
 }
