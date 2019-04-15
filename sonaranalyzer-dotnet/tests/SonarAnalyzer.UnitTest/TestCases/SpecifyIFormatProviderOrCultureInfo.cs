@@ -39,6 +39,8 @@ namespace Tests.Diagnostics
         public static int DoStuff9(string foo, string bar, string quix) => 1;
         public static int DoStuff9(CultureInfo cultureInfo, IFormatProvider formatProvider, string bar, string quix) => 1;
 
+        public static bool DoStuff10(string foo, bool @default = false) => true;
+        public static bool DoStuff10(string foo) => true;
     }
 
     class Program
@@ -52,7 +54,7 @@ namespace Tests.Diagnostics
             string.Format("bla"); // Noncompliant
             Methods.DoStuff2("foo"); // Noncompliant
 
-            "".StartsWith(""); // Noncompliant
+            "".StartsWith(""); // FN, overload with CultureInfo has 3 parameters and is difficult to tell if is the proper overload
 
             Convert.ToInt32("123"); // Noncompliant
             int result;
@@ -65,6 +67,11 @@ namespace Tests.Diagnostics
             char.ToLower('a'); // Noncompliant
 
             "asdasd".ToUpper(); // Noncompliant
+
+            String.Format("%s %s", "foo", "bar", "quix", "hi", "bye"); // Noncompliant
+            String.Format("%s %s", "foo"); // FN, the signature is not params for this one
+            String.Format("%s %s", "foo", "bar"); // FN, the signature is not params for this one
+            String.Format("%s %s", "foo", "bar", "quix"); // FN, the signature is not params for this one
 
             Methods.DoStuff5("foo", "bar", "qix"); // Noncompliant
             Methods.DoStuff6("foo", "bar", "qix"); // Noncompliant
@@ -104,6 +111,8 @@ namespace Tests.Diagnostics
 
             Methods.DoStuff8("foo", "bar", "qix"); // Compliant, alternative has too many params
             Methods.DoStuff9("foo", "bar", "qix"); // Compliant, alternative is not overload
+
+            Methods.DoStuff10("foo"); // Compliant
         }
 
         class MyFormat : IFormatProvider

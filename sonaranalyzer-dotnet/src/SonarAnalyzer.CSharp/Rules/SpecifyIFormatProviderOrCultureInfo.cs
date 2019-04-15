@@ -45,8 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ImmutableArray<KnownType> formatAndCultureType =
             ImmutableArray.Create(
                 KnownType.System_IFormatProvider,
-                KnownType.System_Globalization_CultureInfo,
-                KnownType.System_StringComparison
+                KnownType.System_Globalization_CultureInfo
             );
 
         private static readonly ImmutableArray<KnownType> formattableTypes =
