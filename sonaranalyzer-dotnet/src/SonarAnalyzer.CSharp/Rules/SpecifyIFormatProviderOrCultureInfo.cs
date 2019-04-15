@@ -98,12 +98,16 @@ namespace SonarAnalyzer.Rules.CSharp
             return semanticModel.GetMemberGroup(invocation.Expression)
                 .OfType<IMethodSymbol>()
                 .Where(m => !m.GetAttributes(KnownType.System_ObsoleteAttribute).Any())
-                // must have same number of arguments + 1 (the format or culture argument)
-                .Where(m => m.GetParameters().Count() - invocation.ArgumentList.Arguments.Count == 1)
+                .Where(IsCompatibleOverload)
                 .Any(m => SameParametersExceptFormatOrCulture(m, GetParameters()));
 
             IEnumerable<IParameterSymbol> GetParameters() =>
                 semanticModel.GetSymbolInfo(invocation.Expression).Symbol?.GetParameters();
+
+            // must have same number of arguments + 1 (the format or culture argument) OR is params argument
+            bool IsCompatibleOverload(IMethodSymbol m) =>
+                (m.GetParameters().Count() - invocation.ArgumentList.Arguments.Count == 1) ||
+                m.GetParameters().Last().IsParams;
         }
 
         private static bool SameParametersExceptFormatOrCulture(IMethodSymbol possibleOverload, IEnumerable<IParameterSymbol> parameters)
