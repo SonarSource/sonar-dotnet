@@ -74,10 +74,13 @@ namespace Tests.Diagnostics
 
             "asdasd".ToUpper(); // Noncompliant
 
-            String.Format("%s %s", "foo", "bar", "quix", "hi", "bye"); // Noncompliant
-            String.Format("%s %s", "foo"); // Noncompliant
-            String.Format("%s %s", "foo", "bar"); // Noncompliant
-            String.Format("%s %s", "foo", "bar", "quix"); // Noncompliant
+            string.Format("%s %s", "foo", "bar", "quix", "hi", "bye"); // Noncompliant
+            string.Format("%s %s", "foo"); // Noncompliant
+            string.Format("%s %s", "foo", "bar"); // Noncompliant
+            string.Format("%s %s", "foo", "bar", "quix"); // Noncompliant
+            string.Format("{0}", "foo"); // Noncompliant
+            string.Format("{0}", new MyObject()); // Noncompliant
+            string.Format("TimeClient {0}", 1); // Noncompliant
 
             Methods.DoStuff5("foo", "bar", "qix"); // Noncompliant
             Methods.DoStuff6("foo", "bar", "qix"); // Noncompliant
@@ -127,5 +130,7 @@ namespace Tests.Diagnostics
         {
             public object GetFormat(Type formatType) => null;
         }
+
+        class MyObject { }
     }
 }

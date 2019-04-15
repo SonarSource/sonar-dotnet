@@ -113,6 +113,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool SameParametersExceptFormatOrCulture(IMethodSymbol possibleOverload, IEnumerable<IParameterSymbol> parameters)
         {
             var overloadParametersWithoutFormatCulture = possibleOverload.GetParameters().Where(p => !p.Type.IsAny(formatAndCultureType));
+            // no (format or culture) argument found
+            if (overloadParametersWithoutFormatCulture.Count() == possibleOverload.GetParameters().Count())
+            {
+                return false;
+            }
             // once we filter out the (format or culture) argument, the number of parameters must be the same
             if (parameters.Count() != overloadParametersWithoutFormatCulture.Count())
             {
