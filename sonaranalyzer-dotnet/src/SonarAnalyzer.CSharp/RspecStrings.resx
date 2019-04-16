@@ -8658,4 +8658,31 @@
   <data name="RoslynLanguage" xml:space="preserve">
     <value>C#</value>
   </data>
+  <data name="S666_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S666_Description" xml:space="preserve">
+    <value>To prevent unneeded allocations, empty array allocations should be replaced by Array.Empty&lt;T&gt;().</value>
+  </data>
+  <data name="S666_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S666_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S666_RemediationCost" xml:space="preserve">
+    <value>15min</value>
+  </data>
+  <data name="S666_Severity" xml:space="preserve">
+    <value> Minor</value>
+  </data>
+  <data name="S666_Tags" xml:space="preserve">
+    <value>performance</value>
+  </data>
+  <data name="S666_Title" xml:space="preserve">
+    <value>Empty arrays should be initialized with Array.Empty&lt;T&gt;()</value>
+  </data>
+  <data name="S666_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
 </root>
