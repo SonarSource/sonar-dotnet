@@ -1524,4 +1524,20 @@ namespace Tests.Diagnostics
             if (o == null) { } // Noncompliant
         }
     }
+
+    class FooContainer
+    {
+        public bool Foo { get; set; }
+    }
+
+    class TestNullConditional
+    {
+        void Run(FooContainer fooContainer, bool bar)
+        {
+            if (fooContainer?.Foo == false || bar)
+                Console.WriteLine(bar ? "1" : "2");
+            else
+                Console.WriteLine(fooContainer != null ? "3" : "4"); // Noncompliant FP (issue #1837)
+        }
+    }
 }
