@@ -1532,12 +1532,24 @@ namespace Tests.Diagnostics
 
     class TestNullConditional
     {
-        void Run(FooContainer fooContainer, bool bar)
+        void First(FooContainer fooContainer, bool bar)
         {
             if (fooContainer?.Foo == false || bar)
                 Console.WriteLine(bar ? "1" : "2");
             else
                 Console.WriteLine(fooContainer != null ? "3" : "4"); // Noncompliant FP (issue #1837)
+        }
+
+        void Second(FooContainer fooContainer)
+        {
+            if (fooContainer?.Foo != true)
+            {
+                Console.WriteLine("3");
+                if (fooContainer != null) // Noncompliant FP (issue #2164)
+                {
+                    Console.WriteLine("4");
+                }
+            }
         }
     }
 }
