@@ -1537,7 +1537,11 @@ namespace Tests.Diagnostics
             if (fooContainer?.Foo == false || bar)
                 Console.WriteLine(bar ? "1" : "2");
             else
-                Console.WriteLine(fooContainer != null ? "3" : "4"); // Noncompliant FP (issue #1837)
+                Console.WriteLine(fooContainer != null // Noncompliant FP (issue #1837)
+                    ?
+                    "3"
+                    :
+                    "4"); // Secondary
         }
 
         void Second(FooContainer fooContainer)
