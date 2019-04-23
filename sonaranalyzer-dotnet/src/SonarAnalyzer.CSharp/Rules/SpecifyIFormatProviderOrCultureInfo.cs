@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -99,9 +99,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 .OfType<IMethodSymbol>()
                 .Where(m => !m.GetAttributes(KnownType.System_ObsoleteAttribute).Any())
                 .Where(IsCompatibleOverload)
-                .Any(m => SameParametersExceptFormatOrCulture(m, GetParameters()));
+                .Any(methodSignature => SameParametersExceptFormatOrCulture(methodSignature, GetInvocationParameters()));
 
-            IEnumerable<IParameterSymbol> GetParameters() =>
+            IEnumerable<IParameterSymbol> GetInvocationParameters() =>
                 semanticModel.GetSymbolInfo(invocation.Expression).Symbol?.GetParameters();
 
             // must have same number of arguments + 1 (the format or culture argument) OR is params argument
@@ -110,34 +110,77 @@ namespace SonarAnalyzer.Rules.CSharp
                 (m.GetParameters().Any() && m.GetParameters().Last().IsParams);
         }
 
-        private static bool SameParametersExceptFormatOrCulture(IMethodSymbol possibleOverload, IEnumerable<IParameterSymbol> parameters)
+        private static bool SameParametersExceptFormatOrCulture(IMethodSymbol possibleOverload, IEnumerable<IParameterSymbol> invocationParameters)
         {
-            var overloadParametersWithoutFormatCulture = possibleOverload.GetParameters().Where(p => !p.Type.IsAny(formatAndCultureType));
-            // no (format or culture) argument found
-            if (overloadParametersWithoutFormatCulture.Count() == possibleOverload.GetParameters().Count())
-            {
-                return false;
-            }
-            // once we filter out the (format or culture) argument, the number of parameters must be the same
-            if (parameters.Count() != overloadParametersWithoutFormatCulture.Count())
+            var parametersWithoutFormatCulture = possibleOverload.GetParameters().Where(p => !p.Type.IsAny(formatAndCultureType));
+            // no FormatOrCulture argument found
+            if (parametersWithoutFormatCulture.Count() == possibleOverload.GetParameters().Count())
             {
                 return false;
             }
 
-            var possibleOverloadParameters = overloadParametersWithoutFormatCulture.ToList();
-            var invocationParameters = parameters.ToList();
-            for (var i = 0; i < invocationParameters.Count; i++)
+            // once we filter out the FormatOrCulture argument, we have two possibilities:
+            // - possibleOverload has a 'params' argument which matches the invocationParameters
+            // - the number of parameters is the same and of same type
+
+            var invocationParametersNumber = invocationParameters.Count();
+            var parametersWithoutFormatCultureNumber = parametersWithoutFormatCulture.Count();
+
+            if (parametersWithoutFormatCultureNumber <= invocationParametersNumber &&
+                parametersWithoutFormatCultureNumber > 0 &&
+                parametersWithoutFormatCulture.Last() is IParameterSymbol lastParameter &&
+                lastParameter.IsParams)
             {
-                // invocation parameter can be sub-type of overload parameter
-                if (!invocationParameters[i].Type.DerivesOrImplements(possibleOverloadParameters[i].Type))
+                return VerifyCompatibility(invocationParameters.ToList(), parametersWithoutFormatCulture.ToList(), lastParameter);
+            }
+            else if (invocationParametersNumber == parametersWithoutFormatCultureNumber)
+            {
+                return VerifyCompatibility(invocationParameters.ToList(), parametersWithoutFormatCulture.ToList());
+            }
+            return false;
+        }
+
+        /**
+         * Verifies the compatibility between the invocation parameters and the parameters of a possible overload that
+         * has the last parameter of 'params' type (variable length parameter).
+         */ 
+        private static bool VerifyCompatibility(IList<IParameterSymbol> invocationParameters,
+            IList<IParameterSymbol> overloadCandidateParameters,
+            IParameterSymbol paramsParameter)
+        {
+            var i = 0;
+            // check parameters before the last parameter
+            for (; i < overloadCandidateParameters.Count - 1; i++)
+            {
+                if (!invocationParameters[i].Type.DerivesOrImplements(overloadCandidateParameters[i].Type))
+                {
+                    return false;
+                }
+            }
+            // make sure the rest of the invocation parameters match with the 'params' type
+            var paramsType = GetParamsType(paramsParameter.Type);
+            for (; i < invocationParameters.Count; i++)
+            {
+                if (!invocationParameters[i].Type.DerivesOrImplements(paramsType))
                 {
                     return false;
                 }
             }
             return true;
+
+            ITypeSymbol GetParamsType(ITypeSymbol typeSymbol) => (typeSymbol as IArrayTypeSymbol)?.ElementType;
         }
 
-        private bool ReturnsOrAcceptsFormattableType(IMethodSymbol methodSymbol) =>
+        /**
+         * Checks that the invocation parameters are of the same type (or a subtype) with the overload parameters
+         * Assumption: the two lists have the same number of elements.
+         */
+        private static bool VerifyCompatibility(IList<IParameterSymbol> invocationParameters, IList<IParameterSymbol> overloadCandidateParameters) =>
+             invocationParameters
+                .Select((p, index) => p.Type.DerivesOrImplements(overloadCandidateParameters[index].Type))
+                .All(isCompatible => isCompatible);
+
+        private static bool ReturnsOrAcceptsFormattableType(IMethodSymbol methodSymbol) =>
             methodSymbol.ReturnType.IsAny(formattableTypes) ||
             methodSymbol.GetParameters().Any(p => p.Type.IsAny(formattableTypes));
 
