@@ -47,6 +47,19 @@ namespace Tests.Diagnostics
 
         public static bool DoStuff12(string foo, IFormatProvider provider, int x, params string[] args) => true;
         public static bool DoStuff12(string foo, params string[] args) => true;
+
+        // the following test mimicks the behavior of System.String.Format(), which in some .NET distributions has an override with
+        // an IFormatProvider parameter only for the method with 'params' argument
+        public static string MyFormat(IFormatProvider provider, String format, params object[] args) => "";
+        public static string MyFormat(String format, params object[] args) => "";
+        public static string MyFormat(String format, object arg0) => "";
+        public static string MyFormat(String format, object arg0, object arg1) => "";
+
+        public static string MyFormat2(IFormatProvider provider, string format, bool boolCheck, params string[] args) => "";
+        public static string MyFormat2(string format, bool boolCheck, string arg0) => "";
+        public static string MyFormat2(string format, string arg0) => "";
+        public static string MyFormat2(string format, bool boolCheck, Program arg0) => "";
+        public static string MyFormat2(string format, Program program, params string[] args) => "";
     }
 
     class Program
@@ -85,9 +98,15 @@ namespace Tests.Diagnostics
             Methods.DoStuff5("foo", "bar", "qix"); // Noncompliant
             Methods.DoStuff6("foo", "bar", "qix"); // Noncompliant
             Methods.DoStuff7("foo", "bar", "qix"); // Noncompliant
+
+            Methods.MyFormat("%s", "foo"); // Noncompliant
+            Methods.MyFormat("%s", "foo", "bar"); // Noncompliant
+            Methods.MyFormat("%s", "foo", "bar", "qix"); // Noncompliant
+
+            Methods.MyFormat2("%s", true, "x"); // Noncompliant
         }
 
-        void ValidCases()
+        void ValidCases(MyFormat myFormat)
         {
             42.ToString(CultureInfo.CurrentCulture);
             string.Format(CultureInfo.CurrentUICulture, "{0}", 42);
@@ -114,7 +133,7 @@ namespace Tests.Diagnostics
 
             Methods.DoStuff4("foo", "", ""); // Compliant - the other DoStuff4 does not have the same signature
 
-            Methods.DoStuff5("foo", "bar", "qix", new MyFormat());
+            Methods.DoStuff5("foo", "bar", "qix", myFormat);
             Methods.DoStuff6("foo", CultureInfo.CurrentCulture, "bar", "qix");
             Methods.DoStuff7(CultureInfo.DefaultThreadCurrentCulture, "foo", "bar", "qix");
 
@@ -124,6 +143,16 @@ namespace Tests.Diagnostics
             Methods.DoStuff10("foo"); // Compliant
             Methods.DoStuff11("foo"); // Compliant
             Methods.DoStuff12("foo"); // Compliant
+
+            Methods.MyFormat(myFormat, "%s", "foo"); // Compliant
+            Methods.MyFormat(myFormat, "%s", "foo", "bar"); // Compliant
+            Methods.MyFormat(myFormat, "%s", "foo", "bar", "qix"); // Compliant
+
+            Methods.MyFormat2(myFormat, "%s", true, "x"); // Compliant
+            Methods.MyFormat2("%s", "bar"); // Compliant, there's no overload for it
+            Methods.MyFormat2("%s", true, this); // Compliant, no overload
+            Methods.MyFormat2("%s", this, "foo", "bar", "qix"); // Compliant, no overload
+
         }
 
         class MyFormat : IFormatProvider
