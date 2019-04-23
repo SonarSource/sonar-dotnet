@@ -4,6 +4,71 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  54,
+"endLine":  15,
+"endColumn":  134
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  52,
+"endLine":  20,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  45,
+"endLine":  72,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  52,
+"endLine":  79,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  53,
+"endLine":  84,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
 "region":  {
 "startLine":  169,
@@ -23,6 +88,58 @@
 "startColumn":  54,
 "endLine":  308,
 "endColumn":  82
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  624,
+"startColumn":  34,
+"endLine":  624,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  641,
+"startColumn":  34,
+"endLine":  641,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  658,
+"startColumn":  34,
+"endLine":  658,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  758,
+"startColumn":  24,
+"endLine":  758,
+"endColumn":  99
 }
 }
 }

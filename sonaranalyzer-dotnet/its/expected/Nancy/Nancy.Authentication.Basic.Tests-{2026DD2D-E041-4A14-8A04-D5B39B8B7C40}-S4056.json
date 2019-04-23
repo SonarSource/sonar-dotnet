@@ -4,12 +4,12 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Self.Tests\NancySelfHostFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
 "region":  {
-"startLine":  145,
-"startColumn":  34,
-"endLine":  145,
-"endColumn":  85
+"startLine":  307,
+"startColumn":  31,
+"endLine":  307,
+"endColumn":  75
 }
 }
 },

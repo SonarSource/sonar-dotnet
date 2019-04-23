@@ -4,6 +4,45 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ContentNegotiationFixture.cs",
+"region":  {
+"startLine":  599,
+"startColumn":  67,
+"endLine":  599,
+"endColumn":  166
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ContentNegotiationFixture.cs",
+"region":  {
+"startLine":  719,
+"startColumn":  26,
+"endLine":  719,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\SerializerTests.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  26,
+"endLine":  35,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\SerializerTests.cs",
 "region":  {
 "startLine":  91,

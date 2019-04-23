@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared.Tests\NodeMessageHelpers.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  144,
+"endLine":  92,
+"endColumn":  175
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared.Tests\NodeMessageHelpers.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  152,
+"endLine":  109,
+"endColumn":  183
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared.Tests\NodeMessageHelpers.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  151,
+"endLine":  120,
+"endColumn":  182
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared.Tests\NodeMessageHelpers.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  21,
+"endLine":  141,
+"endColumn":  60
+}
+}
+}
+]
+}

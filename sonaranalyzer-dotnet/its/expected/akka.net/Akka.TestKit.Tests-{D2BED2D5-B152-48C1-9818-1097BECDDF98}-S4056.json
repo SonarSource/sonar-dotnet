@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  101,
+"endLine":  109,
+"endColumn":  180
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestKitBaseTests\DilatedTests.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  72,
+"endLine":  59,
+"endColumn":  166
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestKitBaseTests\DilatedTests.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  72,
+"endLine":  69,
+"endColumn":  166
+}
+}
+}
+]
+}

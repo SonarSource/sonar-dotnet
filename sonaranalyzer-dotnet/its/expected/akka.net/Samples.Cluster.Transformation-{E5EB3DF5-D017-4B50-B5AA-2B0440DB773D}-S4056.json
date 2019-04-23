@@ -12,6 +12,32 @@
 "endColumn":  101
 }
 }
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\TransformationMessages.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  24,
+"endLine":  38,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\TransformationMessages.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  24,
+"endLine":  56,
+"endColumn":  63
+}
+}
 }
 ]
 }

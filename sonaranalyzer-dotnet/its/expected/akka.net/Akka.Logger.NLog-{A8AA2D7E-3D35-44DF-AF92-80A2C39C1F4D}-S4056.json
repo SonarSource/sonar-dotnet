@@ -19,6 +19,19 @@
 "location":  {
 "uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.NLog\NLogLogger.cs",
 "region":  {
+"startLine":  37,
+"startColumn":  63,
+"endLine":  37,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.NLog\NLogLogger.cs",
+"region":  {
 "startLine":  38,
 "startColumn":  52,
 "endLine":  38,

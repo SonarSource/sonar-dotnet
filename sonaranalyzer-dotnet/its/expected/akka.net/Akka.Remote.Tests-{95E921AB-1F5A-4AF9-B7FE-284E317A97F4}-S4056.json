@@ -4,6 +4,97 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AccrualFailureDetectorSpec.cs",
+"region":  {
+"startLine":  254,
+"startColumn":  65,
+"endLine":  254,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  24,
+"endLine":  35,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
+"region":  {
+"startLine":  346,
+"startColumn":  31,
+"endLine":  346,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
+"region":  {
+"startLine":  349,
+"startColumn":  31,
+"endLine":  349,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
+"region":  {
+"startLine":  353,
+"startColumn":  31,
+"endLine":  353,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
+"region":  {
+"startLine":  363,
+"startColumn":  27,
+"endLine":  363,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
+"region":  {
+"startLine":  367,
+"startColumn":  27,
+"endLine":  367,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemoteDaemonSpec.cs",
 "region":  {
 "startLine":  72,
@@ -43,12 +134,103 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemoteRouterSpec.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  53,
+"endLine":  227,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"region":  {
+"startLine":  304,
+"startColumn":  31,
+"endLine":  304,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"region":  {
+"startLine":  309,
+"startColumn":  36,
+"endLine":  309,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"region":  {
+"startLine":  337,
+"startColumn":  94,
+"endLine":  337,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolStressTest.cs",
 "region":  {
 "startLine":  100,
 "startColumn":  31,
 "endLine":  100,
 "endColumn":  55
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolStressTest.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  42,
+"endLine":  121,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\GenericTransportSpec.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  50,
+"endLine":  34,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\GenericTransportSpec.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  50,
+"endLine":  35,
+"endColumn":  115
 }
 }
 }

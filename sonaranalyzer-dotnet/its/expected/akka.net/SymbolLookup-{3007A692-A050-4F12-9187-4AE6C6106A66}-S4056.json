@@ -4,6 +4,45 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\DispatcherActor.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  34,
+"endLine":  36,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\DispatcherActor.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  34,
+"endLine":  47,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\DispatcherActor.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  34,
+"endLine":  62,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
 "uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\MainForm.cs",
 "region":  {
 "startLine":  64,
@@ -23,6 +62,45 @@
 "startColumn":  31,
 "endLine":  65,
 "endColumn":  88
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\MainForm.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  82,
+"endLine":  67,
+"endColumn":  149
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockUriHelper.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  28,
+"endLine":  21,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockUriHelper.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  28,
+"endLine":  26,
+"endColumn":  102
 }
 }
 }

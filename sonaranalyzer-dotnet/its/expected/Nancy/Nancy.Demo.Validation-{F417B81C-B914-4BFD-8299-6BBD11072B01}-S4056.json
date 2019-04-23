@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Models\OddLengthStringAttribute.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  37,
+"endLine":  15,
+"endColumn":  122
+}
+}
+}
+]
+}
