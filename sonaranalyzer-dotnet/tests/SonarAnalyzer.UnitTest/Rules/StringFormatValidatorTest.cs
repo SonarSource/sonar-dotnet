@@ -58,5 +58,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new StringFormatValidator(),
                 workingOptions);
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void StringFormatEdgeCasesValidator()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\StringFormatEdgeCasesValidator.cs",
+                new StringFormatValidator(),
+                workingOptions);
+        }
     }
 }
