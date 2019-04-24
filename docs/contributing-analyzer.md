@@ -17,7 +17,8 @@ All C# and VB .NET analyzers present in SonarLint for Visual Studio, in the Sona
 1. Open `SonarAnalyzer.sln` in the `sonaranalyzer-dotnet` subfolder
 
 The following environment variables must be set:
-- **MSBUILD_PATH** - path to MSBuild.exe from the Visual Studio installation folder
+- **MSBUILD_PATH** - path to `MSBuild.exe` from the Visual Studio installation folder
+- **NUGET_PATH** - path to `nuget.exe` _(e.g. C:\Program Files\nuget\nuget.exe)_
 - **ORCHESTRATOR_CONFIG_URL** - path to orchestrator.properties (for integration tests)
 - **rule_api_path** - path to folder containing the rule api jar
 - **Path** - the **Path** must contain the path to the
