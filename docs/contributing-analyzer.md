@@ -20,7 +20,11 @@ The following environment variables must be set:
 - **MSBUILD_PATH** - path to MSBuild.exe from the Visual Studio installation folder
 - **ORCHESTRATOR_CONFIG_URL** - path to orchestrator.properties (for integration tests)
 - **rule_api_path** - path to folder containing the rule api jar
-- **Path** - the **Path** must contain the path to the dotnet core installation folder
+- **Path** - the **Path** must contain the path to the
+  - dotnet core installation folder
+  - `MSBuild.exe` folder _(e.g. C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\)_
+  - `MSTest.exe` folder _(e.g. C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE)_
+  - `VSTest.Console.exe` folder _(e.g. C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\Extensions\TestPlatform)_
 
 ## Running Tests
 
