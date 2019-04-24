@@ -4,6 +4,8 @@
 
 Maven must be installed and the `MAVEN_HOME` and `M2_HOME` environment variables must point to its folder. Also, `%M2_HOME%\bin` must be added to the **PATH**.
 
+Also follow the [steps](https://xtranet.sonarsource.com/display/DEV/Developer+Box) to set the `ARTIFACTORY_URL` and setup the `~/.m2/settings.xml`.
+
 ## Working with the code
 
 1. Clone [this repository](https://github.com/SonarSource/sonar-dotnet.git)
