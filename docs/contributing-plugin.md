@@ -1,5 +1,9 @@
 # Building, Testing and Debugging the SonarQube plugin
 
+## Environment
+
+Maven must be installed and the `MAVEN_HOME` and `M2_HOME` environment variables must point to its folder. Also, `%M2_HOME%\bin` must be added to the **PATH**.
+
 ## Working with the code
 
 1. Clone [this repository](https://github.com/SonarSource/sonar-dotnet.git)
