@@ -10,33 +10,73 @@ namespace Tests.Diagnostics
     {
         private const string ConstantQuery = "";
 
-        public void SqlCommands(SqlConnection connection, SqlTransaction transaction, string query)
+        public void CompliantSqlCommands(SqlConnection connection, SqlTransaction transaction, string query)
         {
             SqlCommand command;
             command = new SqlCommand(); // Compliant
             command = new SqlCommand(""); // Compliant
             command = new SqlCommand(ConstantQuery); // Compliant
-            command = new SqlCommand(query); // Noncompliant {{Make sure that executing SQL queries is safe here.}}
-//                    ^^^^^^^^^^^^^^^^^^^^^
-            command = new SqlCommand(query, connection); // Noncompliant
+            command = new SqlCommand(query); // Compliant, we don't know anything about the parameter
+            command = new SqlCommand(query, connection); // Compliant
             command = new SqlCommand("", connection); // Compliant, constant queries are safe
-            command = new SqlCommand(query, connection, transaction); // Noncompliant
+            command = new SqlCommand(query, connection, transaction); // Compliant
             command = new SqlCommand("", connection, transaction); // Compliant, constant queries are safe
-            command = new SqlCommand(query, connection, transaction, SqlCommandColumnEncryptionSetting.Enabled); // Noncompliant
+            command = new SqlCommand(query, connection, transaction, SqlCommandColumnEncryptionSetting.Enabled); // Compliant
             command = new SqlCommand("", connection, transaction, SqlCommandColumnEncryptionSetting.Enabled); // Compliant, constant queries are safe
 
-            command.CommandText = query; // Noncompliant
+            command.CommandText = query; // Compliant, we don't know enough about the parameter
             command.CommandText = ConstantQuery; // Compliant
             string text;
             text = command.CommandText; // Compliant
-            text = command.CommandText = query; // Noncompliant
-//                 ^^^^^^^^^^^^^^^^^^^
+            text = command.CommandText = query; // Compliant
 
             SqlDataAdapter adapter;
             adapter = new SqlDataAdapter(); // Compliant
             adapter = new SqlDataAdapter(command); // Compliant
-            adapter = new SqlDataAdapter(query, ""); // Noncompliant
-            adapter = new SqlDataAdapter(query, connection); // Noncompliant
+            adapter = new SqlDataAdapter(query, ""); // Compliant
+            adapter = new SqlDataAdapter(query, connection); // Compliant
+        }
+
+        public void NonCompliant_Concat_SqlCommands(SqlConnection connection, SqlTransaction transaction, string query, string param)
+        {
+            var command = new SqlCommand(string.Concat(query, param)); // Noncompliant {{Make sure that executing SQL queries is safe here.}}
+//                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            command = new SqlCommand(string.Concat(query, param), connection); // Noncompliant
+            command = new SqlCommand(string.Concat(query, param), connection, transaction); // Noncompliant
+            command = new SqlCommand(string.Concat(query, param), connection, transaction, SqlCommandColumnEncryptionSetting.Enabled); // Noncompliant
+
+            command.CommandText = string.Concat(query, param); // Noncompliant
+//                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            string text = command.CommandText = string.Concat(query, param); // Noncompliant
+
+            var adapter = new SqlDataAdapter(string.Concat(query, param), ""); // Noncompliant
+        }
+
+        public void NonCompliant_Format_SqlCommands(SqlConnection connection, SqlTransaction transaction, string param)
+        {
+            var command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param)); // Noncompliant {{Make sure that executing SQL queries is safe here.}}
+//                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param), connection); // Noncompliant
+            command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param), connection, transaction); // Noncompliant
+            command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param), connection, transaction, SqlCommandColumnEncryptionSetting.Enabled); // Noncompliant
+
+            command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param); // Noncompliant
+//                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            string text = command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param); // Noncompliant
+
+            var adapter = new SqlDataAdapter(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param), ""); // Noncompliant
+        }
+
+        public void NonCompliant_Interpolation_SqlCommands(SqlConnection connection, SqlTransaction transaction, string param)
+        {
+            var command = new SqlCommand($"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant {{Make sure that executing SQL queries is safe here.}}
+//                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            command = new SqlCommand($"SELECT * FROM mytable WHERE mycol={param}", connection, transaction, SqlCommandColumnEncryptionSetting.Enabled); // Noncompliant
+
+            command.CommandText = $"SELECT * FROM mytable WHERE mycol={param}"; // Noncompliant
+//                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+            var adapter = new SqlDataAdapter($"SELECT * FROM mytable WHERE mycol={param}", ""); // Noncompliant
         }
 
         public void OdbcCommands(OdbcConnection connection, OdbcTransaction transaction, string query)
@@ -45,21 +85,33 @@ namespace Tests.Diagnostics
             command = new OdbcCommand(); // Compliant
             command = new OdbcCommand(""); // Compliant
             command = new OdbcCommand(ConstantQuery); // Compliant
-            command = new OdbcCommand(query); // Noncompliant
-            command = new OdbcCommand(query, connection); // Noncompliant
-            command = new OdbcCommand(query, connection, transaction); // Noncompliant
+            command = new OdbcCommand(query); // Compliant, we don't know anything about the parameter
+            command = new OdbcCommand(query, connection); // Compliant
+            command = new OdbcCommand(query, connection, transaction); // Compliant
 
-            command.CommandText = query; // Noncompliant
+            command.CommandText = query; // Compliant
             command.CommandText = ConstantQuery; // Compliant
             string text;
             text = command.CommandText; // Compliant
-            text = command.CommandText = query; // Noncompliant
+            text = command.CommandText = query; // Compliant
 
             OdbcDataAdapter adapter;
             adapter = new OdbcDataAdapter(); // Compliant
             adapter = new OdbcDataAdapter(command); // Compliant
-            adapter = new OdbcDataAdapter(query, ""); // Noncompliant
-            adapter = new OdbcDataAdapter(query, connection); // Noncompliant
+            adapter = new OdbcDataAdapter(query, ""); // Compliant
+            adapter = new OdbcDataAdapter(query, connection); // Compliant
+        }
+
+        /**
+         * For the rest of the frameworks, we do sparse testing, to keep tests maintainable and relevant
+         */
+
+        public void NonCompliant_OdbcCommands(SqlConnection connection, SqlTransaction transaction, string query, string param)
+        {
+            var command = new OdbcCommand(string.Concat(query, param)); // Noncompliant {{Make sure that executing SQL queries is safe here.}}
+            command.CommandText = string.Concat(query, param); // Noncompliant
+            command.CommandText = $"SELECT * FROM mytable WHERE mycol={param}"; // Noncompliant
+            var adapter = new OdbcDataAdapter(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param), ""); // Noncompliant
         }
 
         public void OracleCommands(OracleConnection connection, OracleTransaction transaction, string query)
@@ -68,21 +120,28 @@ namespace Tests.Diagnostics
             command = new OracleCommand(); // Compliant
             command = new OracleCommand(""); // Compliant
             command = new OracleCommand(ConstantQuery); // Compliant
-            command = new OracleCommand(query); // Noncompliant
-            command = new OracleCommand(query, connection); // Noncompliant
-            command = new OracleCommand(query, connection, transaction); // Noncompliant
+            command = new OracleCommand(query); // Compliant, we don't know anything about the parameter
+            command = new OracleCommand(query, connection); // Compliant, we don't know anything about the parameter
+            command = new OracleCommand(query, connection, transaction); // Compliant, we don't know anything about the parameter
 
-            command.CommandText = query; // Noncompliant
+            command.CommandText = query; // Compliant, we don't know anything about the parameter
             command.CommandText = ConstantQuery; // Compliant
             string text;
             text = command.CommandText; // Compliant
-            text = command.CommandText = query; // Noncompliant
+            text = command.CommandText = query; // Compliant, we don't know anything about the parameter
 
             OracleDataAdapter adapter;
             adapter = new OracleDataAdapter(); // Compliant
             adapter = new OracleDataAdapter(command); // Compliant
-            adapter = new OracleDataAdapter(query, ""); // Noncompliant
-            adapter = new OracleDataAdapter(query, connection); // Noncompliant
+            adapter = new OracleDataAdapter(query, ""); // Compliant, we don't know anything about the parameter
+            adapter = new OracleDataAdapter(query, connection); // Compliant, we don't know anything about the parameter
+        }
+
+        public void NonCompliant_OracleCommands(OracleConnection connection, OracleTransaction transaction, string query, string param)
+        {
+            var command = new OracleCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param)); // Noncompliant {{Make sure that executing SQL queries is safe here.}}
+            command.CommandText = $"SELECT * FROM mytable WHERE mycol={param}"; // Noncompliant
+            new OracleDataAdapter(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param), ""); // Noncompliant
         }
 
         public void SqlServerCeCommands(SqlCeConnection connection, SqlCeTransaction transaction, string query)
@@ -106,6 +165,13 @@ namespace Tests.Diagnostics
             adapter = new SqlCeDataAdapter(command); // Compliant
             adapter = new SqlCeDataAdapter(query, ""); // Noncompliant
             adapter = new SqlCeDataAdapter(query, connection); // Noncompliant
+        }
+
+        public void NonCompliant_SqlCeCommands(SqlCeConnection connection, SqlCeTransaction transaction, string query, string param)
+        {
+            new SqlCeDataAdapter(string.Concat(query, param), ""); // Noncompliant
+            var command = new SqlCeCommand($"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant {{Make sure that executing SQL queries is safe here.}}
+            command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param); // Noncompliant
         }
     }
 }
