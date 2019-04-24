@@ -7,35 +7,9 @@
 "uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  15,
-"startColumn":  25,
-"endLine":  15,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
-"region":  {
-"startLine":  15,
 "startColumn":  54,
 "endLine":  15,
 "endColumn":  134
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
-"region":  {
-"startLine":  20,
-"startColumn":  25,
-"endLine":  20,
-"endColumn":  50
 }
 }
 },
@@ -88,32 +62,6 @@
 "startColumn":  53,
 "endLine":  84,
 "endColumn":  112
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Markdown.Tests\MarkdownViewEngineFixture.cs",
-"region":  {
-"startLine":  125,
-"startColumn":  25,
-"endLine":  125,
-"endColumn":  61
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Markdown.Tests\MarkdownViewEngineFixture.cs",
-"region":  {
-"startLine":  155,
-"startColumn":  25,
-"endLine":  155,
-"endColumn":  61
 }
 }
 }

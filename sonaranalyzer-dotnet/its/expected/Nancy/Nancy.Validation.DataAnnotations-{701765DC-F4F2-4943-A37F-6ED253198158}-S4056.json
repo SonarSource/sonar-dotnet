@@ -6,19 +6,6 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RangeValidatorAdapter.cs",
 "region":  {
-"startLine":  66,
-"startColumn":  24,
-"endLine":  66,
-"endColumn":  66
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RangeValidatorAdapter.cs",
-"region":  {
 "startLine":  69,
 "startColumn":  20,
 "endLine":  69,

@@ -84,19 +84,6 @@
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
 "region":  {
-"startLine":  34,
-"startColumn":  22,
-"endLine":  34,
-"endColumn":  42
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
-"region":  {
 "startLine":  48,
 "startColumn":  20,
 "endLine":  48,

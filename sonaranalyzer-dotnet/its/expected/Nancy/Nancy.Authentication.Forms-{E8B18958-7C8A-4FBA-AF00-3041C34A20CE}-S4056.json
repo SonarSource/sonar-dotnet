@@ -19,19 +19,6 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
 "region":  {
-"startLine":  278,
-"startColumn":  55,
-"endLine":  278,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
-"region":  {
 "startLine":  329,
 "startColumn":  20,
 "endLine":  329,

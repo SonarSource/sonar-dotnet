@@ -45,19 +45,6 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
 "region":  {
-"startLine":  424,
-"startColumn":  100,
-"endLine":  424,
-"endColumn":  117
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
-"region":  {
 "startLine":  427,
 "startColumn":  34,
 "endLine":  427,
@@ -124,35 +111,9 @@
 "uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  15,
-"startColumn":  25,
-"endLine":  15,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
-"region":  {
-"startLine":  15,
 "startColumn":  54,
 "endLine":  15,
 "endColumn":  134
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
-"region":  {
-"startLine":  20,
-"startColumn":  25,
-"endLine":  20,
-"endColumn":  50
 }
 }
 },

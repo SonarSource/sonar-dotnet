@@ -77,19 +77,6 @@
 "endColumn":  88
 }
 }
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Self\UriExtensions.cs",
-"region":  {
-"startLine":  33,
-"startColumn":  18,
-"endLine":  33,
-"endColumn":  39
-}
-}
 }
 ]
 }

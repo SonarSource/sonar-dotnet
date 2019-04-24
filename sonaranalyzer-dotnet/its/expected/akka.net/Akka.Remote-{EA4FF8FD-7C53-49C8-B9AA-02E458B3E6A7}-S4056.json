@@ -748,19 +748,6 @@
 "uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
 "region":  {
 "startLine":  116,
-"startColumn":  17,
-"endLine":  116,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
-"region":  {
-"startLine":  116,
 "startColumn":  35,
 "endLine":  116,
 "endColumn":  79
