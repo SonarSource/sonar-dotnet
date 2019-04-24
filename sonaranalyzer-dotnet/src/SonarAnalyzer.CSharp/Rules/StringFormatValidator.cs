@@ -435,14 +435,15 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var type = semanticModel.GetTypeInfo(expression).Type;
                 var arraySize = -1;
-                if (type.Is(TypeKind.Array))
+                if (type != null && type.Is(TypeKind.Array))
                 {
                     if (expression is ImplicitArrayCreationExpressionSyntax implicitArray)
                     {
                         arraySize = implicitArray.Initializer.Expressions.Count;
                     }
 
-                    if (expression is ArrayCreationExpressionSyntax array)
+                    if (expression is ArrayCreationExpressionSyntax array &&
+                        array.Initializer != null)
                     {
                         arraySize = array.Initializer.Expressions.Count;
                     }
