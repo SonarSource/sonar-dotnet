@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -111,9 +112,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool SameParametersExceptFormatOrCulture(IMethodSymbol possibleOverload, IEnumerable<IParameterSymbol> invocationParameters)
         {
-            var parametersWithoutFormatCulture = possibleOverload.GetParameters().Where(p => !p.Type.IsAny(formatAndCultureType));
+            var possibleOverloadParameters = possibleOverload.GetParameters();
+            var parametersWithoutFormatCulture = possibleOverloadParameters.Where(p => !p.Type.IsAny(formatAndCultureType));
+            var parametersWithoutFormatCultureCount = parametersWithoutFormatCulture.Count();
             // no FormatOrCulture argument found
-            if (parametersWithoutFormatCulture.Count() == possibleOverload.GetParameters().Count())
+            if (parametersWithoutFormatCultureCount == possibleOverloadParameters.Count())
             {
                 return false;
             }
@@ -122,17 +125,17 @@ namespace SonarAnalyzer.Rules.CSharp
             // - possibleOverload has a 'params' argument which matches the invocationParameters
             // - the number of parameters is the same and of same type
 
-            var invocationParametersNumber = invocationParameters.Count();
-            var parametersWithoutFormatCultureNumber = parametersWithoutFormatCulture.Count();
+            var invocationParametersCount = invocationParameters.Count();
 
-            if (parametersWithoutFormatCultureNumber <= invocationParametersNumber &&
-                parametersWithoutFormatCultureNumber > 0 &&
-                parametersWithoutFormatCulture.Last() is IParameterSymbol lastParameter &&
-                lastParameter.IsParams)
+            if (parametersWithoutFormatCultureCount <= invocationParametersCount &&
+                parametersWithoutFormatCultureCount > 0 &&
+                parametersWithoutFormatCulture.Last().IsParams)
             {
-                return VerifyCompatibility(invocationParameters.ToList(), parametersWithoutFormatCulture.ToList(), lastParameter);
+                var overloadParametersList = parametersWithoutFormatCulture.ToList();
+                var lastIndex = overloadParametersList.Count - 1;
+                return VerifyCompatibility(invocationParameters.ToList(), overloadParametersList, overloadParametersList[lastIndex]);
             }
-            else if (invocationParametersNumber == parametersWithoutFormatCultureNumber)
+            else if (invocationParametersCount == parametersWithoutFormatCultureCount)
             {
                 return VerifyCompatibility(invocationParameters.ToList(), parametersWithoutFormatCulture.ToList());
             }
@@ -147,6 +150,10 @@ namespace SonarAnalyzer.Rules.CSharp
             IList<IParameterSymbol> overloadCandidateParameters,
             IParameterSymbol paramsParameter)
         {
+            if (!(paramsParameter.Type is IArrayTypeSymbol))
+            {
+                return false;
+            }
             var i = 0;
             // check parameters before the last parameter
             for (; i < overloadCandidateParameters.Count - 1; i++)
@@ -157,7 +164,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
             // make sure the rest of the invocation parameters match with the 'params' type
-            var paramsType = GetParamsType(paramsParameter.Type);
+            var paramsType = GetParamsElementType(paramsParameter.Type);
             for (; i < invocationParameters.Count; i++)
             {
                 if (!invocationParameters[i].Type.DerivesOrImplements(paramsType))
@@ -167,17 +174,19 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             return true;
 
-            ITypeSymbol GetParamsType(ITypeSymbol typeSymbol) => (typeSymbol as IArrayTypeSymbol)?.ElementType;
+            ITypeSymbol GetParamsElementType(ITypeSymbol typeSymbol) => (typeSymbol as IArrayTypeSymbol).ElementType;
         }
 
         /**
          * Checks that the invocation parameters are of the same type (or a subtype) with the overload parameters
-         * Assumption: the two lists have the same number of elements.
          */
-        private static bool VerifyCompatibility(IList<IParameterSymbol> invocationParameters, IList<IParameterSymbol> overloadCandidateParameters) =>
-             invocationParameters
+        private static bool VerifyCompatibility(IList<IParameterSymbol> invocationParameters, IList<IParameterSymbol> overloadCandidateParameters)
+        {
+            Debug.Assert(invocationParameters.Count == overloadCandidateParameters.Count);
+            return invocationParameters
                 .Select((p, index) => p.Type.DerivesOrImplements(overloadCandidateParameters[index].Type))
                 .All(isCompatible => isCompatible);
+        }
 
         private static bool ReturnsOrAcceptsFormattableType(IMethodSymbol methodSymbol) =>
             methodSymbol.ReturnType.IsAny(formattableTypes) ||

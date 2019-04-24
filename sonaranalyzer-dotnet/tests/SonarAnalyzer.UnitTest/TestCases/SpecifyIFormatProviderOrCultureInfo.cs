@@ -60,6 +60,12 @@ namespace Tests.Diagnostics
         public static string MyFormat2(string format, string arg0) => "";
         public static string MyFormat2(string format, bool boolCheck, Program arg0) => "";
         public static string MyFormat2(string format, Program program, params string[] args) => "";
+
+        public static string DoStuff13(CultureInfo cultureInfo, params object[] args) => "";
+        public static string DoStuff13(Program program) => "";
+
+        public static string DoStuff14(CultureInfo cultureInfo) => "";
+        public static string DoStuff14(Program program) => "";
     }
 
     class Program
@@ -104,6 +110,8 @@ namespace Tests.Diagnostics
             Methods.MyFormat("%s", "foo", "bar", "qix"); // Noncompliant
 
             Methods.MyFormat2("%s", true, "x"); // Noncompliant
+
+            Methods.DoStuff13(this); // Noncompliant
         }
 
         void ValidCases(MyFormat myFormat)
@@ -153,6 +161,9 @@ namespace Tests.Diagnostics
             Methods.MyFormat2("%s", true, this); // Compliant, no overload
             Methods.MyFormat2("%s", this, "foo", "bar", "qix"); // Compliant, no overload
 
+            Methods.DoStuff13(CultureInfo.CurrentCulture, this);
+
+            Methods.DoStuff14(this); // Compliant, no alternative
         }
 
         class MyFormat : IFormatProvider
