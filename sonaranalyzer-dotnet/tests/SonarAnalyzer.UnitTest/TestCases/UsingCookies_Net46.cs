@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Web;
 
 namespace Tests.Diagnostics
@@ -17,7 +18,7 @@ namespace Tests.Diagnostics
         {
             HttpCookie cookie;
             cookie = new HttpCookie("c"); // Compliant, value is not set
-            cookie = new HttpCookie("c", ""); // Noncompliant {{Make sure that this cookie is used safely.}}
+            cookie = new HttpCookie("c", ""); // Noncompliant {{Make sure that this cookie is written safely.}}
 
             cookie = new HttpCookie("c") { }; // Compliant
             cookie = new HttpCookie("c") { Value = "" }; // Noncompliant
@@ -35,7 +36,12 @@ namespace Tests.Diagnostics
 
             c.Values[""] = ""; // Noncompliant
             c.Values.Add("key", "value"); // Noncompliant
-//          ^^^^^^^^
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+            // operations on generic NameValueCollection objects do not raise any issue
+            var nvc = new NameValueCollection { { "a", "1" }, { "b", "2" } };
+            nvc["a"] = "2";
+            nvc.Add("c", "2");
 
             // setting HttpCookie.Value on fields
             field1.Value = "value"; // Noncompliant
@@ -53,14 +59,14 @@ namespace Tests.Diagnostics
         void Value_Values_Read(HttpCookie cookie)
         {
             string value;
-            value = cookie.Value; // Noncompliant
-            value = cookie[""]; // Noncompliant
-            value = cookie.Values[""]; // Noncompliant
-            value = cookie.Values[""]; // Noncompliant
+            value = cookie.Value; // Compliant
+            value = cookie[""]; // Compliant
+            value = cookie.Values[""]; // Compliant
+            value = cookie.Values[""]; // Compliant
 
-            if (cookie.Value != "") // Noncompliant
+            if (cookie.Value != "") // Compliant
             {
-                Console.Write(cookie.Value); // Noncompliant
+                Console.Write(cookie.Value); // Compliant
             }
         }
 

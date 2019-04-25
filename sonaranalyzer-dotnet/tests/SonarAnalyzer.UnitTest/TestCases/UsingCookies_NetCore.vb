@@ -8,7 +8,7 @@ Namespace Tests.Diagnostics
             ' Response headers
             response.Headers.Add("Set-Cookie", "") ' Noncompliant
             response.Headers("Set-Cookie") = "" ' Noncompliant
-            value = response.Headers("Set-Cookie") ' Noncompliant
+            value = response.Headers("Set-Cookie") ' Compliant
 
             ' Not the Set-Cookie header
             response.Headers.Add("something", "")
@@ -19,7 +19,7 @@ Namespace Tests.Diagnostics
             Dim responseHeaders = response.Headers
             responseHeaders.Add("Set-Cookie", "") ' Noncompliant
             responseHeaders("Set-Cookie") = "" ' Noncompliant
-            value = responseHeaders("Set-Cookie") ' Noncompliant
+            value = responseHeaders("Set-Cookie") ' Compliant
 
             responseHeaders.Remove("Set-Cookie") ' Compliant
             responseHeaders.Remove("") ' Compliant
@@ -41,7 +41,7 @@ Namespace Tests.Diagnostics
             ' Request headers
             request.Headers.Add("Set-Cookie", "") ' Noncompliant
             request.Headers("Set-Cookie") = value ' Noncompliant
-            value = request.Headers("Set-Cookie") ' Noncompliant
+            value = request.Headers("Set-Cookie") ' Compliant
 
             ' Not the Set-Cookie header
             request.Headers.Add("something", "")
@@ -52,16 +52,16 @@ Namespace Tests.Diagnostics
             Dim requestHeaders = request.Headers
             requestHeaders.Add("Set-Cookie", "") ' Noncompliant
             requestHeaders("Set-Cookie") = value ' Noncompliant
-            value = requestHeaders("Set-Cookie") ' Noncompliant
+            value = requestHeaders("Set-Cookie") ' Compliant
 
             ' Request cookies as property
-            value = request.Cookies("") ' Noncompliant
-            request.Cookies.TryGetValue("", value) ' Noncompliant
+            value = request.Cookies("") ' Compliant
+            request.Cookies.TryGetValue("", value) ' Compliant
 
             ' Request cookies as variable
             Dim requestCookies = request.Cookies
-            value = requestCookies("") ' Noncompliant
-            requestCookies.TryGetValue("", value) ' Noncompliant
+            value = requestCookies("") ' Compliant
+            requestCookies.TryGetValue("", value) ' Compliant
         End Sub
     End Class
 End Namespace
