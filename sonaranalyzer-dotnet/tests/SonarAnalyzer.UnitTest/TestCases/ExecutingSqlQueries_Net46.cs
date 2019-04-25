@@ -40,13 +40,13 @@ namespace Tests.Diagnostics
         public void NonCompliant_Concat_SqlCommands(SqlConnection connection, SqlTransaction transaction, string query, string param)
         {
             var command = new SqlCommand(string.Concat(query, param)); // Noncompliant {{Make sure that executing SQL queries is safe here.}}
-//                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             command = new SqlCommand(string.Concat(query, param), connection); // Noncompliant
             command = new SqlCommand(string.Concat(query, param), connection, transaction); // Noncompliant
             command = new SqlCommand(string.Concat(query, param), connection, transaction, SqlCommandColumnEncryptionSetting.Enabled); // Noncompliant
 
             command.CommandText = string.Concat(query, param); // Noncompliant
-//                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//          ^^^^^^^^^^^^^^^^^^^
             string text = command.CommandText = string.Concat(query, param); // Noncompliant
 
             var adapter = new SqlDataAdapter(string.Concat(query, param), ""); // Noncompliant
@@ -55,13 +55,12 @@ namespace Tests.Diagnostics
         public void NonCompliant_Format_SqlCommands(SqlConnection connection, SqlTransaction transaction, string param)
         {
             var command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param)); // Noncompliant {{Make sure that executing SQL queries is safe here.}}
-//                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param), connection); // Noncompliant
             command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param), connection, transaction); // Noncompliant
             command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param), connection, transaction, SqlCommandColumnEncryptionSetting.Enabled); // Noncompliant
 
             command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param); // Noncompliant
-//                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
             string text = command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param); // Noncompliant
 
             var adapter = new SqlDataAdapter(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param), ""); // Noncompliant
@@ -70,11 +69,11 @@ namespace Tests.Diagnostics
         public void NonCompliant_Interpolation_SqlCommands(SqlConnection connection, SqlTransaction transaction, string param)
         {
             var command = new SqlCommand($"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant {{Make sure that executing SQL queries is safe here.}}
-//                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             command = new SqlCommand($"SELECT * FROM mytable WHERE mycol={param}", connection, transaction, SqlCommandColumnEncryptionSetting.Enabled); // Noncompliant
 
             command.CommandText = $"SELECT * FROM mytable WHERE mycol={param}"; // Noncompliant
-//                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//          ^^^^^^^^^^^^^^^^^^^
 
             var adapter = new SqlDataAdapter($"SELECT * FROM mytable WHERE mycol={param}", ""); // Noncompliant
         }
@@ -150,21 +149,21 @@ namespace Tests.Diagnostics
             command = new SqlCeCommand(); // Compliant
             command = new SqlCeCommand(""); // Compliant
             command = new SqlCeCommand(ConstantQuery); // Compliant
-            command = new SqlCeCommand(query); // Noncompliant
-            command = new SqlCeCommand(query, connection); // Noncompliant
-            command = new SqlCeCommand(query, connection, transaction); // Noncompliant
+            command = new SqlCeCommand(query); // Compliant
+            command = new SqlCeCommand(query, connection); // Compliant
+            command = new SqlCeCommand(query, connection, transaction); // Compliant
 
-            command.CommandText = query; // Noncompliant
+            command.CommandText = query; // Compliant
             command.CommandText = ConstantQuery; // Compliant
             string text;
             text = command.CommandText; // Compliant
-            text = command.CommandText = query; // Noncompliant
+            text = command.CommandText = query; // Compliant
 
             SqlCeDataAdapter adapter;
             adapter = new SqlCeDataAdapter(); // Compliant
             adapter = new SqlCeDataAdapter(command); // Compliant
-            adapter = new SqlCeDataAdapter(query, ""); // Noncompliant
-            adapter = new SqlCeDataAdapter(query, connection); // Noncompliant
+            adapter = new SqlCeDataAdapter(query, ""); // Compliant
+            adapter = new SqlCeDataAdapter(query, connection); // Compliant
         }
 
         public void NonCompliant_SqlCeCommands(SqlCeConnection connection, SqlCeTransaction transaction, string query, string param)

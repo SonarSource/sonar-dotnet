@@ -39,6 +39,7 @@ namespace SonarAnalyzer.Rules
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSql")),
+                Conditions.Or(ArgumentAtIndexIsConcat(0), ArgumentAtIndexIsFormat(0)),
                 Conditions.ExceptWhen(
                     OnlyParameterIsConstantOrInterpolatedString()),
                 Conditions.ExceptWhen(
@@ -48,6 +49,9 @@ namespace SonarAnalyzer.Rules
                 InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommandAsync"),
                     new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommand")),
+                Conditions.Or(
+                    Conditions.Or(ArgumentAtIndexIsConcat(0), ArgumentAtIndexIsFormat(0)),
+                    Conditions.Or(ArgumentAtIndexIsConcat(1), ArgumentAtIndexIsFormat(1))),
                 Conditions.ExceptWhen(
                     OnlyParameterIsConstantOrInterpolatedString()));
 
@@ -58,6 +62,7 @@ namespace SonarAnalyzer.Rules
                     new MemberDescriptor(KnownType.System_Data_SqlClient_SqlCommand, "CommandText"),
                     new MemberDescriptor(KnownType.System_Data_SqlServerCe_SqlCeCommand, "CommandText")),
                 PropertyAccessTracker.MatchSetter(),
+                Conditions.Or(SetterIsConcat(), Conditions.Or(SetterIsFormat(), SetterIsInterpolation())),
                 Conditions.ExceptWhen(
                     PropertyAccessTracker.AssignedValueIsConstant()));
 
@@ -73,10 +78,28 @@ namespace SonarAnalyzer.Rules
                     KnownType.System_Data_OracleClient_OracleCommand,
                     KnownType.System_Data_OracleClient_OracleDataAdapter),
                 ObjectCreationTracker.ArgumentAtIndexIs(0, KnownType.System_String),
+                Conditions.Or(FirstArgumentIsConcat(), Conditions.Or(FirstArgumentIsFormat(), FirstArgumentIsInterpolation())),
                 Conditions.ExceptWhen(
                     ObjectCreationTracker.ArgumentAtIndexIsConst(0)));
         }
 
         protected abstract InvocationCondition OnlyParameterIsConstantOrInterpolatedString();
+
+        protected abstract InvocationCondition ArgumentAtIndexIsConcat(int index);
+
+        protected abstract InvocationCondition ArgumentAtIndexIsFormat(int index);
+
+        protected abstract PropertyAccessCondition SetterIsConcat();
+
+        protected abstract PropertyAccessCondition SetterIsFormat();
+
+        protected abstract PropertyAccessCondition SetterIsInterpolation();
+
+        protected abstract ObjectCreationCondition FirstArgumentIsConcat();
+
+        protected abstract ObjectCreationCondition FirstArgumentIsFormat();
+
+        protected abstract ObjectCreationCondition FirstArgumentIsInterpolation();
+
     }
 }

@@ -67,5 +67,45 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 return onlyArgument.IsAnyKind(SyntaxKind.InterpolatedStringExpression) ||
                     onlyArgument.IsConstant(context.SemanticModel);
             };
+
+        protected override InvocationCondition ArgumentAtIndexIsConcat(int index)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override InvocationCondition ArgumentAtIndexIsFormat(int index)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override PropertyAccessCondition SetterIsConcat()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override PropertyAccessCondition SetterIsFormat()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override PropertyAccessCondition SetterIsInterpolation()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override ObjectCreationCondition FirstArgumentIsConcat()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override ObjectCreationCondition FirstArgumentIsFormat()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override ObjectCreationCondition FirstArgumentIsInterpolation()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
