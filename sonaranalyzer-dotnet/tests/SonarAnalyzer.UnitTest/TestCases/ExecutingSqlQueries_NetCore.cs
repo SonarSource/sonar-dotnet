@@ -60,7 +60,6 @@ namespace Tests.Diagnostics
             context.Database.ExecuteSqlCommandAsync(concatenated); // FN
 
             context.Query<User>().FromSql(string.Concat(query, parameters)); // Noncompliant
-            context.Query<User>().FromSql(string.Format(query, parameters)); // Noncompliant
             context.Query<User>().FromSql(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", parameters)); // Noncompliant
             context.Query<User>().FromSql($"SELECT * FROM mytable WHERE mycol={parameters[0]}"); // Compliant, the FormattableString is transformed into a parametrized query.
             context.Query<User>().FromSql("SELECT * FROM mytable WHERE mycol=" + parameters[0]); // Noncompliant
