@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -69,180 +70,107 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override InvocationCondition ArgumentAtIndexIsConcat(int index) =>
             (context) =>
-            {
-                var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
-                if (argumentList == null ||
-                    argumentList.Arguments.Count <= index)
-                {
-                    return false;
-                }
-
-                var argument = argumentList.Arguments[index].Expression.RemoveParentheses();
-                return IsConcat(argument, context.SemanticModel);
-            };
+                GetArgumentAtIndex(context, index) is ExpressionSyntax argument &&
+                IsConcat(argument, context.SemanticModel);
 
         protected override InvocationCondition ArgumentAtIndexIsFormat(int index) =>
             (context) =>
-            {
-                var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
-                if (argumentList == null ||
-                    argumentList.Arguments.Count <= index)
-                {
-                    return false;
-                }
-
-                var argument = argumentList.Arguments[index].Expression.RemoveParentheses();
-                return IsFormat(argument, context.SemanticModel);
-            };
+                GetArgumentAtIndex(context, index) is ExpressionSyntax argument &&
+                IsFormat(argument, context.SemanticModel);
 
         protected override PropertyAccessCondition SetterIsConcat() =>
             (context) =>
-            {
-                // FIXME defensive coding make sure it's valid cast
-                var setter = ((MemberAccessExpressionSyntax)context.Expression);
-                if (!setter.IsLeftSideOfAssignment())
-                {
-                    return false;
-                }
-
-                var argument = ((AssignmentExpressionSyntax)setter.GetSelfOrTopParenthesizedExpression().Parent).Right.RemoveParentheses();
-                return IsConcat(argument, context.SemanticModel);
-            };
+                GetSetValue(context) is ExpressionSyntax argument &&
+                IsConcat(argument, context.SemanticModel);
 
         protected override PropertyAccessCondition SetterIsFormat() =>
             (context) =>
-            {
-                // FIXME defensive coding make sure it's valid cast
-                var setter = ((MemberAccessExpressionSyntax)context.Expression);
-                if (!setter.IsLeftSideOfAssignment())
-                {
-                    return false;
-                }
-
-                var argument = ((AssignmentExpressionSyntax)setter.GetSelfOrTopParenthesizedExpression().Parent).Right.RemoveParentheses();
-                return IsFormat(argument, context.SemanticModel);
-            };
+                GetSetValue(context) is ExpressionSyntax argument &&
+                IsFormat(argument, context.SemanticModel);
 
         protected override PropertyAccessCondition SetterIsInterpolation() =>
             (context) =>
-            {
-                // FIXME defensive coding make sure it's valid cast
-                var setter = ((MemberAccessExpressionSyntax)context.Expression);
-                if (!setter.IsLeftSideOfAssignment())
-                {
-                    return false;
-                }
-
-                var argument = ((AssignmentExpressionSyntax)setter.GetSelfOrTopParenthesizedExpression().Parent).Right.RemoveParentheses();
-                return argument.IsAnyKind(SyntaxKind.InterpolatedStringExpression);
-            };
+                GetSetValue(context) is ExpressionSyntax argument &&
+                argument.IsAnyKind(SyntaxKind.InterpolatedStringExpression);
 
         protected override ObjectCreationCondition FirstArgumentIsConcat() =>
             (context) =>
-            {
-                var argumentList = ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList;
-                if (argumentList == null || argumentList.Arguments.Count == 0)
-                {
-                    return false;
-                }
-                var argument = argumentList.Arguments[0].Expression.RemoveParentheses();
-                return IsConcat(argument, context.SemanticModel);
-            };
+                GetFirstArgument(context) is ExpressionSyntax firstArg &&
+                IsConcat(firstArg, context.SemanticModel);
 
         protected override ObjectCreationCondition FirstArgumentIsFormat() =>
             (context) =>
-            {
-                var argumentList = ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList;
-                if (argumentList == null || argumentList.Arguments.Count == 0)
-                {
-                    return false;
-                }
-                var argument = argumentList.Arguments[0].Expression.RemoveParentheses();
-                return IsFormat(argument, context.SemanticModel);
-            };
+                GetFirstArgument(context) is ExpressionSyntax firstArg &&
+                IsFormat(firstArg, context.SemanticModel);
 
         protected override ObjectCreationCondition FirstArgumentIsInterpolation() =>
             (context) =>
-            {
-                var argumentList = ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList;
-                if (argumentList == null || argumentList.Arguments.Count == 0)
-                {
-                    return false;
-                }
-                var argument = argumentList.Arguments[0].Expression.RemoveParentheses();
-                return argument.IsAnyKind(SyntaxKind.InterpolatedStringExpression);
-            };
+                GetFirstArgument(context) is ExpressionSyntax firstArg &&
+                firstArg.IsAnyKind(SyntaxKind.InterpolatedStringExpression);
 
-        private static bool IsConcat(ExpressionSyntax argument, SemanticModel semanticModel)
-        {
-            if (argument.IsKind(SyntaxKind.AddExpression) && argument is BinaryExpressionSyntax concatenation)
-            {
-                // only say it's concatenation if it's not only constants
-                return !AllConstants(concatenation, semanticModel);
-            }
+        private static ExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index) =>
+            context.Invocation is InvocationExpressionSyntax invocation
+                ? Get(invocation.ArgumentList, index)
+                : null;
 
-            if (argument.IsKind(SyntaxKind.InvocationExpression) && argument is InvocationExpressionSyntax invocation)
-            {
-                var methodSymbol = semanticModel.GetSymbolInfo(invocation).Symbol;
-                return methodSymbol.IsInType(KnownType.System_String) &&
-                    "Concat".Contains(methodSymbol.Name) &&
-                    !AllConstants(invocation, semanticModel);
-            }
+        private static ExpressionSyntax GetSetValue(PropertyAccessContext context) =>
+            context.Expression is MemberAccessExpressionSyntax setter && setter.IsLeftSideOfAssignment()
+                ? ((AssignmentExpressionSyntax)setter.GetSelfOrTopParenthesizedExpression().Parent).Right.RemoveParentheses()
+                : null;
 
-            return false;
-        }
+        private static ExpressionSyntax GetFirstArgument(ObjectCreationContext context) =>
+            context.Expression is ObjectCreationExpressionSyntax objectCreation
+                ? Get(objectCreation.ArgumentList, 0)
+                : null;
 
-        private static bool IsFormat(ExpressionSyntax argument, SemanticModel semanticModel)
-        {
-            if (argument.IsKind(SyntaxKind.InvocationExpression) && argument is InvocationExpressionSyntax invocation)
-            {
-                var methodSymbol = semanticModel.GetSymbolInfo(invocation).Symbol;
-                return methodSymbol.IsInType(KnownType.System_String) &&
-                    "Format".Contains(methodSymbol.Name) &&
-                    !AllConstants(invocation, semanticModel);
-            }
+        private static ExpressionSyntax Get(ArgumentListSyntax argumentList, int index) =>
+            argumentList != null && argumentList.Arguments.Count > index
+                ? argumentList.Arguments[index].Expression.RemoveParentheses()
+                : null;
 
-            return false;
-        }
+        private static bool IsConcat(ExpressionSyntax argument, SemanticModel semanticModel) =>
+            IsStringMethodInvocation("Concat", argument, semanticModel) ||
+            (
+                argument.IsKind(SyntaxKind.AddExpression) &&
+                argument is BinaryExpressionSyntax concatenation &&
+                !IsConcatenationOfConstants(concatenation, semanticModel)
+            );
 
-        private static bool AllConstants(BinaryExpressionSyntax binaryExpression, SemanticModel semanticModel)
+        private static bool IsFormat(ExpressionSyntax argument, SemanticModel semanticModel) =>
+            IsStringMethodInvocation("Format", argument, semanticModel);
+
+        private static bool IsStringMethodInvocation(string methodName, ExpressionSyntax expression, SemanticModel semanticModel) =>
+            expression is InvocationExpressionSyntax invocation &&
+            semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
+            methodSymbol.IsInType(KnownType.System_String) &&
+            methodName.Contains(methodSymbol.Name) &&
+            !AllConstants(invocation, semanticModel);
+
+        private static bool IsConcatenationOfConstants(BinaryExpressionSyntax binaryExpression, SemanticModel semanticModel)
         {
             System.Diagnostics.Debug.Assert(binaryExpression.IsKind(SyntaxKind.AddExpression));
-            if (!(semanticModel.GetTypeInfo(binaryExpression).Type is ITypeSymbol concantenationType) ||
-                !concantenationType.IsAny(KnownType.System_String))
+            if ((semanticModel.GetTypeInfo(binaryExpression).Type is ITypeSymbol concantenationType) &&
+                binaryExpression.Right.IsConstant(semanticModel))
             {
-                return false;
-            }
-            if (!binaryExpression.Right.IsConstant(semanticModel))
-            {
-                return false;
-            }
-            var nestedLeft = binaryExpression.Left;
-            var nestedBinary = nestedLeft as BinaryExpressionSyntax;
-            while (nestedBinary != null)
-            {
-                if (!nestedBinary.IsKind(SyntaxKind.AddExpression) && !nestedBinary.IsConstant(semanticModel))
+                var nestedLeft = binaryExpression.Left;
+                var nestedBinary = nestedLeft as BinaryExpressionSyntax;
+                while (nestedBinary != null)
                 {
-                    return false;
-                }
+                    if (!nestedBinary.IsKind(SyntaxKind.AddExpression) && !nestedBinary.IsConstant(semanticModel))
+                    {
+                        return false;
+                    }
 
-                nestedLeft = nestedBinary.Left;
-                nestedBinary = nestedLeft as BinaryExpressionSyntax;
+                    nestedLeft = nestedBinary.Left;
+                    nestedBinary = nestedLeft as BinaryExpressionSyntax;
+                }
+                return true;
             }
-            return true;
+            return false;
         }
 
-        private static bool AllConstants(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
-        {
-            foreach (var argument in invocation.ArgumentList.Arguments)
-            {
-                if (!argument.Expression.IsConstant(semanticModel))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
+        private static bool AllConstants(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+            invocation.ArgumentList.Arguments.All(a=>a.Expression.IsConstant(semanticModel));
 
     }
 }

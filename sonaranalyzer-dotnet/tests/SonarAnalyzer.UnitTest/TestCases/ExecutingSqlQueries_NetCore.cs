@@ -47,6 +47,7 @@ namespace Tests.Diagnostics
             context.Database.ExecuteSqlCommand(string.Format(query, parameters)); // Noncompliant
             context.Database.ExecuteSqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", parameters)); // Noncompliant
             context.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={parameters[0]}"); // Compliant, the FormattableString is transformed into a parametrized query.
+            context.Database.ExecuteSqlCommand("SELECT * FROM mytable WHERE mycol=" + parameters[0]); // Noncompliant
             var formatted = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", parameters);
             context.Database.ExecuteSqlCommand(formatted); // FN
 
@@ -54,6 +55,7 @@ namespace Tests.Diagnostics
             context.Database.ExecuteSqlCommandAsync(string.Format(query, parameters)); // Noncompliant
             context.Database.ExecuteSqlCommandAsync(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", parameters)); // Noncompliant
             context.Database.ExecuteSqlCommandAsync($"SELECT * FROM mytable WHERE mycol={parameters[0]}"); // Compliant, the FormattableString is transformed into a parametrized query.
+            context.Database.ExecuteSqlCommandAsync("SELECT * FROM mytable WHERE mycol=" + parameters[0]); // Noncompliant
             var concatenated = string.Concat(query, parameters);
             context.Database.ExecuteSqlCommandAsync(concatenated); // FN
 
@@ -61,6 +63,7 @@ namespace Tests.Diagnostics
             context.Query<User>().FromSql(string.Format(query, parameters)); // Noncompliant
             context.Query<User>().FromSql(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", parameters)); // Noncompliant
             context.Query<User>().FromSql($"SELECT * FROM mytable WHERE mycol={parameters[0]}"); // Compliant, the FormattableString is transformed into a parametrized query.
+            context.Query<User>().FromSql("SELECT * FROM mytable WHERE mycol=" + parameters[0]); // Noncompliant
             var interpolated = $"SELECT * FROM mytable WHERE mycol={parameters[0]}";
             context.Query<User>().FromSql(interpolated); // FN
         }

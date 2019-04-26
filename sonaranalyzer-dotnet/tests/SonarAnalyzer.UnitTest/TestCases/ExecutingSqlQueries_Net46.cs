@@ -41,6 +41,8 @@ namespace Tests.Diagnostics
         {
             var command = new SqlCommand(string.Concat(query, param)); // Noncompliant {{Make sure that executing SQL queries is safe here.}}
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            command = new SqlCommand(query + param, connection); // Noncompliant
+            command = new SqlCommand("" + 1 + 2, connection); // Compliant
             command = new SqlCommand(string.Concat(query, param), connection); // Noncompliant
             command = new SqlCommand(string.Concat(query, param), connection, transaction); // Noncompliant
             command = new SqlCommand(string.Concat(query, param), connection, transaction, SqlCommandColumnEncryptionSetting.Enabled); // Noncompliant
