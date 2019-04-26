@@ -80,5 +80,13 @@ namespace SonarAnalyzer.Helpers
         }
 
         public abstract ElementAccessCondition ArgumentAtIndexEquals(int index, string value);
+
+        #region Syntax-level checking methods
+
+        public abstract ElementAccessCondition MatchSetter();
+
+        public abstract ElementAccessCondition MatchProperty(MemberDescriptor member);
+
+        #endregion
     }
 }

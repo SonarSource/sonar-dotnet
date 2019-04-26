@@ -157,6 +157,8 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Collections_ReadOnlyCollectionBase = new KnownType("System.Collections.ReadOnlyCollectionBase");
         internal static readonly KnownType System_Collections_SortedList = new KnownType("System.Collections.SortedList");
         internal static readonly KnownType System_Collections_Stack = new KnownType("System.Collections.Stack");
+        internal static readonly KnownType System_Collections_Specialized_NameObjectCollectionBase = new KnownType("System.Collections.Specialized.NameObjectCollectionBase");
+        internal static readonly KnownType System_Collections_Specialized_NameValueCollection = new KnownType("System.Collections.Specialized.NameValueCollection");
         internal static readonly KnownType System_ComponentModel_DefaultValueAttribute = new KnownType("System.ComponentModel.DefaultValueAttribute");
         internal static readonly KnownType System_ComponentModel_LocalizableAttribute = new KnownType("System.ComponentModel.LocalizableAttribute");
         internal static readonly KnownType System_ComponentModel_Composition_CreationPolicy = new KnownType("System.ComponentModel.Composition.CreationPolicy");

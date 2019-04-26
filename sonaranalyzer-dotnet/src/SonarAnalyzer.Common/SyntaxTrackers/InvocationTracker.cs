@@ -121,5 +121,11 @@ namespace SonarAnalyzer.Helpers
             (context) =>
                 context.MethodSymbol.Value != null &&
                 context.MethodSymbol.Value.IsExtern;
+
+        #region Syntax-level checking methods
+
+        public abstract InvocationCondition MatchProperty(MemberDescriptor member);
+
+        #endregion
     }
 }

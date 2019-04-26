@@ -22,6 +22,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -55,5 +56,29 @@ namespace SonarAnalyzer.Helpers
                     constantValue.Value is string constant &&
                     constant == value;
             };
+
+        #region Syntax-level checking methods
+
+        public override ElementAccessCondition MatchSetter() =>
+            (context) =>
+                ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
+
+        public override ElementAccessCondition MatchProperty(MemberDescriptor member)
+        {
+            return (context) => {
+                var accessSyntax = context.Expression as InvocationExpressionSyntax;
+                if (accessSyntax.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression))
+                {
+                    var memberAccessSyntax = accessSyntax.Expression as MemberAccessExpressionSyntax;
+                    var propertyName = memberAccessSyntax.Name.Identifier.ValueText;
+                    var enclosingClassType = context.SemanticModel.GetTypeInfo(memberAccessSyntax.Expression);
+                    return enclosingClassType.Type != null && member.IsMatch(propertyName, enclosingClassType.Type, false);
+                }
+                return false;
+            };
+
+        }
+
+        #endregion
     }
 }

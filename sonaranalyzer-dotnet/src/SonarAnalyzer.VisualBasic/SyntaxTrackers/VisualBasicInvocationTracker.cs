@@ -71,5 +71,29 @@ namespace SonarAnalyzer.Helpers
 
         protected override string GetMethodName(SyntaxNode invocationExpression) =>
             ((InvocationExpressionSyntax)invocationExpression).Expression.GetIdentifier()?.Identifier.ValueText;
+
+        #region Syntax-level checking methods
+
+        public override InvocationCondition MatchProperty(MemberDescriptor member)
+        {
+            return (context) => {
+                var accessSyntax = context.Invocation as InvocationExpressionSyntax;
+                if (accessSyntax.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression))
+                {
+                    var methodMemberAccessSyntax = accessSyntax.Expression as MemberAccessExpressionSyntax;
+                    if (methodMemberAccessSyntax.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression))
+                    {
+                        var memberAccessSyntax = methodMemberAccessSyntax.Expression as MemberAccessExpressionSyntax;
+                        var propertyName = memberAccessSyntax.Name.Identifier.ValueText;
+                        var enclosingClassType = context.SemanticModel.GetTypeInfo(memberAccessSyntax.Expression);
+                        return enclosingClassType.Type != null && member.IsMatch(propertyName, enclosingClassType.Type, false);
+                    }
+                }
+                return false;
+            };
+
+        }
+
+        #endregion
     }
 }
