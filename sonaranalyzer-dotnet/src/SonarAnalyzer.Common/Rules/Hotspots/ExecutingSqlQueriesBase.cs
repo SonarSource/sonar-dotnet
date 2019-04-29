@@ -18,12 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ExecutingSqlQueriesBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class ExecutingSqlQueriesBase<TSyntaxKind, TExpressionSyntax> : SonarDiagnosticAnalyzer
         where TSyntaxKind : struct
+        where TExpressionSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S2077";
         protected const string MessageFormat = "Make sure that executing SQL queries is safe here.";
@@ -85,21 +87,57 @@ namespace SonarAnalyzer.Rules
 
         protected abstract InvocationCondition OnlyParameterIsConstantOrInterpolatedString();
 
-        protected abstract InvocationCondition ArgumentAtIndexIsConcat(int index);
+        protected abstract TExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index);
 
-        protected abstract InvocationCondition ArgumentAtIndexIsFormat(int index);
+        protected abstract TExpressionSyntax GetSetValue(PropertyAccessContext context);
 
-        protected abstract PropertyAccessCondition SetterIsConcat();
+        protected abstract TExpressionSyntax GetFirstArgument(ObjectCreationContext context);
 
-        protected abstract PropertyAccessCondition SetterIsFormat();
+        protected abstract bool IsConcat(TExpressionSyntax argument, SemanticModel semanticModel);
 
-        protected abstract PropertyAccessCondition SetterIsInterpolation();
+        protected abstract bool IsFormat(TExpressionSyntax argument, SemanticModel semanticModel);
 
-        protected abstract ObjectCreationCondition FirstArgumentIsConcat();
+        protected abstract bool IsInterpolated(TExpressionSyntax argument);
 
-        protected abstract ObjectCreationCondition FirstArgumentIsFormat();
+        private InvocationCondition ArgumentAtIndexIsConcat(int index) =>
+            (context) =>
+                GetArgumentAtIndex(context, index) is TExpressionSyntax argument &&
+                IsConcat(argument, context.SemanticModel);
 
-        protected abstract ObjectCreationCondition FirstArgumentIsInterpolation();
+        private InvocationCondition ArgumentAtIndexIsFormat(int index) =>
+            (context) =>
+                GetArgumentAtIndex(context, index) is TExpressionSyntax argument &&
+                IsFormat(argument, context.SemanticModel);
+
+        private PropertyAccessCondition SetterIsConcat() =>
+            (context) =>
+                GetSetValue(context) is TExpressionSyntax argument &&
+                IsConcat(argument, context.SemanticModel);
+
+        private PropertyAccessCondition SetterIsFormat() =>
+            (context) =>
+                GetSetValue(context) is TExpressionSyntax argument &&
+                IsFormat(argument, context.SemanticModel);
+
+        private PropertyAccessCondition SetterIsInterpolation() =>
+            (context) =>
+                GetSetValue(context) is TExpressionSyntax argument &&
+                IsInterpolated(argument);
+
+        private ObjectCreationCondition FirstArgumentIsConcat() =>
+            (context) =>
+                GetFirstArgument(context) is TExpressionSyntax firstArg &&
+                IsConcat(firstArg, context.SemanticModel);
+
+        private ObjectCreationCondition FirstArgumentIsFormat() =>
+            (context) =>
+                GetFirstArgument(context) is TExpressionSyntax firstArg &&
+                IsFormat(firstArg, context.SemanticModel);
+
+        private ObjectCreationCondition FirstArgumentIsInterpolation() =>
+            (context) =>
+                GetFirstArgument(context) is TExpressionSyntax firstArg &&
+                IsInterpolated(firstArg);
 
     }
 }

@@ -252,6 +252,11 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
+        public static bool IsMethodInvocation(this InvocationExpressionSyntax expression, KnownType type, string methodName, SemanticModel semanticModel) =>
+            semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol methodSymbol &&
+            methodSymbol.IsInType(type) &&
+            methodName.Contains(methodSymbol.Name);
+
         public static Location FindIdentifierLocation(this BaseMethodDeclarationSyntax methodDeclaration) =>
             GetIdentifierOrDefault(methodDeclaration)?.GetLocation();
 

@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind>
+    public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, ExpressionSyntax>
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
@@ -69,52 +69,22 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     onlyArgument.IsConstant(context.SemanticModel);
             };
 
-        protected override InvocationCondition ArgumentAtIndexIsConcat(int index) =>
-            (context) =>
-                GetArgumentAtIndex(context, index) is ExpressionSyntax argument &&
-                IsConcat(argument, context.SemanticModel);
-
-        protected override InvocationCondition ArgumentAtIndexIsFormat(int index) =>
-            (context) =>
-                GetArgumentAtIndex(context, index) is ExpressionSyntax argument &&
-                IsFormat(argument, context.SemanticModel);
-
-        protected override PropertyAccessCondition SetterIsConcat() =>
-            (context) =>
-                GetSetValue(context) is ExpressionSyntax argument &&
-                IsConcat(argument, context.SemanticModel);
-
-        protected override PropertyAccessCondition SetterIsFormat() =>
-            (context) =>
-                GetSetValue(context) is ExpressionSyntax argument &&
-                IsFormat(argument, context.SemanticModel);
-
-        protected override PropertyAccessCondition SetterIsInterpolation() =>
-            (context) =>
-                GetSetValue(context) is ExpressionSyntax argument &&
-                argument.IsAnyKind(SyntaxKind.InterpolatedStringExpression);
-
-        protected override ObjectCreationCondition FirstArgumentIsConcat() =>
-            (context) =>
-                GetFirstArgument(context) is ExpressionSyntax firstArg &&
-                IsConcat(firstArg, context.SemanticModel);
-
-        protected override ObjectCreationCondition FirstArgumentIsFormat() =>
-            (context) =>
-                GetFirstArgument(context) is ExpressionSyntax firstArg &&
-                IsFormat(firstArg, context.SemanticModel);
-
-        protected override ObjectCreationCondition FirstArgumentIsInterpolation() =>
-            (context) =>
-                GetFirstArgument(context) is ExpressionSyntax firstArg &&
-                firstArg.IsAnyKind(SyntaxKind.InterpolatedStringExpression);
-
-        private static ExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index) =>
+        protected override ExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index) =>
             context.Invocation is InvocationExpressionSyntax invocation
-                ? Get(invocation.ArgumentList, index)
+                ? invocation.ArgumentList.Get(index)
                 : null;
 
-        private static bool IsConcat(ExpressionSyntax argument, SemanticModel semanticModel) =>
+        protected override ExpressionSyntax GetSetValue(PropertyAccessContext context) =>
+            context.Expression is MemberAccessExpressionSyntax setter && setter.IsLeftSideOfAssignment()
+                ? ((AssignmentStatementSyntax)setter.GetSelfOrTopParenthesizedExpression().Parent).Right.RemoveParentheses()
+                : null;
+
+        protected override ExpressionSyntax GetFirstArgument(ObjectCreationContext context) =>
+            context.Expression is ObjectCreationExpressionSyntax objectCreation
+                ? objectCreation.ArgumentList.Get(0)
+                : null;
+
+        protected override bool IsConcat(ExpressionSyntax argument, SemanticModel semanticModel) =>
             IsStringMethodInvocation("Concat", argument, semanticModel) ||
             (
                 argument.IsKind(SyntaxKind.ConcatenateExpression) &&
@@ -122,15 +92,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 !IsConcatenationOfConstants(concatenation, semanticModel)
             );
 
-        private static bool IsFormat(ExpressionSyntax argument, SemanticModel semanticModel) =>
+        protected override bool IsFormat(ExpressionSyntax argument, SemanticModel semanticModel) =>
             IsStringMethodInvocation("Format", argument, semanticModel);
+
+        protected override bool IsInterpolated(ExpressionSyntax argument) =>
+            argument.IsAnyKind(SyntaxKind.InterpolatedStringExpression);
 
         private static bool IsStringMethodInvocation(string methodName, ExpressionSyntax expression, SemanticModel semanticModel)
         {
             return expression is InvocationExpressionSyntax invocation &&
-                semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
-                methodSymbol.IsInType(KnownType.System_String) &&
-                methodName.Contains(methodSymbol.Name) &&
+                invocation.IsMethodInvocation(KnownType.System_String, methodName, semanticModel) &&
                 !AllConstants();
 
             bool AllConstants() =>
@@ -159,21 +130,5 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
             return false;
         }
-
-        private static ExpressionSyntax GetSetValue(PropertyAccessContext context) =>
-            context.Expression is MemberAccessExpressionSyntax setter && setter.IsLeftSideOfAssignment()
-                ? ((AssignmentStatementSyntax)setter.GetSelfOrTopParenthesizedExpression().Parent).Right.RemoveParentheses()
-                : null;
-
-        private static ExpressionSyntax GetFirstArgument(ObjectCreationContext context) =>
-            context.Expression is ObjectCreationExpressionSyntax objectCreation
-                ? Get(objectCreation.ArgumentList, 0)
-                : null;
-        private static ExpressionSyntax Get(ArgumentListSyntax argumentList, int index) =>
-            argumentList != null && argumentList.Arguments.Count > index
-                ? argumentList.Arguments[index].GetExpression().RemoveParentheses()
-                : null;
-
-
     }
 }
