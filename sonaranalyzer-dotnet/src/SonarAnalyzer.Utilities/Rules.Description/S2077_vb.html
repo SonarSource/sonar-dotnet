@@ -31,9 +31,10 @@ RawSqlString is considered susceptible. The goal is to guide security code revie
 </ul>
 <h2>Ask Yourself Whether</h2>
 <ul>
-  <li> the SQL query contains any non sanitized input from a user or another untrusted source. </li>
+  <li> the SQL query is built using concatenation or string formatting. </li>
+  <li> some of the values are coming from an untrusted source and are not sanitized. </li>
 </ul>
-<p>You are at risk if you answered yes to this question.</p>
+<p>You may be at risk if you answered yes to this question.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <ul>
   <li> Avoid building queries manually using concatenation or formatting. If you do it anyway, do not include user input in this building process.
@@ -45,7 +46,7 @@ RawSqlString is considered susceptible. The goal is to guide security code revie
   <li> <a href="https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet">Sanitize</a> every unsafe input. </li>
 </ul>
 <p>You can also reduce the impact of an attack by using a database account with low privileges.</p>
-<h2>Questionable Code Example</h2>
+<h2>Sensitive Code Example</h2>
 <pre>
 Public Sub SqlCommands(ByVal connection As SqlConnection, ByVal query As String)
     Dim command As SqlCommand
@@ -63,14 +64,19 @@ Public Sub Foo(ByVal context As DbContext, ByVal query As String)
     context.Query(Of User)().FromSql(query) ' Questionable
 End Sub
 </pre>
+<h2>Exceptions</h2>
+<p>No issue will be raised in the following cases:</p>
+<ul>
+  <li> The SQL query is a hard coded string. </li>
+</ul>
 <h2>See</h2>
 <ul>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A1-Injection">OWASP Top 10 2017 Category A1</a> - Injection </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/89">MITRE, CWE-89</a> - Improper Neutralization of Special Elements used in an SQL Command </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/564.html">MITRE, CWE-564</a> - SQL Injection: Hibernate </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/20.html">MITRE, CWE-20</a> - Improper Input Validation </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/943.html">MITRE, CWE-943</a> - Improper Neutralization of Special Elements in Data Query Logic
   </li>
-  <li> OWASP Top 10 2017 Category A1 - Injection </li>
   <li> <a href="https://www.securecoding.cert.org/confluence/x/PgIRAg">CERT, IDS00-J.</a> - Prevent SQL injection </li>
   <li> <a href="https://www.sans.org/top25-software-errors/#cat1">SANS Top 25</a> - Insecure Interaction Between Components </li>
   <li> Derived from FindSecBugs rules <a href="http://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_JPA">Potential SQL/JPQL Injection

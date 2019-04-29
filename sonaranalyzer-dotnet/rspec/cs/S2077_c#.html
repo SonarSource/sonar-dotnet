@@ -1,15 +1,15 @@
-<p>Executing SQL queries is security-sensitive. It has led in the past to the following vulnerabilities:</p>
+<p>Concatenating or formatting strings used as SQL queries is security-sensitive. It has led in the past to the following vulnerabilities:</p>
 <ul>
   <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-9019">CVE-2018-9019</a> </li>
   <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7318">CVE-2018-7318</a> </li>
   <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-5611">CVE-2017-5611</a> </li>
 </ul>
-<p><a href="https://www.owasp.org/index.php/SQL_Injection">SQL injection</a> is still one of the top 10 security vulnerabilities. Applications that
-execute SQL commands should sanitize any externally-provided values used in those commands. Failure to do so could allow an attacker to include input
-that changes the query so that unintended commands are executed, or sensitive data is exposed. Instead of trying to sanitize data by hand, SQL binding
-mechanisms should be used; they can be relied on to automatically perform a full sanitization.</p>
-<p>This rule checks a variety of methods which are susceptible to SQL injection if not used properly. Any SQL query built from a String or a
-RawSqlString is considered susceptible. The goal is to guide security code reviews.</p>
+<p>SQL queries often need to use a hardcoded SQL string with a dynamic parameter coming from a user request. Concatenating or formatting a string to
+add those parameters to the request is a bad practice as it can result in an <a href="https://www.owasp.org/index.php/SQL_Injection">SQL
+injection</a>. The safe way to add parameters to a SQL query is to use SQL binding mechanisms.</p>
+<p>Note that this rule does not detect SQL injections. See Vulnerability rule {rule:csharpsquid:S3649} to detect actual SQL injections.</p>
+<p>This rule flags the execution of SQL queries which are built using concatenation or formatting of strings, even if there is no injection. The goal
+is to guide security code reviews and to prevent a common bad practice.</p>
 <p>The following specific method signatures are tested:</p>
 <ul>
   <li> <code>System.Data.SqlClient.SqlCommand.SqlCommand(string, ...)</code> </li>
@@ -29,11 +29,18 @@ RawSqlString is considered susceptible. The goal is to guide security code revie
   <li> <code>System.Data.SqlServerCe.SqlCeCommand.CommandText.set</code> </li>
   <li> <code>System.Data.OracleClient.OracleCommand.CommandText.set</code> </li>
 </ul>
+<p>The following formatting and concatenation methods will raise an issue:</p>
+<ul>
+  <li> <code>String.Concat</code> </li>
+  <li> <code>String.Format</code> </li>
+  <li> <code>FormattableString</code>, with some exceptions (see the Exceptions section) </li>
+</ul>
 <h2>Ask Yourself Whether</h2>
 <ul>
-  <li> the SQL query contains any non sanitized input from a user or another untrusted source. </li>
+  <li> the SQL query is built using concatenation or string formatting. </li>
+  <li> some of the values are coming from an untrusted source and are not sanitized. </li>
 </ul>
-<p>You are at risk if you answered yes to this question.</p>
+<p>You may be at risk if you answered yes to this question.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <ul>
   <li> Avoid building queries manually using concatenation or formatting. If you do it anyway, do not include user input in this building process.
@@ -45,23 +52,29 @@ RawSqlString is considered susceptible. The goal is to guide security code revie
   <li> <a href="https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet">Sanitize</a> every unsafe input. </li>
 </ul>
 <p>You can also reduce the impact of an attack by using a database account with low privileges.</p>
-<h2>Questionable Code Example</h2>
+<h2>Sensitive Code Example</h2>
 <pre>
-public void Foo(DbContext context, string query)
+public void Foo(DbContext context, string query, string param)
 {
-    context.Database.ExecuteSqlCommand(query); // Questionable
-    context.Query&lt;User&gt;().FromSql(query); // Questionable
+    string sensitiveQuery = string.Concat(query, param);
+    context.Database.ExecuteSqlCommand(sensitiveQuery); // Sensitive
+    context.Query&lt;User&gt;().FromSql(sensitiveQuery); // Sensitive
+
+    context.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={value}", param); // Sensitive, the FormattableString is evaluated and converted to RawSqlString
+    string query = $"SELECT * FROM mytable WHERE mycol={param}";
+    context.Database.ExecuteSqlCommand(query); // Sensitive, the FormattableString has already been evaluated, it won't be converted to a parametrized query.
 }
 
-public void Bar(SqlConnection connection, string query)
+public void Bar(SqlConnection connection, string param)
 {
     SqlCommand command;
-    command = new SqlCommand(query); // Questionable
+    string sensitiveQuery = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);
+    command = new SqlCommand(sensitiveQuery); // Sensitive
 
-    command.CommandText = query; // Questionable
+    command.CommandText = sensitiveQuery; // Sensitive
 
     SqlDataAdapter adapter;
-    adapter = new SqlDataAdapter(query, connection); // Questionable
+    adapter = new SqlDataAdapter(sensitiveQuery, connection); // Sensitive
 }
 </pre>
 <h2>Exceptions</h2>
@@ -77,26 +90,26 @@ public void Foo(DbContext context, string query, string value, params object[] p
 {
     context.Database.ExecuteSqlCommand("SELECT * FROM mytable"); // No issue raised. The query is hard-coded. Thus no injection is possible.
 
-
     context.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={value}"); // No issue raised. The FormattableString is transformed into a parametrized query.
-    // However these need to be reviewed
-    context.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={value}", parameters); // Questionable, the FormattableString is evaluated and converted to RawSqlString
-    string query = $"SELECT * FROM mytable WHERE mycol={value}"
-    context.Database.ExecuteSqlCommand(query); // Questionable, the FormattableString has already been evaluated, it won't be converted to a parametrized query.
 }
 </pre>
 <h2>See</h2>
 <ul>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A1-Injection">OWASP Top 10 2017 Category A1</a> - Injection </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/89">MITRE, CWE-89</a> - Improper Neutralization of Special Elements used in an SQL Command </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/564.html">MITRE, CWE-564</a> - SQL Injection: Hibernate </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/20.html">MITRE, CWE-20</a> - Improper Input Validation </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/943.html">MITRE, CWE-943</a> - Improper Neutralization of Special Elements in Data Query Logic
   </li>
-  <li> OWASP Top 10 2017 Category A1 - Injection </li>
   <li> <a href="https://www.securecoding.cert.org/confluence/x/PgIRAg">CERT, IDS00-J.</a> - Prevent SQL injection </li>
   <li> <a href="https://www.sans.org/top25-software-errors/#cat1">SANS Top 25</a> - Insecure Interaction Between Components </li>
   <li> Derived from FindSecBugs rules <a href="http://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_JPA">Potential SQL/JPQL Injection
   (JPA)</a>, <a href="http://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_JDO">Potential SQL/JDOQL Injection (JDO)</a>, <a
   href="http://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_HIBERNATE">Potential SQL/HQL Injection (Hibernate)</a> </li>
+</ul>
+<h3>See also</h3>
+<ul>
+  <li> {rule:csharpsquid:S3649} - SQL queries should not be vulnerable to injection attacks (available in SonarCloud and SonarQube Developer Edition)
+  </li>
 </ul>
 
