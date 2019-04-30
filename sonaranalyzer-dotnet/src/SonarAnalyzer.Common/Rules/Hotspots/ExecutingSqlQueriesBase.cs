@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
@@ -36,8 +37,18 @@ namespace SonarAnalyzer.Rules
 
         protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
 
+        internal ImmutableArray<KnownType> ScalarTypes { get; private set; }
+
         protected override void Initialize(SonarAnalysisContext context)
         {
+            var builder = ImmutableArray.CreateBuilder<KnownType>();
+            builder.AddRange(KnownType.IntegralNumbers);
+            builder.AddRange(KnownType.NonIntegralNumbers);
+            builder.Add(KnownType.System_Boolean);
+            builder.Add(KnownType.System_Guid);
+            builder.Add(KnownType.System_DateTime);
+            ScalarTypes = builder.ToImmutableArray();
+
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSql")),
@@ -98,6 +109,10 @@ namespace SonarAnalyzer.Rules
         protected abstract bool IsFormat(TExpressionSyntax argument, SemanticModel semanticModel);
 
         protected abstract bool IsInterpolated(TExpressionSyntax argument);
+
+        protected bool IsScalar(SyntaxNode node, SemanticModel semanticModel) =>
+            semanticModel.GetTypeInfo(node).Type is ITypeSymbol type &&
+            type.IsAny(ScalarTypes);
 
         private InvocationCondition ArgumentAtIndexIsConcat(int index) =>
             (context) =>

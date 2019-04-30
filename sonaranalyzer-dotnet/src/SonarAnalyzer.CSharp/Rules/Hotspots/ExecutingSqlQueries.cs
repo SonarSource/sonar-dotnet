@@ -97,14 +97,14 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override bool IsInterpolated(ExpressionSyntax argument) =>
             argument.IsAnyKind(SyntaxKind.InterpolatedStringExpression);
 
-        private static bool IsStringMethodInvocation(string methodName, ExpressionSyntax expression, SemanticModel semanticModel)
+        private bool IsStringMethodInvocation(string methodName, ExpressionSyntax expression, SemanticModel semanticModel)
         {
             return expression is InvocationExpressionSyntax invocation &&
                 invocation.IsMethodInvocation(KnownType.System_String, methodName, semanticModel) &&
-                !AllConstants();
+                !AllConstantsOrScalars();
 
-            bool AllConstants() =>
-                invocation.ArgumentList.Arguments.All(a => a.Expression.IsConstant(semanticModel));
+            bool AllConstantsOrScalars() =>
+                invocation.ArgumentList.Arguments.All(a => a.Expression.IsConstant(semanticModel) || IsScalar(a.Expression, semanticModel));
         }
 
         private static bool IsConcatenationOfConstants(BinaryExpressionSyntax binaryExpression, SemanticModel semanticModel)

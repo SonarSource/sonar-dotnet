@@ -40,6 +40,11 @@ Namespace Tests.Diagnostics
             command = New SqlCommand(String.Concat(query, param), connection) ' Noncompliant
             command = New SqlCommand(String.Concat(query, param), connection, transaction) ' Noncompliant
             command = New SqlCommand(String.Concat(query, param), connection, transaction, SqlCommandColumnEncryptionSetting.Enabled) ' Noncompliant
+            Dim x As Integer = 1
+            Dim g As Guid = Guid.NewGuid()
+            Dim dateTime As DateTime = DateTime.Now
+            command = New SqlCommand(String.Format("INSERT INTO Users (name) VALUES (""{0}"", ""{2}"", ""{3}"")", x, g, dateTime), connection, transaction, SqlCommandColumnEncryptionSetting.Enabled) ' Compliant, only scalars
+            command = New SqlCommand(String.Format("INSERT INTO Users (name) VALUES (""{0}"", ""{2}"", ""{3}"")", x, param, dateTime), connection, transaction, SqlCommandColumnEncryptionSetting.Enabled) ' Noncompliant
             command.CommandText = String.Concat(query, param) ' Noncompliant
 '           ^^^^^^^^^^^^^^^^^^^
             Dim adapter = New SqlDataAdapter(String.Concat(query, param), "") ' Noncompliant
@@ -86,6 +91,7 @@ Namespace Tests.Diagnostics
             command.CommandText = String.Concat(query, param) ' Noncompliant
             command.CommandText = "SELECT * FROM mytable WHERE mycol=" & param ' Noncompliant
             Dim adapter = New OdbcDataAdapter(String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param), "") ' Noncompliant
+            Dim adapter1 = New odbcdataadapter(sTRing.foRmAt("INSERT INTO Users (name) VALUES (""{0}"")", param), "") ' Noncompliant
         End Sub
 
         Public Sub OracleCommands(ByVal connection As OracleConnection, ByVal transaction As OracleTransaction, ByVal query As String)
@@ -110,6 +116,7 @@ Namespace Tests.Diagnostics
         Public Sub NonCompliant_OracleCommands(ByVal connection As OracleConnection, ByVal transaction As OracleTransaction, ByVal query As String, ByVal param As String)
             Dim command = New OracleCommand("SELECT * FROM mytable WHERE mycol=" & param) ' Noncompliant
             command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
+            command.CommandText = string.forMAT("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
             Dim x = New OracleDataAdapter(String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param), "") ' Noncompliant
         End Sub
 

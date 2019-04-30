@@ -61,6 +61,13 @@ namespace Tests.Diagnostics
             command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param), connection); // Noncompliant
             command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param), connection, transaction); // Noncompliant
             command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param), connection, transaction, SqlCommandColumnEncryptionSetting.Enabled); // Noncompliant
+            int x = 1;
+            Guid g = Guid.NewGuid();
+            DateTime dateTime = DateTime.Now;
+            command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\", \"{2}\", \"{3}\")", x, g, dateTime),
+                connection, transaction, SqlCommandColumnEncryptionSetting.Enabled); // Compliant, only constants
+            command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\", \"{2}\", \"{3}\")", x, param, dateTime), // Noncompliant
+                connection, transaction, SqlCommandColumnEncryptionSetting.Enabled);
 
             command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param); // Noncompliant
             string text = command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param); // Noncompliant
