@@ -80,7 +80,6 @@ public void Bar(SqlConnection connection, string param)
 <h2>Exceptions</h2>
 <p>No issue will be raised in the following cases:</p>
 <ul>
-  <li> The SQL query is a hard coded string. </li>
   <li> When the SQL query is a FormattableString provided <strong>directly</strong> to <code>ExecuteSqlCommand</code>,
   <code>ExecuteSqlCommandAsync</code> or <code>FromSql</code>. In this case the FormattableString is automatically converted to a parametrized query.
   </li>
