@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
@@ -52,9 +53,7 @@ namespace SonarAnalyzer.Rules
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSql")),
-                Conditions.Or(ArgumentAtIndexIsConcat(0), ArgumentAtIndexIsFormat(0)),
-                Conditions.ExceptWhen(
-                    OnlyParameterIsConstantOrInterpolatedString()),
+                Conditions.Or(ArgumentAtIndexIsConcat(0), ArgumentAtIndexIsFormat(0), ArgumentIsInterpolatedWithParameters(0)),
                 Conditions.ExceptWhen(
                     InvocationTracker.ArgumentAtIndexIsConstant(0)));
 
@@ -64,9 +63,10 @@ namespace SonarAnalyzer.Rules
                     new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommand")),
                 Conditions.Or(
                     Conditions.Or(ArgumentAtIndexIsConcat(0), ArgumentAtIndexIsFormat(0)),
-                    Conditions.Or(ArgumentAtIndexIsConcat(1), ArgumentAtIndexIsFormat(1))),
+                    Conditions.Or(ArgumentAtIndexIsConcat(1), ArgumentAtIndexIsFormat(1)),
+                    Conditions.Or(ArgumentIsInterpolatedWithParameters(0), ArgumentIsInterpolatedWithParameters(1))),
                 Conditions.ExceptWhen(
-                    OnlyParameterIsConstantOrInterpolatedString()));
+                    InvocationTracker.ArgumentAtIndexIsConstant(0)));
 
             PropertyAccessTracker.Track(context,
                 PropertyAccessTracker.MatchProperty(
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules
                     new MemberDescriptor(KnownType.System_Data_SqlClient_SqlCommand, "CommandText"),
                     new MemberDescriptor(KnownType.System_Data_SqlServerCe_SqlCeCommand, "CommandText")),
                 PropertyAccessTracker.MatchSetter(),
-                Conditions.Or(SetterIsConcat(), Conditions.Or(SetterIsFormat(), SetterIsInterpolation())),
+                Conditions.Or(SetterIsConcat(), SetterIsFormat(), SetterIsInterpolation()),
                 Conditions.ExceptWhen(
                     PropertyAccessTracker.AssignedValueIsConstant()));
 
@@ -91,12 +91,12 @@ namespace SonarAnalyzer.Rules
                     KnownType.System_Data_OracleClient_OracleCommand,
                     KnownType.System_Data_OracleClient_OracleDataAdapter),
                 ObjectCreationTracker.ArgumentAtIndexIs(0, KnownType.System_String),
-                Conditions.Or(FirstArgumentIsConcat(), Conditions.Or(FirstArgumentIsFormat(), FirstArgumentIsInterpolation())),
+                Conditions.Or(FirstArgumentIsConcat(), FirstArgumentIsFormat(), FirstArgumentIsInterpolation()),
                 Conditions.ExceptWhen(
                     ObjectCreationTracker.ArgumentAtIndexIsConst(0)));
         }
 
-        protected abstract InvocationCondition OnlyParameterIsConstantOrInterpolatedString();
+        protected abstract InvocationCondition ArgumentIsInterpolatedWithParameters(int index);
 
         protected abstract TExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index);
 

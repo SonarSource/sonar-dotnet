@@ -43,10 +43,20 @@ namespace SonarAnalyzer.Helpers
         public static PropertyAccessCondition Or(PropertyAccessCondition condition1, PropertyAccessCondition condition2) =>
             (value) => condition1(value) || condition2(value);
 
+        public static PropertyAccessCondition Or(PropertyAccessCondition condition1, PropertyAccessCondition condition2, PropertyAccessCondition condition3) =>
+            (value) => condition1(value) || condition2(value) || condition3(value);
+
         public static InvocationCondition Or(InvocationCondition condition1, InvocationCondition condition2) =>
             (value) => condition1(value) || condition2(value);
 
+        public static InvocationCondition Or(InvocationCondition condition1, InvocationCondition condition2, InvocationCondition condition3) =>
+            (value) => condition1(value) || condition2(value) || condition3(value);
+
         public static ObjectCreationCondition Or(ObjectCreationCondition condition1, ObjectCreationCondition condition2) =>
             (value) => condition1(value) || condition2(value);
+
+        public static ObjectCreationCondition Or(ObjectCreationCondition condition1, ObjectCreationCondition condition2, ObjectCreationCondition condition3) =>
+            (value) => condition1(value) || condition2(value) || condition3(value);
+
     }
 }

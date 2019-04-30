@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -53,20 +54,22 @@ namespace SonarAnalyzer.Rules.VisualBasic
             ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, rule);
         }
 
-        protected override InvocationCondition OnlyParameterIsConstantOrInterpolatedString() =>
+        protected override InvocationCondition ArgumentIsInterpolatedWithParameters(int index) =>
             (context) =>
             {
                 var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
                 if (argumentList == null ||
-                    argumentList.Arguments.Count != 1)
+                    // interpolation parameters should be after the interpolation arguments
+                    argumentList.Arguments.Count < index + 2 ||
+                    !(argumentList.Arguments[index].GetExpression().RemoveParentheses() is ExpressionSyntax interpolationArgument) ||
+                    !interpolationArgument.IsAnyKind(SyntaxKind.InterpolatedStringExpression) ||
+                    interpolationArgument.IsConstant(context.SemanticModel))
                 {
                     return false;
                 }
 
-                var onlyArgument = argumentList.Arguments[0].GetExpression().RemoveParentheses();
-
-                return onlyArgument.IsAnyKind(SyntaxKind.InterpolatedStringExpression) ||
-                    onlyArgument.IsConstant(context.SemanticModel);
+                var otherParameters = argumentList.Arguments.Skip(index + 1).ToList();
+                return !AllConstantsOrScalars(otherParameters, context.SemanticModel);
             };
 
         protected override ExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index) =>
@@ -102,11 +105,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             return expression is InvocationExpressionSyntax invocation &&
                 invocation.IsMethodInvocation(KnownType.System_String, methodName, semanticModel) &&
-                !AllConstantsOrScalars();
-
-            bool AllConstantsOrScalars() =>
-                invocation.ArgumentList.Arguments.All(a => a.GetExpression().IsConstant(semanticModel) || IsScalar(a.GetExpression(), semanticModel));
+                !AllConstantsOrScalars(invocation.ArgumentList.Arguments.ToList(), semanticModel);
         }
+
+        private bool AllConstantsOrScalars(List<ArgumentSyntax> arguments, SemanticModel semanticModel) =>
+            arguments.All(a => a.GetExpression().IsConstant(semanticModel) || IsScalar(a.GetExpression(), semanticModel));
 
         private static bool IsConcatenationOfConstants(BinaryExpressionSyntax binaryExpression, SemanticModel semanticModel)
         {

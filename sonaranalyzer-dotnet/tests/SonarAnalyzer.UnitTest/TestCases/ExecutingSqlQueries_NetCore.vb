@@ -13,7 +13,7 @@ Namespace Tests.Diagnostics
             context.Database.ExecuteSqlCommand("" & "") ' Compliant, constants are safe
             context.Database.ExecuteSqlCommand(query) ' Compliant, not concat or format
             context.Database.ExecuteSqlCommand("" & query) ' Noncompliant
-            context.Database.ExecuteSqlCommand($"", parameters) ' Compliant, not concat or format
+            context.Database.ExecuteSqlCommand($"", parameters) ' Noncompliant, interpolated string with argument transformed in RawQuery
             context.Database.ExecuteSqlCommand(query, parameters) ' Compliant, not concat or format
             context.Database.ExecuteSqlCommand("" & query, parameters) ' Noncompliant
 
@@ -23,7 +23,7 @@ Namespace Tests.Diagnostics
             context.Database.ExecuteSqlCommandAsync("" & "") ' Compliant, constants are safe
             context.Database.ExecuteSqlCommandAsync(query) ' Compliant, not concat or format
             context.Database.ExecuteSqlCommandAsync("" & query) ' Noncompliant
-            context.Database.ExecuteSqlCommandAsync($"", parameters) ' Compliant, not concat or format
+            context.Database.ExecuteSqlCommandAsync($"", parameters) ' Noncompliant, interpolated string with argument transformed in RawQuery
             context.Database.ExecuteSqlCommandAsync(query, parameters) ' Compliant, not concat or format
             context.Database.ExecuteSqlCommandAsync("" & query, parameters) ' Noncompliant
 
@@ -32,7 +32,7 @@ Namespace Tests.Diagnostics
             context.Query(Of User)().FromSql(ConstQuery) ' Compliant, constants are safe
             context.Query(Of User)().FromSql(query) ' Compliant, not concat or format
             context.Query(Of User)().FromSql("" & "") ' Compliant, constants are safe
-            context.Query(Of User)().FromSql($"", parameters) ' Compliant, not concat or format
+            context.Query(Of User)().FromSql($"", parameters) ' Noncompliant, interpolated string with argument transformed in RawQuery
             context.Query(Of User)().FromSql("", parameters) ' Compliant, the parameters are sanitized
             context.Query(Of User)().FromSql(query, parameters) ' Compliant, not concat or format
             context.Query(Of User)().FromSql("" & query, parameters) ' Noncompliant
