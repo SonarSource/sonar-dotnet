@@ -22,8 +22,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.Common", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.Utilities", "src\SonarAnalyzer.Utilities\SonarAnalyzer.Utilities.csproj", "{4C1BB6CE-645F-400B-B491-AF7BB40E5C01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.UnitTest", "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj", "{4AC7D054-B645-46D7-9671-D666BCE0C745}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.RuleDescriptorGenerator", "src\SonarAnalyzer.RuleDescriptorGenerator\SonarAnalyzer.RuleDescriptorGenerator.csproj", "{E4D5FF22-C1A4-4CAD-B068-E47817F25848}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.RuleDocGenerator.Web", "src\SonarAnalyzer.RuleDocGenerator.Web\SonarAnalyzer.RuleDocGenerator.Web.csproj", "{98EF48F7-28D7-44CA-8C7F-6042EA4898E1}"
@@ -31,6 +29,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.CSharp", "src\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj", "{39CCD086-A7F8-42A0-B402-3C9BD9EB4825}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.VisualBasic", "src\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.csproj", "{01DF3CB0-2213-42F3-BB8E-0C3BC330DE7A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.UnitTest", "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj", "{84BE8B6C-C253-4998-9923-4CD6131C1904}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,10 +50,6 @@ Global
 		{4C1BB6CE-645F-400B-B491-AF7BB40E5C01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C1BB6CE-645F-400B-B491-AF7BB40E5C01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C1BB6CE-645F-400B-B491-AF7BB40E5C01}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4AC7D054-B645-46D7-9671-D666BCE0C745}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4AC7D054-B645-46D7-9671-D666BCE0C745}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4AC7D054-B645-46D7-9671-D666BCE0C745}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4AC7D054-B645-46D7-9671-D666BCE0C745}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E4D5FF22-C1A4-4CAD-B068-E47817F25848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E4D5FF22-C1A4-4CAD-B068-E47817F25848}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4D5FF22-C1A4-4CAD-B068-E47817F25848}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -70,14 +66,18 @@ Global
 		{01DF3CB0-2213-42F3-BB8E-0C3BC330DE7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01DF3CB0-2213-42F3-BB8E-0C3BC330DE7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01DF3CB0-2213-42F3-BB8E-0C3BC330DE7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84BE8B6C-C253-4998-9923-4CD6131C1904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84BE8B6C-C253-4998-9923-4CD6131C1904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84BE8B6C-C253-4998-9923-4CD6131C1904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84BE8B6C-C253-4998-9923-4CD6131C1904}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{4AC7D054-B645-46D7-9671-D666BCE0C745} = {B7233F78-E142-4882-B084-7C83BE472109}
 		{E4D5FF22-C1A4-4CAD-B068-E47817F25848} = {F51A8C2A-A0F5-4282-956F-549D05860396}
 		{98EF48F7-28D7-44CA-8C7F-6042EA4898E1} = {F51A8C2A-A0F5-4282-956F-549D05860396}
+		{84BE8B6C-C253-4998-9923-4CD6131C1904} = {B7233F78-E142-4882-B084-7C83BE472109}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4259CA71-C565-42DD-8D58-F59819A11065}
