@@ -4,58 +4,6 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
-"region":  {
-"startLine":  20,
-"startColumn":  58,
-"endLine":  20,
-"endColumn":  100
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
-"region":  {
-"startLine":  204,
-"startColumn":  17,
-"endLine":  204,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\SettingsModule.cs",
-"region":  {
-"startLine":  32,
-"startColumn":  43,
-"endLine":  32,
-"endColumn":  87
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\ModuleExtensions.cs",
-"region":  {
-"startLine":  20,
-"startColumn":  13,
-"endLine":  20,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
 "uri":  "sources\Nancy\src\Nancy\Extensions\StringExtensions.cs",
 "region":  {
 "startLine":  23,
@@ -69,155 +17,12 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpMultipartBoundary.cs",
-"region":  {
-"startLine":  66,
-"startColumn":  33,
-"endLine":  66,
-"endColumn":  106
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpMultipartBoundary.cs",
-"region":  {
-"startLine":  67,
-"startColumn":  37,
-"endLine":  67,
-"endColumn":  118
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
-"region":  {
-"startLine":  28,
-"startColumn":  54,
-"endLine":  28,
-"endColumn":  102
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
-"region":  {
-"startLine":  29,
-"startColumn":  57,
-"endLine":  29,
-"endColumn":  102
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Request.cs",
-"region":  {
-"startLine":  256,
-"startColumn":  28,
-"endLine":  256,
-"endColumn":  91
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
-"region":  {
-"startLine":  61,
-"startColumn":  20,
-"endLine":  61,
-"endColumn":  100
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRoutePatternMatcher.cs",
-"region":  {
-"startLine":  72,
-"startColumn":  17,
-"endLine":  72,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
 "region":  {
 "startLine":  14,
 "startColumn":  52,
 "endLine":  14,
 "endColumn":  101
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
-"region":  {
-"startLine":  76,
-"startColumn":  25,
-"endLine":  76,
-"endColumn":  132
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\GreedyRegExCaptureNode.cs",
-"region":  {
-"startLine":  79,
-"startColumn":  31,
-"endLine":  79,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\RegExNode.cs",
-"region":  {
-"startLine":  57,
-"startColumn":  31,
-"endLine":  57,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewFactory.cs",
-"region":  {
-"startLine":  163,
-"startColumn":  20,
-"endLine":  163,
-"endColumn":  79
 }
 }
 },
@@ -292,36 +97,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
 "region":  {
-"startLine":  58,
-"startColumn":  70,
-"endLine":  58,
-"endColumn":  159
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
-"region":  {
 "startLine":  63,
 "startColumn":  66,
 "endLine":  63,
 "endColumn":  214
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
-"region":  {
-"startLine":  68,
-"startColumn":  65,
-"endLine":  68,
-"endColumn":  139
 }
 }
 },
@@ -344,49 +123,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
 "region":  {
-"startLine":  78,
-"startColumn":  63,
-"endLine":  78,
-"endColumn":  140
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
-"region":  {
-"startLine":  83,
-"startColumn":  60,
-"endLine":  83,
-"endColumn":  128
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
-"region":  {
 "startLine":  88,
 "startColumn":  74,
 "endLine":  88,
 "endColumn":  172
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
-"region":  {
-"startLine":  93,
-"startColumn":  63,
-"endLine":  93,
-"endColumn":  119
 }
 }
 }
