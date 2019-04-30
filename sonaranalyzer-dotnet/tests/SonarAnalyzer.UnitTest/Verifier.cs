@@ -69,11 +69,11 @@ namespace SonarAnalyzer.UnitTest
         internal static readonly MetadataReference SystemComponentModelComposition =
             MetadataReference.CreateFromFile(typeof(System.ComponentModel.Composition.PartCreationPolicyAttribute).Assembly.Location);
         internal static readonly MetadataReference XunitCoreAssembly =
-            MetadataReference.CreateFromFile(PackagesFolderRelativePath + @"xunit.extensibility.core.2.2.0\lib\netstandard1.1\xunit.core.dll");
-        internal static readonly MetadataReference XunitAssertAssembly =
-            MetadataReference.CreateFromFile(PackagesFolderRelativePath + @"xunit.assert.2.2.0\lib\netstandard1.1\xunit.assert.dll");
+            MetadataReference.CreateFromFile(typeof(Xunit.FactAttribute).Assembly.Location);
+        internal static readonly MetadataReference XunitAssertAssembly = 
+            MetadataReference.CreateFromFile(typeof(Xunit.Assert).Assembly.Location);
         internal static readonly MetadataReference NUnitFrameworkAssembly =
-            MetadataReference.CreateFromFile(PackagesFolderRelativePath + @"NUnit.2.6.4\lib\nunit.framework.dll");
+            MetadataReference.CreateFromFile(typeof(NUnit.Framework.TestAttribute).Assembly.Location);
         internal static readonly MetadataReference FluentAssertionsAssembly =
             MetadataReference.CreateFromFile(typeof(AssertionExtensions).Assembly.Location);
         internal static readonly MetadataReference FluentAssertionsCoreAssembly =
