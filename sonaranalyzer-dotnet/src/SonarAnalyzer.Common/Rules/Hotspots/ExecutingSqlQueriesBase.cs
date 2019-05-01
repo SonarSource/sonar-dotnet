@@ -41,7 +41,13 @@ namespace SonarAnalyzer.Rules
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSql")),
-                Conditions.Or(ArgumentAtIndexIsConcat(0), ArgumentAtIndexIsFormat(0), ArgumentIsInterpolatedWithParameters(0)),
+                Conditions.And(
+                    MethodHasRawSqlQueryParameter(),
+                    Conditions.Or(
+                        Conditions.Or(ArgumentAtIndexIsConcat(0), ArgumentAtIndexIsFormat(0), ArgumentAtIndexIsInterpolated(0)),
+                        Conditions.Or(ArgumentAtIndexIsConcat(1), ArgumentAtIndexIsFormat(1), ArgumentAtIndexIsInterpolated(1))
+                    )
+                ),
                 Conditions.ExceptWhen(
                     InvocationTracker.ArgumentAtIndexIsConstant(0)));
 
@@ -49,10 +55,13 @@ namespace SonarAnalyzer.Rules
                 InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommandAsync"),
                     new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommand")),
-                Conditions.Or(
-                    Conditions.Or(ArgumentAtIndexIsConcat(0), ArgumentAtIndexIsFormat(0)),
-                    Conditions.Or(ArgumentAtIndexIsConcat(1), ArgumentAtIndexIsFormat(1)),
-                    Conditions.Or(ArgumentIsInterpolatedWithParameters(0), ArgumentIsInterpolatedWithParameters(1))),
+                Conditions.And(
+                    MethodHasRawSqlQueryParameter(),
+                    Conditions.Or(
+                        Conditions.Or(ArgumentAtIndexIsConcat(0), ArgumentAtIndexIsFormat(0), ArgumentAtIndexIsInterpolated(0)),
+                        Conditions.Or(ArgumentAtIndexIsConcat(1), ArgumentAtIndexIsFormat(1), ArgumentAtIndexIsInterpolated(1))
+                    )
+                ),
                 Conditions.ExceptWhen(
                     InvocationTracker.ArgumentAtIndexIsConstant(0)));
 
@@ -84,7 +93,7 @@ namespace SonarAnalyzer.Rules
                     ObjectCreationTracker.ArgumentAtIndexIsConst(0)));
         }
 
-        protected abstract InvocationCondition ArgumentIsInterpolatedWithParameters(int index);
+        protected abstract TExpressionSyntax GetInvocationExpression(SyntaxNode expression);
 
         protected abstract TExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index);
 
@@ -97,6 +106,22 @@ namespace SonarAnalyzer.Rules
         protected abstract bool IsFormat(TExpressionSyntax argument, SemanticModel semanticModel);
 
         protected abstract bool IsInterpolated(TExpressionSyntax argument);
+
+        private InvocationCondition MethodHasRawSqlQueryParameter() =>
+            (context) =>
+            {
+                return GetInvocationExpression(context.Invocation) is TExpressionSyntax methodSyntax &&
+                    context.SemanticModel.GetSymbolInfo(methodSyntax).Symbol is IMethodSymbol methodSymbol &&
+                    (ParameterIsRawString(methodSymbol, 0) || ParameterIsRawString(methodSymbol, 1));
+
+                bool ParameterIsRawString(IMethodSymbol method, int index) =>
+                    method.Parameters.Length > index && method.Parameters[index].IsType(KnownType.Microsoft_EntityFrameworkCore_RawSqlString);
+            };
+
+        private InvocationCondition ArgumentAtIndexIsInterpolated(int index) =>
+            (context) =>
+                GetArgumentAtIndex(context, index) is TExpressionSyntax argument &&
+                IsInterpolated(argument);
 
         private InvocationCondition ArgumentAtIndexIsConcat(int index) =>
             (context) =>

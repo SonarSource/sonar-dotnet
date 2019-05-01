@@ -53,24 +53,10 @@ namespace SonarAnalyzer.Rules.CSharp
             ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, rule);
         }
 
-        protected override InvocationCondition ArgumentIsInterpolatedWithParameters(int index) =>
-            (context) =>
-            {
-                var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
-                if (argumentList == null ||
-                    // interpolation parameters should be after the interpolation arguments
-                    argumentList.Arguments.Count < index + 2 ||
-                    !(argumentList.Arguments[index].Expression.RemoveParentheses() is ExpressionSyntax interpolationArgument) ||
-                    !interpolationArgument.IsAnyKind(SyntaxKind.InterpolatedStringExpression) ||
-                    interpolationArgument.IsConstant(context.SemanticModel))
-                {
-                    return false;
-                }
-
-                var otherParameters = argumentList.Arguments.Skip(index + 1).ToList();
-                return !AllConstants(otherParameters, context.SemanticModel);
-            };
-
+        protected override ExpressionSyntax GetInvocationExpression(SyntaxNode expression) =>
+            expression is InvocationExpressionSyntax invocation
+                ? invocation.Expression
+                : null;
 
         protected override ExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index) =>
             context.Invocation is InvocationExpressionSyntax invocation

@@ -21,6 +21,9 @@ Namespace Tests.Diagnostics
             context.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={query}", x) ' Noncompliant
             context.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={query}") ' Compliant, FormattableString is sanitized
 
+            RelationalDatabaseFacadeExtensions.ExecuteSqlCommand(context.Database, query) ' Compliant
+            RelationalDatabaseFacadeExtensions.ExecuteSqlCommand(context.Database, $"SELECT * FROM mytable WHERE mycol={query} AND col2={0}", x) ' Noncompliant
+
             context.Database.ExecuteSqlCommandAsync($"") ' Compliant, FormattableString is sanitized
             context.Database.ExecuteSqlCommandAsync("") ' Compliant, constants are safe
             context.Database.ExecuteSqlCommandAsync(ConstQuery) ' Compliant, constants are safe
@@ -32,6 +35,7 @@ Namespace Tests.Diagnostics
             context.Database.ExecuteSqlCommandAsync("" & query, parameters) ' Noncompliant
             context.Database.ExecuteSqlCommandAsync($"SELECT * FROM mytable WHERE mycol={query}") ' Compliant, FormattableString is sanitized
             context.Database.ExecuteSqlCommandAsync($"SELECT * FROM mytable WHERE mycol={query}", x) ' Noncompliant
+            RelationalDatabaseFacadeExtensions.ExecuteSqlCommandAsync(context.Database, "" & query, parameters) ' Noncompliant
 
             context.Query(Of User)().FromSql($"") ' Compliant, FormattableString is sanitized
             context.Query(Of User)().FromSql("") ' Compliant, constants are safe
@@ -44,6 +48,8 @@ Namespace Tests.Diagnostics
             context.Query(Of User)().FromSql("" & query, parameters) ' Noncompliant
             context.Query(Of User)().FromSql($"SELECT * FROM mytable WHERE mycol={query}") ' Compliant, FormattableString is sanitized
             context.Query(Of User)().FromSql($"SELECT * FROM mytable WHERE mycol={query}", x) ' Noncompliant
+            RelationalQueryableExtensions.FromSql(context.Query(Of User)(), "" & query, parameters) ' Noncompliant
+
         End Sub
 
         Public Sub ConcatAndFormat(ByVal context As DbContext, ByVal query As String, ParamArray parameters As Object())
