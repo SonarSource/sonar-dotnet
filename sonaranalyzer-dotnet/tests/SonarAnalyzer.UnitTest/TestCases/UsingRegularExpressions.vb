@@ -15,8 +15,11 @@ Namespace Tests.Diagnostics
 '               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             r = New Regex("{abc}+{a}") ' Noncompliant
             r = New Regex("+++") ' Noncompliant
+            r = New Regex("\\+\\+\\+") ' Noncompliant FP (escaped special characters)
             r = New Regex("{{{") ' Noncompliant
+            r = New Regex("\\{\\{\\{") ' Noncompliant FP (escaped special characters)
             r = New Regex("***") ' Noncompliant
+            r = New Regex("\\*\\*\\*") ' Noncompliant FP (escaped special characters)
             r = New Regex("(a+)+s", RegexOptions.Compiled) ' Noncompliant
             r = New Regex("(a+)+s", RegexOptions.Compiled, TimeSpan.Zero) ' Noncompliant
             r = New Regex("{ab}*{ab}+{cd}+foo*") ' Noncompliant
@@ -43,6 +46,7 @@ Namespace Tests.Diagnostics
             Dim x2 = New RE("a+b+") ' Noncompliant
             System.Text.RegularExpressions.Regex.IsMatch("", "{}{}") ' Noncompliant
             RE.IsMatch("", "a**") ' Noncompliant
+            RE.IsMatch("", "a\\**") ' Noncompliant FP (escaped special character)
 
             ' Non-static methods are compliant
             r.IsMatch("a+a+")

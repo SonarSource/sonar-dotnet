@@ -19,8 +19,11 @@ namespace Tests.Diagnostics
             r = new Regex("{abc}+{a}"); // Noncompliant {{Make sure that using a regular expression is safe here.}}
 //              ^^^^^^^^^^^^^^^^^^^^^^
             r = new Regex("+++"); // Noncompliant
+            r = new Regex(@"\+\+\+"); // Noncompliant FP (escaped special characters)
             r = new Regex("{{{"); // Noncompliant
+            r = new Regex(@"\{\{\{"); // Noncompliant FP (escaped special characters)
             r = new Regex("***"); // Noncompliant
+            r = new Regex(@"\*\*\*"); // Noncompliant FP (escaped special characters)
             r = new Regex("(a+)+s", RegexOptions.Compiled); // Noncompliant
             r = new Regex("(a+)+s", RegexOptions.Compiled, TimeSpan.Zero); // Noncompliant
             r = new Regex("{ab}*{ab}+{cd}+foo*"); // Noncompliant
@@ -44,6 +47,7 @@ namespace Tests.Diagnostics
             Regex.Replace("", "ab*cd*", s, RegexOptions.Compiled); // Noncompliant
             Regex.Replace("", "ab*cd*", match => "", RegexOptions.Compiled, TimeSpan.Zero); // Noncompliant
             Regex.Replace("", "ab*cd*", "", RegexOptions.Compiled, TimeSpan.Zero); // Noncompliant
+            Regex.Replace("", "ab\\*cd\\*", "", RegexOptions.Compiled, TimeSpan.Zero); // Noncompliant FP (escaped special characters)
 
             Regex.Split("", "a+a+"); // Noncompliant
             Regex.Split("", "a+a+", RegexOptions.Compiled); // Noncompliant
