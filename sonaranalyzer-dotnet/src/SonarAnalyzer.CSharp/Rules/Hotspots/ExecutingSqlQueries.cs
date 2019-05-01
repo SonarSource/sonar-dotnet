@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 var otherParameters = argumentList.Arguments.Skip(index + 1).ToList();
-                return !AllConstantsOrScalars(otherParameters, context.SemanticModel);
+                return !AllConstants(otherParameters, context.SemanticModel);
             };
 
 
@@ -105,11 +105,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return expression is InvocationExpressionSyntax invocation &&
                 invocation.IsMethodInvocation(KnownType.System_String, methodName, semanticModel) &&
-                !AllConstantsOrScalars(invocation.ArgumentList.Arguments.ToList(), semanticModel);
+                !AllConstants(invocation.ArgumentList.Arguments.ToList(), semanticModel);
         }
 
-        private bool AllConstantsOrScalars(List<ArgumentSyntax> arguments, SemanticModel semanticModel) =>
-            arguments.All(a => a.Expression.IsConstant(semanticModel) || IsScalar(a.Expression, semanticModel));
+        private static bool AllConstants(List<ArgumentSyntax> arguments, SemanticModel semanticModel) =>
+            arguments.All(a => a.Expression.IsConstant(semanticModel));
 
         private static bool IsConcatenationOfConstants(BinaryExpressionSyntax binaryExpression, SemanticModel semanticModel)
         {

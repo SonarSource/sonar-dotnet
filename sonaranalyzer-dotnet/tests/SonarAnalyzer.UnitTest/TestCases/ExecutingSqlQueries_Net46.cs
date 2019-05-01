@@ -64,8 +64,8 @@ namespace Tests.Diagnostics
             int x = 1;
             Guid g = Guid.NewGuid();
             DateTime dateTime = DateTime.Now;
-            command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\", \"{2}\", \"{3}\")", x, g, dateTime),
-                connection, transaction, SqlCommandColumnEncryptionSetting.Enabled); // Compliant, only constants
+            command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\", \"{2}\", \"{3}\")", x, g, dateTime), // Noncompliant - scalars can be dangerous and lead to expensive queries
+                connection, transaction, SqlCommandColumnEncryptionSetting.Enabled);
             command = new SqlCommand(string.Format("INSERT INTO Users (name) VALUES (\"{0}\", \"{2}\", \"{3}\")", x, param, dateTime), // Noncompliant
                 connection, transaction, SqlCommandColumnEncryptionSetting.Enabled);
 

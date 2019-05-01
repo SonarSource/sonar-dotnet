@@ -43,7 +43,7 @@ Namespace Tests.Diagnostics
             Dim x As Integer = 1
             Dim g As Guid = Guid.NewGuid()
             Dim dateTime As DateTime = DateTime.Now
-            command = New SqlCommand(String.Format("INSERT INTO Users (name) VALUES (""{0}"", ""{2}"", ""{3}"")", x, g, dateTime), connection, transaction, SqlCommandColumnEncryptionSetting.Enabled) ' Compliant, only scalars
+            command = New SqlCommand(String.Format("INSERT INTO Users (name) VALUES (""{0}"", ""{2}"", ""{3}"")", x, g, dateTime), connection, transaction, SqlCommandColumnEncryptionSetting.Enabled) ' Noncompliant - scalars can be dangerous and lead to expensive queries
             command = New SqlCommand(String.Format("INSERT INTO Users (name) VALUES (""{0}"", ""{2}"", ""{3}"")", x, param, dateTime), connection, transaction, SqlCommandColumnEncryptionSetting.Enabled) ' Noncompliant
             command.CommandText = String.Concat(query, param) ' Noncompliant
 '           ^^^^^^^^^^^^^^^^^^^

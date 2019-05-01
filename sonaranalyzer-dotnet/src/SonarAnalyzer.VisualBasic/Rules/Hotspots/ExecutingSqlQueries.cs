@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 }
 
                 var otherParameters = argumentList.Arguments.Skip(index + 1).ToList();
-                return !AllConstantsOrScalars(otherParameters, context.SemanticModel);
+                return !AllConstants(otherParameters, context.SemanticModel);
             };
 
         protected override ExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index) =>
@@ -105,11 +105,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             return expression is InvocationExpressionSyntax invocation &&
                 invocation.IsMethodInvocation(KnownType.System_String, methodName, semanticModel) &&
-                !AllConstantsOrScalars(invocation.ArgumentList.Arguments.ToList(), semanticModel);
+                !AllConstants(invocation.ArgumentList.Arguments.ToList(), semanticModel);
         }
 
-        private bool AllConstantsOrScalars(List<ArgumentSyntax> arguments, SemanticModel semanticModel) =>
-            arguments.All(a => a.GetExpression().IsConstant(semanticModel) || IsScalar(a.GetExpression(), semanticModel));
+        private static bool AllConstants(List<ArgumentSyntax> arguments, SemanticModel semanticModel) =>
+            arguments.All(a => a.GetExpression().IsConstant(semanticModel));
 
         private static bool IsConcatenationOfConstants(BinaryExpressionSyntax binaryExpression, SemanticModel semanticModel)
         {

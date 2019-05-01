@@ -21,7 +21,7 @@ namespace Tests.Diagnostics
             context.Database.ExecuteSqlCommand("" + query, parameters); // Noncompliant
 
             context.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={query}", parameters[0]); // Noncompliant, the FormattableString is evaluated and converted to RawSqlString
-            context.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={query}{query}", x, guid); // Compliant, scalar values are passed
+            context.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={query}{query}", x, guid); // Noncompliant
             context.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={query}"); // Compliant, FormattableString is sanitized
 
             context.Database.ExecuteSqlCommandAsync($""); // Compliant, FormattableString is sanitized
