@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Helpers
     public class VisualBasicFieldAccessTracker : FieldAccessTracker<SyntaxKind>
     {
         public VisualBasicFieldAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
-            : base(analyzerConfiguration, rule)
+            : base(analyzerConfiguration, rule, caseInsensitiveComparison: true)
         {
         }
 

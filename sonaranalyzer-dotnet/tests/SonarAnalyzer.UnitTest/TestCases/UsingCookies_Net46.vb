@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.Collections.Specialized
 Imports System.Web
 
 Namespace Tests.Diagnostics
@@ -14,19 +15,30 @@ Namespace Tests.Diagnostics
         Private Sub CtorSetsValue()
             Dim cookie As HttpCookie
             cookie = New HttpCookie("c") ' Compliant, value is not set
-            cookie = New HttpCookie("c", "") ' Noncompliant {{Make sure that this cookie is used safely.}}
+            cookie = New HttpCookie("c", "") ' Noncompliant {{Make sure that this cookie is written safely.}}
         End Sub
 
         Private Sub Value_Vaues_Write()
             Dim c = New HttpCookie("c")
 
+            c.VALUE = "" ' Noncompliant
+            c.value = "" ' Noncompliant
             c.Value = "" ' Noncompliant
 '           ^^^^^^^
             c("key") = "" ' Noncompliant
 '           ^^^^^^^^
             c.Values("") = "" ' Noncompliant
             c.Values.Add("key", "value") ' Noncompliant
-'           ^^^^^^^^
+'           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            c.VALUES.ADD("key", "value") ' Noncompliant
+            c.values.add("key", "value") ' Noncompliant
+            c.values.ADD("key", "value") ' Noncompliant
+
+
+            ' operations on generic NameValueCollection objects do not raise any issue
+            Dim nvc = New NameValueCollection From {{"a", "1"}, {"b", "2"}}
+            nvc("a") = "2"
+            nvc.Add("c", "2")
 
             ' setting HttpCookie.Value on fields
             field1.Value = "value" ' Noncompliant
@@ -43,13 +55,13 @@ Namespace Tests.Diagnostics
 
         Private Sub Value_Values_Read(ByVal cookie As HttpCookie)
             Dim value As String
-            value = cookie.Value ' Noncompliant
-            value = cookie("") ' Noncompliant
-            value = cookie.Values("") ' Noncompliant
-            value = cookie.Values("") ' Noncompliant
+            value = cookie.Value ' Compliant
+            value = cookie("") ' Compliant
+            value = cookie.Values("") ' Compliant
+            value = cookie.Values("") ' Compliant
 
-            If cookie.Value <> "" Then ' Noncompliant
-                Console.Write(cookie.Value) ' Noncompliant
+            If cookie.Value <> "" Then ' Compliant
+                Console.Write(cookie.Value) ' Compliant
             End If
         End Sub
 

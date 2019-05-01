@@ -322,6 +322,43 @@ End Namespace
             DoCheckMatch_InterfaceMethods(snippet);
         }
 
+        [TestMethod]
+        public void CheckMatch_CaseInsensitivity()
+        {
+            var code = @"
+Namespace Test
+    NotInheritable Class Class1
+        Implements System.IDisposable
+
+        Public Sub Test()
+            Dispose()
+        End Sub
+
+        Public Sub Dispose() Implements System.IDisposable.Dispose
+            ' no-op
+        End Sub
+    End Class
+End Namespace
+";
+            var snippet = new SnippetCompiler(code, false, AnalyzerLanguage.VisualBasic);
+            var dispose = new MemberDescriptor(KnownType.System_IDisposable, "Dispose");
+            var callToDispose = CreateContextForMethod("Class1.Dispose", snippet);
+
+            var result = MemberDescriptor.MatchesAny("Dispose", callToDispose.MethodSymbol, true, false, dispose);
+            result.Should().Be(true);
+            result = MemberDescriptor.MatchesAny("dispose", callToDispose.MethodSymbol, true, false, dispose);
+            result.Should().Be(false);
+            result = MemberDescriptor.MatchesAny("DISPOSE", callToDispose.MethodSymbol, true, false, dispose);
+            result.Should().Be(false);
+
+            result = MemberDescriptor.MatchesAny("Dispose", callToDispose.MethodSymbol, true, true, dispose);
+            result.Should().Be(true);
+            result = MemberDescriptor.MatchesAny("dispose", callToDispose.MethodSymbol, true, true, dispose);
+            result.Should().Be(true);
+            result = MemberDescriptor.MatchesAny("DISPOSE", callToDispose.MethodSymbol, true, true, dispose);
+            result.Should().Be(true);
+        }
+
         private static InvocationContext CreateContextForMethod(string typeAndMethodName, SnippetCompiler snippet)
         {
             var nameParts = typeAndMethodName.Split('.');
@@ -364,7 +401,7 @@ End Namespace
             SnippetCompiler snippet, params MemberDescriptor[] targetMethodSignatures)
         {
             var result = MemberDescriptor.MatchesAny(invocationContext.MethodName,
-                invocationContext.MethodSymbol, checkDerived, targetMethodSignatures);
+                invocationContext.MethodSymbol, checkDerived, false, targetMethodSignatures);
 
             result.Should().Be(expectedOutcome);
         }

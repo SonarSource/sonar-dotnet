@@ -30,9 +30,12 @@ namespace SonarAnalyzer.Helpers
     public abstract class PropertyAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind>
         where TSyntaxKind : struct
     {
-        protected PropertyAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
+        private bool CaseInsensitiveComparison { get; }
+
+        protected PropertyAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule, bool caseInsensitiveComparison = false)
             : base(analyzerConfiguration, rule)
         {
+            this.CaseInsensitiveComparison = caseInsensitiveComparison;
         }
 
         protected abstract bool IsIdentifierWithinMemberAccess(SyntaxNode expression);
@@ -85,7 +88,7 @@ namespace SonarAnalyzer.Helpers
 
         public PropertyAccessCondition MatchProperty(params MemberDescriptor[] properties) =>
             (context) =>
-                MemberDescriptor.MatchesAny(context.PropertyName, context.PropertySymbol, false, properties);
+                MemberDescriptor.MatchesAny(context.PropertyName, context.PropertySymbol, false, CaseInsensitiveComparison, properties);
 
         public abstract PropertyAccessCondition MatchGetter();
 

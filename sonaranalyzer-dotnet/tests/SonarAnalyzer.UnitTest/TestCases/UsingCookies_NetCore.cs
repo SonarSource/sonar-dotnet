@@ -12,7 +12,7 @@ namespace Tests.Diagnostics
             // Response headers
             response.Headers.Add("Set-Cookie", ""); // Noncompliant
             response.Headers["Set-Cookie"] = ""; // Noncompliant
-            value = response.Headers["Set-Cookie"]; // Noncompliant
+            value = response.Headers["Set-Cookie"]; // Compliant
 
             // Not the Set-Cookie header
             response.Headers.Add("something", "");
@@ -23,7 +23,7 @@ namespace Tests.Diagnostics
             var responseHeaders = response.Headers;
             responseHeaders.Add("Set-Cookie", ""); // Noncompliant
             responseHeaders["Set-Cookie"] = ""; // Noncompliant
-            value = responseHeaders["Set-Cookie"]; // Noncompliant
+            value = responseHeaders["Set-Cookie"]; // Compliant
 
             responseHeaders.Remove("Set-Cookie"); // Compliant
             responseHeaders.Remove(""); // Compliant
@@ -47,7 +47,7 @@ namespace Tests.Diagnostics
             // Request headers
             request.Headers.Add("Set-Cookie", ""); // Noncompliant
             request.Headers["Set-Cookie"] = value; // Noncompliant
-            value = request.Headers["Set-Cookie"]; // Noncompliant
+            value = request.Headers["Set-Cookie"]; // Compliant
 
             // Not the Set-Cookie header
             request.Headers.Add("something", "");
@@ -58,19 +58,19 @@ namespace Tests.Diagnostics
             var requestHeaders = request.Headers;
             requestHeaders.Add("Set-Cookie", ""); // Noncompliant
             requestHeaders["Set-Cookie"] = value; // Noncompliant
-            value = requestHeaders["Set-Cookie"]; // Noncompliant
+            value = requestHeaders["Set-Cookie"]; // Compliant
 
             requestHeaders.Remove("Set-Cookie"); // Compliant
             requestHeaders.Remove(""); // Compliant
 
             // Request cookies as property
-            value = request.Cookies[""]; // Noncompliant
-            request.Cookies.TryGetValue("", out value); // Noncompliant
+            value = request.Cookies[""]; // Compliant
+            request.Cookies.TryGetValue("", out value); // Compliant
 
             // Request cookies as variable
             var requestCookies = request.Cookies;
-            value = requestCookies[""]; // Noncompliant
-            requestCookies.TryGetValue("", out value); // Noncompliant
+            value = requestCookies[""]; // Compliant
+            requestCookies.TryGetValue("", out value); // Compliant
         }
     }
 }

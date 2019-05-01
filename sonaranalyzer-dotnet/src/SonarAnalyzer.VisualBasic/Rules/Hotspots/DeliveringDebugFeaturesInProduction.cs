@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             var methodSymbol = new Lazy<IMethodSymbol>(() => semanticModel.GetSymbolInfo(condition).Symbol as IMethodSymbol);
 
-            return isDevelopmentMethod.IsMatch(methodName, methodSymbol, true);
+            return isDevelopmentMethod.IsMatch(methodName, methodSymbol, caseInsensitiveComparison: true);
         }
     }
 }

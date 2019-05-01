@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Helpers
     public class VisualBasicPropertyAccessTracker : PropertyAccessTracker<SyntaxKind>
     {
         public VisualBasicPropertyAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
-            : base(analyzerConfiguration, rule)
+            : base(analyzerConfiguration, rule, true)
         {
         }
 

@@ -70,5 +70,23 @@ namespace SonarAnalyzer.Helpers
                     constantValue.Value is string constant &&
                     constant == value;
             };
+
+        #region Syntax-level checking methods
+
+        public override InvocationCondition MatchProperty(MemberDescriptor member) =>
+            (context) =>
+                ((InvocationExpressionSyntax)context.Invocation).Expression is MemberAccessExpressionSyntax methodMemberAccess &&
+                methodMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression) &&
+                methodMemberAccess.Expression is MemberAccessExpressionSyntax propertyMemberAccess &&
+                propertyMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression) &&
+                propertyMemberAccess.Name is SimpleNameSyntax propertyMemberName &&
+                propertyMemberName.Identifier is SyntaxToken propertyMemberIdentifier &&
+                context.SemanticModel.GetTypeInfo(propertyMemberAccess.Expression) is TypeInfo enclosingClassType &&
+                propertyMemberIdentifier.ValueText != null &&
+                enclosingClassType.Type != null &&
+                member.IsMatch(propertyMemberIdentifier.ValueText, enclosingClassType.Type);
+
+        #endregion
+
     }
 }

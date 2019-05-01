@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S2255";
-        protected const string MessageFormat = "Make sure that this cookie is used safely.";
+        protected const string MessageFormat = "Make sure that this cookie is written safely.";
 
         protected PropertyAccessTracker<TSyntaxKind> PropertyAccessTracker { get; set; }
 
@@ -40,9 +40,8 @@ namespace SonarAnalyzer.Rules
         {
             PropertyAccessTracker.Track(context,
                 PropertyAccessTracker.MatchProperty(
-                    new MemberDescriptor(KnownType.System_Web_HttpRequestBase, "Cookies"),
-                    new MemberDescriptor(KnownType.System_Web_HttpCookie, "Value"),
-                    new MemberDescriptor(KnownType.System_Web_HttpCookie, "Values")));
+                    new MemberDescriptor(KnownType.System_Web_HttpCookie, "Value")),
+                PropertyAccessTracker.MatchSetter());
 
             ObjectCreationTracker.Track(context,
                 ObjectCreationTracker.MatchConstructor(KnownType.System_Web_HttpCookie),
@@ -50,20 +49,29 @@ namespace SonarAnalyzer.Rules
 
             ElementAccessTracker.Track(context,
                 ElementAccessTracker.MatchIndexerIn(KnownType.System_Web_HttpCookie),
-                ElementAccessTracker.ArgumentAtIndexIs(0, KnownType.System_String));
+                ElementAccessTracker.ArgumentAtIndexIs(0, KnownType.System_String),
+                ElementAccessTracker.MatchSetter());
 
             ElementAccessTracker.Track(context,
                 ElementAccessTracker.MatchIndexerIn(KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary),
-                ElementAccessTracker.ArgumentAtIndexEquals(0, "Set-Cookie"));
+                ElementAccessTracker.ArgumentAtIndexEquals(0, "Set-Cookie"),
+                ElementAccessTracker.MatchSetter());
 
             ElementAccessTracker.Track(context,
                 ElementAccessTracker.MatchIndexerIn(
                     KnownType.Microsoft_AspNetCore_Http_IRequestCookieCollection,
-                    KnownType.Microsoft_AspNetCore_Http_IResponseCookies));
+                    KnownType.Microsoft_AspNetCore_Http_IResponseCookies),
+                ElementAccessTracker.MatchSetter());
+
+            ElementAccessTracker.Track(context,
+                ElementAccessTracker.MatchIndexerIn(
+                    KnownType.System_Collections_Specialized_NameValueCollection),
+                ElementAccessTracker.MatchSetter(),
+                ElementAccessTracker.MatchProperty(
+                    new MemberDescriptor(KnownType.System_Web_HttpCookie, "Values")));
 
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(
-                    new MemberDescriptor(KnownType.Microsoft_AspNetCore_Http_IRequestCookieCollection, "TryGetValue"),
                     new MemberDescriptor(KnownType.Microsoft_AspNetCore_Http_IResponseCookies, "Append")));
 
             InvocationTracker.Track(context,
@@ -73,6 +81,13 @@ namespace SonarAnalyzer.Rules
                 InvocationTracker.ArgumentAtIndexEquals(0, "Set-Cookie"),
                 InvocationTracker.MethodHasParameters(2),
                 IsIHeadersDictionary());
+
+            InvocationTracker.Track(context,
+                InvocationTracker.MatchMethod(
+                    new MemberDescriptor(KnownType.System_Collections_Specialized_NameObjectCollectionBase, "Add")),
+                InvocationTracker.MatchProperty(
+                    new MemberDescriptor(KnownType.System_Web_HttpCookie, "Values")));
+
         }
 
         private static InvocationCondition IsIHeadersDictionary() =>

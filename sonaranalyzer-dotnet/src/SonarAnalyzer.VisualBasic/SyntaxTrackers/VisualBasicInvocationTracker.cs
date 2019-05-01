@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Helpers
     public class VisualBasicInvocationTracker : InvocationTracker<SyntaxKind>
     {
         public VisualBasicInvocationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
-            : base(analyzerConfiguration, rule)
+            : base(analyzerConfiguration, rule, caseInsensitiveComparison: true)
         {
         }
 
@@ -71,5 +71,22 @@ namespace SonarAnalyzer.Helpers
 
         protected override string GetMethodName(SyntaxNode invocationExpression) =>
             ((InvocationExpressionSyntax)invocationExpression).Expression.GetIdentifier()?.Identifier.ValueText;
+
+        #region Syntax-level checking methods
+
+        public override InvocationCondition MatchProperty(MemberDescriptor member) =>
+            (context) =>
+                ((InvocationExpressionSyntax)context.Invocation).Expression is MemberAccessExpressionSyntax methodMemberAccess &&
+                methodMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression) &&
+                methodMemberAccess.Expression is MemberAccessExpressionSyntax propertyMemberAccess &&
+                propertyMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression) &&
+                propertyMemberAccess.Name is SimpleNameSyntax propertyMemberName &&
+                propertyMemberName.Identifier is SyntaxToken propertyMemberIdentifier &&
+                context.SemanticModel.GetTypeInfo(propertyMemberAccess.Expression) is TypeInfo enclosingClassType &&
+                propertyMemberIdentifier.ValueText != null &&
+                enclosingClassType.Type != null &&
+                member.IsMatch(propertyMemberIdentifier.ValueText, enclosingClassType.Type, caseInsensitiveComparison: true);
+
+        #endregion
     }
 }
