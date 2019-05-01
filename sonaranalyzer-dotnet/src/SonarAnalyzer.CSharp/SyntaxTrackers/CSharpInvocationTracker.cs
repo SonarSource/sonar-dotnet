@@ -75,22 +75,17 @@ namespace SonarAnalyzer.Helpers
 
         public override InvocationCondition MatchProperty(MemberDescriptor member)
         {
-            return (context) => {
-                var accessSyntax = context.Invocation as InvocationExpressionSyntax;
-                if (accessSyntax.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression))
-                {
-                    var methodMemberAccessSyntax = accessSyntax.Expression as MemberAccessExpressionSyntax;
-                    if (methodMemberAccessSyntax.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression))
-                    {
-                        var memberAccessSyntax = methodMemberAccessSyntax.Expression as MemberAccessExpressionSyntax;
-                        var propertyName = memberAccessSyntax.Name.Identifier.ValueText;
-                        var enclosingClassType = context.SemanticModel.GetTypeInfo(memberAccessSyntax.Expression);
-                        return enclosingClassType.Type != null && member.IsMatch(propertyName, enclosingClassType.Type, false);
-                    }
-                }
-                return false;
-            };
-
+            return (context) =>
+                ((InvocationExpressionSyntax)context.Invocation).Expression is MemberAccessExpressionSyntax methodMemberAccess &&
+                methodMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression) &&
+                methodMemberAccess.Expression is MemberAccessExpressionSyntax propertyMemberAccess &&
+                propertyMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression) &&
+                propertyMemberAccess.Name is SimpleNameSyntax propertyMemberName &&
+                propertyMemberName.Identifier is SyntaxToken propertyMemberIdentifier &&
+                context.SemanticModel.GetTypeInfo(propertyMemberAccess.Expression) is TypeInfo enclosingClassType &&
+                propertyMemberIdentifier.ValueText != null &&
+                enclosingClassType.Type != null &&
+                member.IsMatch(propertyMemberIdentifier.ValueText, enclosingClassType.Type, false);
         }
 
         #endregion
