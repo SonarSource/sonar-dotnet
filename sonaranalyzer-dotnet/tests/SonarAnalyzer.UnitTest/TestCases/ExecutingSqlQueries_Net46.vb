@@ -61,8 +61,7 @@ Namespace Tests.Diagnostics
 
         Public Sub NonCompliant_Interpolation_SqlCommands(ByVal connection As SqlConnection, ByVal transaction As SqlTransaction, ByVal param As String)
             Dim command = New SqlCommand("SELECT * FROM mytable WHERE mycol=" & param) ' Noncompliant
-            ' FIXME VB.NET 12 does not support string interpolation, must update version used by test framework
-            ' command = New SqlCommand("SELECT * FROM mytable WHERE mycol={param}", connection, transaction, SqlCommandColumnEncryptionSetting.Enabled)
+            command = New SqlCommand($"SELECT * FROM mytable WHERE mycol={param}", connection, transaction, SqlCommandColumnEncryptionSetting.Enabled) ' Noncompliant
             command.CommandText = "SELECT * FROM mytable WHERE mycol=" & param ' Noncompliant
             Dim adapter = New SqlDataAdapter("SELECT * FROM mytable WHERE mycol=" & param, "") ' Noncompliant
         End Sub
@@ -90,6 +89,7 @@ Namespace Tests.Diagnostics
             Dim command = New OdbcCommand(String.Concat(query, param)) ' Noncompliant
             command.CommandText = String.Concat(query, param) ' Noncompliant
             command.CommandText = "SELECT * FROM mytable WHERE mycol=" & param ' Noncompliant
+            command.CommandText = $"SELECT * FROM mytable WHERE mycol={param}" ' Noncompliant
             Dim adapter = New OdbcDataAdapter(String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param), "") ' Noncompliant
             Dim adapter1 = New odbcdataadapter(sTRing.foRmAt("INSERT INTO Users (name) VALUES (""{0}"")", param), "") ' Noncompliant
         End Sub
@@ -118,6 +118,7 @@ Namespace Tests.Diagnostics
             command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
             command.CommandText = string.forMAT("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
             Dim x = New OracleDataAdapter(String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param), "") ' Noncompliant
+            x = New OracleDataAdapter($"INSERT INTO Users (name) VALUES (""{param}"")", "") ' Noncompliant
         End Sub
 
         Public Sub SqlServerCeCommands(ByVal connection As SqlCeConnection, ByVal transaction As SqlCeTransaction, ByVal query As String)

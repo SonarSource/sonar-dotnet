@@ -82,10 +82,12 @@ public void Bar(SqlConnection connection, string param)
 <ul>
   <li> When the SQL query is a FormattableString provided <strong>directly</strong> to <code>ExecuteSqlCommand</code>,
   <code>ExecuteSqlCommandAsync</code> or <code>FromSql</code>. In this case the FormattableString is automatically converted to a parametrized query.
-  </li>
+  This feature was added in Entity Framework Core 2.0. See <a
+  href="https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-2.0#string-interpolation-in-fromsql-and-executesqlcommand">Entity Framework's
+  documentation</a> for more information. </li>
 </ul>
 <pre>
-public void Foo(DbContext context, string query, string value, params object[] parameters)
+public void Foo(DbContext context, string value)
 {
     context.Database.ExecuteSqlCommand("SELECT * FROM mytable"); // No issue raised. The query is hard-coded. Thus no injection is possible.
 
