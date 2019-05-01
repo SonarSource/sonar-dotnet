@@ -21,6 +21,8 @@ Namespace Tests.Diagnostics
         Private Sub Value_Vaues_Write()
             Dim c = New HttpCookie("c")
 
+            c.VALUE = "" ' Noncompliant
+            c.value = "" ' Noncompliant
             c.Value = "" ' Noncompliant
 '           ^^^^^^^
             c("key") = "" ' Noncompliant
@@ -28,6 +30,10 @@ Namespace Tests.Diagnostics
             c.Values("") = "" ' Noncompliant
             c.Values.Add("key", "value") ' Noncompliant
 '           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            c.VALUES.ADD("key", "value") ' Noncompliant
+            c.values.add("key", "value") ' Noncompliant
+            c.values.ADD("key", "value") ' Noncompliant
+
 
             ' operations on generic NameValueCollection objects do not raise any issue
             Dim nvc = New NameValueCollection From {{"a", "1"}, {"b", "2"}}

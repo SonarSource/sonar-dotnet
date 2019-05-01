@@ -30,9 +30,12 @@ namespace SonarAnalyzer.Helpers
     public abstract class FieldAccessTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind>
         where TSyntaxKind : struct
     {
-        protected FieldAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
+        private bool CaseInsensitiveComparison { get; }
+
+        protected FieldAccessTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule, bool caseInsensitiveComparison = false)
             : base(analyzerConfiguration, rule)
         {
+            this.CaseInsensitiveComparison = caseInsensitiveComparison;
         }
 
         protected abstract bool IsIdentifierWithinMemberAccess(SyntaxNode expression);
@@ -83,7 +86,7 @@ namespace SonarAnalyzer.Helpers
 
         public FieldAccessCondition MatchField(params MemberDescriptor[] fields) =>
             (context) =>
-                MemberDescriptor.MatchesAny(context.FieldName, context.InvokedFieldSymbol, false, fields);
+                MemberDescriptor.MatchesAny(context.FieldName, context.InvokedFieldSymbol, false, CaseInsensitiveComparison, fields);
 
         #region Syntax-level standard conditions
 

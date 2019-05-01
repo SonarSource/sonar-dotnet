@@ -35,20 +35,19 @@ namespace SonarAnalyzer.Helpers
 
         internal string Name { get; }
 
-        public bool IsMatch(string memberName, ITypeSymbol containingType, bool checkOverriddenMethods) =>
-            memberName == Name &&
-            containingType.Is(ContainingType);
+        public bool IsMatch(string memberName, ITypeSymbol containingType, bool caseInsensitiveComparison) =>
+            containingType.Is(ContainingType) && HasSameName(memberName, Name, caseInsensitiveComparison);
 
-        public bool IsMatch<TSymbolType>(string memberName, Lazy<TSymbolType> memberSymbol, bool checkOverriddenMethods)
+        public bool IsMatch<TSymbolType>(string memberName, Lazy<TSymbolType> memberSymbol, bool caseInsensitiveComparison)
             where TSymbolType : class, ISymbol
         {
-            if (memberName != Name ||
+            if (!HasSameName(memberName, Name, caseInsensitiveComparison) ||
                 memberSymbol.Value == null)
             {
                 return false;
             }
 
-            if (HasSameContainingType(memberSymbol.Value, checkOverriddenMethods))
+            if (HasSameContainingType(memberSymbol.Value, true))
             {
                 return true;
             }
@@ -57,7 +56,7 @@ namespace SonarAnalyzer.Helpers
         }
 
         public static bool MatchesAny<TSymbolType>(string memberName, Lazy<TSymbolType> memberSymbol,
-            bool checkOverriddenMethods, params MemberDescriptor[] members)
+            bool checkOverriddenMethods, bool caseInsensitiveComparison, params MemberDescriptor[] members)
             where TSymbolType : class, ISymbol
         {
             if (memberName == null)
@@ -67,7 +66,7 @@ namespace SonarAnalyzer.Helpers
 
             foreach (var m in members)
             {
-                if (memberName != m.Name)
+                if (!HasSameName(memberName, m.Name, caseInsensitiveComparison))
                 {
                     continue;
                 }
@@ -85,6 +84,12 @@ namespace SonarAnalyzer.Helpers
 
             return false;
         }
+
+        private static bool HasSameName(string name1, string name2, bool caseInsensitiveComparison) =>
+            (name1 == name2 ||
+                (caseInsensitiveComparison &&
+                name1 != null &&
+                name1.Equals(name2, StringComparison.OrdinalIgnoreCase)));
 
         private bool HasSameContainingType<TSymbolType>(TSymbolType memberSymbol, bool checkOverriddenMethods)
             where TSymbolType : class, ISymbol

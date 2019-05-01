@@ -30,9 +30,12 @@ namespace SonarAnalyzer.Helpers
     public abstract class InvocationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind>
         where TSyntaxKind : struct
     {
-        protected InvocationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
+        private bool CaseInsensitiveComparison { get; }
+
+        protected InvocationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule, bool caseInsensitiveComparison = false)
             : base(analyzerConfiguration, rule)
         {
+            this.CaseInsensitiveComparison = caseInsensitiveComparison;
         }
 
         protected abstract string GetMethodName(SyntaxNode invocationExpression);
@@ -80,7 +83,7 @@ namespace SonarAnalyzer.Helpers
 
         public InvocationCondition MatchMethod(params MemberDescriptor[] methods) =>
             (context) =>
-                MemberDescriptor.MatchesAny(context.MethodName, context.MethodSymbol, true, methods);
+                MemberDescriptor.MatchesAny(context.MethodName, context.MethodSymbol, true, CaseInsensitiveComparison, methods);
 
         public InvocationCondition MethodNameIs(string methodName) =>
             (context) =>

@@ -73,9 +73,8 @@ namespace SonarAnalyzer.Helpers
 
         #region Syntax-level checking methods
 
-        public override InvocationCondition MatchProperty(MemberDescriptor member)
-        {
-            return (context) =>
+        public override InvocationCondition MatchProperty(MemberDescriptor member) =>
+            (context) =>
                 ((InvocationExpressionSyntax)context.Invocation).Expression is MemberAccessExpressionSyntax methodMemberAccess &&
                 methodMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression) &&
                 methodMemberAccess.Expression is MemberAccessExpressionSyntax propertyMemberAccess &&
@@ -86,7 +85,6 @@ namespace SonarAnalyzer.Helpers
                 propertyMemberIdentifier.ValueText != null &&
                 enclosingClassType.Type != null &&
                 member.IsMatch(propertyMemberIdentifier.ValueText, enclosingClassType.Type, false);
-        }
 
         #endregion
 

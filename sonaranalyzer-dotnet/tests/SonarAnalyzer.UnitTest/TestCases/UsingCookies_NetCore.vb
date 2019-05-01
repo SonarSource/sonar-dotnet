@@ -26,6 +26,8 @@ Namespace Tests.Diagnostics
 
             ' Response headers as variable
             response.Cookies.Append("", "") ' Noncompliant
+            response.Cookies.append("", "") ' Noncompliant
+            response.Cookies.APPEND("", "") ' Noncompliant
             response.Cookies.Append("", "", New CookieOptions()) ' Noncompliant
 
             ' Response cookies as variable

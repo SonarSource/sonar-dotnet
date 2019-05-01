@@ -63,9 +63,8 @@ namespace SonarAnalyzer.Helpers
             (context) =>
                 ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
 
-        public override ElementAccessCondition MatchProperty(MemberDescriptor member)
-        {
-            return (context) =>
+        public override ElementAccessCondition MatchProperty(MemberDescriptor member) =>
+            (context) =>
                    ((InvocationExpressionSyntax)context.Expression).Expression is MemberAccessExpressionSyntax memberAccess &&
                     memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression) &&
                     memberAccess.Name is SimpleNameSyntax memberName &&
@@ -73,8 +72,7 @@ namespace SonarAnalyzer.Helpers
                     context.SemanticModel.GetTypeInfo(memberAccess.Expression) is TypeInfo enclosingClassType &&
                     memberIdentifier.ValueText != null &&
                     enclosingClassType.Type != null &&
-                    member.IsMatch(memberIdentifier.ValueText, enclosingClassType.Type, false);
-        }
+                    member.IsMatch(memberIdentifier.ValueText, enclosingClassType.Type, true);
 
         #endregion
     }

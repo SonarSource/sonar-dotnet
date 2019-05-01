@@ -61,9 +61,8 @@ namespace SonarAnalyzer.Helpers
         public override ElementAccessCondition MatchSetter() =>
             (context) => ((ExpressionSyntax)context.Expression).IsLeftSideOfAssignment();
 
-        public override ElementAccessCondition MatchProperty(MemberDescriptor member)
-        {
-            return (context) =>
+        public override ElementAccessCondition MatchProperty(MemberDescriptor member) =>
+            (context) =>
                 ((ElementAccessExpressionSyntax)context.Expression).Expression is MemberAccessExpressionSyntax memberAccess &&
                  memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression) &&
                  memberAccess.Name is SimpleNameSyntax memberName &&
@@ -72,7 +71,6 @@ namespace SonarAnalyzer.Helpers
                  memberIdentifier.ValueText != null &&
                  enclosingClassType.Type != null &&
                  member.IsMatch(memberIdentifier.ValueText, enclosingClassType.Type, false);
-        }
 
         #endregion
     }
