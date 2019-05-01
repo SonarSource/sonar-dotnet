@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Helpers
                 context.SemanticModel.GetTypeInfo(propertyMemberAccess.Expression) is TypeInfo enclosingClassType &&
                 propertyMemberIdentifier.ValueText != null &&
                 enclosingClassType.Type != null &&
-                member.IsMatch(propertyMemberIdentifier.ValueText, enclosingClassType.Type, false);
+                member.IsMatch(propertyMemberIdentifier.ValueText, enclosingClassType.Type);
 
         #endregion
 

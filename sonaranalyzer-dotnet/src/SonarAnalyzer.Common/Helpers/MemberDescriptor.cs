@@ -35,10 +35,10 @@ namespace SonarAnalyzer.Helpers
 
         internal string Name { get; }
 
-        public bool IsMatch(string memberName, ITypeSymbol containingType, bool caseInsensitiveComparison) =>
+        public bool IsMatch(string memberName, ITypeSymbol containingType, bool caseInsensitiveComparison = false) =>
             containingType.Is(ContainingType) && HasSameName(memberName, Name, caseInsensitiveComparison);
 
-        public bool IsMatch<TSymbolType>(string memberName, Lazy<TSymbolType> memberSymbol, bool caseInsensitiveComparison)
+        public bool IsMatch<TSymbolType>(string memberName, Lazy<TSymbolType> memberSymbol, bool caseInsensitiveComparison = false)
             where TSymbolType : class, ISymbol
         {
             if (!HasSameName(memberName, Name, caseInsensitiveComparison) ||
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Helpers
                 return false;
             }
 
-            if (HasSameContainingType(memberSymbol.Value, true))
+            if (HasSameContainingType(memberSymbol.Value, checkOverriddenMethods: true))
             {
                 return true;
             }

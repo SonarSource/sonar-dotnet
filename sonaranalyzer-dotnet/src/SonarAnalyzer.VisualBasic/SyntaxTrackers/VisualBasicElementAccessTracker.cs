@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Helpers
                     context.SemanticModel.GetTypeInfo(memberAccess.Expression) is TypeInfo enclosingClassType &&
                     memberIdentifier.ValueText != null &&
                     enclosingClassType.Type != null &&
-                    member.IsMatch(memberIdentifier.ValueText, enclosingClassType.Type, true);
+                    member.IsMatch(memberIdentifier.ValueText, enclosingClassType.Type, caseInsensitiveComparison: true);
 
         #endregion
     }

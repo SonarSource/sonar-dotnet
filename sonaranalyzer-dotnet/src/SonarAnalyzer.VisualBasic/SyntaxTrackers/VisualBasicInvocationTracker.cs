@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Helpers
     public class VisualBasicInvocationTracker : InvocationTracker<SyntaxKind>
     {
         public VisualBasicInvocationTracker(IAnalyzerConfiguration analyzerConfiguration, DiagnosticDescriptor rule)
-            : base(analyzerConfiguration, rule, true)
+            : base(analyzerConfiguration, rule, caseInsensitiveComparison: true)
         {
         }
 
@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Helpers
                 context.SemanticModel.GetTypeInfo(propertyMemberAccess.Expression) is TypeInfo enclosingClassType &&
                 propertyMemberIdentifier.ValueText != null &&
                 enclosingClassType.Type != null &&
-                member.IsMatch(propertyMemberIdentifier.ValueText, enclosingClassType.Type, true);
+                member.IsMatch(propertyMemberIdentifier.ValueText, enclosingClassType.Type, caseInsensitiveComparison: true);
 
         #endregion
     }
