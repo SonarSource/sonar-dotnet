@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Linq;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
@@ -32,6 +34,8 @@ namespace SonarAnalyzer.Rules
 
         protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
 
+        private readonly ISet<char> SpecialCharacters = new HashSet<char> { '{', '+', '*' };
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             InvocationTracker.Track(context,
@@ -41,11 +45,31 @@ namespace SonarAnalyzer.Rules
                     new MemberDescriptor(KnownType.System_Text_RegularExpressions_Regex, "Matches"),
                     new MemberDescriptor(KnownType.System_Text_RegularExpressions_Regex, "Replace"),
                     new MemberDescriptor(KnownType.System_Text_RegularExpressions_Regex, "Split")),
+                SecondArgumentIsHardcodedRegex(),
                 InvocationTracker.MethodIsStatic());
 
             ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructor(
-                    KnownType.System_Text_RegularExpressions_Regex));
+                ObjectCreationTracker.MatchConstructor(KnownType.System_Text_RegularExpressions_Regex),
+                FirstArgumentIsHardcodedRegex());
         }
+
+        protected abstract string GetStringLiteralAtIndex(InvocationContext context, int index);
+
+        protected abstract string GetStringLiteralAtIndex(ObjectCreationContext context, int index);
+
+        private InvocationCondition SecondArgumentIsHardcodedRegex() =>
+            (context) =>
+                GetStringLiteralAtIndex(context, 1) is string hardcodedString &&
+                IsComplexRegex(hardcodedString);
+
+        private ObjectCreationCondition FirstArgumentIsHardcodedRegex() =>
+            (context) =>
+                GetStringLiteralAtIndex(context, 0) is string hardcodedString &&
+                IsComplexRegex(hardcodedString);
+
+        private bool IsComplexRegex(string s) =>
+            s != null &&
+            s.Length > 2 &&
+            s.ToCharArray().Count(c => SpecialCharacters.Contains(c)) > 1;
     }
 }

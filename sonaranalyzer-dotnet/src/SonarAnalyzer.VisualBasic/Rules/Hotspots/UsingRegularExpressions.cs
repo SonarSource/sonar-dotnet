@@ -22,8 +22,10 @@ using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
@@ -48,5 +50,18 @@ namespace SonarAnalyzer.Rules.VisualBasic
             InvocationTracker = new VisualBasicInvocationTracker(analyzerConfiguration, rule);
             ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, rule);
         }
+
+        protected override string GetStringLiteralAtIndex(InvocationContext context, int index) =>
+            context.Invocation is InvocationExpressionSyntax invocation
+                ? GetStringValue(invocation.ArgumentList, index)
+                : null;
+
+        protected override string GetStringLiteralAtIndex(ObjectCreationContext context, int index) =>
+            context.Expression is ObjectCreationExpressionSyntax objectCreation
+                ? GetStringValue(objectCreation.ArgumentList, index)
+                : null;
+
+        private string GetStringValue(ArgumentListSyntax argumentList, int index) =>
+            argumentList.Get(index).GetStringValue();
     }
 }

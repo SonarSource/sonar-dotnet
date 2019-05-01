@@ -6,19 +6,6 @@
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
-"startLine":  43,
-"startColumn":  25,
-"endLine":  43,
-"endColumn":  135
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
-"region":  {
 "startLine":  161,
 "startColumn":  16,
 "endLine":  161,
@@ -32,75 +19,10 @@
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
-"startLine":  167,
-"startColumn":  38,
-"endLine":  167,
-"endColumn":  73
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
-"region":  {
 "startLine":  303,
 "startColumn":  39,
 "endLine":  303,
 "endColumn":  127
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
-"region":  {
-"startLine":  672,
-"startColumn":  63,
-"endLine":  672,
-"endColumn":  159
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
-"region":  {
-"startLine":  835,
-"startColumn":  91,
-"endLine":  835,
-"endColumn":  119
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
-"region":  {
-"startLine":  1227,
-"startColumn":  63,
-"endLine":  1227,
-"endColumn":  159
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
-"region":  {
-"startLine":  151,
-"startColumn":  21,
-"endLine":  151,
-"endColumn":  84
 }
 }
 },
@@ -136,19 +58,6 @@
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
 "region":  {
-"startLine":  158,
-"startColumn":  25,
-"endLine":  158,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
-"region":  {
 "startLine":  160,
 "startColumn":  32,
 "endLine":  160,
@@ -166,19 +75,6 @@
 "startColumn":  35,
 "endLine":  161,
 "endColumn":  117
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
-"region":  {
-"startLine":  175,
-"startColumn":  21,
-"endLine":  175,
-"endColumn":  60
 }
 }
 },
@@ -331,19 +227,6 @@
 "location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
 "region":  {
-"startLine":  223,
-"startColumn":  37,
-"endLine":  223,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
-"region":  {
 "startLine":  225,
 "startColumn":  44,
 "endLine":  225,
@@ -387,58 +270,6 @@
 "startColumn":  26,
 "endLine":  279,
 "endColumn":  80
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
-"region":  {
-"startLine":  284,
-"startColumn":  18,
-"endLine":  284,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgMovieSource.vb",
-"region":  {
-"startLine":  143,
-"startColumn":  37,
-"endLine":  143,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVSource.vb",
-"region":  {
-"startLine":  128,
-"startColumn":  37,
-"endLine":  128,
-"endColumn":  95
-}
-}
-},
-{
-"id":  "S4784",
-"message":  "Make sure that using a regular expression is safe here.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
-"region":  {
-"startLine":  1382,
-"startColumn":  16,
-"endLine":  1382,
-"endColumn":  69
 }
 }
 }
