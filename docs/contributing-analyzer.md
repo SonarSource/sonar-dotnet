@@ -8,6 +8,8 @@ All C# and VB .NET analyzers present in SonarLint for Visual Studio, in the Sona
 1. Download sub-modules `git submodule update --init --recursive`
 1. Run `.\scripts\build\dev-build.ps1 -restore -build -test`
 
+In general, it is best to run commands from the Visual Studio Developer Command Prompt (if you're using ConEmu, you can setup a console task like `cmd /k ""C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat" & powershell" -new_console:t:"VsDev 2017" -new_console:d:"C:\Workspace\sonar-dotnet"` - it starts the Developer Console inside the folder `C:\Workspace\sonar-dotnet`)
+
 ## Developing with Visual Studio 2017
 
 1. [Visual Studio 2017 Version 15.7](https://www.visualstudio.com/vs/preview/)
