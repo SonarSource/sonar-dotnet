@@ -1,72 +1,42 @@
 <p>Unused parameters are misleading. Whatever the values passed to such parameters, the behavior will be the same.</p>
+<p>This rule raises an issue when a <code>private</code> method of a class/struct takes a parameter without using it.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-void DoSomething(int a, int b) // "b" is unused
+private void DoSomething(int a, int b) // "b" is unused
 {
-  Compute(a);
+    Compute(a);
 }
 
-void DoSomething2(int a) // value of "a" is unused
+private void DoSomething2(int a) // value of "a" is unused
 {
-  a = 10;
-  Compute(a);
+    a = 10;
+    Compute(a);
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-void DoSomething(int a)
+private void DoSomething(int a)
 {
-  Compute(a);
+    Compute(a);
 }
 
-void DoSomething2()
+private void DoSomething2()
 {
-  var a = 10;
-  Compute(a);
+    var a = 10;
+    Compute(a);
 }
 </pre>
 <h2>Exceptions</h2>
-<p><code>virtual</code>, <code>override</code> methods and interface implementations are ignored. </p>
-<pre>
-override void DoSomething(int a, int b) // no issue reported on b
-{
-  Compute(a);
-}
-</pre>
-<p>Furthermore, the <code>this</code> parameter of extension methods is also ignored.</p>
-<pre>
-public static class Extensions
-{
-  public static void MyHelper(this HtmlHelper helper) //no issue reported here
-  {
-    // no use of helper here
-  }
-}
-</pre>
-<p>Methods that have attributes defined on them are ignored.</p>
-<pre>
-public class MyDto
-{
-  public string Name { get; set; }
-
-  [OnDeserialized]
-  private void OnDeserialized(StreamingContext context)
-  {
-    // ...
-  }
-}
-</pre>
-<p>Empty or unsupported methods are ignored.</p>
-<pre>
-public void DoSomething()
-{}
-
-public void Call()
-{
-  throw new NotImplementedException();
-}
-</pre>
-<p>And obviously no issue is raised on the <code>static void Main(string[] args)</code> method</p>
+<p>This rule doesn't raise any issue in the following contexts:</p>
+<ul>
+  <li> The <code>this</code> parameter of extension methods. </li>
+  <li> Methods decorated with attributes. </li>
+  <li> Empty methods. </li>
+  <li> Methods which only throw <code>NotImplementedException</code>. </li>
+  <li> Main methods. </li>
+  <li> <code>virtual</code>, <code>override</code> methods. </li>
+  <li> interface implementations. </li>
+</ul>
 <h2>See</h2>
 <ul>
   <li> MISRA C++:2008, 0-1-11 - There shall be no unused parameters (named or unnamed) in nonvirtual functions. </li>
