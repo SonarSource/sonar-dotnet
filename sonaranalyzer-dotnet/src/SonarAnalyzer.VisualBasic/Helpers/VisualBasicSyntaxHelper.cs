@@ -120,6 +120,11 @@ namespace SonarAnalyzer.Helpers.VisualBasic
                     return null;
             }
         }
+        public static bool IsMethodInvocation(this InvocationExpressionSyntax expression, KnownType type, string methodName, SemanticModel semanticModel) =>
+            semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol methodSymbol &&
+            methodSymbol.IsInType(type) &&
+            // vbnet is case insensitive
+            methodName.Equals(methodSymbol.Name, System.StringComparison.InvariantCultureIgnoreCase);
 
         public static bool IsOnThis(this ExpressionSyntax expression) =>
             IsOn(expression, SyntaxKind.MeExpression);

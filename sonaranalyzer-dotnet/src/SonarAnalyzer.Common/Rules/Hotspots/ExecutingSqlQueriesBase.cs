@@ -18,12 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ExecutingSqlQueriesBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class ExecutingSqlQueriesBase<TSyntaxKind, TExpressionSyntax> : SonarDiagnosticAnalyzer
         where TSyntaxKind : struct
+        where TExpressionSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S2077";
         protected const string MessageFormat = "Make sure that executing SQL queries is safe here.";
@@ -39,8 +41,13 @@ namespace SonarAnalyzer.Rules
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalQueryableExtensions, "FromSql")),
-                Conditions.ExceptWhen(
-                    OnlyParameterIsConstantOrInterpolatedString()),
+                Conditions.And(
+                    MethodHasRawSqlQueryParameter(),
+                    Conditions.Or(
+                        Conditions.Or(ArgumentAtIndexIsConcat(0), ArgumentAtIndexIsFormat(0), ArgumentAtIndexIsInterpolated(0)),
+                        Conditions.Or(ArgumentAtIndexIsConcat(1), ArgumentAtIndexIsFormat(1), ArgumentAtIndexIsInterpolated(1))
+                    )
+                ),
                 Conditions.ExceptWhen(
                     InvocationTracker.ArgumentAtIndexIsConstant(0)));
 
@@ -48,8 +55,15 @@ namespace SonarAnalyzer.Rules
                 InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommandAsync"),
                     new MemberDescriptor(KnownType.Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions, "ExecuteSqlCommand")),
+                Conditions.And(
+                    MethodHasRawSqlQueryParameter(),
+                    Conditions.Or(
+                        Conditions.Or(ArgumentAtIndexIsConcat(0), ArgumentAtIndexIsFormat(0), ArgumentAtIndexIsInterpolated(0)),
+                        Conditions.Or(ArgumentAtIndexIsConcat(1), ArgumentAtIndexIsFormat(1), ArgumentAtIndexIsInterpolated(1))
+                    )
+                ),
                 Conditions.ExceptWhen(
-                    OnlyParameterIsConstantOrInterpolatedString()));
+                    InvocationTracker.ArgumentAtIndexIsConstant(0)));
 
             PropertyAccessTracker.Track(context,
                 PropertyAccessTracker.MatchProperty(
@@ -58,6 +72,7 @@ namespace SonarAnalyzer.Rules
                     new MemberDescriptor(KnownType.System_Data_SqlClient_SqlCommand, "CommandText"),
                     new MemberDescriptor(KnownType.System_Data_SqlServerCe_SqlCeCommand, "CommandText")),
                 PropertyAccessTracker.MatchSetter(),
+                Conditions.Or(SetterIsConcat(), SetterIsFormat(), SetterIsInterpolation()),
                 Conditions.ExceptWhen(
                     PropertyAccessTracker.AssignedValueIsConstant()));
 
@@ -73,10 +88,83 @@ namespace SonarAnalyzer.Rules
                     KnownType.System_Data_OracleClient_OracleCommand,
                     KnownType.System_Data_OracleClient_OracleDataAdapter),
                 ObjectCreationTracker.ArgumentAtIndexIs(0, KnownType.System_String),
+                Conditions.Or(FirstArgumentIsConcat(), FirstArgumentIsFormat(), FirstArgumentIsInterpolation()),
                 Conditions.ExceptWhen(
                     ObjectCreationTracker.ArgumentAtIndexIsConst(0)));
         }
 
-        protected abstract InvocationCondition OnlyParameterIsConstantOrInterpolatedString();
+        protected abstract TExpressionSyntax GetInvocationExpression(SyntaxNode expression);
+
+        protected abstract TExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index);
+
+        protected abstract TExpressionSyntax GetSetValue(PropertyAccessContext context);
+
+        protected abstract TExpressionSyntax GetFirstArgument(ObjectCreationContext context);
+
+        protected abstract bool IsConcat(TExpressionSyntax argument, SemanticModel semanticModel);
+
+        protected abstract bool IsInterpolated(TExpressionSyntax argument);
+
+        protected abstract bool IsStringMethodInvocation(string methodName, TExpressionSyntax expression, SemanticModel semanticModel);
+
+        private bool IsFormat(TExpressionSyntax argument, SemanticModel semanticModel) =>
+            IsStringMethodInvocation("Format", argument, semanticModel);
+
+        private InvocationCondition MethodHasRawSqlQueryParameter() =>
+            (context) =>
+            {
+                return GetInvocationExpression(context.Invocation) is TExpressionSyntax methodSyntax &&
+                    context.SemanticModel.GetSymbolInfo(methodSyntax).Symbol is IMethodSymbol methodSymbol &&
+                    (ParameterIsRawString(methodSymbol, 0) || ParameterIsRawString(methodSymbol, 1));
+
+                bool ParameterIsRawString(IMethodSymbol method, int index) =>
+                    method.Parameters.Length > index && method.Parameters[index].IsType(KnownType.Microsoft_EntityFrameworkCore_RawSqlString);
+            };
+
+        private InvocationCondition ArgumentAtIndexIsInterpolated(int index) =>
+            (context) =>
+                GetArgumentAtIndex(context, index) is TExpressionSyntax argument &&
+                IsInterpolated(argument);
+
+        private InvocationCondition ArgumentAtIndexIsConcat(int index) =>
+            (context) =>
+                GetArgumentAtIndex(context, index) is TExpressionSyntax argument &&
+                IsConcat(argument, context.SemanticModel);
+
+        private InvocationCondition ArgumentAtIndexIsFormat(int index) =>
+            (context) =>
+                GetArgumentAtIndex(context, index) is TExpressionSyntax argument &&
+                IsFormat(argument, context.SemanticModel);
+
+        private PropertyAccessCondition SetterIsConcat() =>
+            (context) =>
+                GetSetValue(context) is TExpressionSyntax argument &&
+                IsConcat(argument, context.SemanticModel);
+
+        private PropertyAccessCondition SetterIsFormat() =>
+            (context) =>
+                GetSetValue(context) is TExpressionSyntax argument &&
+                IsFormat(argument, context.SemanticModel);
+
+        private PropertyAccessCondition SetterIsInterpolation() =>
+            (context) =>
+                GetSetValue(context) is TExpressionSyntax argument &&
+                IsInterpolated(argument);
+
+        private ObjectCreationCondition FirstArgumentIsConcat() =>
+            (context) =>
+                GetFirstArgument(context) is TExpressionSyntax firstArg &&
+                IsConcat(firstArg, context.SemanticModel);
+
+        private ObjectCreationCondition FirstArgumentIsFormat() =>
+            (context) =>
+                GetFirstArgument(context) is TExpressionSyntax firstArg &&
+                IsFormat(firstArg, context.SemanticModel);
+
+        private ObjectCreationCondition FirstArgumentIsInterpolation() =>
+            (context) =>
+                GetFirstArgument(context) is TExpressionSyntax firstArg &&
+                IsInterpolated(firstArg);
+
     }
 }

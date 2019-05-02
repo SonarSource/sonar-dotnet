@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -31,7 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind>
+    public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, ExpressionSyntax>
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
@@ -52,20 +54,68 @@ namespace SonarAnalyzer.Rules.VisualBasic
             ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, rule);
         }
 
-        protected override InvocationCondition OnlyParameterIsConstantOrInterpolatedString() =>
-            (context) =>
+        protected override ExpressionSyntax GetInvocationExpression(SyntaxNode expression) =>
+            expression is InvocationExpressionSyntax invocation
+                ? invocation.Expression
+                : null;
+
+        protected override ExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index) =>
+            context.Invocation is InvocationExpressionSyntax invocation
+                ? invocation.ArgumentList.Get(index)
+                : null;
+
+        protected override ExpressionSyntax GetSetValue(PropertyAccessContext context) =>
+            context.Expression is MemberAccessExpressionSyntax setter && setter.IsLeftSideOfAssignment()
+                ? ((AssignmentStatementSyntax)setter.GetSelfOrTopParenthesizedExpression().Parent).Right.RemoveParentheses()
+                : null;
+
+        protected override ExpressionSyntax GetFirstArgument(ObjectCreationContext context) =>
+            context.Expression is ObjectCreationExpressionSyntax objectCreation
+                ? objectCreation.ArgumentList.Get(0)
+                : null;
+
+        protected override bool IsConcat(ExpressionSyntax argument, SemanticModel semanticModel) =>
+            IsStringMethodInvocation("Concat", argument, semanticModel) ||
+            (
+                argument.IsKind(SyntaxKind.ConcatenateExpression) &&
+                argument is BinaryExpressionSyntax concatenation &&
+                !IsConcatenationOfConstants(concatenation, semanticModel)
+            );
+
+        protected override bool IsInterpolated(ExpressionSyntax argument) =>
+            argument.IsAnyKind(SyntaxKind.InterpolatedStringExpression);
+
+        protected override bool IsStringMethodInvocation(string methodName, ExpressionSyntax expression, SemanticModel semanticModel)
+        {
+            return expression is InvocationExpressionSyntax invocation &&
+                invocation.IsMethodInvocation(KnownType.System_String, methodName, semanticModel) &&
+                !AllConstants(invocation.ArgumentList.Arguments.ToList(), semanticModel);
+        }
+
+        private static bool AllConstants(List<ArgumentSyntax> arguments, SemanticModel semanticModel) =>
+            arguments.All(a => a.GetExpression().IsConstant(semanticModel));
+
+        private static bool IsConcatenationOfConstants(BinaryExpressionSyntax binaryExpression, SemanticModel semanticModel)
+        {
+            System.Diagnostics.Debug.Assert(binaryExpression.IsKind(SyntaxKind.ConcatenateExpression));
+            if ((semanticModel.GetTypeInfo(binaryExpression).Type is ITypeSymbol concantenationType) &&
+                binaryExpression.Right.IsConstant(semanticModel))
             {
-                var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
-                if (argumentList == null ||
-                    argumentList.Arguments.Count != 1)
+                var nestedLeft = binaryExpression.Left;
+                var nestedBinary = nestedLeft as BinaryExpressionSyntax;
+                while (nestedBinary != null)
                 {
-                    return false;
+                    if (!nestedBinary.IsKind(SyntaxKind.ConcatenateExpression) && !nestedBinary.IsConstant(semanticModel))
+                    {
+                        return false;
+                    }
+
+                    nestedLeft = nestedBinary.Left;
+                    nestedBinary = nestedLeft as BinaryExpressionSyntax;
                 }
-
-                var onlyArgument = argumentList.Arguments[0].GetExpression().RemoveParentheses();
-
-                return onlyArgument.IsAnyKind(SyntaxKind.InterpolatedStringExpression) ||
-                    onlyArgument.IsConstant(context.SemanticModel);
-            };
+                return true;
+            }
+            return false;
+        }
     }
 }

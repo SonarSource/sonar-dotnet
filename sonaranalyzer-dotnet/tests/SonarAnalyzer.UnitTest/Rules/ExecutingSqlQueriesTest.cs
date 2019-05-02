@@ -25,6 +25,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.TestFramework;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
@@ -66,6 +67,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_NetCore.vb",
                 new VisualBasic.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
+                options: ParseOptionsHelper.FromVisualBasic15,
                 additionalReferences: GetReferencesNetCore(Constants.NuGetLatestVersion));
         }
 
@@ -75,6 +77,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_Net46.vb",
                 new VisualBasic.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
+                options: ParseOptionsHelper.FromVisualBasic15,
                 additionalReferences: GetReferencesNet46(Constants.NuGetLatestVersion));
         }
 
