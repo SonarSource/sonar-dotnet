@@ -7,7 +7,7 @@
     "constantCost": "30min"
   },
   "tags": [
-    
+    "suspicious"
   ],
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-2190",

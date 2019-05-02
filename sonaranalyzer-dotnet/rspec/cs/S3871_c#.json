@@ -11,8 +11,16 @@
     "api-design",
     "owasp-a10"
   ],
+  "standards": [
+    "OWASP Top Ten"
+  ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-3871",
   "sqKey": "S3871",
-  "scope": "All"
+  "scope": "All",
+  "securityStandards": {
+    "OWASP": [
+      "A10"
+    ]
+  }
 }

@@ -7,10 +7,18 @@
     "constantCost": "20min"
   },
   "tags": [
-    
+    "owasp-a6"
+  ],
+  "standards": [
+    "OWASP Top Ten"
   ],
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-3884",
   "sqKey": "S3884",
-  "scope": "All"
+  "scope": "All",
+  "securityStandards": {
+    "OWASP": [
+      "A6"
+    ]
+  }
 }
