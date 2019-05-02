@@ -7,9 +7,8 @@
 <p>SQL queries often need to use a hardcoded SQL string with a dynamic parameter coming from a user request. Concatenating or formatting a string to
 add those parameters to the request is a bad practice as it can result in an <a href="https://www.owasp.org/index.php/SQL_Injection">SQL
 injection</a>. The safe way to add parameters to a SQL query is to use SQL binding mechanisms.</p>
-<p>Note that this rule does not detect SQL injections. See Vulnerability rule {rule:csharpsquid:S3649} to detect actual SQL injections.</p>
-<p>This rule flags the execution of SQL queries which are built using concatenation or formatting of strings, even if there is no injection. The goal
-is to guide security code reviews and to prevent a common bad practice.</p>
+<p>This rule flags the execution of SQL queries which are built using concatenation or formatting of strings, even if there is no injection. This rule
+does not detect SQL injections. The goal is to guide security code reviews and to prevent a common bad practice.</p>
 <p>The following specific method signatures are tested:</p>
 <ul>
   <li> <code>System.Data.SqlClient.SqlCommand.SqlCommand(string, ...)</code> </li>
@@ -107,10 +106,5 @@ public void Foo(DbContext context, string value)
   <li> Derived from FindSecBugs rules <a href="http://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_JPA">Potential SQL/JPQL Injection
   (JPA)</a>, <a href="http://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_JDO">Potential SQL/JDOQL Injection (JDO)</a>, <a
   href="http://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_HIBERNATE">Potential SQL/HQL Injection (Hibernate)</a> </li>
-</ul>
-<h3>See also</h3>
-<ul>
-  <li> {rule:csharpsquid:S3649} - SQL queries should not be vulnerable to injection attacks (available in SonarCloud and SonarQube Developer Edition)
-  </li>
 </ul>
 

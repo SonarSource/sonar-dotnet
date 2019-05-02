@@ -34,32 +34,35 @@ original data with another one having the same hash.</p>
   <li> the strength of hashing algorithms often decreases over time as hardware capabilities increase. Check regularly that the algorithms you are
   using are still considered secure. If needed, rehash your data using a stronger algorithm. </li>
 </ul>
-<h2>Questionable Code Example</h2>
+<h2>Sensitive Code Example</h2>
 <pre>
 using System.Security.Cryptography;
 
 void ComputeHash()
 {
     // Review all instantiations of classes that inherit from HashAlgorithm, for example:
-    HashAlgorithm hashAlgo = HashAlgorithm.Create(); // Questionable
-    HashAlgorithm hashAlgo2 = HashAlgorithm.Create("SHA1"); // Questionable
-    SHA1 sha = new SHA1CryptoServiceProvider(); // Questionable
-    MD5 md5 = new MD5CryptoServiceProvider(); // Questionable
+    HashAlgorithm hashAlgo = HashAlgorithm.Create(); // Sensitive
+    HashAlgorithm hashAlgo2 = HashAlgorithm.Create("SHA1"); // Sensitive
+    SHA1 sha = new SHA1CryptoServiceProvider(); // Sensitive
+    MD5 md5 = new MD5CryptoServiceProvider(); // Sensitive
     // ...
 }
 
-class MyHashAlgorithm : HashAlgorithm // Questionable
+class MyHashAlgorithm : HashAlgorithm // Sensitive
 {
     // ...
 }
 </pre>
 <h2>See</h2>
 <ul>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure
+  </li>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A6-Security_Misconfiguration">OWASP Top 10 2017 Category A6</a> - Security
+  Misconfiguration </li>
   <li> <a href="https://cwe.mitre.org/data/definitions/916.html">MITRE, CWE-916</a> - Use of Password Hash With Insufficient Computational Effort
   </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/759.html">MITRE, CWE-759</a> - Use of a One-Way Hash without a Salt </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/760.html">MITRE, CWE-760</a> - Use of a One-Way Hash with a Predictable Salt </li>
-  <li> OWASP Top 10 2017 Category A3 - Sensitive Data Exposure </li>
   <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
 </ul>
 

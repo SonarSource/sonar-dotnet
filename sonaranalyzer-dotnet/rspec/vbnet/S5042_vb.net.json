@@ -8,18 +8,23 @@
   },
   "tags": [
     "cwe",
+    "owasp-a1",
     "cert"
   ],
   "standards": [
-    "CWE"
+    "CWE",
+    "OWASP Top Ten"
   ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-5042",
   "sqKey": "S5042",
-  "scope": "All",
+  "scope": "Main",
   "securityStandards": {
     "CWE": [
       409
+    ],
+    "OWASP": [
+      "A1"
     ]
   }
 }

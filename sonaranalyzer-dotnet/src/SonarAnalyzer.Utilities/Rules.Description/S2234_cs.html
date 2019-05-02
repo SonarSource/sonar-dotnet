@@ -5,32 +5,32 @@ to unexpected results.</p>
 <pre>
 public double Divide(int divisor, int dividend)
 {
-  return divisor/dividend;
+    return divisor/dividend;
 }
 
 public void DoTheThing()
 {
-  int divisor = 15;
-  int dividend = 5;
+    int divisor = 15;
+    int dividend = 5;
 
-  double result = Divide(dividend, divisor);  // Noncompliant; operation succeeds, but result is unexpected
-  //...
+    double result = Divide(dividend, divisor);  // Noncompliant; operation succeeds, but result is unexpected
+    //...
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 public double Divide(int divisor, int dividend)
 {
-  return divisor/dividend;
+    return divisor/dividend;
 }
 
 public void DoTheThing()
 {
-  int divisor = 15;
-  int dividend = 5;
+    int divisor = 15;
+    int dividend = 5;
 
-  double result = Divide(divisor, dividend);
-  //...
+    double result = Divide(divisor, dividend);
+    //...
 }
 </pre>
 

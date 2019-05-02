@@ -6,14 +6,14 @@ non-<code>params</code> method too.</p>
 <pre>
 public class MyClass
 {
-  private void Format(string a, params object[] b) { }
+    private void Format(string a, params object[] b) { }
 
-  private void Format(object a, object b, object c) { }
+    private void Format(object a, object b, object c) { }
 }
 
 // ...
 MyClass myClass = new MyClass();
 
-myClass.Format("", null, null); //Noncompliant, resolves to the first Format with params, but was that intended?
+myClass.Format("", null, null); // Noncompliant, resolves to the first Format with params, but was that intended?
 </pre>
 

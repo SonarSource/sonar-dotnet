@@ -7,25 +7,30 @@ consistent with the requirement to have a final <code>default</code> clause in a
 <pre>
 if (x == 0)
 {
-  doSomething();
-} else if (x == 1)
+    DoSomething();
+}
+else if (x == 1)
 {
-  doSomethingElse();
+    DoSomethingElse();
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 if (x == 0)
 {
-  doSomething();
-} else if (x == 1)
+    DoSomething();
+}
+else if (x == 1)
 {
-  doSomethingElse();
-} else
+    DoSomethingElse();
+}
+else
 {
-  throw new IllegalStateException();
+    throw new InvalidOperationException();
 }
 </pre>
+<h2>Exceptions</h2>
+<p>None</p>
 <h2>See</h2>
 <ul>
   <li> MISRA C:2004, 14.10 - All if...else if constructs shall be terminated with an else clause. </li>

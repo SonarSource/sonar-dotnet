@@ -4,7 +4,6 @@
   "status": "ready",
   "tags": [
     "cwe",
-    "owasp-a1",
     "sans-top25-risky",
     "sans-top25-porous",
     "owasp-a3"
@@ -24,7 +23,6 @@
       400
     ],
     "OWASP": [
-      "A1",
       "A3"
     ]
   }

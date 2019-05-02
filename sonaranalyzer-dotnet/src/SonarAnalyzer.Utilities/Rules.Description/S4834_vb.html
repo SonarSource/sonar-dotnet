@@ -26,7 +26,7 @@ user's permissions from an HTTP cookie as it can be modified client-side.</p>
 <p>Enable administrators to swiftly remove permissions when necessary. This enables them to reduce the time an attacker can have access to your
 systems when a breach occurs.</p>
 <p>Log and monitor refused access requests as they can reveal an attack.</p>
-<h2>Questionable Code Example</h2>
+<h2>Sensitive Code Example</h2>
 <pre>
 Imports System.Threading
 Imports System.Security.Permissions
@@ -35,42 +35,42 @@ Imports System.IdentityModel.Tokens
 
 Class SecurityPrincipalDemo
     Class MyIdentity
-        Implements IIdentity ' Questionable, custom IIdentity implementations should be reviewed
+        Implements IIdentity ' Sensitive, custom IIdentity implementations should be reviewed
     End Class
 
     Class MyPrincipal
-        Implements IPrincipal ' Questionable, custom IPrincipal implementations should be reviewed
+        Implements IPrincipal ' Sensitive, custom IPrincipal implementations should be reviewed
     End Class
 
-    &lt;System.Security.Permissions.PrincipalPermission(SecurityAction.Demand, Role:="Administrators")&gt; ' Questionable. The access restrictions enforced by this attribute should be reviewed.
+    &lt;System.Security.Permissions.PrincipalPermission(SecurityAction.Demand, Role:="Administrators")&gt; ' Sensitive. The access restrictions enforced by this attribute should be reviewed.
     Private Shared Sub CheckAdministrator()
-        Dim MyIdentity As WindowsIdentity = WindowsIdentity.GetCurrent() ' Questionable
+        Dim MyIdentity As WindowsIdentity = WindowsIdentity.GetCurrent() ' Sensitive
 
-        HttpContext.User = ... ' Questionable: review all reference (set and get) to System.Web HttpContext.User
+        HttpContext.User = ... ' Sensitive: review all reference (set and get) to System.Web HttpContext.User
 
         Dim domain As AppDomain = AppDomain.CurrentDomain
-        domain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal) ' Questionable
+        domain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal) ' Sensitive
 
-        Dim identity As MyIdentity = New MyIdentity() ' Questionable
-        Dim MyPrincipal As MyPrincipal = New MyPrincipal(MyIdentity) ' Questionable
-        Thread.CurrentPrincipal = MyPrincipal ' Questionable
-        domain.SetThreadPrincipal(MyPrincipal) ' Questionable
+        Dim identity As MyIdentity = New MyIdentity() ' Sensitive
+        Dim MyPrincipal As MyPrincipal = New MyPrincipal(MyIdentity) ' Sensitive
+        Thread.CurrentPrincipal = MyPrincipal ' Sensitive
+        domain.SetThreadPrincipal(MyPrincipal) ' Sensitive
 
-        Dim principalPerm As PrincipalPermission = New PrincipalPermission(Nothing, "Administrators")  ' Questionable
+        Dim principalPerm As PrincipalPermission = New PrincipalPermission(Nothing, "Administrators")  ' Sensitive
         principalPerm.Demand()
 
         Dim handler As SecurityTokenHandler = ...
-        Dim identities As ReadOnlyCollection(Of ClaimsIdentity) = handler.ValidateToken()  ' Questionable, this creates identity
+        Dim identities As ReadOnlyCollection(Of ClaimsIdentity) = handler.ValidateToken()  ' Sensitive, this creates identity
     End Sub
 
-    ' Questionable: review how this function uses the identity and principal.
+    ' Sensitive: review how this function uses the identity and principal.
     Private Sub modifyPrincipal(ByVal identity As MyIdentity, ByVal principal As MyPrincipal)
     End Sub
 End Class
 </pre>
 <h2>See</h2>
 <ul>
-  <li> OWASP Top 10 2017 Category A5 - Broken Access Control </li>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A5-Broken_Access_Control">OWASP Top 10 2017 Category A5</a> - Boken Access Control </li>
   <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
 </ul>
 

@@ -8,6 +8,7 @@
   },
   "tags": [
     "cwe",
+    "based-on-misra",
     "misra",
     "cert",
     "redundant"
@@ -22,7 +23,8 @@
   "securityStandards": {
     "CWE": [
       489,
-      571
+      571,
+      570
     ]
   }
 }

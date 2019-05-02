@@ -1,6 +1,6 @@
 <p>Recursion happens when control enters a loop that has no exit. This can happen a method invokes itself, when a pair of methods invoke each other,
-or when <code>goto</code>s are used to move between two segments of code. It can be a useful tool, but unless the method includes a provision to break
-out of the recursion and <code>return</code>, the recursion will continue until the stack overflows and the program crashes.</p>
+or when <code>goto</code> statements are used to move between two segments of code. It can be a useful tool, but unless the method includes a
+provision to break out of the recursion and <code>return</code>, the recursion will continue until the stack overflows and the program crashes.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 int Pow(int num, int exponent)   // Noncompliant; no condition under which pow isn't re-called
