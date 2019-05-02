@@ -51,16 +51,7 @@ logs:</p>
   failed logins, successful logins, server side input validation failures, access denials and any important transaction. </li>
   <li> Monitor the logs for any suspicious activity. </li>
 </ul>
-<p>See</p>
-<ul>
-  <li> <a href="https://cwe.mitre.org/data/definitions/532.html">MITRE, CWE-532</a> - Information Exposure Through Log Files </li>
-  <li> <a href="https://cwe.mitre.org/data/definitions/117.html">MITRE, CWE-117</a> - Improper Output Neutralization for Logs </li>
-  <li> <a href="https://cwe.mitre.org/data/definitions/778.html">MITRE, CWE-778</a> - Insufficient Logging </li>
-  <li> OWASP Top 10 2017 Category A3 - Sensitive Data Exposure </li>
-  <li> OWASP Top 10 2017 Category A10 - Insufficient Logging &amp; Monitoring </li>
-  <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
-</ul>
-<h2>Questionable Code Example</h2>
+<h2>Sensitive Code Example</h2>
 <p><strong>.Net Core</strong>: configure programmatically</p>
 <pre>
 Imports System
@@ -81,7 +72,7 @@ Namespace MvcApp
         Public Shared Function CreateWebHostBuilder(args As String()) As IWebHostBuilder
 
             WebHost.CreateDefaultBuilder(args) _
-                .ConfigureLogging(Function(hostingContext, Logging) ' Questionable
+                .ConfigureLogging(Function(hostingContext, Logging) ' Sensitive
                                       ' ...
                                   End Function) _
             .UseStartup(Of StartupLogging)()
@@ -95,7 +86,7 @@ Namespace MvcApp
 
         Public Sub ConfigureServices(services As IServiceCollection)
 
-            services.AddLogging(Function(logging) ' Questionable
+            services.AddLogging(Function(logging) ' Sensitive
                                     '...
                                 End Function)
         End Sub
@@ -111,32 +102,32 @@ Namespace MvcApp
             Dim eventLogSettings As Microsoft.Extensions.Logging.EventLog.EventLogSettings = Nothing
 
             ' An issue will be raised for each call to an ILoggerFactory extension methods adding loggers.
-            loggerFactory.AddAzureWebAppDiagnostics() ' Questionable
-            loggerFactory.AddAzureWebAppDiagnostics(azureSettings) ' Questionable
-            loggerFactory.AddConsole() ' Questionable
-            loggerFactory.AddConsole(level) ' Questionable
-            loggerFactory.AddConsole(level, includeScopes) ' Questionable
-            loggerFactory.AddConsole(filter) ' Questionable
-            loggerFactory.AddConsole(filter, includeScopes) ' Questionable
-            loggerFactory.AddConsole(config) ' Questionable
-            loggerFactory.AddConsole(consoleSettings) ' Questionable
-            loggerFactory.AddDebug() ' Questionable
-            loggerFactory.AddDebug(level) ' Questionable
-            loggerFactory.AddDebug(filter) ' Questionable
-            loggerFactory.AddEventLog() ' Questionable
-            loggerFactory.AddEventLog(eventLogSettings) ' Questionable
-            loggerFactory.AddEventLog(level) ' Questionable
+            loggerFactory.AddAzureWebAppDiagnostics() ' Sensitive
+            loggerFactory.AddAzureWebAppDiagnostics(azureSettings) ' Sensitive
+            loggerFactory.AddConsole() ' Sensitive
+            loggerFactory.AddConsole(level) ' Sensitive
+            loggerFactory.AddConsole(level, includeScopes) ' Sensitive
+            loggerFactory.AddConsole(filter) ' Sensitive
+            loggerFactory.AddConsole(filter, includeScopes) ' Sensitive
+            loggerFactory.AddConsole(config) ' Sensitive
+            loggerFactory.AddConsole(consoleSettings) ' Sensitive
+            loggerFactory.AddDebug() ' Sensitive
+            loggerFactory.AddDebug(level) ' Sensitive
+            loggerFactory.AddDebug(filter) ' Sensitive
+            loggerFactory.AddEventLog() ' Sensitive
+            loggerFactory.AddEventLog(eventLogSettings) ' Sensitive
+            loggerFactory.AddEventLog(level) ' Sensitive
             ' Only available for NET Standard 2.0 and above
-            'loggerFactory.AddEventSourceLogger() ' Questionable
+            'loggerFactory.AddEventSourceLogger() ' Sensitive
 
             Dim providers As IEnumerable(Of ILoggerProvider) = Nothing
             Dim filterOptions1 As LoggerFilterOptions = Nothing
             Dim filterOptions2 As IOptionsMonitor(Of LoggerFilterOptions) = Nothing
 
-            Dim factory As LoggerFactory = New LoggerFactory() ' Questionable
-            factory = New LoggerFactory(providers) ' Questionable
-            factory = New LoggerFactory(providers, filterOptions1) ' Questionable
-            factory = New LoggerFactory(providers, filterOptions2) ' Questionable
+            Dim factory As LoggerFactory = New LoggerFactory() ' Sensitive
+            factory = New LoggerFactory(providers) ' Sensitive
+            factory = New LoggerFactory(providers, filterOptions1) ' Sensitive
+            factory = New LoggerFactory(providers, filterOptions2) ' Sensitive
         End Sub
     End Class
 End Namespace
@@ -153,30 +144,30 @@ Imports log4net.Repository
 Namespace Logging
     Class Log4netLogging
         Private Sub Foo(ByVal repository As ILoggerRepository, ByVal element As XmlElement, ByVal configFile As FileInfo, ByVal configUri As Uri, ByVal configStream As Stream, ByVal appender As IAppender, ParamArray appenders As IAppender())
-            log4net.Config.XmlConfigurator.Configure(repository) ' Questionable
-            log4net.Config.XmlConfigurator.Configure(repository, element) ' Questionable
-            log4net.Config.XmlConfigurator.Configure(repository, configFile) ' Questionable
-            log4net.Config.XmlConfigurator.Configure(repository, configUri) ' Questionable
-            log4net.Config.XmlConfigurator.Configure(repository, configStream) ' Questionable
-            log4net.Config.XmlConfigurator.ConfigureAndWatch(repository, configFile) ' Questionable
+            log4net.Config.XmlConfigurator.Configure(repository) ' Sensitive
+            log4net.Config.XmlConfigurator.Configure(repository, element) ' Sensitive
+            log4net.Config.XmlConfigurator.Configure(repository, configFile) ' Sensitive
+            log4net.Config.XmlConfigurator.Configure(repository, configUri) ' Sensitive
+            log4net.Config.XmlConfigurator.Configure(repository, configStream) ' Sensitive
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(repository, configFile) ' Sensitive
 
-            log4net.Config.DOMConfigurator.Configure() ' Questionable
-            log4net.Config.DOMConfigurator.Configure(repository) ' Questionable
-            log4net.Config.DOMConfigurator.Configure(element) ' Questionable
-            log4net.Config.DOMConfigurator.Configure(repository, element) ' Questionable
-            log4net.Config.DOMConfigurator.Configure(configFile) ' Questionable
-            log4net.Config.DOMConfigurator.Configure(repository, configFile) ' Questionable
-            log4net.Config.DOMConfigurator.Configure(configStream) ' Questionable
-            log4net.Config.DOMConfigurator.Configure(repository, configStream) ' Questionable
-            log4net.Config.DOMConfigurator.ConfigureAndWatch(configFile) ' Questionable
-            log4net.Config.DOMConfigurator.ConfigureAndWatch(repository, configFile) ' Questionable
+            log4net.Config.DOMConfigurator.Configure() ' Sensitive
+            log4net.Config.DOMConfigurator.Configure(repository) ' Sensitive
+            log4net.Config.DOMConfigurator.Configure(element) ' Sensitive
+            log4net.Config.DOMConfigurator.Configure(repository, element) ' Sensitive
+            log4net.Config.DOMConfigurator.Configure(configFile) ' Sensitive
+            log4net.Config.DOMConfigurator.Configure(repository, configFile) ' Sensitive
+            log4net.Config.DOMConfigurator.Configure(configStream) ' Sensitive
+            log4net.Config.DOMConfigurator.Configure(repository, configStream) ' Sensitive
+            log4net.Config.DOMConfigurator.ConfigureAndWatch(configFile) ' Sensitive
+            log4net.Config.DOMConfigurator.ConfigureAndWatch(repository, configFile) ' Sensitive
 
-            log4net.Config.BasicConfigurator.Configure() ' Questionable
-            log4net.Config.BasicConfigurator.Configure(appender) ' Questionable
-            log4net.Config.BasicConfigurator.Configure(appenders) ' Questionable
-            log4net.Config.BasicConfigurator.Configure(repository) ' Questionable
-            log4net.Config.BasicConfigurator.Configure(repository, appender) ' Questionable
-            log4net.Config.BasicConfigurator.Configure(repository, appenders) ' Questionable
+            log4net.Config.BasicConfigurator.Configure() ' Sensitive
+            log4net.Config.BasicConfigurator.Configure(appender) ' Sensitive
+            log4net.Config.BasicConfigurator.Configure(appenders) ' Sensitive
+            log4net.Config.BasicConfigurator.Configure(repository) ' Sensitive
+            log4net.Config.BasicConfigurator.Configure(repository, appender) ' Sensitive
+            log4net.Config.BasicConfigurator.Configure(repository, appenders) ' Sensitive
         End Sub
     End Class
 End Namespace
@@ -186,7 +177,7 @@ End Namespace
 Namespace Logging
     Class NLogLogging
         Private Sub Foo(ByVal config As NLog.Config.LoggingConfiguration)
-            NLog.LogManager.Configuration = config ' Questionable
+            NLog.LogManager.Configuration = config ' Sensitive
         End Sub
     End Class
 End Namespace
@@ -196,9 +187,20 @@ End Namespace
 Namespace Logging
     Class SerilogLogging
         Private Sub Foo()
-            Dim config As Serilog.LoggerConfiguration = New Serilog.LoggerConfiguration() ' Questionable
+            Dim config As Serilog.LoggerConfiguration = New Serilog.LoggerConfiguration() ' Sensitive
         End Sub
     End Class
 End Namespace
 </pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure
+  </li>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A10-Insufficient_Logging%26Monitoring">OWASP Top 10 2017 Category A10</a> - Insufficient
+  Logging &amp; Monitoring </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/532.html">MITRE, CWE-532</a> - Information Exposure Through Log Files </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/117.html">MITRE, CWE-117</a> - Improper Output Neutralization for Logs </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/778.html">MITRE, CWE-778</a> - Insufficient Logging </li>
+  <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
+</ul>
 

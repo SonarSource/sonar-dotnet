@@ -26,7 +26,7 @@ user's permissions from an HTTP cookie as it can be modified client-side.</p>
 <p>Enable administrators to swiftly remove permissions when necessary. This enables them to reduce the time an attacker can have access to your
 systems when a breach occurs.</p>
 <p>Log and monitor refused access requests as they can reveal an attack.</p>
-<h2>Questionable Code Example</h2>
+<h2>Sensitive Code Example</h2>
 <pre>
 using System.Threading;
 using System.Security.Permissions;
@@ -35,37 +35,37 @@ using System.IdentityModel.Tokens;
 
 class SecurityPrincipalDemo
 {
-    class MyIdentity : IIdentity // Questionable, custom IIdentity implementations should be reviewed
+    class MyIdentity : IIdentity // Sensitive, custom IIdentity implementations should be reviewed
     {
         // ...
     }
 
-    class MyPrincipal : IPrincipal // Questionable, custom IPrincipal implementations should be reviewed
+    class MyPrincipal : IPrincipal // Sensitive, custom IPrincipal implementations should be reviewed
     {
         // ...
     }
-    [System.Security.Permissions.PrincipalPermission(SecurityAction.Demand, Role = "Administrators")] // Questionable. The access restrictions enforced by this attribute should be reviewed.
+    [System.Security.Permissions.PrincipalPermission(SecurityAction.Demand, Role = "Administrators")] // Sensitive. The access restrictions enforced by this attribute should be reviewed.
     static void CheckAdministrator()
     {
-        WindowsIdentity MyIdentity = WindowsIdentity.GetCurrent(); // Questionable
-        HttpContext.User = ...; // Questionable: review all reference (set and get) to System.Web HttpContext.User
+        WindowsIdentity MyIdentity = WindowsIdentity.GetCurrent(); // Sensitive
+        HttpContext.User = ...; // Sensitive: review all reference (set and get) to System.Web HttpContext.User
         AppDomain domain = AppDomain.CurrentDomain;
-        domain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal); // Questionable
-        MyIdentity identity = new MyIdentity(); // Questionable
-        MyPrincipal MyPrincipal = new MyPrincipal(MyIdentity); // Questionable
-        Thread.CurrentPrincipal = MyPrincipal; // Questionable
-        domain.SetThreadPrincipal(MyPrincipal); // Questionable
+        domain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal); // Sensitive
+        MyIdentity identity = new MyIdentity(); // Sensitive
+        MyPrincipal MyPrincipal = new MyPrincipal(MyIdentity); // Sensitive
+        Thread.CurrentPrincipal = MyPrincipal; // Sensitive
+        domain.SetThreadPrincipal(MyPrincipal); // Sensitive
 
         // All instantiation of PrincipalPermission should be reviewed.
-        PrincipalPermission principalPerm = new PrincipalPermission(null, "Administrators"); // Questionable
+        PrincipalPermission principalPerm = new PrincipalPermission(null, "Administrators"); // Sensitive
         principalPerm.Demand();
 
         SecurityTokenHandler handler = ...;
-        // Questionable: this creates an identity.
+        // Sensitive: this creates an identity.
         ReadOnlyCollection&lt;ClaimsIdentity&gt; identities = handler.ValidateToken(…);
     }
 
-     // Questionable: review how this function uses the identity and principal.
+     // Sensitive: review how this function uses the identity and principal.
     void modifyPrincipal(MyIdentity identity, MyPrincipal principal)
     {
         // ...
@@ -74,7 +74,7 @@ class SecurityPrincipalDemo
 </pre>
 <h2>See</h2>
 <ul>
-  <li> OWASP Top 10 2017 Category A5 - Broken Access Control </li>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A5-Broken_Access_Control">OWASP Top 10 2017 Category A5</a> - Boken Access Control </li>
   <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
 </ul>
 

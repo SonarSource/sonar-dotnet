@@ -19,8 +19,8 @@ which has debug features activated is extremely dangerous.</p>
 <code>Microsoft.AspNetCore.Builder.IApplicationBuilder.UseDeveloperExceptionPage</code> and
 <code>Microsoft.AspNetCore.Builder.IApplicationBuilder.UseDatabaseErrorPage</code> are two of them. Make sure that those features are disabled in
 production.</p>
-<p>Use <code>if (env.IsDevelopment())</code> to disable debug code.</p>
-<h2>Questionable Code Example</h2>
+<p> Use <code>if (env.IsDevelopment())</code> to disable debug code.</p>
+<h2>Sensitive Code Example</h2>
 <p>This rule raises issues when the following .Net Core methods are called:
 <code>Microsoft.AspNetCore.Builder.IApplicationBuilder.UseDeveloperExceptionPage</code>,
 <code>Microsoft.AspNetCore.Builder.IApplicationBuilder.UseDatabaseErrorPage</code>. No Issue is raised when those calls are disabled by <code>if
@@ -41,9 +41,9 @@ namespace mvcApp
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
-            // Those calls are Questionable because it seems that they will run in production
-            app.UseDeveloperExceptionPage(); // Questionable
-            app.UseDatabaseErrorPage(); // Questionable
+            // Those calls are Sensitive because it seems that they will run in production
+            app.UseDeveloperExceptionPage(); // Sensitive
+            app.UseDatabaseErrorPage(); // Sensitive
         }
     }
 }
@@ -53,8 +53,9 @@ namespace mvcApp
 <p>This rule does not analyze configuration files. Make sure that debug mode is not enabled by default in those files.</p>
 <h2>See</h2>
 <ul>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure
+  </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/489.html">MITRE, CWE-489</a> - Leftover Debug Code </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/215.html">MITRE, CWE-215</a> - Information Exposure Through Debug Information </li>
-  <li> OWASP Top 10 2017 Category A3 - Sensitive Data Exposure </li>
 </ul>
 

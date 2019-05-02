@@ -51,7 +51,7 @@ regularly. However these are not the only means to defeat or weaken an encryptio
       <li> Cipher Block Chaining (CBC) with PKCS#5 padding (or PKCS#7) is susceptible to padding oracle attacks. </li>
     </ul> </li>
 </ul>
-<h2>Questionable Code Example</h2>
+<h2>Sensitive Code Example</h2>
 <pre>
 Imports System
 Imports System.Security.Cryptography
@@ -68,38 +68,38 @@ Namespace MyNamespace
             Dim padding As RSAEncryptionPadding = RSAEncryptionPadding.CreateOaep(HashAlgorithmName.SHA1)
 
             ' Review all base RSA class' Encrypt/Decrypt calls
-            myRSA.Encrypt(data, padding)  ' Questionable
-            myRSA.EncryptValue(data)      ' Questionable
-            myRSA.Decrypt(data, padding)  ' Questionable
-            myRSA.DecryptValue(data)      ' Questionable
+            myRSA.Encrypt(data, padding)  ' Sensitive
+            myRSA.EncryptValue(data)      ' Sensitive
+            myRSA.Decrypt(data, padding)  ' Sensitive
+            myRSA.DecryptValue(data)      ' Sensitive
 
             Dim myRSAC As RSACryptoServiceProvider = New RSACryptoServiceProvider()
             ' Review the use of any TryEncrypt/TryDecrypt And specific Encrypt/Decrypt of RSA subclasses.
-            myRSAC.Encrypt(data, False)    ' Questionable
-            myRSAC.Decrypt(data, False)    ' Questionable
+            myRSAC.Encrypt(data, False)    ' Sensitive
+            myRSAC.Decrypt(data, False)    ' Sensitive
 
             Dim written As Integer
-            myRSAC.TryEncrypt(data, Span&lt;byte&gt;.Empty, padding, out written) ' Questionable
-            myRSAC.TryDecrypt(data, Span&lt;byte&gt;.Empty, padding, out written) ' Questionable
+            myRSAC.TryEncrypt(data, Span&lt;byte&gt;.Empty, padding, out written) ' Sensitive
+            myRSAC.TryDecrypt(data, Span&lt;byte&gt;.Empty, padding, out written) ' Sensitive
 
             Dim rgbKey As Byte() = {1, 2, 3}
             Dim rgbIV As Byte() = {4, 5, 6}
             Dim rijn = SymmetricAlgorithm.Create()
 
             ' Review the creation of Encryptors from any SymmetricAlgorithm instance.
-            rijn.CreateEncryptor()   ' Questionable
-            rijn.CreateEncryptor(rgbKey, rgbIV)  ' Questionable
-            rijn.CreateDecryptor()  ' Questionable
-            rijn.CreateDecryptor(rgbKey, rgbIV)  ' Questionable
+            rijn.CreateEncryptor()   ' Sensitive
+            rijn.CreateEncryptor(rgbKey, rgbIV)  ' Sensitive
+            rijn.CreateDecryptor()  ' Sensitive
+            rijn.CreateDecryptor(rgbKey, rgbIV)  ' Sensitive
         End Sub
 
         Public Class MyCrypto
-            Inherits System.Security.Cryptography.AsymmetricAlgorithm ' Questionable
+            Inherits System.Security.Cryptography.AsymmetricAlgorithm ' Sensitive
             ' ...
         End Class
 
         Public Class MyCrypto2
-            Inherits System.Security.Cryptography.SymmetricAlgorithm ' Questionable
+            Inherits System.Security.Cryptography.SymmetricAlgorithm ' Sensitive
             ' ...
         End Class
     End Class
@@ -108,6 +108,10 @@ End Namespace
 </pre>
 <h2>See</h2>
 <ul>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure
+  </li>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A6-Security_Misconfiguration">OWASP Top 10 2017 Category A6</a> - Security
+  Misconfiguration </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/321.html">MITRE, CWE-321</a> - Use of Hard-coded Cryptographic Key </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/322.html">MITRE, CWE-322</a> - Key Exchange without Entity Authentication </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/323.html">MITRE, CWE-323</a> - Reusing a Nonce, Key Pair in Encryption </li>
@@ -116,8 +120,6 @@ End Namespace
   <li> <a href="http://cwe.mitre.org/data/definitions/326.html">MITRE, CWE-326</a> - Inadequate Encryption Strength </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/327.html">MITRE, CWE-327</a> - Use of a Broken or Risky Cryptographic Algorithm </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/522.html">MITRE, CWE-522</a> - Insufficiently Protected Credentials </li>
-  <li> [OWASP Top 10 2017 Category A3 - Sensitive Data Exposure </li>
-  <li> [OWASP Top 10 2017 Category A6 - Security Misconfiguration </li>
   <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
 </ul>
 
