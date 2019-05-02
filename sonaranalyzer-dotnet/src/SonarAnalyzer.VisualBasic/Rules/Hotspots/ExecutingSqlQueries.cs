@@ -82,13 +82,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 !IsConcatenationOfConstants(concatenation, semanticModel)
             );
 
-        protected override bool IsFormat(ExpressionSyntax argument, SemanticModel semanticModel) =>
-            IsStringMethodInvocation("Format", argument, semanticModel);
-
         protected override bool IsInterpolated(ExpressionSyntax argument) =>
             argument.IsAnyKind(SyntaxKind.InterpolatedStringExpression);
 
-        private bool IsStringMethodInvocation(string methodName, ExpressionSyntax expression, SemanticModel semanticModel)
+        protected override bool IsStringMethodInvocation(string methodName, ExpressionSyntax expression, SemanticModel semanticModel)
         {
             return expression is InvocationExpressionSyntax invocation &&
                 invocation.IsMethodInvocation(KnownType.System_String, methodName, semanticModel) &&

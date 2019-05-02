@@ -103,9 +103,12 @@ namespace SonarAnalyzer.Rules
 
         protected abstract bool IsConcat(TExpressionSyntax argument, SemanticModel semanticModel);
 
-        protected abstract bool IsFormat(TExpressionSyntax argument, SemanticModel semanticModel);
-
         protected abstract bool IsInterpolated(TExpressionSyntax argument);
+
+        protected abstract bool IsStringMethodInvocation(string methodName, TExpressionSyntax expression, SemanticModel semanticModel);
+
+        private bool IsFormat(TExpressionSyntax argument, SemanticModel semanticModel) =>
+            IsStringMethodInvocation("Format", argument, semanticModel);
 
         private InvocationCondition MethodHasRawSqlQueryParameter() =>
             (context) =>
