@@ -31,8 +31,9 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class DoNotHardcodeCredentialsBase : ParameterLoadingDiagnosticAnalyzer
     {
+
         protected const string DiagnosticId = "S2068";
-        protected const string MessageFormat = "Remove hard-coded password(s): '{0}'.";
+        protected const string MessageFormat = "'{0}' detected in this expression, review this potentially hardcoded credential.";
 
         private const string DefaultCredentialWords = "password, passwd, pwd";
 
@@ -101,7 +102,7 @@ namespace SonarAnalyzer.Rules
 
             protected IEnumerable<string> FindCredentialWords(string variableName, string variableValue)
             {
-                if (string.IsNullOrWhiteSpace(variableValue))
+                if (string.IsNullOrEmpty(variableValue?.Trim()))
                 {
                     return Enumerable.Empty<string>();
                 }
