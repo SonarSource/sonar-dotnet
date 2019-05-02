@@ -55,7 +55,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentialsBase analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode) =>
-                syntaxNode.Initializer?.Value.ToString();
+                (syntaxNode.Initializer?.Value as LiteralExpressionSyntax)?.Token.ValueText;
+
 
             protected override string GetVariableName(VariableDeclaratorSyntax syntaxNode) =>
                 syntaxNode.Names[0].Identifier.ValueText; // We already tested the count in IsAssignedWithStringLiteral
