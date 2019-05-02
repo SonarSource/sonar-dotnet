@@ -25,8 +25,7 @@ characters: <code>*+{</code>.</p>
 vulnerability reports mentioning the one engine you're are using.</p>
 <p>If the regular expression is vulnerable to ReDos attacks, mitigate the risk by using a "match timeout" to limit the time spent running the regular
 expression.</p>
-<p>Remember also that a ReDos attack is possible if a user-provided regular expression is executed. This rule doesn't detect this kind of
-vulnerability.</p>
+<p>Remember also that a ReDos attack is possible if a user-provided regular expression is executed. This rule won't detect this kind of injection.</p>
 <h2>Sensitive Code Example</h2>
 <pre>
 Imports System

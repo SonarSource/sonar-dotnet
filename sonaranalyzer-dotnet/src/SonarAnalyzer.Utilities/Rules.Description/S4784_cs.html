@@ -25,8 +25,7 @@ characters: <code>*+{</code>.</p>
 vulnerability reports mentioning the one engine you're are using.</p>
 <p>If the regular expression is vulnerable to ReDos attacks, mitigate the risk by using a "match timeout" to limit the time spent running the regular
 expression.</p>
-<p>Remember also that a ReDos attack is possible if a user-provided regular expression is executed. See rule {rule:csharpsquid:S2631} which detects
-such regular expression injections.</p>
+<p>Remember also that a ReDos attack is possible if a user-provided regular expression is executed. This rule won't detect this kind of injection.</p>
 <h2>Sensitive Code Example</h2>
 <pre>
 using System;
@@ -81,10 +80,5 @@ namespace N
   <li> <a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">MITRE, CWE-624</a> - Executable Regular Expression Error
   </li>
   <li> OWASP Regular expression Denial of Service - ReDoS </li>
-</ul>
-<h3>See also</h3>
-<ul>
-  <li> {rule:csharpsquid:S2631} - Regular expressions should not be vulnerable to Denial of Service attacks (available in SonarCloud and SonarQube
-  Developer Edition) </li>
 </ul>
 
