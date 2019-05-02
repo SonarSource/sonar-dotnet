@@ -56,6 +56,9 @@ namespace Tests.Diagnostics
 
             "".DoSomething(null); // Compliant
             new int[] { 1 }.DoSomething(null); // Compliant
+
+            string.Intern("abc"); // Compliant
+            string.Compare("abc", "def"); // Noncompliant
         }
         void M(object o) { }
     }

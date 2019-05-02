@@ -94,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var constructedFrom = invokedMethodSymbol.ContainingType.ConstructedFrom;
 
             return IsLinqMethod(invokedMethodSymbol) ||
-                HasOnlySideEffectFreeMethods(constructedFrom) ||
+                HasOnlySideEffectFreeMethods(invokedMethodSymbol, constructedFrom) ||
                 IsPureMethod(invokedMethodSymbol, constructedFrom);
         }
 
@@ -102,9 +102,10 @@ namespace SonarAnalyzer.Rules.CSharp
             invokedMethodSymbol.GetAttributes(KnownType.System_Diagnostics_Contracts_PureAttribute).Any() ||
             containingType.GetAttributes(KnownType.System_Diagnostics_Contracts_PureAttribute).Any();
 
-        private static bool HasOnlySideEffectFreeMethods(INamedTypeSymbol containingType)
+        private static bool HasOnlySideEffectFreeMethods(IMethodSymbol invokedMethodSymbol, INamedTypeSymbol containingType)
         {
-            return containingType.IsAny(ImmutableKnownTypes);
+            return containingType.IsAny(ImmutableKnownTypes) ||
+                (containingType.Is(KnownType.System_String) && invokedMethodSymbol.Name != "Intern");
         }
 
         private static readonly ImmutableArray<KnownType> ImmutableKnownTypes =
@@ -123,7 +124,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Double,
                 KnownType.System_Decimal,
                 KnownType.System_Boolean,
-                KnownType.System_String,
 
                 KnownType.System_Collections_Immutable_ImmutableArray,
                 KnownType.System_Collections_Immutable_ImmutableArray_T,
