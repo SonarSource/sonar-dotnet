@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
@@ -55,7 +56,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentialsBase analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode) =>
-                (syntaxNode.Initializer?.Value as LiteralExpressionSyntax)?.Token.ValueText;
+                syntaxNode.Initializer?.Value.GetStringValue();
 
 
             protected override string GetVariableName(VariableDeclaratorSyntax syntaxNode) =>
@@ -74,7 +75,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             public AssignmentExpressionBannedWordsFinder(DoNotHardcodeCredentialsBase analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(AssignmentStatementSyntax syntaxNode) =>
-                (syntaxNode.Right as LiteralExpressionSyntax)?.Token.ValueText;
+                syntaxNode.Right.GetStringValue();
 
             protected override string GetVariableName(AssignmentStatementSyntax syntaxNode) =>
                 (syntaxNode.Left as IdentifierNameSyntax)?.Identifier.ValueText;

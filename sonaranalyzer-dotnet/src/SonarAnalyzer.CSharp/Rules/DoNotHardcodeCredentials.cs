@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentialsBase analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode) =>
-                (syntaxNode.Initializer?.Value as LiteralExpressionSyntax)?.Token.ValueText;
+                syntaxNode.Initializer?.Value.GetStringValue();
 
             protected override string GetVariableName(VariableDeclaratorSyntax syntaxNode) =>
                 syntaxNode.Identifier.ValueText;
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public AssignmentExpressionBannedWordsFinder(DoNotHardcodeCredentialsBase analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(AssignmentExpressionSyntax syntaxNode) =>
-                (syntaxNode.Right as LiteralExpressionSyntax)?.Token.ValueText;
+                syntaxNode.Right.GetStringValue();
 
             protected override string GetVariableName(AssignmentExpressionSyntax syntaxNode) =>
                 (syntaxNode.Left as IdentifierNameSyntax)?.Identifier.ValueText;
