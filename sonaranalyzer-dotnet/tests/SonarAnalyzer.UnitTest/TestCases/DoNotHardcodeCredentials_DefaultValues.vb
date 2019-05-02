@@ -3,9 +3,9 @@
 Namespace Tests.Diagnostics
     Class Program
         Public Sub Test()
-            Dim password As String = "foo" 'Noncompliant {{Remove hard-coded password(s): 'password'.}}
+            Dim password As String = "foo" 'Noncompliant {{'password' detected in this expression, review this potentially hardcoded credential.}}
 '               ^^^^^^^^^^^^^^^^^^^^^^^^^^
-            Dim foo As String, passwd As String = "a" 'Noncompliant {{Remove hard-coded password(s): 'passwd'.}}
+            Dim foo As String, passwd As String = "a" 'Noncompliant {{'passwd' detected in this expression, review this potentially hardcoded credential.}}
 '                              ^^^^^^^^^^^^^^^^^^^^^^
             Dim foo2 As String = "Password=123" 'Noncompliant
             Dim bar As String
@@ -15,6 +15,12 @@ Namespace Tests.Diagnostics
             foo = "passwordpassword"
             foo = "foo=1;password=1" 'Noncompliant
             foo = "foo=1password=1"
+
+            Dim myPassword1 As String = Nothing
+            Dim myPassword2 As String = ""
+            Dim myPassword3 As String = "   "
+            Dim myPassword4 As String = "foo" 'Noncompliant {{'password' detected in this expression, review this potentially hardcoded credential.}}
+
         End Sub
     End Class
 

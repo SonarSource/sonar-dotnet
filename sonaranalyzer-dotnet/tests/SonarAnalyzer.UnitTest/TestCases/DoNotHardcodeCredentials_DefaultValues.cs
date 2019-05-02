@@ -6,10 +6,10 @@ namespace Tests.Diagnostics
     {
         public void Test()
         {
-            string password = @"foo"; // Noncompliant {{Remove hard-coded password(s): 'password'.}}
+            string password = @"foo"; // Noncompliant {{'password' detected in this expression, review this potentially hardcoded credential.}}
 //                 ^^^^^^^^^^^^^^^^^
 
-            string foo, passwd = "a"; // Noncompliant {{Remove hard-coded password(s): 'passwd'.}}
+            string foo, passwd = "a"; // Noncompliant {{'passwd' detected in this expression, review this potentially hardcoded credential.}}
 //                      ^^^^^^^^^^^^
 
             string foo2 = @"Password=123"; // Noncompliant
@@ -23,6 +23,11 @@ namespace Tests.Diagnostics
             foo = "foo=1;password=1"; // Noncompliant
             foo = "foo=1password=1";
             foo = ""; // Compliant
+
+            string myPassword1 = null;
+            string myPassword2 = "";
+            string myPassword3 = "        ";
+            string myPassword4 = @"foo"; // Noncompliant {{'password' detected in this expression, review this potentially hardcoded credential.}}
         }
     }
 

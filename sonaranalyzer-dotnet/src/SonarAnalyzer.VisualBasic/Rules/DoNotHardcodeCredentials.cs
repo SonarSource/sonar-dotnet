@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
@@ -55,7 +56,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentialsBase analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode) =>
-                syntaxNode.Initializer?.Value.ToString();
+                syntaxNode.Initializer?.Value.GetStringValue();
+
 
             protected override string GetVariableName(VariableDeclaratorSyntax syntaxNode) =>
                 syntaxNode.Names[0].Identifier.ValueText; // We already tested the count in IsAssignedWithStringLiteral
@@ -73,7 +75,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             public AssignmentExpressionBannedWordsFinder(DoNotHardcodeCredentialsBase analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(AssignmentStatementSyntax syntaxNode) =>
-                (syntaxNode.Right as LiteralExpressionSyntax)?.Token.ValueText;
+                syntaxNode.Right.GetStringValue();
 
             protected override string GetVariableName(AssignmentStatementSyntax syntaxNode) =>
                 (syntaxNode.Left as IdentifierNameSyntax)?.Identifier.ValueText;
