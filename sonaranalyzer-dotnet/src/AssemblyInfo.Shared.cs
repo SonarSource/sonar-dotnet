@@ -23,10 +23,10 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("7.14.0")]
-[assembly: AssemblyFileVersion("7.14.0.0")]
+[assembly: AssemblyVersion("7.15.0")]
+[assembly: AssemblyFileVersion("7.15.0.0")]
 // The value should look like "Version:X.X.X.X Branch:not-set Sha1:not-set"
-[assembly: AssemblyInformationalVersion("Version:7.14.0.0 Branch:not-set Sha1:not-set")]
+[assembly: AssemblyInformationalVersion("Version:7.15.0.0 Branch:not-set Sha1:not-set")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SonarSource")]
 [assembly: AssemblyCopyright("Copyright © 2015-2019 SonarSource SA")]
