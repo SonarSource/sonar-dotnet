@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>SonarAnalyzer.RuleDocGenerator.VisualBasic</id>
-    <version>7.13.0.0</version>
+    <version>7.14.0.0</version>
     <title>SonarAnalyzer Rule Descriptor Generator for VB.Net</title>
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>
