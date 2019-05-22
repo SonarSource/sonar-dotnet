@@ -58,5 +58,9 @@ namespace Tests.Diagnostics
         {
             return !(a==b); // Compliant
         }
+
+        // Note that this is not the same as "collection?.Count <= 0" because when null is compared to a number, the result will always be false
+        public static bool IsNullOrEmpty<T>(IList<T> collection)
+            => !(collection?.Count > 0); // Noncompliant FP #2427
     }
 }
