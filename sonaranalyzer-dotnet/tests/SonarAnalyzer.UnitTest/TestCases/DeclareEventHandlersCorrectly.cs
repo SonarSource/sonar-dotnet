@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -28,5 +28,10 @@ namespace Tests.Diagnostics
         }
 
         public event CorrectEventHandler CorrectEvent;
+    }
+
+    public class Bar<TEventArgs> where TEventArgs : EventArgs
+    {
+        public event EventHandler<TEventArgs> SomethingHappened; // Noncompliant FP #2423
     }
 }
