@@ -51,5 +51,9 @@ Namespace Tests.Diagnostics
         Public Shared Operator <>(ByVal a As BooleanCheckInverted, ByVal b As BooleanCheckInverted) As Boolean
             Return Not (a = b) 'Compliant
         End Operator
+
+        Public Shared Function IsNullOrEmpty(Of T)(ByVal collection As IList(Of T)) As Boolean
+            Return Not (collection?.Count > 0) 'Noncompliant FP #2427
+        End Function
     End Class
 End Namespace
