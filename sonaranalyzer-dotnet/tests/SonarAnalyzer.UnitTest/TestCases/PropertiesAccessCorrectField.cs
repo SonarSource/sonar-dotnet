@@ -522,4 +522,16 @@ namespace Tests.Diagnostics
             set => throw new System.InvalidOperationException(""); // Compliant
         }
     }
+
+    public class CrossProcedural
+    {
+        private int myValue;
+        public int MyValue
+        {
+            get => this.myValue;
+            set => this.SetMyValue(value); // Noncompliant FP
+        }
+
+        private void SetMyValue(int value) => this.myValue = value;
+    }
 }
