@@ -7,7 +7,7 @@
     </Setting>
     <Setting>
       <Key>sonar.cs.analyzeGeneratedCode</Key>
-      <Value>false</Value>
+      <Value>true</Value>
     </Setting>
     <Setting>
       <Key>sonar.cs.file.suffixes</Key>

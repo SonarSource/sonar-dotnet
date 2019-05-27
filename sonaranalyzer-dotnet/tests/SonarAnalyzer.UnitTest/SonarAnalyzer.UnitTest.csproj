@@ -55,6 +55,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="ResourceTests\Malformed\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\NoSettings\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\AnalyzeGenerated\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="ResourceTests\SonarLint.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

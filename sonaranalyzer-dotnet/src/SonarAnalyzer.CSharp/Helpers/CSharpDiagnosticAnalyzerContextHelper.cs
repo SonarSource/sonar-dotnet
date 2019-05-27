@@ -115,10 +115,11 @@ namespace SonarAnalyzer.Helpers
 
         #region SyntaxTree.IsGenerated
 
-        internal static bool IsGenerated(this SyntaxTree tree,
+        internal static bool ShouldAnalyze(this SyntaxTree tree, AnalyzerOptions options,
             Compilation compilation)
         {
-            return tree.IsGenerated(CSharp.CSharpGeneratedCodeRecognizer.Instance, compilation);
+            return !tree.IsGenerated(CSharp.CSharpGeneratedCodeRecognizer.Instance, compilation) ||
+                options.ShouldAnalyzeGeneratedCode(LanguageNames.CSharp);
         }
 
         #endregion SyntaxTree.IsGenerated

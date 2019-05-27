@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var declarationSyntax = GetTypeDeclaration(namedType, c.Compilation);
+                    var declarationSyntax = GetTypeDeclaration(namedType, c.Compilation, c.Options);
                     if (declarationSyntax == null)
                     {
                         return;
@@ -97,10 +97,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Any(m => m.GetAttributes(KnownType.System_ServiceModel_OperationContractAttribute).Any());
         }
 
-        private static TypeDeclarationSyntax GetTypeDeclaration(INamedTypeSymbol namedType, Compilation compilation)
+        private static TypeDeclarationSyntax GetTypeDeclaration(INamedTypeSymbol namedType, Compilation compilation,
+            AnalyzerOptions options)
         {
             return namedType.DeclaringSyntaxReferences
-                .Where(sr => !sr.SyntaxTree.IsGenerated(compilation))
+                .Where(sr => sr.SyntaxTree.ShouldAnalyze(options, compilation))
                 .Select(sr => sr.GetSyntax() as TypeDeclarationSyntax)
                 .FirstOrDefault(s => s != null);
         }

@@ -29,6 +29,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -131,7 +132,8 @@ namespace SonarAnalyzer.Rules.CSharp
                                 c.Compilation.GetSemanticModel,
                                 removableInternalTypes.Select(s => s.Name).ToHashSet());
 
-                            foreach (var syntaxTree in c.Compilation.SyntaxTrees.Where(tree => !tree.IsGenerated(c.Compilation)))
+                            foreach (var syntaxTree in c.Compilation.SyntaxTrees
+                                                        .Where(tree => !tree.IsGenerated(CSharpGeneratedCodeRecognizer.Instance, c.Compilation)))
                             {
                                 usageCollector.SafeVisit(syntaxTree.GetRoot());
                             }
@@ -304,7 +306,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return true;
 
             bool IsGenerated(SyntaxReference syntaxReference) =>
-                syntaxReference.SyntaxTree.IsGenerated(compilation);
+                syntaxReference.SyntaxTree.IsGenerated(CSharpGeneratedCodeRecognizer.Instance, compilation);
         }
         /// <summary>
         /// Collects private or internal member symbols that could potentially be removed if they are not used.
