@@ -31,13 +31,13 @@ namespace SonarAnalyzer.Helpers
             context.Node.SyntaxTree;
         public static SyntaxTree GetSyntaxTree(this SyntaxTreeAnalysisContext context) =>
             context.Tree;
-        public static SyntaxTree GetSyntaxTree(this CompilationAnalysisContext context) =>
+        public static SyntaxTree GetFirstSyntaxTree(this CompilationAnalysisContext context) =>
             context.Compilation.SyntaxTrees.FirstOrDefault();
 #pragma warning disable RS1012 // Start action has no registered actions.
-        public static SyntaxTree GetSyntaxTree(this CompilationStartAnalysisContext context) =>
+        public static SyntaxTree GetFirstSyntaxTree(this CompilationStartAnalysisContext context) =>
 #pragma warning restore RS1012 // Start action has no registered actions.
             context.Compilation.SyntaxTrees.FirstOrDefault();
-        public static SyntaxTree GetSyntaxTree(this SymbolAnalysisContext context) =>
+        public static SyntaxTree GetFirstSyntaxTree(this SymbolAnalysisContext context) =>
             context.Symbol.Locations.FirstOrDefault(l => l.SourceTree != null)?.SourceTree;
         public static SyntaxTree GetSyntaxTree(this CodeBlockAnalysisContext context) =>
             context.CodeBlock.SyntaxTree;

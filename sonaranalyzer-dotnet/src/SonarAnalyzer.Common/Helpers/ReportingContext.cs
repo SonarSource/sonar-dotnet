@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Helpers
 
         public ReportingContext(CompilationAnalysisContext context, Diagnostic diagnostic)
         {
-            SyntaxTree = context.GetSyntaxTree();
+            SyntaxTree = context.GetFirstSyntaxTree();
             Compilation = context.Compilation;
             Diagnostic = diagnostic;
             this.contextSpecificReport = context.ReportDiagnostic;
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Helpers
 
         public ReportingContext(SymbolAnalysisContext context, Diagnostic diagnostic)
         {
-            SyntaxTree = context.GetSyntaxTree();
+            SyntaxTree = context.GetFirstSyntaxTree();
             Compilation = context.Compilation;
             Diagnostic = diagnostic;
             this.contextSpecificReport = context.ReportDiagnostic;
