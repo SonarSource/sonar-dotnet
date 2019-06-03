@@ -29,18 +29,24 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class PropertiesHelper
     {
-        internal const string AnalyzeGeneratedCodeCSharp = "sonar.cs.analyzeGeneratedCode";
-        internal const string AnalyzeGeneratedCodeVisualBasic = "sonar.vbnet.analyzeGeneratedCode";
+        private const string AnalyzeGeneratedCodeCSharp = "sonar.cs.analyzeGeneratedCode";
+        private const string AnalyzeGeneratedCodeVisualBasic = "sonar.vbnet.analyzeGeneratedCode";
 
         // TODO should make sure to read only once during analysis, probably move to IAnalyzerConfiguration
 
-        public static bool ShouldAnalyzeGeneratedCode(this AnalyzerOptions options, string language)
-            => ReadProperty(GetSettings(options),
+        internal static bool ShouldAnalyzeGeneratedCode(this AnalyzerOptions options, string language)
+            => ReadBooleanProperty(GetSettings(options),
                 language == LanguageNames.CSharp
                     ? AnalyzeGeneratedCodeCSharp
                     : AnalyzeGeneratedCodeVisualBasic);
 
-        private static IEnumerable<XElement> GetSettings(AnalyzerOptions options)
+        internal static bool ShouldAnalyzeGeneratedCode(IEnumerable<XElement> settings, string language)
+            => ReadBooleanProperty(settings,
+                language == LanguageNames.CSharp
+                    ? AnalyzeGeneratedCodeCSharp
+                    : AnalyzeGeneratedCodeVisualBasic);
+
+        internal static IEnumerable<XElement> GetSettings(AnalyzerOptions options)
         {
             var sonarLintAdditionalFile = options.AdditionalFiles
                 .FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path));
@@ -62,7 +68,7 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        private static bool ReadProperty(IEnumerable<XElement> settings, string propertyName)
+        internal static bool ReadBooleanProperty(IEnumerable<XElement> settings, string propertyName, bool defaultValue = false)
         {
             var propertyStringValue = GetPropertyStringValue(propertyName);
             if (propertyStringValue != null &&
@@ -70,7 +76,7 @@ namespace SonarAnalyzer.Helpers
             {
                 return propertyValue;
             }
-            return false;
+            return defaultValue;
 
             string GetPropertyStringValue(string propName) =>
                 settings
