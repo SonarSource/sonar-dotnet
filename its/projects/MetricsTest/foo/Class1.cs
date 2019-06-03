@@ -1,4 +1,8 @@
-﻿using System;
+﻿/**
+ * This is a header comment line 1
+ * Header comment line 2
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
