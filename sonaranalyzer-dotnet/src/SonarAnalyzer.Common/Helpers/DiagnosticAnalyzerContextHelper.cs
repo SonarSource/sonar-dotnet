@@ -188,12 +188,10 @@ namespace SonarAnalyzer.Helpers
 
         #endregion ReportDiagnosticIfNonGenerated
 
-        #region SyntaxTree.IsGenerated
-
         private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>> Cache
             = new ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>>();
 
-        private static bool ShouldAnalyze(GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation c, AnalyzerOptions options) =>
+        public static bool ShouldAnalyze(GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation c, AnalyzerOptions options) =>
             !syntaxTree.IsGenerated(generatedCodeRecognizer, c) ||
             options.ShouldAnalyzeGeneratedCode(c.Language);
 
@@ -217,7 +215,5 @@ namespace SonarAnalyzer.Helpers
             cache.TryAdd(tree, generated);
             return generated;
         }
-
-        #endregion SyntaxTree.IsGenerated
     }
 }

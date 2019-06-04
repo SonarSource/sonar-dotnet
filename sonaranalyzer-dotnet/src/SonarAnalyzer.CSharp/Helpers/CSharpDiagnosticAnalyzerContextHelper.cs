@@ -115,10 +115,10 @@ namespace SonarAnalyzer.Helpers
 
         internal static bool ShouldAnalyze(this SyntaxTree tree, AnalyzerOptions options,
             Compilation compilation)
-        {
-            return !tree.IsGenerated(CSharp.CSharpGeneratedCodeRecognizer.Instance, compilation) ||
-                // TODO PERF: do the global setting check before the per-file check.
-                options.ShouldAnalyzeGeneratedCode(LanguageNames.CSharp);
-        }
+            // TODO PERF: do the global setting check before the per-file check.
+            => DiagnosticAnalyzerContextHelper.ShouldAnalyze(CSharp.CSharpGeneratedCodeRecognizer.Instance,
+                tree,
+                compilation,
+                options);
     }
 }
