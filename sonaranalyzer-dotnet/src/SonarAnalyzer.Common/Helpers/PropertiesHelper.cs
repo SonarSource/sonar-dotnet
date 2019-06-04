@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -31,17 +32,13 @@ namespace SonarAnalyzer.Helpers
         internal const string AnalyzeGeneratedCodeCSharp = "sonar.cs.analyzeGeneratedCode";
         internal const string AnalyzeGeneratedCodeVisualBasic = "sonar.vbnet.analyzeGeneratedCode";
 
-        // TODO should make this a singleton class or make sure somehow to not read every time the setting
+        // TODO should make sure to read only once during analysis, probably move to IAnalyzerConfiguration
 
         public static bool ShouldAnalyzeGeneratedCode(this AnalyzerOptions options, string language)
-        {
-            return ReadProperty(GetSettings(options), GetProperty());
-
-            string GetProperty() =>
+            => ReadProperty(GetSettings(options),
                 language == LanguageNames.CSharp
                     ? AnalyzeGeneratedCodeCSharp
-                    : AnalyzeGeneratedCodeVisualBasic;
-        }
+                    : AnalyzeGeneratedCodeVisualBasic);
 
         private static IEnumerable<XElement> GetSettings(AnalyzerOptions options)
         {
@@ -50,11 +47,19 @@ namespace SonarAnalyzer.Helpers
 
             if (sonarLintAdditionalFile == null)
             {
-                return new List<XElement>();
+                return Enumerable.Empty<XElement>();
             }
 
-            var xml = XDocument.Load(sonarLintAdditionalFile.Path);
-            return xml.Descendants("Setting");
+            try
+            {
+                var xml = XDocument.Load(sonarLintAdditionalFile.Path);
+                return xml.Descendants("Setting");
+            }
+            catch (Exception exception)
+            {
+                // ignoring exception as we cannot log it
+                return Enumerable.Empty<XElement>();
+            }
         }
 
         private static bool ReadProperty(IEnumerable<XElement> settings, string propertyName)

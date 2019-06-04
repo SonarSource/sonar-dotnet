@@ -20,8 +20,7 @@
 */
 
 using System.Collections.Immutable;
-using System.Xml;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using System.IO;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -37,14 +36,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void ShouldAnalyzeGeneratedCode_WithTrueSetting_ReturnsTrue()
         {
-            var result = GetSetting("ResourceTests\\AnalyzeGenerated\\SonarLint.xml");
+            var result = GetSetting("ResourceTests\\AnalyzeGeneratedTrue\\SonarLint.xml");
             result.Should().BeTrue();
         }
 
         [TestMethod]
         public void ShouldAnalyzeGeneratedCode_WithFalseSetting_ReturnsFalse()
         {
-            var result = GetSetting("ResourceTests\\SonarLint.xml");
+            var result = GetSetting("ResourceTests\\AnalyzeGeneratedFalse\\SonarLint.xml");
             result.Should().BeFalse();
         }
 
@@ -56,10 +55,23 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        [ExpectedException(exceptionType:typeof(XmlException))]
         public void ShouldAnalyzeGeneratedCode_WithMalformedXml_ReturnsFalse()
         {
-            GetSetting("ResourceTests\\Malformed\\SonarLint.xml");
+            var result = GetSetting("ResourceTests\\Malformed\\SonarLint.xml");
+            result.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void ShouldAnalyzeGeneratedCode_WithNotBooleanValue_ReturnsFalse()
+        {
+            var result = GetSetting("ResourceTests\\NotBoolean\\SonarLint.xml");
+            result.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void ShouldAnalyzeGeneratedCode_WithNotExistingPath_ReturnsFalse()
+        {
+            GetSetting("ResourceTests\\NotExistingFolder\\SonarLint.xml");
         }
 
         private static bool GetSetting(string filePath)
