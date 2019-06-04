@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "C:\Users\Andrei\AppData\Local\Temp\.NETFramework,Version=v4.5.2.AssemblyAttributes.cs",
+"uri":  "%TEMP%\.NETFramework,Version=v4.5.2.AssemblyAttributes.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

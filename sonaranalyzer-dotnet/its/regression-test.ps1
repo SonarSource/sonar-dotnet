@@ -55,8 +55,26 @@ function Initialize-ActualFolder() {
 
     # this copies no files if ruleId is not set, and all but ending with ruleId if set
     Copy-FolderRecursively -From .\expected -To .\actual -Exclude "*${ruleId}.json"
+    ExpandEnvVarsInFiles ".\actual"
     $methodTimerElapsed = $methodTimer.Elapsed.TotalSeconds
     Write-Debug "Initialized actual folder in '${methodTimerElapsed}'"
+}
+
+function ExpandEnvVarsInFiles([string]$folder){
+
+    # Expand any environment variables in all files in the folder
+    Write-Host "Expanding environment variables in files in ${folder}:"
+    $files = Get-ChildItem -Path $folder -Recurse -File
+
+    foreach ($file in $files){
+
+        $fullName = $file.FullName
+        Write-Host "Processing $fullName..."
+
+        $data = [System.IO.File]::ReadAllText(${fullName})
+        $data = [System.Environment]::ExpandEnvironmentVariables($data)
+        [System.IO.File]::WriteAllText(${fullName}, $data)
+    }
 }
 
 function Initialize-OutputFolder() {
