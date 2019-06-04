@@ -1,0 +1,9 @@
+{
+"issues":  [
+{
+"id":  "S3990",
+"message":  "Mark this assembly with 'System.CLSCompliantAttribute'",
+"location":  null
+}
+]
+}

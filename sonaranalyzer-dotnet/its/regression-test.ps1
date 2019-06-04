@@ -200,6 +200,8 @@ try {
     Build-Project "akka.net" "src\Akka.sln"
     Build-Project "Nancy" "src\Nancy.sln"
     Build-Project "Ember-MM" "Ember Media Manager.sln"
+    Build-Project "AnalyzeGenerated" "AnalyzeGeneratedFiles.sln"
+    Build-Project "SkipGenerated" "SkipGeneratedFiles.sln"
 
     Write-Header "Processing analyzer results"
 
