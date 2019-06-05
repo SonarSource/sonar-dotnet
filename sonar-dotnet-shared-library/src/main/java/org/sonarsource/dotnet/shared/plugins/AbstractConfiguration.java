@@ -32,6 +32,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import org.sonar.api.batch.InstantiationStrategy;
+import org.sonar.api.batch.Phase;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.log.Logger;
@@ -42,6 +44,8 @@ import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getRoslynJsonReportPathProperty;
 
 @ScannerSide
+@InstantiationStrategy(InstantiationStrategy.PER_PROJECT)
+@Phase(name = Phase.Name.POST)
 public abstract class AbstractConfiguration {
   private static final Logger LOG = Loggers.get(AbstractConfiguration.class);
   private static final String MSG_SUFFIX = "Analyzer results won't be loaded from this directory.";
@@ -154,6 +158,10 @@ public abstract class AbstractConfiguration {
 
   public boolean ignoreThirdPartyIssues() {
     return configuration.getBoolean(AbstractPropertyDefinitions.getIgnoreIssuesProperty(languageKey)).orElse(false);
+  }
+
+  public boolean analyzeGeneratedCode() {
+    return configuration.getBoolean(AbstractPropertyDefinitions.getAnalyzeGeneratedCode(languageKey)).orElse(false);
   }
 
   public Set<String> bugCategories() {

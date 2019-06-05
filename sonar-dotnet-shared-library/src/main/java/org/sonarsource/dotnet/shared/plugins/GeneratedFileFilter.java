@@ -32,13 +32,23 @@ public class GeneratedFileFilter implements InputFileFilter {
   private static final Logger LOG = Loggers.get(GeneratedFileFilter.class);
 
   private final AbstractGlobalProtobufFileProcessor globalReportProcessor;
+  private final boolean analyzeGeneratedCode;
 
-  public GeneratedFileFilter(AbstractGlobalProtobufFileProcessor globalReportProcessor) {
+  public GeneratedFileFilter(AbstractGlobalProtobufFileProcessor globalReportProcessor, AbstractSolutionConfiguration configuration) {
     this.globalReportProcessor = globalReportProcessor;
+    this.analyzeGeneratedCode = configuration.analyzeGeneratedCode();
+    if (analyzeGeneratedCode) {
+      LOG.debug("Will analyze generated code");
+    } else {
+      LOG.debug("Will ignore generated code");
+    }
   }
 
   @Override
   public boolean accept(InputFile inputFile) {
+    if (analyzeGeneratedCode) {
+      return true;
+    }
     boolean isGenerated = globalReportProcessor.getGeneratedFilePaths().contains(inputFile.path());
     if (isGenerated) {
       LOG.debug("Skipping auto generated file: {}", inputFile);

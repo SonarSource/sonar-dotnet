@@ -61,6 +61,7 @@ public class CSharpPluginTest {
       DotNetSensor.class,
       CSharpConfiguration.class,
       CSharpGlobalProtobufFileProcessor.class,
+      CSharpSolutionConfiguration.class,
       WrongEncodingFileFilter.class,
       EncodingPerFile.class,
       ReportPathCollector.class,

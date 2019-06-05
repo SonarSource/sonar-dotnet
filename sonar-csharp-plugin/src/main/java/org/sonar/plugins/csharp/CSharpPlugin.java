@@ -60,6 +60,7 @@ public class CSharpPlugin implements Plugin {
       DotNetSensor.class,
       CSharpConfiguration.class,
       CSharpGlobalProtobufFileProcessor.class,
+      CSharpSolutionConfiguration.class,
       WrongEncodingFileFilter.class,
       EncodingPerFile.class,
       GeneratedFileFilter.class,

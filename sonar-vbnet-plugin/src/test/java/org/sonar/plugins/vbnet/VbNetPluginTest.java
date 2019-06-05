@@ -61,6 +61,7 @@ public class VbNetPluginTest {
       DotNetSensor.class,
       VbNetConfiguration.class,
       VbNetGlobalProtobufFileProcessor.class,
+      VbNetSolutionConfiguration.class,
       WrongEncodingFileFilter.class,
       EncodingPerFile.class,
       ReportPathCollector.class,

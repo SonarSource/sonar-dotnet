@@ -60,6 +60,7 @@ public class VbNetPlugin implements Plugin {
       DotNetSensor.class,
       VbNetConfiguration.class,
       VbNetGlobalProtobufFileProcessor.class,
+      VbNetSolutionConfiguration.class,
       WrongEncodingFileFilter.class,
       EncodingPerFile.class,
       GeneratedFileFilter.class,

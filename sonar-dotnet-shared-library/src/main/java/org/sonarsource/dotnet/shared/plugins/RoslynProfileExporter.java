@@ -33,6 +33,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.annotation.Nullable;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.profiles.ProfileExporter;
@@ -50,6 +51,17 @@ import org.sonar.api.utils.log.Loggers;
 
 import static java.util.stream.Collectors.toList;
 
+/**
+ * This profile exporter was build to be used by the SonarQube Scanner for MSBuild (S4MSB) during the Begin step,
+ * to download the SonarLint.xml.
+ *
+ * However, starting 2016, it is not used anymore. See commit ce945d inside the S4MSB repo.
+ *
+ * To see the defaults of the settings, see AbstractPropertyDefinitions.java
+ *
+ * See https://github.com/SonarSource/sonar-scanner-msbuild/blob/4.6.1.2049/src/SonarScanner.MSBuild.PreProcessor/Roslyn/RoslynAnalyzerProvider.cs#L150
+ *
+ */
 public class RoslynProfileExporter extends ProfileExporter {
   private static final Logger LOG = Loggers.get(RoslynProfileExporter.class);
   private static final String ROSLYN_REPOSITORY_PREFIX = "roslyn.";
@@ -217,6 +229,15 @@ public class RoslynProfileExporter extends ProfileExporter {
       appendLine(sb, "  </Settings>");
     }
 
+    if (includeSettings) {
+      appendLine(sb, "  <Settings>");
+      appendLine(sb, "    <Setting>");
+      appendLine(sb, "      <Key>" + pluginMetadata.analyzeGeneratedCodePropertyKey() + "</Key>");
+      appendLine(sb, "      <Value>false</Value>");
+      appendLine(sb, "    </Setting>");
+      appendLine(sb, "  </Settings>");
+    }
+
     appendLine(sb, "  <Rules>");
     if (includeRules) {
       for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(pluginMetadata.repositoryKey())) {
@@ -286,8 +307,12 @@ public class RoslynProfileExporter extends ProfileExporter {
     return result;
   }
 
-  private List<String> allRuleKeysByRepositoryKey(String repositoryKey) {
+  private List<String> allRuleKeysByRepositoryKey(@Nullable String repositoryKey) {
     List<String> result = new ArrayList<>();
+    if (repositoryKey == null) {
+      return result;
+    }
+
     for (RulesDefinition rulesDefinition : rulesDefinitions) {
       Context context = new Context();
       rulesDefinition.define(context);
