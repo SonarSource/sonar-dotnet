@@ -124,7 +124,7 @@ public class CoverageReportImportSensorTest {
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", true)
       .execute(context);
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Starting with SonarQube 6.2 separation between Unit Tests and Integration Tests "
+    assertThat(logTester.logs(LoggerLevel.WARN)).contains("Starting with SonarQube 6.2 separation between Unit Tests and Integration Tests "
       + "Coverage reports is deprecated. Please move all reports specified from *.it.reportPaths into *.reportPaths.");
   }
 
@@ -154,7 +154,7 @@ public class CoverageReportImportSensorTest {
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .analyze(context, coverage);
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("The Code Coverage report doesn't contain any coverage "
+    assertThat(logTester.logs(LoggerLevel.WARN)).contains("The Code Coverage report doesn't contain any coverage "
       + "data for the included files. For troubleshooting hints, please refer to https://docs.sonarqube.org/x/CoBh");
   }
 
