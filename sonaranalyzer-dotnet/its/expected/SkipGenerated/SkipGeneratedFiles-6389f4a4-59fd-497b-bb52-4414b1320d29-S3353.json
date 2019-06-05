@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'obj'.",
+"location":  {
+"uri":  "sources\GeneratedCode\handwritten.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  20,
+"endLine":  10,
+"endColumn":  23
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'args'.",
+"location":  {
+"uri":  "sources\GeneratedCode\handwritten.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  28,
+"endLine":  8,
+"endColumn":  41
+}
+}
+}
+]
+}

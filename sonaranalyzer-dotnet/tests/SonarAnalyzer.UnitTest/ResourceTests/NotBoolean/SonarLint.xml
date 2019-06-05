@@ -3,11 +3,11 @@
   <Settings>
     <Setting>
       <Key>sonar.cs.ignoreHeaderComments</Key>
-      <Value>true</Value>
+      <Value>not-boolean-value</Value>
     </Setting>
     <Setting>
       <Key>sonar.cs.analyzeGeneratedCode</Key>
-      <Value>false</Value>
+      <Value>not-boolean-value</Value>
     </Setting>
     <Setting>
       <Key>sonar.cs.file.suffixes</Key>

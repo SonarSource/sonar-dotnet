@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<AnalysisInput>
+  <Rules>
+    <Rule>
+      <Key>S1067</Key>
+      <Parameters>
+        <Parameter>
+          <Key>max</Key>
+          <Value>1</Value>
+        </Parameter>
+      </Parameters>
+    </Rule>
+  </Rules>
+  <Files>
+  </Files>
+</AnalysisInput>

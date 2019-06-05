@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Method'.",
+"location":  {
+"uri":  "sources\GeneratedCode\handwritten.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  9,
+"endLine":  12,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Foo'.",
+"location":  {
+"uri":  "sources\GeneratedCode\handwritten.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  9,
+"endLine":  16,
+"endColumn":  10
+}
+}
+}
+]
+}

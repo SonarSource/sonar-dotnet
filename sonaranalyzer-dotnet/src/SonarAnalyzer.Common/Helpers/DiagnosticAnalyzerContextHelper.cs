@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Helpers
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    if (!c.GetSyntaxTree().IsGenerated(generatedCodeRecognizer, c.SemanticModel.Compilation))
+                    if (ShouldAnalyze(generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
                     {
                         action(c);
                     }
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Helpers
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    if (!c.GetSyntaxTree().IsGenerated(generatedCodeRecognizer, c.SemanticModel.Compilation))
+                    if (ShouldAnalyze(generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
                     {
                         action(c);
                     }
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Helpers
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    if (!c.GetSyntaxTree().IsGenerated(generatedCodeRecognizer, c.SemanticModel.Compilation))
+                    if (ShouldAnalyze(generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
                     {
                         action(c);
                     }
@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Helpers
                     csac.RegisterSyntaxTreeAction(
                         c =>
                         {
-                            if (!c.GetSyntaxTree().IsGenerated(generatedCodeRecognizer, csac.Compilation))
+                            if (ShouldAnalyze(generatedCodeRecognizer, c.GetSyntaxTree(), csac.Compilation, c.Options))
                             {
                                 action(c);
                             }
@@ -112,7 +112,7 @@ namespace SonarAnalyzer.Helpers
                     csac.RegisterSyntaxTreeAction(
                         c =>
                         {
-                            if (!c.GetSyntaxTree().IsGenerated(generatedCodeRecognizer, csac.Compilation))
+                            if (ShouldAnalyze(generatedCodeRecognizer, c.GetSyntaxTree(), csac.Compilation, c.Options))
                             {
                                 action(c);
                             }
@@ -128,7 +128,7 @@ namespace SonarAnalyzer.Helpers
             context.RegisterCodeBlockStartAction<TLanguageKindEnum>(
                 c =>
                 {
-                    if (!c.GetSyntaxTree().IsGenerated(generatedCodeRecognizer, c.SemanticModel.Compilation))
+                    if (ShouldAnalyze(generatedCodeRecognizer, c.GetSyntaxTree(), c.SemanticModel.Compilation, c.Options))
                     {
                         action(c);
                     }
@@ -143,7 +143,7 @@ namespace SonarAnalyzer.Helpers
             context.RegisterCodeBlockStartAction<TLanguageKindEnum>(
                 c =>
                 {
-                    if (!c.GetSyntaxTree().IsGenerated(generatedCodeRecognizer, c.SemanticModel.Compilation))
+                    if (ShouldAnalyze(generatedCodeRecognizer, c.GetSyntaxTree(), c.SemanticModel.Compilation, c.Options))
                     {
                         action(c);
                     }
@@ -160,7 +160,7 @@ namespace SonarAnalyzer.Helpers
             Diagnostic diagnostic,
             Compilation compilation)
         {
-            if (!diagnostic.Location.SourceTree.IsGenerated(generatedCodeRecognizer, compilation))
+            if (ShouldAnalyze(generatedCodeRecognizer, diagnostic.Location.SourceTree, context.Compilation, context.Options))
             {
                 context.ReportDiagnosticWhenActive(diagnostic);
             }
@@ -172,7 +172,7 @@ namespace SonarAnalyzer.Helpers
             Diagnostic diagnostic,
             Compilation compilation)
         {
-            if (!diagnostic.Location.SourceTree.IsGenerated(generatedCodeRecognizer, compilation))
+            if (ShouldAnalyze(generatedCodeRecognizer, diagnostic.Location.SourceTree, compilation, context.Options))
             {
                 context.ReportDiagnosticWhenActive(diagnostic);
             }
@@ -188,12 +188,14 @@ namespace SonarAnalyzer.Helpers
 
         #endregion ReportDiagnosticIfNonGenerated
 
-        #region SyntaxTree.IsGenerated
-
         private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>> Cache
             = new ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>>();
 
-        public static bool IsGenerated(this SyntaxTree tree,
+        public static bool ShouldAnalyze(GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation c, AnalyzerOptions options) =>
+            !syntaxTree.IsGenerated(generatedCodeRecognizer, c) ||
+            options.ShouldAnalyzeGeneratedCode(c.Language);
+
+        internal static bool IsGenerated(this SyntaxTree tree,
             GeneratedCodeRecognizer generatedCodeRecognizer,
             Compilation compilation)
         {
@@ -213,7 +215,5 @@ namespace SonarAnalyzer.Helpers
             cache.TryAdd(tree, generated);
             return generated;
         }
-
-        #endregion SyntaxTree.IsGenerated
     }
 }

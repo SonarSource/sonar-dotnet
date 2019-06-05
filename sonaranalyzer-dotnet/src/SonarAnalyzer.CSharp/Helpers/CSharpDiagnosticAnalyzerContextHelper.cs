@@ -113,14 +113,12 @@ namespace SonarAnalyzer.Helpers
 
         #endregion ReportDiagnosticIfNonGenerated
 
-        #region SyntaxTree.IsGenerated
-
-        internal static bool IsGenerated(this SyntaxTree tree,
+        internal static bool ShouldAnalyze(this SyntaxTree tree, AnalyzerOptions options,
             Compilation compilation)
-        {
-            return tree.IsGenerated(CSharp.CSharpGeneratedCodeRecognizer.Instance, compilation);
-        }
-
-        #endregion SyntaxTree.IsGenerated
+            // TODO PERF: do the global setting check before the per-file check.
+            => DiagnosticAnalyzerContextHelper.ShouldAnalyze(CSharp.CSharpGeneratedCodeRecognizer.Instance,
+                tree,
+                compilation,
+                options);
     }
 }

@@ -59,6 +59,24 @@ function Initialize-ActualFolder() {
     Write-Debug "Initialized actual folder in '${methodTimerElapsed}'"
 }
 
+# FIXME: this is a hacky way of avoiding diffing problems with temporary generated files in the %TEMP% folder
+function ReplaceGeneratedTempFileName([string]$folder){
+
+    Write-Host "Will replace generated temporary file names from the jsons in ${folder}:"
+    $files = Get-ChildItem -Path $folder -Recurse -File
+    $tempFileNameLineRegex = '"uri":.*\.NETFramework,Version=v4.*\.cs"'
+
+    foreach ($file in $files){
+
+        $fullName = $file.FullName
+        Write-Host "Will replace the generated temporary file names inside $fullName..."
+
+        $data = [System.IO.File]::ReadAllText(${fullName})
+        $data = [System.Text.RegularExpressions.Regex]::Replace($data, $tempFileNameLineRegex, '"uri": "replaced"')
+        [System.IO.File]::WriteAllText(${fullName}, $data)
+    }
+}
+
 function Initialize-OutputFolder() {
     $methodTimer = [system.diagnostics.stopwatch]::StartNew()
 
@@ -189,7 +207,7 @@ try {
     Write-Debug "Installing the import before target file at '${msBuildImportBefore15}'"
     Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore15 -Type container -Force) -Force -Recurse
 
-    
+
     # Note: Automapper has multiple configurations that are built simultaneously and sometimes
     # it happens that a the same project is built in parallel in different configurations. The
     # protobuf-generating rules try to write their output in the same folder and fail, even
@@ -200,6 +218,8 @@ try {
     Build-Project "akka.net" "src\Akka.sln"
     Build-Project "Nancy" "src\Nancy.sln"
     Build-Project "Ember-MM" "Ember Media Manager.sln"
+    Build-Project "AnalyzeGenerated" "AnalyzeGeneratedFiles.sln"
+    Build-Project "SkipGenerated" "SkipGeneratedFiles.sln"
 
     Write-Header "Processing analyzer results"
 
@@ -214,6 +234,10 @@ try {
     Measure-AnalyzerPerformance
     $measurePerfTimerElapsed = $measurePerfTimer.Elapsed.TotalSeconds
     Write-Debug "Computed analyzer performance in '${measurePerfTimerElapsed}'"
+
+    # FIXME: this is a hacky way of diffing the issues found on the temporary generated files during build
+    ReplaceGeneratedTempFileName(".\expected\AnalyzeGenerated")
+    ReplaceGeneratedTempFileName(".\actual\AnalyzeGenerated")
 
     Write-Host "Checking for differences..."
     $diffTimer = [system.diagnostics.stopwatch]::StartNew()
