@@ -58,7 +58,7 @@ public class VbNetPlugin implements Plugin {
       ReportPathCollector.class,
       VbNetSonarRulesDefinition.class,
       DotNetSensor.class,
-      VbNetConfiguration.class,
+      VbNetProjectConfiguration.class,
       VbNetGlobalProtobufFileProcessor.class,
       VbNetSolutionConfiguration.class,
       WrongEncodingFileFilter.class,

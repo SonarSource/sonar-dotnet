@@ -20,7 +20,6 @@
 package org.sonar.plugins.csharp;
 
 import org.sonar.api.config.Configuration;
-import org.sonarsource.dotnet.shared.plugins.AbstractConfiguration;
 import org.sonarsource.dotnet.shared.plugins.AbstractSolutionConfiguration;
 
 public class CSharpSolutionConfiguration extends AbstractSolutionConfiguration {

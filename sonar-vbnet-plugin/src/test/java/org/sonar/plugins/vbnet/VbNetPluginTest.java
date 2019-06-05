@@ -59,7 +59,7 @@ public class VbNetPluginTest {
       VbNet.class,
       VbNetSonarRulesDefinition.class,
       DotNetSensor.class,
-      VbNetConfiguration.class,
+      VbNetProjectConfiguration.class,
       VbNetGlobalProtobufFileProcessor.class,
       VbNetSolutionConfiguration.class,
       WrongEncodingFileFilter.class,

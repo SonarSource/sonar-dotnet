@@ -20,7 +20,6 @@
 package org.sonar.plugins.vbnet;
 
 import org.sonar.api.config.Configuration;
-import org.sonarsource.dotnet.shared.plugins.AbstractConfiguration;
 import org.sonarsource.dotnet.shared.plugins.AbstractSolutionConfiguration;
 
 public class VbNetSolutionConfiguration extends AbstractSolutionConfiguration {

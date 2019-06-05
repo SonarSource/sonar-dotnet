@@ -59,7 +59,7 @@ public class CSharpPluginTest {
       CSharp.class,
       CSharpSonarRulesDefinition.class,
       DotNetSensor.class,
-      CSharpConfiguration.class,
+      CSharpProjectConfiguration.class,
       CSharpGlobalProtobufFileProcessor.class,
       CSharpSolutionConfiguration.class,
       WrongEncodingFileFilter.class,
