@@ -55,7 +55,7 @@ function Initialize-ActualFolder() {
 
     # this copies no files if ruleId is not set, and all but ending with ruleId if set
     Copy-FolderRecursively -From .\expected -To .\actual -Exclude "*${ruleId}.json"
-    ExpandEnvVarsInFiles ".\actual"
+    ExpandEnvVarsInFiles ".\expected"
     $methodTimerElapsed = $methodTimer.Elapsed.TotalSeconds
     Write-Debug "Initialized actual folder in '${methodTimerElapsed}'"
 }
