@@ -55,24 +55,24 @@ function Initialize-ActualFolder() {
 
     # this copies no files if ruleId is not set, and all but ending with ruleId if set
     Copy-FolderRecursively -From .\expected -To .\actual -Exclude "*${ruleId}.json"
-    ExpandEnvVarsInFiles ".\expected"
     $methodTimerElapsed = $methodTimer.Elapsed.TotalSeconds
     Write-Debug "Initialized actual folder in '${methodTimerElapsed}'"
 }
 
-function ExpandEnvVarsInFiles([string]$folder){
+# FIXME: this is a hacky way of avoiding diffing problems with temporary generated files in the %TEMP% folder
+function ReplaceGeneratedTempFileName([string]$folder){
 
-    # Expand any environment variables in all files in the folder
-    Write-Host "Expanding environment variables in files in ${folder}:"
+    Write-Host "Will replace generated temporary file names from the jsons in ${folder}:"
     $files = Get-ChildItem -Path $folder -Recurse -File
+    $tempFileNameLineRegex = '"uri":.*\.NETFramework,Version=v4.*\.cs"'
 
     foreach ($file in $files){
 
         $fullName = $file.FullName
-        Write-Host "Processing $fullName..."
+        Write-Host "Will replace the generated temporary file names inside $fullName..."
 
         $data = [System.IO.File]::ReadAllText(${fullName})
-        $data = [System.Environment]::ExpandEnvironmentVariables($data)
+        $data = [System.Text.RegularExpressions.Regex]::Replace($data, $tempFileNameLineRegex, '"uri": "replaced"')
         [System.IO.File]::WriteAllText(${fullName}, $data)
     }
 }
@@ -207,7 +207,7 @@ try {
     Write-Debug "Installing the import before target file at '${msBuildImportBefore15}'"
     Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore15 -Type container -Force) -Force -Recurse
 
-    
+
     # Note: Automapper has multiple configurations that are built simultaneously and sometimes
     # it happens that a the same project is built in parallel in different configurations. The
     # protobuf-generating rules try to write their output in the same folder and fail, even
@@ -234,6 +234,10 @@ try {
     Measure-AnalyzerPerformance
     $measurePerfTimerElapsed = $measurePerfTimer.Elapsed.TotalSeconds
     Write-Debug "Computed analyzer performance in '${measurePerfTimerElapsed}'"
+
+    # FIXME: this is a hacky way of diffing the issues found on the temporary generated files during build
+    ReplaceGeneratedTempFileName(".\expected\AnalyzeGenerated")
+    ReplaceGeneratedTempFileName(".\actual\AnalyzeGenerated")
 
     Write-Host "Checking for differences..."
     $diffTimer = [system.diagnostics.stopwatch]::StartNew()
