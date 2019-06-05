@@ -19,35 +19,13 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 import org.sonar.api.batch.InstantiationStrategy;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.config.Configuration;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
-
-import static java.util.Arrays.asList;
-import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getAnalyzerWorkDirProperty;
-import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getRoslynJsonReportPathProperty;
 
 @ScannerSide
 @InstantiationStrategy(InstantiationStrategy.PER_BATCH)
 public abstract class AbstractSolutionConfiguration {
-  private static final Logger LOG = Loggers.get(AbstractSolutionConfiguration.class);
-  private static final String MSG_SUFFIX = "Analyzer results won't be loaded from this directory.";
-  private static final String PROP_PREFIX = "sonar.";
 
   private final Configuration configuration;
   private final String languageKey;

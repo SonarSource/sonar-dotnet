@@ -194,13 +194,6 @@ public class AbstractProjectConfigurationTest {
   }
 
   @Test
-  public void analyzeGeneratedCodeIsFalseByDefault() {
-    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
-    };
-    assertThat(config.analyzeGeneratedCode()).isFalse();
-  }
-
-  @Test
   public void optOutExternalIssues() {
     settings.setProperty("sonar.cs.roslyn.ignoreIssues", "true");
     config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {

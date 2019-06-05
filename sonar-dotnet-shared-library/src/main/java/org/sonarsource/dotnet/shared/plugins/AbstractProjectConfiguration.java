@@ -160,10 +160,6 @@ public abstract class AbstractProjectConfiguration {
     return configuration.getBoolean(AbstractPropertyDefinitions.getIgnoreIssuesProperty(languageKey)).orElse(false);
   }
 
-  public boolean analyzeGeneratedCode() {
-    return configuration.getBoolean(AbstractPropertyDefinitions.getAnalyzeGeneratedCode(languageKey)).orElse(false);
-  }
-
   public Set<String> bugCategories() {
     return new HashSet<>(asList(configuration.getStringArray(AbstractPropertyDefinitions.getBugCategoriesProperty(languageKey))));
   }
