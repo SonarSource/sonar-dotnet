@@ -43,6 +43,8 @@ Namespace Tests.Diagnostics
             context.Database.ExecuteSqlCommandAsync("" + query, parameters) ' Noncompliant
             context.Database.ExecuteSqlCommandAsync(query + "", parameters) ' Noncompliant
             context.Database.ExecuteSqlCommandAsync(query & "", parameters) ' Noncompliant
+            context.Database.ExecuteSqlCommandAsync("" & query + "", parameters) ' Noncompliant
+            context.Database.ExecuteSqlCommandAsync("" + query & "", parameters) ' Noncompliant
             context.Database.ExecuteSqlCommandAsync($"SELECT * FROM mytable WHERE mycol={query}") ' Compliant, FormattableString is sanitized
             context.Database.ExecuteSqlCommandAsync($"SELECT * FROM mytable WHERE mycol={query}", x) ' Noncompliant
             RelationalDatabaseFacadeExtensions.ExecuteSqlCommandAsync(context.Database, "" & query, parameters) ' Noncompliant

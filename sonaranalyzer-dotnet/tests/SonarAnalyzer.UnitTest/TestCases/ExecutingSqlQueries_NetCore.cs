@@ -33,6 +33,8 @@ namespace Tests.Diagnostics
             context.Database.ExecuteSqlCommandAsync("" + ""); // Compliant, constants are safe
             context.Database.ExecuteSqlCommandAsync(query); // Compliant, not concat
             context.Database.ExecuteSqlCommandAsync("" + query); // Noncompliant
+            context.Database.ExecuteSqlCommandAsync(query + ""); // Noncompliant
+            context.Database.ExecuteSqlCommandAsync("" + query + ""); // Noncompliant
             context.Database.ExecuteSqlCommandAsync($"", parameters); // Noncompliant FP, interpolated string with argument tranformed in RawQuery
             context.Database.ExecuteSqlCommandAsync(query, parameters); // Compliant, not concat or format
             context.Database.ExecuteSqlCommandAsync("" + query, parameters); // Noncompliant

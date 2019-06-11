@@ -104,7 +104,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 var nestedBinary = nestedLeft as BinaryExpressionSyntax;
                 while (nestedBinary != null)
                 {
-                    if (!nestedBinary.IsKind(SyntaxKind.AddExpression) && !nestedBinary.IsConstant(semanticModel))
+                    if (!nestedBinary.Right.IsConstant(semanticModel) ||
+                        (!nestedBinary.IsKind(SyntaxKind.AddExpression) && !nestedBinary.IsConstant(semanticModel)))
                     {
                         return false;
                     }
@@ -112,7 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     nestedLeft = nestedBinary.Left;
                     nestedBinary = nestedLeft as BinaryExpressionSyntax;
                 }
-                return true;
+                return nestedLeft.IsConstant(semanticModel);
             }
             return false;
         }

@@ -108,7 +108,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 var nestedBinary = nestedLeft as BinaryExpressionSyntax;
                 while (nestedBinary != null)
                 {
-                    if (!IsConcatenationOperator(nestedBinary) && !nestedBinary.IsConstant(semanticModel))
+                    if (!nestedBinary.Right.IsConstant(semanticModel) ||
+                        (!IsConcatenationOperator(nestedBinary) && !nestedBinary.IsConstant(semanticModel)))
                     {
                         return false;
                     }
@@ -116,7 +117,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     nestedLeft = nestedBinary.Left;
                     nestedBinary = nestedLeft as BinaryExpressionSyntax;
                 }
-                return true;
+                return nestedLeft.IsConstant(semanticModel);
             }
             return false;
         }
