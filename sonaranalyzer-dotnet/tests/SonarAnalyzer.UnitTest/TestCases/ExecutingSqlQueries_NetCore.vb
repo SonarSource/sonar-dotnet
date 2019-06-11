@@ -11,11 +11,14 @@ Namespace Tests.Diagnostics
             context.Database.ExecuteSqlCommand("") ' Compliant, constants are safe
             context.Database.ExecuteSqlCommand(ConstQuery) ' Compliant, constants are safe
             context.Database.ExecuteSqlCommand("" & "") ' Compliant, constants are safe
+            context.Database.ExecuteSqlCommand("" + "") ' Compliant, constants are safe
             context.Database.ExecuteSqlCommand(query) ' Compliant, not concat or format
             context.Database.ExecuteSqlCommand("" & query) ' Noncompliant
+            context.Database.ExecuteSqlCommand("" + query) ' Noncompliant
             context.Database.ExecuteSqlCommand($"", parameters) ' Noncompliant, interpolated string with argument transformed in RawQuery
             context.Database.ExecuteSqlCommand(query, parameters) ' Compliant, not concat or format
             context.Database.ExecuteSqlCommand("" & query, parameters) ' Noncompliant
+            context.Database.ExecuteSqlCommand("" + query, parameters) ' Noncompliant
 
             context.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={query}", parameters(0)) ' Noncompliant, the FormattableString is evaluated and converted to RawSqlString
             context.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={query}", x) ' Noncompliant
@@ -28,27 +31,38 @@ Namespace Tests.Diagnostics
             context.Database.ExecuteSqlCommandAsync("") ' Compliant, constants are safe
             context.Database.ExecuteSqlCommandAsync(ConstQuery) ' Compliant, constants are safe
             context.Database.ExecuteSqlCommandAsync("" & "") ' Compliant, constants are safe
+            context.Database.ExecuteSqlCommandAsync("" + "") ' Compliant, constants are safe
+            context.Database.ExecuteSqlCommandAsync("" + "" & "") ' Compliant, constants are safe
+            context.Database.ExecuteSqlCommandAsync("" & "" + "") ' Compliant, constants are safe
             context.Database.ExecuteSqlCommandAsync(query) ' Compliant, not concat or format
             context.Database.ExecuteSqlCommandAsync("" & query) ' Noncompliant
+            context.Database.ExecuteSqlCommandAsync("" + query) ' Noncompliant
             context.Database.ExecuteSqlCommandAsync($"", parameters) ' Noncompliant, interpolated string with argument transformed in RawQuery
             context.Database.ExecuteSqlCommandAsync(query, parameters) ' Compliant, not concat or format
             context.Database.ExecuteSqlCommandAsync("" & query, parameters) ' Noncompliant
+            context.Database.ExecuteSqlCommandAsync("" + query, parameters) ' Noncompliant
+            context.Database.ExecuteSqlCommandAsync(query + "", parameters) ' Noncompliant
+            context.Database.ExecuteSqlCommandAsync(query & "", parameters) ' Noncompliant
             context.Database.ExecuteSqlCommandAsync($"SELECT * FROM mytable WHERE mycol={query}") ' Compliant, FormattableString is sanitized
             context.Database.ExecuteSqlCommandAsync($"SELECT * FROM mytable WHERE mycol={query}", x) ' Noncompliant
             RelationalDatabaseFacadeExtensions.ExecuteSqlCommandAsync(context.Database, "" & query, parameters) ' Noncompliant
+            RelationalDatabaseFacadeExtensions.ExecuteSqlCommandAsync(context.Database, "" + query, parameters) ' Noncompliant
 
             context.Query(Of User)().FromSql($"") ' Compliant, FormattableString is sanitized
             context.Query(Of User)().FromSql("") ' Compliant, constants are safe
             context.Query(Of User)().FromSql(ConstQuery) ' Compliant, constants are safe
             context.Query(Of User)().FromSql(query) ' Compliant, not concat or format
             context.Query(Of User)().FromSql("" & "") ' Compliant, constants are safe
+            context.Query(Of User)().FromSql("" + "") ' Compliant, constants are safe
             context.Query(Of User)().FromSql($"", parameters) ' Noncompliant, interpolated string with argument transformed in RawQuery
             context.Query(Of User)().FromSql("", parameters) ' Compliant, the parameters are sanitized
             context.Query(Of User)().FromSql(query, parameters) ' Compliant, not concat or format
             context.Query(Of User)().FromSql("" & query, parameters) ' Noncompliant
+            context.Query(Of User)().FromSql("" + query, parameters) ' Noncompliant
             context.Query(Of User)().FromSql($"SELECT * FROM mytable WHERE mycol={query}") ' Compliant, FormattableString is sanitized
             context.Query(Of User)().FromSql($"SELECT * FROM mytable WHERE mycol={query}", x) ' Noncompliant
             RelationalQueryableExtensions.FromSql(context.Query(Of User)(), "" & query, parameters) ' Noncompliant
+            RelationalQueryableExtensions.FromSql(context.Query(Of User)(), "" + query, parameters) ' Noncompliant
 
         End Sub
 

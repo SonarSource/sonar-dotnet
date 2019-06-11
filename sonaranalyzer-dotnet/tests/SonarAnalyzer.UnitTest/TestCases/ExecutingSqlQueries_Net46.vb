@@ -36,7 +36,13 @@ Namespace Tests.Diagnostics
             Dim command = New SqlCommand(String.Concat(query, param)) ' Noncompliant {{Make sure that executing SQL queries is safe here.}}
 '                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             command = New SqlCommand(query & param, connection) ' Noncompliant
+            command = New SqlCommand(query + param, connection) ' Noncompliant
+            command = New SqlCommand(query + param & param, connection) ' Noncompliant
+            command = New SqlCommand(query & param + param, connection) ' Noncompliant
             command = New SqlCommand("" & 1 & 2, connection) ' Compliant, only constants
+            command = New SqlCommand("" + 1 + 2, connection) ' Compliant, only constants
+            command = New SqlCommand("" & 1 + 2, connection) ' Compliant, only constants
+            command = New SqlCommand("" + 1 & 2, connection) ' Compliant, only constants
             command = New SqlCommand(String.Concat(query, param), connection) ' Noncompliant
             command = New SqlCommand(String.Concat(query, param), connection, transaction) ' Noncompliant
             command = New SqlCommand(String.Concat(query, param), connection, transaction, SqlCommandColumnEncryptionSetting.Enabled) ' Noncompliant
