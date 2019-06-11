@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
@@ -72,7 +73,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool IsIgnoredNullableOperation(BinaryExpressionSyntax expression, SemanticModel semanticModel) =>
             expression.OperatorToken.IsAnyKind(ignoredNullableOperators) &&
-            (IsNullable(expression.Left, semanticModel) || IsNullable(expression.Right, semanticModel));
+            (IsNullable(expression.Left, semanticModel) || IsNullable(expression.Right, semanticModel) ||
+            IsConditionalAccessExpression(expression.Left) || IsConditionalAccessExpression(expression.Right));
+
+        private static bool IsConditionalAccessExpression(ExpressionSyntax expression)
+        {
+            return expression.RemoveParentheses().IsKind(SyntaxKind.ConditionalAccessExpression);
+        }
 
         protected override bool IsLogicalNot(BinaryExpressionSyntax expression, out SyntaxNode logicalNot)
         {

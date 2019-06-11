@@ -53,7 +53,23 @@ Namespace Tests.Diagnostics
         End Operator
 
         Public Shared Function IsNullOrEmpty(Of T)(ByVal collection As IList(Of T)) As Boolean
-            Return Not (collection?.Count > 0) 'Noncompliant FP #2427
+            Return Not (collection?.Count > 0) 'Compliant - not the same as "collection?.Count <= 0"
+        End Function
+
+        Public Shared Function IsNullOrEmpty1(ByVal collection As IList(Of Integer)) As Boolean
+            Return Not (collection?(0) > 0) 'Compliant - not the same as "collection?(0) <= 0"
+        End Function
+
+        Public Shared Function IsNullOrEmpty2(Of T)(ByVal collection As IList(Of T)) As Boolean
+            Return Not (0 < collection?.Count) 'Compliant - not the same as "collection?.Count <= 0"
+        End Function
+
+        Public Shared Function IsNullOrEmpty3(Of T)(ByVal collection As IList(Of T)) As Boolean
+            Return Not (((0)) < ((collection?.Count))) 'Compliant - not the same as "collection?.Count <= 0"
+        End Function
+
+        Public Shared Function IsNullOrEmpty4(Of T)(ByVal collection As IList(Of T)) As Boolean
+            Return Not (0 = collection?.Count) 'Noncompliant
         End Function
     End Class
 End Namespace

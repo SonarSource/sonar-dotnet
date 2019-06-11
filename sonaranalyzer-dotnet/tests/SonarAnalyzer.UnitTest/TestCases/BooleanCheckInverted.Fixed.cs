@@ -58,7 +58,14 @@ namespace Tests.Diagnostics
         }
 
         // Note that this is not the same as "collection?.Count <= 0" because when null is compared to a number, the result will always be false
-        public static bool IsNullOrEmpty<T>(IList<T> collection)
-            => collection?.Count <= 0; // Fixed
+        public static bool IsNullOrEmpty<T>(IList<T> collection) => !(collection?.Count > 0); // Compliant
+
+        public static bool IsNullOrEmpty1(IList<int> collection) => !(collection?[0] > 0); // Compliant
+
+        public static bool IsNullOrEmpty2<T>(IList<T> collection) => !(0 < collection?.Count); // Compliant
+
+        public static bool IsNullOrEmpty3<T>(IList<T> collection) => !((0) < ((collection?.Count))); // Compliant
+
+        public static bool IsNullOrEmpty4<T>(IList<T> collection) => collection?.Count != 0; // Fixed
     }
 }
