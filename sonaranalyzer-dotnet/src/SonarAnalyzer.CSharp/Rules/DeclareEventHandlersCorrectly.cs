@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -73,7 +74,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol.Parameters[0].Name == "sender" &&
                 methodSymbol.Parameters[0].Type.Is(KnownType.System_Object) &&
                 methodSymbol.Parameters[1].Name == "e" &&
-                methodSymbol.Parameters[1].Type.DerivesFrom(KnownType.System_EventArgs);
+                IsDerivedFromEventArgs(methodSymbol.Parameters[1].Type);
+        }
+
+        private static bool IsDerivedFromEventArgs(ITypeSymbol type)
+        {
+            if (type is ITypeParameterSymbol typeParameterSymbol)
+            {
+                foreach(var constraintType in typeParameterSymbol.ConstraintTypes)
+                {
+                    if (IsDerivedFromEventArgs(constraintType))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return type.DerivesFrom(KnownType.System_EventArgs);
         }
     }
 }
