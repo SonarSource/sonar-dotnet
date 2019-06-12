@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -73,7 +74,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol.Parameters[0].Name == "sender" &&
                 methodSymbol.Parameters[0].Type.Is(KnownType.System_Object) &&
                 methodSymbol.Parameters[1].Name == "e" &&
-                methodSymbol.Parameters[1].Type.DerivesFrom(KnownType.System_EventArgs);
+                IsDerivedFromEventArgs(methodSymbol.Parameters[1].Type);
         }
+
+        private static bool IsDerivedFromEventArgs(ITypeSymbol type) =>
+            type.DerivesFrom(KnownType.System_EventArgs) ||
+                (type is ITypeParameterSymbol typeParameterSymbol &&
+                typeParameterSymbol.ConstraintTypes.Any(IsDerivedFromEventArgs));
     }
 }
