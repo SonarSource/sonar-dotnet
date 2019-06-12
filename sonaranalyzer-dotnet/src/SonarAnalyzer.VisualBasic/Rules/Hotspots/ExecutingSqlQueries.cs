@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override bool IsConcat(ExpressionSyntax argument, SemanticModel semanticModel) =>
             IsStringMethodInvocation("Concat", argument, semanticModel) ||
             (
-                argument.IsKind(SyntaxKind.ConcatenateExpression) &&
+                IsConcatenationOperator(argument) &&
                 argument is BinaryExpressionSyntax concatenation &&
                 !IsConcatenationOfConstants(concatenation, semanticModel)
             );
@@ -95,17 +95,20 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static bool AllConstants(List<ArgumentSyntax> arguments, SemanticModel semanticModel) =>
             arguments.All(a => a.GetExpression().IsConstant(semanticModel));
 
+        private static bool IsConcatenationOperator(SyntaxNode node) =>
+            node.IsKind(SyntaxKind.ConcatenateExpression) ||
+            node.IsKind(SyntaxKind.AddExpression);
+
         private static bool IsConcatenationOfConstants(BinaryExpressionSyntax binaryExpression, SemanticModel semanticModel)
         {
-            System.Diagnostics.Debug.Assert(binaryExpression.IsKind(SyntaxKind.ConcatenateExpression));
-            if ((semanticModel.GetTypeInfo(binaryExpression).Type is ITypeSymbol concantenationType) &&
-                binaryExpression.Right.IsConstant(semanticModel))
+            if ((semanticModel.GetTypeInfo(binaryExpression).Type is ITypeSymbol) && binaryExpression.Right.IsConstant(semanticModel))
             {
                 var nestedLeft = binaryExpression.Left;
                 var nestedBinary = nestedLeft as BinaryExpressionSyntax;
                 while (nestedBinary != null)
                 {
-                    if (!nestedBinary.IsKind(SyntaxKind.ConcatenateExpression) && !nestedBinary.IsConstant(semanticModel))
+                    if (!nestedBinary.Right.IsConstant(semanticModel) ||
+                        (!IsConcatenationOperator(nestedBinary) && !nestedBinary.IsConstant(semanticModel)))
                     {
                         return false;
                     }
@@ -113,7 +116,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     nestedLeft = nestedBinary.Left;
                     nestedBinary = nestedLeft as BinaryExpressionSyntax;
                 }
-                return true;
+                return nestedLeft.IsConstant(semanticModel);
             }
             return false;
         }
