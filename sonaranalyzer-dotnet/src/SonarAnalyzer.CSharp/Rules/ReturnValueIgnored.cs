@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class ReturnValueIgnored : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2201";
-        private const string MessageFormat = "Use the return value of method '{0}', which has no side effect.";
+        private const string MessageFormat = "Use the return value of method '{0}'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -94,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var constructedFrom = invokedMethodSymbol.ContainingType.ConstructedFrom;
 
             return IsLinqMethod(invokedMethodSymbol) ||
-                HasOnlySideEffectFreeMethods(invokedMethodSymbol, constructedFrom) ||
+                HasOnlySideEffectFreeMethods(constructedFrom) ||
                 IsPureMethod(invokedMethodSymbol, constructedFrom);
         }
 
@@ -102,10 +102,9 @@ namespace SonarAnalyzer.Rules.CSharp
             invokedMethodSymbol.GetAttributes(KnownType.System_Diagnostics_Contracts_PureAttribute).Any() ||
             containingType.GetAttributes(KnownType.System_Diagnostics_Contracts_PureAttribute).Any();
 
-        private static bool HasOnlySideEffectFreeMethods(IMethodSymbol invokedMethodSymbol, INamedTypeSymbol containingType)
+        private static bool HasOnlySideEffectFreeMethods(INamedTypeSymbol containingType)
         {
-            return containingType.IsAny(ImmutableKnownTypes) ||
-                (containingType.Is(KnownType.System_String) && invokedMethodSymbol.Name != "Intern");
+            return containingType.IsAny(ImmutableKnownTypes);
         }
 
         private static readonly ImmutableArray<KnownType> ImmutableKnownTypes =
@@ -124,6 +123,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Double,
                 KnownType.System_Decimal,
                 KnownType.System_Boolean,
+                KnownType.System_String,
 
                 KnownType.System_Collections_Immutable_ImmutableArray,
                 KnownType.System_Collections_Immutable_ImmutableArray_T,
