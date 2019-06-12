@@ -74,10 +74,8 @@ namespace SonarAnalyzer.Rules.CSharp
             (IsNullable(expression.Left, semanticModel) || IsNullable(expression.Right, semanticModel) ||
             IsConditionalAccessExpression(expression.Left) || IsConditionalAccessExpression(expression.Right));
 
-        private static bool IsConditionalAccessExpression(ExpressionSyntax expression)
-        {
-            return expression.RemoveParentheses().IsKind(SyntaxKind.ConditionalAccessExpression);
-        }
+        private static bool IsConditionalAccessExpression(ExpressionSyntax expression) =>
+            expression.RemoveParentheses().IsKind(SyntaxKind.ConditionalAccessExpression);
 
         protected override bool IsLogicalNot(BinaryExpressionSyntax expression, out SyntaxNode logicalNot)
         {
