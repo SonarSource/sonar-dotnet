@@ -95,10 +95,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static bool AllConstants(List<ArgumentSyntax> arguments, SemanticModel semanticModel) =>
             arguments.All(a => a.GetExpression().IsConstant(semanticModel));
 
-        private static bool IsConcatenationOperator(SyntaxNode node)
-        {
-            return node.IsKind(SyntaxKind.ConcatenateExpression) || node.IsKind(SyntaxKind.AddExpression);
-        }
+        private static bool IsConcatenationOperator(SyntaxNode node) =>
+            node.IsKind(SyntaxKind.ConcatenateExpression) ||
+            node.IsKind(SyntaxKind.AddExpression);
 
         private static bool IsConcatenationOfConstants(BinaryExpressionSyntax binaryExpression, SemanticModel semanticModel)
         {
