@@ -35,6 +35,12 @@ namespace Tests.Diagnostics
             { }
 
             Test(t1.IsInstanceOfType(expr2)); //Fixed
+
+            if (expr1 is object) // Compliant - "is object" is a commonly used pattern for non-null check
+            { }
+
+            if (expr1 is System.Object) // Compliant - "is object" is a commonly used pattern for non-null check
+            { }
         }
     }
     class Fruit { }

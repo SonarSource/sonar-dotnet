@@ -98,7 +98,8 @@ namespace SonarAnalyzer.Rules.CSharp
             if (typeExpression == null ||
                 typeCastTo == null ||
                 !typeExpression.IsClass() ||
-                !typeCastTo.IsClass())
+                !typeCastTo.IsClass() ||
+                typeCastTo.Is(KnownType.System_Object))
             {
                 return;
             }
