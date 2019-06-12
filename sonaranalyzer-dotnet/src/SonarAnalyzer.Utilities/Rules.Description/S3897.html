@@ -6,24 +6,10 @@ allowing it to be used where an <code>IEquatable</code> is called for.</p>
 <pre>
 class MyClass  // Noncompliant
 {
-  public override bool Equals(object other)
-  {
-    //...
-  }
-}
-</pre>
-<pre>
-class MyClass  // Noncompliant
-{
   public bool Equals(MyClass other)
   {
     //...
   }
-}
-</pre>
-<pre>
-class MyClass : IEquatable&lt;T&gt;  // Noncompliant
-{
 }
 </pre>
 <h2>Compliant Solution</h2>

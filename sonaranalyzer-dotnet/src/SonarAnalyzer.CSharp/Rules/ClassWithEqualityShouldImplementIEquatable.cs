@@ -50,6 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var classDeclaration = (ClassDeclarationSyntax)c.Node;
                     var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
                     if (classSymbol == null ||
+                        ImplementsIEquatableInterface(classSymbol) ||
                         classDeclaration.Identifier.IsMissing)
                     {
                         return;
@@ -58,13 +59,18 @@ namespace SonarAnalyzer.Rules.CSharp
                     classSymbol.GetMembers(EqualsMethodName)
                         .OfType<IMethodSymbol>()
                         .Where(IsIEquatableEqualsMethodCandidate)
-                        .Where(ms => ms.GetInterfaceMember() == null)
                         .ToList()
                         .ForEach(ms => c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
                             classDeclaration.Identifier.GetLocation(),
                             ms.Parameters[0].Type.Name)));
                 }, SyntaxKind.ClassDeclaration);
         }
+
+        private bool ImplementsIEquatableInterface(ITypeSymbol classSymbol) =>
+            classSymbol.AllInterfaces.Any(@interface =>
+              @interface.ConstructedFrom.Is(KnownType.System_IEquatable_T) &&
+              @interface.TypeArguments.Length == 1 &&
+              @interface.TypeArguments[0].Equals(classSymbol));
 
         private static bool IsIEquatableEqualsMethodCandidate(IMethodSymbol methodSymbol)
         {
@@ -73,7 +79,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 !methodSymbol.IsOverride &&
                 methodSymbol.DeclaredAccessibility == Accessibility.Public &&
                 methodSymbol.ReturnType.Is(KnownType.System_Boolean) &&
-                methodSymbol.Parameters.Length == 1;
+                methodSymbol.Parameters.Length == 1 &&
+                methodSymbol.Parameters[0].Type.Equals(methodSymbol.ContainingType);
+
         }
     }
 }
