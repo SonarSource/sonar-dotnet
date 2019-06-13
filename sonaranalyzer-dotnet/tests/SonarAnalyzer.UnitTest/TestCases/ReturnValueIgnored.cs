@@ -33,7 +33,7 @@ namespace Tests.Diagnostics
 
             new int[] { 1 }.ToList().ForEach(i => { });
 
-            new int[] { 1 }.ToList(); // Noncompliant {{Use the return value of method 'ToList', which has no side effect.}}
+            new int[] { 1 }.ToList(); // Noncompliant {{Use the return value of method 'ToList'.}}
             new int[] { 1 }.OfType<object>(); // Noncompliant
 
             "this string".Equals("other string"); // Noncompliant
@@ -56,6 +56,9 @@ namespace Tests.Diagnostics
 
             "".DoSomething(null); // Compliant
             new int[] { 1 }.DoSomething(null); // Compliant
+
+            string.Intern("abc"); // Noncompliant {{Use the return value of method 'Intern'.}}
+            string.Compare("abc", "def"); // Noncompliant
         }
         void M(object o) { }
     }

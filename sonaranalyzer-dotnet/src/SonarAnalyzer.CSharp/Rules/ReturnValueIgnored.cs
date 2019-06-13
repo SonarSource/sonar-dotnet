@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class ReturnValueIgnored : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2201";
-        private const string MessageFormat = "Use the return value of method '{0}', which has no side effect.";
+        private const string MessageFormat = "Use the return value of method '{0}'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
