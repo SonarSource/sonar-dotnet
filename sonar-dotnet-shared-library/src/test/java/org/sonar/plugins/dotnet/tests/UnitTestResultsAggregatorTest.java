@@ -28,9 +28,13 @@ import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.internal.MapSettings;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -39,6 +43,9 @@ public class UnitTestResultsAggregatorTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
+
+  @Rule
+  public LogTester logTester = new LogTester();
 
   @Test
   public void hasUnitTestResultsProperty() {
@@ -183,6 +190,24 @@ public class UnitTestResultsAggregatorTest {
     verify(nunitTestResultsFileParser).accept(new File("bar.xml"), results);
     verify(xunitTestResultsFileParser).accept(new File("foo2.xml"), results);
     verify(xunitTestResultsFileParser).accept(new File("bar2.xml"), results);
+  }
+
+  @Test
+  public void aggregate_logs_warning_on_exception() {
+    UnitTestConfiguration unitTestConf = new UnitTestConfiguration("visualStudioTestResultsFile", "nunitTestResultsFile", "xunitTestResultsFile");
+    MapSettings settings = new MapSettings();
+    settings.setProperty("visualStudioTestResultsFile", "foo.trx");
+
+    WildcardPatternFileProvider wildcardPatternFileProvider = mock(WildcardPatternFileProvider.class);
+    when(wildcardPatternFileProvider.listFiles("foo.trx")).thenReturn(new HashSet<>(Collections.singletonList(new File("foo.trx"))));
+
+    VisualStudioTestResultsFileParser visualStudioTestResultsFileParser = mock(VisualStudioTestResultsFileParser.class);
+    doThrow(IllegalStateException.class).when(visualStudioTestResultsFileParser).accept(any(), any());
+
+    new UnitTestResultsAggregator(unitTestConf, settings.asConfig(), visualStudioTestResultsFileParser, null, null)
+      .aggregate(wildcardPatternFileProvider, null);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Could not import unit test report 'foo.trx'");
   }
 
 }
