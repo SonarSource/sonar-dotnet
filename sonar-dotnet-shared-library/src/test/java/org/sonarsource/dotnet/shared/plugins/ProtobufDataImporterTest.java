@@ -95,7 +95,7 @@ public class ProtobufDataImporterTest {
     dataImporter.importResults(tester, Collections.singletonList(workDir), String::toString);
 
     String prefix = "Protobuf file not found: ";
-    assertThat(logTester.logs(LoggerLevel.WARN)).contains(
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly(
       prefix + workDir.resolve("token-type.pb"),
       prefix + workDir.resolve("symrefs.pb"),
       prefix + workDir.resolve("token-cpd.pb"));
