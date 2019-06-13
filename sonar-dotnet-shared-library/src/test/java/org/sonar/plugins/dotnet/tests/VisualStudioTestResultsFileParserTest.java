@@ -19,11 +19,10 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.io.File;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -62,6 +61,27 @@ public class VisualStudioTestResultsFileParserTest {
     assertThat(results.skipped()).isEqualTo(0);
     assertThat(results.failures()).isEqualTo(0);
     assertThat(results.errors()).isEqualTo(0);
+  }
+
+  @Test
+  public void invalid_entity_does_not_fail() {
+    UnitTestResults results = new UnitTestResults();
+    new VisualStudioTestResultsFileParser().accept(new File("src/test/resources/visualstudio_test_results/invalid_entities.trx"), results);
+
+    assertThat(results.failures()).isEqualTo(14);
+    assertThat(results.errors()).isEqualTo(3);
+    assertThat(results.tests()).isEqualTo(43);
+    assertThat(results.skipped()).isEqualTo(12);
+    assertThat(results.executionTime()).isEqualTo(816l);
+  }
+
+  @Test
+  public void invalid_character_fail() {
+    UnitTestResults results = new UnitTestResults();
+    thrown.expect(IllegalStateException.class);
+
+    new VisualStudioTestResultsFileParser().accept(new File("src/test/resources/visualstudio_test_results/invalid_character.trx"), results);
+
   }
 
 }
