@@ -36,7 +36,7 @@ import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AbstractConfigurationTest {
+public class AbstractProjectConfigurationTest {
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
   @Rule
@@ -45,7 +45,7 @@ public class AbstractConfigurationTest {
   private Path workDir;
   private MapSettings settings;
 
-  private AbstractConfiguration config;
+  private AbstractProjectConfiguration config;
 
   @Before
   public void setUp() {
@@ -88,7 +88,7 @@ public class AbstractConfigurationTest {
   @Test
   public void onlyNewRoslynReportPresent() throws IOException {
     createRoslynOut();
-    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
     };
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(config.roslynReportPaths()).containsOnly(workDir.resolve("roslyn-report.json"), workDir.resolve("roslyn-report2.json"));
@@ -97,7 +97,7 @@ public class AbstractConfigurationTest {
   @Test
   public void onlyOldRoslynReportPresent() throws IOException {
     createOldRoslynOut();
-    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
     };
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(config.roslynReportPaths()).containsOnly(workDir.resolve("roslyn-report.json"));
@@ -105,7 +105,7 @@ public class AbstractConfigurationTest {
 
   @Test
   public void giveWarningsWhenGettingProtobufPathAndNoPropertyAvailable() {
-    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
     };
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Property missing: 'sonar.cs.analyzer.projectOutPaths'. No protobuf files will be loaded for this project.");
@@ -115,7 +115,7 @@ public class AbstractConfigurationTest {
   public void noWarningsWhenGettingProtobufPathAndNoPropertyAvailable_TestProject() {
     // Test projects have sonar.tests property set, main projects don't
     settings.setProperty("sonar.tests", "");
-    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
     };
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
@@ -125,7 +125,7 @@ public class AbstractConfigurationTest {
   public void giveWarningsWhenGettingProtobufPathAndNoFolderAvailable() throws IOException {
     Path path1 = createProtobufOut("report");
     settings.setProperty("sonar.cs.analyzer.projectOutPaths", new String[] {path1.toString(), "non-existing"});
-    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
     };
     assertThat(config.protobufReportPaths()).containsOnly(path1.resolve("output-cs"));
     assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
@@ -135,7 +135,7 @@ public class AbstractConfigurationTest {
   @Test
   public void giveWarningsWhenGettingOldProtobufPathAndNoFolderAvailable() {
     settings.setProperty("sonar.cs.analyzer.projectOutPath", "non-existing");
-    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
     };
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
@@ -145,7 +145,7 @@ public class AbstractConfigurationTest {
   @Test
   public void informHowManyProtoFilesAreFound() throws IOException {
     setProtobufOut();
-    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
     };
     assertThat(config.protobufReportPaths()).isNotEmpty();
     assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(2);
@@ -158,7 +158,7 @@ public class AbstractConfigurationTest {
     Path outputCs = path.resolve("output-cs");
     Files.createDirectories(outputCs);
     settings.setProperty("sonar.cs.analyzer.projectOutPath", path.toString());
-    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
     };
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
@@ -169,7 +169,7 @@ public class AbstractConfigurationTest {
   @Test
   public void onlyProtobufReportsPresent() throws IOException {
     setProtobufOut();
-    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
     };
     assertThat(config.protobufReportPaths()).isNotEmpty();
     assertThat(config.roslynReportPaths()).isEmpty();
@@ -179,7 +179,7 @@ public class AbstractConfigurationTest {
   @Test
   public void onlyOldProtobufReportsPresent() throws IOException {
     setOldProtobufOut();
-    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
     };
     assertThat(config.protobufReportPaths()).isNotEmpty();
     assertThat(config.roslynReportPaths()).isEmpty();
@@ -188,7 +188,7 @@ public class AbstractConfigurationTest {
 
   @Test
   public void ignoreExternalIssuesIsFalseByDefault() {
-    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
     };
     assertThat(config.ignoreThirdPartyIssues()).isFalse();
   }
@@ -196,7 +196,7 @@ public class AbstractConfigurationTest {
   @Test
   public void optOutExternalIssues() {
     settings.setProperty("sonar.cs.roslyn.ignoreIssues", "true");
-    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    config = new AbstractProjectConfiguration(settings.asConfig(), "cs") {
     };
     assertThat(config.ignoreThirdPartyIssues()).isTrue();
   }

@@ -32,6 +32,7 @@ import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
+import org.sonar.api.batch.rule.internal.NewActiveRule;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.internal.google.common.collect.ImmutableList;
@@ -103,12 +104,9 @@ public class DotNetSensorTest {
     when(reportPathCollector.protobufDirs()).thenReturn(Collections.emptyList());
     when(reportPathCollector.roslynDirs()).thenReturn(Collections.singletonList(new RoslynReport(null, workDir.getRoot())));
     tester.setActiveRules(new ActiveRulesBuilder()
-      .create(RuleKey.of(REPO_KEY, "S1186"))
-      .activate()
-      .create(RuleKey.of(REPO_KEY, "[parameters_key]"))
-      .activate()
-      .create(RuleKey.of("roslyn.foo", "custom-roslyn"))
-      .activate()
+      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of(REPO_KEY, "S1186")).build())
+      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of(REPO_KEY, "[parameters_key]")).build())
+      .addRule(new NewActiveRule.Builder().setRuleKey(RuleKey.of("roslyn.foo", "custom-roslyn")).build())
       .build());
 
     sensor.execute(tester);

@@ -84,6 +84,17 @@ public abstract class AbstractPropertyDefinitions {
         .type(PropertyType.BOOLEAN)
         .build());
 
+    result.add(
+      PropertyDefinition.builder(getAnalyzeGeneratedCode(languageKey))
+        .category(languageName)
+        .defaultValue("false")
+        .name("Analyze generated code")
+        .description("If set to \"true\", the files containing generated code are analyzed." +
+          " If set to \"false\", the files containing generated code are ignored.")
+        .onQualifiers(Qualifiers.PROJECT)
+        .type(PropertyType.BOOLEAN)
+        .build());
+
     if (runtime.getApiVersion().isGreaterThanOrEqual(Version.create(7, 4))) {
       result.add(
         PropertyDefinition.builder(getIgnoreIssuesProperty(languageKey))
@@ -136,6 +147,10 @@ public abstract class AbstractPropertyDefinitions {
 
   public static String getIgnoreHeaderCommentsProperty(String languageKey) {
     return PROP_PREFIX + languageKey + ".ignoreHeaderComments";
+  }
+
+  public static String getAnalyzeGeneratedCode(String languageKey) {
+    return PROP_PREFIX + languageKey + ".analyzeGeneratedCode";
   }
 
   public static String getFileSuffixProperty(String languageKey) {

@@ -34,11 +34,11 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
  */
 @ScannerSide
 public class PropertiesSensor implements Sensor {
-  private final AbstractConfiguration configuration;
+  private final AbstractProjectConfiguration configuration;
   private final ReportPathCollector reportPathCollector;
   private final DotNetPluginMetadata pluginMetadata;
 
-  public PropertiesSensor(AbstractConfiguration configuration, ReportPathCollector reportPathCollector, DotNetPluginMetadata pluginMetadata) {
+  public PropertiesSensor(AbstractProjectConfiguration configuration, ReportPathCollector reportPathCollector, DotNetPluginMetadata pluginMetadata) {
     this.configuration = configuration;
     this.reportPathCollector = reportPathCollector;
     this.pluginMetadata = pluginMetadata;

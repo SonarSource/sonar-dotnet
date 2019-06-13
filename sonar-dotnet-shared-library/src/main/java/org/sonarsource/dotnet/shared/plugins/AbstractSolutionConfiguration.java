@@ -19,28 +19,28 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import org.sonar.api.ExtensionPoint;
+import org.sonar.api.batch.InstantiationStrategy;
 import org.sonar.api.batch.ScannerSide;
-import org.sonar.api.server.ServerSide;
+import org.sonar.api.config.Configuration;
 
+/**
+ * This configuration is at the level of the solution ("project" in scanner-cli terminology).
+ *
+ * This class is consumed by the GeneratedFileFilter, thus needs to be at solution (scanner "project") level.
+ */
 @ScannerSide
-@ServerSide
-@ExtensionPoint
-public interface DotNetPluginMetadata {
+@InstantiationStrategy(InstantiationStrategy.PER_BATCH)
+public abstract class AbstractSolutionConfiguration {
 
-  String languageKey();
-  String pluginKey();
-  String languageName();
-  String shortLanguageName();
-  String sonarAnalyzerName();
-  String repositoryKey();
+  private final Configuration configuration;
+  private final String languageKey;
 
-  default String ignoreHeaderCommentPropertyKey() {
-    return AbstractPropertyDefinitions.getIgnoreHeaderCommentsProperty(languageKey());
+  public AbstractSolutionConfiguration(Configuration configuration, String languageKey) {
+    this.configuration = configuration;
+    this.languageKey = languageKey;
   }
 
-  default String analyzeGeneratedCodePropertyKey() {
-    return AbstractPropertyDefinitions.getAnalyzeGeneratedCode(languageKey());
+  public boolean analyzeGeneratedCode() {
+    return configuration.getBoolean(AbstractPropertyDefinitions.getAnalyzeGeneratedCode(languageKey)).orElse(false);
   }
-
 }

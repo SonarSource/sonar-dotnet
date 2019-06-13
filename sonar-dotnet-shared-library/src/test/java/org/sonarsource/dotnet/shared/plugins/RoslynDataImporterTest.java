@@ -58,7 +58,7 @@ public class RoslynDataImporterTest {
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
 
-  private RoslynDataImporter roslynDataImporter = new RoslynDataImporter(mock(AbstractConfiguration.class));
+  private RoslynDataImporter roslynDataImporter = new RoslynDataImporter(mock(AbstractProjectConfiguration.class));
   private SensorContextTester tester;
   private Path workDir;
 
