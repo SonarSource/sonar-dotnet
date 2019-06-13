@@ -23,6 +23,11 @@ import org.sonar.api.batch.InstantiationStrategy;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.config.Configuration;
 
+/**
+ * This configuration is at the level of the solution ("project" in scanner-cli terminology).
+ *
+ * This class is consumed by the GeneratedFileFilter, thus needs to be at solution (scanner "project") level.
+ */
 @ScannerSide
 @InstantiationStrategy(InstantiationStrategy.PER_BATCH)
 public abstract class AbstractSolutionConfiguration {

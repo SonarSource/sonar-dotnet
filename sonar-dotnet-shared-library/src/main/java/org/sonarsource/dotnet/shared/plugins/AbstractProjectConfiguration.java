@@ -33,7 +33,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import org.sonar.api.batch.InstantiationStrategy;
-import org.sonar.api.batch.Phase;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.log.Logger;
@@ -43,6 +42,12 @@ import static java.util.Arrays.asList;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getAnalyzerWorkDirProperty;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getRoslynJsonReportPathProperty;
 
+/**
+ * This configuration is at the level of the project ("module" in scanner-cli terminology).
+ *
+ * Note: even if the concept of "module" was dropped from the SQ server side,
+ * "modules" are still a core concept of the SQ scanner.
+ */
 @ScannerSide
 @InstantiationStrategy(InstantiationStrategy.PER_PROJECT)
 public abstract class AbstractProjectConfiguration {

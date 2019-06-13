@@ -27,6 +27,9 @@ import org.sonar.api.utils.log.Loggers;
 /**
  * This class allows to filter files to process based on whether or not they are auto-generated.
  * This filter refuses (filters) all generated files.
+ *
+ * Note: the InputFileFilter, starting the scanner-api version 7.6, is evaluated at solution (scanner "project") level,
+ * thus all its dependencies must be instantiated at solution level.
  */
 public class GeneratedFileFilter implements InputFileFilter {
   private static final Logger LOG = Loggers.get(GeneratedFileFilter.class);
