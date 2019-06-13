@@ -45,7 +45,6 @@ import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.
 
 @ScannerSide
 @InstantiationStrategy(InstantiationStrategy.PER_PROJECT)
-@Phase(name = Phase.Name.POST)
 public abstract class AbstractProjectConfiguration {
   private static final Logger LOG = Loggers.get(AbstractProjectConfiguration.class);
   private static final String MSG_SUFFIX = "Analyzer results won't be loaded from this directory.";
