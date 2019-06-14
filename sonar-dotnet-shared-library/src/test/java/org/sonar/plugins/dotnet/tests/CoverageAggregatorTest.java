@@ -35,6 +35,8 @@ import org.sonar.api.utils.log.LoggerLevel;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -221,6 +223,27 @@ public class CoverageAggregatorTest {
     for (Coverage capturedCoverage : captor.getAllValues()) {
       verify(coverage).mergeWith(capturedCoverage);
     }
+  }
+
+  @Test
+  public void aggregate_logs_warning_on_exception() {
+    MapSettings settings = new MapSettings();
+    settings.setProperty("ncover", "foo.nccov");
+    CoverageConfiguration coverageConf = new CoverageConfiguration("", "ncover", "opencover", "dotcover", "visualstudio");
+
+    CoverageCache cache = mock(CoverageCache.class);
+    when(cache.readCoverageFromCacheOrParse(Mockito.any(CoverageParser.class), Mockito.any(File.class))).thenReturn(new Coverage());
+
+    WildcardPatternFileProvider wildcardPatternFileProvider = mock(WildcardPatternFileProvider.class);
+    when(wildcardPatternFileProvider.listFiles("foo.nccov")).thenReturn(new HashSet<>(Collections.singletonList(new File("foo.nccov"))));
+
+    Coverage coverage = mock(Coverage.class);
+    doThrow(IllegalStateException.class).when(coverage).mergeWith(any());
+
+    new CoverageAggregator(coverageConf, settings.asConfig(), cache, null, null, null, null)
+      .aggregate(wildcardPatternFileProvider, coverage);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Could not import coverage report 'foo.nccov'");
   }
 
   @Test

@@ -23,12 +23,16 @@ import java.io.File;
 import java.util.function.Predicate;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.config.Configuration;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 /**
  * Aggregate the test results from different reports of potentially different tools (e.g. aggregate a NUnit report with a xUnit one and 3 Visual Studio ones).
  */
 @ScannerSide
 public class UnitTestResultsAggregator {
+
+  private static final Logger LOG = Loggers.get(UnitTestResultsAggregator.class);
 
   private final UnitTestConfiguration unitTestConf;
   private final Configuration configuration;
@@ -41,9 +45,9 @@ public class UnitTestResultsAggregator {
   }
 
   UnitTestResultsAggregator(UnitTestConfiguration unitTestConf, Configuration configuration,
-    VisualStudioTestResultsFileParser visualStudioTestResultsFileParser,
-    NUnitTestResultsFileParser nunitTestResultsFileParser,
-    XUnitTestResultsFileParser xunitTestResultsFileParser) {
+                            VisualStudioTestResultsFileParser visualStudioTestResultsFileParser,
+                            NUnitTestResultsFileParser nunitTestResultsFileParser,
+                            XUnitTestResultsFileParser xunitTestResultsFileParser) {
     this.unitTestConf = unitTestConf;
     this.configuration = configuration;
     this.visualStudioTestResultsFileParser = visualStudioTestResultsFileParser;
@@ -94,7 +98,11 @@ public class UnitTestResultsAggregator {
     for (String reportPathPattern : reportPaths) {
       if (!reportPathPattern.isEmpty()) {
         for (File reportFile : wildcardPatternFileProvider.listFiles(reportPathPattern)) {
-          parser.accept(reportFile, unitTestResults);
+          try {
+            parser.accept(reportFile, unitTestResults);
+          } catch (Exception e) {
+            LOG.warn("Could not import unit test report '{}'", reportFile);
+          }
         }
       }
     }

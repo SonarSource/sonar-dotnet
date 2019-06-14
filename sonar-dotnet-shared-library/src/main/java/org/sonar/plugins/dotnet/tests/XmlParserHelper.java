@@ -19,19 +19,25 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import javax.annotation.Nullable;
-import javax.xml.stream.XMLStreamConstants;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
+import javax.annotation.Nullable;
+import javax.xml.stream.Location;
+import javax.xml.stream.XMLStreamConstants;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.analyzer.commons.xml.SafetyFactory;
 
 public class XmlParserHelper implements AutoCloseable {
+
+  private static final Logger LOG = Loggers.get(XmlParserHelper.class);
 
   private final File file;
   private final InputStreamReader reader;
@@ -41,7 +47,7 @@ public class XmlParserHelper implements AutoCloseable {
     try {
       this.file = file;
       this.reader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
-      this.stream = SafetyFactory.createXMLInputFactory().createXMLStreamReader(reader);
+      this.stream = createXmlStreamReader();
 
     } catch (FileNotFoundException | XMLStreamException e) {
       throw new IllegalStateException(e);
@@ -60,15 +66,44 @@ public class XmlParserHelper implements AutoCloseable {
   String nextStartTag() {
     try {
       while (stream.hasNext()) {
-        if (stream.next() == XMLStreamConstants.START_ELEMENT) {
+        if (getNextValid() == XMLStreamConstants.START_ELEMENT) {
           return stream.getLocalName();
         }
       }
-
       return null;
     } catch (XMLStreamException e) {
       throw new IllegalStateException("Error while parsing the XML file: " + file.getAbsolutePath(), e);
     }
+  }
+
+  private int getNextValid() throws XMLStreamException {
+    Location lastLocation = stream.getLocation();
+    while (stream.hasNext()) {
+      try {
+        return stream.next();
+      } catch (XMLStreamException e) {
+        Location currentLocation = stream.getLocation();
+        if (isSameLocation(lastLocation, currentLocation)) {
+          // if the next() method throws exception before moving XML pointer forward, we fail here
+          LOG.warn("Unable to get next XML event while parsing file '{}'", file.toString());
+          throw e;
+        }
+        lastLocation = currentLocation;
+      }
+    }
+    return -1;
+  }
+
+  private static boolean isSameLocation(@Nullable Location loc1, @Nullable Location loc2) {
+    return Objects.equals(loc1, loc2) ||
+      (loc1 != null &&
+        loc2 != null &&
+        loc1.getLineNumber() == loc2.getLineNumber() &&
+        loc1.getColumnNumber() == loc2.getColumnNumber() &&
+        loc1.getCharacterOffset() == loc2.getCharacterOffset() &&
+        Objects.equals(loc1.getPublicId(), loc2.getPublicId()) &&
+        Objects.equals(loc1.getSystemId(), loc2.getSystemId()));
+
   }
 
   @Nullable
@@ -168,6 +203,10 @@ public class XmlParserHelper implements AutoCloseable {
 
   XMLStreamReader stream() {
     return stream;
+  }
+
+  XMLStreamReader createXmlStreamReader() throws XMLStreamException {
+    return SafetyFactory.createXMLInputFactory().createXMLStreamReader(reader);
   }
 
 }

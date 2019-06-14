@@ -19,13 +19,20 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.io.File;
+import java.util.function.Function;
+import javax.xml.stream.Location;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import java.io.File;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class XmlParserHelperTest {
 
@@ -61,6 +68,80 @@ public class XmlParserHelperTest {
     thrown.expectMessage("valid.xml");
     thrown.expectMessage("Expected an double instead of \"hello\" for the attribute \"myString\"");
     xml.getDoubleAttribute("myString");
+  }
+
+  @Test
+  public void no_next_valid_tag() throws XMLStreamException {
+    XMLStreamReader mockedReader = mock(XMLStreamReader.class);
+    when(mockedReader.hasNext()).thenAnswer(createAnswerWithCount(i -> i < 3));
+    when(mockedReader.getLocation()).thenAnswer(createAnswerWithCount(XmlParserHelperTest::createLocation));
+    when(mockedReader.next()).thenThrow(XMLStreamException.class);
+
+    XmlParserHelper parser = createParserWithMockReader(mockedReader);
+
+    assertThat(parser.nextStartTag()).isNull();
+  }
+
+  @Test
+  public void null_location() throws XMLStreamException {
+    XMLStreamReader mockedReader = mock(XMLStreamReader.class);
+    when(mockedReader.hasNext()).thenReturn(true);
+    when(mockedReader.next()).thenThrow(XMLStreamException.class);
+
+    XmlParserHelper parser = createParserWithMockReader(mockedReader);
+
+    thrown.expect(IllegalStateException.class);
+    parser.nextStartTag();
+  }
+
+  private static XmlParserHelper createParserWithMockReader(XMLStreamReader mockedReader) {
+    return new XmlParserHelper(new File("src/test/resources/xml_parser_helper/valid.xml")) {
+      @Override
+      XMLStreamReader createXmlStreamReader() {
+        return mockedReader;
+      }
+    };
+  }
+
+  private static Location createLocation(int i) {
+    return new Location() {
+      @Override
+      public int getLineNumber() {
+        return i;
+      }
+
+      @Override
+      public int getColumnNumber() {
+        return 0;
+      }
+
+      @Override
+      public int getCharacterOffset() {
+        return 0;
+      }
+
+      @Override
+      public String getPublicId() {
+        return null;
+      }
+
+      @Override
+      public String getSystemId() {
+        return null;
+      }
+    };
+  }
+
+  private static Answer createAnswerWithCount(Function<Integer, Object> applyFunction) {
+    return new Answer() {
+      private int count = 0;
+
+      @Override
+      public Object answer(InvocationOnMock invocationOnMock) {
+        count++;
+        return applyFunction.apply(count);
+      }
+    };
   }
 
 }

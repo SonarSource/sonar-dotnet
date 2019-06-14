@@ -61,11 +61,11 @@ public class CoverageAggregator {
 
   @VisibleForTesting
   CoverageAggregator(CoverageConfiguration coverageConf, Configuration configuration,
-    CoverageCache coverageCache,
-    NCover3ReportParser ncover3ReportParser,
-    OpenCoverReportParser openCoverReportParser,
-    DotCoverReportsAggregator dotCoverReportsAggregator,
-    VisualStudioCoverageXmlReportParser visualStudioCoverageXmlReportParser) {
+                     CoverageCache coverageCache,
+                     NCover3ReportParser ncover3ReportParser,
+                     OpenCoverReportParser openCoverReportParser,
+                     DotCoverReportsAggregator dotCoverReportsAggregator,
+                     VisualStudioCoverageXmlReportParser visualStudioCoverageXmlReportParser) {
 
     this.coverageConf = coverageConf;
     this.configuration = configuration;
@@ -131,7 +131,11 @@ public class CoverageAggregator {
           LOG.warn("Could not find any coverage report file matching the pattern '{}'.", reportPathPattern);
         } else {
           for (File reportFile : filesMatchingPattern) {
-            aggregatedCoverage.mergeWith(coverageCache.readCoverageFromCacheOrParse(parser, reportFile));
+            try {
+              aggregatedCoverage.mergeWith(coverageCache.readCoverageFromCacheOrParse(parser, reportFile));
+            } catch (Exception e) {
+              LOG.warn("Could not import coverage report '{}'", reportFile);
+            }
           }
         }
       }
