@@ -62,6 +62,7 @@ namespace Tests.Diagnostics
             "".StartsWith("", true, CultureInfo.CurrentCulture); // Compliant - CultureInfo implies string formatting
 
             MyMethod1("", ""); // Compliant
+            MyMethod1("", StringComparison.CurrentCulture); // Compliant
             MyMethod2(""); // Compliant
 
             MyMethod3(StringComparison.OrdinalIgnoreCase, ""); // Compliant
