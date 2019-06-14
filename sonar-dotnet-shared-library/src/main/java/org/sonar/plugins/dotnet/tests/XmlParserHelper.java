@@ -47,7 +47,7 @@ public class XmlParserHelper implements AutoCloseable {
     try {
       this.file = file;
       this.reader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
-      this.stream = SafetyFactory.createXMLInputFactory().createXMLStreamReader(reader);
+      this.stream = createXmlStreamReader();
 
     } catch (FileNotFoundException | XMLStreamException e) {
       throw new IllegalStateException(e);
@@ -94,12 +94,15 @@ public class XmlParserHelper implements AutoCloseable {
     return -1;
   }
 
-  private static boolean isSameLocation(Location loc1, Location loc2) {
-    return loc1.getLineNumber() == loc2.getLineNumber() &&
-      loc1.getColumnNumber() == loc2.getColumnNumber() &&
-      loc1.getCharacterOffset() == loc2.getCharacterOffset() &&
-      Objects.equals(loc1.getPublicId(), loc2.getPublicId()) &&
-      Objects.equals(loc1.getSystemId(), loc2.getSystemId());
+  private static boolean isSameLocation(@Nullable Location loc1, @Nullable Location loc2) {
+    return Objects.equals(loc1, loc2) ||
+      (loc1 != null &&
+        loc2 != null &&
+        loc1.getLineNumber() == loc2.getLineNumber() &&
+        loc1.getColumnNumber() == loc2.getColumnNumber() &&
+        loc1.getCharacterOffset() == loc2.getCharacterOffset() &&
+        Objects.equals(loc1.getPublicId(), loc2.getPublicId()) &&
+        Objects.equals(loc1.getSystemId(), loc2.getSystemId()));
 
   }
 
@@ -200,6 +203,10 @@ public class XmlParserHelper implements AutoCloseable {
 
   XMLStreamReader stream() {
     return stream;
+  }
+
+  XMLStreamReader createXmlStreamReader() throws XMLStreamException {
+    return SafetyFactory.createXMLInputFactory().createXMLStreamReader(reader);
   }
 
 }
