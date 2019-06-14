@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -41,6 +42,8 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
+        private static readonly ImmutableArray<KnownType> stringComparisonType = ImmutableArray.Create(KnownType.System_StringComparison);
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -50,19 +53,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (invocation.Expression != null &&
                         IsInvalidCall(invocation.Expression, c.SemanticModel) &&
-                        HasOverloadWithStringComparison(invocation.Expression, c.SemanticModel))
+                        CSharpOverloadHelper.HasOverloadWithType(invocation, c.SemanticModel, stringComparisonType))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation(), invocation.Expression));
                     }
                 }, SyntaxKind.InvocationExpression);
-        }
-
-        private static bool HasOverloadWithStringComparison(ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            return semanticModel.GetMemberGroup(expression)
-                .OfType<IMethodSymbol>()
-                .Where(m => !m.GetAttributes(KnownType.System_ObsoleteAttribute).Any())
-                .Any(HasAnyStringComparisonParameter);
         }
 
         private static bool IsInvalidCall(ExpressionSyntax expression, SemanticModel semanticModel)

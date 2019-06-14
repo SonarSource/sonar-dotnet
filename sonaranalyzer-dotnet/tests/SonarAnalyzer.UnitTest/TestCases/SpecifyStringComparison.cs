@@ -36,6 +36,11 @@ namespace Tests.Diagnostics
             "".StartsWith("", true, CultureInfo.CurrentCulture); // Compliant - CultureInfo implies string formatting
 
             MyMethod2("");
+
+      //      var returnedNames = new[] { "Any name", "Any other name" };
+       //     var expectedName = "Any name";
+
+//            Assert.Contains(expectedName, returnedNames, StringComparer.OrdinalIgnoreCase); // Compliant - no overload with StringComparison
         }
     }
 }
