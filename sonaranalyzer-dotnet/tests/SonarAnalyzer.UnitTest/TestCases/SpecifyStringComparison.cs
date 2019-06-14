@@ -10,6 +10,7 @@ namespace Tests.Diagnostics
         public void MyMethod(string value, StringComparison comparisonType) { }
 
         public void MyMethod1(string value1, string value2) { }
+        public void MyMethod1(string value1) { }
         public void MyMethod1(string value1, StringComparison comparisonType) { }
 
         public void MyMethod2(string value) { }
@@ -17,11 +18,19 @@ namespace Tests.Diagnostics
         [Obsolete]
         public void MyMethod2(string value, StringComparison comparisonType) { }
 
+        public void MyMethod3(StringComparison comparisonType, string format, params string[] args) { }
+        public void MyMethod3(string format, params string[] args) { }
+
+        public void MyMethod4(string foo, params string[] args) { }
+        public void MyMethod4(string foo, int bar, params string[] args) { }
+
         public static void Contains<T>(T expected, IEnumerable<T> collection) { }
-
         public static void Contains<T>(T expected, IEnumerable<T> collection, IEqualityComparer<T> comparer) { }
-
         public static void Contains<T>(IEnumerable<T> collection, Predicate<T> filter) { }
+
+        public static void Contains2<T>(T expected, IEnumerable<T> collection) { }
+        public static void Contains2<T>(T expected, IEnumerable<T> collection, StringComparison comparisonType) { }
+        public static void Contains2<T>(IEnumerable<T> collection, Predicate<T> filter) { }
 
         void InvalidCalls()
         {
@@ -31,7 +40,15 @@ namespace Tests.Diagnostics
 
             MyMethod("a"); // Noncompliant
 
+            MyMethod1("a"); // Noncompliant
+
+            MyMethod3("a"); // Noncompliant
+            MyMethod3("a", "b"); // Noncompliant
+            MyMethod3("a", "b", "c"); // Noncompliant
+
             "".StartsWith(""); // Noncompliant
+
+            Contains2("", new[] { "" }); // Noncompliant
         }
 
         void ValidCalls()
@@ -44,10 +61,22 @@ namespace Tests.Diagnostics
             "".StartsWith("", StringComparison.CurrentCulture); // Compliant
             "".StartsWith("", true, CultureInfo.CurrentCulture); // Compliant - CultureInfo implies string formatting
 
-            MyMethod1("", "");
-            MyMethod2("");
+            MyMethod1("", ""); // Compliant
+            MyMethod2(""); // Compliant
 
+            MyMethod3(StringComparison.OrdinalIgnoreCase, ""); // Compliant
+            MyMethod3(StringComparison.OrdinalIgnoreCase, "", ""); // Compliant
+
+            MyMethod4(""); // Compliant
+            MyMethod4("", ""); // Compliant
+            MyMethod4("", 1); // Compliant
+            MyMethod4("", "", ""); // Compliant
+            MyMethod4("", 1, ""); // Compliant
+
+            Contains("", new[] { "" }); // Compliant
             Contains("", new[] { "" }, StringComparer.OrdinalIgnoreCase); // Compliant
+
+            Contains2("", new[] { "" }, StringComparison.OrdinalIgnoreCase); // Compliant
         }
     }
 }

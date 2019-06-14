@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Helpers.CSharp
         private static bool SameParametersExceptWantedType(IMethodSymbol possibleOverload, IEnumerable<IParameterSymbol> invocationParameters, ImmutableArray<KnownType> types)
         {
             var parametersWithoutWantedType = possibleOverload.GetParameters().Where(p => !p.Type.IsAny(types)).ToList();
-            var parametersWithoutWantedTypeCount = parametersWithoutWantedType.Count();
+            var parametersWithoutWantedTypeCount = parametersWithoutWantedType.Count;
 
             if (parametersWithoutWantedTypeCount == possibleOverload.GetParameters().Count())
             {
