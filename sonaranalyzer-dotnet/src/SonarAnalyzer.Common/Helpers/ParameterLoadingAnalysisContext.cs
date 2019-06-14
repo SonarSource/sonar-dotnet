@@ -39,6 +39,8 @@ namespace SonarAnalyzer.Helpers
             this.context = context;
         }
 
+        internal SonarAnalysisContext GetInnerContext() => context;
+
         internal void RegisterCompilationAction(Action<CompilationAnalysisContext> action)
         {
             this.context.RegisterCompilationAction(action);
