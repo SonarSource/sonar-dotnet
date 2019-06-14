@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace Tests.Diagnostics
@@ -8,11 +9,19 @@ namespace Tests.Diagnostics
         public void MyMethod(string value) { }
         public void MyMethod(string value, StringComparison comparisonType) { }
 
+        public void MyMethod1(string value1, string value2) { }
+        public void MyMethod1(string value1, StringComparison comparisonType) { }
 
         public void MyMethod2(string value) { }
 
         [Obsolete]
         public void MyMethod2(string value, StringComparison comparisonType) { }
+
+        public static void Contains<T>(T expected, IEnumerable<T> collection) { }
+
+        public static void Contains<T>(T expected, IEnumerable<T> collection, IEqualityComparer<T> comparer) { }
+
+        public static void Contains<T>(IEnumerable<T> collection, Predicate<T> filter) { }
 
         void InvalidCalls()
         {
@@ -35,12 +44,10 @@ namespace Tests.Diagnostics
             "".StartsWith("", StringComparison.CurrentCulture); // Compliant
             "".StartsWith("", true, CultureInfo.CurrentCulture); // Compliant - CultureInfo implies string formatting
 
+            MyMethod1("", "");
             MyMethod2("");
 
-      //      var returnedNames = new[] { "Any name", "Any other name" };
-       //     var expectedName = "Any name";
-
-//            Assert.Contains(expectedName, returnedNames, StringComparer.OrdinalIgnoreCase); // Compliant - no overload with StringComparison
+            Contains("", new[] { "" }, StringComparer.OrdinalIgnoreCase); // Compliant
         }
     }
 }
