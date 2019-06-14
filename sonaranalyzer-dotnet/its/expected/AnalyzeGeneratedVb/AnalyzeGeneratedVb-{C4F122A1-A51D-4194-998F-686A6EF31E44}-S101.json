@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "sources\GeneratedCodeVb\GeneratedCode.vb",
+"region":  {
+"startLine":  4,
+"startColumn":  7,
+"endLine":  4,
+"endColumn":  15
+}
+}
+}
+]
+}

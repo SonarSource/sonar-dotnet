@@ -219,7 +219,9 @@ try {
     Build-Project "Nancy" "src\Nancy.sln"
     Build-Project "Ember-MM" "Ember Media Manager.sln"
     Build-Project "AnalyzeGenerated" "AnalyzeGeneratedFiles.sln"
+    Build-Project "AnalyzeGeneratedVb" "AnalyzeGeneratedVb.sln"
     Build-Project "SkipGenerated" "SkipGeneratedFiles.sln"
+    Build-Project "SkipGeneratedVb" "SkipGeneratedVb.sln"
 
     Write-Header "Processing analyzer results"
 
@@ -238,6 +240,8 @@ try {
     # FIXME: this is a hacky way of diffing the issues found on the temporary generated files during build
     ReplaceGeneratedTempFileName(".\expected\AnalyzeGenerated")
     ReplaceGeneratedTempFileName(".\actual\AnalyzeGenerated")
+    ReplaceGeneratedTempFileName(".\expected\AnalyzeGeneratedVb")
+    ReplaceGeneratedTempFileName(".\actual\AnalyzeGeneratedVb")
 
     Write-Host "Checking for differences..."
     $diffTimer = [system.diagnostics.stopwatch]::StartNew()

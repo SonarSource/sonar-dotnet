@@ -1,8 +1,11 @@
 # dotnet-test-sources
 project sources for dotnet ITs
 
+# Important
 
-# To add a new project
+Projects are added by hand in this folder
+
+# Historic repo
 
 - Clone the repo https://github.com/SonarSource/dotnet-test-sources.git
 - Copy the project into the root folder of the repo
