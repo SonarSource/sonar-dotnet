@@ -135,21 +135,6 @@ namespace SonarAnalyzer.Helpers
                 });
         }
 
-        public static void RegisterCodeBlockStartActionInNonGenerated<TLanguageKindEnum>(
-            this ParameterLoadingAnalysisContext context,
-            GeneratedCodeRecognizer generatedCodeRecognizer,
-            Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct
-        {
-            context.RegisterCodeBlockStartAction<TLanguageKindEnum>(
-                c =>
-                {
-                    if (ShouldAnalyze(context.GetInnerContext(), generatedCodeRecognizer, c.GetSyntaxTree(), c.SemanticModel.Compilation, c.Options))
-                    {
-                        action(c);
-                    }
-                });
-        }
-
         #endregion Register*ActionInNonGenerated
 
         #region ReportDiagnosticIfNonGenerated
@@ -192,20 +177,20 @@ namespace SonarAnalyzer.Helpers
             = new ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>>();
 
         private static bool ShouldAnalyze(SonarAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation c, AnalyzerOptions options) =>
-            !syntaxTree.IsGenerated(generatedCodeRecognizer, c) ||
-            context.ShouldAnalyzeGenerated(c, options);
+            context.ShouldAnalyzeGenerated(c, options) ||
+            !syntaxTree.IsGenerated(generatedCodeRecognizer, c);
 
         private static bool ShouldAnalyze(CompilationStartAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation c, AnalyzerOptions options) =>
-            !syntaxTree.IsGenerated(generatedCodeRecognizer, c) ||
-            SonarAnalysisContext.ShouldAnalyzeGenerated(context, c, options);
+            SonarAnalysisContext.ShouldAnalyzeGenerated(context, c, options) ||
+            !syntaxTree.IsGenerated(generatedCodeRecognizer, c);
 
         private static bool ShouldAnalyze(CompilationAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation c, AnalyzerOptions options) =>
-            !syntaxTree.IsGenerated(generatedCodeRecognizer, c) ||
-            SonarAnalysisContext.ShouldAnalyzeGenerated(context, c, options);
+            SonarAnalysisContext.ShouldAnalyzeGenerated(context, c, options) ||
+            !syntaxTree.IsGenerated(generatedCodeRecognizer, c);
 
         internal static bool ShouldAnalyze(GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation c, AnalyzerOptions options) =>
-            !syntaxTree.IsGenerated(generatedCodeRecognizer, c) ||
-            options.ShouldAnalyzeGeneratedCode(c.Language);
+            options.ShouldAnalyzeGeneratedCode(c.Language) ||
+            !syntaxTree.IsGenerated(generatedCodeRecognizer, c);
 
         internal static bool IsGenerated(this SyntaxTree tree,
             GeneratedCodeRecognizer generatedCodeRecognizer,
