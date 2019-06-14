@@ -134,7 +134,7 @@ namespace SonarAnalyzer.Helpers
             {
                 return XDocument.Parse(sourceText.ToString()).Descendants("Setting");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // cannot log the exception, so ignore it
                 return Enumerable.Empty<XElement>();
