@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Helpers
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    if (ShouldAnalyze(generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
+                    if (ShouldAnalyze(context, generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
                     {
                         action(c);
                     }
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Helpers
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    if (ShouldAnalyze(generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
+                    if (ShouldAnalyze(context.GetInnerContext(), generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
                     {
                         action(c);
                     }
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Helpers
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    if (ShouldAnalyze(generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
+                    if (ShouldAnalyze(context, generatedCodeRecognizer, c.GetSyntaxTree(), c.Compilation, c.Options))
                     {
                         action(c);
                     }
@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Helpers
                     csac.RegisterSyntaxTreeAction(
                         c =>
                         {
-                            if (ShouldAnalyze(generatedCodeRecognizer, c.GetSyntaxTree(), csac.Compilation, c.Options))
+                            if (ShouldAnalyze(context, generatedCodeRecognizer, c.GetSyntaxTree(), csac.Compilation, c.Options))
                             {
                                 action(c);
                             }
@@ -112,7 +112,7 @@ namespace SonarAnalyzer.Helpers
                     csac.RegisterSyntaxTreeAction(
                         c =>
                         {
-                            if (ShouldAnalyze(generatedCodeRecognizer, c.GetSyntaxTree(), csac.Compilation, c.Options))
+                            if (ShouldAnalyze(context.GetInnerContext(), generatedCodeRecognizer, c.GetSyntaxTree(), csac.Compilation, c.Options))
                             {
                                 action(c);
                             }
@@ -128,22 +128,7 @@ namespace SonarAnalyzer.Helpers
             context.RegisterCodeBlockStartAction<TLanguageKindEnum>(
                 c =>
                 {
-                    if (ShouldAnalyze(generatedCodeRecognizer, c.GetSyntaxTree(), c.SemanticModel.Compilation, c.Options))
-                    {
-                        action(c);
-                    }
-                });
-        }
-
-        public static void RegisterCodeBlockStartActionInNonGenerated<TLanguageKindEnum>(
-            this ParameterLoadingAnalysisContext context,
-            GeneratedCodeRecognizer generatedCodeRecognizer,
-            Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct
-        {
-            context.RegisterCodeBlockStartAction<TLanguageKindEnum>(
-                c =>
-                {
-                    if (ShouldAnalyze(generatedCodeRecognizer, c.GetSyntaxTree(), c.SemanticModel.Compilation, c.Options))
+                    if (ShouldAnalyze(context, generatedCodeRecognizer, c.GetSyntaxTree(), c.SemanticModel.Compilation, c.Options))
                     {
                         action(c);
                     }
@@ -160,7 +145,7 @@ namespace SonarAnalyzer.Helpers
             Diagnostic diagnostic,
             Compilation compilation)
         {
-            if (ShouldAnalyze(generatedCodeRecognizer, diagnostic.Location.SourceTree, context.Compilation, context.Options))
+            if (ShouldAnalyze(context, generatedCodeRecognizer, diagnostic.Location.SourceTree, context.Compilation, context.Options))
             {
                 context.ReportDiagnosticWhenActive(diagnostic);
             }
@@ -191,9 +176,21 @@ namespace SonarAnalyzer.Helpers
         private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>> Cache
             = new ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>>();
 
-        public static bool ShouldAnalyze(GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation c, AnalyzerOptions options) =>
-            !syntaxTree.IsGenerated(generatedCodeRecognizer, c) ||
-            options.ShouldAnalyzeGeneratedCode(c.Language);
+        private static bool ShouldAnalyze(SonarAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation c, AnalyzerOptions options) =>
+            context.ShouldAnalyzeGenerated(c, options) ||
+            !syntaxTree.IsGenerated(generatedCodeRecognizer, c);
+
+        private static bool ShouldAnalyze(CompilationStartAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation c, AnalyzerOptions options) =>
+            SonarAnalysisContext.ShouldAnalyzeGenerated(context, c, options) ||
+            !syntaxTree.IsGenerated(generatedCodeRecognizer, c);
+
+        private static bool ShouldAnalyze(CompilationAnalysisContext context, GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation c, AnalyzerOptions options) =>
+            SonarAnalysisContext.ShouldAnalyzeGenerated(context, c, options) ||
+            !syntaxTree.IsGenerated(generatedCodeRecognizer, c);
+
+        internal static bool ShouldAnalyze(GeneratedCodeRecognizer generatedCodeRecognizer, SyntaxTree syntaxTree, Compilation c, AnalyzerOptions options) =>
+            options.ShouldAnalyzeGeneratedCode(c.Language) ||
+            !syntaxTree.IsGenerated(generatedCodeRecognizer, c);
 
         internal static bool IsGenerated(this SyntaxTree tree,
             GeneratedCodeRecognizer generatedCodeRecognizer,

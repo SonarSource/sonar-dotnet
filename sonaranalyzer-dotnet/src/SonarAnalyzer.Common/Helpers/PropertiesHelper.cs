@@ -29,19 +29,11 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class PropertiesHelper
     {
-        private const string AnalyzeGeneratedCodeCSharp = "sonar.cs.analyzeGeneratedCode";
-        private const string AnalyzeGeneratedCodeVisualBasic = "sonar.vbnet.analyzeGeneratedCode";
-
-        // TODO should make sure to read only once during analysis, probably move to IAnalyzerConfiguration
+        internal const string AnalyzeGeneratedCodeCSharp = "sonar.cs.analyzeGeneratedCode";
+        internal const string AnalyzeGeneratedCodeVisualBasic = "sonar.vbnet.analyzeGeneratedCode";
 
         internal static bool ShouldAnalyzeGeneratedCode(this AnalyzerOptions options, string language)
             => ReadBooleanProperty(GetSettings(options),
-                language == LanguageNames.CSharp
-                    ? AnalyzeGeneratedCodeCSharp
-                    : AnalyzeGeneratedCodeVisualBasic);
-
-        internal static bool ShouldAnalyzeGeneratedCode(IEnumerable<XElement> settings, string language)
-            => ReadBooleanProperty(settings,
                 language == LanguageNames.CSharp
                     ? AnalyzeGeneratedCodeCSharp
                     : AnalyzeGeneratedCodeVisualBasic);
@@ -70,6 +62,10 @@ namespace SonarAnalyzer.Helpers
 
         internal static bool ReadBooleanProperty(IEnumerable<XElement> settings, string propertyName, bool defaultValue = false)
         {
+            if (!settings.Any())
+            {
+                return defaultValue;
+            }
             var propertyStringValue = GetPropertyStringValue(propertyName);
             if (propertyStringValue != null &&
                 bool.TryParse(propertyStringValue, out var propertyValue))

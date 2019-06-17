@@ -22,8 +22,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -70,6 +72,21 @@ namespace SonarAnalyzer.Helpers
         /// </remarks>
         public static Action<IReportingContext> ReportDiagnostic { get; set; }
 
+        public static bool ShouldAnalyzeGenerated(AnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
+            TryGetSonarLintXml(options, out var sonarLintXml) &&
+            analysisContext.TryGetValue(sonarLintXml.GetText(), GetProvider(c.Language), out var shouldAnalyzeGeneratedCode) &&
+            shouldAnalyzeGeneratedCode;
+
+        public static bool ShouldAnalyzeGenerated(CompilationStartAnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
+            TryGetSonarLintXml(options, out var sonarLintXml) &&
+            analysisContext.TryGetValue(sonarLintXml.GetText(), GetProvider(c.Language), out var shouldAnalyzeGeneratedCode) &&
+            shouldAnalyzeGeneratedCode;
+
+        public static bool ShouldAnalyzeGenerated(CompilationAnalysisContext analysisContext, Compilation c, AnalyzerOptions options) =>
+            TryGetSonarLintXml(options, out var sonarLintXml) &&
+            analysisContext.TryGetValue(sonarLintXml.GetText(), GetProvider(c.Language), out var shouldAnalyzeGeneratedCode) &&
+            shouldAnalyzeGeneratedCode;
+
         internal SonarAnalysisContext(AnalysisContext context, IEnumerable<DiagnosticDescriptor> supportedDiagnostics)
         {
             this.supportedDiagnostics = supportedDiagnostics ?? throw new ArgumentNullException(nameof(supportedDiagnostics));
@@ -98,6 +115,47 @@ namespace SonarAnalyzer.Helpers
 
         public void RegisterSymbolAction(Action<SymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
             RegisterContextAction(act => this.context.RegisterSymbolAction(act, symbolKinds), action, c => c.GetFirstSyntaxTree(), c => c.Compilation);
+
+        private static SourceTextValueProvider<bool> analyzeGeneratedCodeProviderCSharp = new SourceTextValueProvider<bool>(sourceText =>
+            PropertiesHelper.ReadBooleanProperty(
+                GetSettings(sourceText),
+                PropertiesHelper.AnalyzeGeneratedCodeCSharp,
+                false));
+
+        private static SourceTextValueProvider<bool> analyzeGeneratedCodeProviderVB = new SourceTextValueProvider<bool>(sourceText =>
+            PropertiesHelper.ReadBooleanProperty(
+                GetSettings(sourceText),
+                PropertiesHelper.AnalyzeGeneratedCodeVisualBasic,
+                false));
+ 
+        private static IEnumerable<XElement> GetSettings(SourceText sourceText)
+        {
+            try
+            {
+                return XDocument.Parse(sourceText.ToString()).Descendants("Setting");
+            }
+            catch (Exception)
+            {
+                // cannot log the exception, so ignore it
+                return Enumerable.Empty<XElement>();
+            }
+        }
+
+        private static SourceTextValueProvider<bool> GetProvider(string language) =>
+            LanguageNames.CSharp == language
+                ? analyzeGeneratedCodeProviderCSharp
+                : analyzeGeneratedCodeProviderVB;
+
+        public bool ShouldAnalyzeGenerated(Compilation c, AnalyzerOptions options) =>
+            ShouldAnalyzeGenerated(this.context, c, options);
+
+        private static bool TryGetSonarLintXml(AnalyzerOptions options, out AdditionalText sonarLintXml)
+        {
+            sonarLintXml = options.AdditionalFiles
+                .FirstOrDefault(f => ParameterLoader.IsSonarLintXml(f.Path));
+
+            return sonarLintXml != null;
+        }
 
         private void RegisterContextAction<TContext>(Action<Action<TContext>> registrationAction, Action<TContext> registeredAction,
             Func<TContext, SyntaxTree> getSyntaxTree, Func<TContext, Compilation> getCompilation)

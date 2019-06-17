@@ -2,8 +2,8 @@
 <AnalysisInput>
   <Settings>
     <Setting>
-      <Key>sonar.cs.analyzeGeneratedCode</Key>
-      <Value>true</Value>
+      <Key>sonar.vbnet.analyzeGeneratedCode</Key>
+      <Value>false</Value>
     </Setting>
   </Settings>
 </AnalysisInput>

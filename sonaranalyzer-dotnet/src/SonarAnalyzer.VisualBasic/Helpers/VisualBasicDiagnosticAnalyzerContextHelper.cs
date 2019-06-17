@@ -65,13 +65,6 @@ namespace SonarAnalyzer.Helpers
             context.RegisterCodeBlockStartActionInNonGenerated(VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance, action);
         }
 
-        public static void RegisterCodeBlockStartActionInNonGenerated<TLanguageKindEnum>(
-            this ParameterLoadingAnalysisContext context,
-            Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct
-        {
-            context.RegisterCodeBlockStartActionInNonGenerated(VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance, action);
-        }
-
         #endregion Register*ActionInNonGenerated
 
         #region ReportDiagnosticIfNonGenerated

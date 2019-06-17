@@ -39,10 +39,7 @@ namespace SonarAnalyzer.Helpers
             this.context = context;
         }
 
-        internal void RegisterCompilationAction(Action<CompilationAnalysisContext> action)
-        {
-            this.context.RegisterCompilationAction(action);
-        }
+        internal SonarAnalysisContext GetInnerContext() => context;
 
         internal void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action)
         {
@@ -53,11 +50,6 @@ namespace SonarAnalyzer.Helpers
         internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, ImmutableArray<TLanguageKindEnum> syntaxKinds) where TLanguageKindEnum : struct
         {
             this.context.RegisterSyntaxNodeAction(action, syntaxKinds);
-        }
-
-        internal void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct
-        {
-            this.context.RegisterCodeBlockStartAction(action);
         }
     }
 }

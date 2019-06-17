@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules
             lock (this.parameterReadLock)
             {
                 ReadHeaderCommentProperties(settings);
-                AnalyzeGeneratedCode = PropertiesHelper.ShouldAnalyzeGeneratedCode(settings, language);
+                AnalyzeGeneratedCode = ShouldAnalyzeGeneratedCode();
                 WorkDirectoryBasePath = File.ReadAllLines(projectOutputAdditionalFile.Path).FirstOrDefault(l => !string.IsNullOrEmpty(l));
 
                 if (!string.IsNullOrEmpty(WorkDirectoryBasePath))
@@ -79,6 +79,13 @@ namespace SonarAnalyzer.Rules
                     IsAnalyzerEnabled = true;
                 }
             }
+
+            bool ShouldAnalyzeGeneratedCode() =>
+                PropertiesHelper.ReadBooleanProperty(
+                    settings,
+                    language == LanguageNames.CSharp
+                        ? PropertiesHelper.AnalyzeGeneratedCodeCSharp
+                        : PropertiesHelper.AnalyzeGeneratedCodeVisualBasic);
         }
 
         private void ReadHeaderCommentProperties(IEnumerable<XElement> settings)
@@ -88,6 +95,7 @@ namespace SonarAnalyzer.Rules
             IgnoreHeaderComments[IgnoreHeaderCommentsVisualBasic] = PropertiesHelper.ReadBooleanProperty(settings,
                 IgnoreHeaderCommentsVisualBasic, false);
         }
+
 
         internal static TextRange GetTextRange(FileLinePositionSpan lineSpan)
         {
