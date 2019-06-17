@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused procedure parameter 'args'.",
+"location":  {
+"uri":  "sources\GeneratedCodeVb\NotIgnored.vb",
+"region":  {
+"startLine":  6,
+"startColumn":  35,
+"endLine":  6,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused procedure parameter 'args'.",
+"location":  {
+"uri":  "sources\GeneratedCodeVb\Region.vb",
+"region":  {
+"startLine":  4,
+"startColumn":  31,
+"endLine":  4,
+"endColumn":  53
+}
+}
+}
+]
+}

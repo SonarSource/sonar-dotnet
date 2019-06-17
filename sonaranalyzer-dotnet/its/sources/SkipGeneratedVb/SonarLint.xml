@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<AnalysisInput>
+  <Settings>
+    <Setting>
+      <Key>sonar.vbnet.ignoreHeaderComments</Key>
+      <Value>true</Value>
+    </Setting>
+    <Setting>
+      <Key>sonar.vbnet.analyzeGeneratedCode</Key>
+      <Value>false</Value>
+    </Setting>
+    <Setting>
+      <Key>sonar.vbnet.file.suffixes</Key>
+      <Value>.vb</Value>
+    </Setting>
+  </Settings>
+  <Rules>
+    <Rule>
+      <Key>S1067</Key>
+      <Parameters>
+        <Parameter>
+          <Key>max</Key>
+          <Value>1</Value>
+        </Parameter>
+      </Parameters>
+    </Rule>
+  </Rules>
+  <Files>
+  </Files>
+</AnalysisInput>
