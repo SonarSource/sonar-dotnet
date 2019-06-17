@@ -64,7 +64,8 @@ function ReplaceGeneratedTempFileName([string]$folder){
 
     Write-Host "Will replace generated temporary file names from the jsons in ${folder}:"
     $files = Get-ChildItem -Path $folder -Recurse -File
-    $tempFileNameLineRegex = '"uri":.*\.NETFramework,Version=v4.*\.cs"'
+    $tempFileNameLineRegexCs = '"uri":.*\.NETFramework,Version=.*\.cs"'
+    $tempFileNameLineRegexVb = '"uri":.*\.NETFramework,Version=.*\.vb"'
 
     foreach ($file in $files){
 
@@ -72,7 +73,8 @@ function ReplaceGeneratedTempFileName([string]$folder){
         Write-Host "Will replace the generated temporary file names inside $fullName..."
 
         $data = [System.IO.File]::ReadAllText(${fullName})
-        $data = [System.Text.RegularExpressions.Regex]::Replace($data, $tempFileNameLineRegex, '"uri": "replaced"')
+        $data = [System.Text.RegularExpressions.Regex]::Replace($data, $tempFileNameLineRegexCs, '"uri": "replaced"')
+        $data = [System.Text.RegularExpressions.Regex]::Replace($data, $tempFileNameLineRegexVb, '"uri": "replaced"')
         [System.IO.File]::WriteAllText(${fullName}, $data)
     }
 }
