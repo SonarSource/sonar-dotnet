@@ -32,6 +32,9 @@ namespace Tests.Diagnostics
         public static void Contains2<T>(T expected, IEnumerable<T> collection, StringComparison comparisonType) { }
         public static void Contains2<T>(IEnumerable<T> collection, Predicate<T> filter) { }
 
+        public static void Contains3<T>(T expected, IEnumerable<T> collection) { }
+        public static void Contains3<T, U>(T expected, IEnumerable<U> collection, StringComparison comparisonType) { }
+
         void InvalidCalls()
         {
             string.Compare("a", "b"); // Noncompliant {{Change this call to 'string.Compare' to an overload that accepts a 'StringComparison' as a parameter.}}
@@ -49,6 +52,7 @@ namespace Tests.Diagnostics
             "".StartsWith(""); // Noncompliant
 
             Contains2("", new[] { "" }); // Noncompliant
+            Contains3("", new[] { "" }); // FN - too complex to correctly resolve type arguments when they are different between invoked and overloaded methods
         }
 
         void ValidCalls()

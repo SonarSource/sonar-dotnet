@@ -37,9 +37,17 @@ namespace SonarAnalyzer.Helpers.CSharp
                 .Where(method => IsCompatibleOverload(invocation, method))
                 .Any(methodSignature => SameParametersExceptWantedType(methodSignature, GetInvocationParameters(invocation, semanticModel), types));
 
-        private static bool SameParametersExceptWantedType(IMethodSymbol possibleOverload, IEnumerable<IParameterSymbol> invocationParameters, ImmutableArray<KnownType> types)
+        private static bool SameParametersExceptWantedType(IMethodSymbol possibleOverload, IMethodSymbol invocationMethodSymbol, ImmutableArray<KnownType> types)
         {
-            var parametersWithoutWantedType = possibleOverload.GetParameters().Where(p => !p.Type.IsAny(types)).ToList();
+            var withTypeParam = possibleOverload;
+            if (possibleOverload.IsGenericMethod && invocationMethodSymbol.IsGenericMethod)
+            {
+                // attempt to create the possibleOverload method symbol with same type arguments as the invocation method
+                withTypeParam = ConstructTypedPossibleOverload(possibleOverload, invocationMethodSymbol);
+            }
+
+            var invocationParameters = invocationMethodSymbol.GetParameters();
+            var parametersWithoutWantedType = withTypeParam.GetParameters().Where(p => !p.Type.IsAny(types)).ToList();
             var parametersWithoutWantedTypeCount = parametersWithoutWantedType.Count;
 
             if (parametersWithoutWantedTypeCount == possibleOverload.GetParameters().Count())
@@ -48,7 +56,6 @@ namespace SonarAnalyzer.Helpers.CSharp
             }
 
             var invocationParametersCount = invocationParameters.Count();
-
             if (parametersWithoutWantedTypeCount <= invocationParametersCount &&
                 parametersWithoutWantedTypeCount > 0 &&
                 parametersWithoutWantedType.Last().IsParams)
@@ -63,8 +70,19 @@ namespace SonarAnalyzer.Helpers.CSharp
                 return invocationParameters
                     .Select((p, index) => p.Type.DerivesOrImplements(parametersWithoutWantedType[index].Type))
                     .All(isCompatible => isCompatible);
+
             }
             return false;
+        }
+
+        private static IMethodSymbol ConstructTypedPossibleOverload(IMethodSymbol possibleOverload, IMethodSymbol invocationMethodSymbol)
+        {
+            if (possibleOverload.TypeParameters.Count() == invocationMethodSymbol.TypeArguments.Count())
+            {
+                return possibleOverload.Construct(invocationMethodSymbol.TypeArguments.ToArray());
+            }
+
+            return possibleOverload;
         }
 
         // must have same number of arguments + 1 (the argument that should be added) OR is params argument
@@ -72,8 +90,8 @@ namespace SonarAnalyzer.Helpers.CSharp
                 (m.GetParameters().Count() - invocation.ArgumentList.Arguments.Count == 1) ||
                 (m.GetParameters().Any() && m.GetParameters().Last().IsParams);
 
-        public static IEnumerable<IParameterSymbol> GetInvocationParameters(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-               semanticModel.GetSymbolInfo(invocation.Expression).Symbol?.GetParameters();
+        public static IMethodSymbol GetInvocationParameters(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+            semanticModel.GetSymbolInfo(invocation.Expression).Symbol as IMethodSymbol;
 
         /**
          * Verifies the compatibility between the invocation parameters and the parameters of a possible overload that
@@ -96,14 +114,23 @@ namespace SonarAnalyzer.Helpers.CSharp
             }
             // make sure the rest of the invocation parameters match with the 'params' type
             var paramsType = GetParamsElementType(paramsParameter.Type);
-            for (; i < invocationParameters.Count; i++)
+            for (; i < invocationParameters.Count - 1; i++)
             {
                 if (!invocationParameters[i].Type.DerivesOrImplements(paramsType))
                 {
                     return false;
                 }
             }
-            return true;
+
+            var lastInvocationParameter = invocationParameters[invocationParameters.Count - 1];
+            if (lastInvocationParameter.IsParams)
+            {
+                return GetParamsElementType(lastInvocationParameter.Type).DerivesOrImplements(paramsType);
+            }
+            else
+            {
+                return lastInvocationParameter.Type.DerivesOrImplements(paramsType);
+            }
 
             ITypeSymbol GetParamsElementType(ITypeSymbol typeSymbol) => (typeSymbol as IArrayTypeSymbol).ElementType;
         }
