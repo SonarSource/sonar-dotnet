@@ -55,7 +55,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="ResourceTests\AnalyzeGeneratedFalseVbnet\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="ResourceTests\AnalyzeGeneratedFalse\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\AnalyzeGeneratedTrueVbnet\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\IgnoreHeaderCommentsFalseVbnet\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\IgnoreHeaderCommentsFalseCSharp\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\IgnoreHeaderCommentsTrueCSharp\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\IgnoreHeaderCommentsTrueVbnet\SonarLint.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ResourceTests\Malformed\SonarLint.xml">
@@ -71,6 +89,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ResourceTests\SonarLint.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceTests\ProjectOutFolderPath.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Common\Resources\input.txt">
