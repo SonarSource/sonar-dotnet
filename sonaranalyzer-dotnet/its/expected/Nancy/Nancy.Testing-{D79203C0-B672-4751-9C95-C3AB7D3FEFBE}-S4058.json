@@ -15,19 +15,6 @@
 },
 {
 "id":  "S4058",
-"message":  "Change this call to 'node.ShouldContainAttribute' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
-"region":  {
-"startLine":  154,
-"startColumn":  17,
-"endLine":  154,
-"endColumn":  50
-}
-}
-},
-{
-"id":  "S4058",
 "message":  "Change this call to 'x.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",

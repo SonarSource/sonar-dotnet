@@ -24,6 +24,9 @@ namespace Tests.Diagnostics
         public void MyMethod4(string foo, params string[] args) { }
         public void MyMethod4(string foo, int bar, params string[] args) { }
 
+        public void MyMethod5(StringComparison comparisonType, string format, params object[] args) { }
+        public void MyMethod5(string format, params string[] args) { }
+
         public static void Contains<T>(T expected, IEnumerable<T> collection) { }
         public static void Contains<T>(T expected, IEnumerable<T> collection, IEqualityComparer<T> comparer) { }
         public static void Contains<T>(IEnumerable<T> collection, Predicate<T> filter) { }
@@ -48,6 +51,8 @@ namespace Tests.Diagnostics
             MyMethod3("a"); // Noncompliant
             MyMethod3("a", "b"); // Noncompliant
             MyMethod3("a", "b", "c"); // Noncompliant
+
+            MyMethod5("a", "b", "c"); // Noncompliant
 
             "".StartsWith(""); // Noncompliant
 
@@ -77,6 +82,8 @@ namespace Tests.Diagnostics
             MyMethod4("", 1); // Compliant
             MyMethod4("", "", ""); // Compliant
             MyMethod4("", 1, ""); // Compliant
+
+            MyMethod5(StringComparison.OrdinalIgnoreCase, "a", "b", "c"); // Compliant
 
             Contains("", new[] { "" }); // Compliant
             Contains("", new[] { "" }, StringComparer.OrdinalIgnoreCase); // Compliant

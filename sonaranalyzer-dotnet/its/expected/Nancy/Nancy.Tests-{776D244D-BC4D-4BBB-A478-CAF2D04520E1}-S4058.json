@@ -67,19 +67,6 @@
 },
 {
 "id":  "S4058",
-"message":  "Change this call to 'Assert.DoesNotContain' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Diagnostics\InteractiveDiagnosticsFixture.cs",
-"region":  {
-"startLine":  82,
-"startColumn":  17,
-"endLine":  82,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S4058",
 "message":  "Change this call to 'x.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",

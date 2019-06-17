@@ -41,32 +41,6 @@
 },
 {
 "id":  "S4058",
-"message":  "Change this call to 'Assert.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "sources\Automapper\src\UnitTests\Projection\NestedAndArraysTests.cs",
-"region":  {
-"startLine":  73,
-"startColumn":  17,
-"endLine":  73,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S4058",
-"message":  "Change this call to 'Assert.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "sources\Automapper\src\UnitTests\Projection\NestedAndArraysTests.cs",
-"region":  {
-"startLine":  74,
-"startColumn":  17,
-"endLine":  74,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
 "uri":  "sources\Automapper\src\UnitTests\Projection\ProjectCollectionEnumerableTest.cs",
