@@ -128,6 +128,7 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
 
             // Assert
             result.Should().NotBeNull();
+            // line number in SQ starts from 1, Roslyn starts from 0
             result.StartLine.Should().Be(55 + 1);
             result.StartOffset.Should().Be(42);
             result.EndLine.Should().Be(99 + 1);
@@ -186,8 +187,6 @@ namespace SonarAnalyzer.UnitTest.Rules.Utilities
             additionalTextMock.Setup(x => x.GetText(System.Threading.CancellationToken.None)).Returns(sourceText);
             return additionalTextMock;
         }
-
-
 
         // We can't use Mock<SourceText> because SourceText is an abstract class
         private class DummySourceText : SourceText
