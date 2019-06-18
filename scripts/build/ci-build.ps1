@@ -340,8 +340,11 @@ function Invoke-JavaBuild() {
             "-Pdeploy-sonarsource,sonaranalyzer" `
             "-Dmaven.test.redirectTestOutputToFile=false" `
             "-Dsonar.projectName=${sonarqubePluginName}" `
-            "-Dsonar.analysis.prNumber=${githubPullRequest}" `
+            "-Dsonar.analysis.buildNumber=${buildNumber}" `
+            "-Dsonar.analysis.pipeline=${buildNumber}" `
             "-Dsonar.analysis.sha1=${githubSha1}" `
+            "-Dsonar.analysis.repository=${githubRepo}" `
+            "-Dsonar.analysis.prNumber=${githubPullRequest}" `
             "-Dsonar.host.url=${sonarCloudUrl}" `
             "-Dsonar.login=${sonarCloudToken}" `
             "-Dsonar.organization=sonarsource" `
@@ -365,7 +368,10 @@ function Invoke-JavaBuild() {
             "-Pcoverage-per-test,deploy-sonarsource,release,sonaranalyzer" `
             "-Dmaven.test.redirectTestOutputToFile=false" `
             "-Dsonar.projectName=${sonarqubePluginName}" `
+            "-Dsonar.analysis.buildNumber=${buildNumber}" `
+            "-Dsonar.analysis.pipeline=${buildNumber}" `
             "-Dsonar.analysis.sha1=${githubSha1}" `
+            "-Dsonar.analysis.repository=${githubRepo}" `
             "-Dsonar.host.url=${sonarCloudUrl}" `
             "-Dsonar.login=${sonarCloudToken}" `
             "-Dsonar.organization=sonarsource" `
