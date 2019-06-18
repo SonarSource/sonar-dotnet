@@ -5,26 +5,26 @@ understand the program and preventing bugs from being introduced.</p>
 <pre>
 public class Foo
 {
-  private void UnusedPrivateMethod() {...} // Noncompliant
+    private void UnusedPrivateMethod() {...} // Noncompliant
 
-  private class UnusedClass {...} // Noncompliant
+    private class UnusedClass {...} // Noncompliant
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 public class Foo
 {
-  public Foo()
-  {
-    UsedPrivateMethod();
-  }
+    public Foo()
+    {
+        UsedPrivateMethod();
+    }
 
-  private void UsedPrivateMethod()
-  {
-    var c = new UsedClass();
-  }
+    private void UsedPrivateMethod()
+    {
+        var c = new UsedClass();
+    }
 
-  private class UsedClass {...}
+    private class UsedClass {...}
 }
 </pre>
 <h2>Exceptions</h2>

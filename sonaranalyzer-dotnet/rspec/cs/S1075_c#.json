@@ -7,7 +7,7 @@
     "constantCost": "20min"
   },
   "tags": [
-    "cert"
+    
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-1075",

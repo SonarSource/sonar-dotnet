@@ -7,9 +7,6 @@
     "constantCost": "10min"
   },
   "tags": [
-    "based-on-misra",
-    "misra",
-    "cert",
     "suspicious"
   ],
   "defaultSeverity": "Critical",

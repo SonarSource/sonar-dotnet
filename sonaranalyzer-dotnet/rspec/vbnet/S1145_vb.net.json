@@ -7,8 +7,7 @@
     "constantCost": "2min"
   },
   "tags": [
-    "cwe",
-    "misra"
+    "cwe"
   ],
   "standards": [
     "CWE"

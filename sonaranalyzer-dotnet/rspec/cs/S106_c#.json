@@ -7,8 +7,7 @@
     "constantCost": "10min"
   },
   "tags": [
-    "bad-practice",
-    "cert"
+    "bad-practice"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-106",

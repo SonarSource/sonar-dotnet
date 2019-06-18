@@ -7,9 +7,7 @@
     "constantCost": "10min"
   },
   "tags": [
-    "based-on-misra",
-    "brain-overload",
-    "misra"
+    "brain-overload"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-907",
