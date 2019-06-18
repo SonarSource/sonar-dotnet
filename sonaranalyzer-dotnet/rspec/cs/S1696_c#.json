@@ -8,8 +8,7 @@
   },
   "tags": [
     "cwe",
-    "error-handling",
-    "cert"
+    "error-handling"
   ],
   "standards": [
     "CWE"

@@ -8,9 +8,6 @@
   },
   "tags": [
     "convention",
-    "based-on-misra",
-    "misra",
-    "cert",
     "pitfall"
   ],
   "defaultSeverity": "Minor",

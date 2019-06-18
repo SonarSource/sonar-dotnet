@@ -7,10 +7,7 @@
     "constantCost": "2min"
   },
   "tags": [
-    "convention",
-    "based-on-misra",
-    "misra",
-    "cert"
+    "convention"
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-1659",

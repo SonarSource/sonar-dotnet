@@ -7,8 +7,7 @@
     "constantCost": "5min"
   },
   "tags": [
-    "unpredictable",
-    "cert"
+    "unpredictable"
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-1449",

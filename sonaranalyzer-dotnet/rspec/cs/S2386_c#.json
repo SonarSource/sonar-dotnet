@@ -8,8 +8,7 @@
   },
   "tags": [
     "cwe",
-    "unpredictable",
-    "cert"
+    "unpredictable"
   ],
   "standards": [
     "CWE"

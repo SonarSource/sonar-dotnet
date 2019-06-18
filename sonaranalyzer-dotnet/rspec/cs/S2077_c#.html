@@ -1,14 +1,14 @@
-<p>Concatenating or formatting strings used as SQL queries is security-sensitive. It has led in the past to the following vulnerabilities:</p>
+<p>Formatting strings used as SQL queries is security-sensitive. It has led in the past to the following vulnerabilities:</p>
 <ul>
   <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-9019">CVE-2018-9019</a> </li>
   <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7318">CVE-2018-7318</a> </li>
   <li> <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-5611">CVE-2017-5611</a> </li>
 </ul>
-<p>SQL queries often need to use a hardcoded SQL string with a dynamic parameter coming from a user request. Concatenating or formatting a string to
-add those parameters to the request is a bad practice as it can result in an <a href="https://www.owasp.org/index.php/SQL_Injection">SQL
-injection</a>. The safe way to add parameters to a SQL query is to use SQL binding mechanisms.</p>
-<p>This rule flags the execution of SQL queries which are built using concatenation or formatting of strings, even if there is no injection. This rule
-does not detect SQL injections. The goal is to guide security code reviews and to prevent a common bad practice.</p>
+<p>SQL queries often need to use a hardcoded SQL string with a dynamic parameter coming from a user request. Formatting a string to add those
+parameters to the request is a bad practice as it can result in an <a href="https://www.owasp.org/index.php/SQL_Injection">SQL injection</a>. The safe
+way to add parameters to a SQL query is to use SQL binding mechanisms.</p>
+<p>This rule flags the execution of SQL queries which are built using formatting of strings, even if there is no injection. This rule does not detect
+SQL injections. The goal is to guide security code reviews and to prevent a common bad practice.</p>
 <p>The following specific method signatures are tested:</p>
 <ul>
   <li> <code>System.Data.SqlClient.SqlCommand.SqlCommand(string, ...)</code> </li>
@@ -28,7 +28,7 @@ does not detect SQL injections. The goal is to guide security code reviews and t
   <li> <code>System.Data.SqlServerCe.SqlCeCommand.CommandText.set</code> </li>
   <li> <code>System.Data.OracleClient.OracleCommand.CommandText.set</code> </li>
 </ul>
-<p>The following formatting and concatenation methods will raise an issue:</p>
+<p>The following formatting methods will raise an issue:</p>
 <ul>
   <li> <code>String.Concat</code> </li>
   <li> <code>String.Format</code> </li>
@@ -36,14 +36,13 @@ does not detect SQL injections. The goal is to guide security code reviews and t
 </ul>
 <h2>Ask Yourself Whether</h2>
 <ul>
-  <li> the SQL query is built using concatenation or string formatting. </li>
+  <li> the SQL query is built using string formatting technics, such as concatenating variables. </li>
   <li> some of the values are coming from an untrusted source and are not sanitized. </li>
 </ul>
 <p>You may be at risk if you answered yes to this question.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <ul>
-  <li> Avoid building queries manually using concatenation or formatting. If you do it anyway, do not include user input in this building process.
-  </li>
+  <li> Avoid building queries manually using formatting technics. If you do it anyway, do not include user input in this building process. </li>
   <li> Use <a href="https://www.owasp.org/index.php/Query_Parameterization_Cheat_Sheet">parameterized queries, prepared statements, or stored
   procedures</a> whenever possible. </li>
   <li> You may also use ORM frameworks such as Hibernate which, if used correctly, reduce injection risks. </li>

@@ -10,7 +10,7 @@
     "owasp-a3"
   ],
   "standards": [
-    "OWASP Top Ten"
+    "OWASP Top 10"
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-2228",

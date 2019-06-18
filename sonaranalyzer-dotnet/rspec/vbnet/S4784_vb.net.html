@@ -39,12 +39,12 @@ Namespace N
     Public Class RegularExpression
         Private Sub Foo(ByVal pattern As String, ByVal options As RegexOptions, ByVal matchTimeout As TimeSpan,
                         ByVal input As String, ByVal replacement As String, ByVal evaluator As MatchEvaluator)
-            // All the following instantiations are Sensitive. Validate the regular expression and matched input.
+            ' All the following instantiations are Sensitive. Validate the regular expression and matched input.
             Dim r As Regex = New System.Text.RegularExpressions.Regex("(a+)+b")
             r = New System.Text.RegularExpressions.Regex("(a+)+b", options)
             r = New System.Text.RegularExpressions.Regex("(a+)+b", options, matchTimeout)
 
-            // All the following static methods are Sensitive.
+            ' All the following static methods are Sensitive.
             System.Text.RegularExpressions.Regex.IsMatch(input, "(a+)+b")
             System.Text.RegularExpressions.Regex.IsMatch(input, "(a+)+b", options)
             System.Text.RegularExpressions.Regex.IsMatch(input, "(a+)+b", options, matchTimeout)
@@ -71,6 +71,10 @@ Namespace N
     End Class
 End Namespace
 </pre>
+<h2>Exceptions</h2>
+<p>Some corner-case regular expressions will not raise an issue even though they might be vulnerable. For example: <code>(a|aa)+</code>,
+<code>(a|a?)+</code>.</p>
+<p>It is a good idea to test your regular expression if it has the same pattern on both side of a "<code>|</code>".</p>
 <h2>See</h2>
 <ul>
   <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A1-Injection">OWASP Top 10 2017 Category A1</a> - Injection </li>

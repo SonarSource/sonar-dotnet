@@ -8,9 +8,6 @@
   },
   "tags": [
     "cwe",
-    "based-on-misra",
-    "misra",
-    "cert",
     "redundant"
   ],
   "standards": [

@@ -8,13 +8,12 @@
   },
   "tags": [
     "cwe",
-    "cert",
     "sans-top25-porous",
     "owasp-a3"
   ],
   "standards": [
     "CWE",
-    "OWASP Top Ten",
+    "OWASP Top 10",
     "SANS Top 25"
   ],
   "defaultSeverity": "Minor",

@@ -7,11 +7,10 @@
     "constantCost": "30min"
   },
   "tags": [
-    "cert",
     "owasp-a3"
   ],
   "standards": [
-    "OWASP Top Ten"
+    "OWASP Top 10"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-1313",
