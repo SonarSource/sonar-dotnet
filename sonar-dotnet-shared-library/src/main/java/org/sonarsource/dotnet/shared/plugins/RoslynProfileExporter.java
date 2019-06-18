@@ -147,7 +147,7 @@ public class RoslynProfileExporter extends ProfileExporter {
 
       appendLine(writer, "    <AdditionalFiles>");
 
-      String sonarlintParameters = analysisSettings(false, false, true, rulesProfile);
+      String sonarlintParameters = analysisSettings(rulesProfile);
       java.util.Base64.Encoder encoder = java.util.Base64.getEncoder();
       String base64 = new String(encoder.encode(sonarlintParameters.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
       appendLine(writer, "      <AdditionalFile FileName=\"SonarLint.xml\">" + base64 + "</AdditionalFile>");
@@ -214,38 +214,18 @@ public class RoslynProfileExporter extends ProfileExporter {
     appendLine(writer, "      </Rules>");
   }
 
-  private String analysisSettings(boolean includeSettings, boolean ignoreHeaderComments, boolean includeRules, RulesProfile ruleProfile) {
+  private String analysisSettings(RulesProfile ruleProfile) {
     StringBuilder sb = new StringBuilder();
 
     appendLine(sb, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
     appendLine(sb, "<AnalysisInput>");
 
-    if (includeSettings) {
-      appendLine(sb, "  <Settings>");
-      appendLine(sb, "    <Setting>");
-      appendLine(sb, "      <Key>" + pluginMetadata.ignoreHeaderCommentPropertyKey() + "</Key>");
-      appendLine(sb, "      <Value>" + (ignoreHeaderComments ? "true" : "false") + "</Value>");
-      appendLine(sb, "    </Setting>");
-      appendLine(sb, "  </Settings>");
-    }
-
-    if (includeSettings) {
-      appendLine(sb, "  <Settings>");
-      appendLine(sb, "    <Setting>");
-      appendLine(sb, "      <Key>" + pluginMetadata.analyzeGeneratedCodePropertyKey() + "</Key>");
-      appendLine(sb, "      <Value>false</Value>");
-      appendLine(sb, "    </Setting>");
-      appendLine(sb, "  </Settings>");
-    }
-
     appendLine(sb, "  <Rules>");
-    if (includeRules) {
-      for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(pluginMetadata.repositoryKey())) {
-        appendLine(sb, "    <Rule>");
-        appendLine(sb, "      <Key>" + escapeXml(activeRule.getRuleKey()) + "</Key>");
-        appendParameters(sb, effectiveParameters(activeRule));
-        appendLine(sb, "    </Rule>");
-      }
+    for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(pluginMetadata.repositoryKey())) {
+      appendLine(sb, "    <Rule>");
+      appendLine(sb, "      <Key>" + escapeXml(activeRule.getRuleKey()) + "</Key>");
+      appendParameters(sb, effectiveParameters(activeRule));
+      appendLine(sb, "    </Rule>");
     }
     appendLine(sb, "  </Rules>");
 
