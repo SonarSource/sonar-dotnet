@@ -337,7 +337,7 @@ function Invoke-JavaBuild() {
 
         # hardcode a PR number so that the PR decoration doesn't find the right PR
         Exec { & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
-            "-Pdeploy-sonarsource,sonaranalyzer" `
+            "-Pcoverage,deploy-sonarsource,release,sonaranalyzer" `
             "-Dmaven.test.redirectTestOutputToFile=false" `
             "-Dsonar.projectName=${sonarqubePluginName}" `
             "-Dsonar.analysis.buildNumber=${buildNumber}" `
@@ -365,7 +365,7 @@ function Invoke-JavaBuild() {
         $env:MAVEN_OPTS = "-Xmx1536m -Xms128m"
 
         Exec { & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
-            "-Pcoverage-per-test,deploy-sonarsource,release,sonaranalyzer" `
+            "-Pcoverage,deploy-sonarsource,release,sonaranalyzer" `
             "-Dmaven.test.redirectTestOutputToFile=false" `
             "-Dsonar.projectName=${sonarqubePluginName}" `
             "-Dsonar.analysis.buildNumber=${buildNumber}" `
@@ -393,7 +393,7 @@ function Invoke-JavaBuild() {
         Write-Host "SonarC# and SonarVB will be deployed"
 
         Exec { & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
-            "-Pdeploy-sonarsource,sonaranalyzer" `
+            "-Pcoverage,deploy-sonarsource,release,sonaranalyzer" `
             "-Dmaven.test.redirectTestOutputToFile=false" `
             "-Dsonar.projectName=${sonarqubePluginName}" `
             "-Dsonar.analysis.buildNumber=${buildNumber}" `
