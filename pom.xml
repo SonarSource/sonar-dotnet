@@ -81,6 +81,8 @@
     <artifactsToPublish>${project.groupId}:sonar-csharp-plugin:jar,${project.groupId}:sonar-vbnet-plugin:jar</artifactsToPublish>
     <artifactsToDownload>${project.groupId}:SonarAnalyzer.CSharp:nupkg,${project.groupId}:SonarAnalyzer.VisualBasic:nupkg</artifactsToDownload>
     <sonar.jacoco.reportPaths>../target/jacoco.exec</sonar.jacoco.reportPaths>
+    <!-- FIXME: warnings on javadoc should be fixed -->
+    <doclint>none</doclint>
   </properties>
 
   <build>
