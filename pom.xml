@@ -81,7 +81,7 @@
     <artifactsToPublish>${project.groupId}:sonar-csharp-plugin:jar,${project.groupId}:sonar-vbnet-plugin:jar</artifactsToPublish>
     <artifactsToDownload>${project.groupId}:SonarAnalyzer.CSharp:nupkg,${project.groupId}:SonarAnalyzer.VisualBasic:nupkg</artifactsToDownload>
     <sonar.jacoco.reportPaths>../target/jacoco.exec</sonar.jacoco.reportPaths>
-    <!-- FIXME: warnings on javadoc should be fixed -->
+    <!-- We are ignoring java doc warnings - this is because we are using JDK 11. Ideally we should not do that. -->
     <doclint>none</doclint>
   </properties>
 
@@ -105,6 +105,19 @@
       <modules>
         <module>sonaranalyzer-dotnet</module>
       </modules>
+    </profile>
+    <profile>
+      <!--
+        Use javac's release flag for Java 9 and higher to avoid Java 11 failures on javadoc phase which happens
+        when the 'release' profile is ran. The 'release' generates the javadoc necessary for the MVN Repository.
+      -->
+      <id>java9+</id>
+      <activation>
+        <jdk>[9,)</jdk>
+      </activation>
+      <properties>
+        <maven.compiler.release>8</maven.compiler.release>
+      </properties>
     </profile>
   </profiles>
 </project>
