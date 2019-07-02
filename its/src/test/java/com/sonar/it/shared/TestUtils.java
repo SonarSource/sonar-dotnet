@@ -156,7 +156,7 @@ public class TestUtils {
   public static String replaceLtsVersion(String version) {
     if (version != null && version.equals("LTS"))
     {
-      return "LATEST_RELEASE[6.7]";
+      return "LATEST_RELEASE[7.9]";
     }
     return version;
   }
