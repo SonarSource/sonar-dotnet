@@ -1,0 +1,244 @@
+﻿/*
+ * SonarAnalyzer for .NET
+ * Copyright (C) 2015-2019 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+extern alias csharp;
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using System.Threading;
+using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
+using SonarAnalyzer.UnitTest.TestFramework;
+
+namespace SonarAnalyzer.UnitTest.Misc
+{
+    [TestClass]
+    public class MiscellaneousTests
+    {        private struct ExecutionResult
+        {
+            public ExecutionResult(Type analyzerType, long elapsedTimeInMs, bool timedOut)
+            {
+                AnalyzerType = analyzerType;
+                ElapsedTimeInMs = elapsedTimeInMs;
+                TimedOut = timedOut;
+            }
+
+            public Type AnalyzerType { get;}
+            public long ElapsedTimeInMs { get; }
+            public bool TimedOut { get; }
+        }
+
+        public TestContext TestContext { get; set; }
+
+        [TestMethod]
+        // This test takes around 40s-60s to run, which is as long as all of the other tests.
+        // This category allows us to exclude it from the set of tests to run.
+        // In the IDE: set the test filter in the Test Explorer to the following
+        //      -Trait:"Slow"
+        // dotnet test or vstest.console.exe: pass the following command line argument
+        //       --TestCaseFilter:"TestCategory!=Slow"
+        [TestCategory("Slow")]
+        public void TestForSlowAnalyzers_EFMigrationSource_2474()
+        {
+            // The test file comes from a repro project for https://github.com/SonarSource/sonar-dotnet/issues/2474
+            // The single file is enough to cause the issue described in the bug, although there
+            // are other large files in the project that might also be problematic.
+
+            // Analyzers known to timeout against this test code
+            // (note: this test doesn't cover the utility analyzers):
+            var knownSlowAnalyzers = new[] { "SonarAnalyzer.Rules.CSharp.UnusedPrivateMember" };
+            
+            int analysisTimeoutInMs = 700;
+            var allAnalyzerTypes = GetSonarAnalyzerTypes(typeof(MetricsAnalyzer).Assembly);
+            var compilation = GetEFCompilation();
+
+            var executionResults = ExecuteAllAnalyzers(compilation, allAnalyzerTypes, analysisTimeoutInMs);
+
+            AssertNoUnexpectedSlowAnalyzers(executionResults, knownSlowAnalyzers);
+        }
+
+        /// <summary>
+        /// This method runs each of the supplied C# analyzers in series against the compilation.
+        /// Any analyzer that takes longer than a specifed timeout is reported and that analysis is stopped.
+        /// NOTE: the utility analyzers won't run because the required analysis settings are not set
+        /// by the test.
+        /// </summary>
+        private IEnumerable<ExecutionResult> ExecuteAllAnalyzers(Compilation compilation, IEnumerable<Type> analyzerTypes, int analysisTimeoutInMs)
+        {
+            // Run an initial analysis so any startup costs aren't attributed to the first analyzer to be tested
+            ExecuteAnalyzerWithTimeout(compilation, CreateAnalyzer(analyzerTypes.First()), 5000);
+
+            var executionResults = new List<ExecutionResult>();
+            var counter = 0;
+            var timer = new Stopwatch();
+
+            // Executing one analyzer at a time (running them in parallel can skew the results)
+            foreach (var analyzerType in analyzerTypes)
+            {
+                var analyzer = CreateAnalyzer(analyzerType);
+
+                // Write to the DEBUG window so we can see what's happening in the output window in the IDE
+                counter++;
+                Debug.WriteLine($"{counter}: {analyzerType.FullName}");
+
+                timer.Restart();
+                var succeeded = ExecuteAnalyzerWithTimeout(compilation, analyzer, analysisTimeoutInMs);
+                timer.Stop();
+
+                var newExecutionResult = new ExecutionResult(analyzerType, timer.ElapsedMilliseconds, !succeeded);
+                executionResults.Add(newExecutionResult);
+
+                if (!succeeded)
+                {
+                    Debug.WriteLine($"   -> TIMED OUT");
+                }
+            }
+
+            DumpExecutionResults(executionResults);
+            return executionResults;
+        }
+
+        private Compilation GetEFCompilation()
+        {
+            var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(
+                new string[] { @"TestCases\Misc\Bug2474_20181005212624_InitialCreate.cs" },
+                additionalReferences: GetReferencesNetCore("2.0.0"));
+
+            var compilation = solutionBuilder.Compile(new CSharpParseOptions(LanguageVersion.Latest)).Single();
+            return compilation;
+        }
+
+        private static IEnumerable<MetadataReference> GetReferencesNetCore(string entityFrameworkVersion) =>
+            Enumerable.Empty<MetadataReference>()
+                .Concat(FrameworkMetadataReference.Netstandard)
+                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer(entityFrameworkVersion))
+                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion));
+
+        private Type[] GetSonarAnalyzerTypes(Assembly assembly)
+        {
+            var allAnalyzerTypes = assembly.GetTypes()
+                .Where(IsSonarAnalyzer).ToArray();
+
+            Log($"Analyzer count: {allAnalyzerTypes.Length}");
+
+            return allAnalyzerTypes;
+        }
+
+        private bool IsSonarAnalyzer(Type type) =>
+            (!type.IsAbstract && IsDerivedFromSonarDiagnosticAnalyzer(type));
+
+        private static readonly Type SonarDiagnosticAnalyzerType = typeof(SonarDiagnosticAnalyzer);
+
+        private bool IsDerivedFromSonarDiagnosticAnalyzer(Type type)
+        {
+            var current = type.BaseType;
+
+            while (current != null)
+            {
+                if (current == SonarDiagnosticAnalyzerType)
+                {
+                    return true;
+                }
+                current = current.BaseType;
+            }
+            return false;
+        }
+
+        private SonarDiagnosticAnalyzer CreateAnalyzer(Type analyzerType) =>
+            Activator.CreateInstance(analyzerType) as SonarDiagnosticAnalyzer;
+
+        private bool ExecuteAnalyzerWithTimeout(Compilation compilation, SonarDiagnosticAnalyzer analyzer, int timeoutMs)
+        {
+            var cancellationSource = new CancellationTokenSource(timeoutMs);
+
+            try
+            {
+                DiagnosticVerifier.GetAllDiagnostics(compilation, new[] { analyzer }, CompilationErrorBehavior.FailTest, cancellationSource.Token);
+            }
+            catch(AggregateException ex)
+            {
+                if (ex.InnerExceptions.Any(x => x is OperationCanceledException))
+                {
+                    return false;
+                }
+                throw ex;
+            }
+            return true;
+        }
+
+        private void AssertNoUnexpectedSlowAnalyzers(IEnumerable<ExecutionResult> executionResults, IEnumerable<string> expectedSlowAnalyzers)
+        {
+            var actualSlowAnalyzers = executionResults.Where(x => x.TimedOut).Select(x => x.AnalyzerType.FullName);
+            AssertNoUnexpectedSlowAnalyzers(actualSlowAnalyzers.Except(expectedSlowAnalyzers, StringComparer.OrdinalIgnoreCase));
+
+            var unexpectedlyFastAnalyzers = expectedSlowAnalyzers.Except(actualSlowAnalyzers, StringComparer.OrdinalIgnoreCase);
+
+            if (!unexpectedlyFastAnalyzers.Any())
+            {
+                Log(FormatListToMessage(expectedSlowAnalyzers, "The expected analyzers were slow:"));
+                return;
+            }
+
+            string unexpectedlyFastMessage = FormatListToMessage(unexpectedlyFastAnalyzers,
+                "The following analyzers where unexpectedly fast - the baseline may need to be updated:");
+
+            Log(unexpectedlyFastMessage);
+            Assert.Fail(unexpectedlyFastMessage);
+        }
+
+        private void AssertNoUnexpectedSlowAnalyzers(IEnumerable<string> slowAnalyzers)
+        {
+            if (!slowAnalyzers.Any())
+            {
+                Log("No unexpected slow analyzers");
+                return;
+            }
+
+            string slowAnalyzersMessage = FormatListToMessage(slowAnalyzers, "Slow analyzers:");
+
+            Log(slowAnalyzersMessage);
+            Assert.Fail(slowAnalyzersMessage);
+        }
+
+        private void DumpExecutionResults(IEnumerable<ExecutionResult> executionResults)
+        {
+            Log("Execution results:");
+            foreach (var result in executionResults.OrderByDescending(x => x.ElapsedTimeInMs))
+            {
+                Log($"  {result.AnalyzerType.FullName}, {result.ElapsedTimeInMs}ms  {(result.TimedOut ? "TIMED OUT" : "")}");
+            }
+        }
+
+        private static string FormatListToMessage(IEnumerable<string> list, string messagePrefix = null) =>
+            messagePrefix + Environment.NewLine
+                + string.Join(", " + Environment.NewLine, list);
+
+        private void Log(string message)
+        {
+            TestContext.WriteLine(message);
+        }
+    }
+}

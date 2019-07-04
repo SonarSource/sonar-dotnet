@@ -23,6 +23,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Threading;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis;
@@ -137,7 +138,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         public static ImmutableArray<Diagnostic> GetAllDiagnostics(Compilation compilation,
-            IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers, CompilationErrorBehavior checkMode)
+            IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers, CompilationErrorBehavior checkMode,
+            CancellationToken? cancellationToken = null)
         {
             var compilationOptions = compilation.Language == LanguageNames.CSharp
                 ? (CompilationOptions)new CS.CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true)
@@ -154,17 +156,23 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(supportedDiagnostics);
 
+            var actualToken = cancellationToken.HasValue ? cancellationToken.Value : CancellationToken.None;
+
             var diagnostics = compilation
                 .WithOptions(compilationOptions)
                 .WithAnalyzers(diagnosticAnalyzers.ToImmutableArray())
-                .GetAllDiagnosticsAsync()
+                .GetAllDiagnosticsAsync(actualToken)
                 .Result;
 
-            VerifyNoExceptionThrown(diagnostics);
-            if (checkMode == CompilationErrorBehavior.FailTest)
+            if (!actualToken.IsCancellationRequested)
             {
-                VerifyBuildErrors(diagnostics, compilation);
+                VerifyNoExceptionThrown(diagnostics);
+                if (checkMode == CompilationErrorBehavior.FailTest)
+                {
+                    VerifyBuildErrors(diagnostics, compilation);
+                }
             }
+
             return diagnostics;
         }
 
