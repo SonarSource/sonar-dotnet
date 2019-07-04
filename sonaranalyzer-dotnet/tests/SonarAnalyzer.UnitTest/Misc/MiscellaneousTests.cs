@@ -37,20 +37,7 @@ namespace SonarAnalyzer.UnitTest.Misc
 {
     [TestClass]
     public class MiscellaneousTests
-    {        private struct ExecutionResult
-        {
-            public ExecutionResult(Type analyzerType, long elapsedTimeInMs, bool timedOut)
-            {
-                AnalyzerType = analyzerType;
-                ElapsedTimeInMs = elapsedTimeInMs;
-                TimedOut = timedOut;
-            }
-
-            public Type AnalyzerType { get;}
-            public long ElapsedTimeInMs { get; }
-            public bool TimedOut { get; }
-        }
-
+    {
         public TestContext TestContext { get; set; }
 
         [TestMethod]
@@ -239,6 +226,20 @@ namespace SonarAnalyzer.UnitTest.Misc
         private void Log(string message)
         {
             TestContext.WriteLine(message);
+        }
+
+        private struct ExecutionResult
+        {
+            public ExecutionResult(Type analyzerType, long elapsedTimeInMs, bool timedOut)
+            {
+                AnalyzerType = analyzerType;
+                ElapsedTimeInMs = elapsedTimeInMs;
+                TimedOut = timedOut;
+            }
+
+            public Type AnalyzerType { get; }
+            public long ElapsedTimeInMs { get; }
+            public bool TimedOut { get; }
         }
     }
 }
