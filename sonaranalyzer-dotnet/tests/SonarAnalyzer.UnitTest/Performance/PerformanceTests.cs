@@ -33,10 +33,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
 
-namespace SonarAnalyzer.UnitTest.Misc
+namespace SonarAnalyzer.UnitTest.Performance
 {
     [TestClass]
-    public class MiscellaneousTests
+    public class PerformanceTests
     {
         public TestContext TestContext { get; set; }
 
@@ -48,23 +48,22 @@ namespace SonarAnalyzer.UnitTest.Misc
         // dotnet test or vstest.console.exe: pass the following command line argument
         //       --TestCaseFilter:"TestCategory!=Slow"
         [TestCategory("Slow")]
-        public void TestForSlowAnalyzers_EFMigrationSource_2474()
+        public void Perf_EntityFrameworkMigration()
         {
-            // The test file comes from a repro project for https://github.com/SonarSource/sonar-dotnet/issues/2474
-            // The single file is enough to cause the issue described in the bug, although there
-            // are other large files in the project that might also be problematic.
+            // Repro for https://github.com/SonarSource/sonar-dotnet/issues/2474
+            // See notes in the test case file for more info.
 
             // Analyzers known to timeout against this test code
             // (note: this test doesn't cover the utility analyzers):
             var knownSlowAnalyzers = new[] { "SonarAnalyzer.Rules.CSharp.UnusedPrivateMember" };
-            
+
             int analysisTimeoutInMs = 700;
             var allAnalyzerTypes = GetSonarAnalyzerTypes(typeof(MetricsAnalyzer).Assembly);
-            var compilation = GetEFCompilation();
+            var compilation = GetEntityFrameworkMigrationCompilation();
 
             var executionResults = ExecuteAllAnalyzers(compilation, allAnalyzerTypes, analysisTimeoutInMs);
 
-            AssertNoUnexpectedSlowAnalyzers(executionResults, knownSlowAnalyzers);
+            AssertExpectedAnalyzerPerformance(executionResults, knownSlowAnalyzers);
         }
 
         /// <summary>
@@ -108,17 +107,17 @@ namespace SonarAnalyzer.UnitTest.Misc
             return executionResults;
         }
 
-        private Compilation GetEFCompilation()
+        private Compilation GetEntityFrameworkMigrationCompilation()
         {
             var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(
-                new string[] { @"TestCases\Misc\Bug2474_20181005212624_InitialCreate.cs" },
-                additionalReferences: GetReferencesNetCore("2.0.0"));
+                new string[] { @"TestCases\Performance\Bug2474_EntityFrameworkMigration.cs" },
+                additionalReferences: GetEntityFrameworkReferencesNetCore("2.0.0"));
 
             var compilation = solutionBuilder.Compile(new CSharpParseOptions(LanguageVersion.Latest)).Single();
             return compilation;
         }
 
-        private static IEnumerable<MetadataReference> GetReferencesNetCore(string entityFrameworkVersion) =>
+        private static IEnumerable<MetadataReference> GetEntityFrameworkReferencesNetCore(string entityFrameworkVersion) =>
             Enumerable.Empty<MetadataReference>()
                 .Concat(FrameworkMetadataReference.Netstandard)
                 .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer(entityFrameworkVersion))
@@ -134,24 +133,26 @@ namespace SonarAnalyzer.UnitTest.Misc
             return allAnalyzerTypes;
         }
 
-        private bool IsSonarAnalyzer(Type type) =>
-            (!type.IsAbstract && IsDerivedFromSonarDiagnosticAnalyzer(type));
-
         private static readonly Type SonarDiagnosticAnalyzerType = typeof(SonarDiagnosticAnalyzer);
 
-        private bool IsDerivedFromSonarDiagnosticAnalyzer(Type type)
-        {
-            var current = type.BaseType;
+        private bool IsSonarAnalyzer(Type type)
+        { 
+            return (!type.IsAbstract && IsDerivedFromSonarDiagnosticAnalyzer(type));
 
-            while (current != null)
+            bool IsDerivedFromSonarDiagnosticAnalyzer(Type typeToCheck)
             {
-                if (current == SonarDiagnosticAnalyzerType)
+                var current = typeToCheck.BaseType;
+
+                while (current != null)
                 {
-                    return true;
+                    if (current == SonarDiagnosticAnalyzerType)
+                    {
+                        return true;
+                    }
+                    current = current.BaseType;
                 }
-                current = current.BaseType;
+                return false;
             }
-            return false;
         }
 
         private SonarDiagnosticAnalyzer CreateAnalyzer(Type analyzerType) =>
@@ -176,35 +177,37 @@ namespace SonarAnalyzer.UnitTest.Misc
             return true;
         }
 
-        private void AssertNoUnexpectedSlowAnalyzers(IEnumerable<ExecutionResult> executionResults, IEnumerable<string> expectedSlowAnalyzers)
+        private void AssertExpectedAnalyzerPerformance(IEnumerable<ExecutionResult> executionResults, IEnumerable<string> expectedSlowAnalyzers)
         {
+            // Anything in expectedSlowAnalyzers should be slow;
+            // everything else should not time out.
+
             var actualSlowAnalyzers = executionResults.Where(x => x.TimedOut).Select(x => x.AnalyzerType.FullName);
             AssertNoUnexpectedSlowAnalyzers(actualSlowAnalyzers.Except(expectedSlowAnalyzers, StringComparer.OrdinalIgnoreCase));
 
             var unexpectedlyFastAnalyzers = expectedSlowAnalyzers.Except(actualSlowAnalyzers, StringComparer.OrdinalIgnoreCase);
 
-            if (!unexpectedlyFastAnalyzers.Any())
+            if (unexpectedlyFastAnalyzers.Any())
             {
-                Log(FormatListToMessage(expectedSlowAnalyzers, "The expected analyzers were slow:"));
-                return;
+                string unexpectedlyFastMessage = FormatListToMessage(unexpectedlyFastAnalyzers,
+                    "The following analyzers were expected to be slow but performed better than expected - the baseline may need to be updated:");
+
+                Log(unexpectedlyFastMessage);
+                Assert.Fail(unexpectedlyFastMessage);
             }
 
-            string unexpectedlyFastMessage = FormatListToMessage(unexpectedlyFastAnalyzers,
-                "The following analyzers where unexpectedly fast - the baseline may need to be updated:");
-
-            Log(unexpectedlyFastMessage);
-            Assert.Fail(unexpectedlyFastMessage);
+            Log(FormatListToMessage(expectedSlowAnalyzers, "The following analyzers were slow (as expected):"));
         }
 
         private void AssertNoUnexpectedSlowAnalyzers(IEnumerable<string> slowAnalyzers)
         {
             if (!slowAnalyzers.Any())
             {
-                Log("No unexpected slow analyzers");
+                Log("No unexpectedly slow analyzers");
                 return;
             }
 
-            string slowAnalyzersMessage = FormatListToMessage(slowAnalyzers, "Slow analyzers:");
+            string slowAnalyzersMessage = FormatListToMessage(slowAnalyzers, "Unexpectedly slow analyzers:");
 
             Log(slowAnalyzersMessage);
             Assert.Fail(slowAnalyzersMessage);
@@ -223,10 +226,8 @@ namespace SonarAnalyzer.UnitTest.Misc
             messagePrefix + Environment.NewLine
                 + string.Join(", " + Environment.NewLine, list);
 
-        private void Log(string message)
-        {
+        private void Log(string message) =>
             TestContext.WriteLine(message);
-        }
 
         private struct ExecutionResult
         {

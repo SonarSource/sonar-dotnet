@@ -1,9 +1,13 @@
 ﻿// Sample code to repro bug #2472: Analysis of Entity Framework migration files never completes
 // https://github.com/SonarSource/sonar-dotnet/issues/2474
 // Created from end-user repro: https://github.com/ksitarek/sonarscannersample
-
+// This file was called "20181005212624_InitialCreate.cs" in that repo.
+//
+// The single file is enough to cause the issue described in the bug, although there
+// are other large files in the project that might also be problematic.
+//
 // Requires the following NuGet package:
-//  <PackageReference Include = "Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.4" />
+//  <PackageReference Include = "Microsoft.EntityFrameworkCore.SqlServer" Version="2.x" />
 
 using System;
 using Microsoft.EntityFrameworkCore.Migrations;
