@@ -95,6 +95,9 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> MicrosoftEntityFrameworkCore(string packageVersion) =>
             NugetMetadataFactory.CreateWithCommandLine("Microsoft.EntityFrameworkCore", packageVersion);
 
+        public static IEnumerable<MetadataReference> MicrosoftEntityFrameworkCoreSqlServer(string packageVersion) =>
+            NugetMetadataFactory.CreateWithCommandLine("Microsoft.EntityFrameworkCore.SqlServer", packageVersion);
+
         public static IEnumerable<MetadataReference> MicrosoftEntityFrameworkCoreRelational(string packageVersion) =>
             NugetMetadataFactory.CreateWithCommandLine("Microsoft.EntityFrameworkCore.Relational", packageVersion);
 
