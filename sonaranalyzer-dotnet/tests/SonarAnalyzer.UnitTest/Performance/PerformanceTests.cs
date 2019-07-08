@@ -23,8 +23,10 @@ extern alias csharp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis;
@@ -215,11 +217,23 @@ namespace SonarAnalyzer.UnitTest.Performance
 
         private void DumpExecutionResults(IEnumerable<ExecutionResult> executionResults)
         {
-            Log("Execution results:");
+            var sb = new StringBuilder();
+            sb.AppendLine("Execution results:");
             foreach (var result in executionResults.OrderByDescending(x => x.ElapsedTimeInMs))
             {
-                Log($"  {result.AnalyzerType.FullName}, {result.ElapsedTimeInMs}ms  {(result.TimedOut ? "TIMED OUT" : "")}");
+                sb.AppendLine($"  {result.AnalyzerType.FullName}, {result.ElapsedTimeInMs}ms  {(result.TimedOut ? "TIMED OUT" : "")}");
             }
+            var message = sb.ToString();
+
+            Log(message);
+
+            // Also dump the output to disk and attach it to the test result.
+            // Note that VS will automatically delete the test results if the
+            // test passed.
+            var filePath = Path.Combine(TestContext.TestRunDirectory,
+                $"ExecutionTime_{TestContext.TestName}.log");
+            File.WriteAllText(filePath, message);
+            TestContext.AddResultFile(filePath);
         }
 
         private static string FormatListToMessage(IEnumerable<string> list, string messagePrefix = null) =>
