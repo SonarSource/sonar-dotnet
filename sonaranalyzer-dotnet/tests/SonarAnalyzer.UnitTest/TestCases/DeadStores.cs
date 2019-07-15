@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Versioning;
+using System.Windows.Forms;
 
 namespace Tests.Diagnostics
 {
@@ -413,5 +414,60 @@ namespace Tests.Diagnostics
                 }
             }
         }
+    }
+
+    public class ReproGithubIssue2311
+    {
+        private void SwitchCaseWithWhenAndLocalScope(object sender, KeyEventArgs e)
+        {
+            var tab = new string(' ', 2);
+            switch (e.KeyCode)
+            {
+                case Keys.Tab:
+                    {
+                        Console.WriteLine(tab);
+                        break;
+                    }
+
+                case Keys.A when e.Control:
+                    {
+                        break;
+                    }
+            }
+        }
+
+        private void SwitchCaseWithLocalScope(object sender, KeyEventArgs e)
+        {
+            var tab = new string(' ', 2);
+            switch (e.KeyCode)
+            {
+                case Keys.Tab:
+                    {
+                        Console.WriteLine(tab);
+                        break;
+                    }
+
+                case Keys.A:
+                    {
+                        break;
+                    }
+            }
+        }
+
+        private void SwitchCase(object sender, KeyEventArgs e)
+        {
+            var tab = new string(' ', 2);
+            switch (e.KeyCode)
+            {
+                case Keys.Tab:
+                    Console.WriteLine(tab);
+                    break;
+
+                case Keys.A:
+                    break;
+            }
+        }
+
+
     }
 }

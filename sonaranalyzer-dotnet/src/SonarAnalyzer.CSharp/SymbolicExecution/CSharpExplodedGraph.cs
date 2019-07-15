@@ -617,6 +617,11 @@ namespace SonarAnalyzer.SymbolicExecution
             var ps = node.ProgramState;
             SymbolicValue sv;
 
+            if (!ps.HasValue)
+            {
+                return;
+            }
+
             if (binaryBranchBlock.BranchingNode is ForStatementSyntax forStatement)
             {
                 if (forStatement.Condition == null)

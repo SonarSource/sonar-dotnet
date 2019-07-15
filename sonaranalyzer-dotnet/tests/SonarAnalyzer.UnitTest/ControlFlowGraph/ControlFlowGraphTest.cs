@@ -2807,7 +2807,7 @@ namespace NS
 
         [TestMethod]
         [TestCategory("CFG")]
-        public void Cfg_Switch_Patterns_When()
+        public void Cfg_Switch_Patterns_Two_Case_When()
         {
             var cfg = Build("cw0(); switch(o) { case int i when i > 0: case string s when s.Length > 0: cw1(); break; } cw2();");
 
@@ -2846,6 +2846,80 @@ namespace NS
 
             lastBlock.SuccessorBlock.Should().Be(exitBlock);
             VerifyAllInstructions(lastBlock, "cw2", "cw2()");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Switch_One_Simple_Case_And_One_Case_With_When()
+        {
+            var cfg = Build("cw(); switch(o) { case 0 : cw0(); break; case 1 when s: cw1(); break; } cw2();");
+
+            VerifyCfg(cfg, 8);
+
+            var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
+            var caseZero = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
+            var caseZeroBlock = (JumpBlock)cfg.Blocks.ElementAt(2);
+            var caseOne = (BranchBlock)cfg.Blocks.ElementAt(3);
+            var caseOneWhenBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(4);
+            var caseOneWhenBlockBody = (JumpBlock)cfg.Blocks.ElementAt(5);
+            var afterSwitchBlock = (SimpleBlock)cfg.Blocks.ElementAt(6);
+            var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(7);
+
+            switchBlock.SuccessorBlocks.Should().OnlyContain(caseZero);
+            VerifyAllInstructions(switchBlock, "cw", "cw()", "o");
+
+            caseZero.TrueSuccessorBlock.Should().Be(caseZeroBlock);
+            caseZero.FalseSuccessorBlock.Should().Be(caseOne);
+            caseZero.BranchingNode.Kind().Should().Be(SyntaxKind.NumericLiteralExpression);
+
+            caseZeroBlock.SuccessorBlock.Should().Be(afterSwitchBlock);
+            VerifyAllInstructions(caseZeroBlock, "cw0", "cw0()");
+
+            caseOne.SuccessorBlocks.Should().ContainInOrder(caseOneWhenBlock, afterSwitchBlock);
+            caseOne.BranchingNode.Kind().Should().Be(SyntaxKind.CasePatternSwitchLabel);
+
+            caseOneWhenBlock.TrueSuccessorBlock.Should().Be(caseOneWhenBlockBody);
+            caseOneWhenBlock.FalseSuccessorBlock.Should().Be(afterSwitchBlock);
+            VerifyAllInstructions(caseOneWhenBlock, "s");
+
+            caseOneWhenBlockBody.SuccessorBlock.Should().Be(afterSwitchBlock);
+            VerifyAllInstructions(caseOneWhenBlockBody, "cw1", "cw1()");
+
+            afterSwitchBlock.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(afterSwitchBlock, "cw2", "cw2()");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Switch_Case_With_When_And_Default()
+        {
+            var cfg = Build("cw(); switch(o) { case 1 when i > 0: cw0(); break; default: cw1(); break; } cw2();");
+
+            VerifyCfg(cfg, 7);
+
+            var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
+            var caseOne = (BranchBlock)cfg.Blocks.ElementAt(1);
+            var caseOneWhenBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
+            var caseOneWhenBlockBody = (JumpBlock)cfg.Blocks.ElementAt(3);
+            var defaultBlock = (SimpleBlock)cfg.Blocks.ElementAt(4);
+            var afterSwitchBlock = (SimpleBlock)cfg.Blocks.ElementAt(5);
+            var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(6);
+
+            switchBlock.SuccessorBlocks.Should().OnlyContain(caseOne);
+            VerifyAllInstructions(switchBlock, "cw", "cw()", "o");
+
+            caseOne.SuccessorBlocks.Should().ContainInOrder(caseOneWhenBlock, defaultBlock);
+            caseOne.BranchingNode.Kind().Should().Be(SyntaxKind.CasePatternSwitchLabel);
+
+            caseOneWhenBlock.TrueSuccessorBlock.Should().Be(caseOneWhenBlockBody);
+            caseOneWhenBlock.FalseSuccessorBlock.Should().Be(defaultBlock);
+            VerifyAllInstructions(caseOneWhenBlock, "i", "0", "i > 0");
+
+            caseOneWhenBlockBody.SuccessorBlock.Should().Be(afterSwitchBlock);
+            VerifyAllInstructions(caseOneWhenBlockBody, "cw0", "cw0()");
+
+            afterSwitchBlock.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(afterSwitchBlock, "cw2", "cw2()");
         }
 
         [TestMethod]
@@ -3004,6 +3078,125 @@ namespace NS
             VerifyAllInstructions(lastBlock, "cw4", "cw4()");
         }
 
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_String_And_Throw()
+        {
+            var cfg = Build(@"
+cw();
+switch(o) // switchBlock
+{
+   case ""0"": cw0(); break; // caseZero
+   default: // defaultBlock
+      throw new InvalidOperationException("""");
+}
+cw1(); // afterSwitchBlock
+");
+            VerifyCfg(cfg, 5);
+
+            var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
+            var defaultBlock = (JumpBlock)cfg.Blocks.ElementAt(1);
+            var caseZero = (JumpBlock)cfg.Blocks.ElementAt(2);
+            var afterSwitchBlock = (SimpleBlock)cfg.Blocks.ElementAt(3);
+            var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(4);
+
+            switchBlock.SuccessorBlocks.Should().OnlyContain(caseZero, defaultBlock);
+            VerifyAllInstructions(switchBlock, "cw", "cw()", "o");
+
+            caseZero.SuccessorBlock.Should().Be(afterSwitchBlock);
+            VerifyAllInstructions(caseZero, "cw0", "cw0()");
+
+            defaultBlock.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(defaultBlock, "\"\"", "new InvalidOperationException(\"\")");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Throws()
+        {
+            var cfg = Build(@"
+cw();
+switch(o) // switchBlock
+{
+   case 1:
+    if (b) // firstCaseIfBlock
+    {
+        cw0(); // trueBranchBlock
+    }
+    else
+    {
+      throw new InvalidOperationException(""""); // falseBranchBlock
+    }
+   default: // defaultThrowBlock
+      throw new InvalidOperationException("""");
+}
+cw1(); // afterSwitchBlock
+");
+            VerifyCfg(cfg, 7);
+
+            var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
+            var defaultThrowBlock = (JumpBlock)cfg.Blocks.ElementAt(1);
+            var firstCaseIfBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
+            var trueBranchBlock = (SimpleBlock)cfg.Blocks.ElementAt(3);
+            var falseBranchBlock = (JumpBlock)cfg.Blocks.ElementAt(4);
+            var afterSwitchBlock = (SimpleBlock)cfg.Blocks.ElementAt(5);
+            var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(6);
+
+            switchBlock.SuccessorBlocks.Should().OnlyContain(firstCaseIfBlock, defaultThrowBlock);
+
+            firstCaseIfBlock.TrueSuccessorBlock.Should().Be(trueBranchBlock);
+            firstCaseIfBlock.FalseSuccessorBlock.Should().Be(falseBranchBlock);
+
+            trueBranchBlock.SuccessorBlocks.Should().OnlyContain(afterSwitchBlock);
+
+            afterSwitchBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            falseBranchBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            defaultThrowBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Enumerable_Patterns()
+        {
+            var cfg = Build(@"
+cw();
+switch(o)
+{
+   case IEnumerable<object> subList when subList.Any() && b && sum > 0 : cw0(); break;
+   default: cw2(); break;
+}
+cw3();
+");
+            VerifyCfg(cfg, 9);
+
+            var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
+            var patternCase = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
+            var sublistAnyCondition = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
+            var bCondition = (BinaryBranchBlock)cfg.Blocks.ElementAt(3);
+            var sumGreaterCondition = (BinaryBranchBlock)cfg.Blocks.ElementAt(4);
+            var caseInnerBlock = (JumpBlock)cfg.Blocks.ElementAt(5);
+            var defaultBlock = (JumpBlock)cfg.Blocks.ElementAt(6);
+            var afterSwitchBlock = (SimpleBlock)cfg.Blocks.ElementAt(7);
+            var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(8);
+
+            switchBlock.SuccessorBlocks.Should().OnlyContain(patternCase);
+
+            patternCase.TrueSuccessorBlock.Should().Be(sublistAnyCondition);
+            patternCase.FalseSuccessorBlock.Should().Be(defaultBlock);
+
+            sublistAnyCondition.TrueSuccessorBlock.Should().Be(bCondition);
+            sublistAnyCondition.FalseSuccessorBlock.Should().Be(defaultBlock);
+
+            bCondition.TrueSuccessorBlock.Should().Be(sumGreaterCondition);
+            bCondition.FalseSuccessorBlock.Should().Be(defaultBlock);
+
+            sumGreaterCondition.TrueSuccessorBlock.Should().Be(caseInnerBlock);
+            sumGreaterCondition.FalseSuccessorBlock.Should().Be(defaultBlock);
+
+            caseInnerBlock.SuccessorBlock.Should().Be(afterSwitchBlock);
+            defaultBlock.SuccessorBlock.Should().Be(afterSwitchBlock);
+            afterSwitchBlock.SuccessorBlock.Should().Be(exitBlock);
+        }
 
         #endregion
 

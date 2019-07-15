@@ -738,7 +738,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     {
                         var casePatternSwitchLabel = (CasePatternSwitchLabelSyntaxWrapper)label;
 
-                        if (ConstantPatternSyntaxWrapper.IsInstance(casePatternSwitchLabel.Pattern))
+                        if (ConstantPatternSyntaxWrapper.IsInstance(casePatternSwitchLabel.Pattern) &&
+                            casePatternSwitchLabel.WhenClause.SyntaxNode == null)
                         {
                             // Creating BranchBlock instead of BinaryBranchBlock will generate some
                             // false negatives because we will not be able to evaluate the case label
@@ -770,6 +771,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
                         currentSectionBlock = CreateBranchBlock(caseSwitchLabel,
                              successors: new[] { sectionBlock, currentSectionBlock });
+                    }
+                    else if (label is CaseSwitchLabelSyntax simpleCaseLabel)
+                    {
+                        currentSectionBlock = CreateBinaryBranchBlock(simpleCaseLabel.Value,
+                           trueSuccessor: sectionBlock,
+                           falseSuccessor: currentSectionBlock);
                     }
                 }
             }
