@@ -46,6 +46,9 @@ If the script ends with `SUCCESS: No differences were found!` (or exit code 0), 
 
 If the script ends with `ERROR: There are differences between the actual and the expected issues.` (or exit code 1),
 the changes you have made have impacted one or many issues raised by the rules.
+
+Note: if you are facing compilation errors due to unknown characters, Disable `beta use unicode utf-8 for worldwide language support` in your `Region Settings`.
+
 #### Manual differences review
 You can visualize the differences using:
 
