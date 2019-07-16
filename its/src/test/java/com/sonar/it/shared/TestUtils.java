@@ -27,6 +27,7 @@ import com.sonar.orchestrator.locator.Location;
 import com.sonar.orchestrator.locator.MavenLocation;
 import com.sonar.orchestrator.util.Command;
 import com.sonar.orchestrator.util.CommandExecutor;
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,18 +37,16 @@ import javax.annotation.CheckForNull;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.File;
+import org.sonarqube.ws.Components;
 import org.sonarqube.ws.Issues;
-import org.sonarqube.ws.WsComponents;
-import org.sonarqube.ws.WsMeasures;
-import org.sonarqube.ws.WsMeasures.Measure;
+import org.sonarqube.ws.Measures;
+import org.sonarqube.ws.Measures.Measure;
 import org.sonarqube.ws.client.HttpConnector;
 import org.sonarqube.ws.client.WsClient;
 import org.sonarqube.ws.client.WsClientFactories;
-import org.sonarqube.ws.client.component.ShowWsRequest;
-import org.sonarqube.ws.client.issue.SearchWsRequest;
-import org.sonarqube.ws.client.measure.ComponentWsRequest;
+import org.sonarqube.ws.client.components.ShowRequest;
+import org.sonarqube.ws.client.issues.SearchRequest;
+import org.sonarqube.ws.client.measures.ComponentRequest;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -124,9 +123,9 @@ public class TestUtils {
   }
 
   @CheckForNull
-  public static WsMeasures.Measure getMeasure(Orchestrator orch, String componentKey, String metricKey) {
-    WsMeasures.ComponentWsResponse response = newWsClient(orch).measures().component(new ComponentWsRequest()
-      .setComponentKey(componentKey)
+  public static Measure getMeasure(Orchestrator orch, String componentKey, String metricKey) {
+    Measures.ComponentWsResponse response = newWsClient(orch).measures().component(new ComponentRequest()
+      .setComponent(componentKey)
       .setMetricKeys(singletonList(metricKey)));
     List<Measure> measures = response.getComponent().getMeasuresList();
     return measures.size() == 1 ? measures.get(0) : null;
@@ -138,12 +137,12 @@ public class TestUtils {
     return (measure == null) ? null : Integer.parseInt(measure.getValue());
   }
 
-  public static WsComponents.Component getComponent(Orchestrator orch, String componentKey) {
-    return newWsClient(orch).components().show(new ShowWsRequest().setKey(componentKey)).getComponent();
+  public static Components.Component getComponent(Orchestrator orch, String componentKey) {
+    return newWsClient(orch).components().show(new ShowRequest().setComponent(componentKey)).getComponent();
   }
 
   public static List<Issues.Issue> getIssues(Orchestrator orch, String componentKey) {
-    return newWsClient(orch).issues().search(new SearchWsRequest().setComponentKeys(Collections.singletonList(componentKey))).getIssuesList();
+    return newWsClient(orch).issues().search(new SearchRequest().setComponentKeys(Collections.singletonList(componentKey))).getIssuesList();
   }
 
   // Versions of SonarQube and plugins support aliases:

@@ -34,11 +34,9 @@ import org.junit.Test;
 import org.junit.rules.ExternalResource;
 import org.junit.rules.RuleChain;
 import org.junit.rules.TemporaryFolder;
-import org.sonarqube.ws.WsMeasures.Measure;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getComponent;
-import static com.sonar.it.csharp.Tests.getMeasure;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 

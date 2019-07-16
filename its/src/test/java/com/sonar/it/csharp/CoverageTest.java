@@ -54,8 +54,8 @@ public class CoverageTest {
     BuildResult buildResult = analyzeCoverageTestProject();
     assertThat(buildResult.getLogs()).doesNotContain("C# Tests Coverage Report Import");
 
-    org.sonarqube.ws.WsMeasures.Measure linesToCover = getMeasure("CoverageTest", "lines_to_cover");
-    org.sonarqube.ws.WsMeasures.Measure uncoveredLines = getMeasure("CoverageTest", "uncovered_lines");
+    org.sonarqube.ws.Measures.Measure linesToCover = getMeasure("CoverageTest", "lines_to_cover");
+    org.sonarqube.ws.Measures.Measure uncoveredLines = getMeasure("CoverageTest", "uncovered_lines");
 
     assertThat(linesToCover.getValue()).isEqualTo("2");
     assertThat(uncoveredLines.getValue()).isEqualTo("2");
