@@ -393,17 +393,19 @@ namespace NS
         {
             var cfg = Build("if (a ?? b) { var y = 10; }");
 
-            VerifyCfg(cfg, 4);
+            VerifyCfg(cfg, 5);
 
             var blocks = cfg.Blocks.ToList();
 
             var branchBlockA = (BinaryBranchBlock)blocks[0];
-            var branchBlockB = (BinaryBranchBlock)blocks[1];
-            var trueBlock = blocks[2];
-            var exit = blocks[3];
+            var branchBlockALeft = (BranchBlock)blocks[1];
+            var branchBlockB = (BinaryBranchBlock)blocks[2];
+            var trueBlock = blocks[3];
+            var exit = blocks[4];
 
             branchBlockA.TrueSuccessorBlock.Should().Be(branchBlockB);
-            branchBlockA.FalseSuccessorBlock.Should().Be(exit);
+            branchBlockA.FalseSuccessorBlock.Should().Be(branchBlockALeft);
+            branchBlockALeft.SuccessorBlocks.Should().OnlyContainInOrder(trueBlock, exit);
             branchBlockB.TrueSuccessorBlock.Should().Be(trueBlock);
             branchBlockB.FalseSuccessorBlock.Should().Be(exit);
             trueBlock.SuccessorBlocks.Should().OnlyContain(exit);
@@ -1476,6 +1478,40 @@ namespace NS
             VerifyAllInstructions(condTrue, "b");
             VerifyAllInstructions(condFalse, "c");
             VerifyAllInstructions(after, "a = x && y ? b : c");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Conditional_ComplexCondition_Coalesce()
+        {
+            var cfg = Build("var a = (x ?? y) ? b : c;");
+            VerifyCfg(cfg, 7);
+
+            var blocks = cfg.Blocks.ToList();
+            var branchBlockX = (BinaryBranchBlock)blocks[0];
+            var branchBlockXLeft = (BranchBlock)blocks[1];
+            var branchBlockY = (BinaryBranchBlock)blocks[2];
+            var condTrue = blocks[3];
+            var condFalse = blocks[4];
+            var after = blocks[5];
+            var exitBlock = cfg.ExitBlock;
+
+            branchBlockX.TrueSuccessorBlock.Should().Be(branchBlockY);
+            branchBlockX.FalseSuccessorBlock.Should().Be(branchBlockXLeft);
+            branchBlockXLeft.SuccessorBlocks.Should().OnlyContainInOrder(condTrue, condFalse);
+            branchBlockY.TrueSuccessorBlock.Should().Be(condTrue);
+            branchBlockY.FalseSuccessorBlock.Should().Be(condFalse);
+
+            condFalse.SuccessorBlocks.Should().OnlyContain(after);
+            condTrue.SuccessorBlocks.Should().OnlyContain(after);
+            after.SuccessorBlocks.Should().OnlyContain(exitBlock);
+
+            VerifyAllInstructions(branchBlockX, "x");
+            VerifyAllInstructions(branchBlockXLeft);
+            VerifyAllInstructions(branchBlockY, "y");
+            VerifyAllInstructions(condTrue, "b");
+            VerifyAllInstructions(condFalse, "c");
+            VerifyAllInstructions(after, "a = (x ?? y) ? b : c");
         }
 
         [TestMethod]
