@@ -26,7 +26,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import javax.annotation.CheckForNull;
 import org.apache.commons.io.FileUtils;
 import org.junit.ClassRule;
@@ -34,9 +33,8 @@ import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-import org.sonarqube.ws.Issues;
-import org.sonarqube.ws.WsComponents;
-import org.sonarqube.ws.WsMeasures;
+import org.sonarqube.ws.Components;
+import org.sonarqube.ws.Measures;
 
 @RunWith(Suite.class)
 @SuiteClasses({
@@ -66,7 +64,7 @@ public class Tests {
     return tmpProjectDir;
   }
 
-  static WsComponents.Component getComponent(String componentKey) {
+  static Components.Component getComponent(String componentKey) {
     return TestUtils.getComponent(ORCHESTRATOR, componentKey);
   }
 
@@ -76,7 +74,7 @@ public class Tests {
   }
 
   @CheckForNull
-  static WsMeasures.Measure getMeasure(String componentKey, String metricKey) {
+  static Measures.Measure getMeasure(String componentKey, String metricKey) {
     return TestUtils.getMeasure(ORCHESTRATOR, componentKey, metricKey);
   }
 }
