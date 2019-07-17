@@ -164,4 +164,22 @@ namespace Tests.Diagnostics
             Dispose();
         }
     }
+
+    public class ReproForIssue2491
+    {
+        public void S3966FalsePositive()
+        {
+            // Rule S3966 is a false positive:
+            // The StreamWriter constructor used sets 'leaveOpen' to true, which prevents the
+            // StreamWriter from disposing the MemoryStream. Dispose is only called due to the
+            // 'using'-statement.
+
+            using (MemoryStream memoryStream = new MemoryStream()) // Noncompliant FP
+            using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, leaveOpen: true))
+            {
+                //...
+            }
+
+        }
+    }
 }
