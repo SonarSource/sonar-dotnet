@@ -1256,11 +1256,17 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                             BuildCondition(binaryExpression.Right, trueSuccessor, falseSuccessor));
 
                     case SyntaxKind.LogicalAndExpression:
+                        return BuildCondition(
+                        binaryExpression.Left,
+                        BuildCondition(binaryExpression.Right, trueSuccessor, falseSuccessor),
+                        falseSuccessor);
+
                     case SyntaxKind.CoalesceExpression:
                         return BuildCondition(
-                            binaryExpression.Left,
-                            BuildCondition(binaryExpression.Right, trueSuccessor, falseSuccessor),
-                            falseSuccessor);
+                        binaryExpression.Left,
+                        BuildCondition(binaryExpression.Right, trueSuccessor, falseSuccessor),
+                        CreateBranchBlock(binaryExpression.Left,successors: new[] { trueSuccessor, falseSuccessor }));
+
                 }
             }
 

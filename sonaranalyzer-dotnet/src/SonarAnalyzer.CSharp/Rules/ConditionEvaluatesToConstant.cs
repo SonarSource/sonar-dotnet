@@ -63,7 +63,8 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.IfStatement,
             SyntaxKind.WhileStatement,
             SyntaxKind.DoStatement,
-            SyntaxKind.ConditionalExpression
+            SyntaxKind.ConditionalExpression,
+            SyntaxKind.CoalesceExpression
         };
 
         // Do not report in finally and catch blocks to avoid False Positives. To correctly solve

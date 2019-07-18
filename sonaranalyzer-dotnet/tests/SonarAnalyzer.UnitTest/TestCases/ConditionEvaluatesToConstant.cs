@@ -1556,4 +1556,83 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+  public class TestNullCoalescing
+  {
+    public void CompliantMethod(bool? input)
+    {
+      if (input ?? false) // Compliant S2583
+      {
+        Console.WriteLine("input is true");
+      }
+      else
+      {
+        Console.WriteLine("input is false");
+      }
+    }
+
+    public void CompliantMethod1(bool? input)
+    {
+      while (input ?? false) // Compliant S2583
+      {
+        Console.WriteLine("input is true");
+      }
+    }
+
+    public void CompliantMethod2(bool? input, bool input1)
+    {
+      while ((input ?? false) && input1) // Compliant S2583
+      {
+        Console.WriteLine("input is true");
+      }
+    }
+
+    public void CompliantMethod3(bool? input, bool input1)
+    {
+    
+      if (input ?? false ? input1 : false) // Compliant S2583
+      {
+        Console.WriteLine("input is true");
+      }
+    }
+
+    public void NonCompliantMethod()
+    {
+      bool? input = true;
+      if (input ?? false) // Noncompliant
+      {
+        Console.WriteLine("input is true"); 
+      }
+      else
+      { // Secondary
+        Console.WriteLine("input is false");
+      }
+    }
+
+    public void NonCompliantMethod1()
+    {
+      bool? input = true;
+      while (input ?? false) // Noncompliant
+      {
+        Console.WriteLine("input is true");
+      }
+    }
+
+    public void NonCompliantMethod2(bool? input)
+    {
+      while ((input ?? false) || true) // Noncompliant
+      {
+        Console.WriteLine("input is true");
+      }
+    }
+
+    public void NonCompliantMethod3(bool? input, bool input1)
+    {
+      if ((input ?? false) ? false : false) // Noncompliant
+      { // Secondary@-1
+        Console.WriteLine("input is true");
+      }
+    }
+
+  }
 }
