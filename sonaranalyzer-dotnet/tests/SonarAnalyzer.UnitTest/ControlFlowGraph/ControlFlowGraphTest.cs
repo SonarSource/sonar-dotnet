@@ -3198,6 +3198,95 @@ cw3();
             afterSwitchBlock.SuccessorBlock.Should().Be(exitBlock);
         }
 
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Default_Statement_First()
+        {
+            var cfg = Build(@"
+int index = 0;
+Exception ex = null;
+switch (index)
+{
+    default:
+        break;
+    case 0 when ex is InvalidOperationException:
+        ex = null;
+        break;
+}
+");
+            VerifyCfg(cfg, 6);
+
+            var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
+            var caseZero = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
+            var caseZeroWhenException = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
+            var caseZeroWhenExceptionBlock = (JumpBlock)cfg.Blocks.ElementAt(3);
+            var defaultBlock = (JumpBlock)cfg.Blocks.ElementAt(4);
+            var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(5);
+
+            switchBlock.SuccessorBlocks.Should().OnlyContain(caseZero);
+
+            caseZero.TrueSuccessorBlock.Should().Be(caseZeroWhenException);
+            caseZero.FalseSuccessorBlock.Should().Be(defaultBlock);
+
+            caseZeroWhenException.TrueSuccessorBlock.Should().Be(caseZeroWhenExceptionBlock);
+            caseZeroWhenException.FalseSuccessorBlock.Should().Be(defaultBlock);
+
+            caseZeroWhenExceptionBlock.SuccessorBlock.Should().Be(exitBlock);
+            defaultBlock.SuccessorBlock.Should().Be(exitBlock);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Mixed_Cases_With_The_Same_Action()
+        {
+            var cfg = Build(@"
+object o = null;
+Exception ex = null;
+switch (o)
+{
+    case 0 when ex is ArgumentException:
+    case 1:
+    case string s when s.Length > 0:
+    case object x:
+        // do stuff
+        break;
+}
+");
+            VerifyCfg(cfg, 9);
+
+            var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
+            var caseZero = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
+            var caseZeroWhenException = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
+            var caseOne = (BinaryBranchBlock)cfg.Blocks.ElementAt(3);
+            var caseStringS = (BinaryBranchBlock)cfg.Blocks.ElementAt(4);
+            var caseStringSWhen = (BinaryBranchBlock)cfg.Blocks.ElementAt(5);
+            var caseObjectX = (BinaryBranchBlock)cfg.Blocks.ElementAt(6);
+            var breakBlock = (JumpBlock)cfg.Blocks.ElementAt(7);
+            var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(8);
+
+            switchBlock.SuccessorBlocks.Should().OnlyContain(caseZero);
+
+            caseZero.TrueSuccessorBlock.Should().Be(caseZeroWhenException);
+            caseZero.FalseSuccessorBlock.Should().Be(exitBlock);
+
+            caseZeroWhenException.TrueSuccessorBlock.Should().Be(caseOne);
+            caseZeroWhenException.FalseSuccessorBlock.Should().Be(exitBlock);
+
+            caseOne.TrueSuccessorBlock.Should().Be(caseStringS);
+            caseOne.FalseSuccessorBlock.Should().Be(exitBlock);
+
+            caseStringS.TrueSuccessorBlock.Should().Be(caseStringSWhen);
+            caseStringS.FalseSuccessorBlock.Should().Be(exitBlock);
+
+            caseStringSWhen.TrueSuccessorBlock.Should().Be(caseObjectX);
+            caseStringSWhen.FalseSuccessorBlock.Should().Be(exitBlock);
+
+            caseObjectX.TrueSuccessorBlock.Should().Be(breakBlock);
+            caseObjectX.FalseSuccessorBlock.Should().Be(exitBlock);
+
+            breakBlock.SuccessorBlock.Should().Be(exitBlock);
+        }
+
         #endregion
 
         #region Goto
