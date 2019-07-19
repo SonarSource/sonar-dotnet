@@ -615,13 +615,12 @@ namespace SonarAnalyzer.SymbolicExecution
         private void VisitBinaryBranch(BinaryBranchBlock binaryBranchBlock, ExplodedGraphNode node, SyntaxNode instruction)
         {
             var ps = node.ProgramState;
-            SymbolicValue sv;
-
             if (!ps.HasValue)
             {
                 return;
             }
 
+            SymbolicValue sv;
             if (binaryBranchBlock.BranchingNode is ForStatementSyntax forStatement)
             {
                 if (forStatement.Condition == null)
