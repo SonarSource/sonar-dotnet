@@ -67,6 +67,7 @@
     <sonarLTS.version>6.7</sonarLTS.version>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
+    <documentationDirectory>${project.basedir}/src/main/resources</documentationDirectory>
   </properties>
 
   <dependencies>
@@ -186,6 +187,7 @@
           <include>org/sonar/plugins/vbnet/*.xml</include>
           <include>org/sonar/plugins/vbnet/*.json</include>
           <include>static/version.txt</include>
+          <include>static/documentation.md</include>
           <include>static/SonarAnalyzer-${project.version}.zip</include>
         </includes>
       </resource>
@@ -297,6 +299,12 @@
                       </fileset>
                       <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/rspec/vbnet">
                         <include name="*.json" /> <!-- Allows to copy each rule definition json file and the Sonar-way profile. -->
+                      </fileset>
+                    </copy>
+
+                    <copy todir="${sonarAnalyzer.workDirectory}/static">
+                      <fileset dir="${documentationDirectory}">
+                        <include name="documentation.md"/>
                       </fileset>
                     </copy>
 
