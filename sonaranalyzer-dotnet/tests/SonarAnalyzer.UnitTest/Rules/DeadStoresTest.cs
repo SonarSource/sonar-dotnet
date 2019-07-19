@@ -21,6 +21,7 @@
 extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +32,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DeadStores()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\DeadStores.cs", new DeadStores());
+            Verifier.VerifyAnalyzer(@"TestCases\DeadStores.cs",
+                new DeadStores(),
+                options: ParseOptionsHelper.FromCSharp7,
+                additionalReferences: FrameworkMetadataReference.SystemWindowsForms);
         }
     }
 }

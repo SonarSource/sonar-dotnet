@@ -369,4 +369,19 @@ namespace Tests.TestCases
             }
         }
     }
+
+    public class ReproGithubIssue2010
+    {
+        static int PatternMatch(StringSplitOptions splitOptions, int i)
+        {
+            switch (splitOptions)
+            {
+                case StringSplitOptions.None
+                    when i > 0:
+                    return 1;
+                default:
+                    return 0;
+            }
+        }
+    }
 }
