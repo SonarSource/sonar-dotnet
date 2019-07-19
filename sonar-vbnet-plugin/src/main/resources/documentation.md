@@ -1,6 +1,6 @@
 ---
 title: VB.NET
-url: vbnet
+key: vbnet
 ---
 
 <!-- static -->
