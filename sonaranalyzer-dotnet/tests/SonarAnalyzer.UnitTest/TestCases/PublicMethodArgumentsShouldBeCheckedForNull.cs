@@ -116,4 +116,20 @@ namespace Tests.Diagnostics
         [AttributeUsage(AttributeTargets.Parameter)]
         public sealed class ValidatedNotNullAttribute : Attribute { }
     }
+
+    public class ReproIssue2476
+    {
+        public void Foo(params string[] infixes)
+        {
+            if (infixes == null || infixes.Length == 0)
+            {
+                infixes = new string[1];
+            }
+            else
+            {
+                Array.Resize(ref infixes, infixes.Length + 1); // Noncompliant FP
+            }
+            // more stuff
+        }
+    }
 }
