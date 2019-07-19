@@ -3267,19 +3267,19 @@ switch (o)
             switchBlock.SuccessorBlocks.Should().OnlyContain(caseZero);
 
             caseZero.TrueSuccessorBlock.Should().Be(caseZeroWhenException);
-            caseZero.FalseSuccessorBlock.Should().Be(exitBlock);
+            caseZero.FalseSuccessorBlock.Should().Be(caseOne);
 
-            caseZeroWhenException.TrueSuccessorBlock.Should().Be(caseOne);
-            caseZeroWhenException.FalseSuccessorBlock.Should().Be(exitBlock);
+            caseZeroWhenException.TrueSuccessorBlock.Should().Be(breakBlock);
+            caseZeroWhenException.FalseSuccessorBlock.Should().Be(caseOne);
 
-            caseOne.TrueSuccessorBlock.Should().Be(caseStringS);
-            caseOne.FalseSuccessorBlock.Should().Be(exitBlock);
+            caseOne.TrueSuccessorBlock.Should().Be(breakBlock);
+            caseOne.FalseSuccessorBlock.Should().Be(caseStringS);
 
             caseStringS.TrueSuccessorBlock.Should().Be(caseStringSWhen);
-            caseStringS.FalseSuccessorBlock.Should().Be(exitBlock);
+            caseStringS.FalseSuccessorBlock.Should().Be(caseObjectX);
 
-            caseStringSWhen.TrueSuccessorBlock.Should().Be(caseObjectX);
-            caseStringSWhen.FalseSuccessorBlock.Should().Be(exitBlock);
+            caseStringSWhen.TrueSuccessorBlock.Should().Be(breakBlock);
+            caseStringSWhen.FalseSuccessorBlock.Should().Be(caseObjectX);
 
             caseObjectX.TrueSuccessorBlock.Should().Be(breakBlock);
             caseObjectX.FalseSuccessorBlock.Should().Be(exitBlock);
