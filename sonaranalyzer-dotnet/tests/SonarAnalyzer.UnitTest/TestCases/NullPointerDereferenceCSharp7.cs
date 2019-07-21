@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Tests.Diagnostics
 {
@@ -164,5 +165,28 @@ namespace Tests.Diagnostics
                     break;
             }
         }
+
+    void Compliant1(Exception exception)
+    {
+
+      if (exception?.Data is IDictionary data)
+      {
+        if (exception.InnerException?.Data is IDictionary innerexceptiondata)
+        {
+
+        }
+      }
     }
+    void NonCompliant1()
+    {
+      Exception exception = null;
+      if (exception.Data is IDictionary data)  // Noncompliant
+      {
+        if (exception.InnerException?.Data is IDictionary innerexceptiondata)
+        {
+
+        }
+      }
+    }
+  }
 }

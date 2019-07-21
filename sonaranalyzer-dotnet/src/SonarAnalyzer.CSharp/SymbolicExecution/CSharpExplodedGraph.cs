@@ -593,6 +593,10 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private void VisitConditionalAccessBinaryBranch(BinaryBranchBlock binaryBranchBlock, ProgramState programState)
         {
+            if(!programState.HasValue)
+            {
+                return;
+            }
             var ps = programState.PopValue(out var sv);
 
             foreach (var newProgramState in sv.TrySetConstraint(ObjectConstraint.Null, ps))

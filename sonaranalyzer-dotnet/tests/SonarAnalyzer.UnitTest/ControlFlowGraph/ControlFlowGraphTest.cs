@@ -1565,11 +1565,11 @@ namespace NS
 
             branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ConditionalAccessExpression);
 
-            branchBlock.Instructions.Should().ContainSingle();
-            branchBlock.Instructions.Should().Contain(i => i.ToString() == "o");
+            oNotNull.Instructions.Should().ContainSingle();
+            oNotNull.Instructions.Should().Contain(i => i.ToString() == "o");
 
-            VerifyAllInstructions(branchBlock, "o");
-            VerifyAllInstructions(oNotNull, "method", ".method" /* This is equivalent to o.method */, "1", ".method(1)");
+            VerifyAllInstructions(oNotNull, "o");
+            VerifyAllInstructions(branchBlock, "method", ".method" /* This is equivalent to o.method */, "1", ".method(1)");
             VerifyAllInstructions(condAccess, "a = o?.method(1)");
         }
 
@@ -1578,18 +1578,20 @@ namespace NS
         public void Cfg_ConditionalAccessNested()
         {
             var cfg = Build("var a = o?.method()?[10];");
-            VerifyCfg(cfg, 5);
+            VerifyCfg(cfg, 6);
 
-            var branchBlock = cfg.EntryBlock as BinaryBranchBlock;
+            var branchBlock1 = cfg.EntryBlock as BinaryBranchBlock;
             var blocks = cfg.Blocks.ToList();
-            var oNotNull = blocks[1] as BinaryBranchBlock;
-            var methodNotNull = blocks[2];
-            var assignment = blocks[3];
+            var method = blocks[1];
+            var branchBlock2 = blocks[2] as BinaryBranchBlock;
+            var o = blocks[3];
+            var assignment = blocks[4];
             var exitBlock = cfg.ExitBlock;
 
-            branchBlock.SuccessorBlocks.Should().OnlyContainInOrder(assignment, oNotNull);
-            oNotNull.SuccessorBlocks.Should().OnlyContainInOrder(assignment, methodNotNull);
-            methodNotNull.SuccessorBlocks.Should().OnlyContain(assignment);
+            branchBlock1.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2, method);
+            method.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2);
+            branchBlock2.SuccessorBlocks.Should().OnlyContainInOrder(assignment, o);
+            o.SuccessorBlocks.Should().OnlyContain(assignment);
             assignment.SuccessorBlocks.Should().OnlyContain(exitBlock);
         }
 

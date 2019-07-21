@@ -49,6 +49,7 @@ namespace Tests.Diagnostics
 
         public void TryCatch4(object o)
         {
+            o = null;
             try
             {
                 var a = o?.ToString();

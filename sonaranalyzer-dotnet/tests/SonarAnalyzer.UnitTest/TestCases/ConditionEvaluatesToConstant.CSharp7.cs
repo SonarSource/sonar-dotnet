@@ -132,5 +132,28 @@
                     break;
             }
         }
+
+    public class A
+    {
+      public object booleanVal { get; set; }
     }
+
+    void Compliant1(A a)
+    {
+      if (a?.booleanVal is null)
+      {
+
+      }
+    }
+
+    void NonCompliant1()
+    {
+      A a = null;
+      if (a?.booleanVal is null) // Noncompliant
+      {
+
+      }
+    }
+
+  }
 }

@@ -1040,10 +1040,10 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private Block BuildConditionalAccessExpression(ConditionalAccessExpressionSyntax conditionalAccess,
             Block currentBlock)
         {
-            var whenNotNull = BuildExpression(conditionalAccess.WhenNotNull, CreateBlock(currentBlock));
 
-            return BuildExpression(conditionalAccess.Expression,
-                CreateBinaryBranchBlock(conditionalAccess, currentBlock, whenNotNull));
+            var expression = BuildExpression(conditionalAccess.Expression, CreateBlock(currentBlock));
+            return BuildExpression(conditionalAccess.WhenNotNull,
+                CreateBinaryBranchBlock(conditionalAccess, currentBlock, expression));
         }
 
         private Block BuildConditionalExpression(ConditionalExpressionSyntax conditional, Block currentBlock)
@@ -1277,6 +1277,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 }
             }
 
+            if (expression is ConditionalAccessExpressionSyntax conditionalAccessExpression)
+            {
+                return BuildCondition(
+                    conditionalAccessExpression.WhenNotNull,
+                    BuildCondition(conditionalAccessExpression.WhenNotNull, trueSuccessor, falseSuccessor),
+                    BuildCondition(conditionalAccessExpression.Expression, trueSuccessor, falseSuccessor)
+                );
+            }
             // Fallback to generating an additional branch block for the if statement itself.
             return BuildExpression(expression,
                     AddBlock(new BinaryBranchBlock(expression, trueSuccessor, falseSuccessor)));
