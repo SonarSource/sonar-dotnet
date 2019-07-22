@@ -30,6 +30,38 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class ReproIssue2478
+    {
+        public void SomeMethod()
+        {
+            var (a, b) = new SomeDeconstructibleType();
+        }
+
+        private sealed class SomeDeconstructibleType
+        {
+            public void Deconstruct(out object a, out object b) // Noncompliant FP #2478
+            {
+                a = b = null;
+            }
+        }
+    }
+
+    public class ReproIssue2333
+    {
+        public void M()
+        {
+            OtherClass oc = new OtherClass();
+            (oc.Name, oc.Type) = ("A", "B");
+            Console.WriteLine(oc.Name + " " + oc.Type);
+        }
+
+        class OtherClass
+        {
+            public string Name { get; set; } // Noncompliant FP #2333
+            public string Type { get; set; } // Noncompliant FP #2333
+        }
+    }
+
     public class EmptyCtor
     {
         // That's invalid syntax, but it is still empty ctor and we should not raise for it, even if it is not used
