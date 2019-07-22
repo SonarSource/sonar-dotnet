@@ -1595,6 +1595,72 @@ namespace NS
             assignment.SuccessorBlocks.Should().OnlyContain(exitBlock);
         }
 
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_ConditionalAccess_Coalesce()
+        {
+            var cfg = Build("if(aObj?.booleanVal ?? false)");
+            VerifyCfg(cfg, 7);
+
+            var branchBlock1 = cfg.EntryBlock as BinaryBranchBlock;
+            var blocks = cfg.Blocks.ToList();
+            var aObj = blocks[1];
+            var branchBlock2 = blocks[2] as BinaryBranchBlock;
+            var coalesceBranchingNode = blocks[3];
+            var flse = blocks[4] as BinaryBranchBlock;
+            var identifierName = blocks[5];
+            var exitBlock = cfg.ExitBlock;
+
+            branchBlock1.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2, aObj);
+            aObj.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2);
+            branchBlock2.SuccessorBlocks.Should().OnlyContainInOrder(flse, coalesceBranchingNode);
+            coalesceBranchingNode.SuccessorBlocks.Should().OnlyContainInOrder(identifierName, exitBlock);
+            flse.SuccessorBlocks.Should().OnlyContainInOrder(identifierName, exitBlock);
+            identifierName.SuccessorBlocks.Should().OnlyContain(exitBlock);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_ConditionalAccess_Conditional()
+        {
+            var cfg = Build("a?.booleanVal == null ? true : false");
+            VerifyCfg(cfg, 6);
+
+            var branchBlock1 = cfg.EntryBlock as BinaryBranchBlock;
+            var blocks = cfg.Blocks.ToList();
+            var a = blocks[1];
+            var branchBlock2 = blocks[2] as BinaryBranchBlock;
+            var tru = blocks[3];
+            var flse = blocks[4];
+            var exitBlock = cfg.ExitBlock;
+
+            branchBlock1.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2, a);
+            a.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2);
+            branchBlock2.SuccessorBlocks.Should().OnlyContainInOrder(tru, flse);
+            tru.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            flse.SuccessorBlocks.Should().OnlyContain(exitBlock);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_ConditionalAccess_is()
+        {
+            var cfg = Build("if (a?.booleanVal is null)");
+            VerifyCfg(cfg, 5);
+
+            var branchBlock1 = cfg.EntryBlock as BinaryBranchBlock;
+            var blocks = cfg.Blocks.ToList();
+            var a = blocks[1];
+            var branchBlock2 = blocks[2] as BinaryBranchBlock;
+            var identifierName = blocks[3];
+            var exitBlock = cfg.ExitBlock;
+
+            branchBlock1.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2, a);
+            a.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2);
+            branchBlock2.SuccessorBlocks.Should().OnlyContainInOrder(identifierName, exitBlock);
+            identifierName.SuccessorBlocks.Should().OnlyContain(exitBlock);
+        }
+
         #endregion
 
         #region Break

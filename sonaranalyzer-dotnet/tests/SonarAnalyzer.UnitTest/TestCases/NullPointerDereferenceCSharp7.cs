@@ -166,12 +166,12 @@ namespace Tests.Diagnostics
             }
         }
 
-    void Compliant1(Exception exception)
+    void Compliant1()
     {
-
+      Exception exception = null;
       if (exception?.Data is IDictionary data)
       {
-        if (exception.InnerException?.Data is IDictionary innerexceptiondata)
+        if (exception?.InnerException?.Data is IDictionary innerexceptiondata)
         {
 
         }

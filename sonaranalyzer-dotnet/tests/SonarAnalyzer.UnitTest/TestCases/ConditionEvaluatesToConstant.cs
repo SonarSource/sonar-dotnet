@@ -1759,7 +1759,7 @@ namespace Tests.Diagnostics
 
     public void CompliantMethod3(bool? input, bool input1)
     {
-    
+
       if (input ?? false ? input1 : false) // Compliant S2583
       {
         Console.WriteLine("input is true");
@@ -1771,7 +1771,7 @@ namespace Tests.Diagnostics
       bool? input = true;
       if (input ?? false) // Noncompliant
       {
-        Console.WriteLine("input is true"); 
+        Console.WriteLine("input is true");
       }
       else
       { // Secondary
@@ -1803,6 +1803,30 @@ namespace Tests.Diagnostics
         Console.WriteLine("input is true");
       }
     }
+  }
+
+  class Program
+  { 
+    public static string CompliantMethod4(string parameter)
+    {
+      var useParameter = parameter ?? "non-empty";
+      if (useParameter == null || useParameter=="")  // Noncompliant FP #1347
+        return "non-empty"; // Secondary
+
+      return "empty";
+    }
+
+    static void CompliantMethod5(string[] args)
+    {
+      var obj = args.Length > 0 ? new Program() : null;
+
+      if (obj?.Cond ?? false)
+      {
+        Console.WriteLine("Foo");
+        Console.WriteLine("Bar");
+      }
+    }
+    private bool Cond = new Random().Next() % 2 == 1;
 
   }
 }

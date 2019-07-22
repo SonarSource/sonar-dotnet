@@ -59,5 +59,106 @@ namespace Tests.Diagnostics
                 var b = o.ToString(); // Noncompliant, o could be null here
             }
         }
+
+    public void Compliant(List<int> list)
+    {
+      var row = list?.Count;
+      if (row != null)
+      {
+        var type = list.ToArray();
+      }
     }
+
+    public class A
+    {
+      public bool booleanVal { get; set; }
+    }
+
+    public void Compliant1(List<int> list, A a)
+    {
+      var row = list?.Count;
+      if (a.booleanVal = (row != null))
+      {
+        var type = list.ToArray();
+      }
+    }
+
+    public void NonCompliant(List<int> list)
+    {
+      var row = list?.Count;
+      if (row == null)
+      {
+        var type = list.ToArray(); // Noncompliant
+      }
+    }
+
+    public void NonCompliant1(List<int> list, A a)
+    {
+      var row = list?.Count;
+      if (a.booleanVal = (row == null))
+      {
+        var type = list.ToArray(); // Noncompliant
+      }
+    }
+
+    void Compliant2(object o)
+    {
+      switch (o?.GetHashCode())
+      {
+        case 1:
+          o.ToString();
+          break;
+        default:
+          break;
+      }
+    }
+
+    void NonCompliant2()
+    {
+      object o = null;
+      switch (o?.GetHashCode())
+      {
+        case null:
+          o.ToString(); // Noncompliant
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
+  public class S2259
+  {
+    public ConsoleColor Color { get; set; }
+
+    public void Method1(S2259 obj)
+    {
+      switch (obj?.Color)
+      {
+        case null:
+          Console.ForegroundColor = obj.Color; // FN @2338
+          break;
+        case ConsoleColor.Red:
+          Console.ForegroundColor = obj.Color; //compliant
+          break;
+        default:
+          Console.WriteLine($"Color {obj.Color} is not supported."); //compliant
+          break;
+      }
+    }
+
+    public void Method2(S2259 obj)
+    {
+      switch (obj?.Color)
+      {
+        case ConsoleColor.Red:
+          Console.ForegroundColor = obj.Color; //compliant
+          break;
+        default:
+          Console.WriteLine($"Color {obj.Color} is not supported."); // FN @2338
+          break;
+      }
+    }
+  }
+
 }
