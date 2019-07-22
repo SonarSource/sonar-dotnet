@@ -2594,6 +2594,132 @@ namespace NS
 
         [TestMethod]
         [TestCategory("CFG")]
+        public void Cfg_TryCatch_ThrowInsideTry()
+        {
+            var cfg = Build(@"
+            bool shouldCatch = false;
+            try
+            {
+                shouldCatch = true;
+                throw new InvalidOperationException(""bar"");
+            }
+            catch(Exception e) when (shouldCatch)
+            {
+                cw2();
+            }
+            cw5();");
+
+            VerifyCfg(cfg, 6);
+
+            var blocks = cfg.Blocks.ToList();
+
+            var tryStartBlock = blocks[0];
+            var tryBodyBlock = blocks[1];
+            var whenBlock = blocks[2];
+            var catchBlock = blocks[3];
+            var afterTryBlock = blocks[4];
+            var exit = blocks.Last();
+
+            tryStartBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(tryStartBlock, "false", "shouldCatch = false");
+            tryStartBlock.SuccessorBlocks.Should().OnlyContain(tryBodyBlock, whenBlock, exit);
+
+            tryBodyBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(tryBodyBlock, "true", "shouldCatch = true", "\"bar\"", "new InvalidOperationException(\"bar\")");
+            tryBodyBlock.SuccessorBlocks.Should().OnlyContain(whenBlock, afterTryBlock, exit);
+
+            whenBlock.Should().BeOfType<BinaryBranchBlock>();
+            VerifyAllInstructions(whenBlock, "shouldCatch");
+            whenBlock.SuccessorBlocks.Should().OnlyContain(catchBlock, afterTryBlock);
+
+            catchBlock.Should().BeOfType<SimpleBlock>();
+            VerifyAllInstructions(catchBlock, "cw2", "cw2()");
+            catchBlock.SuccessorBlocks.Should().OnlyContain(afterTryBlock);
+
+            afterTryBlock.Should().BeOfType<SimpleBlock>();
+            VerifyAllInstructions(afterTryBlock, "cw5", "cw5()");
+            afterTryBlock.SuccessorBlocks.Should().OnlyContain(exit);
+
+            exit.Should().BeOfType<ExitBlock>();
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_TryCatch_Inside_DoWhile()
+        {
+            var cfg = Build(@"
+            var attempts = 0;
+            do
+            {
+                cw0();
+                try
+                {
+                    attempts++;
+                    cw1();
+                    break;
+                }
+                catch(Exception e)
+                {
+                    cw2();
+                    if (attempts > retries)
+                    {
+                        cw3();
+                        throw;
+                    }
+                    cw4();
+                }
+            } while (true);
+            cw5();");
+
+            VerifyCfg(cfg, 10);
+
+            var blocks = cfg.Blocks.ToList();
+
+            var beforeDoBlock = (SimpleBlock) blocks[0];
+            var doBlock = (BranchBlock) blocks[1];
+            var tryBody = (JumpBlock) blocks[2];
+            var weirdEmptyBlock = (BranchBlock) blocks[3];
+            var catchBodyWithIf = (BinaryBranchBlock) blocks[4];
+            var insideIfInsideCatch = (JumpBlock) blocks[5];
+            var afterIfInsideCatch = (SimpleBlock) blocks[6];
+            var whileStmt = (BinaryBranchBlock) blocks[7];
+            var afterDoWhile = (SimpleBlock) blocks[8];
+            var exit = (ExitBlock) blocks.Last();
+
+            VerifyAllInstructions(beforeDoBlock, "0", "attempts = 0");
+            beforeDoBlock.SuccessorBlocks.Should().OnlyContain(doBlock);
+
+            VerifyAllInstructions(doBlock, "cw0", "cw0()");
+            doBlock.SuccessorBlocks.Should().OnlyContainInOrder(catchBodyWithIf, tryBody);
+
+            VerifyAllInstructions(tryBody, "attempts", "attempts++", "cw1", "cw1()");
+            tryBody.SuccessorBlocks.Should().OnlyContainInOrder(afterDoWhile);
+
+            weirdEmptyBlock.ReversedInstructions.Should().BeEmpty();
+            weirdEmptyBlock.SuccessorBlocks.Should().OnlyContainInOrder(catchBodyWithIf, whileStmt);
+
+            VerifyAllInstructions(catchBodyWithIf, "cw2", "cw2()", "attempts", "retries", "attempts > retries");
+            catchBodyWithIf.TrueSuccessorBlock.Should().Be(insideIfInsideCatch);
+            catchBodyWithIf.FalseSuccessorBlock.Should().Be(afterIfInsideCatch);
+
+            VerifyAllInstructions(insideIfInsideCatch, "cw3", "cw3()");
+            insideIfInsideCatch.SuccessorBlocks.Should().OnlyContain(exit);
+
+            VerifyAllInstructions(afterIfInsideCatch, "cw4", "cw4()");
+            afterIfInsideCatch.SuccessorBlocks.Should().OnlyContain(whileStmt);
+
+            VerifyAllInstructions(whileStmt, "true");
+            whileStmt.TrueSuccessorBlock.Should().Be(doBlock);
+            whileStmt.FalseSuccessorBlock.Should().Be(afterDoWhile);
+
+            VerifyAllInstructions(afterDoWhile, "cw5", "cw5()");
+            afterDoWhile.SuccessorBlocks.Should().OnlyContain(exit);
+
+            exit.Should().BeOfType<ExitBlock>();
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
         public void Cfg_TryCatchFinally_Return_Nested()
         {
             var cfg = Build(@"
