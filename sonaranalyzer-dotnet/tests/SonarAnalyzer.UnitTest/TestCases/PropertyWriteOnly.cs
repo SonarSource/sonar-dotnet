@@ -23,3 +23,31 @@
         }
     }
 }
+
+namespace ReproIssue2390
+{
+    public class A
+    {
+        protected int m = 5;
+        public virtual int M
+        {
+            get { return m; }
+            set { m = value; }
+        }
+    }
+    public class B : A
+    {
+        public override int M // Noncompliant FP #2390
+        {
+            set { m = value + 1; }
+        }
+    }
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            B b = new B();
+            System.Console.WriteLine(b.M);
+        }
+    }
+}
