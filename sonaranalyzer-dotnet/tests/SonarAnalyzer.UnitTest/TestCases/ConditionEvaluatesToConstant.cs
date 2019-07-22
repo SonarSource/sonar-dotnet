@@ -1635,4 +1635,59 @@ namespace Tests.Diagnostics
     }
 
   }
+
+    class Repro2442
+    {
+        /// <summary>
+        /// A certain combination of condition wrongly considers the else code as dead.
+        /// </summary>
+        private static void FalsePositive()
+        {
+            FalsePositive2_Sub(true, false, false);
+            FalsePositive2_Sub(true, false, true);
+
+            FalsePositive2_Sub(true, true, true);
+            FalsePositive2_Sub(true, true, false);
+
+            FalsePositive2_Sub(false, false, false);
+            FalsePositive2_Sub(false, false, true);
+
+            FalsePositive2_Sub(false, true, true);
+            FalsePositive2_Sub(false, true, false);
+
+            // Outcome.
+            Console.WriteLine((_test1 && _test2 && _test3 && _test4) ? "Went through each test condition" : "Missed at least one test condition");
+        }
+
+        private static bool _test1 = false;
+        private static bool _test2 = false;
+        private static bool _test3 = false;
+        private static bool _test4 = false;
+
+        private static void FalsePositive2_Sub(bool testCondition1, bool testCondition2, bool testCondition3)
+        {
+            bool condition1 = testCondition1;
+            bool condition2 = testCondition2;
+            bool condition3 = condition2 && testCondition3;
+
+            if (condition2 && condition3 && condition1)
+            {
+                _test1 = true;
+            }
+            else if (!condition2 && !condition1)
+            {
+                _test2 = true;
+            }
+            else if (condition2
+                && condition1
+                && !condition3) // Noncompliant
+            {
+                _test3 = true;
+            }
+            else
+            { // Secondary
+                _test4 = true;
+            }
+        }
+    }
 }
