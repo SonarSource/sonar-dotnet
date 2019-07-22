@@ -167,4 +167,19 @@ namespace Tests.Diagnostics
             throw new ArgumentNullException(null, string.Empty); // Noncompliant
         }
     }
+
+    class ReproForIssue2488
+    {
+        private string input;
+        public string Response
+        {
+            get => "";
+            set => this.input = value ?? throw new ArgumentNullException(nameof(value));
+        }
+        public string Request
+        {
+            get => this.input;
+            set => this.input = value ?? throw new ArgumentNullException(nameof(this.Request)); // Noncompliant
+        }
+    }
 }
