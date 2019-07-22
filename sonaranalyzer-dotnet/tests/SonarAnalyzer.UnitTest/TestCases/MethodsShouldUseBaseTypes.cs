@@ -809,3 +809,26 @@ namespace Test_26
         }
     }
 }
+
+namespace Test_27
+{
+    public sealed class ReproIssue2479
+    {
+        public void SomeMethod(IReadOnlyList<S3242DeconstructibleType> list) // Noncompliant FP #2479, using IReadOnlyCollection gives compile error
+        {
+            for (var i = 0; i < list.Count; ++i)
+            {
+                var (key, value) = list[i];
+                Console.WriteLine(key + " " + value);
+            }
+        }
+    }
+
+    public class S3242DeconstructibleType
+    {
+        public void Deconstruct(out object key, out object value)
+        {
+            key = value = "x";
+        }
+    }
+}
