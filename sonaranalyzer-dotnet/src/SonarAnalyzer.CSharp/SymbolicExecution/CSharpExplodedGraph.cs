@@ -549,8 +549,6 @@ namespace SonarAnalyzer.SymbolicExecution
             if (ShouldConsumeValue(parenthesizedExpression))
             {
                 var newProgramState = programState.PopValue();
-                System.Diagnostics.Debug.Assert(!newProgramState.HasValue);
-
                 return newProgramState;
             }
 

@@ -1806,11 +1806,61 @@ namespace Tests.Diagnostics
   }
 
   class Program
-  { 
+  {
     public static string CompliantMethod4(string parameter)
     {
       var useParameter = parameter ?? "non-empty";
-      if (useParameter == null || useParameter=="")  // Noncompliant FP #1347
+      if (useParameter == null || useParameter == "")
+        return "non-empty";
+
+      return "empty";
+    }
+
+    public static string CompliantMethod5(string parameter)
+    {
+      var useParameter = parameter ?? "non-empty";
+      if (!string.IsNullOrEmpty(useParameter))
+        return "non-empty";
+
+      return "empty";
+    }
+
+    void NonCompliantMethod4(string s)
+    {
+      string parameter = null;
+      string useParameter = parameter ?? null;
+      string useParameter1 = null ?? "a";
+
+      if (useParameter == null) // Noncompliant
+      {
+        var c = "non-empty";
+      }
+      if (parameter == null) // Noncompliant
+      {
+        var c = "non-empty";
+      }
+      parameter = "a";
+      if (parameter == null) // Noncompliant
+      { // Secondary
+        var c = "non-empty";
+      }
+
+      if (useParameter1 == null) // Noncompliant
+      {
+        var c = "non-empty";
+      }
+      useParameter1 = s;
+      if (useParameter1 == null)
+      {
+        var c = "non-empty";
+      }
+    }
+
+    public static string NonCompliantMethod5()
+    {
+      string parameter = null;
+      string useParameter = parameter ?? "";
+      if (!string.IsNullOrEmpty(useParameter))  // Noncompliant
         return "non-empty"; // Secondary
 
       return "empty";

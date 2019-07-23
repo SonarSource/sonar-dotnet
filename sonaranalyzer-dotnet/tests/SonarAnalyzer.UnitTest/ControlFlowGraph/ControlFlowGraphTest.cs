@@ -1361,7 +1361,7 @@ namespace NS
 
             VerifyAllInstructions(branchBlock, "b");
             VerifyAllInstructions(bNullBlock, "c");
-            VerifyAllInstructions(afterOp, "a = b ?? c");
+            VerifyAllInstructions(afterOp, "b", "a = b ?? c");
         }
 
         [TestMethod]
@@ -1369,22 +1369,27 @@ namespace NS
         public void Cfg_Coalesce_Multiple()
         {
             var cfg = Build("var a = b ?? c ?? d;");
-            VerifyCfg(cfg, 5);
+            VerifyCfg(cfg, 6);
 
             var bBlock = cfg.EntryBlock as BinaryBranchBlock;
             var blocks = cfg.Blocks.ToList();
             var cBlock = blocks[1] as BinaryBranchBlock;
-            var dBlock = blocks[2];
-            var bcdBlock = blocks[3];   // b ?? c ?? d
+            var cResultBlock = blocks[2];
+            var dBlock = blocks[3];
+            var bcdBlock = blocks[4];   // b ?? c ?? d
             var exitBlock = cfg.ExitBlock;
 
             bBlock.SuccessorBlocks.Should().OnlyContainInOrder(cBlock, bcdBlock);
-            cBlock.SuccessorBlocks.Should().OnlyContainInOrder(dBlock, bcdBlock);
+            cBlock.SuccessorBlocks.Should().OnlyContainInOrder(dBlock, cResultBlock);
+            cResultBlock.SuccessorBlocks.Should().OnlyContainInOrder(bcdBlock);
             dBlock.SuccessorBlocks.Should().OnlyContain(bcdBlock);
             bcdBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
 
-            bcdBlock.Instructions.Should().ContainSingle();
-            bcdBlock.Instructions.Should().Contain(i => i.ToString() == "a = b ?? c ?? d");
+            VerifyAllInstructions(bBlock, "b");
+            VerifyAllInstructions(cBlock, "c");
+            VerifyAllInstructions(cResultBlock, "c");
+            VerifyAllInstructions(dBlock, "d");
+            VerifyAllInstructions(bcdBlock, "b", "a = b ?? c ?? d");
         }
 
         #endregion

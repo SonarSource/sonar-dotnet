@@ -1056,7 +1056,10 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private Block BuildCoalesceExpression(BinaryExpressionSyntax expression, Block currentBlock)
         {
             var rightBlock = BuildExpression(expression.Right, CreateBlock(currentBlock));
-            return BuildExpression(expression.Left, CreateBinaryBranchBlock(expression, rightBlock, currentBlock));
+            var leftCurrentBlock = expression.Parent.Kind() == SyntaxKind.EqualsValueClause ? currentBlock : CreateBlock(currentBlock);
+            var leftBlock = BuildExpression(expression.Left, leftCurrentBlock);
+            return BuildExpression(expression.Left,
+                CreateBinaryBranchBlock(expression, rightBlock, leftBlock));
         }
 
         private Block BuildLogicalAndExpression(BinaryExpressionSyntax expression, Block currentBlock)
