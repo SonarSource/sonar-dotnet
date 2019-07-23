@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -79,7 +76,7 @@ namespace SonarAnalyzer
                     /*
                      * Up to now, we do exactly the same for all cases that may have created a BinaryBranchBlock
                      * maybe later, depending on the reason (if vs for?) we'll do something different
-                     * 
+                     *
                     var condStatement = bbb.BranchingNode.Parent;
                     switch (condStatement.Kind())
                     {
@@ -175,6 +172,18 @@ namespace SonarAnalyzer
                     break;
                 case SyntaxKind.NotEqualsExpression:
                     ExportComparison("ne", op);
+                    break;
+                case SyntaxKind.GreaterThanExpression:
+                    ExportComparison("sgt", op);
+                    break;
+                case SyntaxKind.GreaterThanOrEqualExpression:
+                    ExportComparison("sge", op);
+                    break;
+                case SyntaxKind.LessThanExpression:
+                    ExportComparison("slt", op);
+                    break;
+                case SyntaxKind.LessThanOrEqualExpression:
+                    ExportComparison("sle", op);
                     break;
                 case SyntaxKind.IdentifierName:
                     {
