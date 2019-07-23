@@ -34,8 +34,6 @@ namespace SonarAnalyzer
             writer.WriteLine("}");
         }
 
-
-
         private void ExportBlock(Block block, bool isEntryBlock, MethodDeclarationSyntax parentMethod)
         {
             if (isEntryBlock)
@@ -203,6 +201,13 @@ namespace SonarAnalyzer
                         }
                     }
                     break;
+                case SyntaxKind.SimpleAssignmentExpression:
+                    {
+                        var assign = op as AssignmentExpressionSyntax;
+                        var lhs = semanticModel.GetSymbolInfo(assign.Left).Symbol.DeclaringSyntaxReferences[0].GetSyntax();
+                        writer.WriteLine($"cbde.store %{OpId(assign.Right)}, %{OpId(lhs)} : memref<i32>");
+                        break;
+                    }
                 default:
                     writer.WriteLine($"%{OpId(op)} = constant {OpId(op)} : i32 // {op.ToFullString()} ({op.Kind()})");
                     break;
@@ -216,9 +221,8 @@ namespace SonarAnalyzer
 
         }
 
-
-        private TextWriter writer;
-        private SemanticModel semanticModel;
+        private readonly TextWriter writer;
+        private readonly SemanticModel semanticModel;
         private readonly Dictionary<Block, int> blockMap = new Dictionary<Block, int>();
         private int blockCounter = 0;
         private readonly Dictionary<SyntaxNode, int> opMap = new Dictionary<SyntaxNode, int>();
