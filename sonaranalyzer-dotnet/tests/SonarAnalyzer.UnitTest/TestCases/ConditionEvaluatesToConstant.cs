@@ -1530,32 +1530,202 @@ namespace Tests.Diagnostics
         public bool Foo { get; set; }
     }
 
-    class TestNullConditional
+  class TestNullConditional
+  {
+    void First(FooContainer fooContainer, bool bar)
     {
-        void First(FooContainer fooContainer, bool bar)
-        {
-            if (fooContainer?.Foo == false || bar)
-                Console.WriteLine(bar ? "1" : "2");
-            else
-                Console.WriteLine(fooContainer != null // Noncompliant FP (issue #1837)
-                    ?
-                    "3"
-                    :
-                    "4"); // Secondary
-        }
-
-        void Second(FooContainer fooContainer)
-        {
-            if (fooContainer?.Foo != true)
-            {
-                Console.WriteLine("3");
-                if (fooContainer != null) // Noncompliant FP (issue #2164)
-                {
-                    Console.WriteLine("4");
-                }
-            }
-        }
+      if (fooContainer?.Foo == false || bar)
+        Console.WriteLine(bar ? "1" : "2");
+      else
+        Console.WriteLine(fooContainer != null
+            ?
+            "3"
+            :
+            "4");
     }
+
+    void Second(FooContainer fooContainer)
+    {
+      if (fooContainer?.Foo != true)
+      {
+        Console.WriteLine("3");
+        if (fooContainer != null)
+        {
+          Console.WriteLine("4");
+        }
+      }
+    }
+
+    public class Result
+    {
+      public bool Succeed { get; set; }
+
+      public static Result Test()
+      {
+        if (DateTime.Now.Day == 17) // swap value here to test both cases if needed
+        {
+          return new Result();
+        }
+        return null;
+      }
+    }
+
+    public static void Compliant1()
+    {
+      var result = Result.Test();
+
+      if (result == null || !result.Succeed)
+      {
+        Console.WriteLine("shorted");
+        if (result != null)
+        {
+          Console.WriteLine("other");
+        }
+      }
+
+      if (result?.Succeed != true)
+      {
+        Console.WriteLine("shorted");
+        if (result != null)
+        {
+          Console.WriteLine("other");
+        }
+      }
+    }
+
+    public static void NonCompliant1()
+    {
+      Result result = null;
+      if (result?.Succeed != null) // Noncompliant
+      { // Secondary
+        Console.WriteLine("shorted");
+        if (result != null)
+        {
+          Console.WriteLine("other");
+        }
+      }
+    }
+
+    public static void NonCompliant2()
+    {
+      Result result = new Result();
+      if (result?.Succeed != null)
+      {
+        Console.WriteLine("shorted");
+        while (result != null) // Noncompliant
+        {
+          Console.WriteLine("other");
+        }
+      }
+    }
+
+    public class A
+    {
+      public bool booleanVal { get; set; }
+    }
+
+    public static void Compliant2()
+    {
+      A aObj = null;
+      if (aObj?.booleanVal ?? false)
+      {
+        Console.WriteLine("a");
+      }
+    }
+
+    public static void NonCompliant3()
+    {
+      A aObj = null;
+      if (aObj?.booleanVal == null) // Noncompliant
+      {
+        Console.WriteLine("a");
+      }
+
+      if (aObj?.booleanVal != null) // Noncompliant
+      { // Secondary
+        Console.WriteLine("a");
+      }
+    }
+
+    public static void Compliant3(A a)
+    {
+
+      if (a?.booleanVal == true)
+      {
+        Console.WriteLine("Compliant");
+        return;
+      }
+
+      if (a != null)  // Compliant
+      {
+      }
+    }
+
+    public static void NonCompliant4(A a)
+    {
+
+      if (a?.booleanVal == null)
+      {
+        Console.WriteLine("Compliant");
+        return;
+      }
+
+      if (a != null) // Noncompliant
+      {
+      }
+    }
+
+    public static void Compliant4(A a)
+    {
+      if (a?.booleanVal == null)
+      {
+        Console.WriteLine("Compliant");
+      }
+
+      if (a != null) // Compliant
+      {
+      }
+    }
+
+    public static void Compliant5(A a)
+    {
+      while (a?.booleanVal == null ? true : false)
+      {
+        Console.WriteLine("Compliant");
+      }
+    }
+
+    public static void NonCompliant5()
+    {
+      A a = null;
+      while (a?.booleanVal == null ? true : false) // Noncompliant
+      { // Secondary@-1
+        Console.WriteLine("Compliant");
+      }
+    }
+
+    public class S
+    {
+      public string str=null;
+    }
+
+    public static void Compliant6(S sObj)
+    {     
+      if (sObj?.str?.Length > 2)
+      {
+        Console.WriteLine("a");
+      }
+    }
+
+    public static void NonCompliant6()
+    {
+      S sObj = null; 
+      if (sObj?.str?.Length > 2) // Noncompliant
+      { // Secondary
+        Console.WriteLine("a");
+      }
+    }
+  }
 
   public class TestNullCoalescing
   {
@@ -1589,7 +1759,7 @@ namespace Tests.Diagnostics
 
     public void CompliantMethod3(bool? input, bool input1)
     {
-    
+
       if (input ?? false ? input1 : false) // Compliant S2583
       {
         Console.WriteLine("input is true");
@@ -1601,7 +1771,7 @@ namespace Tests.Diagnostics
       bool? input = true;
       if (input ?? false) // Noncompliant
       {
-        Console.WriteLine("input is true"); 
+        Console.WriteLine("input is true");
       }
       else
       { // Secondary
@@ -1633,6 +1803,30 @@ namespace Tests.Diagnostics
         Console.WriteLine("input is true");
       }
     }
+  }
+
+  class Program
+  { 
+    public static string CompliantMethod4(string parameter)
+    {
+      var useParameter = parameter ?? "non-empty";
+      if (useParameter == null || useParameter=="")  // Noncompliant FP #1347
+        return "non-empty"; // Secondary
+
+      return "empty";
+    }
+
+    static void CompliantMethod5(string[] args)
+    {
+      var obj = args.Length > 0 ? new Program() : null;
+
+      if (obj?.Cond ?? false)
+      {
+        Console.WriteLine("Foo");
+        Console.WriteLine("Bar");
+      }
+    }
+    private bool Cond = new Random().Next() % 2 == 1;
 
   }
 

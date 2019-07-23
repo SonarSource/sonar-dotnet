@@ -1565,11 +1565,11 @@ namespace NS
 
             branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ConditionalAccessExpression);
 
-            branchBlock.Instructions.Should().ContainSingle();
-            branchBlock.Instructions.Should().Contain(i => i.ToString() == "o");
+            oNotNull.Instructions.Should().ContainSingle();
+            oNotNull.Instructions.Should().Contain(i => i.ToString() == "o");
 
-            VerifyAllInstructions(branchBlock, "o");
-            VerifyAllInstructions(oNotNull, "method", ".method" /* This is equivalent to o.method */, "1", ".method(1)");
+            VerifyAllInstructions(oNotNull, "o");
+            VerifyAllInstructions(branchBlock, "method", ".method" /* This is equivalent to o.method */, "1", ".method(1)");
             VerifyAllInstructions(condAccess, "a = o?.method(1)");
         }
 
@@ -1578,19 +1578,112 @@ namespace NS
         public void Cfg_ConditionalAccessNested()
         {
             var cfg = Build("var a = o?.method()?[10];");
-            VerifyCfg(cfg, 5);
+            VerifyCfg(cfg, 6);
 
-            var branchBlock = cfg.EntryBlock as BinaryBranchBlock;
+            var branchBlock1 = cfg.EntryBlock as BinaryBranchBlock;
             var blocks = cfg.Blocks.ToList();
-            var oNotNull = blocks[1] as BinaryBranchBlock;
-            var methodNotNull = blocks[2];
-            var assignment = blocks[3];
+            var method = blocks[1];
+            var branchBlock2 = blocks[2] as BinaryBranchBlock;
+            var o = blocks[3];
+            var assignment = blocks[4];
             var exitBlock = cfg.ExitBlock;
 
-            branchBlock.SuccessorBlocks.Should().OnlyContainInOrder(assignment, oNotNull);
-            oNotNull.SuccessorBlocks.Should().OnlyContainInOrder(assignment, methodNotNull);
-            methodNotNull.SuccessorBlocks.Should().OnlyContain(assignment);
+            VerifyAllInstructions(branchBlock1, "10", "[10]");
+            VerifyAllInstructions(method, "method", ".method", ".method()");
+            VerifyAllInstructions(branchBlock2);
+            VerifyAllInstructions(o, "o");
+            VerifyAllInstructions(assignment, "a = o?.method()?[10]");
+
+            branchBlock1.TrueSuccessorBlock.Should().Be(branchBlock2);
+            branchBlock1.FalseSuccessorBlock.Should().Be(method);
+            method.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2);
+            branchBlock2.TrueSuccessorBlock.Should().Be(assignment);
+            branchBlock2.FalseSuccessorBlock.Should().Be(o);
+            o.SuccessorBlocks.Should().OnlyContain(assignment);
             assignment.SuccessorBlocks.Should().OnlyContain(exitBlock);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_ConditionalAccess_Coalesce()
+        {
+            var cfg = Build("if(aObj?.booleanVal ?? false)");
+            VerifyCfg(cfg, 7);
+
+            var branchBlock1 = cfg.EntryBlock as BinaryBranchBlock;
+            var blocks = cfg.Blocks.ToList();
+            var aObj = blocks[1];
+            var branchBlock2 = blocks[2] as BinaryBranchBlock;
+            var coalesceBranchingNode = blocks[3];
+            var falseBlock  = blocks[4] as BinaryBranchBlock;
+            var identifierName = blocks[5];
+            var exitBlock = cfg.ExitBlock;
+
+            branchBlock1.TrueSuccessorBlock.Should().Be(branchBlock2);
+            branchBlock1.FalseSuccessorBlock.Should().Be(aObj);
+            aObj.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2);
+            branchBlock2.TrueSuccessorBlock.Should().Be(falseBlock);
+            branchBlock2.FalseSuccessorBlock.Should().Be(coalesceBranchingNode);
+            coalesceBranchingNode.SuccessorBlocks.Should().OnlyContainInOrder(identifierName, exitBlock);
+            falseBlock .SuccessorBlocks.Should().OnlyContainInOrder(identifierName, exitBlock);
+            identifierName.SuccessorBlocks.Should().OnlyContain(exitBlock);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_ConditionalAccess_Conditional()
+        {
+            var cfg = Build("a?.booleanVal == null ? true : false");
+            VerifyCfg(cfg, 6);
+
+            var branchBlock1 = cfg.EntryBlock as BinaryBranchBlock;
+            var blocks = cfg.Blocks.ToList();
+            var a = blocks[1];
+            var branchBlock2 = blocks[2] as BinaryBranchBlock;
+            var trueBlock = blocks[3];
+            var falseBlock  = blocks[4];
+            var exitBlock = cfg.ExitBlock;
+
+            VerifyAllInstructions(branchBlock1, "booleanVal", ".booleanVal");
+            VerifyAllInstructions(a, "a");
+            VerifyAllInstructions(branchBlock2, "null", "a?.booleanVal == null");
+            VerifyAllInstructions(trueBlock, "true");
+            VerifyAllInstructions(falseBlock, "false");
+
+            branchBlock1.TrueSuccessorBlock.Should().Be(branchBlock2);
+            branchBlock1.FalseSuccessorBlock.Should().Be(a);
+            a.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2);
+            branchBlock2.TrueSuccessorBlock.Should().Be(trueBlock);
+            branchBlock2.FalseSuccessorBlock.Should().Be(falseBlock);
+            trueBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            falseBlock .SuccessorBlocks.Should().OnlyContain(exitBlock);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_ConditionalAccess_is()
+        {
+            var cfg = Build("if (a?.booleanVal is null)");
+            VerifyCfg(cfg, 5);
+
+            var branchBlock1 = cfg.EntryBlock as BinaryBranchBlock;
+            var blocks = cfg.Blocks.ToList();
+            var a = blocks[1];
+            var branchBlock2 = blocks[2] as BinaryBranchBlock;
+            var identifierName = blocks[3];
+            var exitBlock = cfg.ExitBlock;
+
+            VerifyAllInstructions(branchBlock1, "booleanVal", ".booleanVal");
+            VerifyAllInstructions(a, "a");
+            VerifyAllInstructions(branchBlock2, "null", "a?.booleanVal is null");
+            VerifyAllInstructions(identifierName, "");
+
+            branchBlock1.TrueSuccessorBlock.Should().Be(branchBlock2);
+            branchBlock1.FalseSuccessorBlock.Should().Be(a);
+            a.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2);
+            branchBlock2.TrueSuccessorBlock.Should().Be(identifierName);
+            branchBlock2.FalseSuccessorBlock.Should().Be(exitBlock);
+            identifierName.SuccessorBlocks.Should().OnlyContain(exitBlock);
         }
 
         #endregion

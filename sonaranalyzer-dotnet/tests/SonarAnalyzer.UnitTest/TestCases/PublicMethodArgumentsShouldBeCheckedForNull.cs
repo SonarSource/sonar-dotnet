@@ -91,6 +91,24 @@ namespace Tests.Diagnostics
         public Program(int i) { }
 
         public Program(string s) : this(s.Length) { }   // Noncompliant {{Refactor this constructor to avoid using members of parameter 's' because it could be null.}}
+
+      public void NonCompliant1(object o)
+      {
+        var c = o?.ToString()?.IsNormalized();
+        if (c == null)
+        {
+          o.GetType().GetMethods();  // Noncompliant 
+        }
+      }
+
+      public void Compliant1(object o)
+      {
+        var c = o?.ToString()?.IsNormalized();
+        if (c != null)
+        {
+          o.GetType().GetMethods();
+        }
+      }
     }
 
     public class GuardedTests

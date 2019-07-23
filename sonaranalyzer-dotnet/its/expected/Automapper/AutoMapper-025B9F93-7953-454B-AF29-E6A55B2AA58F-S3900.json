@@ -327,6 +327,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'typeMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ICtorParamConfigurationExpression.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  72,
+"endLine":  59,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'propertyOrField' before using it.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
