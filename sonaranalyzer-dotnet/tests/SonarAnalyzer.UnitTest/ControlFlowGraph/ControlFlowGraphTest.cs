@@ -1588,9 +1588,17 @@ namespace NS
             var assignment = blocks[4];
             var exitBlock = cfg.ExitBlock;
 
-            branchBlock1.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2, method);
+            VerifyAllInstructions(branchBlock1, "10", "[10]");
+            VerifyAllInstructions(method, "method", ".method", ".method()");
+            VerifyAllInstructions(branchBlock2);
+            VerifyAllInstructions(o, "o");
+            VerifyAllInstructions(assignment, "a = o?.method()?[10]");
+
+            branchBlock1.TrueSuccessorBlock.Should().Be(branchBlock2);
+            branchBlock1.FalseSuccessorBlock.Should().Be(method);
             method.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2);
-            branchBlock2.SuccessorBlocks.Should().OnlyContainInOrder(assignment, o);
+            branchBlock2.TrueSuccessorBlock.Should().Be(assignment);
+            branchBlock2.FalseSuccessorBlock.Should().Be(o);
             o.SuccessorBlocks.Should().OnlyContain(assignment);
             assignment.SuccessorBlocks.Should().OnlyContain(exitBlock);
         }
@@ -1607,15 +1615,17 @@ namespace NS
             var aObj = blocks[1];
             var branchBlock2 = blocks[2] as BinaryBranchBlock;
             var coalesceBranchingNode = blocks[3];
-            var flse = blocks[4] as BinaryBranchBlock;
+            var falseBlock  = blocks[4] as BinaryBranchBlock;
             var identifierName = blocks[5];
             var exitBlock = cfg.ExitBlock;
 
-            branchBlock1.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2, aObj);
+            branchBlock1.TrueSuccessorBlock.Should().Be(branchBlock2);
+            branchBlock1.FalseSuccessorBlock.Should().Be(aObj);
             aObj.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2);
-            branchBlock2.SuccessorBlocks.Should().OnlyContainInOrder(flse, coalesceBranchingNode);
+            branchBlock2.TrueSuccessorBlock.Should().Be(falseBlock);
+            branchBlock2.FalseSuccessorBlock.Should().Be(coalesceBranchingNode);
             coalesceBranchingNode.SuccessorBlocks.Should().OnlyContainInOrder(identifierName, exitBlock);
-            flse.SuccessorBlocks.Should().OnlyContainInOrder(identifierName, exitBlock);
+            falseBlock .SuccessorBlocks.Should().OnlyContainInOrder(identifierName, exitBlock);
             identifierName.SuccessorBlocks.Should().OnlyContain(exitBlock);
         }
 
@@ -1630,15 +1640,23 @@ namespace NS
             var blocks = cfg.Blocks.ToList();
             var a = blocks[1];
             var branchBlock2 = blocks[2] as BinaryBranchBlock;
-            var tru = blocks[3];
-            var flse = blocks[4];
+            var trueBlock = blocks[3];
+            var falseBlock  = blocks[4];
             var exitBlock = cfg.ExitBlock;
 
-            branchBlock1.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2, a);
+            VerifyAllInstructions(branchBlock1, "booleanVal", ".booleanVal");
+            VerifyAllInstructions(a, "a");
+            VerifyAllInstructions(branchBlock2, "null", "a?.booleanVal == null");
+            VerifyAllInstructions(trueBlock, "true");
+            VerifyAllInstructions(falseBlock, "false");
+
+            branchBlock1.TrueSuccessorBlock.Should().Be(branchBlock2);
+            branchBlock1.FalseSuccessorBlock.Should().Be(a);
             a.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2);
-            branchBlock2.SuccessorBlocks.Should().OnlyContainInOrder(tru, flse);
-            tru.SuccessorBlocks.Should().OnlyContain(exitBlock);
-            flse.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            branchBlock2.TrueSuccessorBlock.Should().Be(trueBlock);
+            branchBlock2.FalseSuccessorBlock.Should().Be(falseBlock);
+            trueBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            falseBlock .SuccessorBlocks.Should().OnlyContain(exitBlock);
         }
 
         [TestMethod]
@@ -1655,9 +1673,16 @@ namespace NS
             var identifierName = blocks[3];
             var exitBlock = cfg.ExitBlock;
 
-            branchBlock1.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2, a);
+            VerifyAllInstructions(branchBlock1, "booleanVal", ".booleanVal");
+            VerifyAllInstructions(a, "a");
+            VerifyAllInstructions(branchBlock2, "null", "a?.booleanVal is null");
+            VerifyAllInstructions(identifierName, "");
+
+            branchBlock1.TrueSuccessorBlock.Should().Be(branchBlock2);
+            branchBlock1.FalseSuccessorBlock.Should().Be(a);
             a.SuccessorBlocks.Should().OnlyContainInOrder(branchBlock2);
-            branchBlock2.SuccessorBlocks.Should().OnlyContainInOrder(identifierName, exitBlock);
+            branchBlock2.TrueSuccessorBlock.Should().Be(identifierName);
+            branchBlock2.FalseSuccessorBlock.Should().Be(exitBlock);
             identifierName.SuccessorBlocks.Should().OnlyContain(exitBlock);
         }
 

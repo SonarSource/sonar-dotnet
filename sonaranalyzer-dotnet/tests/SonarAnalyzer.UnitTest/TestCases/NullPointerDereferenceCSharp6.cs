@@ -127,16 +127,16 @@ namespace Tests.Diagnostics
     }
   }
 
-  public class S2259
+  public class ReproForIssue2338
   {
     public ConsoleColor Color { get; set; }
 
-    public void Method1(S2259 obj)
+    public void Method1(ReproForIssue2338 obj)
     {
       switch (obj?.Color)
       {
         case null:
-          Console.ForegroundColor = obj.Color; // FN @2338
+          Console.ForegroundColor = obj.Color; // FN #2338
           break;
         case ConsoleColor.Red:
           Console.ForegroundColor = obj.Color; //compliant
@@ -147,7 +147,7 @@ namespace Tests.Diagnostics
       }
     }
 
-    public void Method2(S2259 obj)
+    public void Method2(ReproForIssue2338 obj)
     {
       switch (obj?.Color)
       {
@@ -155,7 +155,7 @@ namespace Tests.Diagnostics
           Console.ForegroundColor = obj.Color; //compliant
           break;
         default:
-          Console.WriteLine($"Color {obj.Color} is not supported."); // FN @2338
+          Console.WriteLine($"Color {obj.Color} is not supported."); // FN #2338
           break;
       }
     }
