@@ -1,7 +1,12 @@
 ﻿extern alias csharp;
 
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Windows;
 using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.ControlFlowGraph;
 
@@ -10,6 +15,31 @@ namespace SonarAnalyzer.UnitTest
     [TestClass]
     public class MlirExportTest
     {
+        private static string mlirCheckerPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "mlir-cbde.exe");
+        [ClassInitialize]
+        public static void checkExecutableExists(TestContext tc)
+        {
+            Assert.IsTrue(File.Exists(mlirCheckerPath), "We need mlir-cbde.exe to validate the generated IR");
+        }
+
+        public static void ValidateIR(string path)
+        {
+            var pi = new ProcessStartInfo
+            {
+                FileName = mlirCheckerPath,
+                Arguments = path,
+                UseShellExecute = false,
+                // RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
+            var p =Process.Start(pi);
+            p.WaitForExit();
+            if (p.ExitCode != 0)
+            {
+                Assert.Fail(p.StandardError.ReadToEnd());
+            }
+        }
+
         [TestMethod]
         public void SimpleMethod()
         {
@@ -24,7 +54,7 @@ class C
     void Empty() {}
     void Nop(int i) { int j = 2*i;}
 
-    int Cond(int i) { return i%2 == 0 ? i/2 : i*3 +1; }
+    //int Cond(int i) { return i%2 == 0 ? i/2 : i*3 +1; }
     int Cond2(int i)
     {
         if (i%2 == 0)
@@ -34,50 +64,38 @@ class C
     }
 }
 ";
-            using (var writer = new StreamWriter(Path.Combine(Path.GetTempPath(), "csharp.mlir")))
-            {
-                ExportFunction(code, writer, "Empty");
-                ExportFunction(code, writer, "Nop");
-                ExportFunction(code, writer, "Mult");
-                ExportFunction(code, writer, "Cond");
-                ExportFunction(code, writer, "Cond2");
-            }
-
-            var dot = CfgSerializer.Serialize("Cond2", GetCfgForMethod(code, "Cond2"));
+            ValidateCodeGeneration(code);
         }
 
-        private static void ExportFunction(string code, TextWriter writer, string functionName)
+        private static void ExportMethod(string code, TextWriter writer, string functionName)
         {
             (var method, var semanticModel) = TestHelper.Compile(code).GetMethod(functionName);
             var exporter = new MLIRExporter(writer, semanticModel);
             exporter.ExportFunction(method);
         }
-        protected IControlFlowGraph GetCfgForMethod(string code, string methodName)
-        {
-            (var method, var semanticModel) = TestHelper.Compile(code).GetMethod(methodName);
 
-            return CSharpControlFlowGraph.Create(method.Body, semanticModel);
+        private static void ExportAllMethods(string code, TextWriter writer)
+        {
+            (var ast, var semanticModel) = TestHelper.Compile(code);
+            foreach(var method in ast.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
+            {
+                var exporter = new MLIRExporter(writer, semanticModel);
+                exporter.ExportFunction(method);
+            }
+
         }
 
-    }
-}
+        private void ValidateCodeGeneration(string code)
+        {
+            var path = Path.Combine(Path.GetTempPath(), $"csharp.{TestContext.TestName}.mlir");
+            using (var writer = new StreamWriter(path))
+            {
+                ExportAllMethods(code, writer);
+            }
+            ValidateIR(path);
+        }
 
-public class C
-{
-    public int Mult(int i, int j)
-    {
-        return i * j;
-    }
-
-    public void Empty() { }
-    void Nop(int i) { int j = 2 * i; }
-    public int Cond(int i) { return i % 2 == 0 ? i / 2 : i * 3 + 1; }
-    public int Cond2(int i)
-    {
-        if (i % 2 == 0)
-            return i / 2;
-        else
-            return i * 3 + 1;
+        public TestContext TestContext { get; set; } // Set automatically by MsTest
     }
 }
 
