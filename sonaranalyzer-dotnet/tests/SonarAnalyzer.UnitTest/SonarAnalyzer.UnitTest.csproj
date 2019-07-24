@@ -98,6 +98,9 @@
     <Content Include="ResourceTests\ProjectOutFolderPath.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="..\..\..\..\SonarCBDE\build\mlirChecker\Release\mlir-cbde.exe" Link="mlir-cbde.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Common\Resources\input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -119,6 +122,10 @@
     <ProjectReference Include="..\..\src\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.csproj">
       <Aliases>global,vbnet</Aliases>
     </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="PresentationFramework" />
   </ItemGroup>
 
 </Project>
