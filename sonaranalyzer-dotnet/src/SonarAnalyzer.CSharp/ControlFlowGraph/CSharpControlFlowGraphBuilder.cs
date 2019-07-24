@@ -872,6 +872,13 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private Block BuildJumpToExitStatement(StatementSyntax statement, Block currentBlock, ExpressionSyntax expression = null)
         {
+            // When there is a `throw` inside a `try`, and there is a `catch` with a filter,
+            // the `throw` block should point to both the `catch` and the `exit` blocks.
+            if (currentBlock.SuccessorBlocks.Any(b => b is BinaryBranchBlock x && x.BranchingNode.IsKind(SyntaxKind.CatchFilterClause)) &&
+                currentBlock.SuccessorBlocks.Contains(this.ExitTarget.Peek()))
+            {
+                return BuildExpression(expression, currentBlock);
+            }
             return BuildExpression(expression, CreateJumpBlock(statement, this.ExitTarget.Peek(), currentBlock));
         }
 

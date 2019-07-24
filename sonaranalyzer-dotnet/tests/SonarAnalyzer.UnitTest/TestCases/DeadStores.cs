@@ -471,6 +471,8 @@ namespace Tests.Diagnostics
 
     public class ReproGithubIssue697
     {
+        private bool DoStuff() => true;
+
         public void Foo()
         {
             bool shouldCatch = false;
@@ -484,6 +486,25 @@ namespace Tests.Diagnostics
                 Console.WriteLine("Error");
             }
         }
+
+        public void Bar(bool cond)
+        {
+            bool shouldCatch = false;
+            try
+            {
+                DoStuff();
+                shouldCatch = true; // ok, read in catch filter
+                if (cond)
+                {
+                    throw new InvalidOperationException("bar");
+                }
+            }
+            catch (Exception) when (shouldCatch)
+            {
+                Console.WriteLine("Error");
+            }
+        }
+
     }
 
     public class ReproGithubIssue2393

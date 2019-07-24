@@ -1056,6 +1056,30 @@ namespace NS
 
         [TestMethod]
         [TestCategory("CFG")]
+        public void Cfg_Return_JustBeforeExit()
+        {
+            var cfg = Build(@"
+            return;
+            cw0();
+            return;");
+
+            VerifyCfg(cfg, 3);
+
+            var blocks = cfg.Blocks.ToList();
+
+            var block1 = (JumpBlock) blocks[0];
+            var block2 = (SimpleBlock) blocks[1];
+            var exit = (ExitBlock) blocks.Last();
+
+            block1.Instructions.Should().BeEmpty();
+            block1.SuccessorBlocks.Should().OnlyContain(exit);
+
+            VerifyAllInstructions(block2, "cw0", "cw0()");
+            block2.SuccessorBlocks.Should().OnlyContain(exit);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
         public void Cfg_Throw_Value()
         {
             var cfg = Build($"if (true) {{ var y = 12; {ExpressionThrow}; }} var x = 11;");
