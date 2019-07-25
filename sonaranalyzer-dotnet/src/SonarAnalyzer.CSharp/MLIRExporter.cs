@@ -22,7 +22,7 @@ namespace SonarAnalyzer
         public void ExportFunction(MethodDeclarationSyntax method)
         {
             blockCounter = 0;
-            var returnType = semanticModel.GetTypeInfo(method.ReturnType).Type.SpecialType == SpecialType.System_Void ?
+            var returnType = HasNoReturn(method) ?
                 "()" :
                 "i32";
             writer.WriteLine($"func @{method.Identifier.ValueText}{GetAnonymousArgumentsString(method)} -> {returnType} {{");
@@ -32,6 +32,11 @@ namespace SonarAnalyzer
                 ExportBlock(block, block == cfg.EntryBlock, method);
             }
             writer.WriteLine("}");
+        }
+
+        private bool HasNoReturn(MethodDeclarationSyntax method)
+        {
+            return semanticModel.GetTypeInfo(method.ReturnType).Type.SpecialType == SpecialType.System_Void;
         }
 
         private void ExportBlock(Block block, bool isEntryBlock, MethodDeclarationSyntax parentMethod)
@@ -46,8 +51,9 @@ namespace SonarAnalyzer
                     writer.WriteLine($"cbde.store %{param.Identifier.ValueText}, %{id} : memref<i32>");
                 }
             }
-            else if (block is ExitBlock)
+            else if (block is ExitBlock && !HasNoReturn(parentMethod))
             {
+                // If the method returns, it will have an explicit return, no need for this spurious block
                 return;
             }
             else
@@ -100,9 +106,10 @@ namespace SonarAnalyzer
                     }*/
                     break;
                 case SimpleBlock sb:
-                    writer.WriteLine("return");
+                    writer.WriteLine($"br ^{BlockId(sb.SuccessorBlock)}");
                     break;
                 case ExitBlock eb:
+                    // If we reach this point, it means the function has no return, we must manually add one
                     writer.WriteLine("return");
                     break;
 
