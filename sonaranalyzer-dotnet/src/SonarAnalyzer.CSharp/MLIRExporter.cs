@@ -22,6 +22,12 @@ namespace SonarAnalyzer
 
         public void ExportFunction(MethodDeclarationSyntax method)
         {
+            if (IsTooClomplexForMLIR(method))
+            {
+            writer.WriteLine($"// Skipping function {method.Identifier.ValueText}{GetAnonymousArgumentsString(method)}, it contains poisonous unsupported syntaxes");
+            writer.WriteLine();
+                return;
+            }
             blockCounter = 0;
             var returnType = HasNoReturn(method) ?
                 "()" :
@@ -35,6 +41,15 @@ namespace SonarAnalyzer
                 ExportBlock(block, block == cfg.EntryBlock, method);
             }
             writer.WriteLine("}");
+        }
+
+        private bool IsTooClomplexForMLIR(MethodDeclarationSyntax method)
+        {
+            return method.DescendantNodes().Any(n =>
+            n.IsKind(SyntaxKind.ForEachStatement) ||
+            n.IsKind(SyntaxKind.AwaitExpression) ||
+            n.IsKind(SyntaxKind.YieldReturnStatement) ||
+            n.IsKind(SyntaxKind.YieldBreakStatement));
         }
 
         private void CreateEntryBlock(MethodDeclarationSyntax method)
@@ -149,6 +164,9 @@ namespace SonarAnalyzer
                 case SyntaxKind.ForStatement:
                     var forStmt = bbb.BranchingNode as ForStatementSyntax;
                     return forStmt.Condition;
+                case SyntaxKind.ForEachStatement:
+                    Debug.Assert(false, "Not ready to handle those");
+                    return null;
                 default:
                     return bbb.BranchingNode;
             }
