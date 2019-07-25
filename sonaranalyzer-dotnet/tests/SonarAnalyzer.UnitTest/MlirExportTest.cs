@@ -132,6 +132,58 @@ int WithReturn(int i) {
         {
             return CfgSerializer.Serialize(methodName, GetCfgForMethod(code, methodName));
         }
+
+        [TestMethod]
+        public void Loops()
+        {
+            var code = @"
+private int WhileLoop(int i)
+{
+    while (i<100)
+    {
+        i = i * i;
+    }
+    return i;
+}
+private int WhileLoopWithBreak(int i)
+{
+    while (i < 100)
+    {
+        i = i * i;
+        if (i == 49)
+        {
+            break;
+        }
+    }
+    return i;
+}
+";
+            var dot = GetCfgGraph(code, "WhileLoopWithBreak");
+            ValidateCodeGeneration(code);
+
+        }
+
+        private int WhileLoop(int i)
+        {
+            while (i<100)
+            {
+                i = i * i;
+            }
+            return i;
+        }
+        private int WhileLoopWithBreak(int i)
+        {
+            while (i < 100)
+            {
+                i = i * i;
+                if (i == 49)
+                {
+                    break;
+                }
+            }
+            return i;
+        }
+
     }
 }
 
