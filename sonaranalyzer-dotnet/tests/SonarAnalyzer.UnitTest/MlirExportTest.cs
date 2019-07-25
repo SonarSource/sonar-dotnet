@@ -94,8 +94,44 @@ class C
             }
             ValidateIR(path);
         }
+        protected IControlFlowGraph GetCfgForMethod(string code, string methodName)
+        {
+            (var method, var semanticModel) = TestHelper.Compile(code).GetMethod(methodName);
+
+            return CSharpControlFlowGraph.Create(method.Body, semanticModel);
+        }
+
 
         public TestContext TestContext { get; set; } // Set automatically by MsTest
+
+        [TestMethod]
+        public void IfThenElse()
+        {
+            var code = @"
+void UselessCondition(int i) {
+    if (i == 0) {
+        if (i != 0) {
+            int j = 2 * i;
+        }
+    }
+}
+
+int WithReturn(int i) {
+    if (i == 0) {
+        if (i != 0) {
+            int j = 2 * i;
+        }
+    }
+    return i;
+}";
+            var dot = GetCfgGraph(code, "WithReturn");
+            ValidateCodeGeneration(code);
+        }
+
+        private string GetCfgGraph(string code, string methodName)
+        {
+            return CfgSerializer.Serialize(methodName, GetCfgForMethod(code, methodName));
+        }
     }
 }
 
