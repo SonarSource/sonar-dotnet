@@ -109,11 +109,8 @@ namespace SonarAnalyzer
                     writer.WriteLine($"br ^{BlockId(sb.SuccessorBlock)}");
                     break;
                 case ExitBlock eb:
-                    if (HasNoReturn(parentMethod))
-                    {
-                        // We need a return even if not written by the user...
-                        writer.WriteLine("return");
-                    }
+                    // If we reach this point, it means the function has no return, we must manually add one
+                    writer.WriteLine("return");
                     break;
 
             }

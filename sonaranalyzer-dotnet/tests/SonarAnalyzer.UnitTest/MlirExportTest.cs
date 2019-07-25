@@ -124,8 +124,13 @@ int WithReturn(int i) {
     }
     return i;
 }";
-            var dot = CfgSerializer.Serialize("WithReturn", GetCfgForMethod(code, "UselessCondition"));
+            var dot = GetCfgGraph(code, "WithReturn");
             ValidateCodeGeneration(code);
+        }
+
+        private string GetCfgGraph(string code, string methodName)
+        {
+            return CfgSerializer.Serialize(methodName, GetCfgForMethod(code, methodName));
         }
     }
 }
