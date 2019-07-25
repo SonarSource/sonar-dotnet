@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -26,12 +27,27 @@ namespace SonarAnalyzer
                 "()" :
                 "i32";
             writer.WriteLine($"func @{method.Identifier.ValueText}{GetAnonymousArgumentsString(method)} -> {returnType} {{");
+            CreateEntryBlock(method);
+
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
             foreach (var block in cfg.Blocks)
             {
                 ExportBlock(block, block == cfg.EntryBlock, method);
             }
             writer.WriteLine("}");
+        }
+
+        private void CreateEntryBlock(MethodDeclarationSyntax method)
+        {
+            writer.WriteLine($"^entry {GetArgumentsString(method)}:");
+            foreach (var param in method.ParameterList.Parameters)
+            {
+                var id = OpId(param);
+                writer.WriteLine($"%{id} = cbde.alloca i32 : () -> memref<i32>");
+                writer.WriteLine($"cbde.store %{param.Identifier.ValueText}, %{id} : memref<i32>");
+            }
+            writer.WriteLine("br ^0");
+            writer.WriteLine();
         }
 
         private bool HasNoReturn(MethodDeclarationSyntax method)
@@ -41,17 +57,7 @@ namespace SonarAnalyzer
 
         private void ExportBlock(Block block, bool isEntryBlock, MethodDeclarationSyntax parentMethod)
         {
-            if (isEntryBlock)
-            {
-                writer.WriteLine($"^{BlockId(block)} {GetArgumentsString(parentMethod)}: // {block.GetType().Name}");
-                foreach(var param in parentMethod.ParameterList.Parameters)
-                {
-                    var id = OpId(param);
-                    writer.WriteLine($"%{id} = cbde.alloca i32 : () -> memref<i32>");
-                    writer.WriteLine($"cbde.store %{param.Identifier.ValueText}, %{id} : memref<i32>");
-                }
-            }
-            else if (block is ExitBlock && !HasNoReturn(parentMethod))
+            if (block is ExitBlock && !HasNoReturn(parentMethod))
             {
                 // If the method returns, it will have an explicit return, no need for this spurious block
                 return;
@@ -70,13 +76,29 @@ namespace SonarAnalyzer
             switch (block)
             {
                 case JumpBlock jb:
-                    Debug.Assert(jb.JumpNode is ReturnStatementSyntax);
-                    var ret = jb.JumpNode as ReturnStatementSyntax;
-                    writer.WriteLine($"return %{OpId(ret.Expression)} : i32");
+                    switch (jb.JumpNode)
+                    {
+                        case ReturnStatementSyntax ret:
+                            writer.WriteLine($"return %{OpId(ret.Expression)} : i32");
+                            break;
+                        case BreakStatementSyntax _:
+                            writer.WriteLine($"br ^{BlockId(jb.SuccessorBlock)} // break");
+                            break;
+                        case ContinueStatementSyntax _:
+                            writer.WriteLine($"br ^{BlockId(jb.SuccessorBlock)} // continue");
+                            break;
+                        default:
+                            Debug.Assert(false, "Unknown kind of JumpBlock");
+                            break;
+                    }
                     break;
                 case BinaryBranchBlock bbb:
-                    // bbb.BranchingNode represent the condition, not the statement that holds the condition
-                    writer.WriteLine($"cond_br %{OpId(bbb.BranchingNode)}, ^{BlockId(bbb.TrueSuccessorBlock)}, ^{BlockId(bbb.FalseSuccessorBlock)}");
+                    var cond = GetCondition(bbb);
+                    // For an if or a while, bbb.BranchingNode represent the condition, not the statement that holds the condition
+                    // For a for, bbb.BranchingNode represents the for. Since for is a statement, not an expression, if we
+                    // see a for, we know it's at the top level of the expression tree, so it cannot be a for inside of a if condition
+
+                    writer.WriteLine($"cond_br %{OpId(cond)}, ^{BlockId(bbb.TrueSuccessorBlock)}, ^{BlockId(bbb.FalseSuccessorBlock)}");
                     /*
                      * Up to now, we do exactly the same for all cases that may have created a BinaryBranchBlock
                      * maybe later, depending on the reason (if vs for?) we'll do something different
@@ -116,6 +138,22 @@ namespace SonarAnalyzer
             }
             writer.WriteLine();
         }
+
+        private SyntaxNode GetCondition(BinaryBranchBlock bbb)
+        {
+            // For an if or a while, bbb.BranchingNode represent the condition, not the statement that holds the condition
+            // For a for, bbb.BranchingNode represents the for. Since for is a statement, not an expression, if we
+            // see a for, we know it's at the top level of the expression tree, so it cannot be a for inside of a if condition
+            switch (bbb.BranchingNode.Kind())
+            {
+                case SyntaxKind.ForStatement:
+                    var forStmt = bbb.BranchingNode as ForStatementSyntax;
+                    return forStmt.Condition;
+                default:
+                    return bbb.BranchingNode;
+            }
+        }
+
         private static string GetArgumentsString(MethodDeclarationSyntax method)
         {
             if (method.ParameterList.Parameters.Count == 0)
