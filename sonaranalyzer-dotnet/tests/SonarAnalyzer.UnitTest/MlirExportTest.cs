@@ -257,7 +257,25 @@ private int ForLoopContinue(int i)
             ValidateCodeGeneration(code);
 
         }
-
+        [TestMethod]
+        public void ForEachLoops()
+        {
+            var code = @"
+int ForEachLoop()
+{
+    var a = new int [10];
+    foreach(var i in a)
+    {
+        if (i == 0)
+        {
+            return i;
+        }
+    }
+    return 0;
+}
+";
+            ValidateCodeGeneration(code);
+        }
     }
 }
 
