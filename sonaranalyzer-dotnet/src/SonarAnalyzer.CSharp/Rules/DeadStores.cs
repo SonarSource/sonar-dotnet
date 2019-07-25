@@ -113,6 +113,19 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var block in cfg.Blocks)
             {
+                // for the `finally` instruction, we create 2 different finally blocks:
+                // - one block for the normal flow
+                // - one block for the uncaught exception flow (case in which the Finally block will point to EXIT
+                if (block is SimpleBlock simpleBlock &&
+                    !(block is JumpBlock) &&
+                    simpleBlock.SuccessorBlock is ExitBlock &&
+                    block.PredecessorBlocks.Count == 1 &&
+                    block.PredecessorBlocks.ElementAt(0) is BranchBlock possibleTry &&
+                    possibleTry.BranchingNode.IsKind(SyntaxKind.TryStatement))
+                {
+                    // we ignore the `finally` block which is leading to EXIT because it gives FPs when inside a loop
+                    continue;
+                }
                 CheckCfgBlockForDeadStores(block, lva.GetLiveOut(block), lva.CapturedVariables, node, declaration, context);
             }
         }

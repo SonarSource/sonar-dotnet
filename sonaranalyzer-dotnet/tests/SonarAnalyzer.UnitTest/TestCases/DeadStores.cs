@@ -516,8 +516,8 @@ namespace Tests.Diagnostics
             {
                 try
                 {
-                    attempts++; // Noncompliant FP
-                    // do stuff
+                    attempts++;
+                    DoNothing();
                     break;
                 }
                 catch (Exception ex)
@@ -528,6 +528,37 @@ namespace Tests.Diagnostics
             } while (true);
         }
 
+        public static void ComplexRetryOnException(int retries)
+        {
+            var attempts = 0;
+            try
+            {
+                do
+                {
+                    if (retries > 0)
+                    {
+                        DoNothing();
+                        try
+                        {
+                            attempts++;
+                            DoNothing();
+                            break;
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            DoNothing();
+                        }
+                    }
+                } while (true);
+            }
+            catch (Exception ex)
+            {
+                if (attempts > retries)
+                    throw;
+                DoNothing();
+            }
+        }
+
         public void Bar()
         {
             bool isFirst = true;
@@ -535,20 +566,16 @@ namespace Tests.Diagnostics
             {
                 try
                 {
-                    if (isFirst)
-                    {
-                        Console.WriteLine("First");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Not first");
-                    }
+                    DoNothing(isFirst);
                 }
                 finally
                 {
-                    isFirst = false; // Noncompliant FP
+                    isFirst = false; // is used in DoNothing, after loop
                 }
             }
         }
+
+        private static void DoNothing() { }
+        private static void DoNothing(bool b) { }
     }
 }

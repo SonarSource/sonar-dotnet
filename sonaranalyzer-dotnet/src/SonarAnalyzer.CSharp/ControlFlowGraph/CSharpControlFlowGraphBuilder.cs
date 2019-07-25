@@ -558,25 +558,49 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 tryEndStatementConnections.Add(this.ExitTarget.Peek());
             }
 
-            var tryBody = BuildBlock(tryStatement.Block,
-                CreateBranchBlock(tryStatement, tryEndStatementConnections.Distinct()));
-
-            var tryStartStatementConnections = catchBlocks.ToList();
-            tryStartStatementConnections.Add(tryBody); // try body
-
-            if (!areAllExceptionsCaught) // unexpected exception thrown, go to exit (through finally if present)
+            Block tryBody;
+            if (tryStatement.Block.Statements.Any(s=>s.IsKind(SyntaxKind.ReturnStatement)))
             {
-                tryStartStatementConnections.Add(this.ExitTarget.Peek());
+                // there is a return inside the `try`, thus a JumpBlock directly to exit will be created
+                var returnBlock = BuildBlock(tryStatement.Block, currentBlock);
+                var connections = new List<Block>();
+                connections.Add(returnBlock);
+                // if an exception is thrown, it will reach the `catch` blocks
+                connections.AddRange(catchBlocks);
+                // if there is a finally, add it; otherwise, the `return` will jump to exit
+                if (catchSuccessor != currentBlock)
+                {
+                    connections.Add(catchSuccessor);
+                }
+                tryBody = CreateBranchBlock(tryStatement, connections);
+            }
+            else
+            {
+                tryBody = BuildBlock(tryStatement.Block, CreateBranchBlock(tryStatement,
+                    tryEndStatementConnections.Distinct()));
             }
 
-            var tryStartBlock = CreateBranchBlock(tryStatement, tryStartStatementConnections.Distinct());
+            // if this try is inside another try, the `beforeTryBlock` must have edges to the outer catch & finally blocks
+            Block beforeTryBlock;
+            if (currentBlock is BranchBlock possibleOuterTry &&
+                possibleOuterTry.BranchingNode.IsKind(SyntaxKind.TryStatement))
+            {
+                var beforeTryConnections = possibleOuterTry.SuccessorBlocks.ToList();
+                beforeTryConnections.Add(tryBody);
+                beforeTryBlock = CreateBranchBlock(tryStatement, beforeTryConnections.Distinct());
+            }
+            else
+            {
+                // otherwise, what happens before the try is not handled by any catch or finally
+                beforeTryBlock = CreateBlock(tryBody);
+            }
 
             if (hasFinally)
             {
                 this.ExitTarget.Pop();
             }
 
-            return tryStartBlock;
+            return beforeTryBlock;
         }
 
         private Block BuildGotoDefaultStatement(GotoStatementSyntax statement, Block currentBlock)
@@ -836,6 +860,15 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
 
             var target = this.BreakTarget.Peek();
+            if (currentBlock is BranchBlock possibleTryBlock &&
+                possibleTryBlock.BranchingNode.IsKind(SyntaxKind.TryStatement))
+            {
+                var newSuccessors = possibleTryBlock.SuccessorBlocks.ToList();
+                newSuccessors.Add(target);
+                var branchBlock = CreateBranchBlock(possibleTryBlock.BranchingNode, newSuccessors);
+                branchBlock.ReversedInstructions.Add(breakStatement);
+                return branchBlock;
+            }
             return CreateJumpBlock(breakStatement, target, currentBlock);
         }
 
