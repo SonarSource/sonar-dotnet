@@ -132,6 +132,132 @@ int WithReturn(int i) {
         {
             return CfgSerializer.Serialize(methodName, GetCfgForMethod(code, methodName));
         }
+
+        [TestMethod]
+        public void WhileLoops()
+        {
+            var code = @"
+private int WhileLoop(int i)
+{
+    while (i<100)
+    {
+        i = i * i;
+    }
+    return i;
+}
+private int WhileLoopBreak(int i)
+{
+    while (i < 100)
+    {
+        i = i * i;
+        if (i == 49)
+        {
+            break;
+        }
+    }
+    return i;
+}
+private int WhileLoopContinue(int i)
+{
+    while (i < 100)
+    {
+        if (i == 42)
+        {
+            continue;
+        }
+    }
+    return i;
+}
+";
+            ValidateCodeGeneration(code);
+
+        }
+
+        [TestMethod]
+        public void DoWhileLoops()
+        {
+            var code = @"
+private int WhileLoop(int i)
+{
+    do
+    {
+        i = i * i;
+    } while (i<100)
+    return i;
+}
+private int WhileLoopBreak(int i)
+{
+    do
+    {
+        i = i * i;
+        if (i == 49)
+        {
+            break;
+        }
+    } while (i < 100)
+    return i;
+}
+private int WhileLoopContinue(int i)
+{
+    do 
+    {
+        if (i == 42)
+        {
+            continue;
+        }
+    } while (i < 100)
+    return i;
+}
+";
+            ValidateCodeGeneration(code);
+
+        }
+
+
+        [TestMethod]
+        public void ForLoops()
+        {
+            var code = @"
+private int ForLoop(int i)
+{
+    int total = 0;
+    for (int j = 0 ; j<=i ;++j)
+    {
+        total += j;
+    }
+    return total;
+}
+private int ForLoopBreak(int i)
+{
+    int total = 0;
+    for (int j = 0 ; j<=i ;++j)
+    {
+        total += j;
+        if (total > 500)
+        {
+            break;
+        }
+    }
+    return total;
+}
+private int ForLoopContinue(int i)
+{
+    int total = 0;
+    for (int j = 0 ; j<=i ;++j)
+    {
+        if (j % 13 == 0)
+        {
+            continue;
+        }
+        total += j;
+    }
+    return total;
+}
+";
+            ValidateCodeGeneration(code);
+
+        }
+
     }
 }
 
