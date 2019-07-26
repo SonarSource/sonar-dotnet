@@ -92,6 +92,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis
 
                 var liveOut = this.liveOutStates[block];
 
+                // note that on the PHP LVA impl, the `liveOut` gets cleared before being updated
                 foreach (var successor in block.SuccessorBlocks)
                 {
                     if (this.liveInStates.ContainsKey(successor))
@@ -100,9 +101,11 @@ namespace SonarAnalyzer.LiveVariableAnalysis
                     }
                 }
 
+                // in = used + (out - assigned)
                 var liveIn = new HashSet<ISymbol>(this.used[block]);
                 liveIn.UnionWith(liveOut.Except(this.assigned[block]));
 
+                // if things have not changed, skip adding the predecessors to the workList
                 if (this.liveInStates.ContainsKey(block) &&
                     liveIn.SetEquals(this.liveInStates[block]))
                 {

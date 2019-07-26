@@ -467,7 +467,88 @@ namespace Tests.Diagnostics
                     break;
             }
         }
+    }
 
+    public class ReproGithubIssue697
+    {
+        private bool DoStuff() => true;
 
+        public void Foo()
+        {
+            bool shouldCatch = false;
+            try
+            {
+                shouldCatch = true; // ok, is read in catch filter
+                throw new InvalidOperationException("bar");
+            }
+            catch (Exception) when (shouldCatch)
+            {
+                Console.WriteLine("Error");
+            }
+        }
+
+        public void Bar(bool cond)
+        {
+            bool shouldCatch = false;
+            try
+            {
+                DoStuff();
+                shouldCatch = true; // ok, read in catch filter
+                if (cond)
+                {
+                    throw new InvalidOperationException("bar");
+                }
+            }
+            catch (Exception) when (shouldCatch)
+            {
+                Console.WriteLine("Error");
+            }
+        }
+
+    }
+
+    public class ReproGithubIssue2393
+    {
+        public static void RetryOnException(int retries)
+        {
+            var attempts = 0;
+            do
+            {
+                try
+                {
+                    attempts++; // Noncompliant FP
+                    // do stuff
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    if (attempts > retries)
+                        throw;
+                }
+            } while (true);
+        }
+
+        public void Bar()
+        {
+            bool isFirst = true;
+            foreach (var i in System.Linq.Enumerable.Range(1, 10))
+            {
+                try
+                {
+                    if (isFirst)
+                    {
+                        Console.WriteLine("First");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Not first");
+                    }
+                }
+                finally
+                {
+                    isFirst = false; // Noncompliant FP
+                }
+            }
+        }
     }
 }
