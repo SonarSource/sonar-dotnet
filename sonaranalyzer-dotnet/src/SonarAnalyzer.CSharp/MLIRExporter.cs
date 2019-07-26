@@ -267,10 +267,11 @@ namespace SonarAnalyzer
 
         private string GetLocation(SyntaxNode node)
         {
-            var loc = node.GetLocation();
-            var location = $"loc(\"{loc.GetLineSpan().Path}\"" +
-                $" :{loc.GetLineSpan().StartLinePosition.Line}" +
-                $" :{loc.GetLineSpan().StartLinePosition.Character})";
+            // TODO: We should decide which of GetLineSpan or GetMappedLineSpan is better to use
+            var loc = node.GetLocation().GetLineSpan();
+            var location = $"loc(\"{loc.Path}\"" +
+                $" :{loc.StartLinePosition.Line}" +
+                $" :{loc.StartLinePosition.Character})";
 
             return location;
         }
