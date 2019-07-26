@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest
             var pi = new ProcessStartInfo
             {
                 FileName = mlirCheckerPath,
-                Arguments = path,
+                Arguments = '"' + path + '"',
                 UseShellExecute = false,
                 // RedirectStandardOutput = true,
                 RedirectStandardError = true
