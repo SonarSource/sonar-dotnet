@@ -139,8 +139,8 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var reachable in reachableFromBlock)
             {
                 if (!reachable.Key.AllPredecessorBlocks.Contains(cfg.EntryBlock) ||
-                    alreadyProcessed.Contains(reachable.Key) ||
-                    reachable.Value.Contains(cfg.ExitBlock))
+                     alreadyProcessed.Contains(reachable.Key) ||
+                     reachable.Value.Contains(cfg.ExitBlock))
                 {
                     continue;
                 }

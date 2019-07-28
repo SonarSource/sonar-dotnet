@@ -137,6 +137,10 @@ namespace SonarAnalyzer.SymbolicExecution
                     VisitBinaryBranch(binaryBranchBlock, node, ((CatchFilterClauseSyntax)binaryBranchBlock.BranchingNode).FilterExpression);
                     return;
 
+                case SyntaxKind.CaseSwitchLabel when !CasePatternSwitchLabelSyntaxWrapper.IsInstance(binaryBranchBlock.BranchingNode):
+                    VisitCaseSwitchBinaryBranchBlock(binaryBranchBlock, node, (CaseSwitchLabelSyntax)binaryBranchBlock.BranchingNode);
+                    return;
+
                 default:
                     VisitBinaryBranch(binaryBranchBlock, node, binaryBranchBlock.BranchingNode);
                     return;
@@ -613,6 +617,32 @@ namespace SonarAnalyzer.SymbolicExecution
             foreach (var newProgramState in sv.TrySetOppositeConstraint(ObjectConstraint.Null, ps))
             {
                 EnqueueNewNode(new ProgramPoint(binaryBranchBlock.FalseSuccessorBlock), newProgramState);
+            }
+        }
+
+        private void VisitCaseSwitchBinaryBranchBlock(BinaryBranchBlock branchBlock, ExplodedGraphNode node, CaseSwitchLabelSyntax simpleCaseLabel)
+        {
+            var programState = CleanStateAfterBlock(node.ProgramState, node.ProgramPoint.Block);
+            var ps = programState.PopValue(out var sv);
+
+            if (simpleCaseLabel.Value.IsKind(SyntaxKind.NullLiteralExpression))
+            {
+                foreach (var newProgramState in sv.TrySetConstraint(ObjectConstraint.Null, ps))
+                {
+                    EnqueueNewNode(new ProgramPoint(branchBlock.TrueSuccessorBlock), newProgramState);
+                }
+                foreach (var newProgramState in sv.TrySetOppositeConstraint(ObjectConstraint.Null, ps))
+                {
+                    EnqueueNewNode(new ProgramPoint(branchBlock.FalseSuccessorBlock), ps);
+                }
+            }
+            else
+            {
+                foreach (var newProgramState in sv.TrySetOppositeConstraint(ObjectConstraint.Null, ps))
+                {
+                    EnqueueNewNode(new ProgramPoint(branchBlock.TrueSuccessorBlock), newProgramState);
+                }
+                EnqueueNewNode(new ProgramPoint(branchBlock.FalseSuccessorBlock), ps);
             }
         }
 

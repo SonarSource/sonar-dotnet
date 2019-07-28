@@ -1862,7 +1862,7 @@ namespace NS
         public void Cfg_Switch_Break()
         {
             var cfg = Build("cw0(); switch(a) { case 1: case 2: cw1(); break; } cw3();");
-            VerifyCfg(cfg, 5);
+            VerifyCfg(cfg, 6);
 
             var blocks = cfg.Blocks.ToList();
 
@@ -1873,14 +1873,19 @@ namespace NS
             var cw3 = blocks
                 .First(block => block.Instructions.Any(n => n.ToString() == "cw3"));
 
-            var case1 = blocks[1];
+            var case1Branch = blocks[1] as BinaryBranchBlock;
+            var case2Branch = blocks[2] as BinaryBranchBlock;
 
             var exitBlock = cfg.ExitBlock;
 
             cw0.Should().BeSameAs(cfg.EntryBlock);
 
-            cw0.SuccessorBlocks.Should().OnlyContainInOrder(case1, cw1, cw3);
-            case1.SuccessorBlocks.Should().OnlyContain(cw1);
+            cw0.SuccessorBlocks.Should().OnlyContainInOrder(case1Branch);
+            case1Branch.TrueSuccessorBlock.Should().Be(cw1);
+            case1Branch.FalseSuccessorBlock.Should().Be(case2Branch);
+            case2Branch.TrueSuccessorBlock.Should().Be(cw1);
+            case2Branch.FalseSuccessorBlock.Should().Be(cw3);
+
             cw1.SuccessorBlocks.Should().OnlyContain(cw3);
             cw3.SuccessorBlocks.Should().OnlyContain(exitBlock);
         }
@@ -2842,7 +2847,7 @@ namespace NS
         public void Cfg_Switch()
         {
             var cfg = Build("cw0(); switch(a) { case 1: case 2: cw1(); break; case 3: default: case 4: cw2(); break; } cw3();");
-            VerifyCfg(cfg, 8);
+            VerifyCfg(cfg, 9);
 
             var blocks = cfg.Blocks.ToList();
 
@@ -2855,18 +2860,35 @@ namespace NS
             var cw3 = blocks
                 .First(block => block.Instructions.Any(n => n.ToString() == "cw3"));
 
-            var case3 = blocks[1] as JumpBlock;
-            var defaultCase = blocks[2] as JumpBlock;
-            var case1 = blocks[4] as JumpBlock;
+            var case1Jump = blocks[3] as JumpBlock;
+            var defaultCaseJump = blocks[6] as JumpBlock;
+
+            var branchCase1 = blocks[1] as BinaryBranchBlock;
+            var branchCase2 = blocks[2] as BinaryBranchBlock;
+            var branchCase3 = blocks[4] as BinaryBranchBlock;
+            var branchDefault = blocks[5] as BinaryBranchBlock;
 
             var exitBlock = cfg.ExitBlock;
 
             cw0.Should().BeSameAs(cfg.EntryBlock);
 
-            cw0.SuccessorBlocks.Should().OnlyContainInOrder(case1, cw1, case3, defaultCase, cw2);
-            case1.SuccessorBlocks.Should().OnlyContain(cw1);
-            case3.SuccessorBlocks.Should().OnlyContain(defaultCase);
-            defaultCase.SuccessorBlocks.Should().OnlyContain(cw2);
+            cw0.SuccessorBlocks.Should().OnlyContainInOrder(branchCase1);
+            branchCase1.TrueSuccessorBlock.Should().Be(case1Jump);
+            branchCase1.FalseSuccessorBlock.Should().Be(branchCase2);
+
+            branchCase2.TrueSuccessorBlock.Should().Be(case1Jump);
+            branchCase2.FalseSuccessorBlock.Should().Be(branchCase3);
+
+            case1Jump.SuccessorBlocks.Should().OnlyContain(cw3);
+
+            branchCase3.TrueSuccessorBlock.Should().Be(defaultCaseJump);
+            branchCase3.FalseSuccessorBlock.Should().Be(branchDefault);
+
+            branchDefault.TrueSuccessorBlock.Should().Be(defaultCaseJump);
+            branchDefault.FalseSuccessorBlock.Should().Be(defaultCaseJump);
+
+            defaultCaseJump.SuccessorBlocks.Should().OnlyContain(cw3);
+
 
             cw1.SuccessorBlocks.Should().OnlyContain(cw3);
             cw2.SuccessorBlocks.Should().OnlyContain(cw3);
@@ -2881,7 +2903,7 @@ namespace NS
         public void Cfg_Switch_NoDefault()
         {
             var cfg = Build("cw0(); switch(a) { case 1: case 2: cw1(); break; case 3: case 4: cw2(); break; } cw3();");
-            VerifyCfg(cfg, 7);
+            VerifyCfg(cfg, 9);
 
             var blocks = cfg.Blocks.ToList();
 
@@ -2894,16 +2916,21 @@ namespace NS
             var cw3 = blocks
                 .First(block => block.Instructions.Any(n => n.ToString() == "cw3"));
 
-            var case3 = blocks[1] as JumpBlock;
-            var case1 = blocks[3] as JumpBlock;
+            var case1Jump = blocks[3] as JumpBlock;
+            var case3Jump = blocks[6] as JumpBlock;
+
+            var branchCase1 = blocks[1] as BinaryBranchBlock;
+            var branchCase2 = blocks[2] as BinaryBranchBlock;
+            var branchCase3 = blocks[4] as BinaryBranchBlock;
+            var branchDefault = blocks[5] as BinaryBranchBlock;
 
             var exitBlock = cfg.ExitBlock;
 
             cw0.Should().BeSameAs(cfg.EntryBlock);
 
-            cw0.SuccessorBlocks.Should().OnlyContainInOrder(case1, cw1, case3, cw2, cw3);
-            case1.SuccessorBlocks.Should().OnlyContain(cw1);
-            case3.SuccessorBlocks.Should().OnlyContain(cw2);
+            cw0.SuccessorBlocks.Should().OnlyContainInOrder(branchCase1);
+            case1Jump.SuccessorBlocks.Should().OnlyContain(cw3);
+            case3Jump.SuccessorBlocks.Should().OnlyContain(cw3);
 
             cw1.SuccessorBlocks.Should().OnlyContain(cw3);
             cw2.SuccessorBlocks.Should().OnlyContain(cw3);
@@ -2915,7 +2942,7 @@ namespace NS
         public void Cfg_Switch_GotoCase()
         {
             var cfg = Build("cw0(); switch(a) { case 1: case 2: cw1(); goto case 3; case 3: default: case 4: cw2(); break; } cw3();");
-            VerifyCfg(cfg, 8);
+            VerifyCfg(cfg, 9);
 
             var blocks = cfg.Blocks.ToList();
 
@@ -2928,20 +2955,36 @@ namespace NS
             var cw3 = blocks
                 .First(block => block.Instructions.Any(n => n.ToString() == "cw3"));
 
-            var case3 = blocks[1] as JumpBlock;
-            var defaultCase = blocks[2] as JumpBlock;
-            var case1 = blocks[4] as JumpBlock;
+            var case1Jump = blocks[3] as JumpBlock;
+            var defaultCaseJump = blocks[6] as JumpBlock;
+
+            var branchCase1 = blocks[1] as BinaryBranchBlock;
+            var branchCase2 = blocks[2] as BinaryBranchBlock;
+            var branchCase3 = blocks[4] as BinaryBranchBlock;
+            var branchDefault = blocks[5] as BinaryBranchBlock;
 
             var exitBlock = cfg.ExitBlock;
 
             cw0.Should().BeSameAs(cfg.EntryBlock);
 
-            cw0.SuccessorBlocks.Should().OnlyContainInOrder(case1, cw1, case3, defaultCase, cw2);
-            case1.SuccessorBlocks.Should().OnlyContain(cw1);
-            case3.SuccessorBlocks.Should().OnlyContain(defaultCase);
-            defaultCase.SuccessorBlocks.Should().OnlyContain(cw2);
+            cw0.SuccessorBlocks.Should().OnlyContainInOrder(branchCase1);
+            case1Jump.SuccessorBlocks.Should().OnlyContain(defaultCaseJump);
+            defaultCaseJump.SuccessorBlocks.Should().OnlyContain(cw3);
 
-            cw1.SuccessorBlocks.Should().OnlyContain(case3);
+            branchCase1.TrueSuccessorBlock.Should().Be(case1Jump);
+            branchCase1.FalseSuccessorBlock.Should().Be(branchCase2);
+
+            branchCase2.TrueSuccessorBlock.Should().Be(case1Jump);
+            branchCase2.FalseSuccessorBlock.Should().Be(branchCase3);
+
+
+            branchCase3.TrueSuccessorBlock.Should().Be(defaultCaseJump);
+            branchCase3.FalseSuccessorBlock.Should().Be(branchDefault);
+
+            branchDefault.TrueSuccessorBlock.Should().Be(defaultCaseJump);
+            branchDefault.FalseSuccessorBlock.Should().Be(defaultCaseJump);
+
+            cw1.SuccessorBlocks.Should().OnlyContain(defaultCaseJump);
             cw2.SuccessorBlocks.Should().OnlyContain(cw3);
             cw3.SuccessorBlocks.Should().OnlyContain(exitBlock);
         }
@@ -2951,23 +2994,36 @@ namespace NS
         public void Cfg_Switch_Null()
         {
             var cfg = Build("cw0(); switch(a) { case \"\": case null: cw1(); break; case \"a\": cw2(); goto case null; } cw3();");
-            VerifyCfg(cfg, 6);
+            VerifyCfg(cfg, 8);
 
             var blocks = cfg.Blocks.ToList();
 
             var cw0 = blocks
                 .First(block => block.Instructions.Any(n => n.ToString() == "cw0")) as BranchBlock;
+            var cw3 = blocks
+                .First(block => block.Instructions.Any(n => n.ToString() == "cw3"));
 
-            var caseA = blocks[1] as JumpBlock;
-            var caseEmptyString = blocks[2] as JumpBlock;
-            var caseNull = blocks[3] as JumpBlock;
+            var caseEmptyJump = blocks[3] as JumpBlock;
+            var caseAJump = blocks[5] as JumpBlock;
 
+            var branchEmpty = blocks[1] as BinaryBranchBlock;
+            var branchNull = blocks[2] as BinaryBranchBlock;
+            var branchA = blocks[4] as BinaryBranchBlock;
+            
             cw0.Should().BeSameAs(cfg.EntryBlock);
 
-            cw0.SuccessorBlocks.Should().OnlyContainInOrder(caseEmptyString, caseNull, caseA, blocks[4]);
-            caseEmptyString.SuccessorBlocks.Should().OnlyContain(caseNull);
-            caseNull.SuccessorBlocks.Should().OnlyContain(blocks[4]);
-            caseA.SuccessorBlocks.Should().OnlyContain(caseNull);
+            cw0.SuccessorBlocks.Should().OnlyContainInOrder(branchEmpty);
+            caseEmptyJump.SuccessorBlocks.Should().OnlyContain(cw3);
+            caseAJump.SuccessorBlocks.Should().OnlyContain(caseEmptyJump);
+
+            branchEmpty.TrueSuccessorBlock.Should().Be(caseEmptyJump);
+            branchEmpty.FalseSuccessorBlock.Should().Be(branchNull);
+
+            branchNull.TrueSuccessorBlock.Should().Be(caseEmptyJump);
+            branchNull.FalseSuccessorBlock.Should().Be(branchA);
+
+            branchA.TrueSuccessorBlock.Should().Be(caseAJump);
+            branchA.FalseSuccessorBlock.Should().Be(cw3);
         }
 
         [TestMethod]
@@ -2975,7 +3031,7 @@ namespace NS
         public void Cfg_Switch_GotoDefault()
         {
             var cfg = Build("cw0(); switch(a) { case 1: case 2: cw1(); goto default; case 3: default: case 4: cw2(); break; } cw3();");
-            VerifyCfg(cfg, 8);
+            VerifyCfg(cfg, 9);
 
             var blocks = cfg.Blocks.ToList();
 
@@ -2988,20 +3044,36 @@ namespace NS
             var cw3 = blocks
                 .First(block => block.Instructions.Any(n => n.ToString() == "cw3"));
 
-            var case3 = blocks[1] as JumpBlock;
-            var defaultCase = blocks[2] as JumpBlock;
-            var case1 = blocks[4] as JumpBlock;
+            var case1Jump = blocks[3] as JumpBlock;
+            var defaultCaseJump = blocks[6] as JumpBlock;
+
+            var branchCase1 = blocks[1] as BinaryBranchBlock;
+            var branchCase2 = blocks[2] as BinaryBranchBlock;
+            var branchCase3 = blocks[4] as BinaryBranchBlock;
+            var branchDefault = blocks[5] as BinaryBranchBlock;
 
             var exitBlock = cfg.ExitBlock;
 
             cw0.Should().BeSameAs(cfg.EntryBlock);
 
-            cw0.SuccessorBlocks.Should().OnlyContainInOrder(case1, cw1, case3, defaultCase, cw2);
-            case1.SuccessorBlocks.Should().OnlyContain(cw1);
-            case3.SuccessorBlocks.Should().OnlyContain(defaultCase);
-            defaultCase.SuccessorBlocks.Should().OnlyContain(cw2);
+            cw0.SuccessorBlocks.Should().OnlyContainInOrder(branchCase1);
+            case1Jump.SuccessorBlocks.Should().OnlyContain(defaultCaseJump);
+            defaultCaseJump.SuccessorBlocks.Should().OnlyContain(cw3);
 
-            cw1.SuccessorBlocks.Should().OnlyContain(defaultCase);
+            branchCase1.TrueSuccessorBlock.Should().Be(case1Jump);
+            branchCase1.FalseSuccessorBlock.Should().Be(branchCase2);
+
+            branchCase2.TrueSuccessorBlock.Should().Be(case1Jump);
+            branchCase2.FalseSuccessorBlock.Should().Be(branchCase3);
+
+
+            branchCase3.TrueSuccessorBlock.Should().Be(defaultCaseJump);
+            branchCase3.FalseSuccessorBlock.Should().Be(branchDefault);
+
+            branchDefault.TrueSuccessorBlock.Should().Be(defaultCaseJump);
+            branchDefault.FalseSuccessorBlock.Should().Be(defaultCaseJump);
+
+            cw1.SuccessorBlocks.Should().OnlyContain(defaultCaseJump);
             cw2.SuccessorBlocks.Should().OnlyContain(cw3);
             cw3.SuccessorBlocks.Should().OnlyContain(exitBlock);
         }
@@ -3102,7 +3174,7 @@ namespace NS
             var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
             var caseZero = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
             var caseZeroBlock = (JumpBlock)cfg.Blocks.ElementAt(2);
-            var caseOne = (BranchBlock)cfg.Blocks.ElementAt(3);
+            var caseOne = (BinaryBranchBlock)cfg.Blocks.ElementAt(3);
             var caseOneWhenBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(4);
             var caseOneWhenBlockBody = (JumpBlock)cfg.Blocks.ElementAt(5);
             var afterSwitchBlock = (SimpleBlock)cfg.Blocks.ElementAt(6);
@@ -3113,12 +3185,13 @@ namespace NS
 
             caseZero.TrueSuccessorBlock.Should().Be(caseZeroBlock);
             caseZero.FalseSuccessorBlock.Should().Be(caseOne);
-            caseZero.BranchingNode.Kind().Should().Be(SyntaxKind.NumericLiteralExpression);
+            caseZero.BranchingNode.Kind().Should().Be(SyntaxKind.CaseSwitchLabel);
 
             caseZeroBlock.SuccessorBlock.Should().Be(afterSwitchBlock);
             VerifyAllInstructions(caseZeroBlock, "cw0", "cw0()");
 
-            caseOne.SuccessorBlocks.Should().ContainInOrder(caseOneWhenBlock, afterSwitchBlock);
+            caseOne.TrueSuccessorBlock.Should().Be(caseOneWhenBlock);
+            caseOne.FalseSuccessorBlock.Should().Be(afterSwitchBlock);
             caseOne.BranchingNode.Kind().Should().Be(SyntaxKind.CasePatternSwitchLabel);
 
             caseOneWhenBlock.TrueSuccessorBlock.Should().Be(caseOneWhenBlockBody);
@@ -3259,7 +3332,7 @@ namespace NS
 
             var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
             var caseIntBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
-            var caseNullBlock = (BranchBlock)cfg.Blocks.ElementAt(2);
+            var caseNullBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
             var firstSectionBlock = (JumpBlock)cfg.Blocks.ElementAt(3);
             var lastBlock = (SimpleBlock)cfg.Blocks.ElementAt(4);
             var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(5);
@@ -3271,8 +3344,9 @@ namespace NS
             caseIntBlock.FalseSuccessorBlock.Should().Be(caseNullBlock);
             VerifyAllInstructions(caseIntBlock, "int i");
 
-            caseNullBlock.SuccessorBlocks.Should().OnlyContain(firstSectionBlock, lastBlock);
-            VerifyAllInstructions(caseNullBlock);
+            caseNullBlock.TrueSuccessorBlock.Should().Be(firstSectionBlock);
+            caseNullBlock.FalseSuccessorBlock.Should().Be(lastBlock);
+            VerifyAllInstructions(caseNullBlock, "o");
 
             firstSectionBlock.SuccessorBlock.Should().Be(lastBlock);
             VerifyAllInstructions(firstSectionBlock, "cw1", "cw1()");
@@ -3292,7 +3366,7 @@ namespace NS
             var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
             var caseIntBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
             var intSectionBlock = (JumpBlock)cfg.Blocks.ElementAt(2);
-            var caseNullBlock = (BranchBlock)cfg.Blocks.ElementAt(3);
+            var caseNullBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(3);
             var nullSectionBlock = (JumpBlock)cfg.Blocks.ElementAt(4);
             var defaultSectionBlock = (JumpBlock)cfg.Blocks.ElementAt(5);
             var lastBlock = (SimpleBlock)cfg.Blocks.ElementAt(6);
@@ -3308,8 +3382,9 @@ namespace NS
             intSectionBlock.SuccessorBlock.Should().Be(lastBlock);
             VerifyAllInstructions(intSectionBlock, "cw1", "cw1()");
 
-            caseNullBlock.SuccessorBlocks.Should().OnlyContain(nullSectionBlock, defaultSectionBlock);
-            VerifyAllInstructions(caseNullBlock);
+            caseNullBlock.TrueSuccessorBlock.Should().Be(nullSectionBlock);
+            caseNullBlock.FalseSuccessorBlock.Should().Be(defaultSectionBlock);
+            VerifyAllInstructions(caseNullBlock, "o");
 
             nullSectionBlock.SuccessorBlock.Should().Be(lastBlock);
             VerifyAllInstructions(nullSectionBlock, "cw2", "cw2()");
@@ -3335,16 +3410,21 @@ switch(o) // switchBlock
 }
 cw1(); // afterSwitchBlock
 ");
-            VerifyCfg(cfg, 5);
+            VerifyCfg(cfg, 6);
 
             var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
-            var defaultBlock = (JumpBlock)cfg.Blocks.ElementAt(1);
+            var branchBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
             var caseZero = (JumpBlock)cfg.Blocks.ElementAt(2);
-            var afterSwitchBlock = (SimpleBlock)cfg.Blocks.ElementAt(3);
-            var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(4);
+            var defaultBlock = (JumpBlock)cfg.Blocks.ElementAt(3);
+            var afterSwitchBlock = (SimpleBlock)cfg.Blocks.ElementAt(4);
+            var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(5);
 
-            switchBlock.SuccessorBlocks.Should().OnlyContain(caseZero, defaultBlock);
+            switchBlock.SuccessorBlocks.Should().OnlyContain(branchBlock);
             VerifyAllInstructions(switchBlock, "cw", "cw()", "o");
+
+            branchBlock.TrueSuccessorBlock.Should().Be(caseZero);
+            branchBlock.FalseSuccessorBlock.Should().Be(defaultBlock);
+            VerifyAllInstructions(branchBlock, "o");
 
             caseZero.SuccessorBlock.Should().Be(afterSwitchBlock);
             VerifyAllInstructions(caseZero, "cw0", "cw0()");
@@ -3370,31 +3450,34 @@ switch(o) // switchBlock
     {
       throw new InvalidOperationException(""""); // falseBranchBlock
     }
+    break;
    default: // defaultThrowBlock
-      throw new InvalidOperationException("""");
+      throw new InvalidOperationException(""a"");
 }
 cw1(); // afterSwitchBlock
 ");
-            VerifyCfg(cfg, 7);
+            VerifyCfg(cfg, 9);
 
             var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
-            var defaultThrowBlock = (JumpBlock)cfg.Blocks.ElementAt(1);
+            var Case1Block = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
             var firstCaseIfBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
             var trueBranchBlock = (SimpleBlock)cfg.Blocks.ElementAt(3);
             var falseBranchBlock = (JumpBlock)cfg.Blocks.ElementAt(4);
-            var afterSwitchBlock = (SimpleBlock)cfg.Blocks.ElementAt(5);
-            var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(6);
+            var breakJump = (JumpBlock)cfg.Blocks.ElementAt(5);
+            var defaultBranchBlock = (JumpBlock)cfg.Blocks.ElementAt(6);
+            var afterSwitchBlock = (SimpleBlock)cfg.Blocks.ElementAt(7);
+            var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(8);
 
-            switchBlock.SuccessorBlocks.Should().OnlyContain(firstCaseIfBlock, defaultThrowBlock);
-
+            switchBlock.SuccessorBlocks.Should().OnlyContain(Case1Block);
+            Case1Block.TrueSuccessorBlock.Should().Be(firstCaseIfBlock);
+            Case1Block.FalseSuccessorBlock.Should().Be(defaultBranchBlock);
             firstCaseIfBlock.TrueSuccessorBlock.Should().Be(trueBranchBlock);
             firstCaseIfBlock.FalseSuccessorBlock.Should().Be(falseBranchBlock);
-
-            trueBranchBlock.SuccessorBlocks.Should().OnlyContain(afterSwitchBlock);
-
+            trueBranchBlock.SuccessorBlocks.Should().OnlyContain(breakJump);
+            breakJump.SuccessorBlocks.Should().OnlyContain(afterSwitchBlock);
             afterSwitchBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
             falseBranchBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
-            defaultThrowBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            defaultBranchBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
         }
 
         [TestMethod]

@@ -87,7 +87,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             {
                 BoolConstraint.True, // constraint to set
                 ConstraintList(ObjectConstraint.Null), // existing
-                ProgramStateList() // Expected
+                ProgramStateList(ConstraintList(ObjectConstraint.Null)) // Expected
             },
             new object[]
             {
@@ -121,7 +121,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             {
                 BoolConstraint.False, // constraint to set
                 ConstraintList(ObjectConstraint.Null), // existing
-                ProgramStateList() // Expected
+                ProgramStateList(ConstraintList(ObjectConstraint.Null)) // Expected
             },
             new object[]
             {

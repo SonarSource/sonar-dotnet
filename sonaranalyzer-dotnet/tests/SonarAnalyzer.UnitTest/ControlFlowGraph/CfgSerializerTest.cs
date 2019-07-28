@@ -74,13 +74,17 @@ class C
             dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{BRANCH:SwitchStatement|a}""]
 0 -> 1
-0 -> 2
-0 -> 3
-2 [shape=record label=""{JUMP:BreakStatement|c2|c2()}""]
-2 -> 3
-1 [shape=record label=""{JUMP:BreakStatement|c1|c1()}""]
-1 -> 3
-3 [shape=record label=""{EXIT}""]
+1 [shape=record label=""{BINARY:CaseSwitchLabel|a}""]
+1 -> 2 [label=""True""]
+1 -> 3 [label=""False""]
+2 [shape=record label=""{JUMP:BreakStatement|c1|c1()}""]
+2 -> 4
+3 [shape=record label=""{BINARY:CaseSwitchLabel|a}""]
+3 -> 5 [label=""True""]
+3 -> 4 [label=""False""]
+5 [shape=record label=""{JUMP:BreakStatement|c2|c2()}""]
+5 -> 4
+4 [shape=record label=""{EXIT}""]
 }
 ");
         }

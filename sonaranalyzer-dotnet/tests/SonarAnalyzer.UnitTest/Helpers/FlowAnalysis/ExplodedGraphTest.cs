@@ -471,7 +471,7 @@ namespace NS
 
             explorationEnded.Should().BeTrue();
             numberOfExitBlockReached.Should().Be(1);
-            numberOfCw1InstructionVisits.Should().Be(1);
+            numberOfCw1InstructionVisits.Should().Be(2);
             numberOfCw2InstructionVisits.Should().Be(1);
         }
 
