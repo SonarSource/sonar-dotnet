@@ -416,6 +416,65 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class AkkaSnippet
+    {
+        internal void OnlyFinally(object actor)
+        {
+            try
+            {
+                Foo(actor);
+            }
+            finally
+            {
+                actor = null; // FN
+            }
+        }
+
+        internal void Finally_Followed_By_Deadstore(object actor)
+        {
+            try
+            {
+                Foo(actor);
+            }
+            finally
+            {
+                actor = null; // Noncompliant
+            }
+            actor = null; // Noncompliant
+        }
+
+        internal void SnippetTwo(object actor)
+        {
+            try
+            {
+                Foo(actor);
+            }
+            catch (Exception)
+            {
+                actor = null; // Noncompliant
+            }
+            Foo(null);
+        }
+
+        internal void SnippetThree(object actor, int i)
+        {
+            try
+            {
+                Foo(actor);
+            }
+            catch (Exception) when(i == 1)
+            {
+                actor = null; // Noncompliant
+            }
+            finally
+            {
+                actor = null; // Noncompliant
+            }
+        }
+
+        private void Foo(object obj) { }
+    }
+
     public class ReproGithubIssue2311
     {
         private void SwitchCaseWithWhenAndLocalScope(object sender, KeyEventArgs e)
