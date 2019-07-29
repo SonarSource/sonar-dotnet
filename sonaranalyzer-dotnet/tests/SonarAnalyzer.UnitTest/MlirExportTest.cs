@@ -276,6 +276,28 @@ int ForEachLoop()
 ";
             ValidateCodeGeneration(code);
         }
+
+        [TestMethod]
+        public void WorkWithLong()
+        {
+            var code = @"
+long withLong()
+{
+    long l = 10;
+    long total = 0;
+    for(long i = 0; i < l; ++i)
+    {
+        total += i;
+    }
+    if (total != 55)
+    {
+        return total;
+    }
+    return total;
+}
+";
+            ValidateCodeGeneration(code);
+        }
     }
 }
 
