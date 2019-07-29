@@ -32,7 +32,7 @@ namespace SonarAnalyzer
             var returnType = HasNoReturn(method) ?
                 "()" :
                 MLIRType(method.ReturnType);
-            writer.WriteLine($"func @{method.Identifier.ValueText}{GetAnonymousArgumentsString(method)} -> {returnType} {{");
+            writer.WriteLine($"func @{method.Identifier.ValueText}{GetAnonymousArgumentsString(method)} -> {returnType} {GetLocation(method)} {{");
             CreateEntryBlock(method);
 
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
@@ -58,7 +58,7 @@ namespace SonarAnalyzer
             foreach (var param in method.ParameterList.Parameters)
             {
                 var id = OpId(param);
-                writer.WriteLine($"%{id} = cbde.alloca {MLIRType(param)} : () -> memref<{MLIRType(param)}>");
+                writer.WriteLine($"%{id} = cbde.alloca {MLIRType(param)} : () -> memref<{MLIRType(param)}> {GetLocation(param)}");
                 writer.WriteLine($"cbde.store %{param.Identifier.ValueText}, %{id} : memref<{MLIRType(param)}> {GetLocation(param)}");
             }
             writer.WriteLine("br ^0");
