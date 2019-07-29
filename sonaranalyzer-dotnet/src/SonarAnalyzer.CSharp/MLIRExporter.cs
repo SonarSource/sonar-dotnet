@@ -31,8 +31,8 @@ namespace SonarAnalyzer
             blockCounter = 0;
             var returnType = HasNoReturn(method) ?
                 "()" :
-                "i32";
-            writer.WriteLine($"func @{method.Identifier.ValueText}{GetAnonymousArgumentsString(method)} -> {returnType} {GetLocation(method)} {{");
+                MLIRType(method.ReturnType);
+            writer.WriteLine($"func @{method.Identifier.ValueText}{GetAnonymousArgumentsString(method)} -> {returnType} {{");
             CreateEntryBlock(method);
 
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
@@ -58,8 +58,8 @@ namespace SonarAnalyzer
             foreach (var param in method.ParameterList.Parameters)
             {
                 var id = OpId(param);
-                writer.WriteLine($"%{id} = cbde.alloca i32 : () -> memref<i32> {GetLocation(param)}");
-                writer.WriteLine($"cbde.store %{param.Identifier.ValueText}, %{id} : memref<i32> {GetLocation(param)}");
+                writer.WriteLine($"%{id} = cbde.alloca {MLIRType(param)} : () -> memref<{MLIRType(param)}>");
+                writer.WriteLine($"cbde.store %{param.Identifier.ValueText}, %{id} : memref<{MLIRType(param)}> {GetLocation(param)}");
             }
             writer.WriteLine("br ^0");
             writer.WriteLine();
@@ -94,7 +94,14 @@ namespace SonarAnalyzer
                     switch (jb.JumpNode)
                     {
                         case ReturnStatementSyntax ret:
-                            writer.WriteLine($"return %{OpId(ret.Expression)} : i32 {GetLocation(ret)}");
+                            if (ret.Expression == null)
+                            {
+                                writer.WriteLine($"return {GetLocation(ret)}");
+                            }
+                            else
+                            {
+                                writer.WriteLine($"return %{OpId(ret.Expression)} : {MLIRType(ret.Expression)} {GetLocation(ret)}");
+                            }
                             break;
                         case BreakStatementSyntax breakStmt:
                             writer.WriteLine($"br ^{BlockId(jb.SuccessorBlock)} {GetLocation(breakStmt)} // break");
@@ -172,20 +179,50 @@ namespace SonarAnalyzer
             }
         }
 
-        private static string GetArgumentsString(MethodDeclarationSyntax method)
+        private string GetArgumentsString(MethodDeclarationSyntax method)
         {
             if (method.ParameterList.Parameters.Count == 0)
             {
                 return string.Empty;
             }
-            var args = method.ParameterList.Parameters.Select(p => $"%{p.Identifier.ValueText} : i32");
+            var args = method.ParameterList.Parameters.Select(
+                p => $"%{p.Identifier.ValueText} : {MLIRType(p)}");
             return '(' + string.Join(", ", args) + ')';
         }
 
-        private static string GetAnonymousArgumentsString(MethodDeclarationSyntax method)
+        private string GetAnonymousArgumentsString(MethodDeclarationSyntax method)
         {
-            var args = method.ParameterList.Parameters.Select(p => $"i32");
+            var args = method.ParameterList.Parameters.Select(p => MLIRType(p));
             return '(' + string.Join(", ", args) + ')';
+        }
+
+        private string MLIRType(ParameterSyntax p) => MLIRType(semanticModel.GetDeclaredSymbol(p).GetSymbolType());
+
+        private string MLIRType(ExpressionSyntax e) => MLIRType(semanticModel.GetTypeInfo(e).Type);
+
+        private string MLIRType(VariableDeclaratorSyntax v) => MLIRType(semanticModel.GetDeclaredSymbol(v).GetSymbolType());
+
+        private string MLIRType(ITypeSymbol csType)
+        {
+            Debug.Assert(csType != null);
+            if (csType.SpecialType == SpecialType.System_Boolean)
+            {
+                return "i1";
+            }
+            else if (csType.SpecialType == SpecialType.System_Int32)
+            {
+                return "i32";
+            }
+            else
+            {
+                return "none";
+            }
+        }
+
+        private bool IsTypeKnown(ITypeSymbol csType)
+        {
+            return csType.SpecialType == SpecialType.System_Boolean ||
+                csType.SpecialType == SpecialType.System_Int32;
         }
 
         private void ExtractInstruction(SyntaxNode op)
@@ -193,39 +230,16 @@ namespace SonarAnalyzer
             switch (op.Kind())
             {
                 case SyntaxKind.AddExpression:
-                    {
-                        var binExpr = op as BinaryExpressionSyntax;
-                        writer.WriteLine($"%{OpId(op)} = addi %{OpId(binExpr.Left)}, %{OpId(binExpr.Right)} : i32 {GetLocation(op)}");
-                        break;
-                    }
                 case SyntaxKind.SubtractExpression:
-                    {
-                        var binExpr = op as BinaryExpressionSyntax;
-                        writer.WriteLine($"%{OpId(op)} = subi %{OpId(binExpr.Left)}, %{OpId(binExpr.Right)} : i32 {GetLocation(op)}");
-                        break;
-                    }
                 case SyntaxKind.MultiplyExpression:
-                    {
-                        var binExpr = op as BinaryExpressionSyntax;
-                        writer.WriteLine($"%{OpId(op)} = muli %{OpId(binExpr.Left)}, %{OpId(binExpr.Right)} : i32 {GetLocation(op)}");
-                        break;
-                    }
                 case SyntaxKind.DivideExpression:
-                    {
-                        var binExpr = op as BinaryExpressionSyntax;
-                        writer.WriteLine($"%{OpId(op)} = divis %{OpId(binExpr.Left)}, %{OpId(binExpr.Right)} : i32 {GetLocation(op)}");
-                        break;
-                    }
                 case SyntaxKind.ModuloExpression:
-                    {
-                        var binExpr = op as BinaryExpressionSyntax;
-                        writer.WriteLine($"%{OpId(op)} = remis %{OpId(binExpr.Left)}, %{OpId(binExpr.Right)} : i32 {GetLocation(op)}");
-                        break;
-                    }
+                    ExtractBinaryExpression(op);
+                    break;
                 case SyntaxKind.NumericLiteralExpression:
                     {
                         var lit = op as LiteralExpressionSyntax;
-                        writer.WriteLine($"%{OpId(op)} = constant {lit.Token.ValueText} : i32 {GetLocation(op)}");
+                        writer.WriteLine($"%{OpId(op)} = constant {lit.Token.ValueText} : {MLIRType(lit)} {GetLocation(op)}");
                         break;
                     }
                 case SyntaxKind.EqualsExpression:
@@ -250,37 +264,89 @@ namespace SonarAnalyzer
                     {
                         var id = op as IdentifierNameSyntax;
                         var decl = semanticModel.GetSymbolInfo(id).Symbol.DeclaringSyntaxReferences[0].GetSyntax();
-                        writer.WriteLine($"%{OpId(op)} = cbde.load %{OpId(decl)} : memref<i32> {GetLocation(op)}");
+                        if (!SupportedTypes(id))
+                        {
+                            writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(id)} {GetLocation(op)} // Variable of unknown type {id.Identifier.ValueText}");
+                            return;
+                        }
+                        writer.WriteLine($"%{OpId(op)} = cbde.load %{OpId(decl)} : memref<{MLIRType(id)}> {GetLocation(op)}");
                     }
                     break;
                 case SyntaxKind.VariableDeclarator:
                     {
                         var decl = op as VariableDeclaratorSyntax;
                         var id = OpId(decl);
-                        writer.WriteLine($"%{id} = cbde.alloca i32 : () -> memref<i32> {GetLocation(decl)} // {decl.Identifier.ValueText}");
+                        if (!IsTypeKnown(semanticModel.GetDeclaredSymbol(decl).GetSymbolType()))
+                        {
+                            // No need to write the variable, all references to it will be replaced by "unknown"
+                            return;
+                        }
+                        writer.WriteLine($"%{id} = cbde.alloca {MLIRType(decl)} : () -> memref<{MLIRType(decl)}> {GetLocation(decl)} // {decl.Identifier.ValueText}");
                         if (decl.Initializer != null)
                         {
-                            writer.WriteLine($"cbde.store %{OpId(decl.Initializer.Value)}, %{id} : memref<i32> {GetLocation(decl)}");
+                            writer.WriteLine($"cbde.store %{OpId(decl.Initializer.Value)}, %{id} : memref<{MLIRType(decl)}> {GetLocation(decl)}");
                         }
                     }
                     break;
                 case SyntaxKind.SimpleAssignmentExpression:
                     {
                         var assign = op as AssignmentExpressionSyntax;
+                        if (!SupportedTypes(assign))
+                        {
+                            return;
+                        }
                         var lhs = semanticModel.GetSymbolInfo(assign.Left).Symbol.DeclaringSyntaxReferences[0].GetSyntax();
-                        writer.WriteLine($"cbde.store %{OpId(assign.Right)}, %{OpId(lhs)} : memref<i32> {GetLocation(op)}");
+                        writer.WriteLine($"cbde.store %{OpId(assign.Right)}, %{OpId(lhs)} : memref<{MLIRType(assign)}> {GetLocation(op)}");
                         break;
                     }
                 default:
-                    writer.WriteLine($"%{OpId(op)} = constant {OpId(op)} : i32 {GetLocation(op)} // {op.ToFullString()} ({op.Kind()})");
+                    writer.WriteLine($"%{OpId(op)} = constant unit {GetLocation(op)} // {op.ToFullString()} ({op.Kind()})");
                     break;
             }
         }
+
+        private void ExtractBinaryExpression(SyntaxNode op)
+        {
+            var binExpr = op as BinaryExpressionSyntax;
+            if (!SupportedTypes(binExpr.Left, binExpr.Right,binExpr))
+            {
+                writer.WriteLine($"// Skip binary expression on unsupported types {op.ToFullString()}");
+                return;
+            }
+            // TODO : C#8 : Use switch expression
+            string opName;
+            switch (binExpr.Kind())
+            {
+                case SyntaxKind.AddExpression: opName = "addi"; break;
+                case SyntaxKind.SubtractExpression: opName = "subi"; break;
+                case SyntaxKind.MultiplyExpression: opName = "muli"; break;
+                case SyntaxKind.DivideExpression:  opName = "divis"; break;
+                case SyntaxKind.ModuloExpression:  opName = "remis"; break;
+                default:
+                    {
+                        writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(binExpr)} {GetLocation(binExpr)} // Unknown operator {op.ToFullString()}");
+                        return;
+                    }
+            }
+            writer.WriteLine($"%{OpId(op)} = {opName} %{OpId(binExpr.Left)}, %{OpId(binExpr.Right)} : {MLIRType(binExpr)} {GetLocation(binExpr)}");
+        }
+
+        private bool SupportedTypes(params ExpressionSyntax [] exprs)
+        {
+            return exprs.All(expr => IsTypeKnown(semanticModel.GetTypeInfo(expr).Type));
+        }
+
         private void ExportComparison(string compName, SyntaxNode op)
         {
             var binExpr = op as BinaryExpressionSyntax;
+            if (!SupportedTypes(binExpr.Left, binExpr.Right))
+            {
+                writer.WriteLine($"%{OpId(op)} = cbde.unknown : i1  {GetLocation(binExpr)} // comparison of unknown type: {op.ToFullString()}");
+                return;
+            }
             // The type is the type of the operands, not of the result, which is always i1
-            writer.WriteLine($"%{OpId(op)} = cmpi \"{compName}\", %{OpId(binExpr.Left)}, %{OpId(binExpr.Right)} : i32 {GetLocation(op)}");
+            writer.WriteLine($"%{OpId(op)} = cmpi \"{compName}\", %{OpId(binExpr.Left)}, %{OpId(binExpr.Right)} : {MLIRType(binExpr.Left)} {GetLocation(binExpr)}");
+
         }
 
         private string GetLocation(SyntaxNode node)
