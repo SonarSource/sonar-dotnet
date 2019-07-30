@@ -77,9 +77,9 @@ class C
         private static void ExportAllMethods(string code, TextWriter writer, bool withLoc)
         {
             (var ast, var semanticModel) = TestHelper.Compile(code);
+            var exporter = new MLIRExporter(writer, semanticModel, withLoc);
             foreach(var method in ast.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
             {
-                var exporter = new MLIRExporter(writer, semanticModel, withLoc);
                 exporter.ExportFunction(method);
             }
 
