@@ -265,6 +265,11 @@ namespace SonarAnalyzer
                     {
                         var id = op as IdentifierNameSyntax;
                         var decl = semanticModel.GetSymbolInfo(id).Symbol.DeclaringSyntaxReferences[0].GetSyntax();
+                        if (decl is MethodDeclarationSyntax)
+                        {
+                            // We will fetch the function only when looking t the function call itself, we just skip the identifier
+                            break;
+                        }
                         if (!SupportedTypes(id))
                         {
                             writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(id)} {GetLocation(op)} // Variable of unknown type {id.Identifier.ValueText}");
@@ -285,6 +290,11 @@ namespace SonarAnalyzer
                         writer.WriteLine($"%{id} = cbde.alloca {MLIRType(decl)} {GetLocation(decl)} // {decl.Identifier.ValueText}");
                         if (decl.Initializer != null)
                         {
+                            if (!SupportedTypes(decl.Initializer.Value))
+                            {
+                                writer.WriteLine("// Initialized with unknown data");
+                                break;
+                            }
                             writer.WriteLine($"cbde.store %{OpId(decl.Initializer.Value)}, %{id} : memref<{MLIRType(decl)}> {GetLocation(decl)}");
                         }
                     }
@@ -301,7 +311,14 @@ namespace SonarAnalyzer
                         break;
                     }
                 default:
-                    writer.WriteLine($"%{OpId(op)} = constant unit {GetLocation(op)} // {op.ToFullString()} ({op.Kind()})");
+                    if (op is ExpressionSyntax expr)
+                    {
+                        writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(expr)} {GetLocation(op)} // {op.ToFullString()} ({op.Kind()})");
+                    }
+                    else
+                    {
+                        writer.WriteLine($"%{OpId(op)} = cbde.unknown : none {GetLocation(op)} // {op.ToFullString()} ({op.Kind()})");
+                    }
                     break;
             }
         }

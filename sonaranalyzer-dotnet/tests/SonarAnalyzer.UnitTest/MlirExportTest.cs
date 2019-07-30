@@ -305,6 +305,27 @@ long withLong()
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void FuncCall()
+        {
+            var code = @"
+class A {
+int triple(int i) { return 3*i; }
+void log(int i) {}
+
+int f(int i)
+{
+    var result = triple(triple(i));
+    log(result);
+    return result;
+}
+}
+";
+            var dot = GetCfgGraph(code, "f");
+
+            ValidateCodeGeneration(code);
+        }
+
     }
 }
 
