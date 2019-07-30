@@ -58,7 +58,7 @@ namespace SonarAnalyzer
             foreach (var param in method.ParameterList.Parameters)
             {
                 var id = OpId(param);
-                writer.WriteLine($"%{id} = cbde.alloca {MLIRType(param)} : () -> memref<{MLIRType(param)}> {GetLocation(param)}");
+                writer.WriteLine($"%{id} = cbde.alloca {MLIRType(param)} {GetLocation(param)}");
                 writer.WriteLine($"cbde.store %{param.Identifier.ValueText}, %{id} : memref<{MLIRType(param)}> {GetLocation(param)}");
             }
             writer.WriteLine("br ^0");
@@ -281,7 +281,7 @@ namespace SonarAnalyzer
                             // No need to write the variable, all references to it will be replaced by "unknown"
                             return;
                         }
-                        writer.WriteLine($"%{id} = cbde.alloca {MLIRType(decl)} : () -> memref<{MLIRType(decl)}> {GetLocation(decl)} // {decl.Identifier.ValueText}");
+                        writer.WriteLine($"%{id} = cbde.alloca {MLIRType(decl)} {GetLocation(decl)} // {decl.Identifier.ValueText}");
                         if (decl.Initializer != null)
                         {
                             writer.WriteLine($"cbde.store %{OpId(decl.Initializer.Value)}, %{id} : memref<{MLIRType(decl)}> {GetLocation(decl)}");
