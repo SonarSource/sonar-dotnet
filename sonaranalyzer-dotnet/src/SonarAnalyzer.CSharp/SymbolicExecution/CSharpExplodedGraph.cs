@@ -136,7 +136,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.CatchFilterClause:
                     VisitBinaryBranch(binaryBranchBlock, node, ((CatchFilterClauseSyntax)binaryBranchBlock.BranchingNode).FilterExpression);
                     return;
-
+                // this is only for switch cases without a when. We handle C#7 switch case as a default BinaryBranch
                 case SyntaxKind.CaseSwitchLabel when !CasePatternSwitchLabelSyntaxWrapper.IsInstance(binaryBranchBlock.BranchingNode):
                     VisitCaseSwitchBinaryBranchBlock(binaryBranchBlock, node, (CaseSwitchLabelSyntax)binaryBranchBlock.BranchingNode);
                     return;
