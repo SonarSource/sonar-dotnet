@@ -117,6 +117,10 @@ namespace SonarAnalyzer
                         case ContinueStatementSyntax continueStmt:
                             writer.WriteLine($"br ^{BlockId(jb.SuccessorBlock)} {GetLocation(continueStmt)} // continue");
                             break;
+                        case ThrowStatementSyntax throwStmt:
+                            // TODO : Should we transfert to a catch block if we are inside a try/catch?
+                            writer.WriteLine($"cbde.throw %{OpId(throwStmt.Expression)} :  {MLIRType(throwStmt.Expression)} {GetLocation(throwStmt)}");
+                            break;
                         default:
                             Debug.Assert(false, "Unknown kind of JumpBlock");
                             break;
