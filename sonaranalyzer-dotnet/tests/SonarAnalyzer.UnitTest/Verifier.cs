@@ -133,6 +133,8 @@ namespace SonarAnalyzer.UnitTest
             foreach (var compilation in solutionBuilder.Compile(options?.ToArray()))
             {
                 DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, checkMode);
+                // TODO: call to generate MLIR
+
             }
         }
 

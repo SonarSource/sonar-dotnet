@@ -65,7 +65,9 @@ namespace SonarAnalyzer
 
         private bool IsTooClomplexForMLIROrTheCFG(MethodDeclarationSyntax method)
         {
+            // appel de fonctions
             return method.DescendantNodes().Any(n =>
+            n.IsKind(SyntaxKind.TryStatement) ||
             n.IsKind(SyntaxKind.ForEachStatement) ||
             n.IsKind(SyntaxKind.AwaitExpression) ||
             n.IsKind(SyntaxKind.YieldReturnStatement) ||
