@@ -218,7 +218,7 @@ namespace SonarAnalyzer.SymbolicExecution
             if (oldConstraints.HasConstraint(ObjectConstraint.Null))
             {
                 // It was null, and now it should be true or false
-                return Enumerable.Empty<ProgramState>();
+                return new[] { programState };
             }
 
             var oldBoolConstraint = oldConstraints.GetConstraintOrDefault<BoolConstraint>();

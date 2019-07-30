@@ -1247,27 +1247,97 @@ namespace Tests.Diagnostics
                 }
             }
 
-            void Case2()
+            void Case2(bool? i)
             {
+                if (i == null)
+                {
+
+                }
+                if (i == true)
+                {
+
+                }
+                if (i == false)
+                {
+
+                }
+
+                i = null;
+                if (i == null) // Noncompliant 
+                {
+
+                }
+                if (i == true) // Noncompliant 
+                { // Secondary
+
+                }
+                if (i == false) // Noncompliant 
+                { // Secondary
+
+                }
+
+                i = true;
+                if (i == null) // Noncompliant 
+                { // Secondary
+
+                }
+                if (i == true) // Noncompliant 
+                {
+
+                }
+                if (i == false) // Noncompliant 
+                {  // Secondary
+
+                }
+
+                i = false;
+                if (i == null) // Noncompliant 
+                { // Secondary
+
+                }
+                if (i == true) // Noncompliant 
+                { // Secondary
+
+                }
+                if (i == false) // Noncompliant 
+                {
+
+                }
+
                 bool? b2 = true;
                 if (b2 == false) // Noncompliant {{Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.}}
                 { // Secondary
                 }
 
                 bool? b3 = true;
-                if (b3 == null) // Should be NC
-                {
+                if (b3 == null) // Noncompliant
+                { // Secondary
                 }
 
                 bool? b4 = null;
-                if (b4 == true) // Should be NC
-                {
+                if (b4 == true) // Noncompliant
+                { // Secondary
                 }
 
                 bool? b5 = null;
-                if (b5 == false) // Should be NC
+                if (b5 == false) // Noncompliant
+                { // Secondary
+                }
+
+
+                bool? b6 = null;
+                if (b6 == null) // Noncompliant
                 {
                 }
+                bool? b7 = true;
+                if (b7 == true) // Noncompliant
+                {
+                }
+                bool? b8 = false;
+                if (b8 == false) // Noncompliant
+                {
+                }
+
             }
 
             void Case3(bool? b)

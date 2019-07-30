@@ -158,7 +158,7 @@ namespace Tests.Diagnostics
                     break;
 
                 case null:
-                    o.ToString(); // Compliant, False Negative
+                    o.ToString(); // Noncompliant
                     break;
 
                 default:
@@ -187,6 +187,56 @@ namespace Tests.Diagnostics
 
         }
       }
+    }
+
+    public void Method1(object obj)
+    {
+      switch (obj)
+      {
+        case string s1:
+          break;
+        default:
+          return;
+      }
+      var s = obj.ToString();
+    }
+
+    public void Method2(object obj)
+    {
+      switch (obj)
+      {
+        case null:
+          break;
+        default:
+          return;
+      }
+      var s1 = obj.ToString(); // Noncompliant
+    }
+
+    public void Method3(object obj)
+    {
+      obj = null;
+      switch (obj)
+      {
+        case string s1:
+          return;
+        default:
+          break;
+      }
+      var s = obj.ToString(); // Noncompliant
+    }
+
+    public void Method4(object obj)
+    {
+      obj = null;
+      switch (obj)
+      {
+        case null:
+          return;
+        default:
+          break;
+      }
+      var s = obj.ToString();
     }
   }
 }

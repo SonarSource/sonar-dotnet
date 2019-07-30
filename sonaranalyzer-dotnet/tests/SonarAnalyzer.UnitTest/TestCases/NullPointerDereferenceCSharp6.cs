@@ -136,7 +136,7 @@ namespace Tests.Diagnostics
       switch (obj?.Color)
       {
         case null:
-          Console.ForegroundColor = obj.Color; // FN #2338
+          Console.ForegroundColor = obj.Color; // Noncompliant
           break;
         case ConsoleColor.Red:
           Console.ForegroundColor = obj.Color; //compliant
@@ -149,13 +149,14 @@ namespace Tests.Diagnostics
 
     public void Method2(ReproForIssue2338 obj)
     {
+      obj = null;
       switch (obj?.Color)
       {
         case ConsoleColor.Red:
           Console.ForegroundColor = obj.Color; //compliant
           break;
         default:
-          Console.WriteLine($"Color {obj.Color} is not supported."); // FN #2338
+          Console.WriteLine($"Color {obj.Color} is not supported."); // Noncompliant
           break;
       }
     }
