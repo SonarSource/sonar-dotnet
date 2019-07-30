@@ -30,6 +30,11 @@ namespace SonarAnalyzer
                 return;
             }
             blockCounter = 0;
+            blockMap.Clear();
+
+            opCounter = 0;
+            opMap.Clear();
+
             var returnType = HasNoReturn(method) ?
                 "()" :
                 MLIRType(method.ReturnType);
