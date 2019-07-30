@@ -70,29 +70,35 @@ class C
         private static void ExportMethod(string code, TextWriter writer, string functionName)
         {
             (var method, var semanticModel) = TestHelper.Compile(code).GetMethod(functionName);
-            var exporter = new MLIRExporter(writer, semanticModel);
+            var exporter = new MLIRExporter(writer, semanticModel, false);
             exporter.ExportFunction(method);
         }
 
-        private static void ExportAllMethods(string code, TextWriter writer)
+        private static void ExportAllMethods(string code, TextWriter writer, bool withLoc)
         {
             (var ast, var semanticModel) = TestHelper.Compile(code);
             foreach(var method in ast.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
             {
-                var exporter = new MLIRExporter(writer, semanticModel);
+                var exporter = new MLIRExporter(writer, semanticModel, withLoc);
                 exporter.ExportFunction(method);
             }
 
         }
+        private void ValidateCodeGeneration(string code, bool withLoc)
+        {
+            var locPath = withLoc ? ".loc" : "";
+            var path = Path.Combine(Path.GetTempPath(), $"csharp.{TestContext.TestName}{locPath}.mlir");
+            using (var writer = new StreamWriter(path))
+            {
+                ExportAllMethods(code, writer, withLoc);
+            }
+            ValidateIR(path);
+        }
 
         private void ValidateCodeGeneration(string code)
         {
-            var path = Path.Combine(Path.GetTempPath(), $"csharp.{TestContext.TestName}.mlir");
-            using (var writer = new StreamWriter(path))
-            {
-                ExportAllMethods(code, writer);
-            }
-            ValidateIR(path);
+            ValidateCodeGeneration(code, true);
+            ValidateCodeGeneration(code, false);
         }
         protected IControlFlowGraph GetCfgForMethod(string code, string methodName)
         {
@@ -298,6 +304,8 @@ long withLong()
 ";
             ValidateCodeGeneration(code);
         }
+
     }
 }
+
 
