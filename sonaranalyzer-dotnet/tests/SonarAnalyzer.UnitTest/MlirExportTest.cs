@@ -376,6 +376,31 @@ int TryTwoCatches(int i)
     return j+5;
 }
 
+int Throw(int i)
+{
+    if (i> 42)
+    {
+        throw new System.Exception();
+    }
+    return 10;
+}
+
+int TryThrow(int i)
+{
+    ++i;
+    try
+    {
+        if (i> 42)
+        {
+            throw new System.Exception();
+        }
+        return 10;
+    }
+    finally {
+        ++i;
+    }
+    return 20;
+}
 ";
             ValidateCodeGeneration(code);
         }
@@ -403,11 +428,16 @@ int g(A a, int i)
 }
 }
 ";
-            var dot = GetCfgGraph(code, "f");
-
             ValidateCodeGeneration(code);
         }
-
+        public int Throw(int i)
+        {
+            if (i > 42)
+            {
+                throw new System.Exception();
+            }
+            return 10;
+        }
     }
 }
 
