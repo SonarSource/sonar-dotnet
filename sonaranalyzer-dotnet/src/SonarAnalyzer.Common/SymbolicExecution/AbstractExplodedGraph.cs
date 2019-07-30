@@ -436,7 +436,11 @@ namespace SonarAnalyzer.SymbolicExecution
         {
             return type != null &&
                 type.IsValueType &&
-                !type.OriginalDefinition.Is(KnownType.System_Nullable_T);
+                !type.OriginalDefinition.Is(KnownType.System_Nullable_T)
+                && !(type.OriginalDefinition.TypeKind == TypeKind.Struct && type.SpecialType == SpecialType.None);
+                // if it is a non nullable struct comparing it to null is a compilation error.
+                // This will eliminate FP and should not generate FN when the Program compiles.
+                // TODO: remove last condition when we can compile ref struct (nullable struct).
         }
     }
 }

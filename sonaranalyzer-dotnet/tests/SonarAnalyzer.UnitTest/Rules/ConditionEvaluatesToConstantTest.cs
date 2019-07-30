@@ -23,6 +23,8 @@ using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
+using System.Collections.Immutable;
+using CS = Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -45,6 +47,16 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp7.cs",
                 new ConditionEvaluatesToConstant(),
                 ParseOptionsHelper.FromCSharp7);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ConditionEvaluatesToConstant_FromLatest()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharpLatest.cs",
+                new ConditionEvaluatesToConstant(),
+                ImmutableArray.Create(new CS.CSharpParseOptions(CS.LanguageVersion.Latest)),
+                CompilationErrorBehavior.Ignore); // Fix ignoring compilation when nullable struct is supported
         }
     }
 }

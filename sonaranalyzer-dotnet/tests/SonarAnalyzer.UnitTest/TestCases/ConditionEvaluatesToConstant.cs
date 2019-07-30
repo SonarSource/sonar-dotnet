@@ -1209,9 +1209,9 @@ namespace Tests.Diagnostics
         {
             public static void M(MyStructWithNoOperator a)
             {
-                if (a == null) // Noncompliant, also a compiler error
+                if (a == null) // temporary FN, but that is fine since it is a compilation error
                                // Error@-1 [CS0019]
-                { // Secondary
+                {
                 }
             }
         }
