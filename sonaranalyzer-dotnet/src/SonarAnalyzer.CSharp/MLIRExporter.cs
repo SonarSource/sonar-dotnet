@@ -50,7 +50,9 @@ namespace SonarAnalyzer
             n.IsKind(SyntaxKind.ForEachStatement) ||
             n.IsKind(SyntaxKind.AwaitExpression) ||
             n.IsKind(SyntaxKind.YieldReturnStatement) ||
-            n.IsKind(SyntaxKind.YieldBreakStatement));
+            n.IsKind(SyntaxKind.YieldBreakStatement) ||
+            n.IsKind(SyntaxKind.TryStatement)
+            );
         }
 
         private void CreateEntryBlock(MethodDeclarationSyntax method)
