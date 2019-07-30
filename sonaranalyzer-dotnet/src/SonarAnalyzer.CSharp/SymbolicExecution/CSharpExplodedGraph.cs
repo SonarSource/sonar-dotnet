@@ -892,6 +892,12 @@ namespace SonarAnalyzer.SymbolicExecution
                 return SetNonNullConstraintIfValueType(symbol, sv, newProgramState);
             }
 
+            // Taking a an argument by ref will remove its constraint.
+            if(argument.RefOrOutKeyword.IsKind(SyntaxKind.RefKeyword))
+            {
+                newProgramState = newProgramState.RemoveConstraint(sv);
+            }
+
             newProgramState = newProgramState.PopValue();
             sv = SymbolicValue.Create(typeSymbol);
             newProgramState = newProgramState.PushValue(sv);

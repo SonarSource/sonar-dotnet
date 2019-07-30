@@ -1954,4 +1954,57 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    public class RefArgTest
+    {
+        public void Method(ref string s, int x) { }
+        public void Method1(string infixes)
+        {
+            if (infixes != null)
+            {
+                Method(ref infixes, infixes.Length);
+                if (infixes == null) // Compliant
+                {
+                    return;
+                }
+            }
+        }
+
+        public void Method2(string infixes)
+        {
+            if (infixes != null)
+            {
+                Method(ref infixes, infixes.Length);
+                if (infixes != null)  // Compliant
+                {
+                    return;
+                }
+            }
+        }
+
+        public void Method3(string infixes)
+        {
+            if (infixes == null)
+            {
+                Method(ref infixes, infixes.Length);
+                if (infixes == null)  // Compliant
+                {
+                    return;
+                }
+            }
+        }
+
+        public void Method4(string infixes)
+        {
+            if (infixes == null)
+            {
+                Method(ref infixes, infixes.Length);
+                if (infixes != null) // Compliant
+                {
+                    return;
+                }
+            }
+        }
+
+    }
 }

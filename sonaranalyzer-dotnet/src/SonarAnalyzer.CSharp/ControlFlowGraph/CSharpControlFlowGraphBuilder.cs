@@ -1011,11 +1011,29 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private Block BuildInvocationLikeExpression(ExpressionSyntax parent, Block currentBlock,
             ExpressionSyntax child, IEnumerable<ArgumentSyntax> arguments)
         {
-            var args = arguments == null
-                ? Enumerable.Empty<ExpressionSyntax>()
-                : arguments.Select(a => a.Expression);
+            currentBlock.ReversedInstructions.Add(parent);
+            var isNameof = parent is InvocationExpressionSyntax invocation
+                && invocation.IsNameof(this.semanticModel);
 
-            return BuildSimpleNestedExpression(parent, currentBlock, new[] { child }.Concat(args));
+            if (isNameof)
+                return currentBlock;
+
+            foreach (var arg in arguments.Reverse())
+            {
+                if (arg.RefOrOutKeyword.IsKind(SyntaxKind.RefKeyword))
+                {
+                    currentBlock = BuildExpression(arg.Expression, currentBlock);
+                }
+            }
+
+            foreach (var arg in arguments.Reverse())
+            {
+                if (!arg.RefOrOutKeyword.IsKind(SyntaxKind.RefKeyword))
+                {
+                    currentBlock = BuildExpression(arg.Expression, currentBlock);
+                }
+            }
+            return BuildExpression(child, currentBlock);
         }
 
         private Block BuildObjectCreationExpression(ObjectCreationExpressionSyntax expression, Block currentBlock)

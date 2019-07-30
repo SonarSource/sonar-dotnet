@@ -375,6 +375,19 @@ namespace SonarAnalyzer.SymbolicExecution
             return value;
         }
 
+        internal ProgramState RemoveConstraint(SymbolicValue symbolicValue)
+        {
+            var cleanedConstraints = Constraints
+                .Where(kv => kv.Key != symbolicValue)
+                .ToImmutableDictionary();
+            return new ProgramState(
+                Values,
+                cleanedConstraints,
+                ProgramPointVisitCounts,
+                ExpressionStack,
+                Relationships);
+        }
+
         internal ProgramState RemoveSymbols(Func<ISymbol, bool> predicate)
         {
             var cleanedValues = Values
