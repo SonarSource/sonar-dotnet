@@ -313,7 +313,14 @@ namespace SonarAnalyzer
                 default:
                     if (op is ExpressionSyntax expr)
                     {
-                        writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(expr)} {GetLocation(op)} // {op.ToFullString()} ({op.Kind()})");
+                        var exprType = semanticModel.GetTypeInfo(expr).Type;
+                        if (exprType == null)
+                        {
+                            // Some intermediate expressions have no type (member access, initialization of member...)
+                            // and therefore, they have no real value associated to them, we can just ignore them
+                            break;
+                        }
+                        writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(exprType)} {GetLocation(op)} // {op.ToFullString()} ({op.Kind()})");
                     }
                     else
                     {
