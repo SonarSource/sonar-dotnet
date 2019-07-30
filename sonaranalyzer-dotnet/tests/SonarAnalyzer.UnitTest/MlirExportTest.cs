@@ -310,13 +310,20 @@ long withLong()
         {
             var code = @"
 class A {
-int triple(int i) { return 3*i; }
+public int triple(int i) { return 3*i; }
 void log(int i) {}
 
 int f(int i)
 {
     var result = triple(triple(i));
     log(result);
+    return result;
+}
+
+int g(A a, int i)
+{
+    var result = a.triple(i);
+    a.log(result);
     return result;
 }
 }
