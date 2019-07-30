@@ -14,10 +14,11 @@ namespace SonarAnalyzer
 {
     public class MLIRExporter
     {
-        public MLIRExporter(TextWriter w, SemanticModel model)
+        public MLIRExporter(TextWriter w, SemanticModel model, bool withLoc)
         {
             writer = w;
             semanticModel = model;
+            exportsLocations = withLoc;
         }
 
         public void ExportFunction(MethodDeclarationSyntax method)
@@ -351,6 +352,10 @@ namespace SonarAnalyzer
 
         private string GetLocation(SyntaxNode node)
         {
+            if (!exportsLocations)
+            {
+                return string.Empty;
+            }
             // TODO: We should decide which of GetLineSpan or GetMappedLineSpan is better to use
             var loc = node.GetLocation().GetLineSpan();
             var location = $"loc(\"{loc.Path}\"" +
@@ -362,6 +367,7 @@ namespace SonarAnalyzer
 
         private readonly TextWriter writer;
         private readonly SemanticModel semanticModel;
+        private readonly bool exportsLocations;
         private readonly Dictionary<Block, int> blockMap = new Dictionary<Block, int>();
         private int blockCounter = 0;
         private readonly Dictionary<SyntaxNode, int> opMap = new Dictionary<SyntaxNode, int>();
