@@ -97,8 +97,8 @@ class C
 
         private void ValidateCodeGeneration(string code)
         {
-            ValidateCodeGeneration(code, true);
             ValidateCodeGeneration(code, false);
+            ValidateCodeGeneration(code, true);
         }
         protected IControlFlowGraph GetCfgForMethod(string code, string methodName)
         {
@@ -301,6 +301,81 @@ long withLong()
     }
     return total;
 }
+";
+            ValidateCodeGeneration(code);
+        }
+        [TestMethod]
+        public void TryCatchFinally()
+        {
+            var code = @"
+int TryCatch(int i)
+{
+    int j = 3;
+    try
+    {
+        int k = 2;
+    }
+    catch (System.InvalidOperationException e)
+    {
+        return j+2;
+    }
+    return j;
+}
+
+int TryFinally(int i)
+{
+    int j = 3;
+    try
+    {
+        int k = 2;
+    }
+    finally
+    {
+        j++;
+    }
+    return j;
+}
+
+int TryCatchFinally(int i)
+{
+    int j = 3;
+    try
+    {
+        int k = 2;
+    }
+    catch (System.InvalidOperationException e)
+    {
+        return j+2;
+    }
+    finally
+    {
+        j++;
+    }
+    return j;
+}
+
+int TryTwoCatches(int i)
+{
+    int j = 3;
+    try
+    {
+        int k = 2;
+    }
+    catch (System.InvalidOperationException e)
+    {
+        return j+2;
+    }
+    catch (System.Exception e)
+    {
+        return j+2;
+    }
+    finally
+    {
+        j++;
+    }
+    return j+5;
+}
+
 ";
             ValidateCodeGeneration(code);
         }
