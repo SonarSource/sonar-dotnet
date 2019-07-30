@@ -27,7 +27,7 @@ namespace Tests.Diagnostics
             {
                 o = new object();
             }
-            return o.ToString(); // Noncompliant, when e.Message is null o will be null
+            return o.ToString(); // If e.Message is null, the exception won't be caught and this is not reachable
         }
 
         // https://github.com/SonarSource/sonar-csharp/issues/1324

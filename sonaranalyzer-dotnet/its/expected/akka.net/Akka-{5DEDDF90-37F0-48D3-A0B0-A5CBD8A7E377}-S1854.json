@@ -43,19 +43,6 @@
 "id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'actor'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
-"region":  {
-"startLine":  638,
-"startColumn":  23,
-"endLine":  638,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S1854",
-"message":  "Remove this useless assignment to local variable 'actor'.",
-"location":  {
 "uri":  "sources\akka.net\src\core\Akka\Util\Resolver.cs",
 "region":  {
 "startLine":  32,

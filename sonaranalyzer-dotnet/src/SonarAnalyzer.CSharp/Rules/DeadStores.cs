@@ -113,6 +113,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var block in cfg.Blocks)
             {
+                // For the `finally` instruction, 2 different blocks are created:
+                // - one block for the "uncaught exception flow", which will always point to EXIT
+                // - one block for the "normal flow", which points to the block after the `try-finally` (possibly EXIT)
+                if (block is SimpleBlock simpleBlock &&
+                    !(block is JumpBlock) &&
+                    simpleBlock.SuccessorBlock is ExitBlock &&
+                    block.PredecessorBlocks.Count == 1 &&
+                    block.PredecessorBlocks.ElementAt(0) is BranchBlock possibleTry &&
+                    possibleTry.BranchingNode.IsKind(SyntaxKind.TryStatement))
+                {
+                    // we ignore the "uncaught exception flow" block because it gives FPs when inside a loop
+                    // this leads to FNs because we cannot tell what block is actually a `finally` block
+                    // so any block which follows a Try statement and points to EXIT will be ignored
+                    continue;
+                }
                 CheckCfgBlockForDeadStores(block, lva.GetLiveOut(block), lva.CapturedVariables, node, declaration, context);
             }
         }

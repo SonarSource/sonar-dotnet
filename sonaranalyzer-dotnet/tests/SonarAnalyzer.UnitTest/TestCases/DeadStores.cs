@@ -416,6 +416,70 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class AkkaSnippet
+    {
+        internal void OnlyFinally(object actor)
+        {
+            try
+            {
+                Foo(actor);
+            }
+            finally
+            {
+                // the root cause of this situation is the fact that:
+                // - for each finally clause, to separate blocks are generated (see comments in DeadStore class)
+                // - when analyzing a block that follow a try statement, we cannot tell whether it's a catch,
+                //   a finally or just the code which follows the try-catch-finally statement
+                //  this FN can be fixed by adding finally clause in the instructions of the finally block to distinguish catch from finally
+                actor = null; // FN
+            }
+        }
+
+        internal void Finally_Followed_By_Deadstore(object actor)
+        {
+            try
+            {
+                Foo(actor);
+            }
+            finally
+            {
+                actor = null; // Noncompliant
+            }
+            actor = null; // Noncompliant
+        }
+
+        internal void SnippetTwo(object actor)
+        {
+            try
+            {
+                Foo(actor);
+            }
+            catch (Exception)
+            {
+                actor = null; // Noncompliant
+            }
+            Foo(null);
+        }
+
+        internal void SnippetThree(object actor, int i)
+        {
+            try
+            {
+                Foo(actor);
+            }
+            catch (Exception) when(i == 1)
+            {
+                actor = null; // Noncompliant
+            }
+            finally
+            {
+                actor = null; // Noncompliant
+            }
+        }
+
+        private void Foo(object obj) { }
+    }
+
     public class ReproGithubIssue2311
     {
         private void SwitchCaseWithWhenAndLocalScope(object sender, KeyEventArgs e)
@@ -516,8 +580,8 @@ namespace Tests.Diagnostics
             {
                 try
                 {
-                    attempts++; // Noncompliant FP
-                    // do stuff
+                    attempts++;
+                    DoNothing();
                     break;
                 }
                 catch (Exception ex)
@@ -528,6 +592,37 @@ namespace Tests.Diagnostics
             } while (true);
         }
 
+        public static void ComplexRetryOnException(int retries)
+        {
+            var attempts = 0;
+            try
+            {
+                do
+                {
+                    if (retries > 0)
+                    {
+                        DoNothing();
+                        try
+                        {
+                            attempts++;
+                            DoNothing();
+                            break;
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            DoNothing();
+                        }
+                    }
+                } while (true);
+            }
+            catch (Exception ex)
+            {
+                if (attempts > retries)
+                    throw;
+                DoNothing();
+            }
+        }
+
         public void Bar()
         {
             bool isFirst = true;
@@ -535,20 +630,16 @@ namespace Tests.Diagnostics
             {
                 try
                 {
-                    if (isFirst)
-                    {
-                        Console.WriteLine("First");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Not first");
-                    }
+                    DoNothing(isFirst);
                 }
                 finally
                 {
-                    isFirst = false; // Noncompliant FP
+                    isFirst = false; // is used in DoNothing, after loop
                 }
             }
         }
+
+        private static void DoNothing() { }
+        private static void DoNothing(bool b) { }
     }
 }
