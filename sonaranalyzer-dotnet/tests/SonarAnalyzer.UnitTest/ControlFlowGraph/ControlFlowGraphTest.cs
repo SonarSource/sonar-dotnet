@@ -2774,6 +2774,157 @@ namespace NS
             exit.Should().BeOfType<ExitBlock>();
         }
 
+        // This should be fixed in https://github.com/SonarSource/sonar-dotnet/issues/474
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_TryCatchFinally_InsideLoop_WithBreakInsideTry_AndContinueInsideCatch()
+        {
+            var cfg = Build(@"
+            do
+            {
+                cw0();
+                try
+                {
+                    cw1();
+                    break;
+                }
+                catch(ArgumentNullException e)
+                {
+                    cw2();
+                    continue;
+                }
+                finally
+                {
+                    cw3();
+                    // CS0157 control cannot leave the body of a finally, so we cannot have jumps here
+                }
+                // the below is not reachable
+                cw4();
+            } while (true);
+            cw5();");
+
+            VerifyCfg(cfg, 10);
+
+            var blocks = cfg.Blocks.ToList();
+
+            var doBeforeTry = (SimpleBlock) blocks[0];
+            var tryStatement = (BranchBlock) blocks[1];
+            var tryBody = (BranchBlock) blocks[2];
+            var catchBody = (JumpBlock) blocks[3];
+            var finallyBlock_Exit = (SimpleBlock) blocks[4];
+            var finallyBody_NormalFlow = (SimpleBlock) blocks[5];
+            var afterTry = (SimpleBlock) blocks[6];
+            var whileStmt = (BinaryBranchBlock) blocks[7];
+            var afterDoWhile = (SimpleBlock) blocks[8];
+            var exit = (ExitBlock) blocks.Last();
+
+            VerifyAllInstructions(doBeforeTry, "cw0", "cw0()");
+            doBeforeTry.SuccessorBlocks.Should().OnlyContainInOrder(tryStatement);
+
+            VerifyAllInstructions(tryStatement, "cw1", "cw1()", "break;");
+            tryStatement.SuccessorBlocks.Should().OnlyContainInOrder(catchBody, finallyBody_NormalFlow, finallyBlock_Exit, afterDoWhile);
+
+            tryBody.SuccessorBlocks.Should().OnlyContainInOrder(catchBody, finallyBody_NormalFlow, finallyBlock_Exit);
+
+            VerifyAllInstructions(catchBody, "cw2", "cw2()");
+            catchBody.SuccessorBlock.Should().Be(whileStmt);
+
+            finallyBlock_Exit.SuccessorBlock.Should().Be(exit);
+            // FIXME this is wrong, `finally` should be connected to
+            // - EXIT
+            // - WHILE (because of `continue`)
+            // - afterDoWhile (because of `break`)
+            finallyBody_NormalFlow.SuccessorBlock.Should().Be(afterTry);
+            afterTry.SuccessorBlock.Should().Be(whileStmt);
+
+            VerifyAllInstructions(whileStmt, "true");
+            whileStmt.TrueSuccessorBlock.Should().Be(doBeforeTry);
+            whileStmt.FalseSuccessorBlock.Should().Be(afterDoWhile);
+
+            VerifyAllInstructions(afterDoWhile, "cw5", "cw5()");
+            afterDoWhile.SuccessorBlocks.Should().OnlyContain(exit);
+
+            exit.Should().BeOfType<ExitBlock>();
+        }
+
+        // This should be fixed in https://github.com/SonarSource/sonar-dotnet/issues/474
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_TryFinally_InsideLoop_WithBreakAndContinueInsideTry()
+        {
+            var cfg = Build(@"
+            do
+            {
+                cw0();
+                try
+                {
+                    if (cond)
+                    {
+                        cw1();
+                        continue;
+                    }
+                    else
+                    {
+                        cw2();
+                        break;
+                    }
+                }
+                finally
+                {
+                    cw3();
+                }
+                // the below is not reachable
+                cw4();
+            } while (true);
+            cw5();");
+
+            VerifyCfg(cfg, 11);
+
+            var blocks = cfg.Blocks.ToList();
+
+            var doBeforeTry = (SimpleBlock)blocks[0];
+            var ifInsideTry = (BinaryBranchBlock)blocks[1];
+            var thenContinue = (JumpBlock)blocks[2];
+            var elseIf = (JumpBlock)blocks[3];
+            var tryStatement = (BranchBlock)blocks[4];
+            var finallyBody_ExitFlow = (SimpleBlock)blocks[5];
+            var finallyBody_NormalFlow = (SimpleBlock)blocks[6];
+            var afterTry = (SimpleBlock)blocks[7];
+            var whileStmt = (BinaryBranchBlock)blocks[8];
+            var afterDoWhile = (SimpleBlock)blocks[9];
+            var exit = (ExitBlock)blocks.Last();
+
+            VerifyAllInstructions(doBeforeTry, "cw0", "cw0()");
+            doBeforeTry.SuccessorBlock.Should().Be(ifInsideTry);
+
+            ifInsideTry.TrueSuccessorBlock.Should().Be(thenContinue);
+            ifInsideTry.FalseSuccessorBlock.Should().Be(elseIf);
+
+            VerifyAllInstructions(thenContinue, "cw1", "cw1()");
+            // FIXME it should lead to `finally` which should lead to `whileStmt`
+            thenContinue.SuccessorBlock.Should().Be(whileStmt);
+
+            VerifyAllInstructions(elseIf, "cw2", "cw2()");
+            // FIXME it should lead to `finally` which should lead to `afterDoWhile`
+            elseIf.SuccessorBlock.Should().Be(afterDoWhile);
+
+            // FIXME this is weird and is basically skipped
+            tryStatement.SuccessorBlocks.Should().OnlyContainInOrder(finallyBody_NormalFlow, finallyBody_ExitFlow);
+
+            finallyBody_ExitFlow.SuccessorBlock.Should().Be(exit);
+            finallyBody_NormalFlow.SuccessorBlock.Should().Be(afterTry);
+            afterTry.SuccessorBlock.Should().Be(whileStmt);
+
+            VerifyAllInstructions(whileStmt, "true");
+            whileStmt.TrueSuccessorBlock.Should().Be(doBeforeTry);
+            whileStmt.FalseSuccessorBlock.Should().Be(afterDoWhile);
+
+            VerifyAllInstructions(afterDoWhile, "cw5", "cw5()");
+            afterDoWhile.SuccessorBlocks.Should().OnlyContain(exit);
+
+            exit.Should().BeOfType<ExitBlock>();
+        }
+
         [TestMethod]
         [TestCategory("CFG")]
         public void Cfg_TryCatch_Inside_DoWhile_WithThrow_InsideCatch()
@@ -3049,6 +3200,110 @@ namespace NS
             catchReturn.SuccessorBlocks.Should().OnlyContain(exit);
 
             VerifyAllInstructions(afterTry, "foo", "foo()");
+            afterTry.SuccessorBlocks.Should().OnlyContain(exit);
+
+            exit.Should().BeOfType<ExitBlock>();
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_TryCatch_NestedReturnVariable_InCatch()
+        {
+            var cfg = Build(@"
+                var number = 5;
+                try
+                {
+                    bar();
+                    return 0;
+                }
+                catch
+                {
+                    if (cond) return number;
+                }
+                foo();"
+            );
+
+            VerifyCfg(cfg, 7);
+
+            var blocks = cfg.Blocks.ToList();
+
+            var beforeOuterTry = (SimpleBlock)blocks[0];
+            var tryStatementBlock = (BranchBlock) blocks[1];
+            var tryReturn = (JumpBlock) blocks[2];
+            var ifInsideCatch = (BinaryBranchBlock) blocks[3];
+            var returnInCatch = (JumpBlock) blocks[4];
+            var afterTry = (SimpleBlock) blocks[5];
+            var exit = (ExitBlock) blocks[6];
+
+            VerifyAllInstructions(beforeOuterTry, "5", "number = 5");
+            beforeOuterTry.SuccessorBlocks.Should().OnlyContain(tryStatementBlock);
+
+            VerifyNoInstruction(tryStatementBlock);
+            tryStatementBlock.SuccessorBlocks.Should().OnlyContainInOrder(tryReturn, ifInsideCatch);
+
+            VerifyAllInstructions(tryReturn, "bar", "bar()", "0");
+            tryReturn.SuccessorBlocks.Should().OnlyContain(exit);
+
+            ifInsideCatch.TrueSuccessorBlock.Should().Be(returnInCatch);
+            ifInsideCatch.FalseSuccessorBlock.Should().Be(afterTry);
+
+            VerifyAllInstructions(returnInCatch, "number");
+            returnInCatch.SuccessorBlocks.Should().OnlyContain(exit);
+
+            VerifyAllInstructions(afterTry, "foo", "foo()");
+            afterTry.SuccessorBlocks.Should().OnlyContain(exit);
+
+            exit.Should().BeOfType<ExitBlock>();
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_TryCatch_MultipleReturnsInTry()
+        {
+            var cfg = Build(@"
+                beforeTry();
+                try
+                {
+                    if (cond) return;
+                    insideOne();
+                    if (cond) return;
+                    insideTwo();
+                }
+                catch
+                {
+                    catchOne();
+                }
+                afterTry();"
+            );
+
+            VerifyCfg(cfg, 9);
+
+            var blocks = cfg.Blocks.ToList();
+
+            var beforeOuterTry = (SimpleBlock)blocks[0];
+            var firstIf = (BinaryBranchBlock) blocks[1];
+            var firstIfReturn = (JumpBlock) blocks[2];
+            var secondIf = (BinaryBranchBlock) blocks[3];
+            var secondIfReturn = (JumpBlock) blocks[4];
+            var tryStatementBranch = (BranchBlock) blocks[5];
+            var insideCatch = (SimpleBlock) blocks[6];
+            var afterTry = (SimpleBlock) blocks[7];
+            var exit = (ExitBlock) blocks[8];
+
+            beforeOuterTry.SuccessorBlocks.Should().OnlyContain(firstIf);
+
+            firstIf.TrueSuccessorBlock.Should().Be(firstIfReturn);
+            firstIfReturn.SuccessorBlock.Should().Be(exit);
+            firstIf.FalseSuccessorBlock.Should().Be(secondIf);
+
+            secondIf.TrueSuccessorBlock.Should().Be(secondIfReturn);
+            secondIfReturn.SuccessorBlock.Should().Be(exit);
+            secondIf.FalseSuccessorBlock.Should().Be(tryStatementBranch);
+
+            // FIXME this tryStatementBranch is not always used as such, or is it?
+            tryStatementBranch.SuccessorBlocks.Should().OnlyContain(insideCatch, afterTry);
+
+            insideCatch.SuccessorBlocks.Should().OnlyContain(afterTry);
             afterTry.SuccessorBlocks.Should().OnlyContain(exit);
 
             exit.Should().BeOfType<ExitBlock>();
