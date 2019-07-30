@@ -638,10 +638,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         #region Build switch
 
-        private Block BuildSwitchStatement(SwitchStatementSyntax switchStatement, Block currentBlock) =>
-            BuildSwitchStatement_CSharp7(switchStatement, currentBlock);
-
-        private Block BuildSwitchStatement_CSharp7(SwitchStatementSyntax switchStatement, Block currentBlock)
+        private Block BuildSwitchStatement(SwitchStatementSyntax switchStatement, Block currentBlock)
         {
             var caseBlocksByValue = new Dictionary<object, Block>();
             BreakTarget.Push(currentBlock);
@@ -677,6 +674,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
                 foreach (var label in section.Labels.Reverse())
                 {
+                    // Handle C#7 pattern matching case Block 
                     if (CasePatternSwitchLabelSyntaxWrapper.IsInstance(label))
                     {
                         var casePatternSwitchLabel = (CasePatternSwitchLabelSyntaxWrapper)label;

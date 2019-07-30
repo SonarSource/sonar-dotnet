@@ -642,6 +642,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 {
                     EnqueueNewNode(new ProgramPoint(branchBlock.TrueSuccessorBlock), newProgramState);
                 }
+                // False succesor is the next case block. It is always enqueued without constraint
                 EnqueueNewNode(new ProgramPoint(branchBlock.FalseSuccessorBlock), ps);
             }
         }
