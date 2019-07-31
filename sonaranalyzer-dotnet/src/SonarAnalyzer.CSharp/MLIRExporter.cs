@@ -23,7 +23,7 @@ namespace SonarAnalyzer
 
         public void ExportFunction(MethodDeclarationSyntax method)
         {
-            if (IsTooClomplexForMLIR(method))
+            if (IsTooClomplexForMLIROrTheCFG(method))
             {
             writer.WriteLine($"// Skipping function {method.Identifier.ValueText}{GetAnonymousArgumentsString(method)}, it contains poisonous unsupported syntaxes");
             writer.WriteLine();
@@ -49,14 +49,15 @@ namespace SonarAnalyzer
             writer.WriteLine("}");
         }
 
-        private bool IsTooClomplexForMLIR(MethodDeclarationSyntax method)
+        private bool IsTooClomplexForMLIROrTheCFG(MethodDeclarationSyntax method)
         {
             return method.DescendantNodes().Any(n =>
             n.IsKind(SyntaxKind.ForEachStatement) ||
             n.IsKind(SyntaxKind.AwaitExpression) ||
             n.IsKind(SyntaxKind.YieldReturnStatement) ||
             n.IsKind(SyntaxKind.YieldBreakStatement) ||
-            n.IsKind(SyntaxKind.TryStatement)
+            n.IsKind(SyntaxKind.TryStatement) ||
+            n.IsKind(SyntaxKind.UsingStatement)
             );
         }
 
