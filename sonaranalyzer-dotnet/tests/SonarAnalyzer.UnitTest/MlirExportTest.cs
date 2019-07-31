@@ -430,15 +430,33 @@ int g(A a, int i)
 ";
             ValidateCodeGeneration(code);
         }
-        public int Throw(int i)
+        [TestMethod]
+        public void Using()
         {
-            if (i > 42)
-            {
-                throw new System.Exception();
-            }
-            return 10;
+            var code = @"
+using System;
+
+class Resource : IDisposable
+{
+    public void Dispose() {}
+}
+class A {
+    int f(int i)
+    {
+        using (var r = new Resource()) {
+            var result = i + i;
+            return i;
         }
     }
 }
+";
+            var dot = GetCfgGraph(code, "f");
+
+            ValidateCodeGeneration(code);
+        }
+
+
+    } // Class
+} // Namespace
 
 
