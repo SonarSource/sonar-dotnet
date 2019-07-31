@@ -2007,4 +2007,156 @@ namespace Tests.Diagnostics
         }
 
     }
+
+    class ReproForEachFP
+    {
+        private static bool Repro2348(List<int> list)
+        {
+            bool containspositive = false;
+            bool containsnegative = false;
+
+            foreach (int value in list)
+            {
+                if (value > 0)
+                {
+                    containspositive = true;
+                }
+                else if (value < 0)
+                {
+                    containsnegative = true;
+                }
+            }
+
+            return containspositive && !containsnegative; // Compliant
+        }
+
+        private static void Repro1187_1()
+        {
+            bool do1 = false;
+            bool do2 = false;
+            var items = new int[] { 1, 2, 3 };
+            foreach (var item in items)
+            {
+                switch (item)
+                {
+                    case 1:
+                        do1 = true;
+                        break;
+                    case 2:
+                        do2 = true;
+                        break;
+                }
+            }
+
+            if (do1 && do2) // Compliant
+            {
+                throw new InvalidOperationException();
+            }
+        }
+
+        private static void Repro1187_2(List<int> elementGroup)
+        {
+            bool startDoingSomething = false;
+            int a = 0;
+
+            foreach (var element in elementGroup)
+            {
+                if (!startDoingSomething) // Compliant
+                {
+                    if (element > 3)
+                    {
+                        startDoingSomething = true;
+                    }
+                }
+                else
+                {
+                    a++;
+    }
+            }
+        }
+
+        private static bool Repro1160(string[] files)
+        {
+            bool anyPathRooted = false;
+            bool allPathsRooted = true;
+            foreach (var file in files)
+            {
+                if (Path.IsPathRooted(file))
+                {
+                    anyPathRooted = true;
+                }
+                else
+                {
+                    allPathsRooted = false;
+                }
+            }
+            if (anyPathRooted && !allPathsRooted) // Compliant
+            {
+                throw new InvalidOperationException("Paths must be all rooted or all unrooted");
+            }
+            return allPathsRooted;
+        }
+
+        private static bool ForEachLoop(int[] items)
+        {
+            bool bool1 = false;
+            bool bool2 = false;
+
+            foreach (var item in items)
+            {
+                if (item > 0)
+                {
+                    bool1 = true;
+                }
+                else if (item < 0)
+                {
+                    bool2 = true;
+                }
+            }
+
+            if (bool1 && bool2) // Compliant
+            {
+                throw new InvalidOperationException();
+            }
+
+            return bool1 && !bool2; // Noncompliant S2589
+        }
+
+        private static bool ForEachLoop2(int[] items)
+        {
+            bool bool1 = false;
+            bool bool2 = false;
+
+            BeforeLoop:
+
+            foreach (var item1 in items)
+            {
+                foreach (var item2 in items)
+                {
+                    foreach (var item3 in items)
+                    {
+                        foreach (var item4 in items)
+                        {
+                            if (item1 > 0)
+                            {
+                                bool1 = true;
+                            }
+                            else if (item2 < 0)
+                            {
+                                bool2 = true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (bool1 && bool2) // Compliant
+            {
+                goto BeforeLoop;
+            }
+            return false;
+        }
+
+    }
+
 }
