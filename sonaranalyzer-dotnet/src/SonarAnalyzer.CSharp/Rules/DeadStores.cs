@@ -111,24 +111,51 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var lva = CSharpLiveVariableAnalysis.Analyze(cfg, declaration, context.SemanticModel);
 
+            var visitedFinallyBlocks = new List<SyntaxNode>();
             foreach (var block in cfg.Blocks)
             {
-                // For the `finally` instruction, 2 different blocks are created:
+                // For the `finally` block, 2 different blocks are created in the CFG:
                 // - one block for the "uncaught exception flow", which will always point to EXIT
-                // - one block for the "normal flow", which points to the block after the `try-finally` (possibly EXIT)
+                // - one block for the "normal flow", which points to the block after the `try-finally`
+                if (IsUncaughtExceptionFinallyBlock(block))
+                {
+                    // we ignore the "uncaught exception flow" block because it gives FPs when inside a loop
+                    continue;
+                }
+                CheckCfgBlockForDeadStores(block, lva.GetLiveOut(block), lva.CapturedVariables, node, declaration, context);
+            }
+
+            /**
+             * This local function returns `true` when it finds the first `finally` block that leads to EXIT,
+             * which probably is the "uncaught exception flow".
+             *
+             * It will return `false` when it finds a second `finally` block that leads to EXIT
+             * (a "normal flow" can lead to EXIT as well, in case the `finally` is at the end of the method)
+             */
+            bool IsUncaughtExceptionFinallyBlock(Block block)
+            {
                 if (block is SimpleBlock simpleBlock &&
                     !(block is JumpBlock) &&
                     simpleBlock.SuccessorBlock is ExitBlock &&
+                    // we need an instruction to see if it's inside a finally clause
+                    block.Instructions.Count > 0 &&
                     block.PredecessorBlocks.Count == 1 &&
                     block.PredecessorBlocks.ElementAt(0) is BranchBlock possibleTry &&
                     possibleTry.BranchingNode.IsKind(SyntaxKind.TryStatement))
                 {
-                    // we ignore the "uncaught exception flow" block because it gives FPs when inside a loop
-                    // this leads to FNs because we cannot tell what block is actually a `finally` block
-                    // so any block which follows a Try statement and points to EXIT will be ignored
-                    continue;
+                    var instruction = block.Instructions.First();
+                    while (instruction.Parent != null)
+                    {
+                        if (instruction.IsKind(SyntaxKind.FinallyClause) &&
+                            !visitedFinallyBlocks.Contains(instruction))
+                        {
+                            visitedFinallyBlocks.Add(instruction);
+                            return true;
+                        }
+                        instruction = instruction.Parent;
+                    }
                 }
-                CheckCfgBlockForDeadStores(block, lva.GetLiveOut(block), lva.CapturedVariables, node, declaration, context);
+                return false;
             }
         }
 
