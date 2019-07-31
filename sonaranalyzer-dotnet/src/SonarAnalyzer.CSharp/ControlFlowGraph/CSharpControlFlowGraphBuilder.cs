@@ -1015,9 +1015,13 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             var isNameof = parent is InvocationExpressionSyntax invocation
                 && invocation.IsNameof(this.semanticModel);
 
+            // The nameof arguments are not evaluated at runtime and should not be added
+            // to the block as instructions
             if (isNameof)
                 return currentBlock;
 
+            // ref arguments should be added at the end since they remove 
+            // the constraints on the arguments after all the other arguments are evaluated
             foreach (var arg in arguments.Reverse())
             {
                 if (arg.RefOrOutKeyword.IsKind(SyntaxKind.RefKeyword))
