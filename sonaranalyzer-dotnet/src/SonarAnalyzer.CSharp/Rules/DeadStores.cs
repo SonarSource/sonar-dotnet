@@ -146,11 +146,18 @@ namespace SonarAnalyzer.Rules.CSharp
                     var instruction = block.Instructions.First();
                     while (instruction.Parent != null)
                     {
-                        if (instruction.IsKind(SyntaxKind.FinallyClause) &&
-                            !visitedFinallyBlocks.Contains(instruction))
+                        if (instruction.IsKind(SyntaxKind.FinallyClause))
                         {
-                            visitedFinallyBlocks.Add(instruction);
-                            return true;
+                            if (!visitedFinallyBlocks.Contains(instruction))
+                            {
+                                visitedFinallyBlocks.Add(instruction);
+                                return true;
+                            }
+                            else
+                            {
+                                // we found the FinallyClause, so we can stop
+                                return false;
+                            }
                         }
                         instruction = instruction.Parent;
                     }
