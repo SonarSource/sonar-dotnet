@@ -396,12 +396,14 @@ int TryThrow(int i)
         }
         return 10;
     }
-    finally {
-        ++i;
+    catch (System.Exception e)
+    {
+        i+= 12;
     }
     return 20;
 }
 ";
+            var dot = GetCfgGraph(code, "TryThrow");
             ValidateCodeGeneration(code);
         }
 
@@ -409,6 +411,10 @@ int TryThrow(int i)
         public void FuncCall()
         {
             var code = @"
+
+class S {
+    public static void stat(){}
+}
 class A {
 public int triple(int i) { return 3*i; }
 void log(int i) {}
@@ -417,6 +423,12 @@ int f(int i)
 {
     var result = triple(triple(i));
     log(result);
+    unknownVariable = i;
+    unknownFunc(i);
+    S.stat();
+    UnknownClass.func(i);
+    Console.WriteLine(i); // Unknown too, since we are missing library/using
+    i = i + unknownVariabe;
     return result;
 }
 
