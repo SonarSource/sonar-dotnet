@@ -145,9 +145,35 @@ namespace Tests.Diagnostics
             }
             else
             {
-                Array.Resize(ref infixes, infixes.Length + 1); // Noncompliant FP
+                Array.Resize(ref infixes, infixes.Length + 1);
             }
             // more stuff
+        }
+
+        public void Method(ref string s, int x) { }
+        public void Method1(string infixes)
+        {
+            if (infixes != null)
+            {
+                Method(ref infixes, infixes.Length);
+                var x = infixes.Length; // Noncompliant when passed by ref can be set to null
+            }
+
+        }
+
+        public void Method2(string infixes)
+        {
+            if (infixes == null)
+            {
+                Method(ref infixes, infixes.Length); // Noncompliant
+                var x = infixes.Length;
+            }
+        }
+
+        public void Method3(string infixes)
+        {
+                Method(ref infixes, infixes.Length); // Noncompliant
+                var x = infixes.Length; // Noncompliant
         }
     }
 }

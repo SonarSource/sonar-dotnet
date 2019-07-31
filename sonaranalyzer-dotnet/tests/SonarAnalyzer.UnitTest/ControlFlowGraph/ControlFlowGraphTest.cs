@@ -4491,5 +4491,29 @@ namespace NS
         }
 
         #endregion
+
+        #region Method invocation
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Ref_Arg_Should_Be_Last_Instruction()
+        {
+            var cfg = Build(@"Bye(ref x0, x1, x2, x3, ref x4);}");
+            VerifyCfg(cfg, 2);
+            var instructionsBlock = (SimpleBlock)cfg.Blocks.ElementAt(0);
+            VerifyAllInstructions(instructionsBlock, "Bye", "x1", "x2", "x3", "x0", "x4", "Bye(ref x0, x1, x2, x3, ref x4)");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Ref_Arg_Should_Be_Last_Instruction_WithMethodCallOnObject()
+        {
+            var cfg = Build(@"Bye.Hi(ref x0, x1, x2, x3, ref x4);}");
+            VerifyCfg(cfg, 2);
+            var instructionsBlock = (SimpleBlock)cfg.Blocks.ElementAt(0);
+            VerifyAllInstructions(instructionsBlock, "Bye", "Bye.Hi", "x1", "x2", "x3", "x0", "x4", "Bye.Hi(ref x0, x1, x2, x3, ref x4)");
+        }
+
+        #endregion
     }
 }
