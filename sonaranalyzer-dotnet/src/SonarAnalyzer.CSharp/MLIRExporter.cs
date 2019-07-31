@@ -274,21 +274,7 @@ namespace SonarAnalyzer
                     ExportComparison("sle", op);
                     break;
                 case SyntaxKind.IdentifierName:
-                    {
-                        var id = op as IdentifierNameSyntax;
-                        var decl = semanticModel.GetSymbolInfo(id).Symbol.DeclaringSyntaxReferences[0].GetSyntax();
-                        if (decl is MethodDeclarationSyntax)
-                        {
-                            // We will fetch the function only when looking t the function call itself, we just skip the identifier
-                            break;
-                        }
-                        if (!SupportedTypes(id))
-                        {
-                            writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(id)} {GetLocation(op)} // Variable of unknown type {id.Identifier.ValueText}");
-                            return;
-                        }
-                        writer.WriteLine($"%{OpId(op)} = cbde.load %{OpId(decl)} : memref<{MLIRType(id)}> {GetLocation(op)}");
-                    }
+                    ExportIdentifierName(op);
                     break;
                 case SyntaxKind.VariableDeclarator:
                     {
@@ -313,13 +299,7 @@ namespace SonarAnalyzer
                     break;
                 case SyntaxKind.SimpleAssignmentExpression:
                     {
-                        var assign = op as AssignmentExpressionSyntax;
-                        if (!SupportedTypes(assign))
-                        {
-                            return;
-                        }
-                        var lhs = semanticModel.GetSymbolInfo(assign.Left).Symbol.DeclaringSyntaxReferences[0].GetSyntax();
-                        writer.WriteLine($"cbde.store %{OpId(assign.Right)}, %{OpId(lhs)} : memref<{MLIRType(assign)}> {GetLocation(op)}");
+                        ExportSimpleAssignment(op);
                         break;
                     }
                 default:
@@ -342,12 +322,58 @@ namespace SonarAnalyzer
             }
         }
 
+        private void ExportSimpleAssignment(SyntaxNode op)
+        {
+            var assign = op as AssignmentExpressionSyntax;
+            if (!SupportedTypes(assign))
+            {
+                return;
+            }
+            var lhs = semanticModel.GetSymbolInfo(assign.Left).Symbol.DeclaringSyntaxReferences[0].GetSyntax();
+            var rhsType = semanticModel.GetTypeInfo(assign.Right).Type;
+            string rhsId;
+            if (rhsType.Kind == SymbolKind.ErrorType)
+            {
+                rhsId = UniqueOpId();
+                writer.WriteLine($"%{rhsId} = cbde.unknown  : {MLIRType(assign)}");
+            }
+            else
+            {
+                rhsId = OpId(assign.Right);
+            }
+            writer.WriteLine($"cbde.store %{rhsId}, %{OpId(lhs)} : memref<{MLIRType(assign)}> {GetLocation(op)}");
+        }
+
+        private void ExportIdentifierName(SyntaxNode op)
+        {
+            var id = op as IdentifierNameSyntax;
+            var declSymbol = semanticModel.GetSymbolInfo(id).Symbol;
+            if (declSymbol == null)
+            {
+                // In case of an unresolved call, just skip it
+                writer.WriteLine($"// Unresolved: {id.Identifier.ValueText}");
+                return;
+            }
+            var decl = declSymbol.DeclaringSyntaxReferences[0].GetSyntax();
+            if (decl is MethodDeclarationSyntax)
+            {
+                // We will fetch the function only when looking t the function call itself, we just skip the identifier
+                return;
+            }
+            if (!SupportedTypes(id))
+            {
+                writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(id)} {GetLocation(op)} // Variable of unknown type {id.Identifier.ValueText}");
+                return;
+            }
+            writer.WriteLine($"%{OpId(op)} = cbde.load %{OpId(decl)} : memref<{MLIRType(id)}> {GetLocation(op)}");
+        }
+
         private void ExtractBinaryExpression(SyntaxNode op)
         {
             var binExpr = op as BinaryExpressionSyntax;
             if (!SupportedTypes(binExpr.Left, binExpr.Right,binExpr))
             {
-                writer.WriteLine($"// Skip binary expression on unsupported types {op.ToFullString()}");
+                writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(binExpr)} {GetLocation(binExpr)} // Binary expression on unsupported types {op.ToFullString()}");
                 return;
             }
             // TODO : C#8 : Use switch expression
@@ -414,6 +440,10 @@ namespace SonarAnalyzer
         public string OpId(SyntaxNode node)
         {
             return this.opMap.GetOrAdd(node, b => this.opCounter++).ToString();
+        }
+        public string UniqueOpId()
+        {
+            return (opCounter++).ToString();
         }
     }
 }
