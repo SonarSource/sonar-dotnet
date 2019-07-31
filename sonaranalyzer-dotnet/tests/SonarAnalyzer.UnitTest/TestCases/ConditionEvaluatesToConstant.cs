@@ -2071,7 +2071,7 @@ namespace Tests.Diagnostics
                 else
                 {
                     a++;
-    }
+                }
             }
         }
 
