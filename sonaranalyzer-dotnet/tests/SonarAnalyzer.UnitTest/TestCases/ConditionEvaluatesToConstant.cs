@@ -2127,7 +2127,7 @@ namespace Tests.Diagnostics
             bool bool1 = false;
             bool bool2 = false;
 
-            BeforeLoop:
+        BeforeLoop:
 
             foreach (var item1 in items)
             {
@@ -2157,6 +2157,29 @@ namespace Tests.Diagnostics
             return false;
         }
 
+        private static bool LoopIterationLimitation(int[] items)
+        {
+            bool bool1 = false;
+            bool bool2 = false;
+            bool bool3 = false;
+
+            foreach (var item1 in items)
+            {
+                if (bool2) // Noncompliant - FP because symbolic execution stops at the third iteration of loop
+                { // Secondary
+                    bool3 = true;
+                }
+                if (bool1)
+                {
+                    bool2 = true;
+                }
+                if (item1 > 1) {
+                    bool1 = true;
+                }
+
+            }
+            return bool3;
+        }
     }
 
 }

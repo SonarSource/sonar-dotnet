@@ -365,11 +365,11 @@ namespace SonarAnalyzer.SymbolicExecution
             {
                 OnProgramPointVisitCountExceedLimit(pos, programState);
 
-                // reached the max number of visit by program point, so we take the foreach loop false branch with current program state
-                var exitLoopPoint = GetForEachExitBlock(programPoint.Block);
-                if (exitLoopPoint != null)
+                // reached the max number of visit by program point, in the case of ForEach blocks, we take the foreach loop false branch with current program state,
+                // if it is not a foreach loop, newNode will be null and we will stop exploring the path
+                if (GetForEachExitBlock(programPoint.Block) is Block forEachExitBlock)
                 {
-                    newNode = new ExplodedGraphNode(new ProgramPoint(exitLoopPoint), programState);
+                    newNode = new ExplodedGraphNode(new ProgramPoint(forEachExitBlock), programState);
                 }
             }
             else
