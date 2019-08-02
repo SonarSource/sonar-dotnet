@@ -1034,6 +1034,15 @@ namespace SonarAnalyzer.SymbolicExecution
                 nullableConstructorCall.Parameters.Length == 0;
         }
 
+        protected override Block GetForEachExitBlock(Block block)
+        {
+            if (block is BinaryBranchBlock branchBlock && branchBlock.BranchingNode.Kind() is SyntaxKind.ForEachStatement)
+            {
+                return branchBlock.FalseSuccessorBlock;
+            }
+            return null;
+        }
+
         #endregion Visit*
     }
 }

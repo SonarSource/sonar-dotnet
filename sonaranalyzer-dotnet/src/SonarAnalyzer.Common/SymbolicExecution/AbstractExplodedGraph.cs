@@ -316,6 +316,8 @@ namespace SonarAnalyzer.SymbolicExecution
                     .Contains(field.ContainingType));
         }
 
+        protected abstract Block GetForEachExitBlock(Block block);
+
         #endregion Visit*
 
         #region Enqueue exploded graph node
@@ -358,14 +360,24 @@ namespace SonarAnalyzer.SymbolicExecution
                 this.programPoints[pos] = pos;
             }
 
+            ExplodedGraphNode newNode = null;
             if (programState.GetVisitedCount(pos) >= MaxProgramPointExecutionCount)
             {
                 OnProgramPointVisitCountExceedLimit(pos, programState);
-                return;
+
+                // reached the max number of visit by program point, in the case of ForEach blocks, we take the foreach loop false branch with current program state,
+                // if it is not a foreach loop, newNode will be null and we will stop exploring the path
+                if (GetForEachExitBlock(programPoint.Block) is Block forEachExitBlock)
+                {
+                    newNode = new ExplodedGraphNode(new ProgramPoint(forEachExitBlock), programState);
+                }
+            }
+            else
+            {
+                newNode = new ExplodedGraphNode(pos, programState.AddVisit(pos));
             }
 
-            var newNode = new ExplodedGraphNode(pos, programState.AddVisit(pos));
-            if (this.nodesAlreadyInGraph.Add(newNode))
+            if (newNode != null && this.nodesAlreadyInGraph.Add(newNode))
             {
                 this.workList.Enqueue(newNode);
             }
