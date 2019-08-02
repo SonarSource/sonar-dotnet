@@ -567,6 +567,21 @@ void f(int i, int j)
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void ForWithoutCondition()
+        {
+            var code = @"        
+void f(int i)
+{
+    for (;;)
+    {
+        i = i + 1;
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
     } // Class
 } // Namespace
 
