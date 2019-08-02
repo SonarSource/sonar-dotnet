@@ -23,6 +23,11 @@ namespace SonarAnalyzer
 
         public void ExportFunction(MethodDeclarationSyntax method)
         {
+            if (method.Body == null)
+            {
+                return;
+            }
+
             if (IsTooClomplexForMLIROrTheCFG(method))
             {
             writer.WriteLine($"// Skipping function {method.Identifier.ValueText}{GetAnonymousArgumentsString(method)}, it contains poisonous unsupported syntaxes");
