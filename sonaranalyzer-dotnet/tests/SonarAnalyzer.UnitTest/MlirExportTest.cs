@@ -542,6 +542,31 @@ void f()
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void ReturnNullLitteral()
+        {
+            var code = @"        
+public Type f()
+{
+    return null;
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void UnknownMethodOnMultipleLines()
+        {
+            var code = @"        
+void f(int i, int j)
+{
+    g(i,
+    j);
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
     } // Class
 } // Namespace
 
