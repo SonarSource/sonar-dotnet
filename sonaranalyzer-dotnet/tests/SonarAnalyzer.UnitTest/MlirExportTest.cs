@@ -467,6 +467,57 @@ class A {
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void Enum()
+        {
+            var code = @"
+using System;
+
+public enum Color { Red, Green, Blue };
+private enum Color { Red, Green, Blue };
+
+class A {
+    private Color WorkWithEnum(int i, Color col)
+    {
+        if (col == Color.Blue && i == (int)col)
+        {
+            Color c = Color.Blue;
+            return c;
+        }
+        else
+        {
+            return Color.Red;
+        }
+    }
+    private Color WorkWithUnaccessibleEnum(int i, Color col)
+    {
+        if (col == Color.Blue && i == (int)col)
+        {
+            Color c = Color.Blue;
+            return c;
+        }
+        else
+        {
+            return Color.Red;
+        }
+    }
+    private ConsoleColor WorkWithExternalEnum(int i, ConsoleColor col)
+    {
+        if (col == ConsoleColor.Blue && i == (int)col)
+        {
+            Color c = ConsoleColor.Blue;
+            return c;
+        }
+        else
+        {
+            return ConsoleColor.Red;
+        }
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
 
     } // Class
 } // Namespace

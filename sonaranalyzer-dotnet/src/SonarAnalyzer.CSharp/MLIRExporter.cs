@@ -354,8 +354,17 @@ namespace SonarAnalyzer
                 writer.WriteLine($"// Unresolved: {id.Identifier.ValueText}");
                 return;
             }
+            if (declSymbol.DeclaringSyntaxReferences.Length == 0)
+            {
+                // The entity comes from another assembly... We can ignore it, it's not a variable
+                // TODO : Check what happens for external constants, fields and properties...
+                return;
+            }
             var decl = declSymbol.DeclaringSyntaxReferences[0].GetSyntax();
-            if (decl is MethodDeclarationSyntax)
+            if (decl == null ||                    // Not sure if we can be in this situation... 
+                decl is MethodDeclarationSyntax || // We will fetch the function only when looking at the function call itself
+                decl is ClassDeclarationSyntax     // In "Class.member", we are not interested in the "Class" part
+                )
             {
                 // We will fetch the function only when looking t the function call itself, we just skip the identifier
                 return;
