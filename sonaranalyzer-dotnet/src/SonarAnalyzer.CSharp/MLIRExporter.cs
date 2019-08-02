@@ -143,11 +143,15 @@ namespace SonarAnalyzer
                     break;
                 case BinaryBranchBlock bbb:
                     var cond = GetCondition(bbb);
-                    // For an if or a while, bbb.BranchingNode represent the condition, not the statement that holds the condition
-                    // For a for, bbb.BranchingNode represents the for. Since for is a statement, not an expression, if we
-                    // see a for, we know it's at the top level of the expression tree, so it cannot be a for inside of a if condition
-
-                    writer.WriteLine($"cond_br %{OpId(cond)}, ^{BlockId(bbb.TrueSuccessorBlock)}, ^{BlockId(bbb.FalseSuccessorBlock)} {GetLocation(cond)}");
+                    if (null == cond)
+                    {
+                        Debug.Assert(bbb.BranchingNode.Kind() == SyntaxKind.ForStatement);
+                        writer.WriteLine($"br ^{BlockId(bbb.TrueSuccessorBlock)}");
+                    }
+                    else
+                    {
+                        writer.WriteLine($"cond_br %{OpId(cond)}, ^{BlockId(bbb.TrueSuccessorBlock)}, ^{BlockId(bbb.FalseSuccessorBlock)} {GetLocation(cond)}");
+                    }
                     /*
                      * Up to now, we do exactly the same for all cases that may have created a BinaryBranchBlock
                      * maybe later, depending on the reason (if vs for?) we'll do something different
