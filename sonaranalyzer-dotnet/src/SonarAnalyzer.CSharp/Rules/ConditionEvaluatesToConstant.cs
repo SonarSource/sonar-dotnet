@@ -195,7 +195,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 // parent has an unreachable branch.
                 if (constantExpression is ExpressionSyntax expression)
                 {
-                    unreachableExpressions.Add(expression);
+                    bool unreachableCodeIsDetectable = constantValue ?
+                    !expression.Parent.IsKind(SyntaxKind.LogicalAndExpression)
+                    : !expression.Parent.IsKind(SyntaxKind.LogicalOrExpression);
+                    // when an expression is true with "And" parent or is false with "Or" parent
+                    // we don't have enough information to know if we have an unreachable code
+                    if (unreachableCodeIsDetectable)
+                    {
+                        unreachableExpressions.Add(expression);
+                    }
                 }
             }
 
