@@ -317,11 +317,11 @@ namespace SonarAnalyzer
                             // and therefore, they have no real value associated to them, we can just ignore them
                             break;
                         }
-                        writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(exprType)} {GetLocation(op)} // {op.ToFullString()} ({op.Kind()})");
+                        writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(exprType)} {GetLocation(op)} // {op.ToString()} ({op.Kind()})");
                     }
                     else
                     {
-                        writer.WriteLine($"%{OpId(op)} = cbde.unknown : none {GetLocation(op)} // {op.ToFullString()} ({op.Kind()})");
+                        writer.WriteLine($"%{OpId(op)} = cbde.unknown : none {GetLocation(op)} // {op.ToString()} ({op.Kind()})");
                     }
                     break;
             }
@@ -387,7 +387,7 @@ namespace SonarAnalyzer
             var binExpr = op as BinaryExpressionSyntax;
             if (!SupportedTypes(binExpr.Left, binExpr.Right,binExpr))
             {
-                writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(binExpr)} {GetLocation(binExpr)} // Binary expression on unsupported types {op.ToFullString()}");
+                writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(binExpr)} {GetLocation(binExpr)} // Binary expression on unsupported types {op.ToString()}");
                 return;
             }
             // TODO : C#8 : Use switch expression
@@ -401,7 +401,7 @@ namespace SonarAnalyzer
                 case SyntaxKind.ModuloExpression:  opName = "remis"; break;
                 default:
                     {
-                        writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(binExpr)} {GetLocation(binExpr)} // Unknown operator {op.ToFullString()}");
+                        writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(binExpr)} {GetLocation(binExpr)} // Unknown operator {op.ToString()}");
                         return;
                     }
             }
@@ -418,7 +418,7 @@ namespace SonarAnalyzer
             var binExpr = op as BinaryExpressionSyntax;
             if (!SupportedTypes(binExpr.Left, binExpr.Right))
             {
-                writer.WriteLine($"%{OpId(op)} = cbde.unknown : i1  {GetLocation(binExpr)} // comparison of unknown type: {op.ToFullString()}");
+                writer.WriteLine($"%{OpId(op)} = cbde.unknown : i1  {GetLocation(binExpr)} // comparison of unknown type: {op.ToString()}");
                 return;
             }
             // The type is the type of the operands, not of the result, which is always i1
