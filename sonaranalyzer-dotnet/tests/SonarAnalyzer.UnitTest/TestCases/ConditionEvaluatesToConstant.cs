@@ -1970,6 +1970,15 @@ namespace Tests.Diagnostics
             {
 
             }
+
+            if (unknown && (t)) // Noncompliant
+            {
+
+            }
+            else
+            {
+
+            }
         }
 
         /// <summary>
