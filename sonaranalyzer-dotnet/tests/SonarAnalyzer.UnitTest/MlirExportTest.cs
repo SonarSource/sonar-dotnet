@@ -21,7 +21,7 @@ namespace SonarAnalyzer.UnitTest
         public static void checkExecutableExists(TestContext tc)
         {
             Assert.IsTrue(File.Exists(mlirCheckerPath), "We need mlir-cbde.exe to validate the generated IR");
-        }
+        }              
 
         [TestMethod]
         public void SimpleMethod()
