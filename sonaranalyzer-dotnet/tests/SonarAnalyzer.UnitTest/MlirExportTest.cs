@@ -518,6 +518,15 @@ class A {
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void EmptyBody()
+        {
+            var code = @"
+public static extern void Extern(int p1);
+";
+            ValidateCodeGeneration(code);
+        }
+
 
     } // Class
 } // Namespace
