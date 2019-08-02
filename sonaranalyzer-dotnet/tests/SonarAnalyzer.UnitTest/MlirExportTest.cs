@@ -527,6 +527,20 @@ public static extern void Extern(int p1);
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void CommentsWithNewLine()
+        {
+            var code = @"        
+void f()
+{
+    new A() { i = 3 }; // Noncompliant
+//          ^^^^^^^^^
+    new A() { i = 4 };
+}
+
+";
+            ValidateCodeGeneration(code);
+        }
 
     } // Class
 } // Namespace
