@@ -52,7 +52,13 @@ namespace SonarAnalyzer
             var returnType = HasNoReturn(method) ?
                 "()" :
                 MLIRType(method.ReturnType);
-            writer.WriteLine($"func @{method.Identifier.ValueText}{GetAnonymousArgumentsString(method)} -> {returnType} {GetLocation(method)} {{");
+            string methodName = method.Identifier.ValueText;
+            if (method.Parent.Kind() == SyntaxKind.ClassDeclaration)
+            {
+                var parentClass = method.Parent as ClassDeclarationSyntax;
+                methodName += "." + parentClass.Identifier.ValueText;
+            }
+            writer.WriteLine($"func @{methodName}{GetAnonymousArgumentsString(method)} -> {returnType} {GetLocation(method)} {{");
             CreateEntryBlock(method);
 
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
@@ -343,10 +349,10 @@ namespace SonarAnalyzer
         private void ExportSimpleAssignment(SyntaxNode op)
         {
             var assign = op as AssignmentExpressionSyntax;
-            if (!SupportedTypes(assign))
+            if (!SupportedTypes(assign) || semanticModel.GetSymbolInfo(assign.Left).Symbol.DeclaringSyntaxReferences.Length == 0)
             {
                 return;
-            }
+            }            
             var lhs = semanticModel.GetSymbolInfo(assign.Left).Symbol.DeclaringSyntaxReferences[0].GetSyntax();
             var rhsType = semanticModel.GetTypeInfo(assign.Right).Type;
             string rhsId;

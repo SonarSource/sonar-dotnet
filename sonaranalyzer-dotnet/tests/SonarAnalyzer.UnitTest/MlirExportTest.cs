@@ -23,56 +23,6 @@ namespace SonarAnalyzer.UnitTest
             Assert.IsTrue(File.Exists(mlirCheckerPath), "We need mlir-cbde.exe to validate the generated IR");
         }
 
-        public static void ValidateIR(string path)
-        {
-            var pi = new ProcessStartInfo
-            {
-                FileName = mlirCheckerPath,
-                Arguments = '"' + path + '"',
-                UseShellExecute = false,
-                // RedirectStandardOutput = true,
-                RedirectStandardError = true
-            };
-            var p =Process.Start(pi);
-            p.WaitForExit();
-            if (p.ExitCode != 0)
-            {
-                Assert.Fail(p.StandardError.ReadToEnd());
-            }
-        }
-
-        [TestMethod]
-        public void TestCSUnitTests()
-        {
-            var testFiles = Directory.GetFiles(@"TestCases", "*.cs");
-            foreach (var test in testFiles)
-            {
-                var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(new[] { test });
-                var path = Path.Combine(Path.GetTempPath(), $"csharp.{test.Substring(test.IndexOf("\\") + 1)}.mlir");
-                using (var writer = new StreamWriter(path))
-                {
-                    var solutions = solutionBuilder.Compile(null);
-                    //foreach (var compilation in solutionBuilder.Compile(null))
-                    if (solutions.Any())
-                    {
-                        foreach (var syntaxTree in solutions[1].SyntaxTrees)
-                        {
-                            var semanticModel = solutions[1].GetSemanticModel(syntaxTree);
-                            foreach (var method in syntaxTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
-                            {
-                                var dot = CSharpControlFlowGraph.Create(method.Body, semanticModel);
-                                var redot = CfgSerializer.Serialize("blabla", dot);
-
-                                var exporter = new MLIRExporter(writer, semanticModel, false);
-                                exporter.ExportFunction(method);
-                            }
-                        }
-                    }
-                    ValidateIR(path);
-                }
-            }
-        }
-
         [TestMethod]
         public void SimpleMethod()
         {
@@ -125,7 +75,7 @@ class C
             {
                 ExportAllMethods(code, writer, withLoc);
             }
-            ValidateIR(path);
+            ExportMlirFromTest.ValidateIR(path);
         }
 
         private void ValidateCodeGeneration(string code)

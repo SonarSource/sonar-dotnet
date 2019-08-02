@@ -128,13 +128,22 @@ namespace SonarAnalyzer.UnitTest
             IEnumerable<ParseOptions> options = null, CompilationErrorBehavior checkMode = CompilationErrorBehavior.Default,
             IEnumerable<MetadataReference> additionalReferences = null)
         {
+            if (paths == null || !paths.Any())
+            {
+                return;
+            }
+
             var solutionBuilder = SolutionBuilder.CreateSolutionFromPaths(paths, additionalReferences);
 
+            var hasBeenGenerated = false; // TODO: remove it
             foreach (var compilation in solutionBuilder.Compile(options?.ToArray()))
             {
                 DiagnosticVerifier.Verify(compilation, diagnosticAnalyzer, checkMode);
-                // TODO: call to generate MLIR
-
+                if (!hasBeenGenerated)
+                {
+                    hasBeenGenerated = true;
+                    ExportMlirFromTest.exportMlir(compilation, paths.First().Substring(paths.First().IndexOf("\\") + 1));
+                }
             }
         }
 
