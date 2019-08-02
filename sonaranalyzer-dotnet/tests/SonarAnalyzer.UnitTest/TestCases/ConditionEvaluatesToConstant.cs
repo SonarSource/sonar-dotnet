@@ -1880,9 +1880,20 @@ namespace Tests.Diagnostics
     public static string CompliantMethod4(string parameter)
     {
       var useParameter = parameter ?? "non-empty";
-      if (useParameter == null || useParameter=="")  // Noncompliant FP #1347
-        return "non-empty"; // Secondary
+      if (useParameter == null || useParameter=="") // Noncompliant 
+        return "non-empty"; // FN secondary, should be solved when there is a constraint of empty string
 
+      return "empty";
+    }
+
+    public static string Method1347(string parameter)
+    {
+      var useParameter = parameter ?? "non-empty";
+      if (!string.IsNullOrEmpty(useParameter)) // Noncompliant FP #1347
+         return "non-empty";
+      else
+      { // Secondary
+      }
       return "empty";
     }
 
@@ -1902,6 +1913,74 @@ namespace Tests.Diagnostics
 
     class Repro2442
     {
+        public void Method(bool unknown)
+        {
+            bool f = false;
+            bool t = true;
+            if (t) // Noncompliant
+            {
+
+            }
+            else
+            { // Secondary
+
+            }
+
+            if (f) // Noncompliant
+            { // Secondary
+
+            }
+            else
+            {
+
+            }
+
+            if (unknown || t) // Noncompliant
+            {
+
+            }
+            else
+            { // Secondary
+
+            }
+
+            if (unknown && f) // Noncompliant
+            { // Secondary
+
+            }
+            else
+            {
+
+            }
+
+            if (unknown && t) // Noncompliant
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (unknown || f) // Noncompliant
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (unknown && (t)) // Noncompliant
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
         /// <summary>
         /// A certain combination of condition wrongly considers the else code as dead.
         /// </summary>
@@ -1945,11 +2024,11 @@ namespace Tests.Diagnostics
             else if (condition2
                 && condition1
                 && !condition3) // Noncompliant
-            {
+            { 
                 _test3 = true;
             }
             else
-            { // Secondary
+            {
                 _test4 = true;
             }
         }
