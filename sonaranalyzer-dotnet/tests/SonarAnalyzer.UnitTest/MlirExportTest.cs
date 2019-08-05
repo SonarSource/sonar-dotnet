@@ -596,12 +596,29 @@ void f(int i)
         }
 
         [TestMethod]
-        public void UseOfClassField()
+        public void UseOfReadonlyClassField()
         {
             var code = @"
 public class A
 {
-    private int a = 0;
+    readonly int a = 0;
+
+    public int getA()
+    {
+        return a;
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void UseOfConstantClassField()
+        {
+            var code = @"
+public class A
+{
+    const int a = 0;
 
     public int getA()
     {
