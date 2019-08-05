@@ -263,6 +263,15 @@ namespace SonarAnalyzer
                 csType.SpecialType == SpecialType.System_Int32);
         }
 
+        private ExpressionSyntax getAssignmentValue(ExpressionSyntax rhs)
+        {
+            while (rhs.IsKind(SyntaxKind.SimpleAssignmentExpression))
+            {
+                rhs = (rhs as AssignmentExpressionSyntax).Right;
+            }
+            return rhs;
+        }
+
         private void ExtractInstruction(SyntaxNode op)
         {
             switch (op.Kind())
@@ -318,7 +327,8 @@ namespace SonarAnalyzer
                                 writer.WriteLine("// Initialized with unknown data");
                                 break;
                             }
-                            writer.WriteLine($"cbde.store %{OpId(decl.Initializer.Value)}, %{id} : memref<{MLIRType(decl)}> {GetLocation(decl)}");
+                            var value = getAssignmentValue(decl.Initializer.Value);
+                            writer.WriteLine($"cbde.store %{OpId(value)}, %{id} : memref<{MLIRType(decl)}> {GetLocation(decl)}");
                         }
                     }
                     break;
@@ -364,7 +374,7 @@ namespace SonarAnalyzer
             }
             else
             {
-                rhsId = OpId(assign.Right);
+                rhsId = OpId(getAssignmentValue(assign.Right));
             }
             writer.WriteLine($"cbde.store %{rhsId}, %{OpId(lhs)} : memref<{MLIRType(assign)}> {GetLocation(op)}");
         }
@@ -386,7 +396,7 @@ namespace SonarAnalyzer
                 return;
             }
             var decl = declSymbol.DeclaringSyntaxReferences[0].GetSyntax();
-            if (decl == null ||                    // Not sure if we can be in this situation... 
+            if (decl == null ||                    // Not sure if we can be in this situation...
                 decl is MethodDeclarationSyntax || // We will fetch the function only when looking at the function call itself
                 decl is ClassDeclarationSyntax     // In "Class.member", we are not interested in the "Class" part
                 )

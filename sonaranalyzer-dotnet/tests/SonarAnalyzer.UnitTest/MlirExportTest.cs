@@ -530,7 +530,7 @@ public static extern void Extern(int p1);
         [TestMethod]
         public void CommentsWithNewLine()
         {
-            var code = @"        
+            var code = @"
 void f()
 {
     new A() { i = 3 }; // Noncompliant
@@ -545,7 +545,7 @@ void f()
         [TestMethod]
         public void ReturnNullLitteral()
         {
-            var code = @"        
+            var code = @"
 public Type f()
 {
     return null;
@@ -557,7 +557,7 @@ public Type f()
         [TestMethod]
         public void UnknownMethodOnMultipleLines()
         {
-            var code = @"        
+            var code = @"
 void f(int i, int j)
 {
     g(i,
@@ -570,13 +570,26 @@ void f(int i, int j)
         [TestMethod]
         public void ForWithoutCondition()
         {
-            var code = @"        
+            var code = @"
 void f(int i)
 {
     for (;;)
     {
         i = i + 1;
     }
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void ChainingAssignments()
+        {
+            var code = @"
+void f(int i)
+{
+    int j = i = 0;
+    i = j = 10;
 }
 ";
             ValidateCodeGeneration(code);
