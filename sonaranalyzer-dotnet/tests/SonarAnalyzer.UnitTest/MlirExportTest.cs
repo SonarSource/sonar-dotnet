@@ -595,6 +595,23 @@ void f(int i)
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void UseOfClassField()
+        {
+            var code = @"
+public class A
+{
+    private int a = 0;
+
+    public int getA()
+    {
+        return a;
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
     } // Class
 } // Namespace
 
