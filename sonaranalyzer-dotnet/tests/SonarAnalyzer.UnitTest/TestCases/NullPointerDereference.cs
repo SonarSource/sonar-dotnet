@@ -663,4 +663,46 @@ namespace Tests.Diagnostics
             s.ToString(); // Noncompliant
         }
     }
+
+    class TestLoopWithBreak
+    {
+        public static void LoopWithBreak(IEnumerable<string> list)
+        {
+            foreach (string x in list)
+            {
+                try
+                {
+                    if (x == null)
+                    {
+                        x.ToString(); // Noncompliant
+                    }
+                    break;
+                }
+                catch (Exception)
+                {
+                    continue;
+                }
+            }
+        }
+
+        public static IEnumerable<string> LoopWithYeildBreak(IEnumerable<string> list)
+        {
+            foreach (string x in list)
+            {
+                try
+                {
+                    if (x == null)
+                    {
+                        yield return x.ToString(); // Noncompliant
+                    }
+                    yield break;
+                }
+                finally
+                {
+                    // do stuff
+                }
+            }
+        }
+
+    }
 }

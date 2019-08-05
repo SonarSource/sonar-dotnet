@@ -117,4 +117,28 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    class TestLoopWithBreak
+    {
+        public static void LoopWithBreak(System.Collections.Generic.IEnumerable<string> list, bool condition)
+        {
+            int? i1 = null;
+            foreach (string x in list)
+            {
+                try
+                {
+                    if (condition)
+                    {
+                        Console.WriteLine(i1.Value); // Noncompliant
+                    }
+                    break;
+                }
+                catch (Exception)
+                {
+                    continue;
+                }
+            }
+        }
+    }
+
 }
