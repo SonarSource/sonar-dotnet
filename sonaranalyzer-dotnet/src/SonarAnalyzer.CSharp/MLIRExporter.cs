@@ -71,7 +71,12 @@ namespace SonarAnalyzer
             n.IsKind(SyntaxKind.YieldReturnStatement) ||
             n.IsKind(SyntaxKind.YieldBreakStatement) ||
             n.IsKind(SyntaxKind.TryStatement) ||
-            n.IsKind(SyntaxKind.UsingStatement)
+            n.IsKind(SyntaxKind.UsingStatement) ||
+            n.IsKind(SyntaxKind.LogicalAndExpression) ||
+            n.IsKind(SyntaxKind.LogicalOrExpression) ||
+            n.IsKind(SyntaxKind.ConditionalExpression) ||
+            n.IsKind(SyntaxKind.ConditionalAccessExpression) ||
+            n.IsKind(SyntaxKind.CoalesceExpression)
             );
         }
 
