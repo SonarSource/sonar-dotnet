@@ -125,7 +125,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 var explodedGraph = new CSharpExplodedGraph(cfg, symbol, context.SemanticModel, lva);
                 analyze(explodedGraph, context);
             }
-            catch (Exception e) when (e is NotSupportedException || e is ArgumentException || e is InvalidOperationException)
+            catch (Exception e)
             {
                 // Roslyn/MSBuild is currently cutting exception message at the end of the line instead
                 // of displaying the full message. As a workaround, we replace the line ending with ' ## '.
