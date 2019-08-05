@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
 using CSharpExplodedGraph = SonarAnalyzer.SymbolicExecution.CSharpExplodedGraph;
@@ -106,11 +107,22 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var conditionTrue = new HashSet<SyntaxNode>();
             var conditionFalse = new HashSet<SyntaxNode>();
+            var hasYieldStatement = false;
+
+            void instructionProcessed(object sender, InstructionProcessedEventArgs args) {
+                hasYieldStatement = hasYieldStatement || IsYieldNode(args.ProgramPoint.Block);
+            }
 
             void collectConditions(object sender, ConditionEvaluatedEventArgs args) =>
                 CollectConditions(args, conditionTrue, conditionFalse, context.SemanticModel);
 
-            void explorationEnded(object sender, EventArgs args) => Enumerable.Empty<Diagnostic>()
+            void explorationEnded(object sender, EventArgs args) {
+                // Do not raise issue in generator functions (See #1295)
+                if (hasYieldStatement)
+                {
+                    return;
+                }
+                Enumerable.Empty<Diagnostic>()
                     .Union(conditionTrue
                         .Except(conditionFalse)
                         .Where(c => !IsConditionOfLoopWithBreak((ExpressionSyntax)c))
@@ -122,7 +134,9 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Select(node => GetDiagnostics(node, false)))
                     .ToList()
                     .ForEach(d => context.ReportDiagnosticWhenActive(d));
+            }
 
+            explodedGraph.InstructionProcessed += instructionProcessed;
             explodedGraph.ExplorationEnded += explorationEnded;
             explodedGraph.ConditionEvaluated += collectConditions;
 
@@ -132,10 +146,15 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             finally
             {
+                explodedGraph.InstructionProcessed -= instructionProcessed;
                 explodedGraph.ExplorationEnded -= explorationEnded;
                 explodedGraph.ConditionEvaluated -= collectConditions;
             }
         }
+
+        private static bool IsYieldNode(Block node) =>
+            node is JumpBlock jumpBlock &&
+            jumpBlock.JumpNode.IsAnyKind(SyntaxKind.YieldReturnStatement, SyntaxKind.YieldBreakStatement);
 
         private static bool IsInsideCatchOrFinallyBlock(SyntaxNode c) =>
             c.Ancestors().Any(n => n.IsAnyKind(IgnoredBlocks));
