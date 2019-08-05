@@ -2261,4 +2261,32 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class GeneratorFunctions
+    {
+        private bool generate;
+
+        public void Stop()
+        {
+            generate = false;
+        }
+
+        public IEnumerable<int> Repro_1295()
+        {
+            generate = true;
+            while (generate) // OK - 'generate' field can potentially be changed inside the loop where this generator is used 
+            {
+                yield return 0;
+            }
+        }
+
+        public IEnumerable<int> FalseNegative()
+        {
+            var myVariable = true;
+            while (myVariable) // FN - myVariable will never change after initialization
+            {
+                yield return 0;
+            }
+        }
+    }
+
 }
