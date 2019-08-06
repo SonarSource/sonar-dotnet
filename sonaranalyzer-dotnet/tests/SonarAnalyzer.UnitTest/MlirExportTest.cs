@@ -641,7 +641,19 @@ int Func(int, int, int i)
         }
 
         [TestMethod]
-        public void LambdaExpression()
+        public void SimpleLambdaExpression()
+        {
+            var code = @"
+void f()
+{
+    Func<int, int> square = x => x * x;
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void ParenthesizedLambdaExpression()
         {
             var code = @"
 Action f()
