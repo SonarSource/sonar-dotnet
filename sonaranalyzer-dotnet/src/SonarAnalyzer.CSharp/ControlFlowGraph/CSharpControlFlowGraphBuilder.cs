@@ -773,7 +773,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 var newSuccessors = possibleTryBlock.SuccessorBlocks.ToList();
                 newSuccessors.Add(target);
                 var branchBlock = CreateBranchBlock(possibleTryBlock.BranchingNode, newSuccessors);
-                branchBlock.ReversedInstructions.Add(breakStatement);
                 return branchBlock;
             }
             return CreateJumpBlock(breakStatement, target, currentBlock);

@@ -393,8 +393,6 @@ namespace SonarAnalyzer.SymbolicExecution
 
                 case SyntaxKind.CheckedExpression:
                 case SyntaxKind.UncheckedExpression:
-
-                case SyntaxKind.BreakStatement:
                     // Do nothing
                     break;
 
