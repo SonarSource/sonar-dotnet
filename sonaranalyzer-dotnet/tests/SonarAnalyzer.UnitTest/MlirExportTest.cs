@@ -644,9 +644,9 @@ int Func(int, int, int i)
         public void SimpleLambdaExpression()
         {
             var code = @"
-void f()
+public System.Linq.Expressions.Expression<Func<int, int>> F()
 {
-    Func<int, int> square = x => x * x;
+    return x => 2*x;
 }
 ";
             ValidateCodeGeneration(code);
