@@ -85,6 +85,11 @@ namespace SonarAnalyzer
             writer.WriteLine($"^entry {GetArgumentsString(method)}:");
             foreach (var param in method.ParameterList.Parameters)
             {
+                if(string.IsNullOrEmpty(param.Identifier.ValueText))
+                {
+                    // An unnamed parameter cannot be used inside the function
+                    continue;
+                }
                 var id = OpId(param);
                 writer.WriteLine($"%{id} = cbde.alloca {MLIRType(param)} {GetLocation(param)}");
                 writer.WriteLine($"cbde.store %{param.Identifier.ValueText}, %{id} : memref<{MLIRType(param)}> {GetLocation(param)}");
@@ -221,8 +226,16 @@ namespace SonarAnalyzer
             {
                 return string.Empty;
             }
+            int paramCount = 0;
             var args = method.ParameterList.Parameters.Select(
-                p => $"%{p.Identifier.ValueText} : {MLIRType(p)}");
+                p => {
+                    ++paramCount;
+                    var paramName = string.IsNullOrEmpty(p.Identifier.ValueText) ?
+                        ".param" + paramCount.ToString() :
+                        p.Identifier.ValueText;
+                    return $"%{paramName} : {MLIRType(p)}";
+                }
+                );
             return '(' + string.Join(", ", args) + ')';
         }
 
