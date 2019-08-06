@@ -165,21 +165,116 @@ namespace Tests.Diagnostics
         }
     }
 
-    public class ReproForIssue2491
+    public class UsingWithLeaveOpenArgument
     {
-        public void S3966FalsePositive()
+        public void LeaveOpenTrue1()
         {
-            // Rule S3966 is a false positive:
-            // The StreamWriter constructor used sets 'leaveOpen' to true, which prevents the
-            // StreamWriter from disposing the MemoryStream. Dispose is only called due to the
-            // 'using'-statement.
+            using (MemoryStream memoryStream = new MemoryStream())
+            using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, true))
+            {
+                string str = null;
+            }
+        }
 
-            using (MemoryStream memoryStream = new MemoryStream()) // Noncompliant FP
+        public void LeaveOpenTrue2()
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
             using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, leaveOpen: true))
             {
-                //...
+                string str = null;
             }
+        }
 
+        public void LeaveOpenTrue3()
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), leaveOpen: true, bufferSize: 1024))
+            {
+                string str = null;
+            }
+        }
+
+        public void LeaveOpenTrue4()
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            using (StreamReader reader = new StreamReader(memoryStream, new System.Text.UTF8Encoding(false), false, 1024, true))
+            {
+                string str = null;
+            }
+        }
+
+        public void LeaveOpenTrue5()
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            using (StreamReader reader = new StreamReader(memoryStream, new System.Text.UTF8Encoding(false), bufferSize: 2014, leaveOpen: true, detectEncodingFromByteOrderMarks: false))
+            {
+                string str = null;
+            }
+        }
+
+        public void LeaveOpenTrue6()
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), leaveOpen: true, bufferSize: 1024))
+            using (StreamReader reader = new StreamReader(memoryStream, new System.Text.UTF8Encoding(false), bufferSize: 2014, leaveOpen: true, detectEncodingFromByteOrderMarks: false))
+            {
+                string str = null;
+            }
+        }
+
+        public void LeaveOpenTrue7()
+        {
+            using (MemoryStream memoryStream = new MemoryStream()) // Noncompliant
+            using (StreamWriter writer = new StreamWriter(memoryStream))
+            using (StreamReader reader = new StreamReader(memoryStream, new System.Text.UTF8Encoding(false), bufferSize: 2014, leaveOpen: true, detectEncodingFromByteOrderMarks: false))
+            {
+                string str = null;
+            }
+        }
+
+        public void LeaveOpenFalse1()
+        {
+            using (MemoryStream memoryStream = new MemoryStream()) // Noncompliant
+            using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, false))
+            {
+                string str = null;
+            }
+        }
+
+        public void LeaveOpenFalse2()
+        {
+            using (MemoryStream memoryStream = new MemoryStream()) // Noncompliant
+            using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), 1024, leaveOpen: false))
+            {
+                string str = null;
+            }
+        }
+
+        public void LeaveOpenFalse3()
+        {
+            using (MemoryStream memoryStream = new MemoryStream()) // Noncompliant
+            using (StreamWriter writer = new StreamWriter(memoryStream, new System.Text.UTF8Encoding(false), leaveOpen: false, bufferSize: 1024))
+            {
+                string str = null;
+            }
+        }
+
+        public void LeaveOpenFalse4()
+        {
+            using (MemoryStream memoryStream = new MemoryStream()) // Noncompliant
+            using (StreamReader reader = new StreamReader(memoryStream, new System.Text.UTF8Encoding(false), true, 1024, false))
+            {
+                string str = null;
+            }
+        }
+
+        public void LeaveOpenFalse5()
+        {
+            using (MemoryStream memoryStream = new MemoryStream()) // Noncompliant
+            using (StreamReader reader = new StreamReader(memoryStream, new System.Text.UTF8Encoding(false), bufferSize: 2014, leaveOpen: false, detectEncodingFromByteOrderMarks: true))
+            {
+                string str = null;
+            }
         }
     }
 

@@ -29,6 +29,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.CSharp;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
@@ -40,6 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S3966";
         private const string MessageFormat = "Refactor this code to make sure '{0}' is disposed only once.";
+        private const string LeaveOpenParameterName = "leaveOpen";
 
         private static readonly ImmutableArray<KnownType> typesDisposingUnderlyingStream =
             ImmutableArray.Create(
@@ -177,20 +179,43 @@ namespace SonarAnalyzer.Rules.CSharp
             private ProgramState ProcessStreamDisposingTypes(ProgramState programState, SyntaxNode usingExpression)
             {
                 var newProgramState = programState;
+                var objectCreationExpressions = usingExpression.DescendantNodes()
+                    .OfType<ObjectCreationExpressionSyntax>();
 
-                var arguments = usingExpression.DescendantNodes()
-                    .OfType<ObjectCreationExpressionSyntax>()
-                    .Where(IsStreamDisposingType)
-                    .Select(FirstArgumentOrDefault)
-                    .WhereNotNull();
-
-                foreach (var argument in arguments)
+                foreach (var objectCreationExpression in objectCreationExpressions)
                 {
-                    var streamSymbol = this.semanticModel.GetSymbolInfo(argument.Expression).Symbol;
-                    newProgramState = ProcessDisposableSymbol(newProgramState, argument.Expression, streamSymbol);
+                    var objectType = this.semanticModel.GetSymbolInfo(objectCreationExpression.Type)
+                    .Symbol
+                    .GetSymbolType();
+
+                    if (objectType.DerivesOrImplementsAny(typesDisposingUnderlyingStream) &&
+                        objectCreationExpression.ArgumentList?.Arguments is IEnumerable<ArgumentSyntax> argumentList)
+                    {
+                        // Checks for the 'leaveOpen' argument. It is at position 4 if present for StreamReader constructor, while it is at position 3 for StreamWriter.
+                        // See #2491 for more details
+                        var leaveOpenArgumentIndex = objectType.DerivesOrImplements(KnownType.System_IO_StreamReader) ? 4 : 3;
+                        if (!HasLeaveOpenArgument(argumentList, leaveOpenArgumentIndex))
+                        {
+                            var argument = argumentList.First();
+                            var streamSymbol = this.semanticModel.GetSymbolInfo(argument.Expression).Symbol;
+                            newProgramState = ProcessDisposableSymbol(newProgramState, argument.Expression, streamSymbol);
+                        }
+                    }
                 }
 
                 return newProgramState;
+            }
+
+            private static bool HasLeaveOpenArgument(IEnumerable<ArgumentSyntax> argumentList, int leaveOpenArgumentIndex)
+            {
+                var leaveOpenArgument = argumentList.FirstOrDefault(argument => LeaveOpenParameterName.Equals(argument.NameColon?.Name.Identifier.ValueText));
+                if (leaveOpenArgument == null)
+                {
+                    leaveOpenArgument = argumentList.ElementAtOrDefault(leaveOpenArgumentIndex);
+                }
+
+                return leaveOpenArgument != null &&
+                    CSharpEquivalenceChecker.AreEquivalent(leaveOpenArgument.Expression, CSharpSyntaxHelper.TrueLiteralExpression);
             }
 
             private ProgramState ProcessDisposableSymbol(ProgramState programState, SyntaxNode disposeInstruction,
@@ -224,15 +249,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 return disposableSymbol.SetConstraint(DisposableConstraint.Disposed, newProgramState);
             }
-
-            private static ArgumentSyntax FirstArgumentOrDefault(ObjectCreationExpressionSyntax objectCreation) =>
-                objectCreation.ArgumentList?.Arguments.FirstOrDefault();
-
-            private bool IsStreamDisposingType(ObjectCreationExpressionSyntax objectCreation) =>
-                this.semanticModel.GetSymbolInfo(objectCreation.Type)
-                    .Symbol
-                    .GetSymbolType()
-                    .DerivesOrImplementsAny(typesDisposingUnderlyingStream);
         }
     }
 }
