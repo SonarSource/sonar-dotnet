@@ -555,6 +555,38 @@ public Type f()
         }
 
         [TestMethod]
+        public void ReturnParenthesizedNullLitteral()
+        {
+            var code = @"
+public Type f()
+{
+    return (null);
+}
+";
+            var dot = GetCfgGraph(code, "f");
+
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void ParenthesizedExpressions()
+        {
+            var code = @"
+public void f(int i, int j)
+{
+    var k = ((i) + j);
+    if (((k) == 0))
+    {
+        (i = k);
+    }
+}
+";
+            var dot = GetCfgGraph(code, "f");
+
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
         public void UnknownMethodOnMultipleLines()
         {
             var code = @"
