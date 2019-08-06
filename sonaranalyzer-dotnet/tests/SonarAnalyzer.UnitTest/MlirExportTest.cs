@@ -640,6 +640,49 @@ int Func(int, int, int i)
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void SimpleLambdaExpression()
+        {
+            var code = @"
+public System.Linq.Expressions.Expression<Func<int, int>> F()
+{
+    return x => 2*x;
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void ParenthesizedLambdaExpression()
+        {
+            var code = @"
+Action f()
+{
+    return () => Y();
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void SwitchStatement()
+        {
+            var code = @"
+int f(int i)
+{
+    switch (i)
+    {
+        case 1:
+            return 0;
+        default:
+            return 1;
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
+
     } // Class
 } // Namespace
 
