@@ -714,6 +714,22 @@ int f(int i)
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void NonASCIIEncodings()
+        {
+            var code = @"
+public void 你好() { }
+
+public void Łódź() { }
+
+public void AsciiThen你好ThenAsciiAgain() { }
+
+public int Łódźअनुلمرadım(int 你好) { return 2 * 你好; }
+
+";
+            ValidateCodeGeneration(code);
+        }
+
 
     } // Class
 } // Namespace
