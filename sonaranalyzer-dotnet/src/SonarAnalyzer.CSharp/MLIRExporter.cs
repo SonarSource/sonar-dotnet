@@ -401,10 +401,16 @@ namespace SonarAnalyzer
                 decl is ClassDeclarationSyntax     // In "Class.member", we are not interested in the "Class" part
                 )
             {
-                // We will fetch the function only when looking t the function call itself, we just skip the identifier
+                // We will fetch the function only when looking at the function call itself, we just skip the identifier
                 return;
             }
-            if (!SupportedTypes(id))
+
+            if (declSymbol is IFieldSymbol fieldSymbol && fieldSymbol.HasConstantValue)
+            {
+                writer.WriteLine($"%{OpId(op)} = constant {fieldSymbol.ConstantValue.ToString()} : {MLIRType(fieldSymbol.Type)} {GetLocation(op)}");
+                return;
+            }
+            else if (declSymbol is IFieldSymbol || !SupportedTypes(id))
             {
                 writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(id)} {GetLocation(op)} // Variable of unknown type {id.Identifier.ValueText}");
                 return;
@@ -435,6 +441,7 @@ namespace SonarAnalyzer
                         return;
                     }
             }
+
             writer.WriteLine($"%{OpId(op)} = {opName} %{OpId(binExpr.Left)}, %{OpId(binExpr.Right)} : {MLIRType(binExpr)} {GetLocation(binExpr)}");
         }
 
