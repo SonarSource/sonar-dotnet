@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -52,7 +53,7 @@ namespace SonarAnalyzer
             var returnType = HasNoReturn(method) ?
                 "()" :
                 MLIRType(method.ReturnType);
-            writer.WriteLine($"func @{method.Identifier.ValueText}{GetAnonymousArgumentsString(method)} -> {returnType} {GetLocation(method)} {{");
+            writer.WriteLine($"func @{EncodeName(method.Identifier.ValueText)}{GetAnonymousArgumentsString(method)} -> {returnType} {GetLocation(method)} {{");
             CreateEntryBlock(method);
 
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
@@ -95,7 +96,7 @@ namespace SonarAnalyzer
                 }
                 var id = OpId(param);
                 writer.WriteLine($"%{id} = cbde.alloca {MLIRType(param)} {GetLocation(param)}");
-                writer.WriteLine($"cbde.store %{param.Identifier.ValueText}, %{id} : memref<{MLIRType(param)}> {GetLocation(param)}");
+                writer.WriteLine($"cbde.store %{EncodeName(param.Identifier.ValueText)}, %{id} : memref<{MLIRType(param)}> {GetLocation(param)}");
             }
             writer.WriteLine("br ^0");
             writer.WriteLine();
@@ -235,7 +236,7 @@ namespace SonarAnalyzer
                     ++paramCount;
                     var paramName = string.IsNullOrEmpty(p.Identifier.ValueText) ?
                         ".param" + paramCount.ToString() :
-                        p.Identifier.ValueText;
+                        EncodeName(p.Identifier.ValueText);
                     return $"%{paramName} : {MLIRType(p)}";
                 }
                 );
@@ -505,6 +506,7 @@ namespace SonarAnalyzer
         private int blockCounter = 0;
         private readonly Dictionary<SyntaxNode, int> opMap = new Dictionary<SyntaxNode, int>();
         private int opCounter = 0;
+        private readonly Encoding encoder = System.Text.Encoding.GetEncoding("ASCII", new PreservingEncodingFallback(), DecoderFallback.ExceptionFallback);
 
         public int BlockId(Block cfgBlock) =>
             this.blockMap.GetOrAdd(cfgBlock, b => this.blockCounter++);
@@ -515,6 +517,13 @@ namespace SonarAnalyzer
         public string UniqueOpId()
         {
             return (opCounter++).ToString();
+        }
+
+        public string EncodeName(string name)
+        {
+            Byte[] encodedBytes = encoder.GetBytes(name);
+            return '_' + encoder.GetString(encodedBytes);
+
         }
     }
 }
