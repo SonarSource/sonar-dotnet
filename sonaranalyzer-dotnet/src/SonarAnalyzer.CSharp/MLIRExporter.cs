@@ -424,7 +424,8 @@ namespace SonarAnalyzer
             var decl = declSymbol.DeclaringSyntaxReferences[0].GetSyntax();
             if (decl == null ||                    // Not sure if we can be in this situation...
                 decl is MethodDeclarationSyntax || // We will fetch the function only when looking at the function call itself
-                decl is ClassDeclarationSyntax     // In "Class.member", we are not interested in the "Class" part
+                decl is ClassDeclarationSyntax  || // In "Class.member", we are not interested in the "Class" part
+                decl is NamespaceDeclarationSyntax
                 )
             {
                 // We will fetch the function only when looking at the function call itself, we just skip the identifier
