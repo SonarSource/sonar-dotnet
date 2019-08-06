@@ -134,9 +134,9 @@ namespace SonarAnalyzer.Rules.CSharp
              */
             bool IsUncaughtExceptionFinallyBlock(Block block)
             {
-                if (block is SimpleBlock simpleBlock &&
-                    !(block is JumpBlock) &&
-                    simpleBlock.SuccessorBlock is ExitBlock &&
+                if (!(block is JumpBlock) &&
+                    // if it a try inside a finally, the try body will also point to catch
+                    block.SuccessorBlocks.Any(b => b is ExitBlock) &&
                     // we need an instruction to see if it's inside a finally clause
                     block.Instructions.Count > 0 &&
                     block.PredecessorBlocks.Count == 1 &&

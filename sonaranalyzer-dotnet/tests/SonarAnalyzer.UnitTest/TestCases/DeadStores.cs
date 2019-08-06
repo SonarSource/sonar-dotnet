@@ -430,6 +430,25 @@ namespace Tests.Diagnostics
             }
         }
 
+        internal void OnlyFinally_WithTryInside(object actor)
+        {
+            try
+            {
+                Foo(actor);
+            }
+            finally
+            {
+                try
+                {
+                    actor = null; // Noncompliant
+                }
+                catch
+                {
+                    Foo(null);
+                }
+            }
+        }
+
         internal void Finally_Followed_By_Deadstore(object actor)
         {
             try
