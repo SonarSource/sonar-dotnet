@@ -640,6 +640,37 @@ int Func(int, int, int i)
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void LambdaExpression()
+        {
+            var code = @"
+Action f()
+{
+    return () => Y();
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void SwitchStatement()
+        {
+            var code = @"
+int f(int i)
+{
+    switch (i)
+    {
+        case 1:
+            return 0;
+        default:
+            return 1;
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
+
     } // Class
 } // Namespace
 
