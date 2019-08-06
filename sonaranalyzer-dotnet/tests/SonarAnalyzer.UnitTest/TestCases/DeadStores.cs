@@ -426,12 +426,26 @@ namespace Tests.Diagnostics
             }
             finally
             {
-                // the root cause of this situation is the fact that:
-                // - for each finally clause, to separate blocks are generated (see comments in DeadStore class)
-                // - when analyzing a block that follow a try statement, we cannot tell whether it's a catch,
-                //   a finally or just the code which follows the try-catch-finally statement
-                //  this FN can be fixed by adding finally clause in the instructions of the finally block to distinguish catch from finally
-                actor = null; // FN
+                actor = null; // Noncompliant
+            }
+        }
+
+        internal void OnlyFinally_WithTryInside(object actor)
+        {
+            try
+            {
+                Foo(actor);
+            }
+            finally
+            {
+                try
+                {
+                    actor = null; // Noncompliant
+                }
+                catch
+                {
+                    Foo(null);
+                }
             }
         }
 
