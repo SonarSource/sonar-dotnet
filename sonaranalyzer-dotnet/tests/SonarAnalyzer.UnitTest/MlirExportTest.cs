@@ -628,6 +628,17 @@ public class A
 ";
             ValidateCodeGeneration(code);
         }
+        [TestMethod]
+        public void UnnamedFunctionParameter()
+        {
+            var code = @"
+int Func(int, int, int i)
+{
+    return 2*i;
+}
+";
+            ValidateCodeGeneration(code);
+        }
 
     } // Class
 } // Namespace
