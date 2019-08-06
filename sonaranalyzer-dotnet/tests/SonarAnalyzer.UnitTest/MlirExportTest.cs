@@ -757,6 +757,62 @@ public void f(params int[] args)
         }
 
 
+        [TestMethod]
+        public void CheckedUnchecked()
+        {
+            var code = @"
+public int CheckedStmt(int i)
+{
+    checked
+    {
+        var j = i * 2;
+        return j;
+    }
+}
+public int CheckedExpr(int i)
+{
+    return checked(i * 2);
+}
+public int UncheckedStmt(int i)
+{
+    unchecked
+    {
+        var j = i * 2;
+        return j;
+    }
+}
+public int UncheckedExpr(int i)
+{
+    return unchecked(i * 2);
+}
+";
+
+            ValidateCodeGeneration(code);
+        }
+        [TestMethod]
+        public void Fixed()
+        {
+            var code = @"
+class Point 
+{ 
+    public int x;
+    public int y; 
+}
+
+unsafe private static void ModifyFixedStorage()
+{
+    Point pt = new Point();
+    fixed (int* p = &pt.x)
+    {
+        *p = 1;
+    }
+}
+";
+
+            ValidateCodeGeneration(code);
+        }
+
+
     } // Class
 } // Namespace
 
