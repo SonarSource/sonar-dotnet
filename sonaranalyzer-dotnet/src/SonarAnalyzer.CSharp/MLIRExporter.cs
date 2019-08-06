@@ -39,8 +39,8 @@ namespace SonarAnalyzer
 
             if (IsTooClomplexForMLIROrTheCFG(method))
             {
-            writer.WriteLine($"// Skipping function {method.Identifier.ValueText}{GetAnonymousArgumentsString(method)}, it contains poisonous unsupported syntaxes");
-            writer.WriteLine();
+                writer.WriteLine($"// Skipping function {method.Identifier.ValueText}{GetAnonymousArgumentsString(method)}, it contains poisonous unsupported syntaxes");
+                writer.WriteLine();
                 return;
             }
             blockCounter = 0;
@@ -76,7 +76,10 @@ namespace SonarAnalyzer
             n.IsKind(SyntaxKind.LogicalOrExpression) ||
             n.IsKind(SyntaxKind.ConditionalExpression) ||
             n.IsKind(SyntaxKind.ConditionalAccessExpression) ||
-            n.IsKind(SyntaxKind.CoalesceExpression)
+            n.IsKind(SyntaxKind.CoalesceExpression) ||
+            n.IsKind(SyntaxKind.SwitchStatement) ||
+            n.IsKind(SyntaxKind.ParenthesizedLambdaExpression) ||
+            n.IsKind(SyntaxKind.SimpleLambdaExpression)
             );
         }
 
