@@ -134,7 +134,7 @@ public class CoverageAggregator {
             try {
               aggregatedCoverage.mergeWith(coverageCache.readCoverageFromCacheOrParse(parser, reportFile));
             } catch (Exception e) {
-              LOG.warn("Could not import coverage report '{}'", reportFile);
+              LOG.warn("Could not import coverage report '{}' because '{}'", reportFile, e.getMessage());
             }
           }
         }

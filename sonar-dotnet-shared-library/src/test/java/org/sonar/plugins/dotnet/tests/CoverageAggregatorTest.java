@@ -238,12 +238,12 @@ public class CoverageAggregatorTest {
     when(wildcardPatternFileProvider.listFiles("foo.nccov")).thenReturn(new HashSet<>(Collections.singletonList(new File("foo.nccov"))));
 
     Coverage coverage = mock(Coverage.class);
-    doThrow(IllegalStateException.class).when(coverage).mergeWith(any());
+    doThrow(new IllegalStateException("TEST EXCEPTION MESSAGE")).when(coverage).mergeWith(any());
 
     new CoverageAggregator(coverageConf, settings.asConfig(), cache, null, null, null, null)
       .aggregate(wildcardPatternFileProvider, coverage);
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Could not import coverage report 'foo.nccov'");
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Could not import coverage report 'foo.nccov' because 'TEST EXCEPTION MESSAGE'");
   }
 
   @Test
