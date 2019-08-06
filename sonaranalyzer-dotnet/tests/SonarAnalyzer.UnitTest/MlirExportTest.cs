@@ -595,6 +595,40 @@ void f(int i)
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void UseOfReadonlyClassField()
+        {
+            var code = @"
+public class A
+{
+    readonly int a = 0;
+
+    public int getA()
+    {
+        return a;
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void UseOfConstantClassField()
+        {
+            var code = @"
+public class A
+{
+    const int a = 0;
+
+    public int getA()
+    {
+        return a;
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
     } // Class
 } // Namespace
 
