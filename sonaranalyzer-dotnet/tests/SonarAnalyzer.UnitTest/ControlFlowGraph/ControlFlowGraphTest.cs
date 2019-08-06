@@ -2759,7 +2759,7 @@ namespace NS
             VerifyAllInstructions(doBlock, "cw0", "cw0()");
             doBlock.SuccessorBlocks.Should().OnlyContainInOrder(tryBody);
 
-            VerifyAllInstructions(tryBody, "attempts", "attempts++", "cw1", "cw1()", "break;");
+            VerifyAllInstructions(tryBody, "attempts", "attempts++", "cw1", "cw1()");
             // this is wrong, the tryBody should not have a connection with whileStmt, it can lead to FNs
             tryBody.SuccessorBlocks.Should().OnlyContainInOrder(catchBlock, whileStmt, afterDoWhile);
 
@@ -2826,7 +2826,7 @@ namespace NS
             VerifyAllInstructions(doBeforeTry, "cw0", "cw0()");
             doBeforeTry.SuccessorBlocks.Should().OnlyContainInOrder(tryStatement);
 
-            VerifyAllInstructions(tryStatement, "cw1", "cw1()", "break;");
+            VerifyAllInstructions(tryStatement, "cw1", "cw1()");
             tryStatement.SuccessorBlocks.Should().OnlyContainInOrder(catchBody, finallyBody_NormalFlow, finallyBlock_Exit, afterDoWhile);
 
             tryBody.SuccessorBlocks.Should().OnlyContainInOrder(catchBody, finallyBody_NormalFlow, finallyBlock_Exit);
@@ -2983,7 +2983,7 @@ namespace NS
             VerifyAllInstructions(insideDoBeforeTry, "cw0", "cw0()");
             insideDoBeforeTry.SuccessorBlocks.Should().OnlyContainInOrder(insideTry);
 
-            VerifyAllInstructions(insideTry, "attempts", "attempts++", "cw1", "cw1()", "break;");
+            VerifyAllInstructions(insideTry, "attempts", "attempts++", "cw1", "cw1()");
             insideTry.SuccessorBlocks.Should().OnlyContainInOrder(catchBodyWithIf, whileStmt, afterDoWhile);
 
             temporaryStrayBlock.ReversedInstructions.Should().BeEmpty();

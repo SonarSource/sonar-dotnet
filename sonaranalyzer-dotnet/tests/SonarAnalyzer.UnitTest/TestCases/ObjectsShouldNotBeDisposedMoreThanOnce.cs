@@ -182,4 +182,27 @@ namespace Tests.Diagnostics
 
         }
     }
+
+    class TestLoopWithBreak
+    {
+        public static void LoopWithBreak(System.Collections.Generic.IEnumerable<string> list, bool condition, IInterface1 instance1)
+        {
+            foreach (string x in list)
+            {
+                try
+                {
+                    if (condition)
+                    {
+                        instance1.Dispose(); // Noncompliant
+                    }
+                    break;
+                }
+                catch (Exception)
+                {
+                    continue;
+                }
+            }
+        }
+    }
+
 }
