@@ -248,7 +248,11 @@ namespace SonarAnalyzer
             return '(' + string.Join(", ", args) + ')';
         }
 
-        private string MLIRType(ParameterSyntax p) => MLIRType(semanticModel.GetDeclaredSymbol(p).GetSymbolType());
+        private string MLIRType(ParameterSyntax p)
+        {
+            var symbolType = semanticModel.GetDeclaredSymbol(p).GetSymbolType();
+            return symbolType == null ? "none" : MLIRType(symbolType);
+        }
 
         private string MLIRType(ExpressionSyntax e) =>
             e.RemoveParentheses().Kind() == SyntaxKind.NullLiteralExpression ? "none" : MLIRType(semanticModel.GetTypeInfo(e).Type);

@@ -714,6 +714,30 @@ int f(int i)
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void Arglist()
+        {
+            var code = @"
+public void f(__arglist)
+{
+}
+";
+
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void ParamsKeyword()
+        {
+            var code = @"
+public void f(params int[] args)
+        {
+        }
+";
+
+            ValidateCodeGeneration(code);
+        }
+
 
     } // Class
 } // Namespace
