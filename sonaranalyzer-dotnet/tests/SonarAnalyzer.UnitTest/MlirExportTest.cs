@@ -660,6 +660,7 @@ public class A
 ";
             ValidateCodeGeneration(code);
         }
+
         [TestMethod]
         public void UnnamedFunctionParameter()
         {
@@ -727,7 +728,7 @@ public void AsciiThen你好ThenAsciiAgain() { }
 public int Łódźअनुلمرadım(int 你好) { return 2 * 你好; }
 
 ";
-          
+
             ValidateCodeGeneration(code);
         }
 
@@ -755,7 +756,6 @@ public void f(params int[] args)
 
             ValidateCodeGeneration(code);
         }
-
 
         [TestMethod]
         public void CheckedUnchecked()
@@ -789,14 +789,15 @@ public int UncheckedExpr(int i)
 
             ValidateCodeGeneration(code);
         }
+
         [TestMethod]
         public void Fixed()
         {
             var code = @"
-class Point 
-{ 
+class Point
+{
     public int x;
-    public int y; 
+    public int y;
 }
 
 unsafe private static void ModifyFixedStorage()
@@ -812,6 +813,21 @@ unsafe private static void ModifyFixedStorage()
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void Namespace()
+        {
+            var code = @"
+namespace Tests
+{
+    public static void f()
+    {
+        Tests.g();
+    }
+}
+";
+
+            ValidateCodeGeneration(code);
+        }
 
     } // Class
 } // Namespace
