@@ -1,4 +1,5 @@
-﻿using System;
+﻿ #define NOCASES
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -71,6 +72,44 @@ namespace SonarAnalyzer
             return semanticModel.GetTypeInfo(method.ReturnType).Type.SpecialType == SpecialType.System_Void;
         }
 
+        private string GetBlockParameter(Block block)
+        {
+            string blockParam = "";
+            if (block.Instructions.Count > 0)
+            {
+                var firstInstr = block.Instructions.First();
+                var ces = firstInstr.DescendantNodesAndSelf().FirstOrDefault(node => (node is ConditionalExpressionSyntax));
+                if (ces != null)
+                {
+                    var typename = MLIRType(semanticModel.GetTypeInfo(ces).Type);
+                    blockParam = $"(%{OpId(ces)}: {typename})";
+                }
+            }
+            return blockParam;
+        }
+
+        private string GetJumpArgument(SimpleBlock block)
+        {
+            string blockArg = "";
+            var predBlock = block.PredecessorBlocks.FirstOrDefault();
+            if ((block.Instructions.Count() > 0) && (predBlock != null) && (predBlock is BinaryBranchBlock))
+            {
+                var succBlock = block.SuccessorBlocks.FirstOrDefault();
+                if ((succBlock != null) && (succBlock.Instructions.Count() > 0))
+                {
+                    var firstInstr = succBlock.Instructions.First();
+                    bool hasConditionalExpressionSyntaxDescendant = firstInstr.DescendantNodesAndSelf().Any(node => (node is ConditionalExpressionSyntax));
+                    if (hasConditionalExpressionSyntaxDescendant)
+                    {
+                        var lastInstr = block.Instructions.Last();
+                        var typename = MLIRType(semanticModel.GetTypeInfo(lastInstr).Type);
+                        blockArg = $"(%{OpId(lastInstr)}: {typename})";
+                    }
+                }
+            }
+            return blockArg;
+        }
+
         private void ExportBlock(Block block, bool isEntryBlock, MethodDeclarationSyntax parentMethod)
         {
             if (block is ExitBlock && !HasNoReturn(parentMethod))
@@ -80,7 +119,7 @@ namespace SonarAnalyzer
             }
             else
             {
-                writer.WriteLine($"^{BlockId(block)}: // {block.GetType().Name}"); // TODO: Block arguments...
+                writer.WriteLine($"^{BlockId(block)}{GetBlockParameter(block)}: // {block.GetType().Name}"); // TODO: Block arguments...
             }
             // MLIR encodes blocks relationships in operations, not in blocks themselves
             foreach(var op in block.Instructions)
@@ -116,23 +155,28 @@ namespace SonarAnalyzer
                     }
                     break;
                 case BinaryBranchBlock bbb:
+#if (NOCASES)
                     var cond = GetCondition(bbb);
                     // For an if or a while, bbb.BranchingNode represent the condition, not the statement that holds the condition
                     // For a for, bbb.BranchingNode represents the for. Since for is a statement, not an expression, if we
                     // see a for, we know it's at the top level of the expression tree, so it cannot be a for inside of a if condition
-
                     writer.WriteLine($"cond_br %{OpId(cond)}, ^{BlockId(bbb.TrueSuccessorBlock)}, ^{BlockId(bbb.FalseSuccessorBlock)} {GetLocation(cond)}");
+#else
                     /*
                      * Up to now, we do exactly the same for all cases that may have created a BinaryBranchBlock
                      * maybe later, depending on the reason (if vs for?) we'll do something different
-                     *
-                    var condStatement = bbb.BranchingNode.Parent;
+                     * */
+                    var condStatement = bbb.BranchingNode.GetFirstNonParenthesizedParent();
                     switch (condStatement.Kind())
                     {
                         case SyntaxKind.ConditionalExpression: // a ? b : c
                             var cond = condStatement as ConditionalExpressionSyntax;
-                            writer.WriteLine($"cond_br %{OpId(cond.Condition)}, ^{BlockId(bbb.TrueSuccessorBlock)}, ^{BlockId(bbb.FalseSuccessorBlock)}");
+                            //writer.WriteLine($"cond_br %{OpId(cond.Condition)}, ^{BlockId(bbb.TrueSuccessorBlock)}, ^{BlockId(bbb.FalseSuccessorBlock)}");
+                            writer.WriteLine($"cond_br (CES) %{OpId(cond.Condition)}, ^{BlockId(bbb.TrueSuccessorBlock)}, ^{BlockId(bbb.FalseSuccessorBlock)}");
                             break;
+                            //condStatement.
+                            //cond.
+                            //var lhs = semanticModel.GetSymbolInfo(condStatement.).Symbol.DeclaringSyntaxReferences[0].GetSyntax();
                         case SyntaxKind.IfStatement:
                             var ifCond = condStatement as IfStatementSyntax;
                             writer.WriteLine($"cond_br %{OpId(ifCond.Condition)}, ^{BlockId(bbb.TrueSuccessorBlock)}, ^{BlockId(bbb.FalseSuccessorBlock)}");
@@ -148,10 +192,32 @@ namespace SonarAnalyzer
                             writer.WriteLine($"// Unhandled branch {bbb.BranchingNode.Kind().ToString()}");
                             break;
 
-                    }*/
+                    }
+#endif
                     break;
                 case SimpleBlock sb:
-                    writer.WriteLine($"br ^{BlockId(sb.SuccessorBlock)}");
+                    //string blockArg = "";
+                    //if (sb.PredecessorBlocks.Count() > 0
+                    //   && (sb.PredecessorBlocks.ElementAt(0) is BinaryBranchBlock))
+                    //{
+                    //    if (sb.SuccessorBlocks.Count() > 0)
+                    //    {
+                    //        var sblock = sb.SuccessorBlock;
+                    //        if (sblock.Instructions.Count > 0)
+                    //        {
+                    //            var instr = sblock.Instructions.First();
+                    //            var descnodes = instr.DescendantNodesAndSelf().OfType<ConditionalExpressionSyntax>();
+                    //            if (descnodes.Count() > 0 && sb.Instructions.Count() > 0)
+                    //            {
+                    //                var lastinstr = sb.Instructions.Last();
+                    //                //var ces = instr.FirstAncestorOrSelf<ConditionalExpressionSyntax>();
+                    //                var typename = MLIRType(semanticModel.GetTypeInfo(lastinstr).Type);
+                    //                blockArg = $"(%{OpId(lastinstr)}: {typename})";
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                    writer.WriteLine($"br ^{BlockId(sb.SuccessorBlock)}{GetJumpArgument(sb)}");
                     break;
                 case ExitBlock eb:
                     // If we reach this point, it means the function has no return, we must manually add one

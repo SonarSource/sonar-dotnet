@@ -94,9 +94,9 @@
     <Content Include="ResourceTests\ProjectOutFolderPath.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="..\..\..\..\SonarCBDE\build\mlirChecker\Release\mlir-cbde.exe" Link="mlir-cbde.exe">
+<!--    <None Include="..\..\..\..\SonarCBDE\build\mlirChecker\Release\mlir-cbde.exe" Link="mlir-cbde.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </None> -->
     <None Include="Common\Resources\input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
