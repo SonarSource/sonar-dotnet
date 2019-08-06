@@ -80,7 +80,12 @@ namespace SonarAnalyzer
             n.IsKind(SyntaxKind.CoalesceExpression) ||
             n.IsKind(SyntaxKind.SwitchStatement) ||
             n.IsKind(SyntaxKind.ParenthesizedLambdaExpression) ||
-            n.IsKind(SyntaxKind.SimpleLambdaExpression)
+            n.IsKind(SyntaxKind.SimpleLambdaExpression) ||
+            n.IsKind(SyntaxKind.FixedStatement) ||
+            n.IsKind(SyntaxKind.CheckedStatement) ||
+            n.IsKind(SyntaxKind.CheckedExpression) ||
+            n.IsKind(SyntaxKind.UncheckedExpression) ||
+            n.IsKind(SyntaxKind.UncheckedStatement)
             );
         }
 
