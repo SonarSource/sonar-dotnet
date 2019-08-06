@@ -126,7 +126,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 ancestor is SimpleLambdaExpressionSyntax ||
                 ancestor is ParenthesizedLambdaExpressionSyntax ||
                 ancestor is AccessorDeclarationSyntax ||
-                ancestor is BaseMethodDeclarationSyntax);
+                ancestor is BaseMethodDeclarationSyntax ||
+                ancestor is IndexerDeclarationSyntax);
 
             return new HashSet<string>(GetArgumentNames(creationContext));
         }
@@ -161,6 +162,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 return arguments;
+            }
+            if (node is IndexerDeclarationSyntax indexerDeclaration)
+            {
+                return indexerDeclaration.ParameterList.Parameters.Select(p => p.Identifier.ValueText);
             }
 
             return Enumerable.Empty<string>();
