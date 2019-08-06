@@ -828,7 +828,31 @@ namespace Tests
 
             ValidateCodeGeneration(code);
         }
+        [TestMethod]
+        public void Overloads()
+        {
+            var code = @"
+namespace N
+{
+    class A {
+        int F(int i) {return 2*i;}
+    }
+}
 
+class A {
+    int F() {return 0;}
+    int F(int i) {return 2*i;}
+    int F(int i, int j) {return i*j;}
+    double F(double d) {return 2*d;}
+}
+
+class B {
+    int F(int i) {return 2*i;}
+}
+";
+
+            ValidateCodeGeneration(code);
+        }
     } // Class
 } // Namespace
 
