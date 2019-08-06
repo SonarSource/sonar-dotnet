@@ -251,7 +251,7 @@ namespace SonarAnalyzer
         private string MLIRType(ParameterSyntax p) => MLIRType(semanticModel.GetDeclaredSymbol(p).GetSymbolType());
 
         private string MLIRType(ExpressionSyntax e) =>
-            e.Kind() == SyntaxKind.NullLiteralExpression ? "none" : MLIRType(semanticModel.GetTypeInfo(e).Type);
+            e.RemoveParentheses().Kind() == SyntaxKind.NullLiteralExpression ? "none" : MLIRType(semanticModel.GetTypeInfo(e).Type);
 
         private string MLIRType(VariableDeclaratorSyntax v) => MLIRType(semanticModel.GetDeclaredSymbol(v).GetSymbolType());
 
@@ -506,7 +506,7 @@ namespace SonarAnalyzer
             this.blockMap.GetOrAdd(cfgBlock, b => this.blockCounter++);
         public string OpId(SyntaxNode node)
         {
-            return this.opMap.GetOrAdd(node, b => this.opCounter++).ToString();
+            return this.opMap.GetOrAdd(node.RemoveParentheses(), b => this.opCounter++).ToString();
         }
         public string UniqueOpId()
         {
