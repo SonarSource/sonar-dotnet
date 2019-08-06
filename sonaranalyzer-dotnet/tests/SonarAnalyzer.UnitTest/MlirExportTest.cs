@@ -727,6 +727,32 @@ public void AsciiThen你好ThenAsciiAgain() { }
 public int Łódźअनुلمرadım(int 你好) { return 2 * 你好; }
 
 ";
+          
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void Arglist()
+        {
+            var code = @"
+public void f(__arglist)
+{
+}
+";
+
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void ParamsKeyword()
+        {
+            var code = @"
+public void f(params int[] args)
+        {
+        }
+";
+
+
             ValidateCodeGeneration(code);
         }
 
