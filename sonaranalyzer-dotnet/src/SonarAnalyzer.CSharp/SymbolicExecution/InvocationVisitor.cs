@@ -74,6 +74,11 @@ namespace SonarAnalyzer.SymbolicExecution
                 return HandleStringNullCheckMethod();
             }
 
+            if (IsStringNullOrEmptyCheckMethod(methodSymbol))
+            {
+                return HandleStringNullOrEmptyCheckMethod();
+            }
+
             if (methodSymbol != null &&
                 ValidatesNotNull(methodSymbol, out var validatedArgumentIndex))
             {
@@ -104,12 +109,31 @@ namespace SonarAnalyzer.SymbolicExecution
                 .PopValue(out var arg1)
                 .PopValue();
 
-            // Handle string.IsNullOrEmpty(arg1) as if it was arg1 == null
+            // Handle string.IsNullOrSpace(arg1) as if it was arg1 == null
             return new ReferenceEqualsConstraintHandler(arg1, SymbolicValue.Null,
                     this.invocation.ArgumentList.Arguments[0].Expression,
                     null,
                     newProgramState, this.semanticModel)
                 .PushWithConstraint();
+        }
+        private ProgramState HandleStringNullOrEmptyCheckMethod()
+        {
+            var newProgramState = this.programState
+                .PopValue(out var arg1)
+                .PopValue(out var arg2);
+
+            var refEquals = new ReferenceEqualsSymbolicValue(arg1, arg2);
+            newProgramState = newProgramState.PushValue(refEquals);
+            if (newProgramState.HasConstraint(arg1, ObjectConstraint.Null) ||
+                    newProgramState.HasConstraint(arg1, StringConstraint.EmptyString))
+            {
+                newProgramState= newProgramState.SetConstraint(refEquals, BoolConstraint.True);
+            }
+            else if(newProgramState.HasConstraint(arg1, StringConstraint.FullString))
+            {
+                newProgramState = newProgramState.SetConstraint(refEquals, BoolConstraint.False);
+            }        
+            return newProgramState;         
         }
 
         private ProgramState HandleStaticEqualsCall()
@@ -160,18 +184,21 @@ namespace SonarAnalyzer.SymbolicExecution
                 .PopValues(validatedArgumentIndex)
                 .SetConstraint(guardedArgumentValue, ObjectConstraint.NotNull);
 
-        private static readonly ISet<string> IsNullMethodNames = new HashSet<string>
-        {
-            nameof(string.IsNullOrEmpty),
-            nameof(string.IsNullOrWhiteSpace),
-        };
 
         private static bool IsStringNullCheckMethod(IMethodSymbol methodSymbol)
         {
             return methodSymbol != null &&
                 methodSymbol.ContainingType.Is(KnownType.System_String) &&
                 methodSymbol.IsStatic &&
-                IsNullMethodNames.Contains(methodSymbol.Name);
+                nameof(string.IsNullOrWhiteSpace) == methodSymbol.Name;
+        }
+
+        private static bool IsStringNullOrEmptyCheckMethod(IMethodSymbol methodSymbol)
+        {
+            return methodSymbol != null &&
+                methodSymbol.ContainingType.Is(KnownType.System_String) &&
+                methodSymbol.IsStatic &&
+                nameof(string.IsNullOrEmpty) == methodSymbol.Name;
         }
 
         private static bool IsReferenceEqualsCall(IMethodSymbol methodSymbol)

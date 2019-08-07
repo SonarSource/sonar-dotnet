@@ -786,17 +786,16 @@ namespace Tests.Diagnostics
             if (string.IsInterned(s) != null) { }
             s = "";
             if (string.IsNullOrEmpty(s)) { } // Noncompliant
-//Secondary@-1
-            if (string.IsNullOrWhiteSpace(s)) { } // Noncompliant
-//Secondary@-1
 
+            if (string.IsNullOrWhiteSpace(s)) { } // Noncompliant
+            //Secondary@-1
             if (string.IsNullOrEmpty(s1)) { } // Compliant, we don't know anything about the argument
+
             if (string.IsNullOrWhiteSpace(s1)) { } // Compliant
 
             if (string.IsNullOrEmpty(s1))
             {
-                if (string.IsNullOrEmpty(s1)) { } // Noncompliant, we know s1 is not null -> this is always false
-// Secndary@-1
+                if (string.IsNullOrEmpty(s1)) { } // Noncompliant
             }
         }
 
@@ -1881,7 +1880,7 @@ namespace Tests.Diagnostics
     {
       var useParameter = parameter ?? "non-empty";
       if (useParameter == null || useParameter=="") // Noncompliant 
-        return "non-empty"; // FN secondary, should be solved when there is a constraint of empty string
+        return "non-empty"; // we don't know if this going to be excuted or not
 
       return "empty";
     }
@@ -1889,10 +1888,12 @@ namespace Tests.Diagnostics
     public static string Method1347(string parameter)
     {
       var useParameter = parameter ?? "non-empty";
-      if (!string.IsNullOrEmpty(useParameter)) // Noncompliant FP #1347
+      if (!string.IsNullOrEmpty(useParameter))
+      { 
          return "non-empty";
+      }
       else
-      { // Secondary
+      {
       }
       return "empty";
     }
@@ -2289,4 +2290,206 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class StringComparision
+    {
+        public void Method(string s)
+        {
+            string s1 = "";
+            string s2 = "";
+            string s3 = null;
+            string s4 = null;
+            string s5 = "a";
+            string s6 = "a";
+            string s7 = "b";
+            if (s1 == s2) // Noncompliant
+            {
+
+            }
+            if (s3 == s4) // Noncompliant
+            {
+
+            }
+
+            if (s5 == s6)
+            {
+
+            }
+
+            if (s5 == s7)
+            {
+
+            }
+
+            if (s == s1)
+            {
+
+            }
+
+            if (s == s3)
+            {
+
+            }
+
+            if (s == s5)
+            {
+
+            }
+
+            
+            if (s5 == "") // Noncompliant
+            { // Secondary
+
+            }
+
+            if (s5 == null) // Noncompliant
+            { // Secondary
+
+            }
+        }
+    }
+
+    public class NullOrEmpty
+    {
+        public void Method1(string s)
+        {
+            string s1 = null;
+            string s2 = "";
+            string s3 = "a";
+            if (string.IsNullOrEmpty(s1)) // Noncompliant
+            {
+            }
+            if (string.IsNullOrEmpty(s2)) // Noncompliant
+            {
+            }
+
+            if (string.IsNullOrEmpty(s))
+            {
+            }
+
+            if (string.IsNullOrEmpty(s3)) // Noncompliant
+            { // Secondary
+            }
+        }
+
+        public void Method2(string s)
+        {
+
+            if (string.IsNullOrEmpty(s)) 
+            {
+            }
+
+            s = "";
+            if (string.IsNullOrEmpty(s)) // Noncompliant
+            {
+            }
+
+            s = null;
+            if (string.IsNullOrEmpty(s)) // Noncompliant
+            {
+            }
+
+            s = "a";
+            if (string.IsNullOrEmpty(s)) // Noncompliant
+            { // Secondary
+            }
+        }
+
+        public void Method3(string s1)
+        {
+            if (string.IsNullOrEmpty(s1))
+            {
+                s1.ToString();
+            }
+            else
+            {
+                if (s1 == null) // Noncompliant
+                { // Secondary
+                    s1.ToString();
+                }
+            }
+
+        }
+
+        public void Method4(string s1)
+        {
+            if (!string.IsNullOrEmpty(s1))
+            {
+                if (s1 == null) // Noncompliant
+                { // Secondary
+                    s1.ToString();
+                }
+
+            }
+            else
+            {
+                s1.ToString();
+            }
+
+        }
+
+        public void Method5(string s1)
+        {
+            if (!(string.IsNullOrEmpty(s1)))
+            {
+                if (s1 == null) // Noncompliant
+                { // Secondary
+                    s1.ToString();
+                }
+
+            }
+            else
+            {
+                s1.ToString();
+            }
+
+        }
+
+        public void Method6(string s1)
+        {
+            if (string.IsNullOrEmpty(s1) || s1 == "a")
+            {
+                s1.ToString();
+            }
+            else
+            {
+                if (s1 == null) // Noncompliant
+                { // Secondary
+                    s1.ToString();
+                }
+            }
+
+        }
+
+        public void Method7(string s1)
+        {
+            if (string.IsNullOrEmpty(s1) && s1 == "a") // Noncompliant
+            { // Secondary
+                s1.ToString();
+            }
+            else
+            {
+                if (s1 == null)
+                {
+                    s1.ToString();
+                }
+            }
+
+        }
+
+
+        public string Method8(string message)
+        {
+            if (message == null)
+            {
+                throw new ArgumentNullException($"{nameof(message)} shouldn't be null!");
+            }
+
+            if (string.IsNullOrEmpty(message))
+            {
+                throw new ArgumentNullException($"{nameof(message)} shouldn't be empty!");
+            }
+
+            return String.Empty;
+        }
+    }
 }

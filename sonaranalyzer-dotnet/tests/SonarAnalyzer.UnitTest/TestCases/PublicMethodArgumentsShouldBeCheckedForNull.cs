@@ -175,5 +175,35 @@ namespace Tests.Diagnostics
                 Method(ref infixes, infixes.Length); // Noncompliant
                 var x = infixes.Length; // Noncompliant
         }
+
+        public void Method4(string contentType)
+        {
+             if (string.IsNullOrEmpty(contentType))
+            {
+                throw new ArgumentException("inputString cannot be null or empty", contentType);
+            }
+
+            if (contentType.Equals("*"))
+            {
+                contentType = "*/*";
+            }
+
+            var parts = contentType.Split('/', ';');
+        }
+
+        public void Method5(string contentType)
+        {
+            if (string.IsNullOrEmpty(contentType))
+            {
+                throw new ArgumentException("inputString cannot be null or empty", contentType);
+            }
+
+            if (contentType.Equals("*"))
+            {
+                contentType = "";
+            }
+
+            var parts = contentType.Split('/', ';');
+        }
     }
 }

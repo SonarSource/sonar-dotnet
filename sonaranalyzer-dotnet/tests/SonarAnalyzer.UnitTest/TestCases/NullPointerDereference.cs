@@ -289,12 +289,29 @@ namespace Tests.Diagnostics
         {
             if (string.IsNullOrEmpty(s1))
             {
-                s1.ToString(); // Noncompliant, could be null
+                s1.ToString(); // Noncompliant
             }
             else
             {
                 s1.ToString(); // Compliant
             }
+        }
+
+        public void StringEmpty1(string s1)
+        {
+            if (s1 == "" || s1 == null)
+            {
+                s1.ToString(); // Noncompliant
+            }
+            else
+            {
+                s1.ToString(); // Compliant
+            }
+        }
+
+        void StringEmpty3(string path)
+        {
+            var s = path == "" ? new string[] { } : path.Split('/');
         }
     }
 

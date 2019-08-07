@@ -22,9 +22,9 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 {
     public class MemberAccessSymbolicValue : SymbolicValue
     {
-        private readonly string memberName;
 
         public SymbolicValue MemberExpression { get; }
+        public string memberName { get; }
 
         public MemberAccessSymbolicValue(SymbolicValue memberExpression, string memberName)
         {

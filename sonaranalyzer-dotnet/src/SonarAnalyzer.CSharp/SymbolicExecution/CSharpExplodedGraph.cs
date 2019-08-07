@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -353,8 +354,26 @@ namespace SonarAnalyzer.SymbolicExecution
                     newProgramState = newProgramState.PushValue(SymbolicValue.Base);
                     break;
 
-                case SyntaxKind.CharacterLiteralExpression:
                 case SyntaxKind.StringLiteralExpression:
+                    {
+                        var stringLiteralExpression = instruction as LiteralExpressionSyntax;
+                        var sv = new SymbolicValue();
+                        if (stringLiteralExpression.Token.ValueText == "")
+                        {
+                            newProgramState = newProgramState.SetConstraint(sv, StringConstraint.EmptyString);
+                        }
+                        else
+                        {
+                            newProgramState = newProgramState.SetConstraint(sv, StringConstraint.FullString);
+                        }
+                        newProgramState = newProgramState.SetConstraint(sv, ObjectConstraint.NotNull);
+                        newProgramState = newProgramState.PushValue(sv);
+                        newProgramState = InvokeChecks(newProgramState,
+                            (ps, check) => check.ObjectCreated(ps, sv, instruction));
+                    }
+                    break;
+
+                case SyntaxKind.CharacterLiteralExpression:
                 case SyntaxKind.NumericLiteralExpression:
 
                 case SyntaxKind.SizeOfExpression:
@@ -674,23 +693,75 @@ namespace SonarAnalyzer.SymbolicExecution
             {
                 OnConditionEvaluated(instruction, evaluationValue: true);
 
-                var nps = binaryBranchBlock.BranchingNode.IsKind(SyntaxKind.LogicalOrExpression)
-                    ? newProgramState.PushValue(SymbolicValue.True)
-                    : newProgramState;
-
-                EnqueueNewNode(new ProgramPoint(binaryBranchBlock.TrueSuccessorBlock), CleanStateAfterBlock(nps, node.ProgramPoint.Block));
+                foreach (var nps in GenerateNewProgramTrueState(binaryBranchBlock, sv, newProgramState))
+                {
+                    EnqueueNewNode(new ProgramPoint(binaryBranchBlock.TrueSuccessorBlock), CleanStateAfterBlock(nps, node.ProgramPoint.Block));
+                }
             }
 
             foreach (var newProgramState in sv.TrySetOppositeConstraint(BoolConstraint.True, ps))
             {
                 OnConditionEvaluated(instruction, evaluationValue: false);
-
-                var nps = binaryBranchBlock.BranchingNode.IsKind(SyntaxKind.LogicalAndExpression)
-                    ? newProgramState.PushValue(SymbolicValue.False)
-                    : newProgramState;
-
-                EnqueueNewNode(new ProgramPoint(binaryBranchBlock.FalseSuccessorBlock), CleanStateAfterBlock(nps, node.ProgramPoint.Block));
+                foreach (var nps in GenerateNewProgramFalseState(binaryBranchBlock, sv, newProgramState))
+                {
+                    EnqueueNewNode(new ProgramPoint(binaryBranchBlock.FalseSuccessorBlock), CleanStateAfterBlock(nps, node.ProgramPoint.Block));
+                }
             }
+        }
+
+        private static IEnumerable<ProgramState> GenerateNewProgramFalseState(BinaryBranchBlock binaryBranchBlock, SymbolicValue sv, ProgramState newProgramState)
+        {
+            var nps = binaryBranchBlock.BranchingNode.IsKind(SyntaxKind.LogicalAndExpression)
+                ? newProgramState.PushValue(SymbolicValue.False)
+                : newProgramState;
+
+            if (sv is ReferenceEqualsSymbolicValue referenceEqualsSymbolicValue
+                && referenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue rightOperand
+                && rightOperand.memberName == "IsNullOrEmpty")
+            {
+                return referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.FullString, nps);             
+            }
+
+            if (sv is LogicalNotSymbolicValue logicalNotSymbolicValue
+               && logicalNotSymbolicValue.Operand is ReferenceEqualsSymbolicValue referenceEqualsSymbolicValue1
+               && referenceEqualsSymbolicValue1.RightOperand is MemberAccessSymbolicValue rightOperand1
+               && rightOperand1.memberName == "IsNullOrEmpty")
+            {
+                return NullOrEmptyStringStates(nps, referenceEqualsSymbolicValue1);
+            }
+
+            return new[] { nps };
+        }
+
+        private static IEnumerable<ProgramState> GenerateNewProgramTrueState(BinaryBranchBlock binaryBranchBlock, SymbolicValue sv, ProgramState newProgramState)
+        {
+            var nps = binaryBranchBlock.BranchingNode.IsKind(SyntaxKind.LogicalOrExpression)
+                ? newProgramState.PushValue(SymbolicValue.True)
+                : newProgramState;
+
+            if (sv is ReferenceEqualsSymbolicValue referenceEqualsSymbolicValue
+            && referenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue rightOperand
+            && rightOperand.memberName == "IsNullOrEmpty")
+            {
+                return NullOrEmptyStringStates(nps, referenceEqualsSymbolicValue);
+            }
+
+            if (sv is LogicalNotSymbolicValue logicalNotSymbolicValue
+                && logicalNotSymbolicValue.Operand is ReferenceEqualsSymbolicValue referenceEqualsSymbolicValue1
+                && referenceEqualsSymbolicValue1.RightOperand is MemberAccessSymbolicValue rightOperand1
+                && rightOperand1.memberName == "IsNullOrEmpty")
+            {
+                return referenceEqualsSymbolicValue1.LeftOperand.TrySetConstraint(StringConstraint.FullString, nps);                
+            }
+
+            return new[] { nps };
+        }
+
+        private static IEnumerable<ProgramState> NullOrEmptyStringStates(ProgramState nps, ReferenceEqualsSymbolicValue referenceEqualsSymbolicValue)
+        {         
+            var nps1 = referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(ObjectConstraint.Null, nps);
+            var nps2 = referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.EmptyString, nps);
+            return nps1.Concat(nps2);
         }
 
         #endregion Handle VisitBinaryBranch cases
