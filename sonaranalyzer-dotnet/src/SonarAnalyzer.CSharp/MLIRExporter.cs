@@ -60,7 +60,7 @@ namespace SonarAnalyzer
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
             foreach (var block in cfg.Blocks)
             {
-                ExportBlock(block, block == cfg.EntryBlock, method);
+                ExportBlock(block, method);
             }
             writer.WriteLine("}");
         }
@@ -140,7 +140,7 @@ namespace SonarAnalyzer
             return semanticModel.GetTypeInfo(method.ReturnType).Type.SpecialType == SpecialType.System_Void;
         }
 
-        private void ExportBlock(Block block, bool isEntryBlock, MethodDeclarationSyntax parentMethod)
+        private void ExportBlock(Block block, MethodDeclarationSyntax parentMethod)
         {
             if (block is ExitBlock && !HasNoReturn(parentMethod))
             {
@@ -319,9 +319,10 @@ namespace SonarAnalyzer
 
         private ExpressionSyntax getAssignmentValue(ExpressionSyntax rhs)
         {
+            rhs = rhs.RemoveParentheses();
             while (rhs.IsKind(SyntaxKind.SimpleAssignmentExpression))
             {
-                rhs = (rhs as AssignmentExpressionSyntax).Right;
+                rhs = (rhs as AssignmentExpressionSyntax).Right.RemoveParentheses();
             }
             return rhs;
         }
