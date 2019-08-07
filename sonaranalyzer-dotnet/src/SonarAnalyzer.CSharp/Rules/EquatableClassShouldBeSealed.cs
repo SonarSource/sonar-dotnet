@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -73,11 +73,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(IsIEquatableEqualsMethodCandidate)
                 .ToDictionary(ms => ms.Parameters[0].Type.Name, ms => ms);
 
-            // Checks whether any IEquatable<T> has no implementation OR a non-virtual implementation
-            var hasAnyNonVirtualImplementation = equatableInterfacesByTypeName
+            // Checks whether any IEquatable<T> has no implementation OR a non-virtual non-abstract implementation
+            var hasAnyConcreteImplementation = equatableInterfacesByTypeName
                 .Select(iequatable => equalsMethodsByTypeName.GetValueOrDefault(iequatable.Key))
-                .Any(associatedMethod => associatedMethod == null || !associatedMethod.IsVirtual);
-            if (hasAnyNonVirtualImplementation)
+                .Any(associatedMethod => associatedMethod == null || !(associatedMethod.IsVirtual || associatedMethod.IsAbstract));
+            if (hasAnyConcreteImplementation)
             {
                 return true;
             }
