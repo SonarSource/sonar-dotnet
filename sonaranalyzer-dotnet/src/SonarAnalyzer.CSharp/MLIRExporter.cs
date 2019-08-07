@@ -60,7 +60,7 @@ namespace SonarAnalyzer
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
             foreach (var block in cfg.Blocks)
             {
-                ExportBlock(block, block == cfg.EntryBlock, method);
+                ExportBlock(block, block == cfg.EntryBlock, method, returnType);
             }
             writer.WriteLine("}");
         }
@@ -140,7 +140,7 @@ namespace SonarAnalyzer
             return semanticModel.GetTypeInfo(method.ReturnType).Type.SpecialType == SpecialType.System_Void;
         }
 
-        private void ExportBlock(Block block, bool isEntryBlock, MethodDeclarationSyntax parentMethod)
+        private void ExportBlock(Block block, bool isEntryBlock, MethodDeclarationSyntax parentMethod, string functionReturnType)
         {
             if (block is ExitBlock && !HasNoReturn(parentMethod))
             {
@@ -170,7 +170,18 @@ namespace SonarAnalyzer
                             }
                             else
                             {
-                                writer.WriteLine($"return %{OpId(ret.Expression)} : {MLIRType(ret.Expression)} {GetLocation(ret)}");
+                                Debug.Assert(functionReturnType!="()","Returning value in function declared with no return type");
+                                string returnType = MLIRType(ret.Expression);
+                                if (returnType == functionReturnType)
+                                {
+                                    writer.WriteLine($"return %{OpId(ret.Expression)} : {returnType} {GetLocation(ret)}");
+                                }
+                                else
+                                {
+                                    writer.WriteLine($"%{OpId(ret)} = cbde.unknown : {functionReturnType} {GetLocation(ret)} // cast return value from unsupported type");
+                                    writer.WriteLine($"return %{OpId(ret)} : {functionReturnType} {GetLocation(ret)}");
+                                }
+                                    
                             }
                             break;
                         case BreakStatementSyntax breakStmt:
