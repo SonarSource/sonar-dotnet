@@ -853,6 +853,24 @@ class B {
 
             ValidateCodeGeneration(code);
         }
+
+        [TestMethod]
+        public void NestedFunction()
+        {
+            var code = @"
+void f()
+{
+    var s = g();
+    int g()
+    {
+        return 0;
+    }
+}
+";
+
+            ValidateCodeGeneration(code);
+        }
+
     } // Class
 } // Namespace
 
