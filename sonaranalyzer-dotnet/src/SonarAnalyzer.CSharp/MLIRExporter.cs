@@ -113,7 +113,8 @@ namespace SonarAnalyzer
             n.IsKind(SyntaxKind.CheckedExpression) ||
             n.IsKind(SyntaxKind.UncheckedExpression) ||
             n.IsKind(SyntaxKind.UncheckedStatement) ||
-            n.IsKind(SyntaxKindEx.LocalFunctionStatement)
+            n.IsKind(SyntaxKindEx.LocalFunctionStatement) ||
+            n.IsKind(SyntaxKind.GotoStatement)
             );
         }
 
