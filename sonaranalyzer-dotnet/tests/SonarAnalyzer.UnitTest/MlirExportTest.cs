@@ -871,6 +871,58 @@ void f()
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void FieldAssignment()
+        {
+            var code = @"
+class Point
+{
+    public int x;
+    public int y;
+}
+
+void f(Point p)
+{
+    p.x = 2;
+}
+";
+            var dot = GetCfgGraph(code, "f");
+
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void FieldOfThisAssignment()
+        {
+            var code = @"
+class Point
+{
+    public int x;
+    public int y;
+
+    void f(int a)
+    {
+        this.x = a;
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void ArrayAssignment()
+        {
+            var code = @"
+void f()
+{
+    int[] array = new int[5];
+    array[0] = 2;
+}
+";
+
+            ValidateCodeGeneration(code);
+        }
+
     } // Class
 } // Namespace
 
