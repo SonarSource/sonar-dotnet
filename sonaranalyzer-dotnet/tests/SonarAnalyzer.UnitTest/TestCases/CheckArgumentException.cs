@@ -183,7 +183,7 @@ namespace Tests.Diagnostics
         }
     }
 
-    class ReproFforIssue2469
+    class ReproForIssue2469
     {
         public bool this[string a] => throw new ArgumentNullException(nameof(a)); // Compliant
         public bool this[int a] => throw new ArgumentNullException("c"); // Noncompliant
