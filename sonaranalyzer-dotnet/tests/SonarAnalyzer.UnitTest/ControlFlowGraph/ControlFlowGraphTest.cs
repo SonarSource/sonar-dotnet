@@ -2030,26 +2030,24 @@ namespace NS
                 AfterForeach();
             ");
 
-            VerifyCfg(cfg, 9);
+            VerifyCfg(cfg, 8);
             var blocks = cfg.Blocks.ToList();
 
             var beforeForeach = (ForeachCollectionProducerBlock)blocks[0];
             var foreachDecision = (BinaryBranchBlock)blocks[1];
             var beforeTry = (SimpleBlock)blocks[2];
             var insideTry = (BranchBlock)blocks[3];
-            var insideFinally_ThrowFlow = (SimpleBlock)blocks[4];
-            var insideFinally_NormalFlow = (SimpleBlock)blocks[5];
-            var afterFinally = (SimpleBlock)blocks[6];
-            var afterForeach = (SimpleBlock)blocks[7];
-            var exit = (ExitBlock)blocks[8];
+            var insideFinally = (BranchBlock)blocks[4];
+            var afterFinally = (SimpleBlock)blocks[5];
+            var afterForeach = (SimpleBlock)blocks[6];
+            var exit = (ExitBlock)blocks[7];
 
             beforeForeach.SuccessorBlock.Should().Be(foreachDecision);
             foreachDecision.TrueSuccessorBlock.Should().Be(beforeTry);
             foreachDecision.FalseSuccessorBlock.Should().Be(afterForeach);
             beforeTry.SuccessorBlock.Should().Be(insideTry);
-            insideTry.SuccessorBlocks.Should().OnlyContainInOrder(insideFinally_NormalFlow, insideFinally_ThrowFlow);
-            insideFinally_ThrowFlow.SuccessorBlock.Should().Be(exit);
-            insideFinally_NormalFlow.SuccessorBlock.Should().Be(afterFinally);
+            insideTry.SuccessorBlocks.Should().OnlyContainInOrder(insideFinally);
+            insideFinally.SuccessorBlocks.Should().OnlyContainInOrder(afterFinally, exit);
             afterFinally.SuccessorBlock.Should().Be(foreachDecision);
             afterForeach.SuccessorBlock.Should().Be(exit);
         }
@@ -2104,16 +2102,15 @@ namespace NS
             }
             after();");
 
-            VerifyCfg(cfg, 6);
+            VerifyCfg(cfg, 5);
 
             var blocks = cfg.Blocks.ToList();
 
             var tryStartBlock = blocks[0];
             var insideTryBlock = blocks[1];
-            var finallyBlock_ForReturn = blocks[2];
-            var finallyBlock_ForCatch = blocks[3];
-            var afterFinallyBlock = blocks[4];
-            var exit = blocks[5];
+            var finallyBlock = blocks[2];
+            var afterFinallyBlock = blocks[3];
+            var exit = blocks[4];
 
             tryStartBlock.Should().BeOfType<SimpleBlock>();
             VerifyAllInstructions(tryStartBlock, "before", "before()");
@@ -2121,15 +2118,11 @@ namespace NS
 
             insideTryBlock.Should().BeOfType<BranchBlock>();
             VerifyAllInstructions(insideTryBlock, "inside", "inside()");
-            insideTryBlock.SuccessorBlocks.Should().OnlyContain(finallyBlock_ForReturn /*ex*/, finallyBlock_ForCatch /*no ex*/);
+            insideTryBlock.SuccessorBlocks.Should().OnlyContain(finallyBlock);
 
-            finallyBlock_ForReturn.Should().BeOfType<SimpleBlock>();
-            VerifyAllInstructions(finallyBlock_ForReturn, "fin", "fin()");
-            finallyBlock_ForReturn.SuccessorBlocks.Should().OnlyContain(exit);
-
-            finallyBlock_ForCatch.Should().BeOfType<SimpleBlock>();
-            VerifyAllInstructions(finallyBlock_ForCatch, "fin", "fin()");
-            finallyBlock_ForCatch.SuccessorBlocks.Should().OnlyContain(afterFinallyBlock);
+            finallyBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(finallyBlock, "fin", "fin()");
+            finallyBlock.SuccessorBlocks.Should().OnlyContain(afterFinallyBlock, exit);
 
             afterFinallyBlock.Should().BeOfType<SimpleBlock>();
             VerifyAllInstructions(afterFinallyBlock, "after", "after()");
@@ -2267,7 +2260,7 @@ namespace NS
             }
             after();");
 
-            VerifyCfg(cfg, 8);
+            VerifyCfg(cfg, 7);
 
             var blocks = cfg.Blocks.ToList();
 
@@ -2275,10 +2268,9 @@ namespace NS
             var insideTryBlock = blocks[1];
             var catchBlock1 = blocks[2];
             var catchBlock2 = blocks[3];
-            var finallyBlock_ForReturn = blocks[4];
-            var finallyBlock_ForCatch = blocks[5];
-            var afterFinallyBlock = blocks[6];
-            var exit = blocks[7];
+            var finallyBlock = blocks[4];
+            var afterFinallyBlock = blocks[5];
+            var exit = blocks[6];
 
             tryStartBlock.Should().BeOfType<SimpleBlock>();
             VerifyAllInstructions(tryStartBlock, "before", "before()");
@@ -2286,23 +2278,19 @@ namespace NS
 
             insideTryBlock.Should().BeOfType<BranchBlock>();
             VerifyAllInstructions(insideTryBlock, "inside", "inside()");
-            insideTryBlock.SuccessorBlocks.Should().OnlyContain(catchBlock1 /*caught ex*/, catchBlock2 /*caught ex*/, finallyBlock_ForCatch /*no ex*/, finallyBlock_ForReturn /*uncaught ex*/);
+            insideTryBlock.SuccessorBlocks.Should().OnlyContain(catchBlock1 /*caught ex*/, catchBlock2 /*caught ex*/, finallyBlock);
 
             catchBlock1.Should().BeOfType<SimpleBlock>();
             VerifyAllInstructions(catchBlock1, "cat1", "cat1()");
-            catchBlock1.SuccessorBlocks.Should().OnlyContain(finallyBlock_ForCatch);
+            catchBlock1.SuccessorBlocks.Should().OnlyContain(finallyBlock);
 
             catchBlock2.Should().BeOfType<SimpleBlock>();
             VerifyAllInstructions(catchBlock2, "cat2", "cat2()");
-            catchBlock2.SuccessorBlocks.Should().OnlyContain(finallyBlock_ForCatch);
+            catchBlock2.SuccessorBlocks.Should().OnlyContain(finallyBlock);
 
-            finallyBlock_ForReturn.Should().BeOfType<SimpleBlock>();
-            VerifyAllInstructions(finallyBlock_ForReturn, "fin", "fin()");
-            finallyBlock_ForReturn.SuccessorBlocks.Should().OnlyContain(exit);
-
-            finallyBlock_ForCatch.Should().BeOfType<SimpleBlock>();
-            VerifyAllInstructions(finallyBlock_ForCatch, "fin", "fin()");
-            finallyBlock_ForCatch.SuccessorBlocks.Should().OnlyContain(afterFinallyBlock);
+            finallyBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(finallyBlock, "fin", "fin()");
+            finallyBlock.SuccessorBlocks.Should().OnlyContain(afterFinallyBlock, exit);
 
             afterFinallyBlock.Should().BeOfType<SimpleBlock>();
             VerifyAllInstructions(afterFinallyBlock, "after", "after()");
@@ -2334,7 +2322,7 @@ namespace NS
             }
             after();");
 
-            VerifyCfg(cfg, 8);
+            VerifyCfg(cfg, 7);
 
             var blocks = cfg.Blocks.ToList();
 
@@ -2342,10 +2330,9 @@ namespace NS
             var tryEndBlock = blocks[1];
             var catchBlock1 = blocks[2];
             var catchBlock2 = blocks[3];
-            var finallyBlock_ForReturn = blocks[4];
-            var finallyBlock_ForCatch = blocks[5];
-            var afterFinallyBlock = blocks[6];
-            var exit = blocks[7];
+            var finallyBlock = blocks[4];
+            var afterFinallyBlock = blocks[5];
+            var exit = blocks[6];
 
             tryStartBlock.Should().BeOfType<SimpleBlock>();
             VerifyAllInstructions(tryStartBlock, "before", "before()");
@@ -2353,23 +2340,19 @@ namespace NS
 
             tryEndBlock.Should().BeOfType<BranchBlock>();
             VerifyAllInstructions(tryEndBlock, "inside", "inside()");
-            tryEndBlock.SuccessorBlocks.Should().OnlyContain(catchBlock1 /*caught ex*/, catchBlock2 /*caught ex*/, finallyBlock_ForCatch /*no ex*/);
+            tryEndBlock.SuccessorBlocks.Should().OnlyContain(catchBlock1 /*caught ex*/, catchBlock2 /*caught ex*/, finallyBlock /*no ex*/);
 
             catchBlock1.Should().BeOfType<SimpleBlock>();
             VerifyAllInstructions(catchBlock1, "cat1", "cat1()");
-            catchBlock1.SuccessorBlocks.Should().OnlyContain(finallyBlock_ForCatch);
+            catchBlock1.SuccessorBlocks.Should().OnlyContain(finallyBlock);
 
             catchBlock2.Should().BeOfType<SimpleBlock>();
             VerifyAllInstructions(catchBlock2, "cat2", "cat2()");
-            catchBlock2.SuccessorBlocks.Should().OnlyContain(finallyBlock_ForCatch);
+            catchBlock2.SuccessorBlocks.Should().OnlyContain(finallyBlock);
 
-            finallyBlock_ForReturn.Should().BeOfType<SimpleBlock>();
-            VerifyAllInstructions(finallyBlock_ForReturn, "fin", "fin()");
-            finallyBlock_ForReturn.SuccessorBlocks.Should().OnlyContain(exit);
-
-            finallyBlock_ForCatch.Should().BeOfType<SimpleBlock>();
-            VerifyAllInstructions(finallyBlock_ForCatch, "fin", "fin()");
-            finallyBlock_ForCatch.SuccessorBlocks.Should().OnlyContain(afterFinallyBlock);
+            finallyBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(finallyBlock, "fin", "fin()");
+            finallyBlock.SuccessorBlocks.Should().OnlyContain(afterFinallyBlock, exit);
 
             afterFinallyBlock.Should().BeOfType<SimpleBlock>();
             VerifyAllInstructions(afterFinallyBlock, "after", "after()");
@@ -2402,7 +2385,7 @@ namespace NS
             after();
             ");
 
-            VerifyCfg(cfg, 9);
+            VerifyCfg(cfg, 8);
 
             var blocks = cfg.Blocks.ToList();
 
@@ -2411,10 +2394,9 @@ namespace NS
             var returnBlock = blocks[2];
             var tryEndBlock = blocks[3];
             var catchBlock = blocks[4];
-            var finallyBlock_ForReturn = blocks[5];
-            var finallyBlock_ForCatch = blocks[6];
-            var afterFinallyBlock = blocks[7];
-            var exit = blocks[8];
+            var finallyBlock = blocks[5];
+            var afterFinallyBlock = blocks[6];
+            var exit = blocks[7];
 
             VerifyAllInstructions(tryStartBlock, "before", "before()");
             tryStartBlock.SuccessorBlocks.Should().OnlyContain(binaryBlock);
@@ -2423,19 +2405,16 @@ namespace NS
             binaryBlock.SuccessorBlocks.Should().OnlyContain(tryEndBlock /*false*/, returnBlock /*true*/);
 
             VerifyAllInstructions(returnBlock);
-            returnBlock.SuccessorBlocks.Should().OnlyContain(finallyBlock_ForReturn);
+            returnBlock.SuccessorBlocks.Should().OnlyContain(finallyBlock);
 
             VerifyAllInstructions(tryEndBlock, "inside", "inside()");
-            tryEndBlock.SuccessorBlocks.Should().OnlyContain(catchBlock /*exception thrown*/, finallyBlock_ForCatch /*no exception*/);
+            tryEndBlock.SuccessorBlocks.Should().OnlyContain(catchBlock /*exception thrown*/, finallyBlock /*no exception*/);
 
             VerifyAllInstructions(catchBlock, "cat", "cat()");
-            catchBlock.SuccessorBlocks.Should().OnlyContain(finallyBlock_ForCatch);
+            catchBlock.SuccessorBlocks.Should().OnlyContain(finallyBlock);
 
-            VerifyAllInstructions(finallyBlock_ForReturn, "fin", "fin()");
-            finallyBlock_ForReturn.SuccessorBlocks.Should().OnlyContain(exit);
-
-            VerifyAllInstructions(finallyBlock_ForCatch, "fin", "fin()");
-            finallyBlock_ForCatch.SuccessorBlocks.Should().OnlyContain(afterFinallyBlock);
+            VerifyAllInstructions(finallyBlock, "fin", "fin()");
+            finallyBlock.SuccessorBlocks.Should().OnlyContain(afterFinallyBlock, exit);
 
             VerifyAllInstructions(afterFinallyBlock, "after", "after()");
             afterFinallyBlock.SuccessorBlocks.Should().OnlyContain(exit);
@@ -2468,7 +2447,7 @@ namespace NS
             after();
             ");
 
-            VerifyCfg(cfg, 9);
+            VerifyCfg(cfg, 8);
 
             var blocks = cfg.Blocks.ToList();
 
@@ -2477,10 +2456,9 @@ namespace NS
             var returnBlock = blocks[2];
             var tryEndBlock = blocks[3];
             var catchBlock = blocks[4];
-            var finallyBlock_ForReturn = blocks[5];
-            var finallyBlock_ForCatch = blocks[6];
-            var afterFinallyBlock = blocks[7];
-            var exit = blocks[8];
+            var finallyBlock = blocks[5];
+            var afterFinallyBlock = blocks[6];
+            var exit = blocks[7];
 
             VerifyAllInstructions(tryStartBlock, "before", "before()");
             tryStartBlock.SuccessorBlocks.Should().OnlyContain(binaryBlock);
@@ -2489,19 +2467,16 @@ namespace NS
             binaryBlock.SuccessorBlocks.Should().OnlyContain(tryEndBlock /*false*/, returnBlock /*true*/);
 
             VerifyAllInstructions(returnBlock);
-            returnBlock.SuccessorBlocks.Should().OnlyContain(finallyBlock_ForReturn);
+            returnBlock.SuccessorBlocks.Should().OnlyContain(finallyBlock);
 
             VerifyAllInstructions(tryEndBlock, "inside", "inside()");
-            tryEndBlock.SuccessorBlocks.Should().OnlyContain(catchBlock /*caught exception thrown*/, finallyBlock_ForCatch /*no exception*/, finallyBlock_ForReturn /*uncaught exception*/);
+            tryEndBlock.SuccessorBlocks.Should().OnlyContain(catchBlock /*caught exception thrown*/, finallyBlock);
 
             VerifyAllInstructions(catchBlock, "cat", "cat()");
-            catchBlock.SuccessorBlocks.Should().OnlyContain(finallyBlock_ForCatch);
+            catchBlock.SuccessorBlocks.Should().OnlyContain(finallyBlock);
 
-            VerifyAllInstructions(finallyBlock_ForReturn, "fin", "fin()");
-            finallyBlock_ForReturn.SuccessorBlocks.Should().OnlyContain(exit);
-
-            VerifyAllInstructions(finallyBlock_ForCatch, "fin", "fin()");
-            finallyBlock_ForCatch.SuccessorBlocks.Should().OnlyContain(afterFinallyBlock);
+            VerifyAllInstructions(finallyBlock, "fin", "fin()");
+            finallyBlock.SuccessorBlocks.Should().OnlyContain(afterFinallyBlock, exit);
 
             VerifyAllInstructions(afterFinallyBlock, "after", "after()");
             afterFinallyBlock.SuccessorBlocks.Should().OnlyContain(exit);
@@ -2808,7 +2783,7 @@ namespace NS
             } while (true);
             cw5();");
 
-            VerifyCfg(cfg, 10);
+            VerifyCfg(cfg, 9);
 
             var blocks = cfg.Blocks.ToList();
 
@@ -2816,30 +2791,28 @@ namespace NS
             var tryStatement = (BranchBlock) blocks[1];
             var tryBody = (BranchBlock) blocks[2];
             var catchBody = (JumpBlock) blocks[3];
-            var finallyBlock_Exit = (SimpleBlock) blocks[4];
-            var finallyBody_NormalFlow = (SimpleBlock) blocks[5];
-            var afterTry = (SimpleBlock) blocks[6];
-            var whileStmt = (BinaryBranchBlock) blocks[7];
-            var afterDoWhile = (SimpleBlock) blocks[8];
+            var finallyBlock = (BranchBlock) blocks[4];
+            var afterTry = (SimpleBlock) blocks[5];
+            var whileStmt = (BinaryBranchBlock) blocks[6];
+            var afterDoWhile = (SimpleBlock) blocks[7];
             var exit = (ExitBlock) blocks.Last();
 
             VerifyAllInstructions(doBeforeTry, "cw0", "cw0()");
             doBeforeTry.SuccessorBlocks.Should().OnlyContainInOrder(tryStatement);
 
             VerifyAllInstructions(tryStatement, "cw1", "cw1()");
-            tryStatement.SuccessorBlocks.Should().OnlyContainInOrder(catchBody, finallyBody_NormalFlow, finallyBlock_Exit, afterDoWhile);
+            tryStatement.SuccessorBlocks.Should().OnlyContainInOrder(catchBody, finallyBlock, afterDoWhile);
 
-            tryBody.SuccessorBlocks.Should().OnlyContainInOrder(catchBody, finallyBody_NormalFlow, finallyBlock_Exit);
+            tryBody.SuccessorBlocks.Should().OnlyContainInOrder(catchBody, finallyBlock);
 
             VerifyAllInstructions(catchBody, "cw2", "cw2()");
             catchBody.SuccessorBlock.Should().Be(whileStmt);
 
-            finallyBlock_Exit.SuccessorBlock.Should().Be(exit);
             // FIXME this is wrong, `finally` should be connected to
             // - EXIT
             // - WHILE (because of `continue`)
             // - afterDoWhile (because of `break`)
-            finallyBody_NormalFlow.SuccessorBlock.Should().Be(afterTry);
+            finallyBlock.SuccessorBlocks.Should().OnlyContainInOrder(afterTry, exit);
             afterTry.SuccessorBlock.Should().Be(whileStmt);
 
             VerifyAllInstructions(whileStmt, "true");
@@ -2883,7 +2856,7 @@ namespace NS
             } while (true);
             cw5();");
 
-            VerifyCfg(cfg, 11);
+            VerifyCfg(cfg, 10);
 
             var blocks = cfg.Blocks.ToList();
 
@@ -2892,11 +2865,10 @@ namespace NS
             var thenContinue = (JumpBlock)blocks[2];
             var elseIf = (JumpBlock)blocks[3];
             var tryStatement = (BranchBlock)blocks[4];
-            var finallyBody_ExitFlow = (SimpleBlock)blocks[5];
-            var finallyBody_NormalFlow = (SimpleBlock)blocks[6];
-            var afterTry = (SimpleBlock)blocks[7];
-            var whileStmt = (BinaryBranchBlock)blocks[8];
-            var afterDoWhile = (SimpleBlock)blocks[9];
+            var finallyBody = (BranchBlock)blocks[5];
+            var afterTry = (SimpleBlock)blocks[6];
+            var whileStmt = (BinaryBranchBlock)blocks[7];
+            var afterDoWhile = (SimpleBlock)blocks[8];
             var exit = (ExitBlock)blocks.Last();
 
             VerifyAllInstructions(doBeforeTry, "cw0", "cw0()");
@@ -2914,10 +2886,9 @@ namespace NS
             elseIf.SuccessorBlock.Should().Be(afterDoWhile);
 
             // FIXME this is weird and is basically skipped
-            tryStatement.SuccessorBlocks.Should().OnlyContainInOrder(finallyBody_NormalFlow, finallyBody_ExitFlow);
+            tryStatement.SuccessorBlocks.Should().OnlyContainInOrder(finallyBody);
 
-            finallyBody_ExitFlow.SuccessorBlock.Should().Be(exit);
-            finallyBody_NormalFlow.SuccessorBlock.Should().Be(afterTry);
+            finallyBody.SuccessorBlocks.Should().OnlyContainInOrder(afterTry, exit);
             afterTry.SuccessorBlock.Should().Be(whileStmt);
 
             VerifyAllInstructions(whileStmt, "true");
@@ -3030,7 +3001,7 @@ namespace NS
             } while (true);
             cw5();");
 
-            VerifyCfg(cfg, 10);
+            VerifyCfg(cfg, 9);
 
             var blocks = cfg.Blocks.ToList();
 
@@ -3039,10 +3010,9 @@ namespace NS
             var insideTryIfStatement = (BinaryBranchBlock) blocks[2];
             var insideIf = (SimpleBlock) blocks[3];
             var finallyBifurcation = (BranchBlock) blocks[4];
-            var finallyForUncaughtException = (SimpleBlock) blocks[5];
-            var finallyForNormalFlow = (SimpleBlock) blocks[6];
-            var whileStmt = (BinaryBranchBlock) blocks[7];
-            var afterDoWhile = (SimpleBlock) blocks[8];
+            var finallyBlock = (BranchBlock) blocks[5];
+            var whileStmt = (BinaryBranchBlock) blocks[6];
+            var afterDoWhile = (SimpleBlock) blocks[7];
             var exit = (ExitBlock) blocks.Last();
 
             VerifyAllInstructions(beforeDoBlock, "0", "attempts = 0");
@@ -3057,10 +3027,9 @@ namespace NS
 
             insideIf.SuccessorBlock.Should().Be(finallyBifurcation);
 
-            finallyBifurcation.SuccessorBlocks.Should().OnlyContain(finallyForUncaughtException, finallyForNormalFlow);
+            finallyBifurcation.SuccessorBlocks.Should().OnlyContain(finallyBlock);
 
-            finallyForUncaughtException.SuccessorBlock.Should().Be(exit);
-            finallyForNormalFlow.SuccessorBlock.Should().Be(whileStmt);
+            finallyBlock.SuccessorBlocks.Should().OnlyContainInOrder(whileStmt, exit);
 
             whileStmt.TrueSuccessorBlock.Should().Be(insideDoBeforeTry);
             whileStmt.FalseSuccessorBlock.Should().Be(afterDoWhile);
@@ -3106,7 +3075,7 @@ namespace NS
             }
             after_out();");
 
-            VerifyCfg(cfg, 13);
+            VerifyCfg(cfg, 11);
 
             var blocks = cfg.Blocks.ToList();
 
@@ -3115,14 +3084,12 @@ namespace NS
             var innerReturnBlock = blocks[2];
             var innerTryEndBlock = blocks[3];
             var innerCatchBlock = blocks[4];
-            var innerFinallyBlock_ForReturn = blocks[5];
-            var innerFinallyBlock_ForCatch = blocks[6];
-            var outerTryBlock = blocks[7]; // innerAfterFinallyBlock is not generated, its instructions are in outerTryBlock
-            var outerCatchBlock = blocks[8];
-            var outerFinallyBlock_ForReturn = blocks[9];
-            var outerFinallyBlock_ForCatch = blocks[10];
-            var afterFinallyBlock = blocks[11];
-            var exit = blocks[12];
+            var innerFinallyBlock = blocks[5];
+            var outerTryBlock = blocks[6]; // innerAfterFinallyBlock is not generated, its instructions are in outerTryBlock
+            var outerCatchBlock = blocks[7];
+            var outerFinallyBlock = blocks[8];
+            var afterFinallyBlock = blocks[9];
+            var exit = blocks[10];
 
             exit.Should().BeOfType<ExitBlock>();
 
@@ -3130,34 +3097,29 @@ namespace NS
             beforeOuterTry.SuccessorBlocks.Should().OnlyContain(innerTryStartBlock);
 
             innerTryStartBlock.Should().BeOfType<BranchBlock>();
-            innerTryStartBlock.SuccessorBlocks.Should().OnlyContain(innerReturnBlock /*no ex*/, outerCatchBlock, outerFinallyBlock_ForCatch);
+            innerTryStartBlock.SuccessorBlocks.Should().OnlyContain(innerReturnBlock /*no ex*/, outerCatchBlock, outerFinallyBlock);
 
             innerReturnBlock.Should().BeOfType<BranchBlock>();
-            innerReturnBlock.SuccessorBlocks.Should().OnlyContain(innerTryEndBlock, innerCatchBlock, innerFinallyBlock_ForCatch);
+            innerReturnBlock.SuccessorBlocks.Should().OnlyContain(innerTryEndBlock, innerCatchBlock);
 
             innerTryEndBlock.Should().BeOfType<JumpBlock>();
-            innerTryEndBlock.SuccessorBlocks.Should().OnlyContain(innerFinallyBlock_ForReturn);
+            VerifyAllInstructions(innerTryEndBlock, "foo", "foo()");
+            innerTryEndBlock.SuccessorBlocks.Should().OnlyContain(innerFinallyBlock);
 
             innerCatchBlock.Should().BeOfType<SimpleBlock>();
-            innerCatchBlock.SuccessorBlocks.Should().OnlyContain(innerFinallyBlock_ForCatch);
+            innerCatchBlock.SuccessorBlocks.Should().OnlyContain(innerFinallyBlock);
 
-            innerFinallyBlock_ForReturn.Should().BeOfType<SimpleBlock>();
-            innerFinallyBlock_ForReturn.SuccessorBlocks.Should().OnlyContain(outerFinallyBlock_ForReturn);
-
-            innerFinallyBlock_ForCatch.Should().BeOfType<SimpleBlock>();
-            innerFinallyBlock_ForCatch.SuccessorBlocks.Should().OnlyContain(outerTryBlock);
+            innerFinallyBlock.Should().BeOfType<BranchBlock>();
+            innerFinallyBlock.SuccessorBlocks.Should().OnlyContain(outerTryBlock, outerFinallyBlock);
 
             outerTryBlock.Should().BeOfType<BranchBlock>();
-            outerTryBlock.SuccessorBlocks.Should().OnlyContain(outerCatchBlock /*ex*/, outerFinallyBlock_ForCatch /*no ex*/);
+            outerTryBlock.SuccessorBlocks.Should().OnlyContain(outerCatchBlock /*ex*/, outerFinallyBlock /*no ex*/);
 
             outerCatchBlock.Should().BeOfType<SimpleBlock>();
-            outerCatchBlock.SuccessorBlocks.Should().OnlyContain(outerFinallyBlock_ForCatch);
+            outerCatchBlock.SuccessorBlocks.Should().OnlyContain(outerFinallyBlock);
 
-            outerFinallyBlock_ForReturn.Should().BeOfType<SimpleBlock>();
-            outerFinallyBlock_ForReturn.SuccessorBlocks.Should().OnlyContain(exit);
-
-            outerFinallyBlock_ForCatch.Should().BeOfType<SimpleBlock>();
-            outerFinallyBlock_ForCatch.SuccessorBlocks.Should().OnlyContain(afterFinallyBlock);
+            outerFinallyBlock.Should().BeOfType<BranchBlock>();
+            outerFinallyBlock.SuccessorBlocks.Should().OnlyContain(afterFinallyBlock, exit);
 
             afterFinallyBlock.Should().BeOfType<SimpleBlock>();
             afterFinallyBlock.SuccessorBlocks.Should().OnlyContain(exit);

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -105,7 +106,15 @@ namespace SonarAnalyzer.Rules.CSharp
                    !IsThrow(jumpBlock) &&
                    !IsYieldReturn(jumpBlock) &&
                    !IsOnlyYieldBreak(jumpBlock, yieldStatementCount) &&
+                   !IsValidJumpInsideTryCatch(jumpBlock) &&
                    jumpBlock.SuccessorBlock == jumpBlock.WouldBeSuccessor;
+        }
+
+        private static bool IsValidJumpInsideTryCatch(JumpBlock jumpBlock)
+        {
+            return jumpBlock.WouldBeSuccessor is BranchBlock branchBlock &&
+                branchBlock.BranchingNode is FinallyClauseSyntax &&
+                branchBlock.AllSuccessorBlocks.Count > 1;
         }
 
         private static bool IsInsideSwitch(JumpBlock jumpBlock)

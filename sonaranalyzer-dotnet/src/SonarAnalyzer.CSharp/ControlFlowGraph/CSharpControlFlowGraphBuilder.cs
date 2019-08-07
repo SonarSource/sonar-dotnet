@@ -519,11 +519,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             var hasFinally = tryStatement.Finally?.Block != null;
             if (hasFinally)
             {
-                // Create a finally block for the happy path where no exceptions are thrown
-                catchSuccessor = BuildBlock(tryStatement.Finally.Block, CreateBlock(catchSuccessor));
+                var finallySuccessors = new List<Block>();
+                finallySuccessors.Add(CreateBlock(catchSuccessor));
+                finallySuccessors.Add(CreateBlock(this.ExitTarget.Peek()));
 
-                // Wire another finally block to the exit target stack in case we have a return inside the try/catch block
-                this.ExitTarget.Push(BuildBlock(tryStatement.Finally.Block, CreateBlock(this.ExitTarget.Peek())));
+                // Create a finally block that can either go to try-finally successor (happy path) or exit target (exceptional path)
+                catchSuccessor = BuildBlock(tryStatement.Finally.Block, CreateBranchBlock(tryStatement.Finally, finallySuccessors));
+                // This finally block becomes current exit target stack in case we have a return inside the try/catch block
+                this.ExitTarget.Push(catchSuccessor);
             }
 
             var catchBlocks = tryStatement.Catches
@@ -556,17 +559,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             Block tryBody;
             if (tryStatement.Block.Statements.Any(s=>s.IsKind(SyntaxKind.ReturnStatement)))
             {
-                // there is a return inside the `try`, thus a JumpBlock directly to exit will be created
-                var returnBlock = BuildBlock(tryStatement.Block, currentBlock);
+                // there is a return inside the `try`, thus a JumpBlock directly to the finally or exit will be created
+                var returnBlock = BuildBlock(tryStatement.Block, catchSuccessor);
                 var connections = new List<Block>();
                 connections.Add(returnBlock);
                 // if an exception is thrown, it will reach the `catch` blocks
                 connections.AddRange(catchBlocks);
-                // if there is a finally, add it; otherwise, the `return` will jump to exit
-                if (catchSuccessor != currentBlock)
-                {
-                    connections.Add(catchSuccessor);
-                }
                 tryBody = CreateBranchBlock(tryStatement, connections);
             }
             else
