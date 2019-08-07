@@ -328,6 +328,16 @@ namespace SonarAnalyzer
             return rhs;
         }
 
+        private void ExportConstant(SyntaxNode op, ITypeSymbol type, string value)
+        {
+            if (!IsTypeKnown(type))
+            {
+                writer.WriteLine($"%{OpId(op)} = constant unit {GetLocation(op)} // {op.ToFullString()} ({op.Kind()})");
+                return;
+            }
+            writer.WriteLine($"%{OpId(op)} = constant {value} : {MLIRType(type)} {GetLocation(op)}");
+        }
+
         private void ExtractInstruction(SyntaxNode op)
         {
             switch (op.Kind())
@@ -342,7 +352,7 @@ namespace SonarAnalyzer
                 case SyntaxKind.NumericLiteralExpression:
                     {
                         var lit = op as LiteralExpressionSyntax;
-                        writer.WriteLine($"%{OpId(op)} = constant {lit.Token.ValueText} : {MLIRType(lit)} {GetLocation(op)}");
+                        ExportConstant(op, semanticModel.GetTypeInfo(lit).Type, lit.Token.ValueText);
                         break;
                     }
                 case SyntaxKind.EqualsExpression:
@@ -465,7 +475,8 @@ namespace SonarAnalyzer
 
             if (declSymbol is IFieldSymbol fieldSymbol && fieldSymbol.HasConstantValue)
             {
-                writer.WriteLine($"%{OpId(op)} = constant {fieldSymbol.ConstantValue.ToString()} : {MLIRType(fieldSymbol.Type)} {GetLocation(op)}");
+                var constValue = fieldSymbol.ConstantValue != null ? fieldSymbol.ConstantValue.ToString() : "null";
+                ExportConstant(op, fieldSymbol.Type, constValue);
                 return;
             }
             else if (declSymbol is IFieldSymbol || !SupportedTypes(id))
