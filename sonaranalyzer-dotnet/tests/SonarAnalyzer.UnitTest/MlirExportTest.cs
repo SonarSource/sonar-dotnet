@@ -923,6 +923,19 @@ void f()
             ValidateCodeGeneration(code);
         }
 
+
+        [TestMethod]
+        public void IgnoreParenthesesInAssignment()
+        {
+            var code = @"
+void f(int a, int b)
+{
+    a = (b = 2);
+}
+";
+
+            ValidateCodeGeneration(code);
+        }
     } // Class
 } // Namespace
 
