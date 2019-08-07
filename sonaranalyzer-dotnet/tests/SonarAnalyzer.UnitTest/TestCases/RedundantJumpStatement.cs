@@ -134,5 +134,39 @@ namespace Tests.Diagnostics
             }
             Console.WriteLine();
         }
+
+        void RedundantJumpInTryCatch1()
+        {
+            try
+            {
+                Console.WriteLine();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine();
+                return; // Noncompliant
+            }
+            finally
+            {
+                Console.WriteLine();
+            }
+        }
+
+        void RedundantJumpInTryCatch2()
+        {
+            try
+            {
+                Console.WriteLine();
+                return; // Noncompliant
+            }
+            catch (Exception)
+            {
+                Console.WriteLine();
+            }
+            finally
+            {
+                Console.WriteLine();
+            }
+        }
     }
 }
