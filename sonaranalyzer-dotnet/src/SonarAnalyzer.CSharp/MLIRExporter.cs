@@ -53,7 +53,7 @@ namespace SonarAnalyzer
             var returnType = HasNoReturn(method) ?
                 "()" :
                 MLIRType(method.ReturnType);
-            writer.WriteLine($"func @{EncodeName(method.Identifier.ValueText)}{GetAnonymousArgumentsString(method)} -> {returnType} {GetLocation(method)} {{");
+            writer.WriteLine($"func @{GetMangling(method)}{GetAnonymousArgumentsString(method)} -> {returnType} {GetLocation(method)} {{");
             CreateEntryBlock(method);
 
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
@@ -62,6 +62,32 @@ namespace SonarAnalyzer
                 ExportBlock(block, block == cfg.EntryBlock, method);
             }
             writer.WriteLine("}");
+        }
+
+        private string GetMangling(MethodDeclarationSyntax method)
+        {
+            var prettyName = EncodeName(semanticModel.GetDeclaredSymbol(method).ToDisplayString());
+            var sb = new StringBuilder(prettyName.Length);
+            foreach(char c in prettyName)
+            {
+                if (char.IsLetterOrDigit(c) || c == '.' || c == '_')
+                {
+                    sb.Append(c);
+                }
+                else if (char.IsSeparator(c))
+                {
+                    // Ignore it
+                }
+                else if(c == ',')
+                {
+                    sb.Append('.');
+                }
+                else
+                {
+                    sb.Append('$');
+                }
+            }
+            return sb.ToString();
         }
 
         private bool IsTooClomplexForMLIROrTheCFG(MethodDeclarationSyntax method)
