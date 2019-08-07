@@ -998,8 +998,32 @@ class A
 
             ValidateCodeGeneration(code);
         }
+        [TestMethod]
+        public void Property()
+        {
+            var code = @"
+class A {
+    public void DoSomething1() { }
+    public bool someCondition1 { get; set; }
 
+    public void Test_SingleLineBlocks()
+    {
+        if (someCondition1)
+        {
+            someCondition1 = false;
+            DoSomething1(); // Compliant, ignore single line blocks
+        }
+        else
+        {
+            DoSomething1();
+        }
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
     } // Class
-} // Namespace
+
+    } // Namespace
 
 
