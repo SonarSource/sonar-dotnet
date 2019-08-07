@@ -1022,6 +1022,19 @@ class A {
 ";
             ValidateCodeGeneration(code);
         }
+        [TestMethod]
+        public void AsyncFunction()
+        {
+            var code = @"
+class A {
+    async System.Threading.Tasks.Task<int> FuncAsync()
+    {
+        return 3;
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
     } // Class
 
     } // Namespace
