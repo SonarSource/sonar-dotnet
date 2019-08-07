@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer
 {
@@ -111,7 +112,8 @@ namespace SonarAnalyzer
             n.IsKind(SyntaxKind.CheckedStatement) ||
             n.IsKind(SyntaxKind.CheckedExpression) ||
             n.IsKind(SyntaxKind.UncheckedExpression) ||
-            n.IsKind(SyntaxKind.UncheckedStatement)
+            n.IsKind(SyntaxKind.UncheckedStatement) ||
+            n.IsKind(SyntaxKindEx.LocalFunctionStatement)
             );
         }
 
