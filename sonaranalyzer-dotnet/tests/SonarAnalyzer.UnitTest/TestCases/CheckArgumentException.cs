@@ -182,4 +182,10 @@ namespace Tests.Diagnostics
             set => this.input = value ?? throw new ArgumentNullException(nameof(this.Request)); // Noncompliant
         }
     }
+
+    class ReproForIssue2469
+    {
+        public bool this[string a] => throw new ArgumentNullException(nameof(a)); // Compliant
+        public bool this[int a] => throw new ArgumentNullException("c"); // Noncompliant
+    }
 }
