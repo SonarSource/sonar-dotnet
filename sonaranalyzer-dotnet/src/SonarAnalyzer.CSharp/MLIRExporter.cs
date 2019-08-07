@@ -414,7 +414,8 @@ namespace SonarAnalyzer
         private void ExportSimpleAssignment(SyntaxNode op)
         {
             var assign = op as AssignmentExpressionSyntax;
-            if (!SupportedTypes(assign))
+            // We ignore the case where lhs is an expression (field, array...) because we currently do not support these yet
+            if (!SupportedTypes(assign) || assign.Left is ExpressionSyntax)
             {
                 return;
             }
