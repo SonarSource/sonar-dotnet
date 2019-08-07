@@ -93,6 +93,11 @@ namespace SonarAnalyzer
 
         private bool IsTooClomplexForMLIROrTheCFG(MethodDeclarationSyntax method)
         {
+            var symbol = semanticModel.GetDeclaredSymbol(method);
+            if (symbol.IsAsync)
+            {
+                return true;
+            }
             return method.DescendantNodes().Any(n =>
             n.IsKind(SyntaxKind.ForEachStatement) ||
             n.IsKind(SyntaxKind.AwaitExpression) ||
