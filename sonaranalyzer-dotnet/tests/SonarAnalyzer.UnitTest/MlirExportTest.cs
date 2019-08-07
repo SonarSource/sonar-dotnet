@@ -44,9 +44,17 @@ namespace SonarAnalyzer.UnitTest
         public void SimpleMethod()
         {
             var code = @"
-void simple() {
-    int i = 1;
-    int j = (i==2) ? 3 : 4;
+void complexTernaryOk(bool b1, bool b2, bool b3, bool b4, int i) {
+    int j = ( (b1 && b2) || (b3 && b4)) ? 3 : ((i==1 || b4) ? 3 : 4);
+}
+void complexTernaryNotOk(bool b1, bool b2, bool b3, bool b4) {
+    int j = ( (b1 && b2) || (b3 && b4)) ? 3 : (b1?1:2) + (b2?3:4);
+}
+void nestedTernariesIsOk( bool b1, bool b2 ) {
+    int i = (b1?1:(b2?3:4));
+}
+void combinedTernariesIsNotOk( bool b1, bool b2 ) {
+    int i = (b1?1:2) + (b2?3:4);
 }
 int DummyCond() {
 	int i = 2;
@@ -71,7 +79,7 @@ int DummyCond2() {
 	return 5;
 }
 ";
-            var dot = GetCfgGraph(code, "simple");
+            var dot = GetCfgGraph(code, "combinedTernariesIsNotOk");
             ValidateCodeGeneration(code);
         }
 
