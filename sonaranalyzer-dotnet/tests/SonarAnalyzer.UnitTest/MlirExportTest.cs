@@ -936,6 +936,36 @@ void f(int a, int b)
 
             ValidateCodeGeneration(code);
         }
+
+        [TestMethod]
+        public void AssignmentInComparison()
+        {
+            var code = @"
+int f(int a, int b)
+{
+    if ((a = 3) < (b = 2))
+    {
+        return 0;
+    }
+    return 1;
+}
+";
+
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void AssignmentInBinaryOperator()
+        {
+            var code = @"
+void f(int a, int b)
+{
+    a = (b = 2) + 1;
+}
+";
+
+            ValidateCodeGeneration(code);
+        }
     } // Class
 } // Namespace
 
