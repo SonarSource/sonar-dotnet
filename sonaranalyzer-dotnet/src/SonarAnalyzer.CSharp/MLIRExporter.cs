@@ -479,9 +479,12 @@ namespace SonarAnalyzer
                 ExportConstant(op, fieldSymbol.Type, constValue);
                 return;
             }
-            else if (declSymbol is IFieldSymbol || !SupportedTypes(id))
+            // IPropertySymbol could be either in a getter context (we should generate unknown) or in a setter
+            // context (we should do nothing). However, it appears that in setter context, the CFG does not have an
+            // instruction for fetching the property, so we should focus only on getter context.
+            else if (declSymbol is IFieldSymbol || declSymbol is IPropertySymbol || !SupportedTypes(id))
             {
-                writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(id)} {GetLocation(op)} // Variable of unknown type {id.Identifier.ValueText}");
+                writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(id)} {GetLocation(op)} // Not a variable of known type: {id.Identifier.ValueText}");
                 return;
             }
             writer.WriteLine($"%{OpId(op)} = cbde.load %{OpId(decl)} : memref<{MLIRType(id)}> {GetLocation(op)}");
