@@ -966,6 +966,22 @@ void f(int a, int b)
 
             ValidateCodeGeneration(code);
         }
+
+        [TestMethod]
+        public void Goto()
+        {
+            var code = @"
+void f()
+{
+    goto Label;
+Label:
+    return;
+}
+";
+
+            ValidateCodeGeneration(code);
+        }
+
     } // Class
 } // Namespace
 
