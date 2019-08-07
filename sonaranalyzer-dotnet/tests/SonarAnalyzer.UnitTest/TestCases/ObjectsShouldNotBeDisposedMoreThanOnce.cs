@@ -232,6 +232,15 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void LeaveOpenTrue8()
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            using (StreamWriter writer = new StreamWriter(leaveOpen: true, stream: memoryStream, encoding: new System.Text.UTF8Encoding(false), bufferSize: 1024))
+            {
+                string str = null;
+            }
+        }
+
         public void LeaveOpenFalse1()
         {
             using (MemoryStream memoryStream = new MemoryStream()) // Noncompliant
@@ -272,6 +281,15 @@ namespace Tests.Diagnostics
         {
             using (MemoryStream memoryStream = new MemoryStream()) // Noncompliant
             using (StreamReader reader = new StreamReader(memoryStream, new System.Text.UTF8Encoding(false), bufferSize: 2014, leaveOpen: false, detectEncodingFromByteOrderMarks: true))
+            {
+                string str = null;
+            }
+        }
+
+        public void LeaveOpenFalse6()
+        {
+            using (MemoryStream memoryStream = new MemoryStream()) // Noncompliant
+            using (StreamWriter writer = new StreamWriter(leaveOpen: false, stream: memoryStream, encoding: new System.Text.UTF8Encoding(false), bufferSize: 1024))
             {
                 string str = null;
             }

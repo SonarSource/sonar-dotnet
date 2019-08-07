@@ -42,12 +42,12 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3966";
         private const string MessageFormat = "Refactor this code to make sure '{0}' is disposed only once.";
         private const string LeaveOpenParameterName = "leaveOpen";
+        private const string StreamParameterName = "stream";
 
-        private static readonly ImmutableArray<KnownType> typesDisposingUnderlyingStream =
-            ImmutableArray.Create(
-                KnownType.System_IO_StreamReader,
-                KnownType.System_IO_StreamWriter
-            );
+        private static readonly ImmutableDictionary<KnownType, int> typesDisposingUnderlyingStreamWithLeaveOpenArgumentIndex =
+            ImmutableDictionary<KnownType, int>.Empty
+                .Add(KnownType.System_IO_StreamReader, 4)
+                .Add(KnownType.System_IO_StreamWriter, 3);
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -184,19 +184,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 foreach (var objectCreationExpression in objectCreationExpressions)
                 {
-                    var objectType = this.semanticModel.GetSymbolInfo(objectCreationExpression.Type)
-                    .Symbol
-                    .GetSymbolType();
-
-                    if (objectType.DerivesOrImplementsAny(typesDisposingUnderlyingStream) &&
-                        objectCreationExpression.ArgumentList?.Arguments is IEnumerable<ArgumentSyntax> argumentList)
+                    if (this.semanticModel.GetSymbolInfo(objectCreationExpression.Type).Symbol is ISymbol symbol &&
+                        symbol.GetSymbolType() is ITypeSymbol objectType &&
+                        objectType.DerivesOrImplementsAny(typesDisposingUnderlyingStreamWithLeaveOpenArgumentIndex.Keys.ToImmutableArray()) &&
+                        objectCreationExpression.ArgumentList?.Arguments is IEnumerable<ArgumentSyntax> argumentList &&
+                        argumentList.Any())
                     {
                         // Checks for the 'leaveOpen' argument. It is at position 4 if present for StreamReader constructor, while it is at position 3 for StreamWriter.
                         // See #2491 for more details
-                        var leaveOpenArgumentIndex = objectType.DerivesOrImplements(KnownType.System_IO_StreamReader) ? 4 : 3;
-                        if (!HasLeaveOpenArgument(argumentList, leaveOpenArgumentIndex))
+                        var leaveOpenArgumentIndex = typesDisposingUnderlyingStreamWithLeaveOpenArgumentIndex
+                            .Where(entry => objectType.DerivesOrImplements(entry.Key))
+                            .Select(entry => entry.Value)
+                            .First();
+                        if (!HasLeaveOpenTrueArgument(argumentList, leaveOpenArgumentIndex) &&
+                            GetArgument(argumentList, StreamParameterName, 0) is ArgumentSyntax argument)
                         {
-                            var argument = argumentList.First();
                             var streamSymbol = this.semanticModel.GetSymbolInfo(argument.Expression).Symbol;
                             newProgramState = ProcessDisposableSymbol(newProgramState, argument.Expression, streamSymbol);
                         }
@@ -206,16 +208,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 return newProgramState;
             }
 
-            private static bool HasLeaveOpenArgument(IEnumerable<ArgumentSyntax> argumentList, int leaveOpenArgumentIndex)
-            {
-                var leaveOpenArgument = argumentList.FirstOrDefault(argument => LeaveOpenParameterName.Equals(argument.NameColon?.Name.Identifier.ValueText));
-                if (leaveOpenArgument == null)
-                {
-                    leaveOpenArgument = argumentList.ElementAtOrDefault(leaveOpenArgumentIndex);
-                }
+            private static bool HasLeaveOpenTrueArgument(IEnumerable<ArgumentSyntax> argumentList, int leaveOpenArgumentIndex) =>
+                GetArgument(argumentList, LeaveOpenParameterName, leaveOpenArgumentIndex) is ArgumentSyntax leaveOpenArgument &&
+                CSharpEquivalenceChecker.AreEquivalent(leaveOpenArgument.Expression, CSharpSyntaxHelper.TrueLiteralExpression);
 
-                return leaveOpenArgument != null &&
-                    CSharpEquivalenceChecker.AreEquivalent(leaveOpenArgument.Expression, CSharpSyntaxHelper.TrueLiteralExpression);
+            private static ArgumentSyntax GetArgument(IEnumerable<ArgumentSyntax> argumentList, string argumentName, int defaultArgumentIndex)
+            {
+                var argument = argumentList.FirstOrDefault(arg => argumentName.Equals(arg.NameColon?.Name.Identifier.ValueText));
+                if (argument == null)
+                {
+                    return argumentList.ElementAtOrDefault(defaultArgumentIndex);
+                }
+                return argument;
             }
 
             private ProgramState ProcessDisposableSymbol(ProgramState programState, SyntaxNode disposeInstruction,
