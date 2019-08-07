@@ -478,7 +478,7 @@ namespace SonarAnalyzer
         private void ExtractBinaryExpression(SyntaxNode op)
         {
             var binExpr = op as BinaryExpressionSyntax;
-            if (!SupportedTypes(binExpr.Left, binExpr.Right,binExpr))
+            if (!SupportedTypes(binExpr.Left, binExpr.Right, binExpr))
             {
                 writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(binExpr)} {GetLocation(binExpr)} // Binary expression on unsupported types {op.Dump()}");
                 return;
@@ -499,7 +499,7 @@ namespace SonarAnalyzer
                     }
             }
 
-            writer.WriteLine($"%{OpId(op)} = {opName} %{OpId(binExpr.Left)}, %{OpId(binExpr.Right)} : {MLIRType(binExpr)} {GetLocation(binExpr)}");
+            writer.WriteLine($"%{OpId(op)} = {opName} %{OpId(getAssignmentValue(binExpr.Left))}, %{OpId(getAssignmentValue(binExpr.Right))} : {MLIRType(binExpr)} {GetLocation(binExpr)}");
         }
 
         private bool SupportedTypes(params ExpressionSyntax [] exprs)
@@ -516,8 +516,7 @@ namespace SonarAnalyzer
                 return;
             }
             // The type is the type of the operands, not of the result, which is always i1
-            writer.WriteLine($"%{OpId(op)} = cmpi \"{compName}\", %{OpId(binExpr.Left)}, %{OpId(binExpr.Right)} : {MLIRType(binExpr.Left)} {GetLocation(binExpr)}");
-
+            writer.WriteLine($"%{OpId(op)} = cmpi \"{compName}\", %{OpId(getAssignmentValue(binExpr.Left))}, %{OpId(getAssignmentValue(binExpr.Right))} : {MLIRType(binExpr.Left)} {GetLocation(binExpr)}");
         }
 
         private string GetLocation(SyntaxNode node)
