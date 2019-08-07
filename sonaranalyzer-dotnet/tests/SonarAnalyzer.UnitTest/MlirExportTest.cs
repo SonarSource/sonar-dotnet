@@ -982,6 +982,23 @@ Label:
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void UnknownConstant()
+        {
+            var code = @"
+class A
+{
+        private const object NullConst = null;
+
+        void f()
+        {
+            NullConst.ToString();
+        }
+";
+
+            ValidateCodeGeneration(code);
+        }
+
     } // Class
 } // Namespace
 
