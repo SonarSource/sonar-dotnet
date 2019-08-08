@@ -7,6 +7,16 @@ namespace Tests.Diagnostics
         public virtual bool Equals(ClassWithVirtualEquals other) => true;
     }
 
+    public abstract class ClassWithAbstractEquals : IEquatable<ClassWithAbstractEquals> // Compliant
+    {
+        public abstract bool Equals(ClassWithAbstractEquals other);
+    }
+
+    public abstract class ClassWithNonAbstractEquals : IEquatable<ClassWithAbstractEquals> // Noncompliant
+    {
+        public bool Equals(ClassWithAbstractEquals other) => true;
+    }
+
     public sealed class SealedClassImplementsIEquatable : IEquatable<SealedClassImplementsIEquatable> // Compliant
     {
         public bool Equals(SealedClassImplementsIEquatable other) => true;
