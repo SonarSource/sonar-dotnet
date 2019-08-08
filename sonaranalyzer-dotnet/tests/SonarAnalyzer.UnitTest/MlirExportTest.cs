@@ -940,13 +940,128 @@ short g(char c)
 char h(bool c)
 {
     return c;
+    }
+";
+
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void IgnoreParenthesesInAssignment()
+        {
+            var code = @"
+void f(int a, int b)
+{
+    a = (b = 2);
 }
 ";
 
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void AssignmentInComparison()
+        {
+            var code = @"
+int f(int a, int b)
+{
+    if ((a = 3) < (b = 2))
+    {
+        return 0;
+    }
+    return 1;
+}
+";
+
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void AssignmentInBinaryOperator()
+        {
+            var code = @"
+void f(int a, int b)
+{
+    a = (b = 2) + 1;
+}
+";
+
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void Goto()
+        {
+            var code = @"
+void f()
+{
+    goto Label;
+Label:
+    return;
+}
+";
+
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void UnknownConstant()
+        {
+            var code = @"
+class A
+{
+        private const object NullConst = null;
+
+        void f()
+        {
+            NullConst.ToString();
+        }
+";
+
+            ValidateCodeGeneration(code);
+        }
+      
+        [TestMethod]
+        public void Property()
+        {
+            var code = @"
+class A {
+    public void DoSomething1() { }
+    public bool someCondition1 { get; set; }
+
+    public void Test_SingleLineBlocks()
+    {
+        if (someCondition1)
+        {
+            someCondition1 = false;
+            DoSomething1(); // Compliant, ignore single line blocks
+        }
+        else
+        {
+            DoSomething1();
+        }
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
+      
+        [TestMethod]
+        public void AsyncFunction()
+        {
+            var code = @"
+class A {
+    async System.Threading.Tasks.Task<int> FuncAsync()
+    {
+        return 3;
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
     } // Class
-} // Namespace
+
+    } // Namespace
 
 

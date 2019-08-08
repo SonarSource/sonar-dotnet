@@ -93,6 +93,11 @@ namespace SonarAnalyzer
 
         private bool IsTooClomplexForMLIROrTheCFG(MethodDeclarationSyntax method)
         {
+            var symbol = semanticModel.GetDeclaredSymbol(method);
+            if (symbol.IsAsync)
+            {
+                return true;
+            }
             return method.DescendantNodes().Any(n =>
             n.IsKind(SyntaxKind.ForEachStatement) ||
             n.IsKind(SyntaxKind.AwaitExpression) ||
@@ -113,7 +118,8 @@ namespace SonarAnalyzer
             n.IsKind(SyntaxKind.CheckedExpression) ||
             n.IsKind(SyntaxKind.UncheckedExpression) ||
             n.IsKind(SyntaxKind.UncheckedStatement) ||
-            n.IsKind(SyntaxKindEx.LocalFunctionStatement)
+            n.IsKind(SyntaxKindEx.LocalFunctionStatement) ||
+            n.IsKind(SyntaxKind.GotoStatement)
             );
         }
 
@@ -330,11 +336,22 @@ namespace SonarAnalyzer
 
         private ExpressionSyntax getAssignmentValue(ExpressionSyntax rhs)
         {
+            rhs = rhs.RemoveParentheses();
             while (rhs.IsKind(SyntaxKind.SimpleAssignmentExpression))
             {
-                rhs = (rhs as AssignmentExpressionSyntax).Right;
+                rhs = (rhs as AssignmentExpressionSyntax).Right.RemoveParentheses();
             }
             return rhs;
+        }
+
+        private void ExportConstant(SyntaxNode op, ITypeSymbol type, string value)
+        {
+            if (!IsTypeKnown(type))
+            {
+                writer.WriteLine($"%{OpId(op)} = constant unit {GetLocation(op)} // {op.ToFullString()} ({op.Kind()})");
+                return;
+            }
+            writer.WriteLine($"%{OpId(op)} = constant {value} : {MLIRType(type)} {GetLocation(op)}");
         }
 
         private void ExtractInstruction(SyntaxNode op)
@@ -351,7 +368,7 @@ namespace SonarAnalyzer
                 case SyntaxKind.NumericLiteralExpression:
                     {
                         var lit = op as LiteralExpressionSyntax;
-                        writer.WriteLine($"%{OpId(op)} = constant {lit.Token.ValueText} : {MLIRType(lit)} {GetLocation(op)}");
+                        ExportConstant(op, semanticModel.GetTypeInfo(lit).Type, lit.Token.ValueText);
                         break;
                     }
                 case SyntaxKind.EqualsExpression:
@@ -474,12 +491,16 @@ namespace SonarAnalyzer
 
             if (declSymbol is IFieldSymbol fieldSymbol && fieldSymbol.HasConstantValue)
             {
-                writer.WriteLine($"%{OpId(op)} = constant {fieldSymbol.ConstantValue.ToString()} : {MLIRType(fieldSymbol.Type)} {GetLocation(op)}");
+                var constValue = fieldSymbol.ConstantValue != null ? fieldSymbol.ConstantValue.ToString() : "null";
+                ExportConstant(op, fieldSymbol.Type, constValue);
                 return;
             }
-            else if (declSymbol is IFieldSymbol || !SupportedTypes(id))
+            // IPropertySymbol could be either in a getter context (we should generate unknown) or in a setter
+            // context (we should do nothing). However, it appears that in setter context, the CFG does not have an
+            // instruction for fetching the property, so we should focus only on getter context.
+            else if (declSymbol is IFieldSymbol || declSymbol is IPropertySymbol || !SupportedTypes(id))
             {
-                writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(id)} {GetLocation(op)} // Variable of unknown type {id.Identifier.ValueText}");
+                writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(id)} {GetLocation(op)} // Not a variable of known type: {id.Identifier.ValueText}");
                 return;
             }
             writer.WriteLine($"%{OpId(op)} = cbde.load %{OpId(decl)} : memref<{MLIRType(id)}> {GetLocation(op)}");
@@ -488,7 +509,7 @@ namespace SonarAnalyzer
         private void ExtractBinaryExpression(SyntaxNode op)
         {
             var binExpr = op as BinaryExpressionSyntax;
-            if (!SupportedTypes(binExpr.Left, binExpr.Right,binExpr))
+            if (!SupportedTypes(binExpr.Left, binExpr.Right, binExpr))
             {
                 writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(binExpr)} {GetLocation(binExpr)} // Binary expression on unsupported types {op.Dump()}");
                 return;
@@ -509,7 +530,7 @@ namespace SonarAnalyzer
                     }
             }
 
-            writer.WriteLine($"%{OpId(op)} = {opName} %{OpId(binExpr.Left)}, %{OpId(binExpr.Right)} : {MLIRType(binExpr)} {GetLocation(binExpr)}");
+            writer.WriteLine($"%{OpId(op)} = {opName} %{OpId(getAssignmentValue(binExpr.Left))}, %{OpId(getAssignmentValue(binExpr.Right))} : {MLIRType(binExpr)} {GetLocation(binExpr)}");
         }
 
         private bool SupportedTypes(params ExpressionSyntax [] exprs)
@@ -526,8 +547,7 @@ namespace SonarAnalyzer
                 return;
             }
             // The type is the type of the operands, not of the result, which is always i1
-            writer.WriteLine($"%{OpId(op)} = cmpi \"{compName}\", %{OpId(binExpr.Left)}, %{OpId(binExpr.Right)} : {MLIRType(binExpr.Left)} {GetLocation(binExpr)}");
-
+            writer.WriteLine($"%{OpId(op)} = cmpi \"{compName}\", %{OpId(getAssignmentValue(binExpr.Left))}, %{OpId(getAssignmentValue(binExpr.Right))} : {MLIRType(binExpr.Left)} {GetLocation(binExpr)}");
         }
 
         private string GetLocation(SyntaxNode node)
