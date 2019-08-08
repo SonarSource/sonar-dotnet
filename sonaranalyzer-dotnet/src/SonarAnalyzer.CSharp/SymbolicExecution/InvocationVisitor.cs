@@ -68,10 +68,10 @@ namespace SonarAnalyzer.SymbolicExecution
             {
                 return HandleReferenceEqualsCall();
             }
-
-            if (IsStringNullCheckMethod(methodSymbol))
+            // TODO: IsNullOrWhiteSpace is now treated as IsNull. Add the needed string constraints to treat IsNullOrWhiteSpace correctly
+            if (IsStringNullOrWhiteSpaceCheckMethod(methodSymbol))
             {
-                return HandleStringNullCheckMethod();
+                return HandleStringNullOrWhiteSpaceCheckMethod();
             }
 
             if (IsStringNullOrEmptyCheckMethod(methodSymbol))
@@ -103,13 +103,13 @@ namespace SonarAnalyzer.SymbolicExecution
             return newProgramState.SetConstraint(nameof, ObjectConstraint.NotNull);
         }
 
-        private ProgramState HandleStringNullCheckMethod()
+        private ProgramState HandleStringNullOrWhiteSpaceCheckMethod()
         {
             var newProgramState = this.programState
                 .PopValue(out var arg1)
                 .PopValue();
 
-            // Handle string.IsNullOrSpace(arg1) as if it was arg1 == null
+            // Handle string.IsNullOrWhiteSpace(arg1) as if it was arg1 == null
             return new ReferenceEqualsConstraintHandler(arg1, SymbolicValue.Null,
                     this.invocation.ArgumentList.Arguments[0].Expression,
                     null,
@@ -133,7 +133,7 @@ namespace SonarAnalyzer.SymbolicExecution
             {
                 newProgramState = newProgramState.SetConstraint(refEquals, BoolConstraint.False);
             }        
-            return newProgramState;         
+            return newProgramState;    
         }
 
         private ProgramState HandleStaticEqualsCall()
@@ -184,21 +184,22 @@ namespace SonarAnalyzer.SymbolicExecution
                 .PopValues(validatedArgumentIndex)
                 .SetConstraint(guardedArgumentValue, ObjectConstraint.NotNull);
 
+        private static bool IsStringStaticMethod(IMethodSymbol methodSymbol, string methodName) =>
+             methodSymbol != null &&
+             methodSymbol.ContainingType.Is(KnownType.System_String) &&
+             methodSymbol.IsStatic &&
+             methodName == methodSymbol.Name;
 
-        private static bool IsStringNullCheckMethod(IMethodSymbol methodSymbol)
+
+        private static bool IsStringNullOrWhiteSpaceCheckMethod(IMethodSymbol methodSymbol)
         {
-            return methodSymbol != null &&
-                methodSymbol.ContainingType.Is(KnownType.System_String) &&
-                methodSymbol.IsStatic &&
-                nameof(string.IsNullOrWhiteSpace) == methodSymbol.Name;
+            return IsStringStaticMethod(methodSymbol, nameof(string.IsNullOrWhiteSpace));
         }
 
+     
         private static bool IsStringNullOrEmptyCheckMethod(IMethodSymbol methodSymbol)
         {
-            return methodSymbol != null &&
-                methodSymbol.ContainingType.Is(KnownType.System_String) &&
-                methodSymbol.IsStatic &&
-                nameof(string.IsNullOrEmpty) == methodSymbol.Name;
+            return IsStringStaticMethod(methodSymbol, nameof(string.IsNullOrEmpty));
         }
 
         private static bool IsReferenceEqualsCall(IMethodSymbol methodSymbol)

@@ -313,6 +313,26 @@ namespace Tests.Diagnostics
         {
             var s = path == "" ? new string[] { } : path.Split('/');
         }
+
+        void StringEmpty4(string path)
+        {
+            var s = path == null ? new string[] { } : path.Split('/');
+        }
+
+        void StringEmpty5(string path)
+        {
+            var s = path == null ? path.Split('/') : new string[] { }; // Noncompliant
+        }
+
+        void StringEmpty6(string path)
+        {
+            var s = string.IsNullOrEmpty(path) ? path.Split('/') : new string[] { }; // Noncompliant
+        }
+
+        void StringEmpty7(string path)
+        {
+            var s = string.IsNullOrEmpty(path) ? new string[] { } : path.Split('/');
+        }
     }
 
     class A

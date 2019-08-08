@@ -692,19 +692,19 @@ namespace SonarAnalyzer.SymbolicExecution
             foreach (var newProgramState in sv.TrySetConstraint(BoolConstraint.True, ps))
             {
                 OnConditionEvaluated(instruction, evaluationValue: true);
-
-                foreach (var nps in GenerateNewProgramTrueState(binaryBranchBlock, sv, newProgramState))
+                // this inner loop is to give the possibiliyu of handiling the same block with different constraints/programstate.
+                foreach (var innerNewProgramState  in GenerateNewProgramTrueState(binaryBranchBlock, sv, newProgramState))
                 {
-                    EnqueueNewNode(new ProgramPoint(binaryBranchBlock.TrueSuccessorBlock), CleanStateAfterBlock(nps, node.ProgramPoint.Block));
+                    EnqueueNewNode(new ProgramPoint(binaryBranchBlock.TrueSuccessorBlock), CleanStateAfterBlock(innerNewProgramState , node.ProgramPoint.Block));
                 }
             }
 
             foreach (var newProgramState in sv.TrySetOppositeConstraint(BoolConstraint.True, ps))
             {
                 OnConditionEvaluated(instruction, evaluationValue: false);
-                foreach (var nps in GenerateNewProgramFalseState(binaryBranchBlock, sv, newProgramState))
+                foreach (var innerNewProgramState  in GenerateNewProgramFalseState(binaryBranchBlock, sv, newProgramState))
                 {
-                    EnqueueNewNode(new ProgramPoint(binaryBranchBlock.FalseSuccessorBlock), CleanStateAfterBlock(nps, node.ProgramPoint.Block));
+                    EnqueueNewNode(new ProgramPoint(binaryBranchBlock.FalseSuccessorBlock), CleanStateAfterBlock(innerNewProgramState , node.ProgramPoint.Block));
                 }
             }
         }
@@ -717,17 +717,17 @@ namespace SonarAnalyzer.SymbolicExecution
 
             if (sv is ReferenceEqualsSymbolicValue referenceEqualsSymbolicValue
                 && referenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue rightOperand
-                && rightOperand.memberName == "IsNullOrEmpty")
+                && rightOperand.MemberName == "IsNullOrEmpty")
             {
                 return referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.FullString, nps);             
             }
 
             if (sv is LogicalNotSymbolicValue logicalNotSymbolicValue
-               && logicalNotSymbolicValue.Operand is ReferenceEqualsSymbolicValue referenceEqualsSymbolicValue1
-               && referenceEqualsSymbolicValue1.RightOperand is MemberAccessSymbolicValue rightOperand1
-               && rightOperand1.memberName == "IsNullOrEmpty")
+               && logicalNotSymbolicValue.Operand is ReferenceEqualsSymbolicValue logicalNotreferenceEqualsSymbolicValue
+               && logicalNotreferenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue logicalNotrightOperand
+               && logicalNotrightOperand.MemberName == "IsNullOrEmpty")
             {
-                return NullOrEmptyStringStates(nps, referenceEqualsSymbolicValue1);
+                return NullOrEmptyStringStates(nps, logicalNotreferenceEqualsSymbolicValue);
             }
 
             return new[] { nps };
@@ -740,28 +740,28 @@ namespace SonarAnalyzer.SymbolicExecution
                 : newProgramState;
 
             if (sv is ReferenceEqualsSymbolicValue referenceEqualsSymbolicValue
-            && referenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue rightOperand
-            && rightOperand.memberName == "IsNullOrEmpty")
+                && referenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue rightOperand
+                && rightOperand.MemberName == "IsNullOrEmpty")
             {
                 return NullOrEmptyStringStates(nps, referenceEqualsSymbolicValue);
             }
 
             if (sv is LogicalNotSymbolicValue logicalNotSymbolicValue
-                && logicalNotSymbolicValue.Operand is ReferenceEqualsSymbolicValue referenceEqualsSymbolicValue1
-                && referenceEqualsSymbolicValue1.RightOperand is MemberAccessSymbolicValue rightOperand1
-                && rightOperand1.memberName == "IsNullOrEmpty")
+                && logicalNotSymbolicValue.Operand is ReferenceEqualsSymbolicValue logicalNotreferenceEqualsSymbolicValue
+                && logicalNotreferenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue logicalNotrightOperand
+                && logicalNotrightOperand.MemberName == "IsNullOrEmpty")
             {
-                return referenceEqualsSymbolicValue1.LeftOperand.TrySetConstraint(StringConstraint.FullString, nps);                
+                return logicalNotreferenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.FullString, nps);
             }
 
             return new[] { nps };
         }
 
         private static IEnumerable<ProgramState> NullOrEmptyStringStates(ProgramState nps, ReferenceEqualsSymbolicValue referenceEqualsSymbolicValue)
-        {         
-            var nps1 = referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(ObjectConstraint.Null, nps);
-            var nps2 = referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.EmptyString, nps);
-            return nps1.Concat(nps2);
+        {
+            var newProgramStateNull= referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(ObjectConstraint.Null, nps);
+            var newProgramStateEmpty = referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.EmptyString, nps);
+            return newProgramStateNull.Concat(newProgramStateEmpty);
         }
 
         #endregion Handle VisitBinaryBranch cases

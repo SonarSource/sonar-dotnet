@@ -205,5 +205,20 @@ namespace Tests.Diagnostics
 
             var parts = contentType.Split('/', ';');
         }
+
+        public void Method6(string contentType)
+        {
+            if (string.IsNullOrEmpty(contentType))
+            {
+                throw new ArgumentException("inputString cannot be null or empty", contentType);
+            }
+
+            if (contentType.Equals("*"))
+            {
+                contentType = null;
+            }
+
+            var parts = contentType.Split('/', ';'); // Noncompliant
+        }
     }
 }

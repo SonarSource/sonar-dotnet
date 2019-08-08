@@ -2330,12 +2330,21 @@ namespace Tests.Diagnostics
 
             }
 
-            if (s == s5)
-            {
+            if (s1 == s3) // Noncompliant
+            { // Secondary
 
             }
 
-            
+            if (s1 == s5) // Noncompliant
+            { // Secondary
+
+            }
+
+            if (s3 == s5) // Noncompliant
+            { // Secondary
+
+            }
+
             if (s5 == "") // Noncompliant
             { // Secondary
 
@@ -2490,6 +2499,59 @@ namespace Tests.Diagnostics
             }
 
             return String.Empty;
+        }
+    }
+
+    public class NullOrWhiteSoace
+    {
+        public void Method1(string s)
+        {
+            string s1 = null;
+            string s2 = "";
+            string s3 = s ?? "";
+            string s4 = " ";
+
+            if (string.IsNullOrWhiteSpace(s1)) // Noncompliant
+            {               
+            }
+            // IsNullOrWhiteSpace is treated as isNull this can generate FN/FP depending on the case
+
+            if (string.IsNullOrWhiteSpace(s2)) // Noncompliant 
+            { // Secondary FP should always evaluate to true instead of false
+                if (s2 == "a") // FN
+                {
+
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(s3)) // Noncompliant FP should not trigger at all
+            { // Secondary
+
+            }
+
+            if (string.IsNullOrWhiteSpace(s4)) // Noncompliant 
+            { // Secondary FP should always evaluate to true instead of false
+
+            }
+
+            if (string.IsNullOrWhiteSpace(s4)) // Noncompliant FP should not trigger at all
+            { // Secondary
+
+            }
+
+            if (!string.IsNullOrWhiteSpace(s))
+            {
+                if (s == "") // FN
+                {
+
+                }
+
+                if (s == "  ") // FN
+                {
+
+                }
+            }
+
         }
     }
 }

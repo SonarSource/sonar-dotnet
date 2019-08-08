@@ -24,17 +24,17 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
     {
 
         public SymbolicValue MemberExpression { get; }
-        public string memberName { get; }
+        public string MemberName { get; }
 
         public MemberAccessSymbolicValue(SymbolicValue memberExpression, string memberName)
         {
             MemberExpression = memberExpression;
-            this.memberName = memberName;
+            this.MemberName = memberName;
         }
 
         public override string ToString()
         {
-            return $"{MemberExpression}.{this.memberName}";
+            return $"{MemberExpression}.{this.MemberName}";
         }
     }
 }
