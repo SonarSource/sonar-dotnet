@@ -923,6 +923,28 @@ void f()
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void CastOnReturn()
+        {
+            var code = @"
+int f(char c)
+{
+    return c;
+}
+
+short g(char c)
+{
+    return c;
+}
+
+char h(bool c)
+{
+    return c;
+    }
+";
+
+            ValidateCodeGeneration(code);
+        }
 
         [TestMethod]
         public void IgnoreParenthesesInAssignment()
@@ -998,6 +1020,7 @@ class A
 
             ValidateCodeGeneration(code);
         }
+      
         [TestMethod]
         public void Property()
         {
@@ -1022,6 +1045,7 @@ class A {
 ";
             ValidateCodeGeneration(code);
         }
+      
         [TestMethod]
         public void AsyncFunction()
         {
@@ -1035,6 +1059,7 @@ class A {
 ";
             ValidateCodeGeneration(code);
         }
+
     } // Class
 
     } // Namespace
