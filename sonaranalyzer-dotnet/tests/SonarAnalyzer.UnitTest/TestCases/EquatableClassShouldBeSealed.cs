@@ -12,6 +12,11 @@ namespace Tests.Diagnostics
         public abstract bool Equals(ClassWithAbstractEquals other);
     }
 
+    public abstract class ClassWithNonAbstractEquals : IEquatable<ClassWithAbstractEquals> // Noncompliant
+    {
+        public bool Equals(ClassWithAbstractEquals other) => true;
+    }
+
     public sealed class SealedClassImplementsIEquatable : IEquatable<SealedClassImplementsIEquatable> // Compliant
     {
         public bool Equals(SealedClassImplementsIEquatable other) => true;

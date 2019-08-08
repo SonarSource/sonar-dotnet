@@ -4,7 +4,7 @@ to make a meaningful comparison. Therefore that implicit contract is now broken.
 <p>Alternatively <code>IEqualityComparer&lt;T&gt;</code> provides a safer interface and is used by collections or <code>Equals</code> could be made
 <code>virtual</code>.</p>
 <p>This rule raises an issue when a unsealed, <code>public</code> or <code>protected</code> class implements <code>IEquitable&lt;T&gt;</code> and the
-<code>Equals</code> is not <code>virtual</code>.</p>
+<code>Equals</code> is neither <code>virtual</code> nor <code>abstract</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 using System;
