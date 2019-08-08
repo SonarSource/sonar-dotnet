@@ -1,7 +1,11 @@
 ---
-title: VB.NET
+title: VB.NET Override
 key: vbnet
 ---
+
+## This documentation comes from the plugin!
+
+Straight from the `sonar-vbnet-plugin.jar`.
 
 <!-- static -->
 <!-- update_center:vbnet -->
