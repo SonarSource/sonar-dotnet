@@ -705,4 +705,18 @@ namespace Tests.Diagnostics
         }
 
     }
+
+    // see https://github.com/SonarSource/sonar-dotnet/issues/890
+    class TestForLoop
+    {
+        string Foo()
+        {
+            string s = null;
+            for (int i = 0; i < 10; i++)
+            {
+                s = "";
+            }
+            return s.Trim(); // Noncompliant FP due to loop traversal
+        }
+    }
 }
