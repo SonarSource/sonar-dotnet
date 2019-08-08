@@ -70,6 +70,9 @@ namespace SonarAnalyzer.Rules.CSharp
             // It's ok to use magic numbers in the GetHashCode method. Note that I am only checking the method name of the sake of simplicity
             literalExpression.FirstAncestorOrSelf<MethodDeclarationSyntax>()?.Identifier.ValueText == nameof(object.GetHashCode) ||
             // It's ok to use magic numbers in pragma directives
-            literalExpression.FirstAncestorOrSelf<PragmaWarningDirectiveTriviaSyntax>() != null;
+            literalExpression.FirstAncestorOrSelf<PragmaWarningDirectiveTriviaSyntax>() != null ||
+            // It's ok to use magic numbers in property declaration
+            literalExpression.FirstAncestorOrSelf<PropertyDeclarationSyntax>() != null
+            ;
     }
 }
