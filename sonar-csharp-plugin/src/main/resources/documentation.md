@@ -1,7 +1,11 @@
 ---
-title: C#
+title: C# Override
 key: csharp
 ---
+
+## This documentation comes from the plugin!
+
+Straight from the `sonar-csharp-plugin.jar`.
 
 <!-- static -->
 <!-- update_center:csharp -->
