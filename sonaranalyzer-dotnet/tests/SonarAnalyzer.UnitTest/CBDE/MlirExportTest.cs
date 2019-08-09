@@ -8,6 +8,7 @@ using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.ControlFlowGraph;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest
 {
@@ -93,7 +94,7 @@ class C
             {
                 ExportAllMethods(code, writer, withLoc);
             }
-            ValidateIR(path);
+            ExportMlirFromTest.ValidateIR(path);
         }
 
         private void ValidateCodeGeneration(string code)
@@ -206,7 +207,7 @@ private int WhileLoopBreak(int i)
 }
 private int WhileLoopContinue(int i)
 {
-    do 
+    do
     {
         if (i == 42)
         {
