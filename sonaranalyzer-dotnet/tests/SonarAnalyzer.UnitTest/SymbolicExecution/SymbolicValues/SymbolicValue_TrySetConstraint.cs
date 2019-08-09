@@ -36,6 +36,9 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [DynamicData(nameof(NotNullConstraintData), DynamicDataSourceType.Property)]
         [DynamicData(nameof(NoValueConstraintData), DynamicDataSourceType.Property)]
         [DynamicData(nameof(HasValueConstraintData), DynamicDataSourceType.Property)]
+        [DynamicData(nameof(EmptyStringConstraintData), DynamicDataSourceType.Property)]
+        [DynamicData(nameof(FullStringConstraintData), DynamicDataSourceType.Property)]
+        [DynamicData(nameof(FullOrNullStringConstraintData), DynamicDataSourceType.Property)]
         public void TrySetConstraint(SymbolicValueConstraint constraint,
             IList<SymbolicValueConstraint> existingConstraints,
             IList<IList<SymbolicValueConstraint>> expectedConstraintsPerProgramState)
@@ -163,6 +166,18 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
                 ConstraintList(BoolConstraint.True), // existing
                 ProgramStateList() // Expected
             },
+            new object[]
+            {
+                ObjectConstraint.Null, // constraint to set
+                ConstraintList(StringConstraint.EmptyString), // existing
+                ProgramStateList() // Expected
+            },
+            new object[]
+            {
+                ObjectConstraint.Null, // constraint to set
+                ConstraintList(StringConstraint.FullString), // existing
+                ProgramStateList() // Expected
+            },
         };
 
         public static IEnumerable<object[]> NotNullConstraintData { get; } = new[]
@@ -197,6 +212,18 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
                 ConstraintList(BoolConstraint.True), // existing
                 ProgramStateList(ConstraintList(ObjectConstraint.NotNull, BoolConstraint.True)) // Expected
             },
+            new object[]
+            {
+                ObjectConstraint.NotNull, // constraint to set
+                ConstraintList(StringConstraint.EmptyString), // existing
+                ProgramStateList(ConstraintList(ObjectConstraint.NotNull, StringConstraint.EmptyString)) // Expected
+            },
+            new object[]
+            {
+                ObjectConstraint.NotNull, // constraint to set
+                ConstraintList(StringConstraint.FullString), // existing
+                ProgramStateList(ConstraintList(ObjectConstraint.NotNull, StringConstraint.FullString)) // Expected
+            },
         };
 
         public static IEnumerable<object[]> NoValueConstraintData { get; } = new[]
@@ -228,6 +255,108 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
                 NullableValueConstraint.HasValue, // constraint to set
                 ConstraintList(ObjectConstraint.Null), // existing
                 ProgramStateList(ConstraintList(ObjectConstraint.Null)) // Expected, HasValue cannot be applied on non-NullableSymbolicValue
+            },
+        };
+
+        public static IEnumerable<object[]> EmptyStringConstraintData { get; } = new[]
+        {
+            new object[]
+            {
+                StringConstraint.EmptyString, // constraint to set
+                ConstraintList(), // existing
+                ProgramStateList(ConstraintList(StringConstraint.EmptyString, ObjectConstraint.NotNull)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.EmptyString, // constraint to set
+                ConstraintList(StringConstraint.EmptyString), // existing
+                ProgramStateList(ConstraintList(StringConstraint.EmptyString)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.EmptyString, // constraint to set
+                ConstraintList(StringConstraint.FullString), // existing
+                ProgramStateList() // Expected
+            },
+            new object[]
+            {
+                StringConstraint.EmptyString, // constraint to set
+                ConstraintList(ObjectConstraint.Null), // existing
+                ProgramStateList() // Expected
+            },
+            new object[]
+            {
+                StringConstraint.EmptyString, // constraint to set
+                ConstraintList(ObjectConstraint.NotNull), // existing
+                ProgramStateList(ConstraintList(ObjectConstraint.NotNull, StringConstraint.EmptyString)) // Expected
+            },
+        };
+
+        public static IEnumerable<object[]> FullStringConstraintData { get; } = new[]
+        {
+            new object[]
+            {
+                StringConstraint.FullString, // constraint to set
+                ConstraintList(), // existing
+                ProgramStateList(ConstraintList(StringConstraint.FullString, ObjectConstraint.NotNull)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.FullString, // constraint to set
+                ConstraintList(StringConstraint.EmptyString), // existing
+                ProgramStateList() // Expected
+            },
+            new object[]
+            {
+                StringConstraint.FullString, // constraint to set
+                ConstraintList(StringConstraint.FullString), // existing
+                ProgramStateList(ConstraintList(StringConstraint.FullString)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.FullString, // constraint to set
+                ConstraintList(ObjectConstraint.Null), // existing
+                ProgramStateList() // Expected
+            },
+            new object[]
+            {
+                StringConstraint.FullString, // constraint to set
+                ConstraintList(ObjectConstraint.NotNull), // existing
+                ProgramStateList(ConstraintList(ObjectConstraint.NotNull, StringConstraint.FullString)) // Expected
+            },
+        };
+
+        public static IEnumerable<object[]> FullOrNullStringConstraintData { get; } = new[]
+{
+            new object[]
+            {
+                StringConstraint.FullOrNullString, // constraint to set
+                ConstraintList(), // existing
+                ProgramStateList(ConstraintList()) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.FullOrNullString, // constraint to set
+                ConstraintList(StringConstraint.EmptyString), // existing
+                ProgramStateList() // Expected
+            },
+            new object[]
+            {
+                StringConstraint.FullOrNullString, // constraint to set
+                ConstraintList(StringConstraint.FullString), // existing
+                ProgramStateList(ConstraintList(StringConstraint.FullString)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.FullOrNullString, // constraint to set
+                ConstraintList(ObjectConstraint.Null), // existing
+                ProgramStateList(ConstraintList(ObjectConstraint.Null)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.FullOrNullString, // constraint to set
+                ConstraintList(ObjectConstraint.NotNull), // existing
+                ProgramStateList(ConstraintList(ObjectConstraint.NotNull)) // Expected
             },
         };
 

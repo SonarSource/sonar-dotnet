@@ -68,10 +68,15 @@ namespace SonarAnalyzer.SymbolicExecution
             {
                 return HandleReferenceEqualsCall();
             }
-
-            if (IsStringNullCheckMethod(methodSymbol))
+            // TODO: IsNullOrWhiteSpace is now treated as IsNull. Add the needed string constraints to treat IsNullOrWhiteSpace correctly
+            if (IsStringNullOrWhiteSpaceCheckMethod(methodSymbol))
             {
-                return HandleStringNullCheckMethod();
+                return HandleStringNullOrWhiteSpaceCheckMethod();
+            }
+
+            if (IsStringNullOrEmptyCheckMethod(methodSymbol))
+            {
+                return HandleStringNullOrEmptyCheckMethod();
             }
 
             if (methodSymbol != null &&
@@ -98,18 +103,38 @@ namespace SonarAnalyzer.SymbolicExecution
             return newProgramState.SetConstraint(nameof, ObjectConstraint.NotNull);
         }
 
-        private ProgramState HandleStringNullCheckMethod()
+        private ProgramState HandleStringNullOrWhiteSpaceCheckMethod()
         {
             var newProgramState = this.programState
                 .PopValue(out var arg1)
                 .PopValue();
 
-            // Handle string.IsNullOrEmpty(arg1) as if it was arg1 == null
+            // Handle string.IsNullOrWhiteSpace(arg1) as if it was arg1 == null
             return new ReferenceEqualsConstraintHandler(arg1, SymbolicValue.Null,
                     this.invocation.ArgumentList.Arguments[0].Expression,
                     null,
                     newProgramState, this.semanticModel)
                 .PushWithConstraint();
+        }
+
+        private ProgramState HandleStringNullOrEmptyCheckMethod()
+        {
+            var newProgramState = this.programState
+                .PopValue(out var arg1)
+                .PopValue(out var arg2);
+
+            var refEquals = new ReferenceEqualsSymbolicValue(arg1, arg2);
+            newProgramState = newProgramState.PushValue(refEquals);
+            if (newProgramState.HasConstraint(arg1, ObjectConstraint.Null) ||
+                    newProgramState.HasConstraint(arg1, StringConstraint.EmptyString))
+            {
+                newProgramState= newProgramState.SetConstraint(refEquals, BoolConstraint.True);
+            }
+            else if(newProgramState.HasConstraint(arg1, StringConstraint.FullString))
+            {
+                newProgramState = newProgramState.SetConstraint(refEquals, BoolConstraint.False);
+            }
+            return newProgramState;
         }
 
         private ProgramState HandleStaticEqualsCall()
@@ -160,19 +185,21 @@ namespace SonarAnalyzer.SymbolicExecution
                 .PopValues(validatedArgumentIndex)
                 .SetConstraint(guardedArgumentValue, ObjectConstraint.NotNull);
 
-        private static readonly ISet<string> IsNullMethodNames = new HashSet<string>
-        {
-            nameof(string.IsNullOrEmpty),
-            nameof(string.IsNullOrWhiteSpace),
-        };
+        private static bool IsStringStaticMethod(IMethodSymbol methodSymbol, string methodName) =>
+             methodSymbol != null &&
+             methodSymbol.ContainingType.Is(KnownType.System_String) &&
+             methodSymbol.IsStatic &&
+             methodName == methodSymbol.Name;
 
-        private static bool IsStringNullCheckMethod(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.ContainingType.Is(KnownType.System_String) &&
-                methodSymbol.IsStatic &&
-                IsNullMethodNames.Contains(methodSymbol.Name);
-        }
+
+        private static bool IsStringNullOrWhiteSpaceCheckMethod(IMethodSymbol methodSymbol) =>
+            IsStringStaticMethod(methodSymbol, nameof(string.IsNullOrWhiteSpace));
+        
+
+     
+        private static bool IsStringNullOrEmptyCheckMethod(IMethodSymbol methodSymbol) =>
+            IsStringStaticMethod(methodSymbol, nameof(string.IsNullOrEmpty));
+
 
         private static bool IsReferenceEqualsCall(IMethodSymbol methodSymbol)
         {
