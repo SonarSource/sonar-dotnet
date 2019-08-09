@@ -106,31 +106,42 @@ namespace SonarAnalyzer.SymbolicExecution
         private ProgramState HandleStringNullOrWhiteSpaceCheckMethod()
         {
             var newProgramState = this.programState
-                .PopValue(out var arg1)
-                .PopValue();
+                .PopValue(out var arg)
+                .PopValue(out var isNullOrWhiteSpaceMethod);
 
-            // Handle string.IsNullOrWhiteSpace(arg1) as if it was arg1 == null
-            return new ReferenceEqualsConstraintHandler(arg1, SymbolicValue.Null,
-                    this.invocation.ArgumentList.Arguments[0].Expression,
-                    null,
-                    newProgramState, this.semanticModel)
-                .PushWithConstraint();
+            var refEquals = new ReferenceEqualsSymbolicValue(arg, isNullOrWhiteSpaceMethod);
+            newProgramState = newProgramState.PushValue(refEquals);
+            if (newProgramState.HasConstraint(arg, ObjectConstraint.Null) ||
+                    newProgramState.HasConstraint(arg, StringConstraint.EmptyString) ||
+                    newProgramState.HasConstraint(arg, StringConstraint.WhiteSpaceString))
+            {
+                newProgramState = newProgramState.SetConstraint(refEquals, BoolConstraint.True);
+            }
+            else if (newProgramState.HasConstraint(arg, StringConstraint.FullNotWhiteSpaceString))
+            {
+                newProgramState = newProgramState.SetConstraint(refEquals, BoolConstraint.False);
+            }
+            // This is reached when we don't know the result of isNullOrWhiteSpaceMethod
+            // for example when there is a FullOrNullString constraint
+            return newProgramState;
         }
 
         private ProgramState HandleStringNullOrEmptyCheckMethod()
         {
             var newProgramState = this.programState
-                .PopValue(out var arg1)
-                .PopValue(out var arg2);
+                .PopValue(out var arg)
+                .PopValue(out var isNullOrEmptySpaceMethod);
 
-            var refEquals = new ReferenceEqualsSymbolicValue(arg1, arg2);
+            var refEquals = new ReferenceEqualsSymbolicValue(arg, isNullOrEmptySpaceMethod);
             newProgramState = newProgramState.PushValue(refEquals);
-            if (newProgramState.HasConstraint(arg1, ObjectConstraint.Null) ||
-                    newProgramState.HasConstraint(arg1, StringConstraint.EmptyString))
+            if (newProgramState.HasConstraint(arg, ObjectConstraint.Null) ||
+                    newProgramState.HasConstraint(arg, StringConstraint.EmptyString))
             {
                 newProgramState= newProgramState.SetConstraint(refEquals, BoolConstraint.True);
             }
-            else if(newProgramState.HasConstraint(arg1, StringConstraint.FullString))
+            else if(newProgramState.HasConstraint(arg, StringConstraint.FullString) ||
+                        newProgramState.HasConstraint(arg, StringConstraint.WhiteSpaceString) ||
+                        newProgramState.HasConstraint(arg, StringConstraint.FullNotWhiteSpaceString))
             {
                 newProgramState = newProgramState.SetConstraint(refEquals, BoolConstraint.False);
             }

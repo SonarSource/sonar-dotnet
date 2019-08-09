@@ -249,6 +249,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 {
                     return Enumerable.Empty<ProgramState>();
                 }
+
                 return new[] { programState.SetConstraint(this, constraint) };
             }
 
@@ -290,7 +291,7 @@ namespace SonarAnalyzer.SymbolicExecution
             var oldStringConstraint = oldConstraints.GetConstraintOrDefault<StringConstraint>();
             if (oldStringConstraint != null)
             {
-                return UpdateStringConstraint(constraint, programState, oldStringConstraint);
+                return UpdateStringConstraint(constraint, programState, oldStringConstraint, this);
             }
 
             var oldObjectConstraint = oldConstraints.GetConstraintOrDefault<ObjectConstraint>();
@@ -307,7 +308,8 @@ namespace SonarAnalyzer.SymbolicExecution
         {
             if (oldObjectConstraint == ObjectConstraint.Null)
             {
-                if (constraint == StringConstraint.FullString || constraint == StringConstraint.EmptyString)
+                if (constraint == StringConstraint.FullString || constraint == StringConstraint.EmptyString
+                    || constraint == StringConstraint.FullNotWhiteSpaceString || constraint == StringConstraint.WhiteSpaceString)
                 {
                     return Enumerable.Empty<ProgramState>();
                 }
@@ -315,19 +317,68 @@ namespace SonarAnalyzer.SymbolicExecution
             }
             else
             {
+                if(constraint == StringConstraint.FullOrNullString)
+                {
+                    return new[] { programState.SetConstraint(this, StringConstraint.FullString) };
+                }
+
+                if (constraint == StringConstraint.NotWhiteSpaceString)
+                {
+                    return new[] { programState.SetConstraint(this, StringConstraint.FullNotWhiteSpaceString) };
+                }
+
                 return new[] { programState.SetConstraint(this, constraint) };
             }
         }
 
-        private static IEnumerable<ProgramState> UpdateStringConstraint(StringConstraint constraint, ProgramState programState, StringConstraint oldStringConstraint)
+        private static IEnumerable<ProgramState> UpdateStringConstraint(StringConstraint constraint, ProgramState programState, StringConstraint oldStringConstraint, SymbolicValue sv)
         {
-            if (((constraint == StringConstraint.FullString && oldStringConstraint == StringConstraint.EmptyString)
-                || (constraint == StringConstraint.EmptyString && oldStringConstraint == StringConstraint.FullString))
-                || (constraint == StringConstraint.FullOrNullString && oldStringConstraint == StringConstraint.EmptyString))
+            var newFullStringConstraint = constraint == StringConstraint.FullString;
+            var newEmptyStringConstraint = constraint == StringConstraint.EmptyString;
+            var newFullOrNullStringConstraint = constraint == StringConstraint.FullOrNullString;
+            var oldFullStringConstraint = oldStringConstraint == StringConstraint.FullString;
+            var oldEmptyStringConstraint = oldStringConstraint == StringConstraint.EmptyString;
+
+            // oldStringConstraint is never FullOrNullString or NotWhiteSpaceString
+            // constraints are empty Related Related
+            if (((newFullStringConstraint && oldEmptyStringConstraint)
+                || (newEmptyStringConstraint && oldFullStringConstraint))
+                || (newFullOrNullStringConstraint && oldEmptyStringConstraint))
             {
                 return Enumerable.Empty<ProgramState>();
             }
-            return new[] { programState }; // When EmptyString - FullOrNullString 
+
+            var newFullNotWhiteSpaceStringConstraint = constraint == StringConstraint.FullNotWhiteSpaceString;
+            var newWhiteSpaceStringConstraint = constraint == StringConstraint.WhiteSpaceString;
+            var newNotWhiteSpaceStringConstraint = constraint == StringConstraint.NotWhiteSpaceString;
+            var oldFullNotWhiteSpaceStringConstraint = oldStringConstraint == StringConstraint.FullNotWhiteSpaceString;
+            var oldWhiteSpaceStringConstraint = oldStringConstraint == StringConstraint.WhiteSpaceString;
+
+            // constraints are white space Related
+            if (((newFullNotWhiteSpaceStringConstraint && oldWhiteSpaceStringConstraint
+                || (newWhiteSpaceStringConstraint && oldFullNotWhiteSpaceStringConstraint))
+                || (newNotWhiteSpaceStringConstraint && oldWhiteSpaceStringConstraint)))
+            {
+                return Enumerable.Empty<ProgramState>();
+            }
+
+            // constraints are mixed space Related
+            if ((newEmptyStringConstraint && oldFullNotWhiteSpaceStringConstraint)
+               || (newEmptyStringConstraint && oldWhiteSpaceStringConstraint)            
+               || (newFullNotWhiteSpaceStringConstraint && oldEmptyStringConstraint)
+               || (newWhiteSpaceStringConstraint && oldEmptyStringConstraint))
+            {
+                return Enumerable.Empty<ProgramState>();
+            }
+
+
+            if ((newWhiteSpaceStringConstraint && oldFullStringConstraint)
+                ||(newFullNotWhiteSpaceStringConstraint && oldFullStringConstraint))
+            {
+                return new[] { programState.SetConstraint(sv, constraint) };
+            }
+
+            return new[] { programState };
         }
 
         private IEnumerable<ProgramState> SetNewStringConstraint(StringConstraint constraint, ref ProgramState programState)
@@ -343,6 +394,19 @@ namespace SonarAnalyzer.SymbolicExecution
                 programState = programState.SetConstraint(this, StringConstraint.EmptyString);
                 programState = programState.SetConstraint(this, ObjectConstraint.NotNull);
             }
+
+            else if (constraint == StringConstraint.WhiteSpaceString)
+            {
+                programState = programState.SetConstraint(this, StringConstraint.WhiteSpaceString);
+                programState = programState.SetConstraint(this, ObjectConstraint.NotNull);
+            }
+
+            else if (constraint == StringConstraint.FullNotWhiteSpaceString)
+            {
+                programState = programState.SetConstraint(this, StringConstraint.FullNotWhiteSpaceString);
+                programState = programState.SetConstraint(this, ObjectConstraint.NotNull);
+            }
+
             return new[] { programState };
         }
     }

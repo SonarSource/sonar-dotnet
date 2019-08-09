@@ -38,6 +38,9 @@ namespace SonarAnalyzer.SymbolicExecution
 {
     internal class CSharpExplodedGraph : AbstractExplodedGraph
     {
+        private const string isNullOrEmpty = "IsNullOrEmpty";
+        private const string isNullOrWhiteSpace = "IsNullOrWhiteSpace";
+
         public CSharpExplodedGraph(IControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel, AbstractLiveVariableAnalysis lva)
             : base(cfg, declaration, semanticModel, lva)
         {
@@ -358,13 +361,18 @@ namespace SonarAnalyzer.SymbolicExecution
                     {
                         var stringLiteralExpression = instruction as LiteralExpressionSyntax;
                         var sv = new SymbolicValue();
-                        if (stringLiteralExpression.Token.ValueText == "")
+                        var valueText = stringLiteralExpression.Token.ValueText;
+                        if (string.IsNullOrEmpty(valueText))
                         {
                             newProgramState = newProgramState.SetConstraint(sv, StringConstraint.EmptyString);
                         }
+                        else if (string.IsNullOrWhiteSpace(valueText))
+                        {
+                            newProgramState = newProgramState.SetConstraint(sv, StringConstraint.WhiteSpaceString);
+                        }
                         else
                         {
-                            newProgramState = newProgramState.SetConstraint(sv, StringConstraint.FullString);
+                            newProgramState = newProgramState.SetConstraint(sv, StringConstraint.FullNotWhiteSpaceString);
                         }
                         newProgramState = newProgramState.SetConstraint(sv, ObjectConstraint.NotNull);
                         newProgramState = newProgramState.PushValue(sv);
@@ -716,18 +724,31 @@ namespace SonarAnalyzer.SymbolicExecution
                 : newProgramState;
 
             if (sv is ReferenceEqualsSymbolicValue referenceEqualsSymbolicValue
-                && referenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue rightOperand
-                && rightOperand.MemberName == "IsNullOrEmpty")
+                && referenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue rightOperand)
             {
-                return referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.FullString, nps);       
+                if (rightOperand.MemberName == isNullOrEmpty)
+                {
+                    return referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.FullString, nps);
+                }
+                if (rightOperand.MemberName == isNullOrWhiteSpace)
+                {
+                    return referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.FullNotWhiteSpaceString, nps);
+                }
             }
 
             if (sv is LogicalNotSymbolicValue logicalNotSymbolicValue
                && logicalNotSymbolicValue.Operand is ReferenceEqualsSymbolicValue logicalNotReferenceEqualsSymbolicValue
-               && logicalNotReferenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue logicalNotRightOperand
-               && logicalNotRightOperand.MemberName == "IsNullOrEmpty")
+               && logicalNotReferenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue logicalNotRightOperand)
             {
-                return NullOrEmptyStringStates(nps, logicalNotReferenceEqualsSymbolicValue);
+                if (logicalNotRightOperand.MemberName == isNullOrEmpty)
+                {
+                    return NullOrEmptyStringStates(nps, logicalNotReferenceEqualsSymbolicValue);
+                }
+
+                if (logicalNotRightOperand.MemberName == isNullOrWhiteSpace)
+                {
+                    return NullOrEmptyOrWhiteSpaceStringStates(nps, logicalNotReferenceEqualsSymbolicValue);
+                }
             }
 
             return new[] { nps };
@@ -740,18 +761,30 @@ namespace SonarAnalyzer.SymbolicExecution
                 : newProgramState;
 
             if (sv is ReferenceEqualsSymbolicValue referenceEqualsSymbolicValue
-                && referenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue rightOperand
-                && rightOperand.MemberName == "IsNullOrEmpty")
+                && referenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue rightOperand)
             {
-                return NullOrEmptyStringStates(nps, referenceEqualsSymbolicValue);
+                if (rightOperand.MemberName == isNullOrEmpty)
+                {
+                    return NullOrEmptyStringStates(nps, referenceEqualsSymbolicValue);
+                }
+                if (rightOperand.MemberName == isNullOrWhiteSpace)
+                {
+                    return NullOrEmptyOrWhiteSpaceStringStates(nps, referenceEqualsSymbolicValue);
+                }
             }
 
             if (sv is LogicalNotSymbolicValue logicalNotSymbolicValue
                 && logicalNotSymbolicValue.Operand is ReferenceEqualsSymbolicValue logicalNotReferenceEqualsSymbolicValue
-                && logicalNotReferenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue logicalNotRightOperand
-                && logicalNotRightOperand.MemberName == "IsNullOrEmpty")
+                && logicalNotReferenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue logicalNotRightOperand)
             {
-                return logicalNotReferenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.FullString, nps);
+                if (logicalNotRightOperand.MemberName == isNullOrEmpty)
+                {
+                    return logicalNotReferenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.FullString, nps);
+                }
+                if (logicalNotRightOperand.MemberName == isNullOrWhiteSpace)
+                {
+                    return logicalNotReferenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.FullNotWhiteSpaceString, nps);
+                }
             }
 
             return new[] { nps };
@@ -762,6 +795,14 @@ namespace SonarAnalyzer.SymbolicExecution
             var newProgramStateNull = referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(ObjectConstraint.Null, nps);
             var newProgramStateEmpty = referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.EmptyString, nps);
             return newProgramStateNull.Concat(newProgramStateEmpty);
+        }
+
+        private static IEnumerable<ProgramState> NullOrEmptyOrWhiteSpaceStringStates(ProgramState nps, ReferenceEqualsSymbolicValue referenceEqualsSymbolicValue)
+        {
+            var newProgramStateNull = referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(ObjectConstraint.Null, nps);
+            var newProgramStateEmpty = referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.EmptyString, nps);
+            var newProgramStateWhiteSpace = referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.WhiteSpaceString, nps);
+            return newProgramStateNull.Concat(newProgramStateEmpty).Concat(newProgramStateWhiteSpace);
         }
 
         #endregion Handle VisitBinaryBranch cases
