@@ -2512,7 +2512,7 @@ namespace Tests.Diagnostics
             string s4 = " ";
 
             if (string.IsNullOrWhiteSpace(s1)) // Noncompliant
-            {               
+            {       
             }
             // IsNullOrWhiteSpace is treated as isNull this can generate FN/FP depending on the case
 

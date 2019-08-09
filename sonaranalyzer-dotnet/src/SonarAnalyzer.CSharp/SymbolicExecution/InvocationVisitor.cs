@@ -133,8 +133,8 @@ namespace SonarAnalyzer.SymbolicExecution
             else if(newProgramState.HasConstraint(arg1, StringConstraint.FullString))
             {
                 newProgramState = newProgramState.SetConstraint(refEquals, BoolConstraint.False);
-            }        
-            return newProgramState;    
+            }
+            return newProgramState;
         }
 
         private ProgramState HandleStaticEqualsCall()

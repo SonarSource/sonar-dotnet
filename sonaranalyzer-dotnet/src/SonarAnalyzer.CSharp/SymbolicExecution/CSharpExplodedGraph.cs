@@ -719,13 +719,13 @@ namespace SonarAnalyzer.SymbolicExecution
                 && referenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue rightOperand
                 && rightOperand.MemberName == "IsNullOrEmpty")
             {
-                return referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.FullString, nps);             
+                return referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.FullString, nps);       
             }
 
             if (sv is LogicalNotSymbolicValue logicalNotSymbolicValue
                && logicalNotSymbolicValue.Operand is ReferenceEqualsSymbolicValue logicalNotReferenceEqualsSymbolicValue
-               && logicalNotReferenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue logicalNotrightOperand
-               && logicalNotrightOperand.MemberName == "IsNullOrEmpty")
+               && logicalNotReferenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue logicalNotRightOperand
+               && logicalNotRightOperand.MemberName == "IsNullOrEmpty")
             {
                 return NullOrEmptyStringStates(nps, logicalNotReferenceEqualsSymbolicValue);
             }
@@ -747,11 +747,11 @@ namespace SonarAnalyzer.SymbolicExecution
             }
 
             if (sv is LogicalNotSymbolicValue logicalNotSymbolicValue
-                && logicalNotSymbolicValue.Operand is ReferenceEqualsSymbolicValue logicalNotrReferenceEqualsSymbolicValue
-                && logicalNotrReferenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue logicalNotrightOperand
-                && logicalNotrightOperand.MemberName == "IsNullOrEmpty")
+                && logicalNotSymbolicValue.Operand is ReferenceEqualsSymbolicValue logicalNotReferenceEqualsSymbolicValue
+                && logicalNotReferenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue logicalNotRightOperand
+                && logicalNotRightOperand.MemberName == "IsNullOrEmpty")
             {
-                return logicalNotrReferenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.FullString, nps);
+                return logicalNotReferenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.FullString, nps);
             }
 
             return new[] { nps };
