@@ -116,6 +116,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     newProgramState, this.semanticModel)
                 .PushWithConstraint();
         }
+
         private ProgramState HandleStringNullOrEmptyCheckMethod()
         {
             var newProgramState = this.programState

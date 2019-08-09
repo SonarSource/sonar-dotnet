@@ -338,7 +338,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 programState = programState.SetConstraint(this, ObjectConstraint.NotNull);
             }
 
-            if (constraint == StringConstraint.EmptyString)
+            else if (constraint == StringConstraint.EmptyString)
             {
                 programState = programState.SetConstraint(this, StringConstraint.EmptyString);
                 programState = programState.SetConstraint(this, ObjectConstraint.NotNull);
