@@ -192,16 +192,14 @@ namespace SonarAnalyzer.SymbolicExecution
              methodName == methodSymbol.Name;
 
 
-        private static bool IsStringNullOrWhiteSpaceCheckMethod(IMethodSymbol methodSymbol)
-        {
-            return IsStringStaticMethod(methodSymbol, nameof(string.IsNullOrWhiteSpace));
-        }
+        private static bool IsStringNullOrWhiteSpaceCheckMethod(IMethodSymbol methodSymbol) =>
+            IsStringStaticMethod(methodSymbol, nameof(string.IsNullOrWhiteSpace));
+        
 
      
-        private static bool IsStringNullOrEmptyCheckMethod(IMethodSymbol methodSymbol)
-        {
-            return IsStringStaticMethod(methodSymbol, nameof(string.IsNullOrEmpty));
-        }
+        private static bool IsStringNullOrEmptyCheckMethod(IMethodSymbol methodSymbol) =>
+            IsStringStaticMethod(methodSymbol, nameof(string.IsNullOrEmpty));
+
 
         private static bool IsReferenceEqualsCall(IMethodSymbol methodSymbol)
         {
