@@ -43,8 +43,11 @@ namespace SonarAnalyzer
             {
                 writer.WriteLine($"// Skipping function {method.Identifier.ValueText}{GetAnonymousArgumentsString(method)}, it contains poisonous unsupported syntaxes");
                 writer.WriteLine();
+                MlirExporterMetrics.AddExportedFunction(false);
                 return;
             }
+
+            MlirExporterMetrics.AddExportedFunction(true);
             blockCounter = 0;
             blockMap.Clear();
 
@@ -98,29 +101,15 @@ namespace SonarAnalyzer
             {
                 return true;
             }
-            return method.DescendantNodes().Any(n =>
-            n.IsKind(SyntaxKind.ForEachStatement) ||
-            n.IsKind(SyntaxKind.AwaitExpression) ||
-            n.IsKind(SyntaxKind.YieldReturnStatement) ||
-            n.IsKind(SyntaxKind.YieldBreakStatement) ||
-            n.IsKind(SyntaxKind.TryStatement) ||
-            n.IsKind(SyntaxKind.UsingStatement) ||
-            n.IsKind(SyntaxKind.LogicalAndExpression) ||
-            n.IsKind(SyntaxKind.LogicalOrExpression) ||
-            n.IsKind(SyntaxKind.ConditionalExpression) ||
-            n.IsKind(SyntaxKind.ConditionalAccessExpression) ||
-            n.IsKind(SyntaxKind.CoalesceExpression) ||
-            n.IsKind(SyntaxKind.SwitchStatement) ||
-            n.IsKind(SyntaxKind.ParenthesizedLambdaExpression) ||
-            n.IsKind(SyntaxKind.SimpleLambdaExpression) ||
-            n.IsKind(SyntaxKind.FixedStatement) ||
-            n.IsKind(SyntaxKind.CheckedStatement) ||
-            n.IsKind(SyntaxKind.CheckedExpression) ||
-            n.IsKind(SyntaxKind.UncheckedExpression) ||
-            n.IsKind(SyntaxKind.UncheckedStatement) ||
-            n.IsKind(SyntaxKindEx.LocalFunctionStatement) ||
-            n.IsKind(SyntaxKind.GotoStatement)
-            );
+            foreach (var node in method.DescendantNodes())
+            {
+                if (unsupportedSyntaxes.Contains(node.Kind()))
+                {
+                    MlirExporterMetrics.AddUnsupportedSyntax(node.Kind());
+                    return true;
+                }
+            }
+            return false;
         }
 
         private void CreateEntryBlock(MethodDeclarationSyntax method)
@@ -187,7 +176,7 @@ namespace SonarAnalyzer
                                     writer.WriteLine($"%{OpId(ret)} = cbde.unknown : {functionReturnType} {GetLocation(ret)} // cast return value from unsupported type");
                                     writer.WriteLine($"return %{OpId(ret)} : {functionReturnType} {GetLocation(ret)}");
                                 }
-                                    
+
                             }
                             break;
                         case BreakStatementSyntax breakStmt:
@@ -573,6 +562,30 @@ namespace SonarAnalyzer
         private readonly Dictionary<SyntaxNode, int> opMap = new Dictionary<SyntaxNode, int>();
         private int opCounter = 0;
         private readonly Encoding encoder = System.Text.Encoding.GetEncoding("ASCII", new PreservingEncodingFallback(), DecoderFallback.ExceptionFallback);
+        public static readonly List<SyntaxKind> unsupportedSyntaxes = new List<SyntaxKind>
+        {
+            SyntaxKind.ForEachStatement,
+            SyntaxKind.AwaitExpression,
+            SyntaxKind.YieldReturnStatement,
+            SyntaxKind.YieldBreakStatement,
+            SyntaxKind.TryStatement,
+            SyntaxKind.UsingStatement,
+            SyntaxKind.LogicalAndExpression,
+            SyntaxKind.LogicalOrExpression,
+            SyntaxKind.ConditionalExpression,
+            SyntaxKind.ConditionalAccessExpression,
+            SyntaxKind.CoalesceExpression,
+            SyntaxKind.SwitchStatement,
+            SyntaxKind.ParenthesizedLambdaExpression,
+            SyntaxKind.SimpleLambdaExpression,
+            SyntaxKind.FixedStatement,
+            SyntaxKind.CheckedStatement,
+            SyntaxKind.CheckedExpression,
+            SyntaxKind.UncheckedExpression,
+            SyntaxKind.UncheckedStatement,
+            SyntaxKindEx.LocalFunctionStatement,
+            SyntaxKind.GotoStatement
+        };
 
         public int BlockId(Block cfgBlock) =>
             this.blockMap.GetOrAdd(cfgBlock, b => this.blockCounter++);
