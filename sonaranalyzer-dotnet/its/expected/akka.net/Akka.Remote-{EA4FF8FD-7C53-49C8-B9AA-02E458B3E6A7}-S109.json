@@ -106,45 +106,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\DaemonMsgCreateSerializer.cs",
-"region":  {
-"startLine":  39,
-"startColumn":  26,
-"endLine":  39,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MessageContainerSerializer.cs",
-"region":  {
-"startLine":  35,
-"startColumn":  26,
-"endLine":  35,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ProtobufSerializer.cs",
-"region":  {
-"startLine":  33,
-"startColumn":  26,
-"endLine":  33,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '32000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Helios\HeliosTransport.cs",

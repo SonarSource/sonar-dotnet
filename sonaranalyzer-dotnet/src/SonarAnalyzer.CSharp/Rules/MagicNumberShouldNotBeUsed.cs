@@ -72,7 +72,20 @@ namespace SonarAnalyzer.Rules.CSharp
             // It's ok to use magic numbers in pragma directives
             literalExpression.FirstAncestorOrSelf<PragmaWarningDirectiveTriviaSyntax>() != null ||
             // It's ok to use magic numbers in property declaration
-            literalExpression.FirstAncestorOrSelf<PropertyDeclarationSyntax>() != null
+            IsInsideProperty(literalExpression)
             ;
+
+        // Inside property we consider magic numbers as exceptions in the following cases:
+        //   - A {get; set;} = MAGIC_NUMBER
+        //   - A { get { return MAGIC_NUMBER; } }
+        private static bool IsInsideProperty(LiteralExpressionSyntax literalExpression)
+        {
+            if (literalExpression.FirstAncestorOrSelf<PropertyDeclarationSyntax>() == null)
+            {
+                return false;
+            }
+            var parent = literalExpression.Parent;
+            return parent is ReturnStatementSyntax || parent is EqualsValueClauseSyntax;
+        }
     }
 }
