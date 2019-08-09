@@ -64,19 +64,6 @@
 "endColumn":  35
 }
 }
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
-"region":  {
-"startLine":  36,
-"startColumn":  26,
-"endLine":  36,
-"endColumn":  27
-}
-}
 }
 ]
 }

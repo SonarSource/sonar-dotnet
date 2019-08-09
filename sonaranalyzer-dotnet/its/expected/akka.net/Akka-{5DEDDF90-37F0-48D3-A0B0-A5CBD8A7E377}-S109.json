@@ -184,19 +184,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '128' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\SocketAsyncEventArgsPool.cs",
-"region":  {
-"startLine":  35,
-"startColumn":  26,
-"endLine":  35,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
@@ -257,19 +244,6 @@
 "startColumn":  73,
 "endLine":  700,
 "endColumn":  75
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\ByteArraySerializer.cs",
-"region":  {
-"startLine":  33,
-"startColumn":  26,
-"endLine":  33,
-"endColumn":  27
 }
 }
 },

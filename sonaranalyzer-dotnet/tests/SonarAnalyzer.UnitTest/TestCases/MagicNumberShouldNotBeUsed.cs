@@ -7,6 +7,13 @@ namespace Tests.Diagnostics
         private const int MAGIC = 42;
         public readonly int MY_VALUE = 25;
 
+        public int A { get; set; } = 2;
+
+        public static double FooProp
+        {
+            get { return 2; }
+        }
+
         public ValidUseCases()
         {
             int i1 = 0;
@@ -44,6 +51,11 @@ namespace Tests.Diagnostics
 
     public class WrongUseCases
     {
+        public static double FooProp
+        {
+            get { return Math.Sqrt(4); } // Noncompliant
+        }
+
         public WrongUseCases()
         {
             Console.WriteLine(12); // Noncompliant

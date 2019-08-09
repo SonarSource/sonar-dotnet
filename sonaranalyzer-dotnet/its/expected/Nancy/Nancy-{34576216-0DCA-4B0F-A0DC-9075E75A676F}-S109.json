@@ -1042,45 +1042,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNode.cs",
-"region":  {
-"startLine":  15,
-"startColumn":  26,
-"endLine":  15,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2000' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithConstraint.cs",
-"region":  {
-"startLine":  22,
-"startColumn":  26,
-"endLine":  22,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithDefaultValue.cs",
-"region":  {
-"startLine":  19,
-"startColumn":  26,
-"endLine":  19,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithDefaultValue.cs",
@@ -1089,71 +1050,6 @@
 "startColumn":  36,
 "endLine":  67,
 "endColumn":  37
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
-"region":  {
-"startLine":  65,
-"startColumn":  26,
-"endLine":  65,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\GreedyRegExCaptureNode.cs",
-"region":  {
-"startLine":  25,
-"startColumn":  26,
-"endLine":  25,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '10000' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\LiteralNode.cs",
-"region":  {
-"startLine":  15,
-"startColumn":  26,
-"endLine":  15,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\OptionalCaptureNode.cs",
-"region":  {
-"startLine":  17,
-"startColumn":  26,
-"endLine":  17,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\RegExNode.cs",
-"region":  {
-"startLine":  19,
-"startColumn":  26,
-"endLine":  19,
-"endColumn":  30
 }
 }
 },
