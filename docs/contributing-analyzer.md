@@ -49,6 +49,11 @@ the changes you have made have impacted one or many issues raised by the rules.
 
 Note: if you are facing compilation errors on Windows 10 due to unknown characters, disable `beta use unicode utf-8 for worldwide language support` from your `Region Settings`.
 
+#### Updating the references
+You can run `.\update-expected.ps1` to update the list of expected issues. Please review all added/removed/updated issues to confirm they are wanted. Only after reviewing each difference do the commit.
+
+_Note: Integration tests build the code to analyze. If you have an antivirus program on your computer, this may fail with some error messages about an executable file that cannot be open for writing. If this happens, look at the antivirus logs for confirmation, and contact IT team to add an rule to your antivirus program..._
+
 #### Manual differences review
 You can visualize the differences using:
 
@@ -62,9 +67,6 @@ If you run the project `ReviewDiffs` in debug mode from Visual Studio, it will p
 *Disclaimer*: This program is still very new and the paint is still very wet. It may not work in all situations, but it's easy to update it ??.
 
 *PS*: This program outputs message in a way that is compatible with the [VsColorOutput](https://marketplace.visualstudio.com/items?itemName=MikeWard-AnnArbor.VSColorOutput) extension, so that errors are colored in red, and differences are colored like warnings.
-#### Updating the references
-Please review all added/removed/updated issue to confirm they are wanted. When this is done run `.\update-expected.ps1` to update the list of expected issues.
-Note: Integration tests build the code to analyze. If you have an antivirus program on your computer, this may fail with some error messages about an executable file that cannot be open for writing. If this happens, look at the antivirus logs for confirmation, and contact IT team to add an rule to your antivirus program...
 
 ### Manual Tests
 
