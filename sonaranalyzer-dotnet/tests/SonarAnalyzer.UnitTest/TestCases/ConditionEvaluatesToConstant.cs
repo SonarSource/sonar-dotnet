@@ -2292,101 +2292,129 @@ namespace Tests.Diagnostics
 
     public class StringComparision
     {
-        public void Method(string s)
+        public void Method(string parameterString)
         {
-            string s1 = "";
-            string s2 = "";
-            string s3 = null;
-            string s4 = null;
-            string s5 = "a";
-            string s6 = "a";
-            string s7 = "b";
-            string s8 = " ";
-            string s9 = " ";
+            string emptyString1 = "";
+            string emptyString2 = "";
+            string nullString1 = null;
+            string nullString2 = null;
+            string fullStringa1 = "a";
+            string fullStringa2 = "a";
+            string fullStringb = "b";
+            string whiteSpaceString1 = " ";
+            string whiteSpaceString2 = " ";
+            string doubleWhiteSpaceString1 = "  ";
+            string doubleWhiteSpaceString2 = "   ";
 
-            if (s1 == s2) // Noncompliant
+            if (emptyString1 == emptyString2) // Noncompliant
             {
 
             }
-            if (s3 == s4) // Noncompliant
-            {
-
-            }
-
-            if (s5 == s6)
-            {
-
-            }
-
-            if (s5 == s7)
+            if (nullString1 == nullString2) // Noncompliant
             {
 
             }
 
-            if (s == s1)
+            if (fullStringa1 == fullStringa2)
             {
 
             }
 
-            if (s == s3)
+            if (fullStringa1 == fullStringb)
             {
 
             }
 
-            if (s1 == s3) // Noncompliant
+            if (parameterString == emptyString1)
+            {
+
+            }
+
+            if (parameterString == nullString1)
+            {
+
+            }
+
+            if (emptyString1 == nullString1) // Noncompliant
             { // Secondary
 
             }
 
-            if (s1 == s5) // Noncompliant
+            if (emptyString1 == fullStringa1) // Noncompliant
             { // Secondary
 
             }
 
-            if (s3 == s5) // Noncompliant
+            if (nullString1 == fullStringa1) // Noncompliant
             { // Secondary
 
             }
 
-            if (s5 == "") // Noncompliant
+            if (fullStringa1 == "") // Noncompliant
             { // Secondary
 
             }
 
-            if (s5 == null) // Noncompliant
+            if (fullStringa1 == null) // Noncompliant
             { // Secondary
 
             }
 
-            if (s8 == s9) // Noncompliant
+            if (whiteSpaceString1 == whiteSpaceString2) // Noncompliant
             {
 
             }
 
-            if (s8 == " ") // Noncompliant FP thay worth ignoring to avoid introducing more complex string constraints
+            if (whiteSpaceString1 == " ") // Noncompliant FP thay worth ignoring to avoid introducing more complex string constraints
             {
 
             }
 
-            if (s8 == s1) // Noncompliant
+            if (whiteSpaceString1 == emptyString1) // Noncompliant
             { // Secondary
 
             }
 
-            if (s8 == s3) // Noncompliant
+            if (whiteSpaceString1 == nullString1) // Noncompliant
             { // Secondary
 
             }
 
-            if (s8 == s5) // Noncompliant
+            if (whiteSpaceString1 == fullStringa1) // Noncompliant
             { // Secondary
 
             }
 
-            if (s8 == s)
+            if (whiteSpaceString1 == parameterString)
             {
 
             }
+
+            if (doubleWhiteSpaceString1 == doubleWhiteSpaceString2) // Noncompliant
+            {
+
+            }
+
+            if (doubleWhiteSpaceString1 == emptyString1) // Noncompliant
+            { // Secondary
+
+            }
+
+            if (doubleWhiteSpaceString1 == nullString1) // Noncompliant
+            { // Secondary
+
+            }
+
+            if (doubleWhiteSpaceString1 == fullStringa1) // Noncompliant
+            { // Secondary
+
+            }
+
+            if (doubleWhiteSpaceString1 == parameterString)
+            {
+
+            }
+
         }
     }
 

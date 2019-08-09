@@ -38,6 +38,9 @@ namespace SonarAnalyzer.SymbolicExecution
 {
     internal class CSharpExplodedGraph : AbstractExplodedGraph
     {
+        private const string isNullOrEmpty = "IsNullOrEmpty";
+        private const string isNullOrWhiteSpace = "IsNullOrWhiteSpace";
+
         public CSharpExplodedGraph(IControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel, AbstractLiveVariableAnalysis lva)
             : base(cfg, declaration, semanticModel, lva)
         {
@@ -723,11 +726,11 @@ namespace SonarAnalyzer.SymbolicExecution
             if (sv is ReferenceEqualsSymbolicValue referenceEqualsSymbolicValue
                 && referenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue rightOperand)
             {
-                if (rightOperand.MemberName == "IsNullOrEmpty")
+                if (rightOperand.MemberName == isNullOrEmpty)
                 {
                     return referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.FullString, nps);
                 }
-                if (rightOperand.MemberName == "IsNullOrWhiteSpace")
+                if (rightOperand.MemberName == isNullOrWhiteSpace)
                 {
                     return referenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.FullNotWhiteSpaceString, nps);
                 }
@@ -737,12 +740,12 @@ namespace SonarAnalyzer.SymbolicExecution
                && logicalNotSymbolicValue.Operand is ReferenceEqualsSymbolicValue logicalNotReferenceEqualsSymbolicValue
                && logicalNotReferenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue logicalNotRightOperand)
             {
-                if (logicalNotRightOperand.MemberName == "IsNullOrEmpty")
+                if (logicalNotRightOperand.MemberName == isNullOrEmpty)
                 {
                     return NullOrEmptyStringStates(nps, logicalNotReferenceEqualsSymbolicValue);
                 }
 
-                if (logicalNotRightOperand.MemberName == "IsNullOrWhiteSpace")
+                if (logicalNotRightOperand.MemberName == isNullOrWhiteSpace)
                 {
                     return NullOrEmptyOrWhiteSpaceStringStates(nps, logicalNotReferenceEqualsSymbolicValue);
                 }
@@ -760,11 +763,11 @@ namespace SonarAnalyzer.SymbolicExecution
             if (sv is ReferenceEqualsSymbolicValue referenceEqualsSymbolicValue
                 && referenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue rightOperand)
             {
-                if (rightOperand.MemberName == "IsNullOrEmpty")
+                if (rightOperand.MemberName == isNullOrEmpty)
                 {
                     return NullOrEmptyStringStates(nps, referenceEqualsSymbolicValue);
                 }
-                if (rightOperand.MemberName == "IsNullOrWhiteSpace")
+                if (rightOperand.MemberName == isNullOrWhiteSpace)
                 {
                     return NullOrEmptyOrWhiteSpaceStringStates(nps, referenceEqualsSymbolicValue);
                 }
@@ -774,11 +777,11 @@ namespace SonarAnalyzer.SymbolicExecution
                 && logicalNotSymbolicValue.Operand is ReferenceEqualsSymbolicValue logicalNotReferenceEqualsSymbolicValue
                 && logicalNotReferenceEqualsSymbolicValue.RightOperand is MemberAccessSymbolicValue logicalNotRightOperand)
             {
-                if (logicalNotRightOperand.MemberName == "IsNullOrEmpty")
+                if (logicalNotRightOperand.MemberName == isNullOrEmpty)
                 {
                     return logicalNotReferenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.FullString, nps);
                 }
-                if (logicalNotRightOperand.MemberName == "IsNullOrWhiteSpace")
+                if (logicalNotRightOperand.MemberName == isNullOrWhiteSpace)
                 {
                     return logicalNotReferenceEqualsSymbolicValue.LeftOperand.TrySetConstraint(StringConstraint.FullNotWhiteSpaceString, nps);
                 }
