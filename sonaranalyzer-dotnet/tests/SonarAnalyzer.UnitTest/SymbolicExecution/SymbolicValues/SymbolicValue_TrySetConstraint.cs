@@ -39,6 +39,9 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         [DynamicData(nameof(EmptyStringConstraintData), DynamicDataSourceType.Property)]
         [DynamicData(nameof(FullStringConstraintData), DynamicDataSourceType.Property)]
         [DynamicData(nameof(FullOrNullStringConstraintData), DynamicDataSourceType.Property)]
+        [DynamicData(nameof(WhiteSpaceStringConstraintData), DynamicDataSourceType.Property)]
+        [DynamicData(nameof(FullNotWhiteSpaceStringConstraintData), DynamicDataSourceType.Property)]
+        [DynamicData(nameof(NotWhiteSpaceStringConstraintData), DynamicDataSourceType.Property)]
         public void TrySetConstraint(SymbolicValueConstraint constraint,
             IList<SymbolicValueConstraint> existingConstraints,
             IList<IList<SymbolicValueConstraint>> expectedConstraintsPerProgramState)
@@ -178,6 +181,18 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
                 ConstraintList(StringConstraint.FullString), // existing
                 ProgramStateList() // Expected
             },
+            new object[]
+            {
+                ObjectConstraint.Null, // constraint to set
+                ConstraintList(StringConstraint.WhiteSpaceString), // existing
+                ProgramStateList() // Expected
+            },
+            new object[]
+            {
+                ObjectConstraint.Null, // constraint to set
+                ConstraintList(StringConstraint.FullNotWhiteSpaceString), // existing
+                ProgramStateList() // Expected
+            },
         };
 
         public static IEnumerable<object[]> NotNullConstraintData { get; } = new[]
@@ -223,6 +238,18 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
                 ObjectConstraint.NotNull, // constraint to set
                 ConstraintList(StringConstraint.FullString), // existing
                 ProgramStateList(ConstraintList(ObjectConstraint.NotNull, StringConstraint.FullString)) // Expected
+            },
+            new object[]
+            {
+                ObjectConstraint.NotNull, // constraint to set
+                ConstraintList(StringConstraint.WhiteSpaceString), // existing
+                ProgramStateList(ConstraintList(ObjectConstraint.NotNull, StringConstraint.WhiteSpaceString)) // Expected
+            },
+            new object[]
+            {
+                ObjectConstraint.NotNull, // constraint to set
+                ConstraintList(StringConstraint.FullNotWhiteSpaceString), // existing
+                ProgramStateList(ConstraintList(ObjectConstraint.NotNull, StringConstraint.FullNotWhiteSpaceString)) // Expected
             },
         };
 
@@ -290,6 +317,18 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
                 ConstraintList(ObjectConstraint.NotNull), // existing
                 ProgramStateList(ConstraintList(ObjectConstraint.NotNull, StringConstraint.EmptyString)) // Expected
             },
+             new object[]
+            {
+                StringConstraint.EmptyString, // constraint to set
+                ConstraintList(StringConstraint.WhiteSpaceString), // existing
+                ProgramStateList() // Expected
+            },
+            new object[]
+            {
+                StringConstraint.EmptyString, // constraint to set
+                ConstraintList(StringConstraint.FullNotWhiteSpaceString), // existing
+                ProgramStateList() // Expected
+            },
         };
 
         public static IEnumerable<object[]> FullStringConstraintData { get; } = new[]
@@ -324,10 +363,114 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
                 ConstraintList(ObjectConstraint.NotNull), // existing
                 ProgramStateList(ConstraintList(ObjectConstraint.NotNull, StringConstraint.FullString)) // Expected
             },
+            new object[]
+            {
+                StringConstraint.FullString, // constraint to set
+                ConstraintList(StringConstraint.WhiteSpaceString), // existing
+                ProgramStateList(ConstraintList(StringConstraint.WhiteSpaceString)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.FullString, // constraint to set
+                ConstraintList(StringConstraint.FullNotWhiteSpaceString), // existing
+                ProgramStateList(ConstraintList(StringConstraint.FullNotWhiteSpaceString)) // Expected
+            },
+        };
+
+        public static IEnumerable<object[]> FullNotWhiteSpaceStringConstraintData { get; } = new[]
+        {
+            new object[]
+            {
+                StringConstraint.FullNotWhiteSpaceString, // constraint to set
+                ConstraintList(), // existing
+                ProgramStateList(ConstraintList(StringConstraint.FullNotWhiteSpaceString, ObjectConstraint.NotNull)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.FullNotWhiteSpaceString, // constraint to set
+                ConstraintList(StringConstraint.EmptyString), // existing
+                ProgramStateList() // Expected
+            },
+            new object[]
+            {
+                StringConstraint.FullNotWhiteSpaceString, // constraint to set
+                ConstraintList(StringConstraint.FullString), // existing
+                ProgramStateList(ConstraintList(StringConstraint.FullNotWhiteSpaceString)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.FullNotWhiteSpaceString, // constraint to set
+                ConstraintList(ObjectConstraint.Null), // existing
+                ProgramStateList() // Expected
+            },
+            new object[]
+            {
+                StringConstraint.FullNotWhiteSpaceString, // constraint to set
+                ConstraintList(ObjectConstraint.NotNull), // existing
+                ProgramStateList(ConstraintList(ObjectConstraint.NotNull, StringConstraint.FullNotWhiteSpaceString)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.FullNotWhiteSpaceString, // constraint to set
+                ConstraintList(StringConstraint.WhiteSpaceString), // existing
+                ProgramStateList() // Expected
+            },
+            new object[]
+            {
+                StringConstraint.FullNotWhiteSpaceString, // constraint to set
+                ConstraintList(StringConstraint.FullNotWhiteSpaceString), // existing
+                ProgramStateList(ConstraintList(StringConstraint.FullNotWhiteSpaceString)) // Expected
+            },
+        };
+
+        public static IEnumerable<object[]> WhiteSpaceStringConstraintData { get; } = new[]
+        {
+            new object[]
+            {
+                StringConstraint.WhiteSpaceString, // constraint to set
+                ConstraintList(), // existing
+                ProgramStateList(ConstraintList(StringConstraint.WhiteSpaceString, ObjectConstraint.NotNull)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.WhiteSpaceString, // constraint to set
+                ConstraintList(StringConstraint.EmptyString), // existing
+                ProgramStateList() // Expected
+            },
+            new object[]
+            {
+                StringConstraint.WhiteSpaceString, // constraint to set
+                ConstraintList(StringConstraint.FullString), // existing
+                ProgramStateList(ConstraintList(StringConstraint.WhiteSpaceString)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.WhiteSpaceString, // constraint to set
+                ConstraintList(ObjectConstraint.Null), // existing
+                ProgramStateList() // Expected
+            },
+            new object[]
+            {
+                StringConstraint.WhiteSpaceString, // constraint to set
+                ConstraintList(ObjectConstraint.NotNull), // existing
+                ProgramStateList(ConstraintList(ObjectConstraint.NotNull, StringConstraint.WhiteSpaceString)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.WhiteSpaceString, // constraint to set
+                ConstraintList(StringConstraint.WhiteSpaceString), // existing
+                ProgramStateList(ConstraintList(StringConstraint.WhiteSpaceString)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.WhiteSpaceString, // constraint to set
+                ConstraintList(StringConstraint.FullNotWhiteSpaceString), // existing
+                ProgramStateList() // Expected
+            },
         };
 
         public static IEnumerable<object[]> FullOrNullStringConstraintData { get; } = new[]
-{
+        {
             new object[]
             {
                 StringConstraint.FullOrNullString, // constraint to set
@@ -356,7 +499,65 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             {
                 StringConstraint.FullOrNullString, // constraint to set
                 ConstraintList(ObjectConstraint.NotNull), // existing
-                ProgramStateList(ConstraintList(ObjectConstraint.NotNull)) // Expected
+                ProgramStateList(ConstraintList(ObjectConstraint.NotNull, StringConstraint.FullString)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.FullOrNullString, // constraint to set
+                ConstraintList(StringConstraint.WhiteSpaceString), // existing
+                ProgramStateList(ConstraintList(StringConstraint.WhiteSpaceString)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.FullOrNullString, // constraint to set
+                ConstraintList(StringConstraint.FullNotWhiteSpaceString), // existing
+                ProgramStateList(ConstraintList(StringConstraint.FullNotWhiteSpaceString)) // Expected
+            },
+        };
+
+        public static IEnumerable<object[]> NotWhiteSpaceStringConstraintData { get; } = new[]
+        {
+            new object[]
+            {
+                StringConstraint.NotWhiteSpaceString, // constraint to set
+                ConstraintList(), // existing
+                ProgramStateList(ConstraintList()) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.NotWhiteSpaceString, // constraint to set
+                ConstraintList(StringConstraint.EmptyString), // existing
+                ProgramStateList(ConstraintList(StringConstraint.EmptyString)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.NotWhiteSpaceString, // constraint to set
+                ConstraintList(StringConstraint.FullString), // existing
+                ProgramStateList(ConstraintList(StringConstraint.FullString)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.NotWhiteSpaceString, // constraint to set
+                ConstraintList(ObjectConstraint.Null), // existing
+                ProgramStateList(ConstraintList(ObjectConstraint.Null)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.NotWhiteSpaceString, // constraint to set
+                ConstraintList(ObjectConstraint.NotNull), // existing
+                ProgramStateList(ConstraintList(ObjectConstraint.NotNull, StringConstraint.FullNotWhiteSpaceString)) // Expected
+            },
+            new object[]
+            {
+                StringConstraint.NotWhiteSpaceString, // constraint to set
+                ConstraintList(StringConstraint.WhiteSpaceString), // existing
+                ProgramStateList() // Expected
+            },
+            new object[]
+            {
+                StringConstraint.NotWhiteSpaceString, // constraint to set
+                ConstraintList(StringConstraint.FullNotWhiteSpaceString), // existing
+                ProgramStateList(ConstraintList(StringConstraint.FullNotWhiteSpaceString)) // Expected
             },
         };
 

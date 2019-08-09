@@ -107,14 +107,21 @@ namespace SonarAnalyzer.SymbolicExecution
         {
             var newProgramState = this.programState
                 .PopValue(out var arg1)
-                .PopValue();
+                .PopValue(out var arg2);
 
-            // Handle string.IsNullOrWhiteSpace(arg1) as if it was arg1 == null
-            return new ReferenceEqualsConstraintHandler(arg1, SymbolicValue.Null,
-                    this.invocation.ArgumentList.Arguments[0].Expression,
-                    null,
-                    newProgramState, this.semanticModel)
-                .PushWithConstraint();
+            var refEquals = new ReferenceEqualsSymbolicValue(arg1, arg2);
+            newProgramState = newProgramState.PushValue(refEquals);
+            if (newProgramState.HasConstraint(arg1, ObjectConstraint.Null) ||
+                    newProgramState.HasConstraint(arg1, StringConstraint.EmptyString) ||
+                    newProgramState.HasConstraint(arg1, StringConstraint.WhiteSpaceString))
+            {
+                newProgramState = newProgramState.SetConstraint(refEquals, BoolConstraint.True);
+            }
+            else if (newProgramState.HasConstraint(arg1, StringConstraint.FullNotWhiteSpaceString))
+            {
+                newProgramState = newProgramState.SetConstraint(refEquals, BoolConstraint.False);
+            }
+            return newProgramState;
         }
 
         private ProgramState HandleStringNullOrEmptyCheckMethod()
@@ -130,7 +137,9 @@ namespace SonarAnalyzer.SymbolicExecution
             {
                 newProgramState= newProgramState.SetConstraint(refEquals, BoolConstraint.True);
             }
-            else if(newProgramState.HasConstraint(arg1, StringConstraint.FullString))
+            else if(newProgramState.HasConstraint(arg1, StringConstraint.FullString) ||
+                        newProgramState.HasConstraint(arg1, StringConstraint.WhiteSpaceString) ||
+                        newProgramState.HasConstraint(arg1, StringConstraint.FullNotWhiteSpaceString))
             {
                 newProgramState = newProgramState.SetConstraint(refEquals, BoolConstraint.False);
             }

@@ -788,7 +788,7 @@ namespace Tests.Diagnostics
             if (string.IsNullOrEmpty(s)) { } // Noncompliant
 
             if (string.IsNullOrWhiteSpace(s)) { } // Noncompliant
-            //Secondary@-1
+            
             if (string.IsNullOrEmpty(s1)) { } // Compliant, we don't know anything about the argument
 
             if (string.IsNullOrWhiteSpace(s1)) { } // Compliant
@@ -2301,6 +2301,9 @@ namespace Tests.Diagnostics
             string s5 = "a";
             string s6 = "a";
             string s7 = "b";
+            string s8 = " ";
+            string s9 = " ";
+
             if (s1 == s2) // Noncompliant
             {
 
@@ -2352,6 +2355,36 @@ namespace Tests.Diagnostics
 
             if (s5 == null) // Noncompliant
             { // Secondary
+
+            }
+
+            if (s8 == s9) // Noncompliant
+            {
+
+            }
+
+            if (s8 == " ") // Noncompliant FP thay worth ignoring to avoid introducing more complex string constraints
+            {
+
+            }
+
+            if (s8 == s1) // Noncompliant
+            { // Secondary
+
+            }
+
+            if (s8 == s3) // Noncompliant
+            { // Secondary
+
+            }
+
+            if (s8 == s5) // Noncompliant
+            { // Secondary
+
+            }
+
+            if (s8 == s)
+            {
 
             }
         }
@@ -2514,40 +2547,40 @@ namespace Tests.Diagnostics
             if (string.IsNullOrWhiteSpace(s1)) // Noncompliant
             {       
             }
-            // IsNullOrWhiteSpace is treated as isNull this can generate FN/FP depending on the case
+            
 
             if (string.IsNullOrWhiteSpace(s2)) // Noncompliant 
-            { // Secondary FP should always evaluate to true instead of false
-                if (s2 == "a") // FN
-                {
+            {
+                if (s2 == "a") // Noncompliant 
+                { // Secondary
 
                 }
             }
 
-            if (string.IsNullOrWhiteSpace(s3)) // Noncompliant FP should not trigger at all
-            { // Secondary
+            if (string.IsNullOrWhiteSpace(s3))
+            {
 
             }
 
-            if (string.IsNullOrWhiteSpace(s4)) // Noncompliant 
-            { // Secondary FP should always evaluate to true instead of false
+            if (string.IsNullOrWhiteSpace(s4)) // Noncompliant
+            {
 
             }
 
-            if (string.IsNullOrWhiteSpace(s4)) // Noncompliant FP should not trigger at all
+            if (!string.IsNullOrWhiteSpace(s4)) // Noncompliant
             { // Secondary
 
             }
 
             if (!string.IsNullOrWhiteSpace(s))
             {
-                if (s == "") // FN
-                {
+                if (s == "") // Noncompliant
+                { // Secondary
 
                 }
 
-                if (s == "  ") // FN
-                {
+                if (s == " ") // Noncompliant
+                { // Secondary
 
                 }
             }
