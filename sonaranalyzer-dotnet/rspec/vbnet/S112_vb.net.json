@@ -10,9 +10,6 @@
     "cwe",
     "error-handling"
   ],
-  "standards": [
-    "CWE"
-  ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-112",
   "sqKey": "S112",

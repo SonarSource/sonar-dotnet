@@ -9,9 +9,6 @@
   "tags": [
     "owasp-a3"
   ],
-  "standards": [
-    "OWASP Top 10"
-  ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-1313",
   "sqKey": "S1313",
