@@ -13,7 +13,7 @@ In general, it is best to run commands from the Visual Studio Developer Command 
 ## Developing with Visual Studio 2017
 
 1. [Visual Studio 2017 Version 15.7](https://www.visualstudio.com/vs/preview/)
-    - Ensure C#, VB, MSBuild, .NET Core and Visual Studio Extensibility are included in the selected work loads
+    - Ensure C#, VB, MSBuild, .NET Core, F# and Visual Studio Extensibility are included in the selected work loads
     - Ensure Visual Studio Version is between "15.7" and "15.9"
 1. [.NET Core SDK 2.1.402](https://www.microsoft.com/net/download/core) (the current previews are: [Windows x64 installer](https://dotnetcli.blob.core.windows.net/dotnet/Sdk/2.1.300-rtm-008866/dotnet-sdk-2.1.300-rtm-008866-win-x64.exe), [Windows x86 installer](https://dotnetcli.blob.core.windows.net/dotnet/Sdk/2.1.300-rtm-008866/dotnet-sdk-2.1.300-rtm-008866-win-x86.exe))
 1. Open `SonarAnalyzer.sln` in the `sonaranalyzer-dotnet` subfolder
