@@ -11,11 +11,6 @@
     "sans-top25-insecure",
     "owasp-a7"
   ],
-  "standards": [
-    "CWE",
-    "OWASP Top 10",
-    "SANS Top 25"
-  ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-4564",
   "sqKey": "S4564",

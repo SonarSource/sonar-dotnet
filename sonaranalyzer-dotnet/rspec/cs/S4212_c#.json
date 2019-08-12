@@ -10,9 +10,6 @@
     "serialization",
     "owasp-a8"
   ],
-  "standards": [
-    "OWASP Top 10"
-  ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-4212",
   "sqKey": "S4212",

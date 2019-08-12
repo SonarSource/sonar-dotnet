@@ -11,10 +11,6 @@
     "overflow",
     "sans-top25-risky"
   ],
-  "standards": [
-    "CWE",
-    "SANS Top 25"
-  ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-2184",
   "sqKey": "S2184",

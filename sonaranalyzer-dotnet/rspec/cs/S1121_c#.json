@@ -10,9 +10,6 @@
     "cwe",
     "suspicious"
   ],
-  "standards": [
-    "CWE"
-  ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-1121",
   "sqKey": "S1121",

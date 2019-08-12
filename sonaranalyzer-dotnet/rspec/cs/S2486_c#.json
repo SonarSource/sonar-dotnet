@@ -12,10 +12,6 @@
     "owasp-a10",
     "suspicious"
   ],
-  "standards": [
-    "CWE",
-    "OWASP Top 10"
-  ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-2486",
   "sqKey": "S2486",

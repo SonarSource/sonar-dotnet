@@ -10,9 +10,6 @@
     "owasp-a6",
     "pitfall"
   ],
-  "standards": [
-    "OWASP Top 10"
-  ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-4211",
   "sqKey": "S4211",

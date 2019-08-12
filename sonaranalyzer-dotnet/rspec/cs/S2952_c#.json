@@ -10,9 +10,6 @@
     "cwe",
     "denial-of-service"
   ],
-  "standards": [
-    "CWE"
-  ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-2952",
   "sqKey": "S2952",

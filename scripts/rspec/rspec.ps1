@@ -36,7 +36,7 @@ $ErrorActionPreference = "Stop"
 $RuleTemplateFolder = "${PSScriptRoot}\\rspec-templates"
 
 # Update the following variable when a new version of rule-api has to be used.
-$rule_api_version = "1.24.1.1300"
+$rule_api_version = "1.24.2.1313"
 $rule_api_error = "Download Rule-api from " + `
     "'https://repox.jfrog.io/repox/sonarsource-private-releases/com/sonarsource/rule-api/rule-api/${rule_api_version}' " +`
     "to a folder and set the %rule_api_path% environment variable with the full path of that folder. For example 'c:\\work\\tools'."
