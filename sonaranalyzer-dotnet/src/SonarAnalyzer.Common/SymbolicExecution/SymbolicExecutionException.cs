@@ -12,8 +12,5 @@ namespace SonarAnalyzer.SymbolicExecution
         public SymbolicExecutionException(string message) : base(message) { }
 
         public SymbolicExecutionException(string message, Exception innerException) : base(message, innerException) { }
-
-        [ExcludeFromCodeCoverage]
-        protected SymbolicExecutionException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
 }
