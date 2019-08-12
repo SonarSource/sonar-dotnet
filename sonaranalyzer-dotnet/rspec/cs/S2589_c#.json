@@ -10,9 +10,6 @@
     "cwe",
     "redundant"
   ],
-  "standards": [
-    "CWE"
-  ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-2589",
   "sqKey": "S2589",

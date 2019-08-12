@@ -10,9 +10,6 @@
     "cwe",
     "denial-of-service"
   ],
-  "standards": [
-    "CWE"
-  ],
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-2930",
   "sqKey": "S2930",

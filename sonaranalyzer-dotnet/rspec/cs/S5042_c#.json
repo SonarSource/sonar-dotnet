@@ -10,10 +10,6 @@
     "cwe",
     "owasp-a1"
   ],
-  "standards": [
-    "CWE",
-    "OWASP Top 10"
-  ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-5042",
   "sqKey": "S5042",
