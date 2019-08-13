@@ -15,7 +15,6 @@ namespace SonarAnalyzer.Rules.CSharp
     public class MlirGenerator : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1234";
-        internal static int id = 0;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
             ImmutableArray.Create(
@@ -28,6 +27,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var declaration = (MethodDeclarationSyntax)c.Node;
+
                     WriteMlir(declaration, c.SemanticModel);
                 },
                 SyntaxKind.MethodDeclaration);
@@ -38,8 +38,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             try
             {
-                var path = Path.Combine(Path.GetTempPath(), $"csharp.{node.Identifier}.{id.ToString()}.mlir");
-                ++id;
+                // Get random file name to have a unique id for mlir
+                var path = Path.Combine(Path.GetTempPath(), $"csharp.{Path.GetFileNameWithoutExtension(node.SyntaxTree.FilePath)}.{node.Identifier}.{Path.GetRandomFileName()}.mlir");
                 using (var writer = new StreamWriter(path))
                 {
                     var exporter = new MLIRExporter(writer, semanticModel, false);
