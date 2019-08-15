@@ -15,18 +15,18 @@ namespace SonarAnalyzer.UnitTest
     [TestClass]
     public class MlirExportTest
     {
-        private static string mlirCheckerPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "mlir-cbde.exe");
+        private static string cbdeDialectCheckerPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "cbde-dialect-checker.exe");
         [ClassInitialize]
         public static void checkExecutableExists(TestContext tc)
         {
-            Assert.IsTrue(File.Exists(mlirCheckerPath), "We need mlir-cbde.exe to validate the generated IR");
+            Assert.IsTrue(File.Exists(cbdeDialectCheckerPath), "We need cbde-dialect-checker.exe to validate the generated IR");
         }
 
         public static void ValidateIR(string path)
         {
             var pi = new ProcessStartInfo
             {
-                FileName = mlirCheckerPath,
+                FileName = cbdeDialectCheckerPath,
                 Arguments = '"' + path + '"',
                 UseShellExecute = false,
                 // RedirectStandardOutput = true,
