@@ -24,6 +24,10 @@
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
   </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
 
   <!--
     This PropertyGroup is used as a hack to prevent the NU1605 issue to be reported as an error. The rule is detecting

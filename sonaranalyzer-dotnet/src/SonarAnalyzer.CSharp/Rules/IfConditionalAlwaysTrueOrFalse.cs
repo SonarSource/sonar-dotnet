@@ -43,7 +43,6 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(TreatNode, SyntaxKind.IfStatement);
-            context.RegisterCompilationAction(CallCbdeAndReconcile);
         }
 
         protected override bool ConditionIsTrueLiteral(IfStatementSyntax ifSyntax) =>
@@ -71,33 +70,6 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, ifSyntax.Else.GetLocation(), elseClauseLiteral));
             }
-        }
-
-        private void CallCbdeAndReconcile(CompilationAnalysisContext context)
-        {
-            CallCbde();
-            ReconcileCbdeResults();
-        }
-
-        private void CallCbde()
-        {
-            using (System.Diagnostics.Process pProcess = new System.Diagnostics.Process())
-            {
-                pProcess.StartInfo.FileName = @"C:\Users\Vitor\ConsoleApplication1.exe";
-                pProcess.StartInfo.Arguments = "olaa"; //argument
-                pProcess.StartInfo.UseShellExecute = false;
-                pProcess.StartInfo.RedirectStandardOutput = true;
-                pProcess.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                pProcess.StartInfo.CreateNoWindow = true; //not diplay a windows
-                pProcess.Start();
-                string output = pProcess.StandardOutput.ReadToEnd(); //The output result
-                pProcess.WaitForExit();
-            }
-        }
-
-        private void ReconcileCbdeResults()
-        {
-
         }
     }
 }

@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Windows;
 using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,7 +14,7 @@ namespace SonarAnalyzer.UnitTest
     [TestClass]
     public class MlirExportTest
     {
-        private static string cbdeDialectCheckerPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "cbde-dialect-checker.exe");
+        private static string cbdeDialectCheckerPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "CBDE/cbde-dialect-checker.exe");
         [ClassInitialize]
         public static void checkExecutableExists(TestContext tc)
         {

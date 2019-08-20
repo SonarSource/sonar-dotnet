@@ -94,7 +94,7 @@
     <Content Include="ResourceTests\ProjectOutFolderPath.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="..\..\..\..\SonarCBDE\build\intermediaryRepresentation\checker\Release\cbde-dialect-checker.exe" Link="cbde-dialect-checker.exe">
+    <None Include="..\..\..\..\SonarCBDE\build\intermediaryRepresentation\checker\Release\cbde-dialect-checker.exe" Link="CBDE\cbde-dialect-checker.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Common\Resources\input.txt">
