@@ -32,12 +32,13 @@ using System.Collections.Immutable;
 using SonarAnalyzer.Common;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     public abstract class CbdeHandler : SonarDiagnosticAnalyzer
     {
-        private const string cbdeSymbExecBinaryPath = "c:\\Temp\\dotnet-symbolic-execution.exe";
+        private static readonly string cbdeSymbExecBinaryPath = GetExecutablePath();
         private const string mlirDirectoryRoot = "c:\\Temp\\";
         private const string cbdeJsonOutputFileName = "cbdeSEout.json";
 
@@ -53,6 +54,15 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             RegisterMlirAndCbdeInOneStep(context);
         }
+
+        private static string GetExecutablePath()
+        {
+            // TODO: select based on OS
+            var filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "CBDE/windows/dotnet-symbolic-execution.exe");
+            Debug.Assert(File.Exists(filePath), $"Could not locate the CBDE exe. Expected location: {filePath}");
+            return filePath;
+        }
+
         private void RegisterMlirAndCbdeInOneStep(SonarAnalysisContext context)
         {
             context.RegisterCompilationAction(
