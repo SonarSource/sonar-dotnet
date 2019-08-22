@@ -25,96 +25,116 @@ using SonarAnalyzer.Helpers;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.Diagnostics;
 using System.Collections.Immutable;
 using SonarAnalyzer.Common;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     public abstract class CbdeHandler : SonarDiagnosticAnalyzer
     {
         private const string cbdeSymbExecBinaryPath = "c:\\Temp\\dotnet-symbolic-execution.exe";
-        private const string mlirDirectory = "c:\\Temp\\";
-        private const string cbdeJsonOutputFilePath = mlirDirectory + "\\cbdeSEout.json";
+        private const string mlirDirectoryRoot = "c:\\Temp\\";
+        private const string cbdeJsonOutputFileName = "cbdeSEout.json";
 
-        internal const string DiagnosticId = "S2583";
+        protected const string DiagnosticId = "S2583";
         protected const string MessageFormat = "Condition is always {0}";
+
+        private string mlirDirectoryAssembly;
+        private string cbdeJsonOutputPath;
+        protected Dictionary<string, int> fileNameDuplicateNumbering = new Dictionary<string, int>();
+        private StreamWriter logFile;
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            RegisterMlirGeneration(context);
-            Console.WriteLine("Hello Debug");
-            RegisterCbseSymbolicExecution(context);
+            RegisterMlirAndCbdeInOneStep(context);
         }
-
-        private void RegisterMlirGeneration(SonarAnalysisContext context)
-        {
-            context.RegisterCodeBlockStartAction<SyntaxKind>(
-            c =>
-                {
-                    var firstFdecl = c.GetSyntaxTree().GetRoot().DescendantNodes().First();
-                    var mlirFileName = firstFdecl.SyntaxTree.FilePath;
-                    mlirFileName.Replace(":", "_COLON_");
-                    mlirFileName.Replace("/", "_SLASH_");
-                    mlirFileName.Replace("\\", "_BSLASH_");
-                    mlirFileName += ".mlir";
-
-                    using (StreamWriter streamWriter = new StreamWriter(mlirDirectory + mlirFileName))
-                    {
-                        MLIRExporter mlirExporter = new MLIRExporter(streamWriter, c.SemanticModel, true);
-                        foreach (var method in c.GetSyntaxTree().GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
-                        {
-                            mlirExporter.ExportFunction(method);
-                        }
-                    }
-                });
-        }
-        private void RegisterCbseSymbolicExecution(SonarAnalysisContext context)
+        private void RegisterMlirAndCbdeInOneStep(SonarAnalysisContext context)
         {
             context.RegisterCompilationAction(
                 c =>
                 {
-                    using (System.Diagnostics.Process pProcess = new System.Diagnostics.Process())
+                    mlirDirectoryAssembly = Path.Combine(mlirDirectoryRoot, c.Compilation.Assembly.Name);
+                    cbdeJsonOutputPath = Path.Combine(mlirDirectoryAssembly, cbdeJsonOutputFileName);
+                    Directory.CreateDirectory(mlirDirectoryAssembly);
+                    logFile = new StreamWriter(Path.Combine(mlirDirectoryAssembly, "CbdeHandler.log"), true);
+                    logFile.WriteLine(">> New Cbde Run triggered at {0}", DateTime.Now.ToShortTimeString());
+                    logFile.Flush();
+                    foreach (var tree in c.Compilation.SyntaxTrees)
                     {
-                        pProcess.StartInfo.FileName = cbdeSymbExecBinaryPath;
-                        pProcess.StartInfo.Arguments = "-i "+mlirDirectory + " -o " + cbdeJsonOutputFilePath;
-                        pProcess.StartInfo.UseShellExecute = false;
-                        pProcess.StartInfo.RedirectStandardOutput = true;
-                        pProcess.StartInfo.RedirectStandardError = true;
-                        pProcess.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                        pProcess.StartInfo.CreateNoWindow = true;
-                        pProcess.Start();
-                        string output = pProcess.StandardOutput.ReadToEnd();
-                        string eoutput = pProcess.StandardError.ReadToEnd();
-                        //var mem = pProcess.PeakWorkingSet64;
-                        pProcess.WaitForExit();
-                        Console.WriteLine(
-                            "Process finished with exit code {0}",
-                             pProcess.ExitCode);
-                        Console.WriteLine(
-                            "Standard output is\n{0}",
-                            output);
-                        Console.WriteLine(
-                            "Standard error is\n{0}",
-                            eoutput);
-                        // TODO: log this pProcess.PeakWorkingSet64;
-                        if (pProcess.ExitCode != 0)
-                        {
-                            // log output
-                            // do it again enabling SonarCBDE logging
-                        }
-                        else
-                        {
-                            RaiseIssuesFromJSon(c);
-                        }
+                        var mlirFileName = ManglePath(tree.FilePath) + ".mlir";
+                        ExportFunctionMlir(tree, c.Compilation.GetSemanticModel(tree), mlirFileName);
+                        logFile.WriteLine("- generated mlir file {0}", mlirFileName);
+                        logFile.Flush();
                     }
-
+                    RunCbdeAndRaiseIssues(c);
+                });
+        }
+        private string ManglePath(string path)
+        {
+            path = Path.GetFileNameWithoutExtension(path);
+            int count = 0;
+            fileNameDuplicateNumbering.TryGetValue(path, out count);
+            fileNameDuplicateNumbering[path] = ++count;
+            path += "_" + Convert.ToString(count);
+            return path;
+        }
+        private void ExportFunctionMlir(SyntaxTree tree, SemanticModel model, string mlirFileName)
+        {
+            using (StreamWriter streamWriter = new StreamWriter(Path.Combine(mlirDirectoryAssembly, mlirFileName)))
+            {
+                MLIRExporter mlirExporter = new MLIRExporter(streamWriter, model, true);
+                foreach (var method in tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
+                {
+                    mlirExporter.ExportFunction(method);
                 }
-                );
+            }
+        }
+        private void RunCbdeAndRaiseIssues(CompilationAnalysisContext c)
+        {
+            using (Process pProcess = new Process())
+            {
+                logFile.WriteLine("- Cbde process");
+                pProcess.StartInfo.FileName = cbdeSymbExecBinaryPath;
+                pProcess.StartInfo.WorkingDirectory = mlirDirectoryAssembly;
+                pProcess.StartInfo.Arguments = "-i " + "\"" + mlirDirectoryAssembly + "\" -o \"" + cbdeJsonOutputPath + "\"";
+                logFile.WriteLine("  * arguments: '{0}'", pProcess.StartInfo.Arguments);
+                pProcess.StartInfo.UseShellExecute = false;
+                pProcess.StartInfo.RedirectStandardOutput = true;
+                pProcess.StartInfo.RedirectStandardError = true;
+                pProcess.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                pProcess.StartInfo.CreateNoWindow = true;
+                pProcess.Start();
+                pProcess.WaitForExit();
+                string output = pProcess.StandardOutput.ReadToEnd();
+                string eoutput = pProcess.StandardError.ReadToEnd();
+                logFile.WriteLine("  * exit_code: '{0}'", pProcess.ExitCode);
+                logFile.WriteLine("  * stdout: '{0}'", output);
+                logFile.WriteLine("  * stderr: '{0}'", eoutput);
+                logFile.Flush();
+                // TODO: log this pProcess.PeakWorkingSet64;
+                if (pProcess.ExitCode != 0)
+                {
+                    // rerun with logging and do not cleanup the directory
+                    pProcess.StartInfo.Arguments += " -p \"" + Path.Combine(mlirDirectoryAssembly, "CbdeSymbolicExecution.log") + "\"";
+                    pProcess.Start();
+                    pProcess.WaitForExit();
+                }
+                else
+                {
+                    RaiseIssuesFromJSon(c);
+                    Cleanup();
+                }
+            }
+        }
+        private void Cleanup()
+        {
+            logFile.Dispose();
+            Directory.Delete(mlirDirectoryAssembly, true);
         }
         private static Diagnostic CreateDiagnosticFromJToken(JToken token)
         {
@@ -136,31 +156,32 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             string jsonFileContent;
             List<List<JObject>> jsonIssues;
+            logFile.WriteLine("- parsing json file {0}", cbdeJsonOutputPath);
             try
             {
-                jsonFileContent = File.ReadAllText(cbdeJsonOutputFilePath);
-                jsonIssues = JsonConvert.DeserializeObject< List<List<JObject>>>(jsonFileContent);
+                jsonFileContent = File.ReadAllText(cbdeJsonOutputPath);
+                jsonIssues = JsonConvert.DeserializeObject<List<List<JObject>>>(jsonFileContent);
             }
             catch
             {
-                Console.WriteLine("Error parsing json file {0}", cbdeJsonOutputFilePath);
+                logFile.WriteLine("- error parsing json file {0}", cbdeJsonOutputPath);
                 return;
             }
 
             foreach (var issue in jsonIssues.First())
             {
-                Console.WriteLine("Processing token {0}", issue.ToString());
+                logFile.WriteLine("  * processing token {0}", issue.ToString());
                 try
                 {
                     context.ReportDiagnosticWhenActive(CreateDiagnosticFromJToken(issue));
                 }
                 catch
                 {
-                    Console.WriteLine("Error reporting token {0}", cbdeJsonOutputFilePath);
+                    logFile.WriteLine("  * error reporting token {0}", cbdeJsonOutputPath);
                     continue;
                 }
             }
-
+            logFile.Flush();
         }
     }
 
