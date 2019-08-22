@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- Targets to download the CBDE binaries if required. 
+  
+       The files will be downloaded automatically if they are not found locally.
+       
+       To force the files to be downloaded even if they exist, set the build property "UpdateCBDE" to true.
+  
+      Authentication
+      **************
+      Currently the CBDE binaries are in a private repox so a user name and password are required.
+      
+      CI builds: by default, these targets will use the same environment variables to get the 
+      username and password as the ci-qa.ps1 script
+      i.e. REPOX_QAPUBLICADMIN_USERNAME and REPOX_QAPUBLICADMIN_PASSWORD
+
+      Local builds: you can supply alternative credentials by setting the build properties
+      "RepoxUser" and "RepoxPassword"
+      e.g. msbuild /p:RepoxUser=myuser /p:RepoxPassword=mypassword
+      
+      or by setting environment variables with those names (if building in VS, you will need
+      to restart VS after setting the environment variables).
+  
+  -->
+  
+  <PropertyGroup>
+    <CBDEDownloadUrl>http://repox.jfrog.io/repox/sonarsource-public-qa/org/sonarsource/cbde/windows/cbde-windows.zip</CBDEDownloadUrl>
+    <CBDEFolder>$(MSBuildProjectDirectory)\CBDE\windows\</CBDEFolder>
+  </PropertyGroup>
+
+  <!-- Specifies the CBDE files that should be included in the project and copied to the output directory -->
+  <ItemGroup>
+    <Content Include="$(CBDEFolder)\**\*.exe" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(CBDEFolder)\**\*.txt" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <Target Name="FetchCBDEBinaries" BeforeTargets="Build" >
+    <PropertyGroup>
+      <CBDEFilesExist>$([System.IO.File]::Exists('$(CBDEFolder)dotnet-symbolic-execution.exe'))</CBDEFilesExist>
+      <ShouldDownloadCBDE>$(UpdateCBDE)</ShouldDownloadCBDE>
+      <ShouldDownloadCBDE Condition="$(ShouldDownloadCBDE)=='' AND $(CBDEFilesExist)=='false'">true</ShouldDownloadCBDE>
+    </PropertyGroup>
+
+    <Message Importance="high" Text="CBDE: binaries exist? $(CBDEFilesExist)" />
+    <Message Importance="high" Text="CBDE: Updating CBDE binaries" Condition="$(UpdateCBDE)=='true'" />
+
+    <CallTarget Targets="DownloadFromRepox" Condition="$(ShouldDownloadCBDE)=='true'" />    
+  </Target>
+
+  <Target Name="DownloadFromRepox">
+    
+    <!-- By default, use the same environment variables for the repox user and password 
+         that are used in the ci-qa.ps1 script i.e. these should already be set on the
+         build slaves. -->
+    <PropertyGroup>
+      <RepoxUser Condition="$(RepoxUser)==''">$(REPOX_QAPUBLICADMIN_USERNAME)</RepoxUser>
+      <RepoxPassword Condition="$(RepoxPassword)==''">$(REPOX_QAPUBLICADMIN_PASSWORD)</RepoxPassword>
+    </PropertyGroup>
+    
+    <Error Condition="$(RepoxUser)==''" Text="CBDE: RepoxUser property must be set. See the notes in $(MSBuildThisFileFullPath) for more information." />
+    <Error Condition="$(RepoxPassword)==''" Text="CBDE: RepoxPassword property must be set. See the notes in $(MSBuildThisFileFullPath) for more information. " />
+
+    <Message Importance="high" Text="CBDE: Deleting any existing files..." />
+
+    <ItemGroup>
+      <ExistingCBDEFiles Include="$(CBDEFolder)\*.*" />
+    </ItemGroup>
+    <Delete Files="@(ExistingCBDEFiles)" />
+
+    <Message Importance="high" Text="CBDE: Begin downloading CBDE zip..." />
+    <DownloadFile SourceUrl="$(CBDEDownloadUrl)" DestinationFolder="$(CBDEFolder)" UserName="$(RepoxUser)" Password="$(RepoxPassword)" >
+      <Output PropertyName="CBDEZipFilePath" TaskParameter="DownloadedFile" />
+    </DownloadFile>
+    <Message Importance="high" Text="CBDE: Finished downloading CBDE binaries: $(CBDEZipFilePath)" />
+
+    <Message Importance="high" Text="CBDE: Unzipping the CBDE binaries..." />
+    <Unzip SourceFiles="$(CBDEZipFilePath)" DestinationFolder="$(CBDEFolder)" />
+    <Message Importance="high" Text="CBDE: Finished unzipping CBDE binaries" />
+
+  </Target>
+
+  <!--<ItemGroup>
+    <None Include="$(CBDEFolder)\*.exe" />
+    <None Include="$(CBDEFolder)\*.txt" />
+  </ItemGroup>-->
+
+  <!-- Packaging Logic -->
+  <!-- NOTE: there is a built-in DownloadFile task in MSBuild 15.8. 
+       However, the cix slaves have an earlier version installed.
+       https://docs.microsoft.com/en-us/visualstudio/msbuild/downloadfile-task?view=vs-2019 -->
+  <UsingTask TaskName="DownloadFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
+    <ParameterGroup>
+      <SourceUrl ParameterType="System.String" Required="true" />
+      <UserName ParameterType="System.String" Required="true" />
+      <Password ParameterType="System.String" Required="true" />
+      <DestinationFolder ParameterType="System.String" Required="false" />
+      <DownloadedFile ParameterType="System.String" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System.Web" />
+      <Using Namespace="System.Net" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+    using (var client = new System.Net.WebClient())
+    {
+        var directory = DestinationFolder != null ? DestinationFolder + "/" : "";
+        if (!System.IO.Directory.Exists(directory))
+        {
+          System.IO.Directory.CreateDirectory(directory);
+        }
+        
+        client.Credentials = new NetworkCredential(UserName, Password);;
+        var fileName = System.IO.Path.GetFileName(new Uri(SourceUrl).LocalPath);
+        var fullPath = System.IO.Path.Combine(DestinationFolder, fileName);
+        client.DownloadFile(SourceUrl, fullPath);
+        DownloadedFile = fullPath;
+    }
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+
+  <!-- There are MS-supplied Unzip and ZipDirectory tasks, but they are only available in MSBuild 15.8 or above.
+       See https://docs.microsoft.com/en-us/visualstudio/msbuild/unzip-task?view=vs-2017
+       and https://docs.microsoft.com/en-us/visualstudio/msbuild/zipdirectory-task?view=vs-2017 -->
+  <UsingTask TaskName="Unzip" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
+    <ParameterGroup>
+      <SourceFiles ParameterType="System.String" Required="true" />
+      <DestinationFolder ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.IO.Compression.FileSystem" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[    
+    System.IO.Compression.ZipFile.ExtractToDirectory(SourceFiles, DestinationFolder);
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+</Project>
