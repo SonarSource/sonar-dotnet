@@ -733,4 +733,30 @@ namespace Tests.Diagnostics
             return length;
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2600
+    public class FooBarBaz
+    {
+        public int Start()
+        {
+            const int x = -1;
+            int exitCode = x; // Noncompliant FP - if Archive throws, it will be returned
+            Exception exception = null;
+
+            try
+            {
+                Archive();
+
+                exitCode = 1;
+            }
+            catch (SystemException e)
+            {
+                exception = e; // Noncompliant
+            }
+
+            return exitCode;
+        }
+
+        public void Archive() {}
+    }
 }
