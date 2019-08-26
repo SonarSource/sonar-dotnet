@@ -162,4 +162,20 @@ namespace Tests.Diagnostics
     }
   }
 
+    public class ReproFor2593
+    {
+        public int id;
+        public string name;
+
+        public void Repro(ReproFor2593 obj)
+        {
+            obj = null;
+            var objId = obj?.id;
+            if (objId.HasValue)
+            {
+                var objName = obj.name; // Ok
+            }
+        }
+    }
+
 }

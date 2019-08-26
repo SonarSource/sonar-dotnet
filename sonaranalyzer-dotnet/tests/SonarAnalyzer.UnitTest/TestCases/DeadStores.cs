@@ -656,4 +656,107 @@ namespace Tests.Diagnostics
         private static void DoNothing() { }
         private static void DoNothing(bool b) { }
     }
+
+    public static class ReproIssues
+    {
+        // https://github.com/SonarSource/sonar-dotnet/issues/2596
+        public static long WithConstantValue(string path)
+        {
+            const int unknownfilelength = -1;
+            long length = unknownfilelength; // Noncompliant FP because we do not propagate constant values
+            try
+            {
+                length = new System.IO.FileInfo(path).Length;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return length;
+        }
+
+        public static long WithMinus1(string path)
+        {
+            long length = -1;
+            try
+            {
+                length = new System.IO.FileInfo(path).Length;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return length;
+        }
+
+        const int UNKNOWN = -1;
+        public static long WithClassConstant(string path)
+        {
+            long length = UNKNOWN; // Noncompliant
+            try
+            {
+                length = new System.IO.FileInfo(path).Length;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return length;
+        }
+
+        // https://github.com/SonarSource/sonar-dotnet/issues/2598
+        public static string WithCastedNull(string path)
+        {
+            var length = (string)null; // Noncompliant FP
+            try
+            {
+                length = new System.IO.FileInfo(path).Length.ToString();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return length;
+        }
+
+        public static string WithDefault(string path)
+        {
+            string length = default(string);
+            try
+            {
+                length = new System.IO.FileInfo(path).Length.ToString();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return length;
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2600
+    public class FooBarBaz
+    {
+        public int Start()
+        {
+            const int x = -1;
+            int exitCode = x; // Noncompliant FP - if Archive throws, it will be returned
+            Exception exception = null;
+
+            try
+            {
+                Archive();
+
+                exitCode = 1;
+            }
+            catch (SystemException e)
+            {
+                exception = e; // Noncompliant
+            }
+
+            return exitCode;
+        }
+
+        public void Archive() {}
+    }
 }

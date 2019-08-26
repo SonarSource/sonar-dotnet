@@ -1,4 +1,5 @@
-﻿namespace Tests.Diagnostics
+﻿using System;
+namespace Tests.Diagnostics
 {
     public class ExpressionBodyTest
     {
@@ -156,4 +157,89 @@
     }
 
   }
+
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2592
+    public class LoopsAreNotVisited
+    {
+        public void DoWhileWithPattern()
+        {
+            var done = false;
+            do
+            { // Secondary
+                done = true;
+            }
+            while (done is false); // Noncompliant FP
+        }
+
+        public void DoWhile()
+        {
+            var done = false;
+            do
+            { // Secondary
+                done = true;
+            }
+            while (done == false); // Noncompliant FP
+        }
+
+        public static void M(string path, int timeoutmilliseconds = 500)
+        {
+            bool deletesuccess = false;
+            do
+            { // Secondary
+                try
+                {
+                    deletesuccess = true;
+                }
+                catch
+                {
+                    System.Threading.Thread.Sleep(timeoutmilliseconds);
+                }
+            } while (!deletesuccess); // Noncompliant FP
+        }
+
+    }
+
+    static class Repro2590
+    {
+        static void Main()
+        {
+            Foo foo = null;
+
+            try
+            {
+                foo = new Foo(Guid.Empty);
+                foo.Write();
+            }
+            catch
+            {
+                // Do nothing
+            }
+
+            if (foo == null) // Noncompliant S2583  FP
+            { // Secondary
+                Console.WriteLine("Foo is null");
+            }
+
+            if (foo != null) // Noncompliant S2589  FP
+            {
+                Console.WriteLine("Foo is not null");
+            }
+        }
+
+        class Foo
+        {
+            private Guid Id { get; }
+
+            public Foo(Guid id)
+            {
+                Id = id;
+            }
+
+            public void Write()
+            {
+                Console.WriteLine(Id);
+            }
+        }
+    }
 }

@@ -221,4 +221,38 @@ namespace Tests.Diagnostics
             var parts = contentType.Split('/', ';'); // Noncompliant
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2591
+    public class ReproIssue2591
+    {
+        public string FooWithStringTrim(string name)
+        {
+            if (name == null)
+            {
+                name = Guid.NewGuid().ToString("N");
+            }
+
+            return name.Trim(); // Noncompliant FP
+        }
+
+        public string FooWithStringJoin(string name)
+        {
+            if (name == null)
+            {
+                name = Guid.NewGuid().ToString("N");
+            }
+
+            return string.Join("_", name.Split(System.IO.Path.GetInvalidFileNameChars())); // Noncompliant FP
+        }
+
+        public string FooWithObject(object name)
+        {
+            if (name == null)
+            {
+                name = Guid.NewGuid().ToString("N");
+            }
+
+            return name.ToString(); // Noncompliant FP
+        }
+    }
 }
