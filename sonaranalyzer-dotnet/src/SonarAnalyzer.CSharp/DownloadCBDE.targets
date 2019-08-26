@@ -7,25 +7,10 @@
        
        To force the files to be downloaded even if they exist, set the build property "UpdateCBDE" to true.
   
-      Authentication
-      **************
-      Currently the CBDE binaries are in a private repox so a user name and password are required.
-      
-      CI builds: by default, these targets will use the same environment variables to get the 
-      username and password as the ci-qa.ps1 script
-      i.e. REPOX_QAPUBLICADMIN_USERNAME and REPOX_QAPUBLICADMIN_PASSWORD
-
-      Local builds: you can supply alternative credentials by setting the build properties
-      "RepoxUser" and "RepoxPassword"
-      e.g. msbuild /p:RepoxUser=myuser /p:RepoxPassword=mypassword
-      
-      or by setting environment variables with those names (if building in VS, you will need
-      to restart VS after setting the environment variables).
-  
   -->
   
   <PropertyGroup>
-    <CBDEDownloadUrl>http://repox.jfrog.io/repox/sonarsource-public-qa/org/sonarsource/cbde/windows/cbde-windows.zip</CBDEDownloadUrl>
+    <CBDEDownloadUrl>http://repox.jfrog.io/repox/sonarsource-public-builds/org/sonarsource/cbde/windows/cbde-windows.zip</CBDEDownloadUrl>
     <CBDEFolder>$(MSBuildProjectDirectory)\CBDE\windows\</CBDEFolder>
   </PropertyGroup>
 
@@ -54,17 +39,6 @@
 
   <Target Name="DownloadFromRepox">
     
-    <!-- By default, use the same environment variables for the repox user and password 
-         that are used in the ci-qa.ps1 script i.e. these should already be set on the
-         build slaves. -->
-    <PropertyGroup>
-      <RepoxUser Condition="$(RepoxUser)==''">$(REPOX_QAPUBLICADMIN_USERNAME)</RepoxUser>
-      <RepoxPassword Condition="$(RepoxPassword)==''">$(REPOX_QAPUBLICADMIN_PASSWORD)</RepoxPassword>
-    </PropertyGroup>
-    
-    <Error Condition="$(RepoxUser)==''" Text="CBDE: RepoxUser property must be set. See the notes in $(MSBuildThisFileFullPath) for more information." />
-    <Error Condition="$(RepoxPassword)==''" Text="CBDE: RepoxPassword property must be set. See the notes in $(MSBuildThisFileFullPath) for more information. " />
-
     <Message Importance="high" Text="CBDE: Deleting any existing files..." />
 
     <ItemGroup>
@@ -73,7 +47,7 @@
     <Delete Files="@(ExistingCBDEFiles)" />
 
     <Message Importance="high" Text="CBDE: Begin downloading CBDE zip..." />
-    <DownloadFile SourceUrl="$(CBDEDownloadUrl)" DestinationFolder="$(CBDEFolder)" UserName="$(RepoxUser)" Password="$(RepoxPassword)" >
+    <DownloadFile SourceUrl="$(CBDEDownloadUrl)" DestinationFolder="$(CBDEFolder)" >
       <Output PropertyName="CBDEZipFilePath" TaskParameter="DownloadedFile" />
     </DownloadFile>
     <Message Importance="high" Text="CBDE: Finished downloading CBDE binaries: $(CBDEZipFilePath)" />
@@ -96,8 +70,6 @@
   <UsingTask TaskName="DownloadFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
     <ParameterGroup>
       <SourceUrl ParameterType="System.String" Required="true" />
-      <UserName ParameterType="System.String" Required="true" />
-      <Password ParameterType="System.String" Required="true" />
       <DestinationFolder ParameterType="System.String" Required="false" />
       <DownloadedFile ParameterType="System.String" Output="true" />
     </ParameterGroup>
@@ -114,7 +86,6 @@
           System.IO.Directory.CreateDirectory(directory);
         }
         
-        client.Credentials = new NetworkCredential(UserName, Password);;
         var fileName = System.IO.Path.GetFileName(new Uri(SourceUrl).LocalPath);
         var fullPath = System.IO.Path.Combine(DestinationFolder, fileName);
         client.DownloadFile(SourceUrl, fullPath);
