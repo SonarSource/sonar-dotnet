@@ -40,10 +40,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterSyntaxNodeActionInNonGenerated(TreatNode, SyntaxKind.IfStatement);
-        }
 
         protected override bool ConditionIsTrueLiteral(IfStatementSyntax ifSyntax) =>
             ifSyntax.Condition.IsKind(SyntaxKind.TrueLiteralExpression);
