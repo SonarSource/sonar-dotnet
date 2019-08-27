@@ -40,7 +40,7 @@
                        />
   </Target>
 
-  <UsingTask TaskName="DownloadCBDEFiles" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
+  <UsingTask TaskName="DownloadCBDEFiles" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
     <ParameterGroup>
       <SourceUrls ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
       <RootDestinationFolder ParameterType="System.String" Required="false" />
