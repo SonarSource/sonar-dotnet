@@ -10,10 +10,18 @@
   -->
   
   <PropertyGroup>
-    <CBDEDownloadUrl>http://repox.jfrog.io/repox/sonarsource-public-builds/org/sonarsource/cbde/windows/cbde-windows.zip</CBDEDownloadUrl>
-    <CBDEFolder>$(MSBuildProjectDirectory)\CBDE\windows\</CBDEFolder>
+    <CBDEFolder>$(MSBuildProjectDirectory)\CBDE\</CBDEFolder>
   </PropertyGroup>
 
+  <ItemGroup>
+    <CBDEUrls Include="http://repox.jfrog.io/repox/sonarsource-public-builds/org/sonarsource/cbde/windows/cbde-windows.zip" >
+      <SubFolder>windows</SubFolder>
+    </CBDEUrls>
+    <CBDEUrls Include="http://repox.jfrog.io/repox/sonarsource-public-builds/org/sonarsource/cbde/linux/cbde-linux.zip" >
+      <SubFolder>linux</SubFolder>
+    </CBDEUrls>
+  </ItemGroup>
+  
   <!-- Specifies the CBDE files that should be included in the project and copied to the output directory -->
   <ItemGroup>
     <Content Include="$(CBDEFolder)\**\*.exe" >
@@ -24,94 +32,105 @@
     </Content>
   </ItemGroup>
 
-  <Target Name="FetchCBDEBinaries" BeforeTargets="Build" >
-    <PropertyGroup>
-      <CBDEFilesExist>$([System.IO.File]::Exists('$(CBDEFolder)dotnet-symbolic-execution.exe'))</CBDEFilesExist>
-      <ShouldDownloadCBDE>$(UpdateCBDE)</ShouldDownloadCBDE>
-      <ShouldDownloadCBDE Condition="$(ShouldDownloadCBDE)=='' AND $(CBDEFilesExist)=='false'">true</ShouldDownloadCBDE>
-    </PropertyGroup>
+  <Target Name="FetchCBDEBinaries" BeforeTargets="Compile" >
+    <RemoveDir Condition="$(UpdateCBDE)=='true'" Directories="$(CBDEFolder)" />
 
-    <Message Importance="high" Text="CBDE: binaries exist? $(CBDEFilesExist)" />
-    <Message Importance="high" Text="CBDE: Updating CBDE binaries" Condition="$(UpdateCBDE)=='true'" />
-
-    <CallTarget Targets="DownloadFromRepox" Condition="$(ShouldDownloadCBDE)=='true'" />    
+    <DownloadCBDEFiles SourceUrls="@(CBDEUrls)" RootDestinationFolder="$(CBDEFolder)" 
+                       UpdateCBDE="$(UpdateCBDE)"
+                       />
   </Target>
 
-  <Target Name="DownloadFromRepox">
-    
-    <Message Importance="high" Text="CBDE: Deleting any existing files..." />
-
-    <ItemGroup>
-      <ExistingCBDEFiles Include="$(CBDEFolder)\*.*" />
-    </ItemGroup>
-    <Delete Files="@(ExistingCBDEFiles)" />
-
-    <Message Importance="high" Text="CBDE: Begin downloading CBDE zip..." />
-    <DownloadFile SourceUrl="$(CBDEDownloadUrl)" DestinationFolder="$(CBDEFolder)" >
-      <Output PropertyName="CBDEZipFilePath" TaskParameter="DownloadedFile" />
-    </DownloadFile>
-    <Message Importance="high" Text="CBDE: Finished downloading CBDE binaries: $(CBDEZipFilePath)" />
-
-    <Message Importance="high" Text="CBDE: Unzipping the CBDE binaries..." />
-    <Unzip SourceFiles="$(CBDEZipFilePath)" DestinationFolder="$(CBDEFolder)" />
-    <Message Importance="high" Text="CBDE: Finished unzipping CBDE binaries" />
-
-  </Target>
-
-  <!--<ItemGroup>
-    <None Include="$(CBDEFolder)\*.exe" />
-    <None Include="$(CBDEFolder)\*.txt" />
-  </ItemGroup>-->
-
-  <!-- Packaging Logic -->
-  <!-- NOTE: there is a built-in DownloadFile task in MSBuild 15.8. 
-       However, the cix slaves have an earlier version installed.
-       https://docs.microsoft.com/en-us/visualstudio/msbuild/downloadfile-task?view=vs-2019 -->
-  <UsingTask TaskName="DownloadFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
+  <UsingTask TaskName="DownloadCBDEFiles" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
     <ParameterGroup>
-      <SourceUrl ParameterType="System.String" Required="true" />
-      <DestinationFolder ParameterType="System.String" Required="false" />
-      <DownloadedFile ParameterType="System.String" Output="true" />
-    </ParameterGroup>
-    <Task>
-      <Using Namespace="System.Web" />
-      <Using Namespace="System.Net" />
-      <Code Type="Fragment" Language="cs">
-        <![CDATA[
-    using (var client = new System.Net.WebClient())
-    {
-        var directory = DestinationFolder != null ? DestinationFolder + "/" : "";
-        if (!System.IO.Directory.Exists(directory))
-        {
-          System.IO.Directory.CreateDirectory(directory);
-        }
-        
-        var fileName = System.IO.Path.GetFileName(new Uri(SourceUrl).LocalPath);
-        var fullPath = System.IO.Path.Combine(DestinationFolder, fileName);
-        client.DownloadFile(SourceUrl, fullPath);
-        DownloadedFile = fullPath;
-    }
-        ]]>
-      </Code>
-    </Task>
-  </UsingTask>
-
-
-  <!-- There are MS-supplied Unzip and ZipDirectory tasks, but they are only available in MSBuild 15.8 or above.
-       See https://docs.microsoft.com/en-us/visualstudio/msbuild/unzip-task?view=vs-2017
-       and https://docs.microsoft.com/en-us/visualstudio/msbuild/zipdirectory-task?view=vs-2017 -->
-  <UsingTask TaskName="Unzip" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
-    <ParameterGroup>
-      <SourceFiles ParameterType="System.String" Required="true" />
-      <DestinationFolder ParameterType="System.String" Required="true" />
+      <SourceUrls ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+      <RootDestinationFolder ParameterType="System.String" Required="false" />
+      <UpdateCBDE ParameterType="System.Boolean" Required="false" />
     </ParameterGroup>
     <Task>
       <Reference Include="System.IO.Compression.FileSystem" />
-      <Code Type="Fragment" Language="cs">
-        <![CDATA[    
-    System.IO.Compression.ZipFile.ExtractToDirectory(SourceFiles, DestinationFolder);
-        ]]>
+      <Using Namespace="System.Web" />
+      <Using Namespace="System.Net" />
+      <Code Type="Class" Language="cs">
+        <![CDATA[
+
+using System;
+using System.IO;
+using System.Net;
+using Microsoft.Build.Framework;
+using Microsoft.Build.Utilities;
+
+public class DownloadCBDEFiles : Task
+{
+    [Required]
+    public ITaskItem[] SourceUrls { get; set; }
+
+    [Required]
+    public string RootDestinationFolder { get; set; }
+
+    public bool UpdateCBDE { get; set; }
+
+    public override bool Execute()
+    {
+        Log.LogMessage(MessageImportance.High, "CBDE: UpdateCBDE: {0}", UpdateCBDE);
+
+        foreach (var item in SourceUrls)
+        {
+            var url = item.ItemSpec;
+            var subFolderName = item.GetMetadata("SubFolder");
+            var subFolderPath = Path.Combine(RootDestinationFolder, subFolderName);
+            ProcessUrl(url, subFolderName, subFolderPath);
+        }
+
+        return !Log.HasLoggedErrors;
+    }
+
+    private void ProcessUrl(string url, string subFolderName, string subFolderPath)
+    {
+        var urlLocalPath = new Uri(url).LocalPath;
+        var localZipFileName = Path.Combine(subFolderPath, Path.GetFileName(urlLocalPath));
+
+        if (File.Exists(localZipFileName) && !UpdateCBDE)
+        {
+            Log.LogMessage(MessageImportance.High, "CBDE: {0} zip file exists: {1}", subFolderName, localZipFileName);
+        }
+        else
+        {
+            Log.LogMessage(MessageImportance.High, "CBDE: {0}: downloading {1}", subFolderName, url);
+            DownloadAndExtract(url, localZipFileName);
+        }
+    }
+
+    private void DownloadAndExtract(string url, string localZipFileName)
+    {
+        var directory = Path.GetDirectoryName(localZipFileName);
+        Log.LogMessage(MessageImportance.High, "CBDE:   directory: {0}", directory);
+        if (System.IO.Directory.Exists(directory))
+        {
+            Log.LogMessage(MessageImportance.High, "CBDE:   deleting any existing files...");
+            Directory.Delete(directory, true /* recursive*/ );
+            System.IO.Directory.CreateDirectory(directory);
+        }
+        else
+        {
+            Log.LogMessage(MessageImportance.High, "CBDE:   creating directory {0}", directory);
+            System.IO.Directory.CreateDirectory(directory);
+        }
+
+        using (var client = new System.Net.WebClient())
+        {
+            client.DownloadFile(url, localZipFileName);
+        }
+
+        Log.LogMessage(MessageImportance.High, "CBDE:   extracting binaries...");
+        System.IO.Compression.ZipFile.ExtractToDirectory(localZipFileName, directory);
+        Log.LogMessage(MessageImportance.High, "CBDE:   binaries extracted");
+    }
+}
+
+
+]]>
       </Code>
     </Task>
   </UsingTask>
+
 </Project>
