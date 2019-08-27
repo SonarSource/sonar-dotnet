@@ -14,12 +14,13 @@ namespace SonarAnalyzer.UnitTest
     [TestClass]
     public class MlirExportTest
     {
-        private static string cbdeDialectCheckerPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "CBDE/windows/cbde-dialect-checker.exe");
+        private static string cbdeDialectCheckerPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"CBDE\windows\cbde-dialect-checker.exe");
 
         [ClassInitialize]
         public static void checkExecutableExists(TestContext tc)
         {
-            Assert.IsTrue(File.Exists(cbdeDialectCheckerPath), "We need cbde-dialect-checker.exe to validate the generated IR");
+            Assert.IsTrue(File.Exists(cbdeDialectCheckerPath),
+                $"We need cbde-dialect-checker.exe to validate the generated IR, searched in path {cbdeDialectCheckerPath}");
         }
 
         public static void ValidateIR(string path)
@@ -29,7 +30,7 @@ namespace SonarAnalyzer.UnitTest
                 FileName = cbdeDialectCheckerPath,
                 Arguments = '"' + path + '"',
                 UseShellExecute = false,
-                // RedirectStandardOutput = true,
+                RedirectStandardOutput = true,
                 RedirectStandardError = true
             };
             var p =Process.Start(pi);
