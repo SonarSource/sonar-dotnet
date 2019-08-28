@@ -16,15 +16,6 @@
     <CBDEZipFilePath>$(CBDEFolder)$(CBDEZipFileName)</CBDEZipFilePath>
   </PropertyGroup>
 
-  <!-- Specifies the CBDE files that should be included in the project and copied to the output directory -->
-  <!-- <ItemGroup>
-    <Content Include="$(CBDEFolder)\**\*.exe" >
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="$(CBDEFolder)\**\*.txt" >
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup> -->
 
   <Target Name="FetchCBDEBinaries" BeforeTargets="BeforeBuild" >
     <PropertyGroup>
@@ -37,6 +28,7 @@
     <Message Importance="high" Text="CBDE: Updating CBDE binaries" Condition="$(UpdateCBDE)=='true'" />
 
     <CallTarget Targets="DownloadFromRepox" Condition="$(ShouldDownloadCBDE)=='true'" />    
+    <!-- Specifies the CBDE files that should be included in the project and copied to the output directory -->
     <ItemGroup>
       <Content Include="$(CBDEFolder)\**\*.exe" >
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -45,7 +37,6 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
     </ItemGroup>
-    <Message Importance="high" Text="XXXXXXXXXXXXXXXXXX @(Content)" />
   </Target>
 
   <Target Name="DownloadFromRepox">
@@ -64,13 +55,11 @@
     </PropertyGroup>
 
     <Message Importance="high" Text="CBDE: Begin downloading CBDE zip..." />
-    <!-- <DownloadFile SourceUrl="$(CBDEDownloadUrl)" DestinationFolder="$(CBDEFolder)" >
-      <Output PropertyName="CBDEZipFilePath" TaskParameter="DownloadedFile" />
-    </DownloadFile> -->
     <Exec ConsoleToMsBuild="true"
       Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -File $(DownloadScript) -url $(CBDEDownloadUrl) -outfolder $(CBDEFolder) -outfile $(CBDEZipFileName)">
       <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
     </Exec>
+    <Message Importance="low" Text="Output of powershell download: $(OutputOfExec)" />
     <Message Importance="high" Text="CBDE: Finished downloading CBDE binaries: $(CBDEZipFilePath)" />
 
     <Message Importance="high" Text="CBDE: Unzipping the CBDE binaries..." />
@@ -78,66 +67,9 @@
       Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -File $(UnzipScript) -zipfile $(CBDEZipFilePath) -outpath $(CBDEFolder)">
       <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
     </Exec>
-    <Message Importance="high" Text="Output of powershell unzip: $(OutputOfExec)" />
+    <Message Importance="low" Text="Output of powershell unzip: $(OutputOfExec)" />
 
-    <!-- <Unzip SourceFiles="$(CBDEZipFilePath)" DestinationFolder="$(CBDEFolder)" /> -->
     <Message Importance="high" Text="CBDE: Finished unzipping CBDE binaries" />
   </Target>
 
-  <!--<ItemGroup>
-    <None Include="$(CBDEFolder)\*.exe" />
-    <None Include="$(CBDEFolder)\*.txt" />
-  </ItemGroup>-->
-
-  <!-- Packaging Logic -->
-  <!-- NOTE: there is a built-in DownloadFile task in MSBuild 15.8. 
-       However, the cix slaves have an earlier version installed.
-       https://docs.microsoft.com/en-us/visualstudio/msbuild/downloadfile-task?view=vs-2019 -->
-  <!-- <UsingTask TaskName="DownloadFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
-    <ParameterGroup>
-      <SourceUrl ParameterType="System.String" Required="true" />
-      <DestinationFolder ParameterType="System.String" Required="false" />
-      <DownloadedFile ParameterType="System.String" Output="true" />
-    </ParameterGroup>
-    <Task>
-      <Using Namespace="System.Web" />
-      <Using Namespace="System.Net" />
-      <Code Type="Fragment" Language="cs">
-        <![CDATA[
-    using (var client = new System.Net.WebClient())
-    {
-        var directory = DestinationFolder != null ? DestinationFolder + "/" : "";
-        if (!System.IO.Directory.Exists(directory))
-        {
-          System.IO.Directory.CreateDirectory(directory);
-        }
-        
-        var fileName = System.IO.Path.GetFileName(new Uri(SourceUrl).LocalPath);
-        var fullPath = System.IO.Path.Combine(DestinationFolder, fileName);
-        client.DownloadFile(SourceUrl, fullPath);
-        DownloadedFile = fullPath;
-    }
-        ]]>
-      </Code>
-    </Task>
-  </UsingTask> -->
-
-
-  <!-- There are MS-supplied Unzip and ZipDirectory tasks, but they are only available in MSBuild 15.8 or above.
-       See https://docs.microsoft.com/en-us/visualstudio/msbuild/unzip-task?view=vs-2017
-       and https://docs.microsoft.com/en-us/visualstudio/msbuild/zipdirectory-task?view=vs-2017 -->
-  <!-- <UsingTask TaskName="Unzip" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
-    <ParameterGroup>
-      <SourceFiles ParameterType="System.String" Required="true" />
-      <DestinationFolder ParameterType="System.String" Required="true" />
-    </ParameterGroup>
-    <Task>
-      <Reference Include="System.IO.Compression.FileSystem" />
-      <Code Type="Fragment" Language="cs">
-        <![CDATA[    
-    System.IO.Compression.ZipFile.ExtractToDirectory(SourceFiles, DestinationFolder);
-        ]]>
-      </Code>
-    </Task>
-  </UsingTask> -->
 </Project>
