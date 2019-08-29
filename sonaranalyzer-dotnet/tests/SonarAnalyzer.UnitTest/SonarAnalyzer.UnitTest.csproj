@@ -95,9 +95,6 @@
     <Content Include="ResourceTests\ProjectOutFolderPath.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="..\..\..\..\SonarCBDE\build\intermediaryRepresentation\checker\Release\cbde-dialect-checker.exe" Link="cbde-dialect-checker.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Common\Resources\input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -121,8 +118,5 @@
     </ProjectReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="PresentationFramework" />
-  </ItemGroup>
 
 </Project>
