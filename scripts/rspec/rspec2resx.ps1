@@ -34,6 +34,9 @@ $RuleTemplateFolder = "${PSScriptRoot}\\rspec-templates"
 
 $resgenPath = "${Env:ProgramFiles(x86)}\\Microsoft SDKs\\Windows\\v10.0A\\bin\\NETFX 4.7.2 Tools\\ResGen.exe"
 if (-Not (Test-Path $resgenPath)) {
+    $resgenPath = "${Env:ProgramFiles(x86)}\\Microsoft SDKs\\Windows\\v10.0A\\bin\\NETFX 4.6.1 Tools\\ResGen.exe"
+}
+if (-Not (Test-Path $resgenPath)) {
     throw "You need to install the Windows SDK before using this script."
 }
 
