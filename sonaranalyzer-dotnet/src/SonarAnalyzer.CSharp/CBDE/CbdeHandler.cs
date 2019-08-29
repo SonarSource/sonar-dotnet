@@ -31,6 +31,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using System.Collections.Immutable;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -45,6 +46,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private string mlirDirectoryRoot;
         private string mlirDirectoryAssembly;
         private string cbdeJsonOutputPath;
+        private string logFilePath;
+        protected HashSet<string> csSourceFileNames= new HashSet<string>();
         protected Dictionary<string, int> fileNameDuplicateNumbering = new Dictionary<string, int>();
         private StreamWriter logFile;
 
@@ -67,6 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     InitializePathsAndLog(c.Compilation.Assembly.Name);
                     foreach (var tree in c.Compilation.SyntaxTrees)
                     {
+                        csSourceFileNames.Add(tree.FilePath);
                         var mlirFileName = ManglePath(tree.FilePath) + ".mlir";
                         ExportFunctionMlir(tree, c.Compilation.GetSemanticModel(tree), mlirFileName);
                         logFile.WriteLine("- generated mlir file {0}", mlirFileName);
@@ -103,7 +107,8 @@ namespace SonarAnalyzer.Rules.CSharp
             mlirDirectoryAssembly = Path.Combine(mlirDirectoryRoot, assemblyName);
             cbdeJsonOutputPath = Path.Combine(mlirDirectoryAssembly, cbdeJsonOutputFileName);
             Directory.CreateDirectory(mlirDirectoryAssembly);
-            logFile = new StreamWriter(Path.Combine(mlirDirectoryAssembly, "CbdeHandler.log"), true);
+            logFilePath = Path.Combine(mlirDirectoryAssembly, "CbdeHandler.log");
+            logFile = new StreamWriter(logFilePath, true);
             logFile.WriteLine(">> New Cbde Run triggered at {0}", DateTime.Now.ToShortTimeString());
             logFile.Flush();
         }
@@ -150,10 +155,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // TODO: log this pProcess.PeakWorkingSet64;
                 if (pProcess.ExitCode != 0)
                 {
-                    // rerun with logging and do not cleanup the directory
-                    pProcess.StartInfo.Arguments += " -p \"" + Path.Combine(mlirDirectoryAssembly, "CbdeSymbolicExecution.log") + "\"";
-                    pProcess.Start();
-                    pProcess.WaitForExit();
+                    RaiseIssueFromFailedCbdeRun(c);
                 }
                 else
                 {
@@ -182,6 +184,33 @@ namespace SonarAnalyzer.Rules.CSharp
             var loc = Location.Create(file, TextSpan.FromBounds(0, 0), new LinePositionSpan(begin, end));
 
             return Diagnostic.Create(rule, loc);
+        }
+        private static Diagnostic CreateDiagnosticFromFailureString(string filename, string description)
+        {
+            var rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, description, RspecStrings.ResourceManager);
+
+            var begin = new LinePosition(1,1);
+            var end = new LinePosition(1,2);
+            var loc = Location.Create(filename, TextSpan.FromBounds(0, 0), new LinePositionSpan(begin, end));
+
+            return Diagnostic.Create(rule, loc);
+        }
+        private void RaiseIssueFromFailedCbdeRun(CompilationAnalysisContext context)
+        {            
+            StringBuilder failureString = new StringBuilder("CBDE Failure Report :\n  C# souces files involved are:\n");
+            foreach (var fileName in csSourceFileNames)
+            {
+                failureString.Append("  - " + fileName + "\n");
+            }
+            // we dispose the StreamWriter to unlock the log file
+            logFile.Dispose();
+            failureString.Append("  content of the CBDE handler log file is :\n" + File.ReadAllText(logFilePath));
+            logFile = new StreamWriter(logFilePath, true);
+            foreach (var fileName in csSourceFileNames)
+            {
+                context.ReportDiagnosticWhenActive(CreateDiagnosticFromFailureString(fileName, failureString.ToString()));
+            }
         }
         private void RaiseIssuesFromJSon(CompilationAnalysisContext context)
         {
