@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- Targets to download the CBDE binaries if required. 
+  
+       The files will be downloaded automatically if they are not found locally.
+       
+       To force the files to be downloaded even if they exist, set the build property "UpdateCBDE" to true.
+  
+  -->
+  
+  <PropertyGroup>
+    <CBDEDownloadUrl>http://repox.jfrog.io/repox/sonarsource-public-builds/org/sonarsource/cbde/windows/cbde-windows.zip</CBDEDownloadUrl>
+    <CBDEFolder>$(MSBuildProjectDirectory)\CBDE\windows\</CBDEFolder>
+    <CBDEZipFileName>cbde-windows.zip</CBDEZipFileName>
+    <CBDEZipFilePath>$(CBDEFolder)$(CBDEZipFileName)</CBDEZipFilePath>
+  </PropertyGroup>
+
+
+  <Target Name="FetchCBDEBinaries" BeforeTargets="BeforeBuild" >
+    <PropertyGroup>
+      <CBDEFilesExist>$([System.IO.File]::Exists('$(CBDEFolder)dotnet-symbolic-execution.exe'))</CBDEFilesExist>
+      <ShouldDownloadCBDE>$(UpdateCBDE)</ShouldDownloadCBDE>
+      <ShouldDownloadCBDE Condition="$(ShouldDownloadCBDE)=='' AND $(CBDEFilesExist)=='false'">true</ShouldDownloadCBDE>
+    </PropertyGroup>
+
+    <Message Importance="high" Text="CBDE: binaries exist? $(CBDEFilesExist)" />
+    <Message Importance="high" Text="CBDE: Updating CBDE binaries" Condition="$(UpdateCBDE)=='true'" />
+
+    <CallTarget Targets="DownloadFromRepox" Condition="$(ShouldDownloadCBDE)=='true'" />    
+    <!-- Specifies the CBDE files that should be included in the project and copied to the output directory -->
+    <ItemGroup>
+      <Content Include="$(CBDEFolder)\**\*.exe" >
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="$(CBDEFolder)\**\*.txt" >
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+  </Target>
+
+  <Target Name="DownloadFromRepox">
+    
+    <Message Importance="high" Text="CBDE: Deleting any existing files..." />
+
+    <ItemGroup>
+      <ExistingCBDEFiles Include="$(CBDEFolder)\*.*" />
+    </ItemGroup>
+    <Delete Files="@(ExistingCBDEFiles)" />
+
+    <PropertyGroup>
+      <PowerShellExe Condition="'$(PowerShellExe)'==''">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>
+      <UnzipScript>$(MSBuildProjectDirectory)\..\..\..\Scripts\unzip.ps1</UnzipScript>
+      <DownloadScript>$(MSBuildProjectDirectory)\..\..\..\Scripts\download.ps1</DownloadScript>
+    </PropertyGroup>
+
+    <Message Importance="high" Text="CBDE: Begin downloading CBDE zip..." />
+    <Exec ConsoleToMsBuild="true"
+      Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -File $(DownloadScript) -url $(CBDEDownloadUrl) -outfolder $(CBDEFolder) -outfile $(CBDEZipFileName)">
+      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
+    </Exec>
+    <Message Importance="low" Text="Output of powershell download: $(OutputOfExec)" />
+    <Message Importance="high" Text="CBDE: Finished downloading CBDE binaries: $(CBDEZipFilePath)" />
+
+    <Message Importance="high" Text="CBDE: Unzipping the CBDE binaries..." />
+    <Exec ConsoleToMsBuild="true"
+      Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -File $(UnzipScript) -zipfile $(CBDEZipFilePath) -outpath $(CBDEFolder)">
+      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
+    </Exec>
+    <Message Importance="low" Text="Output of powershell unzip: $(OutputOfExec)" />
+
+    <Message Importance="high" Text="CBDE: Finished unzipping CBDE binaries" />
+  </Target>
+
+</Project>

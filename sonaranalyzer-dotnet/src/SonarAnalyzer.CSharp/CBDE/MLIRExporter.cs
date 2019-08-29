@@ -562,7 +562,7 @@ namespace SonarAnalyzer
                 $" :{loc.StartLinePosition.Line}" +
                 $" :{loc.StartLinePosition.Character})";
 
-            return location;
+            return location.Replace("\\", "\\\\");
         }
 
         private readonly TextWriter writer;
