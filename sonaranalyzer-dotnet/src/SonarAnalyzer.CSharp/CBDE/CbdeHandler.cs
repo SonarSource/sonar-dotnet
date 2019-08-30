@@ -53,24 +53,27 @@ namespace SonarAnalyzer.Rules.CSharp
 
         static CbdeHandler()
         {
-            //UnpackCbdeExe();
+            UnpackCbdeExe();
         }
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            //if (cbdeBinaryPath != null)
-            //{
-            //    RegisterMlirAndCbdeInOneStep(context);
-            //}
+            if (cbdeBinaryPath != null)
+            {
+                RegisterMlirAndCbdeInOneStep(context);
+            }
         }
         private void RegisterMlirAndCbdeInOneStep(SonarAnalysisContext context)
         {
             context.RegisterCompilationAction(
                 c =>
                 {
+                    Console.WriteLine("CBDE: Compilation phase");
+
                     InitializePathsAndLog(c.Compilation.Assembly.Name);
                     foreach (var tree in c.Compilation.SyntaxTrees)
                     {
                         csSourceFileNames.Add(tree.FilePath);
+                        Console.WriteLine($"CBDE: Treating file {tree.FilePath}");
                         var mlirFileName = ManglePath(tree.FilePath) + ".mlir";
                         ExportFunctionMlir(tree, c.Compilation.GetSemanticModel(tree), mlirFileName);
                         logFile.WriteLine("- generated mlir file {0}", mlirFileName);
@@ -90,6 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
         private static void UnpackCbdeExe()
         {
+            Console.WriteLine("Starting to unpack CBDE");
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             var rootPath = Path.GetDirectoryName(assembly.Location);
             const string res = "SonarAnalyzer.CBDE.windows.dotnet-symbolic-execution.exe";
@@ -100,6 +104,7 @@ namespace SonarAnalyzer.Rules.CSharp
             stream.Seek(0, SeekOrigin.Begin);
             stream.CopyTo(fileStream);
             fileStream.Close();
+            Console.WriteLine("CBDE unpacked");
         }
         private void InitializePathsAndLog(string assemblyName)
         {
@@ -124,6 +129,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 MLIRExporter mlirExporter = new MLIRExporter(streamWriter, model, true);
                 foreach (var method in tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
                 {
+                    Console.WriteLine($"CBDE: Exporting {method.Identifier.ValueText}");
                     mlirExporter.ExportFunction(method);
                 }
             }

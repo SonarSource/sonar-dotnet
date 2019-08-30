@@ -30,8 +30,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CbdeHandler_CS()
         {
-            //Verifier.VerifyAnalyzer(@"TestCases\CbdeHandler.cs",
-            //    new CS.CbdeHandlerRule());
+            Verifier.VerifyAnalyzer(@"TestCases\CbdeHandler.cs",
+                new CS.CbdeHandlerRule());
         }
     }
 }
