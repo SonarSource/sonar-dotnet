@@ -51,29 +51,37 @@ namespace SonarAnalyzer.Rules.CSharp
         protected Dictionary<string, int> fileNameDuplicateNumbering = new Dictionary<string, int>();
         private StreamWriter logFile;
 
+        private static void GlobalLog(string s)
+        {
+            File.AppendAllText("CBDE.log", s);
+        }
         static CbdeHandler()
         {
+            GlobalLog("Before unpack");
             UnpackCbdeExe();
+            GlobalLog("After unpack");
         }
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
+            GlobalLog("Before initialize");
             if (cbdeBinaryPath != null)
             {
                 RegisterMlirAndCbdeInOneStep(context);
             }
+            GlobalLog("After initialize");
         }
         private void RegisterMlirAndCbdeInOneStep(SonarAnalysisContext context)
         {
             context.RegisterCompilationAction(
                 c =>
                 {
-                    Console.WriteLine("CBDE: Compilation phase");
 
                     InitializePathsAndLog(c.Compilation.Assembly.Name);
+                    GlobalLog("CBDE: Compilation phase");
                     foreach (var tree in c.Compilation.SyntaxTrees)
                     {
                         csSourceFileNames.Add(tree.FilePath);
-                        Console.WriteLine($"CBDE: Treating file {tree.FilePath}");
+                        GlobalLog($"CBDE: Treating file {tree.FilePath}");
                         var mlirFileName = ManglePath(tree.FilePath) + ".mlir";
                         ExportFunctionMlir(tree, c.Compilation.GetSemanticModel(tree), mlirFileName);
                         logFile.WriteLine("- generated mlir file {0}", mlirFileName);
@@ -93,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
         private static void UnpackCbdeExe()
         {
-            Console.WriteLine("Starting to unpack CBDE");
+            GlobalLog("Starting to unpack CBDE");
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             var rootPath = Path.GetDirectoryName(assembly.Location);
             const string res = "SonarAnalyzer.CBDE.windows.dotnet-symbolic-execution.exe";
@@ -104,7 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
             stream.Seek(0, SeekOrigin.Begin);
             stream.CopyTo(fileStream);
             fileStream.Close();
-            Console.WriteLine("CBDE unpacked");
+            GlobalLog("CBDE unpacked");
         }
         private void InitializePathsAndLog(string assemblyName)
         {
