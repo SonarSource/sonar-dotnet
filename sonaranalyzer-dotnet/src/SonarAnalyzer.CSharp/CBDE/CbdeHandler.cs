@@ -53,14 +53,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         static CbdeHandler()
         {
-            UnpackCbdeExe();
+            //UnpackCbdeExe();
         }
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            if (cbdeBinaryPath != null)
-            {
-                RegisterMlirAndCbdeInOneStep(context);
-            }
+            //if (cbdeBinaryPath != null)
+            //{
+            //    RegisterMlirAndCbdeInOneStep(context);
+            //}
         }
         private void RegisterMlirAndCbdeInOneStep(SonarAnalysisContext context)
         {
