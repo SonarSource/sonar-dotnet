@@ -5,10 +5,14 @@ function Get-NuGetPath {
 }
 
 function Get-VsWherePath {
+    # VsWhere is supposed to be at a fixed path, see https://github.com/Microsoft/vswhere/wiki/Installing
+    if (-not (Test-Path env:VSWHERE_PATH)) {
+         $env:VSWHERE_PATH = ${env:ProgramFiles(x86)} + '\Microsoft Visual Studio\Installer\vswhere.exe'
+    }
     return Get-ExecutablePath -name "vswhere.exe" -envVar "VSWHERE_PATH"
 }
 
-function Get-MsBuildPath([ValidateSet("14.0", "15.0")][string]$msbuildVersion) {
+function Get-MsBuildPath([ValidateSet("14.0", "15.0", "16.1")][string]$msbuildVersion) {
     if ($msbuildVersion -eq "14.0") {
         return Get-ExecutablePath -name "msbuild.exe" -envVar "MSBUILD_PATH"
     }
@@ -24,11 +28,15 @@ function Get-MsBuildPath([ValidateSet("14.0", "15.0")][string]$msbuildVersion) {
         # Sets the path to MSBuild 15 into an the MSBUILD_PATH environment variable
         # All subsequent builds after this command will use MSBuild 15!
         # Test if vswhere.exe is in your path. Download from: https://github.com/Microsoft/vswhere/releases
-        $path = Exec { & (Get-VsWherePath) -version "[15.0, 16.0)" -products * -requires Microsoft.Component.MSBuild `
-            -property installationPath } | Select-Object -First 1
+        $path = Exec { & (Get-VsWherePath) -version "[15.0, 16.2)" -products * -requires Microsoft.Component.MSBuild `
+            -find MSBuild\**\Bin\MSBuild.exe } | Select-Object -First 1
         if ($path) {
-            $msbuild15Path = Join-Path $path "MSBuild\15.0\Bin\MSBuild.exe"
+            Write-Host "'vswhere.exe' succeeded"
+            $msbuild15Path = $path
             [environment]::SetEnvironmentVariable($msbuild15Env, $msbuild15Path)
+        }
+        else{
+            Write-Host "'vswhere.exe' failed"
         }
     }
 
@@ -80,7 +88,7 @@ function New-NuGetPackages([string]$binPath) {
 }
 
 function Restore-Packages (
-    [Parameter(Mandatory = $true, Position = 0)][ValidateSet("14.0", "15.0")][string]$msbuildVersion,
+    [Parameter(Mandatory = $true, Position = 0)][ValidateSet("14.0", "15.0", "16.2")][string]$msbuildVersion,
     [Parameter(Mandatory = $true, Position = 1)][string]$solutionPath) {
 
     $solutionName = Split-Path $solutionPath -Leaf
