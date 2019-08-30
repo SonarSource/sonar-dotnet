@@ -49,6 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private string logFilePath;
         protected HashSet<string> csSourceFileNames= new HashSet<string>();
         protected Dictionary<string, int> fileNameDuplicateNumbering = new Dictionary<string, int>();
+        private MemoryStream logStream;
         private StreamWriter logFile;
 
         static CbdeHandler()
@@ -104,13 +105,25 @@ namespace SonarAnalyzer.Rules.CSharp
         private void InitializePathsAndLog(string assemblyName)
         {
             SetupMlirRootDirectory();
-            mlirDirectoryAssembly = Path.Combine(mlirDirectoryRoot, assemblyName);
-            cbdeJsonOutputPath = Path.Combine(mlirDirectoryAssembly, cbdeJsonOutputFileName);
+            do
+            {
+                var random = new Random((int)DateTime.Now.Ticks);
+                var fileSuffix = random.Next(0, int.MaxValue).ToString("X");
+                mlirDirectoryAssembly = Path.Combine(mlirDirectoryRoot, assemblyName, fileSuffix);
+
+            } while (Directory.Exists(mlirDirectoryAssembly));
             Directory.CreateDirectory(mlirDirectoryAssembly);
+            cbdeJsonOutputPath = Path.Combine(mlirDirectoryAssembly, cbdeJsonOutputFileName);
             logFilePath = Path.Combine(mlirDirectoryAssembly, "CbdeHandler.log");
-            logFile = new StreamWriter(logFilePath, true);
+            logStream = new MemoryStream();
+            logFile = new StreamWriter(logStream);
             logFile.WriteLine(">> New Cbde Run triggered at {0}", DateTime.Now.ToShortTimeString());
             logFile.Flush();
+        }
+        private void DumpLogToLogFile()
+        {
+            var str = UTF8Encoding.UTF8.GetString(logStream.GetBuffer());
+            File.AppendAllText(logFilePath, str, Encoding.UTF8);
         }
         private void SetupMlirRootDirectory()
         {
@@ -139,23 +152,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 logFile.WriteLine("  * binary_location: '{0}'", pProcess.StartInfo.FileName);
                 logFile.WriteLine("  * arguments: '{0}'", pProcess.StartInfo.Arguments);
                 pProcess.StartInfo.UseShellExecute = false;
-                pProcess.StartInfo.RedirectStandardOutput = true;
-                pProcess.StartInfo.RedirectStandardError = true;
-                pProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                pProcess.StartInfo.CreateNoWindow = true;
+                //pProcess.StartInfo.RedirectStandardOutput = true;
+                //pProcess.StartInfo.RedirectStandardError = true;
+                //pProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                //pProcess.StartInfo.CreateNoWindow = true;
                 logFile.Flush();
                 pProcess.Start();
                 pProcess.WaitForExit();
-                var output = pProcess.StandardOutput.ReadToEnd();
-                var eoutput = pProcess.StandardError.ReadToEnd();
+                //var output = pProcess.StandardOutput.ReadToEnd();
+                //var eoutput = pProcess.StandardError.ReadToEnd();
                 logFile.WriteLine("  * exit_code: '{0}'", pProcess.ExitCode);
-                logFile.WriteLine("  * stdout: '{0}'", output);
-                logFile.WriteLine("  * stderr: '{0}'", eoutput);
+                //logFile.WriteLine("  * stdout: '{0}'", output);
+                //logFile.WriteLine("  * stderr: '{0}'", eoutput);
                 logFile.Flush();
                 // TODO: log this pProcess.PeakWorkingSet64;
                 if (pProcess.ExitCode != 0)
                 {
                     RaiseIssueFromFailedCbdeRun(c);
+                    DumpLogToLogFile();
                 }
                 else
                 {
@@ -204,9 +218,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 failureString.Append("  - " + fileName + "\n");
             }
             // we dispose the StreamWriter to unlock the log file
-            logFile.Dispose();
-            failureString.Append("  content of the CBDE handler log file is :\n" + File.ReadAllText(logFilePath));
-            logFile = new StreamWriter(logFilePath, true);
+            failureString.Append("  content of the CBDE handler log file is :\n" + Encoding.UTF8.GetString(logStream.GetBuffer()));
             foreach (var fileName in csSourceFileNames)
             {
                 context.ReportDiagnosticWhenActive(CreateDiagnosticFromFailureString(fileName, failureString.ToString()));

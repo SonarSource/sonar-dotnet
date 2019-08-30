@@ -90,7 +90,6 @@ namespace SonarAnalyzer
             }
             return sb.ToString();
         }
-
         private bool IsTooClomplexForMLIROrTheCFG(MethodDeclarationSyntax method)
         {
             var symbol = semanticModel.GetDeclaredSymbol(method);
@@ -118,8 +117,26 @@ namespace SonarAnalyzer
             n.IsKind(SyntaxKind.CheckedExpression) ||
             n.IsKind(SyntaxKind.UncheckedExpression) ||
             n.IsKind(SyntaxKind.UncheckedStatement) ||
+            n.IsKind(SyntaxKind.GotoStatement) ||
+            n.IsKind(SyntaxKindEx.UnderscoreToken) ||
+            n.IsKind(SyntaxKindEx.IsPatternExpression) ||
+            n.IsKind(SyntaxKindEx.DefaultLiteralExpression) ||
             n.IsKind(SyntaxKindEx.LocalFunctionStatement) ||
-            n.IsKind(SyntaxKind.GotoStatement)
+            n.IsKind(SyntaxKindEx.TupleType) ||
+            n.IsKind(SyntaxKindEx.TupleElement) ||
+            n.IsKind(SyntaxKindEx.TupleExpression) ||
+            n.IsKind(SyntaxKindEx.SingleVariableDesignation) ||
+            n.IsKind(SyntaxKindEx.ParenthesizedVariableDesignation) ||
+            n.IsKind(SyntaxKindEx.ForEachVariableStatement) ||
+            n.IsKind(SyntaxKindEx.DeclarationPattern) ||
+            n.IsKind(SyntaxKindEx.ConstantPattern) ||
+            n.IsKind(SyntaxKindEx.CasePatternSwitchLabel) ||
+            n.IsKind(SyntaxKindEx.WhenClause) ||
+            n.IsKind(SyntaxKindEx.DiscardDesignation) ||
+            n.IsKind(SyntaxKindEx.DeclarationExpression) ||
+            n.IsKind(SyntaxKindEx.RefExpression) ||
+            n.IsKind(SyntaxKindEx.RefType) ||
+            n.IsKind(SyntaxKindEx.ThrowExpression)
             );
         }
 
