@@ -5,6 +5,10 @@ function Get-NuGetPath {
 }
 
 function Get-VsWherePath {
+    # VsWhere is supposed to be at a fixed path, see https://github.com/Microsoft/vswhere/wiki/Installing
+    if (-not (Test-Path env:VSWHERE_PATH)) {
+         $env:VSWHERE_PATH = ${env:ProgramFiles(x86)} + '\Microsoft Visual Studio\Installer\vswhere.exe'
+    }
     return Get-ExecutablePath -name "vswhere.exe" -envVar "VSWHERE_PATH"
 }
 
