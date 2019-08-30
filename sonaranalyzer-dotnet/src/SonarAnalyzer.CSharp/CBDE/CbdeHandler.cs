@@ -32,6 +32,7 @@ using System.Collections.Immutable;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Threading;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -49,34 +50,78 @@ namespace SonarAnalyzer.Rules.CSharp
         private string logFilePath;
         protected HashSet<string> csSourceFileNames= new HashSet<string>();
         protected Dictionary<string, int> fileNameDuplicateNumbering = new Dictionary<string, int>();
+        private MemoryStream logStream;
         private StreamWriter logFile;
+        private static readonly object logFileLock = new Object();
+
+        private static readonly string mlirPath =
+            Environment.GetEnvironmentVariable("CIRRUS_WORKING_DIR") ?? // For Cirrus
+            Environment.GetEnvironmentVariable("WORKSPACE") ?? // For Jenkins
+            Path.GetTempPath(); // By default
+        private static readonly string mlirProcessSpecificPath =
+            Path.Combine(mlirPath, $"CBDE_{Process.GetCurrentProcess().Id}");
+        private static readonly string mlirLogFile =
+            Path.Combine(mlirProcessSpecificPath, "cbdeHandler.log");
+        private static void GlobalLog(string s)
+        {
+            lock (logFileLock)
+            {
+                var message = $"{DateTime.Now} ({Thread.CurrentThread.ManagedThreadId,5}): {s}\n";
+                File.AppendAllText(mlirLogFile, message);
+            }
+        }
 
         static CbdeHandler()
         {
+            Directory.CreateDirectory(mlirProcessSpecificPath);
+            lock (logFileLock)
+            {
+                if (File.Exists(mlirProcessSpecificPath))
+                {
+                    File.Delete(mlirProcessSpecificPath);
+                }
+            }
+            GlobalLog("Before unpack");
             UnpackCbdeExe();
+            GlobalLog("After unpack");
         }
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
+            GlobalLog("Before initialize");
             if (cbdeBinaryPath != null)
             {
                 RegisterMlirAndCbdeInOneStep(context);
             }
+            GlobalLog("After initialize");
         }
         private void RegisterMlirAndCbdeInOneStep(SonarAnalysisContext context)
         {
             context.RegisterCompilationAction(
                 c =>
                 {
-                    InitializePathsAndLog(c.Compilation.Assembly.Name);
-                    foreach (var tree in c.Compilation.SyntaxTrees)
+                    var compilationHash = c.Compilation.GetHashCode();
+                    InitializePathsAndLog(c.Compilation.Assembly.Name, compilationHash);
+                    GlobalLog("CBDE: Compilation phase");
+                    try
                     {
-                        csSourceFileNames.Add(tree.FilePath);
-                        var mlirFileName = ManglePath(tree.FilePath) + ".mlir";
-                        ExportFunctionMlir(tree, c.Compilation.GetSemanticModel(tree), mlirFileName);
-                        logFile.WriteLine("- generated mlir file {0}", mlirFileName);
-                        logFile.Flush();
+                        foreach (var tree in c.Compilation.SyntaxTrees)
+                        {
+                            csSourceFileNames.Add(tree.FilePath);
+                            GlobalLog($"CBDE: Treating file {tree.FilePath} in context {compilationHash}");
+                            var mlirFileName = ManglePath(tree.FilePath) + ".mlir";
+                            ExportFunctionMlir(tree, c.Compilation.GetSemanticModel(tree), mlirFileName);
+                            logFile.WriteLine("- generated mlir file {0}", mlirFileName);
+                            logFile.Flush();
+                            GlobalLog($"CBDE: Done with file {tree.FilePath} in context {compilationHash}");
+                        }
+                        RunCbdeAndRaiseIssues(c);
+                        GlobalLog("CBDE: End of compilation");
                     }
-                    RunCbdeAndRaiseIssues(c);
+                    catch(Exception e)
+                    {
+                        GlobalLog("An exception has occured: " + e.Message + "\n" + e.StackTrace);
+                        throw;
+                    }
                 });
         }
         private string ManglePath(string path)
@@ -91,9 +136,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void UnpackCbdeExe()
         {
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            var rootPath = Path.GetDirectoryName(assembly.Location);
             const string res = "SonarAnalyzer.CBDE.windows.dotnet-symbolic-execution.exe";
-            cbdeBinaryPath = Path.Combine(rootPath, "CBDE/windows/dotnet-symbolic-execution.exe");
+            cbdeBinaryPath = Path.Combine(mlirProcessSpecificPath, "windows/dotnet-symbolic-execution.exe");
             Directory.CreateDirectory(Path.GetDirectoryName(cbdeBinaryPath));
             var stream = assembly.GetManifestResourceStream(res);
             var fileStream = File.Create(cbdeBinaryPath);
@@ -101,20 +145,30 @@ namespace SonarAnalyzer.Rules.CSharp
             stream.CopyTo(fileStream);
             fileStream.Close();
         }
-        private void InitializePathsAndLog(string assemblyName)
+        private void InitializePathsAndLog(string assemblyName, int compilationHash)
         {
             SetupMlirRootDirectory();
-            mlirDirectoryAssembly = Path.Combine(mlirDirectoryRoot, assemblyName);
-            cbdeJsonOutputPath = Path.Combine(mlirDirectoryAssembly, cbdeJsonOutputFileName);
+            mlirDirectoryAssembly = Path.Combine(mlirDirectoryRoot, assemblyName, compilationHash.ToString());
+            if (Directory.Exists(mlirDirectoryAssembly))
+            {
+                Directory.Delete(mlirDirectoryAssembly, true);
+            }
             Directory.CreateDirectory(mlirDirectoryAssembly);
+            cbdeJsonOutputPath = Path.Combine(mlirDirectoryAssembly, cbdeJsonOutputFileName);
             logFilePath = Path.Combine(mlirDirectoryAssembly, "CbdeHandler.log");
-            logFile = new StreamWriter(logFilePath, true);
+            logStream = new MemoryStream();
+            logFile = new StreamWriter(logStream);
             logFile.WriteLine(">> New Cbde Run triggered at {0}", DateTime.Now.ToShortTimeString());
             logFile.Flush();
         }
+        private void DumpLogToLogFile()
+        {
+            var str = UTF8Encoding.UTF8.GetString(logStream.GetBuffer());
+            File.AppendAllText(logFilePath, str, Encoding.UTF8);
+        }
         private void SetupMlirRootDirectory()
         {
-            mlirDirectoryRoot = Path.Combine(Path.GetTempPath(), "sonar-dotnet/cbde");
+            mlirDirectoryRoot = Path.Combine(mlirPath, "sonar-dotnet/cbde");
             Directory.CreateDirectory(mlirDirectoryRoot);
         }
         private void ExportFunctionMlir(SyntaxTree tree, SemanticModel model, string mlirFileName)
@@ -130,44 +184,55 @@ namespace SonarAnalyzer.Rules.CSharp
         }
         private void RunCbdeAndRaiseIssues(CompilationAnalysisContext c)
         {
+            GlobalLog("Running CBDE");
             using (Process pProcess = new Process())
             {
                 logFile.WriteLine("- Cbde process");
                 pProcess.StartInfo.FileName = cbdeBinaryPath;
                 pProcess.StartInfo.WorkingDirectory = mlirDirectoryAssembly;
-                pProcess.StartInfo.Arguments = "-i " + "\"" + mlirDirectoryAssembly + "\" -o \"" + cbdeJsonOutputPath + "\"";
+                var progressLogFile = Path.Combine(mlirDirectoryAssembly, "progressLogFile.log");
+                pProcess.StartInfo.Arguments = "-i " + "\"" + mlirDirectoryAssembly + "\" -o \"" + cbdeJsonOutputPath + "\" -p \"" + progressLogFile + "\"";
                 logFile.WriteLine("  * binary_location: '{0}'", pProcess.StartInfo.FileName);
                 logFile.WriteLine("  * arguments: '{0}'", pProcess.StartInfo.Arguments);
                 pProcess.StartInfo.UseShellExecute = false;
-                pProcess.StartInfo.RedirectStandardOutput = true;
+                //pProcess.StartInfo.RedirectStandardOutput = true;
                 pProcess.StartInfo.RedirectStandardError = true;
-                pProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                pProcess.StartInfo.CreateNoWindow = true;
+                pProcess.StartInfo.UseShellExecute = false;
+                //pProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                //pProcess.StartInfo.CreateNoWindow = true;
                 logFile.Flush();
                 pProcess.Start();
                 pProcess.WaitForExit();
-                var output = pProcess.StandardOutput.ReadToEnd();
-                var eoutput = pProcess.StandardError.ReadToEnd();
+                //var output = pProcess.StandardOutput.ReadToEnd();
+                //var eoutput = pProcess.StandardError.ReadToEnd();
                 logFile.WriteLine("  * exit_code: '{0}'", pProcess.ExitCode);
-                logFile.WriteLine("  * stdout: '{0}'", output);
-                logFile.WriteLine("  * stderr: '{0}'", eoutput);
+                //logFile.WriteLine("  * stdout: '{0}'", output);
+                //logFile.WriteLine("  * stderr: '{0}'", eoutput);
                 logFile.Flush();
                 // TODO: log this pProcess.PeakWorkingSet64;
                 if (pProcess.ExitCode != 0)
                 {
+                    GlobalLog("Running CBDE: Failure");
+
+                    var errorOutput = pProcess.StandardError.ReadToEnd();
+                    File.AppendAllText(logFilePath, errorOutput, Encoding.UTF8);
+
                     RaiseIssueFromFailedCbdeRun(c);
+                    //DumpLogToLogFile();
+                    GlobalLog("Running CBDE: Error dumped");
                 }
                 else
                 {
+                    GlobalLog("Running CBDE: Success");
                     RaiseIssuesFromJSon(c);
                     Cleanup();
+                    GlobalLog("Running CBDE: Issues reported");
                 }
             }
         }
         private void Cleanup()
         {
             logFile.Dispose();
-            Directory.Delete(mlirDirectoryAssembly, true);
         }
         private static Diagnostic CreateDiagnosticFromJToken(JToken token)
         {
@@ -197,20 +262,16 @@ namespace SonarAnalyzer.Rules.CSharp
             return Diagnostic.Create(rule, loc);
         }
         private void RaiseIssueFromFailedCbdeRun(CompilationAnalysisContext context)
-        {            
+        {
             StringBuilder failureString = new StringBuilder("CBDE Failure Report :\n  C# souces files involved are:\n");
             foreach (var fileName in csSourceFileNames)
             {
                 failureString.Append("  - " + fileName + "\n");
             }
             // we dispose the StreamWriter to unlock the log file
-            logFile.Dispose();
-            failureString.Append("  content of the CBDE handler log file is :\n" + File.ReadAllText(logFilePath));
-            logFile = new StreamWriter(logFilePath, true);
-            foreach (var fileName in csSourceFileNames)
-            {
-                context.ReportDiagnosticWhenActive(CreateDiagnosticFromFailureString(fileName, failureString.ToString()));
-            }
+            failureString.Append("  content of the CBDE handler log file is :\n" + Encoding.UTF8.GetString(logStream.GetBuffer()));
+            GlobalLog(failureString.ToString());
+            Console.Error.WriteLine("Error when executing MLIR");
         }
         private void RaiseIssuesFromJSon(CompilationAnalysisContext context)
         {
