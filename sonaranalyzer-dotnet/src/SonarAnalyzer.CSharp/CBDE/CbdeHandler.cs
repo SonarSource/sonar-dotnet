@@ -52,11 +52,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private MemoryStream logStream;
         private StreamWriter logFile;
 
-        private static readonly string globalLogPath =
-            Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "CBDE.log");
+        private static readonly string mlirPath =
+            Environment.GetEnvironmentVariable("CIRRUS_WORKING_DIR") ?? Path.GetTempPath();
         private static void GlobalLog(string s)
         {
-            File.AppendAllText(globalLogPath, s);
+            File.AppendAllText(Path.Combine(mlirPath, "CBDE.log"), s);
         }
         static CbdeHandler()
         {
@@ -139,7 +139,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
         private void SetupMlirRootDirectory()
         {
-            mlirDirectoryRoot = Path.Combine(Path.GetTempPath(), "sonar-dotnet/cbde");
+            mlirDirectoryRoot = Path.Combine(mlirPath, "sonar-dotnet/cbde");
             Directory.CreateDirectory(mlirDirectoryRoot);
         }
         private void ExportFunctionMlir(SyntaxTree tree, SemanticModel model, string mlirFileName)
