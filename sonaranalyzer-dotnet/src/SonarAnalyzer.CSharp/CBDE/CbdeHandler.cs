@@ -52,16 +52,26 @@ namespace SonarAnalyzer.Rules.CSharp
         private MemoryStream logStream;
         private StreamWriter logFile;
 
+        private static readonly string globalLogPath =
+            Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "CBDE.log");
+        private static void GlobalLog(string s)
+        {
+            File.AppendAllText(globalLogPath, s);
+        }
         static CbdeHandler()
         {
+            GlobalLog("Before unpack");
             UnpackCbdeExe();
+            GlobalLog("After unpack");
         }
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
+            GlobalLog("Before initialize");
             if (cbdeBinaryPath != null)
             {
                 RegisterMlirAndCbdeInOneStep(context);
             }
+            GlobalLog("After initialize");
         }
         private void RegisterMlirAndCbdeInOneStep(SonarAnalysisContext context)
         {
@@ -69,9 +79,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     InitializePathsAndLog(c.Compilation.Assembly.Name);
+                    GlobalLog("CBDE: Compilation phase");
                     foreach (var tree in c.Compilation.SyntaxTrees)
                     {
                         csSourceFileNames.Add(tree.FilePath);
+                        GlobalLog($"CBDE: Treating file {tree.FilePath}");
                         var mlirFileName = ManglePath(tree.FilePath) + ".mlir";
                         ExportFunctionMlir(tree, c.Compilation.GetSemanticModel(tree), mlirFileName);
                         logFile.WriteLine("- generated mlir file {0}", mlirFileName);
