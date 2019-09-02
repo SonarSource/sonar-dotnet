@@ -67,11 +67,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 File.AppendAllText(mlirGlobalLogPath, message);
             }
         }
+
         static CbdeHandler()
         {
-            if (File.Exists(mlirGlobalLogPath))
+            lock (logFileLock)
             {
-                File.Delete(mlirGlobalLogPath);
+                if (File.Exists(mlirGlobalLogPath))
+                {
+                    File.Delete(mlirGlobalLogPath);
+                }
             }
             GlobalLog("Before unpack");
             UnpackCbdeExe();
