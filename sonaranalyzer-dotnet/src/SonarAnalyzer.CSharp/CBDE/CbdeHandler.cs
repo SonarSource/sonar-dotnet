@@ -92,16 +92,25 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     InitializePathsAndLog(c.Compilation.Assembly.Name);
                     GlobalLog("CBDE: Compilation phase");
-                    foreach (var tree in c.Compilation.SyntaxTrees)
+                    try
                     {
-                        csSourceFileNames.Add(tree.FilePath);
-                        GlobalLog($"CBDE: Treating file {tree.FilePath}");
-                        var mlirFileName = ManglePath(tree.FilePath) + ".mlir";
-                        ExportFunctionMlir(tree, c.Compilation.GetSemanticModel(tree), mlirFileName);
-                        logFile.WriteLine("- generated mlir file {0}", mlirFileName);
-                        logFile.Flush();
+                        foreach (var tree in c.Compilation.SyntaxTrees)
+                        {
+                            csSourceFileNames.Add(tree.FilePath);
+                            GlobalLog($"CBDE: Treating file {tree.FilePath}");
+                            var mlirFileName = ManglePath(tree.FilePath) + ".mlir";
+                            ExportFunctionMlir(tree, c.Compilation.GetSemanticModel(tree), mlirFileName);
+                            logFile.WriteLine("- generated mlir file {0}", mlirFileName);
+                            logFile.Flush();
+                        }
+                        RunCbdeAndRaiseIssues(c);
+                        GlobalLog("CBDE: End of compilation");
                     }
-                    RunCbdeAndRaiseIssues(c);
+                    catch(Exception e)
+                    {
+                        GlobalLog("An exception has occured: " + e.Message + "\n" + e.StackTrace);
+                        throw;
+                    }
                 });
         }
         private string ManglePath(string path)
@@ -167,6 +176,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
         private void RunCbdeAndRaiseIssues(CompilationAnalysisContext c)
         {
+            GlobalLog("Running CBDE");
             using (Process pProcess = new Process())
             {
                 logFile.WriteLine("- Cbde process");
@@ -192,13 +202,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 // TODO: log this pProcess.PeakWorkingSet64;
                 if (pProcess.ExitCode != 0)
                 {
+                    GlobalLog("Running CBDE: Failure");
                     RaiseIssueFromFailedCbdeRun(c);
                     DumpLogToLogFile();
+                    GlobalLog("Running CBDE: Error dumped");
                 }
                 else
                 {
+                    GlobalLog("Running CBDE: Success");
                     RaiseIssuesFromJSon(c);
                     Cleanup();
+                    GlobalLog("Running CBDE: Issues reported");
                 }
             }
         }
