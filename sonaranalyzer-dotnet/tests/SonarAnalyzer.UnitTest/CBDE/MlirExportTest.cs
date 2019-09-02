@@ -1061,6 +1061,19 @@ class A {
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void MethodGroup()
+        {
+            var code = @"
+public static Func<string, bool> CreateFilter()
+{
+    return string.IsNullOrEmpty;
+}
+";
+            ValidateCodeGeneration(code);
+
+        }
+
     } // Class
 
     } // Namespace
