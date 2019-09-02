@@ -194,6 +194,13 @@ namespace SonarAnalyzer
                             else
                             {
                                 Debug.Assert(functionReturnType!="()","Returning value in function declared with no return type");
+                                if (ret.Expression.RemoveParentheses().Kind() == SyntaxKind.SimpleMemberAccessExpression)
+                                {
+                                    // Special case a returning a metod group that will be cast into a func
+                                    writer.WriteLine($"%{OpId(ret)} = cbde.unknown : none {GetLocation(ret)} // return method group");
+                                    writer.WriteLine($"return %{OpId(ret)} : none {GetLocation(ret)}");
+                                    break;
+                                }
                                 string returnType = MLIRType(ret.Expression);
                                 if (returnType == functionReturnType)
                                 {
@@ -322,8 +329,22 @@ namespace SonarAnalyzer
             return symbolType == null ? "none" : MLIRType(symbolType);
         }
 
-        private string MLIRType(ExpressionSyntax e) =>
-            e.RemoveParentheses().Kind() == SyntaxKind.NullLiteralExpression ? "none" : MLIRType(semanticModel.GetTypeInfo(e).Type);
+        private string MLIRType(ExpressionSyntax e)
+        {
+            switch (e.RemoveParentheses().Kind())
+            {
+                case SyntaxKind.NullLiteralExpression:
+                    return "none";
+                case SyntaxKind.SimpleMemberAccessExpression:
+                    if (e.Parent.IsKind(SyntaxKind.InvocationExpression))
+                    {
+                        return MLIRType(semanticModel.GetTypeInfo(e).Type);
+                    }
+                    return "none"; // Case of a method group that will get transformed into at Func<>, but does not have a type
+                default:
+                    return MLIRType(semanticModel.GetTypeInfo(e).Type);
+            }
+        }
 
         private string MLIRType(VariableDeclaratorSyntax v) => MLIRType(semanticModel.GetDeclaredSymbol(v).GetSymbolType());
 
