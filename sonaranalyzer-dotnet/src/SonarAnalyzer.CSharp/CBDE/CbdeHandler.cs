@@ -46,6 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static string cbdeBinaryPath;
         private string mlirDirectoryRoot;
         private string mlirDirectoryAssembly;
+        private string compilationId; // An hexadeciaml string used to uniquely identify the current compilation
         private string cbdeJsonOutputPath;
         private string logFilePath;
         protected HashSet<string> csSourceFileNames= new HashSet<string>();
@@ -97,11 +98,12 @@ namespace SonarAnalyzer.Rules.CSharp
                         foreach (var tree in c.Compilation.SyntaxTrees)
                         {
                             csSourceFileNames.Add(tree.FilePath);
-                            GlobalLog($"CBDE: Treating file {tree.FilePath}");
+                            GlobalLog($"CBDE: Treating file {tree.FilePath} in context {compilationId}");
                             var mlirFileName = ManglePath(tree.FilePath) + ".mlir";
                             ExportFunctionMlir(tree, c.Compilation.GetSemanticModel(tree), mlirFileName);
                             logFile.WriteLine("- generated mlir file {0}", mlirFileName);
                             logFile.Flush();
+                            GlobalLog($"CBDE: Done with file {tree.FilePath} in context {compilationId}");
                         }
                         RunCbdeAndRaiseIssues(c);
                         GlobalLog("CBDE: End of compilation");
@@ -141,8 +143,8 @@ namespace SonarAnalyzer.Rules.CSharp
             do
             {
                 var random = new Random((int)DateTime.Now.Ticks);
-                var fileSuffix = random.Next(0, int.MaxValue).ToString("X");
-                mlirDirectoryAssembly = Path.Combine(mlirDirectoryRoot, assemblyName, fileSuffix);
+                compilationId = random.Next(0, int.MaxValue).ToString("X");
+                mlirDirectoryAssembly = Path.Combine(mlirDirectoryRoot, assemblyName, compilationId);
 
             } while (Directory.Exists(mlirDirectoryAssembly));
             Directory.CreateDirectory(mlirDirectoryAssembly);
