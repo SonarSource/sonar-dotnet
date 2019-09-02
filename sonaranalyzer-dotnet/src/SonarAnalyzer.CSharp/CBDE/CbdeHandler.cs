@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly string mlirPath =
             Environment.GetEnvironmentVariable("CIRRUS_WORKING_DIR") ?? Path.GetTempPath();
         private static readonly string mlirGlobalLogPath =
-            Path.Combine(mlirPath, "CBDE.log");
+            Path.Combine(mlirPath, $"CBDE_{Process.GetCurrentProcess().Id}.log");
         private static void GlobalLog(string s)
         {
             lock (logFileLock)
