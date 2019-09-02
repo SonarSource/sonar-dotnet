@@ -32,6 +32,7 @@ using System.Collections.Immutable;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Threading;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -51,15 +52,26 @@ namespace SonarAnalyzer.Rules.CSharp
         protected Dictionary<string, int> fileNameDuplicateNumbering = new Dictionary<string, int>();
         private MemoryStream logStream;
         private StreamWriter logFile;
+        private static readonly object logFileLock = new Object();
 
         private static readonly string mlirPath =
             Environment.GetEnvironmentVariable("CIRRUS_WORKING_DIR") ?? Path.GetTempPath();
+        private static readonly string mlirGlobalLogPath =
+            Path.Combine(mlirPath, "CBDE.log");
         private static void GlobalLog(string s)
         {
-            File.AppendAllText(Path.Combine(mlirPath, "CBDE.log"), s);
+            lock (logFileLock)
+            {
+                var message = $"{DateTime.Now} ({Thread.CurrentThread.ManagedThreadId,5}): {s}\n";
+                File.AppendAllText(mlirGlobalLogPath, message);
+            }
         }
         static CbdeHandler()
         {
+            if (File.Exists(mlirGlobalLogPath))
+            {
+                File.Delete(mlirGlobalLogPath);
+            }
             GlobalLog("Before unpack");
             UnpackCbdeExe();
             GlobalLog("After unpack");
