@@ -46,7 +46,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private static string cbdeBinaryPath;
         private string mlirDirectoryRoot;
         private string mlirDirectoryAssembly;
-        private string compilationId; // An hexadeciaml string used to uniquely identify the current compilation
         private string cbdeJsonOutputPath;
         private string logFilePath;
         protected HashSet<string> csSourceFileNames= new HashSet<string>();
@@ -95,19 +94,20 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCompilationAction(
                 c =>
                 {
-                    InitializePathsAndLog(c.Compilation.Assembly.Name);
+                    var compilationHash = c.Compilation.GetHashCode();
+                    InitializePathsAndLog(c.Compilation.Assembly.Name, compilationHash);
                     GlobalLog("CBDE: Compilation phase");
                     try
                     {
                         foreach (var tree in c.Compilation.SyntaxTrees)
                         {
                             csSourceFileNames.Add(tree.FilePath);
-                            GlobalLog($"CBDE: Treating file {tree.FilePath} in context {compilationId}");
+                            GlobalLog($"CBDE: Treating file {tree.FilePath} in context {compilationHash}");
                             var mlirFileName = ManglePath(tree.FilePath) + ".mlir";
                             ExportFunctionMlir(tree, c.Compilation.GetSemanticModel(tree), mlirFileName);
                             logFile.WriteLine("- generated mlir file {0}", mlirFileName);
                             logFile.Flush();
-                            GlobalLog($"CBDE: Done with file {tree.FilePath} in context {compilationId}");
+                            GlobalLog($"CBDE: Done with file {tree.FilePath} in context {compilationHash}");
                         }
                         RunCbdeAndRaiseIssues(c);
                         GlobalLog("CBDE: End of compilation");
@@ -141,16 +141,10 @@ namespace SonarAnalyzer.Rules.CSharp
             stream.CopyTo(fileStream);
             fileStream.Close();
         }
-        private void InitializePathsAndLog(string assemblyName)
+        private void InitializePathsAndLog(string assemblyName, int compilationHash)
         {
             SetupMlirRootDirectory();
-            do
-            {
-                var random = new Random((int)DateTime.Now.Ticks);
-                compilationId = random.Next(0, int.MaxValue).ToString("X");
-                mlirDirectoryAssembly = Path.Combine(mlirDirectoryRoot, assemblyName, compilationId);
-
-            } while (Directory.Exists(mlirDirectoryAssembly));
+            mlirDirectoryAssembly = Path.Combine(mlirDirectoryRoot, assemblyName, compilationHash.ToString());
             Directory.CreateDirectory(mlirDirectoryAssembly);
             cbdeJsonOutputPath = Path.Combine(mlirDirectoryAssembly, cbdeJsonOutputFileName);
             logFilePath = Path.Combine(mlirDirectoryAssembly, "CbdeHandler.log");
