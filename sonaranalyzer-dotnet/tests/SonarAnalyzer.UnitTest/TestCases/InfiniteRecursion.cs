@@ -90,7 +90,7 @@ namespace Tests.Diagnostics
 
         object Prop1
         {
-             get // Noncompliant {{Add a way to break out of this property accessor's recursion.}}
+            get
             {
                 return (new InfiniteRecursion())?.Prop1;
             }
