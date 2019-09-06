@@ -984,9 +984,10 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private Block BuildConditionalAccessExpression(ConditionalAccessExpressionSyntax conditionalAccess,
             Block currentBlock)
         {
-            var expression = BuildExpression(conditionalAccess.Expression, CreateBlock(currentBlock));
-            return BuildExpression(conditionalAccess.WhenNotNull,
-                CreateBinaryBranchBlock(conditionalAccess, currentBlock, expression));
+            var whenNotNull = BuildExpression(conditionalAccess.WhenNotNull, CreateBlock(currentBlock));
+
+            return BuildExpression(conditionalAccess.Expression,
+                CreateBinaryBranchBlock(conditionalAccess, currentBlock, whenNotNull));
         }
 
         private Block BuildConditionalExpression(ConditionalExpressionSyntax conditional, Block currentBlock)
