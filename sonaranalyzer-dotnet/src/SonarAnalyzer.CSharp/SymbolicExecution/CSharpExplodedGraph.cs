@@ -494,7 +494,13 @@ namespace SonarAnalyzer.SymbolicExecution
                     {
                         // "x is string s"
                         // VisitDeclarationPattern() expects SV_s on top of the stack, hence we pop SV_x
-                        newProgramState = newProgramState.PopValue();
+                        newProgramState = newProgramState.PopValue(out var SV_x);
+
+                        // Check that current execution path is not compatible with previous null constraint
+                        if (newProgramState.HasConstraint(SV_x, ObjectConstraint.Null))
+                        {
+                            return;
+                        }
 
                         newProgramState = VisitDeclarationPattern((DeclarationPatternSyntaxWrapper)isPatternExpression.Pattern, newProgramState);
                     }

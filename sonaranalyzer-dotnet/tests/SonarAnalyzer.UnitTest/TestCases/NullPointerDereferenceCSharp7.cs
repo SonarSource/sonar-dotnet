@@ -166,30 +166,53 @@ namespace Tests.Diagnostics
             }
         }
 
-    void Compliant1()
-    {
-      Exception exception = null;
-      if (exception?.Data is IDictionary data)
-      {
-        if (exception?.InnerException?.Data is IDictionary innerexceptiondata)
+        void Compliant1()
         {
+            Exception exception = null;
+            if (exception?.Data is IDictionary data)
+            {
+                if (exception?.InnerException?.Data is IDictionary innerexceptiondata)
+                {
 
+                }
+            }
         }
-      }
-    }
-    void NonCompliant1()
-    {
-      Exception exception = null;
-      if (exception.Data is IDictionary data)  // Noncompliant
-      {
-        if (exception.InnerException?.Data is IDictionary innerexceptiondata)
+
+        void NonCompliant1()
         {
+            Exception exception = null;
+            if (exception.Data is IDictionary data) // Noncompliant
+            {
+                if (exception.InnerException?.Data is IDictionary innerexceptiondata)
+                {
 
+                }
+            }
         }
-      }
-    }
 
-    public void Method1(object obj)
+        void Repro_2361(Exception exception)
+        {
+            if (exception?.Data is IDictionary data)
+            {
+                if (exception.InnerException?.Data is IDictionary innerexceptiondata)
+                {
+
+                }
+            }
+        }
+
+        void Null_Conditional_Is_Null(Exception exception)
+        {
+            if (exception?.Data is null)
+            {
+                if (exception.InnerException?.Data is IDictionary innerexceptiondata) // Noncompliant
+                {
+
+                }
+            }
+        }
+
+        public void Method1(object obj)
     {
       switch (obj)
       {
