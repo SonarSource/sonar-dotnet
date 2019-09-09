@@ -336,11 +336,13 @@ namespace SonarAnalyzer
                 case SyntaxKind.NullLiteralExpression:
                     return "none";
                 case SyntaxKind.SimpleMemberAccessExpression:
-                    if (e.Parent.IsKind(SyntaxKind.InvocationExpression))
+                    var type = semanticModel.GetTypeInfo(e).Type;
+                    if (type == null && !e.Parent.IsKind(SyntaxKind.InvocationExpression))
                     {
-                        return MLIRType(semanticModel.GetTypeInfo(e).Type);
+                        // Case of a method group that will get transformed into at Func<>, but does not have a type
+                        return "none";
                     }
-                    return "none"; // Case of a method group that will get transformed into at Func<>, but does not have a type
+                    return MLIRType(semanticModel.GetTypeInfo(e).Type);
                 default:
                     return MLIRType(semanticModel.GetTypeInfo(e).Type);
             }
