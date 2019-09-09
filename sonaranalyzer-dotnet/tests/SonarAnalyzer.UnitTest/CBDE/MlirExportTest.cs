@@ -1074,7 +1074,7 @@ public static Func<string, bool> CreateFilter()
 
         }
         [TestMethod]
-        public void IsIDisposableDispose()
+        public void MemberFieldAccess()
         {
             var code = @"
 class M
@@ -1083,7 +1083,7 @@ class M
 }
 class A
 {
-    private static bool IsIDisposableDispose(M method, M disposableDispose)
+    private static bool f(M method, M disposableDispose)
     {
         if (method.Parameters.Length != disposableDispose.Parameters.Length)
         {
@@ -1097,7 +1097,29 @@ class A
 
         }
 
+        [TestMethod]
+        public void BoolProperty()
+        {
+            var code = @"
+class A
+{
+    public bool Toto => true;
+}
+
+class B
+{
+    static bool f()
+    {
+        A a = new A();
+        return a.Toto;
+    }
+}
+";
+            ValidateCodeGeneration(code);
+
+        }
     } // Class
+
 } // Namespace
 
 
