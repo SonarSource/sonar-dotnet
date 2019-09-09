@@ -212,7 +212,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void Method1(object obj)
+    public void Method1(object obj)
     {
       switch (obj)
       {

@@ -90,7 +90,7 @@ namespace Tests.Diagnostics
 
         object Prop1
         {
-            get
+            get // FN - analyzer currently only checks for property access on the 'this' object
             {
                 return (new InfiniteRecursion())?.Prop1;
             }
@@ -121,6 +121,16 @@ namespace Tests.Diagnostics
         int Prop7
         {
             get => Prop6; // Compliant - FP
+        }
+
+        private InfiniteRecursion infiniteRecursionField;
+
+        object Prop8
+        {
+            get // FN - analyzer currently only checks for property access on the 'this' object
+            {
+                return infiniteRecursionField?.Prop1;
+            }
         }
 
         void InternalRecursion(int i)
