@@ -33,6 +33,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.cs", new RedundantNullCheck());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void RedundantNullCheck_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.vb",
+                new SonarAnalyzer.Rules.VisualBasic.RedundantNullCheck());
+        }
     }
 }
 
