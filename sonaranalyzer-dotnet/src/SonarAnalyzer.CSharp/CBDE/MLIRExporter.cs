@@ -194,7 +194,9 @@ namespace SonarAnalyzer
                             else
                             {
                                 Debug.Assert(functionReturnType!="()","Returning value in function declared with no return type");
-                                if (ret.Expression.RemoveParentheses().Kind() == SyntaxKind.SimpleMemberAccessExpression)
+                                var returnedVal = ret.Expression.RemoveParentheses();
+                                if (semanticModel.GetTypeInfo(returnedVal).Type == null &&
+                                    returnedVal.Kind() == SyntaxKind.SimpleMemberAccessExpression)
                                 {
                                     // Special case a returning a metod group that will be cast into a func
                                     writer.WriteLine($"%{OpId(ret)} = cbde.unknown : none {GetLocation(ret)} // return method group");
