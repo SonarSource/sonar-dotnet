@@ -55,7 +55,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly object logFileLock = new Object();
 
         private static readonly string mlirPath =
-            Environment.GetEnvironmentVariable("CIRRUS_WORKING_DIR") ?? Path.GetTempPath();
+            Environment.GetEnvironmentVariable("CIRRUS_WORKING_DIR") ?? // For Cirrus
+            Environment.GetEnvironmentVariable("WORKSPACE") ?? // For Jenkins
+            Path.GetTempPath(); // By default
         private static readonly string mlirGlobalLogPath =
             Path.Combine(mlirPath, $"CBDE_{Process.GetCurrentProcess().Id}.log");
         private static void GlobalLog(string s)
