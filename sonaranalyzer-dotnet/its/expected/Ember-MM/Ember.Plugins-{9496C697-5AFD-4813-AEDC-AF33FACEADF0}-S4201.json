@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4201",
+"message":  "Remove this unnecessary null check; 'is' returns false for nulls.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  25,
+"endLine":  77,
+"endColumn":  45
+}
+}
+}
+]
+}
