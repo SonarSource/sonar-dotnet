@@ -23,19 +23,20 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.VisualBasic;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class NameOfShouldBeUsed : NameOfShouldBeUsedBase<BaseMethodDeclarationSyntax>
+    public sealed class NameOfShouldBeUsed : NameOfShouldBeUsedBase<MethodBlockBaseSyntax>
     {
-       private static readonly HashSet<SyntaxKind> StringTokenTypes
+        private static readonly HashSet<SyntaxKind> StringTokenTypes
             = new HashSet<SyntaxKind>
             {
                 SyntaxKind.InterpolatedStringTextToken,
@@ -44,18 +45,19 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         protected override DiagnosticDescriptor Rule { get; } = rule;
 
-        protected override StringComparison CaseSensitivity => StringComparison.InvariantCulture;
+        protected override StringComparison CaseSensitivity => StringComparison.InvariantCultureIgnoreCase;
 
         protected override bool IsStringLiteral(SyntaxToken t) => t.IsAnyKind(StringTokenTypes);
 
-        protected override IEnumerable<string> GetParameterNames(BaseMethodDeclarationSyntax method)
+        protected override IEnumerable<string> GetParameterNames(MethodBlockBaseSyntax method)
         {
-            var paramGroups = method.ParameterList?.Parameters
-                .GroupBy(p => p.Identifier.ValueText);
+            var paramGroups = method.BlockStatement.ParameterList?.Parameters
+                .GroupBy(p => p.Identifier.Identifier.ValueText);
 
             if (paramGroups != null &&
                 paramGroups.Any(g => g.Count() != 1))
@@ -63,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return Enumerable.Empty<string>();
             }
 
-            return paramGroups.Select(g => g.First().Identifier.ValueText);
+            return paramGroups.Select(g => g.First().Identifier.Identifier.ValueText);
         }
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -71,15 +73,17 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (!c.Compilation.IsAtLeastLanguageVersion(LanguageVersion.CSharp6))
+                    if (!c.Compilation.IsAtLeastLanguageVersion(LanguageVersion.VisualBasic14))
                     {
                         return;
                     }
 
                     ReportIssues<ThrowStatementSyntax>(c);
                 },
-                SyntaxKind.MethodDeclaration,
-                SyntaxKind.ConstructorDeclaration);
+                SyntaxKind.SubBlock,
+                SyntaxKind.FunctionBlock,
+                SyntaxKind.ConstructorBlock);
         }
     }
 }
+

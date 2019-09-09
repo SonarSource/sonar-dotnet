@@ -21,6 +21,7 @@ namespace Tests.Diagnostics
                 return;
 
             throw new ArgumentException("arg1 ");
+            throw new ArgumentException("arg123");
             throw new ArgumentException("ARG1");
         }
 
