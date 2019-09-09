@@ -145,6 +145,10 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             SetupMlirRootDirectory();
             mlirDirectoryAssembly = Path.Combine(mlirDirectoryRoot, assemblyName, compilationHash.ToString());
+            if (Directory.Exists(mlirDirectoryAssembly))
+            {
+                Directory.Delete(mlirDirectoryAssembly, true);
+            }
             Directory.CreateDirectory(mlirDirectoryAssembly);
             cbdeJsonOutputPath = Path.Combine(mlirDirectoryAssembly, cbdeJsonOutputFileName);
             logFilePath = Path.Combine(mlirDirectoryAssembly, "CbdeHandler.log");
@@ -219,7 +223,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private void Cleanup()
         {
             logFile.Dispose();
-            Directory.Delete(mlirDirectoryAssembly, true);
         }
         private static Diagnostic CreateDiagnosticFromJToken(JToken token)
         {
