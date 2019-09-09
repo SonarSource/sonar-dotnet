@@ -35,6 +35,18 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
+        [TestCategory("CodeFix")]
+        public void RedundantNullCheck_CS_CodeFix()
+        {
+            Verifier.VerifyCodeFix(
+                @"TestCases\RedundantNullCheck.cs",
+                @"TestCases\RedundantNullCheck.Fixed.cs",
+                @"TestCases\RedundantNullCheck.Fixed.Batch.cs",
+                new RedundantNullCheck(),
+                new RedundantNullCheckCodeFixProvider());
+        }
+
+        [TestMethod]
         [TestCategory("Rule")]
         public void RedundantNullCheck_VB()
         {
