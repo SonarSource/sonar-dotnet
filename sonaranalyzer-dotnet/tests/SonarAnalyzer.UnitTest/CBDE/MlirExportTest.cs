@@ -1073,9 +1073,31 @@ public static Func<string, bool> CreateFilter()
             ValidateCodeGeneration(code);
 
         }
+        [TestMethod]
+        public void IsIDisposableDispose()
+        {
+            var code = @"
+class M
+{
+    public int[] Parameters => new int[12];
+}
+class A
+{
+    private static bool IsIDisposableDispose(M method, M disposableDispose)
+    {
+        if (method.Parameters.Length != disposableDispose.Parameters.Length)
+        {
+            return false;
+        }
+        return true;
+    }
+}
+";
+            ValidateCodeGeneration(code);
+
+        }
 
     } // Class
-
-    } // Namespace
+} // Namespace
 
 
