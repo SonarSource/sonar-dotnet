@@ -1,0 +1,15 @@
+<p>There's no need to null test in conjunction with an <code>is</code> test. <code>null</code> is not an instance of anything, so a null check is
+redundant.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+if (x != null &amp;&amp; x is MyClass) { ... }  // Noncompliant
+
+if (x == null || !(x is MyClass)) { ... } // Noncompliant
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+if (x is MyClass) { ... }
+
+if (!(x is MyClass)) { ... }
+</pre>
+
