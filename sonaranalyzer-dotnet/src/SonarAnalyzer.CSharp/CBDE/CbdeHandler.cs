@@ -193,7 +193,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 logFile.WriteLine("  * arguments: '{0}'", pProcess.StartInfo.Arguments);
                 pProcess.StartInfo.UseShellExecute = false;
                 //pProcess.StartInfo.RedirectStandardOutput = true;
-                //pProcess.StartInfo.RedirectStandardError = true;
+                pProcess.StartInfo.RedirectStandardError = true;
+                pProcess.StartInfo.UseShellExecute = false;
                 //pProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 //pProcess.StartInfo.CreateNoWindow = true;
                 logFile.Flush();
@@ -209,8 +210,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (pProcess.ExitCode != 0)
                 {
                     GlobalLog("Running CBDE: Failure");
+
+                    var errorOutput = pProcess.StandardError.ReadToEnd();
+                    File.AppendAllText(logFilePath, errorOutput, Encoding.UTF8);
+
                     RaiseIssueFromFailedCbdeRun(c);
-                    DumpLogToLogFile();
+                    //DumpLogToLogFile();
                     GlobalLog("Running CBDE: Error dumped");
                 }
                 else
@@ -254,7 +259,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return Diagnostic.Create(rule, loc);
         }
         private void RaiseIssueFromFailedCbdeRun(CompilationAnalysisContext context)
-        {            
+        {
             StringBuilder failureString = new StringBuilder("CBDE Failure Report :\n  C# souces files involved are:\n");
             foreach (var fileName in csSourceFileNames)
             {
