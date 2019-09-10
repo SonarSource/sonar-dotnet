@@ -9,10 +9,7 @@ namespace Tests.Diagnostics
 
     public class SimpleDisposable : IDisposable // Noncompliant {{Fix this implementation of 'IDisposable' to conform to the dispose pattern.}}
     {
-        public void Dispose() // Secondary {{'SimpleDisposable.Dispose()' should also call 'GC.SuppressFinalize(this)'.}}
-        {
-            Dispose(true);
-        }
+        public void Dispose() => Dispose(true); // Secondary {{'SimpleDisposable.Dispose()' should also call 'GC.SuppressFinalize(this)'.}}
 
         protected virtual void Dispose(bool disposing) { }
     }
