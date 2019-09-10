@@ -58,24 +58,27 @@ namespace SonarAnalyzer.Rules.CSharp
             Environment.GetEnvironmentVariable("CIRRUS_WORKING_DIR") ?? // For Cirrus
             Environment.GetEnvironmentVariable("WORKSPACE") ?? // For Jenkins
             Path.GetTempPath(); // By default
-        private static readonly string mlirGlobalLogPath =
-            Path.Combine(mlirPath, $"CBDE_{Process.GetCurrentProcess().Id}.log");
+        private static readonly string mlirProcessSpecificPath =
+            Path.Combine(mlirPath, $"CBDE_{Process.GetCurrentProcess().Id}");
+        private static readonly string mlirLogFile =
+            Path.Combine(mlirProcessSpecificPath, "cbdeHandler.log");
         private static void GlobalLog(string s)
         {
             lock (logFileLock)
             {
                 var message = $"{DateTime.Now} ({Thread.CurrentThread.ManagedThreadId,5}): {s}\n";
-                File.AppendAllText(mlirGlobalLogPath, message);
+                File.AppendAllText(mlirLogFile, message);
             }
         }
 
         static CbdeHandler()
         {
+            Directory.CreateDirectory(mlirProcessSpecificPath);
             lock (logFileLock)
             {
-                if (File.Exists(mlirGlobalLogPath))
+                if (File.Exists(mlirProcessSpecificPath))
                 {
-                    File.Delete(mlirGlobalLogPath);
+                    File.Delete(mlirProcessSpecificPath);
                 }
             }
             GlobalLog("Before unpack");
@@ -133,9 +136,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void UnpackCbdeExe()
         {
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            var rootPath = Path.GetDirectoryName(assembly.Location);
             const string res = "SonarAnalyzer.CBDE.windows.dotnet-symbolic-execution.exe";
-            cbdeBinaryPath = Path.Combine(rootPath, "CBDE/windows/dotnet-symbolic-execution.exe");
+            cbdeBinaryPath = Path.Combine(mlirProcessSpecificPath, "windows/dotnet-symbolic-execution.exe");
             Directory.CreateDirectory(Path.GetDirectoryName(cbdeBinaryPath));
             var stream = assembly.GetManifestResourceStream(res);
             var fileStream = File.Create(cbdeBinaryPath);
