@@ -43,6 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return ImmutableArray.Create(RedundantNullCheck.DiagnosticId);
             }
         }
+        
         public override FixAllProvider GetFixAllProvider()
         {
             return WellKnownFixAllProviders.BatchFixer;

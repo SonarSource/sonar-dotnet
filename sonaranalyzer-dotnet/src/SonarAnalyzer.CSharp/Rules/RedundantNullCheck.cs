@@ -82,7 +82,8 @@ namespace SonarAnalyzer.Rules.CSharp
             if (innerExpression is BinaryExpressionSyntax binaryExpression && binaryExpression.IsKind(SyntaxKind.IsExpression))
             {
                 return GetLeftNode(binaryExpression);
-            } else if (innerExpression.IsKind(SyntaxKindEx.IsPatternExpression))
+            }
+            else if (innerExpression.IsKind(SyntaxKindEx.IsPatternExpression))
             {
                 var isPatternExpression = (IsPatternExpressionSyntaxWrapper)innerExpression;
                 return isPatternExpression.Expression.RemoveParentheses();

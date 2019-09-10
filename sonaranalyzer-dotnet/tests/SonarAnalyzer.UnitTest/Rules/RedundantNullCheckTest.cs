@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void RedundantNullCheck_CS()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.cs", new RedundantNullCheck());
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.cs", new CS.RedundantNullCheck());
         }
 
         [TestMethod]
@@ -42,8 +42,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\RedundantNullCheck.cs",
                 @"TestCases\RedundantNullCheck.Fixed.cs",
                 @"TestCases\RedundantNullCheck.Fixed.Batch.cs",
-                new RedundantNullCheck(),
-                new RedundantNullCheckCodeFixProvider());
+                new CS.RedundantNullCheck(),
+                new CS.RedundantNullCheckCodeFixProvider());
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void RedundantNullCheck_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\RedundantNullCheck.vb",
-                new SonarAnalyzer.Rules.VisualBasic.RedundantNullCheck());
+                new VB.RedundantNullCheck());
         }
     }
 }

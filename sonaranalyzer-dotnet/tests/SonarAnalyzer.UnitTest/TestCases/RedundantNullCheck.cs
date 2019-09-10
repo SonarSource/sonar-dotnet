@@ -32,7 +32,12 @@ namespace Tests.Diagnostics
 
             }
 
-            if (a != null && a is RedundantNullCheck aTyped1) // Noncompliant
+            if (a != null && a is RedundantNullCheck aTyped0) // Noncompliant
+            {
+
+            }
+
+            if (a is RedundantNullCheck aTyped1 && aTyped1 != null)
             {
 
             }

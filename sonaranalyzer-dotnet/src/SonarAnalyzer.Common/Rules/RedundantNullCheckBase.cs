@@ -50,15 +50,15 @@ namespace SonarAnalyzer.Rules
             var binaryExpressionLeft = GetLeftNode(binaryExpression);
             var binaryExpressionRight = GetRightNode(binaryExpression);
 
-            if (GetNonNullCheckVariable(binaryExpressionLeft) is SyntaxNode node1
-                && GetIsOperatorCheckVariable(binaryExpressionRight) is  SyntaxNode node2
-                && AreEquivalent(node1, node2))
+            if (GetNonNullCheckVariable(binaryExpressionLeft) is SyntaxNode nonNullCheckVariable1
+                && GetIsOperatorCheckVariable(binaryExpressionRight) is  SyntaxNode isCheckVariable1
+                && AreEquivalent(nonNullCheckVariable1, isCheckVariable1))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], binaryExpressionLeft.GetLocation()));
             }
-            if (GetNonNullCheckVariable(binaryExpressionRight) is SyntaxNode node3
-                && GetIsOperatorCheckVariable(binaryExpressionLeft) is SyntaxNode node4
-                && AreEquivalent(node3, node4))
+            if (GetNonNullCheckVariable(binaryExpressionRight) is SyntaxNode nonNullCheckVariable2
+                && GetIsOperatorCheckVariable(binaryExpressionLeft) is SyntaxNode isCheckVariable2
+                && AreEquivalent(nonNullCheckVariable2, isCheckVariable2))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], binaryExpressionRight.GetLocation()));
             }
@@ -71,15 +71,15 @@ namespace SonarAnalyzer.Rules
             var binaryExpressionLeft = GetLeftNode(binaryExpression);
             var binaryExpressionRight = GetRightNode(binaryExpression);
 
-            if (GetNullCheckVariable(binaryExpressionLeft) is SyntaxNode node1
-                && GetInvertedIsOperatorCheckVariable(binaryExpressionRight) is SyntaxNode node2
-                && AreEquivalent(node1, node2))
+            if (GetNullCheckVariable(binaryExpressionLeft) is SyntaxNode nullCheckVariable1
+                && GetInvertedIsOperatorCheckVariable(binaryExpressionRight) is SyntaxNode invertedIsCheckVariable1
+                && AreEquivalent(nullCheckVariable1, invertedIsCheckVariable1))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], binaryExpressionLeft.GetLocation()));
             }
-            if (GetNullCheckVariable(binaryExpressionRight) is SyntaxNode node3
-                && GetInvertedIsOperatorCheckVariable(binaryExpressionLeft) is SyntaxNode node4
-                && AreEquivalent(node3, node4))
+            if (GetNullCheckVariable(binaryExpressionRight) is SyntaxNode nullCheckVariable2
+                && GetInvertedIsOperatorCheckVariable(binaryExpressionLeft) is SyntaxNode invertedIsCheckVariable2
+                && AreEquivalent(nullCheckVariable2, invertedIsCheckVariable2))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], binaryExpressionRight.GetLocation()));
             }

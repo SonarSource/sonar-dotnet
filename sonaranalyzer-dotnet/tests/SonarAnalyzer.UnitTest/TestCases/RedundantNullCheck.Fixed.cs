@@ -28,7 +28,12 @@ namespace Tests.Diagnostics
 
             }
 
-            if (a is RedundantNullCheck aTyped1) // Fixed
+            if (a is RedundantNullCheck aTyped0) // Fixed
+            {
+
+            }
+
+            if (a is RedundantNullCheck aTyped1 && aTyped1 != null)
             {
 
             }
