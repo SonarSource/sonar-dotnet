@@ -60,7 +60,7 @@ namespace SonarAnalyzer
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
             foreach (var block in cfg.Blocks)
             {
-                ExportBlock(block, block == cfg.EntryBlock, method, returnType);
+                ExportBlock(block, method, returnType);
             }
             writer.WriteLine("}");
         }
@@ -164,7 +164,7 @@ namespace SonarAnalyzer
             return semanticModel.GetTypeInfo(method.ReturnType).Type.SpecialType == SpecialType.System_Void;
         }
 
-        private void ExportBlock(Block block, bool isEntryBlock, MethodDeclarationSyntax parentMethod, string functionReturnType)
+        private void ExportBlock(Block block, MethodDeclarationSyntax parentMethod, string functionReturnType)
         {
             if (block is ExitBlock && !HasNoReturn(parentMethod))
             {
@@ -207,7 +207,7 @@ namespace SonarAnalyzer
                                 string returnType = MLIRType(ret.Expression);
                                 if (returnType == functionReturnType)
                                 {
-                                    writer.WriteLine($"return %{OpId(ret.Expression)} : {returnType} {GetLocation(ret)}");
+                                    writer.WriteLine($"return %{OpId(getAssignmentValue(ret.Expression))} : {returnType} {GetLocation(ret)}");
                                 }
                                 else
                                 {
