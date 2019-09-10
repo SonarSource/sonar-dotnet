@@ -1139,6 +1139,36 @@ class A
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void AnonymousMethodExpression()
+        {
+            var code = @"
+class A
+{
+    public delegate object anonymousMethod(params object[] args);
+
+    public static anonymousMethod GetAnonymousMethod()
+    {
+        return delegate (object[] args) { return 0; };
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
+        [TestMethod]
+        public void AnonymousObjectCreation()
+        {
+            var code = @"
+public int f()
+{
+    var v = new { a = 108, m = ""Hello"" };
+    return v.a;
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
     } // Class
 
 } // Namespace
