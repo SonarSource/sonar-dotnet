@@ -180,17 +180,33 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                if (disposeMethod.HasBodyOrExpressionBody() &&
-                    !isSealedClass &&
-                        (
-                            !HasStatementsCount(disposeMethod, 2) ||
-                            !CallsVirtualDispose(disposeMethod, argumentValue: "true") ||
-                            !CallsSuppressFinalize(disposeMethod)
-                        ))
+                if (disposeMethod.HasBodyOrExpressionBody() && !isSealedClass)
                 {
-                    AddSecondaryLocation(disposeMethod.Identifier.GetLocation(),
-                        $"'{this.classSymbol.Name}.Dispose()' should only invoke 'Dispose(true)' and " +
-                        "'GC.SuppressFinalize(this)'.");
+                    var missingVirtualDispose = !CallsVirtualDispose(disposeMethod, argumentValue: "true");
+                    var missingSuppressFinalize = !CallsSuppressFinalize(disposeMethod);
+                    string remediation = null;
+
+                    if (missingVirtualDispose && missingSuppressFinalize)
+                    {
+                        remediation = "should call 'Dispose(true)' and 'GC.SuppressFinalize(this)'.";
+                    }
+                    else if (missingVirtualDispose)
+                    {
+                        remediation = "should also call 'Dispose(true)'.";
+                    }
+                    else if (missingSuppressFinalize)
+                    {
+                        remediation = "should also call 'GC.SuppressFinalize(this)'.";
+                    }
+                    else if (!HasStatementsCount(disposeMethod, 2))
+                    {
+                        remediation = "should call 'Dispose(true)', 'GC.SuppressFinalize(this)' and nothing else.";
+                    }
+
+                    if (remediation != null)
+                    {
+                        AddSecondaryLocation(disposeMethod.Identifier.GetLocation(), $"'{this.classSymbol.Name}.Dispose()' {remediation}");
+                    }
                 }
 
                 // Because of partial classes we cannot always rely on the current semantic model.
