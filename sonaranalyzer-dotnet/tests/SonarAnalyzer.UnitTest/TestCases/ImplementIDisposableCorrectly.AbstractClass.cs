@@ -18,7 +18,7 @@ namespace Tests.Diagnostics
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Fix this implementation of 'IDisposable' to conform to the dispose pattern.}}
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary@-1 {{Provide 'protected' overridable implementation of 'Dispose(bool)' on 'AbstractWithoutProtectedDispose' or mark the type as 'sealed'.}}
     {
-        public void Dispose() // Secondary {{'AbstractWithoutProtectedDispose.Dispose()' should only invoke 'Dispose(true)' and 'GC.SuppressFinalize(this)'.}}
+        public void Dispose() // Secondary {{'AbstractWithoutProtectedDispose.Dispose()' should also call 'Dispose(true)'.}}
         {
             GC.SuppressFinalize(this);
         }

@@ -9,10 +9,7 @@ namespace Tests.Diagnostics
 
     public class SimpleDisposable : IDisposable // Noncompliant {{Fix this implementation of 'IDisposable' to conform to the dispose pattern.}}
     {
-        public void Dispose() // Secondary {{'SimpleDisposable.Dispose()' should only invoke 'Dispose(true)' and 'GC.SuppressFinalize(this)'.}}
-        {
-            Dispose(true);
-        }
+        public void Dispose() => Dispose(true); // Secondary {{'SimpleDisposable.Dispose()' should also call 'GC.SuppressFinalize(this)'.}}
 
         protected virtual void Dispose(bool disposing) { }
     }
@@ -22,6 +19,18 @@ namespace Tests.Diagnostics
         public void Dispose()
         {
             Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing) { }
+    }
+
+    public class DisposableWithMoreThanTwoStatements : IDisposable // Noncompliant
+    {
+        public void Dispose() // Secondary {{'DisposableWithMoreThanTwoStatements.Dispose()' should call 'Dispose(true)', 'GC.SuppressFinalize(this)' and nothing else.}}
+        {
+            Dispose(true);
+            Console.WriteLine("Extra statement");
             GC.SuppressFinalize(this);
         }
 
@@ -71,7 +80,7 @@ namespace Tests.Diagnostics
 //               ^^^^^^^^^^^^^^^^ Secondary@-1 {{Provide 'protected' overridable implementation of 'Dispose(bool)' on 'NoVirtualDispose' or mark the type as 'sealed'.}}
     {
         public void Dispose() { }
-//                  ^^^^^^^ Secondary {{'NoVirtualDispose.Dispose()' should only invoke 'Dispose(true)' and 'GC.SuppressFinalize(this)'.}}
+//                  ^^^^^^^ Secondary {{'NoVirtualDispose.Dispose()' should call 'Dispose(true)' and 'GC.SuppressFinalize(this)'.}}
 
         public virtual void Dispose(bool a, bool b) { } // This should not affect the implementation
     }
@@ -79,7 +88,7 @@ namespace Tests.Diagnostics
     public class ExplicitImplementation : IDisposable // Noncompliant
     {
         void IDisposable.Dispose()
-//                       ^^^^^^^ Secondary {{'ExplicitImplementation.Dispose()' should only invoke 'Dispose(true)' and 'GC.SuppressFinalize(this)'.}}
+//                       ^^^^^^^ Secondary {{'ExplicitImplementation.Dispose()' should also call 'GC.SuppressFinalize(this)'.}}
 //                       ^^^^^^^ Secondary@-1 {{'ExplicitImplementation.Dispose()' should be 'public'.}}
         {
             Dispose(true);
@@ -92,7 +101,7 @@ namespace Tests.Diagnostics
     {
         public virtual void Dispose()
 //             ^^^^^^^ Secondary {{'VirtualImplementation.Dispose()' should not be 'virtual' or 'abstract'.}}
-//                          ^^^^^^^ Secondary@-1 {{'VirtualImplementation.Dispose()' should only invoke 'Dispose(true)' and 'GC.SuppressFinalize(this)'.}}
+//                          ^^^^^^^ Secondary@-1 {{'VirtualImplementation.Dispose()' should also call 'GC.SuppressFinalize(this)'.}}
         {
             Dispose(true);
         }
@@ -103,7 +112,7 @@ namespace Tests.Diagnostics
     public class WithFinalizer : IDisposable // Noncompliant
     {
         public void Dispose()
-//                  ^^^^^^^ Secondary {{'WithFinalizer.Dispose()' should only invoke 'Dispose(true)' and 'GC.SuppressFinalize(this)'.}}
+//                  ^^^^^^^ Secondary {{'WithFinalizer.Dispose()' should also call 'GC.SuppressFinalize(this)'.}}
         {
             Dispose(true);
         }
