@@ -1169,6 +1169,23 @@ public int f()
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void AssignmentInReturn()
+        {
+            var code = @"
+class A
+{
+    protected int a;
+
+    public int f()
+    {
+        return a = 1;
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
     } // Class
 
 } // Namespace
