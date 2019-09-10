@@ -1021,7 +1021,7 @@ class A
 
             ValidateCodeGeneration(code);
         }
-      
+
         [TestMethod]
         public void Property()
         {
@@ -1046,7 +1046,7 @@ class A {
 ";
             ValidateCodeGeneration(code);
         }
-      
+
         [TestMethod]
         public void AsyncFunction()
         {
@@ -1118,6 +1118,27 @@ class B
             ValidateCodeGeneration(code);
 
         }
+
+        [TestMethod]
+        public void MethodsCallsOnMultipleLines()
+        {
+            var code = @"
+class A
+{
+    public const string myString = ""Blabla"";
+
+    private string f()
+    {
+        var result = myString
+            .Replace('a', 'b')
+            .Replace('d', 'e');
+        return result;
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
     } // Class
 
 } // Namespace

@@ -213,7 +213,7 @@ namespace SonarAnalyzer
                                     writer.WriteLine($"%{OpId(ret)} = cbde.unknown : {functionReturnType} {GetLocation(ret)} // cast return value from unsupported type");
                                     writer.WriteLine($"return %{OpId(ret)} : {functionReturnType} {GetLocation(ret)}");
                                 }
-                                    
+
                             }
                             break;
                         case BreakStatementSyntax breakStmt:
@@ -390,7 +390,7 @@ namespace SonarAnalyzer
         {
             if (!IsTypeKnown(type))
             {
-                writer.WriteLine($"%{OpId(op)} = constant unit {GetLocation(op)} // {op.ToFullString()} ({op.Kind()})");
+                writer.WriteLine($"%{OpId(op)} = constant unit {GetLocation(op)} // {op.Dump()} ({op.Kind()})");
                 return;
             }
             writer.WriteLine($"%{OpId(op)} = constant {value} : {MLIRType(type)} {GetLocation(op)}");
