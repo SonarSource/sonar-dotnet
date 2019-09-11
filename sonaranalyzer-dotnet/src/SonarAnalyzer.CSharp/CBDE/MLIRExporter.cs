@@ -166,15 +166,7 @@ namespace SonarAnalyzer
 
         private void ExportBlock(Block block, MethodDeclarationSyntax parentMethod, string functionReturnType)
         {
-            if (block is ExitBlock && !HasNoReturn(parentMethod))
-            {
-               // If the method returns, it will have an explicit return, no need for this spurious block
-                return;
-            }
-            else
-            {
-                writer.WriteLine($"^{BlockId(block)}: // {block.GetType().Name}"); // TODO: Block arguments...
-            }
+            writer.WriteLine($"^{BlockId(block)}: // {block.GetType().Name}"); // TODO: Block arguments...
             // MLIR encodes blocks relationships in operations, not in blocks themselves
             foreach(var op in block.Instructions)
             {
@@ -276,7 +268,14 @@ namespace SonarAnalyzer
                     break;
                 case ExitBlock eb:
                     // If we reach this point, it means the function has no return, we must manually add one
-                    writer.WriteLine("return");
+                    if (HasNoReturn(parentMethod))
+                    {
+                        writer.WriteLine("return");
+                    }
+                    else
+                    {
+                        writer.WriteLine("cbde.unreachable");
+                    }
                     break;
 
             }
@@ -412,6 +411,12 @@ namespace SonarAnalyzer
                 case SyntaxKind.DivideExpression:
                 case SyntaxKind.ModuloExpression:
                     ExtractBinaryExpression(op);
+                    break;
+                case SyntaxKind.TrueLiteralExpression:
+                    writer.WriteLine($"%{OpId(op)} = constant 1 : i1 {GetLocation(op)} // true");
+                    break;
+                case SyntaxKind.FalseLiteralExpression:
+                    writer.WriteLine($"%{OpId(op)} = constant 0 : i1 {GetLocation(op)} // false");
                     break;
                 case SyntaxKind.NumericLiteralExpression:
                     {

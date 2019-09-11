@@ -24,17 +24,17 @@ namespace Tests.Diagnostics
                 DoSomething();
             }
 
-            if (true) // false negative, not detected by CBDE
+            if (true) // Noncompliant {{Condition is always true}}
             {
                 DoSomething2();
             }
 
-            if (false) // false negative, not detected by CBDE
+            if (false) // Noncompliant {{Condition is always false}}
             {
                 DoSomething();
             }
 
-            if (true) // false negative, not detected by CBDE
+            if (true) // Noncompliant {{Condition is always true}}
             {
                 DoSomething();
             }
@@ -42,7 +42,7 @@ namespace Tests.Diagnostics
             {
             }
 
-            if (false) // false negative, not detected by CBDE
+            if (false) // Noncompliant {{Condition is always false}}
             {
                 DoSomething2();
             }
