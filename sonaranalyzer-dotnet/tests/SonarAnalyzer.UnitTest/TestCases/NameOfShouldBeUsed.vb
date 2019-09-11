@@ -52,7 +52,7 @@ Namespace Tests.TestCases
 
         End Sub
 
-        Public Sub New(arg1 As String, argument As Integer)
+        Public Sub New(arg1 As String, argument As Integer, anotherArgument As String)
             If arg1 is Nothing Or arg1.Length = 0 Then
                 Throw New Exception($"The arg1 with value {arg1} is not valid") ' too short
             End If
@@ -60,6 +60,9 @@ Namespace Tests.TestCases
             Throw New Exception($"argument with value {argument} is not valid") ' Noncompliant
 '                                 ^^^^^^^^^^^^^^^^^^^^
             Throw New Exception($"arg1") ' Noncompliant
+
+            Throw New Exception("anotherArgument argument argument value ""{argument}"" is not valid") ' Noncompliant
+            Throw New Exception("argument anotherArgument argument anotherArgument") ' Noncompliant
         End Sub
 
         Public Function Method_03(arg1 As Integer, arg2 As Integer) As Boolean

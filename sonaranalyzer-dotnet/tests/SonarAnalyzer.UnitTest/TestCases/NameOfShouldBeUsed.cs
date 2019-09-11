@@ -57,13 +57,15 @@ namespace Tests.Diagnostics
                 throw new Exception("arg1"); // Noncompliant
         }
 
-        public Program(string argument, int arg2)
+        public Program(string argument, int arg2, object anotherArgument)
         {
             if (argument == null || argument.Length == 0)
                 throw new Exception($"Argument argument with value \"{argument}\" is not valid"); // Noncompliant  {{Replace the string 'argument' with 'nameof(argument)'.}}
 //                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
             throw new Exception($"argument"); // Noncompliant
+            throw new Exception($"anotherArgument argument argument value \"{argument}\" is not valid"); // Noncompliant  {{Replace the string 'argument' with 'nameof(argument)'.}}
+            throw new Exception("argument anotherArgument argument anotherArgument");  // Noncompliant  {{Replace the string 'argument' with 'nameof(argument)'.}}
         }
 
         public bool Method_02(int arg1, int arg1) // Error [CS0100] - duplicated args

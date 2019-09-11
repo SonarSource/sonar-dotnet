@@ -101,12 +101,16 @@ namespace SonarAnalyzer.Rules
                 {
                     if (parameterName.Equals(stringTokenText, CaseSensitivity))
                     {
+                        // given it's exact equality, there can be only one stringToken key in the dictionary
                         result.Add(stringToken, parameterName);
                     }
                     else if (parameterName.Length > MIN_STRING_LENGTH &&
-                        stringTokenText
-                            .Split(Separators, StringSplitOptions.RemoveEmptyEntries)
-                            .Any(word => word.Equals(parameterName, CaseSensitivity)))
+                        // we are looking at the words inside the string, so there can be multiple parameters matching inside the token
+                        // stop after the first one is found
+                            !result.ContainsKey(stringToken) &&
+                            stringTokenText
+                                .Split(Separators, StringSplitOptions.RemoveEmptyEntries)
+                                .Any(word => word.Equals(parameterName, CaseSensitivity)))
                     {
                         result.Add(stringToken, parameterName);
                     }
