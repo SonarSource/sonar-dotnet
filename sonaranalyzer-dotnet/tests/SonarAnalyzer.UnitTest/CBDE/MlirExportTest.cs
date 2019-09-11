@@ -1186,6 +1186,23 @@ class A
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void BooleanConstant()
+        {
+            var code = @"
+public class A
+{
+    internal const bool myBool = true;
+
+    void f()
+    {
+        var b = myBool;
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
     } // Class
 
 } // Namespace
