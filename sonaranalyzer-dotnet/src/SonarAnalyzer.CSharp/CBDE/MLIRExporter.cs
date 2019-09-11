@@ -522,9 +522,18 @@ namespace SonarAnalyzer
             }
             if (declSymbol.DeclaringSyntaxReferences.Length == 0)
             {
-                // The entity comes from another assembly... We can ignore it, it's not a variable
-                // TODO : Check what happens for external constants, fields and properties...
-                writer.WriteLine($"// Identifier from another assembly: {id.Identifier.ValueText}");
+                // The entity comes from another assembly
+                // We can't ignore it if it is a property or a field because it may be used inside an operation (addi, subi, return...)
+                // So if we ignore it, the next operation will use an unknown register
+                // In case of a method, we can ignore it
+                if (declSymbol is IPropertySymbol || declSymbol is IFieldSymbol)
+                {
+                    writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(id)} {GetLocation(op)} // Identifier from another assembly: {id.Identifier.ValueText}");
+                }
+                else
+                {
+                    writer.WriteLine($"// Entity from another assembly: {id.Identifier.ValueText}");
+                }
                 return;
             }
             var decl = declSymbol.DeclaringSyntaxReferences[0].GetSyntax();

@@ -1203,6 +1203,34 @@ public class A
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void PropertyFromAnotherAssembly()
+        {
+            var code = @"
+
+using System;
+using System.Collections.ObjectModel;
+
+public class A<T> : Collection<T>
+{
+    public void RemoveType(Type type)
+    {
+        for (var i = Count - 1; i >= 0; i--)
+        {
+            var formatter = this[i];
+            if (formatter.GetType() == type)
+            {
+                RemoveAt(i);
+            }
+        }
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
+
+
     } // Class
 
 } // Namespace
