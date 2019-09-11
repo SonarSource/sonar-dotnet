@@ -137,6 +137,19 @@
 "uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
 "region":  {
 "startLine":  404,
+"startColumn":  45,
+"endLine":  404,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'fallback' with 'nameof(fallback)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"region":  {
+"startLine":  404,
 "startColumn":  87,
 "endLine":  404,
 "endColumn":  97
@@ -249,6 +262,19 @@
 },
 {
 "id":  "S2302",
+"message":  "Replace the string 'deadlockTimeout' with 'nameof(deadlockTimeout)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  88,
+"endLine":  45,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S2302",
 "message":  "Replace the string 'numThreads' with 'nameof(numThreads)'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
@@ -262,6 +288,19 @@
 },
 {
 "id":  "S2302",
+"message":  "Replace the string 'numThreads' with 'nameof(numThreads)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  83,
+"endLine":  47,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S2302",
 "message":  "Replace the string 'work' with 'nameof(work)'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
@@ -270,6 +309,19 @@
 "startColumn":  49,
 "endLine":  343,
 "endColumn":  55
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'position' with 'nameof(position)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  340,
+"startColumn":  63,
+"endLine":  340,
+"endColumn":  96
 }
 }
 },
@@ -296,6 +348,19 @@
 "startColumn":  53,
 "endLine":  88,
 "endColumn":  58
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'virtualNodesFactor' with 'nameof(virtualNodesFactor)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  69,
+"endLine":  36,
+"endColumn":  102
 }
 }
 },

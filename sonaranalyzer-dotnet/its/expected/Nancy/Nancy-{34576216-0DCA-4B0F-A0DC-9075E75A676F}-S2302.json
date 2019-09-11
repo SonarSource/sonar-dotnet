@@ -379,6 +379,32 @@
 },
 {
 "id":  "S2302",
+"message":  "Replace the string 'stream' with 'nameof(stream)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  57,
+"endLine":  82,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'stream' with 'nameof(stream)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  457,
+"startColumn":  53,
+"endLine":  457,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S2302",
 "message":  "Replace the string 'expectedLength' with 'nameof(expectedLength)'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
@@ -387,6 +413,19 @@
 "startColumn":  55,
 "endLine":  462,
 "endColumn":  71
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'expectedLength' with 'nameof(expectedLength)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  462,
+"startColumn":  89,
+"endLine":  462,
+"endColumn":  158
 }
 }
 },
@@ -618,6 +657,19 @@
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
 "startLine":  88,
+"startColumn":  49,
+"endLine":  88,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'modelType' with 'nameof(modelType)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  88,
 "startColumn":  110,
 "endLine":  88,
 "endColumn":  121
@@ -769,6 +821,19 @@
 },
 {
 "id":  "S2302",
+"message":  "Replace the string 'request' with 'nameof(request)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  64,
+"endLine":  110,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S2302",
 "message":  "Replace the string 'method' with 'nameof(method)'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Request.cs",
@@ -790,6 +855,19 @@
 "startColumn":  49,
 "endLine":  63,
 "endColumn":  54
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'fileName' with 'nameof(fileName)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  45,
+"endLine":  33,
+"endColumn":  79
 }
 }
 },
@@ -912,6 +990,19 @@
 },
 {
 "id":  "S2302",
+"message":  "Replace the string 'instance' with 'nameof(instance)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  945,
+"startColumn":  65,
+"endLine":  945,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S2302",
 "message":  "Replace the string 'lifetimeProvider' with 'nameof(lifetimeProvider)'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
@@ -920,6 +1011,32 @@
 "startColumn":  53,
 "endLine":  948,
 "endColumn":  71
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'lifetimeProvider' with 'nameof(lifetimeProvider)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  948,
+"startColumn":  73,
+"endLine":  948,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'errorString' with 'nameof(errorString)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  951,
+"startColumn":  49,
+"endLine":  951,
+"endColumn":  80
 }
 }
 },
@@ -951,6 +1068,19 @@
 },
 {
 "id":  "S2302",
+"message":  "Replace the string 'instance' with 'nameof(instance)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  1015,
+"startColumn":  65,
+"endLine":  1015,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S2302",
 "message":  "Replace the string 'lifetimeProvider' with 'nameof(lifetimeProvider)'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
@@ -959,6 +1089,32 @@
 "startColumn":  53,
 "endLine":  1018,
 "endColumn":  71
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'lifetimeProvider' with 'nameof(lifetimeProvider)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  1018,
+"startColumn":  73,
+"endLine":  1018,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'errorString' with 'nameof(errorString)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  1021,
+"startColumn":  49,
+"endLine":  1021,
+"endColumn":  80
 }
 }
 },
@@ -1029,6 +1185,19 @@
 },
 {
 "id":  "S2302",
+"message":  "Replace the string 'parameters' with 'nameof(parameters)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2856,
+"startColumn":  49,
+"endLine":  2856,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S2302",
 "message":  "Replace the string 'lifetimeProvider' with 'nameof(lifetimeProvider)'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
@@ -1037,6 +1206,19 @@
 "startColumn":  53,
 "endLine":  2920,
 "endColumn":  71
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'lifetimeProvider' with 'nameof(lifetimeProvider)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2920,
+"startColumn":  73,
+"endLine":  2920,
+"endColumn":  100
 }
 }
 },
@@ -1115,6 +1297,32 @@
 "startColumn":  49,
 "endLine":  65,
 "endColumn":  70
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'viewLocationContext' with 'nameof(viewLocationContext)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewFactory.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  72,
+"endLine":  65,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'conventions' with 'nameof(conventions)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewResolver.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  53,
+"endLine":  29,
+"endColumn":  149
 }
 }
 },

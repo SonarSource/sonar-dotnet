@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'conventions' with 'nameof(conventions)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\DefaultMetadataModuleResolver.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  53,
+"endLine":  25,
+"endColumn":  159
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'metadataModules' with 'nameof(metadataModules)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\DefaultMetadataModuleResolver.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  53,
+"endLine":  30,
+"endColumn":  163
+}
+}
+}
+]
+}

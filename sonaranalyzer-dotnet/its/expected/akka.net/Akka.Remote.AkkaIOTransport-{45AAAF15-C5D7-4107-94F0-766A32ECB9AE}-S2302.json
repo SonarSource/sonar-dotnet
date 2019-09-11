@@ -20,6 +20,19 @@
 "uri":  "sources\akka.net\src\contrib\transports\Akka.Remote.AkkaIOTransport\AddressConverters.cs",
 "region":  {
 "startLine":  31,
+"startColumn":  45,
+"endLine":  31,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'address' with 'nameof(address)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\transports\Akka.Remote.AkkaIOTransport\AddressConverters.cs",
+"region":  {
+"startLine":  31,
 "startColumn":  64,
 "endLine":  31,
 "endColumn":  73

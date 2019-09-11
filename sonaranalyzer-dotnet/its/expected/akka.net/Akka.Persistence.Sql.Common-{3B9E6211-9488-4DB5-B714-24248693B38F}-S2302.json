@@ -20,6 +20,19 @@
 "uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Hints.cs",
 "region":  {
 "startLine":  70,
+"startColumn":  77,
+"endLine":  70,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Hints.cs",
+"region":  {
+"startLine":  70,
 "startColumn":  131,
 "endLine":  70,
 "endColumn":  141
