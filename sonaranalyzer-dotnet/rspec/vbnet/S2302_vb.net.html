@@ -3,20 +3,28 @@
 <p>This rule raises an issue when any string in the <code>Throw</code> statement is an exact match for the name of one of the method parameters.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Public Sub DoSomething(param As Integer)
+Public Sub DoSomething(param As Integer, secondParam As String)
     If (param &lt; 0)
         Throw New Exception("param") ' Noncompliant
+    End If
+    If secondParam is Nothing
+      Throw New Exception("secondParam should be valid") ' Noncompliant
     End If
 End Sub
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Public Sub DoSomething(param As Integer)
+Public Sub DoSomething(param As Integer, secondParam As String)
     If (param &lt; 0)
-        Throw New Exception(NameOf(param)) ' Noncompliant
+        Throw New Exception(NameOf(param))
+    End If
+    If secondParam is Nothing
+      Throw New Exception($"{NameOf(secondParam)} should be valid")
     End If
 End Sub
 </pre>
 <h2>Exceptions</h2>
-<p>The rule doesn't raise any issue when using VB.NET &lt; 14.0.</p>
+<p>- The rule doesn't raise any issue when using VB.NET &lt; 14.0.</p>
+<p>- When the parameter name is contained in a sentence inside the <code>Throw</code> statement string, the rule will raise an issue only if the
+parameter name is at least 5 characters long.</p>
 

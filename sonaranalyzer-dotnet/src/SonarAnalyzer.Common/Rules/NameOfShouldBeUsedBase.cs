@@ -33,9 +33,20 @@ namespace SonarAnalyzer.Rules
         internal const string DiagnosticId = "S2302";
         protected const string MessageFormat = "Replace the string '{0}' with 'nameof({0})'.";
 
+        private static readonly char[] Separators = { ' ', '.', ',', ';', '!', '?' };
+
+        // when the parameter name is inside a bigger string, we want to avoid common English words like
+        // "a", "then", "he", "of", "have" etc, to avoid false positives
+        private const int MIN_STRING_LENGTH = 5;
+
         protected abstract DiagnosticDescriptor Rule { get; }
 
-        protected abstract StringComparison CaseSensitivity { get; }
+        protected abstract bool IsCaseSensitive { get; }
+
+        protected StringComparison CaseSensitivity
+        {
+            get => IsCaseSensitive ? StringComparison.InvariantCulture : StringComparison.InvariantCultureIgnoreCase;
+        }
 
         // Is string literal or interpolated string
         protected abstract bool IsStringLiteral(SyntaxToken t);
@@ -47,30 +58,61 @@ namespace SonarAnalyzer.Rules
             where TThrowSyntax : SyntaxNode
         {
             var methodSyntax = (TMethodSyntax)context.Node;
-            var paramLookup = GetParameterNames(methodSyntax);
+            var parameterNames = GetParameterNames(methodSyntax);
             // either no parameters, or duplicated parameters
-            if (!paramLookup.Any())
+            if (!parameterNames.Any())
             {
                 return;
             }
 
-            methodSyntax
+            var stringTokensInsideThrowExpressions = methodSyntax
                 .DescendantNodes()
                 .OfType<TThrowSyntax>()
                 .SelectMany(th => th.DescendantTokens())
-                .Where(IsStringLiteral)
-                .Where(t => paramLookup.Any(param => param.Equals(t.ValueText, CaseSensitivity)))
-                .ToList()
-                .ForEach(t => ReportIssue(t, context));
+                .Where(IsStringLiteral);
+
+            var stringTokenAndParameterPairs = GetStringTokenAndParamNamePairs(stringTokensInsideThrowExpressions, parameterNames);
+
+            foreach (var stringTokenAndParam in stringTokenAndParameterPairs)
+            {
+                ReportIssue(stringTokenAndParam.Key, stringTokenAndParam.Value, context);
+            }
         }
 
-        protected void ReportIssue(SyntaxToken stringLiteralToken,
-            SyntaxNodeAnalysisContext context)
-        {
+        protected void ReportIssue(SyntaxToken stringLiteralToken, string parameterName, SyntaxNodeAnalysisContext context) =>
             context.ReportDiagnosticWhenActive(Diagnostic.Create(
                     descriptor: Rule,
                     location: stringLiteralToken.GetLocation(),
-                    messageArgs: stringLiteralToken.ValueText));
+                    messageArgs: parameterName));
+
+        /// <summary>
+        /// Iterates over the string tokens (either from simple strings or from interpolated strings)
+        /// and returns pairs where
+        /// - the key is the string SyntaxToken which contains the verbatim parameter name
+        /// - the value is the name of the parameter which is present in the string token
+        /// </summary>
+        private Dictionary<SyntaxToken, string> GetStringTokenAndParamNamePairs(IEnumerable<SyntaxToken> tokens, IEnumerable<string> parameterNames)
+        {
+            var result = new Dictionary<SyntaxToken, string>();
+            foreach (var stringToken in tokens)
+            {
+                var stringTokenText = stringToken.ValueText;
+                foreach (var parameterName in parameterNames)
+                {
+                    if (parameterName.Equals(stringTokenText, CaseSensitivity))
+                    {
+                        result.Add(stringToken, parameterName);
+                    }
+                    else if (parameterName.Length > MIN_STRING_LENGTH &&
+                        stringTokenText
+                            .Split(Separators, StringSplitOptions.RemoveEmptyEntries)
+                            .Any(word => word.Equals(parameterName, CaseSensitivity)))
+                    {
+                        result.Add(stringToken, parameterName);
+                    }
+                }
+            }
+            return result;
         }
     }
 }

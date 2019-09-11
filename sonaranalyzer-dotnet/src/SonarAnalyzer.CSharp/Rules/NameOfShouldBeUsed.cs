@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -48,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override DiagnosticDescriptor Rule { get; } = rule;
 
-        protected override StringComparison CaseSensitivity => StringComparison.InvariantCulture;
+        protected override bool IsCaseSensitive => true;
 
         protected override bool IsStringLiteral(SyntaxToken t) => t.IsAnyKind(StringTokenTypes);
 
