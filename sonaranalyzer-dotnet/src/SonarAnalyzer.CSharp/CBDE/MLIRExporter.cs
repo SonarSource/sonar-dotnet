@@ -524,6 +524,7 @@ namespace SonarAnalyzer
             {
                 // The entity comes from another assembly... We can ignore it, it's not a variable
                 // TODO : Check what happens for external constants, fields and properties...
+                writer.WriteLine($"// Identifier from another assembly: {id.Identifier.ValueText}");
                 return;
             }
             var decl = declSymbol.DeclaringSyntaxReferences[0].GetSyntax();
@@ -534,6 +535,7 @@ namespace SonarAnalyzer
                 )
             {
                 // We will fetch the function only when looking at the function call itself, we just skip the identifier
+                writer.WriteLine($"// Skipped because MethodDeclarationSyntax or ClassDeclarationSyntax or NamespaceDeclarationSyntax: {id.Identifier.ValueText}");
                 return;
             }
 
