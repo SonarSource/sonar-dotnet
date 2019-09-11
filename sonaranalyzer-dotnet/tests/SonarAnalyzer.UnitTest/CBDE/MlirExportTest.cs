@@ -1229,6 +1229,23 @@ public class A<T> : Collection<T>
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void InfiniteLoop()
+        {
+            var code = @"
+int InfiniteLoop(int i) {
+    while (true) {
+        if (++i == 42) {
+            return i;
+        }
+    }
+    // No return here
+}
+";
+            var dot = GetCfgGraph(code, "InfiniteLoop");
+
+            ValidateCodeGeneration(code);
+        }
 
 
     } // Class
