@@ -389,6 +389,11 @@ namespace SonarAnalyzer
 
         private void ExportConstant(SyntaxNode op, ITypeSymbol type, string value)
         {
+            if (type.SpecialType == SpecialType.System_Boolean)
+            {
+                value = Convert.ToInt32(value.ToLower() == "true").ToString();
+            }
+
             if (!IsTypeKnown(type))
             {
                 writer.WriteLine($"%{OpId(op)} = constant unit {GetLocation(op)} // {op.Dump()} ({op.Kind()})");
