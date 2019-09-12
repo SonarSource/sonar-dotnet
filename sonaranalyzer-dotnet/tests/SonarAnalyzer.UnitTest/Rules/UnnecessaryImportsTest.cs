@@ -33,6 +33,18 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryImports.cs",
                 new CS.UnnecessaryImports());
         }
+
+        [TestMethod]
+        [TestCategory("CodeFix")]
+        public void UnnecessaryImports_CodeFix()
+        {
+            Verifier.VerifyCodeFix(
+                @"TestCases\UnnecessaryImports.cs",
+                @"TestCases\UnnecessaryImports.Fixed.cs",
+                @"TestCases\UnnecessaryImports.Fixed.Batch.cs",
+                new CS.UnnecessaryImports(),
+                new CS.UnnecessaryImportsCodeFixProvider());
+        }
     }
 }
 
