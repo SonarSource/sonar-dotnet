@@ -1,7 +1,7 @@
-﻿using System;
+﻿using System; // NOSONAR
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Linq; // NOSONAR
+using System.Text; // NOSONAR
 using System.Threading.Tasks;
 
 namespace CSLib.foo

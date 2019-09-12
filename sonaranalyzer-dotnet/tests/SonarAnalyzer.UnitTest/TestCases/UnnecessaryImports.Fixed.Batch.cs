@@ -6,6 +6,9 @@ using MyOtherAlias = System.Collections; // FN - aliases not yet supported
 using MyNamespace1; // Compliant - used inside MyNamspace2 to access Ns1_1
 using System.Collections.Generic;
 using System.Globalization;
+using System.Reflection;
+
+[assembly: AssemblyVersion("1.0.0.0")]
 
 namespace MyNamespace0
 {

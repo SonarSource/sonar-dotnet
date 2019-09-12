@@ -9,6 +9,9 @@ using MyNamespace1; // Compliant - used inside MyNamspace2 to access Ns1_1
 using MyNamespace3; // Noncompliant {{Remove this unnecessary 'using'.}}
 using System.Collections.Generic;
 using System.Globalization;
+using System.Reflection;
+
+[assembly: AssemblyVersion("1.0.0.0")]
 
 namespace MyNamespace0
 {

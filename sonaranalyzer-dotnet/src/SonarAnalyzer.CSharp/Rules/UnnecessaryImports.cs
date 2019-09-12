@@ -193,9 +193,9 @@ namespace SonarAnalyzer.Rules.CSharp
             return name.ToString().GetHashCode();
         }
 
-        public override bool Equals(object other)
+        public override bool Equals(object obj)
         {
-            return other is EquivalentNameSyntax equivalentName
+            return obj is EquivalentNameSyntax equivalentName
                 && Equals(equivalentName);
         }
 
