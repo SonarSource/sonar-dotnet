@@ -271,7 +271,7 @@ namespace SonarAnalyzer.Rules.CSharp
             // we dispose the StreamWriter to unlock the log file
             failureString.Append("  content of the CBDE handler log file is :\n" + Encoding.UTF8.GetString(logStream.GetBuffer()));
             GlobalLog(failureString.ToString());
-            Console.Error.WriteLine("Error when executing MLIR");
+            Console.Error.WriteLine($"Error when executing MLIR, more details in {mlirProcessSpecificPath}");
         }
         private void RaiseIssuesFromJSon(CompilationAnalysisContext context)
         {
