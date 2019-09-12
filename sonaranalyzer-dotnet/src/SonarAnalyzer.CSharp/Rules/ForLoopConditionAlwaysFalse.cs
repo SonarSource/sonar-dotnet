@@ -150,9 +150,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static IDictionary<string, int> GetLoopInitializerValues(VariableDeclarationSyntax variableDeclarationSyntax)
         {
-            int x = 0, j = 0;
-
-
             var loopInitializerValues = new Dictionary<string, int>();
             if (variableDeclarationSyntax != null)
             {
