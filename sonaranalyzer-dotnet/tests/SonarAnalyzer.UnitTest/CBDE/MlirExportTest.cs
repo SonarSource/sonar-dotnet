@@ -1247,6 +1247,30 @@ int InfiniteLoop(int i) {
             ValidateCodeGeneration(code);
         }
 
+        [TestMethod]
+        public void IfDynamic()
+        {
+            var code = @"
+internal class A
+{
+    public dynamic HasValue => true;
+}
+
+internal class B
+{
+    public int Func() {
+        var a = new A();
+        if(a.HasValue)
+        {
+            return 2;
+        }
+        return 3;
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
 
     } // Class
 
