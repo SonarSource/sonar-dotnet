@@ -233,7 +233,8 @@ namespace SonarAnalyzer
                     }
                     else
                     {
-                        writer.WriteLine($"cond_br %{OpId(cond)}, ^{BlockId(bbb.TrueSuccessorBlock)}, ^{BlockId(bbb.FalseSuccessorBlock)} {GetLocation(cond)}");
+                        var id = EnforceBoolOpId(cond as ExpressionSyntax);
+                        writer.WriteLine($"cond_br %{id}, ^{BlockId(bbb.TrueSuccessorBlock)}, ^{BlockId(bbb.FalseSuccessorBlock)} {GetLocation(cond)}");
                     }
                     /*
                      * Up to now, we do exactly the same for all cases that may have created a BinaryBranchBlock
@@ -643,6 +644,20 @@ namespace SonarAnalyzer
         public string OpId(SyntaxNode node)
         {
             return this.opMap.GetOrAdd(node.RemoveParentheses(), b => this.opCounter++).ToString();
+        }
+
+        // In some cases, we need an OpId that referes to a boolean variable, even if the variable happens not to be
+        // a boolean (for instance, it could be a dynamic). In such a case, we just create an unknown bool...
+        // Beware not to call this function in the middle of writing some text, because it can add some of its own
+        public string EnforceBoolOpId(ExpressionSyntax e)
+        {
+            if (MLIRType(e) != "i1")
+            {
+                var newId = UniqueOpId();
+                writer.WriteLine($"%{newId} = cbde.unknown : i1 // Creating necessary bool for conversion");
+                return newId;
+            }
+            return OpId(e);
         }
         public string UniqueOpId()
         {
