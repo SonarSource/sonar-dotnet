@@ -173,12 +173,19 @@ namespace SonarAnalyzer.Rules.CSharp
         }
         private void ExportFunctionMlir(SyntaxTree tree, SemanticModel model, string mlirFileName)
         {
-            using (var streamWriter = new StreamWriter(Path.Combine(mlirDirectoryAssembly, mlirFileName)))
+            using (var mlirStreamWriter = new StreamWriter(Path.Combine(mlirDirectoryAssembly, mlirFileName)))
             {
-                MLIRExporter mlirExporter = new MLIRExporter(streamWriter, model, true);
-                foreach (var method in tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
+                using (var perfStreamWriter = new StreamWriter(Path.Combine(mlirDirectoryAssembly, mlirFileName.Replace(".mlir", "-perf.log"))))
                 {
-                    mlirExporter.ExportFunction(method);
+                    perfStreamWriter.WriteLine($"In file {tree.GetRoot().GetLocation().GetLineSpan().Path}");
+                    MLIRExporter mlirExporter = new MLIRExporter(mlirStreamWriter, model, true);
+                    foreach (var method in tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
+                    {
+                        var watch = System.Diagnostics.Stopwatch.StartNew();
+                        mlirExporter.ExportFunction(method);
+                        watch.Stop();
+                        perfStreamWriter.WriteLine($"{method.Identifier}: {watch.ElapsedMilliseconds} (line: {method.GetLocation().GetLineSpan().StartLinePosition.Line + 1})");
+                    }
                 }
             }
         }
