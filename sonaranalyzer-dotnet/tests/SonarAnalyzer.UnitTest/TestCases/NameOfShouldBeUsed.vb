@@ -68,5 +68,17 @@ Namespace Tests.TestCases
         Public Function Method_03(arg1 As Integer, arg2 As Integer) As Boolean
             Throw New Exception("arg2") ' Noncompliant
         End Function
+
+        Public Function SameStringTokens(argumentName As Integer) As Boolean
+            Throw New ArgumentException("argumentName", "argumentName") ' Noncompliant
+            ' Noncompliant@-1
+            Throw New Exception("argumentName") ' Noncompliant
+            Throw New ArgumentException("argumentName argumentName argumentName") ' Noncompliant (only one message)
+            Throw New ArgumentException("argumentName argumentName argumentName") ' Noncompliant
+            Throw New Exception($"argumentName argumentName argumentName") ' Noncompliant (only one message)
+            Throw New Exception($"argumentName argumentName argumentName") ' Noncompliant
+            Throw New Exception("argumentName") ' Noncompliant
+            Throw New Exception("argumentName") ' Noncompliant
+        End Function
     End Class
 End Namespace

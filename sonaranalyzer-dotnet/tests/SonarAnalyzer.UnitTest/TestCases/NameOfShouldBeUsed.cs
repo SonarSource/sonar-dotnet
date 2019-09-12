@@ -80,5 +80,18 @@ namespace Tests.Diagnostics
             throw new Exception($"I have two cars");
             throw new Exception($"I have that problem");
         }
+
+        public bool SameStringTokens(int argumentName)
+        {
+            throw new ArgumentException("argumentName", "argumentName"); // Noncompliant
+            // Noncompliant@-1
+            throw new Exception("argumentName"); // Noncompliant
+            throw new ArgumentException("argumentName argumentName argumentName"); // Noncompliant (only one message)
+            throw new ArgumentException("argumentName argumentName argumentName"); // Noncompliant
+            throw new Exception($"argumentName argumentName argumentName"); // Noncompliant (only one message)
+            throw new Exception($"argumentName argumentName argumentName"); // Noncompliant
+            throw new Exception($"argumentName"); // Noncompliant
+            throw new Exception($"argumentName"); // Noncompliant
+        }
     }
 }
