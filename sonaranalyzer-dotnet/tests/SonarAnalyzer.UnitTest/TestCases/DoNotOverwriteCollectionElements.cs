@@ -282,7 +282,7 @@ namespace Tests.Diagnostics
             dict1.StaticDictionary.Add("static", "a");
             dict2.StaticDictionary.Add("static", "b"); // FN, same instance
 
-            MyContainer.publicStaticDictionaryField.Add("x", "x");
+            MyContainer.publicStaticDictionaryField.Add("x", "x"); // Secondary
             MyContainer.publicStaticDictionaryField.Add("x", "x1"); // Noncompliant
         }
     }
