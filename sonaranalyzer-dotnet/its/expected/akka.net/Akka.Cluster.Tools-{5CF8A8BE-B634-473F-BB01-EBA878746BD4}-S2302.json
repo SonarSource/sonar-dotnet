@@ -15,6 +15,45 @@
 },
 {
 "id":  "S2302",
+"message":  "Replace the string 'system' with 'nameof(system)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionistSettings.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  59,
+"endLine":  24,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\Serialization\ClusterClientMessageSerializer.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  55,
+"endLine":  51,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'system' with 'nameof(system)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubSettings.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  61,
+"endLine":  23,
+"endColumn":  138
+}
+}
+},
+{
+"id":  "S2302",
 "message":  "Replace the string 'singletonName' with 'nameof(singletonName)'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManagerSettings.cs",
@@ -88,6 +127,19 @@
 "startColumn":  106,
 "endLine":  61,
 "endColumn":  118
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\Serialization\ClusterSingletonMessageSerializer.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  60,
+"endLine":  63,
+"endColumn":  131
 }
 }
 }

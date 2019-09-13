@@ -2,6 +2,32 @@
 "issues":  [
 {
 "id":  "S2302",
+"message":  "Replace the string 'message' with 'nameof(message)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  438,
+"startColumn":  37,
+"endLine":  438,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'endpoint' with 'nameof(endpoint)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  49,
+"endLine":  35,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S2302",
 "message":  "Replace the string 'maxSampleSize' with 'nameof(maxSampleSize)'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
@@ -10,6 +36,19 @@
 "startColumn":  55,
 "endLine":  257,
 "endColumn":  70
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'maxSampleSize' with 'nameof(maxSampleSize)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"region":  {
+"startLine":  257,
+"startColumn":  86,
+"endLine":  257,
+"endColumn":  123
 }
 }
 },
@@ -28,6 +67,19 @@
 },
 {
 "id":  "S2302",
+"message":  "Replace the string 'intervalSum' with 'nameof(intervalSum)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  84,
+"endLine":  259,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S2302",
 "message":  "Replace the string 'squaredIntervalSum' with 'nameof(squaredIntervalSum)'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
@@ -36,6 +88,58 @@
 "startColumn":  55,
 "endLine":  261,
 "endColumn":  75
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'squaredIntervalSum' with 'nameof(squaredIntervalSum)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  91,
+"endLine":  261,
+"endColumn":  133
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'message' with 'nameof(message)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  52,
+"endLine":  238,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'address' with 'nameof(address)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"region":  {
+"startLine":  273,
+"startColumn":  66,
+"endLine":  273,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'remote' with 'nameof(remote)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  21,
+"endLine":  318,
+"endColumn":  123
 }
 }
 },

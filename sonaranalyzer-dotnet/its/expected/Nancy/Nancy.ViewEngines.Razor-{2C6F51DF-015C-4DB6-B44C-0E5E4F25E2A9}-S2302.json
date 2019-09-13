@@ -12,6 +12,32 @@
 "endColumn":  57
 }
 }
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'action' with 'nameof(action)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\HelperResult.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  59,
+"endLine":  23,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'required' with 'nameof(required)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  358,
+"startColumn":  85,
+"endLine":  358,
+"endColumn":  114
+}
+}
 }
 ]
 }

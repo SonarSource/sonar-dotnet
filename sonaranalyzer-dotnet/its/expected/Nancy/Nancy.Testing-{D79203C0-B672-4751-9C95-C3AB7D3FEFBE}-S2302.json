@@ -2,6 +2,123 @@
 "issues":  [
 {
 "id":  "S2302",
+"message":  "Replace the string 'expected' with 'nameof(expected)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  39,
+"endLine":  29,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'expected' with 'nameof(expected)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  39,
+"endLine":  42,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'expected' with 'nameof(expected)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  57,
+"endLine":  49,
+"endColumn":  131
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'expected' with 'nameof(expected)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  57,
+"endLine":  60,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'expected' with 'nameof(expected)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  57,
+"endLine":  68,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'condition' with 'nameof(condition)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  43,
+"endLine":  76,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'actual' with 'nameof(actual)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  57,
+"endLine":  103,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'values' with 'nameof(values)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  43,
+"endLine":  116,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'condition' with 'nameof(condition)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  43,
+"endLine":  151,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2302",
 "message":  "Replace the string 'context' with 'nameof(context)'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponse.cs",
@@ -10,6 +127,19 @@
 "startColumn":  49,
 "endLine":  27,
 "endColumn":  58
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'context' with 'nameof(context)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponse.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  60,
+"endLine":  27,
+"endColumn":  112
 }
 }
 },
@@ -28,6 +158,19 @@
 },
 {
 "id":  "S2302",
+"message":  "Replace the string 'hostBrowser' with 'nameof(hostBrowser)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponse.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  64,
+"endLine":  32,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S2302",
 "message":  "Replace the string 'path' with 'nameof(path)'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Testing\PathHelper.cs",
@@ -36,6 +179,19 @@
 "startColumn":  77,
 "endLine":  19,
 "endColumn":  83
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'levels' with 'nameof(levels)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\PathHelper.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  45,
+"endLine":  24,
+"endColumn":  72
 }
 }
 },

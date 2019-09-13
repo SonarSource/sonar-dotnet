@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'source' with 'nameof(source)'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  933,
+"startColumn":  67,
+"endLine":  933,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'separator' with 'nameof(separator)'.",
+"location":  {
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  934,
+"startColumn":  77,
+"endLine":  934,
+"endColumn":  125
+}
+}
+}
+]
+}
