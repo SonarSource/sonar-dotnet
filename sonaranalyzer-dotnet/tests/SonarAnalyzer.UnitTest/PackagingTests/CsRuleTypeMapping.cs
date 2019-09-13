@@ -5031,7 +5031,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
                 //["5031"],
                 //["5032"],
                 //["5033"],
-                //["5034"],
+                ["5034"] = "CODE_SMELL",
                 //["5035"],
                 //["5036"],
                 //["5037"],
