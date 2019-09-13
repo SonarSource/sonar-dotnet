@@ -92,12 +92,12 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckUnnecessaryUsings(SyntaxNodeAnalysisContext context, IEnumerable<UsingDirectiveSyntax> usingDirectives, HashSet<INamespaceSymbol> usedNamespaces)
+        private static void CheckUnnecessaryUsings(SyntaxNodeAnalysisContext context, IEnumerable<UsingDirectiveSyntax> usingDirectives, HashSet<INamespaceSymbol> necessaryNamespaces)
         {
             foreach (var usingDirective in usingDirectives)
             {
                 if (context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
-                && !usedNamespaces.Any(usedNamespace => usedNamespace.IsSameNamespace(namespaceSymbol)))
+                && !necessaryNamespaces.Any(usedNamespace => usedNamespace.IsSameNamespace(namespaceSymbol)))
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, usingDirective.GetLocation(), "unnecessary"));
                 }
