@@ -30,21 +30,15 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public sealed class UnnecessaryImportsCodeFixProvider : SonarCodeFixProvider
+    public sealed class UnnecessaryUsingsCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Remove this unnecessary 'using'.";
         public override ImmutableArray<string> FixableDiagnosticIds
         {
-            get
-            {
-                return ImmutableArray.Create(UnnecessaryImports.DiagnosticId);
-            }
+            get => ImmutableArray.Create(UnnecessaryUsings.DiagnosticId);
         }
 
-        public override FixAllProvider GetFixAllProvider()
-        {
-            return WellKnownFixAllProviders.BatchFixer;
-        }
+        public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {

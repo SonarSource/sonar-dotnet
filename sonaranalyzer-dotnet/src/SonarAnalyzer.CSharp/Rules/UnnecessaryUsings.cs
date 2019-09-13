@@ -18,23 +18,23 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using Microsoft.CodeAnalysis.CSharp;
-using System;
 using SonarAnalyzer.Helpers.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class UnnecessaryImports : SonarDiagnosticAnalyzer
+    public sealed class UnnecessaryUsings : SonarDiagnosticAnalyzer
     {
 
         internal const string DiagnosticId = "S1128";
@@ -52,8 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var compilationUnit = (CompilationUnitSyntax)c.Node;
                     var simpleNamespaces = compilationUnit.Usings.Where(usingDirective => usingDirective.Alias == null);
-                    var globalUsingDirectives = new HashSet<EquivalentNameSyntax>();
-                    globalUsingDirectives.UnionWith(simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)));
+                    var globalUsingDirectives = simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)).ToImmutableHashSet();
 
                     var visitor = new CSharpRemovableUsingWalker(c, globalUsingDirectives, null);
                     foreach (var member in compilationUnit.Members)
@@ -65,14 +64,14 @@ namespace SonarAnalyzer.Rules.CSharp
                         visitor.SafeVisit(attribute);
                     }
 
-                    CheckDuplicateUsings(c, new HashSet<EquivalentNameSyntax>(), simpleNamespaces);
-                    CheckUnnecessaryUsings(c, simpleNamespaces, visitor.usedNamespaces);
+                    CheckDuplicateUsings(c, ImmutableHashSet.Create<EquivalentNameSyntax>(), simpleNamespaces);
+                    CheckUnnecessaryUsings(c, simpleNamespaces, visitor.necessaryNamespaces);
                 },
                 SyntaxKind.CompilationUnit);
 
         }
 
-        private static void CheckDuplicateUsings(SyntaxNodeAnalysisContext context, HashSet<EquivalentNameSyntax> ancestorsUsingDirectives, IEnumerable<UsingDirectiveSyntax> usingDirectives)
+        private static void CheckDuplicateUsings(SyntaxNodeAnalysisContext context, IImmutableSet<EquivalentNameSyntax> ancestorsUsingDirectives, IEnumerable<UsingDirectiveSyntax> usingDirectives)
         {
             var groupingDirectives = usingDirectives
                 .GroupBy(usingDirective => new EquivalentNameSyntax(usingDirective.Name))
@@ -98,34 +97,25 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var usingDirective in usingDirectives)
             {
                 if (context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
-                && !usedNamespaces.Any(usedNamespace => IsSameNamespace(usedNamespace, namespaceSymbol)))
+                && !usedNamespaces.Any(usedNamespace => usedNamespace.IsSameNamespace(namespaceSymbol)))
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, usingDirective.GetLocation(), "unnecessary"));
                 }
             }
         }
 
-        private static bool IsSameNamespace(INamespaceSymbol namespace1, INamespaceSymbol namespace2)
-        {
-            return namespace1.IsGlobalNamespace && namespace2.IsGlobalNamespace
-                || (namespace1.Name.Equals(namespace2.Name)
-                && namespace1.ContainingNamespace != null
-                && namespace2.ContainingNamespace != null
-                && IsSameNamespace(namespace1.ContainingNamespace, namespace2.ContainingNamespace));
-        }
-
         private class CSharpRemovableUsingWalker : CSharpSyntaxWalker
         {
             private readonly SyntaxNodeAnalysisContext context;
-            private readonly HashSet<EquivalentNameSyntax> usingDirectivesFromParent;
+            private readonly IImmutableSet<EquivalentNameSyntax> usingDirectivesFromParent;
             private readonly INamespaceSymbol currentNamespace;
-            public readonly HashSet<INamespaceSymbol> usedNamespaces;
+            public readonly HashSet<INamespaceSymbol> necessaryNamespaces;
 
-            public CSharpRemovableUsingWalker(SyntaxNodeAnalysisContext context, HashSet<EquivalentNameSyntax> usingDirectives, INamespaceSymbol currentNamespace)
+            public CSharpRemovableUsingWalker(SyntaxNodeAnalysisContext context, IImmutableSet<EquivalentNameSyntax> usingDirectives, INamespaceSymbol currentNamespace)
             {
                 this.context = context;
                 this.usingDirectivesFromParent = usingDirectives;
-                this.usedNamespaces = new HashSet<INamespaceSymbol>();
+                this.necessaryNamespaces = new HashSet<INamespaceSymbol>();
                 this.currentNamespace = currentNamespace;
             }
 
@@ -136,17 +126,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 newUsingDirectives.UnionWith(usingDirectivesFromParent);
                 newUsingDirectives.UnionWith(simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)));
 
+                // We visit the namespace declaration with the updated set of parent 'usings', this is needed in case of nested namespaces
                 var visitingNamespace = context.SemanticModel.GetSymbolInfo(node.Name).Symbol as INamespaceSymbol;
-                var visitor = new CSharpRemovableUsingWalker(context, newUsingDirectives, visitingNamespace);
+                var visitor = new CSharpRemovableUsingWalker(context, newUsingDirectives.ToImmutableHashSet(), visitingNamespace);
                 foreach (var member in node.Members)
                 {
                     visitor.SafeVisit(member);
                 }
 
                 CheckDuplicateUsings(context, usingDirectivesFromParent, simpleNamespaces);
-                CheckUnnecessaryUsings(context, simpleNamespaces, visitor.usedNamespaces);
+                CheckUnnecessaryUsings(context, simpleNamespaces, visitor.necessaryNamespaces);
 
-                usedNamespaces.UnionWith(visitor.usedNamespaces);
+                necessaryNamespaces.UnionWith(visitor.necessaryNamespaces);
             }
 
             public override void VisitIdentifierName(IdentifierNameSyntax node)
@@ -160,21 +151,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 base.VisitGenericName(node);
             }
 
+            /// <summary>
+            /// We check the symbol of each name node found in the code. If the containing namespace of the symbol is
+            /// neither the current namespace or one of its parent, it is then added to the necessary namespace set, as
+            /// importing that namespace is indeed necessary.
+            /// </summary>
             private void VisitNameNode(SimpleNameSyntax node)
             {
                 if (context.SemanticModel.GetSymbolInfo(node).Symbol is ISymbol symbol
                     && symbol.ContainingNamespace is INamespaceSymbol namespaceSymbol
-                    && (currentNamespace == null || !IsSelfOrAncestorNamespace(namespaceSymbol, currentNamespace)))
+                    && (currentNamespace == null || !namespaceSymbol.IsSameOrAncestorOf(currentNamespace)))
                 {
-                    usedNamespaces.Add(namespaceSymbol);
+                    necessaryNamespaces.Add(namespaceSymbol);
                 }
-            }
-
-
-            private bool IsSelfOrAncestorNamespace(INamespaceSymbol namespaceSymbol, INamespaceSymbol currentNamespace)
-            {
-                return IsSameNamespace(namespaceSymbol, currentNamespace)
-                    || (currentNamespace.ContainingNamespace != null && IsSelfOrAncestorNamespace(namespaceSymbol, currentNamespace.ContainingNamespace));
             }
         }
     }

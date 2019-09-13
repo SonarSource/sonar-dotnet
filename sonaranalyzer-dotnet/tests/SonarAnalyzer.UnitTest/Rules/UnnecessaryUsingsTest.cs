@@ -24,26 +24,26 @@ using CS = SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class UnnecessaryImportsTest
+    public class UnnecessaryUsingsTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UnnecessaryImports()
+        public void UnnecessaryUsings()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryImports.cs",
-                new CS.UnnecessaryImports());
+            Verifier.VerifyAnalyzer(@"TestCases\UnnecessaryUsings.cs",
+                new CS.UnnecessaryUsings());
         }
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void UnnecessaryImports_CodeFix()
+        public void UnnecessaryUsings_CodeFix()
         {
             Verifier.VerifyCodeFix(
-                @"TestCases\UnnecessaryImports.cs",
-                @"TestCases\UnnecessaryImports.Fixed.cs",
-                @"TestCases\UnnecessaryImports.Fixed.Batch.cs",
-                new CS.UnnecessaryImports(),
-                new CS.UnnecessaryImportsCodeFixProvider());
+                @"TestCases\UnnecessaryUsings.cs",
+                @"TestCases\UnnecessaryUsings.Fixed.cs",
+                @"TestCases\UnnecessaryUsings.Fixed.Batch.cs",
+                new CS.UnnecessaryUsings(),
+                new CS.UnnecessaryUsingsCodeFixProvider());
         }
     }
 }

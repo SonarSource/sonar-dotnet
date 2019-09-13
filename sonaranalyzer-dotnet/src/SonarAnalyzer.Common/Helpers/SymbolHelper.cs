@@ -277,5 +277,20 @@ namespace SonarAnalyzer.Helpers
             var symbolType = semanticModel.GetDeclaredSymbol(syntaxNode)?.GetSymbolType();
             return symbolType.Is(knownType);
         }
+
+        public static bool IsSameNamespace(this INamespaceSymbol namespace1, INamespaceSymbol namespace2)
+        {
+            return namespace1.IsGlobalNamespace && namespace2.IsGlobalNamespace
+                || (namespace1.Name.Equals(namespace2.Name)
+                && namespace1.ContainingNamespace != null
+                && namespace2.ContainingNamespace != null
+                && IsSameNamespace(namespace1.ContainingNamespace, namespace2.ContainingNamespace));
+        }
+
+        public static bool IsSameOrAncestorOf(this INamespaceSymbol thisNamespace, INamespaceSymbol namespaceToCheck)
+        {
+            return IsSameNamespace(thisNamespace, namespaceToCheck)
+                || (namespaceToCheck.ContainingNamespace != null && IsSameOrAncestorOf(thisNamespace, namespaceToCheck.ContainingNamespace));
+        }
     }
 }
