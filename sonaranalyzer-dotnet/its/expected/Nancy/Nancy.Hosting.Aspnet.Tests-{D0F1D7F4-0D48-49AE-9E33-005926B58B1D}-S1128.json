@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet.Tests\NancyHandlerFixture.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  5,
+"endLine":  13,
+"endColumn":  25
+}
+}
+}
+]
+}

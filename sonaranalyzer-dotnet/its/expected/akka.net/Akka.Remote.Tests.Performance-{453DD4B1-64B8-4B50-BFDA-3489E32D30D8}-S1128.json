@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Properties\AssemblyInfo.cs",
+"region":  {
+"startLine":  2,
+"startColumn":  1,
+"endLine":  2,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\AssociationStressSpecBase.cs",
+"region":  {
+"startLine":  4,
+"startColumn":  1,
+"endLine":  4,
+"endColumn":  29
+}
+}
+}
+]
+}

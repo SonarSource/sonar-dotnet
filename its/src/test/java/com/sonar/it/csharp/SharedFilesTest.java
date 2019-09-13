@@ -69,8 +69,8 @@ public class SharedFilesTest {
 
     // shared file in the solution should have measures and issues
     assertThat(getMeasureAsInt("SharedFilesTest:Class1.cs", "files")).isEqualTo(1);
-    assertThat(getMeasureAsInt("SharedFilesTest:Class1.cs", "lines")).isEqualTo(9);
-    assertThat(getMeasureAsInt("SharedFilesTest:Class1.cs", "ncloc")).isEqualTo(7);
+    assertThat(getMeasureAsInt("SharedFilesTest:Class1.cs", "lines")).isEqualTo(7);
+    assertThat(getMeasureAsInt("SharedFilesTest:Class1.cs", "ncloc")).isEqualTo(6);
     
     List<Issue> issues = getIssues("SharedFilesTest:Class1.cs");
     assertThat(issues).hasSize(1);

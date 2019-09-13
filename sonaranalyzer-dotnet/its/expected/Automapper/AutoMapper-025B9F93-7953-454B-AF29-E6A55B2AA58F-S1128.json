@@ -1,0 +1,303 @@
+{
+"issues":  [
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
+"region":  {
+"startLine":  4,
+"startColumn":  1,
+"endLine":  4,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ConstructorMap.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ConstructorMap.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  1,
+"endLine":  6,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyGenerator.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  5,
+"endLine":  11,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  2,
+"startColumn":  1,
+"endLine":  2,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ReflectionHelper.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  1,
+"endLine":  5,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\IProfileExpression.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  1,
+"endLine":  3,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ArrayCopyMapper.cs",
+"region":  {
+"startLine":  2,
+"startColumn":  1,
+"endLine":  2,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ArrayCopyMapper.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  1,
+"endLine":  3,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ArrayCopyMapper.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  1,
+"endLine":  6,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ArrayCopyMapper.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  1,
+"endLine":  7,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ConvertMapper.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  1,
+"endLine":  5,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumerableMapper.cs",
+"region":  {
+"startLine":  2,
+"startColumn":  1,
+"endLine":  2,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumToStringMapper.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  1,
+"endLine":  7,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ImplicitConversionOperatorMapper.cs",
+"region":  {
+"startLine":  4,
+"startColumn":  1,
+"endLine":  4,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\MultidimensionalArrayMapper.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  1,
+"endLine":  3,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\TypeConverterMapper.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  1,
+"endLine":  5,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PathMap.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  5,
+"endLine":  7,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Profile.cs",
+"region":  {
+"startLine":  4,
+"startColumn":  1,
+"endLine":  4,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  1,
+"endLine":  7,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\EnumerableExpressionBinder.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  1,
+"endLine":  5,
+"endColumn":  26
+}
+}
+}
+]
+}

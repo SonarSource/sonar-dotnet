@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemoteConsistentHashingRouterSpec.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  1,
+"endLine":  13,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemoteDeployerSpec.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  1,
+"endLine":  11,
+"endColumn":  27
+}
+}
+}
+]
+}

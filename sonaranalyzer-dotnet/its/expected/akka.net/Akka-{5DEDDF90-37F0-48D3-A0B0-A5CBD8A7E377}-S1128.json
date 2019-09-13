@@ -1,0 +1,355 @@
+{
+"issues":  [
+{
+"id":  "S1128",
+"message":  "Remove this duplicate 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Cell.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  1,
+"endLine":  11,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  1,
+"endLine":  12,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  1,
+"endLine":  14,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\IAutoReceivedMessage.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  1,
+"endLine":  8,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\IDateTimeNowTimeProvider.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  1,
+"endLine":  8,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  1,
+"endLine":  12,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\Internal\AbstractStash.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  1,
+"endLine":  12,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  1,
+"endLine":  12,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\DequeBasedMailbox.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ForkJoinDispatcher.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\IDispatcherPrerequisites.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  1,
+"endLine":  8,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\IDispatcherPrerequisites.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventBusUnsubscriber.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventBusUnsubscriber.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  1,
+"endLine":  10,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventBusUnsubscriber.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  1,
+"endLine":  11,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventStream.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventStream.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  1,
+"endLine":  10,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventStreamExtensions.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventStreamExtensions.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  1,
+"endLine":  10,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventStreamExtensions.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  1,
+"endLine":  11,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventStreamExtensions.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  1,
+"endLine":  12,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\EventStreamExtensions.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  1,
+"endLine":  13,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\SelectionHandler.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterMsg.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  1,
+"endLine":  10,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  1,
+"endLine":  12,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\IPartialActionBuilder.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  1,
+"endLine":  8,
+"endColumn":  14
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  5,
+"endLine":  6,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  5,
+"endLine":  13,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  5,
+"endLine":  27,
+"endColumn":  21
+}
+}
+}
+]
+}

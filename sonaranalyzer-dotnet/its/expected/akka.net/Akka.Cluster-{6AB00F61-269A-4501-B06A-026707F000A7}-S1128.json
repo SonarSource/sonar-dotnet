@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  1,
+"endLine":  12,
+"endColumn":  18
+}
+}
+}
+]
+}

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  1,
+"endLine":  10,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  1,
+"endLine":  10,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  1,
+"endLine":  15,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Properties\AssemblyInfo.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  1,
+"endLine":  14,
+"endColumn":  13
+}
+}
+}
+]
+}

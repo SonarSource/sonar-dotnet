@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\ActorCellKeepingSynchronizationContext.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\ActorCellKeepingSynchronizationContext.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  1,
+"endLine":  10,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\ActorCellKeepingSynchronizationContext.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  1,
+"endLine":  11,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\INoImplicitSender.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  1,
+"endLine":  8,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  1,
+"endLine":  8,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBreaker.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  1,
+"endLine":  8,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBreaker.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBreaker.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  1,
+"endLine":  10,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBreaker.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  1,
+"endLine":  12,
+"endColumn":  30
+}
+}
+}
+]
+}

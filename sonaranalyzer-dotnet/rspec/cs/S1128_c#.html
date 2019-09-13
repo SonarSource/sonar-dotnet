@@ -1,0 +1,40 @@
+<p>Although unnecessary or duplicate <code>using</code> won't change anything to the produced application, removing them:</p>
+<ul>
+  <li> Will help readability and maintenance. </li>
+  <li> Will help reduce the number of items in the IDE auto-completion list when coding. </li>
+  <li> May avoid some name collisions. </li>
+  <li> May improve compilation time because the compiler has fewer namespaces to look-up when it resolves types. </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System.Collections.Generic; // Noncompliant - unnecessary using
+using System.IO;
+using System.IO; // Noncompliant - duplicate
+
+namespace Foo
+{
+    public class Bar
+    {
+        public Bar(string path)
+        {
+            File.ReadAllLines(path);
+        }
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System.IO;
+
+namespace Foo
+{
+    public class Bar
+    {
+        public Bar(string path)
+        {
+            File.ReadAllLines(path);
+        }
+    }
+}
+</pre>
+

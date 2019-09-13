@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\AssociationEvent.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  1,
+"endLine":  8,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\FailureDetectorRegistry.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  1,
+"endLine":  11,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  1,
+"endLine":  11,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteDeploymentWatcher.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  1,
+"endLine":  8,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteDeploymentWatcher.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteDeploymentWatcher.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  1,
+"endLine":  10,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteDeploymentWatcher.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  1,
+"endLine":  11,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteDeploymentWatcher.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  1,
+"endLine":  12,
+"endColumn":  30
+}
+}
+}
+]
+}

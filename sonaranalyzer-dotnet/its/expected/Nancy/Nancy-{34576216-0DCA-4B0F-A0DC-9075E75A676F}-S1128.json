@@ -1,0 +1,225 @@
+{
+"issues":  [
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironment.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  5,
+"endLine":  3,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyContextFactory.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  5,
+"endLine":  3,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsModuleCatalog.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  5,
+"endLine":  8,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  5,
+"endLine":  10,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonConfiguration.cs",
+"region":  {
+"startLine":  4,
+"startColumn":  5,
+"endLine":  4,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  5,
+"endLine":  6,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\MaterialisingResponse.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  5,
+"endLine":  7,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultNancyModuleBuilder.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  5,
+"endLine":  3,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultNancyModuleBuilder.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  5,
+"endLine":  5,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteInvoker.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  5,
+"endLine":  9,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\MethodNotAllowedRoute.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  5,
+"endLine":  6,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\OptionsRoute.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  5,
+"endLine":  6,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteDescription.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  5,
+"endLine":  6,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  5,
+"endLine":  9,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\ModuleSecurity.cs",
+"region":  {
+"startLine":  4,
+"startColumn":  5,
+"endLine":  4,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\ModuleSecurity.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  5,
+"endLine":  8,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewRenderer.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  5,
+"endLine":  3,
+"endColumn":  21
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\ExitCodeContainer.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  1,
+"endLine":  8,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\IMessageSink.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  1,
+"endLine":  8,
+"endColumn":  14
+}
+}
+}
+]
+}
