@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1199",
+"message":  "Extract this nested code block into a separate method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRange.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  17,
+"endLine":  31,
+"endColumn":  18
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1199",
+"message":  "Extract this nested code block into a separate method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  551,
+"startColumn":  17,
+"endLine":  551,
+"endColumn":  18
+}
+}
+}
+]
+}
