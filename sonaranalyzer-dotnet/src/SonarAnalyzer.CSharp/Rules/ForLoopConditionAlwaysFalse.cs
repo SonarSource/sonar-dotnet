@@ -80,16 +80,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     IsAlwaysFalseCondition(logicalNode.Operand.RemoveParentheses())
                 );
 
-        private static bool IsLogicalNot(ExpressionSyntax expression, out PrefixUnaryExpressionSyntax logicalNot)
-        {
-            var prefixUnaryExpression = expression.RemoveParentheses() as PrefixUnaryExpressionSyntax;
-
-            logicalNot = prefixUnaryExpression;
-
-            return prefixUnaryExpression != null
-                && prefixUnaryExpression.OperatorToken.IsKind(SyntaxKind.ExclamationToken);
-        }
-
         private bool IsConditionFalseAtInitialization(ForStatementSyntax forNode)
         {
             var condition = forNode.Condition;
@@ -141,6 +131,16 @@ namespace SonarAnalyzer.Rules.CSharp
             return conditionValue;
         }
 
+        private static bool IsLogicalNot(ExpressionSyntax expression, out PrefixUnaryExpressionSyntax logicalNot)
+        {
+            var prefixUnaryExpression = expression.RemoveParentheses() as PrefixUnaryExpressionSyntax;
+
+            logicalNot = prefixUnaryExpression;
+
+            return prefixUnaryExpression != null
+                && prefixUnaryExpression.OperatorToken.IsKind(SyntaxKind.ExclamationToken);
+        }
+
         /// <summary>
         /// We try to retrieve the integer value of an expression. If the expression is an integer literal, we return its value, otherwise if
         /// the expression is an identifier, we attempt to retrieve the integer value the variable was initialized with if it exists.
@@ -149,7 +149,7 @@ namespace SonarAnalyzer.Rules.CSharp
         /// <param name="expression">The expression for which we want to retrieve the integer value</param>
         /// <param name="intValue">The output parameter that will hold the integer value if it is found</param>
         /// <returns>true if an integer value was found for the expression, false otherwise</returns>
-        private bool GetIntValue(IDictionary<string, int> variableNameToIntegerValue, ExpressionSyntax expression, out int intValue)
+        private static bool GetIntValue(IDictionary<string, int> variableNameToIntegerValue, ExpressionSyntax expression, out int intValue)
         {
             if (ExpressionNumericConverter.TryGetConstantIntValue(expression, out intValue) ||
                     (

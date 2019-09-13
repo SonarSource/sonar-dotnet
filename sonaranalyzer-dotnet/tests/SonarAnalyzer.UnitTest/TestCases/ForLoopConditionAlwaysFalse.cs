@@ -53,7 +53,7 @@ namespace Tests.Diagnostics
 
             var z = 0;
             for (int i = 0; i < z; i++) { } // FN - we only check for literals in the condition
-            for (; z < 0; z++) { } // FN - we only check for initilaizers inside the loop statement
+            for (; z < 0; z++) { } // FN - we only check for initializers inside the loop statement
         }
     }
 }
