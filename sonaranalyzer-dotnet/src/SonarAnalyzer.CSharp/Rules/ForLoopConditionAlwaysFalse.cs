@@ -67,14 +67,18 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private bool IsAlwaysFalseCondition(ExpressionSyntax condition) =>
-            condition.IsKind(SyntaxKind.FalseLiteralExpression)
-            || (IsLogicalNot(condition, out var logicalNode)
-            && IsAlwaysTrueCondition(logicalNode.Operand.RemoveParentheses()));
+            condition.IsKind(SyntaxKind.FalseLiteralExpression) ||
+                (
+                    IsLogicalNot(condition, out var logicalNode) &&
+                    IsAlwaysTrueCondition(logicalNode.Operand.RemoveParentheses()
+                 ));
 
         private bool IsAlwaysTrueCondition(ExpressionSyntax condition) =>
-            condition.IsKind(SyntaxKind.TrueLiteralExpression)
-            || (IsLogicalNot(condition, out var logicalNode)
-            && IsAlwaysFalseCondition(logicalNode.Operand.RemoveParentheses()));
+            condition.IsKind(SyntaxKind.TrueLiteralExpression) ||
+                (
+                    IsLogicalNot(condition, out var logicalNode) &&
+                    IsAlwaysFalseCondition(logicalNode.Operand.RemoveParentheses())
+                );
 
         private static bool IsLogicalNot(ExpressionSyntax expression, out PrefixUnaryExpressionSyntax logicalNot)
         {
@@ -94,21 +98,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var loopInitializerValues = GetLoopInitializerValues(forNode.Declaration);
-            loopInitializerValues = loopInitializerValues
-                .Union(GetLoopInitializerValues(forNode.Initializers))
+            var loopVariableDeclarationMapping = GetVariableDeclarationMapping(forNode.Declaration);
+            var loopInitializerMapping = GetLoopInitializerMapping(forNode.Initializers);
+
+            var variableNameToIntegerMapping = loopVariableDeclarationMapping
+                .Union(loopInitializerMapping)
                 .ToDictionary(d => d.Key, d => d.Value);
 
             var binaryCondition = (BinaryExpressionSyntax)condition;
-            if (GetIntValue(loopInitializerValues, binaryCondition.Left, out var leftValue)
-                && GetIntValue(loopInitializerValues, binaryCondition.Right, out var rightValue))
+            if (GetIntValue(variableNameToIntegerMapping, binaryCondition.Left, out var leftValue)
+                && GetIntValue(variableNameToIntegerMapping, binaryCondition.Right, out var rightValue))
             {
-                return !EvaluateCondition(condition.Kind(), leftValue, rightValue);
+                return !ConditionIsTrue(condition.Kind(), leftValue, rightValue);
             }
             return false;
         }
 
-        private bool EvaluateCondition(SyntaxKind syntaxKind, int leftValue, int rightValue)
+        private bool ConditionIsTrue(SyntaxKind syntaxKind, int leftValue, int rightValue)
         {
             var conditionValue = true;
             switch (syntaxKind)
@@ -135,11 +141,21 @@ namespace SonarAnalyzer.Rules.CSharp
             return conditionValue;
         }
 
-        private bool GetIntValue(IDictionary<string, int> loopInitializerValues, ExpressionSyntax left, out int intValue)
+        /// <summary>
+        /// We try to retrieve the integer value of an expression. If the expression is an integer literal, we return its value, otherwise if
+        /// the expression is an identifier, we attempt to retrieve the integer value the variable was initialized with if it exists.
+        /// </summary>
+        /// <param name="variableNameToIntegerValue">A dictionary mapping variable names to the integer value they were initialized with if it exists</param>
+        /// <param name="expression">The expression for which we want to retrieve the integer value</param>
+        /// <param name="intValue">The output parameter that will hold the integer value if it is found</param>
+        /// <returns>true if an integer value was found for the expression, false otherwise</returns>
+        private bool GetIntValue(IDictionary<string, int> variableNameToIntegerValue, ExpressionSyntax expression, out int intValue)
         {
-            if (ExpressionNumericConverter.TryGetConstantIntValue(left, out intValue)
-                || (left is SimpleNameSyntax simpleName
-                && loopInitializerValues.TryGetValue(simpleName.Identifier.ValueText, out intValue)))
+            if (ExpressionNumericConverter.TryGetConstantIntValue(expression, out intValue) ||
+                    (
+                        expression is SimpleNameSyntax simpleName &&
+                        variableNameToIntegerValue.TryGetValue(simpleName.Identifier.ValueText, out intValue)
+                    ))
             {
                 return true;
             }
@@ -148,7 +164,14 @@ namespace SonarAnalyzer.Rules.CSharp
             return false;
         }
 
-        private static IDictionary<string, int> GetLoopInitializerValues(VariableDeclarationSyntax variableDeclarationSyntax)
+        /// <summary>
+        /// Retrieves the mapping of variable names to their integer value from the variable declaration part of a for loop.
+        /// This will find the mapping for such cases:
+        /// <code>
+        /// for (var i = 0;;) {}
+        /// </code>
+        /// </summary>
+        private static IDictionary<string, int> GetVariableDeclarationMapping(VariableDeclarationSyntax variableDeclarationSyntax)
         {
             var loopInitializerValues = new Dictionary<string, int>();
             if (variableDeclarationSyntax != null)
@@ -165,7 +188,15 @@ namespace SonarAnalyzer.Rules.CSharp
             return loopInitializerValues;
         }
 
-        private static IDictionary<string, int> GetLoopInitializerValues(IEnumerable<ExpressionSyntax> initializers)
+        /// <summary>
+        /// Retrieves the mapping of variable names to their integer value from the initializer part of a for loop.
+        /// This will find the mapping for such cases:
+        /// <code>
+        /// int i;
+        /// for (i = 0;;) {}
+        /// </code>
+        /// </summary>
+        private static IDictionary<string, int> GetLoopInitializerMapping(IEnumerable<ExpressionSyntax> initializers)
         {
             var loopInitializerValues = new Dictionary<string, int>();
             if (initializers != null)

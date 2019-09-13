@@ -50,6 +50,10 @@ namespace Tests.Diagnostics
             for (var i = 0; i > 0x10;) { } // Noncompliant
             for (var i = 0; i < 0b10;) { }
             for (var i = 1; i <= 0Xffff; i++) { }
+
+            var z = 0;
+            for (int i = 0; i < z; i++) { } // FN - we only check for literals in the condition
+            for (; z < 0; z++) { } // FN - we only check for initilaizers inside the loop statement
         }
     }
 }
