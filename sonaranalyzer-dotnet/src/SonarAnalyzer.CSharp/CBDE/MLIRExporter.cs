@@ -496,12 +496,17 @@ namespace SonarAnalyzer
         private void ExportSimpleAssignment(SyntaxNode op)
         {
             var assign = op as AssignmentExpressionSyntax;
-            // We ignore the case where lhs is an expression (field, array...) because we currently do not support these yet
-            if (!SupportedTypes(assign) || assign.Left is ExpressionSyntax)
+            if (!SupportedTypes(assign))
             {
                 return;
             }
-            var lhs = semanticModel.GetSymbolInfo(assign.Left).Symbol.DeclaringSyntaxReferences[0].GetSyntax();
+            var symbolInfo = semanticModel.GetSymbolInfo(assign.Left);
+            // We ignore the case where lhs is not a parameter or a local variable (ie field, property...) because we currently do not support these yet
+            if (symbolInfo.Symbol == null || !(symbolInfo.Symbol is ILocalSymbol || symbolInfo.Symbol is IParameterSymbol))
+            {
+                return;
+            }
+            var lhs = symbolInfo.Symbol.DeclaringSyntaxReferences[0].GetSyntax();
             var rhsType = semanticModel.GetTypeInfo(assign.Right).Type;
             string rhsId;
             if (rhsType.Kind == SymbolKind.ErrorType)
