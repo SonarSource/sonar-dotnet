@@ -1,0 +1,19 @@
+<p>For clarity, all overloads of the same method should be grouped together. That lets both users and maintainers quickly understand all the current
+available options.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Interface IMyInterface
+    Function DoTheThing() As Integer
+    Function DoTheOtherThing() As String // Noncompliant
+    Function DoTheThing(ByVal Path As String) As Integer
+End Interface
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Interface IMyInterface
+    Function DoTheThing() As Integer
+    Function DoTheThing(ByVal Path As String) As Integer
+    Function DoTheOtherThing() As String
+End Interface
+</pre>
+
