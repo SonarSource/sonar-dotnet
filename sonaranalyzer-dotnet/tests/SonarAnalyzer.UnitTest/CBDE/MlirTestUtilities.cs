@@ -83,7 +83,19 @@ namespace SonarAnalyzer.UnitTest.CBDE
         public static void ValidateWithReference(string code, string expected, string testName)
         {
             var actual = ValidateCodeGeneration(code, testName, false);
-            Assert.AreEqual(expected.Trim(), actual.Trim());
+            var trimmedExpected = expected.Trim('\n', '\r', ' ', '\t').Replace("\r\n", "\n");
+            var trimmedActual = actual.Trim('\n', '\r', ' ', '\t');
+            var expectedLines = trimmedExpected.Split('\n');
+            var actualLines = trimmedActual.Split('\n');
+            var maxLines = Math.Min(expectedLines.Length, actualLines.Length);
+            for (int i = 0; i<maxLines; ++i)
+            {
+                if(expectedLines[i] != actualLines[i])
+                {
+                    Assert.Fail($"First different line: {i}\nExpected: {expectedLines[i]}\nActual:   {actualLines[i]}");
+                }
+            }
+            Assert.AreEqual(trimmedExpected.Trim(), trimmedActual.Trim());
         }
 
         public static IControlFlowGraph GetCfgForMethod(string code, string methodName)
