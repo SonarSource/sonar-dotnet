@@ -88,11 +88,13 @@ namespace SonarAnalyzer.Rules.CSharp
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             GlobalLog("Before initialize");
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             if (cbdeBinaryPath != null)
             {
                 RegisterMlirAndCbdeInOneStep(context);
             }
-            GlobalLog("After initialize");
+            watch.Stop();
+            GlobalLog($"After initialize ({watch.ElapsedMilliseconds} ms)");
         }
         private void RegisterMlirAndCbdeInOneStep(SonarAnalysisContext context)
         {
@@ -173,12 +175,17 @@ namespace SonarAnalyzer.Rules.CSharp
         }
         private void ExportFunctionMlir(SyntaxTree tree, SemanticModel model, string mlirFileName)
         {
-            using (var streamWriter = new StreamWriter(Path.Combine(mlirDirectoryAssembly, mlirFileName)))
+            using (var mlirStreamWriter = new StreamWriter(Path.Combine(mlirDirectoryAssembly, mlirFileName)))
+            using (var perfStreamWriter = new StreamWriter(Path.Combine(mlirDirectoryAssembly, mlirFileName.Replace(".mlir", "-perf.log"))))
             {
-                MLIRExporter mlirExporter = new MLIRExporter(streamWriter, model, true);
+                perfStreamWriter.WriteLine($"In file {tree.GetRoot().GetLocation().GetLineSpan().Path}");
+                MLIRExporter mlirExporter = new MLIRExporter(mlirStreamWriter, model, true);
                 foreach (var method in tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
                 {
+                    var watch = System.Diagnostics.Stopwatch.StartNew();
                     mlirExporter.ExportFunction(method);
+                    watch.Stop();
+                    perfStreamWriter.WriteLine($"{method.Identifier}: {watch.ElapsedMilliseconds} (line: {method.GetLocation().GetLineSpan().StartLinePosition.Line + 1})");
                 }
             }
         }
