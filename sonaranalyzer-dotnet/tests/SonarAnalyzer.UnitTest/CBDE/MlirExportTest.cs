@@ -1221,9 +1221,10 @@ class A
             var code = @"
 class A
 {
-    private int p;
+    private long p;
+    private readonly int[] indices;
 
-    public int f(int i)
+    private long f(int i)
     {
         ++i;
         i++;
@@ -1231,6 +1232,11 @@ class A
         i--;
 
         return ++p;
+    }
+
+    private void g(int dim)
+    {
+         _indices[dimension]++;
     }
 }
 ";
