@@ -1,0 +1,100 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'Contains' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  28,
+"endLine":  12,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  28,
+"endLine":  45,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'RoutePatternMatcher' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"region":  {
+"startLine":  1259,
+"startColumn":  57,
+"endLine":  1259,
+"endColumn":  76
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"region":  {
+"startLine":  1296,
+"startColumn":  57,
+"endLine":  1296,
+"endColumn":  76
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetAllModules' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  46,
+"endLine":  145,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"region":  {
+"startLine":  398,
+"startColumn":  54,
+"endLine":  398,
+"endColumn":  67
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Binder' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"region":  {
+"startLine":  676,
+"startColumn":  57,
+"endLine":  676,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"region":  {
+"startLine":  695,
+"startColumn":  57,
+"endLine":  695,
+"endColumn":  63
+}
+}
+]
+}
+]
+}

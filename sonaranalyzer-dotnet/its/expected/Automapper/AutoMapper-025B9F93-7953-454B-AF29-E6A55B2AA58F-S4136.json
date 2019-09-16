@@ -1,0 +1,421 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'MapFrom' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  21,
+"endLine":  124,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  21,
+"endLine":  135,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GenerateConstructorExpression' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\DelegateFactory.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  34,
+"endLine":  27,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Execution\DelegateFactory.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  34,
+"endLine":  39,
+"endColumn":  63
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetMapperFunc' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\IConfigurationProvider.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  70,
+"endLine":  142,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\IConfigurationProvider.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  18,
+"endLine":  151,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Include' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
+"region":  {
+"startLine":  266,
+"startColumn":  51,
+"endLine":  266,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
+"region":  {
+"startLine":  284,
+"startColumn":  51,
+"endLine":  284,
+"endColumn":  58
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'ConstructUsing' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
+"region":  {
+"startLine":  371,
+"startColumn":  51,
+"endLine":  371,
+"endColumn":  65
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\IMappingExpression.cs",
+"region":  {
+"startLine":  385,
+"startColumn":  51,
+"endLine":  385,
+"endColumn":  65
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Map' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  36,
+"endLine":  72,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  30,
+"endLine":  200,
+"endColumn":  33
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetMapperFunc' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  77,
+"endLine":  88,
+"endColumn":  90
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  25,
+"endLine":  106,
+"endColumn":  38
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetElementType' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\ElementTypeHelper.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  28,
+"endLine":  12,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\ElementTypeHelper.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  28,
+"endLine":  17,
+"endColumn":  42
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetElementTypes' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\ElementTypeHelper.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  30,
+"endLine":  14,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\ElementTypeHelper.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  30,
+"endLine":  19,
+"endColumn":  45
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'BeforeMap' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\MappingOperationOptions.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  21,
+"endLine":  26,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MappingOperationOptions.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  39,
+"endLine":  58,
+"endColumn":  48
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'AfterMap' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\MappingOperationOptions.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  21,
+"endLine":  28,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\MappingOperationOptions.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  39,
+"endLine":  60,
+"endColumn":  47
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Configure' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  21,
+"endLine":  116,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  22,
+"endLine":  137,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetExpressionResolutionResult' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberResolverExpressionResultConverter.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  43,
+"endLine":  7,
+"endColumn":  72
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberResolverExpressionResultConverter.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  43,
+"endLine":  27,
+"endColumn":  72
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'To' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionExpression.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  36,
+"endLine":  33,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionExpression.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  36,
+"endLine":  48,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionExpression.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  36,
+"endLine":  71,
+"endColumn":  38
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetGetMethod' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  34,
+"endLine":  130,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  34,
+"endLine":  134,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetSetMethod' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  34,
+"endLine":  132,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  34,
+"endLine":  136,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'IsPublic' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  28,
+"endLine":  79,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  28,
+"endLine":  93,
+"endColumn":  36
+}
+}
+]
+}
+]
+}

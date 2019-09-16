@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'Dispose' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\TestKit.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  21,
+"endLine":  90,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\TestKit.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  32,
+"endLine":  113,
+"endColumn":  39
+}
+}
+]
+}
+]
+}

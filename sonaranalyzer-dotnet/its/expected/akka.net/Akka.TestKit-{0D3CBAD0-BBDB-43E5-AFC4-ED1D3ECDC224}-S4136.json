@@ -1,0 +1,238 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'ExpectOne' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\IEventFilterApplier.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  14,
+"endLine":  23,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\IEventFilterApplier.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  11,
+"endLine":  68,
+"endColumn":  20
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Expect' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\IEventFilterApplier.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  14,
+"endLine":  44,
+"endColumn":  20
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\IEventFilterApplier.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  11,
+"endLine":  93,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'ExpectOne' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  21,
+"endLine":  32,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  18,
+"endLine":  58,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Expect' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  21,
+"endLine":  42,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  18,
+"endLine":  68,
+"endColumn":  24
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'CompareTo' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  20,
+"endLine":  143,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  36,
+"endLine":  183,
+"endColumn":  45
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Equals' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  30,
+"endLine":  133,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  21,
+"endLine":  148,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  36,
+"endLine":  188,
+"endColumn":  42
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Tell' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  21,
+"endLine":  71,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  21,
+"endLine":  94,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  23,
+"endLine":  195,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'ExpectMsgFrom' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  18,
+"endLine":  25,
+"endColumn":  31
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  18,
+"endLine":  103,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'CompareTo' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  36,
+"endLine":  83,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  20,
+"endLine":  148,
+"endColumn":  29
+}
+}
+]
+}
+]
+}

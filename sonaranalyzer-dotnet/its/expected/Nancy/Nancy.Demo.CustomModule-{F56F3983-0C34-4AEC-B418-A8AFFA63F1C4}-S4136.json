@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'UglifiedNancyModule' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.Demo.CustomModule\UglifiedNancyModule.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  16,
+"endLine":  56,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Demo.CustomModule\UglifiedNancyModule.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  17,
+"endLine":  71,
+"endColumn":  36
+}
+}
+]
+}
+]
+}

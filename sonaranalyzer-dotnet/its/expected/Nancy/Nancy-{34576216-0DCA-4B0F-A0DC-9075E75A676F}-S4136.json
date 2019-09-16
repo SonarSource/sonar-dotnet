@@ -1,0 +1,526 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'Dispose' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"region":  {
+"startLine":  398,
+"startColumn":  21,
+"endLine":  398,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"region":  {
+"startLine":  526,
+"startColumn":  32,
+"endLine":  526,
+"endColumn":  39
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetAllModules' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperWithRequestContainerBase.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  58,
+"endLine":  58,
+"endColumn":  71
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperWithRequestContainerBase.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  54,
+"endLine":  207,
+"endColumn":  67
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetModule' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperWithRequestContainerBase.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  45,
+"endLine":  73,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperWithRequestContainerBase.cs",
+"region":  {
+"startLine":  215,
+"startColumn":  41,
+"endLine":  215,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Register' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  21,
+"endLine":  45,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  21,
+"endLine":  77,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'TryGetValue' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Configuration\DefaultNancyEnvironment.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  50,
+"endLine":  58,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Configuration\DefaultNancyEnvironment.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  21,
+"endLine":  109,
+"endColumn":  32
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetEnumerator' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionary.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  36,
+"endLine":  89,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionary.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  94,
+"endLine":  168,
+"endColumn":  107
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'ToString' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  32,
+"endLine":  315,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  748,
+"startColumn":  23,
+"endLine":  748,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'UrlDecode' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  30,
+"endLine":  114,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  30,
+"endLine":  135,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  30,
+"endLine":  249,
+"endColumn":  39
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Dispose' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  25,
+"endLine":  191,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  316,
+"startColumn":  33,
+"endLine":  316,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'BindTo' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  30,
+"endLine":  237,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"region":  {
+"startLine":  319,
+"startColumn":  30,
+"endLine":  319,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'BindToAndValidate' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  30,
+"endLine":  274,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"region":  {
+"startLine":  362,
+"startColumn":  30,
+"endLine":  362,
+"endColumn":  47
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Bind' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  31,
+"endLine":  31,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  30,
+"endLine":  136,
+"endColumn":  34
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'BindAndValidate' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  30,
+"endLine":  92,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  30,
+"endLine":  191,
+"endColumn":  45
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'WithStatusCode' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  34,
+"endLine":  218,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  34,
+"endLine":  242,
+"endColumn":  48
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'NegotiateResponse' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  25,
+"endLine":  37,
+"endColumn":  42
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"region":  {
+"startLine":  252,
+"startColumn":  33,
+"endLine":  252,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetEnumerator' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRangeParameters.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  58,
+"endLine":  54,
+"endColumn":  71
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRangeParameters.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  33,
+"endLine":  73,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'TryMatch' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  33,
+"endLine":  17,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  33,
+"endLine":  42,
+"endColumn":  41
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'TinyIoCContainer' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3002,
+"startColumn":  16,
+"endLine":  3002,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3068,
+"startColumn":  16,
+"endLine":  3068,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3076,
+"startColumn":  17,
+"endLine":  3076,
+"endColumn":  33
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetViewsWithSupportedExtensions' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  63,
+"endLine":  19,
+"endColumn":  94
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  63,
+"endLine":  45,
+"endColumn":  94
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetFilenames' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  44,
+"endLine":  52,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  44,
+"endLine":  70,
+"endColumn":  56
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetViewsWithSupportedExtensions' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IFileSystemReader.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  56,
+"endLine":  18,
+"endColumn":  87
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IFileSystemReader.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  56,
+"endLine":  34,
+"endColumn":  87
+}
+}
+]
+}
+]
+}

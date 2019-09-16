@@ -1,0 +1,100 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'Equals' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  22,
+"endLine":  270,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  30,
+"endLine":  280,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Equals' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"region":  {
+"startLine":  308,
+"startColumn":  22,
+"endLine":  308,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"region":  {
+"startLine":  324,
+"startColumn":  30,
+"endLine":  324,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Equals' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"region":  {
+"startLine":  444,
+"startColumn":  22,
+"endLine":  444,
+"endColumn":  28
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"region":  {
+"startLine":  454,
+"startColumn":  30,
+"endLine":  454,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Create' signatures should be adjacent",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  30,
+"endLine":  29,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  30,
+"endLine":  55,
+"endColumn":  36
+}
+}
+]
+}
+]
+}
