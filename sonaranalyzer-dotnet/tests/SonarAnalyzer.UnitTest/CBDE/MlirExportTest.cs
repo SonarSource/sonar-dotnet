@@ -1215,6 +1215,28 @@ class A
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void PrePostIncrementDecrement()
+        {
+            var code = @"
+class A
+{
+    private int p;
+
+    public int f(int i)
+    {
+        ++i;
+        i++;
+        --i;
+        i--;
+
+        return ++p;
+    }
+}
+";
+            ValidateCodeGeneration(code);
+        }
+
     } // Class
 
 } // Namespace

@@ -473,6 +473,20 @@ namespace SonarAnalyzer
                         ExportSimpleAssignment(op);
                         break;
                     }
+                case SyntaxKind.PreIncrementExpression:
+                case SyntaxKind.PreDecrementExpression:
+                    {
+                        var prefixExp = op as PrefixUnaryExpressionSyntax;
+                        ExportPrePostIncrementDecrement(op, prefixExp.OperatorToken, prefixExp.Operand);
+                        break;
+                    }
+                case SyntaxKind.PostIncrementExpression:
+                case SyntaxKind.PostDecrementExpression:
+                    {
+                        var postfixExp = op as PostfixUnaryExpressionSyntax;
+                        ExportPrePostIncrementDecrement(op, postfixExp.OperatorToken, postfixExp.Operand);
+                        break;
+                    }
                 default:
                     if (op is ExpressionSyntax expr && !(op.Kind() is SyntaxKind.NullLiteralExpression))
                     {
@@ -601,6 +615,37 @@ namespace SonarAnalyzer
             }
 
             writer.WriteLine($"%{OpId(op)} = {opName} %{OpId(getAssignmentValue(binExpr.Left))}, %{OpId(getAssignmentValue(binExpr.Right))} : {MLIRType(binExpr)} {GetLocation(binExpr)}");
+        }
+
+        private void ExportPrePostIncrementDecrement(SyntaxNode op, SyntaxToken opToken, ExpressionSyntax operand)
+        {
+            var id = operand as IdentifierNameSyntax;
+            if (null == id)
+            {
+                writer.WriteLine($"// No identifier name for inc/decrement : {operand.GetIdentifier().GetStringValue()}");
+                return;
+            }
+
+            var declSymbol = semanticModel.GetSymbolInfo(id).Symbol;
+            if (null == declSymbol || declSymbol.DeclaringSyntaxReferences.Length == 0 || null == declSymbol.DeclaringSyntaxReferences[0])
+            {
+                writer.WriteLine($"// No symbol for inc/decrement : {id.Identifier.ValueText}");
+                return;
+            }
+
+            if (declSymbol is IFieldSymbol || declSymbol is IPropertySymbol || !SupportedTypes(id))
+            {
+                writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(operand)} {GetLocation(op)} // Inc/Decrement of field or property {id.Identifier.ValueText}");
+                return;
+            }
+
+            var newId = UniqueOpId();
+            writer.WriteLine($"%{newId} = constant 1 : {MLIRType(operand)} {GetLocation(op)}");
+
+            var opName = opToken.IsKind(SyntaxKind.PlusPlusToken) ? "addi" : "subi";
+            writer.WriteLine($"%{OpId(op)} = {opName} %{OpId(operand)}, %{newId} : {MLIRType(operand)} {GetLocation(op)}");
+            var decl = declSymbol.DeclaringSyntaxReferences[0].GetSyntax();
+            writer.WriteLine($"cbde.store %{OpId(op)}, %{OpId(decl)} : memref<{MLIRType(operand)}> {GetLocation(op)}");
         }
 
         private bool SupportedTypes(params ExpressionSyntax [] exprs)
