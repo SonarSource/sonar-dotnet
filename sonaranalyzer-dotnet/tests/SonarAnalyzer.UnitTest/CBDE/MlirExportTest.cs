@@ -1215,35 +1215,6 @@ class A
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
-        [TestMethod]
-        public void PrePostIncrementDecrement()
-        {
-            var code = @"
-class A
-{
-    private long p;
-    private readonly int[] indices;
-
-    private long f(int i)
-    {
-        int result;
-        result = ++i;
-        result = i++;
-        result = --i;
-        result = i--;
-
-        return ++p; // Not handled, but should not crash
-    }
-
-    private void g(int dim)
-    {
-         _indices[dimension]++; // Not handled, but should not crash
-    }
-}
-";
-            ValidateCodeGeneration(code);
-        }
-
     } // Class
 
 } // Namespace
