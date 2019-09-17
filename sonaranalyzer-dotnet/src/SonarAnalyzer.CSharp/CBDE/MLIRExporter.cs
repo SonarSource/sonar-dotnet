@@ -411,7 +411,17 @@ namespace SonarAnalyzer
                 case SyntaxKind.MultiplyExpression:
                 case SyntaxKind.DivideExpression:
                 case SyntaxKind.ModuloExpression:
-                    ExtractBinaryExpression(op);
+                    {
+                        var binExpr = op as BinaryExpressionSyntax;
+                        ExtractBinaryExpression(binExpr, binExpr.Left, binExpr.Right);
+                        break;
+                    }
+                case SyntaxKind.AddAssignmentExpression:
+                case SyntaxKind.SubtractAssignmentExpression:
+                case SyntaxKind.MultiplyAssignmentExpression:
+                case SyntaxKind.DivideAssignmentExpression:
+                case SyntaxKind.ModuloAssignmentExpression:
+                    ExtractBinaryAssignmentExpression(op);
                     break;
                 case SyntaxKind.TrueLiteralExpression:
                     writer.WriteLine($"%{OpId(op)} = constant 1 : i1 {GetLocation(op)} // true");
@@ -601,31 +611,67 @@ namespace SonarAnalyzer
             writer.WriteLine($"%{OpId(op)} = cbde.load %{OpId(decl)} : memref<{MLIRType(id)}> {GetLocation(op)}");
         }
 
-        private void ExtractBinaryExpression(SyntaxNode op)
+        private void ExtractBinaryExpression(ExpressionSyntax expr, ExpressionSyntax lhs, ExpressionSyntax rhs)
         {
-            var binExpr = op as BinaryExpressionSyntax;
-            if (!AreTypesSupported(binExpr.Left, binExpr.Right, binExpr))
+            if (!AreTypesSupported(lhs, rhs, expr))
             {
-                writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(binExpr)} {GetLocation(binExpr)} // Binary expression on unsupported types {op.Dump()}");
+                writer.WriteLine($"%{OpId(expr)} = cbde.unknown : {MLIRType(expr)} {GetLocation(expr)} // Binary expression on unsupported types {expr.Dump()}");
                 return;
             }
             // TODO : C#8 : Use switch expression
             string opName;
-            switch (binExpr.Kind())
+            switch (expr.Kind())
             {
-                case SyntaxKind.AddExpression: opName = "addi"; break;
-                case SyntaxKind.SubtractExpression: opName = "subi"; break;
-                case SyntaxKind.MultiplyExpression: opName = "muli"; break;
-                case SyntaxKind.DivideExpression:  opName = "divis"; break;
-                case SyntaxKind.ModuloExpression:  opName = "remis"; break;
+                case SyntaxKind.AddExpression:
+                case SyntaxKind.AddAssignmentExpression:
+                    opName = "addi";
+                    break;
+                case SyntaxKind.SubtractExpression:
+                case SyntaxKind.SubtractAssignmentExpression:
+                    opName = "subi";
+                    break;
+                case SyntaxKind.MultiplyExpression:
+                case SyntaxKind.MultiplyAssignmentExpression:
+                    opName = "muli";
+                    break;
+                case SyntaxKind.DivideExpression:
+                case SyntaxKind.DivideAssignmentExpression:
+                    opName = "divis";
+                    break;
+                case SyntaxKind.ModuloExpression:
+                case SyntaxKind.ModuloAssignmentExpression:
+                    opName = "remis";
+                    break;
                 default:
                     {
-                        writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(binExpr)} {GetLocation(binExpr)} // Unknown operator {op.Dump()}");
+                        writer.WriteLine($"%{OpId(expr)} = cbde.unknown : {MLIRType(expr)} {GetLocation(expr)} // Unknown operator {expr.Dump()}");
                         return;
                     }
             }
 
-            writer.WriteLine($"%{OpId(op)} = {opName} %{OpId(getAssignmentValue(binExpr.Left))}, %{OpId(getAssignmentValue(binExpr.Right))} : {MLIRType(binExpr)} {GetLocation(binExpr)}");
+            writer.WriteLine($"%{OpId(expr)} = {opName} %{OpId(getAssignmentValue(lhs))}, %{OpId(getAssignmentValue(rhs))} : {MLIRType(expr)} {GetLocation(expr)}");
+        }
+
+        private void ExtractBinaryAssignmentExpression(SyntaxNode op)
+        {
+            var assignExpr = op as AssignmentExpressionSyntax;
+
+            var id = assignExpr.Left as IdentifierNameSyntax;
+            if (null == id)
+            {
+                writer.WriteLine($"// No identifier name for binary assignment expression");
+                return;
+            }
+
+            var declSymbol = semanticModel.GetSymbolInfo(id);
+            if (!IsSymbolSupportedForAssignment(declSymbol) || !AreTypesSupported(assignExpr))
+            {
+                return;
+            }
+
+            ExtractBinaryExpression(assignExpr, assignExpr.Left, assignExpr.Right);
+            var decl = declSymbol.Symbol.DeclaringSyntaxReferences[0].GetSyntax();
+            writer.WriteLine($"cbde.store %{OpId(assignExpr)}, %{OpId(decl)} : memref<{MLIRType(assignExpr)}> {GetLocation(op)}");
         }
 
         private void ExportPrePostIncrementDecrement(ExpressionSyntax op, SyntaxToken opToken, ExpressionSyntax operand, bool isPostOperation)
@@ -649,7 +695,6 @@ namespace SonarAnalyzer
             if (isPostOperation)
             {
                 opMap[op] = opMap[operand];
-                //writer.WriteLine($"%{OpId(op)} = cbde.load %{OpId(decl)} : memref<{MLIRType(operand)}> {GetLocation(op)}");
             }
 
             var newCstId = UniqueOpId();
