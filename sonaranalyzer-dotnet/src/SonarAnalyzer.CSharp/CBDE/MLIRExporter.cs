@@ -655,6 +655,7 @@ namespace SonarAnalyzer
         private void ExtractBinaryAssignmentExpression(SyntaxNode op)
         {
             var assignExpr = op as AssignmentExpressionSyntax;
+            ExtractBinaryExpression(assignExpr, assignExpr.Left, assignExpr.Right);
 
             var id = assignExpr.Left as IdentifierNameSyntax;
             if (null == id)
@@ -669,7 +670,6 @@ namespace SonarAnalyzer
                 return;
             }
 
-            ExtractBinaryExpression(assignExpr, assignExpr.Left, assignExpr.Right);
             var decl = declSymbol.Symbol.DeclaringSyntaxReferences[0].GetSyntax();
             writer.WriteLine($"cbde.store %{OpId(assignExpr)}, %{OpId(decl)} : memref<{MLIRType(assignExpr)}> {GetLocation(op)}");
         }
@@ -680,7 +680,7 @@ namespace SonarAnalyzer
             var id = operand as IdentifierNameSyntax;
             if (null == id)
             {
-                writer.WriteLine($"// No identifier name for inc/decrement : {operand.GetIdentifier().GetStringValue()}");
+                writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(operand)} {GetLocation(op)} // Inc/Decrement of unknown identifier");
                 return;
             }
 
