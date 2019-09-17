@@ -41,6 +41,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsCaseSensitive => true;
 
+        protected bool IsValidMemberForOverload(MemberDeclarationSyntax member)
+        {
+            if (member is MethodDeclarationSyntax methodDeclaration)
+            {
+                return methodDeclaration.ExplicitInterfaceSpecifier == null;
+            }
+            return true;
+        }
+        
         protected override SyntaxToken? GetNameSyntaxNode(MemberDeclarationSyntax member)
         {
             if (member is ConstructorDeclarationSyntax constructorDeclaration)

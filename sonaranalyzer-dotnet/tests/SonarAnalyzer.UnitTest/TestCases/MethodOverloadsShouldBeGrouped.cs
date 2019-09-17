@@ -1,4 +1,6 @@
-﻿namespace Tests.Diagnostics
+﻿using System.Collections.Generic;
+
+namespace Tests.Diagnostics
 {
     class A
     {
@@ -103,5 +105,45 @@
         void MyStructMethod2() { }
 
         void MyStructMethod(char a) { } // Secondary {{Non-adjacent overload}}
+    }
+
+    class G : D, E
+    {
+        public void DoSomething(double a) { } // Noncompliant
+        
+        void D.DoSomething() { } // Compliant - explicit interface implementation
+
+        public void DoSomethingElse() { }
+
+        void E.DoSomething() { }
+        
+        public void DoSomething(int a) { } // Secondary 
+    }
+
+    class H
+    {
+        private void DoSomething(int a) { } // Compliant - not same accessibility as the other method
+
+        void DoSomethingElse() { }
+
+        public void DoSomething() { }
+    }
+    
+    class I
+    {
+        private void DoSomething(int a) { } // Noncompliant
+
+        void DoSomethingElse() { }
+
+        private void DoSomething() { } // Secondary {{Non-adjacent overload}}
+    }
+
+    class J
+    {
+        void DoSomething<T>(T t) { } // Noncompliant
+        
+        void DoSomethingElse() { }
+        
+        void DoSomething(int a) { } // Secondary {{Non-adjacent overload}}
     }
 }
