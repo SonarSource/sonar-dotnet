@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2583",
+"message":  "Condition is always false",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
+"region":  {
+"startLine":  733,
+"startColumn":  21,
+"endLine":  733,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2583",
+"message":  "Condition is always false",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
+"region":  {
+"startLine":  766,
+"startColumn":  21,
+"endLine":  766,
+"endColumn":  22
+}
+}
+}
+]
+}

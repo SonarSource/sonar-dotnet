@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2583",
+"message":  "Condition is always true",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  28,
+"endLine":  63,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2583",
+"message":  "Condition is always true",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Constructors.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  28,
+"endLine":  128,
+"endColumn":  29
+}
+}
+}
+]
+}

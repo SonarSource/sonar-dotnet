@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S2583",
+"message":  "Condition is always false",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\MultidimensionalArrayMapper.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  21,
+"endLine":  85,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2583",
 "message":  "Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.",
 "location":  [
 {

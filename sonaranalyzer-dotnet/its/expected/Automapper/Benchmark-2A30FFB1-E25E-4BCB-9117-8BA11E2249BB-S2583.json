@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2583",
+"message":  "Condition is always true",
+"location":  {
+"uri":  "sources\Automapper\src\Benchmark\BenchEngine.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  28,
+"endLine":  24,
+"endColumn":  29
+}
+}
+}
+]
+}
