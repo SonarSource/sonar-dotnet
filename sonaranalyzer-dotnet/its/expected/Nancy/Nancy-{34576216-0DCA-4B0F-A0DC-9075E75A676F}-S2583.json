@@ -23,6 +23,32 @@
 }
 }
 ]
+},
+{
+"id":  "S2583",
+"message":  "Condition is always true",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpMultipartBoundary.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  19,
+"endLine":  55,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2583",
+"message":  "Condition is always true",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  342,
+"startColumn":  11,
+"endLine":  342,
+"endColumn":  12
+}
+}
 }
 ]
 }

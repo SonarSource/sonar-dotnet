@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2583",
+"message":  "Condition is always true",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\MailboxesSpec.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  29,
+"endLine":  73,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2583",
+"message":  "Condition is always true",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\RoundRobinSpec.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  29,
+"endLine":  71,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2583",
+"message":  "Condition is always true",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\SmallestMailboxSpec.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  29,
+"endLine":  92,
+"endColumn":  30
+}
+}
+}
+]
+}
