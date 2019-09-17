@@ -1237,6 +1237,32 @@ public void g(int[] array1, long[] array2)
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void NoIdentifier()
+        {
+            var code = @"
+public class A
+{
+    public int count;
+}
+
+public int f()
+{
+    var a = new A();
+    if (--a.count > 0)
+    {
+        return 1;
+    }
+    if ((a.count += 1) > 0)
+    {
+        return 1;
+    }
+    return 0;
+}
+";
+            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+        }
+
     } // Class
 
 } // Namespace
