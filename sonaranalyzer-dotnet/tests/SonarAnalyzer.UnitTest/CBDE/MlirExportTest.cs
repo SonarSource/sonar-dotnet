@@ -1215,6 +1215,28 @@ class A
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void BinaryOperatorAssignment()
+        {
+            var code = @"
+public void f(int i)
+{
+    i -= 1;
+    i += 2;
+    i *= 3;
+    i /= 4;
+    i %= 5;
+}
+
+public void g(int[] array1, long[] array2)
+{
+    array1[0] += 2;
+    array2[0] += 3;
+}
+";
+            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+        }
+
     } // Class
 
 } // Namespace
