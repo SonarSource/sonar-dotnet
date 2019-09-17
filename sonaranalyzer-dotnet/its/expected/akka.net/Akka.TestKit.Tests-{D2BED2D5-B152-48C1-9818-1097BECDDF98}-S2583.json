@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2583",
+"message":  "Condition is always true",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestSchedulerTests.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  29,
+"endLine":  59,
+"endColumn":  30
+}
+}
+}
+]
+}
