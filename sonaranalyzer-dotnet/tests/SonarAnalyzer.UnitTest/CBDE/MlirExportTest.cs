@@ -1226,17 +1226,18 @@ class A
 
     private long f(int i)
     {
-        ++i;
-        i++;
-        --i;
-        i--;
+        int result;
+        result = ++i;
+        result = i++;
+        result = --i;
+        result = i--;
 
-        return ++p;
+        return ++p; // Not handled, but should not crash
     }
 
     private void g(int dim)
     {
-         _indices[dimension]++;
+         _indices[dimension]++; // Not handled, but should not crash
     }
 }
 ";
