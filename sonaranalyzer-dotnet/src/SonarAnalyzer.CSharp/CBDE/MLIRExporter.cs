@@ -458,7 +458,7 @@ namespace SonarAnalyzer
                         writer.WriteLine($"%{id} = cbde.alloca {MLIRType(decl)} {GetLocation(decl)} // {decl.Identifier.ValueText}");
                         if (decl.Initializer != null)
                         {
-                            if (!SupportedTypes(decl.Initializer.Value))
+                            if (!AreTypesSupported(decl.Initializer.Value))
                             {
                                 writer.WriteLine("// Initialized with unknown data");
                                 break;
@@ -471,6 +471,20 @@ namespace SonarAnalyzer
                 case SyntaxKind.SimpleAssignmentExpression:
                     {
                         ExportSimpleAssignment(op);
+                        break;
+                    }
+                case SyntaxKind.PreIncrementExpression:
+                case SyntaxKind.PreDecrementExpression:
+                    {
+                        var prefixExp = op as PrefixUnaryExpressionSyntax;
+                        ExportPrePostIncrementDecrement(prefixExp, prefixExp.OperatorToken, prefixExp.Operand, false);
+                        break;
+                    }
+                case SyntaxKind.PostIncrementExpression:
+                case SyntaxKind.PostDecrementExpression:
+                    {
+                        var postfixExp = op as PostfixUnaryExpressionSyntax;
+                        ExportPrePostIncrementDecrement(postfixExp, postfixExp.OperatorToken, postfixExp.Operand, true);
                         break;
                     }
                 default:
@@ -496,16 +510,17 @@ namespace SonarAnalyzer
         private void ExportSimpleAssignment(SyntaxNode op)
         {
             var assign = op as AssignmentExpressionSyntax;
-            if (!SupportedTypes(assign))
+            if (!AreTypesSupported(assign))
             {
                 return;
             }
+
             var symbolInfo = semanticModel.GetSymbolInfo(assign.Left);
-            // We ignore the case where lhs is not a parameter or a local variable (ie field, property...) because we currently do not support these yet
-            if (symbolInfo.Symbol == null || !(symbolInfo.Symbol is ILocalSymbol || symbolInfo.Symbol is IParameterSymbol))
+            if (!IsSymbolSupportedForAssignment(symbolInfo))
             {
                 return;
             }
+
             var lhs = symbolInfo.Symbol.DeclaringSyntaxReferences[0].GetSyntax();
             var rhsType = semanticModel.GetTypeInfo(assign.Right).Type;
             string rhsId;
@@ -519,6 +534,16 @@ namespace SonarAnalyzer
                 rhsId = OpId(getAssignmentValue(assign.Right));
             }
             writer.WriteLine($"cbde.store %{rhsId}, %{OpId(lhs)} : memref<{MLIRType(assign)}> {GetLocation(op)}");
+        }
+
+        private bool IsSymbolSupportedForAssignment(SymbolInfo symbolInfo)
+        {
+            // We ignore the case where lhs is not a parameter or a local variable (ie field, property...) because we currently do not support these yet
+            if (symbolInfo.Symbol == null || !(symbolInfo.Symbol is ILocalSymbol || symbolInfo.Symbol is IParameterSymbol))
+            {
+                return false;
+            }
+            return true;
         }
 
         private void ExportIdentifierName(SyntaxNode op)
@@ -568,7 +593,7 @@ namespace SonarAnalyzer
             // IPropertySymbol could be either in a getter context (we should generate unknown) or in a setter
             // context (we should do nothing). However, it appears that in setter context, the CFG does not have an
             // instruction for fetching the property, so we should focus only on getter context.
-            else if (declSymbol is IFieldSymbol || declSymbol is IPropertySymbol || !SupportedTypes(id))
+            else if (declSymbol is IFieldSymbol || declSymbol is IPropertySymbol || !AreTypesSupported(id))
             {
                 writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(id)} {GetLocation(op)} // Not a variable of known type: {id.Identifier.ValueText}");
                 return;
@@ -579,7 +604,7 @@ namespace SonarAnalyzer
         private void ExtractBinaryExpression(SyntaxNode op)
         {
             var binExpr = op as BinaryExpressionSyntax;
-            if (!SupportedTypes(binExpr.Left, binExpr.Right, binExpr))
+            if (!AreTypesSupported(binExpr.Left, binExpr.Right, binExpr))
             {
                 writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(binExpr)} {GetLocation(binExpr)} // Binary expression on unsupported types {op.Dump()}");
                 return;
@@ -603,7 +628,41 @@ namespace SonarAnalyzer
             writer.WriteLine($"%{OpId(op)} = {opName} %{OpId(getAssignmentValue(binExpr.Left))}, %{OpId(getAssignmentValue(binExpr.Right))} : {MLIRType(binExpr)} {GetLocation(binExpr)}");
         }
 
-        private bool SupportedTypes(params ExpressionSyntax [] exprs)
+        private void ExportPrePostIncrementDecrement(ExpressionSyntax op, SyntaxToken opToken, ExpressionSyntax operand, bool isPostOperation)
+        {
+            // For now we only handle IdentifierNameSyntax (not ElementAccessExpressionSyntax or other)
+            var id = operand as IdentifierNameSyntax;
+            if (null == id)
+            {
+                writer.WriteLine($"// No identifier name for inc/decrement : {operand.GetIdentifier().GetStringValue()}");
+                return;
+            }
+
+            var declSymbol = semanticModel.GetSymbolInfo(id);
+            if (!IsSymbolSupportedForAssignment(declSymbol) || !AreTypesSupported(operand))
+            {
+                writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(operand)} {GetLocation(op)} // Inc/Decrement of field or property {id.Identifier.ValueText}");
+                return;
+            }
+
+            var decl = declSymbol.Symbol.DeclaringSyntaxReferences[0].GetSyntax();
+            if (isPostOperation)
+            {
+                opMap[op] = opMap[operand];
+                //writer.WriteLine($"%{OpId(op)} = cbde.load %{OpId(decl)} : memref<{MLIRType(operand)}> {GetLocation(op)}");
+            }
+
+            var newCstId = UniqueOpId();
+            writer.WriteLine($"%{newCstId} = constant 1 : {MLIRType(operand)} {GetLocation(op)}");
+
+            var opId = isPostOperation ? UniqueOpId() : OpId(op);
+            var opName = opToken.IsKind(SyntaxKind.PlusPlusToken) ? "addi" : "subi";
+            writer.WriteLine($"%{opId} = {opName} %{OpId(operand)}, %{newCstId} : {MLIRType(operand)} {GetLocation(op)}");
+
+            writer.WriteLine($"cbde.store %{opId}, %{OpId(decl)} : memref<{MLIRType(operand)}> {GetLocation(op)}");
+        }
+
+        private bool AreTypesSupported(params ExpressionSyntax [] exprs)
         {
             return exprs.All(expr => IsTypeKnown(semanticModel.GetTypeInfo(expr).Type));
         }
@@ -611,7 +670,7 @@ namespace SonarAnalyzer
         private void ExportComparison(string compName, SyntaxNode op)
         {
             var binExpr = op as BinaryExpressionSyntax;
-            if (!SupportedTypes(binExpr.Left, binExpr.Right))
+            if (!AreTypesSupported(binExpr.Left, binExpr.Right))
             {
                 writer.WriteLine($"%{OpId(op)} = cbde.unknown : i1  {GetLocation(binExpr)} // comparison of unknown type: {op.Dump()}");
                 return;
