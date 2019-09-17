@@ -11,10 +11,22 @@
   
   <PropertyGroup>
     <CBDEDownloadUrl>http://repox.jfrog.io/repox/sonarsource-public-builds/org/sonarsource/cbde/windows/cbde-windows.zip</CBDEDownloadUrl>
-    <CBDEFolder>$(MSBuildProjectDirectory)\CBDE\windows\</CBDEFolder>
+    <RelativeCBDEFolder>CBDE\windows\</RelativeCBDEFolder>
+    <CBDEFolder>$(MSBuildProjectDirectory)\$(RelativeCBDEFolder)</CBDEFolder>
     <CBDEZipFileName>cbde-windows.zip</CBDEZipFileName>
     <CBDEZipFilePath>$(CBDEFolder)$(CBDEZipFileName)</CBDEZipFilePath>
   </PropertyGroup>
+
+  <!-- Specify them here in case they are already present. If they are not, they will be added by the task that fetches the files -->
+  <ItemGroup>
+      <Content Include="$(RelativeCBDEFolder)\**\*.exe" >
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="$(RelativeCBDEFolder)\**\*.txt" >
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+  </ItemGroup>
+  
 
 
   <Target Name="FetchCBDEBinaries" BeforeTargets="BeforeBuild" >
@@ -30,10 +42,10 @@
     <CallTarget Targets="DownloadFromRepox" Condition="$(ShouldDownloadCBDE)=='true'" />    
     <!-- Specifies the CBDE files that should be included in the project and copied to the output directory -->
     <ItemGroup>
-      <Content Include="$(CBDEFolder)\**\*.exe" >
+      <Content Include="$(RelativeCBDEFolder)\**\*.exe" >
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
-      <Content Include="$(CBDEFolder)\**\*.txt" >
+      <Content Include="$(RelativeCBDEFolder)\**\*.txt" >
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
     </ItemGroup>
