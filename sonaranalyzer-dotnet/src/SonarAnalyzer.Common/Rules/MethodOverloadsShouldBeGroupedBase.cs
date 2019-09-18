@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules
         where TMemberDeclarationSyntax : SyntaxNode
     {
         internal const string DiagnosticId = "S4136";
-        protected const string MessageFormat = "All '{0}' signatures should be adjacent";
+        protected const string MessageFormat = "All '{0}' method overloads should be adjacent.";
 
         protected StringComparison CaseSensitivity
         {
@@ -45,21 +45,8 @@ namespace SonarAnalyzer.Rules
 
         protected abstract SyntaxToken? GetNameSyntaxNode(TMemberDeclarationSyntax member);
 
-        protected bool IsValidMemberForOverload(TMemberDeclarationSyntax member) => true;
-        
-        protected string GetMethodName(TMemberDeclarationSyntax member)
-        {
-            var nameSyntaxNode = GetNameSyntaxNode(member);
-            if (IsCaseSensitive)
-            {
-                return nameSyntaxNode?.ValueText;
-            }
-            else
-            {
-                return nameSyntaxNode?.ValueText?.ToLowerInvariant();
-            }
-        }
-        
+        protected abstract bool IsValidMemberForOverload(TMemberDeclarationSyntax member);
+
         protected void CheckMembers(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
         {
             var misplacedOverloadsMapping = GetMisplacedOverloads(members);
@@ -72,20 +59,21 @@ namespace SonarAnalyzer.Rules
                 {
                     if (misplacedOverloads.Key != null && misplacedOverloads.Count() > 1)
                     {
-                        var mainMethod = misplacedOverloads.First();
+                        var firstMethodSignature = misplacedOverloads.First();
                         var secondaryLocations = misplacedOverloads.Skip(1).Select(member => new SecondaryLocation(member.GetLocation(), "Non-adjacent overload"));
                         c.ReportDiagnosticWhenActive(
                             Diagnostic.Create(
                                 descriptor: Rule,
-                                location: mainMethod.GetLocation(),
+                                location: firstMethodSignature.GetLocation(),
                                 additionalLocations: secondaryLocations.ToAdditionalLocations(),
                                 properties: secondaryLocations.ToProperties(),
-                                messageArgs: misplacedOverloadsEntry.Key));
+                                messageArgs: GetMethodName(firstMethodSignature, false)));
 
                     }
                 }
             }
         }
+
 
         protected IDictionary<string, List<TMemberDeclarationSyntax>> GetMisplacedOverloads(IEnumerable<TMemberDeclarationSyntax> members)
         {
@@ -93,7 +81,7 @@ namespace SonarAnalyzer.Rules
             string previousMemberName = null;
             foreach (var member in members)
             {
-                if (GetMethodName(member) is string methodName
+                if (GetMethodName(member, IsCaseSensitive) is string methodName
                     && IsValidMemberForOverload(member))
                 {
                     if (misplacedOverloads.TryGetValue(methodName, out var currentList))
@@ -115,6 +103,19 @@ namespace SonarAnalyzer.Rules
                 }
             }
             return misplacedOverloads;
+        }
+
+        private string GetMethodName(TMemberDeclarationSyntax member, bool caseSensitive)
+        {
+            var nameSyntaxNode = GetNameSyntaxNode(member);
+            if (caseSensitive)
+            {
+                return nameSyntaxNode?.ValueText;
+            }
+            else
+            {
+                return nameSyntaxNode?.ValueText?.ToLowerInvariant();
+            }
         }
     }
 }

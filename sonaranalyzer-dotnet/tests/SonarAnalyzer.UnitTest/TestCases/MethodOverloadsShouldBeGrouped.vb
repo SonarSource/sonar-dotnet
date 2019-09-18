@@ -5,7 +5,7 @@ Imports System.Text
 
 Namespace Tests.TestCases
     Class A
-        Public Overloads Sub Test() ' Noncompliant {{All 'test' signatures should be adjacent}}
+        Public Overloads Sub Test() ' Noncompliant {{All 'Test' method overloads should be adjacent.}}
 '                            ^^^^
         End Sub
 
@@ -18,7 +18,7 @@ Namespace Tests.TestCases
 '                            ^^^^
         End Sub
 
-        Public Overloads Function Test2() ' Noncompliant {{All 'test2' signatures should be adjacent}}
+        Public Overloads Function Test2() ' Noncompliant {{All 'Test2' method overloads should be adjacent.}}
 '                                 ^^^^^
         End Function
 
@@ -32,7 +32,7 @@ Namespace Tests.TestCases
 '                                 ^^^^^
         End Function
 
-        Public Overloads Function Test3() ' Noncompliant {{All 'test3' signatures should be adjacent}}
+        Public Overloads Function Test3() ' Noncompliant {{All 'Test3' method overloads should be adjacent.}}
         End Function
 
         Public Overloads Function Test3(ByVal a As Integer)
@@ -57,7 +57,7 @@ Namespace Tests.TestCases
     End Class
 
     Class B
-        Public Sub New() ' Noncompliant {{All 'new' signatures should be adjacent}}
+        Public Sub New() ' Noncompliant {{All 'New' method overloads should be adjacent.}}
         End Sub
 
         Public Sub New(ByVal x As Integer)
@@ -88,7 +88,7 @@ Namespace Tests.TestCases
     End Class
 
     Interface D
-        Function TEST() As Integer ' Noncompliant {{All 'test' signatures should be adjacent}}
+        Function TEST() As Integer ' Noncompliant {{All 'TEST' method overloads should be adjacent.}}
 
         Function test(ByVal a As Double) As Integer
 
@@ -118,7 +118,7 @@ Namespace Tests.TestCases
     Structure F
         Public myField1 As String
 
-        Public Sub Test() ' Noncompliant {{All 'test' signatures should be adjacent}}
+        Public Sub Test() ' Noncompliant {{All 'Test' method overloads should be adjacent.}}
         End Sub
 
         Public myField2 As String

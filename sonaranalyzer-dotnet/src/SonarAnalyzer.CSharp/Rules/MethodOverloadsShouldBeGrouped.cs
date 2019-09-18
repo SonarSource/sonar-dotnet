@@ -41,15 +41,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsCaseSensitive => true;
 
-        protected bool IsValidMemberForOverload(MemberDeclarationSyntax member)
-        {
-            if (member is MethodDeclarationSyntax methodDeclaration)
-            {
-                return methodDeclaration.ExplicitInterfaceSpecifier == null;
-            }
-            return true;
-        }
-        
         protected override SyntaxToken? GetNameSyntaxNode(MemberDeclarationSyntax member)
         {
             if (member is ConstructorDeclarationSyntax constructorDeclaration)
@@ -62,28 +53,26 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             return null;
         }
-
+        
+        protected override bool IsValidMemberForOverload(MemberDeclarationSyntax member)
+        {
+            if (member is MethodDeclarationSyntax methodDeclaration)
+            {
+                return methodDeclaration.ExplicitInterfaceSpecifier == null;
+            }
+            return true;
+        }
+        
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                var classDeclaration = (ClassDeclarationSyntax)c.Node;
+                var classDeclaration = (TypeDeclarationSyntax)c.Node;
                 CheckMembers(c, classDeclaration.Members);
+                    
             },
-            SyntaxKind.ClassDeclaration);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var interfaceDeclaration = (InterfaceDeclarationSyntax)c.Node;
-                CheckMembers(c, interfaceDeclaration.Members);
-            },
-            SyntaxKind.InterfaceDeclaration);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var structDeclaration = (StructDeclarationSyntax)c.Node;
-                CheckMembers(c, structDeclaration.Members);
-            },
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.InterfaceDeclaration,
             SyntaxKind.StructDeclaration);
         }
     }

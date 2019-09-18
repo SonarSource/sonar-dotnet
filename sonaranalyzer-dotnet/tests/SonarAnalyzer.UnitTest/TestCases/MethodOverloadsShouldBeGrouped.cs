@@ -4,7 +4,7 @@ namespace Tests.Diagnostics
 {
     class A
     {
-        void a() { } // Noncompliant {{All 'a' signatures should be adjacent}}
+        void a() { } // Noncompliant {{All 'a' method overloads should be adjacent.}}
 //           ^
 
         void a(int a, char b) { }
@@ -40,7 +40,7 @@ namespace Tests.Diagnostics
 
     class B
     {
-        B() { } // Noncompliant {{All 'B' signatures should be adjacent}}
+        B() { } // Noncompliant {{All 'B' method overloads should be adjacent.}}
 
         B(int a) { }
 
@@ -81,7 +81,7 @@ namespace Tests.Diagnostics
 
     interface E
     {
-        void DoSomething(double b); // Noncompliant {{All 'DoSomething' signatures should be adjacent}}
+        void DoSomething(double b); // Noncompliant {{All 'DoSomething' method overloads should be adjacent.}}
 //           ^^^^^^^^^^^
 
         void DoSomething();
@@ -98,7 +98,7 @@ namespace Tests.Diagnostics
 
         F(int a) { }
 
-        void MyStructMethod() { } // Noncompliant {{All 'MyStructMethod' signatures should be adjacent}}
+        void MyStructMethod() { } // Noncompliant {{All 'MyStructMethod' method overloads should be adjacent.}}
 
         void MyStructMethod(int a) { }
 

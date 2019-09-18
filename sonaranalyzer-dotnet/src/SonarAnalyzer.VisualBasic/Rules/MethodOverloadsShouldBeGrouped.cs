@@ -58,27 +58,17 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return null;
         }
 
+        protected override bool IsValidMemberForOverload(StatementSyntax member) => true;
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                var classDeclaration = (ClassBlockSyntax)c.Node;
+                var classDeclaration = (TypeBlockSyntax)c.Node;
                 CheckMembers(c, classDeclaration.Members);
             },
-            SyntaxKind.ClassBlock);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var interfaceDeclaration = (InterfaceBlockSyntax)c.Node;
-                CheckMembers(c, interfaceDeclaration.Members);
-            },
-            SyntaxKind.InterfaceBlock);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var structureDeclaration = (StructureBlockSyntax)c.Node;
-                CheckMembers(c, structureDeclaration.Members);
-            },
+            SyntaxKind.ClassBlock,
+            SyntaxKind.InterfaceBlock,
             SyntaxKind.StructureBlock);
         }
     }
