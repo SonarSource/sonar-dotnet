@@ -6,6 +6,11 @@ namespace Tests.Diagnostics
     {
         public void DoSomething() { throw new NotSupportedException(); }
         public void DoSomething2() { throw new NotSupportedException(); }
+        public void DoSomething3() {
+            goto Label;
+        Label:
+            return;
+        }
         public void DoSomethingArgs(bool a, bool b,int i)
         {
             var someWronglyFormatted = 45;
