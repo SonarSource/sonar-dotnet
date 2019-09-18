@@ -191,22 +191,14 @@ namespace SonarAnalyzer
                                 if (semanticModel.GetTypeInfo(returnedVal).Type == null &&
                                     returnedVal.Kind() == SyntaxKind.SimpleMemberAccessExpression)
                                 {
-                                    // Special case a returning a metod group that will be cast into a func
+                                    // Special case a returning a method group that will be cast into a func
                                     writer.WriteLine($"%{OpId(ret)} = cbde.unknown : none {GetLocation(ret)} // return method group");
                                     writer.WriteLine($"return %{OpId(ret)} : none {GetLocation(ret)}");
                                     break;
                                 }
-                                string returnType = MLIRType(ret.Expression);
-                                if (returnType == functionReturnType)
-                                {
-                                    writer.WriteLine($"return %{OpId(getAssignmentValue(ret.Expression))} : {returnType} {GetLocation(ret)}");
-                                }
-                                else
-                                {
-                                    writer.WriteLine($"%{OpId(ret)} = cbde.unknown : {functionReturnType} {GetLocation(ret)} // cast return value from unsupported type");
-                                    writer.WriteLine($"return %{OpId(ret)} : {functionReturnType} {GetLocation(ret)}");
-                                }
 
+                                var id = ComputeCompatibleId(ret.Expression, functionReturnType);
+                                writer.WriteLine($"return %{id} : {functionReturnType} {GetLocation(ret)}");
                             }
                             break;
                         case BreakStatementSyntax breakStmt:
@@ -541,8 +533,9 @@ namespace SonarAnalyzer
             }
             else
             {
-                rhsId = OpId(getAssignmentValue(assign.Right));
+                rhsId = ComputeCompatibleId(assign.Right, MLIRType(assign));
             }
+
             writer.WriteLine($"cbde.store %{rhsId}, %{OpId(lhs)} : memref<{MLIRType(assign)}> {GetLocation(op)}");
         }
 
@@ -737,6 +730,17 @@ namespace SonarAnalyzer
                 $" :{loc.StartLinePosition.Character})";
 
             return location.Replace("\\", "\\\\");
+        }
+
+        private string ComputeCompatibleId(ExpressionSyntax op, string resultType)
+        {
+            if (MLIRType(op) == resultType)
+            {
+                return OpId(getAssignmentValue(op));
+            }
+            var newId = UniqueOpId();
+            writer.WriteLine($"%{newId} = cbde.unknown : {resultType} {GetLocation(op)} // Dummy variable because type of %{OpId(getAssignmentValue(op))} is incompatible");
+            return newId;
         }
 
         private readonly TextWriter writer;
