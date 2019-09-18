@@ -62,6 +62,8 @@ namespace SonarAnalyzer.Rules.CSharp
             Path.Combine(mlirPath, $"CBDE_{Process.GetCurrentProcess().Id}");
         private static readonly string mlirLogFile =
             Path.Combine(mlirProcessSpecificPath, "cbdeHandler.log");
+        private static readonly string mlirMetricsLogFile =
+            Path.Combine(mlirProcessSpecificPath, "metrics.log");
         private static void GlobalLog(string s)
         {
             lock (logFileLock)
@@ -187,6 +189,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     watch.Stop();
                     perfStreamWriter.WriteLine($"{method.Identifier}: {watch.ElapsedMilliseconds} (line: {method.GetLocation().GetLineSpan().StartLinePosition.Line + 1})");
                 }
+                File.AppendAllText(mlirMetricsLogFile, mlirExporter.GetMetricsData());
             }
         }
         private void RunCbdeAndRaiseIssues(CompilationAnalysisContext c)
