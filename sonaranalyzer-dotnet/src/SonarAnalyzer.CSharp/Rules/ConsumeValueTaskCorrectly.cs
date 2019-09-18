@@ -78,12 +78,12 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private readonly SemanticModel semanticModel;
 
-            public Dictionary<ISymbol, List<SyntaxNode>> SymbolUsages { get; }
+            public Dictionary<ISymbol, IList<SyntaxNode>> SymbolUsages { get; }
 
             public ConsumeValueTaskWalker(SemanticModel semanticModel)
             {
                 this.semanticModel = semanticModel;
-                this.SymbolUsages = new Dictionary<ISymbol, List<SyntaxNode>>();
+                this.SymbolUsages = new Dictionary<ISymbol, IList<SyntaxNode>>();
             }
 
             public override void VisitAwaitExpression(AwaitExpressionSyntax node)
@@ -98,20 +98,74 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                     else
                     {
-                        var newList = new List<SyntaxNode>() { identifierName };
-                        SymbolUsages.Add(symbol, newList);
+                        SymbolUsages.Add(symbol, new List<SyntaxNode>() { identifierName });
                     }
                 }
 
                 base.VisitAwaitExpression(node);
             }
 
+            /**
+             * Check if it's the wanted method on a ValueTask
+             * - we treat AsTask() like await - always add it to the list
+             * - for GetAwaiter().GetResult() - ignore the call if it's called inside an 'if (valueTask.IsCompletedSuccessfully)'
+             */
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
-                // check if it's the wanted method on a ValueTask
-                // do stuff
-                // - GetAwaiter().GetResult() -> also check if inside an if (readTask.IsCompletedSuccessfully) and ignore if so
-                // - AsTask()
+                if (node.Expression is MemberAccessExpressionSyntax memberAccess)
+                {
+                    if (memberAccess.Name.Identifier.ValueText == "AsTask" &&
+                        memberAccess.Expression is IdentifierNameSyntax identifierName &&
+                        semanticModel.GetSymbolInfo(identifierName).Symbol is ISymbol symbol &&
+                        symbol.GetSymbolType().OriginalDefinition.IsAny(ValueTaskTypes))
+                    {
+                        if (SymbolUsages.TryGetValue(symbol, out var syntaxNodes))
+                        {
+                            syntaxNodes.Add(identifierName);
+                        }
+                        else
+                        {
+                            SymbolUsages.Add(symbol, new List<SyntaxNode>() { identifierName });
+                        }
+                    }
+
+                    if (memberAccess.Name.Identifier.ValueText == "GetResult" &&
+                        memberAccess.Expression is InvocationExpressionSyntax invocation &&
+                        invocation.Expression is MemberAccessExpressionSyntax innerMemberAccess &&
+                        innerMemberAccess.Expression is IdentifierNameSyntax leftMostIdentifier &&
+                        semanticModel.GetSymbolInfo(leftMostIdentifier).Symbol is ISymbol leftMostSymbol &&
+                        leftMostSymbol.GetSymbolType().OriginalDefinition.IsAny(ValueTaskTypes))
+                    {
+                        var ancestor = memberAccess.Parent;
+                        bool hasCheck = false;
+                        while (ancestor != null)
+                        {
+                            if (ancestor is IfStatementSyntax statementSyntax)
+                            {
+                                hasCheck = statementSyntax.Condition.DescendantNodesAndSelf().Any(n =>
+                                     n is MemberAccessExpressionSyntax maes &&
+                                     maes.Name.Identifier.ValueText == "IsCompletedSuccessfully" &&
+                                     maes.Expression is IdentifierNameSyntax maesId &&
+                                     semanticModel.GetSymbolInfo(maesId).Symbol == leftMostSymbol);
+                                break;
+                            }
+                            ancestor = ancestor.Parent;
+                        }
+
+                        if (!hasCheck)
+                        {
+                            if (SymbolUsages.TryGetValue(leftMostSymbol, out var syntaxNodes))
+                            {
+                                syntaxNodes.Add(leftMostIdentifier);
+                            }
+                            else
+                            {
+                                SymbolUsages.Add(leftMostSymbol, new List<SyntaxNode>() { leftMostIdentifier });
+                            }
+                        }
+                    }
+                }
+
 
                 base.VisitInvocationExpression(node);
             }

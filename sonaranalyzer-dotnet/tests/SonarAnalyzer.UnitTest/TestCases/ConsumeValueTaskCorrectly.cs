@@ -7,7 +7,6 @@ namespace Tests.Diagnostics
         public ValueTask<int> ReadAsync() => new ValueTask<int>();
         public void Foo(int x) { }
 
-        public async Task<int> GetResult(ValueTask<int> valueTask) => await valueTask;
     }
 
     class Tests
@@ -15,7 +14,7 @@ namespace Tests.Diagnostics
         // see https://devblogs.microsoft.com/dotnet/understanding-the-whys-whats-and-whens-of-valuetask/
         // and https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask-1?view=netstandard-2.1
 
-        public async void Noncompliant1(ValueTaskProvider stream)
+        public async void Foo1(ValueTaskProvider stream)
         {
             var valueTask = stream.ReadAsync();
             var once = await valueTask;
@@ -24,23 +23,23 @@ namespace Tests.Diagnostics
 //                            ^^^^^^^^^ Secondary
         }
 
-        public void Noncompliant2(ValueTaskProvider stream)
+        public void Foo2(ValueTaskProvider stream)
         {
             var valueTask = stream.ReadAsync();
             var once = valueTask.AsTask(); // Noncompliant
             var twice = valueTask.AsTask(); // Secondary
         }
 
-        public async void Noncompliant3(ValueTaskProvider stream)
+        public async void Foo3(ValueTaskProvider stream)
         {
             var valueTask = stream.ReadAsync();
             var once = await valueTask;
-//                     ^^^^^^^^^^^^^^^ Noncompliant
+//                           ^^^^^^^^^ Noncompliant
             var twice = valueTask.AsTask();
-//                      ^^^^^^^^^^^^^^^^^^ Secondary
+//                      ^^^^^^^^^ Secondary
         }
 
-        public async void Noncompliant4(ValueTaskProvider stream)
+        public async void Foo4(ValueTaskProvider stream)
         {
             var valueTask = stream.ReadAsync();
             var once = valueTask.AsTask(); // Noncompliant
@@ -48,19 +47,19 @@ namespace Tests.Diagnostics
 
         }
 
-        public void Noncompliant5(ValueTaskProvider stream)
+        public void Foo5(ValueTaskProvider stream)
         {
             var valueTask = stream.ReadAsync();
             var once = valueTask.Result; // Noncompliant
         }
 
-        public void Noncompliant6(ValueTaskProvider stream)
+        public void Foo6(ValueTaskProvider stream)
         {
             var valueTask = stream.ReadAsync();
             var once = valueTask.GetAwaiter().GetResult(); // Noncompliant
         }
 
-        public void Noncompliant7(ValueTaskProvider stream)
+        public void Foo7(ValueTaskProvider stream)
         {
             int bytesRead = 0;
             ValueTask<int> valueTask = stream.ReadAsync();
@@ -75,16 +74,18 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void Noncompliant8(ValueTask<object> valueTask)
+        public void Foo8(ValueTask<object> valueTask)
         {
             if (valueTask.IsCompletedSuccessfully)
             {
-                var bytesRead = valueTask.Result; // Noncompliant
-                var once = valueTask.GetAwaiter().GetResult(); // Noncompliant
+                var bytesRead = valueTask.Result;
+//                              ^^^^^^^^^ Noncompliant
+                var once = valueTask.GetAwaiter().GetResult();
+//                         ^^^^^^^^^ Secondary
             }
         }
 
-        public void Noncompliant9(ValueTaskProvider stream)
+        public void Foo9(ValueTaskProvider stream)
         {
             int bytesRead;
             ValueTask<int> valueTask = stream.ReadAsync();
@@ -95,18 +96,18 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void Noncompliant10(ValueTaskProvider stream)
+        public void Foo10(ValueTaskProvider stream)
         {
             int bytesRead;
             ValueTask<int> valueTask = stream.ReadAsync();
             if (valueTask.IsCompletedSuccessfully)
             {
                 var once = valueTask.GetAwaiter().GetResult(); // Noncompliant
-                var twice = valueTask.GetAwaiter().GetResult(); // Noncompliant
+                var twice = valueTask.GetAwaiter().GetResult(); // Secondary
             }
         }
 
-        public async void Noncompliant11(ValueTaskProvider stream, bool b, string s, int o)
+        public async void Foo11(ValueTaskProvider stream, bool b, string s, int o)
         {
             var valueTask = stream.ReadAsync();
             var once = await valueTask; // Noncompliant
@@ -127,7 +128,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void Noncompliant12(ValueTaskProvider stream)
+        public void Foo12(ValueTaskProvider stream)
         {
             var valueTask = stream.ReadAsync();
             if (valueTask.IsCompleted) // we don't know if it's successful
@@ -136,7 +137,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void Noncompliant13(ValueTaskProvider stream)
+        public void Foo13(ValueTaskProvider stream)
         {
             var valueTask = stream.ReadAsync();
             if (valueTask.IsCompleted) // we don't know if it's successful
@@ -145,8 +146,8 @@ namespace Tests.Diagnostics
             }
         }
 
-        // two different symbols , one Noncompliant , one Compliant
-        public async void Noncompliant14(ValueTaskProvider stream)
+        // two different symbols , one bad , one ok
+        public async void Foo14(ValueTaskProvider stream)
         {
             var firstValueTask = stream.ReadAsync();
             var once = firstValueTask.GetAwaiter().GetResult(); // Noncompliant
@@ -163,8 +164,8 @@ namespace Tests.Diagnostics
             }
         }
 
-        // two different symbols , both Noncompliant
-        public void Noncompliant15(ValueTaskProvider stream)
+        // two different symbols , both bad
+        public void Foo15(ValueTaskProvider stream)
         {
             var firstValueTask = stream.ReadAsync();
             var firstValueTaskR1 = firstValueTask.AsTask(); // Noncompliant
@@ -175,13 +176,18 @@ namespace Tests.Diagnostics
             var secondValueTaskR2 = secondValueTask.AsTask(); // Secondary
         }
 
-        public void NoncompliantFalseNegative(ValueTaskProvider stream)
+        public void FooFalseNegative(ValueTaskProvider stream)
         {
             int bytesRead;
             ValueTask<int> valueTask = stream.ReadAsync();
-            stream.GetResult(valueTask); // FN
-            stream.GetResult(valueTask); // FN
+            GetResult(valueTask); // FN
+            GetResult(valueTask); // FN
+
+            var awaiter = stream.ReadAsync().GetAwaiter();
+            awaiter.GetResult(); // FN - should we do this as well? it should be easy by verifying a method on System.Runtime.CompilerServices.ValueTaskAwaiter<TResult> which is not inside the if
         }
+
+        private async Task<int> GetResult(ValueTask<int> valueTask) => await valueTask;
 
         public async void Compliant1(ValueTaskProvider stream)
         {
