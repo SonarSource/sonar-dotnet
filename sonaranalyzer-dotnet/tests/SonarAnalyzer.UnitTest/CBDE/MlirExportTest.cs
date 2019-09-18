@@ -1263,6 +1263,27 @@ public int f()
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void IncompatibleAssignmentTypes()
+        {
+            var code = @"
+public int f(int i)
+{
+    byte b = (byte)i;
+    i = b;
+
+    i = b + 0;
+    if (b > 0)
+    {
+        return i;
+    }
+
+    return b;
+}
+";
+            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+        }
+
     } // Class
 
 } // Namespace
