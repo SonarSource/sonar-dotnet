@@ -30,6 +30,12 @@ namespace SonarAnalyzer
             writer = w;
             semanticModel = model;
             exportsLocations = withLoc;
+            exporterMetrics = new MlirExporterMetrics();
+        }
+
+        public string GetMetricsData()
+        {
+            return exporterMetrics.Dump();
         }
 
         public void ExportFunction(MethodDeclarationSyntax method)
@@ -97,48 +103,16 @@ namespace SonarAnalyzer
             {
                 return true;
             }
-            return method.DescendantNodes().Any(n =>
-            n.IsKind(SyntaxKind.ForEachStatement) ||
-            n.IsKind(SyntaxKind.AwaitExpression) ||
-            n.IsKind(SyntaxKind.YieldReturnStatement) ||
-            n.IsKind(SyntaxKind.YieldBreakStatement) ||
-            n.IsKind(SyntaxKind.TryStatement) ||
-            n.IsKind(SyntaxKind.UsingStatement) ||
-            n.IsKind(SyntaxKind.LogicalAndExpression) ||
-            n.IsKind(SyntaxKind.LogicalOrExpression) ||
-            n.IsKind(SyntaxKind.ConditionalExpression) ||
-            n.IsKind(SyntaxKind.ConditionalAccessExpression) ||
-            n.IsKind(SyntaxKind.CoalesceExpression) ||
-            n.IsKind(SyntaxKind.SwitchStatement) ||
-            n.IsKind(SyntaxKind.ParenthesizedLambdaExpression) ||
-            n.IsKind(SyntaxKind.SimpleLambdaExpression) ||
-            n.IsKind(SyntaxKind.FixedStatement) ||
-            n.IsKind(SyntaxKind.CheckedStatement) ||
-            n.IsKind(SyntaxKind.CheckedExpression) ||
-            n.IsKind(SyntaxKind.UncheckedExpression) ||
-            n.IsKind(SyntaxKind.UncheckedStatement) ||
-            n.IsKind(SyntaxKind.GotoStatement) ||
-            n.IsKind(SyntaxKind.AnonymousMethodExpression) ||
-            n.IsKind(SyntaxKindEx.UnderscoreToken) ||
-            n.IsKind(SyntaxKindEx.IsPatternExpression) ||
-            n.IsKind(SyntaxKindEx.DefaultLiteralExpression) ||
-            n.IsKind(SyntaxKindEx.LocalFunctionStatement) ||
-            n.IsKind(SyntaxKindEx.TupleType) ||
-            n.IsKind(SyntaxKindEx.TupleElement) ||
-            n.IsKind(SyntaxKindEx.TupleExpression) ||
-            n.IsKind(SyntaxKindEx.SingleVariableDesignation) ||
-            n.IsKind(SyntaxKindEx.ParenthesizedVariableDesignation) ||
-            n.IsKind(SyntaxKindEx.ForEachVariableStatement) ||
-            n.IsKind(SyntaxKindEx.DeclarationPattern) ||
-            n.IsKind(SyntaxKindEx.ConstantPattern) ||
-            n.IsKind(SyntaxKindEx.CasePatternSwitchLabel) ||
-            n.IsKind(SyntaxKindEx.WhenClause) ||
-            n.IsKind(SyntaxKindEx.DiscardDesignation) ||
-            n.IsKind(SyntaxKindEx.DeclarationExpression) ||
-            n.IsKind(SyntaxKindEx.RefExpression) ||
-            n.IsKind(SyntaxKindEx.RefType) ||
-            n.IsKind(SyntaxKindEx.ThrowExpression)
-            );
+            foreach (var node in method.DescendantNodes())
+            {
+                if (unsupportedSyntaxes.Contains(node.Kind()))
+                {
+                    exporterMetrics.AddUnsupportedFunction(node.Kind());
+                    return true;
+                }
+            }
+            exporterMetrics.AddSupportedFunction();
+            return false;
         }
 
         private void CreateEntryBlock(MethodDeclarationSyntax method)
@@ -751,6 +725,50 @@ namespace SonarAnalyzer
         private readonly Dictionary<SyntaxNode, int> opMap = new Dictionary<SyntaxNode, int>();
         private int opCounter = 0;
         private readonly Encoding encoder = System.Text.Encoding.GetEncoding("ASCII", new PreservingEncodingFallback(), DecoderFallback.ExceptionFallback);
+        private MlirExporterMetrics exporterMetrics;
+        public static readonly List<SyntaxKind> unsupportedSyntaxes = new List<SyntaxKind>
+        {
+            SyntaxKind.ForEachStatement,
+            SyntaxKind.AwaitExpression,
+            SyntaxKind.YieldReturnStatement,
+            SyntaxKind.YieldBreakStatement,
+            SyntaxKind.TryStatement,
+            SyntaxKind.UsingStatement,
+            SyntaxKind.LogicalAndExpression,
+            SyntaxKind.LogicalOrExpression,
+            SyntaxKind.ConditionalExpression,
+            SyntaxKind.ConditionalAccessExpression,
+            SyntaxKind.CoalesceExpression,
+            SyntaxKind.SwitchStatement,
+            SyntaxKind.ParenthesizedLambdaExpression,
+            SyntaxKind.SimpleLambdaExpression,
+            SyntaxKind.FixedStatement,
+            SyntaxKind.CheckedStatement,
+            SyntaxKind.CheckedExpression,
+            SyntaxKind.UncheckedExpression,
+            SyntaxKind.UncheckedStatement,
+            SyntaxKind.GotoStatement,
+            SyntaxKind.AnonymousMethodExpression,
+            SyntaxKindEx.UnderscoreToken,
+            SyntaxKindEx.IsPatternExpression,
+            SyntaxKindEx.DefaultLiteralExpression,
+            SyntaxKindEx.LocalFunctionStatement,
+            SyntaxKindEx.TupleType,
+            SyntaxKindEx.TupleElement,
+            SyntaxKindEx.TupleExpression,
+            SyntaxKindEx.SingleVariableDesignation,
+            SyntaxKindEx.ParenthesizedVariableDesignation,
+            SyntaxKindEx.ForEachVariableStatement,
+            SyntaxKindEx.DeclarationPattern,
+            SyntaxKindEx.ConstantPattern,
+            SyntaxKindEx.CasePatternSwitchLabel,
+            SyntaxKindEx.WhenClause,
+            SyntaxKindEx.DiscardDesignation,
+            SyntaxKindEx.DeclarationExpression,
+            SyntaxKindEx.RefExpression,
+            SyntaxKindEx.RefType,
+            SyntaxKindEx.ThrowExpression
+        };
 
         public int BlockId(Block cfgBlock) =>
             this.blockMap.GetOrAdd(cfgBlock, b => this.blockCounter++);
