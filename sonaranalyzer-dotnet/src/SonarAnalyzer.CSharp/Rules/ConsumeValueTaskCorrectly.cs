@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -36,28 +37,95 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S5034";
 
         // 'await', 'AsTask', 'Result' and '.GetAwaiter().GetResult()' should be called only once on a ValueTask
-        private const string MessageFormat = " Refactor this 'ValueTask' usage to use '{0}' only once.";
+        private const string MessageFormat = "Refactor this 'ValueTask' usage to consume it only once.";
 
-        // This should be called only when 'readTask.IsCompletedSuccessfully' is called before
-        private const string MessageFormatResult = " Refactor this 'ValueTask' usage to use '{0}' only if the operation has completed.";
+        // This should be called only when 'readTask.IsCompletedSuccessfully' is not called before
+        private const string MessageFormatResult = " Refactor this 'ValueTask' usage to consume the result only if the operation has completed successfully.";
 
-        private static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor messageOnlyOnce =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor messageOnlyIfCompletedSuccessfully =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        private static readonly KnownType[] ValueTaskTypes =
+            new[] { KnownType.System_Threading_Tasks_ValueTask, KnownType.System_Threading_Tasks_ValueTask_TResult };
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(messageOnlyIfCompletedSuccessfully);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var node = c.Node;
-                    if (true)
+                    var walker = new ConsumeValueTaskWalker(c.SemanticModel);
+                    walker.Visit(node);
+                    foreach (var keyValue in walker.SymbolUsages)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
+                        var syntaxNodes = keyValue.Value;
+                        if (syntaxNodes.Count() > 1)
+                        {
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(messageOnlyOnce, syntaxNodes.First().GetLocation(),
+                                additionalLocations: syntaxNodes.Skip(1).Select(sn => sn.GetLocation()).ToArray()));
+                        }
                     }
                 },
-                SyntaxKind.InvocationExpression);
+                // should also check in properties?
+                SyntaxKind.MethodDeclaration);
         }
-    }
+
+        private class ConsumeValueTaskWalker : CSharpSyntaxWalker
+        {
+            private readonly SemanticModel semanticModel;
+
+            public Dictionary<ISymbol, List<SyntaxNode>> SymbolUsages { get; }
+
+            public ConsumeValueTaskWalker(SemanticModel semanticModel)
+            {
+                this.semanticModel = semanticModel;
+                this.SymbolUsages = new Dictionary<ISymbol, List<SyntaxNode>>();
+            }
+
+            public override void VisitAwaitExpression(AwaitExpressionSyntax node)
+            {
+                if (node.Expression is IdentifierNameSyntax identifierName &&
+                    semanticModel.GetSymbolInfo(identifierName).Symbol is ISymbol symbol &&
+                    symbol.GetSymbolType().OriginalDefinition.IsAny(ValueTaskTypes))
+                {
+                    if (SymbolUsages.TryGetValue(symbol, out var syntaxNodes))
+                    {
+                        syntaxNodes.Add(identifierName);
+                    }
+                    else
+                    {
+                        var newList = new List<SyntaxNode>() { identifierName };
+                        SymbolUsages.Add(symbol, newList);
+                    }
+                }
+
+                base.VisitAwaitExpression(node);
+            }
+
+            public override void VisitInvocationExpression(InvocationExpressionSyntax node)
+            {
+                // check if it's the wanted method on a ValueTask
+                // do stuff
+                // - GetAwaiter().GetResult() -> also check if inside an if (readTask.IsCompletedSuccessfully) and ignore if so
+                // - AsTask()
+
+                base.VisitInvocationExpression(node);
+            }
+
+            public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
+            {
+                // check if it's the wanted method on a ValueTask
+                // do stuff
+                // - Result -> also check if inside an if (readTask.IsCompletedSuccessfully) and ignore if so
+
+                base.VisitMemberAccessExpression(node);
+            }
+
+        }
+}
 }
 
