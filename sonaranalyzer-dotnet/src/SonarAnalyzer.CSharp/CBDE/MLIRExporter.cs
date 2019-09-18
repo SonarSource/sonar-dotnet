@@ -101,6 +101,7 @@ namespace SonarAnalyzer
             var symbol = semanticModel.GetDeclaredSymbol(method);
             if (symbol.IsAsync)
             {
+                exporterMetrics.AddUnsupportedFunction(SyntaxKind.AsyncKeyword);
                 return true;
             }
             foreach (var node in method.DescendantNodes())

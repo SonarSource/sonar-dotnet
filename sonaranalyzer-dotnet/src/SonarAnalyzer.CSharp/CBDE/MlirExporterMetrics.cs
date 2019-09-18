@@ -24,12 +24,7 @@ namespace SonarAnalyzer
         public void AddUnsupportedFunction(SyntaxKind unsupportedSyntax)
         {
             ++nbUnsupportedFunctions;
-            if (!unsupportedSyntaxes.ContainsKey(unsupportedSyntax))
-            {
-                unsupportedSyntaxes.Add(unsupportedSyntax, 1);
-                return;
-            }
-            ++unsupportedSyntaxes[unsupportedSyntax];
+            unsupportedSyntaxes[unsupportedSyntax] = unsupportedSyntaxes.TryGetValue(unsupportedSyntax, out int currentVal) ? ++currentVal : 1;
         }
 
         public String Dump()
