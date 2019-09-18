@@ -120,6 +120,7 @@ func @_A.g$int$(%arg0: i32) {
   br ^bb1
 ^bb1:	// pred: ^bb0
   %1 = cbde.unknown : none
+  %2 = cbde.unknown : none
   br ^bb2
 ^bb2:	// pred: ^bb1
   return
