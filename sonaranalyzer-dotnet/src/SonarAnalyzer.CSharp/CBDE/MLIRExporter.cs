@@ -25,12 +25,12 @@ namespace SonarAnalyzer
 
     public class MLIRExporter
     {
-        public MLIRExporter(TextWriter w, SemanticModel model, bool withLoc)
+        public MLIRExporter(TextWriter w, SemanticModel model, MlirExporterMetrics metrics, bool withLoc)
         {
             writer = w;
             semanticModel = model;
             exportsLocations = withLoc;
-            exporterMetrics = new MlirExporterMetrics();
+            exporterMetrics = metrics;
         }
 
         public string GetMetricsData()
