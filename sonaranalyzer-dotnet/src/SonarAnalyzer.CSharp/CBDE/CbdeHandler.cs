@@ -54,6 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private StreamWriter logFile;
         private static readonly object logFileLock = new Object();
         private static readonly object metricsFileLock = new Object();
+        private static readonly object perfFileLock = new Object();
 
         private static readonly string mlirPath =
             Environment.GetEnvironmentVariable("CIRRUS_WORKING_DIR") ?? // For Cirrus
@@ -65,12 +66,22 @@ namespace SonarAnalyzer.Rules.CSharp
             Path.Combine(mlirProcessSpecificPath, "cbdeHandler.log");
         private static readonly string mlirMetricsLogFile =
             Path.Combine(mlirProcessSpecificPath, "metrics.log");
+        private static readonly string mlirPerfLogFile =
+            Path.Combine(mlirProcessSpecificPath, "performances.log");
         private static void GlobalLog(string s)
         {
             lock (logFileLock)
             {
                 var message = $"{DateTime.Now} ({Thread.CurrentThread.ManagedThreadId,5}): {s}\n";
                 File.AppendAllText(mlirLogFile, message);
+            }
+        }
+
+        private void PerformanceLog(string s)
+        {
+            lock (perfFileLock)
+            {
+                File.AppendAllText(mlirPerfLogFile, s);
             }
         }
 
@@ -184,17 +195,18 @@ namespace SonarAnalyzer.Rules.CSharp
         private void ExportFunctionMlir(SyntaxTree tree, SemanticModel model, MlirExporterMetrics exporterMetrics, string mlirFileName)
         {
             using (var mlirStreamWriter = new StreamWriter(Path.Combine(mlirDirectoryAssembly, mlirFileName)))
-            using (var perfStreamWriter = new StreamWriter(Path.Combine(mlirDirectoryAssembly, mlirFileName.Replace(".mlir", "-perf.log"))))
             {
-                perfStreamWriter.WriteLine($"In file {tree.GetRoot().GetLocation().GetLineSpan().Path}");
+                string perfLog = tree.GetRoot().GetLocation().GetLineSpan().Path + "\n";
                 MLIRExporter mlirExporter = new MLIRExporter(mlirStreamWriter, model, exporterMetrics, true);
                 foreach (var method in tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
                 {
                     var watch = System.Diagnostics.Stopwatch.StartNew();
                     mlirExporter.ExportFunction(method);
                     watch.Stop();
-                    perfStreamWriter.WriteLine($"{method.Identifier}: {watch.ElapsedMilliseconds} (line: {method.GetLocation().GetLineSpan().StartLinePosition.Line + 1})");
+
+                    perfLog += method.Identifier + " " + watch.ElapsedMilliseconds + "\n";
                 }
+                PerformanceLog(perfLog + "\n");
             }
         }
         private void RunCbdeAndRaiseIssues(CompilationAnalysisContext c)
