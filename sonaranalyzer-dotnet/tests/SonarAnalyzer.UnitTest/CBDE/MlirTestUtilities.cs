@@ -49,14 +49,16 @@ namespace SonarAnalyzer.UnitTest.CBDE
         private static void ExportMethod(string code, TextWriter writer, string functionName)
         {
             (var method, var semanticModel) = TestHelper.Compile(code).GetMethod(functionName);
-            var exporter = new MLIRExporter(writer, semanticModel, false);
+            var exporterMetrics = new MlirExporterMetrics();
+            var exporter = new MLIRExporter(writer, semanticModel, exporterMetrics, false);
             exporter.ExportFunction(method);
         }
 
         private static void ExportAllMethods(string code, TextWriter writer, bool withLoc)
         {
             (var ast, var semanticModel) = TestHelper.Compile(code);
-            var exporter = new MLIRExporter(writer, semanticModel, withLoc);
+            var exporterMetrics = new MlirExporterMetrics();
+            var exporter = new MLIRExporter(writer, semanticModel, exporterMetrics, withLoc);
             foreach (var method in ast.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
             {
                 exporter.ExportFunction(method);
