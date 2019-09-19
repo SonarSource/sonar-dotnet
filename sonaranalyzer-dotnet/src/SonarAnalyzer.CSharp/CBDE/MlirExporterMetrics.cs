@@ -33,12 +33,11 @@ namespace SonarAnalyzer
             {
                 return "";
             }
-            var metricsStr = $"{nbSupportedFunctions} exported functions \n" +
-                $"{nbUnsupportedFunctions} unsupported functions \n" +
-                $" \t => {(float)nbSupportedFunctions / (float)(nbSupportedFunctions + nbUnsupportedFunctions) * 100}% rate \n";
+            var metricsStr = $"exported {nbSupportedFunctions} \n" +
+                $"unsupported {nbUnsupportedFunctions} \n";
             foreach (KeyValuePair<SyntaxKind, int> entry in unsupportedSyntaxes)
             {
-                metricsStr += $"{entry.Key.ToString()} : {entry.Value} \n";
+                metricsStr += $"{entry.Key.ToString()} {entry.Value} \n";
             }
             return metricsStr + "\n";
         }

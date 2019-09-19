@@ -53,6 +53,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private MemoryStream logStream;
         private StreamWriter logFile;
         private static readonly object logFileLock = new Object();
+        private static readonly object metricsFileLock = new Object();
+        private static readonly object perfFileLock = new Object();
 
         private static readonly string mlirPath =
             Environment.GetEnvironmentVariable("CIRRUS_WORKING_DIR") ?? // For Cirrus
@@ -64,12 +66,22 @@ namespace SonarAnalyzer.Rules.CSharp
             Path.Combine(mlirProcessSpecificPath, "cbdeHandler.log");
         private static readonly string mlirMetricsLogFile =
             Path.Combine(mlirProcessSpecificPath, "metrics.log");
+        private static readonly string mlirPerfLogFile =
+            Path.Combine(mlirProcessSpecificPath, "performances.log");
         private static void GlobalLog(string s)
         {
             lock (logFileLock)
             {
                 var message = $"{DateTime.Now} ({Thread.CurrentThread.ManagedThreadId,5}): {s}\n";
                 File.AppendAllText(mlirLogFile, message);
+            }
+        }
+
+        private void PerformanceLog(string s)
+        {
+            lock (perfFileLock)
+            {
+                File.AppendAllText(mlirPerfLogFile, s);
             }
         }
 
@@ -106,6 +118,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var compilationHash = c.Compilation.GetHashCode();
                     InitializePathsAndLog(c.Compilation.Assembly.Name, compilationHash);
                     GlobalLog("CBDE: Compilation phase");
+                    var exporterMetrics = new MlirExporterMetrics();
                     try
                     {
                         foreach (var tree in c.Compilation.SyntaxTrees)
@@ -113,13 +126,17 @@ namespace SonarAnalyzer.Rules.CSharp
                             csSourceFileNames.Add(tree.FilePath);
                             GlobalLog($"CBDE: Treating file {tree.FilePath} in context {compilationHash}");
                             var mlirFileName = ManglePath(tree.FilePath) + ".mlir";
-                            ExportFunctionMlir(tree, c.Compilation.GetSemanticModel(tree), mlirFileName);
+                            ExportFunctionMlir(tree, c.Compilation.GetSemanticModel(tree), exporterMetrics, mlirFileName);
                             logFile.WriteLine("- generated mlir file {0}", mlirFileName);
                             logFile.Flush();
                             GlobalLog($"CBDE: Done with file {tree.FilePath} in context {compilationHash}");
                         }
                         RunCbdeAndRaiseIssues(c);
                         GlobalLog("CBDE: End of compilation");
+                        lock (metricsFileLock)
+                        {
+                            File.AppendAllText(mlirMetricsLogFile, exporterMetrics.Dump());
+                        }
                     }
                     catch(Exception e)
                     {
@@ -175,21 +192,21 @@ namespace SonarAnalyzer.Rules.CSharp
             mlirDirectoryRoot = Path.Combine(mlirPath, "sonar-dotnet/cbde");
             Directory.CreateDirectory(mlirDirectoryRoot);
         }
-        private void ExportFunctionMlir(SyntaxTree tree, SemanticModel model, string mlirFileName)
+        private void ExportFunctionMlir(SyntaxTree tree, SemanticModel model, MlirExporterMetrics exporterMetrics, string mlirFileName)
         {
             using (var mlirStreamWriter = new StreamWriter(Path.Combine(mlirDirectoryAssembly, mlirFileName)))
-            using (var perfStreamWriter = new StreamWriter(Path.Combine(mlirDirectoryAssembly, mlirFileName.Replace(".mlir", "-perf.log"))))
             {
-                perfStreamWriter.WriteLine($"In file {tree.GetRoot().GetLocation().GetLineSpan().Path}");
-                MLIRExporter mlirExporter = new MLIRExporter(mlirStreamWriter, model, true);
+                string perfLog = tree.GetRoot().GetLocation().GetLineSpan().Path + "\n";
+                MLIRExporter mlirExporter = new MLIRExporter(mlirStreamWriter, model, exporterMetrics, true);
                 foreach (var method in tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
                 {
                     var watch = System.Diagnostics.Stopwatch.StartNew();
                     mlirExporter.ExportFunction(method);
                     watch.Stop();
-                    perfStreamWriter.WriteLine($"{method.Identifier}: {watch.ElapsedMilliseconds} (line: {method.GetLocation().GetLineSpan().StartLinePosition.Line + 1})");
+
+                    perfLog += method.Identifier + " " + watch.ElapsedMilliseconds + "\n";
                 }
-                File.AppendAllText(mlirMetricsLogFile, mlirExporter.GetMetricsData());
+                PerformanceLog(perfLog + "\n");
             }
         }
         private void RunCbdeAndRaiseIssues(CompilationAnalysisContext c)
