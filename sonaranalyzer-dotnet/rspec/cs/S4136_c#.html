@@ -4,8 +4,8 @@ available options.</p>
 <pre>
 interface IMyInterface
 {
-  int DoTheThing();
-  string DoTheOtherThing(); // Noncompliant
+  int DoTheThing(); // Noncompliant - overloaded method declarations are not grouped together
+  string DoTheOtherThing();
   int DoTheThing(string s);
 }
 </pre>
@@ -16,6 +16,29 @@ interface IMyInterface
   int DoTheThing();
   int DoTheThing(string s);
   string DoTheOtherThing();
+}
+</pre>
+<h2>Exceptions</h2>
+<p>As it is also a common practice to group method declarations by accessibility level, no issue will be raised for method overloads having different
+access modifiers.</p>
+<p>Example:</p>
+<pre>
+class MyClass
+{
+  private void DoTheThing(string s) // Ok - this method is declared as private while the other one is public
+  {
+    // ...
+  }
+
+  private string DoTheOtherThing(string s)
+  {
+    // ...
+  }
+
+  public void DoTheThing()
+  {
+    // ...
+  }
 }
 </pre>
 

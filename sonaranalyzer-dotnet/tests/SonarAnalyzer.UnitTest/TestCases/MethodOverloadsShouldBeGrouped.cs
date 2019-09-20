@@ -110,13 +110,14 @@ namespace Tests.Diagnostics
     class G : D, E
     {
         public void DoSomething(double a) { } // Noncompliant
-        
-        void D.DoSomething() { } // Compliant - explicit interface implementation
+
+        // Compliant - we dont not raise issues for explicit interface implementation as it is a corner case and it can make sense to group implementation by interface
+        void D.DoSomething() { } 
 
         public void DoSomethingElse() { }
 
-        void E.DoSomething() { }
-        
+        void E.DoSomething() { } // Compliant - explicit interface implementation
+
         public void DoSomething(int a) { } // Secondary 
     }
 
