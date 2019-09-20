@@ -1,0 +1,44 @@
+<p>For clarity, all overloads of the same method should be grouped together. That lets both users and maintainers quickly understand all the current
+available options.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+interface IMyInterface
+{
+  int DoTheThing(); // Noncompliant - overloaded method declarations are not grouped together
+  string DoTheOtherThing();
+  int DoTheThing(string s);
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+interface IMyInterface
+{
+  int DoTheThing();
+  int DoTheThing(string s);
+  string DoTheOtherThing();
+}
+</pre>
+<h2>Exceptions</h2>
+<p>As it is also a common practice to group method declarations by accessibility level, no issue will be raised for method overloads having different
+access modifiers.</p>
+<p>Example:</p>
+<pre>
+class MyClass
+{
+  private void DoTheThing(string s) // Ok - this method is declared as private while the other one is public
+  {
+    // ...
+  }
+
+  private string DoTheOtherThing(string s)
+  {
+    // ...
+  }
+
+  public void DoTheThing()
+  {
+    // ...
+  }
+}
+</pre>
+

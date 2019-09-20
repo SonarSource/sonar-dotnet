@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'Equals' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  21,
+"endLine":  183,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  30,
+"endLine":  199,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Equals' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"region":  {
+"startLine":  785,
+"startColumn":  21,
+"endLine":  785,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"region":  {
+"startLine":  799,
+"startColumn":  30,
+"endLine":  799,
+"endColumn":  36
+}
+}
+]
+}
+]
+}

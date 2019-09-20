@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'ShouldEqual' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  28,
+"endLine":  107,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"region":  {
+"startLine":  189,
+"startColumn":  28,
+"endLine":  189,
+"endColumn":  39
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'ImmutableMessage' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  20,
+"endLine":  112,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  20,
+"endLine":  138,
+"endColumn":  36
+}
+}
+]
+}
+]
+}

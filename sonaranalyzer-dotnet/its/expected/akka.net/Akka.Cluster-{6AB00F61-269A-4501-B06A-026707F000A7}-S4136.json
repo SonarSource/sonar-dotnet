@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'Create' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  30,
+"endLine":  29,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  30,
+"endLine":  55,
+"endColumn":  36
+}
+}
+]
+}
+]
+}

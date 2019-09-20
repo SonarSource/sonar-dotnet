@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'FakeDefaultNancyBootstrapper' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeDefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  16,
+"endLine":  25,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeDefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  16,
+"endLine":  46,
+"endColumn":  44
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'ShouldEqual' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  28,
+"endLine":  107,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"region":  {
+"startLine":  189,
+"startColumn":  28,
+"endLine":  189,
+"endColumn":  39
+}
+}
+]
+}
+]
+}

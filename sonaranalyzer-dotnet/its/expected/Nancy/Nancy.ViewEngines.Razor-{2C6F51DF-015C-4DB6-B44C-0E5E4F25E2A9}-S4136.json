@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'WriteTo' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  285,
+"startColumn":  29,
+"endLine":  285,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  305,
+"startColumn":  29,
+"endLine":  305,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'WriteLiteralTo' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  295,
+"startColumn":  29,
+"endLine":  295,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  29,
+"endLine":  318,
+"endColumn":  43
+}
+}
+]
+}
+]
+}

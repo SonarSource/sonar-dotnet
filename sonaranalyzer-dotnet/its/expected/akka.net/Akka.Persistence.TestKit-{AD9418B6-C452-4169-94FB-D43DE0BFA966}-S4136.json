@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'JournalSpec' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalSpec.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  19,
+"endLine":  40,
+"endColumn":  30
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalSpec.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  19,
+"endLine":  55,
+"endColumn":  30
+}
+}
+]
+}
+]
+}

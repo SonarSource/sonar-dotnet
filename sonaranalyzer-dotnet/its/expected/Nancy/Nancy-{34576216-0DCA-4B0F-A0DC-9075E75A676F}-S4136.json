@@ -1,0 +1,325 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'Register' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  21,
+"endLine":  45,
+"endColumn":  29
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  21,
+"endLine":  77,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'ToString' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  32,
+"endLine":  315,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  748,
+"startColumn":  23,
+"endLine":  748,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'UrlDecode' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  30,
+"endLine":  114,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  30,
+"endLine":  135,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  30,
+"endLine":  249,
+"endColumn":  39
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'BindTo' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  30,
+"endLine":  237,
+"endColumn":  36
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"region":  {
+"startLine":  319,
+"startColumn":  30,
+"endLine":  319,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'BindToAndValidate' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  30,
+"endLine":  274,
+"endColumn":  47
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"region":  {
+"startLine":  362,
+"startColumn":  30,
+"endLine":  362,
+"endColumn":  47
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Bind' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  31,
+"endLine":  31,
+"endColumn":  35
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  30,
+"endLine":  136,
+"endColumn":  34
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'BindAndValidate' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  30,
+"endLine":  92,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  30,
+"endLine":  191,
+"endColumn":  45
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'WithStatusCode' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  34,
+"endLine":  218,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  34,
+"endLine":  242,
+"endColumn":  48
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'TryMatch' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  33,
+"endLine":  17,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  33,
+"endLine":  42,
+"endColumn":  41
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'TinyIoCContainer' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3002,
+"startColumn":  16,
+"endLine":  3002,
+"endColumn":  32
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3076,
+"startColumn":  17,
+"endLine":  3076,
+"endColumn":  33
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetViewsWithSupportedExtensions' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  63,
+"endLine":  19,
+"endColumn":  94
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  63,
+"endLine":  45,
+"endColumn":  94
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetFilenames' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  44,
+"endLine":  52,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  44,
+"endLine":  70,
+"endColumn":  56
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetViewsWithSupportedExtensions' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IFileSystemReader.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  56,
+"endLine":  18,
+"endColumn":  87
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IFileSystemReader.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  56,
+"endLine":  34,
+"endColumn":  87
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'Equals' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  21,
+"endLine":  71,
+"endColumn":  27
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  30,
+"endLine":  108,
+"endColumn":  36
+}
+}
+]
+}
+]
+}
