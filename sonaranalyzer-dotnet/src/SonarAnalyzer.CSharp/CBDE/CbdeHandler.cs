@@ -218,7 +218,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 pProcess.StartInfo.FileName = cbdeBinaryPath;
                 pProcess.StartInfo.WorkingDirectory = mlirDirectoryAssembly;
                 var progressLogFile = Path.Combine(mlirDirectoryAssembly, "progressLogFile.log");
-                pProcess.StartInfo.Arguments = "-i " + "\"" + mlirDirectoryAssembly + "\" -o \"" + cbdeJsonOutputPath + "\" -p \"" + progressLogFile + "\"";
+                var cbdePerfLogFile = Path.Combine(mlirDirectoryAssembly, "perfLogFile.log");
+                pProcess.StartInfo.Arguments = "-i " + "\"" + mlirDirectoryAssembly + "\" -o \"" + cbdeJsonOutputPath + "\" -p \"" + progressLogFile + "\" -s \"" + cbdePerfLogFile + "\"";
                 logFile.WriteLine("  * binary_location: '{0}'", pProcess.StartInfo.FileName);
                 logFile.WriteLine("  * arguments: '{0}'", pProcess.StartInfo.Arguments);
                 pProcess.StartInfo.UseShellExecute = false;
