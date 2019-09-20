@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4136",
-"message":  "All 'FakeDefaultNancyBootstrapper' signatures should be adjacent",
+"message":  "All 'FakeDefaultNancyBootstrapper' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeDefaultNancyBootstrapper.cs",
@@ -26,7 +26,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'ShouldEqual' signatures should be adjacent",
+"message":  "All 'ShouldEqual' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
@@ -50,7 +50,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'BuildMultipartFileValues' signatures should be adjacent",
+"message":  "All 'BuildMultipartFileValues' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",

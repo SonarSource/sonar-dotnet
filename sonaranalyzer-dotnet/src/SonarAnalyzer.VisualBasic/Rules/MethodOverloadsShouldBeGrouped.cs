@@ -64,8 +64,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                var classDeclaration = (TypeBlockSyntax)c.Node;
-                CheckMembers(c, classDeclaration.Members);
+                var typeDeclaration = (TypeBlockSyntax)c.Node;
+                CheckMembers(c, typeDeclaration.Members);
             },
             SyntaxKind.ClassBlock,
             SyntaxKind.InterfaceBlock,

@@ -2,79 +2,7 @@
 "issues":  [
 {
 "id":  "S4136",
-"message":  "All 'Dispose' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
-"region":  {
-"startLine":  398,
-"startColumn":  21,
-"endLine":  398,
-"endColumn":  28
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
-"region":  {
-"startLine":  526,
-"startColumn":  32,
-"endLine":  526,
-"endColumn":  39
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'GetAllModules' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperWithRequestContainerBase.cs",
-"region":  {
-"startLine":  58,
-"startColumn":  58,
-"endLine":  58,
-"endColumn":  71
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperWithRequestContainerBase.cs",
-"region":  {
-"startLine":  207,
-"startColumn":  54,
-"endLine":  207,
-"endColumn":  67
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'GetModule' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperWithRequestContainerBase.cs",
-"region":  {
-"startLine":  73,
-"startColumn":  45,
-"endLine":  73,
-"endColumn":  54
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperWithRequestContainerBase.cs",
-"region":  {
-"startLine":  215,
-"startColumn":  41,
-"endLine":  215,
-"endColumn":  50
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Register' signatures should be adjacent",
+"message":  "All 'Register' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
@@ -98,55 +26,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'TryGetValue' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy\Configuration\DefaultNancyEnvironment.cs",
-"region":  {
-"startLine":  58,
-"startColumn":  50,
-"endLine":  58,
-"endColumn":  61
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Configuration\DefaultNancyEnvironment.cs",
-"region":  {
-"startLine":  109,
-"startColumn":  21,
-"endLine":  109,
-"endColumn":  32
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'GetEnumerator' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionary.cs",
-"region":  {
-"startLine":  89,
-"startColumn":  36,
-"endLine":  89,
-"endColumn":  49
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionary.cs",
-"region":  {
-"startLine":  168,
-"startColumn":  94,
-"endLine":  168,
-"endColumn":  107
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'ToString' signatures should be adjacent",
+"message":  "All 'ToString' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
@@ -170,7 +50,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'UrlDecode' signatures should be adjacent",
+"message":  "All 'UrlDecode' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
@@ -203,31 +83,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'Dispose' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
-"region":  {
-"startLine":  191,
-"startColumn":  25,
-"endLine":  191,
-"endColumn":  32
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
-"region":  {
-"startLine":  316,
-"startColumn":  33,
-"endLine":  316,
-"endColumn":  40
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'BindTo' signatures should be adjacent",
+"message":  "All 'BindTo' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
@@ -251,7 +107,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'BindToAndValidate' signatures should be adjacent",
+"message":  "All 'BindToAndValidate' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
@@ -275,7 +131,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'Bind' signatures should be adjacent",
+"message":  "All 'Bind' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
@@ -299,7 +155,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'BindAndValidate' signatures should be adjacent",
+"message":  "All 'BindAndValidate' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
@@ -323,7 +179,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'WithStatusCode' signatures should be adjacent",
+"message":  "All 'WithStatusCode' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
@@ -347,55 +203,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'NegotiateResponse' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
-"region":  {
-"startLine":  37,
-"startColumn":  25,
-"endLine":  37,
-"endColumn":  42
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
-"region":  {
-"startLine":  252,
-"startColumn":  33,
-"endLine":  252,
-"endColumn":  50
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'GetEnumerator' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRangeParameters.cs",
-"region":  {
-"startLine":  54,
-"startColumn":  58,
-"endLine":  54,
-"endColumn":  71
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRangeParameters.cs",
-"region":  {
-"startLine":  73,
-"startColumn":  33,
-"endLine":  73,
-"endColumn":  46
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'TryMatch' signatures should be adjacent",
+"message":  "All 'TryMatch' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
@@ -419,7 +227,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'TinyIoCContainer' signatures should be adjacent",
+"message":  "All 'TinyIoCContainer' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
@@ -427,15 +235,6 @@
 "startLine":  3002,
 "startColumn":  16,
 "endLine":  3002,
-"endColumn":  32
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3068,
-"startColumn":  16,
-"endLine":  3068,
 "endColumn":  32
 }
 },
@@ -452,7 +251,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'GetViewsWithSupportedExtensions' signatures should be adjacent",
+"message":  "All 'GetViewsWithSupportedExtensions' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
@@ -476,7 +275,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'GetFilenames' signatures should be adjacent",
+"message":  "All 'GetFilenames' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
@@ -500,7 +299,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'GetViewsWithSupportedExtensions' signatures should be adjacent",
+"message":  "All 'GetViewsWithSupportedExtensions' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy\ViewEngines\IFileSystemReader.cs",

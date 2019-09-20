@@ -2,73 +2,7 @@
 "issues":  [
 {
 "id":  "S4136",
-"message":  "All 'BecomeStacked' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
-"region":  {
-"startLine":  166,
-"startColumn":  21,
-"endLine":  166,
-"endColumn":  34
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
-"region":  {
-"startLine":  197,
-"startColumn":  35,
-"endLine":  197,
-"endColumn":  48
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Become' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
-"region":  {
-"startLine":  161,
-"startColumn":  21,
-"endLine":  161,
-"endColumn":  27
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
-"region":  {
-"startLine":  173,
-"startColumn":  28,
-"endLine":  173,
-"endColumn":  34
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
-"region":  {
-"startLine":  192,
-"startColumn":  35,
-"endLine":  192,
-"endColumn":  41
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
-"region":  {
-"startLine":  203,
-"startColumn":  35,
-"endLine":  203,
-"endColumn":  41
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Equals' signatures should be adjacent",
+"message":  "All 'Equals' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
@@ -92,7 +26,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'ToStringWithAddress' signatures should be adjacent",
+"message":  "All 'ToStringWithAddress' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
@@ -116,55 +50,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'AfterIncarnated' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
-"region":  {
-"startLine":  75,
-"startColumn":  35,
-"endLine":  75,
-"endColumn":  50
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
-"region":  {
-"startLine":  88,
-"startColumn":  29,
-"endLine":  88,
-"endColumn":  44
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'BeforeIncarnated' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
-"region":  {
-"startLine":  80,
-"startColumn":  35,
-"endLine":  80,
-"endColumn":  51
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
-"region":  {
-"startLine":  93,
-"startColumn":  29,
-"endLine":  93,
-"endColumn":  45
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Equals' signatures should be adjacent",
+"message":  "All 'Equals' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
@@ -188,7 +74,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'CompareTo' signatures should be adjacent",
+"message":  "All 'CompareTo' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
@@ -212,7 +98,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'Cancel' signatures should be adjacent",
+"message":  "All 'Cancel' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\AlreadyCanceledCancelable.cs",
@@ -236,7 +122,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'Cancel' signatures should be adjacent",
+"message":  "All 'Cancel' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\ICancellable.cs",
@@ -260,103 +146,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'Apply' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
-"region":  {
-"startLine":  113,
-"startColumn":  18,
-"endLine":  113,
-"endColumn":  23
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
-"region":  {
-"startLine":  133,
-"startColumn":  29,
-"endLine":  133,
-"endColumn":  34
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Get' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
-"region":  {
-"startLine":  118,
-"startColumn":  29,
-"endLine":  118,
-"endColumn":  32
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
-"region":  {
-"startLine":  138,
-"startColumn":  18,
-"endLine":  138,
-"endColumn":  21
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'CreateExtension' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
-"region":  {
-"startLine":  123,
-"startColumn":  29,
-"endLine":  123,
-"endColumn":  44
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
-"region":  {
-"startLine":  143,
-"startColumn":  27,
-"endLine":  143,
-"endColumn":  42
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Ask' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
-"region":  {
-"startLine":  27,
-"startColumn":  36,
-"endLine":  27,
-"endColumn":  39
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
-"region":  {
-"startLine":  64,
-"startColumn":  37,
-"endLine":  64,
-"endColumn":  40
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Become' signatures should be adjacent",
+"message":  "All 'Become' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\IActorContext.cs",
@@ -380,7 +170,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'GetExtension' signatures should be adjacent",
+"message":  "All 'GetExtension' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
@@ -404,7 +194,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'Create' signatures should be adjacent",
+"message":  "All 'Create' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
@@ -428,7 +218,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'Equals' signatures should be adjacent",
+"message":  "All 'Equals' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
@@ -452,31 +242,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'DynamicProps' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
-"region":  {
-"startLine":  669,
-"startColumn":  16,
-"endLine":  669,
-"endColumn":  28
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
-"region":  {
-"startLine":  691,
-"startColumn":  17,
-"endLine":  691,
-"endColumn":  29
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Become' signatures should be adjacent",
+"message":  "All 'Become' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
@@ -500,55 +266,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'InternalScheduleOnce' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DedicatedThreadScheduler.cs",
-"region":  {
-"startLine":  93,
-"startColumn":  33,
-"endLine":  93,
-"endColumn":  53
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DedicatedThreadScheduler.cs",
-"region":  {
-"startLine":  106,
-"startColumn":  22,
-"endLine":  106,
-"endColumn":  42
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'InternalScheduleRepeatedly' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DedicatedThreadScheduler.cs",
-"region":  {
-"startLine":  99,
-"startColumn":  33,
-"endLine":  99,
-"endColumn":  59
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DedicatedThreadScheduler.cs",
-"region":  {
-"startLine":  128,
-"startColumn":  22,
-"endLine":  128,
-"endColumn":  48
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'ScheduleOnce' signatures should be adjacent",
+"message":  "All 'ScheduleOnce' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DeprecatedSchedulerExtensions.cs",
@@ -572,7 +290,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'Matches' signatures should be adjacent",
+"message":  "All 'Matches' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
@@ -596,7 +314,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'Take' signatures should be adjacent",
+"message":  "All 'Take' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
@@ -620,7 +338,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'Suspend' signatures should be adjacent",
+"message":  "All 'Suspend' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
@@ -644,7 +362,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'Resume' signatures should be adjacent",
+"message":  "All 'Resume' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
@@ -668,31 +386,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'Publish' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Event\EventBus.cs",
-"region":  {
-"startLine":  164,
-"startColumn":  33,
-"endLine":  164,
-"endColumn":  40
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Event\EventBus.cs",
-"region":  {
-"startLine":  185,
-"startColumn":  29,
-"endLine":  185,
-"endColumn":  36
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Put' signatures should be adjacent",
+"message":  "All 'Put' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\IO\ByteBuffer.cs",
@@ -725,7 +419,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'ConsistentHashingPool' signatures should be adjacent",
+"message":  "All 'ConsistentHashingPool' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
@@ -749,7 +443,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'Equals' signatures should be adjacent",
+"message":  "All 'Equals' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
@@ -773,31 +467,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'TryGet' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
-"region":  {
-"startLine":  53,
-"startColumn":  15,
-"endLine":  53,
-"endColumn":  21
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
-"region":  {
-"startLine":  77,
-"startColumn":  23,
-"endLine":  77,
-"endColumn":  29
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'TryAdd' signatures should be adjacent",
+"message":  "All 'TryAdd' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
@@ -821,113 +491,8 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'TryAdd' signatures should be adjacent",
+"message":  "All 'Remove' method overloads should be adjacent.",
 "location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeMap.cs",
-"region":  {
-"startLine":  23,
-"startColumn":  36,
-"endLine":  23,
-"endColumn":  42
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeMap.cs",
-"region":  {
-"startLine":  36,
-"startColumn":  15,
-"endLine":  36,
-"endColumn":  21
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Add' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeMap.cs",
-"region":  {
-"startLine":  31,
-"startColumn":  59,
-"endLine":  31,
-"endColumn":  62
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeMap.cs",
-"region":  {
-"startLine":  49,
-"startColumn":  41,
-"endLine":  49,
-"endColumn":  44
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Remove' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeMap.cs",
-"region":  {
-"startLine":  72,
-"startColumn":  59,
-"endLine":  72,
-"endColumn":  65
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeMap.cs",
-"region":  {
-"startLine":  85,
-"startColumn":  41,
-"endLine":  85,
-"endColumn":  47
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'TryRemove' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeMap.cs",
-"region":  {
-"startLine":  77,
-"startColumn":  36,
-"endLine":  77,
-"endColumn":  45
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeMap.cs",
-"region":  {
-"startLine":  91,
-"startColumn":  15,
-"endLine":  91,
-"endColumn":  24
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Remove' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableTreeSet.cs",
-"region":  {
-"startLine":  67,
-"startColumn":  47,
-"endLine":  67,
-"endColumn":  53
-}
-},
 {
 "uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableTreeSet.cs",
 "region":  {
@@ -936,36 +501,21 @@
 "endLine":  80,
 "endColumn":  41
 }
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'TryRemove' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableTreeSet.cs",
-"region":  {
-"startLine":  72,
-"startColumn":  30,
-"endLine":  72,
-"endColumn":  39
-}
 },
 {
 "uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableTreeSet.cs",
 "region":  {
-"startLine":  96,
-"startColumn":  15,
-"endLine":  96,
-"endColumn":  24
+"startLine":  91,
+"startColumn":  35,
+"endLine":  91,
+"endColumn":  41
 }
 }
 ]
 },
 {
 "id":  "S4136",
-"message":  "All 'CopyAndAdd' signatures should be adjacent",
+"message":  "All 'CopyAndAdd' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Util\Internal\ImmutabilityUtils.cs",
@@ -989,7 +539,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'CopyAndRemove' signatures should be adjacent",
+"message":  "All 'CopyAndRemove' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Util\Internal\ImmutabilityUtils.cs",
@@ -1013,7 +563,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'SwitchOff' signatures should be adjacent",
+"message":  "All 'SwitchOff' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Util\Switch.cs",
@@ -1037,7 +587,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'SwitchOn' signatures should be adjacent",
+"message":  "All 'SwitchOn' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka\Util\Switch.cs",

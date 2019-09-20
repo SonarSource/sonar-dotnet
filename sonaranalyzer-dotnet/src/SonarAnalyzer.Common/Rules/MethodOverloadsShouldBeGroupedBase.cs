@@ -53,27 +53,30 @@ namespace SonarAnalyzer.Rules
             foreach (var misplacedOverloadsEntry in misplacedOverloadsMapping)
             {
                 var misplacedOverloadsByAccessibility = misplacedOverloadsEntry.Value
-                    .GroupBy(member => c.SemanticModel.GetSymbolInfo(member).Symbol?.DeclaredAccessibility);
-                
+                    .GroupBy(memberDeclaration => c.SemanticModel.GetDeclaredSymbol(memberDeclaration)?.DeclaredAccessibility);
+
                 foreach (var misplacedOverloads in misplacedOverloadsByAccessibility)
                 {
-                    if (misplacedOverloads.Key != null && misplacedOverloads.Count() > 1)
+                    var firstMethodSignature = misplacedOverloads.First();
+                    if (misplacedOverloads.Key != null && misplacedOverloads.Count() > 1 && firstMethodSignature != null)
                     {
-                        var firstMethodSignature = misplacedOverloads.First();
-                        var secondaryLocations = misplacedOverloads.Skip(1).Select(member => new SecondaryLocation(member.GetLocation(), "Non-adjacent overload"));
+                        var secondaryLocations = misplacedOverloads
+                            .Skip(1)
+                            .Select(member => GetNameSyntaxNode(member))
+                            .Where(nameSyntax => nameSyntax != null)
+                            .Select(nameSyntax => new SecondaryLocation(nameSyntax?.GetLocation(), "Non-adjacent overload"));
                         c.ReportDiagnosticWhenActive(
                             Diagnostic.Create(
                                 descriptor: Rule,
-                                location: firstMethodSignature.GetLocation(),
+                                location: GetNameSyntaxNode(firstMethodSignature)?.GetLocation(),
                                 additionalLocations: secondaryLocations.ToAdditionalLocations(),
                                 properties: secondaryLocations.ToProperties(),
-                                messageArgs: GetMethodName(firstMethodSignature, false)));
+                                messageArgs: GetMethodName(firstMethodSignature, true)));
 
                     }
                 }
             }
         }
-
 
         protected IDictionary<string, List<TMemberDeclarationSyntax>> GetMisplacedOverloads(IEnumerable<TMemberDeclarationSyntax> members)
         {

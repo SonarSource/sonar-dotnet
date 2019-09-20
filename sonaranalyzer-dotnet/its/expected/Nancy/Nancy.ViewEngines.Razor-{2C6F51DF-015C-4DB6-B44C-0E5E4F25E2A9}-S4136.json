@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4136",
-"message":  "All 'WriteTo' signatures should be adjacent",
+"message":  "All 'WriteTo' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
@@ -26,7 +26,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'WriteLiteralTo' signatures should be adjacent",
+"message":  "All 'WriteLiteralTo' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",

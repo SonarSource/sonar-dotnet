@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4136",
-"message":  "All 'Equals' signatures should be adjacent",
+"message":  "All 'Equals' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
@@ -20,30 +20,6 @@
 "startColumn":  30,
 "endLine":  108,
 "endColumn":  36
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'LocalAddressForRemote' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
-"region":  {
-"startLine":  264,
-"startColumn":  33,
-"endLine":  264,
-"endColumn":  54
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
-"region":  {
-"startLine":  294,
-"startColumn":  26,
-"endLine":  294,
-"endColumn":  47
 }
 }
 ]

@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4136",
-"message":  "All 'JournalSpec' signatures should be adjacent",
+"message":  "All 'JournalSpec' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalSpec.cs",

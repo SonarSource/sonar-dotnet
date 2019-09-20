@@ -67,8 +67,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                var classDeclaration = (TypeDeclarationSyntax)c.Node;
-                CheckMembers(c, classDeclaration.Members);
+                var typeDeclaration = (TypeDeclarationSyntax)c.Node;
+                CheckMembers(c, typeDeclaration.Members);
                     
             },
             SyntaxKind.ClassDeclaration,

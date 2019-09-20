@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4136",
-"message":  "All 'Contains' signatures should be adjacent",
+"message":  "All 'Contains' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
@@ -26,7 +26,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'RoutePatternMatcher' signatures should be adjacent",
+"message":  "All 'RoutePatternMatcher' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
@@ -50,31 +50,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'GetAllModules' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
-"region":  {
-"startLine":  145,
-"startColumn":  46,
-"endLine":  145,
-"endColumn":  59
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
-"region":  {
-"startLine":  398,
-"startColumn":  54,
-"endLine":  398,
-"endColumn":  67
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Binder' signatures should be adjacent",
+"message":  "All 'Binder' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",

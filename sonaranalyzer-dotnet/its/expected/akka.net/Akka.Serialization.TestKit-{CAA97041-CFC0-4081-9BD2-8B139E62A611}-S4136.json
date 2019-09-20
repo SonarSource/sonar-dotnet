@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4136",
-"message":  "All 'ImmutableMessage' signatures should be adjacent",
+"message":  "All 'ImmutableMessage' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessage.cs",
@@ -20,30 +20,6 @@
 "startColumn":  16,
 "endLine":  36,
 "endColumn":  32
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'ImmutableMessageWithPrivateCtor' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessageWithPrivateCtor.cs",
-"region":  {
-"startLine":  10,
-"startColumn":  19,
-"endLine":  10,
-"endColumn":  50
-}
-},
-{
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessageWithPrivateCtor.cs",
-"region":  {
-"startLine":  35,
-"startColumn":  16,
-"endLine":  35,
-"endColumn":  47
 }
 }
 ]

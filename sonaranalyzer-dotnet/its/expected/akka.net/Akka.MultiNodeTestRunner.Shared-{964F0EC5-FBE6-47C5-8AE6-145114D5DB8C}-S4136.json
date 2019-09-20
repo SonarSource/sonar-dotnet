@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4136",
-"message":  "All 'PublishToChildren' signatures should be adjacent",
+"message":  "All 'PublishToChildren' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",

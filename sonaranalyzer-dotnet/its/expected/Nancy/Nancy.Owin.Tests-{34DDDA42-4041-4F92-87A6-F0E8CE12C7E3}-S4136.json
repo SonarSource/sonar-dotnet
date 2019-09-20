@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4136",
-"message":  "All 'ShouldEqual' signatures should be adjacent",
+"message":  "All 'ShouldEqual' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",

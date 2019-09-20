@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4136",
-"message":  "All 'GetGetMethod' signatures should be adjacent",
+"message":  "All 'GetGetMethod' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
@@ -26,7 +26,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'GetSetMethod' signatures should be adjacent",
+"message":  "All 'GetSetMethod' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
@@ -50,7 +50,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'IsPublic' signatures should be adjacent",
+"message":  "All 'IsPublic' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Automapper\src\AutoMapper\TypeExtensions.cs",
@@ -74,7 +74,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'Contains' signatures should be adjacent",
+"message":  "All 'Contains' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
@@ -98,7 +98,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'CopyTo' signatures should be adjacent",
+"message":  "All 'CopyTo' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
@@ -122,31 +122,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'GetEnumerator' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
-"region":  {
-"startLine":  340,
-"startColumn":  64,
-"endLine":  340,
-"endColumn":  77
-}
-},
-{
-"uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
-"region":  {
-"startLine":  360,
-"startColumn":  70,
-"endLine":  360,
-"endColumn":  83
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Add' signatures should be adjacent",
+"message":  "All 'Add' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
@@ -179,7 +155,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'Remove' signatures should be adjacent",
+"message":  "All 'Remove' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Automapper\src\UnitTests\Dictionaries.cs",
@@ -212,7 +188,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'SetValue' signatures should be adjacent",
+"message":  "All 'SetValue' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
@@ -236,7 +212,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'DoIt4' signatures should be adjacent",
+"message":  "All 'DoIt4' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Automapper\src\UnitTests\Internal\DelegateFactoryTests.cs",
@@ -260,7 +236,7 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'Equals' signatures should be adjacent",
+"message":  "All 'Equals' method overloads should be adjacent.",
 "location":  [
 {
 "uri":  "sources\Automapper\src\UnitTests\Projection\ProjectCollectionListTest.cs",
@@ -278,102 +254,6 @@
 "startColumn":  34,
 "endLine":  96,
 "endColumn":  40
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Destination' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
-"region":  {
-"startLine":  11,
-"startColumn":  22,
-"endLine":  11,
-"endColumn":  33
-}
-},
-{
-"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
-"region":  {
-"startLine":  19,
-"startColumn":  20,
-"endLine":  19,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Destination' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
-"region":  {
-"startLine":  139,
-"startColumn":  20,
-"endLine":  139,
-"endColumn":  31
-}
-},
-{
-"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
-"region":  {
-"startLine":  147,
-"startColumn":  21,
-"endLine":  147,
-"endColumn":  32
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Destination' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
-"region":  {
-"startLine":  54,
-"startColumn":  21,
-"endLine":  54,
-"endColumn":  32
-}
-},
-{
-"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
-"region":  {
-"startLine":  62,
-"startColumn":  22,
-"endLine":  62,
-"endColumn":  33
-}
-}
-]
-},
-{
-"id":  "S4136",
-"message":  "All 'Destination' signatures should be adjacent",
-"location":  [
-{
-"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
-"region":  {
-"startLine":  96,
-"startColumn":  20,
-"endLine":  96,
-"endColumn":  31
-}
-},
-{
-"uri":  "sources\Automapper\src\UnitTests\ShouldUseConstructor.cs",
-"region":  {
-"startLine":  104,
-"startColumn":  22,
-"endLine":  104,
-"endColumn":  33
 }
 }
 ]
