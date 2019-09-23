@@ -340,6 +340,9 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
+        public static bool NameIs(this MemberAccessExpressionSyntax memberAccess, string name) =>
+            memberAccess.Name.Identifier.ValueText == name;
+
         public static bool IsConstant(this ExpressionSyntax expression, SemanticModel semanticModel)
         {
             if (expression == null)

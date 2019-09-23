@@ -57,21 +57,21 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var node = c.Node;
                     var walker = new ConsumeValueTaskWalker(c.SemanticModel);
-                    walker.Visit(node);
-                    foreach (var keyValue in walker.SymbolUsages)
+                    walker.Visit(c.Node);
+
+                    foreach (var syntaxNodes in walker.SymbolUsages.Values)
                     {
-                        var syntaxNodes = keyValue.Value;
                         if (syntaxNodes.Count() > 1)
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(messageOnlyOnce, syntaxNodes.First().GetLocation(),
-                                additionalLocations: syntaxNodes.Skip(1).Select(sn => sn.GetLocation()).ToArray()));
+                                additionalLocations: syntaxNodes.Skip(1).Select(node => node.GetLocation()).ToArray()));
                         }
                     }
-                    foreach (var identifierNode in walker.ConsumedButNotCompleted)
+
+                    foreach (var node in walker.ConsumedButNotCompleted)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(messageOnlyIfCompletedSuccessfully, identifierNode.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(messageOnlyIfCompletedSuccessfully, node.GetLocation()));
                     }
                 },
                 // should also check in properties?
@@ -95,20 +95,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 ConsumedButNotCompleted = new List<SyntaxNode>();
             }
 
+            /**
+             * Check if 'await' is done on a 'ValueTask'
+             */
             public override void VisitAwaitExpression(AwaitExpressionSyntax node)
             {
                 if (node.Expression is IdentifierNameSyntax identifierName &&
-                    semanticModel.GetSymbolInfo(identifierName).Symbol is ISymbol symbol &&
+                    this.semanticModel.GetSymbolInfo(identifierName).Symbol is ISymbol symbol &&
                     symbol.GetSymbolType().OriginalDefinition.IsAny(ValueTaskTypes))
                 {
-                    if (SymbolUsages.TryGetValue(symbol, out var syntaxNodes))
-                    {
-                        syntaxNodes.Add(identifierName);
-                    }
-                    else
-                    {
-                        SymbolUsages.Add(symbol, new List<SyntaxNode>() { identifierName });
-                    }
+                    AddToSymbolUsages(symbol, identifierName);
                 }
 
                 base.VisitAwaitExpression(node);
@@ -123,111 +119,83 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (node.Expression is MemberAccessExpressionSyntax memberAccess)
                 {
-                    if (memberAccess.Name.Identifier.ValueText == "AsTask" &&
+                    if (memberAccess.NameIs("AsTask") &&
                         memberAccess.Expression is IdentifierNameSyntax identifierName &&
-                        semanticModel.GetSymbolInfo(identifierName).Symbol is ISymbol symbol &&
+                        this.semanticModel.GetSymbolInfo(identifierName).Symbol is ISymbol symbol &&
                         symbol.GetSymbolType().OriginalDefinition.IsAny(ValueTaskTypes))
                     {
-                        if (SymbolUsages.TryGetValue(symbol, out var syntaxNodes))
-                        {
-                            syntaxNodes.Add(identifierName);
-                        }
-                        else
-                        {
-                            SymbolUsages.Add(symbol, new List<SyntaxNode>() { identifierName });
-                        }
+                        AddToSymbolUsages(symbol, identifierName);
                     }
 
-                    if (memberAccess.Name.Identifier.ValueText == "GetResult" &&
+                    if (memberAccess.NameIs("GetResult") &&
                         memberAccess.Expression is InvocationExpressionSyntax invocation &&
                         invocation.Expression is MemberAccessExpressionSyntax innerMemberAccess &&
                         innerMemberAccess.Expression is IdentifierNameSyntax leftMostIdentifier &&
-                        semanticModel.GetSymbolInfo(leftMostIdentifier).Symbol is ISymbol leftMostSymbol &&
-                        leftMostSymbol.GetSymbolType().OriginalDefinition.IsAny(ValueTaskTypes))
+                        this.semanticModel.GetSymbolInfo(leftMostIdentifier).Symbol is ISymbol leftMostSymbol &&
+                        leftMostSymbol.GetSymbolType().OriginalDefinition.IsAny(ValueTaskTypes) &&
+                        !IsCompletedSuccessfullyHasBeenCheckedInParent(leftMostSymbol, leftMostIdentifier))
                     {
-                        var ancestor = memberAccess.Parent;
-                        bool hasCheck = false;
-                        while (ancestor != null)
-                        {
-                            if (ancestor is IfStatementSyntax statementSyntax)
-                            {
-                                hasCheck = statementSyntax.Condition.DescendantNodesAndSelf().Any(n =>
-                                     n is MemberAccessExpressionSyntax maes &&
-                                     maes.Name.Identifier.ValueText == "IsCompletedSuccessfully" &&
-                                     maes.Expression is IdentifierNameSyntax maesId &&
-                                     semanticModel.GetSymbolInfo(maesId).Symbol == leftMostSymbol);
-                                break;
-                            }
-                            ancestor = ancestor.Parent;
-                        }
-
-                        // add to dictionary only if it has not been checked for completion
-                        if (!hasCheck)
-                        {
-                            if (SymbolUsages.TryGetValue(leftMostSymbol, out var syntaxNodes))
-                            {
-                                syntaxNodes.Add(leftMostIdentifier);
-                            }
-                            else
-                            {
-                                SymbolUsages.Add(leftMostSymbol, new List<SyntaxNode>() { leftMostIdentifier });
-                            }
-
-                            ConsumedButNotCompleted.Add(leftMostIdentifier);
-                        }
+                        AddToSymbolUsages(leftMostSymbol, leftMostIdentifier);
+                        ConsumedButNotCompleted.Add(leftMostIdentifier);
                     }
                 }
-
 
                 base.VisitInvocationExpression(node);
             }
 
+            /**
+             * Check if ".Result" is accessed on a 'ValueTask'
+             * - ignore the call if it's called inside an 'if (valueTask.IsCompletedSuccessfully)'
+             */
             public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
             {
-                // check if it's the wanted method on a ValueTask
-                // do stuff
-                // - Result -> also check if inside an if (readTask.IsCompletedSuccessfully) and ignore if so
-                if (node.Name.Identifier.ValueText == "Result" &&
+                if (node.NameIs("Result") &&
                     node.Expression is IdentifierNameSyntax identifierName &&
-                    semanticModel.GetSymbolInfo(identifierName).Symbol is ISymbol symbol &&
-                    symbol.GetSymbolType().OriginalDefinition.IsAny(ValueTaskTypes))
+                    this.semanticModel.GetSymbolInfo(identifierName).Symbol is ISymbol symbol &&
+                    symbol.GetSymbolType().OriginalDefinition.IsAny(ValueTaskTypes) &&
+                    !IsCompletedSuccessfullyHasBeenCheckedInParent(symbol, identifierName))
                 {
-                    var ancestor = node.Parent;
-                    bool hasCheck = false;
-                    while (ancestor != null)
-                    {
-                        if (ancestor is IfStatementSyntax statementSyntax)
-                        {
-                            hasCheck = statementSyntax.Condition.DescendantNodesAndSelf().Any(n =>
-                                 n is MemberAccessExpressionSyntax maes &&
-                                 maes.Name.Identifier.ValueText == "IsCompletedSuccessfully" &&
-                                 maes.Expression is IdentifierNameSyntax maesId &&
-                                 semanticModel.GetSymbolInfo(maesId).Symbol == symbol);
-                            break;
-                        }
-                        ancestor = ancestor.Parent;
-                    }
-
-                    // add to dictionary only if it has not been checked for completion
-                    if (!hasCheck)
-                    {
-                        if (SymbolUsages.TryGetValue(symbol, out var syntaxNodes))
-                        {
-                            syntaxNodes.Add(identifierName);
-                        }
-                        else
-                        {
-                            SymbolUsages.Add(symbol, new List<SyntaxNode>() { identifierName });
-                        }
-
-                        ConsumedButNotCompleted.Add(identifierName);
-                    }
+                    AddToSymbolUsages(symbol, identifierName);
+                    ConsumedButNotCompleted.Add(identifierName);
                 }
 
                 base.VisitMemberAccessExpression(node);
             }
 
+            private bool IsCompletedSuccessfullyHasBeenCheckedInParent(ISymbol symbol, SyntaxNode node)
+            {
+                var ancestor = node.Parent;
+                var hasCheck = false;
+                while (ancestor != null)
+                {
+                    if (ancestor is IfStatementSyntax statementSyntax)
+                    {
+                        hasCheck = statementSyntax.Condition.DescendantNodesAndSelf().Any(n =>
+                             n is MemberAccessExpressionSyntax maes &&
+                             maes.Name.Identifier.ValueText == "IsCompletedSuccessfully" &&
+                             maes.Expression is IdentifierNameSyntax maesId &&
+                             this.semanticModel.GetSymbolInfo(maesId).Symbol == symbol);
+                        break;
+                    }
+                    ancestor = ancestor.Parent;
+                }
+
+                return hasCheck;
+            }
+
+            private void AddToSymbolUsages(ISymbol symbol, SyntaxNode syntaxNode)
+            {
+                if (SymbolUsages.TryGetValue(symbol, out var syntaxNodes))
+                {
+                    syntaxNodes.Add(syntaxNode);
+                }
+                else
+                {
+                    SymbolUsages.Add(symbol, new List<SyntaxNode>() { syntaxNode });
+                }
+            }
+
         }
-}
+    }
 }
 
