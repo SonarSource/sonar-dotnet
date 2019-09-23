@@ -65,12 +65,13 @@ namespace Tests.Diagnostics
             ValueTask<int> valueTask = stream.ReadAsync();
             if (valueTask.IsCompletedSuccessfully)
             {
-                bytesRead = valueTask.Result; // Noncompliant
+                // because they're called after completed successfully, we don't count them
+                bytesRead = valueTask.Result;
             }
 
             if (bytesRead > 9)
             {
-                bytesRead = valueTask.Result; // Secondary
+                bytesRead = valueTask.Result; // Noncompliant
             }
         }
 
@@ -78,10 +79,9 @@ namespace Tests.Diagnostics
         {
             if (valueTask.IsCompletedSuccessfully)
             {
-                var bytesRead = valueTask.Result;
-//                              ^^^^^^^^^ Noncompliant
-                var once = valueTask.GetAwaiter().GetResult();
-//                         ^^^^^^^^^ Secondary
+                // because they're called after completed successfully, we don't count them
+                var bytesRead = valueTask.Result; // FN
+                var once = valueTask.GetAwaiter().GetResult(); // FN
             }
         }
 
@@ -91,8 +91,9 @@ namespace Tests.Diagnostics
             ValueTask<int> valueTask = stream.ReadAsync();
             if (valueTask.IsCompletedSuccessfully)
             {
-                var once = valueTask.GetAwaiter().GetResult(); // Noncompliant
-                bytesRead = valueTask.Result; // Noncompliant
+                // because they're called after completed successfully, we don't count them
+                var once = valueTask.GetAwaiter().GetResult(); // FN
+                bytesRead = valueTask.Result; // FN
             }
         }
 
@@ -102,8 +103,9 @@ namespace Tests.Diagnostics
             ValueTask<int> valueTask = stream.ReadAsync();
             if (valueTask.IsCompletedSuccessfully)
             {
-                var once = valueTask.GetAwaiter().GetResult(); // Noncompliant
-                var twice = valueTask.GetAwaiter().GetResult(); // Secondary
+                // because they're called after completed successfully, we don't count them
+                var once = valueTask.GetAwaiter().GetResult(); // FN
+                var twice = valueTask.GetAwaiter().GetResult(); // FN
             }
         }
 

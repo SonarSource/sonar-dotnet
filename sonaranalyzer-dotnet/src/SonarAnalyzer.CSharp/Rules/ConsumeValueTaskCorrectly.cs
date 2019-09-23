@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly KnownType[] ValueTaskTypes =
             new[] { KnownType.System_Threading_Tasks_ValueTask, KnownType.System_Threading_Tasks_ValueTask_TResult };
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(messageOnlyIfCompletedSuccessfully);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(messageOnlyOnce, messageOnlyIfCompletedSuccessfully);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -69,6 +69,10 @@ namespace SonarAnalyzer.Rules.CSharp
                                 additionalLocations: syntaxNodes.Skip(1).Select(sn => sn.GetLocation()).ToArray()));
                         }
                     }
+                    foreach (var identifierNode in walker.ConsumedButNotCompleted)
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(messageOnlyIfCompletedSuccessfully, identifierNode.GetLocation()));
+                    }
                 },
                 // should also check in properties?
                 SyntaxKind.MethodDeclaration);
@@ -78,12 +82,17 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private readonly SemanticModel semanticModel;
 
+            // The key is the 'ValueTask' variable symbol, the value is a list of nodes where it is consumed
             public Dictionary<ISymbol, IList<SyntaxNode>> SymbolUsages { get; }
+
+            // A list of 'ValueTask' nodes on which '.Result' or '.GetAwaiter().GetResult()' has been invoked when the operation has not yet completed
+            public List<SyntaxNode> ConsumedButNotCompleted { get; }
 
             public ConsumeValueTaskWalker(SemanticModel semanticModel)
             {
                 this.semanticModel = semanticModel;
-                this.SymbolUsages = new Dictionary<ISymbol, IList<SyntaxNode>>();
+                SymbolUsages = new Dictionary<ISymbol, IList<SyntaxNode>>();
+                ConsumedButNotCompleted = new List<SyntaxNode>();
             }
 
             public override void VisitAwaitExpression(AwaitExpressionSyntax node)
@@ -152,6 +161,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             ancestor = ancestor.Parent;
                         }
 
+                        // add to dictionary only if it has not been checked for completion
                         if (!hasCheck)
                         {
                             if (SymbolUsages.TryGetValue(leftMostSymbol, out var syntaxNodes))
@@ -162,6 +172,8 @@ namespace SonarAnalyzer.Rules.CSharp
                             {
                                 SymbolUsages.Add(leftMostSymbol, new List<SyntaxNode>() { leftMostIdentifier });
                             }
+
+                            ConsumedButNotCompleted.Add(leftMostIdentifier);
                         }
                     }
                 }
@@ -175,6 +187,42 @@ namespace SonarAnalyzer.Rules.CSharp
                 // check if it's the wanted method on a ValueTask
                 // do stuff
                 // - Result -> also check if inside an if (readTask.IsCompletedSuccessfully) and ignore if so
+                if (node.Name.Identifier.ValueText == "Result" &&
+                    node.Expression is IdentifierNameSyntax identifierName &&
+                    semanticModel.GetSymbolInfo(identifierName).Symbol is ISymbol symbol &&
+                    symbol.GetSymbolType().OriginalDefinition.IsAny(ValueTaskTypes))
+                {
+                    var ancestor = node.Parent;
+                    bool hasCheck = false;
+                    while (ancestor != null)
+                    {
+                        if (ancestor is IfStatementSyntax statementSyntax)
+                        {
+                            hasCheck = statementSyntax.Condition.DescendantNodesAndSelf().Any(n =>
+                                 n is MemberAccessExpressionSyntax maes &&
+                                 maes.Name.Identifier.ValueText == "IsCompletedSuccessfully" &&
+                                 maes.Expression is IdentifierNameSyntax maesId &&
+                                 semanticModel.GetSymbolInfo(maesId).Symbol == symbol);
+                            break;
+                        }
+                        ancestor = ancestor.Parent;
+                    }
+
+                    // add to dictionary only if it has not been checked for completion
+                    if (!hasCheck)
+                    {
+                        if (SymbolUsages.TryGetValue(symbol, out var syntaxNodes))
+                        {
+                            syntaxNodes.Add(identifierName);
+                        }
+                        else
+                        {
+                            SymbolUsages.Add(symbol, new List<SyntaxNode>() { identifierName });
+                        }
+
+                        ConsumedButNotCompleted.Add(identifierName);
+                    }
+                }
 
                 base.VisitMemberAccessExpression(node);
             }
