@@ -133,15 +133,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         private static IEnumerable<MetadataReference> AspNetCoreLoggingReferences =>
             FrameworkMetadataReference.Netstandard
-            .Concat(NuGetMetadataReference.MicrosoftAspNetCore(Constants.NuGetLatestVersion))
-            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHosting(Constants.NuGetLatestVersion))
-            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.NuGetLatestVersion))
-            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.NuGetLatestVersion))
-            .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.NuGetLatestVersion))
-            .Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(Constants.NuGetLatestVersion))
-            .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(Constants.NuGetLatestVersion))
-            .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.NuGetLatestVersion))
-        ;
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCore(Constants.DotNetCore220Version))
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHosting(Constants.DotNetCore220Version))
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.DotNetCore220Version))
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.DotNetCore220Version))
+            .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.DotNetCore220Version))
+            .Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(Constants.DotNetCore220Version))
+            .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(Constants.DotNetCore220Version))
+            .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.DotNetCore220Version));
 
         private static IEnumerable<MetadataReference> Log4NetReferences =>
             NuGetMetadataReference.Log4Net(Constants.NuGetLatestVersion, "net45-full")

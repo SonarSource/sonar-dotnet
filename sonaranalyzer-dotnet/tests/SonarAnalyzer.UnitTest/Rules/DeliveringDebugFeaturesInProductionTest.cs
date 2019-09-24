@@ -72,9 +72,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         private static IEnumerable<MetadataReference> AdditionalReferences =>
             Enumerable.Empty<MetadataReference>()
                 .Concat(FrameworkMetadataReference.Netstandard)
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnostics(Constants.NuGetLatestVersion))
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(Constants.NuGetLatestVersion))
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.NuGetLatestVersion))
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.NuGetLatestVersion));
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnostics(Constants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(Constants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.DotNetCore220Version));
     }
 }
