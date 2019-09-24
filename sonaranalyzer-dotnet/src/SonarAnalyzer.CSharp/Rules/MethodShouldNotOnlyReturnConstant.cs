@@ -101,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var noParenthesesExpression = expression.RemoveParentheses();
             return noParenthesesExpression is LiteralExpressionSyntax &&
-                !noParenthesesExpression.IsKind(SyntaxKind.NullLiteralExpression) &&
+                !noParenthesesExpression.IsNullLiteral() &&
                 semanticModel.GetConstantValue(noParenthesesExpression).HasValue;
         }
     }

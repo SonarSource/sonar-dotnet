@@ -658,7 +658,7 @@ namespace SonarAnalyzer.SymbolicExecution
             var programState = CleanStateAfterBlock(node.ProgramState, node.ProgramPoint.Block);
             var ps = programState.PopValue(out var sv);
 
-            if (simpleCaseLabel.Value.IsKind(SyntaxKind.NullLiteralExpression))
+            if (simpleCaseLabel.Value.IsNullLiteral())
             {
                 foreach (var newProgramState in sv.TrySetConstraint(ObjectConstraint.Null, ps))
                 {
