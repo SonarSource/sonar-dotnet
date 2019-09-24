@@ -179,6 +179,9 @@ namespace SonarAnalyzer.Helpers
                    nameSymbolInfo.Symbol.Name == nameof(string.Empty);
         }
 
+        public static bool IsNullLiteral(this SyntaxNode syntaxNode) =>
+            syntaxNode != null && syntaxNode.IsKind(SyntaxKind.NullLiteralExpression);
+
         public static bool IsAnyKind(this SyntaxNode syntaxNode, params SyntaxKind[] syntaxKinds) =>
             syntaxNode != null && syntaxKinds.Contains((SyntaxKind)syntaxNode.RawKind);
 

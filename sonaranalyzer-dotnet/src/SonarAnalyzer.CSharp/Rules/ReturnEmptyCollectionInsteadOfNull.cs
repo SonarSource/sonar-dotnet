@@ -150,7 +150,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static LiteralExpressionSyntax GetNullLiteralOrDefault(ArrowExpressionClauseSyntax expressionBody)
         {
-            return expressionBody.Expression.IsKind(SyntaxKind.NullLiteralExpression)
+            return expressionBody.Expression.IsNullLiteral()
                 ? (LiteralExpressionSyntax)expressionBody.Expression
                 : null;
         }
@@ -160,7 +160,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return methodBlock.DescendantNodes(n => !n.IsKind(SyntaxKindEx.LocalFunctionStatement))
                 .OfType<ReturnStatementSyntax>()
                 .Where(returnStatement =>
-                    returnStatement.Expression.IsKind(SyntaxKind.NullLiteralExpression) &&
+                    returnStatement.Expression.IsNullLiteral() &&
                     returnStatement.FirstAncestorOrSelf<ParenthesizedLambdaExpressionSyntax>() == null);
         }
     }

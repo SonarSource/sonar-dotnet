@@ -61,10 +61,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 var leftNode = GetLeftNode(binaryExpression);
                 var rightNode = GetRightNode(binaryExpression);
 
-                if (leftNode.IsKind(SyntaxKind.NullLiteralExpression)) {
+                if (leftNode.IsNullLiteral()) {
                     return rightNode;
                 }
-                if (rightNode.IsKind(SyntaxKind.NullLiteralExpression))
+                if (rightNode.IsNullLiteral())
                 {
                     return leftNode;
                 }

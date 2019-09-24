@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var callbackArg = GetCallbackArg(invocation);
                         if (callbackArg != null &&
-                            (IsNullLiteral(callbackArg) || !IsCallbackMayContainEndInvoke(callbackArg, semantic)) &&
+                            (callbackArg.IsNullLiteral() || !IsCallbackMayContainEndInvoke(callbackArg, semantic)) &&
                             !IsParentMethodContainsEndInvoke(invocation, semantic))
                         {
                             var location = ((SyntaxToken)invocation.GetMethodCallIdentifier()).GetLocation();
@@ -139,8 +139,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return node;
         }
-
-        private static bool IsNullLiteral(ExpressionSyntax callbackArg) => callbackArg.IsKind(SyntaxKind.NullLiteralExpression);
 
         private ExpressionSyntax GetArgumentExpressionByNameOrPosition(InvocationExpressionSyntax invocationExpression,
             string argumentName, int argumentPosition)

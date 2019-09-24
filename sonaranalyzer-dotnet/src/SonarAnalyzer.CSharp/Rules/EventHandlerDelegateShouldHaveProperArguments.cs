@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var isSecondParameterNull = invocation.ArgumentList.Arguments[1].Expression
                         .RemoveParentheses()
-                        .IsKind(SyntaxKind.NullLiteralExpression);
+                        .IsNullLiteral();
                     if (isSecondParameterNull)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation(), NullEventArgsMessage));
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var isFirstParameterNull = invocation.ArgumentList.Arguments[0].Expression
                         .RemoveParentheses()
-                        .IsKind(SyntaxKind.NullLiteralExpression);
+                        .IsNullLiteral();
                     if (isFirstParameterNull && !eventSymbol.IsStatic)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation(), NullSenderMessage));

@@ -178,8 +178,7 @@ namespace SonarAnalyzer.Rules
 
         private bool IsImmutableOrValidMutableType(ITypeSymbol typeSymbol, ExpressionSyntax value = null)
         {
-            if (value != null &&
-                value.IsKind(SyntaxKind.NullLiteralExpression))
+            if (value.IsNullLiteral())
             {
                 return true;
             }

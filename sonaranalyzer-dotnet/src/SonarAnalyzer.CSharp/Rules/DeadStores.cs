@@ -290,7 +290,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private bool IsAllowedObjectInitialization(ExpressionSyntax expression)
             {
-                return expression.IsKind(SyntaxKind.NullLiteralExpression);
+                return expression.IsNullLiteral();
             }
 
             private bool IsAllowedBooleanInitialization(ExpressionSyntax expression)
