@@ -29,16 +29,30 @@ namespace Tests.Diagnostics
             caller.EndInvoke(result);
         }
 
-        private static void BeginInvokeOnDelegateWithCallback()
+        private static void BeginInvokeOnDelegateWithLambdaCallback1()
         {
             var caller = new AsyncMethodCaller(AsyncMethod);
             caller.BeginInvoke("delegate", result => { }, null); // Noncompliant
         }
 
-        private static void BeginInvokeAndEndInvokeOnDelegateWithLambdaCallback()
+        private static void BeginInvokeOnDelegateWithLambdaCallback2()
+        {
+            var caller = new AsyncMethodCaller(AsyncMethod);
+            var callback = new AsyncCallback(result => { });
+            caller.BeginInvoke("delegate",  callback, null); // Noncompliant
+        }
+
+        private static void BeginInvokeAndEndInvokeOnDelegateWithLambdaCallback1()
         {
             var caller = new AsyncMethodCaller(AsyncMethod);
             caller.BeginInvoke("delegate", result => caller.EndInvoke(result), null); // Compliant
+        }
+
+        private static void BeginInvokeAndEndInvokeOnDelegateWithLambdaCallback2()
+        {
+            var caller = new AsyncMethodCaller(AsyncMethod);
+            var callback = new AsyncCallback(result => caller.EndInvoke(result));
+            caller.BeginInvoke("delegate",  callback, null); // Compliant, EndInvoke is called by wrapper.CallEndInvoke
         }
 
         private static void BeginInvokeOnDelegateWithDelegateCallback()
@@ -80,6 +94,15 @@ namespace Tests.Diagnostics
             var wrapper = new CallerWrapper(caller);
             var callback = new AsyncCallback(StaticDoNothing);
             caller.BeginInvoke("delegate",  callback, null); // Noncompliant
+        }
+
+        private static void BeginInvokeOnDelegateWithCallbackAssignment()
+        {
+            var caller = new AsyncMethodCaller(AsyncMethod);
+            var wrapper = new CallerWrapper(caller);
+            AsyncCallback callback;
+            callback = new AsyncCallback(StaticDoNothing);
+            caller.BeginInvoke("delegate",  callback, null); // false-negative, we only look at the variable initialization and not at all its assignments
         }
 
         private static void BeginInvokeAndEndInvokeOnDelegateWithWrapperCallback1()

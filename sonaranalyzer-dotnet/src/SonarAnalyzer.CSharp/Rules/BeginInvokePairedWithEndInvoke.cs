@@ -70,8 +70,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var callbackArg = GetCallbackArg(invocation);
                         if (callbackArg != null &&
-                            (callbackArg.IsNullLiteral() || !IsCallbackMayContainEndInvoke(callbackArg, semantic)) &&
-                            !IsParentMethodContainsEndInvoke(invocation, semantic))
+                            (callbackArg.IsNullLiteral() || !CallbackMayContainEndInvoke(callbackArg, semantic)) &&
+                            !ParentMethodContainsEndInvoke(invocation, semantic))
                         {
                             var location = ((SyntaxToken)invocation.GetMethodCallIdentifier()).GetLocation();
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.InvocationExpression);
         }
 
-        private static bool IsParentMethodContainsEndInvoke(SyntaxNode node, SemanticModel semantic)
+        private static bool ParentMethodContainsEndInvoke(SyntaxNode node, SemanticModel semantic)
         {
             var parentContext = node.AncestorsAndSelf()
                 .FirstOrDefault(ancestor => ParentDeclarationKinds.Contains(ancestor.Kind()));
@@ -96,48 +96,52 @@ namespace SonarAnalyzer.Rules.CSharp
             return callbackArg;
         }
 
-        private static bool IsCallbackMayContainEndInvoke(SyntaxNode callbackArg, SemanticModel semantic)
+        /// <returns>
+        /// false if callback code has been resolved and does not contain "EndInvoke",
+        /// true if callback code contains "EndInvoke" or callback code has not been resolved.
+        /// </returns>
+        private static bool CallbackMayContainEndInvoke(SyntaxNode callbackArg, SemanticModel semantic)
         {
-            var calledMethod = callbackArg.RemoveParentheses();
-            calledMethod = ReplaceIdentifierByItsInitializer(calledMethod, semantic);
-            calledMethod = ReplaceNewDelegateByMethodDeclaration(calledMethod, semantic);
-            if (calledMethod != null && ParentDeclarationKinds.Contains(calledMethod.Kind()))
+            var callback = callbackArg.RemoveParentheses();
+            if (callback.IsKind(SyntaxKind.IdentifierName))
             {
-                return GetEndInvokeList(calledMethod, semantic).Count > 0;
+                callback = LookupIdentifierInitializer((IdentifierNameSyntax)callback, semantic);
+            }
+
+            if (callback.IsKind(SyntaxKind.ObjectCreationExpression))
+            {
+                callback = LookupFirstArgument((ObjectCreationExpressionSyntax)callback);
+                if (callback != null && semantic.GetSymbolInfo(callback).Symbol is IMethodSymbol methodSymbol)
+                {
+                    callback = LookupMethodDeclaration(methodSymbol);
+                }
+            }
+
+            if (callback != null && ParentDeclarationKinds.Contains(callback.Kind()))
+            {
+                return GetEndInvokeList(callback, semantic).Count > 0;
             }
 
             return true;
         }
 
-        private static SyntaxNode ReplaceNewDelegateByMethodDeclaration(SyntaxNode node, SemanticModel semantic)
+        private static SyntaxNode LookupFirstArgument(ObjectCreationExpressionSyntax objectCreation) =>
+            objectCreation.ArgumentList.Arguments.Count == 1 ? objectCreation.ArgumentList.Arguments[0].Expression : null;
+
+        private static SyntaxNode LookupMethodDeclaration(IMethodSymbol methodSymbol) =>
+            methodSymbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
+
+        private static SyntaxNode LookupIdentifierInitializer(IdentifierNameSyntax identifier, SemanticModel semantic)
         {
-            if (node != null && node.IsKind(SyntaxKind.ObjectCreationExpression))
+            var declaringReference = semantic.GetSymbolInfo(identifier)
+                .Symbol?.DeclaringSyntaxReferences.FirstOrDefault() ?.GetSyntax();
+            if (declaringReference is VariableDeclaratorSyntax variableDeclarator
+                && variableDeclarator.Initializer is EqualsValueClauseSyntax equalsValueClause)
             {
-                var arguments = ((ObjectCreationExpressionSyntax)node).ArgumentList.Arguments;
-                if (arguments.Count == 1 &&
-                    semantic.GetSymbolInfo(arguments[0].Expression).Symbol is IMethodSymbol symbol)
-                {
-                    return symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
-                }
+                return equalsValueClause.Value.RemoveParentheses();
             }
 
-            return node;
-        }
-
-        private static SyntaxNode ReplaceIdentifierByItsInitializer(SyntaxNode node, SemanticModel semantic)
-        {
-            if (node != null && node.IsKind(SyntaxKind.IdentifierName))
-            {
-                var declaringReference =
-                    semantic.GetSymbolInfo(node).Symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
-                if (declaringReference is VariableDeclaratorSyntax variableDeclarator
-                    && variableDeclarator.Initializer is EqualsValueClauseSyntax equalsValueClause)
-                {
-                    return equalsValueClause.Value.RemoveParentheses();
-                }
-            }
-
-            return node;
+            return null;
         }
 
         private ExpressionSyntax GetArgumentExpressionByNameOrPosition(InvocationExpressionSyntax invocationExpression,
