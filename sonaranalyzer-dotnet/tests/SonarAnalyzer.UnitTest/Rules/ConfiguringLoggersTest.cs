@@ -133,15 +133,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         private static IEnumerable<MetadataReference> AspNetCoreLoggingReferences =>
             FrameworkMetadataReference.Netstandard
-            .Concat(NuGetMetadataReference.MicrosoftAspNetCore(Constants.NuGetLatestVersion))
-            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHosting(Constants.NuGetLatestVersion))
-            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.NuGetLatestVersion))
-            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.NuGetLatestVersion))
-            .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.NuGetLatestVersion))
-            .Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(Constants.NuGetLatestVersion))
-            .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(Constants.NuGetLatestVersion))
-            .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.NuGetLatestVersion))
-        ;
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCore("2.2.0"))
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHosting("2.2.0"))
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions("2.2.0"))
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions("2.2.0"))
+            .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions("2.2.0"))
+            .Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions("2.2.0"))
+            .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions("2.2.0"))
+            .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages("2.2.0"));
 
         private static IEnumerable<MetadataReference> Log4NetReferences =>
             NuGetMetadataReference.Log4Net(Constants.NuGetLatestVersion, "net45-full")
