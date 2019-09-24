@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.Remoting.Messaging;
+using System.Threading;
 
 namespace Tests.Diagnostics
 {
@@ -190,6 +191,18 @@ namespace Tests.Diagnostics
             {
                 caller.BeginInvoke("Foo", null, null); // Noncompliant
             }
+
+            public struct FooStruct
+            {
+                public string field;
+
+                public FooStruct(string field)
+                {
+                    this.field = field;
+                    caller.BeginInvoke("FooStruct", null, null); // Noncompliant
+                }
+            }
+
         }
 
     }
