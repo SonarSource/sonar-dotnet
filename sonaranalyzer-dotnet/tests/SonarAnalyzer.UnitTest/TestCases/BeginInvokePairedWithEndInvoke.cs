@@ -45,7 +45,7 @@ namespace Tests.Diagnostics
         private static void BeginInvokeAndEndInvokeOnDelegateWithLambdaCallback1()
         {
             var caller = new AsyncMethodCaller(AsyncMethod);
-            caller.BeginInvoke("delegate", result => caller.EndInvoke(result), null); // Compliant
+            caller.BeginInvoke(name: "delegate", @object: null, callback: result => caller.EndInvoke(result)); // Compliant
         }
 
         private static void BeginInvokeAndEndInvokeOnDelegateWithLambdaCallback2()

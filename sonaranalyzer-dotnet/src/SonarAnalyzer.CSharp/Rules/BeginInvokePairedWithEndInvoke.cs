@@ -205,9 +205,6 @@ namespace SonarAnalyzer.Rules.CSharp
             public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node) =>
                 OnlyOnParent(node, () => base.VisitConstructorDeclaration(node));
 
-            public override void VisitDelegateDeclaration(DelegateDeclarationSyntax node) =>
-                OnlyOnParent(node, () => base.VisitDelegateDeclaration(node));
-
             public override void VisitDestructorDeclaration(DestructorDeclarationSyntax node) =>
                 OnlyOnParent(node, () => base.VisitDestructorDeclaration(node));
 
