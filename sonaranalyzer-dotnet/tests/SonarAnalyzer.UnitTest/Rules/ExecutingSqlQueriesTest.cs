@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_NetCore.cs",
                 new CSharp.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetReferencesNetCore(Constants.NuGetLatestVersion));
+                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
         }
 
         [TestMethod]
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyNoIssueReported(@"TestCases\ExecutingSqlQueries_NetCore.cs",
                 new CSharp.ExecutingSqlQueries(),
-                additionalReferences: GetReferencesNetCore(Constants.NuGetLatestVersion));
+                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
         }
 
         [TestMethod]
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_NetCore.vb",
                 new VisualBasic.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 options: ParseOptionsHelper.FromVisualBasic15,
-                additionalReferences: GetReferencesNetCore(Constants.NuGetLatestVersion));
+                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
         }
 
         [TestMethod]
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyNoIssueReported(@"TestCases\ExecutingSqlQueries_NetCore.vb",
                 new VisualBasic.ExecutingSqlQueries(),
-                additionalReferences: GetReferencesNetCore(Constants.NuGetLatestVersion));
+                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
         }
 
         private static IEnumerable<MetadataReference> GetReferencesNet46(string sqlServerCeVersion) =>
