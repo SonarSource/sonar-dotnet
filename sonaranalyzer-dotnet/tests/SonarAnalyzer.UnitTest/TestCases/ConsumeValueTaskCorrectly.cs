@@ -17,8 +17,8 @@ namespace Tests.Diagnostics
         public async void Foo1(ValueTaskProvider stream)
         {
             var valueTask = stream.ReadAsync();
-            var once = await valueTask;
-//                           ^^^^^^^^^ Noncompliant
+            var once = await valueTask; // Noncompliant { "Refactor this 'ValueTask' usage to consume it only once." }
+//                           ^^^^^^^^^
             var twice = await valueTask;
 //                            ^^^^^^^^^ Secondary
         }
@@ -33,8 +33,8 @@ namespace Tests.Diagnostics
         public async void Foo3(ValueTaskProvider stream)
         {
             var valueTask = stream.ReadAsync();
-            var once = await valueTask;
-//                           ^^^^^^^^^ Noncompliant
+            var once = await valueTask; // Noncompliant { "Refactor this 'ValueTask' usage to consume it only once." }
+//                           ^^^^^^^^^
             var twice = valueTask.AsTask();
 //                      ^^^^^^^^^ Secondary
         }
@@ -50,7 +50,8 @@ namespace Tests.Diagnostics
         public void Foo5(ValueTaskProvider stream)
         {
             var valueTask = stream.ReadAsync();
-            var once = valueTask.Result; // Noncompliant
+            var once = valueTask.Result; // Noncompliant {"Refactor this 'ValueTask' usage to consume the result only if the operation has completed successfully."}
+//                     ^^^^^^^^^
         }
 
         public void Foo6(ValueTaskProvider stream)
@@ -182,11 +183,11 @@ namespace Tests.Diagnostics
         {
             int bytesRead;
             ValueTask<int> valueTask = stream.ReadAsync();
-            GetResult(valueTask); // FN
+            GetResult(valueTask); // FN - we don't inspect inside the method body
             GetResult(valueTask); // FN
 
             var awaiter = stream.ReadAsync().GetAwaiter();
-            awaiter.GetResult(); // FN - should we do this as well? it should be easy by verifying a method on System.Runtime.CompilerServices.ValueTaskAwaiter<TResult> which is not inside the if
+            awaiter.GetResult(); // FN - we don't track the variable source
         }
 
         private async Task<int> GetResult(ValueTask<int> valueTask) => await valueTask;

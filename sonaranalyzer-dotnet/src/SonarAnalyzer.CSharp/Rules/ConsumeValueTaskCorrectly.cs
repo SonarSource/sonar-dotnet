@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Refactor this 'ValueTask' usage to consume it only once.";
 
         // This should be called only when 'readTask.IsCompletedSuccessfully' is not called before
-        private const string MessageFormatResult = " Refactor this 'ValueTask' usage to consume the result only if the operation has completed successfully.";
+        private const string MessageFormatResult = "Refactor this 'ValueTask' usage to consume the result only if the operation has completed successfully.";
 
         private static readonly DiagnosticDescriptor messageOnlyOnce =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
