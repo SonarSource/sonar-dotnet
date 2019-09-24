@@ -31,8 +31,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ConfiguringLoggersTest
     {
-        private const string DOT_NET_CORE_VERSION = "2.2.0";
-
         [TestMethod]
         [TestCategory("Rule")]
         [TestCategory("Hotspot")]
@@ -135,14 +133,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         private static IEnumerable<MetadataReference> AspNetCoreLoggingReferences =>
             FrameworkMetadataReference.Netstandard
-            .Concat(NuGetMetadataReference.MicrosoftAspNetCore(DOT_NET_CORE_VERSION))
-            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHosting(DOT_NET_CORE_VERSION))
-            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(DOT_NET_CORE_VERSION))
-            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(DOT_NET_CORE_VERSION))
-            .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(DOT_NET_CORE_VERSION))
-            .Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(DOT_NET_CORE_VERSION))
-            .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(DOT_NET_CORE_VERSION))
-            .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(DOT_NET_CORE_VERSION));
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCore(Constants.DotNetCore220Version))
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHosting(Constants.DotNetCore220Version))
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.DotNetCore220Version))
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.DotNetCore220Version))
+            .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.DotNetCore220Version))
+            .Concat(NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(Constants.DotNetCore220Version))
+            .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(Constants.DotNetCore220Version))
+            .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.DotNetCore220Version));
 
         private static IEnumerable<MetadataReference> Log4NetReferences =>
             NuGetMetadataReference.Log4Net(Constants.NuGetLatestVersion, "net45-full")

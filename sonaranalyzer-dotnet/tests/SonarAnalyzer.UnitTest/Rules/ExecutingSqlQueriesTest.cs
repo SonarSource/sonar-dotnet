@@ -34,15 +34,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ExecutingSqlQueriesTest
     {
-        private const string DOT_NET_CORE_VERSION = "2.2.0";
-
         [TestMethod]
         [TestCategory("Rule")]
         public void ExecutingSqlQueries_CS_NetCore()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_NetCore.cs",
                 new CSharp.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetReferencesNetCore(DOT_NET_CORE_VERSION));
+                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
         }
 
         [TestMethod]
@@ -60,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyNoIssueReported(@"TestCases\ExecutingSqlQueries_NetCore.cs",
                 new CSharp.ExecutingSqlQueries(),
-                additionalReferences: GetReferencesNetCore(DOT_NET_CORE_VERSION));
+                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
         }
 
         [TestMethod]
@@ -70,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_NetCore.vb",
                 new VisualBasic.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
                 options: ParseOptionsHelper.FromVisualBasic15,
-                additionalReferences: GetReferencesNetCore(DOT_NET_CORE_VERSION));
+                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
         }
 
         [TestMethod]
@@ -89,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyNoIssueReported(@"TestCases\ExecutingSqlQueries_NetCore.vb",
                 new VisualBasic.ExecutingSqlQueries(),
-                additionalReferences: GetReferencesNetCore(DOT_NET_CORE_VERSION));
+                additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
         }
 
         private static IEnumerable<MetadataReference> GetReferencesNet46(string sqlServerCeVersion) =>

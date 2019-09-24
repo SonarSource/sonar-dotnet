@@ -33,8 +33,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class DeliveringDebugFeaturesInProductionTest
     {
-        private const string DOT_NET_CORE_VERSION = "2.2.0";
-
         [TestMethod]
         [TestCategory("Rule")]
         public void DeliveringDebugFeaturesInProduction_CS()
@@ -74,9 +72,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         private static IEnumerable<MetadataReference> AdditionalReferences =>
             Enumerable.Empty<MetadataReference>()
                 .Concat(FrameworkMetadataReference.Netstandard)
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnostics(DOT_NET_CORE_VERSION))
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(DOT_NET_CORE_VERSION))
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(DOT_NET_CORE_VERSION))
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(DOT_NET_CORE_VERSION));
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnostics(Constants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(Constants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.DotNetCore220Version));
     }
 }
