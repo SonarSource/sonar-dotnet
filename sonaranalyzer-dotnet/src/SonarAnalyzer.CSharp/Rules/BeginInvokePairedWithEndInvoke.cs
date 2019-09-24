@@ -29,6 +29,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.CSharp;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -50,13 +51,16 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ClassDeclaration,
             SyntaxKind.CompilationUnit,
             SyntaxKind.ConstructorDeclaration,
-            SyntaxKind.DelegateDeclaration,
+            SyntaxKind.ConversionOperatorDeclaration,
             SyntaxKind.DestructorDeclaration,
             SyntaxKind.InterfaceDeclaration,
             SyntaxKind.MethodDeclaration,
+            SyntaxKind.OperatorDeclaration,
             SyntaxKind.ParenthesizedLambdaExpression,
+            SyntaxKind.PropertyDeclaration,
             SyntaxKind.SimpleLambdaExpression,
-            SyntaxKind.StructDeclaration
+            SyntaxKind.StructDeclaration,
+            SyntaxKindEx.LocalFunctionStatement,
         }.ToImmutableHashSet();
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -96,9 +100,16 @@ namespace SonarAnalyzer.Rules.CSharp
             return callbackArg;
         }
 
+        /// <summary>
+        /// This method is looking for the callback code which can be:
+        /// - in a identifier initializer (like a lambda)
+        /// - passed directly as a lambda argument
+        /// - passed as a new delegate instantiation (and the code can be inside the method declaration)
+        /// - a mix of the above
+        /// </summary>
         /// <returns>
-        /// false if callback code has been resolved and does not contain "EndInvoke",
-        /// true if callback code contains "EndInvoke" or callback code has not been resolved.
+        /// - false if callback code has been resolved and does not contain "EndInvoke",
+        /// - true if callback code contains "EndInvoke" or callback code has not been resolved.
         /// </returns>
         private static bool CallbackMayContainEndInvoke(SyntaxNode callbackArg, SemanticModel semantic)
         {

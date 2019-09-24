@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Runtime.Remoting.Messaging;
 using System.Threading;
 
@@ -200,9 +200,41 @@ namespace Tests.Diagnostics
                 caller.BeginInvoke(name, null, null); // Noncompliant
             };
 
+            public int prop
+            {
+                get
+                {
+                    caller.BeginInvoke("prop", null, null); // Noncompliant
+                    return 0;
+                }
+            }
+
+            public static implicit operator int(Foo f)
+            {
+                caller.BeginInvoke("prop", null, null); // Noncompliant
+                return 0;
+            }
+
+            public static Foo operator +(Foo b, Foo c)
+            {
+                caller.BeginInvoke("prop", null, null); // Noncompliant
+                return new Foo();
+            }
+
+            static Foo()
+            {
+                caller.BeginInvoke("Foo", null, null); // Noncompliant
+            }
+
             public Foo()
             {
                 caller.BeginInvoke("Foo", null, null); // Noncompliant
+            }
+
+            public void Compliant()
+            {
+                IAsyncResult result = caller.BeginInvoke("method", null, null); // Compliant
+                caller.EndInvoke(result);
             }
 
             public void Bar()
@@ -223,6 +255,17 @@ namespace Tests.Diagnostics
                 {
                     this.field = field;
                     caller.BeginInvoke("FooStruct", null, null); // Noncompliant
+                }
+            }
+
+            public void Container()
+            {
+                IAsyncResult result = BeginInvokeHiddenInALocalFunction();
+                caller.EndInvoke(result);
+
+                IAsyncResult BeginInvokeHiddenInALocalFunction()
+                {
+                    return caller.BeginInvoke("method", null, null); // Noncompliant
                 }
             }
 
