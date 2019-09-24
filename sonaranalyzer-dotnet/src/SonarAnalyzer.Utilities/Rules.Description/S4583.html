@@ -1,9 +1,11 @@
 <p>Calling the <code>BeginInvoke</code> method of a delegate will allocate some resources that are only freed-up when <code>EndInvoke</code> is
 called. This is why you should always pair <code>BeginInvoke</code> with an <code>EndInvoke</code> to complete your asynchronous call.</p>
 <p>This rule raises an issue when:</p>
-<p> * the <code>BeginInvoke</code> method is called without any callback and it is not paired with a call to <code>EndInvoke</code> in the same
-block.</p>
-<p> * a callback with a single parameter of type <code>IAsyncResult</code> doesn't contain a call to <code>EndInvoke</code>.</p>
+<ul>
+  <li> the <code>BeginInvoke</code> method is called without any callback and it is not paired with a call to <code>EndInvoke</code> in the same
+  block. </li>
+  <li> a callback with a single parameter of type <code>IAsyncResult</code> doesn't contain a call to <code>EndInvoke</code>. </li>
+</ul>
 <h2>Noncompliant Code Example</h2>
 <p>BeginInvoke without callback</p>
 <pre>
@@ -14,7 +16,7 @@ public static void Main()
     AsyncExample asyncExample = new AsyncExample();
     AsyncMethodCaller caller = new AsyncMethodCaller(asyncExample.MyMethod);
 
-    // Initiate the asychronous call.
+    // Initiate the asynchronous call.
     IAsyncResult result = caller.BeginInvoke(null, null); // Noncompliant - not paired with EndInvoke
 }
 </pre>
@@ -28,12 +30,9 @@ public static void Main()
     AsyncMethodCaller caller = new AsyncMethodCaller(asyncExample.MyMethod);
 
     IAsyncResult result = caller.BeginInvoke(
-        new AsyncCallback(CallbackMethod),
+        new AsyncCallback((IAsyncResult ar) =&gt; {}),
         null); // Noncompliant - not paired with EndInvoke
 }
-
-static void CallbackMethod(IAsyncResult ar) // Noncompliant - no call to ar.EndInvoke
-{}
 </pre>
 <h2>Compliant Solution</h2>
 <p>BeginInvoke without callback</p>
@@ -60,17 +59,16 @@ public static void Main()
     AsyncMethodCaller caller = new AsyncMethodCaller(asyncExample.MyMethod);
 
     IAsyncResult result = caller.BeginInvoke(
-        new AsyncCallback(CallbackMethod),
-        null);
-}
-
-static void CallbackMethod(IAsyncResult ar)
-{
-    // Retrieve the delegate.
-    AsyncResult result = (AsyncResult) ar;
-    AsyncMethodCaller caller = (AsyncMethodCaller) result.AsyncDelegate;
-    // Call EndInvoke to retrieve the results.
-    string returnValue = caller.EndInvoke(ar);
+        new AsyncCallback((IAsyncResult ar) =&gt;
+            {
+                // Retrieve the delegate.
+                AsyncResult result = (AsyncResult)ar;
+                AsyncMethodCaller caller = (AsyncMethodCaller)result.AsyncDelegate;
+                // Call EndInvoke to retrieve the results.
+                string returnValue = caller.EndInvoke(ar);
+            }),
+            null
+        );
 }
 </pre>
 <h2>See</h2>
