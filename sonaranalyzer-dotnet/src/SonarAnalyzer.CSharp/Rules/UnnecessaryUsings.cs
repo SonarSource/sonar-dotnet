@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
 
         internal const string DiagnosticId = "S1128";
-        private const string MessageFormat = "Remove this {0} 'using'.";
+        private const string MessageFormat = "Remove this unnecessary 'using'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
                 && !necessaryNamespaces.Any(usedNamespace => usedNamespace.IsSameNamespace(namespaceSymbol)))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, usingDirective.GetLocation(), "unnecessary"));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, usingDirective.GetLocation()));
                 }
             }
         }
