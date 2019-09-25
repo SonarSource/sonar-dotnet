@@ -37,21 +37,26 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S5034";
 
         // 'await', 'AsTask', 'Result' and '.GetAwaiter().GetResult()' should be called only once on a ValueTask
-        private const string MessageFormat = "Refactor this 'ValueTask' usage to consume it only once.";
+        private const string ConsumeOnlyOnceMessage = "Refactor this 'ValueTask' usage to consume it only once.";
+
+        private static readonly DiagnosticDescriptor ConsumeOnlyOnce =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, ConsumeOnlyOnceMessage, RspecStrings.ResourceManager);
 
         // This should be called only when 'readTask.IsCompletedSuccessfully' is not called before
-        private const string MessageFormatResult = "Refactor this 'ValueTask' usage to consume the result only if the operation has completed successfully.";
+        private const string ConsumeOnlyIfCompletedMessage = "Refactor this 'ValueTask' usage to consume the result only if the operation has completed successfully.";
 
-        private static readonly DiagnosticDescriptor messageOnlyOnce =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor ConsumeOnlyIfCompleted =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, ConsumeOnlyIfCompletedMessage, RspecStrings.ResourceManager);
 
-        private static readonly DiagnosticDescriptor messageOnlyIfCompletedSuccessfully =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly ImmutableArray<KnownType> ValueTaskTypes =
+            new[] {
+                KnownType.System_Runtime_CompilerServices_ValueTaskAwaiter,
+                KnownType.System_Runtime_CompilerServices_ValueTaskAwaiter_TResult,
+                KnownType.System_Threading_Tasks_ValueTask,
+                KnownType.System_Threading_Tasks_ValueTask_TResult
+            }.ToImmutableArray();
 
-        private static readonly KnownType[] ValueTaskTypes =
-            new[] { KnownType.System_Threading_Tasks_ValueTask, KnownType.System_Threading_Tasks_ValueTask_TResult };
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(messageOnlyOnce, messageOnlyIfCompletedSuccessfully);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(ConsumeOnlyOnce, ConsumeOnlyIfCompleted);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -62,19 +67,24 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var syntaxNodes in walker.SymbolUsages.Values)
                     {
-                        if (syntaxNodes.Count() > 1)
+                        if (syntaxNodes.Count > 1)
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(messageOnlyOnce, syntaxNodes.First().GetLocation(),
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(ConsumeOnlyOnce, syntaxNodes.First().GetLocation(),
                                 additionalLocations: syntaxNodes.Skip(1).Select(node => node.GetLocation()).ToArray()));
                         }
                     }
 
                     foreach (var node in walker.ConsumedButNotCompleted)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(messageOnlyIfCompletedSuccessfully, node.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(ConsumeOnlyIfCompleted, node.GetLocation()));
                     }
                 },
-                // should also check in properties?
+                // when visiting a method or another member with logic inside, lambdas and local functions will be visited as well
+                SyntaxKind.ConstructorDeclaration,
+                SyntaxKind.ConversionOperatorDeclaration,
+                SyntaxKind.OperatorDeclaration,
+                SyntaxKind.PropertyDeclaration,
+                SyntaxKind.DestructorDeclaration,
                 SyntaxKind.MethodDeclaration);
         }
 
@@ -119,24 +129,19 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (node.Expression is MemberAccessExpressionSyntax memberAccess)
                 {
-                    if (memberAccess.NameIs("AsTask") &&
-                        memberAccess.Expression is IdentifierNameSyntax identifierName &&
-                        this.semanticModel.GetSymbolInfo(identifierName).Symbol is ISymbol symbol &&
-                        symbol.GetSymbolType().OriginalDefinition.IsAny(ValueTaskTypes))
+                    if (node.IsMethodInvocation(ValueTaskTypes, "AsTask", semanticModel) &&
+                        GetLeftMostIdentifier(memberAccess) is IdentifierNameSyntax identifier1)
                     {
-                        AddToSymbolUsages(symbol, identifierName);
+                        AddToSymbolUsages(this.semanticModel.GetSymbolInfo(identifier1).Symbol, identifier1);
                     }
 
-                    if (memberAccess.NameIs("GetResult") &&
-                        memberAccess.Expression is InvocationExpressionSyntax invocation &&
-                        invocation.Expression is MemberAccessExpressionSyntax innerMemberAccess &&
-                        innerMemberAccess.Expression is IdentifierNameSyntax leftMostIdentifier &&
-                        this.semanticModel.GetSymbolInfo(leftMostIdentifier).Symbol is ISymbol leftMostSymbol &&
-                        leftMostSymbol.GetSymbolType().OriginalDefinition.IsAny(ValueTaskTypes) &&
-                        !IsCompletedSuccessfullyHasBeenCheckedInParent(leftMostSymbol, leftMostIdentifier))
+                    if (node.IsMethodInvocation(ValueTaskTypes, "GetResult", semanticModel) &&
+                        GetLeftMostIdentifier(memberAccess) is IdentifierNameSyntax identifier2 &&
+                        this.semanticModel.GetSymbolInfo(identifier2).Symbol is ISymbol symbol2 &&
+                        !IsCompletedSuccessfullyHasBeenCheckedInParent(symbol2, identifier2))
                     {
-                        AddToSymbolUsages(leftMostSymbol, leftMostIdentifier);
-                        ConsumedButNotCompleted.Add(leftMostIdentifier);
+                        AddToSymbolUsages(symbol2, identifier2);
+                        ConsumedButNotCompleted.Add(identifier2);
                     }
                 }
 
@@ -149,10 +154,9 @@ namespace SonarAnalyzer.Rules.CSharp
              */
             public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
             {
-                if (node.NameIs("Result") &&
-                    node.Expression is IdentifierNameSyntax identifierName &&
+                if (node.IsPropertyInvocation(ValueTaskTypes, "Result", semanticModel) &&
+                    GetLeftMostIdentifier(node) is IdentifierNameSyntax identifierName &&
                     this.semanticModel.GetSymbolInfo(identifierName).Symbol is ISymbol symbol &&
-                    symbol.GetSymbolType().OriginalDefinition.IsAny(ValueTaskTypes) &&
                     !IsCompletedSuccessfullyHasBeenCheckedInParent(symbol, identifierName))
                 {
                     AddToSymbolUsages(symbol, identifierName);
@@ -162,7 +166,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 base.VisitMemberAccessExpression(node);
             }
 
-            private bool IsCompletedSuccessfullyHasBeenCheckedInParent(ISymbol symbol, SyntaxNode node)
+            private bool IsCompletedSuccessfullyHasBeenCheckedInParent(ISymbol symbol, IdentifierNameSyntax node)
             {
                 var ancestor = node.Parent;
                 var hasCheck = false;
@@ -183,6 +187,27 @@ namespace SonarAnalyzer.Rules.CSharp
                 return hasCheck;
             }
 
+            private SyntaxNode GetLeftMostIdentifier(MemberAccessExpressionSyntax memberAccess)
+            {
+                if (memberAccess.Expression is InvocationExpressionSyntax invocation &&
+                    invocation.Expression is MemberAccessExpressionSyntax innerMemberAccess &&
+                    innerMemberAccess.Expression is IdentifierNameSyntax leftMostIdentifier)
+                {
+                    return leftMostIdentifier;
+                }
+                else if (memberAccess.Expression is IdentifierNameSyntax identifierName)
+                {
+                    return identifierName;
+                }
+                else if (memberAccess.Expression is MemberAccessExpressionSyntax leftMemberAccess &&
+                    leftMemberAccess.Name is IdentifierNameSyntax name)
+                {
+                    // gets 'task' from 'this.Task.Result' or 'Foo.Task.Result'
+                    return name;
+                }
+                return memberAccess.Expression;
+            }
+
             private void AddToSymbolUsages(ISymbol symbol, SyntaxNode syntaxNode)
             {
                 if (SymbolUsages.TryGetValue(symbol, out var syntaxNodes))
@@ -198,4 +223,3 @@ namespace SonarAnalyzer.Rules.CSharp
         }
     }
 }
-

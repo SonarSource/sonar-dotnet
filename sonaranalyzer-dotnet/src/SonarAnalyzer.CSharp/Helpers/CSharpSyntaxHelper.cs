@@ -256,9 +256,22 @@ namespace SonarAnalyzer.Helpers
         }
 
         public static bool IsMethodInvocation(this InvocationExpressionSyntax expression, KnownType type, string methodName, SemanticModel semanticModel) =>
+            expression.NameIs(methodName) &&
             semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol methodSymbol &&
             methodSymbol.IsInType(type) &&
             methodName.Equals(methodSymbol.Name, StringComparison.InvariantCulture);
+
+        public static bool IsMethodInvocation(this InvocationExpressionSyntax expression, ImmutableArray<KnownType> types, string methodName, SemanticModel semanticModel) =>
+            expression.NameIs(methodName) &&
+            semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol methodSymbol &&
+            methodSymbol.IsInType(types) &&
+            methodName.Equals(methodSymbol.Name, StringComparison.InvariantCulture);
+
+        public static bool IsPropertyInvocation(this MemberAccessExpressionSyntax expression, ImmutableArray<KnownType> types, string propertyName, SemanticModel semanticModel) =>
+            expression.NameIs(propertyName) &&
+            semanticModel.GetSymbolInfo(expression).Symbol is IPropertySymbol propertySymbol &&
+            propertySymbol.IsInType(types) &&
+            propertyName.Equals(propertySymbol.Name, StringComparison.InvariantCulture);
 
         public static Location FindIdentifierLocation(this BaseMethodDeclarationSyntax methodDeclaration) =>
             GetIdentifierOrDefault(methodDeclaration)?.GetLocation();
@@ -341,7 +354,21 @@ namespace SonarAnalyzer.Helpers
         }
 
         public static bool NameIs(this MemberAccessExpressionSyntax memberAccess, string name) =>
-            memberAccess.Name.Identifier.ValueText == name;
+            memberAccess.Name.Identifier.ValueText.Equals(name, StringComparison.InvariantCulture);
+
+        public static bool NameIs(this InvocationExpressionSyntax invocation, string name)
+        {
+            var invocationName = string.Empty;
+            if (invocation.Expression is MemberAccessExpressionSyntax memberAccess)
+            {
+                invocationName = memberAccess.Name.Identifier.ValueText;
+            }
+            else if (invocation.Expression is IdentifierNameSyntax identifierName)
+            {
+                invocationName = identifierName.Identifier.ValueText;
+            }
+            return invocationName.Equals(invocationName, StringComparison.InvariantCulture);
+        }
 
         public static bool IsConstant(this ExpressionSyntax expression, SemanticModel semanticModel)
         {

@@ -17,7 +17,7 @@ namespace Tests.Diagnostics
         public async void Foo1(ValueTaskProvider stream)
         {
             var valueTask = stream.ReadAsync();
-            var once = await valueTask; // Noncompliant { "Refactor this 'ValueTask' usage to consume it only once." }
+            var once = await valueTask; // Noncompliant {{Refactor this 'ValueTask' usage to consume it only once.}}
 //                           ^^^^^^^^^
             var twice = await valueTask;
 //                            ^^^^^^^^^ Secondary
@@ -33,7 +33,7 @@ namespace Tests.Diagnostics
         public async void Foo3(ValueTaskProvider stream)
         {
             var valueTask = stream.ReadAsync();
-            var once = await valueTask; // Noncompliant { "Refactor this 'ValueTask' usage to consume it only once." }
+            var once = await valueTask; // Noncompliant {{Refactor this 'ValueTask' usage to consume it only once.}}
 //                           ^^^^^^^^^
             var twice = valueTask.AsTask();
 //                      ^^^^^^^^^ Secondary
@@ -50,7 +50,7 @@ namespace Tests.Diagnostics
         public void Foo5(ValueTaskProvider stream)
         {
             var valueTask = stream.ReadAsync();
-            var once = valueTask.Result; // Noncompliant {"Refactor this 'ValueTask' usage to consume the result only if the operation has completed successfully."}
+            var once = valueTask.Result; // Noncompliant {{Refactor this 'ValueTask' usage to consume the result only if the operation has completed successfully.}}
 //                     ^^^^^^^^^
         }
 
@@ -179,15 +179,19 @@ namespace Tests.Diagnostics
             var secondValueTaskR2 = secondValueTask.AsTask(); // Secondary
         }
 
+        public void Foo16()
+        {
+            var stream = new ValueTaskProvider();
+            var awaiter = stream.ReadAsync().GetAwaiter();
+            awaiter.GetResult(); // Noncompliant
+        }
+
         public void FooFalseNegative(ValueTaskProvider stream)
         {
             int bytesRead;
             ValueTask<int> valueTask = stream.ReadAsync();
             GetResult(valueTask); // FN - we don't inspect inside the method body
             GetResult(valueTask); // FN
-
-            var awaiter = stream.ReadAsync().GetAwaiter();
-            awaiter.GetResult(); // FN - we don't track the variable source
         }
 
         private async Task<int> GetResult(ValueTask<int> valueTask) => await valueTask;
@@ -273,6 +277,64 @@ namespace Tests.Diagnostics
             var t1 = task.Result;
             var t2 = task.Result;
         }
+    }
 
+    class DifferentSyntaxes
+    {
+        public void Foo1(ValueTask<string> valueTask)
+        {
+            LocalMethod();
+
+            async void LocalMethod()
+            {
+                var once = await valueTask; // Noncompliant
+                var twice = await valueTask; // Secondary
+            }
+        }
+
+        public int Foo2(ValueTask<int> valueTask) => valueTask.Result; // Noncompliant
+
+        private ValueTask<int> valueTask;
+        public int Property
+        {
+            get => this.valueTask.Result; // Noncompliant
+        }
+
+
+        public string Foo3(ValueTask<string> valueTask)
+        {
+            System.Func<string> anonMethod = () => valueTask.Result; // Noncompliant
+
+            return anonMethod();
+        }
+
+        public DifferentSyntaxes(ValueTaskProvider stream)
+        {
+            var valueTask = stream.ReadAsync();
+            var once = valueTask.Result; // Noncompliant
+        }
+
+
+        ~DifferentSyntaxes()
+        {
+            var once = this.valueTask.Result; // Noncompliant
+        }
+
+        public static implicit operator int(DifferentSyntaxes f)
+        {
+            return f.valueTask.Result; // Noncompliant
+        }
+
+        public static DifferentSyntaxes operator -(DifferentSyntaxes b, DifferentSyntaxes c)
+        {
+            c.valueTask.GetAwaiter().GetResult(); // FN
+            return null;
+        }
+
+        public static DifferentSyntaxes operator +(DifferentSyntaxes b, DifferentSyntaxes c)
+        {
+            var once = b.valueTask.Result; // Noncompliant
+            return null;
+        }
     }
 }
