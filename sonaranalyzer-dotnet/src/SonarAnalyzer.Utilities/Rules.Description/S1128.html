@@ -1,4 +1,4 @@
-<p>Although unnecessary or duplicate <code>using</code> won't change anything to the produced application, removing them:</p>
+<p>Although unnecessary <code>using</code> won't change anything to the produced application, removing them:</p>
 <ul>
   <li> Will help readability and maintenance. </li>
   <li> Will help reduce the number of items in the IDE auto-completion list when coding. </li>
@@ -8,8 +8,6 @@
 <h2>Noncompliant Code Example</h2>
 <pre>
 using System.Collections.Generic; // Noncompliant - unnecessary using
-using System.IO;
-using System.IO; // Noncompliant - duplicate
 
 namespace Foo
 {

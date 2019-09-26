@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent; // Noncompliant {{Remove this unnecessary 'using'.}}
 using System.IO;
-using System.IO; // Noncompliant {{Remove this duplicate 'using'.}}
+using System.IO; // Warning [CS0105]
 using static System.Console;
 using static System.DateTime; // FN - System.DateTime is not a namespace symbol
 using MySysAlias = System;
@@ -34,9 +34,9 @@ namespace MyNamespace2
 namespace MyNamespace2.Level1
 {
     using MyNamespace0;
-    using MyNamespace0; // Noncompliant {{Remove this duplicate 'using'.}}
-    using MyNamespace0; // Noncompliant {{Remove this duplicate 'using'.}}
-    using MyNamespace1; // Noncompliant {{Remove this duplicate 'using'.}}
+    using MyNamespace0; // Warning [CS0105]
+    using MyNamespace0; // Warning [CS0105]
+    using MyNamespace1; // Warning [CS0105]
     using System.Linq; // Noncompliant {{Remove this unnecessary 'using'.}}
     using MyNamespace2.Level1; // Noncompliant {{Remove this unnecessary 'using'.}}
     using MyNamespace2; // Noncompliant {{Remove this unnecessary 'using'.}}
@@ -51,8 +51,8 @@ namespace MyNamespace2.Level1
 
     namespace Level2
     {
-        using MyNamespace1; // Noncompliant {{Remove this duplicate 'using'.}}
-        using System.IO; // Noncompliant {{Remove this duplicate 'using'.}}
+        using MyNamespace1; // Warning [CS0105]
+        using System.IO; // Warning [CS0105]
 
         class Ns2_2
         {

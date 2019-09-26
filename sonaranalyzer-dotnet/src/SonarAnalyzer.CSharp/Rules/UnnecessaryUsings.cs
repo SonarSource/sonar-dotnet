@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
 
         internal const string DiagnosticId = "S1128";
-        private const string MessageFormat = "Remove this {0} 'using'.";
+        private const string MessageFormat = "Remove this unnecessary 'using'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -64,32 +64,10 @@ namespace SonarAnalyzer.Rules.CSharp
                         visitor.SafeVisit(attribute);
                     }
 
-                    CheckDuplicateUsings(c, ImmutableHashSet.Create<EquivalentNameSyntax>(), simpleNamespaces);
                     CheckUnnecessaryUsings(c, simpleNamespaces, visitor.necessaryNamespaces);
                 },
                 SyntaxKind.CompilationUnit);
 
-        }
-
-        private static void CheckDuplicateUsings(SyntaxNodeAnalysisContext context, IImmutableSet<EquivalentNameSyntax> ancestorsUsingDirectives, IEnumerable<UsingDirectiveSyntax> usingDirectives)
-        {
-            var groupingDirectives = usingDirectives
-                .GroupBy(usingDirective => new EquivalentNameSyntax(usingDirective.Name))
-                .ToList();
-
-            foreach (var potentialDuplicate in groupingDirectives)
-            {
-                var duplicates = potentialDuplicate.Skip(1);
-                foreach (var duplicate in duplicates)
-                {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, duplicate.GetLocation(), "duplicate"));
-                }
-
-                if (ancestorsUsingDirectives.Contains(potentialDuplicate.Key))
-                {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, potentialDuplicate.First().GetLocation(), "duplicate"));
-                }
-            }
         }
 
         private static void CheckUnnecessaryUsings(SyntaxNodeAnalysisContext context, IEnumerable<UsingDirectiveSyntax> usingDirectives, HashSet<INamespaceSymbol> necessaryNamespaces)
@@ -99,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
                 && !necessaryNamespaces.Any(usedNamespace => usedNamespace.IsSameNamespace(namespaceSymbol)))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, usingDirective.GetLocation(), "unnecessary"));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, usingDirective.GetLocation()));
                 }
             }
         }
@@ -134,7 +112,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     visitor.SafeVisit(member);
                 }
 
-                CheckDuplicateUsings(context, usingDirectivesFromParent, simpleNamespaces);
                 CheckUnnecessaryUsings(context, simpleNamespaces, visitor.necessaryNamespaces);
 
                 necessaryNamespaces.UnionWith(visitor.necessaryNamespaces);
