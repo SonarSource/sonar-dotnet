@@ -21,6 +21,7 @@ package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
 import java.util.Map;
+import java.util.Set;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -85,28 +86,31 @@ public class CoverageReportImportSensor implements Sensor {
   void analyze(SensorContext context, Coverage coverage) {
     coverageAggregator.aggregate(wildcardPatternFileProvider, coverage);
 
-    boolean hasAnyMainFileCovered = false;
-    for (String filePath : coverage.files()) {
+    Set<String> coverageFiles = coverage.files();
+    FileCountStatistics fileCountStatistics = new FileCountStatistics(coverageFiles.size());
+    for (String filePath : coverageFiles) {
       FilePredicates p = context.fileSystem().predicates();
       InputFile inputFile = context.fileSystem().inputFile(p.hasAbsolutePath(filePath));
 
       if (inputFile == null) {
+        fileCountStatistics.projectExcluded++;
         LOG.debug("The file '{}' is either excluded or outside of your solution folder therefore Code "
           + "Coverage will not be imported.", filePath);
         continue;
       }
 
       if (inputFile.type().equals(Type.TEST)) {
+        fileCountStatistics.test++;
         // Do not log for test files to avoid pointless noise
         continue;
       }
 
       if (!coverageConf.languageKey().equals(inputFile.language())) {
+        fileCountStatistics.otherLanguageExcluded++;
         continue;
       }
 
-      hasAnyMainFileCovered = true;
-
+      fileCountStatistics.main++;
       boolean fileHasCoverage = false;
 
       NewCoverage newCoverage = context.newCoverage().onFile(inputFile);
@@ -117,16 +121,46 @@ public class CoverageReportImportSensor implements Sensor {
       newCoverage.save();
 
       if (fileHasCoverage) {
+        fileCountStatistics.mainWithCoverage++;
         LOG.debug("Found some coverage info for the file '{}'.", filePath);
       } else {
         LOG.debug("No coverage info found for the file '{}'.", filePath);
       }
     }
 
-    if (!coverage.files().isEmpty() && !hasAnyMainFileCovered) {
-      LOG.warn("The Code Coverage report doesn't contain any coverage data for the included files. For "
-        + "troubleshooting hints, please refer to https://docs.sonarqube.org/x/CoBh");
+    if (fileCountStatistics.total != 0) {
+      LOG.info(fileCountStatistics.toString());
+      if (fileCountStatistics.mainWithCoverage == 0) {
+        LOG.warn("The Code Coverage report doesn't contain any coverage data for the included files. For "
+          + "troubleshooting hints, please refer to https://docs.sonarqube.org/x/CoBh");
+      }
     }
+  }
+
+  private static class FileCountStatistics {
+
+    private final int total;
+    private int main = 0;
+    private int mainWithCoverage = 0;
+    private int test = 0;
+    private int projectExcluded = 0;
+    private int otherLanguageExcluded = 0;
+
+    private FileCountStatistics(int total) {
+      this.total = total;
+    }
+
+    @Override
+    public String toString() {
+      return "Coverage Report Statistics: " +
+        total + " files, " +
+        main + " main files, " +
+        mainWithCoverage + " main files with coverage, " +
+        test + " test files, " +
+        projectExcluded + " project excluded files, " +
+        otherLanguageExcluded + " other language files.";
+    }
+
   }
 
 }

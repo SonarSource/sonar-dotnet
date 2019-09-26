@@ -114,6 +114,7 @@ public class CoverageReportImportSensorTest {
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .execute(context);
 
+    assertThat(logTester.logs(LoggerLevel.INFO)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("No coverage property. Skip Sensor");
   }
 
@@ -124,6 +125,7 @@ public class CoverageReportImportSensorTest {
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", true)
       .execute(context);
 
+    assertThat(logTester.logs(LoggerLevel.INFO)).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Starting with SonarQube 6.2 separation between Unit Tests and Integration Tests "
       + "Coverage reports is deprecated. Please move all reports specified from *.it.reportPaths into *.reportPaths.");
   }
@@ -154,6 +156,8 @@ public class CoverageReportImportSensorTest {
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .analyze(context, coverage);
 
+    assertThat(logTester.logs(LoggerLevel.INFO)).containsOnly("Coverage Report Statistics: " +
+        "1 files, 0 main files, 0 main files with coverage, 1 test files, 0 project excluded files, 0 other language files.");
     assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("The Code Coverage report doesn't contain any coverage "
       + "data for the included files. For troubleshooting hints, please refer to https://docs.sonarqube.org/x/CoBh");
   }
@@ -167,6 +171,8 @@ public class CoverageReportImportSensorTest {
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .analyze(context, coverage);
 
+    assertThat(logTester.logs(LoggerLevel.INFO)).containsOnly("Coverage Report Statistics: " +
+      "1 files, 0 main files, 0 main files with coverage, 0 test files, 1 project excluded files, 0 other language files.");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("The file '" + fooPath + "' is either excluded or outside of "
       + "your solution folder therefore Code Coverage will not be imported.");
   }
