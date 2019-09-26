@@ -258,14 +258,12 @@ namespace SonarAnalyzer.Helpers
         public static bool IsMethodInvocation(this InvocationExpressionSyntax expression, KnownType type, string methodName, SemanticModel semanticModel) =>
             expression.NameIs(methodName) &&
             semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol methodSymbol &&
-            methodSymbol.IsInType(type) &&
-            methodName.Equals(methodSymbol.Name, StringComparison.InvariantCulture);
+            methodSymbol.IsInType(type);
 
         public static bool IsMethodInvocation(this InvocationExpressionSyntax expression, ImmutableArray<KnownType> types, string methodName, SemanticModel semanticModel) =>
             expression.NameIs(methodName) &&
             semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol methodSymbol &&
-            methodSymbol.IsInType(types) &&
-            methodName.Equals(methodSymbol.Name, StringComparison.InvariantCulture);
+            methodSymbol.IsInType(types);
 
         public static bool IsPropertyInvocation(this MemberAccessExpressionSyntax expression, ImmutableArray<KnownType> types, string propertyName, SemanticModel semanticModel) =>
             expression.NameIs(propertyName) &&
@@ -367,7 +365,7 @@ namespace SonarAnalyzer.Helpers
             {
                 invocationName = identifierName.Identifier.ValueText;
             }
-            return invocationName.Equals(invocationName, StringComparison.InvariantCulture);
+            return invocationName.Equals(name, StringComparison.InvariantCulture);
         }
 
         public static bool IsConstant(this ExpressionSyntax expression, SemanticModel semanticModel)

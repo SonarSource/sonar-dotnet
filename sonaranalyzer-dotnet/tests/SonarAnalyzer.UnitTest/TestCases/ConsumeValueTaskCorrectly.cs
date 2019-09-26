@@ -72,7 +72,7 @@ namespace Tests.Diagnostics
 
             if (bytesRead > 9)
             {
-                bytesRead = valueTask.Result; // Noncompliant
+                bytesRead = valueTask.Result; // FN - it is checked above and we don't use the CFG to verify the blocks
             }
         }
 
@@ -186,12 +186,48 @@ namespace Tests.Diagnostics
             awaiter.GetResult(); // Noncompliant
         }
 
+        public async void Foo17(ValueTask<string> valueTask)
+        {
+            string x;
+            if (!valueTask.IsCompletedSuccessfully)
+            {
+                x = await valueTask; // Noncompliant
+                x = await valueTask; // Secondary
+            }
+        }
+
+        public async void Foo18(ValueTask<string> valueTask)
+        {
+            string x;
+            x = await valueTask; // Noncompliant
+            x = valueTask.Result; // Secondary
+// Noncompliant@-1
+            if (!valueTask.IsCompletedSuccessfully)
+            {
+                 x = await valueTask; // Secondary
+            }
+            x = valueTask.Result; // FN , after if
+        }
+
         public void FooFalseNegative(ValueTaskProvider stream)
         {
             int bytesRead;
             ValueTask<int> valueTask = stream.ReadAsync();
             GetResult(valueTask); // FN - we don't inspect inside the method body
             GetResult(valueTask); // FN
+        }
+
+        public async void FooFalseNegative2(ValueTask<string> valueTask)
+        {
+            string x;
+            if (!valueTask.IsCompletedSuccessfully)
+            {
+                 x = await valueTask;
+            }
+            x = valueTask.Result; // FN - checked above in the if, we are blind now
+            x = valueTask.Result; // FN
+            x = valueTask.Result; // FN
+            x = valueTask.Result; // FN
         }
 
         private async Task<int> GetResult(ValueTask<int> valueTask) => await valueTask;
@@ -277,6 +313,16 @@ namespace Tests.Diagnostics
             var t1 = task.Result;
             var t2 = task.Result;
         }
+
+        public async void Compliant8(ValueTask<string> valueTask)
+        {
+            string x;
+            if (!valueTask.IsCompletedSuccessfully)
+            {
+                 x = await valueTask;
+            }
+            x = valueTask.Result;
+        }
     }
 
     class DifferentSyntaxes
@@ -336,5 +382,39 @@ namespace Tests.Diagnostics
             var once = b.valueTask.Result; // Noncompliant
             return null;
         }
+    }
+
+    class StressTest
+    {
+        public async void Foo18(ValueTask<string> valueTask)
+        {
+            string x;
+            x = await valueTask; // Noncompliant
+            x = await valueTask; // Secondary
+            x = valueTask.Result; // Secondary
+// Noncompliant@-1
+            x = valueTask.Result; // Secondary
+// Noncompliant@-1
+
+            x = await valueTask; // Secondary
+            x = await valueTask; // Secondary
+            if (true && false && !valueTask.IsCompletedSuccessfully)
+                x = await valueTask; // Secondary
+
+            x = await valueTask; // Secondary
+            x = await valueTask; // Secondary
+            x = valueTask.Result;
+            x = valueTask.Result;
+            x = valueTask.Result;
+            x = valueTask.Result;
+
+            x = valueTask.Result;
+            if (!valueTask.IsCompletedSuccessfully)
+                if (!valueTask.IsCompletedSuccessfully)
+                    if (!valueTask.IsCompletedSuccessfully)
+                         x = await valueTask; // Secondary
+
+        }
+
     }
 }
