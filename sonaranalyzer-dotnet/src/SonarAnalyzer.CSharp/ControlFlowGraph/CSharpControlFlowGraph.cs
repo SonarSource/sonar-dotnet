@@ -19,17 +19,42 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
 {
     public static class CSharpControlFlowGraph
     {
+        private static readonly ISet<string> UNSUPPORTED_SYNTAX_NODE_KINDS = new HashSet<string>
+        {
+           "DeclarationExpression",
+           "DefaultLiteralExpression",
+           "LocalFunctionStatement",
+           "ForEachVariableStatement",
+           "ThrowExpression",
+           "TupleExpression",
+        }.ToImmutableHashSet();
+
         public static IControlFlowGraph Create(CSharpSyntaxNode node, SemanticModel semanticModel)
         {
-            return new CSharpControlFlowGraphBuilder(node, semanticModel).Build();
+            try
+            {
+                return new CSharpControlFlowGraphBuilder(node, semanticModel).Build();
+            }
+            catch (Exception exc)
+            {
+                var location = node?.GetLocation();
+                var sb = new StringBuilder();
+                sb.AppendLine($"Error creating CFG at {location?.GetLineSpan().Path}:{location?.GetLineNumberToReport()}");
+                sb.AppendLine($"Inner exception: {exc.ToString()}");
+                throw new ControlFlowGraphException(ExceptionHelper.OneLineReportToPreventRoslynTruncation(sb.ToString()), exc);
+            }
         }
 
         public static bool TryGet(CSharpSyntaxNode node, SemanticModel semanticModel, out IControlFlowGraph cfg)
@@ -46,17 +71,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     return false;
                 }
             }
-            catch (Exception exc) when (exc is InvalidOperationException ||
-                                        exc is ArgumentException ||
-                                        exc is NotSupportedException)
+            catch (ControlFlowGraphException exc)
             {
-                // historically, these have been considered as expected
-                // but we should be aware of what syntax we do not yet support (TODO)
-                // https://github.com/SonarSource/sonar-dotnet/issues/2541
-            }
-            catch (Exception exc) when (exc is NotImplementedException)
-            {
-                Debug.Fail(exc.ToString());
+                if (exc.InnerException is NotSupportedException notSupportedException &&
+                    UNSUPPORTED_SYNTAX_NODE_KINDS.Contains(notSupportedException.Message))
+                {
+                    return false;
+                }
+                throw exc;
             }
 
             return cfg != null;

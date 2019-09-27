@@ -18,7 +18,7 @@
 * along with this program; if not, write to the Free Software Foundation,
 * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
-
+using System;
 using System.Linq;
 using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
 using csharp::SonarAnalyzer.ShimLayer.CSharp;
@@ -1254,6 +1254,37 @@ namespace NS
 
             VerifyNoInstruction(cfg.EntryBlock);
             VerifyInstructions(cfg.EntryBlock.SuccessorBlocks.First(), 0, "i");
+        }
+
+        #endregion
+
+        #region Unsupported syntax
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Unsupported_syntax()
+        {
+            var unsupportedSyntaxCode = CompileWithMethodBody(@"
+              namespace NS
+              {{
+                public class Foo
+                {{
+                  public void Bar((string key, string value)[] bars)
+                  {{
+                    foreach (var (key, value) in bars) {{ }}
+                  }}
+                }}
+              }}",
+                "Bar", out var semanticModel);
+
+            Action act = () => CSharpControlFlowGraph.Create(unsupportedSyntaxCode.Body, semanticModel);
+            act.Should().Throw<ControlFlowGraphException>().Where(e => e.Message.StartsWith(
+                "Error creating CFG at test:7 ##" +
+                " Inner exception: System.NotSupportedException: ForEachVariableStatement ##" +
+                "    at SonarAnalyzer.ControlFlowGraph.CSharp.CSharpControlFlowGraphBuilder.BuildStatement(StatementSyntax statement, Block currentBlock) in"));
+
+            CSharpControlFlowGraph.TryGet(unsupportedSyntaxCode.Body, semanticModel, out var cfg).Should().BeFalse();
+            cfg.Should().BeNull();
         }
 
         #endregion
@@ -3448,7 +3479,7 @@ namespace NS
             var branchEmpty = blocks[1] as BinaryBranchBlock;
             var branchNull = blocks[2] as BinaryBranchBlock;
             var branchA = blocks[4] as BinaryBranchBlock;
-            
+
             cw0.Should().BeSameAs(cfg.EntryBlock);
 
             cw0.SuccessorBlocks.Should().OnlyContainInOrder(branchEmpty);
