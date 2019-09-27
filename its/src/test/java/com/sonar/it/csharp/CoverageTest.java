@@ -52,7 +52,10 @@ public class CoverageTest {
   @Test
   public void should_not_import_coverage_without_report() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject();
-    assertThat(buildResult.getLogs()).doesNotContain("C# Tests Coverage Report Import");
+
+    assertThat(buildResult.getLogs())
+      .doesNotContain("Sensor C# Tests Coverage Report Import")
+      .doesNotContain("Coverage Report Statistics:");
 
     org.sonarqube.ws.Measures.Measure linesToCover = getMeasure("CoverageTest", "lines_to_cover");
     org.sonarqube.ws.Measures.Measure uncoveredLines = getMeasure("CoverageTest", "uncovered_lines");
@@ -65,7 +68,10 @@ public class CoverageTest {
   public void ncover3() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", "reports/ncover3.nccov");
 
-    assertThat(buildResult.getLogs()).contains("C# Tests Coverage Report Import");
+    assertThat(buildResult.getLogs()).contains(
+      "Sensor C# Tests Coverage Report Import",
+      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
+
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
     assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
   }
@@ -74,7 +80,10 @@ public class CoverageTest {
   public void open_cover() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.opencover.reportsPaths", "reports/opencover.xml");
 
-    assertThat(buildResult.getLogs()).contains("C# Tests Coverage Report Import");
+    assertThat(buildResult.getLogs()).contains(
+      "Sensor C# Tests Coverage Report Import",
+      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
+
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
     assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(0);
   }
@@ -83,7 +92,10 @@ public class CoverageTest {
   public void dotcover() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.dotcover.reportsPaths", "reports/dotcover.html");
 
-    assertThat(buildResult.getLogs()).contains("C# Tests Coverage Report Import");
+    assertThat(buildResult.getLogs()).contains(
+      "Sensor C# Tests Coverage Report Import",
+      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
+
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
     assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
   }
@@ -92,7 +104,10 @@ public class CoverageTest {
   public void visual_studio() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
-    assertThat(buildResult.getLogs()).contains("C# Tests Coverage Report Import");
+    assertThat(buildResult.getLogs()).contains(
+      "Sensor C# Tests Coverage Report Import",
+      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
+
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
     assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
   }
@@ -109,8 +124,13 @@ public class CoverageTest {
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+    BuildResult buildResult = orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("end"));
+
+    assertThat(buildResult.getLogs()).contains(
+      "Sensor C# Tests Coverage Report Import",
+      "Coverage Report Statistics: 1 files, 0 main files, 0 main files with coverage, 1 test files, 0 project excluded files, 0 other language files.",
+      "WARN: The Code Coverage report doesn't contain any coverage data for the included files.");
 
     assertThat(getMeasureAsInt("NoCoverageOnTests", "files")).isEqualTo(2); // Only main files are counted
     String unitTestComponentId = TestUtils.hasModules(ORCHESTRATOR) ? "NoCoverageOnTests:NoCoverageOnTests:8A3B715A-6E95-4BC1-93C6-A59E9D3F5D5C:UnitTest1.cs" : "NoCoverageOnTests:MyLib.Tests/UnitTest1.cs";
@@ -121,7 +141,11 @@ public class CoverageTest {
 
   @Test
   public void should_support_wildcard_patterns() throws Exception {
-    analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", "reports/*.nccov");
+    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", "reports/*.nccov");
+
+    assertThat(buildResult.getLogs()).contains(
+      "Sensor C# Tests Coverage Report Import",
+      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
 
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
   }
