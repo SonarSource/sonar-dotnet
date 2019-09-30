@@ -27,18 +27,21 @@ using System.Linq;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class NameOfShouldBeUsedBase<TMethodSyntax> : SonarDiagnosticAnalyzer
-            where TMethodSyntax : SyntaxNode
+    public abstract class NameOfShouldBeUsedBase : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2302";
         protected const string MessageFormat = "Replace the string '{0}' with 'nameof({0})'.";
 
-        private static readonly char[] Separators = { ' ', '.', ',', ';', '!', '?' };
+        protected static readonly char[] Separators = { ' ', '.', ',', ';', '!', '?' };
 
         // when the parameter name is inside a bigger string, we want to avoid common English words like
         // "a", "then", "he", "of", "have" etc, to avoid false positives
-        private const int MIN_STRING_LENGTH = 5;
+        protected const int MIN_STRING_LENGTH = 5;
+    }
 
+    public abstract class NameOfShouldBeUsedBase<TMethodSyntax> : NameOfShouldBeUsedBase
+            where TMethodSyntax : SyntaxNode
+    {
         protected abstract DiagnosticDescriptor Rule { get; }
 
         protected abstract bool IsCaseSensitive { get; }

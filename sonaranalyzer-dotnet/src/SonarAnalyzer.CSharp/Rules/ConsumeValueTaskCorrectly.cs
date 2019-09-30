@@ -170,9 +170,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 base.VisitMemberAccessExpression(node);
             }
 
-            public override void VisitIfStatement(IfStatementSyntax statementSyntax)
+            public override void VisitIfStatement(IfStatementSyntax node)
             {
-                var valueTaskMemberAccess = statementSyntax.Condition.DescendantNodesAndSelf().FirstOrDefault(n =>
+                var valueTaskMemberAccess = node.Condition.DescendantNodesAndSelf().FirstOrDefault(n =>
                     n is MemberAccessExpressionSyntax memberAccess &&
                     memberAccess.IsPropertyInvocation(ValueTaskTypes, "IsCompletedSuccessfully", semanticModel));
                 if (valueTaskMemberAccess is MemberAccessExpressionSyntax member &&
@@ -182,7 +182,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     VerifiedForSuccessfulCompletion.Add(symbol);
                 }
-                base.VisitIfStatement(statementSyntax);
+                base.VisitIfStatement(node);
             }
 
             private SyntaxNode GetLeftMostIdentifier(MemberAccessExpressionSyntax memberAccess)
