@@ -268,8 +268,7 @@ namespace SonarAnalyzer.Helpers
         public static bool IsPropertyInvocation(this MemberAccessExpressionSyntax expression, ImmutableArray<KnownType> types, string propertyName, SemanticModel semanticModel) =>
             expression.NameIs(propertyName) &&
             semanticModel.GetSymbolInfo(expression).Symbol is IPropertySymbol propertySymbol &&
-            propertySymbol.IsInType(types) &&
-            propertyName.Equals(propertySymbol.Name, StringComparison.InvariantCulture);
+            propertySymbol.IsInType(types);
 
         public static Location FindIdentifierLocation(this BaseMethodDeclarationSyntax methodDeclaration) =>
             GetIdentifierOrDefault(methodDeclaration)?.GetLocation();
