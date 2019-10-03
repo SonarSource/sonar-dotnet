@@ -253,4 +253,37 @@ namespace Tests.Diagnostics
     {
         public void Add(int a, int b) { }
     }
+
+    public class TestSameClassMultipleInstance
+    {
+        public class MyContainer
+        {
+            public Dictionary<string, string> dictionaryField;
+            public static Dictionary<string, string> publicStaticDictionaryField = new Dictionary<string, string>();
+            private static Dictionary<string, string> staticDictionary = new Dictionary<string, string>();
+            public Dictionary<string, string> StaticDictionary
+            {
+                get => staticDictionary;
+            }
+            public MyContainer()
+            {
+                dictionaryField = new Dictionary<string, string>();
+            }
+        }
+
+        public void Foo()
+        {
+            var dict1 = new MyContainer();
+            var dict2 = new MyContainer();
+
+            dict1.dictionaryField.Add("prop1", "1");
+            dict2.dictionaryField.Add("prop1", "2"); // ok, different instance
+
+            dict1.StaticDictionary.Add("static", "a");
+            dict2.StaticDictionary.Add("static", "b"); // FN, same instance
+
+            MyContainer.publicStaticDictionaryField.Add("x", "x"); // Secondary
+            MyContainer.publicStaticDictionaryField.Add("x", "x1"); // Noncompliant
+        }
+    }
 }
