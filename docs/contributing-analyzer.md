@@ -13,7 +13,7 @@ In general, it is best to run commands from the Visual Studio Developer Command 
 ## Developing with Visual Studio 2017
 
 1. [Visual Studio 2017 Version 15.7](https://www.visualstudio.com/vs/preview/)
-    - Ensure C#, VB, MSBuild, .NET Core, F# and Visual Studio Extensibility are included in the selected work loads
+    - Ensure C#, VB, MSBuild, .NET Core, F#, Visual Studio Extensibility and ASP.Net and web development are included in the selected work loads
     - Ensure Visual Studio Version is between "15.7" and "15.9"
 1. [.NET Core SDK 2.1.402](https://dotnet.microsoft.com/download/dotnet-core/2.1)
 1. Open `SonarAnalyzer.sln` in the `sonaranalyzer-dotnet` subfolder
@@ -22,7 +22,10 @@ The following environment variables must be set:
 - **MSBUILD_PATH** - path to MSBuild.exe from the Visual Studio installation folder
 - **ORCHESTRATOR_CONFIG_URL** - path to orchestrator.properties (for integration tests)
 - **rule_api_path** - path to folder containing the rule api jar
-- **Path** - the **Path** must contain the path to the dotnet core installation folder
+- **Path** - the **Path** must contain:
+    - the path to the dotnet core installation folder
+    - the path to the visual studo installer folder (for vswhere.exe)
+    - the path to the nuget executable folder
 
 ## Running Tests
 
