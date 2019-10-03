@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2479",
+"message":  "Replace the control character at position 4 by its escape sequence '\u200B'.",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\IntentionalFindings\S2479.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  47,
+"endLine":  9,
+"endColumn":  56
+}
+}
+}
+]
+}
