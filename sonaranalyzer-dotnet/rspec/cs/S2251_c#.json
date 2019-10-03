@@ -1,0 +1,16 @@
+{
+  "title": "A \"for\" loop update clause should move the counter in the right direction",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-2251",
+  "sqKey": "S2251",
+  "scope": "All"
+}

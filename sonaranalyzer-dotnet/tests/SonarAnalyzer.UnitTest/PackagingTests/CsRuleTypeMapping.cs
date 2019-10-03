@@ -2248,7 +2248,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["2248"],
             //["2249"],
             //["2250"],
-            //["2251"],
+            ["2251"] = "BUG",
             ["2252"] = "BUG",
             //["2253"],
             //["2254"],
