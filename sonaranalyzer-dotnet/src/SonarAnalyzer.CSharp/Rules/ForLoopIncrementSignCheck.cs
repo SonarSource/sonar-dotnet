@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -34,10 +34,11 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class ForLoopIncrementSignCheck : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2251";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "{0}";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -50,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
                     }
                 },
-                SyntaxKind.InvocationExpression);
+                SyntaxKind.ForStatement);
         }
     }
 }
