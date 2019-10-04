@@ -367,6 +367,9 @@ namespace SonarAnalyzer.Helpers
             return invocationName.Equals(name, StringComparison.InvariantCulture);
         }
 
+        public static bool NameIs(this IdentifierNameSyntax identifierName, string name)
+            => identifierName?.Identifier.ValueText == name;
+
         public static bool IsConstant(this ExpressionSyntax expression, SemanticModel semanticModel)
         {
             if (expression == null)

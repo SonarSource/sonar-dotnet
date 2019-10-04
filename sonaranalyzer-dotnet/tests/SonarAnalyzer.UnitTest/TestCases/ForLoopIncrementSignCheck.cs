@@ -6,29 +6,51 @@ namespace Tests.Diagnostics
     {
         public void TestMethod(int x, int y, int z)
         {
-            for (int i = x; i < y; i++) { }
-            for (int i = x; i > y; i++) { } // Noncompliant {{"i" is incremented and will never reach "stop condition".}}
-//                          ^^^^^
-            for (int i = x; i >= y; i++) { } // Noncompliant
+            for (; ; ) { }
+            for (; x < y;) { }
+            for (; x < y ; z++) { }
 
+            for (int i = x; i < y; i++) { }
+            for (int i = x; i > y; i++) { }
+//                                 ^^^ Noncompliant {{'i' is incremented and will never reach 'stop condition'.}}
+//                          ^^^^^ Secondary@-1
+            for (int i = x; i >= y; i++) { } // Noncompliant
+// Secondary@-1
+            for (int i = x; i < y; ++i) { }
+            for (int i = x; i > y; ++i) { } // Noncompliant
+// Secondary@-1
+            for (int i = x; i > y; --i) { }
+            for (int i = x; i < y; --i) { } // Noncompliant
+// Secondary@-1
             for (int i = x; i > y; i--) { }
-            for (int i = x; i < y; i--) { } // Noncompliant {{"i" is decremented and will never reach "stop condition".}}
-//                          ^^^^^
+            for (int i = x; i < y; --i) { }
+//                                 ^^^ Noncompliant {{'i' is decremented and will never reach 'stop condition'.}}
+//                          ^^^^^ Secondary@-1
             for (int i = x; i <= y; i--) { } // Noncompliant
+// Secondary@-1
 
             for (int i = x; y > i; i++) { }
             for (int i = x; y < i; i++) { } // Noncompliant
+// Secondary@-1
             for (int i = x; y <= i; i++) { } // Noncompliant
+// Secondary@-1
 
             for (int i = x; y < i; i--) { }
             for (int i = x; y > i; i--) { } // Noncompliant
+// Secondary@-1
             for (int i = x; y >= i; i--) { } // Noncompliant
+// Secondary@-1
 
             for (int i = x; x < y; i--) { }
             for (int i = x; x > y; i--) { }
 
             for (int i = x; i > y; i -= 1) { }
             for (int i = x; i > y; i += 1) { } // Noncompliant
+// Secondary@-1
+
+            for (int i = x; i < y; i += 1) { }
+            for (int i = x; i < y; i -= 1) { } // Noncompliant
+// Secondary@-1
 
             for (int i = x; i > y; i -= +1) { }
             for (int i = x; i > y; i += -x) { }
@@ -36,6 +58,11 @@ namespace Tests.Diagnostics
 
             for (int i = x; i > y; i = i - 1) { }
             for (int i = x; i > y; i = i + 1) { } // Noncompliant
+// Secondary@-1
+
+            for (int i = x; i < y; i = i + 1) { }
+            for (int i = x; i < y; i = i - 1) { } // Noncompliant
+// Secondary@-1
 
             for (int i = x; i > y; i = i + z) { }
             for (int i = x; i > y; i = z + 1) { }
@@ -49,6 +76,9 @@ namespace Tests.Diagnostics
             for (int i = x; i > y; Update()) { }
             for (int i = x; Condition(); i++) { }
             for (int i = x; ; i++) { }
+            for (int i = x; i < y && x > 2; i++) { }
+            for (int i = x; i < y && x > 2; i++, x++) { }
+            for (int i = 0, j = 0; i < y; i++) { }
         }
 
         private void Update()
