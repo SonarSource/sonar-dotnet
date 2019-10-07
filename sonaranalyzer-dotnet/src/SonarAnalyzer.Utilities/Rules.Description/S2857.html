@@ -1,0 +1,15 @@
+<p>Badly formed SQL is likely to cause errors at runtime.</p>
+<p>This rule raises an issue when the spacing around SQL keywords appears to be missing.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+string select = "SELECT p.fname, p.lname, p.street1, p.street2, p.city, p.state, p.zip" +
+        "FROM person p" +  // Noncompliant; concatenates to: p.zipFROM
+        "WHERE p.id = ?";  // Noncompliant; concatenates to: pWHERE
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+string select = "SELECT p.fname, p.lname, p.street1, p.street2, p.city, p.state, p.zip" +
+    " FROM person p" +
+    " WHERE p.id = ?";
+</pre>
+

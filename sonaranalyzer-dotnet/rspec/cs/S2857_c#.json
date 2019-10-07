@@ -1,0 +1,16 @@
+{
+  "title": "SQL keywords should be delimited by whitespace",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "sql"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-2857",
+  "sqKey": "S2857",
+  "scope": "Main"
+}

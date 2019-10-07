@@ -41,6 +41,12 @@ namespace SonarAnalyzer.UnitTest
 
         // passed version
 
+        public static IEnumerable<MetadataReference> Dapper(string packageVersion = "1.50.5") =>
+            NugetMetadataFactory.Create("Dapper", packageVersion);
+
+        public static IEnumerable<MetadataReference> EntityFramework(string packageVersion = "6.2.0") =>
+            NugetMetadataFactory.Create("EntityFramework", packageVersion);
+
         public static IEnumerable<MetadataReference> FluentAssertions(string packageVersion) =>
             NugetMetadataFactory.Create("FluentAssertions", packageVersion);
 
@@ -95,6 +101,9 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> MicrosoftAspNetMvcCore(string packageVersion) =>
             NugetMetadataFactory.Create("Microsoft.AspNet.Mvc.Core", packageVersion);
 
+        public static IEnumerable<MetadataReference> MicrosoftDataSqliteCore(string packageVersion = "2.2.4") =>
+            NugetMetadataFactory.Create("Microsoft.Data.Sqlite.Core", packageVersion);
+
         public static IEnumerable<MetadataReference> MicrosoftEntityFrameworkCore(string packageVersion) =>
             NugetMetadataFactory.CreateWithCommandLine("Microsoft.EntityFrameworkCore", packageVersion);
 
@@ -127,6 +136,9 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> MicrosoftNetHttpHeaders(string packageVersion) =>
             NugetMetadataFactory.Create("Microsoft.Net.Http.Headers", packageVersion);
 
+        public static IEnumerable<MetadataReference> MicrosoftSqlServerCompact(string packageVersion = "4.0.8876.1") =>
+            NugetMetadataFactory.CreateWithCommandLine("Microsoft.SqlServer.Compact", packageVersion);
+
         public static IEnumerable<MetadataReference> MSTestTestFramework(string packageVersion) =>
             NugetMetadataFactory.Create("MSTest.TestFramework", packageVersion);
 
@@ -136,8 +148,14 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> NLog(string packageVersion) =>
             NugetMetadataFactory.Create("NLog", packageVersion);
 
+        public static IEnumerable<MetadataReference> NHibernate(string packageVersion = "5.2.2") =>
+            NugetMetadataFactory.Create("NHibernate", packageVersion);
+
         public static IEnumerable<MetadataReference> NUnit(string packageVersion) =>
             NugetMetadataFactory.Create("NUnit", packageVersion);
+
+        public static IEnumerable<MetadataReference> PetaPocoCompiled(string packageVersion = "6.0.353") =>
+            NugetMetadataFactory.Create("PetaPoco.Compiled", packageVersion);
 
         public static IEnumerable<MetadataReference> RestSharp(string packageVersion) =>
             NugetMetadataFactory.Create("RestSharp", packageVersion);
@@ -146,11 +164,26 @@ namespace SonarAnalyzer.UnitTest
             NugetMetadataFactory.Create("Serilog", packageVersion)
                 .Concat(NugetMetadataFactory.Create("Serilog.Sinks.Console", packageVersion));
 
+        public static IEnumerable<MetadataReference> ServiceStackOrmLite(string packageVersion = "5.1.0") =>
+             NugetMetadataFactory.Create("ServiceStack.OrmLite", packageVersion);
+
         public static IEnumerable<MetadataReference> SystemCollectionsImmutable(string packageVersion) =>
             NugetMetadataFactory.Create("System.Collections.Immutable", packageVersion);
 
         public static IEnumerable<MetadataReference> SystemDataSqlServerCe(string packageVersion) =>
             NugetMetadataFactory.Create("Microsoft.SqlServer.Compact", packageVersion);
+
+        internal static IEnumerable<MetadataReference> SystemDataOdbc(string packageVersion = "4.5.0") =>
+            NugetMetadataFactory.Create("System.Data.Odbc", packageVersion);
+
+        internal static IEnumerable<MetadataReference> SystemDataSqlClient(string packageVersion = "4.5.0") =>
+            NugetMetadataFactory.Create("System.Data.SqlClient", packageVersion);
+
+        internal static IEnumerable<MetadataReference> SystemDataSQLiteCore(string packageVersion = "1.0.109.0") =>
+            NugetMetadataFactory.Create("System.Data.SQLite.Core", packageVersion);
+
+        internal static IEnumerable<MetadataReference> SystemDataOracleClient(string packageVersion = "1.0.8") =>
+            NugetMetadataFactory.Create("System.Data.OracleClient", packageVersion);
 
         public static IEnumerable<MetadataReference> SystemThreadingTasksExtensions(string packageVersion) =>
             NugetMetadataFactory.Create("System.Threading.Tasks.Extensions", packageVersion);
