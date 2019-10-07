@@ -131,7 +131,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 case SyntaxKind.PreIncrementExpression:
                 case SyntaxKind.PostDecrementExpression:
                 case SyntaxKind.PostIncrementExpression:
-                    if (GetIdentifierFromUnaryExpression(incrementor) is IdentifierNameSyntax operand)
+                    if (GetUnnaryExpressionOperand(incrementor) is IdentifierNameSyntax operand)
                     {
                         identifierName = operand.Identifier.ValueText;
                         opp =  incrementorToOperation.GetValueOrDefault(incrementorKind, ArithmeticOperation.None);
@@ -206,19 +206,19 @@ namespace SonarAnalyzer.Rules.CSharp
             node is IdentifierNameSyntax identifier &&
             identifier.NameIs(identifierName);
 
-        private IdentifierNameSyntax GetIdentifierFromUnaryExpression(ExpressionSyntax syntax)
+        private ExpressionSyntax GetUnnaryExpressionOperand(ExpressionSyntax syntax)
         {
             switch (syntax.Kind())
             {
                 case SyntaxKind.PreIncrementExpression:
                 case SyntaxKind.PreDecrementExpression:
                     var prefix = (PrefixUnaryExpressionSyntax)syntax;
-                    return (IdentifierNameSyntax)prefix.Operand;
+                    return prefix.Operand;
 
                 case SyntaxKind.PostIncrementExpression:
                 case SyntaxKind.PostDecrementExpression:
                     var postfix = (PostfixUnaryExpressionSyntax)syntax;
-                    return (IdentifierNameSyntax)postfix.Operand;
+                    return postfix.Operand;
 
                 default:
                     break;

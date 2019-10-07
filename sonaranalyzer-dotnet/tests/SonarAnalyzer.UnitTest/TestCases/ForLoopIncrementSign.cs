@@ -4,11 +4,15 @@ namespace Tests.Diagnostics
 {
     public class ForLoopIncrementSign
     {
+        private int number = 10;
+
         public void TestMethod(int x, int y, int z)
         {
             for (; ; ) { }
             for (; x < y;) { }
             for (; x < y ; z++) { }
+            for (int i=0; i < x; this.number++) { }
+
 
             for (int i = x; i < y; i++) { }
             for (int i = x; i > y; i++) { }
