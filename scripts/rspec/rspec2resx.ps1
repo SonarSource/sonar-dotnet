@@ -139,7 +139,7 @@ function CreateStringResources($rules) {
     }
 
     # Create a new Sonar Way definition without hotspots to be loaded on SonarQube older than 7.3
-    ConvertTo-Json $sonarWayRules | Set-Content "${rspecFolder}\\Sonar_way_profile_no_hotspot.json"
+    [IO.File]::WriteAllText("${rspecFolder}\\Sonar_way_profile_no_hotspot.json", ((ConvertTo-Json $sonarWayRules) -replace "`r`n", "`n") + "`n")
 
     # improve readability of the generated file
     [void]$resources.Sort()
