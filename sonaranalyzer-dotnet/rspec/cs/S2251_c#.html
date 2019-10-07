@@ -1,0 +1,29 @@
+<p>A <code>for</code> loop with a counter that moves in the wrong direction is not an infinite loop. Because of wraparound, the loop will eventually
+reach its stop condition, but in doing so, it will run many, many more times than anticipated, potentially causing unexpected behavior. </p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public void DoSomething(string[] strings)
+{
+  for (int i = 0; i &lt; strings.Length; i--)  // Noncompliant
+  {
+    string s = strings[i];  // IndexOutOfRangeException  when i reaches -1
+    // do stuff
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public void DoSomething(string[] strings)
+{
+  for (int i = 0; i &lt; strings.Length; i++)
+  {
+    string s = strings[i];
+    // do stuff
+  }
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/zYEzAg">CERT, MSC54-J.</a> - Avoid inadvertent wrapping of loop counters </li>
+</ul>
+
