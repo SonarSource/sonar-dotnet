@@ -151,7 +151,8 @@ function GetRulesInfo($lang, $rules) {
     }
 
     # Create a new Sonar Way definition without hotspots to be loaded on SonarQube older than 7.3
-    ConvertTo-Json $sonarWayRules | Set-Content "${rspecFolder}\\Sonar_way_profile_no_hotspot.json"
+    [IO.File]::WriteAllText("${rspecFolder}\\Sonar_way_profile_no_hotspot.json", ((ConvertTo-Json $sonarWayRules) -replace "`r`n", "`n") + "`n")
+
     return $newRuleData
 }
 
@@ -250,10 +251,10 @@ Write-Host "Will change directory to $sonarpediaFolder to run rule-api"
 pushd $sonarpediaFolder
 
 if ($ruleKey) {
-    java -jar $rule_api_jar generate -rule $ruleKey
+    java "-Dline.separator=`n" -jar $rule_api_jar generate -rule $ruleKey
 }
 else {
-    java -jar $rule_api_jar update
+    java "-Dline.separator=`n" -jar $rule_api_jar update
 }
 
 Write-Host "Ran rule-api, will move back to root"
