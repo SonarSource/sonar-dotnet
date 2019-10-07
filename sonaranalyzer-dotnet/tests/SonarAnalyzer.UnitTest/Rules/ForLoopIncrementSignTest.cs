@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,14 +25,14 @@ using csharp::SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class ForLoopIncrementSignCheckTest
+    public class ForLoopIncrementSignTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ForLoopIncrementSignCheck()
+        public void ForLoopIncrementSign()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ForLoopIncrementSignCheck.cs",
-                new ForLoopIncrementSignCheck());
+            Verifier.VerifyAnalyzer(@"TestCases\ForLoopIncrementSign.cs",
+                new ForLoopIncrementSign());
         }
     }
 }

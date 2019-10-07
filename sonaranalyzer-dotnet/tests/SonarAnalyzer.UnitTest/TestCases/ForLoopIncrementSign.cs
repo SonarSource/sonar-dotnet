@@ -2,7 +2,7 @@
 
 namespace Tests.Diagnostics
 {
-    public class ForLoopIncrementSignCheck
+    public class ForLoopIncrementSign
     {
         public void TestMethod(int x, int y, int z)
         {
