@@ -1,0 +1,19 @@
+<p>Looking for a given substring starting from a specified offset can be achieved by such code: <code>str.Substring(startIndex).IndexOf(char1)</code>.
+This works well, but it creates a new <code>string</code> for each call to the <code>Substring</code> method. When this is done in a loop, a lot of
+<code>strings</code> are created for nothing, which can lead to performance problems if <code>str</code> is large.</p>
+<p>To avoid performance problems, <code>string.Substring(startIndex)</code> should not be chained with the following methods:</p>
+<p>- <code>IndexOf</code></p>
+<p>- <code>IndexOfAny</code></p>
+<p>- <code>LastIndexOf</code></p>
+<p>- <code>LastIndexOfAny</code></p>
+<p>For each of these methods, another method with an additional parameter is available to specify an offset.</p>
+<p>Using these methods gives the same result while avoiding the creation of additional <code>String</code> instances.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+str.Substring(StartIndex).IndexOf(char1); // Noncompliant; a new string is going to be created by "Substring"
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+str.IndexOf(char1, startIndex);
+</pre>
+
