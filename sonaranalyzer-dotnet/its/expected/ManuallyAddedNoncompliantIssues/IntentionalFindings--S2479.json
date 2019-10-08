@@ -6,9 +6,9 @@
 "location":  {
 "uri":  "sources\ManuallyAddedNoncompliantIssues\IntentionalFindings\S2479.cs",
 "region":  {
-"startLine":  9,
+"startLine":  25,
 "startColumn":  47,
-"endLine":  9,
+"endLine":  25,
 "endColumn":  56
 }
 }

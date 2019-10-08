@@ -20,8 +20,17 @@
 
 namespace IntentionalFindings
 {
-    public static class S2479
+    public static class S2251
     {
-        public static readonly string VALUE = "foo​bar"; // this string contains a \u200B character
+        public static void TestMethod()
+        {
+            const int limit = 5;
+            var sum = 0;
+
+            for (int i = 10; i > limit; i++)  // 'i' is incremented and will never reach 'stop condition'
+            {
+                sum++;
+            }
+        }
     }
 }
