@@ -11,8 +11,7 @@ namespace Tests.Diagnostics
         }
 
         public int GetIndex =>
-            "Test".Substring(1).IndexOf('t'); // Noncompliant {{Replace 'IndexOf' with the overload that accepts an offset parameter.}}
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            "Test".Substring(1).IndexOf('t'); // Noncompliant
 
         public void StringOffsetMethodsCases(string x)
         {
@@ -23,22 +22,14 @@ namespace Tests.Diagnostics
             "Test".IndexOf("es");
             "Test".IndexOf("es", 1);
             "Test".IndexOf("es", 1, StringComparison.InvariantCulture);
-            "Test".Substring(1).IndexOf('t'); // Noncompliant {{Replace 'IndexOf' with the overload that accepts an offset parameter.}}
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            "Test".Substring(1).IndexOf("t"); // Noncompliant {{Replace 'IndexOf' with the overload that accepts an offset parameter.}}
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            "Test".Substring(1).IndexOf("t", 1); // Noncompliant {{Replace 'IndexOf' with the overload that accepts an offset parameter.}}
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            "Test".Substring(1).IndexOf("t", StringComparison.InvariantCulture); // Noncompliant {{Replace 'IndexOf' with the overload that accepts an offset parameter.}}
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            "Test".Substring(1).IndexOf('t', 1, 3); // Noncompliant {{Replace 'IndexOf' with the overload that accepts an offset parameter.}}
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            "Test".Substring(1).IndexOf("t", 1, 3); // Noncompliant {{Replace 'IndexOf' with the overload that accepts an offset parameter.}}
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            "Test".Substring(1).IndexOf("t", 1, StringComparison.CurrentCulture); // Noncompliant {{Replace 'IndexOf' with the overload that accepts an offset parameter.}}
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            "Test".Substring(1).IndexOf("t", 1, 3, StringComparison.CurrentCulture); // Noncompliant {{Replace 'IndexOf' with the overload that accepts an offset parameter.}}
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            "Test".Substring(1).IndexOf('t'); // Noncompliant
+            "Test".Substring(1).IndexOf("t"); // Noncompliant
+            "Test".Substring(1).IndexOf("t", 1); // Noncompliant
+            "Test".Substring(1).IndexOf("t", StringComparison.InvariantCulture); // Noncompliant
+            "Test".Substring(1).IndexOf('t', 1, 3); // Noncompliant
+            "Test".Substring(1).IndexOf("t", 1, 3); // Noncompliant
+            "Test".Substring(1).IndexOf("t", 1, StringComparison.CurrentCulture); // Noncompliant
+            "Test".Substring(1).IndexOf("t", 1, 3, StringComparison.CurrentCulture); // Noncompliant
 
             "Test".IndexOfAny(new[] { 't' });
             "Test".IndexOfAny(new[] { 't' }, 2);
@@ -53,8 +44,7 @@ namespace Tests.Diagnostics
             "Test".LastIndexOf("t", 1, 3);
             "Test".Substring(1).LastIndexOf('t'); // Noncompliant {{Replace 'LastIndexOf' with the overload that accepts an offset parameter.}}
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            "Test".Substring(1).LastIndexOf("t"); // Noncompliant {{Replace 'LastIndexOf' with the overload that accepts an offset parameter.}}
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            "Test".Substring(1).LastIndexOf("t"); // Noncompliant
 
 
             "Test".LastIndexOfAny(new[] { 't' });
@@ -63,16 +53,14 @@ namespace Tests.Diagnostics
             "Test".Substring(1).LastIndexOfAny(new[] { 't' }); // Noncompliant {{Replace 'LastIndexOfAny' with the overload that accepts an offset parameter.}}
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-            x.Substring(1).IndexOf('t'); // Noncompliant {{Replace 'IndexOf' with the overload that accepts an offset parameter.
-//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            x.Substring(1).IndexOf('t'); // Noncompliant
 
             x.Substring(1, 3);
             x.Substring(1).Remove(1).IndexOf('t');
             x.Remove(1).IndexOf('t');
 
             Func<char, int> getIndex = c => {
-                return "Test".Substring(1).IndexOf(c); // Noncompliant {{Replace 'IndexOf' with the overload that accepts an offset parameter.}}
-//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                return "Test".Substring(1).IndexOf(c); // Noncompliant
             };
         }
     }
