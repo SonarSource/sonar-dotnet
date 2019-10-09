@@ -432,5 +432,11 @@
         {
             return type.GetType().ToString();
         }
+
+        [TestCase(typeof(string[]), "System.String[]")]
+        public string NoNamedParameter(Type type) // Noncompliant FP
+        {
+            return type.GetType().ToString();
+        }
     }
 }
