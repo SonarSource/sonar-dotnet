@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4635",
-"message":  "A new string is going to be created by 'Substring'.",
+"message":  "Replace 'IndexOf' with the overload that accepts an offset parameter.",
 "location":  {
 "uri":  "sources\ManuallyAddedNoncompliantIssues\IntentionalFindings\S4635.cs",
 "region":  {
