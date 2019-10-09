@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4635",
+"message":  "Replace 'IndexOf' with the overload that accepts an offset parameter.",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\IntentionalFindings\S4635.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  13,
+"endLine":  28,
+"endColumn":  80
+}
+}
+}
+]
+}

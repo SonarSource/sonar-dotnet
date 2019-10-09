@@ -4632,7 +4632,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["4632"],
             //["4633"],
             //["4634"],
-            //["4635"],
+            ["4635"] = "CODE_SMELL",
             //["4636"],
             //["4637"],
             //["4638"],
