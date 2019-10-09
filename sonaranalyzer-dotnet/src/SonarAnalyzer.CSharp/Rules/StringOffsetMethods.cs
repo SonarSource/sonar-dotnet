@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -34,24 +34,45 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class StringOffsetMethods : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4635";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "A new string is going to be created by 'Substring'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        private readonly string[] methodsToCheck = new string[]
+        {
+            "IndexOf",
+            "IndexOfAny",
+            "LastIndexOf",
+            "LastIndexOfAny"
+        };
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(analysisContext =>
                 {
-                    var node = c.Node;
-                    if (true)
+                    var invocationExpression = (InvocationExpressionSyntax)analysisContext.Node;
+                    var semanticModel = analysisContext.SemanticModel;
+
+                    if (IsTargetMethodInvocation(invocationExpression, semanticModel) &&
+                        HasSubstringMethodInvocationChild(invocationExpression, semanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
+                        analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocationExpression.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);
         }
+
+        private bool IsTargetMethodInvocation(InvocationExpressionSyntax invocationExpression, SemanticModel semanticModel) =>
+            methodsToCheck.Any(methodName => invocationExpression.IsMethodInvocation(KnownType.System_String, methodName, semanticModel));
+
+        private bool HasSubstringMethodInvocationChild(InvocationExpressionSyntax invocationExpression, SemanticModel semanticModel) =>
+            invocationExpression.Expression is MemberAccessExpressionSyntax memberAccessExpression &&
+            memberAccessExpression.Expression is InvocationExpressionSyntax childInvocationExpression &&
+            childInvocationExpression.IsMethodInvocation(KnownType.System_String, "Substring", semanticModel);
+
     }
 }
 
