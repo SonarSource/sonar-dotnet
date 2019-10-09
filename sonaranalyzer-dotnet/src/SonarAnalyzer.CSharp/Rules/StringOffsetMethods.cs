@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class StringOffsetMethods : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4635";
-        private const string MessageFormat = "A new string is going to be created by 'Substring'.";
+        private const string MessageFormat = "Replace '{0}' with the overload that accepts an offset parameter.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -59,7 +59,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (IsTargetMethodInvocation(invocationExpression, semanticModel) &&
                         HasSubstringMethodInvocationChild(invocationExpression, semanticModel))
                     {
-                        analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocationExpression.GetLocation()));
+                        var memberAccess = (MemberAccessExpressionSyntax)invocationExpression.Expression;
+
+                        analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocationExpression.GetLocation(), memberAccess.Name));
                     }
                 },
                 SyntaxKind.InvocationExpression);
