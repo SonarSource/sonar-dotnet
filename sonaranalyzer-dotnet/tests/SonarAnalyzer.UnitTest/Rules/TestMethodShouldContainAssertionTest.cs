@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [DataTestMethod]
-        [DataRow("2.5.7.10213", "4.19.4")]
+        [DataRow("3.11.0", "4.19.4")]
         [DataRow(Constants.NuGetLatestVersion, "4.19.4")]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_NUnit(string testFwkVersion, string fluentVersion)
