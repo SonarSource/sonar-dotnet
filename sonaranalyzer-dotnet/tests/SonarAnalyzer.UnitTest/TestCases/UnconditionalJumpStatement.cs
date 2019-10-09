@@ -500,4 +500,23 @@ namespace Tests.Diagnostics
         public void foo() { }
         public void bar() { }
     }
+
+    class C
+    {
+        int P => throw new Exception();
+        int M()
+        {
+            while (true)
+            {
+                try
+                {
+                    // P will throw, it will be caught and another iteration will happen
+                    return P; // Noncompliant FP
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
+    }
 }
