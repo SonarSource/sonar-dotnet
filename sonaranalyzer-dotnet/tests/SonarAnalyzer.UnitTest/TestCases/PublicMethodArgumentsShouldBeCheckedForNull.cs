@@ -255,4 +255,31 @@ namespace Tests.Diagnostics
             return name.ToString(); // Noncompliant FP
         }
     }
+
+    public class ReproIssue2670
+    {
+        public static void BooleanEqualityComparison(string argument, bool b)
+        {
+            if (string.IsNullOrEmpty(argument) == true)
+            {
+                return;
+            }
+            if (b)
+            {
+                int index = argument.LastIndexOf('c'); // Noncompliant FP
+            }
+        }
+
+        public static void NoComparison(string argument, bool b)
+        {
+            if (string.IsNullOrEmpty(argument))
+            {
+                return;
+            }
+            if (b)
+            {
+                int index = argument.LastIndexOf('c');
+            }
+        }
+    }
 }
