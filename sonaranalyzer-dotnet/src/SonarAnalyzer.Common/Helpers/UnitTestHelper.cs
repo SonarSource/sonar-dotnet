@@ -107,6 +107,11 @@ namespace SonarAnalyzer.Helpers
         public static bool HasExpectedExceptionAttribute(this IMethodSymbol method) =>
             method.GetAttributes().Any(a => a.AttributeClass.IsAny(KnownExpectedExceptionAttributes));
 
+        public static bool HasAssertionInAttribute(this IMethodSymbol method) =>
+            method.GetAttributes().Any(a =>
+                a.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseAttribute) &&
+                a.NamedArguments.Any(arg => arg.Key == "ExpectedResult"));
+
         public static bool IsMsTestOrNUnitTestIgnored(this IMethodSymbol method)
         {
             var attributes = method.GetAttributes();

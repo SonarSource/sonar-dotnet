@@ -1,6 +1,7 @@
 ﻿namespace TestNUnit
 {
     using System;
+    using System.Collections.Generic;
     using FluentAssertions;
     using NUnit.Framework;
 
@@ -417,6 +418,19 @@
         [Ignore("Some reason")]
         public void Theory15() // Don't raise on skipped test methods
         {
+        }
+    }
+
+    [TestFixture]
+    public class TypeExtensionsTests
+    {
+        [TestCase(typeof(string), ExpectedResult = "System.String")]
+        [TestCase(typeof(string[]), ExpectedResult = "System.String[]")]
+        [TestCase(typeof(List<string>), ExpectedResult = "List<System.String>")]
+        [TestCase(typeof(List<(string, int)>), ExpectedResult = "List<ValueTuple<System.String,System.Int32>>")]
+        public string GetFriendlyFullName(Type type)
+        {
+            return type.GetType().ToString();
         }
     }
 }

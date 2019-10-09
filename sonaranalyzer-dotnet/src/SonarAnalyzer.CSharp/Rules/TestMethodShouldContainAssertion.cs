@@ -56,6 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (methodSymbol == null ||
                         !methodSymbol.IsTestMethod() ||
                         methodSymbol.HasExpectedExceptionAttribute() ||
+                        methodSymbol.HasAssertionInAttribute() ||
                         IsTestIgnored(methodSymbol))
                     {
                         return;
