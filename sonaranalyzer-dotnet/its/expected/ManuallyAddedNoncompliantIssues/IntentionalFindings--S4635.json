@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4635",
+"message":  "A new string is going to be created by 'Substring'.",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\IntentionalFindings\S4635.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  13,
+"endLine":  28,
+"endColumn":  80
+}
+}
+}
+]
+}
