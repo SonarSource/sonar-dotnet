@@ -10,16 +10,27 @@ namespace Tests.Diagnostics
     {
         public void VariousSqlKeywords()
         {
+            var alterTable = @"ALTER TABLE InsurancePolicy" +
+                "ADD PERIOD FOR SYSTEM_TIME(SysStartTime, SysEndTime)," + // Noncompliant
+                "SysStartTime datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL" + // ok, we ignore comma
+                "    DEFAULT SYSUTCDATETIME()," +
+                "SysEndTime datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL" +
+                "    DEFAULT CONVERT(DATETIME2, '9999-12-31 23:59:59.99999999');";
             var bulkInsert = "BULK INSERT AdventureWorks2012.Sales.SalesOrderDetail" +
                "FROM 'neworders.txt';"; // Noncompliant {{Add a space before 'FROM'.}}
 //             ^^^^^^^^^^^^^^^^^^^^^^^
-            var select = "SELECT e.*" +
+            var create = "CREATE TABLE #t (x" + "INT PRIMARY KEY);"; // Noncompliant
+            var select = "SELECT e.*, f" +
                 "FROM DimEmployee AS e" + // Noncompliant
                 "ORDER BY LastName;"; // Noncompliant
             var delete = "DELETE TOP 10 PERCENT" + "FROM target_table;"; // Noncompliant
+            var drop = "DROP TABLE" + "AdventureWorks2012.dbo.SalesPerson2 ;"; // Noncompliant
+            var exec = "EXEC ProcWithParameters" + "@name = N'%arm%', @color = N'Black';"; // Noncompliant
+            var execute = "EXECUTE ProcWithParameters" + "@name = N'%arm%', @color = N'Black';"; // Noncompliant
             var update = "UPDATE dbo.Table2" +
                 "SET dbo.Table2.ColB = dbo.Table2.ColB + dbo.Table1.ColB" + // Noncompliant
                 "FROM dbo.Table2"; // Noncompliant
+            var grant = "GRANT EXECUTE ON TestProc" + "TO TesterRole WITH GRANT OPTION;"; // Noncompliant
             var insert = "INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)" + // FN - we only consider alphanumeric characters
                 "VALUES(1, 'Ramesh', 32, 'Ahmedabad', 2000.00);";
             var updateText = "UPDATETEXT @TableName.@ColumnName" +
@@ -37,6 +48,7 @@ namespace Tests.Diagnostics
             var writeText = "WRITETEXT pub_info.pr_info" + "ptrval 'text'"; // Noncompliant
             var writeTextWithAt = "WRITETEXT pub_info.pr_info" + "@ptrval 'text'"; // Noncompliant
             var readText = "READTEXT" + "pub_info.pr_info @ptrval 1 25;"; // Noncompliant
+            var truncate = "TRUNCATE" + "TABLE HumanResources.JobCandidate;"; // Noncompliant
         }
 
         public string Property
@@ -51,11 +63,11 @@ namespace Tests.Diagnostics
             }
         }
 
-        private string field = "SELECT *" +
+        private string field = "SELECT col,col2" +
             "FROM TABLE" +  // Noncompliant
             "WHERE X = 1;"; // Noncompliant
 
-        private string caseInsensitive = "select *" +
+        private string caseInsensitive = "select col3" +
             "from t" +  // Noncompliant
             "where X = 1;"; // Noncompliant
 
@@ -74,7 +86,11 @@ namespace Tests.Diagnostics
             "WHERE X = 1;";
         private string not_sql_string = "I like tomatoes" + "and potatoes";
         private int not_string = 1 + 2 + 3;
-        private string combined = "SELECT all" + 1 + "FROM table";
+        private string empty = string.Empty;
+        private string empty2 = "" + "" + "  " + "\\t" + " ";
+        private string combined = "SELECT all" + 1 + "FROM table"; // FN
+        private string combined2 = "SELECT all" + "" + "FROM table" + "";
+        private string notAdd = "SELECT" + 2 * 3 + "FROM table"; // FN
 
         void ValidCases(string parameter)
         {
@@ -102,7 +118,7 @@ namespace Tests.Diagnostics
                 "WHERE something = x--" +
                 "ORDERBY z";
             var multilineComment = "SELECT * FROM table/*" +
-                "WHERE something = x" + // Noncompliant FP
+                "WHERE something = x" +
                 "ORDERBY z*/"; // Noncompliant FP
             var nonAlphaNumeric = "SELECT * FROM table+" +
                 "WHERE something = x^" +
@@ -115,14 +131,22 @@ namespace Tests.Diagnostics
             var parantheses = "SELECT (" +
                 "x.y,z.z)" + // FN - we ignore parantheses as they can lead to FPs
                 "FROM  table;";
+            var parantheses2 = "SELECT " + ("all") + "FROM table"; // FN
         }
 
-        public void InterpolatedStringsAreIgnored(string col1, string col2, string innerQuery)
+        public void InterpolatedAndRawStringsAreIgnored(string col1, string col2, string innerQuery)
         {
             var select = $"SELECT e.{col1},e.{col2}" + // FN
                 $"FROM DimEmployee AS e" +
                 $"ORDER BY LastName;";
             var interpolatedQuery = $"SELECT x" + $"{innerQuery}";
+            var alterTable = @"ALTER TABLE InsurancePolicy
+ADD PERIOD FOR SYSTEM_TIME(SysStartTime, SysEndTime),
+SysStartTime datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL
+    DEFAULT SYSUTCDATETIME(),
+SysEndTime datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL
+    DEFAULT CONVERT(DATETIME2, '9999-12-31 23:59:59.99999999');";
+
         }
     }
 }

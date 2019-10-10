@@ -25,7 +25,7 @@ namespace Test.SqlAlias
     using SqlAlias = System.Data.SqlClient;
     class Foo
     {
-        private string field = "SELECT *" +
+        private string field = "SELECT a" +
             "FROM TABLE" + // Noncompliant
             " WHERE X = 1;";
     }
@@ -36,7 +36,7 @@ namespace Test.NormalUsing
     using System.Data.SqlClient;
     class Foo
     {
-        private string field = "SELECT *" +
+        private string field = "SELECT a" +
             "FROM TABLE" + // Noncompliant
             " WHERE X = 1;";
     }

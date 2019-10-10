@@ -60,17 +60,25 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxFactory.IdentifierName("PetaPoco")
         };
 
-        private static readonly IList<string> SqlKeywords = new List<string>()
+        // We are interested in SQL keywords that start a query (so without "FROM", for example)
+        private static readonly IList<string> SqlStartQueryKeywords = new List<string>()
         {
+            "ALTER",
             "BULK INSERT",
-            "SELECT",
+            "CREATE",
             "DELETE",
-            "UPDATE",
+            "DROP",
+            "EXEC",
+            "EXECUTE",
+            "GRANT",
             "INSERT",
-            "UPDATETEXT",
             "MERGE",
-            "WRITETEXT",
-            "READTEXT"
+            "READTEXT",
+            "SELECT",
+            "TRUNCATE",
+            "UPDATE",
+            "UPDATETEXT",
+            "WRITETEXT"
         };
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -127,9 +135,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                var previousStringLastChar = ((LiteralExpressionSyntax)beforeCurrentString).Token.ValueText.ToCharArray().Last();
-                var currentStringFirstChar = node.Token.ValueText[0];
-                if (IsKnownCharacter(previousStringLastChar) && IsKnownCharacter(currentStringFirstChar))
+                var previousStringText = ((LiteralExpressionSyntax)beforeCurrentString).Token.ValueText;
+                var currentStringText = node.Token.ValueText;
+                if (previousStringText.Length > 0 &&
+                    IsAlphaNumericOrAt(previousStringText.ToCharArray().Last()) &&
+                    currentStringText.Length > 0 &&
+                    IsAlphaNumericOrAt(currentStringText[0]))
                 {
                     var nodeFirstToken = node.Token.ValueText.Trim().Split(' ').First();
                     this.context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation(), nodeFirstToken));
@@ -139,13 +150,10 @@ namespace SonarAnalyzer.Rules.CSharp
             // Given a concatenation "a" + "b" + "c", this will return the "b" syntax node (one before last)
             private static SyntaxNode GetPenultimateString(BinaryExpressionSyntax concatenation)
             {
-                var penultimateElement = concatenation.Left;
-                while (penultimateElement is BinaryExpressionSyntax previousAddition &&
-                    previousAddition.IsKind(SyntaxKind.AddExpression))
-                {
-                    penultimateElement = previousAddition.Right;
-                }
-                return penultimateElement;
+                var left = concatenation.Left;
+                return left is BinaryExpressionSyntax addition && addition.IsKind(SyntaxKind.AddExpression)
+                    ? addition.Right
+                    : left;
             }
 
             // Given a concatenation "a" + "b" + "c", this will return the "a" syntax node
@@ -161,14 +169,13 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             private static bool StartsWithSqlKeyword(string firstString) =>
-                SqlKeywords.Any(s => firstString.StartsWith(s, StringComparison.OrdinalIgnoreCase));
+                SqlStartQueryKeywords.Any(s => firstString.StartsWith(s, StringComparison.OrdinalIgnoreCase));
 
             /**
              * The '@' symbol is used for named parameters.
-             * The '*' is a widely used wildcard.
              * We ignore other non-alphanumeric characters (e.g. '>','=') to avoid false positives.
              */
-            private static bool IsKnownCharacter(char c) => char.IsLetterOrDigit(c) || c == '@' || c == '*';
+            private static bool IsAlphaNumericOrAt(char c) => char.IsLetterOrDigit(c) || c == '@';
         }
     }
 }
