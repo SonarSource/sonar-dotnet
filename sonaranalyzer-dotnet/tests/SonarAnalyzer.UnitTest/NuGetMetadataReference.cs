@@ -101,7 +101,7 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> MicrosoftAspNetMvcCore(string packageVersion) =>
             NugetMetadataFactory.Create("Microsoft.AspNet.Mvc.Core", packageVersion);
 
-        public static IEnumerable<MetadataReference> MicrosoftDataSqliteCore(string packageVersion = "2.2.4") =>
+        public static IEnumerable<MetadataReference> MicrosoftDataSqliteCore(string packageVersion = "2.0.0") =>
             NugetMetadataFactory.Create("Microsoft.Data.Sqlite.Core", packageVersion);
 
         public static IEnumerable<MetadataReference> MicrosoftEntityFrameworkCore(string packageVersion) =>

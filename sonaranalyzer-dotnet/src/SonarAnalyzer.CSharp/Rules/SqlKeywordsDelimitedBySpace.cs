@@ -128,8 +128,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 var previousStringLastChar = ((LiteralExpressionSyntax)beforeCurrentString).Token.ValueText.ToCharArray().Last();
-                var currentStringLastChar = node.Token.ValueText[0];
-                if (IsKnownCharacter(previousStringLastChar) && IsKnownCharacter(currentStringLastChar))
+                var currentStringFirstChar = node.Token.ValueText[0];
+                if (IsKnownCharacter(previousStringLastChar) && IsKnownCharacter(currentStringFirstChar))
                 {
                     var nodeFirstToken = node.Token.ValueText.Trim().Split(' ').First();
                     this.context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation(), nodeFirstToken));
