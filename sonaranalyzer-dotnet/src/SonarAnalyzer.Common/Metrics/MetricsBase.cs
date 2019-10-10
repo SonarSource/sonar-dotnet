@@ -151,16 +151,6 @@ namespace SonarAnalyzer.Common
 
         #endregion Classes, Accessors, Functions, Statements
 
-        #region PublicApi
-
-        public int PublicApiCount => PublicApiNodes.Count();
-
-        public int PublicUndocumentedApiCount => PublicApiNodes.Count(n => !n.GetLeadingTrivia().Any(IsDocumentationCommentTrivia));
-
-        protected abstract ImmutableArray<SyntaxNode> PublicApiNodes { get; }
-
-        #endregion PublicApi
-
         #region Complexity
 
         public int Complexity => GetCyclomaticComplexity(this.tree.GetRoot());
@@ -170,19 +160,6 @@ namespace SonarAnalyzer.Common
         public abstract int GetCyclomaticComplexity(SyntaxNode node);
 
         public abstract int GetCognitiveComplexity(SyntaxNode node);
-
-        public Distribution FunctionComplexityDistribution
-        {
-            get
-            {
-                var distribution = new Distribution(Distribution.FunctionComplexityRange);
-                foreach (var node in FunctionNodes)
-                {
-                    distribution.Add(GetCyclomaticComplexity(node));
-                }
-                return distribution;
-            }
-        }
 
         #endregion Complexity
     }

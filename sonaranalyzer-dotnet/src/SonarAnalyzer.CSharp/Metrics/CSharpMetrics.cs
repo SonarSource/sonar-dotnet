@@ -51,9 +51,6 @@ namespace SonarAnalyzer.Metrics.CSharp
         public override ImmutableArray<int> ExecutableLines =>
             this.lazyExecutableLines.Value;
 
-        protected override ImmutableArray<SyntaxNode> PublicApiNodes =>
-            publicApiNodes.Value;
-
         public override int GetCognitiveComplexity(SyntaxNode node) =>
             CSharpCognitiveComplexityMetric.GetComplexity(node).Complexity;
 

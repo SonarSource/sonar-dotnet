@@ -360,86 +360,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
 
         [TestMethod]
         [TestCategory(MetricsTestCategoryName)]
-        public void PublicApi()
-        {
-            PublicApi(AnalyzerLanguage.CSharp, "").Should().Be(0);
-            PublicApi(AnalyzerLanguage.CSharp, "class MyClass { }").Should().Be(0);
-            PublicApi(AnalyzerLanguage.CSharp, "public class MyClass { }").Should().Be(1);
-            PublicApi(AnalyzerLanguage.CSharp, "namespace MyNS { }").Should().Be(0);
-            PublicApi(AnalyzerLanguage.CSharp, "public class MyClass { public void MyMethod() { } }").Should().Be(2);
-            PublicApi(AnalyzerLanguage.CSharp, "private class MyClass { public void MyMethod() { } }").Should().Be(0);
-            PublicApi(AnalyzerLanguage.CSharp, "public class MyClass { public int MyField; }").Should().Be(2);
-            PublicApi(AnalyzerLanguage.CSharp, "public interface MyInterface { public class MyClass { } }").Should().Be(2);
-            PublicApi(AnalyzerLanguage.CSharp, "namespace MyNS { public class MyClass { } }").Should().Be(1);
-            PublicApi(AnalyzerLanguage.CSharp, "public class MyClass { public event EventHandler OnSomething; }").Should().Be(2);
-            PublicApi(AnalyzerLanguage.CSharp, "public class MyClass { public delegate void Foo(); }").Should().Be(2);
-            PublicApi(AnalyzerLanguage.CSharp, "public class MyClass { public static MyClass operator +(MyClass a) { return a; } }").Should().Be(2);
-            PublicApi(AnalyzerLanguage.CSharp, "public class MyClass { public class MyClass2 { public int MyField; } }").Should().Be(3);
-            PublicApi(AnalyzerLanguage.CSharp, "public enum MyEnum { MyValue1, MyValue2 }").Should().Be(1);
-            PublicApi(AnalyzerLanguage.CSharp, "public struct MyStruct { public int MyField; }").Should().Be(2);
-            PublicApi(AnalyzerLanguage.CSharp, "public class MyClass { public MyClass this[int i] { get { return null; } } }").Should().Be(2);
-            PublicApi(AnalyzerLanguage.CSharp, "public class MyClass { public int MyProperty { get; set; } }").Should().Be(2);
-            PublicApi(AnalyzerLanguage.CSharp, "public class MyClass { void MyMethod() { } }").Should().Be(1);
-            PublicApi(AnalyzerLanguage.CSharp, "public class MyClass { private void MyMethod() { } }").Should().Be(1);
-            PublicApi(AnalyzerLanguage.CSharp, "public class MyClass { protected MyMethod() { } }").Should().Be(1);
-
-            PublicApi(AnalyzerLanguage.VisualBasic, "").Should().Be(0);
-            PublicApi(AnalyzerLanguage.VisualBasic, "Class [MyClass] \n End Class").Should().Be(0);
-            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n End Class").Should().Be(1);
-            PublicApi(AnalyzerLanguage.VisualBasic, "Namespace MyNS \n End Namespace").Should().Be(0);
-            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Public Sub MyMethod() \n End Sub \n End Class").Should().Be(2);
-            PublicApi(AnalyzerLanguage.VisualBasic, "Private Class [MyClass] \n Public Sub MyMethod() \n End Sub \n End Class").Should().Be(0);
-            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Public MyField As Integer \n End Class").Should().Be(2);
-            PublicApi(AnalyzerLanguage.VisualBasic, "Public Interface MyInterface \n Class[MyClass] \n End Class \n End Interface").Should().Be(2);
-            PublicApi(AnalyzerLanguage.VisualBasic, "Namespace MyNS \n Public Class[MyClass] \n End Class \n End Namespace").Should().Be(1);
-            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Public Event OnSomething As EventHandler \n End Class").Should().Be(2);
-            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Public Delegate Sub Foo() \n End Class").Should().Be(2);
-            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Public Shared Operator +(ByVal a As [MyClass]) As [MyClass] \n Return a \n End Operator \n End Class").Should().Be(2);
-            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Public Class MyClass2 \n Public MyField As Integer \n End Class \n End Class").Should().Be(3);
-            PublicApi(AnalyzerLanguage.VisualBasic, "Public Enum MyEnum \n MyValue1 \n MyValue2 \n End Enum").Should().Be(1);
-            PublicApi(AnalyzerLanguage.VisualBasic, "Public Structure MyStruct \n Public MyField As Integer \n End Structure").Should().Be(2);
-            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Default Public ReadOnly Property Item(ByVal i As Integer) As[MyClass] \n Get \n Return Nothing \n End Get \n End Property \n End Class").Should().Be(2);
-            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Public Property MyProperty As Integer \n End Class").Should().Be(2);
-            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Private Sub MyMethod() \n End Sub \n End Class").Should().Be(1);
-            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Private Sub MyMethod() \n End Sub \n End Class").Should().Be(1);
-            PublicApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Protected Sub New() \n End Sub \n End Class").Should().Be(1);
-        }
-
-        private static int PublicApi(AnalyzerLanguage language, string text) => MetricsFor(language, text).PublicApiCount;
-
-        [TestMethod]
-        [TestCategory(MetricsTestCategoryName)]
-        public void PublicUndocumentedApi()
-        {
-            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "").Should().Be(0);
-            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "class MyClass { }").Should().Be(0);
-            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "public class MyClass { }").Should().Be(1);
-            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "//... \n public class MyClass { }").Should().Be(1);
-            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "/* ... */ public class MyClass { }").Should().Be(1);
-            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "///... \n public class MyClass { }").Should().Be(0); // Count regular comments starting with /// as documentation comments
-            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "/// <summary>...</summary> \n public class MyClass { }").Should().Be(0);
-            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "public class MyClass { \n public int MyField; }").Should().Be(2);
-            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "public class MyClass { \n /*...*/ \n public int MyField; }").Should().Be(2);
-            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "public class MyClass { \n //... \n public int MyField; }").Should().Be(2);
-            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "public class MyClass { \n /// <summary>...</summary> \n public int MyField; }").Should().Be(1);
-            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "public class MyClass { \n /// ... \n public int MyField; }").Should().Be(1);
-            PublicUndocumentedApi(AnalyzerLanguage.CSharp, "/// <summary>...</summary> \n public class MyClass { \n /// <summary>...</summary> \n public int MyField; }").Should().Be(0);
-
-            PublicUndocumentedApi(AnalyzerLanguage.VisualBasic, "").Should().Be(0);
-            PublicUndocumentedApi(AnalyzerLanguage.VisualBasic, "Class [MyClass] \n End Class").Should().Be(0);
-            PublicUndocumentedApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n End Class").Should().Be(1);
-            PublicUndocumentedApi(AnalyzerLanguage.VisualBasic, "'... \n Public Class [MyClass] \n End Class").Should().Be(1);
-            PublicUndocumentedApi(AnalyzerLanguage.VisualBasic, "REM... \n Public Class [MyClass] \n End Class").Should().Be(1);
-            PublicUndocumentedApi(AnalyzerLanguage.VisualBasic, "'''<summary>...</summary> \n Public Class [MyClass] \n End Class").Should().Be(0);
-            PublicUndocumentedApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n Public MyField As Integer \n End Class").Should().Be(2);
-            PublicUndocumentedApi(AnalyzerLanguage.VisualBasic, "Public Class [MyClass] \n '''<summary>...</summary> \n Public MyField As Integer \n End Class").Should().Be(1);
-            PublicUndocumentedApi(AnalyzerLanguage.VisualBasic, "'''<summary>...</summary> \n Public Class [MyClass] \n '''<summary>...</summary> \n Public MyField As Integer \n End Class").Should().Be(0);
-        }
-
-        private static int PublicUndocumentedApi(AnalyzerLanguage language, string text) => MetricsFor(language, text).PublicUndocumentedApiCount;
-
-        [TestMethod]
-        [TestCategory(MetricsTestCategoryName)]
         public void Complexity()
         {
             Complexity(AnalyzerLanguage.CSharp, "")
@@ -596,31 +516,6 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
 
         private static int CognitiveComplexity(AnalyzerLanguage language, string text) =>
             MetricsFor(language, text).CognitiveComplexity;
-
-        [TestMethod]
-        [TestCategory(MetricsTestCategoryName)]
-        public void FunctionComplexityDistribution()
-        {
-            FunctionComplexityDistribution(AnalyzerLanguage.CSharp, "").Ranges.Should().BeEquivalentTo(1, 2, 4, 6, 8, 10, 12);
-            FunctionComplexityDistribution(AnalyzerLanguage.CSharp, "").Values.Should().BeEquivalentTo(0, 0, 0, 0, 0, 0, 0);
-            FunctionComplexityDistribution(AnalyzerLanguage.CSharp, "class MyClass { void M1() { } }").Values.Should().BeEquivalentTo(1, 0, 0, 0, 0, 0, 0);
-            FunctionComplexityDistribution(AnalyzerLanguage.CSharp, "class MyClass { void M1() { } void M2() { } }").Values.Should().BeEquivalentTo(2, 0, 0, 0, 0, 0, 0);
-            FunctionComplexityDistribution(AnalyzerLanguage.CSharp, "class MyClass { void M1() { if (false) { } } }").Values.Should().BeEquivalentTo(0, 1, 0, 0, 0, 0, 0);
-            FunctionComplexityDistribution(AnalyzerLanguage.CSharp, "class MyClass { void M1() { if (false) { } if (false) { } if (false) { } } }").Values.Should().BeEquivalentTo(0, 0, 1, 0, 0, 0, 0);
-
-            FunctionComplexityDistribution(AnalyzerLanguage.VisualBasic, "").Ranges.Should().BeEquivalentTo(1, 2, 4, 6, 8, 10, 12);
-            FunctionComplexityDistribution(AnalyzerLanguage.VisualBasic, "").Values.Should().BeEquivalentTo(0, 0, 0, 0, 0, 0, 0);
-            FunctionComplexityDistribution(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub M1() \n End Sub \n End Class").Values.Should().BeEquivalentTo(1, 0, 0, 0, 0, 0, 0);
-            FunctionComplexityDistribution(AnalyzerLanguage.VisualBasic, "Class MyClass \n Sub M1() \n End Sub \n Sub M2() \n End Sub \nEnd Class").Values.Should().BeEquivalentTo(2, 0, 0, 0, 0, 0, 0);
-            FunctionComplexityDistribution(AnalyzerLanguage.VisualBasic,
-                "Class MyClass \n Sub M1() \n If False Then \n End If \n End Sub \n End Class").Values.Should().BeEquivalentTo(0, 1, 0, 0, 0, 0, 0);
-            FunctionComplexityDistribution(AnalyzerLanguage.VisualBasic,
-                "Class MyClass \n Sub M1() \n If False Then \n End If \n If False Then \n End If \n If False Then \n End If " +
-                "\n End Sub \n End Class").Values.Should().BeEquivalentTo(0, 0, 1, 0, 0, 0, 0);
-        }
-
-        private static Distribution FunctionComplexityDistribution(AnalyzerLanguage language, string text) =>
-            MetricsFor(language, text).FunctionComplexityDistribution;
 
         private static MetricsBase MetricsFor(AnalyzerLanguage language, string text)
         {

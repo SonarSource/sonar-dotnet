@@ -60,17 +60,10 @@ namespace SonarAnalyzer.Rules
                 ClassCount = metrics.ClassCount,
                 StatementCount = metrics.StatementCount,
                 FunctionCount = metrics.FunctionCount,
-                PublicApiCount = metrics.PublicApiCount,
-                PublicUndocumentedApiCount = metrics.PublicUndocumentedApiCount,
 
                 Complexity = complexity,
-                ComplexityInClasses = metrics.ClassNodes.Sum(metrics.GetCyclomaticComplexity),
-                ComplexityInFunctions = metrics.FunctionNodes.Sum(metrics.GetCyclomaticComplexity),
 
                 CognitiveComplexity = metrics.CognitiveComplexity,
-
-                FileComplexityDistribution = new Distribution(Distribution.FileComplexityRange).Add(complexity).ToString(),
-                FunctionComplexityDistribution = metrics.FunctionComplexityDistribution.ToString()
             };
 
             var comments = metrics.GetComments(ignoreHeaderComments);

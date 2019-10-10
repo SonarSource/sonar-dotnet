@@ -77,7 +77,7 @@ public class MetricsImporterTest {
     new MetricsImporter(tester, fileLinesContextFactory, noSonarFilter, String::toString).accept(protobuf.toPath());
 
     Collection<Measure> measures = tester.measures(inputFile.key());
-    assertThat(measures).hasSize(13);
+    assertThat(measures).hasSize(7);
 
     // TODO change test data so that all metrics have different expected values
 
@@ -86,13 +86,7 @@ public class MetricsImporterTest {
         Tuple.tuple(CoreMetrics.CLASSES, 4),
         Tuple.tuple(CoreMetrics.STATEMENTS, 6),
         Tuple.tuple(CoreMetrics.FUNCTIONS, 3),
-        Tuple.tuple(CoreMetrics.PUBLIC_API, 2),
-        Tuple.tuple(CoreMetrics.PUBLIC_UNDOCUMENTED_API, 1),
         Tuple.tuple(CoreMetrics.COMPLEXITY, 7),
-        Tuple.tuple(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION, "0=0;5=1;10=0;20=0;30=0;60=0;90=0"),
-        Tuple.tuple(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION, "1=2;2=0;4=1;6=0;8=0;10=0;12=0"),
-        Tuple.tuple(CoreMetrics.COMPLEXITY_IN_CLASSES, 7),
-        Tuple.tuple(CoreMetrics.COMPLEXITY_IN_FUNCTIONS, 7),
         Tuple.tuple(CoreMetrics.COMMENT_LINES, 12),
         Tuple.tuple(CoreMetrics.COGNITIVE_COMPLEXITY, 18),
         Tuple.tuple(CoreMetrics.NCLOC, 41));

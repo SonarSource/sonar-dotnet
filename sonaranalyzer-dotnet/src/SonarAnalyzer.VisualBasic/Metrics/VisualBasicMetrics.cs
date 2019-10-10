@@ -79,9 +79,6 @@ namespace SonarAnalyzer.Metrics.VisualBasic
         public override ImmutableArray<int> ExecutableLines =>
             this.lazyExecutableLines.Value;
 
-        protected override ImmutableArray<SyntaxNode> PublicApiNodes =>
-            this.publicApiNodes.Value;
-
         public override int GetCognitiveComplexity(SyntaxNode node) =>
             VisualBasicCognitiveComplexityMetric.GetComplexity(node).Complexity;
 

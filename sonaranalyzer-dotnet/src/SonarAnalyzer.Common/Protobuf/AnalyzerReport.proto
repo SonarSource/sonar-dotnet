@@ -91,15 +91,8 @@ message MetricsInfo {
   int32 class_count = 2;
   int32 statement_count = 3;
   int32 function_count = 4;
-  int32 public_api_count = 5;
-  int32 public_undocumented_api_count = 6;
 
   int32 complexity = 7;
-  int32 complexity_in_classes = 8;
-  int32 complexity_in_functions = 9;
-
-  string file_complexity_distribution = 10;
-  string function_complexity_distribution = 11;
 
   repeated int32 no_sonar_comment = 12;
   repeated int32 non_blank_comment = 13;
