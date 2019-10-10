@@ -2,6 +2,7 @@
 {
     using System;
     using FluentAssertions;
+    using NSubstitute;
     using Xunit;
 
     public class Program
@@ -226,5 +227,15 @@
         {
             Assert.True(true);
         }
+    }
+
+    /// <summary>
+    /// The NSubstitute assertions are extensively verified in the NUnit test files.
+    /// Here we just do a simple test to confirm that the errors are not raised in conjunction with XUnit.
+    /// </summary>
+    public class NSubstituteTests
+    {
+        [Fact]
+        public void Received() => Substitute.For<IDisposable>().Received().Dispose();
     }
 }

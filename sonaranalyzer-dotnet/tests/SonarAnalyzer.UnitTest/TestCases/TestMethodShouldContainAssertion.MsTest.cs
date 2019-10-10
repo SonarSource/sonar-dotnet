@@ -2,6 +2,7 @@
 {
     using System;
     using FluentAssertions;
+    using NSubstitute;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -281,5 +282,16 @@
         {
             var result = new Class1().Add(1, 2);
         }
+    }
+
+    /// <summary>
+    /// The NSubstitute assertions are extensively verified in the NUnit test files.
+    /// Here we just do a simple test to confirm that the errors are not raised in conjunction with MsTest.
+    /// </summary>
+    [TestClass]
+    public class NSubstituteTests
+    {
+        [TestMethod]
+        public void Received() => Substitute.For<IDisposable>().Received().Dispose();
     }
 }

@@ -370,6 +370,8 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Xml_XmlNode = new KnownType("System.Xml.XmlNode");
         internal static readonly KnownType System_Xml_XPath_XPathNavigator = new KnownType("System.Xml.XPath.XPathNavigator");
         internal static readonly KnownType System_Xml_XPath_XPathExpression = new KnownType("System.Xml.XPath.XPathExpression");
+        internal static readonly KnownType NSubstitute_SubstituteExtensions = new KnownType("NSubstitute.SubstituteExtensions");
+        internal static readonly KnownType NSubstitute_Received = new KnownType("NSubstitute.Received");
         internal static readonly ImmutableArray<KnownType> SystemActionVariants =
             ImmutableArray.Create(
                 new KnownType("System.Action"),

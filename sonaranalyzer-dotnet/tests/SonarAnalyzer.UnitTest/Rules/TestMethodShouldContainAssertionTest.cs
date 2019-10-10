@@ -30,15 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class TestMethodShouldContainAssertionTest
     {
         [DataTestMethod]
-        [DataRow("1.1.11", "1.6.0")]
-        [DataRow(Constants.NuGetLatestVersion, "4.19.4")]
+        [DataRow("1.1.11", "1.6.0", Constants.NuGetLatestVersion)]
+        [DataRow(Constants.NuGetLatestVersion, "4.19.4", Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void TestMethodShouldContainAssertion_MSTest(string testFwkVersion, string fluentVersion)
+        public void TestMethodShouldContainAssertion_MSTest(string testFwkVersion, string fluentVersion, string nSubstituteVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.MsTest.cs",
                 new TestMethodShouldContainAssertion(),
                 additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion)
                     .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
+                    .Concat(NuGetMetadataReference.NSubstitute(nSubstituteVersion))
                     .Concat(FrameworkMetadataReference.SystemReflection)
                     .Concat(FrameworkMetadataReference.SystemXmlXDocument)
                     .Concat(FrameworkMetadataReference.SystemXmlLinq)
@@ -47,15 +48,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [DataTestMethod]
-        [DataRow("3.11.0", "4.19.4")]
-        [DataRow(Constants.NuGetLatestVersion, "4.19.4")]
+        [DataRow("3.11.0", "4.19.4", Constants.NuGetLatestVersion)]
+        [DataRow(Constants.NuGetLatestVersion, "4.19.4", Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void TestMethodShouldContainAssertion_NUnit(string testFwkVersion, string fluentVersion)
+        public void TestMethodShouldContainAssertion_NUnit(string testFwkVersion, string fluentVersion, string nSubstituteVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.NUnit.cs",
                 new TestMethodShouldContainAssertion(),
                 additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion)
                     .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
+                    .Concat(NuGetMetadataReference.NSubstitute(nSubstituteVersion))
                     .Concat(FrameworkMetadataReference.SystemReflection)
                     .Concat(FrameworkMetadataReference.SystemXmlXDocument)
                     .Concat(FrameworkMetadataReference.SystemXmlLinq)
@@ -116,15 +118,16 @@ public class Foo
         }
 
         [DataTestMethod]
-        [DataRow("2.0.0", "4.19.4")]
-        [DataRow(Constants.NuGetLatestVersion, "4.19.4")]
+        [DataRow("2.0.0", "4.19.4", Constants.NuGetLatestVersion)]
+        [DataRow(Constants.NuGetLatestVersion, "4.19.4", Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
-        public void TestMethodShouldContainAssertion_Xunit(string testFwkVersion, string fluentVersion)
+        public void TestMethodShouldContainAssertion_Xunit(string testFwkVersion, string fluentVersion, string nSubstituteVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Xunit.cs",
                 new TestMethodShouldContainAssertion(),
                 additionalReferences: NuGetMetadataReference.XunitFramework(testFwkVersion)
                     .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
+                    .Concat(NuGetMetadataReference.NSubstitute(nSubstituteVersion))
                     .Concat(FrameworkMetadataReference.SystemReflection)
                     .Concat(FrameworkMetadataReference.SystemXmlXDocument)
                     .Concat(FrameworkMetadataReference.SystemXmlLinq)

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using FluentAssertions;
+    using NSubstitute;
     using NUnit.Framework;
 
     class BaseClass
@@ -439,4 +440,65 @@
             return type.GetType().ToString();
         }
     }
+
+    [TestFixture]
+    class NSubstituteTests
+    {
+        private readonly ICalculator calculator;
+
+        public NSubstituteTests()
+        {
+            calculator = Substitute.For<ICalculator>();
+        }
+
+        [TestCase]
+        public void NoAssert() // Noncompliant
+        {
+        }
+
+        [TestCase]
+        public void Received()
+        {
+            calculator.Received().Add(1, 2);
+        }
+
+        [TestCase]
+        public void ReceivedExpression() => calculator.Received().Add(1, 2);
+
+        [TestCase]
+        public void ReceivedNameSpace() => NSubstitute.SubstituteExtensions.Received(calculator).Add(1, 2);
+
+        [TestCase]
+        public void ReceivedWithAnyArgs()
+        {
+            calculator.ReceivedWithAnyArgs().Add(0, 0);
+        }
+
+        [TestCase]
+        public void DidNotReceived()
+        {
+            calculator.DidNotReceive().Add(1, 2);
+        }
+
+        [TestCase]
+        public void DidNotReceiveWithAnyArgs()
+        {
+            calculator.DidNotReceiveWithAnyArgs().Add(1, 2);
+        }
+
+        [TestCase]
+        public void ReceivedInOrder()
+        {
+            NSubstitute.Received.InOrder(() =>
+            {
+                calculator.Add(1, 2);
+            });
+        }
+    }
+
+    internal interface ICalculator
+    {
+        int Add(int a, int b);
+    }
 }
+
