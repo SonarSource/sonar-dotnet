@@ -56,6 +56,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new TestMethodShouldContainAssertion(),
                 additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion)
                     .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
+                    .Concat(NuGetMetadataReference.NSubstitute("4.2.1"))
                     .Concat(FrameworkMetadataReference.SystemReflection)
                     .Concat(FrameworkMetadataReference.SystemXmlXDocument)
                     .Concat(FrameworkMetadataReference.SystemXmlLinq)

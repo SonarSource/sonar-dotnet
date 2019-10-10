@@ -38,7 +38,18 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+
+        private static readonly string[] nSubstituteExtensionsAssertions = new string[]
+        {
+            "DidNotReceive",
+            "DidNotReceiveWithAnyArgs",
+            "Received",
+            "ReceivedWithAnyArgs"
+        };
+
+        private static readonly string nSubstituteReceivedAssertion = "InOrder";
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -58,6 +69,15 @@ namespace SonarAnalyzer.Rules.CSharp
                         methodSymbol.HasExpectedExceptionAttribute() ||
                         methodSymbol.HasAssertionInAttribute() ||
                         IsTestIgnored(methodSymbol))
+                    {
+                        return;
+                    }
+
+                    if (methodDeclaration.DescendantNodes()
+                        .OfType<InvocationExpressionSyntax>()
+                        .Select(expression => c.SemanticModel.GetSymbolInfo(expression).Symbol)
+                        .OfType<IMethodSymbol>()
+                        .Any(symbol => IsNSubstituteAssertion(symbol)))
                     {
                         return;
                     }
@@ -94,5 +114,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 .SplitCamelCaseToWords()
                 .Intersect(UnitTestHelper.KnownAssertionMethodParts)
                 .Any();
+
+        private static bool IsNSubstituteAssertion(IMethodSymbol methodSymbol) =>
+            methodSymbol != null &&
+            (IsNSubstituteExtensionsAssertion(methodSymbol) || IsNSubstituteReceivedAssertion(methodSymbol));
+
+        private static bool IsNSubstituteExtensionsAssertion(IMethodSymbol methodSymbol) =>
+            nSubstituteExtensionsAssertions.Contains(methodSymbol.Name) &&
+            methodSymbol.ContainingType.ConstructedFrom.Is(KnownType.NSubstitute_SubstituteExtensions);
+
+        private static bool IsNSubstituteReceivedAssertion(IMethodSymbol methodSymbol) =>
+            methodSymbol.Name == nSubstituteReceivedAssertion &&
+            methodSymbol.ContainingType.ConstructedFrom.Is(KnownType.NSubstitute_Received);
     }
 }
