@@ -126,5 +126,18 @@ namespace Tests.Diagnostics
 
             return Task.FromResult(GetObject());
         }
+
+        public Task<object> SomeMethodAsync()
+        {
+            return this.SomeOtherMethodAsync(
+                async input =>
+                {
+                    await Task.Yield();
+
+                    return null; // Noncompliant FP
+                });
+        }
+
+        private Task<object> SomeOtherMethodAsync(Func<object, Task<object>> function) => function.Invoke(null);
     }
 }
