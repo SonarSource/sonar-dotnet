@@ -7,9 +7,9 @@
 "uri":  "sources\ManuallyAddedNoncompliantIssues\IntentionalFindings\S2857.cs",
 "region":  {
 "startLine":  21,
-"startColumn":  2,
+"startColumn":  1,
 "endLine":  21,
-"endColumn":  30
+"endColumn":  29
 }
 }
 }

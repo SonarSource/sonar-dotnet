@@ -142,7 +142,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var strings = new List<LiteralExpressionSyntax>();
                     strings.Add(leftSide);
                     strings.Add(rightSide);
-                    bool onlyStringsInConcatenation = AddStringsToList(node, strings);
+                    var onlyStringsInConcatenation = AddStringsToList(node, strings);
                     if (!onlyStringsInConcatenation)
                     {
                         return;
@@ -159,7 +159,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private void CheckSpaceBetweenStrings(List<LiteralExpressionSyntax> stringLiterals)
             {
-                for (int i = 0; i < stringLiterals.Count -1; i++)
+                for (var i = 0; i < stringLiterals.Count -1; i++)
                 {
                     var firstStringText = stringLiterals[i].Token.ValueText;
                     var secondString = stringLiterals[i + 1];

@@ -4,12 +4,12 @@
 <pre>
 string select = "SELECT p.fname, p.lname, p.street1, p.street2, p.city, p.state, p.zip" +
         "FROM person p" +  // Noncompliant; concatenates to: p.zipFROM
-        "WHERE p.id = ?";  // Noncompliant; concatenates to: pWHERE
+        "WHERE p.id = @ID";  // Noncompliant; concatenates to: pWHERE
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 string select = "SELECT p.fname, p.lname, p.street1, p.street2, p.city, p.state, p.zip" +
     " FROM person p" +
-    " WHERE p.id = ?";
+    " WHERE p.id = @ID";
 </pre>
 
