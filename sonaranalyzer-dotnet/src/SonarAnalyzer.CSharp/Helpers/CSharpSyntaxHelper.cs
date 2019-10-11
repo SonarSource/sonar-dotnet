@@ -409,5 +409,19 @@ namespace SonarAnalyzer.Helpers
                     return false;
             }
         }
+
+        // creates a QualifiedNameSyntax "a.b"
+        public static QualifiedNameSyntax BuildQualifiedNameSyntax(string a, string b) =>
+            SyntaxFactory.QualifiedName(
+                SyntaxFactory.IdentifierName(a),
+                SyntaxFactory.IdentifierName(b));
+
+        // creates a QualifiedNameSyntax "a.b.c"
+        public static QualifiedNameSyntax BuildQualifiedNameSyntax(string a, string b, string c) =>
+            SyntaxFactory.QualifiedName(
+                SyntaxFactory.QualifiedName(
+                    SyntaxFactory.IdentifierName(a),
+                    SyntaxFactory.IdentifierName(b)),
+                SyntaxFactory.IdentifierName(c));
     }
 }
