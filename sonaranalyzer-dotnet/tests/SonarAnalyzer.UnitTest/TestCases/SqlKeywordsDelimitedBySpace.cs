@@ -96,6 +96,7 @@ namespace Tests.Diagnostics
         private string combined = "SELECT all" + 1 + "FROM table"; // FN
         private string combined2 = "SELECT all" + "" + "FROM table" + "";
         private string notAdd = "SELECT" + 2 * 3 + "FROM table"; // FN
+        private string shortWords = "a" + "b" + "c";
 
         void ValidCases(string parameter)
         {

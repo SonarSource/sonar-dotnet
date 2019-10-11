@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         return;
                     }
-                    var visitor = new CSharpStringLiteralWalker(c);
+                    var visitor = new StringConcatenationWalker(c);
                     foreach (var member in namespaceDeclaration.Members)
                     {
                         visitor.SafeVisit(member);
@@ -112,15 +112,23 @@ namespace SonarAnalyzer.Rules.CSharp
             usings.Select(usingDirective => usingDirective.Name)
                 .Any(name => SqlNamespaces.Any(sn => SyntaxFactory.AreEquivalent(name, sn)));
 
-        private class CSharpStringLiteralWalker : CSharpSyntaxWalker
+        private class StringConcatenationWalker : CSharpSyntaxWalker
         {
             private readonly SyntaxNodeAnalysisContext context;
 
-            public CSharpStringLiteralWalker(SyntaxNodeAnalysisContext context)
+            public StringConcatenationWalker(SyntaxNodeAnalysisContext context)
             {
                 this.context = context;
             }
 
+            // The assumption is that in a chain of concatenations "a" + "b" + "c"
+            // the AST form is
+            //        +
+            //       / \
+            //      +  "c"
+            //     / \
+            //   "a" "b"
+            // So we start from the lower-left node which should contain the SQL start keyword
             public override void VisitBinaryExpression(BinaryExpressionSyntax node)
             {
                 if (node.IsKind(SyntaxKind.AddExpression) &&
