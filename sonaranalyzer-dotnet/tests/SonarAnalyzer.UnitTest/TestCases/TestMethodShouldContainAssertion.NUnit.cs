@@ -72,20 +72,6 @@
         }
 
         [Test]
-        public void Test6()
-        {
-            Action act = () => { throw new Exception(); };
-            act.ShouldThrow<Exception>();
-        }
-
-        [Test]
-        public void Test7()
-        {
-            Action act = () => { throw new Exception(); };
-            act.ShouldNotThrow<Exception>();
-        }
-
-        [Test]
         public void Test8()
         {
             AssertSomething();
@@ -164,20 +150,6 @@
         {
             var x = 42;
             x.Should().Be(42);
-        }
-
-        [TestCase]
-        public void TestCase6()
-        {
-            Action act = () => { throw new Exception(); };
-            act.ShouldThrow<Exception>();
-        }
-
-        [TestCase]
-        public void TestCase7()
-        {
-            Action act = () => { throw new Exception(); };
-            act.ShouldNotThrow<Exception>();
         }
 
         [TestCase]
@@ -263,20 +235,6 @@
         }
 
         [TestCaseSource("Foo")]
-        public void TestCaseSource6()
-        {
-            Action act = () => { throw new Exception(); };
-            act.ShouldThrow<Exception>();
-        }
-
-        [TestCaseSource("Foo")]
-        public void TestCaseSource7()
-        {
-            Action act = () => { throw new Exception(); };
-            act.ShouldNotThrow<Exception>();
-        }
-
-        [TestCaseSource("Foo")]
         public void TestCaseSource8()
         {
             AssertSomething();
@@ -356,20 +314,6 @@
         {
             var x = 42;
             x.Should().Be(42);
-        }
-
-        [Theory]
-        public void Theory6()
-        {
-            Action act = () => { throw new Exception(); };
-            act.ShouldThrow<Exception>();
-        }
-
-        [Theory]
-        public void Theory7()
-        {
-            Action act = () => { throw new Exception(); };
-            act.ShouldNotThrow<Exception>();
         }
 
         [Theory]
