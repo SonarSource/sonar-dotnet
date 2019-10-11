@@ -117,11 +117,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsKnownAssertion(IMethodSymbol methodSymbol)
         {
-            if (methodSymbol == null)
-            {
-                return false;
-            }
-
             var type = knownAssertions.GetValueOrDefault(methodSymbol.Name);
             return (type != null) && methodSymbol.ContainingType.ConstructedFrom.Is(type);
         }
