@@ -53,7 +53,7 @@ namespace Tests.Diagnostics
         private
             int field3; // Fixed
         private delegate void Delegate();
-        private event Delegate MyEvent;
+        private event Delegate MyEvent; //Fixed
 
         private event EventHandler<EventArgs> MyUsedEvent
         {
@@ -176,6 +176,18 @@ namespace Tests.Diagnostics
         private GoodException(SerializationInfo info, StreamingContext context) // Compliant because of the serialization
             : base(info, context)
         {
+        }
+    }
+
+    public class FieldAccess
+    {
+        private object field1;
+        private object field2; // Fixed
+        private object field3;
+
+        public FieldAccess()
+        {
+            this.field2 = field3 ?? this.field1?.ToString();
         }
     }
 }

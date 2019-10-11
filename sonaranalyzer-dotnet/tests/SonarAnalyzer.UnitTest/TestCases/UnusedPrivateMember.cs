@@ -59,8 +59,9 @@ namespace Tests.Diagnostics
         private int field, field2; // Noncompliant
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^
         private
-            int field3, field4; // Noncompliant;
-//                      ^^^^^^
+            int field3, // Noncompliant {{Remove this unread private field 'field3' or refactor the code to use its value.}}
+                field4; // Noncompliant;
+//              ^^^^^^
         private int Property // Noncompliant {{Remove the unused private property 'Property'.}}
         {
             get; set;
@@ -73,7 +74,7 @@ namespace Tests.Diagnostics
         private delegate void Delegate();
         private delegate void Delegate2(); // Noncompliant {{Remove the unused private type 'Delegate2'.}}
         private event Delegate Event; //Noncompliant {{Remove the unused private event 'Event'.}}
-        private event Delegate MyEvent;
+        private event Delegate MyEvent; //Noncompliant {{Remove this unread private field 'MyEvent' or refactor the code to use its value.}}
 
         private event EventHandler<EventArgs> MyOtherEvent //Noncompliant {{Remove the unused private event 'MyOtherEvent'.}}
         {
@@ -109,7 +110,7 @@ namespace Tests.Diagnostics
             {
             }
             public int field; // Noncompliant {{Remove the unused private field 'field'.}}
-            public int field2;
+            public int field2; // Noncompliant {{Remove this unread private field 'field2' or refactor the code to use its value.}}
         }
 
         private interface MyInterface
@@ -250,6 +251,18 @@ namespace Tests.Diagnostics
         private GoodException(SerializationInfo info, StreamingContext context) // Compliant because of the serialization
             : base(info, context)
         {
+        }
+    }
+
+    public class FieldAccess
+    {
+        private object field1;
+        private object field2; // Noncompliant {{Remove this unread private field 'field2' or refactor the code to use its value.}}
+        private object field3;
+
+        public FieldAccess()
+        {
+            this.field2 = field3 ?? this.field1?.ToString();
         }
     }
 }

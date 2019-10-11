@@ -1,0 +1,57 @@
+<p>Private fields only used to store values without reading them later is a case of dead store. So changing the value of such field is useless and
+most probably indicates a serious error in the code.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Cuboid
+{
+  private readonly int length;
+  private int Breadth { get; set; } // Breadth is written but never read
+  private readonly int height;  // height is written but never read
+
+  public Cuboid(int length, int breadth, int height)
+  {
+    this.length = length;
+    this.Breadth = breadth;
+    this.height = height;
+  }
+
+  public int Volume
+  {
+    get
+    {
+      return length * length * length;
+    }
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class Cuboid
+{
+  private readonly int length;
+  private int Breadth { get; set; } // Breadth is written but never read
+  private readonly int height;  // height is written but never read
+
+  public Cuboid(int length, int breadth, int height)
+  {
+    this.length = length;
+    this.Breadth = breadth;
+    this.height = height;
+  }
+
+  public int Volume
+  {
+    get
+    {
+      return length * Breadth * height;
+    }
+  }
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="http://cwe.mitre.org/data/definitions/563.html">MITRE, CWE-563</a> - Assignment to Variable without Use ('Unused Variable') </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/QYA5">CERT, MSC13-C.</a> - Detect and remove unused values </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/uQCSBg">CERT, MSC56-J.</a> - Detect and remove superfluous code and values </li>
+</ul>
+

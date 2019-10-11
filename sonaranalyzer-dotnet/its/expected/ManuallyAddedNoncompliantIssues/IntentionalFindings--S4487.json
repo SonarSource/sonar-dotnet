@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'value' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\IntentionalFindings\S4487.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  21,
+"endLine":  25,
+"endColumn":  26
+}
+}
+}
+]
+}

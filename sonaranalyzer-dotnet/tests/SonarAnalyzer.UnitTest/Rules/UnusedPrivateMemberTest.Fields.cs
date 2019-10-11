@@ -102,9 +102,9 @@ public class PrivateMembers
 using System;
 public class FieldUsages
 {
-    private int field1;
-    private int field2;
-    private int field3;
+    private int field1; // Noncompliant {{Remove this unread private field 'field1' or refactor the code to use its value.}}
+    private int field2; // Noncompliant {{Remove this unread private field 'field2' or refactor the code to use its value.}}
+    private int field3; // Noncompliant {{Remove this unread private field 'field3' or refactor the code to use its value.}}
     private int field4;
     private int field5;
     private int field6;
@@ -130,7 +130,7 @@ public class FieldUsages
     public FieldUsages() : this(field9) { }
 
     private int field10;
-    private int field11;
+    private int field11; // Noncompliant {{Remove this unread private field 'field11' or refactor the code to use its value.}}
     public object Method2()
     {
         var x = new[] { field10 };
