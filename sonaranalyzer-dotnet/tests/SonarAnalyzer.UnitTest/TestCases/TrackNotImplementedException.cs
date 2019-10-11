@@ -28,5 +28,8 @@ namespace Tests.Diagnostics
             throw ex; // Noncompliant
 //          ^^^^^^^^^
         }
+
+        void NotImplemented() =>
+            throw new NotImplementedException(); // FN
     }
 }
