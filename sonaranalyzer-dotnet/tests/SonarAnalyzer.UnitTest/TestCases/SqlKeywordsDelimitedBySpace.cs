@@ -10,7 +10,7 @@ namespace Tests.Diagnostics
     {
         public void VariousSqlKeywords()
         {
-            var alterTable = @"ALTER TABLE InsurancePolicy" +
+            var alterTable = "ALTER TABLE InsurancePolicy" +
                 "ADD PERIOD FOR SYSTEM_TIME(SysStartTime, SysEndTime)," + // Noncompliant
                 "SysStartTime datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL" + // ok, we ignore comma
                 "    DEFAULT SYSUTCDATETIME()," +
@@ -73,6 +73,11 @@ namespace Tests.Diagnostics
 
         private string onlyFirstKeyword = "select something" +
             "because I want to";  // Noncompliant FP
+
+        private string insideParens =
+            ("SELECT x" + "FROM y") + // Noncompliant
+            "JOIN" +
+            ("SELECT table" + "WHERE x=1"); // Noncompliant
     }
 
     class CompliantExamples

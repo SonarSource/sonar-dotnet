@@ -81,6 +81,11 @@ namespace SonarAnalyzer.Rules.CSharp
             "WRITETEXT"
         };
 
+        private static readonly int SqlKeywordMinSize = SqlStartQueryKeywords
+            .Select(s => s.Length)
+            .OrderBy(i => i)
+            .First();
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -116,59 +121,82 @@ namespace SonarAnalyzer.Rules.CSharp
                 this.context = context;
             }
 
-            public override void VisitLiteralExpression(LiteralExpressionSyntax node)
+            public override void VisitBinaryExpression(BinaryExpressionSyntax node)
             {
-                if (!node.IsKind(SyntaxKind.StringLiteralExpression) ||
-                    !(node.Parent is BinaryExpressionSyntax parentConcatenation) ||
-                    !parentConcatenation.IsKind(SyntaxKind.AddExpression) ||
-                    node != parentConcatenation.Right)
+                if (node.IsKind(SyntaxKind.AddExpression) &&
+                    // we do the analysis only if it's a SQL keyword on the left
+                    node.Left is LiteralExpressionSyntax leftSide &&
+                    node.Right is LiteralExpressionSyntax rightSide &&
+                    leftSide.IsKind(SyntaxKind.StringLiteralExpression) &&
+                    rightSide.IsKind(SyntaxKind.StringLiteralExpression) &&
+                    StartsWithSqlKeyword(leftSide.Token.ValueText.Trim()))
                 {
-                    return;
-                }
+                    var strings = new List<LiteralExpressionSyntax>();
+                    strings.Add(leftSide);
+                    strings.Add(rightSide);
+                    bool onlyStringsInConcatenation = AddStringsToList(node, strings);
+                    if (!onlyStringsInConcatenation)
+                    {
+                        return;
+                    }
 
-                var firstStringInConcatenation = GetFirstStringFromConcatenation(parentConcatenation);
-                var beforeCurrentString = GetPenultimateString(parentConcatenation);
-                if (!firstStringInConcatenation.IsKind(SyntaxKind.StringLiteralExpression) ||
-                    !StartsWithSqlKeyword(((LiteralExpressionSyntax)firstStringInConcatenation).Token.ValueText.Trim()) ||
-                    !beforeCurrentString.IsKind(SyntaxKind.StringLiteralExpression))
-                {
-                    return;
+                    CheckSpaceBetweenStrings(strings);
                 }
-
-                var previousStringText = ((LiteralExpressionSyntax)beforeCurrentString).Token.ValueText;
-                var currentStringText = node.Token.ValueText;
-                if (previousStringText.Length > 0 &&
-                    IsAlphaNumericOrAt(previousStringText.ToCharArray().Last()) &&
-                    currentStringText.Length > 0 &&
-                    IsAlphaNumericOrAt(currentStringText[0]))
+                else
                 {
-                    var nodeFirstToken = node.Token.ValueText.Trim().Split(' ').First();
-                    this.context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation(), nodeFirstToken));
+                    base.Visit(node.Left);
+                    base.Visit(node.Right);
                 }
             }
 
-            // Given a concatenation "a" + "b" + "c", this will return the "b" syntax node (one before last)
-            private static SyntaxNode GetPenultimateString(BinaryExpressionSyntax concatenation)
+            private void CheckSpaceBetweenStrings(List<LiteralExpressionSyntax> stringLiterals)
             {
-                var left = concatenation.Left;
-                return left is BinaryExpressionSyntax addition && addition.IsKind(SyntaxKind.AddExpression)
-                    ? addition.Right
-                    : left;
+                for (int i = 0; i < stringLiterals.Count -1; i++)
+                {
+                    var firstStringText = stringLiterals[i].Token.ValueText;
+                    var secondString = stringLiterals[i + 1];
+                    var secondStringText = secondString.Token.ValueText;
+                    if (firstStringText.Length > 0 &&
+                        IsAlphaNumericOrAt(firstStringText.ToCharArray().Last()) &&
+                        secondStringText.Length > 0 &&
+                        IsAlphaNumericOrAt(secondStringText[0]))
+                    {
+                        var word = secondStringText.Split(' ').FirstOrDefault();
+                        this.context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, secondString.GetLocation(), word));
+                    }
+                }
             }
 
-            // Given a concatenation "a" + "b" + "c", this will return the "a" syntax node
-            private static SyntaxNode GetFirstStringFromConcatenation(BinaryExpressionSyntax concatenation)
+            /**
+             * Returns
+             * - true if all the found elements are string literals.
+             * - false if, inside the chain of binary expressions, some elements are not string literals or
+             * some binary expressions are not additions.
+             */
+            private static bool AddStringsToList(BinaryExpressionSyntax node, List<LiteralExpressionSyntax> strings)
             {
-                var firstElement = concatenation.Left;
-                while (firstElement is BinaryExpressionSyntax toTheLeftAddition &&
-                    firstElement.IsKind(SyntaxKind.AddExpression))
+                // this is the left-most node of a concatenation chain
+                // collect all string literals
+                var parent = node.Parent;
+                while (parent is BinaryExpressionSyntax concatenation)
                 {
-                    firstElement = toTheLeftAddition.Left;
+                    if (concatenation.IsKind(SyntaxKind.AddExpression) &&
+                        concatenation.Right.IsKind(SyntaxKind.StringLiteralExpression))
+                    {
+                        strings.Add((LiteralExpressionSyntax)concatenation.Right);
+                    }
+                    else
+                    {
+                        // we are in a binary expression, but it's not only of strings or not only concatenations
+                        return false;
+                    }
+                    parent = parent.Parent;
                 }
-                return firstElement;
+                return true;
             }
 
             private static bool StartsWithSqlKeyword(string firstString) =>
+                firstString.Length >= SqlKeywordMinSize &&
                 SqlStartQueryKeywords.Any(s => firstString.StartsWith(s, StringComparison.OrdinalIgnoreCase));
 
             /**
