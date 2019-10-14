@@ -54,13 +54,7 @@ class MetricsImporter extends ProtobufImporter<MetricsInfo> {
     saveMetric(context, inputFile, CoreMetrics.CLASSES, message.getClassCount());
     saveMetric(context, inputFile, CoreMetrics.STATEMENTS, message.getStatementCount());
     saveMetric(context, inputFile, CoreMetrics.FUNCTIONS, message.getFunctionCount());
-    saveMetric(context, inputFile, CoreMetrics.PUBLIC_API, message.getPublicApiCount());
-    saveMetric(context, inputFile, CoreMetrics.PUBLIC_UNDOCUMENTED_API, message.getPublicUndocumentedApiCount());
     saveMetric(context, inputFile, CoreMetrics.COMPLEXITY, message.getComplexity());
-    saveMetric(context, inputFile, CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION, message.getFileComplexityDistribution());
-    saveMetric(context, inputFile, CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION, message.getFunctionComplexityDistribution());
-    saveMetric(context, inputFile, CoreMetrics.COMPLEXITY_IN_CLASSES, message.getComplexityInClasses());
-    saveMetric(context, inputFile, CoreMetrics.COMPLEXITY_IN_FUNCTIONS, message.getComplexityInFunctions());
 
     noSonarFilter.noSonarInFile(inputFile, new HashSet<>(message.getNoSonarCommentList()));
 

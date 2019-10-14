@@ -163,16 +163,6 @@ public class MetricsTest {
     assertThat(getFileMeasureAsInt("complexity")).isEqualTo(3);
   }
 
-  @Test
-  public void complexityInClassesAtFileLevel() {
-    assertThat(getFileMeasureAsInt("complexity_in_classes")).isEqualTo(4);
-  }
-
-  @Test
-  public void complexityInFunctionsAtFileLevel() {
-    assertThat(getFileMeasureAsInt("complexity_in_functions")).isEqualTo(2);
-  }
-
   /* Lines of code */
 
   @Test
@@ -256,54 +246,6 @@ public class MetricsTest {
   @Test
   public void classesAtFileLevel() {
     assertThat(getFileMeasureAsInt("classes")).isEqualTo(2);
-  }
-
-  /* Complexity distribution */
-
-  @Test
-  public void publicApiAtProjectLevel() {
-    assertThat(getProjectMeasureAsInt("public_api")).isEqualTo(9);
-    assertThat(getProjectMeasureAsInt("public_undocumented_api")).isEqualTo(6);
-  }
-
-  @Test
-  public void publicApiAtDirectoryLevel() {
-    assertThat(getDirectoryMeasureAsInt("public_api")).isEqualTo(6);
-    assertThat(getDirectoryMeasureAsInt("public_undocumented_api")).isEqualTo(4);
-  }
-
-  @Test
-  public void publicApiAtFileLevel() {
-    assertThat(getFileMeasureAsInt("public_api")).isEqualTo(3);
-    assertThat(getFileMeasureAsInt("public_undocumented_api")).isEqualTo(2);
-  }
-
-  @Test
-  public void complexityDistributionAtProjectLevel() {
-    assertThat(getProjectMeasure("function_complexity_distribution").getValue()).isEqualTo("1=6;2=0;4=0;6=0;8=0;10=0;12=0");
-    assertThat(getDirectoryMeasure("file_complexity_distribution").getValue()).isEqualTo("0=2;5=0;10=0;20=0;30=0;60=0;90=0");
-  }
-
-  private Measure getProjectMeasure(String metricKey) {
-    return getMeasure(PROJECT, metricKey);
-  }
-
-  /* Helper methods */
-
-  private Measure getDirectoryMeasure(String metricKey) {
-    return getMeasure(DIRECTORY, metricKey);
-  }
-
-  @Test
-  public void complexityDistributionAtDirectoryLevel() {
-    assertThat(getDirectoryMeasure("function_complexity_distribution").getValue()).isEqualTo("1=4;2=0;4=0;6=0;8=0;10=0;12=0");
-    assertThat(getDirectoryMeasure("file_complexity_distribution").getValue()).isEqualTo("0=2;5=0;10=0;20=0;30=0;60=0;90=0");
-  }
-
-  @Test
-  public void complexityDistributionAtFileLevel() {
-    assertThat(getFileMeasureAsInt("function_complexity_distribution")).isNull();
-    assertThat(getFileMeasureAsInt("file_complexity_distribution")).isNull();
   }
 
   @Test

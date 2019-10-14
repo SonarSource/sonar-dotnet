@@ -33,7 +33,6 @@ namespace SonarAnalyzer.Metrics.CSharp
     public class CSharpMetrics : MetricsBase
     {
         private readonly Lazy<ImmutableArray<int>> lazyExecutableLines;
-        private readonly Lazy<ImmutableArray<SyntaxNode>> publicApiNodes;
 
         public CSharpMetrics(SyntaxTree tree, SemanticModel semanticModel)
             : base(tree)
@@ -44,15 +43,11 @@ namespace SonarAnalyzer.Metrics.CSharp
                 throw new ArgumentException(InitalizationErrorTextPattern, nameof(tree));
             }
 
-            this.publicApiNodes = new Lazy<ImmutableArray<SyntaxNode>>(() => CSharpPublicApiMetric.GetMembers(tree));
             this.lazyExecutableLines = new Lazy<ImmutableArray<int>>(() => CSharpExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
         }
 
         public override ImmutableArray<int> ExecutableLines =>
             this.lazyExecutableLines.Value;
-
-        protected override ImmutableArray<SyntaxNode> PublicApiNodes =>
-            publicApiNodes.Value;
 
         public override int GetCognitiveComplexity(SyntaxNode node) =>
             CSharpCognitiveComplexityMetric.GetComplexity(node).Complexity;
