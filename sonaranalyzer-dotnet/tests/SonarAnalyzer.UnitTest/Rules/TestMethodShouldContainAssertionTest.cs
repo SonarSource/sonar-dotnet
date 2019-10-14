@@ -33,6 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             public const string Ver1 = "1.6.0";
             public const string Ver4 = "4.19.4";
+            public const string Ver5 = "5.9.0";
         }
 
         private static class MsTestVersions
@@ -70,6 +71,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [DataTestMethod]
         [DataRow(NUnitVersions.Ver3, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
+        [DataRow(Constants.NuGetLatestVersion, FluentAssertionVersions.Ver5, Constants.NuGetLatestVersion)]
         [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_NUnit(string testFwkVersion, string fluentVersion, string nSubstituteVersion)
