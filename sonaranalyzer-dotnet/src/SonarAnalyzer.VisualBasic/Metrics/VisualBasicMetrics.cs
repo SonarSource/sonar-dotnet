@@ -61,7 +61,6 @@ namespace SonarAnalyzer.Metrics.VisualBasic
         };
 
         private readonly Lazy<ImmutableArray<int>> lazyExecutableLines;
-        private readonly Lazy<ImmutableArray<SyntaxNode>> publicApiNodes;
 
         public VisualBasicMetrics(SyntaxTree tree, SemanticModel semanticModel)
             : base(tree)
@@ -73,7 +72,6 @@ namespace SonarAnalyzer.Metrics.VisualBasic
             }
 
             this.lazyExecutableLines = new Lazy<ImmutableArray<int>>(() => VisualBasicExecutableLinesMetric.GetLineNumbers(tree, semanticModel));
-            this.publicApiNodes = new Lazy<ImmutableArray<SyntaxNode>>(() => VisualBasicPublicApiMetric.GetMembers(tree));
         }
 
         public override ImmutableArray<int> ExecutableLines =>
