@@ -90,5 +90,13 @@ namespace Tests.Diagnostics
             Task.WaitAll(GetFooAsync());
             Thread.Sleep(10);
         }
+
+        public Task<string> Run(Task<string> task)
+        {
+            return task.ContinueWith(completedTask =>
+            {
+                return completedTask.Result; // Noncompliant FP, task is already completed at this point.
+            });
+        }
     }
 }
