@@ -253,6 +253,7 @@ namespace Tests.Diagnostics
             set => F5 = F5 ?? "test";
         }
     }
+
     public struct CompoundAssignmentReadAsWellAsWrite
     {
         private int F0;
@@ -260,6 +261,23 @@ namespace Tests.Diagnostics
         {
             F0 += 1;
             Console.WriteLine(F0);
+        }
+    }
+
+    public class MethodUpdateTest
+    {
+        private int value = 0; // Noncompliant FP
+
+        private void Reset() => value = 0;
+
+        public void TestMethod()
+        {
+            value = 20;
+
+            while (value != 0)
+            {
+                Reset();
+            }
         }
     }
 }
