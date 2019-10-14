@@ -206,5 +206,16 @@ namespace Tests.Diagnostics
                 finally { }
             };
         }
+
+        void CodeBetweenTryBlocks(int x, int y)
+        {
+            try { }
+            catch (Exception) { }
+
+            x++;
+
+            try { }    // Noncompliant FP
+            catch (Exception) { }
+        }
     }
 }
