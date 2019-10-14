@@ -258,5 +258,17 @@ namespace Tests.Diagnostics
                 return 1;
             }
         }
+
+        static readonly Func<string, bool> IsValidYearOfBirth = (year) =>
+        {
+            bool isValid = false; // Noncompliant FP
+
+            if (short.TryParse(year, out short shortYear))
+            {
+                isValid = true;
+            }
+
+            return isValid;
+        };
     }
 }
