@@ -141,8 +141,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 // A field is removable when no method reads it, or all methods that read it, overwrite it before reading
-                return readsByEnclosingSymbol == null
-                    || readsByEnclosingSymbol.Keys.All(ValueOverwrittenBeforeReading);
+                // However, as S4487 reports on fields that are written but not read, we only raise on the latter case
+                return readsByEnclosingSymbol?.Keys.All(ValueOverwrittenBeforeReading) ?? false;
 
                 bool ValueOverwrittenBeforeReading(ISymbol enclosingSymbol)
                 {
@@ -152,8 +152,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     // Note that Enumerable.All() will return true if readStatements is empty. The collection
                     // will be empty if the field is read only in property/field initializers or returned from
                     // expression-bodied methods.
-                    return readStatements == null
-                        || writeStatements != null && readStatements.All(IsPrecededWithWrite);
+                    return writeStatements != null && (readStatements?.All(IsPrecededWithWrite) ?? false);
 
                     // Returns true when readStatement is preceded with a statement that overwrites fieldSymbol,
                     // or false when readStatement is preceded with an invocation of a method or property that

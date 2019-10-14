@@ -51,12 +51,12 @@ namespace SonarAnalyzer.Helpers
         [Flags]
         private enum SymbolAccess { None = 0, Read = 1, Write = 2, ReadWrite = Read | Write, Declaration = 4, Initialization = Write | 8 }
 
-        public IDictionary<ISymbol, SymbolUsage> SymbolUsages { get; } =
+        public IDictionary<ISymbol, SymbolUsage> FieldSymbolUsages { get; } =
             new Dictionary<ISymbol, SymbolUsage>();
 
-        private List<SymbolUsage> Usages(List<ISymbol> symbols) => symbols.Select(Usage).ToList();
+        private List<SymbolUsage> FieldSymbolUsagesList(List<ISymbol> symbols) => symbols.Select(FieldSymbolUsage).ToList();
 
-        private SymbolUsage Usage(ISymbol symbol) => SymbolUsages.GetOrAdd(symbol, s => new SymbolUsage(s));
+        private SymbolUsage FieldSymbolUsage(ISymbol symbol) => FieldSymbolUsages.GetOrAdd(symbol, s => new SymbolUsage(s));
 
         public HashSet<string> DebuggerDisplayValues { get; } =
             new HashSet<string>();
@@ -100,33 +100,39 @@ namespace SonarAnalyzer.Helpers
         public override void VisitIdentifierName(IdentifierNameSyntax node)
         {
             var symbols = GetSymbols(node, IsKnownIdentifier).ToList();
-            var access = ParentAccessType(node);
-            if ((access & SymbolAccess.Declaration) != 0)
-            {
-                Usages(symbols).ForEach(usage => usage.Declaration = node);
-                if ((access & SymbolAccess.Initialization) != 0)
-                {
-                    Usages(symbols).ForEach(usage => usage.Initializer = node);
-                }
-            }
-            else
-            {
-                if ((access & SymbolAccess.Read) != 0)
-                {
-                    Usages(symbols).ForEach(usage => usage.Readings.Add(node));
-                }
 
-                if ((access & SymbolAccess.Write) != 0)
-                {
-                    Usages(symbols).ForEach(usage => usage.Writings.Add(node));
-                }
-            }
+            TryStoreFieldAccess(node, symbols);
 
             UsedSymbols.UnionWith(symbols);
 
             TryStorePropertyAccess(node, symbols);
 
             base.VisitIdentifierName(node);
+        }
+
+        private void TryStoreFieldAccess(IdentifierNameSyntax node, List<ISymbol> symbols)
+        {
+            var access = ParentAccessType(node);
+            if ((access & SymbolAccess.Declaration) != 0)
+            {
+                FieldSymbolUsagesList(symbols).ForEach(usage => usage.Declaration = node);
+                if ((access & SymbolAccess.Initialization) != 0)
+                {
+                    FieldSymbolUsagesList(symbols).ForEach(usage => usage.Initializer = node);
+                }
+            }
+            else
+            {
+                if ((access & SymbolAccess.Read) != 0)
+                {
+                    FieldSymbolUsagesList(symbols).ForEach(usage => usage.Readings.Add(node));
+                }
+
+                if ((access & SymbolAccess.Write) != 0)
+                {
+                    FieldSymbolUsagesList(symbols).ForEach(usage => usage.Writings.Add(node));
+                }
+            }
         }
 
         private SymbolAccess ParentAccessType(SyntaxNode node)
@@ -172,6 +178,10 @@ namespace SonarAnalyzer.Helpers
                 case ExpressionSyntax expressionSyntax when expressionSyntax.IsAnyKind(IncrementKinds):
                     // node++
                     return SymbolAccess.Write | ParentAccessType(expressionSyntax);
+                case ArrowExpressionClauseSyntax arrowExpressionClause when arrowExpressionClause.Parent is MethodDeclarationSyntax arrowMethod:
+                    return arrowMethod.ReturnType != null && arrowMethod.ReturnType.IsKnownType(KnownType.Void, this.getSemanticModel(arrowMethod))
+                        ? SymbolAccess.None
+                        : SymbolAccess.Read;
                 default:
                     // in case of SyntaxKind.SimpleLambdaExpression|ParenthesizedLambdaExpression|AnonymousMethodExpression with a void return type
                     // we should return SymbolAccess.None instead
@@ -229,7 +239,7 @@ namespace SonarAnalyzer.Helpers
         {
             if (this.knownSymbolNames.Contains(node.Identifier.ValueText))
             {
-                var usage = Usage(GetDeclaredSymbol(node));
+                var usage = FieldSymbolUsage(GetDeclaredSymbol(node));
                 usage.Declaration = node;
                 if (node.Initializer != null)
                 {
@@ -276,6 +286,11 @@ namespace SonarAnalyzer.Helpers
         private static bool IsDefaultConstructor(IMethodSymbol constructor) =>
             constructor.Parameters.Length == 0;
 
+        /// <summary>
+        /// Given a node, it tries to get the symbol or the candidate symbols (if the compiler cannot find the symbol,
+        /// .e.g when the code cannot compile).
+        /// </summary>
+        /// <returns>List of symbols</returns>
         private IEnumerable<ISymbol> GetSymbols<TSyntaxNode>(TSyntaxNode node, Func<TSyntaxNode, bool> condition)
             where TSyntaxNode : SyntaxNode
         {
