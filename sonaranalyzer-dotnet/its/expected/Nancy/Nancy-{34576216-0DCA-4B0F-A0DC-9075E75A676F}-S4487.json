@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'serializer' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  24,
+"endLine":  293,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'typeResolver' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  294,
+"startColumn":  26,
+"endLine":  294,
+"endColumn":  38
+}
+}
+}
+]
+}

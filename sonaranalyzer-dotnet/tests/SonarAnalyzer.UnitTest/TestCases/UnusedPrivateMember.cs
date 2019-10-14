@@ -305,4 +305,15 @@ namespace Tests.Diagnostics
         private int F36; // Noncompliant {{Remove this unread private field 'F36' or refactor the code to use its value.}}
         public void M15(int i) => F36 = i + 1;
     }
+
+    public interface IPublicInterface { }
+    [Serializable]
+    public sealed class PublicClass : IPublicInterface
+    {
+        public static readonly PublicClass Instance = new PublicClass();
+
+        private PublicClass()
+        {
+        }
+    }
 }

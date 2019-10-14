@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'Instance' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  53,
+"endLine":  69,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'Instance' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  54,
+"endLine":  106,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'Instance' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  56,
+"endLine":  172,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'Instance' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  56,
+"endLine":  199,
+"endColumn":  92
+}
+}
+}
+]
+}

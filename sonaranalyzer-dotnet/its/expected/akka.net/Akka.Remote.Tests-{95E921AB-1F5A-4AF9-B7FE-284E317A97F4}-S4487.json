@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'remote' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  26,
+"endLine":  136,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'remote' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolStressTest.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  27,
+"endLine":  149,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'remote' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  27,
+"endLine":  129,
+"endColumn":  33
+}
+}
+}
+]
+}

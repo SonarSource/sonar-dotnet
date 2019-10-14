@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_count' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\Logger.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  21,
+"endLine":  15,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_msg' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\Logger.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  24,
+"endLine":  16,
+"endColumn":  28
+}
+}
+}
+]
+}

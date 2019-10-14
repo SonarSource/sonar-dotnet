@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_probe' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"region":  {
+"startLine":  214,
+"startColumn":  40,
+"endLine":  214,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_deleteFailureRate' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Journal\ChaosJournal.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  33,
+"endLine":  43,
+"endColumn":  51
+}
+}
+}
+]
+}

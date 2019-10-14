@@ -15,19 +15,6 @@
 },
 {
 "id":  "S1450",
-"message":  "Remove the field '_log' and declare it as a local variable in the relevant methods.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
-"region":  {
-"startLine":  138,
-"startColumn":  42,
-"endLine":  138,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S1450",
 "message":  "Remove the field '_extension' and declare it as a local variable in the relevant methods.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\SyncWriteJournal.cs",

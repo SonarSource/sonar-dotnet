@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_owner' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  28,
+"endLine":  75,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_owner' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Bug\UseDestinationValue.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  28,
+"endLine":  168,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_abstractProductConversionLinq' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\ExpressionBridge.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  67,
+"endLine":  103,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_destination' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\MappingInheritance\PreserveReferencesWithInheritance.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  29,
+"endLine":  77,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_factory' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\Automapper\src\UnitTests\Tests\TypeMapFactorySpecs.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  32,
+"endLine":  184,
+"endColumn":  40
+}
+}
+}
+]
+}

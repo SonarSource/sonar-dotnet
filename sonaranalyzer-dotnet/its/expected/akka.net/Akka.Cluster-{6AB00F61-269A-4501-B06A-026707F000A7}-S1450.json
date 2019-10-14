@@ -12,19 +12,6 @@
 "endColumn":  34
 }
 }
-},
-{
-"id":  "S1450",
-"message":  "Remove the field '_gossipTimeToLive' and declare it as a local variable in the relevant methods.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
-"region":  {
-"startLine":  45,
-"startColumn":  32,
-"endLine":  45,
-"endColumn":  49
-}
-}
 }
 ]
 }
