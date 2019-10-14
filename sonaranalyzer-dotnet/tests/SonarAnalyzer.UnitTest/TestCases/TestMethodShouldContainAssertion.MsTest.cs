@@ -44,20 +44,6 @@
         }
 
         [TestMethod]
-        public void TestMethod6()
-        {
-            Action act = () => { throw new Exception(); };
-            act.ShouldThrow<Exception>();
-        }
-
-        [TestMethod]
-        public void TestMethod7()
-        {
-            Action act = () => { throw new Exception(); };
-            act.ShouldNotThrow<Exception>();
-        }
-
-        [TestMethod]
         public void TestMethod8()
         {
             AssertSomething();
@@ -173,20 +159,6 @@
         {
             var x = 42;
             x.Should().Be(42);
-        }
-
-        [DataTestMethod]
-        public void TestMethod6()
-        {
-            Action act = () => { throw new Exception(); };
-            act.ShouldThrow<Exception>();
-        }
-
-        [DataTestMethod]
-        public void TestMethod7()
-        {
-            Action act = () => { throw new Exception(); };
-            act.ShouldNotThrow<Exception>();
         }
 
         [DataTestMethod]

@@ -36,20 +36,6 @@
         }
 
         [Fact]
-        public void Fact6()
-        {
-            Action act = () => { throw new Exception(); };
-            act.ShouldThrow<Exception>();
-        }
-
-        [Fact]
-        public void Fact7()
-        {
-            Action act = () => { throw new Exception(); };
-            act.ShouldNotThrow<Exception>();
-        }
-
-        [Fact]
         public void Fact8()
         {
             AssertSomething(42);
@@ -124,22 +110,6 @@
         public void Theory5(int arg1)
         {
             arg1.Should().Be(42);
-        }
-
-        [Theory]
-        [InlineData(1)]
-        public void Theory6(int arg1)
-        {
-            Action act = () => { throw new Exception(); };
-            act.ShouldThrow<Exception>();
-        }
-
-        [Theory]
-        [InlineData(1)]
-        public void Theory7(int arg1)
-        {
-            Action act = () => { throw new Exception(); };
-            act.ShouldNotThrow<Exception>();
         }
 
         [Theory]
