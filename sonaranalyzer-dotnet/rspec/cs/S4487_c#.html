@@ -2,48 +2,44 @@
 most probably indicates a serious error in the code.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Cuboid
+public class Rectangle
 {
   private readonly int length;
-  private int Breadth { get; set; } // Breadth is written but never read
-  private readonly int height;  // height is written but never read
+  private readonly int width;  // width is written but never read
 
-  public Cuboid(int length, int breadth, int height)
+  public Rectangle(int length, int width)
   {
     this.length = length;
-    this.Breadth = breadth;
-    this.height = height;
+    this.width = width;
   }
 
-  public int Volume
+  public int Surface
   {
     get
     {
-      return length * length * length;
+      return length * length;
     }
   }
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public class Cuboid
+public class Rectangle
 {
   private readonly int length;
-  private int Breadth { get; set; } // Breadth is written but never read
-  private readonly int height;  // height is written but never read
+  private readonly int width;
 
-  public Cuboid(int length, int breadth, int height)
+  public Rectangle(int length, int width)
   {
     this.length = length;
-    this.Breadth = breadth;
-    this.height = height;
+    this.width= width;
   }
 
-  public int Volume
+  public int Surface
   {
     get
     {
-      return length * Breadth * height;
+      return length * width;
     }
   }
 }
