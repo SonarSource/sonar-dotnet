@@ -20,6 +20,7 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import org.junit.Test;
+import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.config.PropertyDefinitions;
 import org.sonar.api.config.internal.MapSettings;
@@ -53,7 +54,7 @@ public class AbstractSolutionConfigurationTest {
       "cs",
       "C#",
       ".cs",
-      SonarRuntimeImpl.forSonarQube(Version.create(7, 4), SonarQubeSide.SERVER)) {
+      SonarRuntimeImpl.forSonarQube(Version.create(7, 4), SonarQubeSide.SERVER, SonarEdition.COMMUNITY)) {
     };
     MapSettings settings = new MapSettings(new PropertyDefinitions(definitions.create()));
     settings.setProperty("sonar.cs.analyzeGeneratedCode", analyzeGeneratedCode);

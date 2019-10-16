@@ -26,6 +26,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.config.PropertyDefinitions;
 import org.sonar.api.config.internal.MapSettings;
@@ -50,7 +51,7 @@ public class AbstractProjectConfigurationTest {
   @Before
   public void setUp() {
     workDir = temp.getRoot().toPath();
-    AbstractPropertyDefinitions definitions = new AbstractPropertyDefinitions("cs", "C#", ".cs", SonarRuntimeImpl.forSonarQube(Version.create(7, 4), SonarQubeSide.SERVER)) {
+    AbstractPropertyDefinitions definitions = new AbstractPropertyDefinitions("cs", "C#", ".cs", SonarRuntimeImpl.forSonarQube(Version.create(7, 4), SonarQubeSide.SERVER, SonarEdition.COMMUNITY)) {
     };
     settings = new MapSettings(new PropertyDefinitions(definitions.create()));
   }
