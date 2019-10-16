@@ -24,20 +24,19 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.api.batch.fs.InputModule;
+import org.sonar.api.scanner.fs.InputProject;
 
 class SarifParser01And04 implements SarifParser {
   private static final String FILE_PROTOCOL = "file:///";
-  private final InputModule inputModule;
+  private final InputProject inputProject;
   private final JsonObject root;
   private final UnaryOperator<String> toRealPath;
 
-  SarifParser01And04(InputModule inputModule, JsonObject root, UnaryOperator<String> toRealPath) {
-    this.inputModule = inputModule;
+  SarifParser01And04(InputProject inputProject, JsonObject root, UnaryOperator<String> toRealPath) {
+    this.inputProject = inputProject;
     this.root = root;
     this.toRealPath = toRealPath;
   }
@@ -76,13 +75,13 @@ class SarifParser01And04 implements SarifParser {
 
     JsonArray locationsArray = issue.getAsJsonArray("locations");
     if (locationsArray.size() == 0) {
-      callback.onProjectIssue(ruleId, null, inputModule, message);
+      callback.onProjectIssue(ruleId, null, inputProject, message);
       return;
     }
 
     JsonObject primaryLocationObject = getAnalysisTargetAt(locationsArray, 0);
     if (primaryLocationObject == null) {
-      callback.onProjectIssue(ruleId, null, inputModule, message);
+      callback.onProjectIssue(ruleId, null, inputProject, message);
       return;
     }
 
