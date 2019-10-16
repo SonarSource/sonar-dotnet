@@ -103,10 +103,12 @@ namespace SonarAnalyzer.Helpers.VisualBasic
 
         public static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation)
         {
-           if (invocation == null)
+            if (invocation == null ||
+                invocation.Expression == null)
             {
                 return null;
             }
+
             var expressionType = invocation.Expression.Kind();
             // in vb.net when using the null - conditional operator (e.g.handle?.IsClosed), the parser
             // will generate a SimpleMemberAccessExpression and not a MemberBindingExpressionSyntax like for C#
@@ -134,7 +136,7 @@ namespace SonarAnalyzer.Helpers.VisualBasic
 
         private static bool IsOn(this ExpressionSyntax expression, SyntaxKind onKind)
         {
-            switch (expression.Kind())
+            switch (expression?.Kind())
             {
                 case SyntaxKind.InvocationExpression:
                     return IsOn(((InvocationExpressionSyntax)expression).Expression, onKind);
