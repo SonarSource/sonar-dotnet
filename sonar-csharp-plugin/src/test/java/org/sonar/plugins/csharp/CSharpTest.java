@@ -21,6 +21,7 @@ package org.sonar.plugins.csharp;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.config.PropertyDefinitions;
 import org.sonar.api.config.internal.MapSettings;
@@ -36,7 +37,7 @@ public class CSharpTest {
 
   @Before
   public void init() {
-    PropertyDefinitions defs = new PropertyDefinitions(new CSharpPropertyDefinitions(SonarRuntimeImpl.forSonarQube(Version.create(7, 4), SonarQubeSide.SCANNER)).create());
+    PropertyDefinitions defs = new PropertyDefinitions(new CSharpPropertyDefinitions(SonarRuntimeImpl.forSonarQube(Version.create(7, 4), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY)).create());
     settings = new MapSettings(defs);
     csharp = new CSharp(settings.asConfig());
   }
