@@ -57,7 +57,7 @@ public class UnitTestResultsProvider {
         .description("Example: \"report.trx\", \"report1.trx,report2.trx\" or \"C:/report.trx\"")
         .category(category)
         .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.PROJECT)
         .multiValues(true)
         .build(),
       PropertyDefinition.builder(unitTestConfiguration.nunitTestResultsFilePropertyKey())
@@ -65,7 +65,7 @@ public class UnitTestResultsProvider {
         .description("Example: \"TestResult.xml\", \"TestResult1.xml,TestResult2.xml\" or \"C:/TestResult.xml\"")
         .category(category)
         .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.PROJECT)
         .multiValues(true)
         .build());
   }
