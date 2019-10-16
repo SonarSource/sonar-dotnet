@@ -758,5 +758,20 @@ namespace Tests.Diagnostics
         }
 
         public void Archive() {}
+
+        public class TestClass
+        {
+            public int VarPatternCheck(string value)
+            {
+                switch (value)
+                {
+                    case var x when x == "one":
+                        return 1;
+
+                    default:
+                        return 0;
+                }
+            }
+        }
     }
 }

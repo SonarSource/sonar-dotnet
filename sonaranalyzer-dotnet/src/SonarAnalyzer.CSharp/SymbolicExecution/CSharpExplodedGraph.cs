@@ -515,6 +515,10 @@ namespace SonarAnalyzer.SymbolicExecution
                     newProgramState = VisitDeclarationPattern((DeclarationPatternSyntaxWrapper)instruction, newProgramState);
                     break;
 
+                case SyntaxKindEx.VarPattern:
+                    newProgramState = VisitVarPattern((VarPatternSyntaxWrapper)instruction, newProgramState);
+                    break;
+
                 case SyntaxKindEx.ConstantPattern:
                     // The 0 in 'case 0 when ...'
                     // Do nothing
@@ -528,6 +532,10 @@ namespace SonarAnalyzer.SymbolicExecution
             OnInstructionProcessed(instruction, node.ProgramPoint, newProgramState);
             EnqueueNewNode(newProgramPoint, newProgramState);
         }
+
+        private ProgramState VisitVarPattern(VarPatternSyntaxWrapper varPatternSyntax, ProgramState programState) =>
+            // "var x" in "case var x when ..."
+            VisitVariableDesignation(varPatternSyntax.Designation, programState, singleVariable: true);
 
         private ProgramState VisitDeclarationPattern(DeclarationPatternSyntaxWrapper declarationPattern, ProgramState newProgramState) =>
             // "x is string s" is equivalent to "s = x" and "s" should get NotNull constraint
