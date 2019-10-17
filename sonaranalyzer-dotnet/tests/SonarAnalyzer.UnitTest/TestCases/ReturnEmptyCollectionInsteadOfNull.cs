@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 
 namespace Tests.Diagnostics
@@ -114,6 +115,21 @@ namespace Tests.Diagnostics
             {
                 return null; // Noncompliant
             }
+        }
+
+        static IEnumerable<string> TestNullFromLambda()
+        {
+            var list = new List<string>();
+
+            return list.Select(o =>
+            {
+                if (o != null)
+                {
+                    return o;
+                }
+
+                return null; // Noncompliant FP
+            });
         }
     }
 }
