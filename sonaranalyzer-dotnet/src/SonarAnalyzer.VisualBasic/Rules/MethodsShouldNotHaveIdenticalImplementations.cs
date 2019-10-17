@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-        protected override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
 
         protected override SyntaxKind ClassDeclarationSyntaxKind => SyntaxKind.ClassBlock;
 
@@ -51,12 +51,17 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override bool AreDuplicates(MethodBlockSyntax firstMethod, MethodBlockSyntax secondMethod)
         {
             return firstMethod.Statements.Count >= 2 &&
-                firstMethod.SubOrFunctionStatement.Identifier.ValueText != secondMethod.SubOrFunctionStatement.Identifier.ValueText &&
-                HaveSameParameters(firstMethod?.BlockStatement?.ParameterList.Parameters, secondMethod?.BlockStatement?.ParameterList.Parameters) &&
-                VisualBasicEquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);
+                   firstMethod.GetIdentifierText() != secondMethod.GetIdentifierText() &&
+                   HaveSameParameters(firstMethod.BlockStatement?.ParameterList.Parameters, secondMethod.BlockStatement?.ParameterList.Parameters) &&
+                   VisualBasicEquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);
 
             bool HaveSameParameters(SeparatedSyntaxList<ParameterSyntax>? leftParameters, SeparatedSyntaxList<ParameterSyntax>? rightParameters)
             {
+                if (leftParameters == null && rightParameters == null)
+                {
+                    return true;
+                }
+
                 if ((leftParameters == null && rightParameters != null) ||
                     (leftParameters != null && rightParameters == null) ||
                     leftParameters.Value.Count != rightParameters.Value.Count)
@@ -69,6 +74,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
         }
 
-        protected override SyntaxToken GetMethodIdentifier(MethodBlockSyntax method) => method.SubOrFunctionStatement.Identifier;
+        protected override SyntaxToken GetMethodIdentifier(MethodBlockSyntax method) =>
+            method.SubOrFunctionStatement.Identifier;
     }
 }
