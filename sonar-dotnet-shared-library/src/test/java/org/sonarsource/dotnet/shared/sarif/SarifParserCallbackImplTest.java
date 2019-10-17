@@ -69,7 +69,7 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_add_project_issues() {
-    callback.onProjectIssue("rule1", "warning", ctx.module(), "msg");
+    callback.onProjectIssue("rule1", "warning", ctx.project(), "msg");
     assertThat(ctx.allIssues()).hasSize(1);
     assertThat(ctx.allIssues().iterator().next().primaryLocation().inputComponent().key()).isEqualTo("projectKey");
     assertThat(ctx.allIssues().iterator().next().ruleKey().rule()).isEqualTo("rule1");
@@ -110,13 +110,13 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_ignore_project_issue_with_unknown_rule_key() {
-    callback.onProjectIssue("rule45", "warning", ctx.module(), "msg");
+    callback.onProjectIssue("rule45", "warning", ctx.project(), "msg");
     assertThat(ctx.allIssues()).isEmpty();
     assertThat(ctx.allExternalIssues()).isEmpty();
 
     callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, true, emptySet(), emptySet(), emptySet());
 
-    callback.onProjectIssue("rule45", "warning", ctx.module(), "msg");
+    callback.onProjectIssue("rule45", "warning", ctx.project(), "msg");
 
     assertThat(ctx.allIssues()).isEmpty();
     assertThat(ctx.allExternalIssues()).isEmpty();
@@ -221,8 +221,8 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_ignore_repeated_module_issues() {
-    callback.onProjectIssue("rule1", "warning", ctx.module(), "message");
-    callback.onProjectIssue("rule1", "warning", ctx.module(), "message");
+    callback.onProjectIssue("rule1", "warning", ctx.project(), "message");
+    callback.onProjectIssue("rule1", "warning", ctx.project(), "message");
 
     assertThat(ctx.allIssues()).hasSize(1);
     assertThat(ctx.allIssues()).extracting("ruleKey").extracting("rule")

@@ -33,7 +33,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
-import org.sonar.api.batch.fs.InputModule;
+import org.sonar.api.scanner.fs.InputProject;
 import org.sonar.api.utils.log.LogTester;
 
 import static org.mockito.ArgumentMatchers.eq;
@@ -84,7 +84,7 @@ public class SarifParser01And04Test {
 
     verify(callback).onProjectIssue("AssemblyLevelRule", null, null, "This is an assembly level Roslyn issue with no location.");
     verify(callback).onProjectIssue("NoAnalysisTargetsLocation", null, null, "No analysis targets, report at assembly level.");
-    verify(callback, times(2)).onProjectIssue(Mockito.anyString(), Mockito.isNull(), Mockito.nullable(InputModule.class), Mockito.anyString());
+    verify(callback, times(2)).onProjectIssue(Mockito.anyString(), Mockito.isNull(), Mockito.nullable(InputProject.class), Mockito.anyString());
   }
 
   // VS 2015 Update 2
@@ -99,7 +99,7 @@ public class SarifParser01And04Test {
     inOrder.verify(callback).onIssue("S125", null, location, Collections.emptyList());
     verify(callback, only()).onIssue(Mockito.anyString(), Mockito.isNull(), Mockito.any(Location.class), Mockito.anyCollectionOf(Location.class));
 
-    verify(callback, never()).onProjectIssue(Mockito.anyString(), Mockito.isNull(), Mockito.any(InputModule.class), Mockito.anyString());
+    verify(callback, never()).onProjectIssue(Mockito.anyString(), Mockito.isNull(), Mockito.any(InputProject.class), Mockito.anyString());
   }
 
   @Test

@@ -21,20 +21,20 @@ package org.sonarsource.dotnet.shared.plugins;
 
 import java.nio.file.Path;
 import java.util.Objects;
-import org.sonar.api.batch.fs.InputModule;
+import org.sonar.api.scanner.fs.InputProject;
 
 public class RoslynReport {
 
-  private final InputModule module;
+  private final InputProject project;
   private final Path reportPath;
 
-  public RoslynReport(InputModule module, Path reportPath) {
-    this.module = module;
+  public RoslynReport(InputProject project, Path reportPath) {
+    this.project = project;
     this.reportPath = reportPath;
   }
 
-  public InputModule getModule() {
-    return module;
+  public InputProject getProject() {
+    return project;
   }
 
   public Path getReportPath() {
@@ -50,12 +50,12 @@ public class RoslynReport {
       return false;
     }
     RoslynReport that = (RoslynReport) o;
-    return Objects.equals(module, that.module) &&
+    return Objects.equals(project, that.project) &&
       Objects.equals(reportPath, that.reportPath);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(module, reportPath);
+    return Objects.hash(project, reportPath);
   }
 }

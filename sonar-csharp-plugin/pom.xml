@@ -63,7 +63,7 @@
   </scm>
 
   <properties>
-    <sonar.version>7.3</sonar.version>
+    <sonar.version>7.9</sonar.version>
     <sonarLTS.version>6.7</sonarLTS.version>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>

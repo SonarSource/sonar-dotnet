@@ -32,7 +32,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import javax.annotation.Nullable;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.fs.InputModule;
+import org.sonar.api.scanner.fs.InputProject;
 import org.sonar.api.batch.rule.Severity;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.issue.NewExternalIssue;
@@ -74,25 +74,25 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   }
 
   @Override
-  public void onProjectIssue(String ruleId, @Nullable String level, InputModule inputModule, String message) {
+  public void onProjectIssue(String ruleId, @Nullable String level, InputProject inputProject, String message) {
     // De-duplicate issues
-    Issue issue = new Issue(ruleId, inputModule.toString(), true);
+    Issue issue = new Issue(ruleId, inputProject.toString(), true);
     if (!savedIssues.add(issue)) {
       return;
     }
 
     String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
     if (repositoryKey != null) {
-      createProjectLevelIssue(ruleId, inputModule, message, repositoryKey);
+      createProjectLevelIssue(ruleId, inputProject, message, repositoryKey);
     }
   }
 
-  private void createProjectLevelIssue(String ruleId, InputModule inputModule, String message, String repositoryKey) {
+  private void createProjectLevelIssue(String ruleId, InputProject inputProject, String message, String repositoryKey) {
     NewIssue newIssue = context.newIssue();
     newIssue
       .forRule(RuleKey.of(repositoryKey, ruleId))
       .at(newIssue.newLocation()
-        .on(inputModule)
+        .on(inputProject)
         .message(message))
       .save();
   }

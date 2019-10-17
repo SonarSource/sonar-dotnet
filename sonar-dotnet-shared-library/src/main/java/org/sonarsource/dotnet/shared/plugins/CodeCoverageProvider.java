@@ -72,7 +72,7 @@ public class CodeCoverageProvider {
         .description("Example: \"report.nccov\", \"report1.nccov,report2.nccov\" or \"C:/report.nccov\"")
         .category(category)
         .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .onlyOnQualifiers(Qualifiers.PROJECT)
         .multiValues(true)
         .build(),
       PropertyDefinition.builder(itCoverageConf.ncover3PropertyKey())
@@ -80,7 +80,7 @@ public class CodeCoverageProvider {
         .description("Example: \"report.nccov\", \"report1.nccov,report2.nccov\" or \"C:/report.nccov\"")
         .category(category)
         .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .onlyOnQualifiers(Qualifiers.PROJECT)
         .multiValues(true)
         .build(),
       PropertyDefinition.builder(coverageConf.openCoverPropertyKey())
@@ -88,7 +88,7 @@ public class CodeCoverageProvider {
         .description("Example: \"report.xml\", \"report1.xml,report2.xml\" or \"C:/report.xml\"")
         .category(category)
         .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .onlyOnQualifiers(Qualifiers.PROJECT)
         .multiValues(true)
         .build(),
       PropertyDefinition.builder(itCoverageConf.openCoverPropertyKey())
@@ -96,7 +96,7 @@ public class CodeCoverageProvider {
         .description("Example: \"report.xml\", \"report1.xml,report2.xml\" or \"C:/report.xml\"")
         .category(category)
         .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .onlyOnQualifiers(Qualifiers.PROJECT)
         .multiValues(true)
         .build(),
       PropertyDefinition.builder(coverageConf.dotCoverPropertyKey())
@@ -104,7 +104,7 @@ public class CodeCoverageProvider {
         .description("Example: \"report.html\", \"report1.html,report2.html\" or \"C:/report.html\"")
         .category(category)
         .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .onlyOnQualifiers(Qualifiers.PROJECT)
         .multiValues(true)
         .build(),
       PropertyDefinition.builder(itCoverageConf.dotCoverPropertyKey())
@@ -112,7 +112,7 @@ public class CodeCoverageProvider {
         .description("Example: \"report.html\", \"report1.html,report2.html\" or \"C:/report.html\"")
         .category(category)
         .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .onlyOnQualifiers(Qualifiers.PROJECT)
         .multiValues(true)
         .build(),
       PropertyDefinition.builder(coverageConf.visualStudioCoverageXmlPropertyKey())
@@ -120,7 +120,7 @@ public class CodeCoverageProvider {
         .description("Example: \"report.coveragexml\", \"report1.coveragexml,report2.coveragexml\" or \"C:/report.coveragexml\"")
         .category(category)
         .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .onlyOnQualifiers(Qualifiers.PROJECT)
         .multiValues(true)
         .build(),
       PropertyDefinition.builder(itCoverageConf.visualStudioCoverageXmlPropertyKey())
@@ -128,7 +128,7 @@ public class CodeCoverageProvider {
         .description("Example: \"report.coveragexml\", \"report1.coveragexml,report2.coveragexml\" or \"C:/report.coveragexml\"")
         .category(category)
         .subCategory(SUBCATEGORY)
-        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .onlyOnQualifiers(Qualifiers.PROJECT)
         .multiValues(true)
         .build());
   }

@@ -27,6 +27,7 @@ import java.util.HashSet;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.config.PropertyDefinitions;
@@ -54,7 +55,7 @@ public class GeneratedFileFilterTest {
       "cs",
       "C#",
       ".cs",
-      SonarRuntimeImpl.forSonarQube(Version.create(7, 4), SonarQubeSide.SERVER)) {
+      SonarRuntimeImpl.forSonarQube(Version.create(7, 4), SonarQubeSide.SERVER, SonarEdition.COMMUNITY)) {
     };
     MapSettings settings = new MapSettings(new PropertyDefinitions(definitions.create()));
     defaultConfiguration = new AbstractSolutionConfiguration(settings.asConfig(), "cs") { };

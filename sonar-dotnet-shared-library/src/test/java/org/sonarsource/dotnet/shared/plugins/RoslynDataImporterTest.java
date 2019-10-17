@@ -39,6 +39,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
+import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
@@ -92,7 +93,7 @@ public class RoslynDataImporterTest {
   @Test
   public void roslynReportIsProcessed() {
     Map<String, List<RuleKey>> activeRules = createActiveRules();
-    roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(tester.module(), workDir.resolve("roslyn-report.json"))), tester, activeRules,
+    roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(tester.project(), workDir.resolve("roslyn-report.json"))), tester, activeRules,
       String::toString);
 
     assertThat(tester.allIssues())
@@ -113,10 +114,10 @@ public class RoslynDataImporterTest {
 
   @Test
   public void dont_import_external_issues_before_7_4() {
-    tester.setRuntime(SonarRuntimeImpl.forSonarQube(Version.create(7, 3), SonarQubeSide.SCANNER));
+    tester.setRuntime(SonarRuntimeImpl.forSonarQube(Version.create(7, 3), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY));
 
     Map<String, List<RuleKey>> activeRules = createActiveRules();
-    roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(tester.module(), workDir.resolve("roslyn-report.json"))), tester, activeRules,
+    roslynDataImporter.importRoslynReports(Collections.singletonList(new RoslynReport(tester.project(), workDir.resolve("roslyn-report.json"))), tester, activeRules,
       String::toString);
 
     assertThat(tester.allIssues()).hasSize(4);

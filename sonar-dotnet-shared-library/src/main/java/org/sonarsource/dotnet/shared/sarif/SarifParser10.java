@@ -31,21 +31,20 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
-import org.sonar.api.batch.fs.InputModule;
+import org.sonar.api.scanner.fs.InputProject;
 
 class SarifParser10 implements SarifParser {
   private static final String PROPERTIES_PROP = "properties";
   private static final String LEVEL_PROP = "level";
-  private final InputModule inputModule;
+  private final InputProject inputProject;
   private final JsonObject root;
   private final UnaryOperator<String> toRealPath;
 
-  SarifParser10(InputModule inputModule, JsonObject root, UnaryOperator<String> toRealPath) {
-    this.inputModule = inputModule;
+  SarifParser10(InputProject inputProject, JsonObject root, UnaryOperator<String> toRealPath) {
+    this.inputProject = inputProject;
     this.root = root;
     this.toRealPath = toRealPath;
   }
@@ -106,7 +105,7 @@ class SarifParser10 implements SarifParser {
     String message = resultObj.get("message").getAsString();
     String level = resultObj.has(LEVEL_PROP) ? resultObj.get(LEVEL_PROP).getAsString() : null;
     if (!handleLocationsElement(resultObj, ruleId, message, callback)) {
-      callback.onProjectIssue(ruleId, level, inputModule, message);
+      callback.onProjectIssue(ruleId, level, inputProject, message);
     }
   }
 
