@@ -45,6 +45,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
             builder.Add(typeof(TupleElementSyntaxWrapper), codeAnalysisAssembly.GetType(TupleElementSyntaxWrapper.WrappedTypeName));
             builder.Add(typeof(TupleExpressionSyntaxWrapper), codeAnalysisAssembly.GetType(TupleExpressionSyntaxWrapper.WrappedTypeName));
             builder.Add(typeof(TupleTypeSyntaxWrapper), codeAnalysisAssembly.GetType(TupleTypeSyntaxWrapper.WrappedTypeName));
+            builder.Add(typeof(VarPatternSyntaxWrapper), codeAnalysisAssembly.GetType(VarPatternSyntaxWrapper.WrappedTypeName));
             builder.Add(typeof(VariableDesignationSyntaxWrapper), codeAnalysisAssembly.GetType(VariableDesignationSyntaxWrapper.WrappedTypeName));
             builder.Add(typeof(WhenClauseSyntaxWrapper), codeAnalysisAssembly.GetType(WhenClauseSyntaxWrapper.WrappedTypeName));
 

@@ -26,6 +26,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         public const SyntaxKind CasePatternSwitchLabel = (SyntaxKind)9009;
         public const SyntaxKind WhenClause = (SyntaxKind)9013;
         public const SyntaxKind DiscardDesignation = (SyntaxKind)9014;
+        public const SyntaxKind VarPattern = (SyntaxKind)9027;
         public const SyntaxKind DeclarationExpression = (SyntaxKind)9040;
         public const SyntaxKind RefExpression = (SyntaxKind)9050;
         public const SyntaxKind RefType = (SyntaxKind)9051;
