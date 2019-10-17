@@ -12,14 +12,15 @@ In general, it is best to run commands from the Visual Studio Developer Command 
 
 ## Developing with Visual Studio 2017
 
-1. [Visual Studio 2017 Version 15.7](https://www.visualstudio.com/vs/preview/)
+1. [Visual Studio 2017 Version 15.9](https://my.visualstudio.com/Downloads?q=visual%20studio%202017&wt.mc_id=o~msft~vscom~older-downloads)
     - Ensure C#, VB, MSBuild, .NET Core, F#, Visual Studio Extensibility and ASP.Net and web development are included in the selected work loads
     - Ensure Visual Studio Version is between "15.7" and "15.9"
+    - If you want to install only [Visual Studio 2019](https://visualstudio.microsoft.com/vs/) as an IDE, make sure you also install [Build Tools for Visual Studio 2017 (version 15.9)](https://my.visualstudio.com/Downloads?q=Build%20Tools%20for%20Visual%20Studio%202017%20(version%2015.9)&pgroup=) in order to have MSBuild 15 installed (see #2489)
 1. [.NET Core SDK 2.1.402](https://dotnet.microsoft.com/download/dotnet-core/2.1)
 1. Open `SonarAnalyzer.sln` in the `sonaranalyzer-dotnet` subfolder
 
 The following environment variables must be set:
-- **MSBUILD_PATH** - path to MSBuild.exe from the Visual Studio installation folder
+- **MSBUILD_PATH** - path to MSBuild.exe from the Visual Studio installation folder - to MSBuild 15
 - **ORCHESTRATOR_CONFIG_URL** - path to orchestrator.properties (for integration tests)
 - **rule_api_path** - path to folder containing the rule api jar
 - **Path** - the **Path** must contain:
