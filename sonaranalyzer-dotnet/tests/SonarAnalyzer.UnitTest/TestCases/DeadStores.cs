@@ -758,19 +758,20 @@ namespace Tests.Diagnostics
         }
 
         public void Archive() {}
+    }
 
-        public class TestClass
+    // https://github.com/SonarSource/sonar-dotnet/issues/2426
+    public class ReproGithubIssue2426
+    {
+        public int VarPatternCheck(string value)
         {
-            public int VarPatternCheck(string value)
+            switch (value)
             {
-                switch (value)
-                {
-                    case var x when x == "one":
-                        return 1;
+                case var x when x == "one":
+                    return 1;
 
-                    default:
-                        return 0;
-                }
+                default:
+                    return 0;
             }
         }
     }
