@@ -31,7 +31,7 @@ The following environment variables must be set:
 
 ### Unit Tests
 
-You can run the Unit Tests via the Test Explorer of Visual Studio or using `.\scripts\build\dev-build.ps1 test`
+You can run the Unit Tests via the Test Explorer of Visual Studio or using `.\scripts\build\dev-build.ps1 -test`
 
 ### Integration Tests
 #### Running the tests
