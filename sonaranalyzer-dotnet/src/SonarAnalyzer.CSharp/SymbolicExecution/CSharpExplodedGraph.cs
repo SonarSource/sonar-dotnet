@@ -535,6 +535,13 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private ProgramState VisitVarPattern(VarPatternSyntaxWrapper varPatternSyntax, ProgramState programState) =>
             // "var x" in "case var x when ..."
+            //
+            // VarPattern is treated the same as DeclarationPattern since both have a very similar structure:
+            //
+            // VarPattern                                   DeclarationPattern
+            //   - VarKeyword                                 - PredefinedType
+            //   - SingleVariableDesignation                  - SingleVariableDesignation
+            //      - IdentifierToken                             - IdentifierToken
             VisitVariableDesignation(varPatternSyntax.Designation, programState, singleVariable: true);
 
         private ProgramState VisitDeclarationPattern(DeclarationPatternSyntaxWrapper declarationPattern, ProgramState newProgramState) =>
