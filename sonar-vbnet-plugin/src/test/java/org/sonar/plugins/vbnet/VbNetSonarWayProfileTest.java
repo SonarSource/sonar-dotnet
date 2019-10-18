@@ -30,28 +30,14 @@ import org.sonar.api.utils.log.LogTester;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class VbNetSonarWayProfileTest {
-  private static final SonarRuntime SQ_67 = SonarVersion.SQ_67_RUNTIME;
-  private static final SonarRuntime SQ_73 = SonarVersion.SQ_73_RUNTIME;
-
   @Rule
   public LogTester logTester = new LogTester();
 
   @Test
-  public void hotspots_not_in_sonar_way_before_SQ_73() {
+  public void hotspots_in_sonar_way() {
     Context context = new Context();
 
-    VbNetSonarWayProfile profileDef = new VbNetSonarWayProfile(SQ_67);
-    profileDef.define(context);
-
-    BuiltInQualityProfile profile = context.profile("vbnet", "Sonar way");
-    assertThat(profile.rule(RuleKey.of(VbNetPlugin.REPOSITORY_KEY, "S4823"))).isNull();
-  }
-
-  @Test
-  public void hotspots_in_sonar_way_after_SQ_73() {
-    Context context = new Context();
-
-    VbNetSonarWayProfile profileDef = new VbNetSonarWayProfile(SQ_73);
+    VbNetSonarWayProfile profileDef = new VbNetSonarWayProfile(SonarVersion.SQ_79_RUNTIME);
     profileDef.define(context);
 
     BuiltInQualityProfile profile = context.profile("vbnet", "Sonar way");
