@@ -92,8 +92,6 @@ function GetRules() {
 
 function CreateStringResources($rules) {
     $suffix = $ruleapiLanguageMap.Get_Item($language)
-    
-    $sonarWayRules = Get-Content -Raw "${rspecFolder}\\Sonar_way_profile.json" | ConvertFrom-Json
 
     $resources = New-Object System.Collections.ArrayList
     foreach ($rule in $rules) {
@@ -130,16 +128,7 @@ function CreateStringResources($rules) {
             [void]$resources.Add("${rule}_Remediation=$($remediationsMap.Get_Item(${json}.remediation.func))")
             [void]$resources.Add("${rule}_RemediationCost=$(${json}.remediation.constantCost)") # TODO see if we have remediations other than constantConst and fix them
         }
-
-        # Remove hotspots from the JSON object, we will save this object in a new file that will be
-        # used to define Sonar Way on SonarQube that is older than 7.3 and does not support hotspots
-        if ($json.type -eq "SECURITY_HOTSPOT") {
-            $sonarWayRules.ruleKeys = $sonarWayRules.ruleKeys | ? {$_ -ne $rule}
-        }
     }
-
-    # Create a new Sonar Way definition without hotspots to be loaded on SonarQube older than 7.3
-    [IO.File]::WriteAllText("${rspecFolder}\\Sonar_way_profile_no_hotspot.json", ((ConvertTo-Json $sonarWayRules) -replace "`r`n", "`n") + "`n")
 
     # improve readability of the generated file
     [void]$resources.Sort()
