@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             return firstMethod.Statements.Count >= 2 &&
                    firstMethod.GetIdentifierText() != secondMethod.GetIdentifierText() &&
-                   HaveSameParameters(firstMethod.BlockStatement?.ParameterList.Parameters, secondMethod.BlockStatement?.ParameterList.Parameters) &&
+                   HaveSameParameters(firstMethod.GetParameters(), secondMethod.GetParameters()) &&
                    VisualBasicEquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);
 
             bool HaveSameParameters(SeparatedSyntaxList<ParameterSyntax>? leftParameters, SeparatedSyntaxList<ParameterSyntax>? rightParameters)

@@ -232,6 +232,12 @@ namespace SonarAnalyzer.Helpers.VisualBasic
             }
         }
 
+        public static string GetIdentifierText(this MethodBlockSyntax method)
+            => method.SubOrFunctionStatement.Identifier.ValueText;
+
+        public static SeparatedSyntaxList<ParameterSyntax>? GetParameters(this MethodBlockSyntax method)
+            => method.BlockStatement?.ParameterList?.Parameters;
+
         public static ExpressionSyntax Get(this ArgumentListSyntax argumentList, int index) =>
             argumentList != null && argumentList.Arguments.Count > index
                 ? argumentList.Arguments[index].GetExpression().RemoveParentheses()
