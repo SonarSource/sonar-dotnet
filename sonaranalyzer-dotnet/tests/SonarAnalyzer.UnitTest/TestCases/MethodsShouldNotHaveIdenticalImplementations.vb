@@ -86,6 +86,16 @@ Namespace Tests.Diagnostics
             Return val.ToString() ' Compliant because we ignore one liner
         End Function
 
+        Sub SubNoParentheses
+            Dim s As String = "test"
+            Console.WriteLine("Result: {0}", s)
+        End Sub
+
+        Function FunctionNoParentheses As String
+            Dim s As String = "test"
+            Return s
+        End Function
+
     End Class
 
 End Namespace
