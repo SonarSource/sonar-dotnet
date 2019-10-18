@@ -26,7 +26,6 @@ import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
 
 public class SonarVersion {
-  static final SonarRuntime SQ_74_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(7, 4), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
-  static final SonarRuntime SQ_73_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(7, 3), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
-  static final SonarRuntime SQ_67_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(6, 7), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
+  static final SonarRuntime SQ_79_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
+  static final SonarRuntime SQ_LTS_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SERVER, SonarEdition.COMMUNITY);
 }
