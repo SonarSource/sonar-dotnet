@@ -37,7 +37,7 @@ public class VbNetSonarRulesDefinitionTest {
     Context context = new Context();
     assertThat(context.repositories()).isEmpty();
 
-    VbNetSonarRulesDefinition vbnetRulesDefinition = new VbNetSonarRulesDefinition(SonarVersion.SQ_79_RUNTIME);
+    VbNetSonarRulesDefinition vbnetRulesDefinition = new VbNetSonarRulesDefinition();
     vbnetRulesDefinition.define(context);
 
     assertThat(context.repositories()).hasSize(1);
@@ -51,7 +51,7 @@ public class VbNetSonarRulesDefinitionTest {
 
   @Test
   public void test_security_hotspot() {
-    VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition(SonarVersion.SQ_79_RUNTIME);
+    VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition();
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("vbnet");
@@ -62,20 +62,8 @@ public class VbNetSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_security_hotspot_lts() {
-    VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition(SonarVersion.SQ_LTS);
-    RulesDefinition.Context context = new RulesDefinition.Context();
-    definition.define(context);
-    RulesDefinition.Repository repository = context.repository("vbnet");
-
-    RulesDefinition.Rule rule = repository.rule(SECURITY_HOTSPOT_RULE_KEY);
-    assertThat(rule.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);
-    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:312", "cwe:315", "cwe:565", "cwe:807", "owaspTop10:a3");
-  }
-
-  @Test
   public void test_security_hotspot_has_correct_type_and_security_standards() {
-    VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition(SonarVersion.SQ_79_RUNTIME);
+    VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition();
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("vbnet");
@@ -87,7 +75,7 @@ public class VbNetSonarRulesDefinitionTest {
 
   @Test
   public void test_security_standards_with_vulnerability() {
-    VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition(SonarVersion.SQ_79_RUNTIME);
+    VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition();
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("vbnet");

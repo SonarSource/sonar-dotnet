@@ -19,22 +19,15 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import org.sonar.api.SonarRuntime;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
-import org.sonar.api.utils.Version;
 import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
-import javax.annotation.Nullable;
-
 public abstract class AbstractSonarWayProfile implements BuiltInQualityProfilesDefinition {
-  private final boolean supportsSecurityHotspots;
-  private static final Version SQ_7_3 = Version.create(7, 3);
   private final String languageKey;
   private final String pluginKey;
   private final String repositoryKey;
 
-  protected AbstractSonarWayProfile(@Nullable SonarRuntime sonarRuntime, String languageKey, String pluginKey, String repositoryKey) {
-    this.supportsSecurityHotspots = sonarRuntime != null && sonarRuntime.getApiVersion().isGreaterThanOrEqual(SQ_7_3);
+  protected AbstractSonarWayProfile(String languageKey, String pluginKey, String repositoryKey) {
     this.languageKey = languageKey;
     this.pluginKey = pluginKey;
     this.repositoryKey = repositoryKey;
@@ -50,9 +43,7 @@ public abstract class AbstractSonarWayProfile implements BuiltInQualityProfilesD
   }
 
   private String getSonarWayJsonPath() {
-    return supportsSecurityHotspots
-      ? ("org/sonar/plugins/" + pluginKey + "/Sonar_way_profile.json")
-      : ("org/sonar/plugins/" + pluginKey + "/Sonar_way_profile_no_hotspot.json");
+    return "org/sonar/plugins/" + pluginKey + "/Sonar_way_profile.json";
   }
 
   protected void activateSecurityRules(NewBuiltInQualityProfile sonarWay) {

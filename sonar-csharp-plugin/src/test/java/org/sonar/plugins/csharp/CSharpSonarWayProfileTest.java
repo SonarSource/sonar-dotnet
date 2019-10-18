@@ -28,7 +28,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.sonar.api.SonarRuntime;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.BuiltInQualityProfile;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.Context;
@@ -58,7 +57,7 @@ public class CSharpSonarWayProfileTest {
     Mockito.when(context.createBuiltInQualityProfile(anyString(), anyString())).thenReturn(profile);
     CsRules.ruleKeys = Sets.newHashSet("TEST");
 
-    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_79_RUNTIME);
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
     profileDef.define(context);
 
     assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
@@ -75,7 +74,7 @@ public class CSharpSonarWayProfileTest {
     CsRules.ruleKeys = Sets.newHashSet("TEST");
     CsRules.returnRepository = true;
 
-    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_79_RUNTIME);
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
     profileDef.define(context);
 
     assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
@@ -87,7 +86,7 @@ public class CSharpSonarWayProfileTest {
     CsRules.ruleKeys = Sets.newHashSet("S3649");
     CsRules.returnRepository = true;
 
-    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_79_RUNTIME);
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
     profileDef.define(context);
 
     BuiltInQualityProfile profile = context.profile("cs", "Sonar way");
@@ -103,7 +102,7 @@ public class CSharpSonarWayProfileTest {
     sonarWay.done();
     CsRules.ruleKeys = Sets.newHashSet("S2");
 
-    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_79_RUNTIME);
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
     profileDef.define(context);
   }
 
@@ -113,7 +112,7 @@ public class CSharpSonarWayProfileTest {
     CsRules.ruleKeys = new HashSet<>();
     CsRules.returnRepository = false;
 
-    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_79_RUNTIME);
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
     profileDef.define(context);
 
     BuiltInQualityProfile profile = context.profile("cs", "Sonar way");
@@ -127,7 +126,7 @@ public class CSharpSonarWayProfileTest {
     CsRules.ruleKeys = Sets.newHashSet("S3649");
     CsRules.returnRepository = false;
 
-    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_79_RUNTIME);
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
     profileDef.define(context);
 
     BuiltInQualityProfile profile = context.profile("cs", "Sonar way");
@@ -141,7 +140,7 @@ public class CSharpSonarWayProfileTest {
     CsRules.exceptionToThrow = new ClassNotFoundException();
     CsRules.returnRepository = true;
 
-    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_79_RUNTIME);
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
     profileDef.define(context);
 
     assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
@@ -153,7 +152,7 @@ public class CSharpSonarWayProfileTest {
     CsRules.exceptionToThrow = new NoSuchMethodException();
     CsRules.returnRepository = true;
 
-    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_79_RUNTIME);
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
     profileDef.define(context);
 
     assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
@@ -165,7 +164,7 @@ public class CSharpSonarWayProfileTest {
     CsRules.exceptionToThrow = new IllegalAccessException();
     CsRules.returnRepository = true;
 
-    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_79_RUNTIME);
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
     profileDef.define(context);
 
     assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
@@ -177,7 +176,7 @@ public class CSharpSonarWayProfileTest {
     CsRules.exceptionToThrow = new InvocationTargetException(new Exception());
     CsRules.returnRepository = true;
 
-    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_79_RUNTIME);
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
     profileDef.define(context);
 
     assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
@@ -189,7 +188,7 @@ public class CSharpSonarWayProfileTest {
     CsRules.ruleKeys = new HashSet<>();
     CsRules.returnRepository = false;
 
-    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile(SonarVersion.SQ_79_RUNTIME);
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
     profileDef.define(context);
 
     BuiltInQualityProfile profile = context.profile("cs", "Sonar way");
