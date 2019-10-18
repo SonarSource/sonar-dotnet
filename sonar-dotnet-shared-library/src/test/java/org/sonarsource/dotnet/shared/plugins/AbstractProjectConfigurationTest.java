@@ -51,7 +51,7 @@ public class AbstractProjectConfigurationTest {
   @Before
   public void setUp() {
     workDir = temp.getRoot().toPath();
-    AbstractPropertyDefinitions definitions = new AbstractPropertyDefinitions("cs", "C#", ".cs", SonarRuntimeImpl.forSonarQube(Version.create(7, 4), SonarQubeSide.SERVER, SonarEdition.COMMUNITY)) {
+    AbstractPropertyDefinitions definitions = new AbstractPropertyDefinitions("cs", "C#", ".cs", SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SERVER, SonarEdition.COMMUNITY)) {
     };
     settings = new MapSettings(new PropertyDefinitions(definitions.create()));
   }

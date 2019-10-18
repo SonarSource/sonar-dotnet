@@ -54,7 +54,7 @@ public class AbstractSolutionConfigurationTest {
       "cs",
       "C#",
       ".cs",
-      SonarRuntimeImpl.forSonarQube(Version.create(7, 4), SonarQubeSide.SERVER, SonarEdition.COMMUNITY)) {
+      SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SERVER, SonarEdition.COMMUNITY)) {
     };
     MapSettings settings = new MapSettings(new PropertyDefinitions(definitions.create()));
     settings.setProperty("sonar.cs.analyzeGeneratedCode", analyzeGeneratedCode);
