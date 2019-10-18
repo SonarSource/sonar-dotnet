@@ -28,19 +28,14 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.annotation.Nullable;
 
-import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
-import org.sonar.api.utils.Version;
 
 @ScannerSide
 public abstract class AbstractRulesDefinition implements RulesDefinition {
-
-  private static final Version SQ_7_3 = Version.create(7, 3);
   private static final Gson GSON = new Gson();
 
   private final String repositoryKey;
