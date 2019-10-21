@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Helpers
             new HashSet<ISymbol>();
 
         [Flags]
-        private enum SymbolAccess { None = 0, Read = 1, Write = 2, ReadWrite = Read | Write, Declaration = 4, Initialization = Write | 8 }
+        private enum SymbolAccess { None = 0, Read = 1, Write = 2, ReadWrite = Read | Write }
 
         public IDictionary<ISymbol, SymbolUsage> FieldSymbolUsages { get; } =
             new Dictionary<ISymbol, SymbolUsage>();
@@ -114,25 +114,14 @@ namespace SonarAnalyzer.Helpers
         {
             var access = ParentAccessType(node);
             var fieldSymbolUsagesList = GetFieldSymbolUsagesList(symbols);
-            if (HasFlag(access, SymbolAccess.Declaration))
+            if (HasFlag(access, SymbolAccess.Read))
             {
-                fieldSymbolUsagesList.ForEach(usage => usage.Declaration = node);
-                if (HasFlag(access, SymbolAccess.Initialization))
-                {
-                    fieldSymbolUsagesList.ForEach(usage => usage.Initializer = node);
-                }
+                fieldSymbolUsagesList.ForEach(usage => usage.Readings.Add(node));
             }
-            else
-            {
-                if (HasFlag(access, SymbolAccess.Read))
-                {
-                    fieldSymbolUsagesList.ForEach(usage => usage.Readings.Add(node));
-                }
 
-                if (HasFlag(access, SymbolAccess.Write))
-                {
-                    fieldSymbolUsagesList.ForEach(usage => usage.Writings.Add(node));
-                }
+            if (HasFlag(access, SymbolAccess.Write))
+            {
+                fieldSymbolUsagesList.ForEach(usage => usage.Writings.Add(node));
             }
 
             bool HasFlag(SymbolAccess symbolAccess, SymbolAccess flag) => (symbolAccess & flag) != 0;
@@ -166,7 +155,7 @@ namespace SonarAnalyzer.Helpers
                     if (argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword))
                     {
                         //  out Type node : out node
-                        return SymbolAccess.Write | (argument.Expression.IsKind(SyntaxKindEx.DeclarationExpression) ? SymbolAccess.Declaration : SymbolAccess.None);
+                        return SymbolAccess.Write;
                     }
                     else if (argument.RefOrOutKeyword.IsKind(SyntaxKind.RefKeyword))
                     {
