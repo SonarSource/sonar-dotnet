@@ -4,14 +4,18 @@ developer to decide whether or not the content of the cookie can be read by the 
 target the theft of session-cookies, the <code>HttpOnly</code> attribute could help to reduce their impact as it won't be possible to exploit the XSS
 vulnerability to steal session-cookies.</p>
 <h2>Ask Yourself Whether</h2>
-<p> * the cookie is a <em>session-cookie</em> and the <code>HttpOnly</code> flag is not set to <em>true</em></p>
-<p> * the content of the cookie is sensitive and the <code>HttpOnly</code> flag is not set to <em>true</em></p>
-<p> * the <code>HttpOnly</code> attribute offer an additional protection (not the case for an <em>XSRF-TOKEN cookie</em> / CSRF token for example) but
-it is not set to <em>true</em></p>
+<ul>
+  <li> the cookie is a <em>session-cookie</em> and the <code>HttpOnly</code> flag is not set to <em>true</em> </li>
+  <li> the content of the cookie is sensitive and the <code>HttpOnly</code> flag is not set to <em>true</em> </li>
+  <li> the <code>HttpOnly</code> attribute offer an additional protection (not the case for an <em>XSRF-TOKEN cookie</em> / CSRF token for example)
+  but it is not set to <em>true</em> </li>
+</ul>
 <p>You are at risk if you answered yes to any of those questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
-<p> * You should by default set the <code>HttpOnly</code> flag to <em>true</em> for most of your cookies and it's mandatory for session /
-sensitive-security cookies.</p>
+<ul>
+  <li> You should by default set the <code>HttpOnly</code> flag to <em>true</em> for most of your cookies and it's mandatory for session /
+  sensitive-security cookies. </li>
+</ul>
 <h2>Sensitive Code Examples</h2>
 <p>For example In C# you can specify the HttpOnly flag for<a
 href="https://docs.microsoft.com/en-us/dotnet/api/system.web.httpcookie?view=netframework-4.8">HttpCookie</a> object.</p>
@@ -31,12 +35,14 @@ HttpCookie myCookie = new HttpCookie("Sensitive cookie");
 myCookie.HttpOnly = true; // Compliant: the sensitive cookie is protected against theft thanks to the HttpOnly property set to true (HttpOnly = true)
 </pre>
 <h2>See</h2>
-<p> * <a href="https://www.owasp.org/index.php/HttpOnly">OWASP HttpOnly</a></p>
-<p> * <a href="https://www.owasp.org/index.php/Top_10-2017_A7-Cross-Site_Scripting_(XSS)">OWASP Top 10 2017 Category A7</a> - Cross-Site Scripting
-(XSS)</p>
-<p> * <a href="http://cwe.mitre.org/data/definitions/79.html">CWE-79</a> - Improper Neutralization of Input During Web Page Generation ('Cross-site
-Scripting')</p>
-<p> * <a href="https://cwe.mitre.org/data/definitions/1004.html">CWE-1004</a> - Sensitive Cookie Without 'HttpOnly' Flag</p>
-<p> * <a href="https://www.sans.org/top25-software-errors/#cat1">SANS Top 25</a> - Insecure Interaction Between Components</p>
-<p> * Derived from FindSecBugs rule <a href="https://find-sec-bugs.github.io/bugs.htm#HTTPONLY_COOKIE">HTTPONLY_COOKIE</a></p>
+<ul>
+  <li> <a href="https://www.owasp.org/index.php/HttpOnly">OWASP HttpOnly</a> </li>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A7-Cross-Site_Scripting_(XSS)">OWASP Top 10 2017 Category A7</a> - Cross-Site Scripting
+  (XSS) </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/79.html">CWE-79</a> - Improper Neutralization of Input During Web Page Generation ('Cross-site
+  Scripting') </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/1004.html">CWE-1004</a> - Sensitive Cookie Without 'HttpOnly' Flag </li>
+  <li> <a href="https://www.sans.org/top25-software-errors/#cat1">SANS Top 25</a> - Insecure Interaction Between Components </li>
+  <li> Derived from FindSecBugs rule <a href="https://find-sec-bugs.github.io/bugs.htm#HTTPONLY_COOKIE">HTTPONLY_COOKIE</a> </li>
+</ul>
 
