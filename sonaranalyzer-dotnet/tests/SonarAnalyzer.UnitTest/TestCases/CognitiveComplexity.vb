@@ -170,6 +170,12 @@ Namespace Tests.Diagnostics
       Next
     End Function
 
+    Private Function ForeachNoParens ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+      For Each item In Enumerable.Empty(Of Integer)
+'     ^^^ Secondary {{+1}}
+      Next
+    End Function
+
     Private Sub NestedForeach() ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
       For Each item1 In Enumerable.Empty(Of Integer)
 '     ^^^ Secondary {{+1}}
@@ -580,6 +586,17 @@ Namespace Tests.Diagnostics
                                           End If
                                        End Sub
     End Sub
+
+
+    Private Sub IfActionNoParens ' Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
+      Dim func As Action(Of Integer) = Sub(x As Integer)
+                                          If (x > 0) Then
+'                                         ^^ Secondary {{+2 (incl 1 for nesting)}}
+                                              Console.Write(x)
+                                          End If
+                                       End Sub
+    End Sub
+
 
   End Class
 

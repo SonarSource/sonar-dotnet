@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             var paramGroups = method.BlockStatement.ParameterList?.Parameters
                 .GroupBy(p => p.Identifier.Identifier.ValueText);
 
-            if (paramGroups != null &&
+            if (paramGroups == null ||
                 paramGroups.Any(g => g.Count() != 1))
             {
                 return Enumerable.Empty<string>();

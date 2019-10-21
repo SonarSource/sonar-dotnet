@@ -4,12 +4,22 @@ Imports System.Runtime.InteropServices
 Public Class TooManyParameters
   Implements MyInterface
 
+  Public Sub New
+  End Sub
+
   Public Sub New(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer)
   End Sub
 
   Public Sub New(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Noncompliant {{Constructor has 4 parameters, which is greater than the 3 authorized.}}
 '               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   End Sub
+
+  Public Sub SubNoParams
+  End Sub
+
+  Public Function FuncNoParams
+    Return 1
+  End Function
 
   Public Sub F1(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer) Implements MyInterface.F1
   End Sub
@@ -65,7 +75,7 @@ Public Class TooManyParameters
     Dim v5 = Function(num As Integer, num2 As Integer, num3 As Integer, num4 As Integer) num + num2 + num3 + num4 + 1 ' Noncompliant {{Lambda has 4 parameters, which is greater than the 3 authorized.}}
     ' the above is a FP because of below
     CallFunctionDelegate(v4, v5)
- 
+
     Dim v6 = Sub(num As Integer, num2 As Integer, num3 As Integer) Console.WriteLine()
     Dim v7 = Sub(num As Integer, num2 As Integer, num3 As Integer, num4 As Integer) Console.WriteLine() ' Noncompliant (FP because of below)
     CallSubDelegate(v6, v7)

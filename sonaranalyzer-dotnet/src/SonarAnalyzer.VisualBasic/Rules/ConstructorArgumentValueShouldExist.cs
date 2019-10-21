@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 .FirstAncestorOrSelf<ClassBlockSyntax>()
                 .Members
                 .OfType<ConstructorBlockSyntax>()
-                .SelectMany(x => x.BlockStatement.ParameterList.Parameters)
+                .SelectMany(x => x.BlockStatement.ParameterList?.Parameters ?? new SeparatedSyntaxList<ParameterSyntax>())
                 .Select(x => x.Identifier.Identifier.ValueText);
         }
 

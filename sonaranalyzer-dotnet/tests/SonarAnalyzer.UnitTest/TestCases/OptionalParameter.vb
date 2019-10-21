@@ -11,6 +11,8 @@ Namespace Tests.Diagnostics
         End Function
         Public Sub S(Optional ByVal i As Integer = 5) 'Noncompliant
         End Sub
+        Public Sub SubNoParams
+        End Sub
         Public Sub New()
         End Sub
 
