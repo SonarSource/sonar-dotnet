@@ -113,28 +113,28 @@ namespace SonarAnalyzer.Helpers
         private void TryStoreFieldAccess(IdentifierNameSyntax node, List<ISymbol> symbols)
         {
             var access = ParentAccessType(node);
-            if (HasFlag(SymbolAccess.Declaration))
+            if (HasFlag(access, SymbolAccess.Declaration))
             {
                 FieldSymbolUsagesList(symbols).ForEach(usage => usage.Declaration = node);
-                if (HasFlag(SymbolAccess.Initialization))
+                if (HasFlag(access, SymbolAccess.Initialization))
                 {
                     FieldSymbolUsagesList(symbols).ForEach(usage => usage.Initializer = node);
                 }
             }
             else
             {
-                if (HasFlag(SymbolAccess.Read))
+                if (HasFlag(access, SymbolAccess.Read))
                 {
                     FieldSymbolUsagesList(symbols).ForEach(usage => usage.Readings.Add(node));
                 }
 
-                if (HasFlag(SymbolAccess.Write))
+                if (HasFlag(access, SymbolAccess.Write))
                 {
                     FieldSymbolUsagesList(symbols).ForEach(usage => usage.Writings.Add(node));
                 }
             }
 
-            bool HasFlag(SymbolAccess flag) => (access & flag) != 0;
+            bool HasFlag(SymbolAccess symbolAccess, SymbolAccess flag) => (symbolAccess & flag) != 0;
         }
 
         private SymbolAccess ParentAccessType(SyntaxNode node)
