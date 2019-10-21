@@ -122,7 +122,7 @@ namespace SonarAnalyzer.Metrics.VisualBasic
                 if (node.Expression == null ||
                     node.ArgumentList == null ||
                     State.CurrentMethod == null ||
-                    node.ArgumentList.Arguments.Count != State.CurrentMethod.ParameterList.Parameters.Count)
+                    node.ArgumentList.Arguments.Count != State.CurrentMethod.ParameterList?.Parameters.Count)
                 {
                     return;
                 }

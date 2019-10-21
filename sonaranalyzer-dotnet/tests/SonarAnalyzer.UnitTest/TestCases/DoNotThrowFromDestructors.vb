@@ -7,6 +7,10 @@ Namespace Tests.Diagnostics
             Throw New Exception()
         End Sub
 
+        Public Sub FooNoParens
+            Throw New Exception()
+        End Sub
+
         Public Sub New()
             Throw New Exception()
         End Sub

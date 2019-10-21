@@ -2,6 +2,22 @@
 Imports System.Windows.Markup
 
 Namespace Tests.Diagnostics
+
+    Public Class MyExtension0
+        Inherits MarkupExtension
+
+        Public Overrides Function ProvideValue(serviceProvider As IServiceProvider) As Object
+            Return Nothing
+        End Function
+
+        Public Sub New
+            Value1 = value1
+        End Sub
+
+        <ConstructorArgument("value1")> ' Noncompliant {{Change this 'ConstructorArgumentAttribute' value to match one of the existing constructors arguments.}}
+        Public Property Value1 As Object
+    End Class
+
     Public Class MyExtension1
         Inherits MarkupExtension
 

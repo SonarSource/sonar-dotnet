@@ -5,6 +5,10 @@ Imports System.Text
 
 Namespace Tests.TestCases
     Class Program
+        Public Sub Method_00
+            Throw New Exception("arg1")
+        End Sub
+
         Public Sub Method_01(arg1 As Integer, argument As Integer)
             If arg1 < 0 Then
                 Throw New Exception("arg1") ' Noncompliant {{Replace the string 'arg1' with 'nameof(arg1)'.}}

@@ -7,6 +7,10 @@ Namespace Tests.TestCases
     Class InvalidCodeClass
         Dim field As String
 
+        Private Sub DoSomething1NoParams
+            Console.WriteLine("foo")
+		End Sub
+
         Private Sub DoSomething1(ByVal a As Integer) ' Noncompliant {{Remove this unused procedure parameter 'a'.}}
 '                                ^^^^^^^^^^^^^^^^^^
             Console.WriteLine("foo")
