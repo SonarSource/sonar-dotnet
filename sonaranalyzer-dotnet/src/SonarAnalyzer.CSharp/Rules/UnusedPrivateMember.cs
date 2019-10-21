@@ -183,15 +183,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 usageCollector.DebuggerDisplayValues.Any(value => value.Contains(symbol.Name));
         }
 
-        private static IEnumerable<Diagnostic> GetDiagnosticsForUnreadFields(List<SymbolUsage> unreadFields, string accessibility)
-        {
-            var diagnostics = new List<Diagnostic>();
-            foreach (var usage in unreadFields)
-            {
-                diagnostics.Add(Diagnostic.Create(ruleS4487, usage.Declaration.GetLocation(), accessibility, usage.Symbol.Name));
-            }
-            return diagnostics;
-        }
+        private static IEnumerable<Diagnostic> GetDiagnosticsForUnreadFields(List<SymbolUsage> unreadFields, string accessibility) =>
+            unreadFields.Select(usage => Diagnostic.Create(ruleS4487, usage.Declaration.GetLocation(), accessibility, usage.Symbol.Name));
 
         private static IEnumerable<Diagnostic> GetDiagnosticsForMembers(HashSet<ISymbol> unusedSymbols, string accessibility,
             BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)

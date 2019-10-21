@@ -113,26 +113,28 @@ namespace SonarAnalyzer.Helpers
         private void TryStoreFieldAccess(IdentifierNameSyntax node, List<ISymbol> symbols)
         {
             var access = ParentAccessType(node);
-            if ((access & SymbolAccess.Declaration) != 0)
+            if (HasFlag(SymbolAccess.Declaration))
             {
                 FieldSymbolUsagesList(symbols).ForEach(usage => usage.Declaration = node);
-                if ((access & SymbolAccess.Initialization) != 0)
+                if (HasFlag(SymbolAccess.Initialization))
                 {
                     FieldSymbolUsagesList(symbols).ForEach(usage => usage.Initializer = node);
                 }
             }
             else
             {
-                if ((access & SymbolAccess.Read) != 0)
+                if (HasFlag(SymbolAccess.Read))
                 {
                     FieldSymbolUsagesList(symbols).ForEach(usage => usage.Readings.Add(node));
                 }
 
-                if ((access & SymbolAccess.Write) != 0)
+                if (HasFlag(SymbolAccess.Write))
                 {
                     FieldSymbolUsagesList(symbols).ForEach(usage => usage.Writings.Add(node));
                 }
             }
+
+            bool HasFlag(SymbolAccess flag) => (access & flag) != 0;
         }
 
         private SymbolAccess ParentAccessType(SyntaxNode node)
@@ -173,6 +175,7 @@ namespace SonarAnalyzer.Helpers
                     else
                     {
                         // nameof(node) : node
+                        // this is a different behavior than for PropertyAccess, where nameof is considered being read
                         return argument.Expression.IsInNameofCall(this.getSemanticModel(argument.Expression)) ? SymbolAccess.None : SymbolAccess.Read;
                     }
                 case ExpressionSyntax expressionSyntax when expressionSyntax.IsAnyKind(IncrementKinds):
@@ -183,8 +186,6 @@ namespace SonarAnalyzer.Helpers
                         ? SymbolAccess.None
                         : SymbolAccess.Read;
                 default:
-                    // in case of SyntaxKind.SimpleLambdaExpression|ParenthesizedLambdaExpression|AnonymousMethodExpression with a void return type
-                    // we should return SymbolAccess.None instead
                     return SymbolAccess.Read;
             }
         }
