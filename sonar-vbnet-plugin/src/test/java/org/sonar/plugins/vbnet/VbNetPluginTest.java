@@ -48,7 +48,7 @@ public class VbNetPluginTest {
 
   @Test
   public void getExtensions() {
-    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(7, 4), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
+    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
 
     Plugin.Context context = new Plugin.Context(sonarRuntime);
     new VbNetPlugin().define(context);

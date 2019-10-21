@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.csharp;
 
-import java.util.Set;
 import org.junit.Test;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.debt.DebtRemediationFunction;
@@ -38,7 +37,7 @@ public class CSharpSonarRulesDefinitionTest {
     Context context = new Context();
     assertThat(context.repositories()).isEmpty();
 
-    CSharpSonarRulesDefinition csharpRulesDefinition = new CSharpSonarRulesDefinition(SonarVersion.SQ_67_RUNTIME);
+    CSharpSonarRulesDefinition csharpRulesDefinition = new CSharpSonarRulesDefinition();
     csharpRulesDefinition.define(context);
 
     assertThat(context.repositories()).hasSize(1);
@@ -52,7 +51,7 @@ public class CSharpSonarRulesDefinitionTest {
 
   @Test
   public void test_security_hotspot() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SonarVersion.SQ_73_RUNTIME);
+    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition();
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("csharpsquid");
@@ -63,19 +62,8 @@ public class CSharpSonarRulesDefinitionTest {
   }
 
   @Test
-  public void test_security_hotspot_lts() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SonarVersion.SQ_67_RUNTIME);
-    RulesDefinition.Context context = new RulesDefinition.Context();
-    definition.define(context);
-    RulesDefinition.Repository repository = context.repository("csharpsquid");
-
-    RulesDefinition.Rule hardcodedCredentialsRule = repository.rule(SECURITY_HOTSPOT_RULE_KEY);
-    assertThat(hardcodedCredentialsRule).isNull();
-  }
-
-  @Test
   public void test_security_hotspot_has_correct_type_and_security_standards() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SonarVersion.SQ_73_RUNTIME);
+    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition();
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("csharpsquid");
@@ -87,7 +75,7 @@ public class CSharpSonarRulesDefinitionTest {
 
   @Test
   public void test_security_standards_with_vulnerability() {
-    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SonarVersion.SQ_73_RUNTIME);
+    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition();
     RulesDefinition.Context context = new RulesDefinition.Context();
     definition.define(context);
     RulesDefinition.Repository repository = context.repository("csharpsquid");

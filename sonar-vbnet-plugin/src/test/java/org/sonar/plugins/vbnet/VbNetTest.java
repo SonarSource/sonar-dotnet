@@ -37,7 +37,7 @@ public class VbNetTest {
 
   @Before
   public void init() {
-    PropertyDefinitions defs = new PropertyDefinitions(new VbNetPropertyDefinitions(SonarRuntimeImpl.forSonarQube(Version.create(7, 4), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY)).create());
+    PropertyDefinitions defs = new PropertyDefinitions(new VbNetPropertyDefinitions(SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY)).create());
     settings = new MapSettings(defs);
     vbnet = new VbNet(settings.asConfig());
   }

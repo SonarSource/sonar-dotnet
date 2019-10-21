@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.ScannerSide;
 import org.sonarsource.dotnet.shared.plugins.AbstractRulesDefinition;
 
@@ -30,8 +29,8 @@ import static org.sonar.plugins.csharp.CSharpPlugin.REPOSITORY_NAME;
 public class CSharpSonarRulesDefinition extends AbstractRulesDefinition {
   private static final String RULES_XML = "/org/sonar/plugins/csharp/rules.xml";
 
-  public CSharpSonarRulesDefinition(SonarRuntime sonarRuntime) {
-    super(REPOSITORY_KEY, REPOSITORY_NAME, CSharpPlugin.LANGUAGE_KEY, RULES_XML, sonarRuntime);
+  public CSharpSonarRulesDefinition() {
+    super(REPOSITORY_KEY, REPOSITORY_NAME, CSharpPlugin.LANGUAGE_KEY, RULES_XML);
   }
 
   @Override

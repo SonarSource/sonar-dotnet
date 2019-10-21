@@ -19,13 +19,10 @@
  */
 package org.sonar.plugins.vbnet;
 
-import org.sonar.api.SonarRuntime;
 import org.sonarsource.dotnet.shared.plugins.AbstractSonarWayProfile;
 
-import javax.annotation.Nullable;
-
 class VbNetSonarWayProfile extends AbstractSonarWayProfile {
-  VbNetSonarWayProfile(@Nullable SonarRuntime sonarRuntime) {
-    super(sonarRuntime, VbNetPlugin.LANGUAGE_KEY, VbNetPlugin.PLUGIN_KEY, VbNetPlugin.REPOSITORY_KEY);
+  VbNetSonarWayProfile() {
+    super(VbNetPlugin.LANGUAGE_KEY, VbNetPlugin.PLUGIN_KEY, VbNetPlugin.REPOSITORY_KEY);
   }
 }

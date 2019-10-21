@@ -55,7 +55,7 @@ public class GeneratedFileFilterTest {
       "cs",
       "C#",
       ".cs",
-      SonarRuntimeImpl.forSonarQube(Version.create(7, 4), SonarQubeSide.SERVER, SonarEdition.COMMUNITY)) {
+      SonarRuntimeImpl.forSonarQube(Version.create(7, 9), SonarQubeSide.SERVER, SonarEdition.COMMUNITY)) {
     };
     MapSettings settings = new MapSettings(new PropertyDefinitions(definitions.create()));
     defaultConfiguration = new AbstractSolutionConfiguration(settings.asConfig(), "cs") { };

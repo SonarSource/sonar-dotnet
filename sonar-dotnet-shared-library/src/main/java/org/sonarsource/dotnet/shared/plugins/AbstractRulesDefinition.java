@@ -28,38 +28,26 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.annotation.Nullable;
 
-import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
-import org.sonar.api.utils.Version;
 
 @ScannerSide
 public abstract class AbstractRulesDefinition implements RulesDefinition {
-
-  private static final Version SQ_7_3 = Version.create(7, 3);
   private static final Gson GSON = new Gson();
 
   private final String repositoryKey;
   private final String repositoryName;
   private final String languageKey;
   private final String rulesXmlFilePath;
-  private final boolean supportsSecurityHotspots;
 
-  // for vb.net
   protected AbstractRulesDefinition(String repositoryKey, String repositoryName, String languageKey, String rulesXmlFilePath) {
-    this(repositoryKey, repositoryName, languageKey, rulesXmlFilePath, null);
-  }
-
-  protected AbstractRulesDefinition(String repositoryKey, String repositoryName, String languageKey, String rulesXmlFilePath, @Nullable SonarRuntime sonarRuntime) {
     this.repositoryKey = repositoryKey;
     this.repositoryName = repositoryName;
     this.languageKey = languageKey;
     this.rulesXmlFilePath = rulesXmlFilePath;
-    this.supportsSecurityHotspots = sonarRuntime != null && sonarRuntime.getApiVersion().isGreaterThanOrEqual(SQ_7_3);
   }
 
   @Override
@@ -82,14 +70,8 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
 
     Set<NewRule> hotspotRules = getHotspotRules(allRuleMetadata);
 
-    // Either set security standards fields, or remove the rules altogether,
-    // depending on whether the SonarQube instance supports hotspots or not.
-    if (supportsSecurityHotspots) {
-      allRuleMetadata.forEach(AbstractRulesDefinition::updateSecurityStandards);
-      hotspotRules.forEach(rule -> rule.setType(RuleType.SECURITY_HOTSPOT));
-    } else {
-      rules.removeAll(hotspotRules);
-    }
+    allRuleMetadata.forEach(AbstractRulesDefinition::updateSecurityStandards);
+    hotspotRules.forEach(rule -> rule.setType(RuleType.SECURITY_HOTSPOT));
   }
 
   private static Set<NewRule> getHotspotRules(Map<NewRule, RuleMetadata> allRuleMetadata) {

@@ -24,18 +24,15 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.sonar.api.SonarRuntime;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.AbstractSonarWayProfile;
 
-import javax.annotation.Nullable;
-
 public class CSharpSonarWayProfile extends AbstractSonarWayProfile {
   private static final Logger LOG = Loggers.get(CSharpSonarWayProfile.class);
 
-  CSharpSonarWayProfile(@Nullable SonarRuntime sonarRuntime) {
-    super(sonarRuntime, CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.PLUGIN_KEY, CSharpPlugin.REPOSITORY_KEY);
+  CSharpSonarWayProfile() {
+    super(CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.PLUGIN_KEY, CSharpPlugin.REPOSITORY_KEY);
   }
 
   @Override
