@@ -54,9 +54,9 @@ namespace SonarAnalyzer.Helpers
         public IDictionary<ISymbol, SymbolUsage> FieldSymbolUsages { get; } =
             new Dictionary<ISymbol, SymbolUsage>();
 
-        private List<SymbolUsage> FieldSymbolUsagesList(List<ISymbol> symbols) => symbols.Select(FieldSymbolUsage).ToList();
+        private List<SymbolUsage> GetFieldSymbolUsagesList(List<ISymbol> symbols) => symbols.Select(GetFieldSymbolUsage).ToList();
 
-        private SymbolUsage FieldSymbolUsage(ISymbol symbol) => FieldSymbolUsages.GetOrAdd(symbol, s => new SymbolUsage(s));
+        private SymbolUsage GetFieldSymbolUsage(ISymbol symbol) => FieldSymbolUsages.GetOrAdd(symbol, s => new SymbolUsage(s));
 
         public HashSet<string> DebuggerDisplayValues { get; } =
             new HashSet<string>();
@@ -113,24 +113,25 @@ namespace SonarAnalyzer.Helpers
         private void TryStoreFieldAccess(IdentifierNameSyntax node, List<ISymbol> symbols)
         {
             var access = ParentAccessType(node);
+            var fieldSymbolUsagesList = GetFieldSymbolUsagesList(symbols);
             if (HasFlag(access, SymbolAccess.Declaration))
             {
-                FieldSymbolUsagesList(symbols).ForEach(usage => usage.Declaration = node);
+                fieldSymbolUsagesList.ForEach(usage => usage.Declaration = node);
                 if (HasFlag(access, SymbolAccess.Initialization))
                 {
-                    FieldSymbolUsagesList(symbols).ForEach(usage => usage.Initializer = node);
+                    fieldSymbolUsagesList.ForEach(usage => usage.Initializer = node);
                 }
             }
             else
             {
                 if (HasFlag(access, SymbolAccess.Read))
                 {
-                    FieldSymbolUsagesList(symbols).ForEach(usage => usage.Readings.Add(node));
+                    fieldSymbolUsagesList.ForEach(usage => usage.Readings.Add(node));
                 }
 
                 if (HasFlag(access, SymbolAccess.Write))
                 {
-                    FieldSymbolUsagesList(symbols).ForEach(usage => usage.Writings.Add(node));
+                    fieldSymbolUsagesList.ForEach(usage => usage.Writings.Add(node));
                 }
             }
 
@@ -240,7 +241,7 @@ namespace SonarAnalyzer.Helpers
         {
             if (this.knownSymbolNames.Contains(node.Identifier.ValueText))
             {
-                var usage = FieldSymbolUsage(GetDeclaredSymbol(node));
+                var usage = GetFieldSymbolUsage(GetDeclaredSymbol(node));
                 usage.Declaration = node;
                 if (node.Initializer != null)
                 {

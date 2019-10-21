@@ -206,7 +206,6 @@ namespace Tests.Diagnostics
             this.F35 = "foo";
         }
 
-        // https://github.com/SonarSource/sonar-csharp/issues/1448
         private int F36; // Should be raised by S4487
         public void M15(int i) => F36 = i + 1;
 
