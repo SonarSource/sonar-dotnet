@@ -306,6 +306,24 @@ namespace Tests.Diagnostics
         public void M15(int i) => F36 = i + 1;
     }
 
+    public class OutAndRef
+    {
+        private int F37; // Noncompliant {{Remove this unread private field 'F37' or refactor the code to use its value.}}
+        public void M37() => int.TryParse("1", out F37);
+
+        private int F38;
+        public void M38() => Modify(ref F38);
+
+        public void Modify(ref int x) => x = 37;
+
+        private int F39; // Noncompliant {{Remove the unused private field 'F39'.}}
+        public void M39()
+        {
+            int.TryParse("1", out var x);
+            int.TryParse("1", out var F39);
+        }
+    }
+
     public interface IPublicInterface { }
     [Serializable]
     public sealed class PublicClass : IPublicInterface
