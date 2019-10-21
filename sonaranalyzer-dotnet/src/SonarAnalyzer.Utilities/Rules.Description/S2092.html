@@ -1,31 +1,37 @@
-<p>The "secure" attribute prevents cookies from being sent over plaintext connections such as HTTP, where they would be easily eavesdropped upon.
-Instead, cookies with the secure attribute are only sent over encrypted HTTPS connections.</p>
+<p>If a cookie is protected with the <code>secure</code> attribute set to <em>true</em> it will not be send by the browser over an unencrypted HTTP
+request and thus cannot be observed by an unauthorized person during a man-in-the-middle attack. By default the <code>secure</code> flag is set to
+<em>false</em> and so cookies can be stolen if a man-in-the-attack is performed.</p>
+<h2>Ask Yourself Whether</h2>
+<ul>
+  <li> the cookie is a <em>session-cookie</em> and the <code>secure</code> flag is set to <em>false</em> </li>
+  <li> the content of the cookie is sensitive and the <code>secure</code> flag is set to <em>false</em> </li>
+</ul>
+<p>You are at risk if you answered yes to any of those questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <ul>
-  <li> set the field <code>Secure</code> to <code>true</code> on the <code>HttpCookie</code> object </li>
+  <li> It is recommended to use <code>HTTPs</code> everywhere so setting the <code>secure</code> flag to <em>true</em> should be the default behaviour
+  when creating cookies. </li>
+  <li> Set the <code>secure</code> flag to <em>true</em> for session / sensitive-security cookies. </li>
 </ul>
-<h2>Noncompliant Code Example</h2>
+<h2>Sensitive Code Examples</h2>
+<p>In C# you can specify the secure flag with the HttpCookie.secure property:</p>
 <pre>
-HttpCookie myCookie = new HttpCookie("UserSettings");
-myCookie.Secure = false; // Noncompliant; explicitly set to false
-...
-Response.Cookies.Add(myCookie);
+HttpCookie myCookie = new HttpCookie("Sensitive cookie");
+myCookie.Secure = false; //  Sensitive: a security-sensitive cookie is created with the secure flag set to false
 </pre>
+<p>The <a href="https://docs.microsoft.com/en-us/dotnet/api/system.web.httpcookie.secure?view=netframework-4.8">default value</a> of
+<code>secure</code> flag is false:</p>
 <pre>
-HttpCookie myCookie = new HttpCookie("UserSettings"); // Noncompliant; the default value of 'Secure' is used (=false)
-...
-Response.Cookies.Add(myCookie);
+HttpCookie myCookie = new HttpCookie("Sensitive cookie");
+//  Sensitive: a security-sensitive cookie is created with the secure flag not defined (by default set to false)
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-HttpCookie myCookie = new HttpCookie("UserSettings");
-myCookie.Secure = true; // Compliant
-...
-Response.Cookies.Add(myCookie);
+HttpCookie myCookie = new HttpCookie("Sensitive cookie");
+myCookie.Secure = true; // Compliant: the security-sensitive cookie will not be send during an unencrypted HTTP request thanks to the secure flag (Secure property) set to true
 </pre>
 <h2>See</h2>
 <ul>
-  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A2-Broken_Authentication">OWASP Top 10 2017 Category A2</a> - Broken Authentication </li>
   <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure
   </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/311">MITRE, CWE-311</a> - Missing Encryption of Sensitive Data </li>
