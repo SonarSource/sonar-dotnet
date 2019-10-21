@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'TestActor' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\Routing\ClusterRouterSupervisorSpec.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  40,
+"endLine":  44,
+"endColumn":  49
+}
+}
+}
+]
+}

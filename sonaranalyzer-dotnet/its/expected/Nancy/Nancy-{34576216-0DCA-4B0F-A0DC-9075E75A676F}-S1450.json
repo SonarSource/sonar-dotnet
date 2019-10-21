@@ -41,32 +41,6 @@
 },
 {
 "id":  "S1450",
-"message":  "Remove the field 'serializer' and declare it as a local variable in the relevant methods.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  293,
-"startColumn":  24,
-"endLine":  293,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S1450",
-"message":  "Remove the field 'typeResolver' and declare it as a local variable in the relevant methods.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  294,
-"startColumn":  26,
-"endLine":  294,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S1450",
 "message":  "Remove the field 'resourceAssemblyProvider' and declare it as a local variable in the relevant methods.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Localization\ResourceBasedTextResource.cs",
@@ -75,19 +49,6 @@
 "startColumn":  52,
 "endLine":  14,
 "endColumn":  76
-}
-}
-},
-{
-"id":  "S1450",
-"message":  "Remove the field 'disableCaches' and declare it as a local variable in the relevant methods.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\StaticConfiguration.cs",
-"region":  {
-"startLine":  13,
-"startColumn":  30,
-"endLine":  13,
-"endColumn":  43
 }
 }
 },

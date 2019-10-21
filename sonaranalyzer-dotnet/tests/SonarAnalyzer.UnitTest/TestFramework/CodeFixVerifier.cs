@@ -85,7 +85,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 var codeFixExecuted = false;
                 for (var diagnosticIndexToFix = 0; !codeFixExecuted && diagnosticIndexToFix < diagnostics.Count; diagnosticIndexToFix++)
                 {
-                    var codeActionsForDiagnostic = GetCodeActionsForDiagnostic(codeFixProvider, currentDocument, diagnostics[diagnosticIndexToFix]);
+                    var diagnostic = diagnostics[diagnosticIndexToFix];
+                    if (!codeFixProvider.FixableDiagnosticIds.Contains(diagnostic.Id))
+                    {
+                        // a Diagnostic can raise issues for different rules, but provide fixes for only one of them
+                        // if we don't have a fixer for this rule, we skip it
+                        continue;
+                    }
+                    var codeActionsForDiagnostic = GetCodeActionsForDiagnostic(codeFixProvider, currentDocument, diagnostic);
 
                     if (TryGetCodeActionToApply(codeFixTitle, codeActionsForDiagnostic, out var codeActionToExecute))
                     {

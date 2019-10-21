@@ -53,7 +53,7 @@ namespace Tests.Diagnostics
         private
             int field3; // Fixed
         private delegate void Delegate();
-        private event Delegate MyEvent;
+        private event Delegate MyEvent; //Fixed
 
         private event EventHandler<EventArgs> MyUsedEvent
         {
@@ -175,6 +175,69 @@ namespace Tests.Diagnostics
         }
         private GoodException(SerializationInfo info, StreamingContext context) // Compliant because of the serialization
             : base(info, context)
+        {
+        }
+    }
+
+    public class FieldAccess
+    {
+        private object field1;
+        private object field2; // Fixed
+        private object field3;
+
+        public FieldAccess()
+        {
+            this.field2 = field3 ?? this.field1?.ToString();
+        }
+    }
+
+    // As S4487 will raise when a private field is written and not read, S1450 won't raise on these cases
+    // These tests where finding issues before with S1450 and should find them with S4487 now
+    public class TestsFormerS1450
+    {
+        private int F1 = 0; // Fixed
+
+        public void M1()
+        {
+            ((F1)) = 42;
+        }
+
+        private int F5 = 0; // Fixed
+        private int F6; // Fixed
+        public void M2()
+        {
+            F5 = 42;
+            F6 = 42;
+        }
+
+        private int F14 = 0; // Fixed
+        public void M6(int F14)
+        {
+            this.F14 = 42;
+        }
+        private int F28 = 42; // Fixed
+        public event EventHandler E1
+        {
+            add
+            {
+                F28 = 42;
+            }
+            remove
+            {
+            }
+        }
+
+        private int F36; // Fixed
+        public void M15(int i) => F36 = i + 1;
+    }
+
+    public interface IPublicInterface { }
+    [Serializable]
+    public sealed class PublicClass : IPublicInterface
+    {
+        public static readonly PublicClass Instance = new PublicClass();
+
+        private PublicClass()
         {
         }
     }

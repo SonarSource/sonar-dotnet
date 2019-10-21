@@ -24,6 +24,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -46,6 +47,16 @@ namespace SonarAnalyzer.Helpers
 
         public HashSet<ISymbol> UsedSymbols { get; } =
             new HashSet<ISymbol>();
+
+        [Flags]
+        private enum SymbolAccess { None = 0, Read = 1, Write = 2, ReadWrite = Read | Write, Declaration = 4, Initialization = Write | 8 }
+
+        public IDictionary<ISymbol, SymbolUsage> FieldSymbolUsages { get; } =
+            new Dictionary<ISymbol, SymbolUsage>();
+
+        private List<SymbolUsage> GetFieldSymbolUsagesList(List<ISymbol> symbols) => symbols.Select(GetFieldSymbolUsage).ToList();
+
+        private SymbolUsage GetFieldSymbolUsage(ISymbol symbol) => FieldSymbolUsages.GetOrAdd(symbol, s => new SymbolUsage(s));
 
         public HashSet<string> DebuggerDisplayValues { get; } =
             new HashSet<string>();
@@ -89,11 +100,95 @@ namespace SonarAnalyzer.Helpers
         public override void VisitIdentifierName(IdentifierNameSyntax node)
         {
             var symbols = GetSymbols(node, IsKnownIdentifier).ToList();
+
+            TryStoreFieldAccess(node, symbols);
+
             UsedSymbols.UnionWith(symbols);
 
             TryStorePropertyAccess(node, symbols);
 
             base.VisitIdentifierName(node);
+        }
+
+        private void TryStoreFieldAccess(IdentifierNameSyntax node, List<ISymbol> symbols)
+        {
+            var access = ParentAccessType(node);
+            var fieldSymbolUsagesList = GetFieldSymbolUsagesList(symbols);
+            if (HasFlag(access, SymbolAccess.Declaration))
+            {
+                fieldSymbolUsagesList.ForEach(usage => usage.Declaration = node);
+                if (HasFlag(access, SymbolAccess.Initialization))
+                {
+                    fieldSymbolUsagesList.ForEach(usage => usage.Initializer = node);
+                }
+            }
+            else
+            {
+                if (HasFlag(access, SymbolAccess.Read))
+                {
+                    fieldSymbolUsagesList.ForEach(usage => usage.Readings.Add(node));
+                }
+
+                if (HasFlag(access, SymbolAccess.Write))
+                {
+                    fieldSymbolUsagesList.ForEach(usage => usage.Writings.Add(node));
+                }
+            }
+
+            bool HasFlag(SymbolAccess symbolAccess, SymbolAccess flag) => (symbolAccess & flag) != 0;
+        }
+
+        private SymbolAccess ParentAccessType(SyntaxNode node)
+        {
+            switch (node.Parent)
+            {
+                case ParenthesizedExpressionSyntax parenthesizedExpression:
+                    // (node)
+                    return ParentAccessType(parenthesizedExpression);
+                case ExpressionStatementSyntax statement:
+                    // node;
+                    return SymbolAccess.None;
+                case InvocationExpressionSyntax invocation:
+                    // node(_) : <unexpected>
+                    return node == invocation.Expression ? SymbolAccess.Read : SymbolAccess.None;
+                case MemberAccessExpressionSyntax memberAccess:
+                    // _.node : node._
+                    return node == memberAccess.Name ? ParentAccessType(memberAccess) : SymbolAccess.Read;
+                case MemberBindingExpressionSyntax memberBinding:
+                    // _?.node : node?._
+                    return node == memberBinding.Name ? ParentAccessType(memberBinding) : SymbolAccess.Read;
+                case AssignmentExpressionSyntax assignmentExpression:
+                    // Ignoring distinction assignmentExpression.IsKind(SyntaxKind.SimpleAssignmentExpression) between
+                    // "node = _" and "node += _" both are considered as Write and rely on the parent to know if its read.
+                    //  node = _ : _ = node
+                    return node == assignmentExpression.Left ? SymbolAccess.Write | ParentAccessType(assignmentExpression) : SymbolAccess.Read;
+                case ArgumentSyntax argument:
+                    if (argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword))
+                    {
+                        //  out Type node : out node
+                        return SymbolAccess.Write | (argument.Expression.IsKind(SyntaxKindEx.DeclarationExpression) ? SymbolAccess.Declaration : SymbolAccess.None);
+                    }
+                    else if (argument.RefOrOutKeyword.IsKind(SyntaxKind.RefKeyword))
+                    {
+                        //  ref node
+                        return SymbolAccess.ReadWrite;
+                    }
+                    else
+                    {
+                        // nameof(node) : node
+                        // this is a different behavior than for PropertyAccess, where nameof is considered being read
+                        return argument.Expression.IsInNameofCall(this.getSemanticModel(argument.Expression)) ? SymbolAccess.None : SymbolAccess.Read;
+                    }
+                case ExpressionSyntax expressionSyntax when expressionSyntax.IsAnyKind(IncrementKinds):
+                    // node++
+                    return SymbolAccess.Write | ParentAccessType(expressionSyntax);
+                case ArrowExpressionClauseSyntax arrowExpressionClause when arrowExpressionClause.Parent is MethodDeclarationSyntax arrowMethod:
+                    return arrowMethod.ReturnType != null && arrowMethod.ReturnType.IsKnownType(KnownType.Void, this.getSemanticModel(arrowMethod))
+                        ? SymbolAccess.None
+                        : SymbolAccess.Read;
+                default:
+                    return SymbolAccess.Read;
+            }
         }
 
         public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
@@ -142,6 +237,21 @@ namespace SonarAnalyzer.Helpers
             base.VisitConstructorDeclaration(node);
         }
 
+        public override void VisitVariableDeclarator(VariableDeclaratorSyntax node)
+        {
+            if (this.knownSymbolNames.Contains(node.Identifier.ValueText))
+            {
+                var usage = GetFieldSymbolUsage(GetDeclaredSymbol(node));
+                usage.Declaration = node;
+                if (node.Initializer != null)
+                {
+                    usage.Initializer = node;
+                }
+            }
+
+            base.VisitVariableDeclarator(node);
+        }
+
         public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
         {
             if (node.Initializer != null)
@@ -178,6 +288,11 @@ namespace SonarAnalyzer.Helpers
         private static bool IsDefaultConstructor(IMethodSymbol constructor) =>
             constructor.Parameters.Length == 0;
 
+        /// <summary>
+        /// Given a node, it tries to get the symbol or the candidate symbols (if the compiler cannot find the symbol,
+        /// .e.g when the code cannot compile).
+        /// </summary>
+        /// <returns>List of symbols</returns>
         private IEnumerable<ISymbol> GetSymbols<TSyntaxNode>(TSyntaxNode node, Func<TSyntaxNode, bool> condition)
             where TSyntaxNode : SyntaxNode
         {

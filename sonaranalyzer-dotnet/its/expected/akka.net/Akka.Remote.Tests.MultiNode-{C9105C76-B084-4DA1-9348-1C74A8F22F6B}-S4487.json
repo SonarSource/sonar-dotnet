@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_ignored' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\NewRemoteActorSpec.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  28,
+"endLine":  32,
+"endColumn":  36
+}
+}
+}
+]
+}

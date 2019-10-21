@@ -1,0 +1,199 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'generationProvider' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  35,
+"endLine":  25,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'generationProvider' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  35,
+"endLine":  73,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'Fail' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"region":  {
+"startLine":  444,
+"startColumn":  33,
+"endLine":  444,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'Fail' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"region":  {
+"startLine":  500,
+"startColumn":  33,
+"endLine":  500,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_child' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"region":  {
+"startLine":  551,
+"startColumn":  40,
+"endLine":  551,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_echoActor' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSelectionSpec.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  27,
+"endLine":  21,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_selectionTestActor' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSelectionSpec.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  27,
+"endLine":  22,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_kit' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpListenerSpec.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  42,
+"endLine":  172,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_handlerRef' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpListenerSpec.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  40,
+"endLine":  176,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_pullMode' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpListenerSpec.cs",
+"region":  {
+"startLine":  250,
+"startColumn":  39,
+"endLine":  250,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'Handlers' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  53,
+"endLine":  237,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'CapturedArguments' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  50,
+"endLine":  238,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'a' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ConsistentHashingRouterSpec.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  27,
+"endLine":  79,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'b' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ConsistentHashingRouterSpec.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  30,
+"endLine":  79,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'TestActor' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\RoutingSpec.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  44,
+"endLine":  299,
+"endColumn":  53
+}
+}
+}
+]
+}

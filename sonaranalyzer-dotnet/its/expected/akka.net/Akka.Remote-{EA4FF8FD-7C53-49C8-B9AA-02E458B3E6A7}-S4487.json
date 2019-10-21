@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'handleOrActive' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  276,
+"startColumn":  36,
+"endLine":  276,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'codec' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  282,
+"startColumn":  30,
+"endLine":  282,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_handleOrActive' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  817,
+"startColumn":  36,
+"endLine":  817,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_transportSupervisor' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  27,
+"endLine":  109,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_allMode' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  39,
+"endLine":  139,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_transport' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Helios\HeliosTcpTransport.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  33,
+"endLine":  199,
+"endColumn":  43
+}
+}
+}
+]
+}

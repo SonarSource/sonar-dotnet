@@ -1,8 +1,8 @@
 {
 "issues":  [
 {
-"id":  "S1450",
-"message":  "Remove the field '_system' and declare it as a local variable in the relevant methods.",
+"id":  "S4487",
+"message":  "Remove this unread private field '_system' or refactor the code to use its value.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\AutomaticCluster.cs",
 "region":  {

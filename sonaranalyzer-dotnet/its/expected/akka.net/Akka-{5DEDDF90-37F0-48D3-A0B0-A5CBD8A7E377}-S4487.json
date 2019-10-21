@@ -1,0 +1,199 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_actorAwaitingResultSender' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  36,
+"endLine":  85,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'Actor' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  352,
+"startColumn":  27,
+"endLine":  352,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'e' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  353,
+"startColumn":  27,
+"endLine":  353,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'exception' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  354,
+"startColumn":  27,
+"endLine":  354,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'optionalMessage' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"region":  {
+"startLine":  355,
+"startColumn":  24,
+"endLine":  355,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_mcn' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  33,
+"endLine":  111,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_subscribers' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  50,
+"endLine":  242,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logDeadLetterListener' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  27,
+"endLine":  28,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_system' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  38,
+"endLine":  115,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'respondTo' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\FutureActor.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  27,
+"endLine":  18,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_order' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\ByteBuffer.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  27,
+"endLine":  17,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_tc' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\Inet.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  38,
+"endLine":  111,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_log' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\SelectionHandler.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  46,
+"endLine":  190,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_channelRegistry' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpListener.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  43,
+"endLine":  23,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_selector' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpListener.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  27,
+"endLine":  30,
+"endColumn":  36
+}
+}
+}
+]
+}

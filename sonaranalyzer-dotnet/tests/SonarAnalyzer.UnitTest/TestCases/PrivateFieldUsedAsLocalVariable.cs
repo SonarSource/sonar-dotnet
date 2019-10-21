@@ -9,9 +9,13 @@ namespace Tests.Diagnostics
         private int F1 = 0; // Noncompliant {{Remove the field 'F1' and declare it as a local variable in the relevant methods.}}
 //                  ^^^^^^
         public int F2 = 0; // Compliant - Public
+
+        void Use(int foo) { }
+
         void M1()
         {
             ((F1)) = 42;
+            Use(F1);
             F2 = 42;
         }
 
@@ -23,7 +27,9 @@ namespace Tests.Diagnostics
         void M2()
         {
             F5 = 42;
+            Use(F5);
             F6 = 42;
+            Use(F6);
         }
 
         private int F7 = 0; // Compliant - Read before write
@@ -71,6 +77,7 @@ namespace Tests.Diagnostics
         {
             F13 = 42;
             this.F14 = 42;
+            Use(this.F14);
         }
 
         private int F15 = 0; // Compliant - returned in property getter
@@ -121,6 +128,8 @@ namespace Tests.Diagnostics
         void M10()
         {
             M11(out F24, ref F25);
+            Use(F24);
+            Use(F25);
         }
 
         void M11(out int a, ref int b)
@@ -134,6 +143,7 @@ namespace Tests.Diagnostics
         PrivateFieldUsedAsLocalVariable() : this(F27) // Error [CS0120]
         {
             F26 = 42;
+            Use(F26);
         }
 
         PrivateFieldUsedAsLocalVariable(int a)
@@ -148,6 +158,7 @@ namespace Tests.Diagnostics
             {
                 F28 = 42;
                 F29 = 42;
+                Use(F28); // use after assignment in event
             }
             remove
             {
@@ -155,11 +166,12 @@ namespace Tests.Diagnostics
             }
         }
 
-        private int F30 = 42; // Noncompliant - always assigned from 2 methods
-        private int F31 = 42; // Compliant
+        private int F30 = 42; // Noncompliant - always assigned
+        private int F31 = 42; // Compliant - read in a different method
         void M12()
         {
             F30 = 42;
+            Use(F30);
             F31 = 40;
         }
 
@@ -167,6 +179,8 @@ namespace Tests.Diagnostics
         void M13()
         {
             this.F32 = 42.ToString();
+            Console.WriteLine(this.F32);
+
             Console.WriteLine(this.F31);
         }
 
@@ -174,6 +188,7 @@ namespace Tests.Diagnostics
         ~PrivateFieldUsedAsLocalVariable()
         {
             F33 = "foo";
+            Console.WriteLine(F33);
         }
 
         private string F34 = ""; // Compliant
@@ -191,8 +206,7 @@ namespace Tests.Diagnostics
             this.F35 = "foo";
         }
 
-        // https://github.com/SonarSource/sonar-csharp/issues/1448
-        private int F36; // Noncompliant, we don't read the value
+        private int F36; // Should be raised by S4487
         public void M15(int i) => F36 = i + 1;
 
         private string F37; // Compliant
@@ -279,5 +293,45 @@ namespace Tests.Diagnostics
                 Reset();
             }
         }
+    }
+
+    // As S4487 will raise when a private field is written and not read, S1450 won't raise on these cases
+    // These tests where finding issues before with S1450 and should find them with S4487 now
+    public class TestsForS4487Harmony
+    {
+        private int F1 = 0; // compliant
+
+        public void M1()
+        {
+            ((F1)) = 42;
+        }
+
+        private int F5 = 0; // compliant
+        private int F6; // compliant
+        public void M2()
+        {
+            F5 = 42;
+            F6 = 42;
+        }
+
+        private int F14 = 0; // compliant
+        public void M6(int F14)
+        {
+            this.F14 = 42;
+        }
+        private int F28 = 42; // compliant
+        public event EventHandler E1
+        {
+            add
+            {
+                F28 = 42;
+            }
+            remove
+            {
+            }
+        }
+
+        private int F36; // compliant
+        public void M15(int i) => F36 = i + 1;
     }
 }

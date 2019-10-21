@@ -59,8 +59,9 @@ namespace Tests.Diagnostics
         private int field, field2; // Noncompliant
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^
         private
-            int field3, field4; // Noncompliant;
-//                      ^^^^^^
+            int field3, // Noncompliant {{Remove this unread private field 'field3' or refactor the code to use its value.}}
+                field4; // Noncompliant;
+//              ^^^^^^
         private int Property // Noncompliant {{Remove the unused private property 'Property'.}}
         {
             get; set;
@@ -73,7 +74,7 @@ namespace Tests.Diagnostics
         private delegate void Delegate();
         private delegate void Delegate2(); // Noncompliant {{Remove the unused private type 'Delegate2'.}}
         private event Delegate Event; //Noncompliant {{Remove the unused private event 'Event'.}}
-        private event Delegate MyEvent;
+        private event Delegate MyEvent; //Noncompliant {{Remove this unread private field 'MyEvent' or refactor the code to use its value.}}
 
         private event EventHandler<EventArgs> MyOtherEvent //Noncompliant {{Remove the unused private event 'MyOtherEvent'.}}
         {
@@ -109,7 +110,7 @@ namespace Tests.Diagnostics
             {
             }
             public int field; // Noncompliant {{Remove the unused private field 'field'.}}
-            public int field2;
+            public int field2; // Noncompliant {{Remove this unread private field 'field2' or refactor the code to use its value.}}
         }
 
         private interface MyInterface
@@ -249,6 +250,69 @@ namespace Tests.Diagnostics
         }
         private GoodException(SerializationInfo info, StreamingContext context) // Compliant because of the serialization
             : base(info, context)
+        {
+        }
+    }
+
+    public class FieldAccess
+    {
+        private object field1;
+        private object field2; // Noncompliant {{Remove this unread private field 'field2' or refactor the code to use its value.}}
+        private object field3;
+
+        public FieldAccess()
+        {
+            this.field2 = field3 ?? this.field1?.ToString();
+        }
+    }
+
+    // As S4487 will raise when a private field is written and not read, S1450 won't raise on these cases
+    // These tests where finding issues before with S1450 and should find them with S4487 now
+    public class TestsFormerS1450
+    {
+        private int F1 = 0; // Noncompliant {{Remove this unread private field 'F1' or refactor the code to use its value.}}
+
+        public void M1()
+        {
+            ((F1)) = 42;
+        }
+
+        private int F5 = 0; // Noncompliant {{Remove this unread private field 'F5' or refactor the code to use its value.}}
+        private int F6; // Noncompliant {{Remove this unread private field 'F6' or refactor the code to use its value.}}
+        public void M2()
+        {
+            F5 = 42;
+            F6 = 42;
+        }
+
+        private int F14 = 0; // Noncompliant {{Remove this unread private field 'F14' or refactor the code to use its value.}}
+        public void M6(int F14)
+        {
+            this.F14 = 42;
+        }
+        private int F28 = 42; // Noncompliant {{Remove this unread private field 'F28' or refactor the code to use its value.}}
+        public event EventHandler E1
+        {
+            add
+            {
+                F28 = 42;
+            }
+            remove
+            {
+            }
+        }
+
+        private int F36; // Noncompliant {{Remove this unread private field 'F36' or refactor the code to use its value.}}
+        public void M15(int i) => F36 = i + 1;
+    }
+
+    public interface IPublicInterface { }
+    [Serializable]
+    public sealed class PublicClass : IPublicInterface
+    {
+        public static readonly PublicClass Instance = new PublicClass();
+
+        private PublicClass()
         {
         }
     }

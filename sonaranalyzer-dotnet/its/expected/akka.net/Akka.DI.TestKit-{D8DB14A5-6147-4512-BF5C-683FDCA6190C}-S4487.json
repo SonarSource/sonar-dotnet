@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_di' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  38,
+"endLine":  167,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_di' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  38,
+"endLine":  179,
+"endColumn":  41
+}
+}
+}
+]
+}

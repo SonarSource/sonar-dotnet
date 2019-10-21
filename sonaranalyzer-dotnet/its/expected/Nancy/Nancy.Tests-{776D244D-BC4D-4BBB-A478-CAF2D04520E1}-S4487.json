@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'testModel' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  36,
+"endLine":  22,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'viewLocation' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewLocatorFixture.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  45,
+"endLine":  15,
+"endColumn":  57
+}
+}
+}
+]
+}

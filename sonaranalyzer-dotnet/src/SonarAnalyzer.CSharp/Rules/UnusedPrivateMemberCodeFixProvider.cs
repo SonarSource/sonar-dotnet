@@ -33,12 +33,13 @@ namespace SonarAnalyzer.Rules.CSharp
     public class UnusedPrivateMemberCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Remove unused member";
-        public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(UnusedPrivateMember.DiagnosticId);
+        // We only want to fix S1144 and not S4487 because for S4487 the field is written so we don't know the fix
+        public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(UnusedPrivateMember.S1144DiagnosticId);
         public sealed override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
 
         protected sealed override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
-            var diagnostic = context.Diagnostics.First();
+            var diagnostic = context.Diagnostics.First(diag => diag.Id == UnusedPrivateMember.S1144DiagnosticId);
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var syntax = root.FindNode(diagnosticSpan);
 

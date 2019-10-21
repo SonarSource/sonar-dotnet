@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_log' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  42,
+"endLine":  138,
+"endColumn":  46
+}
+}
+}
+]
+}

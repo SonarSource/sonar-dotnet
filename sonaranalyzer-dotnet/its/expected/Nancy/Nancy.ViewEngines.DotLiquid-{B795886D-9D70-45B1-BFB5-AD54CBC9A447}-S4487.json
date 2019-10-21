@@ -1,8 +1,8 @@
 {
 "issues":  [
 {
-"id":  "S1450",
-"message":  "Remove the field 'viewEngineStartupContext' and declare it as a local variable in the relevant methods.",
+"id":  "S4487",
+"message":  "Remove this unread private field 'viewEngineStartupContext' or refactor the code to use its value.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\LiquidNancyFileSystem.cs",
 "region":  {

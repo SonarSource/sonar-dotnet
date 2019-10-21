@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_log' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"region":  {
+"startLine":  380,
+"startColumn":  34,
+"endLine":  380,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_handler' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  291,
+"startColumn":  32,
+"endLine":  291,
+"endColumn":  40
+}
+}
+}
+]
+}

@@ -34,11 +34,23 @@ using SonarAnalyzer.Helpers.CSharp;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
+    [Rule(S1144DiagnosticId)]
+    [Rule(S4487DiagnosticId)]
     public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S1144";
-        private const string MessageFormat = "Remove the unused {0} {1} '{2}'.";
+        internal const string S1144DiagnosticId = "S1144";
+        private const string S1144MessageFormat = "Remove the unused {0} {1} '{2}'.";
+
+        internal const string S4487DiagnosticId = "S4487";
+        private const string S4487MessageFormat = "Remove this unread {0} field '{1}' or refactor the code to use its value.";
+
+        private static readonly DiagnosticDescriptor ruleS1144 =
+            DiagnosticDescriptorBuilder.GetDescriptor(S1144DiagnosticId, S1144MessageFormat, RspecStrings.ResourceManager,
+                fadeOutCode: true);
+        private static readonly DiagnosticDescriptor ruleS4487 =
+            DiagnosticDescriptorBuilder.GetDescriptor(S4487DiagnosticId, S4487MessageFormat, RspecStrings.ResourceManager,
+                fadeOutCode: true);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(ruleS1144, ruleS4487);
 
         private static readonly ImmutableArray<KnownType> IgnoredTypes =
             ImmutableArray.Create(
@@ -47,11 +59,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.UnityEngine_MonoBehaviour,
                 KnownType.UnityEngine_ScriptableObject
             );
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                fadeOutCode: true);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -162,12 +169,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(usageCollector.PropertyAccess.ContainsKey)
                 .Where(symbol => !IsMentionedInDebuggerDisplay(symbol));
 
+            var usedButUnreadFields = usageCollector.FieldSymbolUsages.Values
+                .Where(usage => usage.Symbol.DeclaredAccessibility == Accessibility.Private ||
+                                usage.Symbol.ContainingType?.DeclaredAccessibility == Accessibility.Private)
+                .Where(usage => usage.Symbol.Kind == SymbolKind.Field || usage.Symbol.Kind == SymbolKind.Event)
+                .Where(usage => !unusedSymbols.Contains(usage.Symbol) && !IsMentionedInDebuggerDisplay(usage.Symbol))
+                .Where(usage => usage.Declaration != null && !usage.Readings.Any())
+                .ToList();
+
             return GetDiagnosticsForMembers(unusedSymbols, accessibility, fieldLikeSymbols)
-                .Concat(propertiesWithUnusedAccessor.SelectMany(propertySymbol => GetDiagnosticsForProperty(propertySymbol, usageCollector.PropertyAccess)));
+                .Concat(propertiesWithUnusedAccessor.SelectMany(propertySymbol => GetDiagnosticsForProperty(propertySymbol, usageCollector.PropertyAccess)))
+                .Concat(GetDiagnosticsForUnreadFields(usedButUnreadFields, accessibility));
 
             bool IsMentionedInDebuggerDisplay(ISymbol symbol) =>
                 usageCollector.DebuggerDisplayValues.Any(value => value.Contains(symbol.Name));
         }
+
+        private static IEnumerable<Diagnostic> GetDiagnosticsForUnreadFields(List<SymbolUsage> unreadFields, string accessibility) =>
+            unreadFields.Select(usage => Diagnostic.Create(ruleS4487, usage.Declaration.GetLocation(), accessibility, usage.Symbol.Name));
 
         private static IEnumerable<Diagnostic> GetDiagnosticsForMembers(HashSet<ISymbol> unusedSymbols, string accessibility,
             BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
@@ -203,7 +222,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 }
 
-                diagnostics.Add(CreateDiagnostic(syntaxForLocation, unused.Symbol));
+                diagnostics.Add(CreateS1144Diagnostic(syntaxForLocation, unused.Symbol));
             }
 
             return diagnostics;
@@ -225,8 +244,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            Diagnostic CreateDiagnostic(SyntaxNode syntaxNode, ISymbol symbol) =>
-                Diagnostic.Create(rule, syntaxNode.GetLocation(), accessibility, GetMemberType(symbol), GetMemberName(symbol));
+            Diagnostic CreateS1144Diagnostic(SyntaxNode syntaxNode, ISymbol symbol) =>
+                Diagnostic.Create(ruleS1144, syntaxNode.GetLocation(), accessibility, GetMemberType(symbol), GetMemberName(symbol));
         }
 
         private static IEnumerable<Diagnostic> GetDiagnosticsForProperty(IPropertySymbol property,
@@ -238,7 +257,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var accessorSyntax = GetAccessorSyntax(property.SetMethod);
                 if (accessorSyntax != null)
                 {
-                    yield return Diagnostic.Create(rule, accessorSyntax.GetLocation(), "private",
+                    yield return Diagnostic.Create(ruleS1144, accessorSyntax.GetLocation(), "private",
                         "set accessor in property", property.Name);
                 }
             }
@@ -247,7 +266,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var accessorSyntax = GetAccessorSyntax(property.GetMethod);
                 if (accessorSyntax != null && accessorSyntax.HasBodyOrExpressionBody())
                 {
-                    yield return Diagnostic.Create(rule, accessorSyntax.GetLocation(), "private",
+                    yield return Diagnostic.Create(ruleS1144, accessorSyntax.GetLocation(), "private",
                         "get accessor in property", property.Name);
                 }
             }

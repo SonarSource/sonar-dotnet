@@ -1,0 +1,53 @@
+<p>Private fields only used to store values without reading them later is a case of dead store. So changing the value of such field is useless and
+most probably indicates a serious error in the code.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Rectangle
+{
+  private readonly int length;
+  private readonly int width;  // width is written but never read
+
+  public Rectangle(int length, int width)
+  {
+    this.length = length;
+    this.width = width;
+  }
+
+  public int Surface
+  {
+    get
+    {
+      return length * length;
+    }
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class Rectangle
+{
+  private readonly int length;
+  private readonly int width;
+
+  public Rectangle(int length, int width)
+  {
+    this.length = length;
+    this.width= width;
+  }
+
+  public int Surface
+  {
+    get
+    {
+      return length * width;
+    }
+  }
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="http://cwe.mitre.org/data/definitions/563.html">MITRE, CWE-563</a> - Assignment to Variable without Use ('Unused Variable') </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/QYA5">CERT, MSC13-C.</a> - Detect and remove unused values </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/uQCSBg">CERT, MSC56-J.</a> - Detect and remove superfluous code and values </li>
+</ul>
+

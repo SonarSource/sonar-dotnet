@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field 'extensions' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\NancyViewFolderFixture.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  46,
+"endLine":  15,
+"endColumn":  56
+}
+}
+}
+]
+}

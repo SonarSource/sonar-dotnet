@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_echo' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  27,
+"endLine":  21,
+"endColumn":  32
+}
+}
+}
+]
+}

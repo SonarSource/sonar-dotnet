@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_gossipTimeToLive' or refactor the code to use its value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  32,
+"endLine":  45,
+"endColumn":  49
+}
+}
+}
+]
+}
