@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var forNode = (ForStatementSyntax)c.Node;
 
                     var conditionSyntax = forNode.Condition;
-                    if (conditionSyntax == null || !(conditionSyntax is BinaryExpressionSyntax binaryCondition))
+                    if (!(conditionSyntax is BinaryExpressionSyntax binaryCondition))
                     {
                         return;
                     }
