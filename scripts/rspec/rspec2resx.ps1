@@ -92,6 +92,8 @@ function GetRules() {
 
 function CreateStringResources($rules) {
     $suffix = $ruleapiLanguageMap.Get_Item($language)
+    
+    $sonarWayRules = Get-Content -Raw "${rspecFolder}\\Sonar_way_profile.json" | ConvertFrom-Json
 
     $resources = New-Object System.Collections.ArrayList
     foreach ($rule in $rules) {
