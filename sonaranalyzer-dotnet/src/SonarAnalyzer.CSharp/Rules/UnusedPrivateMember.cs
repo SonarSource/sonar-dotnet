@@ -170,7 +170,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(symbol => !IsMentionedInDebuggerDisplay(symbol));
 
             var usedButUnreadFields = usageCollector.FieldSymbolUsages.Values
-                .Where(usage => usage.Symbol.DeclaredAccessibility == Accessibility.Private)
+                .Where(usage => usage.Symbol.DeclaredAccessibility == Accessibility.Private ||
+                                usage.Symbol.ContainingType?.DeclaredAccessibility == Accessibility.Private)
                 .Where(usage => usage.Symbol.Kind == SymbolKind.Field || usage.Symbol.Kind == SymbolKind.Event)
                 .Where(usage => !unusedSymbols.Contains(usage.Symbol) && !IsMentionedInDebuggerDisplay(usage.Symbol))
                 .Where(usage => usage.Declaration != null && !usage.Readings.Any())
