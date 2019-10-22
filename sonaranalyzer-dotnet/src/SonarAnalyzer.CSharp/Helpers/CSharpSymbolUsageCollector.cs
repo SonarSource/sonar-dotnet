@@ -163,9 +163,7 @@ namespace SonarAnalyzer.Helpers
                     }
                     else
                     {
-                        // nameof(node) : node
-                        // this is a different behavior than for PropertyAccess, where nameof is considered being read
-                        return argument.Expression.IsInNameofCall(this.getSemanticModel(argument.Expression)) ? SymbolAccess.None : SymbolAccess.Read;
+                        return SymbolAccess.Read;
                     }
                 case ExpressionSyntax expressionSyntax when expressionSyntax.IsAnyKind(IncrementKinds):
                     // node++

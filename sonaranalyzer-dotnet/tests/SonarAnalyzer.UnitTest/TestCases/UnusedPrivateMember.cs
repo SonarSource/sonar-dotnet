@@ -110,7 +110,7 @@ namespace Tests.Diagnostics
             {
             }
             public int field; // Noncompliant {{Remove the unused private field 'field'.}}
-            public int field2; // Noncompliant {{Remove this unread private field 'field2' or refactor the code to use its value.}}
+            public int field2; // Noncompliant {{Remove this unread private class field 'field2' or refactor the code to use its value.}}
         }
 
         private interface MyInterface

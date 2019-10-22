@@ -28,7 +28,7 @@
 },
 {
 "id":  "S4487",
-"message":  "Remove this unread private field 'Fail' or refactor the code to use its value.",
+"message":  "Remove this unread private class field 'Fail' or refactor the code to use its value.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S4487",
-"message":  "Remove this unread private field 'Fail' or refactor the code to use its value.",
+"message":  "Remove this unread private class field 'Fail' or refactor the code to use its value.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S4487",
-"message":  "Remove this unread private field 'Handlers' or refactor the code to use its value.",
+"message":  "Remove this unread private class field 'Handlers' or refactor the code to use its value.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S4487",
-"message":  "Remove this unread private field 'CapturedArguments' or refactor the code to use its value.",
+"message":  "Remove this unread private class field 'CapturedArguments' or refactor the code to use its value.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
 "region":  {

@@ -130,7 +130,7 @@ public class FieldUsages
     public FieldUsages() : this(field9) { }
 
     private int field10;
-    private int field11; // Noncompliant {{Remove this unread private field 'field11' or refactor the code to use its value.}}
+    private int field11; // Compliant nameof(field11)
     public object Method2()
     {
         var x = new[] { field10 };
