@@ -113,8 +113,8 @@ namespace SonarAnalyzer.Rules.CSharp
                                 return;
                             }
 
-                            var diagnostics = GetDiagnostics(usageCollector, removableSymbolsCollector.PrivateSymbols, "private",
-                                removableSymbolsCollector.FieldLikeSymbols);
+                            var diagnostics = GetDiagnosticsForUnusedPrivateMembers(usageCollector, removableSymbolsCollector.PrivateSymbols, "private", removableSymbolsCollector.FieldLikeSymbols)
+                                                    .Concat(GetDiagnosticsForUsedButUnreadFields(usageCollector, removableSymbolsCollector.PrivateSymbols));
                             foreach (var diagnostic in diagnostics)
                             {
                                 cc.ReportDiagnosticIfNonGenerated(diagnostic, cc.Compilation);
@@ -145,7 +145,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 usageCollector.SafeVisit(syntaxTree.GetRoot());
                             }
 
-                            var diagnostics = GetDiagnostics(usageCollector, removableInternalTypes.ToHashSet(), "internal",
+                            var diagnostics = GetDiagnosticsForUnusedPrivateMembers(usageCollector, removableInternalTypes.ToHashSet(), "internal",
                                 new BidirectionalDictionary<ISymbol, SyntaxNode>());
                             foreach (var diagnostic in diagnostics)
                             {
@@ -155,38 +155,49 @@ namespace SonarAnalyzer.Rules.CSharp
                 });
         }
 
-        private static IEnumerable<Diagnostic> GetDiagnostics(CSharpSymbolUsageCollector usageCollector, ISet<ISymbol> removableSymbols,
+        private static IEnumerable<Diagnostic> GetDiagnosticsForUnusedPrivateMembers(CSharpSymbolUsageCollector usageCollector, ISet<ISymbol> removableSymbols,
             string accessibility, BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
         {
-            var unusedSymbols = removableSymbols
-                .Except(usageCollector.UsedSymbols)
-                .Where(symbol => !IsMentionedInDebuggerDisplay(symbol))
-                .ToHashSet();
+            var unusedSymbols = GetUnusedSymbols(usageCollector, removableSymbols);
 
             var propertiesWithUnusedAccessor = removableSymbols
                 .Intersect(usageCollector.UsedSymbols)
                 .OfType<IPropertySymbol>()
                 .Where(usageCollector.PropertyAccess.ContainsKey)
-                .Where(symbol => !IsMentionedInDebuggerDisplay(symbol));
+                .Where(symbol => !IsMentionedInDebuggerDisplay(symbol, usageCollector));
+
+            return GetDiagnosticsForMembers(unusedSymbols, accessibility, fieldLikeSymbols)
+                .Concat(propertiesWithUnusedAccessor.SelectMany(propertySymbol => GetDiagnosticsForProperty(propertySymbol, usageCollector.PropertyAccess)));
+        }
+
+        private static bool IsMentionedInDebuggerDisplay(ISymbol symbol, CSharpSymbolUsageCollector usageCollector) =>
+                usageCollector.DebuggerDisplayValues.Any(value => value.Contains(symbol.Name));
+
+        private static IEnumerable<Diagnostic> GetDiagnosticsForUsedButUnreadFields(CSharpSymbolUsageCollector usageCollector, ISet<ISymbol> removableSymbols)
+        {
+            var unusedSymbols = GetUnusedSymbols(usageCollector, removableSymbols);
 
             var usedButUnreadFields = usageCollector.FieldSymbolUsages.Values
                 .Where(usage => usage.Symbol.DeclaredAccessibility == Accessibility.Private ||
                                 usage.Symbol.ContainingType?.DeclaredAccessibility == Accessibility.Private)
                 .Where(usage => usage.Symbol.Kind == SymbolKind.Field || usage.Symbol.Kind == SymbolKind.Event)
-                .Where(usage => !unusedSymbols.Contains(usage.Symbol) && !IsMentionedInDebuggerDisplay(usage.Symbol))
-                .Where(usage => usage.Declaration != null && !usage.Readings.Any())
-                .ToList();
+                .Where(usage => !unusedSymbols.Contains(usage.Symbol) && !IsMentionedInDebuggerDisplay(usage.Symbol, usageCollector))
+                .Where(usage => usage.Declaration != null && !usage.Readings.Any());
 
-            return GetDiagnosticsForMembers(unusedSymbols, accessibility, fieldLikeSymbols)
-                .Concat(propertiesWithUnusedAccessor.SelectMany(propertySymbol => GetDiagnosticsForProperty(propertySymbol, usageCollector.PropertyAccess)))
-                .Concat(GetDiagnosticsForUnreadFields(usedButUnreadFields, accessibility));
-
-            bool IsMentionedInDebuggerDisplay(ISymbol symbol) =>
-                usageCollector.DebuggerDisplayValues.Any(value => value.Contains(symbol.Name));
+            return GetDiagnosticsForUnreadFields(usedButUnreadFields);
         }
 
-        private static IEnumerable<Diagnostic> GetDiagnosticsForUnreadFields(List<SymbolUsage> unreadFields, string accessibility) =>
-            unreadFields.Select(usage => Diagnostic.Create(ruleS4487, usage.Declaration.GetLocation(), accessibility, usage.Symbol.Name));
+        private static HashSet<ISymbol> GetUnusedSymbols(CSharpSymbolUsageCollector usageCollector, ISet<ISymbol> removableSymbols) =>
+            removableSymbols
+                .Except(usageCollector.UsedSymbols)
+                .Where(symbol => !IsMentionedInDebuggerDisplay(symbol, usageCollector))
+                .ToHashSet();
+
+        private static IEnumerable<Diagnostic> GetDiagnosticsForUnreadFields(IEnumerable<SymbolUsage> unreadFields) =>
+            unreadFields.Select(usage => Diagnostic.Create(ruleS4487, usage.Declaration.GetLocation(), GetFieldAccessibilityForMessage(usage.Symbol), usage.Symbol.Name));
+
+        private static string GetFieldAccessibilityForMessage(ISymbol symbol) =>
+            symbol.DeclaredAccessibility == Accessibility.Private ? "private" : "private class";
 
         private static IEnumerable<Diagnostic> GetDiagnosticsForMembers(HashSet<ISymbol> unusedSymbols, string accessibility,
             BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
