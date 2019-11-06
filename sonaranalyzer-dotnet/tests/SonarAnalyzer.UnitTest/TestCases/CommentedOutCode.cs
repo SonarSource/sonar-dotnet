@@ -123,6 +123,14 @@ namespace Tests.Diagnostics
 
         // this should be compliant:
         // does *not* overwrite file if (still) exists
+
+        // FP https://github.com/SonarSource/sonar-dotnet/issues/2772
+        int c;
+        // False positive - it's just a URL and it is not an interpolated string
+        // Noncompliant: http://localhost:7071/runtime/webhooks/EventGrid?functionName={functionname}
+
+        int d;
+        // Noncompliant: {this, is, a ,set}
     }
 
     /**
