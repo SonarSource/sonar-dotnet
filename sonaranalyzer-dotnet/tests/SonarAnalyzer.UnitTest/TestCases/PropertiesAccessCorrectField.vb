@@ -328,7 +328,7 @@ Namespace Tests.Diagnostics
     Public Class MultipleStatements
         Private _foo As String
         Private _bar As String
-        
+
         Public Property Foo As String
             Get
                 If true Then
@@ -402,6 +402,25 @@ Namespace Tests.Diagnostics
                 Return _mux.Replace("x", "y") ' Compliant
             End Get
         End Property
+    End Class
+
+    ' https://github.com/SonarSource/sonar-dotnet/issues/2774
+    Public Class Class1
+        Private Withevents _cashLess as CashLess
+
+        Public Property CashLess() As CashLess
+            Get ' Noncompliant FP
+                Return _cashLess
+            End Get
+            Set(ByVal value As CashLess) ' Noncompliant FP
+                _cashLess = value
+            End Set
+        End Property
+
+    End Class
+
+    Public Class CashLess
+
     End Class
 
 End Namespace
