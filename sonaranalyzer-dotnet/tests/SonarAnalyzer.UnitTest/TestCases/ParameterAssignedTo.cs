@@ -226,6 +226,16 @@ namespace Tests.Diagnostics
             }
             return x;
         }
+
+        public string Foo(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                text = "(empty)"; // Noncompliant FP (https://github.com/SonarSource/sonar-dotnet/issues/2555)
+            }
+
+            return text;
+        }
     }
 
     public class ExceptionHandling
