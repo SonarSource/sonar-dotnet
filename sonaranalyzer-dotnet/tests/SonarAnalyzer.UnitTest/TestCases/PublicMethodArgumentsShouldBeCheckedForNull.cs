@@ -97,7 +97,7 @@ namespace Tests.Diagnostics
         var c = o?.ToString()?.IsNormalized();
         if (c == null)
         {
-          o.GetType().GetMethods();  // Noncompliant 
+          o.GetType().GetMethods();  // Noncompliant
         }
       }
 
@@ -280,6 +280,20 @@ namespace Tests.Diagnostics
             {
                 int index = argument.LastIndexOf('c');
             }
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2775
+    public class ReproWithIs
+    {
+        public override bool Equals(object obj)
+        {
+            var equals = (obj is string) && (obj.GetHashCode() == GetHashCode()); // Noncompliant FP
+            if (equals)
+            {
+                // do stuff
+            }
+            return equals;
         }
     }
 }
