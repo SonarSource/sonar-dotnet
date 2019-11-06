@@ -1,6 +1,22 @@
 <p>Because it is easy to extract strings from a compiled application, credentials should never be hard-coded. Do so, and they're almost guaranteed to
 end up in the hands of an attacker. This is particularly true for applications that are distributed.</p>
 <p>Credentials should be stored outside of the code in a strongly-protected encrypted configuration file or database.</p>
+<h2>Ask Yourself Whether</h2>
+<ul>
+  <li> Credential allows access to any sensitive component:
+    <ul>
+      <li> Database </li>
+      <li> File storage </li>
+      <li> API </li>
+      <li> Service </li>
+    </ul> </li>
+  <li> Application re-distribution is required before updating the credentials. </li>
+</ul>
+<p>You are at risk, if you answered yes to any of these questions.</p>
+<h2>Recommended Secure Coding Practices</h2>
+<ul>
+  <li> Credentials should be stored outside of the code in a strongly-protected encrypted configuration file or database. </li>
+</ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
 string username = "admin";

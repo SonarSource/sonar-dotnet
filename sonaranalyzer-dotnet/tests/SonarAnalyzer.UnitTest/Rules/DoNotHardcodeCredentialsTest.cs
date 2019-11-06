@@ -21,6 +21,7 @@
 extern alias csharp;
 extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
@@ -34,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotHardcodeCredentials_CS_DefaultValues()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_DefaultValues.cs",
-                new CSharp.DoNotHardcodeCredentials());
+                new CSharp.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]
@@ -42,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotHardcodeCredentials_CS_CustomValues()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.cs",
-                new CSharp.DoNotHardcodeCredentials { CredentialWords = "kode,facal-faire" });
+                new CSharp.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = "kode,facal-faire" });
         }
 
         [TestMethod]
@@ -50,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotHardcodeCredentials_CS_CustomValues_CaseInsensitive()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.cs",
-                new CSharp.DoNotHardcodeCredentials { CredentialWords = "KODE ,,,, FaCaL-FaIrE " });
+                new CSharp.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = "KODE ,,,, FaCaL-FaIrE " });
         }
 
         [TestMethod]
@@ -58,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotHardcodeCredentials_VB_DefaultValues()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_DefaultValues.vb",
-                new VisualBasic.DoNotHardcodeCredentials());
+                new VisualBasic.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled));
         }
 
         [TestMethod]
@@ -66,7 +67,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotHardcodeCredentials_VB_CustomValues()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.vb",
-                new VisualBasic.DoNotHardcodeCredentials { CredentialWords = "kode,facal-faire" });
+                new VisualBasic.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = "kode,facal-faire" });
         }
 
         [TestMethod]
@@ -74,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotHardcodeCredentials_VB_CustomValues_CaseInsensitive()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.vb",
-                new VisualBasic.DoNotHardcodeCredentials { CredentialWords = "KODE ,,,, FaCaL-FaIrE " });
+                new VisualBasic.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = "KODE ,,,, FaCaL-FaIrE " });
         }
     }
 }

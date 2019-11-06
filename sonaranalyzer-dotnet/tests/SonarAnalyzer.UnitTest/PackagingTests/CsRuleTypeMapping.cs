@@ -2065,7 +2065,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["2065"],
             //["2066"],
             //["2067"],
-            ["2068"] = "VULNERABILITY",
+            ["2068"] = "SECURITY_HOTSPOT",
             //["2069"],
             ["2070"] = "VULNERABILITY",
             //["2071"],
