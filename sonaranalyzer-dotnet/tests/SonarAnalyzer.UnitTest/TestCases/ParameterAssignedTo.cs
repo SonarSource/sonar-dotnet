@@ -222,7 +222,7 @@ namespace Tests.Diagnostics
         {
             if (x == null)
             {
-                x = ""; // Noncompliant FP
+                x = ""; // Noncompliant FP (https://github.com/SonarSource/sonar-dotnet/issues/2603)
             }
             return x;
         }
