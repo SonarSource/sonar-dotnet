@@ -112,13 +112,13 @@ namespace Tests.Diagnostics
         public void DoSomething(double a) { } // Noncompliant
 
         // Compliant - we dont not raise issues for explicit interface implementation as it is a corner case and it can make sense to group implementation by interface
-        void D.DoSomething() { } 
+        void D.DoSomething() { }
 
         public void DoSomethingElse() { }
 
         void E.DoSomething() { } // Compliant - explicit interface implementation
 
-        public void DoSomething(int a) { } // Secondary 
+        public void DoSomething(int a) { } // Secondary
     }
 
     class H
@@ -129,7 +129,7 @@ namespace Tests.Diagnostics
 
         public void DoSomething() { }
     }
-    
+
     class I
     {
         private void DoSomething(int a) { } // Noncompliant
@@ -142,9 +142,28 @@ namespace Tests.Diagnostics
     class J
     {
         void DoSomething<T>(T t) { } // Noncompliant
-        
+
         void DoSomethingElse() { }
-        
+
         void DoSomething(int a) { } // Secondary {{Non-adjacent overload}}
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2776
+    public class StaticMethodsTogether
+    {
+        public static void MethodA() // Noncompliant FP - static methods are grouped together, it's ok
+        {
+            // do nothing
+        }
+
+        public static void MethodB()
+        {
+            // do nothing
+        }
+
+        public void MethodA(int i)  // Secondary {{Non-adjacent overload}}
+        {
+            // do nothing
+        }
     }
 }

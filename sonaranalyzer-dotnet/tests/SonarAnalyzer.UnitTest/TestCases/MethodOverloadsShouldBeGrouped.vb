@@ -131,4 +131,17 @@ Namespace Tests.TestCases
         Public Sub Test(a As Integer) ' Secondary {{Non-adjacent overload}}
         End Sub
     End Structure
+
+    ' https://github.com/SonarSource/sonar-dotnet/issues/2776
+    Public Class StaticMethodsTogether
+        Public Shared Sub MethodA() ' Noncompliant FP
+        End Sub
+
+        Public Shared Sub MethodB()
+        End Sub
+
+        Public Sub MethodA(ByVal i As Integer) ' Secondary {{Non-adjacent overload}}
+        End Sub
+    End Class
+
 End Namespace
