@@ -68,4 +68,24 @@ namespace Tests.Diagnostics
         [System.Runtime.Serialization.DataMember]
         public List<int> Values { get; set; }
     }
+
+    public abstract class S4004Base
+    {
+        public abstract IDictionary<object, object> Items { get; set; } // Noncompliant
+    }
+
+    public class S4004Abstract : S4004Base
+    {
+        public override IDictionary<object, object> Items { get; set; } // Noncompliant FP: enforced by base (https://github.com/SonarSource/sonar-dotnet/issues/2606)
+    }
+
+    public interface IS4004
+    {
+        IDictionary<object, object> Items { get; set; } // Noncompliant
+    }
+
+    public class S4004Interface : IS4004
+    {
+        public IDictionary<object, object> Items { get; set; }  // Noncompliant - FP: enforced by interface (https://github.com/SonarSource/sonar-dotnet/issues/2606)
+    }
 }
