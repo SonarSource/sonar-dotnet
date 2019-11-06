@@ -222,9 +222,19 @@ namespace Tests.Diagnostics
         {
             if (x == null)
             {
-                x = ""; // Noncompliant FP
+                x = ""; // Noncompliant FP (https://github.com/SonarSource/sonar-dotnet/issues/2603)
             }
             return x;
+        }
+
+        public string Foo(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                text = "(empty)"; // Noncompliant FP (https://github.com/SonarSource/sonar-dotnet/issues/2555)
+            }
+
+            return text;
         }
     }
 
