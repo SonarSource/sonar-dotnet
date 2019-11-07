@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using System.Linq;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,8 +32,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CertificateValidationCheck()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.cs",
-                new CertificateValidationCheck());
+            Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheckMini.cs", //FIXME: Opravit = Vyhodit Mini
+                new CertificateValidationCheck(),
+                additionalReferences : FrameworkMetadataReference.SystemNetHttp.Concat(FrameworkMetadataReference.Netstandard)
+                );
         }
     }
 }
