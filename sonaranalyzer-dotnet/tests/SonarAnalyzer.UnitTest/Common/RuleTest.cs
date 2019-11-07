@@ -205,6 +205,8 @@ namespace SonarAnalyzer.UnitTest.Common
                 }
                 else if (parameterizedAnalyzers.Contains(analyzer))
                 {
+                    // Even if a a parametrized rule is in Sonar way profile, it is still disabled by default.
+                    // See https://github.com/SonarSource/sonar-dotnet/issues/1274
                     analyzer.IsEnabledByDefault.Should().BeFalse($"{analyzer.Id} has parameters and should be disabled by default");
                 }
                 else if (isInSonarWay)
