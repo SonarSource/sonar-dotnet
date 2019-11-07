@@ -77,6 +77,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.vb",
                 new VisualBasic.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = "KODE ,,,, FaCaL-FaIrE " });
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotHardcodeCredentials_DefaultConfiguration()
+        {
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotHardcodeCredentials_DefaultValues.cs",
+                new CSharp.DoNotHardcodeCredentials());
+        }
     }
 }
 

@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules
         private string credentialWords;
         private IEnumerable<string> splitCredentialWords;
         private Regex passwordValuePattern;
-        private IAnalyzerConfiguration analyzerConfiguration;
+        private readonly IAnalyzerConfiguration analyzerConfiguration;
 
         [RuleParameter("credentialWords", PropertyType.String,
             "Comma separated list of words identifying potential credentials", DefaultCredentialWords)]
