@@ -62,6 +62,11 @@ Namespace Tests.TestCases
       list(0) = 1 ' Noncompliant
     End Sub
 
+    Private Sub ListAddFP(ByVal list As List(Of String))
+      list.Add("MyText") ' Secondary
+      list.Add("MyText") ' Noncompliant
+    End Sub
+
     Private Sub SameIndexSpacedOut(ByVal names() As String)
       names("a") = "a" ' Secondary
       names("b") = "b"
