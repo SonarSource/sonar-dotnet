@@ -111,9 +111,17 @@ namespace Tests.Diagnostics
       }
     }
 
+    [AttributeUsage(AttributeTargets.Parameter)]
+    public sealed class ValidatedNotNullAttribute : Attribute { }
+
+    public static class GuardExtensionClass
+    {
+        public static void GuardExtension([ValidatedNotNull]this string value) { }
+    }
+
     public class GuardedTests
     {
-        public void Guarded(string s1, string s2, string s3)
+        public void Guarded(string s1, string s2, string s3, string s4, string s5)
         {
             Guard1(s1);
             s1.ToUpper();
@@ -123,6 +131,12 @@ namespace Tests.Diagnostics
 
             Guard3("s3", s3);
             s3.ToUpper();
+
+            Guard4(s4);
+            s4.ToUpper();
+
+            s5.GuardExtension();
+            s5.ToUpper(); // Noncompliant - FP for extensions having the [ValidatedNotNull] attribute
         }
 
         public void Guard1<T>([ValidatedNotNull]T value) where T : class { }
@@ -131,8 +145,7 @@ namespace Tests.Diagnostics
 
         public void Guard3<T>(string name, [ValidatedNotNull]T value) where T : class { }
 
-        [AttributeUsage(AttributeTargets.Parameter)]
-        public sealed class ValidatedNotNullAttribute : Attribute { }
+        public static void Guard4<T>([ValidatedNotNull]T value) where T : class { }
     }
 
     public class ReproIssue2476
