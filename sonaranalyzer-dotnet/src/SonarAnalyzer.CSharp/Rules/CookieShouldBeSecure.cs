@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        internal override KnownType TrackedType => KnownType.System_Web_HttpCookie;
+        internal override ImmutableArray<KnownType> TrackedTypes { get; } = ImmutableArray.Create(KnownType.System_Web_HttpCookie);
 
         protected override string TrackedPropertyName => "Secure";
 

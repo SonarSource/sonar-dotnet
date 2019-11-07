@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        internal override KnownType TrackedType => KnownType.System_DirectoryServices_DirectoryEntry;
+        internal override ImmutableArray<KnownType> TrackedTypes { get; } = ImmutableArray.Create(KnownType.System_DirectoryServices_DirectoryEntry);
 
         protected override string TrackedPropertyName => "AuthenticationType";
 

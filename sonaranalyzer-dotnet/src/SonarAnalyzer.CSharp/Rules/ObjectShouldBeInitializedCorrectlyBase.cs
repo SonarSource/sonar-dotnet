@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -43,7 +44,7 @@ namespace SonarAnalyzer.Rules
         /// <summary>
         /// Gets the KnownType representing the type on which instances the rule will raise issues on.
         /// </summary>
-        internal abstract KnownType TrackedType { get; }
+        internal abstract ImmutableArray<KnownType> TrackedTypes { get; }
 
         /// <summary>
         /// Gets the name of the property that has to be set with allowed value in
@@ -101,10 +102,10 @@ namespace SonarAnalyzer.Rules
         }
 
         /// <summary>
-        /// Tests if the provided expression is a property of the <see cref="TrackedType"/>. Override this method
+        /// Tests if the provided expression is a property of the <see cref="TrackedTypes"/>. Override this method
         /// when the <see cref="TrackedPropertyName"/> is a indexer for example.
         /// </summary>
-        /// <returns>True when the parameter is a property of the <see cref="TrackedType"/>, otherwise false.</returns>
+        /// <returns>True when the parameter is a property of the <see cref="TrackedTypes"/>, otherwise false.</returns>
         protected virtual bool IsPropertyOnTrackedType(ExpressionSyntax expression, SemanticModel semanticModel) =>
             expression is MemberAccessExpressionSyntax memberAccess &&
             memberAccess.Expression != null &&
@@ -142,12 +143,12 @@ namespace SonarAnalyzer.Rules
             IsAllowedValue(semanticModel.GetConstantValue(expression).Value);
 
         /// <summary>
-        /// Tests if the provided expression is the <see cref="TrackedType"/> by calling GetTypeInfo.
+        /// Tests if the provided expression is the <see cref="TrackedTypes"/> by calling GetTypeInfo.
         /// </summary>
-        /// <returns>True when the expression if the <see cref="TrackedType"/>, otherwise false.</returns>
+        /// <returns>True when the expression if the <see cref="TrackedTypes"/>, otherwise false.</returns>
         protected bool IsTrackedType(ExpressionSyntax expression, SemanticModel semanticModel) =>
             semanticModel.GetTypeInfo(expression).Type
-                .Is(TrackedType);
+                .IsAny(TrackedTypes);
 
         private bool ObjectCreatedWithAllowedValue(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
         {
