@@ -38,11 +38,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 .WithNotConfigurable();
 
         public CookieShouldBeSecure()
-            : base(AnalyzerConfiguration.Hotspot)
+            : this(AnalyzerConfiguration.Hotspot)
         {
         }
 
-        public CookieShouldBeSecure(IAnalyzerConfiguration analyzerConfiguration)
+        internal CookieShouldBeSecure(IAnalyzerConfiguration analyzerConfiguration)
             : base(analyzerConfiguration)
         {
         }

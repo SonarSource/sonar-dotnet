@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeHttpOnly()
         {
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeHttpOnly.cs",
-                new CookieShouldBeHttpOnly(),
+                new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
                 additionalReferences: FrameworkMetadataReference.SystemWeb);
         }
     }

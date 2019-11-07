@@ -43,6 +43,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override string TrackedPropertyName => "HttpOnly";
 
+        public CookieShouldBeHttpOnly()
+            : this(AnalyzerConfiguration.Hotspot)
+        {
+        }
+
+        internal CookieShouldBeHttpOnly(IAnalyzerConfiguration analyzerConfiguration)
+            : base(analyzerConfiguration)
+        {
+        }
+
         protected override bool IsAllowedValue(object constantValue) =>
             constantValue is bool value && value;
     }
