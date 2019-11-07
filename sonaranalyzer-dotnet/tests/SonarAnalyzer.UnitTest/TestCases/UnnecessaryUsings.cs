@@ -1,4 +1,7 @@
-﻿using System.Collections.Concurrent; // Noncompliant {{Remove this unnecessary 'using'.}}
+﻿using System;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using System.Collections.Concurrent; // Noncompliant {{Remove this unnecessary 'using'.}}
 using System.IO;
 using System.IO; // Warning [CS0105]
 using static System.Console;
@@ -83,4 +86,30 @@ namespace MyNamespace2.Level1.Level2
 namespace MyNamespace3
 {
     class Ns3_0 { }
+}
+
+namespace AwaitExtensionHolder
+{
+
+    internal static class ExtensionHolder
+    {
+        public static TaskAwaiter<int> GetAwaiter(this Func<int> function)
+        {
+            Task<int> task = new Task<int>(function);
+            task.Start();
+            return task.GetAwaiter();
+        }
+    }
+}
+
+namespace AwaitExtensionUser
+{
+    using AwaitExtensionHolder; // Noncompliant FP - 'using' statement is needed for the custom await usage
+    class AwaitUser
+    {
+        async void AsyncMethodUsingAwaitExtension()
+        {
+            var result = await new Func<int>(() => 0);
+        }
+    }
 }
