@@ -39,6 +39,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNetCore_Builder_DatabaseErrorPageExtensions = new KnownType("Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions");
         internal static readonly KnownType Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions = new KnownType("Microsoft.AspNetCore.Hosting.HostingEnvironmentExtensions");
         internal static readonly KnownType Microsoft_AspNetCore_Hosting_WebHostBuilderExtensions = new KnownType("Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions");
+        internal static readonly KnownType Microsoft_AspNetCore_Http_CookieOptions = new KnownType("Microsoft.AspNetCore.Http.CookieOptions");
         internal static readonly KnownType Microsoft_AspNetCore_Http_HttpRequest = new KnownType("Microsoft.AspNetCore.Http.HttpRequest");
         internal static readonly KnownType Microsoft_AspNetCore_Http_HttpResponse = new KnownType("Microsoft.AspNetCore.Http.HttpResponse");
         internal static readonly KnownType Microsoft_AspNetCore_Http_IHeaderDictionary = new KnownType("Microsoft.AspNetCore.Http.IHeaderDictionary");
