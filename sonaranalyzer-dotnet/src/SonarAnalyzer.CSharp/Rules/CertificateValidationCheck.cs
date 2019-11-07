@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -34,23 +34,47 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class CertificateValidationCheck : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4830";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "Enable server certificate validation on this SSL/TLS connection";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
+
+
+
+            //FIXME: Hunt for
+            //property Func<Cokoliv = objekt nebo neco specifickeho, System::Security::Cryptography::X509Certificates::X509Certificate2 ^, System::Security::Cryptography::X509Certificates::X509Chain ^, System::Net::Security::SslPolicyErrors, bool>
+            //and
+            //RemoteCertificateValidationCallback
+
+
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var node = c.Node;
-                    if (true)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
-                    }
-                },
-                SyntaxKind.InvocationExpression);
+
+                    
+                    var Xxx = ((AssignmentExpressionSyntax)c.Node).Left
+                                .DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().LastOrDefault();
+                    //.ChildNodes().OfType<IdentifierNameSyntax>()
+                    //.Last;
+                    System.Diagnostics.Debugger.Break();
+
+                    
+                    //((AddAssignmentExpression)c.Node)
+
+                    //var node = c.Node;
+                    //if (true)
+                    //{
+                    //    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
+                    //}
+
+
+
+
+                }
+                , SyntaxKind.AddAssignmentExpression
+            );
         }
     }
 }
