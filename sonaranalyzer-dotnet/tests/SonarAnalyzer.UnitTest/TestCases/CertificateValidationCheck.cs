@@ -73,7 +73,7 @@ namespace Tests.Diagnostics
             var optB = new OptionalConstructorArguments(this, cb: CompilantValidation);                  
 
             using (var ms = new System.IO.MemoryStream())
-            {
+            {                                                                                                                          //Secondary@+1
                 using (var ssl = new System.Net.Security.SslStream(ms, true, (sender, chain, certificate, SslPolicyErrors) => true))   //Noncompliant
                 {
                 }
@@ -141,6 +141,7 @@ namespace Tests.Diagnostics
 
         static bool NoncompilantValidation(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
+                            // Secondary@+5
                             // Secondary@+4
                             // Secondary@+3
                             // Secondary@+2
