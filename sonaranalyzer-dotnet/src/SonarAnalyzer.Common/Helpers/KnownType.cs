@@ -250,6 +250,8 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_MTAThreadAttribute = new KnownType("System.MTAThreadAttribute");
         internal static readonly KnownType System_Net_Http_HttpClient = new KnownType("System.Net.Http.HttpClient");
         internal static readonly KnownType System_Net_NetworkCredential = new KnownType("System.Net.NetworkCredential");
+        internal static readonly KnownType System_Net_Security_RemoteCertificateValidationCallback = new KnownType("System.Net.Security.RemoteCertificateValidationCallback");
+        internal static readonly KnownType System_Net_Security_SslPolicyErrors = new KnownType("System.Net.Security.SslPolicyErrors");
         internal static readonly KnownType System_Net_Sockets_Socket = new KnownType("System.Net.Sockets.Socket");
         internal static readonly KnownType System_Net_Sockets_TcpClient = new KnownType("System.Net.Sockets.TcpClient");
         internal static readonly KnownType System_Net_Sockets_UdpClient = new KnownType("System.Net.Sockets.UdpClient");
@@ -317,6 +319,8 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Security_Cryptography_SHA1 = new KnownType("System.Security.Cryptography.SHA1");
         internal static readonly KnownType System_Security_Cryptography_SymmetricAlgorithm = new KnownType("System.Security.Cryptography.SymmetricAlgorithm");
         internal static readonly KnownType System_Security_Cryptography_TripleDES = new KnownType("System.Security.Cryptography.TripleDES");
+        internal static readonly KnownType System_Security_Cryptography_X509Certificates_X509Certificate2 = new KnownType("System.Security.Cryptography.X509Certificates.X509Certificate2");
+        internal static readonly KnownType System_Security_Cryptography_X509Certificates_X509Chain = new KnownType("System.Security.Cryptography.X509Certificates.X509Chain");
         internal static readonly KnownType System_Security_Permissions_CodeAccessSecurityAttribute = new KnownType("System.Security.Permissions.CodeAccessSecurityAttribute");
         internal static readonly KnownType System_Security_Permissions_PrincipalPermission = new KnownType("System.Security.Permissions.PrincipalPermission");
         internal static readonly KnownType System_Security_Permissions_PrincipalPermissionAttribute = new KnownType("System.Security.Permissions.PrincipalPermissionAttribute");

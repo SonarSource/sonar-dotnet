@@ -8,42 +8,48 @@ namespace Tests.Diagnostics
 {
     class CertificateValidationChecks
     {
-        
+
         void Main()
         {
+            //False Negative - not implemented case
+            CreateRQ().ServerCertificateValidationCallback += FindValidator(false);  //Compliant due to known False Negative
+
             //Inline version
-            CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => true;   //Noncompliant  {{Enable server certificate validation on this SSL/TLS connection}}
-//                                                                                                             ^^^^
+                                                                                                                        // Secondary@+1
+            CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => true;    // Noncompliant  {{Enable server certificate validation on this SSL/TLS connection}}
+//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                     ^^^^
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => false;
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => certificate.Subject == "Test";
 
             //Without variable
-            CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => true;   //Noncompliant  
+                                                                                                                        // Secondary@+1
+            CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => true;    // Noncompliant  
 
             //Multiple handlers
-            ServicePointManager.ServerCertificateValidationCallback += FalseValidation;
+            ServicePointManager.ServerCertificateValidationCallback += CompilantValidation;
             ServicePointManager.ServerCertificateValidationCallback += CompliantValidationPositiveA;
-            ServicePointManager.ServerCertificateValidationCallback += NoncompilantValidation;
+            ServicePointManager.ServerCertificateValidationCallback += NoncompilantValidation;                          // Noncompliant
             ServicePointManager.ServerCertificateValidationCallback += CompliantValidationPositiveB;
             ServicePointManager.ServerCertificateValidationCallback += CompliantValidationNegative;
-            ServicePointManager.ServerCertificateValidationCallback += AdvNoncompilantTry;
-            ServicePointManager.ServerCertificateValidationCallback += AdvNoncompilantWithTryObstacles;
+            ServicePointManager.ServerCertificateValidationCallback += AdvNoncompilantTry;                              // Noncompliant
+            ServicePointManager.ServerCertificateValidationCallback += AdvNoncompilantWithTryObstacles;                 // Noncompliant
             ServicePointManager.ServerCertificateValidationCallback += AdvCompilantWithTryObstacles;
-            ServicePointManager.ServerCertificateValidationCallback += AdvNoncompilantWithObstacles;
+            ServicePointManager.ServerCertificateValidationCallback += AdvNoncompilantWithObstacles;                    // Noncompliant
             ServicePointManager.ServerCertificateValidationCallback += AdvCompilantWithObstacles;
 
             //Passed as argument
-            InitAsArgument(NoncompilantValidationAsArgument);
+            //FIXME: Obnovit Non-compliant
+            InitAsArgument(NoncompilantValidationAsArgument);                       // Non-compliant  
             InitAsArgument((sender, certificate, chain, SslPolicyErrors) => false);
-            InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Noncompliant  {{Enable server certificate validation on this SSL/TLS connection}}
-//                                                                          ^^^^
+            InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  // Non-compliant  
+                                                                                    // Sec-ondary@-1
 
             //Other occurances
             var httpHandler = new System.Net.Http.HttpClientHandler();
-            httpHandler.ServerCertificateCustomValidationCallback += NoncompilantValidation;
+            httpHandler.ServerCertificateCustomValidationCallback += NoncompilantValidation;            // Noncompliant          
 
             var rq = CreateRQ();
-            rq.ServerCertificateValidationCallback += NoncompilantValidation;
+            rq.ServerCertificateValidationCallback += NoncompilantValidation;                           // Noncompliant
 
             //Do not test this one. It's .NET Standard 2.1 target only. It shoudl work since we're hunting RemoteCertificateValidationCallback and method signature
             //var ws = new System.Net.WebSockets.ClientWebSocket();
@@ -53,27 +59,35 @@ namespace Tests.Diagnostics
             //var sslOpts = new System.Net.Security.SslClientAuthentication();
             //Security.SslClientAuthenticationOptions.RemoteCertificateValidationCallback;
 
+            //Generic signature check without RemoteCertificateValidationCallback
+            var ShouldTrigger = new RelatedSignatureType();
+            ShouldTrigger.Callback += NoncompilantValidation;                                           //Noncompliant
+            ShouldTrigger.Callback += CompilantValidation;
+
+            var ShouldNotTrigger = new NonrelatedSignatureType();
+            ShouldNotTrigger.Callback += (sender, chain, certificate, SslPolicyErrors) => true;   //Compliant, because signature types are not in expected order for validation
+            ShouldNotTrigger.Callback += (sender, chain, certificate, SslPolicyErrors) => false;
+
+            //Constructor arguments
+            var optA = new OptionalConstructorArguments(this, cb: NoncompilantValidation);                 //Noncompliant
+            var optB = new OptionalConstructorArguments(this, cb: CompilantValidation);                  
+
             using (var ms = new System.IO.MemoryStream())
             {
+                using (var ssl = new System.Net.Security.SslStream(ms, true, (sender, chain, certificate, SslPolicyErrors) => true))   //Noncompliant
+                {
+                }
                 using (var ssl = new System.Net.Security.SslStream(ms, true, NoncompilantValidation))   //Noncompliant
                 {
-                    if (ssl.CanSeek)
-                    {
-                        ssl.Position = 0;
-                    }
                 }
-                using (var ssl = new System.Net.Security.SslStream(ms, true, CompilantValidation))   //Noncompliant
+                using (var ssl = new System.Net.Security.SslStream(ms, true, CompilantValidation))
                 {
-                    if (ssl.CanSeek)
-                    {
-                        ssl.Position = 0;
-                    }
                 }
             }
 
         }
 
-        #region "Helpers"
+        #region Helpers
 
 
         void InitAsArgument(RemoteCertificateValidationCallback Callback)
@@ -97,23 +111,51 @@ namespace Tests.Diagnostics
             //Pretend to do some logging
         }
 
+        static RemoteCertificateValidationCallback FindValidator(bool Compliant)
+        {
+            if (Compliant)
+            {
+                return CompilantValidation;
+            }
+            else 
+            {
+                return FindValidatorNested(3);
+            }
+        }
+
+        static RemoteCertificateValidationCallback FindValidatorNested(int Index)
+        {
+            if (Index <=0 )
+            {
+                return NoncompilantValidation;
+            }
+            else
+            {
+                return FindValidatorNested(Index - 1);
+            }
+        }
+
         #endregion
 
-        #region "Basic Validators"
+        #region Basic Validators
 
-        bool NoncompilantValidation(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        static bool NoncompilantValidation(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
-            return true; //Noncompliant {{Enable server certificate validation on this SSL/TLS connection}}
-//                 ^^^^
+                            // Secondary@+4
+                            // Secondary@+3
+                            // Secondary@+2
+                            // Secondary@+1
+            return true;    // Secondary
+
         }
 
         bool NoncompilantValidationAsArgument(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
-            return true; //Noncompliant {{Enable server certificate validation on this SSL/TLS connection}}
-//                 ^^^^
+            //FIXME: Obnovit Sec-ondary
+            return true;    // Sec-ondary
         }
 
-        bool FalseValidation(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        static bool CompilantValidation(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             return false; //Compliant
         }
@@ -155,19 +197,19 @@ namespace Tests.Diagnostics
 
         #endregion
 
-        #region "Advanced Validators"
+        #region Advanced Validators
 
         bool AdvNoncompilantTry(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             try
             {
                 System.Diagnostics.Trace.WriteLine(certificate.Subject);
-                return true; //Noncompliant 
+                return true; // Secondary
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Trace.WriteLine(ex.Message);
-                return true; //Noncompliant 
+                return true; // Secondary 
             }
         }
 
@@ -180,13 +222,13 @@ namespace Tests.Diagnostics
                 System.Diagnostics.Trace.WriteLine("Log something");
                 Log(certificate);
 
-                return true; //Noncompliant 
+                return true; //Secondary
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Trace.WriteLine(ex.Message);
             }
-            return true; //Noncompliant
+            return true; //Secondary
         }
 
         bool AdvCompilantWithTryObstacles(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
@@ -203,16 +245,16 @@ namespace Tests.Diagnostics
             {
                 System.Diagnostics.Trace.WriteLine(ex.Message);
             }
-            return false; 
+            return false;
         }
-        
+
         bool AdvNoncompilantWithObstacles(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             Console.WriteLine("Log something");
             System.Diagnostics.Trace.WriteLine("Log something");
             Log(certificate);
 
-            return true; //Noncompliant
+            return true; //Secondary
         }
 
 
@@ -223,6 +265,35 @@ namespace Tests.Diagnostics
             Log(certificate);
             return IsValid(certificate);
         }
+
+        #endregion
+
+        #region Nested classes
+
+        class RelatedSignatureType
+        {
+
+            public Func<NonrelatedSignatureType, X509Certificate2, X509Chain, SslPolicyErrors, Boolean> Callback { get; set; }
+
+        }
+
+        class NonrelatedSignatureType
+        {
+            //Parameters are in order, that we do not inspect
+            public Func<NonrelatedSignatureType, X509Chain, X509Certificate2, SslPolicyErrors, Boolean> Callback { get; set; }
+
+        }
+
+        class OptionalConstructorArguments
+        {
+
+            public OptionalConstructorArguments(object owner, int a = 0, int b = 0, RemoteCertificateValidationCallback cb = null)
+            {
+
+            }
+
+        }
+
 
         #endregion
 
