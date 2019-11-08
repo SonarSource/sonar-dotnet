@@ -70,6 +70,20 @@ namespace SonarAnalyzer.Helpers
             return true;
         }
 
+        public bool TryGetSymbolParameter(IParameterSymbol parameter, out TArgumentSyntax argument)
+        {
+            foreach(var Pair in GetAllArgumentParameterMappings())
+            {
+                if(Pair.Symbol == parameter)
+                {
+                    argument = Pair.SyntaxNode;
+                    return true;
+                }
+            }
+            argument = null;
+            return false;
+        }
+
         protected abstract SyntaxToken? GetNameColonArgumentIdentifier(TArgumentSyntax argument);
 
         internal IEnumerable<SyntaxNodeSymbolSemanticModelTuple<TArgumentSyntax, IParameterSymbol>> GetAllArgumentParameterMappings()

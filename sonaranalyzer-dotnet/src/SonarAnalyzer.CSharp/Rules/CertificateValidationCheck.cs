@@ -71,12 +71,12 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var Param in Ctor.Parameters.Where(x => IsValidationDelegateType(x.Type)))
                 {
+                    ArgumentSyntax Argument;
                     methodParameterLookup = methodParameterLookup ?? new CSharpMethodParameterLookup((c.Node as ObjectCreationExpressionSyntax).ArgumentList, Ctor);
-                    var Pair = methodParameterLookup.GetAllArgumentParameterMappings().SingleOrDefault(x => x.Symbol == Param);
-                    if (Pair != null)
+                    if (methodParameterLookup.TryGetSymbolParameter(Param, out Argument))
                     { //For Lambda expression extract location of the parenthesizis only to separate them from secondary location of "true"
-                        var PrimaryLocation = ((Pair.SyntaxNode.Expression is ParenthesizedLambdaExpressionSyntax Lambda) ? (SyntaxNode)Lambda.ParameterList : Pair.SyntaxNode).GetLocation();
-                        TryReportLocations(c, PrimaryLocation, Pair.SyntaxNode.Expression);
+                        var PrimaryLocation = ((Argument.Expression is ParenthesizedLambdaExpressionSyntax Lambda) ? (SyntaxNode)Lambda.ParameterList : Argument).GetLocation();
+                        TryReportLocations(c, PrimaryLocation, Argument.Expression);
                     }
                 }
             }
@@ -119,9 +119,23 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 case IdentifierNameSyntax Identifier:   //Direct delegate
                     var MS = c.SemanticModel.GetSymbolInfo(Identifier).Symbol;
-                    foreach (var Syntax in MS.DeclaringSyntaxReferences)
+                    foreach (var Syntax in MS.DeclaringSyntaxReferences.Select(x => x.GetSyntax()))
                     {
-                        Ret.AddRange(NoncompliantLocations((Syntax.GetSyntax() as MethodDeclarationSyntax)?.Body));
+                        Debugger.Break();
+                        switch (Syntax)
+                        {
+                            case MethodDeclarationSyntax Method: //Direct delegate name
+                                Ret.AddRange(NoncompliantLocations(Method.Body));
+                                break;
+                            case ParameterSyntax Param:         //Value arrived as parameter
+                                //FIXME: Doresit, dohledat volajici
+
+                                break;
+                            case VariableDeclaratorSyntax Variable:
+                                //FIXME: Doresit 
+
+                                break;
+                        }
                     }
                     break;
                 case ParenthesizedLambdaExpressionSyntax Lambda:
