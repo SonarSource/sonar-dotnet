@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.Microsoft_AspNetCore_Http_IResponseCookies, "Append")));
-
+            
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Add"),
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules
                 InvocationTracker.ArgumentAtIndexEquals(0, "Set-Cookie"),
                 InvocationTracker.MethodHasParameters(2),
                 IsIHeadersDictionary());
-
+            
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(
                     new MemberDescriptor(KnownType.System_Collections_Specialized_NameObjectCollectionBase, "Add")),
