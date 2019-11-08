@@ -26,6 +26,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+//FIXME: REMOVE
+using System.Diagnostics;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -41,41 +43,120 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
+            //Handling of += delegate syntax
+            context.RegisterSyntaxNodeActionInNonGenerated(c => CheckAddHandlerSyntax(c), SyntaxKind.AddAssignmentExpression);
 
-
-
-            //FIXME: Hunt for
-            //property Func<Cokoliv = objekt nebo neco specifickeho, System::Security::Cryptography::X509Certificates::X509Certificate2 ^, System::Security::Cryptography::X509Certificates::X509Chain ^, System::Net::Security::SslPolicyErrors, bool>
-            //and
-            //RemoteCertificateValidationCallback
-
-
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-                {
-
-                    
-                    var Xxx = ((AssignmentExpressionSyntax)c.Node).Left
-                                .DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().LastOrDefault();
-                    //.ChildNodes().OfType<IdentifierNameSyntax>()
-                    //.Last;
-                    System.Diagnostics.Debugger.Break();
-
-                    
-                    //((AddAssignmentExpression)c.Node)
-
-                    //var node = c.Node;
-                    //if (true)
-                    //{
-                    //    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
-                    //}
-
-
-
-
-                }
-                , SyntaxKind.AddAssignmentExpression
-            );
+            //Handling of constructor parameter syntax (SslStream)
+            context.RegisterSyntaxNodeActionInNonGenerated(c => CheckConstructorParameterSyntax(c), SyntaxKind.ObjectCreationExpression);
         }
+
+        private static void CheckAddHandlerSyntax(SyntaxNodeAnalysisContext c)
+        {
+            var LeftIdentifier = ((AssignmentExpressionSyntax)c.Node).Left.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().LastOrDefault();
+            var Right = ((AssignmentExpressionSyntax)c.Node).Right;
+            if (LeftIdentifier != null && Right != null)
+            {
+                var Left = c.SemanticModel.GetSymbolInfo(LeftIdentifier).Symbol as IPropertySymbol;
+                if (Left != null && IsValidationDelegateType(Left.Type))
+                {
+                    TryReportLocations(c, LeftIdentifier.GetLocation(), Right);
+                }
+            }
+        }
+
+        private static void CheckConstructorParameterSyntax(SyntaxNodeAnalysisContext c)
+        {
+            CSharpMethodParameterLookup methodParameterLookup = null;       //Cache, there might be more of them
+            if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol Ctor)
+            {
+                foreach (var Param in Ctor.Parameters.Where(x => IsValidationDelegateType(x.Type)))
+                {
+                    methodParameterLookup = methodParameterLookup ?? new CSharpMethodParameterLookup((c.Node as ObjectCreationExpressionSyntax).ArgumentList, Ctor);
+                    var Pair = methodParameterLookup.GetAllArgumentParameterMappings().SingleOrDefault(x => x.Symbol == Param);
+                    if (Pair != null)
+                    { //For Lambda expression extract location of the parenthesizis only to separate them from secondary location of "true"
+                        var PrimaryLocation = ((Pair.SyntaxNode.Expression is ParenthesizedLambdaExpressionSyntax Lambda) ? (SyntaxNode)Lambda.ParameterList : Pair.SyntaxNode).GetLocation();
+                        TryReportLocations(c, PrimaryLocation, Pair.SyntaxNode.Expression);
+                    }
+                }
+            }
+        }
+
+        private static void TryReportLocations(SyntaxNodeAnalysisContext c, Location primaryLocation, ExpressionSyntax expression)
+        {
+            var Locations = NoncompliantArgumentLocation(c, expression);
+            if (Locations.Length != 0)
+            {   //Report both, assignemnt as well as all implementation occurances
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, primaryLocation, additionalLocations: Locations));
+            }
+        }
+
+        private static bool IsValidationDelegateType(ITypeSymbol type)
+        {
+            if (type.Is(KnownType.System_Net_Security_RemoteCertificateValidationCallback))
+            {
+                return true;
+            }
+            else if (type is INamedTypeSymbol NamedSymbol && type.Is(KnownType.System_Func_T1_T2_T3_T4_TResult))
+            {
+                //HttpClientHandler.ServerCertificateCustomValidationCallback uses Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool>
+                //We're actually looking for Func<Any Sender, X509Certificate2, X509Chain, SslPolicyErrors, bool>
+                var Params = NamedSymbol.DelegateInvokeMethod.Parameters;
+                return Params.Length == 4   //And it should! T1, T2, T3, T4
+                    && Params[0].Type.IsClassOrStruct() //We don't care about common (Object) nor specific (HttpRequestMessage) type of Sender
+                    && Params[1].Type.Is(KnownType.System_Security_Cryptography_X509Certificates_X509Certificate2)
+                    && Params[2].Type.Is(KnownType.System_Security_Cryptography_X509Certificates_X509Chain)
+                    && Params[3].Type.Is(KnownType.System_Net_Security_SslPolicyErrors)
+                    && NamedSymbol.DelegateInvokeMethod.ReturnType.Is(KnownType.System_Boolean);
+            }
+            return false;
+        }
+
+        private static ImmutableArray<Location> NoncompliantArgumentLocation(SyntaxNodeAnalysisContext c, ExpressionSyntax expression)
+        {
+            var Ret = ImmutableArray.CreateBuilder<Location>();
+            switch (expression)
+            {
+                case IdentifierNameSyntax Identifier:   //Direct delegate
+                    var MS = c.SemanticModel.GetSymbolInfo(Identifier).Symbol;
+                    foreach (var Syntax in MS.DeclaringSyntaxReferences)
+                    {
+                        Ret.AddRange(NoncompliantLocations((Syntax.GetSyntax() as MethodDeclarationSyntax)?.Body));
+                    }
+                    break;
+                case ParenthesizedLambdaExpressionSyntax Lambda:
+                    if ((Lambda.Body as LiteralExpressionSyntax)?.Kind() == SyntaxKind.TrueLiteralExpression)
+                    {
+                        Ret.Add(Lambda.Body.GetLocation());   //Code was found guilty for lambda (...) => true
+                    }
+                    else if (Lambda.Body is BlockSyntax Block)
+                    {
+                        Ret.AddRange(NoncompliantLocations(Block));
+                    }
+                    break;
+                case InvocationExpressionSyntax Invocation:
+                    //False Negative, current version is not recursively inspecting invocations to get validation delegate
+                    //ServerCertificateValidationCallback += FindValidator(false)
+                    break;
+            }
+            return Ret.ToImmutableArray();
+        }
+
+        private static ImmutableArray<Location> NoncompliantLocations(BlockSyntax block)
+        {
+            var Ret = ImmutableArray.CreateBuilder<Location>();
+            if (block != null)
+            {
+                //FIXME: VB.NET vs. return by assign to function name
+                var ReturnExpressions = block.DescendantNodes().OfType<ReturnStatementSyntax>().Select(x => x.Expression).ToArray();
+                if (ReturnExpressions.All(x => x.Kind() == SyntaxKind.TrueLiteralExpression))    //There must be at least one return, that does not return true to be compliant
+                {
+                    Ret.AddRange(ReturnExpressions.Select(x => x.GetLocation()));
+                }
+            }
+            return Ret.ToImmutable();
+        }
+
     }
 }
 

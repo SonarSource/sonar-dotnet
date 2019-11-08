@@ -12,16 +12,31 @@ namespace Tests.Diagnostics
 
         void Mini()
         {
-            var rq = (HttpWebRequest)System.Net.HttpWebRequest.Create("http://localhost");
+            RemoteCertificateValidationCallback Callback = null;
 
-            rq.ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => true;    //Noncompliant
-            ServicePointManager.ServerCertificateValidationCallback += NoncompilantValidation;                          //Noncompliant
+            if (true)
+            {
+                Callback = NoncompilantValidationAsArgument;                //Secondary
+            }
+
+            InitAsArgument(Callback);                                       //Secondary
+
+            InitAsArgument(NoncompilantValidationAsArgument);                       // Secondary / extra secondary to link them
+            InitAsArgument((sender, certificate, chain, SslPolicyErrors) => false);
+            InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  // Secondary
+                                                                                    
         }
 
-        bool NoncompilantValidation(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        bool NoncompilantValidationAsArgument(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
-            return true; //Noncompliant {{Enable server certificate validation on this SSL/TLS connection}}
+            return true;                                                            // Secondary
         }
+
+        void InitAsArgument(RemoteCertificateValidationCallback Callback)
+        {
+            ServicePointManager.ServerCertificateValidationCallback += Callback;    //Noncompliant
+        }
+
 
     }
 }
