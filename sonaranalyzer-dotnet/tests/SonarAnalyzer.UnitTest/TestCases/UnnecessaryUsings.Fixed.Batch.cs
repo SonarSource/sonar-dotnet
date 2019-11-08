@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using System.IO;
 using System.IO; // Warning [CS0105]
 using static System.Console;
 using static System.DateTime; // FN - System.DateTime is not a namespace symbol
@@ -77,4 +80,29 @@ namespace MyNamespace2.Level1.Level2
 namespace MyNamespace3
 {
     class Ns3_0 { }
+}
+
+namespace AwaitExtensionHolder
+{
+
+    internal static class ExtensionHolder
+    {
+        public static TaskAwaiter<int> GetAwaiter(this Func<int> function)
+        {
+            Task<int> task = new Task<int>(function);
+            task.Start();
+            return task.GetAwaiter();
+        }
+    }
+}
+
+namespace AwaitExtensionUser
+{
+    class AwaitUser
+    {
+        async void AsyncMethodUsingAwaitExtension()
+        {
+            var result = await new Func<int>(() => 0);
+        }
+    }
 }

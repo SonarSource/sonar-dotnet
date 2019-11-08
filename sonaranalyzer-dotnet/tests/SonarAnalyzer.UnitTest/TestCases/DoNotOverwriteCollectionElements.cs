@@ -39,6 +39,13 @@ namespace Tests.Diagnostics
             list[0] = 42; // Noncompliant
         }
 
+        void ListAddFP(List<int> list)
+        {
+            // FP - List.Add method should not raise any issue when used with same elements
+            list.Add(42); // Secondary
+            list.Add(42); // Noncompliant
+        }
+
         void SameIndexOnArray(CustomIndexerOneArg obj)
         {
             obj["foo"] = 42; // Compliant, not a collection or dictionary
