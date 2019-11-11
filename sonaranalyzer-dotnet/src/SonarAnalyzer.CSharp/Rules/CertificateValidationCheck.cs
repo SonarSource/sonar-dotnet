@@ -114,6 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static ImmutableArray<Location> NoncompliantArgumentLocation(SyntaxNodeAnalysisContext c, ExpressionSyntax expression)
         {
+            //FIXME: Refactoring
             var Ret = ImmutableArray.CreateBuilder<Location>();
             switch (expression)
             {
