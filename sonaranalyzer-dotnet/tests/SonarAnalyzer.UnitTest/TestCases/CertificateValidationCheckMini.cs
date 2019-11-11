@@ -6,39 +6,24 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Tests.Diagnostics
 {
-    class CertificateValidationChecks   //FIXME: Vyhodit
+
+    class RootType
     {
-
-
-        void Mini()
+        class MiddleType
         {
-            RemoteCertificateValidationCallback Callback = null;
 
-            if (true)
+            class CertificateValidationChecks   //FIXME: Vyhodit
             {
-                Callback = NoncompilantValidationAsArgument;                //Secondary
+
+
+                void Mini()
+                {
+
+                }
+                
+
             }
-
-            InitAsArgument(Callback);                                       //Secondary
-
-            InitAsArgument(NoncompilantValidationAsArgument);                       // Secondary / extra secondary to link them together
-            InitAsArgument((sender, certificate, chain, SslPolicyErrors) => false);
-            InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  // Secondary
-
         }
-
-        bool NoncompilantValidationAsArgument(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
-        {
-            return true;                                                            // Secondary
-        }
-
-        void InitAsArgument(RemoteCertificateValidationCallback Callback)
-        {
-            var cb = Callback;
-            ServicePointManager.ServerCertificateValidationCallback += Callback;    //Noncompliant
-            ServicePointManager.ServerCertificateValidationCallback += cb;          //Noncompliant
-        }
-
 
     }
 }
