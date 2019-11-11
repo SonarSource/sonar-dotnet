@@ -30,8 +30,9 @@ using SonarAnalyzer.Helpers;
 using System.Diagnostics;
 
 //FIXME: Prototyp
-//FIXME: Function Invocation()
-//FIXME: Odolnost proti rekurzi
+//Prepsat testy Mini do ostre, doladit
+//Nahradit u promennych "Some logic" za "alespon jeden je OK" jako u funkci 
+//Odolnost proti rekurzi
 
 //FIXME: Integracni testy, submitnout jako PR Draft, to by melo mit tlacitko na integracni testy a na zmenu na normalni PR
 //FIXME: Pridat VB, oddelit base atd
@@ -124,23 +125,27 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ImmutableArray<Location> ArgumentLocations(SyntaxNodeAnalysisContext c, ExpressionSyntax expression)
         {
             var ret = ImmutableArray.CreateBuilder<Location>();
+            ISymbol MS;
             switch (expression)
             {
                 case IdentifierNameSyntax identifier:
-                    var MS = c.SemanticModel.GetSymbolInfo(identifier).Symbol;
-                    foreach (var Syntax in MS.DeclaringSyntaxReferences.Select(x => x.GetSyntax()))
+                    MS = c.SemanticModel.GetSymbolInfo(identifier).Symbol;
+                    if (MS != null)
                     {
-                        switch (Syntax)
+                        foreach (var syntax in MS.DeclaringSyntaxReferences.Select(x => x.GetSyntax()))
                         {
-                            case MethodDeclarationSyntax method: //Direct delegate name
-                                ret.AddRange(BlockLocations(method.Body));
-                                break;
-                            case ParameterSyntax parameter:         //Value arrived as parameter
-                                ret.AddRange(ParamLocations(c, parameter));
-                                break;
-                            case VariableDeclaratorSyntax variable:
-                                ret.AddRange(VariableLocations(c, variable));
-                                break;
+                            switch (syntax)
+                            {
+                                case MethodDeclarationSyntax method: //Direct delegate name
+                                    ret.AddRange(BlockLocations(method.Body));
+                                    break;
+                                case ParameterSyntax parameter:         //Value arrived as parameter
+                                    ret.AddRange(ParamLocations(c, parameter));
+                                    break;
+                                case VariableDeclaratorSyntax variable:
+                                    ret.AddRange(VariableLocations(c, variable));
+                                    break;
+                            }
                         }
                     }
                     break;
@@ -154,9 +159,15 @@ namespace SonarAnalyzer.Rules.CSharp
                         ret.AddRange(BlockLocations(block));
                     }
                     break;
-                case InvocationExpressionSyntax Invocation:
-                    //False Negative, current version is not recursively inspecting invocations to get validation delegate
-                    //ServerCertificateValidationCallback += FindValidator(false)
+                case InvocationExpressionSyntax invocation:
+                    MS = c.SemanticModel.GetSymbolInfo(invocation).Symbol;
+                    if (MS != null)
+                    {
+                        foreach (var syntax in MS.DeclaringSyntaxReferences.Select(x => x.GetSyntax() as MethodDeclarationSyntax).Where(x => x != null))
+                        {
+                            ret.AddRange(InvocationLocations(c, syntax));
+                        }
+                    }
                     break;
             }
             return ret.ToImmutableArray();
@@ -173,7 +184,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ArgumentSyntax argument;
                 if (methodParamLookup.TryGetSymbolParameter(paramSymbol, out argument))
                 {
-                    ret.AddRange(VariableOrParamSublocations(c, argument.Expression));
+                    ret.AddRange(CallStackSublocations(c, argument.Expression));
                 }
             }
             return ret.ToImmutable();
@@ -196,12 +207,27 @@ namespace SonarAnalyzer.Rules.CSharp
             var UQ = assignedExpressions.Distinct(new Helpers.CSharp.CSharpSyntaxNodeEqualityComparer<ExpressionSyntax>()).ToArray();
             if (UQ.Length == 1)     //If there's only single assignment, than there's no logic. We'll inspect the expression itself.
             {
-                return VariableOrParamSublocations(c, UQ.Single());
+                return CallStackSublocations(c, UQ.Single());
             }
             return ImmutableArray<Location>.Empty;
         }
 
-        private static ImmutableArray<Location> VariableOrParamSublocations(SyntaxNodeAnalysisContext c, ExpressionSyntax expression)
+        private static ImmutableArray<Location> InvocationLocations(SyntaxNodeAnalysisContext c, MethodDeclarationSyntax method)
+        {
+            var returnExpressionSublocationsList = method.Body.DescendantNodes()
+                .OfType<ReturnStatementSyntax>()
+                .Select(x => x.Expression)
+                .Distinct(new Helpers.CSharp.CSharpSyntaxNodeEqualityComparer<ExpressionSyntax>())
+                .Select(x => CallStackSublocations(c, x))
+                .ToArray();
+            if (returnExpressionSublocationsList.Any(x => x.Length == 0)) //If there's at leat one return, that returns compilant delegate, than there's some logic.
+            {
+                return ImmutableArray<Location>.Empty;  
+            }
+            return returnExpressionSublocationsList.SelectMany(x => x).ToImmutableArray();      //Else every return statement is noncompliant
+        }
+
+        private static ImmutableArray<Location> CallStackSublocations(SyntaxNodeAnalysisContext c, ExpressionSyntax expression)
         {
             var lst = ArgumentLocations(c, expression);
             if (lst.Length != 0)        //There's noncompilant issue in this chain
