@@ -39,9 +39,23 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        internal override KnownType TrackedType => KnownType.System_Web_HttpCookie;
+        internal override ImmutableArray<KnownType> TrackedTypes { get; } =
+            ImmutableArray.Create(
+                KnownType.System_Web_HttpCookie,
+                KnownType.Microsoft_AspNetCore_Http_CookieOptions
+            );
 
         protected override string TrackedPropertyName => "HttpOnly";
+
+        public CookieShouldBeHttpOnly()
+            : this(AnalyzerConfiguration.Hotspot)
+        {
+        }
+
+        internal CookieShouldBeHttpOnly(IAnalyzerConfiguration analyzerConfiguration)
+            : base(analyzerConfiguration)
+        {
+        }
 
         protected override bool IsAllowedValue(object constantValue) =>
             constantValue is bool value && value;

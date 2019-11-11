@@ -19,7 +19,11 @@
  */
 
 extern alias csharp;
+
+using System.Collections.Generic;
+using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 
@@ -39,11 +43,24 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void CookiesShouldBeSecure_NetCore()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure_NetCore.cs",
+                new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
+                additionalReferences: GetAdditionalReferences_NetCore());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void CookiesShouldBeSecure_Not_Enabled()
         {
             Verifier.VerifyNoIssueReported(@"TestCases\CookieShouldBeSecure.cs",
                 new CookieShouldBeSecure(),
                 additionalReferences: FrameworkMetadataReference.SystemWeb);
         }
+
+        private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
+            FrameworkMetadataReference.Netstandard
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion));
     }
 }
