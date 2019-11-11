@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CertificateValidationCheck()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.cs", //FIXME: Opravit = Vyhodit Mini
+            Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheckMini.cs", //FIXME: Opravit = Vyhodit Mini
                 new CertificateValidationCheck(),
                 additionalReferences : FrameworkMetadataReference.SystemNetHttp.Concat(FrameworkMetadataReference.Netstandard)
                 );

@@ -21,10 +21,10 @@ namespace Tests.Diagnostics
 
             InitAsArgument(Callback);                                       //Secondary
 
-            InitAsArgument(NoncompilantValidationAsArgument);                       // Secondary / extra secondary to link them
+            InitAsArgument(NoncompilantValidationAsArgument);                       // Secondary / extra secondary to link them together
             InitAsArgument((sender, certificate, chain, SslPolicyErrors) => false);
             InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  // Secondary
-                                                                                    
+
         }
 
         bool NoncompilantValidationAsArgument(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
@@ -34,7 +34,9 @@ namespace Tests.Diagnostics
 
         void InitAsArgument(RemoteCertificateValidationCallback Callback)
         {
+            var cb = Callback;
             ServicePointManager.ServerCertificateValidationCallback += Callback;    //Noncompliant
+            ServicePointManager.ServerCertificateValidationCallback += cb;          //Noncompliant
         }
 
 
