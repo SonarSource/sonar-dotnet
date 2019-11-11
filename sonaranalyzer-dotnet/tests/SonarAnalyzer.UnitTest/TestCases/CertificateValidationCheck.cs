@@ -15,58 +15,17 @@ namespace Tests.Diagnostics
             CreateRQ().ServerCertificateValidationCallback += FindValidator(false);  //Compliant due to known False Negative
 
             //Inline version
-                                                                                                                        //Secondary@+1
+            //Secondary@+1
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => true;    //Noncompliant  {{Enable server certificate validation on this SSL/TLS connection}}
-//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                     ^^^^
+                                                                                                                        //                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                     ^^^^
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => false;
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => certificate.Subject == "Test";
 
             //Without variable
-                                                                                                                        //Secondary@+1
-            CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => true;    //Noncompliant  
-
-            //Multiple handlers
-            ServicePointManager.ServerCertificateValidationCallback += CompilantValidation;
-            ServicePointManager.ServerCertificateValidationCallback += CompliantValidationPositiveA;
-            ServicePointManager.ServerCertificateValidationCallback += NoncompilantValidation;                          //Noncompliant
-            ServicePointManager.ServerCertificateValidationCallback += CompliantValidationPositiveB;
-            ServicePointManager.ServerCertificateValidationCallback += CompliantValidationNegative;
-            ServicePointManager.ServerCertificateValidationCallback += AdvNoncompilantTry;                              //Noncompliant
-            ServicePointManager.ServerCertificateValidationCallback += AdvNoncompilantWithTryObstacles;                 //Noncompliant
-            ServicePointManager.ServerCertificateValidationCallback += AdvCompilantWithTryObstacles;
-            ServicePointManager.ServerCertificateValidationCallback += AdvNoncompilantWithObstacles;                    //Noncompliant
-            ServicePointManager.ServerCertificateValidationCallback += AdvCompilantWithObstacles;
-
-            //Passed as argument
-            RemoteCertificateValidationCallback SingleAssignmentCB, FalseNegativeCB, CompliantCB, DeclarationAssignmentCompliantCB = null;
-            if (true)
-            {   //If there's only one assignemnt, we will inspect it
-                                                                                    //Secondary@+1
-                SingleAssignmentCB = NoncompilantValidationAsArgument;              //Secondary
-                FalseNegativeCB = NoncompilantValidation;                           //Compliant due to false negative, the second assignment is after usage of the variable
-                CompliantCB = NoncompilantValidation;                               //Compliant due to further logic and more assingments
-            }
-            if (true) //Environment.ComputerName, Environment.CommandLine, Debugger.IsAttached, Config.TestEnvironment
-            {
-                CompliantCB = null;                                                 //Compliant, there are more assignments, so there is a logic
-                DeclarationAssignmentCompliantCB = NoncompilantValidation;          //This is compliant due to the more assignments, first one is in variable initialization
-            }
-                                                                                    //Secondary@+1
-            InitAsArgument(SingleAssignmentCB);                                     //Secondary
-            InitAsArgument(FalseNegativeCB);                                       
-            InitAsArgument(CompliantCB);
-            InitAsArgument(DeclarationAssignmentCompliantCB);
-            FalseNegativeCB = null;                                                 //False negative due to more assignments, but this one is after variable usage.
-                                                                                    //Secondary@+1
-            InitAsArgument(NoncompilantValidationAsArgument);                       //Secondary
-            InitAsArgument((sender, certificate, chain, SslPolicyErrors) => false);
-            InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary
-                                                                                    //Secondary@-1
+            //Secondary@+1
+            CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => true;    //Noncompliant
 
             //Other occurances
-            var httpHandler = new System.Net.Http.HttpClientHandler();
-            httpHandler.ServerCertificateCustomValidationCallback += NoncompilantValidation;            //Noncompliant          
-
             var rq = CreateRQ();
             rq.ServerCertificateValidationCallback += NoncompilantValidation;                           //Noncompliant
 
@@ -77,6 +36,25 @@ namespace Tests.Diagnostics
             //Do not test this one. It's .NET Standard 2.1 target only. It shoudl work since we're hunting RemoteCertificateValidationCallback and method signature
             //var sslOpts = new System.Net.Security.SslClientAuthentication();
             //Security.SslClientAuthenticationOptions.RemoteCertificateValidationCallback;
+        }
+
+        void MultipleHandlers() {
+            ServicePointManager.ServerCertificateValidationCallback += CompilantValidation;
+            ServicePointManager.ServerCertificateValidationCallback += CompliantValidationPositiveA;
+            ServicePointManager.ServerCertificateValidationCallback += NoncompilantValidation;                          //Noncompliant
+            ServicePointManager.ServerCertificateValidationCallback += CompliantValidationPositiveB;
+            ServicePointManager.ServerCertificateValidationCallback += CompliantValidationNegative;
+            ServicePointManager.ServerCertificateValidationCallback += AdvNoncompilantTry;                              //Noncompliant
+            ServicePointManager.ServerCertificateValidationCallback += AdvNoncompilantWithTryObstacles;                 //Noncompliant
+            ServicePointManager.ServerCertificateValidationCallback += AdvCompilantWithTryObstacles;
+            ServicePointManager.ServerCertificateValidationCallback += AdvNoncompilantWithObstacles;                    //Noncompliant
+            ServicePointManager.ServerCertificateValidationCallback += AdvCompilantWithObstacles;
+        }
+
+        void GenericHandlerSignature()
+        {
+            var httpHandler = new System.Net.Http.HttpClientHandler();          //This is not RemoteCertificateValidationCallback delegate type, but Func<...>
+            httpHandler.ServerCertificateCustomValidationCallback += NoncompilantValidation;            //Noncompliant          
 
             //Generic signature check without RemoteCertificateValidationCallback
             var ShouldTrigger = new RelatedSignatureType();
@@ -86,8 +64,37 @@ namespace Tests.Diagnostics
             var ShouldNotTrigger = new NonrelatedSignatureType();
             ShouldNotTrigger.Callback += (sender, chain, certificate, SslPolicyErrors) => true;   //Compliant, because signature types are not in expected order for validation
             ShouldNotTrigger.Callback += (sender, chain, certificate, SslPolicyErrors) => false;
+        }
 
-            //Constructor arguments
+        void PassedAsArgument() {
+            RemoteCertificateValidationCallback SingleAssignmentCB, FalseNegativeCB, CompliantCB, DeclarationAssignmentCompliantCB = null;
+            if (true)
+            {   //If there's only one assignemnt, we will inspect it
+                //Secondary@+1
+                SingleAssignmentCB = NoncompilantValidationAsArgument;              //Secondary
+                FalseNegativeCB = NoncompilantValidation;                           //Compliant due to false negative, the second assignment is after usage of the variable
+                CompliantCB = NoncompilantValidation;                               //Compliant due to further logic and more assingments
+            }
+            if (true) //Environment.ComputerName, Environment.CommandLine, Debugger.IsAttached, Config.TestEnvironment
+            {
+                CompliantCB = null;                                                 //Compliant, there are more assignments, so there is a logic
+                DeclarationAssignmentCompliantCB = NoncompilantValidation;          //This is compliant due to the more assignments, first one is in variable initialization
+            }
+            //Secondary@+1
+            InitAsArgument(SingleAssignmentCB);                                     //Secondary
+            InitAsArgument(FalseNegativeCB);
+            InitAsArgument(CompliantCB);
+            InitAsArgument(DeclarationAssignmentCompliantCB);
+            FalseNegativeCB = null;                                                 //False negative due to more assignments, but this one is after variable usage.
+                                                                                    //Secondary@+1
+            InitAsArgument(NoncompilantValidationAsArgument);                       //Secondary
+            InitAsArgument((sender, certificate, chain, SslPolicyErrors) => false);
+            InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary
+                                                                                    //Secondary@-1
+
+        }
+
+        void ConstructorArguments() { 
             var optA = new OptionalConstructorArguments(this, cb: NoncompilantValidation);                 //Noncompliant
             var optB = new OptionalConstructorArguments(this, cb: CompilantValidation);                  
 
