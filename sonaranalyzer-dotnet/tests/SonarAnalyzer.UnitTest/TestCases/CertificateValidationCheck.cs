@@ -9,11 +9,14 @@ namespace Tests.Diagnostics
     class CertificateValidationChecks
     {
 
-        void Main()
+        void FalseNegatives()
         {
-            //False Negative - not implemented case
-            CreateRQ().ServerCertificateValidationCallback += FindValidator(false);  //Compliant due to known False Negative
+            //Values from properties are not inspected at all
+            //Values from overriden operators are not inspected at all
+        }
 
+        void DirectAddHandlers()
+        {
             //Inline version
             //Secondary@+1
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => true;    //Noncompliant  {{Enable server certificate validation on this SSL/TLS connection}}
@@ -94,6 +97,16 @@ namespace Tests.Diagnostics
 
         }
 
+        void DelegateReturnedByFunction()
+        {
+            CreateRQ().ServerCertificateValidationCallback += FindNoncompliant(false);      //Noncompliant
+            CreateRQ().ServerCertificateValidationCallback += FindNoncompliant();           //Noncompliant
+            CreateRQ().ServerCertificateValidationCallback += FindLambdaValidator();        //Noncompliant
+            CreateRQ().ServerCertificateValidationCallback += FindCompliant(true);
+            CreateRQ().ServerCertificateValidationCallback += FindCompliantRecursive(3);            
+            CreateRQ().ServerCertificateValidationCallback += FindNoncompliantRecursive(3); //Noncompliant
+        }
+
         void ConstructorArguments() { 
             var optA = new OptionalConstructorArguments(this, cb: NoncompilantValidation);                 //Noncompliant
             var optB = new OptionalConstructorArguments(this, cb: CompilantValidation);                  
@@ -138,30 +151,6 @@ namespace Tests.Diagnostics
             //Pretend to do some logging
         }
 
-        static RemoteCertificateValidationCallback FindValidator(bool Compliant)
-        {
-            if (Compliant)
-            {
-                return CompilantValidation;
-            }
-            else 
-            {
-                return FindValidatorNested(3);
-            }
-        }
-
-        static RemoteCertificateValidationCallback FindValidatorNested(int Index)
-        {
-            if (Index <=0 )
-            {
-                return NoncompilantValidation;
-            }
-            else
-            {
-                return FindValidatorNested(Index - 1);
-            }
-        }
-
         #endregion
 
         #region Basic Validators
@@ -174,6 +163,8 @@ namespace Tests.Diagnostics
                             //Secondary@-3
                             //Secondary@-4
                             //Secondary@-5
+                            //Secondary@-6
+                            //Secondary@-7
 
         }
 
@@ -294,6 +285,70 @@ namespace Tests.Diagnostics
             System.Diagnostics.Trace.WriteLine("Log something");
             Log(certificate);
             return IsValid(certificate);
+        }
+
+        #endregion
+
+        #region Find Validators
+
+
+        static RemoteCertificateValidationCallback FindNoncompliant()
+        {
+            return NoncompilantValidation;                                      //Secondary
+        }
+
+        static RemoteCertificateValidationCallback FindLambdaValidator()
+        {
+            return (sender, certificate, chain, SslPolicyErrors) => true;        //Secondary
+        }
+
+        static RemoteCertificateValidationCallback FindNoncompliant(bool useDelegate)   //All paths return noncompliant
+        {
+            if (useDelegate)
+            {
+                return NoncompilantValidation;                                  //Secondary
+            }
+            else
+            {
+                return (sender, certificate, chain, SslPolicyErrors) => true;   //Secondary
+            }
+        }
+
+
+        static RemoteCertificateValidationCallback FindCompliant(bool Compliant)    //At least one path returns compliant => there is a logic and it is considered compliant
+        {
+            if (Compliant)
+            {
+                return null;
+            }
+            else
+            {
+                return (sender, certificate, chain, SslPolicyErrors) => true;
+            }
+        }
+
+        static RemoteCertificateValidationCallback FindCompliantRecursive(int Index)
+        {
+            if (Index <= 0)
+            {
+                return CompilantValidation;
+            }
+            else
+            {
+                return FindCompliantRecursive(Index - 1);
+            }
+        }
+
+        static RemoteCertificateValidationCallback FindNoncompliantRecursive(int Index)
+        {
+            if (Index <= 0)
+            {
+                return NoncompilantValidation;                                  //Secondary
+            }
+            else
+            {
+                return FindNoncompliantRecursive(Index - 1);
+            }
         }
 
         #endregion
