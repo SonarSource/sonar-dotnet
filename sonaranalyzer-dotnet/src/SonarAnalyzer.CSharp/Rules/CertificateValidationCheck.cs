@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -30,6 +31,7 @@ using SonarAnalyzer.Helpers;
 using System.Diagnostics;
 
 //FIXME: Prototyp
+//Opravit rekurzi
 //Prepsat testy Mini do ostre, doladit
 //Nahradit u promennych "Some logic" za "alespon jeden je OK" jako u funkci 
 //Odolnost proti rekurzi
@@ -69,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var left = c.SemanticModel.GetSymbolInfo(leftIdentifier).Symbol as IPropertySymbol;
                 if (left != null && IsValidationDelegateType(left.Type))
                 {
-                    TryReportLocations(c, leftIdentifier.GetLocation(), right);
+                    TryReportLocations(new InspectionContext(c), leftIdentifier.GetLocation(), right);
                 }
             }
         }
@@ -86,18 +88,18 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (methodParamLookup.TryGetSymbolParameter(param, out argument))
                     { //For Lambda expression extract location of the parenthesizis only to separate them from secondary location of "true"
                         var primaryLocation = ((argument.Expression is ParenthesizedLambdaExpressionSyntax Lambda) ? (SyntaxNode)Lambda.ParameterList : argument).GetLocation();
-                        TryReportLocations(c, primaryLocation, argument.Expression);
+                        TryReportLocations(new InspectionContext(c), primaryLocation, argument.Expression);
                     }
                 }
             }
         }
 
-        private void TryReportLocations(SyntaxNodeAnalysisContext c, Location primaryLocation, ExpressionSyntax expression)
+        private void TryReportLocations(InspectionContext c, Location primaryLocation, ExpressionSyntax expression)
         {
             var locations = ArgumentLocations(c, expression);
             if (locations.Length != 0)
             {   //Report both, assignemnt as well as all implementation occurances
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, primaryLocation, additionalLocations: locations));
+                c.Context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, primaryLocation, additionalLocations: locations));
             }
         }
 
@@ -122,14 +124,14 @@ namespace SonarAnalyzer.Rules.CSharp
             return false;
         }
 
-        private static ImmutableArray<Location> ArgumentLocations(SyntaxNodeAnalysisContext c, ExpressionSyntax expression)
+        private static ImmutableArray<Location> ArgumentLocations(InspectionContext c, ExpressionSyntax expression)
         {
             var ret = ImmutableArray.CreateBuilder<Location>();
             ISymbol MS;
             switch (expression)
             {
                 case IdentifierNameSyntax identifier:
-                    MS = c.SemanticModel.GetSymbolInfo(identifier).Symbol;
+                    MS = c.Context.SemanticModel.GetSymbolInfo(identifier).Symbol;
                     if (MS != null)
                     {
                         foreach (var syntax in MS.DeclaringSyntaxReferences.Select(x => x.GetSyntax()))
@@ -160,12 +162,16 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                     break;
                 case InvocationExpressionSyntax invocation:
-                    MS = c.SemanticModel.GetSymbolInfo(invocation).Symbol;
+                    MS = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
                     if (MS != null)
                     {
                         foreach (var syntax in MS.DeclaringSyntaxReferences.Select(x => x.GetSyntax() as MethodDeclarationSyntax).Where(x => x != null))
                         {
-                            ret.AddRange(InvocationLocations(c, syntax));
+                            if (!c.VisitedMethods.Contains(syntax))
+                            {
+                                c.VisitedMethods.Add(syntax);
+                                ret.AddRange(InvocationLocations(c, syntax));
+                            }
                         }
                     }
                     break;
@@ -173,12 +179,12 @@ namespace SonarAnalyzer.Rules.CSharp
             return ret.ToImmutableArray();
         }
 
-        private static ImmutableArray<Location> ParamLocations(SyntaxNodeAnalysisContext c, ParameterSyntax param)
+        private static ImmutableArray<Location> ParamLocations(InspectionContext c, ParameterSyntax param)
         {
             var ret = ImmutableArray.CreateBuilder<Location>();
-            var containingMethod = c.SemanticModel.GetDeclaredSymbol(param.FirstAncestorOrSelf<MethodDeclarationSyntax>());
+            var containingMethod = c.Context.SemanticModel.GetDeclaredSymbol(param.FirstAncestorOrSelf<MethodDeclarationSyntax>());
             var paramSymbol = containingMethod.Parameters.Single(x => x.Name == param.Identifier.ValueText);
-            foreach (var invocation in FindInvocationList(c, FindRootClass(param), containingMethod))
+            foreach (var invocation in FindInvocationList(c.Context, FindRootClass(param), containingMethod))
             {
                 var methodParamLookup = new CSharpMethodParameterLookup(invocation.ArgumentList, containingMethod);
                 ArgumentSyntax argument;
@@ -190,9 +196,9 @@ namespace SonarAnalyzer.Rules.CSharp
             return ret.ToImmutable();
         }
 
-        private static ImmutableArray<Location> VariableLocations(SyntaxNodeAnalysisContext c, VariableDeclaratorSyntax variable)
+        private static ImmutableArray<Location> VariableLocations(InspectionContext c, VariableDeclaratorSyntax variable)
         {
-            var assignedExpressions = new System.Collections.Generic.List<ExpressionSyntax>();
+            var assignedExpressions = new List<ExpressionSyntax>();
             var parentBlock = variable.FirstAncestorOrSelf<BlockSyntax>();
             if (parentBlock != null)
             {
@@ -212,7 +218,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return ImmutableArray<Location>.Empty;
         }
 
-        private static ImmutableArray<Location> InvocationLocations(SyntaxNodeAnalysisContext c, MethodDeclarationSyntax method)
+        private static ImmutableArray<Location> InvocationLocations(InspectionContext c, MethodDeclarationSyntax method)
         {
             var returnExpressionSublocationsList = method.Body.DescendantNodes()
                 .OfType<ReturnStatementSyntax>()
@@ -222,12 +228,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 .ToArray();
             if (returnExpressionSublocationsList.Any(x => x.Length == 0)) //If there's at leat one return, that returns compilant delegate, than there's some logic.
             {
-                return ImmutableArray<Location>.Empty;  
+                return ImmutableArray<Location>.Empty;
             }
             return returnExpressionSublocationsList.SelectMany(x => x).ToImmutableArray();      //Else every return statement is noncompliant
         }
 
-        private static ImmutableArray<Location> CallStackSublocations(SyntaxNodeAnalysisContext c, ExpressionSyntax expression)
+        private static ImmutableArray<Location> CallStackSublocations(InspectionContext c, ExpressionSyntax expression)
         {
             var lst = ArgumentLocations(c, expression);
             if (lst.Length != 0)        //There's noncompilant issue in this chain
@@ -283,6 +289,19 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             return ret.ToImmutable();
         }
+
+        private struct InspectionContext
+        {
+            public readonly SyntaxNodeAnalysisContext Context;
+            public readonly HashSet<MethodDeclarationSyntax> VisitedMethods;
+
+            public InspectionContext(SyntaxNodeAnalysisContext context)
+            {
+                this.Context = context;
+                this.VisitedMethods = new HashSet<MethodDeclarationSyntax>();
+            }
+        }
+
 
     }
 }
