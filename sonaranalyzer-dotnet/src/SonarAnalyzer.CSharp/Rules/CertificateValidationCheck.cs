@@ -31,10 +31,7 @@ using SonarAnalyzer.Helpers;
 using System.Diagnostics;
 
 //FIXME: Prototyp
-//Opravit rekurzi
-//Prepsat testy Mini do ostre, doladit
 //Nahradit u promennych "Some logic" za "alespon jeden je OK" jako u funkci 
-//Odolnost proti rekurzi
 
 //FIXME: Integracni testy, submitnout jako PR Draft, to by melo mit tlacitko na integracni testy a na zmenu na normalni PR
 //FIXME: Pridat VB, oddelit base atd
@@ -167,11 +164,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         foreach (var syntax in MS.DeclaringSyntaxReferences.Select(x => x.GetSyntax() as MethodDeclarationSyntax).Where(x => x != null))
                         {
-                            if (!c.VisitedMethods.Contains(syntax))
-                            {
-                                c.VisitedMethods.Add(syntax);
-                                ret.AddRange(InvocationLocations(c, syntax));
-                            }
+                            c.VisitedMethods.Add(syntax);
+                            ret.AddRange(InvocationLocations(c, syntax));
                         }
                     }
                     break;
@@ -182,15 +176,20 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ImmutableArray<Location> ParamLocations(InspectionContext c, ParameterSyntax param)
         {
             var ret = ImmutableArray.CreateBuilder<Location>();
-            var containingMethod = c.Context.SemanticModel.GetDeclaredSymbol(param.FirstAncestorOrSelf<MethodDeclarationSyntax>());
-            var paramSymbol = containingMethod.Parameters.Single(x => x.Name == param.Identifier.ValueText);
-            foreach (var invocation in FindInvocationList(c.Context, FindRootClass(param), containingMethod))
+            var containingMethodDeclaration = param.FirstAncestorOrSelf<MethodDeclarationSyntax>();
+            if (!c.VisitedMethods.Contains(containingMethodDeclaration))
             {
-                var methodParamLookup = new CSharpMethodParameterLookup(invocation.ArgumentList, containingMethod);
-                ArgumentSyntax argument;
-                if (methodParamLookup.TryGetSymbolParameter(paramSymbol, out argument))
+                c.VisitedMethods.Add(containingMethodDeclaration);
+                var containingMethod = c.Context.SemanticModel.GetDeclaredSymbol(containingMethodDeclaration);
+                var paramSymbol = containingMethod.Parameters.Single(x => x.Name == param.Identifier.ValueText);
+                foreach (var invocation in FindInvocationList(c.Context, FindRootClass(param), containingMethod))
                 {
-                    ret.AddRange(CallStackSublocations(c, argument.Expression));
+                    var methodParamLookup = new CSharpMethodParameterLookup(invocation.ArgumentList, containingMethod);
+                    ArgumentSyntax argument;
+                    if (methodParamLookup.TryGetSymbolParameter(paramSymbol, out argument))
+                    {
+                        ret.AddRange(CallStackSublocations(c, argument.Expression));
+                    }
                 }
             }
             return ret.ToImmutable();
@@ -224,13 +223,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 .OfType<ReturnStatementSyntax>()
                 .Select(x => x.Expression)
                 .Distinct(new Helpers.CSharp.CSharpSyntaxNodeEqualityComparer<ExpressionSyntax>())
+                .Where(x => !IsVisited(c, x))                               //Ignore all return statements with recursive call. Result depends on returns that could return compilant validator.
                 .Select(x => CallStackSublocations(c, x))
                 .ToArray();
-            if (returnExpressionSublocationsList.Any(x => x.Length == 0)) //If there's at leat one return, that returns compilant delegate, than there's some logic.
+            if (returnExpressionSublocationsList.Any(x => x.Length == 0))   //If there's at leat one return, that returns compilant delegate, than there's some logic.
             {
                 return ImmutableArray<Location>.Empty;
             }
             return returnExpressionSublocationsList.SelectMany(x => x).ToImmutableArray();      //Else every return statement is noncompliant
+        }
+
+        private static bool IsVisited(InspectionContext c, ExpressionSyntax expression)
+        {
+            if (expression is InvocationExpressionSyntax invocation)
+            {
+                var MS = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
+                return MS != null && MS.DeclaringSyntaxReferences.Length != 0 && MS.DeclaringSyntaxReferences.Select(x => x.GetSyntax() as MethodDeclarationSyntax).Any(x => x != null && c.VisitedMethods.Contains(x));
+            }
+            return false;
         }
 
         private static ImmutableArray<Location> CallStackSublocations(InspectionContext c, ExpressionSyntax expression)

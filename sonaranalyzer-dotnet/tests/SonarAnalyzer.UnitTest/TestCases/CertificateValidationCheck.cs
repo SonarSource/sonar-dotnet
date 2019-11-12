@@ -30,11 +30,11 @@ namespace Tests.Diagnostics
 
             //Other occurances
             var rq = CreateRQ();
-            rq.ServerCertificateValidationCallback += NoncompilantValidation;                           //Noncompliant
+            rq.ServerCertificateValidationCallback += InvalidValidation;                           //Noncompliant
 
             //Do not test this one. It's .NET Standard 2.1 target only. It shoudl work since we're hunting RemoteCertificateValidationCallback and method signature
             //var ws = new System.Net.WebSockets.ClientWebSocket();
-            //ws.Options.RemoteCertificateValidationCallback += NoncompilantValidation;
+            //ws.Options.RemoteCertificateValidationCallback += InvalidValidation;
 
             //Do not test this one. It's .NET Standard 2.1 target only. It shoudl work since we're hunting RemoteCertificateValidationCallback and method signature
             //var sslOpts = new System.Net.Security.SslClientAuthentication();
@@ -44,24 +44,24 @@ namespace Tests.Diagnostics
         void MultipleHandlers() {
             ServicePointManager.ServerCertificateValidationCallback += CompilantValidation;
             ServicePointManager.ServerCertificateValidationCallback += CompliantValidationPositiveA;
-            ServicePointManager.ServerCertificateValidationCallback += NoncompilantValidation;                          //Noncompliant
+            ServicePointManager.ServerCertificateValidationCallback += InvalidValidation;                          //Noncompliant
             ServicePointManager.ServerCertificateValidationCallback += CompliantValidationPositiveB;
             ServicePointManager.ServerCertificateValidationCallback += CompliantValidationNegative;
-            ServicePointManager.ServerCertificateValidationCallback += AdvNoncompilantTry;                              //Noncompliant
-            ServicePointManager.ServerCertificateValidationCallback += AdvNoncompilantWithTryObstacles;                 //Noncompliant
+            ServicePointManager.ServerCertificateValidationCallback += AdvInvalidTry;                              //Noncompliant
+            ServicePointManager.ServerCertificateValidationCallback += AdvInvalidWithTryObstacles;                 //Noncompliant
             ServicePointManager.ServerCertificateValidationCallback += AdvCompilantWithTryObstacles;
-            ServicePointManager.ServerCertificateValidationCallback += AdvNoncompilantWithObstacles;                    //Noncompliant
+            ServicePointManager.ServerCertificateValidationCallback += AdvInvalidWithObstacles;                    //Noncompliant
             ServicePointManager.ServerCertificateValidationCallback += AdvCompilantWithObstacles;
         }
 
         void GenericHandlerSignature()
         {
             var httpHandler = new System.Net.Http.HttpClientHandler();          //This is not RemoteCertificateValidationCallback delegate type, but Func<...>
-            httpHandler.ServerCertificateCustomValidationCallback += NoncompilantValidation;            //Noncompliant          
+            httpHandler.ServerCertificateCustomValidationCallback += InvalidValidation;            //Noncompliant          
 
             //Generic signature check without RemoteCertificateValidationCallback
             var ShouldTrigger = new RelatedSignatureType();
-            ShouldTrigger.Callback += NoncompilantValidation;                                           //Noncompliant
+            ShouldTrigger.Callback += InvalidValidation;                                           //Noncompliant
             ShouldTrigger.Callback += CompilantValidation;
 
             var ShouldNotTrigger = new NonrelatedSignatureType();
@@ -74,14 +74,14 @@ namespace Tests.Diagnostics
             if (true)
             {   //If there's only one assignemnt, we will inspect it
                 //Secondary@+1
-                SingleAssignmentCB = NoncompilantValidationAsArgument;              //Secondary
-                FalseNegativeCB = NoncompilantValidation;                           //Compliant due to false negative, the second assignment is after usage of the variable
-                CompliantCB = NoncompilantValidation;                               //Compliant due to further logic and more assingments
+                SingleAssignmentCB = InvalidValidationAsArgument;                   //Secondary
+                FalseNegativeCB = InvalidValidation;                                //Compliant due to false negative, the second assignment is after usage of the variable
+                CompliantCB = InvalidValidation;                                    //Compliant due to further logic and more assingments
             }
             if (true) //Environment.ComputerName, Environment.CommandLine, Debugger.IsAttached, Config.TestEnvironment
             {
                 CompliantCB = null;                                                 //Compliant, there are more assignments, so there is a logic
-                DeclarationAssignmentCompliantCB = NoncompilantValidation;          //This is compliant due to the more assignments, first one is in variable initialization
+                DeclarationAssignmentCompliantCB = InvalidValidation;               //This is compliant due to the more assignments, first one is in variable initialization
             }
             //Secondary@+1
             InitAsArgument(SingleAssignmentCB);                                     //Secondary
@@ -90,25 +90,26 @@ namespace Tests.Diagnostics
             InitAsArgument(DeclarationAssignmentCompliantCB);
             FalseNegativeCB = null;                                                 //False negative due to more assignments, but this one is after variable usage.
                                                                                     //Secondary@+1
-            InitAsArgument(NoncompilantValidationAsArgument);                       //Secondary
+            InitAsArgument(InvalidValidationAsArgument);                            //Secondary
             InitAsArgument((sender, certificate, chain, SslPolicyErrors) => false);
             InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary
                                                                                     //Secondary@-1
+            InitAsArgumentRecursive(InvalidValidation, 1);                          //Secondary
 
         }
 
         void DelegateReturnedByFunction()
         {
-            CreateRQ().ServerCertificateValidationCallback += FindNoncompliant(false);      //Noncompliant
-            CreateRQ().ServerCertificateValidationCallback += FindNoncompliant();           //Noncompliant
-            CreateRQ().ServerCertificateValidationCallback += FindLambdaValidator();        //Noncompliant
+            CreateRQ().ServerCertificateValidationCallback += FindInvalid(false);       //Noncompliant
+            CreateRQ().ServerCertificateValidationCallback += FindInvalid();            //Noncompliant
+            CreateRQ().ServerCertificateValidationCallback += FindLambdaValidator();    //Noncompliant
             CreateRQ().ServerCertificateValidationCallback += FindCompliant(true);
             CreateRQ().ServerCertificateValidationCallback += FindCompliantRecursive(3);            
-            CreateRQ().ServerCertificateValidationCallback += FindNoncompliantRecursive(3); //Noncompliant
+            CreateRQ().ServerCertificateValidationCallback += FindInvalidRecursive(3);  //Noncompliant
         }
 
         void ConstructorArguments() { 
-            var optA = new OptionalConstructorArguments(this, cb: NoncompilantValidation);                 //Noncompliant
+            var optA = new OptionalConstructorArguments(this, cb: InvalidValidation);                 //Noncompliant
             var optB = new OptionalConstructorArguments(this, cb: CompilantValidation);                  
 
             using (var ms = new System.IO.MemoryStream())
@@ -116,7 +117,7 @@ namespace Tests.Diagnostics
                 using (var ssl = new System.Net.Security.SslStream(ms, true, (sender, chain, certificate, SslPolicyErrors) => true))   //Noncompliant
                 {
                 }
-                using (var ssl = new System.Net.Security.SslStream(ms, true, NoncompilantValidation))   //Noncompliant
+                using (var ssl = new System.Net.Security.SslStream(ms, true, InvalidValidation))   //Noncompliant
                 {
                 }
                 using (var ssl = new System.Net.Security.SslStream(ms, true, CompilantValidation))
@@ -135,6 +136,28 @@ namespace Tests.Diagnostics
             CreateRQ().ServerCertificateValidationCallback += Callback;     //Noncompliant
             CreateRQ().ServerCertificateValidationCallback += cb;           //Noncompliant
         }
+
+        void InitAsArgumentRecursive(RemoteCertificateValidationCallback Callback, int cnt)
+        {
+            if (cnt == 0)
+                CreateRQ().ServerCertificateValidationCallback += Callback;     //Noncompliant
+            else
+                InitAsArgumentRecursive(Callback, cnt - 1);
+        }
+
+
+        void InitAsArgumentRecursiveNoInvocation(RemoteCertificateValidationCallback Callback, int cnt) 
+        {
+            if (cnt == 0)
+            {
+                CreateRQ().ServerCertificateValidationCallback += Callback;     //Compliant, no one is invoking this
+            }
+            else
+            {
+                InitAsArgumentRecursiveNoInvocation(Callback, cnt - 1);
+            }
+        }
+
 
         HttpWebRequest CreateRQ()
         {
@@ -155,7 +178,7 @@ namespace Tests.Diagnostics
 
         #region Basic Validators
 
-        static bool NoncompilantValidation(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        static bool InvalidValidation(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             return true;    //Secondary
                             //Secondary@-1
@@ -165,10 +188,12 @@ namespace Tests.Diagnostics
                             //Secondary@-5
                             //Secondary@-6
                             //Secondary@-7
+                            //Secondary@-8
+                            //Secondary@-9
 
         }
 
-        bool NoncompilantValidationAsArgument(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        bool InvalidValidationAsArgument(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             return true;    //Secondary
                             //Secondary@-1
@@ -220,7 +245,7 @@ namespace Tests.Diagnostics
 
         #region Advanced Validators
 
-        bool AdvNoncompilantTry(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        bool AdvInvalidTry(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             try
             {
@@ -235,7 +260,7 @@ namespace Tests.Diagnostics
         }
 
 
-        bool AdvNoncompilantWithTryObstacles(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        bool AdvInvalidWithTryObstacles(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             try
             {
@@ -269,7 +294,7 @@ namespace Tests.Diagnostics
             return false;
         }
 
-        bool AdvNoncompilantWithObstacles(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        bool AdvInvalidWithObstacles(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             Console.WriteLine("Log something");
             System.Diagnostics.Trace.WriteLine("Log something");
@@ -292,9 +317,9 @@ namespace Tests.Diagnostics
         #region Find Validators
 
 
-        static RemoteCertificateValidationCallback FindNoncompliant()
+        static RemoteCertificateValidationCallback FindInvalid()
         {
-            return NoncompilantValidation;                                      //Secondary
+            return InvalidValidation;                                      //Secondary
         }
 
         static RemoteCertificateValidationCallback FindLambdaValidator()
@@ -302,11 +327,11 @@ namespace Tests.Diagnostics
             return (sender, certificate, chain, SslPolicyErrors) => true;        //Secondary
         }
 
-        static RemoteCertificateValidationCallback FindNoncompliant(bool useDelegate)   //All paths return noncompliant
+        static RemoteCertificateValidationCallback FindInvalid(bool useDelegate)   //All paths return noncompliant
         {
             if (useDelegate)
             {
-                return NoncompilantValidation;                                  //Secondary
+                return InvalidValidation;                                  //Secondary
             }
             else
             {
@@ -339,15 +364,15 @@ namespace Tests.Diagnostics
             }
         }
 
-        static RemoteCertificateValidationCallback FindNoncompliantRecursive(int Index)
+        static RemoteCertificateValidationCallback FindInvalidRecursive(int Index)
         {
             if (Index <= 0)
             {
-                return NoncompilantValidation;                                  //Secondary
+                return InvalidValidation;                                  //Secondary
             }
             else
             {
-                return FindNoncompliantRecursive(Index - 1);
+                return FindInvalidRecursive(Index - 1);
             }
         }
 
