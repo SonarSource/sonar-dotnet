@@ -27,16 +27,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-//FIXME: REMOVE
-using System.Diagnostics;
-
-//FIXME: Prototyp
-//Nahradit u promennych "Some logic" za "alespon jeden je OK" jako u funkci 
-
-//FIXME: Integracni testy, submitnout jako PR Draft, to by melo mit tlacitko na integracni testy a na zmenu na normalni PR
-//FIXME: Pridat VB, oddelit base atd
-//FIXME: Znovu PR Draft, tentokrat doopravdy
-//FIXME: PR
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -133,18 +123,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         foreach (var syntax in MS.DeclaringSyntaxReferences.Select(x => x.GetSyntax()))
                         {
-                            switch (syntax)
-                            {
-                                case MethodDeclarationSyntax method: //Direct delegate name
-                                    ret.AddRange(BlockLocations(method.Body));
-                                    break;
-                                case ParameterSyntax parameter:         //Value arrived as parameter
-                                    ret.AddRange(ParamLocations(c, parameter));
-                                    break;
-                                case VariableDeclaratorSyntax variable:
-                                    ret.AddRange(VariableLocations(c, variable));
-                                    break;
-                            }
+                            ret.AddRange(IdentifierLocations(c, syntax));
                         }
                     }
                     break;
@@ -173,6 +152,20 @@ namespace SonarAnalyzer.Rules.CSharp
             return ret.ToImmutableArray();
         }
 
+        private static ImmutableArray<Location> IdentifierLocations(InspectionContext c, SyntaxNode syntax)
+        {
+            switch (syntax)
+            {
+                case MethodDeclarationSyntax method:        //Direct delegate name
+                    return BlockLocations(method.Body);
+                case ParameterSyntax parameter:             //Value arrived as a parameter
+                    return ParamLocations(c, parameter);
+                case VariableDeclaratorSyntax variable:     //Value passed as variable
+                    return VariableLocations(c, variable);
+            }
+            return ImmutableArray<Location>.Empty;
+        }
+
         private static ImmutableArray<Location> ParamLocations(InspectionContext c, ParameterSyntax param)
         {
             var ret = ImmutableArray.CreateBuilder<Location>();
@@ -197,24 +190,19 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static ImmutableArray<Location> VariableLocations(InspectionContext c, VariableDeclaratorSyntax variable)
         {
-            var assignedExpressions = new List<ExpressionSyntax>();
+            var allAssignedExpressions = new List<ExpressionSyntax>();
             var parentBlock = variable.FirstAncestorOrSelf<BlockSyntax>();
             if (parentBlock != null)
             {
-                assignedExpressions.AddRange(parentBlock.DescendantNodes().OfType<AssignmentExpressionSyntax>()
+                allAssignedExpressions.AddRange(parentBlock.DescendantNodes().OfType<AssignmentExpressionSyntax>()
                     .Where(x => x.Left is IdentifierNameSyntax Ident && Ident.Identifier.ValueText == variable.Identifier.ValueText)
                     .Select(x => x.Right));
             }
             if (variable.Initializer != null)       //Declarator initializer is counted as (default) assignment as well
             {
-                assignedExpressions.Add(variable.Initializer.Value);
+                allAssignedExpressions.Add(variable.Initializer.Value);
             }
-            var UQ = assignedExpressions.Distinct(new Helpers.CSharp.CSharpSyntaxNodeEqualityComparer<ExpressionSyntax>()).ToArray();
-            if (UQ.Length == 1)     //If there's only single assignment, than there's no logic. We'll inspect the expression itself.
-            {
-                return CallStackSublocations(c, UQ.Single());
-            }
-            return ImmutableArray<Location>.Empty;
+            return MultiExpressionSublocations(c, allAssignedExpressions);
         }
 
         private static ImmutableArray<Location> InvocationLocations(InspectionContext c, MethodDeclarationSyntax method)
@@ -222,15 +210,8 @@ namespace SonarAnalyzer.Rules.CSharp
             var returnExpressionSublocationsList = method.Body.DescendantNodes()
                 .OfType<ReturnStatementSyntax>()
                 .Select(x => x.Expression)
-                .Distinct(new Helpers.CSharp.CSharpSyntaxNodeEqualityComparer<ExpressionSyntax>())
-                .Where(x => !IsVisited(c, x))                               //Ignore all return statements with recursive call. Result depends on returns that could return compilant validator.
-                .Select(x => CallStackSublocations(c, x))
-                .ToArray();
-            if (returnExpressionSublocationsList.Any(x => x.Length == 0))   //If there's at leat one return, that returns compilant delegate, than there's some logic.
-            {
-                return ImmutableArray<Location>.Empty;
-            }
-            return returnExpressionSublocationsList.SelectMany(x => x).ToImmutableArray();      //Else every return statement is noncompliant
+                .Where(x => !IsVisited(c, x));      //Ignore all return statements with recursive call. Result depends on returns that could return compilant validator.
+            return MultiExpressionSublocations(c, returnExpressionSublocationsList);
         }
 
         private static bool IsVisited(InspectionContext c, ExpressionSyntax expression)
@@ -241,6 +222,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 return MS != null && MS.DeclaringSyntaxReferences.Length != 0 && MS.DeclaringSyntaxReferences.Select(x => x.GetSyntax() as MethodDeclarationSyntax).Any(x => x != null && c.VisitedMethods.Contains(x));
             }
             return false;
+        }
+
+        private static ImmutableArray<Location> MultiExpressionSublocations(InspectionContext c, IEnumerable<ExpressionSyntax> expressions)
+        {
+            var exprSublocationsList = expressions.Distinct(new Helpers.CSharp.CSharpSyntaxNodeEqualityComparer<ExpressionSyntax>())
+                .Select(x => CallStackSublocations(c, x))
+                .ToArray();
+            if (exprSublocationsList.Any(x => x.Length == 0))   //If there's at leat one concurrent expression, that returns compilant delegate, than there's some logic and this scope is compliant
+            {
+                return ImmutableArray<Location>.Empty;
+            }
+            return exprSublocationsList.SelectMany(x => x).ToImmutableArray();      //Else every return statement is noncompliant
         }
 
         private static ImmutableArray<Location> CallStackSublocations(InspectionContext c, ExpressionSyntax expression)
