@@ -7,6 +7,8 @@ namespace Tests.Diagnostics
 {
     class Program
     {
+        private const string secret = "constantValue";
+
         public void Test()
         {
             string password = @"foo"; // Noncompliant {{Make sure hard-coded credential is safe.}}
@@ -52,6 +54,7 @@ namespace Tests.Diagnostics
             new PasswordDeriveBytes(nonHardcodedPassword, byteArray, "strHashName", 1, cspParams);
             new PasswordDeriveBytes(new byte[] {1}, byteArray, "strHashName", 1, cspParams);
 
+            new NetworkCredential("username", secret); // Noncompliant
             new NetworkCredential("username", "hardcoded"); // Noncompliant
             new NetworkCredential("username", "hardcoded", "domain"); // Noncompliant
             networkCredential.Password = "hardcoded"; // Noncompliant

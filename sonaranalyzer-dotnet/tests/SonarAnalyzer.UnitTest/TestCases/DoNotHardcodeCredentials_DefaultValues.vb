@@ -5,6 +5,8 @@ Imports System.Security.Cryptography
 
 Namespace Tests.Diagnostics
     Class Program
+        Private Const Secret As String = "constantValue"
+
         Public Sub Test()
             Dim password As String = "foo" 'Noncompliant {{Make sure hard-coded credential is safe.}}
 '               ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -44,6 +46,7 @@ Namespace Tests.Diagnostics
             passwordDeriveBytes = New PasswordDeriveBytes(nonHardcodedPassword, byteArray, "strHashName", 1, cspParams)
             passwordDeriveBytes = New PasswordDeriveBytes(New Byte() {1}, byteArray, "strHashName", 1, cspParams)
 
+            networkCredential = New NetworkCredential("username", Secret) 'Noncompliant
             networkCredential = New NetworkCredential("username", "hardcoded") 'Noncompliant
             networkCredential = New NetworkCredential("username", "hardcoded", "domain") 'Noncompliant
             networkCredential.Password = "hardcoded" 'Noncompliant

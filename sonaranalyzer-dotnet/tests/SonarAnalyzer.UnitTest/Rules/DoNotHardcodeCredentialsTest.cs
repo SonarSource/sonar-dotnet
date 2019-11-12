@@ -56,6 +56,14 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void DoNotHardcodeCredentials_CS_DefaultConfiguration()
+        {
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotHardcodeCredentials_DefaultValues.cs",
+                new CSharp.DoNotHardcodeCredentials());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void DoNotHardcodeCredentials_VB_DefaultValues()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_DefaultValues.vb",
@@ -80,10 +88,10 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotHardcodeCredentials_DefaultConfiguration()
+        public void DoNotHardcodeCredentials_VB_DefaultConfiguration()
         {
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotHardcodeCredentials_DefaultValues.cs",
-                new CSharp.DoNotHardcodeCredentials());
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotHardcodeCredentials_DefaultValues.vb",
+                new VisualBasic.DoNotHardcodeCredentials());
         }
     }
 }
