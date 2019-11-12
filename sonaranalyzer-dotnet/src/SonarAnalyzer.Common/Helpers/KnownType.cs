@@ -249,6 +249,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_MarshalByRefObject = new KnownType("System.MarshalByRefObject");
         internal static readonly KnownType System_MTAThreadAttribute = new KnownType("System.MTAThreadAttribute");
         internal static readonly KnownType System_Net_Http_HttpClient = new KnownType("System.Net.Http.HttpClient");
+        internal static readonly KnownType System_Net_NetworkCredential = new KnownType("System.Net.NetworkCredential");
         internal static readonly KnownType System_Net_Sockets_Socket = new KnownType("System.Net.Sockets.Socket");
         internal static readonly KnownType System_Net_Sockets_TcpClient = new KnownType("System.Net.Sockets.TcpClient");
         internal static readonly KnownType System_Net_Sockets_UdpClient = new KnownType("System.Net.Sockets.UdpClient");
@@ -308,6 +309,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Security_Cryptography_HMACRIPEMD160 = new KnownType("System.Security.Cryptography.HMACRIPEMD160");
         internal static readonly KnownType System_Security_Cryptography_HMACSHA1 = new KnownType("System.Security.Cryptography.HMACSHA1");
         internal static readonly KnownType System_Security_Cryptography_MD5 = new KnownType("System.Security.Cryptography.MD5");
+        internal static readonly KnownType System_Security_Cryptography_PasswordDeriveBytes = new KnownType("System.Security.Cryptography.PasswordDeriveBytes");
         internal static readonly KnownType System_Security_Cryptography_RC2 = new KnownType("System.Security.Cryptography.RC2");
         internal static readonly KnownType System_Security_Cryptography_RIPEMD160 = new KnownType("System.Security.Cryptography.RIPEMD160");
         internal static readonly KnownType System_Security_Cryptography_RSA = new KnownType("System.Security.Cryptography.RSA");

@@ -107,6 +107,9 @@ namespace SonarAnalyzer.Helpers
                 .ToArray();
         }
 
+        /**
+         * Indicates that the roslyn diagnostic cannot be suppressed, filtered or have its severity changed.
+         */
         public static DiagnosticDescriptor WithNotConfigurable(this DiagnosticDescriptor dd) =>
             new DiagnosticDescriptor(
                 dd.Id,

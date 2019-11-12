@@ -44,6 +44,14 @@ namespace SonarAnalyzer.Helpers
             context.RegisterSyntaxNodeActionInNonGenerated(VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
         }
 
+        public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(
+            this CompilationStartAnalysisContext context,
+            Action<SyntaxNodeAnalysisContext> action,
+            params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
+        }
+
         public static void RegisterSyntaxTreeActionInNonGenerated(
             this SonarAnalysisContext context,
             Action<SyntaxTreeAnalysisContext> action)

@@ -30,7 +30,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class VbNetSonarRulesDefinitionTest {
   private static final String SECURITY_HOTSPOT_RULE_KEY = "S2255";
-  private static final String VULNERABILITY_RULE_KEY = "S2068";
 
   @Test
   public void test() {
@@ -73,15 +72,4 @@ public class VbNetSonarRulesDefinitionTest {
     assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:312", "cwe:315", "cwe:565", "cwe:807", "owaspTop10:a3");
   }
 
-  @Test
-  public void test_security_standards_with_vulnerability() {
-    VbNetSonarRulesDefinition definition = new VbNetSonarRulesDefinition();
-    RulesDefinition.Context context = new RulesDefinition.Context();
-    definition.define(context);
-    RulesDefinition.Repository repository = context.repository("vbnet");
-
-    RulesDefinition.Rule rule = repository.rule(VULNERABILITY_RULE_KEY);
-    assertThat(rule.type()).isEqualTo(RuleType.VULNERABILITY);
-    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:259", "cwe:798", "owaspTop10:a2");
-  }
 }

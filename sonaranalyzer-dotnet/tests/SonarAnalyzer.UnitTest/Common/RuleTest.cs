@@ -130,6 +130,7 @@ namespace SonarAnalyzer.UnitTest.Common
                 .Where(RuleFinder.IsParameterized)
                 .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
                 .SelectMany(analyzer => analyzer.SupportedDiagnostics)
+                .Where(analyzer => !IsSecurityHotspot(analyzer))
                 .ToList()
                 .ForEach(diagnostic => diagnostic.IsEnabledByDefault.Should().BeFalse());
         }
@@ -196,15 +197,17 @@ namespace SonarAnalyzer.UnitTest.Common
             {
                 var isInSonarWay = analyzer.CustomTags.Contains(DiagnosticDescriptorBuilder.SonarWayTag);
 
-                if (parameterizedAnalyzers.Contains(analyzer))
-                {
-                    analyzer.IsEnabledByDefault.Should().BeFalse($"{analyzer.Id} has parameters and should be disabled by default");
-                }
-                else if (IsSecurityHotspot(analyzer))
+                if (IsSecurityHotspot(analyzer))
                 {
                     // Security hotspots are enabled by default, but they will report issues only
                     // when their ID is contained in SonarLint.xml
                     analyzer.IsEnabledByDefault.Should().BeTrue($"{analyzer.Id} should be enabled by default");
+                }
+                else if (parameterizedAnalyzers.Contains(analyzer))
+                {
+                    // Even if a a parametrized rule is in Sonar way profile, it is still disabled by default.
+                    // See https://github.com/SonarSource/sonar-dotnet/issues/1274
+                    analyzer.IsEnabledByDefault.Should().BeFalse($"{analyzer.Id} has parameters and should be disabled by default");
                 }
                 else if (isInSonarWay)
                 {

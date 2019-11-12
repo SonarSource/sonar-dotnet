@@ -31,29 +31,52 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotHardcodeCredentials : DoNotHardcodeCredentialsBase
+    public sealed class DoNotHardcodeCredentials : DoNotHardcodeCredentialsBase<SyntaxKind>
     {
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                isEnabledByDefault: false);
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
+                .WithNotConfigurable();
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
             ImmutableArray.Create(rule);
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        public DoNotHardcodeCredentials()
+            : this(AnalyzerConfiguration.Hotspot)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                new VariableDeclarationBannedWordsFinder(this).GetAnalysisAction(rule),
-                SyntaxKind.VariableDeclarator);
+        }
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                new AssignmentExpressionBannedWordsFinder(this).GetAnalysisAction(rule),
-                SyntaxKind.SimpleAssignmentStatement);
+        internal /*for testing*/ DoNotHardcodeCredentials(IAnalyzerConfiguration analyzerConfiguration)
+            : base(analyzerConfiguration)
+        {
+            ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, rule);
+            PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, rule);
+        }
+
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            base.Initialize(context);
+
+            context.RegisterCompilationStartAction(
+                c =>
+                {
+                    if (!IsEnabled(c.Options))
+                    {
+                        return;
+                    }
+
+                    c.RegisterSyntaxNodeActionInNonGenerated(
+                        new VariableDeclarationBannedWordsFinder(this).GetAnalysisAction(rule),
+                        SyntaxKind.VariableDeclarator);
+
+                    c.RegisterSyntaxNodeActionInNonGenerated(
+                        new AssignmentExpressionBannedWordsFinder(this).GetAnalysisAction(rule),
+                        SyntaxKind.SimpleAssignmentStatement);
+                });
         }
 
         private class VariableDeclarationBannedWordsFinder : CredentialWordsFinderBase<VariableDeclaratorSyntax>
         {
-            public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentialsBase analyzer) : base(analyzer) { }
+            public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode) =>
                 syntaxNode.Initializer?.Value.GetStringValue();
@@ -72,7 +95,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private class AssignmentExpressionBannedWordsFinder : CredentialWordsFinderBase<AssignmentStatementSyntax>
         {
-            public AssignmentExpressionBannedWordsFinder(DoNotHardcodeCredentialsBase analyzer) : base(analyzer) { }
+            public AssignmentExpressionBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
 
             protected override string GetAssignedValue(AssignmentStatementSyntax syntaxNode) =>
                 syntaxNode.Right.GetStringValue();

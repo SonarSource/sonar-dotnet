@@ -29,17 +29,19 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DoNotHardcodeCredentialsBase : ParameterLoadingDiagnosticAnalyzer
+    public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
     {
 
         protected const string DiagnosticId = "S2068";
-        protected const string MessageFormat = "'{0}' detected in this expression, review this potentially hardcoded credential.";
+        protected const string MessageFormat = "Make sure hard-coded credential is safe.";
 
         private const string DefaultCredentialWords = "password, passwd, pwd";
 
         private string credentialWords;
         private IEnumerable<string> splitCredentialWords;
         private Regex passwordValuePattern;
+        private readonly IAnalyzerConfiguration analyzerConfiguration;
 
         [RuleParameter("credentialWords", PropertyType.String,
             "Comma separated list of words identifying potential credentials", DefaultCredentialWords)]
@@ -58,17 +60,47 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected DoNotHardcodeCredentialsBase()
+        protected ObjectCreationTracker<TSyntaxKind> ObjectCreationTracker { get; set; }
+
+        protected PropertyAccessTracker<TSyntaxKind> PropertyAccessTracker { get; set; }
+
+        protected DoNotHardcodeCredentialsBase(IAnalyzerConfiguration analyzerConfiguration)
         {
             CredentialWords = DefaultCredentialWords;
+            this.analyzerConfiguration = analyzerConfiguration;
+        }
+
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            ObjectCreationTracker.Track(context,
+                ObjectCreationTracker.MatchConstructor(KnownType.System_Net_NetworkCredential),
+                ObjectCreationTracker.ArgumentAtIndexIs(1, KnownType.System_String),
+                ObjectCreationTracker.ArgumentAtIndexIsConst(1));
+
+            ObjectCreationTracker.Track(context,
+               ObjectCreationTracker.MatchConstructor(KnownType.System_Security_Cryptography_PasswordDeriveBytes),
+               ObjectCreationTracker.ArgumentAtIndexIs(0, KnownType.System_String),
+               ObjectCreationTracker.ArgumentAtIndexIsConst(0));
+
+            PropertyAccessTracker.Track(context,
+               PropertyAccessTracker.MatchSetter(),
+               PropertyAccessTracker.AssignedValueIsConstant(),
+               PropertyAccessTracker.MatchProperty(
+                   new MemberDescriptor(KnownType.System_Net_NetworkCredential, "Password")));
+        }
+
+        protected bool IsEnabled(AnalyzerOptions options)
+        {
+            analyzerConfiguration.Initialize(options);
+            return analyzerConfiguration.IsEnabled(DiagnosticId);
         }
 
         protected abstract class CredentialWordsFinderBase<TSyntaxNode>
              where TSyntaxNode : SyntaxNode
         {
-            private readonly DoNotHardcodeCredentialsBase analyzer;
+            private readonly DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer;
 
-            protected CredentialWordsFinderBase(DoNotHardcodeCredentialsBase analyzer)
+            protected CredentialWordsFinderBase(DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer)
             {
                 this.analyzer = analyzer;
             }
