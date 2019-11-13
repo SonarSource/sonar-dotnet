@@ -67,6 +67,13 @@ namespace SonarAnalyzer.Helpers
 
         internal abstract ObjectCreationCondition ArgumentAtIndexIsConst(int index);
 
+        internal abstract object ConstArgumentForParameter(ObjectCreationContext context, string parameterName);
+
+        internal ObjectCreationCondition ArgumentIsBoolConstant(string parameterName, bool expectedValue) =>
+            (context) =>
+                ConstArgumentForParameter(context, parameterName) is bool boolValue &&
+                boolValue == expectedValue;
+
         internal ObjectCreationCondition ArgumentAtIndexIs(int index, KnownType type) =>
             (context) =>
                 context.InvokedConstructorSymbol.Value != null &&
