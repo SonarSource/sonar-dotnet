@@ -20,6 +20,7 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -39,6 +40,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
+        private ObjectCreationTracker<SyntaxKind> ObjectCreationTracker { get; set; }
+
         internal override ImmutableArray<KnownType> TrackedTypes { get; } =
             ImmutableArray.Create(
                 KnownType.System_Web_HttpCookie,
@@ -55,6 +58,16 @@ namespace SonarAnalyzer.Rules.CSharp
         internal CookieShouldBeHttpOnly(IAnalyzerConfiguration analyzerConfiguration)
             : base(analyzerConfiguration)
         {
+            ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, rule);
+        }
+
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            base.Initialize(context);
+
+            ObjectCreationTracker.Track(context,
+                ObjectCreationTracker.MatchConstructor(KnownType.Nancy_Cookies_NancyCookie),
+                Conditions.ExceptWhen(ObjectCreationTracker.ArgumentIsBoolConstant("httpOnly", true)));
         }
 
         protected override bool IsAllowedValue(object constantValue) =>

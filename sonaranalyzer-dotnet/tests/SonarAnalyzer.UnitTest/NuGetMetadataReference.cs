@@ -145,6 +145,9 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> MvvmLightLibs(string packageVersion) =>
             NugetMetadataFactory.Create("MvvmLightLibs", packageVersion);
 
+        public static IEnumerable<MetadataReference> Nancy(string packageVersion = "2.0.0") =>
+            NugetMetadataFactory.Create("Nancy", packageVersion);
+
         public static IEnumerable<MetadataReference> NLog(string packageVersion) =>
             NugetMetadataFactory.Create("NLog", packageVersion);
 
