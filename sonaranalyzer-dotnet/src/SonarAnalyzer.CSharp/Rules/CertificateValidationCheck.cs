@@ -255,7 +255,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var ret = ImmutableArray.CreateBuilder<Location>();
             if (block != null)
             {
-                //FIXME: VB.NET vs. return by assign to function name
+                //ToDo: VB.NET vs. return by assign to function name
                 var returnExpressions = block.DescendantNodes().OfType<ReturnStatementSyntax>().Select(x => x.Expression).ToArray();
                 if (returnExpressions.All(x => x.Kind() == SyntaxKind.TrueLiteralExpression))    //There must be at least one return, that does not return true to be compliant
                 {
