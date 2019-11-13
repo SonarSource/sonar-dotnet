@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2092",
+"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  26,
+"endLine":  280,
+"endColumn":  135
+}
+}
+},
+{
+"id":  "S2092",
+"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"region":  {
+"startLine":  302,
+"startColumn":  26,
+"endLine":  302,
+"endColumn":  145
+}
+}
+}
+]
+}
