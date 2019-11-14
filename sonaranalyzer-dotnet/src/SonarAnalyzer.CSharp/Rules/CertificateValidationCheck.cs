@@ -53,27 +53,24 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var leftIdentifier = ((AssignmentExpressionSyntax)c.Node).Left.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().LastOrDefault();
             var right = ((AssignmentExpressionSyntax)c.Node).Right;
-            if (leftIdentifier != null && right != null)
+            if (leftIdentifier != null && right != null
+                && c.SemanticModel.GetSymbolInfo(leftIdentifier).Symbol is IPropertySymbol left
+                && IsValidationDelegateType(left.Type))
             {
-                var left = c.SemanticModel.GetSymbolInfo(leftIdentifier).Symbol as IPropertySymbol;
-                if (left != null && IsValidationDelegateType(left.Type))
-                {
-                    TryReportLocations(new InspectionContext(c), leftIdentifier.GetLocation(), right);
-                }
+                TryReportLocations(new InspectionContext(c), leftIdentifier.GetLocation(), right);
             }
         }
 
         private void CheckConstructorParameterSyntax(SyntaxNodeAnalysisContext c)
         {
-            CSharpMethodParameterLookup methodParamLookup = null;       //Cache, there might be more of them
             if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol ctor)
             {
+                CSharpMethodParameterLookup methodParamLookup = null;       //Cache, there might be more of them
                 foreach (var param in ctor.Parameters.Where(x => IsValidationDelegateType(x.Type)))
                 {
-                    ArgumentSyntax argument;
                     methodParamLookup = methodParamLookup ?? new CSharpMethodParameterLookup((c.Node as ObjectCreationExpressionSyntax).ArgumentList, ctor);
-                    if (methodParamLookup.TryGetSymbolParameter(param, out argument))
-                    { //For Lambda expression extract location of the parenthesizis only to separate them from secondary location of "true"
+                    if (methodParamLookup.TryGetSymbolParameter(param, out var argument))
+                    { //For Lambda expression extract location of the parentheses only to separate them from secondary location of "true"
                         var primaryLocation = ((argument.Expression is ParenthesizedLambdaExpressionSyntax Lambda) ? (SyntaxNode)Lambda.ParameterList : argument).GetLocation();
                         TryReportLocations(new InspectionContext(c), primaryLocation, argument.Expression);
                     }
@@ -84,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private void TryReportLocations(InspectionContext c, Location primaryLocation, ExpressionSyntax expression)
         {
             var locations = ArgumentLocations(c, expression);
-            if (locations.Length != 0)
+            if (!locations.IsEmpty)
             {   //Report both, assignemnt as well as all implementation occurances
                 c.Context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, primaryLocation, additionalLocations: locations));
             }
@@ -114,14 +111,13 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ImmutableArray<Location> ArgumentLocations(InspectionContext c, ExpressionSyntax expression)
         {
             var ret = ImmutableArray.CreateBuilder<Location>();
-            ISymbol MS;
             switch (expression)
             {
                 case IdentifierNameSyntax identifier:
-                    MS = c.Context.SemanticModel.GetSymbolInfo(identifier).Symbol;
-                    if (MS != null)
+                    var identSymbol = c.Context.SemanticModel.GetSymbolInfo(identifier).Symbol;
+                    if (identSymbol != null)
                     {
-                        foreach (var syntax in MS.DeclaringSyntaxReferences.Select(x => x.GetSyntax()))
+                        foreach (var syntax in identSymbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()))
                         {
                             ret.AddRange(IdentifierLocations(c, syntax));
                         }
@@ -138,10 +134,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                     break;
                 case InvocationExpressionSyntax invocation:
-                    MS = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
-                    if (MS != null)
+                    var invSymbol = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
+                    if (invSymbol != null)
                     {
-                        foreach (var syntax in MS.DeclaringSyntaxReferences.Select(x => x.GetSyntax() as MethodDeclarationSyntax).Where(x => x != null))
+                        foreach (var syntax in invSymbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax() as MethodDeclarationSyntax).Where(x => x != null))
                         {
                             c.VisitedMethods.Add(syntax);
                             ret.AddRange(InvocationLocations(c, syntax));
@@ -210,7 +206,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var returnExpressionSublocationsList = method.Body.DescendantNodes()
                 .OfType<ReturnStatementSyntax>()
                 .Select(x => x.Expression)
-                .Where(x => !IsVisited(c, x));      //Ignore all return statements with recursive call. Result depends on returns that could return compilant validator.
+                .Where(x => !IsVisited(c, x));      //Ignore all return statements with recursive call. Result depends on returns that could return compliant validator.
             return MultiExpressionSublocations(c, returnExpressionSublocationsList);
         }
 
@@ -218,8 +214,9 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (expression is InvocationExpressionSyntax invocation)
             {
-                var MS = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
-                return MS != null && MS.DeclaringSyntaxReferences.Length != 0 && MS.DeclaringSyntaxReferences.Select(x => x.GetSyntax() as MethodDeclarationSyntax).Any(x => x != null && c.VisitedMethods.Contains(x));
+                var symbol = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
+                return symbol != null && !symbol.DeclaringSyntaxReferences.IsEmpty
+                    && symbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax() as MethodDeclarationSyntax).Any(x => x != null && c.VisitedMethods.Contains(x));
             }
             return false;
         }
@@ -229,7 +226,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var exprSublocationsList = expressions.Distinct(new Helpers.CSharp.CSharpSyntaxNodeEqualityComparer<ExpressionSyntax>())
                 .Select(x => CallStackSublocations(c, x))
                 .ToArray();
-            if (exprSublocationsList.Any(x => x.Length == 0))   //If there's at leat one concurrent expression, that returns compilant delegate, than there's some logic and this scope is compliant
+            if (exprSublocationsList.Any(x => x.IsEmpty))   //If there's at leat one concurrent expression, that returns compliant delegate, than there's some logic and this scope is compliant
             {
                 return ImmutableArray<Location>.Empty;
             }
@@ -239,7 +236,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ImmutableArray<Location> CallStackSublocations(InspectionContext c, ExpressionSyntax expression)
         {
             var lst = ArgumentLocations(c, expression);
-            if (lst.Length != 0)        //There's noncompilant issue in this chain
+            if (!lst.IsEmpty)        //There's noncompliant issue in this chain
             {
                 var Loc = expression.GetLocation();
                 if (!lst.Any(x => x.SourceSpan.IntersectsWith(Loc.SourceSpan)))
@@ -304,7 +301,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 this.VisitedMethods = new HashSet<MethodDeclarationSyntax>();
             }
         }
-
 
     }
 }
