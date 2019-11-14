@@ -67,15 +67,14 @@ namespace NS
             var testInput = @"
 Namespace NS
     Public Class Base
-        Sub New(ByVal a As String, ByVal b As String, ByVal c As Boolean, ByVal d As Integer, ByVal e As Object)
+        Sub New(ByVal a As String, b As String, ByVal c As Boolean, ByVal d As Integer, ByVal e As Integer, ByVal f As Object)
         End Sub
 
         Public Sub Usage(ByVal notAConst As String)
-            Dim tmp = New Base(notAConst, ""myConst"", true, 4, New Object())
-        End Function
+            Dim tmp = New Base(notAConst, ""myConst"", True, 4, 5, New Object())
+        End Sub
     End Class
 End Namespace
-
 ";
             var context = CreateContext<VBSyntax.ObjectCreationExpressionSyntax>(testInput, AnalyzerLanguage.VisualBasic);
             var tracker = new VisualBasicObjectCreationTracker(null, null);
@@ -84,7 +83,8 @@ End Namespace
             tracker.ConstArgumentForParameter(context, "b").Should().Be("myConst");
             tracker.ConstArgumentForParameter(context, "c").Should().Be(true);
             tracker.ConstArgumentForParameter(context, "d").Should().Be(4);
-            tracker.ConstArgumentForParameter(context, "e").Should().BeNull();
+            tracker.ConstArgumentForParameter(context, "e").Should().Be(5);
+            tracker.ConstArgumentForParameter(context, "f").Should().BeNull();
         }
 
         private static ObjectCreationContext CreateContext<TSyntaxNodeType>(string testInput, AnalyzerLanguage language) where TSyntaxNodeType : SyntaxNode
