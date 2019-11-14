@@ -59,6 +59,7 @@ namespace NS
             tracker.ConstArgumentForParameter(context, "c").Should().Be(true);
             tracker.ConstArgumentForParameter(context, "d").Should().Be(4);
             tracker.ConstArgumentForParameter(context, "e").Should().BeNull();
+            tracker.ConstArgumentForParameter(context, "nonExistingParameterName").Should().BeNull();
         }
 
         [TestMethod]
@@ -85,6 +86,7 @@ End Namespace
             tracker.ConstArgumentForParameter(context, "d").Should().Be(4);
             tracker.ConstArgumentForParameter(context, "e").Should().Be(5);
             tracker.ConstArgumentForParameter(context, "f").Should().BeNull();
+            tracker.ConstArgumentForParameter(context, "nonExistingParameterName").Should().BeNull();
         }
 
         private static ObjectCreationContext CreateContext<TSyntaxNodeType>(string testInput, AnalyzerLanguage language) where TSyntaxNodeType : SyntaxNode
