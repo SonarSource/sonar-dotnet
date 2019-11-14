@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Helpers.CSharp
 
         public int GetHashCode(T obj)
         {
-            return obj.GetHashCode();
+            return obj.GetType().FullName.GetHashCode();
         }
     }
 

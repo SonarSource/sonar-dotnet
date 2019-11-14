@@ -115,12 +115,9 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 case IdentifierNameSyntax identifier:
                     var identSymbol = c.Context.SemanticModel.GetSymbolInfo(identifier).Symbol;
-                    if (identSymbol != null)
+                    if (identSymbol != null && identSymbol.DeclaringSyntaxReferences.Length==1)
                     {
-                        foreach (var syntax in identSymbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()))
-                        {
-                            ret.AddRange(IdentifierLocations(c, syntax));
-                        }
+                        ret.AddRange(IdentifierLocations(c, identSymbol.DeclaringSyntaxReferences.Single().GetSyntax()));
                     }
                     break;
                 case ParenthesizedLambdaExpressionSyntax lambda:
@@ -135,13 +132,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     break;
                 case InvocationExpressionSyntax invocation:
                     var invSymbol = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
-                    if (invSymbol != null)
+                    if (invSymbol != null && invSymbol.DeclaringSyntaxReferences.Length==1 && invSymbol.DeclaringSyntaxReferences.Single().GetSyntax() is MethodDeclarationSyntax syntax)
                     {
-                        foreach (var syntax in invSymbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax() as MethodDeclarationSyntax).Where(x => x != null))
-                        {
                             c.VisitedMethods.Add(syntax);
                             ret.AddRange(InvocationLocations(c, syntax));
-                        }
                     }
                     break;
             }
@@ -174,8 +168,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 foreach (var invocation in FindInvocationList(c.Context, FindRootClass(param), containingMethod))
                 {
                     var methodParamLookup = new CSharpMethodParameterLookup(invocation.ArgumentList, containingMethod);
-                    ArgumentSyntax argument;
-                    if (methodParamLookup.TryGetSymbolParameter(paramSymbol, out argument))
+                    if (methodParamLookup.TryGetSymbolParameter(paramSymbol, out var argument))
                     {
                         ret.AddRange(CallStackSublocations(c, argument.Expression));
                     }
