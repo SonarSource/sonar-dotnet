@@ -15,8 +15,8 @@ function Get-MsBuildPath([ValidateSet("14.0", "15.0", "16.0", "Current")][string
 
     #If MSBUILD_PATH environment variable is found, the version is not checked and the value of input parameter is ignored.
     Write-Host "Trying to find 'msbuild.exe' using 'MSBUILD_PATH' environment variable"
-    $msbuildEnv = "MSBUILD_PATH"
-    $msbuildPath = [environment]::GetEnvironmentVariable($msbuildEnv, "Process")
+    $msbuildPathEnvVar = "MSBUILD_PATH"
+    $msbuildPath = [environment]::GetEnvironmentVariable($msbuildPathEnvVar, "Process")
 
     if (!$msbuildPath) {
         Write-Host "Environment variable ${msbuildEnv} not found"
@@ -27,7 +27,7 @@ function Get-MsBuildPath([ValidateSet("14.0", "15.0", "16.0", "Current")][string
         # Test if vswhere.exe is in your path. Download from: https://github.com/Microsoft/vswhere/releases
         $msbuildPath = Exec { & (Get-VsWherePath) -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe } | Select-Object -First 1
         if ($msbuildPath) {
-            [environment]::SetEnvironmentVariable($msbuildEnv, $msbuildPath)
+            [environment]::SetEnvironmentVariable($msbuildPathEnvVar, $msbuildPath)
         }
     }
 
