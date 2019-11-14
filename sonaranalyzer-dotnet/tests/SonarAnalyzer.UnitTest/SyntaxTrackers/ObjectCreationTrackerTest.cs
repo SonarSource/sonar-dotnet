@@ -67,7 +67,7 @@ namespace NS
             var testInput = @"
 Namespace NS
     Public Class Base
-        Sub New(ByVal a As String, b As String, ByVal c As Boolean, ByVal d As Integer, ByVal e As Integer, ByVal f As Object)
+        Sub New(ByVal a As String, b As String, ByVal c As Boolean, ByVal d As Integer, ByRef e As Integer, ByVal f As Object)
         End Sub
 
         Public Sub Usage(ByVal notAConst As String)
