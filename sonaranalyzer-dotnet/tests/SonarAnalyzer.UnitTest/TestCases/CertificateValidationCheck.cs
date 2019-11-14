@@ -17,15 +17,27 @@ namespace Tests.Diagnostics
             //Values from overriden operators are not inspected at all
             CreateRQ().ServerCertificateValidationCallback += new CertificateValidationChecks() + 42; //Operator + is overriden to return delegate. 
         }
-        
+
         void DirectAddHandlers()
         {
             //Inline version
             //Secondary@+1
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => true;    //Noncompliant  {{Enable server certificate validation on this SSL/TLS connection}}
-//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                     ^^^^
+                                                                                                                        //                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                     ^^^^
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => false;
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => certificate.Subject == "Test";
+
+            //Lambda block syntax
+                                                                                                                                    //Secondary@+1
+            CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => { return true; };    //Noncompliant
+            CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) =>                      //Noncompliant
+            {
+                return true;    //Secondary
+            };
+            CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) =>
+            {
+                return false;
+            };
 
             //With variable
             var rq = CreateRQ();
@@ -407,7 +419,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        public static RemoteCertificateValidationCallback operator+(CertificateValidationChecks instance, int number)
+        public static RemoteCertificateValidationCallback operator +(CertificateValidationChecks instance, int number)
         {
             return (sender, certificate, chain, SslPolicyErrors) => true;
         }

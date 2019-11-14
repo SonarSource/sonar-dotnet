@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 case IdentifierNameSyntax identifier:
                     var identSymbol = c.Context.SemanticModel.GetSymbolInfo(identifier).Symbol;
-                    if (identSymbol != null && identSymbol.DeclaringSyntaxReferences.Length==1)
+                    if (identSymbol != null && identSymbol.DeclaringSyntaxReferences.Length == 1)
                     {
                         ret.AddRange(IdentifierLocations(c, identSymbol.DeclaringSyntaxReferences.Single().GetSyntax()));
                     }
@@ -132,10 +132,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     break;
                 case InvocationExpressionSyntax invocation:
                     var invSymbol = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
-                    if (invSymbol != null && invSymbol.DeclaringSyntaxReferences.Length==1 && invSymbol.DeclaringSyntaxReferences.Single().GetSyntax() is MethodDeclarationSyntax syntax)
+                    if (invSymbol != null && invSymbol.DeclaringSyntaxReferences.Length == 1 && invSymbol.DeclaringSyntaxReferences.Single().GetSyntax() is MethodDeclarationSyntax syntax)
                     {
-                            c.VisitedMethods.Add(syntax);
-                            ret.AddRange(InvocationLocations(c, syntax));
+                        c.VisitedMethods.Add(syntax);
+                        ret.AddRange(InvocationLocations(c, syntax));
                     }
                     break;
             }
