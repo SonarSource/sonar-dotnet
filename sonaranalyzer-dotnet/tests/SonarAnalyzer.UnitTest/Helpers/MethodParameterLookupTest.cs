@@ -36,7 +36,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
     public class MethodParameterLookupTest
     {
 
-        private const string Source_CS = @"
+
+        [TestMethod]
+        public void TestMethodParameterLookup_CS()
+        {
+            const string Source = @"
 namespace Test
 {
     class TestClass
@@ -79,93 +83,88 @@ namespace Test
         }
     }
 }";
-
-        [TestMethod]
-        public void TestMethodParameterLookup_CS()
-        {
-            var c = new CSharpInspection(Source_CS);
+            var c = new CSharpInspection(Source);
             c.Inspect(0, "DoNothing", new { });
             c.Inspect(1, "DoSomething", new { a = 1, b = true });
             c.Inspect(2, "DoSomething", new { a = 1, b = true });
             c.Inspect(3, "WithOptional", new { a = 1 });
-            c.Inspect(4, "WithOptional", new { a = 1, b = "Ipsum" });
+            c.Inspect(4, "WithOptional", new { a = 1, opt = "Ipsum" });
             c.Inspect(5, "WithOptional", new { a = 1, opt = "Ipsum" });
             c.Inspect(6, "WithParams", new { });
-            //False-Postive, AbstractMethodParameterLookup doesn't work for Params
-            c.Inspect(7, "WithParams", new { arr = 1 });
-            //It should be like this:
+
+            //ToDo: TryGetSymbolParameter doesn't work for Params. Test look like this
             //c.Inspect(7, "WithParams", new { arr = new[] { 1, 2, 3 } });
+
             c.MainInvocations.Length.Should().Be(8); //Self-Test of this test. If new Invocation is added to the Main(), this number has to be updated and test should be written for that case.
         }
+        
+        [TestMethod]
+        public void TestMethodParameterLookup_VB()
+        {
+            const string Source = @"
+Module MainModule
 
+    Sub Main()
+        DoNothing()
+        DoSomething(1, True)
+        WithOptional(1)
+        WithOptional(1, ""Ipsum"")
+        WithParams()
+        WithParams(1, 2, 3)
+    End Sub
 
+    Sub ThisShouldNotBeFoundInMain()
+        SpecialMethod(65535)
+    End Sub
 
-        //        [TestMethod]
-        //        public void TestMethodParameterLookup_VB()
-        //        {
-        //            const string Source = @"
-        //Module MainModule
+    Sub DoNothing()
+    End Sub
 
-        //    Sub Main()
-        //        Special(65535)
-        //        'DoNothing()
-        //        'DoSomething(42, True, Nothing)
-        //        'DoSomething(42, True, Nothing, ""Ipsum"")
-        //        'WithParamArray(42)
-        //        WithParamArray(1, 2, 3)
-        //    End Sub
+    Sub DoSomething(a As Integer, b As Boolean)
+    End Sub
 
-        //    Sub DoSomething(a As Integer, b As Boolean, c As Object, Optional d As String = ""Lorem"")
-        //    End Sub
+    Sub WithOptional(a As Integer, Optional opt As String = ""Lorem"")
+    End Sub
 
-        //    Sub WithParamArray(ParamArray arr() As Integer)
-        //    End Sub
+    Sub WithParams(ParamArray arr() As Integer)
+    End Sub
 
-        //    'Sub WithParamArray(a As Integer, ParamArray arr() As Integer)
-        //    'End Sub
+    Sub SpecialMethod(SpecialParameter As Integer)
+    End Sub
+End Module
+";
+            var c = new VisualBasicInspection(Source);
+            c.Inspect(0, "DoNothing", new { });
+            c.Inspect(1, "DoSomething", new { a = 1, b = true });
+            c.Inspect(2, "WithOptional", new { a = 1 });
+            c.Inspect(3, "WithOptional", new { a = 1, opt = "Ipsum" });
+            c.Inspect(4, "WithParams", new { });
+            //ToDo: TryGetSymbolParameter doesn't work for ParamArray. Test look like this
+            //c.Inspect(5, "WithParams", new { arr = new[] { 1, 2, 3 } });
 
-        //    Sub DoNothing()
-        //    End Sub
-
-        //    Sub Special(SpecialArg As Integer)
-        //    End Sub
-
-        //End Module
-        //";
-        //            var compiler = new SnippetCompiler(Source, false, AnalyzerLanguage.VisualBasic);
-        //            var mainMethod = compiler.GetNodes<VBSyntax.MethodBlockSyntax>().Single(x => x.SubOrFunctionStatement.Identifier.ValueText == "Main");
-        //            var specialInvocation = compiler.GetNodes<VBSyntax.InvocationExpressionSyntax>().Single(x => x.Expression is VBSyntax.IdentifierNameSyntax identifier && identifier.Identifier.ValueText == "Special");
-        //            var specialArgument = specialInvocation.ArgumentList.Arguments.Single();
-        //            var specialParameter = (compiler.SemanticModel.GetSymbolInfo(specialInvocation).Symbol as IMethodSymbol).Parameters.Single();
-        //            Assert.IsNotNull(mainMethod);
-
-        //            foreach (var invocation in mainMethod.DescendantNodes().OfType<VBSyntax.InvocationExpressionSyntax>())
-        //            {
-        //                var method = compiler.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-        //                var lookup = new VisualBasicMethodParameterLookup(invocation.ArgumentList, compiler.SemanticModel);
-        //                var context = new VisualBasicInspectionContext();
-        //                context.Init(compiler, lookup, method, invocation.ArgumentList.Arguments.ToArray(), specialArgument, specialParameter);
-        //                InspectLookupValues(context);
-        //            }
-
-        //        }
-
-
-
+            c.MainInvocations.Length.Should().Be(6); //Self-Test of this test. If new Invocation is added to the Main(), this number has to be updated and test should be written for that case.
+        }
 
         private abstract class InspectionBase<TArgumentSyntax, TInvocationSyntax>
             where TArgumentSyntax : SyntaxNode
             where TInvocationSyntax : SyntaxNode
         {
             public SnippetCompiler Compiler { get; protected set; }
-            public TInvocationSyntax[] MainInvocations;
+            public TInvocationSyntax[] MainInvocations { get; protected set; }
             public TArgumentSyntax SpecialArgument { get; private set; }
             public IParameterSymbol SpecialParameter { get; private set; }
 
+            public abstract TInvocationSyntax[] FindInvocationsIn(string name);
             public abstract object ExtractArgumentValue(TArgumentSyntax argumentSyntax);
             public abstract TArgumentSyntax[] GetArguments(TInvocationSyntax invocation);
             public abstract AbstractMethodParameterLookup<TArgumentSyntax> CreateLookup(TInvocationSyntax invocation, IMethodSymbol method);
-            
+
+            protected InspectionBase(string source, AnalyzerLanguage language)
+            {
+                this.Compiler = new SnippetCompiler(source, false, language);
+                this.MainInvocations = FindInvocationsIn("Main");
+            }
+
             protected void InitSpecial(TInvocationSyntax specialInvocation)
             {
                 this.SpecialArgument = GetArguments(specialInvocation).Single();
@@ -231,11 +230,14 @@ namespace Test
         private class CSharpInspection : InspectionBase<CSharpSyntax.ArgumentSyntax, CSharpSyntax.InvocationExpressionSyntax>
         {
 
-            public CSharpInspection(string source)
+            public CSharpInspection(string source) : base(source, AnalyzerLanguage.CSharp)
             {
-                this.Compiler = new SnippetCompiler(source, false, AnalyzerLanguage.CSharp);
-                this.MainInvocations = Compiler.GetNodes<CSharpSyntax.MethodDeclarationSyntax>().Single(x => x.Identifier.ValueText == "Main").DescendantNodes().OfType<CSharpSyntax.InvocationExpressionSyntax>().ToArray();
                 InitSpecial(Compiler.GetNodes<CSharpSyntax.InvocationExpressionSyntax>().Single(x => x.Expression is CSharpSyntax.IdentifierNameSyntax identifier && identifier.Identifier.ValueText == "SpecialMethod"));
+            }
+
+            public override CSharpSyntax.InvocationExpressionSyntax[] FindInvocationsIn(string name)
+            {
+                return Compiler.GetNodes<CSharpSyntax.MethodDeclarationSyntax>().Single(x => x.Identifier.ValueText == name).DescendantNodes().OfType<CSharpSyntax.InvocationExpressionSyntax>().ToArray();
             }
 
             public override CSharpSyntax.ArgumentSyntax[] GetArguments(CSharpSyntax.InvocationExpressionSyntax invocation)
@@ -255,13 +257,34 @@ namespace Test
 
         }
 
-        //private class VisualBasicInspectionContext : InspectionContextBase<VBSyntax.ArgumentSyntax>
-        //{
+        private class VisualBasicInspection : InspectionBase<VBSyntax.ArgumentSyntax, VBSyntax.InvocationExpressionSyntax>
+        {
 
-        //    public override object ExtractArgumentValue(VBSyntax.ArgumentSyntax argumentSyntax)
-        //    {
-        //        return Compiler.SemanticModel.GetConstantValue(argumentSyntax.GetExpression()).Value;
-        //    }
-        //}
+            public VisualBasicInspection(string source) : base(source, AnalyzerLanguage.VisualBasic)
+            {
+                InitSpecial(Compiler.GetNodes<VBSyntax.InvocationExpressionSyntax>().Single(x => x.Expression is VBSyntax.IdentifierNameSyntax identifier && identifier.Identifier.ValueText == "SpecialMethod"));
+            }
+
+            public override VBSyntax.InvocationExpressionSyntax[] FindInvocationsIn(string name)
+            {
+                return Compiler.GetNodes<VBSyntax.MethodBlockSyntax>().Single(x => x.SubOrFunctionStatement.Identifier.ValueText == "Main").DescendantNodes().OfType<VBSyntax.InvocationExpressionSyntax>().ToArray();
+            }
+
+            public override VBSyntax.ArgumentSyntax[] GetArguments(VBSyntax.InvocationExpressionSyntax invocation)
+            {
+                return invocation.ArgumentList.Arguments.ToArray();
+            }
+
+            public override AbstractMethodParameterLookup<VBSyntax.ArgumentSyntax> CreateLookup(VBSyntax.InvocationExpressionSyntax invocation, IMethodSymbol method)
+            {
+                return new VisualBasicMethodParameterLookup(invocation.ArgumentList, Compiler.SemanticModel);
+            }
+
+            public override object ExtractArgumentValue(VBSyntax.ArgumentSyntax argumentSyntax)
+            {
+                return Compiler.SemanticModel.GetConstantValue(argumentSyntax.GetExpression()).Value;
+            }
+
+        }
     }
 }
