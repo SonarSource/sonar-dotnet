@@ -113,6 +113,8 @@ namespace Tests.Diagnostics
             InitAsArgumentRecursive(InvalidValidation, 1);                          //Secondary
             InitAsOptionalArgument();
 
+            //Call in nested class from root (this)
+            new InnerAssignemntClass().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary           
         }
 
         void DelegateReturnedByFunction()
@@ -182,7 +184,7 @@ namespace Tests.Diagnostics
         }
 
 
-        HttpWebRequest CreateRQ()
+        static HttpWebRequest CreateRQ()
         {
             return (HttpWebRequest)System.Net.HttpWebRequest.Create("http://localhost");
         }
@@ -457,6 +459,25 @@ namespace Tests.Diagnostics
 
         }
 
+        class InnerAssignemntClass
+        {
+
+            public void InitAsArgument(RemoteCertificateValidationCallback callback)
+            {
+                CertificateValidationChecks.CreateRQ().ServerCertificateValidationCallback += callback; //Noncompliant
+            }
+
+        }
+
+        class NeighbourAssignemntClass
+        {
+
+            public void Init(RemoteCertificateValidationCallback callback)
+            {   //Assignemnt from sibling class in nested tree
+                new InnerAssignemntClass().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary           
+            }
+
+        }
 
         #endregion
 
