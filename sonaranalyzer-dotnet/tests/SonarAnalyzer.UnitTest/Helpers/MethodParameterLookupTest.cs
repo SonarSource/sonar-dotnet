@@ -84,13 +84,13 @@ namespace Test
     }
 }";
             var c = new CSharpInspection(Source);
-            c.Inspect(0, "DoNothing", new { });
-            c.Inspect(1, "DoSomething", new { a = 1, b = true });
-            c.Inspect(2, "DoSomething", new { a = 1, b = true });
-            c.Inspect(3, "WithOptional", new { a = 1 });
-            c.Inspect(4, "WithOptional", new { a = 1, opt = "Ipsum" });
-            c.Inspect(5, "WithOptional", new { a = 1, opt = "Ipsum" });
-            c.Inspect(6, "WithParams", new { });
+            c.CheckExpectedParameterMappings(0, "DoNothing", new { });
+            c.CheckExpectedParameterMappings(1, "DoSomething", new { a = 1, b = true });
+            c.CheckExpectedParameterMappings(2, "DoSomething", new { a = 1, b = true });
+            c.CheckExpectedParameterMappings(3, "WithOptional", new { a = 1 });
+            c.CheckExpectedParameterMappings(4, "WithOptional", new { a = 1, opt = "Ipsum" });
+            c.CheckExpectedParameterMappings(5, "WithOptional", new { a = 1, opt = "Ipsum" });
+            c.CheckExpectedParameterMappings(6, "WithParams", new { });
 
             //ToDo: TryGetSymbolParameter doesn't work for Params. Test look like this
             //c.Inspect(7, "WithParams", new { arr = new[] { 1, 2, 3 } });
@@ -134,11 +134,11 @@ Module MainModule
 End Module
 ";
             var c = new VisualBasicInspection(Source);
-            c.Inspect(0, "DoNothing", new { });
-            c.Inspect(1, "DoSomething", new { a = 1, b = true });
-            c.Inspect(2, "WithOptional", new { a = 1 });
-            c.Inspect(3, "WithOptional", new { a = 1, opt = "Ipsum" });
-            c.Inspect(4, "WithParams", new { });
+            c.CheckExpectedParameterMappings(0, "DoNothing", new { });
+            c.CheckExpectedParameterMappings(1, "DoSomething", new { a = 1, b = true });
+            c.CheckExpectedParameterMappings(2, "WithOptional", new { a = 1 });
+            c.CheckExpectedParameterMappings(3, "WithOptional", new { a = 1, opt = "Ipsum" });
+            c.CheckExpectedParameterMappings(4, "WithParams", new { });
             //ToDo: TryGetSymbolParameter doesn't work for ParamArray. Test look like this
             //c.Inspect(5, "WithParams", new { arr = new[] { 1, 2, 3 } });
 
@@ -171,7 +171,7 @@ End Module
                 this.SpecialParameter = (Compiler.SemanticModel.GetSymbolInfo(specialInvocation).Symbol as IMethodSymbol).Parameters.Single();
             }
 
-            public void Inspect(int invocationIndex, string expectedMethod, object expectedArguments)
+            public void CheckExpectedParameterMappings(int invocationIndex, string expectedMethod, object expectedArguments)
             {
                 var invocation = MainInvocations[invocationIndex];
                 var method = Compiler.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
