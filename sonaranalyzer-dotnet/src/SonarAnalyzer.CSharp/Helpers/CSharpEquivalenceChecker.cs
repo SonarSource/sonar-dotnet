@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using System.Collections.Generic;
 
 namespace SonarAnalyzer.Helpers.CSharp
 {
@@ -37,4 +38,18 @@ namespace SonarAnalyzer.Helpers.CSharp
                 (n1, n2) => SyntaxFactory.AreEquivalent(n1, n2));
         }
     }
+
+    internal class CSharpSyntaxNodeEqualityComparer<T> : IEqualityComparer<T> where T : SyntaxNode
+    {
+        public bool Equals(T x, T y)
+        {
+            return CSharpEquivalenceChecker.AreEquivalent(x, y);
+        }
+
+        public int GetHashCode(T obj)
+        {
+            return obj.GetType().FullName.GetHashCode();
+        }
+    }
+
 }

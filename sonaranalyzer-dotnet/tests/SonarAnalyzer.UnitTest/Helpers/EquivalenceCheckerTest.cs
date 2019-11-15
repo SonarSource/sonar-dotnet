@@ -21,6 +21,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -37,6 +38,7 @@ namespace Test
     class TestClass
     {
         int Property {get;set;}
+
         public void Method1()
         {
             var x = Property;
@@ -52,6 +54,12 @@ namespace Test
         public void Method3()
         {
             var x = Property+2;
+            Console.Write(x);
+        }
+
+        public void Method4()
+        {
+            var x = Property-2;
             Console.Write(x);
         }
     }
@@ -94,5 +102,27 @@ namespace Test
                 this.methods.First(m => m.Identifier.ValueText == "Method3").Body.Statements);
             result.Should().BeFalse();
         }
+        
+        [TestMethod]
+        public void EqualityComparer_Node()
+        {
+            var comparer = new CSharpSyntaxNodeEqualityComparer<BlockSyntax>();
+            var method1 = this.methods.First(m => m.Identifier.ValueText == "Method1").Body;
+            var method2 = this.methods.First(m => m.Identifier.ValueText == "Method2").Body;
+            var method3 = this.methods.First(m => m.Identifier.ValueText == "Method3").Body;
+            var method4 = this.methods.First(m => m.Identifier.ValueText == "Method4").Body;
+
+            var result = comparer.Equals(method1, method2);
+            result.Should().BeTrue();
+
+            result = comparer.Equals(method1, method3);
+            result.Should().BeFalse();
+
+            var hashSet = new HashSet<BlockSyntax>(new[] { method1, method2, method3 }, comparer);
+            hashSet.Count.Should().Be(2);
+            hashSet.Contains(method1).Should().BeTrue();
+            hashSet.Contains(method4).Should().BeFalse();
+        }
+
     }
 }
