@@ -1,9 +1,10 @@
 [CmdletBinding(PositionalBinding = $false)]
 param
 (
-    [ValidateSet("14.0", "15.0")]
+    [Parameter(HelpMessage = "Version of MS Build: 14.0, 15.0, 16.0 or Current")]
+    [ValidateSet("14.0", "15.0", "16.0", "Current")]
     [string]
-    $msbuildVersion = "15.0",
+    $msbuildVersion = "Current",
 
     [Parameter(HelpMessage = "The key of the rule to test, e.g. S1234. If omitted, all rules will be tested.")]
     [ValidatePattern("^S[0-9]+")]
@@ -150,8 +151,7 @@ function Copy-FolderRecursively($From, $To, $Include, $Exclude) {
     }
 }
 
-function Measure-AnalyzerPerformance()
-{
+function Measure-AnalyzerPerformance(){
     # Process all build logs in the "output" folder
     $timings = Export-AnalyzerPerformancesFromLogs(Get-ChildItem output -filter *.log | Foreach-Object { $_.FullName })
 
@@ -196,6 +196,8 @@ try {
     . (Join-Path $PSScriptRoot "..\..\scripts\build\build-utils.ps1")
     $msBuildImportBefore14 = Get-MSBuildImportBeforePath "14.0"
     $msBuildImportBefore15 = Get-MSBuildImportBeforePath "15.0"
+    $msBuildImportBefore16 = Get-MSBuildImportBeforePath "16.0"
+    $msBuildImportBeforeCurrent = Get-MSBuildImportBeforePath "Current"
 
     Push-Location $PSScriptRoot
     Test-SonarAnalyzerDll
@@ -208,7 +210,10 @@ try {
     Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore14 -Type container -Force) -Force -Recurse
     Write-Debug "Installing the import before target file at '${msBuildImportBefore15}'"
     Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore15 -Type container -Force) -Force -Recurse
-
+    Write-Debug "Installing the import before target file at '${msBuildImportBefore16}'"
+    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore16 -Type container -Force) -Force -Recurse
+    Write-Debug "Installing the import before target file at '${msBuildImportBeforeCurrent}'"
+    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBeforeCurrent -Type container -Force) -Force -Recurse
 
     # Note: Automapper has multiple configurations that are built simultaneously and sometimes
     # it happens that a the same project is built in parallel in different configurations. The
@@ -216,6 +221,7 @@ try {
     # though there is a basic lock, because it is process-wide and not machine-wide.
     # Parallel builds are not a problem when run through the Scanner for MSBuild because it
     # redirects the outputs of the different configurations in separate folders.
+
     Build-Project "Automapper" "Automapper.sln" -CpuCount 1
     Build-Project "akka.net" "src\Akka.sln"
     Build-Project "Nancy" "src\Nancy.sln"
@@ -269,6 +275,14 @@ finally {
 
     Write-Debug "Removing the import before target file from '${msBuildImportBefore15}'"
     Remove-Item -Force (Join-Path $msBuildImportBefore15 "\SonarAnalyzer.Testing.ImportBefore.targets") `
+        -ErrorAction Ignore
+
+    Write-Debug "Removing the import before target file from '${msBuildImportBefore16}'"
+    Remove-Item -Force (Join-Path $msBuildImportBefore16 "\SonarAnalyzer.Testing.ImportBefore.targets") `
+        -ErrorAction Ignore
+
+    Write-Debug "Removing the import before target file from '${msBuildImportBeforeCurrent}'"
+    Remove-Item -Force (Join-Path $msBuildImportBeforeCurrent "\SonarAnalyzer.Testing.ImportBefore.targets") `
         -ErrorAction Ignore
 
     $scriptTimer.Stop()

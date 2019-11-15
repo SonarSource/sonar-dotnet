@@ -8,36 +8,35 @@ function Get-VsWherePath {
     return Get-ExecutablePath -name "vswhere.exe" -envVar "VSWHERE_PATH"
 }
 
-function Get-MsBuildPath([ValidateSet("14.0", "15.0")][string]$msbuildVersion) {
+function Get-MsBuildPath([ValidateSet("14.0", "15.0", "16.0", "Current")][string]$msbuildVersion) {
     if ($msbuildVersion -eq "14.0") {
         return Get-ExecutablePath -name "msbuild.exe" -envVar "MSBUILD_PATH"
     }
 
-    Write-Host "Trying to find 'msbuild.exe 15' using 'MSBUILD_PATH' environment variable"
-    $msbuild15Env = "MSBUILD_PATH"
-    $msbuild15Path = [environment]::GetEnvironmentVariable($msbuild15Env, "Process")
+    #If MSBUILD_PATH environment variable is found, the version is not checked and the value of input parameter is ignored.
+    Write-Host "Trying to find 'msbuild.exe' using 'MSBUILD_PATH' environment variable"
+    $msbuildPathEnvVar = "MSBUILD_PATH"
+    $msbuildPath = [environment]::GetEnvironmentVariable($msbuildPathEnvVar, "Process")
 
-    if (!$msbuild15Path) {
-        Write-Host "Environment variable not found"
+    if (!$msbuildPath) {
+        Write-Host "Environment variable ${msbuildEnv} not found"
         Write-Host "Trying to find path using 'vswhere.exe'"
 
-        # Sets the path to MSBuild 15 into an the MSBUILD_PATH environment variable
-        # All subsequent builds after this command will use MSBuild 15!
+        # Sets the path to MSBuild into an the MSBUILD_PATH environment variable
+        # All subsequent builds after this command will use that MSBuild!
         # Test if vswhere.exe is in your path. Download from: https://github.com/Microsoft/vswhere/releases
-        $path = Exec { & (Get-VsWherePath) -version "[15.0, 16.0)" -products * -requires Microsoft.Component.MSBuild `
-            -property installationPath } | Select-Object -First 1
-        if ($path) {
-            $msbuild15Path = Join-Path $path "MSBuild\15.0\Bin\MSBuild.exe"
-            [environment]::SetEnvironmentVariable($msbuild15Env, $msbuild15Path)
+        $msbuildPath = Exec { & (Get-VsWherePath) -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe } | Select-Object -First 1
+        if ($msbuildPath) {
+            [environment]::SetEnvironmentVariable($msbuildPathEnvVar, $msbuildPath)
         }
     }
 
-    if (Test-Path $msbuild15Path) {
-        Write-Debug "Found 'msbuild.exe 15' at '${msbuild15Path}'"
-        return $msbuild15Path
+    if (Test-Path $msbuildPath) {
+        Write-Debug "Found 'msbuild.exe' at '${msbuildPath}'"
+        return $msbuildPath
     }
 
-    throw "'msbuild.exe 15' located at '${msbuild15Path}' doesn't exist"
+    throw "'msbuild.exe' located at '${msbuildPath}' doesn't exist"
 }
 
 function Get-VsTestPath {
@@ -50,7 +49,7 @@ function Get-CodeCoveragePath {
     return Get-ExecutablePath -name "CodeCoverage.exe" -directory $codeCoverageDirectory -envVar "CODE_COVERAGE_PATH"
 }
 
-function Get-MSBuildImportBeforePath([ValidateSet("14.0", "15.0")][string]$msbuildVersion) {
+function Get-MSBuildImportBeforePath([ValidateSet("14.0", "15.0", "16.0", "Current")][string]$msbuildVersion) {
     return "$env:USERPROFILE\AppData\Local\Microsoft\MSBuild\${msbuildVersion}\Microsoft.Common.targets\ImportBefore"
 }
 
@@ -80,7 +79,7 @@ function New-NuGetPackages([string]$binPath) {
 }
 
 function Restore-Packages (
-    [Parameter(Mandatory = $true, Position = 0)][ValidateSet("14.0", "15.0")][string]$msbuildVersion,
+    [Parameter(Mandatory = $true, Position = 0)][ValidateSet("14.0", "15.0", "16.0", "Current")][string]$msbuildVersion,
     [Parameter(Mandatory = $true, Position = 1)][string]$solutionPath) {
 
     $solutionName = Split-Path $solutionPath -Leaf
@@ -100,7 +99,7 @@ function Restore-Packages (
 
 # Build
 function Invoke-MSBuild (
-    [Parameter(Mandatory = $true, Position = 0)][ValidateSet("14.0", "15.0")][string]$msbuildVersion,
+    [Parameter(Mandatory = $true, Position = 0)][ValidateSet("14.0", "15.0", "16.0", "Current")][string]$msbuildVersion,
     [Parameter(Mandatory = $true, Position = 1)][string]$solutionPath,
     [parameter(ValueFromRemainingArguments = $true)][array]$remainingArgs) {
 
@@ -142,7 +141,7 @@ function Invoke-UnitTests([string]$binPath, [bool]$failsIfNotTest) {
     Test-ExitCode "ERROR: Unit Tests execution FAILED."
 }
 
-function Invoke-IntegrationTests([ValidateSet("14.0", "15.0")][string] $msbuildVersion) {
+function Invoke-IntegrationTests([ValidateSet("14.0", "15.0", "16.0", "Current")][string] $msbuildVersion) {
     Write-Header "Running integration tests"
 
     Invoke-InLocation "its" {
