@@ -23,7 +23,7 @@ namespace Tests.Diagnostics
             //Inline version
             //Secondary@+1
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => true;    //Noncompliant  {{Enable server certificate validation on this SSL/TLS connection}}
-                                                                                                                        //                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                     ^^^^
+//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                     ^^^^
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => false;
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => certificate.Subject == "Test";
 
@@ -111,6 +111,7 @@ namespace Tests.Diagnostics
             InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary
                                                                                     //Secondary@-1
             InitAsArgumentRecursive(InvalidValidation, 1);                          //Secondary
+            InitAsOptionalArgument();
 
         }
 
@@ -152,6 +153,11 @@ namespace Tests.Diagnostics
             var cb = Callback;                                              //Secondary
             CreateRQ().ServerCertificateValidationCallback += Callback;     //Noncompliant
             CreateRQ().ServerCertificateValidationCallback += cb;           //Noncompliant
+        }
+
+        void InitAsOptionalArgument(RemoteCertificateValidationCallback Callback = null)
+        {
+            CreateRQ().ServerCertificateValidationCallback += Callback;     //Compliant, it is called without argument
         }
 
         void InitAsArgumentRecursive(RemoteCertificateValidationCallback Callback, int cnt)
@@ -394,8 +400,7 @@ namespace Tests.Diagnostics
         }
 
         #endregion
-
-
+        
         #region False negatives
 
         static RemoteCertificateValidationCallback DelegateProperty
