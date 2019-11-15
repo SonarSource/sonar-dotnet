@@ -51,8 +51,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void CheckAddHandlerSyntax(SyntaxNodeAnalysisContext c)
         {
-            var leftIdentifier = ((AssignmentExpressionSyntax)c.Node).Left.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().LastOrDefault();
-            var right = ((AssignmentExpressionSyntax)c.Node).Right;
+            var assignmentNode = (AssignmentExpressionSyntax)c.Node;
+            var leftIdentifier = assignmentNode.Left.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().LastOrDefault();
+            var right = assignmentNode.Right;
             if (leftIdentifier != null && right != null
                 && c.SemanticModel.GetSymbolInfo(leftIdentifier).Symbol is IPropertySymbol left
                 && IsValidationDelegateType(left.Type))
@@ -70,7 +71,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     methodParamLookup = methodParamLookup ?? new CSharpMethodParameterLookup((c.Node as ObjectCreationExpressionSyntax).ArgumentList, ctor);
                     if (methodParamLookup.TryGetSymbolParameter(param, out var argument))
-                    { //For Lambda expression extract location of the parentheses only to separate them from secondary location of "true"
+                    {
+                        //For Lambda expression extract location of the parentheses only to separate them from secondary location of "true"
                         var primaryLocation = ((argument.Expression is ParenthesizedLambdaExpressionSyntax Lambda) ? (SyntaxNode)Lambda.ParameterList : argument).GetLocation();
                         TryReportLocations(new InspectionContext(c), primaryLocation, argument.Expression);
                     }
@@ -82,7 +84,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var locations = ArgumentLocations(c, expression);
             if (!locations.IsEmpty)
-            {   //Report both, assignemnt as well as all implementation occurances
+            {
+                //Report both, assignemnt as well as all implementation occurances
                 c.Context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, primaryLocation, additionalLocations: locations));
             }
         }
@@ -233,7 +236,8 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var Loc = expression.GetLocation();
                 if (!lst.Any(x => x.SourceSpan.IntersectsWith(Loc.SourceSpan)))
-                {   //Add 2nd, 3rd, 4th etc //Secondary marker. If it is not marked already from direct Delegate name or direct Lambda occurance
+                {
+                    //Add 2nd, 3rd, 4th etc //Secondary marker. If it is not marked already from direct Delegate name or direct Lambda occurance
                     return lst.Concat(new[] { Loc }).ToImmutableArray();
                 }
             }
@@ -245,7 +249,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var ret = ImmutableArray.CreateBuilder<Location>();
             if (block != null)
             {
-                //ToDo: VB.NET vs. return by assign to function name
+                //TODO: VB.NET vs. return by assign to function name
                 var returnExpressions = block.DescendantNodes().OfType<ReturnStatementSyntax>().Select(x => x.Expression).ToArray();
                 if (returnExpressions.All(x => x.Kind() == SyntaxKind.TrueLiteralExpression))    //There must be at least one return, that does not return true to be compliant
                 {
