@@ -28,15 +28,25 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
+    [Rule(S2278DiagnosticId)]
+    [Rule(S5547DiagnosticId)]
     public sealed class InsecureEncryptionAlgorithm : DoNotCallInsecureSecurityAlgorithm
     {
-        internal const string DiagnosticId = "S2278";
-        private const string MessageFormat = "Use the recommended AES (Advanced Encryption Standard) instead.";
+        // S2278 was deprecated in favor of S5547. Technically, there is no difference in the C# analyzer between
+        // the 2 rules, but to be coherent with all the other languages, we still replace it with the new one
+        private const string S2278DiagnosticId = "S2278";
+        private const string S2278MessageFormat = "Use the recommended AES (Advanced Encryption Standard) instead.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        private const string S5547DiagnosticId = "S5547";
+        private const string S5547MessageFormat = "Use a strong cipher algorithm.";
+
+        private static readonly DiagnosticDescriptor S2278 =
+            DiagnosticDescriptorBuilder.GetDescriptor(S2278DiagnosticId, S2278MessageFormat, RspecStrings.ResourceManager);
+
+        private static readonly DiagnosticDescriptor S5547 =
+            DiagnosticDescriptorBuilder.GetDescriptor(S5547DiagnosticId, S5547MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(S2278, S5547);
 
         private static readonly ImmutableArray<KnownType> algorithmTypes =
             ImmutableArray.Create(

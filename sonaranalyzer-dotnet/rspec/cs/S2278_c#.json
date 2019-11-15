@@ -1,15 +1,13 @@
 {
   "title": "Neither DES (Data Encryption Standard) nor DESede (3DES) should be used",
   "type": "VULNERABILITY",
-  "status": "ready",
+  "status": "deprecated",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "20min"
   },
   "tags": [
-    "cwe",
-    "owasp-a6",
-    "sans-top25-porous"
+    
   ],
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-2278",
