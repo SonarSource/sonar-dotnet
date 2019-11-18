@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Helpers
         {
             foreach (var pair in GetAllArgumentParameterMappings())
             {
-                if (parameterName.Equals(pair.Symbol.Name))
+                if (parameterName == pair.Symbol.Name)
                 {
                     argument = pair.SyntaxNode;
                     return true;
