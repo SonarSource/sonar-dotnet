@@ -28,7 +28,6 @@ using SonarAnalyzer.UnitTest.TestFramework;
 using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     [TestClass]
@@ -91,7 +90,7 @@ End Namespace
 
         private static ObjectCreationContext CreateContext<TSyntaxNodeType>(string testInput, AnalyzerLanguage language) where TSyntaxNodeType : SyntaxNode
         {
-            var testCode = new SnippetCompiler(testInput, ignoreErrors: true, language: language);
+            var testCode = new SnippetCompiler(testInput, ignoreErrors: false, language: language);
             var objectCreationSyntaxNode = testCode.GetNodes<TSyntaxNodeType>().First();
             var context = new ObjectCreationContext(objectCreationSyntaxNode, testCode.SemanticModel);
             return context;

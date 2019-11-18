@@ -52,12 +52,8 @@ namespace SonarAnalyzer.Helpers
         {
             var argumentList = ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList;
             var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, context.SemanticModel);
-            var argumentParameterMappingForParameter = methodParameterLookup.GetAllArgumentParameterMappings()
-                .FirstOrDefault(pair => parameterName.Equals(pair.Symbol.Name));
-
-            if (argumentParameterMappingForParameter != null)
-            {
-                return context.SemanticModel.GetConstantValue(argumentParameterMappingForParameter.SyntaxNode.Expression).Value;
+            if(methodParameterLookup.TryGetArgumentSyntax(parameterName, out var argumentSyntax)) {
+                return context.SemanticModel.GetConstantValue(argumentSyntax.Expression).Value;
             }
             return null;
         }
