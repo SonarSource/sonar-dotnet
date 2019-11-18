@@ -43,7 +43,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CertificateValidationCheck_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.vb",
-                new SonarAnalyzer.Rules.VisualBasic.CertificateValidationCheck());
+                new SonarAnalyzer.Rules.VisualBasic.CertificateValidationCheck(),
+                additionalReferences: FrameworkMetadataReference.SystemNetHttp.Concat(FrameworkMetadataReference.Netstandard)
+                );
         }
     }
 }
