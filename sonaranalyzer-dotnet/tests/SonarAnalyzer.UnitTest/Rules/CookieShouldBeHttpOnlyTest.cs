@@ -49,6 +49,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                 additionalReferences: GetAdditionalReferences_NetCore());
         }
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CookiesShouldBeHttpOnly_Nancy()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeHttpOnly_Nancy.cs",
+                new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled),
+                additionalReferences: NuGetMetadataReference.Nancy());
+        }
+
         private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
             FrameworkMetadataReference.Netstandard
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion));

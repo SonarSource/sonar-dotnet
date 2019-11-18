@@ -59,6 +59,15 @@ namespace SonarAnalyzer.UnitTest.Rules
                 additionalReferences: FrameworkMetadataReference.SystemWeb);
         }
 
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CookiesShouldBeSecure_Nancy()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\CookiesShouldBeSecure_Nancy.cs",
+                new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled),
+                additionalReferences: NuGetMetadataReference.Nancy());
+        }
+
         private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
             FrameworkMetadataReference.Netstandard
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion));

@@ -20,6 +20,7 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -37,6 +38,8 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                 .WithNotConfigurable();
 
+        private ObjectCreationTracker<SyntaxKind> ObjectCreationTracker { get; set; }
+
         public CookieShouldBeSecure()
             : this(AnalyzerConfiguration.Hotspot)
         {
@@ -45,6 +48,16 @@ namespace SonarAnalyzer.Rules.CSharp
         internal CookieShouldBeSecure(IAnalyzerConfiguration analyzerConfiguration)
             : base(analyzerConfiguration)
         {
+            ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, rule);
+        }
+
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            base.Initialize(context);
+
+            ObjectCreationTracker.Track(context,
+                ObjectCreationTracker.MatchConstructor(KnownType.Nancy_Cookies_NancyCookie),
+                Conditions.ExceptWhen(ObjectCreationTracker.ArgumentIsBoolConstant("secure", true)));
         }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);

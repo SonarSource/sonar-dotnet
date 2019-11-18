@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S2092",
+"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  21,
+"endLine":  158,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S2092",
+"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  26,
+"endLine":  205,
+"endColumn":  139
+}
+}
+},
+{
+"id":  "S2092",
+"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  26,
+"endLine":  204,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S2092",
+"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  367,
+"startColumn":  38,
+"endLine":  367,
+"endColumn":  148
+}
+}
+},
+{
+"id":  "S2092",
+"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  41,
+"endLine":  81,
+"endColumn":  121
+}
+}
+},
+{
+"id":  "S2092",
+"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  54,
+"endLine":  40,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2092",
+"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  50,
+"endLine":  59,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S2092",
+"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Session\CookieBasedSessions.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  26,
+"endLine":  158,
+"endColumn":  14
+}
+}
+}
+]
+}

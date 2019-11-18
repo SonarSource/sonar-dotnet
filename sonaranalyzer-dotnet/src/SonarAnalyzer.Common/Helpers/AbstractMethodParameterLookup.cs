@@ -72,11 +72,16 @@ namespace SonarAnalyzer.Helpers
 
         public bool TryGetSymbolParameter(IParameterSymbol parameter, out TArgumentSyntax argument)
         {
-            foreach(var Pair in GetAllArgumentParameterMappings())
+            return TryGetArgumentSyntax(parameter.Name, out argument);
+        }
+
+        public bool TryGetArgumentSyntax(string parameterName, out TArgumentSyntax argument)
+        {
+            foreach (var pair in GetAllArgumentParameterMappings())
             {
-                if(Pair.Symbol == parameter)
+                if (parameterName == pair.Symbol.Name)
                 {
-                    argument = Pair.SyntaxNode;
+                    argument = pair.SyntaxNode;
                     return true;
                 }
             }
