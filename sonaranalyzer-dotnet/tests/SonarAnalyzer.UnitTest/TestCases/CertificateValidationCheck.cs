@@ -46,6 +46,11 @@ namespace Tests.Diagnostics
             //Without variable
             CreateRQ().ServerCertificateValidationCallback += InvalidValidation;    //Noncompliant
 
+            //Assignment syntax = instead of +=
+            CreateRQ().ServerCertificateValidationCallback = InvalidValidation;    //Noncompliant
+            CreateRQ().ServerCertificateValidationCallback = (sender, certificate, chain, SslPolicyErrors) => { return true; };    //Noncompliant
+                                                                                   //Secondary@-1
+
             //Do not test this one. It's .NET Standard 2.1 target only. It shoudl work since we're hunting RemoteCertificateValidationCallback and method signature
             //var ws = new System.Net.WebSockets.ClientWebSocket();
             //ws.Options.RemoteCertificateValidationCallback += InvalidValidation;
@@ -216,7 +221,8 @@ namespace Tests.Diagnostics
                             //Secondary@-7
                             //Secondary@-8
                             //Secondary@-9
-                            //Secondary@-10
+                            //Secondary@-10            
+                            //Secondary@-11
         }
 
         bool InvalidValidationAsArgument(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
