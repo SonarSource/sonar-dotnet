@@ -11,7 +11,7 @@ Namespace Tests.TestCases
         Public Sub Test() ' TODO ' Noncompliant
 '                           ^^^^
 
-		End Sub
+        End Sub
     End Class
 
     Class Todo

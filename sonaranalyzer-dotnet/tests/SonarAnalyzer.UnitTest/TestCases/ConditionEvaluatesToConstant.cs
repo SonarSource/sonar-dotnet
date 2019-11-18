@@ -788,7 +788,7 @@ namespace Tests.Diagnostics
             if (string.IsNullOrEmpty(s)) { } // Noncompliant
 
             if (string.IsNullOrWhiteSpace(s)) { } // Noncompliant
-            
+
             if (string.IsNullOrEmpty(s1)) { } // Compliant, we don't know anything about the argument
 
             if (string.IsNullOrWhiteSpace(s1)) { } // Compliant
@@ -1262,43 +1262,43 @@ namespace Tests.Diagnostics
                 }
 
                 i = null;
-                if (i == null) // Noncompliant 
+                if (i == null) // Noncompliant
                 {
 
                 }
-                if (i == true) // Noncompliant 
+                if (i == true) // Noncompliant
                 { // Secondary
 
                 }
-                if (i == false) // Noncompliant 
+                if (i == false) // Noncompliant
                 { // Secondary
 
                 }
 
                 i = true;
-                if (i == null) // Noncompliant 
+                if (i == null) // Noncompliant
                 { // Secondary
 
                 }
-                if (i == true) // Noncompliant 
+                if (i == true) // Noncompliant
                 {
 
                 }
-                if (i == false) // Noncompliant 
+                if (i == false) // Noncompliant
                 {  // Secondary
 
                 }
 
                 i = false;
-                if (i == null) // Noncompliant 
+                if (i == null) // Noncompliant
                 { // Secondary
 
                 }
-                if (i == true) // Noncompliant 
+                if (i == true) // Noncompliant
                 { // Secondary
 
                 }
-                if (i == false) // Noncompliant 
+                if (i == false) // Noncompliant
                 {
 
                 }
@@ -1779,7 +1779,7 @@ namespace Tests.Diagnostics
     }
 
     public static void Compliant6(S sObj)
-    {     
+    {
       if (sObj?.str?.Length > 2)
       {
         Console.WriteLine("a");
@@ -1788,7 +1788,7 @@ namespace Tests.Diagnostics
 
     public static void NonCompliant6()
     {
-      S sObj = null; 
+      S sObj = null;
       if (sObj?.str?.Length > 2) // Noncompliant
       { // Secondary
         Console.WriteLine("a");
@@ -1875,11 +1875,11 @@ namespace Tests.Diagnostics
   }
 
   class Program
-  { 
+  {
     public static string CompliantMethod4(string parameter)
     {
       var useParameter = parameter ?? "non-empty";
-      if (useParameter == null || useParameter=="") // Noncompliant 
+      if (useParameter == null || useParameter=="") // Noncompliant
         return "non-empty"; // we don't know if this going to be excuted or not
 
       return "empty";
@@ -1889,7 +1889,7 @@ namespace Tests.Diagnostics
     {
       var useParameter = parameter ?? "non-empty";
       if (!string.IsNullOrEmpty(useParameter))
-      { 
+      {
          return "non-empty";
       }
       else
@@ -2025,7 +2025,7 @@ namespace Tests.Diagnostics
             else if (condition2
                 && condition1
                 && !condition3) // Noncompliant
-            { 
+            {
                 _test3 = true;
             }
             else
@@ -2274,7 +2274,7 @@ namespace Tests.Diagnostics
         public IEnumerable<int> Repro_1295()
         {
             generate = true;
-            while (generate) // OK - 'generate' field can potentially be changed inside the loop where this generator is used 
+            while (generate) // OK - 'generate' field can potentially be changed inside the loop where this generator is used
             {
                 yield return 0;
             }
@@ -2444,7 +2444,7 @@ namespace Tests.Diagnostics
         public void Method2(string s)
         {
 
-            if (string.IsNullOrEmpty(s)) 
+            if (string.IsNullOrEmpty(s))
             {
             }
 
@@ -2573,13 +2573,13 @@ namespace Tests.Diagnostics
             string s4 = " ";
 
             if (string.IsNullOrWhiteSpace(s1)) // Noncompliant
-            {       
-            }
-            
-
-            if (string.IsNullOrWhiteSpace(s2)) // Noncompliant 
             {
-                if (s2 == "a") // Noncompliant 
+            }
+
+
+            if (string.IsNullOrWhiteSpace(s2)) // Noncompliant
+            {
+                if (s2 == "a") // Noncompliant
                 { // Secondary
 
                 }

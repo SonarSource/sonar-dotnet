@@ -138,7 +138,7 @@ namespace SonarAnalyzer.UnitTest.Performance
         private static readonly Type SonarDiagnosticAnalyzerType = typeof(SonarDiagnosticAnalyzer);
 
         private bool IsSonarAnalyzer(Type type)
-        { 
+        {
             return (!type.IsAbstract && IsDerivedFromSonarDiagnosticAnalyzer(type));
 
             bool IsDerivedFromSonarDiagnosticAnalyzer(Type typeToCheck)

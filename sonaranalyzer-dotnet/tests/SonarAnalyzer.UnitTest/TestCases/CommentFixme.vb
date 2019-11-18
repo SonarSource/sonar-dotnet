@@ -11,7 +11,7 @@ Namespace Tests.TestCases
         Public Sub Test() ' FIXME
 '                           ^^^^^
 
-		End Sub
+        End Sub
     End Class
 
     Class FixMe

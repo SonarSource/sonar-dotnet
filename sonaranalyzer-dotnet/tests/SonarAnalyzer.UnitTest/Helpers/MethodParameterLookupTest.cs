@@ -97,7 +97,7 @@ namespace Test
 
             c.MainInvocations.Length.Should().Be(8); //Self-Test of this test. If new Invocation is added to the Main(), this number has to be updated and test should be written for that case.
         }
-        
+
         [TestMethod]
         public void TestMethodParameterLookup_VB()
         {

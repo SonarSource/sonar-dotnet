@@ -15,7 +15,7 @@ namespace Tests.Diagnostics
             CreateRQ().ServerCertificateValidationCallback += FalseNegativeValidatorWithProperty;
             CreateRQ().ServerCertificateValidationCallback += DelegateProperty;
             //Values from overriden operators are not inspected at all
-            CreateRQ().ServerCertificateValidationCallback += new CertificateValidationChecks() + 42; //Operator + is overriden to return delegate. 
+            CreateRQ().ServerCertificateValidationCallback += new CertificateValidationChecks() + 42; //Operator + is overriden to return delegate.
         }
 
         void DirectAddHandlers()
@@ -72,7 +72,7 @@ namespace Tests.Diagnostics
         void GenericHandlerSignature()
         {
             var httpHandler = new System.Net.Http.HttpClientHandler();          //This is not RemoteCertificateValidationCallback delegate type, but Func<...>
-            httpHandler.ServerCertificateCustomValidationCallback += InvalidValidation;            //Noncompliant          
+            httpHandler.ServerCertificateCustomValidationCallback += InvalidValidation;            //Noncompliant
 
             //Generic signature check without RemoteCertificateValidationCallback
             var ShouldTrigger = new RelatedSignatureType();
@@ -115,7 +115,7 @@ namespace Tests.Diagnostics
             InitAsOptionalArgument();
 
             //Call in nested class from root (this)
-            new InnerAssignemntClass().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary           
+            new InnerAssignemntClass().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary
         }
 
         void DelegateReturnedByFunction()
@@ -216,7 +216,7 @@ namespace Tests.Diagnostics
                             //Secondary@-7
                             //Secondary@-8
                             //Secondary@-9
-                            //Secondary@-10            
+                            //Secondary@-10
         }
 
         bool InvalidValidationAsArgument(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
@@ -281,7 +281,7 @@ namespace Tests.Diagnostics
             catch (Exception ex)
             {
                 System.Diagnostics.Trace.WriteLine(ex.Message);
-                return true; //Secondary 
+                return true; //Secondary
             }
         }
 
@@ -403,7 +403,7 @@ namespace Tests.Diagnostics
         }
 
         #endregion
-        
+
         #region False negatives
 
         static RemoteCertificateValidationCallback DelegateProperty
@@ -476,7 +476,7 @@ namespace Tests.Diagnostics
             public void Init(RemoteCertificateValidationCallback callback)
             {
                 //Assignemnt from sibling class in nested tree
-                new InnerAssignemntClass().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary           
+                new InnerAssignemntClass().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary
             }
 
         }
