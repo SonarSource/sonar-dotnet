@@ -30,12 +30,21 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void CertificateValidationCheck()
+        public void CertificateValidationCheck_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.cs",
                 new CertificateValidationCheck(),
                 additionalReferences : FrameworkMetadataReference.SystemNetHttp.Concat(FrameworkMetadataReference.Netstandard)
                 );
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void CertificateValidationCheck_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\CertificateValidationCheck.vb",
+                new SonarAnalyzer.Rules.VisualBasic.CertificateValidationCheck());
+        }
     }
 }
+
