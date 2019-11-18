@@ -154,8 +154,7 @@ namespace Tests.Diagnostics
         }
 
         #region Helpers
-
-
+        
         void InitAsArgument(RemoteCertificateValidationCallback Callback)   //This double-assigment will fire the seconday for each occurence twice
         {
             var cb = Callback;                                              //Secondary
@@ -175,8 +174,7 @@ namespace Tests.Diagnostics
             else
                 InitAsArgumentRecursive(Callback, cnt - 1);
         }
-
-
+        
         void InitAsArgumentRecursiveNoInvocation(RemoteCertificateValidationCallback Callback, int cnt)
         {
             if (cnt == 0)
@@ -188,8 +186,7 @@ namespace Tests.Diagnostics
                 InitAsArgumentRecursiveNoInvocation(Callback, cnt - 1);
             }
         }
-
-
+        
         static HttpWebRequest CreateRQ()
         {
             return (HttpWebRequest)System.Net.HttpWebRequest.Create("http://localhost");
@@ -242,11 +239,11 @@ namespace Tests.Diagnostics
         {
             if (certificate.Subject == "Test")
             {
-                return true;
+                return true;    //Compliant, checks were done
             }
             else
             {
-                return false; //Compliant, checks were done
+                return false; 
             }
         }
 
@@ -255,8 +252,7 @@ namespace Tests.Diagnostics
         {
             return certificate.Subject == "Test";
         }
-
-
+        
         bool CompliantValidationNegative(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             if (certificate.Subject != "Test")
@@ -290,8 +286,7 @@ namespace Tests.Diagnostics
                 return true; //Secondary
             }
         }
-
-
+        
         bool AdvInvalidWithTryObstacles(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             try
@@ -334,8 +329,7 @@ namespace Tests.Diagnostics
 
             return true; //Secondary
         }
-
-
+        
         bool AdvCompliantWithObstacles(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             Console.WriteLine("Log something");
@@ -347,8 +341,7 @@ namespace Tests.Diagnostics
         #endregion
 
         #region Find Validators
-
-
+        
         static RemoteCertificateValidationCallback FindInvalid()
         {
             return InvalidValidation;                                      //Secondary
@@ -370,8 +363,7 @@ namespace Tests.Diagnostics
                 return (sender, certificate, chain, SslPolicyErrors) => true;   //Secondary
             }
         }
-
-
+        
         static RemoteCertificateValidationCallback FindCompliant(bool Compliant)    //At least one path returns compliant => there is a logic and it is considered compliant
         {
             if (Compliant)
