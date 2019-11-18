@@ -71,6 +71,16 @@ namespace SonarAnalyzer.Helpers
                     constant == value;
             };
 
+        internal override object ConstArgumentForParameter(InvocationContext context, string parameterName)
+        {
+            var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
+            if (CSharpSyntaxHelper.ArgumentValueForParameter(context.SemanticModel, parameterName, argumentList) is ExpressionSyntax valueSyntax)
+            {
+                return context.SemanticModel.GetConstantValue(valueSyntax).Value;
+            }
+            return null;
+        }
+
         #region Syntax-level checking methods
 
         public override InvocationCondition MatchProperty(MemberDescriptor member) =>

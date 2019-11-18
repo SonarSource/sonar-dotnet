@@ -81,6 +81,13 @@ namespace SonarAnalyzer.Helpers
 
         public abstract InvocationCondition IsTypeOfExpression();
 
+        internal abstract object ConstArgumentForParameter(InvocationContext context, string parameterName);
+
+        internal InvocationCondition ArgumentIsBoolConstant(string parameterName, bool expectedValue) =>
+            (context) =>
+                ConstArgumentForParameter(context, parameterName) is bool boolValue &&
+                boolValue == expectedValue;
+
         public InvocationCondition MatchMethod(params MemberDescriptor[] methods) =>
             (context) =>
                 MemberDescriptor.MatchesAny(context.MethodName, context.MethodSymbol, true, CaseInsensitiveComparison, methods);

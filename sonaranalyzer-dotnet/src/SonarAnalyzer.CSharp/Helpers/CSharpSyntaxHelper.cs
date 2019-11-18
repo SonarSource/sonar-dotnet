@@ -423,5 +423,15 @@ namespace SonarAnalyzer.Helpers
                     SyntaxFactory.IdentifierName(a),
                     SyntaxFactory.IdentifierName(b)),
                 SyntaxFactory.IdentifierName(c));
+
+        public static ExpressionSyntax ArgumentValueForParameter(SemanticModel semanticModel, string parameterName, ArgumentListSyntax argumentList)
+        {
+            var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, semanticModel);
+            if (methodParameterLookup.TryGetArgumentSyntax(parameterName, out var argumentSyntax))
+            {
+                return argumentSyntax.Expression;
+            }
+            return null;
+        }
     }
 }

@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -51,9 +50,9 @@ namespace SonarAnalyzer.Helpers
         internal override object ConstArgumentForParameter(ObjectCreationContext context, string parameterName)
         {
             var argumentList = ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList;
-            var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, context.SemanticModel);
-            if(methodParameterLookup.TryGetArgumentSyntax(parameterName, out var argumentSyntax)) {
-                return context.SemanticModel.GetConstantValue(argumentSyntax.Expression).Value;
+            if (CSharpSyntaxHelper.ArgumentValueForParameter(context.SemanticModel, parameterName, argumentList) is ExpressionSyntax valueSyntax)
+            {
+                return context.SemanticModel.GetConstantValue(valueSyntax).Value;
             }
             return null;
         }
