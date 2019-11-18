@@ -42,14 +42,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            //Handling of += delegate syntax
-            context.RegisterSyntaxNodeActionInNonGenerated(c => CheckAddHandlerSyntax(c), SyntaxKind.AddAssignmentExpression);
+            //Handling of += syntax
+            context.RegisterSyntaxNodeActionInNonGenerated(c => CheckAssignmentSyntax(c), SyntaxKind.AddAssignmentExpression);
+
+            //Handling of = syntax
+            context.RegisterSyntaxNodeActionInNonGenerated(c => CheckAssignmentSyntax(c), SyntaxKind.SimpleAssignmentExpression);
 
             //Handling of constructor parameter syntax (SslStream)
             context.RegisterSyntaxNodeActionInNonGenerated(c => CheckConstructorParameterSyntax(c), SyntaxKind.ObjectCreationExpression);
         }
 
-        private void CheckAddHandlerSyntax(SyntaxNodeAnalysisContext c)
+        private void CheckAssignmentSyntax(SyntaxNodeAnalysisContext c)
         {
             var assignmentNode = (AssignmentExpressionSyntax)c.Node;
             var leftIdentifier = assignmentNode.Left.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().LastOrDefault();
