@@ -32,10 +32,8 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class CertificateValidationCheck : SonarDiagnosticAnalyzer
+    public sealed class CertificateValidationCheck : CertificateValidationCheckBase
     {
-        internal const string DiagnosticId = "S4830";
-        private const string MessageFormat = "Enable server certificate validation on this SSL/TLS connection";
 
         private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
