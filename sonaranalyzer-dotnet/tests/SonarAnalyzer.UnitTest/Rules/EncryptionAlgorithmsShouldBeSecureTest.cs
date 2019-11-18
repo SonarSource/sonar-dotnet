@@ -37,10 +37,28 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void EncryptionAlgorithmsShouldBeSecure__CS_NetStandard21()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.cs",
+                new CSharp.EncryptionAlgorithmsShouldBeSecure(),
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void EncryptionAlgorithmsShouldBeSecure_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.vb",
                 new VisualBasic.EncryptionAlgorithmsShouldBeSecure());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void EncryptionAlgorithmsShouldBeSecure__VB_NetStandard21()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.vb",
+                new VisualBasic.EncryptionAlgorithmsShouldBeSecure(),
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
     }
 }
