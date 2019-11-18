@@ -20,6 +20,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CSharp = SonarAnalyzer.Rules.CSharp;
+using VisualBasic = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,6 +33,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.cs",
                 new CSharp.EncryptionAlgorithmsShouldBeSecure());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void EncryptionAlgorithmsShouldBeSecure_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.vb",
+                new VisualBasic.EncryptionAlgorithmsShouldBeSecure());
         }
     }
 }

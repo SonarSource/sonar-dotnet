@@ -1,0 +1,59 @@
+<p>To perform secure cryptography, operation modes and padding scheme are essentials and should be used correctly according to the encryption
+algorithm:</p>
+<ul>
+  <li> For block cipher encryption algorithms (like AES, blowfish ...), the GCM (Galois Counter Mode) mode, witch <a
+  href="https://en.wikipedia.org/wiki/Galois/Counter_Mode#Mathematical_basis">works internally</a> with zero/no padding scheme, is recommended. At the
+  opposite, these modes and/or schemes are highly discouraged:
+    <ul>
+      <li> Electronic Codebook (ECB) mode is vulnerable because it doesn't provide serious message confidentiality: under a given key any given
+      plaintext block always gets encrypted to the same ciphertext block. </li>
+      <li> Cipher Block Chaining (CBC) with PKCS#5 padding (or PKCS#7) is susceptible to padding oracle attacks. </li>
+    </ul> </li>
+  <li> RSA encryption algorithm should be used with the recommended padding scheme (OAEP) </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<p><a href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.aesmanaged?view=netframework-4.8">AesManaged</a> object with
+insecure mode:</p>
+<pre>
+Dim aes4 = New AesManaged With {
+    .KeySize = 128,
+    .BlockSize = 128,
+    .Mode = CipherMode.ECB, ' Noncompliant
+    .Padding = PaddingMode.PKCS7
+}
+</pre>
+<p><a
+href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.rsacryptoserviceprovider?view=netframework-4.8">RSACryptoServiceProvider</a>
+object without OAEP padding:</p>
+<pre>
+Dim RSA1 = New RSACryptoServiceProvider()
+Dim encryptedData = RSA1.Encrypt(dataToEncrypt, False) ' Noncompliant: OAEP Padding is not used (second parameter set to false)
+</pre>
+<h2>Compliant Solution</h2>
+<p>AES with GCM mode with <a href="https://www.bouncycastle.org/">bouncycastle</a> library: </p>
+<pre>
+Dim blockCipher As GcmBlockCipher = New GcmBlockCipher(New AesFastEngine()) ' Compliant
+blockCipher.Init(True, New AeadParameters(New KeyParameter(secretKey), 128, iv, Nothing))
+</pre>
+<p>AES with GCM mode with <a href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.aesgcm?view=netcore-3.0">AesGcm</a>
+object: </p>
+<pre>
+Dim aesGcm = New AesGcm(key) ' Compliant
+</pre>
+<p>RSA with OAEP padding with <a
+href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.rsacryptoserviceprovider?view=netframework-4.8">RSACryptoServiceProvider</a>
+object: </p>
+<pre>
+Dim RSA2 = New RSACryptoServiceProvider()
+Dim encryptedData = RSA2.Encrypt(dataToEncrypt, True) ' Compliant: OAEP Padding is used (second parameter set to true)
+</pre>
+<p> </p>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A6-Security_Misconfiguration">OWASP Top 10 2017 Category A6</a> - Security
+  Misconfiguration </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/327.html">MITRE, CWE-327</a> - Use of a Broken or Risky Cryptographic Algorithm </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/VwAZAg">CERT, MSC61-J.</a> - Do not use insecure or weak cryptographic algorithms </li>
+  <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
+</ul>
+

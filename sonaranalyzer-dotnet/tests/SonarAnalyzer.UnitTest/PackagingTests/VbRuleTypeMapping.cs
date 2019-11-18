@@ -5540,7 +5540,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
                 //["5539"],
                 //["5540"],
                 //["5541"],
-                //["5542"],
+                ["5542"] = "VULNERABILITY",
                 //["5543"],
                 //["5544"],
                 //["5545"],
