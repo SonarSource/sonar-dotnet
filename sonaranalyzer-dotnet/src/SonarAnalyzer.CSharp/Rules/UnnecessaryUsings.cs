@@ -55,10 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var globalUsingDirectives = simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)).ToImmutableHashSet();
 
                     var visitor = new CSharpRemovableUsingWalker(c, globalUsingDirectives, null);
-                    foreach (var member in compilationUnit.Members)
-                    {
-                        visitor.SafeVisit(member);
-                    }
+                    VisitContent(visitor, compilationUnit.Members, c.Node.DescendantTrivia());
                     foreach (var attribute in compilationUnit.AttributeLists)
                     {
                         visitor.SafeVisit(attribute);
@@ -68,6 +65,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.CompilationUnit);
 
+        }
+
+        private static void VisitContent(CSharpRemovableUsingWalker visitor, SyntaxList<MemberDeclarationSyntax> members, IEnumerable<SyntaxTrivia> trivias)
+        {
+            var comments = trivias.Where(trivia => trivia.Kind() == SyntaxKind.SingleLineDocumentationCommentTrivia ||
+                trivia.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia);
+
+            foreach (var member in members)
+            {
+                visitor.SafeVisit(member);
+            }
+            foreach (var comment in comments)
+            {
+                if (comment.HasStructure)
+                {
+                    visitor.SafeVisit(comment.GetStructure());
+                }
+            }
         }
 
         private static void CheckUnnecessaryUsings(SyntaxNodeAnalysisContext context, IEnumerable<UsingDirectiveSyntax> usingDirectives, HashSet<INamespaceSymbol> necessaryNamespaces)
@@ -107,10 +122,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 // We visit the namespace declaration with the updated set of parent 'usings', this is needed in case of nested namespaces
                 var visitingNamespace = context.SemanticModel.GetSymbolInfo(node.Name).Symbol as INamespaceSymbol;
                 var visitor = new CSharpRemovableUsingWalker(context, newUsingDirectives.ToImmutableHashSet(), visitingNamespace);
-                foreach (var member in node.Members)
-                {
-                    visitor.SafeVisit(member);
-                }
+
+                VisitContent(visitor, node.Members, node.DescendantTrivia());
 
                 CheckUnnecessaryUsings(context, simpleNamespaces, visitor.necessaryNamespaces);
 
