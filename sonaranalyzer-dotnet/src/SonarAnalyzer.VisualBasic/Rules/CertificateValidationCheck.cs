@@ -33,9 +33,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class CertificateValidationCheck : CertificateValidationCheckBase<MethodBlockSyntax, ArgumentSyntax, ExpressionSyntax>
+    public sealed class CertificateValidationCheck : CertificateValidationCheckBase<MethodBlockSyntax, ArgumentSyntax, ExpressionSyntax, IdentifierNameSyntax, AssignmentStatementSyntax, InvocationExpressionSyntax, ParameterSyntax, VariableDeclaratorSyntax, LambdaExpressionSyntax>
     {
-        internal override ResourceManager RspecResouceManager => RspecStrings.ResourceManager;
+        public CertificateValidationCheck() : base(RspecStrings.ResourceManager) { }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -49,6 +49,120 @@ namespace SonarAnalyzer.Rules.VisualBasic
         internal override AbstractMethodParameterLookup<ArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method)
         {
             throw new System.NotImplementedException();
+        }
+
+        protected override Location ArgumentLocation(ArgumentSyntax argument)
+        {
+            //For Lambda expression extract location of the parentheses only to separate them from secondary location of "true"
+            var expression = argument.GetExpression();
+            if (expression == null)
+            {
+                return argument.GetLocation();
+            }
+            return ((expression is LambdaExpressionSyntax lambda) ? (SyntaxNode)lambda.SubOrFunctionHeader.ParameterList : argument).GetLocation();
+        }
+
+        protected override ExpressionSyntax ArgumentExpression(ArgumentSyntax argument)
+        {
+            return argument.GetExpression();
+        }
+
+        protected override void SplitAssignment(AssignmentStatementSyntax assignment, out IdentifierNameSyntax leftIdentifier, out ExpressionSyntax right)
+        {
+            leftIdentifier = assignment.Left.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().LastOrDefault();
+            right = assignment.Right;
+        }
+
+        protected override IEqualityComparer<ExpressionSyntax> CreateNodeEqualityComparer()
+        {
+            return new Helpers.VisualBasic.VisualBasicSyntaxNodeEqualityComparer<ExpressionSyntax>();
+        }
+
+
+
+        protected override ExpressionSyntax[] FindReturnExpressions(SyntaxNode block)
+        {
+            //FIXME: VB.NET vs. return by assign to function name
+            //Najit spravnou variable
+            //Najit vsechny assignmenty, ktere maji Exit Function nebo jen ta posledni
+            //Loops/For
+
+            return block.DescendantNodes().OfType<ReturnStatementSyntax>().Select(x => x.Expression).ToArray();
+        }
+
+        protected override bool IsTrueLiteral(ExpressionSyntax expression)
+        {
+            return expression.Kind() == SyntaxKind.TrueLiteralExpression;
+        }
+        
+        protected override string IdentifierText(SyntaxNode node)
+        {
+            switch (node)
+            {
+                case IdentifierNameSyntax ident:
+                    return ident.Identifier.ValueText;
+                case ParameterSyntax param:
+                    return param.Identifier.Identifier.ValueText;
+                case VariableDeclaratorSyntax variable:
+                    return variable.Names.Count == 1 ? variable.Names[0].Identifier.ValueText : null;   //FIXME: Revize, jestli je ta synatxe na Dim a, b, c As Integer, takto nebude fungovat spravne
+                default:
+                    return null;
+            }
+        }
+
+        protected override ExpressionSyntax VariableInitializer(VariableDeclaratorSyntax variable)
+        {
+            return variable.Initializer?.Value;
+        }
+
+        //protected override SyntaxNode InvocationArgumentList(InvocationExpressionSyntax invocation)
+        //{
+        //    return invocation.ArgumentList;
+        //}
+
+        protected override ImmutableArray<Location> LambdaLocations(LambdaExpressionSyntax lambda)
+        {
+            System.Diagnostics.Debugger.Break();
+
+            //FIXME: Doresit
+            
+
+            //if ((lambda.Body as LiteralExpressionSyntax)?.Kind() == SyntaxKind.TrueLiteralExpression)
+            //{
+            //    return new[] { lambda.Body.GetLocation() }.ToImmutableArray();   //Code was found guilty for lambda (...) => true
+            //}
+            //else if (lambda.Body is BlockSyntax block)
+            //{
+            //    return BlockLocations(block).ToImmutableArray();
+            //}
+            //else
+            //{
+                return ImmutableArray<Location>.Empty;
+            //}
+        }
+
+        protected override ImmutableArray<SyntaxNode> LocalVariableScopeStatements(VariableDeclaratorSyntax variable)
+        {
+            //FIXME: Top declaration a pak jeho parent
+
+            throw new System.NotImplementedException();
+
+        }
+
+        protected override SyntaxNode FindRootClassOrModule(SyntaxNode node)
+        {
+            SyntaxNode current, candidate;
+            current = node.FirstAncestorOrSelf<ModuleBlockSyntax>();
+            if (current != null)
+            {
+                return current; //Modules can't be nested. If there's one, it's the Root
+            }
+            current = node.FirstAncestorOrSelf<ClassBlockSyntax>();
+            while (current != null && (candidate = current.Parent?.FirstAncestorOrSelf<ClassBlockSyntax>()) != null)  //Search for parent of nested class
+            {
+                current = candidate;
+            }
+            return current;
         }
 
     }
