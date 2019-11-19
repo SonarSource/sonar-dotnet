@@ -21,6 +21,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SonarAnalyzer.Helpers.CSharp
 {
@@ -39,9 +40,15 @@ namespace SonarAnalyzer.Helpers.CSharp
         }
     }
 
-    internal class CSharpSyntaxNodeEqualityComparer<T> : IEqualityComparer<T> where T : SyntaxNode
+    internal class CSharpSyntaxNodeEqualityComparer<T> : IEqualityComparer<T>, IEqualityComparer<SyntaxList<T>>
+        where T : SyntaxNode
     {
         public bool Equals(T x, T y)
+        {
+            return CSharpEquivalenceChecker.AreEquivalent(x, y);
+        }
+
+        public bool Equals(SyntaxList<T> x, SyntaxList<T> y)
         {
             return CSharpEquivalenceChecker.AreEquivalent(x, y);
         }
@@ -49,6 +56,11 @@ namespace SonarAnalyzer.Helpers.CSharp
         public int GetHashCode(T obj)
         {
             return obj.GetType().FullName.GetHashCode();
+        }
+
+        public int GetHashCode(SyntaxList<T> obj)
+        {
+            return (obj.Count + string.Join(", ", obj.Select(x => x.GetType().FullName).Distinct())).GetHashCode();
         }
     }
 
