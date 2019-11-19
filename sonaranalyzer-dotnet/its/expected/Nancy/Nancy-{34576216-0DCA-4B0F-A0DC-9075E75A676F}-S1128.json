@@ -4,19 +4,6 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironment.cs",
-"region":  {
-"startLine":  3,
-"startColumn":  5,
-"endLine":  3,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S1128",
-"message":  "Remove this unnecessary 'using'.",
-"location":  {
 "uri":  "sources\Nancy\src\Nancy\DefaultNancyContextFactory.cs",
 "region":  {
 "startLine":  3,
@@ -62,19 +49,6 @@
 "startColumn":  5,
 "endLine":  4,
 "endColumn":  32
-}
-}
-},
-{
-"id":  "S1128",
-"message":  "Remove this unnecessary 'using'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
-"region":  {
-"startLine":  6,
-"startColumn":  5,
-"endLine":  6,
-"endColumn":  29
 }
 }
 },
@@ -205,19 +179,6 @@
 "startColumn":  5,
 "endLine":  8,
 "endColumn":  27
-}
-}
-},
-{
-"id":  "S1128",
-"message":  "Remove this unnecessary 'using'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewRenderer.cs",
-"region":  {
-"startLine":  3,
-"startColumn":  5,
-"endLine":  3,
-"endColumn":  21
 }
 }
 }
