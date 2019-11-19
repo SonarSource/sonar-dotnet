@@ -29,27 +29,45 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class CertificateValidationCheckBase<TMethodSyntax, TArgumentSyntax, TExpressionSyntax> : SonarDiagnosticAnalyzer
+    public abstract class CertificateValidationCheckBase<TMethodSyntax, TArgumentSyntax, TExpressionSyntax, TIdentifierNameSyntax, TAssignmentExpressionSyntax, TInvocationExpressionSyntax, TParameterSyntax, TVariableDeclaratorSyntax, TLambdaSyntax> : SonarDiagnosticAnalyzer
         where TMethodSyntax : SyntaxNode
         where TArgumentSyntax : SyntaxNode
         where TExpressionSyntax : SyntaxNode
+        where TIdentifierNameSyntax : SyntaxNode
+        where TAssignmentExpressionSyntax : SyntaxNode
+        where TInvocationExpressionSyntax : SyntaxNode
+        where TParameterSyntax : SyntaxNode
+        where TVariableDeclaratorSyntax : SyntaxNode
+        where TLambdaSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S4830";
         protected const string MessageFormat = "Enable server certificate validation on this SSL/TLS connection";
-
-        private readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecRes);
+        private readonly DiagnosticDescriptor rule;
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-
-
+       
         internal abstract AbstractMethodParameterLookup<TArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method);
-        internal abstract System.Resources.ResourceManager RspecResouceManager { get; }
+        protected abstract Location ArgumentLocation(TArgumentSyntax argument);
+        protected abstract TExpressionSyntax ArgumentExpression(TArgumentSyntax argument);
+        protected abstract void SplitAssignment(TAssignmentExpressionSyntax assignment, out TIdentifierNameSyntax leftIdentifier, out TExpressionSyntax right);
+        protected abstract IEqualityComparer<TExpressionSyntax> CreateNodeEqualityComparer();
+        protected abstract SyntaxNode FindRootClassOrModule(SyntaxNode node);
+        protected abstract TExpressionSyntax[] FindReturnExpressions(SyntaxNode block);
+        protected abstract bool IsTrueLiteral(TExpressionSyntax expression);
+        protected abstract string IdentifierText(SyntaxNode node);
+        protected abstract TExpressionSyntax VariableInitializer(TVariableDeclaratorSyntax variable);
+        protected abstract ImmutableArray<Location> LambdaLocations(TLambdaSyntax lambda);
+        protected abstract ImmutableArray<SyntaxNode> LocalVariableScopeStatements(TVariableDeclaratorSyntax variable);
+
+        protected CertificateValidationCheckBase(System.Resources.ResourceManager rspecResources)
+        {
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+        }
 
         protected void CheckAssignmentSyntax(SyntaxNodeAnalysisContext c)
         {
-            var assignmentNode = (AssignmentExpressionSyntax)c.Node;
-            var leftIdentifier = assignmentNode.Left.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().LastOrDefault();
-            var right = assignmentNode.Right;
+            SplitAssignment((TAssignmentExpressionSyntax)c.Node, out var leftIdentifier, out var right);
+            //var leftIdentifier = assignmentNode.Left.DescendantNodesAndSelf().OfType<TIdentifierNameSyntax>().LastOrDefault();
+            //var right = assignmentNode.Right;
             if (leftIdentifier != null && right != null
                 && c.SemanticModel.GetSymbolInfo(leftIdentifier).Symbol is IPropertySymbol left
                 && IsValidationDelegateType(left.Type))
@@ -68,9 +86,7 @@ namespace SonarAnalyzer.Rules
                     methodParamLookup = methodParamLookup ?? CreateParameterLookup(c.Node, ctor);
                     if (methodParamLookup.TryGetSymbolParameter(param, out var argument))
                     {
-                        //For Lambda expression extract location of the parentheses only to separate them from secondary location of "true"
-                        var primaryLocation = ((argument.Expression is ParenthesizedLambdaExpressionSyntax Lambda) ? (SyntaxNode)Lambda.ParameterList : argument).GetLocation();
-                        TryReportLocations(new InspectionContext(c), primaryLocation, argument.Expression);
+                        TryReportLocations(new InspectionContext(c), ArgumentLocation(argument), ArgumentExpression(argument));
                     }
                 }
             }
@@ -107,186 +123,166 @@ namespace SonarAnalyzer.Rules
             return false;
         }
 
-        private static ImmutableArray<Location> ArgumentLocations(InspectionContext c, TExpressionSyntax expression)
+        protected ImmutableArray<Location> ArgumentLocations(InspectionContext c, TExpressionSyntax expression)
         {
-            //FIXME: REMOVE DEBUG
-            return new[] { expression.GetLocation() }.ToImmutableArray();
-
-
-
-            //    var ret = ImmutableArray.CreateBuilder<Location>();
-            //    switch (expression)
-            //    {
-            //        case IdentifierNameSyntax identifier:
-            //            var identSymbol = c.Context.SemanticModel.GetSymbolInfo(identifier).Symbol;
-            //            if (identSymbol != null && identSymbol.DeclaringSyntaxReferences.Length == 1)
-            //            {
-            //                ret.AddRange(IdentifierLocations(c, identSymbol.DeclaringSyntaxReferences.Single().GetSyntax()));
-            //            }
-            //            break;
-            //        case ParenthesizedLambdaExpressionSyntax lambda:
-            //            if ((lambda.Body as LiteralExpressionSyntax)?.Kind() == SyntaxKind.TrueLiteralExpression)
-            //            {
-            //                ret.Add(lambda.Body.GetLocation());   //Code was found guilty for lambda (...) => true
-            //            }
-            //            else if (lambda.Body is BlockSyntax block)
-            //            {
-            //                ret.AddRange(BlockLocations(block));
-            //            }
-            //            break;
-            //        case InvocationExpressionSyntax invocation:
-            //            var invSymbol = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
-            //            if (invSymbol != null && invSymbol.DeclaringSyntaxReferences.Length == 1 && invSymbol.DeclaringSyntaxReferences.Single().GetSyntax() is MethodDeclarationSyntax syntax)
-            //            {
-            //                c.VisitedMethods.Add(syntax);
-            //                ret.AddRange(InvocationLocations(c, syntax));
-            //            }
-            //            break;
-            //    }
-            //    return ret.ToImmutableArray();
+            var ret = ImmutableArray.CreateBuilder<Location>();
+            switch (expression)
+            {
+                case TIdentifierNameSyntax identifier:
+                    var identSymbol = c.Context.SemanticModel.GetSymbolInfo(identifier).Symbol;
+                    if (identSymbol != null && identSymbol.DeclaringSyntaxReferences.Length == 1)
+                    {
+                        ret.AddRange(IdentifierLocations(c, identSymbol.DeclaringSyntaxReferences.Single().GetSyntax()));
+                    }
+                    break;
+                case TLambdaSyntax lambda:
+                    ret.AddRange(LambdaLocations(lambda));
+                    break;
+                case TInvocationExpressionSyntax invocation:
+                    var invSymbol = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
+                    if (invSymbol != null && invSymbol.DeclaringSyntaxReferences.Length == 1 && invSymbol.DeclaringSyntaxReferences.Single().GetSyntax() is TMethodSyntax syntax)
+                    {
+                        c.VisitedMethods.Add(syntax);
+                        ret.AddRange(InvocationLocations(c, syntax));
+                    }
+                    break;
+            }
+            return ret.ToImmutableArray();
         }
 
-        //private static ImmutableArray<Location> IdentifierLocations(InspectionContext c, SyntaxNode syntax)
-        //{
-        //    switch (syntax)
-        //    {
-        //        case MethodDeclarationSyntax method:        //Direct delegate name
-        //            return BlockLocations(method.Body);
-        //        case ParameterSyntax parameter:             //Value arrived as a parameter
-        //            return ParamLocations(c, parameter);
-        //        case VariableDeclaratorSyntax variable:     //Value passed as variable
-        //            return VariableLocations(c, variable);
-        //    }
-        //    return ImmutableArray<Location>.Empty;
-        //}
+        protected ImmutableArray<Location> IdentifierLocations(InspectionContext c, SyntaxNode syntax)
+        {
+            switch (syntax)
+            {
+                case TMethodSyntax method:                  //Direct delegate name
+                    return BlockLocations(method);  //FIXME: Revize, bylo tady .Body
+                case TParameterSyntax parameter:            //Value arrived as a parameter
+                    return ParamLocations(c, parameter);
+                case TVariableDeclaratorSyntax variable:     //Value passed as variable
+                    return VariableLocations(c, variable);
+            }
+            return ImmutableArray<Location>.Empty;
+        }
 
-        //private static ImmutableArray<Location> ParamLocations(InspectionContext c, ParameterSyntax param)
-        //{
-        //    var ret = ImmutableArray.CreateBuilder<Location>();
-        //    var containingMethodDeclaration = param.FirstAncestorOrSelf<MethodDeclarationSyntax>();
-        //    if (!c.VisitedMethods.Contains(containingMethodDeclaration))
-        //    {
-        //        c.VisitedMethods.Add(containingMethodDeclaration);
-        //        var containingMethod = c.Context.SemanticModel.GetDeclaredSymbol(containingMethodDeclaration);
-        //        var paramSymbol = containingMethod.Parameters.Single(x => x.Name == param.Identifier.ValueText);
-        //        foreach (var invocation in FindInvocationList(c.Context, FindRootClass(param), containingMethod))
-        //        {
-        //            var methodParamLookup = new CSharpMethodParameterLookup(invocation.ArgumentList, containingMethod);
-        //            if (methodParamLookup.TryGetSymbolParameter(paramSymbol, out var argument))
-        //            {
-        //                ret.AddRange(CallStackSublocations(c, argument.Expression));
-        //            }
-        //        }
-        //    }
-        //    return ret.ToImmutable();
-        //}
+        protected ImmutableArray<Location> ParamLocations(InspectionContext c, TParameterSyntax param)
+        {
+            var ret = ImmutableArray.CreateBuilder<Location>();
+            var containingMethodDeclaration = param.FirstAncestorOrSelf<TMethodSyntax>();
+            if (!c.VisitedMethods.Contains(containingMethodDeclaration))
+            {
+                c.VisitedMethods.Add(containingMethodDeclaration);
+                var containingMethod = c.Context.SemanticModel.GetDeclaredSymbol(containingMethodDeclaration) as IMethodSymbol;
+                var paramSymbol = containingMethod.Parameters.Single(x => x.Name == IdentifierText(param));
+                foreach (var invocation in FindInvocationList(c.Context, FindRootClassOrModule(param), containingMethod))
+                {
+                    var methodParamLookup = CreateParameterLookup(invocation, containingMethod);
+                    if (methodParamLookup.TryGetSymbolParameter(paramSymbol, out var argument))
+                    {
+                        ret.AddRange(CallStackSublocations(c, ArgumentExpression(argument)));
+                    }
+                }
+            }
+            return ret.ToImmutable();
+        }
 
-        //private static ImmutableArray<Location> VariableLocations(InspectionContext c, VariableDeclaratorSyntax variable)
-        //{
-        //    var allAssignedExpressions = new List<ExpressionSyntax>();
-        //    var parentBlock = variable.FirstAncestorOrSelf<BlockSyntax>();
-        //    if (parentBlock != null)
-        //    {
-        //        allAssignedExpressions.AddRange(parentBlock.DescendantNodes().OfType<AssignmentExpressionSyntax>()
-        //            .Where(x => x.Left is IdentifierNameSyntax Ident && Ident.Identifier.ValueText == variable.Identifier.ValueText)
-        //            .Select(x => x.Right));
-        //    }
-        //    if (variable.Initializer != null)       //Declarator initializer is counted as (default) assignment as well
-        //    {
-        //        allAssignedExpressions.Add(variable.Initializer.Value);
-        //    }
-        //    return MultiExpressionSublocations(c, allAssignedExpressions);
-        //}
+        protected ImmutableArray<Location> VariableLocations(InspectionContext c, TVariableDeclaratorSyntax variable)
+        {
+            var allAssignedExpressions = new List<TExpressionSyntax>();
+            var parentBlock = variable.Parent;  //FIXME: Revize, bylo tu hledani nadrazeneho bloku
+            if (parentBlock != null)
+            {
+                allAssignedExpressions.AddRange(parentBlock.DescendantNodes().OfType<TAssignmentExpressionSyntax>()
+                    .Select(x =>
+                    {
+                        SplitAssignment(x, out var leftIdentifier, out var right);
+                        return new { leftIdentifier, right };
+                    })
+                    .Where( x => x.leftIdentifier != null && IdentifierText(x.leftIdentifier) == IdentifierText(variable))
+                    .Select(x => x.right));
+                    //FIXME: Zkontrolovat a Vyhodit .Where(x => x.Left is TIdentifierNameSyntax ident && IdentifierText(ident) == IdentifierText(variable))
+            }
+            var initializer = VariableInitializer(variable);
+            if (initializer != null)       //Declarator initializer is counted as (default) assignment as well
+            {
+                allAssignedExpressions.Add(initializer);
+            }
+            return MultiExpressionSublocations(c, allAssignedExpressions);
+        }
 
-        //private static ImmutableArray<Location> InvocationLocations(InspectionContext c, MethodDeclarationSyntax method)
-        //{
-        //    var returnExpressionSublocationsList = method.Body.DescendantNodes()
-        //        .OfType<ReturnStatementSyntax>()
-        //        .Select(x => x.Expression)
-        //        .Where(x => !IsVisited(c, x));      //Ignore all return statements with recursive call. Result depends on returns that could return compliant validator.
-        //    return MultiExpressionSublocations(c, returnExpressionSublocationsList);
-        //}
+        private ImmutableArray<Location> InvocationLocations(InspectionContext c, TMethodSyntax method)
+        {
+            var returnExpressionSublocationsList = FindReturnExpressions(method).Where(x => !IsVisited(c, x));      //Ignore all return statements with recursive call. Result depends on returns that could return compliant validator.
+            return MultiExpressionSublocations(c, returnExpressionSublocationsList);
+        }
 
-        //private static bool IsVisited(InspectionContext c, ExpressionSyntax expression)
-        //{
-        //    if (expression is InvocationExpressionSyntax invocation)
-        //    {
-        //        var symbol = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
-        //        return symbol != null && !symbol.DeclaringSyntaxReferences.IsEmpty
-        //            && symbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax() as MethodDeclarationSyntax).Any(x => x != null && c.VisitedMethods.Contains(x));
-        //    }
-        //    return false;
-        //}
+        protected static bool IsVisited(InspectionContext c, TExpressionSyntax expression)
+        {
+            if (expression is TInvocationExpressionSyntax invocation)
+            {
+                var symbol = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
+                return symbol != null && !symbol.DeclaringSyntaxReferences.IsEmpty
+                    && symbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax() as TMethodSyntax).Any(x => x != null && c.VisitedMethods.Contains(x));
+            }
+            return false;
+        }
 
-        //private static ImmutableArray<Location> MultiExpressionSublocations(InspectionContext c, IEnumerable<ExpressionSyntax> expressions)
-        //{
-        //    var exprSublocationsList = expressions.Distinct(new Helpers.CSharp.CSharpSyntaxNodeEqualityComparer<ExpressionSyntax>())
-        //        .Select(x => CallStackSublocations(c, x))
-        //        .ToArray();
-        //    if (exprSublocationsList.Any(x => x.IsEmpty))   //If there's at leat one concurrent expression, that returns compliant delegate, than there's some logic and this scope is compliant
-        //    {
-        //        return ImmutableArray<Location>.Empty;
-        //    }
-        //    return exprSublocationsList.SelectMany(x => x).ToImmutableArray();      //Else every return statement is noncompliant
-        //}
+        protected ImmutableArray<Location> MultiExpressionSublocations(InspectionContext c, IEnumerable<TExpressionSyntax> expressions)
+        {
+            var exprSublocationsList = expressions.Distinct(CreateNodeEqualityComparer())
+                .Select(x => CallStackSublocations(c, x))
+                .ToArray();
+            if (exprSublocationsList.Any(x => x.IsEmpty))   //If there's at leat one concurrent expression, that returns compliant delegate, than there's some logic and this scope is compliant
+            {
+                return ImmutableArray<Location>.Empty;
+            }
+            return exprSublocationsList.SelectMany(x => x).ToImmutableArray();      //Else every return statement is noncompliant
+        }
 
-        //private static ImmutableArray<Location> CallStackSublocations(InspectionContext c, ExpressionSyntax expression)
-        //{
-        //    var lst = ArgumentLocations(c, expression);
-        //    if (!lst.IsEmpty)        //There's noncompliant issue in this chain
-        //    {
-        //        var Loc = expression.GetLocation();
-        //        if (!lst.Any(x => x.SourceSpan.IntersectsWith(Loc.SourceSpan)))
-        //        {
-        //            //Add 2nd, 3rd, 4th etc //Secondary marker. If it is not marked already from direct Delegate name or direct Lambda occurance
-        //            return lst.Concat(new[] { Loc }).ToImmutableArray();
-        //        }
-        //    }
-        //    return lst;
-        //}
+        protected ImmutableArray<Location> CallStackSublocations(InspectionContext c, TExpressionSyntax expression)
+        {
+            var lst = ArgumentLocations(c, expression);
+            if (!lst.IsEmpty)        //There's noncompliant issue in this chain
+            {
+                var Loc = expression.GetLocation();
+                if (!lst.Any(x => x.SourceSpan.IntersectsWith(Loc.SourceSpan)))
+                {
+                    //Add 2nd, 3rd, 4th etc //Secondary marker. If it is not marked already from direct Delegate name or direct Lambda occurance
+                    return lst.Concat(new[] { Loc }).ToImmutableArray();
+                }
+            }
+            return lst;
+        }
 
-        //private static ImmutableArray<Location> BlockLocations(BlockSyntax block)
-        //{
-        //    var ret = ImmutableArray.CreateBuilder<Location>();
-        //    if (block != null)
-        //    {
-        //        //TODO: VB.NET vs. return by assign to function name
-        //        var returnExpressions = block.DescendantNodes().OfType<ReturnStatementSyntax>().Select(x => x.Expression).ToArray();
-        //        if (returnExpressions.All(x => x.Kind() == SyntaxKind.TrueLiteralExpression))    //There must be at least one return, that does not return true to be compliant
-        //        {
-        //            ret.AddRange(returnExpressions.Select(x => x.GetLocation()));
-        //        }
-        //    }
-        //    return ret.ToImmutable();
-        //}
+        protected ImmutableArray<Location> BlockLocations(SyntaxNode block)
+        {
+            var ret = ImmutableArray.CreateBuilder<Location>();
+            if (block != null)
+            {
+                var returnExpressions = FindReturnExpressions(block);
+                if (returnExpressions.All(x => IsTrueLiteral(x)))    //There must be at least one return, that does not return true to be compliant
+                {
+                    ret.AddRange(returnExpressions.Select(x => x.GetLocation()));
+                }
+            }
+            return ret.ToImmutable();
+        }
 
-        //private static ClassDeclarationSyntax FindRootClass(SyntaxNode node)
-        //{
-        //    ClassDeclarationSyntax current, candidate;
-        //    current = node.FirstAncestorOrSelf<ClassDeclarationSyntax>();
-        //    while (current != null && (candidate = current.Parent?.FirstAncestorOrSelf<ClassDeclarationSyntax>()) != null)  //Search for parent of nested class
-        //    {
-        //        current = candidate;
-        //    }
-        //    return current;
-        //}
-
-        //private static ImmutableArray<InvocationExpressionSyntax> FindInvocationList(SyntaxNodeAnalysisContext c, ClassDeclarationSyntax root, IMethodSymbol method)
-        //{
-        //    if (root == null || method == null)
-        //    {
-        //        return ImmutableArray<InvocationExpressionSyntax>.Empty;
-        //    }
-        //    var ret = ImmutableArray.CreateBuilder<InvocationExpressionSyntax>();
-        //    foreach (var Invocation in root.DescendantNodesAndSelf().OfType<InvocationExpressionSyntax>())
-        //    {
-        //        if (c.SemanticModel.GetSymbolInfo(Invocation).Symbol == method)
-        //        {
-        //            ret.Add(Invocation);
-        //        }
-        //    }
-        //    return ret.ToImmutable();
-        //}
+        protected static ImmutableArray<TInvocationExpressionSyntax> FindInvocationList(SyntaxNodeAnalysisContext c, SyntaxNode root, IMethodSymbol method)
+        {
+            if (root == null || method == null)
+            {
+                return ImmutableArray<TInvocationExpressionSyntax>.Empty;
+            }
+            var ret = ImmutableArray.CreateBuilder<TInvocationExpressionSyntax>();
+            foreach (var invocation in root.DescendantNodesAndSelf().OfType<TInvocationExpressionSyntax>())
+            {
+                if (c.SemanticModel.GetSymbolInfo(invocation).Symbol == method)
+                {
+                    ret.Add(invocation);
+                }
+            }
+            return ret.ToImmutable();
+        }
 
         protected struct InspectionContext
         {
