@@ -264,7 +264,10 @@ namespace SonarAnalyzer.Rules.CSharp
         }
         private static Diagnostic CreateDiagnosticFromJToken(JToken token)
         {
-            var key = token["key"].ToString();
+            // Temporary hack to disguise the rule about overflow as a rule about
+            // condition always true to avoid tackling registration issues
+            var key = "S2583"; // token["key"].ToString();
+
             var message = token["message"].ToString();
             var location = token["location"];
             var line = Convert.ToInt32(location["l"]);
