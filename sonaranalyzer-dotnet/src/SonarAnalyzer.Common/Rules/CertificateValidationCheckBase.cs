@@ -23,13 +23,12 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class CertificateValidationCheckBase<TMethodSyntax, TArgumentSyntax, TExpressionSyntax, TIdentifierNameSyntax, TAssignmentExpressionSyntax, TInvocationExpressionSyntax, TParameterSyntax, TVariableDeclaratorSyntax, TLambdaSyntax> : SonarDiagnosticAnalyzer
+    public abstract class CertificateValidationCheckBase<TMethodSyntax, TArgumentSyntax, TExpressionSyntax, TIdentifierNameSyntax, TAssignmentExpressionSyntax, TInvocationExpressionSyntax, TParameterSyntax, TVariableSyntax, TLambdaSyntax> : SonarDiagnosticAnalyzer
         where TMethodSyntax : SyntaxNode
         where TArgumentSyntax : SyntaxNode
         where TExpressionSyntax : SyntaxNode
@@ -37,7 +36,7 @@ namespace SonarAnalyzer.Rules
         where TAssignmentExpressionSyntax : SyntaxNode
         where TInvocationExpressionSyntax : SyntaxNode
         where TParameterSyntax : SyntaxNode
-        where TVariableDeclaratorSyntax : SyntaxNode
+        where TVariableSyntax : SyntaxNode
         where TLambdaSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S4830";
@@ -46,20 +45,20 @@ namespace SonarAnalyzer.Rules
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
        
         internal abstract AbstractMethodParameterLookup<TArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method);
+        internal abstract KnownType GenericDelegateType();
         protected abstract Location ArgumentLocation(TArgumentSyntax argument);
         protected abstract TExpressionSyntax ArgumentExpression(TArgumentSyntax argument);
         protected abstract void SplitAssignment(TAssignmentExpressionSyntax assignment, out TIdentifierNameSyntax leftIdentifier, out TExpressionSyntax right);
         protected abstract IEqualityComparer<TExpressionSyntax> CreateNodeEqualityComparer();
         protected abstract SyntaxNode FindRootClassOrModule(SyntaxNode node);
-        protected abstract TExpressionSyntax[] FindReturnExpressions(SyntaxNode block);
+        protected abstract TExpressionSyntax[] FindReturnExpressions(InspectionContext c, SyntaxNode block);
         protected abstract bool IsTrueLiteral(TExpressionSyntax expression);
         protected abstract string IdentifierText(SyntaxNode node);
-        protected abstract TExpressionSyntax VariableInitializer(TVariableDeclaratorSyntax variable);
-        protected abstract ImmutableArray<Location> LambdaLocations(TLambdaSyntax lambda);
-        protected abstract SyntaxNode LocalVariableScope(TVariableDeclaratorSyntax variable);
+        protected abstract TExpressionSyntax VariableInitializer(TVariableSyntax variable);
+        protected abstract ImmutableArray<Location> LambdaLocations(InspectionContext c, TLambdaSyntax lambda);
+        protected abstract SyntaxNode LocalVariableScope(TVariableSyntax variable);
         protected abstract TExpressionSyntax TryExtractAddressOfOperand(TExpressionSyntax expression);
         protected abstract SyntaxNode SyntaxFromReference(SyntaxReference reference);
-        internal abstract KnownType GenericDelegateType();
         
         protected CertificateValidationCheckBase(System.Resources.ResourceManager rspecResources)
         {
@@ -103,7 +102,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected bool IsValidationDelegateType(ITypeSymbol type)
+        private bool IsValidationDelegateType(ITypeSymbol type)
         {
             if (type.Is(KnownType.System_Net_Security_RemoteCertificateValidationCallback))
             {
@@ -124,42 +123,40 @@ namespace SonarAnalyzer.Rules
             return false;
         }
 
-        protected ImmutableArray<Location> ArgumentLocations(InspectionContext c, TExpressionSyntax expression)
+        private ImmutableArray<Location> ArgumentLocations(InspectionContext c, TExpressionSyntax expression)
         {
-            var ret = ImmutableArray.CreateBuilder<Location>(); //FIXME: Direct return
             switch (TryExtractAddressOfOperand(expression))
             {
                 case TIdentifierNameSyntax identifier:
                     var identSymbol = c.Context.SemanticModel.GetSymbolInfo(identifier).Symbol;
                     if (identSymbol != null && identSymbol.DeclaringSyntaxReferences.Length == 1)
                     {
-                        ret.AddRange(IdentifierLocations(c, SyntaxFromReference(identSymbol.DeclaringSyntaxReferences.Single())));
+                        return IdentifierLocations(c, SyntaxFromReference(identSymbol.DeclaringSyntaxReferences.Single()));
                     }
                     break;
                 case TLambdaSyntax lambda:
-                    ret.AddRange(LambdaLocations(lambda));
-                    break;
+                    return LambdaLocations(c, lambda);
                 case TInvocationExpressionSyntax invocation:
                     var invSymbol = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
                     if (invSymbol != null && invSymbol.DeclaringSyntaxReferences.Length == 1 && SyntaxFromReference(invSymbol.DeclaringSyntaxReferences.Single()) is TMethodSyntax syntax)
                     {
                         c.VisitedMethods.Add(syntax);
-                        ret.AddRange(InvocationLocations(c, syntax));
+                        return InvocationLocations(c, syntax);
                     }
                     break;
             }
-            return ret.ToImmutableArray();
+            return ImmutableArray<Location>.Empty;
         }
 
-        protected ImmutableArray<Location> IdentifierLocations(InspectionContext c, SyntaxNode syntax)
+        private ImmutableArray<Location> IdentifierLocations(InspectionContext c, SyntaxNode syntax)
         {
             switch (syntax)
             {
                 case TMethodSyntax method:                  //Direct delegate name
-                    return BlockLocations(method);  
+                    return BlockLocations(c, method);  
                 case TParameterSyntax parameter:            //Value arrived as a parameter
                     return ParamLocations(c, parameter);
-                case TVariableDeclaratorSyntax variable:     //Value passed as variable
+                case TVariableSyntax variable:     //Value passed as variable
                     return VariableLocations(c, variable);
             }
             return ImmutableArray<Location>.Empty;
@@ -186,7 +183,7 @@ namespace SonarAnalyzer.Rules
             return ret.ToImmutable();
         }
 
-        protected ImmutableArray<Location> VariableLocations(InspectionContext c, TVariableDeclaratorSyntax variable)
+        private ImmutableArray<Location> VariableLocations(InspectionContext c, TVariableSyntax variable)
         {
             var allAssignedExpressions = new List<TExpressionSyntax>();
             var parentScope = LocalVariableScope(variable);
@@ -200,7 +197,6 @@ namespace SonarAnalyzer.Rules
                     })
                     .Where( x => x.leftIdentifier != null && IdentifierText(x.leftIdentifier) == IdentifierText(variable))
                     .Select(x => x.right));
-                    //FIXME: Zkontrolovat a Vyhodit .Where(x => x.Left is TIdentifierNameSyntax ident && IdentifierText(ident) == IdentifierText(variable))
             }
             var initializer = VariableInitializer(variable);
             if (initializer != null)       //Declarator initializer is counted as (default) assignment as well
@@ -212,11 +208,11 @@ namespace SonarAnalyzer.Rules
 
         private ImmutableArray<Location> InvocationLocations(InspectionContext c, TMethodSyntax method)
         {
-            var returnExpressionSublocationsList = FindReturnExpressions(method).Where(x => !IsVisited(c, x));      //Ignore all return statements with recursive call. Result depends on returns that could return compliant validator.
+            var returnExpressionSublocationsList = FindReturnExpressions(c, method).Where(x => !IsVisited(c, x));      //Ignore all return statements with recursive call. Result depends on returns that could return compliant validator.
             return MultiExpressionSublocations(c, returnExpressionSublocationsList);
         }
 
-        protected bool IsVisited(InspectionContext c, TExpressionSyntax expression)
+        private bool IsVisited(InspectionContext c, TExpressionSyntax expression)
         {
             if (expression is TInvocationExpressionSyntax invocation)
             {
@@ -227,7 +223,7 @@ namespace SonarAnalyzer.Rules
             return false;
         }
 
-        protected ImmutableArray<Location> MultiExpressionSublocations(InspectionContext c, IEnumerable<TExpressionSyntax> expressions)
+        private ImmutableArray<Location> MultiExpressionSublocations(InspectionContext c, IEnumerable<TExpressionSyntax> expressions)
         {
             var exprSublocationsList = expressions.Distinct(CreateNodeEqualityComparer())
                 .Select(x => CallStackSublocations(c, x))
@@ -239,7 +235,7 @@ namespace SonarAnalyzer.Rules
             return exprSublocationsList.SelectMany(x => x).ToImmutableArray();      //Else every return statement is noncompliant
         }
 
-        protected ImmutableArray<Location> CallStackSublocations(InspectionContext c, TExpressionSyntax expression)
+        private ImmutableArray<Location> CallStackSublocations(InspectionContext c, TExpressionSyntax expression)
         {
             var lst = ArgumentLocations(c, expression);
             if (!lst.IsEmpty)        //There's noncompliant issue in this chain
@@ -254,12 +250,12 @@ namespace SonarAnalyzer.Rules
             return lst;
         }
 
-        protected ImmutableArray<Location> BlockLocations(SyntaxNode block)
+        protected ImmutableArray<Location> BlockLocations(InspectionContext c, SyntaxNode block)
         {
             var ret = ImmutableArray.CreateBuilder<Location>();
             if (block != null)
             {
-                var returnExpressions = FindReturnExpressions(block);
+                var returnExpressions = FindReturnExpressions(c, block);
                 if (returnExpressions.All(x => IsTrueLiteral(x)))    //There must be at least one return, that does not return true to be compliant
                 {
                     ret.AddRange(returnExpressions.Select(x => x.GetLocation()));
@@ -268,7 +264,7 @@ namespace SonarAnalyzer.Rules
             return ret.ToImmutable();
         }
 
-        protected static ImmutableArray<TInvocationExpressionSyntax> FindInvocationList(SyntaxNodeAnalysisContext c, SyntaxNode root, IMethodSymbol method)
+        private static ImmutableArray<TInvocationExpressionSyntax> FindInvocationList(SyntaxNodeAnalysisContext c, SyntaxNode root, IMethodSymbol method)
         {
             if (root == null || method == null)
             {
