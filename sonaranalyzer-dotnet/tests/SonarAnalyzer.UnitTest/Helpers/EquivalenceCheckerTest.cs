@@ -102,7 +102,7 @@ namespace Test
                 this.methods.First(m => m.Identifier.ValueText == "Method3").Body.Statements);
             result.Should().BeFalse();
         }
-        
+
         [TestMethod]
         public void EqualityComparer_Node()
         {

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ExceptionShouldNotBeThrownFromUnexpectedMethods()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ExceptionShouldNotBeThrownFromUnexpectedMethods.cs", 
+            Verifier.VerifyAnalyzer(@"TestCases\ExceptionShouldNotBeThrownFromUnexpectedMethods.cs",
                 new ExceptionShouldNotBeThrownFromUnexpectedMethods());
         }
     }

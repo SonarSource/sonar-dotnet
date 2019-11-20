@@ -195,7 +195,7 @@ public class Foo
     {
         Action act = () => { throw new Exception(); };
         act.ShouldNotThrow<Exception>();
-    }    
+    }
 }",
             new TestMethodShouldContainAssertion(),
             additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion)

@@ -32,6 +32,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DisposableMemberInNonDisposableClass()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DisposableMemberInNonDisposableClass.cs", new DisposableMemberInNonDisposableClass());
-        }        
+        }
     }
 }

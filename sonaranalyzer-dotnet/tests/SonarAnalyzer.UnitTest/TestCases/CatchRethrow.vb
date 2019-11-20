@@ -31,7 +31,7 @@ Namespace Tests.TestCases
 
             Try
                 doSomething()
-            Catch exc As ArgumentException 
+            Catch exc As ArgumentException
                 Throw
             Catch
                 Console.WriteLine("")
