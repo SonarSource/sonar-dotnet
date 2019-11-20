@@ -277,7 +277,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else if (lambda.Body is BlockSyntax block)
             {
-                return BlockLocations(block).ToImmutableArray();
+                return BlockLocations(block);
             }
             else
             {
@@ -285,14 +285,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        protected override ImmutableArray<SyntaxNode> LocalVariableScopeStatements(VariableDeclaratorSyntax variable)
+        protected override SyntaxNode LocalVariableScope(VariableDeclaratorSyntax variable)
         {
-            var block = variable.FirstAncestorOrSelf<BlockSyntax>();
-            if (block == null)
-            {
-                return ImmutableArray<SyntaxNode>.Empty;
-            }
-            return block.Statements.OfType<SyntaxNode>().ToImmutableArray();
+            return variable.FirstAncestorOrSelf<BlockSyntax>();
         }
 
         //private static ImmutableArray<Location> MultiExpressionSublocations(InspectionContext c, IEnumerable<ExpressionSyntax> expressions)
@@ -337,6 +332,16 @@ namespace SonarAnalyzer.Rules.CSharp
         //    return ret.ToImmutable();
         //}
 
+        protected override ExpressionSyntax TryExtractAddressOfOperand(ExpressionSyntax expression)
+        {
+            return expression; //VB.NET only
+        }
+
+        protected override SyntaxNode SyntaxFromReference(SyntaxReference reference)
+        {
+            return reference.GetSyntax();
+        }
+
         protected override SyntaxNode FindRootClassOrModule(SyntaxNode node)
         {
             ClassDeclarationSyntax current, candidate;
@@ -346,6 +351,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 current = candidate;
             }
             return current;
+        }
+
+        internal override KnownType GenericDelegateType()
+        {
+            return KnownType.System_Func_T1_T2_T3_T4_TResult;
         }
 
     }

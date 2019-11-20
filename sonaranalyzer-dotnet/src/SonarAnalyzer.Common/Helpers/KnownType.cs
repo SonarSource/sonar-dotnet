@@ -78,7 +78,6 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_TestCleanupAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_TestInitializeAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute");
         internal static readonly KnownType Microsoft_Win32_SafeHandles_SafeFileHandle = new KnownType("Microsoft.Win32.SafeHandles.SafeFileHandle");
-        internal static readonly KnownType Nancy_Cookies_NancyCookie = new KnownType("Nancy.Cookies.NancyCookie");
         internal static readonly KnownType NLog_LogManager = new KnownType("NLog.LogManager");
         internal static readonly KnownType NUnit_Framework_Assert = new KnownType("NUnit.Framework.Assert");
         internal static readonly KnownType NUnit_Framework_ExpectedExceptionAttribute = new KnownType("NUnit.Framework.ExpectedExceptionAttribute");
@@ -211,6 +210,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Func_T1_T2_TResult = new KnownType("System.Func<T1, T2, TResult>");
         internal static readonly KnownType System_Func_T1_T2_T3_TResult = new KnownType("System.Func<T1, T2, T3, TResult>");
         internal static readonly KnownType System_Func_T1_T2_T3_T4_TResult = new KnownType("System.Func<T1, T2, T3, T4, TResult>");
+        internal static readonly KnownType System_Func_T1_T2_T3_T4_TResult_VB = new KnownType("System.Func(Of In T1, In T2, In T3, In T4, Out TResult)");
         internal static readonly KnownType System_GC = new KnownType("System.GC");
         internal static readonly KnownType System_Globalization_CompareOptions = new KnownType("System.Globalization.CompareOptions");
         internal static readonly KnownType System_Globalization_CultureInfo = new KnownType("System.Globalization.CultureInfo");
