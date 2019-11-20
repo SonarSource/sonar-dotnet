@@ -128,8 +128,29 @@ namespace Tests.Diagnostics
                     return o;
                 }
 
-                return null; // Noncompliant FP
+                return null;
             });
+        }
+
+        static IEnumerable<string> TestNullFromParenthesizedLambda()
+        {
+            var list = new List<string>();
+
+            return list.Select<string, string>((o, i) =>
+            {
+                return null;
+            });
+        }
+
+        static IEnumerable<string> MethodWithLambdaStillRaisesIssue()
+        {
+            var list = new List<string>();
+
+            return list.Select<string, string>((o, i) =>
+            {
+                return null;
+            });
+            return null; // Noncompliant
         }
     }
 }

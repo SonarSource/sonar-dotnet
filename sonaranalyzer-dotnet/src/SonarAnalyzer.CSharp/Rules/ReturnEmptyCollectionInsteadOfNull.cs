@@ -157,7 +157,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static IEnumerable<ReturnStatementSyntax> GetReturnNullStatements(BlockSyntax methodBlock)
         {
-            return methodBlock.DescendantNodes(n => !n.IsKind(SyntaxKindEx.LocalFunctionStatement))
+            return methodBlock.DescendantNodes(n =>
+                    !n.IsAnyKind(SyntaxKindEx.LocalFunctionStatement,
+                        SyntaxKind.SimpleLambdaExpression,
+                        SyntaxKind.ParenthesizedLambdaExpression))
                 .OfType<ReturnStatementSyntax>()
                 .Where(returnStatement =>
                     returnStatement.Expression.IsNullLiteral() &&
