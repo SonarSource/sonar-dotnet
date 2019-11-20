@@ -120,7 +120,7 @@ namespace Tests.Diagnostics
             InitAsOptionalArgument();
 
             //Call in nested class from root (this)
-            new InnerAssignemntClass().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary
+            new InnerAssignmentClass().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary           
         }
 
         void DelegateReturnedByFunction()
@@ -473,8 +473,8 @@ namespace Tests.Diagnostics
 
             public void Init(RemoteCertificateValidationCallback callback)
             {
-                //Assignemnt from sibling class in nested tree
-                new InnerAssignemntClass().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary
+                //Assignment from sibling class in nested tree
+                new InnerAssignmentClass().InitAsArgument((sender, certificate, chain, SslPolicyErrors) => true);  //Secondary           
             }
 
         }

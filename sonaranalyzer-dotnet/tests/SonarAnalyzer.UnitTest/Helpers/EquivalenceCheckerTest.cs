@@ -166,7 +166,7 @@ End Namespace";
             hashSet.Contains(method1).Should().BeTrue();
             hashSet.Contains(method4).Should().BeFalse();
         }
-
+        
         [TestMethod]
         public void EqualityComparer_List_CS()
         {
