@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -27,13 +28,12 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Rules.Common;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class CertificateValidationCheck : CertificateValidationCheckBase<MethodBlockSyntax, ArgumentSyntax, ExpressionSyntax, IdentifierNameSyntax, AssignmentStatementSyntax, InvocationExpressionSyntax, ParameterSyntax, VariableDeclaratorSyntax, LambdaExpressionSyntax>
+    public sealed class CertificateValidationCheck : CertificateValidationCheckBase<MethodBlockSyntax, ArgumentSyntax, ExpressionSyntax, IdentifierNameSyntax, AssignmentStatementSyntax, InvocationExpressionSyntax, ParameterSyntax, ModifiedIdentifierSyntax, LambdaExpressionSyntax>
     {
         public CertificateValidationCheck() : base(RspecStrings.ResourceManager) { }
 
@@ -48,7 +48,18 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         internal override AbstractMethodParameterLookup<ArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method)
         {
-            throw new System.NotImplementedException();
+            switch (argumentListNode)
+            {
+                //case ArgumentListSyntax args:
+                //    return new VisualBasicMethodParameterLookup(args, method);
+                case InvocationExpressionSyntax invocation:
+                    return new VisualBasicMethodParameterLookup(invocation.ArgumentList, method);
+                case ObjectCreationExpressionSyntax ctor:
+                    return new VisualBasicMethodParameterLookup(ctor.ArgumentList, method);
+                default:
+                    //This should be throw only by bad usage of this method, not by input dependency
+                    throw new ArgumentException("Unexpected type.", nameof(argumentListNode));
+            }
         }
 
         protected override Location ArgumentLocation(ArgumentSyntax argument)
@@ -77,15 +88,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             return new Helpers.VisualBasic.VisualBasicSyntaxNodeEqualityComparer<ExpressionSyntax>();
         }
-
-
-
+        
         protected override ExpressionSyntax[] FindReturnExpressions(SyntaxNode block)
         {
+
             //FIXME: VB.NET vs. return by assign to function name
+            //Testy
             //Najit spravnou variable
             //Najit vsechny assignmenty, ktere maji Exit Function nebo jen ta posledni
-            //Loops/For
+            //Loops/For?
 
             return block.DescendantNodes().OfType<ReturnStatementSyntax>().Select(x => x.Expression).ToArray();
         }
@@ -103,16 +114,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     return ident.Identifier.ValueText;
                 case ParameterSyntax param:
                     return param.Identifier.Identifier.ValueText;
-                case VariableDeclaratorSyntax variable:
-                    return variable.Names.Count == 1 ? variable.Names[0].Identifier.ValueText : null;   //FIXME: Revize, jestli je ta synatxe na Dim a, b, c As Integer, takto nebude fungovat spravne
+                case ModifiedIdentifierSyntax variable:
+                    return variable.Identifier.ValueText;
                 default:
                     return null;
             }
         }
 
-        protected override ExpressionSyntax VariableInitializer(VariableDeclaratorSyntax variable)
+        protected override ExpressionSyntax VariableInitializer(ModifiedIdentifierSyntax variable)
         {
-            return variable.Initializer?.Value;
+            return variable.FirstAncestorOrSelf<VariableDeclaratorSyntax>()?.Initializer?.Value;
         }
 
         //protected override SyntaxNode InvocationArgumentList(InvocationExpressionSyntax invocation)
@@ -122,31 +133,46 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override ImmutableArray<Location> LambdaLocations(LambdaExpressionSyntax lambda)
         {
-            System.Diagnostics.Debugger.Break();
-
-            //FIXME: Doresit
-            
-
-            //if ((lambda.Body as LiteralExpressionSyntax)?.Kind() == SyntaxKind.TrueLiteralExpression)
-            //{
-            //    return new[] { lambda.Body.GetLocation() }.ToImmutableArray();   //Code was found guilty for lambda (...) => true
-            //}
-            //else if (lambda.Body is BlockSyntax block)
-            //{
-            //    return BlockLocations(block).ToImmutableArray();
-            //}
-            //else
-            //{
-                return ImmutableArray<Location>.Empty;
-            //}
+            switch (lambda)
+            {
+                case SingleLineLambdaExpressionSyntax single:
+                    if (single.Body.Kind() == SyntaxKind.TrueLiteralExpression)
+                    {
+                        return new[] { single.Body.GetLocation() }.ToImmutableArray();
+                    }
+                    break;
+                case MultiLineLambdaExpressionSyntax multi:
+                    if (multi.Statements.Count != 0)
+                    {
+                        return BlockLocations(multi.Statements[0].Parent);
+                    }
+                    break;
+            }
+            return ImmutableArray<Location>.Empty;
         }
 
-        protected override ImmutableArray<SyntaxNode> LocalVariableScopeStatements(VariableDeclaratorSyntax variable)
+        protected override SyntaxNode LocalVariableScope(ModifiedIdentifierSyntax variable)
         {
-            //FIXME: Top declaration a pak jeho parent
+            return variable.FirstAncestorOrSelf<LocalDeclarationStatementSyntax>()?.Parent;
+        }
 
-            throw new System.NotImplementedException();
+        protected override ExpressionSyntax TryExtractAddressOfOperand(ExpressionSyntax expression)
+        {
+            if(expression is UnaryExpressionSyntax unary && unary.Kind() == SyntaxKind.AddressOfExpression)
+            {
+                return unary.Operand;
+            }
+            return expression;
+        }
 
+        protected override SyntaxNode SyntaxFromReference(SyntaxReference reference)
+        {
+            var syntax = reference.GetSyntax();
+            if (syntax is MethodStatementSyntax)
+            {
+                return syntax.Parent;
+            }
+            return syntax;
         }
 
         protected override SyntaxNode FindRootClassOrModule(SyntaxNode node)
@@ -163,6 +189,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 current = candidate;
             }
             return current;
+        }
+
+        internal override KnownType GenericDelegateType()
+        {
+            return KnownType.System_Func_T1_T2_T3_T4_TResult_VB;
         }
 
     }
