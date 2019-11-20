@@ -3448,7 +3448,7 @@ namespace NS
             var branchEmpty = blocks[1] as BinaryBranchBlock;
             var branchNull = blocks[2] as BinaryBranchBlock;
             var branchA = blocks[4] as BinaryBranchBlock;
-            
+
             cw0.Should().BeSameAs(cfg.EntryBlock);
 
             cw0.SuccessorBlocks.Should().OnlyContainInOrder(branchEmpty);

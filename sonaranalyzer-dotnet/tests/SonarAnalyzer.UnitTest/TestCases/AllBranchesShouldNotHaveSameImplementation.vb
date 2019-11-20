@@ -93,8 +93,8 @@ Namespace Tests.Diagnostics
 
         Public Sub SingleLineIfCases(ByVal c As Boolean)
             Dim x As Integer
-            If c Then x = 4 else x = 4 'Noncompliant {{Remove this 'If' or edit its blocks so that they are not all the same.}}
-            If c Then x = 0 else x = 1
+            If c Then x = 4 Else x = 4 'Noncompliant {{Remove this 'If' or edit its blocks so that they are not all the same.}}
+            If c Then x = 0 Else x = 1
         End Sub
 
         Private Sub DoSomething()

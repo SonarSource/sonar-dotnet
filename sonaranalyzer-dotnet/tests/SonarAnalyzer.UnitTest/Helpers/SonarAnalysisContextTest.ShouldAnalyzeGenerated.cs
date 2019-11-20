@@ -163,7 +163,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             // 2. Read again for VB to check VB caching
             vbResult = SonarAnalysisContext.ShouldAnalyzeGenerated(analysisContext.Object, vbCompilation, analyzerOptions);
-            
+
             // Assert
             vbResult.Should().BeTrue();
             dummySourceText.ToStringCallCount.Should().Be(2); // file should not have been read again
