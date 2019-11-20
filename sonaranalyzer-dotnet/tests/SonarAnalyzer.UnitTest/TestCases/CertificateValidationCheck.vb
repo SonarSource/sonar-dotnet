@@ -10,10 +10,13 @@ Namespace Tests.TestCases
 
         Private Sub FalseNegatives()
             'Values from properties are not inspected at all
-            CreateRQ().ServerCertificateValidationCallback = AddressOf FalseNegativeValidatorWithProperty
-            CreateRQ().ServerCertificateValidationCallback = DelegateProperty
+            CreateRQ.ServerCertificateValidationCallback = AddressOf FalseNegativeValidatorWithProperty
+            CreateRQ.ServerCertificateValidationCallback = DelegateProperty
             'Values from overriden operators are not inspected at all
-            CreateRQ().ServerCertificateValidationCallback = New CertificateValidationChecks() + 42 'Operator + is overriden to return delegate. 
+            CreateRQ.ServerCertificateValidationCallback = New CertificateValidationChecks() + 42 'Operator + is overriden to return delegate.
+            'VB Specific syntax with return variable, codepaths are not inspected
+            CreateRQ.ServerCertificateValidationCallback = AddressOf FalseNegativeVBSpecific
+            CreateRQ.ServerCertificateValidationCallback = FindFalseNegativeVBSpecific()
         End Sub
 
         Private Sub DirectAddHandlers()
@@ -43,6 +46,10 @@ Namespace Tests.TestCases
             CreateRQ().ServerCertificateValidationCallback = AddressOf InvalidValidation    'Noncompliant
             CreateRQ().ServerCertificateValidationCallback = Function(sender, certificate, chain, SslPolicyErrors) True     'Noncompliant
             'Secondary@-1
+
+            'VB Specific cases with return variable
+            CreateRQ().ServerCertificateValidationCallback = AddressOf CompliantVBSpecific
+            CreateRQ().ServerCertificateValidationCallback = AddressOf InvalidVBSpecific    'Noncompliant
 
             'Do not test this one. It's .NET Standard 2.1 target only. It shoudl work since we're hunting RemoteCertificateValidationCallback and method signature
             'var ws = new System.Net.WebSockets.ClientWebSocket()
@@ -114,12 +121,15 @@ Namespace Tests.TestCases
         End Sub
 
         Private Sub DelegateReturnedByFunction()
-            CreateRQ().ServerCertificateValidationCallback = FindInvalid(False)       'Noncompliant
-            CreateRQ().ServerCertificateValidationCallback = FindInvalid()            'Noncompliant
-            CreateRQ().ServerCertificateValidationCallback = FindLambdaValidator()    'Noncompliant
-            CreateRQ().ServerCertificateValidationCallback = FindCompliant(True)
-            CreateRQ().ServerCertificateValidationCallback = FindCompliantRecursive(3)
-            CreateRQ().ServerCertificateValidationCallback = FindInvalidRecursive(3)  'Noncompliant
+            CreateRQ.ServerCertificateValidationCallback = FindInvalid(False)         'Noncompliant
+            CreateRQ.ServerCertificateValidationCallback = FindInvalid()              'Noncompliant
+            CreateRQ.ServerCertificateValidationCallback = FindLambdaValidator()      'Noncompliant
+            CreateRQ.ServerCertificateValidationCallback = FindCompliant(True)
+            CreateRQ.ServerCertificateValidationCallback = FindCompliantRecursive(3)
+            CreateRQ.ServerCertificateValidationCallback = FindInvalidRecursive(3)    'Noncompliant
+            'Specific cases for VB.NET
+            CreateRQ.ServerCertificateValidationCallback = FindInvalidVBSpecific()    'Noncompliant
+            CreateRQ.ServerCertificateValidationCallback = FindCompliant(True)
         End Sub
 
         Private Sub ConstructorArguments()
@@ -193,6 +203,7 @@ Namespace Tests.TestCases
             'Secondary@-9
             'Secondary@-10            
             'Secondary@-11
+            'Secondary@-12
         End Function
 
         Private Function InvalidValidationAsArgument(Sender As Object, Certificate As X509Certificate, Chain As X509Chain, PolicyErrors As SslPolicyErrors) As Boolean
@@ -226,6 +237,32 @@ Namespace Tests.TestCases
             Else
                 Return True
             End If
+        End Function
+
+        Private Function CompliantVBSpecific(Sender As Object, Certificate As X509Certificate, Chain As X509Chain, PolicyErrors As SslPolicyErrors) As Boolean
+            If Certificate.Subject <> "Test" Then
+                CompliantVBSpecific = False
+            ElseIf DateTime.Parse(Certificate.GetExpirationDateString()) < DateTime.Now Then
+                CompliantVBSpecific = False
+            Else
+                CompliantVBSpecific = True
+            End If
+        End Function
+
+        Private Function InvalidVBSpecific(Sender As Object, Certificate As X509Certificate, Chain As X509Chain, PolicyErrors As SslPolicyErrors) As Boolean
+            If Certificate.Subject <> "Test" Then
+                InvalidVBSpecific = True            'Secondary
+            ElseIf DateTime.Parse(Certificate.GetExpirationDateString()) < DateTime.Now Then
+                InvalidVBSpecific = True            'Secondary
+            Else
+                InvalidVBSpecific = True            'Secondary
+            End If
+        End Function
+
+        Private Function FalseNegativeVBSpecific(Sender As Object, Certificate As X509Certificate, Chain As X509Chain, PolicyErrors As SslPolicyErrors) As Boolean
+            FalseNegativeVBSpecific = False
+            FalseNegativeVBSpecific = False
+            FalseNegativeVBSpecific = True    'False negative, all assigned values are currently considered as possible return values
         End Function
 
 #End Region
@@ -325,6 +362,25 @@ Namespace Tests.TestCases
             Else
                 Return FindInvalidRecursive(Index - 1)
             End If
+        End Function
+
+        Private Function FindInvalidVBSpecific() As RemoteCertificateValidationCallback
+            Dim NotUsed As RemoteCertificateValidationCallback = Nothing
+            NotUsed = AddressOf CompliantValidation
+            FindInvalidVBSpecific = AddressOf InvalidValidation                                      'Secondary
+        End Function
+
+        Private Function FindCompliantVBSpecific(Compliant As Boolean) As RemoteCertificateValidationCallback     'At least one path returns compliant => there is a logic and it is considered compliant
+            If Compliant Then
+                Return Nothing  'Combination of return statement and return variable
+            Else
+                FindCompliantVBSpecific = Function(sender, certificate, chain, SslPolicyErrors) True
+            End If
+        End Function
+
+        Private Function FindFalseNegativeVBSpecific() As RemoteCertificateValidationCallback
+            FindFalseNegativeVBSpecific = Nothing
+            FindFalseNegativeVBSpecific = Function(sender, certificate, chain, SslPolicyErrors) True    'False negative, all assignments are considered as returns
         End Function
 
 #End Region

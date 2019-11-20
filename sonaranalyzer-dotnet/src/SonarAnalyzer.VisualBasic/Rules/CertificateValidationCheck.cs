@@ -50,8 +50,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             switch (argumentListNode)
             {
-                //case ArgumentListSyntax args:
-                //    return new VisualBasicMethodParameterLookup(args, method);
                 case InvocationExpressionSyntax invocation:
                     return new VisualBasicMethodParameterLookup(invocation.ArgumentList, method);
                 case ObjectCreationExpressionSyntax ctor:
@@ -60,6 +58,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     //This should be throw only by bad usage of this method, not by input dependency
                     throw new ArgumentException("Unexpected type.", nameof(argumentListNode));
             }
+        }
+
+        internal override KnownType GenericDelegateType()
+        {
+            return KnownType.System_Func_T1_T2_T3_T4_TResult_VB;
         }
 
         protected override Location ArgumentLocation(ArgumentSyntax argument)
@@ -88,24 +91,38 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             return new Helpers.VisualBasic.VisualBasicSyntaxNodeEqualityComparer<ExpressionSyntax>();
         }
-        
-        protected override ExpressionSyntax[] FindReturnExpressions(SyntaxNode block)
+
+        protected override SyntaxNode FindRootClassOrModule(SyntaxNode node)
         {
+            SyntaxNode current, candidate;
+            current = node.FirstAncestorOrSelf<ModuleBlockSyntax>();
+            if (current != null)
+            {
+                return current; //Modules can't be nested. If there's one, it's the Root
+            }
+            current = node.FirstAncestorOrSelf<ClassBlockSyntax>();
+            while (current != null && (candidate = current.Parent?.FirstAncestorOrSelf<ClassBlockSyntax>()) != null)  //Search for parent of nested class
+            {
+                current = candidate;
+            }
+            return current;
+        }
 
-            //FIXME: VB.NET vs. return by assign to function name
-            //Testy
-            //Najit spravnou variable
-            //Najit vsechny assignmenty, ktere maji Exit Function nebo jen ta posledni
-            //Loops/For?
-
-            return block.DescendantNodes().OfType<ReturnStatementSyntax>().Select(x => x.Expression).ToArray();
+        protected override ExpressionSyntax[] FindReturnExpressions(InspectionContext c, SyntaxNode block)
+        {
+            //Return value set by assignment to function variable/value
+            var assignments = block.DescendantNodes().OfType<AssignmentStatementSyntax>().Where(x => c.Context.SemanticModel.GetSymbolInfo(x.Left).Symbol is ILocalSymbol local && local.IsFunctionValue);
+            //And normal Return statements
+            return block.DescendantNodes().OfType<ReturnStatementSyntax>().Select(x => x.Expression)
+                .Concat(assignments.Select(x => x.Right))
+                .ToArray();
         }
 
         protected override bool IsTrueLiteral(ExpressionSyntax expression)
         {
             return expression.Kind() == SyntaxKind.TrueLiteralExpression;
         }
-        
+
         protected override string IdentifierText(SyntaxNode node)
         {
             switch (node)
@@ -125,13 +142,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             return variable.FirstAncestorOrSelf<VariableDeclaratorSyntax>()?.Initializer?.Value;
         }
-
-        //protected override SyntaxNode InvocationArgumentList(InvocationExpressionSyntax invocation)
-        //{
-        //    return invocation.ArgumentList;
-        //}
-
-        protected override ImmutableArray<Location> LambdaLocations(LambdaExpressionSyntax lambda)
+        
+        protected override ImmutableArray<Location> LambdaLocations(InspectionContext c, LambdaExpressionSyntax lambda)
         {
             switch (lambda)
             {
@@ -144,7 +156,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 case MultiLineLambdaExpressionSyntax multi:
                     if (multi.Statements.Count != 0)
                     {
-                        return BlockLocations(multi.Statements[0].Parent);
+                        return BlockLocations(c, multi.Statements[0].Parent);
                     }
                     break;
             }
@@ -155,7 +167,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             return variable.FirstAncestorOrSelf<LocalDeclarationStatementSyntax>()?.Parent;
         }
-
+        
         protected override ExpressionSyntax TryExtractAddressOfOperand(ExpressionSyntax expression)
         {
             if(expression is UnaryExpressionSyntax unary && unary.Kind() == SyntaxKind.AddressOfExpression)
@@ -164,7 +176,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
             return expression;
         }
-
+                             
         protected override SyntaxNode SyntaxFromReference(SyntaxReference reference)
         {
             var syntax = reference.GetSyntax();
@@ -174,28 +186,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
             return syntax;
         }
-
-        protected override SyntaxNode FindRootClassOrModule(SyntaxNode node)
-        {
-            SyntaxNode current, candidate;
-            current = node.FirstAncestorOrSelf<ModuleBlockSyntax>();
-            if (current != null)
-            {
-                return current; //Modules can't be nested. If there's one, it's the Root
-            }
-            current = node.FirstAncestorOrSelf<ClassBlockSyntax>();
-            while (current != null && (candidate = current.Parent?.FirstAncestorOrSelf<ClassBlockSyntax>()) != null)  //Search for parent of nested class
-            {
-                current = candidate;
-            }
-            return current;
-        }
-
-        internal override KnownType GenericDelegateType()
-        {
-            return KnownType.System_Func_T1_T2_T3_T4_TResult_VB;
-        }
-
+        
     }
 }
 
