@@ -87,8 +87,9 @@ namespace MyNamespace3
 namespace ReferencesInsideDocumentationTags
 {
     using System.ComponentModel;
+    using System.Collections.Specialized;
 
-    /// <summary><see cref="Win32Exception"/></summary>
+    /// <summary> There is <see cref="Win32Exception"/> or <see cref="ListDictionary"/></summary>
     class ClassWithDoc { }
 
     class InnerClass
