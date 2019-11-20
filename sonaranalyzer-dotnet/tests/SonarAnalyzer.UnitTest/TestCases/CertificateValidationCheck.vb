@@ -84,7 +84,7 @@ Namespace Tests.TestCases
             Dim SingleAssignmentCB, FalseNegativeCB, CompliantCB As RemoteCertificateValidationCallback
             Dim DeclarationAssignmentCompliantCB As RemoteCertificateValidationCallback = Nothing
             If True Then
-                'If there's only one assignemnt, we will inspect it
+                'If there's only one Assignment, we will inspect it
                 'Secondary@+1
                 SingleAssignmentCB = AddressOf InvalidValidationAsArgument              'Secondary
                 FalseNegativeCB = AddressOf InvalidValidation                           'Compliant due to false negative, the second assignment is after usage of the variable
@@ -109,7 +109,7 @@ Namespace Tests.TestCases
             InitAsOptionalArgument()
 
             'Call in nested class from root (this)
-            Dim Inner As New InnerAssignemntClass
+            Dim Inner As New InnerAssignmentClass
             Inner.InitAsArgument(Function(sender, certificate, chain, SslPolicyErrors) True)  'Secondary           
         End Sub
 
@@ -376,7 +376,7 @@ Namespace Tests.TestCases
 
         End Class
 
-        Class InnerAssignemntClass
+        Class InnerAssignmentClass
 
             Public Sub InitAsArgument(Callback As RemoteCertificateValidationCallback)
                 CertificateValidationChecks.CreateRQ().ServerCertificateValidationCallback = Callback 'Noncompliant
@@ -384,11 +384,11 @@ Namespace Tests.TestCases
 
         End Class
 
-        Class NeighbourAssignemntClass
+        Class NeighbourAssignmentClass
 
             Public Sub Init(Callback As RemoteCertificateValidationCallback)
-                'Assignemnt from sibling class in nested tree
-                Dim Value As New InnerAssignemntClass()
+                'Assignment from sibling class in nested tree
+                Dim Value As New InnerAssignmentClass()
                 Value.InitAsArgument(Function(sender, certificate, chain, SslPolicyErrors) True)  'Secondary           
             End Sub
 
@@ -397,5 +397,33 @@ Namespace Tests.TestCases
 #End Region
 
     End Class
+
+    Module RootForNestedNeighbours
+
+        Sub NeighbourAssignmentWithoutClass()
+            'Assignment from sibling method in nested tree
+            Dim Value As New InnerAssignmentClass()
+            Value.InitAsArgument(Function(sender, certificate, chain, SslPolicyErrors) True)  'Secondary           
+        End Sub
+
+        Class InnerAssignmentClass
+
+            Public Sub InitAsArgument(Callback As RemoteCertificateValidationCallback)
+                CertificateValidationChecks.CreateRQ().ServerCertificateValidationCallback = Callback 'Noncompliant
+            End Sub
+
+        End Class
+
+        Class NeighbourAssignmentClass
+
+            Public Sub Init(Callback As RemoteCertificateValidationCallback)
+                'Assignment from sibling class in nested tree
+                Dim Value As New InnerAssignmentClass()
+                Value.InitAsArgument(Function(sender, certificate, chain, SslPolicyErrors) True)  'Secondary           
+            End Sub
+
+        End Class
+
+    End Module
 
 End Namespace

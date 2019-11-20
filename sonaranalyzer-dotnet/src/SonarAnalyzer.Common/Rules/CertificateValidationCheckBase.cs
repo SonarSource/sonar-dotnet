@@ -56,8 +56,11 @@ namespace SonarAnalyzer.Rules
         protected abstract string IdentifierText(SyntaxNode node);
         protected abstract TExpressionSyntax VariableInitializer(TVariableDeclaratorSyntax variable);
         protected abstract ImmutableArray<Location> LambdaLocations(TLambdaSyntax lambda);
-        protected abstract ImmutableArray<SyntaxNode> LocalVariableScopeStatements(TVariableDeclaratorSyntax variable);
-
+        protected abstract SyntaxNode LocalVariableScope(TVariableDeclaratorSyntax variable);
+        protected abstract TExpressionSyntax TryExtractAddressOfOperand(TExpressionSyntax expression);
+        protected abstract SyntaxNode SyntaxFromReference(SyntaxReference reference);
+        internal abstract KnownType GenericDelegateType();
+        
         protected CertificateValidationCheckBase(System.Resources.ResourceManager rspecResources)
         {
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
@@ -66,8 +69,6 @@ namespace SonarAnalyzer.Rules
         protected void CheckAssignmentSyntax(SyntaxNodeAnalysisContext c)
         {
             SplitAssignment((TAssignmentExpressionSyntax)c.Node, out var leftIdentifier, out var right);
-            //var leftIdentifier = assignmentNode.Left.DescendantNodesAndSelf().OfType<TIdentifierNameSyntax>().LastOrDefault();
-            //var right = assignmentNode.Right;
             if (leftIdentifier != null && right != null
                 && c.SemanticModel.GetSymbolInfo(leftIdentifier).Symbol is IPropertySymbol left
                 && IsValidationDelegateType(left.Type))
@@ -102,37 +103,37 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected static bool IsValidationDelegateType(ITypeSymbol type)
+        protected bool IsValidationDelegateType(ITypeSymbol type)
         {
             if (type.Is(KnownType.System_Net_Security_RemoteCertificateValidationCallback))
             {
                 return true;
             }
-            else if (type is INamedTypeSymbol NamedSymbol && type.Is(KnownType.System_Func_T1_T2_T3_T4_TResult))
+            else if (type is INamedTypeSymbol namedSymbol && type.OriginalDefinition.Is(GenericDelegateType())) 
             {
                 //HttpClientHandler.ServerCertificateCustomValidationCallback uses Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool>
                 //We're actually looking for Func<Any Sender, X509Certificate2, X509Chain, SslPolicyErrors, bool>
-                var parameters = NamedSymbol.DelegateInvokeMethod.Parameters;
+                var parameters = namedSymbol.DelegateInvokeMethod.Parameters;
                 return parameters.Length == 4   //And it should! T1, T2, T3, T4
                     && parameters[0].Type.IsClassOrStruct() //We don't care about common (Object) nor specific (HttpRequestMessage) type of Sender
                     && parameters[1].Type.Is(KnownType.System_Security_Cryptography_X509Certificates_X509Certificate2)
                     && parameters[2].Type.Is(KnownType.System_Security_Cryptography_X509Certificates_X509Chain)
                     && parameters[3].Type.Is(KnownType.System_Net_Security_SslPolicyErrors)
-                    && NamedSymbol.DelegateInvokeMethod.ReturnType.Is(KnownType.System_Boolean);
+                    && namedSymbol.DelegateInvokeMethod.ReturnType.Is(KnownType.System_Boolean);
             }
             return false;
         }
 
         protected ImmutableArray<Location> ArgumentLocations(InspectionContext c, TExpressionSyntax expression)
         {
-            var ret = ImmutableArray.CreateBuilder<Location>();
-            switch (expression)
+            var ret = ImmutableArray.CreateBuilder<Location>(); //FIXME: Direct return
+            switch (TryExtractAddressOfOperand(expression))
             {
                 case TIdentifierNameSyntax identifier:
                     var identSymbol = c.Context.SemanticModel.GetSymbolInfo(identifier).Symbol;
                     if (identSymbol != null && identSymbol.DeclaringSyntaxReferences.Length == 1)
                     {
-                        ret.AddRange(IdentifierLocations(c, identSymbol.DeclaringSyntaxReferences.Single().GetSyntax()));
+                        ret.AddRange(IdentifierLocations(c, SyntaxFromReference(identSymbol.DeclaringSyntaxReferences.Single())));
                     }
                     break;
                 case TLambdaSyntax lambda:
@@ -140,7 +141,7 @@ namespace SonarAnalyzer.Rules
                     break;
                 case TInvocationExpressionSyntax invocation:
                     var invSymbol = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
-                    if (invSymbol != null && invSymbol.DeclaringSyntaxReferences.Length == 1 && invSymbol.DeclaringSyntaxReferences.Single().GetSyntax() is TMethodSyntax syntax)
+                    if (invSymbol != null && invSymbol.DeclaringSyntaxReferences.Length == 1 && SyntaxFromReference(invSymbol.DeclaringSyntaxReferences.Single()) is TMethodSyntax syntax)
                     {
                         c.VisitedMethods.Add(syntax);
                         ret.AddRange(InvocationLocations(c, syntax));
@@ -155,7 +156,7 @@ namespace SonarAnalyzer.Rules
             switch (syntax)
             {
                 case TMethodSyntax method:                  //Direct delegate name
-                    return BlockLocations(method);  //FIXME: Revize, bylo tady .Body
+                    return BlockLocations(method);  
                 case TParameterSyntax parameter:            //Value arrived as a parameter
                     return ParamLocations(c, parameter);
                 case TVariableDeclaratorSyntax variable:     //Value passed as variable
@@ -188,10 +189,10 @@ namespace SonarAnalyzer.Rules
         protected ImmutableArray<Location> VariableLocations(InspectionContext c, TVariableDeclaratorSyntax variable)
         {
             var allAssignedExpressions = new List<TExpressionSyntax>();
-            var parentBlock = variable.Parent;  //FIXME: Revize, bylo tu hledani nadrazeneho bloku
-            if (parentBlock != null)
+            var parentScope = LocalVariableScope(variable);
+            if (parentScope != null)
             {
-                allAssignedExpressions.AddRange(parentBlock.DescendantNodes().OfType<TAssignmentExpressionSyntax>()
+                allAssignedExpressions.AddRange(parentScope.DescendantNodes().OfType<TAssignmentExpressionSyntax>()
                     .Select(x =>
                     {
                         SplitAssignment(x, out var leftIdentifier, out var right);
@@ -215,13 +216,13 @@ namespace SonarAnalyzer.Rules
             return MultiExpressionSublocations(c, returnExpressionSublocationsList);
         }
 
-        protected static bool IsVisited(InspectionContext c, TExpressionSyntax expression)
+        protected bool IsVisited(InspectionContext c, TExpressionSyntax expression)
         {
             if (expression is TInvocationExpressionSyntax invocation)
             {
                 var symbol = c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
                 return symbol != null && !symbol.DeclaringSyntaxReferences.IsEmpty
-                    && symbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax() as TMethodSyntax).Any(x => x != null && c.VisitedMethods.Contains(x));
+                    && symbol.DeclaringSyntaxReferences.Select(x => SyntaxFromReference(x)).Any(x => x != null && c.VisitedMethods.Contains(x));
             }
             return false;
         }
