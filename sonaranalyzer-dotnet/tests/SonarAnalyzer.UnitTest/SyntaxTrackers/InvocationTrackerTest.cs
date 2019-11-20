@@ -120,7 +120,7 @@ End Namespace
 
         private static InvocationContext CreateContext<TSyntaxNodeType>(string testInput, string methodName, AnalyzerLanguage language) where TSyntaxNodeType : SyntaxNode
         {
-            var testCode = new SnippetCompiler(testInput, ignoreErrors: false, language: language);
+            var testCode = new SnippetCompiler(testInput, false, language);
             var invocationSyntaxNode = testCode.GetNodes<TSyntaxNodeType>().First();
             var context = new InvocationContext(invocationSyntaxNode, methodName, testCode.SemanticModel);
             return context;

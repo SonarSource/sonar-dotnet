@@ -55,8 +55,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
                 return VisualBasicSyntaxHelper.ArgumentValueForParameter(context.SemanticModel, argumentList, "padding") is ExpressionSyntax valueSyntax &&
                     context.SemanticModel.GetSymbolInfo(valueSyntax).Symbol is ISymbol symbol &&
-                    "Pkcs1".Equals(symbol.Name);
-                    
+                    symbol.Name == "Pkcs1";
             };
     }
 }
