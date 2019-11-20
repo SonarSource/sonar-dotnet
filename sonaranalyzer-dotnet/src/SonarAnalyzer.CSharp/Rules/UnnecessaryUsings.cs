@@ -128,6 +128,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 base.VisitGenericName(node);
             }
 
+            public override void VisitAwaitExpression(AwaitExpressionSyntax node)
+            {
+                VisitSymbol(context.SemanticModel.GetAwaitExpressionInfo(node).GetAwaiterMethod);
+                base.VisitAwaitExpression(node);
+            }
+
             /// <summary>
             /// We check the symbol of each name node found in the code. If the containing namespace of the symbol is
             /// neither the current namespace or one of its parent, it is then added to the necessary namespace set, as
@@ -135,9 +141,14 @@ namespace SonarAnalyzer.Rules.CSharp
             /// </summary>
             private void VisitNameNode(SimpleNameSyntax node)
             {
-                if (context.SemanticModel.GetSymbolInfo(node).Symbol is ISymbol symbol
-                    && symbol.ContainingNamespace is INamespaceSymbol namespaceSymbol
-                    && (currentNamespace == null || !namespaceSymbol.IsSameOrAncestorOf(currentNamespace)))
+                VisitSymbol(context.SemanticModel.GetSymbolInfo(node).Symbol);
+            }
+
+            private void VisitSymbol(ISymbol symbol)
+            {
+                if (symbol != null &&
+                    symbol.ContainingNamespace is INamespaceSymbol namespaceSymbol &&
+                    (currentNamespace == null || !namespaceSymbol.IsSameOrAncestorOf(currentNamespace)))
                 {
                     necessaryNamespaces.Add(namespaceSymbol);
                 }

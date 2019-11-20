@@ -104,7 +104,7 @@ namespace AwaitExtensionHolder
 
 namespace AwaitExtensionUser
 {
-    using AwaitExtensionHolder; // Noncompliant FP - 'using' statement is needed for the custom await usage
+    using AwaitExtensionHolder; // Compliant - statement is needed for the custom await usage
     class AwaitUser
     {
         async void AsyncMethodUsingAwaitExtension()

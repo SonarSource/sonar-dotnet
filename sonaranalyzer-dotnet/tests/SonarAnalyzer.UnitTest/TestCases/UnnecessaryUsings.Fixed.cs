@@ -98,6 +98,7 @@ namespace AwaitExtensionHolder
 
 namespace AwaitExtensionUser
 {
+    using AwaitExtensionHolder; // Compliant - statement is needed for the custom await usage
     class AwaitUser
     {
         async void AsyncMethodUsingAwaitExtension()
