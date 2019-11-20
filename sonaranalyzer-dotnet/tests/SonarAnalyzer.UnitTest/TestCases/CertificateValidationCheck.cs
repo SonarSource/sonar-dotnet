@@ -89,7 +89,7 @@ namespace Tests.Diagnostics
             RemoteCertificateValidationCallback SingleAssignmentCB, FalseNegativeCB, CompliantCB, DeclarationAssignmentCompliantCB = null;
             if (true)
             {
-                //If there's only one assignemnt, we will inspect it
+                //If there's only one Assignment, we will inspect it
                 //Secondary@+1
                 SingleAssignmentCB = InvalidValidationAsArgument;                   //Secondary
                 FalseNegativeCB = InvalidValidation;                                //Compliant due to false negative, the second assignment is after usage of the variable
@@ -452,7 +452,7 @@ namespace Tests.Diagnostics
 
         }
 
-        class InnerAssignemntClass
+        class InnerAssignmentClass
         {
 
             public void InitAsArgument(RemoteCertificateValidationCallback callback)
@@ -462,7 +462,7 @@ namespace Tests.Diagnostics
 
         }
 
-        class NeighbourAssignemntClass
+        class NeighbourAssignmentClass
         {
 
             public void Init(RemoteCertificateValidationCallback callback)
