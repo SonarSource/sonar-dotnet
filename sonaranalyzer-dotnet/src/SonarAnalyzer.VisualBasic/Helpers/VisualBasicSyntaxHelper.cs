@@ -242,5 +242,15 @@ namespace SonarAnalyzer.Helpers.VisualBasic
             argumentList != null && argumentList.Arguments.Count > index
                 ? argumentList.Arguments[index].GetExpression().RemoveParentheses()
                 : null;
+
+        public static ExpressionSyntax ArgumentValueForParameter(SemanticModel semanticModel, ArgumentListSyntax argumentList, string parameterName)
+        {
+            var methodParameterLookup = new VisualBasicMethodParameterLookup(argumentList, semanticModel);
+            if (methodParameterLookup.TryGetArgumentSyntax(parameterName, out var argumentSyntax))
+            {
+                return argumentSyntax.GetExpression();
+            }
+            return null;
+        }
     }
 }

@@ -71,6 +71,30 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             return Create(packageId, packageVersion, allowedNugetLibDirectoriesInOrderOfPreference, InstallWithCommandLine);
         }
 
+        public static IEnumerable<MetadataReference> CreateNETStandard21()
+        {
+            var x = $@"{PackagesFolderRelativePath}NETStandard.Library.Ref.2.1.0\ref\netstandard2.1";
+            var packageDir = Path.GetFullPath(x);
+            if (Directory.Exists(packageDir))
+            {
+                LogMessage($"Package found at {packageDir}");
+            }
+            else
+            {
+                LogMessage($"Package not found at {packageDir}");
+                InstallPackage("NETStandard.Library.Ref", "2.1.0");
+                if (!Directory.Exists(packageDir))
+                {
+                    throw new ApplicationException($"Test setup error: folder for downloaded package does not exist. Folder: {packageDir}");
+                }
+            }
+
+            return Directory.GetFiles(packageDir, "*.dll", SearchOption.AllDirectories)
+               .Select(path => new FileInfo(path))
+               .Select(file => (MetadataReference)MetadataReference.CreateFromFile(file.FullName))
+               .ToImmutableArray();
+        }
+
         private static IEnumerable<MetadataReference> Create(string packageId, string packageVersion, string[] allowedTargetFrameworks, Action<string, string> installPackage)
         {
             EnsurePackageIsInstalled(packageId, packageVersion, installPackage);

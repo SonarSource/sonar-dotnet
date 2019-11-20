@@ -1,0 +1,64 @@
+﻿/*
+ * SonarAnalyzer for .NET
+ * Copyright (C) 2015-2019 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using CSharp = SonarAnalyzer.Rules.CSharp;
+using VisualBasic = SonarAnalyzer.Rules.VisualBasic;
+
+namespace SonarAnalyzer.UnitTest.Rules
+{
+    [TestClass]
+    public class EncryptionAlgorithmsShouldBeSecureTest
+    {
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void EncryptionAlgorithmsShouldBeSecure_CS()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.cs",
+                new CSharp.EncryptionAlgorithmsShouldBeSecure());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void EncryptionAlgorithmsShouldBeSecure_CS_NetStandard21()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.cs",
+                new CSharp.EncryptionAlgorithmsShouldBeSecure(),
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void EncryptionAlgorithmsShouldBeSecure_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure.vb",
+                new VisualBasic.EncryptionAlgorithmsShouldBeSecure());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void EncryptionAlgorithmsShouldBeSecure_VB_NetStandard21()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\EncryptionAlgorithmsShouldBeSecure_NetStandard21.vb",
+                new VisualBasic.EncryptionAlgorithmsShouldBeSecure(),
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
+        }
+    }
+}

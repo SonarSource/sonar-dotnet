@@ -39,6 +39,9 @@ namespace SonarAnalyzer.UnitTest
             NugetMetadataFactory.Create("xunit", "1.9.1")
             .Concat(NugetMetadataFactory.Create("xunit.extensions", "1.9.1"));
 
+        public static IEnumerable<MetadataReference> NETStandardV2_1_0 =>
+            NugetMetadataFactory.CreateNETStandard21();
+
         // passed version
 
         public static IEnumerable<MetadataReference> Dapper(string packageVersion = "1.50.5") =>
