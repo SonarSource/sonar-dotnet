@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Helpers
         internal override object ConstArgumentForParameter(InvocationContext context, string parameterName)
         {
             var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
-            if (CSharpSyntaxHelper.ArgumentValueForParameter(context.SemanticModel, parameterName, argumentList) is ExpressionSyntax valueSyntax)
+            if (CSharpSyntaxHelper.ArgumentValueForParameter(context.SemanticModel, argumentList, parameterName) is ExpressionSyntax valueSyntax)
             {
                 return context.SemanticModel.GetConstantValue(valueSyntax).Value;
             }

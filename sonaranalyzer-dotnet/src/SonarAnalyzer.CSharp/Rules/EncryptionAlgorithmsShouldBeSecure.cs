@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
             (context) =>
             {
                 var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
-                return CSharpSyntaxHelper.ArgumentValueForParameter(context.SemanticModel, "padding", argumentList) is ExpressionSyntax valueSyntax &&
+                return CSharpSyntaxHelper.ArgumentValueForParameter(context.SemanticModel, argumentList, "padding") is ExpressionSyntax valueSyntax &&
                     context.SemanticModel.GetSymbolInfo(valueSyntax).Symbol is ISymbol symbol &&
                     "Pkcs1".Equals(symbol.Name);
                     

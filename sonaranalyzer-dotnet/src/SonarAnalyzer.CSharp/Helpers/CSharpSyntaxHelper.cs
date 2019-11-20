@@ -424,7 +424,7 @@ namespace SonarAnalyzer.Helpers
                     SyntaxFactory.IdentifierName(b)),
                 SyntaxFactory.IdentifierName(c));
 
-        public static ExpressionSyntax ArgumentValueForParameter(SemanticModel semanticModel, string parameterName, ArgumentListSyntax argumentList)
+        public static ExpressionSyntax ArgumentValueForParameter(SemanticModel semanticModel, ArgumentListSyntax argumentList, string parameterName)
         {
             var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, semanticModel);
             if (methodParameterLookup.TryGetArgumentSyntax(parameterName, out var argumentSyntax))
