@@ -373,6 +373,11 @@ namespace SonarAnalyzer
         {
             switch (op.Kind())
             {
+                case SyntaxKind.RightShiftExpression:
+                case SyntaxKind.LeftShiftExpression:
+                case SyntaxKind.BitwiseAndExpression:
+                case SyntaxKind.BitwiseOrExpression:
+                case SyntaxKind.ExclusiveOrExpression:
                 case SyntaxKind.AddExpression:
                 case SyntaxKind.SubtractExpression:
                 case SyntaxKind.MultiplyExpression:
@@ -383,6 +388,11 @@ namespace SonarAnalyzer
                         ExtractBinaryExpression(binExpr, binExpr.Left, binExpr.Right);
                         break;
                     }
+                case SyntaxKind.RightShiftAssignmentExpression:
+                case SyntaxKind.LeftShiftAssignmentExpression:
+                case SyntaxKind.AndAssignmentExpression:
+                case SyntaxKind.OrAssignmentExpression:
+                case SyntaxKind.ExclusiveOrAssignmentExpression:
                 case SyntaxKind.AddAssignmentExpression:
                 case SyntaxKind.SubtractAssignmentExpression:
                 case SyntaxKind.MultiplyAssignmentExpression:
@@ -598,6 +608,28 @@ namespace SonarAnalyzer
             string opName;
             switch (expr.Kind())
             {
+                case SyntaxKind.RightShiftAssignmentExpression:
+                case SyntaxKind.RightShiftExpression:
+                    var negateBitCountId = UniqueOpId();
+                    writer.WriteLine($"%{negateBitCountId} = cbde.neg %{OpId(getAssignmentValue(rhs))} : {MLIRType(expr)} {GetLocation(expr)}");
+                    writer.WriteLine($"%{OpId(expr)} = shlis %{OpId(getAssignmentValue(lhs))}, %{negateBitCountId} : {MLIRType(expr)} {GetLocation(expr)}");
+                    return;
+                case SyntaxKind.LeftShiftAssignmentExpression:
+                case SyntaxKind.LeftShiftExpression:
+                    opName = "shlis";
+                    break;
+                case SyntaxKind.AndAssignmentExpression:
+                case SyntaxKind.BitwiseAndExpression:
+                    opName = "and";
+                    break;
+                case SyntaxKind.OrAssignmentExpression:
+                case SyntaxKind.BitwiseOrExpression:
+                    opName = "or";
+                    break;
+                case SyntaxKind.ExclusiveOrAssignmentExpression:
+                case SyntaxKind.ExclusiveOrExpression:
+                    opName = "xor";
+                    break;
                 case SyntaxKind.AddExpression:
                 case SyntaxKind.AddAssignmentExpression:
                     opName = "addi";
