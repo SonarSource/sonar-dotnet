@@ -153,7 +153,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return variable.FirstAncestorOrSelf<BlockSyntax>();
         }
 
-        protected override ExpressionSyntax TryExtractAddressOfOperand(ExpressionSyntax expression)
+        protected override SyntaxNode TryExtractAddressOfOperand(ExpressionSyntax expression)
         {
             return expression;              //VB.NET only
         }

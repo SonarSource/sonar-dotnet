@@ -168,7 +168,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return variable.FirstAncestorOrSelf<LocalDeclarationStatementSyntax>()?.Parent;
         }
         
-        protected override ExpressionSyntax TryExtractAddressOfOperand(ExpressionSyntax expression)
+        protected override SyntaxNode TryExtractAddressOfOperand(ExpressionSyntax expression)
         {
             if(expression is UnaryExpressionSyntax unary && unary.Kind() == SyntaxKind.AddressOfExpression)
             {
