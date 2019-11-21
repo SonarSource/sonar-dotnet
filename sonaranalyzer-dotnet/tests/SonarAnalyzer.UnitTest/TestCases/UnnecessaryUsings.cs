@@ -13,6 +13,8 @@ using MyNamespace3; // Noncompliant {{Remove this unnecessary 'using'.}}
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
+using System.Security.Cryptography;
+using System.Collections.ObjectModel;
 
 [assembly: AssemblyVersion("1.0.0.0")]
 
@@ -86,6 +88,29 @@ namespace MyNamespace2.Level1.Level2
 namespace MyNamespace3
 {
     class Ns3_0 { }
+}
+
+namespace ReferencesInsideDocumentationTags
+{
+    using System.ComponentModel;
+    using System.Collections.Specialized;
+
+    /// <summary> There is <see cref="Win32Exception"/> or <see cref="ListDictionary"/></summary>
+    class ClassWithDoc { }
+
+    class InnerClass
+    {
+        /// <exception cref="AesManaged"></exception>
+        public void MethodWithDoc() { }
+
+        /// <summary>
+        ///   <seealso cref="ReadOnlyCollection{T}"/>
+        /// </summary>
+        public void MethodWithGenericClassDoc() { }
+
+        /// This is just a comment
+        public void MethodWithoutXMLDoc() { }
+    }
 }
 
 namespace AwaitExtensionHolder

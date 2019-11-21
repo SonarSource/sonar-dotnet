@@ -19,19 +19,6 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
 "region":  {
-"startLine":  12,
-"startColumn":  5,
-"endLine":  12,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S1128",
-"message":  "Remove this unnecessary 'using'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
-"region":  {
 "startLine":  16,
 "startColumn":  5,
 "endLine":  16,

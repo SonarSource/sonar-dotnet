@@ -17,19 +17,6 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CSharp\CSharpRazorViewRenderer.cs",
-"region":  {
-"startLine":  7,
-"startColumn":  5,
-"endLine":  7,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S1128",
-"message":  "Remove this unnecessary 'using'.",
-"location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CSharp\NancyCSharpRazorCodeParser.cs",
 "region":  {
 "startLine":  10,
@@ -43,38 +30,12 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\IRazorViewRenderer.cs",
-"region":  {
-"startLine":  7,
-"startColumn":  5,
-"endLine":  7,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S1128",
-"message":  "Remove this unnecessary 'using'.",
-"location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
 "region":  {
 "startLine":  14,
 "startColumn":  5,
 "endLine":  14,
 "endColumn":  28
-}
-}
-},
-{
-"id":  "S1128",
-"message":  "Remove this unnecessary 'using'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\VisualBasicRazorViewRenderer.cs",
-"region":  {
-"startLine":  7,
-"startColumn":  5,
-"endLine":  7,
-"endColumn":  38
 }
 }
 }
