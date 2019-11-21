@@ -7,18 +7,18 @@
 {
 "uri":  "sources\ManuallyAddedNoncompliantIssuesVB\IntentionalFindingsVB\S4830.vb",
 "region":  {
-"startLine":  23,
+"startLine":  22,
 "startColumn":  40,
-"endLine":  23,
+"endLine":  22,
 "endColumn":  75
 }
 },
 {
 "uri":  "sources\ManuallyAddedNoncompliantIssuesVB\IntentionalFindingsVB\S4830.vb",
 "region":  {
-"startLine":  23,
+"startLine":  22,
 "startColumn":  126,
-"endLine":  23,
+"endLine":  22,
 "endColumn":  130
 }
 }
