@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <RootNamespace>IntentionalFindingsVB</RootNamespace>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
 </Project>
