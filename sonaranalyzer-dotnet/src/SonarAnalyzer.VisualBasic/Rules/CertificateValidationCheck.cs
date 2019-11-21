@@ -68,12 +68,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override Location ArgumentLocation(ArgumentSyntax argument)
         {
             //For Lambda expression extract location of the parentheses only to separate them from secondary location of "true"
-            var expression = argument.GetExpression();
-            if (expression == null)
-            {
-                return argument.GetLocation();
-            }
-            return ((expression is LambdaExpressionSyntax lambda) ? (SyntaxNode)lambda.SubOrFunctionHeader.ParameterList : argument).GetLocation();
+            return ((argument.GetExpression() is LambdaExpressionSyntax lambda) ? (SyntaxNode)lambda.SubOrFunctionHeader.ParameterList : argument).GetLocation();
         }
 
         protected override ExpressionSyntax ArgumentExpression(ArgumentSyntax argument)
