@@ -229,6 +229,7 @@ try {
     Build-Project "AnalyzeGenerated" "AnalyzeGeneratedFiles.sln"
     Build-Project "AnalyzeGeneratedVb" "AnalyzeGeneratedVb.sln"
     Build-Project "ManuallyAddedNoncompliantIssues" "ManuallyAddedNoncompliantIssues.sln"
+    Build-Project "ManuallyAddedNoncompliantIssuesVB" "ManuallyAddedNoncompliantIssuesVB.sln"
     Build-Project "SkipGenerated" "SkipGeneratedFiles.sln"
     Build-Project "SkipGeneratedVb" "SkipGeneratedVb.sln"
 

@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4830",
+"message":  "Enable server certificate validation on this SSL/TLS connection",
+"location":  [
+{
+"uri":  "sources\ManuallyAddedNoncompliantIssuesVB\IntentionalFindingsVB\S4830.vb",
+"region":  {
+"startLine":  23,
+"startColumn":  40,
+"endLine":  23,
+"endColumn":  75
+}
+},
+{
+"uri":  "sources\ManuallyAddedNoncompliantIssuesVB\IntentionalFindingsVB\S4830.vb",
+"region":  {
+"startLine":  23,
+"startColumn":  126,
+"endLine":  23,
+"endColumn":  130
+}
+}
+]
+}
+]
+}
