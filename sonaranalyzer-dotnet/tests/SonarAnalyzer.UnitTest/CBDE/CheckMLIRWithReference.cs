@@ -55,6 +55,49 @@ func @_$invalid$global$code$.Func$int$(%arg0: i32) {
         }
 
         [TestMethod]
+        public void LeftRightShift()
+        {
+            var code = @"
+void f( int i )
+{
+    i << 1;
+    i <<= 2;
+    i >> 3;
+    i >>= 4;
+}
+";
+            var expected = @"
+func @_$invalid$global$code$.f$int$(%arg0: i32) {
+  %0 = cbde.alloca i32
+  cbde.store %arg0, %0 : memref<i32>
+  br ^bb1
+^bb1:	// pred: ^bb0
+  %1 = cbde.load %0 : memref<i32>
+  %c1_i32 = constant 1 : i32
+  %2 = shlis %1, %c1_i32 : i32
+  %3 = cbde.load %0 : memref<i32>
+  %c2_i32 = constant 2 : i32
+  %4 = shlis %3, %c2_i32 : i32
+  cbde.store %4, %0 : memref<i32>
+  %5 = cbde.load %0 : memref<i32>
+  %c3_i32 = constant 3 : i32
+  %6 = cbde.neg %c3_i32 : i32
+  %7 = shlis %5, %6 : i32
+  %8 = cbde.load %0 : memref<i32>
+  %c4_i32 = constant 4 : i32
+  %9 = cbde.neg %c4_i32 : i32
+  %10 = shlis %8, %9 : i32
+  cbde.store %10, %0 : memref<i32>
+  br ^bb2
+^bb2:	// pred: ^bb1
+  return
+}
+
+";
+            MlirTestUtilities.ValidateWithReference(code, expected, TestContext.TestName);
+        }
+
+        [TestMethod]
         public void PrePostIncrementDecrement()
         {
             var code = @"
