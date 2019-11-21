@@ -145,6 +145,8 @@ namespace LinqQuery
     }
 }
 
+// This test is for coverage, ensuring the rule does not crash if for some reason the using directive is not found when
+// a QueryExpressionSyntax is in the code
 namespace LinqQueryWithoutUsing
 {
     class LinqQueryUser

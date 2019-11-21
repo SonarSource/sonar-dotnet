@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly IImmutableSet<EquivalentNameSyntax> usingDirectivesFromParent;
             private readonly INamespaceSymbol currentNamespace;
             public readonly HashSet<INamespaceSymbol> necessaryNamespaces;
-            private bool linqQueryVisited;
+            private bool linqQueryVisited = false;
 
             public CSharpRemovableUsingWalker(SyntaxNodeAnalysisContext context, IImmutableSet<EquivalentNameSyntax> usingDirectives, INamespaceSymbol currentNamespace)
             {
@@ -111,7 +111,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 this.usingDirectivesFromParent = usingDirectives;
                 this.necessaryNamespaces = new HashSet<INamespaceSymbol>();
                 this.currentNamespace = currentNamespace;
-                this.linqQueryVisited = false;
             }
 
             public override void VisitNamespaceDeclaration(NamespaceDeclarationSyntax node)
@@ -167,8 +166,8 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var usingDirective in this.usingDirectivesFromParent)
                 {
-                    if (this.context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol &&
-                        namespaceSymbol.ToDisplayString() == "System.Linq")
+                    if (usingDirective.Name.ToString() == "System.Linq" &&
+                        this.context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol)
                     {
                         systemLinqNamespace = namespaceSymbol;
                         return true;
