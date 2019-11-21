@@ -390,6 +390,14 @@ namespace SonarAnalyzer
                 case SyntaxKind.ModuloAssignmentExpression:
                     ExtractBinaryAssignmentExpression(op);
                     break;
+                case SyntaxKind.UnaryMinusExpression:
+                    var neg = op as PrefixUnaryExpressionSyntax;
+                    writer.WriteLine($"%{OpId(neg)} = cbde.neg %{OpId(getAssignmentValue(neg.Operand))} : {MLIRType(neg)} {GetLocation(neg)}");
+                    break;
+                case SyntaxKind.UnaryPlusExpression:
+                    var plus = op as PrefixUnaryExpressionSyntax;
+                    opMap[plus] = opMap[getAssignmentValue(plus.Operand)];
+                    break;
                 case SyntaxKind.TrueLiteralExpression:
                     writer.WriteLine($"%{OpId(op)} = constant 1 : i1 {GetLocation(op)} // true");
                     break;
