@@ -1,5 +1,4 @@
-﻿
-'SonarQube, open source software quality management tool.
+﻿' SonarQube, open source software quality management tool.
 ' Copyright (C) 2008-2013 SonarSource
 ' mailto:contact AT sonarsource DOT com
 '
