@@ -94,7 +94,7 @@ namespace SonarAnalyzer.UnitTest.CBDE
             {
                 if(expectedLines[i] != actualLines[i])
                 {
-                    Assert.Fail($"First different line: {i}\nExpected: {expectedLines[i]}\nActual:   {actualLines[i]}");
+                    Assert.Fail($"First different line: {i}\nExpected: \'{expectedLines[i]}\'\nActual:   \'{actualLines[i]}\'");
                 }
             }
             Assert.AreEqual(trimmedExpected.Trim(), trimmedActual.Trim());
