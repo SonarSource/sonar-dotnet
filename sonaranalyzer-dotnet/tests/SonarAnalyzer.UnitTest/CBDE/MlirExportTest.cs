@@ -1284,6 +1284,40 @@ public int f(int i)
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void UnaryNeg()
+        {
+            var code = @"
+public bool neg()
+{
+    int i = -12;
+    int j = -i;
+    if (i + j == 0) {
+        return true;
+    }
+    return false;
+}
+";
+            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void UnaryPlus()
+        {
+            var code = @"
+public bool plus()
+{
+    int i = +12;
+    int j = +i;
+    if (i - j == 0) {
+        return true;
+    }
+    return false;
+}
+";
+            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+        }
+
     } // Class
 
 } // Namespace
