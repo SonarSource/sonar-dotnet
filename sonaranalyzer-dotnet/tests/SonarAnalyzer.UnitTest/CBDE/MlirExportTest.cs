@@ -1226,6 +1226,11 @@ public void f(int i)
     i *= 3;
     i /= 4;
     i %= 5;
+    i >>= 6;
+    i <<= 7;
+    i &= 8;
+    i |= 9;
+    i ^= 10;
 }
 
 public void g(int[] array1, long[] array2)
