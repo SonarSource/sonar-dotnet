@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules
         protected abstract TExpressionSyntax VariableInitializer(TVariableSyntax variable);
         protected abstract ImmutableArray<Location> LambdaLocations(InspectionContext c, TLambdaSyntax lambda);
         protected abstract SyntaxNode LocalVariableScope(TVariableSyntax variable);
-        protected abstract TExpressionSyntax TryExtractAddressOfOperand(TExpressionSyntax expression);
+        protected abstract SyntaxNode TryExtractAddressOfOperand(TExpressionSyntax expression);
         protected abstract SyntaxNode SyntaxFromReference(SyntaxReference reference);
         
         protected CertificateValidationCheckBase(System.Resources.ResourceManager rspecResources)
@@ -212,7 +212,7 @@ namespace SonarAnalyzer.Rules
             return MultiExpressionSublocations(c, returnExpressionSublocationsList);
         }
 
-        private bool IsVisited(InspectionContext c, TExpressionSyntax expression)
+        private bool IsVisited(InspectionContext c, SyntaxNode expression)
         {
             if (expression is TInvocationExpressionSyntax invocation)
             {
