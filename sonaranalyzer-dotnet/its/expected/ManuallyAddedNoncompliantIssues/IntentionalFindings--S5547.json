@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S5547",
+"message":  "Use a strong cipher algorithm.",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\IntentionalFindings\S5547.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  34,
+"endLine":  29,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S5547",
+"message":  "Use a strong cipher algorithm.",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\IntentionalFindings\S5547.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  33,
+"endLine":  31,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S5547",
+"message":  "Use a strong cipher algorithm.",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\IntentionalFindings\S5547.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  27,
+"endLine":  33,
+"endColumn":  51
+}
+}
+}
+]
+}
