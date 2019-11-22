@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
@@ -39,6 +40,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarAnalysisContext context)
         {
+            //C# += equivalent:
+            //AddHandler situation does not exist in VB.NET. Delegate is pointer to one function only and can not have multiple handlers. It's not an event.
+            //Only assignment and object creation are valid cases for VB.NET
+
             //Handling of = syntax
             context.RegisterSyntaxNodeActionInNonGenerated(c => CheckAssignmentSyntax(c), SyntaxKind.SimpleAssignmentStatement);
 
@@ -115,7 +120,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool IsTrueLiteral(ExpressionSyntax expression)
         {
-            return expression.Kind() == SyntaxKind.TrueLiteralExpression;
+            return expression.RemoveParentheses().Kind() == SyntaxKind.TrueLiteralExpression;
         }
 
         protected override string IdentifierText(SyntaxNode node)
@@ -143,17 +148,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
             switch (lambda)
             {
                 case SingleLineLambdaExpressionSyntax single:
-                    if (single.Body.Kind() == SyntaxKind.TrueLiteralExpression)
+                    if (single.Body is ExpressionSyntax expr && IsTrueLiteral(expr))    //LiteralExpressionSyntax or ParenthesizedExpressionSyntax like (((true)))
                     {
                         return new[] { single.Body.GetLocation() }.ToImmutableArray();
                     }
                     break;
                 case MultiLineLambdaExpressionSyntax multi:
-                    if (multi.Statements.Count != 0)
-                    {
-                        return BlockLocations(c, multi.Statements[0].Parent);
-                    }
-                    break;
+                    return BlockLocations(c, multi);
             }
             return ImmutableArray<Location>.Empty;
         }
@@ -163,11 +164,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return variable.FirstAncestorOrSelf<LocalDeclarationStatementSyntax>()?.Parent;
         }
         
-        protected override SyntaxNode TryExtractAddressOfOperand(ExpressionSyntax expression)
+        protected override SyntaxNode ExtractArgumentExpressionNode(ExpressionSyntax expression)
         {
-            if(expression is UnaryExpressionSyntax unary && unary.Kind() == SyntaxKind.AddressOfExpression)
+            expression = expression.RemoveParentheses();
+            if (expression is UnaryExpressionSyntax unary && unary.Kind() == SyntaxKind.AddressOfExpression)
             {
-                return unary.Operand;
+                return unary.Operand;   //Parentheses can not wrap AddressOf operand
             }
             return expression;
         }

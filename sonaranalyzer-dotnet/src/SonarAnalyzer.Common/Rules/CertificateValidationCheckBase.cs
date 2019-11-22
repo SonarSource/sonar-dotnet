@@ -25,7 +25,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 
-
 namespace SonarAnalyzer.Rules
 {
     public abstract class CertificateValidationCheckBase<TMethodSyntax, TArgumentSyntax, TExpressionSyntax, TIdentifierNameSyntax, TAssignmentExpressionSyntax, TInvocationExpressionSyntax, TParameterSyntax, TVariableSyntax, TLambdaSyntax> : SonarDiagnosticAnalyzer
@@ -57,7 +56,7 @@ namespace SonarAnalyzer.Rules
         protected abstract TExpressionSyntax VariableInitializer(TVariableSyntax variable);
         protected abstract ImmutableArray<Location> LambdaLocations(InspectionContext c, TLambdaSyntax lambda);
         protected abstract SyntaxNode LocalVariableScope(TVariableSyntax variable);
-        protected abstract SyntaxNode TryExtractAddressOfOperand(TExpressionSyntax expression);
+        protected abstract SyntaxNode ExtractArgumentExpressionNode(TExpressionSyntax expression);
         protected abstract SyntaxNode SyntaxFromReference(SyntaxReference reference);
         
         protected CertificateValidationCheckBase(System.Resources.ResourceManager rspecResources)
@@ -125,7 +124,7 @@ namespace SonarAnalyzer.Rules
 
         private ImmutableArray<Location> ArgumentLocations(InspectionContext c, TExpressionSyntax expression)
         {
-            switch (TryExtractAddressOfOperand(expression))
+            switch (ExtractArgumentExpressionNode(expression))
             {
                 case TIdentifierNameSyntax identifier:
                     var identSymbol = c.Context.SemanticModel.GetSymbolInfo(identifier).Symbol;
@@ -170,7 +169,8 @@ namespace SonarAnalyzer.Rules
             {
                 c.VisitedMethods.Add(containingMethodDeclaration);
                 var containingMethod = c.Context.SemanticModel.GetDeclaredSymbol(containingMethodDeclaration) as IMethodSymbol;
-                var paramSymbol = containingMethod.Parameters.Single(x => x.Name == IdentifierText(param));
+                var identText = IdentifierText(param);
+                var paramSymbol = containingMethod.Parameters.Single(x => x.Name == identText);
                 foreach (var invocation in FindInvocationList(c.Context, FindRootClassOrModule(param), containingMethod))
                 {
                     var methodParamLookup = CreateParameterLookup(invocation, containingMethod);
@@ -189,13 +189,14 @@ namespace SonarAnalyzer.Rules
             var parentScope = LocalVariableScope(variable);
             if (parentScope != null)
             {
+                var identText = IdentifierText(variable);
                 allAssignedExpressions.AddRange(parentScope.DescendantNodes().OfType<TAssignmentExpressionSyntax>()
                     .Select(x =>
                     {
                         SplitAssignment(x, out var leftIdentifier, out var right);
                         return new { leftIdentifier, right };
                     })
-                    .Where( x => x.leftIdentifier != null && IdentifierText(x.leftIdentifier) == IdentifierText(variable))
+                    .Where( x => x.leftIdentifier != null && IdentifierText(x.leftIdentifier) == identText)
                     .Select(x => x.right));
             }
             var initializer = VariableInitializer(variable);
@@ -228,7 +229,7 @@ namespace SonarAnalyzer.Rules
             var exprSublocationsList = expressions.Distinct(CreateNodeEqualityComparer())
                 .Select(x => CallStackSublocations(c, x))
                 .ToArray();
-            if (exprSublocationsList.Any(x => x.IsEmpty))   //If there's at leat one concurrent expression, that returns compliant delegate, than there's some logic and this scope is compliant
+            if (exprSublocationsList.Any(x => x.IsEmpty))   //If there's at leat one concurrent expression, that returns compliant delegate, then there's some logic and this scope is compliant
             {
                 return ImmutableArray<Location>.Empty;
             }

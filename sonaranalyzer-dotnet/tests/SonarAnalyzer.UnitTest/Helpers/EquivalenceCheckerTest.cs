@@ -105,114 +105,87 @@ Namespace Test
 
 End Namespace";
 
-        private List<CSharp.MethodDeclarationSyntax> methods_CS;
-        private List<VisualBasic.MethodBlockSyntax> methods_VB;
+        private CSharpMethods methods_CS;
+        private VisualBasicMethods methods_VB;
 
         [TestInitialize]
         public void TestSetup()
         {
-            var syntaxTree_CS = Microsoft.CodeAnalysis.CSharp.CSharpSyntaxTree.ParseText(Source_CS);
-            this.methods_CS = syntaxTree_CS.GetRoot().DescendantNodes().OfType<CSharp.MethodDeclarationSyntax>().ToList();
-
-            var syntaxTree_VB = Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxTree.ParseText(Source_VB);
-            this.methods_VB = syntaxTree_VB.GetRoot().DescendantNodes().OfType<VisualBasic.MethodBlockSyntax>().ToList();
+            methods_CS = new CSharpMethods(Source_CS);
+            methods_VB = new VisualBasicMethods(Source_VB);
         }
 
         [TestMethod]
         public void AreEquivalent_Node_CS()
         {
-            var result = CSharpEquivalenceChecker.AreEquivalent(
-                this.methods_CS.First(m => m.Identifier.ValueText == "Method1").Body,
-                this.methods_CS.First(m => m.Identifier.ValueText == "Method2").Body);
+            var result = CSharpEquivalenceChecker.AreEquivalent(methods_CS.Method1, methods_CS.Method2);
             result.Should().BeTrue();
 
-            result = CSharpEquivalenceChecker.AreEquivalent(
-                this.methods_CS.First(m => m.Identifier.ValueText == "Method1").Body,
-                this.methods_CS.First(m => m.Identifier.ValueText == "Method3").Body);
+            result = CSharpEquivalenceChecker.AreEquivalent(methods_CS.Method1, methods_CS.Method3);
             result.Should().BeFalse();
         }
 
         [TestMethod]
         public void AreEquivalent_List_CS()
         {
-            var result = CSharpEquivalenceChecker.AreEquivalent(
-                this.methods_CS.First(m => m.Identifier.ValueText == "Method1").Body.Statements,
-                this.methods_CS.First(m => m.Identifier.ValueText == "Method2").Body.Statements);
+            var result = CSharpEquivalenceChecker.AreEquivalent(methods_CS.Method1.Statements, methods_CS.Method2.Statements);
             result.Should().BeTrue();
 
-            result = CSharpEquivalenceChecker.AreEquivalent(
-                this.methods_CS.First(m => m.Identifier.ValueText == "Method1").Body.Statements,
-                this.methods_CS.First(m => m.Identifier.ValueText == "Method3").Body.Statements);
+            result = CSharpEquivalenceChecker.AreEquivalent(methods_CS.Method1.Statements, methods_CS.Method3.Statements);
             result.Should().BeFalse();
         }
-        
+
         [TestMethod]
         public void EqualityComparer_Node_CS()
         {
             var comparer = new CSharpSyntaxNodeEqualityComparer<CSharp.BlockSyntax>();
-            var method1 = this.methods_CS.First(m => m.Identifier.ValueText == "Method1").Body;
-            var method2 = this.methods_CS.First(m => m.Identifier.ValueText == "Method2").Body;
-            var method3 = this.methods_CS.First(m => m.Identifier.ValueText == "Method3").Body;
-            var method4 = this.methods_CS.First(m => m.Identifier.ValueText == "Method4").Body;
 
-            var result = comparer.Equals(method1, method2);
+            var result = comparer.Equals(methods_CS.Method1, methods_CS.Method2);
             result.Should().BeTrue();
 
-            result = comparer.Equals(method1, method3);
+            result = comparer.Equals(methods_CS.Method1, methods_CS.Method3);
             result.Should().BeFalse();
 
-            var hashSet = new HashSet<CSharp.BlockSyntax>(new[] { method1, method2, method3 }, comparer);
+            var hashSet = new HashSet<CSharp.BlockSyntax>(new[] { methods_CS.Method1, methods_CS.Method2, methods_CS.Method3 }, comparer);
             hashSet.Count.Should().Be(2);
-            hashSet.Contains(method1).Should().BeTrue();
-            hashSet.Contains(method4).Should().BeFalse();
+            hashSet.Contains(methods_CS.Method1).Should().BeTrue();
+            hashSet.Contains(methods_CS.Method4).Should().BeFalse();
         }
-        
+
         [TestMethod]
         public void EqualityComparer_List_CS()
         {
             var comparer = new CSharpSyntaxNodeEqualityComparer<CSharp.StatementSyntax>();
-            var method1 = this.methods_CS.First(m => m.Identifier.ValueText == "Method1").Body.Statements;
-            var method2 = this.methods_CS.First(m => m.Identifier.ValueText == "Method2").Body.Statements;
-            var method3 = this.methods_CS.First(m => m.Identifier.ValueText == "Method3").Body.Statements;
-            var method4 = this.methods_CS.First(m => m.Identifier.ValueText == "Method4").Body.Statements;
 
-            var result = comparer.Equals(method1, method2);
+            var result = comparer.Equals(methods_CS.Method1.Statements, methods_CS.Method2.Statements);
             result.Should().BeTrue();
 
-            result = comparer.Equals(method1, method3);
+            result = comparer.Equals(methods_CS.Method1.Statements, methods_CS.Method3.Statements);
             result.Should().BeFalse();
 
-            var hashSet = new HashSet<SyntaxList<CSharp.StatementSyntax>>(new[] { method1, method2, method3 }, comparer);
+            var hashSet = new HashSet<SyntaxList<CSharp.StatementSyntax>>(new[] { methods_CS.Method1.Statements, methods_CS.Method2.Statements, methods_CS.Method3.Statements }, comparer);
             hashSet.Count.Should().Be(2);
-            hashSet.Contains(method1).Should().BeTrue();
-            hashSet.Contains(method4).Should().BeFalse();
+            hashSet.Contains(methods_CS.Method1.Statements).Should().BeTrue();
+            hashSet.Contains(methods_CS.Method4.Statements).Should().BeFalse();
         }
 
         [TestMethod]
         public void AreEquivalent_Node_VB()
         {
-            var result = VisualBasicEquivalenceChecker.AreEquivalent(
-                this.methods_VB.First(m => m.GetIdentifierText() == "Method1").Statements.First(),
-                this.methods_VB.First(m => m.GetIdentifierText() == "Method2").Statements.First());
+            var result = VisualBasicEquivalenceChecker.AreEquivalent(methods_VB.Method1.First(), methods_VB.Method2.First());
             result.Should().BeTrue();
 
-            result = VisualBasicEquivalenceChecker.AreEquivalent(
-                this.methods_VB.First(m => m.GetIdentifierText() == "Method1").Statements.First(),
-                this.methods_VB.First(m => m.GetIdentifierText() == "Method3").Statements.First());
+            result = VisualBasicEquivalenceChecker.AreEquivalent(methods_VB.Method1.First(), methods_VB.Method3.First());
             result.Should().BeFalse();
         }
 
         [TestMethod]
         public void AreEquivalent_List_VB()
         {
-            var result = VisualBasicEquivalenceChecker.AreEquivalent(
-                this.methods_VB.First(m => m.GetIdentifierText() == "Method1").Statements,
-                this.methods_VB.First(m => m.GetIdentifierText() == "Method2").Statements);
+            var result = VisualBasicEquivalenceChecker.AreEquivalent(methods_VB.Method1, methods_VB.Method2);
             result.Should().BeTrue();
 
-            result = VisualBasicEquivalenceChecker.AreEquivalent(
-                this.methods_VB.First(m => m.GetIdentifierText() == "Method1").Statements,
-                this.methods_VB.First(m => m.GetIdentifierText() == "Method3").Statements);
+            result = VisualBasicEquivalenceChecker.AreEquivalent(methods_VB.Method1, methods_VB.Method3);
             result.Should().BeFalse();
         }
 
@@ -220,42 +193,62 @@ End Namespace";
         public void EqualityComparer_Node_VB()
         {
             var comparer = new VisualBasicSyntaxNodeEqualityComparer<VisualBasic.StatementSyntax>();
-            var method1 = this.methods_VB.First(m => m.GetIdentifierText() == "Method1").Statements.First();
-            var method2 = this.methods_VB.First(m => m.GetIdentifierText() == "Method2").Statements.First();
-            var method3 = this.methods_VB.First(m => m.GetIdentifierText() == "Method3").Statements.First();
-            var method4 = this.methods_VB.First(m => m.GetIdentifierText() == "Method4").Statements.First();
 
-            var result = comparer.Equals(method1, method2);
+            var result = comparer.Equals(methods_VB.Method1.First(), methods_VB.Method2.First());
             result.Should().BeTrue();
 
-            result = comparer.Equals(method1, method3);
+            result = comparer.Equals(methods_VB.Method1.First(), methods_VB.Method3.First());
             result.Should().BeFalse();
 
-            var hashSet = new HashSet<VisualBasic.StatementSyntax>(new[] { method1, method2, method3 }, comparer);
+            var hashSet = new HashSet<VisualBasic.StatementSyntax>(new[] { methods_VB.Method1.First(), methods_VB.Method2.First(), methods_VB.Method3.First() }, comparer);
             hashSet.Count.Should().Be(2);
-            hashSet.Contains(method1).Should().BeTrue();
-            hashSet.Contains(method4).Should().BeFalse();
+            hashSet.Contains(methods_VB.Method1.First()).Should().BeTrue();
+            hashSet.Contains(methods_VB.Method4.First()).Should().BeFalse();
         }
 
         [TestMethod]
         public void EqualityComparer_List_VB()
         {
             var comparer = new VisualBasicSyntaxNodeEqualityComparer<VisualBasic.StatementSyntax>();
-            var method1 = this.methods_VB.First(m => m.GetIdentifierText() == "Method1").Statements;
-            var method2 = this.methods_VB.First(m => m.GetIdentifierText() == "Method2").Statements;
-            var method3 = this.methods_VB.First(m => m.GetIdentifierText() == "Method3").Statements;
-            var method4 = this.methods_VB.First(m => m.GetIdentifierText() == "Method4").Statements;
-
-            var result = comparer.Equals(method1, method2);
+            
+            var result = comparer.Equals(methods_VB.Method1, methods_VB.Method2);
             result.Should().BeTrue();
 
-            result = comparer.Equals(method1, method3);
+            result = comparer.Equals(methods_VB.Method1, methods_VB.Method3);
             result.Should().BeFalse();
-            
-            var hashSet = new HashSet<SyntaxList<VisualBasic.StatementSyntax>>(new[] { method1, method2, method3 }, comparer);
+
+            var hashSet = new HashSet<SyntaxList<VisualBasic.StatementSyntax>>(new[] { methods_VB.Method1, methods_VB.Method2, methods_VB.Method3 }, comparer);
             hashSet.Count.Should().Be(2);
-            hashSet.Contains(method1).Should().BeTrue();
-            hashSet.Contains(method4).Should().BeFalse();
+            hashSet.Contains(methods_VB.Method1).Should().BeTrue();
+            hashSet.Contains(methods_VB.Method4).Should().BeFalse();
+        }
+
+        private class CSharpMethods
+        {
+            public readonly CSharp.BlockSyntax Method1, Method2, Method3, Method4;
+
+            public CSharpMethods(string source)
+            {
+                var methods = Microsoft.CodeAnalysis.CSharp.CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes().OfType<CSharp.MethodDeclarationSyntax>().ToArray();
+                Method1 = methods.Single(m => m.Identifier.ValueText == "Method1").Body;
+                Method2 = methods.Single(m => m.Identifier.ValueText == "Method2").Body;
+                Method3 = methods.Single(m => m.Identifier.ValueText == "Method3").Body;
+                Method4 = methods.Single(m => m.Identifier.ValueText == "Method4").Body;
+            }
+        }
+
+        private class VisualBasicMethods
+        {
+            public readonly SyntaxList<VisualBasic.StatementSyntax> Method1, Method2, Method3, Method4;
+
+            public VisualBasicMethods(string source)
+            {
+                var methods = Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxTree.ParseText(source).GetRoot().DescendantNodes().OfType<VisualBasic.MethodBlockSyntax>().ToArray();
+                Method1 = methods.Single(m => m.GetIdentifierText() == "Method1").Statements;
+                Method2 = methods.Single(m => m.GetIdentifierText() == "Method2").Statements;
+                Method3 = methods.Single(m => m.GetIdentifierText() == "Method3").Statements;
+                Method4 = methods.Single(m => m.GetIdentifierText() == "Method4").Statements;
+            }
         }
 
     }

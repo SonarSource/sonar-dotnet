@@ -24,6 +24,8 @@ namespace Tests.Diagnostics
             //Secondary@+1
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => true;    //Noncompliant  {{Enable server certificate validation on this SSL/TLS connection}}
 //                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                     ^^^^
+            //Secondary@+1
+            CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => (((true)));    //Noncompliant 
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => false;
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => certificate.Subject == "Test";
 
@@ -51,11 +53,11 @@ namespace Tests.Diagnostics
             CreateRQ().ServerCertificateValidationCallback = (sender, certificate, chain, SslPolicyErrors) => { return true; };    //Noncompliant
                                                                                    //Secondary@-1
 
-            //Do not test this one. It's .NET Standard 2.1 target only. It shoudl work since we're hunting RemoteCertificateValidationCallback and method signature
+            //Do not test this one. It's .NET Standard 2.1 target only. It should work since we're hunting RemoteCertificateValidationCallback and method signature
             //var ws = new System.Net.WebSockets.ClientWebSocket();
             //ws.Options.RemoteCertificateValidationCallback += InvalidValidation;
 
-            //Do not test this one. It's .NET Standard 2.1 target only. It shoudl work since we're hunting RemoteCertificateValidationCallback and method signature
+            //Do not test this one. It's .NET Standard 2.1 target only. It should work since we're hunting RemoteCertificateValidationCallback and method signature
             //var sslOpts = new System.Net.Security.SslClientAuthentication();
             //Security.SslClientAuthenticationOptions.RemoteCertificateValidationCallback;
         }
@@ -141,6 +143,7 @@ namespace Tests.Diagnostics
             using (var ms = new System.IO.MemoryStream())
             {                                                                                                                          //Secondary@+1
                 using (var ssl = new System.Net.Security.SslStream(ms, true, (sender, chain, certificate, SslPolicyErrors) => true))   //Noncompliant
+//                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^     ^^^^
                 {
                 }
                 using (var ssl = new System.Net.Security.SslStream(ms, true, InvalidValidation))   //Noncompliant

@@ -22,8 +22,10 @@ Namespace Tests.TestCases
         Private Sub DirectAddHandlers()
             'Inline version
             'Secondary@+1
-            CreateRQ().ServerCertificateValidationCallback = Function(sender, certificate, chain, SslPolicyErrors) True    'Noncompliant  {{Enable server certificate validation on this SSL/TLS connection}}
+            CreateRQ().ServerCertificateValidationCallback = Function(sender, certificate, chain, SslPolicyErrors) True         'Noncompliant  {{Enable server certificate validation on this SSL/TLS connection}}
             '          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                         ^^^^
+            'Secondary@+1
+            CreateRQ().ServerCertificateValidationCallback = Function(sender, certificate, chain, SslPolicyErrors) (((True)))   'Noncompliant
             CreateRQ().ServerCertificateValidationCallback = Function(sender, certificate, chain, SslPolicyErrors) False
             CreateRQ().ServerCertificateValidationCallback = Function(sender, certificate, chain, SslPolicyErrors) certificate.Subject = "Test"
 
@@ -51,11 +53,11 @@ Namespace Tests.TestCases
             CreateRQ().ServerCertificateValidationCallback = AddressOf CompliantVBSpecific
             CreateRQ().ServerCertificateValidationCallback = AddressOf InvalidVBSpecific    'Noncompliant
 
-            'Do not test this one. It's .NET Standard 2.1 target only. It shoudl work since we're hunting RemoteCertificateValidationCallback and method signature
+            'Do not test this one. It's .NET Standard 2.1 target only. It should work since we're hunting RemoteCertificateValidationCallback and method signature
             'var ws = new System.Net.WebSockets.ClientWebSocket()
             'ws.Options.RemoteCertificateValidationCallback = InvalidValidation
 
-            'Do not test this one. It's .NET Standard 2.1 target only. It shoudl work since we're hunting RemoteCertificateValidationCallback and method signature
+            'Do not test this one. It's .NET Standard 2.1 target only. It should work since we're hunting RemoteCertificateValidationCallback and method signature
             'var sslOpts = new System.Net.Security.SslClientAuthentication()
             'Security.SslClientAuthenticationOptions.RemoteCertificateValidationCallback
         End Sub
@@ -138,6 +140,7 @@ Namespace Tests.TestCases
 
             Using ms As New System.IO.MemoryStream                                                                                      'Secondary@+1
                 Using ssl As New System.Net.Security.SslStream(ms, True, Function(sender, chain, certificate, SslPolicyErrors) True)    'Noncompliant
+                    '                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  ^^^^
                 End Using
                 Using ssl As New System.Net.Security.SslStream(ms, True, AddressOf InvalidValidation)   'Noncompliant
                 End Using

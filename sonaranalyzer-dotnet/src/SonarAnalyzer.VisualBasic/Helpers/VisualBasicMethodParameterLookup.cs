@@ -35,8 +35,7 @@ namespace SonarAnalyzer.Helpers
             : base(argumentList.Arguments, semanticModel.GetSymbolInfo(argumentList.Parent).Symbol as IMethodSymbol)
         {
         }
-
-
+        
         protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
             (argument as SimpleArgumentSyntax)?.NameColonEquals?.Name.Identifier;
     }

@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsTrueLiteral(ExpressionSyntax expression)
         {
-            return expression.Kind() == SyntaxKind.TrueLiteralExpression;
+            return expression.RemoveParentheses().Kind() == SyntaxKind.TrueLiteralExpression;
         }
 
         protected override string IdentifierText(SyntaxNode node)
@@ -134,13 +134,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override ImmutableArray<Location> LambdaLocations(InspectionContext c, ParenthesizedLambdaExpressionSyntax lambda)
         {
-            if ((lambda.Body as LiteralExpressionSyntax)?.Kind() == SyntaxKind.TrueLiteralExpression)
-            {
-                return new[] { lambda.Body.GetLocation() }.ToImmutableArray();   //Code was found guilty for lambda (...) => true
-            }
-            else if (lambda.Body is BlockSyntax block)
+            if (lambda.Body is BlockSyntax block)
             {
                 return BlockLocations(c, block);
+            }
+            else if (lambda.Body is ExpressionSyntax expr && IsTrueLiteral(expr))   //LiteralExpressionSyntax or ParenthesizedExpressionSyntax like (((true)))
+            {
+                return new[] { lambda.Body.GetLocation() }.ToImmutableArray();   //Code was found guilty for lambda (...) => true
             }
             else
             {
@@ -153,9 +153,9 @@ namespace SonarAnalyzer.Rules.CSharp
             return variable.FirstAncestorOrSelf<BlockSyntax>();
         }
 
-        protected override SyntaxNode TryExtractAddressOfOperand(ExpressionSyntax expression)
+        protected override SyntaxNode ExtractArgumentExpressionNode(ExpressionSyntax expression)
         {
-            return expression;              //VB.NET only
+            return expression.RemoveParentheses(); 
         }
 
         protected override SyntaxNode SyntaxFromReference(SyntaxReference reference)
