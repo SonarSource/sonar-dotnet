@@ -132,3 +132,28 @@ namespace AwaitExtensionUser
         }
     }
 }
+
+namespace LinqQuery
+{
+    using System.Linq; // Compliant - statement is needed for query syntax
+    class LinqQueryUser
+    {
+        public void DoLinqQuery(List<string> myList)
+        {
+            var linkQuery = from item in myList select item.GetType();
+        }
+    }
+}
+
+// This test is for coverage, ensuring the rule does not crash if for some reason the using directive is not found when
+// a QueryExpressionSyntax is in the code
+namespace LinqQueryWithoutUsing
+{
+    class LinqQueryUser
+    {
+        public void DoLinqQuery(List<string> myList)
+        {
+            var linkQuery = from item in myList select item.GetType(); // Error [CS1935] - Could not find an implementation of the query pattern for source type 'List<string>'.
+        }
+    }
+}

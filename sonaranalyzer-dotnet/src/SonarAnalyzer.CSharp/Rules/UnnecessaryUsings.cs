@@ -103,6 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly IImmutableSet<EquivalentNameSyntax> usingDirectivesFromParent;
             private readonly INamespaceSymbol currentNamespace;
             public readonly HashSet<INamespaceSymbol> necessaryNamespaces;
+            private bool linqQueryVisited = false;
 
             public CSharpRemovableUsingWalker(SyntaxNodeAnalysisContext context, IImmutableSet<EquivalentNameSyntax> usingDirectives, INamespaceSymbol currentNamespace)
             {
@@ -148,6 +149,35 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             /// <summary>
+            /// LINQ Query Syntax do not use symbols from the 'System.Linq' namespace directly, but the using directive is
+            /// still necessary to use the Query Syntax form.
+            /// </summary>
+            public override void VisitQueryExpression(QueryExpressionSyntax node)
+            {
+                if (!this.linqQueryVisited && TryGetSystemLinkNamespace(out var systemLinqNamespaceSymbol))
+                {
+                    this.necessaryNamespaces.Add(systemLinqNamespaceSymbol);
+                }
+                this.linqQueryVisited = true;
+                base.VisitQueryExpression(node);
+            }
+
+            private bool TryGetSystemLinkNamespace(out INamespaceSymbol systemLinqNamespace)
+            {
+                foreach (var usingDirective in this.usingDirectivesFromParent)
+                {
+                    if (usingDirective.Name.ToString() == "System.Linq" &&
+                        this.context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol)
+                    {
+                        systemLinqNamespace = namespaceSymbol;
+                        return true;
+                    }
+                }
+                systemLinqNamespace = null;
+                return false;
+            }
+
+            /// <summary>
             /// We check the symbol of each name node found in the code. If the containing namespace of the symbol is
             /// neither the current namespace or one of its parent, it is then added to the necessary namespace set, as
             /// importing that namespace is indeed necessary.
@@ -171,16 +201,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
     internal sealed class EquivalentNameSyntax : IEquatable<EquivalentNameSyntax>
     {
-        private readonly NameSyntax name;
+        public NameSyntax Name { get; private set; }
 
         public EquivalentNameSyntax(NameSyntax name)
         {
-            this.name = name;
+            Name = name;
         }
 
         public override int GetHashCode()
         {
-            return name.ToString().GetHashCode();
+            return Name.ToString().GetHashCode();
         }
 
         public override bool Equals(object obj)
@@ -191,7 +221,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public bool Equals(EquivalentNameSyntax other)
         {
-            return other != null && CSharpEquivalenceChecker.AreEquivalent(this.name, other.name);
+            return other != null && CSharpEquivalenceChecker.AreEquivalent(Name, other.Name);
         }
     }
 }
