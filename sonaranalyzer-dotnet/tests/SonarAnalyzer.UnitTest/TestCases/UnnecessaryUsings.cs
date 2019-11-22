@@ -139,9 +139,39 @@ namespace AwaitExtensionUser
     }
 }
 
-namespace LinqQuery
+namespace LinqQuery1
 {
     using System.Linq; // Compliant - statement is needed for query syntax
+    class LinqQueryUser
+    {
+        public void DoLinqQuery(List<string> myList)
+        {
+            var linkQuery = from item in myList select item.GetType();
+        }
+    }
+}
+
+namespace LinqQuery2
+{
+    using global::System.Linq; // Compliant - statement is needed for query syntax
+    class LinqQueryUser
+    {
+        public void DoLinqQuery(List<string> myList)
+        {
+            var linkQuery = from item in myList select item.GetType();
+        }
+    }
+}
+
+namespace NoLinqQuery
+{
+    using System.Linq; // Noncompliant
+    class UnusedLinqImport { }
+}
+
+namespace System
+{
+    using Linq; // Compliant - statement is needed for query syntax
     class LinqQueryUser
     {
         public void DoLinqQuery(List<string> myList)
