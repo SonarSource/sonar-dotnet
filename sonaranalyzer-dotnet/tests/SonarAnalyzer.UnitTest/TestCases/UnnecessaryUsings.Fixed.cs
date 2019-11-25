@@ -136,9 +136,9 @@ namespace AwaitExtensionUser
 namespace LinqQuery1
 {
     using System.Linq; // Compliant - statement is needed for query syntax
-    class LinqQueryUser
+    class Usage
     {
-        public void DoLinqQuery(List<string> myList)
+        public void DoQuery(List<string> myList)
         {
             var query = from item in myList select item.GetType();
         }
@@ -148,9 +148,9 @@ namespace LinqQuery1
 namespace LinqQuery2
 {
     using global::System.Linq; // Compliant - statement is needed for query syntax
-    class LinqQueryUser
+    class Usage
     {
-        public void DoLinqQuery(List<string> myList)
+        public void DoQuery(List<string> myList)
         {
             var query = from item in myList select item.GetType();
         }
@@ -162,9 +162,9 @@ namespace LinqQuery3.System.Linq { }
 namespace LinqQuery3
 {
     using global::System.Linq;
-    class LinqQueryUser
+    class Usage
     {
-        public void DoLinqQuery(List<string> myList)
+        public void DoQuery(List<string> myList)
         {
             var query = from item in myList select item.GetType();
         }
@@ -179,9 +179,9 @@ namespace NoLinqQuery
 namespace System
 {
     using Linq; // Compliant - statement is needed for query syntax
-    class LinqQueryUser
+    class Usage
     {
-        public void DoLinqQuery(List<string> myList)
+        public void DoQuery(List<string> myList)
         {
             var query = from item in myList select item.GetType();
         }
@@ -192,9 +192,9 @@ namespace System
 // a QueryExpressionSyntax is in the code
 namespace LinqQueryWithoutUsing
 {
-    class LinqQueryUser
+    class Usage
     {
-        public void DoLinqQuery(List<string> myList)
+        public void DoQuery(List<string> myList)
         {
             var query = from item in myList select item.GetType(); // Error [CS1935] - Could not find an implementation of the query pattern for source type 'List<string>'.
         }
