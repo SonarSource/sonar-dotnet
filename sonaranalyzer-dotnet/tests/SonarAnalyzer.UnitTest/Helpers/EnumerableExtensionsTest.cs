@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -81,50 +80,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var c2 = new List<string>();
 
             c1.Equals(c2, (e1, e2) => e1.ToString() == e2).Should().BeTrue();
-        }
-
-        [TestMethod]
-        public void JoinStr_T_String()
-        {
-            var lst = new[] {
-                Tuple.Create(1, "a"),
-                Tuple.Create(2, "bb"),
-                Tuple.Create(3, "ccc") };
-
-            lst.JoinStr(null, x => x.Item2).Should().Be("abbccc");
-            lst.JoinStr(", ", x => x.Item2).Should().Be("a, bb, ccc");
-            lst.JoinStr(" ", x => x.Item2 + "!").Should().Be("a! bb! ccc!");
-            lst.JoinStr("; ", x => x.Item1 + ":" + x.Item2).Should().Be("1:a; 2:bb; 3:ccc");
-        }
-
-        [TestMethod]
-        public void JoinStr_T_Int()
-        {
-            var lst = new[] {
-                Tuple.Create(1, "a"),
-                Tuple.Create(2, "bb"),
-                Tuple.Create(3, "ccc") };
-
-            lst.JoinStr(", ", x => x.Item1).Should().Be("1, 2, 3");
-            lst.JoinStr(null, x => x.Item1 + 10).Should().Be("111213");
-        }
-
-        [TestMethod]
-        public void JoinStr_String()
-        {
-            new string[] { }.JoinStr(", ").Should().Be("");
-            new[] { "a" }.JoinStr(", ").Should().Be("a");
-            new[] { "a", "bb", "ccc" }.JoinStr(", ").Should().Be("a, bb, ccc");
-            new[] { "a", "bb", "ccc" }.JoinStr(null).Should().Be("abbccc");
-        }
-
-        [TestMethod]
-        public void JoinStr_Int()
-        {
-            new int[] { }.JoinStr(", ").Should().Be("");
-            new[] { 1 }.JoinStr(", ").Should().Be("1");
-            new[] { 1, 22, 333 }.JoinStr(", ").Should().Be("1, 22, 333");
-            new[] { 1, 22, 333 }.JoinStr(null).Should().Be("122333");
         }
     }
 }
