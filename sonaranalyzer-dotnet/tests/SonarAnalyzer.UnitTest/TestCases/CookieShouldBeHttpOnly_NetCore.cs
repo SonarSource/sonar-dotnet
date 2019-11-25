@@ -18,7 +18,7 @@ namespace Tests.Diagnostics
 
         void CtorSetsNotAllowedValue()
         {
-            new CookieOptions(); // Noncompliant {{Set the 'HttpOnly' property of this cookie to 'true'.}}
+            new CookieOptions(); // Noncompliant {{Make sure creating this cookie without the "HttpOnly" flag is safe.}}
         }
 
         void InitializerSetsAllowedValue()
