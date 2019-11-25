@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -169,7 +169,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract string FileName { get; }
 
-        // TODO: Remove this hardcoded hack as soon as the following ticket is fixed:
+        // ToDo: Remove this hardcoded hack as soon as the following ticket is fixed:
         // https://jira.sonarsource.com/browse/MMF-672
         private static bool ShouldGenerateMetrics(SyntaxTree tree) =>
             FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath));

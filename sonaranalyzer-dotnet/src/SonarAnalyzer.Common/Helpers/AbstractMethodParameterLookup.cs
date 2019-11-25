@@ -24,7 +24,7 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
-    // TODO: this should come from the Roslyn API (https://github.com/dotnet/roslyn/issues/9)
+    // ToDo: this should come from the Roslyn API (https://github.com/dotnet/roslyn/issues/9)
     internal abstract class AbstractMethodParameterLookup<TArgumentSyntax>
         where TArgumentSyntax : SyntaxNode
     {
