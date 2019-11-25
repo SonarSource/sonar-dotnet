@@ -9,12 +9,23 @@ namespace Tests.Diagnostics
     {
         IEnumerable<string> ArrowedStrings1 => null; // Noncompliant {{Return an empty collection instead of null.}}
 //                                             ^^^^
+
+        IEnumerable<string> ArrowedStrings2 => (null); // Noncompliant
+
         IEnumerable<string> Strings2
         {
             get
             {
                 return null; // Noncompliant
 //              ^^^^^^^^^^^^
+            }
+        }
+
+        IEnumerable<string> Strings3
+        {
+            get
+            {
+                return ((null)); // Noncompliant
             }
         }
 
@@ -128,8 +139,29 @@ namespace Tests.Diagnostics
                     return o;
                 }
 
-                return null; // Noncompliant FP
+                return null;
             });
+        }
+
+        static IEnumerable<string> TestNullFromParenthesizedLambda()
+        {
+            var list = new List<string>();
+
+            return list.Select<string, string>((o, i) =>
+            {
+                return null;
+            });
+        }
+
+        static IEnumerable<string> MethodWithLambdaStillRaisesIssue()
+        {
+            var list = new List<string>();
+
+            return list.Select<string, string>((o, i) =>
+            {
+                return null;
+            });
+            return null; // Noncompliant
         }
     }
 }

@@ -97,8 +97,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return methodSymbol != null &&
                 !methodSymbol.ReturnType.Is(KnownType.System_String) &&
-                methodSymbol.ReturnType.DerivesOrImplementsAny(CollectionTypes) &&
-                !methodSymbol.ReturnType.DerivesFrom(KnownType.System_Xml_XmlNode);
+                !methodSymbol.ReturnType.DerivesFrom(KnownType.System_Xml_XmlNode) &&
+                methodSymbol.ReturnType.DerivesOrImplementsAny(CollectionTypes);
         }
 
         private static ArrowExpressionClauseSyntax GetExpressionBody(SyntaxNode node)
@@ -150,18 +150,20 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static LiteralExpressionSyntax GetNullLiteralOrDefault(ArrowExpressionClauseSyntax expressionBody)
         {
-            return expressionBody.Expression.IsNullLiteral()
-                ? (LiteralExpressionSyntax)expressionBody.Expression
+            var innerExpression = expressionBody.Expression.RemoveParentheses();
+            return innerExpression.IsNullLiteral()
+                ? (LiteralExpressionSyntax)innerExpression
                 : null;
         }
 
         private static IEnumerable<ReturnStatementSyntax> GetReturnNullStatements(BlockSyntax methodBlock)
         {
-            return methodBlock.DescendantNodes(n => !n.IsKind(SyntaxKindEx.LocalFunctionStatement))
+            return methodBlock.DescendantNodes(n =>
+                    !n.IsAnyKind(SyntaxKindEx.LocalFunctionStatement,
+                        SyntaxKind.SimpleLambdaExpression,
+                        SyntaxKind.ParenthesizedLambdaExpression))
                 .OfType<ReturnStatementSyntax>()
-                .Where(returnStatement =>
-                    returnStatement.Expression.IsNullLiteral() &&
-                    returnStatement.FirstAncestorOrSelf<ParenthesizedLambdaExpressionSyntax>() == null);
+                .Where(returnStatement => returnStatement.Expression.RemoveParentheses().IsNullLiteral());
         }
     }
 }
