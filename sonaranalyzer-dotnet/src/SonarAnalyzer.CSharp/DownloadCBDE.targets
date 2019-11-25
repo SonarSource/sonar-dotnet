@@ -9,79 +9,93 @@
   
   -->
   
+    <ItemGroup>
+    <CBDEUrls Include="http://repox.jfrog.io/repox/sonarsource-public-builds/org/sonarsource/cbde/windows/cbde-windows.zip" >
+      <SubFolder>windows\</SubFolder>
+      <MainExe>dotnet-symbolic-execution.exe</MainExe>
+      <ZipFileName>cbde-windows.zip</ZipFileName>
+    </CBDEUrls>
+    <CBDEUrls Include="http://repox.jfrog.io/repox/sonarsource-public-builds/org/sonarsource/cbde/linux/cbde-linux.zip" >
+      <SubFolder>linux\</SubFolder>
+      <MainExe>dotnet-symbolic-execution</MainExe>
+      <ZipFileName>cbde-linux.zip</ZipFileName>
+    </CBDEUrls>
+  </ItemGroup>
+
   <PropertyGroup>
     <CBDEDownloadUrl>http://repox.jfrog.io/repox/sonarsource-public-builds/org/sonarsource/cbde/windows/cbde-windows.zip</CBDEDownloadUrl>
-    <RelativeCBDEFolder>CBDE\windows\</RelativeCBDEFolder>
+    <RelativeCBDEFolder>CBDE\</RelativeCBDEFolder>
     <CBDEFolder>$(MSBuildProjectDirectory)\$(RelativeCBDEFolder)</CBDEFolder>
-    <CBDEZipFileName>cbde-windows.zip</CBDEZipFileName>
-    <CBDEZipFilePath>$(CBDEFolder)$(CBDEZipFileName)</CBDEZipFilePath>
-  </PropertyGroup>
+   </PropertyGroup>
 
   <!-- Specify them here in case they are already present. If they are not, they will be added by the task that fetches the files -->
   <ItemGroup>
-      <Content Include="$(RelativeCBDEFolder)\**\*.exe" >
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-      <Content Include="$(RelativeCBDEFolder)\**\*.txt" >
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
+    <Content Include="$(RelativeCBDEFolder)\windows\**\*.exe" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(RelativeCBDEFolder)\windows\**\*.txt" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(RelativeCBDEFolder)\linux\**" Exclude="$(RelativeCBDEFolder)\linux\**\*.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
+
   
 
 
-  <Target Name="FetchCBDEBinaries" BeforeTargets="BeforeBuild" >
-    <PropertyGroup>
-      <CBDEFilesExist>$([System.IO.File]::Exists('$(CBDEFolder)dotnet-symbolic-execution.exe'))</CBDEFilesExist>
-      <ShouldDownloadCBDE>$(UpdateCBDE)</ShouldDownloadCBDE>
-      <ShouldDownloadCBDE Condition="$(ShouldDownloadCBDE)=='' AND $(CBDEFilesExist)=='false'">true</ShouldDownloadCBDE>
-    </PropertyGroup>
-
-    <Message Importance="high" Text="CBDE: binaries exist? $(CBDEFilesExist)" />
-    <Message Importance="high" Text="CBDE: Updating CBDE binaries" Condition="$(UpdateCBDE)=='true'" />
-
-    <CallTarget Targets="DownloadFromRepox" Condition="$(ShouldDownloadCBDE)=='true'" />    
-    <!-- Specifies the CBDE files that should be included in the project and copied to the output directory -->
-    <ItemGroup>
-      <Content Include="$(RelativeCBDEFolder)\**\*.exe" >
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-      <Content Include="$(RelativeCBDEFolder)\**\*.txt" >
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-    </ItemGroup>
-  </Target>
-
-  <Target Name="DownloadFromRepox">
-    
-    <Message Importance="high" Text="CBDE: Deleting any existing files..." />
-
-    <ItemGroup>
-      <ExistingCBDEFiles Include="$(CBDEFolder)\*.*" />
-    </ItemGroup>
-    <Delete Files="@(ExistingCBDEFiles)" />
-
+  <Target Name="FetchCBDEBinaries" BeforeTargets="BeforeBuild" Outputs="%(CBDEUrls.SubFolder)/%(CBDEUrls.MainExe)">
     <PropertyGroup>
       <PowerShellExe Condition="'$(PowerShellExe)'==''">%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe</PowerShellExe>
       <UnzipScript>$(MSBuildProjectDirectory)\..\..\..\Scripts\unzip.ps1</UnzipScript>
       <DownloadScript>$(MSBuildProjectDirectory)\..\..\..\Scripts\download.ps1</DownloadScript>
     </PropertyGroup>
+    
+    <PropertyGroup>
+      <CBDEFilesExist>$([System.IO.File]::Exists('$(CBDEFolder)%(CBDEUrls.SubFolder)%(CBDEUrls.MainExe)'))</CBDEFilesExist>
+      <!--<CBDEZipFilePath>$(CBDEFolder)%(CBDEUrls.ZipFileName)</CBDEZipFilePath>-->
+      <ShouldDownloadCBDE>$(UpdateCBDE)</ShouldDownloadCBDE>
+      <ShouldDownloadCBDE Condition="$(ShouldDownloadCBDE)=='' AND $(CBDEFilesExist)=='false'">true</ShouldDownloadCBDE>
+    </PropertyGroup>
 
-    <Message Importance="high" Text="CBDE: Begin downloading CBDE zip..." />
-    <Exec ConsoleToMsBuild="true"
-      Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -File $(DownloadScript) -url $(CBDEDownloadUrl) -outfolder $(CBDEFolder) -outfile $(CBDEZipFileName)">
+    <Message Importance="high" Text="%(CBDEUrls.SubFolder)/%(CBDEUrls.MainExe): binaries exist? $(CBDEFilesExist)" />
+    <Message Importance="high" Text="%(CBDEUrls.SubFolder)/%(CBDEUrls.MainExe): Updating CBDE binaries" Condition="$(UpdateCBDE)=='true'" />
+    <Message Importance="high" Text="CBDE: Deleting any existing files..." Condition="$(ShouldDownloadCBDE)=='true'"/>
+
+    <ItemGroup>
+      <ExistingCBDEFiles Include="$(CBDEFolder)\*.*" />
+    </ItemGroup>
+    <Delete Files="@(ExistingCBDEFiles)" Condition="$(ShouldDownloadCBDE)=='true'"/>
+
+    <Message Importance="high" Text="CBDE: Begin downloading CBDE zip..." Condition="$(ShouldDownloadCBDE)=='true'"/>
+    <Exec ConsoleToMsBuild="true" Condition="$(ShouldDownloadCBDE)=='true'"
+      Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -File $(DownloadScript) -url @(CBDEUrls) -outfolder $(CBDEFolder)%(CBDEUrls.SubFolder) -outfile %(CBDEUrls.ZipFileName)">
+      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec"/>
+    </Exec>
+    <Message Importance="low" Text="Output of powershell download: $(OutputOfExec)"  Condition="$(ShouldDownloadCBDE)=='true'"/>
+    <Message Importance="high" Text="CBDE: Finished downloading CBDE binaries: $(CBDEZipFilePath)"  Condition="$(ShouldDownloadCBDE)=='true'"/>
+
+    <Message Importance="high" Text="CBDE: Unzipping the CBDE binaries..."  Condition="$(ShouldDownloadCBDE)=='true'"/>
+    <Exec ConsoleToMsBuild="true" Condition="$(ShouldDownloadCBDE)=='true'"
+      Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -File $(UnzipScript) -zipfile $(CBDEFolder)%(CBDEUrls.SubFolder)%(CBDEUrls.ZipFileName) -outpath $(CBDEFolder)%(CBDEUrls.SubFolder)">
       <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
     </Exec>
-    <Message Importance="low" Text="Output of powershell download: $(OutputOfExec)" />
-    <Message Importance="high" Text="CBDE: Finished downloading CBDE binaries: $(CBDEZipFilePath)" />
+    <Message Importance="low" Text="Output of powershell unzip: $(OutputOfExec)" Condition="$(ShouldDownloadCBDE)=='true'"/>
 
-    <Message Importance="high" Text="CBDE: Unzipping the CBDE binaries..." />
-    <Exec ConsoleToMsBuild="true"
-      Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -File $(UnzipScript) -zipfile $(CBDEZipFilePath) -outpath $(CBDEFolder)">
-      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
-    </Exec>
-    <Message Importance="low" Text="Output of powershell unzip: $(OutputOfExec)" />
+    <Message Importance="high" Text="CBDE: Finished unzipping CBDE binaries" Condition="$(ShouldDownloadCBDE)=='true'"/>
 
-    <Message Importance="high" Text="CBDE: Finished unzipping CBDE binaries" />
+    <!-- Specifies the CBDE files that should be included in the project and copied to the output directory -->
+    <ItemGroup>
+      <Content Include="$(RelativeCBDEFolder)\windows\**\*.exe" >
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="$(RelativeCBDEFolder)\windows\**\*.txt" >
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="$(RelativeCBDEFolder)\linux\**" Exclude="$(RelativeCBDEFolder)\linux\**\*.zip">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
   </Target>
 
 </Project>
