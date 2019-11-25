@@ -211,6 +211,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Func_T1_T2_TResult = new KnownType("System.Func<T1, T2, TResult>");
         internal static readonly KnownType System_Func_T1_T2_T3_TResult = new KnownType("System.Func<T1, T2, T3, TResult>");
         internal static readonly KnownType System_Func_T1_T2_T3_T4_TResult = new KnownType("System.Func<T1, T2, T3, T4, TResult>");
+        internal static readonly KnownType System_Func_T1_T2_T3_T4_TResult_VB = new KnownType("System.Func(Of In T1, In T2, In T3, In T4, Out TResult)");
         internal static readonly KnownType System_GC = new KnownType("System.GC");
         internal static readonly KnownType System_Globalization_CompareOptions = new KnownType("System.Globalization.CompareOptions");
         internal static readonly KnownType System_Globalization_CultureInfo = new KnownType("System.Globalization.CultureInfo");

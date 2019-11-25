@@ -20,6 +20,8 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SonarAnalyzer.Helpers.VisualBasic
 {
@@ -35,6 +37,30 @@ namespace SonarAnalyzer.Helpers.VisualBasic
         {
             return Common.EquivalenceChecker.AreEquivalent(nodeList1, nodeList2,
                 (n1, n2) => SyntaxFactory.AreEquivalent(n1, n2));
+        }
+    }
+    
+    internal class VisualBasicSyntaxNodeEqualityComparer<T> : IEqualityComparer<T>, IEqualityComparer<SyntaxList<T>>
+        where T : SyntaxNode
+    {
+        public bool Equals(T x, T y)
+        {
+            return VisualBasicEquivalenceChecker.AreEquivalent(x, y);
+        }
+
+        public bool Equals(SyntaxList<T> x, SyntaxList<T> y)
+        {
+            return VisualBasicEquivalenceChecker.AreEquivalent(x, y);
+        }
+
+        public int GetHashCode(T obj)
+        {
+            return obj.GetType().FullName.GetHashCode();
+        }
+
+        public int GetHashCode(SyntaxList<T> obj)
+        {
+            return (obj.Count + string.Join(", ", obj.Select(x => x.GetType().FullName).Distinct())).GetHashCode();
         }
     }
 }
