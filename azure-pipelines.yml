@@ -23,6 +23,31 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+- powershell: |
+   # Calculate the file path
+   $versionFilePath = "$env:BUILD_SOURCESDIRECTORY\scripts\version\Version.props"
+   Write-Host "Reading the Sonar project version from '${versionFilePath}' ..."
+
+   # Read the version from the file
+   [xml]$versionProps = Get-Content "$versionFilePath"
+   $sonarProjectVersion = $versionProps.Project.PropertyGroup.MainVersion
+   Write-Host "Sonar project version is '${sonarProjectVersion}'"
+
+   # Set the variable to it can be used by other tasks
+   Write-Host "##vso[task.setvariable variable=SONAR_PROJECT_VERSION;]$sonarProjectVersion"
+  displayName: 'Read Sonar project version from the versions.props file'
+
+- task: SonarCloudPrepare@1
+  displayName: 'Run Code Analysis - Begin Step'
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: 'sonarsource'
+    scannerMode: 'MSBuild'
+    projectKey: 'sonaranalyzer-dotnet'
+    projectName: 'SonarAnalyzer .Net'
+    projectVersion: '$(SONAR_PROJECT_VERSION)'
+    extraProperties: 
+
 - task: VSBuild@1
   displayName: "Build SonarAnalyzer"
   inputs:
@@ -42,3 +67,11 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     rerunFailedTests: false
+
+- task: SonarCloudAnalyze@1
+  displayName: 'Run Code Analysis - End Step'
+
+- task: SonarCloudPublish@1
+  displayName: 'Run Code Analysis - Publish QG'
+  inputs:
+    pollingTimeoutSec: '300'
