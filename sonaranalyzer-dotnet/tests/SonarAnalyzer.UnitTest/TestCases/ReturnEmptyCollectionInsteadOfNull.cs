@@ -9,12 +9,23 @@ namespace Tests.Diagnostics
     {
         IEnumerable<string> ArrowedStrings1 => null; // Noncompliant {{Return an empty collection instead of null.}}
 //                                             ^^^^
+
+        IEnumerable<string> ArrowedStrings2 => (null); // Noncompliant
+
         IEnumerable<string> Strings2
         {
             get
             {
                 return null; // Noncompliant
 //              ^^^^^^^^^^^^
+            }
+        }
+
+        IEnumerable<string> Strings3
+        {
+            get
+            {
+                return ((null)); // Noncompliant
             }
         }
 
