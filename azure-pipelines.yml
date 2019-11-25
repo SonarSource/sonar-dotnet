@@ -31,6 +31,14 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: VSTest@2
+  displayName: "Run SonarAnalyzer unit tests"
   inputs:
+    testAssemblyVer2: |
+     **\$(BuildConfiguration)\**\*.UnitTest.dll
+     !**\obj\**
+    runInParallel: true
+    runTestsInIsolation: true
+    codeCoverageEnabled: true
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    rerunFailedTests: false
