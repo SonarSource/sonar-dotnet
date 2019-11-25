@@ -10,7 +10,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*.sln'
+  solution: 'sonaranalyzer-dotnet/SonarAnalyzer.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
