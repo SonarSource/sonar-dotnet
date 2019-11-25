@@ -166,8 +166,8 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var usingDirective in this.usingDirectivesFromParent)
                 {
-                    if (usingDirective.Name.ToString() == "System.Linq" &&
-                        this.context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol)
+                    if (this.context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol &&
+                        namespaceSymbol.ToDisplayString() == "System.Linq")
                     {
                         systemLinqNamespace = namespaceSymbol;
                         return true;
