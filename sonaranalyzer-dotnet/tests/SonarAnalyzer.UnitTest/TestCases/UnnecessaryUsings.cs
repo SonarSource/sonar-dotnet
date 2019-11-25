@@ -146,7 +146,7 @@ namespace LinqQuery1
     {
         public void DoLinqQuery(List<string> myList)
         {
-            var linkQuery = from item in myList select item.GetType();
+            var query = from item in myList select item.GetType();
         }
     }
 }
@@ -158,7 +158,22 @@ namespace LinqQuery2
     {
         public void DoLinqQuery(List<string> myList)
         {
-            var linkQuery = from item in myList select item.GetType();
+            var query = from item in myList select item.GetType();
+        }
+    }
+}
+
+namespace LinqQuery3.System.Linq { }
+
+namespace LinqQuery3
+{
+    using System.Linq; // Noncompliant - This is 'LinqQuery3.System.Linq' whose import is indeed unnecessary
+    using global::System.Linq;
+    class LinqQueryUser
+    {
+        public void DoLinqQuery(List<string> myList)
+        {
+            var query = from item in myList select item.GetType();
         }
     }
 }
@@ -176,7 +191,7 @@ namespace System
     {
         public void DoLinqQuery(List<string> myList)
         {
-            var linkQuery = from item in myList select item.GetType();
+            var query = from item in myList select item.GetType();
         }
     }
 }
@@ -189,7 +204,7 @@ namespace LinqQueryWithoutUsing
     {
         public void DoLinqQuery(List<string> myList)
         {
-            var linkQuery = from item in myList select item.GetType(); // Error [CS1935] - Could not find an implementation of the query pattern for source type 'List<string>'.
+            var query = from item in myList select item.GetType(); // Error [CS1935] - Could not find an implementation of the query pattern for source type 'List<string>'.
         }
     }
 }
