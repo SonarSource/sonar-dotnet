@@ -45,7 +45,7 @@ using System;
 
     hello
 
-    Noncompliant: ;
+    // Noncompliant: ;
 
     ; world
 
@@ -66,7 +66,7 @@ using System;
 
 
 
-    Noncompliant: Console.WriteLine();
+    // Noncompliant: Console.WriteLine();
 
 
     Console.WriteLine();

@@ -63,6 +63,23 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         }
 
         [TestMethod]
+        public void GetExpectedIssueLocations_OnlyCommentedNoncompliant()
+        {
+            var code = @"public class MyNoncompliantClass
+{
+    public void NoncompliantMethod(object o)
+    {
+        Console.WriteLine(o); // Noncompliant
+    }
+}";
+            var locations = new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+
+            locations.Should().HaveCount(1);
+            locations.Select(l => l.IsPrimary).Should().Equal(new[] { true });
+            locations.Select(l => l.LineNumber).Should().Equal(new[] { 5 });
+        }
+
+        [TestMethod]
         public void GetExpectedIssueLocations_ExactLocations()
         {
             var code = @"public class Foo
