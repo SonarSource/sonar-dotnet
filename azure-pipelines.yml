@@ -111,3 +111,4 @@ steps:
     packDestination: '$(Build.ArtifactStagingDirectory)'
     verbosityPack: 'Detailed'
     publishPackageMetadata: true
+    includeSymbols: true
