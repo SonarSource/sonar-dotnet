@@ -59,6 +59,7 @@ steps:
     secureFile: 'sonarsource-2019-2021.pfx'
 
 - task: SonarCloudPrepare@1
+  condition: false
   displayName: 'Run Code Analysis - Begin Step'
   inputs:
     SonarCloud: 'SonarCloud'
@@ -78,6 +79,7 @@ steps:
     msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=true /p:DefineConstants=SignAssembly /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:pfxCertificatePath="$(pfx.secureFilePath)" /p:pfxPassword="$(pfxPassword)" /p:pfxSha1=$(pfxSha1) /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)  '
 
 - task: VSTest@2
+  condition: false
   displayName: "Run SonarAnalyzer unit tests"
   inputs:
     testAssemblyVer2: |
@@ -91,9 +93,35 @@ steps:
     rerunFailedTests: false
 
 - task: SonarCloudAnalyze@1
+  condition: false
   displayName: 'Run Code Analysis - End Step'
 
 - task: SonarCloudPublish@1
+  condition: false
   displayName: 'Run Code Analysis - Publish QG'
   inputs:
     pollingTimeoutSec: '300'
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      function New-NuGetPackages([string]$binPath) {
+          Write-Header "Building NuGet packages"
+
+          $nugetExe = Get-NuGetPath
+          Get-ChildItem "src" -Recurse *.nuspec | ForEach-Object {
+              $outputDir = Join-Path $_.DirectoryName $binPath
+
+              Write-Debug "Creating NuGet package for '$_' in ${outputDir}"
+
+              $fixedBinPath = if ($_.Name -Like "Descriptor.*.nuspec") { "${binPath}\net46" } else { $binPath }
+
+              Exec { & $nugetExe pack $_.FullName -NoPackageAnalysis -OutputDirectory $outputDir `
+                -Prop binPath=$fixedBinPath `
+              } -errorMessage "ERROR: NuGet package creation FAILED."
+          }
+      }
+
+      $binPath = "bin\Release"
+      New-NuGetPackages $binPath
