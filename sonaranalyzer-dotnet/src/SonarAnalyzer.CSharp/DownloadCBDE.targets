@@ -29,6 +29,10 @@
    </PropertyGroup>
 
   <!-- Specify them here in case they are already present. If they are not, they will be added by the task that fetches the files -->
+  <!-- This is a duplication of the "Content" items defined inside the target FetchCBDEBinaries, and we should try to remove it.
+       However, if we simply remove it, when running unit tests from the IDE while SonarAnalyzer.CSharp is already up-to-date
+       these files are missing. Duplication the item definition here avoid this situation
+       -->
   <ItemGroup>
     <Content Include="$(RelativeCBDEFolder)\windows\**\*.exe" >
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
