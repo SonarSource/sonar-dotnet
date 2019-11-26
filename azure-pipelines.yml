@@ -114,8 +114,9 @@ steps:
     includeSymbols: true
 
 - task: ArtifactoryNuGet@1
+  displayName: "Publish nuget packages"
   inputs:
     command: 'push'
     artifactoryService: 'Repox'
     targetDeployRepo: 'sonarsource-nuget-releases'
-    pathToNupkg: '*.nupkg'
+    pathToNupkg: '$(Build.ArtifactStagingDirectory)\*.nupkg'
