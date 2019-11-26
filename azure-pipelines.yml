@@ -112,3 +112,10 @@ steps:
     verbosityPack: 'Detailed'
     publishPackageMetadata: true
     includeSymbols: true
+
+- task: ArtifactoryNuGet@1
+  inputs:
+    command: 'push'
+    artifactoryService: 'Repox'
+    targetDeployRepo: 'sonarsource-nuget-releases'
+    pathToNupkg: '*.nupkg'
