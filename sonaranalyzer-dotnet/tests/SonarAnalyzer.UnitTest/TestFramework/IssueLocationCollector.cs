@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         internal const string ISSUE_LOCATION_PATTERN =
             COMMENT_PATTERN + "+" + NO_PRECISE_LOCATION_PATTERN + TYPE_PATTERN + OFFSET_PATTERN + ISSUE_IDS_PATTERN + MESSAGE_PATTERN;
         private const string PRECISE_ISSUE_LOCATION_PATTERN =
-            @"^" + COMMENT_PATTERN + PRECISE_LOCATION_PATTERN + TYPE_PATTERN + "*" + OFFSET_PATTERN + ISSUE_IDS_PATTERN + MESSAGE_PATTERN + "$";
+            COMMENT_PATTERN + PRECISE_LOCATION_PATTERN + TYPE_PATTERN + "*" + OFFSET_PATTERN + ISSUE_IDS_PATTERN + MESSAGE_PATTERN + "$";
         internal const string BUILD_ERROR_LOCATION_PATTERN =
             COMMENT_PATTERN + NO_PRECISE_LOCATION_PATTERN + BUILD_ERROR_PATTERN + OFFSET_PATTERN + ISSUE_IDS_PATTERN;
 
@@ -135,13 +135,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 return CreateIssueLocations(match, line.LineNumber);
             }
-
-            var patternWithoutLineStart = PRECISE_ISSUE_LOCATION_PATTERN.Substring(1);
-            if (Regex.IsMatch(lineText, patternWithoutLineStart))
-            {
-                Execute.Assertion.FailWith($"Line matches expected location pattern, but doesn't start at the beginning of the line. Line: {line.LineNumber}");
-            }
-
             return Enumerable.Empty<IssueLocation>();
         }
 

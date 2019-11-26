@@ -251,15 +251,21 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         }
 
         [TestMethod]
-        public void GetIssueLocations_NotStartOfLine()
+        public void GetIssueLocations_NotStartOfLineIsOk()
         {
             var line = GetLine(3, @"if (a > b)
 {
     Console.WriteLine(a);
     //      ^^^^^^^^^
 }");
-            Action action = () => new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
-            action.Should().Throw<AssertFailedException>();
+            var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+            result.Should().ContainSingle();
+            var issueLocation = result.First();
+
+            issueLocation.IsPrimary.Should().BeTrue();
+            issueLocation.LineNumber.Should().Be(3);
+            issueLocation.Start.Should().Be(12);
+            issueLocation.Length.Should().Be(9);
         }
     }
 }
