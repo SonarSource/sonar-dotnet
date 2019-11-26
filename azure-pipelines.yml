@@ -39,6 +39,7 @@ steps:
 
 - task: DownloadSecureFile@1
   displayName: 'Download snk file'
+  name: snk
   inputs:
     secureFile: SonarSourceSecret.snk
 
