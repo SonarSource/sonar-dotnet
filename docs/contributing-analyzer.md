@@ -53,8 +53,8 @@ To run the ITs you will need to follow this pattern:
 
 Notes: 
 
-1. You can run a single rule using the -ruleId parameter (e.g. `.\regression-test.ps1 -ruleId S1234`)
-1. You can run a single project using the -project parameter (e.g. `.\regression-test.ps1 -project nancy`)
+1. You can run a single rule using the `-ruleId` parameter (e.g. `.\regression-test.ps1 -ruleId S1234`)
+1. You can run a single project using the `-project` parameter (e.g. `.\regression-test.ps1 -project Nancy`)
 
 If the script ends with `SUCCESS: No differences were found!` (or exit code 0), this means the changes you have made haven't impacted any rule.
 
