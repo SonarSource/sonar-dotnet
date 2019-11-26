@@ -148,5 +148,20 @@ public class UnexpectedSecondary
 
             action.Should().NotThrow<UnexpectedDiagnosticException>();
         }
+
+        [TestMethod]
+        public void BuildError()
+        {
+            Action action =
+                () => Verifier.VerifyCSharpAnalyzer(@"
+public class UnexpectedSecondaryWithBuildError
+
+        public void Test(bool a, bool b) { }
+}",
+                    new BinaryOperationWithIdenticalExpressions());
+
+            action.Should().Throw<UnexpectedDiagnosticException>()
+                  .WithMessage("Unexpected build error [CS1514]: { expected on line 2");
+        }
     }
 }

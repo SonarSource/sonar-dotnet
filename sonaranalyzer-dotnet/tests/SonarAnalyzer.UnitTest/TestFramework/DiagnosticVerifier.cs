@@ -83,7 +83,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     issue => issue.IsPrimary,
                     diagnostic.Location,
                     compareIdToMessage ? diagnostic.Id : diagnostic.GetMessage(),
-                    compareIdToMessage ? diagnostic.Id + ": " + diagnostic.GetMessage() : null,
+                    compareIdToMessage ? $"Unexpected build error [{diagnostic.Id}]: {diagnostic.GetMessage()} on line {diagnostic.Location.GetLineNumberToReport()}" : null,
                     out var issueId);
 
                 var secondaryLocations = diagnostic.AdditionalLocations
@@ -218,7 +218,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             if (expectedIssue == null)
             {
                 var issueType = primary ? "Primary issue" : "Secondary issue";
-                throw new UnexpectedDiagnosticException(location, $"{issueType} with message '{(string.IsNullOrEmpty(extraInfo) ? message : extraInfo)}' not expected on line {lineNumber}");
+                var exceptionMessage = string.IsNullOrEmpty(extraInfo) ? $"{issueType} with message '{message}' not expected on line {lineNumber}" : extraInfo;
+                throw new UnexpectedDiagnosticException(location, exceptionMessage);
             }
 
             var expectedDescription = primary ? "Expected primary" : "Expected secondary";
