@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -179,6 +179,17 @@ namespace SonarAnalyzer.Rules.CSharp
             if (!(node is SimpleNameSyntax))
             {
                 return false;
+            }
+
+
+            Console.WriteLine("I am covered by tests, I hope!");
+            Console.WriteLine("I am covered by tests, I hope!");
+            Console.WriteLine("I am  covered by tests, I hope!");
+            Console.WriteLine("I am  covered by tests, I hope!");
+
+            if (node == null)
+            {
+                Console.WriteLine("I am not covered by tests, I hope!");
             }
 
             var memberAccess = node.Parent as MemberAccessExpressionSyntax;
