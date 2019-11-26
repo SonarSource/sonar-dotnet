@@ -4,6 +4,7 @@
     <TargetFramework>net46</TargetFramework>
     <AssemblyName>SonarAnalyzer.VisualBasic</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,5 +35,5 @@
   <PropertyGroup>
     <Rspec2Resx>vbnet</Rspec2Resx>
   </PropertyGroup>
-  
+
 </Project>

@@ -4,6 +4,7 @@
     <TargetFramework>net46</TargetFramework>
     <AssemblyName>SonarAnalyzer.Utilities</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
 
   <ItemGroup>

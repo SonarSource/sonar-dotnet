@@ -5,6 +5,7 @@
     <AssemblyName>SonarAnalyzer.RuleDescriptorGenerator</AssemblyName>
     <RootNamespace>SonarAnalyzer.RuleDescriptorGenerator</RootNamespace>
     <OutputType>Exe</OutputType>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
 
   <ItemGroup>
