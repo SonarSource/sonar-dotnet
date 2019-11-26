@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules
         protected abstract void SplitAssignment(TAssignmentExpressionSyntax assignment, out TIdentifierNameSyntax leftIdentifier, out TExpressionSyntax right);
         protected abstract IEqualityComparer<TExpressionSyntax> CreateNodeEqualityComparer();
         protected abstract SyntaxNode FindRootClassOrModule(SyntaxNode node);
-        protected abstract TExpressionSyntax[] FindReturnExpressions(InspectionContext c, SyntaxNode block);
+        protected abstract TExpressionSyntax[] FindReturnAndThrowExpressions(InspectionContext c, SyntaxNode block);
         protected abstract bool IsTrueLiteral(TExpressionSyntax expression);
         protected abstract string IdentifierText(SyntaxNode node);
         protected abstract TExpressionSyntax VariableInitializer(TVariableSyntax variable);
@@ -209,7 +209,7 @@ namespace SonarAnalyzer.Rules
 
         private ImmutableArray<Location> InvocationLocations(InspectionContext c, TMethodSyntax method)
         {
-            var returnExpressionSublocationsList = FindReturnExpressions(c, method).Where(x => !IsVisited(c, x));      //Ignore all return statements with recursive call. Result depends on returns that could return compliant validator.
+            var returnExpressionSublocationsList = FindReturnAndThrowExpressions(c, method).Where(x => !IsVisited(c, x));      //Ignore all return statements with recursive call. Result depends on returns that could return compliant validator.
             return MultiExpressionSublocations(c, returnExpressionSublocationsList);
         }
 
@@ -256,8 +256,8 @@ namespace SonarAnalyzer.Rules
             var ret = ImmutableArray.CreateBuilder<Location>();
             if (block != null)
             {
-                var returnExpressions = FindReturnExpressions(c, block);
-                if (returnExpressions.All(x => IsTrueLiteral(x)))    //There must be at least one return, that does not return true to be compliant
+                var returnExpressions = FindReturnAndThrowExpressions(c, block);
+                if (returnExpressions.All(x => IsTrueLiteral(x)))    //There must be at least one return, that does not return true to be compliant. There can be NULL from standalone Throw statement.
                 {
                     ret.AddRange(returnExpressions.Select(x => x.GetLocation()));
                 }

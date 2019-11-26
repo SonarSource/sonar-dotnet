@@ -15,7 +15,9 @@ namespace Tests.Diagnostics
             CreateRQ().ServerCertificateValidationCallback += FalseNegativeValidatorWithProperty;
             CreateRQ().ServerCertificateValidationCallback += DelegateProperty;
             //Values from overriden operators are not inspected at all
-            CreateRQ().ServerCertificateValidationCallback += new CertificateValidationChecks() + 42; //Operator + is overriden to return delegate. 
+            CreateRQ().ServerCertificateValidationCallback += new CertificateValidationChecks() + 42; //Operator + is overriden to return delegate.
+            //Specific cases
+            CreateRQ().ServerCertificateValidationCallback += FalseNegativeException;
         }
 
         void DirectAddHandlers()
@@ -66,14 +68,16 @@ namespace Tests.Diagnostics
         {
             ServicePointManager.ServerCertificateValidationCallback += CompliantValidation;
             ServicePointManager.ServerCertificateValidationCallback += CompliantValidationPositiveA;
-            ServicePointManager.ServerCertificateValidationCallback += InvalidValidation;                          //Noncompliant
+            ServicePointManager.ServerCertificateValidationCallback += InvalidValidation;                       //Noncompliant
             ServicePointManager.ServerCertificateValidationCallback += CompliantValidationPositiveB;
             ServicePointManager.ServerCertificateValidationCallback += CompliantValidationNegative;
-            ServicePointManager.ServerCertificateValidationCallback += AdvInvalidTry;                              //Noncompliant
-            ServicePointManager.ServerCertificateValidationCallback += AdvInvalidWithTryObstacles;                 //Noncompliant
+            ServicePointManager.ServerCertificateValidationCallback += AdvInvalidTry;                           //Noncompliant
+            ServicePointManager.ServerCertificateValidationCallback += AdvInvalidWithTryObstacles;              //Noncompliant
             ServicePointManager.ServerCertificateValidationCallback += AdvCompliantWithTryObstacles;
-            ServicePointManager.ServerCertificateValidationCallback += AdvInvalidWithObstacles;                    //Noncompliant
+            ServicePointManager.ServerCertificateValidationCallback += AdvInvalidWithObstacles;                 //Noncompliant
             ServicePointManager.ServerCertificateValidationCallback += AdvCompliantWithObstacles;
+            ServicePointManager.ServerCertificateValidationCallback += AdvCompliantWithException;
+            ServicePointManager.ServerCertificateValidationCallback += AdvCompliantWithExceptionAndRethrow;
         }
 
         void GenericHandlerSignature()
@@ -341,10 +345,37 @@ namespace Tests.Diagnostics
             return IsValid(certificate);
         }
 
+        bool AdvCompliantWithException(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        {
+            if (certificate.Subject != "test")
+            {
+                throw new InvalidOperationException("You shall not pass!");
+            }
+            return true;    //Compliant, uncaught exception is thrown above
+        }
+
+        bool AdvCompliantWithExceptionAndRethrow(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        {
+            try
+            {
+                if (certificate.Subject != "test")
+                {
+                    throw new InvalidOperationException("You shall not pass!");
+                }
+                return true;    //Compliant due to throw logic
+            }
+            catch
+            {
+                //Log
+                throw;
+            }
+            return true;        //Compliant due to throw logic
+        }
+                
         #endregion
 
         #region Find Validators
-        
+
         static RemoteCertificateValidationCallback FindInvalid()
         {
             return InvalidValidation;                                      //Secondary
@@ -431,6 +462,23 @@ namespace Tests.Diagnostics
         public static RemoteCertificateValidationCallback operator +(CertificateValidationChecks instance, int number)
         {
             return (sender, certificate, chain, SslPolicyErrors) => true;
+        }
+
+        bool FalseNegativeException(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        {
+            try
+            {
+                if (certificate.Subject != "test")
+                {
+                    throw new InvalidOperationException("You shall not pass! But you will anyway.");
+                }
+                return true;    //False negative
+            }
+            catch   //All exceptions are cought, even those throw from inner DoValidation(crt).. helpers
+            {
+                //Log, no throw
+            }
+            return true;        //False negative
         }
 
         #endregion
