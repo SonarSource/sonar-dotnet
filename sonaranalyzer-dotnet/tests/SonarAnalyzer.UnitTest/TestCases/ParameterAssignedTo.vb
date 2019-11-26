@@ -3,6 +3,7 @@
 Namespace Tests.Diagnostics
 
     Module ParameterAssignedToStatic
+
         ' Error@+1 [BC30002]
         <Extension()>
         Static Sub MySub(ByVal a As Integer) ' Error [BC30242] Static is not valid
@@ -17,22 +18,44 @@ Namespace Tests.Diagnostics
                 Throw exc
             End Try
         End Sub
+
     End Module
 
     Public Class ParameterAssignedTo
+
         Sub f1(a As Integer)
             a = 42 ' Noncompliant
         End Sub
+
         Sub f2(a As Integer)
             Dim tmp As Integer = a
             tmp = 42
         End Sub
+
         Sub f3(ByRef a As Integer)
             a = 42
         End Sub
+
         Sub f4(ByVal a As Integer)
             a = 42 ' Noncompliant
         End Sub
+
+    End Class
+
+    Public Class FalsePostitive
+
+        Sub f5(a As String)
+            If String.IsNullOrEmpty(a) Then
+                a = "(Empty)"   'Noncompliant FP, it has been read/used first #2555
+            End If
+        End Sub
+
+        Sub f6(a As String)
+            If String.IsNullOrEmpty(a) Then
+                a = "(Empty)"   'Noncompliant FP, it has been read/used first #2555
+            End If
+        End Sub
+
     End Class
 
 End Namespace

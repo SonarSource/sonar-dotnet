@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -69,14 +69,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsReadBefore(SemanticModel semanticModel, ISymbol parameterSymbol, AssignmentExpressionSyntax assignment)
         {
-            return GetPreviousStatements(assignment)
-                .Union(new[] { assignment.Right })
-                .SelectMany(s => s.DescendantNodes(n => true))
+            return GetPreviousNodes(assignment)
+                .Union(assignment.Right.DescendantNodes())
                 .OfType<IdentifierNameSyntax>()
                 .Any(node =>
                 {
                     var nodeSymbol = semanticModel.GetSymbolInfo(node).Symbol;
-                    return parameterSymbol.Equals(nodeSymbol) && IsReadAccess(node);
+                    return parameterSymbol.Equals(nodeSymbol);
                 });
         }
 
@@ -88,26 +87,17 @@ namespace SonarAnalyzer.Rules.CSharp
         /// Returns all statements before the specified statement within the containing method.
         /// This method recursively traverses all parent blocks of the provided statement.
         /// </summary>
-        private static IEnumerable<SyntaxNode> GetPreviousStatements(SyntaxNode statement)
+        private static IEnumerable<SyntaxNode> GetPreviousNodes(SyntaxNode statement)
         {
-            var previousStatements = statement.Parent.ChildNodes()
-                .OfType<StatementSyntax>()
+            var previousNodes = statement.Parent.ChildNodes()
                 .TakeWhile(x => x != statement)
-                .Reverse();
+                .SelectMany(x => x.DescendantNodes());
 
             return statement.Parent is StatementSyntax parentStatement
-                ? previousStatements.Union(GetPreviousStatements(parentStatement))
-                : previousStatements;
+                ? previousNodes.Union(GetPreviousNodes(parentStatement))
+                : previousNodes;
         }
 
-        private bool IsReadAccess(IdentifierNameSyntax node)
-        {
-            bool isLeftSideOfAssignment =
-                node.Parent is AssignmentExpressionSyntax assignmentExpression &&
-                assignmentExpression.Left == node;
-
-            return !isLeftSideOfAssignment;
-        }
     }
 }
 

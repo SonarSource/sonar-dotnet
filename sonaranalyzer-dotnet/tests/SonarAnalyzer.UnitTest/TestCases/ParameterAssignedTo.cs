@@ -149,6 +149,14 @@ namespace Tests.Diagnostics
                 });
         }
 
+        void f9(string a)
+        {
+            if (string.IsNullOrEmpty(a))
+            {
+                a = "(Empty)";  //Compliant, it has been read/used first #2555
+            }
+        }
+
         public int this[int index]
         {
             get
@@ -214,24 +222,21 @@ namespace Tests.Diagnostics
             string y = ((x));
             ((x)) = "";
         }
-    }
 
-    public class FalsePositives
-    {
-        public string foo(string x)
+        public string f16(string x)
         {
             if (x == null)
             {
-                x = ""; // Noncompliant FP (https://github.com/SonarSource/sonar-dotnet/issues/2603)
+                x = ""; 
             }
             return x;
         }
 
-        public string Foo(string text)
+        public string f17(string text)
         {
             if (string.IsNullOrWhiteSpace(text))
             {
-                text = "(empty)"; // Noncompliant FP (https://github.com/SonarSource/sonar-dotnet/issues/2555)
+                text = "(empty)"; 
             }
 
             return text;
