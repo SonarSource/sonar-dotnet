@@ -217,7 +217,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 () => Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_EmptyFile.cs",
                     new CheckFileLicense { HeaderFormat = SingleLineHeader });
             action.Should().Throw<UnexpectedDiagnosticException>()
-                  .WithMessage("Issue with message 'Add or update the header of this file.' not expected on line 1");
+                  .WithMessage("Primary issue with message 'Add or update the header of this file.' not expected on line 1");
         }
 
         [TestMethod]

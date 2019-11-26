@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             foreach (var diagnostic in diagnostics)
             {
-                VerifyIssue(expectedIssues,
+                VerifyPrimaryIssue(expectedIssues,
                     issue => issue.IsPrimary,
                     diagnostic.Location,
                     compareIdToMessage ? diagnostic.Id : diagnostic.GetMessage(),
@@ -93,7 +93,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
                 foreach (var secondaryLocation in secondaryLocations)
                 {
-                    VerifyIssue(expectedIssues,
+                    VerifySecondaryIssue(expectedIssues,
                         issue => issue.IssueId == issueId && !issue.IsPrimary,
                         secondaryLocation.Location,
                         secondaryLocation.Message,
@@ -194,8 +194,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static void VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics) =>
             diagnostics.Should().NotContain(d => d.Id == AnalyzerFailedDiagnosticId);
 
-        private static void VerifyIssue(IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
+        private static void VerifyPrimaryIssue(IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
             Location location, string message, string extraInfo, out string issueId)
+        {
+            VerifyIssue(expectedIssues, issueFilter, location, message, extraInfo, true, out issueId);
+        }
+
+        private static void VerifySecondaryIssue(IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
+            Location location, string message, string extraInfo, out string issueId)
+        {
+            VerifyIssue(expectedIssues, issueFilter, location, message, extraInfo, false, out issueId);
+        }
+
+        private static void VerifyIssue(IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
+            Location location, string message, string extraInfo, bool primary, out string issueId)
         {
             var lineNumber = location.GetLineNumberToReport();
 
@@ -205,12 +217,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             if (expectedIssue == null)
             {
-                throw new UnexpectedDiagnosticException(location, $"Issue with message '{(string.IsNullOrEmpty(extraInfo) ? message : extraInfo)}' not expected on line {lineNumber}");
+                var issueType = primary ? "Primary issue" : "Secondary issue";
+                throw new UnexpectedDiagnosticException(location, $"{issueType} with message '{(string.IsNullOrEmpty(extraInfo) ? message : extraInfo)}' not expected on line {lineNumber}");
             }
 
+            var expectedDescription = primary ? "Expected primary" : "Expected secondary";
             if (expectedIssue.Message != null && expectedIssue.Message != message)
             {
-                throw new UnexpectedDiagnosticException(location, $"Expected message on line {lineNumber} to be '{expectedIssue.Message}', but got '{message}'.");
+                throw new UnexpectedDiagnosticException(location, $"{expectedDescription} message on line {lineNumber} to be '{expectedIssue.Message}', but got '{message}'.");
             }
 
             var diagnosticStart = location.GetLineSpan().StartLinePosition.Character;
@@ -218,13 +232,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             if (expectedIssue.Start.HasValue && expectedIssue.Start != diagnosticStart)
             {
                 throw new UnexpectedDiagnosticException(location,
-                    $"Expected issue on line {lineNumber} to start on column {expectedIssue.Start} but got column {diagnosticStart}.");
+                    $"{expectedDescription} issue on line {lineNumber} to start on column {expectedIssue.Start} but got column {diagnosticStart}.");
             }
 
             if (expectedIssue.Length.HasValue && expectedIssue.Length != location.SourceSpan.Length)
             {
                 throw new UnexpectedDiagnosticException(location,
-                    $"Expected issue on line {lineNumber} to have a length of {expectedIssue.Length} but got a length of {location.SourceSpan.Length}).");
+                    $"{expectedDescription} issue on line {lineNumber} to have a length of {expectedIssue.Length} but got a length of {location.SourceSpan.Length}.");
             }
 
             expectedIssues.Remove(expectedIssue);
