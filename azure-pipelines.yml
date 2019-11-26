@@ -103,6 +103,7 @@ steps:
     pollingTimeoutSec: '300'
 
 - task: PowerShell@2
+  displayName: "Build NuGet packages"
   inputs:
     targetType: 'inline'
     script: |
