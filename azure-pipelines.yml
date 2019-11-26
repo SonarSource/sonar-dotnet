@@ -111,6 +111,7 @@ steps:
 
 - task: NuGetCommand@2
   displayName: "Build NuGet packages"
+  condition: false
   inputs:
     command: pack
     packagesToPack: 'sonaranalyzer-dotnet/src/**/*.nuspec'
