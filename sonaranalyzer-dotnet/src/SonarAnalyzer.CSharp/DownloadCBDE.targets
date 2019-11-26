@@ -52,24 +52,24 @@
     </PropertyGroup>
     
     <PropertyGroup>
-      <CBDEFilesExist>$([System.IO.File]::Exists('$(CBDEFolder)%(CBDEUrls.SubFolder)%(CBDEUrls.MainExe)'))</CBDEFilesExist>
-      <!--<CBDEZipFilePath>$(CBDEFolder)%(CBDEUrls.ZipFileName)</CBDEZipFilePath>-->
+      <CBDECurrentFolder>$(CBDEFolder)%(CBDEUrls.SubFolder)</CBDECurrentFolder>
+      <CBDEFilesExist>$([System.IO.File]::Exists('$(CBDECurrentFolder)%(CBDEUrls.MainExe)'))</CBDEFilesExist>
       <ShouldDownloadCBDE>$(UpdateCBDE)</ShouldDownloadCBDE>
       <ShouldDownloadCBDE Condition="$(ShouldDownloadCBDE)=='' AND $(CBDEFilesExist)=='false'">true</ShouldDownloadCBDE>
     </PropertyGroup>
 
-    <Message Importance="high" Text="%(CBDEUrls.SubFolder)/%(CBDEUrls.MainExe): binaries exist? $(CBDEFilesExist)" />
-    <Message Importance="high" Text="%(CBDEUrls.SubFolder)/%(CBDEUrls.MainExe): Updating CBDE binaries" Condition="$(UpdateCBDE)=='true'" />
+    <Message Importance="high" Text="%(CBDEUrls.SubFolder)%(CBDEUrls.MainExe): binaries exist? $(CBDEFilesExist)" />
+    <Message Importance="high" Text="%(CBDEUrls.SubFolder)%(CBDEUrls.MainExe): Updating CBDE binaries" Condition="$(UpdateCBDE)=='true'" />
     <Message Importance="high" Text="CBDE: Deleting any existing files..." Condition="$(ShouldDownloadCBDE)=='true'"/>
 
     <ItemGroup>
-      <ExistingCBDEFiles Include="$(CBDEFolder)\*.*" />
+      <ExistingCBDEFiles Include="$(CBDECurrentFolder)\*.*" />
     </ItemGroup>
     <Delete Files="@(ExistingCBDEFiles)" Condition="$(ShouldDownloadCBDE)=='true'"/>
 
     <Message Importance="high" Text="CBDE: Begin downloading CBDE zip..." Condition="$(ShouldDownloadCBDE)=='true'"/>
     <Exec ConsoleToMsBuild="true" Condition="$(ShouldDownloadCBDE)=='true'"
-      Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -File $(DownloadScript) -url @(CBDEUrls) -outfolder $(CBDEFolder)%(CBDEUrls.SubFolder) -outfile %(CBDEUrls.ZipFileName)">
+      Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -File $(DownloadScript) -url @(CBDEUrls) -outfolder $(CBDECurrentFolder) -outfile %(CBDEUrls.ZipFileName)">
       <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec"/>
     </Exec>
     <Message Importance="low" Text="Output of powershell download: $(OutputOfExec)"  Condition="$(ShouldDownloadCBDE)=='true'"/>
@@ -77,7 +77,7 @@
 
     <Message Importance="high" Text="CBDE: Unzipping the CBDE binaries..."  Condition="$(ShouldDownloadCBDE)=='true'"/>
     <Exec ConsoleToMsBuild="true" Condition="$(ShouldDownloadCBDE)=='true'"
-      Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -File $(UnzipScript) -zipfile $(CBDEFolder)%(CBDEUrls.SubFolder)%(CBDEUrls.ZipFileName) -outpath $(CBDEFolder)%(CBDEUrls.SubFolder)">
+      Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -File $(UnzipScript) -zipfile $(CBDECurrentFolder)%(CBDEUrls.ZipFileName) -outpath $(CBDECurrentFolder)">
       <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
     </Exec>
     <Message Importance="low" Text="Output of powershell unzip: $(OutputOfExec)" Condition="$(ShouldDownloadCBDE)=='true'"/>
