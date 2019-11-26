@@ -120,6 +120,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var match = Regex.Match(lineText, pattern);
             if (match.Success)
             {
+                EnsureNoRemainingCurlyBrace(line, match);
                 return CreateIssueLocations(match, line.LineNumber + 1);
             }
 
@@ -133,6 +134,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var match = Regex.Match(lineText, PRECISE_ISSUE_LOCATION_PATTERN);
             if (match.Success)
             {
+                EnsureNoRemainingCurlyBrace(line, match);
                 return CreateIssueLocations(match, line.LineNumber);
             }
             return Enumerable.Empty<IssueLocation>();
@@ -224,6 +226,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             if (preciseLocationsOnSameLine.Skip(1).Any())
             {
                 ThrowUnexpectedPreciseLocationCount(preciseLocationsOnSameLine.Count(), preciseLocationsOnSameLine.First().LineNumber);
+            }
+        }
+
+        private static void EnsureNoRemainingCurlyBrace(TextLine line, Match match)
+        {
+            var remainingLine = line.ToString().Substring(match.Index + match.Length);
+            if (remainingLine.Contains("{"))
+            {
+                Execute.Assertion.FailWith("Unexpected '{{' found on line: {0}. Either correctly use the '{{{{message}}}}' " +
+                    "format or remove the curly brace on the line of the expected issue", line.LineNumber);
             }
         }
 

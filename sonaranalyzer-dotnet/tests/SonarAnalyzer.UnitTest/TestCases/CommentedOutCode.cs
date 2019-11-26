@@ -1,12 +1,13 @@
 ﻿// Copyright © 2011 - Present RealDimensions Software, LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// Noncompliant: ; {{Remove this commented out code.}}
+// Noncompliant {{Remove this commented out code.}} : ;
 using System;
 
 // Noncompliant: ;
 using System;
-// Noncompliant: {
+// Noncompliant@+1
+// {
 using System;
 // Noncompliant: }
 using System;
@@ -26,9 +27,11 @@ using System;
 using System;
 // Noncompliant: switch(
 using System;
-// Noncompliant: try{
+// Noncompliant@+1
+// try{
 using System;
-// Noncompliant: else{
+// Noncompliant@+1
+// else{
 using System;
 // &&
 // ||
@@ -126,11 +129,12 @@ namespace Tests.Diagnostics
 
         // FP https://github.com/SonarSource/sonar-dotnet/issues/2772
         int c;
-        // False positive - it's just a URL and it is not an interpolated string
-        // Noncompliant: http://localhost:7071/runtime/webhooks/EventGrid?functionName={functionname}
+        // Noncompliant@+1 - False positive, it's just a URL and it is not an interpolated string
+        // http://localhost:7071/runtime/webhooks/EventGrid?functionName={functionname}
 
         int d;
-        // Noncompliant: {this, is, a ,set}
+        // Noncompliant@+1
+        // {this, is, a ,set}
     }
 
     /**

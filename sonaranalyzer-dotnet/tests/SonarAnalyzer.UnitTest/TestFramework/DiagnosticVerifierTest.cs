@@ -163,5 +163,24 @@ public class UnexpectedSecondaryWithBuildError
             action.Should().Throw<UnexpectedDiagnosticException>()
                   .WithMessage("Unexpected build error [CS1514]: { expected on line 2");
         }
+
+        [TestMethod]
+        public void UnexpectedRemainingCurlyBrace()
+        {
+            Action action =
+                () => Verifier.VerifyCSharpAnalyzer(@"
+public class UnexpectedRemainingCurlyBrace
+    {
+        public void Test(bool a, bool b)
+        {
+            if (a == a) // Noncompliant {Wrong format message}
+            { }
+        }
+    }",
+                    new BinaryOperationWithIdenticalExpressions());
+
+            action.Should().Throw<AssertFailedException>()
+                  .WithMessage("Unexpected '{' found on line: 5. Either correctly use the '{{message}}' format or remove the curly brace on the line of the expected issue");
+        }
     }
 }
