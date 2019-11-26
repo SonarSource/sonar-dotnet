@@ -9,7 +9,12 @@ param
     [Parameter(HelpMessage = "The key of the rule to test, e.g. S1234. If omitted, all rules will be tested.")]
     [ValidatePattern("^S[0-9]+")]
     [string]
-    $ruleId
+    $ruleId,
+
+    [Parameter(HelpMessage = "The name of single project to build. If ommited, all projects will be build.")]
+    [ValidateSet("AnalyzeGenerated", "AnalyzeGeneratedVb", "akka.net", "Automapper", "Ember-MM", "Nancy", "ManuallyAddedNoncompliantIssues", "ManuallyAddedNoncompliantIssuesVB", "SkipGenerated", "SkipGeneratedVb")]
+    [string]
+    $project
 )
 
 Set-StrictMode -version 2.0
@@ -26,6 +31,11 @@ function Test-SonarAnalyzerDll {
 }
 
 function Build-Project([string]$ProjectName, [string]$SolutionRelativePath, [int]$CpuCount = 4) {
+    if ($project -And -Not ($ProjectName -eq $project)) {
+        Write-Host "Build skipped: $ProjectName"
+        return
+    }
+
     New-Item -ItemType directory -Path .\output\$ProjectName | out-null
 
     $solutionPath = Resolve-Path ".\sources\${ProjectName}\${SolutionRelativePath}"
@@ -222,14 +232,15 @@ try {
     # Parallel builds are not a problem when run through the Scanner for MSBuild because it
     # redirects the outputs of the different configurations in separate folders.
 
-    Build-Project "Automapper" "Automapper.sln" -CpuCount 1
-    Build-Project "akka.net" "src\Akka.sln"
-    Build-Project "Nancy" "src\Nancy.sln"
-    Build-Project "Ember-MM" "Ember Media Manager.sln"
+    # Do not forget to update ValidateSet of -project parameter when new project is added.
     Build-Project "AnalyzeGenerated" "AnalyzeGeneratedFiles.sln"
     Build-Project "AnalyzeGeneratedVb" "AnalyzeGeneratedVb.sln"
+    Build-Project "akka.net" "src\Akka.sln"
+    Build-Project "Automapper" "Automapper.sln" -CpuCount 1
+    Build-Project "Ember-MM" "Ember Media Manager.sln"
     Build-Project "ManuallyAddedNoncompliantIssues" "ManuallyAddedNoncompliantIssues.sln"
     Build-Project "ManuallyAddedNoncompliantIssuesVB" "ManuallyAddedNoncompliantIssuesVB.sln"
+    Build-Project "Nancy" "src\Nancy.sln"
     Build-Project "SkipGenerated" "SkipGeneratedFiles.sln"
     Build-Project "SkipGeneratedVb" "SkipGeneratedVb.sln"
 
