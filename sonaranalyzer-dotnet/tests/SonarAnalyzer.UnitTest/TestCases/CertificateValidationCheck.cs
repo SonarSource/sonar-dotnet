@@ -21,9 +21,9 @@ namespace Tests.Diagnostics
         void DirectAddHandlers()
         {
             //Inline version
-            //Secondary@+1
-            CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => true;    //Noncompliant  {{Enable server certificate validation on this SSL/TLS connection}}
-//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                     ^^^^
+            CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => true;
+//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ {{Enable server certificate validation on this SSL/TLS connection}}
+//                                                                                                             ^^^^ Secondary@-1
             //Secondary@+1
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => (((true)));    //Noncompliant 
             CreateRQ().ServerCertificateValidationCallback += (sender, certificate, chain, SslPolicyErrors) => false;
@@ -141,9 +141,10 @@ namespace Tests.Diagnostics
             var optB = new OptionalConstructorArguments(this, cb: CompliantValidation);
 
             using (var ms = new System.IO.MemoryStream())
-            {                                                                                                                          //Secondary@+1
-                using (var ssl = new System.Net.Security.SslStream(ms, true, (sender, chain, certificate, SslPolicyErrors) => true))   //Noncompliant
-//                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^     ^^^^
+            {
+                using (var ssl = new System.Net.Security.SslStream(ms, true, (sender, chain, certificate, SslPolicyErrors) => true))
+//                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ {{Enable server certificate validation on this SSL/TLS connection}}
+//                                                                                                                            ^^^^ Secondary@-1
                 {
                 }
                 using (var ssl = new System.Net.Security.SslStream(ms, true, InvalidValidation))   //Noncompliant

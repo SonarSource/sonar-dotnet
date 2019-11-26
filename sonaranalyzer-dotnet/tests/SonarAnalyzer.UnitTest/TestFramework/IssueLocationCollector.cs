@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private const string MESSAGE_PATTERN = @"\s*(\{\{(?<message>.*)\}\})*";
         private const string TYPE_PATTERN = @"(?<issueType>Noncompliant|Secondary)";
         private const string BUILD_ERROR_PATTERN = @"Error";
-        private const string PRECISE_LOCATION_PATTERN = @"\s*(?<position>\^+)\s*";
+        private const string PRECISE_LOCATION_PATTERN = @"\s*(?<position>\^+)(\s+(?<position>\^+))*\s*";
         private const string NO_PRECISE_LOCATION_PATTERN = @"\s*(?<!\^+\s{1})";
         private const string COMMENT_PATTERN = @"(?<comment>\/\/|\')";
 
@@ -146,6 +146,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var start = GetStart(match);
             var length = GetLength(match);
 
+            var position = match.Groups["position"];
+            if (position.Success && position.Captures.Count > 1)
+            {
+                ThrowUnexpectedPreciseLocationCount(position.Captures.Count, line);
+            }
+
             return GetIssueIds(match).Select(
                 issueId => new IssueLocation
                 {
@@ -217,13 +223,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             if (preciseLocationsOnSameLine.Skip(1).Any())
             {
-                var message = @"Expecting only one precise location per line, found "+ preciseLocationsOnSameLine.Count() +
-@" on line " + preciseLocationsOnSameLine.First().LineNumber + @". If you want to specify more than one precise location per line you need to omit the Noncompliant comment:
+                ThrowUnexpectedPreciseLocationCount(preciseLocationsOnSameLine.Count(), preciseLocationsOnSameLine.First().LineNumber);
+            }
+        }
+
+        private static void ThrowUnexpectedPreciseLocationCount(int  count, int line)
+        {
+            var message = $"Expecting only one precise location per line, found {count} on line {line}. " +
+                @"If you want to specify more than one precise location per line you need to omit the Noncompliant comment:
 internal class MyClass : IInterface1 // there should be no Noncompliant comment
 ^^^^^^^ {{Do not create internal classes.}}
                          ^^^^^^^^^^^ @-1 {{IInterface1 IInterface1 is bad for your health.}}";
-                throw new InvalidOperationException(message);
-            }
+            throw new InvalidOperationException(message);
         }
 
         [DebuggerDisplay("ID:{IssueId} @{LineNumber} Primary:{IsPrimary} Start:{Start} Length:{Length} '{Message}'")]
