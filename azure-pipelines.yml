@@ -37,6 +37,16 @@ steps:
    Write-Host "##vso[task.setvariable variable=SONAR_PROJECT_VERSION;]$sonarProjectVersion"
   displayName: 'Read Sonar project version from the versions.props file'
 
+- task: DownloadSecureFile@1
+  displayName: 'Download snk file'
+  inputs:
+    secureFile: SonarSourceSecret.snk
+
+- task: DownloadSecureFile@1
+  displayName: 'Download pfx file'
+  inputs:
+    secureFile: 'sonarsource-2019-2021.pfx'
+
 - task: SonarCloudPrepare@1
   displayName: 'Run Code Analysis - Begin Step'
   inputs:
@@ -54,6 +64,7 @@ steps:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=true /p:DefineConstants=SignAssembly /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:pfxCertificatePath="$(pfx.secureFilePath)" /p:pfxPassword="$(pfxPassword)" /p:pfxSha1=$(pfxSha1) /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)  '
 
 - task: VSTest@2
   displayName: "Run SonarAnalyzer unit tests"
