@@ -128,7 +128,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     //                 Name: Add
                     //                 Expression: a  // we need this
                     var memberAccess = (MemberAccessExpressionSyntax)expression;
-                    return memberAccess.Name.ToString() == "Add"
+                    return memberAccess.Name.ToString() == "Add" && invocation.ArgumentList?.Arguments.Count != 1   //#2674 Do not raise on ICollection.Add(item)
                         ? memberAccess.Expression
                         : null; // Ignore invocations that are on methods different than Add
                 case SyntaxKind.MemberBindingExpression:
