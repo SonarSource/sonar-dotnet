@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -277,7 +277,7 @@ namespace SonarAnalyzer.SymbolicExecution
             var liveVariables = this.lva.GetLiveOut(block)
                 .Union(this.nonInDeclarationParameters); // LVA excludes out and ref parameters
 
-            // TODO: Remove the IFieldSymbol check when SLVS-1136 is fixed
+            // ToDo: Remove the IFieldSymbol check when SLVS-1136 is fixed
             return programState.RemoveSymbols(
                 symbol => !(symbol is IFieldSymbol) && !liveVariables.Contains(symbol));
         }

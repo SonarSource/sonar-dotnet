@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Helpers
 
         internal static bool ShouldAnalyze(this SyntaxTree tree, AnalyzerOptions options,
             Compilation compilation)
-            // TODO PERF: do the global setting check before the per-file check.
+            // ToDo: PERF: do the global setting check before the per-file check.
             => DiagnosticAnalyzerContextHelper.ShouldAnalyze(CSharp.CSharpGeneratedCodeRecognizer.Instance,
                 tree,
                 compilation,

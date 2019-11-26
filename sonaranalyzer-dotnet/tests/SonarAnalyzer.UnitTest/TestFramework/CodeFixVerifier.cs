@@ -133,7 +133,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 (doc, ids, ct) => Task.FromResult(
                     DiagnosticVerifier.GetDiagnostics(
                         currentDocument.Project.GetCompilationAsync(ct).Result,
-                        diagnosticAnalyzer, CompilationErrorBehavior.Ignore)), // TODO: Is that the right decision?
+                        diagnosticAnalyzer, CompilationErrorBehavior.Ignore)), // ToDo: Is that the right decision?
                 null);
 
             var fixAllContext = new FixAllContext(currentDocument, codeFixProvider, FixAllScope.Document,
@@ -160,7 +160,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
 
             diagnostics = DiagnosticVerifier.GetDiagnostics(project.GetCompilationAsync().Result,
-                diagnosticAnalyzer, CompilationErrorBehavior.Ignore).ToList(); // TODO: Is that the right choice?
+                diagnosticAnalyzer, CompilationErrorBehavior.Ignore).ToList(); // ToDo: Is that the right choice?
             actualCode = document.GetSyntaxRootAsync().Result.GetText().ToString();
         }
 

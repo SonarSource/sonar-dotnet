@@ -2809,7 +2809,7 @@ namespace NS
             VerifyAllInstructions(catchBody, "cw2", "cw2()");
             catchBody.SuccessorBlock.Should().Be(whileStmt);
 
-            // FIXME this is wrong, `finally` should be connected to
+            // ToDo: this is wrong, `finally` should be connected to
             // - EXIT
             // - WHILE (because of `continue`)
             // - afterDoWhile (because of `break`)
@@ -2879,14 +2879,14 @@ namespace NS
             ifInsideTry.FalseSuccessorBlock.Should().Be(elseIf);
 
             VerifyAllInstructions(thenContinue, "cw1", "cw1()");
-            // FIXME it should lead to `finally` which should lead to `whileStmt`
+            // ToDo: it should lead to `finally` which should lead to `whileStmt`
             thenContinue.SuccessorBlock.Should().Be(whileStmt);
 
             VerifyAllInstructions(elseIf, "cw2", "cw2()");
-            // FIXME it should lead to `finally` which should lead to `afterDoWhile`
+            // ToDo: it should lead to `finally` which should lead to `afterDoWhile`
             elseIf.SuccessorBlock.Should().Be(afterDoWhile);
 
-            // FIXME this is weird and is basically skipped
+            // ToDo: this is weird and is basically skipped
             tryStatement.SuccessorBlocks.Should().OnlyContainInOrder(finallyBody);
 
             finallyBody.SuccessorBlocks.Should().OnlyContainInOrder(afterTry, exit);
@@ -3268,7 +3268,7 @@ namespace NS
             secondIfReturn.SuccessorBlock.Should().Be(exit);
             secondIf.FalseSuccessorBlock.Should().Be(tryStatementBranch);
 
-            // FIXME this tryStatementBranch is not always used as such, or is it?
+            // ToDo: this tryStatementBranch is not always used as such, or is it?
             tryStatementBranch.SuccessorBlocks.Should().OnlyContain(insideCatch, afterTry);
 
             insideCatch.SuccessorBlocks.Should().OnlyContain(afterTry);

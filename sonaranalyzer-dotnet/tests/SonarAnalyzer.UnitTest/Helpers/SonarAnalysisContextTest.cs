@@ -56,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             {
                 foreach (var testCase in this.TestCases)
                 {
-                    // TODO: We should find a way to ack the fact the action was not run
+                    // ToDo: We should find a way to ack the fact the action was not run
                     Verifier.VerifyNoIssueReported(testCase.Path, testCase.Analyzer);
                 }
             }

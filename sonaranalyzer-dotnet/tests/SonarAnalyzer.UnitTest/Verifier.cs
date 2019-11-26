@@ -65,7 +65,7 @@ namespace SonarAnalyzer.UnitTest
                .AddReferences(additionalReferences)
                .GetSolution();
 
-            // TODO: add [CallerLineNumber]int lineNumber = 0
+            // ToDo: add [CallerLineNumber]int lineNumber = 0
             // then add ability to shift result reports with this line number
             foreach (var compilation in solution.Compile(options?.ToArray()))
             {
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.UnitTest
                .AddReferences(additionalReferences)
                .GetSolution();
 
-            // TODO: add [CallerLineNumber]int lineNumber = 0
+            // ToDo: add [CallerLineNumber]int lineNumber = 0
             // then add ability to shift result reports with this line number
             foreach (var compilation in solution.Compile())
             {

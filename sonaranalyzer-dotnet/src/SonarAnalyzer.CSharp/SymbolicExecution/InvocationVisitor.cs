@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.SymbolicExecution
             {
                 return HandleReferenceEqualsCall();
             }
-            // TODO: IsNullOrWhiteSpace is now treated as IsNull. Add the needed string constraints to treat IsNullOrWhiteSpace correctly
+            // ToDo: IsNullOrWhiteSpace is now treated as IsNull. Add the needed string constraints to treat IsNullOrWhiteSpace correctly
             if (IsStringNullOrWhiteSpaceCheckMethod(methodSymbol))
             {
                 return HandleStringNullOrWhiteSpaceCheckMethod();

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -1006,7 +1006,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
             if (sv == null)
             {
-                if (symbol is IFieldSymbol fieldSymbol) // TODO: Fix me when implementing SLVS-1130
+                if (symbol is IFieldSymbol fieldSymbol) // ToDo: Fix me when implementing SLVS-1130
                 {
                     sv = fieldSymbol.CreateFieldSymbolicValue();
                     newProgramState = newProgramState.StoreSymbolicValue(symbol, sv);
