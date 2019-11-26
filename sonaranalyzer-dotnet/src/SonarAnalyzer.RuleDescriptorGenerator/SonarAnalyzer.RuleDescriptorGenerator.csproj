@@ -6,6 +6,8 @@
     <RootNamespace>SonarAnalyzer.RuleDescriptorGenerator</RootNamespace>
     <OutputType>Exe</OutputType>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <RestoreLockedMode>true</RestoreLockedMode>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
   </PropertyGroup>
 
   <ItemGroup>
