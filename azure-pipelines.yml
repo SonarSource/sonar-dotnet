@@ -102,27 +102,12 @@ steps:
   inputs:
     pollingTimeoutSec: '300'
 
-- task: PowerShell@2
-  displayName: "Build NuGet packages"
+- task: NuGetCommand@2
+  displayName: "Build nuget packages"
   inputs:
-    targetType: 'inline'
-    script: |
-      function New-NuGetPackages([string]$binPath) {
-          Write-Header "Building NuGet packages"
-
-          $nugetExe = Get-NuGetPath
-          Get-ChildItem "src" -Recurse *.nuspec | ForEach-Object {
-              $outputDir = Join-Path $_.DirectoryName $binPath
-
-              Write-Debug "Creating NuGet package for '$_' in ${outputDir}"
-
-              $fixedBinPath = if ($_.Name -Like "Descriptor.*.nuspec") { "${binPath}\net46" } else { $binPath }
-
-              Exec { & $nugetExe pack $_.FullName -NoPackageAnalysis -OutputDirectory $outputDir `
-                -Prop binPath=$fixedBinPath `
-              } -errorMessage "ERROR: NuGet package creation FAILED."
-          }
-      }
-
-      $binPath = "bin\Release"
-      New-NuGetPackages $binPath
+    command: pack
+    packagesToPack: 'sonaranalyzer-dotnet/src/**/*.nuspec'
+    configuration: '$(BuildConfiguration)' # Optional
+    packDestination: '$(Build.ArtifactStagingDirectory)'
+    verbosityPack: 'Detailed'
+    publishPackageMetadata: true
