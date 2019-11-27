@@ -216,7 +216,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 var issueId = primaryIssueId != null ? $" [{ primaryIssueId}]" : "";
                 var issueType = isPrimary ? "Primary issue" : $"Secondary issue{issueId}";
-                var exceptionMessage = string.IsNullOrEmpty(extraInfo) ? $"{issueType} with message '{message}' not expected on line {lineNumber}" : extraInfo;
+                var seeOutputMessage = $"{Environment.NewLine}See output to see all actual diagnostics raised on the file";
+                var exceptionMessage = string.IsNullOrEmpty(extraInfo) ? $"{issueType} with message '{message}' not expected on line {lineNumber}.{seeOutputMessage}" : extraInfo;
                 throw new UnexpectedDiagnosticException(location, exceptionMessage);
             }
 
