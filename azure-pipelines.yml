@@ -66,7 +66,7 @@ steps:
     secureFile: 'sonarsource-2019-2021.pfx'
 
 - task: SonarCloudPrepare@1
-  condition: true
+  condition: false
   displayName: 'Run Code Analysis - Begin Step'
   inputs:
     SonarCloud: 'SonarCloud'
@@ -86,7 +86,7 @@ steps:
     msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=true /p:DefineConstants=SignAssembly /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:pfxCertificatePath="$(pfx.secureFilePath)" /p:pfxPassword="$(pfxPassword)" /p:pfxSha1=$(pfxSha1) /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)  '
 
 - task: VSTest@2
-  condition: true
+  condition: false
   displayName: "Run SonarAnalyzer unit tests"
   inputs:
     testAssemblyVer2: |
@@ -100,11 +100,11 @@ steps:
     rerunFailedTests: false
 
 - task: SonarCloudAnalyze@1
-  condition: true
+  condition: false
   displayName: 'Run Code Analysis - End Step'
 
 - task: SonarCloudPublish@1
-  condition: true
+  condition: false
   displayName: 'Run Code Analysis - Publish QG'
   inputs:
     pollingTimeoutSec: '300'
