@@ -153,6 +153,10 @@ public class CoverageReportImportSensorTest {
     context.fileSystem().add(new TestInputFileBuilder("foo", "Foo.cs").setLanguage("cs")
       .setType(Type.TEST).build());
 
+    File f = new File(fooPath);
+    assertThat(f.exists());
+    assertThat(!f.isDirectory());
+
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .analyze(context, coverage);
 
