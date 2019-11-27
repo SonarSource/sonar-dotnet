@@ -140,6 +140,7 @@ steps:
     pathToNupkg: '$(Build.ArtifactStagingDirectory)\*.nupkg'
 
 - task: PowerShell@2
+  condition: false
   displayName: 'Run integration tests'
   inputs:
     filePath: 'sonaranalyzer-dotnet/its/regression-test.ps1'
