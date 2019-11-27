@@ -50,7 +50,7 @@ steps:
 - task: VSBuild@1
   displayName: 'Set BranchName, Sha1 and BuildNumber properties from Azure pipeline variables'
   inputs:
-    solution: build/ChangeVersion.proj
+    solution: scripts/version/ChangeVersion.proj
     msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
 
 - task: DownloadSecureFile@1
