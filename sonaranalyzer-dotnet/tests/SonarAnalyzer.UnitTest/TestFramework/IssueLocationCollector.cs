@@ -32,6 +32,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 {
     public class IssueLocationCollector
     {
+        private const string EXACT_COLUMN_PATTERN = @"\s*(\^(?<columnStart>[0-9]+)#(?<length>[0-9]+))?";
         private const string OFFSET_PATTERN = @"(?:@(?<sign>[\+|-]?)(?<offset>[0-9]+))?";
         private const string ISSUE_IDS_PATTERN = @"\s*(\[(?<issueIds>.*)\])*";
         private const string MESSAGE_PATTERN = @"\s*(\{\{(?<message>.*)\}\})*";
@@ -42,11 +43,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private const string COMMENT_PATTERN = @"(?<comment>\/\/|\')";
 
         internal const string ISSUE_LOCATION_PATTERN =
-            COMMENT_PATTERN + "+" + NO_PRECISE_LOCATION_PATTERN + TYPE_PATTERN + OFFSET_PATTERN + ISSUE_IDS_PATTERN + MESSAGE_PATTERN;
+            COMMENT_PATTERN + "+" + NO_PRECISE_LOCATION_PATTERN + TYPE_PATTERN + OFFSET_PATTERN + EXACT_COLUMN_PATTERN + ISSUE_IDS_PATTERN + MESSAGE_PATTERN;
         private const string PRECISE_ISSUE_LOCATION_PATTERN =
             COMMENT_PATTERN + PRECISE_LOCATION_PATTERN + TYPE_PATTERN + "*" + OFFSET_PATTERN + ISSUE_IDS_PATTERN + MESSAGE_PATTERN + "$";
         internal const string BUILD_ERROR_LOCATION_PATTERN =
-            COMMENT_PATTERN + NO_PRECISE_LOCATION_PATTERN + BUILD_ERROR_PATTERN + OFFSET_PATTERN + ISSUE_IDS_PATTERN;
+            COMMENT_PATTERN + NO_PRECISE_LOCATION_PATTERN + BUILD_ERROR_PATTERN + OFFSET_PATTERN + EXACT_COLUMN_PATTERN + ISSUE_IDS_PATTERN;
 
         public IList<IIssueLocation> GetExpectedIssueLocations(IEnumerable<TextLine> lines)
         {
@@ -91,6 +92,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 var preciseLocation = preciseLocationsOnSameLine.SingleOrDefault();
                 if (preciseLocation != null)
                 {
+                    if (location.Start != null)
+                    {
+                        throw new InvalidOperationException($"Unexpected redundant issue location on line {location.LineNumber}. Issue location can " +
+                            $"be set either with 'precise issue location' or 'exact column location' pattern but not both.");
+                    }
                     location.Start = preciseLocation.Start;
                     location.Length = preciseLocation.Length;
                     usedLocations.Add(preciseLocation);
@@ -145,8 +151,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var line = lineNumber + GetOffset(match);
             var isPrimary = GetIsPrimary(match);
             var message = GetMessage(match);
-            var start = GetStart(match);
-            var length = GetLength(match);
+            var start = GetStart(match) ?? GetColumnStart(match);
+            var length = GetLength(match) ?? GetColumnLength(match);
 
             var position = match.Groups["position"];
             if (position.Success && position.Captures.Count > 1)
@@ -176,6 +182,26 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             var position = match.Groups["position"];
             return position.Success ? (int?)position.Length : null;
+        }
+
+        private static int? GetColumnStart(Match match)
+        {
+            var columnStart = match.Groups["columnStart"];
+            if (columnStart.Success)
+            {
+                return int.Parse(columnStart.Value) - 1;
+            }
+            return null;
+        }
+
+        private static int? GetColumnLength(Match match)
+        {
+            var length = match.Groups["length"];
+            if (length.Success)
+            {
+                return int.Parse(length.Value);
+            }
+            return null;
         }
 
         private bool GetIsPrimary(Match match)

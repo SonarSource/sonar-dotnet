@@ -238,5 +238,60 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 
             result.Should().BeEmpty();
         }
+
+        [TestMethod]
+        public void GetIssueLocations_Noncompliant_ExactColumn()
+        {
+            var line = GetLine(2, @"if (a > b)
+{
+    Console.WriteLine(a); //Noncompliant^5#7
+}");
+            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+
+            result.Should().ContainSingle();
+
+            VerifyIssueLocations(result,
+                expectedIsPrimary: new[] { true },
+                expectedLineNumbers: new[] { 3 },
+                expectedMessages: new string[] { null },
+                expectedIssueIds: new string[] { null });
+        }
+
+        [TestMethod]
+        public void GetIssueLocations_Secondary_ExactColumn_Ids()
+        {
+            var line = GetLine(2, @"if (a > b)
+{
+    Console.WriteLine(a); //Secondary ^13#9 [myId]
+}");
+            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+
+            result.Should().ContainSingle();
+
+            VerifyIssueLocations(result,
+                expectedIsPrimary: new[] { false },
+                expectedLineNumbers: new[] { 3 },
+                expectedMessages: new string[] { null },
+                expectedIssueIds: new string[] { "myId" });
+        }
+
+        [TestMethod]
+        public void GetIssueLocations_Noncompliant_Offset_ExactColumn_Message()
+        {
+            var line = GetLine(2, @"if (a > b)
+{
+    Console.WriteLine(a); //Noncompliant@-2 ^5#16 {{MyMessage}}
+                          
+}");
+            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+
+            result.Should().ContainSingle();
+
+            VerifyIssueLocations(result,
+                expectedIsPrimary: new[] { true },
+                expectedLineNumbers: new[] { 1 },
+                expectedMessages: new string[] { "MyMessage" },
+                expectedIssueIds: new string[] { null });
+        }
     }
 }

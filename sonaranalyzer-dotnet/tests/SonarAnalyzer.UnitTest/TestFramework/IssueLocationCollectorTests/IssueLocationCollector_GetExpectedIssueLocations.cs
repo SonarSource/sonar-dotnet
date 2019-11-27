@@ -21,6 +21,7 @@
 using FluentAssertions;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Linq;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
@@ -97,6 +98,48 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 
             locations.Select(l => l.IsPrimary).Should().BeEquivalentTo(new[] { true, false });
             locations.Select(l => l.LineNumber).Should().Equal(new[] { 3, 3 });
+            locations.Select(l => l.Start).Should().Equal(new[] { 16, 27 });
+            locations.Select(l => l.Length).Should().Equal(new[] { 3, 1 });
+        }
+
+        [TestMethod]
+        public void GetExpectedIssueLocations_ExactColumns()
+        {
+            var code = @"public class Foo
+{
+    public void Bar(object o) // Noncompliant ^17#3
+                              // Secondary@-1 ^28#1
+    {
+        Console.WriteLine(o);
+    }
+}";
+            var locations = new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+
+            locations.Should().HaveCount(2);
+
+            locations.Select(l => l.IsPrimary).Should().BeEquivalentTo(new[] { true, false });
+            locations.Select(l => l.LineNumber).Should().Equal(new[] { 3, 3 });
+            locations.Select(l => l.Start).Should().Equal(new[] { 16, 27 });
+            locations.Select(l => l.Length).Should().Equal(new[] { 3, 1 });
+        }
+
+        [TestMethod]
+        public void GetExpectedIssueLocations_Redundant_Locations()
+        {
+            var code = @"public class Foo
+{
+    public void Bar(object o) // Noncompliant ^17#3
+//              ^^^
+    {
+        Console.WriteLine(o);
+    }
+}";
+
+            Action action = () => new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+
+            action.Should().Throw<InvalidOperationException>()
+                .WithMessage("Unexpected redundant issue location on line 3. Issue location can be set either " +
+                "with 'precise issue location' or 'exact column location' pattern but not both.");
         }
     }
 }
