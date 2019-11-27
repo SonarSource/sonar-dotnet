@@ -158,9 +158,6 @@ steps:
 
 ######### MVN stuff ########
 
-- checkout: self
-  fetchDepth: 1
-
 - task: Cache@2
   displayName: "Cache Maven local repo"
   inputs:
@@ -176,7 +173,7 @@ steps:
   inputs:
     secureFile: 'maven-settings.xml'
 
-- template: update-maven-version-steps.yml
+- template: update-maven-version-steps.yml@commonTemplates
   parameters:
     mavenSettingsFilePath: $(mavenSettings.secureFilePath)
 
