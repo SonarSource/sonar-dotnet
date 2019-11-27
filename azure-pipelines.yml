@@ -47,6 +47,12 @@ steps:
    Write-Host "##vso[task.setvariable variable=SONAR_PROJECT_VERSION;]$sonarProjectVersion"
   displayName: 'Read Sonar project version from the versions.props file'
 
+- task: VSBuild@1
+  displayName: 'Set BranchName, Sha1 and BuildNumber properties from Azure pipeline variables'
+  inputs:
+    solution: build/ChangeVersion.proj
+    msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
+
 - task: DownloadSecureFile@1
   displayName: 'Download snk file'
   name: snk
@@ -114,6 +120,7 @@ steps:
     includeSymbols: true
 
 - task: ArtifactoryNuGet@1
+  condition: false
   displayName: "Publish nuget packages"
   inputs:
     command: 'push'
