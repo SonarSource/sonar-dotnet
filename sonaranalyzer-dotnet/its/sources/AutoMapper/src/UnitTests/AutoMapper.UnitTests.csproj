@@ -7,6 +7,7 @@
     <NoWarn>$(NoWarn);0649</NoWarn>
     <ProjectGuid>F0CC7EF4-B035-4FE1-A476-0676F7251200</ProjectGuid>
     <CodeAnalysisRuleSet>..\..\..\..\ValidationRuleset.ruleset</CodeAnalysisRuleSet>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net452' ">
