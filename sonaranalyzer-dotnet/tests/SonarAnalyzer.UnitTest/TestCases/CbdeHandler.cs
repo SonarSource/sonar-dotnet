@@ -4,6 +4,14 @@ namespace Tests.Diagnostics
 {
     public class IfConditionalAlwaysTrueOrFalse
     {
+        public void PositiveOverflow() {
+            int i = 2147483600;
+            i +=100; // Noncompliant {{This operation always overflows}}
+        }
+        public void NegativeOverflow() {
+            int i = -2147483600;
+            i -=100; // Noncompliant {{This operation always overflows}}
+        }
         public void DoSomething() { throw new NotSupportedException(); }
         public void DoSomething2() { throw new NotSupportedException(); }
         public void DoSomething3() {

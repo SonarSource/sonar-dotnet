@@ -34,6 +34,24 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
     [ExcludeFromCodeCoverage]
     public static class Program
     {
+        private class RuleKeyComparator : EqualityComparer<RuleDetail>
+        {
+            public override bool Equals(RuleDetail r1, RuleDetail r2)
+            {
+                if (r1 == null && r2 == null)
+                    return true;
+                else if (r1 == null || r2 == null)
+                    return false;
+
+                return r1.Key == r2.Key;
+            }
+
+            public override int GetHashCode(RuleDetail r)
+            {
+                return r.Key.GetHashCode();
+            }
+        };
+
         public static void Main(string[] args)
         {
             if (args.Length != 1)
@@ -57,7 +75,7 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
             var language = AnalyzerLanguage.Parse(lang);
 
             var genericRuleDetails = RuleDetailBuilder.GetAllRuleDetails(language).ToList();
-            var ruleDetails = genericRuleDetails.Select(RuleDetail.Convert).ToList();
+            var ruleDetails = genericRuleDetails.Select(RuleDetail.Convert).Distinct(new RuleKeyComparator()).ToList();
 
             Directory.CreateDirectory(lang);
 

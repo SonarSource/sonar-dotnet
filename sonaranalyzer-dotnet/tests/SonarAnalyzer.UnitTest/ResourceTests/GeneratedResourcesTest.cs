@@ -42,9 +42,10 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
         [TestMethod]
         public void AnalyzersHaveCorrespondingResource_CSharp()
         {
-            var rulesFromResources = GetRulesFromResources(RspecRelativeFolderPath + "cs");
+            // NOTE: we allow one rule to be implemented by several classes (because of CBDE that can overlap with a C# class)
+            var rulesFromResources = GetRulesFromResources(RspecRelativeFolderPath + "cs").ToHashSet();
 
-            var rulesFromClasses = GetRulesFromClasses(typeof(CSharpSyntaxHelper).Assembly);
+            var rulesFromClasses = GetRulesFromClasses(typeof(CSharpSyntaxHelper).Assembly).ToHashSet();
 
             rulesFromResources.Should().Equal(rulesFromClasses);
         }
