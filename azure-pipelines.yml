@@ -66,7 +66,7 @@ steps:
     secureFile: 'sonarsource-2019-2021.pfx'
 
 - task: SonarCloudPrepare@1
-  condition: false
+  condition: true
   displayName: 'Run Code Analysis - Begin Step'
   inputs:
     SonarCloud: 'SonarCloud'
@@ -86,7 +86,7 @@ steps:
     msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=true /p:DefineConstants=SignAssembly /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:pfxCertificatePath="$(pfx.secureFilePath)" /p:pfxPassword="$(pfxPassword)" /p:pfxSha1=$(pfxSha1) /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)  '
 
 - task: VSTest@2
-  condition: false
+  condition: true
   displayName: "Run SonarAnalyzer unit tests"
   inputs:
     testAssemblyVer2: |
@@ -100,16 +100,17 @@ steps:
     rerunFailedTests: false
 
 - task: SonarCloudAnalyze@1
-  condition: false
+  condition: true
   displayName: 'Run Code Analysis - End Step'
 
 - task: SonarCloudPublish@1
-  condition: false
+  condition: true
   displayName: 'Run Code Analysis - Publish QG'
   inputs:
     pollingTimeoutSec: '300'
 
 - task: NuGetCommand@2
+  condition: false
   displayName: "Build NuGet packages"
   inputs:
     command: pack
@@ -120,6 +121,7 @@ steps:
     publishPackageMetadata: true
 
 - task: CopyFiles@2
+  condition: false
   displayName: 'Copy NuGet packages to: $(Build.ArtifactStagingDirectory)'
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)'
@@ -127,6 +129,7 @@ steps:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
+  condition: false
   inputs:
     pathToPublish: $(Build.ArtifactStagingDirectory)
     artifactName: BuildOutput
