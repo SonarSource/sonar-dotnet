@@ -110,9 +110,9 @@ Namespace Tests.TestCases
 
         Private Sub IDictionaryAddMixedCase(ByVal dict As IDictionary(Of Integer, Integer))
             dict.Add(0, 0) ' Secondary
-            '           ^^^^^^^^^^^^^^
+'           ^^^^^^^^^^^^^^
             dict.Add(0, 1) ' Noncompliant
-            '           ^^^^^^^^^^^^^^
+'           ^^^^^^^^^^^^^^
         End Sub
 
         Private Sub DictionaryAdd(ByVal dict As Dictionary(Of Integer, Integer))
