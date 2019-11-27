@@ -158,6 +158,9 @@ steps:
 
 ######### MVN stuff ########
 
+- checkout: self
+  fetchDepth: 1
+
 - task: Cache@2
   displayName: "Cache Maven local repo"
   inputs:
