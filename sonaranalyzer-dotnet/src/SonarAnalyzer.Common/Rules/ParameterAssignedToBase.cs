@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -25,18 +26,35 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class ParameterAssignedToBase : SonarDiagnosticAnalyzer
+
+    public abstract class ParameterAssignedToBase<TLanguageKindEnum, TAssignmentStatementSyntax, TIdentifierNameSyntax> : SonarDiagnosticAnalyzer
+        where TLanguageKindEnum : struct
+        where TAssignmentStatementSyntax : SyntaxNode
+        where TIdentifierNameSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S1226";
         protected const string MessageFormat = "Introduce a new variable instead of reusing the parameter '{0}'.";
 
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-    }
+        private readonly DiagnosticDescriptor rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-    public abstract class ParameterAssignedToBase<TLanguageKindEnum, TAssignmentStatementSyntax> : ParameterAssignedToBase
-        where TLanguageKindEnum : struct
-        where TAssignmentStatementSyntax : SyntaxNode
-    {
+        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+
+        protected abstract bool IsAssignmentToCatchVariable(ISymbol symbol, SyntaxNode node);
+
+        protected abstract bool IsAssignmentToParameter(ISymbol symbol);
+
+        protected abstract SyntaxNode AssignmentLeft(TAssignmentStatementSyntax assignment);
+
+        protected abstract SyntaxNode AssignmentRight(TAssignmentStatementSyntax assignment);
+
+        protected abstract TLanguageKindEnum SyntaxKindOfInterest { get; }
+
+        protected ParameterAssignedToBase(System.Resources.ResourceManager rspecResources)
+        {
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+        }
+
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -44,7 +62,7 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var assignment = (TAssignmentStatementSyntax)c.Node;
-                    var left = GetAssignedNode(assignment);
+                    var left = AssignmentLeft(assignment);
                     var symbol = c.SemanticModel.GetSymbolInfo(left).Symbol;
 
                     if (symbol != null
@@ -54,18 +72,52 @@ namespace SonarAnalyzer.Rules
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], left.GetLocation(), left.ToString()));
                     }
                 },
-                SyntaxKindsOfInterest.ToArray());
+                SyntaxKindOfInterest);
         }
 
+        private bool IsReadBefore(SemanticModel semanticModel, ISymbol parameterSymbol, TAssignmentStatementSyntax assignment)
+        {
+            //FIXME: REMOVE DEBUG
+            if (parameterSymbol.Name.ToString() == "xx")
+                System.Diagnostics.Debugger.Break();
 
-        protected abstract bool IsAssignmentToCatchVariable(ISymbol symbol, SyntaxNode node);
 
-        protected abstract bool IsAssignmentToParameter(ISymbol symbol);
+            // Same problem as in VB.NET / IsAssignmentToCatchVariable:
+            // parameterSymbol.DeclaringSyntaxReferences is empty for Catch syntax in VB.NET as well as for indexer syntax for C#
+            // https://github.com/dotnet/roslyn/issues/6209
+            var stopLocation = parameterSymbol.Locations.FirstOrDefault();
+            if (stopLocation == null)
+            {
+                return true; //If we can't find the location, it's going to be FN
+            }
+            return GetPreviousNodes(stopLocation, assignment)
+                .Union(AssignmentRight(assignment).DescendantNodes())
+                .OfType<TIdentifierNameSyntax>()
+                .Any(node =>
+                {
+                    var nodeSymbol = semanticModel.GetSymbolInfo(node).Symbol;
+                    return parameterSymbol.Equals(nodeSymbol);
+                });
+        }
 
-        protected abstract bool IsReadBefore(SemanticModel semanticModel, ISymbol parameterSymbol, TAssignmentStatementSyntax assignment);
+        /// <summary>
+        /// Returns all nodes before the specified statement to the declaration of variable/parameter given by stopLocation.
+        /// This method recursively traverses all parent blocks of the provided statement.
+        /// </summary>
+        private static IEnumerable<SyntaxNode> GetPreviousNodes(Location stopLocation, SyntaxNode statement) 
+        {
+            if (statement == null || (stopLocation != null && statement.GetLocation().SourceSpan.IntersectsWith(stopLocation.SourceSpan)))   //Method declaration or Catch variable declaration, stop here and do not include this statement
+            {
+                return new SyntaxNode[] { };
+            }
+            var previousNodes = statement.Parent.ChildNodes()
+                .TakeWhile(x => x != statement)     //Take all from beginning, including "catch ex" on the way, down to current statement
+                .Reverse()                          //Reverse in order to keep the tail
+                .TakeWhile(x => stopLocation == null || !x.GetLocation().SourceSpan.IntersectsWith(stopLocation.SourceSpan))    //Keep the tail until "catch ex" or "int i" is found
+                .SelectMany(x => x.DescendantNodes());
 
-        protected abstract SyntaxNode GetAssignedNode(TAssignmentStatementSyntax assignment);
+            return previousNodes.Union(GetPreviousNodes(stopLocation, statement.Parent));
+        }
 
-        public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
     }
 }

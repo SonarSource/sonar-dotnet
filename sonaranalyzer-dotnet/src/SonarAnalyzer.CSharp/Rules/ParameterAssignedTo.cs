@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -32,17 +30,18 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class ParameterAssignedTo : ParameterAssignedToBase<SyntaxKind, AssignmentExpressionSyntax>
+    public sealed class ParameterAssignedTo : ParameterAssignedToBase<SyntaxKind, AssignmentExpressionSyntax, IdentifierNameSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(
-            SyntaxKind.SimpleAssignmentExpression
-            );
+        public ParameterAssignedTo() : base(RspecStrings.ResourceManager) { }
 
-        public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => kindsOfInterest;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
+
+        protected override SyntaxKind SyntaxKindOfInterest => SyntaxKind.SimpleAssignmentExpression;
+
+        protected override SyntaxNode AssignmentLeft(AssignmentExpressionSyntax assignment) => assignment.Left;
+
+        protected override SyntaxNode AssignmentRight(AssignmentExpressionSyntax assignment) => assignment.Right;
 
         protected override bool IsAssignmentToCatchVariable(ISymbol symbol, SyntaxNode node)
         {
@@ -67,37 +66,6 @@ namespace SonarAnalyzer.Rules.CSharp
             return result;
         }
 
-        protected override bool IsReadBefore(SemanticModel semanticModel, ISymbol parameterSymbol, AssignmentExpressionSyntax assignment)
-        {
-            return GetPreviousNodes(assignment)
-                .Union(assignment.Right.DescendantNodes())
-                .OfType<IdentifierNameSyntax>()
-                .Any(node =>
-                {
-                    var nodeSymbol = semanticModel.GetSymbolInfo(node).Symbol;
-                    return parameterSymbol.Equals(nodeSymbol);
-                });
-        }
-
-        protected override SyntaxNode GetAssignedNode(AssignmentExpressionSyntax assignment) => assignment.Left;
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
-
-        /// <summary>
-        /// Returns all statements before the specified statement within the containing method.
-        /// This method recursively traverses all parent blocks of the provided statement.
-        /// </summary>
-        private static IEnumerable<SyntaxNode> GetPreviousNodes(SyntaxNode statement)
-        {
-            var previousNodes = statement.Parent.ChildNodes()
-                .TakeWhile(x => x != statement)
-                .SelectMany(x => x.DescendantNodes());
-
-            return statement.Parent is StatementSyntax parentStatement
-                ? previousNodes.Union(GetPreviousNodes(parentStatement))
-                : previousNodes;
-        }
 
     }
 }
-

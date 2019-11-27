@@ -8,7 +8,7 @@ namespace Tests.Diagnostics
         static void f7(this int a)
         {
             a = 42; // Noncompliant
-//          ^
+                    //          ^
 
             try
             {
@@ -98,14 +98,15 @@ namespace Tests.Diagnostics
 
         void f6(int a, int b, int c, int d, int e)
         {
-          b = 42; // Noncompliant
-          e = 0; // Noncompliant
+            b = 42; // Noncompliant
+            e = 0; // Noncompliant
         }
 
 
         delegate void d1(out int b, int c, ref int d);
 
         private event d1 e;
+
         void f8(Func<int, int> param)
         {
             d1 dd = delegate (out int b, int c, ref int d)
@@ -117,7 +118,7 @@ namespace Tests.Diagnostics
 
             param = i => 42; // Noncompliant
 
-            e += delegate(out int foo1, int foo2, ref int foo3)
+            e += delegate (out int foo1, int foo2, ref int foo3)
             {
                 foo1 = 0;
                 foo2 = 0; // Noncompliant
@@ -147,14 +148,6 @@ namespace Tests.Diagnostics
                     x = 0; // Noncompliant
                     return 0;
                 });
-        }
-
-        void f9(string a)
-        {
-            if (string.IsNullOrEmpty(a))
-            {
-                a = "(Empty)";  //Compliant, it has been read/used first #2555
-            }
         }
 
         public int this[int index]
@@ -227,7 +220,7 @@ namespace Tests.Diagnostics
         {
             if (x == null)
             {
-                x = ""; 
+                x = "";
             }
             return x;
         }
@@ -236,11 +229,12 @@ namespace Tests.Diagnostics
         {
             if (string.IsNullOrWhiteSpace(text))
             {
-                text = "(empty)"; 
+                text = "(empty)";
             }
 
             return text;
         }
+
     }
 
     public class ExceptionHandling
@@ -261,11 +255,50 @@ namespace Tests.Diagnostics
 
         void quix(Exception e)
         {
-            var list = new List<string>();
             if (e != null)
             {
                 FormatMessage(e);
                 e = new Exception("");
+            }
+        }
+
+        void serialized()
+        {
+            try
+            {
+
+            }
+            catch (Exception exSerial)
+            {
+                FormatMessage(exSerial);
+            }
+            try
+            {
+
+            }
+            catch (Exception exSerial)      //Same name as previous statement
+            {
+                exSerial = new Exception("Obfuscation");    //Noncompliant
+            }
+        }
+
+        void nested()
+        {
+            try
+            {
+
+            }
+            catch (Exception exOuter)
+            {
+                try
+                {
+                    FormatMessage(exOuter);
+                }
+                catch (Exception exInner)
+                {
+                    exOuter = new Exception("Compliant");
+                    exInner = exOuter;  //Noncompliant
+                }
             }
         }
 
