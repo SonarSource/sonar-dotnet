@@ -205,7 +205,7 @@ steps:
     jdkVersionOption: '1.11'
     mavenOptions: $(MAVEN_OPTS)
 
-- template: prepare-sq-analysis-steps.yml
+- template: prepare-sq-analysis-steps.yml@commonTemplates
 
 # running SQ analysis can be done either in parallel or merged with running UTs
 - task: Maven@3
