@@ -10,7 +10,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-#  - group: sonarsource-build-variables
+  - group: sonarsource-build-variables
   - name: solution
     value: 'sonaranalyzer-dotnet/SonarAnalyzer.sln'
   - name: buildPlatform
