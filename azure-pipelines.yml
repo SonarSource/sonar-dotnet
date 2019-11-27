@@ -179,6 +179,7 @@ steps:
 
 - task: Maven@3
   displayName: 'Run Maven deploy'
+  condition: false
   env:
     ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
     ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_DEPLOY_PASSWORD)
