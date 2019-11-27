@@ -94,7 +94,7 @@ public class CoverageReportImportSensor implements Sensor {
 
       if (inputFile == null) {
         fileCountStatistics.projectExcluded++;
-        LOG.debug("The file '{}' is either excluded or outside of your solution folder therefore Code "
+        LOG.info("The file '{}' is either excluded or outside of your solution folder therefore Code "
           + "Coverage will not be imported.", filePath);
         continue;
       }
