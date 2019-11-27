@@ -92,7 +92,7 @@ function Restore-Packages (
         } -errorMessage "ERROR: Restoring NuGet packages FAILED."
     }
     else {
-        Exec { & (Get-NuGetPath) restore $solutionPath -MSBuildPath $msbuildBinDir -NoCache -Force`
+        Exec { & (Get-NuGetPath) restore $solutionPath -MSBuildPath $msbuildBinDir `
         } -errorMessage "ERROR: Restoring NuGet packages FAILED."
     }
 }
