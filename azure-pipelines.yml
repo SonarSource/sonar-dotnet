@@ -117,7 +117,6 @@ steps:
     packDestination: '$(Build.ArtifactStagingDirectory)'
     verbosityPack: 'Detailed'
     publishPackageMetadata: true
-    includeSymbols: true
 
 - task: ArtifactoryNuGet@1
   condition: false
