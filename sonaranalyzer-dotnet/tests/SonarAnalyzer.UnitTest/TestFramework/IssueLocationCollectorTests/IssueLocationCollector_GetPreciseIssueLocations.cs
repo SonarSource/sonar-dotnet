@@ -267,5 +267,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
             issueLocation.Start.Should().Be(12);
             issueLocation.Length.Should().Be(9);
         }
+
+        [TestMethod]
+        public void GetIssueLocations_InvalidPattern()
+        {
+            var line = GetLine(3, @"if (a > b)
+{
+    Console.WriteLine(a);
+//          ^^^^^^^^^ SecondaryNoncompliantSecondary {{Some message}}
+}");
+            var result = new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
+
+            result.Should().BeEmpty();
+        }
     }
 }
