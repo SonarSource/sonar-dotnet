@@ -154,8 +154,8 @@ public class CoverageReportImportSensorTest {
       .setType(Type.TEST).build());
 
     File f = new File(fooPath);
-    assertThat(f.exists());
-    assertThat(!f.isDirectory());
+    assertThat(f.exists()).isTrue();
+    assertThat(f.isDirectory()).isFalse();
 
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .analyze(context, coverage);
