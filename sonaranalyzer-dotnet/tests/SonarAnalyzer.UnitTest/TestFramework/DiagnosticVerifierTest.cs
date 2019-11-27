@@ -69,6 +69,26 @@ public class UnexpectedSecondary
         }
 
         [TestMethod]
+        public void UnexpectedSecondaryIssueWrongId()
+        {
+            Action action =
+                () => Verifier.VerifyCSharpAnalyzer(@"
+public class UnexpectedSecondary
+    {
+        public void Test(bool a, bool b)
+        {
+            // Secondary@+1 [myWrongId]
+            if (a == a) // Noncompliant [myId]
+            { }
+        }
+    }",
+                    new BinaryOperationWithIdenticalExpressions());
+
+            action.Should().Throw<UnexpectedDiagnosticException>()
+                  .WithMessage("Secondary issue [myId] with message '' not expected on line 7");
+        }
+
+        [TestMethod]
         public void SecondaryIssueUnexpectedMessage()
         {
             Action action =
