@@ -113,16 +113,15 @@ steps:
   inputs:
     command: pack
     packagesToPack: 'sonaranalyzer-dotnet/src/**/*.nuspec'
-    configuration: '$(BuildConfiguration)' # Optional
+    configuration: '$(BuildConfiguration)'
     packDestination: '$(Build.ArtifactStagingDirectory)'
     verbosityPack: 'Detailed'
     publishPackageMetadata: true
 
 - task: ArtifactoryNuGet@1
-  condition: false
   displayName: "Publish nuget packages"
   inputs:
     command: 'push'
     artifactoryService: 'Repox'
-    targetDeployRepo: 'sonarsource-nuget-releases'
+    targetDeployRepo: 'sonarsource-nuget-public'
     pathToNupkg: '$(Build.ArtifactStagingDirectory)\*.nupkg'
