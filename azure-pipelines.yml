@@ -14,10 +14,11 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
+  MSBUILD_PATH: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\msbuild.exe'
 
 steps:
 - task: NuGetToolInstaller@1
-  displayName: "Install nuget"
+  displayName: "Install NuGet"
 
 - task: Cache@2
   inputs:
@@ -29,7 +30,7 @@ steps:
   displayName: Cache NuGet packages
 
 - task: NuGetCommand@2
-  displayName: "Restore nuget packages"
+  displayName: "Restore NuGet packages"
   inputs:
     restoreSolution: '$(solution)'
 
@@ -109,7 +110,7 @@ steps:
     pollingTimeoutSec: '300'
 
 - task: NuGetCommand@2
-  displayName: "Build nuget packages"
+  displayName: "Build NuGet packages"
   inputs:
     command: pack
     packagesToPack: 'sonaranalyzer-dotnet/src/**/*.nuspec'
@@ -120,7 +121,7 @@ steps:
 
 - task: ArtifactoryNuGet@1
   condition: false
-  displayName: "Publish nuget packages"
+  displayName: "Publish NuGet packages"
   inputs:
     command: 'push'
     artifactoryService: 'Repox'
