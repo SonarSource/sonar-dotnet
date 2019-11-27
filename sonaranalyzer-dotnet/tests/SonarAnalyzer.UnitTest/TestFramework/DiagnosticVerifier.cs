@@ -211,20 +211,19 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var expectedIssue = expectedIssues
                 .Where(issueFilter)
                 .FirstOrDefault(issue => issue.LineNumber == lineNumber);
+            var issueType = isPrimary ? "primary" : "secondary";
 
             if (expectedIssue == null)
             {
                 var issueId = primaryIssueId != null ? $" [{ primaryIssueId}]" : "";
-                var issueType = isPrimary ? "Primary issue" : $"Secondary issue{issueId}";
                 var seeOutputMessage = $"{Environment.NewLine}See output to see all actual diagnostics raised on the file";
-                var exceptionMessage = string.IsNullOrEmpty(extraInfo) ? $"{issueType} with message '{message}' not expected on line {lineNumber}.{seeOutputMessage}" : extraInfo;
+                var exceptionMessage = string.IsNullOrEmpty(extraInfo) ? $"Unexpected {issueType} issue{issueId} on line {lineNumber} with message '{message}'.{seeOutputMessage}" : extraInfo;
                 throw new UnexpectedDiagnosticException(location, exceptionMessage);
             }
 
-            var expectedDescription = isPrimary ? "Expected primary" : "Expected secondary";
             if (expectedIssue.Message != null && expectedIssue.Message != message)
             {
-                throw new UnexpectedDiagnosticException(location, $"{expectedDescription} message on line {lineNumber} to be '{expectedIssue.Message}', but got '{message}'.");
+                throw new UnexpectedDiagnosticException(location, $"Expected {issueType} message on line {lineNumber} to be '{expectedIssue.Message}', but got '{message}'.");
             }
 
             var diagnosticStart = location.GetLineSpan().StartLinePosition.Character;
@@ -232,13 +231,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             if (expectedIssue.Start.HasValue && expectedIssue.Start != diagnosticStart)
             {
                 throw new UnexpectedDiagnosticException(location,
-                    $"{expectedDescription} issue on line {lineNumber} to start on column {expectedIssue.Start} but got column {diagnosticStart}.");
+                    $"Expected {issueType} issue on line {lineNumber} to start on column {expectedIssue.Start} but got column {diagnosticStart}.");
             }
 
             if (expectedIssue.Length.HasValue && expectedIssue.Length != location.SourceSpan.Length)
             {
                 throw new UnexpectedDiagnosticException(location,
-                    $"{expectedDescription} issue on line {lineNumber} to have a length of {expectedIssue.Length} but got a length of {location.SourceSpan.Length}.");
+                    $"Expected {issueType} issue on line {lineNumber} to have a length of {expectedIssue.Length} but got a length of {location.SourceSpan.Length}.");
             }
 
             expectedIssues.Remove(expectedIssue);
