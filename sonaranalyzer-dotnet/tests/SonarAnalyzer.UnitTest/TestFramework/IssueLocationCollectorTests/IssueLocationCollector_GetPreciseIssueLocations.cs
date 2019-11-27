@@ -239,7 +239,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         }
 
         [TestMethod]
-        public void GetIssueLocations_NoComment()
+        public void GetPreciseIssueLocations_NoComment()
         {
             var line = GetLine(3, @"if (a > b)
 {
@@ -251,7 +251,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         }
 
         [TestMethod]
-        public void GetIssueLocations_NotStartOfLineIsOk()
+        public void GetPreciseIssueLocations_NotStartOfLineIsOk()
         {
             var line = GetLine(3, @"if (a > b)
 {
@@ -269,7 +269,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         }
 
         [TestMethod]
-        public void GetIssueLocations_InvalidPattern()
+        public void GetPreciseIssueLocations_InvalidPattern()
         {
             var line = GetLine(3, @"if (a > b)
 {
