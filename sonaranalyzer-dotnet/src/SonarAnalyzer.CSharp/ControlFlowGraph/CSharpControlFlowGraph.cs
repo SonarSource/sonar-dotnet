@@ -61,5 +61,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             return cfg != null;
         }
+
+        private static void UnusedMethod()
+        {
+            var x = 0;
+
+            // test a feature branch
+        }
     }
 }
