@@ -102,14 +102,16 @@ namespace SonarAnalyzer.Rules.CSharp
             return current;
         }
 
-        protected override ExpressionSyntax[] FindReturnExpressions(InspectionContext c, SyntaxNode block)
+        protected override ExpressionSyntax[] FindReturnAndThrowExpressions(InspectionContext c, SyntaxNode block)
         {
-            return block.DescendantNodes().OfType<ReturnStatementSyntax>().Select(x => x.Expression).ToArray();
+            return block.DescendantNodes().OfType<ReturnStatementSyntax>().Select(x => x.Expression)
+                .Concat(block.DescendantNodes().OfType<ThrowStatementSyntax>().Select(x => x.Expression))   //Throw statements #2825. x.Expression can be NULL for standalone Throw and we need that one as well.
+                .ToArray();
         }
 
         protected override bool IsTrueLiteral(ExpressionSyntax expression)
         {
-            return expression.RemoveParentheses().Kind() == SyntaxKind.TrueLiteralExpression;
+            return expression?.RemoveParentheses().Kind() == SyntaxKind.TrueLiteralExpression;
         }
 
         protected override string IdentifierText(SyntaxNode node)
@@ -126,7 +128,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return null;
             }
         }
-        
+
         protected override ExpressionSyntax VariableInitializer(VariableDeclaratorSyntax variable)
         {
             return variable.Initializer?.Value;
@@ -155,13 +157,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxNode ExtractArgumentExpressionNode(ExpressionSyntax expression)
         {
-            return expression.RemoveParentheses(); 
+            return expression.RemoveParentheses();
         }
 
         protected override SyntaxNode SyntaxFromReference(SyntaxReference reference)
         {
             return reference.GetSyntax();   //VB.NET has more complicated logic
         }
-        
+
     }
 }
