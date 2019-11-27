@@ -119,9 +119,16 @@ steps:
     publishPackageMetadata: true
 
 - task: ArtifactoryNuGet@1
+  condition: false
   displayName: "Publish nuget packages"
   inputs:
     command: 'push'
     artifactoryService: 'Repox'
     targetDeployRepo: 'sonarsource-nuget-public'
     pathToNupkg: '$(Build.ArtifactStagingDirectory)\*.nupkg'
+
+- task: PowerShell@2
+  displayName: 'Run integration tests'
+  inputs:
+    filePath: 'sonaranalyzer-dotnet/its/regression-test.ps1'
+    workingDirectory: 'sonaranalyzer-dotnet/its'
