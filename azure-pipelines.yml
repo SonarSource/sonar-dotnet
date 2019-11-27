@@ -14,6 +14,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
+  MSBUILD_PATH: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\msbuild.exe'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -126,12 +127,6 @@ steps:
     artifactoryService: 'Repox'
     targetDeployRepo: 'sonarsource-nuget-public'
     pathToNupkg: '$(Build.ArtifactStagingDirectory)\*.nupkg'
-
-- task: PowerShell@2
-  displayName: 'Set MSBUILD_PATH env var'
-  inputs:
-    targetType: 'inline'
-    script: '$Env:MSBUILD_PATH = vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe | select-object -first 1'
 
 - task: PowerShell@2
   displayName: 'Run integration tests'
