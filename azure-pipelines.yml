@@ -119,14 +119,17 @@ steps:
     verbosityPack: 'Detailed'
     publishPackageMetadata: true
 
-- task: ArtifactoryNuGet@1
-  condition: false
-  displayName: "Publish NuGet packages"
+- task: CopyFiles@2
+  displayName: 'Copy NuGet packages to: $(Build.ArtifactStagingDirectory)'
   inputs:
-    command: 'push'
-    artifactoryService: 'Repox'
-    targetDeployRepo: 'sonarsource-nuget-public'
-    pathToNupkg: '$(Build.ArtifactStagingDirectory)\*.nupkg'
+    SourceFolder: '$(Build.SourcesDirectory)'
+    Contents: '*.nupkg'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: BuildOutput
 
 - task: PowerShell@2
   displayName: 'Run integration tests'
