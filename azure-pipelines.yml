@@ -145,3 +145,45 @@ steps:
   inputs:
     filePath: 'sonaranalyzer-dotnet/its/regression-test.ps1'
     workingDirectory: 'sonaranalyzer-dotnet/its'
+
+######### MVN stuff ########
+
+- task: Cache@2
+  displayName: "Cache Maven local repo"
+  inputs:
+  key: 'maven | "$(Agent.OS)" | **/pom.xml'
+  restoreKeys: |
+    maven | "$(Agent.OS)"
+    maven
+  path: $(MAVEN_CACHE_FOLDER)
+
+- task: DownloadSecureFile@1
+  displayName: 'Download Maven settings'
+  name: mavenSettings
+  inputs:
+    secureFile: 'maven-settings.xml'
+
+- template: update-maven-version-steps.yml
+  parameters:
+    mavenSettingsFilePath: $(mavenSettings.secureFilePath)
+
+- task: Maven@3
+  displayName: 'Run Maven deploy'
+  env:
+    ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
+    ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_DEPLOY_PASSWORD)
+  inputs:
+    goals: 'deploy'
+    options: >-
+      $(commonMavenArguments)
+      --settings $(mavenSettings.secureFilePath)
+    publishJUnitResults: false
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    mavenOptions: $(MAVEN_OPTS)
+
+- bash: git checkout .
+  name: revertPomChanges
+  displayName: Revert changes made to pom.xml to not break cache feature
+
+######### END MVN stuff ########
