@@ -21,6 +21,13 @@ variables:
     value: $(Pipeline.Workspace)/.nuget/packages
   - name: MSBUILD_PATH
     value: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\msbuild.exe'
+# MVN vars
+  - name: MAVEN_CACHE_FOLDER
+    value: $(Pipeline.Workspace)/.m2/repository
+  - name: MAVEN_OPTS
+    value: '-Xmx3072m -Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
+  - name: commonMavenArguments
+    value: -B -Pdeploy-sonarsource -Dmaven.test.skip=true
 
 resources:
   repositories:
@@ -154,11 +161,11 @@ steps:
 - task: Cache@2
   displayName: "Cache Maven local repo"
   inputs:
-  key: 'maven | "$(Agent.OS)" | **/pom.xml'
-  restoreKeys: |
-    maven | "$(Agent.OS)"
-    maven
-  path: $(MAVEN_CACHE_FOLDER)
+    key: 'maven | "$(Agent.OS)" | **/pom.xml'
+    restoreKeys: |
+      maven | "$(Agent.OS)"
+      maven
+    path: $(MAVEN_CACHE_FOLDER)
 
 - task: DownloadSecureFile@1
   displayName: 'Download Maven settings'
