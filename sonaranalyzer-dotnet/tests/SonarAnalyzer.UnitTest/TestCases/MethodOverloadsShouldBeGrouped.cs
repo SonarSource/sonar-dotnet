@@ -151,6 +151,10 @@ namespace Tests.Diagnostics
     // https://github.com/SonarSource/sonar-dotnet/issues/2776
     public class StaticMethodsTogether
     {
+
+        public StaticMethodsTogether() { }
+        public StaticMethodsTogether(int i) { }
+
         public static void MethodA() // Compliant - static methods are grouped together, it's ok
         {
         }
@@ -158,6 +162,8 @@ namespace Tests.Diagnostics
         public static void MethodB()
         {
         }
+
+        static StaticMethodsTogether() { }  //Compliant - static constructor can be grouped with static methods
 
         public void MethodA(int i)  
         {
@@ -178,7 +184,6 @@ namespace Tests.Diagnostics
         public static void MethodC(bool b)    // Secondary
         {
         }
-
-
+        
     }
 }

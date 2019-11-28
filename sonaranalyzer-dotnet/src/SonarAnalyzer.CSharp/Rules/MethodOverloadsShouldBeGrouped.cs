@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -61,6 +62,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 return methodDeclaration.ExplicitInterfaceSpecifier == null;
             }
             return true;
+        }
+
+        protected override bool IsStatic(MemberDeclarationSyntax member)
+        {
+            if (member is BaseMethodDeclarationSyntax declaration) //Method or Constructor
+            {
+                return declaration.Modifiers.Any(x => x.Kind() == SyntaxKind.StaticKeyword);
+            }
+            return false;
         }
         
         protected override void Initialize(SonarAnalysisContext context)

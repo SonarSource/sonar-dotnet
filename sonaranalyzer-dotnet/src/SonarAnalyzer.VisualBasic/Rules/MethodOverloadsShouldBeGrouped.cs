@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -59,6 +60,28 @@ namespace SonarAnalyzer.Rules.VisualBasic
         }
 
         protected override bool IsValidMemberForOverload(StatementSyntax member) => true;
+
+        protected override bool IsStatic(StatementSyntax member)
+        {
+            if (member is ConstructorBlockSyntax constructorDeclaration)
+            {
+                return IsStaticStatement(constructorDeclaration.SubNewStatement);
+            }
+            else if (member is MethodBlockSyntax methodDeclaration)
+            {
+                return IsStaticStatement(methodDeclaration.SubOrFunctionStatement);
+            }
+            else if (member is MethodStatementSyntax methodStatement) 
+            {
+                return IsStaticStatement(methodStatement);
+            }
+            return false;
+        }
+
+        private bool IsStaticStatement(MethodBaseSyntax statement)
+        {
+            return statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.SharedKeyword);
+        }
 
         protected override void Initialize(SonarAnalysisContext context)
         {

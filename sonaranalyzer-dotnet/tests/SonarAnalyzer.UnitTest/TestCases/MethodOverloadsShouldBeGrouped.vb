@@ -135,10 +135,19 @@ Namespace Tests.TestCases
     ' https://github.com/SonarSource/sonar-dotnet/issues/2776
     Public Class StaticMethodsTogether
 
+        Public Sub New()
+        End Sub
+
+        Public Sub New(i As Integer)
+        End Sub
+
         Public Shared Sub MethodA() ' Compliant - Static methods are grouped together, it's ok
         End Sub
 
         Public Shared Sub MethodB()
+        End Sub
+
+        Shared Sub New()            ' Compliant - static constructor can be grouped with static methods
         End Sub
 
         Public Sub MethodA(ByVal i As Integer)

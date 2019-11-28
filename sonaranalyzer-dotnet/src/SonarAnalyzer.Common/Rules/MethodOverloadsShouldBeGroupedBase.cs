@@ -47,6 +47,8 @@ namespace SonarAnalyzer.Rules
 
         protected abstract bool IsValidMemberForOverload(TMemberDeclarationSyntax member);
 
+        protected abstract bool IsStatic(TMemberDeclarationSyntax member);
+
         protected void CheckMembers(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
         {
             var misplacedOverloadsMapping = GetMisplacedOverloads(members);
@@ -81,28 +83,29 @@ namespace SonarAnalyzer.Rules
         protected IDictionary<string, List<TMemberDeclarationSyntax>> GetMisplacedOverloads(IEnumerable<TMemberDeclarationSyntax> members)
         {
             var misplacedOverloads = new Dictionary<string, List<TMemberDeclarationSyntax>>();
-            string previousMemberName = null;
+            string previousKey = null, key;
             foreach (var member in members)
             {
                 if (GetMethodName(member, IsCaseSensitive) is string methodName
                     && IsValidMemberForOverload(member))
                 {
-                    if (misplacedOverloads.TryGetValue(methodName, out var currentList))
+                    key = methodName + "/" + IsStatic(member);  //#4136 Should not raise when static methods are grouped together
+                    if (misplacedOverloads.TryGetValue(key, out var currentList))
                     {
-                        if (!methodName.Equals(previousMemberName, CaseSensitivity))
+                        if (!key.Equals(previousKey, CaseSensitivity))   
                         {
                             currentList.Add(member);
                         }
                     }
                     else
                     {
-                        misplacedOverloads.Add(methodName, new List<TMemberDeclarationSyntax> { member });
+                        misplacedOverloads.Add(key, new List<TMemberDeclarationSyntax> { member });
                     }
-                    previousMemberName = methodName;
+                    previousKey = key;
                 }
                 else
                 {
-                    previousMemberName = null;
+                    previousKey = null;
                 }
             }
             return misplacedOverloads;
