@@ -77,11 +77,6 @@ namespace SonarAnalyzer.Rules
 
         private bool IsReadBefore(SemanticModel semanticModel, ISymbol parameterSymbol, TAssignmentStatementSyntax assignment)
         {
-            //FIXME: REMOVE DEBUG
-            if (parameterSymbol.Name.ToString() == "xx")
-                System.Diagnostics.Debugger.Break();
-
-
             // Same problem as in VB.NET / IsAssignmentToCatchVariable:
             // parameterSymbol.DeclaringSyntaxReferences is empty for Catch syntax in VB.NET as well as for indexer syntax for C#
             // https://github.com/dotnet/roslyn/issues/6209
@@ -106,14 +101,14 @@ namespace SonarAnalyzer.Rules
         /// </summary>
         private static IEnumerable<SyntaxNode> GetPreviousNodes(Location stopLocation, SyntaxNode statement) 
         {
-            if (statement == null || (stopLocation != null && statement.GetLocation().SourceSpan.IntersectsWith(stopLocation.SourceSpan)))   //Method declaration or Catch variable declaration, stop here and do not include this statement
+            if (statement == null || statement.GetLocation().SourceSpan.IntersectsWith(stopLocation.SourceSpan))   //Method declaration or Catch variable declaration, stop here and do not include this statement
             {
                 return new SyntaxNode[] { };
             }
             var previousNodes = statement.Parent.ChildNodes()
                 .TakeWhile(x => x != statement)     //Take all from beginning, including "catch ex" on the way, down to current statement
                 .Reverse()                          //Reverse in order to keep the tail
-                .TakeWhile(x => stopLocation == null || !x.GetLocation().SourceSpan.IntersectsWith(stopLocation.SourceSpan))    //Keep the tail until "catch ex" or "int i" is found
+                .TakeWhile(x => !x.GetLocation().SourceSpan.IntersectsWith(stopLocation.SourceSpan))    //Keep the tail until "catch ex" or "int i" is found
                 .SelectMany(x => x.DescendantNodes());
 
             return previousNodes.Union(GetPreviousNodes(stopLocation, statement.Parent));
