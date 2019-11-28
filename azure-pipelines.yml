@@ -18,10 +18,11 @@ variables:
 
 stages:
   - stage: dotnetBuildStage
-    displayName: '.Net build and package stage'
+    displayName: '.Net build'
 
     jobs:
     - job: dotnetBuildjob
+      displayName: 'Build and package'
       steps:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
@@ -89,7 +90,21 @@ stages:
           solution: '$(solution)'
           platform: '$(buildPlatform)'
           configuration: '$(buildConfiguration)'
-          msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=true /p:DefineConstants=SignAssembly /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:pfxCertificatePath="$(pfx.secureFilePath)" /p:pfxPassword="$(pfxPassword)" /p:pfxSha1=$(pfxSha1) /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)  '
+          msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=true /p:DefineConstants=SignAssembly /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:pfxCertificatePath="$(pfx.secureFilePath)" /p:pfxPassword="$(pfxPassword)" /p:pfxSha1=$(pfxSha1) /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)'
+
+      - task: CopyFiles@2
+        condition: true
+        displayName: 'Copy build binaries to: $(Build.ArtifactStagingDirectory)'
+        inputs:
+          SourceFolder: '$(Build.SourcesDirectory)'
+          Contents: 'sonaranalyzer-dotnet/its/binaries/*.dll'
+          TargetFolder: '$(Build.ArtifactStagingDirectory)/binaries'
+
+      - task: PublishBuildArtifacts@1
+        condition: true
+        inputs:
+          pathToPublish: 'sonaranalyzer-dotnet/its/binaries/*.dll'
+          artifactName: Binaries
 
       - task: VSTest@2
         condition: false
@@ -145,6 +160,12 @@ stages:
     jobs:
     - job: runIntegrationTestsJob
       steps:
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
+          script: |
+            dir $(Build.ArtifactStagingDirectory)
+            dir $(Build.ArtifactStagingDirectory)/binaries
 
       - task: PowerShell@2
         condition: true
