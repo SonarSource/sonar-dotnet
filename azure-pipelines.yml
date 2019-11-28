@@ -17,7 +17,7 @@ variables:
   MSBUILD_PATH: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\msbuild.exe'
 
 stages:
-  - stage: dotnet-build-stage
+  - stage: dotnetBuildStage
     displayName: '.Net build and package stage'
 
     jobs:
