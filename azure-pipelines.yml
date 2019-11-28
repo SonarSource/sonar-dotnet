@@ -116,7 +116,6 @@ steps:
 
 - task: Maven@3
   displayName: 'Run Maven deploy'
-  condition: false
   env:
     ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
     ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_DEPLOY_PASSWORD)
@@ -131,6 +130,7 @@ steps:
     mavenOptions: $(MAVEN_OPTS)
 
 - task: SonarCloudPrepare@1
+  condition: false
   inputs:
     SonarCloud: 'SonarCloud'
     organization: 'sonarsource'
@@ -138,6 +138,7 @@ steps:
 
 # running SonarCloud analysis can be done in parallel with ITs
 - task: Maven@3
+  condition: false
   displayName: 'Run Maven verify, UTs with SonarCloud'
   inputs:
     goals: 'verify'
@@ -152,12 +153,22 @@ steps:
     sqMavenPluginVersionChoice: 'latest'
 
 - task: SonarCloudPublish@1
+  condition: false
   inputs:
     pollingTimeoutSec: '300'
 
-- script: mvn clean install
-  workingDirectory: its
+- task: Maven@3
   displayName: 'Run MVN ITs'
+  inputs:
+    mavenPomFile: its/pom.xml
+    goals: 'clean verify'
+    options: -B --settings $(mavenSettings.secureFilePath)
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    testRunTitle: 'ITs on Windows'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    mavenOptions: $(MAVEN_OPTS)
 
 - bash: git checkout .
   name: revertPomChanges
