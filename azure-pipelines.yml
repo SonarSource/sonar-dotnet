@@ -155,14 +155,16 @@ stages:
           artifactName: BuildOutput
 
   - stage: runIntegrationTestsStage
-    displayName: 'Run .Net integration tests'
+    displayName: '.Net ITs'
     jobs:
     - job: runIntegrationTestsJob
+      displayName: 'Run integration tests'
       steps:
 
       - task: DownloadPipelineArtifact@2
         inputs:
           artifact: Binaries
+          targetPath: 'sonaranalyzer-dotnet/its/binaries/'
 
       - task: PowerShell@2
         inputs:
