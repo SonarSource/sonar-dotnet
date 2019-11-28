@@ -46,11 +46,11 @@ namespace Tests.Diagnostics
             list.Add(42);
         }
 
-        void IListAdd(ICollection<int> list)
+        void ICollectionAdd(ICollection<int> collection)
         {
             // #2674 List.Add method should not raise any issue when used with same elements
-            list.Add(42);
-            list.Add(42);
+            collection.Add(42);
+            collection.Add(42);
         }
 
         void SameIndexOnArray(CustomIndexerOneArg obj)

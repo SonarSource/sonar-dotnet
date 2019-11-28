@@ -69,10 +69,10 @@ Namespace Tests.TestCases
             list.Add("MyText")
         End Sub
 
-        Private Sub ICollectionAdd(list As ICollection(Of String))
+        Private Sub ICollectionAdd(collection As ICollection(Of String))
             '#2674 List.Add method should not raise any issue when used with same elements
-            list.Add("MyText")
-            list.Add("MyText")
+            collection.Add("MyText")
+            collection.Add("MyText")
         End Sub
 
         Private Sub SameIndexSpacedOut(ByVal names() As String)
@@ -109,9 +109,9 @@ Namespace Tests.TestCases
         End Sub
 
         Private Sub IDictionaryAddMixedCase(ByVal dict As IDictionary(Of Integer, Integer))
-            dict.Add(0, 0) ' Secondary
+            dict.add(0, 0) ' Secondary
 '           ^^^^^^^^^^^^^^
-            dict.Add(0, 1) ' Noncompliant
+            dict.ADD(0, 1) ' Noncompliant
 '           ^^^^^^^^^^^^^^
         End Sub
 
@@ -224,7 +224,7 @@ Namespace Tests.TestCases
     Class NullReferenceReproducer
 
         Sub FooBar()
-            Bar() ' AD0001 NullReferenceException in GetFirstArgumentExpression
+            Bar ' AD0001 NullReferenceException in GetFirstArgumentExpression
         End Sub
 
         Public Sub Bar()
