@@ -130,8 +130,8 @@ steps:
     pollingTimeoutSec: '300'
 
 - task: NuGetCommand@2
-  displayName: "Build NuGet packages"
   condition: false
+  displayName: "Build NuGet packages"
   inputs:
     command: pack
     packagesToPack: 'sonaranalyzer-dotnet/src/**/*.nuspec'
