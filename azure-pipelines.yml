@@ -6,6 +6,14 @@ pool:
 
 variables:
   - group: sonar-dotnet-variables
+  - group: sonarsource-build-variables
+
+resources:
+  repositories:
+    - repository: commonTemplates
+      type: git
+      name: pipelines-yaml-templates
+      ref:  refs/tags/v1.0.6
 
 stages:
   - stage: dotnetBuildStage
@@ -198,3 +206,16 @@ stages:
         inputs:
           filePath: 'sonaranalyzer-dotnet/its/regression-test.ps1'
           workingDirectory: 'sonaranalyzer-dotnet/its'
+
+    - job: runJavaBuild
+      displayName: 'Run Java build'
+
+      steps:
+      - task: Cache@2
+        displayName: "Cache Maven local repo"
+        inputs:
+          key: 'maven | "$(Agent.OS)" | **/pom.xml'
+          restoreKeys: |
+            maven | "$(Agent.OS)"
+            maven
+          path: $(MAVEN_CACHE_FOLDER)
