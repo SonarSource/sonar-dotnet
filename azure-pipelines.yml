@@ -133,6 +133,7 @@ steps:
 # running UTs can be done in parallel with deploying
 - task: Maven@3
   displayName: 'Run Maven verify'
+  condition: false
   inputs:
     goals: 'verify'
     options: '-B --settings $(mavenSettings.secureFilePath)'
@@ -143,20 +144,18 @@ steps:
     jdkVersionOption: '1.11'
     mavenOptions: $(MAVEN_OPTS)
 
-- template: prepare-sq-analysis-steps.yml@commonTemplates
-
-# running SQ analysis can be done either in parallel or merged with running UTs
-- task: Maven@3
-  displayName: 'Run Maven verify with SQ'
+- task: SonarCloudPrepare@1
   inputs:
-    goals: 'verify'
-    options: -B --settings $(mavenSettings.secureFilePath) -Pcoverage
-    publishJUnitResults: false
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    mavenOptions: $(MAVEN_OPTS)
-    sonarQubeRunAnalysis: true
-    sqMavenPluginVersionChoice: 'latest'
+    SonarCloud: 'SonarCloud'
+    organization: 'sonarsource'
+    scannerMode: 'Other'
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
+
 
 - bash: git checkout .
   name: revertPomChanges
