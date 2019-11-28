@@ -22,8 +22,8 @@ stages:
     jobs:
     - job: dotnetBuildjob
       displayName: 'Build and package'
-
       steps:
+
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
 
@@ -156,12 +156,14 @@ stages:
 
   - stage: runIntegrationTestsStage
     displayName: '.Net ITs'
+    dependsOn: dotnetBuildStage
     jobs:
     - job: runIntegrationTestsJob
       displayName: 'Run integration tests'
       steps:
 
       - task: DownloadPipelineArtifact@2
+        displayName: 'Download binaries to test'
         inputs:
           artifact: Binaries
           targetPath: 'sonaranalyzer-dotnet/its/binaries/'
