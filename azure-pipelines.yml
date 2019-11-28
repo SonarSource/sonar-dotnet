@@ -55,7 +55,7 @@ stages:
         displayName: 'Set BranchName, Sha1 and BuildNumber'
         inputs:
           solution: scripts/version/ChangeVersion.proj
-          msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
+          msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration) /p:WarningLevel=0'
 
       - task: DownloadSecureFile@1
         displayName: 'Download snk file'
