@@ -85,18 +85,6 @@ steps:
   inputs:
     secureFile: 'sonarsource-2019-2021.pfx'
 
-- task: SonarCloudPrepare@1
-  condition: false
-  displayName: 'Run Code Analysis - Begin Step'
-  inputs:
-    SonarCloud: 'SonarCloud'
-    organization: 'sonarsource'
-    scannerMode: 'MSBuild'
-    projectKey: 'sonaranalyzer-dotnet'
-    projectName: 'SonarAnalyzer .Net'
-    projectVersion: '$(SONAR_PROJECT_VERSION)'
-    extraProperties: 
-
 - task: VSBuild@1
   displayName: "Build SonarAnalyzer"
   inputs:
@@ -104,57 +92,6 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=true /p:DefineConstants=SignAssembly /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:pfxCertificatePath="$(pfx.secureFilePath)" /p:pfxPassword="$(pfxPassword)" /p:pfxSha1=$(pfxSha1) /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)  '
-
-- task: VSTest@2
-  condition: false
-  displayName: "Run SonarAnalyzer unit tests"
-  inputs:
-    testAssemblyVer2: |
-     **\$(BuildConfiguration)\**\*.UnitTest.dll
-     !**\obj\**
-    runInParallel: true
-    runTestsInIsolation: true
-    codeCoverageEnabled: true
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-    rerunFailedTests: false
-
-- task: SonarCloudAnalyze@1
-  condition: false
-  displayName: 'Run Code Analysis - End Step'
-
-- task: SonarCloudPublish@1
-  condition: false
-  displayName: 'Run Code Analysis - Publish QG'
-  inputs:
-    pollingTimeoutSec: '300'
-
-- task: NuGetCommand@2
-  condition: false
-  displayName: "Build NuGet packages"
-  inputs:
-    command: pack
-    packagesToPack: 'sonaranalyzer-dotnet/src/**/*.nuspec'
-    configuration: '$(BuildConfiguration)'
-    packDestination: '$(Build.ArtifactStagingDirectory)'
-    verbosityPack: 'Detailed'
-    publishPackageMetadata: true
-
-- task: ArtifactoryNuGet@1
-  condition: false
-  displayName: "Publish NuGet packages"
-  inputs:
-    command: 'push'
-    artifactoryService: 'Repox'
-    targetDeployRepo: 'sonarsource-nuget-public'
-    pathToNupkg: '$(Build.ArtifactStagingDirectory)\*.nupkg'
-
-- task: PowerShell@2
-  condition: false
-  displayName: 'Run integration tests'
-  inputs:
-    filePath: 'sonaranalyzer-dotnet/its/regression-test.ps1'
-    workingDirectory: 'sonaranalyzer-dotnet/its'
 
 ######### MVN stuff ########
 
