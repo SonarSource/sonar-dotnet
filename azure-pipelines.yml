@@ -22,7 +22,6 @@ stages:
 
     jobs:
     - job: dotnetBuildjob
-      displayName: '.Net build and package job'
       steps:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
@@ -141,8 +140,14 @@ stages:
           pathToPublish: $(Build.ArtifactStagingDirectory)
           artifactName: BuildOutput
 
+  - stage: runIntegrationTestsStage
+    displayName: 'Run .Net integration tests'
+    jobs:
+    - job: runIntegrationTestsJob
+      steps:
+
       - task: PowerShell@2
-        condition: false
+        condition: true
         displayName: 'Run integration tests'
         inputs:
           filePath: 'sonaranalyzer-dotnet/its/regression-test.ps1'
