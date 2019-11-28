@@ -219,3 +219,28 @@ stages:
             maven | "$(Agent.OS)"
             maven
           path: $(MAVEN_CACHE_FOLDER)
+
+      - task: DownloadSecureFile@1
+        displayName: 'Download Maven settings'
+        name: mavenSettings
+        inputs:
+          secureFile: 'maven-settings.xml'
+
+      - template: update-maven-version-steps.yml@commonTemplates
+        parameters:
+          mavenSettingsFilePath: $(mavenSettings.secureFilePath)
+
+      - task: Maven@3
+        displayName: 'Run Maven deploy'
+        env:
+          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
+          ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_DEPLOY_PASSWORD)
+        inputs:
+          goals: 'deploy'
+          options: >-
+            $(commonMavenArguments)
+            --settings $(mavenSettings.secureFilePath)
+          publishJUnitResults: false
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '1.11'
+          mavenOptions: $(MAVEN_OPTS)
