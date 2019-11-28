@@ -105,12 +105,6 @@ stages:
           path: sonaranalyzer-dotnet/its/binaries/
           artifact: Binaries
 
-      - task: PublishBuildArtifacts@1
-        condition: false
-        inputs:
-          pathToPublish: 'sonaranalyzer-dotnet/its/binaries/*.dll'
-          artifactName: Binaries
-
       - task: VSTest@2
         condition: false
         displayName: "Run SonarAnalyzer unit tests"
@@ -165,12 +159,17 @@ stages:
     jobs:
     - job: runIntegrationTestsJob
       steps:
+
+      - task: DownloadPipelineArtifact@2
+        inputs:
+          artifact: Binaries
+
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
           script: |
-            dir $(Build.ArtifactStagingDirectory)
-            dir $(Build.ArtifactStagingDirectory)/binaries
+            dir sonaranalyzer-dotnet/its
+            dir sonaranalyzer-dotnet/its/binaries/
 
       - task: PowerShell@2
         condition: true
