@@ -163,7 +163,6 @@ stages:
           msbuildArgs: '/p:DeployExtension=false /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)'
 
       - task: VSTest@2
-        condition: false
         displayName: "Run SonarAnalyzer unit tests"
         inputs:
           testAssemblyVer2: |
@@ -177,11 +176,9 @@ stages:
           rerunFailedTests: false
 
       - task: SonarCloudAnalyze@1
-        condition: false
         displayName: 'Run Code Analysis - End Step'
 
       - task: SonarCloudPublish@1
-        condition: false
         displayName: 'Run Code Analysis - Publish QG'
         inputs:
           pollingTimeoutSec: '300'
