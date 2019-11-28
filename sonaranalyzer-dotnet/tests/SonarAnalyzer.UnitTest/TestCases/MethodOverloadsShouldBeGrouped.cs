@@ -151,19 +151,34 @@ namespace Tests.Diagnostics
     // https://github.com/SonarSource/sonar-dotnet/issues/2776
     public class StaticMethodsTogether
     {
-        public static void MethodA() // Noncompliant FP - static methods are grouped together, it's ok
+        public static void MethodA() // Compliant - static methods are grouped together, it's ok
         {
-            // do nothing
         }
 
         public static void MethodB()
         {
-            // do nothing
         }
 
-        public void MethodA(int i)  // Secondary {{Non-adjacent overload}}
+        public void MethodA(int i)  
         {
-            // do nothing
         }
+
+        public static void MethodC()    // Noncompliant - When there're more shared methods, they still should be together
+        {
+        }
+
+        public static void MethodD()    
+        {
+        }
+
+        public static void MethodD(bool b)
+        {
+        }
+
+        public static void MethodC(bool b)    // Secondary
+        {
+        }
+
+
     }
 }

@@ -134,14 +134,28 @@ Namespace Tests.TestCases
 
     ' https://github.com/SonarSource/sonar-dotnet/issues/2776
     Public Class StaticMethodsTogether
-        Public Shared Sub MethodA() ' Noncompliant FP
+
+        Public Shared Sub MethodA() ' Compliant - Static methods are grouped together, it's ok
         End Sub
 
         Public Shared Sub MethodB()
         End Sub
 
-        Public Sub MethodA(ByVal i As Integer) ' Secondary {{Non-adjacent overload}}
+        Public Sub MethodA(ByVal i As Integer)
         End Sub
+
+        Public Shared Sub MethodC() 'Noncompliant - When there're more shared methods, they still should be together
+        End Sub
+
+        Public Shared Sub MethodD()
+        End Sub
+
+        Public Shared Sub MethodD(b As Boolean) 'Compliant
+        End Sub
+
+        Public Shared Sub MethodC(b As Boolean) 'Secondary
+        End Sub
+
     End Class
 
 End Namespace
