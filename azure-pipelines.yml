@@ -81,12 +81,11 @@ stages:
           configuration: '$(buildConfiguration)'
           msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=true /p:DefineConstants=SignAssembly /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:pfxCertificatePath="$(pfx.secureFilePath)" /p:pfxPassword="$(pfxPassword)" /p:pfxSha1=$(pfxSha1) /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)'
 
-      - task: CopyFiles@2
-        displayName: 'Copy build binaries to: $(Build.ArtifactStagingDirectory)'
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publis binaries as pipeline artifact'
         inputs:
-          SourceFolder: '$(Build.SourcesDirectory)'
-          Contents: 'sonaranalyzer-dotnet/its/binaries/*.dll'
-          TargetFolder: '$(Build.ArtifactStagingDirectory)/binaries'
+          path: sonaranalyzer-dotnet/its/binaries/
+          artifact: Binaries
 
       - task: NuGetCommand@2
         displayName: "Build NuGet packages"
@@ -99,16 +98,16 @@ stages:
           publishPackageMetadata: true
 
       - task: CopyFiles@2
-        displayName: 'Copy NuGet packages to: $(Build.ArtifactStagingDirectory)'
+        displayName: 'Copy NuGet packages to same folder'
         inputs:
           SourceFolder: '$(Build.SourcesDirectory)'
           Contents: '*.nupkg'
-          TargetFolder: '$(Build.ArtifactStagingDirectory)'
+          TargetFolder: '$(Build.ArtifactStagingDirectory)/packages'
 
       - task: PublishBuildArtifacts@1
         displayName: 'Publish NuGet packages as build artifacts'
         inputs:
-          pathToPublish: $(Build.ArtifactStagingDirectory)
+          pathToPublish: '$(Build.ArtifactStagingDirectory)/packages'
           artifactName: BuildOutput
 
   - stage: runIntegrationTestsStage
