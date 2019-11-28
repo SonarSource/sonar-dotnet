@@ -156,10 +156,6 @@ stages:
 
   - stage: runIntegrationTestsStage
     displayName: '.Net ITs'
-
-    variables: 
-      MSBUILD_PATH: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\msbuild.exe'
-
     jobs:
     - job: runIntegrationTestsJob
       displayName: 'Run integration tests'
@@ -169,6 +165,9 @@ stages:
         inputs:
           artifact: Binaries
           targetPath: 'sonaranalyzer-dotnet/its/binaries/'
+
+      - task: NuGetToolInstaller@1
+        displayName: "Install NuGet"
 
       - task: PowerShell@2
         condition: true
