@@ -28,7 +28,6 @@ using Newtonsoft.Json.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.Diagnostics;
-using System.Collections.Immutable;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
@@ -36,12 +35,11 @@ using System.Threading;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    public abstract class CbdeHandler : SonarDiagnosticAnalyzer
+    public class CbdeHandler
     {
-        private const string cbdeJsonOutputFileName = "cbdeSEout.json";
+        Action<String, String, Location, CompilationAnalysisContext> raiseIssue;
 
-        protected const string DiagnosticId = "S2583";
-        protected const string MessageFormat = "Condition is always {0}";
+        private const string cbdeJsonOutputFileName = "cbdeSEout.json";
 
         private static string cbdeBinaryPath;
         private string mlirDirectoryRoot;
@@ -99,8 +97,9 @@ namespace SonarAnalyzer.Rules.CSharp
             UnpackCbdeExe();
             GlobalLog("After unpack");
         }
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        public void Initialize(SonarAnalysisContext context, Action<String, String, Location, CompilationAnalysisContext> raiseIssue)
         {
+            this.raiseIssue = raiseIssue;
             GlobalLog("Before initialize");
             var watch = System.Diagnostics.Stopwatch.StartNew();
             if (cbdeBinaryPath != null)
@@ -262,35 +261,20 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             logFile.Dispose();
         }
-        private static Diagnostic CreateDiagnosticFromJToken(JToken token)
+        private void RaiseIssueFromJToken(JToken token, CompilationAnalysisContext context)
         {
-            // Temporary hack to disguise the rule about overflow as a rule about
-            // condition always true to avoid tackling registration issues
-            var key = "S2583"; // token["key"].ToString();
-
+            var key = token["key"].ToString();
             var message = token["message"].ToString();
             var location = token["location"];
             var line = Convert.ToInt32(location["l"]);
             var col = Convert.ToInt32(location["c"]);
             var file = location["f"].ToString();
 
-            DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(key, message, RspecStrings.ResourceManager);
             var begin = new LinePosition(line, col);
             var end = new LinePosition(line, col + 1);
             var loc = Location.Create(file, TextSpan.FromBounds(0, 0), new LinePositionSpan(begin, end));
 
-            return Diagnostic.Create(rule, loc);
-        }
-        private static Diagnostic CreateDiagnosticFromFailureString(string filename, string description)
-        {
-            var rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, description, RspecStrings.ResourceManager);
-
-            var begin = new LinePosition(1,1);
-            var end = new LinePosition(1,2);
-            var loc = Location.Create(filename, TextSpan.FromBounds(0, 0), new LinePositionSpan(begin, end));
-
-            return Diagnostic.Create(rule, loc);
+            raiseIssue(key, message, loc, context);
         }
         private void RaiseIssueFromFailedCbdeRun(CompilationAnalysisContext context)
         {
@@ -325,7 +309,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 logFile.WriteLine("  * processing token {0}", issue.ToString());
                 try
                 {
-                    context.ReportDiagnosticWhenActive(CreateDiagnosticFromJToken(issue));
+                    RaiseIssueFromJToken(issue, context);
                 }
                 catch
                 {
@@ -335,13 +319,5 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             logFile.Flush();
         }
-    }
-
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class CbdeHandlerRule : CbdeHandler
-    {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
     }
 }

@@ -1,0 +1,17 @@
+{
+  "title": "Calculations should not overflow",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "overflow",
+    "based-on-misra"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-3949",
+  "sqKey": "S3949",
+  "scope": "All"
+}
