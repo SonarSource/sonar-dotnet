@@ -16,127 +16,134 @@ variables:
   NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
   MSBUILD_PATH: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\msbuild.exe'
 
-steps:
-- task: NuGetToolInstaller@1
-  displayName: "Install NuGet"
+stages:
+  - stage: dotnet-build-stage
+    displayName: '.Net build and package stage'
 
-- task: Cache@2
-  inputs:
-    key: 'nuget | "$(Agent.OS)" | **/packages.lock.json'
-    restoreKeys: |
-       nuget | "$(Agent.OS)"
-       nuget
-    path: $(NUGET_PACKAGES)
-  displayName: Cache NuGet packages
+    jobs:
+    - job: dotnetBuildjob
+      displayName: '.Net build and package job'
+      steps:
+      - task: NuGetToolInstaller@1
+        displayName: "Install NuGet"
 
-- task: NuGetCommand@2
-  displayName: "Restore NuGet packages"
-  inputs:
-    restoreSolution: '$(solution)'
+      - task: Cache@2
+        displayName: Cache NuGet packages
+        inputs:
+          key: 'nuget | "$(Agent.OS)" | **/packages.lock.json'
+          restoreKeys: |
+            nuget | "$(Agent.OS)"
+            nuget
+          path: $(NUGET_PACKAGES)
 
-- powershell: |
-   # Calculate the file path
-   $versionFilePath = "$env:BUILD_SOURCESDIRECTORY\scripts\version\Version.props"
-   Write-Host "Reading the Sonar project version from '${versionFilePath}' ..."
+      - task: NuGetCommand@2
+        displayName: "Restore NuGet packages"
+        inputs:
+          restoreSolution: '$(solution)'
 
-   # Read the version from the file
-   [xml]$versionProps = Get-Content "$versionFilePath"
-   $sonarProjectVersion = $versionProps.Project.PropertyGroup.MainVersion
-   Write-Host "Sonar project version is '${sonarProjectVersion}'"
+      - powershell: |
+          # Calculate the file path
+          $versionFilePath = "$env:BUILD_SOURCESDIRECTORY\scripts\version\Version.props"
+          Write-Host "Reading the Sonar project version from '${versionFilePath}' ..."
 
-   # Set the variable to it can be used by other tasks
-   Write-Host "##vso[task.setvariable variable=SONAR_PROJECT_VERSION;]$sonarProjectVersion"
-  displayName: 'Read Sonar project version from the versions.props file'
+          # Read the version from the file
+          [xml]$versionProps = Get-Content "$versionFilePath"
+          $sonarProjectVersion = $versionProps.Project.PropertyGroup.MainVersion
+          Write-Host "Sonar project version is '${sonarProjectVersion}'"
 
-- task: VSBuild@1
-  displayName: 'Set BranchName, Sha1 and BuildNumber properties from Azure pipeline variables'
-  inputs:
-    solution: scripts/version/ChangeVersion.proj
-    msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
+          # Set the variable to it can be used by other tasks
+          Write-Host "##vso[task.setvariable variable=SONAR_PROJECT_VERSION;]$sonarProjectVersion"
+        displayName: 'Read Sonar project version from the versions.props file'
 
-- task: DownloadSecureFile@1
-  displayName: 'Download snk file'
-  name: snk
-  inputs:
-    secureFile: SonarSourceSecret.snk
+      - task: VSBuild@1
+        displayName: 'Set BranchName, Sha1 and BuildNumber properties from Azure pipeline variables'
+        inputs:
+          solution: scripts/version/ChangeVersion.proj
+          msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
 
-- task: DownloadSecureFile@1
-  displayName: 'Download pfx file'
-  inputs:
-    secureFile: 'sonarsource-2019-2021.pfx'
+      - task: DownloadSecureFile@1
+        displayName: 'Download snk file'
+        name: snk
+        inputs:
+          secureFile: SonarSourceSecret.snk
 
-- task: SonarCloudPrepare@1
-  condition: false
-  displayName: 'Run Code Analysis - Begin Step'
-  inputs:
-    SonarCloud: 'SonarCloud'
-    organization: 'sonarsource'
-    scannerMode: 'MSBuild'
-    projectKey: 'sonaranalyzer-dotnet'
-    projectName: 'SonarAnalyzer .Net'
-    projectVersion: '$(SONAR_PROJECT_VERSION)'
-    extraProperties: 
+      - task: DownloadSecureFile@1
+        displayName: 'Download pfx file'
+        inputs:
+          secureFile: 'sonarsource-2019-2021.pfx'
 
-- task: VSBuild@1
-  displayName: "Build SonarAnalyzer"
-  inputs:
-    solution: '$(solution)'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-    msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=true /p:DefineConstants=SignAssembly /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:pfxCertificatePath="$(pfx.secureFilePath)" /p:pfxPassword="$(pfxPassword)" /p:pfxSha1=$(pfxSha1) /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)  '
+      - task: SonarCloudPrepare@1
+        condition: false
+        displayName: 'Run Code Analysis - Begin Step'
+        inputs:
+          SonarCloud: 'SonarCloud'
+          organization: 'sonarsource'
+          scannerMode: 'MSBuild'
+          projectKey: 'sonaranalyzer-dotnet'
+          projectName: 'SonarAnalyzer .Net'
+          projectVersion: '$(SONAR_PROJECT_VERSION)'
+          extraProperties: 
 
-- task: VSTest@2
-  condition: false
-  displayName: "Run SonarAnalyzer unit tests"
-  inputs:
-    testAssemblyVer2: |
-     **\$(BuildConfiguration)\**\*.UnitTest.dll
-     !**\obj\**
-    runInParallel: true
-    runTestsInIsolation: true
-    codeCoverageEnabled: true
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-    rerunFailedTests: false
+      - task: VSBuild@1
+        displayName: "Build SonarAnalyzer"
+        inputs:
+          solution: '$(solution)'
+          platform: '$(buildPlatform)'
+          configuration: '$(buildConfiguration)'
+          msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=true /p:DefineConstants=SignAssembly /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:pfxCertificatePath="$(pfx.secureFilePath)" /p:pfxPassword="$(pfxPassword)" /p:pfxSha1=$(pfxSha1) /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)  '
 
-- task: SonarCloudAnalyze@1
-  condition: false
-  displayName: 'Run Code Analysis - End Step'
+      - task: VSTest@2
+        condition: false
+        displayName: "Run SonarAnalyzer unit tests"
+        inputs:
+          testAssemblyVer2: |
+            **\$(BuildConfiguration)\**\*.UnitTest.dll
+            !**\obj\**
+          runInParallel: true
+          runTestsInIsolation: true
+          codeCoverageEnabled: true
+          platform: '$(buildPlatform)'
+          configuration: '$(buildConfiguration)'
+          rerunFailedTests: false
 
-- task: SonarCloudPublish@1
-  condition: false
-  displayName: 'Run Code Analysis - Publish QG'
-  inputs:
-    pollingTimeoutSec: '300'
+      - task: SonarCloudAnalyze@1
+        condition: false
+        displayName: 'Run Code Analysis - End Step'
 
-- task: NuGetCommand@2
-  condition: false
-  displayName: "Build NuGet packages"
-  inputs:
-    command: pack
-    packagesToPack: 'sonaranalyzer-dotnet/src/**/*.nuspec'
-    configuration: '$(BuildConfiguration)'
-    packDestination: '$(Build.ArtifactStagingDirectory)'
-    verbosityPack: 'Detailed'
-    publishPackageMetadata: true
+      - task: SonarCloudPublish@1
+        condition: false
+        displayName: 'Run Code Analysis - Publish QG'
+        inputs:
+          pollingTimeoutSec: '300'
 
-- task: CopyFiles@2
-  condition: false
-  displayName: 'Copy NuGet packages to: $(Build.ArtifactStagingDirectory)'
-  inputs:
-    SourceFolder: '$(Build.SourcesDirectory)'
-    Contents: '*.nupkg'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+      - task: NuGetCommand@2
+        condition: false
+        displayName: "Build NuGet packages"
+        inputs:
+          command: pack
+          packagesToPack: 'sonaranalyzer-dotnet/src/**/*.nuspec'
+          configuration: '$(BuildConfiguration)'
+          packDestination: '$(Build.ArtifactStagingDirectory)'
+          verbosityPack: 'Detailed'
+          publishPackageMetadata: true
 
-- task: PublishBuildArtifacts@1
-  condition: false
-  inputs:
-    pathToPublish: $(Build.ArtifactStagingDirectory)
-    artifactName: BuildOutput
+      - task: CopyFiles@2
+        condition: false
+        displayName: 'Copy NuGet packages to: $(Build.ArtifactStagingDirectory)'
+        inputs:
+          SourceFolder: '$(Build.SourcesDirectory)'
+          Contents: '*.nupkg'
+          TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
-- task: PowerShell@2
-  condition: false
-  displayName: 'Run integration tests'
-  inputs:
-    filePath: 'sonaranalyzer-dotnet/its/regression-test.ps1'
-    workingDirectory: 'sonaranalyzer-dotnet/its'
+      - task: PublishBuildArtifacts@1
+        condition: false
+        inputs:
+          pathToPublish: $(Build.ArtifactStagingDirectory)
+          artifactName: BuildOutput
+
+      - task: PowerShell@2
+        condition: false
+        displayName: 'Run integration tests'
+        inputs:
+          filePath: 'sonaranalyzer-dotnet/its/regression-test.ps1'
+          workingDirectory: 'sonaranalyzer-dotnet/its'
