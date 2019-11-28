@@ -159,6 +159,9 @@ steps:
 
 - task: Maven@3
   displayName: 'Run MVN ITs'
+  env:
+    ARTIFACTORY_API_KEY: $(ARTIFACTORY_API_KEY)
+    GITHUB_TOKEN: $(GITHUB_TOKEN)
   inputs:
     mavenPomFile: its/pom.xml
     goals: 'clean verify'
