@@ -251,3 +251,12 @@ stages:
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: '1.11'
           mavenOptions: $(MAVEN_OPTS)
+
+
+    - job: runJavaUnitTests
+      displayName: 'Run Java Unit Tests'
+      dependsOn: runJavaBuild
+
+    - job: runJavaIntegrationTests
+      displayName: 'Run Java Integration Tests'
+      dependsOn: runJavaBuild
