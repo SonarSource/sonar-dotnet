@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
             PropertyAccessTracker = new CSharpPropertyAccessTracker(AnalyzerConfiguration.AlwaysEnabled, rule);
             ObjectCreationTracker = new CSharpObjectCreationTracker(AnalyzerConfiguration.AlwaysEnabled, rule);
         }
-        
+
         protected override PropertyAccessCondition IsInsideObjectInitializer() =>
             (context) =>
                 context.Expression.FirstAncestorOrSelf<InitializerExpressionSyntax>() != null;
@@ -52,7 +52,9 @@ namespace SonarAnalyzer.Rules.CSharp
             (context) =>
             {
                 var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
-                return CSharpSyntaxHelper.ArgumentValueForParameter(context.SemanticModel, argumentList, "padding") is ExpressionSyntax valueSyntax &&
+                var values = CSharpSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, "padding");
+                return values.Length == 1 &&
+                    values[0] is ExpressionSyntax valueSyntax &&
                     context.SemanticModel.GetSymbolInfo(valueSyntax).Symbol is ISymbol symbol &&
                     symbol.Name == "Pkcs1";
             };

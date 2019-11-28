@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules
         protected const string MessageFormat = "Enable server certificate validation on this SSL/TLS connection";
         private readonly DiagnosticDescriptor rule;
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-       
+
         internal abstract AbstractMethodParameterLookup<TArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method);
         internal abstract KnownType GenericDelegateType();
         protected abstract Location ArgumentLocation(TArgumentSyntax argument);
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules
         protected abstract SyntaxNode LocalVariableScope(TVariableSyntax variable);
         protected abstract SyntaxNode ExtractArgumentExpressionNode(TExpressionSyntax expression);
         protected abstract SyntaxNode SyntaxFromReference(SyntaxReference reference);
-        
+
         protected CertificateValidationCheckBase(System.Resources.ResourceManager rspecResources)
         {
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
@@ -80,10 +80,10 @@ namespace SonarAnalyzer.Rules
             if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol ctor)
             {
                 AbstractMethodParameterLookup<TArgumentSyntax> methodParamLookup = null;       //Cache, there might be more of them
-                foreach (var param in ctor.Parameters.Where(x => IsValidationDelegateType(x.Type)))
+                foreach (var param in ctor.Parameters.Where(x => !x.IsParams && IsValidationDelegateType(x.Type)))  ////Validation for TryGetNonParamsSyntax, ParamArray/params and therefore array arguments are not inspected
                 {
                     methodParamLookup = methodParamLookup ?? CreateParameterLookup(c.Node, ctor);
-                    if (methodParamLookup.TryGetSyntax(param, out var argument))
+                    if (methodParamLookup.TryGetNonParamsSyntax(param, out var argument))
                     {
                         TryReportLocations(new InspectionContext(c), ArgumentLocation(argument), ArgumentExpression(argument));
                     }
@@ -107,7 +107,7 @@ namespace SonarAnalyzer.Rules
             {
                 return true;
             }
-            else if (type is INamedTypeSymbol namedSymbol && type.OriginalDefinition.Is(GenericDelegateType())) 
+            else if (type is INamedTypeSymbol namedSymbol && type.OriginalDefinition.Is(GenericDelegateType()))
             {
                 //HttpClientHandler.ServerCertificateCustomValidationCallback uses Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool>
                 //We're actually looking for Func<Any Sender, X509Certificate2, X509Chain, SslPolicyErrors, bool>
@@ -152,7 +152,7 @@ namespace SonarAnalyzer.Rules
             switch (syntax)
             {
                 case TMethodSyntax method:                  //Direct delegate name
-                    return BlockLocations(c, method);  
+                    return BlockLocations(c, method);
                 case TParameterSyntax parameter:            //Value arrived as a parameter
                     return ParamLocations(c, parameter);
                 case TVariableSyntax variable:     //Value passed as variable
@@ -171,12 +171,15 @@ namespace SonarAnalyzer.Rules
                 var containingMethod = c.Context.SemanticModel.GetDeclaredSymbol(containingMethodDeclaration) as IMethodSymbol;
                 var identText = IdentifierText(param);
                 var paramSymbol = containingMethod.Parameters.Single(x => x.Name == identText);
-                foreach (var invocation in FindInvocationList(c.Context, FindRootClassOrModule(param), containingMethod))
+                if (!paramSymbol.IsParams)  //Validation for TryGetNonParamsSyntax, ParamArray/params and therefore array arguments are not inspected
                 {
-                    var methodParamLookup = CreateParameterLookup(invocation, containingMethod);
-                    if (methodParamLookup.TryGetSyntax(paramSymbol, out var argument))
+                    foreach (var invocation in FindInvocationList(c.Context, FindRootClassOrModule(param), containingMethod))
                     {
-                        ret.AddRange(CallStackSublocations(c, ArgumentExpression(argument)));
+                        var methodParamLookup = CreateParameterLookup(invocation, containingMethod);
+                        if (methodParamLookup.TryGetNonParamsSyntax(paramSymbol, out var argument))
+                        {
+                            ret.AddRange(CallStackSublocations(c, ArgumentExpression(argument)));
+                        }
                     }
                 }
             }
@@ -196,7 +199,7 @@ namespace SonarAnalyzer.Rules
                         SplitAssignment(x, out var leftIdentifier, out var right);
                         return new { leftIdentifier, right };
                     })
-                    .Where( x => x.leftIdentifier != null && IdentifierText(x.leftIdentifier) == identText)
+                    .Where(x => x.leftIdentifier != null && IdentifierText(x.leftIdentifier) == identText)
                     .Select(x => x.right));
             }
             var initializer = VariableInitializer(variable);
