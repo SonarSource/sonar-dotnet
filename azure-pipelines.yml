@@ -96,7 +96,7 @@ stages:
         displayName: 'Publish NuGet packages as build artifacts'
         inputs:
           pathToPublish: '$(Build.ArtifactStagingDirectory)/packages'
-          artifactName: BuildOutput
+          artifactName: 'NuGet Packages'
 
   - stage: runIntegrationTestsStage
     displayName: '.Net tests'
