@@ -130,33 +130,21 @@ steps:
     jdkVersionOption: '1.11'
     mavenOptions: $(MAVEN_OPTS)
 
-# running UTs can be done in parallel with deploying
-- task: Maven@3
-  displayName: 'Run Maven verify'
-  condition: false
-  inputs:
-    goals: 'verify'
-    options: '-B --settings $(mavenSettings.secureFilePath)'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    testRunTitle: 'UTs on Windows'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    mavenOptions: $(MAVEN_OPTS)
-
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'SonarCloud'
     organization: 'sonarsource'
     scannerMode: 'Other'
 
-# running SQ analysis can be done either in parallel or merged with running UTs
+# running SonarCloud analysis can be done in parallel with ITs
 - task: Maven@3
-  displayName: 'Run Maven verify with SonarCloud'
+  displayName: 'Run Maven verify, UTs with SonarCloud'
   inputs:
     goals: 'verify'
     options: -B --settings $(mavenSettings.secureFilePath) -Pcoverage
-    publishJUnitResults: false
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    testRunTitle: 'UTs on Windows'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.11'
     mavenOptions: $(MAVEN_OPTS)
@@ -166,6 +154,10 @@ steps:
 - task: SonarCloudPublish@1
   inputs:
     pollingTimeoutSec: '300'
+
+- script: mvn clean install
+  workingDirectory: its
+  displayName: 'Run MVN ITs'
 
 - bash: git checkout .
   name: revertPomChanges
