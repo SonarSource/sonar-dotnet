@@ -93,16 +93,9 @@ stages:
           command: pack
           packagesToPack: 'sonaranalyzer-dotnet/src/**/*.nuspec'
           configuration: '$(BuildConfiguration)'
-          packDestination: '$(Build.ArtifactStagingDirectory)'
+          packDestination: '$(Build.ArtifactStagingDirectory)/packages'
           verbosityPack: 'Detailed'
           publishPackageMetadata: true
-
-      - task: CopyFiles@2
-        displayName: 'Copy NuGet packages to same folder'
-        inputs:
-          SourceFolder: '$(Build.SourcesDirectory)'
-          Contents: '*.nupkg'
-          TargetFolder: '$(Build.ArtifactStagingDirectory)/packages'
 
       - task: PublishBuildArtifacts@1
         displayName: 'Publish NuGet packages as build artifacts'
@@ -192,4 +185,3 @@ stages:
         inputs:
           filePath: 'sonaranalyzer-dotnet/its/regression-test.ps1'
           workingDirectory: 'sonaranalyzer-dotnet/its'
-    
