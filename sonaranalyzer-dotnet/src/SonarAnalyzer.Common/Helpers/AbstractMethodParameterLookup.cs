@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Helpers
             MethodSymbol = methodSymbol;
         }
 
-        public bool TryGetParameterSymbol(TArgumentSyntax argument, out IParameterSymbol parameter)
+        public bool TryGetSymbol(TArgumentSyntax argument, out IParameterSymbol parameter)
         {
             parameter = null;
 
@@ -70,12 +70,12 @@ namespace SonarAnalyzer.Helpers
             return true;
         }
 
-        public bool TryGetSymbolParameter(IParameterSymbol parameter, out TArgumentSyntax argument)
+        public bool TryGetSyntax(IParameterSymbol parameter, out TArgumentSyntax argument)
         {
-            return TryGetArgumentSyntax(parameter.Name, out argument);
+            return TryGetSyntax(parameter.Name, out argument);
         }
 
-        public bool TryGetArgumentSyntax(string parameterName, out TArgumentSyntax argument)
+        public bool TryGetSyntax(string parameterName, out TArgumentSyntax argument)
         {
             foreach (var pair in GetAllArgumentParameterMappings())
             {
@@ -95,7 +95,7 @@ namespace SonarAnalyzer.Helpers
         {
             foreach (var argument in argumentList)
             {
-                if (TryGetParameterSymbol(argument, out var parameter))
+                if (TryGetSymbol(argument, out var parameter))
                 {
                     yield return new SyntaxNodeSymbolSemanticModelTuple<TArgumentSyntax, IParameterSymbol> { SyntaxNode = argument, Symbol = parameter };
                 }

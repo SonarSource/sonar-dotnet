@@ -427,7 +427,7 @@ namespace SonarAnalyzer.Helpers
         public static ExpressionSyntax ArgumentValueForParameter(SemanticModel semanticModel, ArgumentListSyntax argumentList, string parameterName)
         {
             var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, semanticModel);
-            if (methodParameterLookup.TryGetArgumentSyntax(parameterName, out var argumentSyntax))
+            if (methodParameterLookup.TryGetSyntax(parameterName, out var argumentSyntax))
             {
                 return argumentSyntax.Expression;
             }

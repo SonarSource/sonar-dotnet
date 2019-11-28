@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Rules
                 foreach (var param in ctor.Parameters.Where(x => IsValidationDelegateType(x.Type)))
                 {
                     methodParamLookup = methodParamLookup ?? CreateParameterLookup(c.Node, ctor);
-                    if (methodParamLookup.TryGetSymbolParameter(param, out var argument))
+                    if (methodParamLookup.TryGetSyntax(param, out var argument))
                     {
                         TryReportLocations(new InspectionContext(c), ArgumentLocation(argument), ArgumentExpression(argument));
                     }
@@ -174,7 +174,7 @@ namespace SonarAnalyzer.Rules
                 foreach (var invocation in FindInvocationList(c.Context, FindRootClassOrModule(param), containingMethod))
                 {
                     var methodParamLookup = CreateParameterLookup(invocation, containingMethod);
-                    if (methodParamLookup.TryGetSymbolParameter(paramSymbol, out var argument))
+                    if (methodParamLookup.TryGetSyntax(paramSymbol, out var argument))
                     {
                         ret.AddRange(CallStackSublocations(c, ArgumentExpression(argument)));
                     }

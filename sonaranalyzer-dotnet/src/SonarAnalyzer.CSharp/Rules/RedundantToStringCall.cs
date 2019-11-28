@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -119,7 +119,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var parameterLookup = new CSharpMethodParameterLookup(stringFormatInvocation, c.SemanticModel);
-                    if (parameterLookup.TryGetParameterSymbol(stringFormatArgument, out var argParameter) &&
+                    if (parameterLookup.TryGetSymbol(stringFormatArgument, out var argParameter) &&
                         argParameter.Name.StartsWith("arg", StringComparison.Ordinal))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, MessageCompiler));

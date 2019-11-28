@@ -246,7 +246,7 @@ namespace SonarAnalyzer.Helpers.VisualBasic
         public static ExpressionSyntax ArgumentValueForParameter(SemanticModel semanticModel, ArgumentListSyntax argumentList, string parameterName)
         {
             var methodParameterLookup = new VisualBasicMethodParameterLookup(argumentList, semanticModel);
-            if (methodParameterLookup.TryGetArgumentSyntax(parameterName, out var argumentSyntax))
+            if (methodParameterLookup.TryGetSyntax(parameterName, out var argumentSyntax))
             {
                 return argumentSyntax.GetExpression();
             }
