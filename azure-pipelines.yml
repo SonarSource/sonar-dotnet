@@ -5,11 +5,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: 'sonaranalyzer-dotnet/SonarAnalyzer.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-  NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
-  MSBUILD_PATH: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\msbuild.exe'
+  - group: sonar-dotnet-variables
 
 stages:
   - stage: dotnetBuildStage
