@@ -211,6 +211,13 @@ stages:
       displayName: 'Run Java build'
 
       steps:
+
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download .Net binaries for Maven build'
+        inputs:
+          artifact: Binaries
+          targetPath: 'sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/$(buildConfiguration)/'
+
       - task: Cache@2
         displayName: "Cache Maven local repo"
         inputs:
