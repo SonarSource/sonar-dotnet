@@ -100,8 +100,13 @@ stages:
           Contents: 'sonaranalyzer-dotnet/its/binaries/*.dll'
           TargetFolder: '$(Build.ArtifactStagingDirectory)/binaries'
 
+      - task: PublishPipelineArtifact@1
+        inputs:
+          path: sonaranalyzer-dotnet/its/binaries/
+          artifact: Binaries
+
       - task: PublishBuildArtifacts@1
-        condition: true
+        condition: false
         inputs:
           pathToPublish: 'sonaranalyzer-dotnet/its/binaries/*.dll'
           artifactName: Binaries
