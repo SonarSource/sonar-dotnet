@@ -150,12 +150,22 @@ steps:
     organization: 'sonarsource'
     scannerMode: 'Other'
 
-- task: SonarCloudAnalyze@1
+# running SQ analysis can be done either in parallel or merged with running UTs
+- task: Maven@3
+  displayName: 'Run Maven verify with SonarCloud'
+  inputs:
+    goals: 'verify'
+    options: -B --settings $(mavenSettings.secureFilePath) -Pcoverage
+    publishJUnitResults: false
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    mavenOptions: $(MAVEN_OPTS)
+    sonarQubeRunAnalysis: true
+    sqMavenPluginVersionChoice: 'latest'
 
 - task: SonarCloudPublish@1
   inputs:
     pollingTimeoutSec: '300'
-
 
 - bash: git checkout .
   name: revertPomChanges
