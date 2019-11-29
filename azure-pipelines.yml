@@ -130,6 +130,7 @@ steps:
     mavenOptions: $(MAVEN_OPTS)
 
 - task: SonarCloudPrepare@1
+  condition: false
   inputs:
     SonarCloud: 'SonarCloud'
     organization: 'sonarsource'
@@ -137,6 +138,7 @@ steps:
 
 # running SonarCloud analysis can be done in parallel with ITs
 - task: Maven@3
+  condition: false
   displayName: 'Run Maven verify, UTs with SonarCloud'
   inputs:
     goals: 'verify'
@@ -151,6 +153,7 @@ steps:
     sqMavenPluginVersionChoice: 'latest'
 
 - task: SonarCloudPublish@1
+  condition: false
   inputs:
     pollingTimeoutSec: '300'
 
@@ -161,7 +164,7 @@ steps:
     GITHUB_TOKEN: $(GITHUB_TOKEN)
   inputs:
     mavenPomFile: its/pom.xml
-    goals: 'clean verify'
+    goals: 'verify'
     options: -B --settings $(mavenSettings.secureFilePath)
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
