@@ -18,9 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Linq;
-using System.Reflection;
+using System.Collections;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -35,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class MethodParameterLookupTest
     {
-        
+
         [TestMethod]
         public void TestMethodParameterLookup_CS()
         {
@@ -186,8 +185,7 @@ End Module
                 {
                     if (parameter.IsParams && lookup.TryGetSyntax(parameter, out var argumentList))
                     {
-                        //FIXME: This does not work yet
-                        //argumentList.Select(x => ExtractArgumentValue(x)).ToArray().Should().BeEquivalentTo(((System.Collections.IEnumerable)ExtractExpectedValue(expectedArguments, parameter.Name)).OfType<object>().ToArray());
+                        argumentList.Select(x => ExtractArgumentValue(x)).Should().BeEquivalentTo((IEnumerable)ExtractExpectedValue(expectedArguments, parameter.Name));
                     }
                     else if (!parameter.IsParams && lookup.TryGetNonParamsSyntax(parameter, out var argument))
                     {
@@ -208,7 +206,16 @@ End Module
                 {
                     if (lookup.TryGetSymbol(argument, out var symbol))
                     {
-                        ExtractArgumentValue(argument).Should().Be(ExtractExpectedValue(expectedArguments, symbol.Name));
+                        var value = ExtractArgumentValue(argument);
+                        var expected = ExtractExpectedValue(expectedArguments, symbol.Name);
+                        if (symbol.IsParams)
+                        {
+                            ((IEnumerable)expected).Should().Contain(value);    //Expected contains all values {1, 2, 3} for ParamArray/params, but foreach is probing one at a time
+                        }
+                        else
+                        {
+                            value.Should().Be(expected);
+                        }
                     }
                     else
                     {
