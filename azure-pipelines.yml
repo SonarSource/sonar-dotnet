@@ -16,9 +16,12 @@ resources:
       ref:  refs/tags/v1.0.6
 
 stages:
-  - stage: dotnetBuildStage
-    displayName: '.Net build'
-
+- template: stage-with-burgr-notifications.yml@commonTemplates
+  parameters:
+    burgrName: 'build'
+    burgrType: 'build'
+    stageName: 'build'
+    stageDisplayName: Build and stage to repox
     jobs:
     - job: dotnetBuildjob
       displayName: 'Build and package'
@@ -108,8 +111,13 @@ stages:
           pathToPublish: '$(Build.ArtifactStagingDirectory)/packages'
           artifactName: 'NuGet Packages'
 
-  - stage: runIntegrationTestsStage
-    displayName: '.Net tests'
+- template: stage-with-burgr-notifications.yml@commonTemplates
+  parameters:
+    burgrName: 'qa'
+    burgrType: 'qa'
+    stageName: 'qa'
+    stageDisplayName: Run ITs
+    stageDependencies: build
     dependsOn: dotnetBuildStage
 
     jobs:
