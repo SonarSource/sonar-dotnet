@@ -26,7 +26,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.function.Predicate;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -50,7 +49,7 @@ import static org.mockito.Mockito.when;
 public class CoverageReportImportSensorTest {
 
   @Rule
-  public TemporaryFolder temp = new TemporaryFolder();
+  public TemporaryFolder temp = createTempFolder();
 
   @Rule
   public LogTester logTester = new LogTester();
@@ -146,7 +145,6 @@ public class CoverageReportImportSensorTest {
   }
 
   @Test
-  @Ignore("FIXME fix the test before merging the PR!")
   public void execute_coverage_no_main_file() throws IOException {
     Coverage coverage = mock(Coverage.class);
     String fooPath = new File(baseDir, "Foo.cs").getCanonicalPath();
@@ -154,10 +152,6 @@ public class CoverageReportImportSensorTest {
 
     context.fileSystem().add(new TestInputFileBuilder("foo", "Foo.cs").setLanguage("cs")
       .setType(Type.TEST).build());
-
-    File f = new File(fooPath);
-    assertThat(f.exists()).isTrue();
-    assertThat(f.isDirectory()).isFalse();
 
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .analyze(context, coverage);
@@ -213,6 +207,19 @@ public class CoverageReportImportSensorTest {
     verify(coverageAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(coverage));
 
     return context;
+  }
+
+  // This method has been taken from SonarSource/sonar-scanner-msbuild
+  private static TemporaryFolder createTempFolder() {
+    // If the test is being run under VSTS then the Scanner will
+    // expect the project to be under the VSTS sources directory
+    File baseDirectory = null;
+    if (VstsUtils.isRunningUnderVsts()){
+      String vstsSourcePath = VstsUtils.getSourcesDirectory();
+      baseDirectory = new File(vstsSourcePath);
+    }
+    TemporaryFolder folder = new TemporaryFolder(baseDirectory);
+    return folder;
   }
 
 }
