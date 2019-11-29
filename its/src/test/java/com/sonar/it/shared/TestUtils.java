@@ -80,7 +80,7 @@ public class TestUtils {
   public static Build<ScannerForMSBuild> newScanner(Path projectDir) {
     // We need to set the fallback version to run from inside the IDE when the property isn't set
     return ScannerForMSBuild.create(projectDir.toFile())
-      .setScannerVersion(System.getProperty("scannerMsbuild.version", "4.6.1.2049"));
+      .setScannerVersion(System.getProperty("scannerMsbuild.version", "4.8.0.12008"));
   }
 
   public static void runMSBuild(Orchestrator orch, Path projectDir, String... arguments) {
