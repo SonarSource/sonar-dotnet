@@ -253,7 +253,7 @@ stages:
         inputs:
           secureFile: 'maven-settings.xml'
 
-      - template: update-maven-version-steps.yml@commonTemplates
+      - template: update-maven-version-steps.yml
         parameters:
           mavenSettingsFilePath: $(mavenSettings.secureFilePath)
 
