@@ -40,7 +40,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MultiTargetAppTest {
   @Rule
-  public TemporaryFolder temp = new TemporaryFolder();
+  public TemporaryFolder temp = TestUtils.createTempFolder();
 
   @ClassRule
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;

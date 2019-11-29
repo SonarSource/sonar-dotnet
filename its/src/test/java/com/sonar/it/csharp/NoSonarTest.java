@@ -34,7 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class NoSonarTest {
 
   @ClassRule
-  public static TemporaryFolder temp = new TemporaryFolder();
+  public static TemporaryFolder temp = TestUtils.createTempFolder();
 
   private static final String PROJECT = "NoSonarTest";
   @ClassRule

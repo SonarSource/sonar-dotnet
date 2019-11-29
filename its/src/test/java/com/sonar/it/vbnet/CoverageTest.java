@@ -42,7 +42,7 @@ public class CoverageTest {
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
   @Rule
-  public TemporaryFolder temp = new TemporaryFolder();
+  public TemporaryFolder temp = TestUtils.createTempFolder();
 
   @Before
   public void init() {

@@ -47,7 +47,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class MetricsIncludeHeaderCommentTest {
 
-  public static TemporaryFolder temp = new TemporaryFolder();
+  public static TemporaryFolder temp = TestUtils.createTempFolder();
 
   private static final String PROJECT = "MetricsTest";
   private static final String DIRECTORY = TestUtils.hasModules(ORCHESTRATOR) ? "MetricsTest:MetricsTest:1F026ECA-900A-488D-9D07-AD23216FA32B:foo" : "MetricsTest:foo";

@@ -39,7 +39,7 @@ public class NoSonarTest {
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
   private static final String PROJECT = "VbNoSonarTest";
   @ClassRule
-  public static TemporaryFolder temp = new TemporaryFolder();
+  public static TemporaryFolder temp = TestUtils.createTempFolder();
 
   @BeforeClass
   public static void init() throws Exception {
