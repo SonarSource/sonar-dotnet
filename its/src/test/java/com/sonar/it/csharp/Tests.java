@@ -46,6 +46,7 @@ import org.sonarqube.ws.Measures;
   CasingAppTest.class,
   CoverageTest.class,
   DoNotAnalyzeTestFilesTest.class,
+  MetricsIncludeHeaderCommentTest.class,
   MetricsTest.class,
   MultiTargetAppTest.class,
   NoSonarTest.class,
@@ -69,7 +70,8 @@ public class Tests {
   public static Path projectDir(TemporaryFolder temp, String projectName) throws IOException {
     Path projectDir = Paths.get("projects").resolve(projectName);
     FileUtils.deleteDirectory(new File(temp.getRoot(), projectName));
-    Path tmpProjectDir = temp.newFolder(projectName).toPath();
+    File newFolder = temp.newFolder(projectName);
+    Path tmpProjectDir = Paths.get(newFolder.getCanonicalPath());
     FileUtils.copyDirectory(projectDir.toFile(), tmpProjectDir.toFile());
     return tmpProjectDir;
   }
