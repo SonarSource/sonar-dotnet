@@ -165,7 +165,7 @@ steps:
   inputs:
     mavenPomFile: its/pom.xml
     goals: 'clean verify'
-    options: -B --settings $(mavenSettings.secureFilePath) -X -D"maven.test.redirectTestOutputToFile"=false
+    options: -B --settings $(mavenSettings.secureFilePath) -X -D"maven.test.redirectTestOutputToFile"=false -Dtest="com.sonar.it.csharp.Tests"
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     testRunTitle: 'ITs on Windows'
