@@ -157,6 +157,7 @@ public class CoverageTest {
       .setProjectKey("CoverageTest")
       .setProjectName("CoverageTest")
       .setProjectVersion("1.0")
+      .setProperty("sonar.verbose", "true")
       .setProfile("no_rule")
       .setProperties(keyValues));
 
