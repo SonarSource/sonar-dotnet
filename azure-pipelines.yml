@@ -10,11 +10,31 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: 'sonaranalyzer-dotnet/SonarAnalyzer.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-  NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
-  MSBUILD_PATH: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\msbuild.exe'
+  - group: sonarsource-build-variables
+  - name: solution
+    value: 'sonaranalyzer-dotnet/SonarAnalyzer.sln'
+  - name: buildPlatform
+    value: 'Any CPU'
+  - name: buildConfiguration
+    value: 'Release'
+  - name: NUGET_PACKAGES
+    value: $(Pipeline.Workspace)/.nuget/packages
+  - name: MSBUILD_PATH
+    value: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\msbuild.exe'
+# MVN vars
+  - name: MAVEN_CACHE_FOLDER
+    value: $(Pipeline.Workspace)/.m2/repository
+  - name: MAVEN_OPTS
+    value: '-Xmx3072m -Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
+  - name: commonMavenArguments
+    value: -B -Pdeploy-sonarsource -Dmaven.test.skip=true
+
+resources:
+  repositories:
+    - repository: commonTemplates
+      type: git
+      name: pipelines-yaml-templates
+      ref:  refs/tags/v1.0.6
 
 steps:
 - task: NuGetToolInstaller@1
@@ -65,18 +85,6 @@ steps:
   inputs:
     secureFile: 'sonarsource-2019-2021.pfx'
 
-- task: SonarCloudPrepare@1
-  condition: false
-  displayName: 'Run Code Analysis - Begin Step'
-  inputs:
-    SonarCloud: 'SonarCloud'
-    organization: 'sonarsource'
-    scannerMode: 'MSBuild'
-    projectKey: 'sonaranalyzer-dotnet'
-    projectName: 'SonarAnalyzer .Net'
-    projectVersion: '$(SONAR_PROJECT_VERSION)'
-    extraProperties: 
-
 - task: VSBuild@1
   displayName: "Build SonarAnalyzer"
   inputs:
@@ -85,51 +93,85 @@ steps:
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=true /p:DefineConstants=SignAssembly /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:pfxCertificatePath="$(pfx.secureFilePath)" /p:pfxPassword="$(pfxPassword)" /p:pfxSha1=$(pfxSha1) /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)  '
 
-- task: VSTest@2
-  condition: false
-  displayName: "Run SonarAnalyzer unit tests"
-  inputs:
-    testAssemblyVer2: |
-     **\$(BuildConfiguration)\**\*.UnitTest.dll
-     !**\obj\**
-    runInParallel: true
-    runTestsInIsolation: true
-    codeCoverageEnabled: true
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-    rerunFailedTests: false
+######### MVN stuff ########
 
-- task: SonarCloudAnalyze@1
-  condition: false
-  displayName: 'Run Code Analysis - End Step'
+- task: Cache@2
+  displayName: "Cache Maven local repo"
+  inputs:
+    key: 'maven | "$(Agent.OS)" | **/pom.xml'
+    restoreKeys: |
+      maven | "$(Agent.OS)"
+      maven
+    path: $(MAVEN_CACHE_FOLDER)
+
+- task: DownloadSecureFile@1
+  displayName: 'Download Maven settings'
+  name: mavenSettings
+  inputs:
+    secureFile: 'maven-settings.xml'
+
+- template: update-maven-version-steps.yml@commonTemplates
+  parameters:
+    mavenSettingsFilePath: $(mavenSettings.secureFilePath)
+
+- task: Maven@3
+  displayName: 'Run Maven deploy'
+  env:
+    ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
+    ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_DEPLOY_PASSWORD)
+  inputs:
+    goals: 'deploy'
+    options: >-
+      $(commonMavenArguments)
+      --settings $(mavenSettings.secureFilePath)
+    publishJUnitResults: false
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    mavenOptions: $(MAVEN_OPTS)
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: 'sonarsource'
+    scannerMode: 'Other'
+
+# running SonarCloud analysis can be done in parallel with ITs
+- task: Maven@3
+  displayName: 'Run Maven verify, UTs with SonarCloud'
+  inputs:
+    goals: 'verify'
+    options: -B --settings $(mavenSettings.secureFilePath) -Pcoverage
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    testRunTitle: 'UTs on Windows'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    mavenOptions: $(MAVEN_OPTS)
+    sonarQubeRunAnalysis: true
+    sqMavenPluginVersionChoice: 'latest'
 
 - task: SonarCloudPublish@1
-  condition: false
-  displayName: 'Run Code Analysis - Publish QG'
   inputs:
     pollingTimeoutSec: '300'
 
-- task: NuGetCommand@2
-  displayName: "Build NuGet packages"
+- task: Maven@3
+  displayName: 'Run MVN ITs'
+  env:
+    ARTIFACTORY_API_KEY: $(ARTIFACTORY_API_KEY)
+    GITHUB_TOKEN: $(GITHUB_TOKEN)
   inputs:
-    command: pack
-    packagesToPack: 'sonaranalyzer-dotnet/src/**/*.nuspec'
-    configuration: '$(BuildConfiguration)'
-    packDestination: '$(Build.ArtifactStagingDirectory)'
-    verbosityPack: 'Detailed'
-    publishPackageMetadata: true
+    mavenPomFile: its/pom.xml
+    goals: 'clean verify'
+    options: -B --settings $(mavenSettings.secureFilePath)
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    testRunTitle: 'ITs on Windows'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    mavenOptions: $(MAVEN_OPTS)
 
-- task: ArtifactoryNuGet@1
-  condition: false
-  displayName: "Publish NuGet packages"
-  inputs:
-    command: 'push'
-    artifactoryService: 'Repox'
-    targetDeployRepo: 'sonarsource-nuget-public'
-    pathToNupkg: '$(Build.ArtifactStagingDirectory)\*.nupkg'
+- bash: git checkout .
+  name: revertPomChanges
+  displayName: Revert changes made to pom.xml to not break cache feature
 
-- task: PowerShell@2
-  displayName: 'Run integration tests'
-  inputs:
-    filePath: 'sonaranalyzer-dotnet/its/regression-test.ps1'
-    workingDirectory: 'sonaranalyzer-dotnet/its'
+######### END MVN stuff ########
