@@ -35,6 +35,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import org.apache.commons.lang.StringUtils;
+import org.junit.rules.TemporaryFolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonarqube.ws.Components;
@@ -169,4 +170,26 @@ public class TestUtils {
       .url(orch.getServer().getUrl())
       .build());
   }
+  
+  // This method has been taken from SonarSource/sonar-scanner-msbuild
+  public static TemporaryFolder createTempFolder() {
+    LOG.info("TEST SETUP: creating temporary folder...");
+
+    // If the test is being run under VSTS then the Scanner will
+    // expect the project to be under the VSTS sources directory
+    File baseDirectory = null;
+    if (VstsUtils.isRunningUnderVsts()){
+      String vstsSourcePath = VstsUtils.getSourcesDirectory();
+      LOG.info("TEST SETUP: Tests are running under VSTS. Build dir:  " + vstsSourcePath);
+      baseDirectory = new File(vstsSourcePath);
+    }
+    else {
+      LOG.info("TEST SETUP: Tests are not running under VSTS");
+    }
+
+    TemporaryFolder folder = new TemporaryFolder(baseDirectory);
+    LOG.info("TEST SETUP: Temporary folder created. Base directory: " + baseDirectory);
+    return folder;
+  }
+
 }
