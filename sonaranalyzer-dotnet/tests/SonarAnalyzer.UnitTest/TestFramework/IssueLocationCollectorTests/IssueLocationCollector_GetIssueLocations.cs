@@ -276,12 +276,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         }
 
         [TestMethod]
-        public void GetIssueLocations_Noncompliant_Offset_ExactColumn_Message()
+        public void GetIssueLocations_Noncompliant_Offset_ExactColumn_Message_Whitespaces()
         {
             var line = GetLine(2, @"if (a > b)
 {
-    Console.WriteLine(a); //Noncompliant@-2 ^5#16 {{MyMessage}}
-                          
+    Console.WriteLine(a); //Noncompliant @-2 ^5#16 [myIssueId] {{MyMessage}}               
 }");
             var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
 
@@ -291,7 +290,30 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
                 expectedIsPrimary: new[] { true },
                 expectedLineNumbers: new[] { 1 },
                 expectedMessages: new string[] { "MyMessage" },
-                expectedIssueIds: new string[] { null });
+                expectedIssueIds: new string[] { "myIssueId" });
+            result.Select(issue => issue.Start).Should().Equal(new[] { 4 });
+            result.Select(issue => issue.Length).Should().Equal(new[] { 16 });
+        }
+
+
+        [TestMethod]
+        public void GetIssueLocations_Noncompliant_Offset_ExactColumn_Message_NoWhitespace()
+        {
+            var line = GetLine(2, @"if (a > b)
+{
+    Console.WriteLine(a); //Noncompliant@-2^5#16[myIssueId]{{MyMessage}}        
+}");
+            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+
+            result.Should().ContainSingle();
+
+            VerifyIssueLocations(result,
+                expectedIsPrimary: new[] { true },
+                expectedLineNumbers: new[] { 1 },
+                expectedMessages: new string[] { "MyMessage" },
+                expectedIssueIds: new string[] { "myIssueId" });
+            result.Select(issue => issue.Start).Should().Equal(new[] { 4 });
+            result.Select(issue => issue.Length).Should().Equal(new[] { 16 });
         }
     }
 }

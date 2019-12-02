@@ -223,7 +223,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             if (expectedIssue.Message != null && expectedIssue.Message != message)
             {
-                throw new UnexpectedDiagnosticException(location, $"Expected {issueType} message on line {lineNumber} to be '{expectedIssue.Message}', but got '{message}'.");
+                throw new UnexpectedDiagnosticException(location, $@"Expected {issueType} message on line {lineNumber} does not match actual message.
+Expected: '{expectedIssue.Message}'
+Actual  : '{message}'");
             }
 
             var diagnosticStart = location.GetLineSpan().StartLinePosition.Character;

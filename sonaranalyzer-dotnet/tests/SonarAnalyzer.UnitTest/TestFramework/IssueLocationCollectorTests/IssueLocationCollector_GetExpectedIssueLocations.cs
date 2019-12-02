@@ -141,5 +141,22 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
                 .WithMessage("Unexpected redundant issue location on line 3. Issue location can be set either " +
                 "with 'precise issue location' or 'exact column location' pattern but not both.");
         }
+
+        [TestMethod]
+        public void GetExpectedIssueLocations_Multiple_PrimaryIds()
+        {
+            var code = @"public class Foo
+{
+    public void Bar(object o) // Noncompliant [myId1]
+    {
+        Console.WriteLine(o); // Noncompliant [myId1]
+    }
+}";
+
+            Action action = () => new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+
+            action.Should().Throw<InvalidOperationException>()
+                .WithMessage("Primary location with id [myId1] found on multiple lines: 3,5");
+        }
     }
 }

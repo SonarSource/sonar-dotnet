@@ -280,5 +280,23 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 
             result.Should().BeEmpty();
         }
+
+        [TestMethod]
+        public void GetPreciseIssueLocations_MultiplePatternsOnSameLine()
+        {
+            var line = GetLine(3, @"if (a > b)
+{
+    Console.WriteLine(a);
+//  ^^^^^^^ ^^^^^^^^^ ^
+}");
+            Action action = () => new IssueLocationCollector().GetPreciseIssueLocations(line);
+            action.Should()
+                .Throw<InvalidOperationException>()
+                .WithMessage(@"Expecting only one precise location per line, found 3 on line 3. If you want to specify more than one precise location per line you need to omit the Noncompliant comment:
+internal class MyClass : IInterface1 // there should be no Noncompliant comment
+^^^^^^^ {{Do not create internal classes.}}
+                         ^^^^^^^^^^^ @-1 {{IInterface1 is bad for your health.}}");
+
+        }
     }
 }

@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     /// <summary>
     /// This class will look for specific patterns inside the unit test files being analyzed when testing a rule.
     /// Here's a summary and examples of the different patterns that can be used to mark part of the code as noncompliant.
-    /// These patterns must appear after a single line comment '//' token.
+    /// These patterns must appear after a single line comment ("//" or "'" token).
     ///
     /// Simple 'Noncompliant' comment. Will mark the current line as expecting the primary location of an issue.
     /// <code>
@@ -91,22 +91,22 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     /// </summary>
     public class IssueLocationCollector
     {
-        private const string EXACT_COLUMN_PATTERN = @"\s*(\^(?<columnStart>[0-9]+)#(?<length>[0-9]+))?";
-        private const string OFFSET_PATTERN = @"(?:@(?<sign>[\+|-]?)(?<offset>[0-9]+))?";
-        private const string ISSUE_IDS_PATTERN = @"\s*(\[(?<issueIds>.*)\])*";
-        private const string MESSAGE_PATTERN = @"\s*(\{\{(?<message>.*)\}\})*";
-        private const string TYPE_PATTERN = @"(?<issueType>Noncompliant|Secondary)";
-        private const string BUILD_ERROR_PATTERN = @"Error";
-        private const string PRECISE_LOCATION_PATTERN = @"\s*(?<position>\^+)(\s+(?<position>\^+))*\s*";
-        private const string NO_PRECISE_LOCATION_PATTERN = @"\s*(?<!\^+\s{1})";
-        private const string COMMENT_PATTERN = @"(?<comment>\/\/|\')";
+        private const string CommentPattern = "(?<comment>//|')";
+        private const string PrecisePositionPattern = @"\s*(?<position>\^+)(\s+(?<invalid>\^+))*\s*";
+        private const string NoPrecisePositionPattern = @"\s*(?<!\^+\s{1})";
+        private const string IssueTypePattern = "(?<issueType>Noncompliant|Secondary)";
+        private const string ErrorTypePattern = "Error";
+        private const string OffsetPattern = @"(\s*@(?<offset>[+-]?\d+))?";
+        private const string ExactColumnPattern = @"(\s*\^(?<columnStart>\d+)#(?<length>\d+))?";
+        private const string IssueIdsPattern = @"(\s*\[(?<issueIds>.+)\])?";
+        private const string MessagePattern = @"(\s*\{\{(?<message>.+)\}\})?";
 
-        internal const string ISSUE_LOCATION_PATTERN =
-            COMMENT_PATTERN + "+" + NO_PRECISE_LOCATION_PATTERN + TYPE_PATTERN + OFFSET_PATTERN + EXACT_COLUMN_PATTERN + ISSUE_IDS_PATTERN + MESSAGE_PATTERN;
-        private const string PRECISE_ISSUE_LOCATION_PATTERN =
-            COMMENT_PATTERN + PRECISE_LOCATION_PATTERN + TYPE_PATTERN + "?" + OFFSET_PATTERN + ISSUE_IDS_PATTERN + MESSAGE_PATTERN + "$";
-        internal const string BUILD_ERROR_LOCATION_PATTERN =
-            COMMENT_PATTERN + NO_PRECISE_LOCATION_PATTERN + BUILD_ERROR_PATTERN + OFFSET_PATTERN + EXACT_COLUMN_PATTERN + ISSUE_IDS_PATTERN;
+        private static readonly Regex RxPreciseLocation =
+            new Regex(@"^\s*" + CommentPattern + PrecisePositionPattern + IssueTypePattern + "?" + OffsetPattern + IssueIdsPattern + MessagePattern + "$", RegexOptions.Compiled);
+        private static readonly Regex RxBuildError =
+            new Regex(CommentPattern + NoPrecisePositionPattern + ErrorTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern, RegexOptions.Compiled);
+        internal static readonly Regex RxIssue =
+                   new Regex(CommentPattern + NoPrecisePositionPattern + IssueTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern + MessagePattern, RegexOptions.Compiled);
 
         public IList<IIssueLocation> GetExpectedIssueLocations(IEnumerable<TextLine> lines)
         {
@@ -120,7 +120,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .WhereNotNull()
                 .ToList();
 
-            return MergeLocations(locations, preciseLocations);
+
+            var mergedLocations = MergeLocations(locations, preciseLocations);
+
+            EnsureNoDuplicatedPrimaryIds(mergedLocations);
+
+            return mergedLocations;
+        }
+
+        public static bool IsNotIssueLocationLine(string line)
+        {
+            return !RxPreciseLocation.IsMatch(line);
         }
 
         internal IList<IIssueLocation> GetExpectedBuildErrors(IEnumerable<TextLine> lines)
@@ -131,11 +141,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .Cast<IIssueLocation>()
                 .ToList()
                 ?? Enumerable.Empty<IIssueLocation>().ToList();
-        }
-
-        public static bool IsNotIssueLocationLine(string line)
-        {
-            return !Regex.IsMatch(line, PRECISE_ISSUE_LOCATION_PATTERN);
         }
 
         internal /*for testing*/ IList<IIssueLocation> MergeLocations(IEnumerable<IssueLocation> locations, IEnumerable<IssueLocation> preciseLocations)
@@ -151,7 +156,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 var preciseLocation = preciseLocationsOnSameLine.SingleOrDefault();
                 if (preciseLocation != null)
                 {
-                    if (location.Start != null)
+                    if (location.Start.HasValue)
                     {
                         throw new InvalidOperationException($"Unexpected redundant issue location on line {location.LineNumber}. Issue location can " +
                             $"be set either with 'precise issue location' or 'exact column location' pattern but not both.");
@@ -170,38 +175,38 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         internal /*for testing*/ IEnumerable<IssueLocation> GetIssueLocations(TextLine line)
         {
-            return GetLocations(line, ISSUE_LOCATION_PATTERN);
+            return GetLocations(line, RxIssue);
         }
 
         internal /*for testing*/ IEnumerable<IssueLocation> GetBuildErrorsLocations(TextLine line)
         {
-            return GetLocations(line, BUILD_ERROR_LOCATION_PATTERN);
-        }
-
-        private IEnumerable<IssueLocation> GetLocations(TextLine line, string pattern)
-        {
-            var lineText = line.ToString();
-
-            var match = Regex.Match(lineText, pattern);
-            if (match.Success)
-            {
-                EnsureNoRemainingCurlyBrace(line, match);
-                return CreateIssueLocations(match, line.LineNumber + 1);
-            }
-
-            return Enumerable.Empty<IssueLocation>();
+            return GetLocations(line, RxBuildError);
         }
 
         internal /*for testing*/ IEnumerable<IssueLocation> GetPreciseIssueLocations(TextLine line)
         {
             var lineText = line.ToString();
 
-            var match = Regex.Match(lineText, PRECISE_ISSUE_LOCATION_PATTERN);
+            var match = RxPreciseLocation.Match(lineText);
             if (match.Success)
             {
                 EnsureNoRemainingCurlyBrace(line, match);
                 return CreateIssueLocations(match, line.LineNumber);
             }
+            return Enumerable.Empty<IssueLocation>();
+        }
+
+        private IEnumerable<IssueLocation> GetLocations(TextLine line, Regex rx)
+        {
+            var lineText = line.ToString();
+
+            var match = rx.Match(lineText);
+            if (match.Success)
+            {
+                EnsureNoRemainingCurlyBrace(line, match);
+                return CreateIssueLocations(match, line.LineNumber + 1);
+            }
+
             return Enumerable.Empty<IssueLocation>();
         }
 
@@ -213,10 +218,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var start = GetStart(match) ?? GetColumnStart(match);
             var length = GetLength(match) ?? GetColumnLength(match);
 
-            var position = match.Groups["position"];
-            if (position.Success && position.Captures.Count > 1)
+            var invalid = match.Groups["invalid"];
+            if (invalid.Success)
             {
-                ThrowUnexpectedPreciseLocationCount(position.Captures.Count, line);
+                ThrowUnexpectedPreciseLocationCount(invalid.Captures.Count + 1, line);
             }
 
             return GetIssueIds(match).Select(
@@ -294,19 +299,25 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private int GetOffset(Match match)
         {
-            var sign = match.Groups["sign"];
             var offset = match.Groups["offset"];
-            if (!sign.Success && !offset.Success)
-            {
-                return 0;
-            }
-
-            var offsetValue = int.Parse(offset.Value);
-
-            return sign.Value == "-" ? -offsetValue : offsetValue;
+            return offset.Success ? int.Parse(offset.Value) : 0;
         }
 
-        private void EnsureOnlyOneElement(IEnumerable<IssueLocation> preciseLocationsOnSameLine)
+        private static void EnsureNoDuplicatedPrimaryIds(IList<IIssueLocation> mergedLocations)
+        {
+            var duplicateLocationsIds = mergedLocations
+                            .Where(location => location.IsPrimary)
+                            .GroupBy(x => x.IssueId)
+                            .Where(x => x.Key != null)
+                            .FirstOrDefault(group => group.Count() > 1);
+            if (duplicateLocationsIds != null)
+            {
+                var duplicatedIdLines = duplicateLocationsIds.Select(issueLocation => issueLocation.LineNumber).JoinStr(",");
+                throw new InvalidOperationException($"Primary location with id [{duplicateLocationsIds.Key}] found on multiple lines: {duplicatedIdLines}");
+            }
+        }
+
+        private static void EnsureOnlyOneElement(IEnumerable<IssueLocation> preciseLocationsOnSameLine)
         {
             if (preciseLocationsOnSameLine.Skip(1).Any())
             {
@@ -317,10 +328,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static void EnsureNoRemainingCurlyBrace(TextLine line, Match match)
         {
             var remainingLine = line.ToString().Substring(match.Index + match.Length);
-            if (remainingLine.Contains("{"))
+            if (remainingLine.Contains("{") || remainingLine.Contains("}"))
             {
-                Execute.Assertion.FailWith("Unexpected '{{' found on line: {0}. Either correctly use the '{{{{message}}}}' " +
-                    "format or remove the curly brace on the line of the expected issue", line.LineNumber);
+                Execute.Assertion.FailWith("Unexpected '{{' or '}}' found on line: {0}. Either correctly use the '{{{{message}}}}' " +
+                    "format or remove the curly braces on the line of the expected issue", line.LineNumber);
             }
         }
 
@@ -330,7 +341,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 @"If you want to specify more than one precise location per line you need to omit the Noncompliant comment:
 internal class MyClass : IInterface1 // there should be no Noncompliant comment
 ^^^^^^^ {{Do not create internal classes.}}
-                         ^^^^^^^^^^^ @-1 {{IInterface1 IInterface1 is bad for your health.}}";
+                         ^^^^^^^^^^^ @-1 {{IInterface1 is bad for your health.}}";
             throw new InvalidOperationException(message);
         }
 

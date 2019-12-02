@@ -133,7 +133,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private static string ReplaceNonCompliantComment(string line)
         {
-            var match = Regex.Match(line, IssueLocationCollector.ISSUE_LOCATION_PATTERN);
+            var match = IssueLocationCollector.RxIssue.Match(line);
             if (!match.Success)
             {
                 return line;

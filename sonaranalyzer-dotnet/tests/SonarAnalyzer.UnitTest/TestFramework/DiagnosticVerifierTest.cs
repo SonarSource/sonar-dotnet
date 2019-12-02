@@ -108,7 +108,9 @@ public class UnexpectedSecondary
                     new BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<UnexpectedDiagnosticException>()
-                  .WithMessage("Expected secondary message on line 7 to be 'Wrong message', but got ''.");
+                  .WithMessage(@"Expected secondary message on line 7 does not match actual message.
+Expected: 'Wrong message'
+Actual  : ''");
         }
 
         [TestMethod]
@@ -188,7 +190,7 @@ public class UnexpectedSecondaryWithBuildError
         }
 
         [TestMethod]
-        public void UnexpectedRemainingCurlyBrace()
+        public void UnexpectedRemainingOpeningCurlyBrace()
         {
             Action action =
                 () => Verifier.VerifyCSharpAnalyzer(@"
@@ -203,7 +205,26 @@ public class UnexpectedRemainingCurlyBrace
                     new BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<AssertFailedException>()
-                  .WithMessage("Unexpected '{' found on line: 5. Either correctly use the '{{message}}' format or remove the curly brace on the line of the expected issue");
+                  .WithMessage("Unexpected '{' or '}' found on line: 5. Either correctly use the '{{message}}' format or remove the curly braces on the line of the expected issue");
+        }
+
+        [TestMethod]
+        public void UnexpectedRemainingClosingCurlyBrace()
+        {
+            Action action =
+                () => Verifier.VerifyCSharpAnalyzer(@"
+public class UnexpectedRemainingCurlyBrace
+    {
+        public void Test(bool a, bool b)
+        {
+            if (a == a) // Noncompliant (Another Wrong format message}
+            { }
+        }
+    }",
+                    new BinaryOperationWithIdenticalExpressions());
+
+            action.Should().Throw<AssertFailedException>()
+                  .WithMessage("Unexpected '{' or '}' found on line: 5. Either correctly use the '{{message}}' format or remove the curly braces on the line of the expected issue");
         }
     }
 }

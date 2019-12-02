@@ -9,7 +9,8 @@ using System;
 // Noncompliant@+1
 // {
 using System;
-// Noncompliant: }
+// Noncompliant@+1
+// }
 using System;
 // foo ; {} bar
 using System;
