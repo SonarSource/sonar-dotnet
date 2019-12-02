@@ -47,8 +47,10 @@ public class CoverageAggregator {
 
   public CoverageAggregator(CoverageConfiguration coverageConf, Configuration configuration, FileSystem fs) {
 
-    Predicate<String> isSupportedLanguage = absolutePath -> fs.hasFiles(fs.predicates().and(fs.predicates().hasAbsolutePath(absolutePath),
-      fs.predicates().hasLanguage(coverageConf.languageKey())));
+    Predicate<String> isSupportedLanguage = absolutePath -> fs.hasFiles(
+      fs.predicates().and(
+        fs.predicates().hasAbsolutePath(absolutePath),
+        fs.predicates().hasLanguage(coverageConf.languageKey())));
 
     this.coverageConf = coverageConf;
     this.configuration = configuration;

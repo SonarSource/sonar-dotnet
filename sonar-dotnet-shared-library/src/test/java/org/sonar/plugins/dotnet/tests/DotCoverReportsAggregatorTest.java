@@ -19,17 +19,24 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.util.List;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
 import java.io.File;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class DotCoverReportsAggregatorTest {
+
+  @Rule
+  public LogTester logTester = new LogTester();
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
@@ -73,6 +80,11 @@ public class DotCoverReportsAggregatorTest {
     verify(parser).accept(new File("src/test/resources/dotcover_aggregator/foo.bar/src/1.html"), coverage);
     verify(parser).accept(new File("src/test/resources/dotcover_aggregator/foo.bar/src/2.html"), coverage);
     verify(parser, Mockito.never()).accept(new File("src/test/resources/dotcover_aggregator/foo.bar/src/nosource.html"), coverage);
+
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Aggregating the HTML reports from ");
+    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
+    assertThat(debugLogs.get(1)).startsWith("DotCover aggregator: collected '3' report files to parse");
   }
 
 }

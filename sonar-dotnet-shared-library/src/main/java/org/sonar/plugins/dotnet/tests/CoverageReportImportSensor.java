@@ -36,10 +36,11 @@ import org.sonar.api.utils.log.Loggers;
  * This class is responsible to handle all the C# and VB.NET code coverage reports (parse and report back to SonarQube).
  */
 public class CoverageReportImportSensor implements Sensor {
+  private static final String BASE_DIR = ".";
 
   private static final Logger LOG = Loggers.get(CoverageReportImportSensor.class);
 
-  private final WildcardPatternFileProvider wildcardPatternFileProvider = new WildcardPatternFileProvider(new File("."), File.separator);
+  private final WildcardPatternFileProvider wildcardPatternFileProvider = new WildcardPatternFileProvider(new File(BASE_DIR), File.separator);
   private final CoverageConfiguration coverageConf;
   private final CoverageAggregator coverageAggregator;
   private final boolean isIntegrationTest;
@@ -84,11 +85,20 @@ public class CoverageReportImportSensor implements Sensor {
   }
 
   void analyze(SensorContext context, Coverage coverage) {
+
+    LOG.debug("Will analyze coverage with wildcardPatternFileProvider with base dir '{}' and file separator '{}'.", BASE_DIR, File.separator);
+
     coverageAggregator.aggregate(wildcardPatternFileProvider, coverage);
 
     Set<String> coverageFiles = coverage.files();
     FileCountStatistics fileCountStatistics = new FileCountStatistics(coverageFiles.size());
+
+    LOG.debug("Will analyze coverage after aggregate found '{}' coverage files.", coverageFiles.size());
+
     for (String filePath : coverageFiles) {
+
+      LOG.debug("Will count statistics for '{}'.", filePath);
+
       FilePredicates p = context.fileSystem().predicates();
       InputFile inputFile = context.fileSystem().inputFile(p.hasAbsolutePath(filePath));
 
@@ -101,24 +111,31 @@ public class CoverageReportImportSensor implements Sensor {
 
       if (inputFile.type().equals(Type.TEST)) {
         fileCountStatistics.test++;
+        LOG.debug("Will skip '{}' as it is a test file.", filePath);
         // Do not log for test files to avoid pointless noise
         continue;
       }
 
       if (!coverageConf.languageKey().equals(inputFile.language())) {
+        LOG.debug("Will skip '{}' as conf lang '{}' does not equal file lang '{}'.",
+          filePath, coverageConf.languageKey(), inputFile.language());
         fileCountStatistics.otherLanguageExcluded++;
         continue;
       }
 
+      LOG.debug("Will check main file coverage for '{}'.", filePath);
       fileCountStatistics.main++;
       boolean fileHasCoverage = false;
 
       NewCoverage newCoverage = context.newCoverage().onFile(inputFile);
       for (Map.Entry<Integer, Integer> entry : coverage.hits(filePath).entrySet()) {
+        LOG.debug("Found entry with key '{}' and value '{}'.", entry.getKey(), entry.getValue());
         fileHasCoverage = true;
         newCoverage.lineHits(entry.getKey(), entry.getValue());
       }
       newCoverage.save();
+
+      LOG.debug("fileHasCoverage for '{}' is '{}'.", filePath, fileHasCoverage);
 
       if (fileHasCoverage) {
         fileCountStatistics.mainWithCoverage++;
@@ -127,6 +144,8 @@ public class CoverageReportImportSensor implements Sensor {
         LOG.debug("No coverage info found for the file '{}'.", filePath);
       }
     }
+
+    LOG.debug("The total number of file count statistics is '{}'.", fileCountStatistics.total);
 
     if (fileCountStatistics.total != 0) {
       LOG.info(fileCountStatistics.toString());

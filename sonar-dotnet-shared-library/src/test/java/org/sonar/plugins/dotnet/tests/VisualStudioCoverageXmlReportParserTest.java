@@ -26,11 +26,16 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.File;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class VisualStudioCoverageXmlReportParserTest {
+
+  @Rule
+  public LogTester logTester = new LogTester();
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
@@ -87,6 +92,13 @@ public class VisualStudioCoverageXmlReportParserTest {
         Assertions.entry(32, 0),
         Assertions.entry(33, 0),
         Assertions.entry(34, 0));
+
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(3);
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(1))
+      .startsWith("Found covered lines for id '0' for path ")
+      .endsWith("\\MyLibrary\\Calc.cs'");
   }
 
   @Test
@@ -98,11 +110,21 @@ public class VisualStudioCoverageXmlReportParserTest {
 
     assertThat(coverage.hits(new File("MyLibrary\\Calc.cs").getCanonicalPath()))
       .hasSize(0);
+
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1))
+      .startsWith("Skipping file with path '")
+      .endsWith("\\CalcMultiplyTest\\MultiplyTest.cs' because it is not indexed or does not have the supported language.");
   }
 
   @Test
   public void should_not_fail_with_invalid_path() {
     new VisualStudioCoverageXmlReportParser(alwaysTrue).accept(new File("src/test/resources/visualstudio_coverage_xml/invalid_path.coveragexml"), mock(Coverage.class));
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the Visual Studio coverage XML report ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
+    assertThat(logTester.logs(LoggerLevel.WARN).get(0))
+      .isEqualTo("Skipping the import of Visual Studio XML code coverage for the invalid file path: z:\\*\"?.cs at line 55");
   }
 
 }

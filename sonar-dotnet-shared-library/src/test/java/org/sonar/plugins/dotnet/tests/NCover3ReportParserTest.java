@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.util.List;
 import java.util.function.Predicate;
 import org.assertj.core.api.Assertions;
 import org.junit.Rule;
@@ -26,11 +27,16 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.File;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class NCover3ReportParserTest {
+
+  @Rule
+  public LogTester logTester = new LogTester();
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
@@ -89,11 +95,45 @@ public class NCover3ReportParserTest {
         Assertions.entry(32, 4),
         Assertions.entry(36, 2),
         Assertions.entry(37, 2));
+
+    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
+    assertThat(debugLogs.get(1)).isEqualTo("NCover3 parser: analyzing the doc tag with ID '1' and url 'MyLibrary\\Adder.cs'.");
+    assertThat(debugLogs.get(2))
+      .startsWith("NCover3 parser: ID '1' with url 'MyLibrary\\Adder.cs' is resolved as '")
+      .endsWith("MyLibrary\\Adder.cs'.");
+  }
+
+  @Test
+  public void log_unsupported_file_extension() throws Exception {
+    Coverage coverage = new Coverage();
+    Predicate<String> alwaysFalse = s -> false;
+    // use "one_file.nccov" to easily check the logs (it has only one coverage entry)
+    new NCover3ReportParser(alwaysFalse).accept(new File("src/test/resources/ncover3/one_file.nccov"), coverage);
+
+    assertThat(coverage.files()).isEmpty();
+
+    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
+    assertThat(debugLogs.get(1)).isEqualTo("NCover3 parser: analyzing the doc tag with ID '1' and url 'MyLibrary\\Adder.cs'.");
+    assertThat(debugLogs.get(2))
+      .startsWith("NCover3 parser: ID '1' with url 'MyLibrary\\Adder.cs' is resolved as '")
+      .endsWith("MyLibrary\\Adder.cs'.");
+    assertThat(debugLogs.get(3))
+      .startsWith("NCover3 parser: doc '1', line '31', vc '4' will be skipped because it has a path '")
+      .endsWith("\\MyLibrary\\Adder.cs' which is not indexed or does not have the supported language.");
+    assertThat(debugLogs.get(4))
+      .startsWith("NCover3 parser: doc '1', line '32', vc '4' will be skipped because it has a path '")
+      .endsWith("\\MyLibrary\\Adder.cs' which is not indexed or does not have the supported language.");
   }
 
   @Test
   public void should_not_fail_with_invalid_path() {
     new NCover3ReportParser(alwaysTrue).accept(new File("src/test/resources/ncover3/invalid_path.nccov"), mock(Coverage.class));
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is '");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains(
+      "NCover3 parser: analyzing the doc tag with ID '1' and url 'z:\\*\"?.cs'.",
+      "Skipping the import of NCover3 code coverage for the invalid file path: z:\\*\"?.cs at line 7");
   }
 
 }

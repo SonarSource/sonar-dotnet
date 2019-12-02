@@ -40,6 +40,7 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
 
   @Override
   public void accept(File file, Coverage coverage) {
+    LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
     LOG.info("Parsing the Visual Studio coverage XML report " + file.getAbsolutePath());
     new Parser(file, coverage).parse();
   }
@@ -114,16 +115,21 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
       }
 
       if (!isSupportedLanguage.test(canonicalPath)) {
+        LOG.debug("Skipping file with path '{}' because it is not indexed or does not have the supported language.", canonicalPath);
         return;
       }
 
       if (coveredLines.containsKey(id)) {
+        LOG.trace("Found covered lines for id '{}' for path '{}'", id, canonicalPath);
+
         for (Integer line : coveredLines.get(id)) {
           coverage.addHits(canonicalPath, line, 1);
         }
       }
 
       if (uncoveredLines.containsKey(id)) {
+        LOG.trace("Found uncovered lines for id '{}' for path '{}'", id, canonicalPath);
+
         for (Integer line : uncoveredLines.get(id)) {
           coverage.addHits(canonicalPath, line, 0);
         }

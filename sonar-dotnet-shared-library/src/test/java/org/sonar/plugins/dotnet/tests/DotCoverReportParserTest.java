@@ -26,11 +26,16 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.File;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class DotCoverReportParserTest {
+
+  @Rule
+  public LogTester logTester = new LogTester();
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
@@ -78,11 +83,33 @@ public class DotCoverReportParserTest {
         Assertions.entry(32, 0),
         Assertions.entry(33, 0),
         Assertions.entry(34, 0));
+
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the dotCover report ");
+    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(16);
+    assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
+      .startsWith("DotCover parser: found coverage for line '12', hits '0' when analyzing the path '");
+  }
+
+  @Test
+  public void predicate_false() throws Exception {
+    Coverage coverage = new Coverage();
+    Predicate<String> alwaysFalse = s -> false;
+    new DotCoverReportParser(alwaysFalse).accept(new File("src/test/resources/dotcover/valid.html"), coverage);
+
+    assertThat(coverage.files()).isEmpty();
+
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the dotCover report ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0))
+      .startsWith("Skipping the import of dotCover code coverage for file '")
+      .endsWith("' because it is not indexed or does not have the supported language.");
   }
 
   @Test
   public void should_not_fail_with_invalid_path() {
     new DotCoverReportParser(alwaysTrue).accept(new File("src/test/resources/dotcover/invalid_path.html"), mock(Coverage.class));
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the dotCover report ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0))
+      .isEqualTo("Skipping the import of dotCover code coverage for the invalid file path: z:\\*\"?.cs.");
   }
 
 }

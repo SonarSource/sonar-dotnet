@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.util.List;
 import java.util.function.Predicate;
 import org.assertj.core.api.Assertions;
 import org.junit.Rule;
@@ -26,11 +27,16 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.File;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class OpenCoverReportParserTest {
+
+  @Rule
+  public LogTester logTester = new LogTester();
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
@@ -97,11 +103,33 @@ public class OpenCoverReportParserTest {
         Assertions.entry(11, 0),
         Assertions.entry(12, 0),
         Assertions.entry(13, 0));
+
+    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
+  }
+
+  @Test
+  public void log_unsupported_file_extension() throws Exception {
+    Coverage coverage = new Coverage();
+    Predicate<String> alwaysFalse = s -> false;
+    // to easily check the logs (it has only one coverage entry)
+    new OpenCoverReportParser(alwaysFalse).accept(new File("src/test/resources/opencover/one_class.xml"), coverage);
+
+    assertThat(coverage.files()).isEmpty();
+
+    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
+    assertThat(debugLogs.get(1))
+      .startsWith("Skipping the fileId '1', line '16', vc '1' because file '")
+      .endsWith("\\MyLibraryNUnitTest\\AdderNUnitTest.cs' is not indexed or does not have the supported language.");
   }
 
   @Test
   public void should_not_fail_with_invalid_path() {
     new OpenCoverReportParser(alwaysTrue).accept(new File("src/test/resources/opencover/invalid_path.xml"), mock(Coverage.class));
+    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
+    assertThat(debugLogs.get(1)).startsWith("Skipping the import of OpenCover code coverage for the invalid file path: z:\\*\"?.cs at line 150");
   }
 
 }

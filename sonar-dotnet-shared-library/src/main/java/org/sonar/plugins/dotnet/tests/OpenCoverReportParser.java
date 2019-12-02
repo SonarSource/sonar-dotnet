@@ -39,6 +39,7 @@ public class OpenCoverReportParser implements CoverageParser {
 
   @Override
   public void accept(File file, Coverage coverage) {
+    LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
     LOG.info("Parsing the OpenCover report " + file.getAbsolutePath());
     new Parser(file, coverage).parse();
   }
@@ -106,8 +107,16 @@ public class OpenCoverReportParser implements CoverageParser {
         String file = files.get(fileId);
 
         if (isSupportedLanguage.test(file)) {
+          LOG.trace("OpenCover parser: add hits for fileId '{}', line '{}', vc '{}'", fileId, line, vc);
+
           coverage.addHits(file, line, vc);
+        } else {
+          LOG.debug("Skipping the fileId '{}', line '{}', vc '{}' because file '{}'" +
+              " is not indexed or does not have the supported language.",
+            fileId, line, vc, file);
         }
+      } else {
+        LOG.debug("OpenCover parser: the fileId '{}' key is not contained in files", fileId);
       }
     }
 

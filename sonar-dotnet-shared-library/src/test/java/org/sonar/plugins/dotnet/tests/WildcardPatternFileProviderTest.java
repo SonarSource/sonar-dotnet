@@ -20,6 +20,7 @@
 package org.sonar.plugins.dotnet.tests;
 
 import com.google.common.base.Joiner;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -28,6 +29,8 @@ import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
 import java.util.Set;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,15 +42,16 @@ public class WildcardPatternFileProviderTest {
   @Rule
   public ExpectedException thrown = ExpectedException.none();
 
+  @Rule
+  public LogTester logTester = new LogTester();
+
   @Before
   public void init() throws Exception {
     tmp.newFile("foo.txt");
     tmp.newFile("bar.txt");
-
     tmp.newFolder("a");
     tmp.newFile(path("a", "foo.txt"));
     tmp.newFolder("a", "a21");
-
     tmp.newFolder("b");
 
     tmp.newFolder("c");
@@ -57,6 +61,44 @@ public class WildcardPatternFileProviderTest {
     tmp.newFolder("c", "c22", "c31");
     tmp.newFile(path("c", "c22", "c31", "foo.txt"));
     tmp.newFile(path("c", "c22", "c31", "bar.txt"));
+  }
+
+  @Test
+  public void logging_added_and_skipped_files() {
+    listFiles(new File(tmp.getRoot(), path("**\\c\\c21", "foo.txt")).getAbsolutePath());
+
+    List<String> logs = logTester.logs((LoggerLevel.DEBUG));
+    assertThat(logs).hasSize(17);
+    // the initial given pattern (the expanded path, includes the temporary dir)
+    assertThat(logs.get(0)).startsWith("WILDCARD - will list files for pattern '").endsWith("foo.txt'.");
+    // the constructed wildcard pattern
+    assertThat(logs.get(2)).startsWith("WILDCARD - will add files for wildcardPattern '**\\c\\c21\\foo.txt'.");
+    // we only check the substring for SKIP statement - we don't know the order they are logged in
+    assertThat(logs.get(3)).startsWith("WILDCARD - will SKIP file '");
+
+    assertThat(logs).contains("WILDCARD - result has 1 elements.");
+  }
+
+  @Test
+  public void logging_early_return_absolute_path() {
+    listFiles(new File(tmp.getRoot(), "foo.txt").getAbsolutePath());
+
+    List<String> logs = logTester.logs((LoggerLevel.DEBUG));
+    assertThat(logs).hasSize(3);
+    assertThat(logs.get(0)).startsWith("WILDCARD - will list files for pattern '").endsWith("foo.txt'.");
+    assertThat(logs.get(1)).startsWith("WILDCARD - absoluteFileTillFirstWildcardElement '").endsWith("foo.txt'.");
+    assertThat(logs.get(2)).startsWith("WILDCARD - Early return WITH '").endsWith("foo.txt'.");
+  }
+
+  @Test
+  public void logging_early_return_no_file_found() {
+    listFiles(new File(tmp.getRoot(), "not-existing-file").getAbsolutePath());
+
+    List<String> logs = logTester.logs((LoggerLevel.DEBUG));
+    assertThat(logs).hasSize(3);
+    assertThat(logs.get(0)).startsWith("WILDCARD - will list files for pattern '").endsWith("not-existing-file'.");
+    assertThat(logs.get(1)).startsWith("WILDCARD - absoluteFileTillFirstWildcardElement '").endsWith("not-existing-file'.");
+    assertThat(logs.get(2)).isEqualTo("WILDCARD - Early return WITH EMPTY because wildcard elements is empty.");
   }
 
   @Test

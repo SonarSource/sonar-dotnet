@@ -72,6 +72,9 @@ public class DotCoverReportParser implements CoverageParser {
       String fileCanonicalPath = extractFileCanonicalPath(contents);
       if (fileCanonicalPath != null && isSupportedLanguage.test(fileCanonicalPath)) {
         collectCoverage(fileCanonicalPath, contents);
+      } else {
+        LOG.debug("Skipping the import of dotCover code coverage for file '{}'"
+          + " because it is not indexed or does not have the supported language.", fileCanonicalPath);
       }
     }
 
@@ -85,7 +88,7 @@ public class DotCoverReportParser implements CoverageParser {
       try {
         return new File(lowerCaseAbsolutePath).getCanonicalPath();
       } catch (IOException e) {
-        LOG.debug("Skipping the import of dotCover code coverage for the invalid file path: " + lowerCaseAbsolutePath, e);
+        LOG.debug("Skipping the import of dotCover code coverage for the invalid file path: " + lowerCaseAbsolutePath + ".", e);
         return null;
       }
     }
@@ -101,6 +104,9 @@ public class DotCoverReportParser implements CoverageParser {
         int line = Integer.parseInt(matcher.group(1));
         int hits = Integer.parseInt(matcher.group(2));
         coverage.addHits(fileCanonicalPath, line, hits);
+
+        LOG.trace("DotCover parser: found coverage for line '{}', hits '{}' when analyzing the path '{}'.",
+            line, hits, fileCanonicalPath);
       }
     }
 

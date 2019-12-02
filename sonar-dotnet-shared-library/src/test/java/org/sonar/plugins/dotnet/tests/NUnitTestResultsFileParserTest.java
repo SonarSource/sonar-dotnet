@@ -24,11 +24,16 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.File;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class NUnitTestResultsFileParserTest {
+
+  @Rule
+  public LogTester logTester = new LogTester();
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
@@ -53,6 +58,9 @@ public class NUnitTestResultsFileParserTest {
   public void valid() {
     UnitTestResults results = new UnitTestResults();
     new NUnitTestResultsFileParser().accept(new File("src/test/resources/nunit/valid.xml"), results);
+
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the NUnit Test Results file ");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is '");
 
     assertThat(results.errors()).isEqualTo(30);
     assertThat(results.failures()).isEqualTo(20);

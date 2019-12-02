@@ -44,6 +44,7 @@ public class DotCoverReportsAggregator implements CoverageParser {
 
   @Override
   public void accept(File file, Coverage coverage) {
+    LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
     LOG.info("Aggregating the HTML reports from " + file.getAbsolutePath());
     checkIsHtml(file);
 
@@ -54,6 +55,8 @@ public class DotCoverReportsAggregator implements CoverageParser {
     }
 
     List<File> reportFiles = listReportFiles(folder);
+    LOG.debug("DotCover aggregator: collected '{}' report files to parse", reportFiles.size());
+
     for (File reportFile : reportFiles) {
       if (!isExcluded(reportFile)) {
         parser.accept(reportFile, coverage);

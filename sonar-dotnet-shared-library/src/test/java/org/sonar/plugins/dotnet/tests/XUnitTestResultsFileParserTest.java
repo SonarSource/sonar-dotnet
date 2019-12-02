@@ -72,6 +72,9 @@ public class XUnitTestResultsFileParserTest {
     UnitTestResults results = new UnitTestResults();
     new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/valid.xml"), results);
 
+    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the XUnit Test Results file");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is '");
+
     assertThat(results.failures()).isEqualTo(3);
     assertThat(results.errors()).isEqualTo(5);
     assertThat(results.tests()).isEqualTo(17);
