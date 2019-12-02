@@ -227,30 +227,6 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'TinyIoCContainer' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3002,
-"startColumn":  16,
-"endLine":  3002,
-"endColumn":  32
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3076,
-"startColumn":  17,
-"endLine":  3076,
-"endColumn":  33
-}
-}
-]
-},
-{
-"id":  "S4136",
 "message":  "All 'GetViewsWithSupportedExtensions' method overloads should be adjacent.",
 "location":  [
 {

@@ -467,30 +467,6 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'TryAdd' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
-"region":  {
-"startLine":  97,
-"startColumn":  18,
-"endLine":  97,
-"endColumn":  24
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
-"region":  {
-"startLine":  103,
-"startColumn":  25,
-"endLine":  103,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S4136",
 "message":  "All 'Remove' method overloads should be adjacent.",
 "location":  [
 {
