@@ -79,6 +79,10 @@ public class CoverageTest {
 
   @Test
   public void ncover3() throws Exception {
+
+    LOG.info("ncover3 - will do build");
+    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", "reports/ncover3.nccov");
+
     if (VstsUtils.isRunningUnderVsts()) {
       LOG.info("ncover3 running in VSTS  - will enumerate files");
       String vstsSourcePath = VstsUtils.getSourcesDirectory();
@@ -113,8 +117,6 @@ public class CoverageTest {
     else {
       LOG.warn("NOT RUNNING IN VSTS ncover3");
     }
-
-    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", "reports/ncover3.nccov");
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
