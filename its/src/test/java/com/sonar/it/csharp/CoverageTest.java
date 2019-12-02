@@ -20,16 +20,24 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
+import com.sonar.it.shared.VstsUtils;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getMeasure;
@@ -37,6 +45,9 @@ import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CoverageTest {
+
+
+  final private static Logger LOG = LoggerFactory.getLogger(CoverageTest.class);
 
   @ClassRule
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
@@ -66,6 +77,32 @@ public class CoverageTest {
 
   @Test
   public void ncover3() throws Exception {
+    if (VstsUtils.isRunningUnderVsts()) {
+      String vstsSourcePath = VstsUtils.getSourcesDirectory();
+      try (Stream<Path> walk = Files.walk(Paths.get(vstsSourcePath))) {
+
+        List<String> result = walk.filter(Files::isDirectory)
+          .map(Path::toString)
+          .collect(Collectors.toList());
+
+        result.forEach(LOG::info);
+
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      try (Stream<Path> walk = Files.walk(Paths.get(temp.getRoot().getAbsolutePath()))) {
+
+        List<String> result = walk.filter(Files::isDirectory)
+          .map(Path::toString)
+          .collect(Collectors.toList());
+
+        result.forEach(LOG::info);
+
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", "reports/ncover3.nccov");
 
     assertThat(buildResult.getLogs()).contains(

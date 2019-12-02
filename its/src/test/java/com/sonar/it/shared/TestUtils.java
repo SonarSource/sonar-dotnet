@@ -189,6 +189,7 @@ public class TestUtils {
 
     TemporaryFolder folder = new TemporaryFolder(baseDirectory);
     LOG.info("TEST SETUP: Temporary folder created. Base directory: " + baseDirectory);
+    LOG.info("TEST SETUP: Temporary folder created. Temp folder: " + folder);
     return folder;
   }
 
