@@ -427,7 +427,7 @@ namespace SonarAnalyzer.Helpers
         /// <summary>
         /// Returns argument expressions for given parameter.
         ///
-        /// There can be zero, one or more results based on parametr type (Optinal or ParamArray/params).
+        /// There can be zero, one or more results based on parameter type (Optional or ParamArray/params).
         /// </summary>
         public static ImmutableArray<ExpressionSyntax> ArgumentValuesForParameter(SemanticModel semanticModel, ArgumentListSyntax argumentList, string parameterName)
         {

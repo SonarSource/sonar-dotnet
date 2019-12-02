@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules
             if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol ctor)
             {
                 AbstractMethodParameterLookup<TArgumentSyntax> methodParamLookup = null;       //Cache, there might be more of them
-                foreach (var param in ctor.Parameters.Where(x => !x.IsParams && IsValidationDelegateType(x.Type)))  ////Validation for TryGetNonParamsSyntax, ParamArray/params and therefore array arguments are not inspected
+                foreach (var param in ctor.Parameters.Where(x => !x.IsParams && IsValidationDelegateType(x.Type)))  //Validation for TryGetNonParamsSyntax, ParamArray/params and therefore array arguments are not inspected
                 {
                     methodParamLookup = methodParamLookup ?? CreateParameterLookup(c.Node, ctor);
                     if (methodParamLookup.TryGetNonParamsSyntax(param, out var argument))

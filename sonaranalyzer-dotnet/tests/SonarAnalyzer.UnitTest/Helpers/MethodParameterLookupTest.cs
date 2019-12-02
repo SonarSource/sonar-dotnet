@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Linq;
 using System.Collections;
 using FluentAssertions;
@@ -92,6 +93,11 @@ namespace Test
             c.CheckExpectedParameterMappings(7, "WithParams", new { arr = new[] { 1, 2, 3 } });
 
             c.MainInvocations.Length.Should().Be(8); //Self-Test of this test. If new Invocation is added to the Main(), this number has to be updated and test should be written for that case.
+
+            //TryGetNonParamsSyntax throw scenario
+            var lookupThrow = c.CreateLookup(6, "WithParams");
+            Action actionThrow = () => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument);
+            actionThrow.Should().Throw<InvalidOperationException>();
         }
 
         [TestMethod]
@@ -136,8 +142,13 @@ End Module
             c.CheckExpectedParameterMappings(3, "WithOptional", new { a = 1, opt = "Ipsum" });
             c.CheckExpectedParameterMappings(4, "WithParams", new { });
             c.CheckExpectedParameterMappings(5, "WithParams", new { arr = new[] { 1, 2, 3 } });
-
+            
             c.MainInvocations.Length.Should().Be(6); //Self-Test of this test. If new Invocation is added to the Main(), this number has to be updated and test should be written for that case.
+
+            //TryGetNonParamsSyntax throw scenario
+            var lookupThrow = c.CreateLookup(4, "WithParams");
+            Action actionThrow = () => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument);
+            actionThrow.Should().Throw<InvalidOperationException>();
         }
 
         private abstract class InspectionBase<TArgumentSyntax, TInvocationSyntax>
@@ -166,14 +177,19 @@ End Module
                 this.SpecialParameter = (Compiler.SemanticModel.GetSymbolInfo(specialInvocation).Symbol as IMethodSymbol).Parameters.Single();
             }
 
-            public void CheckExpectedParameterMappings(int invocationIndex, string expectedMethod, object expectedArguments)
+            public AbstractMethodParameterLookup<TArgumentSyntax> CreateLookup(int invocationIndex, string expectedMethod)
             {
                 var invocation = MainInvocations[invocationIndex];
                 var method = Compiler.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
                 method.Name.Should().Be(expectedMethod);
-                var lookup = CreateLookup(invocation, method);
-                InspectTryGetSyntax(lookup, expectedArguments, method);
-                InspectTryGetSymbol(lookup, expectedArguments, GetArguments(invocation));
+                return CreateLookup(invocation, method);
+            }
+
+            public void CheckExpectedParameterMappings(int invocationIndex, string expectedMethod, object expectedArguments)
+            {
+                var lookup = CreateLookup(invocationIndex, expectedMethod);
+                InspectTryGetSyntax(lookup, expectedArguments, lookup.MethodSymbol);
+                InspectTryGetSymbol(lookup, expectedArguments, GetArguments(MainInvocations[invocationIndex]));
             }
 
             private void InspectTryGetSyntax
@@ -193,7 +209,7 @@ End Module
                     }
                     else if (!parameter.IsOptional && !parameter.IsParams)
                     {
-                        Assert.Fail($"TryGetSymbolParametr missing {parameter.Name}");
+                        Assert.Fail($"TryGetSyntax missing {parameter.Name}");
                     } //Else it's OK
                 }
             }

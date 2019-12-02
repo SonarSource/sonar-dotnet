@@ -112,7 +112,7 @@ namespace SonarAnalyzer.Helpers
         {
             if (parameter.IsParams)
             {
-                throw new System.InvalidOperationException("Cannot call TryGetSingleSyntax on ParamArray/params parameters.");
+                throw new System.InvalidOperationException("Cannot call TryGetNonParamsSyntax on ParamArray/params parameters.");
             }
             if (TryGetSyntax(parameter, out var all))
             {
