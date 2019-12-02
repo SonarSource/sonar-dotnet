@@ -2,32 +2,6 @@
 "issues":  [
 {
 "id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'e'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
-"region":  {
-"startLine":  144,
-"startColumn":  17,
-"endLine":  144,
-"endColumn":  18
-}
-}
-},
-{
-"id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'count'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpMultipartSubStream.cs",
-"region":  {
-"startLine":  125,
-"startColumn":  17,
-"endLine":  125,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'type'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
@@ -36,71 +10,6 @@
 "startColumn":  21,
 "endLine":  324,
 "endColumn":  25
-}
-}
-},
-{
-"id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'type'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
-"region":  {
-"startLine":  356,
-"startColumn":  17,
-"endLine":  356,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'encoding'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\TextResponse.cs",
-"region":  {
-"startLine":  25,
-"startColumn":  17,
-"endLine":  25,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'contentType'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\TextResponse.cs",
-"region":  {
-"startLine":  30,
-"startColumn":  17,
-"endLine":  30,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'encoding'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\TextResponse.cs",
-"region":  {
-"startLine":  58,
-"startColumn":  17,
-"endLine":  58,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'constructor'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3654,
-"startColumn":  17,
-"endLine":  3654,
-"endColumn":  28
 }
 }
 },
