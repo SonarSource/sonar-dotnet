@@ -177,6 +177,11 @@ namespace Tests.Diagnostics
         {
         }
 
+        public static int MethodD(int i)
+        {
+            return i;
+        }
+
         public static void MethodD(bool b)
         {
         }
@@ -184,6 +189,15 @@ namespace Tests.Diagnostics
         public static void MethodC(bool b)    // Secondary
         {
         }
-        
+
+        public static void Separator()
+        {
+        }
+
+        public static int MethodC(int i)    // Secondary
+        {
+            return i;
+        }
+
     }
 }

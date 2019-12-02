@@ -153,17 +153,26 @@ Namespace Tests.TestCases
         Public Sub MethodA(ByVal i As Integer)
         End Sub
 
-        Public Shared Sub MethodC() 'Noncompliant - When there're more shared methods, they still should be together
+        Public Shared Sub MethodC() ' Noncompliant - When there're more shared methods, they still should be together
         End Sub
 
         Public Shared Sub MethodD()
         End Sub
 
-        Public Shared Sub MethodD(b As Boolean) 'Compliant
+        Public Shared Function MethodD(i As Integer) As Integer ' Compliant
+        End Function
+
+        Public Shared Sub MethodD(b As Boolean)         ' Compliant
         End Sub
 
-        Public Shared Sub MethodC(b As Boolean) 'Secondary
+        Public Shared Sub MethodC(b As Boolean)         ' Secondary
         End Sub
+
+        Public Shared Sub Separator()
+        End Sub
+
+        Public Shared Function MethodC(i As Integer)    ' Secondary
+        End Function
 
     End Class
 

@@ -82,6 +82,7 @@ namespace SonarAnalyzer.Rules
 
         protected IDictionary<string, List<TMemberDeclarationSyntax>> GetMisplacedOverloads(IEnumerable<TMemberDeclarationSyntax> members)
         {
+            //Key is methodName concatenated with IsStatic. This identifies group of members that should be placed together.
             var misplacedOverloads = new Dictionary<string, List<TMemberDeclarationSyntax>>();
             string previousKey = null, key;
             foreach (var member in members)
@@ -89,7 +90,8 @@ namespace SonarAnalyzer.Rules
                 if (GetMethodName(member, IsCaseSensitive) is string methodName
                     && IsValidMemberForOverload(member))
                 {
-                    key = methodName + "/" + IsStatic(member);  //#4136 Should not raise when static methods are grouped together
+                    // #4136 Should not raise when static methods are grouped together
+                    key = methodName + "/" + IsStatic(member);  
                     if (misplacedOverloads.TryGetValue(key, out var currentList))
                     {
                         if (!key.Equals(previousKey, CaseSensitivity))   

@@ -66,7 +66,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsStatic(MemberDeclarationSyntax member)
         {
-            if (member is BaseMethodDeclarationSyntax declaration) //Method or Constructor
+            //Method or Constructor
+            if (member is BaseMethodDeclarationSyntax declaration) 
             {
                 return declaration.Modifiers.Any(x => x.Kind() == SyntaxKind.StaticKeyword);
             }
