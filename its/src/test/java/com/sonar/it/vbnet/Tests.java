@@ -38,7 +38,6 @@ import org.sonarqube.ws.Measures;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-  CoverageTest.class,
 })
 public class Tests {
 

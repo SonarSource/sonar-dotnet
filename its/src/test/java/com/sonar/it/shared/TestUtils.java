@@ -189,7 +189,7 @@ public class TestUtils {
 
     TemporaryFolder folder = new TemporaryFolder(baseDirectory);
     LOG.info("TEST SETUP: Temporary folder created. Base directory: " + baseDirectory);
-    LOG.info("TEST SETUP: Temporary folder created. Temp folder: " + folder);
+    LOG.info("TEST SETUP: Temporary folder created. Temp folder: " + folder.getRoot().getAbsolutePath());
     return folder;
   }
 
