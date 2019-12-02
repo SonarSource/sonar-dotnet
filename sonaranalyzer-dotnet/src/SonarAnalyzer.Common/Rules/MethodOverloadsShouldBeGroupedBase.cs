@@ -49,38 +49,30 @@ namespace SonarAnalyzer.Rules
 
         protected abstract bool IsStatic(TMemberDeclarationSyntax member);
 
+        protected abstract bool IsAbstract(TMemberDeclarationSyntax member);
+
         protected void CheckMembers(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
         {
-            var misplacedOverloadsMapping = GetMisplacedOverloads(members);
-            foreach (var misplacedOverloadsEntry in misplacedOverloadsMapping)
+            var misplacedOverloads = GetMisplacedOverloads(c, members);
+            foreach (var misplacedMethods in misplacedOverloads.Values.Where(x => x.Count > 1))
             {
-                var misplacedOverloadsByAccessibility = misplacedOverloadsEntry.Value
-                    .GroupBy(memberDeclaration => c.SemanticModel.GetDeclaredSymbol(memberDeclaration)?.DeclaredAccessibility);
-
-                foreach (var misplacedOverloads in misplacedOverloadsByAccessibility)
-                {
-                    var firstMethodSignature = misplacedOverloads.First();
-                    if (misplacedOverloads.Key != null && misplacedOverloads.Count() > 1 && firstMethodSignature != null)
-                    {
-                        var secondaryLocations = misplacedOverloads
-                            .Skip(1)
-                            .Select(member => GetNameSyntaxNode(member))
-                            .Where(nameSyntax => nameSyntax != null)
-                            .Select(nameSyntax => new SecondaryLocation(nameSyntax?.GetLocation(), "Non-adjacent overload"));
-                        c.ReportDiagnosticWhenActive(
-                            Diagnostic.Create(
-                                descriptor: Rule,
-                                location: GetNameSyntaxNode(firstMethodSignature)?.GetLocation(),
-                                additionalLocations: secondaryLocations.ToAdditionalLocations(),
-                                properties: secondaryLocations.ToProperties(),
-                                messageArgs: GetMethodName(firstMethodSignature, true)));
-
-                    }
-                }
+                var firstMethod = misplacedMethods.First();
+                var secondaryLocations = misplacedMethods
+                    .Skip(1)
+                    .Select(member => GetNameSyntaxNode(member))
+                    .Where(nameSyntax => nameSyntax != null)
+                    .Select(nameSyntax => new SecondaryLocation(nameSyntax?.GetLocation(), "Non-adjacent overload"));
+                c.ReportDiagnosticWhenActive(
+                    Diagnostic.Create(
+                        descriptor: Rule,
+                        location: GetNameSyntaxNode(firstMethod)?.GetLocation(),
+                        additionalLocations: secondaryLocations.ToAdditionalLocations(),
+                        properties: secondaryLocations.ToProperties(),
+                        messageArgs: GetMethodName(firstMethod, true)));
             }
         }
 
-        protected IDictionary<string, List<TMemberDeclarationSyntax>> GetMisplacedOverloads(IEnumerable<TMemberDeclarationSyntax> members)
+        protected IDictionary<string, List<TMemberDeclarationSyntax>> GetMisplacedOverloads(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
         {
             //Key is methodName concatenated with IsStatic. This identifies group of members that should be placed together.
             var misplacedOverloads = new Dictionary<string, List<TMemberDeclarationSyntax>>();
@@ -90,11 +82,12 @@ namespace SonarAnalyzer.Rules
                 if (GetMethodName(member, IsCaseSensitive) is string methodName
                     && IsValidMemberForOverload(member))
                 {
-                    // #4136 Should not raise when static methods are grouped together
-                    key = methodName + "/" + IsStatic(member);  
+                    // Groups that should be together are defined by accessibility, abstract, static and member name #4136
+                    var accessibility = c.SemanticModel.GetDeclaredSymbol(member)?.DeclaredAccessibility.ToString();
+                    key = $"{accessibility}/{IsStatic(member)}/{IsAbstract(member)}/{methodName}";
                     if (misplacedOverloads.TryGetValue(key, out var currentList))
                     {
-                        if (!key.Equals(previousKey, CaseSensitivity))   
+                        if (!key.Equals(previousKey, CaseSensitivity))
                         {
                             currentList.Add(member);
                         }

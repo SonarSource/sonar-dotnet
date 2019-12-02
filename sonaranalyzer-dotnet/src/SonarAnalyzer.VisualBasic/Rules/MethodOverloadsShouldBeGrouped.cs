@@ -82,6 +82,25 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             return statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.SharedKeyword);
         }
+        
+        protected override bool IsAbstract(StatementSyntax member)
+        {
+            //Method only. Constructor cannot be MustInherit
+            if (member is MethodBlockSyntax methodDeclaration)
+            {
+                return IsMustInheritStatement(methodDeclaration.SubOrFunctionStatement);
+            }
+            else if (member is MethodStatementSyntax methodStatement)
+            {
+                return IsMustInheritStatement(methodStatement);
+            }
+            return false;
+        }
+
+        private bool IsMustInheritStatement(MethodBaseSyntax statement)
+        {
+            return statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.MustOverrideKeyword);
+        }
 
         protected override void Initialize(SonarAnalysisContext context)
         {

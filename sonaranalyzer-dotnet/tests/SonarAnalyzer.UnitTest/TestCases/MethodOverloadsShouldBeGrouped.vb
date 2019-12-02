@@ -176,4 +176,43 @@ Namespace Tests.TestCases
 
     End Class
 
+    Public MustInherit Class MustOverrideMethodsTogether
+
+        Protected MustOverride Sub DoWork(b As Boolean) 'Compliant - MustOverride methods are grouped together, it's OK
+        Protected MustOverride Sub DoWork(i As Integer)
+
+        Protected Sub New()
+        End Sub
+
+        Protected Sub DoWork() 'Compliant - MustOverride methods are grouped together, it's OK
+            DoWork(True)
+            DoWork(42)
+        End Sub
+
+        Protected MustOverride Sub OnEvent(b As Boolean)    'Noncompliant
+        Protected MustOverride Sub OnProgress()
+        Protected MustOverride Sub OnEvent(i As Integer)    'Secondary
+
+    End Class
+
+    Public Class Inheritor
+        Inherits MustOverrideMethodsTogether
+
+        Protected Overrides Sub DoWork(b As Boolean)
+        End Sub
+
+        Protected Overrides Sub DoWork(i As Integer)
+        End Sub
+
+        Protected Overrides Sub OnEvent(b As Boolean)   'Noncompliant
+        End Sub
+
+        Protected Overrides Sub OnProgress()
+        End Sub
+
+        Protected Overrides Sub OnEvent(i As Integer)   'Secondary
+        End Sub
+
+    End Class
+
 End Namespace

@@ -73,7 +73,17 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             return false;
         }
-        
+
+        protected override bool IsAbstract(MemberDeclarationSyntax member)
+        {
+            //Method only. Constructor cannot be abstract
+            if (member is MethodDeclarationSyntax declaration)
+            {
+                return declaration.Modifiers.Any(x => x.Kind() == SyntaxKind.AbstractKeyword);
+            }
+            return false;
+        }
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>

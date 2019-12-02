@@ -200,4 +200,50 @@ namespace Tests.Diagnostics
         }
 
     }
+
+    public abstract class MustOverrideMethodsTogether
+    {
+
+        protected abstract void DoWork(bool b); //Compliant - abstract methods are grouped together, it's OK
+        protected abstract void DoWork(int i);
+
+        protected MustOverrideMethodsTogether() { }
+
+        protected void DoWork() //Compliant - abstract methods are grouped together, it's OK
+        {
+            DoWork(true);
+            DoWork(42);
+        }
+
+        protected abstract void OnEvent(bool b);    //Noncompliant
+        protected abstract void OnProgress();
+        protected abstract void OnEvent(int i);     //Secondary
+
+    }
+
+    public class Inheritor : MustOverrideMethodsTogether
+    {
+
+        protected override void DoWork(bool b)
+        {
+        }
+
+        protected override void DoWork(int i)
+        {
+        }
+
+        protected override void OnEvent(bool b) //Noncompliant
+        {
+        }
+
+        protected override void OnProgress()
+        {
+        }
+
+        protected override void OnEvent(int i)  //Secondary
+        {
+        }
+        
+    }
+
 }
