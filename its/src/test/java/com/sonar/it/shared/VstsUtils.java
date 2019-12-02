@@ -25,11 +25,11 @@ public class VstsUtils {
   final static String ENV_BUILD_DIRECTORY = "AGENT_BUILDDIRECTORY";
   final static String ENV_SOURCES_DIRECTORY = "BUILD_SOURCESDIRECTORY";
 
-  static Boolean isRunningUnderVsts(){
+  public static Boolean isRunningUnderVsts(){
     return System.getenv(ENV_BUILD_DIRECTORY) != null;
   }
 
-  static String getSourcesDirectory(){
+  public static String getSourcesDirectory(){
     return GetVstsEnvironmentVariable(ENV_SOURCES_DIRECTORY);
   }
 
