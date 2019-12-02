@@ -21,7 +21,7 @@ vulnerabilities and smells in your code.
 ## Useful links
 
 * [Project homepage](https://redirect.sonarsource.com/plugins/csharp.html)
-* [Issue tracking](https://github.com/SonarSource/sonar-dotnet/issues)
+* [Issue tracking](./docs/issues.md)
 * [C# rules](https://rules.sonarsource.com/csharp)
 * [VB.Net rules](https://rules.sonarsource.com/vbnet)
 
