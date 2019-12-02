@@ -66,8 +66,13 @@ public class WildcardPatternFileProvider {
 
     List<String> wildcardElements = elements.subList(elementsTillFirstWildcard.size(), elements.size());
     if (wildcardElements.isEmpty()) {
-      LOG.info("WILDCARD - Early return because wildcard elements is empty");
-      return absoluteFileTillFirstWildcardElement.exists() ? new HashSet<>(Arrays.asList(absoluteFileTillFirstWildcardElement)) : Collections.emptySet();
+      if (absoluteFileTillFirstWildcardElement.exists()) {
+        LOG.info("WILDCARD - Early return WITH " + absoluteFileTillFirstWildcardElement.getAbsolutePath());
+        new HashSet<>(Arrays.asList(absoluteFileTillFirstWildcardElement));
+      } else {
+        LOG.info("WILDCARD - Early return WITH EMPTY because wildcard elements is empty");
+        return Collections.emptySet();
+      }
     }
     checkNoCurrentOrParentFolderAccess(wildcardElements);
 

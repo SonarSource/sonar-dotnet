@@ -91,7 +91,13 @@ public class CoverageReportImportSensor implements Sensor {
 
     Set<String> coverageFiles = coverage.files();
     FileCountStatistics fileCountStatistics = new FileCountStatistics(coverageFiles.size());
+
+    LOG.info("ANALYZE coverage after aggregate found " + coverageFiles.size() + " coverage files");
+
     for (String filePath : coverageFiles) {
+
+      LOG.info("ANALYZE will count statistics for " + filePath);
+
       FilePredicates p = context.fileSystem().predicates();
       InputFile inputFile = context.fileSystem().inputFile(p.hasAbsolutePath(filePath));
 
@@ -104,24 +110,31 @@ public class CoverageReportImportSensor implements Sensor {
 
       if (inputFile.type().equals(Type.TEST)) {
         fileCountStatistics.test++;
+        LOG.info("ANALYZE will skip as it is a test file");
         // Do not log for test files to avoid pointless noise
         continue;
       }
 
       if (!coverageConf.languageKey().equals(inputFile.language())) {
+        LOG.info("ANALYZE will skip as conf lang '" + coverageConf.languageKey() +  "' does not equal file lang '" + inputFile.language() + "'");
         fileCountStatistics.otherLanguageExcluded++;
         continue;
       }
 
+      LOG.info("ANALYZE will check main file coverage");
       fileCountStatistics.main++;
       boolean fileHasCoverage = false;
 
       NewCoverage newCoverage = context.newCoverage().onFile(inputFile);
       for (Map.Entry<Integer, Integer> entry : coverage.hits(filePath).entrySet()) {
+        LOG.info("ANALYZE found entry " + entry.getKey() + " " + entry.getValue());
         fileHasCoverage = true;
         newCoverage.lineHits(entry.getKey(), entry.getValue());
       }
       newCoverage.save();
+
+
+      LOG.info("ANALYZE does the file have coverage? : " + fileHasCoverage);
 
       if (fileHasCoverage) {
         fileCountStatistics.mainWithCoverage++;
@@ -130,6 +143,8 @@ public class CoverageReportImportSensor implements Sensor {
         LOG.debug("No coverage info found for the file '{}'.", filePath);
       }
     }
+
+    LOG.info("ANALYZE statistics total " + fileCountStatistics.total);
 
     if (fileCountStatistics.total != 0) {
       LOG.info(fileCountStatistics.toString());
