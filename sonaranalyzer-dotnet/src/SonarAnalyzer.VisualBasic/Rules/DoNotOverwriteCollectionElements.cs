@@ -128,6 +128,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         var conditionalAccess = memberAccess.Parent.Parent as ConditionalAccessExpressionSyntax;
                         return conditionalAccess?.Expression;
                     }
+                    if(memberAccess.Name.ToString().Equals("Add", StringComparison.OrdinalIgnoreCase) && invocation.ArgumentList?.Arguments.Count == 1)
+                    {
+                        return null;    //#2674 Do not raise on ICollection.Add(item)
+                    }                  
                     return memberAccess.Expression; // Return the collection identifier containing the method
 
                 case SyntaxKind.IdentifierName:
