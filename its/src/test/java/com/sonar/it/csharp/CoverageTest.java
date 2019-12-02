@@ -82,7 +82,8 @@ public class CoverageTest {
   public void ncover3() throws Exception {
 
     LOG.info("ncover3 - will do build");
-    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", "reports/ncover3.nccov");
+    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths",
+      "reports" + File.separator + "ncover3.nccov");
 
     if (VstsUtils.isRunningUnderVsts()) {
       LOG.info("ncover3 running in VSTS  - will enumerate files");

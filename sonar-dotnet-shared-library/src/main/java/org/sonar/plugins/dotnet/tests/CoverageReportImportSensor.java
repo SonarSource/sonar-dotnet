@@ -84,6 +84,9 @@ public class CoverageReportImportSensor implements Sensor {
   }
 
   void analyze(SensorContext context, Coverage coverage) {
+
+    LOG.info("ANALYZE coverage with wildcardPatternFileProvider ." + File.separator);
+
     coverageAggregator.aggregate(wildcardPatternFileProvider, coverage);
 
     Set<String> coverageFiles = coverage.files();

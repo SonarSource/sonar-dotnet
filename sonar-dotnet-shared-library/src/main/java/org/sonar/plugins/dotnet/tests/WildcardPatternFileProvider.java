@@ -29,8 +29,11 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.sonar.api.utils.WildcardPattern;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 public class WildcardPatternFileProvider {
+  private static final Logger LOG = Loggers.get(WildcardPatternFileProvider.class);
 
   private static final String CURRENT_FOLDER = ".";
   private static final String PARENT_FOLDER = "..";
@@ -48,6 +51,9 @@ public class WildcardPatternFileProvider {
   }
 
   Set<File> listFiles(String pattern) {
+
+    LOG.info("WILDCARD - will list files for " + pattern);
+
     List<String> elements = Arrays.asList(pattern.split(Pattern.quote(directorySeparator)));
 
     List<String> elementsTillFirstWildcard = elementsTillFirstWildcard(elements);
@@ -56,23 +62,33 @@ public class WildcardPatternFileProvider {
 
     File absoluteFileTillFirstWildcardElement = fileTillFirstWildcardElement.isAbsolute() ? fileTillFirstWildcardElement : new File(baseDir, pathTillFirstWildcardElement);
 
+    LOG.info("WILDCARD - absoluteFileTillFirstWildcardElement " + absoluteFileTillFirstWildcardElement.getAbsolutePath());
+
     List<String> wildcardElements = elements.subList(elementsTillFirstWildcard.size(), elements.size());
     if (wildcardElements.isEmpty()) {
+      LOG.info("WILDCARD - Early return because wildcard elements is empty");
       return absoluteFileTillFirstWildcardElement.exists() ? new HashSet<>(Arrays.asList(absoluteFileTillFirstWildcardElement)) : Collections.emptySet();
     }
     checkNoCurrentOrParentFolderAccess(wildcardElements);
 
     WildcardPattern wildcardPattern = WildcardPattern.create(toPath(wildcardElements), directorySeparator);
 
+    LOG.info("WILDCARD - will add files for wildcardPattern " + wildcardPattern.toString());
+
     Set<File> result = new HashSet<>();
     for (File file : listFiles(absoluteFileTillFirstWildcardElement)) {
       String relativePath = relativize(absoluteFileTillFirstWildcardElement, file);
 
       if (wildcardPattern.match(relativePath)) {
+        LOG.info("WILDCARD - Adding file to result list " + file.getAbsolutePath());
         result.add(file);
+      } else
+      {
+        LOG.info("WILDCARD - SKIP file " + file.getAbsolutePath() + " because it does not match pattern ");
       }
     }
 
+    LOG.info("WILDCARD - result has " + result.size() + " elements");
     return result;
   }
 
