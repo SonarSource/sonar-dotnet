@@ -35,7 +35,6 @@ import java.util.stream.Stream;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Ignore;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.slf4j.Logger;
@@ -54,8 +53,8 @@ public class CoverageTest {
   @ClassRule
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
-  @Rule
-  public TemporaryFolder temp = TestUtils.createTempFolder();
+  @ClassRule
+  public static final TemporaryFolder temp = TestUtils.createTempFolder();
 
   @Before
   public void init() {
