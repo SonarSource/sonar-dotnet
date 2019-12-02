@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             PropertyAccessTracker = new VisualBasicPropertyAccessTracker(AnalyzerConfiguration.AlwaysEnabled, rule);
             ObjectCreationTracker = new VisualBasicObjectCreationTracker(AnalyzerConfiguration.AlwaysEnabled, rule);
         }
-        
+
         protected override PropertyAccessCondition IsInsideObjectInitializer() =>
             (context) =>
                 context.Expression.FirstAncestorOrSelf<ObjectMemberInitializerSyntax>() != null;
@@ -53,7 +53,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
             (context) =>
             {
                 var argumentList = ((InvocationExpressionSyntax)context.Invocation).ArgumentList;
-                return VisualBasicSyntaxHelper.ArgumentValueForParameter(context.SemanticModel, argumentList, "padding") is ExpressionSyntax valueSyntax &&
+                var values = VisualBasicSyntaxHelper.ArgumentValuesForParameter(context.SemanticModel, argumentList, "padding");
+                return values.Length == 1 &&
+                    values[0] is ExpressionSyntax valueSyntax &&
                     context.SemanticModel.GetSymbolInfo(valueSyntax).Symbol is ISymbol symbol &&
                     symbol.Name == "Pkcs1";
             };

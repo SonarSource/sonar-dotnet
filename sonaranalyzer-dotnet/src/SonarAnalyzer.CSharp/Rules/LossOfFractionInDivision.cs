@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var lookup = new CSharpMethodParameterLookup(invocation, semanticModel);
-            if (!lookup.TryGetParameterSymbol(argument, out var parameter))
+            if (!lookup.TryGetSymbol(argument, out var parameter))
             {
                 type = null;
                 return false;

@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
@@ -38,7 +39,7 @@ namespace SonarAnalyzer.Helpers
             MethodSymbol = methodSymbol;
         }
 
-        public bool TryGetParameterSymbol(TArgumentSyntax argument, out IParameterSymbol parameter)
+        public bool TryGetSymbol(TArgumentSyntax argument, out IParameterSymbol parameter)
         {
             parameter = null;
 
@@ -70,20 +71,53 @@ namespace SonarAnalyzer.Helpers
             return true;
         }
 
-        public bool TryGetSymbolParameter(IParameterSymbol parameter, out TArgumentSyntax argument)
+        /// <summary>
+        /// Method returns array of argument syntaxes that represents all syntaxes passed to the parameter.
+        /// 
+        /// There could be multiple syntaxes for ParamArray/params.
+        /// There could be zero or one result for optional parameters.
+        /// There will be single result for normal parameters.
+        /// </summary>
+        public bool TryGetSyntax(IParameterSymbol parameter, out ImmutableArray<TArgumentSyntax> argument)
         {
-            return TryGetArgumentSyntax(parameter.Name, out argument);
+            return TryGetSyntax(parameter.Name, out argument);
         }
 
-        public bool TryGetArgumentSyntax(string parameterName, out TArgumentSyntax argument)
+        /// <summary>
+        /// Method returns array of argument syntaxes that represents all syntaxes passed to the parameter.
+        /// 
+        /// There could be multiple syntaxes for ParamArray/params.
+        /// There could be zero or one result for optional parameters.
+        /// There will be single result for normal parameters.
+        public bool TryGetSyntax(string parameterName, out ImmutableArray<TArgumentSyntax> argument)
         {
+            var ret = ImmutableArray.CreateBuilder<TArgumentSyntax>();
             foreach (var pair in GetAllArgumentParameterMappings())
             {
                 if (parameterName == pair.Symbol.Name)
                 {
-                    argument = pair.SyntaxNode;
-                    return true;
+                    ret.Add(pair.SyntaxNode);
                 }
+            }
+            argument = ret.ToImmutable();
+            return !argument.IsEmpty;
+        }
+
+        /// <summary>
+        /// Method returns zero or one argument syntax that represents syntax passed to the parameter.
+        /// 
+        /// Caller must ensure that given parameter is not ParamArray/params.
+        /// </summary>
+        public bool TryGetNonParamsSyntax(IParameterSymbol parameter, out TArgumentSyntax argument)
+        {
+            if (parameter.IsParams)
+            {
+                throw new System.InvalidOperationException("Cannot call TryGetNonParamsSyntax on ParamArray/params parameters.");
+            }
+            if (TryGetSyntax(parameter, out var all))
+            {
+                argument = all.Single();
+                return true;
             }
             argument = null;
             return false;
@@ -95,7 +129,7 @@ namespace SonarAnalyzer.Helpers
         {
             foreach (var argument in argumentList)
             {
-                if (TryGetParameterSymbol(argument, out var parameter))
+                if (TryGetSymbol(argument, out var parameter))
                 {
                     yield return new SyntaxNodeSymbolSemanticModelTuple<TArgumentSyntax, IParameterSymbol> { SyntaxNode = argument, Symbol = parameter };
                 }

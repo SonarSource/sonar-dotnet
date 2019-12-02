@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var argument in invocation.ArgumentList.Arguments)
             {
-                if (!methodParameterLookup.TryGetParameterSymbol(argument, out var parameter) ||
+                if (!methodParameterLookup.TryGetSymbol(argument, out var parameter) ||
                     parameter.IsParams)
                 {
                     continue;
