@@ -167,6 +167,30 @@
 }
 }
 ]
+},
+{
+"id":  "S4136",
+"message":  "All 'TestLatch' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestLatch.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  16,
+"endLine":  43,
+"endColumn":  25
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestLatch.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  16,
+"endLine":  88,
+"endColumn":  25
+}
+}
+]
 }
 ]
 }

@@ -203,24 +203,24 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'TryMatch' method overloads should be adjacent.",
+"message":  "All 'CanResolve' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  17,
-"startColumn":  33,
-"endLine":  17,
-"endColumn":  41
+"startLine":  1729,
+"startColumn":  21,
+"endLine":  1729,
+"endColumn":  31
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
-"startLine":  42,
-"startColumn":  33,
-"endLine":  42,
-"endColumn":  41
+"startLine":  1755,
+"startColumn":  21,
+"endLine":  1755,
+"endColumn":  31
 }
 }
 ]
