@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -33,57 +32,26 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class MethodOverloadsShouldBeGrouped : MethodOverloadsShouldBeGroupedBase<MemberDeclarationSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public MethodOverloadsShouldBeGrouped() : base(RspecStrings.ResourceManager) { }
 
-        protected override DiagnosticDescriptor Rule { get; } = rule;
-
-        protected override bool IsCaseSensitive => true;
-
-        protected override SyntaxToken? GetNameSyntaxNode(MemberDeclarationSyntax member)
+        protected override MemberInfo CreateMemberInfo(SyntaxNodeAnalysisContext c, MemberDeclarationSyntax member)
         {
-            if (member is ConstructorDeclarationSyntax constructorDeclaration)
+            if (!IsValidMemberForOverload(member))
             {
-                return constructorDeclaration.Identifier;
+                return null;
             }
-            else if (member is MethodDeclarationSyntax methodDeclaration)
+            if (member is ConstructorDeclarationSyntax constructor)
             {
-                return methodDeclaration.Identifier;
+                return new MemberInfo(c, member, constructor.Identifier, IsStatic(constructor), false, true);
+            }
+            else if (member is MethodDeclarationSyntax method)
+            {
+                return new MemberInfo(c, member, method.Identifier, IsStatic(method), method.Modifiers.Any(x => x.Kind() == SyntaxKind.AbstractKeyword), true);
             }
             return null;
         }
         
-        protected override bool IsValidMemberForOverload(MemberDeclarationSyntax member)
-        {
-            if (member is MethodDeclarationSyntax methodDeclaration)
-            {
-                return methodDeclaration.ExplicitInterfaceSpecifier == null;
-            }
-            return true;
-        }
-
-        protected override bool IsStatic(MemberDeclarationSyntax member)
-        {
-            //Method or Constructor
-            if (member is BaseMethodDeclarationSyntax declaration) 
-            {
-                return declaration.Modifiers.Any(x => x.Kind() == SyntaxKind.StaticKeyword);
-            }
-            return false;
-        }
-
-        protected override bool IsAbstract(MemberDeclarationSyntax member)
-        {
-            //Method only. Constructor cannot be abstract
-            if (member is MethodDeclarationSyntax declaration)
-            {
-                return declaration.Modifiers.Any(x => x.Kind() == SyntaxKind.AbstractKeyword);
-            }
-            return false;
-        }
-
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
@@ -96,5 +64,20 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.InterfaceDeclaration,
             SyntaxKind.StructDeclaration);
         }
+
+        private bool IsValidMemberForOverload(MemberDeclarationSyntax member)
+        {
+            if (member is MethodDeclarationSyntax methodDeclaration)
+            {
+                return methodDeclaration.ExplicitInterfaceSpecifier == null;
+            }
+            return true;
+        }
+
+        private bool IsStatic(BaseMethodDeclarationSyntax declaration)
+        {
+            return declaration.Modifiers.Any(x => x.Kind() == SyntaxKind.StaticKeyword);
+        }
+
     }
 }

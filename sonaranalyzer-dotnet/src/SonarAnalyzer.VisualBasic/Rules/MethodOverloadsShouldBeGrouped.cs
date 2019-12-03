@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -33,73 +32,24 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class MethodOverloadsShouldBeGrouped : MethodOverloadsShouldBeGroupedBase<StatementSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-           DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public MethodOverloadsShouldBeGrouped() : base(RspecStrings.ResourceManager) { }
 
-        protected override DiagnosticDescriptor Rule { get; } = rule;
-
-        protected override bool IsCaseSensitive => false;
-
-        protected override SyntaxToken? GetNameSyntaxNode(StatementSyntax member)
+        protected override MemberInfo CreateMemberInfo(SyntaxNodeAnalysisContext c, StatementSyntax member)
         {
-            if (member is ConstructorBlockSyntax constructorDeclaration)
+            if (member is ConstructorBlockSyntax constructor)
             {
-                return constructorDeclaration.SubNewStatement.NewKeyword;
+                return new MemberInfo(c, member, constructor.SubNewStatement.NewKeyword, IsStaticStatement(constructor.SubNewStatement), false, false);
             }
-            else if (member is MethodBlockSyntax methodDeclaration)
+            else if (member is MethodBlockSyntax methodBlock)
             {
-                return methodDeclaration.SubOrFunctionStatement.Identifier;
+                return new MemberInfo(c, member, methodBlock.SubOrFunctionStatement.Identifier, IsStaticStatement(methodBlock.SubOrFunctionStatement), IsMustInheritStatement(methodBlock.SubOrFunctionStatement), false);
             }
             else if (member is MethodStatementSyntax methodStatement)
             {
-                return methodStatement.Identifier;
+                return new MemberInfo(c, member, methodStatement.Identifier, IsStaticStatement(methodStatement), IsMustInheritStatement(methodStatement), false);
             }
             return null;
-        }
-
-        protected override bool IsValidMemberForOverload(StatementSyntax member) => true;
-
-        protected override bool IsStatic(StatementSyntax member)
-        {
-            if (member is ConstructorBlockSyntax constructorDeclaration)
-            {
-                return IsStaticStatement(constructorDeclaration.SubNewStatement);
-            }
-            else if (member is MethodBlockSyntax methodDeclaration)
-            {
-                return IsStaticStatement(methodDeclaration.SubOrFunctionStatement);
-            }
-            else if (member is MethodStatementSyntax methodStatement) 
-            {
-                return IsStaticStatement(methodStatement);
-            }
-            return false;
-        }
-
-        private bool IsStaticStatement(MethodBaseSyntax statement)
-        {
-            return statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.SharedKeyword);
-        }
-        
-        protected override bool IsAbstract(StatementSyntax member)
-        {
-            //Method only. Constructor cannot be MustInherit
-            if (member is MethodBlockSyntax methodDeclaration)
-            {
-                return IsMustInheritStatement(methodDeclaration.SubOrFunctionStatement);
-            }
-            else if (member is MethodStatementSyntax methodStatement)
-            {
-                return IsMustInheritStatement(methodStatement);
-            }
-            return false;
-        }
-
-        private bool IsMustInheritStatement(MethodBaseSyntax statement)
-        {
-            return statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.MustOverrideKeyword);
         }
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -113,5 +63,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.InterfaceBlock,
             SyntaxKind.StructureBlock);
         }
+
+        private bool IsStaticStatement(MethodBaseSyntax statement) => statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.SharedKeyword);
+
+        private bool IsMustInheritStatement(MethodBaseSyntax statement) => statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.MustOverrideKeyword);
+
     }
 }

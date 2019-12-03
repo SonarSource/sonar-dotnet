@@ -72,6 +72,12 @@ namespace SonarAnalyzer.Helpers
             return enumerable.Where(e => e != null);
         }
 
+        public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<Nullable<T>> enumerable)
+                where T : struct
+        {
+            return enumerable.Where(x => x.HasValue).Select(x => x.Value);
+        }
+        
         /// <summary>
         /// Applies a specified function to the corresponding elements of two sequences,
         /// producing a sequence of the results. If the collections have different length

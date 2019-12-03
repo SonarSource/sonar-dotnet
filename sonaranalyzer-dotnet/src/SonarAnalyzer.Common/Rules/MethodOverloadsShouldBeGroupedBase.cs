@@ -24,6 +24,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 
 namespace SonarAnalyzer.Rules
@@ -31,92 +32,103 @@ namespace SonarAnalyzer.Rules
     public abstract class MethodOverloadsShouldBeGroupedBase<TMemberDeclarationSyntax> : SonarDiagnosticAnalyzer
         where TMemberDeclarationSyntax : SyntaxNode
     {
+
         internal const string DiagnosticId = "S4136";
         protected const string MessageFormat = "All '{0}' method overloads should be adjacent.";
 
-        protected StringComparison CaseSensitivity
+        private readonly DiagnosticDescriptor rule;
+    
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected MethodOverloadsShouldBeGroupedBase(System.Resources.ResourceManager resources)
         {
-            get => IsCaseSensitive ? StringComparison.InvariantCulture : StringComparison.InvariantCultureIgnoreCase;
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, resources);
         }
-
-        protected abstract DiagnosticDescriptor Rule { get; }
-
-        protected abstract bool IsCaseSensitive { get; }
-
-        protected abstract SyntaxToken? GetNameSyntaxNode(TMemberDeclarationSyntax member);
-
-        protected abstract bool IsValidMemberForOverload(TMemberDeclarationSyntax member);
-
-        protected abstract bool IsStatic(TMemberDeclarationSyntax member);
-
-        protected abstract bool IsAbstract(TMemberDeclarationSyntax member);
-
+        
+        protected abstract MemberInfo CreateMemberInfo(SyntaxNodeAnalysisContext c, TMemberDeclarationSyntax member);
+        
         protected void CheckMembers(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
         {
-            var misplacedOverloads = GetMisplacedOverloads(c, members);
-            foreach (var misplacedMethods in misplacedOverloads.Values.Where(x => x.Count > 1))
+            foreach (var misplacedMembers in GetMisplacedOverloads(c, members))
             {
-                var firstMethod = misplacedMethods.First();
-                var secondaryLocations = misplacedMethods
-                    .Skip(1)
-                    .Select(member => GetNameSyntaxNode(member))
-                    .Where(nameSyntax => nameSyntax != null)
-                    .Select(nameSyntax => new SecondaryLocation(nameSyntax?.GetLocation(), "Non-adjacent overload"));
+                var firstMember = misplacedMembers.First();
+                var secondaryLocations = misplacedMembers.Skip(1).Select(x => new SecondaryLocation(x.NameSyntax.GetLocation(), "Non-adjacent overload"));
                 c.ReportDiagnosticWhenActive(
                     Diagnostic.Create(
-                        descriptor: Rule,
-                        location: GetNameSyntaxNode(firstMethod)?.GetLocation(),
+                        descriptor: rule,
+                        location: firstMember.NameSyntax.GetLocation(),
                         additionalLocations: secondaryLocations.ToAdditionalLocations(),
                         properties: secondaryLocations.ToProperties(),
-                        messageArgs: GetMethodName(firstMethod, true)));
+                        messageArgs: firstMember.NameSyntax.ValueText));
             }
         }
 
-        protected IDictionary<string, List<TMemberDeclarationSyntax>> GetMisplacedOverloads(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
+        protected List<MemberInfo>[] GetMisplacedOverloads(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
         {
-            //Key is methodName concatenated with IsStatic. This identifies group of members that should be placed together.
-            var misplacedOverloads = new Dictionary<string, List<TMemberDeclarationSyntax>>();
-            string previousKey = null, key;
+            var misplacedOverloads = new Dictionary<MemberInfo, List<MemberInfo>>();
+            MemberInfo previous = null;
             foreach (var member in members)
             {
-                if (GetMethodName(member, IsCaseSensitive) is string methodName
-                    && IsValidMemberForOverload(member))
+                if (CreateMemberInfo(c, member) is MemberInfo current)
                 {
-                    // Groups that should be together are defined by accessibility, abstract, static and member name #4136
-                    var accessibility = c.SemanticModel.GetDeclaredSymbol(member)?.DeclaredAccessibility.ToString();
-                    key = $"{accessibility}/{IsStatic(member)}/{IsAbstract(member)}/{methodName}";
-                    if (misplacedOverloads.TryGetValue(key, out var currentList))
+                    if (misplacedOverloads.TryGetValue(current, out var values))
                     {
-                        if (!key.Equals(previousKey, CaseSensitivity))
+                        if (!current.Equals(previous))
                         {
-                            currentList.Add(member);
+                            values.Add(current);
                         }
                     }
                     else
                     {
-                        misplacedOverloads.Add(key, new List<TMemberDeclarationSyntax> { member });
+                        misplacedOverloads.Add(current, new List<MemberInfo> { current });
                     }
-                    previousKey = key;
+                    previous = current;
                 }
                 else
                 {
-                    previousKey = null;
+                    previous = null;
                 }
             }
-            return misplacedOverloads;
+            return misplacedOverloads.Values.Where(x => x.Count > 1).ToArray();
         }
 
-        private string GetMethodName(TMemberDeclarationSyntax member, bool caseSensitive)
+        protected class MemberInfo
         {
-            var nameSyntaxNode = GetNameSyntaxNode(member);
-            if (caseSensitive)
+
+            public readonly TMemberDeclarationSyntax Member;
+            public readonly string Accessibility;
+            public readonly SyntaxToken NameSyntax;
+            public readonly bool IsStatic;
+            public readonly bool IsAbstract;
+
+            private readonly bool isCaseSensitive;
+
+            public MemberInfo(SyntaxNodeAnalysisContext context, TMemberDeclarationSyntax member, SyntaxToken nameSyntax, bool isStatic, bool isAbstract, bool isCaseSensitive)
             {
-                return nameSyntaxNode?.ValueText;
+                Member = member;
+                Accessibility = context.SemanticModel.GetDeclaredSymbol(member)?.DeclaredAccessibility.ToString();
+                NameSyntax = nameSyntax;
+                IsStatic = isStatic;
+                IsAbstract = isAbstract;
+                this.isCaseSensitive = isCaseSensitive;                
             }
-            else
+            
+            public override bool Equals(object obj)
             {
-                return nameSyntaxNode?.ValueText?.ToLowerInvariant();
+                // Groups that should be together are defined by accessibility, abstract, static and member name #4136
+                return obj is MemberInfo info
+                    && Accessibility == info.Accessibility
+                    && NameSyntax.ValueText.Equals(info.NameSyntax.ValueText, isCaseSensitive && info.isCaseSensitive ? StringComparison.InvariantCulture : StringComparison.InvariantCultureIgnoreCase)
+                    && IsStatic == info.IsStatic
+                    && IsAbstract == info.IsAbstract;
             }
+
+            public override int GetHashCode()
+            {
+                return NameSyntax.ValueText.ToLowerInvariant().GetHashCode();
+            }
+
         }
+
     }
 }
