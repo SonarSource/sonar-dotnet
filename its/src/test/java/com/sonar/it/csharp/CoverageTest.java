@@ -139,17 +139,33 @@ public class CoverageTest {
     String reportPath = "reports" + File.separator + "visualstudio.coveragexml";
 
     Path projectDir = Tests.projectDir(temp, "NoCoverageOnTests");
+
+    if (VstsUtils.isRunningUnderVsts()) {
+
+      LOG.info("We are running under AzurePipelines / VSTS !");
+
+      // create absolute path on the VSTS file system
+      String pathPrefix = temp.getRoot().getAbsolutePath() + File.separator +
+        "CoverageTest" + File.separator;
+      reportPath = pathPrefix + reportPath;
+      ovewriteCoverageFileContentWithAbsolutePath(reportPath, pathPrefix);
+    } else {
+      LOG.info("Not running in Azure Pipelines / VSTS");
+    }
+
     orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("NoCoverageOnTests")
       .setProjectVersion("1.0")
       .setProfile("no_rule")
+      .setProjectDir(projectDir.toFile())
       .setProperty("sonar.cs.vscoveragexml.reportsPaths", reportPath));
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
     BuildResult buildResult = orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("end"));
+      .addArgument("end")
+      .setProjectDir(projectDir.toFile()));
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
@@ -208,25 +224,14 @@ public class CoverageTest {
         "CoverageTest" + File.separator;
       reportPathString = pathPrefix + reportPathString;
 
-      // replace relative path with absolute path inside the coverage report file
-      Path reportPath = Paths.get(reportPathString);
-      String reportContent = new String(Files.readAllBytes(reportPath), UTF_8);
-
-      if (reportPathString.contains("ncover3")) {
-        reportContent = addPathPrefix(reportContent, "url=\"", pathPrefix);
-      } else if (reportPathString.contains("opencover")) {
-        reportContent = addPathPrefix(reportContent, "fullPath=\"", pathPrefix);
-      } else if (reportPathString.contains("visualstudio")) {
-        reportContent = addPathPrefix(reportContent, "path=\"", pathPrefix);
-      } else if (reportPathString.contains("dotcover")) {
-        reportContent = addPathPrefix(reportContent, "<title>", pathPrefix);
+      if (!path.contains("*")) {
+        ovewriteCoverageFileContentWithAbsolutePath(reportPathString, pathPrefix);
       } else {
-        LOG.warn("Could not find a known coverage provider for path " + reportPathString);
+        LOG.info("Path contains '*' so will rewrite the ncover file");
+        String ncoverPath = "reports" + File.separator + "ncover3.nccov"
+        String ncoverReportPathString = pathPrefix + ncoverPath;
+        ovewriteCoverageFileContentWithAbsolutePath(ncoverReportPathString, pathPrefix);
       }
-
-      // overwrite contents
-      Files.write(reportPath, reportContent.getBytes(UTF_8));
-
     } else {
       LOG.info("Not running in Azure Pipelines / VSTS");
     }
@@ -248,6 +253,37 @@ public class CoverageTest {
     return orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("end")
       .setProjectDir(projectDir.toFile()));
+  }
+
+  private void ovewriteCoverageFileContentWithAbsolutePath(String reportPathString, String pathPrefix) throws IOException {
+    // replace relative path with absolute path inside the coverage report file
+    LOG.info("Get path for " + reportPathString);
+    Path reportPath = Paths.get(reportPathString);
+    String reportContent = new String(Files.readAllBytes(reportPath), UTF_8);
+
+    if (reportPathString.contains("ncover3")) {
+      reportContent = addPathPrefix(reportContent, "url=\"", pathPrefix);
+    } else if (reportPathString.contains("opencover")) {
+      reportContent = addPathPrefix(reportContent, "fullPath=\"", pathPrefix);
+    } else if (reportPathString.contains("visualstudio")) {
+      reportContent = addPathPrefix(reportContent, "path=\"", pathPrefix);
+    } else if (reportPathString.contains("dotcover")) {
+      String dotcoverReportPathString = String.format("%s%s%s%s%s%s%s%s%s",
+        pathPrefix, File.separator,
+        "reports", File.separator,
+        "dotcover", File.separator,
+        "src", File.separator,
+        "1.html");
+      Path dotcoverReportPath = Paths.get(dotcoverReportPathString);
+      String dotcoverReportContent = new String(Files.readAllBytes(dotcoverReportPath), UTF_8);
+      dotcoverReportContent = addPathPrefix(dotcoverReportContent, "<title>", pathPrefix);
+      Files.write(dotcoverReportPath, dotcoverReportContent.getBytes(UTF_8));
+    } else {
+      LOG.warn("Could not find a known coverage provider for path " + reportPathString);
+    }
+
+    // overwrite contents
+    Files.write(reportPath, reportContent.getBytes(UTF_8));
   }
 
   private void LogFileSystem() {
