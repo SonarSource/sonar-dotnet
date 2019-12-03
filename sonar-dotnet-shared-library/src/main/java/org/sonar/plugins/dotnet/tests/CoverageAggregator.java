@@ -56,10 +56,19 @@ public class CoverageAggregator {
     this.coverageConf = coverageConf;
     this.configuration = configuration;
     this.coverageCache = new CoverageCache();
-    this.ncover3ReportParser = new NCover3ReportParser(isSupportedLanguage);
+    this.ncover3ReportParser = new NCover3ReportParser(isSupportedLanguage, coverageConf, fs);
     this.openCoverReportParser = new OpenCoverReportParser(isSupportedLanguage);
     this.dotCoverReportsAggregator = new DotCoverReportsAggregator(new DotCoverReportParser(isSupportedLanguage));
     this.visualStudioCoverageXmlReportParser = new VisualStudioCoverageXmlReportParser(isSupportedLanguage);
+  }
+
+  public static boolean hasAbsolutePathAndLanguage(CoverageConfiguration coverageConf, FileSystem fs, String absolutePath) {
+    if (fs.hasFiles(fs.predicates().hasAbsolutePath(absolutePath))) {
+      return true;
+    } else {
+      LOG.debug(String.format("File with path '%s' cannot be found on filesystem with baseDir '%s' and workDir '%s'", absolutePath, fs.baseDir(), fs.workDir()));
+    }
+    return false;
   }
 
   @VisibleForTesting

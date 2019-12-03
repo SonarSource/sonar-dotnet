@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
+import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.internal.google.common.annotations.VisibleForTesting;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -31,9 +33,20 @@ public class NCover3ReportParser implements CoverageParser {
 
   private static final Logger LOG = Loggers.get(NCover3ReportParser.class);
   private final Predicate<String> isSupportedLanguage;
+  private final CoverageConfiguration coverageConf;
+  private final FileSystem fs;
 
-  public NCover3ReportParser(Predicate<String> isSupportedLanguage) {
+  @VisibleForTesting
+  NCover3ReportParser(Predicate<String> isSupportedLanguage) {
     this.isSupportedLanguage = isSupportedLanguage;
+    this.coverageConf = null;
+    this.fs = null;
+  }
+
+  public NCover3ReportParser(Predicate<String> isSupportedLanguage, CoverageConfiguration coverageConf, FileSystem fs) {
+    this.isSupportedLanguage = isSupportedLanguage;
+    this.coverageConf = coverageConf;
+    this.fs = fs;
   }
 
   @Override
@@ -109,7 +122,7 @@ public class NCover3ReportParser implements CoverageParser {
       if (documents.containsKey(doc) && !isExcludedLine(line)) {
         String path = documents.get(doc);
         LOG.debug("NCover3 parser: analyzing the doc '" + doc + "' with the path '" + path + "'");
-        if (isSupportedLanguage.test(path)) {
+        if (isSupportedLanguage.test(path) || CoverageAggregator.hasAbsolutePathAndLanguage(coverageConf, fs, path)) {
           coverage.addHits(path, line, vc);
         } else {
           LOG.debug("NCover3 parser: the doc '" + doc + "' has a path '" + path + "' with a not-supported language");
