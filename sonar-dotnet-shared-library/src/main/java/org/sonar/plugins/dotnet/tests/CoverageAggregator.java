@@ -22,7 +22,6 @@ package org.sonar.plugins.dotnet.tests;
 import java.io.File;
 import java.util.Set;
 import java.util.function.Predicate;
-import jdk.internal.org.jline.utils.Log;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Configuration;
@@ -140,7 +139,7 @@ public class CoverageAggregator {
           }
         }
       } else {
-        Log.debug("CoverageAggregator received empty set of coverage files for " + reportPathPattern);
+        LOG.debug("CoverageAggregator received empty set of coverage files for " + reportPathPattern);
       }
     }
   }
