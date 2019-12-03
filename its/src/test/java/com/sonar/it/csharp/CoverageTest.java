@@ -100,10 +100,10 @@ public class CoverageTest {
 
   private void LogFileSystem() {
     if (VstsUtils.isRunningUnderVsts()) {
-      LOG.debug("ncover3 running in VSTS  - will enumerate files");
+      LOG.info("ncover3 running in VSTS  - will enumerate files");
       String vstsSourcePath = VstsUtils.getSourcesDirectory();
-      LOG.debug("TEST RUN: Tests are running under VSTS. Build dir:  " + vstsSourcePath);
-      LOG.debug("TEST RUN: Will enumerate files in the build directory");
+      LOG.info("TEST RUN: Tests are running under VSTS. Build dir:  " + vstsSourcePath);
+      LOG.info("TEST RUN: Will enumerate files in the build directory");
       File baseDirectory = new File(vstsSourcePath);
       try (Stream<Path> walk = Files.walk(Paths.get(baseDirectory.toURI()))) {
 
@@ -111,27 +111,27 @@ public class CoverageTest {
           .map(Path::toString)
           .collect(Collectors.toList());
 
-        result.forEach(LOG::debug);
+        result.forEach(LOG::info);
 
       } catch (IOException e) {
         e.printStackTrace();
       }
-      LOG.debug("TEST RUN: Tests are running under VSTS. Temp dir:  " + temp.getRoot().getAbsolutePath());
-      LOG.debug("TEST RUN: Will enumerate files in the temp directory");
+      LOG.info("TEST RUN: Tests are running under VSTS. Temp dir:  " + temp.getRoot().getAbsolutePath());
+      LOG.info("TEST RUN: Will enumerate files in the temp directory");
       try (Stream<Path> walk = Files.walk(Paths.get(temp.getRoot().getAbsolutePath()))) {
 
         List<String> result = walk
           .map(Path::toString)
           .collect(Collectors.toList());
 
-        result.forEach(LOG::debug);
+        result.forEach(LOG::info);
 
       } catch (IOException e) {
         e.printStackTrace();
       }
     }
     else {
-      LOG.debug("NOT RUNNING IN VSTS ncover3");
+      LOG.info("NOT RUNNING IN VSTS ncover3");
     }
   }
 
@@ -235,6 +235,9 @@ public class CoverageTest {
 
     String reportPathString = path;
     if (VstsUtils.isRunningUnderVsts()) {
+
+      LOG.info("We are running under AzurePipelines / VSTS !");
+
       String vstsSourcePath = VstsUtils.getSourcesDirectory();
       // create absolute path on the VSTS file system
       String pathPrefix = vstsSourcePath + File.separator +
@@ -247,21 +250,22 @@ public class CoverageTest {
       Path reportPath = Paths.get(reportPathString);
 
       if (path.contains("ncover3")) {
+        LOG.info("Will try to replace file contents");
         String reportContent = new String(Files.readAllBytes(reportPath), UTF_8);
 
-        LOG.debug("Content for " + reportPath.toAbsolutePath());
-        LOG.debug(reportContent);
+        LOG.info("Content for " + reportPath.toAbsolutePath());
+        LOG.info(reportContent);
 
         reportContent = reportContent.replace("url=\"", "url=\"" + pathPrefix.replace("\\", "\\\\"));
 
-        LOG.debug("Modified content for " + reportPath.toAbsolutePath());
-        LOG.debug(reportContent);
-        LOG.debug("Will write above content to " + reportPath.toAbsolutePath());
+        LOG.info("Modified content for " + reportPath.toAbsolutePath());
+        LOG.info(reportContent);
+        LOG.info("Will write above content to " + reportPath.toAbsolutePath());
 
         // overwrite
         Files.write(reportPath, reportContent.getBytes(UTF_8));
 
-        LOG.debug("FINISHED OVERWRITE");
+        LOG.info("FINISHED OVERWRITE");
 
       } else if (path.contains("opencover")) {
 
@@ -272,6 +276,8 @@ public class CoverageTest {
       } else {
         LOG.warn("Could not find a known coverage provider for path " + path);
       }
+    } else {
+      LOG.info("Not running in Azure Pipelines / VSTS");
     }
     LOG.info("ncover3 - will analyze with reportPathString : " + reportPathString);
 
