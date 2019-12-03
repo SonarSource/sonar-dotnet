@@ -228,7 +228,7 @@ public class CoverageTest {
         ovewriteCoverageFileContentWithAbsolutePath(reportPathString, pathPrefix);
       } else {
         LOG.info("Path contains '*' so will rewrite the ncover file");
-        String ncoverPath = "reports" + File.separator + "ncover3.nccov"
+        String ncoverPath = "reports" + File.separator + "ncover3.nccov";
         String ncoverReportPathString = pathPrefix + ncoverPath;
         ovewriteCoverageFileContentWithAbsolutePath(ncoverReportPathString, pathPrefix);
       }
