@@ -44,6 +44,7 @@ import org.slf4j.LoggerFactory;
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getMeasure;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CoverageTest {
@@ -83,55 +84,11 @@ public class CoverageTest {
 
     LOG.info("ncover3 - will do build");
 
-    // d:\a\1\s\its\projects\CoverageTest\reports\ncover3.nccov
-
     String reportPath = "reports" + File.separator + "ncover3.nccov";
-    if (VstsUtils.isRunningUnderVsts()) {
-      String vstsSourcePath = VstsUtils.getSourcesDirectory();
-      reportPath = vstsSourcePath + File.separator +
-        "its" + File.separator +
-        "projects" + File.separator +
-        "CoverageTest" + File.separator +
-        reportPath;
-    }
 
-    LOG.info("ncover3 - will analyze with reportPath : " + reportPath);
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", reportPath);
 
-    if (VstsUtils.isRunningUnderVsts()) {
-      LOG.info("ncover3 running in VSTS  - will enumerate files");
-      String vstsSourcePath = VstsUtils.getSourcesDirectory();
-      LOG.info("TEST RUN: Tests are running under VSTS. Build dir:  " + vstsSourcePath);
-      LOG.info("TEST RUN: Will enumerate files in the build directory");
-      File baseDirectory = new File(vstsSourcePath);
-      try (Stream<Path> walk = Files.walk(Paths.get(baseDirectory.toURI()))) {
-
-        List<String> result = walk
-          .map(Path::toString)
-          .collect(Collectors.toList());
-
-        result.forEach(LOG::info);
-
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-      LOG.info("TEST RUN: Tests are running under VSTS. Temp dir:  " + temp.getRoot().getAbsolutePath());
-      LOG.info("TEST RUN: Will enumerate files in the temp directory");
-      try (Stream<Path> walk = Files.walk(Paths.get(temp.getRoot().getAbsolutePath()))) {
-
-        List<String> result = walk
-          .map(Path::toString)
-          .collect(Collectors.toList());
-
-        result.forEach(LOG::info);
-
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-    else {
-      LOG.warn("NOT RUNNING IN VSTS ncover3");
-    }
+    LogFileSystem();
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
@@ -139,6 +96,43 @@ public class CoverageTest {
 
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
     assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
+  }
+
+  private void LogFileSystem() {
+    if (VstsUtils.isRunningUnderVsts()) {
+      LOG.debug("ncover3 running in VSTS  - will enumerate files");
+      String vstsSourcePath = VstsUtils.getSourcesDirectory();
+      LOG.debug("TEST RUN: Tests are running under VSTS. Build dir:  " + vstsSourcePath);
+      LOG.debug("TEST RUN: Will enumerate files in the build directory");
+      File baseDirectory = new File(vstsSourcePath);
+      try (Stream<Path> walk = Files.walk(Paths.get(baseDirectory.toURI()))) {
+
+        List<String> result = walk
+          .map(Path::toString)
+          .collect(Collectors.toList());
+
+        result.forEach(LOG::debug);
+
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      LOG.debug("TEST RUN: Tests are running under VSTS. Temp dir:  " + temp.getRoot().getAbsolutePath());
+      LOG.debug("TEST RUN: Will enumerate files in the temp directory");
+      try (Stream<Path> walk = Files.walk(Paths.get(temp.getRoot().getAbsolutePath()))) {
+
+        List<String> result = walk
+          .map(Path::toString)
+          .collect(Collectors.toList());
+
+        result.forEach(LOG::debug);
+
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+    else {
+      LOG.debug("NOT RUNNING IN VSTS ncover3");
+    }
   }
 
   @Test
@@ -220,7 +214,7 @@ public class CoverageTest {
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
   }
 
-  private BuildResult analyzeCoverageTestProject(String... keyValues) throws IOException {
+  private BuildResult analyzeCoverageTestProject() throws IOException {
     Path projectDir = Tests.projectDir(temp, "CoverageTest");
     orchestrator.executeBuild(TestUtils.newScanner(projectDir)
       .addArgument("begin")
@@ -228,8 +222,67 @@ public class CoverageTest {
       .setProjectName("CoverageTest")
       .setProjectVersion("1.0")
       .setProperty("sonar.verbose", "true")
+      .setProfile("no_rule"));
+
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+
+    return orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+      .addArgument("end"));
+  }
+
+  private BuildResult analyzeCoverageTestProject(String scannerPropertyName, String path) throws IOException {
+    Path projectDir = Tests.projectDir(temp, "CoverageTest");
+
+    String reportPathString = path;
+    if (VstsUtils.isRunningUnderVsts()) {
+      String vstsSourcePath = VstsUtils.getSourcesDirectory();
+      // create absolute path on the VSTS file system
+      String pathPrefix = vstsSourcePath + File.separator +
+        "its" + File.separator +
+        "projects" + File.separator +
+        "CoverageTest" + File.separator;
+      reportPathString = pathPrefix + reportPathString;
+
+      // replace relative path with absolute path inside the coverage report file
+      Path reportPath = Paths.get(reportPathString);
+
+      if (path.contains("ncover3")) {
+        String reportContent = new String(Files.readAllBytes(reportPath), UTF_8);
+
+        LOG.debug("Content for " + reportPath.toAbsolutePath());
+        LOG.debug(reportContent);
+
+        reportContent = reportContent.replace("url=\"", "url=\"" + pathPrefix.replace("\\", "\\\\"));
+
+        LOG.debug("Modified content for " + reportPath.toAbsolutePath());
+        LOG.debug(reportContent);
+        LOG.debug("Will write above content to " + reportPath.toAbsolutePath());
+
+        // overwrite
+        Files.write(reportPath, reportContent.getBytes(UTF_8));
+
+        LOG.debug("FINISHED OVERWRITE");
+
+      } else if (path.contains("opencover")) {
+
+      } else if (path.contains("visualstudio")) {
+
+      } else if (path.contains("dotcover")) {
+
+      } else {
+        LOG.warn("Could not find a known coverage provider for path " + path);
+      }
+    }
+    LOG.info("ncover3 - will analyze with reportPathString : " + reportPathString);
+
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+      .addArgument("begin")
+      .setProjectKey("CoverageTest")
+      .setProjectName("CoverageTest")
+      .setProjectVersion("1.0")
+      .setProperty("sonar.verbose", "true")
       .setProfile("no_rule")
-      .setProperties(keyValues));
+      .setProperties(scannerPropertyName, path));
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 

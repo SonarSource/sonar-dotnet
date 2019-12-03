@@ -20,6 +20,7 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
+import java.nio.file.FileSystems;
 import java.util.Set;
 import java.util.function.Predicate;
 import org.sonar.api.batch.ScannerSide;
@@ -47,8 +48,10 @@ public class CoverageAggregator {
 
   public CoverageAggregator(CoverageConfiguration coverageConf, Configuration configuration, FileSystem fs) {
 
-    Predicate<String> isSupportedLanguage = absolutePath -> fs.hasFiles(fs.predicates().and(fs.predicates().hasAbsolutePath(absolutePath),
-      fs.predicates().hasLanguage(coverageConf.languageKey())));
+    Predicate<String> isSupportedLanguage = absolutePath -> fs.hasFiles(
+      fs.predicates().and(
+        fs.predicates().hasAbsolutePath(absolutePath),
+        fs.predicates().hasLanguage(coverageConf.languageKey())));
 
     this.coverageConf = coverageConf;
     this.configuration = configuration;
