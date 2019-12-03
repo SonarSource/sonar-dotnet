@@ -91,6 +91,7 @@ public class NCover3ReportParser implements CoverageParser {
       String url = xmlParserHelper.getRequiredAttribute("url");
 
       LOG.debug(String.format("NCover3 parser: analyzing the doc tag with ID '%s' and url '%s'", id, url));
+      LOG.debug(String.format("NCover3 parser: current dir is '%s'", System.getProperty("user.dir")));
 
       if (!isExcludedId(id)) {
         try {
