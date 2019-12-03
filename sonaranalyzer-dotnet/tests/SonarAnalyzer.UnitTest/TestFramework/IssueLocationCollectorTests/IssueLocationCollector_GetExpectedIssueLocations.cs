@@ -158,5 +158,42 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
             action.Should().Throw<InvalidOperationException>()
                 .WithMessage("Primary location with id [myId1] found on multiple lines: 3,5");
         }
+
+        [TestMethod]
+        public void GetExpectedIssueLocations_Invalid_Type_Format()
+        {
+            var code = @"public class Foo
+{
+    public void Bar(object o) // Is Noncompliant
+    {
+        Console.WriteLine(o);
+    }
+}";
+
+            Action action = () => new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+
+            action.Should().Throw<InvalidOperationException>()
+                .WithMessage(@"Line 2 looks like it contains comment RegEx for noncompliant code, but it is not recognized as one of the expected RegEx.
+Either remove the Noncompliant/Secondary word or precise pattern '^^' from the comment, or fix the pattern.");
+        }
+
+        [TestMethod]
+        public void GetExpectedIssueLocations_Invalid_Precise_Format()
+        {
+            var code = @"public class Foo
+{
+    public void Bar(object o) // Noncompliant
+//  issue is here   ^^^^^^
+    {
+        Console.WriteLine(o);
+    }
+}";
+
+            Action action = () => new IssueLocationCollector().GetExpectedIssueLocations(SourceText.From(code).Lines);
+
+            action.Should().Throw<InvalidOperationException>()
+                .WithMessage(@"Line 3 looks like it contains comment RegEx for noncompliant code, but it is not recognized as one of the expected RegEx.
+Either remove the Noncompliant/Secondary word or precise pattern '^^' from the comment, or fix the pattern.");
+        }
     }
 }

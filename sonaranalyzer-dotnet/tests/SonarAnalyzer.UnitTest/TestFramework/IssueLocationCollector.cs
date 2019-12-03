@@ -101,6 +101,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private const string IssueIdsPattern = @"(\s*\[(?<issueIds>.+)\])?";
         private const string MessagePattern = @"(\s*\{\{(?<message>.+)\}\})?";
 
+        private static readonly Regex RxInvalidType =
+            new Regex(CommentPattern + ".*" + IssueTypePattern, RegexOptions.Compiled);
+        private static readonly Regex RxInvalidxPreciseLocation =
+            new Regex(@"^\s*" + CommentPattern + ".*" + PrecisePositionPattern, RegexOptions.Compiled);
+
         private static readonly Regex RxPreciseLocation =
             new Regex(@"^\s*" + CommentPattern + PrecisePositionPattern + IssueTypePattern + "?" + OffsetPattern + IssueIdsPattern + MessagePattern + "$", RegexOptions.Compiled);
         private static readonly Regex RxBuildError =
@@ -110,15 +115,26 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public IList<IIssueLocation> GetExpectedIssueLocations(IEnumerable<TextLine> lines)
         {
-            var preciseLocations = lines
-                .SelectMany(GetPreciseIssueLocations)
-                .WhereNotNull()
-                .ToList();
+            var preciseLocations = new List<IssueLocation>();
+            var locations = new List<IssueLocation>();
 
-            var locations = lines
-                .SelectMany(GetIssueLocations)
-                .WhereNotNull()
-                .ToList();
+            foreach (var line in lines)
+            {
+                var newPreciseLocations = GetPreciseIssueLocations(line);
+                if (newPreciseLocations.Any())
+                {
+                    preciseLocations.AddRange(newPreciseLocations);
+                }
+                else if (GetIssueLocations(line) is IEnumerable<IssueLocation> newLocations
+                    && newLocations.Any())
+                {
+                    locations.AddRange(newLocations);
+                }
+                else
+                {
+                    EnsureNoInvalidFormat(line);
+                }
+            }
 
             var mergedLocations = MergeLocations(locations, preciseLocations);
 
@@ -292,6 +308,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             var offset = match.Groups["offset"];
             return offset.Success ? int.Parse(offset.Value) : 0;
+        }
+
+        private static void EnsureNoInvalidFormat(TextLine line)
+        {
+            var lineText = line.ToString();
+            if (RxInvalidType.IsMatch(lineText) || RxInvalidxPreciseLocation.IsMatch(lineText))
+            {
+                throw new InvalidOperationException($@"Line {line.LineNumber} looks like it contains comment RegEx for noncompliant code, but it is not recognized as one of the expected RegEx.
+Either remove the Noncompliant/Secondary word or precise pattern '^^' from the comment, or fix the pattern.");
+            }
         }
 
         private static void EnsureNoDuplicatedPrimaryIds(IList<IIssueLocation> mergedLocations)
