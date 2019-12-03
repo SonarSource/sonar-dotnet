@@ -251,21 +251,13 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static int? GetColumnStart(Match match)
         {
             var columnStart = match.Groups["columnStart"];
-            if (columnStart.Success)
-            {
-                return int.Parse(columnStart.Value) - 1;
-            }
-            return null;
+            return columnStart.Success ? (int?)int.Parse(columnStart.Value) - 1 : null;
         }
 
         private static int? GetColumnLength(Match match)
         {
             var length = match.Groups["length"];
-            if (length.Success)
-            {
-                return int.Parse(length.Value);
-            }
-            return null;
+            return length.Success ? (int?)int.Parse(length.Value) : null;
         }
 
         private bool GetIsPrimary(Match match)

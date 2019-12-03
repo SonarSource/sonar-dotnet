@@ -226,5 +226,27 @@ public class UnexpectedRemainingCurlyBrace
             action.Should().Throw<AssertFailedException>()
                   .WithMessage("Unexpected '{' or '}' found on line: 5. Either correctly use the '{{message}}' format or remove the curly braces on the line of the expected issue");
         }
+
+        [TestMethod]
+        public void ExpectedIssuesNotRaised()
+        {
+            Action action =
+                () => Verifier.VerifyCSharpAnalyzer(@"
+public class ExpectedIssuesNotRaised
+    {
+        public void Test(bool a, bool b) // Noncompliant [MyId0]
+        {
+            if (a == b) // Noncompliant
+            { } // Secondary [MyId1]
+        }
+    }",
+                    new BinaryOperationWithIdenticalExpressions());
+
+            action.Should().Throw<AssertFailedException>()
+                  .WithMessage(@"Issue(s) expected but not raised on line(s):
+Line: 4, Type: primary, Id: 'MyId0'
+Line: 6, Type: primary, Id: ''
+Line: 7, Type: secondary, Id: 'MyId1'");
+        }
     }
 }

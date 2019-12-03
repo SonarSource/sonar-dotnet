@@ -102,8 +102,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             if (expectedIssues.Count != 0)
             {
-                Execute.Assertion.FailWith($"Issue expected but not raised on line(s) " +
-                    $"{string.Join(",", expectedIssues.Select(i => i.LineNumber))}.");
+                var expectedIssuesDescription = expectedIssues.Select(i => $"{Environment.NewLine}Line: {i.LineNumber}, Type: {IssueType(i.IsPrimary)}, Id: '{i.IssueId}'");
+                Execute.Assertion.FailWith($"Issue(s) expected but not raised on line(s):{expectedIssuesDescription.JoinStr("")}");
             }
         }
 
@@ -211,7 +211,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var expectedIssue = expectedIssues
                 .Where(issueFilter)
                 .FirstOrDefault(issue => issue.LineNumber == lineNumber);
-            var issueType = isPrimary ? "primary" : "secondary";
+            var issueType = IssueType(isPrimary);
 
             if (expectedIssue == null)
             {
@@ -245,6 +245,8 @@ Actual  : '{message}'");
             expectedIssues.Remove(expectedIssue);
             return expectedIssue.IssueId;
         }
+
+        private static string IssueType(bool isPrimary) => isPrimary ? "primary" : "secondary";
 
         internal static class SuppressionHandler
         {
