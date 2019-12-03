@@ -93,9 +93,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     {
         private const string CommentPattern = "(?<comment>//|')";
         private const string PrecisePositionPattern = @"\s*(?<position>\^+)(\s+(?<invalid>\^+))*\s*";
-        private const string NoPrecisePositionPattern = @"\s*(?<!\^+\s{1})";
-        private const string IssueTypePattern = "(?<issueType>Noncompliant|Secondary)";
-        private const string ErrorTypePattern = "Error";
+        private const string NoPrecisePositionPattern = @"(?<!\s*\^+\s{1})";
+        private const string IssueTypePattern = @"\s*(?<issueType>Noncompliant|Secondary)";
+        private const string ErrorTypePattern = @"\s*Error";
         private const string OffsetPattern = @"(\s*@(?<offset>[+-]?\d+))?";
         private const string ExactColumnPattern = @"(\s*\^(?<columnStart>\d+)#(?<length>\d+))?";
         private const string IssueIdsPattern = @"(\s*\[(?<issueIds>.+)\])?";
@@ -119,7 +119,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .SelectMany(GetIssueLocations)
                 .WhereNotNull()
                 .ToList();
-
 
             var mergedLocations = MergeLocations(locations, preciseLocations);
 
