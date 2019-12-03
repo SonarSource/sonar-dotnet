@@ -249,7 +249,7 @@ public class CoverageTest {
       // replace relative path with absolute path inside the coverage report file
       Path reportPath = Paths.get(reportPathString);
 
-      if (path.contains("ncover3")) {
+      if (reportPathString.contains("ncover3")) {
         LOG.info("Will try to replace file contents");
         String reportContent = new String(Files.readAllBytes(reportPath), UTF_8);
 
@@ -267,14 +267,14 @@ public class CoverageTest {
 
         LOG.info("FINISHED OVERWRITE");
 
-      } else if (path.contains("opencover")) {
+      } else if (reportPathString.contains("opencover")) {
 
-      } else if (path.contains("visualstudio")) {
+      } else if (reportPathString.contains("visualstudio")) {
 
-      } else if (path.contains("dotcover")) {
+      } else if (reportPathString.contains("dotcover")) {
 
       } else {
-        LOG.warn("Could not find a known coverage provider for path " + path);
+        LOG.warn("Could not find a known coverage provider for path " + reportPathString);
       }
     } else {
       LOG.info("Not running in Azure Pipelines / VSTS");
@@ -288,7 +288,7 @@ public class CoverageTest {
       .setProjectVersion("1.0")
       .setProperty("sonar.verbose", "true")
       .setProfile("no_rule")
-      .setProperties(scannerPropertyName, path));
+      .setProperties(scannerPropertyName, reportPathString));
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
