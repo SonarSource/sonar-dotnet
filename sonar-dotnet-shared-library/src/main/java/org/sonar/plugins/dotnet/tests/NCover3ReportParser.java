@@ -77,6 +77,8 @@ public class NCover3ReportParser implements CoverageParser {
       String id = xmlParserHelper.getRequiredAttribute("id");
       String url = xmlParserHelper.getRequiredAttribute("url");
 
+      LOG.debug(String.format("NCover3 parser: analyzing the doc tag with ID '%s' and url '%s'", id, url));
+
       if (!isExcludedId(id)) {
         try {
           documents.put(id, new File(url).getCanonicalPath());
@@ -84,6 +86,8 @@ public class NCover3ReportParser implements CoverageParser {
           LOG.debug("Skipping the import of NCover3 code coverage for the invalid file path: " + url
             + " at line " + xmlParserHelper.stream().getLocation().getLineNumber(), e);
         }
+      } else {
+        LOG.debug(String.format("NCover3 parser: id '%s' is excluded, so url '%s' was not added", id, url));
       }
     }
 
@@ -96,11 +100,18 @@ public class NCover3ReportParser implements CoverageParser {
       int line = xmlParserHelper.getRequiredIntAttribute("l");
       int vc = xmlParserHelper.getRequiredIntAttribute("vc");
 
+      LOG.debug("NCover3 parser: analyzing the doc '" + doc + "'");
+
       if (documents.containsKey(doc) && !isExcludedLine(line)) {
         String path = documents.get(doc);
+        LOG.debug("NCover3 parser: analyzing the doc '" + doc + "' with the path '" + path + "'");
         if (isSupportedLanguage.test(path)) {
           coverage.addHits(path, line, vc);
+        } else {
+          LOG.debug("NCover3 parser: the doc '" + doc + "' has a path '" + path + "' with a not-supported language");
         }
+      } else {
+        LOG.debug("NCover3 parser: the doc '" + doc + "' is either not contained in documents, or the line " + line + " is excluded");
       }
     }
 
