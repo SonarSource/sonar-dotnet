@@ -233,16 +233,15 @@ public class CoverageTest {
   private BuildResult analyzeCoverageTestProject(String scannerPropertyName, String path) throws IOException {
     Path projectDir = Tests.projectDir(temp, "CoverageTest");
 
+    LOG.info(String.format("Coverage Test: project dir is '%s'", projectDir));
+
     String reportPathString = path;
     if (VstsUtils.isRunningUnderVsts()) {
 
       LOG.info("We are running under AzurePipelines / VSTS !");
 
-      String vstsSourcePath = VstsUtils.getSourcesDirectory();
       // create absolute path on the VSTS file system
-      String pathPrefix = vstsSourcePath + File.separator +
-        "its" + File.separator +
-        "projects" + File.separator +
+      String pathPrefix = temp.getRoot().getAbsolutePath() + File.separator +
         "CoverageTest" + File.separator;
       reportPathString = pathPrefix + reportPathString;
 
@@ -288,12 +287,14 @@ public class CoverageTest {
       .setProjectVersion("1.0")
       .setProperty("sonar.verbose", "true")
       .setProfile("no_rule")
+      .setProjectDir(projectDir.toFile())
       .setProperties(scannerPropertyName, reportPathString));
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
     return orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("end"));
+      .addArgument("end")
+      .setProjectDir(projectDir.toFile()));
   }
 
 }
