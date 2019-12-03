@@ -424,14 +424,19 @@ namespace SonarAnalyzer.Helpers
                     SyntaxFactory.IdentifierName(b)),
                 SyntaxFactory.IdentifierName(c));
 
-        public static ExpressionSyntax ArgumentValueForParameter(SemanticModel semanticModel, ArgumentListSyntax argumentList, string parameterName)
+        /// <summary>
+        /// Returns argument expressions for given parameter.
+        ///
+        /// There can be zero, one or more results based on parameter type (Optional or ParamArray/params).
+        /// </summary>
+        public static ImmutableArray<ExpressionSyntax> ArgumentValuesForParameter(SemanticModel semanticModel, ArgumentListSyntax argumentList, string parameterName)
         {
             var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, semanticModel);
-            if (methodParameterLookup.TryGetArgumentSyntax(parameterName, out var argumentSyntax))
+            if (methodParameterLookup.TryGetSyntax(parameterName, out var argumentSyntax))
             {
-                return argumentSyntax.Expression;
+                return argumentSyntax.Select(x => x.Expression).ToImmutableArray();
             }
-            return null;
+            return ImmutableArray<ExpressionSyntax>.Empty;
         }
     }
 }

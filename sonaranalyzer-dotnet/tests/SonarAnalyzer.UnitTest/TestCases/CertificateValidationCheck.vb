@@ -17,6 +17,8 @@ Namespace Tests.TestCases
             'VB Specific syntax with return variable, codepaths are not inspected
             CreateRQ.ServerCertificateValidationCallback = AddressOf FalseNegativeVBSpecific
             CreateRQ.ServerCertificateValidationCallback = FindFalseNegativeVBSpecific()
+            'Specific cases
+            CreateRQ.ServerCertificateValidationCallback = AddressOf FalseNegativeException
         End Sub
 
         Private Sub DirectAddHandlers()
@@ -65,14 +67,16 @@ Namespace Tests.TestCases
         Private Sub MultipleHandlers()
             ServicePointManager.ServerCertificateValidationCallback = AddressOf CompliantValidation
             ServicePointManager.ServerCertificateValidationCallback = AddressOf CompliantValidationPositiveA
-            ServicePointManager.ServerCertificateValidationCallback = AddressOf InvalidValidation                          'Noncompliant
+            ServicePointManager.ServerCertificateValidationCallback = AddressOf InvalidValidation                       'Noncompliant
             ServicePointManager.ServerCertificateValidationCallback = AddressOf CompliantValidationPositiveB
             ServicePointManager.ServerCertificateValidationCallback = AddressOf CompliantValidationNegative
-            ServicePointManager.ServerCertificateValidationCallback = AddressOf AdvInvalidTry                              'Noncompliant
-            ServicePointManager.ServerCertificateValidationCallback = AddressOf AdvInvalidWithTryObstacles                 'Noncompliant
+            ServicePointManager.ServerCertificateValidationCallback = AddressOf AdvInvalidTry                           'Noncompliant
+            ServicePointManager.ServerCertificateValidationCallback = AddressOf AdvInvalidWithTryObstacles              'Noncompliant
             ServicePointManager.ServerCertificateValidationCallback = AddressOf AdvCompliantWithTryObstacles
-            ServicePointManager.ServerCertificateValidationCallback = AddressOf AdvInvalidWithObstacles                    'Noncompliant
+            ServicePointManager.ServerCertificateValidationCallback = AddressOf AdvInvalidWithObstacles                 'Noncompliant
             ServicePointManager.ServerCertificateValidationCallback = AddressOf AdvCompliantWithObstacles
+            ServicePointManager.ServerCertificateValidationCallback = AddressOf AdvCompliantWithException
+            ServicePointManager.ServerCertificateValidationCallback = AddressOf AdvCompliantWithExceptionAndRethrow
         End Sub
 
         Private Sub GenericHandlerSignature()
@@ -324,6 +328,24 @@ Namespace Tests.TestCases
             Return IsValid(Certificate)
         End Function
 
+        Private Function AdvCompliantWithException(Sender As Object, Certificate As X509Certificate, Chain As X509Chain, PolicyErrors As SslPolicyErrors) As Boolean
+            If Certificate.Subject <> "test" Then Throw New InvalidOperationException("You shall not pass!")
+            Return True ' Compliant, uncaught exception Is thrown above
+        End Function
+
+        Private Function AdvCompliantWithExceptionAndRethrow(Sender As Object, Certificate As X509Certificate, Chain As X509Chain, PolicyErrors As SslPolicyErrors) As Boolean
+            Try
+                If Certificate.Subject <> "test" Then
+                    Throw New InvalidOperationException("You shall not pass!")
+                End If
+                Return True     'Compliant due to Throw logic
+            Catch
+                'Log
+                Throw
+            End Try
+            Return True         'Compliant due to Throw logic
+        End Function
+
 #End Region
 
 #Region "Find Validators"
@@ -385,6 +407,16 @@ Namespace Tests.TestCases
         Private Function FindFalseNegativeVBSpecific() As RemoteCertificateValidationCallback
             FindFalseNegativeVBSpecific = Nothing
             FindFalseNegativeVBSpecific = Function(sender, certificate, chain, SslPolicyErrors) True    'False negative, all assignments are considered as returns
+        End Function
+
+        Private Function FalseNegativeException(Sender As Object, Certificate As X509Certificate, Chain As X509Chain, PolicyErrors As SslPolicyErrors) As Boolean
+            Try
+                If Certificate.Subject <> "test" Then Throw New InvalidOperationException("You shall not pass! But you will anyway.")
+                Return True 'False negative
+            Catch   'All exceptions are cought, even those throw from inner DoValidation(crt).. helpers
+                'Log, no rethrow
+            End Try
+            Return True     'False negative
         End Function
 
 #End Region

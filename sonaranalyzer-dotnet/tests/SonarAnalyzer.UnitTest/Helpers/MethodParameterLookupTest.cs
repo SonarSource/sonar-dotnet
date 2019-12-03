@@ -20,7 +20,7 @@
 
 using System;
 using System.Linq;
-using System.Reflection;
+using System.Collections;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -35,7 +35,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class MethodParameterLookupTest
     {
-
 
         [TestMethod]
         public void TestMethodParameterLookup_CS()
@@ -91,11 +90,14 @@ namespace Test
             c.CheckExpectedParameterMappings(4, "WithOptional", new { a = 1, opt = "Ipsum" });
             c.CheckExpectedParameterMappings(5, "WithOptional", new { a = 1, opt = "Ipsum" });
             c.CheckExpectedParameterMappings(6, "WithParams", new { });
-
-            //ToDo: TryGetSymbolParameter doesn't work for Params. Test look like this
-            //c.Inspect(7, "WithParams", new { arr = new[] { 1, 2, 3 } });
+            c.CheckExpectedParameterMappings(7, "WithParams", new { arr = new[] { 1, 2, 3 } });
 
             c.MainInvocations.Length.Should().Be(8); //Self-Test of this test. If new Invocation is added to the Main(), this number has to be updated and test should be written for that case.
+
+            //TryGetNonParamsSyntax throw scenario
+            var lookupThrow = c.CreateLookup(6, "WithParams");
+            Action actionThrow = () => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument);
+            actionThrow.Should().Throw<InvalidOperationException>();
         }
 
         [TestMethod]
@@ -139,10 +141,14 @@ End Module
             c.CheckExpectedParameterMappings(2, "WithOptional", new { a = 1 });
             c.CheckExpectedParameterMappings(3, "WithOptional", new { a = 1, opt = "Ipsum" });
             c.CheckExpectedParameterMappings(4, "WithParams", new { });
-            //ToDo: TryGetSymbolParameter doesn't work for ParamArray. Test look like this
-            //c.Inspect(5, "WithParams", new { arr = new[] { 1, 2, 3 } });
-
+            c.CheckExpectedParameterMappings(5, "WithParams", new { arr = new[] { 1, 2, 3 } });
+            
             c.MainInvocations.Length.Should().Be(6); //Self-Test of this test. If new Invocation is added to the Main(), this number has to be updated and test should be written for that case.
+
+            //TryGetNonParamsSyntax throw scenario
+            var lookupThrow = c.CreateLookup(4, "WithParams");
+            Action actionThrow = () => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument);
+            actionThrow.Should().Throw<InvalidOperationException>();
         }
 
         private abstract class InspectionBase<TArgumentSyntax, TInvocationSyntax>
@@ -171,42 +177,61 @@ End Module
                 this.SpecialParameter = (Compiler.SemanticModel.GetSymbolInfo(specialInvocation).Symbol as IMethodSymbol).Parameters.Single();
             }
 
-            public void CheckExpectedParameterMappings(int invocationIndex, string expectedMethod, object expectedArguments)
+            public AbstractMethodParameterLookup<TArgumentSyntax> CreateLookup(int invocationIndex, string expectedMethod)
             {
                 var invocation = MainInvocations[invocationIndex];
                 var method = Compiler.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
                 method.Name.Should().Be(expectedMethod);
-                var lookup = CreateLookup(invocation, method);
-                InspectTryGetSymbolParametr(lookup, expectedArguments, method);
-                InspectTryGetParameterSymbol(lookup, expectedArguments, GetArguments(invocation));
+                return CreateLookup(invocation, method);
             }
 
-            private void InspectTryGetSymbolParametr(AbstractMethodParameterLookup<TArgumentSyntax> lookup, object expectedArguments, IMethodSymbol method)
+            public void CheckExpectedParameterMappings(int invocationIndex, string expectedMethod, object expectedArguments)
             {
-                lookup.TryGetSymbolParameter(SpecialParameter, out var symbol).Should().Be(false);
+                var lookup = CreateLookup(invocationIndex, expectedMethod);
+                InspectTryGetSyntax(lookup, expectedArguments, lookup.MethodSymbol);
+                InspectTryGetSymbol(lookup, expectedArguments, GetArguments(MainInvocations[invocationIndex]));
+            }
+
+            private void InspectTryGetSyntax
+                (AbstractMethodParameterLookup<TArgumentSyntax> lookup, object expectedArguments, IMethodSymbol method)
+            {
+                lookup.TryGetSyntax(SpecialParameter, out var symbol).Should().Be(false);
 
                 foreach (var parameter in method.Parameters)
                 {
-                    if (lookup.TryGetSymbolParameter(parameter, out var argument))
+                    if (parameter.IsParams && lookup.TryGetSyntax(parameter, out var argumentList))
+                    {
+                        argumentList.Select(x => ExtractArgumentValue(x)).Should().BeEquivalentTo((IEnumerable)ExtractExpectedValue(expectedArguments, parameter.Name));
+                    }
+                    else if (!parameter.IsParams && lookup.TryGetNonParamsSyntax(parameter, out var argument))
                     {
                         ExtractArgumentValue(argument).Should().Be(ExtractExpectedValue(expectedArguments, parameter.Name));
                     }
                     else if (!parameter.IsOptional && !parameter.IsParams)
                     {
-                        Assert.Fail($"TryGetSymbolParametr missing {parameter.Name}");
+                        Assert.Fail($"TryGetSyntax missing {parameter.Name}");
                     } //Else it's OK
                 }
             }
 
-            private void InspectTryGetParameterSymbol(AbstractMethodParameterLookup<TArgumentSyntax> lookup, object expectedArguments, TArgumentSyntax[] arguments)
+            private void InspectTryGetSymbol(AbstractMethodParameterLookup<TArgumentSyntax> lookup, object expectedArguments, TArgumentSyntax[] arguments)
             {
-                lookup.TryGetParameterSymbol(SpecialArgument, out var parameter).Should().Be(false);
+                lookup.TryGetSymbol(SpecialArgument, out var parameter).Should().Be(false);
 
                 foreach (var argument in arguments)
                 {
-                    if (lookup.TryGetParameterSymbol(argument, out var symbol))
+                    if (lookup.TryGetSymbol(argument, out var symbol))
                     {
-                        ExtractArgumentValue(argument).Should().Be(ExtractExpectedValue(expectedArguments, symbol.Name));
+                        var value = ExtractArgumentValue(argument);
+                        var expected = ExtractExpectedValue(expectedArguments, symbol.Name);
+                        if (symbol.IsParams)
+                        {
+                            ((IEnumerable)expected).Should().Contain(value);    //Expected contains all values {1, 2, 3} for ParamArray/params, but foreach is probing one at a time
+                        }
+                        else
+                        {
+                            value.Should().Be(expected);
+                        }
                     }
                     else
                     {

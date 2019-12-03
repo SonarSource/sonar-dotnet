@@ -108,19 +108,20 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return current;
         }
 
-        protected override ExpressionSyntax[] FindReturnExpressions(InspectionContext c, SyntaxNode block)
+        protected override ExpressionSyntax[] FindReturnAndThrowExpressions(InspectionContext c, SyntaxNode block)
         {
             //Return value set by assignment to function variable/value
             var assignments = block.DescendantNodes().OfType<AssignmentStatementSyntax>().Where(x => c.Context.SemanticModel.GetSymbolInfo(x.Left).Symbol is ILocalSymbol local && local.IsFunctionValue);
-            //And normal Return statements
+            //And normal Return statements and throws
             return block.DescendantNodes().OfType<ReturnStatementSyntax>().Select(x => x.Expression)
+                .Concat(block.DescendantNodes().OfType<ThrowStatementSyntax>().Select(x => x.Expression))   //Throw statements #2825. x.Expression can be NULL for standalone Throw and we need that one as well.
                 .Concat(assignments.Select(x => x.Right))
                 .ToArray();
         }
 
         protected override bool IsTrueLiteral(ExpressionSyntax expression)
         {
-            return expression.RemoveParentheses().Kind() == SyntaxKind.TrueLiteralExpression;
+            return expression?.RemoveParentheses().Kind() == SyntaxKind.TrueLiteralExpression;
         }
 
         protected override string IdentifierText(SyntaxNode node)

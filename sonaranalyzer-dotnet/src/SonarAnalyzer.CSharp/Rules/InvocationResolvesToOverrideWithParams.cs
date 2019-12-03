@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var allParameterMatches = new List<IParameterSymbol>();
             foreach (var argument in argumentList.Arguments)
             {
-                if (!methodParameterLookup.TryGetParameterSymbol(argument, out var parameter))
+                if (!methodParameterLookup.TryGetSymbol(argument, out var parameter))
                 {
                     return false;
                 }
@@ -147,7 +147,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var argument = argumentList.Arguments[i];
                 var argumentType = argumentTypes[i];
-                if (!methodParameterLookup.TryGetParameterSymbol(argument, out var parameter))
+                if (!methodParameterLookup.TryGetSymbol(argument, out var parameter))
                 {
                     return false;
                 }

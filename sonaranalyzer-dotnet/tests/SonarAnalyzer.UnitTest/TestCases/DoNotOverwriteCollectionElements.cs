@@ -39,11 +39,18 @@ namespace Tests.Diagnostics
             list[0] = 42; // Noncompliant
         }
 
-        void ListAddFP(List<int> list)
+        void ListAdd(List<int> list)
         {
-            // FP - List.Add method should not raise any issue when used with same elements
-            list.Add(42); // Secondary
-            list.Add(42); // Noncompliant
+            // #2674 List.Add method should not raise any issue when used with same elements
+            list.Add(42);
+            list.Add(42);
+        }
+
+        void ICollectionAdd(ICollection<int> collection)
+        {
+            // #2674 List.Add method should not raise any issue when used with same elements
+            collection.Add(42);
+            collection.Add(42);
         }
 
         void SameIndexOnArray(CustomIndexerOneArg obj)

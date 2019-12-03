@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -31,28 +30,18 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class ParameterAssignedTo : ParameterAssignedToBase<SyntaxKind, AssignmentStatementSyntax>
+    public sealed class ParameterAssignedTo : ParameterAssignedToBase<SyntaxKind, AssignmentStatementSyntax, IdentifierNameSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-           DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public ParameterAssignedTo() : base(RspecStrings.ResourceManager) { }
 
-        private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(
-            SyntaxKind.AddAssignmentStatement,
-            SyntaxKind.SimpleAssignmentStatement,
-            SyntaxKind.SubtractAssignmentStatement,
-            SyntaxKind.MultiplyAssignmentStatement,
-            SyntaxKind.DivideAssignmentStatement,
-            SyntaxKind.MidAssignmentStatement,
-            SyntaxKind.ConcatenateAssignmentStatement,
-            SyntaxKind.ExponentiateAssignmentStatement,
-            SyntaxKind.IntegerDivideAssignmentStatement,
-            SyntaxKind.LeftShiftAssignmentStatement,
-            SyntaxKind.RightShiftAssignmentStatement
-            );
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
 
-        public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => kindsOfInterest;
+        protected override SyntaxKind SyntaxKindOfInterest => SyntaxKind.SimpleAssignmentStatement;
+
+        protected override SyntaxNode AssignmentLeft(AssignmentStatementSyntax assignment) => assignment.Left;
+
+        protected override SyntaxNode AssignmentRight(AssignmentStatementSyntax assignment) => assignment.Right;
 
         protected override bool IsAssignmentToCatchVariable(ISymbol symbol, SyntaxNode node)
         {
@@ -79,18 +68,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override bool IsAssignmentToParameter(ISymbol symbol)
         {
             var parameterSymbol = symbol as IParameterSymbol;
-
             return parameterSymbol?.RefKind == RefKind.None;
         }
 
-        protected override SyntaxNode GetAssignedNode(AssignmentStatementSyntax assignment) => assignment.Left;
 
-        protected override bool IsReadBefore(SemanticModel semanticModel, ISymbol parameterSymbol, AssignmentStatementSyntax assignment)
-        {
-            // Implement logic https://jira.sonarsource.com/browse/SONARVB-236
-            return false;
-        }
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.VisualBasicGeneratedCodeRecognizer.Instance;
     }
 }
