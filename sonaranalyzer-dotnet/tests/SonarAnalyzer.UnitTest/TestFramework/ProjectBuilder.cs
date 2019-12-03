@@ -122,7 +122,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
                 if (removeAnalysisComments)
                 {
-                    lines = lines.Where(IssueLocationCollector.IsNotIssueLocationLine)
+                    lines = lines.Where(line => !IssueLocationCollector.RxPreciseLocation.IsMatch(line))
                         .Select(ReplaceNonCompliantComment)
                         .ToArray();
                 }

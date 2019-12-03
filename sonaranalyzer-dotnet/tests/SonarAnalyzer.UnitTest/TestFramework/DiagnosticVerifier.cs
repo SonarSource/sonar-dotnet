@@ -215,7 +215,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             if (expectedIssue == null)
             {
-                var issueId = primaryIssueId != null ? $" [{ primaryIssueId}]" : "";
+                var issueId = primaryIssueId == null ?  "" : $" [{ primaryIssueId}]";
                 var seeOutputMessage = $"{Environment.NewLine}See output to see all actual diagnostics raised on the file";
                 var exceptionMessage = string.IsNullOrEmpty(extraInfo) ? $"Unexpected {issueType} issue{issueId} on line {lineNumber} with message '{message}'.{seeOutputMessage}" : extraInfo;
                 throw new UnexpectedDiagnosticException(location, exceptionMessage);
@@ -223,7 +223,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             if (expectedIssue.Message != null && expectedIssue.Message != message)
             {
-                throw new UnexpectedDiagnosticException(location, $@"Expected {issueType} message on line {lineNumber} does not match actual message.
+                throw new UnexpectedDiagnosticException(location,
+$@"Expected {issueType} message on line {lineNumber} does not match actual message.
 Expected: '{expectedIssue.Message}'
 Actual  : '{message}'");
             }

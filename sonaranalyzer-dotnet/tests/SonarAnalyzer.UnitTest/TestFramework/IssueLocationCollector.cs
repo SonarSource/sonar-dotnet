@@ -92,7 +92,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     public class IssueLocationCollector
     {
         private const string CommentPattern = "(?<comment>//|')";
-        private const string PrecisePositionPattern = @"\s*(?<position>\^+)(\s+(?<invalid>\^+))*\s*";
+        private const string PrecisePositionPattern = @"\s*(?<position>\^+)(\s+(?<invalid>\^+))*";
         private const string NoPrecisePositionPattern = @"(?<!\s*\^+\s{1})";
         private const string IssueTypePattern = @"\s*(?<issueType>Noncompliant|Secondary)";
         private const string ErrorTypePattern = @"\s*Error";
@@ -101,17 +101,16 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private const string IssueIdsPattern = @"(\s*\[(?<issueIds>.+)\])?";
         private const string MessagePattern = @"(\s*\{\{(?<message>.+)\}\})?";
 
+        internal static readonly Regex RxIssue =
+           new Regex(CommentPattern + NoPrecisePositionPattern + IssueTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern + MessagePattern, RegexOptions.Compiled);
+        internal static readonly Regex RxPreciseLocation =
+            new Regex(@"^\s*" + CommentPattern + PrecisePositionPattern + IssueTypePattern + "?" + OffsetPattern + IssueIdsPattern + MessagePattern + "$", RegexOptions.Compiled);
+        private static readonly Regex RxBuildError =
+            new Regex(CommentPattern + ErrorTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern, RegexOptions.Compiled);
         private static readonly Regex RxInvalidType =
             new Regex(CommentPattern + ".*" + IssueTypePattern, RegexOptions.Compiled);
         private static readonly Regex RxInvalidxPreciseLocation =
             new Regex(@"^\s*" + CommentPattern + ".*" + PrecisePositionPattern, RegexOptions.Compiled);
-
-        private static readonly Regex RxPreciseLocation =
-            new Regex(@"^\s*" + CommentPattern + PrecisePositionPattern + IssueTypePattern + "?" + OffsetPattern + IssueIdsPattern + MessagePattern + "$", RegexOptions.Compiled);
-        private static readonly Regex RxBuildError =
-            new Regex(CommentPattern + NoPrecisePositionPattern + ErrorTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern, RegexOptions.Compiled);
-        internal static readonly Regex RxIssue =
-                   new Regex(CommentPattern + NoPrecisePositionPattern + IssueTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern + MessagePattern, RegexOptions.Compiled);
 
         public IList<IIssueLocation> GetExpectedIssueLocations(IEnumerable<TextLine> lines)
         {
@@ -136,26 +135,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 }
             }
 
-            var mergedLocations = MergeLocations(locations, preciseLocations);
-
-            EnsureNoDuplicatedPrimaryIds(mergedLocations);
-
-            return mergedLocations;
+            return EnsureNoDuplicatedPrimaryIds(MergeLocations(locations, preciseLocations));
         }
 
-        public static bool IsNotIssueLocationLine(string line)
+        internal IEnumerable<IIssueLocation> GetExpectedBuildErrors(IEnumerable<TextLine> lines)
         {
-            return !RxPreciseLocation.IsMatch(line);
-        }
-
-        internal IList<IIssueLocation> GetExpectedBuildErrors(IEnumerable<TextLine> lines)
-        {
-            return lines?.SelectMany(GetBuildErrorsLocations)
-                .WhereNotNull()
-                .ToList()
-                .Cast<IIssueLocation>()
-                .ToList()
-                ?? Enumerable.Empty<IIssueLocation>().ToList();
+            return lines?.SelectMany(GetBuildErrorsLocations).OfType<IIssueLocation>() ?? Enumerable.Empty<IIssueLocation>();
         }
 
         internal /*for testing*/ IList<IIssueLocation> MergeLocations(IEnumerable<IssueLocation> locations, IEnumerable<IssueLocation> preciseLocations)
@@ -166,7 +151,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             {
                 var preciseLocationsOnSameLine = preciseLocations.Where(l => l.LineNumber == location.LineNumber);
 
-                EnsureOnlyOneElement(preciseLocationsOnSameLine);
+                if (preciseLocationsOnSameLine.Count() > 1)
+                {
+                    ThrowUnexpectedPreciseLocationCount(preciseLocationsOnSameLine.Count(), preciseLocationsOnSameLine.First().LineNumber);
+                }
 
                 var preciseLocation = preciseLocationsOnSameLine.SingleOrDefault();
                 if (preciseLocation != null)
@@ -200,9 +188,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         internal /*for testing*/ IEnumerable<IssueLocation> GetPreciseIssueLocations(TextLine line)
         {
-            var lineText = line.ToString();
-
-            var match = RxPreciseLocation.Match(lineText);
+            var match = RxPreciseLocation.Match(line.ToString());
             if (match.Success)
             {
                 EnsureNoRemainingCurlyBrace(line, match);
@@ -213,9 +199,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private IEnumerable<IssueLocation> GetLocations(TextLine line, Regex rx)
         {
-            var lineText = line.ToString();
-
-            var match = rx.Match(lineText);
+            var match = rx.Match(line.ToString());
             if (match.Success)
             {
                 EnsureNoRemainingCurlyBrace(line, match);
@@ -287,6 +271,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             return message.Success ? message.Value : null;
         }
 
+        private int GetOffset(Match match)
+        {
+            var offset = match.Groups["offset"];
+            return offset.Success ? int.Parse(offset.Value) : 0;
+        }
+
         private IEnumerable<string> GetIssueIds(Match match)
         {
             var issueIds = match.Groups["issueIds"];
@@ -300,14 +290,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 .Split(',')
                 .Select(s => s.Trim())
                 .Where(s => !string.IsNullOrEmpty(s))
-                .OrderBy(s => s)
-                .Select(s => s.Split('.').First());
-        }
-
-        private int GetOffset(Match match)
-        {
-            var offset = match.Groups["offset"];
-            return offset.Success ? int.Parse(offset.Value) : 0;
+                .OrderBy(s => s);
         }
 
         private static void EnsureNoInvalidFormat(TextLine line)
@@ -315,31 +298,23 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var lineText = line.ToString();
             if (RxInvalidType.IsMatch(lineText) || RxInvalidxPreciseLocation.IsMatch(lineText))
             {
-                throw new InvalidOperationException($@"Line {line.LineNumber} looks like it contains comment RegEx for noncompliant code, but it is not recognized as one of the expected RegEx.
+                throw new InvalidOperationException($@"Line {line.LineNumber} looks like it contains comment for noncompliant code, but it is not recognized as one of the expected pattern.
 Either remove the Noncompliant/Secondary word or precise pattern '^^' from the comment, or fix the pattern.");
             }
         }
 
-        private static void EnsureNoDuplicatedPrimaryIds(IList<IIssueLocation> mergedLocations)
+        private static IList<IIssueLocation> EnsureNoDuplicatedPrimaryIds(IList<IIssueLocation> mergedLocations)
         {
             var duplicateLocationsIds = mergedLocations
-                            .Where(location => location.IsPrimary)
+                            .Where(x => x.IsPrimary && x.IssueId != null)
                             .GroupBy(x => x.IssueId)
-                            .Where(x => x.Key != null)
                             .FirstOrDefault(group => group.Count() > 1);
             if (duplicateLocationsIds != null)
             {
-                var duplicatedIdLines = duplicateLocationsIds.Select(issueLocation => issueLocation.LineNumber).JoinStr(",");
+                var duplicatedIdLines = duplicateLocationsIds.Select(issueLocation => issueLocation.LineNumber).JoinStr(", ");
                 throw new InvalidOperationException($"Primary location with id [{duplicateLocationsIds.Key}] found on multiple lines: {duplicatedIdLines}");
             }
-        }
-
-        private static void EnsureOnlyOneElement(IEnumerable<IssueLocation> preciseLocationsOnSameLine)
-        {
-            if (preciseLocationsOnSameLine.Skip(1).Any())
-            {
-                ThrowUnexpectedPreciseLocationCount(preciseLocationsOnSameLine.Count(), preciseLocationsOnSameLine.First().LineNumber);
-            }
+            return mergedLocations;
         }
 
         private static void EnsureNoRemainingCurlyBrace(TextLine line, Match match)

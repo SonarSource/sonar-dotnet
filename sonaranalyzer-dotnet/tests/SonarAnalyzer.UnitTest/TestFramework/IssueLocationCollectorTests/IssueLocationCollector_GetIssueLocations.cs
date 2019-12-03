@@ -178,17 +178,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         {
             var line = GetLine(2, @"if (a > b)
 {
-    Console.WriteLine(a); //Noncompliant [last.2,last.1,flow1,flow2]
+    Console.WriteLine(a); //Noncompliant [last,flow1,flow2]
 }");
             var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
 
-            result.Should().HaveCount(4);
+            result.Should().HaveCount(3);
 
             VerifyIssueLocations(result,
-                expectedIsPrimary: new[] { true, true, true, true },
-                expectedLineNumbers: new[] { 3, 3, 3, 3 },
-                expectedMessages: new string[] { null, null, null, null },
-                expectedIssueIds: new[] { "flow1", "flow2", "last", "last" });
+                expectedIsPrimary: new[] { true, true, true },
+                expectedLineNumbers: new[] { 3, 3, 3 },
+                expectedMessages: new string[] { null, null, null },
+                expectedIssueIds: new[] { "flow1", "flow2", "last" });
         }
 
         [TestMethod]
