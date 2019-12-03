@@ -146,7 +146,7 @@ public class CoverageTest {
 
       // create absolute path on the VSTS file system
       String pathPrefix = temp.getRoot().getAbsolutePath() + File.separator +
-        "CoverageTest" + File.separator;
+        "NoCoverageOnTests" + File.separator;
       reportPath = pathPrefix + reportPath;
       ovewriteCoverageFileContentWithAbsolutePath(reportPath, pathPrefix);
     } else {
@@ -261,7 +261,8 @@ public class CoverageTest {
     Path reportPath = Paths.get(reportPathString);
     String reportContent = new String(Files.readAllBytes(reportPath), UTF_8);
 
-    if (reportPathString.contains("ncover3")) {
+    // 'nccov' is used by the ncover test and the wildcard test
+    if (reportPathString.contains("nccov")) {
       reportContent = addPathPrefix(reportContent, "url=\"", pathPrefix);
     } else if (reportPathString.contains("opencover")) {
       reportContent = addPathPrefix(reportContent, "fullPath=\"", pathPrefix);
