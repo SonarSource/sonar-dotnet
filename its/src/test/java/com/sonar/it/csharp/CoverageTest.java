@@ -64,7 +64,6 @@ public class CoverageTest {
   }
 
   @Test
-  @Ignore // FIXME
   public void should_not_import_coverage_without_report() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject();
 
@@ -81,14 +80,9 @@ public class CoverageTest {
 
   @Test
   public void ncover3() throws Exception {
-
-    LOG.info("ncover3 - will do build");
-
     String reportPath = "reports" + File.separator + "ncover3.nccov";
 
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", reportPath);
-
-    LogFileSystem();
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
@@ -96,6 +90,164 @@ public class CoverageTest {
 
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
     assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
+  }
+
+  @Test
+  public void open_cover() throws Exception {
+    String reportPath = "reports" + File.separator + "opencover.xml";
+
+    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.opencover.reportsPaths", reportPath);
+
+    assertThat(buildResult.getLogs()).contains(
+      "Sensor C# Tests Coverage Report Import",
+      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
+
+    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
+    assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(0);
+  }
+
+  @Test
+  public void dotcover() throws Exception {
+    String reportPath = "reports" + File.separator + "dotcover.html";
+
+    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.dotcover.reportsPaths", reportPath);
+
+    assertThat(buildResult.getLogs()).contains(
+      "Sensor C# Tests Coverage Report Import",
+      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
+
+    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
+    assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
+  }
+
+  @Test
+  public void visual_studio() throws Exception {
+    String reportPath = "reports" + File.separator + "visualstudio.coveragexml";
+
+    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.vscoveragexml.reportsPaths", reportPath);
+
+    assertThat(buildResult.getLogs()).contains(
+      "Sensor C# Tests Coverage Report Import",
+      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
+
+    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
+    assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
+  }
+
+  @Test
+  public void no_coverage_on_tests() throws Exception {
+    String reportPath = "reports" + File.separator + "visualstudio.coveragexml";
+
+    Path projectDir = Tests.projectDir(temp, "NoCoverageOnTests");
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+      .addArgument("begin")
+      .setProjectKey("NoCoverageOnTests")
+      .setProjectVersion("1.0")
+      .setProfile("no_rule")
+      .setProperty("sonar.cs.vscoveragexml.reportsPaths", reportPath));
+
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+
+    BuildResult buildResult = orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+      .addArgument("end"));
+
+    assertThat(buildResult.getLogs()).contains(
+      "Sensor C# Tests Coverage Report Import",
+      "Coverage Report Statistics: 1 files, 0 main files, 0 main files with coverage, 1 test files, 0 project excluded files, 0 other language files.",
+      "WARN: The Code Coverage report doesn't contain any coverage data for the included files.");
+
+    assertThat(getMeasureAsInt("NoCoverageOnTests", "files")).isEqualTo(2); // Only main files are counted
+    String unitTestComponentId = TestUtils.hasModules(ORCHESTRATOR) ? "NoCoverageOnTests:NoCoverageOnTests:8A3B715A-6E95-4BC1-93C6-A59E9D3F5D5C:UnitTest1.cs" : "NoCoverageOnTests:MyLib.Tests/UnitTest1.cs";
+    assertThat(Tests.getComponent(unitTestComponentId)).isNotNull();
+    assertThat(getMeasureAsInt("NoCoverageOnTests", "lines_to_cover")).isNull();
+    assertThat(getMeasureAsInt("NoCoverageOnTests", "uncovered_lines")).isNull();
+  }
+
+  @Test
+  public void should_support_wildcard_patterns() throws Exception {
+    String reportPath = "reports" + File.separator + "*/.nccov";
+
+    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", reportPath);
+
+    assertThat(buildResult.getLogs()).contains(
+      "Sensor C# Tests Coverage Report Import",
+      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
+
+    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
+  }
+
+  private BuildResult analyzeCoverageTestProject() throws IOException {
+    Path projectDir = Tests.projectDir(temp, "CoverageTest");
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+      .addArgument("begin")
+      .setProjectKey("CoverageTest")
+      .setProjectName("CoverageTest")
+      .setProjectVersion("1.0")
+      .setProperty("sonar.verbose", "true")
+      .setProfile("no_rule"));
+
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+
+    return orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+      .addArgument("end"));
+  }
+
+  private BuildResult analyzeCoverageTestProject(String scannerPropertyName, String path) throws IOException {
+    Path projectDir = Tests.projectDir(temp, "CoverageTest");
+    LogFileSystem();
+
+    LOG.info(String.format("Coverage Test: project dir is '%s'", projectDir));
+
+    String reportPathString = path;
+    if (VstsUtils.isRunningUnderVsts()) {
+
+      LOG.info("We are running under AzurePipelines / VSTS !");
+
+      // create absolute path on the VSTS file system
+      String pathPrefix = temp.getRoot().getAbsolutePath() + File.separator +
+        "CoverageTest" + File.separator;
+      reportPathString = pathPrefix + reportPathString;
+
+      // replace relative path with absolute path inside the coverage report file
+      Path reportPath = Paths.get(reportPathString);
+      String reportContent = new String(Files.readAllBytes(reportPath), UTF_8);
+
+      if (reportPathString.contains("ncover3")) {
+        reportContent = addPathPrefix(reportContent, "url=\"", pathPrefix);
+      } else if (reportPathString.contains("opencover")) {
+        reportContent = addPathPrefix(reportContent, "fullPath=\"", pathPrefix);
+      } else if (reportPathString.contains("visualstudio")) {
+        reportContent = addPathPrefix(reportContent, "path=\"", pathPrefix);
+      } else if (reportPathString.contains("dotcover")) {
+        reportContent = addPathPrefix(reportContent, "<title>", pathPrefix);
+      } else {
+        LOG.warn("Could not find a known coverage provider for path " + reportPathString);
+      }
+
+      // overwrite contents
+      Files.write(reportPath, reportContent.getBytes(UTF_8));
+
+    } else {
+      LOG.info("Not running in Azure Pipelines / VSTS");
+    }
+
+    LOG.info("ncover3 - will analyze with reportPathString : " + reportPathString);
+
+    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+      .addArgument("begin")
+      .setProjectKey("CoverageTest")
+      .setProjectName("CoverageTest")
+      .setProjectVersion("1.0")
+      .setProperty("sonar.verbose", "true")
+      .setProfile("no_rule")
+      .setProjectDir(projectDir.toFile())
+      .setProperties(scannerPropertyName, reportPathString));
+
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+
+    return orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+      .addArgument("end")
+      .setProjectDir(projectDir.toFile()));
   }
 
   private void LogFileSystem() {
@@ -135,166 +287,13 @@ public class CoverageTest {
     }
   }
 
-  @Test
-  @Ignore // FIXME
-  public void open_cover() throws Exception {
-    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.opencover.reportsPaths", "reports/opencover.xml");
-
-    assertThat(buildResult.getLogs()).contains(
-      "Sensor C# Tests Coverage Report Import",
-      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
-
-    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
-    assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(0);
-  }
-
-  @Test
-  @Ignore // FIXME
-  public void dotcover() throws Exception {
-    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.dotcover.reportsPaths", "reports/dotcover.html");
-
-    assertThat(buildResult.getLogs()).contains(
-      "Sensor C# Tests Coverage Report Import",
-      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
-
-    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
-    assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
-  }
-
-  @Test
-  @Ignore // FIXME
-  public void visual_studio() throws Exception {
-    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
-
-    assertThat(buildResult.getLogs()).contains(
-      "Sensor C# Tests Coverage Report Import",
-      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
-
-    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
-    assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
-  }
-
-  @Test
-  @Ignore // FIXME
-  public void no_coverage_on_tests() throws Exception {
-    Path projectDir = Tests.projectDir(temp, "NoCoverageOnTests");
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("begin")
-      .setProjectKey("NoCoverageOnTests")
-      .setProjectVersion("1.0")
-      .setProfile("no_rule")
-      .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml"));
-
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
-
-    BuildResult buildResult = orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("end"));
-
-    assertThat(buildResult.getLogs()).contains(
-      "Sensor C# Tests Coverage Report Import",
-      "Coverage Report Statistics: 1 files, 0 main files, 0 main files with coverage, 1 test files, 0 project excluded files, 0 other language files.",
-      "WARN: The Code Coverage report doesn't contain any coverage data for the included files.");
-
-    assertThat(getMeasureAsInt("NoCoverageOnTests", "files")).isEqualTo(2); // Only main files are counted
-    String unitTestComponentId = TestUtils.hasModules(ORCHESTRATOR) ? "NoCoverageOnTests:NoCoverageOnTests:8A3B715A-6E95-4BC1-93C6-A59E9D3F5D5C:UnitTest1.cs" : "NoCoverageOnTests:MyLib.Tests/UnitTest1.cs";
-    assertThat(Tests.getComponent(unitTestComponentId)).isNotNull();
-    assertThat(getMeasureAsInt("NoCoverageOnTests", "lines_to_cover")).isNull();
-    assertThat(getMeasureAsInt("NoCoverageOnTests", "uncovered_lines")).isNull();
-  }
-
-  @Test
-  @Ignore // FIXME
-  public void should_support_wildcard_patterns() throws Exception {
-    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", "reports/*.nccov");
-
-    assertThat(buildResult.getLogs()).contains(
-      "Sensor C# Tests Coverage Report Import",
-      "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
-
-    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
-  }
-
-  private BuildResult analyzeCoverageTestProject() throws IOException {
-    Path projectDir = Tests.projectDir(temp, "CoverageTest");
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("begin")
-      .setProjectKey("CoverageTest")
-      .setProjectName("CoverageTest")
-      .setProjectVersion("1.0")
-      .setProperty("sonar.verbose", "true")
-      .setProfile("no_rule"));
-
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
-
-    return orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("end"));
-  }
-
-  private BuildResult analyzeCoverageTestProject(String scannerPropertyName, String path) throws IOException {
-    Path projectDir = Tests.projectDir(temp, "CoverageTest");
-
-    LOG.info(String.format("Coverage Test: project dir is '%s'", projectDir));
-
-    String reportPathString = path;
-    if (VstsUtils.isRunningUnderVsts()) {
-
-      LOG.info("We are running under AzurePipelines / VSTS !");
-
-      // create absolute path on the VSTS file system
-      String pathPrefix = temp.getRoot().getAbsolutePath() + File.separator +
-        "CoverageTest" + File.separator;
-      reportPathString = pathPrefix + reportPathString;
-
-      // replace relative path with absolute path inside the coverage report file
-      Path reportPath = Paths.get(reportPathString);
-
-      if (reportPathString.contains("ncover3")) {
-        LOG.info("Will try to replace file contents");
-        String reportContent = new String(Files.readAllBytes(reportPath), UTF_8);
-
-        LOG.info("Content for " + reportPath.toAbsolutePath());
-        LOG.info(reportContent);
-
-        reportContent = reportContent.replace("url=\"", "url=\"" + pathPrefix.replace("\\", "\\\\"));
-
-        LOG.info("Modified content for " + reportPath.toAbsolutePath());
-        LOG.info(reportContent);
-        LOG.info("Will write above content to " + reportPath.toAbsolutePath());
-
-        // overwrite
-        Files.write(reportPath, reportContent.getBytes(UTF_8));
-
-        LOG.info("FINISHED OVERWRITE");
-
-      } else if (reportPathString.contains("opencover")) {
-
-      } else if (reportPathString.contains("visualstudio")) {
-
-      } else if (reportPathString.contains("dotcover")) {
-
-      } else {
-        LOG.warn("Could not find a known coverage provider for path " + reportPathString);
-      }
-    } else {
-      LOG.info("Not running in Azure Pipelines / VSTS");
-    }
-    LOG.info("ncover3 - will analyze with reportPathString : " + reportPathString);
-
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("begin")
-      .setProjectKey("CoverageTest")
-      .setProjectName("CoverageTest")
-      .setProjectVersion("1.0")
-      .setProperty("sonar.verbose", "true")
-      .setProfile("no_rule")
-      .setProjectDir(projectDir.toFile())
-      .setProperties(scannerPropertyName, reportPathString));
-
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
-
-    return orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("end")
-      .setProjectDir(projectDir.toFile()));
+  private static String addPathPrefix(String reportContent, String replaceTarget, String pathPrefix) {
+    LOG.info("Will try to replace file contents. BEFORE:");
+    LOG.info(reportContent);
+    String result = reportContent.replace(replaceTarget, replaceTarget + pathPrefix.replace("\\", "\\\\"));
+    LOG.info("AFTER:");
+    LOG.info(reportContent);
+    return result;
   }
 
 }
