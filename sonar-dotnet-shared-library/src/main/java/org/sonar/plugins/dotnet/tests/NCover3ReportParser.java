@@ -81,7 +81,11 @@ public class NCover3ReportParser implements CoverageParser {
 
       if (!isExcludedId(id)) {
         try {
-          documents.put(id, new File(url).getCanonicalPath());
+          String path = new File(url).getCanonicalPath();
+
+          LOG.debug(String.format("NCover3 parser: url '%s' is resolved as '%s'", url, path));
+
+          documents.put(id, path);
         } catch (IOException e) {
           LOG.debug("Skipping the import of NCover3 code coverage for the invalid file path: " + url
             + " at line " + xmlParserHelper.stream().getLocation().getLineNumber(), e);
