@@ -1322,6 +1322,20 @@ public bool plus()
 ";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
+        [TestMethod]
+        public void MixingUintAndNeg()
+        {
+            var code = @"
+void f() {
+  int j = -10u;
+}
+
+void g() {
+  int someInt = -2147483648;
+}
+";
+            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+        }
 
     } // Class
 

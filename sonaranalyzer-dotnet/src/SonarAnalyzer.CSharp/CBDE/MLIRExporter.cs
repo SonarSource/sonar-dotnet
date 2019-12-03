@@ -402,7 +402,14 @@ namespace SonarAnalyzer
                     break;
                 case SyntaxKind.UnaryMinusExpression:
                     var neg = op as PrefixUnaryExpressionSyntax;
-                    writer.WriteLine($"%{OpId(neg)} = cbde.neg %{OpId(getAssignmentValue(neg.Operand))} : {MLIRType(neg)} {GetLocation(neg)}");
+                    if (IsTypeKnown(semanticModel.GetTypeInfo(neg).Type) && !IsTypeKnown(semanticModel.GetTypeInfo(neg.Operand).Type))
+                    {
+                        writer.WriteLine($"%{OpId(neg)} = cbde.unknown : {MLIRType(neg)} {GetLocation(op)} // A negation changing type whose source type is unknown");
+                    }
+                    else
+                    {
+                        writer.WriteLine($"%{OpId(neg)} = cbde.neg %{OpId(getAssignmentValue(neg.Operand))} : {MLIRType(neg)} {GetLocation(neg)}");
+                    }
                     break;
                 case SyntaxKind.UnaryPlusExpression:
                     var plus = op as PrefixUnaryExpressionSyntax;
