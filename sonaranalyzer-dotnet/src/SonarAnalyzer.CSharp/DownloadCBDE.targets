@@ -8,25 +8,25 @@
        To force the files to be downloaded even if they exist, set the build property "UpdateCBDE" to true.
   
   -->
-  
-    <ItemGroup>
-    <CBDEUrls Include="http://repox.jfrog.io/repox/sonarsource-public-builds/org/sonarsource/cbde/windows/cbde-windows.zip" >
+
+  <PropertyGroup>
+    <RelativeCBDEFolder>CBDE\</RelativeCBDEFolder>
+    <CBDEFolder>$(MSBuildProjectDirectory)\$(RelativeCBDEFolder)</CBDEFolder>
+    <SpecificCBDEVersion>1.0.0.13060</SpecificCBDEVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <CBDEUrls Include="http://repox.jfrog.io/repox/sonarsource-public-builds/org/sonarsource/cbde/$(SpecificCBDEVersion)/cbde-windows.$(SpecificCBDEVersion).zip" >
       <SubFolder>windows\</SubFolder>
       <MainExe>dotnet-symbolic-execution.exe</MainExe>
       <ZipFileName>cbde-windows.zip</ZipFileName>
     </CBDEUrls>
-    <CBDEUrls Include="http://repox.jfrog.io/repox/sonarsource-public-builds/org/sonarsource/cbde/linux/cbde-linux.zip" >
+    <CBDEUrls Include="http://repox.jfrog.io/repox/sonarsource-public-builds/org/sonarsource/cbde/$(SpecificCBDEVersion)/cbde-linux.$(SpecificCBDEVersion).zip" >
       <SubFolder>linux\</SubFolder>
       <MainExe>dotnet-symbolic-execution</MainExe>
       <ZipFileName>cbde-linux.zip</ZipFileName>
     </CBDEUrls>
   </ItemGroup>
 
-  <PropertyGroup>
-    <CBDEDownloadUrl>http://repox.jfrog.io/repox/sonarsource-public-builds/org/sonarsource/cbde/windows/cbde-windows.zip</CBDEDownloadUrl>
-    <RelativeCBDEFolder>CBDE\</RelativeCBDEFolder>
-    <CBDEFolder>$(MSBuildProjectDirectory)\$(RelativeCBDEFolder)</CBDEFolder>
-   </PropertyGroup>
 
   <!-- Specify them here in case they are already present. If they are not, they will be added by the task that fetches the files -->
   <!-- This is a duplication of the "Content" items defined inside the target FetchCBDEBinaries, and we should try to remove it.
@@ -71,7 +71,7 @@
     </ItemGroup>
     <Delete Files="@(ExistingCBDEFiles)" Condition="$(ShouldDownloadCBDE)=='true'"/>
 
-    <Message Importance="high" Text="CBDE: Begin downloading CBDE zip..." Condition="$(ShouldDownloadCBDE)=='true'"/>
+    <Message Importance="high" Text="CBDE: Begin downloading CBDE zip at @(CBDEUrls)..." Condition="$(ShouldDownloadCBDE)=='true'"/>
     <Exec ConsoleToMsBuild="true" Condition="$(ShouldDownloadCBDE)=='true'"
       Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -File $(DownloadScript) -url @(CBDEUrls) -outfolder $(CBDECurrentFolder) -outfile %(CBDEUrls.ZipFileName)">
       <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec"/>
