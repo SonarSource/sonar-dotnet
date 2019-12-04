@@ -32,7 +32,6 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class MethodOverloadsShouldBeGrouped : MethodOverloadsShouldBeGroupedBase<MemberDeclarationSyntax>
     {
-
         public MethodOverloadsShouldBeGrouped() : base(RspecStrings.ResourceManager) { }
 
         protected override MemberInfo CreateMemberInfo(SyntaxNodeAnalysisContext c, MemberDeclarationSyntax member)
@@ -51,14 +50,13 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             return null;
         }
-        
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var typeDeclaration = (TypeDeclarationSyntax)c.Node;
                 CheckMembers(c, typeDeclaration.Members);
-                    
             },
             SyntaxKind.ClassDeclaration,
             SyntaxKind.InterfaceDeclaration,
@@ -74,10 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return true;
         }
 
-        private bool IsStatic(BaseMethodDeclarationSyntax declaration)
-        {
-            return declaration.Modifiers.Any(x => x.Kind() == SyntaxKind.StaticKeyword);
-        }
+        private bool IsStatic(BaseMethodDeclarationSyntax declaration) => declaration.Modifiers.Any(x => x.Kind() == SyntaxKind.StaticKeyword);
 
     }
 }

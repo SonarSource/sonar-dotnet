@@ -32,7 +32,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class MethodOverloadsShouldBeGrouped : MethodOverloadsShouldBeGroupedBase<StatementSyntax>
     {
-
         public MethodOverloadsShouldBeGrouped() : base(RspecStrings.ResourceManager) { }
 
         protected override MemberInfo CreateMemberInfo(SyntaxNodeAnalysisContext c, StatementSyntax member)
@@ -43,11 +42,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
             else if (member is MethodBlockSyntax methodBlock)
             {
-                return new MemberInfo(c, member, methodBlock.SubOrFunctionStatement.Identifier, IsStaticStatement(methodBlock.SubOrFunctionStatement), IsMustInheritStatement(methodBlock.SubOrFunctionStatement), false);
+                return new MemberInfo(c, member, methodBlock.SubOrFunctionStatement.Identifier, IsStaticStatement(methodBlock.SubOrFunctionStatement), IsAbstractStatement(methodBlock.SubOrFunctionStatement), false);
             }
             else if (member is MethodStatementSyntax methodStatement)
             {
-                return new MemberInfo(c, member, methodStatement.Identifier, IsStaticStatement(methodStatement), IsMustInheritStatement(methodStatement), false);
+                return new MemberInfo(c, member, methodStatement.Identifier, IsStaticStatement(methodStatement), IsAbstractStatement(methodStatement), false);
             }
             return null;
         }
@@ -66,7 +65,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private bool IsStaticStatement(MethodBaseSyntax statement) => statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.SharedKeyword);
 
-        private bool IsMustInheritStatement(MethodBaseSyntax statement) => statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.MustOverrideKeyword);
+        private bool IsAbstractStatement(MethodBaseSyntax statement) => statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.MustOverrideKeyword);
 
     }
 }

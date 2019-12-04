@@ -32,40 +32,39 @@ namespace SonarAnalyzer.Rules
     public abstract class MethodOverloadsShouldBeGroupedBase<TMemberDeclarationSyntax> : SonarDiagnosticAnalyzer
         where TMemberDeclarationSyntax : SyntaxNode
     {
-
         internal const string DiagnosticId = "S4136";
         protected const string MessageFormat = "All '{0}' method overloads should be adjacent.";
 
         private readonly DiagnosticDescriptor rule;
-    
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected MethodOverloadsShouldBeGroupedBase(System.Resources.ResourceManager resources)
         {
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, resources);
         }
-        
+
         protected abstract MemberInfo CreateMemberInfo(SyntaxNodeAnalysisContext c, TMemberDeclarationSyntax member);
-        
+
         protected void CheckMembers(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
         {
-            foreach (var misplacedMembers in GetMisplacedOverloads(c, members))
+            foreach (var misplacedNameSyntaxes in GetMisplacedOverloads(c, members))
             {
-                var firstMember = misplacedMembers.First();
-                var secondaryLocations = misplacedMembers.Skip(1).Select(x => new SecondaryLocation(x.NameSyntax.GetLocation(), "Non-adjacent overload"));
+                var firstName = misplacedNameSyntaxes.First();
+                var secondaryLocations = misplacedNameSyntaxes.Skip(1).Select(x => new SecondaryLocation(x.GetLocation(), "Non-adjacent overload"));
                 c.ReportDiagnosticWhenActive(
                     Diagnostic.Create(
                         descriptor: rule,
-                        location: firstMember.NameSyntax.GetLocation(),
+                        location: firstName.GetLocation(),
                         additionalLocations: secondaryLocations.ToAdditionalLocations(),
                         properties: secondaryLocations.ToProperties(),
-                        messageArgs: firstMember.NameSyntax.ValueText));
+                        messageArgs: firstName.ValueText));
             }
         }
 
-        protected List<MemberInfo>[] GetMisplacedOverloads(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
+        protected List<SyntaxToken>[] GetMisplacedOverloads(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
         {
-            var misplacedOverloads = new Dictionary<MemberInfo, List<MemberInfo>>();
+            var misplacedOverloads = new Dictionary<MemberInfo, List<SyntaxToken>>();
             MemberInfo previous = null;
             foreach (var member in members)
             {
@@ -75,12 +74,12 @@ namespace SonarAnalyzer.Rules
                     {
                         if (!current.Equals(previous))
                         {
-                            values.Add(current);
+                            values.Add(current.NameSyntax);
                         }
                     }
                     else
                     {
-                        misplacedOverloads.Add(current, new List<MemberInfo> { current });
+                        misplacedOverloads.Add(current, new List<SyntaxToken> { current.NameSyntax });
                     }
                     previous = current;
                 }
@@ -95,7 +94,6 @@ namespace SonarAnalyzer.Rules
         protected class MemberInfo
         {
 
-            public readonly TMemberDeclarationSyntax Member;
             public readonly string Accessibility;
             public readonly SyntaxToken NameSyntax;
             public readonly bool IsStatic;
@@ -105,14 +103,13 @@ namespace SonarAnalyzer.Rules
 
             public MemberInfo(SyntaxNodeAnalysisContext context, TMemberDeclarationSyntax member, SyntaxToken nameSyntax, bool isStatic, bool isAbstract, bool isCaseSensitive)
             {
-                Member = member;
                 Accessibility = context.SemanticModel.GetDeclaredSymbol(member)?.DeclaredAccessibility.ToString();
                 NameSyntax = nameSyntax;
                 IsStatic = isStatic;
                 IsAbstract = isAbstract;
-                this.isCaseSensitive = isCaseSensitive;                
+                this.isCaseSensitive = isCaseSensitive;
             }
-            
+
             public override bool Equals(object obj)
             {
                 // Groups that should be together are defined by accessibility, abstract, static and member name #4136

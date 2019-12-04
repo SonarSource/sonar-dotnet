@@ -165,7 +165,7 @@ namespace Tests.Diagnostics
 
         static StaticMethodsTogether() { }  //Compliant - static constructor can be grouped with static methods
 
-        public void MethodA(int i)  
+        public void MethodA(int i)
         {
         }
 
@@ -173,7 +173,7 @@ namespace Tests.Diagnostics
         {
         }
 
-        public static void MethodD()    
+        public static void MethodD()
         {
         }
 
@@ -243,7 +243,7 @@ namespace Tests.Diagnostics
         protected override void OnEvent(int i)  //Secondary
         {
         }
-        
+
     }
 
 }
