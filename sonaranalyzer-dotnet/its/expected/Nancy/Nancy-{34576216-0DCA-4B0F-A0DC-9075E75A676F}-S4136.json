@@ -203,30 +203,6 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'CanResolve' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  1729,
-"startColumn":  21,
-"endLine":  1729,
-"endColumn":  31
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  1755,
-"startColumn":  21,
-"endLine":  1755,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S4136",
 "message":  "All 'GetViewsWithSupportedExtensions' method overloads should be adjacent.",
 "location":  [
 {

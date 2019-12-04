@@ -146,30 +146,6 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'ActorInitializationException' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
-"region":  {
-"startLine":  121,
-"startColumn":  19,
-"endLine":  121,
-"endColumn":  47
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
-"region":  {
-"startLine":  162,
-"startColumn":  19,
-"endLine":  162,
-"endColumn":  47
-}
-}
-]
-},
-{
-"id":  "S4136",
 "message":  "All 'Become' method overloads should be adjacent.",
 "location":  [
 {

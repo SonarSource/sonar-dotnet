@@ -148,6 +148,22 @@ namespace Tests.Diagnostics
         void DoSomething(int a) { } // Secondary {{Non-adjacent overload}}
     }
 
+    class K
+    {
+        public void Lorem() { }
+
+        public void DoSomething() { }
+
+        private void DoSomething(int i) { }    // Compliant interleaving with different accesibility
+
+        protected void DoSomething(bool b) { }
+
+        public void DoSomething(string s) { }
+
+        private void Lorem(int i) { }       // Compliant, different accessibility
+
+    }
+
     // https://github.com/SonarSource/sonar-dotnet/issues/2776
     public class StaticMethodsTogether
     {
@@ -219,12 +235,20 @@ namespace Tests.Diagnostics
         protected abstract void OnProgress();
         protected abstract void OnEvent(int i);     //Secondary
 
+        public void DoSomething() { }
+        protected abstract void DoSomething(bool b);     //Compliant interleaving with abstract
+        public void DoSomething(int i) { }
+
     }
 
     public class Inheritor : MustOverrideMethodsTogether
     {
 
         protected override void DoWork(bool b)
+        {
+        }
+
+        public static void DoWork(string s) //Compliant interleaving with static
         {
         }
 
@@ -241,6 +265,10 @@ namespace Tests.Diagnostics
         }
 
         protected override void OnEvent(int i)  //Secondary
+        {
+        }
+
+        protected override void DoSomething(bool b)
         {
         }
 

@@ -132,6 +132,28 @@ Namespace Tests.TestCases
         End Sub
     End Structure
 
+    Class K
+
+        Public Sub Lorem()
+        End Sub
+
+        Public Sub DoSomething()
+        End Sub
+
+        Private Sub DoSomething(i As Integer)   ' Compliant interleaving With different accesibility
+        End Sub
+
+        Protected Sub DoSomething(b As Boolean)
+        End Sub
+
+        Public Sub DoSomething(s As String)
+        End Sub
+
+        Private Sub Lorem(i As Integer)     ' Compliant, different accessibility
+        End Sub
+
+    End Class
+
     ' https://github.com/SonarSource/sonar-dotnet/issues/2776
     Public Class StaticMethodsTogether
 
@@ -193,12 +215,23 @@ Namespace Tests.TestCases
         Protected MustOverride Sub OnProgress()
         Protected MustOverride Sub OnEvent(i As Integer)    'Secondary
 
+        Public Sub DoSomething()
+        End Sub
+
+        Protected MustOverride Sub DoSomething(b As Boolean)
+
+        Public Sub DoSomething(i As Integer)
+        End Sub
+
     End Class
 
     Public Class Inheritor
         Inherits MustOverrideMethodsTogether
 
         Protected Overrides Sub DoWork(b As Boolean)
+        End Sub
+
+        Public Overloads Shared Sub DoWork(s As String)           'Compliant interleaving with static
         End Sub
 
         Protected Overrides Sub DoWork(i As Integer)
@@ -211,6 +244,9 @@ Namespace Tests.TestCases
         End Sub
 
         Protected Overrides Sub OnEvent(i As Integer)   'Secondary
+        End Sub
+
+        Protected Overrides Sub DoSomething(b As Boolean)
         End Sub
 
     End Class

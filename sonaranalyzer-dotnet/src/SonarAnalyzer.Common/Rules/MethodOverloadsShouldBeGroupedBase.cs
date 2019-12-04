@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules
                 {
                     if (misplacedOverloads.TryGetValue(current, out var values))
                     {
-                        if (!current.Equals(previous))
+                        if (!current.NameEquals(previous))
                         {
                             values.Add(current.NameSyntax);
                         }
@@ -110,14 +110,19 @@ namespace SonarAnalyzer.Rules
                 this.isCaseSensitive = isCaseSensitive;
             }
 
+            public bool NameEquals(MemberInfo other)
+            {
+                return NameSyntax.ValueText.Equals(other?.NameSyntax.ValueText, isCaseSensitive ? StringComparison.InvariantCulture : StringComparison.InvariantCultureIgnoreCase);
+            }
+
             public override bool Equals(object obj)
             {
                 // Groups that should be together are defined by accessibility, abstract, static and member name #4136
-                return obj is MemberInfo info
-                    && Accessibility == info.Accessibility
-                    && NameSyntax.ValueText.Equals(info.NameSyntax.ValueText, isCaseSensitive && info.isCaseSensitive ? StringComparison.InvariantCulture : StringComparison.InvariantCultureIgnoreCase)
-                    && IsStatic == info.IsStatic
-                    && IsAbstract == info.IsAbstract;
+                return obj is MemberInfo other
+                    && Accessibility == other.Accessibility
+                    && NameEquals(other)
+                    && IsStatic == other.IsStatic
+                    && IsAbstract == other.IsAbstract;
             }
 
             public override int GetHashCode()

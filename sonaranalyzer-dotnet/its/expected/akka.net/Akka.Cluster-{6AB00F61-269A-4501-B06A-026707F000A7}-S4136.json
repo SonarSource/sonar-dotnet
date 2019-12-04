@@ -2,30 +2,6 @@
 "issues":  [
 {
 "id":  "S4136",
-"message":  "All 'PerformanceCounterMetricsCollector' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
-"region":  {
-"startLine":  731,
-"startColumn":  16,
-"endLine":  731,
-"endColumn":  50
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
-"region":  {
-"startLine":  743,
-"startColumn":  16,
-"endLine":  743,
-"endColumn":  50
-}
-}
-]
-},
-{
-"id":  "S4136",
 "message":  "All 'Create' method overloads should be adjacent.",
 "location":  [
 {
