@@ -93,7 +93,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     {
         private const string CommentPattern = "(?<comment>//|')";
         private const string PrecisePositionPattern = @"\s*(?<position>\^+)(\s+(?<invalid>\^+))*";
-        private const string NoPrecisePositionPattern = @"(?<!\s*\^+\s{1})";
+        private const string NoPrecisePositionPattern = @"(?<!\s*\^+\s)";
         private const string IssueTypePattern = @"\s*(?<issueType>Noncompliant|Secondary)";
         private const string ErrorTypePattern = @"\s*Error";
         private const string OffsetPattern = @"(\s*@(?<offset>[+-]?\d+))?";
