@@ -79,12 +79,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             foreach (var diagnostic in diagnostics)
             {
-                VerifyIssue(expectedIssues,
+                var issueId = VerifyPrimaryIssue(expectedIssues,
                     issue => issue.IsPrimary,
                     diagnostic.Location,
                     compareIdToMessage ? diagnostic.Id : diagnostic.GetMessage(),
-                    compareIdToMessage ? diagnostic.Id + ": " + diagnostic.GetMessage() : null,
-                    out var issueId);
+                    compareIdToMessage ? $"Unexpected build error [{diagnostic.Id}]: {diagnostic.GetMessage()} on line {diagnostic.Location.GetLineNumberToReport()}" : null);
 
                 var secondaryLocations = diagnostic.AdditionalLocations
                     .Select((location, i) => diagnostic.GetSecondaryLocation(i))
@@ -93,19 +92,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
                 foreach (var secondaryLocation in secondaryLocations)
                 {
-                    VerifyIssue(expectedIssues,
+                    VerifySecondaryIssue(expectedIssues,
                         issue => issue.IssueId == issueId && !issue.IsPrimary,
                         secondaryLocation.Location,
                         secondaryLocation.Message,
-                        null,
-                        out issueId);
+                        issueId);
                 }
             }
 
             if (expectedIssues.Count != 0)
             {
-                Execute.Assertion.FailWith($"Issue expected but not raised on line(s) " +
-                    $"{string.Join(",", expectedIssues.Select(i => i.LineNumber))}.");
+                var expectedIssuesDescription = expectedIssues.Select(i => $"{Environment.NewLine}Line: {i.LineNumber}, Type: {IssueType(i.IsPrimary)}, Id: '{i.IssueId}'");
+                Execute.Assertion.FailWith($"Issue(s) expected but not raised on line(s):{expectedIssuesDescription.JoinStr("")}");
             }
         }
 
@@ -194,23 +192,41 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private static void VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics) =>
             diagnostics.Should().NotContain(d => d.Id == AnalyzerFailedDiagnosticId);
 
-        private static void VerifyIssue(IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
-            Location location, string message, string extraInfo, out string issueId)
+        private static string VerifyPrimaryIssue(IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
+            Location location, string message, string extraInfo)
+        {
+            return VerifyIssue(expectedIssues, issueFilter, location, message, extraInfo, true, null);
+        }
+
+        private static void VerifySecondaryIssue(IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
+            Location location, string message, string issueId)
+        {
+            VerifyIssue(expectedIssues, issueFilter, location, message, null, false, issueId);
+        }
+
+        private static string VerifyIssue(IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
+            Location location, string message, string extraInfo, bool isPrimary, string primaryIssueId)
         {
             var lineNumber = location.GetLineNumberToReport();
-
             var expectedIssue = expectedIssues
                 .Where(issueFilter)
                 .FirstOrDefault(issue => issue.LineNumber == lineNumber);
+            var issueType = IssueType(isPrimary);
 
             if (expectedIssue == null)
             {
-                throw new UnexpectedDiagnosticException(location, $"Issue with message '{(string.IsNullOrEmpty(extraInfo) ? message : extraInfo)}' not expected on line {lineNumber}");
+                var issueId = primaryIssueId == null ?  "" : $" [{ primaryIssueId}]";
+                var seeOutputMessage = $"{Environment.NewLine}See output to see all actual diagnostics raised on the file";
+                var exceptionMessage = string.IsNullOrEmpty(extraInfo) ? $"Unexpected {issueType} issue{issueId} on line {lineNumber} with message '{message}'.{seeOutputMessage}" : extraInfo;
+                throw new UnexpectedDiagnosticException(location, exceptionMessage);
             }
 
             if (expectedIssue.Message != null && expectedIssue.Message != message)
             {
-                throw new UnexpectedDiagnosticException(location, $"Expected message on line {lineNumber} to be '{expectedIssue.Message}', but got '{message}'.");
+                throw new UnexpectedDiagnosticException(location,
+$@"Expected {issueType} message on line {lineNumber} does not match actual message.
+Expected: '{expectedIssue.Message}'
+Actual  : '{message}'");
             }
 
             var diagnosticStart = location.GetLineSpan().StartLinePosition.Character;
@@ -218,19 +234,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             if (expectedIssue.Start.HasValue && expectedIssue.Start != diagnosticStart)
             {
                 throw new UnexpectedDiagnosticException(location,
-                    $"Expected issue on line {lineNumber} to start on column {expectedIssue.Start} but got column {diagnosticStart}.");
+                    $"Expected {issueType} issue on line {lineNumber} to start on column {expectedIssue.Start} but got column {diagnosticStart}.");
             }
 
             if (expectedIssue.Length.HasValue && expectedIssue.Length != location.SourceSpan.Length)
             {
                 throw new UnexpectedDiagnosticException(location,
-                    $"Expected issue on line {lineNumber} to have a length of {expectedIssue.Length} but got a length of {location.SourceSpan.Length}).");
+                    $"Expected {issueType} issue on line {lineNumber} to have a length of {expectedIssue.Length} but got a length of {location.SourceSpan.Length}.");
             }
 
             expectedIssues.Remove(expectedIssue);
-
-            issueId = expectedIssue.IssueId;
+            return expectedIssue.IssueId;
         }
+
+        private static string IssueType(bool isPrimary) => isPrimary ? "primary" : "secondary";
 
         internal static class SuppressionHandler
         {

@@ -2,27 +2,30 @@
 
 /*
 hello
-todo - Noncompliant
-TODO */ //Noncompliant
+todo -  // Noncompliant
+TODO */ // Noncompliant
 
 // Noncompliant: hello TODO world
 
 // ok
 
 
+// Noncompliant@+3
 ///
 /// <summary>
-/// TODO - Noncompliant
+/// TODO -
 /// </summary>
 
+// Noncompliant@+2
 /**
-toDo - Noncompliant
+toDo -
 */
 
 // The following should be compliant:
 // aaaTODO000
 
-// !TODO! Noncompliant
+// Noncompliant@+1
+// !TODO!
 
 /*TODO*/ // Noncompliant
 //^^^^

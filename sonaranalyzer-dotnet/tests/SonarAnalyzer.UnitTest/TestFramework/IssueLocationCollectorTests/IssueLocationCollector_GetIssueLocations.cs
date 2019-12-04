@@ -178,17 +178,17 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
         {
             var line = GetLine(2, @"if (a > b)
 {
-    Console.WriteLine(a); //Noncompliant [last.2,last.1,flow1,flow2]
+    Console.WriteLine(a); //Noncompliant [last,flow1,flow2]
 }");
             var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
 
-            result.Should().HaveCount(4);
+            result.Should().HaveCount(3);
 
             VerifyIssueLocations(result,
-                expectedIsPrimary: new[] { true, true, true, true },
-                expectedLineNumbers: new[] { 3, 3, 3, 3 },
-                expectedMessages: new string[] { null, null, null, null },
-                expectedIssueIds: new[] { "flow1", "flow2", "last", "last" });
+                expectedIsPrimary: new[] { true, true, true },
+                expectedLineNumbers: new[] { 3, 3, 3 },
+                expectedMessages: new string[] { null, null, null },
+                expectedIssueIds: new[] { "flow1", "flow2", "last" });
         }
 
         [TestMethod]
@@ -237,6 +237,83 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
             var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
 
             result.Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public void GetIssueLocations_Noncompliant_ExactColumn()
+        {
+            var line = GetLine(2, @"if (a > b)
+{
+    Console.WriteLine(a); //Noncompliant^5#7
+}");
+            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+
+            result.Should().ContainSingle();
+
+            VerifyIssueLocations(result,
+                expectedIsPrimary: new[] { true },
+                expectedLineNumbers: new[] { 3 },
+                expectedMessages: new string[] { null },
+                expectedIssueIds: new string[] { null });
+        }
+
+        [TestMethod]
+        public void GetIssueLocations_Secondary_ExactColumn_Ids()
+        {
+            var line = GetLine(2, @"if (a > b)
+{
+    Console.WriteLine(a); //Secondary ^13#9 [myId]
+}");
+            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+
+            result.Should().ContainSingle();
+
+            VerifyIssueLocations(result,
+                expectedIsPrimary: new[] { false },
+                expectedLineNumbers: new[] { 3 },
+                expectedMessages: new string[] { null },
+                expectedIssueIds: new string[] { "myId" });
+        }
+
+        [TestMethod]
+        public void GetIssueLocations_Noncompliant_Offset_ExactColumn_Message_Whitespaces()
+        {
+            var line = GetLine(2, @"if (a > b)
+{
+    Console.WriteLine(a); //Noncompliant @-2 ^5#16 [myIssueId] {{MyMessage}}               
+}");
+            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+
+            result.Should().ContainSingle();
+
+            VerifyIssueLocations(result,
+                expectedIsPrimary: new[] { true },
+                expectedLineNumbers: new[] { 1 },
+                expectedMessages: new string[] { "MyMessage" },
+                expectedIssueIds: new string[] { "myIssueId" });
+            result.Select(issue => issue.Start).Should().Equal(new[] { 4 });
+            result.Select(issue => issue.Length).Should().Equal(new[] { 16 });
+        }
+
+
+        [TestMethod]
+        public void GetIssueLocations_Noncompliant_Offset_ExactColumn_Message_NoWhitespace()
+        {
+            var line = GetLine(2, @"if (a > b)
+{
+    Console.WriteLine(a); //Noncompliant@-2^5#16[myIssueId]{{MyMessage}}        
+}");
+            var result = new IssueLocationCollector().GetIssueLocations(line).ToList();
+
+            result.Should().ContainSingle();
+
+            VerifyIssueLocations(result,
+                expectedIsPrimary: new[] { true },
+                expectedLineNumbers: new[] { 1 },
+                expectedMessages: new string[] { "MyMessage" },
+                expectedIssueIds: new string[] { "myIssueId" });
+            result.Select(issue => issue.Start).Should().Equal(new[] { 4 });
+            result.Select(issue => issue.Length).Should().Equal(new[] { 16 });
         }
     }
 }

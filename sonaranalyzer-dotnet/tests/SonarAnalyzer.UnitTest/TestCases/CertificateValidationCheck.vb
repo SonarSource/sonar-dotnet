@@ -23,9 +23,9 @@ Namespace Tests.TestCases
 
         Private Sub DirectAddHandlers()
             'Inline version
-            'Secondary@+1
-            CreateRQ().ServerCertificateValidationCallback = Function(sender, certificate, chain, SslPolicyErrors) True         'Noncompliant  {{Enable server certificate validation on this SSL/TLS connection}}
-            '          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                         ^^^^
+            CreateRQ().ServerCertificateValidationCallback = Function(sender, certificate, chain, SslPolicyErrors) True
+            '          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ {{Enable server certificate validation on this SSL/TLS connection}}
+            '                                                                                                      ^^^^ Secondary@-1
             'Secondary@+1
             CreateRQ().ServerCertificateValidationCallback = Function(sender, certificate, chain, SslPolicyErrors) (((True)))   'Noncompliant
             CreateRQ().ServerCertificateValidationCallback = Function(sender, certificate, chain, SslPolicyErrors) False
@@ -142,9 +142,10 @@ Namespace Tests.TestCases
             Dim optA As New OptionalConstructorArguments(Me, cb:=AddressOf InvalidValidation)                 'Noncompliant
             Dim optB As New OptionalConstructorArguments(Me, cb:=AddressOf CompliantValidation)
 
-            Using ms As New System.IO.MemoryStream                                                                                      'Secondary@+1
-                Using ssl As New System.Net.Security.SslStream(ms, True, Function(sender, chain, certificate, SslPolicyErrors) True)    'Noncompliant
-                    '                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  ^^^^
+            Using ms As New System.IO.MemoryStream
+                Using ssl As New System.Net.Security.SslStream(ms, True, Function(sender, chain, certificate, SslPolicyErrors) True)
+                    '                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    '                                                                                                          ^^^^ Secondary@-1
                 End Using
                 Using ssl As New System.Net.Security.SslStream(ms, True, AddressOf InvalidValidation)   'Noncompliant
                 End Using

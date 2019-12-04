@@ -2,27 +2,29 @@
 
 /*
 hello
-fixme - Noncompliant
-FIXME */ //Noncompliant
+fixme -  // Noncompliant
+FIXME */ // Noncompliant
 
 // Noncompliant: hello FIXME world
 
 // ok
 
-
+// Noncompliant@+3
 ///
 /// <summary>
-/// FIXME - Noncompliant
+/// FIXME -
 /// </summary>
 
+// Noncompliant@+2
 /**
-fixMe - Noncompliant
+fixMe -
 */
 
 // The following should be compliant:
 // aaaFIXME000
 
-// !FIXME! Noncompliant
+// Noncompliant@+1
+// !FIXME!
 
 /*FIXME*/ // Noncompliant
 //^^^^^
