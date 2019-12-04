@@ -33,11 +33,11 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UsingCookies
     {
-        private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
+        private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore(string packageVersion) =>
             FrameworkMetadataReference.Netstandard
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.NuGetLatestVersion))
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion))
-                .Concat(NuGetMetadataReference.MicrosoftExtensionsPrimitives(Constants.NuGetLatestVersion));
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(packageVersion))
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(packageVersion))
+                .Concat(NuGetMetadataReference.MicrosoftExtensionsPrimitives(packageVersion));
 
         private static IEnumerable<MetadataReference> GetAdditionalReferences_Net46() =>
             FrameworkMetadataReference.SystemWeb;
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_NetCore.cs",
                 new CSharp.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferences_NetCore());
+                additionalReferences: GetAdditionalReferences_NetCore(Constants.DotNetCore220Version));
         }
 
         [TestMethod]
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\UsingCookies_NetCore.vb",
                 new VisualBasic.UsingCookies(AnalyzerConfiguration.AlwaysEnabled),
-                additionalReferences: GetAdditionalReferences_NetCore());
+                additionalReferences: GetAdditionalReferences_NetCore(Constants.DotNetCore220Version));
 
         }
 
