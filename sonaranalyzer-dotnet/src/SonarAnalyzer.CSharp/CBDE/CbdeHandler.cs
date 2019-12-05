@@ -38,6 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public class CbdeHandler
     {
         Action<String, String, Location, CompilationAnalysisContext> raiseIssue;
+        Func<CompilationAnalysisContext, bool> shouldRunInContext;
 
         private const string cbdeJsonOutputFileName = "cbdeSEout.json";
 
@@ -97,10 +98,19 @@ namespace SonarAnalyzer.Rules.CSharp
             UnpackCbdeExe();
             GlobalLog("After unpack");
         }
-        public void Initialize(SonarAnalysisContext context, Action<String, String, Location, CompilationAnalysisContext> raiseIssue)
+        public void Initialize(SonarAnalysisContext context,
+            Action<String, String, Location, CompilationAnalysisContext> raiseIssue,
+            Func<CompilationAnalysisContext, bool> shouldRunInContext)
         {
             this.raiseIssue = raiseIssue;
-            GlobalLog("Before initialize");
+            this.shouldRunInContext = shouldRunInContext;
+            bool hasPath = (cbdeBinaryPath != null);
+            if(cbdeBinaryPath != null)
+            {
+                GlobalLog("CBDE: Should not be run in that context");   
+                hasPath = true;
+            }
+            GlobalLog(String.Format("Before initialize {0}", hasPath));
             var watch = System.Diagnostics.Stopwatch.StartNew();
             if (cbdeBinaryPath != null)
             {
@@ -114,6 +124,10 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCompilationAction(
                 c =>
                 {
+                    if(!shouldRunInContext(c))
+                    {
+                        return;
+                    }
                     var compilationHash = c.Compilation.GetHashCode();
                     InitializePathsAndLog(c.Compilation.Assembly.Name, compilationHash);
                     GlobalLog("CBDE: Compilation phase");

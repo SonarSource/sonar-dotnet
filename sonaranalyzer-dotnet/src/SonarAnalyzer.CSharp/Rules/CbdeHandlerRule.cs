@@ -24,6 +24,9 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using System.Collections.Immutable;
+using System.Linq;
+using System.IO;
+using System.Runtime.InteropServices;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -32,7 +35,8 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(S3949DiagnosticId)]
     public sealed class CbdeHandlerRule : SonarDiagnosticAnalyzer
     {
-        CbdeHandler cbdeHandler = new CbdeHandler();
+        // Note: For now, this rule actually runs only under windows and outside of SonarLint
+        private CbdeHandler cbdeHandler;
         private const string S2583DiagnosticId = "S2583";
         private const string S2583MessageFormat = "{0}";
         private static readonly DiagnosticDescriptor ruleS2583 = DiagnosticDescriptorBuilder.GetDescriptor(S2583DiagnosticId, S2583MessageFormat, RspecStrings.ResourceManager, fadeOutCode: true);
@@ -49,7 +53,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            cbdeHandler.Initialize(context, OnCbdeIssue);
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                cbdeHandler = new CbdeHandler();
+                cbdeHandler.Initialize(context, OnCbdeIssue, ShouldRunCbdeInContext);
+            }
         }
 
         private void OnCbdeIssue(String key, String message, Location loc, CompilationAnalysisContext context)
@@ -58,6 +66,34 @@ namespace SonarAnalyzer.Rules.CSharp
                 throw new InvalidOperationException($"CBDE should not raise issues on key {key}");
 
             context.ReportDiagnosticWhenActive(Diagnostic.Create(ruleIdToDiagDescriptor[key], loc, message));
+        }
+
+        internal const string ConfigurationAdditionalFile = "ProjectOutFolderPath.txt";
+        internal static bool IsProjectOutput(AdditionalText file) =>
+           ParameterLoader.ConfigurationFilePathMatchesExpected(file.Path, ConfigurationAdditionalFile);
+
+        // The logic used here is based on detecting a file which is present only when not run from SonarLint
+        // The logic is copied from FirstOrDefault(IsProjectOutput)
+        // TODO: factorize this?
+        internal static bool CalledFromSonarLint(CompilationAnalysisContext context)
+        {
+            var options = context.Options;
+            var settings = PropertiesHelper.GetSettings(options);
+            var projectOutputAdditionalFile = options.AdditionalFiles
+                .FirstOrDefault(IsProjectOutput);
+
+            if (!settings.Any() || projectOutputAdditionalFile == null)
+            {
+                return true;
+            }
+            var WorkDirectoryBasePath = File.ReadAllLines(projectOutputAdditionalFile.Path).FirstOrDefault(l => !string.IsNullOrEmpty(l));
+
+            return string.IsNullOrEmpty(WorkDirectoryBasePath);
+        }
+
+        private bool ShouldRunCbdeInContext(CompilationAnalysisContext context)
+        {
+            return !CalledFromSonarLint(context);
         }
     }
 }
