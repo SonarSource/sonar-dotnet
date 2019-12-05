@@ -126,5 +126,35 @@ namespace SonarAnalyzer.UnitTest.Helpers
             new[] { 1, 22, 333 }.JoinStr(", ").Should().Be("1, 22, 333");
             new[] { 1, 22, 333 }.JoinStr(null).Should().Be("122333");
         }
+
+        [TestMethod]
+        public void WhereNotNull_Class()
+        {
+            var instance = new Object();
+            new object[] { }.WhereNotNull().Should().BeEmpty();
+            new object[] { null, null, null }.WhereNotNull().Should().BeEmpty();
+            new object[] { 1, "a", instance }.WhereNotNull().Should().BeEquivalentTo(new object[] { 1, "a", instance });
+            new object[] { 1, "a", null }.WhereNotNull().Should().BeEquivalentTo(new object[] { 1, "a"});
+        }
+
+        [TestMethod]
+        public void WhereNotNull_NullableStruct()
+        {
+            new StructType?[] { }.WhereNotNull().Should().BeEmpty();
+            new StructType?[] { null, null, null }.WhereNotNull().Should().BeEmpty();
+            new StructType?[] { new StructType(1), new StructType(2), new StructType (3)}.WhereNotNull().Should().BeEquivalentTo(new object[] { new StructType(1), new StructType(2), new StructType(3) });
+            new StructType?[] { new StructType(1), new StructType(2), null }.WhereNotNull().Should().BeEquivalentTo(new object[] { new StructType(1), new StructType(2) });
+        }
+
+        private struct StructType {
+
+            public int Count;
+
+            public StructType(int count)
+            {
+                Count = count;
+            }
+        }
+
     }
 }

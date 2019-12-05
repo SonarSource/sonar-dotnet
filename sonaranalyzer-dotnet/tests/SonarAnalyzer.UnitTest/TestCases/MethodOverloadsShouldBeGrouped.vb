@@ -132,16 +132,123 @@ Namespace Tests.TestCases
         End Sub
     End Structure
 
+    Class K
+
+        Public Sub Lorem()
+        End Sub
+
+        Public Sub DoSomething()
+        End Sub
+
+        Private Sub DoSomething(i As Integer)   ' Compliant interleaving With different accesibility
+        End Sub
+
+        Protected Sub DoSomething(b As Boolean)
+        End Sub
+
+        Public Sub DoSomething(s As String)
+        End Sub
+
+        Private Sub Lorem(i As Integer)     ' Compliant, different accessibility
+        End Sub
+
+    End Class
+
     ' https://github.com/SonarSource/sonar-dotnet/issues/2776
     Public Class StaticMethodsTogether
-        Public Shared Sub MethodA() ' Noncompliant FP
+
+        Public Sub New()
+        End Sub
+
+        Public Sub New(i As Integer)
+        End Sub
+
+        Public Shared Sub MethodA() ' Compliant - Static methods are grouped together, it's ok
         End Sub
 
         Public Shared Sub MethodB()
         End Sub
 
-        Public Sub MethodA(ByVal i As Integer) ' Secondary {{Non-adjacent overload}}
+        Shared Sub New()            ' Compliant - static constructor can be grouped with static methods
         End Sub
+
+        Public Sub MethodA(ByVal i As Integer)
+        End Sub
+
+        Public Shared Sub MethodC() ' Noncompliant - When there're more shared methods, they still should be together
+        End Sub
+
+        Public Shared Sub MethodD()
+        End Sub
+
+        Public Shared Function MethodD(i As Integer) As Integer ' Compliant
+        End Function
+
+        Public Shared Sub MethodD(b As Boolean)         ' Compliant
+        End Sub
+
+        Public Shared Sub MethodC(b As Boolean)         ' Secondary
+        End Sub
+
+        Public Shared Sub Separator()
+        End Sub
+
+        Public Shared Function MethodC(i As Integer)    ' Secondary
+        End Function
+
+    End Class
+
+    Public MustInherit Class MustOverrideMethodsTogether
+
+        Protected MustOverride Sub DoWork(b As Boolean) 'Compliant - MustOverride methods are grouped together, it's OK
+        Protected MustOverride Sub DoWork(i As Integer)
+
+        Protected Sub New()
+        End Sub
+
+        Protected Sub DoWork() 'Compliant - MustOverride methods are grouped together, it's OK
+            DoWork(True)
+            DoWork(42)
+        End Sub
+
+        Protected MustOverride Sub OnEvent(b As Boolean)    'Noncompliant
+        Protected MustOverride Sub OnProgress()
+        Protected MustOverride Sub OnEvent(i As Integer)    'Secondary
+
+        Public Sub DoSomething()
+        End Sub
+
+        Protected MustOverride Sub DoSomething(b As Boolean)
+
+        Public Sub DoSomething(i As Integer)
+        End Sub
+
+    End Class
+
+    Public Class Inheritor
+        Inherits MustOverrideMethodsTogether
+
+        Protected Overrides Sub DoWork(b As Boolean)
+        End Sub
+
+        Public Overloads Shared Sub DoWork(s As String)           'Compliant interleaving with static
+        End Sub
+
+        Protected Overrides Sub DoWork(i As Integer)
+        End Sub
+
+        Protected Overrides Sub OnEvent(b As Boolean)   'Noncompliant
+        End Sub
+
+        Protected Overrides Sub OnProgress()
+        End Sub
+
+        Protected Overrides Sub OnEvent(i As Integer)   'Secondary
+        End Sub
+
+        Protected Overrides Sub DoSomething(b As Boolean)
+        End Sub
+
     End Class
 
 End Namespace

@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void MethodOverloadsShouldBeGrouped()
+        public void MethodOverloadsShouldBeGrouped_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\MethodOverloadsShouldBeGrouped.cs",
                 new CS.MethodOverloadsShouldBeGrouped());

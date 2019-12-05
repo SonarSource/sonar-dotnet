@@ -148,22 +148,130 @@ namespace Tests.Diagnostics
         void DoSomething(int a) { } // Secondary {{Non-adjacent overload}}
     }
 
+    class K
+    {
+        public void Lorem() { }
+
+        public void DoSomething() { }
+
+        private void DoSomething(int i) { }    // Compliant interleaving with different accesibility
+
+        protected void DoSomething(bool b) { }
+
+        public void DoSomething(string s) { }
+
+        private void Lorem(int i) { }       // Compliant, different accessibility
+
+    }
+
     // https://github.com/SonarSource/sonar-dotnet/issues/2776
     public class StaticMethodsTogether
     {
-        public static void MethodA() // Noncompliant FP - static methods are grouped together, it's ok
+
+        public StaticMethodsTogether() { }
+        public StaticMethodsTogether(int i) { }
+
+        public static void MethodA() // Compliant - static methods are grouped together, it's ok
         {
-            // do nothing
         }
 
         public static void MethodB()
         {
-            // do nothing
         }
 
-        public void MethodA(int i)  // Secondary {{Non-adjacent overload}}
+        static StaticMethodsTogether() { }  //Compliant - static constructor can be grouped with static methods
+
+        public void MethodA(int i)
         {
-            // do nothing
         }
+
+        public static void MethodC()    // Noncompliant - When there're more shared methods, they still should be together
+        {
+        }
+
+        public static void MethodD()
+        {
+        }
+
+        public static int MethodD(int i)
+        {
+            return i;
+        }
+
+        public static void MethodD(bool b)
+        {
+        }
+
+        public static void MethodC(bool b)    // Secondary
+        {
+        }
+
+        public static void Separator()
+        {
+        }
+
+        public static int MethodC(int i)    // Secondary
+        {
+            return i;
+        }
+
     }
+
+    public abstract class MustOverrideMethodsTogether
+    {
+
+        protected abstract void DoWork(bool b); //Compliant - abstract methods are grouped together, it's OK
+        protected abstract void DoWork(int i);
+
+        protected MustOverrideMethodsTogether() { }
+
+        protected void DoWork() //Compliant - abstract methods are grouped together, it's OK
+        {
+            DoWork(true);
+            DoWork(42);
+        }
+
+        protected abstract void OnEvent(bool b);    //Noncompliant
+        protected abstract void OnProgress();
+        protected abstract void OnEvent(int i);     //Secondary
+
+        public void DoSomething() { }
+        protected abstract void DoSomething(bool b);     //Compliant interleaving with abstract
+        public void DoSomething(int i) { }
+
+    }
+
+    public class Inheritor : MustOverrideMethodsTogether
+    {
+
+        protected override void DoWork(bool b)
+        {
+        }
+
+        public static void DoWork(string s) //Compliant interleaving with static
+        {
+        }
+
+        protected override void DoWork(int i)
+        {
+        }
+
+        protected override void OnEvent(bool b) //Noncompliant
+        {
+        }
+
+        protected override void OnProgress()
+        {
+        }
+
+        protected override void OnEvent(int i)  //Secondary
+        {
+        }
+
+        protected override void DoSomething(bool b)
+        {
+        }
+
+    }
+
 }

@@ -72,6 +72,12 @@ namespace SonarAnalyzer.Helpers
             return enumerable.Where(e => e != null);
         }
 
+        public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<Nullable<T>> enumerable)
+                where T : struct
+        {
+            return enumerable.Where(x => x.HasValue).Select(x => x.Value);
+        }
+
         /// <summary>
         /// Applies a specified function to the corresponding elements of two sequences,
         /// producing a sequence of the results. If the collections have different length
@@ -114,34 +120,26 @@ namespace SonarAnalyzer.Helpers
         /// <summary>
         /// This is string.Join() as extension. Concatenates members of collection using specified separator between each member. Selector is used to extract string value from T for concatenation.
         /// </summary>
-        public static string JoinStr<T>(this IEnumerable<T> enumerable, string separator, Func<T, string> selector)
-        {
-            return string.Join(separator, enumerable.Select(x => selector(x)));
-        }
+        public static string JoinStr<T>(this IEnumerable<T> enumerable, string separator, Func<T, string> selector) =>
+            string.Join(separator, enumerable.Select(x => selector(x)));
 
         /// <summary>
         /// This is string.Join() as extension. Concatenates members of collection using specified separator between each member. Selector is used to extract integer value from T for concatenation.
         /// </summary>
-        public static string JoinStr<T>(this IEnumerable<T> enumerable, string separator, Func<T, int> selector)
-        {
-            return string.Join(separator, enumerable.Select(x => selector(x)));
-        }
+        public static string JoinStr<T>(this IEnumerable<T> enumerable, string separator, Func<T, int> selector) =>
+            string.Join(separator, enumerable.Select(x => selector(x)));
 
         /// <summary>
         /// This is string.Join() as extension. Concatenates members of string collection using specified separator between each member.
         /// </summary>
-        public static string JoinStr(this IEnumerable<string> enumerable, string separator)
-        {
-            return JoinStr(enumerable, separator, x => x);
-        }
+        public static string JoinStr(this IEnumerable<string> enumerable, string separator) =>
+            JoinStr(enumerable, separator, x => x);
 
         /// <summary>
         /// This is string.Join() as extension. Concatenates members of int collection using specified separator between each member.
         /// </summary>
-        public static string JoinStr(this IEnumerable<int> enumerable, string separator)
-        {
-            return JoinStr(enumerable, separator, x => x);
-        }
+        public static string JoinStr(this IEnumerable<int> enumerable, string separator) =>
+            JoinStr(enumerable, separator, x => x);
 
 
     }
