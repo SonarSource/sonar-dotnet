@@ -12,7 +12,7 @@
   <PropertyGroup>
     <RelativeCBDEFolder>CBDE\</RelativeCBDEFolder>
     <CBDEFolder>$(MSBuildProjectDirectory)\$(RelativeCBDEFolder)</CBDEFolder>
-    <SpecificCBDEVersion>1.0.0.13060</SpecificCBDEVersion>
+    <SpecificCBDEVersion>1.0.0.13154</SpecificCBDEVersion>
   </PropertyGroup>
   <ItemGroup>
     <CBDEUrls Include="http://repox.jfrog.io/repox/sonarsource-public-builds/org/sonarsource/cbde/$(SpecificCBDEVersion)/cbde-windows.$(SpecificCBDEVersion).zip" >
@@ -20,11 +20,13 @@
       <MainExe>dotnet-symbolic-execution.exe</MainExe>
       <ZipFileName>cbde-windows.zip</ZipFileName>
     </CBDEUrls>
+    <!-- Only Windows is supported for now
     <CBDEUrls Include="http://repox.jfrog.io/repox/sonarsource-public-builds/org/sonarsource/cbde/$(SpecificCBDEVersion)/cbde-linux.$(SpecificCBDEVersion).zip" >
       <SubFolder>linux\</SubFolder>
       <MainExe>dotnet-symbolic-execution</MainExe>
       <ZipFileName>cbde-linux.zip</ZipFileName>
     </CBDEUrls>
+    -->
   </ItemGroup>
 
 
