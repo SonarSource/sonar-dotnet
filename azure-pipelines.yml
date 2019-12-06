@@ -21,7 +21,7 @@ stages:
     burgrName: 'build'
     burgrType: 'build'
     stageName: 'build'
-    stageDisplayName: Build and stage to repox
+    stageDisplayName: 'Build the dotnet analyzers and stage to repox'
     jobs:
     - job: dotnetBuildjob
       displayName: 'Build and package'
@@ -76,7 +76,7 @@ stages:
           secureFile: 'sonarsource-2019-2021.pfx'
 
       - task: VSBuild@1
-        displayName: "Build SonarAnalyzer"
+        displayName: "Build SonarAnalyzer solution"
         inputs:
           solution: '$(solution)'
           platform: '$(buildPlatform)'
@@ -84,7 +84,7 @@ stages:
           msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=true /p:DefineConstants=SignAssembly /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:pfxCertificatePath="$(pfx.secureFilePath)" /p:pfxPassword="$(pfxPassword)" /p:pfxSha1=$(pfxSha1) /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0'
 
       - task: PublishPipelineArtifact@1
-        displayName: 'Publish binaries as pipeline artifact'
+        displayName: 'Publish analyzer binaries as pipeline artifact'
         inputs:
           path: sonaranalyzer-dotnet/its/binaries/
           artifact: Binaries
@@ -116,13 +116,13 @@ stages:
     burgrName: 'qa'
     burgrType: 'qa'
     stageName: 'qa'
-    stageDisplayName: Run ITs
+    stageDisplayName: 'Run dotnet analyzers ITs and publish SC QG'
     stageDependencies: build
     dependsOn: dotnetBuildStage
 
     jobs:
     - job: runUnitTestsJob
-      displayName: 'Run unit tests'
+      displayName: 'Run dotnet unit tests'
 
       steps:
       - task: NuGetToolInstaller@1
@@ -173,7 +173,7 @@ stages:
           projectVersion: '$(SONAR_PROJECT_VERSION)'
 
       - task: VSBuild@1
-        displayName: "Build SonarAnalyzer"
+        displayName: 'Build SonarAnalyzer solution'
         inputs:
           solution: '$(solution)'
           platform: '$(buildPlatform)'
@@ -203,7 +203,7 @@ stages:
 
 
     - job: runIntegrationTestsJob
-      displayName: 'Run integration tests'
+      displayName: 'Run SonarAnalyzer integration tests'
 
       steps:
       - task: DownloadPipelineArtifact@2
@@ -216,7 +216,7 @@ stages:
         displayName: "Install NuGet"
 
       - task: PowerShell@2
-        displayName: 'Run integration tests'
+        displayName: 'Run SonarAnalyzer integration tests'
         inputs:
           filePath: 'sonaranalyzer-dotnet/its/regression-test.ps1'
           workingDirectory: 'sonaranalyzer-dotnet/its'
@@ -311,7 +311,7 @@ stages:
           path: $(MAVEN_CACHE_FOLDER)
 
       - task: SonarCloudPrepare@1
-        displayName: 'Run Code Analysis - Begin Step'
+        displayName: 'Prepare code analysis for Java plugin'
         inputs:
           SonarCloud: 'SonarCloud'
           organization: 'sonarsource'
