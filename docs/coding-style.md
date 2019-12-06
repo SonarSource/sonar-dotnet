@@ -11,21 +11,25 @@ and standard [Naming Guidelines](https://docs.microsoft.com/en-us/dotnet/standar
 Members and types should always have the lowest possible visibility.
 
 Ordering of class members should be the following:
+
 1. Constants
-2. Fields
-3. Abstract members
-4. Constructors
-5. Methods and Properties
-6. Private nested classes
+1. Fields
+1. Abstract members
+1. Constructors
+1. Properties
+1. Methods 
+1. Private nested classes
 
 Furthermore, each of these categories should be ordered from higher to lower accessibility level (public, internal, protected, private).
 
 ## FIXME and ToDo
 
-`FIXME` should only be used in the code during development as a temporary reminder that there is still work to
+* `FIXME` should only be used in the code during development as a temporary reminder that there is still work to
 be done here. A `FIXME` should never appear in a PR or be merged into master.
-`ToDo` can be used to mark part of the code that will need to be updated at a later time. It can be used to
+
+* `ToDo` can be used to mark part of the code that will need to be updated at a later time. It can be used to
 track updates that should be done at some point, but that either cannot be done at that moment, or can be fixed later.
+Ideally, a `ToDo` comment should be followed by an issue number (what needs to be done should be in the github issues).
 
 ## Regions
 
@@ -36,4 +40,5 @@ for the implementation of these interfaces.
 
 ## VB.NET Specifics
 
-Empty lines should be used between blocks and regions to improve readability.
+Empty lines should be used between blocks, `Namespace`/`End Namespace` statements, `Class`/`End Class` statements
+and regions to improve readability.

@@ -19,7 +19,7 @@ by creating a new GitHub Issue to get some early feedback on this idea.
 ## Pull Request (PR)
 
 To submit a contribution, create a pull request for this repository. Please make sure that you have the proper
-[toolset](https://github.com/SonarSource/sonar-developer-toolset) and follow our [coding style](CODING_STYLE.md).
+[toolset](https://github.com/SonarSource/sonar-developer-toolset) and follow our [coding style](./docs/coding-style.md).
 
 ## Custom Rules
 
