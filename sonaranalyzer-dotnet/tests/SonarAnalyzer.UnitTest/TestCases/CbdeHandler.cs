@@ -37,17 +37,17 @@ namespace Tests.Diagnostics
                 DoSomething();
             }
 
-            if (true) // Noncompliant {{Condition is always true}}
+            if (true) // always true (but rule not actvated)
             {
                 DoSomething2();
             }
 
-            if (false) // Noncompliant {{Condition is always false}}
+            if (false) // always false (but rule not actvated)
             {
                 DoSomething();
             }
 
-            if (true) // Noncompliant {{Condition is always true}}
+            if (true) // always true (but rule not actvated)
             {
                 DoSomething();
             }
@@ -55,7 +55,7 @@ namespace Tests.Diagnostics
             {
             }
 
-            if (false) // Noncompliant {{Condition is always false}}
+            if (false) // always false (but rule not actvated)
             {
                 DoSomething2();
             }
@@ -65,7 +65,7 @@ namespace Tests.Diagnostics
             }
 
             int j = 0;
-            if (j == 0) // Noncompliant {{Condition is always true}}
+            if (j == 0) // always true (but rule not actvated)
             {
                 DoSomething2();
             }
@@ -76,7 +76,7 @@ namespace Tests.Diagnostics
 
             if (i == 0)
             {
-                if (i == 0) // Noncompliant {{Condition is always true}}
+                if (i == 0) // always true (but rule not actvated)
                 {
                     DoSomething2();
                 }
@@ -85,7 +85,7 @@ namespace Tests.Diagnostics
             j = i;
             if (i == 0)
             {
-                if (j == 0) // Noncompliant {{Condition is always true}}
+                if (j == 0) // always true (but rule not actvated)
                 {
                     DoSomething2();
                 }

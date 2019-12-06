@@ -32,24 +32,19 @@ using System.Diagnostics.CodeAnalysis;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(S2583DiagnosticId)]
     [Rule(S3949DiagnosticId)]
     public sealed class CbdeHandlerRule : SonarDiagnosticAnalyzer
     {
         // Note: For now, this rule actually runs only under windows and outside of SonarLint
         private readonly bool unitTest;
-        private const string S2583DiagnosticId = "S2583";
-        private const string S2583MessageFormat = "{0}";
-        private static readonly DiagnosticDescriptor ruleS2583 = DiagnosticDescriptorBuilder.GetDescriptor(S2583DiagnosticId, S2583MessageFormat, RspecStrings.ResourceManager, fadeOutCode: true);
 
         private const string S3949DiagnosticId = "S3949";
         private const string S3949MessageFormat = "{0}";
         private static readonly DiagnosticDescriptor ruleS3949 = DiagnosticDescriptorBuilder.GetDescriptor(S3949DiagnosticId, S3949MessageFormat, RspecStrings.ResourceManager, fadeOutCode: true);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(ruleS2583, ruleS3949);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(ruleS3949);
 
         private readonly ImmutableDictionary<string, DiagnosticDescriptor> ruleIdToDiagDescriptor = ImmutableDictionary<string, DiagnosticDescriptor>.Empty
-            .Add("S2583", ruleS2583)
             .Add("S3949", ruleS3949);
         public CbdeHandlerRule() : this(false) {}
         private CbdeHandlerRule(bool unitTest)
@@ -64,11 +59,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                CbdeHandler cbdeHandler = new CbdeHandler();
-                cbdeHandler.Initialize(context, OnCbdeIssue, ShouldRunCbdeInContext);
+                CbdeHandler cbdeHandler = new CbdeHandler(context, OnCbdeIssue, ShouldRunCbdeInContext);
             }
         }
 
+        // This functions is called for each issue found by cbde after it runs
         private void OnCbdeIssue(String key, String message, Location loc, CompilationAnalysisContext context)
         {
             if (!ruleIdToDiagDescriptor.ContainsKey(key))
@@ -102,6 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return string.IsNullOrEmpty(WorkDirectoryBasePath);
         }
 
+        // This function is called from CbdeHandler to check if it should run
         private bool ShouldRunCbdeInContext(CompilationAnalysisContext context)
         {
             return !CalledFromSonarLint(context) || unitTest;
