@@ -1,7 +1,7 @@
 <p>Numbers are infinite, but the types that hold them are not. Each numeric type has hard upper and lower bounds. Try to calculate or assign numbers
 beyond those bounds, and the result will be a value that has silently wrapped around from the expected positive value to a negative one, or vice
 versa.</p>
-<p>This rule is only available for analyzers running on Windows machines. It will not be reported by analazyers running on any other OS.</p>
+<p>This rule is only available for analyses run on Windows machines. It will not be reported in analyses run on any other OS.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 public int getTheNumber(int positiveInt) {
@@ -9,4 +9,3 @@ public int getTheNumber(int positiveInt) {
   return num + positiveInt;  // Noncompliant
 }
 </pre>
-
