@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,6 +27,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Diagnostics.CodeAnalysis;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -36,7 +37,6 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class CbdeHandlerRule : SonarDiagnosticAnalyzer
     {
         // Note: For now, this rule actually runs only under windows and outside of SonarLint
-        private CbdeHandler cbdeHandler;
         private readonly bool unitTest;
         private const string S2583DiagnosticId = "S2583";
         private const string S2583MessageFormat = "{0}";
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(ruleS2583, ruleS3949);
 
-        private ImmutableDictionary<string, DiagnosticDescriptor> ruleIdToDiagDescriptor = ImmutableDictionary<string, DiagnosticDescriptor>.Empty
+        private readonly ImmutableDictionary<string, DiagnosticDescriptor> ruleIdToDiagDescriptor = ImmutableDictionary<string, DiagnosticDescriptor>.Empty
             .Add("S2583", ruleS2583)
             .Add("S3949", ruleS3949);
         public CbdeHandlerRule() : this(false) {}
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                cbdeHandler = new CbdeHandler();
+                CbdeHandler cbdeHandler = new CbdeHandler();
                 cbdeHandler.Initialize(context, OnCbdeIssue, ShouldRunCbdeInContext);
             }
         }
@@ -78,12 +78,14 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         internal const string ConfigurationAdditionalFile = "ProjectOutFolderPath.txt";
+
+        [ExcludeFromCodeCoverage]
         internal static bool IsProjectOutput(AdditionalText file) =>
            ParameterLoader.ConfigurationFilePathMatchesExpected(file.Path, ConfigurationAdditionalFile);
 
         // The logic used here is based on detecting a file which is present only when not run from SonarLint
         // The logic is copied from FirstOrDefault(IsProjectOutput)
-        // TODO: factorize this?
+        [ExcludeFromCodeCoverage]
         internal static bool CalledFromSonarLint(CompilationAnalysisContext context)
         {
             var options = context.Options;
