@@ -27,8 +27,6 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -38,8 +36,6 @@ import static com.sonar.it.vbnet.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DoNotAnalyzeTestFilesTest {
-
-  final private static Logger LOG = LoggerFactory.getLogger(DoNotAnalyzeTestFilesTest.class);
 
   @ClassRule
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
@@ -62,7 +58,6 @@ public class DoNotAnalyzeTestFilesTest {
       .setProjectVersion("1.0")
       .setProfile("vbnet_no_rule")
       .setProperty("sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml")
-      .setProperty("sonar.verbose", "true")
       .setProperty("sonar.projectBaseDir", projectDir.toString() + File.separator + "MyLib.Tests");
 
     orchestrator.executeBuild(beginStep);

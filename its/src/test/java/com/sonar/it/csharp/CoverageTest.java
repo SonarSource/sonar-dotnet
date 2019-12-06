@@ -33,8 +33,6 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getMeasure;
@@ -42,9 +40,6 @@ import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CoverageTest {
-
-
-  final private static Logger LOG = LoggerFactory.getLogger(CoverageTest.class);
 
   @ClassRule
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
@@ -75,13 +70,10 @@ public class CoverageTest {
   @Test
   public void ncover3() throws Exception {
 
-    LOG.info("ncover3 - will do build");
-
     String reportPath = temp.getRoot().getAbsolutePath() + File.separator +
                         "CoverageTest" + File.separator +
                         "reports" + File.separator + "ncover3.nccov";
 
-    LOG.info("ncover3 - will analyze with reportPath : " + reportPath);
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", reportPath);
 
     assertThat(buildResult.getLogs()).contains(
@@ -173,14 +165,11 @@ public class CoverageTest {
   private BuildResult analyzeCoverageTestProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "CoverageTest");
 
-    LOG.info(String.format("Coverage Test: project dir is '%s'", projectDir));
-
     ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("CoverageTest")
       .setProjectName("CoverageTest")
       .setProjectVersion("1.0")
-      .setProperty("sonar.verbose", "true")
       .setProfile("no_rule")
       .setProperties(keyValues);
 

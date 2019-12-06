@@ -224,7 +224,6 @@ public class CoverageTest {
       .addArgument("begin")
       .setProjectKey("CSharpVBNetCoverage")
       .setProjectVersion("1.0")
-      .setProperty("sonar.verbose", "true")
       .setProperties(keyValues)
       .setProperty("sonar.projectBaseDir", projectDir.toString());
 
