@@ -214,11 +214,12 @@ public class CoverageReportImportSensorTest {
     // If the test is being run under VSTS then the Scanner will
     // expect the project to be under the VSTS sources directory
     File baseDirectory = null;
+
     if (VstsUtils.isRunningUnderVsts()){
       String vstsSourcePath = VstsUtils.getSourcesDirectory();
       baseDirectory = new File(vstsSourcePath);
     }
-    TemporaryFolder folder = new TemporaryFolder(baseDirectory);
-    return folder;
+
+    return new TemporaryFolder(baseDirectory);
   }
 }
