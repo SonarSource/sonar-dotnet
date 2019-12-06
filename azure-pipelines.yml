@@ -1,0 +1,419 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  - group: sonar-dotnet-variables
+  - group: sonarsource-build-variables
+
+resources:
+  repositories:
+    - repository: commonTemplates
+      type: git
+      name: pipelines-yaml-templates
+      ref:  refs/tags/v1.0.6
+
+stages:
+- template: stage-with-burgr-notifications.yml@commonTemplates
+  parameters:
+    burgrName: 'build'
+    burgrType: 'build'
+    stageName: 'build'
+    stageDisplayName: Build and stage to repox
+    jobs:
+    - job: dotnetBuildjob
+      displayName: 'Build and package'
+
+      steps:
+      - task: NuGetToolInstaller@1
+        displayName: "Install NuGet"
+
+      - task: Cache@2
+        displayName: Cache NuGet packages
+        inputs:
+          key: 'nuget | "$(Agent.OS)" | **/packages.lock.json'
+          restoreKeys: |
+            nuget | "$(Agent.OS)"
+            nuget
+          path: $(NUGET_PACKAGES)
+
+      - task: NuGetCommand@2
+        displayName: "Restore NuGet packages"
+        inputs:
+          restoreSolution: '$(solution)'
+
+      - powershell: |
+          # Calculate the file path
+          $versionFilePath = "$env:BUILD_SOURCESDIRECTORY\scripts\version\Version.props"
+          Write-Host "Reading the Sonar project version from '${versionFilePath}' ..."
+
+          # Read the version from the file
+          [xml]$versionProps = Get-Content "$versionFilePath"
+          $sonarProjectVersion = $versionProps.Project.PropertyGroup.MainVersion
+          Write-Host "Sonar project version is '${sonarProjectVersion}'"
+
+          # Set the variable to it can be used by other tasks
+          Write-Host "##vso[task.setvariable variable=SONAR_PROJECT_VERSION;]$sonarProjectVersion"
+        displayName: 'Read Sonar project version from the versions.props file'
+
+      - task: VSBuild@1
+        displayName: 'Set BranchName, Sha1 and BuildNumber'
+        inputs:
+          solution: scripts/version/ChangeVersion.proj
+          msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
+
+      - task: DownloadSecureFile@1
+        displayName: 'Download snk file'
+        name: snk
+        inputs:
+          secureFile: SonarSourceSecret.snk
+
+      - task: DownloadSecureFile@1
+        displayName: 'Download pfx file'
+        inputs:
+          secureFile: 'sonarsource-2019-2021.pfx'
+
+      - task: VSBuild@1
+        displayName: "Build SonarAnalyzer"
+        inputs:
+          solution: '$(solution)'
+          platform: '$(buildPlatform)'
+          configuration: '$(buildConfiguration)'
+          msbuildArgs: '/p:DeployExtension=false /p:SignAssembly=true /p:DefineConstants=SignAssembly /p:AssemblyOriginatorKeyFile="$(snk.secureFilePath)" /p:pfxCertificatePath="$(pfx.secureFilePath)" /p:pfxPassword="$(pfxPassword)" /p:pfxSha1=$(pfxSha1) /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId) /p:WarningLevel=0'
+
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish binaries as pipeline artifact'
+        inputs:
+          path: sonaranalyzer-dotnet/its/binaries/
+          artifact: Binaries
+
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish rule descriptor binaries as pipeline artifact'
+        inputs:
+          path: sonaranalyzer-dotnet\src\SonarAnalyzer.RuleDescriptorGenerator\bin
+          artifact: RuleDescriptorBin
+
+      - task: NuGetCommand@2
+        displayName: "Build NuGet packages"
+        inputs:
+          command: pack
+          packagesToPack: 'sonaranalyzer-dotnet/src/**/*.nuspec'
+          configuration: '$(BuildConfiguration)'
+          packDestination: '$(Build.ArtifactStagingDirectory)/packages'
+          verbosityPack: 'Detailed'
+          publishPackageMetadata: true
+
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish NuGet packages as build artifacts'
+        inputs:
+          pathToPublish: '$(Build.ArtifactStagingDirectory)/packages'
+          artifactName: 'NuGet Packages'
+
+- template: stage-with-burgr-notifications.yml@commonTemplates
+  parameters:
+    burgrName: 'qa'
+    burgrType: 'qa'
+    stageName: 'qa'
+    stageDisplayName: Run ITs
+    stageDependencies: build
+    dependsOn: dotnetBuildStage
+
+    jobs:
+    - job: runUnitTestsJob
+      displayName: 'Run unit tests'
+
+      steps:
+      - task: NuGetToolInstaller@1
+        displayName: "Install NuGet"
+
+      - task: Cache@2
+        displayName: Cache NuGet packages
+        inputs:
+          key: 'nuget | "$(Agent.OS)" | **/packages.lock.json'
+          restoreKeys: |
+            nuget | "$(Agent.OS)"
+            nuget
+          path: $(NUGET_PACKAGES)
+
+      - task: NuGetCommand@2
+        displayName: "Restore NuGet packages"
+        inputs:
+          restoreSolution: '$(solution)'
+
+      - powershell: |
+          # Calculate the file path
+          $versionFilePath = "$env:BUILD_SOURCESDIRECTORY\scripts\version\Version.props"
+          Write-Host "Reading the Sonar project version from '${versionFilePath}' ..."
+
+          # Read the version from the file
+          [xml]$versionProps = Get-Content "$versionFilePath"
+          $sonarProjectVersion = $versionProps.Project.PropertyGroup.MainVersion
+          Write-Host "Sonar project version is '${sonarProjectVersion}'"
+
+          # Set the variable to it can be used by other tasks
+          Write-Host "##vso[task.setvariable variable=SONAR_PROJECT_VERSION;]$sonarProjectVersion"
+        displayName: 'Read Sonar project version from the versions.props file'
+
+      - task: VSBuild@1
+        displayName: 'Set BranchName, Sha1 and BuildNumber properties from Azure pipeline variables'
+        inputs:
+          solution: scripts/version/ChangeVersion.proj
+          msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
+
+      - task: SonarCloudPrepare@1
+        displayName: 'Run Code Analysis - Begin Step'
+        inputs:
+          SonarCloud: 'SonarCloud'
+          organization: 'sonarsource'
+          scannerMode: 'MSBuild'
+          projectKey: 'sonaranalyzer-dotnet'
+          projectName: 'SonarAnalyzer .Net'
+          projectVersion: '$(SONAR_PROJECT_VERSION)'
+
+      - task: VSBuild@1
+        displayName: "Build SonarAnalyzer"
+        inputs:
+          solution: '$(solution)'
+          platform: '$(buildPlatform)'
+          configuration: '$(buildConfiguration)'
+          msbuildArgs: '/p:DeployExtension=false /p:Sha1=$(Build.SourceVersion) /p:BuildNumber=$(Build.BuildId)'
+
+      - task: VSTest@2
+        displayName: "Run SonarAnalyzer unit tests"
+        inputs:
+          testAssemblyVer2: |
+            **\$(BuildConfiguration)\**\*.UnitTest.dll
+            !**\obj\**
+          runInParallel: true
+          runTestsInIsolation: true
+          codeCoverageEnabled: true
+          platform: '$(buildPlatform)'
+          configuration: '$(buildConfiguration)'
+          rerunFailedTests: false
+
+      - task: SonarCloudAnalyze@1
+        displayName: 'Run Code Analysis - End Step'
+
+      - task: SonarCloudPublish@1
+        displayName: 'Run Code Analysis - Publish QG'
+        inputs:
+          pollingTimeoutSec: '300'
+
+
+    - job: runIntegrationTestsJob
+      displayName: 'Run integration tests'
+
+      steps:
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download binaries to test'
+        inputs:
+          artifact: Binaries
+          targetPath: 'sonaranalyzer-dotnet/its/binaries/'
+
+      - task: NuGetToolInstaller@1
+        displayName: "Install NuGet"
+
+      - task: PowerShell@2
+        displayName: 'Run integration tests'
+        inputs:
+          filePath: 'sonaranalyzer-dotnet/its/regression-test.ps1'
+          workingDirectory: 'sonaranalyzer-dotnet/its'
+
+    - job: runJavaBuild
+      displayName: 'Run Java build'
+
+      steps:
+
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download .Net binaries for Maven build'
+        inputs:
+          artifact: Binaries
+          targetPath: 'sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/$(buildConfiguration)/'
+
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download rule descriptor binaries'
+        inputs:
+          artifact: RuleDescriptorBin
+          targetPath: sonaranalyzer-dotnet\src\SonarAnalyzer.RuleDescriptorGenerator\bin
+
+      - task: Cache@2
+        displayName: "Cache Maven local repo"
+        inputs:
+          key: 'maven | "$(Agent.OS)" | **/pom.xml'
+          restoreKeys: |
+            maven | "$(Agent.OS)"
+            maven
+          path: $(MAVEN_CACHE_FOLDER)
+
+      - task: DownloadSecureFile@1
+        displayName: 'Download Maven settings'
+        name: mavenSettings
+        inputs:
+          secureFile: 'maven-settings.xml'
+
+      - template: update-maven-version-steps.yml
+        parameters:
+          mavenSettingsFilePath: $(mavenSettings.secureFilePath)
+
+      - task: Maven@3
+        displayName: 'Run Maven deploy'
+        env:
+          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
+          ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_DEPLOY_PASSWORD)
+        inputs:
+          goals: 'deploy'
+          options: >-
+            $(commonMavenArguments)
+            --settings $(mavenSettings.secureFilePath)
+          publishJUnitResults: false
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '1.11'
+          mavenOptions: $(MAVEN_OPTS)
+
+
+    - job: runJavaUnitTests
+      displayName: 'Run Java Unit Tests'
+      dependsOn: runJavaBuild
+
+      steps:
+
+      - task: DownloadSecureFile@1
+        displayName: 'Download Maven settings'
+        name: mavenSettings
+        inputs:
+          secureFile: 'maven-settings.xml'
+
+      - template: update-maven-version-steps.yml
+        parameters:
+          mavenSettingsFilePath: $(mavenSettings.secureFilePath)
+
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download .Net binaries for Maven build'
+        inputs:
+          artifact: Binaries
+          targetPath: 'sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/$(buildConfiguration)/'
+          
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download rule descriptor binaries'
+        inputs:
+          artifact: RuleDescriptorBin
+          targetPath: 'sonaranalyzer-dotnet\src\SonarAnalyzer.RuleDescriptorGenerator\bin'
+
+      - task: Cache@2
+        displayName: "Cache Maven local repo"
+        inputs:
+          key: 'maven | "$(Agent.OS)" | **/pom.xml'
+          restoreKeys: |
+            maven | "$(Agent.OS)"
+            maven
+          path: $(MAVEN_CACHE_FOLDER)
+
+      - task: SonarCloudPrepare@1
+        displayName: 'Run Code Analysis - Begin Step'
+        inputs:
+          SonarCloud: 'SonarCloud'
+          organization: 'sonarsource'
+          scannerMode: 'Other'
+
+      - task: Maven@3
+        displayName: 'Run Maven verify, UTs with SonarCloud'
+        inputs:
+          goals: 'verify'
+          options: -B --settings $(mavenSettings.secureFilePath) -Pcoverage
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          testRunTitle: 'UTs on Windows'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '1.11'
+          mavenOptions: $(MAVEN_OPTS)
+          sonarQubeRunAnalysis: true
+          sqMavenPluginVersionChoice: 'latest'
+
+      - task: SonarCloudPublish@1
+        displayName: 'Run Code Analysis - Publish QG'
+        inputs:
+          pollingTimeoutSec: '300'
+
+      - bash: git checkout .
+        name: revertPomChanges
+        displayName: Revert changes made to pom.xml to not break cache feature
+
+    - job: runJavaIntegrationTests
+      displayName: 'Run Java Integration Tests'
+      dependsOn: runJavaBuild
+
+      steps:
+
+      - task: DownloadSecureFile@1
+        displayName: 'Download Maven settings'
+        name: mavenSettings
+        inputs:
+          secureFile: 'maven-settings.xml'
+
+      - template: update-maven-version-steps.yml
+        parameters:
+          mavenSettingsFilePath: $(mavenSettings.secureFilePath)
+
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download .Net binaries for Maven build'
+        inputs:
+          artifact: Binaries
+          targetPath: 'sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/$(buildConfiguration)/'
+          
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download rule descriptor binaries'
+        inputs:
+          artifact: RuleDescriptorBin
+          targetPath: 'sonaranalyzer-dotnet\src\SonarAnalyzer.RuleDescriptorGenerator\bin'
+
+      - task: Cache@2
+        displayName: "Cache Maven local repo"
+        inputs:
+          key: 'maven | "$(Agent.OS)" | **/pom.xml'
+          restoreKeys: |
+            maven | "$(Agent.OS)"
+            maven
+          path: $(MAVEN_CACHE_FOLDER)
+
+      - task: Maven@3
+        displayName: 'Run Maven install'
+        env:
+          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
+          ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_DEPLOY_PASSWORD)
+        inputs:
+          goals: 'install'
+          options: >-
+            $(commonMavenArguments)
+            --settings $(mavenSettings.secureFilePath)
+            -DskipTests=true
+          publishJUnitResults: false
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '1.11'
+          mavenOptions: $(MAVEN_OPTS)
+
+      - task: Maven@3
+        displayName: 'Run MVN ITs'
+        env:
+          ARTIFACTORY_API_KEY: $(ARTIFACTORY_API_KEY)
+          GITHUB_TOKEN: $(GITHUB_TOKEN)
+        inputs:
+          mavenPomFile: its/pom.xml
+          goals: 'verify'
+          options: -B --settings $(mavenSettings.secureFilePath)
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          testRunTitle: 'ITs on Windows'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '1.11'
+          mavenOptions: $(MAVEN_OPTS)
+
+      - bash: git checkout .
+        name: revertPomChanges
+        displayName: Revert changes made to pom.xml to not break cache feature
+
+- template: promote-stage.yml@commonTemplates
+  parameters:
+    stageDependencies:
+    - qa

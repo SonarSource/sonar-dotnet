@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 
+import com.sonar.orchestrator.build.ScannerForMSBuild;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.SystemUtils;
 import org.junit.ClassRule;
@@ -41,7 +42,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MetricsTest {
 
-  public static TemporaryFolder temp = new TemporaryFolder();
+  public static TemporaryFolder temp = TestUtils.createTempFolder();
 
   private static final String PROJECT = "MetricsTest";
   private static final String DIRECTORY = TestUtils.hasModules(ORCHESTRATOR) ? "MetricsTest:MetricsTest:1F026ECA-900A-488D-9D07-AD23216FA32B:foo" : "MetricsTest:foo";
@@ -73,19 +74,22 @@ public class MetricsTest {
           ORCHESTRATOR.resetData();
 
           Path projectDir = Tests.projectDir(temp, "MetricsTest");
-          ORCHESTRATOR.executeBuild(TestUtils.newScanner(projectDir)
+
+          ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
             .addArgument("begin")
             .setProjectKey("MetricsTest")
             .setProjectName("MetricsTest")
             .setProjectVersion("1.0")
             .setProfile("no_rule")
             // Without that, the MetricsTest project is considered as a Test project :)
-            .setProperty("sonar.msbuild.testProjectPattern", "noTests"));
+            .setProperty("sonar.msbuild.testProjectPattern", "noTests")
+            .setProperty("sonar.projectBaseDir", projectDir.toString());
+
+          ORCHESTRATOR.executeBuild(beginStep);
 
           TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
 
-          ORCHESTRATOR.executeBuild(TestUtils.newScanner(projectDir)
-            .addArgument("end"));
+          ORCHESTRATOR.executeBuild(TestUtils.newEndStep(projectDir));
         }
       });
   }

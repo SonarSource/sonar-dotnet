@@ -22,6 +22,8 @@ package com.sonar.it.csharp;
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
 import java.nio.file.Path;
+
+import com.sonar.orchestrator.build.ScannerForMSBuild;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -34,7 +36,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class NoSonarTest {
 
   @ClassRule
-  public static TemporaryFolder temp = new TemporaryFolder();
+  public static TemporaryFolder temp = TestUtils.createTempFolder();
 
   private static final String PROJECT = "NoSonarTest";
   @ClassRule
@@ -45,19 +47,21 @@ public class NoSonarTest {
     orchestrator.resetData();
 
     Path projectDir = Tests.projectDir(temp, "NoSonarTest");
-    ORCHESTRATOR.executeBuild(TestUtils.newScanner(projectDir)
+
+    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("NoSonarTest")
       .setProjectName("NoSonarTest")
       .setProjectVersion("1.0")
       .setProfile("class_name")
       // Without that, the NoSonarTest project is considered as a Test project :)
-      .setProperty("sonar.msbuild.testProjectPattern", "noTests"));
+      .setProperty("sonar.msbuild.testProjectPattern", "noTests");
+
+    ORCHESTRATOR.executeBuild(beginStep);
 
     TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
 
-    ORCHESTRATOR.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("end"));
+    ORCHESTRATOR.executeBuild(TestUtils.newEndStep(projectDir));
   }
 
   @Test

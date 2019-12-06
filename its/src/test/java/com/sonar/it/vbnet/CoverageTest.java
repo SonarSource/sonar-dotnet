@@ -21,6 +21,7 @@ package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
+import com.sonar.orchestrator.build.ScannerForMSBuild;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -42,7 +43,7 @@ public class CoverageTest {
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
   @Rule
-  public TemporaryFolder temp = new TemporaryFolder();
+  public TemporaryFolder temp = TestUtils.createTempFolder();
 
   @Before
   public void init() {
@@ -113,17 +114,20 @@ public class CoverageTest {
   @Test
   public void no_coverage_on_tests() throws Exception {
     Path projectDir = Tests.projectDir(temp, "VbNoCoverageOnTests");
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+
+    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("VbNoCoverageOnTests")
       .setProjectVersion("1.0")
       .setProfile("vbnet_no_rule")
-      .setProperty("sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml"));
+      .setProperty("sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml")
+      .setProperty("sonar.projectBaseDir", projectDir.toString());
+
+    orchestrator.executeBuild(beginStep);
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    BuildResult buildResult = orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("end"));
+    BuildResult buildResult = orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor VB.NET Tests Coverage Report Import",
@@ -150,17 +154,19 @@ public class CoverageTest {
 
   private BuildResult analyzeCoverageTestProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "VbCoverageTest");
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+
+    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("VbCoverageTest")
       .setProjectVersion("1.0")
       .setProfile("vbnet_no_rule")
-      .setProperties(keyValues));
+      .setProperties(keyValues);
+
+    orchestrator.executeBuild(beginStep);
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    return orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("end"));
+    return orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
   }
 
   @Test
@@ -213,17 +219,20 @@ public class CoverageTest {
 
   private BuildResult analyzeCoverageMixProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "CSharpVBNetCoverage");
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+
+    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("CSharpVBNetCoverage")
       .setProjectVersion("1.0")
-      .setProperties(keyValues));
+      .setProperty("sonar.verbose", "true")
+      .setProperties(keyValues)
+      .setProperty("sonar.projectBaseDir", projectDir.toString());
 
-    TestUtils.runNuGet(orchestrator, projectDir, "restore");
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+    orchestrator.executeBuild(beginStep);
 
-    return orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("end"));
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Restore", "/t:Rebuild");
+
+    return orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
   }
 
   private static final String getProgramCsComponentId() { return TestUtils.hasModules(orchestrator) ? "CSharpVBNetCoverage:CSharpVBNetCoverage:2EC3A59D-240B-498F-BF1F-EB2A84092718:Program.cs" : "CSharpVBNetCoverage:CSharpConsoleApp/Program.cs"; }

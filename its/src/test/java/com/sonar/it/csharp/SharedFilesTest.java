@@ -21,8 +21,11 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
+
 import java.nio.file.Path;
 import java.util.List;
+
+import com.sonar.orchestrator.build.ScannerForMSBuild;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -38,7 +41,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class SharedFilesTest {
   @Rule
-  public TemporaryFolder temp = new TemporaryFolder();
+  public TemporaryFolder temp = TestUtils.createTempFolder();
 
   @ClassRule
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
@@ -51,17 +54,19 @@ public class SharedFilesTest {
   @Test
   public void should_analyze_shared_files() throws Exception {
     Path projectDir = Tests.projectDir(temp, "SharedFilesTest");
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+
+    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("SharedFilesTest")
       .setProjectVersion("1.0")
-      .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml"));
+      .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml")
+      .setProperty("sonar.projectBaseDir", projectDir.toString());
 
-    TestUtils.runNuGet(orchestrator, projectDir, "restore");
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+    orchestrator.executeBuild(beginStep);
 
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("end"));
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Restore", "/t:Rebuild");
+
+    orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
 
     assertThat(getComponent("SharedFilesTest:Class1.cs")).isNotNull();
     assertThat(getComponent(TestUtils.hasModules(ORCHESTRATOR) ? "SharedFilesTest:SharedFilesTest:77C8C6B5-18EC-45D4-8DA8-17A6525450A4:Program1.cs" : "SharedFilesTest:ConsoleApp1/Program1.cs")).isNotNull();

@@ -20,6 +20,7 @@
 package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
+import com.sonar.orchestrator.build.ScannerForMSBuild;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -41,7 +42,7 @@ public class UnitTestResultsTest {
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
   @Rule
-  public TemporaryFolder temp = new TemporaryFolder();
+  public TemporaryFolder temp = TestUtils.createTempFolder();
 
   @Before
   public void init() {
@@ -60,18 +61,20 @@ public class UnitTestResultsTest {
 
   private void analyzeTestProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "VbUnitTestResultsTest");
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+
+    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("VbUnitTestResultsTest")
       .setProjectName("VbUnitTestResultsTest")
       .setProjectVersion("1.0")
       .setProfile("vbnet_no_rule")
-      .setProperties(keyValues));
+      .setProperties(keyValues);
+
+    orchestrator.executeBuild(beginStep);
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("end"));
+    orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
   }
 
   @Test

@@ -20,6 +20,7 @@
 package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
+import com.sonar.orchestrator.build.ScannerForMSBuild;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -39,26 +40,28 @@ public class NoSonarTest {
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
   private static final String PROJECT = "VbNoSonarTest";
   @ClassRule
-  public static TemporaryFolder temp = new TemporaryFolder();
+  public static TemporaryFolder temp = TestUtils.createTempFolder();
 
   @BeforeClass
   public static void init() throws Exception {
     orchestrator.resetData();
 
     Path projectDir = Tests.projectDir(temp, "VbNoSonarTest");
-    ORCHESTRATOR.executeBuild(TestUtils.newScanner(projectDir)
+
+    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("VbNoSonarTest")
       .setProjectName("VbNoSonarTest")
       .setProjectVersion("1.0")
       .setProfile("vbnet_class_name")
       // Without that, the NoSonarTest project is considered as a Test project :)
-      .setProperty("sonar.msbuild.testProjectPattern", "noTests"));
+      .setProperty("sonar.msbuild.testProjectPattern", "noTests");
+
+    ORCHESTRATOR.executeBuild(beginStep);
 
     TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
 
-    ORCHESTRATOR.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("end"));
+    ORCHESTRATOR.executeBuild(TestUtils.newEndStep(projectDir));
   }
 
   @Test
