@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -37,6 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         // Note: For now, this rule actually runs only under windows and outside of SonarLint
         private CbdeHandler cbdeHandler;
+        private readonly bool unitTest;
         private const string S2583DiagnosticId = "S2583";
         private const string S2583MessageFormat = "{0}";
         private static readonly DiagnosticDescriptor ruleS2583 = DiagnosticDescriptorBuilder.GetDescriptor(S2583DiagnosticId, S2583MessageFormat, RspecStrings.ResourceManager, fadeOutCode: true);
@@ -50,7 +51,15 @@ namespace SonarAnalyzer.Rules.CSharp
         private ImmutableDictionary<string, DiagnosticDescriptor> ruleIdToDiagDescriptor = ImmutableDictionary<string, DiagnosticDescriptor>.Empty
             .Add("S2583", ruleS2583)
             .Add("S3949", ruleS3949);
-
+        public CbdeHandlerRule() : this(false) {}
+        private CbdeHandlerRule(bool unitTest)
+        {
+            this.unitTest = unitTest;
+        }
+        public static CbdeHandlerRule MakeUnitTestInstance()
+        {
+            return new CbdeHandlerRule(true);
+        }
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -93,7 +102,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private bool ShouldRunCbdeInContext(CompilationAnalysisContext context)
         {
-            return !CalledFromSonarLint(context);
+            return !CalledFromSonarLint(context) || unitTest;
         }
     }
 }
