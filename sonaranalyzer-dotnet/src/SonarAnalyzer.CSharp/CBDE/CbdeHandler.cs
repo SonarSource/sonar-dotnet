@@ -56,6 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly object logFileLock = new Object();
         private static readonly object metricsFileLock = new Object();
         private static readonly object perfFileLock = new Object();
+        private static readonly object staticInitLock = new Object();
 
         private static readonly string mlirPath =
             Environment.GetEnvironmentVariable("CIRRUS_WORKING_DIR") ?? // For Cirrus
@@ -101,7 +102,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             this.raiseIssue = raiseIssue;
             this.shouldRunInContext = shouldRunInContext;
-            lock (perfFileLock)
+            lock (staticInitLock)
             {
                 if(!initialized)
                 {
