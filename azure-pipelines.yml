@@ -62,7 +62,7 @@ stages:
         displayName: 'Set BranchName, Sha1 and BuildNumber'
         inputs:
           solution: scripts/version/ChangeVersion.proj
-          msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
+          msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:Pipeline=$(Build.BuildId) /p:Repository="SonarSource/sonar-dotnet" /p:BuildConfiguration=$(BuildConfiguration)'
 
       - task: DownloadSecureFile@1
         displayName: 'Download snk file'
