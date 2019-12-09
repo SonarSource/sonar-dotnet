@@ -62,11 +62,7 @@ public class UnitTestResultsTest {
   private void analyzeTestProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "VbUnitTestResultsTest");
 
-    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
-      .addArgument("begin")
-      .setProjectKey("VbUnitTestResultsTest")
-      .setProjectName("VbUnitTestResultsTest")
-      .setProjectVersion("1.0")
+    ScannerForMSBuild beginStep = TestUtils.createStartStep("VbUnitTestResultsTest", projectDir)
       .setProfile("vbnet_no_rule")
       .setProperties(keyValues);
 

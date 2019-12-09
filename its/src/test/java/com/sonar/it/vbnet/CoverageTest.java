@@ -115,13 +115,9 @@ public class CoverageTest {
   public void no_coverage_on_tests() throws Exception {
     Path projectDir = Tests.projectDir(temp, "VbNoCoverageOnTests");
 
-    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
-      .addArgument("begin")
-      .setProjectKey("VbNoCoverageOnTests")
-      .setProjectVersion("1.0")
+    ScannerForMSBuild beginStep = TestUtils.createStartStep("VbNoCoverageOnTests", projectDir)
       .setProfile("vbnet_no_rule")
-      .setProperty("sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml")
-      .setProperty("sonar.projectBaseDir", projectDir.toString());
+      .setProperty("sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
     orchestrator.executeBuild(beginStep);
 
@@ -155,10 +151,7 @@ public class CoverageTest {
   private BuildResult analyzeCoverageTestProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "VbCoverageTest");
 
-    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
-      .addArgument("begin")
-      .setProjectKey("VbCoverageTest")
-      .setProjectVersion("1.0")
+    ScannerForMSBuild beginStep = TestUtils.createStartStep("VbCoverageTest", projectDir)
       .setProfile("vbnet_no_rule")
       .setProperties(keyValues);
 
@@ -220,12 +213,8 @@ public class CoverageTest {
   private BuildResult analyzeCoverageMixProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "CSharpVBNetCoverage");
 
-    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
-      .addArgument("begin")
-      .setProjectKey("CSharpVBNetCoverage")
-      .setProjectVersion("1.0")
-      .setProperties(keyValues)
-      .setProperty("sonar.projectBaseDir", projectDir.toString());
+    ScannerForMSBuild beginStep = TestUtils.createStartStep("CSharpVBNetCoverage", projectDir)
+      .setProperties(keyValues);
 
     orchestrator.executeBuild(beginStep);
 

@@ -124,13 +124,9 @@ public class CoverageTest {
   public void no_coverage_on_tests() throws Exception {
     Path projectDir = Tests.projectDir(temp, "NoCoverageOnTests");
 
-    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
-      .addArgument("begin")
-      .setProjectKey("NoCoverageOnTests")
-      .setProjectVersion("1.0")
+    ScannerForMSBuild beginStep = TestUtils.createStartStep("NoCoverageOnTests", projectDir)
       .setProfile("no_rule")
-      .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml")
-      .setProperty("sonar.projectBaseDir", projectDir.toString());
+      .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
     orchestrator.executeBuild(beginStep);
 
@@ -165,11 +161,7 @@ public class CoverageTest {
   private BuildResult analyzeCoverageTestProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "CoverageTest");
 
-    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
-      .addArgument("begin")
-      .setProjectKey("CoverageTest")
-      .setProjectName("CoverageTest")
-      .setProjectVersion("1.0")
+    ScannerForMSBuild beginStep = TestUtils.createStartStep("CoverageTest", projectDir)
       .setProfile("no_rule")
       .setProperties(keyValues);
 

@@ -92,11 +92,7 @@ public class UnitTestResultsTest {
   private BuildResult analyzeTestProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "UnitTestResultsTest");
 
-    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
-      .addArgument("begin")
-      .setProjectKey("UnitTestResultsTest")
-      .setProjectName("UnitTestResultsTest")
-      .setProjectVersion("1.0")
+    ScannerForMSBuild beginStep = TestUtils.createStartStep("UnitTestResultsTest", projectDir)
       .setProfile("no_rule")
       .setProperties(keyValues);
 

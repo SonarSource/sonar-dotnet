@@ -51,14 +51,9 @@ public class DoNotAnalyzeTestFilesTest {
   public void should_not_increment_test() throws Exception {
     Path projectDir = Tests.projectDir(temp, "VbDoNotAnalyzeTestFilesTest");
 
-    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
-      .addArgument("begin")
-      .setProjectKey("VbDoNotAnalyzeTestFilesTest")
-      .setProjectName("VbDoNotAnalyzeTestFilesTest")
-      .setProjectVersion("1.0")
+    ScannerForMSBuild beginStep = TestUtils.createStartStep("VbDoNotAnalyzeTestFilesTest", projectDir, "MyLib.Tests")
       .setProfile("vbnet_no_rule")
-      .setProperty("sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml")
-      .setProperty("sonar.projectBaseDir", projectDir.toString() + File.separator + "MyLib.Tests");
+      .setProperty("sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
     orchestrator.executeBuild(beginStep);
 

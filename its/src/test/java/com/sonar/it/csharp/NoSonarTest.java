@@ -48,11 +48,7 @@ public class NoSonarTest {
 
     Path projectDir = Tests.projectDir(temp, "NoSonarTest");
 
-    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
-      .addArgument("begin")
-      .setProjectKey("NoSonarTest")
-      .setProjectName("NoSonarTest")
-      .setProjectVersion("1.0")
+    ScannerForMSBuild beginStep = TestUtils.createStartStep("NoSonarTest", projectDir)
       .setProfile("class_name")
       // Without that, the NoSonarTest project is considered as a Test project :)
       .setProperty("sonar.msbuild.testProjectPattern", "noTests");

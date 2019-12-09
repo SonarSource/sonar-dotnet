@@ -83,15 +83,10 @@ public class MetricsIncludeHeaderCommentTest {
 
           Path projectDir = Tests.projectDir(temp, "MetricsTest");
 
-          ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
-            .addArgument("begin")
-            .setProjectKey("MetricsTest")
-            .setProjectName("MetricsTest")
-            .setProjectVersion("1.0")
+          ScannerForMSBuild beginStep = TestUtils.createStartStep("MetricsTest", projectDir)
             .setProfile("no_rule")
             // Without that, the MetricsTest project is considered as a Test project :)
-            .setProperty("sonar.msbuild.testProjectPattern", "noTests")
-            .setProperty("sonar.projectBaseDir", projectDir.toString());
+            .setProperty("sonar.msbuild.testProjectPattern", "noTests");
 
           ORCHESTRATOR.executeBuild(beginStep);
 

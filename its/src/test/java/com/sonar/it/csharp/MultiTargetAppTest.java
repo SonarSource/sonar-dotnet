@@ -57,14 +57,8 @@ public class MultiTargetAppTest {
   @Test
   public void should_analyze_multitarget_project() throws Exception {
     Path projectDir = Tests.projectDir(temp, "MultiTargetConsoleApp");
-    String baseDir = projectDir.toString() + File.separator + "MultiTargetConsoleApp";
 
-    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
-      .addArgument("begin")
-      .setProjectKey("MultiTargetConsoleApp")
-      .setProjectName("MultiTargetConsoleApp")
-      .setProjectVersion("1.0")
-      .setProperty("sonar.projectBaseDir", baseDir);
+    ScannerForMSBuild beginStep = TestUtils.createStartStep("MultiTargetConsoleApp", projectDir, "MultiTargetConsoleApp");
 
     orchestrator.executeBuild(beginStep);
 

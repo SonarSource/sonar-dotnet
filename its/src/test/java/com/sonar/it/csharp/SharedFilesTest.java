@@ -55,12 +55,8 @@ public class SharedFilesTest {
   public void should_analyze_shared_files() throws Exception {
     Path projectDir = Tests.projectDir(temp, "SharedFilesTest");
 
-    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
-      .addArgument("begin")
-      .setProjectKey("SharedFilesTest")
-      .setProjectVersion("1.0")
-      .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml")
-      .setProperty("sonar.projectBaseDir", projectDir.toString());
+    ScannerForMSBuild beginStep = TestUtils.createStartStep("SharedFilesTest", projectDir)
+      .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
     orchestrator.executeBuild(beginStep);
 

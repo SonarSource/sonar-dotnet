@@ -30,7 +30,6 @@ import org.sonarqube.ws.Issues;
 
 import com.sonar.orchestrator.Orchestrator;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
@@ -57,14 +56,8 @@ public class CasingAppTest {
   @Test
   public void class1_should_have_metrics_and_issues() throws IOException {
     Path projectDir = Tests.projectDir(temp, "CasingApp");
-    String baseDir = projectDir.toString() + File.separator + "CasingApp";
 
-    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
-      .addArgument("begin")
-      .setProjectKey("CasingApp")
-      .setProjectName("CasingApp")
-      .setProjectVersion("1.0")
-      .setProperty("sonar.projectBaseDir", baseDir);
+    ScannerForMSBuild beginStep = TestUtils.createStartStep("CasingApp", projectDir, "CasingApp");
 
     orchestrator.executeBuild(beginStep);
 

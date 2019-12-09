@@ -29,7 +29,6 @@ import org.junit.rules.RuleChain;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Measures.Measure;
 
-import java.io.File;
 import java.nio.file.Path;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
@@ -60,15 +59,10 @@ public class MetricsTest {
 
           Path projectDir = Tests.projectDir(temp, "VbMetricsTest");
 
-          ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
-            .addArgument("begin")
-            .setProjectKey("VbMetricsTest")
-            .setProjectName("VbMetricsTest")
-            .setProjectVersion("1.0")
+          ScannerForMSBuild beginStep = TestUtils.createStartStep("VbMetricsTest", projectDir)
             .setProfile("vbnet_no_rule")
             // Without that, the MetricsTest project is considered as a Test project :)
-            .setProperty("sonar.msbuild.testProjectPattern", "noTests")
-            .setProperty("sonar.projectBaseDir", projectDir.toString());
+            .setProperty("sonar.msbuild.testProjectPattern", "noTests");
 
           ORCHESTRATOR.executeBuild(beginStep);
 
