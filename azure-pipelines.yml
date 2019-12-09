@@ -118,7 +118,6 @@ stages:
     stageName: 'qa'
     stageDisplayName: 'Run dotnet analyzers ITs and publish SC QG'
     stageDependencies: build
-    dependsOn: dotnetBuildStage
 
     jobs:
     - job: runUnitTestsJob
