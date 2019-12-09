@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -228,10 +228,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 logStreamWriter.WriteLine("- Cbde process");
                 pProcess.StartInfo.FileName = cbdeBinaryPath;
                 pProcess.StartInfo.WorkingDirectory = mlirDirectoryAssembly;
-                var progressLogFile = Path.Combine(mlirDirectoryAssembly, "progressLogFile.log");
                 var cbdePerfLogFile = Path.Combine(mlirDirectoryAssembly, "perfLogFile.log");
 
-                pProcess.StartInfo.Arguments = "-i " + "\"" + mlirDirectoryAssembly + "\" -o \"" + cbdeJsonOutputPath + "\" -p \"" + progressLogFile + "\" -s \"" + cbdePerfLogFile + "\"";
+                pProcess.StartInfo.Arguments = $"-i \"{mlirDirectoryAssembly}\" -o \"{cbdeJsonOutputPath}\" -s \"{cbdePerfLogFile}\"";
 
                 logStreamWriter.WriteLine("  * binary_location: '{0}'", pProcess.StartInfo.FileName);
                 logStreamWriter.WriteLine("  * arguments: '{0}'", pProcess.StartInfo.Arguments);
