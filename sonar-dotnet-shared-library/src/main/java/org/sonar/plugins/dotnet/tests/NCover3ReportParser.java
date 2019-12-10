@@ -31,10 +31,10 @@ public class NCover3ReportParser implements CoverageParser {
 
   private static final String EXCLUDED_ID = "0";
   private static final Logger LOG = Loggers.get(NCover3ReportParser.class);
-  private final Predicate<String> isSupportedLanguage;
+  private final Predicate<String> isIndexedAndSupportedLanguage;
 
-  public NCover3ReportParser(Predicate<String> isSupportedLanguage) {
-    this.isSupportedLanguage = isSupportedLanguage;
+  public NCover3ReportParser(Predicate<String> isIndexedAndSupportedLanguage) {
+    this.isIndexedAndSupportedLanguage = isIndexedAndSupportedLanguage;
   }
 
   @Override
@@ -109,7 +109,7 @@ public class NCover3ReportParser implements CoverageParser {
 
       if (documents.containsKey(doc) && !isExcludedLine(line)) {
         String path = documents.get(doc);
-        if (isSupportedLanguage.test(path)) {
+        if (isIndexedAndSupportedLanguage.test(path)) {
 
           LOG.trace("NCover3 parser: found coverage for line '{}', vc '{}' when analyzing the doc '{}' with the path '{}'.",
             line, vc, doc, path);

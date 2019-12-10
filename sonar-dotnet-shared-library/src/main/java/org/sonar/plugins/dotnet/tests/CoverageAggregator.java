@@ -47,7 +47,7 @@ public class CoverageAggregator {
 
   public CoverageAggregator(CoverageConfiguration coverageConf, Configuration configuration, FileSystem fs) {
 
-    Predicate<String> isSupportedLanguage = absolutePath -> fs.hasFiles(
+    Predicate<String> isIndexedAndSupportedLanguage = absolutePath -> fs.hasFiles(
       fs.predicates().and(
         fs.predicates().hasAbsolutePath(absolutePath),
         fs.predicates().hasLanguage(coverageConf.languageKey())));
@@ -55,10 +55,10 @@ public class CoverageAggregator {
     this.coverageConf = coverageConf;
     this.configuration = configuration;
     this.coverageCache = new CoverageCache();
-    this.ncover3ReportParser = new NCover3ReportParser(isSupportedLanguage);
-    this.openCoverReportParser = new OpenCoverReportParser(isSupportedLanguage);
-    this.dotCoverReportsAggregator = new DotCoverReportsAggregator(new DotCoverReportParser(isSupportedLanguage));
-    this.visualStudioCoverageXmlReportParser = new VisualStudioCoverageXmlReportParser(isSupportedLanguage);
+    this.ncover3ReportParser = new NCover3ReportParser(isIndexedAndSupportedLanguage);
+    this.openCoverReportParser = new OpenCoverReportParser(isIndexedAndSupportedLanguage);
+    this.dotCoverReportsAggregator = new DotCoverReportsAggregator(new DotCoverReportParser(isIndexedAndSupportedLanguage));
+    this.visualStudioCoverageXmlReportParser = new VisualStudioCoverageXmlReportParser(isIndexedAndSupportedLanguage);
   }
 
   @VisibleForTesting
@@ -132,14 +132,18 @@ public class CoverageAggregator {
         if (filesMatchingPattern.isEmpty()) {
           LOG.warn("Could not find any coverage report file matching the pattern '{}'.", reportPathPattern);
         } else {
-          for (File reportFile : filesMatchingPattern) {
-            try {
-              aggregatedCoverage.mergeWith(coverageCache.readCoverageFromCacheOrParse(parser, reportFile));
-            } catch (Exception e) {
-              LOG.warn("Could not import coverage report '{}' because '{}'", reportFile, e.getMessage());
-            }
-          }
+          mergeParsedCoverageWithAggregatedCoverage(aggregatedCoverage, parser, filesMatchingPattern);
         }
+      }
+    }
+  }
+
+  private void mergeParsedCoverageWithAggregatedCoverage(Coverage aggregatedCoverage, CoverageParser parser, Set<File> filesMatchingPattern) {
+    for (File reportFile : filesMatchingPattern) {
+      try {
+        aggregatedCoverage.mergeWith(coverageCache.readCoverageFromCacheOrParse(parser, reportFile));
+      } catch (Exception e) {
+        LOG.warn("Could not import coverage report '{}' because '{}'", reportFile, e.getMessage());
       }
     }
   }
