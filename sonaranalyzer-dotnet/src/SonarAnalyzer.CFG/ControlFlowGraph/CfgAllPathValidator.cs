@@ -27,7 +27,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
     {
         protected readonly IControlFlowGraph cfg;
 
-        private readonly HashSet<Block> _alreadyVisitedBlocks = new HashSet<Block>();
+        private readonly HashSet<Block> alreadyVisitedBlocks = new HashSet<Block>();
 
         protected CfgAllPathValidator(IControlFlowGraph cfg)
         {
@@ -46,16 +46,16 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private bool AreAllSuccessorsValid(Block block)
         {
-            _alreadyVisitedBlocks.Add(block);
+            this.alreadyVisitedBlocks.Add(block);
 
             if (block.SuccessorBlocks.Contains(cfg.ExitBlock) ||
-                !block.SuccessorBlocks.Except(_alreadyVisitedBlocks).Any())
+                !block.SuccessorBlocks.Except(this.alreadyVisitedBlocks).Any())
             {
                 return false;
             }
 
             return block.SuccessorBlocks
-                .Except(_alreadyVisitedBlocks)
+                .Except(this.alreadyVisitedBlocks)
                 .All(b => IsBlockValidWithSuccessors(b));
         }
 

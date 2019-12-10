@@ -37,15 +37,15 @@ namespace SonarAnalyzer.ControlFlowGraph
 
         protected readonly Block[] successors;
 
-        public override IReadOnlyList<Block> SuccessorBlocks => ImmutableArray.Create(successors);
+        public override IReadOnlyList<Block> SuccessorBlocks => ImmutableArray.Create(this.successors);
 
         internal override void ReplaceSuccessors(Dictionary<Block, Block> replacementMapping)
         {
-            for (var i = 0; i < successors.Length; i++)
+            for (var i = 0; i < this.successors.Length; i++)
             {
-                if (replacementMapping.ContainsKey(successors[i]))
+                if (replacementMapping.ContainsKey(this.successors[i]))
                 {
-                    successors[i] = replacementMapping[successors[i]];
+                    this.successors[i] = replacementMapping[this.successors[i]];
                 }
             }
         }

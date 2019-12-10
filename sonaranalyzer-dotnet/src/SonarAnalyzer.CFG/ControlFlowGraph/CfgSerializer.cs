@@ -47,24 +47,24 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private class CfgWalker
         {
-            private readonly BlockIdProvider _blockId = new BlockIdProvider();
-            private readonly DotWriter _writer;
+            private readonly BlockIdProvider blockId = new BlockIdProvider();
+            private readonly DotWriter writer;
 
             public CfgWalker(DotWriter writer)
             {
-                _writer = writer;
+                this.writer = writer;
             }
 
             public void Visit(string methodName, IControlFlowGraph cfg)
             {
-                _writer.WriteGraphStart(methodName);
+                this.writer.WriteGraphStart(methodName);
 
                 foreach (var block in cfg.Blocks)
                 {
                     Visit(block);
                 }
 
-                _writer.WriteGraphEnd();
+                this.writer.WriteGraphEnd();
             }
 
             private void Visit(Block block)
@@ -133,14 +133,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
                     header += ":" + terminatorType;
                 }
-                _writer.WriteNode(_blockId.Get(block), header, block.Instructions.Select(i => i.ToString()).ToArray());
+                this.writer.WriteNode(this.blockId.Get(block), header, block.Instructions.Select(i => i.ToString()).ToArray());
             }
 
             private void WriteEdges(Block block, Func<Block, string> getLabel)
             {
                 foreach (var successor in block.SuccessorBlocks)
                 {
-                    _writer.WriteEdge(_blockId.Get(block), _blockId.Get(successor), getLabel(successor));
+                    this.writer.WriteEdge(this.blockId.Get(block), this.blockId.Get(successor), getLabel(successor));
                 }
             }
         }

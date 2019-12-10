@@ -33,23 +33,23 @@ namespace SonarAnalyzer.ControlFlowGraph
     /// </summary>
     public class Block
     {
-        private readonly Lazy<IReadOnlyList<SyntaxNode>> _instructions;
-        private readonly Lazy<IReadOnlyCollection<Block>> _predecessorBlocks;
-        private readonly Lazy<ISet<Block>> _allSuccessors;
-        private readonly Lazy<ISet<Block>> _allPredecessors;
+        private readonly Lazy<IReadOnlyList<SyntaxNode>> instructions;
+        private readonly Lazy<IReadOnlyCollection<Block>> predecessorBlocks;
+        private readonly Lazy<ISet<Block>> allSuccessors;
+        private readonly Lazy<ISet<Block>> allPredecessors;
 
         // Protected to allow extending and mocking
         protected Block()
         {
-            _instructions = new Lazy<IReadOnlyList<SyntaxNode>>(() => ReversedInstructions.Reverse().ToImmutableArray());
-            _predecessorBlocks = new Lazy<IReadOnlyCollection<Block>>(() => EditablePredecessorBlocks.ToImmutableHashSet());
-            _allSuccessors = new Lazy<ISet<Block>>(() => GetAll(this, b => b.SuccessorBlocks));
-            _allPredecessors = new Lazy<ISet<Block>>(() => GetAll(this, b => b.PredecessorBlocks));
+            this.instructions = new Lazy<IReadOnlyList<SyntaxNode>>(() => ReversedInstructions.Reverse().ToImmutableArray());
+            this.predecessorBlocks = new Lazy<IReadOnlyCollection<Block>>(() => EditablePredecessorBlocks.ToImmutableHashSet());
+            this.allSuccessors = new Lazy<ISet<Block>>(() => GetAll(this, b => b.SuccessorBlocks));
+            this.allPredecessors = new Lazy<ISet<Block>>(() => GetAll(this, b => b.PredecessorBlocks));
         }
 
-        public virtual IReadOnlyList<SyntaxNode> Instructions => _instructions.Value;
+        public virtual IReadOnlyList<SyntaxNode> Instructions => this.instructions.Value;
 
-        public virtual IReadOnlyCollection<Block> PredecessorBlocks => _predecessorBlocks.Value;
+        public virtual IReadOnlyCollection<Block> PredecessorBlocks => this.predecessorBlocks.Value;
 
         public virtual IReadOnlyList<Block> SuccessorBlocks { get; } = ImmutableArray.Create<Block>();
 
@@ -66,9 +66,9 @@ namespace SonarAnalyzer.ControlFlowGraph
         {
         }
 
-        public ISet<Block> AllSuccessorBlocks => _allSuccessors.Value;
+        public ISet<Block> AllSuccessorBlocks => this.allSuccessors.Value;
 
-        public ISet<Block> AllPredecessorBlocks => _allPredecessors.Value;
+        public ISet<Block> AllPredecessorBlocks => this.allPredecessors.Value;
 
         private static ISet<Block> GetAll(Block initial, Func<Block, IEnumerable<Block>> getNexts)
         {

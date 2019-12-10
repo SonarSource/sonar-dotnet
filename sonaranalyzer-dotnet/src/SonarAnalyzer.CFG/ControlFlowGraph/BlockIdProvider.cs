@@ -25,10 +25,10 @@ namespace SonarAnalyzer.ControlFlowGraph
 {
     public  class BlockIdProvider
     {
-        private readonly Dictionary<Block, string> _map = new Dictionary<Block, string>();
-        private int _counter;
+        private readonly Dictionary<Block, string> map = new Dictionary<Block, string>();
+        private int counter;
 
         public string Get(Block cfgBlock) =>
-            _map.GetOrAdd(cfgBlock, b => $"{_counter++}");
+            this.map.GetOrAdd(cfgBlock, b => $"{this.counter++}");
     }
 }

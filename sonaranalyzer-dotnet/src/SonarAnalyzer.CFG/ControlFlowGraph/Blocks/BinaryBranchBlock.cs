@@ -39,9 +39,9 @@ namespace SonarAnalyzer.ControlFlowGraph
             }
         }
 
-        public Block TrueSuccessorBlock => successors[0];
+        public Block TrueSuccessorBlock => this.successors[0];
 
-        public Block FalseSuccessorBlock => successors[1];
+        public Block FalseSuccessorBlock => this.successors[1];
 
         public SyntaxNode Parent => BranchingNode.Parent;
     }

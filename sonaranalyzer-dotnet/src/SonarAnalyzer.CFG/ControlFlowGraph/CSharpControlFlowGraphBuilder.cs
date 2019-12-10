@@ -606,12 +606,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             {
                 var finallySuccessors = new List<Block>();
                 finallySuccessors.Add(CreateBlock(catchSuccessor));
-                finallySuccessors.Add(CreateBlock(this.ExitTarget.Peek()));
+                finallySuccessors.Add(CreateBlock(this.exitTarget.Peek()));
 
                 // Create a finally block that can either go to try-finally successor (happy path) or exit target (exceptional path)
                 catchSuccessor = BuildBlock(tryStatement.Finally.Block, CreateBranchBlock(tryStatement.Finally, finallySuccessors));
                 // This finally block becomes current exit target stack in case we have a return inside the try/catch block
-                this.ExitTarget.Push(catchSuccessor);
+                this.exitTarget.Push(catchSuccessor);
             }
 
             var catchBlocks = tryStatement.Catches
@@ -638,7 +638,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             tryEndStatementConnections.Add(catchSuccessor); // happy path, no exceptions thrown
             if (!areAllExceptionsCaught) // unexpected exception thrown, go to exit (through finally if present)
             {
-                tryEndStatementConnections.Add(this.ExitTarget.Peek());
+                tryEndStatementConnections.Add(this.exitTarget.Peek());
             }
 
             Block tryBody;
@@ -675,7 +675,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             if (hasFinally)
             {
-                this.ExitTarget.Pop();
+                this.exitTarget.Pop();
             }
 
             return beforeTryBlock;
@@ -930,16 +930,16 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             // When there is a `throw` inside a `try`, and there is a `catch` with a filter,
             // the `throw` block should point to both the `catch` and the `exit` blocks.
             if (currentBlock.SuccessorBlocks.Any(b => b is BinaryBranchBlock x && x.BranchingNode.IsKind(SyntaxKind.CatchFilterClause)) &&
-                currentBlock.SuccessorBlocks.Contains(ExitTarget.Peek()))
+                currentBlock.SuccessorBlocks.Contains(this.exitTarget.Peek()))
             {
                 return BuildExpression(expression, currentBlock);
             }
-            return BuildExpression(expression, CreateJumpBlock(statement, ExitTarget.Peek(), currentBlock));
+            return BuildExpression(expression, CreateJumpBlock(statement, this.exitTarget.Peek(), currentBlock));
         }
 
         private Block BuildJumpToExitStatement(ExpressionSyntax expression, Block currentBlock, ExpressionSyntax innerExpression)
         {
-            return BuildExpression(innerExpression, CreateJumpBlock(expression, ExitTarget.Peek(), currentBlock));
+            return BuildExpression(innerExpression, CreateJumpBlock(expression, this.exitTarget.Peek(), currentBlock));
         }
 
         #endregion Build jumps: break, continue, return, throw, yield break
