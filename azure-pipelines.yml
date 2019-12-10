@@ -173,7 +173,7 @@ stages:
           extraProperties: |
             sonar.analysis.buildNumber=$(Build.BuildId)
             sonar.analysis.pipeline=$(Build.BuildId)
-            sonar.analysis.sha1=$(Build.SourceVersion)
+            sonar.analysis.sha1=$(System.PullRequest.SourceCommitId)
             sonar.analysis.repository=SonarSource/sonar-dotnet
 
       - task: PowerShell@2
