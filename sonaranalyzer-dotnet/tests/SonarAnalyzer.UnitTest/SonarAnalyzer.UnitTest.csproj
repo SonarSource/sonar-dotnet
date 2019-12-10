@@ -121,4 +121,10 @@
     </ProjectReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="SonarAnalyzer.CFG">
+      <HintPath>..\..\src\SonarAnalyzer.CFG\bin\Debug\net46\SonarAnalyzer.CFG.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
