@@ -233,7 +233,6 @@ stages:
 
 
     - job: runIntegrationTestsJob
-      condition: false
       displayName: 'Run SonarAnalyzer integration tests'
 
       steps:
@@ -372,7 +371,6 @@ stages:
         displayName: Revert changes made to pom.xml to not break cache feature
 
     - job: runJavaIntegrationTests
-      condition: false
       displayName: 'Run Java Integration Tests'
       dependsOn: runJavaBuild
 
