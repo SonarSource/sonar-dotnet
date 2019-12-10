@@ -21,7 +21,6 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 
-import java.io.File;
 import java.util.stream.Collectors;
 
 import com.sonar.orchestrator.build.ScannerForMSBuild;
@@ -58,13 +57,13 @@ public class MultiTargetAppTest {
   public void should_analyze_multitarget_project() throws Exception {
     Path projectDir = Tests.projectDir(temp, "MultiTargetConsoleApp");
 
-    ScannerForMSBuild beginStep = TestUtils.createStartStep("MultiTargetConsoleApp", projectDir, "MultiTargetConsoleApp");
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep("MultiTargetConsoleApp", projectDir, "MultiTargetConsoleApp");
 
     orchestrator.executeBuild(beginStep);
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Restore", "/t:Rebuild");
 
-    orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
+    orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
 
     String programCsComponentId = TestUtils.hasModules(ORCHESTRATOR) ? "MultiTargetConsoleApp:MultiTargetConsoleApp:9D7FB932-3B1E-446D-9D34-A63410458B88:Program.cs" : "MultiTargetConsoleApp:Program.cs";
     assertThat(getComponent(programCsComponentId)).isNotNull();

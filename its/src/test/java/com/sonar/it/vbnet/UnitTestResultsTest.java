@@ -62,7 +62,7 @@ public class UnitTestResultsTest {
   private void analyzeTestProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "VbUnitTestResultsTest");
 
-    ScannerForMSBuild beginStep = TestUtils.createStartStep("VbUnitTestResultsTest", projectDir)
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep("VbUnitTestResultsTest", projectDir)
       .setProfile("vbnet_no_rule")
       .setProperties(keyValues);
 
@@ -70,7 +70,7 @@ public class UnitTestResultsTest {
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
+    orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
   }
 
   @Test

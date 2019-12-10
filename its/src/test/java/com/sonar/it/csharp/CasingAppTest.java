@@ -57,13 +57,13 @@ public class CasingAppTest {
   public void class1_should_have_metrics_and_issues() throws IOException {
     Path projectDir = Tests.projectDir(temp, "CasingApp");
 
-    ScannerForMSBuild beginStep = TestUtils.createStartStep("CasingApp", projectDir, "CasingApp");
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep("CasingApp", projectDir, "CasingApp");
 
     orchestrator.executeBuild(beginStep);
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
+    orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
 
     String class1ComponentKey = TestUtils.hasModules(ORCHESTRATOR) ? "CasingApp:CasingApp:600E8C27-9AB2-48E9-AA48-2713E4B34288:SRC/Class1.cs" : "CasingApp:SRC/Class1.cs";
 

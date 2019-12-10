@@ -77,16 +77,16 @@ public class TestUtils {
     return pluginLocation;
   }
 
-  public static ScannerForMSBuild newEndStep(Path projectDir) {
+  public static ScannerForMSBuild createEndStep(Path projectDir) {
     return TestUtils.newScanner(projectDir)
       .addArgument("end");
   }
 
-  public static  ScannerForMSBuild createStartStep(String projectName, Path projectDir) {
-    return createStartStep(projectName, projectDir, "");
+  public static  ScannerForMSBuild createBeginStep(String projectName, Path projectDir) {
+    return createBeginStep(projectName, projectDir, "");
   }
 
-  public static  ScannerForMSBuild createStartStep(String projectName, Path projectDir, String subProjectName) {
+  public static  ScannerForMSBuild createBeginStep(String projectName, Path projectDir, String subProjectName) {
     return TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey(projectName)
@@ -96,10 +96,7 @@ public class TestUtils {
   }
 
   private static String getProjectBaseDir(Path projectDir, String subProjectName){
-    if (subProjectName.isEmpty()) {
-      return projectDir.toString();
-    }
-    return projectDir.toString() + File.separator + subProjectName;
+    return projectDir.resolve(subProjectName).toString();
   }
 
   private static Build<ScannerForMSBuild> newScanner(Path projectDir) {

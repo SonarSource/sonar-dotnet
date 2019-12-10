@@ -55,14 +55,14 @@ public class SharedFilesTest {
   public void should_analyze_shared_files() throws Exception {
     Path projectDir = Tests.projectDir(temp, "SharedFilesTest");
 
-    ScannerForMSBuild beginStep = TestUtils.createStartStep("SharedFilesTest", projectDir)
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep("SharedFilesTest", projectDir)
       .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
     orchestrator.executeBuild(beginStep);
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Restore", "/t:Rebuild");
 
-    orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
+    orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
 
     assertThat(getComponent("SharedFilesTest:Class1.cs")).isNotNull();
     assertThat(getComponent(TestUtils.hasModules(ORCHESTRATOR) ? "SharedFilesTest:SharedFilesTest:77C8C6B5-18EC-45D4-8DA8-17A6525450A4:Program1.cs" : "SharedFilesTest:ConsoleApp1/Program1.cs")).isNotNull();

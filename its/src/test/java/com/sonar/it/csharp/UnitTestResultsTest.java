@@ -92,7 +92,7 @@ public class UnitTestResultsTest {
   private BuildResult analyzeTestProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "UnitTestResultsTest");
 
-    ScannerForMSBuild beginStep = TestUtils.createStartStep("UnitTestResultsTest", projectDir)
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep("UnitTestResultsTest", projectDir)
       .setProfile("no_rule")
       .setProperties(keyValues);
 
@@ -100,6 +100,6 @@ public class UnitTestResultsTest {
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    return orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
+    return orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
   }
 }

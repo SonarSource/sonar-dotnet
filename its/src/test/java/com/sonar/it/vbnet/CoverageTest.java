@@ -115,7 +115,7 @@ public class CoverageTest {
   public void no_coverage_on_tests() throws Exception {
     Path projectDir = Tests.projectDir(temp, "VbNoCoverageOnTests");
 
-    ScannerForMSBuild beginStep = TestUtils.createStartStep("VbNoCoverageOnTests", projectDir)
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep("VbNoCoverageOnTests", projectDir)
       .setProfile("vbnet_no_rule")
       .setProperty("sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
@@ -123,7 +123,7 @@ public class CoverageTest {
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    BuildResult buildResult = orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
+    BuildResult buildResult = orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor VB.NET Tests Coverage Report Import",
@@ -151,7 +151,7 @@ public class CoverageTest {
   private BuildResult analyzeCoverageTestProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "VbCoverageTest");
 
-    ScannerForMSBuild beginStep = TestUtils.createStartStep("VbCoverageTest", projectDir)
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep("VbCoverageTest", projectDir)
       .setProfile("vbnet_no_rule")
       .setProperties(keyValues);
 
@@ -159,7 +159,7 @@ public class CoverageTest {
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    return orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
+    return orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
   }
 
   @Test
@@ -213,14 +213,14 @@ public class CoverageTest {
   private BuildResult analyzeCoverageMixProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "CSharpVBNetCoverage");
 
-    ScannerForMSBuild beginStep = TestUtils.createStartStep("CSharpVBNetCoverage", projectDir)
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep("CSharpVBNetCoverage", projectDir)
       .setProperties(keyValues);
 
     orchestrator.executeBuild(beginStep);
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Restore", "/t:Rebuild");
 
-    return orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
+    return orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
   }
 
   private static final String getProgramCsComponentId() { return TestUtils.hasModules(orchestrator) ? "CSharpVBNetCoverage:CSharpVBNetCoverage:2EC3A59D-240B-498F-BF1F-EB2A84092718:Program.cs" : "CSharpVBNetCoverage:CSharpConsoleApp/Program.cs"; }

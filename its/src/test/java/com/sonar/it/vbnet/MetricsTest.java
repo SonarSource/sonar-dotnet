@@ -59,7 +59,7 @@ public class MetricsTest {
 
           Path projectDir = Tests.projectDir(temp, "VbMetricsTest");
 
-          ScannerForMSBuild beginStep = TestUtils.createStartStep("VbMetricsTest", projectDir)
+          ScannerForMSBuild beginStep = TestUtils.createBeginStep("VbMetricsTest", projectDir)
             .setProfile("vbnet_no_rule")
             // Without that, the MetricsTest project is considered as a Test project :)
             .setProperty("sonar.msbuild.testProjectPattern", "noTests");
@@ -68,7 +68,7 @@ public class MetricsTest {
 
           TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
 
-          ORCHESTRATOR.executeBuild(TestUtils.newEndStep(projectDir));
+          ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
         }
       });
   }
