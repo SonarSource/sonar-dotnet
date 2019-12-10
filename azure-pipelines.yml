@@ -194,14 +194,6 @@ stages:
             sonar.analysis.sha1=$(Build.SourceVersion)
             sonar.analysis.repository=$(Build.Repository.ID)
 
-      - task: PowerShell@2
-        inputs:
-          targetType: 'inline'
-          script: |
-            echo "Display environment variables"
-            $env:SONARQUBE_SCANNER_PARAMS | ConvertTo-Json | Set-Content params.json
-            cat params.json
-
       - task: VSBuild@1
         displayName: 'Build SonarAnalyzer solution'
         inputs:
