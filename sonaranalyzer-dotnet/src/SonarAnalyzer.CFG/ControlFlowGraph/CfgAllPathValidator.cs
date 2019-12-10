@@ -36,7 +36,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         public bool CheckAllPaths()
         {
-            return IsBlockValidWithSuccessors(cfg.EntryBlock);
+            return IsBlockValidWithSuccessors(this.cfg.EntryBlock);
         }
 
         private bool IsBlockValidWithSuccessors(Block block)
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             this.alreadyVisitedBlocks.Add(block);
 
-            if (block.SuccessorBlocks.Contains(cfg.ExitBlock) ||
+            if (block.SuccessorBlocks.Contains(this.cfg.ExitBlock) ||
                 !block.SuccessorBlocks.Except(this.alreadyVisitedBlocks).Any())
             {
                 return false;

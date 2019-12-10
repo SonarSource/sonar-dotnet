@@ -110,6 +110,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\SonarAnalyzer.CFG\SonarAnalyzer.CFG.csproj" />
     <ProjectReference Include="..\..\src\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj" />
     <ProjectReference Include="..\..\src\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj">
       <Aliases>global,csharp</Aliases>
@@ -119,12 +120,6 @@
     <ProjectReference Include="..\..\src\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.csproj">
       <Aliases>global,vbnet</Aliases>
     </ProjectReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="SonarAnalyzer.CFG">
-      <HintPath>..\..\src\SonarAnalyzer.CFG\bin\Debug\net46\SonarAnalyzer.CFG.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

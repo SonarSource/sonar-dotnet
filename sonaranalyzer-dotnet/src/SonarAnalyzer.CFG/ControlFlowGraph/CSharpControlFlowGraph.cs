@@ -50,7 +50,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                                         exc is ArgumentException ||
                                         exc is NotSupportedException)
             {
-                // These are expected
+                // historically, these have been considered as expected
+                // but we should be aware of what syntax we do not yet support (ToDo)
+                // https://github.com/SonarSource/sonar-dotnet/issues/2541
             }
             catch (Exception exc) when (exc is NotImplementedException)
             {
