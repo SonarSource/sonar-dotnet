@@ -22,6 +22,12 @@ Ordering of class members should be the following:
 
 Furthermore, each of these categories should be ordered from higher to lower accessibility level (public, internal, protected, private).
 
+## Comments
+
+* Comments should be on separate lines.
+
+* Comments on the same line with code are acceptable for short lines of code and short comments.
+
 ## FIXME and ToDo
 
 * `FIXME` should only be used in the code during development as a temporary reminder that there is still work to
