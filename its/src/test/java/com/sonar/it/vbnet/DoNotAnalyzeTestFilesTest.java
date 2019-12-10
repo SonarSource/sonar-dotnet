@@ -21,12 +21,14 @@ package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
+import com.sonar.orchestrator.build.ScannerForMSBuild;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import java.io.File;
 import java.nio.file.Path;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
@@ -38,7 +40,7 @@ public class DoNotAnalyzeTestFilesTest {
   @ClassRule
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
   @Rule
-  public TemporaryFolder temp = new TemporaryFolder();
+  public TemporaryFolder temp = TestUtils.createTempFolder();
 
   @Before
   public void init() {
@@ -48,18 +50,21 @@ public class DoNotAnalyzeTestFilesTest {
   @Test
   public void should_not_increment_test() throws Exception {
     Path projectDir = Tests.projectDir(temp, "VbDoNotAnalyzeTestFilesTest");
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+
+    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("VbDoNotAnalyzeTestFilesTest")
       .setProjectName("VbDoNotAnalyzeTestFilesTest")
       .setProjectVersion("1.0")
       .setProfile("vbnet_no_rule")
-      .setProperty("sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml"));
+      .setProperty("sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml")
+      .setProperty("sonar.projectBaseDir", projectDir.toString() + File.separator + "MyLib.Tests");
+
+    orchestrator.executeBuild(beginStep);
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("end"));
+    orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
 
     String unitTest1ComponentId = TestUtils.hasModules(ORCHESTRATOR) ? "VbDoNotAnalyzeTestFilesTest:VbDoNotAnalyzeTestFilesTest:039CD4D5-8C38-47EB-AE09-F2457DE61EFC:UnitTest1.vb" : "VbDoNotAnalyzeTestFilesTest:UnitTest1.vb";
     assertThat(Tests.getComponent(unitTest1ComponentId)).isNotNull();
@@ -67,5 +72,4 @@ public class DoNotAnalyzeTestFilesTest {
     assertThat(getMeasureAsInt("VbDoNotAnalyzeTestFilesTest", "lines")).isNull();
     assertThat(getMeasureAsInt("VbDoNotAnalyzeTestFilesTest", "ncloc")).isNull();
   }
-
 }

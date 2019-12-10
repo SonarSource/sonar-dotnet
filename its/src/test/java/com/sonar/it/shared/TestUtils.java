@@ -35,6 +35,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import org.apache.commons.lang.StringUtils;
+import org.junit.rules.TemporaryFolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonarqube.ws.Components;
@@ -55,7 +56,6 @@ public class TestUtils {
 
   final private static Logger LOG = LoggerFactory.getLogger(TestUtils.class);
   private static final String MSBUILD_PATH = "MSBUILD_PATH";
-  private static final String NUGET_PATH = "NUGET_PATH";
 
   public static Location getPluginLocation (String pluginName) {
     Location pluginLocation;
@@ -77,18 +77,33 @@ public class TestUtils {
     return pluginLocation;
   }
 
+  public static ScannerForMSBuild newEndStep(Path projectDir) {
+    return TestUtils.newScanner(projectDir)
+      .addArgument("end");
+  }
+
   public static Build<ScannerForMSBuild> newScanner(Path projectDir) {
     // We need to set the fallback version to run from inside the IDE when the property isn't set
     return ScannerForMSBuild.create(projectDir.toFile())
-      .setScannerVersion(System.getProperty("scannerMsbuild.version", "4.6.1.2049"));
+      .setScannerVersion(System.getProperty("scannerMsbuild.version", "4.8.0.12008"))
+
+      // In order to be able to run tests on Azure pipelines, the AGENT_BUILDDIRECTORY environment variable
+      // needs to be set to the analyzed project directory.
+      // This is necessary because the scanner for MsBuild will use this variable to set the correct work directory.
+      .setEnvironmentVariable(VstsUtils.ENV_BUILD_DIRECTORY, projectDir.toString());
   }
 
   public static void runMSBuild(Orchestrator orch, Path projectDir, String... arguments) {
     Path msBuildPath = getMsBuildPath(orch);
 
-    int r = CommandExecutor.create().execute(Command.create(msBuildPath.toString())
+    Command command = Command.create(msBuildPath.toString())
       .addArguments(arguments)
-      .setDirectory(projectDir.toFile()), 60 * 1000);
+      .setEnvironmentVariable("AGENT_BUILDDIRECTORY", projectDir.toString())
+      .setDirectory(projectDir.toFile());
+
+    LOG.info(String.format("Running MSBuild in working directory '%s'", command.getDirectory()));
+
+    int r = CommandExecutor.create().execute(command, 60 * 1000);
     assertThat(r).isEqualTo(0);
   }
 
@@ -101,25 +116,6 @@ public class TestUtils {
         "'. Please configure property '" + MSBUILD_PATH + "'");
     }
     return msBuildPath;
-  }
-
-  public static void runNuGet(Orchestrator orch, Path projectDir, String... arguments) {
-    Path nugetPath = getNuGetPath(orch);
-
-    int r = CommandExecutor.create().execute(Command.create(nugetPath.toString())
-      .addArguments(arguments)
-      .setDirectory(projectDir.toFile()), 60 * 1000);
-    assertThat(r).isEqualTo(0);
-  }
-
-  private static Path getNuGetPath(Orchestrator orch) {
-    String nugetPathStr = orch.getConfiguration().getString(NUGET_PATH);
-    Path nugetPath = Paths.get(nugetPathStr).toAbsolutePath();
-    if (!Files.exists(nugetPath)) {
-      throw new IllegalStateException("Unable to find NuGet at '" + nugetPath.toString() +
-        "'. Please configure property '" + NUGET_PATH + "'");
-    }
-    return nugetPath;
   }
 
   @CheckForNull
@@ -169,4 +165,26 @@ public class TestUtils {
       .url(orch.getServer().getUrl())
       .build());
   }
+  
+  // This method has been taken from SonarSource/sonar-scanner-msbuild
+  public static TemporaryFolder createTempFolder() {
+    LOG.info("TEST SETUP: creating temporary folder...");
+
+    // If the test is being run under VSTS then the Scanner will
+    // expect the project to be under the VSTS sources directory
+    File baseDirectory = null;
+    if (VstsUtils.isRunningUnderVsts()){
+      String vstsSourcePath = VstsUtils.getSourcesDirectory();
+      LOG.info("TEST SETUP: Tests are running under VSTS. Build dir:  " + vstsSourcePath);
+      baseDirectory = new File(vstsSourcePath);
+    }
+    else {
+      LOG.info("TEST SETUP: Tests are not running under VSTS");
+    }
+
+    TemporaryFolder folder = new TemporaryFolder(baseDirectory);
+    LOG.info("TEST SETUP: Temporary folder created. Base directory: " + baseDirectory);
+    return folder;
+  }
+
 }

@@ -20,7 +20,11 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
+
+import java.io.File;
 import java.util.stream.Collectors;
+
+import com.sonar.orchestrator.build.ScannerForMSBuild;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -40,7 +44,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MultiTargetAppTest {
   @Rule
-  public TemporaryFolder temp = new TemporaryFolder();
+  public TemporaryFolder temp = TestUtils.createTempFolder();
 
   @ClassRule
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
@@ -53,17 +57,20 @@ public class MultiTargetAppTest {
   @Test
   public void should_analyze_multitarget_project() throws Exception {
     Path projectDir = Tests.projectDir(temp, "MultiTargetConsoleApp");
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+    String baseDir = projectDir.toString() + File.separator + "MultiTargetConsoleApp";
+
+    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("MultiTargetConsoleApp")
       .setProjectName("MultiTargetConsoleApp")
-      .setProjectVersion("1.0"));
+      .setProjectVersion("1.0")
+      .setProperty("sonar.projectBaseDir", baseDir);
 
-    TestUtils.runNuGet(orchestrator, projectDir, "restore");
-    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+    orchestrator.executeBuild(beginStep);
 
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("end"));
+    TestUtils.runMSBuild(orchestrator, projectDir, "/t:Restore", "/t:Rebuild");
+
+    orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
 
     String programCsComponentId = TestUtils.hasModules(ORCHESTRATOR) ? "MultiTargetConsoleApp:MultiTargetConsoleApp:9D7FB932-3B1E-446D-9D34-A63410458B88:Program.cs" : "MultiTargetConsoleApp:Program.cs";
     assertThat(getComponent(programCsComponentId)).isNotNull();

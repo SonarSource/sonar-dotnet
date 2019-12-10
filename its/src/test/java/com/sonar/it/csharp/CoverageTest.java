@@ -23,8 +23,11 @@ import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+
+import com.sonar.orchestrator.build.ScannerForMSBuild;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -42,7 +45,7 @@ public class CoverageTest {
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
   @Rule
-  public TemporaryFolder temp = new TemporaryFolder();
+  public TemporaryFolder temp = TestUtils.createTempFolder();
 
   @Before
   public void init() {
@@ -66,7 +69,12 @@ public class CoverageTest {
 
   @Test
   public void ncover3() throws Exception {
-    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", "reports/ncover3.nccov");
+
+    String reportPath = temp.getRoot().getAbsolutePath() + File.separator +
+                        "CoverageTest" + File.separator +
+                        "reports" + File.separator + "ncover3.nccov";
+
+    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", reportPath);
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
@@ -115,17 +123,20 @@ public class CoverageTest {
   @Test
   public void no_coverage_on_tests() throws Exception {
     Path projectDir = Tests.projectDir(temp, "NoCoverageOnTests");
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+
+    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("NoCoverageOnTests")
       .setProjectVersion("1.0")
       .setProfile("no_rule")
-      .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml"));
+      .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml")
+      .setProperty("sonar.projectBaseDir", projectDir.toString());
+
+    orchestrator.executeBuild(beginStep);
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    BuildResult buildResult = orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("end"));
+    BuildResult buildResult = orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
@@ -134,6 +145,7 @@ public class CoverageTest {
 
     assertThat(getMeasureAsInt("NoCoverageOnTests", "files")).isEqualTo(2); // Only main files are counted
     String unitTestComponentId = TestUtils.hasModules(ORCHESTRATOR) ? "NoCoverageOnTests:NoCoverageOnTests:8A3B715A-6E95-4BC1-93C6-A59E9D3F5D5C:UnitTest1.cs" : "NoCoverageOnTests:MyLib.Tests/UnitTest1.cs";
+
     assertThat(Tests.getComponent(unitTestComponentId)).isNotNull();
     assertThat(getMeasureAsInt("NoCoverageOnTests", "lines_to_cover")).isNull();
     assertThat(getMeasureAsInt("NoCoverageOnTests", "uncovered_lines")).isNull();
@@ -152,18 +164,19 @@ public class CoverageTest {
 
   private BuildResult analyzeCoverageTestProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "CoverageTest");
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+
+    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("CoverageTest")
       .setProjectName("CoverageTest")
       .setProjectVersion("1.0")
       .setProfile("no_rule")
-      .setProperties(keyValues));
+      .setProperties(keyValues);
+
+    orchestrator.executeBuild(beginStep);
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    return orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("end"));
+    return orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
   }
-
 }

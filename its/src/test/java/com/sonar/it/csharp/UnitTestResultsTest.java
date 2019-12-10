@@ -24,6 +24,8 @@ import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
 import java.io.IOException;
 import java.nio.file.Path;
+
+import com.sonar.orchestrator.build.ScannerForMSBuild;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -40,7 +42,7 @@ public class UnitTestResultsTest {
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
   @Rule
-  public TemporaryFolder temp = new TemporaryFolder();
+  public TemporaryFolder temp = TestUtils.createTempFolder();
 
   @Before
   public void init() {
@@ -89,17 +91,19 @@ public class UnitTestResultsTest {
 
   private BuildResult analyzeTestProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "UnitTestResultsTest");
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+
+    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("UnitTestResultsTest")
       .setProjectName("UnitTestResultsTest")
       .setProjectVersion("1.0")
       .setProfile("no_rule")
-      .setProperties(keyValues));
+      .setProperties(keyValues);
+
+    orchestrator.executeBuild(beginStep);
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    return orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("end"));
+    return orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
   }
 }

@@ -20,6 +20,7 @@
 package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
+import com.sonar.orchestrator.build.ScannerForMSBuild;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -29,6 +30,7 @@ import org.sonarqube.ws.Issues;
 
 import com.sonar.orchestrator.Orchestrator;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
@@ -40,8 +42,9 @@ import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CasingAppTest {
+
   @Rule
-  public TemporaryFolder temp = new TemporaryFolder();
+  public TemporaryFolder temp = TestUtils.createTempFolder();
 
   @ClassRule
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
@@ -54,18 +57,23 @@ public class CasingAppTest {
   @Test
   public void class1_should_have_metrics_and_issues() throws IOException {
     Path projectDir = Tests.projectDir(temp, "CasingApp");
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
+    String baseDir = projectDir.toString() + File.separator + "CasingApp";
+
+    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
       .addArgument("begin")
       .setProjectKey("CasingApp")
       .setProjectName("CasingApp")
-      .setProjectVersion("1.0"));
+      .setProjectVersion("1.0")
+      .setProperty("sonar.projectBaseDir", baseDir);
+
+    orchestrator.executeBuild(beginStep);
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(TestUtils.newScanner(projectDir)
-      .addArgument("end"));
+    orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
 
     String class1ComponentKey = TestUtils.hasModules(ORCHESTRATOR) ? "CasingApp:CasingApp:600E8C27-9AB2-48E9-AA48-2713E4B34288:SRC/Class1.cs" : "CasingApp:SRC/Class1.cs";
+
     assertThat(getComponent(class1ComponentKey)).isNotNull();
 
     assertThat(getMeasureAsInt(class1ComponentKey, "files")).isEqualTo(1);

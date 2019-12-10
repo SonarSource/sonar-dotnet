@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.sonarsource.parent</groupId>
     <artifactId>parent</artifactId>
-    <version>49</version>
+    <version>53</version>
   </parent>
 
   <groupId>com.sonarsource.it</groupId>
@@ -21,7 +21,7 @@
   </organization>
 
   <properties>
-    <scannerMsbuild.version>4.3.1.1372</scannerMsbuild.version>
+    <scannerMsbuild.version>4.7.1.2311</scannerMsbuild.version>
     <surefire.argLine>-server</surefire.argLine>
   </properties>
 

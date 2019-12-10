@@ -49,7 +49,7 @@ import static org.mockito.Mockito.when;
 public class CoverageReportImportSensorTest {
 
   @Rule
-  public TemporaryFolder temp = new TemporaryFolder();
+  public TemporaryFolder temp = createTempFolder();
 
   @Rule
   public LogTester logTester = new LogTester();
@@ -209,4 +209,17 @@ public class CoverageReportImportSensorTest {
     return context;
   }
 
+  // This method has been taken from SonarSource/sonar-scanner-msbuild
+  private static TemporaryFolder createTempFolder() {
+    // If the test is being run under VSTS then the Scanner will
+    // expect the project to be under the VSTS sources directory
+    File baseDirectory = null;
+
+    if (VstsUtils.isRunningUnderVsts()){
+      String vstsSourcePath = VstsUtils.getSourcesDirectory();
+      baseDirectory = new File(vstsSourcePath);
+    }
+
+    return new TemporaryFolder(baseDirectory);
+  }
 }

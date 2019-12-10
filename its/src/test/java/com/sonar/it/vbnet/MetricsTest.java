@@ -20,6 +20,7 @@
 package com.sonar.it.vbnet;
 
 import com.sonar.it.shared.TestUtils;
+import com.sonar.orchestrator.build.ScannerForMSBuild;
 import org.apache.commons.lang.SystemUtils;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -28,6 +29,7 @@ import org.junit.rules.RuleChain;
 import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.Measures.Measure;
 
+import java.io.File;
 import java.nio.file.Path;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
@@ -41,7 +43,7 @@ public class MetricsTest {
   private static final String PROJECT = "VbMetricsTest";
   private static final String DIRECTORY = TestUtils.hasModules(ORCHESTRATOR) ? "VbMetricsTest:VbMetricsTest:107A81BD-3E88-4E13-B659-770551688818:foo" : "VbMetricsTest:foo";
   private static final String FILE = TestUtils.hasModules(ORCHESTRATOR) ? "VbMetricsTest:VbMetricsTest:107A81BD-3E88-4E13-B659-770551688818:foo/Module1.vb" : "VbMetricsTest:foo/Module1.vb";
-  public static TemporaryFolder temp = new TemporaryFolder();
+  public static TemporaryFolder temp = TestUtils.createTempFolder();
   @ClassRule
   public static RuleChain chain = getRuleChain();
 
@@ -57,19 +59,22 @@ public class MetricsTest {
           ORCHESTRATOR.resetData();
 
           Path projectDir = Tests.projectDir(temp, "VbMetricsTest");
-          ORCHESTRATOR.executeBuild(TestUtils.newScanner(projectDir)
+
+          ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
             .addArgument("begin")
             .setProjectKey("VbMetricsTest")
             .setProjectName("VbMetricsTest")
             .setProjectVersion("1.0")
             .setProfile("vbnet_no_rule")
             // Without that, the MetricsTest project is considered as a Test project :)
-            .setProperty("sonar.msbuild.testProjectPattern", "noTests"));
+            .setProperty("sonar.msbuild.testProjectPattern", "noTests")
+            .setProperty("sonar.projectBaseDir", projectDir.toString());
+
+          ORCHESTRATOR.executeBuild(beginStep);
 
           TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
 
-          ORCHESTRATOR.executeBuild(TestUtils.newScanner(projectDir)
-            .addArgument("end"));
+          ORCHESTRATOR.executeBuild(TestUtils.newEndStep(projectDir));
         }
       });
   }

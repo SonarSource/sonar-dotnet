@@ -4,6 +4,9 @@
     <TargetFramework>net46</TargetFramework>
     <AssemblyName>SonarAnalyzer</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <RestoreLockedMode>true</RestoreLockedMode>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,9 +36,9 @@
       <IsLinux Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' == 'true'">true</IsLinux>
     </PropertyGroup>
     <PropertyGroup>
-      <ProtocCompiler Condition="$(IsWindows)==true">"$(UserProfile)/.nuget/packages/Google.Protobuf.Tools/3.6.1/tools/windows_x64/protoc.exe"</ProtocCompiler>
-      <ProtocCompiler Condition="$(IsOSX)==true">~/.nuget/packages/google.protobuf.tools/3.6.1/tools/macosx_x64/protoc</ProtocCompiler>
-      <ProtocCompiler Condition="$(IsLinux)==true">~/.nuget/packages/google.protobuf.tools/3.6.1/tools/linux_x64/protoc</ProtocCompiler>
+      <ProtocCompiler Condition="$(IsWindows)==true">"$(NUGET_PACKAGES)/Google.Protobuf.Tools/3.6.1/tools/windows_x64/protoc.exe"</ProtocCompiler>
+      <ProtocCompiler Condition="$(IsOSX)==true">$(NUGET_PACKAGES)/google.protobuf.tools/3.6.1/tools/macosx_x64/protoc</ProtocCompiler>
+      <ProtocCompiler Condition="$(IsLinux)==true">$(NUGET_PACKAGES)/google.protobuf.tools/3.6.1/tools/linux_x64/protoc</ProtocCompiler>
     </PropertyGroup>
     <Exec Command="$(ProtocCompiler) -I=./Protobuf --csharp_out=./Protobuf ./Protobuf/AnalyzerReport.proto" />
     <Message Importance="high" Text="Protobuf classes generated." />

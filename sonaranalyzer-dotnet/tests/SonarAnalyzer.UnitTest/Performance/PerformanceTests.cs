@@ -50,6 +50,7 @@ namespace SonarAnalyzer.UnitTest.Performance
         // dotnet test or vstest.console.exe: pass the following command line argument
         //       --TestCaseFilter:"TestCategory!=Slow"
         [TestCategory("Slow")]
+        [Ignore("Skip this one as it adds significant delays. It will be moved to the integration tests.")]
         public void Perf_EntityFrameworkMigration()
         {
             // Repro for https://github.com/SonarSource/sonar-dotnet/issues/2474
