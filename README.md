@@ -1,5 +1,7 @@
 # SonarC\# and SonarVB
 
+[![Build Status](https://sonarsource.visualstudio.com/DotNetTeam%20Project/_apis/build/status/Sonar.Net?branchName=master)](https://sonarsource.visualstudio.com/DotNetTeam%20Project/_build/latest?definitionId=77&branchName=master)
+
 |Product|Quality Gate|Coverage|
 |:--:|:--:|:--:|
 |Analyzer|[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=sonaranalyzer-dotnet&metric=alert_status)](https://sonarcloud.io/dashboard?id=sonaranalyzer-dotnet)|[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=sonaranalyzer-dotnet&metric=coverage)](https://sonarcloud.io/component_measures?id=sonaranalyzer-dotnet&metric=coverage)|
