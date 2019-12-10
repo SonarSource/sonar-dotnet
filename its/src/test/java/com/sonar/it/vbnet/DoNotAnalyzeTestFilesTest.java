@@ -28,7 +28,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import java.io.File;
 import java.nio.file.Path;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
@@ -51,20 +50,15 @@ public class DoNotAnalyzeTestFilesTest {
   public void should_not_increment_test() throws Exception {
     Path projectDir = Tests.projectDir(temp, "VbDoNotAnalyzeTestFilesTest");
 
-    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
-      .addArgument("begin")
-      .setProjectKey("VbDoNotAnalyzeTestFilesTest")
-      .setProjectName("VbDoNotAnalyzeTestFilesTest")
-      .setProjectVersion("1.0")
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep("VbDoNotAnalyzeTestFilesTest", projectDir, "MyLib.Tests")
       .setProfile("vbnet_no_rule")
-      .setProperty("sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml")
-      .setProperty("sonar.projectBaseDir", projectDir.toString() + File.separator + "MyLib.Tests");
+      .setProperty("sonar.vbnet.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
     orchestrator.executeBuild(beginStep);
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
+    orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
 
     String unitTest1ComponentId = TestUtils.hasModules(ORCHESTRATOR) ? "VbDoNotAnalyzeTestFilesTest:VbDoNotAnalyzeTestFilesTest:039CD4D5-8C38-47EB-AE09-F2457DE61EFC:UnitTest1.vb" : "VbDoNotAnalyzeTestFilesTest:UnitTest1.vb";
     assertThat(Tests.getComponent(unitTest1ComponentId)).isNotNull();

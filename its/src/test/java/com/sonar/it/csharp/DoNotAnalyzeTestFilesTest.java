@@ -22,7 +22,6 @@ package com.sonar.it.csharp;
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
 
-import java.io.File;
 import java.nio.file.Path;
 
 import com.sonar.orchestrator.build.ScannerForMSBuild;
@@ -53,20 +52,15 @@ public class DoNotAnalyzeTestFilesTest {
   public void should_not_increment_test() throws Exception {
     Path projectDir = Tests.projectDir(temp, "DoNotAnalyzeTestFilesTest");
 
-    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
-      .addArgument("begin")
-      .setProjectKey("DoNotAnalyzeTestFilesTest")
-      .setProjectName("DoNotAnalyzeTestFilesTest")
-      .setProjectVersion("1.0")
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep("DoNotAnalyzeTestFilesTest", projectDir, "MyLib.Tests")
       .setProfile("no_rule")
-      .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml")
-      .setProperty("sonar.projectBaseDir", projectDir.toString() + File.separator + "MyLib.Tests");
+      .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
     orchestrator.executeBuild(beginStep);
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
+    orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
 
     String unitTestComponentId = TestUtils.hasModules(ORCHESTRATOR) ? "DoNotAnalyzeTestFilesTest:DoNotAnalyzeTestFilesTest:8A3B715A-6E95-4BC1-93C6-A59E9D3F5D5C:UnitTest1.cs" : "DoNotAnalyzeTestFilesTest:UnitTest1.cs";
     assertThat(Tests.getComponent(unitTestComponentId)).isNotNull();

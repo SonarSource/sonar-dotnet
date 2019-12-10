@@ -30,7 +30,6 @@ import org.sonarqube.ws.Issues;
 
 import com.sonar.orchestrator.Orchestrator;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
@@ -57,20 +56,14 @@ public class CasingAppTest {
   @Test
   public void class1_should_have_metrics_and_issues() throws IOException {
     Path projectDir = Tests.projectDir(temp, "CasingApp");
-    String baseDir = projectDir.toString() + File.separator + "CasingApp";
 
-    ScannerForMSBuild beginStep = TestUtils.newScanner(projectDir)
-      .addArgument("begin")
-      .setProjectKey("CasingApp")
-      .setProjectName("CasingApp")
-      .setProjectVersion("1.0")
-      .setProperty("sonar.projectBaseDir", baseDir);
+    ScannerForMSBuild beginStep = TestUtils.createBeginStep("CasingApp", projectDir, "CasingApp");
 
     orchestrator.executeBuild(beginStep);
 
     TestUtils.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(TestUtils.newEndStep(projectDir));
+    orchestrator.executeBuild(TestUtils.createEndStep(projectDir));
 
     String class1ComponentKey = TestUtils.hasModules(ORCHESTRATOR) ? "CasingApp:CasingApp:600E8C27-9AB2-48E9-AA48-2713E4B34288:SRC/Class1.cs" : "CasingApp:SRC/Class1.cs";
 

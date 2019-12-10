@@ -77,12 +77,29 @@ public class TestUtils {
     return pluginLocation;
   }
 
-  public static ScannerForMSBuild newEndStep(Path projectDir) {
+  public static ScannerForMSBuild createEndStep(Path projectDir) {
     return TestUtils.newScanner(projectDir)
       .addArgument("end");
   }
 
-  public static Build<ScannerForMSBuild> newScanner(Path projectDir) {
+  public static  ScannerForMSBuild createBeginStep(String projectName, Path projectDir) {
+    return createBeginStep(projectName, projectDir, "");
+  }
+
+  public static  ScannerForMSBuild createBeginStep(String projectName, Path projectDir, String subProjectName) {
+    return TestUtils.newScanner(projectDir)
+      .addArgument("begin")
+      .setProjectKey(projectName)
+      .setProjectName(projectName)
+      .setProjectVersion("1.0")
+      .setProperty("sonar.projectBaseDir", getProjectBaseDir(projectDir, subProjectName));
+  }
+
+  private static String getProjectBaseDir(Path projectDir, String subProjectName){
+    return projectDir.resolve(subProjectName).toString();
+  }
+
+  private static Build<ScannerForMSBuild> newScanner(Path projectDir) {
     // We need to set the fallback version to run from inside the IDE when the property isn't set
     return ScannerForMSBuild.create(projectDir.toFile())
       .setScannerVersion(System.getProperty("scannerMsbuild.version", "4.8.0.12008"))
