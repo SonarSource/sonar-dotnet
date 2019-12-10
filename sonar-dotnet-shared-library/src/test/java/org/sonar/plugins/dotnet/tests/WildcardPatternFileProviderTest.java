@@ -65,40 +65,48 @@ public class WildcardPatternFileProviderTest {
 
   @Test
   public void logging_added_and_skipped_files() {
-    listFiles(new File(tmp.getRoot(), path("**\\c\\c21", "foo.txt")).getAbsolutePath());
+    File tmpRoot = tmp.getRoot();
+    String givenPattern = new File(tmpRoot, path("**\\c\\c21", "foo.txt")).getAbsolutePath();
+    listFiles(givenPattern);
 
-    List<String> logs = logTester.logs((LoggerLevel.DEBUG));
-    assertThat(logs).hasSize(17);
-    // the initial given pattern (the expanded path, includes the temporary dir)
-    assertThat(logs.get(0)).startsWith("WILDCARD - will list files for pattern '").endsWith("foo.txt'.");
-    // the constructed wildcard pattern
-    assertThat(logs.get(2)).startsWith("WILDCARD - will add files for wildcardPattern '**\\c\\c21\\foo.txt'.");
-    // we only check the substring for SKIP statement - we don't know the order they are logged in
-    assertThat(logs.get(3)).startsWith("WILDCARD - will SKIP file '");
+    List<String> debugLogs = logTester.logs((LoggerLevel.DEBUG));
+    assertThat(debugLogs).hasSize(3);
+    assertThat(debugLogs.get(0)).isEqualTo("Pattern matcher extracted prefix/absolute path '" + tmpRoot + "' from the given pattern '" + givenPattern + "'.");
+    assertThat(debugLogs.get(1)).isEqualTo("Gathering files for wildcardPattern '**\\c\\c21\\foo.txt'.");
+    assertThat(debugLogs.get(2)).startsWith("Pattern matcher returns '1' files.");
 
-    assertThat(logs).contains("WILDCARD - result has 1 elements.");
+    List<String> traceLogs = logTester.logs((LoggerLevel.TRACE));
+    assertThat(traceLogs).hasSize(13);
+    // we don't know the order of logging, so we're just doing a sanity check
+    assertThat(traceLogs).contains("Skipping file '" +
+      tmpRoot +
+      "\\c\\c22\\c31\\foo.txt'" +
+      " because it does not match pattern '**\\c\\c21\\foo.txt'.");
+    assertThat(traceLogs).contains("Adding file '" + tmpRoot + "\\c\\c21\\foo.txt" + "' to result list.");
   }
 
   @Test
   public void logging_early_return_absolute_path() {
-    listFiles(new File(tmp.getRoot(), "foo.txt").getAbsolutePath());
+    File tmpRoot = tmp.getRoot();
+    String absoluteFilePath = new File(tmpRoot,  "foo.txt").getAbsolutePath();
+    listFiles(absoluteFilePath);
 
     List<String> logs = logTester.logs((LoggerLevel.DEBUG));
-    assertThat(logs).hasSize(3);
-    assertThat(logs.get(0)).startsWith("WILDCARD - will list files for pattern '").endsWith("foo.txt'.");
-    assertThat(logs.get(1)).startsWith("WILDCARD - absoluteFileTillFirstWildcardElement '").endsWith("foo.txt'.");
-    assertThat(logs.get(2)).startsWith("WILDCARD - Early return WITH '").endsWith("foo.txt'.");
+    assertThat(logs).hasSize(2);
+    assertThat(logs.get(0)).isEqualTo("Pattern matcher extracted prefix/absolute path '" + absoluteFilePath + "' from the given pattern '" + absoluteFilePath + "'.");
+    assertThat(logs.get(1)).isEqualTo("Pattern matcher returns a single file: '" + absoluteFilePath + "'.");
   }
 
   @Test
   public void logging_early_return_no_file_found() {
-    listFiles(new File(tmp.getRoot(), "not-existing-file").getAbsolutePath());
+    File tmpRoot = tmp.getRoot();
+    String nonExistingFilePath = new File(tmpRoot,  "not-existing-file").getAbsolutePath();
+    listFiles(nonExistingFilePath);
 
     List<String> logs = logTester.logs((LoggerLevel.DEBUG));
-    assertThat(logs).hasSize(3);
-    assertThat(logs.get(0)).startsWith("WILDCARD - will list files for pattern '").endsWith("not-existing-file'.");
-    assertThat(logs.get(1)).startsWith("WILDCARD - absoluteFileTillFirstWildcardElement '").endsWith("not-existing-file'.");
-    assertThat(logs.get(2)).isEqualTo("WILDCARD - Early return WITH EMPTY because wildcard elements is empty.");
+    assertThat(logs).hasSize(2);
+    assertThat(logs.get(0)).isEqualTo("Pattern matcher extracted prefix/absolute path '" + nonExistingFilePath + "' from the given pattern '" + nonExistingFilePath + "'.");
+    assertThat(logs.get(1)).isEqualTo("Pattern matcher did not find any files matching the pattern '" + nonExistingFilePath + "'.");
   }
 
   @Test

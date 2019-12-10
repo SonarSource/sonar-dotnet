@@ -32,10 +32,10 @@ import org.sonar.api.utils.log.Loggers;
 public class VisualStudioCoverageXmlReportParser implements CoverageParser {
 
   private static final Logger LOG = Loggers.get(VisualStudioCoverageXmlReportParser.class);
-  private final Predicate<String> isIndexedAndSupportedLanguage;
+  private final Predicate<String> isSupported;
 
-  public  VisualStudioCoverageXmlReportParser(Predicate<String> isIndexedAndSupportedLanguage) {
-    this.isIndexedAndSupportedLanguage = isIndexedAndSupportedLanguage;
+  public  VisualStudioCoverageXmlReportParser(Predicate<String> isSupported) {
+    this.isSupported = isSupported;
   }
 
   @Override
@@ -114,7 +114,7 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
         return;
       }
 
-      if (!isIndexedAndSupportedLanguage.test(canonicalPath)) {
+      if (!isSupported.test(canonicalPath)) {
         LOG.debug("Skipping file with path '{}' because it is not indexed or does not have the supported language.", canonicalPath);
         return;
       }

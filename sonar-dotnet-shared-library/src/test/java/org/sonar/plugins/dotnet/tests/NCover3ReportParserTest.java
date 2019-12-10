@@ -98,9 +98,10 @@ public class NCover3ReportParserTest {
 
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
-    assertThat(debugLogs.get(1)).isEqualTo("NCover3 parser: analyzing the doc tag with ID '1' and url 'MyLibrary\\Adder.cs'.");
-    assertThat(debugLogs.get(2))
-      .startsWith("NCover3 parser: ID '1' with url 'MyLibrary\\Adder.cs' is resolved as '")
+    List<String> traceLogs = logTester.logs(LoggerLevel.TRACE);
+    assertThat(traceLogs.get(0)).isEqualTo("Analyzing the doc tag with NCover3 ID '1' and url 'MyLibrary\\Adder.cs'.");
+    assertThat(traceLogs.get(1))
+      .startsWith("NCover3 ID '1' with url 'MyLibrary\\Adder.cs' is resolved as '")
       .endsWith("MyLibrary\\Adder.cs'.");
   }
 
@@ -115,16 +116,17 @@ public class NCover3ReportParserTest {
 
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
-    assertThat(debugLogs.get(1)).isEqualTo("NCover3 parser: analyzing the doc tag with ID '1' and url 'MyLibrary\\Adder.cs'.");
+    assertThat(debugLogs.get(1))
+      .startsWith("NCover3 doc '1', line '31', vc '4' will be skipped because it has a path '")
+      .endsWith("\\MyLibrary\\Adder.cs' which is not indexed or does not have the supported language.");
     assertThat(debugLogs.get(2))
-      .startsWith("NCover3 parser: ID '1' with url 'MyLibrary\\Adder.cs' is resolved as '")
+      .startsWith("NCover3 doc '1', line '32', vc '4' will be skipped because it has a path '")
+      .endsWith("\\MyLibrary\\Adder.cs' which is not indexed or does not have the supported language.");
+    List<String> traceLogs = logTester.logs(LoggerLevel.TRACE);
+    assertThat(traceLogs.get(0)).isEqualTo("Analyzing the doc tag with NCover3 ID '1' and url 'MyLibrary\\Adder.cs'.");
+    assertThat(traceLogs.get(1))
+      .startsWith("NCover3 ID '1' with url 'MyLibrary\\Adder.cs' is resolved as '")
       .endsWith("MyLibrary\\Adder.cs'.");
-    assertThat(debugLogs.get(3))
-      .startsWith("NCover3 parser: doc '1', line '31', vc '4' will be skipped because it has a path '")
-      .endsWith("\\MyLibrary\\Adder.cs' which is not indexed or does not have the supported language.");
-    assertThat(debugLogs.get(4))
-      .startsWith("NCover3 parser: doc '1', line '32', vc '4' will be skipped because it has a path '")
-      .endsWith("\\MyLibrary\\Adder.cs' which is not indexed or does not have the supported language.");
   }
 
   @Test
@@ -132,8 +134,9 @@ public class NCover3ReportParserTest {
     new NCover3ReportParser(alwaysTrue).accept(new File("src/test/resources/ncover3/invalid_path.nccov"), mock(Coverage.class));
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is '");
     assertThat(logTester.logs(LoggerLevel.DEBUG)).contains(
-      "NCover3 parser: analyzing the doc tag with ID '1' and url 'z:\\*\"?.cs'.",
       "Skipping the import of NCover3 code coverage for the invalid file path: z:\\*\"?.cs at line 7");
+    List<String> traceLogs = logTester.logs(LoggerLevel.TRACE);
+    assertThat(traceLogs.get(0)).isEqualTo("Analyzing the doc tag with NCover3 ID '1' and url 'z:\\*\"?.cs'.");
   }
 
 }

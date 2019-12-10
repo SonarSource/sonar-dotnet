@@ -31,10 +31,10 @@ public class NCover3ReportParser implements CoverageParser {
 
   private static final String EXCLUDED_ID = "0";
   private static final Logger LOG = Loggers.get(NCover3ReportParser.class);
-  private final Predicate<String> isIndexedAndSupportedLanguage;
+  private final Predicate<String> isSupported;
 
-  public NCover3ReportParser(Predicate<String> isIndexedAndSupportedLanguage) {
-    this.isIndexedAndSupportedLanguage = isIndexedAndSupportedLanguage;
+  public NCover3ReportParser(Predicate<String> isSupported) {
+    this.isSupported = isSupported;
   }
 
   @Override
@@ -80,13 +80,13 @@ public class NCover3ReportParser implements CoverageParser {
       String id = xmlParserHelper.getRequiredAttribute("id");
       String url = xmlParserHelper.getRequiredAttribute("url");
 
-      LOG.debug("NCover3 parser: analyzing the doc tag with ID '{}' and url '{}'.", id, url);
+      LOG.trace("Analyzing the doc tag with NCover3 ID '{}' and url '{}'.", id, url);
 
       if (!isExcludedId(id)) {
         try {
           String path = new File(url).getCanonicalPath();
 
-          LOG.debug("NCover3 parser: ID '{}' with url '{}' is resolved as '{}'.", id, url, path);
+          LOG.trace("NCover3 ID '{}' with url '{}' is resolved as '{}'.", id, url, path);
 
           documents.put(id, path);
         } catch (IOException e) {
@@ -94,7 +94,7 @@ public class NCover3ReportParser implements CoverageParser {
             + " at line " + xmlParserHelper.stream().getLocation().getLineNumber(), e);
         }
       } else {
-        LOG.debug("NCover3 parser: id '{}' is excluded, so url '{}' was not added.", id, url);
+        LOG.debug("NCover3 ID '{}' is excluded, so url '{}' was not added.", id, url);
       }
     }
 
@@ -109,19 +109,19 @@ public class NCover3ReportParser implements CoverageParser {
 
       if (documents.containsKey(doc) && !isExcludedLine(line)) {
         String path = documents.get(doc);
-        if (isIndexedAndSupportedLanguage.test(path)) {
+        if (isSupported.test(path)) {
 
-          LOG.trace("NCover3 parser: found coverage for line '{}', vc '{}' when analyzing the doc '{}' with the path '{}'.",
+          LOG.trace("Found coverage for line '{}', vc '{}' when analyzing the doc '{}' with the path '{}'.",
             line, vc, doc, path);
 
           coverage.addHits(path, line, vc);
         } else {
-          LOG.debug("NCover3 parser: doc '{}', line '{}', vc '{}' will be skipped because it has a path '{}'" +
+          LOG.debug("NCover3 doc '{}', line '{}', vc '{}' will be skipped because it has a path '{}'" +
               " which is not indexed or does not have the supported language.",
             doc, line, vc, path);
         }
       } else if (!isExcludedLine(line)) {
-        LOG.debug("NCover3 parser: the doc '{}' is not contained in documents and will be skipped.", doc);
+        LOG.debug("NCover3 doc '{}' is not contained in documents and will be skipped.", doc);
       }
     }
 

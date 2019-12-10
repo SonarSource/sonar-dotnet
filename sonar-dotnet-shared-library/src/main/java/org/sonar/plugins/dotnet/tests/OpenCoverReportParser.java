@@ -31,10 +31,10 @@ import java.util.Map;
 public class OpenCoverReportParser implements CoverageParser {
 
   private static final Logger LOG = Loggers.get(OpenCoverReportParser.class);
-  private final Predicate<String> isIndexedAndSupportedLanguage;
+  private final Predicate<String> isSupported;
 
-  public OpenCoverReportParser(Predicate<String> isIndexedAndSupportedLanguage) {
-    this.isIndexedAndSupportedLanguage = isIndexedAndSupportedLanguage;
+  public OpenCoverReportParser(Predicate<String> isSupported) {
+    this.isSupported = isSupported;
   }
 
   @Override
@@ -106,7 +106,7 @@ public class OpenCoverReportParser implements CoverageParser {
       if (files.containsKey(fileId)) {
         String identifiedFile = files.get(fileId);
 
-        if (isIndexedAndSupportedLanguage.test(identifiedFile)) {
+        if (isSupported.test(identifiedFile)) {
           LOG.trace("OpenCover parser: add hits for fileId '{}', line '{}', vc '{}'", fileId, line, vc);
 
           coverage.addHits(identifiedFile, line, vc);

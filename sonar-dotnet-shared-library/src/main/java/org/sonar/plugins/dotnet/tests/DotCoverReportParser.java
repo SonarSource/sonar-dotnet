@@ -39,10 +39,10 @@ public class DotCoverReportParser implements CoverageParser {
   private static final Pattern COVERED_LINES_PATTERN_2 = Pattern.compile("\\[(\\d++),\\d++,\\d++,\\d++,(\\d++)\\]");
 
   private static final Logger LOG = Loggers.get(DotCoverReportParser.class);
-  private final Predicate<String> isIndexedAndSupportedLanguage;
+  private final Predicate<String> isSupported;
 
-  public DotCoverReportParser(Predicate<String> isIndexedAndSupportedLanguage) {
-    this.isIndexedAndSupportedLanguage = isIndexedAndSupportedLanguage;
+  public DotCoverReportParser(Predicate<String> isSupported) {
+    this.isSupported = isSupported;
   }
 
   @Override
@@ -70,7 +70,7 @@ public class DotCoverReportParser implements CoverageParser {
       }
 
       String fileCanonicalPath = extractFileCanonicalPath(contents);
-      if (fileCanonicalPath != null && isIndexedAndSupportedLanguage.test(fileCanonicalPath)) {
+      if (fileCanonicalPath != null && isSupported.test(fileCanonicalPath)) {
         collectCoverage(fileCanonicalPath, contents);
       } else {
         LOG.debug("Skipping the import of dotCover code coverage for file '{}'"
