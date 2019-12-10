@@ -37,7 +37,7 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
   @Override
   public void accept(File file, UnitTestResults unitTestResults) {
     LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
-    LOG.info("Parsing the Visual Studio Test Results file " + file.getAbsolutePath());
+    LOG.info("Parsing the Visual Studio Test Results file '{}'.", file.getAbsolutePath());
     new Parser(file, unitTestResults).parse();
   }
 
@@ -95,6 +95,9 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
       int failures = timeout + failed + aborted;
 
       unitTestResults.add(total, skipped, failures, errors, null);
+
+      LOG.debug("Parsed Visual Studio Test Counters - total:{}, failed:{}, errors:{}, timeout:{}, aborted:{}, executed:{}.",
+        total, failed, errors, timeout, aborted, executed);
     }
 
     private void handleTimesTag(XmlParserHelper xmlParserHelper) {
@@ -103,6 +106,8 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
       long duration = finish.getTime() - start.getTime();
 
       unitTestResults.add(0, 0, 0, 0, duration);
+
+      LOG.debug("Parsed Visual Studio Test Times - duration:{}.", duration);
     }
 
     private Date getRequiredDateAttribute(XmlParserHelper xmlParserHelper, String name) {

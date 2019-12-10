@@ -56,7 +56,6 @@ public class NCover3ReportParser implements CoverageParser {
     }
 
     public void parse() {
-
       try (XmlParserHelper xmlParserHelper = new XmlParserHelper(file)) {
         checkRootTag(xmlParserHelper);
         dispatchTags(xmlParserHelper);

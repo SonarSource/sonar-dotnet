@@ -105,7 +105,7 @@ public class DotCoverReportParser implements CoverageParser {
         int hits = Integer.parseInt(matcher.group(2));
         coverage.addHits(fileCanonicalPath, line, hits);
 
-        LOG.trace("DotCover parser: found coverage for line '{}', hits '{}' when analyzing the path '{}'.",
+        LOG.trace("dotCover parser: found coverage for line '{}', hits '{}' when analyzing the path '{}'.",
             line, hits, fileCanonicalPath);
       }
     }

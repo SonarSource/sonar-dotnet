@@ -191,9 +191,7 @@ public class CoverageReportImportSensorTest {
       "The total number of file count statistics is '1'.");
     assertThat(logTester.logs(LoggerLevel.TRACE)).contains(
       "Counting statistics for '" + fooPath + "'.",
-      "Checking main file coverage for '" + fooPath + "'.",
-      "fileHasCoverage for '" + fooPath + "' is 'false'."
-    );
+      "Checking main file coverage for '" + fooPath + "'.");
   }
 
   @Test

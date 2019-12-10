@@ -87,7 +87,7 @@ public class DotCoverReportParserTest {
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the dotCover report ");
     assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(16);
     assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
-      .startsWith("DotCover parser: found coverage for line '12', hits '0' when analyzing the path '");
+      .startsWith("dotCover parser: found coverage for line '12', hits '0' when analyzing the path '");
   }
 
   @Test

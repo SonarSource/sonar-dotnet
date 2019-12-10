@@ -138,8 +138,6 @@ public class CoverageReportImportSensor implements Sensor {
       }
       newCoverage.save();
 
-      LOG.trace("fileHasCoverage for '{}' is '{}'.", filePath, fileHasCoverage);
-
       if (fileHasCoverage) {
         fileCountStatistics.mainWithCoverage++;
         LOG.trace("Found some coverage info for the file '{}'.", filePath);

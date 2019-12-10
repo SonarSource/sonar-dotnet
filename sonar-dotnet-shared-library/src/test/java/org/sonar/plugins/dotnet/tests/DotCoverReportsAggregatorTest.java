@@ -84,7 +84,7 @@ public class DotCoverReportsAggregatorTest {
     assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Aggregating the HTML reports from ");
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
-    assertThat(debugLogs.get(1)).startsWith("DotCover aggregator: collected '3' report files to parse");
+    assertThat(debugLogs.get(1)).isEqualTo("dotCover aggregator: collected 3 report files to parse.");
   }
 
 }
