@@ -6,11 +6,11 @@ namespace Tests.Diagnostics
     {
         public void PositiveOverflow() {
             int i = 2147483600;
-            i +=100; // Noncompliant {{This operation always overflows}}
+            i +=100; // Noncompliant {{There is a path on which this operation always overflows}}
         }
         public void NegativeOverflow() {
             int i = -2147483600;
-            i -=100; // Noncompliant {{This operation always overflows}}
+            i -=100; // Noncompliant {{There is a path on which this operation always overflows}}
         }
         public void DoSomething() { throw new NotSupportedException(); }
         public void DoSomething2() { throw new NotSupportedException(); }
