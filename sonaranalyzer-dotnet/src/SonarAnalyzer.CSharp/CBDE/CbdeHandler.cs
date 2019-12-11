@@ -281,13 +281,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 pProcess.StartInfo.RedirectStandardError = true;
                 pProcess.StartInfo.UseShellExecute = false;
                 pProcess.Start();
-                long totalProcessorTime=0, peakPagedMemory = 0, peakVirtualMemory=0, peakWorkingSet=0;
+                long totalProcessorTime=0, peakPagedMemory = 0, peakWorkingSet=0;
                 while(!pProcess.WaitForExit(100))
                 {
-                    totalProcessorTime = (long)pProcess.TotalProcessorTime.TotalMilliseconds;
-                    peakPagedMemory = pProcess.PeakPagedMemorySize64;
-                    peakVirtualMemory = pProcess.PeakVirtualMemorySize64;
-                    peakWorkingSet = pProcess.PeakWorkingSet64;
+                    try
+                    {
+                        totalProcessorTime = (long)pProcess.TotalProcessorTime.TotalMilliseconds;
+                        peakPagedMemory = pProcess.PeakPagedMemorySize64;
+                        peakWorkingSet = pProcess.PeakWorkingSet64;
+                    }
+                    catch (InvalidOperationException) {
+                        // the process might have exited during the loop
+                    }
                 }
 
                 var logString = $@" *exit code: {pProcess.ExitCode}
