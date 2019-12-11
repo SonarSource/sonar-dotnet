@@ -64,8 +64,8 @@ public class VisualStudioTestResultsFileParserTest {
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs).hasSize(3);
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is '");
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1)).startsWith("Parsed Visual Studio Test Times - duration:816.");
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(2)).startsWith("Parsed Visual Studio Test Counters - total:43, failed:2, errors:3, timeout:5, aborted:7, executed:31.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1)).startsWith("Parsed Visual Studio Test Times - duration: 816.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(2)).startsWith("Parsed Visual Studio Test Counters - total: 43, failed: 2, errors: 3, timeout: 5, aborted: 7, executed: 31.");
   }
 
   @Test
@@ -80,7 +80,7 @@ public class VisualStudioTestResultsFileParserTest {
 
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs).hasSize(2);
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1)).startsWith("Parsed Visual Studio Test Counters - total:3, failed:0, errors:0, timeout:0, aborted:0, executed:3.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1)).startsWith("Parsed Visual Studio Test Counters - total: 3, failed: 0, errors: 0, timeout: 0, aborted: 0, executed: 3.");
   }
 
   @Test
@@ -91,7 +91,7 @@ public class VisualStudioTestResultsFileParserTest {
 
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs).hasSize(2);
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1)).startsWith("Parsed Visual Studio Test Counters - total:3, failed:0, errors:0, timeout:0, aborted:0, executed:3.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1)).startsWith("Parsed Visual Studio Test Counters - total: 3, failed: 0, errors: 0, timeout: 0, aborted: 0, executed: 3.");
   }
 
   @Test
@@ -107,8 +107,8 @@ public class VisualStudioTestResultsFileParserTest {
 
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs).hasSize(3);
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1)).startsWith("Parsed Visual Studio Test Times - duration:816.");
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(2)).startsWith("Parsed Visual Studio Test Counters - total:43, failed:2, errors:3, timeout:5, aborted:7, executed:31.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(1)).startsWith("Parsed Visual Studio Test Times - duration: 816.");
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(2)).startsWith("Parsed Visual Studio Test Counters - total: 43, failed: 2, errors: 3, timeout: 5, aborted: 7, executed: 31.");
   }
 
   @Test

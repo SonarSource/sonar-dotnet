@@ -81,7 +81,7 @@ public class XUnitTestResultsFileParser implements UnitTestResultsParser {
       Long executionTime = time != null ? (long) (time * 1000) : null;
 
       unitTestResults.add(total, skipped, failed, errors, executionTime);
-      LOG.debug("Parsed XUnit test results - total:{}, failed:{}, skipped:{}, errors:{}, executionTime:{}.",
+      LOG.debug("Parsed XUnit test results - total: {}, failed: {}, skipped: {}, errors: {}, executionTime: {}.",
         total, failed, skipped, errors, executionTime);
     }
 

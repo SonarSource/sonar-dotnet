@@ -78,7 +78,7 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
 
       unitTestResults.add(total, totalSkipped, failures, errors, executionTime);
 
-      LOG.debug("Parsed NUnit results - total:{}, totalSkipped:{}, failures:{}, errors:{}, execution time:{}.",
+      LOG.debug("Parsed NUnit results - total: {}, totalSkipped: {}, failures: {}, errors: {}, execution time: {}.",
         total, totalSkipped, failures, errors, executionTime);
     }
 
@@ -97,7 +97,7 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
 
       unitTestResults.add(total, totalSkipped, failures, errors, executionTime);
 
-      LOG.debug("Parsed NUnit test run - total:{}, totalSkipped:{}, failures:{}, errors:{}, execution time:{}.",
+      LOG.debug("Parsed NUnit test run - total: {}, totalSkipped: {}, failures: {}, errors: {}, execution time: {}.",
         total, totalSkipped, failures, errors, executionTime);
     }
 

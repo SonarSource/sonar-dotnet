@@ -73,7 +73,7 @@ public class NUnitTestResultsFileParserTest {
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs).hasSize(2);
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
-    assertThat(debugLogs.get(1)).startsWith("Parsed NUnit results - total:200, totalSkipped:9, failures:20, errors:30, execution time:51.");
+    assertThat(debugLogs.get(1)).startsWith("Parsed NUnit results - total: 200, totalSkipped: 9, failures: 20, errors: 30, execution time: 51.");
   }
 
   @Test
@@ -85,7 +85,7 @@ public class NUnitTestResultsFileParserTest {
 
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs).hasSize(2);
-    assertThat(debugLogs.get(1)).startsWith("Parsed NUnit results - total:200, totalSkipped:9, failures:20, errors:30, execution time:1051.");
+    assertThat(debugLogs.get(1)).startsWith("Parsed NUnit results - total: 200, totalSkipped: 9, failures: 20, errors: 30, execution time: 1051.");
   }
 
   @Test
@@ -101,7 +101,7 @@ public class NUnitTestResultsFileParserTest {
 
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs).hasSize(2);
-    assertThat(debugLogs.get(1)).startsWith("Parsed NUnit results - total:200, totalSkipped:9, failures:20, errors:30, execution time:null.");
+    assertThat(debugLogs.get(1)).startsWith("Parsed NUnit results - total: 200, totalSkipped: 9, failures: 20, errors: 30, execution time: null.");
   }
 
   @Test
@@ -117,7 +117,7 @@ public class NUnitTestResultsFileParserTest {
 
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs).hasSize(2);
-    assertThat(debugLogs.get(1)).startsWith("Parsed NUnit test run - total:18, totalSkipped:4, failures:2, errors:1, execution time:154.");
+    assertThat(debugLogs.get(1)).startsWith("Parsed NUnit test run - total: 18, totalSkipped: 4, failures: 2, errors: 1, execution time: 154.");
   }
 
 }

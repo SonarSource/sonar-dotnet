@@ -86,8 +86,8 @@ public class XUnitTestResultsFileParserTest {
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs).hasSize(3);
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
-    assertThat(debugLogs.get(1)).isEqualTo("Parsed XUnit test results - total:5, failed:2, skipped:0, errors:0, executionTime:227.");
-    assertThat(debugLogs.get(2)).isEqualTo("Parsed XUnit test results - total:12, failed:1, skipped:4, errors:5, executionTime:228.");
+    assertThat(debugLogs.get(1)).isEqualTo("Parsed XUnit test results - total: 5, failed: 2, skipped: 0, errors: 0, executionTime: 227.");
+    assertThat(debugLogs.get(2)).isEqualTo("Parsed XUnit test results - total: 12, failed: 1, skipped: 4, errors: 5, executionTime: 228.");
   }
 
   @Test
@@ -102,7 +102,7 @@ public class XUnitTestResultsFileParserTest {
 
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs).hasSize(2);
-    assertThat(debugLogs.get(1)).isEqualTo("Parsed XUnit test results - total:6, failed:1, skipped:2, errors:0, executionTime:297.");
+    assertThat(debugLogs.get(1)).isEqualTo("Parsed XUnit test results - total: 6, failed: 1, skipped: 2, errors: 0, executionTime: 297.");
   }
 
   @Test
@@ -118,8 +118,8 @@ public class XUnitTestResultsFileParserTest {
 
     List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
     assertThat(debugLogs).hasSize(3);
-    assertThat(debugLogs.get(1)).isEqualTo("Parsed XUnit test results - total:5, failed:2, skipped:0, errors:0, executionTime:null.");
-    assertThat(debugLogs.get(2)).isEqualTo("Parsed XUnit test results - total:12, failed:1, skipped:4, errors:5, executionTime:null.");
+    assertThat(debugLogs.get(1)).isEqualTo("Parsed XUnit test results - total: 5, failed: 2, skipped: 0, errors: 0, executionTime: null.");
+    assertThat(debugLogs.get(2)).isEqualTo("Parsed XUnit test results - total: 12, failed: 1, skipped: 4, errors: 5, executionTime: null.");
   }
 
   @Test

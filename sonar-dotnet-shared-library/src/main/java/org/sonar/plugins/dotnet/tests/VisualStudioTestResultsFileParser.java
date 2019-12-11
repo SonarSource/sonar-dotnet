@@ -96,7 +96,7 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
 
       unitTestResults.add(total, skipped, failures, errors, null);
 
-      LOG.debug("Parsed Visual Studio Test Counters - total:{}, failed:{}, errors:{}, timeout:{}, aborted:{}, executed:{}.",
+      LOG.debug("Parsed Visual Studio Test Counters - total: {}, failed: {}, errors: {}, timeout: {}, aborted: {}, executed: {}.",
         total, failed, errors, timeout, aborted, executed);
     }
 
@@ -107,7 +107,7 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
 
       unitTestResults.add(0, 0, 0, 0, duration);
 
-      LOG.debug("Parsed Visual Studio Test Times - duration:{}.", duration);
+      LOG.debug("Parsed Visual Studio Test Times - duration: {}.", duration);
     }
 
     private Date getRequiredDateAttribute(XmlParserHelper xmlParserHelper, String name) {
