@@ -43,9 +43,10 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             get { return (long)(currentProcessThread.TotalProcessorTime.TotalMilliseconds - totalMsStart); }
         }
-        public static ProcessThread GetCurrentProcessThread()
+        private static ProcessThread GetCurrentProcessThread()
         {
             var currentId = AppDomain.GetCurrentThreadId();
+            // this is not a generic collection, so there is no linq way of doing that
             foreach (ProcessThread p in Process.GetCurrentProcess().Threads)
             {
                 if (p.Id == currentId)
@@ -59,11 +60,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             totalMsStart = currentProcessThread.TotalProcessorTime.TotalMilliseconds;
         }
-        public ThreadCpuStopWatch()
+        private ThreadCpuStopWatch()
         {
             currentProcessThread = GetCurrentProcessThread();
-            Reset();
         }
+        // We are copying the interface of the class StopWatch
         public static ThreadCpuStopWatch StartNew()
         {
             var instance = new ThreadCpuStopWatch();
@@ -289,12 +290,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     peakWorkingSet = pProcess.PeakWorkingSet64;
                 }
 
-                var logString = String.Format(
-                    "  * exit_code: '{0}'\n" +
-                    "  * cpu_time: {1} ms\n" +
-                    "  * peak_paged_mem: {2} MB\n" +
-                    "  * peak_working_set: {3} MB\n",
-                    pProcess.ExitCode, totalProcessorTime, peakPagedMemory>>20, peakWorkingSet >> 20);
+                var logString = $@" *exit code: {pProcess.ExitCode}
+  * cpu_time: {totalProcessorTime} ms
+  * peak_paged_mem: {peakPagedMemory >> 20} MB
+  * peak_working_set: {peakWorkingSet >> 20} MB";
+
                 GlobalLog(logString);
                 logStreamWriter.Write(logString);
                 logStreamWriter.Flush();
