@@ -181,6 +181,11 @@
         "resolved": "2.1.0",
         "contentHash": "/ieJ02r4MEJM21Eyl+c5kwoJWPhy+qEEcN68JaqDoamabgxJI1jGi/kNLuKvHUCl6tU7E0rMvaR6FmEnDWtS4A=="
       },
+      "Newtonsoft.Json": {
+        "type": "Transitive",
+        "resolved": "11.0.2",
+        "contentHash": "IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ=="
+      },
       "SQLitePCLRaw.bundle_green": {
         "type": "Transitive",
         "resolved": "1.1.2",
@@ -390,6 +395,11 @@
         "resolved": "4.3.0",
         "contentHash": "uv1ynXqiMK8mp1GM3jDqPCFN66eJ5w5XNomaK2XD+TuCroNTLFGeZ+WCmBMcBDyTFKou3P6cR6J/QsaqDp7fGQ=="
       },
+      "System.Runtime.InteropServices.RuntimeInformation": {
+        "type": "Transitive",
+        "resolved": "4.3.0",
+        "contentHash": "cbz4YJMqRDR7oLeMRbdYv7mYzc++17lNhScCX0goO2XpGWdvAt60CGN+FHdePUEHCe/Jy9jUlvNAiNdM+7jsOw=="
+      },
       "System.Runtime.Numerics": {
         "type": "Transitive",
         "resolved": "4.3.0",
@@ -511,8 +521,10 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "1.3.2",
+          "Newtonsoft.Json": "11.0.2",
           "SonarAnalyzer": "1.0.0",
-          "System.Collections.Immutable": "1.1.37"
+          "System.Collections.Immutable": "1.1.37",
+          "System.Runtime.InteropServices.RuntimeInformation": "4.3.0"
         }
       },
       "sonaranalyzer.ruledescriptorgenerator": {
