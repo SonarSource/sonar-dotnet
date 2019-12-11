@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.util.List;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -77,6 +78,16 @@ public class XUnitTestResultsFileParserTest {
     assertThat(results.tests()).isEqualTo(17);
     assertThat(results.skipped()).isEqualTo(4);
     assertThat(results.executionTime()).isEqualTo(227 + 228);
+
+    List<String> infoLogs = logTester.logs(LoggerLevel.INFO);
+    assertThat(infoLogs).hasSize(1);
+    assertThat(infoLogs.get(0)).startsWith("Parsing the XUnit Test Results file");
+
+    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    assertThat(debugLogs).hasSize(3);
+    assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
+    assertThat(debugLogs.get(1)).isEqualTo("Parsed XUnit test results - total: 5, failed: 2, skipped: 0, errors: 0, executionTime: 227.");
+    assertThat(debugLogs.get(2)).isEqualTo("Parsed XUnit test results - total: 12, failed: 1, skipped: 4, errors: 5, executionTime: 228.");
   }
 
   @Test
@@ -88,6 +99,10 @@ public class XUnitTestResultsFileParserTest {
     assertThat(results.errors()).isEqualTo(0);
     assertThat(results.skipped()).isEqualTo(2);
     assertThat(results.tests()).isEqualTo(6);
+
+    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    assertThat(debugLogs).hasSize(2);
+    assertThat(debugLogs.get(1)).isEqualTo("Parsed XUnit test results - total: 6, failed: 1, skipped: 2, errors: 0, executionTime: 297.");
   }
 
   @Test
@@ -100,6 +115,11 @@ public class XUnitTestResultsFileParserTest {
     assertThat(results.tests()).isEqualTo(17);
     assertThat(results.skipped()).isEqualTo(4);
     assertThat(results.executionTime()).isNull();
+
+    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    assertThat(debugLogs).hasSize(3);
+    assertThat(debugLogs.get(1)).isEqualTo("Parsed XUnit test results - total: 5, failed: 2, skipped: 0, errors: 0, executionTime: null.");
+    assertThat(debugLogs.get(2)).isEqualTo("Parsed XUnit test results - total: 12, failed: 1, skipped: 4, errors: 5, executionTime: null.");
   }
 
   @Test
@@ -113,6 +133,9 @@ public class XUnitTestResultsFileParserTest {
     assertThat(results.failures()).isEqualTo(0);
     assertThat(results.errors()).isEqualTo(0);
     assertThat(results.executionTime()).isNull();
+
+    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    assertThat(debugLogs).hasSize(1);
   }
 
   @Test
@@ -126,5 +149,8 @@ public class XUnitTestResultsFileParserTest {
     assertThat(results.failures()).isEqualTo(0);
     assertThat(results.errors()).isEqualTo(0);
     assertThat(results.executionTime()).isNull();
+
+    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    assertThat(debugLogs).hasSize(1);
   }
 }

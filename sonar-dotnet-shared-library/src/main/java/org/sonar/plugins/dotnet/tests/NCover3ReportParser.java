@@ -29,15 +29,17 @@ import org.sonar.api.utils.log.Loggers;
 
 public class NCover3ReportParser implements CoverageParser {
 
+  private static final String EXCLUDED_ID = "0";
   private static final Logger LOG = Loggers.get(NCover3ReportParser.class);
-  private final Predicate<String> isSupportedLanguage;
+  private final Predicate<String> isSupported;
 
-  public NCover3ReportParser(Predicate<String> isSupportedLanguage) {
-    this.isSupportedLanguage = isSupportedLanguage;
+  public NCover3ReportParser(Predicate<String> isSupported) {
+    this.isSupported = isSupported;
   }
 
   @Override
   public void accept(File file, Coverage coverage) {
+    LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
     LOG.info("Parsing the NCover3 report " + file.getAbsolutePath());
     new Parser(file, coverage).parse();
   }
@@ -77,18 +79,26 @@ public class NCover3ReportParser implements CoverageParser {
       String id = xmlParserHelper.getRequiredAttribute("id");
       String url = xmlParserHelper.getRequiredAttribute("url");
 
+      LOG.trace("Analyzing the doc tag with NCover3 ID '{}' and url '{}'.", id, url);
+
       if (!isExcludedId(id)) {
         try {
-          documents.put(id, new File(url).getCanonicalPath());
+          String path = new File(url).getCanonicalPath();
+
+          LOG.trace("NCover3 ID '{}' with url '{}' is resolved as '{}'.", id, url, path);
+
+          documents.put(id, path);
         } catch (IOException e) {
           LOG.debug("Skipping the import of NCover3 code coverage for the invalid file path: " + url
             + " at line " + xmlParserHelper.stream().getLocation().getLineNumber(), e);
         }
+      } else {
+        LOG.debug("NCover3 ID '{}' is excluded, so url '{}' was not added.", id, url);
       }
     }
 
     private boolean isExcludedId(String id) {
-      return "0".equals(id);
+      return EXCLUDED_ID.equals(id);
     }
 
     private void handleSegmentPointTag(XmlParserHelper xmlParserHelper) {
@@ -98,9 +108,19 @@ public class NCover3ReportParser implements CoverageParser {
 
       if (documents.containsKey(doc) && !isExcludedLine(line)) {
         String path = documents.get(doc);
-        if (isSupportedLanguage.test(path)) {
+        if (isSupported.test(path)) {
+
+          LOG.trace("Found coverage for line '{}', vc '{}' when analyzing the doc '{}' with the path '{}'.",
+            line, vc, doc, path);
+
           coverage.addHits(path, line, vc);
+        } else {
+          LOG.debug("NCover3 doc '{}', line '{}', vc '{}' will be skipped because it has a path '{}'" +
+              " which is not indexed or does not have the supported language.",
+            doc, line, vc, path);
         }
+      } else if (!isExcludedLine(line)) {
+        LOG.debug("NCover3 doc '{}' is not contained in documents and will be skipped.", doc);
       }
     }
 

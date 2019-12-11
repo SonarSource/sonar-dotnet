@@ -32,11 +32,17 @@ import org.sonar.api.utils.log.Loggers;
 
 public class DotCoverReportParser implements CoverageParser {
 
-  private static final Logger LOG = Loggers.get(DotCoverReportParser.class);
-  private final Predicate<String> isSupportedLanguage;
+  private static final Pattern TITLE_PATTERN = Pattern.compile(".*?<title>(.*?)</title>.*", Pattern.DOTALL);
+  private static final Pattern COVERED_LINES_PATTERN_1 = Pattern.compile(
+    ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[(.*?)\\]\\);\\s*+</script>.*",
+    Pattern.DOTALL);
+  private static final Pattern COVERED_LINES_PATTERN_2 = Pattern.compile("\\[(\\d++),\\d++,\\d++,\\d++,(\\d++)\\]");
 
-  public DotCoverReportParser(Predicate<String> isSupportedLanguage) {
-    this.isSupportedLanguage = isSupportedLanguage;
+  private static final Logger LOG = Loggers.get(DotCoverReportParser.class);
+  private final Predicate<String> isSupported;
+
+  public DotCoverReportParser(Predicate<String> isSupported) {
+    this.isSupported = isSupported;
   }
 
   @Override
@@ -46,12 +52,6 @@ public class DotCoverReportParser implements CoverageParser {
   }
 
   private class Parser {
-
-    private final Pattern TITLE_PATTERN = Pattern.compile(".*?<title>(.*?)</title>.*", Pattern.DOTALL);
-    private final Pattern COVERED_LINES_PATTERN_1 = Pattern.compile(
-      ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[(.*?)\\]\\);\\s*+</script>.*",
-      Pattern.DOTALL);
-    private final Pattern COVERED_LINES_PATTERN_2 = Pattern.compile("\\[(\\d++),\\d++,\\d++,\\d++,(\\d++)\\]");
 
     private final File file;
     private final Coverage coverage;
@@ -70,8 +70,11 @@ public class DotCoverReportParser implements CoverageParser {
       }
 
       String fileCanonicalPath = extractFileCanonicalPath(contents);
-      if (fileCanonicalPath != null && isSupportedLanguage.test(fileCanonicalPath)) {
+      if (fileCanonicalPath != null && isSupported.test(fileCanonicalPath)) {
         collectCoverage(fileCanonicalPath, contents);
+      } else {
+        LOG.debug("Skipping the import of dotCover code coverage for file '{}'"
+          + " because it is not indexed or does not have the supported language.", fileCanonicalPath);
       }
     }
 
@@ -85,7 +88,7 @@ public class DotCoverReportParser implements CoverageParser {
       try {
         return new File(lowerCaseAbsolutePath).getCanonicalPath();
       } catch (IOException e) {
-        LOG.debug("Skipping the import of dotCover code coverage for the invalid file path: " + lowerCaseAbsolutePath, e);
+        LOG.debug("Skipping the import of dotCover code coverage for the invalid file path: " + lowerCaseAbsolutePath + ".", e);
         return null;
       }
     }
@@ -101,6 +104,9 @@ public class DotCoverReportParser implements CoverageParser {
         int line = Integer.parseInt(matcher.group(1));
         int hits = Integer.parseInt(matcher.group(2));
         coverage.addHits(fileCanonicalPath, line, hits);
+
+        LOG.trace("dotCover parser: found coverage for line '{}', hits '{}' when analyzing the path '{}'.",
+            line, hits, fileCanonicalPath);
       }
     }
 

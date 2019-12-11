@@ -29,8 +29,11 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.sonar.api.utils.WildcardPattern;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 public class WildcardPatternFileProvider {
+  private static final Logger LOG = Loggers.get(WildcardPatternFileProvider.class);
 
   private static final String CURRENT_FOLDER = ".";
   private static final String PARENT_FOLDER = "..";
@@ -48,6 +51,7 @@ public class WildcardPatternFileProvider {
   }
 
   Set<File> listFiles(String pattern) {
+
     List<String> elements = Arrays.asList(pattern.split(Pattern.quote(directorySeparator)));
 
     List<String> elementsTillFirstWildcard = elementsTillFirstWildcard(elements);
@@ -56,23 +60,39 @@ public class WildcardPatternFileProvider {
 
     File absoluteFileTillFirstWildcardElement = fileTillFirstWildcardElement.isAbsolute() ? fileTillFirstWildcardElement : new File(baseDir, pathTillFirstWildcardElement);
 
+    LOG.debug("Pattern matcher extracted prefix/absolute path '{}' from the given pattern '{}'.",
+      absoluteFileTillFirstWildcardElement.getAbsolutePath(), pattern);
+
     List<String> wildcardElements = elements.subList(elementsTillFirstWildcard.size(), elements.size());
     if (wildcardElements.isEmpty()) {
-      return absoluteFileTillFirstWildcardElement.exists() ? new HashSet<>(Arrays.asList(absoluteFileTillFirstWildcardElement)) : Collections.emptySet();
+      if (absoluteFileTillFirstWildcardElement.exists()) {
+        LOG.debug("Pattern matcher returns a single file: '{}'.", absoluteFileTillFirstWildcardElement.getAbsolutePath());
+        return new HashSet<>(Collections.singletonList(absoluteFileTillFirstWildcardElement));
+      } else {
+        LOG.debug("Pattern matcher did not find any files matching the pattern '{}'.", pattern);
+        return Collections.emptySet();
+      }
     }
     checkNoCurrentOrParentFolderAccess(wildcardElements);
 
     WildcardPattern wildcardPattern = WildcardPattern.create(toPath(wildcardElements), directorySeparator);
+
+    LOG.debug("Gathering files for wildcardPattern '{}'.", wildcardPattern.toString());
 
     Set<File> result = new HashSet<>();
     for (File file : listFiles(absoluteFileTillFirstWildcardElement)) {
       String relativePath = relativize(absoluteFileTillFirstWildcardElement, file);
 
       if (wildcardPattern.match(relativePath)) {
+        LOG.trace("Adding file '{}' to result list.", file.getAbsolutePath());
         result.add(file);
+      } else {
+        LOG.trace("Skipping file '{}' because it does not match pattern '{}'.",
+          file.getAbsolutePath(), wildcardPattern);
       }
     }
 
+    LOG.debug("Pattern matcher returns '{}' files.", result.size());
     return result;
   }
 

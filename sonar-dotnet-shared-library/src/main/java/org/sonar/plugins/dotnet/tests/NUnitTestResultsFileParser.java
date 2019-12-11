@@ -32,7 +32,8 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
 
   @Override
   public void accept(File file, UnitTestResults unitTestResults) {
-    LOG.info("Parsing the NUnit Test Results file " + file.getAbsolutePath());
+    LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
+    LOG.info("Parsing the NUnit Test Results file '{}'.", file.getAbsolutePath());
     new Parser(file, unitTestResults).parse();
   }
 
@@ -76,6 +77,9 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
       Long executionTime = duration != null ? (long) duration.doubleValue() : null;
 
       unitTestResults.add(total, totalSkipped, failures, errors, executionTime);
+
+      LOG.debug("Parsed NUnit results - total: {}, totalSkipped: {}, failures: {}, errors: {}, execution time: {}.",
+        total, totalSkipped, failures, errors, executionTime);
     }
 
     private void handleTestRunTag(XmlParserHelper xmlParserHelper) {
@@ -92,6 +96,9 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
       int errors = readErrorCountFromNestedTestCaseTags(xmlParserHelper);
 
       unitTestResults.add(total, totalSkipped, failures, errors, executionTime);
+
+      LOG.debug("Parsed NUnit test run - total: {}, totalSkipped: {}, failures: {}, errors: {}, execution time: {}.",
+        total, totalSkipped, failures, errors, executionTime);
     }
 
     @CheckForNull

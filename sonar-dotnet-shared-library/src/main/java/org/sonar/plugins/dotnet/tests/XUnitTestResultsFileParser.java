@@ -31,7 +31,8 @@ public class XUnitTestResultsFileParser implements UnitTestResultsParser {
 
   @Override
   public void accept(File file, UnitTestResults unitTestResults) {
-    LOG.info("Parsing the XUnit Test Results file " + file.getAbsolutePath());
+    LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
+    LOG.info("Parsing the XUnit Test Results file '{}'.", file.getAbsolutePath());
     new Parser(file, unitTestResults).parse();
   }
 
@@ -80,6 +81,8 @@ public class XUnitTestResultsFileParser implements UnitTestResultsParser {
       Long executionTime = time != null ? (long) (time * 1000) : null;
 
       unitTestResults.add(total, skipped, failed, errors, executionTime);
+      LOG.debug("Parsed XUnit test results - total: {}, failed: {}, skipped: {}, errors: {}, executionTime: {}.",
+        total, failed, skipped, errors, executionTime);
     }
 
   }

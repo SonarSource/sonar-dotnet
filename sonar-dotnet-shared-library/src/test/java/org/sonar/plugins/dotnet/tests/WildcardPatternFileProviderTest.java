@@ -20,6 +20,7 @@
 package org.sonar.plugins.dotnet.tests;
 
 import com.google.common.base.Joiner;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -28,6 +29,8 @@ import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
 import java.util.Set;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,15 +42,16 @@ public class WildcardPatternFileProviderTest {
   @Rule
   public ExpectedException thrown = ExpectedException.none();
 
+  @Rule
+  public LogTester logTester = new LogTester();
+
   @Before
   public void init() throws Exception {
     tmp.newFile("foo.txt");
     tmp.newFile("bar.txt");
-
     tmp.newFolder("a");
     tmp.newFile(path("a", "foo.txt"));
     tmp.newFolder("a", "a21");
-
     tmp.newFolder("b");
 
     tmp.newFolder("c");
@@ -57,6 +61,52 @@ public class WildcardPatternFileProviderTest {
     tmp.newFolder("c", "c22", "c31");
     tmp.newFile(path("c", "c22", "c31", "foo.txt"));
     tmp.newFile(path("c", "c22", "c31", "bar.txt"));
+  }
+
+  @Test
+  public void logging_added_and_skipped_files() {
+    File tmpRoot = tmp.getRoot();
+    String givenPattern = new File(tmpRoot, path("**\\c\\c21", "foo.txt")).getAbsolutePath();
+    listFiles(givenPattern);
+
+    List<String> debugLogs = logTester.logs((LoggerLevel.DEBUG));
+    assertThat(debugLogs).hasSize(3);
+    assertThat(debugLogs.get(0)).isEqualTo("Pattern matcher extracted prefix/absolute path '" + tmpRoot + "' from the given pattern '" + givenPattern + "'.");
+    assertThat(debugLogs.get(1)).isEqualTo("Gathering files for wildcardPattern '**\\c\\c21\\foo.txt'.");
+    assertThat(debugLogs.get(2)).startsWith("Pattern matcher returns '1' files.");
+
+    List<String> traceLogs = logTester.logs((LoggerLevel.TRACE));
+    assertThat(traceLogs).hasSize(13);
+    // we don't know the order of logging, so we're just doing a sanity check
+    assertThat(traceLogs).contains("Skipping file '" +
+      tmpRoot +
+      "\\c\\c22\\c31\\foo.txt'" +
+      " because it does not match pattern '**\\c\\c21\\foo.txt'.");
+    assertThat(traceLogs).contains("Adding file '" + tmpRoot + "\\c\\c21\\foo.txt" + "' to result list.");
+  }
+
+  @Test
+  public void logging_early_return_absolute_path() {
+    File tmpRoot = tmp.getRoot();
+    String absoluteFilePath = new File(tmpRoot,  "foo.txt").getAbsolutePath();
+    listFiles(absoluteFilePath);
+
+    List<String> logs = logTester.logs((LoggerLevel.DEBUG));
+    assertThat(logs).hasSize(2);
+    assertThat(logs.get(0)).isEqualTo("Pattern matcher extracted prefix/absolute path '" + absoluteFilePath + "' from the given pattern '" + absoluteFilePath + "'.");
+    assertThat(logs.get(1)).isEqualTo("Pattern matcher returns a single file: '" + absoluteFilePath + "'.");
+  }
+
+  @Test
+  public void logging_early_return_no_file_found() {
+    File tmpRoot = tmp.getRoot();
+    String nonExistingFilePath = new File(tmpRoot,  "not-existing-file").getAbsolutePath();
+    listFiles(nonExistingFilePath);
+
+    List<String> logs = logTester.logs((LoggerLevel.DEBUG));
+    assertThat(logs).hasSize(2);
+    assertThat(logs.get(0)).isEqualTo("Pattern matcher extracted prefix/absolute path '" + nonExistingFilePath + "' from the given pattern '" + nonExistingFilePath + "'.");
+    assertThat(logs.get(1)).isEqualTo("Pattern matcher did not find any files matching the pattern '" + nonExistingFilePath + "'.");
   }
 
   @Test
