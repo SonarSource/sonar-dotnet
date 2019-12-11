@@ -1,15 +1,12 @@
 {
   "version": 1,
   "dependencies": {
-    ".NETFramework,Version=v4.6": {
+    ".NETFramework,Version=v4.8": {
       "FluentAssertions": {
         "type": "Direct",
         "requested": "[5.6.0, )",
         "resolved": "5.6.0",
-        "contentHash": "f4dbuhV21i1Icv0vRnOI62fvNVpVR4s238ezEgwajL1HyITWZUQnMMW0UgpV4P/kqL31fSrplAm8pLSxFtzhIg==",
-        "dependencies": {
-          "System.ValueTuple": "4.4.0"
-        }
+        "contentHash": "f4dbuhV21i1Icv0vRnOI62fvNVpVR4s238ezEgwajL1HyITWZUQnMMW0UgpV4P/kqL31fSrplAm8pLSxFtzhIg=="
       },
       "FluentAssertions.Analyzers": {
         "type": "Direct",
@@ -324,6 +321,11 @@
         "resolved": "4.3.0",
         "contentHash": "kYdVd2f2PAdFGblzFswE4hkNANJBKRmsfa2X5LG2AcWE1c7/4t0pYae1L8vfZ5xvE2nK/R9JprtToA61OSHWIg=="
       },
+      "System.IO": {
+        "type": "Transitive",
+        "resolved": "4.3.0",
+        "contentHash": "3qjaHvxQPDpSOYICjUoTsmoq5u6QJAFRUITgeT/4gqkF1bajbSmb1kwSxEA8AHlofqgcKJcM8udgieRNhaJ5Cg=="
+      },
       "System.IO.Compression": {
         "type": "Transitive",
         "resolved": "4.3.0",
@@ -388,7 +390,10 @@
       "System.Runtime.InteropServices": {
         "type": "Transitive",
         "resolved": "4.3.0",
-        "contentHash": "uv1ynXqiMK8mp1GM3jDqPCFN66eJ5w5XNomaK2XD+TuCroNTLFGeZ+WCmBMcBDyTFKou3P6cR6J/QsaqDp7fGQ=="
+        "contentHash": "uv1ynXqiMK8mp1GM3jDqPCFN66eJ5w5XNomaK2XD+TuCroNTLFGeZ+WCmBMcBDyTFKou3P6cR6J/QsaqDp7fGQ==",
+        "dependencies": {
+          "System.Runtime": "4.3.0"
+        }
       },
       "System.Runtime.Numerics": {
         "type": "Transitive",
@@ -400,6 +405,9 @@
         "resolved": "4.3.0",
         "contentHash": "W1kd2Y8mYSCgc3ULTAZ0hOP2dSdG5YauTb1089T0/kRcN2MpSAW1izOFROrJgxSlMn3ArsgHXagigyi+ibhevg==",
         "dependencies": {
+          "System.IO": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Security.Cryptography.Encoding": "4.3.0",
           "System.Security.Cryptography.Primitives": "4.3.0"
         }
       },
@@ -467,8 +475,8 @@
       },
       "System.ValueTuple": {
         "type": "Transitive",
-        "resolved": "4.4.0",
-        "contentHash": "BahUww/+mdP4ARCAh2RQhQTg13wYLVrBb9SYVgW8ZlrwjraGCXHGjo0oIiUfZ34LUZkMMR+RAzR7dEY4S1HeQQ=="
+        "resolved": "4.3.0",
+        "contentHash": "cNLEvBX3d6MMQRZe3SMFNukVbitDAEpVZO17qa0/2FHxZ7Y7PpFRpr6m2615XYM/tYYYf0B+WyHNujqIw8Luwg=="
       },
       "System.Xml.ReaderWriter": {
         "type": "Transitive",

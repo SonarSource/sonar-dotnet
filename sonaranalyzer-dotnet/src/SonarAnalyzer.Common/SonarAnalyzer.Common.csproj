@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net46</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
     <AssemblyName>SonarAnalyzer</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>

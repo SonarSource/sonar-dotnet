@@ -26,20 +26,6 @@ namespace SonarAnalyzer.Helpers
 {
     public static class EnumerableExtensions
     {
-        public static HashSet<T> ToHashSet<T>(this IEnumerable<T> enumerable, IEqualityComparer<T> equalityComparer = null)
-        {
-            if (enumerable == null)
-            {
-                return equalityComparer != null
-                    ? new HashSet<T>(equalityComparer)
-                    : new HashSet<T>();
-            }
-
-            return equalityComparer != null
-                ? new HashSet<T>(enumerable, equalityComparer)
-                : new HashSet<T>(enumerable);
-        }
-
         /// <summary>
         /// Compares each element between two collections. The elements needs in the same order to be considered equal.
         /// </summary>
