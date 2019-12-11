@@ -287,6 +287,7 @@
                     <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp">
                       <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/${analyzer.configuration}/">
                         <include name="SonarAnalyzer.dll"/>
+                        <include name="SonarAnalyzer.CFG.dll"/>
                         <include name="SonarAnalyzer.CSharp.dll"/>
                         <include name="Google.Protobuf.dll"/>
                         <include name="Newtonsoft.Json.dll"/>

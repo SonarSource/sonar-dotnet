@@ -111,6 +111,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\SonarAnalyzer.CFG\SonarAnalyzer.CFG.csproj" />
     <ProjectReference Include="..\..\src\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj" />
     <ProjectReference Include="..\..\src\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj">
       <Aliases>global,csharp</Aliases>

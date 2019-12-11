@@ -130,6 +130,7 @@
   <Target Name="CopyBinaries" AfterTargets="Build">
     <ItemGroup>
       <BinariesToCopy Include="$(OutputPath)\SonarAnalyzer.dll" />
+      <BinariesToCopy Include="$(OutputPath)\SonarAnalyzer.CFG.dll" />
       <BinariesToCopy Include="$(OutputPath)\SonarAnalyzer.CSharp.dll" />
       <BinariesToCopy Include="$(OutputPath)\SonarAnalyzer.VisualBasic.dll" />
       <BinariesToCopy Include="$(OutputPath)\Google.Protobuf.dll" />

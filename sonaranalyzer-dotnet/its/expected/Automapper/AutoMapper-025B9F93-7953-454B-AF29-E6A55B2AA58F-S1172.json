@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this parameter 'instanceParameter', whose value is ignored in the method.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  102,
+"endLine":  258,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this parameter 'typePairCount', whose value is ignored in the method.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  132,
+"endLine":  258,
+"endColumn":  159
+}
+}
+}
+]
+}
