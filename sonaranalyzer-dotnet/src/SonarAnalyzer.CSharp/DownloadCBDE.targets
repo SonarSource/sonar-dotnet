@@ -20,13 +20,6 @@
       <MainExe>dotnet-symbolic-execution.exe</MainExe>
       <ZipFileName>cbde-windows.zip</ZipFileName>
     </CBDEUrls>
-    <!-- Only Windows is supported for now
-    <CBDEUrls Include="http://repox.jfrog.io/repox/sonarsource-public-builds/org/sonarsource/cbde/$(SpecificCBDEVersion)/cbde-linux.$(SpecificCBDEVersion).zip" >
-      <SubFolder>linux\</SubFolder>
-      <MainExe>dotnet-symbolic-execution</MainExe>
-      <ZipFileName>cbde-linux.zip</ZipFileName>
-    </CBDEUrls>
-    -->
   </ItemGroup>
 
 
@@ -40,9 +33,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="$(RelativeCBDEFolder)\windows\**\*.txt" >
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="$(RelativeCBDEFolder)\linux\**" Exclude="$(RelativeCBDEFolder)\linux\**\*.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -74,20 +64,12 @@
     <Delete Files="@(ExistingCBDEFiles)" Condition="$(ShouldDownloadCBDE)=='true'"/>
 
     <Message Importance="high" Text="CBDE: Begin downloading CBDE zip at @(CBDEUrls)..." Condition="$(ShouldDownloadCBDE)=='true'"/>
-    <Exec ConsoleToMsBuild="true" Condition="$(ShouldDownloadCBDE)=='true'"
-      Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -File $(DownloadScript) -url @(CBDEUrls) -outfolder $(CBDECurrentFolder) -outfile %(CBDEUrls.ZipFileName)">
-      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec"/>
-    </Exec>
-    <Message Importance="low" Text="Output of powershell download: $(OutputOfExec)"  Condition="$(ShouldDownloadCBDE)=='true'"/>
+    <DownloadFile Condition="$(ShouldDownloadCBDE)=='true'" SourceUrl="@(CBDEUrls)" DestinationFolder="$(CBDECurrentFolder)"
+              DestinationFileName="%(CBDEUrls.ZipFileName)"/>
     <Message Importance="high" Text="CBDE: Finished downloading CBDE binaries: $(CBDEZipFilePath)"  Condition="$(ShouldDownloadCBDE)=='true'"/>
 
     <Message Importance="high" Text="CBDE: Unzipping the CBDE binaries..."  Condition="$(ShouldDownloadCBDE)=='true'"/>
-    <Exec ConsoleToMsBuild="true" Condition="$(ShouldDownloadCBDE)=='true'"
-      Command="$(PowerShellExe) -NonInteractive -ExecutionPolicy Unrestricted -File $(UnzipScript) -zipfile $(CBDECurrentFolder)%(CBDEUrls.ZipFileName) -outpath $(CBDECurrentFolder)">
-      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
-    </Exec>
-    <Message Importance="low" Text="Output of powershell unzip: $(OutputOfExec)" Condition="$(ShouldDownloadCBDE)=='true'"/>
-
+    <Unzip SourceFiles="$(CBDECurrentFolder)%(CBDEUrls.ZipFileName)" DestinationFolder="$(CBDECurrentFolder)" />
     <Message Importance="high" Text="CBDE: Finished unzipping CBDE binaries" Condition="$(ShouldDownloadCBDE)=='true'"/>
 
     <!-- Specifies the CBDE files that should be included in the project and copied to the output directory -->
@@ -96,9 +78,6 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="$(RelativeCBDEFolder)\windows\**\*.txt" >
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-      <Content Include="$(RelativeCBDEFolder)\linux\**" Exclude="$(RelativeCBDEFolder)\linux\**\*.zip">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
     </ItemGroup>
