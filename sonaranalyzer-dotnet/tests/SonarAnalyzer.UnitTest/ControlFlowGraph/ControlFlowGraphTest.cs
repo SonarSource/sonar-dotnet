@@ -1,5 +1,4 @@
-﻿extern alias csharp;
-/*
+﻿/*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2019 SonarSource SA
 * mailto: contact AT sonarsource DOT com
@@ -20,14 +19,14 @@
 */
 
 using System.Linq;
-using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
-using csharp::SonarAnalyzer.ShimLayer.CSharp;
+using SonarAnalyzer.ControlFlowGraph;
+using SonarAnalyzer.ControlFlowGraph.CSharp;
+using SonarAnalyzer.ShimLayer.CSharp;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.ControlFlowGraph;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
