@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -100,7 +100,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterExplodedGraphBasedAnalysis((e, c) => CheckForRedundantConditions(e, c));
+            //FIXME: Temporary silence for CFG defork
+            //context.RegisterExplodedGraphBasedAnalysis((e, c) => CheckForRedundantConditions(e, c));
         }
 
         private static void CheckForRedundantConditions(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)

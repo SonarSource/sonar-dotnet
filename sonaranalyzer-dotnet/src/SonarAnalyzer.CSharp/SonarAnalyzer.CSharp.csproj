@@ -15,17 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SonarAnalyzer.CFG\SonarAnalyzer.CFG.csproj" />
     <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.Shared.cs" Link="Properties\AssemblyInfo.Shared.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="ShimLayer\*.cs">
-      <SonarQubeExclude>true</SonarQubeExclude>
-    </Compile>
   </ItemGroup>
 
   <!--

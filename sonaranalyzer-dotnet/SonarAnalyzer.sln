@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common Solution Items", "Common Solution Items", "{0C3E0519-DB5C-47C0-ABB3-9D1FB23DFBAF}"
 	ProjectSection(SolutionItems) = preProject
@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.Common", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.Utilities", "src\SonarAnalyzer.Utilities\SonarAnalyzer.Utilities.csproj", "{4C1BB6CE-645F-400B-B491-AF7BB40E5C01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.UnitTest", "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj", "{4AC7D054-B645-46D7-9671-D666BCE0C745}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.UnitTest", "tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj", "{4AC7D054-B645-46D7-9671-D666BCE0C745}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.RuleDescriptorGenerator", "src\SonarAnalyzer.RuleDescriptorGenerator\SonarAnalyzer.RuleDescriptorGenerator.csproj", "{E4D5FF22-C1A4-4CAD-B068-E47817F25848}"
 EndProject
@@ -31,6 +31,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.VisualBasic", "src\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.csproj", "{01DF3CB0-2213-42F3-BB8E-0C3BC330DE7A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReviewDiffs", "its\ReviewDiffs\ReviewDiffs.csproj", "{50934C7A-2751-4675-91C4-CFD37C8BF57C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.CFG", "src\SonarAnalyzer.CFG\SonarAnalyzer.CFG.csproj", "{F766F556-CB91-408A-9149-EB963DE1B817}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +72,10 @@ Global
 		{50934C7A-2751-4675-91C4-CFD37C8BF57C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50934C7A-2751-4675-91C4-CFD37C8BF57C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50934C7A-2751-4675-91C4-CFD37C8BF57C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F766F556-CB91-408A-9149-EB963DE1B817}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F766F556-CB91-408A-9149-EB963DE1B817}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F766F556-CB91-408A-9149-EB963DE1B817}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F766F556-CB91-408A-9149-EB963DE1B817}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
