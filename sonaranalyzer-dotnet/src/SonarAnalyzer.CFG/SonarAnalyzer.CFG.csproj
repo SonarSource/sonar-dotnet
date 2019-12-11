@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
+  <PropertyGroup>
+    <TargetFramework>net46</TargetFramework>
+    <AssemblyName>SonarAnalyzer.CFG</AssemblyName>
+    <RootNamespace>SonarAnalyzer</RootNamespace>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <RestoreLockedMode>true</RestoreLockedMode>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+    <ProjectGuid>{F766F556-CB91-408A-9149-EB963DE1B817}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="1.3.2" />
+    <PackageReference Include="System.Collections.Immutable" Version="1.1.37" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\AssemblyInfo.Shared.cs" Link="Properties\AssemblyInfo.Shared.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ShimLayer\*.cs">
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
+  </ItemGroup>
+  <!--
+    This PropertyGroup is used as a hack to prevent the NU1605 issue to be reported as an error. The rule is detecting
+    the downgrade of System.Collections.Immutable from 1.2.0 to 1.1.37 (VS 2015 Update 3 only embeds 1.1.37).
+    Do not use NoWarn in order to avoid hiding other issues.
+  -->
+  <PropertyGroup>
+    <WarningsAsErrors />
+    <NoWarn>NU1605</NoWarn>
+  </PropertyGroup>
+</Project>

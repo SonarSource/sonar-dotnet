@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SonarAnalyzer.CFG\SonarAnalyzer.CFG.csproj" />
     <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj" />
   </ItemGroup>
 
@@ -25,11 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ShimLayer\*.cs">
-      <SonarQubeExclude>true</SonarQubeExclude>
-    </Compile>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <EmbeddedResource Include="CBDE/windows/dotnet-symbolic-execution.exe" />
   </ItemGroup>
