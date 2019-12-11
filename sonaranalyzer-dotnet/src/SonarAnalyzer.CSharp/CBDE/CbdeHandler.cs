@@ -35,49 +35,12 @@ using System.Threading;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    public class ThreadCpuStopWatch
-    {
-        private double totalMsStart;
-        private readonly ProcessThread currentProcessThread;
-        public long ElapsedMilliseconds
-        {
-            get { return (long)(currentProcessThread.TotalProcessorTime.TotalMilliseconds - totalMsStart); }
-        }
-        private static ProcessThread GetCurrentProcessThread()
-        {
-            var currentId = AppDomain.GetCurrentThreadId();
-            // this is not a generic collection, so there is no linq way of doing that
-            foreach (ProcessThread p in Process.GetCurrentProcess().Threads)
-            {
-                if (p.Id == currentId)
-                {
-                    return p;
-                }
-            }
-            return null;
-        }
-        public void Reset()
-        {
-            totalMsStart = currentProcessThread.TotalProcessorTime.TotalMilliseconds;
-        }
-        private ThreadCpuStopWatch()
-        {
-            currentProcessThread = GetCurrentProcessThread();
-        }
-        // We are copying the interface of the class StopWatch
-        public static ThreadCpuStopWatch StartNew()
-        {
-            var instance = new ThreadCpuStopWatch();
-            instance.Reset();
-            return instance;
-        }
-    }
-
     public class CbdeHandler
     {
         private readonly Action<String, String, Location, CompilationAnalysisContext> raiseIssue;
         private readonly Func<CompilationAnalysisContext, bool> shouldRunInContext;
         private static bool initialized = false;
+        private const int processStatPeriodMs = 1000;
 
         private const string cbdeJsonOutputFileName = "cbdeSEout.json";
 
@@ -89,8 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected HashSet<string> csSourceFileNames= new HashSet<string>();
         protected Dictionary<string, int> fileNameDuplicateNumbering = new Dictionary<string, int>();
 
-        private MemoryStream logStream;
-        private StreamWriter logStreamWriter;
+        private StringBuilder logStringBuilder;
         private static readonly object logFileLock = new Object();
         private static readonly object metricsFileLock = new Object();
         private static readonly object perfFileLock = new Object();
@@ -180,8 +142,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             GlobalLog($"CBDE: Generating MLIR for source file {tree.FilePath} in context {compilationHash}");
                             var mlirFileName = ManglePath(tree.FilePath) + ".mlir";
                             ExportFunctionMlir(tree, c.Compilation.GetSemanticModel(tree), exporterMetrics, mlirFileName);
-                            logStreamWriter.WriteLine("- generated mlir file {0}", mlirFileName);
-                            logStreamWriter.Flush();
+                            logStringBuilder.AppendFormat("- generated mlir file {0}\n", mlirFileName);
                             GlobalLog($"CBDE: Done with file {tree.FilePath} in context {compilationHash}");
                         }
                         GlobalLog($"CBDE: MLIR generation time: {watch.ElapsedMilliseconds} ms");
@@ -234,10 +195,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             Directory.CreateDirectory(cbdeDirectoryAssembly);
             cbdeJsonOutputPath = Path.Combine(cbdeDirectoryAssembly, cbdeJsonOutputFileName);
-            logStream = new MemoryStream();
-            logStreamWriter = new StreamWriter(logStream);
-            logStreamWriter.WriteLine(">> New Cbde Run triggered at {0}", DateTime.Now.ToShortTimeString());
-            logStreamWriter.Flush();
+            logStringBuilder = new StringBuilder();
+            logStringBuilder.AppendFormat(">> New Cbde Run triggered at {0}\n", DateTime.Now.ToShortTimeString());
         }
         private void SetupMlirRootDirectory()
         {
@@ -266,26 +225,26 @@ namespace SonarAnalyzer.Rules.CSharp
             GlobalLog("Running CBDE");
             using (Process pProcess = new Process())
             {
-                logStreamWriter.WriteLine("- Cbde process");
+                logStringBuilder.AppendLine("- Cbde process");
                 pProcess.StartInfo.FileName = cbdeBinaryPath;
                 pProcess.StartInfo.WorkingDirectory = cbdeDirectoryAssembly;
                 var cbdePerfLogFile = Path.Combine(cbdeDirectoryAssembly, "perfLogFile.log");
 
                 pProcess.StartInfo.Arguments = $"-i \"{cbdeDirectoryAssembly}\" -o \"{cbdeJsonOutputPath}\" -s \"{cbdePerfLogFile}\"";
 
-                logStreamWriter.WriteLine("  * binary_location: '{0}'", pProcess.StartInfo.FileName);
-                logStreamWriter.WriteLine("  * arguments: '{0}'", pProcess.StartInfo.Arguments);
-                logStreamWriter.Flush();
+                logStringBuilder.AppendFormat("  * binary_location: '{0}'\n", pProcess.StartInfo.FileName);
+                logStringBuilder.AppendFormat("  * arguments: '{0}'\n", pProcess.StartInfo.Arguments);
 
                 pProcess.StartInfo.UseShellExecute = false;
                 pProcess.StartInfo.RedirectStandardError = true;
                 pProcess.StartInfo.UseShellExecute = false;
                 pProcess.Start();
                 long totalProcessorTime=0, peakPagedMemory = 0, peakWorkingSet=0;
-                while(!pProcess.WaitForExit(100))
+                while(!pProcess.WaitForExit(processStatPeriodMs))
                 {
                     try
                     {
+                        pProcess.Refresh();
                         totalProcessorTime = (long)pProcess.TotalProcessorTime.TotalMilliseconds;
                         peakPagedMemory = pProcess.PeakPagedMemorySize64;
                         peakWorkingSet = pProcess.PeakWorkingSet64;
@@ -301,8 +260,7 @@ namespace SonarAnalyzer.Rules.CSharp
   * peak_working_set: {peakWorkingSet >> 20} MB";
 
                 GlobalLog(logString);
-                logStreamWriter.Write(logString);
-                logStreamWriter.Flush();
+                logStringBuilder.AppendLine(logString);
 
                 if (pProcess.ExitCode != 0)
                 {
@@ -321,7 +279,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
         private void Cleanup()
         {
-            logStreamWriter.Dispose();
+            logStringBuilder.Clear();
         }
         private void RaiseIssueFromJToken(JToken token, CompilationAnalysisContext context)
         {
@@ -346,9 +304,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 failureString.Append("  - " + fileName + "\n");
             }
             // we dispose the StreamWriter to unlock the log file
-            logStreamWriter.WriteLine("- parsing json file {0}", cbdeJsonOutputPath);
+            logStringBuilder.AppendFormat("- parsing json file {0}\n", cbdeJsonOutputPath);
             failureString.Append("  content of stderr is:\n" + pProcess.StandardError.ReadToEnd());
-            failureString.Append("  content of the CBDE handler log file is :\n" + Encoding.UTF8.GetString(logStream.GetBuffer()));
+            failureString.Append("  content of the CBDE handler log file is :\n" + logStringBuilder.ToString());
             GlobalLog(failureString.ToString());
             Console.Error.WriteLine($"Error when executing CBDE, more details in {cbdeProcessSpecificPath}");
         }
@@ -356,7 +314,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             string jsonFileContent;
             List<List<JObject>> jsonIssues;
-            logStreamWriter.WriteLine("- parsing json file {0}", cbdeJsonOutputPath);
+            logStringBuilder.AppendFormat("- parsing json file {0}\n", cbdeJsonOutputPath);
             try
             {
                 jsonFileContent = File.ReadAllText(cbdeJsonOutputPath);
@@ -364,24 +322,65 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             catch
             {
-                logStreamWriter.WriteLine("- error parsing json file {0}", cbdeJsonOutputPath);
+                logStringBuilder.AppendFormat("- error parsing json file {0}\n", cbdeJsonOutputPath);
                 return;
             }
 
             foreach (var issue in jsonIssues.First())
             {
-                logStreamWriter.WriteLine("  * processing token {0}", issue.ToString());
+                logStringBuilder.AppendFormat("  * processing token {0}\n", issue.ToString());
                 try
                 {
                     RaiseIssueFromJToken(issue, context);
                 }
                 catch
                 {
-                    logStreamWriter.WriteLine("  * error reporting token {0}", cbdeJsonOutputPath);
+                    logStringBuilder.AppendFormat("  * error reporting token {0}\n", cbdeJsonOutputPath);
                     continue;
                 }
             }
-            logStreamWriter.Flush();
+        }
+
+        private class ThreadCpuStopWatch
+        {
+            private double totalMsStart;
+
+            private readonly ProcessThread currentProcessThread;
+
+            public long ElapsedMilliseconds =>
+                (long)(currentProcessThread.TotalProcessorTime.TotalMilliseconds - totalMsStart);
+
+            private static ProcessThread GetCurrentProcessThread()
+            {
+                var currentId = AppDomain.GetCurrentThreadId();
+                // this is not a generic collection, so there is no linq way of doing that
+                foreach (ProcessThread p in Process.GetCurrentProcess().Threads)
+                {
+                    if (p.Id == currentId)
+                    {
+                        return p;
+                    }
+                }
+                return null;
+            }
+
+            public void Reset()
+            {
+                totalMsStart = currentProcessThread.TotalProcessorTime.TotalMilliseconds;
+            }
+
+            private ThreadCpuStopWatch()
+            {
+                currentProcessThread = GetCurrentProcessThread();
+            }
+
+            // We are copying the interface of the class StopWatch
+            public static ThreadCpuStopWatch StartNew()
+            {
+                var instance = new ThreadCpuStopWatch();
+                instance.Reset();
+                return instance;
+            }
         }
     }
 }
