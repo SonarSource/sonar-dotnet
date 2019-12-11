@@ -4,6 +4,7 @@
   "status": "ready",
   "tags": [
     "cwe",
+    "owasp-a6",
     "sans-top25-porous",
     "owasp-a3"
   ],
@@ -13,10 +14,12 @@
   "scope": "All",
   "securityStandards": {
     "CWE": [
-      327
+      327,
+      326
     ],
     "OWASP": [
-      "A3"
+      "A3",
+      "A6"
     ]
   }
 }
