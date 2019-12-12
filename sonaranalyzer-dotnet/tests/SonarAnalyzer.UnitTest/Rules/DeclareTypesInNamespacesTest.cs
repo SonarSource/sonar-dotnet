@@ -21,6 +21,7 @@
 extern alias csharp;
 extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
@@ -36,6 +37,20 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\DeclareTypesInNamespaces.cs",
                 new CSharp.DeclareTypesInNamespaces());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DeclareTypesInNamespaces_CS_Before8()
+            => Verifier.VerifyAnalyzer(@"TestCases\DeclareTypesInNamespaces.BeforeCSharp8.cs",
+                new CSharp.DeclareTypesInNamespaces(),
+                options: ParseOptionsHelper.BeforeCSharp8);
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DeclareTypesInNamespaces_CS_After8() =>
+            Verifier.VerifyAnalyzer(@"TestCases\DeclareTypesInNamespaces.AfterCSharp8.cs",
+                new CSharp.DeclareTypesInNamespaces(),
+                options: ParseOptionsHelper.FromCSharp8);
 
         [TestMethod]
         [TestCategory("Rule")]
