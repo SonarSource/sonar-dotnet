@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -87,6 +87,11 @@ namespace SonarAnalyzer.Helpers
             analysisContext.TryGetValue(sonarLintXml.GetText(), GetProvider(c.Language), out var shouldAnalyzeGeneratedCode) &&
             shouldAnalyzeGeneratedCode;
 
+        public static bool ShouldLogCbdeRun(CompilationAnalysisContext analysisContext, AnalyzerOptions options) =>
+            TryGetSonarLintXml(options, out var sonarLintXml) &&
+            analysisContext.TryGetValue(sonarLintXml.GetText(), logCbdeExecution, out var shouldLogCbdeExecution) &&
+            shouldLogCbdeExecution;
+
         internal SonarAnalysisContext(AnalysisContext context, IEnumerable<DiagnosticDescriptor> supportedDiagnostics)
         {
             this.supportedDiagnostics = supportedDiagnostics ?? throw new ArgumentNullException(nameof(supportedDiagnostics));
@@ -115,6 +120,12 @@ namespace SonarAnalyzer.Helpers
 
         public void RegisterSymbolAction(Action<SymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
             RegisterContextAction(act => this.context.RegisterSymbolAction(act, symbolKinds), action, c => c.GetFirstSyntaxTree(), c => c.Compilation);
+
+        private static SourceTextValueProvider<bool> logCbdeExecution = new SourceTextValueProvider<bool>(sourceText =>
+            PropertiesHelper.ReadBooleanProperty(
+                GetSettings(sourceText),
+                PropertiesHelper.LogCbdeExecution,
+                false));
 
         private static SourceTextValueProvider<bool> analyzeGeneratedCodeProviderCSharp = new SourceTextValueProvider<bool>(sourceText =>
             PropertiesHelper.ReadBooleanProperty(

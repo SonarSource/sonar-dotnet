@@ -29,6 +29,7 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class PropertiesHelper
     {
+        internal const string LogCbdeExecution = "sonar.cs.logCbdeRun";
         internal const string AnalyzeGeneratedCodeCSharp = "sonar.cs.analyzeGeneratedCode";
         internal const string AnalyzeGeneratedCodeVisualBasic = "sonar.vbnet.analyzeGeneratedCode";
 
