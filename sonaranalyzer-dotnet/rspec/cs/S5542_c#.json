@@ -5,7 +5,8 @@
   "tags": [
     "cwe",
     "owasp-a6",
-    "sans-top25-porous"
+    "sans-top25-porous",
+    "owasp-a3"
   ],
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-5542",
@@ -13,10 +14,12 @@
   "scope": "All",
   "securityStandards": {
     "CWE": [
-      327
+      327,
+      780
     ],
     "OWASP": [
-      "A6"
+      "A6",
+      "A3"
     ]
   }
 }

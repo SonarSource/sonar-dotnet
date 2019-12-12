@@ -1,5 +1,55 @@
-<p>When <code>switch</code> statements have large sets of <code>case</code> clauses, it is usually an attempt to map two sets of data. A real map
-structure would be more readable and maintainable, and should be used instead.</p>
+<p>When <code>switch</code> statements have large sets of case clauses, it is usually an attempt to map two sets of data. A <code>Dictionary</code>
+should be used instead to make the code more readable and maintainable.</p>
+<h2>Noncompliant Code Example</h2>
+<p>With a "Maximum number of case" set to 4</p>
+<pre>
+public class TooManyCase
+{
+    public int switchCase(char ch)
+    {
+        switch(ch) {  // Noncompliant
+            case 'a':
+                return 1;
+            case 'b':
+            case 'c':
+                return 2;
+            case 'd':
+                return 3;
+            case 'e':
+                return 4;
+            case 'f':
+            case 'g':
+            case 'h':
+                return 5;
+            default:
+                return 6;
+        }
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System.Collections.Generic;
+
+public class TooManyCase
+{
+    Dictionary&lt;char, int&gt; matching = new Dictionary&lt;char, int&gt;()
+    {
+        {'a', 1}, {'b', 2}, {'c', 2}, {'d', 3},
+        {'e', 4}, {'f', 5}, {'g', 5}, {'h', 5}
+    };
+
+    public int withDictionary(char ch)
+    {
+        int value;
+        if (this.matching.TryGetValue(ch, out value)) {
+            return value;
+        } else {
+            return 6;
+        }
+    }
+}
+</pre>
 <h2>Exceptions</h2>
 <p>This rule ignores <code>switch</code>es over <code>Enum</code>s and empty, fall-through cases.</p>
 

@@ -53,19 +53,19 @@ SQL injections. The goal is to guide security code reviews and to prevent a comm
 <pre>
 Public Sub SqlCommands(ByVal connection As SqlConnection, ByVal query As String, ByVal param As String)
     Dim sensitiveQuery As String = String.Concat(query, param)
-    command = New SqlCommand(sensitiveQuery) ' Questionable
+    command = New SqlCommand(sensitiveQuery) ' Sensitive
 
-    command.CommandText = sensitiveQuery ' Questionable
+    command.CommandText = sensitiveQuery ' Sensitive
 
     Dim adapter As SqlDataAdapter
-    adapter = New SqlDataAdapter(sensitiveQuery, connection) ' Questionable
+    adapter = New SqlDataAdapter(sensitiveQuery, connection) ' Sensitive
 End Sub
 
 Public Sub Foo(ByVal context As DbContext, ByVal query As String, ByVal param As String)
     Dim sensitiveQuery As String = String.Concat(query, param)
-    context.Database.ExecuteSqlCommand(sensitiveQuery) ' Questionable
+    context.Database.ExecuteSqlCommand(sensitiveQuery) ' Sensitive
 
-    context.Query(Of User)().FromSql(sensitiveQuery) ' Questionable
+    context.Query(Of User)().FromSql(sensitiveQuery) ' Sensitive
 End Sub
 </pre>
 <h2>Exceptions</h2>
