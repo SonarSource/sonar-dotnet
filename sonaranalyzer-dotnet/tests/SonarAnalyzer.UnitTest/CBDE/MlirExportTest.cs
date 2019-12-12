@@ -5,6 +5,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.CBDE
 {
+    /// <summary>
+    /// This class contains tests that generate MLIR code from C# source code, then check that the generated
+    /// code is valid. It does not compare the generated code to a reference.
+    /// </summary>
     [TestClass]
     public class MlirExportTest
     {
