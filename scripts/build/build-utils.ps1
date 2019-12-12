@@ -55,7 +55,7 @@ function Get-MSBuildImportBeforePath([ValidateSet("14.0", "15.0", "16.0", "Curre
 
 # NuGet
 function New-NuGetPackages([string]$binPath) {
-    Write-Header "Building NuGet packages"
+    Write-Header "Building NuGet packages $binPath"
 
     $nugetExe = Get-NuGetPath
     Get-ChildItem "src" -Recurse *.nuspec | ForEach-Object {
@@ -64,6 +64,7 @@ function New-NuGetPackages([string]$binPath) {
         Write-Debug "Creating NuGet package for '$_' in ${outputDir}"
 
         $fixedBinPath = if ($_.Name -Like "Descriptor.*.nuspec") { "${binPath}\net46" } else { $binPath }
+        $fixedBinPath = if ($_.Name -Like "SonarAnalyzer.CFG.*.nuspec") { "${binPath}\net46" } else { $binPath }
 
         if (Test-Debug) {
             Exec { & $nugetExe pack $_.FullName -NoPackageAnalysis -OutputDirectory $outputDir `
