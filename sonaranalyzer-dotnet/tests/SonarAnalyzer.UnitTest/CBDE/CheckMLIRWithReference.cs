@@ -7,6 +7,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.CBDE
 {
+    /// <summary>
+    /// This class contains tests that generate MLIR code from C# source code, then check that the generated
+    /// code is valid and is equal to a specified reference.
+    /// It is used instead of MlirExportTest when the generation result is tricky and deserves to be checked thoroughly
+    /// </summary>
     [TestClass]
     public class CheckMlirWithReference
     {

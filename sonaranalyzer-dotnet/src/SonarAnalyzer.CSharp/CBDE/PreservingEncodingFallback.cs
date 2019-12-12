@@ -37,6 +37,11 @@ namespace SonarAnalyzer
         private int currentChar;
     }
 
+    /// <summary>
+    /// C# source code can contain any character, but MLIR only handle 8-bits chars. We must therefore encode C# names
+    /// so that two different strings in C# always result in two different strings in the generated code (by default, all
+    /// unknown characters would be translated to the same one)
+    /// </summary>
     internal class PreservingEncodingFallback : EncoderFallback
     {
         public override int MaxCharCount => 4;
