@@ -43,10 +43,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             FromCSharp7 = CSharp7.Concat(FromCSharp8);
             FromCSharp6 = CSharp6.Concat(FromCSharp7);
 
-            FromVisualBasic15 = VisualBasic15;
+            FromVisualBasic15 = VisualBasic15.Concat(VisualBasic16);
             FromVisualBasic14 = VisualBasic14.Concat(FromVisualBasic15);
+            FromVisualBasic12 = VisualBasic12.Concat(FromVisualBasic14);
 
-            defaultParseOptions = FromCSharp7.Concat(VisualBasic12).Concat(FromVisualBasic14);
+            defaultParseOptions = FromCSharp7.Concat(FromVisualBasic12);
         }
 #pragma warning restore S3963
 
@@ -119,6 +120,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public static IEnumerable<ParseOptions> CSharp8 { get; } =
             ImmutableArray.Create(new CS.CSharpParseOptions(CS.LanguageVersion.CSharp8));
 
+        public static IEnumerable<ParseOptions> FromVisualBasic12 { get; }
+
         public static IEnumerable<ParseOptions> FromVisualBasic14 { get; }
 
         public static IEnumerable<ParseOptions> FromVisualBasic15 { get; }
@@ -134,5 +137,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic15),
                 new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic15_3),
                 new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic15_5));
+
+        public static IEnumerable<ParseOptions> VisualBasic16 { get; } =
+            ImmutableArray.Create(new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic16));
     }
 }
