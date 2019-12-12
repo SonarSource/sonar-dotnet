@@ -62,4 +62,4 @@ packages/
 # rule-api temp artifacts
 *.restext
 RspecStrings.resx
-/sonaranalyzer-dotnet/src/SonarAnalyzer.CSharp/CBDE
+/sonaranalyzer-dotnet/src/SonarAnalyzer.CSharp/CBDE/windows
