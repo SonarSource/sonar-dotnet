@@ -17,7 +17,10 @@ namespace SonarAnalyzer.UnitTest.CBDE
 {
     public static class MlirTestUtilities
     {
-        private static string cbdeDialectCheckerPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"CBDE\windows\cbde-dialect-checker.exe");
+        private static string cbdeDialectCheckerPath =
+            Path.Combine(
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                @"CBDE\windows\cbde-dialect-checker.exe");
         public static void checkExecutableExists()
         {
             Assert.IsTrue(File.Exists(cbdeDialectCheckerPath),

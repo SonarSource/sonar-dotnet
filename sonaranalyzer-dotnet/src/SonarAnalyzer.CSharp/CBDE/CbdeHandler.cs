@@ -96,9 +96,10 @@ namespace SonarAnalyzer.Rules.CSharp
             GlobalLog("Unpacking CBDE executables");
             UnpackCbdeExe();
         }
+
         public CbdeHandler(SonarAnalysisContext context,
             Action<String, String, Location, CompilationAnalysisContext> raiseIssue,
-            Func<CompilationAnalysisContext, bool> shouldRunInContext)            
+            Func<CompilationAnalysisContext, bool> shouldRunInContext)
         {
             this.raiseIssue = raiseIssue;
             this.shouldRunInContext = shouldRunInContext;
@@ -119,6 +120,7 @@ namespace SonarAnalyzer.Rules.CSharp
             watch.Stop();
             GlobalLog($"After initialize ({watch.ElapsedMilliseconds} ms)");
         }
+
         private void RegisterMlirAndCbdeInOneStep(SonarAnalysisContext context)
         {
             context.RegisterCompilationAction(
@@ -164,6 +166,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 });
         }
+
+        // In big projects, multiple source files can have the same name.
+        // We need to convert all of them to mlir. Mangling the full pathname of each file would be too long.
+        // We just give a number to each file haviong the same name.
         private string ManglePath(string path)
         {
             path = Path.GetFileNameWithoutExtension(path);
@@ -173,6 +179,7 @@ namespace SonarAnalyzer.Rules.CSharp
             path += "_" + Convert.ToString(count);
             return path;
         }
+
         private static void UnpackCbdeExe()
         {
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
@@ -185,6 +192,7 @@ namespace SonarAnalyzer.Rules.CSharp
             stream.CopyTo(fileStream);
             fileStream.Close();
         }
+
         private void InitializePathsAndLog(string assemblyName, int compilationHash)
         {
             SetupMlirRootDirectory();
@@ -198,11 +206,13 @@ namespace SonarAnalyzer.Rules.CSharp
             logStringBuilder = new StringBuilder();
             logStringBuilder.AppendFormat(">> New Cbde Run triggered at {0}\n", DateTime.Now.ToShortTimeString());
         }
+
         private void SetupMlirRootDirectory()
         {
             cbdeDirectoryRoot = Path.Combine(cbdePath, "sonar-dotnet/cbde");
             Directory.CreateDirectory(cbdeDirectoryRoot);
         }
+
         private void ExportFunctionMlir(SyntaxTree tree, SemanticModel model, MlirExporterMetrics exporterMetrics, string mlirFileName)
         {
             using (var mlirStreamWriter = new StreamWriter(Path.Combine(cbdeDirectoryAssembly, mlirFileName)))
@@ -296,6 +306,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             raiseIssue(key, message, loc, context);
         }
+
         private void LogFailedCbdeRun(Process pProcess)
         {
             StringBuilder failureString = new StringBuilder("CBDE Failure Report :\n  C# souces files involved are:\n");
@@ -310,6 +321,7 @@ namespace SonarAnalyzer.Rules.CSharp
             GlobalLog(failureString.ToString());
             Console.Error.WriteLine($"Error when executing CBDE, more details in {cbdeProcessSpecificPath}");
         }
+
         private void RaiseIssuesFromJSon(CompilationAnalysisContext context)
         {
             string jsonFileContent;

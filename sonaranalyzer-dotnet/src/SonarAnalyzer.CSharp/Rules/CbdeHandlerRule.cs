@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Runtime.CompilerServices;
 using SonarAnalyzer.Helpers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -29,13 +30,15 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Diagnostics.CodeAnalysis;
 
+[assembly: InternalsVisibleTo("SonarAnalyzer.UnitTest" + Signing.InternalsVisibleToPublicKey)]
+
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(S3949DiagnosticId)]
+    // Note: For now, this rule actually runs only under windows and outside of SonarLint
     public sealed class CbdeHandlerRule : SonarDiagnosticAnalyzer
     {
-        // Note: For now, this rule actually runs only under windows and outside of SonarLint
         private readonly bool unitTest;
 
         private const string S3949DiagnosticId = "S3949";
@@ -51,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             this.unitTest = unitTest;
         }
-        public static CbdeHandlerRule MakeUnitTestInstance()
+        internal static CbdeHandlerRule MakeUnitTestInstance()
         {
             return new CbdeHandlerRule(true);
         }
@@ -79,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
            ParameterLoader.ConfigurationFilePathMatchesExpected(file.Path, ConfigurationAdditionalFile);
 
         // The logic used here is based on detecting a file which is present only when not run from SonarLint
-        // The logic is copied from FirstOrDefault(IsProjectOutput)
+        /// The logic is copied from <see cref="SonarAnalyzer.Rules.UtilityAnalyzerBase"/>
         [ExcludeFromCodeCoverage]
         internal static bool CalledFromSonarLint(CompilationAnalysisContext context)
         {
