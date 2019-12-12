@@ -37,8 +37,7 @@ namespace Tests.Diagnostics
 
             // see https://github.com/SonarSource/sonar-csharp/issues/1840
             var multiDimIntArray = new int[][] // Compliant - type specifier is mandatory here
-            {
-new[]{ 1 } // Fixed
+            { new[] { 1 } // Fixed
             };
             var zzz = new int[][] { new[] { 1, 2, 3 }, new int[0], new int[0] };
             var www = new int[][][] { new[] { new[] { 0 } } };
