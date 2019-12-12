@@ -1,5 +1,49 @@
-<p>When <code>switch</code> statements have large sets of <code>case</code> clauses, it is usually an attempt to map two sets of data. A real map
-structure would be more readable and maintainable, and should be used instead.</p>
+<p>When <code>Select Case</code> statements have large sets of case clauses, it is usually an attempt to map two sets of data. A
+<code>Dictionary</code> should be used instead to make the code more readable and maintainable.</p>
+<h2>Noncompliant Code Example</h2>
+<p>With a "Maximum number of case" set to 4</p>
+<pre>
+Public Class TooManyCase
+
+    Public Function SelectCase(Ch As Char) As Integer
+        Select Case Ch
+            Case "a"c
+                Return 1
+            Case "b"c, "c"c
+                Return 2
+            Case "d"c
+                Return 3
+            Case "e"c
+                Return 4
+            Case "f"c, "g"c, "h"c
+                Return 5
+            Case Else
+                Return 6
+        End Select
+    End Function
+
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Public Class TooManyCase
+
+    Private fMatching As New Dictionary(Of Char, Integer) From {
+            {"a"c, 1}, {"b"c, 2}, {"c"c, 2}, {"d"c, 3},
+            {"e"c, 4}, {"f"c, 5}, {"g"c, 5}, {"h"c, 5},
+        }
+
+    Public Function SelectCase(Ch As Char) As Integer
+        Dim Value As Integer
+        If fMatching.TryGetValue(Ch, Value) Then
+            Return Value
+        Else
+            Return 6
+        End If
+    End Function
+
+End Class
+</pre>
 <h2>Exceptions</h2>
-<p>This rule ignores <code>Switch Case</code>s over <code>Enum</code>s and empty, fall-through cases.</p>
+<p>This rule ignores <code>Select Case</code>s over <code>Enum</code>s and empty, fall-through cases.</p>
 

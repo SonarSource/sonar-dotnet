@@ -1,5 +1,5 @@
 {
-  "title": "Cryptographic keys should be robust",
+  "title": "Cryptographic keys should not be too short",
   "type": "VULNERABILITY",
   "status": "ready",
   "remediation": {

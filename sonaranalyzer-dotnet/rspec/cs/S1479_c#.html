@@ -1,7 +1,7 @@
 <p>When <code>switch</code> statements have large sets of case clauses, it is usually an attempt to map two sets of data. A <code>Dictionary</code>
 should be used instead to make the code more readable and maintainable.</p>
 <h2>Noncompliant Code Example</h2>
-<p>With a “Maximum number of case” set to 14</p>
+<p>With a "Maximum number of case" set to 4</p>
 <pre>
 public class TooManyCase
 {
@@ -9,25 +9,20 @@ public class TooManyCase
     {
         switch(ch) {  // Noncompliant
             case 'a':
+                return 1;
             case 'b':
             case 'c':
+                return 2;
             case 'd':
+                return 3;
             case 'e':
-                return 1;
+                return 4;
             case 'f':
             case 'g':
             case 'h':
-            case 'i':
-            case 'j':
-                return 2;
-            case 'k':
-            case 'l':
-            case 'm':
-            case 'n':
-            case 'o':
-                return 3;
+                return 5;
             default:
-                return 4;
+                return 6;
         }
     }
 }
@@ -40,9 +35,8 @@ public class TooManyCase
 {
     Dictionary&lt;char, int&gt; matching = new Dictionary&lt;char, int&gt;()
     {
-        {'a', 1}, {'b', 1}, {'c', 1}, {'d', 1}, {'e', 1},
-        {'f', 2}, {'g', 2}, {'h', 2}, {'i', 2}, {'j', 2},
-        {'k', 3}, {'l', 3}, {'m', 3}, {'n', 3}, {'o', 3}
+        {'a', 1}, {'b', 2}, {'c', 2}, {'d', 3},
+        {'e', 4}, {'f', 5}, {'g', 5}, {'h', 5}
     };
 
     public int withDictionary(char ch)
@@ -51,7 +45,7 @@ public class TooManyCase
         if (this.matching.TryGetValue(ch, out value)) {
             return value;
         } else {
-            return 4;
+            return 6;
         }
     }
 }
