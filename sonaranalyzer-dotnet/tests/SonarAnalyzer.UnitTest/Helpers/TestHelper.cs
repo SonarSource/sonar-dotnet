@@ -18,17 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.TestFramework;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace SonarAnalyzer.UnitTest
 {
@@ -38,11 +37,16 @@ namespace SonarAnalyzer.UnitTest
             params MetadataReference[] additionalReferences)
         {
             var language = isCSharp ? AnalyzerLanguage.CSharp : AnalyzerLanguage.VisualBasic;
+            var ext = isCSharp ? ".cs" : ".vb";
 
             var compilation = SolutionBuilder
                 .Create()
                 .AddProject(language, createExtraEmptyFile: false)
                 .AddSnippet(classDeclaration)
+                .AddDocument(Path.Combine("TestCases", "Helpers", "Microsoft_AspNetCore_Mvc_ControllerAttribute" + ext))
+                .AddDocument(Path.Combine("TestCases", "Helpers", "Microsoft_AspNetCore_Mvc_ControllerBase" + ext))
+                .AddDocument(Path.Combine("TestCases", "Helpers", "Microsoft_AspNetCore_Mvc_NonControllerAttribute" + ext))
+                .AddDocument(Path.Combine("TestCases", "Helpers", "System_Web_MVC_Controller" + ext))
                 .AddReferences(additionalReferences)
                 .GetCompilation();
             var tree = compilation.SyntaxTrees.First();
@@ -57,6 +61,12 @@ namespace SonarAnalyzer.UnitTest
                 .Skip(skip)
                 .First();
 
+        public static (MethodDeclarationSyntax, SemanticModel) GetMethod(this (SyntaxTree, SemanticModel) tuple, string name)
+        {
+            var (syntaxTree, semanticModel) = tuple;
+            return (syntaxTree.GetMethod(name), semanticModel);
+        }
+
         public static PropertyDeclarationSyntax GetProperty(this SyntaxTree syntaxTree, string name, int skip = 0) =>
             syntaxTree.GetRoot()
                 .DescendantNodes()
@@ -64,6 +74,11 @@ namespace SonarAnalyzer.UnitTest
                 .Where(m => m.Identifier.ValueText == name)
                 .Skip(skip)
                 .First();
+        public static (PropertyDeclarationSyntax, SemanticModel) GetProperty(this (SyntaxTree, SemanticModel) tuple, string name)
+        {
+            var (syntaxTree, semanticModel) = tuple;
+            return (syntaxTree.GetProperty(name), semanticModel);
+        }
 
         public static ConstructorDeclarationSyntax GetConstructor(this SyntaxTree syntaxTree, string name, int skip = 0) =>
             syntaxTree.GetRoot()
@@ -73,25 +88,90 @@ namespace SonarAnalyzer.UnitTest
                 .Skip(skip)
                 .First();
 
-        public static IMethodSymbol GetMethodSymbol(this (SyntaxTree, SemanticModel) tuple, string name)
+        public static (ConstructorDeclarationSyntax, SemanticModel) GetConstructor(this (SyntaxTree, SemanticModel) tuple, string name)
         {
-            var (syntaxTree, semantcModel) = tuple;
-
-            return semantcModel.GetDeclaredSymbol(syntaxTree.GetMethod(name));
+            var (syntaxTree, semanticModel) = tuple;
+            return (syntaxTree.GetConstructor(name), semanticModel);
         }
 
-        public static (MethodDeclarationSyntax, SemanticModel) GetMethod(this (SyntaxTree, SemanticModel) tuple, string name)
-        {
-            var (syntaxTree, semantcModel) = tuple;
+        public static IndexerDeclarationSyntax GetIndexer(this SyntaxTree syntaxTree) =>
+            syntaxTree.GetRoot()
+                .DescendantNodes()
+                .OfType<IndexerDeclarationSyntax>()
+                .First();
 
-            return (syntaxTree.GetMethod(name), semantcModel);
+        public static (IndexerDeclarationSyntax, SemanticModel) GetIndexer(this (SyntaxTree, SemanticModel) tuple)
+        {
+            var (syntaxTree, semanticModel) = tuple;
+            return (syntaxTree.GetIndexer(), semanticModel);
         }
 
-        public static (PropertyDeclarationSyntax, SemanticModel) GetProperty(this (SyntaxTree, SemanticModel) tuple, string name)
-        {
-            var (syntaxTree, semantcModel) = tuple;
+        public static AccessorDeclarationSyntax GetAccessor(this SyntaxTree syntaxTree, string accessorKeyword) =>
+           syntaxTree.GetRoot()
+               .DescendantNodes()
+               .OfType<AccessorDeclarationSyntax>()
+               .First(m => m.Keyword.ValueText == accessorKeyword);
 
-            return (syntaxTree.GetProperty(name), semantcModel);
+        public static (AccessorDeclarationSyntax, SemanticModel) GetAccessor(this (SyntaxTree, SemanticModel) tuple, string keyword)
+        {
+            var (syntaxTree, semanticModel) = tuple;
+            return (syntaxTree.GetAccessor(keyword), semanticModel);
+        }
+
+        public static OperatorDeclarationSyntax GetOperator(this SyntaxTree syntaxTree) =>
+           syntaxTree.GetRoot()
+               .DescendantNodes()
+               .OfType<OperatorDeclarationSyntax>()
+               .First();
+
+        public static (OperatorDeclarationSyntax, SemanticModel) GetOperator(this (SyntaxTree, SemanticModel) tuple)
+        {
+            var (syntaxTree, semanticModel) = tuple;
+            return (syntaxTree.GetOperator(), semanticModel);
+        }
+
+        public static ConversionOperatorDeclarationSyntax GetConversionOperator(this SyntaxTree syntaxTree) =>
+           syntaxTree.GetRoot()
+               .DescendantNodes()
+               .OfType<ConversionOperatorDeclarationSyntax>()
+               .First();
+
+        public static (ConversionOperatorDeclarationSyntax, SemanticModel) GetConversionOperator(this (SyntaxTree, SemanticModel) tuple)
+        {
+            var (syntaxTree, semanticModel) = tuple;
+            return (syntaxTree.GetConversionOperator(), semanticModel);
+        }
+
+        public static DestructorDeclarationSyntax GetDestructor(this SyntaxTree syntaxTree) =>
+            syntaxTree.GetRoot()
+                .DescendantNodes()
+                .OfType<DestructorDeclarationSyntax>()
+                .First();
+
+        public static (DestructorDeclarationSyntax, SemanticModel) GetDestructor(this (SyntaxTree, SemanticModel) tuple)
+        {
+            var (syntaxTree, semanticModel) = tuple;
+            return (syntaxTree.GetDestructor(), semanticModel);
+        }
+
+        public static BaseTypeDeclarationSyntax GetType(this SyntaxTree syntaxTree, string name, int skip = 0) =>
+            syntaxTree.GetRoot()
+                .DescendantNodes()
+                .OfType<BaseTypeDeclarationSyntax>()
+                .Where(m => m.Identifier.ValueText == name)
+                .Skip(skip)
+                .First();
+
+        public static IMethodSymbol GetMethodSymbol(this (SyntaxTree, SemanticModel) tuple, string name, int skip = 0)
+        {
+            var (syntaxTree, semanticModel) = tuple;
+            return semanticModel.GetDeclaredSymbol(syntaxTree.GetMethod(name, skip));
+        }
+
+        public static INamedTypeSymbol GetNamedTypeSymbol(this (SyntaxTree, SemanticModel) tuple, string name, int skip = 0)
+        {
+            var (syntaxTree, semanticModel) = tuple;
+            return semanticModel.GetDeclaredSymbol(syntaxTree.GetType(name, skip));
         }
 
         public static void AssertCollection<T>(IList<T> items, params Action<T>[] asserts)
