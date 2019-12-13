@@ -61,6 +61,7 @@ class C
             case 1:
                 c1();
                 break;
+
             case 2:
                 c2();
                 break;
@@ -141,6 +142,40 @@ class C
 1 -> 2 [label=""True""]
 1 -> 3 [label=""False""]
 2 [shape=record label=""{SIMPLE|Bar|Bar()}""]
+2 -> 1
+3 [shape=record label=""{EXIT}""]
+}
+");
+        }
+
+        [TestMethod]
+        public void Serialize_Foreach_Binary_VarDeclaration()
+        {
+            var code = @"
+namespace Namespace
+    {
+        public class Test
+        {
+            public void ForEach((string key, string value)[] values)
+            {
+                foreach (var (key, value) in values)
+                {
+                    string i = key;
+                    string j = value;
+                }
+            }
+        }
+    };";
+
+            var dot = CfgSerializer.Serialize("ForEach", GetCfgForMethod(code, "ForEach"));
+
+            dot.Should().BeIgnoringLineEndings(@"digraph ""ForEach"" {
+0 [shape=record label=""{FOREACH:ForEachVariableStatement|values}""]
+0 -> 1
+1 [shape=record label=""{BINARY:ForEachVariableStatement}""]
+1 -> 2 [label=""True""]
+1 -> 3 [label=""False""]
+2 [shape=record label=""{SIMPLE|key|i = key|value|j = value}""]
 2 -> 1
 3 [shape=record label=""{EXIT}""]
 }
@@ -252,6 +287,95 @@ class C
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{SIMPLE|Bar|x =\>\n        \{\n            return 1 + 1;\n        \}|Bar(x =\>\n        \{\n            return 1 + 1;\n        \})}""]
+0 -> 1
+1 [shape=record label=""{EXIT}""]
+}
+");
+        }
+
+        [TestMethod]
+        public void Serialize_Range()
+        {
+            var code = @"
+internal class Test
+{
+    public void Range()
+    {
+        Range r = 1..4;
+    }
+}
+";
+            var dot = CfgSerializer.Serialize("Range", GetCfgForMethod(code, "Range"));
+
+            dot.Should().BeIgnoringLineEndings(@"digraph ""Range"" {
+0 [shape=record label=""{SIMPLE|r = 1..4}""]
+0 -> 1
+1 [shape=record label=""{EXIT}""]
+}
+");
+        }
+
+        [TestMethod]
+        public void Serialize_Index()
+        {
+            var code = @"
+internal class Test
+{
+    public void Index()
+    {
+        Index index = ^1;
+    }
+}
+";
+            var dot = CfgSerializer.Serialize("Index", GetCfgForMethod(code, "Index"));
+
+            dot.Should().BeIgnoringLineEndings(@"digraph ""Index"" {
+0 [shape=record label=""{SIMPLE|index = ^1}""]
+0 -> 1
+1 [shape=record label=""{EXIT}""]
+}
+");
+        }
+
+        [TestMethod]
+        public void Serialize_IndexInRange()
+        {
+            var code = @"
+internal class Test
+{
+    public void Range()
+    {
+        Range range = ^2..^0;
+    }
+}
+";
+            var dot = CfgSerializer.Serialize("Range", GetCfgForMethod(code, "Range"));
+
+            dot.Should().BeIgnoringLineEndings(@"digraph ""Range"" {
+0 [shape=record label=""{SIMPLE|range = ^2..^0}""]
+0 -> 1
+1 [shape=record label=""{EXIT}""]
+}
+");
+        }
+
+        [TestMethod]
+        public void Serialize_RangeInIndexer()
+        {
+            var code = @"
+internal class Test
+{
+    public void Range()
+    {
+        var ints = new[] { 1, 2 };
+        var lastTwo = ints[^2..^1];
+    }
+}
+";
+            var dot = CfgSerializer.Serialize("Range", GetCfgForMethod(code, "Range"));
+
+            dot.Should().BeIgnoringLineEndings(@"digraph ""Range"" {
+0 [shape=record label=""{SIMPLE|new[] \{ 1, 2 \}|1|2|\{ 1, 2 \}|ints = new[] \{ 1, 2 \}|ints|ints[^2..^1]|lastTwo = ints[^2..^1]}""]
 0 -> 1
 1 [shape=record label=""{EXIT}""]
 }
