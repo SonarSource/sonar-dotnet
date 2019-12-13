@@ -66,6 +66,24 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly string cbdeLogFile = Path.Combine(cbdeProcessSpecificPath, "cbdeHandler.log");
         private static readonly string cbdeMetricsLogFile = Path.Combine(cbdeProcessSpecificPath, "metrics.log");
         private static readonly string cbdePerfLogFile = Path.Combine(cbdeProcessSpecificPath, "performances.log");
+        private bool emitLog = false;
+
+        private void LogIfFailure(string s)
+        {
+            if (emitLog)
+            {
+                logStringBuilder.AppendLine(s);
+            }
+        }
+
+        private void Log(string s)
+        {
+            if(emitLog)
+            {
+                GlobalLog(s);
+            }
+        }
+
         private static void GlobalLog(string s)
         {
             lock (logFileLock)
@@ -93,7 +111,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     File.Delete(cbdeProcessSpecificPath);
                 }
             }
-            GlobalLog("Unpacking CBDE executables");
             UnpackCbdeExe();
         }
 
@@ -111,14 +128,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     initialized = true;
                 }
             }
-            GlobalLog("Before initialize");
+            Log("Before initialize");
             var watch = Stopwatch.StartNew();
             if (cbdeBinaryPath != null)
             {
                 RegisterMlirAndCbdeInOneStep(context);
             }
             watch.Stop();
-            GlobalLog($"After initialize ({watch.ElapsedMilliseconds} ms)");
+            Log($"After initialize ({watch.ElapsedMilliseconds} ms)");
         }
 
         private void RegisterMlirAndCbdeInOneStep(SonarAnalysisContext context)
@@ -126,13 +143,14 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCompilationAction(
                 c =>
                 {
-                    if(!shouldRunInContext(c))
+                    emitLog = Environment.GetEnvironmentVariables().Contains("SONAR_DOTNET_LOG_CBDE");
+                    if (!shouldRunInContext(c))
                     {
                         return;
                     }
                     var compilationHash = c.Compilation.GetHashCode();
                     InitializePathsAndLog(c.Compilation.Assembly.Name, compilationHash);
-                    GlobalLog("CBDE: Compilation phase");
+                    Log("CBDE: Compilation phase");
                     var exporterMetrics = new MlirExporterMetrics();
                     try
                     {
@@ -141,19 +159,19 @@ namespace SonarAnalyzer.Rules.CSharp
                         foreach (var tree in c.Compilation.SyntaxTrees)
                         {
                             csSourceFileNames.Add(tree.FilePath);
-                            GlobalLog($"CBDE: Generating MLIR for source file {tree.FilePath} in context {compilationHash}");
+                            Log($"CBDE: Generating MLIR for source file {tree.FilePath} in context {compilationHash}");
                             var mlirFileName = ManglePath(tree.FilePath) + ".mlir";
                             ExportFunctionMlir(tree, c.Compilation.GetSemanticModel(tree), exporterMetrics, mlirFileName);
-                            logStringBuilder.AppendFormat("- generated mlir file {0}\n", mlirFileName);
-                            GlobalLog($"CBDE: Done with file {tree.FilePath} in context {compilationHash}");
+                            LogIfFailure($"- generated mlir file {mlirFileName}");
+                            Log($"CBDE: Done with file {tree.FilePath} in context {compilationHash}");
                         }
-                        GlobalLog($"CBDE: MLIR generation time: {watch.ElapsedMilliseconds} ms");
-                        GlobalLog($"CBDE: MLIR generation cpu time: {cpuWatch.ElapsedMilliseconds} ms");
+                        Log($"CBDE: MLIR generation time: {watch.ElapsedMilliseconds} ms");
+                        Log($"CBDE: MLIR generation cpu time: {cpuWatch.ElapsedMilliseconds} ms");
                         watch.Restart();
                         RunCbdeAndRaiseIssues(c);
-                        GlobalLog($"CBDE: CBDE execution and reporting time: {watch.ElapsedMilliseconds} ms");
-                        GlobalLog($"CBDE: CBDE execution and reporting cpu time: {cpuWatch.ElapsedMilliseconds} ms");
-                        GlobalLog("CBDE: End of compilation");
+                        Log($"CBDE: CBDE execution and reporting time: {watch.ElapsedMilliseconds} ms");
+                        Log($"CBDE: CBDE execution and reporting cpu time: {cpuWatch.ElapsedMilliseconds} ms");
+                        Log("CBDE: End of compilation");
                         lock (metricsFileLock)
                         {
                             File.AppendAllText(cbdeMetricsLogFile, exporterMetrics.Dump());
@@ -161,7 +179,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                     catch(Exception e)
                     {
-                        GlobalLog("An exception has occured: " + e.Message + "\n" + e.StackTrace);
+                        Log("An exception has occured: " + e.Message + "\n" + e.StackTrace);
                         throw;
                     }
                 });
@@ -204,7 +222,7 @@ namespace SonarAnalyzer.Rules.CSharp
             Directory.CreateDirectory(cbdeDirectoryAssembly);
             cbdeJsonOutputPath = Path.Combine(cbdeDirectoryAssembly, cbdeJsonOutputFileName);
             logStringBuilder = new StringBuilder();
-            logStringBuilder.AppendFormat(">> New Cbde Run triggered at {0}\n", DateTime.Now.ToShortTimeString());
+            LogIfFailure($">> New Cbde Run triggered at {DateTime.Now.ToShortTimeString()}");
         }
 
         private void SetupMlirRootDirectory()
@@ -232,18 +250,18 @@ namespace SonarAnalyzer.Rules.CSharp
         }
         private void RunCbdeAndRaiseIssues(CompilationAnalysisContext c)
         {
-            GlobalLog("Running CBDE");
+            Log("Running CBDE");
             using (Process pProcess = new Process())
             {
-                logStringBuilder.AppendLine("- Cbde process");
+                LogIfFailure("- Cbde process");
                 pProcess.StartInfo.FileName = cbdeBinaryPath;
                 pProcess.StartInfo.WorkingDirectory = cbdeDirectoryAssembly;
                 var cbdePerfLogFile = Path.Combine(cbdeDirectoryAssembly, "perfLogFile.log");
 
                 pProcess.StartInfo.Arguments = $"-i \"{cbdeDirectoryAssembly}\" -o \"{cbdeJsonOutputPath}\" -s \"{cbdePerfLogFile}\"";
 
-                logStringBuilder.AppendFormat("  * binary_location: '{0}'\n", pProcess.StartInfo.FileName);
-                logStringBuilder.AppendFormat("  * arguments: '{0}'\n", pProcess.StartInfo.Arguments);
+                LogIfFailure($"  * binary_location: '{pProcess.StartInfo.FileName}'");
+                LogIfFailure($"  * arguments: '{pProcess.StartInfo.Arguments}'");
 
                 pProcess.StartInfo.UseShellExecute = false;
                 pProcess.StartInfo.RedirectStandardError = true;
@@ -269,21 +287,21 @@ namespace SonarAnalyzer.Rules.CSharp
   * peak_paged_mem: {peakPagedMemory >> 20} MB
   * peak_working_set: {peakWorkingSet >> 20} MB";
 
-                GlobalLog(logString);
-                logStringBuilder.AppendLine(logString);
+                Log(logString);
+                LogIfFailure(logString);
 
                 if (pProcess.ExitCode != 0)
                 {
-                    GlobalLog("Running CBDE: Failure");
+                    Log("Running CBDE: Failure");
                     LogFailedCbdeRun(pProcess);
-                    GlobalLog("Running CBDE: Error dumped");
+                    Log("Running CBDE: Error dumped");
                 }
                 else
                 {
-                    GlobalLog("Running CBDE: Success");
+                    Log("Running CBDE: Success");
                     RaiseIssuesFromJSon(c);
                     Cleanup();
-                    GlobalLog("Running CBDE: Issues reported");
+                    Log("Running CBDE: Issues reported");
                 }
             }
         }
@@ -315,10 +333,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 failureString.Append("  - " + fileName + "\n");
             }
             // we dispose the StreamWriter to unlock the log file
-            logStringBuilder.AppendFormat("- parsing json file {0}\n", cbdeJsonOutputPath);
+            LogIfFailure($"- parsing json file {cbdeJsonOutputPath}");
             failureString.Append("  content of stderr is:\n" + pProcess.StandardError.ReadToEnd());
             failureString.Append("  content of the CBDE handler log file is :\n" + logStringBuilder.ToString());
-            GlobalLog(failureString.ToString());
+            Log(failureString.ToString());
             Console.Error.WriteLine($"Error when executing CBDE, more details in {cbdeProcessSpecificPath}");
         }
 
@@ -326,7 +344,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             string jsonFileContent;
             List<List<JObject>> jsonIssues;
-            logStringBuilder.AppendFormat("- parsing json file {0}\n", cbdeJsonOutputPath);
+            LogIfFailure($"- parsing json file {cbdeJsonOutputPath}");
             try
             {
                 jsonFileContent = File.ReadAllText(cbdeJsonOutputPath);
@@ -334,20 +352,24 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             catch
             {
-                logStringBuilder.AppendFormat("- error parsing json file {0}\n", cbdeJsonOutputPath);
+                LogIfFailure($"- error parsing json file {cbdeJsonOutputPath}");
+                Log(logStringBuilder.ToString());
+                Console.Error.WriteLine($"Error parsing output from CBDE, more details in {cbdeProcessSpecificPath}");
                 return;
             }
 
             foreach (var issue in jsonIssues.First())
             {
-                logStringBuilder.AppendFormat("  * processing token {0}\n", issue.ToString());
+                LogIfFailure($"  * processing token {issue.ToString()}");
                 try
                 {
                     RaiseIssueFromJToken(issue, context);
                 }
                 catch
                 {
-                    logStringBuilder.AppendFormat("  * error reporting token {0}\n", cbdeJsonOutputPath);
+                    LogIfFailure($"  * error reporting token {cbdeJsonOutputPath}");
+                    Log(logStringBuilder.ToString());
+                    Console.Error.WriteLine($"Error raising issue from CBDE, more details in {cbdeProcessSpecificPath}");
                     continue;
                 }
             }
