@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +33,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotDecreaseMemberVisibility()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotDecreaseMemberVisibility.cs",
-                new DoNotDecreaseMemberVisibility());
+                new DoNotDecreaseMemberVisibility(),
+                options: ParseOptionsHelper.FromCSharp8,
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
     }
 }
