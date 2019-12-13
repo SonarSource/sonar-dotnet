@@ -19,14 +19,14 @@
 */
 
 using System.Linq;
-using SonarAnalyzer.ControlFlowGraph;
-using SonarAnalyzer.ControlFlowGraph.CSharp;
-using SonarAnalyzer.ShimLayer.CSharp;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.ControlFlowGraph;
+using SonarAnalyzer.ControlFlowGraph.CSharp;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -81,8 +81,9 @@ namespace NS
         public Foo(int i) {}
     }
 }";
-            var syntaxTree = Compile(input, out var semanticModel);
-            var ctor = syntaxTree.GetRoot().DescendantNodes().OfType<ConstructorDeclarationSyntax>().First();
+
+            var (ctor, semanticModel) = TestHelper.Compile(input).GetConstructor("Foo");
+
             var cfg = CSharpControlFlowGraph.Create(ctor.Body, semanticModel);
 
             VerifyCfg(cfg, 5);
@@ -123,8 +124,8 @@ namespace NS
         public Foo(int i) {}
     }
 }";
-            var syntaxTree = Compile(input, out var semanticModel);
-            var ctor = syntaxTree.GetRoot().DescendantNodes().OfType<ConstructorDeclarationSyntax>().First();
+            var (ctor, semanticModel) = TestHelper.Compile(input).GetConstructor("Foo");
+
             var cfg = CSharpControlFlowGraph.Create(ctor.Body, semanticModel);
 
             VerifyCfg(cfg, 2);
@@ -157,8 +158,8 @@ namespace NS
         public Bar(int i) {}
     }
 }";
-            var syntaxTree = Compile(input, out var semanticModel);
-            var ctor = syntaxTree.GetRoot().DescendantNodes().OfType<ConstructorDeclarationSyntax>().First();
+            var (ctor, semanticModel) = TestHelper.Compile(input).GetConstructor("Foo");
+
             var cfg = CSharpControlFlowGraph.Create(ctor.Body, semanticModel);
 
             VerifyCfg(cfg, 2);
@@ -408,6 +409,40 @@ namespace NS
             branchBlockB.TrueSuccessorBlock.Should().Be(trueBlock);
             branchBlockB.FalseSuccessorBlock.Should().Be(exit);
             trueBlock.SuccessorBlocks.Should().OnlyContain(exit);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Conditional_ComplexCondition_Coalesce()
+        {
+            var cfg = Build("var a = (x ?? y) ? b : c;");
+            VerifyCfg(cfg, 7);
+
+            var blocks = cfg.Blocks.ToList();
+            var branchBlockX = (BinaryBranchBlock)blocks[0];
+            var branchBlockXLeft = (BranchBlock)blocks[1];
+            var branchBlockY = (BinaryBranchBlock)blocks[2];
+            var condTrue = blocks[3];
+            var condFalse = blocks[4];
+            var after = blocks[5];
+            var exitBlock = cfg.ExitBlock;
+
+            branchBlockX.TrueSuccessorBlock.Should().Be(branchBlockY);
+            branchBlockX.FalseSuccessorBlock.Should().Be(branchBlockXLeft);
+            branchBlockXLeft.SuccessorBlocks.Should().OnlyContainInOrder(condTrue, condFalse);
+            branchBlockY.TrueSuccessorBlock.Should().Be(condTrue);
+            branchBlockY.FalseSuccessorBlock.Should().Be(condFalse);
+
+            condFalse.SuccessorBlocks.Should().OnlyContain(after);
+            condTrue.SuccessorBlocks.Should().OnlyContain(after);
+            after.SuccessorBlocks.Should().OnlyContain(exitBlock);
+
+            VerifyAllInstructions(branchBlockX, "x");
+            VerifyAllInstructions(branchBlockXLeft);
+            VerifyAllInstructions(branchBlockY, "y");
+            VerifyAllInstructions(condTrue, "b");
+            VerifyAllInstructions(condFalse, "c");
+            VerifyAllInstructions(after, "a = (x ?? y) ? b : c");
         }
 
         [TestMethod]
@@ -798,6 +833,64 @@ namespace NS
             exitBlock.PredecessorBlocks.Should().OnlyContain(foreach1Block);
         }
 
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Foreach_VarDeclaration()
+        {
+            var cfg = Build("foreach (var (key, value) in collection) { string j = value; } ");
+            VerifyCfg(cfg, 4);
+
+            var allBlocks = cfg.Blocks.ToList();
+
+            var forEachCollectionBlock = cfg.EntryBlock as ForeachCollectionProducerBlock;
+
+            forEachCollectionBlock.Should().NotBeNull();
+            VerifyAllInstructions(forEachCollectionBlock, "collection");
+
+            var foreachBlock = allBlocks[1] as BinaryBranchBlock;
+            VerifyNoInstruction(foreachBlock);
+
+            var loopBodyBlock = allBlocks[2] as SimpleBlock;
+            VerifyAllInstructions(loopBodyBlock, "value", "j = value");
+
+            var exitBlock = cfg.ExitBlock;
+
+            forEachCollectionBlock.SuccessorBlocks.Should().Contain(foreachBlock);
+
+            foreachBlock.SuccessorBlocks.Should().OnlyContainInOrder(loopBodyBlock, exitBlock);
+            foreachBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ForEachVariableStatement);
+
+            loopBodyBlock.SuccessorBlocks.Should().OnlyContain(foreachBlock);
+
+            exitBlock.PredecessorBlocks.Should().OnlyContain(foreachBlock);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Foreach_AsyncStream()
+        {
+            var cfg = Build("await foreach (var number in GetAsync()) { var x = 10; }");
+
+            VerifyCfg(cfg, 4);
+            var collectionBlock = cfg.EntryBlock as ForeachCollectionProducerBlock;
+            var blocks = cfg.Blocks.ToList();
+            var foreachBlock = (BinaryBranchBlock)blocks[1];
+            var loopBodyBlock = blocks[2];
+            var exitBlock = cfg.ExitBlock;
+
+            collectionBlock.SuccessorBlocks.Should().Contain(foreachBlock);
+            VerifyAllInstructions(collectionBlock, "GetAsync", "GetAsync()");
+
+            foreachBlock.SuccessorBlocks.Should().OnlyContainInOrder(loopBodyBlock, exitBlock);
+            foreachBlock.BranchingNode.Kind().Should().Be(SyntaxKind.ForEachStatement);
+            VerifyNoInstruction(foreachBlock);
+
+            loopBodyBlock.SuccessorBlocks.Should().OnlyContain(foreachBlock);
+            VerifyAllInstructions(loopBodyBlock, "10", "x = 10");
+
+            exitBlock.PredecessorBlocks.Should().OnlyContain(foreachBlock);
+        }
+
         #endregion
 
         #region For statement
@@ -1009,12 +1102,24 @@ namespace NS
 
         [TestMethod]
         [TestCategory("CFG")]
-        public void Cfg_Throw()
+        public void Cfg_Throw_Statement_InvalidThrow()
         {
             var cfg = Build($"if (true) {{ var y = 12; {SimpleThrow}; }} var x = 11;");
             VerifyJumpWithNoExpression(cfg, SyntaxKind.ThrowStatement);
 
             cfg = Build($"if (true) {{ {SimpleThrow}; }} var x = 11;");
+            VerifyJumpWithNoExpression(cfg, SyntaxKind.ThrowStatement);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Throw_Statement()
+        {
+            var throwException = "throw new InvalidOperationException(\"\")";
+            var cfg = Build($"if (true) {{ var y = 12; {throwException}; }} var x = 11;");
+            VerifyJumpWithNoExpression(cfg, SyntaxKind.ThrowStatement);
+
+            cfg = Build($"if (true) {{ {throwException}; }} var x = 11;");
             VerifyJumpWithNoExpression(cfg, SyntaxKind.ThrowStatement);
         }
 
@@ -1041,7 +1146,7 @@ namespace NS
             branchBlock.SuccessorBlocks.Should().OnlyContainInOrder(trueBlock, falseBlock);
             trueBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
             trueBlock.JumpNode.Kind().Should().Be(kind);
-
+            falseBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
             exitBlock.PredecessorBlocks.Should().OnlyContain(trueBlock, falseBlock);
         }
 
@@ -1066,9 +1171,9 @@ namespace NS
 
             var blocks = cfg.Blocks.ToList();
 
-            var block1 = (JumpBlock) blocks[0];
-            var block2 = (SimpleBlock) blocks[1];
-            var exit = (ExitBlock) blocks.Last();
+            var block1 = (JumpBlock)blocks[0];
+            var block2 = (SimpleBlock)blocks[1];
+            var exit = (ExitBlock)blocks.Last();
 
             block1.Instructions.Should().BeEmpty();
             block1.SuccessorBlocks.Should().OnlyContain(exit);
@@ -1369,22 +1474,47 @@ namespace NS
         {
             var cfg = Build("var a = b ?? c;");
             VerifyCfg(cfg, 4);
-
-            var branchBlock = cfg.EntryBlock as BinaryBranchBlock;
+            var branchBlock = (BinaryBranchBlock) cfg.EntryBlock;
             var blocks = cfg.Blocks.ToList();
             var bNullBlock = blocks[1];
-            var afterOp = blocks[2];
+            var assignmentBlock = blocks[2];
             var exitBlock = cfg.ExitBlock;
 
-            branchBlock.SuccessorBlocks.Should().OnlyContainInOrder(bNullBlock, afterOp);
-            bNullBlock.SuccessorBlocks.Should().OnlyContain(afterOp);
-            afterOp.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            branchBlock.SuccessorBlocks.Should().OnlyContainInOrder(bNullBlock, assignmentBlock);
+            bNullBlock.SuccessorBlocks.Should().OnlyContain(assignmentBlock);
+            assignmentBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
 
             branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.CoalesceExpression);
 
             VerifyAllInstructions(branchBlock, "b");
             VerifyAllInstructions(bNullBlock, "c");
-            VerifyAllInstructions(afterOp, "a = b ?? c");
+            VerifyAllInstructions(assignmentBlock, "a = b ?? c");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Coalesce_Self()
+        {
+            var cfg = Build("a = a ?? c;");
+            VerifyCfg(cfg, 4);
+
+            var branchBlock = (BinaryBranchBlock) cfg.EntryBlock;
+            var blocks = cfg.Blocks.ToList();
+            var bNullBlock = blocks[1];
+            var afterOp = blocks[2];
+            var exitBlock = cfg.ExitBlock;
+
+            branchBlock.TrueSuccessorBlock.Should().Be(bNullBlock);
+            branchBlock.FalseSuccessorBlock.Should().Be(afterOp);
+            branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.CoalesceExpression);
+
+            bNullBlock.SuccessorBlocks.Should().OnlyContain(afterOp);
+
+            afterOp.SuccessorBlocks.Should().OnlyContain(exitBlock);
+
+            VerifyAllInstructions(branchBlock, "a");
+            VerifyAllInstructions(bNullBlock, "c");
+            VerifyAllInstructions(afterOp, "a = a ?? c");
         }
 
         [TestMethod]
@@ -1394,20 +1524,199 @@ namespace NS
             var cfg = Build("var a = b ?? c ?? d;");
             VerifyCfg(cfg, 5);
 
-            var bBlock = cfg.EntryBlock as BinaryBranchBlock;
+            var bBlock = (BinaryBranchBlock) cfg.EntryBlock;
             var blocks = cfg.Blocks.ToList();
-            var cBlock = blocks[1] as BinaryBranchBlock;
+            var cBlock = (BinaryBranchBlock) blocks[1];
             var dBlock = blocks[2];
             var bcdBlock = blocks[3];   // b ?? c ?? d
             var exitBlock = cfg.ExitBlock;
 
-            bBlock.SuccessorBlocks.Should().OnlyContainInOrder(cBlock, bcdBlock);
-            cBlock.SuccessorBlocks.Should().OnlyContainInOrder(dBlock, bcdBlock);
-            dBlock.SuccessorBlocks.Should().OnlyContain(bcdBlock);
-            bcdBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            bBlock.TrueSuccessorBlock.Should().Be(cBlock);
+            bBlock.FalseSuccessorBlock.Should().Be(bcdBlock);
+            bBlock.Instructions.Should().ContainSingle("b");
+            bBlock.BranchingNode.Kind().Should().Be(SyntaxKind.CoalesceExpression);
 
-            bcdBlock.Instructions.Should().ContainSingle();
-            bcdBlock.Instructions.Should().Contain(i => i.ToString() == "a = b ?? c ?? d");
+            cBlock.TrueSuccessorBlock.Should().Be(dBlock);
+            cBlock.FalseSuccessorBlock.Should().Be(bcdBlock);
+            cBlock.Instructions.Should().ContainSingle("c");
+            cBlock.BranchingNode.Kind().Should().Be(SyntaxKind.CoalesceExpression);
+
+            dBlock.SuccessorBlocks.Should().OnlyContain(bcdBlock);
+            dBlock.Instructions.Should().ContainSingle("d");
+
+            bcdBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            bcdBlock.Instructions.Should().ContainSingle("a = b ?? c ?? d");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Coalesce_MultipleAssignments()
+        {
+            var cfg = Build("a = a ?? (b = b ?? c);");
+            VerifyCfg(cfg, 6);
+
+            var firstBranchBlockWithA = (BinaryBranchBlock) cfg.EntryBlock;
+            var blocks = cfg.Blocks.ToList();
+            var secondBranchBlockWithB = (BinaryBranchBlock) blocks[1];
+            var simpleBlockWithC = (SimpleBlock) blocks[2];
+            var simpleBlockWithAssignmentToB = (SimpleBlock) blocks[3];
+            var simpleBlockWithFullExpression = (SimpleBlock) blocks[4];
+            var exitBlock = cfg.ExitBlock;
+
+            firstBranchBlockWithA.TrueSuccessorBlock.Should().Be(secondBranchBlockWithB);
+            firstBranchBlockWithA.FalseSuccessorBlock.Should().Be(simpleBlockWithFullExpression);
+            firstBranchBlockWithA.Instructions.Should().ContainSingle("a");
+            firstBranchBlockWithA.BranchingNode.Kind().Should().Be(SyntaxKind.CoalesceExpression);
+
+            secondBranchBlockWithB.TrueSuccessorBlock.Should().Be(simpleBlockWithC);
+            secondBranchBlockWithB.FalseSuccessorBlock.Should().Be(simpleBlockWithAssignmentToB);
+            secondBranchBlockWithB.Instructions.Should().ContainSingle("b");
+            secondBranchBlockWithB.BranchingNode.Kind().Should().Be(SyntaxKind.CoalesceExpression);
+
+            simpleBlockWithC.SuccessorBlock.Should().Be(simpleBlockWithAssignmentToB);
+            simpleBlockWithC.Instructions.Should().ContainSingle("c");
+
+            simpleBlockWithAssignmentToB.SuccessorBlock.Should().Be(simpleBlockWithFullExpression);
+            simpleBlockWithAssignmentToB.Instructions.Should().ContainSingle("b = b ?? c");
+
+            simpleBlockWithFullExpression.SuccessorBlock.Should().Be(exitBlock);
+            simpleBlockWithFullExpression.Instructions.Should().ContainSingle("a = a ?? (b = b ?? c)");
+        }
+
+        #endregion
+
+        #region Null-coalescing assigment
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_NullCoalescingAssignment()
+        {
+            // is similar with "a = a ?? b;"
+            /// <see cref="Cfg_Coalesce_Self"/>
+            var cfg = Build("a ??= b;");
+            VerifyCfg(cfg, 4);
+
+            var branchBlock = (BinaryBranchBlock) cfg.EntryBlock;
+            var blocks = cfg.Blocks.ToList();
+            var blockWithB = blocks[1];
+            var assignmentBlock = blocks[2];
+            var exitBlock = cfg.ExitBlock;
+
+            branchBlock.TrueSuccessorBlock.Should().Be(blockWithB);
+            branchBlock.FalseSuccessorBlock.Should().Be(assignmentBlock);
+            branchBlock.BranchingNode.Kind().Should().Be(SyntaxKindEx.CoalesceAssignmentExpression);
+            VerifyAllInstructions(branchBlock, "a");
+
+            blockWithB.SuccessorBlocks.Should().OnlyContain(assignmentBlock);
+            VerifyAllInstructions(blockWithB, "b");
+
+            assignmentBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            VerifyAllInstructions(assignmentBlock, "a ??= b");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_NullCoalescingAssignment_Multiple()
+        {
+            // is similar with "a = a ?? (b = b ?? c);"
+            /// <see cref="Cfg_Coalesce_MultipleAssignments"/>
+            var cfg = Build("a ??= b ??= c;");
+            VerifyCfg(cfg, 6);
+
+            var firstBranchBlockWithA = (BinaryBranchBlock) cfg.EntryBlock;
+            var blocks = cfg.Blocks.ToList();
+            var secondBranchBlockWithB = (BinaryBranchBlock) blocks[1];
+            var simpleBlockWithC = (SimpleBlock) blocks[2];
+            var simpleBlockWithAssignmentToB = (SimpleBlock) blocks[3];
+            var simpleBlockWithFullExpression = (SimpleBlock) blocks[4];
+            var exitBlock = cfg.ExitBlock;
+
+            firstBranchBlockWithA.TrueSuccessorBlock.Should().Be(secondBranchBlockWithB);
+            firstBranchBlockWithA.FalseSuccessorBlock.Should().Be(simpleBlockWithFullExpression);
+            firstBranchBlockWithA.Instructions.Should().ContainSingle("a");
+            firstBranchBlockWithA.BranchingNode.Kind().Should().Be(SyntaxKindEx.CoalesceAssignmentExpression);
+
+            secondBranchBlockWithB.TrueSuccessorBlock.Should().Be(simpleBlockWithC);
+            secondBranchBlockWithB.FalseSuccessorBlock.Should().Be(simpleBlockWithAssignmentToB);
+            secondBranchBlockWithB.Instructions.Should().ContainSingle("b");
+            secondBranchBlockWithB.BranchingNode.Kind().Should().Be(SyntaxKindEx.CoalesceAssignmentExpression);
+
+            simpleBlockWithC.SuccessorBlock.Should().Be(simpleBlockWithAssignmentToB);
+            simpleBlockWithC.Instructions.Should().ContainSingle("c");
+
+            simpleBlockWithAssignmentToB.SuccessorBlock.Should().Be(simpleBlockWithFullExpression);
+            simpleBlockWithAssignmentToB.Instructions.Should().ContainSingle("b = b ?? c");
+
+            simpleBlockWithFullExpression.SuccessorBlock.Should().Be(exitBlock);
+            simpleBlockWithFullExpression.Instructions.Should().ContainSingle("a = a ?? (b = b ?? c)");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_NullCoalescingAssignment_Coalesce()
+        {
+            // similar to a = a ?? b ?? c
+            var cfg = Build("a ??= b ?? c;");
+            VerifyCfg(cfg, 5);
+
+            var coalesceAssignmentBranchBlock = (BinaryBranchBlock) cfg.EntryBlock;
+            var blocks = cfg.Blocks.ToList();
+            var coalesceBranchBlock = (BinaryBranchBlock) blocks[1];
+            var blockWithC = (SimpleBlock) blocks[2];
+            var assignmentBlock = blocks[3];
+            var exitBlock = cfg.ExitBlock;
+
+            coalesceAssignmentBranchBlock.TrueSuccessorBlock.Should().Be(coalesceBranchBlock);
+            coalesceAssignmentBranchBlock.FalseSuccessorBlock.Should().Be(assignmentBlock);
+            coalesceAssignmentBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKindEx.CoalesceAssignmentExpression);
+            coalesceAssignmentBranchBlock.Instructions.Should().ContainSingle("a");
+
+            coalesceBranchBlock.TrueSuccessorBlock.Should().Be(blockWithC);
+            coalesceBranchBlock.FalseSuccessorBlock.Should().Be(assignmentBlock);
+            coalesceBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.CoalesceExpression);
+            coalesceBranchBlock.Instructions.Should().ContainSingle("b");
+
+            blockWithC.SuccessorBlocks.Should().OnlyContain(assignmentBlock);
+            blockWithC.Instructions.Should().ContainSingle("c");
+
+            assignmentBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            assignmentBlock.Instructions.Should().ContainSingle("a ??= b ?? c");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_NullCoalescingAssignment_Conditional()
+        {
+            var cfg = Build("a ??= b ? c : d;");
+            VerifyCfg(cfg, 6);
+
+            var nullCoalesceAssignmentBranchBlock = (BinaryBranchBlock) cfg.EntryBlock;
+            var blocks = cfg.Blocks.ToList();
+            var conditionalBranchBlock = (BinaryBranchBlock) blocks[1];
+            var cBlock = (SimpleBlock) blocks[2];
+            var dBlock = (SimpleBlock) blocks[3];
+            var simpleBlockWithFullExpression = (SimpleBlock) blocks[4];
+            var exitBlock = cfg.ExitBlock;
+
+            nullCoalesceAssignmentBranchBlock.TrueSuccessorBlock.Should().Be(conditionalBranchBlock);
+            nullCoalesceAssignmentBranchBlock.FalseSuccessorBlock.Should().Be(simpleBlockWithFullExpression);
+            nullCoalesceAssignmentBranchBlock.Instructions.Should().ContainSingle("a");
+            nullCoalesceAssignmentBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKindEx.CoalesceAssignmentExpression);
+
+            conditionalBranchBlock.TrueSuccessorBlock.Should().Be(cBlock);
+            conditionalBranchBlock.FalseSuccessorBlock.Should().Be(dBlock);
+            conditionalBranchBlock.Instructions.Should().ContainSingle("b");
+            conditionalBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.IdentifierName);
+
+            cBlock.SuccessorBlock.Should().Be(simpleBlockWithFullExpression);
+            cBlock.Instructions.Should().ContainSingle("c");
+
+            dBlock.SuccessorBlock.Should().Be(simpleBlockWithFullExpression);
+            dBlock.Instructions.Should().ContainSingle("d");
+
+            simpleBlockWithFullExpression.SuccessorBlock.Should().Be(exitBlock);
+            simpleBlockWithFullExpression.Instructions.Should().HaveCount(1);
+            simpleBlockWithFullExpression.Instructions.Should().ContainSingle("a ??= b ? c : d");
         }
 
         #endregion
@@ -1505,40 +1814,6 @@ namespace NS
 
         [TestMethod]
         [TestCategory("CFG")]
-        public void Cfg_Conditional_ComplexCondition_Coalesce()
-        {
-            var cfg = Build("var a = (x ?? y) ? b : c;");
-            VerifyCfg(cfg, 7);
-
-            var blocks = cfg.Blocks.ToList();
-            var branchBlockX = (BinaryBranchBlock)blocks[0];
-            var branchBlockXLeft = (BranchBlock)blocks[1];
-            var branchBlockY = (BinaryBranchBlock)blocks[2];
-            var condTrue = blocks[3];
-            var condFalse = blocks[4];
-            var after = blocks[5];
-            var exitBlock = cfg.ExitBlock;
-
-            branchBlockX.TrueSuccessorBlock.Should().Be(branchBlockY);
-            branchBlockX.FalseSuccessorBlock.Should().Be(branchBlockXLeft);
-            branchBlockXLeft.SuccessorBlocks.Should().OnlyContainInOrder(condTrue, condFalse);
-            branchBlockY.TrueSuccessorBlock.Should().Be(condTrue);
-            branchBlockY.FalseSuccessorBlock.Should().Be(condFalse);
-
-            condFalse.SuccessorBlocks.Should().OnlyContain(after);
-            condTrue.SuccessorBlocks.Should().OnlyContain(after);
-            after.SuccessorBlocks.Should().OnlyContain(exitBlock);
-
-            VerifyAllInstructions(branchBlockX, "x");
-            VerifyAllInstructions(branchBlockXLeft);
-            VerifyAllInstructions(branchBlockY, "y");
-            VerifyAllInstructions(condTrue, "b");
-            VerifyAllInstructions(condFalse, "c");
-            VerifyAllInstructions(after, "a = (x ?? y) ? b : c");
-        }
-
-        [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_ConditionalMultiple()
         {
             var cfg = Build("var a = cond1 ? (cond2?x:y) : (cond3?p:q);");
@@ -1561,8 +1836,101 @@ namespace NS
                 .SuccessorBlocks.First().Should().Be(cfg.ExitBlock);
 
             var assignmentBlock = cfg.ExitBlock.PredecessorBlocks.First();
-            assignmentBlock.Instructions.Should().ContainSingle();
+            assignmentBlock.Instructions.Should().HaveCount(1);
             assignmentBlock.Instructions.Should().Contain(i => i.ToString() == "a = cond1 ? (cond2?x:y) : (cond3?p:q)");
+        }
+
+        #endregion
+
+        #region Throw expression
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Throw_Expression_NullCoalesce()
+        {
+            var throwException = "throw new InvalidOperationException(\"\")";
+            var cfg = Build($"object x = null; var y = x ?? {throwException};");
+            VerifyJumpWithNoExpression(cfg, SyntaxKind.ThrowExpression);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Throw_Expression_Ternary()
+        {
+            var throwException = "throw new InvalidOperationException(\"\")";
+            var cfg = Build($"var x = true ? 1 : {throwException};");
+
+            VerifyCfg(cfg, 5);
+            var binaryBranch = cfg.EntryBlock as BinaryBranchBlock;
+            var blocks = cfg.Blocks.ToList();
+            var trueBlock = blocks[1] as SimpleBlock;
+            var falseJumpBlock = blocks[2] as JumpBlock;
+            var assignmentBlock = blocks[3] as SimpleBlock;
+            var exitBlock = cfg.ExitBlock;
+
+            binaryBranch.SuccessorBlocks.Should().OnlyContainInOrder(trueBlock, falseJumpBlock);
+            trueBlock.SuccessorBlocks.Should().OnlyContain(assignmentBlock);
+            falseJumpBlock.SuccessorBlock.Should().Be(exitBlock);
+            falseJumpBlock.WouldBeSuccessor.Should().Be(assignmentBlock);
+            assignmentBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            exitBlock.PredecessorBlocks.Should().OnlyContain(falseJumpBlock, assignmentBlock);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Throw_Expression_MethodArgument()
+        {
+            var throwException = "throw new InvalidOperationException(\"\")";
+            var cfg = Build($"Console.WriteLine({throwException});");
+
+            VerifyCfg(cfg, 3);
+            var jumpBlock = cfg.EntryBlock as JumpBlock;
+            var blocks = cfg.Blocks.ToList();
+            var methodCallBlock = blocks[1] as SimpleBlock;
+            var exitBlock = cfg.ExitBlock;
+
+            jumpBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            jumpBlock.WouldBeSuccessor.Should().Be(methodCallBlock);
+            methodCallBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            exitBlock.PredecessorBlocks.Should().OnlyContain(methodCallBlock, jumpBlock);
+        }
+
+        #endregion
+
+        #region Ranges and Indices
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Range_Expression()
+        {
+            var cfg = Build($"Range r = 1..4;");
+
+            VerifyCfg(cfg, 2);
+
+            var rangeBlock = cfg.EntryBlock as SimpleBlock;
+            var exitBlock = cfg.ExitBlock;
+
+            VerifyAllInstructions(rangeBlock, "r = 1..4");
+
+            rangeBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            exitBlock.PredecessorBlocks.Should().OnlyContain(rangeBlock);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Index_Expression()
+        {
+            var cfg = Build($"Index index = ^1;");
+
+            VerifyCfg(cfg, 2);
+
+            var rangeBlock = cfg.EntryBlock as SimpleBlock;
+            var exitBlock = cfg.ExitBlock;
+
+            VerifyAllInstructions(rangeBlock, "index = ^1");
+
+            rangeBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            exitBlock.PredecessorBlocks.Should().OnlyContain(rangeBlock);
         }
 
         #endregion
@@ -1588,8 +1956,6 @@ namespace NS
             assignment.SuccessorBlocks.Should().OnlyContain(exitBlock);
 
             oIsNullBranch.BranchingNode.Kind().Should().Be(SyntaxKind.ConditionalAccessExpression);
-            oIsNullBranch.Instructions.Should().ContainSingle();
-            oIsNullBranch.Instructions.Should().Contain(i => i.ToString() == "o");
 
             VerifyAllInstructions(oIsNullBranch, "o");
             VerifyAllInstructions(oNotNull, "method", ".method" /* This is equivalent to o.method */, "1", ".method(1)");
@@ -1649,7 +2015,7 @@ namespace NS
             boolFieldAccess.SuccessorBlocks.Should().OnlyContainInOrder(coalesceIsNullBranch);
             coalesceIsNullBranch.TrueSuccessorBlock.Should().Be(falseBlock);
             coalesceIsNullBranch.FalseSuccessorBlock.Should().Be(assignment);
-            falseBlock .SuccessorBlocks.Should().OnlyContainInOrder(assignment);
+            falseBlock.SuccessorBlocks.Should().OnlyContainInOrder(assignment);
             assignment.SuccessorBlocks.Should().OnlyContain(exitBlock);
         }
 
@@ -1665,7 +2031,7 @@ namespace NS
             var boolFieldAccess = blocks[1];
             var nullCheckBranch = blocks[2] as BinaryBranchBlock;
             var trueBlock = blocks[3];
-            var falseBlock  = blocks[4];
+            var falseBlock = blocks[4];
             var exitBlock = cfg.ExitBlock;
 
             VerifyAllInstructions(aIsNullBranch, "a");
@@ -1680,7 +2046,7 @@ namespace NS
             nullCheckBranch.TrueSuccessorBlock.Should().Be(trueBlock);
             nullCheckBranch.FalseSuccessorBlock.Should().Be(falseBlock);
             trueBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
-            falseBlock .SuccessorBlocks.Should().OnlyContain(exitBlock);
+            falseBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
         }
 
         [TestMethod]
@@ -2086,6 +2452,7 @@ namespace NS
         #endregion
 
         #region Try/Finally
+
         [TestMethod]
         [TestCategory("CFG")]
         public void Cfg_Try_Finally()
@@ -2719,14 +3086,14 @@ namespace NS
 
             var blocks = cfg.Blocks.ToList();
 
-            var beforeDoBlock = (SimpleBlock) blocks[0];
-            var doBlock = (SimpleBlock) blocks[1];
-            var tryBody = (BranchBlock) blocks[2];
-            var tryStatementBranch = (BranchBlock) blocks[3];
-            var catchBlock = (SimpleBlock) blocks[4];
-            var whileStmt = (BinaryBranchBlock) blocks[5];
-            var afterDoWhile = (SimpleBlock) blocks[6];
-            var exit = (ExitBlock) blocks.Last();
+            var beforeDoBlock = (SimpleBlock)blocks[0];
+            var doBlock = (SimpleBlock)blocks[1];
+            var tryBody = (BranchBlock)blocks[2];
+            var tryStatementBranch = (BranchBlock)blocks[3];
+            var catchBlock = (SimpleBlock)blocks[4];
+            var whileStmt = (BinaryBranchBlock)blocks[5];
+            var afterDoWhile = (SimpleBlock)blocks[6];
+            var exit = (ExitBlock)blocks.Last();
 
             VerifyAllInstructions(beforeDoBlock, "0", "attempts = 0");
             beforeDoBlock.SuccessorBlocks.Should().OnlyContain(doBlock);
@@ -2787,15 +3154,15 @@ namespace NS
 
             var blocks = cfg.Blocks.ToList();
 
-            var doBeforeTry = (SimpleBlock) blocks[0];
-            var tryStatement = (BranchBlock) blocks[1];
-            var tryBody = (BranchBlock) blocks[2];
-            var catchBody = (JumpBlock) blocks[3];
-            var finallyBlock = (BranchBlock) blocks[4];
-            var afterTry = (SimpleBlock) blocks[5];
-            var whileStmt = (BinaryBranchBlock) blocks[6];
-            var afterDoWhile = (SimpleBlock) blocks[7];
-            var exit = (ExitBlock) blocks.Last();
+            var doBeforeTry = (SimpleBlock)blocks[0];
+            var tryStatement = (BranchBlock)blocks[1];
+            var tryBody = (BranchBlock)blocks[2];
+            var catchBody = (JumpBlock)blocks[3];
+            var finallyBlock = (BranchBlock)blocks[4];
+            var afterTry = (SimpleBlock)blocks[5];
+            var whileStmt = (BinaryBranchBlock)blocks[6];
+            var afterDoWhile = (SimpleBlock)blocks[7];
+            var exit = (ExitBlock)blocks.Last();
 
             VerifyAllInstructions(doBeforeTry, "cw0", "cw0()");
             doBeforeTry.SuccessorBlocks.Should().OnlyContainInOrder(tryStatement);
@@ -2933,20 +3300,20 @@ namespace NS
 
             var blocks = cfg.Blocks.ToList();
 
-            var beforeDoBlock = (SimpleBlock) blocks[0];
-            var insideDoBeforeTry = (SimpleBlock) blocks[1];
-            var insideTry = (BranchBlock) blocks[2];
+            var beforeDoBlock = (SimpleBlock)blocks[0];
+            var insideDoBeforeTry = (SimpleBlock)blocks[1];
+            var insideTry = (BranchBlock)blocks[2];
 
             // this block is initially created for the `insideTry`,
             // and it gets replaced when seeing the `break;`
-            var temporaryStrayBlock = (BranchBlock) blocks[3];
+            var temporaryStrayBlock = (BranchBlock)blocks[3];
 
-            var catchBodyWithIf = (BinaryBranchBlock) blocks[4];
-            var insideIfInsideCatch = (JumpBlock) blocks[5];
-            var afterIfInsideCatch = (SimpleBlock) blocks[6];
-            var whileStmt = (BinaryBranchBlock) blocks[7];
-            var afterDoWhile = (SimpleBlock) blocks[8];
-            var exit = (ExitBlock) blocks.Last();
+            var catchBodyWithIf = (BinaryBranchBlock)blocks[4];
+            var insideIfInsideCatch = (JumpBlock)blocks[5];
+            var afterIfInsideCatch = (SimpleBlock)blocks[6];
+            var whileStmt = (BinaryBranchBlock)blocks[7];
+            var afterDoWhile = (SimpleBlock)blocks[8];
+            var exit = (ExitBlock)blocks.Last();
 
             VerifyAllInstructions(beforeDoBlock, "0", "attempts = 0");
             beforeDoBlock.SuccessorBlocks.Should().OnlyContain(insideDoBeforeTry);
@@ -3005,15 +3372,15 @@ namespace NS
 
             var blocks = cfg.Blocks.ToList();
 
-            var beforeDoBlock = (SimpleBlock) blocks[0];
-            var insideDoBeforeTry = (SimpleBlock) blocks[1];
-            var insideTryIfStatement = (BinaryBranchBlock) blocks[2];
-            var insideIf = (SimpleBlock) blocks[3];
-            var finallyBifurcation = (BranchBlock) blocks[4];
-            var finallyBlock = (BranchBlock) blocks[5];
-            var whileStmt = (BinaryBranchBlock) blocks[6];
-            var afterDoWhile = (SimpleBlock) blocks[7];
-            var exit = (ExitBlock) blocks.Last();
+            var beforeDoBlock = (SimpleBlock)blocks[0];
+            var insideDoBeforeTry = (SimpleBlock)blocks[1];
+            var insideTryIfStatement = (BinaryBranchBlock)blocks[2];
+            var insideIf = (SimpleBlock)blocks[3];
+            var finallyBifurcation = (BranchBlock)blocks[4];
+            var finallyBlock = (BranchBlock)blocks[5];
+            var whileStmt = (BinaryBranchBlock)blocks[6];
+            var afterDoWhile = (SimpleBlock)blocks[7];
+            var exit = (ExitBlock)blocks.Last();
 
             VerifyAllInstructions(beforeDoBlock, "0", "attempts = 0");
             beforeDoBlock.SuccessorBlocks.Should().OnlyContain(insideDoBeforeTry);
@@ -3038,8 +3405,6 @@ namespace NS
 
             exit.Should().BeOfType<ExitBlock>();
         }
-
-
 
         [TestMethod]
         [TestCategory("CFG")]
@@ -3148,10 +3513,10 @@ namespace NS
             var blocks = cfg.Blocks.ToList();
 
             var beforeOuterTry = (SimpleBlock)blocks[0];
-            var tryStatementBlock = (BranchBlock) blocks[1];
-            var tryReturn = (JumpBlock) blocks[2];
-            var catchReturn = (JumpBlock) blocks[3];
-            var afterTry = (SimpleBlock) blocks[4];
+            var tryStatementBlock = (BranchBlock)blocks[1];
+            var tryReturn = (JumpBlock)blocks[2];
+            var catchReturn = (JumpBlock)blocks[3];
+            var afterTry = (SimpleBlock)blocks[4];
             var exit = blocks[5];
 
             VerifyAllInstructions(beforeOuterTry, "5", "number = 5");
@@ -3195,12 +3560,12 @@ namespace NS
             var blocks = cfg.Blocks.ToList();
 
             var beforeOuterTry = (SimpleBlock)blocks[0];
-            var tryStatementBlock = (BranchBlock) blocks[1];
-            var tryReturn = (JumpBlock) blocks[2];
-            var ifInsideCatch = (BinaryBranchBlock) blocks[3];
-            var returnInCatch = (JumpBlock) blocks[4];
-            var afterTry = (SimpleBlock) blocks[5];
-            var exit = (ExitBlock) blocks[6];
+            var tryStatementBlock = (BranchBlock)blocks[1];
+            var tryReturn = (JumpBlock)blocks[2];
+            var ifInsideCatch = (BinaryBranchBlock)blocks[3];
+            var returnInCatch = (JumpBlock)blocks[4];
+            var afterTry = (SimpleBlock)blocks[5];
+            var exit = (ExitBlock)blocks[6];
 
             VerifyAllInstructions(beforeOuterTry, "5", "number = 5");
             beforeOuterTry.SuccessorBlocks.Should().OnlyContain(tryStatementBlock);
@@ -3248,14 +3613,14 @@ namespace NS
             var blocks = cfg.Blocks.ToList();
 
             var beforeOuterTry = (SimpleBlock)blocks[0];
-            var firstIf = (BinaryBranchBlock) blocks[1];
-            var firstIfReturn = (JumpBlock) blocks[2];
-            var secondIf = (BinaryBranchBlock) blocks[3];
-            var secondIfReturn = (JumpBlock) blocks[4];
-            var tryStatementBranch = (BranchBlock) blocks[5];
-            var insideCatch = (SimpleBlock) blocks[6];
-            var afterTry = (SimpleBlock) blocks[7];
-            var exit = (ExitBlock) blocks[8];
+            var firstIf = (BinaryBranchBlock)blocks[1];
+            var firstIfReturn = (JumpBlock)blocks[2];
+            var secondIf = (BinaryBranchBlock)blocks[3];
+            var secondIfReturn = (JumpBlock)blocks[4];
+            var tryStatementBranch = (BranchBlock)blocks[5];
+            var insideCatch = (SimpleBlock)blocks[6];
+            var afterTry = (SimpleBlock)blocks[7];
+            var exit = (ExitBlock)blocks[8];
 
             beforeOuterTry.SuccessorBlocks.Should().OnlyContain(firstIf);
 
@@ -3326,7 +3691,6 @@ namespace NS
             branchDefault.FalseSuccessorBlock.Should().Be(defaultCaseJump);
 
             defaultCaseJump.SuccessorBlocks.Should().OnlyContain(cw3);
-
 
             cw1.SuccessorBlocks.Should().OnlyContain(cw3);
             cw2.SuccessorBlocks.Should().OnlyContain(cw3);
@@ -3415,7 +3779,6 @@ namespace NS
             branchCase2.TrueSuccessorBlock.Should().Be(case1Jump);
             branchCase2.FalseSuccessorBlock.Should().Be(branchCase3);
 
-
             branchCase3.TrueSuccessorBlock.Should().Be(defaultCaseJump);
             branchCase3.FalseSuccessorBlock.Should().Be(branchDefault);
 
@@ -3503,7 +3866,6 @@ namespace NS
 
             branchCase2.TrueSuccessorBlock.Should().Be(case1Jump);
             branchCase2.FalseSuccessorBlock.Should().Be(branchCase3);
-
 
             branchCase3.TrueSuccessorBlock.Should().Be(defaultCaseJump);
             branchCase3.FalseSuccessorBlock.Should().Be(branchDefault);
@@ -3674,6 +4036,207 @@ namespace NS
 
             afterSwitchBlock.SuccessorBlock.Should().Be(exitBlock);
             VerifyAllInstructions(afterSwitchBlock, "cw2", "cw2()");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_SwitchExpression_Return()
+        {
+            var cfg = Build(@"
+var type = ""test"";
+return type switch
+{
+    ""a"" => 1,
+    ""b"" => 2,
+    _ => 3
+};");
+            VerifyCfg(cfg, 8);
+
+            // The generated CFG is very similar to the one generated for the following conditional expression:
+            // return type == "a" ? 1 : (type == "b" ? 2 : 3);
+
+            var aArm = (BinaryBranchBlock)cfg.Blocks.ElementAt(0);
+            var aTrue = (SimpleBlock)cfg.Blocks.ElementAt(1);
+            var bArm = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
+            var bTrue = (SimpleBlock)cfg.Blocks.ElementAt(3);
+            var discardArm = (SimpleBlock)cfg.Blocks.ElementAt(4);
+            var discardBody = (SimpleBlock)cfg.Blocks.ElementAt(5);
+            var returnStatement = (JumpBlock)cfg.Blocks.ElementAt(6);
+            var exitBlock = cfg.ExitBlock;
+
+            aArm.TrueSuccessorBlock.Should().Be(aTrue);
+            aArm.FalseSuccessorBlock.Should().Be(bArm);
+            VerifyAllInstructions(aArm, "\"test\"", "type = \"test\"", "type", "\"a\"");
+
+            aTrue.SuccessorBlock.Should().Be(returnStatement);
+            VerifyAllInstructions(aTrue, "1");
+
+            bArm.TrueSuccessorBlock.Should().Be(bTrue);
+            bArm.FalseSuccessorBlock.Should().Be(discardArm);
+            VerifyAllInstructions(bArm, "\"b\"");
+
+            bTrue.SuccessorBlock.Should().Be(returnStatement);
+            VerifyAllInstructions(bTrue, "2");
+
+            discardArm.SuccessorBlock.Should().Be(discardBody);
+            VerifyAllInstructions(discardArm, "_");
+
+            discardBody.SuccessorBlock.Should().Be(returnStatement);
+            VerifyAllInstructions(discardBody, "3");
+
+            returnStatement.SuccessorBlock.Should().Be(exitBlock);
+            VerifyNoInstruction(returnStatement);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_SwitchExpression_Assignment()
+        {
+            var cfg = Build(@"var type = ""test""; var result = type switch {""a"" => 1, ""b"" => 2, _ => 3};");
+            VerifyCfg(cfg, 8);
+
+            var aArm = (BinaryBranchBlock)cfg.Blocks.ElementAt(0);
+            var aTrue = (SimpleBlock)cfg.Blocks.ElementAt(1);
+            var bArm = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
+            var bTrue = (SimpleBlock)cfg.Blocks.ElementAt(3);
+            var discardArm = (SimpleBlock)cfg.Blocks.ElementAt(4);
+            var discardBody = (SimpleBlock)cfg.Blocks.ElementAt(5);
+            var assignment = (SimpleBlock)cfg.Blocks.ElementAt(6);
+            var exitBlock = cfg.ExitBlock;
+
+            aArm.TrueSuccessorBlock.Should().Be(aTrue);
+            aArm.FalseSuccessorBlock.Should().Be(bArm);
+            VerifyAllInstructions(aArm, "\"test\"", "type = \"test\"", "type", "\"a\"");
+
+            aTrue.SuccessorBlock.Should().Be(assignment);
+            VerifyAllInstructions(aTrue, "1");
+
+            bArm.TrueSuccessorBlock.Should().Be(bTrue);
+            bArm.FalseSuccessorBlock.Should().Be(discardArm);
+            VerifyAllInstructions(bArm, "\"b\"");
+
+            bTrue.SuccessorBlock.Should().Be(assignment);
+            VerifyAllInstructions(bTrue, "2");
+
+            discardArm.SuccessorBlock.Should().Be(discardBody);
+            VerifyAllInstructions(discardArm, "_");
+
+            discardBody.SuccessorBlock.Should().Be(assignment);
+            VerifyAllInstructions(discardBody, "3");
+
+            assignment.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(assignment, @"result = type switch {""a"" => 1, ""b"" => 2, _ => 3}");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_SwitchExpression_InnerSwitch()
+        {
+            var cfg = Build(@"
+string first = ""foo"", second = ""bar"";
+var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" => 3, _ => 4};");
+
+            VerifyCfg(cfg, 11);
+
+            var aArm = (BinaryBranchBlock)cfg.Blocks.ElementAt(0);
+            var xArm = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
+            var xTrue = (SimpleBlock)cfg.Blocks.ElementAt(2);
+            var secondSwitchDiscardArm = (SimpleBlock)cfg.Blocks.ElementAt(3);
+            var secondSwitchDiscardArmBody = (SimpleBlock)cfg.Blocks.ElementAt(4);
+            var bArm = (BinaryBranchBlock)cfg.Blocks.ElementAt(5);
+            var bTrue = (SimpleBlock)cfg.Blocks.ElementAt(6);
+            var firstSwitchDiscard = (SimpleBlock)cfg.Blocks.ElementAt(7);
+            var firstSwitchDiscardBody = (SimpleBlock)cfg.Blocks.ElementAt(8);
+            var assignment = (SimpleBlock)cfg.Blocks.ElementAt(9);
+            var exitBlock = cfg.ExitBlock;
+
+            aArm.TrueSuccessorBlock.Should().Be(xArm);
+            aArm.FalseSuccessorBlock.Should().Be(bArm);
+            VerifyAllInstructions(aArm, "\"foo\"", "first = \"foo\"", "\"bar\"", "second = \"bar\"", "first", "\"a\"");
+
+            xArm.TrueSuccessorBlock.Should().Be(xTrue);
+            xArm.FalseSuccessorBlock.Should().Be(secondSwitchDiscardArm);
+            VerifyAllInstructions(xArm, "second", "\"x\"");
+
+            xTrue.SuccessorBlock.Should().Be(assignment);
+            VerifyAllInstructions(xTrue, "1");
+
+            secondSwitchDiscardArm.SuccessorBlock.Should().Be(secondSwitchDiscardArmBody);
+            VerifyAllInstructions(secondSwitchDiscardArm, "_");
+
+            secondSwitchDiscardArmBody.SuccessorBlock.Should().Be(assignment);
+            VerifyAllInstructions(secondSwitchDiscardArmBody, "2");
+
+            bArm.TrueSuccessorBlock.Should().Be(bTrue);
+            bArm.FalseSuccessorBlock.Should().Be(firstSwitchDiscard);
+            VerifyAllInstructions(bArm, "\"b\"");
+
+            bTrue.SuccessorBlock.Should().Be(assignment);
+            VerifyAllInstructions(bTrue, "3");
+
+            firstSwitchDiscard.SuccessorBlock.Should().Be(firstSwitchDiscardBody);
+            VerifyAllInstructions(firstSwitchDiscard, "_");
+
+            firstSwitchDiscardBody.SuccessorBlock.Should().Be(assignment);
+            VerifyAllInstructions(firstSwitchDiscardBody, "4");
+
+            assignment.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(assignment, @"result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" => 3, _ => 4}");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_SwitchExpression_WhenClause()
+        {
+            var cfg = Build(@"string first = ""foo"", second = ""bar""; var result = first switch {""a"" when second == ""bar"" => 1, ""a"" => 2, ""b"" => 3, _ => 4};");
+
+            VerifyCfg(cfg, 11);
+
+            var aWithWhenClauseArm = (BinaryBranchBlock)cfg.EntryBlock;
+            var whenClause = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
+            var aWithWhenClauseArmTrue = (SimpleBlock)cfg.Blocks.ElementAt(2);
+            var aArm = (BinaryBranchBlock)cfg.Blocks.ElementAt(3);
+            var aTrue = (SimpleBlock)cfg.Blocks.ElementAt(4);
+            var bArm = (BinaryBranchBlock)cfg.Blocks.ElementAt(5);
+            var bTrue = (SimpleBlock)cfg.Blocks.ElementAt(6);
+            var discardArm = (SimpleBlock)cfg.Blocks.ElementAt(7);
+            var discardArmBody = (SimpleBlock)cfg.Blocks.ElementAt(8);
+            var assignment = (SimpleBlock)cfg.Blocks.ElementAt(9);
+            var exitBlock = cfg.ExitBlock;
+
+            aWithWhenClauseArm.TrueSuccessorBlock.Should().Be(whenClause);
+            aWithWhenClauseArm.FalseSuccessorBlock.Should().Be(aArm);
+            VerifyAllInstructions(aWithWhenClauseArm, "\"foo\"", "first = \"foo\"", "\"bar\"", "second = \"bar\"", "first", "\"a\"");
+
+            whenClause.TrueSuccessorBlock.Should().Be(aWithWhenClauseArmTrue);
+            whenClause.FalseSuccessorBlock.Should().Be(aArm);
+            VerifyAllInstructions(whenClause, "second", "\"bar\"", "second == \"bar\"");
+
+            aWithWhenClauseArmTrue.SuccessorBlock.Should().Be(assignment);
+            VerifyAllInstructions(aWithWhenClauseArmTrue, "1");
+
+            aArm.TrueSuccessorBlock.Should().Be(aTrue);
+            aArm.FalseSuccessorBlock.Should().Be(bArm);
+            VerifyAllInstructions(aArm, "\"a\"");
+
+            aTrue.SuccessorBlock.Should().Be(assignment);
+            VerifyAllInstructions(aTrue, "2");
+
+            bArm.TrueSuccessorBlock.Should().Be(bTrue);
+            bArm.FalseSuccessorBlock.Should().Be(discardArm);
+            VerifyAllInstructions(bArm, "\"b\"");
+
+            bTrue.SuccessorBlock.Should().Be(assignment);
+            VerifyAllInstructions(bTrue, "3");
+
+            discardArm.SuccessorBlock.Should().Be(discardArmBody);
+            VerifyAllInstructions(discardArm, "_");
+
+            discardArmBody.SuccessorBlock.Should().Be(assignment);
+            VerifyAllInstructions(discardArmBody, "4");
+
+            assignment.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(assignment, @"result = first switch {""a"" when second == ""bar"" => 1, ""a"" => 2, ""b"" => 3, _ => 4}");
         }
 
         [TestMethod]
@@ -3889,6 +4452,7 @@ switch(o) // switchBlock
       throw new InvalidOperationException(""""); // falseBranchBlock
     }
     break;
+
    default: // defaultThrowBlock
       throw new InvalidOperationException(""a"");
 }
@@ -3973,6 +4537,7 @@ switch (index)
 {
     default:
         break;
+
     case 0 when ex is InvalidOperationException:
         ex = null;
         break;
@@ -4294,10 +4859,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
             VerifyInstructions(cfg.EntryBlock, 2, "x", "__makeref(x)", "__refvalue(__makeref(x), int)");
             VerifyInstructions(cfg.EntryBlock, 6, "x", "__makeref(x)", "__reftype(__makeref(x))");
 
-            cfg = Build("var x = stackalloc int[10];");
-            VerifyMinimalCfg(cfg);
-            VerifyInstructions(cfg.EntryBlock, 0, "10", "int[10]", "stackalloc int[10]");
-
             cfg = Build("var x = new Action(()=>{}); var y = new Action(i=>{}); var z = new Action(delegate(){});");
             VerifyMinimalCfg(cfg);
             VerifyInstructions(cfg.EntryBlock, 0, "()=>{}", "new Action(()=>{})");
@@ -4309,6 +4870,33 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
             cfg = Build("string.Format(\"\")");
             VerifyMinimalCfg(cfg);
             VerifyAllInstructions(cfg.EntryBlock, "string", "string.Format", "\"\"", "string.Format(\"\")");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Stackalloc()
+        {
+            var cfg = Build("var x = stackalloc int[10];");
+            VerifyMinimalCfg(cfg);
+            VerifyInstructions(cfg.EntryBlock, 0, "10", "int[10]", "stackalloc int[10]");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Stackalloc_Initializer()
+        {
+            var cfg = Build("var x = stackalloc int[2] { 10, 20 };");
+            VerifyMinimalCfg(cfg);
+            VerifyInstructions(cfg.EntryBlock, 0, "2", "int[2]", "10", "20", "{ 10, 20 }", "stackalloc int[2] { 10, 20 }");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Stackalloc_Implicit()
+        {
+            var cfg = Build("var x = stackalloc [] {100, 200, 300};");
+            VerifyMinimalCfg(cfg);
+            VerifyInstructions(cfg.EntryBlock, 0, "100", "200", "300", "{100, 200, 300}", "stackalloc [] {100, 200, 300}");
         }
 
         [TestMethod]
@@ -4326,9 +4914,212 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
 
         #endregion
 
+        #region Method invocation
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Ref_Arg_Should_Be_Last_Instruction()
+        {
+            var cfg = Build(@"Bye(ref x0, x1, x2, x3, ref x4);}");
+            VerifyCfg(cfg, 2);
+            var instructionsBlock = (SimpleBlock)cfg.Blocks.ElementAt(0);
+            VerifyAllInstructions(instructionsBlock, "Bye", "x1", "x2", "x3", "x0", "x4", "Bye(ref x0, x1, x2, x3, ref x4)");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Ref_Arg_Should_Be_Last_Instruction_WithMethodCallOnObject()
+        {
+            var cfg = Build(@"Bye.Hi(ref x0, x1, x2, x3, ref x4);}");
+            VerifyCfg(cfg, 2);
+            var instructionsBlock = (SimpleBlock)cfg.Blocks.ElementAt(0);
+            VerifyAllInstructions(instructionsBlock, "Bye", "Bye.Hi", "x1", "x2", "x3", "x0", "x4", "Bye.Hi(ref x0, x1, x2, x3, ref x4)");
+        }
+
+        #endregion
+
+        #region Property Pattern Clause
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_PropertyPatternClause_Simple()
+        {
+            var cfg = Build(@"var x = address is Address { State: ""WA"" };");
+
+            VerifyCfg(cfg, 2);
+
+            var entryBlock = (SimpleBlock)cfg.EntryBlock;
+            var exitBlock = cfg.ExitBlock;
+
+            entryBlock.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(entryBlock,
+                "address",
+                "Address { State: \"WA\" }", // RecursivePattern
+                "\"WA\"", // Constant Pattern
+                "address is Address { State: \"WA\" }", // IsPatternExpression
+                "x = address is Address { State: \"WA\" }"); // VariableDeclaration
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_PropertyPatternClause_MultipleProperties()
+        {
+            var cfg = Build(@"var x = address is { State: ""WA"", Street: ""Rue"" };");
+
+            VerifyCfg(cfg, 2);
+
+            var entryBlock = (SimpleBlock)cfg.EntryBlock;
+            var exitBlock = cfg.ExitBlock;
+
+            entryBlock.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(entryBlock,
+                "address",
+                "{ State: \"WA\", Street: \"Rue\" }", // Recursive Pattern
+                "\"Rue\"", // Constant Pattern
+                "\"WA\"", // Constant Pattern
+                "address is { State: \"WA\", Street: \"Rue\" }", // IsPatternExpression
+                "x = address is { State: \"WA\", Street: \"Rue\" }"); // VariableDeclaration
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_PropertyPatternClause_WithSingleVariableDesignation()
+        {
+            var cfg = Build(@"var x = address is Address { State: ""WA"" } addr;");
+
+            VerifyCfg(cfg, 2);
+
+            var entryBlock = (SimpleBlock)cfg.EntryBlock;
+            var exitBlock = cfg.ExitBlock;
+
+            entryBlock.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(entryBlock,
+                "address",
+                "Address { State: \"WA\" } addr", // Recursive Pattern
+                "\"WA\"", // Constant Pattern
+                "address is Address { State: \"WA\" } addr", // IsPatternExpression
+                "x = address is Address { State: \"WA\" } addr"); // VariableDeclaration
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_PropertyPatternClause_InsideIf()
+        {
+            var cfg = Build(@"if (address is Address { State: ""WA"" }) { return true; }");
+
+            VerifyCfg(cfg, 3);
+
+            var entryBlock = (BinaryBranchBlock)cfg.EntryBlock;
+            var trueBlock = (JumpBlock)cfg.Blocks.ElementAt(1);
+            var exitBlock = cfg.ExitBlock;
+
+            entryBlock.TrueSuccessorBlock.Should().Be(trueBlock);
+            entryBlock.FalseSuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(entryBlock,
+                "address",
+                "Address { State: \"WA\" }", // Recursive Pattern
+                "\"WA\"", // Constant Pattern
+                "address is Address { State: \"WA\" }"); // IsPatternExpression
+
+            trueBlock.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(trueBlock, "true");
+
+            VerifyNoInstruction(exitBlock);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_PropertyPatternClause_InsideIf_WithSingleVariableDesignation()
+        {
+            var cfg = Build(@"if (address is Address { State: ""WA"" } addr) { return true; }");
+
+            VerifyCfg(cfg, 3);
+
+            var entryBlock = (BinaryBranchBlock)cfg.EntryBlock;
+            var trueBlock = (JumpBlock)cfg.Blocks.ElementAt(1);
+            var exitBlock = cfg.ExitBlock;
+
+            entryBlock.TrueSuccessorBlock.Should().Be(trueBlock);
+            entryBlock.FalseSuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(entryBlock,
+                "address",
+                "Address { State: \"WA\" } addr", // Recursive Pattern
+                "\"WA\"", // Constant Pattern
+                "address is Address { State: \"WA\" } addr"); // IsPatternExpression
+
+            trueBlock.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(trueBlock, "true");
+
+            VerifyNoInstruction(exitBlock);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_PropertyPatternClause_InsideSwitch()
+        {
+            var cfg = Build(@"location switch { { State: ""WA"" } adr => salePrice * 0.06M, { State: ""MN"" } => salePrice * 0.75M, _ => 0M };");
+
+            VerifyCfg(cfg, 7);
+
+            var waArmBranch = (BinaryBranchBlock)cfg.EntryBlock;
+            var waArmTrueBranch = (SimpleBlock)cfg.Blocks.ElementAt(1);
+            var mnArmBranch = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
+            var mnArmTrueBranch = (SimpleBlock)cfg.Blocks.ElementAt(3);
+            var discardArm = (SimpleBlock)cfg.Blocks.ElementAt(4);
+            var discardArmBody = (SimpleBlock)cfg.Blocks.ElementAt(5);
+            var exitBlock = cfg.ExitBlock;
+
+            waArmBranch.TrueSuccessorBlock.Should().Be(waArmTrueBranch);
+            waArmBranch.FalseSuccessorBlock.Should().Be(mnArmBranch);
+            VerifyAllInstructions(waArmBranch, "location", "{ State: \"WA\" } adr" /* RecursivePattern */, "\"WA\"" /* ConstantPattern */);
+
+            waArmTrueBranch.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(waArmTrueBranch, "salePrice", "0.06M", "salePrice * 0.06M");
+
+            mnArmBranch.TrueSuccessorBlock.Should().Be(mnArmTrueBranch);
+            mnArmBranch.FalseSuccessorBlock.Should().Be(discardArm);
+            VerifyAllInstructions(mnArmBranch, "{ State: \"MN\" }" /* RecursivePattern */, "\"MN\"" /* ConstantPattern */);
+
+            mnArmTrueBranch.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(mnArmTrueBranch, "salePrice", "0.75M", "salePrice * 0.75M");
+
+            discardArm.SuccessorBlock.Should().Be(discardArmBody);
+            VerifyAllInstructions(discardArm, "_" /* DiscardPattern */);
+
+            discardArmBody.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(discardArmBody, "0M");
+
+            VerifyNoInstruction(exitBlock);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_PropertyPatternClause_Nested()
+        {
+            var cfg = Build(@"var result = o is Person { Name: ""John Doe"", Address: { State: ""WA"" } };");
+
+            VerifyCfg(cfg, 2);
+
+            var entryBlock = (SimpleBlock)cfg.EntryBlock;
+            var exitBlock = cfg.ExitBlock;
+
+            entryBlock.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(entryBlock,
+                "o",
+                "Person { Name: \"John Doe\", Address: { State: \"WA\" } }", // RecursivePattern
+                "{ State: \"WA\" }", // RecursivePattern
+                "\"WA\"", // Constant Pattern
+                "\"John Doe\"", // Constant Pattern
+                "o is Person { Name: \"John Doe\", Address: { State: \"WA\" } }", // IsPatternExpression
+                "result = o is Person { Name: \"John Doe\", Address: { State: \"WA\" } }"); // VariableDeclaration
+        }
+
+        #endregion
+
         #region Helpers to build the CFG for the tests
 
         internal const string TestInput = @"
+using System;
 namespace NS
 {{
   public class Foo
@@ -4343,49 +5134,29 @@ namespace NS
         internal static MethodDeclarationSyntax CompileWithMethodBody(string input, string methodName,
             out SemanticModel semanticModel, ParseOptions parseOptions = null)
         {
-            parseOptions = parseOptions ?? new CSharpParseOptions(LanguageVersion.CSharp7);
-
-            using (var workspace = new AdhocWorkspace())
-            {
-                var document = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                    .AddMetadataReferences(FrameworkMetadataReference.Mscorlib)
-                    .AddMetadataReferences(FrameworkMetadataReference.System)
-                    .AddMetadataReferences(FrameworkMetadataReference.SystemCore)
-                    .AddDocument("test", input);
-                var compilation = document.Project
-                    .WithParseOptions(parseOptions)
-                    .GetCompilationAsync().Result;
-                var tree = compilation.SyntaxTrees.First();
-
-                semanticModel = compilation.GetSemanticModel(tree);
-
-                return tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>()
-                    .First(m => m.Identifier.ValueText == methodName);
-            }
+            MethodDeclarationSyntax methodDeclaration;
+            (methodDeclaration, semanticModel) = TestHelper.Compile(input).GetMethod(methodName);
+            return methodDeclaration;
         }
 
-        internal static SyntaxTree Compile(string input, out SemanticModel semanticModel)
+        internal static ConstructorDeclarationSyntax CompileWithConstructorBody(string input, string methodName,
+            out SemanticModel semanticModel, ParseOptions parseOptions = null)
         {
-            using (var workspace = new AdhocWorkspace())
-            {
-                var document = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                    .AddMetadataReferences(FrameworkMetadataReference.Mscorlib)
-                    .AddMetadataReferences(FrameworkMetadataReference.System)
-                    .AddMetadataReferences(FrameworkMetadataReference.SystemCore)
-                    .AddDocument("test", input);
-                var compilation = document.Project.GetCompilationAsync().Result;
-                var tree = compilation.SyntaxTrees.First();
-
-                semanticModel = compilation.GetSemanticModel(tree);
-
-                return tree;
-            }
+            ConstructorDeclarationSyntax ctorDeclaration;
+            (ctorDeclaration, semanticModel) = TestHelper.Compile(input).GetConstructor(methodName);
+            return ctorDeclaration;
         }
 
         private static IControlFlowGraph Build(string methodBody)
         {
             var method = CompileWithMethodBody(string.Format(TestInput, methodBody), "Bar", out var semanticModel);
-            return CSharpControlFlowGraph.Create(method.Body, semanticModel);
+            var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
+
+            // when debugging the CFG, it is useful to visualize the CFG
+            var dot = CfgSerializer.Serialize("CFG diagnostics", cfg);
+            System.Diagnostics.Debug.WriteLine(dot);
+
+            return cfg;
         }
 
         #endregion
@@ -4394,7 +5165,7 @@ namespace NS
 
         private void VerifyInstructions(Block block, int fromIndex, params string[] instructions)
         {
-            block.Instructions.Should().HaveCountGreaterOrEqualTo(fromIndex + instructions.Length);
+            block.Instructions.Count.Should().BeGreaterOrEqualTo(fromIndex + instructions.Length);
             for (var i = 0; i < instructions.Length; i++)
             {
                 block.Instructions[fromIndex + i].ToString().Should().Be(instructions[i]);
@@ -4450,30 +5221,6 @@ namespace NS
 
             cfg.ExitBlock.SuccessorBlocks.Should().BeEmpty();
             cfg.ExitBlock.Instructions.Should().BeEmpty();
-        }
-
-        #endregion
-
-        #region Method invocation
-
-        [TestMethod]
-        [TestCategory("CFG")]
-        public void Cfg_Ref_Arg_Should_Be_Last_Instruction()
-        {
-            var cfg = Build(@"Bye(ref x0, x1, x2, x3, ref x4);}");
-            VerifyCfg(cfg, 2);
-            var instructionsBlock = (SimpleBlock)cfg.Blocks.ElementAt(0);
-            VerifyAllInstructions(instructionsBlock, "Bye", "x1", "x2", "x3", "x0", "x4", "Bye(ref x0, x1, x2, x3, ref x4)");
-        }
-
-        [TestMethod]
-        [TestCategory("CFG")]
-        public void Cfg_Ref_Arg_Should_Be_Last_Instruction_WithMethodCallOnObject()
-        {
-            var cfg = Build(@"Bye.Hi(ref x0, x1, x2, x3, ref x4);}");
-            VerifyCfg(cfg, 2);
-            var instructionsBlock = (SimpleBlock)cfg.Blocks.ElementAt(0);
-            VerifyAllInstructions(instructionsBlock, "Bye", "Bye.Hi", "x1", "x2", "x3", "x0", "x4", "Bye.Hi(ref x0, x1, x2, x3, ref x4)");
         }
 
         #endregion
