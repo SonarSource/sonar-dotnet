@@ -38,4 +38,18 @@ namespace Tests.Diagnostics
         {
         }
     }
+
+    public interface IFirst
+    {
+        public virtual void Method(int[] numbers)
+        {
+        }
+    }
+
+    public class Second : IFirst
+    {
+        public void Method(params int[] numbers) // Compliant - The default interface method can be accessed only after cast.
+        {
+        }
+    }
 }
