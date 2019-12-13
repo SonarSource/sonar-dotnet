@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3949",
+"message":  "There is a path on which this operation always overflows",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\IntentionalFindings\S3949.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  9,
+"endLine":  5,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3949",
+"message":  "There is a path on which this operation always overflows",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\IntentionalFindings\S3949.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  9,
+"endLine":  9,
+"endColumn":  10
+}
+}
+}
+]
+}
