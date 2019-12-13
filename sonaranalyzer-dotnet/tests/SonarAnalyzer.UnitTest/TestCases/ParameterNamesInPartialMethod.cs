@@ -75,4 +75,22 @@ namespace Tests.Diagnostics
             return 0;
         }
     }
+
+    public partial interface IParameterNamesInPartialMethods
+    {
+        partial void DoSomething(int x, int y);
+        partial void DoSomething2(int x, int y);
+    }
+
+    public partial interface IParameterNamesInPartialMethods
+    {
+        partial void DoSomething(int x, int y)
+        {
+        }
+
+        partial void DoSomething2(int someParam, int y) //Noncompliant {{Rename parameter 'someParam' to 'x' to match the partial class declaration.}}
+//                                    ^^^^^^^^^
+        {
+        }
+    }
 }

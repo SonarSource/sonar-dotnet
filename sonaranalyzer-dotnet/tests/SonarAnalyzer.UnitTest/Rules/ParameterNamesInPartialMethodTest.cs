@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +32,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ParameterNamesInPartialMethod()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ParameterNamesInPartialMethod.cs", new ParameterNamesInPartialMethod());
+            Verifier.VerifyAnalyzer(@"TestCases\ParameterNamesInPartialMethod.cs",
+                new ParameterNamesInPartialMethod(),
+                options: ParseOptionsHelper.FromCSharp8,
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
     }
 }
