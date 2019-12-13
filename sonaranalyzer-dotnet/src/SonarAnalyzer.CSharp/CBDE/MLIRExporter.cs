@@ -15,7 +15,7 @@ using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer
 {
-    public static class SyntaxNodeExtension
+    internal static class SyntaxNodeExtension
     {
         public static string Dump(this SyntaxNode node)
         {
@@ -141,7 +141,7 @@ namespace SonarAnalyzer
 
         private void ExportBlock(Block block, MethodDeclarationSyntax parentMethod, string functionReturnType)
         {
-            writer.WriteLine($"^{BlockId(block)}: // {block.GetType().Name}"); // TODO: Block arguments...
+            writer.WriteLine($"^{BlockId(block)}: // {block.GetType().Name}");
             // MLIR encodes blocks relationships in operations, not in blocks themselves
             foreach(var op in block.Instructions)
             {
@@ -192,6 +192,13 @@ namespace SonarAnalyzer
                     }
                     break;
                 case BinaryBranchBlock bbb:
+                    /*
+                     * Currently, we do exactly the same for all cases that may have created a BinaryBranchBlock
+                     * (this block can be created for ConditionalExpression, IfStatement, ForEachStatement, 
+                     * CoalesceExpression, ConditionalAccessExpression, LogicalAndExpression, LogicalOrExpression, 
+                     * ForStatement and CatchFilterClause) maybe later, we'll do something different depending on
+                     * the control structure
+                     */
                     var cond = GetCondition(bbb);
                     if (null == cond)
                     {
@@ -203,33 +210,6 @@ namespace SonarAnalyzer
                         var id = EnforceBoolOpId(cond as ExpressionSyntax);
                         writer.WriteLine($"cond_br %{id}, ^{BlockId(bbb.TrueSuccessorBlock)}, ^{BlockId(bbb.FalseSuccessorBlock)} {GetLocation(cond)}");
                     }
-                    /*
-                     * Up to now, we do exactly the same for all cases that may have created a BinaryBranchBlock
-                     * maybe later, depending on the reason (if vs for?) we'll do something different
-                     *
-                    var condStatement = bbb.BranchingNode.Parent;
-                    switch (condStatement.Kind())
-                    {
-                        case SyntaxKind.ConditionalExpression: // a ? b : c
-                            var cond = condStatement as ConditionalExpressionSyntax;
-                            writer.WriteLine($"cond_br %{OpId(cond.Condition)}, ^{BlockId(bbb.TrueSuccessorBlock)}, ^{BlockId(bbb.FalseSuccessorBlock)}");
-                            break;
-                        case SyntaxKind.IfStatement:
-                            var ifCond = condStatement as IfStatementSyntax;
-                            writer.WriteLine($"cond_br %{OpId(ifCond.Condition)}, ^{BlockId(bbb.TrueSuccessorBlock)}, ^{BlockId(bbb.FalseSuccessorBlock)}");
-                            break;
-                        case SyntaxKind.ForEachStatement:
-                        case SyntaxKind.CoalesceExpression:
-                        case SyntaxKind.ConditionalAccessExpression:
-                        case SyntaxKind.LogicalAndExpression:
-                        case SyntaxKind.LogicalOrExpression:
-                        case SyntaxKind.ForStatement:
-                        case SyntaxKind.CatchFilterClause:
-                        default:
-                            writer.WriteLine($"// Unhandled branch {bbb.BranchingNode.Kind().ToString()}");
-                            break;
-
-                    }*/
                     break;
                 case SimpleBlock sb:
                     writer.WriteLine($"br ^{BlockId(sb.SuccessorBlock)}");
