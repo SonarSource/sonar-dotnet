@@ -35,6 +35,14 @@ The following environment variables must be set:
     - %M2_HOME%\bin
     - the path to the Scanner For MSBuild folder and to the Scanner CLI
 
+## NuGet lock files update
+
+NuGet lock file restore was enabled for all .Net projects in order to be able to use the Cache task on Azure pipeplines.
+
+More details here: https://docs.microsoft.com/en-us/azure/devops/pipelines/caching/?view=azure-devops#netnuget
+
+These files need to be updated on every dependency change by running: `dotnet restore --force-evaluate`
+
 ## Running Tests
 
 ### Unit Tests
