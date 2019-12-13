@@ -143,7 +143,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCompilationAction(
                 c =>
                 {
-                    emitLog = SonarAnalysisContext.ShouldLogCbdeRun(c, c.Options);
+                    emitLog = Environment.GetEnvironmentVariables().Contains("SONAR_DOTNET_LOG_CBDE");
                     if (!shouldRunInContext(c))
                     {
                         return;
