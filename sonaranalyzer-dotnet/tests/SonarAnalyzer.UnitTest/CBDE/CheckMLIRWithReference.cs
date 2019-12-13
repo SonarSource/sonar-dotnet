@@ -60,6 +60,127 @@ func @_$invalid$global$code$.Func$int$(%arg0: i32) {
         }
 
         [TestMethod]
+        public void TestBitwiseAndOrXor()
+        {
+            var code = @"
+void Func(int i) {
+    var j = 12;
+
+    j = j & i;
+    j &= i;
+
+    j = j | i;
+    j |= i;
+
+    j = j ^ i;
+    j ^= i;
+}
+";
+            var expected = @"
+func @_$invalid$global$code$.Func$int$(%arg0: i32) {
+  %0 = cbde.alloca i32
+  cbde.store %arg0, %0 : memref<i32>
+  br ^bb1
+^bb1:	// pred: ^bb0
+  %c12_i32 = constant 12 : i32
+  %1 = cbde.alloca i32
+  cbde.store %c12_i32, %1 : memref<i32>
+  %2 = cbde.load %1 : memref<i32>
+  %3 = cbde.load %0 : memref<i32>
+  %4 = and %2, %3 : i32
+  cbde.store %4, %1 : memref<i32>
+  %5 = cbde.load %1 : memref<i32>
+  %6 = cbde.load %0 : memref<i32>
+  %7 = and %5, %6 : i32
+  cbde.store %7, %1 : memref<i32>
+  %8 = cbde.load %1 : memref<i32>
+  %9 = cbde.load %0 : memref<i32>
+  %10 = or %8, %9 : i32
+  cbde.store %10, %1 : memref<i32>
+  %11 = cbde.load %1 : memref<i32>
+  %12 = cbde.load %0 : memref<i32>
+  %13 = or %11, %12 : i32
+  cbde.store %13, %1 : memref<i32>
+  %14 = cbde.load %1 : memref<i32>
+  %15 = cbde.load %0 : memref<i32>
+  %16 = xor %14, %15 : i32
+  cbde.store %16, %1 : memref<i32>
+  %17 = cbde.load %1 : memref<i32>
+  %18 = cbde.load %0 : memref<i32>
+  %19 = xor %17, %18 : i32
+  cbde.store %19, %1 : memref<i32>
+  br ^bb2
+^bb2:	// pred: ^bb1
+  return
+}
+";
+            MlirTestUtilities.ValidateWithReference(code, expected, TestContext.TestName);
+
+        }
+
+        [TestMethod]
+        public void MultiplicationDivisionModulo()
+        {
+            var code = @"
+void Func(int i) {
+    var j = 12;
+
+    j = j * i;
+    j *= i;
+
+    j = j / i;
+    j /= i;
+
+    j = j % i;
+    j %= i;
+}
+";
+            var expected = @"
+func @_$invalid$global$code$.Func$int$(%arg0: i32) {
+  %0 = cbde.alloca i32
+  cbde.store %arg0, %0 : memref<i32>
+  br ^bb1
+^bb1:	// pred: ^bb0
+  %c12_i32 = constant 12 : i32
+  %1 = cbde.alloca i32
+  cbde.store %c12_i32, %1 : memref<i32>
+  %2 = cbde.load %1 : memref<i32>
+  %3 = cbde.load %0 : memref<i32>
+  %4 = muli %2, %3 : i32
+  cbde.store %4, %1 : memref<i32>
+  %5 = cbde.load %1 : memref<i32>
+  %6 = cbde.load %0 : memref<i32>
+  %7 = muli %5, %6 : i32
+  cbde.store %7, %1 : memref<i32>
+  %8 = cbde.load %1 : memref<i32>
+  %9 = cbde.load %0 : memref<i32>
+  %10 = divis %8, %9 : i32
+  cbde.store %10, %1 : memref<i32>
+  %11 = cbde.load %1 : memref<i32>
+  %12 = cbde.load %0 : memref<i32>
+  %13 = divis %11, %12 : i32
+  cbde.store %13, %1 : memref<i32>
+  %14 = cbde.load %1 : memref<i32>
+  %15 = cbde.load %0 : memref<i32>
+  %16 = remis %14, %15 : i32
+  cbde.store %16, %1 : memref<i32>
+  %17 = cbde.load %1 : memref<i32>
+  %18 = cbde.load %0 : memref<i32>
+  %19 = remis %17, %18 : i32
+  cbde.store %19, %1 : memref<i32>
+  br ^bb2
+^bb2:	// pred: ^bb1
+  return
+}
+
+
+";
+            MlirTestUtilities.ValidateWithReference(code, expected, TestContext.TestName);
+
+        }
+
+
+        [TestMethod]
         public void LeftRightShift()
         {
             var code = @"
