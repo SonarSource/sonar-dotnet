@@ -37,15 +37,16 @@ namespace SonarAnalyzer.UnitTest
             params MetadataReference[] additionalReferences)
         {
             var language = isCSharp ? AnalyzerLanguage.CSharp : AnalyzerLanguage.VisualBasic;
+            var ext = isCSharp ? ".cs" : ".vb";
 
             var compilation = SolutionBuilder
                 .Create()
                 .AddProject(language, createExtraEmptyFile: false)
                 .AddSnippet(classDeclaration)
-                .AddDocument(Path.Combine("TestCases", "Helpers", "Microsoft_AspNetCore_Mvc_ControllerAttribute.cs"))
-                .AddDocument(Path.Combine("TestCases", "Helpers", "Microsoft_AspNetCore_Mvc_ControllerBase.cs"))
-                .AddDocument(Path.Combine("TestCases", "Helpers", "Microsoft_AspNetCore_Mvc_NonControllerAttribute.cs"))
-                .AddDocument(Path.Combine("TestCases", "Helpers", "System_Web_MVC_Controller.cs"))
+                .AddDocument(Path.Combine("TestCases", "Helpers", "Microsoft_AspNetCore_Mvc_ControllerAttribute" + ext))
+                .AddDocument(Path.Combine("TestCases", "Helpers", "Microsoft_AspNetCore_Mvc_ControllerBase" + ext))
+                .AddDocument(Path.Combine("TestCases", "Helpers", "Microsoft_AspNetCore_Mvc_NonControllerAttribute" + ext))
+                .AddDocument(Path.Combine("TestCases", "Helpers", "System_Web_MVC_Controller" + ext))
                 .AddReferences(additionalReferences)
                 .GetCompilation();
             var tree = compilation.SyntaxTrees.First();
