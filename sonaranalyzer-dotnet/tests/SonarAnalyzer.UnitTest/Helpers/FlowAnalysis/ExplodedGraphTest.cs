@@ -654,7 +654,7 @@ namespace TesteAnalyzer
     }
 }
 ";
-            var tree = ControlFlowGraphTest.Compile(testInput, out var semanticModel);
+            var (tree, semanticModel) = TestHelper.Compile(testInput);
             var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First(m => m.Identifier.ValueText == "Main");
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
 
