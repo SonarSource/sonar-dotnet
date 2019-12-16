@@ -318,6 +318,19 @@ namespace Tests.TestCases
                 p = 11;
             }
         }
+
+        private int Method6_LocalFunctions(int usedInLocalFunction)   // Compliant
+        {
+            int LocalFunction(int seed) => usedInLocalFunction + seed;
+            int BadIncA() => usedInLocalFunction + 1;   // Fixed
+            int BadIncB(int seed)             // Fixed
+            {
+                seed = 1;
+                return usedInLocalFunction + seed;
+            }
+
+            return LocalFunction(42) + BadIncA(42) + BadIncB(42);
+        }
     }
 
     public class Intermediate : ISerializable // Error [CS0535]
