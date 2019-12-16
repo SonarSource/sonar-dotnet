@@ -49,6 +49,20 @@ namespace Tests.Diagnostics
             var writeTextWithAt = "WRITETEXT pub_info.pr_info" + "@ptrval 'text'"; // Noncompliant
             var readText = "READTEXT" + "pub_info.pr_info @ptrval 1 25;"; // Noncompliant
             var truncate = "TRUNCATE" + "TABLE HumanResources.JobCandidate;"; // Noncompliant
+
+            var a = "TRUNCATE" + " " + "TABLE HumanResources.JobCandidate;";
+
+            var b = "TRUNCATE" + @" " + "TABLE HumanResources.JobCandidate;";
+            var b1 = @"TRUNCATE" + @"TABLE HumanResources.JobCandidate;"; // Noncompliant
+
+            var c = "TRUNCATE" + $" " + "TABLE HumanResources.JobCandidate;";
+            var c1 = $"TRUNCATE" + $"TABLE HumanResources.JobCandidate;"; // Compliant - FN
+
+            var d = "TRUNCATE" + $@" " + "TABLE HumanResources.JobCandidate;";
+            var d1 = $@"TRUNCATE" + $@"TABLE HumanResources.JobCandidate;"; // Compliant - FN
+
+            var e = "TRUNCATE" + @$" " + "TABLE HumanResources.JobCandidate;";
+            var e1 = @$"TRUNCATE" + @$"TABLE HumanResources.JobCandidate;"; // Compliant - FN
         }
 
         public string Property
