@@ -148,6 +148,13 @@ namespace Tests.Diagnostics
             }
         }
 
+        void NullCoalescenceAssignment() // Compliant - Null coalescence assignment is not considered
+        {
+            bool? value = null;
+
+            value ??= true;
+        }
+
         void TernaryOperatorWihtInnerTernayOperator() // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 3 to the 0 allowed.}}
         {
             var t = true ? false ? -1 : 0 : 1;
