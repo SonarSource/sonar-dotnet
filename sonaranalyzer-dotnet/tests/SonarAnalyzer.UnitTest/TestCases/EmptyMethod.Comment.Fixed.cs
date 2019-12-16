@@ -48,4 +48,16 @@ namespace Tests.Diagnostics
         {
         }
     }
+
+    public interface IInterface
+    {
+        public void F1()
+        {
+            // Method intentionally left empty.
+        } // Fixed
+
+        public virtual void F2() { }
+
+        public abstract void F3();
+    }
 }

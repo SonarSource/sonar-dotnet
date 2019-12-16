@@ -21,6 +21,7 @@ extern alias csharp;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -36,8 +37,10 @@ namespace SonarAnalyzer.UnitTest.Rules
                 {
                     @"TestCases\StaticFieldInitializerOrder.cs",
                     @"TestCases\StaticFieldInitializerOrder_PartialClass.cs"
-                }
-                , new StaticFieldInitializerOrder());
+                },
+                new StaticFieldInitializerOrder(),
+                options: ParseOptionsHelper.FromCSharp8,
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
     }
 }

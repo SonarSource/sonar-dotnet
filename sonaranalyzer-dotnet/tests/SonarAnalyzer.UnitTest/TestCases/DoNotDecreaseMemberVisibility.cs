@@ -178,3 +178,24 @@ namespace FalsePositiveOnIndexers
         }
     }
 }
+
+namespace DefaultInterfaceMembers
+{
+    public interface IFoo
+    {
+        public void SomeMethod(int count) { }
+    }
+
+    public interface IBar : IFoo
+    {
+        private void SomeMethod(int count) { }
+    }
+
+    public class Consumer
+    {
+        public Consumer(IBar bar)
+        {
+            bar.SomeMethod(1); // Compliant, the method from IFoo is called
+        }
+    }
+}

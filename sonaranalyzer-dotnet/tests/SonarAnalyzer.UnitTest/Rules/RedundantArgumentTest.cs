@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +32,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void RedundantArgument()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantArgument.cs", new RedundantArgument());
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantArgument.cs",
+                new RedundantArgument(),
+                options: ParseOptionsHelper.FromCSharp8,
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
 
         [TestMethod]
@@ -43,7 +47,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\RedundantArgument.NoNamed.Fixed.cs",
                 new RedundantArgument(),
                 new RedundantArgumentCodeFixProvider(),
-                RedundantArgumentCodeFixProvider.TitleRemove);
+                RedundantArgumentCodeFixProvider.TitleRemove,
+                options: ParseOptionsHelper.FromCSharp8,
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
 
         [TestMethod]
@@ -55,7 +61,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\RedundantArgument.Named.Fixed.cs",
                 new RedundantArgument(),
                 new RedundantArgumentCodeFixProvider(),
-                RedundantArgumentCodeFixProvider.TitleRemoveWithNameAdditions);
+                RedundantArgumentCodeFixProvider.TitleRemoveWithNameAdditions,
+                options: ParseOptionsHelper.FromCSharp8,
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
     }
 }
