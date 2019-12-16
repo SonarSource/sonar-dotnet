@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.PerformanceData;
 
 namespace Tests.Diagnostics
 {
@@ -45,6 +44,38 @@ namespace Tests.Diagnostics
         {
             get { return myVar; }
             set { myVar = value; }
+        }
+    }
+
+    interface IStaticFieldWrittenFromInstanceMember
+    {
+        private static int count = 0;
+//                         ^^^^^^^^^ Secondary
+//                         ^^^^^^^^^ Secondary@-1
+
+        public void DoSomething()
+        {
+            count++;  // Noncompliant {{Remove this set, which updates a 'static' field from an instance method.}}
+//          ^^^^^
+            var action = new Action(() =>
+            {
+                count++; // Compliant, already reported on this symbol
+            });
+        }
+
+        public static void DoSomethingStatic()
+        {
+            count++;
+        }
+
+        public int MyProperty
+        {
+            get { return 0; }
+            set
+            {
+                count++; // Noncompliant
+                count += 42; // Compliant, already reported on this symbol
+            }
         }
     }
 }
