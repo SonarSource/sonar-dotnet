@@ -22,11 +22,11 @@ extern alias csharp;
 extern alias vbnet;
 
 using System.Linq;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
-using vbnet::SonarAnalyzer.Rules.VisualBasic;
+using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
+using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 {
                     @"TestCases\ClassName.cs",
                     @"TestCases\ClassName.Partial.cs",
-                }, new ClassAndMethodName(),
+                }, new CSharp.ClassAndMethodName(),
                 options: ParseOptionsHelper.FromCSharp8,
                 additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ClassName_VB()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ClassName.vb", new ClassName());
+            Verifier.VerifyAnalyzer(@"TestCases\ClassName.vb", new VisualBasic.ClassName());
         }
 
         [TestMethod]
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"TestCases\MethodName.cs",
                     @"TestCases\MethodName.Partial.cs",
                 },
-                new ClassAndMethodName());
+                new CSharp.ClassAndMethodName());
         }
 
         [TestMethod]
@@ -86,7 +86,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             }
             .Select(x =>
             (
-                actual: ClassAndMethodName.SplitToParts(x.Item1).ToArray(),
+                actual: CSharp.ClassAndMethodName.SplitToParts(x.Item1).ToArray(),
                 expected: x.Item2
             ))
             .ToList()

@@ -48,7 +48,7 @@ namespace Tests.Diagnostics
 
     public class Second : IFirst
     {
-        public void Method(params int[] numbers) // Compliant - The default interface method can be accessed only after cast.
+        public void Method(params int[] numbers) // Compliant - The interface method can be accessed only after cast (due to the fact that it has an implementation).
         {
         }
     }
