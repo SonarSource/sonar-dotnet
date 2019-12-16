@@ -19,6 +19,7 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -30,7 +31,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExpressionComplexity_CSharp()
         {
             var diagnostic = new SonarAnalyzer.Rules.CSharp.ExpressionComplexity { Maximum = 3};
-            Verifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.cs", diagnostic);
+            Verifier.VerifyAnalyzer(@"TestCases\ExpressionComplexity.cs",
+                diagnostic,
+                options: ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]
