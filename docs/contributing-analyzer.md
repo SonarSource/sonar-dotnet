@@ -8,21 +8,19 @@ All C# and VB .NET analyzers present in SonarLint for Visual Studio, in the Sona
 1. Download sub-modules `git submodule update --init --recursive`
 1. Run `.\scripts\build\dev-build.ps1 -restore -build -test`
 
-In general, it is best to run commands from the Visual Studio Developer Command Prompt (if you're using ConEmu, you can setup a console task like `cmd /k ""C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat" & powershell" -new_console:t:"VsDev 2017" -new_console:d:"C:\Workspace\sonar-dotnet"` - it starts the Developer Console inside the folder `C:\Workspace\sonar-dotnet`)
+In general, it is best to run commands from the Visual Studio Developer Command Prompt (if you're using ConEmu, you can setup a console task like `-new_console:C:\Workspace\sonar-dotnet cmd /k "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat"` - it starts the Developer Console inside the folder `C:\Workspace\sonar-dotnet`)
 
-## Developing with Visual Studio 2017
+## Developing with Visual Studio 2019
 
-1. [Visual Studio 2017 Version 15.9](https://my.visualstudio.com/Downloads?q=Visual%20Studio%202017)
-    - Ensure C#, VB, MSBuild, .NET Core, F#, Visual Studio Extensibility and ASP.Net and web development are included in the selected work loads
-    - Ensure Visual Studio Version is between "15.7" and "15.9" (see #2489 and #2763)
-    - If you want to install only [Visual Studio 2019](https://my.visualstudio.com/Downloads?q=Visual%20Studio%202019) as an IDE, make sure you also install [Build Tools for Visual Studio 2017 (version 15.9)](https://my.visualstudio.com/Downloads?q=Build%20Tools%20for%20Visual%20Studio%202017%20version%2015.9) in order to have MSBuild 15 installed (see #2489)
+1. [Visual Studio 2019 Version 16.4.1](https://visualstudio.microsoft.com/vs/)
+    - Ensure .Net Desktop development (C#, VB and F#), .NET Core, Visual Studio extension development and ASP.Net and web development are included in the selected work loads
 1. [.NET Core SDK 2.1.402](https://dotnet.microsoft.com/download/dotnet-core/2.1)
 1. Open `SonarAnalyzer.sln` in the `sonaranalyzer-dotnet` subfolder
 
 The following environment variables must be set:
 - **JAVA_HOME**
 - **MAVEN_HOME** / **M2_HOME**
-- **MSBUILD_PATH** - path to the MSBuild.exe executable from the Visual Studio installation folder - to MSBuild 15
+- **MSBUILD_PATH** - path to the MSBuild.exe executable from the Visual Studio installation folder - to MSBuild 16
 - **NUGET_PATH** - path to the nuget.exe executable (related to the [plugin integration tests](./contributing-plugin.md#integration-tests))
 - **ORCHESTRATOR_CONFIG_URL** - path to orchestrator.properties file (for integration tests)
 - **rule_api_path** - path to folder containing the rule api jar
@@ -54,7 +52,7 @@ You can run the Unit Tests via the Test Explorer of Visual Studio or using `.\sc
 To run the ITs you will need to follow this pattern:
 
 1. Make sure the project is built: Integration tests don't build the analyzer, but use the results of the latest build (debug or release)
-1. Open the `Developer Command Prompt for VS2017` from the start menu
+1. Open the `Developer Command Prompt for VS2019` from the start menu
 1. Go to `PATH_TO_CLONED_REPOSITORY/sonaranalyzer-dotnet/its`
 1. Run `powershell`
 1. Run `.\regression-test.ps1`
