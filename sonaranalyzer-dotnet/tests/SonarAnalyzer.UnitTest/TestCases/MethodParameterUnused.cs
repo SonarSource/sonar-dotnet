@@ -130,6 +130,17 @@ namespace Tests.TestCases
         {
 
         }
+
+        private static int Add(this string s, int a, int b) //Unused extension owner is ignored
+        {
+            return a + b;
+        }
+
+        private static int AddedLength(this string s, int a, int b) //Noncompliant
+        {
+            return s.Length + a;
+        }
+
     }
 
     abstract class BaseAbstract
