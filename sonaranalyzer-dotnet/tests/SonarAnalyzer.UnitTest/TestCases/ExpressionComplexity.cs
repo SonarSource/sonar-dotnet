@@ -17,6 +17,10 @@ namespace Tests.Diagnostics
 
             var d1 = true && false && true && false && true && true; // Noncompliant
 
+            bool? v1 = null, v2 = null, v3 = null, v4 = null, v5 = null;
+
+            var h = v1 ??= v2 ??= v3 ??= v4 ??= v5; // Compliant - FN: null coalescing assignment is not counted
+
             call(
                 a =>
                 a = ((a1 ? false : true) || a1 || true && false && true || false)); // Noncompliant

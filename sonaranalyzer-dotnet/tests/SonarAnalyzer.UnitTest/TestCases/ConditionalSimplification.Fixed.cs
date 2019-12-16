@@ -60,6 +60,11 @@ namespace Tests.TestCases
                 x = o;
             }
 
+            bool? value = null;
+
+            if (value == null) // Compliant - FN:  x ??= false can be used instead
+                value = false;
+
             var yyy = new Y();
             x = condition ? Identity(new Y()) : Identity(yyy);
 

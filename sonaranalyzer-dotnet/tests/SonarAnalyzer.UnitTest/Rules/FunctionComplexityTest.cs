@@ -20,6 +20,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.Helpers;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +32,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void FunctionComplexity_CSharp()
         {
             var diagnostic = new SonarAnalyzer.Rules.CSharp.FunctionComplexity { Maximum = 3 };
-            Verifier.VerifyAnalyzer(@"TestCases\FunctionComplexity.cs", diagnostic);
+            Verifier.VerifyAnalyzer(@"TestCases\FunctionComplexity.cs",
+                diagnostic,
+                options: ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]
