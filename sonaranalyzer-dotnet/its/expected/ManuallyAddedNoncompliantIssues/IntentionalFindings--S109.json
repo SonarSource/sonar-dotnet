@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\IntentionalFindings\S3949.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  13,
+"endLine":  5,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\IntentionalFindings\S3949.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  13,
+"endLine":  9,
+"endColumn":  16
+}
+}
+}
+]
+}
