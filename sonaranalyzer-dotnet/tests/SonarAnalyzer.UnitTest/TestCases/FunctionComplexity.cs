@@ -118,7 +118,7 @@ namespace Tests.Diagnostics
             public string Name;
         }
 
-        void NullCoalescenceAssignment() // Compliant - Null coalescence assignment is not considered
+        void NullCoalescenceAssignment() // Compliant - FN: Null coalescence assignment is not considered
         {
             bool? v1 = null, v2 = null, v3 = null, v4 = null, v5 = null;
 

@@ -148,7 +148,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        void NullCoalescenceAssignment() // Compliant - Null coalescence assignment is not considered
+        void NullCoalescenceAssignment() // Compliant - FN: Null coalescence assignment is not considered
         {
             bool? value = null;
 
