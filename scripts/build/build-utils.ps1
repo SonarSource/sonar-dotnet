@@ -55,7 +55,7 @@ function Get-MSBuildImportBeforePath([ValidateSet("14.0", "15.0", "16.0", "Curre
 
 # NuGet
 function New-NuGetPackages([string]$binPath) {
-    Write-Header "Building NuGet packages $binPath"
+    Write-Header "Building NuGet packages"
 
     $nugetExe = Get-NuGetPath
     Get-ChildItem "src" -Recurse *.nuspec | ForEach-Object {

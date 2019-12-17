@@ -111,6 +111,14 @@ stages:
           pathToPublish: '$(Build.ArtifactStagingDirectory)/packages'
           artifactName: 'NuGet Packages'
 
+      - task: ArtifactoryNuGet@1
+        displayName: 'Publish SonarAnalyzer.CFG.CSharp NuGet on repox'
+        inputs:
+          command: 'push'
+          artifactoryService: 'Repox artifactory'
+          targetDeployRepo: 'sonarsource-nuget-dev'
+          pathToNupkg: '$(Build.ArtifactStagingDirectory)/packages/SonarAnalyzer.CFG.CSharp.*.nupkg'
+
 - template: stage-with-burgr-notifications.yml@commonTemplates
   parameters:
     burgrName: 'qa'
