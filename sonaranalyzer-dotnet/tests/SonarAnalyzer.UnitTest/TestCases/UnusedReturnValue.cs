@@ -49,4 +49,19 @@ namespace Tests.Diagnostics
             MyMethod();
         }
     }
+
+    public class WithLocalFunctions
+    {
+        public void Method()
+        {
+            GetNumber();
+            GetNumberStatic();
+
+            int GetNumber() { return 42; } // Compliant - FN
+
+            static int GetNumberStatic() { return 42; } // Compliant - FN
+
+            static int GetNumberStaticExpression() => 42; // Compliant - FN, the sole purpose of expressions is to return values, in this case the function can be deleted
+        }
+    }
 }
