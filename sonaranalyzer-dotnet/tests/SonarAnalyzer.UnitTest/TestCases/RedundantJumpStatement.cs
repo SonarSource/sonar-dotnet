@@ -168,5 +168,28 @@ namespace Tests.Diagnostics
                 Console.WriteLine();
             }
         }
+
+        void CSharp8_StaticLocalFunctions()
+        {
+            static void Compute(int a, out int b)
+            {
+                b = a;
+                return;     // Noncompliant
+            }
+        }
+    }
+
+    public interface IWithDefaultImplementation
+    {
+        decimal Count { get; set; }
+        decimal Price { get; set; }
+
+        //Default interface methods
+        void Reset()
+        {
+            Price = 0;
+            Count = 0;
+            return;     // Noncompliant
+        }
     }
 }
