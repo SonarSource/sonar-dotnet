@@ -19,8 +19,12 @@
  */
 
 extern alias csharp;
+extern alias vbnet;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
+using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +36,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MethodsShouldNotHaveIdenticalImplementations()
         {
             Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.cs",
-                new MethodsShouldNotHaveIdenticalImplementations());
+                new CSharp.MethodsShouldNotHaveIdenticalImplementations(),
+                options: ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]
@@ -40,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MethodsShouldNotHaveIdenticalImplementations_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.vb",
-                new SonarAnalyzer.Rules.VisualBasic.MethodsShouldNotHaveIdenticalImplementations());
+                new VisualBasic.MethodsShouldNotHaveIdenticalImplementations());
         }
     }
 }

@@ -134,5 +134,26 @@ namespace Tests.Diagnostics
             x.Test("hello");
             x.Test("world");
         }
+
+        static string M(int x)
+        {
+            x += 1;
+            return x.ToString();
+        }
+
+        public void Method()
+        {
+            static string M1(int x)
+            {
+                x += 1;
+                return x.ToString();
+            }
+
+            static string M2(int x) // Compliant - FN: local static functions are not verified
+            {
+                x += 1;
+                return x.ToString();
+            }
+        }
     }
 }
