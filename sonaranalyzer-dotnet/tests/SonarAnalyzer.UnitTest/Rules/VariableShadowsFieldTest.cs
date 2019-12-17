@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +32,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void VariableShadowsField()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\VariableShadowsField.cs", new VariableShadowsField());
+            Verifier.VerifyAnalyzer(@"TestCases\VariableShadowsField.cs",
+                new VariableShadowsField(),
+                ParseOptionsHelper.FromCSharp8);
         }
     }
 }
