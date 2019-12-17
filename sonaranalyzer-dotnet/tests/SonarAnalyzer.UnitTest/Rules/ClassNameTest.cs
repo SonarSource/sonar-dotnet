@@ -64,7 +64,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"TestCases\MethodName.cs",
                     @"TestCases\MethodName.Partial.cs",
                 },
-                new CSharp.ClassAndMethodName());
+                new CSharp.ClassAndMethodName(),
+                ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]
