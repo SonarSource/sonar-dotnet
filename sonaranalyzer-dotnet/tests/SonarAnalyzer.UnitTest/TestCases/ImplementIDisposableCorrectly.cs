@@ -243,6 +243,13 @@ namespace Rspec_Compliant_Samples
             // Do not forget to call base
             base.Dispose(disposing);
     }
+
+    public ref struct Struct
+    {
+        public void Dispose()
+        {
+        }
+    }
 }
 
 namespace VS_Generated_Implementation
