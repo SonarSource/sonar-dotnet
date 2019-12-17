@@ -51,5 +51,34 @@ namespace Tests.Diagnostics
                 fs.Write(bytes, 0, bytes.Length);
             }
         }
+
+        public FileStream Method(string path, string text)
+        {
+            using var fs = File.Create(path); // Compliant - FN the resource is returned already disposed
+
+            return fs;
+        }
+
+        public ref struct Struct
+        {
+            public void Dispose()
+            {
+            }
+        }
+
+        public Struct Foo(string path, string text)
+        {
+            using (var disposableRefStruct = new Struct()) // Noncompliant {{Remove the 'using' statement; it will cause automatic disposal of 'disposableRefStruct'.}}
+            {
+                return disposableRefStruct;
+            }
+        }
+
+        public Struct Bar(string path, string text)
+        {
+            using var disposableRefStruct = new Struct(); // Compliant - FN the resource is returned already disposed
+
+            return disposableRefStruct;
+        }
     }
 }
