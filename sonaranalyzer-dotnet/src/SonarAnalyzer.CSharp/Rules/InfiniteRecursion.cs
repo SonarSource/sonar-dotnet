@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -49,8 +49,20 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                CheckForNoExitMethod,
+                c =>
+                {
+                    var method = (MethodDeclarationSyntax)c.Node;
+                    CheckForNoExitMethod(c, (CSharpSyntaxNode)method.Body ?? method.ExpressionBody, method.Identifier);
+                },
                 SyntaxKind.MethodDeclaration);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var function = (LocalFunctionStatementSyntaxWrapper)c.Node;
+                    CheckForNoExitMethod(c, (CSharpSyntaxNode)function.Body ?? function.ExpressionBody, function.Identifier);
+                },
+                SyntaxKindEx.LocalFunctionStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckForNoExitProperty,
@@ -100,25 +112,14 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckForNoExitMethod(SyntaxNodeAnalysisContext c)
+        private static void CheckForNoExitMethod(SyntaxNodeAnalysisContext c, CSharpSyntaxNode body, SyntaxToken identifier)
         {
-            var method = (MethodDeclarationSyntax)c.Node;
-            var methodSymbol = c.SemanticModel.GetDeclaredSymbol(method);
-
-            if (methodSymbol == null)
+            var symbol = c.SemanticModel.GetDeclaredSymbol(c.Node);
+            if (symbol != null && body != null && CSharpControlFlowGraph.TryGet(body, c.SemanticModel, out var cfg))
             {
-                return;
-            }
-
-            var bodyNode = (CSharpSyntaxNode)method.Body ?? method.ExpressionBody;
-            if (bodyNode != null &&
-                CSharpControlFlowGraph.TryGet(bodyNode, c.SemanticModel, out var cfg))
-            {
-                var walker = new CfgWalkerForMethod(
-                    new RecursionAnalysisContext(cfg, methodSymbol, method.Identifier.GetLocation(), c));
+                var walker = new CfgWalkerForMethod(new RecursionAnalysisContext(cfg, symbol, identifier.GetLocation(), c));
                 walker.CheckPaths();
-
-                CheckInfiniteJumpLoop(bodyNode, cfg, "method", c);
+                CheckInfiniteJumpLoop(body, cfg, "method", c);
             }
         }
 
