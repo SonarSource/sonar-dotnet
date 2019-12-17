@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +33,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ExceptionShouldNotBeThrownFromUnexpectedMethods()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ExceptionShouldNotBeThrownFromUnexpectedMethods.cs",
-                new ExceptionShouldNotBeThrownFromUnexpectedMethods());
+                new ExceptionShouldNotBeThrownFromUnexpectedMethods(),
+                ParseOptionsHelper.FromCSharp8);
         }
     }
 }
