@@ -19,6 +19,7 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -32,7 +33,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ParametersCorrectOrder_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ParametersCorrectOrder.cs",
-                new CS.ParametersCorrectOrder());
+                new CS.ParametersCorrectOrder(),
+                options: ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]
