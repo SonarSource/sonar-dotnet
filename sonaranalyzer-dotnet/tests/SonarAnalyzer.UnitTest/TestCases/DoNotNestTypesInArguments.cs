@@ -52,4 +52,14 @@ namespace MyLibrary
 
         public void Method_WithUsing(ComplexType arg) { } // Noncompliant
     }
+
+    public class WithLocalFunctions
+    {
+        public void Method()
+        {
+            void DoSomething(ICollection<ICollection<int>> outerCollect) { } // Compliant - FN
+
+            static void DoSomethingElse(ICollection<ICollection<int>> outerCollect) { } // Compliant - FN
+        }
+    }
 }
