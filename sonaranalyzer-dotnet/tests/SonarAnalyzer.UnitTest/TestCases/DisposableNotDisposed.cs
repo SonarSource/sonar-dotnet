@@ -117,7 +117,7 @@ namespace Tests.Diagnostics
 
         private void Clear()
         {
-            using var inner_field_fs1 = new FileStream(@"c:\foo.txt", FileMode.Open); // Noncompliant - FP: the class is disposide because of the using declaration
+            using var inner_field_fs1 = new FileStream(@"c:\foo.txt", FileMode.Open); // Noncompliant - FP: the class is disposed by the using declaration
         }
     }
 
