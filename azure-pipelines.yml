@@ -116,7 +116,7 @@ stages:
         inputs:
           command: 'push'
           artifactoryService: 'Repox artifactory'
-          targetDeployRepo: 'sonarsource-nuget-dev'
+          targetDeployRepo: 'sonarsource-nuget-qa'
           pathToNupkg: '$(Build.ArtifactStagingDirectory)/packages/SonarAnalyzer.CFG.CSharp.*.nupkg'
 
 - template: stage-with-burgr-notifications.yml@commonTemplates
@@ -447,3 +447,17 @@ stages:
   parameters:
     stageDependencies:
     - qa
+
+    - task: ArtifactoryBuildPromotion@1
+      displayName: 'Promote SonarAnalyzer.CFG.CSharp NuGet on repox (Pull Request)'
+      condition: eq(variables['Build.Reason'], 'PullRequest')
+      inputs:
+        artifactoryService: 'Repox artifactory'
+        buildName: 'SonarAnalyzer.CFG.CSharp'
+        buildNumber: '$(Build.BuildId)'
+        targetRepo: 'sonarsource-nuget-dev'
+        status: 'it-passed-pr'
+        sourceRepo: 'sonarsource-nuget-qa'
+        includeDependencies: false
+        copy: true
+        dryRun: true
