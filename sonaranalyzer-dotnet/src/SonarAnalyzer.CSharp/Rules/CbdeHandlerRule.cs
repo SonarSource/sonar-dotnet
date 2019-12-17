@@ -44,6 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string S3949DiagnosticId = "S3949";
         private const string S3949MessageFormat = "{0}";
         private static readonly DiagnosticDescriptor ruleS3949 = DiagnosticDescriptorBuilder.GetDescriptor(S3949DiagnosticId, S3949MessageFormat, RspecStrings.ResourceManager, fadeOutCode: true);
+        private static string WorkDirectoryBasePath;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(ruleS3949);
 
@@ -62,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                CbdeHandler cbdeHandler = new CbdeHandler(context, OnCbdeIssue, ShouldRunCbdeInContext);
+                CbdeHandler cbdeHandler = new CbdeHandler(context, OnCbdeIssue, ShouldRunCbdeInContext, () => { return WorkDirectoryBasePath; });
             }
         }
 
@@ -95,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return true;
             }
-            var WorkDirectoryBasePath = File.ReadAllLines(projectOutputAdditionalFile.Path).FirstOrDefault(l => !string.IsNullOrEmpty(l));
+            WorkDirectoryBasePath = File.ReadAllLines(projectOutputAdditionalFile.Path).FirstOrDefault(l => !string.IsNullOrEmpty(l));
 
             return string.IsNullOrEmpty(WorkDirectoryBasePath);
         }

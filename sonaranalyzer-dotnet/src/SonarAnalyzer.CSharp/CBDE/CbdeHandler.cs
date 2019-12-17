@@ -39,15 +39,14 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private readonly Action<String, String, Location, CompilationAnalysisContext> raiseIssue;
         private readonly Func<CompilationAnalysisContext, bool> shouldRunInContext;
+        private readonly Func<string> getOutputDirectory;
         private static bool initialized = false;
         private const int processStatPeriodMs = 1000;
 
         private const string cbdeJsonOutputFileName = "cbdeSEout.json";
 
+        // this is the place where the cbde executable is unpacked. It is in a temp folder
         private static string cbdeBinaryPath;
-        private string cbdeDirectoryRoot;
-        private string cbdeDirectoryAssembly;
-        private string cbdeJsonOutputPath;
 
         protected HashSet<string> csSourceFileNames= new HashSet<string>();
         protected Dictionary<string, int> fileNameDuplicateNumbering = new Dictionary<string, int>();
@@ -58,14 +57,18 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly object perfFileLock = new Object();
         private static readonly object staticInitLock = new Object();
 
-        private static readonly string cbdePath =
-            Environment.GetEnvironmentVariable("CIRRUS_WORKING_DIR") ?? // For Cirrus
-            Environment.GetEnvironmentVariable("WORKSPACE") ?? // For Jenkins
-            Path.GetTempPath(); // By default
-        private static readonly string cbdeProcessSpecificPath = Path.Combine(cbdePath, $"CBDE_{Process.GetCurrentProcess().Id}");
-        private static readonly string cbdeLogFile = Path.Combine(cbdeProcessSpecificPath, "cbdeHandler.log");
-        private static readonly string cbdeMetricsLogFile = Path.Combine(cbdeProcessSpecificPath, "metrics.log");
-        private static readonly string cbdePerfLogFile = Path.Combine(cbdeProcessSpecificPath, "performances.log");
+        // cbdePath is inside .sonarqube/out/<n>/
+        // cbdeDirectoryRoot contains mlir files and results for each assembly
+        // cbdeProcessSpecificPath is the $"{cbdePath}/CBDE_{pid}/" folder
+        // cbdeLogFile, cbdeMetricsLogFile and cbdePerfLogFile are inside cbdeProcessSpecificPath
+        private string cbdePath;
+        private string cbdeDirectoryRoot;
+        private string cbdeDirectoryAssembly;
+        private string cbdeJsonOutputPath;
+        private static string cbdeProcessSpecificPath;
+        private string cbdeLogFile;
+        private string cbdeMetricsLogFile;
+        private string cbdePerfLogFile;
         private bool emitLog = false;
 
         private void LogIfFailure(string s)
@@ -80,16 +83,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if(emitLog)
             {
-                GlobalLog(s);
-            }
-        }
-
-        private static void GlobalLog(string s)
-        {
-            lock (logFileLock)
-            {
-                var message = $"{DateTime.Now} ({Thread.CurrentThread.ManagedThreadId,5}): {s}\n";
-                File.AppendAllText(cbdeLogFile, message);
+                lock (logFileLock)
+                {
+                    var message = $"{DateTime.Now} ({Thread.CurrentThread.ManagedThreadId,5}): {s}\n";
+                    File.AppendAllText(cbdeLogFile, message);
+                }
             }
         }
 
@@ -103,12 +101,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void Initialize()
         {
-            Directory.CreateDirectory(cbdeProcessSpecificPath);
+            cbdeBinaryPath = Path.Combine(Path.GetTempPath(), $"CBDE_{Process.GetCurrentProcess().Id}");
+            Directory.CreateDirectory(cbdeBinaryPath);
             lock (logFileLock)
             {
-                if (File.Exists(cbdeProcessSpecificPath))
+                if (File.Exists(cbdeBinaryPath))
                 {
-                    File.Delete(cbdeProcessSpecificPath);
+                    File.Delete(cbdeBinaryPath);
                 }
             }
             UnpackCbdeExe();
@@ -116,10 +115,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public CbdeHandler(SonarAnalysisContext context,
             Action<String, String, Location, CompilationAnalysisContext> raiseIssue,
-            Func<CompilationAnalysisContext, bool> shouldRunInContext)
+            Func<CompilationAnalysisContext, bool> shouldRunInContext,
+            Func<string> getOutputDirectory)
         {
             this.raiseIssue = raiseIssue;
             this.shouldRunInContext = shouldRunInContext;
+            this.getOutputDirectory = getOutputDirectory;
             lock (staticInitLock)
             {
                 if(!initialized)
@@ -202,7 +203,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             const string res = "SonarAnalyzer.CBDE.windows.dotnet-symbolic-execution.exe";
-            cbdeBinaryPath = Path.Combine(cbdeProcessSpecificPath, "windows/dotnet-symbolic-execution.exe");
+            cbdeBinaryPath = Path.Combine(cbdeBinaryPath, "windows/dotnet-symbolic-execution.exe");
             Directory.CreateDirectory(Path.GetDirectoryName(cbdeBinaryPath));
             var stream = assembly.GetManifestResourceStream(res);
             var fileStream = File.Create(cbdeBinaryPath);
@@ -227,7 +228,22 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void SetupMlirRootDirectory()
         {
-            cbdeDirectoryRoot = Path.Combine(cbdePath, "sonar-dotnet/cbde");
+            if((getOutputDirectory() != null) && (getOutputDirectory().Length != 0))
+            {
+                cbdePath = Path.Combine(getOutputDirectory(), "cbde");
+                Directory.CreateDirectory(cbdePath);
+            }
+            else
+            {
+                // used only when doing the unit test
+                cbdePath = Path.GetTempPath();
+            }
+            cbdeProcessSpecificPath = Path.Combine(cbdePath, $"CBDE_{Process.GetCurrentProcess().Id}");
+            Directory.CreateDirectory(cbdeProcessSpecificPath);
+            cbdeLogFile = Path.Combine(cbdeProcessSpecificPath, "cbdeHandler.log");
+            cbdeMetricsLogFile = Path.Combine(cbdeProcessSpecificPath, "metrics.log");
+            cbdePerfLogFile = Path.Combine(cbdeProcessSpecificPath, "performances.log");
+            cbdeDirectoryRoot = Path.Combine(cbdePath, "assemblies");
             Directory.CreateDirectory(cbdeDirectoryRoot);
         }
 
