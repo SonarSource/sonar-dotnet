@@ -68,4 +68,32 @@ namespace Tests.Diagnostics
                 });
         }
     }
+
+    public class WithLocalFunctions
+    {
+        public void Method()
+        {
+            void Foo(List<int> list)
+            {
+                list.Select(item => 1);
+
+                list.Select(item =>
+                {
+                    var value = 1; // Noncompliant
+                    return item;
+                });
+            }
+
+            static void Bar(List<int> list)
+            {
+                list.Select(item => 1);
+
+                list.Select(item =>
+                {
+                    var value = 1; // Noncompliant
+                    return item;
+                });
+            }
+        }
+    }
 }
