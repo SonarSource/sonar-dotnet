@@ -22,8 +22,9 @@ extern alias csharp;
 extern alias vbnet;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.UnitTest.TestFramework;
+
+using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules

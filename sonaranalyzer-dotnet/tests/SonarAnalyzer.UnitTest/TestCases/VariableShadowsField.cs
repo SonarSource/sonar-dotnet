@@ -105,7 +105,7 @@ namespace Tests.Diagnostics
 
             static void doMore()
             {
-                bool isUsed = true; // Compliant - FN: should check also function variable shadowing?
+                bool isUsed = true; // Compliant
             }
         }
     }
