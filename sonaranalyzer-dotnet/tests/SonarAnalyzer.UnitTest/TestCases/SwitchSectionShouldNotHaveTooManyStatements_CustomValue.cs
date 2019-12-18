@@ -22,21 +22,5 @@ namespace Tests.Diagnostics
                     break;
             }
         }
-
-        public int Test(string type)
-        {
-            return type switch // Compliant - FN
-            {
-                _ => 1
-                       + 2
-                       + 3
-                       + 4
-                       + 5
-                       + 6
-                       + 7
-                       + 8
-                       + 9
-            };
-        }
     }
 }

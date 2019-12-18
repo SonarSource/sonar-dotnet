@@ -47,7 +47,7 @@ namespace Tests.Diagnostics
 
             var result = first switch
             {
-                "a" => second switch // Compliant - FN: should check also switch expressions?
+                "a" => second switch // Compliant
                 {
                     "x" => 9,
                     _ => 1
