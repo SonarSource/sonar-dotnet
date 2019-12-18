@@ -183,4 +183,4 @@ stages:
 - template: promote-stage.yml@commonTemplates
   parameters:
     stageDependencies:
-    - qa
+    - build
