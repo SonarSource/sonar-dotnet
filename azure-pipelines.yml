@@ -445,7 +445,7 @@ stages:
 
 - stage: promoteNugets
   displayName: Promote NuGet on repox
-  dependsOn: build
+  dependsOn: qa
   condition: succeeded()
   jobs:
     - job: promoteRepox
@@ -491,19 +491,50 @@ stages:
                 targetRepo = sourceRepo.replace('qa', 'public')
               
               artifact = f'SonarAnalyzer.CFG.CSharp.{version}.nupkg'
-              status = 'passed'
               print(f'Promoting nuget {artifact} from {sourceRepo} to {targetRepo}')
 
               url = f'$(ARTIFACTORY_URL)/api/move/{sourceRepo}/{artifact}?to=/{targetRepo}/{artifact}'
-              print(f'URL: {url}')
               headers = {'Content-Type': 'application/json'}
               response = requests.post(url, headers=headers, auth=('$(ARTIFACTORY_API_USER)', '$(ARTIFACTORY_API_KEY)'))
               
+              fixedBranch = ''
+              if not isPr:
+                # Cannot use BUILD_SOURCEBRANCHNAME because of https://github.com/Microsoft/azure-pipelines-agent/issues/838
+                branch = os.environ['BUILD_SOURCEBRANCH']
+                refPrefix = "refs/heads/"
+                if branch.startswith(refPrefix):
+                  fixedBranch = branch[len(refPrefix):]
+              print("##vso[task.setvariable variable=fixedBranch;isOutput=true]" + fixedBranch)
+
               promoted = response.status_code == 200
               if not promoted:
                 print('[!] [{0}] Server Error'.format(response.status_code), file=sys.stderr)
 
+    - job: nugetBurgrFailed
+      dependsOn: promoteRepox
+      pool: server
+      condition: failed()
+      steps:
+      - template: notify-burgr-steps.yml
+        parameters:
+          name: 'artifacts'
+          type: 'promotion'
+          status: 'failed'
+          fixedBranch: $(fixedBranch)
+
+    - job: nugetBurgrCanceled
+      dependsOn: promoteRepox
+      pool: server
+      condition: canceled()
+      steps:
+      - template: notify-burgr-steps.yml
+        parameters:
+          name: 'artifacts'
+          type: 'promotion'
+          status: 'canceled'
+          fixedBranch: $(fixedBranch)
+
 - template: promote-stage.yml@commonTemplates
   parameters:
     stageDependencies:
-    - build
+    - promoteNugets
