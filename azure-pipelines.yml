@@ -515,7 +515,7 @@ stages:
       pool: server
       condition: failed()
       steps:
-      - template: notify-burgr-steps.yml
+      - template: notify-burgr-steps.yml@commonTemplates
         parameters:
           name: 'artifacts'
           type: 'promotion'
@@ -527,7 +527,7 @@ stages:
       pool: server
       condition: canceled()
       steps:
-      - template: notify-burgr-steps.yml
+      - template: notify-burgr-steps.yml@commonTemplates
         parameters:
           name: 'artifacts'
           type: 'promotion'
