@@ -33,18 +33,64 @@ using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.ShimLayer.CSharp;
 
-namespace SonarAnalyzer
+namespace SonarAnalyzer.CBDE
 {
-    internal static class SyntaxNodeExtension
-    {
-        public static string Dump(this SyntaxNode node)
-        {
-            return Regex.Replace(node.ToString(), @"\t|\n|\r", " ");
-        }
-    }
-
     public class MLIRExporter
     {
+        public static readonly List<SyntaxKind> unsupportedSyntaxes = new List<SyntaxKind>
+        {
+            SyntaxKind.ForEachStatement,
+            SyntaxKind.AwaitExpression,
+            SyntaxKind.YieldReturnStatement,
+            SyntaxKind.YieldBreakStatement,
+            SyntaxKind.TryStatement,
+            SyntaxKind.UsingStatement,
+            SyntaxKind.LogicalAndExpression,
+            SyntaxKind.LogicalOrExpression,
+            SyntaxKind.ConditionalExpression,
+            SyntaxKind.ConditionalAccessExpression,
+            SyntaxKind.CoalesceExpression,
+            SyntaxKind.SwitchStatement,
+            SyntaxKind.ParenthesizedLambdaExpression,
+            SyntaxKind.SimpleLambdaExpression,
+            SyntaxKind.FixedStatement,
+            SyntaxKind.CheckedStatement,
+            SyntaxKind.CheckedExpression,
+            SyntaxKind.UncheckedExpression,
+            SyntaxKind.UncheckedStatement,
+            SyntaxKind.GotoStatement,
+            SyntaxKind.AnonymousMethodExpression,
+            SyntaxKindEx.UnderscoreToken,
+            SyntaxKindEx.IsPatternExpression,
+            SyntaxKindEx.DefaultLiteralExpression,
+            SyntaxKindEx.LocalFunctionStatement,
+            SyntaxKindEx.TupleType,
+            SyntaxKindEx.TupleElement,
+            SyntaxKindEx.TupleExpression,
+            SyntaxKindEx.SingleVariableDesignation,
+            SyntaxKindEx.ParenthesizedVariableDesignation,
+            SyntaxKindEx.ForEachVariableStatement,
+            SyntaxKindEx.DeclarationPattern,
+            SyntaxKindEx.ConstantPattern,
+            SyntaxKindEx.CasePatternSwitchLabel,
+            SyntaxKindEx.WhenClause,
+            SyntaxKindEx.DiscardDesignation,
+            SyntaxKindEx.DeclarationExpression,
+            SyntaxKindEx.RefExpression,
+            SyntaxKindEx.RefType,
+            SyntaxKindEx.ThrowExpression
+        };
+
+        private readonly TextWriter writer;
+        private readonly SemanticModel semanticModel;
+        private readonly bool exportsLocations;
+        private readonly Dictionary<Block, int> blockMap = new Dictionary<Block, int>();
+        private int blockCounter = 0;
+        private readonly Dictionary<SyntaxNode, int> opMap = new Dictionary<SyntaxNode, int>();
+        private int opCounter = 0;
+        private readonly Encoding encoder = System.Text.Encoding.GetEncoding("ASCII", new PreservingEncodingFallback(), DecoderFallback.ExceptionFallback);
+        private readonly MlirExporterMetrics exporterMetrics;
+
         public MLIRExporter(TextWriter w, SemanticModel model, MlirExporterMetrics metrics, bool withLoc)
         {
             writer = w;
@@ -65,7 +111,7 @@ namespace SonarAnalyzer
                 return;
             }
 
-            if (IsTooClomplexForMLIROrTheCFG(method))
+            if (IsTooComplexForMLIROrTheCFG(method))
             {
                 writer.WriteLine($"// Skipping function {method.Identifier.ValueText}{GetAnonymousArgumentsString(method)}, it contains poisonous unsupported syntaxes");
                 writer.WriteLine();
@@ -116,7 +162,8 @@ namespace SonarAnalyzer
             }
             return sb.ToString();
         }
-        private bool IsTooClomplexForMLIROrTheCFG(MethodDeclarationSyntax method)
+
+        private bool IsTooComplexForMLIROrTheCFG(MethodDeclarationSyntax method)
         {
             var symbol = semanticModel.GetDeclaredSymbol(method);
             if (symbol.IsAsync)
@@ -159,6 +206,75 @@ namespace SonarAnalyzer
             return semanticModel.GetTypeInfo(method.ReturnType).Type.SpecialType == SpecialType.System_Void;
         }
 
+        private void ExportReturnStatement(ReturnStatementSyntax ret, string functionReturnType)
+        {
+            if (ret.Expression == null)
+            {
+                writer.WriteLine($"return {GetLocation(ret)}");
+            }
+            else
+            {
+                Debug.Assert(functionReturnType != "()", "Returning value in function declared with no return type");
+                var returnedVal = ret.Expression.RemoveParentheses();
+                if (semanticModel.GetTypeInfo(returnedVal).Type == null &&
+                    returnedVal.Kind() == SyntaxKind.SimpleMemberAccessExpression)
+                {
+                    // Special case a returning a method group that will be cast into a func
+                    writer.WriteLine($"%{OpId(ret)} = cbde.unknown : none {GetLocation(ret)} // return method group");
+                    writer.WriteLine($"return %{OpId(ret)} : none {GetLocation(ret)}");
+                    return;
+                }
+
+                var id = ComputeCompatibleId(ret.Expression, functionReturnType);
+                writer.WriteLine($"return %{id} : {functionReturnType} {GetLocation(ret)}");
+            }
+        }
+
+        private void ExportJumpBlock(JumpBlock jb, string functionReturnType)
+        {
+            switch (jb.JumpNode)
+            {
+                case ReturnStatementSyntax ret:
+                    ExportReturnStatement(ret, functionReturnType);
+                    break;
+                case BreakStatementSyntax breakStmt:
+                    writer.WriteLine($"br ^{BlockId(jb.SuccessorBlock)} {GetLocation(breakStmt)} // break");
+                    break;
+                case ContinueStatementSyntax continueStmt:
+                    writer.WriteLine($"br ^{BlockId(jb.SuccessorBlock)} {GetLocation(continueStmt)} // continue");
+                    break;
+                case ThrowStatementSyntax throwStmt:
+                    // TODO : Should we transfert to a catch block if we are inside a try/catch?
+                    writer.WriteLine($"cbde.throw %{OpId(throwStmt.Expression)} :  {MLIRType(throwStmt.Expression)} {GetLocation(throwStmt)}");
+                    break;
+                default:
+                    Debug.Assert(false, "Unknown kind of JumpBlock");
+                    break;
+            }
+        }
+
+        private void ExportBinaryBranchBlock(BinaryBranchBlock bbb)
+        {
+            /*
+                     * Currently, we do exactly the same for all cases that may have created a BinaryBranchBlock
+                     * (this block can be created for ConditionalExpression, IfStatement, ForEachStatement, 
+                     * CoalesceExpression, ConditionalAccessExpression, LogicalAndExpression, LogicalOrExpression, 
+                     * ForStatement and CatchFilterClause) maybe later, we'll do something different depending on
+                     * the control structure
+                     */
+            var cond = GetCondition(bbb);
+            if (null == cond)
+            {
+                Debug.Assert(bbb.BranchingNode.Kind() == SyntaxKind.ForStatement);
+                writer.WriteLine($"br ^{BlockId(bbb.TrueSuccessorBlock)}");
+            }
+            else
+            {
+                var id = EnforceBoolOpId(cond as ExpressionSyntax);
+                writer.WriteLine($"cond_br %{id}, ^{BlockId(bbb.TrueSuccessorBlock)}, ^{BlockId(bbb.FalseSuccessorBlock)} {GetLocation(cond)}");
+            }
+        }
+
         private void ExportBlock(Block block, MethodDeclarationSyntax parentMethod, string functionReturnType)
         {
             writer.WriteLine($"^{BlockId(block)}: // {block.GetType().Name}");
@@ -172,64 +288,10 @@ namespace SonarAnalyzer
             switch (block)
             {
                 case JumpBlock jb:
-                    switch (jb.JumpNode)
-                    {
-                        case ReturnStatementSyntax ret:
-                            if (ret.Expression == null)
-                            {
-                                writer.WriteLine($"return {GetLocation(ret)}");
-                            }
-                            else
-                            {
-                                Debug.Assert(functionReturnType!="()","Returning value in function declared with no return type");
-                                var returnedVal = ret.Expression.RemoveParentheses();
-                                if (semanticModel.GetTypeInfo(returnedVal).Type == null &&
-                                    returnedVal.Kind() == SyntaxKind.SimpleMemberAccessExpression)
-                                {
-                                    // Special case a returning a method group that will be cast into a func
-                                    writer.WriteLine($"%{OpId(ret)} = cbde.unknown : none {GetLocation(ret)} // return method group");
-                                    writer.WriteLine($"return %{OpId(ret)} : none {GetLocation(ret)}");
-                                    break;
-                                }
-
-                                var id = ComputeCompatibleId(ret.Expression, functionReturnType);
-                                writer.WriteLine($"return %{id} : {functionReturnType} {GetLocation(ret)}");
-                            }
-                            break;
-                        case BreakStatementSyntax breakStmt:
-                            writer.WriteLine($"br ^{BlockId(jb.SuccessorBlock)} {GetLocation(breakStmt)} // break");
-                            break;
-                        case ContinueStatementSyntax continueStmt:
-                            writer.WriteLine($"br ^{BlockId(jb.SuccessorBlock)} {GetLocation(continueStmt)} // continue");
-                            break;
-                        case ThrowStatementSyntax throwStmt:
-                            // TODO : Should we transfert to a catch block if we are inside a try/catch?
-                            writer.WriteLine($"cbde.throw %{OpId(throwStmt.Expression)} :  {MLIRType(throwStmt.Expression)} {GetLocation(throwStmt)}");
-                            break;
-                        default:
-                            Debug.Assert(false, "Unknown kind of JumpBlock");
-                            break;
-                    }
+                    ExportJumpBlock(jb, functionReturnType);
                     break;
                 case BinaryBranchBlock bbb:
-                    /*
-                     * Currently, we do exactly the same for all cases that may have created a BinaryBranchBlock
-                     * (this block can be created for ConditionalExpression, IfStatement, ForEachStatement, 
-                     * CoalesceExpression, ConditionalAccessExpression, LogicalAndExpression, LogicalOrExpression, 
-                     * ForStatement and CatchFilterClause) maybe later, we'll do something different depending on
-                     * the control structure
-                     */
-                    var cond = GetCondition(bbb);
-                    if (null == cond)
-                    {
-                        Debug.Assert(bbb.BranchingNode.Kind() == SyntaxKind.ForStatement);
-                        writer.WriteLine($"br ^{BlockId(bbb.TrueSuccessorBlock)}");
-                    }
-                    else
-                    {
-                        var id = EnforceBoolOpId(cond as ExpressionSyntax);
-                        writer.WriteLine($"cond_br %{id}, ^{BlockId(bbb.TrueSuccessorBlock)}, ^{BlockId(bbb.FalseSuccessorBlock)} {GetLocation(cond)}");
-                    }
+                    ExportBinaryBranchBlock(bbb);
                     break;
                 case SimpleBlock sb:
                     writer.WriteLine($"br ^{BlockId(sb.SuccessorBlock)}");
@@ -765,59 +827,6 @@ namespace SonarAnalyzer
             return newId;
         }
 
-        private readonly TextWriter writer;
-        private readonly SemanticModel semanticModel;
-        private readonly bool exportsLocations;
-        private readonly Dictionary<Block, int> blockMap = new Dictionary<Block, int>();
-        private int blockCounter = 0;
-        private readonly Dictionary<SyntaxNode, int> opMap = new Dictionary<SyntaxNode, int>();
-        private int opCounter = 0;
-        private readonly Encoding encoder = System.Text.Encoding.GetEncoding("ASCII", new PreservingEncodingFallback(), DecoderFallback.ExceptionFallback);
-        private MlirExporterMetrics exporterMetrics;
-        public static readonly List<SyntaxKind> unsupportedSyntaxes = new List<SyntaxKind>
-        {
-            SyntaxKind.ForEachStatement,
-            SyntaxKind.AwaitExpression,
-            SyntaxKind.YieldReturnStatement,
-            SyntaxKind.YieldBreakStatement,
-            SyntaxKind.TryStatement,
-            SyntaxKind.UsingStatement,
-            SyntaxKind.LogicalAndExpression,
-            SyntaxKind.LogicalOrExpression,
-            SyntaxKind.ConditionalExpression,
-            SyntaxKind.ConditionalAccessExpression,
-            SyntaxKind.CoalesceExpression,
-            SyntaxKind.SwitchStatement,
-            SyntaxKind.ParenthesizedLambdaExpression,
-            SyntaxKind.SimpleLambdaExpression,
-            SyntaxKind.FixedStatement,
-            SyntaxKind.CheckedStatement,
-            SyntaxKind.CheckedExpression,
-            SyntaxKind.UncheckedExpression,
-            SyntaxKind.UncheckedStatement,
-            SyntaxKind.GotoStatement,
-            SyntaxKind.AnonymousMethodExpression,
-            SyntaxKindEx.UnderscoreToken,
-            SyntaxKindEx.IsPatternExpression,
-            SyntaxKindEx.DefaultLiteralExpression,
-            SyntaxKindEx.LocalFunctionStatement,
-            SyntaxKindEx.TupleType,
-            SyntaxKindEx.TupleElement,
-            SyntaxKindEx.TupleExpression,
-            SyntaxKindEx.SingleVariableDesignation,
-            SyntaxKindEx.ParenthesizedVariableDesignation,
-            SyntaxKindEx.ForEachVariableStatement,
-            SyntaxKindEx.DeclarationPattern,
-            SyntaxKindEx.ConstantPattern,
-            SyntaxKindEx.CasePatternSwitchLabel,
-            SyntaxKindEx.WhenClause,
-            SyntaxKindEx.DiscardDesignation,
-            SyntaxKindEx.DeclarationExpression,
-            SyntaxKindEx.RefExpression,
-            SyntaxKindEx.RefType,
-            SyntaxKindEx.ThrowExpression
-        };
-
         public int BlockId(Block cfgBlock) =>
             this.blockMap.GetOrAdd(cfgBlock, b => this.blockCounter++);
         public string OpId(SyntaxNode node)
@@ -848,6 +857,14 @@ namespace SonarAnalyzer
             Byte[] encodedBytes = encoder.GetBytes(name);
             return '_' + encoder.GetString(encodedBytes);
 
+        }
+    }
+
+    internal static class SyntaxNodeExtension
+    {
+        public static string Dump(this SyntaxNode node)
+        {
+            return Regex.Replace(node.ToString(), @"\t|\n|\r", " ");
         }
     }
 }

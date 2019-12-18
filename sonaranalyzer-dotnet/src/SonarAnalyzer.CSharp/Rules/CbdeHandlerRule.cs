@@ -21,6 +21,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.CBDE;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
@@ -50,20 +51,24 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private readonly ImmutableDictionary<string, DiagnosticDescriptor> ruleIdToDiagDescriptor = ImmutableDictionary<string, DiagnosticDescriptor>.Empty
             .Add("S3949", ruleS3949);
+
         public CbdeHandlerRule() : this(false) {}
+
         private CbdeHandlerRule(bool unitTest)
         {
             this.unitTest = unitTest;
         }
+
         internal static CbdeHandlerRule MakeUnitTestInstance()
         {
             return new CbdeHandlerRule(true);
         }
+
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                CbdeHandler cbdeHandler = new CbdeHandler(context, OnCbdeIssue, ShouldRunCbdeInContext, () => { return WorkDirectoryBasePath; });
+                new CbdeHandler(context, OnCbdeIssue, ShouldRunCbdeInContext, () => { return WorkDirectoryBasePath; });
             }
         }
 

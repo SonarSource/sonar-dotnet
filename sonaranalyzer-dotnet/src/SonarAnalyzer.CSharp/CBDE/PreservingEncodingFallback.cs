@@ -21,7 +21,7 @@
 using System;
 using System.Text;
 
-namespace SonarAnalyzer
+namespace SonarAnalyzer.CBDE
 {
     internal class PreservingEncodingBuffer : EncoderFallbackBuffer
     {

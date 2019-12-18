@@ -23,13 +23,13 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace SonarAnalyzer
+namespace SonarAnalyzer.CBDE
 {
     public class MlirExporterMetrics
     {
         private int supportedFunctionsCount;
         private int unsupportedFunctionsCount;
-        private Dictionary<SyntaxKind, int> unsupportedSyntaxes;
+        private readonly Dictionary<SyntaxKind, int> unsupportedSyntaxes;
 
         public MlirExporterMetrics()
         {
