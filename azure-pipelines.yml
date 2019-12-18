@@ -116,7 +116,7 @@ stages:
         inputs:
           command: 'push'
           artifactoryService: 'Repox artifactory'
-          targetDeployRepo: 'sonarsource-nuget-qa'
+          targetDeployRepo: 'sonarsource-nuget-dev'
           pathToNupkg: '$(Build.ArtifactStagingDirectory)/packages/SonarAnalyzer.CFG.CSharp.*.nupkg'
 
 - stage: promoteNugets
@@ -162,7 +162,7 @@ stages:
               sourceRepo = 'sonarsource-nuget-qa' # todo os.environ['ARTIFACTORY_NUGET_REPO']
               targetRepo = None
               if isPr:
-                targetRepo = sourceRepo.replace('qa', 'dev')
+                targetRepo = sourceRepo.replace('qa', 'public')
               else:
                 targetRepo = sourceRepo.replace('qa', 'public')
               
