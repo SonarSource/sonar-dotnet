@@ -27,5 +27,13 @@
                     break;
             }
         }
+
+        public int Test(string type)
+        {
+            return type switch // Compliant - FN
+            {
+                _ => 1
+            };
+        }
     }
 }
