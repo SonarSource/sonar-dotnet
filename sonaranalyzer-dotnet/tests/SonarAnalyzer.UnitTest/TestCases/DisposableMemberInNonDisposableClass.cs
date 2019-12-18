@@ -99,4 +99,14 @@ namespace Tests.Diagnostics
     {
 
     }
+
+    public ref struct DisposableStruct // Compliant - FN
+    {
+        private FileStream fs;  // This member is never Disposed
+
+        public void OpenResource(string path)
+        {
+            this.fs = new FileStream(path, FileMode.Open);
+        }
+    }
 }

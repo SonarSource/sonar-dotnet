@@ -318,4 +318,28 @@ namespace Tests.Diagnostics
         }
     }
 
+    public ref struct Struct
+    {
+        public void Dispose()
+        {
+        }
+    }
+
+    public class Consumer
+    {
+        public void M1()
+        {
+            var s = new Struct();
+
+            s.Dispose();
+            s.Dispose(); // Noncompliant
+        }
+
+        public void M2()
+        {
+            using var s = new Struct();
+
+            s.Dispose(); // Compliant - FN
+        }
+    }
 }

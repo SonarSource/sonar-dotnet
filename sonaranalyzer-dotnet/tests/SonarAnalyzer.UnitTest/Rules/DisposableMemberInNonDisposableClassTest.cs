@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +32,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DisposableMemberInNonDisposableClass()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\DisposableMemberInNonDisposableClass.cs", new DisposableMemberInNonDisposableClass());
+            Verifier.VerifyAnalyzer(@"TestCases\DisposableMemberInNonDisposableClass.cs",
+                new DisposableMemberInNonDisposableClass(),
+                ParseOptionsHelper.FromCSharp8);
         }
     }
 }

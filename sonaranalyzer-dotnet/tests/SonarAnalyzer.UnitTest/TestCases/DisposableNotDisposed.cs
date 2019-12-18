@@ -113,5 +113,26 @@ namespace Tests.Diagnostics
         {
             // do nothing
         }
+
+
+        private void Clear()
+        {
+            using var inner_field_fs1 = new FileStream(@"c:\foo.txt", FileMode.Open); // Noncompliant - FP: the class is disposed by the using declaration
+        }
+    }
+
+    public ref struct Struct
+    {
+        public void Dispose()
+        {
+        }
+    }
+
+    public class Consumer
+    {
+        public void Method()
+        {
+            var x = new Struct(); // Compliant - FN this struct needs to be disposed (disposable ref struct)
+        }
     }
 }
