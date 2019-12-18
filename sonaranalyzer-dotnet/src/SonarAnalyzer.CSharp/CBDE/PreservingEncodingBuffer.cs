@@ -18,23 +18,39 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Text;
 
 namespace SonarAnalyzer.CBDE
 {
-
-    /// <summary>
-    /// C# source code can contain any character, but MLIR only handle 8-bits chars. We must therefore encode C# names
-    /// so that two different strings in C# always result in two different strings in the generated code (by default, all
-    /// unknown characters would be translated to the same one)
-    /// </summary>
-    internal class PreservingEncodingFallback : EncoderFallback
+    internal class PreservingEncodingBuffer : EncoderFallbackBuffer
     {
-        public override int MaxCharCount => 4;
+        public override int Remaining => buffer.Length - currentChar;
 
-        public override EncoderFallbackBuffer CreateFallbackBuffer()
+        public override bool Fallback(char charUnknown, int index)
         {
-            return new PreservingEncodingBuffer();
+            buffer = String.Format(".{0:X}", (int)charUnknown);
+            currentChar = 0;
+            return true;
         }
+
+        public override bool Fallback(char charUnknownHigh, char charUnknownLow, int index)
+        {
+            buffer = String.Format(".{0:X}{1:X}", (int)charUnknownHigh, (int)charUnknownLow);
+            currentChar = 0;
+            return true;
+        }
+
+        public override char GetNextChar()
+        {
+            return currentChar < buffer.Length ? buffer[currentChar++] : '\u0000';
+        }
+
+        public override bool MovePrevious()
+        {
+            return false;
+        }
+        private string buffer;
+        private int currentChar;
     }
 }

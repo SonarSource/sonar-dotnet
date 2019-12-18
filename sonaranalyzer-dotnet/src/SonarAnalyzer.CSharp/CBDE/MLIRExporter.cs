@@ -246,6 +246,7 @@ namespace SonarAnalyzer.CBDE
                     break;
                 case ThrowStatementSyntax throwStmt:
                     // TODO : Should we transfert to a catch block if we are inside a try/catch?
+                    // This is part of https://github.com/SonarSource/SonarCBDE/issues/111
                     writer.WriteLine($"cbde.throw %{OpId(throwStmt.Expression)} :  {MLIRType(throwStmt.Expression)} {GetLocation(throwStmt)}");
                     break;
                 default:
@@ -674,7 +675,6 @@ namespace SonarAnalyzer.CBDE
                 writer.WriteLine($"%{OpId(expr)} = cbde.unknown : {MLIRType(expr)} {GetLocation(expr)} // Binary expression on unsupported types {expr.Dump()}");
                 return;
             }
-            // TODO : C#8 : Use switch expression
             string opName;
             switch (expr.Kind())
             {
@@ -809,6 +809,7 @@ namespace SonarAnalyzer.CBDE
                 return string.Empty;
             }
             // TODO: We should decide which of GetLineSpan or GetMappedLineSpan is better to use
+            // This is part of https://github.com/SonarSource/SonarCBDE/issues/30
             var loc = node.GetLocation().GetLineSpan();
             var location = $"loc(\"{loc.Path}\"" +
                 $" :{loc.StartLinePosition.Line}" +
