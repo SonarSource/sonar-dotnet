@@ -159,12 +159,12 @@ stages:
               
               version = '$(SONAR_PROJECT_VERSION).$(Build.BuildId)'
               isPr = '$(Build.Reason)' == 'PullRequest'
-              sourceRepo = 'sonarsource-nuget-qa' # todo os.environ['ARTIFACTORY_NUGET_REPO']
+              sourceRepo = 'sonarsource-nuget-dev' # todo os.environ['ARTIFACTORY_NUGET_REPO']
               targetRepo = None
               if isPr:
-                targetRepo = sourceRepo.replace('qa', 'public')
+                targetRepo = sourceRepo.replace('dev', 'public')
               else:
-                targetRepo = sourceRepo.replace('qa', 'public')
+                targetRepo = sourceRepo.replace('dev', 'public')
               
               artifact = f'SonarAnalyzer.CSharp.{version}.nupkg'
               status = 'passed'
