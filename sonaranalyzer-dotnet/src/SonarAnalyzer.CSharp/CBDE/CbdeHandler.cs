@@ -194,7 +194,7 @@ namespace SonarAnalyzer.CBDE
                     catch(Exception e)
                     {
                         Log("An exception has occured: " + e.Message + "\n" + e.StackTrace);
-                        throw;
+                        throw new Exception($"Top level error in CBDE handling: {e.Message}");
                     }
                 });
         }
@@ -283,22 +283,30 @@ namespace SonarAnalyzer.CBDE
 
                 cbdeProcess.StartInfo.UseShellExecute = false;
                 cbdeProcess.StartInfo.RedirectStandardError = true;
-                cbdeProcess.Start();
                 long totalProcessorTime = 0;
                 long peakPagedMemory = 0;
-                long peakWorkingSet=0;
-                while(!cbdeProcess.WaitForExit(processStatPeriodMs))
+                long peakWorkingSet = 0;
+                try
                 {
-                    try
+                    cbdeProcess.Start();
+                    while (!cbdeProcess.WaitForExit(processStatPeriodMs))
                     {
-                        cbdeProcess.Refresh();
-                        totalProcessorTime = (long)cbdeProcess.TotalProcessorTime.TotalMilliseconds;
-                        peakPagedMemory = cbdeProcess.PeakPagedMemorySize64;
-                        peakWorkingSet = cbdeProcess.PeakWorkingSet64;
+                        try
+                        {
+                            cbdeProcess.Refresh();
+                            totalProcessorTime = (long)cbdeProcess.TotalProcessorTime.TotalMilliseconds;
+                            peakPagedMemory = cbdeProcess.PeakPagedMemorySize64;
+                            peakWorkingSet = cbdeProcess.PeakWorkingSet64;
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            // the process might have exited during the loop
+                        }
                     }
-                    catch (InvalidOperationException) {
-                        // the process might have exited during the loop
-                    }
+                }
+                catch (Exception e)
+                {
+                    throw new Exception($"Exception while running CBDE process: {e.Message}");
                 }
 
                 var logString = $@" *exit code: {cbdeProcess.ExitCode}
@@ -358,7 +366,7 @@ namespace SonarAnalyzer.CBDE
             failureString.Append("  content of stderr is:\n" + pProcess.StandardError.ReadToEnd());
             failureString.Append("  content of the CBDE handler log file is :\n" + logStringBuilder.ToString());
             Log(failureString.ToString());
-            Console.Error.WriteLine($"Error when executing CBDE, more details in {cbdeProcessSpecificPath}");
+            throw new Exception($"CBDE external process reported an error.");
         }
 
         private void RaiseIssuesFromJSon(CompilationAnalysisContext context)
@@ -377,8 +385,7 @@ namespace SonarAnalyzer.CBDE
                 {
                     LogIfFailure($"- error parsing json file {cbdeJsonOutputPath}: {exception.ToString()}");
                     Log(logStringBuilder.ToString());
-                    Console.Error.WriteLine($"Error parsing output from CBDE, more details in {cbdeProcessSpecificPath}");
-                    return;
+                    throw new Exception($"Error parsing output from CBDE: {exception.Message}");
                 }
                 throw;
             }
@@ -398,8 +405,7 @@ namespace SonarAnalyzer.CBDE
                     {
                         LogIfFailure($"  * error reporting token {cbdeJsonOutputPath}: {e.ToString()}");
                         Log(logStringBuilder.ToString());
-                        Console.Error.WriteLine($"Error raising issue from CBDE, more details in {cbdeProcessSpecificPath}");
-                        continue;
+                        throw new Exception($"Error raising issue from CBDE: {e.Message}");
                     }
                     throw;
                 }
