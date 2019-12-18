@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,6 +29,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -57,6 +58,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.DestructorDeclaration,
                 SyntaxKind.ConversionOperatorDeclaration,
                 SyntaxKind.OperatorDeclaration);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var declaration = (LocalFunctionStatementSyntaxWrapper)c.Node;
+                    CheckForRedundantJumps(declaration.Body, c);
+                },
+                SyntaxKindEx.LocalFunctionStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
