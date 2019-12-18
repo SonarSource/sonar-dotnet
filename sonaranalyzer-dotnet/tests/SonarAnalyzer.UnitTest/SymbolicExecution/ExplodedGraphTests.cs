@@ -26,18 +26,18 @@ using csharp::SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.UnitTest.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.UnitTest.SymbolicExecution
 {
     [TestClass]
-    public class ExplodedGraphTest
+    public class ExplodedGraphTests
     {
         private const string TestInput = @"
 namespace NS
