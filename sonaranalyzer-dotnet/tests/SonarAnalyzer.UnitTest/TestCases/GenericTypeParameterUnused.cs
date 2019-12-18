@@ -117,4 +117,22 @@ namespace Tests.Diagnostics
         where T2 : T1
     {
     }
+
+    public class WithLocalFunctions
+    {
+        public void Method()
+        {
+            DoMoreStuff<int, string>("value");
+
+            T3 DoStuff<T, T1, T3>(params T3[] o) // Compliant - FN: local functions are not verified
+            {
+                return o[0];
+            }
+
+            static T3 DoMoreStuff<T, T3>(params T3[] o) // Compliant - FN: local static functions are not verified
+            {
+                return o[0];
+            }
+        }
+    }
 }

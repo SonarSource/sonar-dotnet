@@ -82,4 +82,21 @@ namespace Tests.Diagnostics
             i.Write(1); // Fixed
         }
     }
+
+    public class WithLocalFunctions
+    {
+        public void Method()
+        {
+            Foo(1); // Fixed
+            Bar(1); // Fixed
+
+            void Foo(int i, int j = 5)
+            {
+            }
+
+            static void Bar(int i, int j = 5)
+            {
+            }
+        }
+    }
 }

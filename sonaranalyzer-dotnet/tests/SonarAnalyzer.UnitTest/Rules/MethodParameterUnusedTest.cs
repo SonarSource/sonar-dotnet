@@ -59,6 +59,15 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void MethodParameterUnused_FromCSharp8()
+        {
+            Verifier.VerifyNoIssueReported(@"TestCases\MethodParameterUnused.CSharp8.cs",
+                new CS.MethodParameterUnused(),
+                ParseOptionsHelper.FromCSharp8);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void MethodParameterUnused_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.vb",

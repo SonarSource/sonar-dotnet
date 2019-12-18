@@ -39,4 +39,21 @@ namespace Tests.Diagnostics
         {
         }
     }
+
+    public class WithLocalFunctions
+    {
+        public void Method()
+        {
+            void Foo()
+            {
+                throw new NotImplementedException(); // Noncompliant
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            }
+
+            static void Bar()
+            {
+                throw new NotImplementedException(); // Noncompliant
+            }
+        }
+    }
 }

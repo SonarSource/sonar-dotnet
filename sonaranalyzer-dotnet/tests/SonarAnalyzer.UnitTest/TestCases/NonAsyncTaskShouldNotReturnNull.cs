@@ -139,5 +139,17 @@ namespace Tests.Diagnostics
         }
 
         private Task<object> SomeOtherMethodAsync(Func<object, Task<object>> function) => function.Invoke(null);
+
+        public Task<object> GetBar()
+        {
+            return Add(1, 2);
+
+            static Task<object> Add(int left, int right)
+            {
+                return null; // Compliant - FN: static local functions are not triggering the warning
+            }
+
+            static Task<object> GetTaskAsync2() => null; // Compliant - FN: static local functions are not triggering the warning
+        }
     }
 }
