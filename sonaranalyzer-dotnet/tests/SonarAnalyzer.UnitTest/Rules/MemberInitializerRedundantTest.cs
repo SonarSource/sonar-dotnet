@@ -34,8 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs",
                 new MemberInitializerRedundant(),
-                ParseOptionsHelper.FromCSharp8,
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
+                ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]
