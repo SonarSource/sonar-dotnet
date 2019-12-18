@@ -35,8 +35,29 @@
                 seed = 1;
                 return x + seed;
             }
+            static int BadIncRecursive(int x, int seed)     //Noncompliant
+            {
+                seed = 1;
+                if (x > 1)
+                {
+                    return BadIncRecursive(x - 1, seed);
+                }
+                return x + seed;
+            }
 
-            return LocalFunction(a, 42) + BadIncA(a, 42) + BadIncB(a, 42);
+            return LocalFunction(a, 42) + BadIncA(a, 42) + BadIncB(a, 42) + BadIncRecursive(a, 42);
+        }
+    }
+
+    public class SwitchExpressions
+    {
+        public int DoSomething(int a, bool b)
+        {
+            return b switch
+            {
+                true => a,
+                _ => 0
+            };
         }
     }
 

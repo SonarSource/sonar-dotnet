@@ -54,6 +54,12 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
         protected override void ProcessBlock(Block block, out HashSet<ISymbol> assignedInBlock,
             out HashSet<ISymbol> usedInBlock)
         {
+            ProcessBlockInternal(block, null, out assignedInBlock, out usedInBlock);
+        }
+
+        private void ProcessBlockInternal(Block block, HashSet<ISymbol> processedLocalFunctions
+            , out HashSet<ISymbol> assignedInBlock, out HashSet<ISymbol> usedInBlock)
+        {
             assignedInBlock = new HashSet<ISymbol>(); // Kill (The set of variables that are assigned a value.)
             usedInBlock = new HashSet<ISymbol>(); // Gen (The set of variables that are used before any assignment.)
 
@@ -76,7 +82,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                         break;
 
                     case SyntaxKind.InvocationExpression:
-                        ProcessLocalFunction(instruction, assignedInBlock, usedInBlock);
+                        ProcessLocalFunction(instruction, assignedInBlock, usedInBlock, processedLocalFunctions);
                         break;
 
                     case SyntaxKind.AnonymousMethodExpression:
@@ -192,11 +198,12 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
         }
 
         private void ProcessLocalFunction(SyntaxNode instruction, HashSet<ISymbol> assignedInBlock,
-            HashSet<ISymbol> usedBeforeAssigned)
+            HashSet<ISymbol> usedBeforeAssigned, HashSet<ISymbol> processedLocalFunctions)
         {
             var symbol = semanticModel.GetSymbolInfo(((InvocationExpressionSyntax)instruction).Expression).Symbol;
             // Local function invocation
             if (symbol != null
+                && (processedLocalFunctions == null || !processedLocalFunctions.Contains(symbol))
                 && symbol.ContainingSymbol is IMethodSymbol
                 && symbol.DeclaringSyntaxReferences.Length == 1
                 && symbol.DeclaringSyntaxReferences.Single().GetSyntax() is CSharpSyntaxNode node
@@ -204,9 +211,11 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                 && (LocalFunctionStatementSyntaxWrapper)node is LocalFunctionStatementSyntaxWrapper function
                 && CSharpControlFlowGraph.TryGet(function.Body ?? function.ExpressionBody as CSharpSyntaxNode, semanticModel, out var cfg))
             {
+                processedLocalFunctions = processedLocalFunctions ?? new HashSet<ISymbol>();
+                processedLocalFunctions.Add(symbol);
                 foreach (var block in cfg.Blocks.Reverse())
                 {
-                    ProcessBlock(block, out var subAssigned, out var subUsed);
+                    ProcessBlockInternal(block, processedLocalFunctions, out var subAssigned, out var subUsed);
                     assignedInBlock.UnionWith(subAssigned);
                     usedBeforeAssigned.UnionWith(subUsed);
                 }
