@@ -166,7 +166,7 @@ stages:
               else:
                 targetRepo = sourceRepo.replace('dev', 'public')
               
-              artifact = f'SonarAnalyzer.CSharp.{version}.nupkg'
+              artifact = f'SonarAnalyzer.CFG.CSharp.{version}.nupkg'
               status = 'passed'
               print(f'Promoting nuget {artifact} from {sourceRepo} to {targetRepo}')
               
