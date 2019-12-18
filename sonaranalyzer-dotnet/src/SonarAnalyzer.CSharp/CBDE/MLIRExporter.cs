@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace SonarAnalyzer.CBDE
 {
     public class MLIRExporter
     {
-        public static readonly List<SyntaxKind> unsupportedSyntaxes = new List<SyntaxKind>
+        public static readonly ImmutableList<SyntaxKind> unsupportedSyntaxes = new List<SyntaxKind>
         {
             SyntaxKind.ForEachStatement,
             SyntaxKind.AwaitExpression,
@@ -79,7 +80,7 @@ namespace SonarAnalyzer.CBDE
             SyntaxKindEx.RefExpression,
             SyntaxKindEx.RefType,
             SyntaxKindEx.ThrowExpression
-        };
+        }.ToImmutableList();
 
         private readonly TextWriter writer;
         private readonly SemanticModel semanticModel;

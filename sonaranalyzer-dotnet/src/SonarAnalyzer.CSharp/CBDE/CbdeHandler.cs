@@ -380,7 +380,7 @@ namespace SonarAnalyzer.CBDE
                     Console.Error.WriteLine($"Error parsing output from CBDE, more details in {cbdeProcessSpecificPath}");
                     return;
                 }
-                throw exception;
+                throw;
             }
 
             // in cbde json output there is enclosing {}, so this is considered as a list of list
@@ -401,7 +401,7 @@ namespace SonarAnalyzer.CBDE
                         Console.Error.WriteLine($"Error raising issue from CBDE, more details in {cbdeProcessSpecificPath}");
                         continue;
                     }
-                    throw e;
+                    throw;
                 }
             }
         }
