@@ -144,5 +144,17 @@ namespace Tests.Diagnostics
         private void DoSomethingElse()
         {
         }
+
+        public int Test(string type)
+        {
+            return type switch // Compliant - FN: all branches call the same function
+            {
+                "a" => GetNumber(),
+                "b" => GetNumber(),
+                _ => GetNumber()
+            };
+        }
+
+        public int GetNumber() => 42;
     }
 }
