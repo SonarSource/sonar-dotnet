@@ -263,7 +263,7 @@ namespace Tests.Diagnostics
 
             Func<List<int>> func = () =>
             {
-                return (l = new List<int>(new [] {i}));
+                return (l = new List<int>(new[] { i }));
             };
 
             var x = l; // Noncompliant
@@ -416,6 +416,69 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class CSharp8
+    {
+
+        public interface IWithDefaultImplementation
+        {
+            decimal Count { get; set; }
+            decimal Price { get; set; }
+
+            //Default interface methods
+            decimal Total(decimal discount)
+            {
+                decimal bias;
+                bias = 42.42M;   // Noncompliant
+                bias = 0;
+                var ret = bias + Count * Price * (1 - discount);
+                discount = 0;   // Noncompliant
+                return ret;
+            }
+
+        }
+
+        public class StaticLocalFunctions
+        {
+            public int DoSomething(int a)
+            {
+                static int LocalFunction(int x)
+                {
+                    int seed;
+                    seed = 1;       //Noncompliant
+                    seed = 42;
+                    return x + seed;
+                }
+
+                return LocalFunction(a);
+            }
+        }
+
+        public class SwitchExpressions
+        {
+            int Compute(int a, bool isOK)
+            {
+                var state = a;  //Compliant, it is used inside switch expression
+                state = isOK switch
+                {
+                    true => (state + 1) % 4,
+                    false => state
+                };
+                return state;
+            }
+        }
+
+        public class NullCoalescingAssignment
+        {
+            int[] Compute(int[] arr)
+            {
+                var lst = arr;    //Compliant
+                lst ??= new int[0];
+                return lst;
+            }
+        }
+
+    }
+
     public class AkkaSnippet
     {
         internal void OnlyFinally(object actor)
@@ -481,7 +544,7 @@ namespace Tests.Diagnostics
             {
                 Foo(actor);
             }
-            catch (Exception) when(i == 1)
+            catch (Exception) when (i == 1)
             {
                 actor = null; // Noncompliant
             }
@@ -757,7 +820,7 @@ namespace Tests.Diagnostics
             return exitCode;
         }
 
-        public void Archive() {}
+        public void Archive() { }
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/2426
