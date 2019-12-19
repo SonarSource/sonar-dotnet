@@ -245,7 +245,7 @@ namespace SonarAnalyzer.CBDE
                     writer.WriteLine($"br ^{BlockId(jb.SuccessorBlock)} {GetLocation(continueStmt)} // continue");
                     break;
                 case ThrowStatementSyntax throwStmt:
-                    // TODO : Should we transfert to a catch block if we are inside a try/catch?
+                    // TODO : Should we transfer to a catch block if we are inside a try/catch?
                     // This is part of https://github.com/SonarSource/SonarCBDE/issues/111
                     writer.WriteLine($"cbde.throw %{OpId(throwStmt.Expression)} :  {MLIRType(throwStmt.Expression)} {GetLocation(throwStmt)}");
                     break;
