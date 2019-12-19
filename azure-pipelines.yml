@@ -116,7 +116,7 @@ stages:
         inputs:
           command: 'push'
           artifactoryService: 'Repox artifactory'
-          targetDeployRepo: 'sonarsource-nuget-qa'
+          targetDeployRepo: '$(ARTIFACTORY_NUGET_REPO)'
           pathToNupkg: '$(Build.ArtifactStagingDirectory)/packages/SonarAnalyzer.CFG.CSharp.*.nupkg'
 
 - template: stage-with-burgr-notifications.yml@commonTemplates
@@ -483,7 +483,7 @@ stages:
               
               version = '$(SONAR_PROJECT_VERSION).$(Build.BuildId)'
               isPr = '$(Build.Reason)' == 'PullRequest'
-              sourceRepo = 'sonarsource-nuget-qa' # todo os.environ['ARTIFACTORY_NUGET_REPO']
+              sourceRepo = os.environ['ARTIFACTORY_NUGET_REPO']
               targetRepo = None
               if isPr:
                 targetRepo = sourceRepo.replace('qa', 'dev')
