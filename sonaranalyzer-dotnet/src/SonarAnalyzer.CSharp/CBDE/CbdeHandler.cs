@@ -35,9 +35,6 @@ using System.Threading;
 
 namespace SonarAnalyzer.CBDE
 {
-    public class CbdeException : Exception {
-        public CbdeException(string message) : base(message) {}
-    };
     public class CbdeHandler
     {
         private const int processStatPeriodMs = 1000;
@@ -68,7 +65,6 @@ namespace SonarAnalyzer.CBDE
         private string cbdeDirectoryRoot;
         private string cbdeDirectoryAssembly;
         private string cbdeJsonOutputPath;
-        private string cbdeProcessSpecificPath;
         private string cbdeLogFile;
         private string cbdeMetricsLogFile;
         private string cbdePerfLogFile;
@@ -241,7 +237,7 @@ namespace SonarAnalyzer.CBDE
                 // used only when doing the unit test
                 cbdePath = Path.GetTempPath();
             }
-            cbdeProcessSpecificPath = Path.Combine(cbdePath, $"CBDE_{Process.GetCurrentProcess().Id}");
+            var cbdeProcessSpecificPath = Path.Combine(cbdePath, $"CBDE_{Process.GetCurrentProcess().Id}");
             Directory.CreateDirectory(cbdeProcessSpecificPath);
             cbdeLogFile = Path.Combine(cbdeProcessSpecificPath, "cbdeHandler.log");
             cbdeMetricsLogFile = Path.Combine(cbdeProcessSpecificPath, "metrics.log");
