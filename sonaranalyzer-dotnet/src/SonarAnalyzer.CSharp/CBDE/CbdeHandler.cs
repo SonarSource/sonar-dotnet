@@ -68,6 +68,7 @@ namespace SonarAnalyzer.CBDE
         private string cbdeLogFile;
         private string cbdeMetricsLogFile;
         private string cbdePerfLogFile;
+        private string moreDetailsMessage;
         private bool emitLog = false;
 
         public CbdeHandler(SonarAnalysisContext context,
@@ -193,7 +194,7 @@ namespace SonarAnalyzer.CBDE
                     catch(Exception e)
                     {
                         Log("An exception has occured: " + e.Message + "\n" + e.StackTrace);
-                        throw new CbdeException($"Top level error in CBDE handling: {e.Message}");
+                        throw new CbdeException($"Top level error in CBDE handling: {e.Message}{this.moreDetailsMessage}");
                     }
                 });
         }
@@ -240,6 +241,7 @@ namespace SonarAnalyzer.CBDE
             var cbdeProcessSpecificPath = Path.Combine(cbdePath, $"CBDE_{Process.GetCurrentProcess().Id}");
             Directory.CreateDirectory(cbdeProcessSpecificPath);
             cbdeLogFile = Path.Combine(cbdeProcessSpecificPath, "cbdeHandler.log");
+            moreDetailsMessage = emitLog ? $", more details in {cbdeProcessSpecificPath}" : "";
             cbdeMetricsLogFile = Path.Combine(cbdeProcessSpecificPath, "metrics.log");
             cbdePerfLogFile = Path.Combine(cbdeProcessSpecificPath, "performances.log");
             cbdeDirectoryRoot = Path.Combine(cbdePath, "assemblies");
@@ -305,7 +307,7 @@ namespace SonarAnalyzer.CBDE
                 }
                 catch (Exception e)
                 {
-                    throw new CbdeException($"Exception while running CBDE process: {e.Message}");
+                    throw new CbdeException($"Exception while running CBDE process: {e.Message}{this.moreDetailsMessage}");
                 }
 
                 var logString = $@" *exit code: {cbdeProcess.ExitCode}
@@ -365,7 +367,7 @@ namespace SonarAnalyzer.CBDE
             failureString.Append("  content of stderr is:\n" + pProcess.StandardError.ReadToEnd());
             failureString.Append("  content of the CBDE handler log file is :\n" + logStringBuilder.ToString());
             Log(failureString.ToString());
-            throw new CbdeException($"CBDE external process reported an error.");
+            throw new CbdeException($"CBDE external process reported an error{this.moreDetailsMessage}");
         }
 
         private void RaiseIssuesFromJSon(CompilationAnalysisContext context)
@@ -384,7 +386,7 @@ namespace SonarAnalyzer.CBDE
                 {
                     LogIfFailure($"- error parsing json file {cbdeJsonOutputPath}: {exception.ToString()}");
                     Log(logStringBuilder.ToString());
-                    throw new CbdeException($"Error parsing output from CBDE: {exception.Message}");
+                    throw new CbdeException($"Error parsing output from CBDE: {exception.Message}{this.moreDetailsMessage}");
                 }
                 throw;
             }
@@ -404,7 +406,7 @@ namespace SonarAnalyzer.CBDE
                     {
                         LogIfFailure($"  * error reporting token {cbdeJsonOutputPath}: {e.ToString()}");
                         Log(logStringBuilder.ToString());
-                        throw new CbdeException($"Error raising issue from CBDE: {e.Message}");
+                        throw new CbdeException($"Error raising issue from CBDE: {e.Message}{this.moreDetailsMessage}");
                     }
                     throw;
                 }
