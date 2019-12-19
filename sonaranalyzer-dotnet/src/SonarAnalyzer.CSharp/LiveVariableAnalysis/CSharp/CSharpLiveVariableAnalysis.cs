@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,14 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 {
@@ -53,6 +54,12 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
         protected override void ProcessBlock(Block block, out HashSet<ISymbol> assignedInBlock,
             out HashSet<ISymbol> usedInBlock)
         {
+            ProcessBlockInternal(block, null, out assignedInBlock, out usedInBlock);
+        }
+
+        private void ProcessBlockInternal(Block block, HashSet<ISymbol> processedLocalFunctions
+            , out HashSet<ISymbol> assignedInBlock, out HashSet<ISymbol> usedInBlock)
+        {
             assignedInBlock = new HashSet<ISymbol>(); // Kill (The set of variables that are assigned a value.)
             usedInBlock = new HashSet<ISymbol>(); // Gen (The set of variables that are used before any assignment.)
 
@@ -71,8 +78,11 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                         break;
 
                     case SyntaxKind.VariableDeclarator:
-                        ProcessVariableDeclarator((VariableDeclaratorSyntax)instruction, assignedInBlock,
-                            usedInBlock);
+                        ProcessVariableDeclarator((VariableDeclaratorSyntax)instruction, assignedInBlock, usedInBlock);
+                        break;
+
+                    case SyntaxKind.InvocationExpression:
+                        ProcessLocalFunction(instruction, assignedInBlock, usedInBlock, processedLocalFunctions);
                         break;
 
                     case SyntaxKind.AnonymousMethodExpression:
@@ -183,6 +193,31 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                     {
                         usedBeforeAssigned.Add(symbol);
                     }
+                }
+            }
+        }
+
+        private void ProcessLocalFunction(SyntaxNode instruction, HashSet<ISymbol> assignedInBlock,
+            HashSet<ISymbol> usedBeforeAssigned, HashSet<ISymbol> processedLocalFunctions)
+        {
+            var symbol = semanticModel.GetSymbolInfo(((InvocationExpressionSyntax)instruction).Expression).Symbol;
+            // Local function invocation
+            if (symbol != null
+                && (processedLocalFunctions == null || !processedLocalFunctions.Contains(symbol))
+                && symbol.ContainingSymbol is IMethodSymbol
+                && symbol.DeclaringSyntaxReferences.Length == 1
+                && symbol.DeclaringSyntaxReferences.Single().GetSyntax() is CSharpSyntaxNode node
+                && node.Kind() == SyntaxKindEx.LocalFunctionStatement
+                && (LocalFunctionStatementSyntaxWrapper)node is LocalFunctionStatementSyntaxWrapper function
+                && CSharpControlFlowGraph.TryGet(function.Body ?? function.ExpressionBody as CSharpSyntaxNode, semanticModel, out var cfg))
+            {
+                processedLocalFunctions = processedLocalFunctions ?? new HashSet<ISymbol>();
+                processedLocalFunctions.Add(symbol);
+                foreach (var block in cfg.Blocks.Reverse())
+                {
+                    ProcessBlockInternal(block, processedLocalFunctions, out var subAssigned, out var subUsed);
+                    assignedInBlock.UnionWith(subAssigned);
+                    usedBeforeAssigned.UnionWith(subUsed);
                 }
             }
         }
