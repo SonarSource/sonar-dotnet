@@ -1,5 +1,4 @@
-﻿extern alias csharp;
-/*
+﻿/*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2019 SonarSource SA
 * mailto: contact AT sonarsource DOT com
@@ -19,6 +18,7 @@
 * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+extern alias csharp;
 using System.Linq;
 using csharp::SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using FluentAssertions;
