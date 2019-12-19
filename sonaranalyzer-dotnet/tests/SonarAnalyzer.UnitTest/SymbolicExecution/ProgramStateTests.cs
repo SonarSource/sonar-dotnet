@@ -23,8 +23,9 @@ using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.UnitTest.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.UnitTest.SymbolicExecution
 {
     [TestClass]
     public class ProgramStateTests

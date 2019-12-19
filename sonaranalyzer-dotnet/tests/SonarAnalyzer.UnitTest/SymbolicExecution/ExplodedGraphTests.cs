@@ -1,5 +1,4 @@
-﻿extern alias csharp;
-/*
+﻿/*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2019 SonarSource SA
 * mailto: contact AT sonarsource DOT com
@@ -19,6 +18,7 @@
 * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+extern alias csharp;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,18 +26,18 @@ using csharp::SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.UnitTest.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.UnitTest.SymbolicExecution
 {
     [TestClass]
-    public class ExplodedGraphTest
+    public class ExplodedGraphTests
     {
         private const string TestInput = @"
 namespace NS
