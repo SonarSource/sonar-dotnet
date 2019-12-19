@@ -13,7 +13,6 @@
     <language>en-US</language>
     <copyright>Copyright © 2015-2019 SonarSource SA</copyright>
     <tags></tags>
-    <developmentDependency>true</developmentDependency>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System" targetFramework="" />
     </frameworkAssemblies>
