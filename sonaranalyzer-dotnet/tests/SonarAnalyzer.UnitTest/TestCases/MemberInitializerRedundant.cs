@@ -186,4 +186,28 @@ namespace Tests.Diagnostics
 
         public Person11() => a = 42;
     }
+
+    class CSharp8_PersonA
+    {
+        int age = 42;
+        public CSharp8_PersonA(bool b, int age)
+        {
+            Console.Write(b switch
+                {
+                    true => $"Age: {this.age}",
+                    _ => "N/A"
+                }
+                );
+            this.age = age;
+        }
+    }
+
+    class CSharp8_PersonB
+    {
+        int[] ids = new int[0];
+        public CSharp8_PersonB(int[] ids)
+        {
+            this.ids ??= ids;
+        }
+    }
 }
