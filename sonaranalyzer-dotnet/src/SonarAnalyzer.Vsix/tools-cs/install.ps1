@@ -50,3 +50,6 @@ $project.Object.AnalyzerReferences.Add($analyzerFilePath)
 
 $analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.CSharp.dll"
 $project.Object.AnalyzerReferences.Add($analyzerFilePath)
+
+$analyzerFilePath = Join-Path $analyzersPath "Newtonsoft.Json.dll"
+$project.Object.AnalyzerReferences.Add($analyzerFilePath)

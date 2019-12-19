@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3903",
+"message":  "Move 'IfConditionalAlwaysTrueOrFalse' into a named namespace.",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\IntentionalFindings\S3949.cs",
+"region":  {
+"startLine":  1,
+"startColumn":  14,
+"endLine":  1,
+"endColumn":  44
+}
+}
+}
+]
+}

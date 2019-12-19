@@ -26,6 +26,7 @@
     <file src="bin\Release\SonarAnalyzer.dll" target="analyzers" />
     <file src="bin\Release\SonarAnalyzer.CSharp.dll" target="analyzers" />
     <file src="bin\Release\Google.Protobuf.dll" target="analyzers" />
+    <file src="bin\Release\Newtonsoft.Json.dll" target="analyzers" />
     <file src="tools-cs\*.ps1" target="tools\" />
     <file src="License.txt" />
   </files>
