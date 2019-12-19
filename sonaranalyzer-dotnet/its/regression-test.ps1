@@ -30,6 +30,12 @@ function Test-SonarAnalyzerDll {
     }
 }
 
+function Test-SonarAnalyzerCFGDll {
+    if (-Not (Test-Path ".\binaries\SonarAnalyzer.CFG.dll")) {
+        throw "Could not find '.\binaries\SonarAnalyzer.CFG.dll'."
+    }
+}
+
 function Build-Project([string]$ProjectName, [string]$SolutionRelativePath, [int]$CpuCount = 4) {
     if ($project -And -Not ($ProjectName -eq $project)) {
         Write-Host "Build skipped: $ProjectName"
@@ -211,6 +217,7 @@ try {
 
     Push-Location $PSScriptRoot
     Test-SonarAnalyzerDll
+    Test-SonarAnalyzerCFGDll
 
     Write-Header "Initializing the environment"
     Initialize-ActualFolder

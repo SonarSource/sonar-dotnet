@@ -45,6 +45,9 @@ $analyzersPath = Join-Path $analyzersPath "analyzers"
 $analyzerFilePath = Join-Path $analyzersPath "Google.Protobuf.dll"
 $project.Object.AnalyzerReferences.Add($analyzerFilePath)
 
+$analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.CFG.dll"
+$project.Object.AnalyzerReferences.Add($analyzerFilePath)
+
 $analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.dll"
 $project.Object.AnalyzerReferences.Add($analyzerFilePath)
 

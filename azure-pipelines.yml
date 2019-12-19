@@ -490,7 +490,7 @@ stages:
               else:
                 targetRepo = sourceRepo.replace('qa', 'public')
               
-              artifact = f'NonExistingPkg.{version}.nupkg'
+              artifact = f'SonarAnalyzer.CFG.CSharp.{version}.nupkg'
               print(f'Promoting nuget {artifact} from {sourceRepo} to {targetRepo}')
 
               url = f'$(ARTIFACTORY_URL)/api/move/{sourceRepo}/{artifact}?to=/{targetRepo}/{artifact}'
