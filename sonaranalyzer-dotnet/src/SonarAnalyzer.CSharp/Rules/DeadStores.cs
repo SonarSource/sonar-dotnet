@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,6 +31,7 @@ using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -48,18 +49,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
+            // No need to check for ExpressionBody as it can't contain variable assignment
+
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var declaration = (BaseMethodDeclarationSyntax)c.Node;
-                    var symbol = c.SemanticModel.GetDeclaredSymbol(declaration);
-                    if (symbol == null)
-                    {
-                        return;
-                    }
-
-                    CheckForDeadStores(declaration.Body, symbol, c);
-                    // No need to check for ExpressionBody as it can't contain variable assignment
+                    CheckForDeadStores(declaration.Body, c.SemanticModel.GetDeclaredSymbol(declaration), c);
                 },
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration,
@@ -71,14 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var declaration = (AccessorDeclarationSyntax)c.Node;
-                    var symbol = c.SemanticModel.GetDeclaredSymbol(declaration);
-                    if (symbol == null)
-                    {
-                        return;
-                    }
-
-                    CheckForDeadStores(declaration.Body, symbol, c);
-                    // No need to check for ExpressionBody as it can't contain variable assignment
+                    CheckForDeadStores(declaration.Body, c.SemanticModel.GetDeclaredSymbol(declaration), c);
                 },
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
@@ -89,22 +78,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var declaration = (AnonymousFunctionExpressionSyntax)c.Node;
-                    var symbol = c.SemanticModel.GetSymbolInfo(declaration).Symbol;
-                    if (symbol == null)
-                    {
-                        return;
-                    }
-
-                    CheckForDeadStores(declaration.Body, symbol, c);
+                    CheckForDeadStores(declaration.Body, c.SemanticModel.GetSymbolInfo(declaration).Symbol, c);
                 },
                 SyntaxKind.AnonymousMethodExpression,
                 SyntaxKind.SimpleLambdaExpression,
                 SyntaxKind.ParenthesizedLambdaExpression);
-        }
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var declaration = (LocalFunctionStatementSyntaxWrapper)c.Node;
+                    CheckForDeadStores(declaration.Body, c.SemanticModel.GetDeclaredSymbol(declaration), c);
+                },
+                SyntaxKindEx.LocalFunctionStatement);
+            }
 
         private static void CheckForDeadStores(CSharpSyntaxNode node, ISymbol declaration, SyntaxNodeAnalysisContext context)
         {
-            if (!CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out var cfg))
+            if (declaration == null || !CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out var cfg))
             {
                 return;
             }
