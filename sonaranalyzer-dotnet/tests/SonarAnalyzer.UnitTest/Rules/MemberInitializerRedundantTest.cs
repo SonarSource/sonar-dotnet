@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +32,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MemberInitializerRedundant()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs", new MemberInitializerRedundant());
+            Verifier.VerifyAnalyzer(@"TestCases\MemberInitializerRedundant.cs",
+                new MemberInitializerRedundant(),
+                ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]
