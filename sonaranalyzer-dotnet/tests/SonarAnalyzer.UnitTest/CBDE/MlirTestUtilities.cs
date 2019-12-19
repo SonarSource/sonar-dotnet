@@ -119,7 +119,7 @@ namespace SonarAnalyzer.UnitTest.CBDE
         {
             (var method, var semanticModel) = TestHelper.Compile(code).GetMethod(functionName);
             var exporterMetrics = new MlirExporterMetrics();
-            var exporter = new MLIRExporter(writer, semanticModel, exporterMetrics, false);
+            var exporter = new MlirExporter(writer, semanticModel, exporterMetrics, false);
             exporter.ExportFunction(method);
         }
 
@@ -127,7 +127,7 @@ namespace SonarAnalyzer.UnitTest.CBDE
         {
             (var ast, var semanticModel) = TestHelper.Compile(code);
             var exporterMetrics = new MlirExporterMetrics();
-            var exporter = new MLIRExporter(writer, semanticModel, exporterMetrics, withLoc);
+            var exporter = new MlirExporter(writer, semanticModel, exporterMetrics, withLoc);
             foreach (var method in ast.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
             {
                 exporter.ExportFunction(method);

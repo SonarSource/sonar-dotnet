@@ -256,7 +256,7 @@ namespace SonarAnalyzer.CBDE
             {
                 StringBuilder perfLog = new StringBuilder();
                 perfLog.AppendLine(tree.GetRoot().GetLocation().GetLineSpan().Path);
-                var mlirExporter = new MLIRExporter(mlirStreamWriter, model, exporterMetrics, true);
+                var mlirExporter = new MlirExporter(mlirStreamWriter, model, exporterMetrics, true);
                 foreach (var method in tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
                 {
                     var watch = System.Diagnostics.Stopwatch.StartNew();

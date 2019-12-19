@@ -36,7 +36,7 @@ using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.CBDE
 {
-    public class MLIRExporter
+    public class MlirExporter
     {
         public static readonly ImmutableList<SyntaxKind> unsupportedSyntaxes = new List<SyntaxKind>
         {
@@ -92,7 +92,7 @@ namespace SonarAnalyzer.CBDE
         private readonly Encoding encoder = System.Text.Encoding.GetEncoding("ASCII", new PreservingEncodingFallback(), DecoderFallback.ExceptionFallback);
         private readonly MlirExporterMetrics exporterMetrics;
 
-        public MLIRExporter(TextWriter w, SemanticModel model, MlirExporterMetrics metrics, bool withLoc)
+        public MlirExporter(TextWriter w, SemanticModel model, MlirExporterMetrics metrics, bool withLoc)
         {
             writer = w;
             semanticModel = model;
@@ -112,7 +112,7 @@ namespace SonarAnalyzer.CBDE
                 return;
             }
 
-            if (IsTooComplexForMLIROrTheCFG(method))
+            if (IsTooComplexForMlirOrTheCfg(method))
             {
                 writer.WriteLine($"// Skipping function {method.Identifier.ValueText}{GetAnonymousArgumentsString(method)}, it contains poisonous unsupported syntaxes");
                 writer.WriteLine();
@@ -126,7 +126,7 @@ namespace SonarAnalyzer.CBDE
 
             var returnType = HasNoReturn(method) ?
                 "()" :
-                MLIRType(method.ReturnType);
+                MlirType(method.ReturnType);
             writer.WriteLine($"func @{GetMangling(method)}{GetAnonymousArgumentsString(method)} -> {returnType} {GetLocation(method)} {{");
             CreateEntryBlock(method);
 
@@ -164,7 +164,7 @@ namespace SonarAnalyzer.CBDE
             return sb.ToString();
         }
 
-        private bool IsTooComplexForMLIROrTheCFG(MethodDeclarationSyntax method)
+        private bool IsTooComplexForMlirOrTheCfg(MethodDeclarationSyntax method)
         {
             var symbol = semanticModel.GetDeclaredSymbol(method);
             if (symbol.IsAsync)
@@ -195,8 +195,8 @@ namespace SonarAnalyzer.CBDE
                     continue;
                 }
                 var id = OpId(param);
-                writer.WriteLine($"%{id} = cbde.alloca {MLIRType(param)} {GetLocation(param)}");
-                writer.WriteLine($"cbde.store %{EncodeName(param.Identifier.ValueText)}, %{id} : memref<{MLIRType(param)}> {GetLocation(param)}");
+                writer.WriteLine($"%{id} = cbde.alloca {MlirType(param)} {GetLocation(param)}");
+                writer.WriteLine($"cbde.store %{EncodeName(param.Identifier.ValueText)}, %{id} : memref<{MlirType(param)}> {GetLocation(param)}");
             }
             writer.WriteLine("br ^0");
             writer.WriteLine();
@@ -247,7 +247,7 @@ namespace SonarAnalyzer.CBDE
                 case ThrowStatementSyntax throwStmt:
                     // TODO : Should we transfer to a catch block if we are inside a try/catch?
                     // This is part of https://github.com/SonarSource/SonarCBDE/issues/111
-                    writer.WriteLine($"cbde.throw %{OpId(throwStmt.Expression)} :  {MLIRType(throwStmt.Expression)} {GetLocation(throwStmt)}");
+                    writer.WriteLine($"cbde.throw %{OpId(throwStmt.Expression)} :  {MlirType(throwStmt.Expression)} {GetLocation(throwStmt)}");
                     break;
                 default:
                     Debug.Assert(false, "Unknown kind of JumpBlock");
@@ -345,7 +345,7 @@ namespace SonarAnalyzer.CBDE
                     var paramName = string.IsNullOrEmpty(p.Identifier.ValueText) ?
                         ".param" + paramCount.ToString() :
                         EncodeName(p.Identifier.ValueText);
-                    return $"%{paramName} : {MLIRType(p)}";
+                    return $"%{paramName} : {MlirType(p)}";
                 }
                 );
             return '(' + string.Join(", ", args) + ')';
@@ -353,17 +353,17 @@ namespace SonarAnalyzer.CBDE
 
         private string GetAnonymousArgumentsString(MethodDeclarationSyntax method)
         {
-            var args = method.ParameterList.Parameters.Select(p => MLIRType(p));
+            var args = method.ParameterList.Parameters.Select(p => MlirType(p));
             return '(' + string.Join(", ", args) + ')';
         }
 
-        private string MLIRType(ParameterSyntax p)
+        private string MlirType(ParameterSyntax p)
         {
             var symbolType = semanticModel.GetDeclaredSymbol(p).GetSymbolType();
-            return symbolType == null ? "none" : MLIRType(symbolType);
+            return symbolType == null ? "none" : MlirType(symbolType);
         }
 
-        private string MLIRType(ExpressionSyntax e)
+        private string MlirType(ExpressionSyntax e)
         {
             switch (e.RemoveParentheses().Kind())
             {
@@ -376,15 +376,15 @@ namespace SonarAnalyzer.CBDE
                         // Case of a method group that will get transformed into at Func<>, but does not have a type
                         return "none";
                     }
-                    return MLIRType(semanticModel.GetTypeInfo(e).Type);
+                    return MlirType(semanticModel.GetTypeInfo(e).Type);
                 default:
-                    return MLIRType(semanticModel.GetTypeInfo(e).Type);
+                    return MlirType(semanticModel.GetTypeInfo(e).Type);
             }
         }
 
-        private string MLIRType(VariableDeclaratorSyntax v) => MLIRType(semanticModel.GetDeclaredSymbol(v).GetSymbolType());
+        private string MlirType(VariableDeclaratorSyntax v) => MlirType(semanticModel.GetDeclaredSymbol(v).GetSymbolType());
 
-        private string MLIRType(ITypeSymbol csType)
+        private string MlirType(ITypeSymbol csType)
         {
             Debug.Assert(csType != null);
             if (csType.SpecialType == SpecialType.System_Boolean)
@@ -430,7 +430,7 @@ namespace SonarAnalyzer.CBDE
                 writer.WriteLine($"%{OpId(op)} = constant unit {GetLocation(op)} // {op.Dump()} ({op.Kind()})");
                 return;
             }
-            writer.WriteLine($"%{OpId(op)} = constant {value} : {MLIRType(type)} {GetLocation(op)}");
+            writer.WriteLine($"%{OpId(op)} = constant {value} : {MlirType(type)} {GetLocation(op)}");
         }
 
         private void ExtractInstruction(SyntaxNode op)
@@ -468,11 +468,11 @@ namespace SonarAnalyzer.CBDE
                     var neg = op as PrefixUnaryExpressionSyntax;
                     if (IsTypeKnown(semanticModel.GetTypeInfo(neg).Type) && !IsTypeKnown(semanticModel.GetTypeInfo(neg.Operand).Type))
                     {
-                        writer.WriteLine($"%{OpId(neg)} = cbde.unknown : {MLIRType(neg)} {GetLocation(op)} // A negation changing type whose source type is unknown");
+                        writer.WriteLine($"%{OpId(neg)} = cbde.unknown : {MlirType(neg)} {GetLocation(op)} // A negation changing type whose source type is unknown");
                     }
                     else
                     {
-                        writer.WriteLine($"%{OpId(neg)} = cbde.neg %{OpId(getAssignmentValue(neg.Operand))} : {MLIRType(neg)} {GetLocation(neg)}");
+                        writer.WriteLine($"%{OpId(neg)} = cbde.neg %{OpId(getAssignmentValue(neg.Operand))} : {MlirType(neg)} {GetLocation(neg)}");
                     }
                     break;
                 case SyntaxKind.UnaryPlusExpression:
@@ -521,7 +521,7 @@ namespace SonarAnalyzer.CBDE
                             // No need to write the variable, all references to it will be replaced by "unknown"
                             return;
                         }
-                        writer.WriteLine($"%{id} = cbde.alloca {MLIRType(decl)} {GetLocation(decl)} // {decl.Identifier.ValueText}");
+                        writer.WriteLine($"%{id} = cbde.alloca {MlirType(decl)} {GetLocation(decl)} // {decl.Identifier.ValueText}");
                         if (decl.Initializer != null)
                         {
                             if (!AreTypesSupported(decl.Initializer.Value))
@@ -530,7 +530,7 @@ namespace SonarAnalyzer.CBDE
                                 break;
                             }
                             var value = getAssignmentValue(decl.Initializer.Value);
-                            writer.WriteLine($"cbde.store %{OpId(value)}, %{id} : memref<{MLIRType(decl)}> {GetLocation(decl)}");
+                            writer.WriteLine($"cbde.store %{OpId(value)}, %{id} : memref<{MlirType(decl)}> {GetLocation(decl)}");
                         }
                     }
                     break;
@@ -563,7 +563,7 @@ namespace SonarAnalyzer.CBDE
                             // and therefore, they have no real value associated to them, we can just ignore them
                             break;
                         }
-                        writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(exprType)} {GetLocation(op)} // {op.Dump()} ({op.Kind()})");
+                        writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MlirType(exprType)} {GetLocation(op)} // {op.Dump()} ({op.Kind()})");
                     }
                     else
                     {
@@ -593,14 +593,14 @@ namespace SonarAnalyzer.CBDE
             if (rhsType.Kind == SymbolKind.ErrorType)
             {
                 rhsId = UniqueOpId();
-                writer.WriteLine($"%{rhsId} = cbde.unknown  : {MLIRType(assign)}");
+                writer.WriteLine($"%{rhsId} = cbde.unknown  : {MlirType(assign)}");
             }
             else
             {
-                rhsId = ComputeCompatibleId(assign.Right, MLIRType(assign));
+                rhsId = ComputeCompatibleId(assign.Right, MlirType(assign));
             }
 
-            writer.WriteLine($"cbde.store %{rhsId}, %{OpId(lhs)} : memref<{MLIRType(assign)}> {GetLocation(op)}");
+            writer.WriteLine($"cbde.store %{rhsId}, %{OpId(lhs)} : memref<{MlirType(assign)}> {GetLocation(op)}");
         }
 
         private bool IsSymbolSupportedForAssignment(SymbolInfo symbolInfo)
@@ -631,7 +631,7 @@ namespace SonarAnalyzer.CBDE
                 // In case of a method, we can ignore it
                 if (declSymbol is IPropertySymbol || declSymbol is IFieldSymbol)
                 {
-                    writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(id)} {GetLocation(op)} // Identifier from another assembly: {id.Identifier.ValueText}");
+                    writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MlirType(id)} {GetLocation(op)} // Identifier from another assembly: {id.Identifier.ValueText}");
                 }
                 else
                 {
@@ -662,17 +662,17 @@ namespace SonarAnalyzer.CBDE
             // instruction for fetching the property, so we should focus only on getter context.
             else if (declSymbol is IFieldSymbol || declSymbol is IPropertySymbol || !AreTypesSupported(id))
             {
-                writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(id)} {GetLocation(op)} // Not a variable of known type: {id.Identifier.ValueText}");
+                writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MlirType(id)} {GetLocation(op)} // Not a variable of known type: {id.Identifier.ValueText}");
                 return;
             }
-            writer.WriteLine($"%{OpId(op)} = cbde.load %{OpId(decl)} : memref<{MLIRType(id)}> {GetLocation(op)}");
+            writer.WriteLine($"%{OpId(op)} = cbde.load %{OpId(decl)} : memref<{MlirType(id)}> {GetLocation(op)}");
         }
 
         private void ExtractBinaryExpression(ExpressionSyntax expr, ExpressionSyntax lhs, ExpressionSyntax rhs)
         {
             if (!AreTypesSupported(lhs, rhs, expr))
             {
-                writer.WriteLine($"%{OpId(expr)} = cbde.unknown : {MLIRType(expr)} {GetLocation(expr)} // Binary expression on unsupported types {expr.Dump()}");
+                writer.WriteLine($"%{OpId(expr)} = cbde.unknown : {MlirType(expr)} {GetLocation(expr)} // Binary expression on unsupported types {expr.Dump()}");
                 return;
             }
             string opName;
@@ -681,8 +681,8 @@ namespace SonarAnalyzer.CBDE
                 case SyntaxKind.RightShiftAssignmentExpression:
                 case SyntaxKind.RightShiftExpression:
                     var negateBitCountId = UniqueOpId();
-                    writer.WriteLine($"%{negateBitCountId} = cbde.neg %{OpId(getAssignmentValue(rhs))} : {MLIRType(expr)} {GetLocation(expr)}");
-                    writer.WriteLine($"%{OpId(expr)} = shlis %{OpId(getAssignmentValue(lhs))}, %{negateBitCountId} : {MLIRType(expr)} {GetLocation(expr)}");
+                    writer.WriteLine($"%{negateBitCountId} = cbde.neg %{OpId(getAssignmentValue(rhs))} : {MlirType(expr)} {GetLocation(expr)}");
+                    writer.WriteLine($"%{OpId(expr)} = shlis %{OpId(getAssignmentValue(lhs))}, %{negateBitCountId} : {MlirType(expr)} {GetLocation(expr)}");
                     return;
                 case SyntaxKind.LeftShiftAssignmentExpression:
                 case SyntaxKind.LeftShiftExpression:
@@ -722,12 +722,12 @@ namespace SonarAnalyzer.CBDE
                     break;
                 default:
                     {
-                        writer.WriteLine($"%{OpId(expr)} = cbde.unknown : {MLIRType(expr)} {GetLocation(expr)} // Unknown operator {expr.Dump()}");
+                        writer.WriteLine($"%{OpId(expr)} = cbde.unknown : {MlirType(expr)} {GetLocation(expr)} // Unknown operator {expr.Dump()}");
                         return;
                     }
             }
 
-            writer.WriteLine($"%{OpId(expr)} = {opName} %{OpId(getAssignmentValue(lhs))}, %{OpId(getAssignmentValue(rhs))} : {MLIRType(expr)} {GetLocation(expr)}");
+            writer.WriteLine($"%{OpId(expr)} = {opName} %{OpId(getAssignmentValue(lhs))}, %{OpId(getAssignmentValue(rhs))} : {MlirType(expr)} {GetLocation(expr)}");
         }
 
         private void ExtractBinaryAssignmentExpression(SyntaxNode op)
@@ -749,7 +749,7 @@ namespace SonarAnalyzer.CBDE
             }
 
             var decl = declSymbol.Symbol.DeclaringSyntaxReferences[0].GetSyntax();
-            writer.WriteLine($"cbde.store %{OpId(assignExpr)}, %{OpId(decl)} : memref<{MLIRType(assignExpr)}> {GetLocation(op)}");
+            writer.WriteLine($"cbde.store %{OpId(assignExpr)}, %{OpId(decl)} : memref<{MlirType(assignExpr)}> {GetLocation(op)}");
         }
 
         private void ExportPrePostIncrementDecrement(ExpressionSyntax op, SyntaxToken opToken, ExpressionSyntax operand, bool isPostOperation)
@@ -758,14 +758,14 @@ namespace SonarAnalyzer.CBDE
             var id = operand as IdentifierNameSyntax;
             if (null == id)
             {
-                writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(operand)} {GetLocation(op)} // Inc/Decrement of unknown identifier");
+                writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MlirType(operand)} {GetLocation(op)} // Inc/Decrement of unknown identifier");
                 return;
             }
 
             var declSymbol = semanticModel.GetSymbolInfo(id);
             if (!IsSymbolSupportedForAssignment(declSymbol) || !AreTypesSupported(operand))
             {
-                writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MLIRType(operand)} {GetLocation(op)} // Inc/Decrement of field or property {id.Identifier.ValueText}");
+                writer.WriteLine($"%{OpId(op)} = cbde.unknown : {MlirType(operand)} {GetLocation(op)} // Inc/Decrement of field or property {id.Identifier.ValueText}");
                 return;
             }
 
@@ -776,13 +776,13 @@ namespace SonarAnalyzer.CBDE
             }
 
             var newCstId = UniqueOpId();
-            writer.WriteLine($"%{newCstId} = constant 1 : {MLIRType(operand)} {GetLocation(op)}");
+            writer.WriteLine($"%{newCstId} = constant 1 : {MlirType(operand)} {GetLocation(op)}");
 
             var opId = isPostOperation ? UniqueOpId() : OpId(op);
             var opName = opToken.IsKind(SyntaxKind.PlusPlusToken) ? "addi" : "subi";
-            writer.WriteLine($"%{opId} = {opName} %{OpId(operand)}, %{newCstId} : {MLIRType(operand)} {GetLocation(op)}");
+            writer.WriteLine($"%{opId} = {opName} %{OpId(operand)}, %{newCstId} : {MlirType(operand)} {GetLocation(op)}");
 
-            writer.WriteLine($"cbde.store %{opId}, %{OpId(decl)} : memref<{MLIRType(operand)}> {GetLocation(op)}");
+            writer.WriteLine($"cbde.store %{opId}, %{OpId(decl)} : memref<{MlirType(operand)}> {GetLocation(op)}");
         }
 
         private bool AreTypesSupported(params ExpressionSyntax [] exprs)
@@ -799,7 +799,7 @@ namespace SonarAnalyzer.CBDE
                 return;
             }
             // The type is the type of the operands, not of the result, which is always i1
-            writer.WriteLine($"%{OpId(op)} = cmpi \"{compName}\", %{OpId(getAssignmentValue(binExpr.Left))}, %{OpId(getAssignmentValue(binExpr.Right))} : {MLIRType(binExpr.Left)} {GetLocation(binExpr)}");
+            writer.WriteLine($"%{OpId(op)} = cmpi \"{compName}\", %{OpId(getAssignmentValue(binExpr.Left))}, %{OpId(getAssignmentValue(binExpr.Right))} : {MlirType(binExpr.Left)} {GetLocation(binExpr)}");
         }
 
         private string GetLocation(SyntaxNode node)
@@ -820,7 +820,7 @@ namespace SonarAnalyzer.CBDE
 
         private string ComputeCompatibleId(ExpressionSyntax op, string resultType)
         {
-            if (MLIRType(op) == resultType)
+            if (MlirType(op) == resultType)
             {
                 return OpId(getAssignmentValue(op));
             }
@@ -841,7 +841,7 @@ namespace SonarAnalyzer.CBDE
         // Beware not to call this function in the middle of writing some text, because it can add some of its own
         public string EnforceBoolOpId(ExpressionSyntax e)
         {
-            if (MLIRType(e) != "i1")
+            if (MlirType(e) != "i1")
             {
                 var newId = UniqueOpId();
                 writer.WriteLine($"%{newId} = cbde.unknown : i1 // Creating necessary bool for conversion");
