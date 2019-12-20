@@ -111,6 +111,14 @@ stages:
           pathToPublish: '$(Build.ArtifactStagingDirectory)/packages'
           artifactName: 'NuGet Packages'
 
+      - task: ArtifactoryNuGet@1
+        displayName: 'Publish SonarAnalyzer.CFG.CSharp NuGet on repox'
+        inputs:
+          command: 'push'
+          artifactoryService: 'Repox artifactory'
+          targetDeployRepo: '$(ARTIFACTORY_NUGET_REPO)'
+          pathToNupkg: '$(Build.ArtifactStagingDirectory)/packages/SonarAnalyzer.CFG.CSharp.*.nupkg'
+
 - template: stage-with-burgr-notifications.yml@commonTemplates
   parameters:
     burgrName: 'qa'
@@ -449,7 +457,98 @@ stages:
         name: revertPomChanges
         displayName: Revert changes made to pom.xml to not break cache feature
 
+- stage: promoteNugets
+  displayName: Promote NuGet on repox
+  dependsOn: qa
+  condition: succeeded()
+  jobs:
+    - job: promoteRepox
+      displayName: 'Promote SonarAnalyzer.CFG.CSharp NuGet on repox'
+      steps:
+        - powershell: |
+            # Calculate the file path
+            $versionFilePath = "$env:BUILD_SOURCESDIRECTORY\scripts\version\Version.props"
+            Write-Host "Reading the Sonar project version from '${versionFilePath}' ..."
+
+            # Read the version from the file
+            [xml]$versionProps = Get-Content "$versionFilePath"
+            $sonarProjectVersion = $versionProps.Project.PropertyGroup.MainVersion
+            Write-Host "Sonar project version is '${sonarProjectVersion}'"
+
+            # Set the variable to it can be used by other tasks
+            Write-Host "##vso[task.setvariable variable=SONAR_PROJECT_VERSION;]$sonarProjectVersion"
+          displayName: 'Read Sonar project version from the versions.props file'
+
+        - task: UsePythonVersion@0
+          inputs:
+            versionSpec: '3.x'
+        
+        - bash: pip3 install requests
+
+        - task: PythonScript@0
+          name: promoteRepox
+          inputs:
+            failOnStderr: true
+            scriptSource: 'inline'
+            script: |
+              import requests
+              import os
+              import sys
+              
+              version = '$(SONAR_PROJECT_VERSION).$(Build.BuildId)'
+              isPr = '$(Build.Reason)' == 'PullRequest'
+              sourceRepo = os.environ['ARTIFACTORY_NUGET_REPO']
+              targetRepo = None
+              if isPr:
+                targetRepo = sourceRepo.replace('qa', 'dev')
+              else:
+                targetRepo = sourceRepo.replace('qa', 'public')
+              
+              artifact = f'SonarAnalyzer.CFG.CSharp.{version}.nupkg'
+              print(f'Promoting nuget {artifact} from {sourceRepo} to {targetRepo}')
+
+              url = f'$(ARTIFACTORY_URL)/api/move/{sourceRepo}/{artifact}?to=/{targetRepo}/{artifact}'
+              headers = {'Content-Type': 'application/json'}
+              response = requests.post(url, headers=headers, auth=('$(ARTIFACTORY_API_USER)', '$(ARTIFACTORY_API_KEY)'))
+              
+              fixedBranch = ''
+              if not isPr:
+                # Cannot use BUILD_SOURCEBRANCHNAME because of https://github.com/Microsoft/azure-pipelines-agent/issues/838
+                branch = os.environ['BUILD_SOURCEBRANCH']
+                refPrefix = "refs/heads/"
+                if branch.startswith(refPrefix):
+                  fixedBranch = branch[len(refPrefix):]
+              print("##vso[task.setvariable variable=fixedBranch;isOutput=true]" + fixedBranch)
+
+              promoted = response.status_code == 200
+              if not promoted:
+                print('[!] [{0}] Server Error'.format(response.status_code), file=sys.stderr)
+
+    - job: nugetBurgrFailed
+      dependsOn: promoteRepox
+      pool: server
+      condition: failed()
+      steps:
+      - template: notify-burgr-steps.yml@commonTemplates
+        parameters:
+          name: 'artifacts'
+          type: 'promotion'
+          status: 'failed'
+          fixedBranch: $(fixedBranch)
+
+    - job: nugetBurgrCanceled
+      dependsOn: promoteRepox
+      pool: server
+      condition: canceled()
+      steps:
+      - template: notify-burgr-steps.yml@commonTemplates
+        parameters:
+          name: 'artifacts'
+          type: 'promotion'
+          status: 'canceled'
+          fixedBranch: $(fixedBranch)
+
 - template: promote-stage.yml@commonTemplates
   parameters:
     stageDependencies:
-    - qa
+    - promoteNugets

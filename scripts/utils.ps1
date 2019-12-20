@@ -107,3 +107,9 @@ function Expand-ZIPFile($source, $destination) {
 function Test-Debug() {
     return $DebugPreference -ne "SilentlyContinue"
 }
+
+function Test-FileExists([string]$path) {
+    if (-Not (Test-Path $path)) {
+        throw "Could not find '${path}'."
+    }
+}

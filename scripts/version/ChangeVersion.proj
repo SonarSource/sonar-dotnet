@@ -51,6 +51,12 @@
       <ReplaceWith>$(NugetVersion)</ReplaceWith>
       <ExpectedMatchCount>1</ExpectedMatchCount>
     </NugetDescriptor>
+
+    <NugetCFG Include="$(SolutionRoot)\src\SonarAnalyzer.CFG\SonarAnalyzer.CFG.*.nuspec">
+      <Find>(?&lt;=&lt;version&gt;)([^&lt;]*)</Find>
+      <ReplaceWith>$(NugetVersion)</ReplaceWith>
+      <ExpectedMatchCount>1</ExpectedMatchCount>
+    </NugetCFG>
   </ItemGroup>
 
   <Target Name="UpdateAssemblyVersion">
@@ -62,5 +68,6 @@
     <RegexTransform Items="@(NugetAnalyzer)" />
     <RegexTransform Items="@(NugetReleaseNotes)" />
     <RegexTransform Items="@(NugetDescriptor)" />
+    <RegexTransform Items="@(NugetCFG)" />
   </Target>
 </Project>
