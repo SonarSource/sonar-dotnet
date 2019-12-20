@@ -22,6 +22,13 @@ try {
 catch {
 }
 
+$analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.CFG.dll"
+try {
+    $project.Object.AnalyzerReferences.Remove($analyzerFilePath)
+}
+catch {
+}
+
 $analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.dll"
 try {
     $project.Object.AnalyzerReferences.Remove($analyzerFilePath)
