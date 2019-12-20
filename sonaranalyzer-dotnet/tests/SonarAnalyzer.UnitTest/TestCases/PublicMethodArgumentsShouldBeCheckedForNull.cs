@@ -315,3 +315,21 @@ namespace Tests.Diagnostics
         }
     }
 }
+
+namespace CSharp8
+{
+    public class NullCoalescenceAssignment
+    {
+        public void NullCoalescenceAssignment_NotNull(string s1)
+        {
+            s1 ??= "N/A";
+            s1.ToString(); // Compliant
+        }
+
+        public void NullCoalescenceAssignment_Null(string s1)
+        {
+            s1 ??= null;
+            s1.ToString(); // Noncompliant
+        }
+    }
+}

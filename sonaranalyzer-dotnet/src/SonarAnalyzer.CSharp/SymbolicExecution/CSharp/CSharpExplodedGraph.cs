@@ -117,6 +117,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     return;
 
                 case SyntaxKind.CoalesceExpression:
+                case SyntaxKindEx.CoalesceAssignmentExpression:
                     VisitCoalesceExpressionBinaryBranch(binaryBranchBlock, newProgramState);
                     return;
 
@@ -172,6 +173,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     break;
 
                 case SyntaxKind.SimpleAssignmentExpression:
+                case SyntaxKindEx.CoalesceAssignmentExpression:
                     newProgramState = VisitSimpleAssignment((AssignmentExpressionSyntax)instruction, newProgramState);
                     break;
 
@@ -192,7 +194,6 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.DivideAssignmentExpression:
                 case SyntaxKind.MultiplyAssignmentExpression:
                 case SyntaxKind.ModuloAssignmentExpression:
-
                 case SyntaxKind.LeftShiftAssignmentExpression:
                 case SyntaxKind.RightShiftAssignmentExpression:
                     newProgramState = VisitOpAssignment((AssignmentExpressionSyntax)instruction, newProgramState);
@@ -635,10 +636,12 @@ namespace SonarAnalyzer.SymbolicExecution
             {
                 var nps = newProgramState;
 
-                if (!ShouldConsumeValue((BinaryExpressionSyntax)binaryBranchBlock.BranchingNode))
+                if (!ShouldConsumeValue((ExpressionSyntax)binaryBranchBlock.BranchingNode)
+                    || binaryBranchBlock.BranchingNode?.Kind() == SyntaxKindEx.CoalesceAssignmentExpression)
                 {
                     nps = nps.PushValue(sv);
                 }
+
                 EnqueueNewNode(new ProgramPoint(binaryBranchBlock.FalseSuccessorBlock), nps);
             }
         }
@@ -1156,7 +1159,7 @@ namespace SonarAnalyzer.SymbolicExecution
             }
 
             return parent is ExpressionStatementSyntax ||
-                parent is YieldStatementSyntax;
+                   parent is YieldStatementSyntax;
         }
 
         private static bool IsEmptyNullableCtorCall(IMethodSymbol nullableConstructorCall)
