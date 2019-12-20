@@ -343,4 +343,20 @@ namespace CSharp8
             s.ToString(); // Noncompliant
         }
     }
+
+    public class LocalStaticFunctions
+    {
+        public void Method(object arg)
+        {
+            string LocalFunction(object o)
+            {
+                return o.ToString(); // Compliant - FN: local functions are not supported by the CFG
+            }
+
+            static string LocalStaticFunction(object o)
+            {
+                return o.ToString(); // Compliant - FN: local functions are not supported by the CFG
+            }
+        }
+    }
 }
