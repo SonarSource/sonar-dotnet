@@ -332,4 +332,15 @@ namespace CSharp8
             s1.ToString(); // Noncompliant
         }
     }
+
+    public interface IWithDefaultMembers
+    {
+        decimal Count { get; set; }
+        decimal Price { get; set; }
+
+        void Reset(string s)
+        {
+            s.ToString(); // Noncompliant
+        }
+    }
 }
