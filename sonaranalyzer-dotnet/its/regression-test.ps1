@@ -24,18 +24,6 @@ if ($PSBoundParameters['Verbose'] -Or $PSBoundParameters['Debug']) {
     $global:DebugPreference = "Continue"
 }
 
-function Test-SonarAnalyzerDll {
-    if (-Not (Test-Path ".\binaries\SonarAnalyzer.dll")) {
-        throw "Could not find '.\binaries\SonarAnalyzer.dll'."
-    }
-}
-
-function Test-SonarAnalyzerCFGDll {
-    if (-Not (Test-Path ".\binaries\SonarAnalyzer.CFG.dll")) {
-        throw "Could not find '.\binaries\SonarAnalyzer.CFG.dll'."
-    }
-}
-
 function Build-Project([string]$ProjectName, [string]$SolutionRelativePath, [int]$CpuCount = 4) {
     if ($project -And -Not ($ProjectName -eq $project)) {
         Write-Host "Build skipped: $ProjectName"
@@ -216,8 +204,8 @@ try {
     $msBuildImportBeforeCurrent = Get-MSBuildImportBeforePath "Current"
 
     Push-Location $PSScriptRoot
-    Test-SonarAnalyzerDll
-    Test-SonarAnalyzerCFGDll
+    Test-FileExists ".\binaries\SonarAnalyzer.dll"
+    Test-FileExists ".\binaries\SonarAnalyzer.CFG.dll"
 
     Write-Header "Initializing the environment"
     Initialize-ActualFolder
