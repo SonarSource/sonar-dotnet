@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -1355,6 +1355,40 @@ void f() {
 void g() {
   int someInt = -2147483648;
 }
+";
+            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void UnsafeStatement()
+        {
+            var code = @"
+int f() {
+  int i = 0;
+  unsafe
+  {
+    i = 1;
+  }
+  int j += i;
+  return j;
+}
+
+";
+            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+        }
+
+        [TestMethod]
+        public void UnsafeClass()
+        {
+            var code = @"
+unsafe class C {
+  int f()
+  {
+    int j = 1;
+    return j+1;
+  }
+}
+
 ";
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
