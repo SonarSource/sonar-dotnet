@@ -28,7 +28,12 @@ namespace Tests.Diagnostics
             o.ToString(); // Compliant, not public
         }
 
-        private void CompliantCases_Internal(object o)
+        protected internal void NotCompliantCases_ProtectedInternal(object o)
+        {
+            o.ToString(); // Noncompliant
+        }
+
+        internal void CompliantCases_Internal(object o)
         {
             o.ToString(); // Compliant, not public
         }
