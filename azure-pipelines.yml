@@ -357,7 +357,7 @@ stages:
         displayName: 'Run Maven verify, UTs with SonarCloud'
         inputs:
           goals: 'verify'
-          options: -B --settings $(mavenSettings.secureFilePath) -Pcoverage
+          options: -B --settings $(mavenSettings.secureFilePath) -Pcoverage -Dsonar.projectVersion=$(SONAR_PROJECT_VERSION)
           publishJUnitResults: true
           testResultsFiles: '**/surefire-reports/TEST-*.xml'
           testRunTitle: 'UTs on Windows'
@@ -366,7 +366,6 @@ stages:
           mavenOptions: $(MAVEN_OPTS)
           sonarQubeRunAnalysis: true
           sqMavenPluginVersionChoice: 'latest'
-          sonar.projectVersion: $(SONAR_PROJECT_VERSION)
 
       - task: SonarCloudPublish@1
         displayName: 'Run Code Analysis - Publish QG'
