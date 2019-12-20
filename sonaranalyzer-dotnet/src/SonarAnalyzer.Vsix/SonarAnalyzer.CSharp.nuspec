@@ -23,6 +23,7 @@
   </metadata>
   <files>
     <!-- If these are changed than the build\release.ps1 should also be changed -->
+    <file src="bin\Release\SonarAnalyzer.CFG.dll" target="analyzers" />
     <file src="bin\Release\SonarAnalyzer.dll" target="analyzers" />
     <file src="bin\Release\SonarAnalyzer.CSharp.dll" target="analyzers" />
     <file src="bin\Release\Google.Protobuf.dll" target="analyzers" />

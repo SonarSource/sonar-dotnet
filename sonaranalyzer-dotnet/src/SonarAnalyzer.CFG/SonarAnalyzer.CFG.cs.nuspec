@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>SonarAnalyzer.CFG.CSharp</id>
+    <version>8.2.0.0</version>
+    <title>C# CFG library for SonarAnalyzer</title>
+    <authors>SonarSource</authors>
+    <owners>SonarSource</owners>
+    <license type="file">License.txt</license>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>CFG library for SonarSource C# plugins</description>
+    <releaseNotes></releaseNotes>
+    <language>en-US</language>
+    <copyright>Copyright © 2015-2019 SonarSource SA</copyright>
+    <tags></tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System" targetFramework="" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <!-- If these are changed than the build\release.ps1 should also be changed -->
+    <file src="bin\Release\net46\SonarAnalyzer.CFG.dll" target="lib" />
+    <file src="License.txt" />
+  </files>
+</package>
