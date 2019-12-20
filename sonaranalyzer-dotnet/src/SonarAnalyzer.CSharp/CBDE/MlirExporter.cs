@@ -61,6 +61,7 @@ namespace SonarAnalyzer.CBDE
             SyntaxKind.UsingStatement,
             SyntaxKind.YieldReturnStatement,
             SyntaxKind.YieldBreakStatement,
+            SyntaxKind.UnsafeStatement,
             SyntaxKindEx.CasePatternSwitchLabel,
             SyntaxKindEx.ConstantPattern,
             SyntaxKindEx.DeclarationExpression,
