@@ -1393,6 +1393,32 @@ unsafe class C {
             MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
         }
 
+        [TestMethod]
+        public void BoolAssignmentInsideIfCondition()
+        {
+            var code = @"
+public class Derived {
+
+protected bool j;
+
+  void f()
+  {
+    bool k = true;
+    j = 0;
+    if(j = k)
+    {
+      k=1;
+    }
+    else
+    {
+      k=2;
+    }
+  }
+}
+
+";
+            MlirTestUtilities.ValidateCodeGeneration(code, TestContext.TestName);
+        }
     } // Class
 
 } // Namespace

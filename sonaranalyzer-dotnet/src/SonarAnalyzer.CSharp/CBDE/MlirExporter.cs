@@ -848,7 +848,7 @@ namespace SonarAnalyzer.CBDE
                 writer.WriteLine($"%{newId} = cbde.unknown : i1 // Creating necessary bool for conversion");
                 return newId;
             }
-            return OpId(e);
+            return OpId(getAssignmentValue(e));
         }
         public string UniqueOpId()
         {
