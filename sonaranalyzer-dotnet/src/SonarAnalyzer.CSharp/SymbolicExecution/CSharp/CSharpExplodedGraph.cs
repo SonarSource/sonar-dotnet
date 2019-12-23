@@ -478,8 +478,8 @@ namespace SonarAnalyzer.SymbolicExecution
                     var constructorInitializer = (ConstructorInitializerSyntax)instruction;
                     if (constructorInitializer.ArgumentList != null)
                     {
-                        var ctorInifializerArgumentsCount = constructorInitializer.ArgumentList.Arguments.Count;
-                        newProgramState = newProgramState.PopValues(ctorInifializerArgumentsCount);
+                        var ctorInitializerArgumentsCount = constructorInitializer.ArgumentList.Arguments.Count;
+                        newProgramState = newProgramState.PopValues(ctorInitializerArgumentsCount);
                     }
                     break;
 
