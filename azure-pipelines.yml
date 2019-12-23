@@ -486,7 +486,7 @@ stages:
               sourceRepo = os.environ['ARTIFACTORY_NUGET_REPO']
               targetRepo = None
               if isPr:
-                targetRepo = sourceRepo.replace('qa', 'dev')
+                targetRepo = sourceRepo.replace('qa', 'public')
               else:
                 targetRepo = sourceRepo.replace('qa', 'public')
               
