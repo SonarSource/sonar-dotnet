@@ -56,7 +56,7 @@ namespace SonarAnalyzer.SymbolicExecution
         {
             var newProgramState = node.ProgramState;
 
-            if (block is UsingEndBlock usingFinalizerBlock)
+            if (block is UsingEndBlock)
             {
                 newProgramState = InvokeChecks(newProgramState, (ps, check) => check.PreProcessUsingStatement(node.ProgramPoint, ps));
                 newProgramState = CleanStateAfterBlock(newProgramState, block);
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 return;
             }
 
-            if (block is LockBlock lockBlock)
+            if (block is LockBlock)
             {
                 newProgramState = newProgramState.PopValue();
 
