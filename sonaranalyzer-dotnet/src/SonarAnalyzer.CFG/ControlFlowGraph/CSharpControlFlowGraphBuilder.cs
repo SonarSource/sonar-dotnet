@@ -524,8 +524,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
             else if (DiscardPatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
             {
-                currentBlock.ReversedInstructions.Add(patternSyntaxWrapper);
-
                 return currentBlock;
             }
             else if (RecursivePatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
