@@ -532,6 +532,11 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKindEx.DiscardPattern:
                     break;
 
+                case SyntaxKindEx.DeclarationExpression:
+                    // e.g.: dictionary.TryGetValue(key, out TValue value);
+                    // Do nothing
+                    break;
+
                 default:
                     throw new NotSupportedException($"{instruction.Kind()}");
             }
