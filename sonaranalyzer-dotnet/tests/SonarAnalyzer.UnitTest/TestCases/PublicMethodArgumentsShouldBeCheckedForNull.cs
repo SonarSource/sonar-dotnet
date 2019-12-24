@@ -314,6 +314,23 @@ namespace Tests.Diagnostics
             return equals;
         }
     }
+
+    public class ReproWithIsNullOrEmpty
+    {
+        public static string SanitiseIMDbId(string imdbId)
+        {
+            if (string.IsNullOrEmpty(imdbId))
+                return string.Empty;
+
+            if (imdbId.StartsWith(" "))
+                imdbId = string.Concat("tt", imdbId);
+
+            if (imdbId.Length != 9) // Noncompliant - FP
+                imdbId = string.Empty;
+
+            return imdbId;
+        }
+    }
 }
 
 namespace CSharp8
