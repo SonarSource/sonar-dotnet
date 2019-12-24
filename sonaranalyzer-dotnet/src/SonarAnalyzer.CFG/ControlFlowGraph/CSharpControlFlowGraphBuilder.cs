@@ -811,9 +811,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 var armBlock = BuildExpression(arm.Expression, CreateBlock(currentBlock));
 
                 currentArmBlock = BuildArmBranch(arm, armBlock, currentArmBlock);
+
+                currentArmBlock = BuildExpression(switchExpressionSyntax.GoverningExpression, currentArmBlock);
             }
 
-            return BuildExpression(switchExpressionSyntax.GoverningExpression, currentArmBlock);
+            return currentArmBlock;
         }
 
         private Block BuildArmBranch(SwitchExpressionArmSyntaxWrapper switchExpressionArmSyntax, Block trueSuccessor, Block falseSuccessor)
