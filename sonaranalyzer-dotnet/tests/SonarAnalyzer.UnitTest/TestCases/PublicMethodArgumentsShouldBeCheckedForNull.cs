@@ -331,6 +331,21 @@ namespace CSharp8
             s1 ??= null;
             s1.ToString(); // Noncompliant
         }
+
+        public void InsideIf(string str)
+        {
+            if (str != null)
+            {
+                str ??= null;
+                str.ToString(); // Compliant, we know str is not null
+            }
+
+            if (str == null)
+            {
+                str ??= "foo";
+                str.ToString(); // Compliant, assigned foo
+            }
+        }
     }
 
     public interface IWithDefaultMembers
