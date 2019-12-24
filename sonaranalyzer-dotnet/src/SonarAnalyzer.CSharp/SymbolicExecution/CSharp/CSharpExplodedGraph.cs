@@ -146,6 +146,10 @@ namespace SonarAnalyzer.SymbolicExecution
                     VisitCaseSwitchBinaryBranchBlock(binaryBranchBlock, node, (CaseSwitchLabelSyntax)binaryBranchBlock.BranchingNode);
                     return;
 
+                case SyntaxKindEx.SwitchExpressionArm:
+                    VisitSwitchExpressionArmBinaryBranch(binaryBranchBlock, node, (SwitchExpressionArmSyntaxWrapper) binaryBranchBlock.BranchingNode);
+                    return;
+
                 default:
                     VisitBinaryBranch(binaryBranchBlock, node, binaryBranchBlock.BranchingNode);
                     return;
@@ -525,6 +529,9 @@ namespace SonarAnalyzer.SymbolicExecution
                     // Do nothing
                     break;
 
+                case SyntaxKindEx.DiscardPattern:
+                    break;
+
                 default:
                     throw new NotSupportedException($"{instruction.Kind()}");
             }
@@ -697,6 +704,32 @@ namespace SonarAnalyzer.SymbolicExecution
                 }
                 // False succesor is the next case block. It is always enqueued without constraint
                 EnqueueNewNode(new ProgramPoint(branchBlock.FalseSuccessorBlock), ps);
+            }
+        }
+
+        private void VisitSwitchExpressionArmBinaryBranch(BinaryBranchBlock branchBlock, ExplodedGraphNode node, SwitchExpressionArmSyntaxWrapper armSyntaxWrapper)
+        {
+            var programState = node.ProgramState;
+
+            programState = programState.PopValue(out _); // pattern expression is ignored for now
+            programState = programState.PopValue(out var governingExpression);
+
+            if (armSyntaxWrapper.Pattern.IsNullConstantPattern())
+            {
+                foreach (var newProgramState in governingExpression.TrySetConstraint(ObjectConstraint.Null, programState))
+                {
+                    EnqueueNewNode(new ProgramPoint(branchBlock.TrueSuccessorBlock), newProgramState);
+                }
+
+                foreach (var newProgramState in governingExpression.TrySetOppositeConstraint(ObjectConstraint.Null, programState))
+                {
+                    EnqueueNewNode(new ProgramPoint(branchBlock.FalseSuccessorBlock), newProgramState);
+                }
+            }
+            else
+            {
+                EnqueueNewNode(new ProgramPoint(branchBlock.TrueSuccessorBlock), programState);
+                EnqueueNewNode(new ProgramPoint(branchBlock.FalseSuccessorBlock), programState);
             }
         }
 

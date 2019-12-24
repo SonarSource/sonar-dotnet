@@ -359,4 +359,57 @@ namespace CSharp8
             }
         }
     }
+
+    public class SwitchExpressions
+    {
+        public void OnlyDiscardBranch_Noncompliant(string s, bool b)
+        {
+            var result = b switch
+            {
+                _ => s.ToString() // Noncompliant
+            };
+        }
+
+        public void MultipleBranches_Noncompliant(string s, int val)
+        {
+            var result = val switch
+            {
+                1 => "a",
+                2 => s.ToString(), // Noncompliant
+                _ => "b"
+            };
+        }
+
+        public void Nested_Noncompliant(string s, int val, bool condition)
+        {
+            var result = val switch
+            {
+                1 => "a",
+                2 => condition switch
+                {
+                    _ => s.ToString() // Noncompliant
+                },
+                _ => "b"
+            };
+        }
+
+        public void MultipleBranches_HandleNull(string s, int val)
+        {
+            var result = s switch
+            {
+                null => s.ToString(), // Noncompliant
+                _ => s.ToString() // Compliant as null was already handled
+            };
+        }
+
+        public void MultipleBranches_Compliant(string s, int val)
+        {
+            var result = val switch
+            {
+                1 => "a",
+                2 => s == null ? string.Empty : s.ToString(),
+                _ => "b"
+            };
+        }
+    }
 }
