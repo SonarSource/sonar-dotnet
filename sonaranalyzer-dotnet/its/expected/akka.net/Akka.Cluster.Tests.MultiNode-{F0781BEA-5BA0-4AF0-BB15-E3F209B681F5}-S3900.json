@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'roles' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  32,
+"endLine":  263,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'expectedAddresses' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
+"region":  {
+"startLine":  300,
+"startColumn":  37,
+"endLine":  300,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'nodesInCluster' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
+"region":  {
+"startLine":  333,
+"startColumn":  18,
+"endLine":  333,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'nodesInCluster' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
+"region":  {
+"startLine":  391,
+"startColumn":  37,
+"endLine":  391,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'actorRef' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\Routing\ClusterConsistentHashingGroupSpec.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  38,
+"endLine":  105,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'actorRef' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\Routing\ClusterConsistentHashingRouterSpec.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  38,
+"endLine":  108,
+"endColumn":  46
+}
+}
+}
+]
+}

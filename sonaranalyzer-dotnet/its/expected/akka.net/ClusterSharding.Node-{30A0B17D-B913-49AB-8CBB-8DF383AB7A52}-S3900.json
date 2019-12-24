@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'address' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\DBHelper.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  28,
+"endLine":  54,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'address' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\DBHelper.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  28,
+"endLine":  69,
+"endColumn":  35
+}
+}
+}
+]
+}

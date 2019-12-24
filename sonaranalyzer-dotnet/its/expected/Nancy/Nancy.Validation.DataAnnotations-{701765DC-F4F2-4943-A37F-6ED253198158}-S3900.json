@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'factory' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsValidator.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  31,
+"endLine":  26,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'attribute' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsValidatorAdapter.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  60,
+"endLine":  48,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'attribute' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsValidatorAdapter.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  17,
+"endLine":  89,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'result' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsValidatorAdapter.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  45,
+"endLine":  106,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'attribute' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RangeValidatorAdapter.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  55,
+"endLine":  43,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'descriptor' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RangeValidatorAdapter.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  25,
+"endLine":  44,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'attribute' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RegexValidatorAdapter.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  50,
+"endLine":  40,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'descriptor' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RegexValidatorAdapter.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  25,
+"endLine":  41,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'attribute' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RequiredValidatorAdapter.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  52,
+"endLine":  40,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'descriptor' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RequiredValidatorAdapter.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  90,
+"endLine":  40,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'attribute' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\StringLengthValidatorAdapter.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  57,
+"endLine":  40,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'descriptor' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\StringLengthValidatorAdapter.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  25,
+"endLine":  41,
+"endColumn":  35
+}
+}
+}
+]
+}

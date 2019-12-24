@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'config' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\ClusterClient\ClusterClientSpec.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  23,
+"endLine":  105,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'config' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  22,
+"endLine":  207,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'config' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerLeaveSpec.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  22,
+"endLine":  86,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'config' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerSpec.cs",
+"region":  {
+"startLine":  319,
+"startColumn":  27,
+"endLine":  319,
+"endColumn":  33
+}
+}
+}
+]
+}
