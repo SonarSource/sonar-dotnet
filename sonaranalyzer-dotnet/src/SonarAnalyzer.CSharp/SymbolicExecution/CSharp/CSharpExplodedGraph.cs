@@ -718,9 +718,15 @@ namespace SonarAnalyzer.SymbolicExecution
         {
             var programState = node.ProgramState;
 
-            programState = programState.PopValue(out var governingExpression);
+            // the governing expression is always the first one so we need to pop all the values to extract it
+            // this is currently fine since the other values are not used by symbolic execution
+            SymbolicValue governingExpression = null;
+            while (programState.HasValue)
+            {
+                programState = programState.PopValue(out governingExpression);
+            }
 
-            if (armSyntaxWrapper.Pattern.IsNullConstantPattern())
+            if (armSyntaxWrapper.Pattern.IsNullConstantPattern() && governingExpression != null)
             {
                 foreach (var newProgramState in governingExpression.TrySetConstraint(ObjectConstraint.Null, programState))
                 {
