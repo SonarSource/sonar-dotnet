@@ -382,5 +382,50 @@ namespace Tests.Diagnostics
                 s.Dispose(); // Ok - s is null here, so it will raise a null pointer dereference instead
             }
         }
+
+        public class NullCoalescenceAssignment
+        {
+            public void NullCoalescenceAssignment_NotNull(Stream s)
+            {
+                if (s == null)
+                {
+                    s ??= new FileStream("path", FileMode.Open);
+                    using (var sr = new StreamReader(s))
+                    {
+                    }
+                    s.Dispose(); // Noncompliant
+                }
+            }
+        }
+
+        public interface IWithDefaultMembers
+        {
+            void DoDispose()
+            {
+                var d = new Disposable();
+                d.Dispose();
+                d.Dispose(); // Noncompliant
+            }
+        }
+
+        public class LocalStaticFunctions
+        {
+            public void Method(object arg)
+            {
+                void LocalFunction()
+                {
+                    var d = new Disposable();
+                    d.Dispose();
+                    d.Dispose(); // Compliant - FN: local functions are not supported by the CFG
+                }
+
+                static void LocalStaticFunction()
+                {
+                    var d = new Disposable();
+                    d.Dispose();
+                    d.Dispose(); // Compliant - FN: local functions are not supported by the CFG
+                }
+            }
+        }
     }
 }
