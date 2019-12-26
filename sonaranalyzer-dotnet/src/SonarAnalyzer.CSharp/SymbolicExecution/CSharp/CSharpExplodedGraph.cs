@@ -525,12 +525,17 @@ namespace SonarAnalyzer.SymbolicExecution
                     break;
 
                 case SyntaxKindEx.ConstantPattern:
+                case SyntaxKindEx.RecursivePattern:
                     // The 0 in 'case 0 when ...'
                     // Do nothing
                     break;
 
                 case SyntaxKindEx.DeclarationExpression:
                     // e.g.: dictionary.TryGetValue(key, out TValue value);
+                    // Do nothing
+                    break;
+
+                case SyntaxKindEx.TupleExpression:
                     // Do nothing
                     break;
 
@@ -713,7 +718,6 @@ namespace SonarAnalyzer.SymbolicExecution
         {
             var programState = node.ProgramState;
 
-            programState = programState.PopValue(out _); // pattern expression is ignored for now
             programState = programState.PopValue(out var governingExpression);
 
             if (armSyntaxWrapper.Pattern.IsNullConstantPattern())
@@ -1114,6 +1118,12 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private ProgramState VisitSimpleAssignment(AssignmentExpressionSyntax assignment, ProgramState programState)
         {
+            if (assignment.Left.IsKind(SyntaxKindEx.TupleExpression))
+            {
+                // TupleExpressions are not yet supported: https://github.com/SonarSource/sonar-dotnet/issues/2933
+                return programState;
+            }
+
             var newProgramState = programState;
             newProgramState = newProgramState.PopValue(out var sv);
             if (!CSharpControlFlowGraphBuilder.IsAssignmentWithSimpleLeftSide(assignment))

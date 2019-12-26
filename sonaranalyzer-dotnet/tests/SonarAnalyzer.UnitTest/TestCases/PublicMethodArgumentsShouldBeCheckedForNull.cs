@@ -392,6 +392,26 @@ namespace CSharp8
         }
     }
 
+    public class Address
+    {
+        public string Name { get; }
+
+        public string State { get; }
+
+        public void Deconstruct(out string name, out string state) =>
+            (name, state) = (Name, State);
+    }
+
+    public class Person
+    {
+        public string Name { get; }
+
+        public Address Address { get; }
+
+        public void Deconstruct(out string name, out Address address) =>
+            (name, address) = (Name, Address);
+    }
+
     public class SwitchExpressions
     {
         public void OnlyDiscardBranch_Noncompliant(string s, bool b)
@@ -441,6 +461,52 @@ namespace CSharp8
                 1 => "a",
                 2 => s == null ? string.Empty : s.ToString(),
                 _ => "b"
+            };
+        }
+
+        public string MultipleBranches_PropertyPattern(Address address, string s)
+        {
+            return address switch
+            {
+                {State: "WA" } addr => s.ToString(), // Noncompliant
+                _ => string.Empty
+            };
+        }
+
+        public string MultipleBranches_RecursivePattern(Person person, string s)
+        {
+            return person switch
+            {
+                { Address: {State: "WA" } } pers => s.ToString(), // Noncompliant
+                _ => string.Empty
+            };
+        }
+
+        public string MultipleBranches_TuplePattern(Address address, string s)
+         {
+             return address switch
+             {
+                 var (name, state) => s.ToString(), // Compliant - FN
+                 _ => string.Empty
+             };
+         }
+
+        public string MultipleBranches_WhenClause(Address address, string s)
+        {
+            return address switch
+            {
+                Address addr when addr.Name.Length > 0 => s.ToString(), // Noncompliant
+                Address addr when addr.Name.Length == s.Length => string.Empty, // Noncompliant
+                _ => string.Empty
+            };
+        }
+
+        public string MultipleBranches_VarDeclaration(Address address, string s)
+        {
+            return address switch
+            {
+                Address addr => s.ToString(), // Noncompliant
+                _ => string.Empty
             };
         }
     }
