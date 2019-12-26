@@ -427,5 +427,36 @@ namespace Tests.Diagnostics
                 }
             }
         }
+
+        public class DefaultLiteral
+        {
+            public void Method(object arg)
+            {
+                int i = default;
+            }
+        }
+
+        public class TupleExpressions
+        {
+            public void Method(object arg)
+            {
+                object myObject1;
+                object myObject2;
+
+                if (arg == null)
+                {
+                    (myObject1, myObject2) = (arg, null);
+                }
+                else
+                {
+                    (myObject1, myObject2) = (null, arg);
+                }
+
+                if (myObject1 == null)
+                {
+                    myObject1 = myObject2;
+                }
+            }
+        }
     }
 }

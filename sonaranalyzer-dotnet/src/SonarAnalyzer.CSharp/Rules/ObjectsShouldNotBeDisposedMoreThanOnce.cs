@@ -160,7 +160,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private ProgramState PreProcessVariableDeclarator(ProgramState programState, VariableDeclaratorSyntax declarator)
             {
-                if (declarator.Initializer?.Value == null)
+                if (declarator.Initializer?.Value == null || !programState.HasValue)
                 {
                     return programState;
                 }

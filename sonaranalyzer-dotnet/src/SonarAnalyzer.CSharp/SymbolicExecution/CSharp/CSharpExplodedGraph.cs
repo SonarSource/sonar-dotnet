@@ -405,7 +405,8 @@ namespace SonarAnalyzer.SymbolicExecution
                     break;
 
                 case SyntaxKind.DefaultExpression:
-                    newProgramState = VisitDefaultExpression((DefaultExpressionSyntax)instruction, newProgramState);
+                case SyntaxKindEx.DefaultLiteralExpression:
+                    newProgramState = VisitDefaultExpression(instruction, newProgramState);
                     break;
 
                 case SyntaxKind.AnonymousObjectCreationExpression:
@@ -921,7 +922,7 @@ namespace SonarAnalyzer.SymbolicExecution
             return newProgramState.PushValue(resultValue);
         }
 
-        private ProgramState VisitDefaultExpression(DefaultExpressionSyntax instruction, ProgramState programState)
+        private ProgramState VisitDefaultExpression(SyntaxNode instruction, ProgramState programState)
         {
             var sv = new SymbolicValue();
             var typeSymbol = SemanticModel.GetTypeInfo(instruction).Type;
