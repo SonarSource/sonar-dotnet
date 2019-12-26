@@ -19,22 +19,23 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
     public class ObjectsShouldNotBeDisposedMoreThanOnceTest
     {
-        //FIXME: Temporary silence for CFG defork
-        [Ignore("Temporary disabled for CFG defork")]
         [TestMethod]
         [TestCategory("Rule")]
         public void ObjectsShouldNotBeDisposedMoreThanOnce()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ObjectsShouldNotBeDisposedMoreThanOnce.cs",
-                new ObjectsShouldNotBeDisposedMoreThanOnce());
+                new ObjectsShouldNotBeDisposedMoreThanOnce(),
+                ParseOptionsHelper.FromCSharp8,
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
     }
 }
