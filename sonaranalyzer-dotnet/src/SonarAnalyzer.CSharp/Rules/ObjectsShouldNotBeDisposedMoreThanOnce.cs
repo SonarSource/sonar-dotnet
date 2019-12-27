@@ -165,8 +165,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     return programState;
                 }
 
+                // We need to associate the symbolic value to the symbol here first, as it hasn't been done yet, since we
+                // are are pre-processing the VariableDeclarator instruction
                 var disposableSymbol = this.semanticModel.GetDeclaredSymbol(declarator);
                 var newProgramState = programState.StoreSymbolicValue(disposableSymbol, programState.PeekValue());
+
                 newProgramState = ProcessDisposableSymbol(newProgramState, declarator, disposableSymbol);
                 return ProcessStreamDisposingTypes(newProgramState, declarator);
             }

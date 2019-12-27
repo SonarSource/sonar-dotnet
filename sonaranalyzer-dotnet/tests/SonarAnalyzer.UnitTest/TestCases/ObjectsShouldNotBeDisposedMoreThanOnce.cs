@@ -428,7 +428,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        public class DefaultLiteral
+        public class DefaultLiteralDoesNotCrashRule
         {
             public void Method(object arg)
             {
@@ -436,7 +436,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        public class TupleExpressions
+        public class TupleExpressionsDoNotCrashRule
         {
             public void Method(object myObject1, object myObject2)
             {
