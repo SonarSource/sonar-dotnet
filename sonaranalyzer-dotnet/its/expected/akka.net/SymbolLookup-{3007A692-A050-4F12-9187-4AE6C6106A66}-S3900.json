@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'message' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\DispatcherActor.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  27,
+"endLine":  35,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sd' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\DispatcherActor.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  73,
+"endLine":  47,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'fail' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\DispatcherActor.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  29,
+"endLine":  54,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'message' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\TickerActors.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  26,
+"endLine":  34,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'message' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\TickerActors.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  27,
+"endLine":  44,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'message' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\TickerActors.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  23,
+"endLine":  54,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'data' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\MainForm.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  43,
+"endLine":  54,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'tickerSymbol' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockUriHelper.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  72,
+"endLine":  21,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'tickerSymbol' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockUriHelper.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  70,
+"endLine":  26,
+"endColumn":  82
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\LiquidNancyFileSystem.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  44,
+"endLine":  43,
+"endColumn":  51
+}
+}
+}
+]
+}
