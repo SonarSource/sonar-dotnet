@@ -509,5 +509,14 @@ namespace CSharp8
                 _ => string.Empty
             };
         }
+
+        public string TwoBranches_NoDefault(bool condition, string s)
+        {
+            return condition switch
+            {
+                true => s.ToString(), // Noncompliant
+                false => s.ToString() // Noncompliant
+            };
+        }
     }
 }
