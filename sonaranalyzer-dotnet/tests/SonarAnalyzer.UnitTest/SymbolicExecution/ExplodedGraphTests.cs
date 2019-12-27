@@ -675,5 +675,74 @@ namespace TesteAnalyzer
             maxStepCountReached.Should().BeFalse();
             maxInternalStateCountReached.Should().BeTrue();
         }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_DeclarationStatementVisit()
+        {
+            const string methodBody =  @"
+using System.Collections.Generic;
+
+namespace Namespace
+{
+  public class DeclarationStatement
+  {
+    public int Test(Dictionary<string, string> dictionary, string key)
+    {
+        dictionary.TryGetValue(key, out var value);
+    }
+  }
+}";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(methodBody, "Test", out var semanticModel);
+            var methodSymbol = semanticModel.GetDeclaredSymbol(method);
+            var dictionarySymbol = semanticModel.GetDeclaredSymbol(method.ParameterList.Parameters.First());
+
+            var valueDeclaration = method.DescendantNodes().OfType<DeclarationExpressionSyntax>().First();
+            var valueSymbol = semanticModel.GetDeclaredSymbol(valueDeclaration);
+
+            var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
+            var lva = CSharpLiveVariableAnalysis.Analyze(cfg, methodSymbol, semanticModel);
+
+            var explodedGraph = new CSharpExplodedGraph(cfg, methodSymbol, semanticModel, lva);
+
+            explodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+                    switch (instruction)
+                    {
+                        case "dictionary":
+                            args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
+                            dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeFalse();
+                            break;
+
+                        case "dictionary.TryGetValue":
+                            args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
+                            dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            break;
+
+                        case "key":
+                            args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
+                            dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            break;
+
+                        case "var value":
+                            args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
+                            dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            break;
+
+                        case "dictionary.TryGetValue(key, out var value)":
+                            args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
+                            dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+
+                            // Currently the DeclarationExpressionSyntax are ignored so the "value" variable is not
+                            // https://github.com/SonarSource/sonar-dotnet/issues/2936
+                            args.ProgramState.GetSymbolValue(valueSymbol).Should().BeNull();
+                            break;
+                    }
+                };
+
+            explodedGraph.Walk();
+        }
     }
 }
