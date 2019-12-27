@@ -697,10 +697,9 @@ namespace SonarAnalyzer.SymbolicExecution
                     EnqueueNewNode(new ProgramPoint(branchBlock.TrueSuccessorBlock), newProgramState);
                 }
 
-                // ToDo: newProgramState seems to be unused, probably and issue
                 foreach (var newProgramState in sv.TrySetOppositeConstraint(ObjectConstraint.Null, ps))
                 {
-                    EnqueueNewNode(new ProgramPoint(branchBlock.FalseSuccessorBlock), ps);
+                    EnqueueNewNode(new ProgramPoint(branchBlock.FalseSuccessorBlock), newProgramState);
                 }
             }
             else
