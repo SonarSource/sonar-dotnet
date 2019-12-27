@@ -438,24 +438,12 @@ namespace Tests.Diagnostics
 
         public class TupleExpressions
         {
-            public void Method(object arg)
+            public void Method(object myObject1, object myObject2)
             {
-                object myObject1;
-                object myObject2;
-
-                if (arg == null)
-                {
-                    (myObject1, myObject2) = (arg, null);
-                }
-                else
-                {
-                    (myObject1, myObject2) = (null, arg);
-                }
-
-                if (myObject1 == null)
-                {
-                    myObject1 = myObject2;
-                }
+                var myTuple = (1, 2);
+                (object a, object b) c = (1, null);
+                (object d, object e) = (1, null);
+                (myObject1, myObject2) = (1, null);
             }
         }
     }
