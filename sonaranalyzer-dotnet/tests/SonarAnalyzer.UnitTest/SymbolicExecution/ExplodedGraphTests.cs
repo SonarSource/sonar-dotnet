@@ -888,5 +888,52 @@ namespace Namespace
             explorationEnded.Should().BeTrue();
             numberOfExitBlockReached.Should().Be(3);
         }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_NullCoalesceAssignmentVisit()
+        {
+            const string methodBody =  @"
+using System.Collections.Generic;
+
+namespace Namespace
+{
+    public class NullCoalescenceAssignment
+    {
+        public void Test(string s)
+        {
+            s ??= ""N/A"";
+        }
+    }
+}";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(methodBody, "Test", out var semanticModel);
+            var methodSymbol = semanticModel.GetDeclaredSymbol(method);
+            var sSymbol = semanticModel.GetDeclaredSymbol(method.ParameterList.Parameters.First());
+
+            var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
+            var lva = CSharpLiveVariableAnalysis.Analyze(cfg, methodSymbol, semanticModel);
+
+            var explodedGraph = new CSharpExplodedGraph(cfg, methodSymbol, semanticModel, lva);
+
+            explodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+                    switch (instruction)
+                    {
+                        case "s":
+                            args.ProgramState.GetSymbolValue(sSymbol).Should().NotBeNull();
+                            sSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeFalse();
+                            break;
+
+                        case "s ??= \"N/A\"":
+                            args.ProgramState.GetSymbolValue(sSymbol).Should().NotBeNull();
+                            sSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            break;
+                    }
+                };
+
+            explodedGraph.Walk();
+        }
     }
 }
