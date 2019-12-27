@@ -473,6 +473,15 @@ namespace CSharp8
             };
         }
 
+        public string MultipleBranches_PropertyPattern_FP(string s)
+        {
+            return s switch
+            {
+                { Length: 5 } => s.ToString(), // Noncompliant - FP we know that the length is 5 so the string cannot be null
+                _ => string.Empty
+            };
+        }
+
         public string MultipleBranches_RecursivePattern(Person person, string s)
         {
             return person switch
