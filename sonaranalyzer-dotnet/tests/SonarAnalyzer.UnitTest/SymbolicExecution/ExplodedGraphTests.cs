@@ -675,5 +675,265 @@ namespace TesteAnalyzer
             maxStepCountReached.Should().BeFalse();
             maxInternalStateCountReached.Should().BeTrue();
         }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_DeclarationStatementVisit()
+        {
+            const string methodBody =  @"
+using System.Collections.Generic;
+
+namespace Namespace
+{
+  public class DeclarationStatement
+  {
+    public int Test(Dictionary<string, string> dictionary, string key)
+    {
+        dictionary.TryGetValue(key, out var value);
+    }
+  }
+}";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(methodBody, "Test", out var semanticModel);
+            var methodSymbol = semanticModel.GetDeclaredSymbol(method);
+            var dictionarySymbol = semanticModel.GetDeclaredSymbol(method.ParameterList.Parameters.First());
+
+            var valueDeclaration = method.DescendantNodes().OfType<DeclarationExpressionSyntax>().First();
+            var valueSymbol = semanticModel.GetDeclaredSymbol(valueDeclaration);
+
+            var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
+            var lva = CSharpLiveVariableAnalysis.Analyze(cfg, methodSymbol, semanticModel);
+
+            var explodedGraph = new CSharpExplodedGraph(cfg, methodSymbol, semanticModel, lva);
+
+            explodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+                    switch (instruction)
+                    {
+                        case "dictionary":
+                            args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
+                            dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeFalse();
+                            break;
+
+                        case "dictionary.TryGetValue":
+                            args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
+                            dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            break;
+
+                        case "key":
+                            args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
+                            dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            break;
+
+                        case "var value":
+                            args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
+                            dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            break;
+
+                        case "dictionary.TryGetValue(key, out var value)":
+                            args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
+                            dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+
+                            // Currently the DeclarationExpressionSyntax are ignored so the "value" variable is not
+                            // https://github.com/SonarSource/sonar-dotnet/issues/2936
+                            args.ProgramState.GetSymbolValue(valueSymbol).Should().BeNull();
+                            break;
+                    }
+                };
+
+            explodedGraph.Walk();
+        }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_SwitchWithRecursivePatternVisit()
+        {
+            const string methodBody =  @"
+using System.Collections.Generic;
+
+namespace Namespace
+{
+    public class Address
+    {
+        public string Name { get; }
+        public string State { get; }
+    }
+
+    public class Person
+    {
+        public string Name { get; }
+        public Address Address { get; }
+    }
+
+    public class DeclarationStatement
+    {
+public string Test(Person person)
+{
+    return person switch
+        {
+            { Address: {State: ""WA"" } address } p => address.Name,
+            _ => string.Empty
+        };
+}
+    }
+}";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(methodBody, "Test", out var semanticModel);
+            var methodSymbol = semanticModel.GetDeclaredSymbol(method);
+            var personSymbol = semanticModel.GetDeclaredSymbol(method.ParameterList.Parameters.First());
+
+            var declarations = method.DescendantNodes().OfType<SingleVariableDesignationSyntax>().ToList();
+            var addressSymbol = semanticModel.GetDeclaredSymbol(declarations[0]);
+            var pSymbol = semanticModel.GetDeclaredSymbol(declarations[1]);
+
+            var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
+            var lva = CSharpLiveVariableAnalysis.Analyze(cfg, methodSymbol, semanticModel);
+
+            var explodedGraph = new CSharpExplodedGraph(cfg, methodSymbol, semanticModel, lva);
+
+            explodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+                    switch (instruction)
+                    {
+                        case "person":
+                            args.ProgramState.GetSymbolValue(personSymbol).Should().NotBeNull();
+                            break;
+
+                        case "{ Address: {State: \"WA\" } address } p":
+                            args.ProgramState.GetSymbolValue(personSymbol).Should().NotBeNull();
+
+                            // Currently the recursive pattern is ignored and the values for "p" and "address" are not created.
+                            // https://github.com/SonarSource/sonar-dotnet/issues/2937
+                            args.ProgramState.GetSymbolValue(addressSymbol).Should().BeNull();
+                            args.ProgramState.GetSymbolValue(pSymbol).Should().BeNull();
+                            break;
+
+                        case "{State: \"WA\" } address":
+                            args.ProgramState.GetSymbolValue(personSymbol).Should().NotBeNull();
+
+                            // Currently the recursive pattern is ignored and the value for "address" is not created.
+                            // https://github.com/SonarSource/sonar-dotnet/issues/2937
+                            args.ProgramState.GetSymbolValue(addressSymbol).Should().BeNull();
+                            break;
+
+                        case "\"WA\"":
+                            args.ProgramState.GetSymbolValue(personSymbol).Should().NotBeNull();
+                            break;
+                    }
+                };
+
+            explodedGraph.Walk();
+        }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_SwitchExpressionVisit()
+        {
+            const string methodBody =  @"
+namespace Namespace
+{
+  public class SwitchExpression
+  {
+    public int Test(string str)
+    {
+      return str switch { null => 1, """" => 2, _ => 3};
+    }
+  }
+}";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(methodBody, "Test", out var semanticModel);
+            var methodSymbol = semanticModel.GetDeclaredSymbol(method);
+            var strParameter = method.ParameterList.Parameters.First();
+            var strSymbol = semanticModel.GetDeclaredSymbol(strParameter);
+
+            var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
+            var lva = CSharpLiveVariableAnalysis.Analyze(cfg, methodSymbol, semanticModel);
+
+            var explodedGraph = new CSharpExplodedGraph(cfg, methodSymbol, semanticModel, lva);
+
+            var explorationEnded = false;
+            explodedGraph.ExplorationEnded += (sender, args) => { explorationEnded = true; };
+
+            var numberOfExitBlockReached = 0;
+            explodedGraph.ExitBlockReached += (sender, args) => { numberOfExitBlockReached++; };
+
+            explodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+
+                    switch (instruction)
+                    {
+                        case "1" :
+                            args.ProgramState.GetSymbolValue(strSymbol).Should().NotBe(SymbolicValue.Null);
+                            strSymbol.HasConstraint(ObjectConstraint.Null, args.ProgramState).Should().BeTrue();
+                            break;
+
+                        case "2":
+                            args.ProgramState.GetSymbolValue(strSymbol).Should().NotBe(SymbolicValue.Null);
+                            strSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            break;
+
+                        case "3":
+                            args.ProgramState.GetSymbolValue(strSymbol).Should().BeNull();
+                            // due to the current shape of the CFG the last node doesn't have the right constrains
+                            // https://github.com/SonarSource/sonar-dotnet/issues/2938
+                            // strSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            break;
+                    }
+                };
+
+            explodedGraph.Walk();
+            explorationEnded.Should().BeTrue();
+            numberOfExitBlockReached.Should().Be(3);
+        }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_NullCoalesceAssignmentVisit()
+        {
+            const string methodBody =  @"
+using System.Collections.Generic;
+
+namespace Namespace
+{
+    public class NullCoalescenceAssignment
+    {
+        public void Test(string s)
+        {
+            s ??= ""N/A"";
+        }
+    }
+}";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(methodBody, "Test", out var semanticModel);
+            var methodSymbol = semanticModel.GetDeclaredSymbol(method);
+            var sSymbol = semanticModel.GetDeclaredSymbol(method.ParameterList.Parameters.First());
+
+            var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
+            var lva = CSharpLiveVariableAnalysis.Analyze(cfg, methodSymbol, semanticModel);
+
+            var explodedGraph = new CSharpExplodedGraph(cfg, methodSymbol, semanticModel, lva);
+
+            explodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+                    switch (instruction)
+                    {
+                        case "s":
+                            args.ProgramState.GetSymbolValue(sSymbol).Should().NotBeNull();
+                            sSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeFalse();
+                            break;
+
+                        case "s ??= \"N/A\"":
+                            args.ProgramState.GetSymbolValue(sSymbol).Should().NotBeNull();
+                            sSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            break;
+                    }
+                };
+
+            explodedGraph.Walk();
+        }
     }
 }

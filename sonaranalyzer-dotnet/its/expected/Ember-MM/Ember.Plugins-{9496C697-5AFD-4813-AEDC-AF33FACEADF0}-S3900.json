@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'section' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  38,
+"endLine":  58,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'imdbId' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember.Plugins\Utility.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  22,
+"endLine":  44,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'imdbId' before using it.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember.Plugins\Utility.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  21,
+"endLine":  46,
+"endColumn":  27
+}
+}
+}
+]
+}

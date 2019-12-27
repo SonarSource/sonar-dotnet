@@ -1,0 +1,1850 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'typeInfo' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\AllMemberInfo.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  19,
+"endLine":  15,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'typeInfo' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\AllMemberInfo.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  19,
+"endLine":  16,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'getTypeInfoMembers' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\CaseInsensitiveName.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  17,
+"endLine":  12,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'getTypeInfoMembers' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\CaseSensitiveName.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  17,
+"endLine":  14,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'resolvers' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\DefaultMember.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  17,
+"endLine":  20,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'parent' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\NameSplitMember.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  38,
+"endLine":  32,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'resolvers' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\NameSplitMember.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  21,
+"endLine":  36,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'options' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\NameSplitMember.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  35,
+"endLine":  38,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'names' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\PrePostfixName.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  34,
+"endLine":  19,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'getTypeInfoMembers' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\ReplaceName.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  37,
+"endLine":  23,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'getTypeInfoMembers' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\SourceToDestinationNameMapperAttributesMember.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  33,
+"endLine":  17,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'dictionary' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Internal\PrimitiveHelper.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'type' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Internal\PrimitiveHelper.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  40,
+"endLine":  59,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'type' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\Internal\PrimitiveHelper.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  16,
+"endLine":  75,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'converter' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  379,
+"startColumn":  26,
+"endLine":  379,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'typeMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"region":  {
+"startLine":  567,
+"startColumn":  42,
+"endLine":  567,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'typeMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  30,
+"endLine":  293,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'typeMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"region":  {
+"startLine":  296,
+"startColumn":  31,
+"endLine":  296,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'typeMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\PathConfigurationExpression.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  27,
+"endLine":  48,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'typeMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Configuration\SourceMappingExpression.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  40,
+"endLine":  18,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'configuration' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\DelegateFactory.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  13,
+"endLine":  28,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'configurationProvider' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  27,
+"endLine":  31,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destinationParameter' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  43,
+"endLine":  57,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'objectMapperExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  35,
+"endLine":  58,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'typeMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  17,
+"endLine":  116,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'property' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\PropertyDescription.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  20,
+"endLine":  21,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'owner' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\PropertyEmitter.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  29,
+"endLine":  23,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'requiredType' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\PropertyEmitter.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  17,
+"endLine":  59,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'typeMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  32,
+"endLine":  40,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'typeMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ICtorParamConfigurationExpression.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  30,
+"endLine":  56,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'propertyOrField' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  36,
+"endLine":  19,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'obj' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  63,
+"endLine":  25,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'memberExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  35,
+"endLine":  29,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'collection' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  16,
+"endLine":  43,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'expression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  78,
+"endLine":  101,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'exp' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  30,
+"endLine":  105,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'replace' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  42,
+"endLine":  106,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'exp' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  30,
+"endLine":  113,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'replace' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  42,
+"endLine":  114,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'expression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  85,
+"endLine":  141,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'then' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  55,
+"endLine":  163,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'then' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  67,
+"endLine":  163,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'expression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ExpressionFactory.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  16,
+"endLine":  164,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'parameter' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ReflectionHelper.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  17,
+"endLine":  24,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ReflectionHelper.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  20,
+"endLine":  35,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'fullMemberName' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ReflectionHelper.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  40,
+"endLine":  76,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'expression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ReflectionHelper.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  36,
+"endLine":  95,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'targetType' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Internal\ReflectionHelper.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  24,
+"endLine":  178,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\IObjectMapper.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  26,
+"endLine":  71,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\IObjectMapper.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  26,
+"endLine":  72,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'match' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\LowerUnderscoreNamingConvention.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  52,
+"endLine":  11,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'configurationProvider' because it could be null.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mapper.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  43,
+"endLine":  183,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'inlineConfiguration' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  21,
+"endLine":  218,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'includedTypes' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  368,
+"startColumn":  33,
+"endLine":  368,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'typeMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\MapperConfiguration.cs",
+"region":  {
+"startLine":  450,
+"startColumn":  74,
+"endLine":  450,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ArrayCopyMapper.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  68,
+"endLine":  37,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ArrayCopyMapper.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  70,
+"endLine":  38,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'configurationProvider' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ArrayCopyMapper.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  17,
+"endLine":  40,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'profileMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ArrayCopyMapper.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  35,
+"endLine":  43,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ArrayMapper.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  70,
+"endLine":  21,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ArrayMapper.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  68,
+"endLine":  22,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ConvertMapper.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  40,
+"endLine":  46,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ConvertMapper.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  63,
+"endLine":  46,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'self' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\CreateMapBasedOnCriteriaMapper.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  13,
+"endLine":  28,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumerableMapper.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  16,
+"endLine":  21,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'source' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumToEnumMapper.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  55,
+"endLine":  22,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumToEnumMapper.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  49,
+"endLine":  46,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumToEnumMapper.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  72,
+"endLine":  46,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumToStringMapper.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  30,
+"endLine":  21,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\EnumToUnderlyingTypeMapper.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  34,
+"endLine":  29,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ExplicitConversionOperatorMapper.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  79,
+"endLine":  31,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ExplicitConversionOperatorMapper.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  102,
+"endLine":  31,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\FlagsEnumMapper.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  34,
+"endLine":  33,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\FlagsEnumMapper.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  48,
+"endLine":  34,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromDynamicMapper.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  49,
+"endLine":  54,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromDynamicMapper.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  72,
+"endLine":  54,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  49,
+"endLine":  24,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ImplicitConversionOperatorMapper.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  79,
+"endLine":  30,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ImplicitConversionOperatorMapper.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  102,
+"endLine":  30,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\CollectionMapperExpressionFactory.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  46,
+"endLine":  24,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\CollectionMapperExpressionFactory.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  52,
+"endLine":  26,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'configurationProvider' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\CollectionMapperExpressionFactory.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  34,
+"endLine":  54,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'enumerableType' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\Internal\ElementTypeHelper.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  17,
+"endLine":  22,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\MultidimensionalArrayMapper.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  49,
+"endLine":  53,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\MultidimensionalArrayMapper.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  70,
+"endLine":  53,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destination' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\MultidimensionalArrayMapper.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  36,
+"endLine":  65,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\NullableDestinationMapper.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  30,
+"endLine":  16,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\NullableDestinationMapper.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  80,
+"endLine":  16,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\NullableSourceMapper.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  61,
+"endLine":  18,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\NullableSourceMapper.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  85,
+"endLine":  18,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ReadOnlyCollectionMapper.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  92,
+"endLine":  27,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\StringToEnumMapper.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  35,
+"endLine":  23,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'profileMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ToDynamicMapper.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  37,
+"endLine":  19,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ToDynamicMapper.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  49,
+"endLine":  56,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\ToDynamicMapper.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  72,
+"endLine":  56,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\TypeConverterMapper.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  49,
+"endLine":  44,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\TypeConverterMapper.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  72,
+"endLine":  44,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destExpression' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Mappers\UnderlyingTypeToEnumMapper.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  49,
+"endLine":  27,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'match' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PascalCaseNamingConvention.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  52,
+"endLine":  10,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'openMapConfig' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  13,
+"endLine":  202,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'pathMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  25,
+"endLine":  24,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'inheritedMappedProperty' because it could be null.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  20,
+"endLine":  37,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'inheritedMappedProperty' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  16,
+"endLine":  105,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'request' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  47,
+"endLine":  156,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'letPropertyMaps' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  16,
+"endLine":  158,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'request' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  465,
+"startColumn":  65,
+"endLine":  465,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'typeMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  465,
+"startColumn":  94,
+"endLine":  465,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'builder' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  471,
+"startColumn":  39,
+"endLine":  471,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'expressionBuilder' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ExpressionBuilder.cs",
+"region":  {
+"startLine":  589,
+"startColumn":  62,
+"endLine":  589,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'configuration' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Extensions.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  49,
+"endLine":  60,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'configuration' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Extensions.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  49,
+"endLine":  114,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'propertyMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\AssignableExpressionBinder.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  16,
+"endLine":  9,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'result' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\AssignableExpressionBinder.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  69,
+"endLine":  9,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'propertyMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\EnumerableExpressionBinder.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'node' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberAccessQueryMapperVisitor.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  49,
+"endLine":  18,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'propertyMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberGetterExpressionResultConverter.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  71,
+"endLine":  11,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'propertyMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberGetterExpressionResultConverter.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  71,
+"endLine":  15,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'propertyMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberGetterExpressionResultConverter.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  16,
+"endLine":  31,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'propertyMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberGetterExpressionResultConverter.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  16,
+"endLine":  34,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'letPropertyMaps' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberResolverExpressionResultConverter.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  34,
+"endLine":  11,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'propertyMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberResolverExpressionResultConverter.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  75,
+"endLine":  15,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'propertyMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\MemberResolverExpressionResultConverter.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  41,
+"endLine":  31,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'propertyMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\NullableDestinationExpressionBinder.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'result' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\NullableDestinationExpressionBinder.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  70,
+"endLine":  13,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'typeMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperHelper.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  31,
+"endLine":  25,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'config' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperHelper.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  27,
+"endLine":  34,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceType' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperHelper.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  131,
+"endLine":  49,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destinationType' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperHelper.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  150,
+"endLine":  49,
+"endColumn":  165
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceQuery' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperVisitor.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  38,
+"endLine":  33,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destQuery' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperVisitor.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  32,
+"endLine":  35,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'node' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperVisitor.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  17,
+"endLine":  57,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'node' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperVisitor.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  30,
+"endLine":  64,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'node' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperVisitor.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  33,
+"endLine":  81,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'node' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperVisitor.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  17,
+"endLine":  92,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'propertyMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\StringExpressionBinder.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  16,
+"endLine":  9,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'sourceType' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  34,
+"endLine":  38,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'destinationType' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  51,
+"endLine":  38,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'options' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypeMapFactory.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  34,
+"endLine":  13,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'obj1' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  26,
+"endLine":  201,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'obj2' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\TypePair.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  46,
+"endLine":  201,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'propertyMap' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ValueTransformerConfiguration.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  20,
+"endLine":  20,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'valueTransformers' before using it.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ValueTransformerConfiguration.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  13,
+"endLine":  37,
+"endColumn":  30
+}
+}
+}
+]
+}

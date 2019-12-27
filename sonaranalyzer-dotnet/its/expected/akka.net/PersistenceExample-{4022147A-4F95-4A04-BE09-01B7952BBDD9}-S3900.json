@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'evt' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExamplePersistentActor.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  42,
+"endLine":  56,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'message' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExamplePersistentFailingActor.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  35,
+"endLine":  28,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'message' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExamplePersistentFailingActor.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  25,
+"endLine":  40,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'message' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\PersistenceExample\SnapshotedExampleActor.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  48,
+"endLine":  33,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'message' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\PersistenceExample\SnapshotedExampleActor.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  25,
+"endLine":  46,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'message' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ViewExampleActor.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  25,
+"endLine":  34,
+"endColumn":  32
+}
+}
+}
+]
+}

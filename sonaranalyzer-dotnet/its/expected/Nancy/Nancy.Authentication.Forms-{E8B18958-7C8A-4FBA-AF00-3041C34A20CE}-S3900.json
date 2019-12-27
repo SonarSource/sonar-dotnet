@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  31,
+"endLine":  111,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  17,
+"endLine":  121,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'configuration' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"region":  {
+"startLine":  351,
+"startColumn":  66,
+"endLine":  351,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'cookieValue' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"region":  {
+"startLine":  353,
+"startColumn":  35,
+"endLine":  353,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'module' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\ModuleExtensions.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  20,
+"endLine":  22,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'module' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\ModuleExtensions.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  69,
+"endLine":  37,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'module' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\ModuleExtensions.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  20,
+"endLine":  60,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'module' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\ModuleExtensions.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  66,
+"endLine":  73,
+"endColumn":  72
+}
+}
+}
+]
+}
