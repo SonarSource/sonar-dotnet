@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'message' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\NewRemoteActorSpec.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  20,
+"endLine":  25,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'message' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\NewRemoteActorSpec.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  21,
+"endLine":  42,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'message' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\PiercingShouldKeepQuarantineSpec.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  21,
+"endLine":  69,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'message' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\RemoteRandomSpec.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  21,
+"endLine":  87,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'message' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\RemoteRoundRobinSpec.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  21,
+"endLine":  97,
+"endColumn":  28
+}
+}
+}
+]
+}

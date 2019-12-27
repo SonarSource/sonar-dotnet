@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'container' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication.Basic\AuthenticationBootstrapper.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  17,
+"endLine":  14,
+"endColumn":  26
+}
+}
+}
+]
+}

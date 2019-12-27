@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'message' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalSpec.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  21,
+"endLine":  70,
+"endColumn":  28
+}
+}
+}
+]
+}

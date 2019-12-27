@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'value' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\AttributeValue.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  39,
+"endLine":  26,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'value' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\AttributeValue.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  17,
+"endLine":  32,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'encoded' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\EncodedHtmlString.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  20,
+"endLine":  52,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'context' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\ModelCodeGenerator.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  13,
+"endLine":  30,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'renderContext' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  28,
+"endLine":  139,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'writer' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  287,
+"startColumn":  13,
+"endLine":  287,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'writer' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  13,
+"endLine":  297,
+"endColumn":  19
+}
+}
+}
+]
+}

@@ -56,7 +56,7 @@ namespace SonarAnalyzer.SymbolicExecution
         {
             var newProgramState = node.ProgramState;
 
-            if (block is UsingEndBlock usingFinalizerBlock)
+            if (block is UsingEndBlock)
             {
                 newProgramState = InvokeChecks(newProgramState, (ps, check) => check.PreProcessUsingStatement(node.ProgramPoint, ps));
                 newProgramState = CleanStateAfterBlock(newProgramState, block);
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 return;
             }
 
-            if (block is LockBlock lockBlock)
+            if (block is LockBlock)
             {
                 newProgramState = newProgramState.PopValue();
 
@@ -117,6 +117,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     return;
 
                 case SyntaxKind.CoalesceExpression:
+                case SyntaxKindEx.CoalesceAssignmentExpression:
                     VisitCoalesceExpressionBinaryBranch(binaryBranchBlock, newProgramState);
                     return;
 
@@ -143,6 +144,10 @@ namespace SonarAnalyzer.SymbolicExecution
                 // this is only for switch cases without a when. We handle C#7 switch case as a default BinaryBranch
                 case SyntaxKind.CaseSwitchLabel when !CasePatternSwitchLabelSyntaxWrapper.IsInstance(binaryBranchBlock.BranchingNode):
                     VisitCaseSwitchBinaryBranchBlock(binaryBranchBlock, node, (CaseSwitchLabelSyntax)binaryBranchBlock.BranchingNode);
+                    return;
+
+                case SyntaxKindEx.SwitchExpressionArm:
+                    VisitSwitchExpressionArmBinaryBranch(binaryBranchBlock, node, (SwitchExpressionArmSyntaxWrapper) binaryBranchBlock.BranchingNode);
                     return;
 
                 default:
@@ -172,6 +177,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     break;
 
                 case SyntaxKind.SimpleAssignmentExpression:
+                case SyntaxKindEx.CoalesceAssignmentExpression:
                     newProgramState = VisitSimpleAssignment((AssignmentExpressionSyntax)instruction, newProgramState);
                     break;
 
@@ -192,7 +198,6 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.DivideAssignmentExpression:
                 case SyntaxKind.MultiplyAssignmentExpression:
                 case SyntaxKind.ModuloAssignmentExpression:
-
                 case SyntaxKind.LeftShiftAssignmentExpression:
                 case SyntaxKind.RightShiftAssignmentExpression:
                     newProgramState = VisitOpAssignment((AssignmentExpressionSyntax)instruction, newProgramState);
@@ -477,8 +482,8 @@ namespace SonarAnalyzer.SymbolicExecution
                     var constructorInitializer = (ConstructorInitializerSyntax)instruction;
                     if (constructorInitializer.ArgumentList != null)
                     {
-                        var ctorInifializerArgumentsCount = constructorInitializer.ArgumentList.Arguments.Count;
-                        newProgramState = newProgramState.PopValues(ctorInifializerArgumentsCount);
+                        var ctorInitializerArgumentsCount = constructorInitializer.ArgumentList.Arguments.Count;
+                        newProgramState = newProgramState.PopValues(ctorInitializerArgumentsCount);
                     }
                     break;
 
@@ -519,8 +524,18 @@ namespace SonarAnalyzer.SymbolicExecution
                     newProgramState = VisitVarPattern((VarPatternSyntaxWrapper)instruction, newProgramState);
                     break;
 
+                case SyntaxKindEx.RecursivePattern: // https://github.com/SonarSource/sonar-dotnet/issues/2937
                 case SyntaxKindEx.ConstantPattern:
                     // The 0 in 'case 0 when ...'
+                    // Do nothing
+                    break;
+
+                case SyntaxKindEx.DeclarationExpression:
+                    // e.g.: dictionary.TryGetValue(key, out TValue value);
+                    // Do nothing
+                    break;
+
+                case SyntaxKindEx.TupleExpression:
                     // Do nothing
                     break;
 
@@ -635,10 +650,12 @@ namespace SonarAnalyzer.SymbolicExecution
             {
                 var nps = newProgramState;
 
-                if (!ShouldConsumeValue((BinaryExpressionSyntax)binaryBranchBlock.BranchingNode))
+                if (!ShouldConsumeValue((ExpressionSyntax)binaryBranchBlock.BranchingNode)
+                    || binaryBranchBlock.BranchingNode?.Kind() == SyntaxKindEx.CoalesceAssignmentExpression)
                 {
                     nps = nps.PushValue(sv);
                 }
+
                 EnqueueNewNode(new ProgramPoint(binaryBranchBlock.FalseSuccessorBlock), nps);
             }
         }
@@ -679,6 +696,8 @@ namespace SonarAnalyzer.SymbolicExecution
                 {
                     EnqueueNewNode(new ProgramPoint(branchBlock.TrueSuccessorBlock), newProgramState);
                 }
+
+                // ToDo: newProgramState seems to be unused, probably and issue
                 foreach (var newProgramState in sv.TrySetOppositeConstraint(ObjectConstraint.Null, ps))
                 {
                     EnqueueNewNode(new ProgramPoint(branchBlock.FalseSuccessorBlock), ps);
@@ -692,6 +711,37 @@ namespace SonarAnalyzer.SymbolicExecution
                 }
                 // False succesor is the next case block. It is always enqueued without constraint
                 EnqueueNewNode(new ProgramPoint(branchBlock.FalseSuccessorBlock), ps);
+            }
+        }
+
+        private void VisitSwitchExpressionArmBinaryBranch(BinaryBranchBlock branchBlock, ExplodedGraphNode node, SwitchExpressionArmSyntaxWrapper armSyntaxWrapper)
+        {
+            var programState = node.ProgramState;
+
+            // the governing expression is always the first one so we need to pop all the values to extract it
+            // this is currently fine since the other values are not used by symbolic execution
+            SymbolicValue governingExpression = null;
+            while (programState.HasValue)
+            {
+                programState = programState.PopValue(out governingExpression);
+            }
+
+            if (armSyntaxWrapper.Pattern.IsNullConstantPattern() && governingExpression != null)
+            {
+                foreach (var newProgramState in governingExpression.TrySetConstraint(ObjectConstraint.Null, programState))
+                {
+                    EnqueueNewNode(new ProgramPoint(branchBlock.TrueSuccessorBlock), newProgramState);
+                }
+
+                foreach (var newProgramState in governingExpression.TrySetOppositeConstraint(ObjectConstraint.Null, programState))
+                {
+                    EnqueueNewNode(new ProgramPoint(branchBlock.FalseSuccessorBlock), newProgramState);
+                }
+            }
+            else
+            {
+                EnqueueNewNode(new ProgramPoint(branchBlock.TrueSuccessorBlock), programState);
+                EnqueueNewNode(new ProgramPoint(branchBlock.FalseSuccessorBlock), programState);
             }
         }
 
@@ -1074,6 +1124,12 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private ProgramState VisitSimpleAssignment(AssignmentExpressionSyntax assignment, ProgramState programState)
         {
+            if (assignment.Left.IsKind(SyntaxKindEx.TupleExpression))
+            {
+                // TupleExpressions are not yet supported: https://github.com/SonarSource/sonar-dotnet/issues/2933
+                return programState;
+            }
+
             var newProgramState = programState;
             newProgramState = newProgramState.PopValue(out var sv);
             if (!CSharpControlFlowGraphBuilder.IsAssignmentWithSimpleLeftSide(assignment))
@@ -1156,7 +1212,7 @@ namespace SonarAnalyzer.SymbolicExecution
             }
 
             return parent is ExpressionStatementSyntax ||
-                parent is YieldStatementSyntax;
+                   parent is YieldStatementSyntax;
         }
 
         private static bool IsEmptyNullableCtorCall(IMethodSymbol nullableConstructorCall)

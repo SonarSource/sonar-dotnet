@@ -18,24 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.TestFramework;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using SonarAnalyzer.ShimLayer.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Helpers
 {
-    [TestClass]
-    public class PublicMethodArgumentsShouldBeCheckedForNullTest
+    public static class PatternSyntaxWrapperExtensions
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void PublicMethodArgumentsShouldBeCheckedForNull()
+        public static bool IsNullConstantPattern(this PatternSyntaxWrapper pattern)
         {
-            Verifier.VerifyAnalyzer(@"TestCases\PublicMethodArgumentsShouldBeCheckedForNull.cs",
-                new PublicMethodArgumentsShouldBeCheckedForNull(),
-                ParseOptionsHelper.FromCSharp8,
-                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
+            if (!ConstantPatternSyntaxWrapper.IsInstance(pattern))
+            {
+                return false;
+            }
+
+            var constantPattern = (ConstantPatternSyntaxWrapper)pattern;
+
+            return constantPattern.Expression.IsKind(SyntaxKind.NullLiteralExpression);
         }
     }
 }

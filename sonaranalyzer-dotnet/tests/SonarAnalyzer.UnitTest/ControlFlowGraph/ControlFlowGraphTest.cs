@@ -4073,13 +4073,13 @@ return type switch
 
             bArm.TrueSuccessorBlock.Should().Be(bTrue);
             bArm.FalseSuccessorBlock.Should().Be(discardArm);
-            VerifyAllInstructions(bArm, "\"b\"");
+            VerifyAllInstructions(bArm, "type", "\"b\"");
 
             bTrue.SuccessorBlock.Should().Be(returnStatement);
             VerifyAllInstructions(bTrue, "2");
 
             discardArm.SuccessorBlock.Should().Be(discardBody);
-            VerifyAllInstructions(discardArm, "_");
+            VerifyAllInstructions(discardArm, "type");
 
             discardBody.SuccessorBlock.Should().Be(returnStatement);
             VerifyAllInstructions(discardBody, "3");
@@ -4113,13 +4113,13 @@ return type switch
 
             bArm.TrueSuccessorBlock.Should().Be(bTrue);
             bArm.FalseSuccessorBlock.Should().Be(discardArm);
-            VerifyAllInstructions(bArm, "\"b\"");
+            VerifyAllInstructions(bArm, "type", "\"b\"");
 
             bTrue.SuccessorBlock.Should().Be(assignment);
             VerifyAllInstructions(bTrue, "2");
 
             discardArm.SuccessorBlock.Should().Be(discardBody);
-            VerifyAllInstructions(discardArm, "_");
+            VerifyAllInstructions(discardArm, "type");
 
             discardBody.SuccessorBlock.Should().Be(assignment);
             VerifyAllInstructions(discardBody, "3");
@@ -4162,20 +4162,20 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
             VerifyAllInstructions(xTrue, "1");
 
             secondSwitchDiscardArm.SuccessorBlock.Should().Be(secondSwitchDiscardArmBody);
-            VerifyAllInstructions(secondSwitchDiscardArm, "_");
+            VerifyAllInstructions(secondSwitchDiscardArm, "second");
 
             secondSwitchDiscardArmBody.SuccessorBlock.Should().Be(assignment);
             VerifyAllInstructions(secondSwitchDiscardArmBody, "2");
 
             bArm.TrueSuccessorBlock.Should().Be(bTrue);
             bArm.FalseSuccessorBlock.Should().Be(firstSwitchDiscard);
-            VerifyAllInstructions(bArm, "\"b\"");
+            VerifyAllInstructions(bArm, "first", "\"b\"");
 
             bTrue.SuccessorBlock.Should().Be(assignment);
             VerifyAllInstructions(bTrue, "3");
 
             firstSwitchDiscard.SuccessorBlock.Should().Be(firstSwitchDiscardBody);
-            VerifyAllInstructions(firstSwitchDiscard, "_");
+            VerifyAllInstructions(firstSwitchDiscard, "first");
 
             firstSwitchDiscardBody.SuccessorBlock.Should().Be(assignment);
             VerifyAllInstructions(firstSwitchDiscardBody, "4");
@@ -4217,20 +4217,20 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
 
             aArm.TrueSuccessorBlock.Should().Be(aTrue);
             aArm.FalseSuccessorBlock.Should().Be(bArm);
-            VerifyAllInstructions(aArm, "\"a\"");
+            VerifyAllInstructions(aArm, "first", "\"a\"");
 
             aTrue.SuccessorBlock.Should().Be(assignment);
             VerifyAllInstructions(aTrue, "2");
 
             bArm.TrueSuccessorBlock.Should().Be(bTrue);
             bArm.FalseSuccessorBlock.Should().Be(discardArm);
-            VerifyAllInstructions(bArm, "\"b\"");
+            VerifyAllInstructions(bArm, "first", "\"b\"");
 
             bTrue.SuccessorBlock.Should().Be(assignment);
             VerifyAllInstructions(bTrue, "3");
 
             discardArm.SuccessorBlock.Should().Be(discardArmBody);
-            VerifyAllInstructions(discardArm, "_");
+            VerifyAllInstructions(discardArm, "first");
 
             discardArmBody.SuccessorBlock.Should().Be(assignment);
             VerifyAllInstructions(discardArmBody, "4");
@@ -5078,13 +5078,13 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
 
             mnArmBranch.TrueSuccessorBlock.Should().Be(mnArmTrueBranch);
             mnArmBranch.FalseSuccessorBlock.Should().Be(discardArm);
-            VerifyAllInstructions(mnArmBranch, "{ State: \"MN\" }" /* RecursivePattern */, "\"MN\"" /* ConstantPattern */);
+            VerifyAllInstructions(mnArmBranch, "location", "{ State: \"MN\" }" /* RecursivePattern */, "\"MN\"" /* ConstantPattern */);
 
             mnArmTrueBranch.SuccessorBlock.Should().Be(exitBlock);
             VerifyAllInstructions(mnArmTrueBranch, "salePrice", "0.75M", "salePrice * 0.75M");
 
             discardArm.SuccessorBlock.Should().Be(discardArmBody);
-            VerifyAllInstructions(discardArm, "_" /* DiscardPattern */);
+            VerifyAllInstructions(discardArm, "location");
 
             discardArmBody.SuccessorBlock.Should().Be(exitBlock);
             VerifyAllInstructions(discardArmBody, "0M");
