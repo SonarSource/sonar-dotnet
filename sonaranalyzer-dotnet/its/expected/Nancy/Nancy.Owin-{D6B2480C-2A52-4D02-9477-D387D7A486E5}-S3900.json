@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'builder' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Owin\AppBuilderExtensions.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  20,
+"endLine":  29,
+"endColumn":  27
+}
+}
+}
+]
+}

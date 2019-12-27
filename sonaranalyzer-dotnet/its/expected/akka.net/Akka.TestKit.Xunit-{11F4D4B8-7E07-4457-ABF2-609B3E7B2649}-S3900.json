@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'x' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  34,
+"endLine":  59,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'y' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  49,
+"endLine":  59,
+"endColumn":  50
+}
+}
+}
+]
+}

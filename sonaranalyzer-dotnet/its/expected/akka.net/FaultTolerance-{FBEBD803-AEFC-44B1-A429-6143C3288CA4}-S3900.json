@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'message' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  17,
+"endLine":  130,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'message' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  271,
+"startColumn":  46,
+"endLine":  271,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'message' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  382,
+"startColumn":  22,
+"endLine":  382,
+"endColumn":  29
+}
+}
+}
+]
+}
