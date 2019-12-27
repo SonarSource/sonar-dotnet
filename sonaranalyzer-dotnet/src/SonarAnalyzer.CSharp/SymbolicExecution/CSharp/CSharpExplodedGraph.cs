@@ -524,8 +524,8 @@ namespace SonarAnalyzer.SymbolicExecution
                     newProgramState = VisitVarPattern((VarPatternSyntaxWrapper)instruction, newProgramState);
                     break;
 
+                case SyntaxKindEx.RecursivePattern: // https://github.com/SonarSource/sonar-dotnet/issues/2937
                 case SyntaxKindEx.ConstantPattern:
-                case SyntaxKindEx.RecursivePattern:
                     // The 0 in 'case 0 when ...'
                     // Do nothing
                     break;

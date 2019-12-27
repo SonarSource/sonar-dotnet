@@ -744,5 +744,87 @@ namespace Namespace
 
             explodedGraph.Walk();
         }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_SwitchWithRecursivePatternVisit()
+        {
+            const string methodBody =  @"
+using System.Collections.Generic;
+
+namespace Namespace
+{
+    public class Address
+    {
+        public string Name { get; }
+        public string State { get; }
+    }
+
+    public class Person
+    {
+        public string Name { get; }
+        public Address Address { get; }
+    }
+
+    public class DeclarationStatement
+    {
+public string Test(Person person)
+{
+    return person switch
+        {
+            { Address: {State: ""WA"" } address } p => address.Name,
+            _ => string.Empty
+        };
+}
+    }
+}";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(methodBody, "Test", out var semanticModel);
+            var methodSymbol = semanticModel.GetDeclaredSymbol(method);
+            var personSymbol = semanticModel.GetDeclaredSymbol(method.ParameterList.Parameters.First());
+
+            var declarations = method.DescendantNodes().OfType<SingleVariableDesignationSyntax>().ToList();
+            var addressSymbol = semanticModel.GetDeclaredSymbol(declarations[0]);
+            var pSymbol = semanticModel.GetDeclaredSymbol(declarations[1]);
+
+            var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
+            var lva = CSharpLiveVariableAnalysis.Analyze(cfg, methodSymbol, semanticModel);
+
+            var explodedGraph = new CSharpExplodedGraph(cfg, methodSymbol, semanticModel, lva);
+
+            explodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+                    switch (instruction)
+                    {
+                        case "person":
+                            args.ProgramState.GetSymbolValue(personSymbol).Should().NotBeNull();
+                            break;
+
+                        case "{ Address: {State: \"WA\" } address } p":
+                            args.ProgramState.GetSymbolValue(personSymbol).Should().NotBeNull();
+
+                            // Currently the recursive pattern is ignored and the values for "p" and "address" are not created.
+                            // https://github.com/SonarSource/sonar-dotnet/issues/2937
+                            args.ProgramState.GetSymbolValue(addressSymbol).Should().BeNull();
+                            args.ProgramState.GetSymbolValue(pSymbol).Should().BeNull();
+                            break;
+
+                        case "{State: \"WA\" } address":
+                            args.ProgramState.GetSymbolValue(personSymbol).Should().NotBeNull();
+
+                            // Currently the recursive pattern is ignored and the value for "address" is not created.
+                            // https://github.com/SonarSource/sonar-dotnet/issues/2937
+                            args.ProgramState.GetSymbolValue(addressSymbol).Should().BeNull();
+                            break;
+
+                        case "\"WA\"":
+                            args.ProgramState.GetSymbolValue(personSymbol).Should().NotBeNull();
+                            break;
+                    }
+                };
+
+            explodedGraph.Walk();
+        }
     }
 }
