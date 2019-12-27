@@ -528,4 +528,20 @@ namespace CSharp8
             };
         }
     }
+
+    public class SwitchStatement
+    {
+        public void Test(string s)
+        {
+            switch (s)
+            {
+                case null:
+                    break;
+
+                default:
+                    s.ToString(); // Compliant - the null is handled by the case null branch.
+                    break;
+            }
+        }
+    }
 }
