@@ -524,8 +524,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
             else if (DiscardPatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
             {
-                currentBlock.ReversedInstructions.Add(patternSyntaxWrapper);
-
                 return currentBlock;
             }
             else if (RecursivePatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
@@ -808,29 +806,34 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             var currentArmBlock = currentBlock;
 
-            foreach (var arm in switchExpressionSyntax.Arms.Reverse())
+            for (var index = switchExpressionSyntax.Arms.Count - 1; index >= 0; index--)
             {
+                var arm = switchExpressionSyntax.Arms[index];
+                var isLast = index == switchExpressionSyntax.Arms.Count - 1;
+
                 var armBlock = BuildExpression(arm.Expression, CreateBlock(currentBlock));
 
-                currentArmBlock = BuildArmBranch(arm, armBlock, currentArmBlock);
+                currentArmBlock = BuildArmBranch(arm, armBlock, currentArmBlock, isLast);
+
+                currentArmBlock = BuildExpression(switchExpressionSyntax.GoverningExpression, currentArmBlock);
             }
 
-            return BuildExpression(switchExpressionSyntax.GoverningExpression, currentArmBlock);
+            return currentArmBlock;
         }
 
-        private Block BuildArmBranch(SwitchExpressionArmSyntaxWrapper switchExpressionArmSyntax, Block trueSuccessor, Block falseSuccessor)
+        private Block BuildArmBranch(SwitchExpressionArmSyntaxWrapper switchExpressionArmSyntax, Block trueSuccessor, Block falseSuccessor, bool isLast)
         {
             var newTrueSuccessor = CreateWhenCloseNewTrueSuccessor(switchExpressionArmSyntax.WhenClause, trueSuccessor, falseSuccessor);
 
-            var currentBlock = CreateCurrentBlock(switchExpressionArmSyntax, newTrueSuccessor, falseSuccessor);
+            var currentBlock = CreateCurrentBlock(switchExpressionArmSyntax, newTrueSuccessor, falseSuccessor, isLast);
 
             currentBlock = BuildPatternExpression(switchExpressionArmSyntax.Pattern, currentBlock);
 
             return currentBlock;
         }
 
-        private Block CreateCurrentBlock(SwitchExpressionArmSyntaxWrapper switchExpressionArmSyntax, Block trueSuccessor, Block falseSuccessor) =>
-            switchExpressionArmSyntax.Pattern.SyntaxNode.IsKind(SyntaxKindEx.DiscardPattern)
+        private Block CreateCurrentBlock(SwitchExpressionArmSyntaxWrapper switchExpressionArmSyntax, Block trueSuccessor, Block falseSuccessor, bool isLast) =>
+            isLast
                 ? CreateBlock(trueSuccessor)
                 : (Block)CreateBinaryBranchBlock(switchExpressionArmSyntax, trueSuccessor, falseSuccessor);
 

@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'evt' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  24,
+"endLine":  110,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'evt' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  24,
+"endLine":  137,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'evt' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  24,
+"endLine":  164,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'evt' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  24,
+"endLine":  191,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'messages' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Journal\ChaosJournal.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  41,
+"endLine":  93,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'persistent' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Journal\ChaosJournal.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  43,
+"endLine":  114,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'system' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  23,
+"endLine":  161,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'journalConfig' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  20,
+"endLine":  297,
+"endColumn":  33
+}
+}
+}
+]
+}
