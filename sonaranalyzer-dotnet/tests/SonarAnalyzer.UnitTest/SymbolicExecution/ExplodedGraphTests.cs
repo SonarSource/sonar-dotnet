@@ -826,5 +826,67 @@ public string Test(Person person)
 
             explodedGraph.Walk();
         }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_SwitchExpressionVisit()
+        {
+            const string methodBody =  @"
+namespace Namespace
+{
+  public class SwitchExpression
+  {
+    public int Test(string str)
+    {
+      return str switch { null => 1, """" => 2, _ => 3};
+    }
+  }
+}";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(methodBody, "Test", out var semanticModel);
+            var methodSymbol = semanticModel.GetDeclaredSymbol(method);
+            var strParameter = method.ParameterList.Parameters.First();
+            var strSymbol = semanticModel.GetDeclaredSymbol(strParameter);
+
+            var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
+            var lva = CSharpLiveVariableAnalysis.Analyze(cfg, methodSymbol, semanticModel);
+
+            var explodedGraph = new CSharpExplodedGraph(cfg, methodSymbol, semanticModel, lva);
+
+            var explorationEnded = false;
+            explodedGraph.ExplorationEnded += (sender, args) => { explorationEnded = true; };
+
+            var numberOfExitBlockReached = 0;
+            explodedGraph.ExitBlockReached += (sender, args) => { numberOfExitBlockReached++; };
+
+            explodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+
+                    switch (instruction)
+                    {
+                        case "1" :
+                            args.ProgramState.GetSymbolValue(strSymbol).Should().NotBe(SymbolicValue.Null);
+                            strSymbol.HasConstraint(ObjectConstraint.Null, args.ProgramState).Should().BeTrue();
+                            break;
+
+                        case "2":
+                            args.ProgramState.GetSymbolValue(strSymbol).Should().NotBe(SymbolicValue.Null);
+                            strSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            break;
+
+                        case "3":
+                            args.ProgramState.GetSymbolValue(strSymbol).Should().BeNull();
+                            // due to the current shape of the CFG the last node doesn't have the right constrains
+                            // https://github.com/SonarSource/sonar-dotnet/issues/2938
+                            // strSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            break;
+                    }
+                };
+
+            explodedGraph.Walk();
+            explorationEnded.Should().BeTrue();
+            numberOfExitBlockReached.Should().Be(3);
+        }
     }
 }
