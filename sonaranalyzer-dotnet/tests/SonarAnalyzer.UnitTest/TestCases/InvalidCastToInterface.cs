@@ -175,3 +175,57 @@ namespace Tests.Diagnostics
         }
     }
 }
+
+namespace Tests.Diagnostics
+{
+    namespace CSharp8
+    {
+        public class NullCoalescenceAssignment
+        {
+            public void NullCoalescenceAssignment_Null()
+            {
+                int? i1 = null;
+                i1 ??= (int)i1; // Noncompliant {{Nullable is known to be empty, this cast throws an exception.}}
+            }
+
+            public void NullCoalescenceAssignment_NotNull()
+            {
+                int? i1 = 1;
+                i1 ??= (int)i1;
+            }
+        }
+
+        public interface IWithDefaultMembers
+        {
+            void NoncompliantDefaultInterfaceMethod()
+            {
+                int? i1 = null;
+                var i2 = (int)i1; // Noncompliant
+            }
+
+            void CompliantDefaultInterfaceMethod()
+            {
+                int? i1 = 1;
+                var i2 = (int)i1;
+            }
+        }
+
+        public class LocalStaticFunctions
+        {
+            public void Method(object arg)
+            {
+                void LocalFunction()
+                {
+                    int? i1 = null;
+                    var i2 = (int)i1; // Compliant - FN: local functions are not supported by the CFG
+                }
+
+                static void LocalStaticFunction()
+                {
+                    int? i1 = null;
+                    var i2 = (int)i1; // Compliant - FN: local functions are not supported by the CFG
+                }
+            }
+        }
+    }
+}
