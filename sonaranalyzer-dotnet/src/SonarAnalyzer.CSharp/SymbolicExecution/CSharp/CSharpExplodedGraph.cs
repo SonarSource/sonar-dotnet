@@ -405,7 +405,8 @@ namespace SonarAnalyzer.SymbolicExecution
                     break;
 
                 case SyntaxKind.DefaultExpression:
-                    newProgramState = VisitDefaultExpression((DefaultExpressionSyntax)instruction, newProgramState);
+                case SyntaxKindEx.DefaultLiteralExpression:
+                    newProgramState = VisitDefaultExpression(instruction, newProgramState);
                     break;
 
                 case SyntaxKind.AnonymousObjectCreationExpression:
@@ -536,7 +537,11 @@ namespace SonarAnalyzer.SymbolicExecution
                     break;
 
                 case SyntaxKindEx.TupleExpression:
-                    // Do nothing
+                    // TupleExpressions are not yet supported: https://github.com/SonarSource/sonar-dotnet/issues/2933
+                    // ToDo: Constraints should be set correctly
+                    var typeSymbol = SemanticModel.GetTypeInfo(instruction).Type;
+                    var tupleSV = SymbolicValue.Create(typeSymbol);
+                    newProgramState = newProgramState.PushValue(tupleSV);
                     break;
 
                 default:
@@ -920,7 +925,7 @@ namespace SonarAnalyzer.SymbolicExecution
             return newProgramState.PushValue(resultValue);
         }
 
-        private ProgramState VisitDefaultExpression(DefaultExpressionSyntax instruction, ProgramState programState)
+        private ProgramState VisitDefaultExpression(SyntaxNode instruction, ProgramState programState)
         {
             var sv = new SymbolicValue();
             var typeSymbol = SemanticModel.GetTypeInfo(instruction).Type;
@@ -1123,12 +1128,6 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private ProgramState VisitSimpleAssignment(AssignmentExpressionSyntax assignment, ProgramState programState)
         {
-            if (assignment.Left.IsKind(SyntaxKindEx.TupleExpression))
-            {
-                // TupleExpressions are not yet supported: https://github.com/SonarSource/sonar-dotnet/issues/2933
-                return programState;
-            }
-
             var newProgramState = programState;
             newProgramState = newProgramState.PopValue(out var sv);
             if (!CSharpControlFlowGraphBuilder.IsAssignmentWithSimpleLeftSide(assignment))

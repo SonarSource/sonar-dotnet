@@ -317,5 +317,134 @@ namespace Tests.Diagnostics
             }
         }
     }
+}
 
+namespace Tests.Diagnostics
+{
+    namespace CSharp8
+    {
+        class UsingDeclaration
+        {
+            public void Disposed_UsingDeclaration()
+            {
+                using var d = new Disposable();
+                d.Dispose(); // Noncompliant {{Refactor this code to make sure 'd' is disposed only once.}}
+            }
+
+            public void Implicit_Disposed_UsingDeclaration(Stream str)
+            {
+                using var s = new FileStream("path", FileMode.Open);
+                using var sr = new StreamReader(s); // Noncompliant {{Refactor this code to make sure 's' is disposed only once.}}
+            }
+
+            public void Disposed_Using_Valid()
+            {
+                var s = new FileStream("path", FileMode.Open);
+                try
+                {
+                    using var sr = new StreamReader(s);
+                    s = null;
+                }
+                finally
+                {
+                    if (s != null)
+                    {
+                        s.Dispose();
+                    }
+                }
+            }
+
+            public void Mixed_Usings_Disposed(Stream str)
+            {
+                using var s = new FileStream("path", FileMode.Open);
+                using (var sr = new StreamReader(s)) // Noncompliant {{Refactor this code to make sure 's' is disposed only once.}}
+                {
+                }
+            }
+
+            public void Mixed_Usings_ComplexCFG_Disposed(Stream str)
+            {
+                using var s = new FileStream("path1", FileMode.Open);
+                using (var sr1 = new FileStream("path2", FileMode.Open))
+                {
+                    if (str != null)
+                    {
+                        using (var sr2 = new StreamReader(s)) // Noncompliant
+                        {
+                        }
+                    }
+                }
+            }
+
+            public void FileStream_Using_Null(Stream str)
+            {
+                using FileStream s = null;
+                s.Dispose(); // Ok - s is null here, so it will raise a null pointer dereference instead
+            }
+        }
+
+        public class NullCoalescenceAssignment
+        {
+            public void NullCoalescenceAssignment_NotNull(Stream s)
+            {
+                if (s == null)
+                {
+                    s ??= new FileStream("path", FileMode.Open);
+                    using (var sr = new StreamReader(s))
+                    {
+                    }
+                    s.Dispose(); // Noncompliant
+                }
+            }
+        }
+
+        public interface IWithDefaultMembers
+        {
+            void DoDispose()
+            {
+                var d = new Disposable();
+                d.Dispose();
+                d.Dispose(); // Noncompliant
+            }
+        }
+
+        public class LocalStaticFunctions
+        {
+            public void Method(object arg)
+            {
+                void LocalFunction()
+                {
+                    var d = new Disposable();
+                    d.Dispose();
+                    d.Dispose(); // Compliant - FN: local functions are not supported by the CFG
+                }
+
+                static void LocalStaticFunction()
+                {
+                    var d = new Disposable();
+                    d.Dispose();
+                    d.Dispose(); // Compliant - FN: local functions are not supported by the CFG
+                }
+            }
+        }
+
+        public class DefaultLiteralDoesNotCrashRule
+        {
+            public void Method(object arg)
+            {
+                int i = default;
+            }
+        }
+
+        public class TupleExpressionsDoNotCrashRule
+        {
+            public void Method(object myObject1, object myObject2)
+            {
+                var myTuple = (1, 2);
+                (object a, object b) c = (1, null);
+                (object d, object e) = (1, null);
+                (myObject1, myObject2) = (1, null);
+            }
+        }
+    }
 }
