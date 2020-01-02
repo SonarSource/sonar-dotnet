@@ -1297,6 +1297,17 @@ namespace NS
             VerifyAllInstructions(cfg.EntryBlock, "new MemoryStream()");
         }
 
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_UsingLocalDeclaration()
+        {
+            var cfg = Build("using var stream = new MemoryStream();");
+
+            VerifyCfg(cfg, 2);
+            cfg.EntryBlock.Should().BeOfType<SimpleBlock>();
+            VerifyAllInstructions(cfg.EntryBlock, "new MemoryStream()", "stream = new MemoryStream()");
+        }
+
         #endregion
 
         #region Fixed statement
