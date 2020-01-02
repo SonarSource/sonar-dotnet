@@ -815,7 +815,10 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
                 currentArmBlock = BuildArmBranch(arm, armBlock, currentArmBlock, isLast);
 
-                currentArmBlock = BuildExpression(switchExpressionSyntax.GoverningExpression, currentArmBlock);
+                if (!isLast)
+                {
+                    currentArmBlock = BuildExpression(switchExpressionSyntax.GoverningExpression, currentArmBlock);
+                }
             }
 
             return currentArmBlock;
@@ -834,7 +837,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private Block CreateCurrentBlock(SwitchExpressionArmSyntaxWrapper switchExpressionArmSyntax, Block trueSuccessor, Block falseSuccessor, bool isLast) =>
             isLast
-                ? CreateBlock(trueSuccessor)
+                ? trueSuccessor
                 : (Block)CreateBinaryBranchBlock(switchExpressionArmSyntax, trueSuccessor, falseSuccessor);
 
         private Block BuildCasePattern(CasePatternSwitchLabelSyntaxWrapper casePatternSwitchLabel,
