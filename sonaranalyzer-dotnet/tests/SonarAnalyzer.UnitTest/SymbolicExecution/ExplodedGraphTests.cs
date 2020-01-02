@@ -59,9 +59,8 @@ namespace NS
             var testInput = "var a = true; var b = false; b = !b; a = (b);";
             var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
-            var varDeclarators = method.DescendantNodes().OfType<VariableDeclaratorSyntax>();
-            var aSymbol = semanticModel.GetDeclaredSymbol(varDeclarators.First(d => d.Identifier.ToString() == "a"));
-            var bSymbol = semanticModel.GetDeclaredSymbol(varDeclarators.First(d => d.Identifier.ToString() == "b"));
+            var aSymbol = GetSymbol(semanticModel, method, "a");
+            var bSymbol = GetSymbol(semanticModel, method, "b");
 
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
             var lva = CSharpLiveVariableAnalysis.Analyze(cfg, methodSymbol, semanticModel);
@@ -183,9 +182,8 @@ namespace NS
             var testInput = "var a = false; bool b; if (a) { b = true; } else { b = false; } a = b;";
             var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
-            var varDeclarators = method.DescendantNodes().OfType<VariableDeclaratorSyntax>();
-            var aSymbol = semanticModel.GetDeclaredSymbol(varDeclarators.First(d => d.Identifier.ToString() == "a"));
-            var bSymbol = semanticModel.GetDeclaredSymbol(varDeclarators.First(d => d.Identifier.ToString() == "b"));
+            var aSymbol = GetSymbol(semanticModel, method, "a");
+            var bSymbol = GetSymbol(semanticModel, method, "b");
 
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
             var lva = CSharpLiveVariableAnalysis.Analyze(cfg, methodSymbol, semanticModel);
@@ -239,8 +237,7 @@ namespace NS
             var testInput = "var a = false; if (a && !a) { a = true; }";
             var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
-            var varDeclarators = method.DescendantNodes().OfType<VariableDeclaratorSyntax>();
-            var aSymbol = semanticModel.GetDeclaredSymbol(varDeclarators.First(d => d.Identifier.ToString() == "a"));
+            var aSymbol = GetSymbol(semanticModel, method, "a");
 
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
             var lva = CSharpLiveVariableAnalysis.Analyze(cfg, methodSymbol, semanticModel);
@@ -281,10 +278,8 @@ namespace NS
             var testInput = "var a = false; bool b; if (inParameter) { b = inParameter; } else { b = !inParameter; } a = b;";
             var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
-
-            var varDeclarators = method.DescendantNodes().OfType<VariableDeclaratorSyntax>();
-            var aSymbol = semanticModel.GetDeclaredSymbol(varDeclarators.First(d => d.Identifier.ToString() == "a"));
-            var bSymbol = semanticModel.GetDeclaredSymbol(varDeclarators.First(d => d.Identifier.ToString() == "b"));
+            var aSymbol = GetSymbol(semanticModel, method, "a");
+            var bSymbol = GetSymbol(semanticModel, method, "b");
 
             var parameters = method.DescendantNodes().OfType<ParameterSyntax>();
             var inParameterSymbol = semanticModel.GetDeclaredSymbol(parameters.First(d => d.Identifier.ToString() == "inParameter"));
@@ -363,9 +358,7 @@ namespace NS
             var testInput = "var a = !true; bool b; if (inParameter) { b = false; } else { b = false; } a = b;";
             var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
-
-            var varDeclarators = method.DescendantNodes().OfType<VariableDeclaratorSyntax>();
-            var aSymbol = semanticModel.GetDeclaredSymbol(varDeclarators.First(d => d.Identifier.ToString() == "a"));
+            var aSymbol = GetSymbol(semanticModel, method, "a");
 
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
             var lva = CSharpLiveVariableAnalysis.Analyze(cfg, methodSymbol, semanticModel);
@@ -482,9 +475,8 @@ namespace NS
             var testInput = "var a = true; a |= false; var b = 42; b++; ++b;";
             var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
-            var varDeclarators = method.DescendantNodes().OfType<VariableDeclaratorSyntax>();
-            var aSymbol = semanticModel.GetDeclaredSymbol(varDeclarators.First(d => d.Identifier.ToString() == "a"));
-            var bSymbol = semanticModel.GetDeclaredSymbol(varDeclarators.First(d => d.Identifier.ToString() == "b"));
+            var aSymbol = GetSymbol(semanticModel, method, "a");
+            var bSymbol = GetSymbol(semanticModel, method, "b");
 
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
             var lva = CSharpLiveVariableAnalysis.Analyze(cfg, methodSymbol, semanticModel);
@@ -831,7 +823,7 @@ public string Test(Person person)
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SwitchExpressionVisit()
         {
-            const string methodBody =  @"
+            const string methodBody = @"
 namespace Namespace
 {
   public class SwitchExpression
@@ -865,7 +857,7 @@ namespace Namespace
 
                     switch (instruction)
                     {
-                        case "1" :
+                        case "1":
                             args.ProgramState.GetSymbolValue(strSymbol).Should().NotBe(SymbolicValue.Null);
                             strSymbol.HasConstraint(ObjectConstraint.Null, args.ProgramState).Should().BeTrue();
                             break;
@@ -893,7 +885,7 @@ namespace Namespace
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_NullCoalesceAssignmentVisit()
         {
-            const string methodBody =  @"
+            const string methodBody = @"
 using System.Collections.Generic;
 
 namespace Namespace
@@ -934,6 +926,101 @@ namespace Namespace
                 };
 
             explodedGraph.Walk();
+        }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_DefaultLiteral()
+        {
+            var testInput = "var i = default(int); int j = default; System.IO.File k = default;";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
+            var methodSymbol = semanticModel.GetDeclaredSymbol(method);
+            var iSymbol = GetSymbol(semanticModel, method, "i");
+            var jSymbol = GetSymbol(semanticModel, method, "j");
+            var kSymbol = GetSymbol(semanticModel, method, "k");
+
+            var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
+            var lva = CSharpLiveVariableAnalysis.Analyze(cfg, methodSymbol, semanticModel);
+            var explodedGraph = new CSharpExplodedGraph(cfg, methodSymbol, semanticModel, lva);
+
+            var numberOfProcessedInstructions = 0;
+            explodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    numberOfProcessedInstructions++;
+                    var instruction = args.Instruction.ToString();
+                    if (instruction == "i = default(int)")
+                    {
+                        args.ProgramState.GetSymbolValue(iSymbol).Should().NotBeNull();
+                        iSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                    }
+                    if (instruction == "j = default")
+                    {
+                        args.ProgramState.GetSymbolValue(jSymbol).Should().NotBeNull();
+                        jSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                    }
+                    if (instruction == "k = default")
+                    {
+                        args.ProgramState.GetSymbolValue(kSymbol).Should().NotBeNull();
+                        kSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeFalse();
+                        kSymbol.HasConstraint(ObjectConstraint.Null, args.ProgramState).Should().BeTrue();
+                    }
+                };
+
+            explodedGraph.Walk();
+            numberOfProcessedInstructions.Should().Be(6);
+        }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_TupleExpressions()
+        {
+            var testInput = "var myTuple = (1, 2); (object a, object b) c = (1, null); (object d, object e) = (1, null);";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
+            var methodSymbol = semanticModel.GetDeclaredSymbol(method);
+            var myTupleSymbol = GetSymbol(semanticModel, method, "myTuple");
+            var cSymbol = GetSymbol(semanticModel, method, "c");
+
+            var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
+            var lva = CSharpLiveVariableAnalysis.Analyze(cfg, methodSymbol, semanticModel);
+            var explodedGraph = new CSharpExplodedGraph(cfg, methodSymbol, semanticModel, lva);
+
+            var numberOfProcessedInstructions = 0;
+            explodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    numberOfProcessedInstructions++;
+                    var instruction = args.Instruction.ToString();
+
+                    if (instruction == "myTuple = (1, 2)")
+                    {
+                        args.ProgramState.GetSymbolValue(myTupleSymbol).Should().NotBeNull();
+                    }
+                    if (instruction == "c = (1, null)")
+                    {
+                        args.ProgramState.GetSymbolValue(cSymbol).Should().NotBeNull();
+                    }
+
+                    // Symbolic value for tuples are in the stack for compatibility
+                    if (instruction == "(object d, object e)")
+                    {
+                        args.ProgramState.HasValue.Should().BeTrue();
+                    }
+                    // Stack is clean after assignment
+                    if (instruction == "(object d, object e) = (1, null)")
+                    {
+                        args.ProgramState.HasValue.Should().BeFalse();
+                    }
+                };
+
+            explodedGraph.Walk();
+            numberOfProcessedInstructions.Should().Be(7);
+        }
+
+        private static ISymbol GetSymbol(SemanticModel semanticModel, MethodDeclarationSyntax method, string identifier)
+        {
+            var varDeclarators = method.DescendantNodes().OfType<VariableDeclaratorSyntax>();
+            return semanticModel.GetDeclaredSymbol(varDeclarators.First(d => d.Identifier.ToString() == identifier));
         }
     }
 }
