@@ -276,7 +276,7 @@ namespace SonarAnalyzer.SymbolicExecution
         protected ProgramState CleanStateAfterBlock(ProgramState programState, Block block)
         {
             // We do not clean state when entering a using block statement, as some variables declared with "using" keywords
-            // may still be implictly disposed later, even if they are not referenced anymore. State will still be cleaned
+            // may still be implicitly disposed later, even if they are not referenced anymore. State will still be cleaned
             // in the "VisitSimpleBlock" of UsingEndBlock
             if (block is JumpBlock jumpBlock &&
                 jumpBlock.SuccessorBlock is UsingEndBlock)

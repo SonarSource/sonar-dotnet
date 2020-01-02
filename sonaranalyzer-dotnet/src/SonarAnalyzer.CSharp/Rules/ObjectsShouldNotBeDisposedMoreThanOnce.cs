@@ -147,10 +147,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     return VisitInvocationExpression(invocation, programState);
                 }
-                else if (instruction is VariableDeclaratorSyntax declarator &&
+
+                if (instruction is VariableDeclaratorSyntax declarator &&
                     declarator.Parent?.Parent is LocalDeclarationStatementSyntax declaration &&
-                    declaration.UsingKeyword() != null &&
-                    declaration.UsingKeyword().Kind() != SyntaxKind.None)
+                    declaration.IsKind(SyntaxKind.UsingKeyword))
                 {
                     return PreProcessVariableDeclarator(programState, declarator);
                 }
