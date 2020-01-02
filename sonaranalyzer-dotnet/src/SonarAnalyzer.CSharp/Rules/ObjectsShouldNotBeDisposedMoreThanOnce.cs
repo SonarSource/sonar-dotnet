@@ -30,6 +30,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.CSharp;
+using SonarAnalyzer.ShimLayer.CSharp;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
@@ -56,8 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            //FIXME: Temporary silence for CFG defork
-            //context.RegisterExplodedGraphBasedAnalysis(CheckForMultipleDispose);
+            context.RegisterExplodedGraphBasedAnalysis(CheckForMultipleDispose);
         }
 
         private static void CheckForMultipleDispose(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
@@ -142,10 +142,36 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
             {
+                var instruction = programPoint.Block.Instructions[programPoint.Offset];
+                if (instruction is InvocationExpressionSyntax invocation)
+                {
+                    return VisitInvocationExpression(invocation, programState);
+                }
 
-                return !(programPoint.Block.Instructions[programPoint.Offset] is InvocationExpressionSyntax instruction)
-                    ? programState
-                    : VisitInvocationExpression(instruction, programState);
+                if (instruction is VariableDeclaratorSyntax declarator &&
+                    declarator.Parent?.Parent is LocalDeclarationStatementSyntax declaration &&
+                    declaration.UsingKeyword().IsKind(SyntaxKind.UsingKeyword))
+                {
+                    return PreProcessVariableDeclarator(programState, declarator);
+                }
+
+                return programState;
+            }
+
+            private ProgramState PreProcessVariableDeclarator(ProgramState programState, VariableDeclaratorSyntax declarator)
+            {
+                if (declarator.Initializer?.Value == null || !programState.HasValue)
+                {
+                    return programState;
+                }
+
+                // We need to associate the symbolic value to the symbol here first, as it hasn't been done yet, since we
+                // are are pre-processing the VariableDeclarator instruction
+                var disposableSymbol = this.semanticModel.GetDeclaredSymbol(declarator);
+                var newProgramState = programState.StoreSymbolicValue(disposableSymbol, programState.PeekValue());
+
+                newProgramState = ProcessDisposableSymbol(newProgramState, declarator, disposableSymbol);
+                return ProcessStreamDisposingTypes(newProgramState, declarator);
             }
 
             private ProgramState VisitInvocationExpression(InvocationExpressionSyntax instruction, ProgramState programState)
