@@ -669,9 +669,9 @@ namespace Namespace
                     }
                 };
 
-            context.WalkWithExitBlocks(2, 9);
+            context.WalkWithExitBlocks(9, 2);
 
-            instructionsInspected.Should().Be(4);
+            instructionsInspected.Should().Be(5);
         }
 
         [TestMethod]
