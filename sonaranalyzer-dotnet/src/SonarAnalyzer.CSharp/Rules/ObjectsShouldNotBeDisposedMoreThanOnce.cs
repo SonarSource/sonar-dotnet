@@ -150,7 +150,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (instruction is VariableDeclaratorSyntax declarator &&
                     declarator.Parent?.Parent is LocalDeclarationStatementSyntax declaration &&
-                    declaration.IsKind(SyntaxKind.UsingKeyword))
+                    declaration.UsingKeyword().IsKind(SyntaxKind.UsingKeyword))
                 {
                     return PreProcessVariableDeclarator(programState, declarator);
                 }
