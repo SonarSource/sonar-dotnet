@@ -24,6 +24,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.ControlFlowGraph;
+using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
@@ -274,6 +275,15 @@ namespace SonarAnalyzer.SymbolicExecution
 
         protected ProgramState CleanStateAfterBlock(ProgramState programState, Block block)
         {
+            // We do not clean state when entering a using block statement, as some variables declared with "using" keywords
+            // may still be implicitly disposed later, even if they are not referenced anymore. State will still be cleaned
+            // in the "VisitSimpleBlock" of UsingEndBlock
+            if (block is JumpBlock jumpBlock &&
+                jumpBlock.SuccessorBlock is UsingEndBlock)
+            {
+               return programState;
+            }
+
             var liveVariables = this.lva.GetLiveOut(block)
                 .Union(this.nonInDeclarationParameters); // LVA excludes out and ref parameters
 
