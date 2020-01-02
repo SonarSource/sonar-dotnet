@@ -595,7 +595,6 @@ namespace Namespace
             numberOfValidatedInstructions.Should().Be(1);
         }
 
-        [Ignore("Temporary disabled due to SwitchArm CFG")] //FIXME: Activate after CFG switch expression stack fix. There are 2 exit blocks reached, but there should be only one (right?)
         [TestMethod]
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SwitchWithRecursivePatternVisit()
@@ -670,7 +669,7 @@ namespace Namespace
                     }
                 };
 
-            context.Walk(9);
+            context.WalkWithExitBlocks(2, 9);
 
             instructionsInspected.Should().Be(4);
         }
