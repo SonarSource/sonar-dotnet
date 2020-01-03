@@ -193,6 +193,20 @@ namespace Tests.Diagnostics
                 int? i1 = 1;
                 i1 ??= (int)i1;
             }
+
+            public void NullCoalescenceAssignmentResult_Null()
+            {
+                int? i = null;
+                i ??= null;
+                var r1 = (int)i; // Noncompliant
+            }
+
+            public void NullCoalescenceAssignmentResult_NotNull()
+            {
+                int? i = null;
+                i ??= 1;
+                var r1 = (int)i;
+            }
         }
 
         public class SwitchExpressions
@@ -227,6 +241,24 @@ namespace Tests.Diagnostics
                      _ => -5
                 };
                 return (int) result;
+            }
+
+            public int NullableHasValue(int? val)
+            {
+                return val.HasValue switch
+                {
+                    true => (int)val,
+                    _ => 0
+                };
+            }
+
+            public int NullableNoValue(int? val)
+            {
+                return val.HasValue switch
+                {
+                    false => (int)val, // FN Switch expressions are not constrained (See #2949)
+                    _ => 0
+                };
             }
         }
 
