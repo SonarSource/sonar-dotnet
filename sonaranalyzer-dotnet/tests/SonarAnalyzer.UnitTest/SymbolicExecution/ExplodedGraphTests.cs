@@ -868,10 +868,8 @@ namespace Namespace
                             break;
 
                         case "3":
-                            args.ProgramState.GetSymbolValue(strSymbol).Should().BeNull();
-                            // due to the current shape of the CFG the last node doesn't have the right constrains
-                            // https://github.com/SonarSource/sonar-dotnet/issues/2938
-                            // strSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            args.ProgramState.GetSymbolValue(strSymbol).Should().NotBe(SymbolicValue.Null);
+                            strSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
                             break;
                     }
                 };
