@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace Tests.Diagnostics
 {
     public class ExpressionBodyTest
