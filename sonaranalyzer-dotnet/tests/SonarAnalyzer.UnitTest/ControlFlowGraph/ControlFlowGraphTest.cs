@@ -4061,7 +4061,7 @@ return type switch
     ""b"" => 2,
     _ => 3
 };");
-            VerifyCfg(cfg, 8);
+            VerifyCfg(cfg, 7);
 
             // The generated CFG is very similar to the one generated for the following conditional expression:
             // return type == "a" ? 1 : (type == "b" ? 2 : 3);
@@ -4071,8 +4071,7 @@ return type switch
             var bArm = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
             var bTrue = (SimpleBlock)cfg.Blocks.ElementAt(3);
             var discardArm = (SimpleBlock)cfg.Blocks.ElementAt(4);
-            var discardBody = (SimpleBlock)cfg.Blocks.ElementAt(5);
-            var returnStatement = (JumpBlock)cfg.Blocks.ElementAt(6);
+            var returnStatement = (JumpBlock)cfg.Blocks.ElementAt(5);
             var exitBlock = cfg.ExitBlock;
 
             aArm.TrueSuccessorBlock.Should().Be(aTrue);
@@ -4089,11 +4088,8 @@ return type switch
             bTrue.SuccessorBlock.Should().Be(returnStatement);
             VerifyAllInstructions(bTrue, "2");
 
-            discardArm.SuccessorBlock.Should().Be(discardBody);
-            VerifyAllInstructions(discardArm, "type");
-
-            discardBody.SuccessorBlock.Should().Be(returnStatement);
-            VerifyAllInstructions(discardBody, "3");
+            discardArm.SuccessorBlock.Should().Be(returnStatement);
+            VerifyAllInstructions(discardArm, "3");
 
             returnStatement.SuccessorBlock.Should().Be(exitBlock);
             VerifyNoInstruction(returnStatement);
@@ -4104,15 +4100,14 @@ return type switch
         public void Cfg_SwitchExpression_Assignment()
         {
             var cfg = Build(@"var type = ""test""; var result = type switch {""a"" => 1, ""b"" => 2, _ => 3};");
-            VerifyCfg(cfg, 8);
+            VerifyCfg(cfg, 7);
 
             var aArm = (BinaryBranchBlock)cfg.Blocks.ElementAt(0);
             var aTrue = (SimpleBlock)cfg.Blocks.ElementAt(1);
             var bArm = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
             var bTrue = (SimpleBlock)cfg.Blocks.ElementAt(3);
             var discardArm = (SimpleBlock)cfg.Blocks.ElementAt(4);
-            var discardBody = (SimpleBlock)cfg.Blocks.ElementAt(5);
-            var assignment = (SimpleBlock)cfg.Blocks.ElementAt(6);
+            var assignment = (SimpleBlock)cfg.Blocks.ElementAt(5);
             var exitBlock = cfg.ExitBlock;
 
             aArm.TrueSuccessorBlock.Should().Be(aTrue);
@@ -4129,11 +4124,8 @@ return type switch
             bTrue.SuccessorBlock.Should().Be(assignment);
             VerifyAllInstructions(bTrue, "2");
 
-            discardArm.SuccessorBlock.Should().Be(discardBody);
-            VerifyAllInstructions(discardArm, "type");
-
-            discardBody.SuccessorBlock.Should().Be(assignment);
-            VerifyAllInstructions(discardBody, "3");
+            discardArm.SuccessorBlock.Should().Be(assignment);
+            VerifyAllInstructions(discardArm, "3");
 
             assignment.SuccessorBlock.Should().Be(exitBlock);
             VerifyAllInstructions(assignment, @"result = type switch {""a"" => 1, ""b"" => 2, _ => 3}");
@@ -4147,18 +4139,16 @@ return type switch
 string first = ""foo"", second = ""bar"";
 var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" => 3, _ => 4};");
 
-            VerifyCfg(cfg, 11);
+            VerifyCfg(cfg, 9);
 
             var aArm = (BinaryBranchBlock)cfg.Blocks.ElementAt(0);
             var xArm = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
             var xTrue = (SimpleBlock)cfg.Blocks.ElementAt(2);
             var secondSwitchDiscardArm = (SimpleBlock)cfg.Blocks.ElementAt(3);
-            var secondSwitchDiscardArmBody = (SimpleBlock)cfg.Blocks.ElementAt(4);
-            var bArm = (BinaryBranchBlock)cfg.Blocks.ElementAt(5);
-            var bTrue = (SimpleBlock)cfg.Blocks.ElementAt(6);
-            var firstSwitchDiscard = (SimpleBlock)cfg.Blocks.ElementAt(7);
-            var firstSwitchDiscardBody = (SimpleBlock)cfg.Blocks.ElementAt(8);
-            var assignment = (SimpleBlock)cfg.Blocks.ElementAt(9);
+            var bArm = (BinaryBranchBlock)cfg.Blocks.ElementAt(4);
+            var bTrue = (SimpleBlock)cfg.Blocks.ElementAt(5);
+            var firstSwitchDiscard = (SimpleBlock)cfg.Blocks.ElementAt(6);
+            var assignment = (SimpleBlock)cfg.Blocks.ElementAt(7);
             var exitBlock = cfg.ExitBlock;
 
             aArm.TrueSuccessorBlock.Should().Be(xArm);
@@ -4172,11 +4162,8 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
             xTrue.SuccessorBlock.Should().Be(assignment);
             VerifyAllInstructions(xTrue, "1");
 
-            secondSwitchDiscardArm.SuccessorBlock.Should().Be(secondSwitchDiscardArmBody);
-            VerifyAllInstructions(secondSwitchDiscardArm, "second");
-
-            secondSwitchDiscardArmBody.SuccessorBlock.Should().Be(assignment);
-            VerifyAllInstructions(secondSwitchDiscardArmBody, "2");
+            secondSwitchDiscardArm.SuccessorBlock.Should().Be(assignment);
+            VerifyAllInstructions(secondSwitchDiscardArm, "2");
 
             bArm.TrueSuccessorBlock.Should().Be(bTrue);
             bArm.FalseSuccessorBlock.Should().Be(firstSwitchDiscard);
@@ -4185,11 +4172,8 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
             bTrue.SuccessorBlock.Should().Be(assignment);
             VerifyAllInstructions(bTrue, "3");
 
-            firstSwitchDiscard.SuccessorBlock.Should().Be(firstSwitchDiscardBody);
-            VerifyAllInstructions(firstSwitchDiscard, "first");
-
-            firstSwitchDiscardBody.SuccessorBlock.Should().Be(assignment);
-            VerifyAllInstructions(firstSwitchDiscardBody, "4");
+            firstSwitchDiscard.SuccessorBlock.Should().Be(assignment);
+            VerifyAllInstructions(firstSwitchDiscard, "4");
 
             assignment.SuccessorBlock.Should().Be(exitBlock);
             VerifyAllInstructions(assignment, @"result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" => 3, _ => 4}");
@@ -4201,7 +4185,7 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         {
             var cfg = Build(@"string first = ""foo"", second = ""bar""; var result = first switch {""a"" when second == ""bar"" => 1, ""a"" => 2, ""b"" => 3, _ => 4};");
 
-            VerifyCfg(cfg, 11);
+            VerifyCfg(cfg, 10);
 
             var aWithWhenClauseArm = (BinaryBranchBlock)cfg.EntryBlock;
             var whenClause = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
@@ -4211,8 +4195,7 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
             var bArm = (BinaryBranchBlock)cfg.Blocks.ElementAt(5);
             var bTrue = (SimpleBlock)cfg.Blocks.ElementAt(6);
             var discardArm = (SimpleBlock)cfg.Blocks.ElementAt(7);
-            var discardArmBody = (SimpleBlock)cfg.Blocks.ElementAt(8);
-            var assignment = (SimpleBlock)cfg.Blocks.ElementAt(9);
+            var assignment = (SimpleBlock)cfg.Blocks.ElementAt(8);
             var exitBlock = cfg.ExitBlock;
 
             aWithWhenClauseArm.TrueSuccessorBlock.Should().Be(whenClause);
@@ -4240,11 +4223,8 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
             bTrue.SuccessorBlock.Should().Be(assignment);
             VerifyAllInstructions(bTrue, "3");
 
-            discardArm.SuccessorBlock.Should().Be(discardArmBody);
-            VerifyAllInstructions(discardArm, "first");
-
-            discardArmBody.SuccessorBlock.Should().Be(assignment);
-            VerifyAllInstructions(discardArmBody, "4");
+            discardArm.SuccessorBlock.Should().Be(assignment);
+            VerifyAllInstructions(discardArm, "4");
 
             assignment.SuccessorBlock.Should().Be(exitBlock);
             VerifyAllInstructions(assignment, @"result = first switch {""a"" when second == ""bar"" => 1, ""a"" => 2, ""b"" => 3, _ => 4}");
@@ -5070,14 +5050,13 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
         {
             var cfg = Build(@"location switch { { State: ""WA"" } adr => salePrice * 0.06M, { State: ""MN"" } => salePrice * 0.75M, _ => 0M };");
 
-            VerifyCfg(cfg, 7);
+            VerifyCfg(cfg, 6);
 
             var waArmBranch = (BinaryBranchBlock)cfg.EntryBlock;
             var waArmTrueBranch = (SimpleBlock)cfg.Blocks.ElementAt(1);
             var mnArmBranch = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
             var mnArmTrueBranch = (SimpleBlock)cfg.Blocks.ElementAt(3);
             var discardArm = (SimpleBlock)cfg.Blocks.ElementAt(4);
-            var discardArmBody = (SimpleBlock)cfg.Blocks.ElementAt(5);
             var exitBlock = cfg.ExitBlock;
 
             waArmBranch.TrueSuccessorBlock.Should().Be(waArmTrueBranch);
@@ -5094,11 +5073,8 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
             mnArmTrueBranch.SuccessorBlock.Should().Be(exitBlock);
             VerifyAllInstructions(mnArmTrueBranch, "salePrice", "0.75M", "salePrice * 0.75M");
 
-            discardArm.SuccessorBlock.Should().Be(discardArmBody);
-            VerifyAllInstructions(discardArm, "location");
-
-            discardArmBody.SuccessorBlock.Should().Be(exitBlock);
-            VerifyAllInstructions(discardArmBody, "0M");
+            discardArm.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(discardArm, "0M");
 
             VerifyNoInstruction(exitBlock);
         }
