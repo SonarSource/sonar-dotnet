@@ -829,6 +829,17 @@ namespace CSharp8
 
             list.Clear(); // Noncompliant
         }
+
+        public void UsingSwitchResult_Compliant(bool cond)
+        {
+            var list = cond switch
+            {
+                true => new List<int> { 5 },
+                _ => new List<int>()
+            };
+
+            list.Clear();
+        }
     }
 
     public interface IWithDefaultMembers
