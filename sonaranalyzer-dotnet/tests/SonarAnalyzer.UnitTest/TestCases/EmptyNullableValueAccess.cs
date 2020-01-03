@@ -129,6 +129,21 @@ namespace Tests.Diagnostics
             return i.Value;
         }
 
+        public int CSharp8_SwitchExpressions3(int? value)
+        {
+            return value.HasValue switch { true => value.Value, false => 0};
+        }
+
+        public int CSharp8_SwitchExpressions4(int? value)
+        {
+            return value.HasValue switch { true => 0, false => value.Value };   // FN - switch expressions are not constrained
+        }
+
+        public int CSharp8_SwitchExpressions5(int? value, bool flag)
+        {
+            return flag switch { true => value.Value, false => 0 }; // FN - switch expressions are not constrained
+        }
+
         public int CSharp8_StaticLocalFunctions(int? param)
         {
             static int ExtractValue(int? intOrNull)
