@@ -195,6 +195,41 @@ namespace Tests.Diagnostics
             }
         }
 
+        public class SwitchExpressions
+        {
+            public void Nullable_In_Arm_Noncompliant()
+            {
+                int? i = null;
+                int? result = i switch
+                {
+                    null => (int) i, // Noncompliant
+                    _ => 0
+                };
+            }
+
+            public int AlwaysNull_Noncompliant(int val)
+            {
+                int? result = val switch
+                {
+                    1 => null,
+                    2 => null,
+                    _ => null
+                };
+                return (int)result; // Noncompliant
+            }
+
+            public int AlwaysNonNull(int val)
+            {
+                int? result = val switch
+                {
+                    1 => -1,
+                    2 => -2,
+                     _ => -5
+                };
+                return (int) result;
+            }
+        }
+
         public interface IWithDefaultMembers
         {
             void NoncompliantDefaultInterfaceMethod()
