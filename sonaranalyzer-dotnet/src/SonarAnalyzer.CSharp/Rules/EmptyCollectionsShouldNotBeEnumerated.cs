@@ -91,8 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            //FIXME: Temporary silence for CFG defork
-            //context.RegisterExplodedGraphBasedAnalysis(CheckForEmptyCollectionAccess);
+            context.RegisterExplodedGraphBasedAnalysis(CheckForEmptyCollectionAccess);
         }
 
         private void CheckForEmptyCollectionAccess(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)

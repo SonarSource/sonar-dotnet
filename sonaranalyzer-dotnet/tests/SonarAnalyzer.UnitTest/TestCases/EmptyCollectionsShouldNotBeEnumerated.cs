@@ -792,3 +792,93 @@ namespace Tests.Diagnostics
         }
     }
 }
+
+namespace CSharp8
+{
+    public class NullCoalescenceAssignment
+    {
+        public void Test()
+        {
+            List<int> list = null;
+            list ??= new List<int>();
+            list.Clear(); // Noncompliant
+        }
+    }
+
+    public class SwitchExpression
+    {
+        private static bool Predicate(int i) => true;
+
+        public bool InsideSwitch(int type)
+        {
+            var list = new List<int>();
+
+            return type switch
+            {
+                1 => list.Exists(Predicate), // Noncompliant
+                _ => false
+            };
+        }
+
+        public void UsingSwitchResult(bool cond)
+        {
+            var list = cond switch
+            {
+                _ => new List<int>()
+            };
+
+            list.Clear(); // Noncompliant
+        }
+
+        public void UsingSwitchResult_Compliant(bool cond)
+        {
+            var list = cond switch
+            {
+                true => new List<int> { 5 },
+                _ => new List<int>()
+            };
+
+            list.Clear();
+        }
+    }
+
+    public interface IWithDefaultMembers
+    {
+        public void Test()
+        {
+            var list = new List<int>();
+            list.Clear(); // Noncompliant
+        }
+    }
+
+    public class LocalStaticFunctions
+    {
+        public void Method(object arg)
+        {
+            void LocalFunction(object o)
+            {
+                var list = new List<int>();
+                list.Clear(); // Compliant - FN: local functions are not supported by the CFG
+            }
+
+            static void LocalStaticFunction(object o)
+            {
+                var list = new List<int>();
+                list.Clear(); // Compliant - FN: local functions are not supported by the CFG
+            }
+        }
+    }
+
+    public class Ranges
+    {
+        public void Method(string[] words)
+        {
+            var someWords = words[1..4];
+            someWords.Clone(); // Compliant
+
+            var noWords = words[1..1];
+            noWords.Clone(); // Compliant - FN, the collection is empty (https://github.com/SonarSource/sonar-dotnet/issues/2944)
+        }
+    }
+}
+
