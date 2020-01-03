@@ -100,7 +100,7 @@ namespace Tests.Diagnostics.CSharp8
             result.ToString();
         }
 
-        public void Nullable_In_Arm(string? s)
+        public void Nullable_In_Arm(string s)
         {
             var result = s switch
             {
