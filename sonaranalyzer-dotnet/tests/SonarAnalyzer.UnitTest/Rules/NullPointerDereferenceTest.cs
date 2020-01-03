@@ -60,8 +60,7 @@ public static class Utils
 }
 ", new NullPointerDereference());
         }
-        //FIXME: Temporary silence for CFG defork
-        [Ignore("Temporary disabled for CFG defork")]
+
         [TestMethod]
         [TestCategory("Rule")]
         public void NullPointerDereference()
@@ -70,8 +69,6 @@ public static class Utils
                 new NullPointerDereference());
         }
 
-        //FIXME: Temporary silence for CFG defork
-        [Ignore("Temporary disabled for CFG defork")]
         [TestMethod]
         [TestCategory("Rule")]
         public void NullPointerDereference_CSharp6()
@@ -81,8 +78,6 @@ public static class Utils
                 ParseOptionsHelper.FromCSharp6);
         }
 
-        //FIXME: Temporary silence for CFG defork
-        [Ignore("Temporary disabled for CFG defork")]
         [TestMethod]
         [TestCategory("Rule")]
         public void NullPointerDereference_CSharp7()
@@ -90,6 +85,16 @@ public static class Utils
             Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereferenceCSharp7.cs",
                 new NullPointerDereference(),
                 ParseOptionsHelper.FromCSharp7);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void NullPointerDereference_CSharp8()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereferenceCSharp8.cs",
+                new NullPointerDereference(),
+                ParseOptionsHelper.FromCSharp8,
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
     }
 }
