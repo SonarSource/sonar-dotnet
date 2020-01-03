@@ -338,7 +338,7 @@ namespace Tests.Diagnostics
         public void M2()
         {
             using var s = new Struct();
-            s.Dispose(); // Compliant - FN
+            s.Dispose(); // Noncompliant
         }
     }
 }
