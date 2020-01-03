@@ -551,7 +551,6 @@ namespace Namespace
             context.WalkWithInstructions(5);
         }
 
-        [Ignore("Temporary disabled due to SwitchArm CFG")] //FIXME: Activate after CFG switch expression stack fix
         [TestMethod]
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SwitchExpression_SimpleExpression()
@@ -569,7 +568,7 @@ namespace Namespace
                 }
             };
 
-            context.WalkWithInstructions(0);
+            context.WalkWithInstructions(14);
 
             numberOfValidatedInstructions.Should().Be(1);
         }
@@ -670,9 +669,9 @@ namespace Namespace
                     }
                 };
 
-            context.WalkWithExitBlocks(9, 2);
+            context.WalkWithInstructions(8);
 
-            instructionsInspected.Should().Be(5);
+            instructionsInspected.Should().Be(4);
         }
 
         [TestMethod]
@@ -717,7 +716,7 @@ namespace Namespace
                     }
                 };
 
-            context.WalkWithExitBlocks(8, 3);
+            context.WalkWithExitBlocks(7, 3);
         }
 
         [TestMethod]
