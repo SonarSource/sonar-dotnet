@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1944",
+"message":  "Review this cast; in this project there's no type that implements both 'IPlugin' and 'IDisposable'.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  51,
+"endLine":  198,
+"endColumn":  62
+}
+}
+}
+]
+}
