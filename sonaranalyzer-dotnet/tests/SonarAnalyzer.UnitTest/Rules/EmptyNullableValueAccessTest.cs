@@ -21,19 +21,20 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
     public class EmptyNullableValueAccessTest
     {
-        //FIXME: Temporary silence for CFG defork
-        [Ignore("Temporary disabled for CFG defork")]
         [TestMethod]
         [TestCategory("Rule")]
         public void EmptyNullableValueAccess()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyNullableValueAccess.cs", new EmptyNullableValueAccess());
+            Verifier.VerifyAnalyzer(@"TestCases\EmptyNullableValueAccess.cs", new EmptyNullableValueAccess(),
+                                ParseOptionsHelper.FromCSharp8,
+                                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
     }
 }
