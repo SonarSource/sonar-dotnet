@@ -809,7 +809,7 @@ namespace CSharp8
     {
         private static bool Predicate(int i) => true;
 
-        public bool Test(int type)
+        public bool InsideSwitch(int type)
         {
             var list = new List<int>();
 
@@ -818,6 +818,16 @@ namespace CSharp8
                 1 => list.Exists(Predicate), // Noncompliant
                 _ => false
             };
+        }
+
+        public void UsingSwitchResult(bool cond)
+        {
+            var list = cond switch
+            {
+                _ => new List<int>()
+            };
+
+            list.Clear(); // Noncompliant
         }
     }
 
