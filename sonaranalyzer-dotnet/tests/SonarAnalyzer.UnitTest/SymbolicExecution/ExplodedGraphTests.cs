@@ -61,7 +61,7 @@ namespace NS
             var context = new ExplodedGraphContext(testInput);
             var aSymbol = context.GetSymbol("a");
             var bSymbol = context.GetSymbol("b");
-            context.EG.InstructionProcessed +=
+            context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
                     if (args.Instruction.ToString() == "a = true")
@@ -84,7 +84,7 @@ namespace NS
                     }
                 };
 
-            context.Walk(9);
+            context.WalkWithInstructions(9);
         }
 
         [TestMethod]
@@ -95,7 +95,7 @@ namespace NS
             var context = new ExplodedGraphContext(testInput);
             var parameters = context.MainMethod.DescendantNodes().OfType<ParameterSyntax>();
             var outParameterSymbol = context.SemanticModel.GetDeclaredSymbol(parameters.First(d => d.Identifier.ToString() == "outParameter"));
-            context.EG.InstructionProcessed +=
+            context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
                     if (args.Instruction.ToString() == "outParameter = true")
@@ -105,7 +105,7 @@ namespace NS
                     }
                 };
 
-            context.Walk(2);
+            context.WalkWithInstructions(2);
         }
 
         [TestMethod]
@@ -120,7 +120,7 @@ namespace NS
             var testInput = inputBuilder.ToString();
             var context = new ExplodedGraphContext(testInput);
 
-            context.EG.Walk();  // Special case with manual checks
+            context.ExplodedGraph.Walk();  // Special case with manual checks
 
             context.ExplorationEnded.Should().Be(false);
             context.NumberOfExitBlockReached.Should().Be(0);
@@ -136,7 +136,7 @@ namespace NS
             var aSymbol = context.GetSymbol("a");
             var bSymbol = context.GetSymbol("b");
             var numberOfLastInstructionVisits = 0;
-            context.EG.InstructionProcessed +=
+            context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
                     if (args.Instruction.ToString() == "a = false")
@@ -159,7 +159,7 @@ namespace NS
                     }
                 };
 
-            context.Walk(8);
+            context.WalkWithInstructions(8);
 
             numberOfLastInstructionVisits.Should().Be(1);
         }
@@ -168,23 +168,24 @@ namespace NS
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SingleBranchVisited_And()
         {
-            const string testInput = "var a = false; if (a && !a) { a = true; }";
+            const string testInput = "var a = false; if (a && !a) { a = !true; } else { a = true; }";
             var context = new ExplodedGraphContext(testInput);
             var aSymbol = context.GetSymbol("a");
-            context.EG.InstructionProcessed +=
+            context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
-                    if (args.Instruction.ToString() == "a = !true")
-                    {
-                        args.ProgramState.GetSymbolValue(aSymbol).Should().Be(SymbolicValue.False); // Roslyn is clever !true has const value.
-                    }
-                    if (args.Instruction.ToString() == "!a")
-                    {
-                        Execute.Assertion.FailWith("We should never get into this branch");
+                    switch (args.Instruction.ToString()){
+                        case "a = true":
+                            args.ProgramState.GetSymbolValue(aSymbol).Should().Be(SymbolicValue.True);
+                            break;
+                        case "a = !true":
+                        case "!a":
+                            Execute.Assertion.FailWith("We should never get into this branch");
+                            break;
                     }
                 };
 
-            context.Walk(3); // Only EG final status check
+            context.WalkWithInstructions(5);
         }
 
         [TestMethod]
@@ -200,7 +201,7 @@ namespace NS
             var numberOfLastInstructionVisits = 0;
             var visitedBlocks = new HashSet<Block>();
             var branchesVisited = 0;
-            context.EG.InstructionProcessed +=
+            context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
                     visitedBlocks.Add(args.ProgramPoint.Block);
@@ -209,7 +210,7 @@ namespace NS
                     {
                         branchesVisited++;
 
-                        args.ProgramState.GetSymbolValue(aSymbol).Should().Be(SymbolicValue.False); // Roslyn is clever !true has const value.
+                        args.ProgramState.GetSymbolValue(aSymbol).Should().Be(SymbolicValue.False);
                     }
                     if (args.Instruction.ToString() == "b = inParameter")
                     {
@@ -238,14 +239,14 @@ namespace NS
                     }
                 };
 
-            // Number of Exit blocks:
+            // Number of ExitBlocks is still 1 in this case:
             // All variables are dead at the ExitBlock, so whenever we get there,
             // the ExplodedGraph nodes should be the same, and thus should be processed only once.
-            context.Walk(13);
+            context.WalkWithInstructions(13);
 
             branchesVisited.Should().Be(4 + 1);
             numberOfLastInstructionVisits.Should().Be(2);
-            visitedBlocks.Should().HaveCount(context.CFG.Blocks.Count() - 1 /* Exit block*/);
+            visitedBlocks.Should().HaveCount(context.ControlFlowGraph.Blocks.Count() - 1 /* Exit block*/);
         }
 
         [TestMethod]
@@ -256,7 +257,7 @@ namespace NS
             var context = new ExplodedGraphContext(testInput);
             var aSymbol = context.GetSymbol("a");
             var numberOfLastInstructionVisits = 0;
-            context.EG.InstructionProcessed +=
+            context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
                     if (args.Instruction.ToString() == "a = b")
@@ -266,7 +267,7 @@ namespace NS
                     }
                 };
 
-            context.Walk(11);
+            context.WalkWithInstructions(11);
 
             numberOfLastInstructionVisits.Should().Be(1);
         }
@@ -279,16 +280,16 @@ namespace NS
             var context = new ExplodedGraphContext(testInput);
             var visitedBlocks = new HashSet<Block>();
             var countConditionEvaluated = 0;
-            context.EG.ConditionEvaluated += (sender, args) => { countConditionEvaluated++; };
-            context.EG.InstructionProcessed +=
+            context.ExplodedGraph.ConditionEvaluated += (sender, args) => { countConditionEvaluated++; };
+            context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
                     visitedBlocks.Add(args.ProgramPoint.Block);
                 };
 
-            context.Walk(5);
+            context.WalkWithInstructions(5);
 
-            visitedBlocks.Should().HaveCount(context.CFG.Blocks.Count() - 1 /* Exit block */);
+            visitedBlocks.Should().HaveCount(context.ControlFlowGraph.Blocks.Count() - 1 /* Exit block */);
             countConditionEvaluated.Should().Be(0);
         }
 
@@ -300,7 +301,7 @@ namespace NS
             var context = new ExplodedGraphContext(testInput);
             var numberOfCw1InstructionVisits = 0;
             var numberOfCw2InstructionVisits = 0;
-            context.EG.InstructionProcessed +=
+            context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
                     if (args.Instruction.ToString() == "cw1()")
@@ -313,7 +314,7 @@ namespace NS
                     }
                 };
 
-            context.Walk(11);
+            context.WalkWithInstructions(11);
 
             numberOfCw1InstructionVisits.Should().Be(2);
             numberOfCw2InstructionVisits.Should().Be(1);
@@ -329,7 +330,7 @@ namespace NS
             var bSymbol = context.GetSymbol("b");
             var branchesVisited = 0;
             SymbolicValue sv = null;
-            context.EG.InstructionProcessed +=
+            context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
                     if (args.Instruction.ToString() == "a = true")
@@ -366,7 +367,7 @@ namespace NS
                     }
                 };
 
-            context.Walk(11);
+            context.WalkWithInstructions(11);
 
             branchesVisited.Should().Be(5);
         }
@@ -380,7 +381,7 @@ namespace NS
             var propertySymbol = context.SemanticModel.GetSymbolInfo(context.MainMethod.DescendantNodes()
                 .OfType<IdentifierNameSyntax>().First(d => d.Identifier.ToString() == "Property")).Symbol;
             propertySymbol.Should().NotBeNull();
-            context.EG.InstructionProcessed +=
+            context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
                     if (args.Instruction.ToString() == "Property")
@@ -389,7 +390,7 @@ namespace NS
                     }
                 };
 
-            context.Walk(3);     // Only EG final status check
+            context.WalkWithInstructions(3);
         }
 
         [TestMethod]
@@ -399,13 +400,13 @@ namespace NS
             const string testInput = "var i = 0; while (i < 1) { i = i + 1; }";
             var context = new ExplodedGraphContext(testInput);
             var exceeded = 0;
-            context.EG.ProgramPointVisitCountExceedLimit += (sender, args) =>
+            context.ExplodedGraph.ProgramPointVisitCountExceedLimit += (sender, args) =>
             {
                 exceeded++;
                 args.ProgramPoint.Block.Instructions.Should().Contain(i => i.ToString() == "i < 1");
             };
 
-            context.EG.Walk();
+            context.ExplodedGraph.Walk();
 
             exceeded.Should().Be(1);
         }
@@ -459,9 +460,9 @@ namespace TesteAnalyzer
 ";
             var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
             var maxInternalStateCountReached = false;
-            context.EG.MaxInternalStateCountReached += (sender, args) => { maxInternalStateCountReached = true; };
+            context.ExplodedGraph.MaxInternalStateCountReached += (sender, args) => { maxInternalStateCountReached = true; };
 
-            context.EG.Walk();  // Special case, walk and check everythink manually
+            context.ExplodedGraph.Walk();  // Special case, walk and check everythink manually
 
             maxInternalStateCountReached.Should().BeTrue();
             context.NumberOfExitBlockReached.Should().Be(0);
@@ -476,7 +477,7 @@ namespace TesteAnalyzer
             const string testInput = @"static string Local(object o) {return o.ToString()} Local(null);";
             var context = new ExplodedGraphContext(testInput);
             var numberOfValidatedInstructions = 0;
-            context.EG.InstructionProcessed += (sender, args) =>
+            context.ExplodedGraph.InstructionProcessed += (sender, args) =>
             {
                 if (args.Instruction.ToString() == "o.ToString()")
                 {
@@ -484,7 +485,7 @@ namespace TesteAnalyzer
                 }
             };
 
-            context.Walk(3);
+            context.WalkWithInstructions(3);
 
             numberOfValidatedInstructions.Should().Be(0);   // Local functions are not supported by CFG (yet)
         }
@@ -510,7 +511,7 @@ namespace Namespace
             var dictionarySymbol = context.SemanticModel.GetDeclaredSymbol(context.MainMethod.ParameterList.Parameters.First());
             var valueDeclaration = context.MainMethod.DescendantNodes().OfType<DeclarationExpressionSyntax>().First();
             var valueSymbol = context.SemanticModel.GetDeclaredSymbol(valueDeclaration);
-            context.EG.InstructionProcessed +=
+            context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
                     var instruction = args.Instruction.ToString();
@@ -547,7 +548,7 @@ namespace Namespace
                     }
                 };
 
-            context.Walk(5);
+            context.WalkWithInstructions(5);
         }
 
         [Ignore("Temporary disabled due to SwitchArm CFG")] //FIXME: Activate after CFG switch expression stack fix
@@ -559,7 +560,7 @@ namespace Namespace
             var context = new ExplodedGraphContext(testInput);
             var sSymbol = context.GetSymbol("s");
             var numberOfValidatedInstructions = 0;
-            context.EG.InstructionProcessed += (sender, args) =>
+            context.ExplodedGraph.InstructionProcessed += (sender, args) =>
             {
                 if (args.Instruction.ToString() == "s.ToString()")
                 {
@@ -568,7 +569,7 @@ namespace Namespace
                 }
             };
 
-            context.Walk(0);
+            context.WalkWithInstructions(0);
 
             numberOfValidatedInstructions.Should().Be(1);
         }
@@ -581,7 +582,7 @@ namespace Namespace
             var context = new ExplodedGraphContext(testInput);
             var sSymbol = context.GetSymbol("s");
             var numberOfValidatedInstructions = 0;
-            context.EG.InstructionProcessed += (sender, args) =>
+            context.ExplodedGraph.InstructionProcessed += (sender, args) =>
             {
                 if (args.Instruction.ToString() == "s.ToString()")
                 {
@@ -590,7 +591,7 @@ namespace Namespace
                 }
             };
 
-            context.Walk(14);
+            context.WalkWithInstructions(14);
 
             numberOfValidatedInstructions.Should().Be(1);
         }
@@ -632,7 +633,7 @@ namespace Namespace
             var addressSymbol = context.SemanticModel.GetDeclaredSymbol(declarations[0]);
             var pSymbol = context.SemanticModel.GetDeclaredSymbol(declarations[1]);
             var instructionsInspected = 0;
-            context.EG.InstructionProcessed +=
+            context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
                     var instruction = args.Instruction.ToString();
@@ -692,7 +693,7 @@ namespace Namespace
             var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
             var strParameter = context.MainMethod.ParameterList.Parameters.First();
             var strSymbol = context.SemanticModel.GetDeclaredSymbol(strParameter);
-            context.EG.InstructionProcessed +=
+            context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
                     var instruction = args.Instruction.ToString();
@@ -726,7 +727,7 @@ namespace Namespace
             const string testInput = @"string s = null; s ??= ""N/A""; s.ToString();";
             var context = new ExplodedGraphContext(testInput);
             var sSymbol = context.GetSymbol("s");
-            context.EG.InstructionProcessed +=
+            context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
                     var instruction = args.Instruction.ToString();
@@ -744,7 +745,7 @@ namespace Namespace
                     }
                 };
 
-            context.Walk(8);
+            context.WalkWithInstructions(8);
         }
 
         [TestMethod]
@@ -756,7 +757,7 @@ namespace Namespace
             var iSymbol = context.GetSymbol("i");
             var jSymbol = context.GetSymbol("j");
             var kSymbol = context.GetSymbol("k");
-            context.EG.InstructionProcessed +=
+            context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
                     var instruction = args.Instruction.ToString();
@@ -778,7 +779,7 @@ namespace Namespace
                     }
                 };
 
-            context.Walk(6);
+            context.WalkWithInstructions(6);
         }
 
         [TestMethod]
@@ -789,7 +790,7 @@ namespace Namespace
             var context = new ExplodedGraphContext(testInput);
             var myTupleSymbol = context.GetSymbol("myTuple");
             var cSymbol = context.GetSymbol("c");
-            context.EG.InstructionProcessed +=
+            context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
                     var instruction = args.Instruction.ToString();
@@ -815,7 +816,7 @@ namespace Namespace
                     }
                 };
 
-            context.Walk(7);
+            context.WalkWithInstructions(7);
         }
 
         private class ExplodedGraphContext
@@ -823,9 +824,9 @@ namespace Namespace
             public readonly SemanticModel SemanticModel;
             public readonly MethodDeclarationSyntax MainMethod;
             public readonly IMethodSymbol MainMethodSymbol;
-            public readonly AbstractLiveVariableAnalysis LVA;
-            public readonly IControlFlowGraph CFG;
-            public readonly CSharpExplodedGraph EG;
+            public readonly AbstractLiveVariableAnalysis LiveVariableAnalysis;
+            public readonly IControlFlowGraph ControlFlowGraph;
+            public readonly CSharpExplodedGraph ExplodedGraph;
 
             public bool ExplorationEnded;
             public bool MaxStepCountReached;
@@ -849,13 +850,13 @@ namespace Namespace
                 this.MainMethod = mainMethod;
                 this.SemanticModel = semanticModel;
                 this.MainMethodSymbol = semanticModel.GetDeclaredSymbol(this.MainMethod) as IMethodSymbol;
-                this.CFG = CSharpControlFlowGraph.Create(this.MainMethod.Body, semanticModel);
-                this.LVA = CSharpLiveVariableAnalysis.Analyze(this.CFG, this.MainMethodSymbol, semanticModel);
-                this.EG = new CSharpExplodedGraph(this.CFG, this.MainMethodSymbol, semanticModel, this.LVA);
-                this.EG.InstructionProcessed += (sender, args) => { this.NumberOfProcessedInstructions++; };
-                this.EG.ExplorationEnded += (sender, args) => { this.ExplorationEnded = true; };
-                this.EG.MaxStepCountReached += (sender, args) => { this.MaxStepCountReached = true; };
-                this.EG.ExitBlockReached += (sender, args) => { this.NumberOfExitBlockReached++; };
+                this.ControlFlowGraph = CSharpControlFlowGraph.Create(this.MainMethod.Body, semanticModel);
+                this.LiveVariableAnalysis = CSharpLiveVariableAnalysis.Analyze(this.ControlFlowGraph, this.MainMethodSymbol, semanticModel);
+                this.ExplodedGraph = new CSharpExplodedGraph(this.ControlFlowGraph, this.MainMethodSymbol, semanticModel, this.LiveVariableAnalysis);
+                this.ExplodedGraph.InstructionProcessed += (sender, args) => { this.NumberOfProcessedInstructions++; };
+                this.ExplodedGraph.ExplorationEnded += (sender, args) => { this.ExplorationEnded = true; };
+                this.ExplodedGraph.MaxStepCountReached += (sender, args) => { this.MaxStepCountReached = true; };
+                this.ExplodedGraph.ExitBlockReached += (sender, args) => { this.NumberOfExitBlockReached++; };
             }
 
             public ISymbol GetSymbol(string identifier)
@@ -866,17 +867,17 @@ namespace Namespace
 
             public void WalkWithExitBlocks(int expectedProcessedInstructions, int expectedExitBlocks)
             {
-                Walk(expectedProcessedInstructions, expectedExitBlocks);
+                WalkAndCheck(expectedProcessedInstructions, expectedExitBlocks);
             }
 
-            public void Walk(int expectedProcessedInstructions)
+            public void WalkWithInstructions(int expectedProcessedInstructions)
             {
-                Walk(expectedProcessedInstructions, 1);
+                WalkAndCheck(expectedProcessedInstructions, 1);
             }
 
-            private void Walk(int expectedProcessedInstructions, int expectedExitBlocks)
+            private void WalkAndCheck(int expectedProcessedInstructions, int expectedExitBlocks)
             {
-                this.EG.Walk();
+                this.ExplodedGraph.Walk();
                 this.ExplorationEnded.Should().Be(true);
                 this.NumberOfProcessedInstructions.Should().Be(expectedProcessedInstructions);
                 this.NumberOfExitBlockReached.Should().Be(expectedExitBlocks);
