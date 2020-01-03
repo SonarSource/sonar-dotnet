@@ -187,7 +187,6 @@ namespace Tests.Diagnostics
 
     public interface IWithDefaultImplementation
     {
-        //Default interface methods
         int DoSomething()
         {
             int? i = null;
