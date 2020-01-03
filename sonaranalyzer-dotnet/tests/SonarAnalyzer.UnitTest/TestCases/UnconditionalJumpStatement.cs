@@ -519,4 +519,24 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    public class Repro_2864
+    {
+        public void ValidationMethod(bool shouldThrow)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if (shouldThrow)
+                {
+                    Throw();
+                }
+
+                //Local funciton is declared inside loop
+                void Throw()
+                {
+                    throw new InvalidOperationException("Message"); // Noncompliant FP
+                }
+            }
+        }
+    }
 }
