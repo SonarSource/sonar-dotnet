@@ -99,6 +99,15 @@ namespace Tests.Diagnostics.CSharp8
             };
             result.ToString();
         }
+
+        public void Nullable_In_Arm(string? s)
+        {
+            var result = s switch
+            {
+                var x when x != null => s.ToString(),
+                _ => s.ToString() // FN Switch expressions are not constrained (See #2949)
+            };
+        }
     }
 
     public class DefaultLiteral
