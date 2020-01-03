@@ -48,8 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            //FIXME: Temporary silence for CFG defork
-            //context.RegisterExplodedGraphBasedAnalysis((e, c) => CheckForNullDereference(e, c));
+            context.RegisterExplodedGraphBasedAnalysis((e, c) => CheckForNullDereference(e, c));
         }
 
         private static void CheckForNullDereference(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
