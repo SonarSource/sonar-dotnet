@@ -157,7 +157,7 @@ namespace Tests.Diagnostics
         public int CSharp8_NullCoalescingAssignment(int? param)
         {
             param ??= 42;
-            return param.Value; // OK, value is allways set
+            return param.Value; // OK, value is always set
         }
 
     }
