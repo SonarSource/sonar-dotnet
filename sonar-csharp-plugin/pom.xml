@@ -289,7 +289,7 @@
                         <include name="SonarAnalyzer.dll"/>
                         <include name="SonarAnalyzer.CSharp.dll"/>
                         <include name="Google.Protobuf.dll"/>
-                        <include name="Newtonsoft.Json.dll"/>
+                        <include name="Utf8Json.dll"/>
                       </fileset>
                     </copy>
                     <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
