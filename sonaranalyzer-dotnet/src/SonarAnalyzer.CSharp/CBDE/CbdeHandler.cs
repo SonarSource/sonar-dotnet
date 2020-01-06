@@ -23,8 +23,7 @@ using System;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
 using System.IO;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Microsoft.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -32,6 +31,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
+using Utf8Json;
 
 namespace SonarAnalyzer.CBDE
 {
@@ -345,14 +345,14 @@ Stack trace: {e.StackTrace}";
             logStringBuilder.Clear();
         }
 
-        private void RaiseIssueFromJToken(JToken token, CompilationAnalysisContext context)
+        private void RaiseIssueFromJToken(dynamic token, CompilationAnalysisContext context)
         {
-            var key = token["key"].ToString();
-            var message = token["message"].ToString();
+            var key = token["key"];
+            var message = token["message"];
             var location = token["location"];
             var line = Convert.ToInt32(location["l"]);
             var col = Convert.ToInt32(location["c"]);
-            var file = location["f"].ToString();
+            var file = location["f"];
 
             var begin = new LinePosition(line, col);
             var end = new LinePosition(line, col + 1);
@@ -379,16 +379,16 @@ Stack trace: {e.StackTrace}";
         private void RaiseIssuesFromJSon(CompilationAnalysisContext context)
         {
             string jsonFileContent;
-            List<List<JObject>> jsonIssues;
+            List<List<dynamic>> jsonIssues;
             LogIfFailure($"- parsing json file {cbdeJsonOutputPath}");
             try
             {
                 jsonFileContent = File.ReadAllText(cbdeJsonOutputPath);
-                jsonIssues = JsonConvert.DeserializeObject<List<List<JObject>>>(jsonFileContent);
+                jsonIssues = JsonSerializer.Deserialize<List<List<dynamic>>>(jsonFileContent);
             }
             catch(Exception exception)
             {
-                if (exception is JsonException || exception is IOException)
+                if (exception is JsonParsingException || exception is IOException)
                 {
                     LogIfFailure($"- error parsing json file {cbdeJsonOutputPath}: {exception.ToString()}");
                     Log(logStringBuilder.ToString());
@@ -401,14 +401,14 @@ Stack trace: {e.StackTrace}";
             // with one element in the outer list
             foreach (var issue in jsonIssues.First())
             {
-                LogIfFailure($"  * processing token {issue.ToString()}");
+                LogIfFailure($"  * processing token {issue}");
                 try
                 {
                     RaiseIssueFromJToken(issue, context);
                 }
                 catch(Exception e)
                 {
-                    if (e is SystemException || e is JsonException)
+                    if (e is SystemException || e is JsonParsingException)
                     {
                         LogIfFailure($"  * error reporting token {cbdeJsonOutputPath}: {e.ToString()}");
                         Log(logStringBuilder.ToString());
