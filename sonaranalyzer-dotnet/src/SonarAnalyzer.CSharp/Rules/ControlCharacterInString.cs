@@ -113,7 +113,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckControlCharacter(SyntaxNodeAnalysisContext c, string text, int displayPosIncrement)
         {
+            // simple verbatim - the node is StringLiteralExpression, the first token is verbatim
             if (c.Node.GetFirstToken().IsVerbatimStringLiteral())
+            {
+                return;
+            }
+            // interpolated verbatim - the node is InterpolatedStringText, the parent is InterpolatedStringExpression
+            if (c.Node.Parent.GetFirstToken().IsKind(SyntaxKind.InterpolatedVerbatimStringStartToken))
             {
                 return;
             }
