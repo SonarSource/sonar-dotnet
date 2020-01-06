@@ -194,7 +194,13 @@ namespace SonarAnalyzer.CBDE
                     catch(Exception e)
                     {
                         Log("An exception has occured: " + e.Message + "\n" + e.StackTrace);
-                        throw new CbdeException($"Top level error in CBDE handling: {e.Message}{this.moreDetailsMessage}");
+                        var message = $@"Top level error in CBDE handling: {e.Message}
+Details: {this.moreDetailsMessage}
+Stack trace: {e.StackTrace}";
+                        // Roslyn/MSBuild is currently cutting exception message at the end of the line instead
+                        // of displaying the full message. As a workaround, we replace the line ending with ' ## '.
+                        // See https://github.com/dotnet/roslyn/issues/1455 and https://github.com/dotnet/roslyn/issues/24346
+                        throw new CbdeException(message.Replace(Environment.NewLine, " ## "));
                     }
                 });
         }
