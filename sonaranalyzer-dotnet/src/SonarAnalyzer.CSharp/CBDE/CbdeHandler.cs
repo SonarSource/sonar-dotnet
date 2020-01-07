@@ -23,8 +23,6 @@ using System;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
 using System.IO;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -32,13 +30,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
+using System.Xml.Linq;
+using System.Xml;
 
 namespace SonarAnalyzer.CBDE
 {
     public class CbdeHandler
     {
         private const int processStatPeriodMs = 1000;
-        private const string cbdeJsonOutputFileName = "cbdeSEout.json";
+        private const string cbdeJsonOutputFileName = "cbdeSEout.xml";
 
         private static bool initialized = false;
         // this is the place where the cbde executable is unpacked. It is in a temp folder
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.CBDE
         private string cbdePath;
         private string cbdeDirectoryRoot;
         private string cbdeDirectoryAssembly;
-        private string cbdeJsonOutputPath;
+        private string cbdeResultsPath;
         private string cbdeLogFile;
         private string cbdeMetricsLogFile;
         private string cbdePerfLogFile;
@@ -228,7 +228,7 @@ Stack trace: {e.StackTrace}";
                 Directory.Delete(cbdeDirectoryAssembly, true);
             }
             Directory.CreateDirectory(cbdeDirectoryAssembly);
-            cbdeJsonOutputPath = Path.Combine(cbdeDirectoryAssembly, cbdeJsonOutputFileName);
+            cbdeResultsPath = Path.Combine(cbdeDirectoryAssembly, cbdeJsonOutputFileName);
             logStringBuilder = new StringBuilder();
             LogIfFailure($">> New Cbde Run triggered at {DateTime.Now.ToShortTimeString()}");
         }
@@ -284,7 +284,7 @@ Stack trace: {e.StackTrace}";
                 cbdeProcess.StartInfo.WorkingDirectory = cbdeDirectoryAssembly;
                 var cbdeExePerfLogFile = Path.Combine(cbdeDirectoryAssembly, "perfLogFile.log");
 
-                cbdeProcess.StartInfo.Arguments = $"-i \"{cbdeDirectoryAssembly}\" -o \"{cbdeJsonOutputPath}\" -s \"{cbdeExePerfLogFile}\"";
+                cbdeProcess.StartInfo.Arguments = $"-i \"{cbdeDirectoryAssembly}\" -o \"{cbdeResultsPath}\" -s \"{cbdeExePerfLogFile}\"";
 
                 LogIfFailure($"  * binary_location: '{cbdeProcess.StartInfo.FileName}'");
                 LogIfFailure($"  * arguments: '{cbdeProcess.StartInfo.Arguments}'");
@@ -328,7 +328,7 @@ Stack trace: {e.StackTrace}";
                 if (cbdeProcess.ExitCode == 0)
                 {
                     Log("Running CBDE: Success");
-                    RaiseIssuesFromJSon(c);
+                    RaiseIssuesFromResultFile(c);
                     Cleanup();
                     Log("Running CBDE: Issues reported");
                 }
@@ -346,14 +346,13 @@ Stack trace: {e.StackTrace}";
             logStringBuilder.Clear();
         }
 
-        private void RaiseIssueFromJToken(JToken token, CompilationAnalysisContext context)
+        private void RaiseIssueFromXElement(XElement issue, CompilationAnalysisContext context)
         {
-            var key = token["key"].ToString();
-            var message = token["message"].ToString();
-            var location = token["location"];
-            var line = Convert.ToInt32(location["l"]);
-            var col = Convert.ToInt32(location["c"]);
-            var file = location["f"].ToString();
+            var key = issue.Attribute("key").Value;
+            var message = issue.Attribute("message").Value;
+            var line = int.Parse(issue.Attribute("l").Value);
+            var col = int.Parse(issue.Attribute("c").Value);
+            var file = issue.Attribute("f").Value;
 
             var begin = new LinePosition(line, col);
             var end = new LinePosition(line, col + 1);
@@ -370,53 +369,33 @@ Stack trace: {e.StackTrace}";
                 failureString.Append("  - " + fileName + "\n");
             }
             // we dispose the StreamWriter to unlock the log file
-            LogIfFailure($"- parsing json file {cbdeJsonOutputPath}");
+            LogIfFailure($"- parsing json file {cbdeResultsPath}");
             failureString.Append("  content of stderr is:\n" + pProcess.StandardError.ReadToEnd());
             failureString.Append("  content of the CBDE handler log file is :\n" + logStringBuilder.ToString());
             Log(failureString.ToString());
             throw new CbdeException($"CBDE external process reported an error{this.moreDetailsMessage}");
         }
 
-        private void RaiseIssuesFromJSon(CompilationAnalysisContext context)
+        private void RaiseIssuesFromResultFile(CompilationAnalysisContext context)
         {
-            string jsonFileContent;
-            List<List<JObject>> jsonIssues;
-            LogIfFailure($"- parsing json file {cbdeJsonOutputPath}");
+            LogIfFailure($"- parsing file {cbdeResultsPath}");
             try
             {
-                jsonFileContent = File.ReadAllText(cbdeJsonOutputPath);
-                jsonIssues = JsonConvert.DeserializeObject<List<List<JObject>>>(jsonFileContent);
+                var document = XDocument.Load(cbdeResultsPath);
+                foreach (var i in document.Descendants("Issue"))
+                {
+                    RaiseIssueFromXElement(i, context);
+                }
             }
             catch(Exception exception)
             {
-                if (exception is JsonException || exception is IOException)
+                if (exception is XmlException || exception is NullReferenceException)
                 {
-                    LogIfFailure($"- error parsing json file {cbdeJsonOutputPath}: {exception.ToString()}");
+                    LogIfFailure($"- error parsing result file {cbdeResultsPath}: {exception.ToString()}");
                     Log(logStringBuilder.ToString());
                     throw new CbdeException($"Error parsing output from CBDE: {exception.Message}{this.moreDetailsMessage}");
                 }
                 throw;
-            }
-
-            // in cbde json output there is enclosing {}, so this is considered as a list of list
-            // with one element in the outer list
-            foreach (var issue in jsonIssues.First())
-            {
-                LogIfFailure($"  * processing token {issue.ToString()}");
-                try
-                {
-                    RaiseIssueFromJToken(issue, context);
-                }
-                catch(Exception e)
-                {
-                    if (e is SystemException || e is JsonException)
-                    {
-                        LogIfFailure($"  * error reporting token {cbdeJsonOutputPath}: {e.ToString()}");
-                        Log(logStringBuilder.ToString());
-                        throw new CbdeException($"Error raising issue from CBDE: {e.Message}{this.moreDetailsMessage}");
-                    }
-                    throw;
-                }
             }
         }
 

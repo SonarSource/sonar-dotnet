@@ -36,9 +36,4 @@ try {
 catch {
 }
 
-$analyzerFilePath = Join-Path $analyzersPath "Newtonsoft.Json.dll"
-try {
-    $project.Object.AnalyzerReferences.Remove($analyzerFilePath)
-}
-catch {
-}
+
