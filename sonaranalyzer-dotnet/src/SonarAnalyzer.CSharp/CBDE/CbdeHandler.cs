@@ -37,9 +37,17 @@ namespace SonarAnalyzer.CBDE
 {
     public class CbdeHandler
     {
+        internal enum MockType
+        {
+            NoMock,
+            CBDEWaitAndSucceeds,
+            CBDEFails,
+            CBDESucceedsWithIncorrectResults
+        }
         private const int processStatPeriodMs = 1000;
         private const string cbdeJsonOutputFileName = "cbdeSEout.xml";
 
+        private static MockType mockType = MockType.NoMock;
         private static bool initialized = false;
         // this is the place where the cbde executable is unpacked. It is in a temp folder
         private static string cbdeBinaryPath;
@@ -51,6 +59,7 @@ namespace SonarAnalyzer.CBDE
         private readonly Action<String, String, Location, CompilationAnalysisContext> raiseIssue;
         private readonly Func<CompilationAnalysisContext, bool> shouldRunInContext;
         private readonly Func<string> getOutputDirectory;
+        private readonly Action<string> onCbdeExecution;
 
         protected HashSet<string> csSourceFileNames= new HashSet<string>();
         protected Dictionary<string, int> fileNameDuplicateNumbering = new Dictionary<string, int>();
@@ -71,14 +80,21 @@ namespace SonarAnalyzer.CBDE
         private string moreDetailsMessage;
         private bool emitLog = false;
 
+        // Used for test only
+        internal static void SetMockType(MockType mt)
+        {
+            mockType = mt;
+        }
         public CbdeHandler(SonarAnalysisContext context,
             Action<String, String, Location, CompilationAnalysisContext> raiseIssue,
             Func<CompilationAnalysisContext, bool> shouldRunInContext,
-            Func<string> getOutputDirectory)
+            Func<string> getOutputDirectory,
+            Action<String> onCbdeExecution) // Used by unit tests
         {
             this.raiseIssue = raiseIssue;
             this.shouldRunInContext = shouldRunInContext;
             this.getOutputDirectory = getOutputDirectory;
+            this.onCbdeExecution = onCbdeExecution;
             lock (staticInitLock)
             {
                 if(!initialized)
@@ -139,17 +155,33 @@ namespace SonarAnalyzer.CBDE
             UnpackCbdeExe();
         }
 
-        private static void UnpackCbdeExe()
+        private static void InstallMock(string mockName)
         {
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            const string res = "SonarAnalyzer.CBDE.windows.dotnet-symbolic-execution.exe";
-            cbdeBinaryPath = Path.Combine(cbdeBinaryPath, "windows/dotnet-symbolic-execution.exe");
-            Directory.CreateDirectory(Path.GetDirectoryName(cbdeBinaryPath));
-            var stream = assembly.GetManifestResourceStream(res);
-            var fileStream = File.Create(cbdeBinaryPath);
-            stream.Seek(0, SeekOrigin.Begin);
-            stream.CopyTo(fileStream);
-            fileStream.Close();
+            cbdeBinaryPath = Path.Combine(Path.GetDirectoryName(assembly.Location), "CBDEMocks", mockName + ".exe");
+        }
+
+        private static void UnpackCbdeExe()
+        {
+            switch (mockType)
+            {
+                case MockType.NoMock:
+                    var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+                    const string res = "SonarAnalyzer.CBDE.windows.dotnet-symbolic-execution.exe";
+                    cbdeBinaryPath = Path.Combine(cbdeBinaryPath, "windows/dotnet-symbolic-execution.exe");
+                    Directory.CreateDirectory(Path.GetDirectoryName(cbdeBinaryPath));
+                    var stream = assembly.GetManifestResourceStream(res);
+                    var fileStream = File.Create(cbdeBinaryPath);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    stream.CopyTo(fileStream);
+                    fileStream.Close();
+                    break;
+                case MockType.CBDEWaitAndSucceeds:
+                case MockType.CBDEFails:
+                case MockType.CBDESucceedsWithIncorrectResults:
+                    InstallMock(Enum.GetName(typeof(MockType), mockType));
+                    break;
+            }
         }
 
         private void RegisterMlirAndCbdeInOneStep(SonarAnalysisContext context)
@@ -157,7 +189,7 @@ namespace SonarAnalyzer.CBDE
             context.RegisterCompilationAction(
                 c =>
                 {
-                    emitLog = Environment.GetEnvironmentVariables().Contains("SONAR_DOTNET_INTERNAL_LOG_CBDE");
+                    emitLog = mockType!= MockType.NoMock || Environment.GetEnvironmentVariables().Contains("SONAR_DOTNET_INTERNAL_LOG_CBDE");
                     if (!shouldRunInContext(c))
                     {
                         return;
@@ -338,6 +370,10 @@ Stack trace: {e.StackTrace}";
                     LogFailedCbdeRun(cbdeProcess);
                     Log("Running CBDE: Error dumped");
                 }
+            }
+            if (onCbdeExecution != null)
+            {
+                onCbdeExecution(cbdeLogFile);
             }
         }
 

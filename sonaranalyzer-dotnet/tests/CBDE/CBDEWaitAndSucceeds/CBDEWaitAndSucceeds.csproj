@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{D62ECEFD-08C1-4654-9920-70F64AE24325}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>CBDEWaitAndSucceed</RootNamespace>
-    <AssemblyName>CBDEWaitAndSucceed</AssemblyName>
+    <RootNamespace>CBDEWaitAndSucceeds</RootNamespace>
+    <AssemblyName>CBDEWaitAndSucceeds</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
