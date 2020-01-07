@@ -427,11 +427,11 @@ Stack trace: {e.StackTrace}";
 
             public void Reset()
             {
-                totalMsStart = currentProcessThread.TotalProcessorTime.TotalMilliseconds;
+                totalMsStart = currentProcessThread?.TotalProcessorTime.TotalMilliseconds ?? 0;
             }
 
             public long ElapsedMilliseconds =>
-                (long)(currentProcessThread.TotalProcessorTime.TotalMilliseconds - totalMsStart);
+                (long)((currentProcessThread?.TotalProcessorTime.TotalMilliseconds ?? -1) - totalMsStart);
 
             private static ProcessThread GetCurrentProcessThread()
             {
