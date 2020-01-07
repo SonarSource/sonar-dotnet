@@ -46,13 +46,13 @@ namespace Tests.Diagnostics
                 return 42; // never executed
             }
 
-            a = false switch { true => true, _ => false };
+            a = false switch { true => true, _ => false };  // FN - switch arms are not constrained
             if (a)  // FN - switch arms are not constrained
             {
                 return 42; // never executed
             }
 
-            a = 0 switch { 1 => true, _ => false };
+            a = 0 switch { 1 => true, _ => false }; // FN - switch arms are not constrained
             if (a)  // FN - switch arms are not constrained
             {
                 return 42; // never executed
