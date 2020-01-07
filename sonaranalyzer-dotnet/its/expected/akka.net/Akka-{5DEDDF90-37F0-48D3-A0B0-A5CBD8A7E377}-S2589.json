@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'false'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Router.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  17,
+"endLine":  192,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'true'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MonoConcurrentQueue.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  21,
+"endLine":  157,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'true'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MonoConcurrentQueue.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  21,
+"endLine":  188,
+"endColumn":  37
+}
+}
+}
+]
+}

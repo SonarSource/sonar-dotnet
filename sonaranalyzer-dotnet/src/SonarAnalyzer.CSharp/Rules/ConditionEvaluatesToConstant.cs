@@ -100,8 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            //FIXME: Temporary silence for CFG defork
-            //context.RegisterExplodedGraphBasedAnalysis((e, c) => CheckForRedundantConditions(e, c));
+            context.RegisterExplodedGraphBasedAnalysis((e, c) => CheckForRedundantConditions(e, c));
         }
 
         private static void CheckForRedundantConditions(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
