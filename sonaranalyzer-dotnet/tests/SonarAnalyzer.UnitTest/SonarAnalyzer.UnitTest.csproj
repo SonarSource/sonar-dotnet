@@ -122,5 +122,9 @@
     </ProjectReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CBDEMocks\" />
+  </ItemGroup>
+
 
 </Project>
