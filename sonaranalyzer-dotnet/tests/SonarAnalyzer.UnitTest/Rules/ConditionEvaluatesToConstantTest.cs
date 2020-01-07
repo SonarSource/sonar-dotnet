@@ -29,8 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ConditionEvaluatesToConstantTest
     {
-        //FIXME: Temporary silence for CFG defork
-        [Ignore("Temporary disabled for CFG defork")]
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_CSharp6()
@@ -40,8 +38,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new[] { new CSharpParseOptions(LanguageVersion.CSharp6) });
         }
 
-        //FIXME: Temporary silence for CFG defork
-        [Ignore("Temporary disabled for CFG defork")]
         [TestMethod]
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_FromCSharp7()
@@ -49,6 +45,16 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp7.cs",
                 new ConditionEvaluatesToConstant(),
                 ParseOptionsHelper.FromCSharp7);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ConditionEvaluatesToConstant_FromCSharp8()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp8.cs",
+                new ConditionEvaluatesToConstant(),
+                ParseOptionsHelper.FromCSharp8,
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
     }
 }
