@@ -6,7 +6,6 @@ namespace Tests.Diagnostics
     {
         void DoSomething();
 
-        //Default interface methods
         void DoNothing()
         {
             var a = false;
@@ -22,13 +21,13 @@ namespace Tests.Diagnostics
         int SwitchExpression()
         {
             var a = false;
-            return a switch { true => 0, false => 1 };  // FN - switch arms are not inspected
+            return a switch { true => 0, false => 1 };  // FN - switch arms are not constrained
         }
 
         int SwitchExpression_Discard()
         {
             var a = false;
-            return a switch { true => 0, _ => 1 };  // FN - switch arms are not inspected
+            return a switch { true => 0, _ => 1 };  // FN - switch arms are not constrained
         }
 
         int SwitchExpression_Results()
@@ -90,14 +89,14 @@ namespace Tests.Diagnostics
             static int UseValueInside()
             {
                 var a = false;
-                if (a)  // FN Static local functions are not inspected in CFG
+                if (a)  // FN Local static functions are not inspected in CFG
                 {
                     return 0; // never executed
                 }
                 return 1;
             }
 
-            if (ReturnFalse())  // FN - content and resutl value of local static funcition is not inspected
+            if (ReturnFalse())  // FN - content and result value of local static function is not inspected
             {
                 return 42;  // never executed
             }
@@ -125,5 +124,32 @@ namespace Tests.Diagnostics
             }
         }
 
+    }
+
+    // See https://github.com/SonarSource/sonar-dotnet/issues/2496
+    public class Repro_2496
+    {
+
+        public void EmptyCollectionCheck(ReadOnlySpan<byte> span)
+        {
+            // Check for empty collection with == override
+            if (span == null)   // Noncompliant FP S2589 Change this condition so it does not always evaluate to true
+            {                   // Secondary FP
+                return;
+            }
+        }
+
+        public void EmptyCollectionCheck2()
+        {
+            // There's wrong error message for this case.
+            // Condition is always evaluated as 'true', not as 'false' as message suggests.
+            // Subsequent code is always executed, not 'never' as message suggests.
+            ReadOnlySpan<byte> span = new byte[] { };
+            // Check for empty collection with == override
+            if (span == null)   // Noncompliant {{Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.}}
+            {                   // Secondary
+                return;
+            }
+        }
     }
 }
