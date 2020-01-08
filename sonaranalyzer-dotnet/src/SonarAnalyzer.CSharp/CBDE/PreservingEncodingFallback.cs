@@ -27,6 +27,7 @@ namespace SonarAnalyzer.CBDE
     /// C# source code can contain any character, but MLIR only handle 8-bits chars. We must therefore encode C# names
     /// so that two different strings in C# always result in two different strings in the generated code (by default, all
     /// unknown characters would be translated to the same one)
+    /// The used encoding scheme assumes that the initial string does not contain '.'
     /// </summary>
     internal class PreservingEncodingFallback : EncoderFallback
     {
