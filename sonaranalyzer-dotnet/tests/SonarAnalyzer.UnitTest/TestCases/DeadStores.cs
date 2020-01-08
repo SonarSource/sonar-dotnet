@@ -838,4 +838,29 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    // Fixed issue verification https://github.com/SonarSource/sonar-dotnet/issues/2607
+    public class Verify2607
+    {
+        public static void DeadStore(int[] array)
+        {
+            var x = 0;
+            x = array[^1]; // Noncompliant
+            try
+            {
+                x = 11; // Noncompliant
+                x = 12;
+                Console.Write(x);
+                x = 13; // Noncompliant
+            }
+            catch (Exception)
+            {
+                x = 21; // Noncompliant
+                x = 22;
+                Console.Write(x);
+                x = 23; // Noncompliant
+            }
+            x = 31; // Noncompliant
+        }
+    }
 }
