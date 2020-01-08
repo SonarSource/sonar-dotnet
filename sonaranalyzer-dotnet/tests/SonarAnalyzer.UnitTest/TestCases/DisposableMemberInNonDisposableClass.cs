@@ -115,7 +115,7 @@ namespace Tests.Diagnostics
     {
         private readonly IDisposable _disposable;
 
-        public NonDisposableClassWithDisposableMember()
+        public Repro_2957()
         {
             _disposable = new DisposableStuff();
         }
