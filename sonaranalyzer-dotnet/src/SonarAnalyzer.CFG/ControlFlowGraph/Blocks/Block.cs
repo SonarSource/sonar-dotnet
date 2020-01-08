@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Helpers;
+using SonarAnalyzer.CFG.Helpers;
 
 namespace SonarAnalyzer.ControlFlowGraph
 {
@@ -53,8 +53,7 @@ namespace SonarAnalyzer.ControlFlowGraph
 
         public virtual IReadOnlyList<Block> SuccessorBlocks { get; } = ImmutableArray.Create<Block>();
 
-        //FIXME: Restore internal after migration of tests
-        public IList<SyntaxNode> ReversedInstructions { get; } = new List<SyntaxNode>();
+        internal IList<SyntaxNode> ReversedInstructions { get; } = new List<SyntaxNode>();
 
         internal ISet<Block> EditablePredecessorBlocks { get; } = new HashSet<Block>();
 
