@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -113,13 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckControlCharacter(SyntaxNodeAnalysisContext c, string text, int displayPosIncrement)
         {
-            // simple verbatim - the node is StringLiteralExpression, the first token is verbatim
-            if (c.Node.GetFirstToken().IsVerbatimStringLiteral())
-            {
-                return;
-            }
-            // interpolated verbatim - the node is InterpolatedStringText, the parent is InterpolatedStringExpression
-            if (c.Node.Parent.GetFirstToken().IsKind(SyntaxKind.InterpolatedVerbatimStringStartToken))
+            if (IsSimpleVerbatimString(c.Node) || IsInterpolatedVerbatimString(c.Node.Parent))
             {
                 return;
             }
@@ -134,5 +128,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
         }
+
+        private static bool IsSimpleVerbatimString(SyntaxNode syntaxNode) =>
+            syntaxNode.GetFirstToken().IsVerbatimStringLiteral();
+
+        private static bool IsInterpolatedVerbatimString(SyntaxNode syntaxNode) =>
+            syntaxNode.GetFirstToken().IsKind(SyntaxKind.InterpolatedVerbatimStringStartToken);
     }
 }
