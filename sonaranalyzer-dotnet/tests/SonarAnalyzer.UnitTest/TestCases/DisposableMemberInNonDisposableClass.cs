@@ -109,4 +109,20 @@ namespace Tests.Diagnostics
             this.fs = new FileStream(path, FileMode.Open);
         }
     }
+
+    //See https://github.com/SonarSource/sonar-dotnet/issues/2957
+    public class Repro_2957 // FN, it should raise the issue
+    {
+        private readonly IDisposable _disposable;
+
+        public Repro_2957()
+        {
+            _disposable = new DisposableStuff();
+        }
+
+        private sealed class DisposableStuff : IDisposable
+        {
+            public void Dispose() { }
+        }
+    }
 }
