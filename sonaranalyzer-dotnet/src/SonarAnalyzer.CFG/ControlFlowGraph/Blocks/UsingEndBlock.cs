@@ -23,7 +23,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Helpers;
+using SonarAnalyzer.CFG.Helpers;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
 {

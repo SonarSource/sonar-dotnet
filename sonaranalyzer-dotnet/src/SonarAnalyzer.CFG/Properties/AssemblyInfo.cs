@@ -18,17 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using SonarAnalyzer.CFG.Helpers;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 
-namespace SonarAnalyzer.ControlFlowGraph
-{
-    public  class BlockIdProvider
-    {
-        private readonly Dictionary<Block, string> map = new Dictionary<Block, string>();
-        private int counter;
+[assembly: AssemblyTitle("SonarAnalyzer CFG")]
+[assembly: AssemblyProduct("SonarAnalyzer")]
+[assembly: AssemblyDescription("")]
 
-        public string Get(Block cfgBlock) =>
-            this.map.GetOrAdd(cfgBlock, b => $"{this.counter++}");
-    }
-}
+[assembly: InternalsVisibleTo("SonarAnalyzer.UnitTest" + Signing.InternalsVisibleToPublicKey)]

@@ -21,7 +21,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.CFG.Helpers
 {
     internal static class StringExtensions
     {
