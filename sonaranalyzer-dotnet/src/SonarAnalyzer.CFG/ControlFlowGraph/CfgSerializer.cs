@@ -24,7 +24,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using SonarAnalyzer.Helpers;
+using SonarAnalyzer.CFG.Helpers;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
 {

@@ -21,7 +21,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.CFG.Helpers
 {
     internal static class DictionaryExtensions
     {

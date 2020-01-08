@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.CFG.Helpers
 {
     internal static class CSharpSyntaxHelper
     {
