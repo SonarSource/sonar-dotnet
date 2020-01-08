@@ -38,7 +38,7 @@ namespace SonarAnalyzer.CBDE
     public class CbdeHandler
     {
         private const int processStatPeriodMs = 1000;
-        private const string cbdeJsonOutputFileName = "cbdeSEout.xml";
+        private const string cbdeOutputFileName = "cbdeSEout.xml";
 
         private static bool initialized = false;
         // this is the place where the cbde executable is unpacked. It is in a temp folder
@@ -144,19 +144,16 @@ namespace SonarAnalyzer.CBDE
 
         private static void Initialize()
         {
-            if (extractedCbdeBinaryPath == null)
+            extractedCbdeBinaryPath = Path.Combine(Path.GetTempPath(), $"CBDE_{Process.GetCurrentProcess().Id}");
+            Directory.CreateDirectory(extractedCbdeBinaryPath);
+            lock (logFileLock)
             {
-                extractedCbdeBinaryPath = Path.Combine(Path.GetTempPath(), $"CBDE_{Process.GetCurrentProcess().Id}");
-                Directory.CreateDirectory(extractedCbdeBinaryPath);
-                lock (logFileLock)
+                if (File.Exists(extractedCbdeBinaryPath))
                 {
-                    if (File.Exists(extractedCbdeBinaryPath))
-                    {
-                        File.Delete(extractedCbdeBinaryPath);
-                    }
+                    File.Delete(extractedCbdeBinaryPath);
                 }
-                UnpackCbdeExe();
             }
+            UnpackCbdeExe();
         }
 
         private static void UnpackCbdeExe()
@@ -247,7 +244,7 @@ Stack trace: {e.StackTrace}";
                 Directory.Delete(cbdeDirectoryAssembly, true);
             }
             Directory.CreateDirectory(cbdeDirectoryAssembly);
-            cbdeResultsPath = Path.Combine(cbdeDirectoryAssembly, cbdeJsonOutputFileName);
+            cbdeResultsPath = Path.Combine(cbdeDirectoryAssembly, cbdeOutputFileName);
             logStringBuilder = new StringBuilder();
             LogIfFailure($">> New Cbde Run triggered at {DateTime.Now.ToShortTimeString()}");
         }
