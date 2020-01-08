@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SwitchCasesMinimumThree_CS()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\SwitchCasesMinimumThree.cs", new SwitchCasesMinimumThree());
+            Verifier.VerifyAnalyzer(@"TestCases\SwitchCasesMinimumThree.cs", new SwitchCasesMinimumThree(), ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]

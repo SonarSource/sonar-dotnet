@@ -21,6 +21,7 @@
 extern alias csharp;
 extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
@@ -33,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void VariableUnused_CS()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\VariableUnused.cs", new CSharp.VariableUnused());
+            Verifier.VerifyAnalyzer(@"TestCases\VariableUnused.cs", new CSharp.VariableUnused(), ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]

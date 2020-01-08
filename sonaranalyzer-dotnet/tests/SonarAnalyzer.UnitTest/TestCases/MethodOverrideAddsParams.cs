@@ -39,4 +39,18 @@ namespace Tests.Diagnostics
         {
         }
     }
+
+    public interface IFirst
+    {
+        public virtual void Method(int[] numbers)
+        {
+        }
+    }
+
+    public class Second : IFirst
+    {
+        public void Method(params int[] numbers) // Compliant - The interface method can be accessed only after cast (due to the fact that it has an implementation).
+        {
+        }
+    }
 }

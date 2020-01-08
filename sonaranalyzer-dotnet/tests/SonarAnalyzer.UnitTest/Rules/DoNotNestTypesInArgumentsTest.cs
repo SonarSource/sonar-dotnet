@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +33,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotNestTypesInArguments()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotNestTypesInArguments.cs",
-                new DoNotNestTypesInArguments());
+                new DoNotNestTypesInArguments(),
+                ParseOptionsHelper.FromCSharp8);
         }
     }
 }

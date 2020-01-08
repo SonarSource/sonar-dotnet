@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -31,5 +31,29 @@ namespace Tests.Diagnostics
 
         void NotImplemented() =>
             throw new NotImplementedException(); // FN
+    }
+
+    interface IInterface
+    {
+        void FooBar() // Compliant - Default interface methods can be used to extend an already existing API while keeping backwards compatibility.
+        {
+        }
+    }
+
+    public class WithLocalFunctions
+    {
+        public void Method()
+        {
+            void Foo()
+            {
+                throw new NotImplementedException(); // Noncompliant
+//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            }
+
+            static void Bar()
+            {
+                throw new NotImplementedException(); // Noncompliant
+            }
+        }
     }
 }

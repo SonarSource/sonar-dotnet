@@ -87,4 +87,28 @@ namespace Tests.Diagnostics
             fs.Dispose(); // Compliant, do not report here
         }
     }
+
+    public ref struct DisposableRefStruct
+    {
+        private FileStream fs;
+
+        public void OpenResource(string path)
+        {
+            this.fs = new FileStream(path, FileMode.Open);
+        }
+
+        public void CloseResource()
+        {
+            this.fs.Close();
+        }
+
+        public void CleanUp()
+        {
+            this.fs.Dispose(); // Compliant - FN
+        }
+
+        public void Dispose()
+        {
+        }
+    }
 }

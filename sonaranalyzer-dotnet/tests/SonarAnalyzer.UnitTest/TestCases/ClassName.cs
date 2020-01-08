@@ -4,9 +4,9 @@
 //        ^^^
     {
     }
+
     static class IEnumerableExtensions // Compliant
     {
-
     }
 
     class foo // Noncompliant {{Rename class 'foo' to match pascal case naming rules, consider using 'Foo'.}}
@@ -41,6 +41,11 @@ namespace t2
 
     interface IIIFoo // Compliant
     {
+    }
+
+    interface IWithDefaultMembers
+    {
+        public void foo() { } // Noncompliant {{Rename method 'foo' to match pascal case naming rules, consider using 'Foo'.}}
     }
 }
 namespace t3

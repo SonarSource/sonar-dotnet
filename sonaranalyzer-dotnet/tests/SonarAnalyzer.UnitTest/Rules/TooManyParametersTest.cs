@@ -23,6 +23,7 @@ extern alias vbnet;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -49,7 +50,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TooManyParameters_CS_DefaultValues()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.cs", new CSharp.TooManyParameters());
+            Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.cs",
+                new CSharp.TooManyParameters(),
+                ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]

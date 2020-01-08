@@ -22,6 +22,8 @@ namespace Tests.Diagnostics
 
             context.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={query} AND mycol2={0}", parameters[0]); // Noncompliant, string interpolation  it is RawSqlString
             context.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={query}{query}", x, guid); // Noncompliant, RawSqlQuery
+            context.Database.ExecuteSqlCommand(@$"SELECT * FROM mytable WHERE mycol={query}{query}", x, guid); // Noncompliant, RawSqlQuery
+            context.Database.ExecuteSqlCommand($@"SELECT * FROM mytable WHERE mycol={query}{query}", x, guid); // Noncompliant, RawSqlQuery
             context.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={query}"); // Compliant, FormattableString is sanitized
 
             RelationalDatabaseFacadeExtensions.ExecuteSqlCommand(context.Database, query); // Compliant

@@ -48,4 +48,16 @@ namespace Tests.Diagnostics
         {
         }
     }
+
+    public interface IInterface
+    {
+        public void F1()
+        {
+            throw new NotSupportedException();
+        } // Fixed
+
+        public virtual void F2() { }
+
+        public abstract void F3();
+    }
 }

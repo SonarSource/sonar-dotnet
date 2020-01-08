@@ -40,6 +40,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\ExecutingSqlQueries_NetCore.cs",
                 new CSharp.ExecutingSqlQueries(AnalyzerConfiguration.AlwaysEnabled),
+                options: ParseOptionsHelper.FromCSharp8,
                 additionalReferences: GetReferencesNetCore(Constants.DotNetCore220Version));
         }
 

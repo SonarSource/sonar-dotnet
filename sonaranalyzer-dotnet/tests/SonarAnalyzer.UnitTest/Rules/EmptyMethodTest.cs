@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +32,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void EmptyMethod()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.cs", new EmptyMethod());
+            Verifier.VerifyAnalyzer(@"TestCases\EmptyMethod.cs",
+                new EmptyMethod(),
+                options: ParseOptionsHelper.FromCSharp8,
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
 
         [TestMethod]

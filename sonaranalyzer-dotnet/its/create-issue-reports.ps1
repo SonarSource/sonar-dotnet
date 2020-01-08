@@ -102,6 +102,10 @@ function New-IssueReports([string]$sarifReportPath) {
 	    Restore-UriDeclaration $allIssues.relatedLocations.physicalLocation $pathPrefix
         $allIssues = $allIssues | Foreach-Object { Get-IssueV3($_) }
     }
+    else {
+        # Some json are not populated with issues. e.g.: CBDE
+        return
+    }
 
     # Change spaces to %20
     $allIssues.location | Foreach-Object {

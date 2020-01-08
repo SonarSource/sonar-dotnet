@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.Helpers;
+using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -34,7 +35,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CognitiveComplexity_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\CognitiveComplexity.cs",
-                new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+                new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 },
+                options: ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]

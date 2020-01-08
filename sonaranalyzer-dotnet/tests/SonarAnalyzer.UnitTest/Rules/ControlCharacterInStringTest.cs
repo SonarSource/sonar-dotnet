@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +33,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ControlCharacterInString()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ControlCharacterInString.cs",
-                new ControlCharacterInString());
+                new ControlCharacterInString(),
+                options: ParseOptionsHelper.FromCSharp8);
         }
     }
 }

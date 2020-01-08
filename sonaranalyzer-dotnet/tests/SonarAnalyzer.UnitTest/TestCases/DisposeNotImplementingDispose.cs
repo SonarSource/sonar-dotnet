@@ -135,4 +135,11 @@ namespace Tests.Diagnostics
 
         }
     }
+
+    public ref struct Struct
+    {
+        public void Dispose() // Noncompliant - FP
+        {
+        }
+    }
 }

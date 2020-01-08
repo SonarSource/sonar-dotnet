@@ -406,7 +406,8 @@ Namespace Tests.Diagnostics
 
     ' https://github.com/SonarSource/sonar-dotnet/issues/2774
     Public Class Class1
-        Private Withevents _cashLess as CashLess
+
+        Private WithEvents _cashLess As CashLess
 
         Public Property CashLess() As CashLess
             Get ' Noncompliant FP
@@ -420,6 +421,28 @@ Namespace Tests.Diagnostics
     End Class
 
     Public Class CashLess
+
+    End Class
+
+    ' https://github.com/SonarSource/sonar-dotnet/issues/2867
+    Public Class Repro_2867
+
+        Public Class ValueWrapper(Of T)
+
+            Public Property Value As T
+
+        End Class
+
+        Private ReadOnly _someMember As New ValueWrapper(Of Double)
+
+        Public Property SomeMember As Double
+            Get
+                Return _someMember.Value
+            End Get
+            Set(value As Double)    ' Noncompliant FP
+                _someMember.Value = value
+            End Set
+        End Property
 
     End Class
 

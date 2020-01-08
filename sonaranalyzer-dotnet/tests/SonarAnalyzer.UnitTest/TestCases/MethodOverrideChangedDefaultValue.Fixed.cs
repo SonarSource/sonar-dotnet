@@ -50,4 +50,22 @@ namespace Tests.Diagnostics
         {
         }
     }
+
+    public interface IFirst
+    {
+        void Write(int i, int j = 5);
+
+        void Write(int i = 42);
+    }
+
+    public interface ISecond : IFirst
+    {
+        void Write(int i, int j = 5)
+        {
+        }
+
+        void Write(int i = 0) // Compliant - This method can be called only after a cast to ISecond
+        {
+        }
+    }
 }

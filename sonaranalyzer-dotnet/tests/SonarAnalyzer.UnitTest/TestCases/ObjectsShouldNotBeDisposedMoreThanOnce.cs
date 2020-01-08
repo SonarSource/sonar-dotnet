@@ -446,5 +446,30 @@ namespace Tests.Diagnostics
                 (myObject1, myObject2) = (1, null);
             }
         }
+
+        public ref struct Struct
+        {
+            public void Dispose()
+            {
+            }
+        }
+
+        public class Consumer
+        {
+            public void M1()
+            {
+                var s = new Struct();
+
+                s.Dispose();
+                s.Dispose(); // Noncompliant
+            }
+
+            public void M2()
+            {
+                using var s = new Struct();
+
+                s.Dispose(); // Noncompliant
+            }
+        }
     }
 }
