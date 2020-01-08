@@ -46,7 +46,7 @@ public class UnexpectedSecondary
                     new BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<UnexpectedDiagnosticException>()
-                  .WithMessage($"Unexpected primary issue on line 7 with message 'Correct one of the identical expressions on both sides of operator '=='.'.{Environment.NewLine}" +
+                  .WithMessage($"Unexpected primary issue on line 7, span (6,21)-(6,22) with message 'Correct one of the identical expressions on both sides of operator '=='.'.{Environment.NewLine}" +
                   $"See output to see all actual diagnostics raised on the file");
         }
 
@@ -66,7 +66,7 @@ public class UnexpectedSecondary
                     new BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<UnexpectedDiagnosticException>()
-                  .WithMessage($"Unexpected secondary issue on line 6 with message ''.{Environment.NewLine}" +
+                  .WithMessage($"Unexpected secondary issue on line 6, span (5,16)-(5,17) with message ''.{Environment.NewLine}" +
                   $"See output to see all actual diagnostics raised on the file");
         }
 
@@ -87,7 +87,7 @@ public class UnexpectedSecondary
                     new BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<UnexpectedDiagnosticException>()
-                  .WithMessage($"Unexpected secondary issue [myId] on line 7 with message ''.{Environment.NewLine}" +
+                  .WithMessage($"Unexpected secondary issue [myId] on line 7, span (6,16)-(6,17) with message ''.{Environment.NewLine}" +
                   $"See output to see all actual diagnostics raised on the file");
         }
 

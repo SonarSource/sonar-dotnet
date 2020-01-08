@@ -116,4 +116,25 @@ namespace Tests.Diagnostics
         public static void M1<T>(Func<T> f) { }
         public static void M1(Func<Task> f) { }
     }
+
+    public class WithLocalFunctions
+    {
+        public static void Test(int foo, params object[] p)
+        {
+            Console.WriteLine("test1");
+        }
+
+        public static void Test(double foo, object p1)
+        {
+            Console.WriteLine("test2");
+        }
+
+        public void Method()
+        {
+            static void Call()
+            {
+                Test(42, null); // Noncompliant {{Review this call, which partially matches an overload without 'params'. The partial match is 'void WithLocalFunctions.Test(double foo, object p1)'.}}
+            }
+        }
+    }
 }

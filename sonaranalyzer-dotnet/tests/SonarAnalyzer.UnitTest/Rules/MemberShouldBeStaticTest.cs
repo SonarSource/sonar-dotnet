@@ -24,6 +24,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -45,6 +46,16 @@ namespace SonarAnalyzer.UnitTest.Rules
                     .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspnetCoreVersion))
                     .Concat(FrameworkMetadataReference.SystemWeb)
                     .ToImmutableArray());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MemberShouldBeStatic_CSharp8()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\MemberShouldBeStatic.FromCSharp8.cs",
+                new MemberShouldBeStatic(),
+                options: ParseOptionsHelper.FromCSharp8,
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
 
         [TestMethod]

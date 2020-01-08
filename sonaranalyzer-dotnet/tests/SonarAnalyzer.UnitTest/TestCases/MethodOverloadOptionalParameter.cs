@@ -69,4 +69,16 @@ namespace Tests.Diagnostics
         void Foo8<T>(KeyValuePair<KeyValuePair<T, int>, string> ids);
         void Foo8<U>(KeyValuePair<KeyValuePair<U, int>, string> messages, string delimiter = "\n"); // Noncompliant
     }
+
+    public interface IInterfaceWithDefaultImpl
+    {
+        void Print2(string[] messages)
+        {
+        }
+
+        void Print2(string[] messages, string delimiter = "\n") // Noncompliant;
+//                                     ^^^^^^^^^^^^^^^^^^^^^^^
+        {
+        }
+    }
 }

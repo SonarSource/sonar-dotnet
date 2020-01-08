@@ -157,4 +157,40 @@ namespace Tests.Diagnostics
     }
     interface IBoo { }
     class Boo : IBoo { }
+
+    class WithLocalFunctions
+    {
+        public void M1()
+        {
+            static double divide(int divisor, int dividend)
+            {
+                return divisor / dividend;
+            }
+
+            static void doTheThing(int divisor, int dividend)
+            {
+                double result = divide(dividend, divisor);  // Noncompliant
+            }
+        }
+
+        public void M2()
+        {
+            double divide(int divisor, int dividend)
+            {
+                return divisor / dividend;
+            }
+
+            void doTheThing(int divisor, int dividend)
+            {
+                double result = divide(dividend, divisor);  // Noncompliant
+            }
+        }
+
+        public void M3()
+        {
+            double divide(int divisor, int dividend) => divisor / dividend;
+
+            double doTheThing(int divisor, int dividend) => divide(dividend, divisor);  // Noncompliant
+        }
+    }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Tests.Diagnostics
@@ -11,6 +11,20 @@ namespace Tests.Diagnostics
 //                                                 ^^^^^^^ Noncompliant@-2 [1] {{Rename the parameter 'METHOD1' so that it does not duplicate the method name.}}
         {
             // Do something
+        }
+    }
+
+    class WithLocalFunctions
+    {
+        public void Method()
+        {
+            void Method1(string Method1) // Compliant - FN
+            {
+            }
+
+            static void Method2(string Method2) // Compliant - FN
+            {
+            }
         }
     }
 }

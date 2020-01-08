@@ -89,6 +89,16 @@
         public void MyEOFile() { }
     }
 
+    public class WithLocalFunctions
+    {
+        public void Method()
+        {
+            void foo() { } // Compliant - FN
+
+            static void Do_Some_Test_() { } // Compliant - FN
+        }
+    }
+
     public class Invalid
     {
         public int () => 42; // Error [CS1519,CS8124,CS1519]

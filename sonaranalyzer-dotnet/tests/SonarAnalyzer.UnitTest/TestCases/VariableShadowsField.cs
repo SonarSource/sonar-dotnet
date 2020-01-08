@@ -76,4 +76,37 @@ namespace Tests.Diagnostics
             return null;
         }
     }
+
+    public class WithLocalFunctions
+    {
+        private int field;
+
+        public void Method()
+        {
+            void doSomething()
+            {
+                int field = 0; // Noncompliant
+            }
+
+            static void doMore()
+            {
+                int field = 0; // Noncompliant
+            }
+        }
+
+        public void MethodWithLocalVar()
+        {
+            bool isUsed = true;
+
+            void doSomething()
+            {
+                bool isUsed = true; // Compliant - FN: should check also function variable shadowing?
+            }
+
+            static void doMore()
+            {
+                bool isUsed = true; // Compliant
+            }
+        }
+    }
 }

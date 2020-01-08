@@ -19,6 +19,7 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,7 +30,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void SelfAssignment_CSharp()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\SelfAssignment.cs", new SonarAnalyzer.Rules.CSharp.SelfAssignment());
+            Verifier.VerifyAnalyzer(@"TestCases\SelfAssignment.cs",
+                new SonarAnalyzer.Rules.CSharp.SelfAssignment(),
+                options: ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]

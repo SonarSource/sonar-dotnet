@@ -57,7 +57,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 foreach (var testCase in this.TestCases)
                 {
                     // ToDo: We should find a way to ack the fact the action was not run
-                    Verifier.VerifyNoIssueReported(testCase.Path, testCase.Analyzer);
+                    Verifier.VerifyNoIssueReported(testCase.Path, testCase.Analyzer, ParseOptionsHelper.FromCSharp8);
                 }
             }
             finally
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             foreach (var testCase in this.TestCases)
             {
                 // FIX ME: We test that a rule is enabled only by checking the issues are reported
-                Verifier.VerifyAnalyzer(testCase.Path, testCase.Analyzer);
+                Verifier.VerifyAnalyzer(testCase.Path, testCase.Analyzer, ParseOptionsHelper.FromCSharp8);
             }
         }
 
@@ -118,11 +118,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
                     {
                         if (testCase.Analyzer is AnonymousDelegateEventUnsubscribe)
                         {
-                            Verifier.VerifyNoIssueReported(testCase.Path, testCase.Analyzer);
+                            Verifier.VerifyNoIssueReported(testCase.Path, testCase.Analyzer, ParseOptionsHelper.FromCSharp8);
                         }
                         else
                         {
-                            Verifier.VerifyAnalyzer(testCase.Path, testCase.Analyzer);
+                            Verifier.VerifyAnalyzer(testCase.Path, testCase.Analyzer, ParseOptionsHelper.FromCSharp8);
                         }
                     }
                 }

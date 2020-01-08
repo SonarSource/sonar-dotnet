@@ -23,6 +23,7 @@ extern alias vbnet;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -34,7 +35,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TooManyLabelsInSwitch()
         {
             Verifier.VerifyAnalyzer(@"TestCases\TooManyLabelsInSwitch.cs",
-                new CSharp.TooManyLabelsInSwitch { Maximum = 2 });
+                new CSharp.TooManyLabelsInSwitch { Maximum = 2 },
+                ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]

@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,6 +33,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void InheritedCollidingInterfaceMembers()
         {
             Verifier.VerifyAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.cs", new InheritedCollidingInterfaceMembers());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void InheritedCollidingInterfaceMembers_CSharp8()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\InheritedCollidingInterfaceMembers.AfterCSharp8.cs",
+                new InheritedCollidingInterfaceMembers(),
+                options: ParseOptionsHelper.FromCSharp8,
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
     }
 }

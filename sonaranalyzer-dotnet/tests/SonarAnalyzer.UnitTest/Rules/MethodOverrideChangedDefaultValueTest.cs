@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +32,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MethodOverrideChangedDefaultValue()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideChangedDefaultValue.cs", new MethodOverrideChangedDefaultValue());
+            Verifier.VerifyAnalyzer(@"TestCases\MethodOverrideChangedDefaultValue.cs",
+                new MethodOverrideChangedDefaultValue(),
+                options: ParseOptionsHelper.FromCSharp8,
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
 
         [TestMethod]
@@ -43,7 +47,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\MethodOverrideChangedDefaultValue.Fixed.cs",
                 @"TestCases\MethodOverrideChangedDefaultValue.Fixed.Batch.cs",
                 new MethodOverrideChangedDefaultValue(),
-                new MethodOverrideChangedDefaultValueCodeFixProvider());
+                new MethodOverrideChangedDefaultValueCodeFixProvider(),
+                options: ParseOptionsHelper.FromCSharp8,
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
         }
     }
 }

@@ -12,11 +12,16 @@ namespace Tests.TestCases
         {
 
         }
+
         public SelfAssignment(int Prop1)
         {
+            int? value = null;
 
+            value ??= value; // Compliant - FN: self-assignment
         }
+
         public int Prop1 { get; set; }
+
         public void Test()
         {
             var Prop1 = 5;

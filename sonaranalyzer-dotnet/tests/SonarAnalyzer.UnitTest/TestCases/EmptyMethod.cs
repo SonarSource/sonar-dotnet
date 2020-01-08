@@ -45,4 +45,14 @@ namespace Tests.Diagnostics
         {
         }
     }
+
+    public interface IInterface
+    {
+        public void F1() { } // Noncompliant
+//                  ^^
+
+        public virtual void F2() { }
+
+        public abstract void F3();
+    }
 }

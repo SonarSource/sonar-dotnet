@@ -21,6 +21,7 @@
 extern alias csharp;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +33,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void GenericTypeParameterUnused()
         {
             Verifier.VerifyAnalyzer(@"TestCases\GenericTypeParameterUnused.cs",
-                new GenericTypeParameterUnused());
+                new GenericTypeParameterUnused(),
+                options: ParseOptionsHelper.FromCSharp8);
         }
     }
 }

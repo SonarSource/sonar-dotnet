@@ -21,6 +21,7 @@
 extern alias csharp;
 extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
@@ -34,7 +35,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void AllBranchesShouldNotHaveSameImplementation_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\AllBranchesShouldNotHaveSameImplementation.cs",
-                new CSharp.AllBranchesShouldNotHaveSameImplementation());
+                new CSharp.AllBranchesShouldNotHaveSameImplementation(),
+                ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]

@@ -20,6 +20,7 @@
 
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 using CS=SonarAnalyzer.Rules.CSharp;
 using VB=SonarAnalyzer.Rules.VisualBasic;
 
@@ -41,7 +42,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void SwitchSectionShouldNotHaveTooManyStatements_CustomValue_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\SwitchSectionShouldNotHaveTooManyStatements_CustomValue.cs",
-                new CS.SwitchSectionShouldNotHaveTooManyStatements { Threshold = 1 });
+                new CS.SwitchSectionShouldNotHaveTooManyStatements { Threshold = 1 },
+                ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]

@@ -42,6 +42,19 @@ namespace Tests.Diagnostics
                     Console.WriteLine("Other");
                     break;
             }
+
+            string first = "foo", second = "bar";
+
+            var result = first switch
+            {
+                "a" => second switch // Compliant
+                {
+                    "x" => 9,
+                    _ => 1
+                },
+                "b" => 2,
+                _ => 3
+            };
         }
     }
 }

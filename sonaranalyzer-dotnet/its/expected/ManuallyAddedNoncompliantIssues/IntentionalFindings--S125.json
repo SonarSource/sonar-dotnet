@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\IntentionalFindings\S3949.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  18,
+"endLine":  5,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\IntentionalFindings\S3949.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  94
+}
+}
+}
+]
+}

@@ -70,4 +70,36 @@ namespace Tests.Diagnostics
             expTreeVar = () => FuncWithOptionals(null); //Compliant
         }
     }
+
+    public interface IInterfaceWithDefaultMethod
+    {
+        public void Write(int i, int j = 5)
+        {
+        }
+    }
+
+    public class Consumer
+    {
+        public Consumer(IInterfaceWithDefaultMethod i)
+        {
+            i.Write(1, 5); // Fixed
+        }
+    }
+
+    public class WithLocalFunctions
+    {
+        public void Method()
+        {
+            Foo(1, 5); // Fixed
+            Bar(1, 5); // Fixed
+
+            void Foo(int i, int j = 5)
+            {
+            }
+
+            static void Bar(int i, int j = 5)
+            {
+            }
+        }
+    }
 }

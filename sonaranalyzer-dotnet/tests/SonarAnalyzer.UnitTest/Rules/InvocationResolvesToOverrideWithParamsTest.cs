@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +33,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void InvocationResolvesToOverrideWithParams()
         {
             Verifier.VerifyAnalyzer(@"TestCases\InvocationResolvesToOverrideWithParams.cs",
-                new InvocationResolvesToOverrideWithParams());
+                new InvocationResolvesToOverrideWithParams(),
+                ParseOptionsHelper.FromCSharp8);
         }
     }
 }

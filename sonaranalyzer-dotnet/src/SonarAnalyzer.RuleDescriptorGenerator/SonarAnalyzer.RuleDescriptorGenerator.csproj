@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
+    <LangVersion>8.0</LangVersion>
     <AssemblyName>SonarAnalyzer.RuleDescriptorGenerator</AssemblyName>
     <RootNamespace>SonarAnalyzer.RuleDescriptorGenerator</RootNamespace>
     <OutputType>Exe</OutputType>

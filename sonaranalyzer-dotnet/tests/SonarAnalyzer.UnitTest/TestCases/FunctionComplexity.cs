@@ -117,5 +117,12 @@ namespace Tests.Diagnostics
         {
             public string Name;
         }
+
+        void NullCoalescenceAssignment() // Compliant - FN: Null coalescence assignment is not considered
+        {
+            bool? v1 = null, v2 = null, v3 = null, v4 = null, v5 = null;
+
+            var h = v1 ??= v2 ??= v3 ??= v4 ??= v5;
+        }
     }
 }

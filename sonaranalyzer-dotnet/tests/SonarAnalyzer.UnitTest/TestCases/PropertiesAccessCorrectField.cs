@@ -536,4 +536,22 @@ namespace Tests.Diagnostics
         private int GetMyValue() => this.myValue;
         private void SetMyValue(int value) => this.myValue = value;
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2867
+    public class Repro_2867
+    {
+        private class ValueWrapper<T>
+        {
+            public T Value { get; set; }
+            // ...
+        }
+
+        private readonly ValueWrapper<double> _someMember = new ValueWrapper<double>();
+
+        public double SomeMember
+        {
+            get => _someMember.Value;
+            set => _someMember.Value = value;   // Noncompliant FP
+        }
+    }
 }

@@ -243,6 +243,20 @@ namespace Rspec_Compliant_Samples
             // Do not forget to call base
             base.Dispose(disposing);
     }
+
+    public ref struct Struct
+    {
+        public void Dispose()
+        {
+        }
+    }
+
+    public ref struct Struct2
+    {
+        public void Dispose(bool disposing) // Compliant - FN: for ref structs the pattern is to have Dispose without parameters
+        {
+        }
+    }
 }
 
 namespace VS_Generated_Implementation

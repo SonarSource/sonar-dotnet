@@ -254,4 +254,12 @@ namespace Tests.Diagnostics
             throw new Exception(); // Noncompliant
         }
     }
+
+    ref struct DisposableRefStruct
+    {
+        public void Dispose()
+        {
+            throw new Exception(); // Noncompliant
+        }
+    }
 }

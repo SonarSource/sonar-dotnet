@@ -144,5 +144,41 @@ namespace Tests.Diagnostics
         private void DoSomethingElse()
         {
         }
+
+        public int SwitchExpressionNoncompliant(string type)
+        {
+            return type switch // Compliant - FN: all branches call the same function
+            {
+                "a" => GetNumber(),
+                "b" => GetNumber(),
+                _ => GetNumber()
+            };
+        }
+
+        public int SwitchExpressionNested(string type)
+        {
+            return type switch
+            {
+                "a" => GetNumber(),
+                _ => type switch // Compliant - FN: all branches call the same function
+                {
+                        "b" => GetNumber(),
+                        "c" => GetNumber(),
+                        _ => GetNumber()
+                    }
+            };
+        }
+
+        public int GetNumber() => 42;
+
+        public int SwitchExpressionCompliant(string type)
+        {
+            return type switch // Compliant
+            {
+                "a" => 42,
+                "b" => type.Length,
+                _ => GetNumber()
+            };
+        }
     }
 }
