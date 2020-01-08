@@ -1,6 +1,7 @@
 ﻿extern alias csharp;
 
 using System.IO;
+using System.Text.RegularExpressions;
 /*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2019 SonarSource SA
@@ -35,23 +36,80 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CbdeHandler_CS()
         {
             Verifier.VerifyAnalyzer(@"TestCases\CbdeHandler.cs",
-                CS.CbdeHandlerRule.MakeUnitTestInstance(null));
+                CS.CbdeHandlerRule.MakeUnitTestInstance(CbdeHandler.MockType.NoMock, null));
         }
 
         [TestMethod]
         [TestCategory("CBDE")]
         public void CbdeHandlerWait()
         {
-            CbdeHandler.SetMockType(CbdeHandler.MockType.CBDEWaitAndSucceeds);
-            Verifier.VerifyAnalyzer(@"TestCases\CbdeHandler.cs",
-                CS.CbdeHandlerRule.MakeUnitTestInstance(s =>
+            bool cbdeExecuted = false;
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\CbdeHandlerDummy.cs",
+                CS.CbdeHandlerRule.MakeUnitTestInstance(CbdeHandler.MockType.CBDEWaitAndSucceeds,
+                s =>
                 {
+                    cbdeExecuted = true;
                     var logContent = File.ReadAllText(s);
+                    Assert.IsTrue(logContent.Contains("Running CBDE: Success"));
+                    var workingSet = Regex.Match(logContent, "peak_working_set: ([0-9]*) MB");
+                    Assert.IsTrue(workingSet.Success);
+                    var peak = workingSet.Groups[1].Value;
+                    Assert.IsTrue(int.TryParse(peak, out int peakValue));
+                    Assert.AreNotEqual(peakValue, 0); // We had enough time to at least use some memory
                 }
                 ));
-
-            CbdeHandler.SetMockType(CbdeHandler.MockType.NoMock);
+            Assert.IsTrue(cbdeExecuted);
         }
-    }
+
+        [TestMethod]
+        [TestCategory("CBDE")]
+        public void CbdeHandlerExecutableNotFound()
+        {
+            bool cbdeExecuted = false;
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\CbdeHandlerDummy.cs",
+                CS.CbdeHandlerRule.MakeUnitTestInstance(CbdeHandler.MockType.NonExistingExecutable,
+                s =>
+                {
+                    cbdeExecuted = true;
+                    var logContent = File.ReadAllText(s);
+                    Assert.IsTrue(logContent.Contains("Running CBDE: Cannot start process"));
+                }
+                ));
+            Assert.IsTrue(cbdeExecuted);
+        }
+
+        [TestMethod]
+        [TestCategory("CBDE")]
+        public void CbdeHandlerFailed()
+        {
+            bool cbdeExecuted = false;
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\CbdeHandlerDummy.cs",
+                CS.CbdeHandlerRule.MakeUnitTestInstance(CbdeHandler.MockType.CBDEFails,
+                s =>
+                {
+                    cbdeExecuted = true;
+                    var logContent = File.ReadAllText(s);
+                    Assert.IsTrue(logContent.Contains("Running CBDE: Failure"));
+                }
+                ));
+            Assert.IsTrue(cbdeExecuted);
+        }
+
+        [TestMethod]
+        [TestCategory("CBDE")]
+        public void CbdeHandlerIncorrectOutput()
+        {
+            bool cbdeExecuted = false;
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\CbdeHandlerDummy.cs",
+                CS.CbdeHandlerRule.MakeUnitTestInstance(CbdeHandler.MockType.CBDESucceedsWithIncorrectResults,
+                s =>
+                {
+                    cbdeExecuted = true;
+                    var logContent = File.ReadAllText(s);
+                    Assert.IsTrue(logContent.Contains("error parsing result file"));
+                }
+                ));
+            Assert.IsTrue(cbdeExecuted);
+        }    }
 
 }

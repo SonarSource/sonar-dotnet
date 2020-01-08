@@ -46,6 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string S3949MessageFormat = "{0}";
         private static readonly DiagnosticDescriptor ruleS3949 = DiagnosticDescriptorBuilder.GetDescriptor(S3949DiagnosticId, S3949MessageFormat, RspecStrings.ResourceManager, fadeOutCode: true);
         private static string WorkDirectoryBasePath;
+        private readonly CbdeHandler.MockType mockType;
         private readonly Action<string> onCbdeExecution;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(ruleS3949);
@@ -53,24 +54,26 @@ namespace SonarAnalyzer.Rules.CSharp
         private readonly ImmutableDictionary<string, DiagnosticDescriptor> ruleIdToDiagDescriptor = ImmutableDictionary<string, DiagnosticDescriptor>.Empty
             .Add("S3949", ruleS3949);
 
-        public CbdeHandlerRule() : this(false, null) {}
+        public CbdeHandlerRule() : this(false, CbdeHandler.MockType.NoMock, null) {}
 
-        private CbdeHandlerRule(bool unitTest, Action<string> onCbdeExecution)
+        private CbdeHandlerRule(bool unitTest, CbdeHandler.MockType mockType, Action<string> onCbdeExecution)
         {
             this.unitTest = unitTest;
+            this.mockType = mockType;
             this.onCbdeExecution = onCbdeExecution;
         }
 
-        internal static CbdeHandlerRule MakeUnitTestInstance(Action<string> onCbdeExecution)
+        internal static CbdeHandlerRule MakeUnitTestInstance(CbdeHandler.MockType mockType, Action<string> onCbdeExecution)
         {
-            return new CbdeHandlerRule(true, onCbdeExecution);
+            return new CbdeHandlerRule(true, mockType, onCbdeExecution);
         }
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                new CbdeHandler(context, OnCbdeIssue, ShouldRunCbdeInContext, () => { return WorkDirectoryBasePath; }, onCbdeExecution);
+                new CbdeHandler(context, OnCbdeIssue, ShouldRunCbdeInContext, () => { return WorkDirectoryBasePath; },
+                    mockType, onCbdeExecution);
             }
         }
 

@@ -37,17 +37,18 @@ namespace SonarAnalyzer.CBDE
 {
     public class CbdeHandler
     {
-        internal enum MockType
+        public enum MockType
         {
             NoMock,
             CBDEWaitAndSucceeds,
             CBDEFails,
-            CBDESucceedsWithIncorrectResults
+            CBDESucceedsWithIncorrectResults,
+            NonExistingExecutable
         }
         private const int processStatPeriodMs = 1000;
         private const string cbdeJsonOutputFileName = "cbdeSEout.xml";
 
-        private static MockType mockType = MockType.NoMock;
+        private MockType mockType = MockType.NoMock;
         private static bool initialized = false;
         // this is the place where the cbde executable is unpacked. It is in a temp folder
         private static string cbdeBinaryPath;
@@ -59,7 +60,9 @@ namespace SonarAnalyzer.CBDE
         private readonly Action<String, String, Location, CompilationAnalysisContext> raiseIssue;
         private readonly Func<CompilationAnalysisContext, bool> shouldRunInContext;
         private readonly Func<string> getOutputDirectory;
-        private readonly Action<string> onCbdeExecution;
+        // This is used by unit tests that want to check the log (whose path is the parameter of this action) contains
+        // what is expected
+        private readonly Action<string> onCbdeExecution; 
 
         protected HashSet<string> csSourceFileNames= new HashSet<string>();
         protected Dictionary<string, int> fileNameDuplicateNumbering = new Dictionary<string, int>();
@@ -81,25 +84,24 @@ namespace SonarAnalyzer.CBDE
         private bool emitLog = false;
 
         // Used for test only
-        internal static void SetMockType(MockType mt)
-        {
-            mockType = mt;
-        }
+
         public CbdeHandler(SonarAnalysisContext context,
             Action<String, String, Location, CompilationAnalysisContext> raiseIssue,
             Func<CompilationAnalysisContext, bool> shouldRunInContext,
             Func<string> getOutputDirectory,
+            MockType mockType, // Used by unit tests to replace the true CBDE executable
             Action<String> onCbdeExecution) // Used by unit tests
         {
             this.raiseIssue = raiseIssue;
             this.shouldRunInContext = shouldRunInContext;
             this.getOutputDirectory = getOutputDirectory;
+            this.mockType = mockType;
             this.onCbdeExecution = onCbdeExecution;
             lock (staticInitLock)
             {
                 if(!initialized)
                 {
-                    Initialize();
+                    Initialize(mockType);
                     initialized = true;
                 }
             }
@@ -141,7 +143,7 @@ namespace SonarAnalyzer.CBDE
             }
         }
 
-        private static void Initialize()
+        private static void Initialize(MockType mockType)
         {
             cbdeBinaryPath = Path.Combine(Path.GetTempPath(), $"CBDE_{Process.GetCurrentProcess().Id}");
             Directory.CreateDirectory(cbdeBinaryPath);
@@ -152,7 +154,7 @@ namespace SonarAnalyzer.CBDE
                     File.Delete(cbdeBinaryPath);
                 }
             }
-            UnpackCbdeExe();
+            UnpackCbdeExe(mockType);
         }
 
         private static void InstallMock(string mockName)
@@ -161,7 +163,7 @@ namespace SonarAnalyzer.CBDE
             cbdeBinaryPath = Path.Combine(Path.GetDirectoryName(assembly.Location), "CBDEMocks", mockName + ".exe");
         }
 
-        private static void UnpackCbdeExe()
+        private static void UnpackCbdeExe(MockType mockType)
         {
             switch (mockType)
             {
@@ -179,6 +181,7 @@ namespace SonarAnalyzer.CBDE
                 case MockType.CBDEWaitAndSucceeds:
                 case MockType.CBDEFails:
                 case MockType.CBDESucceedsWithIncorrectResults:
+                case MockType.NonExistingExecutable:
                     InstallMock(Enum.GetName(typeof(MockType), mockType));
                     break;
             }
@@ -346,6 +349,8 @@ Stack trace: {e.StackTrace}";
                 }
                 catch (Exception e)
                 {
+                    Log("Running CBDE: Cannot start process");
+                    ReportEndOfCbdeExecution();
                     throw new CbdeException($"Exception while running CBDE process: {e.Message}{this.moreDetailsMessage}");
                 }
 
@@ -367,10 +372,14 @@ Stack trace: {e.StackTrace}";
                 else
                 {
                     Log("Running CBDE: Failure");
-                    LogFailedCbdeRun(cbdeProcess);
-                    Log("Running CBDE: Error dumped");
+                    LogFailedCbdeRunAndThrow(cbdeProcess);
                 }
             }
+            ReportEndOfCbdeExecution();
+        }
+
+        private void ReportEndOfCbdeExecution()
+        {
             if (onCbdeExecution != null)
             {
                 onCbdeExecution(cbdeLogFile);
@@ -397,7 +406,7 @@ Stack trace: {e.StackTrace}";
             raiseIssue(key, message, loc, context);
         }
 
-        private void LogFailedCbdeRun(Process pProcess)
+        private void LogFailedCbdeRunAndThrow(Process pProcess)
         {
             StringBuilder failureString = new StringBuilder("CBDE Failure Report :\n  C# souces files involved are:\n");
             foreach (var fileName in csSourceFileNames)
@@ -409,6 +418,7 @@ Stack trace: {e.StackTrace}";
             failureString.Append("  content of stderr is:\n" + pProcess.StandardError.ReadToEnd());
             failureString.Append("  content of the CBDE handler log file is :\n" + logStringBuilder.ToString());
             Log(failureString.ToString());
+            ReportEndOfCbdeExecution();
             throw new CbdeException($"CBDE external process reported an error{this.moreDetailsMessage}");
         }
 
@@ -429,8 +439,10 @@ Stack trace: {e.StackTrace}";
                 {
                     LogIfFailure($"- error parsing result file {cbdeResultsPath}: {exception.ToString()}");
                     Log(logStringBuilder.ToString());
+                    ReportEndOfCbdeExecution();
                     throw new CbdeException($"Error parsing output from CBDE: {exception.Message}{this.moreDetailsMessage}");
                 }
+                ReportEndOfCbdeExecution();
                 throw;
             }
         }
