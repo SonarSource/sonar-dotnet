@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CBDEArguments
 {
+    [ExcludeFromCodeCoverage]
     public class CbdeArguments
     {
         public class CbdeArgumentException : Exception

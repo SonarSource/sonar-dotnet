@@ -1,9 +1,11 @@
-﻿using System.IO;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Threading;
 using CBDEArguments;
 
 namespace CBDEWaitAndSucceed
 {
+    [ExcludeFromCodeCoverage]
     static class Program
     {
         static void Main(string[] args)

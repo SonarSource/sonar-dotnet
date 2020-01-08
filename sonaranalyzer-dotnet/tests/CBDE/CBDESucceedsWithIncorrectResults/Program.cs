@@ -1,8 +1,10 @@
-﻿using System.IO;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using CBDEArguments;
 
 namespace CBDESucceedsWithIncorrectResults
 {
+    [ExcludeFromCodeCoverage]
     static class Program
     {
         static void Main(string[] args)
