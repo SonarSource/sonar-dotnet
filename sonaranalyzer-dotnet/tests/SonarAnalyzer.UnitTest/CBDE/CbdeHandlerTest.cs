@@ -1,8 +1,4 @@
-﻿extern alias csharp;
-
-using System.IO;
-using System.Text.RegularExpressions;
-/*
+﻿/*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2019 SonarSource SA
 * mailto: contact AT sonarsource DOT com
@@ -22,8 +18,17 @@ using System.Text.RegularExpressions;
 * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+extern alias csharp;
+
+using System.Collections.Generic;
+using System.IO;
+using System.Text.RegularExpressions;
 using csharp::SonarAnalyzer.CBDE;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
+using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -43,8 +48,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("CBDE")]
         public void CbdeHandlerWait()
         {
-            bool cbdeExecuted = false;
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\CbdeHandlerDummy.cs",
+            var cbdeExecuted = false;
+            RunAnalysisWithoutVerification(@"TestCases\CbdeHandlerDummy.cs",
                 CS.CbdeHandlerRule.MakeUnitTestInstance(CbdeHandler.MockType.CBDEWaitAndSucceeds,
                 s =>
                 {
@@ -65,8 +70,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("CBDE")]
         public void CbdeHandlerExecutableNotFound()
         {
-            bool cbdeExecuted = false;
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\CbdeHandlerDummy.cs",
+            var cbdeExecuted = false;
+            RunAnalysisWithoutVerification(@"TestCases\CbdeHandlerDummy.cs",
                 CS.CbdeHandlerRule.MakeUnitTestInstance(CbdeHandler.MockType.NonExistingExecutable,
                 s =>
                 {
@@ -82,8 +87,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("CBDE")]
         public void CbdeHandlerFailed()
         {
-            bool cbdeExecuted = false;
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\CbdeHandlerDummy.cs",
+            var cbdeExecuted = false;
+            RunAnalysisWithoutVerification(@"TestCases\CbdeHandlerDummy.cs",
                 CS.CbdeHandlerRule.MakeUnitTestInstance(CbdeHandler.MockType.CBDEFails,
                 s =>
                 {
@@ -99,8 +104,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("CBDE")]
         public void CbdeHandlerIncorrectOutput()
         {
-            bool cbdeExecuted = false;
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\CbdeHandlerDummy.cs",
+            var cbdeExecuted = false;
+            RunAnalysisWithoutVerification(@"TestCases\CbdeHandlerDummy.cs",
                 CS.CbdeHandlerRule.MakeUnitTestInstance(CbdeHandler.MockType.CBDESucceedsWithIncorrectResults,
                 s =>
                 {
@@ -110,6 +115,19 @@ namespace SonarAnalyzer.UnitTest.Rules
                 }
                 ));
             Assert.IsTrue(cbdeExecuted);
-        }    }
+        }
 
+        private void RunAnalysisWithoutVerification(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
+            IEnumerable<MetadataReference> additionalReferences = null)
+        {
+            var compilation = SolutionBuilder.Create()
+                .AddTestProject(AnalyzerLanguage.FromPath(path))
+                .AddReferences(additionalReferences)
+                .AddDocument(path)
+                .GetCompilation();
+            DiagnosticVerifier.GetDiagnostics(compilation, diagnosticAnalyzer,
+                CompilationErrorBehavior.FailTest,
+                verifyNoExceptionIsThrown: false);
+        }
+    }
 }

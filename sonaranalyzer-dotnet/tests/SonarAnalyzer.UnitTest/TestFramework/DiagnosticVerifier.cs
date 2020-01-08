@@ -119,13 +119,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         }
 
         public static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation,
-            DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode)
+            DiagnosticAnalyzer diagnosticAnalyzer, CompilationErrorBehavior checkMode,
+            bool verifyNoExceptionIsThrown = true)
         {
             var ids = diagnosticAnalyzer.SupportedDiagnostics
                 .Select(diagnostic => diagnostic.Id)
                 .ToHashSet();
 
-            return GetAllDiagnostics(compilation, new[] { diagnosticAnalyzer }, checkMode)
+            return GetAllDiagnostics(compilation, new[] { diagnosticAnalyzer }, checkMode, verifyNoExceptionIsThrown)
                 .Where(d => ids.Contains(d.Id));
         }
 
@@ -137,6 +138,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public static ImmutableArray<Diagnostic> GetAllDiagnostics(Compilation compilation,
             IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers, CompilationErrorBehavior checkMode,
+            bool verifyNoException = true,
             CancellationToken? cancellationToken = null)
         {
             var compilationOptions = compilation.Language == LanguageNames.CSharp
@@ -164,7 +166,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             if (!actualToken.IsCancellationRequested)
             {
-                VerifyNoExceptionThrown(diagnostics);
+                if (verifyNoException)
+                {
+                    VerifyNoExceptionThrown(diagnostics);
+                }
                 if (checkMode == CompilationErrorBehavior.FailTest)
                 {
                     VerifyBuildErrors(diagnostics, compilation);

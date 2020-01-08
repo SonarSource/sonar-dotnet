@@ -167,7 +167,8 @@ namespace SonarAnalyzer.UnitTest.Performance
 
             try
             {
-                DiagnosticVerifier.GetAllDiagnostics(compilation, new[] { analyzer }, CompilationErrorBehavior.FailTest, cancellationSource.Token);
+                DiagnosticVerifier.GetAllDiagnostics(compilation, new[] { analyzer }, CompilationErrorBehavior.FailTest,
+                    cancellationToken: cancellationSource.Token);
             }
             catch(AggregateException ex)
             {
