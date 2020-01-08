@@ -111,11 +111,6 @@
         "resolved": "1.0.27",
         "contentHash": "pwu80Ohe7SBzZ6i69LVdzowp6V+LaVRzd5F7A6QlD42vQkX0oT7KXKWWPlM/S00w1gnMQMRnEdbtOV12z6rXdQ=="
       },
-      "Newtonsoft.Json": {
-        "type": "Transitive",
-        "resolved": "11.0.2",
-        "contentHash": "IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ=="
-      },
       "System.AppContext": {
         "type": "Transitive",
         "resolved": "4.1.0",
@@ -360,7 +355,6 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "1.3.2",
-          "Newtonsoft.Json": "11.0.2",
           "SonarAnalyzer": "1.0.0",
           "System.Collections.Immutable": "1.1.37",
           "System.Runtime.InteropServices.RuntimeInformation": "4.3.0"

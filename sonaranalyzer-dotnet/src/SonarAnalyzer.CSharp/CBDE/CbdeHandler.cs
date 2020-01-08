@@ -23,8 +23,6 @@ using System;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
 using System.IO;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -32,17 +30,19 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
+using System.Xml.Linq;
+using System.Xml;
 
 namespace SonarAnalyzer.CBDE
 {
     public class CbdeHandler
     {
         private const int processStatPeriodMs = 1000;
-        private const string cbdeJsonOutputFileName = "cbdeSEout.json";
+        private const string cbdeOutputFileName = "cbdeSEout.xml";
 
         private static bool initialized = false;
         // this is the place where the cbde executable is unpacked. It is in a temp folder
-        private static string cbdeBinaryPath;
+        private static string extractedCbdeBinaryPath;
         private static readonly object logFileLock = new Object();
         private static readonly object metricsFileLock = new Object();
         private static readonly object perfFileLock = new Object();
@@ -51,6 +51,9 @@ namespace SonarAnalyzer.CBDE
         private readonly Action<String, String, Location, CompilationAnalysisContext> raiseIssue;
         private readonly Func<CompilationAnalysisContext, bool> shouldRunInContext;
         private readonly Func<string> getOutputDirectory;
+        // This is used by unit tests that want to check the log (whose path is the parameter of this action) contains
+        // what is expected
+        private readonly Action<string> onCbdeExecution;
 
         protected HashSet<string> csSourceFileNames= new HashSet<string>();
         protected Dictionary<string, int> fileNameDuplicateNumbering = new Dictionary<string, int>();
@@ -62,23 +65,30 @@ namespace SonarAnalyzer.CBDE
         // cbdeProcessSpecificPath is the $"{cbdePath}/CBDE_{pid}/" folder
         // cbdeLogFile, cbdeMetricsLogFile and cbdePerfLogFile are inside cbdeProcessSpecificPath
         private string cbdePath;
+        // the cbdeExecutablePath is normally the extractedCbdeBinaryPath, but can be different in tests
+        private string cbdeExecutablePath;
         private string cbdeDirectoryRoot;
         private string cbdeDirectoryAssembly;
-        private string cbdeJsonOutputPath;
+        private string cbdeResultsPath;
         private string cbdeLogFile;
         private string cbdeMetricsLogFile;
         private string cbdePerfLogFile;
         private string moreDetailsMessage;
         private bool emitLog = false;
 
+        // Used for test only
+
         public CbdeHandler(SonarAnalysisContext context,
             Action<String, String, Location, CompilationAnalysisContext> raiseIssue,
             Func<CompilationAnalysisContext, bool> shouldRunInContext,
-            Func<string> getOutputDirectory)
+            Func<string> getOutputDirectory,
+            string testCbdeBinaryPath = null, //  Used by unit tests
+            Action<String> onCbdeExecution = null) // Used by unit tests
         {
             this.raiseIssue = raiseIssue;
             this.shouldRunInContext = shouldRunInContext;
             this.getOutputDirectory = getOutputDirectory;
+            this.onCbdeExecution = onCbdeExecution;
             lock (staticInitLock)
             {
                 if(!initialized)
@@ -87,14 +97,21 @@ namespace SonarAnalyzer.CBDE
                     initialized = true;
                 }
             }
-            Log("Before initialize");
-            var watch = Stopwatch.StartNew();
-            if (cbdeBinaryPath != null)
+            if (testCbdeBinaryPath == null)
+            {
+                emitLog = Environment.GetEnvironmentVariables().Contains("SONAR_DOTNET_INTERNAL_LOG_CBDE");
+                this.cbdeExecutablePath = extractedCbdeBinaryPath;
+            }
+            else
+            {
+                // we are in test mode
+                emitLog = true;
+                this.cbdeExecutablePath = testCbdeBinaryPath;
+            }
+            if (cbdeExecutablePath != null)
             {
                 RegisterMlirAndCbdeInOneStep(context);
             }
-            watch.Stop();
-            Log($"After initialize ({watch.ElapsedMilliseconds} ms)");
         }
 
         private void LogIfFailure(string s)
@@ -127,13 +144,13 @@ namespace SonarAnalyzer.CBDE
 
         private static void Initialize()
         {
-            cbdeBinaryPath = Path.Combine(Path.GetTempPath(), $"CBDE_{Process.GetCurrentProcess().Id}");
-            Directory.CreateDirectory(cbdeBinaryPath);
+            extractedCbdeBinaryPath = Path.Combine(Path.GetTempPath(), $"CBDE_{Process.GetCurrentProcess().Id}");
+            Directory.CreateDirectory(extractedCbdeBinaryPath);
             lock (logFileLock)
             {
-                if (File.Exists(cbdeBinaryPath))
+                if (File.Exists(extractedCbdeBinaryPath))
                 {
-                    File.Delete(cbdeBinaryPath);
+                    File.Delete(extractedCbdeBinaryPath);
                 }
             }
             UnpackCbdeExe();
@@ -143,10 +160,10 @@ namespace SonarAnalyzer.CBDE
         {
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             const string res = "SonarAnalyzer.CBDE.windows.dotnet-symbolic-execution.exe";
-            cbdeBinaryPath = Path.Combine(cbdeBinaryPath, "windows/dotnet-symbolic-execution.exe");
-            Directory.CreateDirectory(Path.GetDirectoryName(cbdeBinaryPath));
+            extractedCbdeBinaryPath = Path.Combine(extractedCbdeBinaryPath, "windows/dotnet-symbolic-execution.exe");
+            Directory.CreateDirectory(Path.GetDirectoryName(extractedCbdeBinaryPath));
             var stream = assembly.GetManifestResourceStream(res);
-            var fileStream = File.Create(cbdeBinaryPath);
+            var fileStream = File.Create(extractedCbdeBinaryPath);
             stream.Seek(0, SeekOrigin.Begin);
             stream.CopyTo(fileStream);
             fileStream.Close();
@@ -157,7 +174,6 @@ namespace SonarAnalyzer.CBDE
             context.RegisterCompilationAction(
                 c =>
                 {
-                    emitLog = Environment.GetEnvironmentVariables().Contains("SONAR_DOTNET_INTERNAL_LOG_CBDE");
                     if (!shouldRunInContext(c))
                     {
                         return;
@@ -196,11 +212,12 @@ namespace SonarAnalyzer.CBDE
                         Log("An exception has occured: " + e.Message + "\n" + e.StackTrace);
                         var message = $@"Top level error in CBDE handling: {e.Message}
 Details: {this.moreDetailsMessage}
+Inner exception: {e.InnerException}
 Stack trace: {e.StackTrace}";
                         // Roslyn/MSBuild is currently cutting exception message at the end of the line instead
                         // of displaying the full message. As a workaround, we replace the line ending with ' ## '.
                         // See https://github.com/dotnet/roslyn/issues/1455 and https://github.com/dotnet/roslyn/issues/24346
-                        throw new CbdeException(message.Replace(Environment.NewLine, " ## "));
+                        throw new CbdeException(message.Replace("\n", " ## ").Replace("\r", ""));
                     }
                 });
         }
@@ -227,7 +244,7 @@ Stack trace: {e.StackTrace}";
                 Directory.Delete(cbdeDirectoryAssembly, true);
             }
             Directory.CreateDirectory(cbdeDirectoryAssembly);
-            cbdeJsonOutputPath = Path.Combine(cbdeDirectoryAssembly, cbdeJsonOutputFileName);
+            cbdeResultsPath = Path.Combine(cbdeDirectoryAssembly, cbdeOutputFileName);
             logStringBuilder = new StringBuilder();
             LogIfFailure($">> New Cbde Run triggered at {DateTime.Now.ToShortTimeString()}");
         }
@@ -279,11 +296,11 @@ Stack trace: {e.StackTrace}";
             using (Process cbdeProcess = new Process())
             {
                 LogIfFailure("- Cbde process");
-                cbdeProcess.StartInfo.FileName = cbdeBinaryPath;
+                cbdeProcess.StartInfo.FileName = cbdeExecutablePath;
                 cbdeProcess.StartInfo.WorkingDirectory = cbdeDirectoryAssembly;
                 var cbdeExePerfLogFile = Path.Combine(cbdeDirectoryAssembly, "perfLogFile.log");
 
-                cbdeProcess.StartInfo.Arguments = $"-i \"{cbdeDirectoryAssembly}\" -o \"{cbdeJsonOutputPath}\" -s \"{cbdeExePerfLogFile}\"";
+                cbdeProcess.StartInfo.Arguments = $"-i \"{cbdeDirectoryAssembly}\" -o \"{cbdeResultsPath}\" -s \"{cbdeExePerfLogFile}\"";
 
                 LogIfFailure($"  * binary_location: '{cbdeProcess.StartInfo.FileName}'");
                 LogIfFailure($"  * arguments: '{cbdeProcess.StartInfo.Arguments}'");
@@ -313,6 +330,8 @@ Stack trace: {e.StackTrace}";
                 }
                 catch (Exception e)
                 {
+                    Log("Running CBDE: Cannot start process");
+                    ReportEndOfCbdeExecution();
                     throw new CbdeException($"Exception while running CBDE process: {e.Message}{this.moreDetailsMessage}");
                 }
 
@@ -327,16 +346,24 @@ Stack trace: {e.StackTrace}";
                 if (cbdeProcess.ExitCode == 0)
                 {
                     Log("Running CBDE: Success");
-                    RaiseIssuesFromJSon(c);
+                    RaiseIssuesFromResultFile(c);
                     Cleanup();
                     Log("Running CBDE: Issues reported");
                 }
                 else
                 {
                     Log("Running CBDE: Failure");
-                    LogFailedCbdeRun(cbdeProcess);
-                    Log("Running CBDE: Error dumped");
+                    LogFailedCbdeRunAndThrow(cbdeProcess);
                 }
+            }
+            ReportEndOfCbdeExecution();
+        }
+
+        private void ReportEndOfCbdeExecution()
+        {
+            if (onCbdeExecution != null)
+            {
+                onCbdeExecution(cbdeLogFile);
             }
         }
 
@@ -345,14 +372,13 @@ Stack trace: {e.StackTrace}";
             logStringBuilder.Clear();
         }
 
-        private void RaiseIssueFromJToken(JToken token, CompilationAnalysisContext context)
+        private void RaiseIssueFromXElement(XElement issue, CompilationAnalysisContext context)
         {
-            var key = token["key"].ToString();
-            var message = token["message"].ToString();
-            var location = token["location"];
-            var line = Convert.ToInt32(location["l"]);
-            var col = Convert.ToInt32(location["c"]);
-            var file = location["f"].ToString();
+            var key = issue.Attribute("key").Value;
+            var message = issue.Attribute("message").Value;
+            var line = int.Parse(issue.Attribute("l").Value);
+            var col = int.Parse(issue.Attribute("c").Value);
+            var file = issue.Attribute("f").Value;
 
             var begin = new LinePosition(line, col);
             var end = new LinePosition(line, col + 1);
@@ -361,7 +387,7 @@ Stack trace: {e.StackTrace}";
             raiseIssue(key, message, loc, context);
         }
 
-        private void LogFailedCbdeRun(Process pProcess)
+        private void LogFailedCbdeRunAndThrow(Process pProcess)
         {
             StringBuilder failureString = new StringBuilder("CBDE Failure Report :\n  C# souces files involved are:\n");
             foreach (var fileName in csSourceFileNames)
@@ -369,53 +395,36 @@ Stack trace: {e.StackTrace}";
                 failureString.Append("  - " + fileName + "\n");
             }
             // we dispose the StreamWriter to unlock the log file
-            LogIfFailure($"- parsing json file {cbdeJsonOutputPath}");
+            LogIfFailure($"- parsing json file {cbdeResultsPath}");
             failureString.Append("  content of stderr is:\n" + pProcess.StandardError.ReadToEnd());
             failureString.Append("  content of the CBDE handler log file is :\n" + logStringBuilder.ToString());
             Log(failureString.ToString());
+            ReportEndOfCbdeExecution();
             throw new CbdeException($"CBDE external process reported an error{this.moreDetailsMessage}");
         }
 
-        private void RaiseIssuesFromJSon(CompilationAnalysisContext context)
+        private void RaiseIssuesFromResultFile(CompilationAnalysisContext context)
         {
-            string jsonFileContent;
-            List<List<JObject>> jsonIssues;
-            LogIfFailure($"- parsing json file {cbdeJsonOutputPath}");
+            LogIfFailure($"- parsing file {cbdeResultsPath}");
             try
             {
-                jsonFileContent = File.ReadAllText(cbdeJsonOutputPath);
-                jsonIssues = JsonConvert.DeserializeObject<List<List<JObject>>>(jsonFileContent);
+                var document = XDocument.Load(cbdeResultsPath);
+                foreach (var i in document.Descendants("Issue"))
+                {
+                    RaiseIssueFromXElement(i, context);
+                }
             }
             catch(Exception exception)
             {
-                if (exception is JsonException || exception is IOException)
+                if (exception is XmlException || exception is NullReferenceException)
                 {
-                    LogIfFailure($"- error parsing json file {cbdeJsonOutputPath}: {exception.ToString()}");
+                    LogIfFailure($"- error parsing result file {cbdeResultsPath}: {exception.ToString()}");
                     Log(logStringBuilder.ToString());
+                    ReportEndOfCbdeExecution();
                     throw new CbdeException($"Error parsing output from CBDE: {exception.Message}{this.moreDetailsMessage}");
                 }
+                ReportEndOfCbdeExecution();
                 throw;
-            }
-
-            // in cbde json output there is enclosing {}, so this is considered as a list of list
-            // with one element in the outer list
-            foreach (var issue in jsonIssues.First())
-            {
-                LogIfFailure($"  * processing token {issue.ToString()}");
-                try
-                {
-                    RaiseIssueFromJToken(issue, context);
-                }
-                catch(Exception e)
-                {
-                    if (e is SystemException || e is JsonException)
-                    {
-                        LogIfFailure($"  * error reporting token {cbdeJsonOutputPath}: {e.ToString()}");
-                        Log(logStringBuilder.ToString());
-                        throw new CbdeException($"Error raising issue from CBDE: {e.Message}{this.moreDetailsMessage}");
-                    }
-                    throw;
-                }
             }
         }
 
@@ -427,11 +436,11 @@ Stack trace: {e.StackTrace}";
 
             public void Reset()
             {
-                totalMsStart = currentProcessThread.TotalProcessorTime.TotalMilliseconds;
+                totalMsStart = currentProcessThread?.TotalProcessorTime.TotalMilliseconds ?? 0;
             }
 
             public long ElapsedMilliseconds =>
-                (long)(currentProcessThread.TotalProcessorTime.TotalMilliseconds - totalMsStart);
+                (long)((currentProcessThread?.TotalProcessorTime.TotalMilliseconds ?? -1) - totalMsStart);
 
             private static ProcessThread GetCurrentProcessThread()
             {

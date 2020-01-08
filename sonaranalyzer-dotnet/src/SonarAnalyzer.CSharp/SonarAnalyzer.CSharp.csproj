@@ -29,11 +29,7 @@
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
   </ItemGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-  </ItemGroup>
-  
+
   <ItemGroup>
     <EmbeddedResource Include="CBDE/windows/dotnet-symbolic-execution.exe" />
   </ItemGroup>

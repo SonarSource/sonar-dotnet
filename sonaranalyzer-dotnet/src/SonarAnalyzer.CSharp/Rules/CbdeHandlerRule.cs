@@ -46,29 +46,34 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string S3949MessageFormat = "{0}";
         private static readonly DiagnosticDescriptor ruleS3949 = DiagnosticDescriptorBuilder.GetDescriptor(S3949DiagnosticId, S3949MessageFormat, RspecStrings.ResourceManager, fadeOutCode: true);
         private static string WorkDirectoryBasePath;
+        private readonly Action<string> onCbdeExecution;
+        private readonly string testCbdeBinaryPath;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(ruleS3949);
 
         private readonly ImmutableDictionary<string, DiagnosticDescriptor> ruleIdToDiagDescriptor = ImmutableDictionary<string, DiagnosticDescriptor>.Empty
             .Add("S3949", ruleS3949);
 
-        public CbdeHandlerRule() : this(false) {}
+        public CbdeHandlerRule() : this(false, null, null) {}
 
-        private CbdeHandlerRule(bool unitTest)
+        private CbdeHandlerRule(bool unitTest, string testCbdeBinaryPath, Action<string> onCbdeExecution)
         {
             this.unitTest = unitTest;
+            this.testCbdeBinaryPath = testCbdeBinaryPath;
+            this.onCbdeExecution = onCbdeExecution;
         }
 
-        internal static CbdeHandlerRule MakeUnitTestInstance()
+        internal static CbdeHandlerRule MakeUnitTestInstance(string testCbdeBinaryPath, Action<string> onCbdeExecution)
         {
-            return new CbdeHandlerRule(true);
+            return new CbdeHandlerRule(true, testCbdeBinaryPath, onCbdeExecution);
         }
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                new CbdeHandler(context, OnCbdeIssue, ShouldRunCbdeInContext, () => { return WorkDirectoryBasePath; });
+                new CbdeHandler(context, OnCbdeIssue, ShouldRunCbdeInContext, () => { return WorkDirectoryBasePath; },
+                    testCbdeBinaryPath, onCbdeExecution);
             }
         }
 
