@@ -12,6 +12,12 @@
           "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2]"
         }
       },
+      "Newtonsoft.Json": {
+        "type": "Direct",
+        "requested": "[11.0.2, )",
+        "resolved": "11.0.2",
+        "contentHash": "IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ=="
+      },
       "System.Collections.Immutable": {
         "type": "Direct",
         "requested": "[1.1.37, )",
