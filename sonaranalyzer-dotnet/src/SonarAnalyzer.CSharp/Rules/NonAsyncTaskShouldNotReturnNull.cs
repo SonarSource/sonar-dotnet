@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
             new HashSet<SyntaxKind>
             {
                 SyntaxKind.ArrowExpressionClause,
-                SyntaxKind.ReturnStatement,
+                SyntaxKind.ReturnStatement
             };
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -85,10 +85,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     case SyntaxKind.PropertyDeclaration:
                     case SyntaxKind.MethodDeclaration:
                         return ancestor;
-
-                    default:
-                        // do nothing
-                        break;
                 }
             }
 
