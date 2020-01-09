@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 HaveSameParameters(firstMethod.ParameterList?.Parameters, secondMethod.ParameterList?.Parameters) &&
                 firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
 
-            bool HaveSameParameters(SeparatedSyntaxList<ParameterSyntax>? leftParameters, SeparatedSyntaxList<ParameterSyntax>? rightParameters)
+            static bool HaveSameParameters(SeparatedSyntaxList<ParameterSyntax>? leftParameters, SeparatedSyntaxList<ParameterSyntax>? rightParameters)
             {
                 if ((leftParameters == null && rightParameters != null) ||
                     (leftParameters != null && rightParameters == null) ||
