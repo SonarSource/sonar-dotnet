@@ -27,13 +27,14 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.Wrappers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
     public sealed class MethodsShouldNotHaveIdenticalImplementations
-        : MethodsShouldNotHaveIdenticalImplementationsBase<MethodDeclarationSyntax, SyntaxKind>
+        : MethodsShouldNotHaveIdenticalImplementationsBase<IMethodDeclaration, SyntaxKind>
     {
         private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
@@ -41,13 +42,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxKind ClassDeclarationSyntaxKind => SyntaxKind.ClassDeclaration;
 
-        protected override IEnumerable<MethodDeclarationSyntax> GetMethodDeclarations(SyntaxNode node)
-        {
-            var classDeclaration = (ClassDeclarationSyntax)node;
-            return classDeclaration.Members.OfType<MethodDeclarationSyntax>().ToList();
-        }
+        protected override IEnumerable<IMethodDeclaration> GetMethodDeclarations(SyntaxNode node)
+            => ((ClassDeclarationSyntax)node).GetMethodDeclarations();
 
-        protected override bool AreDuplicates(MethodDeclarationSyntax firstMethod, MethodDeclarationSyntax secondMethod)
+        protected override bool AreDuplicates(IMethodDeclaration firstMethod, IMethodDeclaration secondMethod)
         {
             return firstMethod.Body != null &&
                 secondMethod.Body != null &&
@@ -58,18 +56,24 @@ namespace SonarAnalyzer.Rules.CSharp
 
             static bool HaveSameParameters(SeparatedSyntaxList<ParameterSyntax>? leftParameters, SeparatedSyntaxList<ParameterSyntax>? rightParameters)
             {
-                if (leftParameters == null && rightParameters != null ||
-                    leftParameters != null && rightParameters == null ||
+                if (leftParameters == null && rightParameters == null)
+                {
+                    return true;
+                }
+
+                if (leftParameters == null ||
+                    rightParameters == null ||
                     leftParameters.Value.Count != rightParameters.Value.Count)
                 {
                     return false;
                 }
 
-                return leftParameters.Value.Zip(rightParameters.Value, (p1, p2) => new { p1, p2 })
+                return leftParameters.Value
+                    .Zip(rightParameters.Value, (p1, p2) => new { p1, p2 })
                     .All(tuple => tuple.p1.IsEquivalentTo(tuple.p2, false));
             }
         }
 
-        protected override SyntaxToken GetMethodIdentifier(MethodDeclarationSyntax method) => method.Identifier;
+        protected override SyntaxToken GetMethodIdentifier(IMethodDeclaration method) => method.Identifier;
     }
 }

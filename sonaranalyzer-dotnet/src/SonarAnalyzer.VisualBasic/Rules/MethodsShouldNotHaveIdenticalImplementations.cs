@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override IEnumerable<MethodBlockSyntax> GetMethodDeclarations(SyntaxNode node)
         {
             var classDeclaration = (ClassBlockSyntax)node;
-            return classDeclaration.Members.OfType<MethodBlockSyntax>().ToList();
+            return classDeclaration.Members.OfType<MethodBlockSyntax>();
         }
 
         protected override bool AreDuplicates(MethodBlockSyntax firstMethod, MethodBlockSyntax secondMethod)
