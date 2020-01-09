@@ -78,12 +78,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 switch (ancestor.Kind())
                 {
                     case SyntaxKind.ParenthesizedLambdaExpression:
-                    case SyntaxKindEx.LocalFunctionStatement:
                         return null;
 
                     case SyntaxKind.VariableDeclaration:
                     case SyntaxKind.PropertyDeclaration:
                     case SyntaxKind.MethodDeclaration:
+                    case SyntaxKindEx.LocalFunctionStatement:
                         return ancestor;
                 }
             }
