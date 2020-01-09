@@ -38,11 +38,6 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
             });
         }
 
-        public bool Equals(EqualsRelationship other)
-        {
-            return other != null && AreOperandsMatching(other);
-        }
-
         public sealed override int GetHashCode() => this.hash.Value;
 
         public sealed override bool Equals(object obj)
@@ -53,6 +48,11 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
             }
 
             return Equals(obj as EqualsRelationship);
+        }
+
+        public bool Equals(EqualsRelationship other)
+        {
+            return other != null && AreOperandsMatching(other);
         }
 
         internal static int GetHashCodeMinMaxOrdered(int leftHash, int rightHash, int typeHash)
