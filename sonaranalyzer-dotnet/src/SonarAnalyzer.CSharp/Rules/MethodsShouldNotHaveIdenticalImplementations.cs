@@ -70,9 +70,6 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        protected override SyntaxToken GetMethodIdentifier(MethodDeclarationSyntax method)
-        {
-            return method.Identifier;
-        }
+        protected override SyntaxToken GetMethodIdentifier(MethodDeclarationSyntax method) => method.Identifier;
     }
 }
