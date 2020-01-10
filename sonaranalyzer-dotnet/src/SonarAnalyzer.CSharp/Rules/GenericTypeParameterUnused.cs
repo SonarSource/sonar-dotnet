@@ -50,27 +50,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 analysisContext.RegisterSyntaxNodeAction(
                     c =>
                     {
-                        var methodDeclaration = c.Node as MethodDeclarationSyntax;
-                        var classDeclaration = c.Node as ClassDeclarationSyntax;
-                        var localFunctionDeclaration = LocalFunctionStatementSyntaxWrapper.IsInstance(c.Node) ? (LocalFunctionStatementSyntaxWrapper) c.Node : default;
-
-                        if (methodDeclaration != null &&
-                            !IsMethodCandidate(methodDeclaration, c.SemanticModel))
-                        {
-                            return;
-                        }
-
                         var declarationSymbol = c.SemanticModel.GetDeclaredSymbol(c.Node);
                         if (declarationSymbol == null)
                         {
                             return;
                         }
 
-                        // For local methods the only valid modifiers are async, static and unsafe
-                        // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/local-functions#local-function-syntax
-
-                        var helper = GetTypeParameterHelper(methodDeclaration, classDeclaration, localFunctionDeclaration);
-                        if (helper.TypeParameterList == null || helper.TypeParameterList.Parameters.Count == 0)
+                        var helper = GetTypeParameterHelper(c.Node, c.SemanticModel);
+                        if (helper?.TypeParameterList == null || helper.TypeParameterList.Parameters.Count == 0)
                         {
                             return;
                         }
@@ -96,33 +83,32 @@ namespace SonarAnalyzer.Rules.CSharp
             });
         }
 
-        private static TypeParameterHelper GetTypeParameterHelper(MethodDeclarationSyntax methodDeclaration,
-            ClassDeclarationSyntax classDeclaration, LocalFunctionStatementSyntaxWrapper wrapper)
-        {
-            if (classDeclaration != null)
+        private static TypeParameterHelper GetTypeParameterHelper(SyntaxNode node, SemanticModel semanticModel) =>
+            node switch
             {
-                return new TypeParameterHelper
-                {
-                    TypeParameterList = classDeclaration.TypeParameterList,
-                    ContainerSyntaxTypeName = "class"
-                };
-            }
+                ClassDeclarationSyntax classDeclaration
+                    => new TypeParameterHelper
+                        {
+                            TypeParameterList = classDeclaration.TypeParameterList,
+                            ContainerSyntaxTypeName = "class"
+                        },
 
-            if (methodDeclaration != null)
-            {
-                return new TypeParameterHelper
-                {
-                    TypeParameterList = methodDeclaration.TypeParameterList,
-                    ContainerSyntaxTypeName = "method"
-                };
-            }
+                MethodDeclarationSyntax methodDeclaration when IsMethodCandidate(methodDeclaration, semanticModel)
+                    => new TypeParameterHelper
+                        {
+                            TypeParameterList = methodDeclaration.TypeParameterList,
+                            ContainerSyntaxTypeName = "method"
+                        },
 
-            return new TypeParameterHelper
-            {
-                TypeParameterList = wrapper.TypeParameterList,
-                ContainerSyntaxTypeName = "local function"
+                var wrapper when LocalFunctionStatementSyntaxWrapper.IsInstance(wrapper)
+                    => new TypeParameterHelper
+                        {
+                            TypeParameterList = ((LocalFunctionStatementSyntaxWrapper)node).TypeParameterList,
+                            ContainerSyntaxTypeName = "local function"
+                        },
+
+                _ => null
             };
-        }
 
         private class TypeParameterHelper
         {

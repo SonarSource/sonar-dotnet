@@ -123,6 +123,9 @@ namespace Tests.Diagnostics
     {
         public void Method()
         {
+            // For local methods the only valid modifiers are async, static and unsafe
+            // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/local-functions#local-function-syntax
+
             void LocalFunctionNoTypeParameter() { }
 
             void LocalFunctionUnusedParameter<T>() { } // Noncompliant
