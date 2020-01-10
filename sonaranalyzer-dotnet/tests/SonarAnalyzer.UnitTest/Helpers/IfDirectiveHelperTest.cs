@@ -1,8 +1,4 @@
-﻿#define BLOCK1
-#define BLOCK2
-#define BLOCK3
-
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2019 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -21,6 +17,10 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
+
+#define BLOCK1
+#define BLOCK2
+#define BLOCK3
 
 using System.Linq;
 using FluentAssertions;
