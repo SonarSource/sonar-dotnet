@@ -722,7 +722,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        public static IEnumerable<string> LoopWithYeildBreak(IEnumerable<string> list)
+        public static IEnumerable<string> LoopWithYieldBreak(IEnumerable<string> list)
         {
             foreach (string x in list)
             {

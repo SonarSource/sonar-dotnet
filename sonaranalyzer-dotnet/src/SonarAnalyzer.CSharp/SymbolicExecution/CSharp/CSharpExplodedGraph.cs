@@ -97,12 +97,6 @@ namespace SonarAnalyzer.SymbolicExecution
                 return;
             }
 
-            if (block is JumpBlock jumpBlock &&
-                jumpBlock.JumpNode.IsKind(SyntaxKind.YieldReturnStatement))
-            {
-                newProgramState = newProgramState.RemoveSymbols(IsFieldSymbol);
-            }
-
             base.VisitSimpleBlock(block, node);
         }
 
@@ -532,7 +526,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     break;
 
                 case SyntaxKindEx.DeclarationExpression:
-                    // e.g.: dictionary.TryGetValue(key, out TValue value);
+                    // https://github.com/SonarSource/sonar-dotnet/issues/2936
                     // Do nothing
                     break;
 

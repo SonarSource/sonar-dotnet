@@ -402,19 +402,6 @@ namespace SonarAnalyzer.SymbolicExecution
                 : programState;
         }
 
-        protected static ProgramState SetNonNullConstraintIfValueType(ITypeSymbol typeSymbol,
-            SymbolicValue symbolicValue, ProgramState programState)
-        {
-            var isDefinitelyNotNull = !programState.HasConstraint(symbolicValue, ObjectConstraint.NotNull) &&
-                IsNonNullableValueType(typeSymbol) &&
-                !IsValueTypeWithOverloadedNullCompatibleOpEquals(typeSymbol) &&
-                !IsPointer(typeSymbol);
-
-            return isDefinitelyNotNull
-                ? programState.SetConstraint(symbolicValue, ObjectConstraint.NotNull)
-                : programState;
-        }
-
         private static bool IsPointer(ITypeSymbol typeSymbol)
         {
             return typeSymbol?.TypeKind == TypeKind.Pointer;
@@ -442,6 +429,19 @@ namespace SonarAnalyzer.SymbolicExecution
 
             return !type.IsValueType ||
                 type.OriginalDefinition.Is(KnownType.System_Nullable_T);
+        }
+
+        protected static ProgramState SetNonNullConstraintIfValueType(ITypeSymbol typeSymbol,
+            SymbolicValue symbolicValue, ProgramState programState)
+        {
+            var isDefinitelyNotNull = !programState.HasConstraint(symbolicValue, ObjectConstraint.NotNull) &&
+                IsNonNullableValueType(typeSymbol) &&
+                !IsValueTypeWithOverloadedNullCompatibleOpEquals(typeSymbol) &&
+                !IsPointer(typeSymbol);
+
+            return isDefinitelyNotNull
+                ? programState.SetConstraint(symbolicValue, ObjectConstraint.NotNull)
+                : programState;
         }
 
         protected static ProgramState SetNonNullConstraintIfValueType(ISymbol symbol, SymbolicValue symbolicValue, ProgramState programState)
