@@ -80,24 +80,9 @@
     <!-- Release: enable publication to Bintray -->
     <artifactsToPublish>${project.groupId}:sonar-csharp-plugin:jar,${project.groupId}:sonar-vbnet-plugin:jar</artifactsToPublish>
     <artifactsToDownload>${project.groupId}:SonarAnalyzer.CSharp:nupkg,${project.groupId}:SonarAnalyzer.VisualBasic:nupkg</artifactsToDownload>
-    <sonar.jacoco.reportPaths>../target/jacoco.exec</sonar.jacoco.reportPaths>
     <!-- We are ignoring java doc warnings - this is because we are using JDK 11. Ideally we should not do that. -->
     <doclint>none</doclint>
   </properties>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.4</version>
-        <configuration>
-          <append>true</append>
-          <destFile>../target/jacoco.exec</destFile>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 
   <profiles>
     <profile>
