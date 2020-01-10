@@ -364,7 +364,7 @@ stages:
       - task: Maven@3
         displayName: 'Run Maven verify, UTs with SonarCloud'
         inputs:
-          goals: 'verify'
+          goals: 'verify sonar:sonar'
           options: -B --settings $(mavenSettings.secureFilePath) -Pcoverage -Dsonar.projectVersion=$(SONAR_PROJECT_VERSION)
           publishJUnitResults: true
           testResultsFiles: '**/surefire-reports/TEST-*.xml'
