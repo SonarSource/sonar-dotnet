@@ -25,14 +25,6 @@ namespace SonarAnalyzer.CFG.Helpers
 {
     internal static class SemanticModelHelper
     {
-        public static SemanticModel GetSyntaxTreeSemanticModel(this SemanticModel model, SyntaxNode node)
-        {
-            // See https://github.com/dotnet/roslyn/issues/18730
-            return model.SyntaxTree == node.SyntaxTree
-                ? model
-                : model.Compilation.GetSemanticModel(node.SyntaxTree);
-        }
-
         /// <summary>
         /// Starting .NET Framework 4.6.1, we've noticed that LINQ methods aren't resolved properly, so we need to use the CandidateSymbol.
         /// </summary>

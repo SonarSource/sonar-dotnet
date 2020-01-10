@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -27,15 +26,6 @@ namespace SonarAnalyzer.CFG.Helpers
 {
     internal static class CSharpSyntaxHelper
     {
-        public static readonly ExpressionSyntax NullLiteralExpression =
-            SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression);
-
-        public static readonly ExpressionSyntax FalseLiteralExpression =
-            SyntaxFactory.LiteralExpression(SyntaxKind.FalseLiteralExpression);
-
-        public static readonly ExpressionSyntax TrueLiteralExpression =
-            SyntaxFactory.LiteralExpression(SyntaxKind.TrueLiteralExpression);
-
         public static readonly string NameOfKeywordText =
             SyntaxFacts.GetText(SyntaxKind.NameOfKeyword);
 
@@ -53,21 +43,6 @@ namespace SonarAnalyzer.CFG.Helpers
 
         public static ExpressionSyntax RemoveParentheses(this ExpressionSyntax expression) =>
             (ExpressionSyntax)RemoveParentheses((SyntaxNode)expression);
-
-        public static SyntaxNode GetSelfOrTopParenthesizedExpression(this SyntaxNode node)
-        {
-            var current = node;
-            var parent = current.Parent as ParenthesizedExpressionSyntax;
-            while (parent != null)
-            {
-                current = parent;
-                parent = current.Parent as ParenthesizedExpressionSyntax;
-            }
-            return current;
-        }
-
-        public static SyntaxNode GetFirstNonParenthesizedParent(this SyntaxNode node) =>
-            node.GetSelfOrTopParenthesizedExpression().Parent;
 
         private static bool IsOn(this ExpressionSyntax expression, SyntaxKind onKind)
         {
@@ -110,9 +85,6 @@ namespace SonarAnalyzer.CFG.Helpers
                 (nameofIdentifier.Value.ToString() == NameOfKeywordText);
         }
 
-        public static bool IsAnyKind(this SyntaxNode syntaxNode, ImmutableArray<SyntaxKind> syntaxKinds) =>
-            syntaxNode != null && syntaxKinds.Contains((SyntaxKind)syntaxNode.RawKind);
-
         public static bool IsCatchingAllExceptions(this CatchClauseSyntax catchClause)
         {
             if (catchClause.Declaration == null)
@@ -125,8 +97,5 @@ namespace SonarAnalyzer.CFG.Helpers
             return catchClause.Filter == null &&
                 (exceptionTypeName == "Exception" || exceptionTypeName == "System.Exception");
         }
-
-        public static bool IsNamed(this ArgumentSyntax argumentSyntax) =>
-            argumentSyntax.NameColon != null;
     }
 }
