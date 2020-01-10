@@ -39,4 +39,9 @@
     <Rspec2Resx>vbnet</Rspec2Resx>
   </PropertyGroup>
 
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\.sonarlint\SonarLint.xml">
+      <Link>Properties\SonarLint.xml</Link>
+    </AdditionalFiles>
+  </ItemGroup>
 </Project>
