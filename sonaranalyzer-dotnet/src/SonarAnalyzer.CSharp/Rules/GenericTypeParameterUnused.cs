@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -34,9 +35,8 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class GenericTypeParameterUnused : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2326";
+        private const string DiagnosticId = "S2326";
         private const string MessageFormat = "'{0}' is not used in the {1}.";
-
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -52,6 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var methodDeclaration = c.Node as MethodDeclarationSyntax;
                         var classDeclaration = c.Node as ClassDeclarationSyntax;
+                        var localFunctionDeclaration = LocalFunctionStatementSyntaxWrapper.IsInstance(c.Node) ? (LocalFunctionStatementSyntaxWrapper) c.Node : default;
 
                         if (methodDeclaration != null &&
                             !IsMethodCandidate(methodDeclaration, c.SemanticModel))
@@ -65,7 +66,10 @@ namespace SonarAnalyzer.Rules.CSharp
                             return;
                         }
 
-                        var helper = GetTypeParameterHelper(methodDeclaration, classDeclaration);
+                        // For local methods the only valid modifiers are async, static and unsafe
+                        // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/local-functions#local-function-syntax
+
+                        var helper = GetTypeParameterHelper(methodDeclaration, classDeclaration, localFunctionDeclaration);
                         if (helper.TypeParameterList == null || helper.TypeParameterList.Parameters.Count == 0)
                         {
                             return;
@@ -87,23 +91,37 @@ namespace SonarAnalyzer.Rules.CSharp
                         }
                     },
                     SyntaxKind.MethodDeclaration,
-                    SyntaxKind.ClassDeclaration);
+                    SyntaxKind.ClassDeclaration,
+                    SyntaxKindEx.LocalFunctionStatement);
             });
         }
 
-        private static TypeParameterHelper GetTypeParameterHelper(MethodDeclarationSyntax methodDeclaration, ClassDeclarationSyntax classDeclaration)
+        private static TypeParameterHelper GetTypeParameterHelper(MethodDeclarationSyntax methodDeclaration,
+            ClassDeclarationSyntax classDeclaration, LocalFunctionStatementSyntaxWrapper wrapper)
         {
-            return classDeclaration == null
-                ? new TypeParameterHelper
-                {
-                    TypeParameterList = methodDeclaration.TypeParameterList,
-                    ContainerSyntaxTypeName = "method"
-                }
-                : new TypeParameterHelper
+            if (classDeclaration != null)
+            {
+                return new TypeParameterHelper
                 {
                     TypeParameterList = classDeclaration.TypeParameterList,
                     ContainerSyntaxTypeName = "class"
                 };
+            }
+
+            if (methodDeclaration != null)
+            {
+                return new TypeParameterHelper
+                {
+                    TypeParameterList = methodDeclaration.TypeParameterList,
+                    ContainerSyntaxTypeName = "method"
+                };
+            }
+
+            return new TypeParameterHelper
+            {
+                TypeParameterList = wrapper.TypeParameterList,
+                ContainerSyntaxTypeName = "local function"
+            };
         }
 
         private class TypeParameterHelper
