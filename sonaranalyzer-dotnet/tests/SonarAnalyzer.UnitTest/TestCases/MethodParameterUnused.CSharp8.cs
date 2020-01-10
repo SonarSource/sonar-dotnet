@@ -47,6 +47,25 @@
 
             return LocalFunction(a, 42) + BadIncA(a, 42) + BadIncB(a, 42) + BadIncRecursive(a, 42);
         }
+
+        public void Method()
+        {
+            void WithMultipleParameters(int a,
+                                        int b, // Noncompliant
+                                        int c,
+                                        int d) // Noncompliant
+            {
+                var result = a + c;
+            }
+
+            static void WithMultipleParametersStatic(int a,
+                                                     int b, // Noncompliant
+                                                     int c,
+                                                     int d) // Noncompliant
+            {
+                var result = a + c;
+            }
+        }
     }
 
     public class SwitchExpressions
