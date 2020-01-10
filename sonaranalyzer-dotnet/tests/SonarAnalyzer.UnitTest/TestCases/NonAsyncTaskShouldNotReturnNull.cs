@@ -146,10 +146,10 @@ namespace Tests.Diagnostics
 
             static Task<object> Add(int left, int right)
             {
-                return null; // Compliant - FN: static local functions are not triggering the warning
+                return null; // Noncompliant
             }
 
-            static Task<object> GetTaskAsync2() => null; // Compliant - FN: static local functions are not triggering the warning
+            static Task<object> GetTaskAsync2() => null; // Noncompliant
         }
     }
 }
