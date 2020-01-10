@@ -126,7 +126,7 @@ function Invoke-MSBuild (
 function Invoke-UnitTests([string]$binPath, [bool]$failsIfNotTest) {
     Write-Header "Running unit tests"
 
-    $escapedPath = (Join-Path $binPath "net46") -Replace '\\', '\\'
+    $escapedPath = (Join-Path $binPath "net48") -Replace '\\', '\\'
 
     Write-Debug "Running unit tests for"
     $testFiles = @()
