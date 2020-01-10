@@ -26,7 +26,6 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.UnitTest.TestFramework;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace SonarAnalyzer.UnitTest
@@ -37,16 +36,11 @@ namespace SonarAnalyzer.UnitTest
             params MetadataReference[] additionalReferences)
         {
             var language = isCSharp ? AnalyzerLanguage.CSharp : AnalyzerLanguage.VisualBasic;
-            var ext = isCSharp ? ".cs" : ".vb";
 
             var compilation = SolutionBuilder
                 .Create()
                 .AddProject(language, createExtraEmptyFile: false)
                 .AddSnippet(classDeclaration)
-                .AddDocument(Path.Combine("TestCases", "Helpers", "Microsoft_AspNetCore_Mvc_ControllerAttribute" + ext))
-                .AddDocument(Path.Combine("TestCases", "Helpers", "Microsoft_AspNetCore_Mvc_ControllerBase" + ext))
-                .AddDocument(Path.Combine("TestCases", "Helpers", "Microsoft_AspNetCore_Mvc_NonControllerAttribute" + ext))
-                .AddDocument(Path.Combine("TestCases", "Helpers", "System_Web_MVC_Controller" + ext))
                 .AddReferences(additionalReferences)
                 .GetCompilation();
             var tree = compilation.SyntaxTrees.First();
@@ -74,6 +68,7 @@ namespace SonarAnalyzer.UnitTest
                 .Where(m => m.Identifier.ValueText == name)
                 .Skip(skip)
                 .First();
+
         public static (PropertyDeclarationSyntax, SemanticModel) GetProperty(this (SyntaxTree, SemanticModel) tuple, string name)
         {
             var (syntaxTree, semanticModel) = tuple;
