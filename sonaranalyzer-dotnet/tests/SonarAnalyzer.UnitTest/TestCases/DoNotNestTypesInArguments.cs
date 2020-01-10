@@ -57,9 +57,9 @@ namespace MyLibrary
     {
         public void Method()
         {
-            void DoSomething(ICollection<ICollection<int>> outerCollect) { } // Compliant - FN
+            void DoSomething(ICollection<ICollection<int>> outerCollect) { } // Noncompliant
 
-            static void DoSomethingElse(ICollection<ICollection<int>> outerCollect) { } // Compliant - FN
+            static void DoSomethingElse(ICollection<ICollection<int>> outerCollect) { } // Noncompliant
         }
     }
 }

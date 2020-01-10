@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -26,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -33,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class DoNotNestTypesInArguments : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S4017";
+        private const string DiagnosticId = "S4017";
         private const string MessageFormat = "Refactor this method to remove the nested type argument.";
 
         private static readonly DiagnosticDescriptor rule =
@@ -45,25 +47,28 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
             c =>
             {
-                var methodDeclaration = c.Node as MethodDeclarationSyntax;
-
-                var argumentTypeSymbols = methodDeclaration
-                        .ParameterList
-                        .Parameters
-                        .Where(p => GetNestingDepth(p, c) > 1);
+                var argumentTypeSymbols = GetParametersSyntaxNodes(c.Node)
+                    .Where(p => GetNestingDepth(p, c) > 1);
 
                 foreach (var argument in argumentTypeSymbols)
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, argument.GetLocation()));
                 }
             },
-            SyntaxKind.MethodDeclaration);
+            SyntaxKind.MethodDeclaration,
+            SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private static int GetNestingDepth(ParameterSyntax parameterSyntax, SyntaxNodeAnalysisContext context)
-        {
-            return GetNestingDepth(context.SemanticModel.GetDeclaredSymbol(parameterSyntax)?.Type, 0 , true);
-        }
+        private static IEnumerable<ParameterSyntax> GetParametersSyntaxNodes(SyntaxNode node) =>
+            node switch
+            {
+                MethodDeclarationSyntax methodDeclarationSyntax => methodDeclarationSyntax.ParameterList.Parameters,
+                var wrapper when LocalFunctionStatementSyntaxWrapper.IsInstance(wrapper) => ((LocalFunctionStatementSyntaxWrapper)wrapper).ParameterList.Parameters,
+                _ => Enumerable.Empty<ParameterSyntax>()
+            };
+
+        private static int GetNestingDepth(ParameterSyntax parameterSyntax, SyntaxNodeAnalysisContext context) =>
+            GetNestingDepth(context.SemanticModel.GetDeclaredSymbol(parameterSyntax)?.Type, 0 , true);
 
         private static readonly ImmutableArray<KnownType> expressionFuncActionTypes =
             KnownType.SystemFuncVariants
