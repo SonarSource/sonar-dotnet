@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>SonarAnalyzer.CFG.CSharp</id>
-    <version>8.2.0.0</version>
+    <version>8.3.0.0</version>
     <title>C# CFG library for SonarAnalyzer</title>
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>
