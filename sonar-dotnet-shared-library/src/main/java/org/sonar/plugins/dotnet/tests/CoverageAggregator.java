@@ -122,28 +122,8 @@ public class CoverageAggregator {
       aggregate(wildcardPatternFileProvider, configuration.getStringArray(coverageConf.visualStudioCoverageXmlPropertyKey()), visualStudioCoverageXmlReportParser, coverage);
     }
 
-    if (coverage == null) {
-      Nothing();
-      Nothing();
-      Nothing();
-      Nothing();
-      Nothing();
-      Nothing();
-      Nothing();
-    } else {
-      Nothing();
-      Nothing();
-      Nothing();
-      Nothing();
-      Nothing();
-      Nothing();
-      Nothing();
-    }
-
     return coverage;
   }
-
-  private void Nothing() {}
 
   private void aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, String[] reportPaths, CoverageParser parser, Coverage aggregatedCoverage) {
     for (String reportPathPattern : reportPaths) {
