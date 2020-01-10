@@ -59,18 +59,16 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private static IEnumerable<ParameterSyntax> GetParametersSyntaxNodes(SyntaxNode node)
-        {
-            return node switch
+        private static IEnumerable<ParameterSyntax> GetParametersSyntaxNodes(SyntaxNode node) =>
+            node switch
             {
                 MethodDeclarationSyntax methodDeclarationSyntax => methodDeclarationSyntax.ParameterList.Parameters,
                 var wrapper when LocalFunctionStatementSyntaxWrapper.IsInstance(wrapper) => ((LocalFunctionStatementSyntaxWrapper)wrapper).ParameterList.Parameters,
                 _ => Enumerable.Empty<ParameterSyntax>()
             };
-        }
 
-        private static int GetNestingDepth(ParameterSyntax parameterSyntax, SyntaxNodeAnalysisContext context)
-            => GetNestingDepth(context.SemanticModel.GetDeclaredSymbol(parameterSyntax)?.Type, 0 , true);
+        private static int GetNestingDepth(ParameterSyntax parameterSyntax, SyntaxNodeAnalysisContext context) =>
+            GetNestingDepth(context.SemanticModel.GetDeclaredSymbol(parameterSyntax)?.Type, 0 , true);
 
         private static readonly ImmutableArray<KnownType> expressionFuncActionTypes =
             KnownType.SystemFuncVariants
