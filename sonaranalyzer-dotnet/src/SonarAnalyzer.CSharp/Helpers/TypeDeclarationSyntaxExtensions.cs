@@ -42,5 +42,33 @@ namespace SonarAnalyzer.Helpers
             => methodDeclaration.DescendantNodes()
                 .Where(member => member.IsKind(SyntaxKindEx.LocalFunctionStatement))
                 .Select(member => new LocalFunctionStatementAdapter((LocalFunctionStatementSyntaxWrapper)member));
+
+        private class LocalFunctionStatementAdapter : IMethodDeclaration
+        {
+            private readonly LocalFunctionStatementSyntaxWrapper _syntaxWrapper;
+
+            public LocalFunctionStatementAdapter(LocalFunctionStatementSyntaxWrapper syntaxWrapper)
+                => this._syntaxWrapper = syntaxWrapper;
+
+            public BlockSyntax Body { get => this._syntaxWrapper.Body; }
+
+            public SyntaxToken Identifier { get => this._syntaxWrapper.Identifier; }
+
+            public ParameterListSyntax ParameterList { get => this._syntaxWrapper.ParameterList; }
+        }
+
+        private class MethodDeclarationSyntaxAdapter : IMethodDeclaration
+        {
+            private readonly MethodDeclarationSyntax _declarationSyntax;
+
+            public MethodDeclarationSyntaxAdapter(MethodDeclarationSyntax declarationSyntax)
+                => this._declarationSyntax = declarationSyntax;
+
+            public BlockSyntax Body { get => this._declarationSyntax.Body; }
+
+            public SyntaxToken Identifier { get => this._declarationSyntax.Identifier; }
+
+            public ParameterListSyntax ParameterList { get => this._declarationSyntax.ParameterList; }
+        }
     }
 }
