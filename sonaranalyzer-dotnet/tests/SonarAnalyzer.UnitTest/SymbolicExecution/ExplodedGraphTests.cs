@@ -1,4 +1,4 @@
-﻿/*
+/*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2020 SonarSource SA
 * mailto: contact AT sonarsource DOT com
@@ -26,11 +26,11 @@ using csharp::SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
@@ -821,69 +821,32 @@ namespace Namespace
 
         [TestMethod]
         [TestCategory("Symbolic execution")]
-        public void ExplodedGraph_DeclarationExpression()
+        public void ExplodedGraph_RefExpressions()
         {
             const string testInput = @"
-namespace Namespace
-{
-    public class DeclarationExpression
-    {
-        public void Main(IDecoder decoder)
-        {
-            var result = decoder.Convert(out int bytesUsed, out int charsUsed);
-        }
-    }
+using System;
 
-    public interface IDecoder
+namespace Test
+{
+    public class Program
     {
-        bool Convert(out int bytesUsed, out int charsUsed);
+        public static Program Empty = new Program();
+        protected ref readonly Program Main() => ref Empty;
     }
-}";
+}
+";
             var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
-            var bytesUsedSymbol = context.GetSymbol("bytesUsed");
-            var charsUsedSymbol = context.GetSymbol("charsUsed");
             context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
-                    var instruction = args.Instruction.ToString();
-
-                    switch (instruction)
-                    {
-                        case "decoder":
-                            args.ProgramState.GetSymbolValue(bytesUsedSymbol).Should().BeNull();
-                            args.ProgramState.GetSymbolValue(charsUsedSymbol).Should().BeNull();
-                            break;
-
-                        case "decoder.Convert":
-                            args.ProgramState.GetSymbolValue(bytesUsedSymbol).Should().BeNull();
-                            args.ProgramState.GetSymbolValue(charsUsedSymbol).Should().BeNull();
-                            break;
-
-                        case "int bytesUsed":
-                            args.ProgramState.GetSymbolValue(bytesUsedSymbol).Should().NotBeNull();
-                            args.ProgramState.GetSymbolValue(charsUsedSymbol).Should().BeNull();
-                            break;
-
-                        case "int charsUsed":
-                            args.ProgramState.GetSymbolValue(bytesUsedSymbol).Should().NotBeNull();
-                            args.ProgramState.GetSymbolValue(charsUsedSymbol).Should().NotBeNull();
-                            break;
-
-                        case "decoder.Convert(out int bytesUsed, out int charsUsed)":
-                            args.ProgramState.GetSymbolValue(bytesUsedSymbol).Should().NotBeNull();
-                            args.ProgramState.GetSymbolValue(charsUsedSymbol).Should().NotBeNull();
-                            break;
-
-                        case "result = decoder.Convert(out int bytesUsed, out int charsUsed)":
-                            args.ProgramState.GetSymbolValue(bytesUsedSymbol).Should().NotBeNull();
-                            args.ProgramState.GetSymbolValue(charsUsedSymbol).Should().NotBeNull();
-                            args.ProgramState.HasValue.Should().BeFalse();
-                            break;
-                    }
+                    args.ProgramPoint.Block.Instructions.Should().HaveCount(2);
+                    args.ProgramPoint.Block.Instructions.Should().Contain(i => i.ToString() == "Empty");
+                    args.ProgramPoint.Block.Instructions.Should().Contain(i => i.ToString() == "ref Empty");
                 };
 
-            context.WalkWithInstructions(6);
+            context.WalkWithInstructions(2);
         }
+
 
         private class ExplodedGraphContext
         {
@@ -916,7 +879,8 @@ namespace Namespace
                 this.MainMethod = mainMethod;
                 this.SemanticModel = semanticModel;
                 this.MainMethodSymbol = semanticModel.GetDeclaredSymbol(this.MainMethod) as IMethodSymbol;
-                this.ControlFlowGraph = CSharpControlFlowGraph.Create(this.MainMethod.Body, semanticModel);
+                var methodBody = (CSharpSyntaxNode)this.MainMethod.Body ?? this.MainMethod.ExpressionBody;
+                this.ControlFlowGraph = CSharpControlFlowGraph.Create(methodBody, semanticModel);
                 this.LiveVariableAnalysis = CSharpLiveVariableAnalysis.Analyze(this.ControlFlowGraph, this.MainMethodSymbol, semanticModel);
                 this.ExplodedGraph = new CSharpExplodedGraph(this.ControlFlowGraph, this.MainMethodSymbol, semanticModel, this.LiveVariableAnalysis);
                 this.ExplodedGraph.InstructionProcessed += (sender, args) => { this.NumberOfProcessedInstructions++; };
@@ -927,24 +891,8 @@ namespace Namespace
 
             public ISymbol GetSymbol(string identifier)
             {
-                var varDeclarator = this.MainMethod
-                    .DescendantNodes()
-                    .OfType<VariableDeclaratorSyntax>()
-                    .FirstOrDefault(d => d.Identifier.ToString() == identifier);
-
-                if (varDeclarator != null)
-                {
-                    return this.SemanticModel.GetDeclaredSymbol(varDeclarator);
-                }
-
-                var declarationExpression = this.MainMethod
-                    .DescendantNodes()
-                    .OfType<DeclarationExpressionSyntax>()
-                    .Where(d => d.Designation is SingleVariableDesignationSyntax)
-                    .Select(d => (SingleVariableDesignationSyntax)d.Designation)
-                    .First(d => d.Identifier.Text == identifier);
-
-                return this.SemanticModel.GetDeclaredSymbol(declarationExpression);
+                var varDeclarators = this.MainMethod.DescendantNodes().OfType<VariableDeclaratorSyntax>();
+                return this.SemanticModel.GetDeclaredSymbol(varDeclarators.First(d => d.Identifier.ToString() == identifier));
             }
 
             public void WalkWithExitBlocks(int expectedProcessedInstructions, int expectedExitBlocks)
