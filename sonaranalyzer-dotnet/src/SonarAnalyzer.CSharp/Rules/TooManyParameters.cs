@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.CSharp;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -49,7 +50,8 @@ namespace SonarAnalyzer.Rules.CSharp
             { SyntaxKind.DelegateDeclaration, "Delegate" },
             { SyntaxKind.AnonymousMethodExpression, "Delegate" },
             { SyntaxKind.ParenthesizedLambdaExpression, "Lambda" },
-            { SyntaxKind.SimpleLambdaExpression, "Lambda" }
+            { SyntaxKind.SimpleLambdaExpression, "Lambda" },
+            { SyntaxKindEx.LocalFunctionStatement, "Local function" }
         }.ToImmutableDictionary();
 
         protected override string UserFriendlyNameForNode(SyntaxNode node) => nodeToDeclarationName[node.Kind()];
