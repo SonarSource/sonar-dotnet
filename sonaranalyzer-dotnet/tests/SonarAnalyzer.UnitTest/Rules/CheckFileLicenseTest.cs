@@ -222,6 +222,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
+        [TestCategory("CodeFix")]
+        public void CheckFileLicenseCodeFix_WhenThereIsAYearDifference_ShouldBeNonCompliant_CS()
+        {
+            Verifier.VerifyAnalyzer(
+                @"TestCases\CheckFileLicense_YearDifference.cs",
+                new CheckFileLicense { HeaderFormat = MultiLineHeader });
+        }
+
+        [TestMethod]
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenProvidingAnInvalidRegex_ShouldThrowException_CS()
         {
@@ -278,6 +287,17 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\CheckFileLicense_NoLicenseStartWithNamespace.cs",
                 @"TestCases\CheckFileLicense_NoLicenseStartWithNamespace.Fixed.cs",
                 new CheckFileLicense { HeaderFormat = SingleLineHeader },
+                new CheckFileLicenseCodeFixProvider());
+        }
+
+        [TestMethod]
+        [TestCategory("CodeFix")]
+        public void CheckFileLicenseCodeFix_WhenThereIsAYearDifference_ShouldBeFixedAsExpected_CS()
+        {
+            Verifier.VerifyCodeFix(
+                @"TestCases\CheckFileLicense_YearDifference.cs",
+                @"TestCases\CheckFileLicense_YearDifference.Fixed.cs",
+                new CheckFileLicense { HeaderFormat = MultiLineHeader },
                 new CheckFileLicenseCodeFixProvider());
         }
 
