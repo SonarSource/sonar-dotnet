@@ -143,17 +143,25 @@ namespace Tests.Diagnostics
 
         public void Method()
         {
-            static string M1(int x)
+            static string LocalFunction(int x)
+//                        ^^^^^^^^^^^^^ Secondary
+//                        ^^^^^^^^^^^^^ Secondary@-1
             {
-                x += 1;
+                x += 42;
                 return x.ToString();
             }
 
-            static string M2(int x) // Compliant - FN: local static functions are not verified
+            static string LocalFunctionCopy(int x) // Noncompliant
             {
-                x += 1;
+                x += 42;
                 return x.ToString();
             }
+        }
+
+        public string MethodWhichCopiesLocalFunction(int x) // Noncompliant
+        {
+            x += 42;
+            return x.ToString();
         }
     }
 }

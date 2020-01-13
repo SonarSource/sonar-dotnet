@@ -27,7 +27,6 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TMethodDeclarationSyntax, TLanguageKindEnum>
         : SonarDiagnosticAnalyzer
-        where TMethodDeclarationSyntax : SyntaxNode
         where TLanguageKindEnum : struct
     {
         protected const string DiagnosticId = "S4144";
@@ -41,7 +40,7 @@ namespace SonarAnalyzer.Rules
             context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer,
                 c =>
                 {
-                    var methods = GetMethodDeclarations(c.Node);
+                    var methods = GetMethodDeclarations(c.Node).ToList();
 
                     var alreadyHandledMethods = new HashSet<TMethodDeclarationSyntax>();
 
