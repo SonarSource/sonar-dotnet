@@ -29,6 +29,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -60,7 +61,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 { SyntaxKind.ClassDeclaration, "class" },
                 { SyntaxKind.InterfaceDeclaration, "interface" },
                 { SyntaxKind.MethodDeclaration, "method" },
-                { SyntaxKind.PropertyDeclaration, "property" }
+                { SyntaxKind.PropertyDeclaration, "property" },
+                { SyntaxKindEx.LocalFunctionStatement, "local function" },
             };
 
         private static readonly ImmutableArray<KnownType> ComRelatedTypes =
@@ -84,6 +86,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     CheckMemberName(declaration, declaration.Identifier, c);
                 },
                 SyntaxKind.MethodDeclaration);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var declaration = (LocalFunctionStatementSyntaxWrapper)c.Node;
+                    CheckMemberName(declaration, declaration.Identifier, c);
+                },
+                SyntaxKindEx.LocalFunctionStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -135,7 +145,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckMemberName(MemberDeclarationSyntax member, SyntaxToken identifier,
+        private static void CheckMemberName(SyntaxNode member, SyntaxToken identifier,
             SyntaxNodeAnalysisContext context)
         {
             var symbol = context.SemanticModel.GetDeclaredSymbol(member);
