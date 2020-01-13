@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 ";
 
 
-        [RuleParameter(HeaderFormatRuleParameterKey, PropertyType.String, "Expected copyright and license header.",
+        [RuleParameter(HeaderFormatRuleParameterKey, PropertyType.Text, "Expected copyright and license header.",
             HeaderFormatDefaultValue)]
         public override string HeaderFormat { get; set; } = HeaderFormatDefaultValue;
 
