@@ -61,7 +61,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AdditionalFiles Include="..\..\src\SonarLint.xml">
+    <AdditionalFiles Include="..\..\.sonarlint\SonarLint.xml">
       <Link>Properties\SonarLint.xml</Link>
     </AdditionalFiles>
   </ItemGroup>
