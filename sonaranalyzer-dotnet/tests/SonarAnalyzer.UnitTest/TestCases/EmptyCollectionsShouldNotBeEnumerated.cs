@@ -885,7 +885,11 @@ namespace CSharp8
     {
         public void Flush(IDecoder decoder)
         {
-            var result = decoder.Convert(out int bytesUsed, out int charsUsed);
+            var first = decoder.Convert(out int bytesUsed, out int charsUsed);
+
+            var second = decoder.Convert(out var _, out var _);
+
+            var third = decoder.Convert(out _, out _);
         }
     }
 

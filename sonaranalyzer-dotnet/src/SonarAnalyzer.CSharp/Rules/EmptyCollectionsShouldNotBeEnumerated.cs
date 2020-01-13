@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
@@ -345,12 +346,25 @@ namespace SonarAnalyzer.Rules.CSharp
                 var tempProgramState = programState;
 
                 return argumentList.Arguments
+                    .Where(HasAssociatedSymbolicValue)
                     .Select(argument =>
                     {
                         // We have side effect here, but it is harmless, we only need the symbolic values
                         tempProgramState = tempProgramState.PopValue(out var value);
                         return value;
                     });
+            }
+
+            private static bool HasAssociatedSymbolicValue(ArgumentSyntax argumentSyntax)
+            {
+                // e.g. Method(out var _)
+                if (DeclarationExpressionSyntaxWrapper.IsInstance(argumentSyntax.Expression) &&
+                    ((DeclarationExpressionSyntaxWrapper)argumentSyntax.Expression).Designation.SyntaxNode.IsKind(SyntaxKindEx.DiscardDesignation))
+                {
+                    return false;
+                }
+
+                return true;
             }
 
             private static bool IsDictionarySetItem(ElementAccessExpressionSyntax elementAccess) =>
