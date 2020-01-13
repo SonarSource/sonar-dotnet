@@ -826,7 +826,7 @@ namespace Namespace
             const string testInput = @"
 namespace Namespace
 {
-    public class SwitchExpression
+    public class DeclarationExpression
     {
         public void Main(IDecoder decoder)
         {
