@@ -1,4 +1,4 @@
-/*
+﻿/*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2020 SonarSource SA
 * mailto: contact AT sonarsource DOT com
@@ -30,6 +30,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
@@ -818,6 +819,72 @@ namespace Namespace
             context.WalkWithInstructions(7);
         }
 
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_DeclarationExpression()
+        {
+            const string testInput = @"
+namespace Namespace
+{
+    public class SwitchExpression
+    {
+        public void Main(IDecoder decoder)
+        {
+            var result = decoder.Convert(out int bytesUsed, out int charsUsed);
+        }
+    }
+
+    public interface IDecoder
+    {
+        bool Convert(out int bytesUsed, out int charsUsed);
+    }
+}";
+            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var bytesUsedSymbol = context.GetSymbol("bytesUsed");
+            var charsUsedSymbol = context.GetSymbol("charsUsed");
+            context.ExplodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+
+                    switch (instruction)
+                    {
+                        case "decoder":
+                            args.ProgramState.GetSymbolValue(bytesUsedSymbol).Should().BeNull();
+                            args.ProgramState.GetSymbolValue(charsUsedSymbol).Should().BeNull();
+                            break;
+
+                        case "decoder.Convert":
+                            args.ProgramState.GetSymbolValue(bytesUsedSymbol).Should().BeNull();
+                            args.ProgramState.GetSymbolValue(charsUsedSymbol).Should().BeNull();
+                            break;
+
+                        case "int bytesUsed":
+                            args.ProgramState.GetSymbolValue(bytesUsedSymbol).Should().NotBeNull();
+                            args.ProgramState.GetSymbolValue(charsUsedSymbol).Should().BeNull();
+                            break;
+
+                        case "int charsUsed":
+                            args.ProgramState.GetSymbolValue(bytesUsedSymbol).Should().NotBeNull();
+                            args.ProgramState.GetSymbolValue(charsUsedSymbol).Should().NotBeNull();
+                            break;
+
+                        case "decoder.Convert(out int bytesUsed, out int charsUsed)":
+                            args.ProgramState.GetSymbolValue(bytesUsedSymbol).Should().NotBeNull();
+                            args.ProgramState.GetSymbolValue(charsUsedSymbol).Should().NotBeNull();
+                            break;
+
+                        case "result = decoder.Convert(out int bytesUsed, out int charsUsed)":
+                            args.ProgramState.GetSymbolValue(bytesUsedSymbol).Should().NotBeNull();
+                            args.ProgramState.GetSymbolValue(charsUsedSymbol).Should().NotBeNull();
+                            args.ProgramState.HasValue.Should().BeFalse();
+                            break;
+                    }
+                };
+
+            context.WalkWithInstructions(6);
+        }
+
         private class ExplodedGraphContext
         {
             public readonly SemanticModel SemanticModel;
@@ -860,8 +927,24 @@ namespace Namespace
 
             public ISymbol GetSymbol(string identifier)
             {
-                var varDeclarators = this.MainMethod.DescendantNodes().OfType<VariableDeclaratorSyntax>();
-                return this.SemanticModel.GetDeclaredSymbol(varDeclarators.First(d => d.Identifier.ToString() == identifier));
+                var varDeclarator = this.MainMethod
+                    .DescendantNodes()
+                    .OfType<VariableDeclaratorSyntax>()
+                    .FirstOrDefault(d => d.Identifier.ToString() == identifier);
+
+                if (varDeclarator != null)
+                {
+                    return this.SemanticModel.GetDeclaredSymbol(varDeclarator);
+                }
+
+                var declarationExpression = this.MainMethod
+                    .DescendantNodes()
+                    .OfType<DeclarationExpressionSyntax>()
+                    .Where(d => d.Designation is SingleVariableDesignationSyntax)
+                    .Select(d => (SingleVariableDesignationSyntax)d.Designation)
+                    .First(d => d.Identifier.Text == identifier);
+
+                return this.SemanticModel.GetDeclaredSymbol(declarationExpression);
             }
 
             public void WalkWithExitBlocks(int expectedProcessedInstructions, int expectedExitBlocks)
