@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.CSharp;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -69,7 +70,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ExclusiveOrAssignmentExpression,
                 SyntaxKind.OrAssignmentExpression,
                 SyntaxKind.LeftShiftAssignmentExpression,
-                SyntaxKind.RightShiftAssignmentExpression);
+                SyntaxKind.RightShiftAssignmentExpression,
+                SyntaxKindEx.CoalesceAssignmentExpression);
         }
 
         private static bool IsNonCompliantSubExpression(AssignmentExpressionSyntax assignment, ExpressionSyntax topParenthesizedExpression)
@@ -142,6 +144,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 IsDirectlyInStatementCondition<DoStatementSyntax>(topParenthesizedExpression, expression, s => s.Condition);
         }
 
+        private static bool IsDirectlyInStatementCondition<T>(ExpressionSyntax expressionParent,
+            ExpressionSyntax originalExpression, Func<T, ExpressionSyntax> conditionSelector) where T : SyntaxNode
+        {
+            var statement = expressionParent.Parent.FirstAncestorOrSelf<T>();
+            return statement != null &&
+                conditionSelector(statement).RemoveParentheses() == originalExpression;
+        }
+
         private static bool IsInStatementCondition(ExpressionSyntax expression)
         {
             var expressionOrParenthesizedParent = expression.GetSelfOrTopParenthesizedExpression();
@@ -150,14 +160,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 IsInStatementCondition<ForStatementSyntax>(expressionOrParenthesizedParent, expression, s => s?.Condition) ||
                 IsInStatementCondition<WhileStatementSyntax>(expressionOrParenthesizedParent, expression, s => s?.Condition) ||
                 IsInStatementCondition<DoStatementSyntax>(expressionOrParenthesizedParent, expression, s => s?.Condition);
-        }
-
-        private static bool IsDirectlyInStatementCondition<T>(ExpressionSyntax expressionParent,
-            ExpressionSyntax originalExpression, Func<T, ExpressionSyntax> conditionSelector) where T : SyntaxNode
-        {
-            var statement = expressionParent.Parent.FirstAncestorOrSelf<T>();
-            return statement != null &&
-                conditionSelector(statement).RemoveParentheses() == originalExpression;
         }
 
         private static bool IsInStatementCondition<T>(ExpressionSyntax expressionParent, ExpressionSyntax originalExpression,
