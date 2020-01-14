@@ -880,5 +880,22 @@ namespace CSharp8
             noWords.Clone(); // Compliant - FN, the collection is empty (https://github.com/SonarSource/sonar-dotnet/issues/2944)
         }
     }
+
+    public class DeclarationExpression
+    {
+        public void Flush(IDecoder decoder)
+        {
+            var first = decoder.Convert(out int bytesUsed, out int charsUsed);
+
+            var second = decoder.Convert(out var _, out var _);
+
+            var third = decoder.Convert(out _, out _);
+        }
+    }
+
+    public interface IDecoder
+    {
+        bool Convert(out int i3, out int i4);
+    }
 }
 

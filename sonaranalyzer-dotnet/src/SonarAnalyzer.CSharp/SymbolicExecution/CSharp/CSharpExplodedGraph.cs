@@ -526,8 +526,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     break;
 
                 case SyntaxKindEx.DeclarationExpression:
-                    // https://github.com/SonarSource/sonar-dotnet/issues/2936
-                    // Do nothing
+                    newProgramState = VisitDeclarationExpression((DeclarationExpressionSyntaxWrapper)instruction, newProgramState);
                     break;
 
                 case SyntaxKindEx.TupleExpression:
@@ -545,6 +544,19 @@ namespace SonarAnalyzer.SymbolicExecution
             newProgramState = EnsureStackState(parenthesizedExpression, newProgramState);
             OnInstructionProcessed(instruction, node.ProgramPoint, newProgramState);
             EnqueueNewNode(newProgramPoint, newProgramState);
+        }
+
+        private ProgramState VisitDeclarationExpression(DeclarationExpressionSyntaxWrapper wrapper, ProgramState programState)
+        {
+            // DeclarationExpression is not yet fully supported: https://github.com/SonarSource/sonar-dotnet/issues/2936
+
+            var declaredSymbol = SemanticModel.GetDeclaredSymbol(wrapper.Designation);
+            var symbolicValue = SymbolicValue.Create(declaredSymbol.GetSymbolType());
+
+            programState = programState.PushValue(symbolicValue);
+            programState = programState.StoreSymbolicValue(declaredSymbol, symbolicValue);
+
+            return programState;
         }
 
         private ProgramState VisitVarPattern(VarPatternSyntaxWrapper varPatternSyntax, ProgramState programState) =>
