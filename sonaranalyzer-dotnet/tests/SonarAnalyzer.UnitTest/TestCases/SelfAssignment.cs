@@ -17,7 +17,7 @@ namespace Tests.TestCases
         {
             int? value = null;
 
-            value ??= value; // Compliant - FN: self-assignment
+            value ??= value; // Noncompliant
         }
 
         public int Prop1 { get; set; }
