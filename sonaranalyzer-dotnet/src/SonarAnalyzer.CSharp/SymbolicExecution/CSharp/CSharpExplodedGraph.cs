@@ -555,6 +555,21 @@ namespace SonarAnalyzer.SymbolicExecution
         {
             // DeclarationExpression is not yet fully supported: https://github.com/SonarSource/sonar-dotnet/issues/2936
 
+            if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(wrapper.Designation))
+            {
+                var designation = (ParenthesizedVariableDesignationSyntaxWrapper)wrapper.Designation;
+
+                foreach (var variable in designation.Variables)
+                {
+                    var variableSymbol = SemanticModel.GetDeclaredSymbol(variable);
+                    var variableSymbolicValue = SymbolicValue.Create(variableSymbol.GetSymbolType());
+
+                    programState = programState.StoreSymbolicValue(variableSymbol, variableSymbolicValue);
+                }
+
+                return programState;
+            }
+
             var declaredSymbol = SemanticModel.GetDeclaredSymbol(wrapper.Designation);
             var symbolicValue = SymbolicValue.Create(declaredSymbol.GetSymbolType());
 
@@ -1139,8 +1154,19 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private ProgramState VisitSimpleAssignment(AssignmentExpressionSyntax assignment, ProgramState programState)
         {
+            if (DeclarationExpressionSyntaxWrapper.IsInstance(assignment.Left))
+            {
+                var declaration = (DeclarationExpressionSyntaxWrapper)assignment.Left;
+                if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(declaration.Designation))
+                {
+                    // There are no values added to the stack when the declaration is processed so we don't have to pop any.
+                    return programState;
+                }
+            }
+
             var newProgramState = programState;
             newProgramState = newProgramState.PopValue(out var sv);
+
             if (!CSharpControlFlowGraphBuilder.IsAssignmentWithSimpleLeftSide(assignment))
             {
                 newProgramState = newProgramState.PopValue();
@@ -1149,6 +1175,7 @@ namespace SonarAnalyzer.SymbolicExecution
             var leftSymbol = SemanticModel.GetSymbolInfo(assignment.Left).Symbol;
             newProgramState = newProgramState.PushValue(sv);
             newProgramState = SetNewSymbolicValueIfTracked(leftSymbol, sv, newProgramState);
+
             return SetNonNullConstraintIfValueType(leftSymbol, sv, newProgramState);
         }
 

@@ -19,6 +19,7 @@
 */
 
 extern alias csharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -917,6 +918,63 @@ namespace Test
             context.WalkWithInstructions(2);
         }
 
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_TupleExpressionsDeconstruct()
+        {
+            const string testInput = @"
+using System.Collections.Generic;
+
+namespace Tests.Diagnostics.CSharp8
+{
+    public class Loader
+    {
+        public void Deconstruct(out string projectInstance, out List<string> diagnostics)
+        {
+            projectInstance = "";
+            diagnostics = new List<string>();
+        }
+    }
+
+    public class Test
+    {
+        public void Main(Loader loader)
+        {
+            var (projectInstance, diagnostics) = loader;
+        }
+    }
+}";
+            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var projectInstanceSymbol = context.GetSymbol("projectInstance", ExplodedGraphContext.SymbolType.Declaration);
+            var diagnosticsSymbol = context.GetSymbol("diagnostics", ExplodedGraphContext.SymbolType.Declaration);
+
+            context.ExplodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+
+                    switch (instruction)
+                    {
+                        case "var (projectInstance, diagnostics)":
+                            args.ProgramState.GetSymbolValue(projectInstanceSymbol).Should().NotBeNull();
+                            args.ProgramState.GetSymbolValue(diagnosticsSymbol).Should().NotBeNull();
+                            break;
+
+                        case "loader":
+                            args.ProgramState.GetSymbolValue(projectInstanceSymbol).Should().NotBeNull();
+                            args.ProgramState.GetSymbolValue(diagnosticsSymbol).Should().NotBeNull();
+                            break;
+
+                        case "var (projectInstance, diagnostics) = loader":
+                            args.ProgramState.GetSymbolValue(projectInstanceSymbol).Should().NotBeNull();
+                            args.ProgramState.GetSymbolValue(diagnosticsSymbol).Should().NotBeNull();
+                            args.ProgramState.HasValue.Should().BeFalse();
+                            break;
+                    }
+                };
+
+            context.WalkWithInstructions(3);
+        }
 
         private class ExplodedGraphContext
         {
@@ -966,7 +1024,7 @@ namespace Test
                 Declaration
             }
 
-            public ISymbol GetSymbol(string identifier, SymbolType st = SymbolType.Variable)
+            internal ISymbol GetSymbol(string identifier, SymbolType st = SymbolType.Variable)
             {
                 var expression = st switch
                 {
@@ -974,16 +1032,18 @@ namespace Test
                         .DescendantNodes()
                         .OfType<VariableDeclaratorSyntax>()
                         .First(d => d.Identifier.ToString() == identifier),
-                    SymbolType.Identifier => (CSharpSyntaxNode) this.MainMethod
+
+                    SymbolType.Identifier => (CSharpSyntaxNode)this.MainMethod
                         .DescendantNodes()
                         .OfType<IdentifierNameSyntax>()
                         .First(d => d.Identifier.ToString() == identifier),
+
                     SymbolType.Declaration => this.MainMethod
                         .DescendantNodes()
-                        .OfType<DeclarationExpressionSyntax>()
-                        .Where(d => d.Designation is SingleVariableDesignationSyntax)
-                        .Select(d => (SingleVariableDesignationSyntax)d.Designation)
+                        .OfType<SingleVariableDesignationSyntax>()
                         .First(d => d.Identifier.Text == identifier),
+
+                    _ => throw new NotSupportedException()
                 };
 
                 return this.SemanticModel.GetDeclaredSymbol(expression)
