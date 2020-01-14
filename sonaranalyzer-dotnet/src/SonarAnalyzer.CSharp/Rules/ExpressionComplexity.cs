@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -19,13 +19,13 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -33,12 +33,9 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class ExpressionComplexity : ExpressionComplexityBase<ExpressionSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
-                isEnabledByDefault: false);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
         public override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.CSharpGeneratedCodeRecognizer.Instance;
+
+        public ExpressionComplexity() : base(RspecStrings.ResourceManager) { }
 
         private static readonly ISet<SyntaxKind> CompoundExpressionKinds = new HashSet<SyntaxKind>
         {
@@ -57,7 +54,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             SyntaxKind.ConditionalExpression,
             SyntaxKind.LogicalAndExpression,
-            SyntaxKind.LogicalOrExpression
+            SyntaxKind.LogicalOrExpression,
+            SyntaxKindEx.CoalesceAssignmentExpression
         };
 
         protected override bool IsComplexityIncreasingKind(SyntaxNode node) =>
