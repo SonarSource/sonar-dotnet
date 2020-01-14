@@ -26,11 +26,12 @@ using csharp::SonarAnalyzer.LiveVariableAnalysis.CSharp;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.CFG.Helpers;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
@@ -833,15 +834,14 @@ namespace Namespace
             var result = decoder.Convert(out int bytesUsed, out int charsUsed);
         }
     }
-
     public interface IDecoder
     {
         bool Convert(out int bytesUsed, out int charsUsed);
     }
 }";
             var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
-            var bytesUsedSymbol = context.GetSymbol("bytesUsed");
-            var charsUsedSymbol = context.GetSymbol("charsUsed");
+            var bytesUsedSymbol = context.GetSymbol("bytesUsed", ExplodedGraphContext.SymbolType.Declaration);
+            var charsUsedSymbol = context.GetSymbol("charsUsed", ExplodedGraphContext.SymbolType.Declaration);
             context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
@@ -885,6 +885,39 @@ namespace Namespace
             context.WalkWithInstructions(6);
         }
 
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_RefExpressions()
+        {
+            const string testInput = @"
+using System;
+
+namespace Test
+{
+    public class Program
+    {
+        public static Program Empty = new Program();
+        protected ref readonly Program Main() => ref Empty;
+    }
+}
+";
+            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+
+            var identifierSymbol = context.GetSymbol("Empty", ExplodedGraphContext.SymbolType.Identifier);
+
+            context.ExplodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    args.ProgramPoint.Block.Instructions.Should().HaveCount(2);
+                    args.ProgramPoint.Block.Instructions.Should().Contain(i => i.ToString() == "Empty");
+                    args.ProgramPoint.Block.Instructions.Should().Contain(i => i.ToString() == "ref Empty");
+                    args.ProgramState.GetSymbolValue(identifierSymbol).Should().NotBeNull();
+                };
+
+            context.WalkWithInstructions(2);
+        }
+
+
         private class ExplodedGraphContext
         {
             public readonly SemanticModel SemanticModel;
@@ -916,7 +949,8 @@ namespace Namespace
                 this.MainMethod = mainMethod;
                 this.SemanticModel = semanticModel;
                 this.MainMethodSymbol = semanticModel.GetDeclaredSymbol(this.MainMethod) as IMethodSymbol;
-                this.ControlFlowGraph = CSharpControlFlowGraph.Create(this.MainMethod.Body, semanticModel);
+                var methodBody = (CSharpSyntaxNode)this.MainMethod.Body ?? this.MainMethod.ExpressionBody;
+                this.ControlFlowGraph = CSharpControlFlowGraph.Create(methodBody, semanticModel);
                 this.LiveVariableAnalysis = CSharpLiveVariableAnalysis.Analyze(this.ControlFlowGraph, this.MainMethodSymbol, semanticModel);
                 this.ExplodedGraph = new CSharpExplodedGraph(this.ControlFlowGraph, this.MainMethodSymbol, semanticModel, this.LiveVariableAnalysis);
                 this.ExplodedGraph.InstructionProcessed += (sender, args) => { this.NumberOfProcessedInstructions++; };
@@ -925,26 +959,35 @@ namespace Namespace
                 this.ExplodedGraph.ExitBlockReached += (sender, args) => { this.NumberOfExitBlockReached++; };
             }
 
-            public ISymbol GetSymbol(string identifier)
+            public enum SymbolType
             {
-                var varDeclarator = this.MainMethod
-                    .DescendantNodes()
-                    .OfType<VariableDeclaratorSyntax>()
-                    .FirstOrDefault(d => d.Identifier.ToString() == identifier);
+                Variable,
+                Identifier,
+                Declaration
+            }
 
-                if (varDeclarator != null)
+            public ISymbol GetSymbol(string identifier, SymbolType st = SymbolType.Variable)
+            {
+                var expression = st switch
                 {
-                    return this.SemanticModel.GetDeclaredSymbol(varDeclarator);
-                }
+                    SymbolType.Variable => this.MainMethod
+                        .DescendantNodes()
+                        .OfType<VariableDeclaratorSyntax>()
+                        .First(d => d.Identifier.ToString() == identifier),
+                    SymbolType.Identifier => (CSharpSyntaxNode) this.MainMethod
+                        .DescendantNodes()
+                        .OfType<IdentifierNameSyntax>()
+                        .First(d => d.Identifier.ToString() == identifier),
+                    SymbolType.Declaration => this.MainMethod
+                        .DescendantNodes()
+                        .OfType<DeclarationExpressionSyntax>()
+                        .Where(d => d.Designation is SingleVariableDesignationSyntax)
+                        .Select(d => (SingleVariableDesignationSyntax)d.Designation)
+                        .First(d => d.Identifier.Text == identifier),
+                };
 
-                var declarationExpression = this.MainMethod
-                    .DescendantNodes()
-                    .OfType<DeclarationExpressionSyntax>()
-                    .Where(d => d.Designation is SingleVariableDesignationSyntax)
-                    .Select(d => (SingleVariableDesignationSyntax)d.Designation)
-                    .First(d => d.Identifier.Text == identifier);
-
-                return this.SemanticModel.GetDeclaredSymbol(declarationExpression);
+                return this.SemanticModel.GetDeclaredSymbol(expression)
+                    ?? this.SemanticModel.GetSymbolOrCandidateSymbol(expression);
             }
 
             public void WalkWithExitBlocks(int expectedProcessedInstructions, int expectedExitBlocks)
