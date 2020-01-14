@@ -29,6 +29,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.CFG.Helpers;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.LiveVariableAnalysis;
@@ -836,12 +837,16 @@ namespace Test
 }
 ";
             var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+
+            var identifierSymbol = context.GetSymbol("Empty", ExplodedGraphContext.SymbolType.Identifier);
+
             context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
                     args.ProgramPoint.Block.Instructions.Should().HaveCount(2);
                     args.ProgramPoint.Block.Instructions.Should().Contain(i => i.ToString() == "Empty");
                     args.ProgramPoint.Block.Instructions.Should().Contain(i => i.ToString() == "ref Empty");
+                    args.ProgramState.GetSymbolValue(identifierSymbol).Should().NotBeNull();
                 };
 
             context.WalkWithInstructions(2);
@@ -889,10 +894,27 @@ namespace Test
                 this.ExplodedGraph.ExitBlockReached += (sender, args) => { this.NumberOfExitBlockReached++; };
             }
 
-            public ISymbol GetSymbol(string identifier)
+            public enum SymbolType
             {
-                var varDeclarators = this.MainMethod.DescendantNodes().OfType<VariableDeclaratorSyntax>();
-                return this.SemanticModel.GetDeclaredSymbol(varDeclarators.First(d => d.Identifier.ToString() == identifier));
+                Variable,
+                Identifier,
+            }
+
+            public ISymbol GetSymbol(string identifier, SymbolType st = SymbolType.Variable)
+            {
+                var expression = st switch
+                {
+                    SymbolType.Variable => this.MainMethod
+                        .DescendantNodes()
+                        .OfType<VariableDeclaratorSyntax>()
+                        .First(d => d.Identifier.ToString() == identifier),
+                    SymbolType.Identifier => (CSharpSyntaxNode) this.MainMethod
+                        .DescendantNodes()
+                        .OfType<IdentifierNameSyntax>()
+                        .First(d => d.Identifier.ToString() == identifier),
+                };
+
+                return this.SemanticModel.GetSymbolOrCandidateSymbol(expression);
             }
 
             public void WalkWithExitBlocks(int expectedProcessedInstructions, int expectedExitBlocks)
