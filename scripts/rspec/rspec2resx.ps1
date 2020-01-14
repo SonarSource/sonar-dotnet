@@ -31,16 +31,8 @@ param (
 Set-StrictMode -version 1.0
 $ErrorActionPreference = "Stop"
 $RuleTemplateFolder = "${PSScriptRoot}\\rspec-templates"
-
-$resgenPath = "${Env:ProgramFiles(x86)}\\Microsoft SDKs\\Windows\\v10.0A\\bin\\NETFX 4.7.2 Tools\\ResGen.exe"
-if (-Not (Test-Path $resgenPath)) {
-    $resgenPath = "${Env:ProgramFiles(x86)}\\Microsoft SDKs\\Windows\\v10.0A\\bin\\NETFX 4.6.1 Tools\\ResGen.exe"
-}
-if (-Not (Test-Path $resgenPath)) {
-    throw "You need to install the Windows SDK before using this script."
-}
-
 $sonaranalyzerPath = "${PSScriptRoot}\\..\\..\\sonaranalyzer-dotnet"
+$SupportedSDKs = @("4.8", "4.7.2", "4.6.1")
 
 $categoriesMap = @{
     "BUG" = "Bug";
@@ -78,6 +70,16 @@ $roslynLanguageMap = @{
     "vbnet" = "Visual Basic";
 }
 
+function FindResGen(){
+    foreach ($SDK in $SupportedSDKs){
+        $Ret = "${Env:ProgramFiles(x86)}\\Microsoft SDKs\\Windows\\v10.0A\\bin\\NETFX ${SDK} Tools\\ResGen.exe"
+        if (Test-Path $Ret) {
+            return $Ret
+        }
+    }
+    throw "You need to install the .NET Framework $($SupportedSDKs[0]) SDK before using this script."
+}
+
 # Returns a string array with rule keys for the specified language.
 function GetRules() {
     $suffix = $ruleapiLanguageMap.Get_Item($language)
@@ -90,9 +92,9 @@ function GetRules() {
     }
 }
 
-function CreateStringResources($rules) {
+function CreateStringResources($rules, $resgenPath) {
     $suffix = $ruleapiLanguageMap.Get_Item($language)
-    
+
     $sonarWayRules = Get-Content -Raw "${rspecFolder}\\Sonar_way_profile.json" | ConvertFrom-Json
 
     $resources = New-Object System.Collections.ArrayList
@@ -148,6 +150,7 @@ function CreateStringResources($rules) {
 
 ### SCRIPT START ###
 
+$resgenPath = FindResGen
 $rules = GetRules
-CreateStringResources $rules
+CreateStringResources $rules $resgenPath
 
