@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
@@ -40,6 +41,14 @@ namespace SonarAnalyzer.Rules
     public abstract class ExpressionComplexityBase<TExpression> : ExpressionComplexityBase
         where TExpression : SyntaxNode
     {
+        private readonly DiagnosticDescriptor rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected ExpressionComplexityBase(System.Resources.ResourceManager rspecResources)
+        {
+            this.rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources, isEnabledByDefault: false);
+        }
+
         public abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
         protected sealed override void Initialize(ParameterLoadingAnalysisContext context)

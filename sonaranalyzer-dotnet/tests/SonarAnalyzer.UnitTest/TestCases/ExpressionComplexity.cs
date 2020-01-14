@@ -19,7 +19,7 @@ namespace Tests.Diagnostics
 
             bool? v1 = null, v2 = null, v3 = null, v4 = null, v5 = null;
 
-            var h = v1 ??= v2 ??= v3 ??= v4 ??= v5; // Compliant - FN: null coalescing assignment is not counted
+            var h = v1 ??= v2 ??= v3 ??= v4 ??= v5; // Noncompliant
 
             call(
                 a =>
