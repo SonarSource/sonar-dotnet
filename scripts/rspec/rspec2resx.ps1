@@ -32,12 +32,15 @@ Set-StrictMode -version 1.0
 $ErrorActionPreference = "Stop"
 $RuleTemplateFolder = "${PSScriptRoot}\\rspec-templates"
 
-$resgenPath = "${Env:ProgramFiles(x86)}\\Microsoft SDKs\\Windows\\v10.0A\\bin\\NETFX 4.7.2 Tools\\ResGen.exe"
+$resgenPath = "${Env:ProgramFiles(x86)}\\Microsoft SDKs\\Windows\\v10.0A\\bin\\NETFX 4.8 Tools\\ResGen.exe"
+if (-Not (Test-Path $resgenPath)) {
+    $resgenPath = "${Env:ProgramFiles(x86)}\\Microsoft SDKs\\Windows\\v10.0A\\bin\\NETFX 4.7.2 Tools\\ResGen.exe"
+}
 if (-Not (Test-Path $resgenPath)) {
     $resgenPath = "${Env:ProgramFiles(x86)}\\Microsoft SDKs\\Windows\\v10.0A\\bin\\NETFX 4.6.1 Tools\\ResGen.exe"
 }
 if (-Not (Test-Path $resgenPath)) {
-    throw "You need to install the Windows SDK before using this script."
+    throw "You need to install the .NET Framework 4.8 SDK before using this script."
 }
 
 $sonaranalyzerPath = "${PSScriptRoot}\\..\\..\\sonaranalyzer-dotnet"
@@ -92,7 +95,7 @@ function GetRules() {
 
 function CreateStringResources($rules) {
     $suffix = $ruleapiLanguageMap.Get_Item($language)
-    
+
     $sonarWayRules = Get-Content -Raw "${rspecFolder}\\Sonar_way_profile.json" | ConvertFrom-Json
 
     $resources = New-Object System.Collections.ArrayList
