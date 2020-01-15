@@ -922,29 +922,9 @@ namespace Test
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_TupleExpressionsDeconstruct()
         {
-            const string testInput = @"
-using System.Collections.Generic;
+            const string testInput = "var (projectInstance, diagnostics) = loader;";
 
-namespace Tests.Diagnostics.CSharp8
-{
-    public class Loader
-    {
-        public void Deconstruct(out string projectInstance, out List<string> diagnostics)
-        {
-            projectInstance = "";
-            diagnostics = new List<string>();
-        }
-    }
-
-    public class Test
-    {
-        public void Main(Loader loader)
-        {
-            var (projectInstance, diagnostics) = loader;
-        }
-    }
-}";
-            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var context = new ExplodedGraphContext(testInput);
             var projectInstanceSymbol = context.GetSymbol("projectInstance", ExplodedGraphContext.SymbolType.Declaration);
             var diagnosticsSymbol = context.GetSymbol("diagnostics", ExplodedGraphContext.SymbolType.Declaration);
 
@@ -968,6 +948,40 @@ namespace Tests.Diagnostics.CSharp8
                         case "var (projectInstance, diagnostics) = loader":
                             args.ProgramState.GetSymbolValue(projectInstanceSymbol).Should().NotBeNull();
                             args.ProgramState.GetSymbolValue(diagnosticsSymbol).Should().NotBeNull();
+                            args.ProgramState.HasValue.Should().BeFalse();
+                            break;
+                    }
+                };
+
+            context.WalkWithInstructions(3);
+        }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_TupleExpressionsWithDiscardDeconstruct()
+        {
+            const string testInput = "var (projectInstance, _) = loader;";
+
+            var context = new ExplodedGraphContext(testInput);
+            var projectInstanceSymbol = context.GetSymbol("projectInstance", ExplodedGraphContext.SymbolType.Declaration);
+
+            context.ExplodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+
+                    switch (instruction)
+                    {
+                        case "var (projectInstance, _)":
+                            args.ProgramState.GetSymbolValue(projectInstanceSymbol).Should().NotBeNull();
+                            break;
+
+                        case "loader":
+                            args.ProgramState.GetSymbolValue(projectInstanceSymbol).Should().NotBeNull();
+                            break;
+
+                        case "var (projectInstance, _) = loader":
+                            args.ProgramState.GetSymbolValue(projectInstanceSymbol).Should().NotBeNull();
                             args.ProgramState.HasValue.Should().BeFalse();
                             break;
                     }
