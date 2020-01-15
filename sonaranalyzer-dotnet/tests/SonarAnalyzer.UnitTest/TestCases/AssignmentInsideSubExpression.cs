@@ -42,7 +42,9 @@ namespace Tests.Diagnostics
 //                ^^^
 
             int? val = null;
-            foo(val ??= 1); // Compliant - FN: assignment in function call
+            foo(val ??= 1); // Noncompliant
+            foo(val ?? 1);
+            val ??= 1;
 
             i = 42;
             foo(i == 42);
@@ -64,7 +66,8 @@ namespace Tests.Diagnostics
             for (int j = 0; b == false; j++) { }
 
             bool? value = null;
-            if (value ??= true) { } // Compliant - FN: assignment inside 'if'
+            if (value ??= true) { } // Noncompliant
+            if (value ?? true) { }
 
             // Fix S1121: NullReferenceException when while loop with assignment expression is within a for loop with no condition (#725)
             for (;;)
