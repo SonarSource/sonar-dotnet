@@ -990,6 +990,52 @@ namespace Test
             context.WalkWithInstructions(3);
         }
 
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_DiscardDesignationAsFunctionArgument()
+        {
+            const string testInput = @"var result = obj.Read(out int _);";
+
+            var context = new ExplodedGraphContext(testInput);
+            var resultSymbol = context.GetSymbol("result");
+
+            context.ExplodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+
+                    switch (instruction)
+                    {
+                        case "obj":
+                            args.ProgramState.GetSymbolValue(resultSymbol).Should().BeNull();
+                            args.ProgramState.ExpressionStack.Peek().ToString().Should().Be("SV_2"); // obj => SV_2
+                            break;
+
+                        case "obj.Read":
+                            args.ProgramState.GetSymbolValue(resultSymbol).Should().BeNull();
+                            args.ProgramState.ExpressionStack.Peek().ToString().Should().Be("SV_2.Read");
+                            break;
+
+                        case "int _":
+                            args.ProgramState.GetSymbolValue(resultSymbol).Should().BeNull();
+                            args.ProgramState.ExpressionStack.Peek().ToString().Should().Be("SV_4"); // _ => SV_4
+                            break;
+
+                        case "obj.Read(out int _)":
+                            args.ProgramState.GetSymbolValue(resultSymbol).Should().BeNull();
+                            args.ProgramState.ExpressionStack.Peek().ToString().Should().Be("SV_5"); // invocation return value => SV_5
+                            break;
+
+                        case "result = obj.Read(out int _)":
+                            args.ProgramState.GetSymbolValue(resultSymbol).ToString().Should().Be("SV_5"); // result = invocation return value (SV_5)
+                            args.ProgramState.HasValue.Should().BeFalse();
+                            break;
+                    }
+                };
+
+            context.WalkWithInstructions(5);
+        }
+
         private class ExplodedGraphContext
         {
             public readonly SemanticModel SemanticModel;
