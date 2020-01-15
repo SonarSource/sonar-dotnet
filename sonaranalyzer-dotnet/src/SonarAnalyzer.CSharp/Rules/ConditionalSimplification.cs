@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.CSharp;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -42,7 +43,54 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        internal const string IsNullCoalescingKey = "isNullCoalescing";
+        internal const string SimplifiedOperatorKey = "SimplifiedOperator";
+
+        internal static bool IsNullCoalesceAssignmentCandidate(SyntaxNodeAnalysisContext c, SyntaxNode conditional, ExpressionSyntax comparedToNull) =>
+            IsNullCoalesceAssignmentSupported(c)
+                && conditional?.Parent is AssignmentExpressionSyntax parentAssignment
+                && CSharpEquivalenceChecker.AreEquivalent(parentAssignment.Left, comparedToNull);
+
+        internal static bool TryGetExpressionComparedToNull(ExpressionSyntax expression, out ExpressionSyntax compared, out bool comparedIsNullInTrue)
+        {
+            compared = null;
+            comparedIsNullInTrue = false;
+            if (!(expression is BinaryExpressionSyntax binary) ||
+                !EqualsOrNotEquals.Contains(binary.Kind()))
+            {
+                return false;
+            }
+
+            comparedIsNullInTrue = binary.IsKind(SyntaxKind.EqualsExpression);
+
+            if (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.NullLiteralExpression))
+            {
+                compared = binary.Right;
+                return true;
+            }
+
+            if (CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.NullLiteralExpression))
+            {
+                compared = binary.Left;
+                return true;
+            }
+
+            return false;
+        }
+
+        internal static bool IsNullCoalesceAssignmentSupported(SyntaxNodeAnalysisContext c) =>
+            c.Compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp8);
+
+        internal static StatementSyntax ExtractSingleStatement(StatementSyntax statement)
+        {
+            if (!(statement is BlockSyntax block))
+            {
+                return statement;
+            }
+
+            return block.Statements.Count == 1
+                ? block.Statements.First()
+                : null;
+        }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -53,23 +101,38 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckIfStatement,
                 SyntaxKind.IfStatement);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                CheckCoalesceExpression,
+                SyntaxKind.CoalesceExpression);
+        }
+
+        private static void CheckCoalesceExpression(SyntaxNodeAnalysisContext context)
+        {
+            if(context.Node.Parent is AssignmentExpressionSyntax assignment && IsNullCoalesceAssignmentSupported(context))
+            {
+                var left = ((BinaryExpressionSyntax)context.Node).Left.RemoveParentheses();
+                if(CSharpEquivalenceChecker.AreEquivalent(assignment.Left.RemoveParentheses(), left))
+                {
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignment.GetLocation(), "??="));
+                }
+            }
         }
 
         private static void CheckIfStatement(SyntaxNodeAnalysisContext context)
         {
             var ifStatement = (IfStatementSyntax)context.Node;
-            if (ifStatement.Else == null ||
-                ifStatement.Parent is ElseClauseSyntax)
+            if (ifStatement.Parent is ElseClauseSyntax)
             {
                 return;
             }
 
             var whenTrue = ExtractSingleStatement(ifStatement.Statement);
-            var whenFalse = ExtractSingleStatement(ifStatement.Else.Statement);
+            var whenFalse = ExtractSingleStatement(ifStatement.Else?.Statement);
 
-            if (whenTrue == null ||
-                whenFalse == null ||
-                CSharpEquivalenceChecker.AreEquivalent(whenTrue, whenFalse))
+            if (whenTrue == null
+                || (ifStatement.Else != null && whenFalse == null)
+                || (whenFalse != null && CSharpEquivalenceChecker.AreEquivalent(whenTrue, whenFalse)))
             {
                 /// Equivalence handled by S1871, <see cref="ConditionalStructureSameImplementation"/>
                 return;
@@ -78,13 +141,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 TryGetExpressionComparedToNull(ifStatement.Condition, out var comparedToNull, out var comparedIsNullInTrue) &&
                 ExpressionCanBeNull(comparedToNull, context.SemanticModel);
 
-            if (CanBeSimplified(whenTrue, whenFalse,
+            if (CanBeSimplified(context, whenTrue, whenFalse,
                 possiblyNullCoalescing ? comparedToNull : null, context.SemanticModel,
-                comparedIsNullInTrue, out var isNullCoalescing))
+                comparedIsNullInTrue, out var simplifiedOperator))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, ifStatement.IfKeyword.GetLocation(),
-                    ImmutableDictionary<string, string>.Empty.Add(IsNullCoalescingKey, isNullCoalescing.ToString()),
-                    isNullCoalescing ? "??" : "?:"));
+                    ImmutableDictionary<string, string>.Empty.Add(SimplifiedOperatorKey, simplifiedOperator),
+                    simplifiedOperator));
             }
         }
 
@@ -110,7 +173,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (CanExpressionBeNullCoalescing(whenTrue, whenFalse, comparedToNull, context.SemanticModel, comparedIsNullInTrue))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, conditional.GetLocation(), "??"));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, conditional.GetLocation(),
+                     IsNullCoalesceAssignmentCandidate(context, conditional, comparedToNull) ? "??=" : "??"));
+
             }
         }
 
@@ -148,10 +213,10 @@ namespace SonarAnalyzer.Rules.CSharp
             return typeNull == null && typeValue != null && typeValue.IsValueType;
         }
 
-        private static bool CanBeSimplified(StatementSyntax statement1, StatementSyntax statement2,
-            ExpressionSyntax comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue, out bool isNullCoalescing)
+        private static bool CanBeSimplified(SyntaxNodeAnalysisContext context, StatementSyntax statement1, StatementSyntax statement2,
+            ExpressionSyntax comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue, out string simplifiedOperator)
         {
-            isNullCoalescing = false;
+            simplifiedOperator = "?:";
 
             if (statement1 is ReturnStatementSyntax return1 &&
                 statement2 is ReturnStatementSyntax return2)
@@ -167,7 +232,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (comparedToNull != null &&
                     CanExpressionBeNullCoalescing(retExpr1, retExpr2, comparedToNull, semanticModel, comparedIsNullInTrue))
                 {
-                    isNullCoalescing = true;
+                    simplifiedOperator = "??";
                 }
 
                 return true;
@@ -175,16 +240,25 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var expressionStatement2 = statement2 as ExpressionStatementSyntax;
 
-            if (!(statement1 is ExpressionStatementSyntax expressionStatement1) || expressionStatement2 == null)
+            if (!(statement1 is ExpressionStatementSyntax expressionStatement1)
+                || (statement2 != null && expressionStatement2 == null))
             {
                 return false;
             }
 
             var expression1 = expressionStatement1.Expression.RemoveParentheses();
+            if(statement2 == null)
+            {
+                simplifiedOperator = IsNullCoalesceAssignmentSupported(context) ? "??=" : "??";
+                return expression1 is AssignmentExpressionSyntax assignment
+                    && comparedIsNullInTrue
+                    && comparedToNull != null
+                    && CSharpEquivalenceChecker.AreEquivalent(assignment.Left, comparedToNull);
+            }
             var expression2 = expressionStatement2.Expression.RemoveParentheses();
 
             if (AreCandidateAssignments(expression1, expression2, comparedToNull, semanticModel,
-                comparedIsNullInTrue, out isNullCoalescing))
+                comparedIsNullInTrue, out simplifiedOperator))
             {
                 return true;
             }
@@ -192,7 +266,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (comparedToNull != null &&
                 CanExpressionBeNullCoalescing(expression1, expression2, comparedToNull, semanticModel, comparedIsNullInTrue))
             {
-                isNullCoalescing = true;
+                simplifiedOperator = "??";
                 return true;
             }
 
@@ -200,9 +274,9 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool AreCandidateAssignments(ExpressionSyntax expression1, ExpressionSyntax expression2,
-            ExpressionSyntax compared, SemanticModel semanticModel, bool comparedIsNullInTrue, out bool isNullCoalescing)
+            ExpressionSyntax compared, SemanticModel semanticModel, bool comparedIsNullInTrue, out string simplifiedOperator)
         {
-            isNullCoalescing = false;
+            simplifiedOperator = "?:";
             var assignment1 = expression1 as AssignmentExpressionSyntax;
             var assignment2 = expression2 as AssignmentExpressionSyntax;
             var canBeSimplified =
@@ -224,22 +298,10 @@ namespace SonarAnalyzer.Rules.CSharp
             if (compared != null &&
                 CanExpressionBeNullCoalescing(assignment1.Right, assignment2.Right, compared, semanticModel, comparedIsNullInTrue))
             {
-                isNullCoalescing = true;
+                simplifiedOperator = "??";
             }
 
             return true;
-        }
-
-        internal static StatementSyntax ExtractSingleStatement(StatementSyntax statement)
-        {
-            if (!(statement is BlockSyntax block))
-            {
-                return statement;
-            }
-
-            return block.Statements.Count == 1
-                ? block.Statements.First()
-                : null;
         }
 
         private static bool AreCandidateInvocationsForNullCoalescing(ExpressionSyntax expression1, ExpressionSyntax expression2,
@@ -327,8 +389,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return numberOfDifferences == 1 && (comparedToNull == null || numberOfComparisonsToCondition == 1);
         }
 
-        private static bool CanExpressionBeNullCoalescing(ExpressionSyntax whenTrue, ExpressionSyntax whenFalse,
-            ExpressionSyntax comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue)
+        private static bool CanExpressionBeNullCoalescing(ExpressionSyntax whenTrue, ExpressionSyntax whenFalse, ExpressionSyntax comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue)
         {
             if (CSharpEquivalenceChecker.AreEquivalent(whenTrue, comparedToNull))
             {
@@ -340,36 +401,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return comparedIsNullInTrue;
             }
 
-            return AreCandidateInvocationsForNullCoalescing(whenTrue, whenFalse, comparedToNull,
-                semanticModel, comparedIsNullInTrue);
-        }
-
-        internal static bool TryGetExpressionComparedToNull(ExpressionSyntax expression,
-            out ExpressionSyntax compared, out bool comparedIsNullInTrue)
-        {
-            compared = null;
-            comparedIsNullInTrue = false;
-            if (!(expression is BinaryExpressionSyntax binary) ||
-                !EqualsOrNotEquals.Contains(binary.Kind()))
-            {
-                return false;
-            }
-
-            comparedIsNullInTrue = binary.IsKind(SyntaxKind.EqualsExpression);
-
-            if (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.NullLiteralExpression))
-            {
-                compared = binary.Right;
-                return true;
-            }
-
-            if (CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.NullLiteralExpression))
-            {
-                compared = binary.Left;
-                return true;
-            }
-
-            return false;
+            return AreCandidateInvocationsForNullCoalescing(whenTrue, whenFalse, comparedToNull, semanticModel, comparedIsNullInTrue);
         }
 
         private static bool ExpressionCanBeNull(ExpressionSyntax expression, SemanticModel semanticModel)

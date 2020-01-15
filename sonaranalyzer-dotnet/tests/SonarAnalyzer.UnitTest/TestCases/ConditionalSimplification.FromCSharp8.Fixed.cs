@@ -12,7 +12,7 @@ namespace Tests.TestCases
         {
             return o;
         }
-        object IdentityAnyOtherMethod(object o  )
+        object IdentityAnyOtherMethod(object o)
         {
             return o;
         }
@@ -20,67 +20,32 @@ namespace Tests.TestCases
         {
             object x;
 
-            if (a != null) // Noncompliant {{Use the '??' operator here.}}
-//          ^^
-            {
-                /*some comment*/
-                x = a;
-            }
-            else
-            {
-                x = b/*some other comment*/;
-            }
+            x = a ?? b/*some other comment*/;
 
-            x = a != null ? (a) : b;  // Noncompliant {{Use the '??' operator here.}}
-//              ^^^^^^^^^^^^^^^^^^^
+            x = a ?? b;  // Fixed
             x = a != null ? a : a;  // Compliant, triggers S2758
 
             int i = 5;
             var z = i == null ? 4 : i; //can't be converted
 
-            x = (y == null) ? Identity(new object()) : Identity(y);  // Noncompliant {{Use the '??' operator here.}}
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            x = Identity(y ?? new object());  // Fixed
+
+            a ??= b;                 // Fixed
+            a ??= b;    // Fixed
+            a ??= b;    // Fixed
 
             x = a ?? b;
             x = a ?? b;
             x = y ?? new object();
             x = condition ? a : b;
 
-            if (condition) // Noncompliant {{Use the '?:' operator here.}}
-            {
-                x = a;
-            }
-            else
-            {
-                x = b;
-            }
+            x = condition ? a : b;
 
-            if (condition) // Noncompliant
-            {
-                x = Identity(new object());
-            }
-            else
-            {
-                x = IdentityAnyOtherMethod(y);
-            }
+            x = condition ? Identity(new object()) : IdentityAnyOtherMethod(y);
 
-            if (condition) // Noncompliant
-            {
-                Identity(new object());
-            }
-            else
-            {
-                Identity(y);
-            }
+            Identity(condition ? new object() : y);
 
-            if (condition) // Noncompliant
-            {
-                return 1;
-            }
-            else
-            {
-                return 2;
-            }
+            return condition ? 1 : 2;
 
             if (condition)
                 return 1;
@@ -99,29 +64,20 @@ namespace Tests.TestCases
                 x = o;
             }
 
-            bool? value = null;
+            a ??= b; // Fixed
 
-            if (value == null) // Compliant - FN:  x ??= false can be used instead
-                value = false;
+            if (a != null)
+            {
+                a = b;
+            }
+
+            bool? value = null;
+            value ??= false;  // Fixed
 
             var yyy = new Y();
-            if (condition) //Noncompliant
-            {
-                x = Identity(new Y());
-            }
-            else
-            {
-                x = Identity(yyy);
-            }
+            x = condition ? Identity(new Y()) : Identity(yyy);
 
-            if (condition) //Noncompliant
-            {
-                x = Identity(new Y());
-            }
-            else
-            {
-                x = Identity(new X());
-            }
+            x = condition ? Identity(new Y()) : Identity(new X());
 
             Base elem;
             if (condition) // Non-compliant, but not handled because of the type difference
@@ -133,19 +89,9 @@ namespace Tests.TestCases
                 elem = new B();
             }
 
-            if (condition) //Noncompliant
-                x = Identity(new Y());
-            else
-                x = Identity(yyy);
+            x = condition ? Identity(new Y()) : Identity(yyy);
 
-            if (condition) // Noncompliant
-            {
-                elem = new A();
-            }
-            else
-            {
-                elem = null;
-            }
+            elem = condition ? new A() : null;
             if (condition) // Non-compliant, but not handled because of the type difference
             {
                 elem = new A();
@@ -155,14 +101,17 @@ namespace Tests.TestCases
                 elem = new NonExistentType(); // Error [CS0246]
             }
 
-            if (false) // Noncompliant
-            {
-                elem = null;
-            }
-            else
-            {
-                elem = (null);
-            }
+            elem = false ? null : (null);
+        }
+
+        object IsNull1(object a, object b)
+        {
+            return a ?? b;
+        }
+
+        object IsNull2(object a, object b)
+        {
+            return a ?? b;
         }
 
         // we ignore lambdas because of type resolution for conditional expressions, see CS0173
@@ -255,14 +204,7 @@ namespace Tests.TestCases
                 Bar(name, true);
             }
 
-            if (name == "") // Noncompliant
-            {
-                Bar(((name)), ((false)));
-            }
-            else
-            {
-                Bar(name, true);
-            }
+            Bar(name, name == "" ? false : true);
         }
 
         private static void Bar(string name, bool? value) { }

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,22 +30,44 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ConditionalSimplification()
+        public void ConditionalSimplification_BeforeCSharp8()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.BeforeCSharp8.cs",
+                new ConditionalSimplification(),
+                options: ParseOptionsHelper.BeforeCSharp8);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ConditionalSimplification_FromCSharp8()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionalSimplification.FromCSharp8.cs",
                 new ConditionalSimplification(),
                 options: ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]
         [TestCategory("CodeFix")]
-        public void ConditionalSimplification_CodeFix()
+        public void ConditionalSimplification_BeforeCSharp8_CodeFix()
         {
             Verifier.VerifyCodeFix(
-                @"TestCases\ConditionalSimplification.cs",
-                @"TestCases\ConditionalSimplification.Fixed.cs",
+                @"TestCases\ConditionalSimplification.BeforeCSharp8.cs",
+                @"TestCases\ConditionalSimplification.BeforeCSharp8.Fixed.cs",
                 new ConditionalSimplification(),
-                new ConditionalSimplificationCodeFixProvider());
+                new ConditionalSimplificationCodeFixProvider(),
+                options: ParseOptionsHelper.BeforeCSharp8);
+        }
+
+        [TestMethod]
+        [TestCategory("CodeFix")]
+        public void ConditionalSimplification_FromCSharp8_CodeFix()
+        {
+            Verifier.VerifyCodeFix(
+                @"TestCases\ConditionalSimplification.FromCSharp8.cs",
+                @"TestCases\ConditionalSimplification.FromCSharp8.Fixed.cs",
+                new ConditionalSimplification(),
+                new ConditionalSimplificationCodeFixProvider(),
+                options: ParseOptionsHelper.FromCSharp8);
         }
     }
 }

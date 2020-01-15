@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -127,7 +127,7 @@ namespace SonarAnalyzer.Helpers
                 GetSettings(sourceText),
                 PropertiesHelper.AnalyzeGeneratedCodeVisualBasic,
                 false));
- 
+
         private static IEnumerable<XElement> GetSettings(SourceText sourceText)
         {
             try
