@@ -922,29 +922,9 @@ namespace Test
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_TupleExpressionsDeconstruct()
         {
-            const string testInput = @"
-using System.Collections.Generic;
+            const string testInput = "var (projectInstance, diagnostics) = loader;";
 
-namespace Tests.Diagnostics.CSharp8
-{
-    public class Loader
-    {
-        public void Deconstruct(out string projectInstance, out List<string> diagnostics)
-        {
-            projectInstance = "";
-            diagnostics = new List<string>();
-        }
-    }
-
-    public class Test
-    {
-        public void Main(Loader loader)
-        {
-            var (projectInstance, diagnostics) = loader;
-        }
-    }
-}";
-            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var context = new ExplodedGraphContext(testInput);
             var projectInstanceSymbol = context.GetSymbol("projectInstance", ExplodedGraphContext.SymbolType.Declaration);
             var diagnosticsSymbol = context.GetSymbol("diagnostics", ExplodedGraphContext.SymbolType.Declaration);
 
@@ -980,29 +960,9 @@ namespace Tests.Diagnostics.CSharp8
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_TupleExpressionsWithDiscardDeconstruct()
         {
-            const string testInput = @"
-using System.Collections.Generic;
+            const string testInput = "var (projectInstance, _) = loader;";
 
-namespace Tests.Diagnostics.CSharp8
-{
-    public class Loader
-    {
-        public void Deconstruct(out string projectInstance, out List<string> diagnostics)
-        {
-            projectInstance = "";
-            diagnostics = new List<string>();
-        }
-    }
-
-    public class Test
-    {
-        public void Main(Loader loader)
-        {
-            var (projectInstance, _) = loader;
-        }
-    }
-}";
-            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var context = new ExplodedGraphContext(testInput);
             var projectInstanceSymbol = context.GetSymbol("projectInstance", ExplodedGraphContext.SymbolType.Declaration);
 
             context.ExplodedGraph.InstructionProcessed +=
