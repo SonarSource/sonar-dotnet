@@ -80,8 +80,9 @@ namespace Tests.Diagnostics
     public class WithLocalFunctions
     {
         private int field;
+        private int Property { get; set; }
 
-        public void Method()
+        public void ShadowField()
         {
             void doSomething()
             {
@@ -94,13 +95,26 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void ShadowProperty()
+        {
+            void doSomething()
+            {
+                int Property = 0; // Noncompliant
+            }
+
+            static void doMore()
+            {
+                int Property = 0; // Noncompliant
+            }
+        }
+
         public void MethodWithLocalVar()
         {
             bool isUsed = true;
 
             void doSomething()
             {
-                bool isUsed = true; // Compliant - FN: should check also function variable shadowing?
+                bool isUsed = true; // Compliant - currently the rule only looks at fields and properties
             }
 
             static void doMore()
