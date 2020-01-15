@@ -1,5 +1,5 @@
-<p><code>switch</code> statements are useful when there are many different cases depending on the value of the same expression.</p>
-<p>For just one or two cases however, the code will be more readable with <code>if</code> statements.</p>
+<p><code>switch</code> statements and expressions are useful when there are many different cases depending on the value of the same expression.</p>
+<p>For just one or two cases however, the code will be more readable using <code>if</code> statements or the ternary operator instead.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 switch (variable)
@@ -11,6 +11,13 @@ switch (variable)
     doSomethingElse();
     break;
 }
+
+var foo = variable switch
+{
+  0 =&gt; doSomething(),
+  _ =&gt; doSomethingElse(),
+}
+
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
@@ -21,6 +28,21 @@ if (variable == 0)
 else
 {
   doSomethingElse();
+}
+
+var foo = variable == 0
+  ? doSomething()
+  : doSomethingElse();
+
+</pre>
+<h2>Exceptions</h2>
+<p>For <code>switch</code> expressions with two arms, this rule generates an issue only when one of the arms has the discard (default) value.</p>
+<p> Thus, the following code will not generate an issue</p>
+<pre>
+var foo = variable switch
+{
+  0 =&gt; doSomething(),
+  1 =&gt; doSomethingElse(),
 }
 </pre>
 

@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -33,9 +34,21 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class SwitchCasesMinimumThree : SwitchCasesMinimumThreeBase
     {
-        private const string MessageFormat = "Replace this 'switch' statement with 'if' statements to increase readability.";
+        private enum SwitchExpressionType
+        {
+            SingleReturnValue,
+            TwoReturnValues,
+            ManyReturnValues
+        }
+
+        private const string SwitchStatementMessage = "Replace this 'switch' statement with 'if' statements to increase readability.";
+
+        private const string TwoReturnValueSwitchExpressionMessage = "Replace this 'switch' expression with a ternary conditional operator to increase readability.";
+
+        private const string SingleReturnValueSwitchExpressionMessage = "Remove this 'switch' expression to increase readability.";
+
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, "{0}", RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
@@ -47,13 +60,49 @@ namespace SonarAnalyzer.Rules.CSharp
                     var switchNode = (SwitchStatementSyntax)c.Node;
                     if (!HasAtLeastThreeLabels(switchNode))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, switchNode.SwitchKeyword.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, switchNode.SwitchKeyword.GetLocation(), SwitchStatementMessage));
                     }
                 },
                 SyntaxKind.SwitchStatement);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var switchNode = (SwitchExpressionSyntaxWrapper)c.Node;
+                    var message = EvaluateType(switchNode) switch
+                    {
+                        SwitchExpressionType.SingleReturnValue => SingleReturnValueSwitchExpressionMessage,
+                        SwitchExpressionType.TwoReturnValues => TwoReturnValueSwitchExpressionMessage,
+                        _ => string.Empty
+                    };
+                    if (message != string.Empty)
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, switchNode.SwitchKeyword.GetLocation(), message));
+                    }
+                },
+                SyntaxKindEx.SwitchExpression);
         }
 
         private static bool HasAtLeastThreeLabels(SwitchStatementSyntax node) =>
             node.Sections.Sum(section => section.Labels.Count) >= 3;
+
+        private static SwitchExpressionType EvaluateType(SwitchExpressionSyntaxWrapper switchExpression)
+        {
+            var numberOfArms = switchExpression.Arms.Count;
+            if (numberOfArms > 2)
+            {
+                return SwitchExpressionType.ManyReturnValues;
+            }
+            var hasDiscardValue = switchExpression.Arms.Any(arm => DiscardPatternSyntaxWrapper.IsInstance(arm.Pattern.SyntaxNode));
+            if (numberOfArms == 2)
+            {
+                return hasDiscardValue ? SwitchExpressionType.TwoReturnValues : SwitchExpressionType.ManyReturnValues;
+            }
+            if (numberOfArms == 1)
+            {
+                return hasDiscardValue ? SwitchExpressionType.SingleReturnValue : SwitchExpressionType.TwoReturnValues;
+            }
+            return SwitchExpressionType.SingleReturnValue;
+        }
     }
 }
