@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -83,6 +84,37 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SymbolKind.NamedType);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                var localFunctionSyntax = (LocalFunctionStatementSyntaxWrapper)c.Node;
+                var localFunctionSymbol = c.SemanticModel.GetDeclaredSymbol(localFunctionSyntax);
+                var topmostContainingMethod = c.Node
+                    .AncestorsAndSelf()
+                    .Where(ancestor => ancestor is BaseMethodDeclarationSyntax || ancestor is PropertyDeclarationSyntax)
+                    .LastOrDefault();
+
+                if (localFunctionSymbol == null || topmostContainingMethod == null)
+                {
+                    return;
+                }
+
+                var invocations = topmostContainingMethod
+                    .DescendantNodes()
+                    .OfType<InvocationExpressionSyntax>()
+                    .Where(invocation => c.SemanticModel.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol methodSymbol
+                                        && localFunctionSymbol.Equals(methodSymbol));
+
+                var isReturnValueUsed = invocations.Any(invocation =>
+                    !IsExpressionStatement(invocation.Parent) &&
+                    !IsActionLambda(invocation.Parent, c.SemanticModel));
+
+                if (!isReturnValueUsed)
+                {
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, localFunctionSyntax.ReturnType.GetLocation()));
+                }
+            },
+            SyntaxKindEx.LocalFunctionStatement);
         }
 
         private static bool IsReturnValueUsed(IEnumerable<SyntaxNodeSymbolSemanticModelTuple<InvocationExpressionSyntax, IMethodSymbol>> matchingInvocations)

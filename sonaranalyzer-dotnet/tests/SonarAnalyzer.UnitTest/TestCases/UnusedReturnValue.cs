@@ -52,16 +52,35 @@ namespace Tests.Diagnostics
 
     public class WithLocalFunctions
     {
+        int MyProperty
+        {
+            get
+            {
+                GetNumber();
+                return 42;
+
+                int GetNumber() { return 42; } // Noncompliant
+            }
+        }
+
         public void Method()
         {
-            GetNumber();
-            GetNumberStatic();
+            GetNumber2();
+            var result1 = GetNumber3();
 
-            int GetNumber() { return 42; } // Compliant - FN
+            GetNumberStatic2();
+            var result2 = GetNumberStatic3();
 
-            static int GetNumberStatic() { return 42; } // Compliant - FN
+            int GetNumber1() { return 42; } // Noncompliant {{Change return type to 'void'; not a single caller uses the returned value.}}
+//          ^^^
+            int GetNumber2() { return 42; } // Noncompliant
+            int GetNumber3() { return 42; }
 
-            static int GetNumberStaticExpression() => 42; // Compliant - FN, the sole purpose of expressions is to return values, in this case the function can be deleted
+            static int GetNumberStatic1() { return 42; } // Noncompliant
+            static int GetNumberStatic2() { return 42; } // Noncompliant
+            static int GetNumberStatic3() { return 42; }
+
+            static int GetNumberStaticExpression() => 42; // Noncompliant
         }
     }
 }

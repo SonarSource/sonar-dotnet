@@ -32,7 +32,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UnusedReturnValue()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\UnusedReturnValue.cs", new UnusedReturnValue(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\UnusedReturnValue.cs",
+                new UnusedReturnValue(),
+                ParseOptionsHelper.FromCSharp8);
         }
     }
 }
