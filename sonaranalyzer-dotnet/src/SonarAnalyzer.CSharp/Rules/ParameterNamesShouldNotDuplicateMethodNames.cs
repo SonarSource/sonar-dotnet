@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -47,20 +48,30 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var method = (MethodDeclarationSyntax)c.Node;
-
-                var methodName = method.Identifier.ToString();
-
-                foreach (var parameter in method.ParameterList.Parameters.Select(p => p.Identifier))
-                {
-                    var parameterName = parameter.ToString();
-                    if (string.Equals(parameterName, methodName, StringComparison.OrdinalIgnoreCase))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameter.GetLocation(),
-                            new[] { method.Identifier.GetLocation() }, parameterName));
-                    }
-                }
+                CheckMethodParameters(c, method.Identifier, method.ParameterList);
             },
             SyntaxKind.MethodDeclaration);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                var localFunction = (LocalFunctionStatementSyntaxWrapper)c.Node;
+                CheckMethodParameters(c, localFunction.Identifier, localFunction.ParameterList);
+            },
+            SyntaxKindEx.LocalFunctionStatement);
+        }
+
+        private static void CheckMethodParameters(SyntaxNodeAnalysisContext context, SyntaxToken identifier, ParameterListSyntax parameterList)
+        {
+            var methodName = identifier.ToString();
+            foreach (var parameter in parameterList.Parameters.Select(p => p.Identifier))
+            {
+                var parameterName = parameter.ToString();
+                if (string.Equals(parameterName, methodName, StringComparison.OrdinalIgnoreCase))
+                {
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameter.GetLocation(),
+                        new[] { identifier.GetLocation() }, parameterName));
+                }
+            }
         }
     }
 }
