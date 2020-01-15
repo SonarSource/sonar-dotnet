@@ -100,6 +100,13 @@ From Visual Studio, make sure `SonarAnalyzer.Vsix.csproj` is selected as startup
     - [Ember-MM](Ember-MM/Ember%20Media%20Manager.sln)
 4. Turn on your new rule in [Validation Ruleset](ValidationRuleset.ruleset), review the results, improve, and setup the regression test once you are satisfied.
     - Note: the solutions have been pre-configured to use this ruleset on all their projects.
+    - Note: for rules that need project-specific configuration, you need to manually add the link to the project-specific SonarLint.xml file
+      e.g. for Akka.net `..\akka.net\src\core\Akka\Akka.csproj` add
+```
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\..\SonarLint.xml" />
+  </ItemGroup>
+```
 
 ## Contributing
 
