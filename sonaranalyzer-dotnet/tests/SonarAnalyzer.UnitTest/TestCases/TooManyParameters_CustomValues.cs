@@ -82,4 +82,16 @@ namespace Tests.Diagnostics
 
         }
     }
+
+    public class TooManyParametersLocalFunctions
+    {
+        public void MainMethod(int p1, int p2, int p3)
+        {
+            string OKNumberOfParameters1(int p1, int p2) => "";
+            static void OKNumberOfParameters2(int p1, int p2, int p3) { }
+
+            void TooManyParameters1(int p1, int p2, int p3, int p4) { } // Noncompliant {{Local function has 4 parameters, which is greater than the 3 authorized.}}
+            static string TooManyParameters2(int p1, int p2, int p3, int p4, int p5) => ""; // Noncompliant {{Local function has 5 parameters, which is greater than the 3 authorized.}}
+        }
+    }
 }

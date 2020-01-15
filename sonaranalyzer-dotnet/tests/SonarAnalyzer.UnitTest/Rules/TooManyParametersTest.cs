@@ -35,7 +35,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TooManyParameters_CS_CustomValues()
         {
             Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_CustomValues.cs",
-                new CSharp.TooManyParameters { Maximum = 3 });
+                new CSharp.TooManyParameters { Maximum = 3 },
+                ParseOptionsHelper.FromCSharp8);
         }
 
         [TestMethod]
@@ -61,7 +62,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters_DefaultValues.vb", new VisualBasic.TooManyParameters());
         }
-
     }
 }
 
