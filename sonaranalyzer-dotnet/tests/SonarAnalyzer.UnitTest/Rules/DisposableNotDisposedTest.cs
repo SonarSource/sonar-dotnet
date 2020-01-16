@@ -32,7 +32,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DisposableNotDisposed()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\DisposableNotDisposed.cs", new DisposableNotDisposed(), ParseOptionsHelper.FromCSharp8);
+            Verifier.VerifyAnalyzer(@"TestCases\DisposableNotDisposed.cs",
+                new DisposableNotDisposed(),
+                ParseOptionsHelper.FromCSharp8);
         }
     }
 }

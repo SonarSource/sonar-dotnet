@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -125,33 +126,24 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void TrackInitializedLocalsAndPrivateFields(SyntaxNode typeDeclaration, SemanticModel semanticModel, ISet<NodeAndSymbol> trackedNodesAndSymbols)
         {
-            var localAndFieldDeclarations = typeDeclaration
+            var localVariableDeclarations = typeDeclaration
                 .DescendantNodes()
-                .Where(n => n.IsKind(SyntaxKind.LocalDeclarationStatement) || n.IsKind(SyntaxKind.FieldDeclaration));
+                .OfType<LocalDeclarationStatementSyntax>()
+                .Where(localDeclaration => !localDeclaration.UsingKeyword().IsKind(SyntaxKind.UsingKeyword))
+                .Select(localDeclaration => localDeclaration.Declaration);
 
-            foreach (var localOrFieldDeclaration in localAndFieldDeclarations)
+            var fieldVariableDeclarations = typeDeclaration
+                .DescendantNodes()
+                .OfType<FieldDeclarationSyntax>()
+                .Where(fieldDeclaration => !fieldDeclaration.Modifiers.Any() || fieldDeclaration.Modifiers.Any(SyntaxKind.PrivateKeyword))
+                .Select(fieldDeclaration => fieldDeclaration.Declaration);
+
+            var variableDeclarations = localVariableDeclarations.Concat(fieldVariableDeclarations);
+
+            foreach (var declaration in variableDeclarations)
             {
-                VariableDeclarationSyntax declaration;
-                if (localOrFieldDeclaration.IsKind(SyntaxKind.LocalDeclarationStatement))
-                {
-                    declaration = ((LocalDeclarationStatementSyntax)localOrFieldDeclaration).Declaration;
-                }
-                else if (localOrFieldDeclaration.IsKind(SyntaxKind.FieldDeclaration))
-                {
-                    var fieldDeclaration = (FieldDeclarationSyntax)localOrFieldDeclaration;
-                    if (fieldDeclaration.Modifiers.Any() && !fieldDeclaration.Modifiers.Any(SyntaxKind.PrivateKeyword))
-                    {
-                        continue;
-                    }
-
-                    declaration = fieldDeclaration.Declaration;
-                }
-                else
-                {
-                    throw new NotSupportedException("Syntax node should be either a local declaration or a field declaration");
-                }
-
-                foreach (var variableNode in declaration.Variables.Where(v => v.Initializer != null && IsInstantiation(v.Initializer.Value, semanticModel)))
+                var trackedVariables = declaration.Variables.Where(v => v.Initializer != null && IsInstantiation(v.Initializer.Value, semanticModel));
+                foreach (var variableNode in trackedVariables)
                 {
                     trackedNodesAndSymbols.Add(new NodeAndSymbol { Node = variableNode, Symbol = semanticModel.GetDeclaredSymbol(variableNode) });
                 }
@@ -293,6 +285,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsInstantiation(ExpressionSyntax expression, SemanticModel semanticModel)
         {
             return IsNewTrackedTypeObjectCreation(expression, semanticModel) ||
+                IsDisposableRefStructCreation(expression, semanticModel) ||
                 IsFactoryMethodInvocation(expression, semanticModel);
         }
 
@@ -310,6 +303,19 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             return semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol constructor && !constructor.Parameters.Any(p => p.Type.Implements(KnownType.System_IDisposable));
+        }
+
+        private static bool IsDisposableRefStructCreation(ExpressionSyntax expression, SemanticModel semanticModel)
+        {
+            if (!expression.IsKind(SyntaxKind.ObjectCreationExpression))
+            {
+                return false;
+            }
+
+            var type = semanticModel.GetTypeInfo(expression).Type;
+            return type.IsStruct()
+                && type.IsRefLikeType()
+                && type.GetMembers().OfType<IMethodSymbol>().Any(methodSymbol => methodSymbol.Name == "Dispose");
         }
 
         private static bool IsFactoryMethodInvocation(ExpressionSyntax expression, SemanticModel semanticModel)
