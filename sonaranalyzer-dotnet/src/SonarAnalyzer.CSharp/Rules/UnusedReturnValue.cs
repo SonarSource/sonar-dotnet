@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     !IsExpressionStatement(invocation.Parent) &&
                     !IsActionLambda(invocation.Parent, c.SemanticModel));
 
-                if (!isReturnValueUsed)
+                if (invocations.Any() && !isReturnValueUsed)
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, localFunctionSyntax.ReturnType.GetLocation()));
                 }
