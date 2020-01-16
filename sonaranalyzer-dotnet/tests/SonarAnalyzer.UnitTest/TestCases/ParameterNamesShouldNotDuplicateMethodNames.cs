@@ -12,6 +12,11 @@ namespace Tests.Diagnostics
         {
             // Do something
         }
+
+        public int @int(int @int) => 0; // Noncompliant
+                                        // Secondary@-1
+
+        public int @int(string @int1) => 0;
     }
 
     class WithLocalFunctions
