@@ -52,11 +52,14 @@ namespace Tests.Diagnostics
             }
         }
 
-        public FileStream Method(string path, string text)
+        public FileStream Method(string path)
         {
-            using var fs = File.Create(path); // Compliant - FN the resource is returned already disposed
+            using var fs1 = File.Create(path); // Noncompliant {{Remove the 'using' statement; it will cause automatic disposal of 'fs1'.}}
+//          ^^^^^
 
-            return fs;
+            using var fs2 = File.Create(path);
+
+            return fs1;
         }
 
         public ref struct Struct
@@ -66,7 +69,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        public Struct Foo(string path, string text)
+        public Struct Foo()
         {
             using (var disposableRefStruct = new Struct()) // Noncompliant {{Remove the 'using' statement; it will cause automatic disposal of 'disposableRefStruct'.}}
             {
@@ -74,11 +77,18 @@ namespace Tests.Diagnostics
             }
         }
 
-        public Struct Bar(string path, string text)
+        public Struct Bar()
         {
-            using var disposableRefStruct = new Struct(); // Compliant - FN the resource is returned already disposed
+            using var disposableRefStruct = new Struct(); // Noncompliant
 
             return disposableRefStruct;
+        }
+
+        public Struct FooBar()
+        {
+            using var notReturnedDisposableRefStruct = new Struct();
+            var notUsingRefStruct = new Struct();
+            return notUsingRefStruct;
         }
     }
 }
