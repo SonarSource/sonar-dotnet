@@ -26,10 +26,12 @@ namespace Tests.Diagnostics
         private int MyMethod1() { return 42; } // Compliant, unused, S1144 also reports on it
         private int MyMethod2() { return 42; }
         private int MyMethod3() { return 42; }
+        private void MyMethod4() { return; }
 
         public void Test()
         {
             MyMethod();
+            MyMethod4();
             var i = MyMethod2();
             Action<int> a = (x) => MyMethod();
             Func<int> f = () => MyMethod3();
@@ -68,6 +70,7 @@ namespace Tests.Diagnostics
         public void Method(IEnumerable<string> myEnumerable)
         {
             GetNumber1();
+            VoidFunction();
             var result1 = GetNumber3();
 
             GetNumberStatic1();
@@ -82,6 +85,8 @@ namespace Tests.Diagnostics
             int GetNumber2() { return 42; } // Compliant - unused local functions are outside the scope of this rule
             int GetNumber3() { return 42; }
             int GetNumber4(string myParam) { return 42; }
+
+            void VoidFunction() { return; }
 
             static int GetNumberStatic1() { return 42; } // Noncompliant
             static int GetNumberStatic2() { return 42; } // Compliant -  local functions are outside the scope of this rule

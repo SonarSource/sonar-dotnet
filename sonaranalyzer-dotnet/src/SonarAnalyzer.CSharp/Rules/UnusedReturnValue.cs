@@ -88,13 +88,13 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var localFunctionSyntax = (LocalFunctionStatementSyntaxWrapper)c.Node;
-                var localFunctionSymbol = c.SemanticModel.GetDeclaredSymbol(localFunctionSyntax);
+                var localFunctionSymbol = c.SemanticModel.GetDeclaredSymbol(localFunctionSyntax) as IMethodSymbol;
                 var topmostContainingMethod = c.Node
                     .AncestorsAndSelf()
                     .Where(ancestor => ancestor is BaseMethodDeclarationSyntax || ancestor is PropertyDeclarationSyntax)
                     .LastOrDefault();
 
-                if (localFunctionSymbol == null || topmostContainingMethod == null)
+                if (localFunctionSymbol == null || localFunctionSymbol.ReturnsVoid || topmostContainingMethod == null)
                 {
                     return;
                 }
