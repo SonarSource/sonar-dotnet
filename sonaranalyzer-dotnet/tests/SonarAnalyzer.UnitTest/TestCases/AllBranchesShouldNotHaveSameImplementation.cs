@@ -145,22 +145,20 @@ namespace Tests.Diagnostics
         {
         }
 
-        public int SwitchExpressionNoncompliant(string type)
-        {
-            return type switch // Compliant - FN: all branches call the same function
+        public int SwitchExpressionNoncompliant(string type) =>
+            type switch // Noncompliant
             {
                 "a" => GetNumber(),
                 "b" => GetNumber(),
                 _ => GetNumber()
             };
-        }
 
         public int SwitchExpressionNested(string type)
         {
             return type switch
             {
                 "a" => GetNumber(),
-                _ => type switch // Compliant - FN: all branches call the same function
+                _ => type switch // Noncompliant
                 {
                         "b" => GetNumber(),
                         "c" => GetNumber(),
@@ -173,12 +171,23 @@ namespace Tests.Diagnostics
 
         public int SwitchExpressionCompliant(string type)
         {
-            return type switch // Compliant
+            var x = type switch // Compliant
             {
                 "a" => 42,
                 "b" => type.Length,
-                _ => GetNumber()
+                _ => GetNumber(),
             };
+            string y = type switch { }; // Compliant
+            var z = type switch { "a" => 42 }; // Compliant
+            var withoutDefault = type switch // Compliant, does not have the discard default arm
+            {
+                "a" => GetNumber(),
+                "b" => GetNumber(),
+                "c" => GetNumber(),
+                "d" => GetNumber(),
+                "e" => GetNumber(),
+            };
+            return x;
         }
     }
 }
