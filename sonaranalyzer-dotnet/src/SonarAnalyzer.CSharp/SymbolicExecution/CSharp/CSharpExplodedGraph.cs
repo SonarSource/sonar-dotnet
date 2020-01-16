@@ -576,7 +576,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private static ProgramState VisitDiscardDesignationSyntax(DiscardDesignationSyntaxWrapper wrapper, ProgramState programState)
         {
-            // In case of discard designation we push a new symbolic value with no constrains.
+            // In case of discard designation we push a new symbolic value with no constraints.
             // This is used when processing method invocations since, when the method is called, we pop a symbolic value
             // from the expression stack for each method argument.
             programState = programState.PushValue(new SymbolicValue());
