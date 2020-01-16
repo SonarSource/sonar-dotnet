@@ -29,6 +29,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -60,7 +61,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 { SyntaxKind.ClassDeclaration, "class" },
                 { SyntaxKind.InterfaceDeclaration, "interface" },
                 { SyntaxKind.MethodDeclaration, "method" },
-                { SyntaxKind.PropertyDeclaration, "property" }
+                { SyntaxKind.PropertyDeclaration, "property" },
+                { SyntaxKindEx.LocalFunctionStatement, "local function" },
             };
 
         private static readonly ImmutableArray<KnownType> ComRelatedTypes =
@@ -80,18 +82,12 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var declaration = (MethodDeclarationSyntax)c.Node;
-                    CheckMemberName(declaration, declaration.Identifier, c);
+                    var identifier = GetDeclarationIdentifier(c.Node);
+                    CheckMemberName(c.Node, identifier, c);
                 },
-                SyntaxKind.MethodDeclaration);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var declaration = (PropertyDeclarationSyntax)c.Node;
-                    CheckMemberName(declaration, declaration.Identifier, c);
-                },
-                SyntaxKind.PropertyDeclaration);
+                SyntaxKind.MethodDeclaration,
+                SyntaxKind.PropertyDeclaration,
+                SyntaxKindEx.LocalFunctionStatement);
         }
 
         private static void CheckTypeName(SyntaxNodeAnalysisContext context)
@@ -135,8 +131,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckMemberName(MemberDeclarationSyntax member, SyntaxToken identifier,
-            SyntaxNodeAnalysisContext context)
+        private static void CheckMemberName(SyntaxNode member, SyntaxToken identifier, SyntaxNodeAnalysisContext context)
         {
             var symbol = context.SemanticModel.GetDeclaredSymbol(member);
             if (symbol == null)
@@ -344,5 +339,14 @@ namespace SonarAnalyzer.Rules.CSharp
             idx >= 0
             && idx < input.Length
             && char.IsUpper(input[idx]);
+
+        private static SyntaxToken GetDeclarationIdentifier(SyntaxNode declaration) =>
+            declaration.Kind() switch
+            {
+                SyntaxKind.MethodDeclaration => ((MethodDeclarationSyntax)declaration).Identifier,
+                SyntaxKind.PropertyDeclaration => ((PropertyDeclarationSyntax)declaration).Identifier,
+                SyntaxKindEx.LocalFunctionStatement => ((LocalFunctionStatementSyntaxWrapper)declaration).Identifier,
+                _ => throw new InvalidOperationException("Method can only be called on known registered syntax kinds")
+            };
     }
 }

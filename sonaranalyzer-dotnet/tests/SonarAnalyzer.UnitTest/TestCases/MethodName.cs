@@ -93,9 +93,9 @@
     {
         public void Method()
         {
-            void foo() { } // Compliant - FN
+            void foo() { } // Noncompliant {{Rename local function 'foo' to match pascal case naming rules, consider using 'Foo'.}}
 
-            static void Do_Some_Test_() { } // Compliant - FN
+            static void Do_Some_Test_() { } // Noncompliant {{Rename local function 'Do_Some_Test_' to match pascal case naming rules, trim underscores from the name.}}
         }
     }
 
