@@ -560,12 +560,26 @@ namespace SonarAnalyzer.SymbolicExecution
                 return VisitParenthesizedVariableDesignationSyntax((ParenthesizedVariableDesignationSyntaxWrapper)wrapper.Designation, programState);
             }
 
+            if (DiscardDesignationSyntaxWrapper.IsInstance(wrapper.Designation))
+            {
+                return VisitDiscardDesignationSyntax(programState);
+            }
+
             var declaredSymbol = SemanticModel.GetDeclaredSymbol(wrapper.Designation);
             var symbolicValue = SymbolicValue.Create(declaredSymbol.GetSymbolType());
 
             programState = programState.PushValue(symbolicValue);
             programState = programState.StoreSymbolicValue(declaredSymbol, symbolicValue);
 
+            return programState;
+        }
+
+        private static ProgramState VisitDiscardDesignationSyntax(ProgramState programState)
+        {
+            // In case of discard designation we push a new symbolic value with no constraints.
+            // This is used when processing method invocations since, when the method is called, we pop a symbolic value
+            // from the expression stack for each method argument.
+            programState = programState.PushValue(new SymbolicValue());
             return programState;
         }
 

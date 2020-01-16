@@ -471,12 +471,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     return BuildJumpToExitStatement(throwExpression, currentBlock, throwExpression.Expression);
 
                 case SyntaxKindEx.DeclarationExpression:
-                    // we ignore 'discard' parameters
-                    var declaration = (DeclarationExpressionSyntaxWrapper)expression;
-                    if (!declaration.Designation.SyntaxNode.IsKind(SyntaxKindEx.DiscardDesignation))
-                    {
-                        currentBlock.ReversedInstructions.Add(expression);
-                    }
+                    currentBlock.ReversedInstructions.Add(expression);
                     return currentBlock;
 
                 case SyntaxKindEx.RefExpression:
