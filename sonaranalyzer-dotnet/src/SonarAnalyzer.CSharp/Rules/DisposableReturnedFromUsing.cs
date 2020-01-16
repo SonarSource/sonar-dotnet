@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -49,55 +50,75 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var usingStatement = (UsingStatementSyntax) c.Node;
                     var declaration = usingStatement.Declaration;
-                    var declaredSymbols = new HashSet<ISymbol>();
+                    var symbolsDeclaredInUsing = new HashSet<ISymbol>();
                     if (declaration != null)
                     {
-                        declaredSymbols =
+                        symbolsDeclaredInUsing =
                             declaration.Variables.Select(syntax => c.SemanticModel.GetDeclaredSymbol(syntax))
                                 .WhereNotNull()
                                 .ToHashSet();
                     }
-                    else
+                    else if (usingStatement.Expression is AssignmentExpressionSyntax assignment)
                     {
-                        if (usingStatement.Expression is AssignmentExpressionSyntax assignment)
+                        if (!(assignment.Left is IdentifierNameSyntax identifierName))
                         {
-                            if (!(assignment.Left is IdentifierNameSyntax identifierName))
-                            {
-                                return;
-                            }
-                            var symbol = c.SemanticModel.GetSymbolInfo(identifierName).Symbol;
-                            if (symbol == null)
-                            {
-                                return;
-                            }
-                            declaredSymbols = new HashSet<ISymbol> { symbol };
+                            return;
                         }
+                        var symbol = c.SemanticModel.GetSymbolInfo(identifierName).Symbol;
+                        if (symbol == null)
+                        {
+                            return;
+                        }
+                        symbolsDeclaredInUsing = new HashSet<ISymbol> { symbol };
                     }
 
-                    if (declaredSymbols.Count == 0)
+                    CheckReturns(c, usingStatement.UsingKeyword, usingStatement.Statement, symbolsDeclaredInUsing);
+                },
+                SyntaxKind.UsingStatement);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var localDeclarationStatement = (LocalDeclarationStatementSyntax)c.Node;
+                    var usingKeyword = localDeclarationStatement.UsingKeyword();
+                    if (!usingKeyword.IsKind(SyntaxKind.UsingKeyword))
                     {
                         return;
                     }
 
-                    var returnedSymbols = GetReturnedSymbols(usingStatement.Statement, c.SemanticModel);
-                    returnedSymbols.IntersectWith(declaredSymbols);
+                    var declaredSymbols = localDeclarationStatement.Declaration.Variables
+                                .Select(syntax => c.SemanticModel.GetDeclaredSymbol(syntax))
+                                .WhereNotNull()
+                                .ToHashSet();
 
-                    if (returnedSymbols.Any())
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, usingStatement.UsingKeyword.GetLocation(),
-                            string.Join(", ",
-                                returnedSymbols.Select(s => $"'{s.Name}'").OrderBy(s => s))));
-                    }
+                    CheckReturns(c, usingKeyword, localDeclarationStatement.Parent, declaredSymbols);
                 },
-                SyntaxKind.UsingStatement);
+                SyntaxKind.LocalDeclarationStatement);
         }
 
-        private static ISet<ISymbol> GetReturnedSymbols(StatementSyntax usingStatement,
-            SemanticModel semanticModel)
+        private static void CheckReturns(SyntaxNodeAnalysisContext c, SyntaxToken usingKeyword, SyntaxNode body, HashSet<ISymbol> declaredSymbols)
         {
-            var enclosingSymbol = semanticModel.GetEnclosingSymbol(usingStatement.SpanStart);
+            if (declaredSymbols.Count == 0)
+            {
+                return;
+            }
 
-            return usingStatement.DescendantNodesAndSelf()
+            var returnedSymbols = GetReturnedSymbols(body, c.SemanticModel);
+            returnedSymbols.IntersectWith(declaredSymbols);
+
+            if (returnedSymbols.Any())
+            {
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, usingKeyword.GetLocation(),
+                    string.Join(", ",
+                        returnedSymbols.Select(s => $"'{s.Name}'").OrderBy(s => s))));
+            }
+        }
+
+        private static ISet<ISymbol> GetReturnedSymbols(SyntaxNode body, SemanticModel semanticModel)
+        {
+            var enclosingSymbol = semanticModel.GetEnclosingSymbol(body.SpanStart);
+
+            return body.DescendantNodesAndSelf()
                 .OfType<ReturnStatementSyntax>()
                 .Where(ret => semanticModel.GetEnclosingSymbol(ret.SpanStart).Equals(enclosingSymbol))
                 .Select(ret => ret.Expression)
