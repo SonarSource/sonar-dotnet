@@ -20,12 +20,14 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -42,6 +44,10 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
+                context => Analyze(context, (SwitchExpressionSyntaxWrapper)context.Node),
+                SyntaxKindEx.SwitchExpression);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
                 new SwitchStatementAnalyzer().GetAnalysisAction(rule, "switch"),
                 SyntaxKind.SwitchStatement);
 
@@ -52,6 +58,22 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 new IfStatementAnalyzer().GetAnalysisAction(rule, "if"),
                 SyntaxKind.ElseClause);
+        }
+
+        private static void Analyze(SyntaxNodeAnalysisContext context, SwitchExpressionSyntaxWrapper switchExpression)
+        {
+            var arms = switchExpression.Arms;
+            if (arms.Count < 2)
+            {
+                return;
+            }
+            var firstArm = arms[0];
+            if (switchExpression.HasDiscardPattern() &&
+                arms.Skip(1).All(arm => SyntaxFactory.AreEquivalent(arm.Expression, firstArm.Expression)))
+            {
+                var message = string.Format(SelectMessage, "switch");
+                context.ReportDiagnostic(Diagnostic.Create(rule, switchExpression.SwitchKeyword.GetLocation(), message));
+            }
         }
 
         private class IfStatementAnalyzer : IfStatementAnalyzerBase<ElseClauseSyntax, IfStatementSyntax>
