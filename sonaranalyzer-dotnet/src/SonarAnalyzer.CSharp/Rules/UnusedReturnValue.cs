@@ -49,8 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var namedType = (INamedTypeSymbol)c.Symbol;
-                    if (!namedType.IsClassOrStruct() ||
-                        namedType.ContainingType != null)
+                    if (!namedType.IsClassOrStruct() || namedType.ContainingType != null)
                     {
                         return;
                     }
@@ -67,17 +66,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var declaredPrivateMethodWithReturn in declaredPrivateMethodsWithReturn)
                     {
-                        var matchingInvocations = invocations
-                            .Where(inv => object.Equals(inv.Symbol.OriginalDefinition, declaredPrivateMethodWithReturn.Symbol))
-                            .ToList();
+                        var matchingInvocations = invocations.Where(inv => object.Equals(inv.Symbol.OriginalDefinition, declaredPrivateMethodWithReturn.Symbol));
 
-                        if (!matchingInvocations.Any())
-                        {
-                            /// this is handled by S1144 <see cref="UnusedPrivateMember"/>
-                            continue;
-                        }
-
-                        if (!IsReturnValueUsed(matchingInvocations))
+                        /// 0 invocation is handled by S1144 <see cref="UnusedPrivateMember"/>
+                        if (matchingInvocations.Any() && !IsReturnValueUsed(matchingInvocations))
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, declaredPrivateMethodWithReturn.SyntaxNode.ReturnType.GetLocation()));
                         }
@@ -91,8 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var localFunctionSymbol = c.SemanticModel.GetDeclaredSymbol(localFunctionSyntax) as IMethodSymbol;
                 var topmostContainingMethod = c.Node
                     .AncestorsAndSelf()
-                    .Where(ancestor => ancestor is BaseMethodDeclarationSyntax || ancestor is PropertyDeclarationSyntax)
-                    .LastOrDefault();
+                    .LastOrDefault(ancestor => ancestor is BaseMethodDeclarationSyntax || ancestor is PropertyDeclarationSyntax);
 
                 if (localFunctionSymbol == null || localFunctionSymbol.ReturnsVoid || topmostContainingMethod == null)
                 {
