@@ -1008,26 +1008,22 @@ namespace Test
                     {
                         case "obj":
                             args.ProgramState.GetSymbolValue(resultSymbol).Should().BeNull();
-                            args.ProgramState.ExpressionStack.Peek().ToString().Should().Be("SV_2"); // obj => SV_2
                             break;
 
                         case "obj.Read":
                             args.ProgramState.GetSymbolValue(resultSymbol).Should().BeNull();
-                            args.ProgramState.ExpressionStack.Peek().ToString().Should().Be("SV_2.Read");
                             break;
 
                         case "int _":
                             args.ProgramState.GetSymbolValue(resultSymbol).Should().BeNull();
-                            args.ProgramState.ExpressionStack.Peek().ToString().Should().Be("SV_4"); // _ => SV_4
                             break;
 
                         case "obj.Read(out int _)":
                             args.ProgramState.GetSymbolValue(resultSymbol).Should().BeNull();
-                            args.ProgramState.ExpressionStack.Peek().ToString().Should().Be("SV_5"); // invocation return value => SV_5
                             break;
 
                         case "result = obj.Read(out int _)":
-                            args.ProgramState.GetSymbolValue(resultSymbol).ToString().Should().Be("SV_5"); // result = invocation return value (SV_5)
+                            args.ProgramState.GetSymbolValue(resultSymbol).Should().NotBeNull();
                             args.ProgramState.HasValue.Should().BeFalse();
                             break;
                     }
