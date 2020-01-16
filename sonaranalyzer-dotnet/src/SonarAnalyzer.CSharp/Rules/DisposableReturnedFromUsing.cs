@@ -50,10 +50,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var usingStatement = (UsingStatementSyntax) c.Node;
                     var declaration = usingStatement.Declaration;
-                    var declaredSymbols = new HashSet<ISymbol>();
+                    var symbolsDeclaredInUsing = new HashSet<ISymbol>();
                     if (declaration != null)
                     {
-                        declaredSymbols =
+                        symbolsDeclaredInUsing =
                             declaration.Variables.Select(syntax => c.SemanticModel.GetDeclaredSymbol(syntax))
                                 .WhereNotNull()
                                 .ToHashSet();
@@ -69,10 +69,10 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             return;
                         }
-                        declaredSymbols = new HashSet<ISymbol> { symbol };
+                        symbolsDeclaredInUsing = new HashSet<ISymbol> { symbol };
                     }
 
-                    CheckReturns(c, usingStatement.UsingKeyword, usingStatement.Statement, declaredSymbols);
+                    CheckReturns(c, usingStatement.UsingKeyword, usingStatement.Statement, symbolsDeclaredInUsing);
                 },
                 SyntaxKind.UsingStatement);
 

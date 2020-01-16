@@ -62,6 +62,26 @@ namespace Tests.Diagnostics
             return fs1;
         }
 
+        public FileStream MethodSingleNoncompliantVariables(string path)
+        {
+            // Noncompliant@+1 {{Remove the 'using' statement; it will cause automatic disposal of 'fs1'.}}
+            using FileStream fs1 = File.Create(path), fs2 = File.Create(path);
+
+            if (path != null)
+                return fs1;
+            return null;
+        }
+
+        public FileStream MethodMultipleNoncompliantVariables(string path)
+        {
+            // Noncompliant@+1 {{Remove the 'using' statement; it will cause automatic disposal of 'fs1', 'fs2'.}}
+            using FileStream fs1 = File.Create(path), fs2 = File.Create(path);
+
+            if (path != null)
+                return fs1;
+            return fs2;
+        }
+
         public ref struct Struct
         {
             public void Dispose()
@@ -89,6 +109,13 @@ namespace Tests.Diagnostics
             using var notReturnedDisposableRefStruct = new Struct();
             var notUsingRefStruct = new Struct();
             return notUsingRefStruct;
+        }
+
+        public Struct BarFoo()
+        {
+            using var foo = new Struct(); // FN - we do not track alias variables
+            var bar = foo;
+            return bar;
         }
     }
 }
