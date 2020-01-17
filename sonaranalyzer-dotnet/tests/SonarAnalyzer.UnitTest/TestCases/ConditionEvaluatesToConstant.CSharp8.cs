@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
@@ -104,7 +105,7 @@ namespace Tests.Diagnostics
             return UseValueInside();
         }
 
-        void NullCoalesceAssignment(string a, string b, string c)
+        void NullCoalesceAssignment(string a, string b, string c, Options options)
         {
             a ??= "(empty)";
             if (a == null)  // Noncompliant
@@ -122,8 +123,37 @@ namespace Tests.Diagnostics
             {                               // Secondary
                 throw new ArgumentNullException(nameof(c)); // never executed
             }
-        }
 
+            if ((options.First ??= "(empty)") == null)  // Noncompliant
+            {                                           // Secondary
+                throw new ArgumentNullException(nameof(c)); // never executed
+            }
+
+            if ((options.First ??= options.Second ??= "(empty)") == null)  // Noncompliant
+            {                                                              // Secondary
+                throw new ArgumentNullException(nameof(c)); // never executed
+            }
+
+            if ((options.field ??= "(empty)") == null)  // Noncompliant
+            {                                           // Secondary
+                throw new ArgumentNullException(nameof(c)); // never executed
+            }
+
+            var list = new List<string>();
+            if ((list[0] ??= "(empty)") == null)  // Noncompliant
+            {                                     // Secondary
+                throw new ArgumentNullException(nameof(c)); // never executed
+            }
+        }
+    }
+
+    public class Options
+    {
+        public string First { get; set; }
+
+        public string Second { get; set; }
+
+        public string field;
     }
 
     // See https://github.com/SonarSource/sonar-dotnet/issues/2496

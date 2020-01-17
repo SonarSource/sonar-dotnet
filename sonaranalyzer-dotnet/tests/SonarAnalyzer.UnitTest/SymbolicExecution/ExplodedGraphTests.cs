@@ -1032,6 +1032,29 @@ namespace Test
             context.WalkWithInstructions(5);
         }
 
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_CoalesceAssignmentOnProperty()
+        {
+            var context = new ExplodedGraphContext("return options.Property ??= 1");
+
+            context.ExplodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+
+                    if (instruction != "options.Property ??= 1")
+                    {
+                        return;
+                    }
+
+                    // The symbolic value corresponding to the expression result should have the NotNull constraint an all branches.
+                    args.ProgramState.HasConstraint(args.ProgramState.PeekValue(), ObjectConstraint.NotNull).Should().BeTrue();
+                };
+
+            context.WalkWithExitBlocks(5, 2);
+        }
+
         private class ExplodedGraphContext
         {
             public readonly SemanticModel SemanticModel;
