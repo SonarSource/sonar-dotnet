@@ -10,10 +10,10 @@ namespace Tests.TestCases
             a = a ?? b;    // Fixed
             a = a ?? b;    // Fixed
 
-            a = a ?? b; // Fixed
+            a = a ?? b;
 
             bool? value = null;
-            value = value ?? false;  // Fixed
+            value = value ?? false;
 
         }
     }

@@ -64,7 +64,8 @@ namespace Tests.TestCases
                 x = o;
             }
 
-            a ??= b; // Fixed
+            //This will be CodeFix-ed
+            a ??= b;
 
             if (a != null)
             {
@@ -72,7 +73,7 @@ namespace Tests.TestCases
             }
 
             bool? value = null;
-            value ??= false;  // Fixed
+            value ??= false;  //This will be CodeFix-ed and this comment should be preserved
 
             var yyy = new Y();
             x = condition ? Identity(new Y()) : Identity(yyy);

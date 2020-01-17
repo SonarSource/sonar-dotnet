@@ -44,6 +44,7 @@ namespace Tests.TestCases
             a = a ?? b;                 // Noncompliant {{Use the '??=' operator here.}}
 //          ^^^^^^^^^^
             a = a != null ? (a) : b;    // Noncompliant {{Use the '??=' operator here.}}
+//          ^^^^^^^^^^^^^^^^^^^^^^^
             a = null == a ? b : (a);    // Noncompliant {{Use the '??=' operator here.}}
 
             x = a ?? b;
@@ -104,6 +105,7 @@ namespace Tests.TestCases
                 x = o;
             }
 
+            //This will be CodeFix-ed
             if (a == null) // Noncompliant {{Use the '??=' operator here.}}
             {
                 a = b;
@@ -116,7 +118,7 @@ namespace Tests.TestCases
 
             bool? value = null;
             if (value == null)  // Noncompliant {{Use the '??=' operator here.}}
-                value = false;
+                value = false;  //This will be CodeFix-ed and this comment should be preserved
 
             var yyy = new Y();
             if (condition) //Noncompliant
