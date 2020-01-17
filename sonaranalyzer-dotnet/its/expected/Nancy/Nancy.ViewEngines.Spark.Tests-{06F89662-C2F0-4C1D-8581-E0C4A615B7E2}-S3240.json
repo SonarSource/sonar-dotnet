@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  492,
+"startColumn":  13,
+"endLine":  492,
+"endColumn":  15
+}
+}
+}
+]
+}

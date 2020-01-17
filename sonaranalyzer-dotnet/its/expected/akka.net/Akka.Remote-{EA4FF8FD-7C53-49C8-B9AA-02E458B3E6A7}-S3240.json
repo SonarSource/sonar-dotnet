@@ -28,6 +28,19 @@
 },
 {
 "id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  349,
+"startColumn":  13,
+"endLine":  349,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
@@ -126,6 +139,19 @@
 "startLine":  346,
 "startColumn":  13,
 "endLine":  346,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  13,
+"endLine":  240,
 "endColumn":  15
 }
 }

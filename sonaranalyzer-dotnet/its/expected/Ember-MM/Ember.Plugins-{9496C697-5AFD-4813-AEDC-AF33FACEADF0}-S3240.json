@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  17,
+"endLine":  74,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  13,
+"endLine":  88,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  13,
+"endLine":  128,
+"endColumn":  15
+}
+}
+}
+]
+}

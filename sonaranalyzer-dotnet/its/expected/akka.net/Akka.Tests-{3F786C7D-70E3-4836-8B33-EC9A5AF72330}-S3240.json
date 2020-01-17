@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  903,
+"startColumn":  17,
+"endLine":  903,
+"endColumn":  19
+}
+}
+}
+]
+}

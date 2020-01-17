@@ -2,6 +2,136 @@
 "issues":  [
 {
 "id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\ConfigurationValidator.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  13,
+"endLine":  58,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\ExpressionBuilder.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  13,
+"endLine":  29,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  13,
+"endLine":  89,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  13,
+"endLine":  109,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  13,
+"endLine":  110,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  13,
+"endLine":  111,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  13,
+"endLine":  112,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  13,
+"endLine":  113,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  13,
+"endLine":  114,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\PropertyMap.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  13,
+"endLine":  115,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
 "uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\Impl\QueryMapperVisitor.cs",
@@ -10,6 +140,19 @@
 "startColumn":  13,
 "endLine":  123,
 "endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionExpression.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  13,
+"endLine":  81,
+"endColumn":  72
 }
 }
 }

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self.Tests\NancySelfHostFixture.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  13,
+"endLine":  193,
+"endColumn":  15
+}
+}
+}
+]
+}

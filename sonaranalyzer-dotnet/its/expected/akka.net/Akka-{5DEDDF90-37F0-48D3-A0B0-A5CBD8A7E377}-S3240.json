@@ -2,6 +2,32 @@
 "issues":  [
 {
 "id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  13,
+"endLine":  172,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  13,
+"endLine":  152,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
@@ -28,6 +54,32 @@
 },
 {
 "id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  278,
+"startColumn":  17,
+"endLine":  278,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  840,
+"startColumn":  13,
+"endLine":  840,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
@@ -36,6 +88,19 @@
 "startColumn":  13,
 "endLine":  259,
 "endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  17,
+"endLine":  270,
+"endColumn":  19
 }
 }
 },
@@ -145,6 +210,19 @@
 },
 {
 "id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  13,
+"endLine":  139,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
@@ -153,6 +231,32 @@
 "startColumn":  17,
 "endLine":  100,
 "endColumn":  19
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\RoutedActorRef.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  13,
+"endLine":  56,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Router.cs",
+"region":  {
+"startLine":  217,
+"startColumn":  13,
+"endLine":  217,
+"endColumn":  15
 }
 }
 },
@@ -179,6 +283,45 @@
 "startColumn":  5,
 "endLine":  88,
 "endColumn":  7
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\StringBuilderExtensions.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  13,
+"endLine":  27,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\StringBuilderExtensions.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  13,
+"endLine":  28,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\CachedMatchCompiler.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  13,
+"endLine":  38,
+"endColumn":  15
 }
 }
 }

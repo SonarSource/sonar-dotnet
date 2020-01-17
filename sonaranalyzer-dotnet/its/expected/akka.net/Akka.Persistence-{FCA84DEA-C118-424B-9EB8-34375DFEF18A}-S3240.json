@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"region":  {
+"startLine":  392,
+"startColumn":  13,
+"endLine":  392,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"region":  {
+"startLine":  794,
+"startColumn":  17,
+"endLine":  794,
+"endColumn":  19
+}
+}
+}
+]
+}

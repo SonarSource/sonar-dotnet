@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewFactoryFixture.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  13,
+"endLine":  49,
+"endColumn":  15
+}
+}
+}
+]
+}
