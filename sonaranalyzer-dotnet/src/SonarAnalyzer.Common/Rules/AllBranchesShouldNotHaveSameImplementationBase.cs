@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules
             "Remove this '{0}' or edit its sections so that they are not all the same.";
 
         protected const string TernaryMessage =
-            "Remove this ternary operator or edit it so that when true and when false blocks are not the same.";
+            "Remove this ternary operator or edit it so that when true and when false expressions are not the same.";
 
         protected const string IfMessage =
             "Remove this '{0}' or edit its blocks so that they are not all the same.";
