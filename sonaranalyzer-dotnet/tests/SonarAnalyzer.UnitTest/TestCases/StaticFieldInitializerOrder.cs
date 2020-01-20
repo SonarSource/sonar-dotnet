@@ -55,6 +55,7 @@ namespace Tests.TestCases
     public interface IBadExample
     {
         public static int X = Y; // Noncompliant {{Move this field's initializer into a static constructor.}}
+        public static int Z = Y; // Noncompliant
         public static int Y = 42;
     }
 
@@ -62,9 +63,10 @@ namespace Tests.TestCases
     {
         public static int X;
         public static int Y = 42;
+        public static int Z = Y;
         static IGoodExample()
         {
-            X = Y; // that's the way to do it
+            X = Y;
         }
     }
 }
