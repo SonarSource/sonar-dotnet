@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -51,8 +52,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
                     if (!(invocation.Expression is MemberAccessExpressionSyntax memberAccess) ||
-                        !IsDisposableField(memberAccess.Expression, c.SemanticModel) ||
+                        !IsDisposableField(memberAccess.Expression, c.SemanticModel, out var fieldSymbol) ||
                         !IsDisposeMethodCalled(invocation, c.SemanticModel))
+                    {
+                        return;
+                    }
+
+                    var containingType = fieldSymbol.ContainingType;
+                    if (!ImplementsDisposable(containingType) &&
+                        !IsDisposableRefStruct(c.Compilation, containingType))
                     {
                         return;
                     }
@@ -84,11 +92,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol.Equals(methodSymbol.ContainingType.FindImplementationForInterfaceMember(disposeMethod));
         }
 
-        private static bool IsDisposableField(ExpressionSyntax expression, SemanticModel semanticModel)
+        private static bool IsDisposableField(ExpressionSyntax expression, SemanticModel semanticModel, out IFieldSymbol fieldSymbol)
         {
-            return semanticModel.GetSymbolInfo(expression).Symbol is IFieldSymbol fieldSymbol &&
-                DisposableMemberInNonDisposableClass.IsNonStaticNonPublicDisposableField(fieldSymbol) &&
-                fieldSymbol.ContainingType.Implements(KnownType.System_IDisposable);
+            var symbol = semanticModel.GetSymbolInfo(expression).Symbol;
+            if (symbol is IFieldSymbol fs)
+            {
+                fieldSymbol = fs;
+                return DisposableMemberInNonDisposableClass.IsNonStaticNonPublicDisposableField(fieldSymbol);
+            }
+            fieldSymbol = null;
+            return false;
         }
 
         private static bool IsMethodMatchingDisposeMethodName(IMethodSymbol enclosingMethodSymbol)
@@ -96,5 +109,15 @@ namespace SonarAnalyzer.Rules.CSharp
             return enclosingMethodSymbol.Name == DisposeMethodName ||
                 enclosingMethodSymbol.ExplicitInterfaceImplementations.Any() && enclosingMethodSymbol.Name == DisposeMethodExplicitName;
         }
+
+        private static bool ImplementsDisposable(INamedTypeSymbol containingType) =>
+            containingType.Implements(KnownType.System_IDisposable);
+
+        private static bool IsDisposableRefStruct(Compilation compilation, INamedTypeSymbol containingType) =>
+            compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp8) &&
+            containingType.GetMembers("Dispose").Any(
+                s => s is IMethodSymbol disposeMethod &&
+                disposeMethod.Arity == 0 &&
+                disposeMethod.DeclaredAccessibility == Accessibility.Public);
     }
 }
