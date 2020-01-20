@@ -1077,15 +1077,11 @@ namespace Test
                 : this(compilation.tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single(m => m.Identifier.ValueText == "Main"), compilation.semanticModel)
             { }
 
-            public ExplodedGraphContext(SyntaxTree tree, SemanticModel semanticModel)
-                : this(tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single(m => m.Identifier.ValueText == "Main"), semanticModel)
-            {}
-
             private ExplodedGraphContext(MethodDeclarationSyntax mainMethod, SemanticModel semanticModel)
             {
                 this.MainMethod = mainMethod;
                 this.SemanticModel = semanticModel;
-                this.MainMethodSymbol = semanticModel.GetDeclaredSymbol(this.MainMethod) as IMethodSymbol;
+                this.MainMethodSymbol = semanticModel.GetDeclaredSymbol(this.MainMethod);
                 var methodBody = (CSharpSyntaxNode)this.MainMethod.Body ?? this.MainMethod.ExpressionBody;
                 this.ControlFlowGraph = CSharpControlFlowGraph.Create(methodBody, semanticModel);
                 this.LiveVariableAnalysis = CSharpLiveVariableAnalysis.Analyze(this.ControlFlowGraph, this.MainMethodSymbol, semanticModel);
