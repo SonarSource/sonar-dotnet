@@ -2,6 +2,7 @@
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
 {
@@ -122,17 +123,42 @@ namespace Tests.Diagnostics
     {
         public void Method()
         {
-            DoMoreStuff<int, string>("value");
+            // For local methods the only valid modifiers are async, static and unsafe
+            // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/local-functions#local-function-syntax
 
-            T3 DoStuff<T, T1, T3>(params T3[] o) // Compliant - FN: local functions are not verified
+            void LocalFunctionNoTypeParameter() { }
+
+            void LocalFunctionUnusedParameter<T>() { } // Noncompliant
+
+            T LocalFunctionWithUsedTypeParameter<T>(T p) => p;
+
+            T LocalFunctionWithParameterUsedAsReturnType<T>(object o) => (T)o;
+
+            void LocalFunctionWithUsedTypeParameterNoReturn<T>(T o) { };
+
+            async Task<T> LocalAsyncFunctionWithUsedTypeParameter<T>(Task<T> v) => await v;
+
+            static void StaticLocalFunctionNoTypeParameter() { }
+
+            static void StaticLocalFunctionWithMultipleParamsAndUnusedTypeParameter<T1, T2, T3, T4, T5>(T1 a, T5 b, T5 c, T1 d) // Noncompliant {{'T2' is not used in the local function.}}
+                                                                                                                                // Noncompliant@-1 {{'T3' is not used in the local function.}}
+                                                                                                                                // Noncompliant@-2 {{'T4' is not used in the local function.}}
+            { }
+
+            static void StaticLocalFunctionWithParametersInDifferentOrder<T1, T2, T3, T4>(T4 a, T3 b, T2 c, T1 d) { }
+
+            static T3 StaticLocalFunctionWithUnusedTypeParameter<T, T3>(params T3[] o) // Noncompliant
             {
                 return o[0];
             }
 
-            static T3 DoMoreStuff<T, T3>(params T3[] o) // Compliant - FN: local static functions are not verified
+            static async Task<int> LocalStaticAsyncFunctionWithUnusedTypeParameter<T>() // Noncompliant
             {
-                return o[0];
+                await Task.Delay(1);
+                return 1;
             }
+
+            unsafe static void LocalStaticUnsafeFunctionWithUnusedTypeParameter<T>() { } // Noncompliant
         }
     }
 }

@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -34,9 +35,8 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class GenericTypeParameterUnused : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2326";
+        private const string DiagnosticId = "S2326";
         private const string MessageFormat = "'{0}' is not used in the {1}.";
-
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -50,23 +50,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 analysisContext.RegisterSyntaxNodeAction(
                     c =>
                     {
-                        var methodDeclaration = c.Node as MethodDeclarationSyntax;
-                        var classDeclaration = c.Node as ClassDeclarationSyntax;
-
-                        if (methodDeclaration != null &&
-                            !IsMethodCandidate(methodDeclaration, c.SemanticModel))
-                        {
-                            return;
-                        }
-
                         var declarationSymbol = c.SemanticModel.GetDeclaredSymbol(c.Node);
                         if (declarationSymbol == null)
                         {
                             return;
                         }
 
-                        var helper = GetTypeParameterHelper(methodDeclaration, classDeclaration);
-                        if (helper.TypeParameterList == null || helper.TypeParameterList.Parameters.Count == 0)
+                        var helper = CreateParametersInfo(c.Node, c.SemanticModel);
+                        if (helper?.Parameters == null || helper.Parameters.Parameters.Count == 0)
                         {
                             return;
                         }
@@ -76,40 +67,54 @@ namespace SonarAnalyzer.Rules.CSharp
 
                         var usedTypeParameters = GetUsedTypeParameters(declarations, c, analysisContext.Compilation);
 
-                        foreach (var typeParameter in helper.TypeParameterList.Parameters
+                        foreach (var typeParameter in helper.Parameters.Parameters
                             .Select(typeParameter => typeParameter.Identifier.Text)
                             .Where(typeParameter => !usedTypeParameters.Contains(typeParameter)))
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
-                                helper.TypeParameterList.Parameters.First(tp => tp.Identifier.Text == typeParameter)
+                                helper.Parameters.Parameters.First(tp => tp.Identifier.Text == typeParameter)
                                     .GetLocation(),
-                                typeParameter, helper.ContainerSyntaxTypeName));
+                                typeParameter, helper.ContainerName));
                         }
                     },
                     SyntaxKind.MethodDeclaration,
-                    SyntaxKind.ClassDeclaration);
+                    SyntaxKind.ClassDeclaration,
+                    SyntaxKindEx.LocalFunctionStatement);
             });
         }
 
-        private static TypeParameterHelper GetTypeParameterHelper(MethodDeclarationSyntax methodDeclaration, ClassDeclarationSyntax classDeclaration)
-        {
-            return classDeclaration == null
-                ? new TypeParameterHelper
-                {
-                    TypeParameterList = methodDeclaration.TypeParameterList,
-                    ContainerSyntaxTypeName = "method"
-                }
-                : new TypeParameterHelper
-                {
-                    TypeParameterList = classDeclaration.TypeParameterList,
-                    ContainerSyntaxTypeName = "class"
-                };
-        }
+        private static ParametersInfo CreateParametersInfo(SyntaxNode node, SemanticModel semanticModel) =>
+            node switch
+            {
+                ClassDeclarationSyntax classDeclaration
+                    => new ParametersInfo
+                        {
+                            Parameters = classDeclaration.TypeParameterList,
+                            ContainerName = "class"
+                        },
 
-        private class TypeParameterHelper
+                MethodDeclarationSyntax methodDeclaration when IsMethodCandidate(methodDeclaration, semanticModel)
+                    => new ParametersInfo
+                        {
+                            Parameters = methodDeclaration.TypeParameterList,
+                            ContainerName = "method"
+                        },
+
+                var wrapper when LocalFunctionStatementSyntaxWrapper.IsInstance(wrapper)
+                    => new ParametersInfo
+                        {
+                            Parameters = ((LocalFunctionStatementSyntaxWrapper)node).TypeParameterList,
+                            ContainerName = "local function"
+                        },
+
+                _ => null
+            };
+
+        private class ParametersInfo
         {
-            public TypeParameterListSyntax TypeParameterList { get; set; }
-            public string ContainerSyntaxTypeName { get; set; }
+            public TypeParameterListSyntax Parameters { get; set; }
+
+            public string ContainerName { get; set; }
         }
 
         private static bool IsMethodCandidate(MethodDeclarationSyntax methodDeclaration, SemanticModel semanticModel)
