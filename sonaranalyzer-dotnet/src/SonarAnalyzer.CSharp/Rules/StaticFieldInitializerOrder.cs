@@ -49,7 +49,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
                     var variables = fieldDeclaration.Declaration.Variables;
-                    var classDeclaration = fieldDeclaration.FirstAncestorOrSelf<ClassDeclarationSyntax>();
+                    var typeDeclaration = fieldDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>(
+                        sn => sn.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration));
 
                     if (!fieldDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword) ||
                         !variables.Any())
@@ -62,20 +63,20 @@ namespace SonarAnalyzer.Rules.CSharp
                     foreach (var variable in variables.Where(v => v.Initializer != null))
                     {
                         var identifierFieldMappings = GetIdentifierFieldMappings(variable, containingType, c.SemanticModel);
-                        var identifierClassMappings = GetIdentifierClassMappings(identifierFieldMappings);
+                        var identifierTypeMappings = GetIdentifierTypeMappings(identifierFieldMappings);
 
-                        var usedClassDeclarations = identifierClassMappings
-                            .Select(mapping => mapping.ClassDeclaration);
-                        var isAnyInDifferentClass = usedClassDeclarations.Any(cl => cl != classDeclaration);
+                        var usedTypeDeclarations = identifierTypeMappings
+                            .Select(mapping => mapping.TypeDeclaration);
+                        var isAnyInDifferentType = usedTypeDeclarations.Any(cl => cl != typeDeclaration);
 
-                        var sameClassIdentifiersAfterThis = identifierClassMappings
-                            .Where(mapping => mapping.ClassDeclaration == classDeclaration)
+                        var sameTypeIdentifiersAfterThis = identifierTypeMappings
+                            .Where(mapping => mapping.TypeDeclaration == typeDeclaration)
                             .Where(mapping => !mapping.Identifier.Field.IsConst)
                             .Where(mapping => mapping.Identifier.Field.DeclaringSyntaxReferences.First().Span.Start > variable.SpanStart);
-                        var isAnyAfterInSameClass = sameClassIdentifiersAfterThis.Any();
+                        var isAnyAfterInSameType = sameTypeIdentifiersAfterThis.Any();
 
-                        if (isAnyInDifferentClass ||
-                            isAnyAfterInSameClass)
+                        if (isAnyInDifferentType ||
+                            isAnyAfterInSameType)
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, variable.Initializer.GetLocation()));
                         }
@@ -84,15 +85,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.FieldDeclaration);
         }
 
-        private static List<IdentifierClassDeclarationMapping> GetIdentifierClassMappings(IEnumerable<IdentifierFieldMapping> identifierFieldMappings)
+        private static List<IdentifierTypeDeclarationMapping> GetIdentifierTypeMappings(IEnumerable<IdentifierFieldMapping> identifierFieldMappings)
         {
             return identifierFieldMappings
-                .Select(i => new IdentifierClassDeclarationMapping
+                .Select(i => new IdentifierTypeDeclarationMapping
                 {
                     Identifier = i,
-                    ClassDeclaration = GetClassDeclaration(i.Field)
+                    TypeDeclaration = GetTypeDeclaration(i.Field)
                 })
-                .Where(mapping => mapping.ClassDeclaration != null)
+                .Where(mapping => mapping.TypeDeclaration != null)
                 .ToList();
         }
 
@@ -120,12 +121,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(identifier => identifier.IsRelevant);
         }
 
-        private static ClassDeclarationSyntax GetClassDeclaration(IFieldSymbol field)
+        private static TypeDeclarationSyntax GetTypeDeclaration(IFieldSymbol field)
         {
             var reference = field.DeclaringSyntaxReferences.FirstOrDefault();
             return reference?.SyntaxTree == null
                 ? null
-                : reference.GetSyntax().FirstAncestorOrSelf<ClassDeclarationSyntax>();
+                : reference.GetSyntax().FirstAncestorOrSelf<TypeDeclarationSyntax>();
         }
 
         private class IdentifierFieldMapping
@@ -135,10 +136,10 @@ namespace SonarAnalyzer.Rules.CSharp
             public bool IsRelevant { get; set; }
         }
 
-        private class IdentifierClassDeclarationMapping
+        private class IdentifierTypeDeclarationMapping
         {
             public IdentifierFieldMapping Identifier { get; set; }
-            public ClassDeclarationSyntax ClassDeclaration { get; set; }
+            public TypeDeclarationSyntax TypeDeclaration { get; set; }
         }
     }
 }

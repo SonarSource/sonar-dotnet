@@ -31,14 +31,14 @@ namespace Tests.TestCases
     {
         public static string s1 = new string('x', Const); // Compliant. Const do not suffer from initialization order fiasco.
         public static string s2 = new string('x', Const2);
-        public static string s3 = new string('x', Y); // Compliant - FN
+        public static string s3 = new string('x', Y); // Noncompliant
 
         public static Action<int> A = (i) => { var x = i + StaticFieldInitializerOrder.Y; }; // Okay??? Might or might not. For no we don't report on it
-        public static int X = Y; // Compliant - FN: Y at this time is still assigned default(int), i.e. 0
+        public static int X = Y; // Noncompliant
         public static int X2 = M(StaticFieldInitializerOrder.Y); // Compliant - FN: Y at this time is still assigned default(int), i.e. 0
         public static int Y = 42;
         public static int Z = Y; // Okay
-        public static int V = W; // Compliant - FN
+        public static int V = W; // Noncompliant
         public static int U = Const; // Compliant
         public const int Const = 5;
 
@@ -50,5 +50,23 @@ namespace Tests.TestCases
         public static int W = 2;
 
         public const int Const2 = 5;
+    }
+
+    public interface IBadExample
+    {
+        public static int X = Y; // Noncompliant {{Move this field's initializer into a static constructor.}}
+        public static int Z = Y; // Noncompliant
+        public static int Y = 42;
+    }
+
+    public interface IGoodExample
+    {
+        public static int X;
+        public static int Y = 42;
+        public static int Z = Y;
+        static IGoodExample()
+        {
+            X = Y;
+        }
     }
 }
