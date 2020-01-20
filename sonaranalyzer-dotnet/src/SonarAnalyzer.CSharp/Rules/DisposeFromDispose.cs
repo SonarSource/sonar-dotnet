@@ -104,11 +104,9 @@ namespace SonarAnalyzer.Rules.CSharp
             return false;
         }
 
-        private static bool IsMethodMatchingDisposeMethodName(IMethodSymbol enclosingMethodSymbol)
-        {
-            return enclosingMethodSymbol.Name == DisposeMethodName ||
-                enclosingMethodSymbol.ExplicitInterfaceImplementations.Any() && enclosingMethodSymbol.Name == DisposeMethodExplicitName;
-        }
+        private static bool IsMethodMatchingDisposeMethodName(IMethodSymbol enclosingMethodSymbol) =>
+            enclosingMethodSymbol.Name == DisposeMethodName ||
+            enclosingMethodSymbol.ExplicitInterfaceImplementations.Any() && enclosingMethodSymbol.Name == DisposeMethodExplicitName;
 
         private static bool ImplementsDisposable(INamedTypeSymbol containingType) =>
             containingType.Implements(KnownType.System_IDisposable);
