@@ -1189,7 +1189,10 @@ namespace SonarAnalyzer.SymbolicExecution
             var newProgramState = programState;
             newProgramState = newProgramState.PopValue(out var sv);
 
-            if (!CSharpControlFlowGraphBuilder.IsAssignmentWithSimpleLeftSide(assignment))
+            if (!CSharpControlFlowGraphBuilder.IsAssignmentWithSimpleLeftSide(assignment) &&
+                // For CoalesceAssignmentExpression the stack contains only the result of the expression and because of that
+                // we can't pop the left side of the expression from the stack.
+                !assignment.IsKind(SyntaxKindEx.CoalesceAssignmentExpression))
             {
                 newProgramState = newProgramState.PopValue();
             }
