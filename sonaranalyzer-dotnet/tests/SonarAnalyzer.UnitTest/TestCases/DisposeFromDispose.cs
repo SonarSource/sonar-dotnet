@@ -104,11 +104,61 @@ namespace Tests.Diagnostics
 
         public void CleanUp()
         {
-            this.fs.Dispose(); // Compliant - FN
+            this.fs.Dispose(); // Noncompliant
         }
 
         public void Dispose()
         {
         }
     }
+
+    public readonly ref struct ReadonlyDisposableRefStruct
+    {
+        private readonly FileStream fs;
+
+        public ReadonlyDisposableRefStruct(string path)
+        {
+            this.fs = new FileStream(path, FileMode.Open);
+        }
+
+        public void CloseResource()
+        {
+            this.fs.Close();
+        }
+
+        public void CleanUp()
+        {
+            this.fs.Dispose(); // Noncompliant
+        }
+
+        public void Dispose()
+        {
+        }
+    }
+
+    public ref struct FakeDisposableRefStruct
+    {
+        private FileStream fs;
+
+        public void OpenResource(string path)
+        {
+            this.fs = new FileStream(path, FileMode.Open);
+        }
+
+        public void CloseResource()
+        {
+            this.fs.Close();
+        }
+
+        public void CleanUp()
+        {
+            this.fs.Dispose(); // Compliant - the Dispose method is not accessible
+        }
+
+        private void Dispose()
+        {
+        }
+    }
+
+
 }
