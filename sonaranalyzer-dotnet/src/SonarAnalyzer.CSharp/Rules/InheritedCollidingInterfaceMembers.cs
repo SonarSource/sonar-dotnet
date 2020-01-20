@@ -94,7 +94,10 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var notRedefinedMembersFromInterface = interfacesToCheck[i].GetMembers()
                     .OfType<IMethodSymbol>()
-                    .Where(method => !membersFromDerivedInterface.Any(redefinedMember => AreCollidingMethods(method, redefinedMember)));
+                    .Where(method =>
+                        !method.IsStatic &&
+                        method.DeclaredAccessibility != Accessibility.Private &&
+                        !membersFromDerivedInterface.Any(redefinedMember => AreCollidingMethods(method, redefinedMember)));
 
                 foreach (var notRedefinedMemberFromInterface1 in notRedefinedMembersFromInterface)
                 {
