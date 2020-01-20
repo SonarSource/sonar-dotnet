@@ -102,6 +102,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 return allStatements;
             }
+
+            protected override Location GetLocation(IfStatementSyntax topLevelIf) => topLevelIf.IfKeyword.GetLocation();
         }
 
         private class TernaryStatementAnalyzer : TernaryStatementAnalyzerBase<ConditionalExpressionSyntax>
@@ -111,6 +113,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             protected override SyntaxNode GetWhenTrue(ConditionalExpressionSyntax ternaryStatement) =>
                 ternaryStatement.WhenTrue.RemoveParentheses();
+
+            protected override Location GetLocation(ConditionalExpressionSyntax ternaryStatement) =>
+                ternaryStatement.Condition.CreateLocation(ternaryStatement.QuestionToken);
         }
 
         private class SwitchStatementAnalyzer : SwitchStatementAnalyzerBase<SwitchStatementSyntax, SwitchSectionSyntax>
@@ -123,6 +128,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             protected override bool HasDefaultLabel(SwitchStatementSyntax switchStatement) =>
                 switchStatement.HasDefaultLabel();
+
+            protected override Location GetLocation(SwitchStatementSyntax switchStatement) =>
+                switchStatement.SwitchKeyword.GetLocation();
         }
     }
 }

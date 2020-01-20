@@ -52,6 +52,8 @@ namespace SonarAnalyzer.Rules
 
             protected abstract bool IsLastElseInChain(TElseSyntax elseSyntax);
 
+            protected abstract Location GetLocation(TIfSyntax topLevelIf);
+
             public Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule, params object[] messageArgs) =>
                 context =>
                 {
@@ -69,7 +71,7 @@ namespace SonarAnalyzer.Rules
                     if (ifBlocksStatements.All(ifStatements => AreEquivalent(ifStatements, elseStatements)))
                     {
                         var message = string.Format(IfMessage, messageArgs);
-                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, topLevelIf.GetLocation(), message));
+                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetLocation(topLevelIf), message));
                     }
                 };
 
@@ -84,6 +86,8 @@ namespace SonarAnalyzer.Rules
 
             protected abstract SyntaxNode GetWhenFalse(TTernaryStatement ternaryStatement);
 
+            protected abstract Location GetLocation(TTernaryStatement ternaryStatement);
+
             public Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
                 context =>
                 {
@@ -94,7 +98,7 @@ namespace SonarAnalyzer.Rules
 
                     if (whenTrue.IsEquivalentTo(whenFalse, topLevel: false))
                     {
-                        context.ReportDiagnostic(Diagnostic.Create(rule, ternaryStatement.GetLocation(), TernaryMessage));
+                        context.ReportDiagnostic(Diagnostic.Create(rule, GetLocation(ternaryStatement), TernaryMessage));
                     }
                 };
         }
@@ -109,6 +113,8 @@ namespace SonarAnalyzer.Rules
 
             protected abstract bool AreEquivalent(TSwitchSection section1, TSwitchSection section2);
 
+            protected abstract Location GetLocation(TSwitchStatement switchStatement);
+
             public Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule, params object[] messageArgs) =>
                 context =>
                 {
@@ -121,7 +127,7 @@ namespace SonarAnalyzer.Rules
                         sections.Skip(1).All(section => AreEquivalent(section, sections[0])))
                     {
                         var message = string.Format(SelectMessage, messageArgs);
-                        context.ReportDiagnostic(Diagnostic.Create(rule, switchStatement.GetLocation(), message));
+                        context.ReportDiagnostic(Diagnostic.Create(rule, GetLocation(switchStatement), message));
                     }
                 };
         }
