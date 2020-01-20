@@ -84,7 +84,7 @@ Namespace Tests.Diagnostics
 
         Public Sub TernaryCases(ByVal c As Boolean)
             Dim a As Integer = 1
-            Dim b As Integer = If(a > 12, 4, 4) 'Noncompliant {{Remove this ternary operator or edit it so that when true and when false blocks are not the same.}}
+            Dim b As Integer = If(a > 12, 4, 4) 'Noncompliant {{Remove this ternary operator or edit it so that when true and when false expressions are not the same.}}
             Dim x = If(1 > 18, True, True) 'Noncompliant
             Dim y = If(1 > 18, True, False)
             y = If(1 > 18, (True), True) 'Noncompliant
