@@ -56,8 +56,8 @@ namespace SonarAnalyzer.Rules.CSharp
                             return;
                         }
 
-                        var helper = GetTypeParameterHelper(c.Node, c.SemanticModel);
-                        if (helper?.TypeParameterList == null || helper.TypeParameterList.Parameters.Count == 0)
+                        var helper = CreateParametersInfo(c.Node, c.SemanticModel);
+                        if (helper?.Parameters == null || helper.Parameters.Parameters.Count == 0)
                         {
                             return;
                         }
@@ -67,14 +67,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
                         var usedTypeParameters = GetUsedTypeParameters(declarations, c, analysisContext.Compilation);
 
-                        foreach (var typeParameter in helper.TypeParameterList.Parameters
+                        foreach (var typeParameter in helper.Parameters.Parameters
                             .Select(typeParameter => typeParameter.Identifier.Text)
                             .Where(typeParameter => !usedTypeParameters.Contains(typeParameter)))
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
-                                helper.TypeParameterList.Parameters.First(tp => tp.Identifier.Text == typeParameter)
+                                helper.Parameters.Parameters.First(tp => tp.Identifier.Text == typeParameter)
                                     .GetLocation(),
-                                typeParameter, helper.ContainerSyntaxTypeName));
+                                typeParameter, helper.ContainerName));
                         }
                     },
                     SyntaxKind.MethodDeclaration,
@@ -83,37 +83,38 @@ namespace SonarAnalyzer.Rules.CSharp
             });
         }
 
-        private static TypeParameterHelper GetTypeParameterHelper(SyntaxNode node, SemanticModel semanticModel) =>
+        private static ParametersInfo CreateParametersInfo(SyntaxNode node, SemanticModel semanticModel) =>
             node switch
             {
                 ClassDeclarationSyntax classDeclaration
-                    => new TypeParameterHelper
+                    => new ParametersInfo
                         {
-                            TypeParameterList = classDeclaration.TypeParameterList,
-                            ContainerSyntaxTypeName = "class"
+                            Parameters = classDeclaration.TypeParameterList,
+                            ContainerName = "class"
                         },
 
                 MethodDeclarationSyntax methodDeclaration when IsMethodCandidate(methodDeclaration, semanticModel)
-                    => new TypeParameterHelper
+                    => new ParametersInfo
                         {
-                            TypeParameterList = methodDeclaration.TypeParameterList,
-                            ContainerSyntaxTypeName = "method"
+                            Parameters = methodDeclaration.TypeParameterList,
+                            ContainerName = "method"
                         },
 
                 var wrapper when LocalFunctionStatementSyntaxWrapper.IsInstance(wrapper)
-                    => new TypeParameterHelper
+                    => new ParametersInfo
                         {
-                            TypeParameterList = ((LocalFunctionStatementSyntaxWrapper)node).TypeParameterList,
-                            ContainerSyntaxTypeName = "local function"
+                            Parameters = ((LocalFunctionStatementSyntaxWrapper)node).TypeParameterList,
+                            ContainerName = "local function"
                         },
 
                 _ => null
             };
 
-        private class TypeParameterHelper
+        private class ParametersInfo
         {
-            public TypeParameterListSyntax TypeParameterList { get; set; }
-            public string ContainerSyntaxTypeName { get; set; }
+            public TypeParameterListSyntax Parameters { get; set; }
+
+            public string ContainerName { get; set; }
         }
 
         private static bool IsMethodCandidate(MethodDeclarationSyntax methodDeclaration, SemanticModel semanticModel)
