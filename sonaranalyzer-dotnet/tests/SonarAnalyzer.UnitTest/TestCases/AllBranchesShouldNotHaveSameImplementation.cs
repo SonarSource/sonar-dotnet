@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
     {
         public void IfElseCases(int b, int c)
         {
-            if (b == 0)  // Noncompliant {{Remove this 'if' or edit its blocks so that they are not all the same.}}
+            if (b == 0)  // Noncompliant {{Remove this conditional structure or edit its code blocks so that they're not all the same.}}
 //          ^^
             {
                 DoSomething();
@@ -65,7 +65,7 @@ namespace Tests.Diagnostics
 
         public void SwitchCases(int i)
         {
-            switch (i) // Noncompliant {{Remove this 'switch' or edit its sections so that they are not all the same.}}
+            switch (i) // Noncompliant {{Remove this conditional structure or edit its code blocks so that they're not all the same.}}
 //          ^^^^^^
             {
                 case 1:
@@ -132,7 +132,7 @@ namespace Tests.Diagnostics
 
         public void TernaryCases(bool c, int a)
         {
-            int b = a > 12 ? 4 : 4;  // Noncompliant {{Remove this ternary operator or edit it so that when true and when false expressions are not the same.}}
+            int b = a > 12 ? 4 : 4;  // Noncompliant {{This conditional operation returns the same value whether the condition is "true" or "false".}}
 //                  ^^^^^^^^
 
             var x = 1 > 18 ? true : true; // Noncompliant
@@ -150,7 +150,7 @@ namespace Tests.Diagnostics
         }
 
         public int SwitchExpressionNoncompliant(string type) =>
-            type switch // Noncompliant {{Remove this 'switch' or edit its sections so that they are not all the same.}}
+            type switch // Noncompliant {{Remove this conditional structure or edit its code blocks so that they're not all the same.}}
 //               ^^^^^^
             {
                 "a" => GetNumber(),

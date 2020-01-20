@@ -40,7 +40,7 @@ Namespace Tests.Diagnostics
         End Sub
 
         Public Sub SwitchCases(i As Integer)
-            Select Case i ' Noncompliant {{Remove this 'Select Case' or edit its sections so that they are not all the same.}}
+            Select Case i ' Noncompliant {{Remove this conditional structure or edit its code blocks so that they're not all the same.}}
 '           ^^^^^^
                 Case 1
                     DoSomething()
@@ -86,7 +86,7 @@ Namespace Tests.Diagnostics
 
         Public Sub TernaryCases(ByVal c As Boolean)
             Dim a As Integer = 1
-            Dim b As Integer = If(a > 12, 4, 4) 'Noncompliant {{Remove this ternary operator or edit it so that when true and when false expressions are not the same.}}
+            Dim b As Integer = If(a > 12, 4, 4) 'Noncompliant {{This conditional operation returns the same value whether the condition is "true" or "false".}}
 '                              ^^
             Dim x = If(1 > 18, True, True) 'Noncompliant
             Dim y = If(1 > 18, True, False)
@@ -96,7 +96,7 @@ Namespace Tests.Diagnostics
 
         Public Sub SingleLineIfCases(ByVal c As Boolean)
             Dim x As Integer
-            If c Then x = 4 Else x = 4 'Noncompliant {{Remove this 'If' or edit its blocks so that they are not all the same.}}
+            If c Then x = 4 Else x = 4 'Noncompliant {{Remove this conditional structure or edit its code blocks so that they're not all the same.}}
 '           ^^
             If c Then x = 0 Else x = 1
         End Sub

@@ -29,14 +29,11 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class AllBranchesShouldNotHaveSameImplementationBase : SonarDiagnosticAnalyzer
     {
-        protected const string SelectMessage =
-            "Remove this '{0}' or edit its sections so that they are not all the same.";
+        protected const string StatementsMessage =
+            "Remove this conditional structure or edit its code blocks so that they're not all the same.";
 
         protected const string TernaryMessage =
-            "Remove this ternary operator or edit it so that when true and when false expressions are not the same.";
-
-        protected const string IfMessage =
-            "Remove this '{0}' or edit its blocks so that they are not all the same.";
+            "This conditional operation returns the same value whether the condition is \"true\" or \"false\".";
 
         internal const string DiagnosticId = "S3923";
         internal const string MessageFormat = "{0}";
@@ -54,7 +51,7 @@ namespace SonarAnalyzer.Rules
 
             protected abstract Location GetLocation(TIfSyntax topLevelIf);
 
-            public Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule, params object[] messageArgs) =>
+            public Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
                 context =>
                 {
                     var elseSyntax = (TElseSyntax)context.Node;
@@ -70,8 +67,7 @@ namespace SonarAnalyzer.Rules
 
                     if (ifBlocksStatements.All(ifStatements => AreEquivalent(ifStatements, elseStatements)))
                     {
-                        var message = string.Format(IfMessage, messageArgs);
-                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetLocation(topLevelIf), message));
+                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetLocation(topLevelIf), StatementsMessage));
                     }
                 };
 
@@ -115,7 +111,7 @@ namespace SonarAnalyzer.Rules
 
             protected abstract Location GetLocation(TSwitchStatement switchStatement);
 
-            public Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule, params object[] messageArgs) =>
+            public Action<SyntaxNodeAnalysisContext> GetAnalysisAction(DiagnosticDescriptor rule) =>
                 context =>
                 {
                     var switchStatement = (TSwitchStatement)context.Node;
@@ -126,8 +122,7 @@ namespace SonarAnalyzer.Rules
                         HasDefaultLabel(switchStatement) &&
                         sections.Skip(1).All(section => AreEquivalent(section, sections[0])))
                     {
-                        var message = string.Format(SelectMessage, messageArgs);
-                        context.ReportDiagnostic(Diagnostic.Create(rule, GetLocation(switchStatement), message));
+                        context.ReportDiagnostic(Diagnostic.Create(rule, GetLocation(switchStatement), StatementsMessage));
                     }
                 };
         }

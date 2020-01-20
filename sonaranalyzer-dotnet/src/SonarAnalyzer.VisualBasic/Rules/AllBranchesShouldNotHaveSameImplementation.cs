@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                new SelectCaseStatementAnalyzer().GetAnalysisAction(rule, "Select Case"),
+                new SelectCaseStatementAnalyzer().GetAnalysisAction(rule),
                 SyntaxKind.SelectBlock);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -52,11 +52,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.TernaryConditionalExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                new IfStatementAnalyzer().GetAnalysisAction(rule, "If"),
+                new IfStatementAnalyzer().GetAnalysisAction(rule),
                 SyntaxKind.ElseBlock);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                new SingleLineIfStatementAnalyzer().GetAnalysisAction(rule, "If"),
+                new SingleLineIfStatementAnalyzer().GetAnalysisAction(rule),
                 SyntaxKind.SingleLineElseClause);
         }
 

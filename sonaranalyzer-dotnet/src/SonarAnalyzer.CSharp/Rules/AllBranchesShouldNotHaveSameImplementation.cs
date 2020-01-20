@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.SwitchExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                new SwitchStatementAnalyzer().GetAnalysisAction(rule, "switch"),
+                new SwitchStatementAnalyzer().GetAnalysisAction(rule),
                 SyntaxKind.SwitchStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ConditionalExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                new IfStatementAnalyzer().GetAnalysisAction(rule, "if"),
+                new IfStatementAnalyzer().GetAnalysisAction(rule),
                 SyntaxKind.ElseClause);
         }
 
@@ -71,8 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (switchExpression.HasDiscardPattern() &&
                 arms.Skip(1).All(arm => SyntaxFactory.AreEquivalent(arm.Expression, firstArm.Expression)))
             {
-                var message = string.Format(SelectMessage, "switch");
-                context.ReportDiagnostic(Diagnostic.Create(rule, switchExpression.SwitchKeyword.GetLocation(), message));
+                context.ReportDiagnostic(Diagnostic.Create(rule, switchExpression.SwitchKeyword.GetLocation(), StatementsMessage));
             }
         }
 
