@@ -201,4 +201,33 @@ namespace Tests.Diagnostics
         }
     }
 
+    public ref struct MyTestDisposableRefStruct
+    {
+        public void Dispose()
+        {
+        }
+    }
+
+    public ref struct RefStructResourceHolder
+    {
+        // ref structs can only be fields in other ref structs
+
+        private MyTestDisposableRefStruct foo;
+
+        public void OpenResource(string path)
+        {
+            this.foo = new MyTestDisposableRefStruct();
+        }
+
+        public void CleanUp()
+        {
+            this.foo.Dispose(); // Noncompliant
+        }
+
+        public void Dispose()
+        {
+            // method added to satisfy demands of interface
+        }
+    }
+
 }

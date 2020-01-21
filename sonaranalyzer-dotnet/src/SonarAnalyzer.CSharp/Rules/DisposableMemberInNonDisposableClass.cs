@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -55,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
                     var disposableFields = namedType.GetMembers().OfType<IFieldSymbol>()
-                        .Where(IsNonStaticNonPublicDisposableField).ToHashSet();
+                        .Where(fs => fs.IsNonStaticNonPublicDisposableField()).ToHashSet();
 
                     var disposableFieldsWithInitializer = disposableFields
                         .Where(f => IsOwnerSinceDeclaration(f));
@@ -124,12 +125,5 @@ namespace SonarAnalyzer.Rules.CSharp
             return false;
         }
 
-        internal static bool IsNonStaticNonPublicDisposableField(IFieldSymbol fieldSymbol)
-        {
-            return fieldSymbol != null &&
-                   !fieldSymbol.IsStatic &&
-                   (fieldSymbol.DeclaredAccessibility == Accessibility.Protected || fieldSymbol.DeclaredAccessibility == Accessibility.Private) &&
-                   fieldSymbol.Type.Implements(KnownType.System_IDisposable);
-        }
     }
 }
