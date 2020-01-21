@@ -51,7 +51,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    if (IsDisposableFieldInDisposableClassOrStruct(invocation, c.SemanticModel, c.Compilation) &&
+                    if (invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
+                        c.SemanticModel.GetSymbolInfo(memberAccess.Expression).Symbol is IFieldSymbol invocationTarget &&
+                        IsDisposableField(invocationTarget) &&
+                        IsDisposeMethodCalled(invocation, c.SemanticModel) &&
+                        IsDisposableClassOrStruct(invocationTarget.ContainingType, c.Compilation) &&
                         !IsCalledInsideDispose(invocation, c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetLocation(invocation)));
@@ -60,21 +64,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.InvocationExpression);
         }
 
+        private static bool IsDisposableField(IFieldSymbol fieldSymbol) =>
+            DisposableMemberInNonDisposableClass.IsNonStaticNonPublicDisposableField(fieldSymbol);
+
         /// <summary>
-        /// Returns true if:
-        /// - the invocation is done on a non-static, non-public disposable field
-        /// AND
-        /// - the containing type is either a class implementing IDisposable, or a disposable ref struct (C# 8 feature)
+        /// Classes and structs are disposable if they implement the IDisposable interface.
+        /// Starting C# 8, "ref structs" (which cannot implement an interface) can also be disposable.
         /// </summary>
-        private static bool IsDisposableFieldInDisposableClassOrStruct(InvocationExpressionSyntax invocation, SemanticModel semanticModel, Compilation compilation) =>
-            invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
-            semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol is IFieldSymbol fieldSymbol &&
-            DisposableMemberInNonDisposableClass.IsNonStaticNonPublicDisposableField(fieldSymbol) &&
-            IsDisposeMethodCalled(invocation, semanticModel) &&
-            (
-                ImplementsDisposable(fieldSymbol.ContainingType) ||
-                IsDisposableRefStruct(compilation, fieldSymbol.ContainingType)
-            );
+        private static bool IsDisposableClassOrStruct(INamedTypeSymbol type, Compilation compilation) =>
+            ImplementsDisposable(type) ||
+            IsDisposableRefStruct(compilation, type);
+
 
         private static bool IsCalledInsideDispose(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
             semanticModel.GetEnclosingSymbol(invocation.SpanStart) is IMethodSymbol enclosingMethodSymbol &&
@@ -103,7 +103,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool ImplementsDisposable(INamedTypeSymbol containingType) =>
             containingType.Implements(KnownType.System_IDisposable);
 
-        // The disposable ref struct feature has been introduced in C# 8
         private static bool IsDisposableRefStruct(Compilation compilation, INamedTypeSymbol containingType) =>
             compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp8) &&
             IsRefStruct(containingType) &&
