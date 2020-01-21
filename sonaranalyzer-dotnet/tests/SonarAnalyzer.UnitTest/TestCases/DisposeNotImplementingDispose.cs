@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
 {
     public interface IMine
     {
-        void Dispose(); //Noncompliant
+        void Dispose(); //Noncompliant {{Either implement 'IDisposable.Dispose', or totally rename this method to prevent confusion.}}
 //           ^^^^^^^
     }
 
@@ -130,15 +130,29 @@ namespace Tests.Diagnostics
 
     public partial class MyPartial
     {
-        public void Dispose(int i) // Non-compliant, but not reported now because of the partial
+        public void Dispose(int i) // FN, partial classes are not processed, see https://github.com/dotnet/roslyn/issues/3748
         {
 
         }
     }
 
-    public ref struct Struct
+    public ref struct RefStruct
     {
-        public void Dispose() // Noncompliant - FP
+        public void Dispose() // ok
+        {
+        }
+    }
+
+    public struct Struct
+    {
+        public void Dispose() // Noncompliant {{Either implement 'IDisposable.Dispose', or totally rename this method to prevent confusion.}}
+        {
+        }
+    }
+
+    public struct DisposableStruct : IDisposable
+    {
+        public void Dispose()
         {
         }
     }
