@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -51,34 +52,38 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    if (!(invocation.Expression is MemberAccessExpressionSyntax memberAccess) ||
-                        !IsDisposableField(memberAccess.Expression, c.SemanticModel, out var fieldSymbol) ||
-                        !IsDisposeMethodCalled(invocation, c.SemanticModel))
+                    if (IsDisposableFieldInDisposableClassOrStruct(invocation, c.SemanticModel, c.Compilation) &&
+                        !IsCalledInsideDispose(invocation, c.SemanticModel))
                     {
-                        return;
-                    }
-
-                    var containingType = fieldSymbol.ContainingType;
-                    if (!ImplementsDisposable(containingType) &&
-                        !IsDisposableRefStruct(c.Compilation, containingType))
-                    {
-                        return;
-                    }
-
-                    var enclosingSymbol = c.SemanticModel.GetEnclosingSymbol(invocation.SpanStart);
-                    if (enclosingSymbol == null)
-                    {
-                        return;
-                    }
-
-                    if (!(enclosingSymbol is IMethodSymbol enclosingMethodSymbol) ||
-                        !IsMethodMatchingDisposeMethodName(enclosingMethodSymbol))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetLocation(invocation)));
                     }
                 },
                 SyntaxKind.InvocationExpression);
         }
+
+        /// <summary>
+        /// Returns true if:
+        /// - the invocation is done on a non-static, non-public disposable field
+        /// AND
+        /// - the containing type is either a class implementing IDisposable, or a disposable ref struct (C# 8 feature)
+        /// </summary>
+        private static bool IsDisposableFieldInDisposableClassOrStruct(InvocationExpressionSyntax invocation, SemanticModel semanticModel, Compilation compilation) =>
+            invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
+            semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol is IFieldSymbol fieldSymbol &&
+            DisposableMemberInNonDisposableClass.IsNonStaticNonPublicDisposableField(fieldSymbol) &&
+            IsDisposeMethodCalled(invocation, semanticModel) &&
+            (
+                ImplementsDisposable(fieldSymbol.ContainingType) ||
+                IsDisposableRefStruct(compilation, fieldSymbol.ContainingType)
+            );
+
+        private static bool IsCalledInsideDispose(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+            semanticModel.GetEnclosingSymbol(invocation.SpanStart) is IMethodSymbol enclosingMethodSymbol &&
+            IsMethodMatchingDisposeMethodName(enclosingMethodSymbol);
+
+        private Location GetLocation(InvocationExpressionSyntax invocation) =>
+            // We already did the type check before
+            ((MemberAccessExpressionSyntax)invocation.Expression).Name.GetLocation();
 
         private static bool IsDisposeMethodCalled(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
         {
@@ -90,18 +95,6 @@ namespace SonarAnalyzer.Rules.CSharp
             var disposeMethod = DisposeNotImplementingDispose.GetDisposeMethod(semanticModel.Compilation);
             return disposeMethod != null &&
                 methodSymbol.Equals(methodSymbol.ContainingType.FindImplementationForInterfaceMember(disposeMethod));
-        }
-
-        private static bool IsDisposableField(ExpressionSyntax expression, SemanticModel semanticModel, out IFieldSymbol fieldSymbol)
-        {
-            var symbol = semanticModel.GetSymbolInfo(expression).Symbol;
-            if (symbol is IFieldSymbol fs)
-            {
-                fieldSymbol = fs;
-                return DisposableMemberInNonDisposableClass.IsNonStaticNonPublicDisposableField(fieldSymbol);
-            }
-            fieldSymbol = null;
-            return false;
         }
 
         private static bool IsMethodMatchingDisposeMethodName(IMethodSymbol enclosingMethodSymbol) =>
