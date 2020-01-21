@@ -66,10 +66,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var declaredPrivateMethodWithReturn in declaredPrivateMethodsWithReturn)
                     {
-                        var matchingInvocations = invocations.Where(inv => object.Equals(inv.Symbol.OriginalDefinition, declaredPrivateMethodWithReturn.Symbol));
+                        var matchingInvocations = invocations
+                            .Where(invocation => invocation.Symbol.OriginalDefinition.Equals(declaredPrivateMethodWithReturn.Symbol))
+                            .Select(invocation => invocation.SyntaxNode)
+                            .ToList();
 
                         /// 0 invocation is handled by S1144 <see cref="UnusedPrivateMember"/>
-                        if (matchingInvocations.Any() && !IsReturnValueUsed(matchingInvocations))
+                        if (matchingInvocations.Any() && !IsReturnValueUsed(matchingInvocations, declaredPrivateMethodWithReturn.SemanticModel))
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, declaredPrivateMethodWithReturn.SyntaxNode.ReturnType.GetLocation()));
                         }
@@ -81,26 +84,15 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var localFunctionSyntax = (LocalFunctionStatementSyntaxWrapper)c.Node;
                 var localFunctionSymbol = c.SemanticModel.GetDeclaredSymbol(localFunctionSyntax) as IMethodSymbol;
-                var topmostContainingMethod = c.Node
-                    .AncestorsAndSelf()
-                    .LastOrDefault(ancestor => ancestor is BaseMethodDeclarationSyntax || ancestor is PropertyDeclarationSyntax);
+                var topmostContainingMethod = c.Node.GetTopMostContainingMethod();
 
                 if (localFunctionSymbol == null || localFunctionSymbol.ReturnsVoid || topmostContainingMethod == null)
                 {
                     return;
                 }
 
-                var invocations = topmostContainingMethod
-                    .DescendantNodes()
-                    .OfType<InvocationExpressionSyntax>()
-                    .Where(invocation => c.SemanticModel.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol methodSymbol
-                                        && localFunctionSymbol.Equals(methodSymbol));
-
-                var isReturnValueUsed = invocations.Any(invocation =>
-                    !IsExpressionStatement(invocation.Parent) &&
-                    !IsActionLambda(invocation.Parent, c.SemanticModel));
-
-                if (invocations.Any() && !isReturnValueUsed)
+                var matchingInvocations = GetLocalMatchingInvocations(topmostContainingMethod, localFunctionSymbol, c.SemanticModel);
+                if (matchingInvocations.Any() && !IsReturnValueUsed(matchingInvocations, c.SemanticModel))
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, localFunctionSyntax.ReturnType.GetLocation()));
                 }
@@ -108,12 +100,18 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKindEx.LocalFunctionStatement);
         }
 
-        private static bool IsReturnValueUsed(IEnumerable<SyntaxNodeSymbolSemanticModelTuple<InvocationExpressionSyntax, IMethodSymbol>> matchingInvocations)
-        {
-            return matchingInvocations.Any(invocation =>
-                !IsExpressionStatement(invocation.SyntaxNode.Parent) &&
-                !IsActionLambda(invocation.SyntaxNode.Parent, invocation.SemanticModel));
-        }
+        private static IEnumerable<InvocationExpressionSyntax> GetLocalMatchingInvocations(SyntaxNode containingMethod, IMethodSymbol invocationSymbol, SemanticModel semanticModel) =>
+            containingMethod.DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Where(invocation => semanticModel.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol methodSymbol
+                                    && invocationSymbol.Equals(methodSymbol))
+                .ToList();
+
+        private static bool IsReturnValueUsed(IEnumerable<InvocationExpressionSyntax> matchingInvocations, SemanticModel semanticModel) =>
+            matchingInvocations.Any(invocation =>
+                !IsExpressionStatement(invocation.Parent) &&
+                !IsActionLambda(invocation.Parent, semanticModel));
+
 
         private static bool IsActionLambda(SyntaxNode node, SemanticModel semanticModel)
         {

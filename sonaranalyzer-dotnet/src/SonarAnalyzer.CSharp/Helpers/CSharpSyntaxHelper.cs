@@ -72,6 +72,9 @@ namespace SonarAnalyzer.Helpers
                 ? argumentList.Arguments[index].Expression.RemoveParentheses()
                 : null;
 
+        public static SyntaxNode GetTopMostContainingMethod(this SyntaxNode node) =>
+            node.AncestorsAndSelf().LastOrDefault(ancestor => ancestor is BaseMethodDeclarationSyntax || ancestor is PropertyDeclarationSyntax);
+
         public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
         {
             var currentExpression = expression;
