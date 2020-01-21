@@ -1,7 +1,7 @@
 <p>In the interests of keeping code clean, the simplest possible conditional syntax should be used. That means </p>
 <ul>
-  <li> using the <code>??=</code> operator for an self-assign-if-not-null operator, </li>
-  <li> using the <code>??</code> operator for an assign-if-not-null operator, </li>
+  <li> using the <code>??=</code> operator for a self-assign-if-not-null operation, </li>
+  <li> using the <code>??</code> operator for an assign-if-not-null operation, </li>
   <li> using the ternary operator <code>?:</code> for assignment to a single variable, and </li>
   <li> removing the <code>??</code> when the left operand is known to be <code>null</code>, or known to be definitely not <code>null</code>. </li>
 </ul>
@@ -31,12 +31,12 @@ else
   x = b;
 }
 
-if (a == null)  //Noncompliant
+if (a == null)  // Noncompliant
     a = new object();
 
 var y = null ?? new object(); // Noncompliant
 
-a = a ?? new object();  //Noncompliant for C# 8
+a = a ?? new object();  // Noncompliant for C# 8
 </pre>
 <h2>Compliant Solution</h2>
 <pre>

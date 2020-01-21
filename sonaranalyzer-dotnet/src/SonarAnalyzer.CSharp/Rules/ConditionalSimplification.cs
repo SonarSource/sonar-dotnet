@@ -50,42 +50,37 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         internal static bool IsCoalesceAssignmentCandidate(SyntaxNode conditional, ExpressionSyntax comparedToNull) =>
-            conditional?.Parent is AssignmentExpressionSyntax parentAssignment
+            conditional?.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax parentAssignment
                 && CSharpEquivalenceChecker.AreEquivalent(parentAssignment.Left, comparedToNull);
 
         internal static bool TryGetExpressionComparedToNull(ExpressionSyntax expression, out ExpressionSyntax compared, out bool comparedIsNullInTrue)
         {
             compared = null;
             comparedIsNullInTrue = false;
-            if (!(expression is BinaryExpressionSyntax binary) || !EqualsOrNotEquals.Contains(binary.Kind()))
+            if (expression.RemoveParentheses() is BinaryExpressionSyntax binary && EqualsOrNotEquals.Contains(binary.Kind()))
             {
-                return false;
+                comparedIsNullInTrue = binary.IsKind(SyntaxKind.EqualsExpression);
+                if (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.NullLiteralExpression))
+                {
+                    compared = binary.Right;
+                    return true;
+                }
+                else if (CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.NullLiteralExpression))
+                {
+                    compared = binary.Left;
+                    return true;
+                }
             }
-
-            comparedIsNullInTrue = binary.IsKind(SyntaxKind.EqualsExpression);
-            if (CSharpEquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.NullLiteralExpression))
-            {
-                compared = binary.Right;
-                return true;
-            }
-            else if (CSharpEquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.NullLiteralExpression))
-            {
-                compared = binary.Left;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         internal static StatementSyntax ExtractSingleStatement(StatementSyntax statement)
         {
-            if (!(statement is BlockSyntax block))
+            if (statement is BlockSyntax block)
             {
-                return statement;
+                return block.Statements.Count == 1 ? block.Statements.First() : null;
             }
-            return block.Statements.Count == 1 ? block.Statements.First() : null;
+            return statement;
         }
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -105,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckCoalesceExpression(SyntaxNodeAnalysisContext context)
         {
-            if (context.Node.Parent is AssignmentExpressionSyntax assignment && IsCoalesceAssignmentSupported(context))
+            if (context.Node.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax assignment && IsCoalesceAssignmentSupported(context))
             {
                 var left = ((BinaryExpressionSyntax)context.Node).Left.RemoveParentheses();
                 if (CSharpEquivalenceChecker.AreEquivalent(assignment.Left.RemoveParentheses(), left))
@@ -162,7 +157,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if(IsCoalesceAssignmentSupported(context) && IsCoalesceAssignmentCandidate(conditional, comparedToNull))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, conditional.Parent.GetLocation(), BuildCodeFixProperties(context), "??="));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, conditional.GetFirstNonParenthesizedParent().GetLocation(), BuildCodeFixProperties(context), "??="));
                 }
                 else
                 {
@@ -255,7 +250,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else
             {
-                return AreCandidateInvocationsForTernary(expression1, expression2, semanticModel);
+                return AreCandidateInvocations(expression1, expression2, null, semanticModel, comparedIsNullInTrue: false);
             }
         }
 
@@ -281,13 +276,6 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             return true;
         }
-
-        private static bool AreCandidateInvocationsForCoalescing(ExpressionSyntax expression1, ExpressionSyntax expression2,
-            ExpressionSyntax comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue) =>
-            AreCandidateInvocations(expression1, expression2, comparedToNull, semanticModel, comparedIsNullInTrue);
-
-        private static bool AreCandidateInvocationsForTernary(ExpressionSyntax expression1, ExpressionSyntax expression2, SemanticModel semanticModel) =>
-            AreCandidateInvocations(expression1, expression2, null, semanticModel, comparedIsNullInTrue: false);
 
         private static bool AreCandidateInvocations(ExpressionSyntax expression1, ExpressionSyntax expression2, ExpressionSyntax comparedToNull, SemanticModel semanticModel, bool comparedIsNullInTrue)
         {
@@ -365,7 +353,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else
             {
-                return AreCandidateInvocationsForCoalescing(whenTrue, whenFalse, comparedToNull, semanticModel, comparedIsNullInTrue);
+                return AreCandidateInvocations(whenTrue, whenFalse, comparedToNull, semanticModel, comparedIsNullInTrue);
             }
         }
 

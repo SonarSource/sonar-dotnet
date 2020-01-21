@@ -33,6 +33,9 @@ namespace Tests.TestCases
             a ??= b;                 // Fixed
             a ??= b;    // Fixed
             a ??= b;    // Fixed
+            a ??= b;               // Fixed
+            a ??= b;             // Fixed
+            a ??= b;    // Fixed
 
             x = a ?? b;
             x = a ?? b;
@@ -40,6 +43,8 @@ namespace Tests.TestCases
             x = condition ? a : b;
 
             x = condition ? a : b;
+
+            x = a ?? b;
 
             x = condition ? Identity(new object()) : IdentityAnyOtherMethod(y);
 
@@ -79,6 +84,12 @@ namespace Tests.TestCases
             x = condition ? Identity(new Y()) : Identity(yyy);
 
             x = condition ? Identity(new Y()) : Identity(new X());
+
+            // Removing space from "if (" on next line will fail the test.
+            // https://github.com/SonarSource/sonar-dotnet/issues/3064
+            Identity(yyy ?? new Y());
+
+            Identity(yyy ?? new Y());
 
             Base elem;
             if (condition) // Non-compliant, but not handled because of the type difference

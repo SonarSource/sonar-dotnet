@@ -76,21 +76,22 @@ namespace SonarAnalyzer.Rules.CSharp
                     var ifPart = ConditionalSimplification.ExtractSingleStatement(ifStatement.Statement);
                     var elsePart = ConditionalSimplification.ExtractSingleStatement(ifStatement.Else?.Statement);
                     ConditionalSimplification.TryGetExpressionComparedToNull(ifStatement.Condition, out compared, out var _);
-                    return SimplifyIfStatement(new ComparedContext(diagnostic, semanticModel, compared, out annotation), ifPart, elsePart, ifStatement.Condition);
+                    return SimplifyIfStatement(new ComparedContext(diagnostic, semanticModel, compared, out annotation), ifPart, elsePart, ifStatement.Condition.RemoveParentheses());
 
                 case AssignmentExpressionSyntax assignment:
                     var context = new ComparedContext(diagnostic, semanticModel, null, out annotation);
-                    if (assignment.Right is BinaryExpressionSyntax binaryExpression && binaryExpression.Kind() == SyntaxKind.CoalesceExpression)
+                    var right = assignment.Right.RemoveParentheses();
+                    if (right is BinaryExpressionSyntax binaryExpression && binaryExpression.Kind() == SyntaxKind.CoalesceExpression)
                     {
                         return CoalesceAssignmentExpression(context, assignment.Left, binaryExpression.Right);
                     }
-                    else if (assignment.Right is ConditionalExpressionSyntax conditional)
+                    else if (right is ConditionalExpressionSyntax conditional)
                     {
-                        ConditionalSimplification.TryGetExpressionComparedToNull(conditional.Condition.RemoveParentheses(), out compared, out var comparedIsNullInTrue);
+                        ConditionalSimplification.TryGetExpressionComparedToNull(conditional.Condition, out compared, out var comparedIsNullInTrue);
                         if (context.IsCoalesceAssignmentSupported && ConditionalSimplification.IsCoalesceAssignmentCandidate(conditional, compared))
                         {
                             return CoalesceAssignmentExpression(context,
-                                (conditional.Parent as AssignmentExpressionSyntax).Left,
+                                (conditional.GetFirstNonParenthesizedParent() as AssignmentExpressionSyntax).Left,
                                 (comparedIsNullInTrue ? conditional.WhenTrue : conditional.WhenFalse).RemoveParentheses());
                         }
                     }
@@ -195,18 +196,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (context.IsCoalesceAssignmentSupported)
             {
-                try
-                {
-                    // Generating SyntaxFactory.BinaryExpression with SyntaxKindEx.CoalesceAssignmentExpression does not work with
-                    // currenlty referenced Roslyn version. Post-update using .WithOperatorToken() is also checked against unexpected arguments.
-                    var tree = CSharpSyntaxTree.ParseText("void F(object x) {x ??= null;}");
-                    var assignment = tree.GetRoot().DescendantNodes().OfType<AssignmentExpressionSyntax>().Single();
-                    return assignment.Update(left, assignment.OperatorToken, right).WithAdditionalAnnotations(context.Annotation);
-                }
-                catch
-                {
-                    return null;    // We just don't offer a code-fix. IsCoalesceAssignmentSupported should avoid this catch in advance.
-                }
+                return SyntaxFactory.AssignmentExpression(ShimLayer.CSharp.SyntaxKindEx.CoalesceAssignmentExpression, left, right).WithAdditionalAnnotations(context.Annotation);
             }
             return SyntaxFactory.AssignmentExpression(SyntaxKind.SimpleAssignmentExpression, left, CoalesceExpression(left, right, context.Annotation));
         }

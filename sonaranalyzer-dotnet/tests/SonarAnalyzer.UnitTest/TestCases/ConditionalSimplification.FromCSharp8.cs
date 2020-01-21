@@ -46,6 +46,10 @@ namespace Tests.TestCases
             a = a != null ? (a) : b;    // Noncompliant {{Use the '??=' operator here.}}
 //          ^^^^^^^^^^^^^^^^^^^^^^^
             a = null == a ? b : (a);    // Noncompliant {{Use the '??=' operator here.}}
+            a = (a ?? b);               // Noncompliant {{Use the '??=' operator here.}}
+            a = ((a ?? b));             // Noncompliant {{Use the '??=' operator here.}}
+            a = ((null == a ? b : (a)));    // Noncompliant {{Use the '??=' operator here.}}
+//          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
             x = a ?? b;
             x = a ?? b;
@@ -53,6 +57,15 @@ namespace Tests.TestCases
             x = condition ? a : b;
 
             if (condition) // Noncompliant {{Use the '?:' operator here.}}
+            {
+                x = a;
+            }
+            else
+            {
+                x = b;
+            }
+
+            if ((a != null)) // Noncompliant {{Use the '??' operator here.}}
             {
                 x = a;
             }
@@ -138,6 +151,22 @@ namespace Tests.TestCases
             {
                 x = Identity(new X());
             }
+
+            // Removing space from "if (" on next line will fail the test.
+            // https://github.com/SonarSource/sonar-dotnet/issues/3064
+            if (yyy == null) // Noncompliant
+            {
+                Identity(new Y());
+            }
+            else
+            {
+                Identity(yyy);
+            }
+
+            if (((yyy == null))) // Noncompliant
+                Identity(new Y());
+            else
+                Identity(((yyy)));
 
             Base elem;
             if (condition) // Non-compliant, but not handled because of the type difference
