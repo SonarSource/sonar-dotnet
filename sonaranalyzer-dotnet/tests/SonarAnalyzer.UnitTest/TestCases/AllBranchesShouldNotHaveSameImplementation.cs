@@ -6,7 +6,8 @@ namespace Tests.Diagnostics
     {
         public void IfElseCases(int b, int c)
         {
-            if (b == 0)  // Noncompliant
+            if (b == 0)  // Noncompliant {{Remove this conditional structure or edit its code blocks so that they're not all the same.}}
+//          ^^
             {
                 DoSomething();
             }
@@ -22,6 +23,7 @@ namespace Tests.Diagnostics
             if (b == 0) // Noncompliant
             {
                 if (c == 1) // Noncompliant
+//              ^^
                 {
                     DoSomething();
                 }
@@ -63,7 +65,8 @@ namespace Tests.Diagnostics
 
         public void SwitchCases(int i)
         {
-            switch (i) // Noncompliant {{Remove this 'switch' or edit its sections so that they are not all the same.}}
+            switch (i) // Noncompliant {{Remove this conditional structure or edit its code blocks so that they're not all the same.}}
+//          ^^^^^^
             {
                 case 1:
                     DoSomething();
@@ -129,7 +132,8 @@ namespace Tests.Diagnostics
 
         public void TernaryCases(bool c, int a)
         {
-            int b = a > 12 ? 4 : 4;  // Noncompliant
+            int b = a > 12 ? 4 : 4;  // Noncompliant {{This conditional operation returns the same value whether the condition is "true" or "false".}}
+//                  ^^^^^^^^
 
             var x = 1 > 18 ? true : true; // Noncompliant
             var y = 1 > 18 ? true : false;
@@ -145,22 +149,21 @@ namespace Tests.Diagnostics
         {
         }
 
-        public int SwitchExpressionNoncompliant(string type)
-        {
-            return type switch // Compliant - FN: all branches call the same function
+        public int SwitchExpressionNoncompliant(string type) =>
+            type switch // Noncompliant {{Remove this conditional structure or edit its code blocks so that they're not all the same.}}
+//               ^^^^^^
             {
                 "a" => GetNumber(),
                 "b" => GetNumber(),
                 _ => GetNumber()
             };
-        }
 
         public int SwitchExpressionNested(string type)
         {
             return type switch
             {
                 "a" => GetNumber(),
-                _ => type switch // Compliant - FN: all branches call the same function
+                _ => type switch // Noncompliant
                 {
                         "b" => GetNumber(),
                         "c" => GetNumber(),
@@ -173,12 +176,23 @@ namespace Tests.Diagnostics
 
         public int SwitchExpressionCompliant(string type)
         {
-            return type switch // Compliant
+            var x = type switch // Compliant
             {
                 "a" => 42,
                 "b" => type.Length,
-                _ => GetNumber()
+                _ => GetNumber(),
             };
+            string y = type switch { }; // Compliant
+            var z = type switch { "a" => 42 }; // Compliant
+            var withoutDefault = type switch // Compliant, does not have the discard default arm
+            {
+                "a" => GetNumber(),
+                "b" => GetNumber(),
+                "c" => GetNumber(),
+                "d" => GetNumber(),
+                "e" => GetNumber(),
+            };
+            return x;
         }
     }
 }

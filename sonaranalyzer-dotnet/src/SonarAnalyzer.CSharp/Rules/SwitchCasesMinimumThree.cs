@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return SwitchExpressionType.ManyReturnValues;
             }
-            var hasDiscardValue = switchExpression.Arms.Any(arm => DiscardPatternSyntaxWrapper.IsInstance(arm.Pattern.SyntaxNode));
+            var hasDiscardValue = switchExpression.HasDiscardPattern();
             if (numberOfArms == 2)
             {
                 return hasDiscardValue ? SwitchExpressionType.TwoReturnValues : SwitchExpressionType.ManyReturnValues;

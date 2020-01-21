@@ -20,12 +20,14 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -42,7 +44,11 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                new SwitchStatementAnalyzer().GetAnalysisAction(rule, "switch"),
+                context => Analyze(context, (SwitchExpressionSyntaxWrapper)context.Node),
+                SyntaxKindEx.SwitchExpression);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                new SwitchStatementAnalyzer().GetAnalysisAction(rule),
                 SyntaxKind.SwitchStatement);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -50,8 +56,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ConditionalExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                new IfStatementAnalyzer().GetAnalysisAction(rule, "if"),
+                new IfStatementAnalyzer().GetAnalysisAction(rule),
                 SyntaxKind.ElseClause);
+        }
+
+        private static void Analyze(SyntaxNodeAnalysisContext context, SwitchExpressionSyntaxWrapper switchExpression)
+        {
+            var arms = switchExpression.Arms;
+            if (arms.Count < 2)
+            {
+                return;
+            }
+            var firstArm = arms[0];
+            if (switchExpression.HasDiscardPattern() &&
+                arms.Skip(1).All(arm => SyntaxFactory.AreEquivalent(arm.Expression, firstArm.Expression)))
+            {
+                context.ReportDiagnostic(Diagnostic.Create(rule, switchExpression.SwitchKeyword.GetLocation(), StatementsMessage));
+            }
         }
 
         private class IfStatementAnalyzer : IfStatementAnalyzerBase<ElseClauseSyntax, IfStatementSyntax>
@@ -80,6 +101,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 return allStatements;
             }
+
+            protected override Location GetLocation(IfStatementSyntax topLevelIf) => topLevelIf.IfKeyword.GetLocation();
         }
 
         private class TernaryStatementAnalyzer : TernaryStatementAnalyzerBase<ConditionalExpressionSyntax>
@@ -89,6 +112,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             protected override SyntaxNode GetWhenTrue(ConditionalExpressionSyntax ternaryStatement) =>
                 ternaryStatement.WhenTrue.RemoveParentheses();
+
+            protected override Location GetLocation(ConditionalExpressionSyntax ternaryStatement) =>
+                ternaryStatement.Condition.CreateLocation(ternaryStatement.QuestionToken);
         }
 
         private class SwitchStatementAnalyzer : SwitchStatementAnalyzerBase<SwitchStatementSyntax, SwitchSectionSyntax>
@@ -101,6 +127,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             protected override bool HasDefaultLabel(SwitchStatementSyntax switchStatement) =>
                 switchStatement.HasDefaultLabel();
+
+            protected override Location GetLocation(SwitchStatementSyntax switchStatement) =>
+                switchStatement.SwitchKeyword.GetLocation();
         }
     }
 }

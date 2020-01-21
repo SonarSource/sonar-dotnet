@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                new SelectCaseStatementAnalyzer().GetAnalysisAction(rule, "Select Case"),
+                new SelectCaseStatementAnalyzer().GetAnalysisAction(rule),
                 SyntaxKind.SelectBlock);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -52,11 +52,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.TernaryConditionalExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                new IfStatementAnalyzer().GetAnalysisAction(rule, "If"),
+                new IfStatementAnalyzer().GetAnalysisAction(rule),
                 SyntaxKind.ElseBlock);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                new SingleLineIfStatementAnalyzer().GetAnalysisAction(rule, "If"),
+                new SingleLineIfStatementAnalyzer().GetAnalysisAction(rule),
                 SyntaxKind.SingleLineElseClause);
         }
 
@@ -75,6 +75,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     .Select(elseif => elseif.Statements.Cast<SyntaxNode>())
                     .Concat(new[] { topLevelIf.Statements.Cast<SyntaxNode>() });
             }
+
+            protected override Location GetLocation(MultiLineIfBlockSyntax topLevelIf)
+                => topLevelIf.IfStatement.IfKeyword.GetLocation();
         }
 
         private class TernaryStatementAnalyzer : TernaryStatementAnalyzerBase<TernaryConditionalExpressionSyntax>
@@ -84,6 +87,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             protected override SyntaxNode GetWhenTrue(TernaryConditionalExpressionSyntax ternaryStatement) =>
                 ternaryStatement.WhenTrue.RemoveParentheses();
+
+            protected override Location GetLocation(TernaryConditionalExpressionSyntax ternaryStatement) =>
+                ternaryStatement.IfKeyword.GetLocation();
         }
 
         private class SingleLineIfStatementAnalyzer : IfStatementAnalyzerBase<SingleLineElseClauseSyntax, SingleLineIfStatementSyntax>
@@ -99,6 +105,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 elseSyntax.Statements;
 
             protected override bool IsLastElseInChain(SingleLineElseClauseSyntax elseSyntax) => true;
+
+            protected override Location GetLocation(SingleLineIfStatementSyntax topLevelIf) =>
+                topLevelIf.IfKeyword.GetLocation();
         }
 
         private class SelectCaseStatementAnalyzer : SwitchStatementAnalyzerBase<SelectBlockSyntax, CaseBlockSyntax>
@@ -111,6 +120,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             protected override bool HasDefaultLabel(SelectBlockSyntax switchStatement) =>
                 switchStatement.CaseBlocks.Any(section => section.IsKind(SyntaxKind.CaseElseBlock));
+
+            protected override Location GetLocation(SelectBlockSyntax switchStatement) =>
+                switchStatement.SelectStatement.SelectKeyword.GetLocation();
         }
     }
 }
