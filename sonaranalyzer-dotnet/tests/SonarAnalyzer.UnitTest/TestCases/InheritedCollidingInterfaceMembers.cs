@@ -31,7 +31,7 @@ namespace Tests.Diagnostics
     {
         unsafe int Method<T2>(T2[,] parameter, int* pointer);
     }
-    public interface IMyInterfaceGenericCommon1 : IMyInterfaceGeneric1, IMyInterfaceGeneric2 // Non-compliant, but not recognized
+    public interface IMyInterfaceGenericCommon1 : IMyInterfaceGeneric1, IMyInterfaceGeneric2 // FN, no support for generics with different type name
     {
     }
 

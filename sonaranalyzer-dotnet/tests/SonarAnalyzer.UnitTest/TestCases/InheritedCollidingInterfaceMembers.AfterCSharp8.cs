@@ -138,14 +138,12 @@ namespace Tests.Diagnostics
     public interface IPrivateMethodSecond
     {
         private string Private(string value)
-//                     ^^^^^^^ Secondary
         {
             return value;
         }
     }
 
-    public interface IPrivateMethodCommon : IPrivateMethodFirst, IPrivateMethodSecond // Noncompliant - FP: Issue is raised but since the methods are not accessible on the derived classes or interfaces it doesn't make sense.
-//                   ^^^^^^^^^^^^^^^^^^^^
+    public interface IPrivateMethodCommon : IPrivateMethodFirst, IPrivateMethodSecond // compliant: the methods are not accessible on the derived classes or interfaces
     {
     }
 
@@ -182,13 +180,12 @@ namespace Tests.Diagnostics
     public interface IStaticMethodSecond
     {
         public static string Static(string value)
-//                           ^^^^^^ Secondary
         {
             return value;
         }
     }
 
-    public interface IStaticMethodDerived : IStaticMethodFirst, IStaticMethodSecond // Noncompliant - FP: static methods are not inherited
+    public interface IStaticMethodDerived : IStaticMethodFirst, IStaticMethodSecond // compliant: static methods are not inherited
     {
     }
 

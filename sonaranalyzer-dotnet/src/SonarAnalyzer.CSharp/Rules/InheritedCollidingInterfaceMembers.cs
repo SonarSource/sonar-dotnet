@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -92,11 +92,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
             for (var i = 0; i < interfacesToCheck.Length; i++)
             {
-                var notRedefinedMembersFromInterface1 = interfacesToCheck[i].GetMembers()
+                var notRedefinedMembersFromInterface = interfacesToCheck[i].GetMembers()
                     .OfType<IMethodSymbol>()
-                    .Where(method => !membersFromDerivedInterface.Any(redefinedMember => AreCollidingMethods(method, redefinedMember)));
+                    .Where(method =>
+                        !method.IsStatic &&
+                        method.DeclaredAccessibility != Accessibility.Private &&
+                        !membersFromDerivedInterface.Any(redefinedMember => AreCollidingMethods(method, redefinedMember)));
 
-                foreach (var notRedefinedMemberFromInterface1 in notRedefinedMembersFromInterface1)
+                foreach (var notRedefinedMemberFromInterface1 in notRedefinedMembersFromInterface)
                 {
                     for (var j = i + 1; j < interfacesToCheck.Length; j++)
                     {
