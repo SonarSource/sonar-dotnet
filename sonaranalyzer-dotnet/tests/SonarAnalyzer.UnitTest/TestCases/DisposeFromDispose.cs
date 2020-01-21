@@ -160,5 +160,45 @@ namespace Tests.Diagnostics
         }
     }
 
+    public struct DisposableStruct : IDisposable
+    {
+        private FileStream fs;
+        public void OpenResource(string path)
+        {
+            this.fs = new FileStream(path, FileMode.Open);
+        }
+        public void CloseResource()
+        {
+            this.fs.Close();
+        }
+
+        public void CleanUp()
+        {
+            this.fs.Dispose(); // Noncompliant
+        }
+
+        public void Dispose()
+        {
+            // method added to satisfy demands of interface
+        }
+    }
+
+    public struct DisposableStructCorrect : IDisposable
+    {
+        private FileStream fs;
+        public void OpenResource(string path)
+        {
+            this.fs = new FileStream(path, FileMode.Open);
+        }
+        public void CloseResource()
+        {
+            this.fs.Close();
+        }
+
+        public void Dispose()
+        {
+            this.fs.Dispose(); // compliant
+        }
+    }
 
 }

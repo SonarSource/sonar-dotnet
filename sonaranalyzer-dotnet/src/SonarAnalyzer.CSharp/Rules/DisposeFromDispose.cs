@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -104,11 +103,19 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool ImplementsDisposable(INamedTypeSymbol containingType) =>
             containingType.Implements(KnownType.System_IDisposable);
 
+        // The disposable ref struct feature has been introduced in C# 8
         private static bool IsDisposableRefStruct(Compilation compilation, INamedTypeSymbol containingType) =>
             compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp8) &&
+            IsRefStruct(containingType) &&
             containingType.GetMembers("Dispose").Any(
                 s => s is IMethodSymbol disposeMethod &&
                 disposeMethod.Arity == 0 &&
                 disposeMethod.DeclaredAccessibility == Accessibility.Public);
+
+        private static bool IsRefStruct(INamedTypeSymbol symbol) =>
+            symbol.IsStruct() &&
+            symbol.DeclaringSyntaxReferences.Length == 1 &&
+            symbol.DeclaringSyntaxReferences[0].GetSyntax() is StructDeclarationSyntax structDeclaration &&
+            structDeclaration.Modifiers.Any(SyntaxKind.RefKeyword);
     }
 }
