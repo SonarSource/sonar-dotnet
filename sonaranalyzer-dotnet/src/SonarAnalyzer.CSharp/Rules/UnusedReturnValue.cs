@@ -71,8 +71,8 @@ namespace SonarAnalyzer.Rules.CSharp
                             .Select(invocation => invocation.SyntaxNode)
                             .ToList();
 
-                        /// 0 invocation is handled by S1144 <see cref="UnusedPrivateMember"/>
-                        if (matchingInvocations.Any() && !IsReturnValueUsed(matchingInvocations, declaredPrivateMethodWithReturn.SemanticModel))
+
+                        if (IsNoncompliant(matchingInvocations, declaredPrivateMethodWithReturn.SemanticModel))
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, declaredPrivateMethodWithReturn.SyntaxNode.ReturnType.GetLocation()));
                         }
@@ -80,24 +80,34 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SymbolKind.NamedType);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var localFunctionSyntax = (LocalFunctionStatementSyntaxWrapper)c.Node;
-                var localFunctionSymbol = c.SemanticModel.GetDeclaredSymbol(localFunctionSyntax) as IMethodSymbol;
-                var topmostContainingMethod = c.Node.GetTopMostContainingMethod();
-
-                if (localFunctionSymbol == null || localFunctionSymbol.ReturnsVoid || topmostContainingMethod == null)
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
-                    return;
-                }
+                    var localFunctionSyntax = (LocalFunctionStatementSyntaxWrapper)c.Node;
+                    var localFunctionSymbol = c.SemanticModel.GetDeclaredSymbol(localFunctionSyntax) as IMethodSymbol;
+                    var topmostContainingMethod = c.Node.GetTopMostContainingMethod();
 
-                var matchingInvocations = GetLocalMatchingInvocations(topmostContainingMethod, localFunctionSymbol, c.SemanticModel);
-                if (matchingInvocations.Any() && !IsReturnValueUsed(matchingInvocations, c.SemanticModel))
-                {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, localFunctionSyntax.ReturnType.GetLocation()));
-                }
-            },
-            SyntaxKindEx.LocalFunctionStatement);
+                    if (localFunctionSymbol == null || localFunctionSymbol.ReturnsVoid || topmostContainingMethod == null)
+                    {
+                        return;
+                    }
+
+                    var matchingInvocations = GetLocalMatchingInvocations(topmostContainingMethod, localFunctionSymbol, c.SemanticModel);
+                    if (IsNoncompliant(matchingInvocations, c.SemanticModel))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, localFunctionSyntax.ReturnType.GetLocation()));
+                    }
+                },
+                SyntaxKindEx.LocalFunctionStatement);
+        }
+
+        /// <summary>
+        /// Method invocation is noncompliant when there is at least 1 inovcation of the method, and no invocation is
+        /// using the return value. The case of 0 invocation is handled by S1144 <see cref="UnusedPrivateMember"/>
+        /// </summary>
+        private static bool IsNoncompliant(IEnumerable<InvocationExpressionSyntax> matchingInvocations, SemanticModel semanticModel)
+        {
+            return matchingInvocations.Any() && !IsReturnValueUsed(matchingInvocations, c.SemanticModel);
         }
 
         private static IEnumerable<InvocationExpressionSyntax> GetLocalMatchingInvocations(SyntaxNode containingMethod, IMethodSymbol invocationSymbol, SemanticModel semanticModel) =>
