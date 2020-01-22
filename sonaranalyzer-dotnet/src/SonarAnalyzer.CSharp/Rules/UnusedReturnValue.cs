@@ -107,7 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
         /// </summary>
         private static bool IsNoncompliant(IEnumerable<InvocationExpressionSyntax> matchingInvocations, SemanticModel semanticModel)
         {
-            return matchingInvocations.Any() && !IsReturnValueUsed(matchingInvocations, c.SemanticModel);
+            return matchingInvocations.Any() && !IsReturnValueUsed(matchingInvocations, semanticModel);
         }
 
         private static IEnumerable<InvocationExpressionSyntax> GetLocalMatchingInvocations(SyntaxNode containingMethod, IMethodSymbol invocationSymbol, SemanticModel semanticModel) =>
