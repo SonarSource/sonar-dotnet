@@ -15,6 +15,19 @@
 },
 {
 "id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ErrorHandling\DefaultStatusCodeHandler.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  13,
+"endLine":  108,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Extensions\RequestExtensions.cs",
@@ -62,6 +75,19 @@
 "startColumn":  25,
 "endLine":  462,
 "endColumn":  27
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  13,
+"endLine":  143,
+"endColumn":  15
 }
 }
 },
@@ -132,6 +158,32 @@
 },
 {
 "id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  492,
+"startColumn":  13,
+"endLine":  492,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  502,
+"startColumn":  13,
+"endLine":  502,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
@@ -140,6 +192,32 @@
 "startColumn":  4,
 "endLine":  919,
 "endColumn":  6
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  6,
+"endLine":  240,
+"endColumn":  8
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"region":  {
+"startLine":  600,
+"startColumn":  13,
+"endLine":  600,
+"endColumn":  15
 }
 }
 },
@@ -184,6 +262,19 @@
 },
 {
 "id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  13,
+"endLine":  133,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\GenericFileResponse.cs",
@@ -197,6 +288,45 @@
 },
 {
 "id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\TextResponse.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  13,
+"endLine":  23,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\TextResponse.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  13,
+"endLine":  56,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2859,
+"startColumn":  21,
+"endLine":  2859,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
@@ -205,6 +335,19 @@
 "startColumn":  17,
 "endLine":  3261,
 "endColumn":  19
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3648,
+"startColumn":  13,
+"endLine":  3648,
+"endColumn":  15
 }
 }
 }

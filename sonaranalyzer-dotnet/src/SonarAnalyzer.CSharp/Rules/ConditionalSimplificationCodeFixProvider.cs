@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -37,239 +37,240 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string Title = "Simplify condition";
 
-        public override ImmutableArray<string> FixableDiagnosticIds =>
-            ImmutableArray.Create(ConditionalSimplification.DiagnosticId);
-
-        public override FixAllProvider GetFixAllProvider() =>
-            WellKnownFixAllProviders.BatchFixer;
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(ConditionalSimplification.DiagnosticId);
+        public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
         protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
-            var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var syntax = root.FindNode(diagnosticSpan);
+            var oldNode = root.FindNode(diagnostic.Location.SourceSpan);
             var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
-
-            if (syntax is ConditionalExpressionSyntax conditional)
+            var newNode = Simplify(diagnostic, semanticModel, oldNode, out var annotation);
+            if (newNode != null)
             {
-                var condition = conditional.Condition.RemoveParentheses();
-                var whenTrue = conditional.WhenTrue.RemoveParentheses();
-                var whenFalse = conditional.WhenFalse.RemoveParentheses();
-                ConditionalSimplification.TryGetExpressionComparedToNull(condition, out var compared, out var comparedIsNullInTrue);
+                context.RegisterCodeFix(CodeAction.Create(Title, c =>
+                    {
+                        var nodeToAddWithoutAnnotation = RemoveAnnotation(newNode, annotation);
 
-                var annotation = new SyntaxAnnotation();
-                var coalescing = GetNullCoalescing(whenTrue, whenFalse, compared, semanticModel, annotation);
-
-                context.RegisterCodeFix(
-                    GetActionToExecute(context, root, conditional, coalescing, annotation),
-                    context.Diagnostics);
-            }
-
-            if (syntax is IfStatementSyntax ifStatement)
-            {
-                var whenTrue = ConditionalSimplification.ExtractSingleStatement(ifStatement.Statement);
-                var whenFalse = ConditionalSimplification.ExtractSingleStatement(ifStatement.Else.Statement);
-                ConditionalSimplification.TryGetExpressionComparedToNull(ifStatement.Condition, out var compared, out var comparedIsNullInTrue);
-                var isNullCoalescing = bool.Parse(diagnostic.Properties[ConditionalSimplification.IsNullCoalescingKey]);
-
-                var annotation = new SyntaxAnnotation();
-                var simplified = GetSimplified(whenTrue, whenFalse, ifStatement.Condition, compared, semanticModel, annotation, isNullCoalescing);
-
-                context.RegisterCodeFix(
-                    GetActionToExecute(context, root, ifStatement, simplified, annotation),
-                    context.Diagnostics);
+                        var newRoot = root.ReplaceNode(
+                            oldNode,
+                            nodeToAddWithoutAnnotation.WithTriviaFrom(oldNode).WithAdditionalAnnotations(Formatter.Annotation));
+                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                    }), context.Diagnostics);
             }
         }
 
-        private static CodeAction GetActionToExecute(CodeFixContext context, SyntaxNode root,
-            SyntaxNode nodeToChange, SyntaxNode nodeToAdd, SyntaxAnnotation annotation)
+        private static SyntaxNode Simplify(Diagnostic diagnostic, SemanticModel semanticModel, SyntaxNode oldNode, out SyntaxAnnotation annotation)
         {
-            return CodeAction.Create(
-                Title,
-                c =>
-                {
-                    var nodeToAddWithoutAnnotation = RemoveAnnotation(nodeToAdd, annotation);
+            ExpressionSyntax compared;
+            switch (oldNode)
+            {
+                case ConditionalExpressionSyntax conditional:
+                    var condition = conditional.Condition.RemoveParentheses();
+                    var whenTrue = conditional.WhenTrue.RemoveParentheses();
+                    var whenFalse = conditional.WhenFalse.RemoveParentheses();
+                    ConditionalSimplification.TryGetExpressionComparedToNull(condition, out compared, out _);
+                    return SimplifyCoalesceExpression(new ComparedContext(diagnostic, semanticModel, compared, out annotation), whenTrue, whenFalse);
 
-                    var newRoot = root.ReplaceNode(
-                        nodeToChange,
-                        nodeToAddWithoutAnnotation.WithTriviaFrom(nodeToChange).WithAdditionalAnnotations(Formatter.Annotation));
-                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                });
+                case IfStatementSyntax ifStatement:
+                    var ifPart = ConditionalSimplification.ExtractSingleStatement(ifStatement.Statement);
+                    var elsePart = ConditionalSimplification.ExtractSingleStatement(ifStatement.Else?.Statement);
+                    ConditionalSimplification.TryGetExpressionComparedToNull(ifStatement.Condition, out compared, out var _);
+                    return SimplifyIfStatement(new ComparedContext(diagnostic, semanticModel, compared, out annotation), ifPart, elsePart, ifStatement.Condition.RemoveParentheses());
+
+                case AssignmentExpressionSyntax assignment:
+                    var context = new ComparedContext(diagnostic, semanticModel, null, out annotation);
+                    var right = assignment.Right.RemoveParentheses();
+                    if (right is BinaryExpressionSyntax binaryExpression && binaryExpression.Kind() == SyntaxKind.CoalesceExpression)
+                    {
+                        return CoalesceAssignmentExpression(context, assignment.Left, binaryExpression.Right);
+                    }
+                    else if (right is ConditionalExpressionSyntax conditional)
+                    {
+                        ConditionalSimplification.TryGetExpressionComparedToNull(conditional.Condition, out compared, out var comparedIsNullInTrue);
+                        if (context.IsCoalesceAssignmentSupported && ConditionalSimplification.IsCoalesceAssignmentCandidate(conditional, compared))
+                        {
+                            return CoalesceAssignmentExpression(context,
+                                (conditional.GetFirstNonParenthesizedParent() as AssignmentExpressionSyntax).Left,
+                                (comparedIsNullInTrue ? conditional.WhenTrue : conditional.WhenFalse).RemoveParentheses());
+                        }
+                    }
+                    break;
+            }
+            annotation = null;
+            return null;
         }
 
-        private static T RemoveAnnotation<T>(T node, SyntaxAnnotation annotation) where T: SyntaxNode
+        private static T RemoveAnnotation<T>(T node, SyntaxAnnotation annotation) where T : SyntaxNode
         {
             var annotated = node.GetAnnotatedNodes(annotation).FirstOrDefault();
             if (annotated == null)
             {
                 return node;
             }
-
-            if (annotated == node)
+            else if (annotated == node)
             {
                 return node.WithoutAnnotations(annotation);
             }
-
             return node.ReplaceNode(annotated, annotated.WithoutAnnotations(annotation));
         }
 
-        private static StatementSyntax GetSimplified(StatementSyntax statement1, StatementSyntax statement2,
-            ExpressionSyntax condition, ExpressionSyntax compared, SemanticModel semanticModel, SyntaxAnnotation annotation,
-            bool isNullCoalescing)
+        private static StatementSyntax SimplifyIfStatement(ComparedContext context, StatementSyntax statement1, StatementSyntax statement2, ExpressionSyntax condition)
         {
-            if (statement1 is ReturnStatementSyntax return1 &&
-                statement2 is ReturnStatementSyntax return2)
+            if (statement1 is ReturnStatementSyntax return1 && statement2 is ReturnStatementSyntax return2)
             {
                 var retExpr1 = return1.Expression.RemoveParentheses();
                 var retExpr2 = return2.Expression.RemoveParentheses();
-
-                var createdExpression = isNullCoalescing
-                    ? GetNullCoalescing(retExpr1, retExpr2, compared, semanticModel, annotation)
-                    : GetConditionalExpression(condition, return1.Expression, return2.Expression, annotation);
-
+                var createdExpression = context.SimplifiedOperator switch
+                {
+                    "?:" => ConditionalExpression(condition, retExpr1, retExpr2, context.Annotation),
+                    "??" => SimplifyCoalesceExpression(context, retExpr1, retExpr2),
+                    _ => throw new System.InvalidOperationException("Unexpected simplifiedOperator: " + context.SimplifiedOperator)
+                };
                 return SyntaxFactory.ReturnStatement(createdExpression);
             }
+            var expression = SimplifyIfExpression(context, statement1 as ExpressionStatementSyntax, statement2 as ExpressionStatementSyntax, condition);
+            return expression == null ? null : SyntaxFactory.ExpressionStatement(expression);
+        }
 
-            var expressionStatement1 = statement1 as ExpressionStatementSyntax;
-            var expressionStatement2 = statement2 as ExpressionStatementSyntax;
-
-            var expression1 = expressionStatement1.Expression.RemoveParentheses();
-            var expression2 = expressionStatement2.Expression.RemoveParentheses();
-
-            var assignment = GetSimplifiedAssignment(expression1, expression2, condition, compared, semanticModel, annotation, isNullCoalescing);
-            if (assignment != null)
+        private static ExpressionSyntax SimplifyIfExpression(ComparedContext context, ExpressionStatementSyntax statement1, ExpressionStatementSyntax statement2, ExpressionSyntax condition)
+        {
+            bool isCoalescing;
+            var expression1 = statement1.Expression.RemoveParentheses();
+            switch (context.SimplifiedOperator)
             {
-                return SyntaxFactory.ExpressionStatement(assignment);
+                case "?:":
+                    isCoalescing = false;
+                    break;
+                case "??":
+                    if (statement2 == null)
+                    {
+                        return CoalesceAssignmentExpression(context, expression1);
+                    }
+                    isCoalescing = true;
+                    break;
+                case "??=":
+                    return CoalesceAssignmentExpression(context, expression1);
+                default:
+                    throw new System.InvalidOperationException("Unexpected simplifiedOperator: " + context.SimplifiedOperator);
             }
+            var expression2 = statement2.Expression.RemoveParentheses();
+            return SimplifyAssignmentExpression(context, expression1, expression2, condition, isCoalescing)
+                ?? SimplifyInvocationExpression(context, expression1, expression2, condition, isCoalescing);
+        }
 
-            var expression = GetSimplificationFromInvocations(expression1, expression2, condition, compared, semanticModel, annotation, isNullCoalescing);
-            return expression != null
-                ? SyntaxFactory.ExpressionStatement(expression)
+        private static ExpressionSyntax SimplifyAssignmentExpression(ComparedContext context, ExpressionSyntax expression1, ExpressionSyntax expression2, ExpressionSyntax condition, bool isCoalescing)
+        {
+            if (expression1 is AssignmentExpressionSyntax assignment1
+                && expression2 is AssignmentExpressionSyntax assignment2
+                && assignment1.Kind() == assignment2.Kind()
+                && CSharpEquivalenceChecker.AreEquivalent(assignment1.Left, assignment2.Left))
+            {
+                var createdExpression = isCoalescing
+                    ? SimplifyCoalesceExpression(context, assignment1.Right, assignment2.Right)
+                    : ConditionalExpression(condition, assignment1.Right, assignment2.Right, context.Annotation);
+                return SyntaxFactory.AssignmentExpression(assignment1.Kind(), assignment1.Left, createdExpression);
+            }
+            return null;
+        }
+
+        private static ExpressionSyntax SimplifyCoalesceExpression(ComparedContext context, ExpressionSyntax whenTrue, ExpressionSyntax whenFalse)
+        {
+            if (CSharpEquivalenceChecker.AreEquivalent(whenTrue, context.Compared))
+            {
+                return CoalesceExpression(context.Compared, whenFalse, context.Annotation);
+            }
+            else if (CSharpEquivalenceChecker.AreEquivalent(whenFalse, context.Compared))
+            {
+                return CoalesceExpression(context.Compared, whenTrue, context.Annotation);
+            }
+            return SimplifyInvocationExpression(context, whenTrue, whenFalse, null, isCoalescing: true);
+        }
+
+        private static ExpressionSyntax CoalesceAssignmentExpression(ComparedContext context, ExpressionSyntax assignmentExpression) =>
+            assignmentExpression is AssignmentExpressionSyntax originalAssignment
+                ? CoalesceAssignmentExpression(context, originalAssignment.Left, originalAssignment.Right)
                 : null;
+
+        private static ExpressionSyntax CoalesceAssignmentExpression(ComparedContext context, ExpressionSyntax left, ExpressionSyntax right)
+        {
+            if (context.IsCoalesceAssignmentSupported)
+            {
+                return SyntaxFactory.AssignmentExpression(ShimLayer.CSharp.SyntaxKindEx.CoalesceAssignmentExpression, left, right).WithAdditionalAnnotations(context.Annotation);
+            }
+            return SyntaxFactory.AssignmentExpression(SyntaxKind.SimpleAssignmentExpression, left, CoalesceExpression(left, right, context.Annotation));
         }
 
-        private static ConditionalExpressionSyntax GetConditionalExpression(ExpressionSyntax condition, ExpressionSyntax expressionTrue,
-            ExpressionSyntax expressionFalse, SyntaxAnnotation annotation)
+        private static ExpressionSyntax CoalesceExpression(ExpressionSyntax left, ExpressionSyntax right, SyntaxAnnotation annotation) =>
+            SyntaxFactory.BinaryExpression(SyntaxKind.CoalesceExpression, left, right).WithAdditionalAnnotations(annotation);
+
+        private static ConditionalExpressionSyntax ConditionalExpression(ExpressionSyntax condition, ExpressionSyntax truePart, ExpressionSyntax falsePart, SyntaxAnnotation annotation) =>
+            SyntaxFactory.ConditionalExpression(condition, truePart, falsePart).WithAdditionalAnnotations(annotation);
+
+        private static ExpressionSyntax SimplifyInvocationExpression(ComparedContext context, ExpressionSyntax expression1, ExpressionSyntax expression2, ExpressionSyntax condition, bool isCoalescing)
         {
-            return SyntaxFactory.ConditionalExpression(
-                condition,
-                expressionTrue,
-                expressionFalse)
-                .WithAdditionalAnnotations(annotation);
+            if (expression1 is InvocationExpressionSyntax methodCall1
+                && expression2 is InvocationExpressionSyntax methodCall2
+                && context.SemanticModel.GetSymbolInfo(methodCall1).Symbol is IMethodSymbol methodSymbol1
+                && context.SemanticModel.GetSymbolInfo(methodCall2).Symbol is IMethodSymbol methodSymbol2
+                && methodSymbol1.Equals(methodSymbol2))
+            {
+                return methodCall1.WithArgumentList(SimplifyInvocationArguments(context, methodCall1, methodCall2, condition, isCoalescing));
+            }
+            return null;
         }
 
-        private static ExpressionSyntax GetSimplifiedAssignment(ExpressionSyntax expression1, ExpressionSyntax expression2,
-            ExpressionSyntax condition, ExpressionSyntax compared, SemanticModel semanticModel, SyntaxAnnotation annotation,
-            bool isNullCoalescing)
+        private static ArgumentListSyntax SimplifyInvocationArguments(ComparedContext context, InvocationExpressionSyntax methodCall1, InvocationExpressionSyntax methodCall2, ExpressionSyntax condition, bool isCoalescing)
         {
-            var assignment1 = expression1 as AssignmentExpressionSyntax;
-            var assignment2 = expression2 as AssignmentExpressionSyntax;
-            var canBeSimplified =
-                assignment1 != null &&
-                assignment2 != null &&
-                CSharpEquivalenceChecker.AreEquivalent(assignment1.Left, assignment2.Left) &&
-                assignment1.Kind() == assignment2.Kind();
-
-            if (!canBeSimplified)
-            {
-                return null;
-            }
-
-            var createdExpression = isNullCoalescing
-                ? GetNullCoalescing(assignment1.Right, assignment2.Right, compared, semanticModel, annotation)
-                : GetConditionalExpression(condition, assignment1.Right, assignment2.Right, annotation);
-
-            return SyntaxFactory.AssignmentExpression(
-                assignment1.Kind(),
-                assignment1.Left,
-                createdExpression);
-        }
-
-        private static ExpressionSyntax GetNullCoalescing(ExpressionSyntax whenTrue, ExpressionSyntax whenFalse,
-            ExpressionSyntax compared, SemanticModel semanticModel, SyntaxAnnotation annotation)
-        {
-            if (CSharpEquivalenceChecker.AreEquivalent(whenTrue, compared))
-            {
-                var createdExpression = SyntaxFactory.BinaryExpression(
-                    SyntaxKind.CoalesceExpression,
-                    compared,
-                    whenFalse)
-                    .WithAdditionalAnnotations(annotation);
-                return createdExpression;
-            }
-
-            if (CSharpEquivalenceChecker.AreEquivalent(whenFalse, compared))
-            {
-                var createdExpression = SyntaxFactory.BinaryExpression(
-                    SyntaxKind.CoalesceExpression,
-                    compared,
-                    whenTrue)
-                    .WithAdditionalAnnotations(annotation);
-                return createdExpression;
-            }
-
-            return GetSimplificationFromInvocations(whenTrue, whenFalse, null, compared, semanticModel, annotation,
-                isNullCoalescing: true);
-        }
-
-        private static ExpressionSyntax GetSimplificationFromInvocations(ExpressionSyntax expression1, ExpressionSyntax expression2,
-            ExpressionSyntax condition, ExpressionSyntax compared, SemanticModel semanticModel, SyntaxAnnotation annotation,
-            bool isNullCoalescing)
-        {
-            var methodCall2 = expression2 as InvocationExpressionSyntax;
-            if (!(expression1 is InvocationExpressionSyntax methodCall1) ||
-                methodCall2 == null)
-            {
-                return null;
-            }
-
-            var methodSymbol1 = semanticModel.GetSymbolInfo(methodCall1).Symbol;
-            var methodSymbol2 = semanticModel.GetSymbolInfo(methodCall2).Symbol;
-            if (methodSymbol1 == null ||
-                methodSymbol2 == null ||
-                !methodSymbol1.Equals(methodSymbol2))
-            {
-                return null;
-            }
-
             var newArgumentList = SyntaxFactory.ArgumentList();
-
             for (var i = 0; i < methodCall1.ArgumentList.Arguments.Count; i++)
             {
                 var arg1 = methodCall1.ArgumentList.Arguments[i];
                 var arg2 = methodCall2.ArgumentList.Arguments[i];
-
                 var expr1 = arg1.Expression.RemoveParentheses();
                 var expr2 = arg2.Expression.RemoveParentheses();
-
-                if (!CSharpEquivalenceChecker.AreEquivalent(expr1, expr2))
+                if (CSharpEquivalenceChecker.AreEquivalent(expr1, expr2))
+                {
+                    newArgumentList = newArgumentList.AddArguments(arg1.WithExpression(expr1));
+                }
+                else
                 {
                     ExpressionSyntax createdExpression;
-                    if (isNullCoalescing)
+                    if (isCoalescing)
                     {
-                        var arg1IsCompared = CSharpEquivalenceChecker.AreEquivalent(expr1, compared);
-                        var expression = arg1IsCompared ? expr2 : expr1;
-
-                        createdExpression = SyntaxFactory.BinaryExpression(SyntaxKind.CoalesceExpression, compared, expression);
+                        var arg1Compared = CSharpEquivalenceChecker.AreEquivalent(expr1, context.Compared);
+                        createdExpression = SyntaxFactory.BinaryExpression(SyntaxKind.CoalesceExpression, context.Compared, arg1Compared ? expr2 : expr1);
                     }
                     else
                     {
                         createdExpression = SyntaxFactory.ConditionalExpression(condition, expr1, expr2);
                     }
-
-                    newArgumentList = newArgumentList.AddArguments(
-                        SyntaxFactory.Argument(
-                            arg1.NameColon,
-                            arg1.RefOrOutKeyword,
-                            createdExpression.WithAdditionalAnnotations(annotation)));
-                }
-                else
-                {
-                    newArgumentList = newArgumentList.AddArguments(arg1.WithExpression(arg1.Expression.RemoveParentheses()));
+                    newArgumentList = newArgumentList.AddArguments(SyntaxFactory.Argument(arg1.NameColon, arg1.RefOrOutKeyword, createdExpression.WithAdditionalAnnotations(context.Annotation)));
                 }
             }
+            return newArgumentList;
+        }
 
-            return methodCall1.WithArgumentList(newArgumentList);
+        private class ComparedContext
+        {
+            public readonly ExpressionSyntax Compared;
+            public readonly SemanticModel SemanticModel;
+            public readonly SyntaxAnnotation Annotation;
+            public readonly bool IsCoalesceAssignmentSupported;
+            /// <summary>
+            /// Value is set only for IfStatement checks.
+            /// </summary>
+            public readonly string SimplifiedOperator;
+
+            public ComparedContext(Diagnostic diagnostic, SemanticModel semanticModel, ExpressionSyntax compared, out SyntaxAnnotation annotation)
+            {
+                this.Compared = compared;
+                this.SemanticModel = semanticModel;
+                this.Annotation = new SyntaxAnnotation();
+                this.IsCoalesceAssignmentSupported = bool.Parse(diagnostic.Properties[ConditionalSimplification.IsCoalesceAssignmentSupportedKey]);
+                diagnostic.Properties.TryGetValue(ConditionalSimplification.SimplifiedOperatorKey, out this.SimplifiedOperator);
+                annotation = this.Annotation;
+            }
         }
     }
 }

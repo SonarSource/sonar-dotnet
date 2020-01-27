@@ -12,6 +12,19 @@
 "endColumn":  27
 }
 }
+},
+{
+"id":  "S3240",
+"message":  "Use the '??' operator here.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"region":  {
+"startLine":  534,
+"startColumn":  13,
+"endLine":  534,
+"endColumn":  15
+}
+}
 }
 ]
 }

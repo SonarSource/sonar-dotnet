@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -130,10 +130,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             var fixAllDiagnosticProvider = new FixAllDiagnosticProvider(
                 codeFixProvider.FixableDiagnosticIds.ToHashSet(),
-                (doc, ids, ct) => Task.FromResult(
-                    DiagnosticVerifier.GetDiagnostics(
-                        currentDocument.Project.GetCompilationAsync(ct).Result,
-                        diagnosticAnalyzer, CompilationErrorBehavior.Ignore)), // ToDo: Is that the right decision?
+                (doc, ids, ct) => Task.FromResult(diagnostics.AsEnumerable()),
                 null);
 
             var fixAllContext = new FixAllContext(currentDocument, codeFixProvider, FixAllScope.Document,
