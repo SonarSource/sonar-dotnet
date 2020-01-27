@@ -133,13 +133,11 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (node.IsKind(SyntaxKind.AddExpression) &&
                     // we do the analysis only if it's a SQL keyword on the left
-                    node.Left is LiteralExpressionSyntax leftSide &&
-                    node.Right is LiteralExpressionSyntax rightSide &&
-                    leftSide.IsKind(SyntaxKind.StringLiteralExpression) &&
-                    rightSide.IsKind(SyntaxKind.StringLiteralExpression) &&
-                    StartsWithSqlKeyword(leftSide.Token.ValueText.Trim()))
+                    TryGetStringWrapper(node.Left, out var leftSide) &&
+                    TryGetStringWrapper(node.Right, out var rightSide) &&
+                    StartsWithSqlKeyword(leftSide.Text.Trim()))
                 {
-                    var strings = new List<LiteralExpressionSyntax>();
+                    var strings = new List<StringWrapper>();
                     strings.Add(leftSide);
                     strings.Add(rightSide);
                     var onlyStringsInConcatenation = AddStringsToList(node, strings);
@@ -157,22 +155,39 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            private void CheckSpaceBetweenStrings(List<LiteralExpressionSyntax> stringLiterals)
+            private void CheckSpaceBetweenStrings(List<StringWrapper> stringWrappers)
             {
-                for (var i = 0; i < stringLiterals.Count -1; i++)
+                for (var i = 0; i < stringWrappers.Count -1; i++)
                 {
-                    var firstStringText = stringLiterals[i].Token.ValueText;
-                    var secondString = stringLiterals[i + 1];
-                    var secondStringText = secondString.Token.ValueText;
+                    var firstStringText = stringWrappers[i].Text;
+                    var secondString = stringWrappers[i + 1];
+                    var secondStringText = secondString.Text;
                     if (firstStringText.Length > 0 &&
                         IsAlphaNumericOrAt(firstStringText.ToCharArray().Last()) &&
                         secondStringText.Length > 0 &&
                         IsAlphaNumericOrAt(secondStringText[0]))
                     {
                         var word = secondStringText.Split(' ').FirstOrDefault();
-                        this.context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, secondString.GetLocation(), word));
+                        this.context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, secondString.Node.GetLocation(), word));
                     }
                 }
+            }
+
+            private static bool TryGetStringWrapper(ExpressionSyntax expression, out StringWrapper stringWrapper)
+            {
+                if (expression is LiteralExpressionSyntax literal && literal.IsKind(SyntaxKind.StringLiteralExpression))
+                {
+                    stringWrapper = new StringWrapper(literal, literal.Token.ValueText);
+                    return true;
+                }
+                else if (expression is InterpolatedStringExpressionSyntax interpolatedString)
+                {
+                    var interpolatedStringText = interpolatedString.Contents.JoinStr("", content => content.ToString());
+                    stringWrapper = new StringWrapper(interpolatedString, interpolatedStringText);
+                    return true;
+                }
+                stringWrapper = null;
+                return false;
             }
 
             /**
@@ -181,7 +196,7 @@ namespace SonarAnalyzer.Rules.CSharp
              * - false if, inside the chain of binary expressions, some elements are not string literals or
              * some binary expressions are not additions.
              */
-            private static bool AddStringsToList(BinaryExpressionSyntax node, List<LiteralExpressionSyntax> strings)
+            private static bool AddStringsToList(BinaryExpressionSyntax node, List<StringWrapper> strings)
             {
                 // this is the left-most node of a concatenation chain
                 // collect all string literals
@@ -189,9 +204,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 while (parent is BinaryExpressionSyntax concatenation)
                 {
                     if (concatenation.IsKind(SyntaxKind.AddExpression) &&
-                        concatenation.Right.IsKind(SyntaxKind.StringLiteralExpression))
+                        TryGetStringWrapper(concatenation.Right, out var stringWrapper))
                     {
-                        strings.Add((LiteralExpressionSyntax)concatenation.Right);
+                        strings.Add(stringWrapper);
                     }
                     else
                     {
@@ -208,10 +223,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 SqlStartQueryKeywords.Any(s => firstString.StartsWith(s, StringComparison.OrdinalIgnoreCase));
 
             /**
-             * The '@' symbol is used for named parameters.
+             * The '@' symbol is used for named parameters. The '{' and '}' symbols are used in string interpolations.
              * We ignore other non-alphanumeric characters (e.g. '>','=') to avoid false positives.
              */
-            private static bool IsAlphaNumericOrAt(char c) => char.IsLetterOrDigit(c) || c == '@';
+            private static bool IsAlphaNumericOrAt(char c) => char.IsLetterOrDigit(c) || c == '@' || c == '{' || c == '}';
+        }
+
+        internal class StringWrapper
+        {
+            public SyntaxNode Node { get; }
+            public string Text { get; }
+
+            internal StringWrapper(SyntaxNode node, string text)
+            {
+                Node = node;
+                Text = text;
+            }
         }
     }
 }
