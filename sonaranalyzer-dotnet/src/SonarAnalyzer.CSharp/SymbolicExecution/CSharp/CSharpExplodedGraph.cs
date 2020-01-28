@@ -553,8 +553,6 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private ProgramState VisitDeclarationExpression(DeclarationExpressionSyntaxWrapper wrapper, ProgramState programState)
         {
-            // DeclarationExpression is not yet fully supported: https://github.com/SonarSource/sonar-dotnet/issues/2936
-
             if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(wrapper.Designation))
             {
                 return VisitParenthesizedVariableDesignationSyntax((ParenthesizedVariableDesignationSyntaxWrapper)wrapper.Designation, programState);
@@ -567,6 +565,8 @@ namespace SonarAnalyzer.SymbolicExecution
 
             var declaredSymbol = SemanticModel.GetDeclaredSymbol(wrapper.Designation);
             var symbolicValue = SymbolicValue.Create(declaredSymbol.GetSymbolType());
+
+            programState = SetNonNullConstraintIfValueType(declaredSymbol, symbolicValue, programState);
 
             programState = programState.PushValue(symbolicValue);
             programState = programState.StoreSymbolicValue(declaredSymbol, symbolicValue);
