@@ -495,7 +495,7 @@ namespace TesteAnalyzer
 
         [TestMethod]
         [TestCategory("Symbolic execution")]
-        public void ExplodedGraph_DeclarationExpressionVisit_AsOutParameter()
+        public void ExplodedGraph_DeclarationExpressionVisit_AsOutParameter_AddsNotNullConstraintForValueType()
         {
             const string testInput = @"
 using System.Collections.Generic;
@@ -551,6 +551,76 @@ namespace Namespace
 
                             args.ProgramState.HasValue.Should().BeFalse();
                             break;
+
+                        default:
+                            throw new NotImplementedException();
+                    }
+                };
+
+            context.WalkWithInstructions(5);
+        }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_DeclarationExpressionVisit_AsOutParameter_AddsNoConstraintForReferenceType()
+        {
+            const string testInput = @"
+using System.Collections.Generic;
+
+namespace Namespace
+{
+  public class DeclarationStatement
+  {
+    public int Main(Dictionary<string, string> dictionary, string key)
+    {
+        dictionary.TryGetValue(key, out var value);
+    }
+  }
+}";
+            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var dictionarySymbol = context.SemanticModel.GetDeclaredSymbol(context.MainMethod.ParameterList.Parameters.First());
+            var valueSymbol = context.GetSymbol("value", ExplodedGraphContext.SymbolType.Declaration);
+            context.ExplodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+                    switch (instruction)
+                    {
+                        case "dictionary":
+                            args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
+                            dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeFalse();
+                            break;
+
+                        case "dictionary.TryGetValue":
+                            args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
+                            dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            break;
+
+                        case "key":
+                            args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
+                            dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            break;
+
+                        case "var value":
+                            args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
+                            dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+
+                            args.ProgramState.GetSymbolValue(valueSymbol).Should().NotBeNull();
+                            valueSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeFalse();
+                            break;
+
+                        case "dictionary.TryGetValue(key, out var value)":
+                            args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
+                            dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+
+                            args.ProgramState.GetSymbolValue(valueSymbol).Should().NotBeNull();
+                            valueSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeFalse();
+
+                            args.ProgramState.HasValue.Should().BeFalse();
+                            break;
+
+                        default:
+                            throw new NotImplementedException();
                     }
                 };
 
@@ -563,18 +633,25 @@ namespace Namespace
         {
             const string testInput = "string key = null; Dictionary<string, int> dictionary = new Dictionary<string, int>(); dictionary.TryGetValue(key, out var _); dictionary.TryGetValue(key, out _);";
             var context = new ExplodedGraphContext(testInput);
-            var dictionarySymbol = context.SemanticModel.GetDeclaredSymbol(context.MainMethod.ParameterList.Parameters.First());
+            var dictionarySymbol = context.GetSymbol("dictionary");
+            var instructionsInspected = 0;
             context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
                     var instruction = args.Instruction.ToString();
                     switch (instruction)
                     {
+                        case "key":
+                            args.ProgramState.HasValue.Should().BeTrue();
+                            instructionsInspected++;
+                            break;
+
                         case "dictionary.TryGetValue(key, out var _)":
                             args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
                             dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
 
                             args.ProgramState.HasValue.Should().BeFalse();
+                            instructionsInspected++;
                             break;
 
                         case "dictionary.TryGetValue(key, out _)":
@@ -582,11 +659,13 @@ namespace Namespace
                             dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
 
                             args.ProgramState.HasValue.Should().BeFalse();
+                            instructionsInspected++;
                             break;
                     }
                 };
 
             context.WalkWithInstructions(14);
+            instructionsInspected.Should().Be(4);
         }
 
         [TestMethod]
