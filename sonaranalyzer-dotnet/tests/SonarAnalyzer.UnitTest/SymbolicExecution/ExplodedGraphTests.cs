@@ -504,7 +504,7 @@ namespace Namespace
 {
   public class DeclarationStatement
   {
-    public int Main(Dictionary<string, string> dictionary, string key)
+    public int Main(Dictionary<string, int> dictionary, string key)
     {
         dictionary.TryGetValue(key, out var value);
     }
@@ -512,8 +512,7 @@ namespace Namespace
 }";
             var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
             var dictionarySymbol = context.SemanticModel.GetDeclaredSymbol(context.MainMethod.ParameterList.Parameters.First());
-            var valueDeclaration = context.MainMethod.DescendantNodes().OfType<DeclarationExpressionSyntax>().First();
-            var valueSymbol = context.SemanticModel.GetDeclaredSymbol(valueDeclaration);
+            var valueSymbol = context.GetSymbol("value", ExplodedGraphContext.SymbolType.Declaration);
             context.ExplodedGraph.InstructionProcessed +=
                 (sender, args) =>
                 {
@@ -538,15 +537,19 @@ namespace Namespace
                         case "var value":
                             args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
                             dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+
+                            args.ProgramState.GetSymbolValue(valueSymbol).Should().NotBeNull();
+                            valueSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
                             break;
 
                         case "dictionary.TryGetValue(key, out var value)":
                             args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
                             dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
 
-                            // Currently the DeclarationExpressionSyntax are ignored so the "value" variable is not
-                            // https://github.com/SonarSource/sonar-dotnet/issues/2936
-                            args.ProgramState.GetSymbolValue(valueSymbol).Should().BeNull();
+                            args.ProgramState.GetSymbolValue(valueSymbol).Should().NotBeNull();
+                            valueSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+
+                            args.ProgramState.HasValue.Should().BeFalse();
                             break;
                     }
                 };
