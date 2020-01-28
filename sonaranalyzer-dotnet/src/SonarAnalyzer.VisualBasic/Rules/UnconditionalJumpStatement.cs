@@ -72,6 +72,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     SyntaxKind.SubLambdaHeader
                 };
 
+            protected override ISet<SyntaxKind> LocalFunctionSyntaxes { get; } = new HashSet<SyntaxKind>();
+
             protected override ISet<SyntaxKind> ConditionalStatements { get; } = new HashSet<SyntaxKind>
             {
                 SyntaxKind.SingleLineIfStatement,

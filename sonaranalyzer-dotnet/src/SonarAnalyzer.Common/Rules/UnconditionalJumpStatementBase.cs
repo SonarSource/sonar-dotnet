@@ -71,12 +71,14 @@ namespace SonarAnalyzer.Rules
         protected abstract ISet<TLanguageKindEnum> StatementsThatCanThrow { get; }
         protected abstract ISet<TLanguageKindEnum> LambdaSyntaxes { get; }
 
-        private readonly ISet<TLanguageKindEnum> lambdaOrLoopStatements;
+        protected abstract ISet<TLanguageKindEnum> LocalFunctionSyntaxes { get; }
+
+        private readonly ISet<TLanguageKindEnum> ignoredSyntaxesKind;
 
         protected LoopWalkerBase(SyntaxNodeAnalysisContext context, ISet<TLanguageKindEnum> loopStatements)
         {
             this.rootExpression = context.Node;
-            this.lambdaOrLoopStatements = LambdaSyntaxes.Union(loopStatements).ToHashSet();
+            this.ignoredSyntaxesKind = LambdaSyntaxes.Union(LocalFunctionSyntaxes).Union(loopStatements).ToHashSet();
         }
 
         public abstract void Visit();
@@ -100,7 +102,7 @@ namespace SonarAnalyzer.Rules
                 .TakeWhile(n => !this.rootExpression.Equals(n))
                 .ToList();
 
-            if (ancestors.Any(n => IsAnyKind(n, this.lambdaOrLoopStatements)))
+            if (ancestors.Any(n => IsAnyKind(n, this.ignoredSyntaxesKind)))
             {
                 return;
             }

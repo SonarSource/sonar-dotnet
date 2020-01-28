@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -63,6 +64,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 = new HashSet<SyntaxKind> {
                     SyntaxKind.ParenthesizedLambdaExpression,
                     SyntaxKind.SimpleLambdaExpression };
+
+            protected override ISet<SyntaxKind> LocalFunctionSyntaxes { get; } = new HashSet<SyntaxKind> { SyntaxKindEx.LocalFunctionStatement };
 
             protected override ISet<SyntaxKind> ConditionalStatements { get; } = new HashSet<SyntaxKind>
             {

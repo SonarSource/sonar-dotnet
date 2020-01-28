@@ -520,21 +520,26 @@ namespace Tests.Diagnostics
         }
     }
 
-    public class Repro_2864
+    public class LocalFunctions
     {
-        public void ValidationMethod(bool shouldThrow)
+        public void LocalFunctionInLoop()
         {
-            for (int i = 0; i < 3; i++)
+            while(true)
             {
-                if (shouldThrow)
-                {
-                    Throw();
-                }
-
-                //Local funciton is declared inside loop
                 void Throw()
                 {
-                    throw new InvalidOperationException("Message"); // Noncompliant FP
+                    throw new InvalidOperationException("Message");
+                }
+            }
+        }
+
+        public void StaticLocalFunctionInLoop()
+        {
+            while (true)
+            {
+                static void Throw()
+                {
+                    throw new InvalidOperationException("Message");
                 }
             }
         }
