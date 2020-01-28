@@ -52,17 +52,19 @@ namespace Tests.Diagnostics
 
             var a = "TRUNCATE" + " " + "TABLE HumanResources.JobCandidate;";
 
-            var b = "TRUNCATE" + @" " + "TABLE HumanResources.JobCandidate;";
-            var b1 = @"TRUNCATE" + @"TABLE HumanResources.JobCandidate;"; // Noncompliant
+            var b1 = "TRUNCATE" + @" " + "TABLE HumanResources.JobCandidate;";
+            var b2 = @"TRUNCATE" + @"TABLE HumanResources.JobCandidate;"; // Noncompliant
 
-            var c = "TRUNCATE" + $" " + "TABLE HumanResources.JobCandidate;";
-            var c1 = $"TRUNCATE" + $"TABLE HumanResources.JobCandidate;"; // Noncompliant
+            var c1 = "TRUNCATE" + $" " + "TABLE HumanResources.JobCandidate;";
+            var c2 = $"TRUNCATE" + $"TABLE HumanResources.JobCandidate;"; // Noncompliant
 
-            var d = "TRUNCATE" + $@" " + "TABLE HumanResources.JobCandidate;";
-            var d1 = $@"TRUNCATE" + $@"TABLE HumanResources.JobCandidate;"; // Noncompliant
+            var d1 = "TRUNCATE" + $@" " + "TABLE HumanResources.JobCandidate;";
+            var d2 = $@"TRUNCATE " + $@"TABLE HumanResources.JobCandidate;";
+            var d3 = $@"TRUNCATE" + $@"TABLE HumanResources.JobCandidate;"; // Noncompliant
 
-            var e = "TRUNCATE" + @$" " + "TABLE HumanResources.JobCandidate;";
-            var e2 = @$"TRUNCATE" + @$"TABLE HumanResources.JobCandidate;"; // Noncompliant
+            var e1 = "TRUNCATE" + @$" " + "TABLE HumanResources.JobCandidate;";
+            var e2 = @$"TRUNCATE" + @$" TABLE HumanResources.JobCandidate;";
+            var e3 = @$"TRUNCATE" + @$"TABLE HumanResources.JobCandidate;"; // Noncompliant
         }
 
         public string Property
