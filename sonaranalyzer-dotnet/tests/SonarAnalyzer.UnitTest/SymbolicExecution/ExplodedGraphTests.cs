@@ -556,6 +556,28 @@ namespace Namespace
 
         [TestMethod]
         [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_VariableDesignationVisit_InsideIf()
+        {
+            const string testInput = "if (value is int x) { }";
+            var context = new ExplodedGraphContext(testInput);
+            var xSymbol = context.GetSymbol("x", ExplodedGraphContext.SymbolType.Declaration);
+            context.ExplodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+
+                    if (instruction == "value is int x")
+                    {
+                        args.ProgramState.GetSymbolValue(xSymbol).Should().NotBeNull();
+                        xSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                    }
+                };
+
+            context.WalkWithInstructions(2);
+        }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SwitchExpression_SimpleExpression()
         {
             const string testInput = @"string s = null; s = (s == null) switch { true => ""Value"", _ => s}; s.ToString();";
