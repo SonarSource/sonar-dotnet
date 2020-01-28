@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -26,7 +26,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -82,21 +81,27 @@ namespace SonarAnalyzer.Rules.CSharp
             ((MemberAccessExpressionSyntax)invocation.Expression).Name.GetLocation();
 
         /// <summary>
-        /// Note: disposable ref structs do not implement the IDisposable interface
+        /// Verifies that the invocation is calling the correct Dispose() method on an disposable object.
         /// </summary>
+        /// <remarks>
+        /// Disposable ref structs do not implement the IDisposable interface and are supported starting C# 8.
+        /// </remarks>
         private static bool IsDisposeMethodCalled(InvocationExpressionSyntax invocation, SemanticModel semanticModel, LanguageVersion languageVersion)
         {
-            if (!(semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol))
+            if (!(semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol) ||
+                !methodSymbol.IsDisposeMethod())
             {
                 return false;
             }
 
-            var disposeMethod = semanticModel.Compilation.GetTypeMethod(SpecialType.System_IDisposable, "Dispose");
-            return disposeMethod != null &&
-            (
-                methodSymbol.Equals(methodSymbol.ContainingType.FindImplementationForInterfaceMember(disposeMethod)) ||
-                methodSymbol.ContainingType.IsDisposableRefStruct(languageVersion)
-            );
+            var disposeMethodSignature = semanticModel.Compilation.GetTypeMethod(SpecialType.System_IDisposable, "Dispose");
+            if (disposeMethodSignature == null)
+            {
+                return false;
+            }
+
+            return methodSymbol.Equals(methodSymbol.ContainingType.FindImplementationForInterfaceMember(disposeMethodSignature)) ||
+                methodSymbol.ContainingType.IsDisposableRefStruct(languageVersion);
         }
 
         private static bool IsMethodMatchingDisposeMethodName(IMethodSymbol enclosingMethodSymbol) =>

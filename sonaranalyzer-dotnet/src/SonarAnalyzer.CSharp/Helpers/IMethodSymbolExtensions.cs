@@ -18,26 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal static class ITypeSymbolExtensions
+    internal static class IMethodSymbolExtensions
     {
-        internal static bool IsDisposableRefStruct(this ITypeSymbol symbol, LanguageVersion languageVersion) =>
-            languageVersion.IsAtLeast(LanguageVersionEx.CSharp8) &&
-            IsRefStruct(symbol) &&
-            symbol.GetMembers("Dispose").Any(s => s is IMethodSymbol method && method.IsDisposeMethod());
-
-        internal static bool IsRefStruct(this ITypeSymbol symbol) =>
-            symbol != null &&
-            symbol.IsStruct() &&
-            symbol.DeclaringSyntaxReferences.Length == 1 &&
-            symbol.DeclaringSyntaxReferences[0].GetSyntax() is StructDeclarationSyntax structDeclaration &&
-            structDeclaration.Modifiers.Any(SyntaxKind.RefKeyword);
+        // The signature of the Dispose method on IDisposable
+        internal static bool IsDisposeMethod(this IMethodSymbol symbol) =>
+            symbol.Name.Equals("Dispose") &&
+            symbol.Arity == 0 &&
+            symbol.Parameters.Length == 0 &&
+            symbol.ReturnsVoid &&
+            symbol.DeclaredAccessibility == Accessibility.Public;
     }
 }

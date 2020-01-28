@@ -301,4 +301,34 @@ namespace Tests.Diagnostics
             foo.Dispose(true);
         }
     }
+
+    public ref struct AnotherDisposableRefStructHolder2
+    {
+        private AnotherDisposableRefStruct foo;
+
+        public void Cleanup()
+        {
+            this.foo.AnotherMethod(); // ok
+        }
+
+        public void Dispose()
+        {
+        }
+    }
+
+    public ref struct AnotherDisposableRefStructHolder3
+    {
+        private AnotherDisposableRefStruct foo;
+
+        public void Cleanup()
+        {
+            this.foo.Dispose(true); // ok
+        }
+
+        public void Dispose()
+        {
+        }
+    }
+
+
 }
