@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -51,10 +51,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var declaredSymbol = (INamedTypeSymbol)c.Symbol;
 
-                    if (declaredSymbol.DeclaringSyntaxReferences.Length > 1)
+                    // Partial classes are not processed, see https://github.com/dotnet/roslyn/issues/3748
+                    // And ref structs cannot inherit from the IDisposable interface
+                    if (declaredSymbol.DeclaringSyntaxReferences.Length > 1 ||
+                        IsRefStruct(declaredSymbol))
                     {
-                        // Partial classes are not processed.
-                        // See https://github.com/dotnet/roslyn/issues/3748
                         return;
                     }
 
@@ -82,6 +83,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SymbolKind.NamedType);
         }
+
+        private static bool IsRefStruct(INamedTypeSymbol symbol) =>
+            symbol.IsStruct() &&
+            symbol.DeclaringSyntaxReferences.Length == 1 &&
+            symbol.DeclaringSyntaxReferences[0].GetSyntax() is StructDeclarationSyntax structDeclaration &&
+            structDeclaration.Modifiers.Any(SyntaxKind.RefKeyword);
 
         private static void CollectInvocationsFromDisposeImplementation(IMethodSymbol disposeMethod, Compilation compilation,
             HashSet<IMethodSymbol> mightImplementDispose,
