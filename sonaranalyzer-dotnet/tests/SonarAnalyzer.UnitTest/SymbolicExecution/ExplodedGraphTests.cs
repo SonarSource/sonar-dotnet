@@ -495,7 +495,7 @@ namespace TesteAnalyzer
 
         [TestMethod]
         [TestCategory("Symbolic execution")]
-        public void ExplodedGraph_DeclarationStatementVisit()
+        public void ExplodedGraph_DeclarationExpressionVisit_AsOutParameter()
         {
             const string testInput = @"
 using System.Collections.Generic;
@@ -555,6 +555,38 @@ namespace Namespace
                 };
 
             context.WalkWithInstructions(5);
+        }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_DeclarationExpressionVisit_AsOutParameter_Discard()
+        {
+            const string testInput = "string key = null; Dictionary<string, int> dictionary = new Dictionary<string, int>(); dictionary.TryGetValue(key, out var _); dictionary.TryGetValue(key, out _);";
+            var context = new ExplodedGraphContext(testInput);
+            var dictionarySymbol = context.SemanticModel.GetDeclaredSymbol(context.MainMethod.ParameterList.Parameters.First());
+            context.ExplodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+                    switch (instruction)
+                    {
+                        case "dictionary.TryGetValue(key, out var _)":
+                            args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
+                            dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+
+                            args.ProgramState.HasValue.Should().BeFalse();
+                            break;
+
+                        case "dictionary.TryGetValue(key, out _)":
+                            args.ProgramState.GetSymbolValue(dictionarySymbol).Should().NotBeNull();
+                            dictionarySymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+
+                            args.ProgramState.HasValue.Should().BeFalse();
+                            break;
+                    }
+                };
+
+            context.WalkWithInstructions(14);
         }
 
         [TestMethod]
