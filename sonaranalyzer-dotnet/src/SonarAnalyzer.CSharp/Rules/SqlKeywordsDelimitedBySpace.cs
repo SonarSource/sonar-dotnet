@@ -180,12 +180,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     stringWrapper = new StringWrapper(literal, literal.Token.ValueText);
                     return true;
                 }
-                else if (expression is InterpolatedStringExpressionSyntax interpolatedString)
+
+                if (expression is InterpolatedStringExpressionSyntax interpolatedString)
                 {
                     var interpolatedStringText = interpolatedString.Contents.JoinStr("", content => content.ToString());
                     stringWrapper = new StringWrapper(interpolatedString, interpolatedStringText);
                     return true;
                 }
+
                 stringWrapper = null;
                 return false;
             }
@@ -229,7 +231,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private static bool IsAlphaNumericOrAt(char c) => char.IsLetterOrDigit(c) || c == '@' || c == '{' || c == '}';
         }
 
-        internal class StringWrapper
+        private class StringWrapper
         {
             public SyntaxNode Node { get; }
             public string Text { get; }
