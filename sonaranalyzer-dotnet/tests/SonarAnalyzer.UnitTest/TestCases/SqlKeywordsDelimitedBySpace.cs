@@ -52,17 +52,19 @@ namespace Tests.Diagnostics
 
             var a = "TRUNCATE" + " " + "TABLE HumanResources.JobCandidate;";
 
-            var b = "TRUNCATE" + @" " + "TABLE HumanResources.JobCandidate;";
-            var b1 = @"TRUNCATE" + @"TABLE HumanResources.JobCandidate;"; // Noncompliant
+            var b1 = "TRUNCATE" + @" " + "TABLE HumanResources.JobCandidate;";
+            var b2 = @"TRUNCATE" + @"TABLE HumanResources.JobCandidate;"; // Noncompliant
 
-            var c = "TRUNCATE" + $" " + "TABLE HumanResources.JobCandidate;";
-            var c1 = $"TRUNCATE" + $"TABLE HumanResources.JobCandidate;"; // Compliant - FN
+            var c1 = "TRUNCATE" + $" " + "TABLE HumanResources.JobCandidate;";
+            var c2 = $"TRUNCATE" + $"TABLE HumanResources.JobCandidate;"; // Noncompliant
 
-            var d = "TRUNCATE" + $@" " + "TABLE HumanResources.JobCandidate;";
-            var d1 = $@"TRUNCATE" + $@"TABLE HumanResources.JobCandidate;"; // Compliant - FN
+            var d1 = "TRUNCATE" + $@" " + "TABLE HumanResources.JobCandidate;";
+            var d2 = $@"TRUNCATE " + $@"TABLE HumanResources.JobCandidate;";
+            var d3 = $@"TRUNCATE" + $@"TABLE HumanResources.JobCandidate;"; // Noncompliant
 
-            var e = "TRUNCATE" + @$" " + "TABLE HumanResources.JobCandidate;";
-            var e1 = @$"TRUNCATE" + @$"TABLE HumanResources.JobCandidate;"; // Compliant - FN
+            var e1 = "TRUNCATE" + @$" " + "TABLE HumanResources.JobCandidate;";
+            var e2 = @$"TRUNCATE" + @$" TABLE HumanResources.JobCandidate;";
+            var e3 = @$"TRUNCATE" + @$"TABLE HumanResources.JobCandidate;"; // Noncompliant
         }
 
         public string Property
@@ -156,10 +158,17 @@ namespace Tests.Diagnostics
 
         public void InterpolatedAndRawStringsAreIgnored(string col1, string col2, string innerQuery)
         {
-            var select = $"SELECT e.{col1},e.{col2}" + // FN
-                $"FROM DimEmployee AS e" +
-                $"ORDER BY LastName;";
-            var interpolatedQuery = $"SELECT x" + $"{innerQuery}";
+            var select1 = $"SELECT e.{col1},e.{col2}" +
+                $"FROM DimEmployee AS e" + // Noncompliant {{Add a space before 'FROM'.}}
+                $"ORDER BY LastName;"; // Noncompliant {{Add a space before 'ORDER'.}}
+            var select2 = $"SELECT e.{col1},e.{col2}" +
+                " FROM DimEmployee AS e" +
+                "ORDER BY LastName;"; // Noncompliant {{Add a space before 'ORDER'.}}
+            var interpolatedQuery1 = $"SELECT x" + $"{innerQuery}"; // Noncompliant {{Add a space before '{innerQuery}'.}}
+            var interpolatedQuery2 = "SELECT x" + $"{innerQuery}"; // Noncompliant
+            var interpolatedQuery3 = "SELECT x" + $"{ innerQuery }"; // Noncompliant
+            var interpolatedQuery4 = "SELECT x " + $"{innerQuery}";
+            var interpolatedQuery5 = "SELECT x" + $" {innerQuery}";
             var alterTable = @"ALTER TABLE InsurancePolicy
 ADD PERIOD FOR SYSTEM_TIME(SysStartTime, SysEndTime),
 SysStartTime datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL
