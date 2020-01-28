@@ -639,7 +639,8 @@ namespace SonarAnalyzer.SymbolicExecution
                 if (singleVariable)
                 {
                     // When the pattern is "x is Type t" we know that "t != null", hence (SV != null)
-                    newProgramState = newProgramState.PushValue(new ValueNotEqualsSymbolicValue(newSymbolicValue, SymbolicValue.Null));
+                    newProgramState = newProgramState.SetConstraint(newSymbolicValue, ObjectConstraint.NotNull);
+                    newProgramState = newProgramState.PushValue(newSymbolicValue);
                 }
             }
             else if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(variableDesignation))
