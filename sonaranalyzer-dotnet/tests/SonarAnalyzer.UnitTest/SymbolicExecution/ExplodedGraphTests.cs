@@ -768,6 +768,50 @@ namespace Namespace
 
         [TestMethod]
         [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_SwitchExpression_NullConstraint()
+        {
+            const string testInput = @"const string a = null; string str = GetStr(); var x = str switch { a => 1, _ => 2};";
+            var context = new ExplodedGraphContext(testInput);
+            var strParameter = context.MainMethod.ParameterList.Parameters.First();
+            var strSymbol = context.GetSymbol("str");
+            var instructionsInspected = 0;
+            var assignmentInspected = 0;
+            context.ExplodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+
+                    switch (instruction)
+                    {
+                        case "1":
+                            args.ProgramState.GetSymbolValue(strSymbol).Should().NotBe(SymbolicValue.Null);
+                            args.ProgramState.HasValue.Should().BeTrue();
+                            strSymbol.HasConstraint(ObjectConstraint.Null, args.ProgramState).Should().BeTrue();
+                            instructionsInspected++;
+                            break;
+
+                        case "2":
+                            args.ProgramState.GetSymbolValue(strSymbol).Should().NotBe(SymbolicValue.Null);
+                            args.ProgramState.HasValue.Should().BeTrue();
+                            strSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            instructionsInspected++;
+                            break;
+
+                        case @"x = str switch { a => 1, _ => 2}":
+                            args.ProgramState.HasValue.Should().BeFalse();
+                            instructionsInspected++;
+                            assignmentInspected++;
+                            break;
+                    }
+                };
+
+            context.WalkWithInstructions(11);
+            instructionsInspected.Should().Be(4);
+            assignmentInspected.Should().Be(2);
+        }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_NullCoalesceAssignmentVisit()
         {
             const string testInput = @"string s = null; s ??= ""N/A""; s.ToString();";

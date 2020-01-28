@@ -777,7 +777,9 @@ namespace SonarAnalyzer.SymbolicExecution
                 programState = programState.PopValue(out armPatternSymbolicValue);
             }
 
-            if (armSyntaxWrapper.Pattern.IsNullConstantPattern() && governingExpression != null)
+            programState = programState.PopValue(out var governingExpression);
+
+            if (armPatternSymbolicValue != null && armPatternSymbolicValue.IsNull(programState))
             {
                 foreach (var newProgramState in governingExpression.TrySetConstraint(ObjectConstraint.Null, programState))
                 {
