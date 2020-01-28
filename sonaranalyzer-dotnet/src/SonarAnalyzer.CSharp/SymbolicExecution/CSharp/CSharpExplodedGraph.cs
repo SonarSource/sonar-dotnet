@@ -769,13 +769,12 @@ namespace SonarAnalyzer.SymbolicExecution
         private void VisitSwitchExpressionArmBinaryBranch(BinaryBranchBlock branchBlock, ExplodedGraphNode node, SwitchExpressionArmSyntaxWrapper armSyntaxWrapper)
         {
             var programState = node.ProgramState;
+            SymbolicValue armPatternSymbolicValue = null;
 
-            // the governing expression is always the first one so we need to pop all the values to extract it
-            // this is currently fine since the other values are not used by symbolic execution
-            SymbolicValue governingExpression = null;
-            while (programState.HasValue)
+            // Constant pattern is the only one appearing as instruction, so we need to pop its value from the stack
+            if (ConstantPatternSyntaxWrapper.IsInstance(armSyntaxWrapper.Pattern))
             {
-                programState = programState.PopValue(out governingExpression);
+                programState = programState.PopValue(out armPatternSymbolicValue);
             }
 
             if (armSyntaxWrapper.Pattern.IsNullConstantPattern() && governingExpression != null)
