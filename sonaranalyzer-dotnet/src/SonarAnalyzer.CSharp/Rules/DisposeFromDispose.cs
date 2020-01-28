@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var disposeMethod = DisposeNotImplementingDispose.GetDisposeMethod(semanticModel.Compilation);
+            var disposeMethod = semanticModel.Compilation.GetTypeMethod(SpecialType.System_IDisposable, "Dispose");
             return disposeMethod != null &&
             (
                 methodSymbol.Equals(methodSymbol.ContainingType.FindImplementationForInterfaceMember(disposeMethod)) ||
