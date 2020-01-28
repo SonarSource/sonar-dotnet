@@ -226,8 +226,79 @@ namespace Tests.Diagnostics
 
         public void Dispose()
         {
-            // method added to satisfy demands of interface
+            // this method makes this struct a disposable ref struct in C# 8
         }
     }
 
+    public ref struct NotDisposableRefStruct
+    {
+        public void Dispose(bool shouldDispose)
+        {
+        }
+        public string Dispose()
+        {
+            return "";
+        }
+    }
+
+    public ref struct NotDisposableRefStructHolder1
+    {
+        private NotDisposableRefStruct foo;
+
+        public void OpenResource(string path)
+        {
+            this.foo = new NotDisposableRefStruct();
+        }
+
+        public void CleanUp()
+        {
+            this.foo.Dispose(true); // Ok
+        }
+        public void Dispose()
+        {
+        }
+    }
+
+    public ref struct NotDisposableRefStructHolder2
+    {
+        private NotDisposableRefStruct foo;
+
+        public void OpenResource(string path)
+        {
+            this.foo = new NotDisposableRefStruct();
+        }
+
+        public void CleanUp()
+        {
+            var x = foo.Dispose(); // Ok
+        }
+        public void Dispose()
+        {
+        }
+    }
+
+
+
+    public ref struct AnotherDisposableRefStruct
+    {
+        public void Dispose() { }
+        public void Dispose(bool x) { }
+        public void Dispose(string y) { }
+        public void AnotherMethod() { }
+    }
+
+    public ref struct AnotherDisposableRefStructHolder1
+    {
+        private AnotherDisposableRefStruct foo;
+
+        public void Cleanup()
+        {
+            this.foo.Dispose(); // Noncompliant
+        }
+
+        public void Dispose()
+        {
+            foo.Dispose(true);
+        }
+    }
 }

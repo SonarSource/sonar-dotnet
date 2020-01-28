@@ -22,17 +22,20 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Helpers
 {
     internal static class ITypeSymbolExtensions
     {
-        internal static bool IsDisposableRefStruct(this ITypeSymbol symbol) =>
-            symbol != null &&
+        internal static bool IsDisposableRefStruct(this ITypeSymbol symbol, Compilation compilation) =>
+            compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp8) &&
             IsRefStruct(symbol) &&
             symbol.GetMembers("Dispose").Any(
                 s => s is IMethodSymbol disposeMethod &&
                 disposeMethod.Arity == 0 &&
+                !disposeMethod.Parameters.Any() &&
+                disposeMethod.ReturnsVoid &&
                 disposeMethod.DeclaredAccessibility == Accessibility.Public);
 
         internal static bool IsRefStruct(this ITypeSymbol symbol) =>

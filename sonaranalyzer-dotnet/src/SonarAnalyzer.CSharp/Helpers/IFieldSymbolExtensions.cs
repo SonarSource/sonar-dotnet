@@ -25,10 +25,10 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class IFieldSymbolExtensions
     {
-        internal static bool IsNonStaticNonPublicDisposableField(this IFieldSymbol fieldSymbol) =>
+        internal static bool IsNonStaticNonPublicDisposableField(this IFieldSymbol fieldSymbol, Compilation compilation) =>
             fieldSymbol != null &&
             !fieldSymbol.IsStatic &&
             (fieldSymbol.DeclaredAccessibility == Accessibility.Protected || fieldSymbol.DeclaredAccessibility == Accessibility.Private) &&
-            (fieldSymbol.Type.Implements(KnownType.System_IDisposable) || fieldSymbol.Type.IsDisposableRefStruct());
+            (fieldSymbol.Type.Implements(KnownType.System_IDisposable) || fieldSymbol.Type.IsDisposableRefStruct(compilation));
     }
 }
