@@ -51,11 +51,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
+                    var languageVersion = c.Compilation.GetLanguageVersion();
                     if (invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
                         c.SemanticModel.GetSymbolInfo(memberAccess.Expression).Symbol is IFieldSymbol invocationTarget &&
-                        invocationTarget.IsNonStaticNonPublicDisposableField(c.Compilation) &&
-                        IsDisposeMethodCalled(invocation, c.SemanticModel, c.Compilation) &&
-                        IsDisposableClassOrStruct(invocationTarget.ContainingType, c.Compilation) &&
+                        invocationTarget.IsNonStaticNonPublicDisposableField(languageVersion) &&
+                        IsDisposeMethodCalled(invocation, c.SemanticModel, languageVersion) &&
+                        IsDisposableClassOrStruct(invocationTarget.ContainingType, languageVersion) &&
                         !IsCalledInsideDispose(invocation, c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetLocation(invocation)));
@@ -68,9 +69,9 @@ namespace SonarAnalyzer.Rules.CSharp
         /// Classes and structs are disposable if they implement the IDisposable interface.
         /// Starting C# 8, "ref structs" (which cannot implement an interface) can also be disposable.
         /// </summary>
-        private static bool IsDisposableClassOrStruct(INamedTypeSymbol type, Compilation compilation) =>
+        private static bool IsDisposableClassOrStruct(INamedTypeSymbol type, LanguageVersion languageVersion) =>
             ImplementsDisposable(type) ||
-            type.IsDisposableRefStruct(compilation);
+            type.IsDisposableRefStruct(languageVersion);
 
         private static bool IsCalledInsideDispose(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
             semanticModel.GetEnclosingSymbol(invocation.SpanStart) is IMethodSymbol enclosingMethodSymbol &&
@@ -83,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
         /// <summary>
         /// Note: disposable ref structs do not implement the IDisposable interface
         /// </summary>
-        private static bool IsDisposeMethodCalled(InvocationExpressionSyntax invocation, SemanticModel semanticModel, Compilation compilation)
+        private static bool IsDisposeMethodCalled(InvocationExpressionSyntax invocation, SemanticModel semanticModel, LanguageVersion languageVersion)
         {
             if (!(semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol))
             {
@@ -94,7 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return disposeMethod != null &&
             (
                 methodSymbol.Equals(methodSymbol.ContainingType.FindImplementationForInterfaceMember(disposeMethod)) ||
-                methodSymbol.ContainingType.IsDisposableRefStruct(compilation)
+                methodSymbol.ContainingType.IsDisposableRefStruct(languageVersion)
             );
         }
 

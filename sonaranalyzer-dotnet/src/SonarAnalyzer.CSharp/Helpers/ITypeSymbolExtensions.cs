@@ -28,8 +28,8 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class ITypeSymbolExtensions
     {
-        internal static bool IsDisposableRefStruct(this ITypeSymbol symbol, Compilation compilation) =>
-            compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp8) &&
+        internal static bool IsDisposableRefStruct(this ITypeSymbol symbol, LanguageVersion languageVersion) =>
+            languageVersion.IsAtLeast(LanguageVersionEx.CSharp8) &&
             IsRefStruct(symbol) &&
             symbol.GetMembers("Dispose").Any(
                 s => s is IMethodSymbol disposeMethod &&

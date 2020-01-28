@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -23,9 +23,11 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.Helpers
 {
-    public static class CSharpCompilationHelper
+    internal static class CSharpCompilationHelper
     {
-        public static bool IsAtLeastLanguageVersion(this Compilation compilation, LanguageVersion languageVersion) =>
-            (compilation as CSharpCompilation)?.LanguageVersion.CompareTo(languageVersion) >= 0;
+        internal static bool IsAtLeastLanguageVersion(this Compilation compilation, LanguageVersion languageVersion) =>
+            compilation.GetLanguageVersion().CompareTo(languageVersion) >= 0;
+
+        internal static LanguageVersion GetLanguageVersion(this Compilation compilation) => ((CSharpCompilation) compilation).LanguageVersion;
     }
 }

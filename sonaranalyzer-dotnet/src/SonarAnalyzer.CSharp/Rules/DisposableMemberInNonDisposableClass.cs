@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
                     var disposableFields = namedType.GetMembers().OfType<IFieldSymbol>()
-                        .Where(fs => fs.IsNonStaticNonPublicDisposableField(analysisContext.Compilation)).ToHashSet();
+                        .Where(fs => fs.IsNonStaticNonPublicDisposableField(analysisContext.Compilation.GetLanguageVersion())).ToHashSet();
 
                     var disposableFieldsWithInitializer = disposableFields
                         .Where(f => IsOwnerSinceDeclaration(f));

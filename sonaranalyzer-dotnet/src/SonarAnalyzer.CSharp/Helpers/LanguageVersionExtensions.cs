@@ -18,18 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal static class IFieldSymbolExtensions
+    internal static class LanguageVersionExtensions
     {
-        internal static bool IsNonStaticNonPublicDisposableField(this IFieldSymbol fieldSymbol, LanguageVersion languageVersion) =>
-            fieldSymbol != null &&
-            !fieldSymbol.IsStatic &&
-            (fieldSymbol.DeclaredAccessibility == Accessibility.Protected || fieldSymbol.DeclaredAccessibility == Accessibility.Private) &&
-            (fieldSymbol.Type.Implements(KnownType.System_IDisposable) || fieldSymbol.Type.IsDisposableRefStruct(languageVersion));
+        internal static bool IsAtLeast(this LanguageVersion left, LanguageVersion right) =>
+            left.CompareTo(right) >= 0;
     }
 }
