@@ -5015,30 +5015,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
 
         [TestMethod]
         [TestCategory("CFG")]
-        public void Cfg_DiscardPatternClause_InsideIf()
-        {
-            var cfg = Build(@"if (address is Address _) { return true; }");
-
-            VerifyCfg(cfg, 3);
-
-            var entryBlock = (BinaryBranchBlock)cfg.EntryBlock;
-            var trueBlock = (JumpBlock)cfg.Blocks.ElementAt(1);
-            var exitBlock = cfg.ExitBlock;
-
-            entryBlock.TrueSuccessorBlock.Should().Be(trueBlock);
-            entryBlock.FalseSuccessorBlock.Should().Be(exitBlock);
-            VerifyAllInstructions(entryBlock,
-                "address",
-                "address is Address _"); // IsPatternExpression
-
-            trueBlock.SuccessorBlock.Should().Be(exitBlock);
-            VerifyAllInstructions(trueBlock, "true");
-
-            VerifyNoInstruction(exitBlock);
-        }
-
-        [TestMethod]
-        [TestCategory("CFG")]
         public void Cfg_PropertyPatternClause_InsideIf_WithSingleVariableDesignation()
         {
             var cfg = Build(@"if (address is Address { State: ""WA"" } addr) { return true; }");

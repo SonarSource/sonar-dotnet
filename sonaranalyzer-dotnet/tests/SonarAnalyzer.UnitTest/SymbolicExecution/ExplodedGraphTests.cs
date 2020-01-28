@@ -714,7 +714,6 @@ namespace Namespace
         {
             const string testInput = @"string str = GetStr(); var x = str switch { null => 1, int i => 2, { } => 3, _ => 4};";
             var context = new ExplodedGraphContext(testInput);
-            var strParameter = context.MainMethod.ParameterList.Parameters.First();
             var strSymbol = context.GetSymbol("str");
             var instructionsInspected = 0;
             var assignmentInspected = 0;
@@ -772,7 +771,6 @@ namespace Namespace
         {
             const string testInput = @"const string a = null; string str = GetStr(); var x = str switch { a => 1, _ => 2};";
             var context = new ExplodedGraphContext(testInput);
-            var strParameter = context.MainMethod.ParameterList.Parameters.First();
             var strSymbol = context.GetSymbol("str");
             var instructionsInspected = 0;
             var assignmentInspected = 0;
