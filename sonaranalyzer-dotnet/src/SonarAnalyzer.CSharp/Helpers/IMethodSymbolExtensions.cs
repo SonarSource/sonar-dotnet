@@ -19,15 +19,17 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal static class CSharpCompilationHelper
+    internal static class IMethodSymbolExtensions
     {
-        internal static bool IsAtLeastLanguageVersion(this Compilation compilation, LanguageVersion languageVersion) =>
-            compilation.GetLanguageVersion().IsAtLeast(languageVersion);
-
-        internal static LanguageVersion GetLanguageVersion(this Compilation compilation) => ((CSharpCompilation) compilation).LanguageVersion;
+        // The signature of the Dispose method on IDisposable
+        internal static bool IsDisposeMethod(this IMethodSymbol symbol) =>
+            symbol.Name.Equals("Dispose") &&
+            symbol.Arity == 0 &&
+            symbol.Parameters.Length == 0 &&
+            symbol.ReturnsVoid &&
+            symbol.DeclaredAccessibility == Accessibility.Public;
     }
 }

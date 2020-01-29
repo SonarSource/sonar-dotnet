@@ -18,16 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal static class CSharpCompilationHelper
+    public static class CompilationExtensions
     {
-        internal static bool IsAtLeastLanguageVersion(this Compilation compilation, LanguageVersion languageVersion) =>
-            compilation.GetLanguageVersion().IsAtLeast(languageVersion);
-
-        internal static LanguageVersion GetLanguageVersion(this Compilation compilation) => ((CSharpCompilation) compilation).LanguageVersion;
+        public static IMethodSymbol GetTypeMethod(this Compilation compilation, SpecialType type, string methodName) =>
+            (IMethodSymbol)compilation.GetSpecialType(type)
+                .GetMembers(methodName)
+                .SingleOrDefault();
     }
 }

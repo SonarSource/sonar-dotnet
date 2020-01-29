@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,32 +18,26 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.TestFramework;
-using System.Collections.Immutable;
+using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.ShimLayer.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Helpers
 {
-    [TestClass]
-    public class DisposeFromDisposeTest
+    internal static class ITypeSymbolExtensions
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void DisposeFromDispose()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.cs", new DisposeFromDispose(), ParseOptionsHelper.FromCSharp8);
-        }
+        internal static bool IsDisposableRefStruct(this ITypeSymbol symbol, LanguageVersion languageVersion) =>
+            languageVersion.IsAtLeast(LanguageVersionEx.CSharp8) &&
+            IsRefStruct(symbol) &&
+            symbol.GetMembers("Dispose").Any(s => s is IMethodSymbol method && method.IsDisposeMethod());
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void DisposeFromDispose_BeforeCSharp8()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.BeforeCSharp8.cs", new DisposeFromDispose(),
-                ImmutableArray.Create(new CSharpParseOptions(LanguageVersion.CSharp7_2)));
-        }
-
+        internal static bool IsRefStruct(this ITypeSymbol symbol) =>
+            symbol != null &&
+            symbol.IsStruct() &&
+            symbol.DeclaringSyntaxReferences.Length == 1 &&
+            symbol.DeclaringSyntaxReferences[0].GetSyntax() is StructDeclarationSyntax structDeclaration &&
+            structDeclaration.Modifiers.Any(SyntaxKind.RefKeyword);
     }
 }

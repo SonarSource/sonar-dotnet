@@ -54,12 +54,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     // Partial classes are not processed, see https://github.com/dotnet/roslyn/issues/3748
                     // And ref structs cannot inherit from the IDisposable interface
                     if (declaredSymbol.DeclaringSyntaxReferences.Length > 1 ||
-                        IsRefStruct(declaredSymbol))
+                        declaredSymbol.IsRefStruct())
                     {
                         return;
                     }
 
-                    var disposeMethod = GetDisposeMethod(c.Compilation);
+                    var disposeMethod = c.Compilation.GetTypeMethod(SpecialType.System_IDisposable, "Dispose");
                     if (disposeMethod == null)
                     {
                         return;
@@ -83,12 +83,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SymbolKind.NamedType);
         }
-
-        private static bool IsRefStruct(INamedTypeSymbol symbol) =>
-            symbol.IsStruct() &&
-            symbol.DeclaringSyntaxReferences.Length == 1 &&
-            symbol.DeclaringSyntaxReferences[0].GetSyntax() is StructDeclarationSyntax structDeclaration &&
-            structDeclaration.Modifiers.Any(SyntaxKind.RefKeyword);
 
         private static void CollectInvocationsFromDisposeImplementation(IMethodSymbol disposeMethod, Compilation compilation,
             HashSet<IMethodSymbol> mightImplementDispose,
@@ -199,13 +193,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
             return false;
-        }
-
-        internal static IMethodSymbol GetDisposeMethod(Compilation compilation)
-        {
-            return (IMethodSymbol)compilation.GetSpecialType(SpecialType.System_IDisposable)
-                .GetMembers("Dispose")
-                .SingleOrDefault();
         }
     }
 }

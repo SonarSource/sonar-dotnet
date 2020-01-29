@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,32 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.TestFramework;
-using System.Collections.Immutable;
+
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Helpers
 {
-    [TestClass]
-    public class DisposeFromDisposeTest
+    internal static class IFieldSymbolExtensions
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void DisposeFromDispose()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.cs", new DisposeFromDispose(), ParseOptionsHelper.FromCSharp8);
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void DisposeFromDispose_BeforeCSharp8()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\DisposeFromDispose.BeforeCSharp8.cs", new DisposeFromDispose(),
-                ImmutableArray.Create(new CSharpParseOptions(LanguageVersion.CSharp7_2)));
-        }
-
+        internal static bool IsNonStaticNonPublicDisposableField(this IFieldSymbol fieldSymbol, LanguageVersion languageVersion) =>
+            fieldSymbol != null &&
+            !fieldSymbol.IsStatic &&
+            (fieldSymbol.DeclaredAccessibility == Accessibility.Protected || fieldSymbol.DeclaredAccessibility == Accessibility.Private) &&
+            (fieldSymbol.Type.Implements(KnownType.System_IDisposable) || fieldSymbol.Type.IsDisposableRefStruct(languageVersion));
     }
 }
