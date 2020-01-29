@@ -506,8 +506,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     }
                     else if (RecursivePatternSyntaxWrapper.IsInstance(isPatternExpression.Pattern))
                     {
-                        var recursivePattern = (RecursivePatternSyntaxWrapper)isPatternExpression.Pattern;
-                        VisitRecursivePattern(recursivePattern);
+                        newProgramState = VisitRecursivePattern((RecursivePatternSyntaxWrapper)isPatternExpression.Pattern, newProgramState);
                     }
                     else
                     {
@@ -560,10 +559,11 @@ namespace SonarAnalyzer.SymbolicExecution
             EnqueueNewNode(newProgramPoint, newProgramState);
         }
 
-        private static void VisitRecursivePattern(RecursivePatternSyntaxWrapper recursivePattern)
+        private static ProgramState VisitRecursivePattern(RecursivePatternSyntaxWrapper recursivePattern, ProgramState programState)
         {
             // Currently RecursivePatterns are not considered during the symbolic execution
             // https://github.com/SonarSource/sonar-dotnet/issues/2937
+            return programState;
         }
 
         private ProgramState VisitDeclarationExpression(DeclarationExpressionSyntaxWrapper wrapper, ProgramState programState)
@@ -795,7 +795,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
             if (RecursivePatternSyntaxWrapper.IsInstance(armSyntaxWrapper.Pattern))
             {
-                VisitRecursivePattern((RecursivePatternSyntaxWrapper)armSyntaxWrapper.Pattern);
+                programState = VisitRecursivePattern((RecursivePatternSyntaxWrapper)armSyntaxWrapper.Pattern, programState);
             }
 
             programState = programState.PopValue(out var governingExpression);
