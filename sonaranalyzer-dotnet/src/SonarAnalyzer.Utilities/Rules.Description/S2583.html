@@ -16,6 +16,12 @@ else
 {
   DoSomethingElse(); // never executed
 }
+
+c = null;
+d = "value";
+c ?? "value"; // Noncompliant, c is always null
+d ?? "value"; // Noncompliant, d is always not null, "value" is never used
+x ?? c; // Noncompliant, c is always null
 </pre>
 <h2>Exceptions</h2>
 <p>This rule will not raise an issue in either of these cases:</p>
