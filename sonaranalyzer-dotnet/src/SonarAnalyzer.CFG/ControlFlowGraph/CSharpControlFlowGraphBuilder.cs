@@ -523,29 +523,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
             else if (RecursivePatternSyntaxWrapper.IsInstance(patternSyntaxWrapper))
             {
-                return BuildRecursivePatternExpression((RecursivePatternSyntaxWrapper)patternSyntaxWrapper, currentBlock);
+                // The recursive pattern will be handled in CSharpExplodedGraph and UcfgInstructionFactory.
+                currentBlock.ReversedInstructions.Add(patternSyntaxWrapper);
+                return currentBlock;
             }
 
             throw new NotSupportedException($"{patternSyntaxWrapper.SyntaxNode.Kind()}");
-        }
-
-        private Block BuildRecursivePatternExpression(RecursivePatternSyntaxWrapper recursivePattern, Block currentBlock)
-        {
-            // The recursive pattern has PropertyPatternClause and PositionalPatternClause which
-            // need to be recursively handled since they can have multiple subpatterns.
-            // e.g. for "o is string { Length: 5 }": RecursivePattern -> PropertyPatternClause -> ConstantPattern
-            if (recursivePattern.PropertyPatternClause.SyntaxNode != null)
-            {
-                foreach (var subPattern in recursivePattern.PropertyPatternClause.Subpatterns)
-                {
-                    currentBlock = BuildPatternExpression(subPattern.Pattern, currentBlock);
-                }
-            }
-
-            currentBlock.ReversedInstructions.Add(recursivePattern);
-
-            // Support for PositionalPatternClause will be added by https://jira.sonarsource.com/browse/SONARSEC-791
-            return currentBlock;
         }
 
         #endregion Top level Build*

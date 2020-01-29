@@ -791,26 +791,12 @@ namespace Namespace
                             args.ProgramState.GetSymbolValue(addressSymbol).Should().BeNull();
                             args.ProgramState.GetSymbolValue(pSymbol).Should().BeNull();
                             break;
-
-                        case "{State: \"WA\" } address":
-                            instructionsInspected++;
-                            args.ProgramState.GetSymbolValue(personSymbol).Should().NotBeNull();
-
-                            // Currently the recursive pattern is ignored and the value for "address" is not created.
-                            // https://github.com/SonarSource/sonar-dotnet/issues/2937
-                            args.ProgramState.GetSymbolValue(addressSymbol).Should().BeNull();
-                            break;
-
-                        case "\"WA\"":
-                            instructionsInspected++;
-                            args.ProgramState.GetSymbolValue(personSymbol).Should().NotBeNull();
-                            break;
                     }
                 };
 
-            context.WalkWithInstructions(8);
+            context.WalkWithInstructions(6);
 
-            instructionsInspected.Should().Be(4);
+            instructionsInspected.Should().Be(2);
         }
 
         [TestMethod]
@@ -856,6 +842,106 @@ namespace Namespace
                 };
 
             context.WalkWithExitBlocks(7, 3);
+        }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_SwitchExpression_AllPatterns()
+        {
+            const string testInput = @"string str = GetStr(); var x = str switch { null => 1, int i => 2, { } => 3, _ => 4};";
+            var context = new ExplodedGraphContext(testInput);
+            var strSymbol = context.GetSymbol("str");
+            var instructionsInspected = 0;
+            var assignmentInspected = 0;
+            context.ExplodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+
+                    switch (instruction)
+                    {
+                        case "1":
+                            args.ProgramState.GetSymbolValue(strSymbol).Should().NotBe(SymbolicValue.Null);
+                            args.ProgramState.HasValue.Should().BeTrue();
+                            strSymbol.HasConstraint(ObjectConstraint.Null, args.ProgramState).Should().BeTrue();
+                            instructionsInspected++;
+                            break;
+
+                        case "2":
+                            args.ProgramState.GetSymbolValue(strSymbol).Should().NotBe(SymbolicValue.Null);
+                            args.ProgramState.HasValue.Should().BeTrue();
+                            strSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            instructionsInspected++;
+                            break;
+
+                        case "3":
+                            args.ProgramState.GetSymbolValue(strSymbol).Should().NotBe(SymbolicValue.Null);
+                            args.ProgramState.HasValue.Should().BeTrue();
+                            strSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            instructionsInspected++;
+                            break;
+
+                        case "4":
+                            args.ProgramState.GetSymbolValue(strSymbol).Should().NotBe(SymbolicValue.Null);
+                            args.ProgramState.HasValue.Should().BeTrue();
+                            strSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            instructionsInspected++;
+                            break;
+
+                        case @"x = str switch { null => 1, int i => 2, { } => 3, _ => 4}":
+                            args.ProgramState.HasValue.Should().BeFalse();
+                            instructionsInspected++;
+                            assignmentInspected++;
+                            break;
+                    }
+                };
+
+            context.WalkWithInstructions(16);
+            instructionsInspected.Should().Be(8);
+            assignmentInspected.Should().Be(4);
+        }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_SwitchExpression_NullConstraint()
+        {
+            const string testInput = @"const string a = null; string str = GetStr(); var x = str switch { a => 1, _ => 2};";
+            var context = new ExplodedGraphContext(testInput);
+            var strSymbol = context.GetSymbol("str");
+            var instructionsInspected = 0;
+            var assignmentInspected = 0;
+            context.ExplodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    var instruction = args.Instruction.ToString();
+
+                    switch (instruction)
+                    {
+                        case "1":
+                            args.ProgramState.GetSymbolValue(strSymbol).Should().NotBe(SymbolicValue.Null);
+                            args.ProgramState.HasValue.Should().BeTrue();
+                            strSymbol.HasConstraint(ObjectConstraint.Null, args.ProgramState).Should().BeTrue();
+                            instructionsInspected++;
+                            break;
+
+                        case "2":
+                            args.ProgramState.GetSymbolValue(strSymbol).Should().NotBe(SymbolicValue.Null);
+                            args.ProgramState.HasValue.Should().BeTrue();
+                            strSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+                            instructionsInspected++;
+                            break;
+
+                        case @"x = str switch { a => 1, _ => 2}":
+                            args.ProgramState.HasValue.Should().BeFalse();
+                            instructionsInspected++;
+                            assignmentInspected++;
+                            break;
+                    }
+                };
+
+            context.WalkWithInstructions(11);
+            instructionsInspected.Should().Be(4);
+            assignmentInspected.Should().Be(2);
         }
 
         [TestMethod]

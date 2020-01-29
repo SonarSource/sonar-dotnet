@@ -4946,7 +4946,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
             VerifyAllInstructions(entryBlock,
                 "address",
                 "Address { State: \"WA\" }", // RecursivePattern
-                "\"WA\"", // Constant Pattern
                 "address is Address { State: \"WA\" }", // IsPatternExpression
                 "x = address is Address { State: \"WA\" }"); // VariableDeclaration
         }
@@ -4966,8 +4965,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
             VerifyAllInstructions(entryBlock,
                 "address",
                 "{ State: \"WA\", Street: \"Rue\" }", // Recursive Pattern
-                "\"Rue\"", // Constant Pattern
-                "\"WA\"", // Constant Pattern
                 "address is { State: \"WA\", Street: \"Rue\" }", // IsPatternExpression
                 "x = address is { State: \"WA\", Street: \"Rue\" }"); // VariableDeclaration
         }
@@ -4987,7 +4984,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
             VerifyAllInstructions(entryBlock,
                 "address",
                 "Address { State: \"WA\" } addr", // Recursive Pattern
-                "\"WA\"", // Constant Pattern
                 "address is Address { State: \"WA\" } addr", // IsPatternExpression
                 "x = address is Address { State: \"WA\" } addr"); // VariableDeclaration
         }
@@ -5009,7 +5005,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
             VerifyAllInstructions(entryBlock,
                 "address",
                 "Address { State: \"WA\" }", // Recursive Pattern
-                "\"WA\"", // Constant Pattern
                 "address is Address { State: \"WA\" }"); // IsPatternExpression
 
             trueBlock.SuccessorBlock.Should().Be(exitBlock);
@@ -5035,7 +5030,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
             VerifyAllInstructions(entryBlock,
                 "address",
                 "Address { State: \"WA\" } addr", // Recursive Pattern
-                "\"WA\"", // Constant Pattern
                 "address is Address { State: \"WA\" } addr"); // IsPatternExpression
 
             trueBlock.SuccessorBlock.Should().Be(exitBlock);
@@ -5061,14 +5055,14 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
 
             waArmBranch.TrueSuccessorBlock.Should().Be(waArmTrueBranch);
             waArmBranch.FalseSuccessorBlock.Should().Be(mnArmBranch);
-            VerifyAllInstructions(waArmBranch, "location", "{ State: \"WA\" } adr" /* RecursivePattern */, "\"WA\"" /* ConstantPattern */);
+            VerifyAllInstructions(waArmBranch, "location", "{ State: \"WA\" } adr" /* RecursivePattern */);
 
             waArmTrueBranch.SuccessorBlock.Should().Be(exitBlock);
             VerifyAllInstructions(waArmTrueBranch, "salePrice", "0.06M", "salePrice * 0.06M");
 
             mnArmBranch.TrueSuccessorBlock.Should().Be(mnArmTrueBranch);
             mnArmBranch.FalseSuccessorBlock.Should().Be(discardArm);
-            VerifyAllInstructions(mnArmBranch, "location", "{ State: \"MN\" }" /* RecursivePattern */, "\"MN\"" /* ConstantPattern */);
+            VerifyAllInstructions(mnArmBranch, "location", "{ State: \"MN\" }" /* RecursivePattern */);
 
             mnArmTrueBranch.SuccessorBlock.Should().Be(exitBlock);
             VerifyAllInstructions(mnArmTrueBranch, "salePrice", "0.75M", "salePrice * 0.75M");
@@ -5094,9 +5088,6 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
             VerifyAllInstructions(entryBlock,
                 "o",
                 "Person { Name: \"John Doe\", Address: { State: \"WA\" } }", // RecursivePattern
-                "{ State: \"WA\" }", // RecursivePattern
-                "\"WA\"", // Constant Pattern
-                "\"John Doe\"", // Constant Pattern
                 "o is Person { Name: \"John Doe\", Address: { State: \"WA\" } }", // IsPatternExpression
                 "result = o is Person { Name: \"John Doe\", Address: { State: \"WA\" } }"); // VariableDeclaration
         }

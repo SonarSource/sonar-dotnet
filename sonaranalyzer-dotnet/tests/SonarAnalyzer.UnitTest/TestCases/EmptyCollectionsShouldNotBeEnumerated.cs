@@ -844,10 +844,18 @@ namespace CSharp8
 
     public interface IWithDefaultMembers
     {
+        public void Test(int a, int b) { }
+
         public void Test()
         {
             var list = new List<int>();
             list.Clear(); // Noncompliant
+        }
+
+        public void TestWithNestedSwitchExpression()
+        {
+            var list = new List<int>();
+            Test(list.IndexOf(1), list.Count switch { 1 => 2, _ => 3 }); // Noncompliant
         }
     }
 
