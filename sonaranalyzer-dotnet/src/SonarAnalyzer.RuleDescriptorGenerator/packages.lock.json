@@ -252,8 +252,8 @@
       },
       "System.Runtime.InteropServices.RuntimeInformation": {
         "type": "Transitive",
-        "resolved": "4.3.0",
-        "contentHash": "cbz4YJMqRDR7oLeMRbdYv7mYzc++17lNhScCX0goO2XpGWdvAt60CGN+FHdePUEHCe/Jy9jUlvNAiNdM+7jsOw=="
+        "resolved": "4.0.0",
+        "contentHash": "hWPhJxc453RCa8Z29O91EmfGeZIHX1ZH2A8L6lYQVSaKzku2DfArSfMEb1/MYYzPQRJZeu0c9dmYeJKxW5Fgng=="
       },
       "System.Runtime.Numerics": {
         "type": "Transitive",
@@ -373,8 +373,7 @@
           "Microsoft.DotNet.PlatformAbstractions": "3.1.1",
           "SonarAnalyzer": "1.0.0",
           "SonarAnalyzer.CFG": "1.0.0",
-          "System.Collections.Immutable": "1.1.37",
-          "System.Runtime.InteropServices.RuntimeInformation": "4.3.0"
+          "System.Collections.Immutable": "1.1.37"
         }
       },
       "sonaranalyzer.utilities": {
@@ -402,8 +401,8 @@
       },
       "System.Runtime.InteropServices.RuntimeInformation": {
         "type": "Transitive",
-        "resolved": "4.3.0",
-        "contentHash": "cbz4YJMqRDR7oLeMRbdYv7mYzc++17lNhScCX0goO2XpGWdvAt60CGN+FHdePUEHCe/Jy9jUlvNAiNdM+7jsOw=="
+        "resolved": "4.0.0",
+        "contentHash": "hWPhJxc453RCa8Z29O91EmfGeZIHX1ZH2A8L6lYQVSaKzku2DfArSfMEb1/MYYzPQRJZeu0c9dmYeJKxW5Fgng=="
       },
       "System.Security.Cryptography.Algorithms": {
         "type": "Transitive",
