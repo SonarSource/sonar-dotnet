@@ -28,7 +28,6 @@ using SonarAnalyzer.Common;
 using System.Collections.Immutable;
 using System.Linq;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: InternalsVisibleTo("SonarAnalyzer.UnitTest" + Signing.InternalsVisibleToPublicKey)]
@@ -68,11 +67,12 @@ namespace SonarAnalyzer.Rules.CSharp
             return new CbdeHandlerRule(true, testCbdeBinaryPath, onCbdeExecution);
         }
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            // The available platform ids are documented here: https://docs.microsoft.com/en-us/dotnet/api/system.platformid?view=netframework-4.8
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {
-                new CbdeHandler(context, OnCbdeIssue, ShouldRunCbdeInContext, () => { return WorkDirectoryBasePath; },
+                new CbdeHandler(context, OnCbdeIssue, ShouldRunCbdeInContext, () => WorkDirectoryBasePath,
                     testCbdeBinaryPath, onCbdeExecution);
             }
         }
