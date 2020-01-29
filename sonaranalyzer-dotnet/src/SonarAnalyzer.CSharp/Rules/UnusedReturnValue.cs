@@ -68,11 +68,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var matchingInvocations = invocations
                             .Where(invocation => invocation.Symbol.OriginalDefinition.Equals(declaredPrivateMethodWithReturn.Symbol))
-                            .Select(invocation => invocation.SyntaxNode)
                             .ToList();
 
-
-                        if (IsNoncompliant(matchingInvocations, declaredPrivateMethodWithReturn.SemanticModel))
+                        if (IsNoncompliant(matchingInvocations))
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, declaredPrivateMethodWithReturn.SyntaxNode.ReturnType.GetLocation()));
                         }
@@ -93,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var matchingInvocations = GetLocalMatchingInvocations(topmostContainingMethod, localFunctionSymbol, c.SemanticModel);
-                    if (IsNoncompliant(matchingInvocations, c.SemanticModel))
+                    if (IsNoncompliant(matchingInvocations))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, localFunctionSyntax.ReturnType.GetLocation()));
                     }
@@ -105,22 +103,15 @@ namespace SonarAnalyzer.Rules.CSharp
         /// Method invocation is noncompliant when there is at least 1 inovcation of the method, and no invocation is
         /// using the return value. The case of 0 invocation is handled by S1144 <see cref="UnusedPrivateMember"/>
         /// </summary>
-        private static bool IsNoncompliant(IEnumerable<InvocationExpressionSyntax> matchingInvocations, SemanticModel semanticModel)
+        private static bool IsNoncompliant(IEnumerable<SyntaxNodeSymbolSemanticModelTuple<InvocationExpressionSyntax, IMethodSymbol>> matchingInvocations)
         {
-            return matchingInvocations.Any() && !IsReturnValueUsed(matchingInvocations, semanticModel);
+            return matchingInvocations.Any() && !IsReturnValueUsed(matchingInvocations);
         }
 
-        private static IEnumerable<InvocationExpressionSyntax> GetLocalMatchingInvocations(SyntaxNode containingMethod, IMethodSymbol invocationSymbol, SemanticModel semanticModel) =>
-            containingMethod.DescendantNodes()
-                .OfType<InvocationExpressionSyntax>()
-                .Where(invocation => semanticModel.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol methodSymbol
-                                    && invocationSymbol.Equals(methodSymbol))
-                .ToList();
-
-        private static bool IsReturnValueUsed(IEnumerable<InvocationExpressionSyntax> matchingInvocations, SemanticModel semanticModel) =>
+        private static bool IsReturnValueUsed(IEnumerable<SyntaxNodeSymbolSemanticModelTuple<InvocationExpressionSyntax, IMethodSymbol>> matchingInvocations) =>
             matchingInvocations.Any(invocation =>
-                !IsExpressionStatement(invocation.Parent) &&
-                !IsActionLambda(invocation.Parent, semanticModel));
+                !IsExpressionStatement(invocation.SyntaxNode.Parent) &&
+                !IsActionLambda(invocation.SyntaxNode.Parent, invocation.SemanticModel));
 
 
         private static bool IsActionLambda(SyntaxNode node, SemanticModel semanticModel)
@@ -137,6 +128,20 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return node is ExpressionStatementSyntax;
         }
+
+        private static IEnumerable<SyntaxNodeSymbolSemanticModelTuple<InvocationExpressionSyntax, IMethodSymbol>> GetLocalMatchingInvocations(SyntaxNode containingMethod, IMethodSymbol invocationSymbol, SemanticModel semanticModel) =>
+            containingMethod.DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Where(invocation => semanticModel.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol methodSymbol
+                                    && invocationSymbol.Equals(methodSymbol))
+                .Select(node =>
+                        new SyntaxNodeSymbolSemanticModelTuple<InvocationExpressionSyntax, IMethodSymbol>
+                        {
+                            SyntaxNode = node,
+                            SemanticModel = semanticModel,
+                            Symbol = invocationSymbol
+                        })
+                .ToList();
 
         private static IEnumerable<SyntaxNodeSymbolSemanticModelTuple<InvocationExpressionSyntax, IMethodSymbol>> CollectInvocations(
             IEnumerable<SyntaxNodeAndSemanticModel<BaseTypeDeclarationSyntax>> containers)
