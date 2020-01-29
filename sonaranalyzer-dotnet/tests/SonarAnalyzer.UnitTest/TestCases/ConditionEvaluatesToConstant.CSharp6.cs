@@ -2600,10 +2600,22 @@ namespace Tests.Diagnostics
 
             //FNs
             ret = "Value" ?? a; // FN, literals are not handled except 'null'
+        }
 
-            //Workaround to keep variables in LVA
-            //https://github.com/SonarSource/sonar-dotnet/issues/3076
-            ret = isNull + notNull + notEmpty;
+        int CoalesceCount<T>(IList<T> arg)
+        {
+            arg = arg ?? new List<T>();
+            return arg.Count;
+        }
+
+        public class CoalesceProperty
+        {
+            private object message;
+
+            public object Message
+            {
+                get { return message = message ?? new object(); }
+            }
         }
     }
 
@@ -2657,16 +2669,6 @@ namespace Tests.Diagnostics
                 }
             }
 
-        }
-    }
-
-    public class Repro_3076     // https://github.com/SonarSource/sonar-dotnet/issues/3076
-    {
-        void LostLVA(string a)
-        {
-            string notNull = "";
-            string ret;
-            ret = notNull ?? "N/A"; //FN Variable notNull is supposed to be known to be not-null, but symbolic value and it's constraints were lost in previous CFG/BinaryBlock cleanup
         }
     }
 

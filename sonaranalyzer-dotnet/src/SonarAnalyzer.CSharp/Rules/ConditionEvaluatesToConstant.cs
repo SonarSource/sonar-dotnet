@@ -70,6 +70,12 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.CoalesceExpression
         };
 
+        private static readonly ISet<SyntaxKind> CoalesceExpressions = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.CoalesceExpression,
+            SyntaxKindEx.CoalesceAssignmentExpression
+        };
+
         // Do not report in finally and catch blocks to avoid False Positives. To correctly solve
         // this problem we would need to link all CFG blocks for catch clauses to all statements within
         // the try block. This is unreasonable because it will generate tons of paths, thus making
@@ -371,39 +377,22 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 }
             }
-            var allCoalesce = args.Instruction.DescendantNodesAndSelf()
-                .Select(x => (x is BinaryExpressionSyntax binary && binary.IsKind(SyntaxKind.CoalesceExpression) ? new CoalesceOperands(binary.Left, binary.Right, false) : null)
-                          ?? (x is AssignmentExpressionSyntax assign && assign.IsKind(SyntaxKindEx.CoalesceAssignmentExpression) ? new CoalesceOperands(assign.Left, assign.Right, true) : null))
+            var rightOperands = args.Instruction.DescendantNodesAndSelf()
+                .Select(x => (x is BinaryExpressionSyntax binary && binary.IsKind(SyntaxKind.CoalesceExpression) ? binary.Right : null)
+                          ?? (x is AssignmentExpressionSyntax assign && assign.IsKind(SyntaxKindEx.CoalesceAssignmentExpression) ? assign.Right : null))
                 .WhereNotNull().ToArray();
-            foreach (var coalesce in allCoalesce)
+            foreach (var right in rightOperands)
             {
-                if (!coalesce.IsAssignment) //Too late for left operand in ??=, symbolic value was already set
-                {
-                    ProcessOperand(coalesce.Left, true);
-                }
-                ProcessOperand(coalesce.Right, false);
+                //It's too late for left operands of ??= or x=x??, symbolic value was already set
+                ProcessOperand(right, false);
             }
             if(args.ProgramPoint.Block is BinaryBranchBlock bbb
-                && bbb.BranchingNode.IsKind(SyntaxKindEx.CoalesceAssignmentExpression)
+                && bbb.BranchingNode.IsAnyKind(CoalesceExpressions)
                 && args.ProgramPoint.Offset == args.ProgramPoint.Block.Instructions.Count - 1 //Last instruction of BBB holds ??= left operand value
-                && args.ProgramPoint.Block.Instructions[args.ProgramPoint.Offset] is ExpressionSyntax expr)
+                && args.ProgramPoint.Block.Instructions[args.ProgramPoint.Offset] is ExpressionSyntax left)
             {
-                ProcessOperand(expr, true);
+                ProcessOperand(left, true);
             }
         }
-
-        private class CoalesceOperands
-        {
-            public readonly ExpressionSyntax Left, Right;
-            public readonly bool IsAssignment;
-
-            public CoalesceOperands(ExpressionSyntax left, ExpressionSyntax right, bool isAssignment)
-            {
-                this.Left = left;
-                this.Right = right;
-                this.IsAssignment = isAssignment;
-            }
-        }
-
     }
 }
