@@ -504,6 +504,10 @@ namespace SonarAnalyzer.SymbolicExecution
 
                         newProgramState = VisitDeclarationPattern((DeclarationPatternSyntaxWrapper)isPatternExpression.Pattern, newProgramState);
                     }
+                    else if (RecursivePatternSyntaxWrapper.IsInstance(isPatternExpression.Pattern))
+                    {
+                        newProgramState = VisitRecursivePattern((RecursivePatternSyntaxWrapper)isPatternExpression.Pattern, newProgramState);
+                    }
                     else
                     {
                         throw new NotSupportedException($"{instruction.Kind()}");
@@ -519,10 +523,14 @@ namespace SonarAnalyzer.SymbolicExecution
                     newProgramState = VisitVarPattern((VarPatternSyntaxWrapper)instruction, newProgramState);
                     break;
 
-                case SyntaxKindEx.RecursivePattern: // https://github.com/SonarSource/sonar-dotnet/issues/2937
                 case SyntaxKindEx.ConstantPattern:
                     // The 0 in 'case 0 when ...'
                     // Do nothing
+                    break;
+
+                case SyntaxKindEx.RecursivePattern:
+                    // Recursive pattern should be handled by IsPatternExpression and SwitchExpressionArm
+                    // Do nothing.
                     break;
 
                 case SyntaxKindEx.DeclarationExpression:
@@ -549,6 +557,13 @@ namespace SonarAnalyzer.SymbolicExecution
             newProgramState = EnsureStackState(parenthesizedExpression, newProgramState);
             OnInstructionProcessed(instruction, node.ProgramPoint, newProgramState);
             EnqueueNewNode(newProgramPoint, newProgramState);
+        }
+
+        private static ProgramState VisitRecursivePattern(RecursivePatternSyntaxWrapper recursivePattern, ProgramState programState)
+        {
+            // Currently RecursivePatterns are not considered during the symbolic execution
+            // https://github.com/SonarSource/sonar-dotnet/issues/2937
+            return programState;
         }
 
         private ProgramState VisitDeclarationExpression(DeclarationExpressionSyntaxWrapper wrapper, ProgramState programState)
@@ -776,6 +791,11 @@ namespace SonarAnalyzer.SymbolicExecution
             if (ConstantPatternSyntaxWrapper.IsInstance(armSyntaxWrapper.Pattern))
             {
                 programState = programState.PopValue(out armPatternSymbolicValue);
+            }
+
+            if (RecursivePatternSyntaxWrapper.IsInstance(armSyntaxWrapper.Pattern))
+            {
+                programState = VisitRecursivePattern((RecursivePatternSyntaxWrapper)armSyntaxWrapper.Pattern, programState);
             }
 
             programState = programState.PopValue(out var governingExpression);
