@@ -530,7 +530,8 @@ namespace SonarAnalyzer.SymbolicExecution
                     break;
 
                 case SyntaxKindEx.RecursivePattern:
-                    VisitRecursivePattern((RecursivePatternSyntaxWrapper)instruction);
+                    // Recursive pattern should be handled by IsPatternExpression and SwitchExpressionArm
+                    // Do nothing.
                     break;
 
                 case SyntaxKindEx.DeclarationExpression:
@@ -790,6 +791,11 @@ namespace SonarAnalyzer.SymbolicExecution
             if (ConstantPatternSyntaxWrapper.IsInstance(armSyntaxWrapper.Pattern))
             {
                 programState = programState.PopValue(out armPatternSymbolicValue);
+            }
+
+            if (RecursivePatternSyntaxWrapper.IsInstance(armSyntaxWrapper.Pattern))
+            {
+                VisitRecursivePattern((RecursivePatternSyntaxWrapper)armSyntaxWrapper.Pattern);
             }
 
             programState = programState.PopValue(out var governingExpression);
