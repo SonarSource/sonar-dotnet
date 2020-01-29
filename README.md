@@ -29,8 +29,8 @@ vulnerabilities and smells in your code.
 
 ## Have question or feedback?
 
-To provide feedback (request a feature, report a bug etc.), simply
-[create a GitHub Issue](https://github.com/SonarSource/sonar-dotnet/issues/new).
+* [Contact us on Community](https://community.sonarsource.com/) to provide feedback, request new rule or feature.
+* [Create a GitHub Issue](https://github.com/SonarSource/sonar-dotnet/issues/new) if you've found a bug, False-Positive or False-Negative situation. 
 
 ## Get started
 
