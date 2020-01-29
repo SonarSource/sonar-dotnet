@@ -2562,6 +2562,49 @@ namespace Tests.Diagnostics
 
             return String.Empty;
         }
+
+        void NullCoalesce_Useless(string a, string b, string c, string d)
+        {
+            string isNull = null;
+            string notNull = "";
+            string notEmpty = "value";
+            string ret;
+
+            ret = b ?? a;
+            ret = b ?? notNull;
+            ret = c ?? notEmpty;
+            ret = d ?? "N/A";
+
+            //Left operand: Values notNull and notEmpty are known to be not-null
+            ret = notNull ?? a;      // Noncompliant
+            ret = ((notNull)) ?? a;      // Noncompliant
+            ret = "Lorem " + (notNull ?? a) + " ipsum"; // Noncompliant
+            ret = notNull ?? "N/A";  // Noncompliant
+            ret = notEmpty ?? "N/A"; // Noncompliant {{Change this expression which always evaluates to 'not null'.}}
+//                ^^^^^^^^
+
+            //Left operand: isNull is known to be null
+            ret = null ?? a;    // Noncompliant
+            ret = isNull ?? a;  // Noncompliant
+            ret = ((isNull)) ?? a;  // Noncompliant
+            ret = "Lorem " + (isNull ?? a) + " ipsum"; // Noncompliant
+
+            //Right operand: isNull is known to be null, therefore ?? is useless
+            ret = a ?? null;    // Noncompliant
+            ret = a ?? isNull;  // Noncompliant {{Change this expression which always evaluates to 'null'.}}
+//                     ^^^^^^
+
+            //Combo/Fatality
+            ret = notNull ?? isNull;    //Noncompliant [LeftA, RightA]
+            ret = isNull ?? null;       //Noncompliant [LeftB, RightB]
+
+            //FNs
+            ret = "Value" ?? a; // FN, literals are not handled except 'null'
+
+            //Workaround to keep variables in LVA
+            //https://github.com/SonarSource/sonar-dotnet/issues/3076
+            ret = isNull + notNull + notEmpty;
+        }
     }
 
     public class NullOrWhiteSoace
@@ -2614,6 +2657,16 @@ namespace Tests.Diagnostics
                 }
             }
 
+        }
+    }
+
+    public class Repro_3076     // https://github.com/SonarSource/sonar-dotnet/issues/3076
+    {
+        void LostLVA(string a)
+        {
+            string notNull = "";
+            string ret;
+            ret = notNull ?? "N/A"; //FN Variable notNull is supposed to be known to be not-null, but symbolic value and it's constraints were lost in previous CFG/BinaryBlock cleanup
         }
     }
 

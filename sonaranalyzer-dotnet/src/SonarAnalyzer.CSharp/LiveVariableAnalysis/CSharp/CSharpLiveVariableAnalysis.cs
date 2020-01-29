@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -236,7 +236,6 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 
         internal static bool IsOutArgument(IdentifierNameSyntax identifier)
         {
-
             return identifier.GetFirstNonParenthesizedParent() is ArgumentSyntax argument &&
                 argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
         }

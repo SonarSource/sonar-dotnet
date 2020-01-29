@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,7 +29,9 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using CSharpExplodedGraph = SonarAnalyzer.SymbolicExecution.CSharpExplodedGraph;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -85,18 +87,17 @@ namespace SonarAnalyzer.Rules.CSharp
         };
 
         private const string S2583DiagnosticId = "S2583"; // Bug
-        private const string S2583MessageFormat = "Change this condition so that it does not always evaluate to '{0}'; some subsequent code is never executed.";
+        private const string S2583MessageFormatBool = "Change this condition so that it does not always evaluate to '{0}'; some subsequent code is never executed.";
+        private const string S2583MessageFormatNull = "Change this expression which always evaluates to '{0}'.";
 
         private const string S2589DiagnosticId = "S2589"; // Code smell
         private const string S2589MessageFormat = "Change this condition so that it does not always evaluate to '{0}'.";
 
-        private static readonly DiagnosticDescriptor s2583 =
-            DiagnosticDescriptorBuilder.GetDescriptor(S2583DiagnosticId, S2583MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor s2583Bool = DiagnosticDescriptorBuilder.GetDescriptor(S2583DiagnosticId, S2583MessageFormatBool, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor s2583Null = DiagnosticDescriptorBuilder.GetDescriptor(S2583DiagnosticId, S2583MessageFormatNull, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor s2589 = DiagnosticDescriptorBuilder.GetDescriptor(S2589DiagnosticId, S2589MessageFormat, RspecStrings.ResourceManager);
 
-        private static readonly DiagnosticDescriptor s2589 =
-            DiagnosticDescriptorBuilder.GetDescriptor(S2589DiagnosticId, S2589MessageFormat, RspecStrings.ResourceManager);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(s2583, s2589);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(s2583Bool, s2583Null, s2589);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -107,16 +108,22 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var conditionTrue = new HashSet<SyntaxNode>();
             var conditionFalse = new HashSet<SyntaxNode>();
+            var isNull = new HashSet<SyntaxNode>();
+            var isNotNull = new HashSet<SyntaxNode>();
+            var isUnknown = new HashSet<SyntaxNode>();
             var hasYieldStatement = false;
 
-            void instructionProcessed(object sender, InstructionProcessedEventArgs args) {
+            void instructionProcessed(object sender, InstructionProcessedEventArgs args)
+            {
                 hasYieldStatement = hasYieldStatement || IsYieldNode(args.ProgramPoint.Block);
+                CollectCoalesce(args, isNull, isNotNull, isUnknown, context.SemanticModel);
             }
 
             void collectConditions(object sender, ConditionEvaluatedEventArgs args) =>
                 CollectConditions(args, conditionTrue, conditionFalse, context.SemanticModel);
 
-            void explorationEnded(object sender, EventArgs args) {
+            void explorationEnded(object sender, EventArgs args)
+            {
                 // Do not raise issue in generator functions (See #1295)
                 if (hasYieldStatement)
                 {
@@ -132,6 +139,16 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Except(conditionTrue)
                         .Where(c => !IsInsideCatchOrFinallyBlock(c))
                         .Select(node => GetDiagnostics(node, false)))
+                    .Union(isNull
+                        .Except(isUnknown)
+                        .Except(isNotNull)
+                        .Where(c => !IsInsideCatchOrFinallyBlock(c))
+                        .Select(node => Diagnostic.Create(s2583Null, node.GetLocation(), messageArgs: "null")))
+                    .Union(isNotNull
+                        .Except(isUnknown)
+                        .Except(isNull)
+                        .Where(c => !IsInsideCatchOrFinallyBlock(c))
+                        .Select(node => Diagnostic.Create(s2583Null, node.GetLocation(), messageArgs: "not null")))
                     .ToList()
                     .ForEach(d => context.ReportDiagnosticWhenActive(d));
             }
@@ -188,14 +205,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static Diagnostic GetDiagnostics(SyntaxNode constantNode, bool constantValue)
         {
-            var unreachableLocations = GetUnreachableLocations(constantNode, constantValue)
-                .ToList();
-
+            var unreachableLocations = GetUnreachableLocations(constantNode, constantValue).ToList();
             var constantText = constantValue.ToString().ToLowerInvariant();
-
-            return unreachableLocations.Count > 0 ?
-                Diagnostic.Create(s2583, constantNode.GetLocation(), messageArgs: constantText, additionalLocations: unreachableLocations) :
-                Diagnostic.Create(s2589, constantNode.GetLocation(), messageArgs: constantText);
+            return unreachableLocations.Count > 0
+                ? Diagnostic.Create(s2583Bool, constantNode.GetLocation(), messageArgs: constantText, additionalLocations: unreachableLocations)
+                : Diagnostic.Create(s2589, constantNode.GetLocation(), messageArgs: constantText);
         }
 
         private static IEnumerable<Location> GetUnreachableLocations(SyntaxNode constantExpression, bool constantValue)
@@ -330,5 +344,66 @@ namespace SonarAnalyzer.Rules.CSharp
                 return syntaxNode.IsAnyKind(BooleanLiterals);
             }
         }
+
+        private static void CollectCoalesce(InstructionProcessedEventArgs args, HashSet<SyntaxNode> isNull, HashSet<SyntaxNode> isNotNull, HashSet<SyntaxNode> isUnknown, SemanticModel semanticModel)
+        {
+            void ProcessOperand(ExpressionSyntax operand, bool useNotNull)
+            {
+                if (operand.RemoveParentheses().IsKind(SyntaxKind.NullLiteralExpression))
+                {
+                    isNull.Add(operand);
+                    return;
+                }
+                var symbol = semanticModel.GetSymbolInfo(operand.RemoveParentheses()).Symbol;
+                if (symbol != null)
+                {
+                    if (symbol.HasConstraint(ObjectConstraint.Null, args.ProgramState))
+                    {
+                        isNull.Add(operand);
+                    }
+                    else if (useNotNull && symbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState))
+                    {
+                        isNotNull.Add(operand);
+                    }
+                    else
+                    {
+                        isUnknown.Add(operand);
+                    }
+                }
+            }
+            var allCoalesce = args.Instruction.DescendantNodesAndSelf()
+                .Select(x => (x is BinaryExpressionSyntax binary && binary.IsKind(SyntaxKind.CoalesceExpression) ? new CoalesceOperands(binary.Left, binary.Right, false) : null)
+                          ?? (x is AssignmentExpressionSyntax assign && assign.IsKind(SyntaxKindEx.CoalesceAssignmentExpression) ? new CoalesceOperands(assign.Left, assign.Right, true) : null))
+                .WhereNotNull().ToArray();
+            foreach (var coalesce in allCoalesce)
+            {
+                if (!coalesce.IsAssignment) //Too late for left operand in ??=, symbolic value was already set
+                {
+                    ProcessOperand(coalesce.Left, true);
+                }
+                ProcessOperand(coalesce.Right, false);
+            }
+            if(args.ProgramPoint.Block is BinaryBranchBlock bbb
+                && bbb.BranchingNode.IsKind(SyntaxKindEx.CoalesceAssignmentExpression)
+                && args.ProgramPoint.Offset == args.ProgramPoint.Block.Instructions.Count - 1 //Last instruction of BBB holds ??= left operand value
+                && args.ProgramPoint.Block.Instructions[args.ProgramPoint.Offset] is ExpressionSyntax expr)
+            {
+                ProcessOperand(expr, true);
+            }
+        }
+
+        private class CoalesceOperands
+        {
+            public readonly ExpressionSyntax Left, Right;
+            public readonly bool IsAssignment;
+
+            public CoalesceOperands(ExpressionSyntax left, ExpressionSyntax right, bool isAssignment)
+            {
+                this.Left = left;
+                this.Right = right;
+                this.IsAssignment = isAssignment;
+            }
+        }
+
     }
 }
