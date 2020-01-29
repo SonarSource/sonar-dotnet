@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Helpers
     internal static class CSharpCompilationHelper
     {
         internal static bool IsAtLeastLanguageVersion(this Compilation compilation, LanguageVersion languageVersion) =>
-            compilation.GetLanguageVersion().CompareTo(languageVersion) >= 0;
+            compilation.GetLanguageVersion().IsAtLeast(languageVersion);
 
         internal static LanguageVersion GetLanguageVersion(this Compilation compilation) => ((CSharpCompilation) compilation).LanguageVersion;
     }

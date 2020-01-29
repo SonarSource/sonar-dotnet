@@ -283,7 +283,7 @@ namespace Tests.Diagnostics
     {
         public void Dispose() { }
         public void Dispose(bool x) { }
-        public void Dispose(string y) { }
+        public void Dispose<T>() { }
         public void AnotherMethod() { }
     }
 
@@ -323,6 +323,20 @@ namespace Tests.Diagnostics
         public void Cleanup()
         {
             this.foo.Dispose(true); // ok
+        }
+
+        public void Dispose()
+        {
+        }
+    }
+
+    public ref struct AnotherDisposableRefStructHolder4
+    {
+        private AnotherDisposableRefStruct foo;
+
+        public void Cleanup()
+        {
+            this.foo.Dispose<string>(); // ok
         }
 
         public void Dispose()
