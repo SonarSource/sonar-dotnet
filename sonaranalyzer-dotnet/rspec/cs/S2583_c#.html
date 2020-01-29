@@ -2,26 +2,26 @@
 be used in production.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-a = false;
-if (a) // Noncompliant
+public void Sample(bool b)
 {
-  DoSomething(); // never executed
-}
+    bool a = false;
+    if (a) // Noncompliant
+    {
+        DoSomething(); // never executed
+    }
 
-if (!a || b) // Noncompliant; "!a" is always "true", "b" is never evaluated
-{
-  DoSomething();
-}
-else
-{
-  DoSomethingElse(); // never executed
-}
+    if (!a || b) // Noncompliant; "!a" is always "true", "b" is never evaluated
+    {
+        DoSomething();
+    }
+    else
+    {
+        DoSomethingElse(); // never executed
+    }
 
-c = null;
-d = "value";
-c ?? "value"; // Noncompliant, c is always null
-d ?? "value"; // Noncompliant, d is always not null, "value" is never used
-x ?? c; // Noncompliant, c is always null
+    var d = "xxx";
+    var res = d ?? "value"; // Noncompliant, d is always not null, "value" is never used
+}
 </pre>
 <h2>Exceptions</h2>
 <p>This rule will not raise an issue in either of these cases:</p>

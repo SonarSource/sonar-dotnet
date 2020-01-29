@@ -2,20 +2,27 @@
 because it does not match the programmer's intent, then it's a bug and the expression should be fixed.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-a = true;
-if (a) // Noncompliant
+public void Sample(bool b, bool c, string s)
 {
-  DoSomething();
-}
+    var a = true;
+    if (a) // Noncompliant
+    {
+        DoSomething();
+    }
 
-if (b &amp;&amp; a) // Noncompliant; "a" is always "true"
-{
-  DoSomething();
-}
+    if (b &amp;&amp; a) // Noncompliant; "a" is always "true"
+    {
+        DoSomething();
+    }
 
-if (c || !a) // Noncompliant; "!a" is always "false"
-{
-  DoSomething();
+    if (c || !a) // Noncompliant; "!a" is always "false"
+    {
+        DoSomething();
+    }
+
+    string d = null, res;
+    res = s ?? d; // Noncompliant, d is always null
+    res = d ?? "value"; // Noncompliant, d is always null
 }
 </pre>
 <h2>Compliant Solution</h2>

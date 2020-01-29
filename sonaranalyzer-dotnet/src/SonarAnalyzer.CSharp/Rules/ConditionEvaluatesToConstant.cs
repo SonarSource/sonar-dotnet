@@ -92,18 +92,20 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.FalseLiteralExpression
         };
 
+        private const string MessageFormat = "{0}";
+
         private const string S2583DiagnosticId = "S2583"; // Bug
         private const string S2583MessageFormatBool = "Change this condition so that it does not always evaluate to '{0}'; some subsequent code is never executed.";
-        private const string S2583MessageFormatNull = "Change this expression which always evaluates to '{0}'.";
+        private const string S2583MessageNotNull = "Change this expression which always evaluates to 'not null'; some subsequent code is never executed.";
 
         private const string S2589DiagnosticId = "S2589"; // Code smell
-        private const string S2589MessageFormat = "Change this condition so that it does not always evaluate to '{0}'.";
+        private const string S2589MessageFormatBool = "Change this condition so that it does not always evaluate to '{0}'.";
+        private const string S2589MessageNull = "Change this expression which always evaluates to 'null'.";
 
-        private static readonly DiagnosticDescriptor s2583Bool = DiagnosticDescriptorBuilder.GetDescriptor(S2583DiagnosticId, S2583MessageFormatBool, RspecStrings.ResourceManager);
-        private static readonly DiagnosticDescriptor s2583Null = DiagnosticDescriptorBuilder.GetDescriptor(S2583DiagnosticId, S2583MessageFormatNull, RspecStrings.ResourceManager);
-        private static readonly DiagnosticDescriptor s2589 = DiagnosticDescriptorBuilder.GetDescriptor(S2589DiagnosticId, S2589MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor s2583 = DiagnosticDescriptorBuilder.GetDescriptor(S2583DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor s2589 = DiagnosticDescriptorBuilder.GetDescriptor(S2589DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(s2583Bool, s2583Null, s2589);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(s2583, s2589);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -149,12 +151,12 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Except(isUnknown)
                         .Except(isNotNull)
                         .Where(c => !IsInsideCatchOrFinallyBlock(c))
-                        .Select(node => Diagnostic.Create(s2583Null, node.GetLocation(), messageArgs: "null")))
+                        .Select(node => Diagnostic.Create(s2589, node.GetLocation(), messageArgs: S2589MessageNull)))
                     .Union(isNotNull
                         .Except(isUnknown)
                         .Except(isNull)
                         .Where(c => !IsInsideCatchOrFinallyBlock(c))
-                        .Select(node => Diagnostic.Create(s2583Null, node.GetLocation(), messageArgs: "not null")))
+                        .Select(node => Diagnostic.Create(s2583, node.GetLocation(), messageArgs: S2583MessageNotNull)))
                     .ToList()
                     .ForEach(d => context.ReportDiagnosticWhenActive(d));
             }
@@ -214,8 +216,8 @@ namespace SonarAnalyzer.Rules.CSharp
             var unreachableLocations = GetUnreachableLocations(constantNode, constantValue).ToList();
             var constantText = constantValue.ToString().ToLowerInvariant();
             return unreachableLocations.Count > 0
-                ? Diagnostic.Create(s2583Bool, constantNode.GetLocation(), messageArgs: constantText, additionalLocations: unreachableLocations)
-                : Diagnostic.Create(s2589, constantNode.GetLocation(), messageArgs: constantText);
+                ? Diagnostic.Create(s2583, constantNode.GetLocation(), messageArgs: string.Format(S2583MessageFormatBool, constantText), additionalLocations: unreachableLocations)
+                : Diagnostic.Create(s2589, constantNode.GetLocation(), messageArgs: string.Format(S2589MessageFormatBool, constantText));
         }
 
         private static IEnumerable<Location> GetUnreachableLocations(SyntaxNode constantExpression, bool constantValue)

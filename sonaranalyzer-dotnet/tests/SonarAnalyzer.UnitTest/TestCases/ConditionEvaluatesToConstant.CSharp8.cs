@@ -169,7 +169,7 @@ namespace Tests.Diagnostics
             ret ??= "N/A";  // Noncompliant
 
             ret = notEmpty;
-            ret ??= "N/A"; // Noncompliant {{Change this expression which always evaluates to 'not null'.}}
+            ret ??= "N/A"; // Noncompliant {{Change this expression which always evaluates to 'not null'; some subsequent code is never executed.}}
 //          ^^^
 
             //Left operand: ret is known to be null

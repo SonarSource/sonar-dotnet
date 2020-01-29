@@ -2580,7 +2580,7 @@ namespace Tests.Diagnostics
             ret = ((notNull)) ?? a;      // Noncompliant
             ret = "Lorem " + (notNull ?? a) + " ipsum"; // Noncompliant
             ret = notNull ?? "N/A";  // Noncompliant
-            ret = notEmpty ?? "N/A"; // Noncompliant {{Change this expression which always evaluates to 'not null'.}}
+            ret = notEmpty ?? "N/A"; // Noncompliant {{Change this expression which always evaluates to 'not null'; some subsequent code is never executed.}}
 //                ^^^^^^^^
 
             //Left operand: isNull is known to be null
