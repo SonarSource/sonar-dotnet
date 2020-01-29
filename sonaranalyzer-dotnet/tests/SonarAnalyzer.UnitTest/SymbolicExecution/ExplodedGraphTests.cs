@@ -879,6 +879,47 @@ namespace Namespace
 
         [TestMethod]
         [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_IsPattern_WithPositionalPattern()
+        {
+            const string testInput = @"var x = obj is (string s, int i) t;";
+
+            var context = new ExplodedGraphContext(testInput);
+            var tSymbol = context.GetSymbol("t", ExplodedGraphContext.SymbolType.Declaration);
+
+            context.ExplodedGraph.InstructionProcessed += (sender, args) =>
+            {
+                var instruction = args.Instruction.ToString();
+
+                switch (instruction)
+                {
+                    case "obj":
+                        args.ProgramState.GetSymbolValue(tSymbol).Should().BeNull();
+                        break;
+
+                    case "(string s, int i) t":
+                        args.ProgramState.GetSymbolValue(tSymbol).Should().BeNull();
+                        break;
+
+                    case "obj is (string s, int i) t":
+                        args.ProgramState.GetSymbolValue(tSymbol).Should().BeNull();
+                        args.ProgramState.HasValue.Should().BeTrue();
+                        break;
+
+                    case "x = obj is (string s, int i) t":
+                        args.ProgramState.GetSymbolValue(tSymbol).Should().BeNull();
+                        args.ProgramState.HasValue.Should().BeFalse();
+                        break;
+
+                    default:
+                        throw new NotImplementedException();
+                }
+            };
+
+            context.WalkWithInstructions(4);
+        }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SwitchExpressionVisit()
         {
             const string testInput = @"
