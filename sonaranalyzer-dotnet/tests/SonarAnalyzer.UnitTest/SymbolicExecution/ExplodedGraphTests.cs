@@ -714,6 +714,43 @@ namespace Namespace
 
         [TestMethod]
         [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_IsPatternVisit_DeclarationPattern_Discard()
+        {
+            const string testInput = @"var x = options is Options _;";
+
+            var context = new ExplodedGraphContext(testInput);
+            var xSymbol = context.GetSymbol("x");
+
+            context.ExplodedGraph.InstructionProcessed += (sender, args) =>
+            {
+                var instruction = args.Instruction.ToString();
+
+                switch (instruction)
+                {
+                    case "options":
+                        args.ProgramState.HasValue.Should().BeTrue();
+                        break;
+
+                    case "options is Options _":
+                        args.ProgramState.HasValue.Should().BeTrue();
+                        break;
+
+                    case "x = options is Options _":
+                        xSymbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState).Should().BeTrue();
+
+                        args.ProgramState.HasValue.Should().BeFalse();
+                        break;
+
+                    default:
+                        throw new NotImplementedException();
+                }
+            };
+
+            context.WalkWithInstructions(3);
+        }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SwitchStatement()
         {
             const string testInput = @"string s=null; switch(s==null) {case true: s=""Value""; break; default : break;}; s.ToString();";
