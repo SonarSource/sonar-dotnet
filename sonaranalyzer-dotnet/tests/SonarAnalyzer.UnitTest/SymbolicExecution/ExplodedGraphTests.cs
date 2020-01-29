@@ -838,6 +838,47 @@ namespace Namespace
 
         [TestMethod]
         [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_IsPattern_WithRecursivePattern()
+        {
+            const string testInput = @"var x = address is Address { State: ""WA"" } addr;";
+
+            var context = new ExplodedGraphContext(testInput);
+            var addrSymbol = context.GetSymbol("addr", ExplodedGraphContext.SymbolType.Declaration);
+
+            context.ExplodedGraph.InstructionProcessed += (sender, args) =>
+            {
+                var instruction = args.Instruction.ToString();
+
+                switch (instruction)
+                {
+                    case "address":
+                        args.ProgramState.GetSymbolValue(addrSymbol).Should().BeNull();
+                        break;
+
+                    case "Address { State: \"WA\" } addr":
+                        args.ProgramState.GetSymbolValue(addrSymbol).Should().BeNull();
+                        break;
+
+                    case "address is Address { State: \"WA\" } addr":
+                        args.ProgramState.GetSymbolValue(addrSymbol).Should().BeNull();
+                        args.ProgramState.HasValue.Should().BeTrue();
+                        break;
+
+                    case "x = address is Address { State: \"WA\" } addr":
+                        args.ProgramState.GetSymbolValue(addrSymbol).Should().BeNull();
+                        args.ProgramState.HasValue.Should().BeFalse();
+                        break;
+
+                    default:
+                        throw new NotImplementedException();
+                }
+            };
+
+            context.WalkWithInstructions(4);
+        }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SwitchExpressionVisit()
         {
             const string testInput = @"

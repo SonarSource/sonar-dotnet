@@ -504,6 +504,11 @@ namespace SonarAnalyzer.SymbolicExecution
 
                         newProgramState = VisitDeclarationPattern((DeclarationPatternSyntaxWrapper)isPatternExpression.Pattern, newProgramState);
                     }
+                    else if (RecursivePatternSyntaxWrapper.IsInstance(isPatternExpression.Pattern))
+                    {
+                        var recursivePattern = (RecursivePatternSyntaxWrapper)isPatternExpression.Pattern;
+                        VisitRecursivePattern(recursivePattern);
+                    }
                     else
                     {
                         throw new NotSupportedException($"{instruction.Kind()}");
@@ -519,10 +524,13 @@ namespace SonarAnalyzer.SymbolicExecution
                     newProgramState = VisitVarPattern((VarPatternSyntaxWrapper)instruction, newProgramState);
                     break;
 
-                case SyntaxKindEx.RecursivePattern: // https://github.com/SonarSource/sonar-dotnet/issues/2937
                 case SyntaxKindEx.ConstantPattern:
                     // The 0 in 'case 0 when ...'
                     // Do nothing
+                    break;
+
+                case SyntaxKindEx.RecursivePattern:
+                    VisitRecursivePattern((RecursivePatternSyntaxWrapper)instruction);
                     break;
 
                 case SyntaxKindEx.DeclarationExpression:
@@ -549,6 +557,12 @@ namespace SonarAnalyzer.SymbolicExecution
             newProgramState = EnsureStackState(parenthesizedExpression, newProgramState);
             OnInstructionProcessed(instruction, node.ProgramPoint, newProgramState);
             EnqueueNewNode(newProgramPoint, newProgramState);
+        }
+
+        private static void VisitRecursivePattern(RecursivePatternSyntaxWrapper recursivePattern)
+        {
+            // Currently RecursivePatterns are not considered during the symbolic execution
+            // https://github.com/SonarSource/sonar-dotnet/issues/2937
         }
 
         private ProgramState VisitDeclarationExpression(DeclarationExpressionSyntaxWrapper wrapper, ProgramState programState)
