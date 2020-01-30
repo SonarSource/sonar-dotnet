@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -35,18 +35,14 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class ConsumeValueTaskCorrectly : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S5034";
+        internal const string MessageFormat = "{0}";
 
         // 'await', 'AsTask', 'Result' and '.GetAwaiter().GetResult()' should be called only once on a ValueTask
         private const string ConsumeOnlyOnceMessage = "Refactor this 'ValueTask' usage to consume it only once.";
-
-        private static readonly DiagnosticDescriptor ConsumeOnlyOnce =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, ConsumeOnlyOnceMessage, RspecStrings.ResourceManager);
-
         // 'Result' and '.GetAwaiter().GetResult()' should be consumed inside an 'if (valueTask.IsCompletedSuccessfully)'
         private const string ConsumeOnlyIfCompletedMessage = "Refactor this 'ValueTask' usage to consume the result only if the operation has completed successfully.";
 
-        private static readonly DiagnosticDescriptor ConsumeOnlyIfCompleted =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, ConsumeOnlyIfCompletedMessage, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         private static readonly ImmutableArray<KnownType> ValueTaskTypes =
             new[] {
@@ -56,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Threading_Tasks_ValueTask_TResult
             }.ToImmutableArray();
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(ConsumeOnlyOnce, ConsumeOnlyIfCompleted);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -69,14 +65,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         if (syntaxNodes.Count > 1)
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(ConsumeOnlyOnce, syntaxNodes.First().GetLocation(),
-                                additionalLocations: syntaxNodes.Skip(1).Select(node => node.GetLocation()).ToArray()));
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, syntaxNodes.First().GetLocation(),
+                                additionalLocations: syntaxNodes.Skip(1).Select(node => node.GetLocation()).ToArray(),
+                                messageArgs: ConsumeOnlyOnceMessage));
                         }
                     }
 
                     foreach (var node in walker.ConsumedButNotCompleted)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(ConsumeOnlyIfCompleted, node.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation(), messageArgs: ConsumeOnlyIfCompletedMessage   ));
                     }
                 },
                 // when visiting a method or another member with logic inside, lambdas and local functions will be visited as well
