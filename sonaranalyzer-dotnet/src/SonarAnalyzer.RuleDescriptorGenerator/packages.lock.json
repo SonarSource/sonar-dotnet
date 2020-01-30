@@ -111,14 +111,6 @@
         "resolved": "1.0.27",
         "contentHash": "pwu80Ohe7SBzZ6i69LVdzowp6V+LaVRzd5F7A6QlD42vQkX0oT7KXKWWPlM/S00w1gnMQMRnEdbtOV12z6rXdQ=="
       },
-      "Microsoft.DotNet.PlatformAbstractions": {
-        "type": "Transitive",
-        "resolved": "3.1.1",
-        "contentHash": "5lV+Vejn4bKC3wEUPH2Z/FTYkaHBO0AVJqqTD+ATE0rP6jQARIJbtWKc+aF2TWGsxFeiARW8Y0lnMFHdLOJFqA==",
-        "dependencies": {
-          "System.Runtime.InteropServices.RuntimeInformation": "4.0.0"
-        }
-      },
       "System.AppContext": {
         "type": "Transitive",
         "resolved": "4.1.0",
@@ -250,11 +242,6 @@
         "resolved": "4.1.0",
         "contentHash": "16eu3kjHS633yYdkjwShDHZLRNMKVi/s0bY8ODiqJ2RfMhDMAwxZaUaWVnZ2P71kr/or+X9o/xFWtNqz8ivieQ=="
       },
-      "System.Runtime.InteropServices.RuntimeInformation": {
-        "type": "Transitive",
-        "resolved": "4.3.0",
-        "contentHash": "cbz4YJMqRDR7oLeMRbdYv7mYzc++17lNhScCX0goO2XpGWdvAt60CGN+FHdePUEHCe/Jy9jUlvNAiNdM+7jsOw=="
-      },
       "System.Runtime.Numerics": {
         "type": "Transitive",
         "resolved": "4.0.1",
@@ -370,11 +357,9 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "1.3.2",
-          "Microsoft.DotNet.PlatformAbstractions": "3.1.1",
           "SonarAnalyzer": "1.0.0",
           "SonarAnalyzer.CFG": "1.0.0",
-          "System.Collections.Immutable": "1.1.37",
-          "System.Runtime.InteropServices.RuntimeInformation": "4.3.0"
+          "System.Collections.Immutable": "1.1.37"
         }
       },
       "sonaranalyzer.utilities": {
@@ -399,11 +384,6 @@
         "type": "Transitive",
         "resolved": "4.0.0",
         "contentHash": "qjF74OTAU+mRhLaL4YSfiWy3vj6T3AOz8AW37l5zCwfbBfj0k7E94XnEsRaf2TnhE/7QaV6Hvqakoy2LoV8MVg=="
-      },
-      "System.Runtime.InteropServices.RuntimeInformation": {
-        "type": "Transitive",
-        "resolved": "4.3.0",
-        "contentHash": "cbz4YJMqRDR7oLeMRbdYv7mYzc++17lNhScCX0goO2XpGWdvAt60CGN+FHdePUEHCe/Jy9jUlvNAiNdM+7jsOw=="
       },
       "System.Security.Cryptography.Algorithms": {
         "type": "Transitive",
