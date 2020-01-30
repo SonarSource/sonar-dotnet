@@ -12,26 +12,31 @@ In general, it is best to run commands from the Visual Studio Developer Command 
 
 ## Developing with Visual Studio 2019
 
-1. [Visual Studio 2019 Version 16.4.1](https://visualstudio.microsoft.com/vs/)
-    - Ensure .Net Desktop development (C#, VB and F#), .NET Core, Visual Studio extension development and ASP.Net and web development are included in the selected work loads
-1. [.NET Core SDK 2.1.402](https://dotnet.microsoft.com/download/dotnet-core/2.1)
-1. Open `SonarAnalyzer.sln` in the `sonaranalyzer-dotnet` subfolder
-
-The following environment variables must be set:
-- **JAVA_HOME**
-- **MAVEN_HOME** / **M2_HOME**
-- **MSBUILD_PATH** - path to the MSBuild.exe executable from the Visual Studio installation folder - to MSBuild 16
-- **NUGET_PATH** - path to the nuget.exe executable (related to the [plugin integration tests](./contributing-plugin.md#integration-tests))
-- **ORCHESTRATOR_CONFIG_URL** - path to orchestrator.properties file (for integration tests)
-- **rule_api_path** - path to folder containing the rule api jar
-- **Path** - the **Path** must contain:
-    - the path to the dotnet core installation folder
-    - the path to the MSBuild bin folder
-    - the path to the visual studo installer folder (for vswhere.exe)
-    - the path to the nuget executable folder (e.g. C:\Program Files\nuget)
-    - the path to the JDK bin folder
-    - %M2_HOME%\bin
-    - the path to the Scanner For MSBuild folder and to the Scanner CLI
+1. [Visual Studio 2019](https://visualstudio.microsoft.com/vs/)
+1. Ensure to install Workloads:
+    - ASP.NET and web development
+    - .NET desktop development (C#, VB and F# with .NET Core and .NET Framework)
+    - Visual Studio extension development
+1. Ensure to install Individual components:
+    - .NET Core 3.1 SDK
+    - .NET Framework 4.8 SDK
+    - .NET Framework 4.8 Targeting pack
+1. The following environment variables must be set:
+    - **JAVA_HOME**
+    - **MAVEN_HOME** / **M2_HOME**
+    - **MSBUILD_PATH** - path to the MSBuild.exe executable from the Visual Studio installation folder - to MSBuild 16
+    - **NUGET_PATH** - path to the nuget.exe executable (related to the [plugin integration tests](./contributing-plugin.md#integration-tests))
+    - **ORCHESTRATOR_CONFIG_URL** - url to orchestrator.properties file (for integration tests) in uri form (i.e. file:///c:/something/orchestrator.properties)
+    - **RULE_API_PATH** - path to folder containing the rule api jar
+    - **PATH** - the system **PATH** variable must contain:
+        - the path to the dotnet core installation folder
+        - the path to the MSBuild bin folder
+        - the path to the visual studo installer folder (for vswhere.exe)
+        - the path to the nuget executable folder (e.g. C:\Program Files\nuget)
+        - the path to the JDK bin folder
+        - %M2_HOME%\bin
+        - the path to the Scanner For MSBuild folder and to the Scanner CLI
+1. Open `sonaranalyzer-dotnet/SonarAnalyzer.sln`
 
 ## NuGet lock files update
 
@@ -93,12 +98,12 @@ If you run the project `ReviewDiffs` in debug mode from Visual Studio, it will p
 From Visual Studio, make sure `SonarAnalyzer.Vsix.csproj` is selected as startup project. And then do the following:
 
 1. Make sure SonarLint for Visual Studio is uninstalled
-2. Hit `F5` to launch the experimental instance of Visual Studio
-3. Open one of the following solutions from the experimental instance:
+1. Hit `F5` to launch the experimental instance of Visual Studio
+1. Open one of the following solutions from the experimental instance:
     - [Akka.NET](akka.net/src/Akka.sln)
     - [Nancy](Nancy/src/Nancy.sln)
     - [Ember-MM](Ember-MM/Ember%20Media%20Manager.sln)
-4. Turn on your new rule in [Validation Ruleset](ValidationRuleset.ruleset), review the results, improve, and setup the regression test once you are satisfied.
+1. Turn on your new rule in [Validation Ruleset](ValidationRuleset.ruleset), review the results, improve, and setup the regression test once you are satisfied.
     - Note: the solutions have been pre-configured to use this ruleset on all their projects.
     - Note: for rules that need project-specific configuration, you need to manually add the link to the project-specific SonarLint.xml file
       e.g. for Akka.net `..\akka.net\src\core\Akka\Akka.csproj` add

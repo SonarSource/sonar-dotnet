@@ -9,7 +9,9 @@ You're welcome to submit any issue that you've found using the C# and VB.NET cod
 * [SonarQube](https://www.sonarqube.org/) plugins 
 * [SonarCloud](https://sonarcloud.io/about) analysis
 
-Please provide a minimal reproducible example in each case.
+Please report all exceptions thrown from analyzer as well as False-Positive and False-Negative behavior. Try to provide a minimal reproducible example for each case.
+
+You can ask for help, request new rule or feature on [Community Forum](https://community.sonarsource.com/).
 
 ## Labels
 
@@ -23,3 +25,4 @@ Labels are divided into several categories. One issue can have:
 
 * Any issue without labels needs review.
 * Every issue containing labels is confirmed.
+* Issues marked as `Status: On Hold` are treated case by case. Reference timeout is 3 months without reply.
