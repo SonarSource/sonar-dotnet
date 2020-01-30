@@ -11,7 +11,7 @@ You're welcome to submit any issue that you've found using the C# and VB.NET cod
 
 Please report all exceptions thrown from analyzer as well as False-Positive and False-Negative behavior. Try to provide a minimal reproducible example for each case.
 
-You can request new rule or feature on [Community Forum](https://community.sonarsource.com/).
+You can ask for help, request new rule or feature on [Community Forum](https://community.sonarsource.com/).
 
 ## Labels
 
