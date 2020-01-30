@@ -20,27 +20,33 @@ public void Sample(bool b, bool c, string s)
         DoSomething();
     }
 
-    string d = null, res;
-    res = s ?? d; // Noncompliant, d is always null
-    res = d ?? "value"; // Noncompliant, d is always null
+    string d = null;
+    var v1 = d ?? "value"; // Noncompliant, d is always null
+    var v2 = s ?? d; // Noncompliant, d is always null and produced value is always equal to s. Condition to check value of s is gratuitous.
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-a = true;
-if (Foo(a))
+public void Sample(bool b, bool c, string s)
 {
-  DoSomething();
-}
+    var a = true;
+    if (Foo(a))
+    {
+        DoSomething();
+    }
 
-if (b)
-{
-  DoSomething();
-}
+    if (b)
+    {
+        DoSomething();
+    }
 
-if (c)
-{
-  DoSomething();
+    if (c)
+    {
+        DoSomething();
+    }
+
+    var v1 = "value";
+    var v2 = s;
 }
 </pre>
 <h2>See</h2>

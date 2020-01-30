@@ -23,6 +23,29 @@ public void Sample(bool b)
     var res = d ?? "value"; // Noncompliant, d is always not null, "value" is never used
 }
 </pre>
+<h2>Compliant Solution</h2>
+<pre>
+public void Sample(bool b)
+{
+    bool a = false;
+    if (Foo(a))
+    {
+        DoSomething();
+    }
+
+    if (b)
+    {
+        DoSomething();
+    }
+    else
+    {
+        DoSomethingElse();
+    }
+
+    var d = "xxx";
+    var res = d;
+}
+</pre>
 <h2>Exceptions</h2>
 <p>This rule will not raise an issue in either of these cases:</p>
 <ul>
