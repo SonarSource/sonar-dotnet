@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant_CSharp6()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.CSharp6.cs",
                 new ConditionEvaluatesToConstant(),
                 new[] { new CSharpParseOptions(LanguageVersion.CSharp6) });
         }

@@ -113,7 +113,7 @@ namespace Tests.Diagnostics
                 throw new ArgumentNullException(nameof(a)); // never executed
             }
 
-            b ??= null;
+            b ??= null; // Noncompliant {{Change this expression which always evaluates to 'null'.}}
             if (b == null)  // OK
             {
                 throw new ArgumentNullException(nameof(b)); // OK
@@ -144,6 +144,50 @@ namespace Tests.Diagnostics
             {                                     // Secondary
                 throw new ArgumentNullException(nameof(c)); // never executed
             }
+        }
+
+        void NullCoalesceAssignment_Useless(string a, string b, string c, string d)
+        {
+            string isNull = null;
+            string notNull = "";
+            string notEmpty = "value";
+            string ret;
+
+            ret = b ?? a;
+            ret = b ?? notNull;
+            ret = c ?? notEmpty;
+            ret = d ?? "N/A";
+
+            //Left operand: Values notNull, notEmpty and ret are known to be not-null
+            ret = notNull;
+            ret ??= a;      // Noncompliant
+
+            ret = notNull;
+            ret = "Lorem " + (ret ??= a) + " ipsum"; // Noncompliant
+
+            ret = notNull;
+            ret ??= "N/A";  // Noncompliant
+
+            ret = notEmpty;
+            ret ??= "N/A"; // Noncompliant {{Change this expression which always evaluates to 'not null'; some subsequent code is never executed.}}
+//          ^^^
+
+            //Left operand: ret is known to be null
+            ret = null;
+            ret ??= a;  // Noncompliant
+
+            ret = null;
+            ret = "Lorem " + (ret ??= a) + " ipsum"; // Noncompliant
+
+            //Right operand: isNull is known to be null, therefore ?? is useless
+            ret = a;
+            ret ??= null;    // Noncompliant
+            ret ??= isNull;  // Noncompliant {{Change this expression which always evaluates to 'null'.}}
+//                  ^^^^^^
+
+            //Combo/Fatality
+            notNull ??= isNull;    //Noncompliant [LeftA, RightA]
+            isNull ??= null;       //Noncompliant [LeftB, RightB]
         }
     }
 

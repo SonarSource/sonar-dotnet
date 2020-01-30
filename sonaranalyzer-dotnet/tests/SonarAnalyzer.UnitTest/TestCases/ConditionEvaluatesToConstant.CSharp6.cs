@@ -2562,6 +2562,61 @@ namespace Tests.Diagnostics
 
             return String.Empty;
         }
+
+        void NullCoalesce_Useless(string a, string b, string c, string d)
+        {
+            string isNull = null;
+            string notNull = "";
+            string notEmpty = "value";
+            string ret;
+
+            ret = b ?? a;
+            ret = b ?? notNull;
+            ret = c ?? notEmpty;
+            ret = d ?? "N/A";
+
+            //Left operand: Values notNull and notEmpty are known to be not-null
+            ret = notNull ?? a;      // Noncompliant
+            ret = ((notNull)) ?? a;      // Noncompliant
+            ret = "Lorem " + (notNull ?? a) + " ipsum"; // Noncompliant
+            ret = notNull ?? "N/A";  // Noncompliant
+            ret = notEmpty ?? "N/A"; // Noncompliant {{Change this expression which always evaluates to 'not null'; some subsequent code is never executed.}}
+//                ^^^^^^^^
+
+            //Left operand: isNull is known to be null
+            ret = null ?? a;    // Noncompliant
+            ret = isNull ?? a;  // Noncompliant
+            ret = ((isNull)) ?? a;  // Noncompliant
+            ret = "Lorem " + (isNull ?? a) + " ipsum"; // Noncompliant
+
+            //Right operand: isNull is known to be null, therefore ?? is useless
+            ret = a ?? null;    // Noncompliant
+            ret = a ?? isNull;  // Noncompliant {{Change this expression which always evaluates to 'null'.}}
+//                     ^^^^^^
+
+            //Combo/Fatality
+            ret = notNull ?? isNull;    //Noncompliant [LeftA, RightA]
+            ret = isNull ?? null;       //Noncompliant [LeftB, RightB]
+
+            //FNs
+            ret = "Value" ?? a; // FN, literals are not handled except 'null'
+        }
+
+        int CoalesceCount<T>(IList<T> arg)
+        {
+            arg = arg ?? new List<T>();
+            return arg.Count;
+        }
+
+        public class CoalesceProperty
+        {
+            private object message;
+
+            public object Message
+            {
+                get { return message = message ?? new object(); }
+            }
+        }
     }
 
     public class NullOrWhiteSoace

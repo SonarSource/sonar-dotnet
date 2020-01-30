@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,7 +29,9 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 using CSharpExplodedGraph = SonarAnalyzer.SymbolicExecution.CSharpExplodedGraph;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -68,6 +70,12 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.CoalesceExpression
         };
 
+        private static readonly ISet<SyntaxKind> CoalesceExpressions = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.CoalesceExpression,
+            SyntaxKindEx.CoalesceAssignmentExpression
+        };
+
         // Do not report in finally and catch blocks to avoid False Positives. To correctly solve
         // this problem we would need to link all CFG blocks for catch clauses to all statements within
         // the try block. This is unreasonable because it will generate tons of paths, thus making
@@ -84,17 +92,18 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.FalseLiteralExpression
         };
 
+        private const string MessageFormat = "{0}";
+
         private const string S2583DiagnosticId = "S2583"; // Bug
-        private const string S2583MessageFormat = "Change this condition so that it does not always evaluate to '{0}'; some subsequent code is never executed.";
+        private const string S2583MessageFormatBool = "Change this condition so that it does not always evaluate to '{0}'; some subsequent code is never executed.";
+        private const string S2583MessageNotNull = "Change this expression which always evaluates to 'not null'; some subsequent code is never executed.";
 
         private const string S2589DiagnosticId = "S2589"; // Code smell
-        private const string S2589MessageFormat = "Change this condition so that it does not always evaluate to '{0}'.";
+        private const string S2589MessageFormatBool = "Change this condition so that it does not always evaluate to '{0}'.";
+        private const string S2589MessageNull = "Change this expression which always evaluates to 'null'.";
 
-        private static readonly DiagnosticDescriptor s2583 =
-            DiagnosticDescriptorBuilder.GetDescriptor(S2583DiagnosticId, S2583MessageFormat, RspecStrings.ResourceManager);
-
-        private static readonly DiagnosticDescriptor s2589 =
-            DiagnosticDescriptorBuilder.GetDescriptor(S2589DiagnosticId, S2589MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor s2583 = DiagnosticDescriptorBuilder.GetDescriptor(S2583DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor s2589 = DiagnosticDescriptorBuilder.GetDescriptor(S2589DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(s2583, s2589);
 
@@ -107,16 +116,22 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var conditionTrue = new HashSet<SyntaxNode>();
             var conditionFalse = new HashSet<SyntaxNode>();
+            var isNull = new HashSet<SyntaxNode>();
+            var isNotNull = new HashSet<SyntaxNode>();
+            var isUnknown = new HashSet<SyntaxNode>();
             var hasYieldStatement = false;
 
-            void instructionProcessed(object sender, InstructionProcessedEventArgs args) {
+            void instructionProcessed(object sender, InstructionProcessedEventArgs args)
+            {
                 hasYieldStatement = hasYieldStatement || IsYieldNode(args.ProgramPoint.Block);
+                CollectCoalesce(args, isNull, isNotNull, isUnknown, context.SemanticModel);
             }
 
             void collectConditions(object sender, ConditionEvaluatedEventArgs args) =>
                 CollectConditions(args, conditionTrue, conditionFalse, context.SemanticModel);
 
-            void explorationEnded(object sender, EventArgs args) {
+            void explorationEnded(object sender, EventArgs args)
+            {
                 // Do not raise issue in generator functions (See #1295)
                 if (hasYieldStatement)
                 {
@@ -132,6 +147,16 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Except(conditionTrue)
                         .Where(c => !IsInsideCatchOrFinallyBlock(c))
                         .Select(node => GetDiagnostics(node, false)))
+                    .Union(isNull
+                        .Except(isUnknown)
+                        .Except(isNotNull)
+                        .Where(c => !IsInsideCatchOrFinallyBlock(c))
+                        .Select(node => Diagnostic.Create(s2589, node.GetLocation(), messageArgs: S2589MessageNull)))
+                    .Union(isNotNull
+                        .Except(isUnknown)
+                        .Except(isNull)
+                        .Where(c => !IsInsideCatchOrFinallyBlock(c))
+                        .Select(node => Diagnostic.Create(s2583, node.GetLocation(), messageArgs: S2583MessageNotNull)))
                     .ToList()
                     .ForEach(d => context.ReportDiagnosticWhenActive(d));
             }
@@ -188,14 +213,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static Diagnostic GetDiagnostics(SyntaxNode constantNode, bool constantValue)
         {
-            var unreachableLocations = GetUnreachableLocations(constantNode, constantValue)
-                .ToList();
-
+            var unreachableLocations = GetUnreachableLocations(constantNode, constantValue).ToList();
             var constantText = constantValue.ToString().ToLowerInvariant();
-
-            return unreachableLocations.Count > 0 ?
-                Diagnostic.Create(s2583, constantNode.GetLocation(), messageArgs: constantText, additionalLocations: unreachableLocations) :
-                Diagnostic.Create(s2589, constantNode.GetLocation(), messageArgs: constantText);
+            return unreachableLocations.Count > 0
+                ? Diagnostic.Create(s2583, constantNode.GetLocation(), messageArgs: string.Format(S2583MessageFormatBool, constantText), additionalLocations: unreachableLocations)
+                : Diagnostic.Create(s2589, constantNode.GetLocation(), messageArgs: string.Format(S2589MessageFormatBool, constantText));
         }
 
         private static IEnumerable<Location> GetUnreachableLocations(SyntaxNode constantExpression, bool constantValue)
@@ -328,6 +350,50 @@ namespace SonarAnalyzer.Rules.CSharp
             bool IsBooleanLiteral(SyntaxNode syntaxNode)
             {
                 return syntaxNode.IsAnyKind(BooleanLiterals);
+            }
+        }
+
+        private static void CollectCoalesce(InstructionProcessedEventArgs args, HashSet<SyntaxNode> isNull, HashSet<SyntaxNode> isNotNull, HashSet<SyntaxNode> isUnknown, SemanticModel semanticModel)
+        {
+            void ProcessOperand(ExpressionSyntax operand, bool useNotNull)
+            {
+                if (operand.RemoveParentheses().IsKind(SyntaxKind.NullLiteralExpression))
+                {
+                    isNull.Add(operand);
+                    return;
+                }
+                var symbol = semanticModel.GetSymbolInfo(operand.RemoveParentheses()).Symbol;
+                if (symbol != null)
+                {
+                    if (symbol.HasConstraint(ObjectConstraint.Null, args.ProgramState))
+                    {
+                        isNull.Add(operand);
+                    }
+                    else if (useNotNull && symbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState))
+                    {
+                        isNotNull.Add(operand);
+                    }
+                    else
+                    {
+                        isUnknown.Add(operand);
+                    }
+                }
+            }
+            var rightOperands = args.Instruction.DescendantNodesAndSelf()
+                .Select(x => (x is BinaryExpressionSyntax binary && binary.IsKind(SyntaxKind.CoalesceExpression) ? binary.Right : null)
+                          ?? (x is AssignmentExpressionSyntax assign && assign.IsKind(SyntaxKindEx.CoalesceAssignmentExpression) ? assign.Right : null))
+                .WhereNotNull().ToArray();
+            foreach (var right in rightOperands)
+            {
+                //It's too late for left operands of ??= or x=x??, symbolic value was already set
+                ProcessOperand(right, false);
+            }
+            if(args.ProgramPoint.Block is BinaryBranchBlock bbb
+                && bbb.BranchingNode.IsAnyKind(CoalesceExpressions)
+                && args.ProgramPoint.Offset == args.ProgramPoint.Block.Instructions.Count - 1 //Last instruction of BBB holds ??= left operand value
+                && args.ProgramPoint.Block.Instructions[args.ProgramPoint.Offset] is ExpressionSyntax left)
+            {
+                ProcessOperand(left, true);
             }
         }
     }

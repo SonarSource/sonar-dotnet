@@ -2,19 +2,48 @@
 be used in production.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-a = false;
-if (a) // Noncompliant
+public void Sample(bool b)
 {
-  DoSomething(); // never executed
-}
+    bool a = false;
+    if (a) // Noncompliant
+    {
+        DoSomething(); // never executed
+    }
 
-if (!a || b) // Noncompliant; "!a" is always "true", "b" is never evaluated
-{
-  DoSomething();
+    if (!a || b) // Noncompliant; "!a" is always "true", "b" is never evaluated
+    {
+        DoSomething();
+    }
+    else
+    {
+        DoSomethingElse(); // never executed
+    }
+
+    var d = "xxx";
+    var res = d ?? "value"; // Noncompliant, d is always not null, "value" is never used
 }
-else
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public void Sample(bool b)
 {
-  DoSomethingElse(); // never executed
+    bool a = false;
+    if (Foo(a))
+    {
+        DoSomething();
+    }
+
+    if (b)
+    {
+        DoSomething();
+    }
+    else
+    {
+        DoSomethingElse();
+    }
+
+    var d = "xxx";
+    var res = d;
 }
 </pre>
 <h2>Exceptions</h2>
