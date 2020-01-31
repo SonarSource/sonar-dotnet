@@ -4,13 +4,13 @@
   <parent>
     <groupId>org.sonarsource.dotnet</groupId>
     <artifactId>sonaranalyzer-maven-artifacts</artifactId>
-    <version>8.3-SNAPSHOT</version>
+    <version>8.4-SNAPSHOT</version>
   </parent>
 
   <artifactId>SonarAnalyzer.CSharp</artifactId>
   <packaging>pom</packaging>
   <name>SonarAnalyzer.CSharp</name>
-  
+
   <build>
     <plugins>
       <plugin>
@@ -30,7 +30,7 @@
                   <file>file-SonarAnalyzer.CSharp</file>
                   <type>nupkg</type>
                   <classifier></classifier>
-                </artifact>                
+                </artifact>
               </artifacts>
             </configuration>
           </execution>
