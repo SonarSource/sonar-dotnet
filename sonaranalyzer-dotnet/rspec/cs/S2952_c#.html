@@ -1,6 +1,7 @@
 <p>It is possible in an <code>IDisposable</code> to call <code>Dispose</code> on class members from any method, but the contract of
 <code>Dispose</code> is that it will clean up all unmanaged resources. Move disposing of members to some other method, and you risk resource
 leaks.</p>
+<p>This rule also applies for disposable ref structs.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 public class ResourceHolder : IDisposable
