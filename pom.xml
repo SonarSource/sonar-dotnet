@@ -10,7 +10,7 @@
 
   <groupId>org.sonarsource.dotnet</groupId>
   <artifactId>sonar-csharp</artifactId>
-  <version>8.3-SNAPSHOT</version>
+  <version>8.4-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>SonarC# parent</name>

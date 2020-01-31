@@ -4,13 +4,13 @@
   <parent>
     <groupId>org.sonarsource.dotnet</groupId>
     <artifactId>sonaranalyzer-maven-artifacts</artifactId>
-    <version>8.3-SNAPSHOT</version>
+    <version>8.4-SNAPSHOT</version>
   </parent>
 
   <artifactId>SonarAnalyzer.RuleDocGenerator.CSharp</artifactId>
   <packaging>pom</packaging>
   <name>SonarAnalyzer.RuleDocGenerator.CSharp</name>
-  
+
   <build>
     <plugins>
       <plugin>
@@ -30,7 +30,7 @@
                   <file>file-SonarAnalyzer.RuleDocGenerator.CSharp</file>
                   <type>nupkg</type>
                   <classifier></classifier>
-                </artifact>                
+                </artifact>
               </artifacts>
             </configuration>
           </execution>
