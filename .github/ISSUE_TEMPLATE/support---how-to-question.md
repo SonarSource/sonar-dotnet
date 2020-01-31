@@ -7,10 +7,10 @@ assignees: ''
 
 ---
 
-We strongly recommend that you ask support questions in the community forum:
+We strongly recommend that you ask support questions in the
 [Community Forum](https://community.sonarsource.com/).
 
-That includes problems with
+That includes problems with:
 - running a SonarQube / SonarCloud analysis
 - importing code coverage or unit test results results
 - how to create custom rules
