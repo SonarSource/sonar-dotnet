@@ -200,3 +200,30 @@ namespace LinqQueryWithoutUsing
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/3065
+namespace Repro_3065.Extensions
+{
+    public static class ListExtensions
+    {
+        public static void Add(this List<string> list, string firstName, string lastName)
+        {
+            list.Add(firstName + " " + lastName);
+        }
+    }
+}
+
+namespace Repro_3065
+{
+
+    internal static class Program
+    {
+        private static void Main(string[] args)
+        {
+            var list = new List<string>
+            {
+                { "John", "Smith" },
+            };
+        }
+    }
+}
