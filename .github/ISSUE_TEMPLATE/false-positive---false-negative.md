@@ -1,6 +1,6 @@
 ---
-name: False Positive / False Negative
-about: Report an issue about a C#/VB.Net analysis rule.
+name: Report a False Positive / False Negative
+about: Open an issue about a C#/VB.NET analysis rule.
 title: ''
 labels: ''
 assignees: ''
