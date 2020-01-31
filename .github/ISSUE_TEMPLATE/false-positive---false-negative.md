@@ -13,9 +13,7 @@ Please provide a succinct description of your issue. Also please provide the rul
 
 ### Repro steps
 
-Please provide a code snippet that compiles which reproduces the problem. Alternatively, a link to a SonarCloud project where the issue appears.
-
-Please also attach a screenshot of the issue raised so we can see on which line it is raised.
+Please provide a code snippet that compiles which reproduces the problem. Alternatively, a link to a SonarCloud project where the issue appears, or a git repository, or attach a zip with a reproducer project.
 
 ### Expected behavior
 
@@ -33,5 +31,6 @@ Please provide a description of any known workarounds.
 
 * SonarC# Version
 * Visual Studio Version
-* MSBuild version
+* MSBuild / dotnet version
 * If running through the Scanner for MSBuild, its version
+* Operating System
