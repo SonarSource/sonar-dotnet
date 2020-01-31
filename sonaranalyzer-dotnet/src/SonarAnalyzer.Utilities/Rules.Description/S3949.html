@@ -4,9 +4,12 @@ versa.</p>
 <p>This rule is only available for analyses run on Windows machines. It will not be reported in analyses run on any other OS.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public int getTheNumber(int positiveInt) {
-  int num = Integer.MAX_VALUE;
-  return num + positiveInt;  // Noncompliant
+public int getTheNumber(int val) {
+  if (val &lt;= 0) {
+      return val;
+  }
+  int num = int.MaxValue;
+  return num + val;  // Noncompliant
 }
 </pre>
 
