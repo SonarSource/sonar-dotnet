@@ -1,4 +1,4 @@
-/*
+﻿/*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2020 SonarSource SA
 * mailto: contact AT sonarsource DOT com
@@ -80,7 +80,7 @@ public class Foo
                 new CS.MethodsShouldNotHaveTooManyLines { Max = max });
 
             action.Should().Throw<AssertFailedException>()
-                .WithMessage("*error AD0001: * 'SonarAnalyzer.Rules.CSharp.MethodsShouldNotHaveTooManyLines' *System.InvalidOperationException* 'Invalid rule parameter: maximum number of lines = *. Must be at least 2.'.}.");
+                .WithMessage("*error AD0001: *SonarAnalyzer.Rules.CSharp.MethodsShouldNotHaveTooManyLines* *System.InvalidOperationException* *Invalid rule parameter: maximum number of lines = *. Must be at least 2.*");
         }
 
         [TestMethod]
@@ -118,7 +118,7 @@ public class Foo
                 new VB.MethodsShouldNotHaveTooManyLines { Max = max });
 
             action.Should().Throw<AssertFailedException>()
-                .WithMessage("*error AD0001: * 'SonarAnalyzer.Rules.VisualBasic.MethodsShouldNotHaveTooManyLines' *System.InvalidOperationException* 'Invalid rule parameter: maximum number of lines = *. Must be at least 2.'.}.");
+                .WithMessage("*error AD0001: *SonarAnalyzer.Rules.VisualBasic.MethodsShouldNotHaveTooManyLines* *System.InvalidOperationException* *Invalid rule parameter: maximum number of lines = *. Must be at least 2.*");
         }
     }
 }

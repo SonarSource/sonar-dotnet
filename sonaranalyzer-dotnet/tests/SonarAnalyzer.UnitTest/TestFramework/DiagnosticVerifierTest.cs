@@ -1,4 +1,4 @@
-/*
+﻿/*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2020 SonarSource SA
 * mailto: contact AT sonarsource DOT com
@@ -186,7 +186,7 @@ public class UnexpectedSecondaryWithBuildError
                     new BinaryOperationWithIdenticalExpressions());
 
             action.Should().Throw<UnexpectedDiagnosticException>()
-                  .WithMessage("Unexpected build error [CS1514]: { expected on line 2");
+                  .WithMessage("Unexpected build error [CS1514]: { * on line 2");
         }
 
         [TestMethod]
