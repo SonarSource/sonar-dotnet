@@ -7,15 +7,13 @@
 |Analyzer|[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=sonaranalyzer-dotnet&metric=alert_status)](https://sonarcloud.io/dashboard?id=sonaranalyzer-dotnet)|[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=sonaranalyzer-dotnet&metric=coverage)](https://sonarcloud.io/component_measures?id=sonaranalyzer-dotnet&metric=coverage)|
 |Plugin|[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.dotnet%3Asonar-csharp&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.sonarsource.dotnet%3Asonar-csharp)|[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.dotnet%3Asonar-csharp&metric=coverage)](https://sonarcloud.io/component_measures?id=org.sonarsource.dotnet%3Asonar-csharp&metric=coverage)|
 
-SonarC# and SonarVB are [static code analyser](https://en.wikipedia.org/wiki/Static_program_analysis) for C# and VB.&#8203;NET
-languages used as an extension for the [SonarQube](http://www.sonarqube.org/) and [SonarCloud](https://sonarcloud.io)
-platforms. It will allow you to produce stable and easily supported code by helping you to find and to correct bugs,
-vulnerabilities and smells in your code.
+SonarC# and SonarVB are [static code analyzers](https://en.wikipedia.org/wiki/Static_program_analysis) for the C# and VB.&#8203;NET
+languages and are part of the [SonarQube](http://www.sonarqube.org/), [SonarCloud](https://sonarcloud.io) and [SonarLint](https://www.sonarlint.org/) code quality and security products. These analyzers allow you to produce safe, reliable and maintainable code by helping you find and correct bugs, vulnerabilities and code smells in your codebase.
 
 ## Features
 
-* 350+ C# rules and 100+ VB.&#8203;NET rules
-* Metrics (complexity, number of lines etc.)
+* 380+ C# rules and 130+ VB.&#8203;NET rules
+* Metrics (complexity, duplications, number of lines etc.)
 * Import of [unit test results](https://docs.sonarqube.org/x/CoBh) from VSTest, MSTest, NUnit and xUnit
 * Import of [test coverage reports](https://docs.sonarqube.org/x/CoBh) from Visual Studio Code Coverage, dotCover, OpenCover and NCover 3.
 * Support for [custom rules](https://github.com/SonarSource/sonarqube-roslyn-sdk)
@@ -27,10 +25,21 @@ vulnerabilities and smells in your code.
 * [C# rules](https://rules.sonarsource.com/csharp)
 * [VB.Net rules](https://rules.sonarsource.com/vbnet)
 
-## Have question or feedback?
+### Nuget.org packages
 
-* [Contact us on Community Forum](https://community.sonarsource.com/) to provide feedback, ask for help, request new rule or feature.
-* [Create a GitHub Issue](https://github.com/SonarSource/sonar-dotnet/issues/new) if you've found a bug, False-Positive or False-Negative situation. 
+* [SonarAnalyzer.CSharp](https://www.nuget.org/packages/SonarAnalyzer.CSharp/)
+* [SonarAnalyzer.VisualBasic](https://www.nuget.org/packages/SonarAnalyzer.VisualBasic/)
+
+### Integration with SonarQube and SonarCloud
+
+* [Analyze projects with Scanner for MSBuild](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-msbuild/)
+* [Importing code coverage](https://community.sonarsource.com/t/coverage-test-data-generate-reports-for-c-vb-net/9871)
+* [SonarQube and the code coverage](https://community.sonarsource.com/t/sonarqube-and-the-code-coverage/4725)
+
+## Do you have a question or feedback?
+
+* [Contact us on Community Forum](https://community.sonarsource.com/) to provide feedback, ask for help, request new rules or features.
+* [Create a GitHub Issue](https://github.com/SonarSource/sonar-dotnet/issues/new/choose) if you've found a bug, False-Positive or False-Negative. 
 
 ## Get started
 
