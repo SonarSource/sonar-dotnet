@@ -25,7 +25,18 @@ languages and are part of the [SonarQube](http://www.sonarqube.org/), [SonarClou
 * [C# rules](https://rules.sonarsource.com/csharp)
 * [VB.Net rules](https://rules.sonarsource.com/vbnet)
 
-## Have a question or feedback?
+### Nuget.org packages
+
+* [SonarAnalyzer.CSharp](https://www.nuget.org/packages/SonarAnalyzer.CSharp/)
+* [SonarAnalyzer.VisualBasic](https://www.nuget.org/packages/SonarAnalyzer.VisualBasic/)
+
+### Integration with SonarQube and SonarCloud
+
+* [Analyze projects with Scanner for MSBuild](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-msbuild/)
+* [Importing code coverage](https://community.sonarsource.com/t/coverage-test-data-generate-reports-for-c-vb-net/9871)
+* [SonarQube and the code coverage](https://community.sonarsource.com/t/sonarqube-and-the-code-coverage/4725)
+
+## Do you have a question or feedback?
 
 * [Contact us on Community Forum](https://community.sonarsource.com/) to provide feedback, ask for help, request new rules or features.
 * [Create a GitHub Issue](https://github.com/SonarSource/sonar-dotnet/issues/new/choose) if you've found a bug, False-Positive or False-Negative. 
