@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -238,7 +238,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new CheckFileLicense { HeaderFormat = FailingSingleLineRegexHeader, IsRegularExpression = true });
 
             action.Should().Throw<AssertFailedException>()
-                .WithMessage("*error AD0001:*'SonarAnalyzer.Rules.CSharp.CheckFileLicense'*System.InvalidOperationException*'Invalid regular expression: ['.*");
+                .WithMessage("*error AD0001:*SonarAnalyzer.Rules.CSharp.CheckFileLicense*System.InvalidOperationException*Invalid regular expression: [*");
         }
 
         [TestMethod]
