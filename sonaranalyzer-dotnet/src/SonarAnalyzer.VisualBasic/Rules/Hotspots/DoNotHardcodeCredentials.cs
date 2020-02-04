@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, rule);
         }
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
             base.Initialize(context);
 
