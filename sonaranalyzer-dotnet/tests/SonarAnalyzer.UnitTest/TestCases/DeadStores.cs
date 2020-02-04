@@ -863,4 +863,15 @@ namespace Tests.Diagnostics
             x = 31; // Noncompliant
         }
     }
+
+    // issue https://github.com/SonarSource/sonar-dotnet/issues/3094
+    public class TupleReturn
+    {
+        public static (int foo, int bar) M(string text)
+        {
+            int b = int.Parse(text); // Noncompliant -- false positive
+            return (1, b);
+        }
+    }
+
 }
