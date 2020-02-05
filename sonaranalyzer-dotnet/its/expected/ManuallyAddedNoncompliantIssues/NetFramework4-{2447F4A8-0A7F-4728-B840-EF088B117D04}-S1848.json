@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1848",
+"message":  "Either remove this useless object instantiation of class 'XmlDocument' or use it.",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlDocumentTest.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  13,
+"endLine":  40,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1848",
+"message":  "Either remove this useless object instantiation of class 'XmlTextReader' or use it.",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlTextReaderTest.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  13,
+"endLine":  31,
+"endColumn":  35
+}
+}
+}
+]
+}

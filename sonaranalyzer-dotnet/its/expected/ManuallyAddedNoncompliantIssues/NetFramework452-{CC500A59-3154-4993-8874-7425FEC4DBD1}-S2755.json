@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S2755",
+"message":  null,
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework452\XmlReaderTest.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  20,
+"endLine":  34,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2755",
+"message":  null,
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework452\XmlReaderTest.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  13,
+"endLine":  42,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2755",
+"message":  null,
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework452\XmlReaderTest.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  13,
+"endLine":  47,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S2755",
+"message":  null,
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework452\XPathNavigatorTest.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  58,
+"endLine":  32,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2755",
+"message":  null,
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework452\XPathNavigatorTest.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  20,
+"endLine":  33,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2755",
+"message":  null,
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework452\XPathNavigatorTest.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  26,
+"endLine":  38,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2755",
+"message":  null,
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework452\XPathNavigatorTest.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  20,
+"endLine":  40,
+"endColumn":  41
+}
+}
+}
+]
+}
