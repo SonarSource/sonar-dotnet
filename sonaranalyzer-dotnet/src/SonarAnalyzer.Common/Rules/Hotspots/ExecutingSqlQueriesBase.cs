@@ -111,7 +111,7 @@ namespace SonarAnalyzer.Rules
             IsStringMethodInvocation("Format", argument, semanticModel);
 
         private InvocationCondition MethodHasRawSqlQueryParameter() =>
-            (context) =>
+            context =>
             {
                 return GetInvocationExpression(context.Invocation) is TExpressionSyntax methodSyntax &&
                     context.SemanticModel.GetSymbolInfo(methodSyntax).Symbol is IMethodSymbol methodSymbol &&
@@ -122,47 +122,47 @@ namespace SonarAnalyzer.Rules
             };
 
         private InvocationCondition ArgumentAtIndexIsInterpolated(int index) =>
-            (context) =>
+            context =>
                 GetArgumentAtIndex(context, index) is TExpressionSyntax argument &&
                 IsInterpolated(argument);
 
         private InvocationCondition ArgumentAtIndexIsConcat(int index) =>
-            (context) =>
+            context =>
                 GetArgumentAtIndex(context, index) is TExpressionSyntax argument &&
                 IsConcat(argument, context.SemanticModel);
 
         private InvocationCondition ArgumentAtIndexIsFormat(int index) =>
-            (context) =>
+            context =>
                 GetArgumentAtIndex(context, index) is TExpressionSyntax argument &&
                 IsFormat(argument, context.SemanticModel);
 
         private PropertyAccessCondition SetterIsConcat() =>
-            (context) =>
+            context =>
                 GetSetValue(context) is TExpressionSyntax argument &&
                 IsConcat(argument, context.SemanticModel);
 
         private PropertyAccessCondition SetterIsFormat() =>
-            (context) =>
+            context =>
                 GetSetValue(context) is TExpressionSyntax argument &&
                 IsFormat(argument, context.SemanticModel);
 
         private PropertyAccessCondition SetterIsInterpolation() =>
-            (context) =>
+            context =>
                 GetSetValue(context) is TExpressionSyntax argument &&
                 IsInterpolated(argument);
 
         private ObjectCreationCondition FirstArgumentIsConcat() =>
-            (context) =>
+            context =>
                 GetFirstArgument(context) is TExpressionSyntax firstArg &&
                 IsConcat(firstArg, context.SemanticModel);
 
         private ObjectCreationCondition FirstArgumentIsFormat() =>
-            (context) =>
+            context =>
                 GetFirstArgument(context) is TExpressionSyntax firstArg &&
                 IsFormat(firstArg, context.SemanticModel);
 
         private ObjectCreationCondition FirstArgumentIsInterpolation() =>
-            (context) =>
+            context =>
                 GetFirstArgument(context) is TExpressionSyntax firstArg &&
                 IsInterpolated(firstArg);
 
