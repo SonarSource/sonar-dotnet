@@ -63,6 +63,7 @@ public class Tests {
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/class_name.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/template_rule.xml"))
+    .restoreProfileAtStartup(FileLocation.of("profiles/custom_parameters.xml"))
     .addPlugin(MavenLocation.of("com.sonarsource.security", "sonar-security-plugin", "7.3.0.1282"))
     .activateLicense()
     .build();

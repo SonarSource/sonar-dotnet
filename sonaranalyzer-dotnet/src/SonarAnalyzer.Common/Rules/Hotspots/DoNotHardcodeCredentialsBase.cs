@@ -29,10 +29,9 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : ParameterLoadingDiagnosticAnalyzer
         where TSyntaxKind : struct
     {
-
         protected const string DiagnosticId = "S2068";
         protected const string MessageFormat = "Make sure hard-coded credential is safe.";
 
@@ -70,19 +69,21 @@ namespace SonarAnalyzer.Rules
             this.analyzerConfiguration = analyzerConfiguration;
         }
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
-            ObjectCreationTracker.Track(context,
+            var innerContext = context.GetInnerContext();
+
+            ObjectCreationTracker.Track(innerContext,
                 ObjectCreationTracker.MatchConstructor(KnownType.System_Net_NetworkCredential),
                 ObjectCreationTracker.ArgumentAtIndexIs(1, KnownType.System_String),
                 ObjectCreationTracker.ArgumentAtIndexIsConst(1));
 
-            ObjectCreationTracker.Track(context,
+            ObjectCreationTracker.Track(innerContext,
                ObjectCreationTracker.MatchConstructor(KnownType.System_Security_Cryptography_PasswordDeriveBytes),
                ObjectCreationTracker.ArgumentAtIndexIs(0, KnownType.System_String),
                ObjectCreationTracker.ArgumentAtIndexIsConst(0));
 
-            PropertyAccessTracker.Track(context,
+            PropertyAccessTracker.Track(innerContext,
                PropertyAccessTracker.MatchSetter(),
                PropertyAccessTracker.AssignedValueIsConstant(),
                PropertyAccessTracker.MatchProperty(
@@ -132,7 +133,7 @@ namespace SonarAnalyzer.Rules
                     }
                 };
 
-            protected IEnumerable<string> FindCredentialWords(string variableName, string variableValue)
+            private IEnumerable<string> FindCredentialWords(string variableName, string variableValue)
             {
                 if (string.IsNullOrEmpty(variableValue?.Trim()))
                 {
