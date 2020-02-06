@@ -10,7 +10,7 @@
           <parameters>
               <parameter>
                   <key>credentialWords</key>
-                  <value>password, passwd, pwd, usario, senha</value>
+                  <value>password, passwd, pwd, senha</value>
               </parameter>
           </parameters>
       </rule>

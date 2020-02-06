@@ -64,11 +64,10 @@ public class RuleParameterCustomizationTest {
 
     List<Issue> issues = getIssues(componentKey);
 
-    assertThat(issues.size()).isEqualTo(3);
+    assertThat(issues.size()).isEqualTo(2);
 
     assertIssue(issues.get(0), 6, "Make sure hard-coded credential is safe.");
     assertIssue(issues.get(1), 7, "Make sure hard-coded credential is safe.");
-    assertIssue(issues.get(2), 8, "Make sure hard-coded credential is safe.");
   }
 
   private void assertIssue(Issue issue, int line, String message){
