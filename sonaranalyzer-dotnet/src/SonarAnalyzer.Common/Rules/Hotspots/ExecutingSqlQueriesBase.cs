@@ -115,58 +115,38 @@ namespace SonarAnalyzer.Rules
         private InvocationCondition MethodHasRawSqlQueryParameter() =>
             context =>
             {
-                return GetInvocationExpression(context.Invocation) is TExpressionSyntax methodSyntax &&
-                    context.SemanticModel.GetSymbolInfo(methodSyntax).Symbol is IMethodSymbol methodSymbol &&
-                    (ParameterIsRawString(methodSymbol, 0) || ParameterIsRawString(methodSymbol, 1));
+                return context.SemanticModel.GetSymbolInfo(GetInvocationExpression(context.Invocation)).Symbol is IMethodSymbol methodSymbol &&
+                       (ParameterIsRawString(methodSymbol, 0) || ParameterIsRawString(methodSymbol, 1));
 
-                bool ParameterIsRawString(IMethodSymbol method, int index) =>
+                static bool ParameterIsRawString(IMethodSymbol method, int index) =>
                     method.Parameters.Length > index && method.Parameters[index].IsType(KnownType.Microsoft_EntityFrameworkCore_RawSqlString);
             };
 
         private InvocationCondition ArgumentAtIndexIsInterpolated(int index) =>
-            context =>
-                GetArgumentAtIndex(context, index) is TExpressionSyntax argument &&
-                IsInterpolated(argument);
+            context => IsInterpolated(GetArgumentAtIndex(context, index));
 
         private InvocationCondition ArgumentAtIndexIsConcat(int index) =>
-            context =>
-                GetArgumentAtIndex(context, index) is TExpressionSyntax argument &&
-                IsConcat(argument, context.SemanticModel);
+            context => IsConcat(GetArgumentAtIndex(context, index), context.SemanticModel);
 
         private InvocationCondition ArgumentAtIndexIsFormat(int index) =>
-            context =>
-                GetArgumentAtIndex(context, index) is TExpressionSyntax argument &&
-                IsFormat(argument, context.SemanticModel);
+            context => IsFormat(GetArgumentAtIndex(context, index), context.SemanticModel);
 
         private PropertyAccessCondition SetterIsConcat() =>
-            context =>
-                GetSetValue(context) is TExpressionSyntax argument &&
-                IsConcat(argument, context.SemanticModel);
+            context => IsConcat(GetSetValue(context), context.SemanticModel);
 
         private PropertyAccessCondition SetterIsFormat() =>
-            context =>
-                GetSetValue(context) is TExpressionSyntax argument &&
-                IsFormat(argument, context.SemanticModel);
+            context => IsFormat(GetSetValue(context), context.SemanticModel);
 
         private PropertyAccessCondition SetterIsInterpolation() =>
-            context =>
-                GetSetValue(context) is TExpressionSyntax argument &&
-                IsInterpolated(argument);
+            context => IsInterpolated(GetSetValue(context));
 
         private ObjectCreationCondition FirstArgumentIsConcat() =>
-            context =>
-                GetFirstArgument(context) is TExpressionSyntax firstArg &&
-                IsConcat(firstArg, context.SemanticModel);
+            context => IsConcat(GetFirstArgument(context), context.SemanticModel);
 
         private ObjectCreationCondition FirstArgumentIsFormat() =>
-            context =>
-                GetFirstArgument(context) is TExpressionSyntax firstArg &&
-                IsFormat(firstArg, context.SemanticModel);
+            context => IsFormat(GetFirstArgument(context), context.SemanticModel);
 
         private ObjectCreationCondition FirstArgumentIsInterpolation() =>
-            context =>
-                GetFirstArgument(context) is TExpressionSyntax firstArg &&
-                IsInterpolated(firstArg);
-
+            context => IsInterpolated(GetFirstArgument(context));
     }
 }

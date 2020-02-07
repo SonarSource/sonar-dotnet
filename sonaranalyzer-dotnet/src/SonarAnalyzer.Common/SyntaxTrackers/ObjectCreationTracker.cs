@@ -70,12 +70,12 @@ namespace SonarAnalyzer.Helpers
         internal abstract object ConstArgumentForParameter(ObjectCreationContext context, string parameterName);
 
         internal ObjectCreationCondition ArgumentIsBoolConstant(string parameterName, bool expectedValue) =>
-            (context) =>
+            context =>
                 ConstArgumentForParameter(context, parameterName) is bool boolValue &&
                 boolValue == expectedValue;
 
         internal ObjectCreationCondition ArgumentAtIndexIs(int index, KnownType type) =>
-            (context) =>
+            context =>
                 context.InvokedConstructorSymbol.Value != null &&
                 context.InvokedConstructorSymbol.Value.Parameters.Length > index &&
                 context.InvokedConstructorSymbol.Value.Parameters[index].Type.Is(type);
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Helpers
         internal ObjectCreationCondition WhenDerivesOrImplementsAny(params KnownType[] types)
         {
             var typesArray = types.ToImmutableArray();
-            return (context) =>
+            return context =>
                 context.InvokedConstructorSymbol.Value != null &&
                 context.InvokedConstructorSymbol.Value.IsConstructor() &&
                 context.InvokedConstructorSymbol.Value.ContainingType.DerivesOrImplementsAny(typesArray);
@@ -94,28 +94,22 @@ namespace SonarAnalyzer.Helpers
             // We cannot do a syntax check first because a type name can be aliased with
             // a using Alias = Fully.Qualified.Name and we will generate false negative
             // for new Alias()
-            return (context) =>
+            return context =>
                 context.InvokedConstructorSymbol.Value != null &&
                 context.InvokedConstructorSymbol.Value.IsConstructor() &&
                 context.InvokedConstructorSymbol.Value.ContainingType.IsAny(types);
         }
 
         internal ObjectCreationCondition WhenDerivesFrom(KnownType baseType) =>
-            (context) =>
+            context =>
                 context.InvokedConstructorSymbol.Value != null &&
                 context.InvokedConstructorSymbol.Value.IsConstructor() &&
                 context.InvokedConstructorSymbol.Value.ContainingType.DerivesFrom(baseType);
 
         internal ObjectCreationCondition WhenImplements(KnownType baseType) =>
-            (context) =>
+            context =>
                 context.InvokedConstructorSymbol.Value != null &&
                 context.InvokedConstructorSymbol.Value.IsConstructor() &&
                 context.InvokedConstructorSymbol.Value.ContainingType.Implements(baseType);
-
-        internal ObjectCreationCondition WhenDerivesOrImplements(KnownType baseType) =>
-            (context) =>
-                context.InvokedConstructorSymbol.Value != null &&
-                context.InvokedConstructorSymbol.Value.IsConstructor() &&
-                context.InvokedConstructorSymbol.Value.ContainingType.DerivesOrImplements(baseType);
     }
 }
