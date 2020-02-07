@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,6 +29,18 @@ namespace SonarAnalyzer.Rules
     {
         protected const string DiagnosticId = "S2077";
         protected const string MessageFormat = "Make sure that executing SQL queries is safe here.";
+
+        private readonly KnownType[] constructors = {
+            KnownType.Microsoft_EntityFrameworkCore_RawSqlString,
+            KnownType.System_Data_SqlClient_SqlCommand,
+            KnownType.System_Data_SqlClient_SqlDataAdapter,
+            KnownType.System_Data_Odbc_OdbcCommand,
+            KnownType.System_Data_Odbc_OdbcDataAdapter,
+            KnownType.System_Data_SqlServerCe_SqlCeCommand,
+            KnownType.System_Data_SqlServerCe_SqlCeDataAdapter,
+            KnownType.System_Data_OracleClient_OracleCommand,
+            KnownType.System_Data_OracleClient_OracleDataAdapter
+        };
 
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
 
@@ -77,20 +89,10 @@ namespace SonarAnalyzer.Rules
                     PropertyAccessTracker.AssignedValueIsConstant()));
 
             ObjectCreationTracker.Track(context,
-                ObjectCreationTracker.MatchConstructor(
-                    KnownType.Microsoft_EntityFrameworkCore_RawSqlString,
-                    KnownType.System_Data_SqlClient_SqlCommand,
-                    KnownType.System_Data_SqlClient_SqlDataAdapter,
-                    KnownType.System_Data_Odbc_OdbcCommand,
-                    KnownType.System_Data_Odbc_OdbcDataAdapter,
-                    KnownType.System_Data_SqlServerCe_SqlCeCommand,
-                    KnownType.System_Data_SqlServerCe_SqlCeDataAdapter,
-                    KnownType.System_Data_OracleClient_OracleCommand,
-                    KnownType.System_Data_OracleClient_OracleDataAdapter),
+                ObjectCreationTracker.MatchConstructor(this.constructors),
                 ObjectCreationTracker.ArgumentAtIndexIs(0, KnownType.System_String),
                 Conditions.Or(FirstArgumentIsConcat(), FirstArgumentIsFormat(), FirstArgumentIsInterpolation()),
-                Conditions.ExceptWhen(
-                    ObjectCreationTracker.ArgumentAtIndexIsConst(0)));
+                Conditions.ExceptWhen(ObjectCreationTracker.ArgumentAtIndexIsConst(0)));
         }
 
         protected abstract TExpressionSyntax GetInvocationExpression(SyntaxNode expression);
