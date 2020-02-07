@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
+using System.Linq;
 
 namespace SonarAnalyzer.Rules
 {
@@ -95,6 +96,14 @@ namespace SonarAnalyzer.Rules
                 Conditions.ExceptWhen(ObjectCreationTracker.ArgumentAtIndexIsConst(0)));
         }
 
+        protected SyntaxNode GetDeclaringSyntaxNode(TExpressionSyntax expressionSyntax, SemanticModel semanticModel) =>
+            semanticModel
+                .GetSymbolInfo(expressionSyntax)
+                .Symbol?
+                .DeclaringSyntaxReferences
+                .FirstOrDefault()?
+                .GetSyntax();
+
         protected abstract TExpressionSyntax GetInvocationExpression(SyntaxNode expression);
 
         protected abstract TExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index);
@@ -105,7 +114,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract bool IsConcat(TExpressionSyntax argument, SemanticModel semanticModel);
 
-        protected abstract bool IsInterpolated(TExpressionSyntax argument);
+        protected abstract bool IsInterpolated(TExpressionSyntax expression, SemanticModel semanticModel);
 
         protected abstract bool IsStringMethodInvocation(string methodName, TExpressionSyntax expression, SemanticModel semanticModel);
 
@@ -115,7 +124,10 @@ namespace SonarAnalyzer.Rules
         private InvocationCondition MethodHasRawSqlQueryParameter() =>
             context =>
             {
-                return context.SemanticModel.GetSymbolInfo(GetInvocationExpression(context.Invocation)).Symbol is IMethodSymbol methodSymbol &&
+                var invocationExpression = GetInvocationExpression(context.Invocation);
+
+                return invocationExpression != null &&
+                       context.SemanticModel.GetSymbolInfo(invocationExpression).Symbol is IMethodSymbol methodSymbol &&
                        (ParameterIsRawString(methodSymbol, 0) || ParameterIsRawString(methodSymbol, 1));
 
                 static bool ParameterIsRawString(IMethodSymbol method, int index) =>
@@ -123,7 +135,7 @@ namespace SonarAnalyzer.Rules
             };
 
         private InvocationCondition ArgumentAtIndexIsInterpolated(int index) =>
-            context => IsInterpolated(GetArgumentAtIndex(context, index));
+            context => IsInterpolated(GetArgumentAtIndex(context, index), context.SemanticModel);
 
         private InvocationCondition ArgumentAtIndexIsConcat(int index) =>
             context => IsConcat(GetArgumentAtIndex(context, index), context.SemanticModel);
@@ -138,7 +150,7 @@ namespace SonarAnalyzer.Rules
             context => IsFormat(GetSetValue(context), context.SemanticModel);
 
         private PropertyAccessCondition SetterIsInterpolation() =>
-            context => IsInterpolated(GetSetValue(context));
+            context => IsInterpolated(GetSetValue(context), context.SemanticModel);
 
         private ObjectCreationCondition FirstArgumentIsConcat() =>
             context => IsConcat(GetFirstArgument(context), context.SemanticModel);
@@ -147,6 +159,6 @@ namespace SonarAnalyzer.Rules
             context => IsFormat(GetFirstArgument(context), context.SemanticModel);
 
         private ObjectCreationCondition FirstArgumentIsInterpolation() =>
-            context => IsInterpolated(GetFirstArgument(context));
+            context => IsInterpolated(GetFirstArgument(context), context.SemanticModel);
     }
 }

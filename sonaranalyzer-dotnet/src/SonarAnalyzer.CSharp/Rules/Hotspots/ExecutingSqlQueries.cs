@@ -81,17 +81,51 @@ namespace SonarAnalyzer.Rules.CSharp
                 !IsConcatenationOfConstants(concatenation, semanticModel)
             );
 
-        protected override bool IsInterpolated(ExpressionSyntax argument) =>
-            argument.IsAnyKind(SyntaxKind.InterpolatedStringExpression);
+        protected override bool IsInterpolated(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            expression switch
+            {
+                null => false,
+                IdentifierNameSyntax identifierNameSyntax => IsInterpolated(identifierNameSyntax, semanticModel),
+                _ => expression.IsKind(SyntaxKind.InterpolatedStringExpression)
+            };
 
-        protected override bool IsStringMethodInvocation(string methodName, ExpressionSyntax expression, SemanticModel semanticModel)
+        private bool IsInterpolated(IdentifierNameSyntax identifier, SemanticModel semanticModel)
         {
-            return expression is InvocationExpressionSyntax invocation &&
-                invocation.IsMethodInvocation(KnownType.System_String, methodName, semanticModel) &&
-                !AllConstants(invocation.ArgumentList.Arguments.ToList(), semanticModel);
+            var declaringSyntax = GetDeclaringSyntaxNode(identifier, semanticModel);
+
+            if (declaringSyntax is VariableDeclaratorSyntax variableDeclaratorSyntax)
+            {
+                return IsInterpolated(variableDeclaratorSyntax.Initializer.Value, semanticModel);
+            }
+
+            return false;
         }
 
-        private static bool AllConstants(List<ArgumentSyntax> arguments, SemanticModel semanticModel) =>
+        protected override bool IsStringMethodInvocation(string methodName, ExpressionSyntax expression, SemanticModel semanticModel) =>
+            expression switch
+            {
+                InvocationExpressionSyntax invocation => IsStringMethodInvocation(invocation, methodName, semanticModel),
+                IdentifierNameSyntax identifier => IsStringMethodInvocation(identifier, methodName, semanticModel),
+                _ => false
+            };
+
+        private static bool IsStringMethodInvocation(InvocationExpressionSyntax invocation, string methodName, SemanticModel semanticModel) =>
+            invocation.IsMethodInvocation(KnownType.System_String, methodName, semanticModel) &&
+            !AllConstants(invocation.ArgumentList.Arguments.ToList(), semanticModel);
+
+        private bool IsStringMethodInvocation(IdentifierNameSyntax identifier, string methodName, SemanticModel semanticModel)
+        {
+            var declaringSyntax = GetDeclaringSyntaxNode(identifier, semanticModel);
+
+            if (declaringSyntax is VariableDeclaratorSyntax variableDeclaratorSyntax)
+            {
+                return IsStringMethodInvocation(methodName, variableDeclaratorSyntax.Initializer.Value, semanticModel);
+            }
+
+            return false;
+        }
+
+        private static bool AllConstants(IEnumerable<ArgumentSyntax> arguments, SemanticModel semanticModel) =>
             arguments.All(a => a.Expression.IsConstant(semanticModel));
 
         private static bool IsConcatenationOfConstants(BinaryExpressionSyntax binaryExpression, SemanticModel semanticModel)
