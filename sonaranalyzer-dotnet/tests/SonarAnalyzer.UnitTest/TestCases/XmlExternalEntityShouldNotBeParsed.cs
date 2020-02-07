@@ -82,36 +82,42 @@ namespace Tests.Diagnostics
             reader.XmlResolver = new XmlUrlResolver(); // Noncompliant
         }
 
+        protected void XmlTextReader_4(XmlNameTable table)
+        {
+            XmlTextReader reader = new XmlTextReader("resources/", table); // Noncompliant
+            reader.DtdProcessing = DtdProcessing.Parse;
+        }
+
         // System.Xml.XmlDocument
-        protected void XmlDocument_1(XmlUrlResolver xmlUrlResolver)
+        protected void XmlDocumentTest(XmlUrlResolver xmlUrlResolver)
         {
             XmlDocument doc = new XmlDocument();
             doc.XmlResolver = xmlUrlResolver; // Noncompliant
         }
 
         // System.Xml.XmlDataDocument
-        protected void XmlDataDocument()
+        protected void XmlDataDocumentTest()
         {
             XmlDataDocument doc = new XmlDataDocument();
             doc.XmlResolver = new XmlPreloadedResolver(); // Noncompliant
         }
 
         // System.Configuration.ConfigXmlDocument
-        protected void ConfigXmlDocument()
+        protected void ConfigXmlDocumentTest()
         {
             ConfigXmlDocument doc = new ConfigXmlDocument();
             doc.XmlResolver = new XmlPreloadedResolver(); // Noncompliant
         }
 
         // Microsoft.Web.XmlTransform.XmlFileInfoDocument
-        protected void XmlFileInfoDocument()
+        protected void XmlFileInfoDocumentTest()
         {
             XmlFileInfoDocument doc = new XmlFileInfoDocument();
             doc.XmlResolver = new XmlPreloadedResolver(); // Noncompliant
         }
 
         // Microsoft.Web.XmlTransform.XmlTransformableDocument
-        protected void XmlTransformableDocument_1()
+        protected void XmlTransformableDocumentTest()
         {
             XmlTransformableDocument doc = new XmlTransformableDocument();
             doc.XmlResolver = new XmlPreloadedResolver(); // Noncompliant
@@ -162,25 +168,25 @@ namespace Tests.Diagnostics
         }
 
         // System.Xml.XmlDataDocument
-        protected void XmlDataDocument()
+        protected void XmlDataDocumentTest()
         {
             XmlDataDocument doc = new XmlDataDocument(); // Noncompliant
         }
 
         // System.Configuration.ConfigXmlDocument
-        protected void ConfigXmlDocument()
+        protected void ConfigXmlDocumentTest()
         {
             ConfigXmlDocument doc = new ConfigXmlDocument(); // Noncompliant
         }
 
         // Microsoft.Web.XmlTransform.XmlFileInfoDocument
-        protected void XmlFileInfoDocument()
+        protected void XmlFileInfoDocumentTest()
         {
             XmlFileInfoDocument doc = new XmlFileInfoDocument(); // Noncompliant
         }
 
         // Microsoft.Web.XmlTransform.XmlTransformableDocument
-        protected void XmlTransformableDocument_1()
+        protected void XmlTransformableDocumentTest()
         {
             XmlTransformableDocument doc = new XmlTransformableDocument(); // Noncompliant
         }
@@ -205,6 +211,11 @@ namespace Tests.Diagnostics
 
 
         public void InsideTryCatch()
+        {
+
+        }
+
+        public void InsideLoop()
         {
 
         }
@@ -234,6 +245,29 @@ namespace Tests.Diagnostics
 
         // constructor
         public VariousUnsafeCombinations()
+        {
+
+        }
+
+        // multiple constructor calls for same type
+        public void MultipleConstructorCallsForSameType()
+        {
+
+        }
+
+        // multiple sets of the property, some sanitize some vulnerable, last sanitize
+        public void MultipleSetsLastSanitize()
+        {
+
+        }
+
+        // multiple sets of the property, some sanitize some vulnerable, last vulnerable
+        public void MultipleSetsLastMakeUnsafe()
+        {
+
+        }
+
+        public void MultipleVulnerableApisInSameMethod()
         {
 
         }
@@ -284,6 +318,18 @@ namespace Tests.Diagnostics
             reader.XmlResolver = new XmlSecureResolver(null, "");
         }
 
+        protected void XmlTextReader_4(XmlNameTable table)
+        {
+            XmlTextReader reader = new XmlTextReader("resources/", table);
+            reader.DtdProcessing = DtdProcessing.Prohibit;
+        }
+
+        protected void XmlTextReader_5(XmlNameTable table)
+        {
+            XmlTextReader reader = new XmlTextReader("resources/", table);
+            reader.DtdProcessing = DtdProcessing.Ignore;
+        }
+
         // System.Xml.XmlDocument
         protected void XmlDocument_1(XmlSecureResolver xmlSecureResolver)
         {
@@ -291,26 +337,32 @@ namespace Tests.Diagnostics
             doc.XmlResolver = xmlSecureResolver;
         }
 
+        protected void XmlDocument_2(XmlSecureResolver xmlSecureResolver)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.XmlResolver = null;
+        }
+
         // System.Xml.XmlDataDocument
-        protected void XmlDataDocument()
+        protected void XmlDataDocumentTest()
         {
             XmlDataDocument doc = new XmlDataDocument();
         }
 
         // System.Configuration.ConfigXmlDocument
-        protected void ConfigXmlDocument()
+        protected void ConfigXmlDocumentTest()
         {
             ConfigXmlDocument doc = new ConfigXmlDocument();
         }
 
         // Microsoft.Web.XmlTransform.XmlFileInfoDocument
-        protected void XmlFileInfoDocument()
+        protected void XmlFileInfoDocumentTest()
         {
             XmlFileInfoDocument doc = new XmlFileInfoDocument();
         }
 
         // Microsoft.Web.XmlTransform.XmlTransformableDocument
-        protected void XmlTransformableDocument_1()
+        protected void XmlTransformableDocumentTest()
         {
             XmlTransformableDocument doc = new XmlTransformableDocument();
         }
@@ -357,28 +409,28 @@ namespace Tests.Diagnostics
         }
 
         // System.Xml.XmlDataDocument
-        protected void XmlDataDocument()
+        protected void XmlDataDocumentTest()
         {
             XmlDataDocument doc = new XmlDataDocument();
             doc.XmlResolver = null;
         }
 
         // System.Configuration.ConfigXmlDocument
-        protected void ConfigXmlDocument()
+        protected void ConfigXmlDocumentTest()
         {
             ConfigXmlDocument doc = new ConfigXmlDocument();
             doc.XmlResolver = null;
         }
 
         // Microsoft.Web.XmlTransform.XmlFileInfoDocument
-        protected void XmlFileInfoDocument()
+        protected void XmlFileInfoDocumentTest()
         {
             XmlFileInfoDocument doc = new XmlFileInfoDocument();
             doc.XmlResolver = null;
         }
 
         // Microsoft.Web.XmlTransform.XmlTransformableDocument
-        protected void XmlTransformableDocument_1()
+        protected void XmlTransformableDocumentTest()
         {
             XmlTransformableDocument doc = new XmlTransformableDocument();
             doc.XmlResolver = null;

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -72,5 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsAllowedValue(object constantValue) =>
             constantValue is bool value && value;
+
+        protected override bool IsAllowedValue(ISymbol symbol) => false;
     }
 }

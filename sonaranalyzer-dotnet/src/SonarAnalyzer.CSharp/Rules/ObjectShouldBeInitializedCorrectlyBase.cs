@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -57,6 +57,12 @@ namespace SonarAnalyzer.Rules
         /// </summary>
         /// <returns>True when <paramref name="constantValue"/> is an allowed value, otherwise false.</returns>
         protected abstract bool IsAllowedValue(object constantValue);
+
+        /// <summary>
+        /// Tests if the provided <paramref name="expressionSyntax"/> is equal to allowed value.
+        /// </summary>
+        /// <returns>True when <paramref name="expressionSyntax"/> is an allowed value, otherwise false.</returns>
+        protected abstract bool IsAllowedValue(ISymbol symbol);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -138,9 +144,26 @@ namespace SonarAnalyzer.Rules
         /// </summary>
         /// <returns>True if the expression is a constant equal to allowed value,
         /// otherwise false.</returns>
-        protected bool IsAllowedValue(ExpressionSyntax expression, SemanticModel semanticModel) =>
-            expression != null &&
-            IsAllowedValue(semanticModel.GetConstantValue(expression).Value);
+        protected bool IsAllowedValue(ExpressionSyntax expression, SemanticModel semanticModel)
+        {
+            if (expression == null)
+            {
+                return false;
+            }
+            if (expression.IsKind(SyntaxKind.NullLiteralExpression))
+            {
+                return true;
+            }
+            if (semanticModel.GetConstantValue(expression).Value is object constantValue)
+            {
+                return IsAllowedValue(constantValue);
+            }
+            if (semanticModel.GetSymbolInfo(expression).Symbol is ISymbol symbol)
+            {
+                return IsAllowedValue(symbol);
+            }
+            return false;
+        }
 
         /// <summary>
         /// Tests if the provided expression is the <see cref="TrackedTypes"/> by calling GetTypeInfo.
