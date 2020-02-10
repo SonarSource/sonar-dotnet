@@ -41,6 +41,14 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
+        private static ImmutableArray<KnownType> UnsafeXmlResolvers { get; } = ImmutableArray.Create(
+                KnownType.System_Xml_XmlUrlResolver,
+                KnownType.System_Xml_Resolvers_XmlPreloadedResolver
+        );
+
+        // The value of System.Xml.DtdProcessing.Parse
+        private const int DtdProcessingParse = 2;
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             (new XmlDocumentShouldBeSafe()).InternalInitialize(context);
@@ -60,14 +68,9 @@ namespace SonarAnalyzer.Rules.CSharp
         [SuppressMessage("AnalyzerCorrectness", "RS1001:Missing diagnostic analyzer attribute.", Justification = "This is not a different diagnostic.")]
         private class XmlDocumentShouldBeSafe : ObjectShouldBeInitializedCorrectlyBase
         {
-            private static ImmutableArray<KnownType> UnsafeXmlResolvers { get; } = ImmutableArray.Create(
-                KnownType.System_Xml_XmlUrlResolver,
-                KnownType.System_Xml_Resolvers_XmlPreloadedResolver
-            );
-
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-            protected override string TrackedPropertyName => "XmlResolver";
+            protected override bool IsTrackedPropertyName(string propertyName) => "XmlResolver".Equals(propertyName);
 
             internal override ImmutableArray<KnownType> TrackedTypes { get; } = ImmutableArray.Create(
                 KnownType.System_Xml_XmlDocument,
@@ -97,20 +100,30 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-            protected override string TrackedPropertyName => "DtdProcessing";
+            protected override bool IsTrackedPropertyName(string propertyName) => "XmlResolver".Equals(propertyName) || "DtdProcessing".Equals(propertyName);
 
             internal override ImmutableArray<KnownType> TrackedTypes { get; } = ImmutableArray.Create(KnownType.System_Xml_XmlTextReader);
 
             // FIXME create constructor that gets the target framework and IsAllowedValue should consider that
+            protected override bool CtorInitializesTrackedPropertyWithAllowedValue(ArgumentListSyntax argumentList, SemanticModel semanticModel) => true;
+
+            // FIXME create constructor that gets the target framework and IsAllowedValue should consider that
+            protected override bool IsAllowedValue(ISymbol symbol) =>
+                !IsUnsafeXmlResolverConstructor(symbol) &&
+                !symbol.GetSymbolType().IsAny(UnsafeXmlResolvers);
+
             protected override bool IsAllowedValue(object constantValue)
             {
-                throw new System.NotImplementedException();
+                if (constantValue is int integerValue)
+                {
+                    return integerValue != DtdProcessingParse;
+                }
+                return constantValue == null;
             }
 
-            protected override bool IsAllowedValue(ISymbol symbol)
-            {
-                throw new System.NotImplementedException();
-            }
+            private bool IsUnsafeXmlResolverConstructor(ISymbol symbol) =>
+                symbol.Kind == SymbolKind.Method &&
+                symbol.ContainingType.GetSymbolType().IsAny(UnsafeXmlResolvers);
         }
     }
 }

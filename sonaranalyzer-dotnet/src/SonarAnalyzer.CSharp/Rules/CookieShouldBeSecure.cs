@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.Microsoft_AspNetCore_Http_CookieOptions
             );
 
-        protected override string TrackedPropertyName => "Secure";
+        protected override bool IsTrackedPropertyName(string propertyName) => "Secure".Equals(propertyName);
 
         protected override bool IsAllowedValue(object constantValue) =>
             constantValue is bool value && value;

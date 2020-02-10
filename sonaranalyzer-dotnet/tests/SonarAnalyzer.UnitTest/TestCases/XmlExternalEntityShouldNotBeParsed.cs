@@ -84,8 +84,8 @@ namespace Tests.Diagnostics
 
         protected void XmlTextReader_4(XmlNameTable table)
         {
-            XmlTextReader reader = new XmlTextReader("resources/", table); // Noncompliant
-            reader.DtdProcessing = DtdProcessing.Parse;
+            XmlTextReader reader = new XmlTextReader("resources/", table);
+            reader.DtdProcessing = DtdProcessing.Parse; // Noncompliant
         }
 
         // System.Xml.XmlDocument
@@ -443,7 +443,7 @@ namespace Tests.Diagnostics
         protected void XmlNodeReader_1()
         {
             XmlDocument doc = new XmlDocument();
-            doc.XmlResolver = new XmlUrlResolver();
+            doc.XmlResolver = new XmlUrlResolver(); // Noncompliant
             XmlNodeReader reader = new XmlNodeReader(doc);  // safe even though the XmlDocument is not!
         }
 

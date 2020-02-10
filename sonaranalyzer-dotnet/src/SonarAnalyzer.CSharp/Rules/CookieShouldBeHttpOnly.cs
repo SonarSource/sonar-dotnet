@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.Microsoft_AspNetCore_Http_CookieOptions
             );
 
-        protected override string TrackedPropertyName => "HttpOnly";
+        protected override bool IsTrackedPropertyName(string propertyName) => "HttpOnly".Equals(propertyName);
 
         public CookieShouldBeHttpOnly()
             : this(AnalyzerConfiguration.Hotspot)

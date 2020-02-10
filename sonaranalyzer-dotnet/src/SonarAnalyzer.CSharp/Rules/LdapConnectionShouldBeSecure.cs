@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal override ImmutableArray<KnownType> TrackedTypes { get; } = ImmutableArray.Create(KnownType.System_DirectoryServices_DirectoryEntry);
 
-        protected override string TrackedPropertyName => "AuthenticationType";
+        protected override bool IsTrackedPropertyName(string propertyName) => "AuthenticationType".Equals(propertyName);
 
         protected override bool CtorInitializesTrackedPropertyWithAllowedValue(ArgumentListSyntax argumentList, SemanticModel semanticModel) =>
             argumentList == null ||

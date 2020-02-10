@@ -47,10 +47,10 @@ namespace SonarAnalyzer.Rules
         internal abstract ImmutableArray<KnownType> TrackedTypes { get; }
 
         /// <summary>
-        /// Gets the name of the property that has to be set with allowed value in
-        /// order for the object to be initialized correctly.
+        /// Tests the name of the property that has to be set with an allowed value in order for the object to be initialized correctly.
         /// </summary>
-        protected abstract string TrackedPropertyName { get; }
+        /// <returns>True when <paramref name="propertyName"/> is the name of a relevant property, otherwise false.</returns>
+        protected abstract bool IsTrackedPropertyName(string propertyName);
 
         /// <summary>
         /// Tests if the provided <paramref name="constantValue"/> is equal to allowed value.
@@ -236,8 +236,6 @@ namespace SonarAnalyzer.Rules
                 ? initializer.Expressions
                 : Enumerable.Empty<ExpressionSyntax>();
 
-        private bool IsTrackedPropertyName(string propertyName) =>
-             Equals(propertyName, TrackedPropertyName);
 
         private static IEnumerable<StatementSyntax> GetNextStatements(StatementSyntax statement) =>
             statement.Parent.ChildNodes().OfType<StatementSyntax>().SkipWhile(x => x != statement).Skip(1);
