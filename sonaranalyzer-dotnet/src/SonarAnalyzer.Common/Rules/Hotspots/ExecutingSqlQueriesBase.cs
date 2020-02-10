@@ -20,7 +20,6 @@
 
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
-using System.Linq;
 
 namespace SonarAnalyzer.Rules
 {
