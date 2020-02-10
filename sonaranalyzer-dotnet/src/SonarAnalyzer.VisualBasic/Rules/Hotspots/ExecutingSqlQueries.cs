@@ -92,7 +92,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private bool IsInterpolated(IdentifierNameSyntax identifier, SemanticModel semanticModel)
         {
-            var declaringSyntax = GetDeclaringSyntaxNode(identifier, semanticModel);
+            var declaringSyntax = semanticModel.GetDeclaringSyntaxNode(identifier);
 
             if (declaringSyntax.Parent is VariableDeclaratorSyntax variableDeclaratorSyntax)
             {
@@ -116,7 +116,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private bool IsStringMethodInvocation(IdentifierNameSyntax identifier, string methodName, SemanticModel semanticModel)
         {
-            var declaringSyntax = GetDeclaringSyntaxNode(identifier, semanticModel);
+            var declaringSyntax = semanticModel.GetDeclaringSyntaxNode(identifier);
 
             if (declaringSyntax.Parent is VariableDeclaratorSyntax variableDeclaratorSyntax)
             {

@@ -96,14 +96,6 @@ namespace SonarAnalyzer.Rules
                 Conditions.ExceptWhen(ObjectCreationTracker.ArgumentAtIndexIsConst(0)));
         }
 
-        protected SyntaxNode GetDeclaringSyntaxNode(TExpressionSyntax expressionSyntax, SemanticModel semanticModel) =>
-            semanticModel
-                .GetSymbolInfo(expressionSyntax)
-                .Symbol?
-                .DeclaringSyntaxReferences
-                .FirstOrDefault()?
-                .GetSyntax();
-
         protected abstract TExpressionSyntax GetInvocationExpression(SyntaxNode expression);
 
         protected abstract TExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index);

@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private bool IsInterpolated(IdentifierNameSyntax identifier, SemanticModel semanticModel)
         {
-            var declaringSyntax = GetDeclaringSyntaxNode(identifier, semanticModel);
+            var declaringSyntax = semanticModel.GetDeclaringSyntaxNode(identifier);
 
             if (declaringSyntax is VariableDeclaratorSyntax variableDeclaratorSyntax)
             {
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private bool IsStringMethodInvocation(IdentifierNameSyntax identifier, string methodName, SemanticModel semanticModel)
         {
-            var declaringSyntax = GetDeclaringSyntaxNode(identifier, semanticModel);
+            var declaringSyntax = semanticModel.GetDeclaringSyntaxNode(identifier);
 
             if (declaringSyntax is VariableDeclaratorSyntax variableDeclaratorSyntax)
             {
