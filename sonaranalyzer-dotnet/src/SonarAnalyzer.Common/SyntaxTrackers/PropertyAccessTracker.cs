@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Helpers
         #region Syntax-level standard conditions
 
         public PropertyAccessCondition MatchProperty(params MemberDescriptor[] properties) =>
-            (context) =>
+            context =>
                 MemberDescriptor.MatchesAny(context.PropertyName, context.PropertySymbol, false, CaseInsensitiveComparison, properties);
 
         public abstract PropertyAccessCondition MatchGetter();

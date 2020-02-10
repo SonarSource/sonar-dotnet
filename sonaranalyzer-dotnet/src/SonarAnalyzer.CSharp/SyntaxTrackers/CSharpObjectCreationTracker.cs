@@ -32,14 +32,13 @@ namespace SonarAnalyzer.Helpers
         {
         }
 
-        protected override SyntaxKind[] TrackedSyntaxKinds { get; } =
-            new[] { SyntaxKind.ObjectCreationExpression };
+        protected override SyntaxKind[] TrackedSyntaxKinds { get; } = { SyntaxKind.ObjectCreationExpression };
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer { get; } =
             CSharp.CSharpGeneratedCodeRecognizer.Instance;
 
         internal override ObjectCreationCondition ArgumentAtIndexIsConst(int index) =>
-            (context) =>
+            context =>
             {
                 var argumentList = ((ObjectCreationExpressionSyntax)context.Expression).ArgumentList;
                 return argumentList != null &&

@@ -82,15 +82,33 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 !IsConcatenationOfConstants(concatenation, semanticModel)
             );
 
-        protected override bool IsInterpolated(ExpressionSyntax argument) =>
-            argument.IsAnyKind(SyntaxKind.InterpolatedStringExpression);
+        protected override bool IsInterpolated(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            expression switch
+            {
+                null => false,
+                IdentifierNameSyntax identifierNameSyntax => IsInterpolated(identifierNameSyntax, semanticModel),
+                _ => expression.IsKind(SyntaxKind.InterpolatedStringExpression)
+            };
 
-        protected override bool IsStringMethodInvocation(string methodName, ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            return expression is InvocationExpressionSyntax invocation &&
-                invocation.IsMethodInvocation(KnownType.System_String, methodName, semanticModel) &&
-                !AllConstants(invocation.ArgumentList.Arguments.ToList(), semanticModel);
-        }
+        private bool IsInterpolated(IdentifierNameSyntax identifier, SemanticModel semanticModel)
+            => semanticModel.GetDeclaringSyntaxNode(identifier)?.Parent is VariableDeclaratorSyntax variableDeclaratorSyntax &&
+               IsInterpolated(variableDeclaratorSyntax.Initializer?.Value, semanticModel);
+
+        protected override bool IsStringMethodInvocation(string methodName, ExpressionSyntax expression, SemanticModel semanticModel) =>
+            expression switch
+            {
+                InvocationExpressionSyntax invocation => IsStringMethodInvocation(invocation, methodName, semanticModel),
+                IdentifierNameSyntax identifier => IsStringMethodInvocation(identifier, methodName, semanticModel),
+                _ => false
+            };
+
+        private static bool IsStringMethodInvocation(InvocationExpressionSyntax invocation, string methodName, SemanticModel semanticModel) =>
+            invocation.IsMethodInvocation(KnownType.System_String, methodName, semanticModel) &&
+            !AllConstants(invocation.ArgumentList.Arguments.ToList(), semanticModel);
+
+        private bool IsStringMethodInvocation(IdentifierNameSyntax identifier, string methodName, SemanticModel semanticModel)
+            => semanticModel.GetDeclaringSyntaxNode(identifier)?.Parent is VariableDeclaratorSyntax variableDeclaratorSyntax &&
+               IsStringMethodInvocation(methodName, variableDeclaratorSyntax.Initializer?.Value, semanticModel);
 
         private static bool AllConstants(List<ArgumentSyntax> arguments, SemanticModel semanticModel) =>
             arguments.All(a => a.GetExpression().IsConstant(semanticModel));

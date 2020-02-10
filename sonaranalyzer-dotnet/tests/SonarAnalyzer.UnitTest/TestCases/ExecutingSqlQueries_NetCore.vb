@@ -69,19 +69,30 @@ Namespace Tests.Diagnostics
         End Sub
 
         Public Sub ConcatAndFormat(ByVal context As DbContext, ByVal query As String, ParamArray parameters As Object())
+            Dim formatted = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", parameters)
+            Dim concatenated = String.Concat(query, parameters)
+            Dim interpolated = $"SELECT * FROM mytable WHERE mycol={query}"
+
             context.Database.ExecuteSqlCommand(String.Concat(query, parameters)) ' Noncompliant
             context.Database.ExecuteSqlCommand(String.Format(query, parameters)) ' Noncompliant
             context.Database.ExecuteSqlCommand(String.Format("INSERT INTO Users (name) VALUES (""{0}"")", parameters)) ' Noncompliant
             context.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={parameters(0)}") ' Compliant, is sanitized
-            Dim formatted = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", parameters)
-            context.Database.ExecuteSqlCommand(formatted) ' FN
+            context.Database.ExecuteSqlCommand(formatted) ' Noncompliant
+            context.Database.ExecuteSqlCommand(concatenated) ' Noncompliant
+            context.Database.ExecuteSqlCommand(interpolated) ' Noncompliant
+
             context.Database.ExecuteSqlCommandAsync(String.Concat(query, parameters)) ' Noncompliant
             context.Database.ExecuteSqlCommandAsync(String.Format(query, parameters)) ' Noncompliant
             context.Database.ExecuteSqlCommandAsync(String.Format("INSERT INTO Users (name) VALUES (""{0}"")", parameters)) ' Noncompliant
-            Dim concatenated = String.Concat(query, parameters)
-            context.Database.ExecuteSqlCommandAsync(concatenated) ' FN
+            context.Database.ExecuteSqlCommandAsync(formatted) ' Noncompliant
+            context.Database.ExecuteSqlCommandAsync(concatenated) ' Noncompliant
+            context.Database.ExecuteSqlCommandAsync(interpolated) ' Noncompliant
+
             context.Query(Of User)().FromSql(String.Concat(query, parameters)) ' Noncompliant
             context.Query(Of User)().FromSql(String.Format("INSERT INTO Users (name) VALUES (""{0}"")", parameters)) ' Noncompliant
+            context.Query(Of User)().FromSql(formatted) ' Noncompliant
+            context.Query(Of User)().FromSql(concatenated) ' Noncompliant
+            context.Query(Of User)().FromSql(interpolated) ' Noncompliant
         End Sub
 
     End Class

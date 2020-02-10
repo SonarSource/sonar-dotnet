@@ -181,5 +181,28 @@ namespace Tests.Diagnostics
             var command = new SqlCeCommand($"SELECT * FROM mytable WHERE mycol={param}"); // Noncompliant {{Make sure that executing SQL queries is safe here.}}
             command.CommandText = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param); // Noncompliant
         }
+
+        public void Bar(SqlConnection connection, string param)
+        {
+            SqlCommand command;
+            string sensitiveQuery = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);
+            command = new SqlCommand(sensitiveQuery); // Noncompliant
+
+            command.CommandText = sensitiveQuery; // Noncompliant
+
+            string stillSensitive = sensitiveQuery;
+            command.CommandText = stillSensitive; // Noncompliant
+
+            SqlDataAdapter adapter;
+            adapter = new SqlDataAdapter(sensitiveQuery, connection); // Noncompliant
+
+            string x = null;
+            x = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);
+            command.CommandText = x; // FN
+
+            string y;
+            y = sensitiveQuery;
+            command.CommandText = y;  // FN
+        }
     }
 }
