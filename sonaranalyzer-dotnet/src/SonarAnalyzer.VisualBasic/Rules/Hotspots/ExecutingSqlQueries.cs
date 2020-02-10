@@ -91,16 +91,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             };
 
         private bool IsInterpolated(IdentifierNameSyntax identifier, SemanticModel semanticModel)
-        {
-            var declaringSyntax = semanticModel.GetDeclaringSyntaxNode(identifier);
-
-            if (declaringSyntax.Parent is VariableDeclaratorSyntax variableDeclaratorSyntax)
-            {
-                return IsInterpolated(variableDeclaratorSyntax.Initializer.Value, semanticModel);
-            }
-
-            return false;
-        }
+            => semanticModel.GetDeclaringSyntaxNode(identifier)?.Parent is VariableDeclaratorSyntax variableDeclaratorSyntax &&
+               IsInterpolated(variableDeclaratorSyntax.Initializer?.Value, semanticModel);
 
         protected override bool IsStringMethodInvocation(string methodName, ExpressionSyntax expression, SemanticModel semanticModel) =>
             expression switch
@@ -115,16 +107,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             !AllConstants(invocation.ArgumentList.Arguments.ToList(), semanticModel);
 
         private bool IsStringMethodInvocation(IdentifierNameSyntax identifier, string methodName, SemanticModel semanticModel)
-        {
-            var declaringSyntax = semanticModel.GetDeclaringSyntaxNode(identifier);
-
-            if (declaringSyntax.Parent is VariableDeclaratorSyntax variableDeclaratorSyntax)
-            {
-                return IsStringMethodInvocation(methodName, variableDeclaratorSyntax.Initializer.Value, semanticModel);
-            }
-
-            return false;
-        }
+            => semanticModel.GetDeclaringSyntaxNode(identifier)?.Parent is VariableDeclaratorSyntax variableDeclaratorSyntax &&
+               IsStringMethodInvocation(methodName, variableDeclaratorSyntax.Initializer?.Value, semanticModel);
 
         private static bool AllConstants(List<ArgumentSyntax> arguments, SemanticModel semanticModel) =>
             arguments.All(a => a.GetExpression().IsConstant(semanticModel));

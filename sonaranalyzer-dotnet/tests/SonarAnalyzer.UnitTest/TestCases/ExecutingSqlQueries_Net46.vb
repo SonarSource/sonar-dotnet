@@ -63,6 +63,14 @@ Namespace Tests.Diagnostics
             command = New SqlCommand(String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param), connection, transaction, SqlCommandColumnEncryptionSetting.Enabled) ' Noncompliant
             command.CommandText = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param) ' Noncompliant
             Dim adapter = New SqlDataAdapter(String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param), "") ' Noncompliant
+
+            Dim sensitiveQuery = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param)
+            Dim stillSensitive = sensitiveQuery
+            command.CommandText = stillSensitive ' Noncompliant
+
+            Dim x as String
+            x = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param)
+            command.CommandText = x ' FN
         End Sub
 
         Public Sub NonCompliant_Interpolation_SqlCommands(ByVal connection As SqlConnection, ByVal transaction As SqlTransaction, ByVal param As String)

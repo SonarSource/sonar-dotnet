@@ -190,8 +190,15 @@ namespace Tests.Diagnostics
 
             command.CommandText = sensitiveQuery; // Noncompliant
 
+            string stillSensitive = sensitiveQuery;
+            command.CommandText = stillSensitive; // Noncompliant
+
             SqlDataAdapter adapter;
             adapter = new SqlDataAdapter(sensitiveQuery, connection); // Noncompliant
+
+            string x = null;
+            x = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);
+            command.CommandText = x; // FN
         }
     }
 }
