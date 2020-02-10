@@ -12,7 +12,7 @@
   <PropertyGroup>
     <RelativeCBDEFolder>CBDE\</RelativeCBDEFolder>
     <CBDEFolder>$(MSBuildProjectDirectory)\$(RelativeCBDEFolder)</CBDEFolder>
-    <SpecificCBDEVersion>1.0.0.14017</SpecificCBDEVersion>
+    <SpecificCBDEVersion>1.0.0.14843</SpecificCBDEVersion>
   </PropertyGroup>
   <ItemGroup>
     <CBDEUrls Include="http://repox.jfrog.io/repox/sonarsource-public-builds/org/sonarsource/cbde/$(SpecificCBDEVersion)/cbde-windows.$(SpecificCBDEVersion).zip" >
