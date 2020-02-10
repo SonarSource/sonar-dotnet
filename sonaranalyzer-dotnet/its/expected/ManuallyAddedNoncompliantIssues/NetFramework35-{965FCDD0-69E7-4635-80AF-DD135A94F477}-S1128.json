@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework35\Properties\AssemblyInfo.cs",
+"region":  {
+"startLine":  2,
+"startColumn":  1,
+"endLine":  2,
+"endColumn":  39
+}
+}
+}
+]
+}

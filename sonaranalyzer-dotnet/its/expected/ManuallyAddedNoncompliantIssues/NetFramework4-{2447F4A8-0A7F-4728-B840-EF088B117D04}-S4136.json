@@ -7,18 +7,18 @@
 {
 "uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlDocumentTest.cs",
 "region":  {
-"startLine":  32,
+"startLine":  33,
 "startColumn":  31,
-"endLine":  32,
+"endLine":  33,
 "endColumn":  44
 }
 },
 {
 "uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlDocumentTest.cs",
 "region":  {
-"startLine":  50,
+"startLine":  51,
 "startColumn":  31,
-"endLine":  50,
+"endLine":  51,
 "endColumn":  44
 }
 }

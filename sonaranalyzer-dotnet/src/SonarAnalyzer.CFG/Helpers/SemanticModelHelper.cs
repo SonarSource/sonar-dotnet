@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -23,7 +23,8 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.CFG.Helpers
 {
-    internal static class SemanticModelHelper
+    // FIXME move to SonarAnalyzer.Common
+    public static class SemanticModelHelper
     {
         /// <summary>
         /// Starting .NET Framework 4.6.1, we've noticed that LINQ methods aren't resolved properly, so we need to use the CandidateSymbol.

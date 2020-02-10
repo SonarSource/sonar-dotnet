@@ -18,46 +18,37 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Configuration;
+using System.IO;
 using System.Xml;
 
 namespace NetFramework4
 {
-    class XmlDocumentTest
+    public class XmlReaderTest
     {
+        private const string BaseUri = "resources/";
         public static void Main(string[] args)
         {
             // dummy
         }
 
-        protected static void XmlDocument_1(XmlUrlResolver xmlUrlResolver)
+        protected static XmlReader XmlReader_1()
         {
-            var doc = new XmlDocument(); // Noncompliant
-            doc.XmlResolver = xmlUrlResolver; // Noncompliant in all versions - and shown twice
+            var settings = new XmlReaderSettings();
+            settings.ProhibitDtd = false;
+            return XmlReader.Create(new MemoryStream(), settings, BaseUri); // Noncompliant in 3.5
         }
 
-        protected static void XmlDocument_2()
+        protected static void XmlReader_2()
         {
-            new XmlDocument(); // Noncompliant before 4.5.2
+            var settings = new XmlReaderSettings();
+            XmlReader.Create(new MemoryStream(), new XmlReaderSettings(), BaseUri); // ok
         }
 
-        // System.Xml.XmlDocument
-        protected static void XmlDocument_3(XmlSecureResolver xmlSecureResolver)
+        protected static XmlReader XmlReader_3()
         {
-            var doc = new XmlDocument();
-            doc.XmlResolver = xmlSecureResolver;
-        }
-
-        protected static void XmlDocument_1()
-        {
-            var doc = new XmlDocument();
-            doc.XmlResolver = null;
-        }
-
-        // System.Configuration.ConfigXmlDocument
-        protected void ConfigXmlDocumentTest()
-        {
-            ConfigXmlDocument doc = new ConfigXmlDocument(); // Noncompliant
+            var settings = new XmlReaderSettings();
+            settings.ProhibitDtd = true;
+            return XmlReader.Create(new MemoryStream(), settings, BaseUri); // ok
         }
 
     }

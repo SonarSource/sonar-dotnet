@@ -4,45 +4,6 @@
 "id":  "S1118",
 "message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
 "location":  {
-"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlDocumentTest.cs",
-"region":  {
-"startLine":  25,
-"startColumn":  11,
-"endLine":  25,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S1118",
-"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
-"location":  {
-"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlReaderTest.cs",
-"region":  {
-"startLine":  26,
-"startColumn":  11,
-"endLine":  26,
-"endColumn":  24
-}
-}
-},
-{
-"id":  "S1118",
-"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
-"location":  {
-"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlTextReaderTest.cs",
-"region":  {
-"startLine":  25,
-"startColumn":  11,
-"endLine":  25,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S1118",
-"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
-"location":  {
 "uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XPathNavigatorTest.cs",
 "region":  {
 "startLine":  28,

@@ -2,92 +2,92 @@
 "issues":  [
 {
 "id":  "S2755",
-"message":  null,
+"message":  "Disable access to external entities in XML parsing.",
 "location":  {
-"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlReaderTest.cs",
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlDocumentTest.cs",
 "region":  {
-"startLine":  34,
-"startColumn":  20,
-"endLine":  34,
-"endColumn":  75
+"startLine":  35,
+"startColumn":  23,
+"endLine":  35,
+"endColumn":  40
 }
 }
 },
 {
 "id":  "S2755",
-"message":  null,
+"message":  "Disable access to external entities in XML parsing.",
 "location":  {
-"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlReaderTest.cs",
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlDocumentTest.cs",
 "region":  {
-"startLine":  42,
+"startLine":  36,
 "startColumn":  13,
-"endLine":  42,
-"endColumn":  68
+"endLine":  36,
+"endColumn":  45
 }
 }
 },
 {
 "id":  "S2755",
-"message":  null,
+"message":  "Disable access to external entities in XML parsing.",
 "location":  {
-"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlReaderTest.cs",
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlDocumentTest.cs",
 "region":  {
-"startLine":  47,
+"startLine":  41,
 "startColumn":  13,
-"endLine":  47,
-"endColumn":  83
+"endLine":  41,
+"endColumn":  30
 }
 }
 },
 {
 "id":  "S2755",
-"message":  null,
+"message":  "Disable access to external entities in XML parsing.",
 "location":  {
-"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XPathNavigatorTest.cs",
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlDocumentTest.cs",
 "region":  {
-"startLine":  32,
-"startColumn":  58,
-"endLine":  32,
-"endColumn":  85
+"startLine":  60,
+"startColumn":  37,
+"endLine":  60,
+"endColumn":  60
 }
 }
 },
 {
 "id":  "S2755",
-"message":  null,
+"message":  "Disable access to external entities in XML parsing.",
 "location":  {
-"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XPathNavigatorTest.cs",
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlTextReaderTest.cs",
 "region":  {
-"startLine":  33,
-"startColumn":  20,
-"endLine":  33,
-"endColumn":  41
+"startLine":  31,
+"startColumn":  13,
+"endLine":  31,
+"endColumn":  35
 }
 }
 },
 {
 "id":  "S2755",
-"message":  null,
+"message":  "Disable access to external entities in XML parsing.",
 "location":  {
-"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XPathNavigatorTest.cs",
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlTextReaderTest.cs",
 "region":  {
-"startLine":  38,
+"startLine":  43,
 "startColumn":  26,
-"endLine":  38,
-"endColumn":  57
+"endLine":  43,
+"endColumn":  48
 }
 }
 },
 {
 "id":  "S2755",
-"message":  null,
+"message":  "Disable access to external entities in XML parsing.",
 "location":  {
-"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XPathNavigatorTest.cs",
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlTextReaderTest.cs",
 "region":  {
-"startLine":  40,
-"startColumn":  20,
-"endLine":  40,
-"endColumn":  41
+"startLine":  44,
+"startColumn":  13,
+"endLine":  44,
+"endColumn":  43
 }
 }
 }

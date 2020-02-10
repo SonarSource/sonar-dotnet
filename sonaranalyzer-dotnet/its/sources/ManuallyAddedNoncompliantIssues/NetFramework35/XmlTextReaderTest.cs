@@ -26,29 +26,21 @@ namespace NetFramework4
     {
         private const string Url = "resources/";
 
-        protected static XmlTextReader XmlTextReader_after_4_5_2(XmlUrlResolver parameter)
+        protected static void XmlTextReader_1()
         {
-            var reader = new XmlTextReader(Url); // this is safe in .NET 4.5.2+ by default
-            reader.XmlResolver = parameter; // Noncompliant
-            return reader;
+            var reader = new XmlTextReader(Url); // Noncompliant
         }
 
-        protected static void XmlTextReader_before4_5_2_compliant1()
+        protected static void XmlTextReader_2()
         {
             var reader = new XmlTextReader(Url);
-            reader.DtdProcessing = DtdProcessing.Prohibit; // ok
+            reader.ProhibitDtd = true; // ok
         }
 
-        protected static void XmlTextReader_before4_5_2_compliant2()
+        protected static void XmlTextReader_3()
         {
-            XmlTextReader reader = new XmlTextReader(Url);
-            reader.DtdProcessing = DtdProcessing.Ignore; // ok
+            var reader = new XmlTextReader(Url); // Noncompliant in 3.5
+            reader.ProhibitDtd = false;
         }
-
-        protected static XmlTextReader XmlTextReader_after_4_5_2_compliant(XmlUrlResolver parameter)
-        {
-            return new XmlTextReader(Url); // this is safe in .NET 4.5.2+ by default
-        }
-
     }
 }

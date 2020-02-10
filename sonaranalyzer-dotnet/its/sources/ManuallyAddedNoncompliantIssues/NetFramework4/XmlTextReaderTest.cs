@@ -28,12 +28,19 @@ namespace NetFramework4
 
         protected static void XmlTextReader_before_4_5_2(XmlUrlResolver parameter)
         {
-            new XmlTextReader(Url); // Noncompliant according to OWASP guide
+            new XmlTextReader(Url); // Noncompliant
+        }
+
+        // System.Xml.XmlTextReader
+        protected void XmlTextReader_1()
+        {
+            var reader = new XmlTextReader("resources/");
+            reader.XmlResolver = null; // compliant before 4.5.2
         }
 
         protected static XmlTextReader XmlTextReader_after_4_5_2(XmlUrlResolver parameter)
         {
-            var reader = new XmlTextReader(Url); // this is safe in .NET 4.5.2+ by default
+            var reader = new XmlTextReader(Url); // this is safe in .NET 4.5.2+ by default - FP
             reader.XmlResolver = parameter; // Noncompliant
             return reader;
         }
@@ -48,11 +55,6 @@ namespace NetFramework4
         {
             XmlTextReader reader = new XmlTextReader(Url);
             reader.DtdProcessing = DtdProcessing.Ignore; // ok
-        }
-
-        protected static XmlTextReader XmlTextReader_after_4_5_2_compliant(XmlUrlResolver parameter)
-        {
-            return new XmlTextReader(Url); // this is safe in .NET 4.5.2+ by default
         }
 
     }

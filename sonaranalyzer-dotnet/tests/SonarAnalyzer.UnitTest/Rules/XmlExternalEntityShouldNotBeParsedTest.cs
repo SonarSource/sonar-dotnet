@@ -30,9 +30,9 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void XmlExternalEntityShouldNotBeParsed_DotNetFramework()
+        public void XmlExternalEntityShouldNotBeParsed_DotNetFramework_XmlDocument()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\XmlExternalEntityShouldNotBeParsed.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument.cs",
                 new XmlExternalEntityShouldNotBeParsed(),
                 additionalReferences: FrameworkMetadataReference.SystemXml
                     .Concat(FrameworkMetadataReference.SystemData)
@@ -41,18 +41,25 @@ namespace SonarAnalyzer.UnitTest.Rules
                     .ToArray());
         }
 
-        //[TestMethod]
-        //[TestCategory("Rule")]
-        //public void XmlExternalEntityShouldNotBeParsed_DotNetCore()
-        //{
-        //    Verifier.VerifyAnalyzer(@"TestCases\XmlExternalEntityShouldNotBeParsed.cs",
-        //        new XmlExternalEntityShouldNotBeParsed(),
-        //        additionalReferences: NuGetMetadataReference.NETStandardV2_1_0
-        //            .Concat(FrameworkMetadataReference.SystemXmlLinq)
-        //            .Concat(NuGetMetadataReference.MicrosoftWebXdt())
-        //            .ToArray());
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void XmlExternalEntityShouldNotBeParsed_DotNetFramework_XmlTextReader()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader.cs",
+                new XmlExternalEntityShouldNotBeParsed(),
+                additionalReferences: FrameworkMetadataReference.SystemXml.ToArray());
+        }
 
-        //}
+        // FIXME: add tests for the following APIs
+
+        // public void XmlExternalEntityShouldNotBeParsed_DotNetFramework_XmlPathNavigator()
+
+        // public void XmlExternalEntityShouldNotBeParsed_DotNetFramework_XmlReader()
+
+        // public void XmlExternalEntityShouldNotBeParsed_DotNetFramework_AlwaysSafe()
+
+        // The NetCore test should be a smoke test to be sure we raise issues on those libraries
+        // public void XmlExternalEntityShouldNotBeParsed_NetCore()
     }
 }
 

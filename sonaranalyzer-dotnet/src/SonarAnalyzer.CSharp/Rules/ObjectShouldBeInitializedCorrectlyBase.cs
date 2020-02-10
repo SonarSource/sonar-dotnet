@@ -64,6 +64,8 @@ namespace SonarAnalyzer.Rules
         /// <returns>True when <paramref name="expressionSyntax"/> is an allowed value, otherwise false.</returns>
         protected abstract bool IsAllowedValue(ISymbol symbol);
 
+        protected abstract void CompilationAction(Compilation compilation);
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterCompilationStartAction(
@@ -73,6 +75,8 @@ namespace SonarAnalyzer.Rules
                     {
                         return;
                     }
+
+                    CompilationAction(ccc.Compilation);
 
                     ccc.RegisterSyntaxNodeActionInNonGenerated(
                         c =>

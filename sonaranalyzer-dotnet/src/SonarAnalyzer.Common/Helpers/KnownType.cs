@@ -383,6 +383,8 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Xml_XmlNode = new KnownType("System.Xml.XmlNode");
         internal static readonly KnownType System_Xml_XPath_XPathNavigator = new KnownType("System.Xml.XPath.XPathNavigator");
         internal static readonly KnownType System_Xml_XPath_XPathExpression = new KnownType("System.Xml.XPath.XPathExpression");
+        internal static readonly KnownType System_Xml_XmlReader = new KnownType("System.Xml.XmlReader");
+        internal static readonly KnownType System_Xml_XmlReaderSettings = new KnownType("System.Xml.XmlReaderSettings");
         internal static readonly KnownType System_Xml_XmlUrlResolver = new KnownType("System.Xml.XmlUrlResolver");
         internal static readonly KnownType System_Xml_XmlTextReader = new KnownType("System.Xml.XmlTextReader");
         internal static readonly KnownType System_Xml_Resolvers_XmlPreloadedResolver = new KnownType("System.Xml.Resolvers.XmlPreloadedResolver");

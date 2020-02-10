@@ -1,0 +1,46 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'resources/' 4 times.",
+"location":  [
+{
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlReaderTest.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  40,
+"endLine":  28,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlReaderTest.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  60,
+"endLine":  49,
+"endColumn":  72
+}
+},
+{
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlReaderTest.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  60,
+"endLine":  57,
+"endColumn":  72
+}
+},
+{
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlReaderTest.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  60,
+"endLine":  64,
+"endColumn":  72
+}
+}
+]
+}
+]
+}

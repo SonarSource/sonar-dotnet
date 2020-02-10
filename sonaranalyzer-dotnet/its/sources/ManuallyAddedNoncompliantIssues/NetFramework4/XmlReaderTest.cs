@@ -41,8 +41,30 @@ namespace NetFramework4
             settings.XmlResolver = new XmlUrlResolver(); // by default in 4.5.2+, it is null
             XmlReader.Create(new MemoryStream(), settings, BaseUri); // Noncompliant after 4.5.2
         }
+        protected void XmlReader_3()
+        {
+            XmlReaderSettings settings = new XmlReaderSettings();
+            settings.DtdProcessing = DtdProcessing.Parse;
+            settings.XmlResolver = null;
+            XmlReader.Create(new MemoryStream(), settings, "resources/"); // Noncompliant
+        }
 
-        protected static void XmlReader_3()
+        protected void XmlReader_4()
+        {
+            XmlReaderSettings settings = new XmlReaderSettings();
+            settings.DtdProcessing = DtdProcessing.Prohibit;
+            settings.XmlResolver = new XmlUrlResolver();
+            XmlReader.Create(new MemoryStream(), settings, "resources/"); // ok
+        }
+        protected void XmlReader_5()
+        {
+            XmlReaderSettings settings = new XmlReaderSettings();
+            settings.DtdProcessing = DtdProcessing.Ignore;
+            settings.XmlResolver = new XmlUrlResolver();
+            XmlReader.Create(new MemoryStream(), settings, "resources/"); // ok
+        }
+
+        protected static void XmlReader_6()
         {
             XmlReader.Create(new MemoryStream(), new XmlReaderSettings(), BaseUri); // ok in all versions
         }

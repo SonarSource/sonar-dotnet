@@ -26,11 +26,6 @@ namespace NetFramework4
     {
         private const string Url = "resources/";
 
-        protected static void XmlTextReader_before_4_5_2(XmlUrlResolver parameter)
-        {
-            new XmlTextReader(Url); // Noncompliant according to OWASP guide
-        }
-
         protected static XmlTextReader XmlTextReader_after_4_5_2(XmlUrlResolver parameter)
         {
             var reader = new XmlTextReader(Url); // this is safe in .NET 4.5.2+ by default
