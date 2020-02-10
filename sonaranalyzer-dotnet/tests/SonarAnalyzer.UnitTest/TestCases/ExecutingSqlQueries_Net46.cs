@@ -199,6 +199,10 @@ namespace Tests.Diagnostics
             string x = null;
             x = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);
             command.CommandText = x; // FN
+
+            string y;
+            y = sensitiveQuery;
+            command.CommandText = y;  // FN
         }
     }
 }

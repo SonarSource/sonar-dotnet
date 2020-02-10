@@ -71,6 +71,10 @@ Namespace Tests.Diagnostics
             Dim x as String
             x = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param)
             command.CommandText = x ' FN
+
+            Dim y as String
+            y = sensitiveQuery
+            command.CommandText = y ' FN
         End Sub
 
         Public Sub NonCompliant_Interpolation_SqlCommands(ByVal connection As SqlConnection, ByVal transaction As SqlTransaction, ByVal param As String)
