@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -95,7 +96,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckForDeadStores(CSharpSyntaxNode node, ISymbol declaration, SyntaxNodeAnalysisContext context)
         {
-            if (declaration == null || !CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out var cfg))
+            if (declaration == null ||
+                node == null ||
+                // Currently the tuple expressions are not supported and this is known to cause false positives.
+                // Please check:
+                // - community feedback: https://github.com/SonarSource/sonar-dotnet/issues/3094
+                // - implementation ticket: https://github.com/SonarSource/sonar-dotnet/issues/2933
+                node.DescendantNodes().AnyOfKind(SyntaxKindEx.TupleExpression) ||
+                !CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out var cfg))
             {
                 return;
             }

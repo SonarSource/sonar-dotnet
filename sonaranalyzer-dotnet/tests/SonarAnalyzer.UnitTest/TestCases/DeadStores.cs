@@ -869,9 +869,13 @@ namespace Tests.Diagnostics
     {
         public static (int foo, int bar) M(string text)
         {
-            int b = int.Parse(text); // Noncompliant -- false positive
+            int b = int.Parse(text);
             return (1, b);
         }
-    }
 
+        public void UnusedTuple_FalseNegative()
+        {
+            (int x, int y) t = (1, 2); // Compliant - FN, tuples are not yet covered: https://github.com/SonarSource/sonar-dotnet/issues/2933
+        }
+    }
 }
