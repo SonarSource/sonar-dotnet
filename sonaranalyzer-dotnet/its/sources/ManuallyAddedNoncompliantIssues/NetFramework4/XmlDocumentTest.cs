@@ -21,7 +21,7 @@
 using System.Configuration;
 using System.Xml;
 
-namespace NetFramework4
+namespace Test
 {
     class XmlDocumentTest
     {

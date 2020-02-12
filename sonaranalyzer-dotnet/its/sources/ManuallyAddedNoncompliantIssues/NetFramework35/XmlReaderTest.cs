@@ -21,7 +21,7 @@
 using System.IO;
 using System.Xml;
 
-namespace NetFramework4
+namespace Test
 {
     public class XmlReaderTest
     {

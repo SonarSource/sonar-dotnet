@@ -23,7 +23,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.XPath;
 
-namespace NetFramework4
+namespace Test
 {
     class XPathNavigatorTest
     {
