@@ -18,9 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -33,9 +33,6 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class XmlExternalEntityShouldNotBeParsed : SonarDiagnosticAnalyzer
     {
-        // For the XXE rule we actually need to know about .NET 4.5.2,
-        // but it is good enough given the other .NET 4.x do not have support anymore
-
         internal const string DiagnosticId = "S2755";
         private const string MessageFormat = "Disable access to external entities in XML parsing.";
 
@@ -51,6 +48,8 @@ namespace SonarAnalyzer.Rules.CSharp
         // The value of System.Xml.DtdProcessing.Parse
         private const int DtdProcessingParse = 2;
 
+        // For the XXE rule we actually need to know about .NET 4.5.2,
+        // but it is good enough given the other .NET 4.x do not have support anymore
         private INetFrameworkVersionProvider VersionProvider;
 
         public XmlExternalEntityShouldNotBeParsed()
@@ -130,7 +129,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-            protected override bool IsTrackedPropertyName(string propertyName) => "XmlResolver".Equals(propertyName) || "DtdProcessing".Equals(propertyName);
+            private static readonly ISet<string> TrackedProperties = new HashSet<string>
+            {
+                "XmlResolver", // should be null
+                "DtdProcessing", // should not be Parse
+                "ProhibitDtd" // should be true in .NET 3.5
+            }.ToImmutableHashSet();
+
+            protected override bool IsTrackedPropertyName(string propertyName) => TrackedProperties.Contains(propertyName);
 
             internal override ImmutableArray<KnownType> TrackedTypes { get; } = ImmutableArray.Create(KnownType.System_Xml_XmlTextReader);
 
@@ -151,11 +157,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
             protected override bool IsAllowedValue(object constantValue)
             {
+                if (constantValue == null)
+                {
+                    return true;
+                }
                 if (constantValue is int integerValue)
                 {
                     return integerValue != DtdProcessingParse;
                 }
-                return constantValue == null;
+                return constantValue is bool && (bool)constantValue;
             }
 
             protected override void CompilationAction(Compilation compilation)

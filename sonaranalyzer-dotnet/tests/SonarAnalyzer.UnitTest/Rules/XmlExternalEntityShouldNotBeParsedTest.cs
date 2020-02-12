@@ -22,18 +22,30 @@ extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using System.Linq;
+using Moq;
+using SonarAnalyzer.Helpers;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
     public class XmlExternalEntityShouldNotBeParsedTest
     {
-        [TestMethod]
+        [DataRow(NetFrameworkVersion.After45, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument.cs")]
+        [DataRow(NetFrameworkVersion.Below4, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument_Net35.cs")]
+        [DataRow(NetFrameworkVersion.Between4And45, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument_Net4.cs")]
+        [DataRow(NetFrameworkVersion.Unknown, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument_UnknownFrameworkVersion.cs")]
+        [DataTestMethod]
         [TestCategory("Rule")]
-        public void XmlExternalEntityShouldNotBeParsed_DotNetFramework_XmlDocument()
+        public void XmlExternalEntityShouldNotBeParsed_XmlDocument(NetFrameworkVersion version, string testFilePath)
         {
-            Verifier.VerifyAnalyzer(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument.cs",
-                new XmlExternalEntityShouldNotBeParsed(),
+            var versionProviderMock = new Mock<INetFrameworkVersionProvider>();
+            versionProviderMock
+                .Setup(vp => vp.GetDotNetFrameworkVersion(It.IsAny<Compilation>()))
+                .Returns(version);
+
+            Verifier.VerifyAnalyzer(testFilePath,
+                new XmlExternalEntityShouldNotBeParsed(versionProviderMock.Object),
                 additionalReferences: FrameworkMetadataReference.SystemXml
                     .Concat(FrameworkMetadataReference.SystemData)
                     .Concat(FrameworkMetadataReference.SystemXmlLinq)
@@ -41,12 +53,21 @@ namespace SonarAnalyzer.UnitTest.Rules
                     .ToArray());
         }
 
-        [TestMethod]
+        [DataRow(NetFrameworkVersion.After45, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader.cs")]
+        [DataRow(NetFrameworkVersion.Below4, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_Net35.cs")]
+        [DataRow(NetFrameworkVersion.Between4And45, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_Net4.cs")]
+        [DataRow(NetFrameworkVersion.Unknown, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_UnknownFrameworkVersion.cs")]
+        [DataTestMethod]
         [TestCategory("Rule")]
-        public void XmlExternalEntityShouldNotBeParsed_DotNetFramework_XmlTextReader()
+        public void XmlExternalEntityShouldNotBeParsed_XmlTextReader(NetFrameworkVersion version, string testFilePath)
         {
-            Verifier.VerifyAnalyzer(@"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader.cs",
-                new XmlExternalEntityShouldNotBeParsed(),
+            var versionProviderMock = new Mock<INetFrameworkVersionProvider>();
+            versionProviderMock
+                .Setup(vp => vp.GetDotNetFrameworkVersion(It.IsAny<Compilation>()))
+                .Returns(version);
+
+            Verifier.VerifyAnalyzer(testFilePath,
+                new XmlExternalEntityShouldNotBeParsed(versionProviderMock.Object),
                 additionalReferences: FrameworkMetadataReference.SystemXml.ToArray());
         }
 

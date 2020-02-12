@@ -37,7 +37,7 @@ namespace Test
 
         protected static void XmlDocument_2()
         {
-            new XmlDocument(); // Noncompliant before 4.5.2
+            new XmlDocument();
         }
 
         // System.Xml.XmlDocument

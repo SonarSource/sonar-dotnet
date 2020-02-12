@@ -19,9 +19,9 @@
 "location":  {
 "uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework35\XmlTextReaderTest.cs",
 "region":  {
-"startLine":  36,
+"startLine":  42,
 "startColumn":  26,
-"endLine":  36,
+"endLine":  42,
 "endColumn":  48
 }
 }
@@ -32,10 +32,10 @@
 "location":  {
 "uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework35\XmlTextReaderTest.cs",
 "region":  {
-"startLine":  42,
-"startColumn":  26,
-"endLine":  42,
-"endColumn":  48
+"startLine":  43,
+"startColumn":  13,
+"endLine":  43,
+"endColumn":  39
 }
 }
 }
