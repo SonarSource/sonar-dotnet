@@ -243,4 +243,24 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    // See https://github.com/SonarSource/sonar-dotnet/issues/3110
+    public class Repro_3110
+    {
+        public int DoSomething(object value)
+        {
+            if (!(value is bool valueBool))
+                return -1;
+
+            if (valueBool)  // Noncompliant, FP - valueBool can be true or false
+            {
+                return 42;
+            }
+            else
+            { // Secondary, FN
+                return 0;
+            }
+        }
+    }
+
 }
