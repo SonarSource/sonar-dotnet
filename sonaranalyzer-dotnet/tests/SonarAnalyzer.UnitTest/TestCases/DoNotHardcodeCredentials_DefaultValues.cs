@@ -71,6 +71,7 @@ namespace Tests.Diagnostics
             string query3 = "password=:param";
             string query4 = "password='"+pwd+"'";
             string query5 = "password={0}";
+            string query6 = @"Server=myServerName\myInstanceName;Database=myDataBase;Password=:myPassword;User Id=:username;";
         }
     }
 

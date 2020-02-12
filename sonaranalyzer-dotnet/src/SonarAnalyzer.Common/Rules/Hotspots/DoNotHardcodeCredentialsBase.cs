@@ -53,8 +53,10 @@ namespace SonarAnalyzer.Rules
                 this.splitCredentialWords = value.ToUpperInvariant()
                     .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                     .Select(x => x.Trim())
+                    .Select(Regex.Escape)
                     .ToList();
-                this.passwordValuePattern = new Regex(string.Format(@"\b(?<password>{0})\b[:=](?!\?|:|\{{[0-9]*\}})\S",
+
+                this.passwordValuePattern = new Regex(string.Format(@"\b(?<password>{0})\s*[:=]\s*(?<suffix>.*)$",
                     string.Join("|", this.splitCredentialWords)), RegexOptions.Compiled | RegexOptions.IgnoreCase);
             }
         }
@@ -99,6 +101,7 @@ namespace SonarAnalyzer.Rules
         protected abstract class CredentialWordsFinderBase<TSyntaxNode>
              where TSyntaxNode : SyntaxNode
         {
+            private readonly Regex validParameterPattern = new Regex(@"^\?|:\w+|\{\d+[^}]*\}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             private readonly DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer;
 
             protected CredentialWordsFinderBase(DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer)
@@ -148,12 +151,29 @@ namespace SonarAnalyzer.Rules
                 var matches = analyzer.passwordValuePattern.Matches(variableValue);
                 foreach (Match match in matches)
                 {
-                    credentialWordsFound.Add(match.Groups["password"].Value);
+                    if (!match.Success)
+                    {
+                        continue;
+                    }
+
+                    if (!IsValidParameter(match.Groups["suffix"].Value))
+                    {
+                        credentialWordsFound.Add(match.Groups["password"].Value);
+                    }
                 }
 
                 // Rule was initially implemented with everything lower (which is wrong) so we have to force lower
                 // before reporting to avoid new issues to appear on SQ/SC.
                 return credentialWordsFound.Select(x => x.ToLowerInvariant());
+            }
+
+            private bool IsValidParameter(string suffix)
+            {
+                var candidateParameter = suffix
+                    .Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries)
+                    .FirstOrDefault();
+
+                return candidateParameter == null || validParameterPattern.IsMatch(suffix);
             }
         }
     }
