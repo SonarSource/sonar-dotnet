@@ -19,48 +19,52 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.IO;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Threading;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeGen;
-using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Emit;
-using Microsoft.CodeAnalysis.Symbols;
-using Roslyn.Utilities;
 
 namespace SonarAnalyzer.Helpers
 {
+    /// <summary>
+    /// This class provides an approximation of the .NET Framework version of the Compilation.
+    /// </summary>
+    /// <remarks>
+    /// This class has been added for the requirements of the S2755 C# implementation, so it is quite limited.
+    /// </remarks>
     public class NetFrameworkVersionProvider : INetFrameworkVersionProvider
     {
-        public static NetFrameworkVersionProvider Instance = new NetFrameworkVersionProvider();
-
-        // The following is based on https://docs.microsoft.com/en-us/dotnet/framework/whats-new/obsolete-types#xml
         public NetFrameworkVersion GetDotNetFrameworkVersion(Compilation compilation)
         {
             if (compilation == null)
             {
                 return NetFrameworkVersion.Unknown;
             }
-            var xmlTextReaderSymbol = compilation.GetTypeByMetadataName("System.Xml.XmlTextReader");
-            var containingAssemblyName = xmlTextReaderSymbol?.ContainingAssembly.Identity.Name;
-            if (containingAssemblyName == null || !containingAssemblyName.Equals("System.Xml"))
+
+            /// See https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/ee471421(v=vs.100)
+            var debuggerSymbol = compilation.GetTypeByMetadataName("System.Diagnostics.Debugger");
+
+            var containingAssemblyName = debuggerSymbol?.ContainingAssembly.Identity.Name;
+            if (containingAssemblyName == null ||
+                !containingAssemblyName.Equals("mscorlib", StringComparison.OrdinalIgnoreCase))
             {
-                // it is not .NET Framework; maybe it is .NET Standard or .NET Core
+                // it could be .NET Core or .NET Standard
                 return NetFrameworkVersion.Unknown;
             }
 
-            if (xmlTextReaderSymbol.GetMembers("DtdProcessing").IsEmpty)
+            var debuggerConstructorSymbol = debuggerSymbol.GetMembers(".ctor").FirstOrDefault();
+            if (debuggerConstructorSymbol == null)
             {
-                // DtdProcessing has been introduced in .NET Framework 4
+                // e.g. .NET Standard or maybe another .NET distribution
+                return NetFrameworkVersion.Unknown;
+            }
+
+            if (!debuggerConstructorSymbol.GetAttributes().Any(attribute => attribute.AttributeClass.Name.Equals("ObsoleteAttribute")))
+            {
+                // the constructor was still not deprecated in .NET Framework 3.5
                 return NetFrameworkVersion.Below4;
             }
 
-            // https://docs.microsoft.com/en-us/dotnet/framework/whats-new/obsolete-types#mscorlib
-            // System.Diagnostics.Contracts.Internal.ContractHelper was not obsolete in 4.0 but became obsolete in 4.5
+            // See https://docs.microsoft.com/en-us/dotnet/framework/whats-new/obsolete-types#mscorlib
+            // ContractHelper was not obsolete in 4.0 but became obsolete in 4.5
             var contractHelperSymbol = compilation.GetTypeByMetadataName("System.Diagnostics.Contracts.Internal.ContractHelper");
             if (contractHelperSymbol.GetAttributes().Any(attribute => attribute.AttributeClass.Name.Equals("ObsoleteAttribute")))
             {

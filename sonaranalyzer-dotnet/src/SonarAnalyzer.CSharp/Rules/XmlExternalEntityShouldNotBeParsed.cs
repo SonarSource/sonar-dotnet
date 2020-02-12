@@ -50,10 +50,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         // For the XXE rule we actually need to know about .NET 4.5.2,
         // but it is good enough given the other .NET 4.x do not have support anymore
-        private INetFrameworkVersionProvider VersionProvider;
+        private readonly INetFrameworkVersionProvider VersionProvider;
 
         public XmlExternalEntityShouldNotBeParsed()
-            : this(NetFrameworkVersionProvider.Instance)
+            : this(new NetFrameworkVersionProvider())
         {
         }
 
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private NetFrameworkVersion NetFrameworkVersion;
 
-            private INetFrameworkVersionProvider VersionProvider;
+            private readonly INetFrameworkVersionProvider VersionProvider;
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
@@ -125,7 +125,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private NetFrameworkVersion NetFrameworkVersion;
 
-            private INetFrameworkVersionProvider VersionProvider;
+            private readonly INetFrameworkVersionProvider VersionProvider;
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 

@@ -22,7 +22,7 @@ namespace SonarAnalyzer.Helpers
 {
     public enum NetFrameworkVersion
     {
-        // either cannot tell, either is is .NET Core or .NET Standard
+        // cannot tell
         Unknown,
         // below .NET 4.0
         Below4,
