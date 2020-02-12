@@ -63,6 +63,15 @@ namespace Tests.Diagnostics
             new PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1); // Noncompliant
             new PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1, cspParams); // Noncompliant
         }
+
+        public void CompliantParameterUse(string pwd)
+        {
+            string query1 = "password=?";
+            string query2 = "password=:password";
+            string query3 = "password=:param";
+            string query4 = "password='"+pwd+"'";
+            string query5 = "password={0}";
+        }
     }
 
     class FalseNegatives

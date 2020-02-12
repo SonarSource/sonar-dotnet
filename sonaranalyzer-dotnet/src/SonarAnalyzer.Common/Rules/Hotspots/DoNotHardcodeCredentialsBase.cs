@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules
                     .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                     .Select(x => x.Trim())
                     .ToList();
-                this.passwordValuePattern = new Regex(string.Format(@"\b(?<password>{0})\b[:=]\S",
+                this.passwordValuePattern = new Regex(string.Format(@"\b(?<password>{0})\b[:=](?!\?|:|\{{[0-9]*\}})\S",
                     string.Join("|", this.splitCredentialWords)), RegexOptions.Compiled | RegexOptions.IgnoreCase);
             }
         }
