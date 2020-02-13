@@ -111,7 +111,7 @@ namespace Tests.Diagnostics
     }
 
     //See https://github.com/SonarSource/sonar-dotnet/issues/2957
-    public class Repro_2957 // FN, it should raise the issue
+    public class Repro_2957 // Noncompliant {{Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_disposable'.}}
     {
         private readonly IDisposable _disposable;
 
