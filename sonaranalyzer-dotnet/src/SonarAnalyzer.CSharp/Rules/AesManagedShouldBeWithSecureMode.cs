@@ -40,12 +40,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal override ImmutableArray<KnownType> TrackedTypes { get; } = ImmutableArray.Create(KnownType.System_Security_Cryptography_AesManaged);
 
-        protected override bool IsTrackedPropertyName(string propertyName) => "Mode".Equals(propertyName);
+        protected override bool IsTrackedPropertyName(string propertyName) => "Mode" == propertyName;
 
         protected override bool IsAllowedValue(object constantValue) => false;
 
         protected override bool IsAllowedValue(ISymbol symbol) => false;
-
-        protected override void CompilationAction(Compilation compilation) { }
     }
 }

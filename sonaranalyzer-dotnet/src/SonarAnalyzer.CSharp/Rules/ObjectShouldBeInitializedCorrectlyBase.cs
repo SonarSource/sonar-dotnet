@@ -64,7 +64,10 @@ namespace SonarAnalyzer.Rules
         /// <returns>True when <paramref name="expressionSyntax"/> is an allowed value, otherwise false.</returns>
         protected abstract bool IsAllowedValue(ISymbol symbol);
 
-        protected abstract void CompilationAction(Compilation compilation);
+        /// <summary>
+        /// This can be overriden if the derived class needs access to the Compilation.
+        /// </summary>
+        protected virtual void CompilationAction(Compilation compilation) { }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -158,11 +161,11 @@ namespace SonarAnalyzer.Rules
             {
                 return true;
             }
-            if (semanticModel.GetConstantValue(expression).Value is object constantValue)
+            if (semanticModel.GetConstantValue(expression).Value is { } constantValue)
             {
                 return IsAllowedValue(constantValue);
             }
-            if (semanticModel.GetSymbolInfo(expression).Symbol is ISymbol symbol)
+            if (semanticModel.GetSymbolInfo(expression).Symbol is { } symbol)
             {
                 return IsAllowedValue(symbol);
             }

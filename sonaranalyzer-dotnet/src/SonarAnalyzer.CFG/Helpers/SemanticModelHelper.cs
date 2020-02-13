@@ -36,7 +36,7 @@ namespace SonarAnalyzer.CFG.Helpers
         /// The first candidate symbol if resolution failed.
         /// Null if no symbol was found.
         /// </returns>
-        public static ISymbol GetSymbolOrCandidateSymbol(this SemanticModel model, SyntaxNode node)
+        internal static ISymbol GetSymbolOrCandidateSymbol(this SemanticModel model, SyntaxNode node)
         {
             var symbolInfo = model.GetSymbolInfo(node);
             if (symbolInfo.Symbol != null)

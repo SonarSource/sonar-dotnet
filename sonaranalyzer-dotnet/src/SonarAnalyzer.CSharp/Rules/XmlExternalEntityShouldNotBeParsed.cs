@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-            protected override bool IsTrackedPropertyName(string propertyName) => "XmlResolver".Equals(propertyName);
+            protected override bool IsTrackedPropertyName(string propertyName) => "XmlResolver" == propertyName;
 
             internal override ImmutableArray<KnownType> TrackedTypes { get; } = ImmutableArray.Create(
                 KnownType.System_Xml_XmlDocument,
@@ -140,7 +140,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             internal override ImmutableArray<KnownType> TrackedTypes { get; } = ImmutableArray.Create(KnownType.System_Xml_XmlTextReader);
 
-            // FIXME create constructor that gets the target framework and IsAllowedValue should consider that
             protected override bool CtorInitializesTrackedPropertyWithAllowedValue(ArgumentListSyntax argumentList, SemanticModel semanticModel) =>
                 NetFrameworkVersion switch
                 {
@@ -150,7 +149,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     _ => true
                 };
 
-            // FIXME create constructor that gets the target framework and IsAllowedValue should consider that
             protected override bool IsAllowedValue(ISymbol symbol) =>
                 !IsUnsafeXmlResolverConstructor(symbol) &&
                 !symbol.GetSymbolType().IsAny(UnsafeXmlResolvers);
