@@ -42,11 +42,6 @@ namespace SonarAnalyzer.Rules
         {
         }
 
-        /// <summary>
-        /// Gets the KnownType representing the type on which instances the rule will raise issues on.
-        /// </summary>
-        internal abstract ImmutableArray<KnownType> TrackedTypes { get; }
-
         protected abstract CSharpObjectInitializationTracker objectInitializationTracker { get; }
 
         /// <summary>
@@ -72,7 +67,7 @@ namespace SonarAnalyzer.Rules
                         {
                             var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
 
-                            if (IsTrackedType(objectCreation, c.SemanticModel) &&
+                            if (objectInitializationTracker.IsTrackedType(objectCreation, c.SemanticModel) &&
                                 !ObjectCreatedWithAllowedValue(objectCreation, c.SemanticModel) &&
                                 !IsLaterAssignedWithAllowedValue(objectCreation, c.SemanticModel))
                             {
@@ -101,12 +96,6 @@ namespace SonarAnalyzer.Rules
         }
 
         /// <summary>
-        /// Tests if the provided <paramref name="expressionSyntax"/> is equal to allowed value.
-        /// </summary>
-        /// <returns>True when <paramref name="expressionSyntax"/> is an allowed value, otherwise false.</returns>
-        protected virtual bool IsAllowedValue(ISymbol symbol) => false;
-
-        /// <summary>
         /// This can be overriden if the derived class needs access to the Compilation.
         /// </summary>
         protected virtual void CompilationAction(Compilation compilation) { }
@@ -119,7 +108,7 @@ namespace SonarAnalyzer.Rules
         protected virtual bool IsPropertyOnTrackedType(ExpressionSyntax expression, SemanticModel semanticModel) =>
             expression is MemberAccessExpressionSyntax memberAccess &&
             memberAccess.Expression != null &&
-            IsTrackedType(memberAccess.Expression, semanticModel);
+            objectInitializationTracker.IsTrackedType(memberAccess.Expression, semanticModel);
 
         /// <summary>
         /// Tests it the provided <paramref name="argumentList"/> contains initialization of the <see cref="TrackedPropertyName"/>
@@ -163,18 +152,10 @@ namespace SonarAnalyzer.Rules
             }
             if (semanticModel.GetSymbolInfo(expression).Symbol is { } symbol)
             {
-                return IsAllowedValue(symbol);
+                return objectInitializationTracker.IsAllowedObject(symbol);
             }
             return false;
         }
-
-        /// <summary>
-        /// Tests if the provided expression is the <see cref="TrackedTypes"/> by calling GetTypeInfo.
-        /// </summary>
-        /// <returns>True when the expression if the <see cref="TrackedTypes"/>, otherwise false.</returns>
-        protected bool IsTrackedType(ExpressionSyntax expression, SemanticModel semanticModel) =>
-            semanticModel.GetTypeInfo(expression).Type
-                .IsAny(TrackedTypes);
 
         private bool ObjectCreatedWithAllowedValue(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
         {

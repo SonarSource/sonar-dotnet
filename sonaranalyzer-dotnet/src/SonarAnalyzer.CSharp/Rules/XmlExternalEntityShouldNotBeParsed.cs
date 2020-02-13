@@ -50,6 +50,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 symbol.Kind == SymbolKind.Method &&
                 symbol.ContainingType.GetSymbolType().IsAny(UnsafeXmlResolvers);
 
+        private static bool IsAllowedObject(ISymbol symbol) =>
+            !IsUnsafeXmlResolverConstructor(symbol) &&
+            !symbol.GetSymbolType().IsAny(UnsafeXmlResolvers);
+
         // The value of System.Xml.DtdProcessing.Parse
         private const int DtdProcessingParse = 2;
 
@@ -78,9 +82,19 @@ namespace SonarAnalyzer.Rules.CSharp
         [SuppressMessage("AnalyzerCorrectness", "RS1001:Missing diagnostic analyzer attribute.", Justification = "This is not a different diagnostic.")]
         private class XmlDocumentShouldBeSafe : XmlApiShouldBeInitializedCorrectlyBase
         {
+            private static readonly ImmutableArray<KnownType> TrackedTypes = ImmutableArray.Create(
+                KnownType.System_Xml_XmlDocument,
+                KnownType.System_Xml_XmlDataDocument,
+                KnownType.System_Configuration_ConfigXmlDocument,
+                KnownType.Microsoft_Web_XmlTransform_XmlFileInfoDocument,
+                KnownType.Microsoft_Web_XmlTransform_XmlTransformableDocument
+            );
+
             protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
                     // we do not expect any constant values for XmlResolver
-                    isAllowedConstantValue: constantValue => true
+                    isAllowedConstantValue: constantValue => true,
+                    trackedTypes: TrackedTypes,
+                    isAllowedObject: symbol => IsAllowedObject(symbol)
             );
 
             public XmlDocumentShouldBeSafe(INetFrameworkVersionProvider netFrameworkVersionProvider)
@@ -89,14 +103,6 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-            internal override ImmutableArray<KnownType> TrackedTypes { get; } = ImmutableArray.Create(
-                KnownType.System_Xml_XmlDocument,
-                KnownType.System_Xml_XmlDataDocument,
-                KnownType.System_Configuration_ConfigXmlDocument,
-                KnownType.Microsoft_Web_XmlTransform_XmlFileInfoDocument,
-                KnownType.Microsoft_Web_XmlTransform_XmlTransformableDocument
-            );
 
             protected override bool IsTrackedPropertyName(string propertyName) => "XmlResolver" == propertyName;
 
@@ -119,8 +125,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 "ProhibitDtd" // should be true in .NET 3.5
             );
 
+            private static readonly ImmutableArray<KnownType> TrackedTypes = ImmutableArray.Create(KnownType.System_Xml_XmlTextReader);
+
             protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
-                    isAllowedConstantValue: constantValue => IsAllowedValue(constantValue)
+                    isAllowedConstantValue: constantValue => IsAllowedValue(constantValue),
+                    trackedTypes: TrackedTypes,
+                    isAllowedObject: symbol => IsAllowedObject(symbol)
             );
 
             private static bool IsAllowedValue(object constantValue)
@@ -142,8 +152,6 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-            internal override ImmutableArray<KnownType> TrackedTypes { get; } = ImmutableArray.Create(KnownType.System_Xml_XmlTextReader);
 
             protected override bool IsTrackedPropertyName(string propertyName) => TrackedProperties.Contains(propertyName);
 
@@ -177,9 +185,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 NetFrameworkVersion = VersionProvider.GetDotNetFrameworkVersion(compilation);
             }
 
-            protected override bool IsAllowedValue(ISymbol symbol) =>
-                !IsUnsafeXmlResolverConstructor(symbol) &&
-                !symbol.GetSymbolType().IsAny(UnsafeXmlResolvers);
         }
     }
 }

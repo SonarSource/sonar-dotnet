@@ -43,14 +43,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private ObjectCreationTracker<SyntaxKind> ObjectCreationTracker { get; set; }
 
-        internal override ImmutableArray<KnownType> TrackedTypes { get; } =
+        private static readonly ImmutableArray<KnownType> TrackedTypes =
             ImmutableArray.Create(
                 KnownType.System_Web_HttpCookie,
                 KnownType.Microsoft_AspNetCore_Http_CookieOptions
             );
 
         protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
-            isAllowedConstantValue: constantValue => constantValue is bool value && value
+            isAllowedConstantValue: constantValue => constantValue is bool value && value,
+            trackedTypes: TrackedTypes
         );
 
         protected override bool IsTrackedPropertyName(string propertyName) => "HttpOnly" == propertyName;

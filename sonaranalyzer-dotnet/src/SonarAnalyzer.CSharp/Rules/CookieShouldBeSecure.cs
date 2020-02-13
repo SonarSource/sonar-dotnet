@@ -39,6 +39,12 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                 .WithNotConfigurable();
 
+        private static readonly ImmutableArray<KnownType> TrackedTypes =
+            ImmutableArray.Create(
+                KnownType.System_Web_HttpCookie,
+                KnownType.Microsoft_AspNetCore_Http_CookieOptions
+            );
+
         private ObjectCreationTracker<SyntaxKind> ObjectCreationTracker { get; set; }
 
         public CookieShouldBeSecure()
@@ -53,7 +59,8 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
-            isAllowedConstantValue: constantValue => constantValue is bool value && value
+            isAllowedConstantValue: constantValue => constantValue is bool value && value,
+            trackedTypes: TrackedTypes
         );
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -66,12 +73,6 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        internal override ImmutableArray<KnownType> TrackedTypes { get; } =
-            ImmutableArray.Create(
-                KnownType.System_Web_HttpCookie,
-                KnownType.Microsoft_AspNetCore_Http_CookieOptions
-            );
 
         protected override bool IsTrackedPropertyName(string propertyName) => "Secure" == propertyName;
 

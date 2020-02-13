@@ -19,9 +19,22 @@
  */
 
 
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Helpers;
+
 namespace SonarAnalyzer.SyntaxTrackers
 {
-    public delegate bool ConstantValuePredicate(object constantValue);
+    /// <summary>
+    /// Tests if the provided <paramref name="constantValue"/> is equal to an allowed constant (literal) value.
+    /// </summary>
+    internal delegate bool ConstantValuePredicate(object constantValue);
+
+    /// <summary>
+    /// Returns true if the object represented by a <paramref name="symbol"/> should be allowed.
+    /// </summary>
+    internal delegate bool SymbolValuePredicate(ISymbol symbol);
 
     /// <summary>
     /// Verifies the initialization of an object, whether one or more properties have been correctly set when the object was initialized.
@@ -31,18 +44,29 @@ namespace SonarAnalyzer.SyntaxTrackers
     /// - OR invoking the constructor and then setting some specific properties on the created object
     public class CSharpObjectInitializationTracker
     {
-        /// <summary>
-        /// Tests if the provided <paramref name="constantValue"/> is equal to allowed value.
-        /// </summary>
-        /// <returns>True when <paramref name="constantValue"/> is an allowed value, otherwise false.</returns>
         private readonly ConstantValuePredicate constantValuePredicate;
 
-        public bool IsAllowedConstantValue(object constantValue) => constantValuePredicate(constantValue);
+        private readonly SymbolValuePredicate objectPredicate;
 
-        public CSharpObjectInitializationTracker(ConstantValuePredicate isAllowedConstantValue)
+        private readonly ImmutableArray<KnownType> trackedTypes;
+
+        internal bool IsAllowedConstantValue(object constantValue) => constantValuePredicate(constantValue);
+
+        internal bool IsAllowedObject(ISymbol symbol) => objectPredicate(symbol);
+
+        internal bool IsTrackedType(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            semanticModel.GetTypeInfo(expression).Type.IsAny(trackedTypes);
+
+        internal CSharpObjectInitializationTracker(ConstantValuePredicate isAllowedConstantValue, ImmutableArray<KnownType> trackedTypes)
+            : this (isAllowedConstantValue, trackedTypes, isAllowedObject: s => false)
         {
-            constantValuePredicate = isAllowedConstantValue;
         }
 
+        internal CSharpObjectInitializationTracker(ConstantValuePredicate isAllowedConstantValue, ImmutableArray<KnownType> trackedTypes, SymbolValuePredicate isAllowedObject)
+        {
+            this.constantValuePredicate = isAllowedConstantValue;
+            this.objectPredicate = isAllowedObject;
+            this.trackedTypes = trackedTypes;
+        }
     }
 }
