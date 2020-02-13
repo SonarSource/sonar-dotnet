@@ -34,4 +34,12 @@ namespace Tests.Diagnostics
             new PasswordDeriveBytes("hardcoded", byteArray, cspParams); // Noncompliant
         }
     }
+
+    public class FalseNegatives
+    {
+        public void Method()
+        {
+            string x = @"\*+?|}{][)(^$.# =something"; // FN
+        }
+    }
 }

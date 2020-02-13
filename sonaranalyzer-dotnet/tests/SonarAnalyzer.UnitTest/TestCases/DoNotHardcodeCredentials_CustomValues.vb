@@ -28,4 +28,10 @@ Namespace Tests.Diagnostics
             passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1, cspParams) 'Noncompliant
         End Sub
     End Class
+
+    Class FalseNegatives
+        Public Sub Test()
+            Dim x as String = "\*+?|}{][)(^$.# =something" ' FN
+        End Sub
+    End Class
 End Namespace

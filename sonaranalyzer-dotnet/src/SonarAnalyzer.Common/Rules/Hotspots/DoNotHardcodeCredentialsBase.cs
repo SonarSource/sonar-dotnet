@@ -53,11 +53,10 @@ namespace SonarAnalyzer.Rules
                 this.splitCredentialWords = value.ToUpperInvariant()
                     .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                     .Select(x => x.Trim())
-                    .Select(Regex.Escape)
                     .ToList();
 
                 this.passwordValuePattern = new Regex(string.Format(@"\b(?<password>{0})\s*[:=]\s*(?<suffix>.+)$",
-                    string.Join("|", this.splitCredentialWords)), RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                    string.Join("|", this.splitCredentialWords.Select(Regex.Escape))), RegexOptions.Compiled | RegexOptions.IgnoreCase);
             }
         }
 
@@ -161,10 +160,7 @@ namespace SonarAnalyzer.Rules
 
             private bool IsValidParameter(string suffix)
             {
-                var candidateParameter = suffix
-                    .Split(';')
-                    .First()
-                    .Trim();
+                var candidateParameter = suffix.Split(';').First().Trim();
 
                 return string.IsNullOrWhiteSpace(candidateParameter) ||
                        validParameterPattern.IsMatch(candidateParameter);

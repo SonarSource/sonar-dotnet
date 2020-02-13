@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotHardcodeCredentials_CS_CustomValues()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.cs",
-                new CSharp.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,\*+?|{}[]()^$.# " });
+                new CSharp.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,\*+?|}{][)(^$.# " });
         }
 
         [TestMethod]
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotHardcodeCredentials_VB_CustomValues()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.vb",
-                new VisualBasic.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = "kode,facal-faire" });
+                new VisualBasic.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = @"kode,facal-faire,\*+?|}{][)(^$.# " });
         }
 
         [TestMethod]
