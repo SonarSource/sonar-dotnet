@@ -23,7 +23,6 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.CFG.Helpers
 {
-    // FIXME move to SonarAnalyzer.Common
     public static class SemanticModelHelper
     {
         /// <summary>

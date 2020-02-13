@@ -53,6 +53,5 @@ namespace SonarAnalyzer.Rules.CSharp
             constantValue is int integerValue &&
             (integerValue & AuthenticationTypes_Secure) > 0; // The expected value is a bit from a Flags enum
 
-        protected override bool IsAllowedValue(ISymbol symbol) => false;
     }
 }

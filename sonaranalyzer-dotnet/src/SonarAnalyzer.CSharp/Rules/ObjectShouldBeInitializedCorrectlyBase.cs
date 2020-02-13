@@ -58,17 +58,6 @@ namespace SonarAnalyzer.Rules
         /// <returns>True when <paramref name="constantValue"/> is an allowed value, otherwise false.</returns>
         protected abstract bool IsAllowedValue(object constantValue);
 
-        /// <summary>
-        /// Tests if the provided <paramref name="expressionSyntax"/> is equal to allowed value.
-        /// </summary>
-        /// <returns>True when <paramref name="expressionSyntax"/> is an allowed value, otherwise false.</returns>
-        protected abstract bool IsAllowedValue(ISymbol symbol);
-
-        /// <summary>
-        /// This can be overriden if the derived class needs access to the Compilation.
-        /// </summary>
-        protected virtual void CompilationAction(Compilation compilation) { }
-
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterCompilationStartAction(
@@ -115,6 +104,17 @@ namespace SonarAnalyzer.Rules
         }
 
         /// <summary>
+        /// Tests if the provided <paramref name="expressionSyntax"/> is equal to allowed value.
+        /// </summary>
+        /// <returns>True when <paramref name="expressionSyntax"/> is an allowed value, otherwise false.</returns>
+        protected virtual bool IsAllowedValue(ISymbol symbol) => false;
+
+        /// <summary>
+        /// This can be overriden if the derived class needs access to the Compilation.
+        /// </summary>
+        protected virtual void CompilationAction(Compilation compilation) { }
+
+        /// <summary>
         /// Tests if the provided expression is a property of the <see cref="TrackedTypes"/>. Override this method
         /// when the <see cref="TrackedPropertyName"/> is a indexer for example.
         /// </summary>
@@ -147,10 +147,9 @@ namespace SonarAnalyzer.Rules
         }
 
         /// <summary>
-        /// Tests if the expression is a constant equal to allowed value.
+        /// Tests if the expression is an allowed value. The implementation of checks is provided by the derived class.
         /// </summary>
-        /// <returns>True if the expression is a constant equal to allowed value,
-        /// otherwise false.</returns>
+        /// <returns>True if the expression is an allowed value, otherwise false.</returns>
         protected bool IsAllowedValue(ExpressionSyntax expression, SemanticModel semanticModel)
         {
             if (expression == null)
@@ -242,7 +241,6 @@ namespace SonarAnalyzer.Rules
             initializer != null
                 ? initializer.Expressions
                 : Enumerable.Empty<ExpressionSyntax>();
-
 
         private static IEnumerable<StatementSyntax> GetNextStatements(StatementSyntax statement) =>
             statement.Parent.ChildNodes().OfType<StatementSyntax>().SkipWhile(x => x != statement).Skip(1);

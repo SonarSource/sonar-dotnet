@@ -73,7 +73,5 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override bool IsAllowedValue(object constantValue) =>
             constantValue is bool value && value;
 
-        protected override bool IsAllowedValue(ISymbol symbol) => false;
-
     }
 }
