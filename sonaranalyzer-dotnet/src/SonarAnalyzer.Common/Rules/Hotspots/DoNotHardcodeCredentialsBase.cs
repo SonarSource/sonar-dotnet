@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules
                     .Select(Regex.Escape)
                     .ToList();
 
-                this.passwordValuePattern = new Regex(string.Format(@"\b(?<password>{0})\s*[:=]\s*(?<suffix>.*)$",
+                this.passwordValuePattern = new Regex(string.Format(@"\b(?<password>{0})\s*[:=]\s*(?<suffix>.+)$",
                     string.Join("|", this.splitCredentialWords)), RegexOptions.Compiled | RegexOptions.IgnoreCase);
             }
         }
@@ -148,18 +148,10 @@ namespace SonarAnalyzer.Rules
                     .Intersect(analyzer.splitCredentialWords)
                     .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
-                var matches = analyzer.passwordValuePattern.Matches(variableValue);
-                foreach (Match match in matches)
+                var match = analyzer.passwordValuePattern.Match(variableValue);
+                if (match.Success && !IsValidParameter(match.Groups["suffix"].Value))
                 {
-                    if (!match.Success)
-                    {
-                        continue;
-                    }
-
-                    if (!IsValidParameter(match.Groups["suffix"].Value))
-                    {
-                        credentialWordsFound.Add(match.Groups["password"].Value);
-                    }
+                    credentialWordsFound.Add(match.Groups["password"].Value);
                 }
 
                 // Rule was initially implemented with everything lower (which is wrong) so we have to force lower
@@ -170,10 +162,12 @@ namespace SonarAnalyzer.Rules
             private bool IsValidParameter(string suffix)
             {
                 var candidateParameter = suffix
-                    .Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries)
-                    .FirstOrDefault();
+                    .Split(';')
+                    .First()
+                    .Trim();
 
-                return candidateParameter == null || validParameterPattern.IsMatch(suffix);
+                return string.IsNullOrWhiteSpace(candidateParameter) ||
+                       validParameterPattern.IsMatch(candidateParameter);
             }
         }
     }

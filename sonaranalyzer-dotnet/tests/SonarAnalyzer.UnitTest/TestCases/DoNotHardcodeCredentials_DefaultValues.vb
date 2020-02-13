@@ -55,15 +55,29 @@ Namespace Tests.Diagnostics
             passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1) 'Noncompliant
             passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1, cspParams) 'Noncompliant
         End Sub
+
+        Public Sub CompliantParameterUse(pwd as String)
+            Dim query1 As String = "password=?"
+            Dim query2 As String = "password=:password"
+            Dim query3 As String = "password=:param"
+            Dim query4 As String = "password='"+pwd+"'"
+            Dim query5 As String = "password={0}"
+            Dim query6 As String = "password=;user=;"
+            Dim query7 As String = "password=:password;user=:user;"
+            Dim query8 As String = "password=?;user=?;"
+            Dim query9 As String = "Server=myServerName\myInstanceName;Database=myDataBase;Password=:myPassword;User Id=:username;"
+        End Sub
     End Class
 
     Class FalseNegatives
         Private password As String
 
-        Public Sub Foo()
+        Public Sub Foo(user as String)
             Me.password = "foo" ' False Negative
             Configuration.Password = "foo" ' False Negative
             Me.password = Configuration.Password = "foo" ' False Negative
+            Dim query1 as String = "password=':crazy;secret';user=xxx" ' False Negative - passwords enclosed in '' are not covered
+            Dim query2 as String = "password=hardcoded;user='" + user + "'" ' False Negative - Only LiteralExpressionSyntax nodes are covered
         End Sub
 
         Class Configuration
