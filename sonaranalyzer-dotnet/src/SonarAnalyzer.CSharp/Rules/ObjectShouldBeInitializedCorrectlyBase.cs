@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SyntaxTrackers;
 
 namespace SonarAnalyzer.Rules
 {
@@ -46,17 +47,13 @@ namespace SonarAnalyzer.Rules
         /// </summary>
         internal abstract ImmutableArray<KnownType> TrackedTypes { get; }
 
+        protected abstract CSharpObjectInitializationTracker objectInitializationTracker { get; }
+
         /// <summary>
         /// Tests the name of the property that has to be set with an allowed value in order for the object to be initialized correctly.
         /// </summary>
         /// <returns>True when <paramref name="propertyName"/> is the name of a relevant property, otherwise false.</returns>
         protected abstract bool IsTrackedPropertyName(string propertyName);
-
-        /// <summary>
-        /// Tests if the provided <paramref name="constantValue"/> is equal to allowed value.
-        /// </summary>
-        /// <returns>True when <paramref name="constantValue"/> is an allowed value, otherwise false.</returns>
-        protected abstract bool IsAllowedValue(object constantValue);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -162,7 +159,7 @@ namespace SonarAnalyzer.Rules
             }
             if (semanticModel.GetConstantValue(expression).Value is { } constantValue)
             {
-                return IsAllowedValue(constantValue);
+                return objectInitializationTracker.IsAllowedConstantValue(constantValue);
             }
             if (semanticModel.GetSymbolInfo(expression).Symbol is { } symbol)
             {

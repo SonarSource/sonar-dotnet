@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SyntaxTrackers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -40,9 +41,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal override ImmutableArray<KnownType> TrackedTypes { get; } = ImmutableArray.Create(KnownType.System_Security_Cryptography_AesManaged);
 
+        protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
+            isAllowedConstantValue: constantValue => false
+        );
+
         protected override bool IsTrackedPropertyName(string propertyName) => "Mode" == propertyName;
-
-        protected override bool IsAllowedValue(object constantValue) => false;
-
     }
 }

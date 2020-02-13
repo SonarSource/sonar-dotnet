@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SyntaxTrackers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -38,9 +39,17 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
+        private static bool IsAllowedValue(object constantValue) =>
+            constantValue is int integerValue &&
+            (integerValue & AuthenticationTypes_Secure) > 0; // The expected value is a bit from a Flags enum
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         internal override ImmutableArray<KnownType> TrackedTypes { get; } = ImmutableArray.Create(KnownType.System_DirectoryServices_DirectoryEntry);
+
+        protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
+            isAllowedConstantValue: constantValue => IsAllowedValue(constantValue)
+        );
 
         protected override bool IsTrackedPropertyName(string propertyName) => "AuthenticationType" == propertyName;
 
@@ -48,10 +57,6 @@ namespace SonarAnalyzer.Rules.CSharp
             argumentList == null ||
             argumentList.Arguments.Count != 4 ||
             IsAllowedValue(argumentList.Arguments[3].Expression, semanticModel);
-
-        protected override bool IsAllowedValue(object constantValue) =>
-            constantValue is int integerValue &&
-            (integerValue & AuthenticationTypes_Secure) > 0; // The expected value is a bit from a Flags enum
 
     }
 }

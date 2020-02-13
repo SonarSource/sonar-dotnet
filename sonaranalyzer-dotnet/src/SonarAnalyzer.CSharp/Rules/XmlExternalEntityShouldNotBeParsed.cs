@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SyntaxTrackers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -77,7 +78,15 @@ namespace SonarAnalyzer.Rules.CSharp
         [SuppressMessage("AnalyzerCorrectness", "RS1001:Missing diagnostic analyzer attribute.", Justification = "This is not a different diagnostic.")]
         private class XmlDocumentShouldBeSafe : XmlApiShouldBeInitializedCorrectlyBase
         {
-            public XmlDocumentShouldBeSafe(INetFrameworkVersionProvider netFrameworkVersionProvider) : base(netFrameworkVersionProvider) { }
+            protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
+                    // we do not expect any constant values for XmlResolver
+                    isAllowedConstantValue: constantValue => true
+            );
+
+            public XmlDocumentShouldBeSafe(INetFrameworkVersionProvider netFrameworkVersionProvider)
+                : base(netFrameworkVersionProvider)
+            {
+            }
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
@@ -99,9 +108,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     NetFrameworkVersion.Below4 => false,
                     _ => true
                 };
-
-            // we do not expect any constant values for XmlResolver
-            protected override bool IsAllowedValue(object constantValue) => true;
         }
 
         [SuppressMessage("AnalyzerCorrectness", "RS1001:Missing diagnostic analyzer attribute.", Justification = "This is not a different diagnostic.")]
@@ -113,7 +119,27 @@ namespace SonarAnalyzer.Rules.CSharp
                 "ProhibitDtd" // should be true in .NET 3.5
             );
 
-            public XmlTextReaderShouldBeSafe(INetFrameworkVersionProvider netFrameworkVersionProvider) : base(netFrameworkVersionProvider) { }
+            protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
+                    isAllowedConstantValue: constantValue => IsAllowedValue(constantValue)
+            );
+
+            private static bool IsAllowedValue(object constantValue)
+            {
+                if (constantValue == null)
+                {
+                    return true;
+                }
+                if (constantValue is int integerValue)
+                {
+                    return integerValue != DtdProcessingParse;
+                }
+                return constantValue is bool && (bool)constantValue;
+            }
+
+            public XmlTextReaderShouldBeSafe(INetFrameworkVersionProvider netFrameworkVersionProvider)
+                : base(netFrameworkVersionProvider)
+            {
+            }
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
@@ -130,19 +156,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     _ => true
                 };
 
-            protected override bool IsAllowedValue(object constantValue)
-            {
-                if (constantValue == null)
-                {
-                    return true;
-                }
-                if (constantValue is int integerValue)
-                {
-                    return integerValue != DtdProcessingParse;
-                }
-                return constantValue is bool && (bool)constantValue;
-            }
-
         }
 
         private abstract class XmlApiShouldBeInitializedCorrectlyBase : ObjectShouldBeInitializedCorrectlyBase
@@ -152,6 +165,7 @@ namespace SonarAnalyzer.Rules.CSharp
             protected readonly INetFrameworkVersionProvider VersionProvider;
 
             protected XmlApiShouldBeInitializedCorrectlyBase(INetFrameworkVersionProvider netFrameworkVersionProvider)
+                : base()
             {
                 VersionProvider = netFrameworkVersionProvider;
             }

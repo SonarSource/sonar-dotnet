@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SyntaxTrackers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -48,6 +49,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.Microsoft_AspNetCore_Http_CookieOptions
             );
 
+        protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
+            isAllowedConstantValue: constantValue => constantValue is bool value && value
+        );
+
         protected override bool IsTrackedPropertyName(string propertyName) => "HttpOnly" == propertyName;
 
         public CookieShouldBeHttpOnly()
@@ -69,9 +74,5 @@ namespace SonarAnalyzer.Rules.CSharp
                 ObjectCreationTracker.MatchConstructor(KnownType.Nancy_Cookies_NancyCookie),
                 Conditions.ExceptWhen(ObjectCreationTracker.ArgumentIsBoolConstant("httpOnly", true)));
         }
-
-        protected override bool IsAllowedValue(object constantValue) =>
-            constantValue is bool value && value;
-
     }
 }

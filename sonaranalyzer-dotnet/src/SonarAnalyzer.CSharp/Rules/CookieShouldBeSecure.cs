@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SyntaxTrackers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -51,6 +52,10 @@ namespace SonarAnalyzer.Rules.CSharp
             ObjectCreationTracker = new CSharpObjectCreationTracker(analyzerConfiguration, rule);
         }
 
+        protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
+            isAllowedConstantValue: constantValue => constantValue is bool value && value
+        );
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             base.Initialize(context);
@@ -69,9 +74,6 @@ namespace SonarAnalyzer.Rules.CSharp
             );
 
         protected override bool IsTrackedPropertyName(string propertyName) => "Secure" == propertyName;
-
-        protected override bool IsAllowedValue(object constantValue) =>
-            constantValue is bool value && value;
 
     }
 }
