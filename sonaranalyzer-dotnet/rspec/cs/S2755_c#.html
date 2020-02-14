@@ -52,26 +52,6 @@ href="https://www.owasp.org/index.php/Server_Side_Request_Forgery">SSRFs</a>:</p
 </pre>
 <p>It is recommended to disable access to external entities.</p>
 <h2>Noncompliant Code Examples</h2>
-<p>System.Xml.Linq.XDocument</p>
-<pre>
-XmlReaderSettings settings = new XmlReaderSettings();
-settings.DtdProcessing = DtdProcessing.Parse; // Unsafe: DTDs will be processed
-settings.XmlResolver = new XmlUrlResolver(); // Unsafe: XmlUrlResolver is used to resolve external XML resources such as entities, document type definitions (DTDs) or schemas.
-XmlReader reader = XmlReader.Create("xxe.xml", settings); // Noncompliant: parser created with unsafe configurations
-
-XDocument parser = XDocument.Load(reader);
-</pre>
-<p>System.Xml.XmlDictionaryReader</p>
-<pre>
-XmlReaderSettings settings = new XmlReaderSettings();
-settings.DtdProcessing = DtdProcessing.Parse;
-settings.XmlResolver = new XmlUrlResolver();
-
-XmlReader reader = XmlReader.Create("xxe.xml", settings);
-XmlDictionaryReader dict = XmlDictionaryReader.CreateDictionaryReader(reader);
-while (dict.Read()) // Noncompliant: XmlDictionaryReader is safe by default and becomes unsafe if used with an unsafe parser (here XmlReader)
-{ ... }
-</pre>
 <p>System.Xml.XmlDocument</p>
 <pre>
 // .NET Framework &lt; 4.5.2
@@ -84,16 +64,6 @@ or
 XmlDocument parser = new XmlDocument();
 parser.XmlResolver = new XmlUrlResolver();
 parser.LoadXml("xxe.xml"); // Noncompliant: XmlDocument.XmlResolver configured with XmlUrlResolver that makes it unsafe
-</pre>
-<p>System.Xml.XmlReader</p>
-<pre>
-// .NET Framework 4.5.2+
-XmlReaderSettings settings = new XmlReaderSettings();
-settings.DtdProcessing = DtdProcessing.Parse;
-settings.XmlResolver = new XmlUrlResolver();
-XmlReader reader = XmlReader.Create("xxe.xml", settings);
-while (reader.Read()) // Noncompliant: XmlReader is safe by default and becomes unsafe if DtdProcessing = Parse and XmlResolver is not null
-{ ... }
 </pre>
 <p>System.Xml.XmlTextReader</p>
 <pre>
@@ -111,16 +81,6 @@ while (reader.Read()) // Noncompliant: XmlTextRead.XmlResolver configured with X
 { ... }
 </pre>
 <h2>Compliant Solution</h2>
-<p>System.Xml.Linq.XDocument</p>
-<pre>
-XDocument parser = XDocument.Load("xxe.xml"); // Compliant: XDocument is safe by default. DTD processing is turned off by default as described in https://github.com/dotnet/docs/blob/master/docs/csharp/programming-guide/concepts/linq/linq-to-xml-security.md
-</pre>
-<p>System.Xml.XmlDictionaryReader</p>
-<pre>
-XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(Encoding.ASCII.GetBytes(xmlText), XmlDictionaryReaderQuotas.Max);
-while (reader.Read()) // Compliant: XmlReXmlDictionaryReaderader is safe by default
-{ ... }
-</pre>
 <p>System.Xml.XmlDocument</p>
 <pre>
 XmlDocument parser = new XmlDocument();
@@ -131,19 +91,6 @@ or
 
 XmlDocument parser = new XmlDocument();
 parser.LoadXml("xxe.xml"); // Compliant: XmlDocument is safe by default in  .NET Framework 4.5.2+ because XmlResolver is set by default to null
-</pre>
-<p>System.Xml.XmlNodeReader</p>
-<pre>
-XmlDocument doc = new XmlDocument();
-doc.LoadXml("xxe.xml); // XmlDocument is safe by default in  .NET Framework 4.5.2+
-
-XmlNodeReader reader = new XmlNodeReader(doc);  // Compliant: XmlNodeReader is safe by default even if XmlDocument is not
-</pre>
-<p>System.Xml.XmlReader</p>
-<pre>
-XmlReader reader = XmlReader.Create("xxe.xml");
-while (reader.Read()) // Compliant: XmlReader is safe by default
-{ ... }
 </pre>
 <p>System.Xml.XmlTextReader</p>
 <pre>
