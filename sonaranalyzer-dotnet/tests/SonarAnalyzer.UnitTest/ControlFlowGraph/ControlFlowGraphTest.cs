@@ -1,4 +1,4 @@
-/*
+﻿/*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2020 SonarSource SA
 * mailto: contact AT sonarsource DOT com
@@ -1592,6 +1592,62 @@ namespace NS
 
             simpleBlockWithFullExpression.SuccessorBlock.Should().Be(exitBlock);
             simpleBlockWithFullExpression.Instructions.Should().ContainSingle("a = a ?? (b = b ?? c)");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Coalesce_Throw()
+        {
+            var cfg = Build(@"var a = b ?? throw new Exception(""Test"");");
+            VerifyCfg(cfg, 4);
+            var branchBlock = (BinaryBranchBlock)cfg.EntryBlock;
+            var blocks = cfg.Blocks.ToList();
+            var throwBlock = blocks[1];
+            var assignmentBlock = blocks[2];
+            var exitBlock = cfg.ExitBlock;
+
+            branchBlock.SuccessorBlocks.Should().OnlyContainInOrder(throwBlock, assignmentBlock);
+            throwBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            assignmentBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+
+            branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.CoalesceExpression);
+
+            VerifyAllInstructions(branchBlock, "b");
+            VerifyAllInstructions(throwBlock, @"""Test""", @"new Exception(""Test"")");
+            VerifyAllInstructions(assignmentBlock, @"a = b ?? throw new Exception(""Test"")");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Coalesce_ThrowCoalesce()
+        {
+            var cfg = Build(@"var a = b ?? throw ex ?? new Exception(""Test"");");
+            VerifyCfg(cfg, 6);
+            var blocks = cfg.Blocks.ToList();
+            var firstBranchBlockWithB = (BinaryBranchBlock)cfg.EntryBlock;
+            var secondBranchBlockWithEx = (BinaryBranchBlock)blocks[1];
+            var simpleBlockWithException = (SimpleBlock)blocks[2];
+            var jumpBlockThrow = (JumpBlock)blocks[3];
+            var simpleBlockWithFullExpression = (SimpleBlock)blocks[4];
+            var exitBlock = cfg.ExitBlock;
+
+            firstBranchBlockWithB.TrueSuccessorBlock.Should().Be(secondBranchBlockWithEx);
+            firstBranchBlockWithB.FalseSuccessorBlock.Should().Be(simpleBlockWithFullExpression);
+            firstBranchBlockWithB.Instructions.Should().ContainSingle("b");
+            firstBranchBlockWithB.BranchingNode.Kind().Should().Be(SyntaxKind.CoalesceExpression);
+
+            secondBranchBlockWithEx.TrueSuccessorBlock.Should().Be(simpleBlockWithException);
+            secondBranchBlockWithEx.FalseSuccessorBlock.Should().Be(jumpBlockThrow);
+            secondBranchBlockWithEx.Instructions.Should().ContainSingle("ex");
+            secondBranchBlockWithEx.BranchingNode.Kind().Should().Be(SyntaxKind.CoalesceExpression);
+
+            simpleBlockWithException.SuccessorBlock.Should().Be(jumpBlockThrow);
+            VerifyAllInstructions(simpleBlockWithException, @"""Test""", @"new Exception(""Test"")");
+
+            jumpBlockThrow.SuccessorBlock.Should().Be(exitBlock);
+
+            simpleBlockWithFullExpression.SuccessorBlock.Should().Be(exitBlock);
+            simpleBlockWithFullExpression.Instructions.Should().ContainSingle(@"a = b ?? throw ex ?? new Exception(""Test"")");
         }
 
         #endregion
