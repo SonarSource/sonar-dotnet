@@ -43,9 +43,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
             isAllowedConstantValue: constantValue => false,
-            trackedTypes: TrackedTypes
+            trackedTypes: TrackedTypes,
+            isTrackedPropertyName: propertyName => "Mode" == propertyName
         );
-
-        protected override bool IsTrackedPropertyName(string propertyName) => "Mode" == propertyName;
     }
 }

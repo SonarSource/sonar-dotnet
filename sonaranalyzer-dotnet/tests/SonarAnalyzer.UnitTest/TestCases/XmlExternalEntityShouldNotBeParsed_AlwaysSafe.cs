@@ -1,13 +1,7 @@
-﻿using System;
-using System.Configuration;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 using System.Xml;
 using System.Xml.Linq;
-using System.Xml.Resolvers;
-using System.Xml.XPath;
 using System.Xml.Xsl;
-using Microsoft.Web.XmlTransform;
 
 namespace Tests.Diagnostics
 {
@@ -54,7 +48,7 @@ namespace Tests.Diagnostics
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.DtdProcessing = DtdProcessing.Parse;
             settings.XmlResolver = new XmlUrlResolver();
-            XmlReader reader = XmlReader.Create(new MemoryStream(), settings, "resources/"); // Noncompliant
+            XmlReader reader = XmlReader.Create(new MemoryStream(), settings, "resources/");
             XDocument xdocument = XDocument.Load(reader); // we already raise on XmlReader
         }
 

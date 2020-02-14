@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -30,7 +30,5 @@ namespace SonarAnalyzer.Helpers
         }
 
         protected abstract void Initialize(SonarAnalysisContext context);
-
-        internal void InternalInitialize(SonarAnalysisContext context) => Initialize(context);
     }
 }

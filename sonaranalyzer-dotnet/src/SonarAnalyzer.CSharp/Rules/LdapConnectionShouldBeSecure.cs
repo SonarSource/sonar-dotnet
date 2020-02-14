@@ -20,7 +20,6 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -36,28 +35,22 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Set the 'AuthenticationType' property of this DirectoryEntry to 'AuthenticationTypes.Secure'.";
         private const int AuthenticationTypes_Secure = 1;
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+
+        protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
+            isAllowedConstantValue: constantValue => IsAllowedValue(constantValue),
+            trackedTypes: TrackedTypes,
+            isTrackedPropertyName: propertyName => "AuthenticationType" == propertyName,
+            trackedConstructorArgumentIndex: 3
+        );
 
         private static bool IsAllowedValue(object constantValue) =>
             constantValue is int integerValue &&
             (integerValue & AuthenticationTypes_Secure) > 0; // The expected value is a bit from a Flags enum
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         private static readonly ImmutableArray<KnownType> TrackedTypes = ImmutableArray.Create(KnownType.System_DirectoryServices_DirectoryEntry);
-
-        protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
-            isAllowedConstantValue: constantValue => IsAllowedValue(constantValue),
-            trackedTypes: TrackedTypes
-        );
-
-        protected override bool IsTrackedPropertyName(string propertyName) => "AuthenticationType" == propertyName;
-
-        protected override bool CtorInitializesTrackedPropertyWithAllowedValue(ArgumentListSyntax argumentList, SemanticModel semanticModel) =>
-            argumentList == null ||
-            argumentList.Arguments.Count != 4 ||
-            IsAllowedValue(argumentList.Arguments[3].Expression, semanticModel);
-
     }
 }

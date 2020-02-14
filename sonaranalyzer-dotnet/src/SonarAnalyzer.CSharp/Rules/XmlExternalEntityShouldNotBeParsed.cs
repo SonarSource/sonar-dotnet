@@ -18,10 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
@@ -39,23 +40,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-        private static ImmutableArray<KnownType> UnsafeXmlResolvers { get; } = ImmutableArray.Create(
-                KnownType.System_Xml_XmlUrlResolver,
-                KnownType.System_Xml_Resolvers_XmlPreloadedResolver
-        );
-
-        private static bool IsUnsafeXmlResolverConstructor(ISymbol symbol) =>
-                symbol.Kind == SymbolKind.Method &&
-                symbol.ContainingType.GetSymbolType().IsAny(UnsafeXmlResolvers);
-
-        private static bool IsAllowedObject(ISymbol symbol) =>
-            !IsUnsafeXmlResolverConstructor(symbol) &&
-            !symbol.GetSymbolType().IsAny(UnsafeXmlResolvers);
-
-        // The value of System.Xml.DtdProcessing.Parse
-        private const int DtdProcessingParse = 2;
 
         // For the XXE rule we actually need to know about .NET 4.5.2,
         // but it is good enough given the other .NET 4.x do not have support anymore
@@ -73,16 +59,51 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            new XmlDocumentShouldBeSafe(VersionProvider).InternalInitialize(context);
-            new XmlTextReaderShouldBeSafe(VersionProvider).InternalInitialize(context);
+            context.RegisterCompilationStartAction(
+                ccc =>
+                {
+                    ccc.RegisterSyntaxNodeActionInNonGenerated(
+                        c =>
+                        {
+                            var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
 
-            // FIXME Implement for XmlReader and XPathNavigator
+                            var trackers = TrackerFactory.Create(c.Compilation, VersionProvider);
+                            if (trackers.Item1.IsAnalyzedIncorrectly(objectCreation, c.SemanticModel) ||
+                                trackers.Item2.IsAnalyzedIncorrectly(objectCreation, c.SemanticModel))
+                            {
+                                c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], objectCreation.GetLocation()));
+                            }
+                        },
+                        SyntaxKind.ObjectCreationExpression);
+
+                    ccc.RegisterSyntaxNodeActionInNonGenerated(
+                        c =>
+                        {
+                            var assignment = (AssignmentExpressionSyntax)c.Node;
+
+                            var trackers = TrackerFactory.Create(c.Compilation, VersionProvider);
+                            if (trackers.Item1.IsAnalyzedIncorrectly(assignment, c.SemanticModel) ||
+                                trackers.Item2.IsAnalyzedIncorrectly(assignment, c.SemanticModel))
+                            {
+                                c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], assignment.GetLocation()));
+                            }
+                        },
+                        SyntaxKind.SimpleAssignmentExpression);
+                });
+
          }
 
-        [SuppressMessage("AnalyzerCorrectness", "RS1001:Missing diagnostic analyzer attribute.", Justification = "This is not a different diagnostic.")]
-        private class XmlDocumentShouldBeSafe : XmlApiShouldBeInitializedCorrectlyBase
+        private static class TrackerFactory
         {
-            private static readonly ImmutableArray<KnownType> TrackedTypes = ImmutableArray.Create(
+            // The value of System.Xml.DtdProcessing.Parse
+            private const int DtdProcessingParse = 2;
+
+            private static ImmutableArray<KnownType> UnsafeXmlResolvers { get; } = ImmutableArray.Create(
+                    KnownType.System_Xml_XmlUrlResolver,
+                    KnownType.System_Xml_Resolvers_XmlPreloadedResolver
+            );
+
+            private static readonly ImmutableArray<KnownType> XmlDocumentTrackedTypes = ImmutableArray.Create(
                 KnownType.System_Xml_XmlDocument,
                 KnownType.System_Xml_XmlDataDocument,
                 KnownType.System_Configuration_ConfigXmlDocument,
@@ -90,50 +111,48 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.Microsoft_Web_XmlTransform_XmlTransformableDocument
             );
 
-            protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
-                    // we do not expect any constant values for XmlResolver
-                    isAllowedConstantValue: constantValue => true,
-                    trackedTypes: TrackedTypes,
-                    isAllowedObject: symbol => IsAllowedObject(symbol)
+            private static readonly ISet<string> XmlTextReaderTrackedProperties = ImmutableHashSet.Create(
+                "XmlResolver", // should be null
+                "DtdProcessing", // should not be Parse
+                "ProhibitDtd" // should be true in .NET 3.5
             );
 
-            public XmlDocumentShouldBeSafe(INetFrameworkVersionProvider netFrameworkVersionProvider)
-                : base(netFrameworkVersionProvider)
+            public static Tuple<CSharpObjectInitializationTracker, CSharpObjectInitializationTracker> Create(Compilation compilation, INetFrameworkVersionProvider versionProvider)
             {
+                var netFrameworkVersion = versionProvider.GetDotNetFrameworkVersion(compilation);
+                var constructorIsSafe = ConstructorIsSafe(netFrameworkVersion);
+
+                var xmlDocumentTracker = new CSharpObjectInitializationTracker(
+                    // we do not expect any constant values for XmlResolver
+                    isAllowedConstantValue: constantValue => true,
+                    trackedTypes: XmlDocumentTrackedTypes,
+                    isTrackedPropertyName: propertyName => "XmlResolver" == propertyName,
+                    isAllowedObject: symbol => IsAllowedObject(symbol),
+                    constructorIsSafe: constructorIsSafe
+                );
+
+                var xmlTextReaderTracker = new CSharpObjectInitializationTracker(
+                    isAllowedConstantValue: constantValue => IsAllowedValueForXmlTextReader(constantValue),
+                    trackedTypes: ImmutableArray.Create(KnownType.System_Xml_XmlTextReader),
+                    isTrackedPropertyName : propertyName => XmlTextReaderTrackedProperties.Contains(propertyName),
+                    isAllowedObject: symbol => IsAllowedObject(symbol),
+                    constructorIsSafe: constructorIsSafe
+                );
+
+                return Tuple.Create(xmlDocumentTracker, xmlTextReaderTracker);
             }
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-            protected override bool IsTrackedPropertyName(string propertyName) => "XmlResolver" == propertyName;
-
-            protected override bool CtorInitializesTrackedPropertyWithAllowedValue(ArgumentListSyntax argumentList, SemanticModel semanticModel) =>
-                NetFrameworkVersion switch
+            // The XmlDocument and XmlTextReader constructors were made safe-by-default in .NET 4.5.2
+            private static bool ConstructorIsSafe(NetFrameworkVersion version) =>
+                version switch
                 {
                     NetFrameworkVersion.After45 => true,
                     NetFrameworkVersion.Between4And45 => false,
                     NetFrameworkVersion.Below4 => false,
                     _ => true
                 };
-        }
 
-        [SuppressMessage("AnalyzerCorrectness", "RS1001:Missing diagnostic analyzer attribute.", Justification = "This is not a different diagnostic.")]
-        private class XmlTextReaderShouldBeSafe : XmlApiShouldBeInitializedCorrectlyBase
-        {
-            private static readonly ISet<string> TrackedProperties = ImmutableHashSet.Create(
-                "XmlResolver", // should be null
-                "DtdProcessing", // should not be Parse
-                "ProhibitDtd" // should be true in .NET 3.5
-            );
-
-            private static readonly ImmutableArray<KnownType> TrackedTypes = ImmutableArray.Create(KnownType.System_Xml_XmlTextReader);
-
-            protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
-                    isAllowedConstantValue: constantValue => IsAllowedValue(constantValue),
-                    trackedTypes: TrackedTypes,
-                    isAllowedObject: symbol => IsAllowedObject(symbol)
-            );
-
-            private static bool IsAllowedValue(object constantValue)
+            private static bool IsAllowedValueForXmlTextReader(object constantValue)
             {
                 if (constantValue == null)
                 {
@@ -141,50 +160,20 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 if (constantValue is int integerValue)
                 {
+                    // treat the DtdProcessing property
                     return integerValue != DtdProcessingParse;
                 }
+                // treat the ProhibitDtd property
                 return constantValue is bool && (bool)constantValue;
             }
 
-            public XmlTextReaderShouldBeSafe(INetFrameworkVersionProvider netFrameworkVersionProvider)
-                : base(netFrameworkVersionProvider)
-            {
-            }
+            private static bool IsUnsafeXmlResolverConstructor(ISymbol symbol) =>
+                    symbol.Kind == SymbolKind.Method &&
+                    symbol.ContainingType.GetSymbolType().IsAny(UnsafeXmlResolvers);
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-            protected override bool IsTrackedPropertyName(string propertyName) => TrackedProperties.Contains(propertyName);
-
-            protected override bool CtorInitializesTrackedPropertyWithAllowedValue(ArgumentListSyntax argumentList, SemanticModel semanticModel) =>
-                NetFrameworkVersion switch
-                {
-                    NetFrameworkVersion.After45 => true,
-                    NetFrameworkVersion.Between4And45 => false,
-                    NetFrameworkVersion.Below4 => false,
-                    _ => true
-                };
-
-        }
-
-        private abstract class XmlApiShouldBeInitializedCorrectlyBase : ObjectShouldBeInitializedCorrectlyBase
-        {
-            protected NetFrameworkVersion NetFrameworkVersion;
-
-            protected readonly INetFrameworkVersionProvider VersionProvider;
-
-            protected XmlApiShouldBeInitializedCorrectlyBase(INetFrameworkVersionProvider netFrameworkVersionProvider)
-                : base()
-            {
-                VersionProvider = netFrameworkVersionProvider;
-            }
-
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-            protected override void CompilationAction(Compilation compilation)
-            {
-                NetFrameworkVersion = VersionProvider.GetDotNetFrameworkVersion(compilation);
-            }
-
+            private static bool IsAllowedObject(ISymbol symbol) =>
+                !IsUnsafeXmlResolverConstructor(symbol) &&
+                !symbol.GetSymbolType().IsAny(UnsafeXmlResolvers);
         }
     }
 }

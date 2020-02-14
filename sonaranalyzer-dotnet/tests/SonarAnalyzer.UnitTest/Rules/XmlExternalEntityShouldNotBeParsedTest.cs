@@ -39,13 +39,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void XmlExternalEntityShouldNotBeParsed_XmlDocument(NetFrameworkVersion version, string testFilePath)
         {
-            var versionProviderMock = new Mock<INetFrameworkVersionProvider>();
-            versionProviderMock
-                .Setup(vp => vp.GetDotNetFrameworkVersion(It.IsAny<Compilation>()))
-                .Returns(version);
+            // setup
+            var rule = new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version));
 
-            Verifier.VerifyAnalyzer(testFilePath,
-                new XmlExternalEntityShouldNotBeParsed(versionProviderMock.Object),
+            // act & verify
+            Verifier.VerifyAnalyzer(testFilePath, rule,
                 additionalReferences: FrameworkMetadataReference.SystemXml
                     .Concat(FrameworkMetadataReference.SystemData)
                     .Concat(FrameworkMetadataReference.SystemXmlLinq)
@@ -61,26 +59,40 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void XmlExternalEntityShouldNotBeParsed_XmlTextReader(NetFrameworkVersion version, string testFilePath)
         {
+            // setup
+            var rule = new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version));
+
+            // act & verify
+            Verifier.VerifyAnalyzer(testFilePath, rule,
+                additionalReferences: FrameworkMetadataReference.SystemXml.ToArray());
+        }
+
+        [DataRow(NetFrameworkVersion.After45, @"TestCases\XmlExternalEntityShouldNotBeParsed_AlwaysSafe.cs")]
+        [DataRow(NetFrameworkVersion.Unknown, @"TestCases\XmlExternalEntityShouldNotBeParsed_AlwaysSafe.cs")]
+        [DataTestMethod]
+        [TestCategory("Rule")]
+        public void XmlExternalEntityShouldNotBeParsed_AlwaysSafe(NetFrameworkVersion version, string testFilePath)
+        {
+            // setup
+            var rule = new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version));
+
+            // act & verify
+            Verifier.VerifyAnalyzer(testFilePath, rule,
+                additionalReferences: FrameworkMetadataReference.SystemXml
+                    .Concat(FrameworkMetadataReference.SystemData)
+                    .Concat(FrameworkMetadataReference.SystemXmlLinq)
+                    .ToArray());
+        }
+
+        private INetFrameworkVersionProvider GetVersionProviderMock(NetFrameworkVersion version)
+        {
             var versionProviderMock = new Mock<INetFrameworkVersionProvider>();
             versionProviderMock
                 .Setup(vp => vp.GetDotNetFrameworkVersion(It.IsAny<Compilation>()))
                 .Returns(version);
 
-            Verifier.VerifyAnalyzer(testFilePath,
-                new XmlExternalEntityShouldNotBeParsed(versionProviderMock.Object),
-                additionalReferences: FrameworkMetadataReference.SystemXml.ToArray());
+            return versionProviderMock.Object;
         }
-
-        // FIXME: add tests for the following APIs
-
-        // public void XmlExternalEntityShouldNotBeParsed_DotNetFramework_XmlPathNavigator()
-
-        // public void XmlExternalEntityShouldNotBeParsed_DotNetFramework_XmlReader()
-
-        // public void XmlExternalEntityShouldNotBeParsed_DotNetFramework_AlwaysSafe()
-
-        // The NetCore test should be a smoke test to be sure we raise issues on those libraries
-        // public void XmlExternalEntityShouldNotBeParsed_NetCore()
     }
 }
 

@@ -51,10 +51,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
             isAllowedConstantValue: constantValue => constantValue is bool value && value,
-            trackedTypes: TrackedTypes
+            trackedTypes: TrackedTypes,
+            isTrackedPropertyName: propertyName => "HttpOnly" == propertyName
         );
-
-        protected override bool IsTrackedPropertyName(string propertyName) => "HttpOnly" == propertyName;
 
         public CookieShouldBeHttpOnly()
             : this(AnalyzerConfiguration.Hotspot)

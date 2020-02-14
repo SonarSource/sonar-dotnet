@@ -60,7 +60,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
             isAllowedConstantValue: constantValue => constantValue is bool value && value,
-            trackedTypes: TrackedTypes
+            trackedTypes: TrackedTypes,
+            isTrackedPropertyName: propertyName => "Secure" == propertyName
         );
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -73,8 +74,6 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override bool IsTrackedPropertyName(string propertyName) => "Secure" == propertyName;
 
     }
 }
