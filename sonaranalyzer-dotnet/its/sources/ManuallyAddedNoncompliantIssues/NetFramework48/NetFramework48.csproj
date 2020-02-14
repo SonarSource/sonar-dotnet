@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <CodeAnalysisRuleSet>..\XXE.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,9 +46,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XmlDocumentTest.cs" />
-    <Compile Include="XmlReaderTest.cs" />
     <Compile Include="XmlTextReaderTest.cs" />
-    <Compile Include="XPathNavigatorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

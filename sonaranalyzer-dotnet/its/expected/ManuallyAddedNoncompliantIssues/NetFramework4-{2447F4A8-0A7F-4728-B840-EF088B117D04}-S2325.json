@@ -15,45 +15,6 @@
 },
 {
 "id":  "S2325",
-"message":  "Make 'XmlReader_3' a static method.",
-"location":  {
-"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlReaderTest.cs",
-"region":  {
-"startLine":  44,
-"startColumn":  24,
-"endLine":  44,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'XmlReader_4' a static method.",
-"location":  {
-"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlReaderTest.cs",
-"region":  {
-"startLine":  52,
-"startColumn":  24,
-"endLine":  52,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2325",
-"message":  "Make 'XmlReader_5' a static method.",
-"location":  {
-"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlReaderTest.cs",
-"region":  {
-"startLine":  59,
-"startColumn":  24,
-"endLine":  59,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S2325",
 "message":  "Make 'XmlTextReader_1' a static method.",
 "location":  {
 "uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlTextReaderTest.cs",

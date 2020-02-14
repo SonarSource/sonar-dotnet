@@ -22,9 +22,14 @@ using System.Xml;
 
 namespace Test
 {
-    class XmlTextReaderTest
+    public class XmlTextReaderTest
     {
         private const string Url = "resources/";
+
+        public static void Main(string[] args)
+        {
+            // dummy
+        }
 
         protected static void XmlTextReader_1()
         {

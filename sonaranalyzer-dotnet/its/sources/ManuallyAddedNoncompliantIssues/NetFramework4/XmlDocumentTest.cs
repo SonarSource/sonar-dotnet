@@ -23,7 +23,7 @@ using System.Xml;
 
 namespace Test
 {
-    class XmlDocumentTest
+    public class XmlDocumentTest
     {
         public static void Main(string[] args)
         {

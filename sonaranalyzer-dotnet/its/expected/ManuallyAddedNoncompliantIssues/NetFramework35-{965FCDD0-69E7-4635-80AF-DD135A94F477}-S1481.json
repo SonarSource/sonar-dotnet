@@ -2,26 +2,13 @@
 "issues":  [
 {
 "id":  "S1481",
-"message":  "Remove the unused local variable 'settings'.",
-"location":  {
-"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework35\XmlReaderTest.cs",
-"region":  {
-"startLine":  43,
-"startColumn":  17,
-"endLine":  43,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S1481",
 "message":  "Remove the unused local variable 'reader'.",
 "location":  {
 "uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework35\XmlTextReaderTest.cs",
 "region":  {
-"startLine":  31,
+"startLine":  36,
 "startColumn":  17,
-"endLine":  31,
+"endLine":  36,
 "endColumn":  23
 }
 }
