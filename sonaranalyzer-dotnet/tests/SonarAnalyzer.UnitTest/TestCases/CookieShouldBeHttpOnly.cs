@@ -84,5 +84,11 @@ namespace Tests.Diagnostics
             }
             c4.HttpOnly = true;
         }
+
+        void RaiseTwice()
+        {
+            var x = new HttpCookie("c"); // Noncompliant {{Make sure creating this cookie without the "HttpOnly" flag is safe.}}
+            x.HttpOnly = false; // Noncompliant
+        }
     }
 }

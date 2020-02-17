@@ -11,7 +11,7 @@ namespace Tests.Diagnostics
             // this is not used, but the rule is not advanced enough to figure it out
             XmlUrlResolver res = new XmlUrlResolver();
             // we don't really know it's null or not
-            reader.XmlResolver = parameter; // Noncompliant
+            reader.XmlResolver = parameter; // Noncompliant {{Disable access to external entities in XML parsing.}}
         }
 
         protected void XmlTextReader_2(XmlNameTable table)

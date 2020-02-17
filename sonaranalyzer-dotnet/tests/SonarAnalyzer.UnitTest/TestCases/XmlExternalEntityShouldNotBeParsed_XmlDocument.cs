@@ -11,8 +11,10 @@ using Microsoft.Web.XmlTransform;
 
 namespace Tests.Diagnostics
 {
-    class NoncompliantTests_After_Net_4_5_2
+    class NoncompliantTests
     {
+        XmlDocument doc = new XmlDocument() { XmlResolver = new XmlPreloadedResolver() }; // Noncompliant {{Disable access to external entities in XML parsing.}}
+
         // System.Xml.XmlDocument
         protected void XmlDocumentTest(XmlUrlResolver xmlUrlResolver)
         {

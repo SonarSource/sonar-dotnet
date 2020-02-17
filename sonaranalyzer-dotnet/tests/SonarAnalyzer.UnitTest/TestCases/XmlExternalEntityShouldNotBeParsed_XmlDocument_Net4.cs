@@ -13,6 +13,8 @@ namespace Tests.Diagnostics
 {
     class Test
     {
+        XmlDocument doc = new XmlDocument(); // Noncompliant
+
         protected static void XmlDocument_1(XmlUrlResolver xmlUrlResolver)
         {
             var doc = new XmlDocument(); // Noncompliant
