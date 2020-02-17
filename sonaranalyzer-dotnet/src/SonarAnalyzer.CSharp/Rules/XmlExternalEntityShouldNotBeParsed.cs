@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
@@ -68,10 +67,10 @@ namespace SonarAnalyzer.Rules.CSharp
                             var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
 
                             var trackers = TrackerFactory.Create(c.Compilation, VersionProvider);
-                            if (trackers.Item1.IsAnalyzedIncorrectly(objectCreation, c.SemanticModel) ||
-                                trackers.Item2.IsAnalyzedIncorrectly(objectCreation, c.SemanticModel))
+                            if (trackers.xmlDocumentTracker.ShouldBeReported(objectCreation, c.SemanticModel) ||
+                                trackers.xmlTextReaderTracker.ShouldBeReported(objectCreation, c.SemanticModel))
                             {
-                                c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], objectCreation.GetLocation()));
+                                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreation.GetLocation()));
                             }
                         },
                         SyntaxKind.ObjectCreationExpression);
@@ -82,10 +81,10 @@ namespace SonarAnalyzer.Rules.CSharp
                             var assignment = (AssignmentExpressionSyntax)c.Node;
 
                             var trackers = TrackerFactory.Create(c.Compilation, VersionProvider);
-                            if (trackers.Item1.IsAnalyzedIncorrectly(assignment, c.SemanticModel) ||
-                                trackers.Item2.IsAnalyzedIncorrectly(assignment, c.SemanticModel))
+                            if (trackers.xmlDocumentTracker.ShouldBeReported(assignment, c.SemanticModel) ||
+                                trackers.xmlTextReaderTracker.ShouldBeReported(assignment, c.SemanticModel))
                             {
-                                c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], assignment.GetLocation()));
+                                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignment.GetLocation()));
                             }
                         },
                         SyntaxKind.SimpleAssignmentExpression);
@@ -95,9 +94,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static class TrackerFactory
         {
-            // The value of System.Xml.DtdProcessing.Parse
-            private const int DtdProcessingParse = 2;
-
             private static ImmutableArray<KnownType> UnsafeXmlResolvers { get; } = ImmutableArray.Create(
                     KnownType.System_Xml_XmlUrlResolver,
                     KnownType.System_Xml_Resolvers_XmlPreloadedResolver
@@ -117,29 +113,30 @@ namespace SonarAnalyzer.Rules.CSharp
                 "ProhibitDtd" // should be true in .NET 3.5
             );
 
-            public static Tuple<CSharpObjectInitializationTracker, CSharpObjectInitializationTracker> Create(Compilation compilation, INetFrameworkVersionProvider versionProvider)
+            public static (CSharpObjectInitializationTracker xmlDocumentTracker, CSharpObjectInitializationTracker xmlTextReaderTracker) Create(
+                Compilation compilation, INetFrameworkVersionProvider versionProvider)
             {
                 var netFrameworkVersion = versionProvider.GetDotNetFrameworkVersion(compilation);
                 var constructorIsSafe = ConstructorIsSafe(netFrameworkVersion);
 
                 var xmlDocumentTracker = new CSharpObjectInitializationTracker(
                     // we do not expect any constant values for XmlResolver
-                    isAllowedConstantValue: constantValue => true,
+                    isAllowedConstantValue: constantValue => false,
                     trackedTypes: XmlDocumentTrackedTypes,
                     isTrackedPropertyName: propertyName => "XmlResolver" == propertyName,
-                    isAllowedObject: symbol => IsAllowedObject(symbol),
+                    isAllowedObject: IsAllowedObject,
                     constructorIsSafe: constructorIsSafe
                 );
 
                 var xmlTextReaderTracker = new CSharpObjectInitializationTracker(
-                    isAllowedConstantValue: constantValue => IsAllowedValueForXmlTextReader(constantValue),
+                    isAllowedConstantValue: IsAllowedValueForXmlTextReader,
                     trackedTypes: ImmutableArray.Create(KnownType.System_Xml_XmlTextReader),
-                    isTrackedPropertyName : propertyName => XmlTextReaderTrackedProperties.Contains(propertyName),
-                    isAllowedObject: symbol => IsAllowedObject(symbol),
+                    isTrackedPropertyName : XmlTextReaderTrackedProperties.Contains,
+                    isAllowedObject: IsAllowedObject,
                     constructorIsSafe: constructorIsSafe
                 );
 
-                return Tuple.Create(xmlDocumentTracker, xmlTextReaderTracker);
+                return (xmlDocumentTracker, xmlTextReaderTracker);
             }
 
             // The XmlDocument and XmlTextReader constructors were made safe-by-default in .NET 4.5.2
@@ -160,11 +157,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 if (constantValue is int integerValue)
                 {
-                    // treat the DtdProcessing property
-                    return integerValue != DtdProcessingParse;
+                    return integerValue != (int)System.Xml.DtdProcessing.Parse;
                 }
                 // treat the ProhibitDtd property
-                return constantValue is bool && (bool)constantValue;
+                return constantValue is bool value && value;
             }
 
             private static bool IsUnsafeXmlResolverConstructor(ISymbol symbol) =>

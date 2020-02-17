@@ -95,25 +95,12 @@ namespace SonarAnalyzer.SyntaxTrackers
             this.trackedConstructorArgumentIndex = trackedConstructorArgumentIndex;
         }
 
-        /// <summary>
-        /// Tests if the provided <paramref name="constantValue"/> is equal to an allowed constant (literal) value.
-        /// </summary>
-        internal bool IsAllowedConstantValue(object constantValue) => isAllowedConstantValue(constantValue);
-
-        /// <summary>
-        /// Returns true if the object represented by a <paramref name="symbol"/> should be allowed.
-        /// </summary>
-        internal bool IsAllowedObject(ISymbol symbol) => isAllowedObject(symbol);
-
-        internal bool IsTrackedType(ExpressionSyntax expression, SemanticModel semanticModel) =>
-            semanticModel.GetTypeInfo(expression).Type.IsAny(trackedTypes);
-
-        internal bool IsAnalyzedIncorrectly(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
+        internal bool ShouldBeReported(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
             IsTrackedType(objectCreation, semanticModel) &&
             !ObjectCreatedWithAllowedValue(objectCreation, semanticModel) &&
             !IsLaterAssignedWithAllowedValue(objectCreation, semanticModel);
 
-        internal bool IsAnalyzedIncorrectly(AssignmentExpressionSyntax assignment, SemanticModel semanticModel) =>
+        internal bool ShouldBeReported(AssignmentExpressionSyntax assignment, SemanticModel semanticModel) =>
             // Ignore assignments within object initializers, they are reported in the ObjectCreationExpression handler
             assignment.FirstAncestorOrSelf<InitializerExpressionSyntax>() == null &&
             IsTrackedPropertyName(assignment.Left) &&
@@ -121,10 +108,23 @@ namespace SonarAnalyzer.SyntaxTrackers
             !IsAllowedValue(assignment.Right, semanticModel);
 
         /// <summary>
+        /// Tests if the provided <paramref name="constantValue"/> is equal to an allowed constant (literal) value.
+        /// </summary>
+        private bool IsAllowedConstantValue(object constantValue) => isAllowedConstantValue(constantValue);
+
+        /// <summary>
+        /// Returns true if the object represented by a <paramref name="symbol"/> should be allowed.
+        /// </summary>
+        private bool IsAllowedObject(ISymbol symbol) => isAllowedObject(symbol);
+
+        private bool IsTrackedType(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            semanticModel.GetTypeInfo(expression).Type.IsAny(trackedTypes);
+
+        /// <summary>
         /// Tests if the expression is an allowed value. The implementation of checks is provided by the derived class.
         /// </summary>
         /// <returns>True if the expression is an allowed value, otherwise false.</returns>
-        internal bool IsAllowedValue(ExpressionSyntax expression, SemanticModel semanticModel)
+        private bool IsAllowedValue(ExpressionSyntax expression, SemanticModel semanticModel)
         {
             if (expression == null)
             {
@@ -144,12 +144,6 @@ namespace SonarAnalyzer.SyntaxTrackers
             }
             return false;
         }
-
-        /// <summary>
-        /// Tests the name of the property that has to be set with an allowed value in order for the object to be initialized correctly.
-        /// </summary>
-        /// <returns>True when <paramref name="propertyName"/> is the name of a relevant property, otherwise false.</returns>
-        internal bool IsTrackedPropertyName(string propertyName) => isTrackedPropertyName(propertyName);
 
         /// <summary>
         /// Verifies that the properties are assigned with allowed values. Otherwise, verifies the constructor invocation.
@@ -184,6 +178,12 @@ namespace SonarAnalyzer.SyntaxTrackers
             // if no tracked properties are being explicitly set or passed as arguments, the constructor may still be safe by design
             return constructorIsSafe;
         }
+
+        /// <summary>
+        /// Tests the name of the property that has to be set with an allowed value in order for the object to be initialized correctly.
+        /// </summary>
+        /// <returns>True when <paramref name="propertyName"/> is the name of a relevant property, otherwise false.</returns>
+        private bool IsTrackedPropertyName(string propertyName) => isTrackedPropertyName(propertyName);
 
         /// <summary>
         /// Tests if the <paramref name="expression"/> is <see cref="TrackedPropertyName"/>.
@@ -231,9 +231,7 @@ namespace SonarAnalyzer.SyntaxTrackers
         }
 
         private IEnumerable<ExpressionSyntax> GetInitializerExpressions(InitializerExpressionSyntax initializer) =>
-            initializer != null
-                ? initializer.Expressions
-                : Enumerable.Empty<ExpressionSyntax>();
+            initializer?.Expressions ?? Enumerable.Empty<ExpressionSyntax>();
 
         private static ISymbol GetAssignedVariableSymbol(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
         {

@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules
                         c =>
                         {
                             var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
-                            if (objectInitializationTracker.IsAnalyzedIncorrectly(objectCreation, c.SemanticModel))
+                            if (objectInitializationTracker.ShouldBeReported(objectCreation, c.SemanticModel))
                             {
                                 c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], objectCreation.GetLocation()));
                             }
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules
                         {
                             var assignment = (AssignmentExpressionSyntax)c.Node;
 
-                            if (objectInitializationTracker.IsAnalyzedIncorrectly(assignment, c.SemanticModel))
+                            if (objectInitializationTracker.ShouldBeReported(assignment, c.SemanticModel))
                             {
                                 c.ReportDiagnosticWhenActive(Diagnostic.Create(SupportedDiagnostics[0], assignment.GetLocation()));
                             }

@@ -128,6 +128,14 @@ namespace Tests.Diagnostics
             }
         }
 
+        delegate XmlUrlResolver TestDelegate();
+        private void LambdaFunction()
+        {
+            TestDelegate resolverFactory = () => new XmlUrlResolver();
+            var doc = new XmlDocument();
+            doc.XmlResolver = resolverFactory();
+        }
+
         public string XmlProperty
         {
             get
