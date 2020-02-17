@@ -55,48 +55,48 @@ href="https://www.owasp.org/index.php/Server_Side_Request_Forgery">SSRFs</a>:</p
 <p>System.Xml.XmlDocument</p>
 <pre>
 // .NET Framework &lt; 4.5.2
-XmlDocument parser = new XmlDocument();
-parser.LoadXml("xxe.xml"); // Noncompliant: XmlDocument is not safe by default
+XmlDocument parser = new XmlDocument(); // Noncompliant: XmlDocument is not safe by default
+parser.LoadXml("xxe.xml");
 
 or
 
 // .NET Framework 4.5.2+
 XmlDocument parser = new XmlDocument();
-parser.XmlResolver = new XmlUrlResolver();
-parser.LoadXml("xxe.xml"); // Noncompliant: XmlDocument.XmlResolver configured with XmlUrlResolver that makes it unsafe
+parser.XmlResolver = new XmlUrlResolver(); // Noncompliant: XmlDocument.XmlResolver configured with XmlUrlResolver that makes it unsafe
+parser.LoadXml("xxe.xml");
 </pre>
 <p>System.Xml.XmlTextReader</p>
 <pre>
 // .NET Framework &lt; 4.5.2
-XmlTextReader reader = new XmlTextReader("xxe.xml");
-while (reader.Read()) // Noncompliant: XmlTextReady is not safe by default
+XmlTextReader reader = new XmlTextReader("xxe.xml"); // Noncompliant: XmlTextReady is not safe by default
+while (reader.Read())
 { ... }
 
 or
 
 // .NET Framework 4.5.2+
 XmlTextReader reader = new XmlTextReader("xxe.xml");
-reader.XmlResolver = new XmlUrlResolver();
-while (reader.Read()) // Noncompliant: XmlTextRead.XmlResolver configured with XmlUrlResolver that makes it unsafe
+reader.XmlResolver = new XmlUrlResolver(); // Noncompliant: XmlTextRead.XmlResolver configured with XmlUrlResolver that makes it unsafe
+while (reader.Read())
 { ... }
 </pre>
 <h2>Compliant Solution</h2>
 <p>System.Xml.XmlDocument</p>
 <pre>
 XmlDocument parser = new XmlDocument();
-parser.XmlResolver = null;
-parser.LoadXml("xxe.xml"); // Compliant: XmlResolver has been set to null
+parser.XmlResolver = null; // Compliant: XmlResolver has been set to null
+parser.LoadXml("xxe.xml");
 
 or
 
-XmlDocument parser = new XmlDocument();
-parser.LoadXml("xxe.xml"); // Compliant: XmlDocument is safe by default in  .NET Framework 4.5.2+ because XmlResolver is set by default to null
+XmlDocument parser = new XmlDocument(); // Compliant: XmlDocument is safe by default in  .NET Framework 4.5.2+ because XmlResolver is set by default to null
+parser.LoadXml("xxe.xml");
 </pre>
 <p>System.Xml.XmlTextReader</p>
 <pre>
 // .NET 4.5.2+
-XmlTextReader reader = new XmlTextReader("xxe.xml");
-while (reader.Read()) // Compliant: XmlTextReader is safe by default in  .NET Framework 4.5.2+ because XmlResolver is set by default to null
+XmlTextReader reader = new XmlTextReader("xxe.xml"); // Compliant: XmlTextReader is safe by default in  .NET Framework 4.5.2+ because XmlResolver is set by default to null
+while (reader.Read())
 { ... }
 
 // .NET 4.0 to .NET 4.5.1
