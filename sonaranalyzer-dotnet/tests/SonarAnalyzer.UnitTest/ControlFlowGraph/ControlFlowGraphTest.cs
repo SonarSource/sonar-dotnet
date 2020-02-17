@@ -1606,7 +1606,8 @@ namespace NS
             var assignmentBlock = blocks[2];
             var exitBlock = cfg.ExitBlock;
 
-            branchBlock.SuccessorBlocks.Should().OnlyContainInOrder(throwBlock, assignmentBlock);
+            branchBlock.TrueSuccessorBlock.Should().Be(throwBlock);
+            branchBlock.FalseSuccessorBlock.Should().Be(assignmentBlock);
             throwBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
             assignmentBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
 
