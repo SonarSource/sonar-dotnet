@@ -35,5 +35,25 @@ namespace NetFramework4
             XmlTextReader reader = new XmlTextReader(Url);
             reader.DtdProcessing = DtdProcessing.Ignore; // ok
         }
+
+        protected void XmlTextReader_InsideIf(bool foo)
+        {
+            var reader = new XmlTextReader("resources/"); // Noncompliant
+            if (foo)
+            {
+                reader.XmlResolver = null; // conditionally set; not enough
+            }
+        }
+
+        protected void XmlTextReader_InsideIf2(bool foo)
+        {
+            var reader = new XmlTextReader("resources/");
+            if (foo)
+            {
+                reader.XmlResolver = null;
+            }
+            reader.XmlResolver = null; // this is ok
+        }
+
     }
 }

@@ -22,38 +22,38 @@ using System.Xml;
 
 namespace Test
 {
-    class XmlTextReaderTest
+    public static class XmlTextReaderTest
     {
         private const string Url = "resources/";
 
-        protected static void XmlTextReader_before_4_5_2(XmlUrlResolver parameter)
+        public static XmlTextReader XmlTextReader_OnlyConstructor()
         {
-            new XmlTextReader(Url); // Noncompliant
+            var x = new XmlTextReader(Url); // Noncompliant
+            return x;
         }
 
-        // System.Xml.XmlTextReader
-        protected void XmlTextReader_1()
+        public static void XmlTextReader_SetSanitizeWithNull()
         {
             var reader = new XmlTextReader("resources/");
             reader.XmlResolver = null; // compliant before 4.5.2
         }
 
-        protected static XmlTextReader XmlTextReader_after_4_5_2(XmlUrlResolver parameter)
+        public static XmlTextReader XmlTextReader_SetVulnerableProperty(XmlUrlResolver parameter)
         {
-            var reader = new XmlTextReader(Url); // this is safe in .NET 4.5.2+ by default - FP
+            var reader = new XmlTextReader(Url);
             reader.XmlResolver = parameter; // Noncompliant
             return reader;
         }
 
-        protected static void XmlTextReader_before4_5_2_compliant1()
+        public static void XmlTextReader_SetProhibit()
         {
             var reader = new XmlTextReader(Url);
             reader.DtdProcessing = DtdProcessing.Prohibit; // ok
         }
 
-        protected static void XmlTextReader_before4_5_2_compliant2()
+        public static void XmlTextReader_SetIgnore()
         {
-            XmlTextReader reader = new XmlTextReader(Url);
+            var reader = new XmlTextReader(Url);
             reader.DtdProcessing = DtdProcessing.Ignore; // ok
         }
 

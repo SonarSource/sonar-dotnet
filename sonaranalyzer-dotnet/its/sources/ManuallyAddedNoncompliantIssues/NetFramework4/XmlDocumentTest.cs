@@ -23,41 +23,40 @@ using System.Xml;
 
 namespace Test
 {
-    public class XmlDocumentTest
+    public static class XmlDocumentTest
     {
         public static void Main(string[] args)
         {
             // dummy
         }
 
-        protected static void XmlDocument_1(XmlUrlResolver xmlUrlResolver)
+        public static XmlDocument XmlDocument_OnlyConstructor()
+        {
+            return new XmlDocument(); // Noncompliant before 4.5.2
+        }
+
+        public static void XmlDocument_ConstructorWithVulnerableProperty(XmlUrlResolver xmlUrlResolver)
         {
             var doc = new XmlDocument(); // Noncompliant
             doc.XmlResolver = xmlUrlResolver; // Noncompliant in all versions - and shown twice
         }
 
-        protected static void XmlDocument_2()
-        {
-            new XmlDocument(); // Noncompliant before 4.5.2
-        }
-
-        // System.Xml.XmlDocument
-        protected static void XmlDocument_3(XmlSecureResolver xmlSecureResolver)
+        public static void XmlDocument_SetSafeResolver(XmlSecureResolver xmlSecureResolver)
         {
             var doc = new XmlDocument();
             doc.XmlResolver = xmlSecureResolver;
         }
 
-        protected static void XmlDocument_1()
+        public static void XmlDocument_SetNull()
         {
             var doc = new XmlDocument();
             doc.XmlResolver = null;
         }
 
-        // System.Configuration.ConfigXmlDocument
-        protected void ConfigXmlDocumentTest()
+        public static ConfigXmlDocument ConfigXmlDocumentTest()
         {
-            ConfigXmlDocument doc = new ConfigXmlDocument(); // Noncompliant
+            var doc = new ConfigXmlDocument(); // Noncompliant
+            return doc;
         }
 
     }

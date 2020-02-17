@@ -7,9 +7,9 @@
 "uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework35\XmlTextReaderTest.cs",
 "region":  {
 "startLine":  36,
-"startColumn":  26,
+"startColumn":  20,
 "endLine":  36,
-"endColumn":  48
+"endColumn":  42
 }
 }
 },

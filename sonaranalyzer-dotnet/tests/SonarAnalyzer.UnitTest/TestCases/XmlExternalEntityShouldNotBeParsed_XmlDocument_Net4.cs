@@ -23,5 +23,25 @@ namespace Tests.Diagnostics
         {
             new XmlDocument(); // Noncompliant before 4.5.2
         }
+
+        protected void XmlDocument_InsideIf(bool foo)
+        {
+            var doc = new XmlDocument(); // Noncompliant
+            if (foo)
+            {
+                doc.XmlResolver = null; // conditionally set; not enough
+            }
+        }
+
+        protected void XmlDocument_InsideIf2(bool foo)
+        {
+            var doc = new XmlDocument();
+            if (foo)
+            {
+                doc.XmlResolver = null;
+            }
+            doc.XmlResolver = null; // this is ok
+        }
+
     }
 }

@@ -22,32 +22,31 @@
 
 namespace Test
 {
-    class XmlDocumentTest
+    public static class XmlDocumentTest
     {
         public static void Main(string[] args)
         {
             // dummy
         }
 
-        protected static void XmlDocument_1(XmlUrlResolver xmlUrlResolver)
+        public static XmlDocument XmlDocument_OnlyConstructor()
+        {
+            return new XmlDocument();
+        }
+
+        public static void XmlDocument_SetUnsafeResolver(XmlUrlResolver xmlUrlResolver)
         {
             var doc = new XmlDocument();
             doc.XmlResolver = xmlUrlResolver; // Noncompliant in all versions
         }
 
-        protected static void XmlDocument_2()
-        {
-            new XmlDocument();
-        }
-
-        // System.Xml.XmlDocument
-        protected static void XmlDocument_3(XmlSecureResolver xmlSecureResolver)
+        public static void XmlDocument_SetSecureResolver(XmlSecureResolver xmlSecureResolver)
         {
             var doc = new XmlDocument();
             doc.XmlResolver = xmlSecureResolver;
         }
 
-        protected static void XmlDocument_1()
+        public static void XmlDocument_SetNullResolver()
         {
             var doc = new XmlDocument();
             doc.XmlResolver = null;

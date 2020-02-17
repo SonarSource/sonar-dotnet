@@ -18,36 +18,36 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
- using System.Xml;
+using System.Xml;
 
 namespace Test
 {
-    class XmlDocumentTest
+    public static class XmlDocumentTest
     {
         public static void Main(string[] args)
         {
             // dummy
         }
 
-        protected static void XmlDocument_1(XmlUrlResolver xmlUrlResolver)
+        public static XmlDocument XmlDocument_OnlyConstructor()
+        {
+            var x = new XmlDocument(); // safe in 4.5.2+
+            return x;
+        }
+
+        public static void XmlDocument_SetUnsafeResolve(XmlUrlResolver xmlUrlResolver)
         {
             var doc = new XmlDocument();
             doc.XmlResolver = xmlUrlResolver; // Noncompliant in all versions
         }
 
-        protected static void XmlDocument_2()
-        {
-            new XmlDocument();
-        }
-
-        // System.Xml.XmlDocument
-        protected static void XmlDocument_3(XmlSecureResolver xmlSecureResolver)
+        public static void XmlDocument_SetSafeResolver(XmlSecureResolver xmlSecureResolver)
         {
             var doc = new XmlDocument();
             doc.XmlResolver = xmlSecureResolver;
         }
 
-        protected static void XmlDocument_1()
+        public static void XmlDocument_SetNullResolver()
         {
             var doc = new XmlDocument();
             doc.XmlResolver = null;

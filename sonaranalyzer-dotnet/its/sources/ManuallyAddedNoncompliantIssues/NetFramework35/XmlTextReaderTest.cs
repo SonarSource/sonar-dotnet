@@ -22,7 +22,7 @@ using System.Xml;
 
 namespace Test
 {
-    public class XmlTextReaderTest
+    public static class XmlTextReaderTest
     {
         private const string Url = "resources/";
 
@@ -31,18 +31,18 @@ namespace Test
             // dummy
         }
 
-        protected static void XmlTextReader_1()
+        public static XmlTextReader XmlTextReader_OnlyConstructor()
         {
-            var reader = new XmlTextReader(Url); // Noncompliant
+            return new XmlTextReader(Url); // Noncompliant
         }
 
-        protected static void XmlTextReader_2()
+        public static void XmlTextReader_SetProhibit()
         {
             var reader = new XmlTextReader(Url);
             reader.ProhibitDtd = true; // ok
         }
 
-        protected static void XmlTextReader_3()
+        public static void XmlTextReader_SetVulnerableProperty()
         {
             var reader = new XmlTextReader(Url); // Noncompliant in 3.5
             reader.ProhibitDtd = false;

@@ -22,32 +22,32 @@ using System.Xml;
 
 namespace Test
 {
-    class XmlTextReaderTest
+    public static class XmlTextReaderTest
     {
         private const string Url = "resources/";
 
-        protected static XmlTextReader XmlTextReader_after_4_5_2(XmlUrlResolver parameter)
+        public static XmlTextReader XmlTextReader_OnlyConstructor()
+        {
+            return new XmlTextReader(Url); // this is safe in .NET 4.5.2+ by default
+        }
+
+        public static XmlTextReader XmlTextReader_SetUnsafeResolver(XmlUrlResolver parameter)
         {
             var reader = new XmlTextReader(Url); // this is safe in .NET 4.5.2+ by default
             reader.XmlResolver = parameter; // Noncompliant
             return reader;
         }
 
-        protected static void XmlTextReader_before4_5_2_compliant1()
+        public static void XmlTextReader_SetProhibit()
         {
             var reader = new XmlTextReader(Url);
             reader.DtdProcessing = DtdProcessing.Prohibit; // ok
         }
 
-        protected static void XmlTextReader_before4_5_2_compliant2()
+        public static void XmlTextReader_SetIgnore()
         {
-            XmlTextReader reader = new XmlTextReader(Url);
+            var reader = new XmlTextReader(Url);
             reader.DtdProcessing = DtdProcessing.Ignore; // ok
-        }
-
-        protected static XmlTextReader XmlTextReader_after_4_5_2_compliant(XmlUrlResolver parameter)
-        {
-            return new XmlTextReader(Url); // this is safe in .NET 4.5.2+ by default
         }
 
     }

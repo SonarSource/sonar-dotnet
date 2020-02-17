@@ -7,9 +7,9 @@
 "uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlDocumentTest.cs",
 "region":  {
 "startLine":  35,
-"startColumn":  23,
+"startColumn":  20,
 "endLine":  35,
-"endColumn":  40
+"endColumn":  37
 }
 }
 },
@@ -19,10 +19,10 @@
 "location":  {
 "uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlDocumentTest.cs",
 "region":  {
-"startLine":  36,
-"startColumn":  13,
-"endLine":  36,
-"endColumn":  45
+"startLine":  40,
+"startColumn":  23,
+"endLine":  40,
+"endColumn":  40
 }
 }
 },
@@ -35,7 +35,7 @@
 "startLine":  41,
 "startColumn":  13,
 "endLine":  41,
-"endColumn":  30
+"endColumn":  45
 }
 }
 },
@@ -45,10 +45,10 @@
 "location":  {
 "uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlDocumentTest.cs",
 "region":  {
-"startLine":  60,
-"startColumn":  37,
-"endLine":  60,
-"endColumn":  60
+"startLine":  58,
+"startColumn":  23,
+"endLine":  58,
+"endColumn":  46
 }
 }
 },
@@ -59,9 +59,9 @@
 "uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework4\XmlTextReaderTest.cs",
 "region":  {
 "startLine":  31,
-"startColumn":  13,
+"startColumn":  21,
 "endLine":  31,
-"endColumn":  35
+"endColumn":  43
 }
 }
 },
