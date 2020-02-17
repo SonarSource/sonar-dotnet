@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules
                     .Select(x => x.Trim())
                     .ToList();
 
-                this.passwordValuePattern = new Regex(string.Format(@"\b(?<password>{0})\s*[:=]\s*(?<suffix>.+)$",
+                this.passwordValuePattern = new Regex(string.Format(@"\b(?<credential>{0})\s*[:=]\s*(?<suffix>.+)$",
                     string.Join("|", this.splitCredentialWords.Select(Regex.Escape))), RegexOptions.Compiled | RegexOptions.IgnoreCase);
             }
         }
@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules
         protected abstract class CredentialWordsFinderBase<TSyntaxNode>
              where TSyntaxNode : SyntaxNode
         {
-            private readonly Regex validParameterPattern = new Regex(@"^\?|:\w+|\{\d+[^}]*\}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            private readonly Regex validCredentialPattern = new Regex(@"^\?|:\w+|\{\d+[^}]*\}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             private readonly DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer;
 
             protected CredentialWordsFinderBase(DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer)
@@ -148,9 +148,9 @@ namespace SonarAnalyzer.Rules
                     .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
                 var match = analyzer.passwordValuePattern.Match(variableValue);
-                if (match.Success && !IsValidParameter(match.Groups["suffix"].Value))
+                if (match.Success && !IsValidCredential(match.Groups["suffix"].Value))
                 {
-                    credentialWordsFound.Add(match.Groups["password"].Value);
+                    credentialWordsFound.Add(match.Groups["credential"].Value);
                 }
 
                 // Rule was initially implemented with everything lower (which is wrong) so we have to force lower
@@ -158,12 +158,12 @@ namespace SonarAnalyzer.Rules
                 return credentialWordsFound.Select(x => x.ToLowerInvariant());
             }
 
-            private bool IsValidParameter(string suffix)
+            private bool IsValidCredential(string suffix)
             {
-                var candidateParameter = suffix.Split(';').First().Trim();
+                var candidateCredential = suffix.Split(';').First().Trim();
 
-                return string.IsNullOrWhiteSpace(candidateParameter) ||
-                       validParameterPattern.IsMatch(candidateParameter);
+                return string.IsNullOrWhiteSpace(candidateCredential) ||
+                       this.validCredentialPattern.IsMatch(candidateCredential);
             }
         }
     }
