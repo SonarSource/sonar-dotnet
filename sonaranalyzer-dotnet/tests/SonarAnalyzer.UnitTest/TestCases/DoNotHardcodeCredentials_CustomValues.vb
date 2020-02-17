@@ -11,7 +11,8 @@ Namespace Tests.Diagnostics
             Dim passKodeKode As String = "a" 'Noncompliant
             Dim passKoDe As String = "a"    ' Error [BC30288] Local variable 'passKoDe' is already declared in the current block
             Dim x As String = "kode=a;kode=a" 'Noncompliant
-            Dim x2 As String = "facal-faire=a;kode=a" 'Noncompliant
+            Dim x1 As String = "facal-faire=a;kode=a" 'Noncompliant
+            Dim x2 as String = "x\*+?|}{][)(^$.# =something" ' Noncompliant
         End Sub
 
         Public Sub StandardAPI(secureString As SecureString, nonHardcodedPassword As String, byteArray As Byte(), cspParams As CspParameters)
@@ -31,7 +32,7 @@ Namespace Tests.Diagnostics
 
     Class FalseNegatives
         Public Sub Test()
-            Dim x as String = "\*+?|}{][)(^$.# =something" ' FN
+            Dim x as String = "*=something" ' FN - current regex expects \b (word boundary) at the beginning
         End Sub
     End Class
 End Namespace
