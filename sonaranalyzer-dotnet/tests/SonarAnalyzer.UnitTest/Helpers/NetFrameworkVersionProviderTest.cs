@@ -61,6 +61,17 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
+        public void NetFrameworkVersionProvider_CurrentAssemblyMscorlib_Netstandard()
+        {
+            var compilation = GetCompilation(FrameworkMetadataReference.Mscorlib
+                .Concat(FrameworkMetadataReference.System)
+                .Concat(FrameworkMetadataReference.Netstandard));
+            var versionProvider = new NetFrameworkVersionProvider();
+            // the local .net framework mscorlib is actually used
+            versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.After45);
+        }
+
+        [TestMethod]
         public void NetFrameworkVersionProvider_NoReference()
         {
 
