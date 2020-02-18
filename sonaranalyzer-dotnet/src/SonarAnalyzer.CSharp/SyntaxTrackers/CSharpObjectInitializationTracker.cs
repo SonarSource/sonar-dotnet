@@ -180,16 +180,13 @@ namespace SonarAnalyzer.SyntaxTrackers
         }
 
         /// <summary>
-        /// Tests the name of the property that has to be set with an allowed value in order for the object to be initialized correctly.
+        /// Returns true if <paramref name="propertyName"/> is the name of a tracked property.
         /// </summary>
-        /// <returns>True when <paramref name="propertyName"/> is the name of a relevant property, otherwise false.</returns>
         private bool IsTrackedPropertyName(string propertyName) => isTrackedPropertyName(propertyName);
 
         /// <summary>
-        /// Tests if the <paramref name="expression"/> is <see cref="TrackedPropertyName"/>.
+        /// Returns true if the <paramref name="expression"/> has the name of a tracked property.
         /// </summary>
-        /// <returns>True if the <paramref name="expression"/> is <see cref="TrackedPropertyName"/>,
-        /// otherwise false.</returns>
         private bool IsTrackedPropertyName(ExpressionSyntax expression)
         {
             var memberAccess = expression as MemberAccessExpressionSyntax;
@@ -198,10 +195,8 @@ namespace SonarAnalyzer.SyntaxTrackers
         }
 
         /// <summary>
-        /// Tests if the provided expression is a property of the <see cref="TrackedTypes"/>. Override this method
-        /// when the <see cref="TrackedPropertyName"/> is a indexer for example.
+        /// Returns true if the provided expression is a member of a tracked type.
         /// </summary>
-        /// <returns>True when the parameter is a property of the <see cref="TrackedTypes"/>, otherwise false.</returns>
         private bool IsPropertyOnTrackedType(ExpressionSyntax expression, SemanticModel semanticModel) =>
             expression is MemberAccessExpressionSyntax memberAccess &&
             memberAccess.Expression != null &&
