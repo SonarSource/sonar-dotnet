@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -23,7 +23,7 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.CFG.Helpers
 {
-    public static class SemanticModelHelper
+    internal static class SemanticModelHelper
     {
         /// <summary>
         /// Starting .NET Framework 4.6.1, we've noticed that LINQ methods aren't resolved properly, so we need to use the CandidateSymbol.
@@ -35,7 +35,7 @@ namespace SonarAnalyzer.CFG.Helpers
         /// The first candidate symbol if resolution failed.
         /// Null if no symbol was found.
         /// </returns>
-        internal static ISymbol GetSymbolOrCandidateSymbol(this SemanticModel model, SyntaxNode node)
+        public static ISymbol GetSymbolOrCandidateSymbol(this SemanticModel model, SyntaxNode node)
         {
             var symbolInfo = model.GetSymbolInfo(node);
             if (symbolInfo.Symbol != null)
