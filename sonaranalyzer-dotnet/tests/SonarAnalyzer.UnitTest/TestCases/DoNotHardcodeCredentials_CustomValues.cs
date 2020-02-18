@@ -15,8 +15,8 @@ namespace Tests.Diagnostics
             string passKoDe = "a"; // Compliant
 
             string x = "kode=a;kode=a"; // Noncompliant
-            string x2 = "facal-faire=a;kode=a"; // Noncompliant
-
+            string x1 = "facal-faire=a;kode=a"; // Noncompliant
+            string x2 = @"x\*+?|}{][)(^$.# =something"; // Noncompliant
         }
 
         public void StandardAPI(SecureString secureString, string nonHardcodedPassword, byte[] byteArray, CspParameters cspParams)
@@ -32,6 +32,14 @@ namespace Tests.Diagnostics
             new NetworkCredential("username", "hardcoded"); // Noncompliant
             networkCredential.Password = "hardcoded"; // Noncompliant
             new PasswordDeriveBytes("hardcoded", byteArray, cspParams); // Noncompliant
+        }
+    }
+
+    public class FalseNegatives
+    {
+        public void Method()
+        {
+            string x = "*=something"; // FN - current regex expects \b (word boundary) at the beginning
         }
     }
 }

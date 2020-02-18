@@ -54,8 +54,9 @@ namespace SonarAnalyzer.Rules
                     .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                     .Select(x => x.Trim())
                     .ToList();
-                this.passwordValuePattern = new Regex(string.Format(@"\b(?<password>{0})\b[:=]\S",
-                    string.Join("|", this.splitCredentialWords)), RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+                this.passwordValuePattern = new Regex(string.Format(@"\b(?<credential>{0})\s*[:=]\s*(?<suffix>.+)$",
+                    string.Join("|", this.splitCredentialWords.Select(Regex.Escape))), RegexOptions.Compiled | RegexOptions.IgnoreCase);
             }
         }
 
@@ -99,6 +100,7 @@ namespace SonarAnalyzer.Rules
         protected abstract class CredentialWordsFinderBase<TSyntaxNode>
              where TSyntaxNode : SyntaxNode
         {
+            private readonly Regex validCredentialPattern = new Regex(@"^\?|:\w+|\{\d+[^}]*\}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             private readonly DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer;
 
             protected CredentialWordsFinderBase(DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer)
@@ -145,15 +147,23 @@ namespace SonarAnalyzer.Rules
                     .Intersect(analyzer.splitCredentialWords)
                     .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
-                var matches = analyzer.passwordValuePattern.Matches(variableValue);
-                foreach (Match match in matches)
+                var match = analyzer.passwordValuePattern.Match(variableValue);
+                if (match.Success && !IsValidCredential(match.Groups["suffix"].Value))
                 {
-                    credentialWordsFound.Add(match.Groups["password"].Value);
+                    credentialWordsFound.Add(match.Groups["credential"].Value);
                 }
 
                 // Rule was initially implemented with everything lower (which is wrong) so we have to force lower
                 // before reporting to avoid new issues to appear on SQ/SC.
                 return credentialWordsFound.Select(x => x.ToLowerInvariant());
+            }
+
+            private bool IsValidCredential(string suffix)
+            {
+                var candidateCredential = suffix.Split(';').First().Trim();
+
+                return string.IsNullOrWhiteSpace(candidateCredential) ||
+                       this.validCredentialPattern.IsMatch(candidateCredential);
             }
         }
     }

@@ -63,17 +63,32 @@ namespace Tests.Diagnostics
             new PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1); // Noncompliant
             new PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1, cspParams); // Noncompliant
         }
+
+        public void CompliantParameterUse(string pwd)
+        {
+            string query1 = "password=?";
+            string query2 = "password=:password";
+            string query3 = "password=:param";
+            string query4 = "password='"+pwd+"'";
+            string query5 = "password={0}";
+            string query6 = "password=;user=;";
+            string query7 = "password=:password;user=:user;";
+            string query8 = "password=?;user=?;";
+            string query9 = @"Server=myServerName\myInstanceName;Database=myDataBase;Password=:myPassword;User Id=:username;";
+        }
     }
 
     class FalseNegatives
     {
         private string password;
 
-        public void Foo()
+        public void Foo(string user)
         {
             this.password = "foo"; // False Negative
             Configuration.Password = "foo"; // False Negative
             this.password = Configuration.Password = "foo"; // False Negative
+            string query1 = "password=':crazy;secret';user=xxx"; // False Negative - passwords enclosed in '' are not covered
+            string query2 = "password=hardcoded;user='" + user + "'"; // False Negative - Only LiteralExpressionSyntax nodes are covered
         }
 
         class Configuration
