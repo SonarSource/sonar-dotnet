@@ -11,22 +11,25 @@ using Microsoft.Web.XmlTransform;
 
 namespace Tests.Diagnostics
 {
+    /// <summary>
+    /// In .NET Framework 3.5, the constructor is unsafe by default.
+    /// </summary>
     class Test
     {
         XmlDocument doc = new XmlDocument(); // Noncompliant
 
-        protected static void XmlDocument_1(XmlUrlResolver xmlUrlResolver)
+        protected static void XmlDocument_SetUnsafeProperty(XmlUrlResolver xmlUrlResolver)
         {
             var doc = new XmlDocument(); // Noncompliant
             doc.XmlResolver = xmlUrlResolver; // Noncompliant in all versions - and shown twice
         }
 
-        protected static void XmlDocument_2()
+        protected static void XmlDocument_OnlyConstructor()
         {
             new XmlDocument(); // Noncompliant before 4.5.2
         }
 
-        protected void XmlDocument_InsideIf(bool foo)
+        protected void XmlDocument_InsideIf_SanitizeInCondition(bool foo)
         {
             var doc = new XmlDocument(); // Noncompliant
             if (foo)
@@ -35,7 +38,7 @@ namespace Tests.Diagnostics
             }
         }
 
-        protected void XmlDocument_InsideIf2(bool foo)
+        protected void XmlDocument_InsideIf_SanitizeOutsideCondition(bool foo)
         {
             var doc = new XmlDocument();
             if (foo)

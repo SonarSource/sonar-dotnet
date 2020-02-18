@@ -29,6 +29,10 @@ namespace Tests.Diagnostics
         }
     }
 
+    /// <summary>
+    /// There are APIs that become unsafe if an unsafe XmlDocument or XmlTextReader are passed to them.
+    /// As we already track these types and raise on them, there's no need to add noise.
+    /// </summary>
     class IgnoredToAvoidNoise
     {
         // System.Xml.Xsl.XslCompiledTransform

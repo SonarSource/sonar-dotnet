@@ -11,15 +11,18 @@ using Microsoft.Web.XmlTransform;
 
 namespace Tests.Diagnostics
 {
+    /// <summary>
+    /// Unknown framework behaves like .NET Framework 4.5.2+
+    /// </summary>
     class Test
     {
-        protected static void XmlDocument_1(XmlUrlResolver xmlUrlResolver)
+        protected static void XmlDocument_MakeUnsafe(XmlUrlResolver xmlUrlResolver)
         {
             var doc = new XmlDocument();
-            doc.XmlResolver = xmlUrlResolver; // Noncompliant in all versions - and shown twice
+            doc.XmlResolver = xmlUrlResolver; // Noncompliant in all versions
         }
 
-        protected static void XmlDocument_2()
+        protected static void XmlDocument_OnlyConstructor()
         {
             new XmlDocument();
         }

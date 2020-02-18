@@ -11,11 +11,14 @@ using Microsoft.Web.XmlTransform;
 
 namespace Tests.Diagnostics
 {
+    /// <summary>
+    /// In .NET Framework 4.5.2+, the XmlDocument (and derivates) constructors are safe.
+    /// An unsafe XML Resolver must be set in order to make the XmlDocument unsafe.
+    /// </summary>
     class NoncompliantTests
     {
         XmlDocument doc = new XmlDocument() { XmlResolver = new XmlPreloadedResolver() }; // Noncompliant {{Disable access to external entities in XML parsing.}}
 
-        // System.Xml.XmlDocument
         protected void XmlDocumentTest(XmlUrlResolver xmlUrlResolver)
         {
             XmlDocument doc = new XmlDocument();
@@ -53,38 +56,33 @@ namespace Tests.Diagnostics
 
     class CompliantTests_After_Net_4_5_2
     {
-        // System.Xml.XmlDocument
-        protected void XmlDocument_1(XmlSecureResolver xmlSecureResolver)
+        protected void XmlDocument_WithSecureResolver(XmlSecureResolver xmlSecureResolver)
         {
             XmlDocument doc = new XmlDocument();
             doc.XmlResolver = xmlSecureResolver;
         }
 
-        protected void XmlDocument_2(XmlSecureResolver xmlSecureResolver)
+        protected void XmlDocument_WithNullResolver(XmlSecureResolver xmlSecureResolver)
         {
             XmlDocument doc = new XmlDocument();
             doc.XmlResolver = null;
         }
 
-        // System.Xml.XmlDataDocument
         protected void XmlDataDocumentTest()
         {
             XmlDataDocument doc = new XmlDataDocument();
         }
 
-        // System.Configuration.ConfigXmlDocument
         protected void ConfigXmlDocumentTest()
         {
             ConfigXmlDocument doc = new ConfigXmlDocument();
         }
 
-        // Microsoft.Web.XmlTransform.XmlFileInfoDocument
         protected void XmlFileInfoDocumentTest()
         {
             XmlFileInfoDocument doc = new XmlFileInfoDocument();
         }
 
-        // Microsoft.Web.XmlTransform.XmlTransformableDocument
         protected void XmlTransformableDocumentTest()
         {
             XmlTransformableDocument doc = new XmlTransformableDocument();
@@ -135,7 +133,23 @@ namespace Tests.Diagnostics
         {
             TestDelegate resolverFactory = () => new XmlUrlResolver();
             var doc = new XmlDocument();
-            doc.XmlResolver = resolverFactory();
+            doc.XmlResolver = resolverFactory(); // FN
+        }
+
+        private void SetUnsafeResolverFromMethod()
+        {
+            var doc = new XmlDocument();
+            doc.XmlResolver = GetUrlResolver(); // FN
+        }
+
+        private XmlUrlResolver GetUrlResolver() => new XmlUrlResolver();
+
+        private void PropagateResolverValue(ConfigXmlDocument doc)
+        {
+            var res1 = new XmlUrlResolver();
+            var res2 = res1;
+            var res3 = res2;
+            doc.XmlResolver = res3; // Noncompliant
         }
 
         public string XmlProperty
