@@ -21,14 +21,15 @@
 extern alias csharp;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.CodeActions;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
@@ -39,7 +40,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public void VerifyCodeFix_WithDuplicateIssues()
         {
             const string filename = @"TestCases\VerifyCodeFix.Empty.cs";
-            System.Action a = () => { Verifier.VerifyCodeFix(filename, filename, new TestDuplicateLocationRule(), new TestDuplicateLocationRuleCodeFix()); };
+            Action a = () => { Verifier.VerifyCodeFix(filename, filename, new TestDuplicateLocationRule(), new TestDuplicateLocationRuleCodeFix()); };
             a.Should().NotThrow();
         }
 
@@ -47,12 +48,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private class TestDuplicateLocationRule : SonarDiagnosticAnalyzer
         {
             public const string DiagnosticId = "Test42";
-            private DiagnosticDescriptor rule = new DiagnosticDescriptor(DiagnosticId, "Title", "Message", "Category", DiagnosticSeverity.Warning, true, null, null, new[] { "MainSourceScope" });
+            private readonly DiagnosticDescriptor rule = new DiagnosticDescriptor(DiagnosticId, "Title", "Message", "Category", DiagnosticSeverity.Warning, true, null, null, "MainSourceScope");
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
             protected override void Initialize(SonarAnalysisContext context)
             {
-                context.RegisterSyntaxNodeAction<SyntaxKind>(c =>
+                context.RegisterSyntaxNodeAction(c =>
                 {
                     // Duplicate issues from different analyzer versions, see https://github.com/SonarSource/sonar-dotnet/issues/1109
                     c.ReportDiagnostic(Diagnostic.Create(this.rule, c.Node.GetLocation()));
@@ -68,7 +69,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
             {
-                // Do not change the document
                 context.RegisterCodeFix(CodeAction.Create("TestTitle", c => Task.FromResult(context.Document)), context.Diagnostics);
                 return TaskHelper.CompletedTask;
             }

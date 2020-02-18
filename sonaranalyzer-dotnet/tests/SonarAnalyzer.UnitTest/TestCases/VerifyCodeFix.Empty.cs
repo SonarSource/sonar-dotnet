@@ -1,5 +1,5 @@
 ﻿
 namespace Tests
 {
-    // Nothing to see here
+    // Only namespace declaration is needed here to raise the issue
 }
