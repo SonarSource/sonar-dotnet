@@ -1,4 +1,4 @@
-extern alias csharp;
+﻿extern alias csharp;
 /*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2020 SonarSource SA
@@ -21,6 +21,7 @@ extern alias csharp;
 
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
