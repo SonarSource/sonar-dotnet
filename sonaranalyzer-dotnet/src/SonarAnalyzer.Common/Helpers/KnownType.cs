@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -77,6 +77,8 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_ClassInitializeAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_TestCleanupAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_TestInitializeAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute");
+        internal static readonly KnownType Microsoft_Web_XmlTransform_XmlFileInfoDocument = new KnownType("Microsoft.Web.XmlTransform.XmlFileInfoDocument");
+        internal static readonly KnownType Microsoft_Web_XmlTransform_XmlTransformableDocument = new KnownType("Microsoft.Web.XmlTransform.XmlTransformableDocument");
         internal static readonly KnownType Microsoft_Win32_SafeHandles_SafeFileHandle = new KnownType("Microsoft.Win32.SafeHandles.SafeFileHandle");
         internal static readonly KnownType Nancy_Cookies_NancyCookie = new KnownType("Nancy.Cookies.NancyCookie");
         internal static readonly KnownType NLog_LogManager = new KnownType("NLog.LogManager");
@@ -167,6 +169,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_ComponentModel_Composition_ExportAttribute = new KnownType("System.ComponentModel.Composition.ExportAttribute");
         internal static readonly KnownType System_ComponentModel_Composition_InheritedExportAttribute = new KnownType("System.ComponentModel.Composition.InheritedExportAttribute");
         internal static readonly KnownType System_ComponentModel_Composition_PartCreationPolicyAttribute = new KnownType("System.ComponentModel.Composition.PartCreationPolicyAttribute");
+        internal static readonly KnownType System_Configuration_ConfigXmlDocument = new KnownType("System.Configuration.ConfigXmlDocument");
         internal static readonly KnownType System_Console = new KnownType("System.Console");
         internal static readonly KnownType System_Data_Common_CommandTrees_DbExpression = new KnownType("System.Data.Common.CommandTrees.DbExpression");
         internal static readonly KnownType System_Data_DataSet = new KnownType("System.Data.DataSet");
@@ -376,9 +379,15 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Windows_Forms_Application = new KnownType("System.Windows.Forms.Application");
         internal static readonly KnownType System_Windows_Markup_ConstructorArgumentAttribute = new KnownType("System.Windows.Markup.ConstructorArgumentAttribute");
         internal static readonly KnownType System_Xml_XmlDocument = new KnownType("System.Xml.XmlDocument");
+        internal static readonly KnownType System_Xml_XmlDataDocument = new KnownType("System.Xml.XmlDataDocument");
         internal static readonly KnownType System_Xml_XmlNode = new KnownType("System.Xml.XmlNode");
         internal static readonly KnownType System_Xml_XPath_XPathNavigator = new KnownType("System.Xml.XPath.XPathNavigator");
         internal static readonly KnownType System_Xml_XPath_XPathExpression = new KnownType("System.Xml.XPath.XPathExpression");
+        internal static readonly KnownType System_Xml_XmlReader = new KnownType("System.Xml.XmlReader");
+        internal static readonly KnownType System_Xml_XmlReaderSettings = new KnownType("System.Xml.XmlReaderSettings");
+        internal static readonly KnownType System_Xml_XmlUrlResolver = new KnownType("System.Xml.XmlUrlResolver");
+        internal static readonly KnownType System_Xml_XmlTextReader = new KnownType("System.Xml.XmlTextReader");
+        internal static readonly KnownType System_Xml_Resolvers_XmlPreloadedResolver = new KnownType("System.Xml.Resolvers.XmlPreloadedResolver");
         internal static readonly KnownType NSubstitute_SubstituteExtensions = new KnownType("NSubstitute.SubstituteExtensions");
         internal static readonly KnownType NSubstitute_Received = new KnownType("NSubstitute.Received");
         internal static readonly ImmutableArray<KnownType> SystemActionVariants =

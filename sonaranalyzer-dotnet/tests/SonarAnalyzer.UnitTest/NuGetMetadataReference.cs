@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -141,6 +141,9 @@ namespace SonarAnalyzer.UnitTest
 
         public static IEnumerable<MetadataReference> MicrosoftSqlServerCompact(string packageVersion = "4.0.8876.1") =>
             NugetMetadataFactory.CreateWithCommandLine("Microsoft.SqlServer.Compact", packageVersion);
+
+        public static IEnumerable<MetadataReference> MicrosoftWebXdt(string packageVersion = "3.0.0") =>
+            NugetMetadataFactory.Create("Microsoft.Web.Xdt", packageVersion);
 
         public static IEnumerable<MetadataReference> MSTestTestFramework(string packageVersion) =>
             NugetMetadataFactory.Create("MSTest.TestFramework", packageVersion);

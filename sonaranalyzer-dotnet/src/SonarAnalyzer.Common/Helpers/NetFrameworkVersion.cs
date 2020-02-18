@@ -1,14 +1,14 @@
 ﻿/*
- * SonarQube, open source software quality management tool.
- * Copyright (C) 2008-2013 SonarSource
- * mailto:contact AT sonarsource DOT com
+ * SonarAnalyzer for .NET
+ * Copyright (C) 2015-2020 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
  *
- * SonarQube is free software; you can redistribute it and/or
+ * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 3 of the License, or (at your option) any later version.
  *
- * SonarQube is distributed in the hope that it will be useful,
+ * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
@@ -18,21 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace IntentionalFindings
+namespace SonarAnalyzer.Helpers
 {
-    public class S4487
+    public enum NetFrameworkVersion
     {
-        private int value; // unread field
-
-        public S4487()
-        {
-            value = 0;
-        }
-
-        public void SetField(int value)
-        {
-            this.value = value;
-        }
+        // cannot tell
+        Unknown,
+        // below .NET 4.0
+        Below4,
+        // between .NET 4.0 (inclusive) and .NET 4.5 (exclusive)
+        Between4And45,
+        // after .NET 4.5 (inclusive)
+        After45
     }
-
 }

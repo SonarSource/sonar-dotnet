@@ -18,21 +18,38 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace IntentionalFindings
-{
-    public class S4487
-    {
-        private int value; // unread field
+ using System.Xml;
 
-        public S4487()
+namespace Test
+{
+    public static class XmlDocumentTest
+    {
+        public static void Main(string[] args)
         {
-            value = 0;
+            // dummy
         }
 
-        public void SetField(int value)
+        public static XmlDocument XmlDocument_OnlyConstructor()
         {
-            this.value = value;
+            return new XmlDocument();
+        }
+
+        public static void XmlDocument_SetUnsafeResolver(XmlUrlResolver xmlUrlResolver)
+        {
+            var doc = new XmlDocument();
+            doc.XmlResolver = xmlUrlResolver; // Noncompliant in all versions
+        }
+
+        public static void XmlDocument_SetSecureResolver(XmlSecureResolver xmlSecureResolver)
+        {
+            var doc = new XmlDocument();
+            doc.XmlResolver = xmlSecureResolver;
+        }
+
+        public static void XmlDocument_SetNullResolver()
+        {
+            var doc = new XmlDocument();
+            doc.XmlResolver = null;
         }
     }
-
 }

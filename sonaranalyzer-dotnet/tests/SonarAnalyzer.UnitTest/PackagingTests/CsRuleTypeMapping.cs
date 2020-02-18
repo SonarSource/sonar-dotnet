@@ -2752,7 +2752,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["2752"],
             //["2753"],
             //["2754"],
-            //["2755"],
+            ["2755"] = "VULNERABILITY",
             //["2756"],
             ["2757"] = "BUG",
             ["2758"] = "BUG",

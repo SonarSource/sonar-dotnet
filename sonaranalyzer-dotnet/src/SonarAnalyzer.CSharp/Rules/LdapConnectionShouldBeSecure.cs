@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -20,10 +20,10 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SyntaxTrackers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -35,22 +35,22 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Set the 'AuthenticationType' property of this DirectoryEntry to 'AuthenticationTypes.Secure'.";
         private const int AuthenticationTypes_Secure = 1;
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        internal override ImmutableArray<KnownType> TrackedTypes { get; } = ImmutableArray.Create(KnownType.System_DirectoryServices_DirectoryEntry);
+        protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
+            isAllowedConstantValue: IsAllowedValue,
+            trackedTypes: TrackedTypes,
+            isTrackedPropertyName: propertyName => "AuthenticationType" == propertyName,
+            trackedConstructorArgumentIndex: 3
+        );
 
-        protected override string TrackedPropertyName => "AuthenticationType";
-
-        protected override bool CtorInitializesTrackedPropertyWithAllowedValue(ArgumentListSyntax argumentList, SemanticModel semanticModel) =>
-            argumentList == null ||
-            argumentList.Arguments.Count != 4 ||
-            IsAllowedValue(argumentList.Arguments[3].Expression, semanticModel);
-
-        protected override bool IsAllowedValue(object constantValue) =>
+        private static bool IsAllowedValue(object constantValue) =>
             constantValue is int integerValue &&
             (integerValue & AuthenticationTypes_Secure) > 0; // The expected value is a bit from a Flags enum
+
+
+        private static readonly ImmutableArray<KnownType> TrackedTypes = ImmutableArray.Create(KnownType.System_DirectoryServices_DirectoryEntry);
     }
 }

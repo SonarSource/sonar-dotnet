@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SyntaxTrackers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -42,13 +43,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private ObjectCreationTracker<SyntaxKind> ObjectCreationTracker { get; set; }
 
-        internal override ImmutableArray<KnownType> TrackedTypes { get; } =
+        private static readonly ImmutableArray<KnownType> TrackedTypes =
             ImmutableArray.Create(
                 KnownType.System_Web_HttpCookie,
                 KnownType.Microsoft_AspNetCore_Http_CookieOptions
             );
 
-        protected override string TrackedPropertyName => "HttpOnly";
+        protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
+            isAllowedConstantValue: constantValue => constantValue is bool value && value,
+            trackedTypes: TrackedTypes,
+            isTrackedPropertyName: propertyName => "HttpOnly" == propertyName
+        );
 
         public CookieShouldBeHttpOnly()
             : this(AnalyzerConfiguration.Hotspot)
@@ -69,8 +74,5 @@ namespace SonarAnalyzer.Rules.CSharp
                 ObjectCreationTracker.MatchConstructor(KnownType.Nancy_Cookies_NancyCookie),
                 Conditions.ExceptWhen(ObjectCreationTracker.ArgumentIsBoolConstant("httpOnly", true)));
         }
-
-        protected override bool IsAllowedValue(object constantValue) =>
-            constantValue is bool value && value;
     }
 }

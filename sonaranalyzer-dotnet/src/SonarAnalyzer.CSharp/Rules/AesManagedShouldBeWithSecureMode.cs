@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SyntaxTrackers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -30,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class AesManagedShouldBeWithSecureMode : ObjectShouldBeInitializedCorrectlyBase
     {
-        internal const string DiagnosticId = "S4432";
+        private const string DiagnosticId = "S4432";
         private const string MessageFormat = "Use a certified third party library implementing Galois/Counter Mode (GCM) instead.";
 
         private static readonly DiagnosticDescriptor rule =
@@ -38,11 +39,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
-        internal override ImmutableArray<KnownType> TrackedTypes { get; } = ImmutableArray.Create(KnownType.System_Security_Cryptography_AesManaged);
+        private static readonly ImmutableArray<KnownType> TrackedTypes = ImmutableArray.Create(KnownType.System_Security_Cryptography_AesManaged);
 
-        protected override string TrackedPropertyName => "Mode";
-
-        protected override bool IsAllowedValue(object constantValue) =>
-            false;
+        protected override CSharpObjectInitializationTracker objectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
+            isAllowedConstantValue: constantValue => false,
+            trackedTypes: TrackedTypes,
+            isTrackedPropertyName: propertyName => "Mode" == propertyName
+        );
     }
 }

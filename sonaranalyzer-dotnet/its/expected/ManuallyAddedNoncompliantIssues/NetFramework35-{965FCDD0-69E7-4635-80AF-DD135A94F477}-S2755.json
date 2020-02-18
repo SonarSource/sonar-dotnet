@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2755",
+"message":  "Disable access to external entities in XML parsing.",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework35\XmlTextReaderTest.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  20,
+"endLine":  36,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2755",
+"message":  "Disable access to external entities in XML parsing.",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework35\XmlTextReaderTest.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  26,
+"endLine":  47,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2755",
+"message":  "Disable access to external entities in XML parsing.",
+"location":  {
+"uri":  "sources\ManuallyAddedNoncompliantIssues\NetFramework35\XmlTextReaderTest.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  13,
+"endLine":  48,
+"endColumn":  39
+}
+}
+}
+]
+}

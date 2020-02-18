@@ -18,21 +18,37 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-namespace IntentionalFindings
+using System.Xml;
+
+namespace Test
 {
-    public class S4487
+    public static class XmlTextReaderTest
     {
-        private int value; // unread field
+        private const string Url = "resources/";
 
-        public S4487()
+        public static XmlTextReader XmlTextReader_OnlyConstructor()
         {
-            value = 0;
+            return new XmlTextReader(Url); // this is safe in .NET 4.5.2+ by default
         }
 
-        public void SetField(int value)
+        public static XmlTextReader XmlTextReader_SetUnsafeResolver(XmlUrlResolver parameter)
         {
-            this.value = value;
+            var reader = new XmlTextReader(Url); // this is safe in .NET 4.5.2+ by default
+            reader.XmlResolver = parameter; // Noncompliant
+            return reader;
         }
+
+        public static void XmlTextReader_SetProhibit()
+        {
+            var reader = new XmlTextReader(Url);
+            reader.DtdProcessing = DtdProcessing.Prohibit; // ok
+        }
+
+        public static void XmlTextReader_SetIgnore()
+        {
+            var reader = new XmlTextReader(Url);
+            reader.DtdProcessing = DtdProcessing.Ignore; // ok
+        }
+
     }
-
 }
