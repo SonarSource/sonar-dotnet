@@ -169,7 +169,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool IsAllowedObject(ISymbol symbol) =>
                 !IsUnsafeXmlResolverConstructor(symbol) &&
-                !symbol.GetSymbolType().IsAny(UnsafeXmlResolvers);
+                !symbol.GetSymbolType().IsAny(UnsafeXmlResolvers) &&
+                !IsUnsafeXmlResolverReturnType(symbol);
+
+            private static bool IsUnsafeXmlResolverReturnType(ISymbol symbol) =>
+                symbol is IMethodSymbol methodSymbol &&
+                methodSymbol.ReturnType.IsAny(UnsafeXmlResolvers);
         }
     }
 }

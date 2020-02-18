@@ -147,6 +147,14 @@ namespace Tests.Diagnostics
             reader2.XmlResolver = new XmlUrlResolver(); // Noncompliant
         }
 
+        delegate XmlUrlResolver TestDelegate();
+        private void LambdaFunction()
+        {
+            TestDelegate resolverFactory = () => new XmlUrlResolver();
+            XmlTextReader reader = new XmlTextReader("resources/");
+            reader.XmlResolver = resolverFactory(); // Noncompliant
+        }
+
         protected void PropagateValues_Parse(XmlNameTable table)
         {
             XmlTextReader reader = new XmlTextReader("resources/", table);

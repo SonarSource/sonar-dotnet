@@ -133,16 +133,25 @@ namespace Tests.Diagnostics
         {
             TestDelegate resolverFactory = () => new XmlUrlResolver();
             var doc = new XmlDocument();
-            doc.XmlResolver = resolverFactory(); // FN
+            doc.XmlResolver = resolverFactory(); // Noncompliant
         }
 
         private void SetUnsafeResolverFromMethod()
         {
             var doc = new XmlDocument();
-            doc.XmlResolver = GetUrlResolver(); // FN
+            doc.XmlResolver = GetUrlResolver(); // Noncompliant
         }
 
         private XmlUrlResolver GetUrlResolver() => new XmlUrlResolver();
+
+        private void SetUnsafeResolverFromMethodWithTuple()
+        {
+            var doc = new XmlDocument();
+            var tuple = GetUrlResolverInTuple();
+            doc.XmlResolver = tuple.resolver; // Noncompliant
+        }
+
+        private (XmlUrlResolver resolver, int i) GetUrlResolverInTuple() => (new XmlUrlResolver(), 1);
 
         private void PropagateResolverValue(ConfigXmlDocument doc)
         {
