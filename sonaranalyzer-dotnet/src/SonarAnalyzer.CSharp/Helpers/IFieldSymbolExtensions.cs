@@ -30,6 +30,6 @@ namespace SonarAnalyzer.Helpers
             fieldSymbol != null &&
             !fieldSymbol.IsStatic &&
             (fieldSymbol.DeclaredAccessibility == Accessibility.Protected || fieldSymbol.DeclaredAccessibility == Accessibility.Private) &&
-            (fieldSymbol.Type.Implements(KnownType.System_IDisposable) || fieldSymbol.Type.IsDisposableRefStruct(languageVersion));
+            (fieldSymbol.Type.Is(KnownType.System_IDisposable) || fieldSymbol.Type.Implements(KnownType.System_IDisposable) || fieldSymbol.Type.IsDisposableRefStruct(languageVersion));
     }
 }
