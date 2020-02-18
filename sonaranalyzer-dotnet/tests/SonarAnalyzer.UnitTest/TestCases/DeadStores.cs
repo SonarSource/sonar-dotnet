@@ -878,4 +878,20 @@ namespace Tests.Diagnostics
             (int x, int y) t = (1, 2); // Compliant - FN, tuples are not yet covered: https://github.com/SonarSource/sonar-dotnet/issues/2933
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3126
+    public class Issue_3126
+    {
+        public string WithLocalFunction()
+        {
+            string buffer = "Value"; // Noncompliant FP
+            return Local();
+
+            string Local()
+            {
+                return buffer;
+            }
+        }
+
+    }
 }
