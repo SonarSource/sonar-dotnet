@@ -27,7 +27,7 @@ namespace IntentionalFindings
             const int limit = 5;
             var sum = 0;
 
-            for (int i = 10; i > limit; i++)  // 'i' is incremented and will never reach 'stop condition'
+            for (int i = 10; i > limit; i++)  // Noncompliant (S2251) {{'i' is incremented and will never reach 'stop condition'.}}
             {
                 sum++;
             }

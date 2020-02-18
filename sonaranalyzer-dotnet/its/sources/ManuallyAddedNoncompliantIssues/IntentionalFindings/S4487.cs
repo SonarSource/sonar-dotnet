@@ -22,7 +22,7 @@ namespace IntentionalFindings
 {
     public class S4487
     {
-        private int value; // unread field
+        private int value; // Noncompliant (S4487) {{Remove this unread private field 'value' or refactor the code to use its value.}}
 
         public S4487()
         {

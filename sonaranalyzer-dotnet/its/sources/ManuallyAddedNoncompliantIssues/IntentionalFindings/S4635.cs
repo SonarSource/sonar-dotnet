@@ -25,6 +25,6 @@ namespace IntentionalFindings
     public static class S4635
     {
         public static int TestMethod() =>
-            "Test".Substring(1).IndexOf('t', StringComparison.InvariantCulture); // A new string is going to be created by 'Substring'.
+            "Test".Substring(1).IndexOf('t', StringComparison.InvariantCulture); // Noncompliant (S4635) {{Replace 'IndexOf' with the overload that accepts an offset parameter.}}
     }
 }

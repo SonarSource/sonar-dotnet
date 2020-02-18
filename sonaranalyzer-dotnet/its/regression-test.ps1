@@ -20,6 +20,10 @@ param
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
 
+. .\create-issue-reports.ps1
+
+$InternalProjects = @("ManuallyAddedNoncompliantIssues", "ManuallyAddedNoncompliantIssuesVB")
+
 if ($PSBoundParameters['Verbose'] -Or $PSBoundParameters['Debug']) {
     $global:DebugPreference = "Continue"
 }
@@ -195,6 +199,148 @@ function Show-DiffResults() {
     } -errorMessage $errorMsg
 }
 
+function CreateIssue($fileName, $lineNumber, $issueId, $message){
+    return New-Object PSObject -Property @{
+        FileName = $fileName
+        LineNumber = $lineNumber
+        IssueId = $issueId
+        Message = $message
+    }
+}
+
+function LoadExpectedIssues($file, $regex){
+    $issues = $file | Select-String -Pattern $regex | ForEach-Object { CreateIssue $_.Path $_.LineNumber $_.Matches.Groups[3].Value $_.Matches.Groups[4].Value }
+    $id = $issues | where { $_.IssueId -ne "" } | select -ExpandProperty IssueId | unique
+
+    if ($issues -eq $null){
+        return $issues
+    }
+
+    if ($id -eq $null){
+        throw "Please specify the rule id in the following file: $($file.FullName)"
+    }
+
+    if ($id -is [system.array]){
+        throw "Only one rule can be verified per file. Multiple rule identifiers are defined ($id) in $($file.FullName)"
+    }
+
+    foreach($issue in $issues){
+        $issue.IssueId = $id
+    }
+
+    return $issues
+}
+
+function LoadExpectedIssuesForInternalProject($project){
+    $csRegex = "\/\/\s*Noncompliant(\s*\((?<ID>S\d+)\))?(\s*\{\{(?<Message>.+)\}\})?"
+
+    $issues = @()
+
+    foreach($file in Get-ChildItem sources/$project -filter *.cs -recurse){
+        $fileIssues = LoadExpectedIssues $file $csRegex
+        $issues = $issues + $fileIssues
+    }
+
+    $vbRegex = "'\s*Noncompliant(\s*\((?<ID>S\d+)\))?(\s*\{\{(?<Message>.+)\}\})?"
+
+    foreach($file in Get-ChildItem sources/$project -filter *.vb -recurse){
+        $fileIssues = LoadExpectedIssues $file $vbRegex
+        $issues = $issues + $fileIssues
+    }
+
+    return $issues
+}
+
+function IssuesAreEqual($actual, $expected){
+    return ($actual.issueId -eq $expected.issueId) -and
+           ($actual.lineNumber -eq $expected.lineNumber) -and
+           ($expected.fileName.endswith($actual.fileName) -and
+           ($expected.message -eq "" -or $expected.message -eq $actual.message))
+}
+
+function CompareIssues($actual, $expected){
+    $unexpectedIssues = @()
+    foreach ($actualIssue in $actual){
+        $found = $false
+
+        foreach($expectedIssue in $expected){
+            if (IssuesAreEqual $actualIssue $expectedIssue){
+                $found = $true
+            }
+        }
+
+        if ($found -eq $false) {
+            # There might be the case when different rules fire for the same class. Since we want reduce the noise and narrow the focus, 
+            # we can have only one rule verified per class (this is done by checking the specified id in the first Noncompliant message).
+            $expectedIssueInFile = $expected | where { $_.FileName.endsWith($actualIssue.FileName) } | unique
+
+            if ($expectedIssueInFile -eq $null -or $expectedIssueInFile.issueId -eq $actualIssue.issueId){
+                $unexpectedIssues = $unexpectedIssues + $actualIssue
+            }
+        }
+    }
+
+    if ($unexpectedIssues.Count -ne 0){
+        Write-Warning "Unexpected issues:"
+        Write-Host ($unexpectedIssues | Format-Table | Out-String)
+    }
+
+    $expectedButNotRaisedIssues = @()
+    foreach ($expectedIssue in $expected){
+        $found = $false
+        foreach($actualIssue in $actual){
+            if (IssuesAreEqual $actualIssue $expectedIssue){
+                $found = $true
+            }
+        }
+
+        if ($found -eq $false) {
+            $expectedButNotRaisedIssues = $expectedButNotRaisedIssues + $expectedIssue
+        }
+    }
+
+    if ($expectedButNotRaisedIssues.Count -ne 0){
+        Write-Warning "Issues not raised:"
+        Write-Host ($expectedButNotRaisedIssues | Format-Table | Out-String)
+    }
+
+    return $unexpectedIssues.Count -eq 0 -and $expectedButNotRaisedIssues.Count -eq 0
+}
+
+function CheckDiffsForInternalProject($fileName, $project){
+    $actual = GetActualIssues($fileName) | Foreach-Object {
+        $location = $_.location
+
+        # location can be an array if the "relatedLocations" node is populated (since these are appended by "Get-IssueV3" function).
+        # Since we only care about the real location we consider only the first element of the array.
+        if ($location -is [system.array]){
+            $location = $location[0]
+        }
+        
+        CreateIssue $location.uri $location.region.startLine $_.id $_.message
+    }
+
+    $expected = LoadExpectedIssuesForInternalProject $project
+
+    $result = CompareIssues $actual $expected
+
+    if ($result -eq $false){
+        throw "There are differences between actual and expected for $filename!"
+    }
+}
+
+function CheckInternalProjectsDifferences(){
+    Write-Host "Check differences for internal projects"
+    $internalProjTimer = [system.diagnostics.stopwatch]::StartNew()
+    
+    foreach ($project in $InternalProjects){
+        Get-ChildItem output\$project -filter *.json -recurse | Foreach-Object { CheckDiffsForInternalProject $_.FullName $project }
+    }
+
+    $internalProjTimerElapsed = $internalProjTimer.Elapsed.TotalSeconds
+    Write-Debug "Internal project differences verified in '${internalProjTimerElapsed}'"
+}
+
 try {
     $scriptTimer = [system.diagnostics.stopwatch]::StartNew()
     . (Join-Path $PSScriptRoot "..\..\scripts\build\build-utils.ps1")
@@ -241,9 +387,14 @@ try {
 
     Write-Header "Processing analyzer results"
 
+    CheckInternalProjectsDifferences
+
     Write-Host "Normalizing the SARIF reports"
     $sarifTimer = [system.diagnostics.stopwatch]::StartNew()
-    Exec { & .\create-issue-reports.ps1 }
+    
+    # Normalize & overwrite all *.json SARIF files found under the "actual" folder
+    Get-ChildItem output -filter *.json -recurse | where { $_.FullName -notmatch 'ManuallyAddedNoncompliantIssues' } | Foreach-Object { New-IssueReports $_.FullName }
+
     $sarifTimerElapsed = $sarifTimer.Elapsed.TotalSeconds
     Write-Debug "Normalized the SARIF reports in '${sarifTimerElapsed}'"
 

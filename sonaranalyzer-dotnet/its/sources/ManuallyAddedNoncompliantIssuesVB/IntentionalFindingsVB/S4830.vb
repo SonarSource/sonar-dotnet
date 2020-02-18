@@ -19,7 +19,7 @@
 Public Module S4830
 
     Public Sub TestMethod()
-        System.Net.ServicePointManager.ServerCertificateValidationCallback = Function(sender, certificate, chain, sslErrors) True ' Noncompliant
+        System.Net.ServicePointManager.ServerCertificateValidationCallback = Function(sender, certificate, chain, sslErrors) True ' Noncompliant (S4830)
     End Sub
 
 End Module

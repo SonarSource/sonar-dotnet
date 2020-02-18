@@ -25,6 +25,6 @@ namespace IntentionalFindings
     public static class S2857
     {
         public static readonly string VALUE = "SELECT one, two" +
-            "FROM table";
+            "FROM table"; // Noncompliant (S2857) {{Add a space before 'FROM'.}}
     }
 }
