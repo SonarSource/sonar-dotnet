@@ -225,7 +225,7 @@ function LoadExpectedIssues($file, $regex){
         throw "Please specify the rule id in the following file: $($file.FullName)"
     }
 
-    # if the ruleId parametter is provided, it should be used to filter the expected issues
+    # if the ruleId parameter is provided, it should be used to filter the expected issues
     if ($ruleId -ne "" -and $id -ne $ruleId) {
         return @()
     }
@@ -286,6 +286,11 @@ function VerifyUnexpectedIssues($actualIssues, $expectedIssues){
             # we can have only one rule verified per class (this is done by checking the specified id in the first Noncompliant message).
             $expectedIssueInFile = $expectedIssues | where { $_.FileName.endsWith($actualIssue.FileName) } | unique
 
+            # There are three cases to cover:
+            # - the issue was raised for a file which has a Noncompliant comment with that issue id
+            # - the issue was raised for a file which doesn't have a Noncompliant comment with an issue id
+            # - the issue was raised for a file which has a Noncompliant comment with a different issue id
+            # In the first two cases the unexpected issue needs to be reported but in the last one we should ignore it.
             if ($expectedIssueInFile -eq $null -or $expectedIssueInFile.issueId -eq $actualIssue.issueId){
                 $unexpectedIssues = $unexpectedIssues + $actualIssue
             }
