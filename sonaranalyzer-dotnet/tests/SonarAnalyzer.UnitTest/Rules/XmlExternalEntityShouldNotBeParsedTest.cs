@@ -19,12 +19,13 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
-using System.Linq;
 using Moq;
-using SonarAnalyzer.Helpers;
 using Microsoft.CodeAnalysis;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
+using SonarAnalyzer.UnitTest.TestFramework;
+using System.Linq;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
