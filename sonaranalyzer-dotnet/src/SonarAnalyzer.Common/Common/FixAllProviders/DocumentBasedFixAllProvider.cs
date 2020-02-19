@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
@@ -122,7 +123,9 @@ namespace SonarAnalyzer.Common
             var elementDiagnosticPairs = diagnostics
                 .Select(d => new KeyValuePair<SyntaxNodeOrToken, Diagnostic>(GetReportedElement(d, root), d))
                 .Where(n => !n.Key.IsMissing)
-                .ToDictionary(kv => kv.Key, kv => kv.Value);
+                .GroupBy(n => n.Key)
+                .ToDictionary(g => g.Key, g => g.First().Value);
+            diagnostics = elementDiagnosticPairs.Values.ToImmutableArray(); // Continue with unique winners
 
             var diagnosticAnnotationPairs = new BidirectionalDictionary<Diagnostic, SyntaxAnnotation>();
             CreateAnnotationForDiagnostics(diagnostics, annotationKind, diagnosticAnnotationPairs);

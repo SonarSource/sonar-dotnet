@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -25,6 +25,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {

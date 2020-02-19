@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,9 +29,8 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules;
-using SonarAnalyzer.UnitTest.TestFramework;
 
-namespace SonarAnalyzer.UnitTest
+namespace SonarAnalyzer.UnitTest.TestFramework
 {
     public enum CompilationErrorBehavior
     {

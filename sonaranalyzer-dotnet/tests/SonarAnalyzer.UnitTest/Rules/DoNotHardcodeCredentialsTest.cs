@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -22,6 +22,7 @@ extern alias csharp;
 extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.TestFramework;
 using CSharp = csharp::SonarAnalyzer.Rules.CSharp;
 using VisualBasic = vbnet::SonarAnalyzer.Rules.VisualBasic;
 
