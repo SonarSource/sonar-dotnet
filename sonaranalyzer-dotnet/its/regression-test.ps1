@@ -209,15 +209,25 @@ function CreateIssue($fileName, $lineNumber, $issueId, $message){
 }
 
 function LoadExpectedIssues($file, $regex){
+    # Unfortunatelly regex named groups don't work. 
+    # In the current context:
+    # - $_.Matches.Groups[3].Value is IssueId 
+    # - $_.Matches.Groups[4].Value is Message
     $issues = $file | Select-String -Pattern $regex | ForEach-Object { CreateIssue $_.Path $_.LineNumber $_.Matches.Groups[3].Value $_.Matches.Groups[4].Value }
-    $id = $issues | where { $_.IssueId -ne "" } | select -ExpandProperty IssueId | unique
 
     if ($issues -eq $null){
-        return $issues
+        return @()
     }
 
+    $id = $issues | where { $_.IssueId -ne "" } | select -ExpandProperty IssueId | unique
+    
     if ($id -eq $null){
         throw "Please specify the rule id in the following file: $($file.FullName)"
+    }
+
+    # if the ruleId parametter is provided, it should be used to filter the expected issues
+    if ($ruleId -ne "" -and $id -ne $ruleId) {
+        return @()
     }
 
     if ($id -is [system.array]){
@@ -231,8 +241,7 @@ function LoadExpectedIssues($file, $regex){
     return $issues
 }
 
-
-function LoadExpectedProjectIssues($project, $regex, $extension){
+function LoadExpectedIssuesByProjectType($project, $regex, $extension){
     $issues = @()
 
     foreach($file in Get-ChildItem sources/$project -filter $extension -recurse){
@@ -247,33 +256,35 @@ function LoadExpectedIssuesForInternalProject($project){
     $csRegex = "\/\/\s*Noncompliant(\s*\((?<ID>S\d+)\))?(\s*\{\{(?<Message>.+)\}\})?"
     $vbRegex = "'\s*Noncompliant(\s*\((?<ID>S\d+)\))?(\s*\{\{(?<Message>.+)\}\})?"
 
-    return (LoadExpectedProjectIssues $project $csRegex "*.cs") + 
-           (LoadExpectedProjectIssues $project $vbRegex "*.vb")
+    return (LoadExpectedIssuesByProjectType $project $csRegex "*.cs") + 
+           (LoadExpectedIssuesByProjectType $project $vbRegex "*.vb")
 }
 
 function IssuesAreEqual($actual, $expected){
-    return ($actual.issueId -eq $expected.issueId) -and
-           ($actual.lineNumber -eq $expected.lineNumber) -and
+    return ($expected.issueId -eq $actual.issueId) -and
+           ($expected.lineNumber -eq $actual.lineNumber) -and
+           # The file name extracted from roslyn report ($actual) is relative but the one from expected issue is absolute.
            ($expected.fileName.endswith($actual.fileName) -and
            ($expected.message -eq "" -or $expected.message -eq $actual.message))
 }
 
-function CompareIssues($actual, $expected){
+function VerifyUnexpectedIssues($actualIssues, $expectedIssues){
     $unexpectedIssues = @()
-    foreach ($actualIssue in $actual){
+
+    foreach ($actualIssue in $actualIssues){
         $found = $false
 
-        foreach($expectedIssue in $expected){
+        foreach($expectedIssue in $expectedIssues){
             if (IssuesAreEqual $actualIssue $expectedIssue){
                 $found = $true
+                break
             }
         }
 
         if ($found -eq $false) {
             # There might be the case when different rules fire for the same class. Since we want reduce the noise and narrow the focus, 
             # we can have only one rule verified per class (this is done by checking the specified id in the first Noncompliant message).
-
-            $expectedIssueInFile = $expected | where { $_.FileName.endsWith($actualIssue.FileName) } | unique
+            $expectedIssueInFile = $expectedIssues | where { $_.FileName.endsWith($actualIssue.FileName) } | unique
 
             if ($expectedIssueInFile -eq $null -or $expectedIssueInFile.issueId -eq $actualIssue.issueId){
                 $unexpectedIssues = $unexpectedIssues + $actualIssue
@@ -286,12 +297,18 @@ function CompareIssues($actual, $expected){
         Write-Host ($unexpectedIssues | Format-Table | Out-String)
     }
 
+    return $unexpectedIssues
+}
+
+function VerifyExpectedIssues ($actualIssues, $expectedIssues){
     $expectedButNotRaisedIssues = @()
-    foreach ($expectedIssue in $expected){
+
+    foreach ($expectedIssue in $expectedIssues){
         $found = $false
-        foreach($actualIssue in $actual){
+        foreach($actualIssue in $actualIssues){
             if (IssuesAreEqual $actualIssue $expectedIssue){
                 $found = $true
+                break
             }
         }
 
@@ -304,6 +321,13 @@ function CompareIssues($actual, $expected){
         Write-Warning "Issues not raised:"
         Write-Host ($expectedButNotRaisedIssues | Format-Table | Out-String)
     }
+
+    return $expectedButNotRaisedIssues
+}
+
+function CompareIssues($actualIssues, $expectedIssues){
+    $unexpectedIssues = VerifyUnexpectedIssues $actualIssues $expectedIssues
+    $expectedButNotRaisedIssues = VerifyExpectedIssues $actualIssues $expectedIssues
 
     return $unexpectedIssues.Count -eq 0 -and $expectedButNotRaisedIssues.Count -eq 0
 }
@@ -331,14 +355,14 @@ function LoadActualIssues($project){
 }
 
 function CheckDiffsForInternalProject($project){
-    $actual = LoadActualIssues $project
+    $actualIssues = LoadActualIssues $project
 
-    $expected = LoadExpectedIssuesForInternalProject $project
+    $expectedIssues = LoadExpectedIssuesForInternalProject $project
 
-    $result = CompareIssues $actual $expected
+    $result = CompareIssues $actualIssues $expectedIssues
 
     if ($result -eq $false){
-        throw "There are differences between actual and expected for $project!"
+        throw "There are differences between actual and expected issues for $project!"
     }
 }
 
