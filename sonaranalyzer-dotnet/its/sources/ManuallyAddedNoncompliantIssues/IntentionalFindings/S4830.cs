@@ -24,9 +24,7 @@ namespace IntentionalFindings
     {
         public static void TestMethod()
         {
-            System.Net.ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslErrors) => true; //Noncompliant
+            System.Net.ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslErrors) => true; // Noncompliant (S4830)
         }
-        
-
     }
 }

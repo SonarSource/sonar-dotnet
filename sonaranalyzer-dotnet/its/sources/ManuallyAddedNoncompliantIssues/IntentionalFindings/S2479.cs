@@ -22,6 +22,6 @@ namespace IntentionalFindings
 {
     public static class S2479
     {
-        public static readonly string VALUE = "foo​bar"; // this string contains a \u200B character
+        public static readonly string VALUE = "foo​bar"; // Noncompliant (S2479) {{Replace the control character at position 4 by its escape sequence '\u200B'.}}
     }
 }

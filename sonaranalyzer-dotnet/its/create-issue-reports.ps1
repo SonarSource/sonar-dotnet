@@ -58,7 +58,7 @@ function Get-IssueV3($entry) {
   return
 }
 
-function New-IssueReports([string]$sarifReportPath) {
+function GetActualIssues([string]$sarifReportPath){
     # Load the JSON, working around CovertFrom-Json max size limitation
     # See http://stackoverflow.com/questions/16854057/convertfrom-json-max-length
     $contents = Get-Content $sarifReportPath -Raw
@@ -99,7 +99,8 @@ function New-IssueReports([string]$sarifReportPath) {
 
         $allIssues = $json.runs | Foreach-Object { $_.results }
         Restore-UriDeclaration $allIssues.locations.resultFile $pathPrefix
-	    Restore-UriDeclaration $allIssues.relatedLocations.physicalLocation $pathPrefix
+        Restore-UriDeclaration $allIssues.relatedLocations.physicalLocation $pathPrefix
+
         $allIssues = $allIssues | Foreach-Object { Get-IssueV3($_) }
     }
     else {
@@ -113,6 +114,12 @@ function New-IssueReports([string]$sarifReportPath) {
 	        $_.uri = $_.uri.replace(' ', '%20')
 	    }
     }
+
+    return $allIssues
+}
+
+function New-IssueReports([string]$sarifReportPath) {
+    $allIssues = GetActualIssues($sarifReportPath)
 
     # Filter, Sort & Group issues to get a stable SARIF report
     # AD0001's stack traces in the message are unstable
@@ -145,6 +152,3 @@ function New-IssueReports([string]$sarifReportPath) {
         Set-Content $path $lines
     }
 }
-
-# Normalize & overwrite all *.json SARIF files found under the "actual" folder
-Get-ChildItem output -filter *.json -recurse | Foreach-Object { New-IssueReports($_.FullName) }

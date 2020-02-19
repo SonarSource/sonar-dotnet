@@ -34,7 +34,7 @@ namespace Test
         public static XmlTextReader XmlTextReader_SetUnsafeResolver(XmlUrlResolver parameter)
         {
             var reader = new XmlTextReader(Url); // this is safe in .NET 4.5.2+ by default
-            reader.XmlResolver = parameter; // Noncompliant
+            reader.XmlResolver = parameter; // Noncompliant (S2755) {{Disable access to external entities in XML parsing.}}
             return reader;
         }
 

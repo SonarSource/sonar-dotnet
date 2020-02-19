@@ -32,7 +32,7 @@ namespace Test
 
         public static XmlDocument XmlDocument_OnlyConstructor()
         {
-            return new XmlDocument(); // Noncompliant before 4.5.2
+            return new XmlDocument(); // Noncompliant (S2755) {{Disable access to external entities in XML parsing.}}
         }
 
         public static void XmlDocument_ConstructorWithVulnerableProperty(XmlUrlResolver xmlUrlResolver)
