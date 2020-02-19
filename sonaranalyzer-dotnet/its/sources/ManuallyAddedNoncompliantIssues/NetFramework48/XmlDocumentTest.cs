@@ -37,7 +37,7 @@ namespace Test
         public static void XmlDocument_SetUnsafeResolver(XmlUrlResolver xmlUrlResolver)
         {
             var doc = new XmlDocument();
-            doc.XmlResolver = xmlUrlResolver; // Noncompliant in all versions
+            doc.XmlResolver = xmlUrlResolver; // Noncompliant (S2755) {{Disable access to external entities in XML parsing.}}
         }
 
         public static void XmlDocument_SetSecureResolver(XmlSecureResolver xmlSecureResolver)

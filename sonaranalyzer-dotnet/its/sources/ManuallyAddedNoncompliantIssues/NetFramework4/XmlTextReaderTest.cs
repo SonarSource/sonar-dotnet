@@ -28,7 +28,7 @@ namespace Test
 
         public static XmlTextReader XmlTextReader_OnlyConstructor()
         {
-            var x = new XmlTextReader(Url); // Noncompliant
+            var x = new XmlTextReader(Url); // Noncompliant (S2755) {{Disable access to external entities in XML parsing.}}
             return x;
         }
 
@@ -40,7 +40,7 @@ namespace Test
 
         public static XmlTextReader XmlTextReader_SetVulnerableProperty(XmlUrlResolver parameter)
         {
-            var reader = new XmlTextReader(Url);
+            var reader = new XmlTextReader(Url); // Noncompliant
             reader.XmlResolver = parameter; // Noncompliant
             return reader;
         }
