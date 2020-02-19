@@ -16,4 +16,27 @@ Interface IMyInterface
     Function DoTheOtherThing() As String
 End Interface
 </pre>
+<h2>Exceptions</h2>
+<p>As it is common practice to group method declarations by implemented interface, no issue will be raised for interface implementations if grouped
+together with other members of that interface.</p>
+<p>As it is also a common practice to group method declarations by accessibility level, no issue will be raised for method overloads having different
+access modifiers.</p>
+<p> Example:</p>
+<pre>
+Class MyClass
+
+    Private Sub DoTheThing(s As String) ' Ok - this method is declared as Private while the other one is Public
+        ' ...
+    End Sub
+
+    Private Sub DoTheOtherThing(s As String)
+        ' ...
+    End Sub
+
+    Public Sub DoTheThing()
+        ' ...
+    End Sub
+
+End Class
+</pre>
 
