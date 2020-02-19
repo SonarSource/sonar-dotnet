@@ -96,4 +96,12 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    public class FalsePositive
+    {
+        public void WithUsingKeyword(string path)
+        {
+            using var stream = File.Create(path);  // Noncompliant FP: https://github.com/SonarSource/sonar-dotnet/issues/3137
+        }
+    }
 }
