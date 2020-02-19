@@ -231,24 +231,24 @@ function LoadExpectedIssues($file, $regex){
     return $issues
 }
 
-function LoadExpectedIssuesForInternalProject($project){
-    $csRegex = "\/\/\s*Noncompliant(\s*\((?<ID>S\d+)\))?(\s*\{\{(?<Message>.+)\}\})?"
 
+function LoadExpectedProjectIssues($project, $regex, $extension){
     $issues = @()
 
-    foreach($file in Get-ChildItem sources/$project -filter *.cs -recurse){
-        $fileIssues = LoadExpectedIssues $file $csRegex
-        $issues = $issues + $fileIssues
-    }
-
-    $vbRegex = "'\s*Noncompliant(\s*\((?<ID>S\d+)\))?(\s*\{\{(?<Message>.+)\}\})?"
-
-    foreach($file in Get-ChildItem sources/$project -filter *.vb -recurse){
-        $fileIssues = LoadExpectedIssues $file $vbRegex
+    foreach($file in Get-ChildItem sources/$project -filter $extension -recurse){
+        $fileIssues = LoadExpectedIssues $file $regex
         $issues = $issues + $fileIssues
     }
 
     return $issues
+}
+
+function LoadExpectedIssuesForInternalProject($project){
+    $csRegex = "\/\/\s*Noncompliant(\s*\((?<ID>S\d+)\))?(\s*\{\{(?<Message>.+)\}\})?"
+    $vbRegex = "'\s*Noncompliant(\s*\((?<ID>S\d+)\))?(\s*\{\{(?<Message>.+)\}\})?"
+
+    return (LoadExpectedProjectIssues $project $csRegex "*.cs") + 
+           (LoadExpectedProjectIssues $project $vbRegex "*.vb")
 }
 
 function IssuesAreEqual($actual, $expected){
@@ -272,6 +272,7 @@ function CompareIssues($actual, $expected){
         if ($found -eq $false) {
             # There might be the case when different rules fire for the same class. Since we want reduce the noise and narrow the focus, 
             # we can have only one rule verified per class (this is done by checking the specified id in the first Noncompliant message).
+
             $expectedIssueInFile = $expected | where { $_.FileName.endsWith($actualIssue.FileName) } | unique
 
             if ($expectedIssueInFile -eq $null -or $expectedIssueInFile.issueId -eq $actualIssue.issueId){
@@ -307,25 +308,37 @@ function CompareIssues($actual, $expected){
     return $unexpectedIssues.Count -eq 0 -and $expectedButNotRaisedIssues.Count -eq 0
 }
 
-function CheckDiffsForInternalProject($fileName, $project){
-    $actual = GetActualIssues($fileName) | Foreach-Object {
-        $location = $_.location
+function LoadActualIssues($project){
+    $analysisResults = Get-ChildItem output/$project -filter *.json -recurse
 
-        # location can be an array if the "relatedLocations" node is populated (since these are appended by "Get-IssueV3" function).
-        # Since we only care about the real location we consider only the first element of the array.
-        if ($location -is [system.array]){
-            $location = $location[0]
-        }
+    $issues = @()
+
+    foreach($fileName in $analysisResults){
+        $issues += GetActualIssues($fileName.FullName) | Foreach-Object {
+            $location = $_.location
+
+            # location can be an array if the "relatedLocations" node is populated (since these are appended by "Get-IssueV3" function).
+            # Since we only care about the real location we consider only the first element of the array.
+            if ($location -is [system.array]){
+                $location = $location[0]
+            }
         
-        CreateIssue $location.uri $location.region.startLine $_.id $_.message
+            CreateIssue $location.uri $location.region.startLine $_.id $_.message
+        }
     }
+
+    return $issues
+}
+
+function CheckDiffsForInternalProject($project){
+    $actual = LoadActualIssues $project
 
     $expected = LoadExpectedIssuesForInternalProject $project
 
     $result = CompareIssues $actual $expected
 
     if ($result -eq $false){
-        throw "There are differences between actual and expected for $filename!"
+        throw "There are differences between actual and expected for $project!"
     }
 }
 
@@ -334,7 +347,7 @@ function CheckInternalProjectsDifferences(){
     $internalProjTimer = [system.diagnostics.stopwatch]::StartNew()
     
     foreach ($project in $InternalProjects){
-        Get-ChildItem output\$project -filter *.json -recurse | Foreach-Object { CheckDiffsForInternalProject $_.FullName $project }
+        CheckDiffsForInternalProject $project
     }
 
     $internalProjTimerElapsed = $internalProjTimer.Elapsed.TotalSeconds
