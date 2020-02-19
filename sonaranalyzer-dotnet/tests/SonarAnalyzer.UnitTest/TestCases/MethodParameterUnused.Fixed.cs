@@ -406,4 +406,18 @@ namespace Tests.TestCases
             }
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3132
+    public class Repro_3132
+    {
+        object TupleArgument((string adress, bool state)? e) // Fixed
+        {
+            return new { Data = (e?.adress, e?.state) };
+        }
+
+        public object PublicTupleArgument((string adress, bool state)? e) // Compliant for public method
+        {
+            return new { Data = (e?.adress, e?.state) };
+        }
+    }
 }
