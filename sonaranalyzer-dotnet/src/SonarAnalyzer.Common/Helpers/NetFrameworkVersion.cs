@@ -24,11 +24,11 @@ namespace SonarAnalyzer.Helpers
     {
         // cannot tell
         Unknown,
-        // below .NET 4.0
-        Below4,
-        // between .NET 4.0 (inclusive) and .NET 4.5 (exclusive)
-        Between4And45,
-        // after .NET 4.5 (inclusive)
-        After45
+        // probably .NET 3.5
+        Probably35,
+        // between .NET 4.0 (inclusive) and .NET 4.5.1 (inclusive)
+        Between4And451,
+        // after .NET 4.5.2 (inclusive)
+        After452
     }
 }

@@ -32,9 +32,9 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class XmlExternalEntityShouldNotBeParsedTest
     {
-        [DataRow(NetFrameworkVersion.After45, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument.cs")]
-        [DataRow(NetFrameworkVersion.Below4, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument_Net35.cs")]
-        [DataRow(NetFrameworkVersion.Between4And45, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument_Net4.cs")]
+        [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument.cs")]
+        [DataRow(NetFrameworkVersion.Probably35, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument_Net35.cs")]
+        [DataRow(NetFrameworkVersion.Between4And451, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument_Net4.cs")]
         [DataRow(NetFrameworkVersion.Unknown, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlDocument_UnknownFrameworkVersion.cs")]
         [DataTestMethod]
         [TestCategory("Rule")]
@@ -52,9 +52,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                     .ToArray());
         }
 
-        [DataRow(NetFrameworkVersion.After45, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader.cs")]
-        [DataRow(NetFrameworkVersion.Below4, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_Net35.cs")]
-        [DataRow(NetFrameworkVersion.Between4And45, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_Net4.cs")]
+        [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader.cs")]
+        [DataRow(NetFrameworkVersion.Probably35, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_Net35.cs")]
+        [DataRow(NetFrameworkVersion.Between4And451, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_Net4.cs")]
         [DataRow(NetFrameworkVersion.Unknown, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader_UnknownFrameworkVersion.cs")]
         [DataTestMethod]
         [TestCategory("Rule")]
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 additionalReferences: FrameworkMetadataReference.SystemXml.ToArray());
         }
 
-        [DataRow(NetFrameworkVersion.After45, @"TestCases\XmlExternalEntityShouldNotBeParsed_AlwaysSafe.cs")]
+        [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_AlwaysSafe.cs")]
         [DataRow(NetFrameworkVersion.Unknown, @"TestCases\XmlExternalEntityShouldNotBeParsed_AlwaysSafe.cs")]
         [DataTestMethod]
         [TestCategory("Rule")]
