@@ -26,30 +26,6 @@
 },
 {
 "id":  "S4136",
-"message":  "All 'ToString' method overloads should be adjacent.",
-"location":  [
-{
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  315,
-"startColumn":  32,
-"endLine":  315,
-"endColumn":  40
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  748,
-"startColumn":  23,
-"endLine":  748,
-"endColumn":  31
-}
-}
-]
-},
-{
-"id":  "S4136",
 "message":  "All 'UrlDecode' method overloads should be adjacent.",
 "location":  [
 {
