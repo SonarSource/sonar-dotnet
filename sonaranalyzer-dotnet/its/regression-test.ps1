@@ -370,8 +370,11 @@ function CheckInternalProjectsDifferences(){
     Write-Host "Check differences for internal projects"
     $internalProjTimer = [system.diagnostics.stopwatch]::StartNew()
     
-    foreach ($project in $InternalProjects){
-        CheckDiffsForInternalProject $project
+    foreach ($currentProject in $InternalProjects){
+        # we need to verify only the specified project if the "-project" parameter has a value 
+        if ($project -eq "" -or $currentProject -eq $project){
+            CheckDiffsForInternalProject $currentProject
+        }
     }
 
     $internalProjTimerElapsed = $internalProjTimer.Elapsed.TotalSeconds
