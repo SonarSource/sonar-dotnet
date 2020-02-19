@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -48,10 +48,10 @@ namespace SonarAnalyzer.Rules
 
         protected void CheckMembers(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
         {
-            foreach (var misplacedNameSyntaxes in GetMisplacedOverloads(c, members))
+            foreach (var misplaced in GetMisplacedOverloads(c, members))
             {
-                var firstName = misplacedNameSyntaxes.First();
-                var secondaryLocations = misplacedNameSyntaxes.Skip(1).Select(x => new SecondaryLocation(x.GetLocation(), "Non-adjacent overload"));
+                var firstName = misplaced.First().NameSyntax;
+                var secondaryLocations = misplaced.Skip(1).Select(x => new SecondaryLocation(x.NameSyntax.GetLocation(), "Non-adjacent overload"));
                 c.ReportDiagnosticWhenActive(
                     Diagnostic.Create(
                         descriptor: rule,
@@ -62,9 +62,10 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected List<SyntaxToken>[] GetMisplacedOverloads(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
+        protected List<MemberInfo>[] GetMisplacedOverloads(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
         {
-            var misplacedOverloads = new Dictionary<MemberInfo, List<SyntaxToken>>();
+            var misplacedOverloads = new Dictionary<MemberInfo, List<MemberInfo>>();
+            var groupedByInterface = GroupedByInterface(c, members);
             MemberInfo previous = null;
             foreach (var member in members)
             {
@@ -72,14 +73,14 @@ namespace SonarAnalyzer.Rules
                 {
                     if (misplacedOverloads.TryGetValue(current, out var values))
                     {
-                        if (!current.NameEquals(previous))
+                        if (!current.NameEquals(previous) && ProcessByInterface(member, values))
                         {
-                            values.Add(current.NameSyntax);
+                            values.Add(current);
                         }
                     }
                     else
                     {
-                        misplacedOverloads.Add(current, new List<SyntaxToken> { current.NameSyntax });
+                        misplacedOverloads.Add(current, new List<MemberInfo> { current });
                     }
                     previous = current;
                 }
@@ -89,11 +90,70 @@ namespace SonarAnalyzer.Rules
                 }
             }
             return misplacedOverloads.Values.Where(x => x.Count > 1).ToArray();
+
+            bool ProcessByInterface(TMemberDeclarationSyntax member, List<MemberInfo> others)
+            {
+                if(groupedByInterface.TryGetValue(member, out var interfaces))
+                {
+                    return others.Any(other => FindInterfaces(c.SemanticModel, other.Member).Intersect(interfaces).Any());
+                }
+                return true; // Not member of an interface => process
+            }
         }
+
+        private Dictionary<TMemberDeclarationSyntax, ImmutableArray<INamedTypeSymbol>> GroupedByInterface(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
+        {
+            var ret = new Dictionary<TMemberDeclarationSyntax, ImmutableArray<INamedTypeSymbol>>();
+            ImmutableArray<INamedTypeSymbol> currentInterfaces, previousInterfaces = ImmutableArray<INamedTypeSymbol>.Empty;
+            TMemberDeclarationSyntax previous = null;
+            foreach (var member in members)
+            {
+                currentInterfaces = FindInterfaces(c.SemanticModel, member);
+                if (currentInterfaces.Intersect(previousInterfaces).Any())
+                {
+                    ret.Add(member, currentInterfaces);
+                    if (previous != null && !ret.ContainsKey(previous))
+                    {
+                        ret.Add(previous, previousInterfaces);
+                    }
+                }
+                previousInterfaces = currentInterfaces;
+                previous = member;
+            }
+            return ret;
+        }
+
+        private ImmutableArray<INamedTypeSymbol> FindInterfaces(SemanticModel semanticModel, TMemberDeclarationSyntax member)
+        {
+            var ret = new HashSet<INamedTypeSymbol>();
+            var symbol = semanticModel.GetDeclaredSymbol(member);
+            if (symbol != null)
+            {
+                ret.AddRange(ExplicitInterfaces(symbol).Select(x => x.ContainingType));
+                foreach (var @interface in symbol.ContainingType.AllInterfaces)
+                {
+                    if (@interface.GetMembers().Any(x => symbol.ContainingType.FindImplementationForInterfaceMember(x) == symbol))
+                    {
+                        ret.Add(@interface);
+                    }
+                }
+            }
+            return ret.ToImmutableArray();
+        }
+
+        private IEnumerable<ISymbol> ExplicitInterfaces(ISymbol symbol) =>
+            symbol switch
+            {
+                IEventSymbol e => e.ExplicitInterfaceImplementations,
+                IMethodSymbol m => m.ExplicitInterfaceImplementations,
+                IPropertySymbol p => p.ExplicitInterfaceImplementations,
+                _ => Enumerable.Empty<ISymbol>()
+            };
 
         protected class MemberInfo
         {
 
+            public readonly TMemberDeclarationSyntax Member;
             public readonly string Accessibility;
             public readonly SyntaxToken NameSyntax;
             public readonly bool IsStatic;
@@ -103,6 +163,7 @@ namespace SonarAnalyzer.Rules
 
             public MemberInfo(SyntaxNodeAnalysisContext context, TMemberDeclarationSyntax member, SyntaxToken nameSyntax, bool isStatic, bool isAbstract, bool isCaseSensitive)
             {
+                Member = member;
                 Accessibility = context.SemanticModel.GetDeclaredSymbol(member)?.DeclaredAccessibility.ToString();
                 NameSyntax = nameSyntax;
                 IsStatic = isStatic;
@@ -119,8 +180,8 @@ namespace SonarAnalyzer.Rules
             {
                 // Groups that should be together are defined by accessibility, abstract, static and member name #4136
                 return obj is MemberInfo other
-                    && Accessibility == other.Accessibility
                     && NameEquals(other)
+                    && Accessibility == other.Accessibility
                     && IsStatic == other.IsStatic
                     && IsAbstract == other.IsAbstract;
             }

@@ -251,4 +251,78 @@ Namespace Tests.TestCases
 
     End Class
 
+    Public Class InterfaceImplementationTogether
+        Implements IEqualityComparer(Of Integer), IEqualityComparer(Of String)
+
+        Private Function ComparerEquals(x As Integer, y As Integer) As Boolean Implements IEqualityComparer(Of Integer).Equals
+        End Function
+
+        Private Function ComparerGetHashCode(obj As Integer) As Integer Implements IEqualityComparer(Of Integer).GetHashCode
+        End Function
+
+        Private Function ComparerEquals(x As String, y As String) As Boolean Implements IEqualityComparer(Of String).Equals
+        End Function
+
+        Private Function ComparerGetHashCode(obj As String) As Integer Implements IEqualityComparer(Of String).GetHashCode
+        End Function
+
+    End Class
+
+    Public Interface ITest(Of ItemType)
+
+        Sub Aaa(X As ItemType)
+        Event Eee(Arg As ItemType)
+        Property Ppp() As ItemType
+        Sub Zzz(X As ItemType)
+
+    End Interface
+
+    Public Class InterfaceImplementationTogetherWithPropertiesAndEvents
+        Implements ITest(Of Integer), ITest(Of String)
+
+        Public Sub Aaa(X As Integer) Implements ITest(Of Integer).Aaa
+            Throw New NotImplementedException()
+        End Sub
+
+        Public Property Ppp() As Integer Implements ITest(Of Integer).Ppp
+
+        Public Event Eee(Arg As Integer) Implements ITest(Of Integer).Eee
+
+        Public Sub Zzz(X As Integer) Implements ITest(Of Integer).Zzz
+        End Sub
+
+        Public Sub Aaa(X As String) Implements ITest(Of String).Aaa
+        End Sub
+
+        Private Property ITest_Ppp() As String Implements ITest(Of String).Ppp
+
+        Private Event ITest_Eee(Arg As String) Implements ITest(Of String).Eee
+
+        Public Sub Zzz(X As String) Implements ITest(Of String).Zzz
+        End Sub
+
+    End Class
+
+    Public Interface ICancel
+
+        Sub Cancel()
+        Sub Cancel(b As Boolean)
+        Sub Renew()
+
+    End Interface
+
+    Public Class InterfaceImplementationMethodsTogether
+        Implements ICancel
+
+        Public Sub Cancel() Implements ICancel.Cancel   ' Noncompliant, it should be adjecent inside same Interface implementation group
+        End Sub
+
+        Public Sub Renew() Implements ICancel.Renew
+        End Sub
+
+        Public Sub Cancel(b As Boolean) Implements ICancel.Cancel ' Secondary
+        End Sub
+
+    End Class
+
 End Namespace
