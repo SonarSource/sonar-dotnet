@@ -48,5 +48,26 @@ namespace Tests.Diagnostics
             doc.XmlResolver = null; // this is ok
         }
 
+        public void WithInitializeInsideIf(XmlUrlResolver xmlUrlResolver)
+        {
+            XmlDocument doc;
+            if ((doc = new XmlDocument()) != null)
+            {
+                doc.XmlResolver = null; // no DTD resolving
+                doc.Load("");
+            }
+
+            if ((doc = new XmlDocument()) != null) // Noncompliant
+            {
+                doc.XmlResolver = xmlUrlResolver; // Noncompliant
+                doc.Load("");
+            }
+
+            if ((doc = new XmlDocument()) != null)
+            {
+                doc.XmlResolver = null; // no DTD resolving
+                doc.Load("");
+            }
+        }
     }
 }

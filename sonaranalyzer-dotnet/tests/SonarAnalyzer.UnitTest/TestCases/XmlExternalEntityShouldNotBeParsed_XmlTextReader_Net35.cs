@@ -60,7 +60,7 @@ namespace NetFramework35
             }
 
             using (FileStream fs2 = new FileStream("", FileMode.Open, FileAccess.Read, FileShare.Read | FileShare.Delete))
-            using (XmlTextReader r2 = new XmlTextReader(fs2, XmlNodeType.Element, null))
+            using (XmlTextReader r2 = new XmlTextReader(fs2, XmlNodeType.Element, null)) // Noncompliant
             {
                 r2.XmlResolver = new XmlUrlResolver(); // Noncompliant
                 while (r2.Read())

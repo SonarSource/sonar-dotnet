@@ -212,8 +212,11 @@ namespace SonarAnalyzer.SyntaxTrackers
 
             var variableSymbol = GetAssignedVariableSymbol(objectCreation, semanticModel);
 
+            var nextStatements = GetNextStatements(statement);
+            var innerStatements = GetInnerStatements(statement);
+
             return variableSymbol != null
-                && GetNextStatements(statement)
+                && nextStatements.Union(innerStatements)
                     .OfType<ExpressionStatementSyntax>()
                     .Select(x => x.Expression)
                     .OfType<AssignmentExpressionSyntax>()
@@ -254,5 +257,8 @@ namespace SonarAnalyzer.SyntaxTrackers
 
         private static IEnumerable<StatementSyntax> GetNextStatements(StatementSyntax statement) =>
             statement.Parent.ChildNodes().OfType<StatementSyntax>().SkipWhile(x => x != statement).Skip(1);
+
+        private static IEnumerable<StatementSyntax> GetInnerStatements(StatementSyntax statement) =>
+            statement.DescendantNodes().OfType<StatementSyntax>();
     }
 }
