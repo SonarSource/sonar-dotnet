@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.IO;
+using System.Xml;
 
 namespace NetFramework35
 {
@@ -44,6 +45,56 @@ namespace NetFramework35
             if (foo)
             {
                 reader.ProhibitDtd = true; // this is set conditionally, so not enough
+            }
+        }
+
+        public void WithUsingStatement()
+        {
+            using (FileStream fs = new FileStream("", FileMode.Open, FileAccess.Read, FileShare.Read | FileShare.Delete))
+            using (XmlTextReader r = new XmlTextReader(fs, XmlNodeType.Element, null))
+            {
+                r.XmlResolver = null; // no DTD resolving
+                while (r.Read())
+                {
+                }
+            }
+
+            using (FileStream fs2 = new FileStream("", FileMode.Open, FileAccess.Read, FileShare.Read | FileShare.Delete))
+            using (XmlTextReader r2 = new XmlTextReader(fs2, XmlNodeType.Element, null))
+            {
+                r2.XmlResolver = new XmlUrlResolver(); // Noncompliant
+                while (r2.Read())
+                {
+                }
+            }
+
+        }
+
+        public void WithUsingInsideUsingStatement(bool b)
+        {
+            using (FileStream fs = new FileStream("", FileMode.Open, FileAccess.Read, FileShare.Read | FileShare.Delete))
+            using (XmlTextReader r = new XmlTextReader(fs, XmlNodeType.Element, null))
+            {
+                r.XmlResolver = null; // no DTD resolving
+                while (r.Read())
+                {
+                }
+                if (b)
+                {
+
+                }
+                else
+                {
+                    string s = "";
+                    if (s != null)
+                    {
+                        using (FileStream innerFs = new FileStream("", FileMode.Open, FileAccess.Read, FileShare.Read | FileShare.Delete))
+                        using (XmlTextReader innerReader = new XmlTextReader(fs, XmlNodeType.Element, null))
+                        {
+                            innerReader.XmlResolver = null; // no DTD resolving
+                        }
+                    }
+                }
             }
         }
 
