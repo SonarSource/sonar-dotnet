@@ -42,5 +42,13 @@ namespace MyLibrary
 }
 </pre>
 <h2>Exceptions</h2>
-<p>This rule does not raise issues for <code>string</code>, <code>Array</code> and <code>PermissionSet</code>.</p>
+<p>This rule does not raise issues for</p>
+<ul>
+  <li> <code>string</code>, <code>Array</code> and <code>PermissionSet,</code> </li>
+  <li> properties marked as <code>DataMemberAttribute</code> </li>
+  <li> classes marked as <code>Serializable</code> </li>
+  <li> properties overriding a base class member </li>
+  <li> properties implementing interface </li>
+</ul>
+<p>&nbsp;</p>
 
