@@ -1,0 +1,1 @@
+Created from `sonar-dotnet\sonaranalyzer-dotnet\tests\XXE\Mscorlib3.5Mock`

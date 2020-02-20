@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Helpers
 
             var typeSymbol = mscorlibAssembly.GetTypeByMetadataName("System.IO.UnmanagedMemoryStream");
             // this was not present in .NET Framework 4.5.1 and became present in 4.5.2
-            if (!typeSymbol.GetMembers("FlushAsync").IsEmpty)
+            if (typeSymbol != null && !typeSymbol.GetMembers("FlushAsync").IsEmpty)
             {
                 return NetFrameworkVersion.After452;
             }
