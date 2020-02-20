@@ -439,7 +439,7 @@ Namespace Tests.Diagnostics
             Get
                 Return _someMember.Value
             End Get
-            Set(value As Double)    ' Noncompliant FP
+            Set(value As Double)
                 _someMember.Value = value
             End Set
         End Property

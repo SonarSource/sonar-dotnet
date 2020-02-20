@@ -551,7 +551,7 @@ namespace Tests.Diagnostics
         public double SomeMember
         {
             get => _someMember.Value;
-            set => _someMember.Value = value;   // Noncompliant FP
+            set => _someMember.Value = value;
         }
     }
 }
