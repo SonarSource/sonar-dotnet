@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -82,6 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsObservedCollectionType(IPropertySymbol propertySymbol) =>
             !propertySymbol.GetAttributes(KnownType.System_Runtime_Serialization_DataMemberAttribute).Any() &&
+            !propertySymbol.ContainingType.GetAttributes(KnownType.System_SerializableAttribute).Any() &&
              propertySymbol.Type.OriginalDefinition.DerivesOrImplementsAny(collectionTypes) &&
             !propertySymbol.Type.OriginalDefinition.DerivesOrImplementsAny(ignoredCollectionTypes);
 

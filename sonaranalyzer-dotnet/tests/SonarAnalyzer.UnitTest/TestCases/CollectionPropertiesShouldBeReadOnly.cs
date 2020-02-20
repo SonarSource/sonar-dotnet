@@ -1,3 +1,4 @@
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -66,6 +67,15 @@ namespace Tests.Diagnostics
         public Dictionary<string, string> Properties { get; set; }
 
         [System.Runtime.Serialization.DataMember]
+        public List<int> Values { get; set; }
+    }
+
+    // Ignore collections marked with Serializable attribute: https://github.com/SonarSource/sonar-dotnet/issues/2762
+    [Serializable]
+    public class SerializableMessage
+    {
+        public Dictionary<string, string> Properties { get; set; }
+
         public List<int> Values { get; set; }
     }
 
