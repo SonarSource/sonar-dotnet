@@ -49,7 +49,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                     .Concat(FrameworkMetadataReference.SystemData)
                     .Concat(FrameworkMetadataReference.SystemXmlLinq)
                     .Concat(NuGetMetadataReference.MicrosoftWebXdt())
-                    .ToArray());
+                    .ToArray(),
+                options: ParseOptionsHelper.FromCSharp8);
         }
 
         [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlTextReader.cs")]
@@ -65,7 +66,8 @@ namespace SonarAnalyzer.UnitTest.Rules
 
             // act & verify
             Verifier.VerifyAnalyzer(testFilePath, rule,
-                additionalReferences: FrameworkMetadataReference.SystemXml.ToArray());
+                additionalReferences: FrameworkMetadataReference.SystemXml.ToArray(),
+                options: ParseOptionsHelper.FromCSharp8);
         }
 
         [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_AlwaysSafe.cs")]
