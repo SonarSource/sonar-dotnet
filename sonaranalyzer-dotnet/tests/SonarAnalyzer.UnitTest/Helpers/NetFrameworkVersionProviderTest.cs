@@ -19,11 +19,12 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
 
@@ -55,49 +56,77 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void NetFrameworkVersionProvider_CurrentAssemblyMscorlib()
         {
-            var compilation = GetCompilation(FrameworkMetadataReference.Mscorlib.Concat(FrameworkMetadataReference.System));
+            var compilation = GetRawCompilation(FrameworkMetadataReference.Mscorlib.Concat(FrameworkMetadataReference.System));
             var versionProvider = new NetFrameworkVersionProvider();
-            versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.After45);
+            versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.After452);
         }
 
         [TestMethod]
         public void NetFrameworkVersionProvider_CurrentAssemblyMscorlib_Netstandard()
         {
-            var compilation = GetCompilation(FrameworkMetadataReference.Mscorlib
+            var compilation = GetRawCompilation(FrameworkMetadataReference.Mscorlib
                 .Concat(FrameworkMetadataReference.System)
                 .Concat(FrameworkMetadataReference.Netstandard));
             var versionProvider = new NetFrameworkVersionProvider();
             // the local .net framework mscorlib is actually used
-            versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.After45);
+            versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.After452);
+        }
+
+        [TestMethod]
+        public void NetFrameworkVersionProvider_Net35()
+        {
+            var mscorlib35 = ImmutableArray.Create((MetadataReference)
+                MetadataReference.CreateFromFile(CreateMockPath("3.5/mscorlib.dll")));
+            var compilation = GetRawCompilation(mscorlib35);
+            var versionProvider = new NetFrameworkVersionProvider();
+            versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.Probably35);
+        }
+
+        [TestMethod]
+        public void NetFrameworkVersionProvider_Net40_NoIOClass()
+        {
+            var mscorlib35 = ImmutableArray.Create((MetadataReference)
+                MetadataReference.CreateFromFile(CreateMockPath("4.0_no_IO/mscorlib.dll")));
+            var compilation = GetRawCompilation(mscorlib35);
+            var versionProvider = new NetFrameworkVersionProvider();
+            versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.Between4And451);
+        }
+
+        [TestMethod]
+        public void NetFrameworkVersionProvider_Net40_WithIOClass()
+        {
+            var mscorlib35 = ImmutableArray.Create((MetadataReference)
+                MetadataReference.CreateFromFile(CreateMockPath("4.0_with_IO/mscorlib.dll")));
+            var compilation = GetRawCompilation(mscorlib35);
+            var versionProvider = new NetFrameworkVersionProvider();
+            versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.Between4And451);
         }
 
         [TestMethod]
         public void NetFrameworkVersionProvider_NoReference()
         {
 
-            var compilation = GetNoReferencesCompilation();
+            var compilation = GetRawCompilation();
             var versionProvider = new NetFrameworkVersionProvider();
             versionProvider.GetDotNetFrameworkVersion(compilation).Should().Be(NetFrameworkVersion.Unknown);
         }
 
-        private Compilation GetCompilation(IEnumerable<MetadataReference> additionalReferences)
-        {
-            return SolutionBuilder
-                .Create()
-                .AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
-                .AddSnippet(CodeSnippet)
-                .AddReferences(additionalReferences)
-                .GetCompilation();
-        }
-
-        private Compilation GetNoReferencesCompilation()
+        private static Compilation GetRawCompilation(IEnumerable<MetadataReference> theReferences = null)
         {
             var solution = new AdhocWorkspace().CurrentSolution;
             var project = solution.AddProject("test", "test", LanguageNames.CSharp);
             var projectBuilder = ProjectBuilder.FromProject(project);
             return projectBuilder
                 .AddSnippet(CodeSnippet)
+                .AddReferences(theReferences)
                 .GetCompilation();
         }
+
+        private static string CreateMockPath(string mockName)
+        {
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            return Path.Combine(Path.GetDirectoryName(assembly.Location), "XXEMocks", mockName);
+        }
+
     }
 }

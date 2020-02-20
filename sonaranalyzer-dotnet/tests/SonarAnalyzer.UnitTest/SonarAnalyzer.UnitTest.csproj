@@ -67,6 +67,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="XXEMocks\3.5\mscorlib.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XXEMocks\4.0_with_IO\mscorlib.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XXEMocks\4.0_no_IO\mscorlib.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="CBDEMocks\CBDEArguments.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -141,6 +150,5 @@
       <Aliases>global,vbnet</Aliases>
     </ProjectReference>
   </ItemGroup>
-
 
 </Project>

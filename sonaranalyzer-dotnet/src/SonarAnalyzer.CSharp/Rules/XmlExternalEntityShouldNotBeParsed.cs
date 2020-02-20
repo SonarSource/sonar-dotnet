@@ -143,9 +143,9 @@ namespace SonarAnalyzer.Rules.CSharp
             private static bool ConstructorIsSafe(NetFrameworkVersion version) =>
                 version switch
                 {
-                    NetFrameworkVersion.After45 => true,
-                    NetFrameworkVersion.Between4And45 => false,
-                    NetFrameworkVersion.Below4 => false,
+                    NetFrameworkVersion.After452 => true,
+                    NetFrameworkVersion.Between4And451 => false,
+                    NetFrameworkVersion.Probably35 => false,
                     _ => true
                 };
 

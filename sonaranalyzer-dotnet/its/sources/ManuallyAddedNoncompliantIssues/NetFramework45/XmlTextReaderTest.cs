@@ -56,6 +56,5 @@ namespace Test
             var reader = new XmlTextReader(Url);
             reader.DtdProcessing = DtdProcessing.Ignore; // ok
         }
-
     }
 }

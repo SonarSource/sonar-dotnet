@@ -221,6 +221,15 @@ namespace Tests.Diagnostics
         {
             doc.XmlResolver = new XmlPreloadedResolver(); // Noncompliant
         }
-    }
 
+        public void WithInitializeInsideIf()
+        {
+            XmlDocument doc;
+            if ((doc = new XmlDocument()) != null)
+            {
+                doc.XmlResolver = null; // no DTD resolving
+                doc.Load("");
+            }
+        }
+    }
  }

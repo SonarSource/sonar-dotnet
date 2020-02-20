@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2755",
+"message":  "Disable access to external entities in XML parsing.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  28,
+"endLine":  43,
+"endColumn":  45
+}
+}
+}
+]
+}

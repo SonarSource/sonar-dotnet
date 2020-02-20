@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetFramework48", "NetFramew
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetFramework35", "NetFramework35\NetFramework35.csproj", "{965FCDD0-69E7-4635-80AF-DD135A94F477}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetFramework45", "NetFramework45\NetFramework45.csproj", "{304DB1D2-AF51-4CBB-B284-CEF20DE2B299}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{965FCDD0-69E7-4635-80AF-DD135A94F477}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{965FCDD0-69E7-4635-80AF-DD135A94F477}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{965FCDD0-69E7-4635-80AF-DD135A94F477}.Release|Any CPU.Build.0 = Release|Any CPU
+		{304DB1D2-AF51-4CBB-B284-CEF20DE2B299}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{304DB1D2-AF51-4CBB-B284-CEF20DE2B299}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{304DB1D2-AF51-4CBB-B284-CEF20DE2B299}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{304DB1D2-AF51-4CBB-B284-CEF20DE2B299}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
