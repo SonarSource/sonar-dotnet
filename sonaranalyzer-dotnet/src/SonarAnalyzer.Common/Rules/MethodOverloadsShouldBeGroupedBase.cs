@@ -48,10 +48,10 @@ namespace SonarAnalyzer.Rules
 
         protected void CheckMembers(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
         {
-            foreach (var misplaced in GetMisplacedOverloads(c, members))
+            foreach (var misplacedOverload in GetMisplacedOverloads(c, members))
             {
-                var firstName = misplaced.First().NameSyntax;
-                var secondaryLocations = misplaced.Skip(1).Select(x => new SecondaryLocation(x.NameSyntax.GetLocation(), "Non-adjacent overload"));
+                var firstName = misplacedOverload.First().NameSyntax;
+                var secondaryLocations = misplacedOverload.Skip(1).Select(x => new SecondaryLocation(x.NameSyntax.GetLocation(), "Non-adjacent overload"));
                 c.ReportDiagnosticWhenActive(
                     Diagnostic.Create(
                         descriptor: rule,
