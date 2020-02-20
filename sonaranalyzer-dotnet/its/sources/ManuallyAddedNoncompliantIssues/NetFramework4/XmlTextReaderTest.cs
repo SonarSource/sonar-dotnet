@@ -35,7 +35,7 @@ namespace Test
         public static void XmlTextReader_SetSanitizeWithNull()
         {
             var reader = new XmlTextReader("resources/");
-            reader.XmlResolver = null; // compliant before 4.5.2
+            reader.XmlResolver = null;
         }
 
         public static XmlTextReader XmlTextReader_SetVulnerableProperty(XmlUrlResolver parameter)

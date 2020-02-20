@@ -51,13 +51,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mscorlib", "tests\XXE\Mscor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mscorlib", "tests\XXE\Mscorlib4.0MockWithIo\mscorlib.csproj", "{614BAED6-8F6B-48E4-A3CD-E34851516A37}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XXE_mocks", "XXE_mocks", "{6544F153-B0A5-4923-A2E0-E8F536DE18A1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NetFrameworkVersionMocks", "NetFrameworkVersionMocks", "{6544F153-B0A5-4923-A2E0-E8F536DE18A1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.5", "3.5", "{9BFBA760-D08C-4A13-9463-4FAC3CFBA97F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.0_no_IO", "4.0_no_IO", "{305F8BA2-C772-44D5-9EA4-A556ED3B8F7E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.0_no_UnmanagedMemoryStream", "4.0_no_UnmanagedMemoryStream", "{305F8BA2-C772-44D5-9EA4-A556ED3B8F7E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.0_with_IO", "4.0_with_IO", "{50657C7A-950C-4855-9E30-53262D523766}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.0_with_UnmanagedMemoryStreamWithoutFlushAsync", "4.0_with_UnmanagedMemoryStreamWithoutFlushAsync", "{50657C7A-950C-4855-9E30-53262D523766}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
