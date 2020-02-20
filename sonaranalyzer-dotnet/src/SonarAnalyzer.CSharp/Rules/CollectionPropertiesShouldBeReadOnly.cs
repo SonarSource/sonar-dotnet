@@ -99,9 +99,12 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return true;
             }
-            foreach(var @interface in propertySymbol.ContainingType.Interfaces)
+            foreach (var @interface in propertySymbol.ContainingType.Interfaces)
             {
-                if (@interface.GetMembers().Any(x => propertySymbol.ContainingType.FindImplementationForInterfaceMember(x) == propertySymbol))
+                if (@interface.GetMembers()
+                    .OfType<IPropertySymbol>()
+                    .Where(x => x.Name == propertySymbol.Name)
+                    .Any(x => propertySymbol.ContainingType.FindImplementationForInterfaceMember(x) == propertySymbol))
                 {
                     return true;
                 }
