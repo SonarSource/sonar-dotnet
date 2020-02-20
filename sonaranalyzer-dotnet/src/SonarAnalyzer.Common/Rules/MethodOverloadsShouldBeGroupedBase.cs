@@ -95,7 +95,7 @@ namespace SonarAnalyzer.Rules
             {
                 if(groupedByInterface.TryGetValue(member, out var interfaces))
                 {
-                    return others.Any(other => FindInterfaces(c.SemanticModel, other.Member).Intersect(interfaces).Any());
+                    return interfaces.Length==1 && others.Any(other => FindInterfaces(c.SemanticModel, other.Member).Contains(interfaces.Single()));
                 }
                 return true; // Not member of an interface => process
             }

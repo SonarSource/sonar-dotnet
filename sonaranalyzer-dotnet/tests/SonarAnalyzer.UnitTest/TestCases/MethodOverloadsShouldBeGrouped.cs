@@ -343,4 +343,35 @@ namespace Tests.Diagnostics
         public void Renew() { }
         public void Cancel(bool b) { } // Secondary
     }
+
+    public interface ISecond
+    {
+        void A();
+        void Cancel();
+        void B();
+    }
+
+    public class ImplementsBoth : ICancel, ISecond
+    {
+        public void Cancel(bool b) { }
+        public void Renew() { }
+
+        public void A() { }
+        public void Cancel() { } // Implements ICancel and ISecond
+        public void B() { }
+    }
+
+    public class ImplementsBothFalseNegative : ICancel, ISecond
+    {
+        public void Cancel(bool b) { } // Noncompliant
+        public void Renew() { }
+
+        public void A() { }
+        public void B() { }
+
+        public void Something() { }
+
+        public void Cancel() { } // Secondary, implements ICancel and ISecond
+    }
+
 }
