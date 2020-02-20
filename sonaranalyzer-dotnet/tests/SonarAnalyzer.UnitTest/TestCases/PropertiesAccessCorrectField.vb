@@ -119,8 +119,7 @@ Namespace Tests.Diagnostics
         Private isDisposed As Boolean
 
         Public Property Field1 As Integer
-            Get ' Noncompliant
-'           ^^^
+            Get ' Noncompliant ^13#3
                 If Not Me.initialized Then
                     Throw New InvalidOperationException()
                 End If
@@ -138,7 +137,7 @@ Namespace Tests.Diagnostics
                 End If
 
                 Me.field2_ = value ' Noncompliant
-'                  ^^^^^^^
+                '  ^^^^^^^
             End Set
         End Property
     End Class
@@ -150,7 +149,7 @@ Namespace Tests.Diagnostics
         Public ReadOnly Property Field2 As Integer
             Get
                 Return (((Me.field1_))) ' Noncompliant
-'                            ^^^^^^^
+                '            ^^^^^^^
             End Get
         End Property
     End Class
@@ -243,8 +242,8 @@ Namespace Tests.Diagnostics
             Get
                 Return wrapped.field1
             End Get
-            Set
-                wrapped.field1 = value
+            Set(Value As Integer)
+                wrapped.field1 = Value
             End Set
         End Property
     End Class
@@ -331,18 +330,17 @@ Namespace Tests.Diagnostics
 
         Public Property Foo As String
             Get
-                If true Then
+                If True Then
                     Throw New System.InvalidOperationException("")
                 End If
 
                 _foo = "stuff"
                 Return _bar ' Noncompliant {{Refactor this getter so that it actually refers to the field '_foo'.}}
-'                      ^^^^
+                '      ^^^^
             End Get
             Set
                 If _foo.Equals(_foo) Then
-                    _bar = value ' Noncompliant {{Refactor this setter so that it actually refers to the field '_foo'.}}
-'                   ^^^^
+                    _bar = Value ' Noncompliant ^21#4 {{Refactor this setter so that it actually refers to the field '_foo'.}}
                 End If
 
             End Set
@@ -350,18 +348,18 @@ Namespace Tests.Diagnostics
 
         Public Property Bar As String
             Get
-                If true Then
+                If True Then
                     Throw New System.InvalidOperationException("")
                 End If
 
                 Me._bar = "stuff"
                 Return Me._foo ' Noncompliant {{Refactor this getter so that it actually refers to the field '_bar'.}}
-'                         ^^^^
+                '         ^^^^
             End Get
             Set
                 If Me._bar.Equals(Me._foo) Then
-                    Me._foo = value ' Noncompliant {{Refactor this setter so that it actually refers to the field '_bar'.}}
-'                      ^^^^
+                    Me._foo = Value ' Noncompliant {{Refactor this setter so that it actually refers to the field '_bar'.}}
+                    '  ^^^^
                 End If
 
             End Set
@@ -374,7 +372,7 @@ Namespace Tests.Diagnostics
         Public ReadOnly Property Foo As String
             Get
                 Dim variable = Me._foo ' Compliant, field is read
-                If true Then
+                If True Then
                     variable = (variable + variable)
                 End If
                 Return variable
@@ -407,14 +405,24 @@ Namespace Tests.Diagnostics
     ' https://github.com/SonarSource/sonar-dotnet/issues/2774
     Public Class Class1
 
-        Private WithEvents _cashLess As CashLess
+        Private WithEvents _RootA As Random
+        Private WithEvents _RootB As Random
 
-        Public Property CashLess() As CashLess
-            Get ' Noncompliant FP
-                Return _cashLess
+        Public Property RootA() As Random
+            Get
+                Return _RootA
             End Get
-            Set(ByVal value As CashLess) ' Noncompliant FP
-                _cashLess = value
+            Set(ByVal Value As Random)
+                _RootA = Value
+            End Set
+        End Property
+
+        Public Property RootB() As Random
+            Get
+                Return Me._RootB
+            End Get
+            Set(ByVal Value As Random)
+                Me._RootB = Value
             End Set
         End Property
 
