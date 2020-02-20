@@ -353,19 +353,6 @@
 },
 {
 "id":  "S4004",
-"message":  "Make the 'Days' property read-only by removing the property setter or making it private.",
-"location":  {
-"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProjectToAbstractType.cs",
-"region":  {
-"startLine":  165,
-"startColumn":  54,
-"endLine":  165,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S4004",
 "message":  "Make the 'Content' property read-only by removing the property setter or making it private.",
 "location":  {
 "uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProxyTests.cs",
@@ -387,19 +374,6 @@
 "startColumn":  60,
 "endLine":  94,
 "endColumn":  67
-}
-}
-},
-{
-"id":  "S4004",
-"message":  "Make the 'Content' property read-only by removing the property setter or making it private.",
-"location":  {
-"uri":  "sources\Automapper\src\IntegrationTests\Inheritance\ProxyTests.cs",
-"region":  {
-"startLine":  100,
-"startColumn":  61,
-"endLine":  100,
-"endColumn":  68
 }
 }
 },

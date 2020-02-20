@@ -86,7 +86,7 @@ namespace Tests.Diagnostics
 
     public class S4004Abstract : S4004Base
     {
-        public override IDictionary<object, object> Items { get; set; } // Noncompliant FP: enforced by base (https://github.com/SonarSource/sonar-dotnet/issues/2606)
+        public override IDictionary<object, object> Items { get; set; } // Compliant enforced by base (https://github.com/SonarSource/sonar-dotnet/issues/2606)
     }
 
     public interface IS4004
@@ -94,8 +94,13 @@ namespace Tests.Diagnostics
         IDictionary<object, object> Items { get; set; } // Noncompliant
     }
 
-    public class S4004Interface : IS4004
+    public class S4004InterfaceImplicit : IS4004
     {
-        public IDictionary<object, object> Items { get; set; }  // Noncompliant - FP: enforced by interface (https://github.com/SonarSource/sonar-dotnet/issues/2606)
+        public IDictionary<object, object> Items { get; set; }  // Compliant enforced by interface (https://github.com/SonarSource/sonar-dotnet/issues/2606)
+    }
+
+    public class S4004InterfaceExplicit : IS4004
+    {
+        IDictionary<object, object> IS4004.Items { get; set; }  // Compliant enforced by interface (https://github.com/SonarSource/sonar-dotnet/issues/2606)
     }
 }

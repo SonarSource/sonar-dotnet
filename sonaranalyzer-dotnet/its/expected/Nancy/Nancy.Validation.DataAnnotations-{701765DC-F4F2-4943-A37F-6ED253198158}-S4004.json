@@ -12,19 +12,6 @@
 "endColumn":  106
 }
 }
-},
-{
-"id":  "S4004",
-"message":  "Make the 'AttributeAdaptors' property read-only by removing the property setter or making it private.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\PropertyValidator.cs",
-"region":  {
-"startLine":  17,
-"startColumn":  96,
-"endLine":  17,
-"endColumn":  113
-}
-}
 }
 ]
 }

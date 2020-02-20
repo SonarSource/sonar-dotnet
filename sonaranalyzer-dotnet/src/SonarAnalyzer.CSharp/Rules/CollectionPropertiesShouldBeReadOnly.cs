@@ -81,14 +81,31 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsObservedCollectionType(IPropertySymbol propertySymbol) =>
+            !propertySymbol.IsOverride &&
             !propertySymbol.GetAttributes(KnownType.System_Runtime_Serialization_DataMemberAttribute).Any() &&
             !propertySymbol.ContainingType.GetAttributes(KnownType.System_SerializableAttribute).Any() &&
              propertySymbol.Type.OriginalDefinition.DerivesOrImplementsAny(collectionTypes) &&
-            !propertySymbol.Type.OriginalDefinition.DerivesOrImplementsAny(ignoredCollectionTypes);
+            !propertySymbol.Type.OriginalDefinition.DerivesOrImplementsAny(ignoredCollectionTypes) &&
+            !IsInterfaceImplementation(propertySymbol);
 
         private static bool HasPublicSetter(IPropertySymbol propertySymbol) =>
             propertySymbol.SetMethod != null &&
             !privateOrInternalAccessibility.Contains(propertySymbol.GetEffectiveAccessibility()) &&
             !privateOrInternalAccessibility.Contains(propertySymbol.SetMethod.DeclaredAccessibility);
+
+        private static bool IsInterfaceImplementation(IPropertySymbol propertySymbol)
+        {
+            foreach (var @interface in propertySymbol.ContainingType.Interfaces)
+            {
+                if (@interface.GetMembers()
+                    .OfType<IPropertySymbol>()
+                    .Where(x => x.Name == propertySymbol.Name)
+                    .Any(x => propertySymbol.ContainingType.FindImplementationForInterfaceMember(x) == propertySymbol))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

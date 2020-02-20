@@ -147,19 +147,6 @@
 "id":  "S4004",
 "message":  "Make the 'Items' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultRequestTrace.cs",
-"region":  {
-"startLine":  14,
-"startColumn":  44,
-"endLine":  14,
-"endColumn":  49
-}
-}
-},
-{
-"id":  "S4004",
-"message":  "Make the 'Items' property read-only by removing the property setter or making it private.",
-"location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\IRequestTrace.cs",
 "region":  {
 "startLine":  14,
