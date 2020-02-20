@@ -73,25 +73,27 @@ namespace NetFramework35
         public void WithUsingInsideUsingStatement(bool b)
         {
             using (FileStream fs = new FileStream("", FileMode.Open, FileAccess.Read, FileShare.Read | FileShare.Delete))
-            using (XmlTextReader r = new XmlTextReader(fs, XmlNodeType.Element, null))
             {
-                r.XmlResolver = null; // no DTD resolving
-                while (r.Read())
+                using (XmlTextReader r = new XmlTextReader(fs, XmlNodeType.Element, null))
                 {
-                }
-                if (b)
-                {
-
-                }
-                else
-                {
-                    string s = "";
-                    if (s != null)
+                    r.XmlResolver = null; // no DTD resolving
+                    while (r.Read())
                     {
-                        using (FileStream innerFs = new FileStream("", FileMode.Open, FileAccess.Read, FileShare.Read | FileShare.Delete))
-                        using (XmlTextReader innerReader = new XmlTextReader(fs, XmlNodeType.Element, null))
+                    }
+                    if (b)
+                    {
+
+                    }
+                    else
+                    {
+                        string s = "";
+                        if (s != null)
                         {
-                            innerReader.XmlResolver = null; // no DTD resolving
+                            using (FileStream innerFs = new FileStream("", FileMode.Open, FileAccess.Read, FileShare.Read | FileShare.Delete))
+                            using (XmlTextReader innerReader = new XmlTextReader(fs, XmlNodeType.Element, null))
+                            {
+                                innerReader.XmlResolver = null; // no DTD resolving
+                            }
                         }
                     }
                 }
