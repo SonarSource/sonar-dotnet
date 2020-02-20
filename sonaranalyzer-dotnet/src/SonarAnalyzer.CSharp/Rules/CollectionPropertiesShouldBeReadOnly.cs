@@ -95,10 +95,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsInterfaceImplementation(IPropertySymbol propertySymbol)
         {
-            if (!propertySymbol.ExplicitInterfaceImplementations.IsEmpty)
-            {
-                return true;
-            }
             foreach (var @interface in propertySymbol.ContainingType.Interfaces)
             {
                 if (@interface.GetMembers()
