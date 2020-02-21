@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.sonarsource.dotnet</groupId>
     <artifactId>sonaranalyzer-dotnet</artifactId>
-    <version>8.4-SNAPSHOT</version>
+    <version>8.5-SNAPSHOT</version>
   </parent>
 
   <artifactId>sonaranalyzer-maven-artifacts</artifactId>
