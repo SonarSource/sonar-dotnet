@@ -189,7 +189,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             // Check for direct field access: "Foo"
             if (strippedExpression is IdentifierNameSyntax && IsFieldOrWithEvents(out var directSymbol))
             {
-                return new FieldData(accessorKind, field, strippedExpression, useFieldLocation);
+                return new FieldData(accessorKind, directSymbol, strippedExpression, useFieldLocation);
             }
             else
             {
