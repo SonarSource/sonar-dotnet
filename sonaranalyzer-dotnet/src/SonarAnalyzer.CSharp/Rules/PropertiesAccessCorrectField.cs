@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -54,7 +54,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 FieldData? foundField = null;
                 if (node is AssignmentExpressionSyntax assignment && node.IsKind(SyntaxKind.SimpleAssignmentExpression))
                 {
-                    foundField = ExtractFieldFromExpression(AccessorKind.Setter, assignment.Left, compilation);
+                    foundField = assignment.Left.DescendantNodesAndSelf().OfType<ExpressionSyntax>()
+                        .Select(x => ExtractFieldFromExpression(AccessorKind.Setter, x, compilation))
+                        .FirstOrDefault(x => x != null);
                 }
                 else if (node is ArgumentSyntax argument && IsRefOrOut(argument.RefOrOutKeyword))
                 {
@@ -79,8 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var reads = new Dictionary<IFieldSymbol, FieldData>();
-            var notAssigned = getter.DescendantNodes().Select(n => n as ExpressionSyntax)
-                .WhereNotNull().Where(n => !IsLeftSideOfAssignment(n));
+            var notAssigned = getter.DescendantNodes().OfType<ExpressionSyntax>().Where(n => !IsLeftSideOfAssignment(n));
             foreach (var expression in notAssigned)
             {
                 var readField = ExtractFieldFromExpression(AccessorKind.Getter, expression, compilation);
