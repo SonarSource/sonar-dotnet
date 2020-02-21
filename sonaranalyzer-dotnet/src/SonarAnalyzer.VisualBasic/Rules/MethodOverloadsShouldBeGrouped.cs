@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -63,9 +63,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.StructureBlock);
         }
 
-        private bool IsStaticStatement(MethodBaseSyntax statement) => statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.SharedKeyword);
+        private static bool IsStaticStatement(MethodBaseSyntax statement) => statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.SharedKeyword);
 
-        private bool IsAbstractStatement(MethodBaseSyntax statement) => statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.MustOverrideKeyword);
+        private static bool IsAbstractStatement(MethodBaseSyntax statement) => statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.MustOverrideKeyword);
 
     }
 }

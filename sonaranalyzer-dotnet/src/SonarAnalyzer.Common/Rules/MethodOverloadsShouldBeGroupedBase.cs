@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules
         protected List<MemberInfo>[] GetMisplacedOverloads(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
         {
             var misplacedOverloads = new Dictionary<MemberInfo, List<MemberInfo>>();
-            var groupedByInterface = GroupedByInterface(c, members);
+            var membersGroupedByInterface = MembersGroupedByInterface(c, members);
             MemberInfo previous = null;
             foreach (var member in members)
             {
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules
                 {
                     if (misplacedOverloads.TryGetValue(current, out var values))
                     {
-                        if (!current.NameEquals(previous) && ProcessByInterface(member, values))
+                        if (!current.NameEquals(previous) && ShouldProcess(member, values))
                         {
                             values.Add(current);
                         }
@@ -91,9 +91,9 @@ namespace SonarAnalyzer.Rules
             }
             return misplacedOverloads.Values.Where(x => x.Count > 1).ToArray();
 
-            bool ProcessByInterface(TMemberDeclarationSyntax member, List<MemberInfo> others)
+            bool ShouldProcess(TMemberDeclarationSyntax member, List<MemberInfo> others)
             {
-                if(groupedByInterface.TryGetValue(member, out var interfaces))
+                if(membersGroupedByInterface.TryGetValue(member, out var interfaces))
                 {
                     return interfaces.Length==1 && others.Any(other => FindInterfaces(c.SemanticModel, other.Member).Contains(interfaces.Single()));
                 }
@@ -101,7 +101,15 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private Dictionary<TMemberDeclarationSyntax, ImmutableArray<INamedTypeSymbol>> GroupedByInterface(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
+        /// <summary>
+        /// Function returns members that are considered to be grouped with another member of the same interface (adjacent members).
+        /// These members are allowed to be grouped by interface and not forced to be grouped by member name.
+        /// Another overload (not related by interface) can be placed somewhere else.
+        ///
+        /// Returned ImmutableArray of interfaces for each member is used to determine whether overloads of the same interface should be grouped by name.
+        /// If all methods of the class implement single interface, we want the overloads to be placed together within interface group.
+        /// </summary>
+        private static Dictionary<TMemberDeclarationSyntax, ImmutableArray<INamedTypeSymbol>> MembersGroupedByInterface(SyntaxNodeAnalysisContext c, IEnumerable<TMemberDeclarationSyntax> members)
         {
             var ret = new Dictionary<TMemberDeclarationSyntax, ImmutableArray<INamedTypeSymbol>>();
             ImmutableArray<INamedTypeSymbol> currentInterfaces, previousInterfaces = ImmutableArray<INamedTypeSymbol>.Empty;
@@ -123,13 +131,13 @@ namespace SonarAnalyzer.Rules
             return ret;
         }
 
-        private ImmutableArray<INamedTypeSymbol> FindInterfaces(SemanticModel semanticModel, TMemberDeclarationSyntax member)
+        private static ImmutableArray<INamedTypeSymbol> FindInterfaces(SemanticModel semanticModel, TMemberDeclarationSyntax member)
         {
             var ret = new HashSet<INamedTypeSymbol>();
             var symbol = semanticModel.GetDeclaredSymbol(member);
             if (symbol != null)
             {
-                ret.AddRange(ExplicitInterfaces(symbol).Select(x => x.ContainingType));
+                ret.AddRange(ExplicitInterfaceImplementations(symbol).Select(x => x.ContainingType));
                 foreach (var @interface in symbol.ContainingType.AllInterfaces)
                 {
                     if (@interface.GetMembers().Any(x => symbol.ContainingType.FindImplementationForInterfaceMember(x) == symbol))
@@ -141,7 +149,7 @@ namespace SonarAnalyzer.Rules
             return ret.ToImmutableArray();
         }
 
-        private IEnumerable<ISymbol> ExplicitInterfaces(ISymbol symbol) =>
+        private static IEnumerable<ISymbol> ExplicitInterfaceImplementations(ISymbol symbol) =>
             symbol switch
             {
                 IEventSymbol e => e.ExplicitInterfaceImplementations,
