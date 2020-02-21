@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.StructDeclaration);
         }
 
-        private bool IsValidMemberForOverload(MemberDeclarationSyntax member)
+        private static bool IsValidMemberForOverload(MemberDeclarationSyntax member)
         {
             if (member is MethodDeclarationSyntax methodDeclaration)
             {
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return true;
         }
 
-        private bool IsStatic(BaseMethodDeclarationSyntax declaration) => declaration.Modifiers.Any(x => x.Kind() == SyntaxKind.StaticKeyword);
+        private static bool IsStatic(BaseMethodDeclarationSyntax declaration) => declaration.Modifiers.Any(x => x.Kind() == SyntaxKind.StaticKeyword);
 
     }
 }

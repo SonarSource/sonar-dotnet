@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
@@ -111,12 +112,16 @@ namespace Tests.Diagnostics
     {
         public void DoSomething(double a) { } // Noncompliant
 
+        public void SeparateFromSameInterfaceD() { }
+
         // Compliant - we dont not raise issues for explicit interface implementation as it is a corner case and it can make sense to group implementation by interface
         void D.DoSomething() { }
 
         public void DoSomethingElse() { }
 
         void E.DoSomething() { } // Compliant - explicit interface implementation
+
+        public void SeparateFromSameInterfaceE() { }
 
         public void DoSomething(int a) { } // Secondary
     }
@@ -272,6 +277,101 @@ namespace Tests.Diagnostics
         {
         }
 
+    }
+
+    public class InterfaceImplementationTogether : IEqualityComparer<int>, IEqualityComparer<string>
+    {
+        public bool Equals(int x, int y) { return true; }
+
+        public int GetHashCode(int obj) { return 0; }
+
+        public bool Equals(string x, string y) { return true; }
+
+        public int GetHashCode(string obj) { return 0; }
+    }
+
+    public interface ITest<TItem>
+    {
+        void Aaa(TItem x);
+        event EventHandler<TItem> Eee;
+        TItem this[TItem index] { get; set; }
+        TItem Ppp { get; set; }
+        void Zzz(TItem x);
+    }
+
+    public class InterfaceImplementationTogetherWithPropertiesAndEvents : ITest<int>, ITest<string>
+    {
+        public event EventHandler<int> Eee;
+        public void Aaa(int x) { }
+        public int this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        int ITest<int>.Ppp { get; set; }
+        public void Zzz(int x) { }
+
+        event EventHandler<string> ITest<string>.Eee
+        {
+            add { }
+            remove { }
+        }
+        public void Aaa(string x) { }
+        public string this[string index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Ppp { get; set; }
+        public void Zzz(string x) { }
+    }
+
+    public class ImplicitInterfaceWithEventHandler : ITest<int>
+    {
+        public void Zzz(string x) { } // Noncompliant
+
+        // Implicit interface implementation groupped together
+        public void Aaa(int x) { }
+        int ITest<int>.Ppp { get; set; }
+        public int this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public event EventHandler<int> Eee; // C# events are not recognized as parts of interface group, grouping is splitted here
+        public void Zzz(int x) { } // Secondary
+    }
+
+    public interface ICancel
+    {
+        void Cancel();
+        void Cancel(bool b);
+        void Renew();
+    }
+
+    public class InterfaceImplementationMethodsTogether : ICancel
+    {
+        public void Cancel() { } // Noncompliant, it should be adjecent inside same interface implementation group
+        public void Renew() { }
+        public void Cancel(bool b) { } // Secondary
+    }
+
+    public interface ISecond
+    {
+        void A();
+        void Cancel();
+        void B();
+    }
+
+    public class ImplementsBoth : ICancel, ISecond
+    {
+        public void Cancel(bool b) { }
+        public void Renew() { }
+
+        public void A() { }
+        public void Cancel() { } // Implements ICancel and ISecond
+        public void B() { }
+    }
+
+    public class ImplementsBothFalseNegative : ICancel, ISecond
+    {
+        public void Cancel(bool b) { } // Noncompliant
+        public void Renew() { }
+
+        public void A() { }
+        public void B() { }
+
+        public void Something() { }
+
+        public void Cancel() { } // Secondary, implements ICancel and ISecond
     }
 
 }
