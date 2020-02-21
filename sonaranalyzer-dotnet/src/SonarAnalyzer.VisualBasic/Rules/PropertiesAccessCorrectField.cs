@@ -91,7 +91,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 if (readField.HasValue && !reads.ContainsKey(readField.Value.Field))
                 {
                     reads.Add(readField.Value.Field, readField.Value);
-
                 }
             }
             return reads.Values;
@@ -143,24 +142,43 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             var strippedExpression = expression.RemoveParentheses();
 
-            // Check for direct field access: "foo"
-            if (strippedExpression is IdentifierNameSyntax &&
-                semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field)
+            // Check for direct field access: "Foo"
+            if (strippedExpression is IdentifierNameSyntax && IsFieldOrWithEvents(out var directSymbol))
             {
-                return new FieldData(accessorKind, field, strippedExpression);
+                return new FieldData(accessorKind, directSymbol, strippedExpression);
             }
             else
             {
-                // Check for "this.foo"
+                // Check for "Me.Foo"
                 if (strippedExpression is MemberAccessExpressionSyntax member &&
                     member.Expression is MeExpressionSyntax thisExpression &&
-                    semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field2)
+                    IsFieldOrWithEvents(out var meSymbol))
                 {
-                    return new FieldData(accessorKind, field2, member.Name);
+                    return new FieldData(accessorKind, meSymbol, member.Name);
                 }
             }
 
             return null;
+
+            bool IsFieldOrWithEvents(out IFieldSymbol fieldSymbol)
+            {
+                var symbol = semanticModel.GetSymbolInfo(strippedExpression).Symbol;
+                if(symbol is IFieldSymbol)
+                {
+                    fieldSymbol = symbol as IFieldSymbol;
+                    return true;
+                }
+                else if( symbol is IPropertySymbol property && property.IsWithEvents)
+                {
+                    fieldSymbol = property.ContainingType.GetMembers("_" + property.Name).OfType<IFieldSymbol>().SingleOrDefault();
+                    return fieldSymbol != null;
+                }
+                else
+                {
+                    fieldSymbol = null;
+                    return false;
+                }
+            }
         }
 
         private static bool IsLeftSideOfAssignment(ExpressionSyntax expression)
