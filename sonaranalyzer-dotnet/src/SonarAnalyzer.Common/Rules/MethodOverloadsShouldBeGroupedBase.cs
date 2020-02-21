@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules
                 {
                     if (misplacedOverloads.TryGetValue(current, out var values))
                     {
-                        if (!current.NameEquals(previous) && ShouldProcess(member, values))
+                        if (!current.NameEquals(previous) && IsMisplacedCandidate(member, values))
                         {
                             values.Add(current);
                         }
@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules
             }
             return misplacedOverloads.Values.Where(x => x.Count > 1).ToArray();
 
-            bool ShouldProcess(TMemberDeclarationSyntax member, List<MemberInfo> others)
+            bool IsMisplacedCandidate(TMemberDeclarationSyntax member, List<MemberInfo> others)
             {
                 if(membersGroupedByInterface.TryGetValue(member, out var interfaces))
                 {
