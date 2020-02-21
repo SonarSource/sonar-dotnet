@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -112,7 +112,7 @@ namespace SonarAnalyzer.Rules
             {
                 Location location = null;
                 string accessorType = null;
-                if (fields.Count() == 1)
+                if (fields.Count(x => x.UseFieldLocation) == 1)
                 {
                     var fieldWithValue = fields.First();
                     location = fieldWithValue.LocationNode.GetLocation();
@@ -144,6 +144,16 @@ namespace SonarAnalyzer.Rules
             }
             return allPropertyData;
         }
+
+        protected SyntaxNode FindInvokedMethod(Compilation compilation, INamedTypeSymbol containingType, SyntaxNode expression) =>
+            compilation.GetSemanticModel(expression.SyntaxTree) is SemanticModel semanticModel
+            && semanticModel.GetSymbolInfo(expression).Symbol is ISymbol invocationSymbol
+            && invocationSymbol.ContainingType == containingType
+            && invocationSymbol.DeclaringSyntaxReferences.Length == 1
+            && invocationSymbol.DeclaringSyntaxReferences.Single().GetSyntax() is SyntaxNode invokedMethod
+            ? invokedMethod
+            : null;
+
 
         /**
          * Assignments can be done either
@@ -187,11 +197,12 @@ namespace SonarAnalyzer.Rules
 
         protected struct FieldData
         {
-            public FieldData(AccessorKind accessor, IFieldSymbol field, SyntaxNode locationNode)
+            public FieldData(AccessorKind accessor, IFieldSymbol field, SyntaxNode locationNode, bool useFieldLocation)
             {
                 AccessorKind = accessor;
                 Field = field;
                 LocationNode = locationNode;
+                UseFieldLocation = useFieldLocation;
             }
 
             public AccessorKind AccessorKind { get; }
@@ -199,6 +210,8 @@ namespace SonarAnalyzer.Rules
             public IFieldSymbol Field { get; }
 
             public SyntaxNode LocationNode { get; }
+
+            public bool UseFieldLocation { get; }
         }
 
         /// <summary>
