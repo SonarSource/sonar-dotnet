@@ -21,6 +21,7 @@ In general, it is best to run commands from the Visual Studio Developer Command 
     - .NET Core 3.1 SDK
     - .NET Framework 4.8 SDK
     - .NET Framework 4.8 Targeting pack
+    - .NET 3.5 SDK (SP1)
 1. The following environment variables must be set:
     - **JAVA_HOME**
     - **MAVEN_HOME** / **M2_HOME**
