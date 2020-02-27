@@ -48,19 +48,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
-                    var variables = fieldDeclaration.Declaration.Variables;
-                    var typeDeclaration = fieldDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>(
-                        sn => sn.IsAnyKind(SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration));
-
-                    if (!fieldDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword) ||
-                        !variables.Any())
+                    if (!fieldDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword))
                     {
                         return;
                     }
 
-                    var containingType = c.SemanticModel.GetDeclaredSymbol(variables.First()).ContainingType;
+                    var variables = fieldDeclaration.Declaration.Variables.Where(v => v.Initializer != null).ToList();
+                    if (variables.Count == 0)
+                    {
+                        return;
+                    }
 
-                    foreach (var variable in variables.Where(v => v.Initializer != null))
+                    var containingType = c.SemanticModel.GetDeclaredSymbol(variables[0]).ContainingType;
+
+                    var typeDeclaration = fieldDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>(
+                        sn => sn.Kind() == SyntaxKind.ClassDeclaration || sn.Kind() == SyntaxKind.InterfaceDeclaration);
+
+                    foreach (var variable in variables)
                     {
                         var identifierFieldMappings = GetIdentifierFieldMappings(variable, containingType, c.SemanticModel);
                         var identifierTypeMappings = GetIdentifierTypeMappings(identifierFieldMappings);
@@ -104,17 +108,21 @@ namespace SonarAnalyzer.Rules.CSharp
                 .OfType<IdentifierNameSyntax>()
                 .Select(identifier =>
                 {
+                    if (!containingType.MemberNames.Contains(identifier.Identifier.ValueText))
+                    {
+                        return new IdentifierFieldMapping();
+                    }
+
                     var field = semanticModel.GetSymbolInfo(identifier).Symbol as IFieldSymbol;
-                    var enclosingSymbol = semanticModel.GetEnclosingSymbol(identifier.SpanStart);
+
                     return new IdentifierFieldMapping
                     {
-                        Identifier = identifier,
                         Field = field,
                         IsRelevant = field != null &&
                             !field.IsConst &&
                             field.IsStatic &&
                             containingType.Equals(field.ContainingType) &&
-                            enclosingSymbol is IFieldSymbol &&
+                            semanticModel.GetEnclosingSymbol(identifier.SpanStart) is IFieldSymbol enclosingSymbol &&
                             enclosingSymbol.ContainingType.Equals(field.ContainingType)
                     };
                 })
@@ -129,16 +137,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 : reference.GetSyntax().FirstAncestorOrSelf<TypeDeclarationSyntax>();
         }
 
-        private class IdentifierFieldMapping
+        private struct IdentifierFieldMapping
         {
-            public IdentifierNameSyntax Identifier { get; set; }
             public IFieldSymbol Field { get; set; }
+
             public bool IsRelevant { get; set; }
         }
 
-        private class IdentifierTypeDeclarationMapping
+        private struct IdentifierTypeDeclarationMapping
         {
             public IdentifierFieldMapping Identifier { get; set; }
+
             public TypeDeclarationSyntax TypeDeclaration { get; set; }
         }
     }
