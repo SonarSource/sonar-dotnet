@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         }
 
                         var helper = CreateParametersInfo(c.Node, c.SemanticModel);
-                        if (helper?.Parameters == null || helper.Parameters.Parameters.Count == 0)
+                        if (helper.Parameters == null || helper.Parameters.Parameters.Count == 0)
                         {
                             return;
                         }
@@ -65,10 +65,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         var declarations = declarationSymbol.DeclaringSyntaxReferences
                             .Select(reference => reference.GetSyntax());
 
-                        var usedTypeParameters = GetUsedTypeParameters(declarations, c, analysisContext.Compilation);
+                        var typeParameterNames = helper.Parameters.Parameters.Select(typeParameter => typeParameter.Identifier.Text).ToList();
 
-                        foreach (var typeParameter in helper.Parameters.Parameters
-                            .Select(typeParameter => typeParameter.Identifier.Text)
+                        var usedTypeParameters = GetUsedTypeParameters(declarations, typeParameterNames, c, analysisContext.Compilation);
+
+                        foreach (var typeParameter in typeParameterNames
                             .Where(typeParameter => !usedTypeParameters.Contains(typeParameter)))
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
@@ -107,10 +108,10 @@ namespace SonarAnalyzer.Rules.CSharp
                             ContainerName = "local function"
                         },
 
-                _ => null
+                _ => default
             };
 
-        private class ParametersInfo
+        private struct ParametersInfo
         {
             public TypeParameterListSyntax Parameters { get; set; }
 
@@ -135,7 +136,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol.IsChangeable();
         }
 
-        private static List<string> GetUsedTypeParameters(IEnumerable<SyntaxNode> declarations,
+        private static List<string> GetUsedTypeParameters(IEnumerable<SyntaxNode> declarations, List<string> typeParameterNames,
             SyntaxNodeAnalysisContext localContext,
             Compilation compilation)
         {
@@ -143,6 +144,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .SelectMany(declaration => declaration.DescendantNodes())
                 .OfType<IdentifierNameSyntax>()
                 .Where(identifier => !(identifier.Parent is TypeParameterConstraintClauseSyntax))
+                .Where(identifier => typeParameterNames.Contains(identifier.Identifier.ValueText))
                 .Select(identifier =>
                 {
                     var semanticModelOfThisTree = identifier.SyntaxTree == localContext.Node.SyntaxTree
