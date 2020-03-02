@@ -31,6 +31,7 @@
 
   <ItemGroup>
     <Compile Remove="TestCases\**\*" />
+    <Compile Include="TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_Net35.cs" />
     <None Include="TestCases\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

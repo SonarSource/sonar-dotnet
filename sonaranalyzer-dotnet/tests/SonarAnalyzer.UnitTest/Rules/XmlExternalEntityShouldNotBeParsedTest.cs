@@ -87,7 +87,24 @@ namespace SonarAnalyzer.UnitTest.Rules
                     .ToArray());
         }
 
-        private INetFrameworkVersionProvider GetVersionProviderMock(NetFrameworkVersion version)
+        [DataRow(NetFrameworkVersion.Probably35, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_Net35.cs")]
+        [DataRow(NetFrameworkVersion.Between4And451, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_BeforeNet452.cs")]
+        [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_Net452.cs")]
+        [DataRow(NetFrameworkVersion.Unknown, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_Net452.cs")]
+        [DataTestMethod]
+        [TestCategory("Rule")]
+        public void XmlExternalEntityShouldNotBeParsed_XmlReader(NetFrameworkVersion version, string testFilePath)
+        {
+            var rule = new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version));
+
+            Verifier.VerifyAnalyzer(testFilePath, rule,
+                additionalReferences: FrameworkMetadataReference.SystemXml
+                    .Concat(FrameworkMetadataReference.SystemData)
+                    .Concat(FrameworkMetadataReference.SystemXmlLinq)
+                    .ToArray());
+        }
+
+        private static INetFrameworkVersionProvider GetVersionProviderMock(NetFrameworkVersion version)
         {
             var versionProviderMock = new Mock<INetFrameworkVersionProvider>();
             versionProviderMock

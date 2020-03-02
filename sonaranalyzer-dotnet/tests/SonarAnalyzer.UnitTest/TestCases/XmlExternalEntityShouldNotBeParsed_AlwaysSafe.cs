@@ -52,7 +52,7 @@ namespace Tests.Diagnostics
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.DtdProcessing = DtdProcessing.Parse;
             settings.XmlResolver = new XmlUrlResolver();
-            XmlReader reader = XmlReader.Create(new MemoryStream(), settings, "resources/");
+            XmlReader reader = XmlReader.Create(new MemoryStream(), settings, "resources/"); // Noncompliant
             XDocument xdocument = XDocument.Load(reader); // we already raise on XmlReader
         }
 
@@ -62,7 +62,7 @@ namespace Tests.Diagnostics
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.DtdProcessing = DtdProcessing.Parse;
             settings.XmlResolver = new XmlUrlResolver();
-            XmlReader reader = XmlReader.Create(new MemoryStream(), settings, "resources/");
+            XmlReader reader = XmlReader.Create(new MemoryStream(), settings, "resources/"); // Noncompliant
             XDocument xdocument = XDocument.Load(reader); // we already raise for the XmlReader config
         }
     }
