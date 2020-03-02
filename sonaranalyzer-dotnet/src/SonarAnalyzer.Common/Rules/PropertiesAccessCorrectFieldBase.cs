@@ -37,6 +37,16 @@ namespace SonarAnalyzer.Rules
         private readonly DiagnosticDescriptor rule;
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
+        /**
+         * Assignments can be done either
+         * - directly via an assignment
+         * - indirectly, when passed as 'out' or 'ref' parameter
+         */
+        protected abstract IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation);
+        protected abstract IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation);
+        protected abstract bool ImplementsExplicitGetterOrSetter(IPropertySymbol property);
+        protected abstract bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod);
+
         protected PropertiesAccessCorrectFieldBase(System.Resources.ResourceManager rspecResources)
         {
             rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
@@ -50,7 +60,16 @@ namespace SonarAnalyzer.Rules
             context.RegisterSymbolAction(CheckType, SymbolKind.NamedType);
         }
 
-        protected void CheckType(SymbolAnalysisContext context)
+        protected SyntaxNode FindInvokedMethod(Compilation compilation, INamedTypeSymbol containingType, SyntaxNode expression) =>
+            compilation.GetSemanticModel(expression.SyntaxTree) is SemanticModel semanticModel
+            && semanticModel.GetSymbolInfo(expression).Symbol is ISymbol invocationSymbol
+            && invocationSymbol.ContainingType == containingType
+            && invocationSymbol.DeclaringSyntaxReferences.Length == 1
+            && invocationSymbol.DeclaringSyntaxReferences.Single().GetSyntax() is SyntaxNode invokedMethod
+            ? invokedMethod
+            : null;
+
+        private void CheckType(SymbolAnalysisContext context)
         {
             var symbol = (INamedTypeSymbol)context.Symbol;
             if (symbol.TypeKind != TypeKind.Class &&
@@ -92,13 +111,13 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected IEnumerable<IPropertySymbol> GetExplictlyDeclaredProperties(INamedTypeSymbol symbol) =>
+        private IEnumerable<IPropertySymbol> GetExplictlyDeclaredProperties(INamedTypeSymbol symbol) =>
             symbol.GetMembers()
                 .Where(m => m.Kind == SymbolKind.Property)
                 .OfType<IPropertySymbol>()
                 .Where(p => ImplementsExplicitGetterOrSetter(p));
 
-        protected void CheckExpectedFieldIsUsed(IMethodSymbol methodSymbol, IFieldSymbol expectedField, IEnumerable<FieldData> actualFields, SymbolAnalysisContext context)
+        private void CheckExpectedFieldIsUsed(IMethodSymbol methodSymbol, IFieldSymbol expectedField, IEnumerable<FieldData> actualFields, SymbolAnalysisContext context)
         {
             var expectedFieldIsUsed = actualFields.Any(a => a.Field == expectedField);
             if (!expectedFieldIsUsed || !actualFields.Any())
@@ -135,7 +154,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected IList<PropertyData> CollectPropertyData(IEnumerable<IPropertySymbol> properties, Compilation compilation)
+        private IList<PropertyData> CollectPropertyData(IEnumerable<IPropertySymbol> properties, Compilation compilation)
         {
             IList<PropertyData> allPropertyData = new List<PropertyData>();
 
@@ -151,27 +170,6 @@ namespace SonarAnalyzer.Rules
             }
             return allPropertyData;
         }
-
-        protected SyntaxNode FindInvokedMethod(Compilation compilation, INamedTypeSymbol containingType, SyntaxNode expression) =>
-            compilation.GetSemanticModel(expression.SyntaxTree) is SemanticModel semanticModel
-            && semanticModel.GetSymbolInfo(expression).Symbol is ISymbol invocationSymbol
-            && invocationSymbol.ContainingType == containingType
-            && invocationSymbol.DeclaringSyntaxReferences.Length == 1
-            && invocationSymbol.DeclaringSyntaxReferences.Single().GetSyntax() is SyntaxNode invokedMethod
-            ? invokedMethod
-            : null;
-
-
-        /**
-         * Assignments can be done either
-         * - directly via an assignment
-         * - indirectly, when passed as 'out' or 'ref' parameter
-         */
-        protected abstract IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation);
-        protected abstract IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation);
-        protected abstract bool ImplementsExplicitGetterOrSetter(IPropertySymbol property);
-        protected abstract bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod);
-
 
         protected struct PropertyData
         {
