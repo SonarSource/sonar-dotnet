@@ -134,7 +134,7 @@ namespace MyLibrary
         public ValueTask<bool> GetSomething3() => default(ValueTask<bool>); // Compliant - return type is ValueTask<T>
     }
 
-    // https://github.com/SonarSource/sonar-dotnet/pull/3136
+    // https://github.com/SonarSource/sonar-dotnet/issues/3140
     public class Repro_3136
     {
         private static readonly Random rnd = new Random();
