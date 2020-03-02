@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 
@@ -33,7 +34,13 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4275";
         protected const string MessageFormat = "Refactor this {0} so that it actually refers to the field '{1}'.";
 
-        protected abstract DiagnosticDescriptor Rule { get; }
+        private readonly DiagnosticDescriptor rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        protected PropertiesAccessCorrectFieldBase(System.Resources.ResourceManager rspecResources)
+        {
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+        }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -100,7 +107,7 @@ namespace SonarAnalyzer.Rules
                 if (locationAndAccessorType.Item1 != null)
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(
-                        Rule,
+                        rule,
                         locationAndAccessorType.Item1,
                         locationAndAccessorType.Item2,
                         expectedField.Name
