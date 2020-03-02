@@ -480,6 +480,25 @@ Namespace Tests.Diagnostics
             End Set
         End Property
 
+        Public Property BodyValue__ As Integer 'Get/Set with more than one statement
+            Get 'Noncompliant, only one function invocation is supported
+                Try
+                    IrrelevantFunction()
+                    Return GetByBody()
+                Catch ex As Exception
+                    Return 0
+                End Try
+            End Get
+            Set(value As Integer) 'Noncompliant, only one function invocation is supported
+                Try
+                    IrrelevantProcedure(value)
+                    SetByBody(value)
+                Catch ex As Exception
+                    'Nothing
+                End Try
+            End Set
+        End Property
+
         Public Property BodyValueWrong As Integer
             Get                     'Noncompliant
                 Return GetByBody()
@@ -488,6 +507,14 @@ Namespace Tests.Diagnostics
                 SetByBody(value)
             End Set
         End Property
+
+        Private Function IrrelevantFunction() As Integer
+            Return 42   'Do not touch local fieds
+        End Function
+
+        Private Sub IrrelevantProcedure(Value As Integer)
+            'Do not set local fields
+        End Sub
 
         Private Function GetByBody() As Integer
             Return _BodyValue

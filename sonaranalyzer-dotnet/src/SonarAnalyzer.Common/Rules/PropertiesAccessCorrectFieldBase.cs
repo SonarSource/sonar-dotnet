@@ -60,12 +60,12 @@ namespace SonarAnalyzer.Rules
             context.RegisterSymbolAction(CheckType, SymbolKind.NamedType);
         }
 
-        protected SyntaxNode FindInvokedMethod(Compilation compilation, INamedTypeSymbol containingType, SyntaxNode expression) =>
-            compilation.GetSemanticModel(expression.SyntaxTree) is SemanticModel semanticModel
-            && semanticModel.GetSymbolInfo(expression).Symbol is ISymbol invocationSymbol
+        protected static SyntaxNode FindInvokedMethod(Compilation compilation, INamedTypeSymbol containingType, SyntaxNode expression) =>
+            compilation.GetSemanticModel(expression.SyntaxTree) is { } semanticModel
+            && semanticModel.GetSymbolInfo(expression).Symbol is { } invocationSymbol
             && invocationSymbol.ContainingType == containingType
             && invocationSymbol.DeclaringSyntaxReferences.Length == 1
-            && invocationSymbol.DeclaringSyntaxReferences.Single().GetSyntax() is SyntaxNode invokedMethod
+            && invocationSymbol.DeclaringSyntaxReferences.Single().GetSyntax() is { } invokedMethod
             ? invokedMethod
             : null;
 
@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Rules
                 .OfType<IPropertySymbol>()
                 .Where(p => ImplementsExplicitGetterOrSetter(p));
 
-        private void CheckExpectedFieldIsUsed(IMethodSymbol methodSymbol, IFieldSymbol expectedField, IEnumerable<FieldData> actualFields, SymbolAnalysisContext context)
+        private void CheckExpectedFieldIsUsed(IMethodSymbol methodSymbol, IFieldSymbol expectedField, ImmutableArray<FieldData> actualFields, SymbolAnalysisContext context)
         {
             var expectedFieldIsUsed = actualFields.Any(a => a.Field == expectedField);
             if (!expectedFieldIsUsed || !actualFields.Any())
@@ -134,7 +134,7 @@ namespace SonarAnalyzer.Rules
                 }
             }
 
-            Tuple<Location, string> GetLocationAndAccessor(IEnumerable<FieldData> fields, IMethodSymbol method)
+            Tuple<Location, string> GetLocationAndAccessor(ImmutableArray<FieldData> fields, IMethodSymbol method)
             {
                 Location location = null;
                 string accessorType = null;
@@ -177,17 +177,17 @@ namespace SonarAnalyzer.Rules
                 bool ignoreGetter, bool ignoreSetter)
             {
                 PropertySymbol = propertySymbol;
-                ReadFields = read;
-                UpdatedFields = updated;
+                ReadFields = read.ToImmutableArray();
+                UpdatedFields = updated.ToImmutableArray();
                 IgnoreGetter = ignoreGetter;
                 IgnoreSetter = ignoreSetter;
             }
 
             public IPropertySymbol PropertySymbol { get; }
 
-            public IEnumerable<FieldData> ReadFields { get; }
+            public ImmutableArray<FieldData> ReadFields { get; }
 
-            public IEnumerable<FieldData> UpdatedFields { get; }
+            public ImmutableArray<FieldData> UpdatedFields { get; }
 
             public bool IgnoreGetter { get; }
 

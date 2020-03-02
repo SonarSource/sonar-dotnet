@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -190,6 +190,9 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsAnyKind(this SyntaxNode syntaxNode, ISet<SyntaxKind> syntaxKinds) =>
             syntaxNode != null && syntaxKinds.Contains((SyntaxKind)syntaxNode.RawKind);
+
+        public static bool IsAnyKind(this SyntaxToken syntaxToken, params SyntaxKind[] syntaxKinds) =>
+            syntaxKinds.Contains((SyntaxKind)syntaxToken.RawKind);
 
         public static bool IsAnyKind(this SyntaxToken syntaxToken, ISet<SyntaxKind> syntaxKinds) =>
             syntaxKinds.Contains((SyntaxKind)syntaxToken.RawKind);

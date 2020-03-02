@@ -596,6 +596,34 @@ namespace Tests.Diagnostics
             }
         }
 
+        public int BodyValue__ // get/set with more than one statement
+        {
+            get // Noncompliant, only one function invocation is supported
+            {
+                try
+                {
+                    var nothing = IrrelevantFunction();
+                    return GetByBody();
+                }
+                catch (Exception ex)
+                {
+                    return 0;
+                }
+            }
+            set // Noncompliant, only one function invocation is supported
+            {
+                try
+                {
+                    IrrelevantProcedure(value);
+                    SetByBody(value);
+                }
+                catch (Exception ex)
+                {
+                    // Nothing
+                }
+            }
+        }
+
         public int BodyValueWrong
         {
             get // Noncompliant
@@ -606,6 +634,16 @@ namespace Tests.Diagnostics
             {
                 this.SetByExpression(value);
             }
+        }
+
+        private int IrrelevantFunction()
+        {
+            return 42; // Do not return local fields
+        }
+
+        private void IrrelevantProcedure(int value)
+        {
+            // Do not set local fields
         }
 
         private int GetByBody()

@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             FillAssignments(setter, true);
             // If there're no candidate variables, we'll try to inspect one local method invocation with value as argument
             if (assignments.Count == 0
-                && SingleInvocation(setter) is ExpressionSyntax expression
+                && SingleInvocation(setter) is { } expression
                 && FindInvokedMethod(compilation, property.ContainingType, expression) is MethodBaseSyntax invokedMethod)
             {
                 FillAssignments(invokedMethod, false);
@@ -133,13 +133,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
             (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorStatementSyntax getter &&
             getter.Parent.DescendantNodes().Any());
 
-        private ExpressionSyntax SingleReturn(StatementSyntax body)
+        private static ExpressionSyntax SingleReturn(StatementSyntax body)
         {
             var returns = body.Parent.DescendantNodes().OfType<ReturnStatementSyntax>().ToArray();
             return returns.Length == 1 ? returns.Single().Expression : null;
         }
 
-        private ExpressionSyntax SingleInvocation(StatementSyntax body)
+        private static ExpressionSyntax SingleInvocation(StatementSyntax body)
         {
             var expressions = body.Parent.DescendantNodes().OfType<InvocationExpressionSyntax>().Select(x => x.Expression).ToArray();
             if (expressions.Length == 1)
@@ -185,15 +185,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 return new FieldData(accessorKind, directSymbol, strippedExpression, useFieldLocation);
             }
-            else
-            {
-                // Check for "Me.Foo"
-                if (strippedExpression is MemberAccessExpressionSyntax member &&
+            // Check for "Me.Foo"
+            else if (strippedExpression is MemberAccessExpressionSyntax member &&
                     member.Expression is MeExpressionSyntax &&
-                    semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field2)
-                {
-                    return new FieldData(accessorKind, field2, member.Name, useFieldLocation);
-                }
+                    semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field)
+            {
+                return new FieldData(accessorKind, field, member.Name, useFieldLocation);
             }
 
             return null;
@@ -201,12 +198,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
             bool IsFieldOrWithEvents(out IFieldSymbol fieldSymbol)
             {
                 var symbol = semanticModel.GetSymbolInfo(strippedExpression).Symbol;
-                if(symbol is IFieldSymbol)
+                if (symbol is IFieldSymbol)
                 {
                     fieldSymbol = symbol as IFieldSymbol;
                     return true;
                 }
-                else if( symbol is IPropertySymbol property && property.IsWithEvents)
+                else if (symbol is IPropertySymbol property && property.IsWithEvents)
                 {
                     fieldSymbol = property.ContainingType.GetMembers("_" + property.Name).OfType<IFieldSymbol>().SingleOrDefault();
                     return fieldSymbol != null;
