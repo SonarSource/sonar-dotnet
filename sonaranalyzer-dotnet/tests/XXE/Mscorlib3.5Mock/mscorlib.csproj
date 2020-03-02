@@ -1,9 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>net35</TargetFramework>
-    <LangVersion>8.0</LangVersion>
-    <RootNamespace>System</RootNamespace>
-    <SonarQubeExclude>true</SonarQubeExclude>
-  </PropertyGroup>
-</Project>

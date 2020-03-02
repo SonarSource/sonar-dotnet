@@ -125,7 +125,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         private static string CreateMockPath(string mockName)
         {
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            return Path.Combine(Path.GetDirectoryName(assembly.Location), "XXEMocks", mockName);
+            return Path.Combine(Path.GetDirectoryName(assembly.Location), "../../../../FrameworkMocks/lib/", mockName);
         }
 
     }
