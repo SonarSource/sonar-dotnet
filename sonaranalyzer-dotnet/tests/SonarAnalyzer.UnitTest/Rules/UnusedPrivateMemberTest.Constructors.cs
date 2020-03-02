@@ -144,5 +144,20 @@ public class PrivateConstructors
 }
 ", new CS.UnusedPrivateMember());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UnusedPrivateMember_Illegal_Interface_Constructor()
+        {
+            // While typing code in IDE, we can end up in a state where an interface has a constructor defined.
+            // Even though this results in a compiler error (CS0526), IDE will still trigger rules on the interface.
+            Verifier.VerifyCSharpAnalyzer(@"
+public interface IInterface
+{
+    // UnusedPrivateMember rule does not trigger AD0001 error from NullReferenceException
+    IInterface() {} // Error [CS0526]
+}
+", new CS.UnusedPrivateMember(), checkMode: CompilationErrorBehavior.Ignore);
+        }
     }
 }

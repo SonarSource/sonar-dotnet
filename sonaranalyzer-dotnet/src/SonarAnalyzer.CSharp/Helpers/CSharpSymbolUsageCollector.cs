@@ -268,8 +268,15 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        private static IMethodSymbol GetDefaultConstructor(INamedTypeSymbol namedType) =>
-            namedType.InstanceConstructors.FirstOrDefault(IsDefaultConstructor);
+        private static IMethodSymbol GetDefaultConstructor(INamedTypeSymbol namedType)
+        {
+            // See https://github.com/SonarSource/sonar-dotnet/issues/3155
+            if (namedType != null && namedType.InstanceConstructors != null)
+            {
+                return namedType.InstanceConstructors.FirstOrDefault(IsDefaultConstructor);
+            }
+            return null;
+        }
 
         private static bool IsDefaultConstructor(IMethodSymbol constructor) =>
             constructor.Parameters.Length == 0;
