@@ -12,10 +12,10 @@ Namespace Tests.Diagnostics
             '   ^^^^^^^^^^^^^^^^^^^^^^^^^^
             Dim foo As String, passwd As String = "a" 'Noncompliant {{"passwd" detected here, make sure this is not a hard-coded credential.}}
             '                  ^^^^^^^^^^^^^^^^^^^^^^
+            Dim pwdPassword As String = "a"     'Noncompliant {{"pwd, password" detected here, make sure this is not a hard-coded credential.}}
             Dim foo2 As String = "Password=123" 'Noncompliant
             Dim bar As String
-            bar = "Password=p" 'Noncompliant
-'           ^^^^^^^^^^^^^^^^^^
+            bar = "Password=p" 'Noncompliant ^13#18
             foo = "password="
             foo = "passwordpassword"
             foo = "foo=1;password=1" 'Noncompliant
@@ -25,7 +25,20 @@ Namespace Tests.Diagnostics
             Dim myPassword2 As String = ""
             Dim myPassword3 As String = "   "
             Dim myPassword4 As String = "foo" 'Noncompliant
+        End Sub
 
+        Public Sub DefaultKeywords()
+            Dim password As String = "a"       ' Noncompliant
+            Dim x1 As String = "password=a"    ' Noncompliant
+
+            Dim passwd As String = "a"         ' Noncompliant
+            Dim x2 As String = "passwd=a"      ' Noncompliant
+
+            Dim pwd As String = "a"            ' Noncompliant
+            Dim x3 As String = "pwd=a"         ' Noncompliant
+
+            Dim passphrase As String = "a"     ' Noncompliant
+            Dim x4 As String = "passphrase=a"  ' Noncompliant
         End Sub
 
         Public Sub StandardAPI(secureString As SecureString, nonHardcodedPassword As String, byteArray As Byte(), cspParams As CspParameters)
@@ -69,7 +82,7 @@ Namespace Tests.Diagnostics
         End Sub
 
         Public Sub UriWithUserInfo(Pwd As String, Domain As String)
-            Dim n1 As String = "scheme://user:azerty123@domain.com" ' Noncompliant {{Review this hard-coded URL, which may contain a credential.}}
+            Dim n1 As String = "scheme://user:azerty123@domain.com" ' Noncompliant {{Review this hard-coded URI, which may contain a credential.}}
             Dim n2 As String = "scheme://user:With%20%3F%20Encoded@domain.com"              ' Noncompliant
             Dim n3 As String = "scheme://user:With!$&'()*+,;=OtherCharacters@domain.com"    ' Noncompliant
 
