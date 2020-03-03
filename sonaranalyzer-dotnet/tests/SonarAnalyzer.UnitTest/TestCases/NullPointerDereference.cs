@@ -756,4 +756,28 @@ namespace Tests.Diagnostics
             return s.Trim(); // Noncompliant FP due to loop traversal
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3156
+    class ForEachCollection
+    {
+        string DoSomething(IEnumerable<object> list, object current)
+        {
+            if (current == null)
+            {
+                //SE creates both constrains for 'current'
+            }
+            foreach(var item in list)
+            {
+                if (item == current)
+                {
+                    return item.ToString(); // Noncompliant FP, null constraint is inherited from 'current == null' check
+                }
+                else if (item.ToString() == "xxx") // 'item' does not contain constraints by default, issue is not raised here anyway
+                {
+                    return item.ToString();
+                }
+            }
+            return null;
+        }
+    }
 }
