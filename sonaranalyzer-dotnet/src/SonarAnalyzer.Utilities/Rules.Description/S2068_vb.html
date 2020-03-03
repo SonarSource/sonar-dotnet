@@ -26,16 +26,19 @@ strings, and for variable names that match any of the patterns from the provided
 <h2>Noncompliant Code Example</h2>
 <pre>
 Dim username As String = "admin"
-Dim password As String = "Password123"
-Dim usernamePassword As String = "user=admin&amp;password=Password123"
-Dim usernamePassword2 As String = "user=admin&amp;" &amp; "password=" &amp; password
+Dim password As String = "Password123" ' Sensitive
+Dim usernamePassword As String = "user=admin&amp;password=Password123" ' Sensitive
+Dim url As String = "scheme://user:Admin123@domain.com" ' Sensitive
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 Dim username As String = "admin"
 Dim password As String = GetEncryptedPassword()
 Dim usernamePassword As String = String.Format("user={0}&amp;password={1}", GetEncryptedUsername(), GetEncryptedPassword())
+Dim url As String = $"scheme://{username}:{password}@domain.com"
 </pre>
+<h2>Exceptions</h2>
+<p>Issue is not raised when URI username and password are the same.</p>
 <h2>See</h2>
 <ul>
   <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A2-Broken_Authentication">OWASP Top 10 2017 Category A2</a> - Broken Authentication </li>

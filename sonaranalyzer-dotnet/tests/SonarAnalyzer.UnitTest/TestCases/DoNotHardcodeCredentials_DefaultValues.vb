@@ -8,14 +8,14 @@ Namespace Tests.Diagnostics
         Private Const Secret As String = "constantValue"
 
         Public Sub Test()
-            Dim password As String = "foo" 'Noncompliant {{Make sure hard-coded credential is safe.}}
-'               ^^^^^^^^^^^^^^^^^^^^^^^^^^
-            Dim foo As String, passwd As String = "a" 'Noncompliant {{Make sure hard-coded credential is safe.}}
-'                              ^^^^^^^^^^^^^^^^^^^^^^
+            Dim password As String = "foo" 'Noncompliant {{"password" detected here, make sure this is not a hard-coded credential.}}
+            '   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+            Dim foo As String, passwd As String = "a" 'Noncompliant {{"passwd" detected here, make sure this is not a hard-coded credential.}}
+            '                  ^^^^^^^^^^^^^^^^^^^^^^
+            Dim pwdPassword As String = "a"     'Noncompliant {{"pwd, password" detected here, make sure this is not a hard-coded credential.}}
             Dim foo2 As String = "Password=123" 'Noncompliant
             Dim bar As String
-            bar = "Password=p" 'Noncompliant
-'           ^^^^^^^^^^^^^^^^^^
+            bar = "Password=p" 'Noncompliant ^13#18
             foo = "password="
             foo = "passwordpassword"
             foo = "foo=1;password=1" 'Noncompliant
@@ -25,7 +25,20 @@ Namespace Tests.Diagnostics
             Dim myPassword2 As String = ""
             Dim myPassword3 As String = "   "
             Dim myPassword4 As String = "foo" 'Noncompliant
+        End Sub
 
+        Public Sub DefaultKeywords()
+            Dim password As String = "a"       ' Noncompliant
+            Dim x1 As String = "password=a"    ' Noncompliant
+
+            Dim passwd As String = "a"         ' Noncompliant
+            Dim x2 As String = "passwd=a"      ' Noncompliant
+
+            Dim pwd As String = "a"            ' Noncompliant
+            Dim x3 As String = "pwd=a"         ' Noncompliant
+
+            Dim passphrase As String = "a"     ' Noncompliant
+            Dim x4 As String = "passphrase=a"  ' Noncompliant
         End Sub
 
         Public Sub StandardAPI(secureString As SecureString, nonHardcodedPassword As String, byteArray As Byte(), cspParams As CspParameters)
@@ -56,17 +69,38 @@ Namespace Tests.Diagnostics
             passwordDeriveBytes = New PasswordDeriveBytes("hardcoded", byteArray, "strHashName", 1, cspParams) 'Noncompliant
         End Sub
 
-        Public Sub CompliantParameterUse(pwd as String)
+        Public Sub CompliantParameterUse(pwd As String)
             Dim query1 As String = "password=?"
             Dim query2 As String = "password=:password"
             Dim query3 As String = "password=:param"
-            Dim query4 As String = "password='"+pwd+"'"
+            Dim query4 As String = "password='" + pwd + "'"
             Dim query5 As String = "password={0}"
             Dim query6 As String = "password=;user=;"
             Dim query7 As String = "password=:password;user=:user;"
             Dim query8 As String = "password=?;user=?;"
             Dim query9 As String = "Server=myServerName\myInstanceName;Database=myDataBase;Password=:myPassword;User Id=:username;"
         End Sub
+
+        Public Sub UriWithUserInfo(Pwd As String, Domain As String)
+            Dim n1 As String = "scheme://user:azerty123@domain.com" ' Noncompliant {{Review this hard-coded URI, which may contain a credential.}}
+            Dim n2 As String = "scheme://user:With%20%3F%20Encoded@domain.com"              ' Noncompliant
+            Dim n3 As String = "scheme://user:With!$&'()*+,;=OtherCharacters@domain.com"    ' Noncompliant
+
+            Dim fn1 As String = "scheme://user:azerty123@" & Domain  ' Compliant FN, concatenated strings are not supported
+
+            Dim c1 As String = "scheme://user:" & Pwd & "@domain.com"
+            Dim c2 As String = "scheme://user:@domain.com"
+            Dim c3 As String = "scheme://user@domain.com:80"
+            Dim c4 As String = "scheme://user@domain.com"
+            Dim c5 As String = "scheme://domain.com/user:azerty123"
+            Dim c6 As String = String.Format("scheme://user:{0}@domain.com", Pwd)
+            Dim c7 As String = $"scheme://user:{Pwd}@domain.com"
+
+            Dim e1 As String = "scheme://admin:admin@domain.com"    ' Compliant exception, user and password are the same
+            Dim e2 As String = "scheme://abc:abc@domain.com"        ' Compliant exception, user and password are the same
+            Dim e3 As String = "scheme://a%20;c:a%20;c@domain.com"  ' Compliant exception, user and password are the same
+        End Sub
+
     End Class
 
     Class FalseNegatives

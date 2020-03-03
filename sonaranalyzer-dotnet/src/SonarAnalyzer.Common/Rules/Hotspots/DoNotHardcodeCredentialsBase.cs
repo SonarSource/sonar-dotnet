@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
@@ -33,17 +34,20 @@ namespace SonarAnalyzer.Rules
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S2068";
-        protected const string MessageFormat = "Make sure hard-coded credential is safe.";
+        private const string MessageFormat = "{0}";
+        private const string MessageFormatCredential = @"""{0}"" detected here, make sure this is not a hard-coded credential.";
+        private const string MessageUriUserInfo = "Review this hard-coded URI, which may contain a credential.";
+        private const string DefaultCredentialWords = "password, passwd, pwd, passphrase";
 
-        private const string DefaultCredentialWords = "password, passwd, pwd";
-
+        protected readonly DiagnosticDescriptor rule;
         private string credentialWords;
         private IEnumerable<string> splitCredentialWords;
         private Regex passwordValuePattern;
         private readonly IAnalyzerConfiguration analyzerConfiguration;
 
-        [RuleParameter("credentialWords", PropertyType.String,
-            "Comma separated list of words identifying potential credentials", DefaultCredentialWords)]
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        [RuleParameter("credentialWords", PropertyType.String, "Comma separated list of words identifying potential credentials", DefaultCredentialWords)]
         public string CredentialWords
         {
             get => this.credentialWords;
@@ -64,8 +68,9 @@ namespace SonarAnalyzer.Rules
 
         protected PropertyAccessTracker<TSyntaxKind> PropertyAccessTracker { get; set; }
 
-        protected DoNotHardcodeCredentialsBase(IAnalyzerConfiguration analyzerConfiguration)
+        protected DoNotHardcodeCredentialsBase(System.Resources.ResourceManager rspecResources, IAnalyzerConfiguration analyzerConfiguration)
         {
+            this.rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources).WithNotConfigurable();
             CredentialWords = DefaultCredentialWords;
             this.analyzerConfiguration = analyzerConfiguration;
         }
@@ -101,6 +106,7 @@ namespace SonarAnalyzer.Rules
              where TSyntaxNode : SyntaxNode
         {
             private readonly Regex validCredentialPattern = new Regex(@"^\?|:\w+|\{\d+[^}]*\}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            private readonly Regex uriUserInfoPattern = new Regex(@"\w+:\/\/(?<Login>[^:]+):(?<Password>[^@]+)@", RegexOptions.Compiled);
             private readonly DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer;
 
             protected CredentialWordsFinderBase(DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer)
@@ -118,20 +124,23 @@ namespace SonarAnalyzer.Rules
                 context =>
                 {
                     var declarator = (TSyntaxNode)context.Node;
-
                     if (!IsAssignedWithStringLiteral(declarator, context.SemanticModel))
                     {
                         return;
                     }
-
                     var variableName = GetVariableName(declarator);
                     var variableValue = GetAssignedValue(declarator);
 
                     var bannedWords = FindCredentialWords(variableName, variableValue);
                     if (bannedWords.Any())
                     {
-                        context.ReportDiagnosticWhenActive(
-                            Diagnostic.Create(rule, declarator.GetLocation(), string.Join(", ", bannedWords)));
+                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, declarator.GetLocation(),
+                            string.Format(MessageFormatCredential, bannedWords.JoinStr(", "))));
+                    }
+                    else if(ContainsUriUserInfo(variableValue))
+                    {
+                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, declarator.GetLocation(),
+                            MessageUriUserInfo));
                     }
                 };
 
@@ -164,6 +173,12 @@ namespace SonarAnalyzer.Rules
 
                 return string.IsNullOrWhiteSpace(candidateCredential) ||
                        this.validCredentialPattern.IsMatch(candidateCredential);
+            }
+
+            private bool ContainsUriUserInfo(string variableValue)
+            {
+                var match = uriUserInfoPattern.Match(variableValue);
+                return match.Success && !string.Equals(match.Groups["Login"].Value, match.Groups["Password"].Value, StringComparison.OrdinalIgnoreCase);
             }
         }
     }

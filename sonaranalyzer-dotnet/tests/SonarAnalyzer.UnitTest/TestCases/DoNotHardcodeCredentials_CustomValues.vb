@@ -7,12 +7,12 @@ Namespace Tests.Diagnostics
     Class Program
         Public Sub Test()
             Dim passWord As String = "foo"
-            Dim passKode As String = "a" 'Noncompliant {{Make sure hard-coded credential is safe.}}
+            Dim passKode As String = "a" 'Noncompliant {{"kode" detected here, make sure this is not a hard-coded credential.}}
             Dim passKodeKode As String = "a" 'Noncompliant
             Dim passKoDe As String = "a"    ' Error [BC30288] Local variable 'passKoDe' is already declared in the current block
             Dim x As String = "kode=a;kode=a" 'Noncompliant
             Dim x1 As String = "facal-faire=a;kode=a" 'Noncompliant
-            Dim x2 as String = "x\*+?|}{][)(^$.# =something" ' Noncompliant
+            Dim x2 As String = "x\*+?|}{][)(^$.# =something" ' Noncompliant {{"x\*+?|}{][)(^$.#" detected here, make sure this is not a hard-coded credential.}}
         End Sub
 
         Public Sub StandardAPI(secureString As SecureString, nonHardcodedPassword As String, byteArray As Byte(), cspParams As CspParameters)
