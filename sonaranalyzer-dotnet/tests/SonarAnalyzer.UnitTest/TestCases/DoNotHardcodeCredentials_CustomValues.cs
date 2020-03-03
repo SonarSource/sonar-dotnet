@@ -10,13 +10,13 @@ namespace Tests.Diagnostics
         public void Test()
         {
             string passWord = @"foo"; // Compliant
-            string passKode = "a"; // Noncompliant {{Make sure hard-coded credential is safe.}}
+            string passKode = "a"; // Noncompliant {{"kode" detected here, make sure this is not a hard-coded credential.}}
             string passKodeKode = "a"; // Noncompliant
             string passKoDe = "a"; // Compliant
 
             string x = "kode=a;kode=a"; // Noncompliant
             string x1 = "facal-faire=a;kode=a"; // Noncompliant
-            string x2 = @"x\*+?|}{][)(^$.# =something"; // Noncompliant
+            string x2 = @"x\*+?|}{][)(^$.# =something"; // Noncompliant {{"x\*+?|}{][)(^$.#" detected here, make sure this is not a hard-coded credential.}}
         }
 
         public void StandardAPI(SecureString secureString, string nonHardcodedPassword, byte[] byteArray, CspParameters cspParams)

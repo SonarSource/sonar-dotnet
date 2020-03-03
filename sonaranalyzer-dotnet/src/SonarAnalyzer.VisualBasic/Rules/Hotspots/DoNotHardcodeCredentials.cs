@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -33,20 +32,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [Rule(DiagnosticId)]
     public sealed class DoNotHardcodeCredentials : DoNotHardcodeCredentialsBase<SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
-                .WithNotConfigurable();
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(rule);
-
-        public DoNotHardcodeCredentials()
-            : this(AnalyzerConfiguration.Hotspot)
-        {
-        }
+        public DoNotHardcodeCredentials() : this(AnalyzerConfiguration.Hotspot) { }
 
         internal /*for testing*/ DoNotHardcodeCredentials(IAnalyzerConfiguration analyzerConfiguration)
-            : base(analyzerConfiguration)
+            : base(RspecStrings.ResourceManager, analyzerConfiguration)
         {
             ObjectCreationTracker = new VisualBasicObjectCreationTracker(analyzerConfiguration, rule);
             PropertyAccessTracker = new VisualBasicPropertyAccessTracker(analyzerConfiguration, rule);

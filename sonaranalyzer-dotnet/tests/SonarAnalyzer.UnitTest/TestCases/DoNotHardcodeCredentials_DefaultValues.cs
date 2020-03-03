@@ -11,10 +11,10 @@ namespace Tests.Diagnostics
 
         public void Test()
         {
-            string password = @"foo"; // Noncompliant {{Make sure hard-coded credential is safe.}}
+            string password = @"foo"; // Noncompliant {{"password" detected here, make sure this is not a hard-coded credential.}}
 //                 ^^^^^^^^^^^^^^^^^
 
-            string foo, passwd = "a"; // Noncompliant {{Make sure hard-coded credential is safe.}}
+            string foo, passwd = "a"; // Noncompliant {{"passwd" detected here, make sure this is not a hard-coded credential.}}
 //                      ^^^^^^^^^^^^
 
             string foo2 = @"Password=123"; // Noncompliant
@@ -75,6 +75,27 @@ namespace Tests.Diagnostics
             string query7 = "password=:password;user=:user;";
             string query8 = "password=?;user=?;";
             string query9 = @"Server=myServerName\myInstanceName;Database=myDataBase;Password=:myPassword;User Id=:username;";
+        }
+
+        public void UriWithUserInfo(string pwd, string domain)
+        {
+            string n1 = "scheme://user:azerty123@domain.com"; // Noncompliant {{Review this hard-coded URL, which may contain a credential.}}
+            string n2 = "scheme://user:With%20%3F%20Encoded@domain.com";              // Noncompliant
+            string n3 = "scheme://user:With!$&'()*+,;=OtherCharacters@domain.com";    // Noncompliant
+
+            string fn1 = "scheme://user:azerty123@" + domain;  // Compliant FN, concatenated strings are not supported
+
+            string c1 = "scheme://user:" + pwd + "@domain.com";
+            string c2 = "scheme://user:@domain.com";
+            string c3 = "scheme://user@domain.com:80";
+            string c4 = "scheme://user@domain.com";
+            string c5 = "scheme://domain.com/user:azerty123";
+            string c6 = String.Format("scheme://user:{0}@domain.com", pwd);
+            string c7 = $"scheme://user:{pwd}@domain.com";
+
+            string e1 = "scheme://admin:admin@domain.com";    // Compliant exception, user and password are the same
+            string e2 = "scheme://abc:abc@domain.com";        // Compliant exception, user and password are the same
+            string e3 = "scheme://a%20;c:a%20;c@domain.com";  // Compliant exception, user and password are the same
         }
     }
 
