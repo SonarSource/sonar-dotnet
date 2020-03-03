@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var declarations = declarationSymbol.DeclaringSyntaxReferences
                             .Select(reference => reference.GetSyntax());
 
-                        var typeParameterNames = helper.Parameters.Parameters.Select(typeParameter => typeParameter.Identifier.Text).ToList();
+                        var typeParameterNames = helper.Parameters.Parameters.Select(typeParameter => typeParameter.Identifier.Text).ToArray();
 
                         var usedTypeParameters = GetUsedTypeParameters(declarations, typeParameterNames, c, analysisContext.Compilation);
 
@@ -136,7 +136,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol.IsChangeable();
         }
 
-        private static List<string> GetUsedTypeParameters(IEnumerable<SyntaxNode> declarations, List<string> typeParameterNames,
+        private static List<string> GetUsedTypeParameters(IEnumerable<SyntaxNode> declarations, string[] typeParameterNames,
             SyntaxNodeAnalysisContext localContext,
             Compilation compilation)
         {
