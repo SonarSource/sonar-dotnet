@@ -111,6 +111,7 @@ namespace Tests.Diagnostics
     {
         public void MyMethod(T2 p) { }
     }
+
     public class MyNonCompliantSpecialGenericClass<
         T1, // Compliant, not recognized that it's a non used type parameter
         T2> // Noncompliant
@@ -159,6 +160,23 @@ namespace Tests.Diagnostics
             }
 
             unsafe static void LocalStaticUnsafeFunctionWithUnusedTypeParameter<T>() { } // Noncompliant
+        }
+    }
+
+    public partial class PartialClass<T>
+    {
+    }
+
+    public class T
+    {
+        public void Method() {}
+    }
+
+    public class GenericClass<T> // Noncompliant
+    {
+        public void Method(Tests.Diagnostics.T x)
+        {
+            x.Method();
         }
     }
 }
