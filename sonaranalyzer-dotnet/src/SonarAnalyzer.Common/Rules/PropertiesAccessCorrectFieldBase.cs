@@ -171,7 +171,7 @@ namespace SonarAnalyzer.Rules
             return allPropertyData;
         }
 
-        protected struct PropertyData
+        private readonly struct PropertyData
         {
             public PropertyData(IPropertySymbol propertySymbol, IEnumerable<FieldData> read, IEnumerable<FieldData> updated,
                 bool ignoreGetter, bool ignoreSetter)
