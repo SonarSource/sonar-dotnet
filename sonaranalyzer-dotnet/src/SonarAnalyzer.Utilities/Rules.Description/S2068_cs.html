@@ -28,12 +28,14 @@ strings, and for variable names that match any of the patterns from the provided
 string username = "admin";
 string password = "Admin123"; // Sensitive
 string usernamePassword  = "user=admin&amp;password=Admin123"; // Sensitive
+string url = "scheme://user:Admin123@domain.com"; // Sensitive
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 string username = "admin";
 string password = GetEncryptedPassword();
 string usernamePassword = string.Format("user={0}&amp;password={1}", GetEncryptedUsername(), GetEncryptedPassword());
+string url = $"scheme://{username}:{password}@domain.com";
 </pre>
 <h2>See</h2>
 <ul>
