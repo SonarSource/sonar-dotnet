@@ -180,6 +180,16 @@ namespace UnityEditor
         }
 
         [TestMethod]
+        [TestCategory("Rule")]
+        public void UnusedPrivateMember_FromCSharp8()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.CSharp8.cs",
+                new CS.UnusedPrivateMember(),
+                ParseOptionsHelper.FromCSharp8,
+                additionalReferences: NuGetMetadataReference.NETStandardV2_1_0);
+        }
+
+        [TestMethod]
         [TestCategory("CodeFix")]
         public void UnusedPrivateMember_CodeFix()
         {
