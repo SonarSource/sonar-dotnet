@@ -133,4 +133,16 @@ namespace MyLibrary
         public Task<bool> GetSomething2() => Task.FromResult(true); // Compliant - return type is Task<T>
         public ValueTask<bool> GetSomething3() => default(ValueTask<bool>); // Compliant - return type is ValueTask<T>
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3140
+    public class Repro_3136
+    {
+        private static readonly Random rnd = new Random();
+
+        [NoProperty]
+        public int GetRandom() => rnd.Next(); // Noncompliant FP, attribute is needed and cannot be applied to property (Web API Controller)
+
+        [AttributeUsage(AttributeTargets.All ^ AttributeTargets.Property)]
+        private class NoPropertyAttribute : Attribute { }
+    }
 }
