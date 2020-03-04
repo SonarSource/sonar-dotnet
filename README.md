@@ -61,7 +61,7 @@ and on our [Community Forum](https://community.sonarsource.com/).
 
 If you want to fix an issue from [the backlog](https://github.com/SonarSource/sonar-dotnet/issues),
 read [Get started](#get-started) and please make sure that you follow [our coding style](./docs/coding-style.md).
-Before submitting the PR, make sure [all tests](.docs/contributing-analyzer.md#running-tests) are passing (all checks must be green).
+Before submitting the PR, make sure [all tests](./docs/contributing-analyzer.md#running-tests) are passing (all checks must be green).
 
 * We suggest you do not pick issues that have the `Area: CFG` label
 _(they are difficult, can have many side effects and are less likely to be accepted)_.
