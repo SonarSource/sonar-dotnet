@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -27,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -34,11 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldBase
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override DiagnosticDescriptor Rule => rule;
+        public PropertiesAccessCorrectField() : base(RspecStrings.ResourceManager) { }
 
         protected override IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation)
         {
@@ -49,27 +45,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
             // we only keep information for the first location of the symbol
             var assignments = new Dictionary<IFieldSymbol, FieldData>();
-            foreach (var node in setter.DescendantNodes())
-            {
-                FieldData? foundField = null;
-                if (node is AssignmentExpressionSyntax assignment && node.IsKind(SyntaxKind.SimpleAssignmentExpression))
-                {
-                    foundField = assignment.Left.DescendantNodesAndSelf().OfType<ExpressionSyntax>()
-                        .Select(x => ExtractFieldFromExpression(AccessorKind.Setter, x, compilation))
-                        .FirstOrDefault(x => x != null);
-                }
-                else if (node is ArgumentSyntax argument && IsRefOrOut(argument.RefOrOutKeyword))
-                {
-                    foundField = ExtractFieldFromExpression(AccessorKind.Setter, argument.Expression, compilation);
-                }
-                if (foundField.HasValue && !assignments.ContainsKey(foundField.Value.Field))
-                {
-                    assignments.Add(foundField.Value.Field, foundField.Value);
-                }
-            }
-            return assignments.Values;
+            FillAssignments(assignments, compilation, setter, true);
 
-            bool IsRefOrOut(SyntaxToken node) => node.IsKind(SyntaxKind.RefKeyword) || node.IsKind(SyntaxKind.OutKeyword);
+            // If there're no candidate variables, we'll try to inspect one local method invocation with value as argument
+            if (assignments.Count == 0
+                && (setter.ExpressionBody()?.Expression ?? SingleInvocation(setter.Body)) is { } expression
+                && FindInvokedMethod(compilation, property.ContainingType, expression) is MethodDeclarationSyntax invokedMethod)
+            {
+                FillAssignments(assignments, compilation, invokedMethod, false);
+            }
+
+            return assignments.Values;
         }
 
         protected override IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation)
@@ -81,17 +67,30 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var reads = new Dictionary<IFieldSymbol, FieldData>();
-            var notAssigned = getter.DescendantNodes().OfType<ExpressionSyntax>().Where(n => !IsLeftSideOfAssignment(n));
-            foreach (var expression in notAssigned)
+            FillReads(getter, true);
+
+            // If there're no candidate variables, we'll try inspect one return of local method invocation
+            if (reads.Count == 0
+                && (getter.ExpressionBody()?.Expression ?? SingleReturn(getter.Body)) is InvocationExpressionSyntax returnExpression
+                && FindInvokedMethod(compilation, property.ContainingType, returnExpression) is MethodDeclarationSyntax invokedMethod)
             {
-                var readField = ExtractFieldFromExpression(AccessorKind.Getter, expression, compilation);
-                // we only keep information for the first location of the symbol
-                if (readField.HasValue && !reads.ContainsKey(readField.Value.Field))
-                {
-                    reads.Add(readField.Value.Field, readField.Value);
-                }
+                FillReads(invokedMethod, false);
             }
             return reads.Values;
+
+            void FillReads(SyntaxNode root, bool useFieldLocation)
+            {
+                var notAssigned = root.DescendantNodes().OfType<ExpressionSyntax>().Where(n => !IsLeftSideOfAssignment(n));
+                foreach (var expression in notAssigned)
+                {
+                    var readField = ExtractFieldFromExpression(AccessorKind.Getter, expression, compilation, useFieldLocation);
+                    // we only keep information for the first location of the symbol
+                    if (readField.HasValue && !reads.ContainsKey(readField.Value.Field))
+                    {
+                        reads.Add(readField.Value.Field, readField.Value);
+                    }
+                }
+            }
         }
 
         protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod)
@@ -119,9 +118,50 @@ namespace SonarAnalyzer.Rules.CSharp
             (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax getter &&
             getter.DescendantNodes().Any());
 
-        private static FieldData? ExtractFieldFromExpression(AccessorKind accessorKind,
-            ExpressionSyntax expression,
-            Compilation compilation)
+        private static void FillAssignments(Dictionary<IFieldSymbol, FieldData> assignments, Compilation compilation, SyntaxNode root, bool useFieldLocation)
+        {
+            foreach (var node in root.DescendantNodes())
+            {
+                FieldData? foundField = null;
+                if (node is AssignmentExpressionSyntax assignment && node.IsKind(SyntaxKind.SimpleAssignmentExpression))
+                {
+                    foundField = assignment.Left.DescendantNodesAndSelf().OfType<ExpressionSyntax>()
+                        .Select(x => ExtractFieldFromExpression(AccessorKind.Setter, x, compilation, useFieldLocation))
+                        .FirstOrDefault(x => x != null);
+                }
+                else if (node is ArgumentSyntax argument && argument.RefOrOutKeyword.IsAnyKind(SyntaxKind.RefKeyword,SyntaxKind.OutKeyword))
+                {
+                    foundField = ExtractFieldFromExpression(AccessorKind.Setter, argument.Expression, compilation, useFieldLocation);
+                }
+                if (foundField.HasValue && !assignments.ContainsKey(foundField.Value.Field))
+                {
+                    assignments.Add(foundField.Value.Field, foundField.Value);
+                }
+            }
+        }
+
+        private static ExpressionSyntax SingleReturn(BlockSyntax body)
+        {
+            var returns = body.DescendantNodes().OfType<ReturnStatementSyntax>().ToArray();
+            return returns.Length == 1 ? returns.Single().Expression : null;
+        }
+
+        private static ExpressionSyntax SingleInvocation(BlockSyntax body)
+        {
+            var expressions = body.DescendantNodes().OfType<InvocationExpressionSyntax>().Select(x => x.Expression).ToArray();
+            if (expressions.Length == 1)
+            {
+                var expr = expressions.Single();
+                if (expr is IdentifierNameSyntax
+                    || (expr is MemberAccessExpressionSyntax member && member.Expression is ThisExpressionSyntax))
+                {
+                    return expr;
+                }
+            }
+            return null;
+        }
+
+        private static FieldData? ExtractFieldFromExpression(AccessorKind accessorKind, ExpressionSyntax expression, Compilation compilation, bool useFieldLocation)
         {
             var semanticModel = compilation.GetSemanticModel(expression.SyntaxTree);
             if (semanticModel == null)
@@ -135,14 +175,14 @@ namespace SonarAnalyzer.Rules.CSharp
             if (strippedExpression is IdentifierNameSyntax &&
                 semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field)
             {
-                return new FieldData(accessorKind, field, strippedExpression);
+                return new FieldData(accessorKind, field, strippedExpression, useFieldLocation);
             }
             // Check for "this.foo"
             else if (strippedExpression is MemberAccessExpressionSyntax member &&
-                member.Expression is ThisExpressionSyntax thisExpression &&
+                member.Expression is ThisExpressionSyntax &&
                 semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field2)
             {
-                return new FieldData(accessorKind, field2, member.Name);
+                return new FieldData(accessorKind, field2, member.Name, useFieldLocation);
             }
 
             return null;

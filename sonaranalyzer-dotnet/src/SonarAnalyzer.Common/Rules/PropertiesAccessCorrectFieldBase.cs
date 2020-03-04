@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 
@@ -33,7 +34,23 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S4275";
         protected const string MessageFormat = "Refactor this {0} so that it actually refers to the field '{1}'.";
 
-        protected abstract DiagnosticDescriptor Rule { get; }
+        private readonly DiagnosticDescriptor rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        /**
+         * Assignments can be done either
+         * - directly via an assignment
+         * - indirectly, when passed as 'out' or 'ref' parameter
+         */
+        protected abstract IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation);
+        protected abstract IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation);
+        protected abstract bool ImplementsExplicitGetterOrSetter(IPropertySymbol property);
+        protected abstract bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod);
+
+        protected PropertiesAccessCorrectFieldBase(System.Resources.ResourceManager rspecResources)
+        {
+            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+        }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -43,7 +60,16 @@ namespace SonarAnalyzer.Rules
             context.RegisterSymbolAction(CheckType, SymbolKind.NamedType);
         }
 
-        protected void CheckType(SymbolAnalysisContext context)
+        protected static SyntaxNode FindInvokedMethod(Compilation compilation, INamedTypeSymbol containingType, SyntaxNode expression) =>
+            compilation.GetSemanticModel(expression.SyntaxTree) is { } semanticModel
+            && semanticModel.GetSymbolInfo(expression).Symbol is { } invocationSymbol
+            && invocationSymbol.ContainingType == containingType
+            && invocationSymbol.DeclaringSyntaxReferences.Length == 1
+            && invocationSymbol.DeclaringSyntaxReferences.Single().GetSyntax() is { } invokedMethod
+            ? invokedMethod
+            : null;
+
+        private void CheckType(SymbolAnalysisContext context)
         {
             var symbol = (INamedTypeSymbol)context.Symbol;
             if (symbol.TypeKind != TypeKind.Class &&
@@ -85,13 +111,13 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected IEnumerable<IPropertySymbol> GetExplictlyDeclaredProperties(INamedTypeSymbol symbol) =>
+        private IEnumerable<IPropertySymbol> GetExplictlyDeclaredProperties(INamedTypeSymbol symbol) =>
             symbol.GetMembers()
                 .Where(m => m.Kind == SymbolKind.Property)
                 .OfType<IPropertySymbol>()
                 .Where(p => ImplementsExplicitGetterOrSetter(p));
 
-        protected void CheckExpectedFieldIsUsed(IMethodSymbol methodSymbol, IFieldSymbol expectedField, IEnumerable<FieldData> actualFields, SymbolAnalysisContext context)
+        private void CheckExpectedFieldIsUsed(IMethodSymbol methodSymbol, IFieldSymbol expectedField, ImmutableArray<FieldData> actualFields, SymbolAnalysisContext context)
         {
             var expectedFieldIsUsed = actualFields.Any(a => a.Field == expectedField);
             if (!expectedFieldIsUsed || !actualFields.Any())
@@ -100,7 +126,7 @@ namespace SonarAnalyzer.Rules
                 if (locationAndAccessorType.Item1 != null)
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(
-                        Rule,
+                        rule,
                         locationAndAccessorType.Item1,
                         locationAndAccessorType.Item2,
                         expectedField.Name
@@ -108,11 +134,11 @@ namespace SonarAnalyzer.Rules
                 }
             }
 
-            Tuple<Location, string> GetLocationAndAccessor(IEnumerable<FieldData> fields, IMethodSymbol method)
+            Tuple<Location, string> GetLocationAndAccessor(ImmutableArray<FieldData> fields, IMethodSymbol method)
             {
                 Location location = null;
                 string accessorType = null;
-                if (fields.Count() == 1)
+                if (fields.Count(x => x.UseFieldLocation) == 1)
                 {
                     var fieldWithValue = fields.First();
                     location = fieldWithValue.LocationNode.GetLocation();
@@ -128,7 +154,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected IList<PropertyData> CollectPropertyData(IEnumerable<IPropertySymbol> properties, Compilation compilation)
+        private IList<PropertyData> CollectPropertyData(IEnumerable<IPropertySymbol> properties, Compilation compilation)
         {
             IList<PropertyData> allPropertyData = new List<PropertyData>();
 
@@ -145,34 +171,23 @@ namespace SonarAnalyzer.Rules
             return allPropertyData;
         }
 
-        /**
-         * Assignments can be done either
-         * - directly via an assignment
-         * - indirectly, when passed as 'out' or 'ref' parameter
-         */
-        protected abstract IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation);
-        protected abstract IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation);
-        protected abstract bool ImplementsExplicitGetterOrSetter(IPropertySymbol property);
-        protected abstract bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod);
-
-
-        protected struct PropertyData
+        private readonly struct PropertyData
         {
             public PropertyData(IPropertySymbol propertySymbol, IEnumerable<FieldData> read, IEnumerable<FieldData> updated,
                 bool ignoreGetter, bool ignoreSetter)
             {
                 PropertySymbol = propertySymbol;
-                ReadFields = read;
-                UpdatedFields = updated;
+                ReadFields = read.ToImmutableArray();
+                UpdatedFields = updated.ToImmutableArray();
                 IgnoreGetter = ignoreGetter;
                 IgnoreSetter = ignoreSetter;
             }
 
             public IPropertySymbol PropertySymbol { get; }
 
-            public IEnumerable<FieldData> ReadFields { get; }
+            public ImmutableArray<FieldData> ReadFields { get; }
 
-            public IEnumerable<FieldData> UpdatedFields { get; }
+            public ImmutableArray<FieldData> UpdatedFields { get; }
 
             public bool IgnoreGetter { get; }
 
@@ -187,11 +202,12 @@ namespace SonarAnalyzer.Rules
 
         protected struct FieldData
         {
-            public FieldData(AccessorKind accessor, IFieldSymbol field, SyntaxNode locationNode)
+            public FieldData(AccessorKind accessor, IFieldSymbol field, SyntaxNode locationNode, bool useFieldLocation)
             {
                 AccessorKind = accessor;
                 Field = field;
                 LocationNode = locationNode;
+                UseFieldLocation = useFieldLocation;
             }
 
             public AccessorKind AccessorKind { get; }
@@ -199,6 +215,8 @@ namespace SonarAnalyzer.Rules
             public IFieldSymbol Field { get; }
 
             public SyntaxNode LocationNode { get; }
+
+            public bool UseFieldLocation { get; }
         }
 
         /// <summary>

@@ -454,4 +454,126 @@ Namespace Tests.Diagnostics
 
     End Class
 
+    ' https//github.com/SonarSource/sonar-dotnet/issues/2435
+    Public Class CrossProcedural_Repro_2435
+
+        Private _BodyValue As Integer
+        Private _BodyValueWrong As Integer
+        Private _TooNested As Integer
+        Private _TooComplex As Integer
+
+        Public Property BodyValue As Integer
+            Get
+                Return GetByBody()
+            End Get
+            Set(value As Integer)
+                SetByBody(value)
+            End Set
+        End Property
+
+        Public Property BodyValue_ As Integer   'With "Me."
+            Get
+                Return Me.GetByBody()
+            End Get
+            Set(value As Integer)
+                Me.SetByBody(value)
+            End Set
+        End Property
+
+        Public Property BodyValue__ As Integer 'Get/Set with more than one statement
+            Get 'Noncompliant, only one function invocation is supported
+                Try
+                    IrrelevantFunction()
+                    Return GetByBody()
+                Catch ex As Exception
+                    Return 0
+                End Try
+            End Get
+            Set(value As Integer) 'Noncompliant, only one function invocation is supported
+                Try
+                    IrrelevantProcedure(value)
+                    SetByBody(value)
+                Catch ex As Exception
+                    'Nothing
+                End Try
+            End Set
+        End Property
+
+        Public Property BodyValueWrong As Integer
+            Get                     'Noncompliant
+                Return GetByBody()
+            End Get
+            Set(value As Integer)   'Noncompliant
+                SetByBody(value)
+            End Set
+        End Property
+
+        Private Function IrrelevantFunction() As Integer
+            Return 42   'Do not touch local fieds
+        End Function
+
+        Private Sub IrrelevantProcedure(Value As Integer)
+            'Do not set local fields
+        End Sub
+
+        Private Function GetByBody() As Integer
+            Return _BodyValue
+        End Function
+
+        Private Sub SetByBody(Value As Integer)
+            _BodyValue = Value
+        End Sub
+
+        Public Property TooNested
+            Get         ' Noncompliant, only one level Of nesting Is supported
+                Return GetTooNestedA()
+            End Get
+            Set(value)  ' Noncompliant, only one level Of nesting Is supported
+                SetTooNestedA(value)
+            End Set
+        End Property
+
+        Private Function GetTooNestedA() As Integer
+            Return GetTooNestedB()
+        End Function
+
+        Private Sub SetTooNestedA(Value As Integer)
+            SetTooNestedB(Value)
+        End Sub
+
+        Private Function GetTooNestedB() As Integer
+            Return _TooNested
+        End Function
+
+        Private Sub SetTooNestedB(Value As Integer)
+            _TooNested = Value
+        End Sub
+
+        Public Property TooComplex As Integer
+            Get ' Noncompliant, only single return scenario is supported
+                If True Then
+                    Return GetTooComplex()
+                Else
+                    Return GetTooComplex()
+                End If
+            End Get
+            Set(Value As Integer) ' Noncompliant, only one function invocation is supported
+                If True Then
+                    SetTooComplex(Value)
+                Else
+                    SetTooComplex(Value)
+                End If
+            End Set
+        End Property
+
+        Private Function GetTooComplex() As Integer
+            Return _TooComplex
+        End Function
+
+        Private Sub SetTooComplex(Value As Integer)
+            _TooComplex = Value
+        End Sub
+
+    End Class
+
 End Namespace

@@ -523,20 +523,6 @@ namespace Tests.Diagnostics
         }
     }
 
-    public class CrossProcedural
-    {
-        private int myValue;
-        public int MyValue
-        {
-            // below there are two False Positives
-            get => this.GetMyValue(); // Noncompliant {{Refactor this getter so that it actually refers to the field 'myValue'.}}
-            set => this.SetMyValue(value); // Noncompliant {{Refactor this setter so that it actually refers to the field 'myValue'.}}
-        }
-
-        private int GetMyValue() => this.myValue;
-        private void SetMyValue(int value) => this.myValue = value;
-    }
-
     // https://github.com/SonarSource/sonar-dotnet/issues/2867
     public class Repro_2867
     {
@@ -553,5 +539,155 @@ namespace Tests.Diagnostics
             get => _someMember.Value;
             set => _someMember.Value = value;
         }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/2435
+    public class CrossProcedural_Repro_2435
+    {
+        private int expressionValue;
+        private int expressionValueWrong;
+        private int bodyValue;
+        private int bodyValueWrong;
+        private int tooNested;
+        private int tooComplex;
+
+        public int ExpressionValue
+        {
+            get => GetByExpression();
+            set => SetByExpression(value);
+        }
+
+        public int ExpressionValue_ // With "this."
+        {
+            get => this.GetByExpression();
+            set => this.SetByExpression(value);
+        }
+
+        public int ExpressionValueWrong
+        {
+            get => GetByExpression(); // Noncompliant
+            set => SetByExpression(value); // Noncompliant
+        }
+
+        private int GetByExpression() => this.expressionValue;
+        private void SetByExpression(int value) => this.expressionValue = value;
+
+        public int BodyValue
+        {
+            get
+            {
+                return GetByBody();
+            }
+            set
+            {
+                SetByBody(value);
+            }
+        }
+
+        public int BodyValue_ // With "this."
+        {
+            get
+            {
+                return this.GetByBody();
+            }
+            set
+            {
+                this.SetByBody(value);
+            }
+        }
+
+        public int BodyValue__ // get/set with more than one statement
+        {
+            get // Noncompliant, only one function invocation is supported
+            {
+                try
+                {
+                    var nothing = IrrelevantFunction();
+                    return GetByBody();
+                }
+                catch (Exception ex)
+                {
+                    return 0;
+                }
+            }
+            set // Noncompliant, only one function invocation is supported
+            {
+                try
+                {
+                    IrrelevantProcedure(value);
+                    SetByBody(value);
+                }
+                catch (Exception ex)
+                {
+                    // Nothing
+                }
+            }
+        }
+
+        public int BodyValueWrong
+        {
+            get // Noncompliant
+            {
+                return this.GetByExpression();
+            }
+            set // Noncompliant
+            {
+                this.SetByExpression(value);
+            }
+        }
+
+        private int IrrelevantFunction()
+        {
+            return 42; // Do not return local fields
+        }
+
+        private void IrrelevantProcedure(int value)
+        {
+            // Do not set local fields
+        }
+
+        private int GetByBody()
+        {
+            return this.bodyValue;
+        }
+
+        private void SetByBody(int value)
+        {
+            this.bodyValue = value;
+        }
+
+        public int TooNested
+        {
+            get => GetTooNestedA(); // Noncompliant, only one level of nesting is supported
+            set => SetTooNestedA(value); // Noncompliant, only one level of nesting is supported
+        }
+
+        private int GetTooNestedA() => GetTooNestedB();
+        private void SetTooNestedA(int value) => SetTooNestedB(value);
+
+        private int GetTooNestedB() => this.tooNested;
+        private void SetTooNestedB(int value) => this.tooNested = value;
+
+        public int TooComplex
+        {
+            get // Noncompliant, only single return scenario is supported
+            {
+                if (true)
+                    return GetTooComplex();
+                else
+                    return GetTooComplex();
+            }
+            set // Noncompliant, only one function invocation is supported
+            {
+                if (true)
+                    SetTooComplex(value);
+                else
+                    SetTooComplex(value);
+
+            }
+        }
+
+        private int GetTooComplex() => this.tooComplex;
+        private void SetTooComplex(int value) => this.tooComplex = value;
     }
 }
