@@ -75,6 +75,8 @@ namespace SonarAnalyzer.Rules.CSharp
                             {
                                 c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreation.GetLocation()));
                             }
+
+                            VerifyXPathDocumentConstructor(c);
                         },
                         SyntaxKind.ObjectCreationExpression);
 
@@ -104,7 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var settings = invocation.GetArgumentsOfKnownType(KnownType.System_Xml_XmlReaderSettings, context.SemanticModel).FirstOrDefault();
+            var settings = invocation.GetArgumentSymbolsOfKnownType(KnownType.System_Xml_XmlReaderSettings, context.SemanticModel).FirstOrDefault();
             if (settings == null)
             {
                 return; // safe by default
@@ -116,6 +118,28 @@ namespace SonarAnalyzer.Rules.CSharp
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation()));
             }
         }
+
+        private void VerifyXPathDocumentConstructor(SyntaxNodeAnalysisContext context)
+        {
+            var objectCreation = (ObjectCreationExpressionSyntax)context.Node;
+
+            if (!context.SemanticModel.GetTypeInfo(objectCreation).Type.Is(KnownType.System_Xml_XPath_XPathDocument) ||
+                // If a XmlReader is provided in the constructor, XPathDocument will be as safe as the received reader.
+                // In this case we don't raise a warning since the XmlReader has it's own checks.
+                objectCreation.GetArgumentsOfKnownType(KnownType.System_Xml_XmlReader, context.SemanticModel).Any())
+            {
+                return;
+            }
+
+            if (!IsXPathDocumentSecureByDefault(this.VersionProvider.GetDotNetFrameworkVersion(context.Compilation)))
+            {
+                context.ReportDiagnostic(Diagnostic.Create(rule, objectCreation.GetLocation()));
+            }
+        }
+
+        private static bool IsXPathDocumentSecureByDefault(NetFrameworkVersion version) =>
+            // XPathDocument is secure by default starting with .Net 4.5.2
+            version == NetFrameworkVersion.After452 || version == NetFrameworkVersion.Unknown;
 
         private static class TrackerFactory
         {
