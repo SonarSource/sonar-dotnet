@@ -36,9 +36,15 @@ string username = "admin";
 string password = GetEncryptedPassword();
 string usernamePassword = string.Format("user={0}&amp;password={1}", GetEncryptedUsername(), GetEncryptedPassword());
 string url = $"scheme://{username}:{password}@domain.com";
+
+string url2 = "http://guest:guest@domain.com"; // Compliant
+const string Password_Property = "custom.password"; // Compliant
 </pre>
 <h2>Exceptions</h2>
-<p>Issue is not raised when URI username and password are the same.</p>
+<ul>
+  <li> Issue is not raised when URI username and password are the same. </li>
+  <li> Issue is not raised when searched pattern is found in variable name and value. </li>
+</ul>
 <h2>See</h2>
 <ul>
   <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A2-Broken_Authentication">OWASP Top 10 2017 Category A2</a> - Broken Authentication </li>
