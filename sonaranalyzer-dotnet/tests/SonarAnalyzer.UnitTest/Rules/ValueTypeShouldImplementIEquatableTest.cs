@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ValueTypeShouldImplementIEquatable()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ValueTypeShouldImplementIEquatable.cs", new ValueTypeShouldImplementIEquatable());
+            Verifier.VerifyAnalyzer(@"TestCases\ValueTypeShouldImplementIEquatable.cs", new ValueTypeShouldImplementIEquatable(), ParseOptionsHelper.FromCSharp8);
         }
     }
 }
