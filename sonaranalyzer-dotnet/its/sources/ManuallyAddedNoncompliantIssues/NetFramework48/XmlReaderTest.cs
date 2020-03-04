@@ -23,5 +23,12 @@ namespace NetFramework48
         {
             using (XmlReader.Create("uri", new XmlReaderSettings {DtdProcessing = DtdProcessing.Ignore, XmlResolver = new XmlUrlResolver()})) { }
         }
+
+        public void XmlReader_SecureResolver(XmlSecureResolver secureResolver)
+        {
+            var settings = new XmlReaderSettings {DtdProcessing = DtdProcessing.Parse, XmlResolver = secureResolver};
+
+            XmlReader.Create("uri", settings).Dispose(); // Compliant - XmlSecureResolver is used
+        }
     }
 }

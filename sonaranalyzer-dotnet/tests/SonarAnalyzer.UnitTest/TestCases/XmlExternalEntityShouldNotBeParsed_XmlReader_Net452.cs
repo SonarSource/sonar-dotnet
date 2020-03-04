@@ -1,4 +1,7 @@
-﻿using System.Xml;
+﻿using System;
+using System.IO;
+using System.Text;
+using System.Xml;
 
 namespace SonarAnalyzer.UnitTest.TestCases
 {
@@ -109,6 +112,26 @@ namespace SonarAnalyzer.UnitTest.TestCases
         public void XmlReader_SettingsAsParameter(XmlReaderSettings settings)
         {
             XmlReader.Create("uri", settings).Dispose(); // Compliant - we don't track settings change between methods
+        }
+
+        public void processXml(string xml)
+        {
+            var settings = new XmlReaderSettings();
+
+            settings.ProhibitDtd = false;
+            settings.XmlResolver = new XmlSafeResolver(); // In order to avoid false positives we check the exact type of XmlResolver not to be XmlUrlResolver or XmlPreloadedResolver
+
+            XmlReader.Create(stream, settings).Dispose(); // Compliant
+        }
+    }
+
+    // Example of partial sanitization recommended by microsoft
+    // https://docs.microsoft.com/en-us/archive/msdn-magazine/2009/november/xml-denial-of-service-attacks-and-defenses#defending-against-external-entity-attacks
+    internal class XmlSafeResolver : XmlUrlResolver
+    {
+        public override object GetEntity(Uri absoluteUri, string role, Type ofObjectToReturn)
+        {
+            return null;
         }
     }
 }
