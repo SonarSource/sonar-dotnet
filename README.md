@@ -73,8 +73,7 @@ After your PR is ready, we will cherry-pick your commits and open a PR to run th
 
 ### Join us
 
-If you would like to work on this project full-time, we are hiring!
-Check out [sonarsource.com/company/jobs/](https://www.sonarsource.com/company/jobs/).
+If you would like to work on this project full-time, [we are hiring!](https://www.sonarsource.com/company/jobs/static-code-analyzer-cs-developer).
 
 ## Custom Rules
 
