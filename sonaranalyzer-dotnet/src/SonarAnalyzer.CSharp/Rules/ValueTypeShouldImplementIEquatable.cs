@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -46,6 +46,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var declaration = (StructDeclarationSyntax)c.Node;
+
+                    if (declaration.Modifiers.Any(SyntaxKind.RefKeyword))
+                    {
+                        return;
+                    }
 
                     var structSymbol = c.SemanticModel.GetDeclaredSymbol(declaration);
                     if (structSymbol == null)

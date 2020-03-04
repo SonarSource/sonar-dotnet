@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Tests.Diagnostics
@@ -14,5 +14,10 @@ namespace Tests.Diagnostics
         {
             throw new NotImplementedException();
         }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3157
+    ref struct Repro_3157 // Compliant, ref structs can not implement interfaces
+    {
     }
 }
