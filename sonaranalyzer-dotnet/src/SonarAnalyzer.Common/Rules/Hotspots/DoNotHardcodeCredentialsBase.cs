@@ -137,7 +137,7 @@ namespace SonarAnalyzer.Rules
                         context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, declarator.GetLocation(),
                             string.Format(MessageFormatCredential, bannedWords.JoinStr(", "))));
                     }
-                    else if(ContainsUriUserInfo(variableValue))
+                    else if (ContainsUriUserInfo(variableValue))
                     {
                         context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, declarator.GetLocation(),
                             MessageUriUserInfo));
@@ -151,10 +151,16 @@ namespace SonarAnalyzer.Rules
                     return Enumerable.Empty<string>();
                 }
 
-                var credentialWordsFound = variableName
+                var credentialWordsFound = (variableName ==null || variableName.Any(x => char.IsLower(x)) ? variableName : variableName.ToLower()) // Prepare "PASSWORD" for SplitCamelCaseToWords()
                     .SplitCamelCaseToWords()
                     .Intersect(analyzer.splitCredentialWords)
                     .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+                if (credentialWordsFound.Any(x => variableValue.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0))
+                {
+                    // See https://github.com/SonarSource/sonar-dotnet/issues/2868
+                    return Enumerable.Empty<string>();
+                }
 
                 var match = analyzer.passwordValuePattern.Match(variableValue);
                 if (match.Success && !IsValidCredential(match.Groups["suffix"].Value))

@@ -7,6 +7,8 @@ namespace Tests.Diagnostics
 {
     class Program
     {
+        public const string DBConnectionString = "Server=localhost; Database=Test; User=SA; Password=Secret123";    // Noncompliant
+
         private const string secret = "constantValue";
 
         public void Test()
@@ -52,6 +54,16 @@ namespace Tests.Diagnostics
             string x4 = "passphrase=a";  // Noncompliant
         }
 
+        public void Constants()
+        {
+            const string ConnectionString = "Server=localhost; Database=Test; User=SA; Password=Secret123";    // Noncompliant
+            const string ConnectionStringWithSpaces = "Server=localhost; Database=Test; User=SA; Password   =   Secret123";    // Noncompliant
+            const string Password = "Secret123";  // Noncompliant
+
+            const string LoginName = "Admin";
+            const string Localhost = "localhost";
+        }
+
         public void StandardAPI(SecureString secureString, string nonHardcodedPassword, byte[] byteArray, CspParameters cspParams)
         {
             var networkCredential = new NetworkCredential();
@@ -63,13 +75,13 @@ namespace Tests.Diagnostics
             new NetworkCredential("username", nonHardcodedPassword, "domain");
 
             new PasswordDeriveBytes(nonHardcodedPassword, byteArray);
-            new PasswordDeriveBytes(new byte[] {1}, byteArray);
+            new PasswordDeriveBytes(new byte[] { 1 }, byteArray);
             new PasswordDeriveBytes(nonHardcodedPassword, byteArray, cspParams);
-            new PasswordDeriveBytes(new byte[] {1}, byteArray, cspParams);
+            new PasswordDeriveBytes(new byte[] { 1 }, byteArray, cspParams);
             new PasswordDeriveBytes(nonHardcodedPassword, byteArray, "strHashName", 1);
-            new PasswordDeriveBytes(new byte[] {1}, byteArray, "strHashName", 1);
+            new PasswordDeriveBytes(new byte[] { 1 }, byteArray, "strHashName", 1);
             new PasswordDeriveBytes(nonHardcodedPassword, byteArray, "strHashName", 1, cspParams);
-            new PasswordDeriveBytes(new byte[] {1}, byteArray, "strHashName", 1, cspParams);
+            new PasswordDeriveBytes(new byte[] { 1 }, byteArray, "strHashName", 1, cspParams);
 
             new NetworkCredential("username", secret); // Noncompliant
             new NetworkCredential("username", "hardcoded"); // Noncompliant
@@ -86,12 +98,30 @@ namespace Tests.Diagnostics
             string query1 = "password=?";
             string query2 = "password=:password";
             string query3 = "password=:param";
-            string query4 = "password='"+pwd+"'";
+            string query4 = "password='" + pwd + "'";
             string query5 = "password={0}";
             string query6 = "password=;user=;";
             string query7 = "password=:password;user=:user;";
             string query8 = "password=?;user=?;";
             string query9 = @"Server=myServerName\myInstanceName;Database=myDataBase;Password=:myPassword;User Id=:username;";
+        }
+
+        public void WordInVariableNameAndValue()
+        {
+            // It's compliant when the word is used in name AND the value.
+            const string PASSWORD = "Password";
+            const string Password_Input = "[id='password']";
+            const string PASSWORD_PROPERTY = "custom.password";
+            const string TRUSTSTORE_PASSWORD = "trustStorePassword";
+            const string CONNECTION_PASSWORD = "connection.password";
+            const string RESET_PASSWORD = "/users/resetUserPassword";
+            const string RESET_PASSWORD_CS = "/uzivatel/resetovat-heslo"; // Noncompliant, "heslo" means "password", but we don't translate SEO friendly URL for all languages
+
+            string passwordKey = "Password";
+            string passwordProperty = "config.password.value";
+            string passwordName = "UserPasswordValue";
+            string password = "Password";
+            string pwd = "pwd";
         }
 
         public void UriWithUserInfo(string pwd, string domain)

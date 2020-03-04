@@ -4,7 +4,11 @@ Imports System.Security
 Imports System.Security.Cryptography
 
 Namespace Tests.Diagnostics
+
     Class Program
+
+        Public Const DBConnectionString As String = "Server=localhost; Database=Test; User=SA; Password=Secret123"    ' Noncompliant
+
         Private Const Secret As String = "constantValue"
 
         Public Sub Test()
@@ -39,6 +43,15 @@ Namespace Tests.Diagnostics
 
             Dim passphrase As String = "a"     ' Noncompliant
             Dim x4 As String = "passphrase=a"  ' Noncompliant
+        End Sub
+
+        Public Sub Constants()
+            Const ConnectionString As String = "Server=localhost; Database=Test; User=SA; Password=Secret123"    ' Noncompliant
+            Const ConnectionStringWithSpaces As String = "Server=localhost; Database=Test; User=SA; Password   =   Secret123"    ' Noncompliant
+            Const Password As String = "Secret123"  ' Noncompliant
+
+            Const LoginName As String = "Admin"
+            Const Localhost As String = "localhost"
         End Sub
 
         Public Sub StandardAPI(secureString As SecureString, nonHardcodedPassword As String, byteArray As Byte(), cspParams As CspParameters)
@@ -81,6 +94,26 @@ Namespace Tests.Diagnostics
             Dim query9 As String = "Server=myServerName\myInstanceName;Database=myDataBase;Password=:myPassword;User Id=:username;"
         End Sub
 
+        Public Sub WordInConstantNameAndValue()
+            ' It's compliant when the word is used in name AND the value.
+            Const PASSWORD As String = "Password"
+            Const Password_Input As String = "[id='password']"
+            Const PASSWORD_PROPERTY As String = "custom.password"
+            Const TRUSTSTORE_PASSWORD As String = "trustStorePassword"
+            Const CONNECTION_PASSWORD As String = "connection.password"
+            Const RESET_PASSWORD As String = "/users/resetUserPassword"
+            Const RESET_PASSWORD_CS As String = "/uzivatel/resetovat-heslo" ' Noncompliant, "heslo" means "password", but we don't translate SEO friendly URL for all languages
+        End Sub
+
+        Public Sub WordInVariableNameAndValue()
+            ' It's compliant when the word is used in name AND the value.
+            Dim PasswordKey As String = "Password"
+            Dim PasswordProperty As String = "config.password.value"
+            Dim PasswordName As String = "UserPasswordValue"
+            Dim Password As String = "Password"
+            Dim pwd As String = "pwd"
+        End Sub
+
         Public Sub UriWithUserInfo(Pwd As String, Domain As String)
             Dim n1 As String = "scheme://user:azerty123@domain.com" ' Noncompliant {{Review this hard-coded URI, which may contain a credential.}}
             Dim n2 As String = "scheme://user:With%20%3F%20Encoded@domain.com"              ' Noncompliant
@@ -103,15 +136,26 @@ Namespace Tests.Diagnostics
 
     End Class
 
+    Public Class SqlConnection
+        Implements IDisposable
+
+        Public Sub New(ConnStr As String)
+        End Sub
+
+        Public Sub Dispose() Implements IDisposable.Dispose
+        End Sub
+
+    End Class
+
     Class FalseNegatives
         Private password As String
 
-        Public Sub Foo(user as String)
+        Public Sub Foo(user As String)
             Me.password = "foo" ' False Negative
             Configuration.Password = "foo" ' False Negative
             Me.password = Configuration.Password = "foo" ' False Negative
-            Dim query1 as String = "password=':crazy;secret';user=xxx" ' False Negative - passwords enclosed in '' are not covered
-            Dim query2 as String = "password=hardcoded;user='" + user + "'" ' False Negative - Only LiteralExpressionSyntax nodes are covered
+            Dim query1 As String = "password=':crazy;secret';user=xxx" ' False Negative - passwords enclosed in '' are not covered
+            Dim query2 As String = "password=hardcoded;user='" + user + "'" ' False Negative - Only LiteralExpressionSyntax nodes are covered
         End Sub
 
         Class Configuration
