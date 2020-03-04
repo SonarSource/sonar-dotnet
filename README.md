@@ -66,7 +66,7 @@ Before submitting the PR, make sure [all tests](./docs/contributing-analyzer.md#
 * We suggest you do not pick issues that have the `Area: CFG` label
 _(they are difficult, can have many side effects and are less likely to be accepted)_.
 * We suggest you do not implement new rules unless they are already specified for C# and/or VB.NET on
-our [rules repository](https://jira.sonarsource.com/projects/RSPEC)
+our [rules repository](https://jira.sonarsource.com/projects/RSPEC).
 
 Note: our CI runs only on PRs opened by sonarsourcers.
 After your PR is ready, we will cherry-pick your commits and open a PR to run the CI (keeping the attribution).
@@ -78,7 +78,7 @@ If you would like to work on this project full-time, [we are hiring!](https://ww
 ## Custom Rules
 
 If you have an idea for a rule but you are not sure that everyone needs it, you can implement your own Roslyn analyzer.
-- All Roslyn issues from the build are picked up by the[Scanner for MSBuild](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-msbuild/)
+- All Roslyn issues from the build are picked up by the [Scanner for MSBuild](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-msbuild/)
 and pushed to SonarQube / SonarCloud as external issues.
 - Also check out the [SonarQube Roslyn SDK](https://github.com/SonarSource-VisualStudio/sonarqube-roslyn-sdk) to embed
 your Roslyn analyzer in SonarQube plugin, if you want to manage your rules from SonarQube.
