@@ -1396,6 +1396,120 @@ namespace Test
             context.WalkWithExitBlocks(5, 2);
         }
 
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_IndiceFromVariable()
+        {
+            const string testInput = @"
+namespace Namespace
+{
+    public class CollectionInitializer
+    {
+        public System.Index Main(int i)
+        {
+            return ^i;
+        }
+    }
+}";
+            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var isIndiceVisited = false;
+
+            context.ExplodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    isIndiceVisited = isIndiceVisited || args.Instruction.ToString() == "^i";
+                };
+
+            context.WalkWithExitBlocks(1, 1);
+            isIndiceVisited.Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_CollectionInitializerWithIndice()
+        {
+            const string testInput = @"
+namespace Namespace
+{
+    public class CollectionInitializer
+    {
+        public string[] Main(string[] list)
+        {
+            return new[] { list[^1] };
+        }
+    }
+}";
+            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var isIndexerVisited = false;
+
+            context.ExplodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    isIndexerVisited = isIndexerVisited || args.Instruction.ToString() == "list[^1]";
+                };
+
+            context.WalkWithExitBlocks(5, 1);
+            isIndexerVisited.Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_RangeFromVariables()
+        {
+            const string testInput = @"
+namespace Namespace
+{
+    public class CollectionInitializer
+    {
+        public System.Range Main(int min, int max)
+        {
+            return min..max;
+        }
+    }
+}";
+            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var isRangeVisited = false;
+
+            context.ExplodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    isRangeVisited = isRangeVisited || args.Instruction.ToString() == "min..max";
+                };
+
+            context.WalkWithExitBlocks(1, 1);
+            isRangeVisited.Should().BeTrue();
+        }
+
+        [TestMethod]
+        [TestCategory("Symbolic execution")]
+        public void ExplodedGraph_CollectionInitializerWithRange()
+        {
+            const string testInput = @"
+namespace Namespace
+{
+    using System.Collections.Generic;
+
+    public class CollectionInitializer
+    {
+        public List<string[]> Main(string[] list)
+        {
+            return new List<string[]> { list[2..4] };
+        }
+    }
+}";
+            var context = new ExplodedGraphContext(TestHelper.Compile(testInput));
+            var isIndexerVisited = false;
+
+            context.ExplodedGraph.InstructionProcessed +=
+                (sender, args) =>
+                {
+                    isIndexerVisited = isIndexerVisited || args.Instruction.ToString() == "list[2..4]";
+                };
+
+            context.WalkWithExitBlocks(5, 1);
+            isIndexerVisited.Should().BeTrue();
+        }
+
         private class ExplodedGraphContext
         {
             public readonly SemanticModel SemanticModel;
