@@ -1,4 +1,4 @@
-/*
+﻿/*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2020 SonarSource SA
 * mailto: contact AT sonarsource DOT com
@@ -308,7 +308,7 @@ internal class Test
             var dot = CfgSerializer.Serialize("Range", GetCfgForMethod(code, "Range"));
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Range"" {
-0 [shape=record label=""{SIMPLE|r = 1..4}""]
+0 [shape=record label=""{SIMPLE|1..4|r = 1..4}""]
 0 -> 1
 1 [shape=record label=""{EXIT}""]
 }
@@ -330,7 +330,7 @@ internal class Test
             var dot = CfgSerializer.Serialize("Index", GetCfgForMethod(code, "Index"));
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Index"" {
-0 [shape=record label=""{SIMPLE|index = ^1}""]
+0 [shape=record label=""{SIMPLE|^1|index = ^1}""]
 0 -> 1
 1 [shape=record label=""{EXIT}""]
 }
@@ -352,7 +352,7 @@ internal class Test
             var dot = CfgSerializer.Serialize("Range", GetCfgForMethod(code, "Range"));
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Range"" {
-0 [shape=record label=""{SIMPLE|range = ^2..^0}""]
+0 [shape=record label=""{SIMPLE|^2..^0|range = ^2..^0}""]
 0 -> 1
 1 [shape=record label=""{EXIT}""]
 }
@@ -375,7 +375,7 @@ internal class Test
             var dot = CfgSerializer.Serialize("Range", GetCfgForMethod(code, "Range"));
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Range"" {
-0 [shape=record label=""{SIMPLE|new[] \{ 1, 2 \}|1|2|\{ 1, 2 \}|ints = new[] \{ 1, 2 \}|ints|ints[^2..^1]|lastTwo = ints[^2..^1]}""]
+0 [shape=record label=""{SIMPLE|new[] \{ 1, 2 \}|1|2|\{ 1, 2 \}|ints = new[] \{ 1, 2 \}|ints|^2..^1|ints[^2..^1]|lastTwo = ints[^2..^1]}""]
 0 -> 1
 1 [shape=record label=""{EXIT}""]
 }
