@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -389,6 +389,9 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.ArrayCreationExpression:
                 case SyntaxKind.ImplicitArrayCreationExpression:
                 case SyntaxKind.StackAllocArrayCreationExpression:
+
+                case SyntaxKindEx.RangeExpression:
+                case SyntaxKindEx.IndexExpression:
                     {
                         var sv = new SymbolicValue();
                         newProgramState = newProgramState.SetConstraint(sv, ObjectConstraint.NotNull);
