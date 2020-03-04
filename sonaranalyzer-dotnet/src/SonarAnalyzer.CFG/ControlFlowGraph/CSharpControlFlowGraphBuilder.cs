@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -313,6 +313,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 case SyntaxKind.ArgListExpression:
 
                 case SyntaxKindEx.TupleExpression:
+
+                case SyntaxKindEx.RangeExpression:
+                case SyntaxKindEx.IndexExpression:
                     currentBlock.ReversedInstructions.Add(expression);
                     return currentBlock;
 
@@ -482,12 +485,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
                 case SyntaxKindEx.SwitchExpression:
                     return BuildSwitchExpression((SwitchExpressionSyntaxWrapper)expression, currentBlock);
-
-                case SyntaxKindEx.RangeExpression:
-                    return currentBlock;
-
-                case SyntaxKindEx.IndexExpression:
-                    return currentBlock;
 
                 default:
                     throw new NotSupportedException($"{expression.Kind()}");

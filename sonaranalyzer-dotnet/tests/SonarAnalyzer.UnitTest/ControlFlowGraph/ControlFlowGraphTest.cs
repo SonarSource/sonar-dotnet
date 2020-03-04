@@ -1978,7 +1978,7 @@ namespace NS
             var rangeBlock = cfg.EntryBlock as SimpleBlock;
             var exitBlock = cfg.ExitBlock;
 
-            VerifyAllInstructions(rangeBlock, "r = 1..4");
+            VerifyAllInstructions(rangeBlock, "1..4", "r = 1..4");
 
             rangeBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
             exitBlock.PredecessorBlocks.Should().OnlyContain(rangeBlock);
@@ -1995,7 +1995,7 @@ namespace NS
             var rangeBlock = cfg.EntryBlock as SimpleBlock;
             var exitBlock = cfg.ExitBlock;
 
-            VerifyAllInstructions(rangeBlock, "index = ^1");
+            VerifyAllInstructions(rangeBlock, "^1", "index = ^1");
 
             rangeBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
             exitBlock.PredecessorBlocks.Should().OnlyContain(rangeBlock);
