@@ -53,7 +53,7 @@ Check out the [contributing](CONTRIBUTING.md) page to see the best places to log
 
 ### Join us
 
-If you would like to work on this project full-time, we are hiring! Check out [sonarsource.com/hiring](https://www.sonarsource.com/company/jobs/).
+If you would like to work on this project full-time, we are hiring! Check out [sonarsource.com/company/jobs/](https://www.sonarsource.com/company/jobs/).
 
 ## License
 
