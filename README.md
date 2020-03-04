@@ -51,6 +51,10 @@ languages and are part of the [SonarQube](http://www.sonarqube.org/), [SonarClou
 
 Check out the [contributing](CONTRIBUTING.md) page to see the best places to log issues and start discussions.
 
+### Join us
+
+If you would like to work on this project full-time, we are hiring! Check out [sonarsource.com/hiring](https://www.sonarsource.com/company/jobs/).
+
 ## License
 
 Copyright 2014-2020 SonarSource.
