@@ -121,7 +121,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
             settings.ProhibitDtd = false;
             settings.XmlResolver = new XmlSafeResolver(); // In order to avoid false positives we check the exact type of XmlResolver not to be XmlUrlResolver or XmlPreloadedResolver
 
-            XmlReader.Create(stream, settings).Dispose(); // Compliant
+            XmlReader.Create("uri", settings).Dispose(); // Compliant
         }
     }
 
