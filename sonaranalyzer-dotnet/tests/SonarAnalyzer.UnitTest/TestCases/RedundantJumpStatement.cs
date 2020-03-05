@@ -210,6 +210,20 @@ namespace Tests.Diagnostics
             }
             Price = 0;
         }
+    }
 
+    // https://github.com/SonarSource/sonar-dotnet/issues/3105
+    public class Repro_3105
+    {
+        public void DoSomething()
+        {
+            Action a = () => throw new Exception(); // Noncompliant FP, it's a function declaration, not a jump
+
+            Invoke(() => throw new Exception()); // Noncompliant FP, it's a function declaration, not a jump
+        }
+
+        void Invoke(Action a)
+        {
+        }
     }
 }
