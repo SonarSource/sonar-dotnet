@@ -351,14 +351,8 @@ namespace SonarAnalyzer.Helpers
                 _ => string.Empty
             };
 
-        public static bool NameIs(this MemberAccessExpressionSyntax memberAccess, string name) =>
-            memberAccess.Name.Identifier.ValueText.Equals(name, StringComparison.InvariantCulture);
-
         public static bool NameIs(this ExpressionSyntax expression, string name) =>
             expression.GetName().Equals(name, StringComparison.InvariantCulture);
-
-        public static bool NameIs(this IdentifierNameSyntax identifierName, string name)
-            => identifierName?.Identifier.ValueText == name;
 
         public static bool IsConstant(this ExpressionSyntax expression, SemanticModel semanticModel)
         {

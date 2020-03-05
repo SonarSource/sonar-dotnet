@@ -110,8 +110,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var xmlReaderSettingsValidator = new XmlReaderSettingsValidator(context.SemanticModel);
-            if (xmlReaderSettingsValidator.IsUnsafe(invocation, settings, VersionProvider.GetDotNetFrameworkVersion(context.Compilation)))
+            var xmlReaderSettingsValidator = new XmlReaderSettingsValidator(context.SemanticModel, VersionProvider.GetDotNetFrameworkVersion(context.Compilation));
+            if (xmlReaderSettingsValidator.IsUnsafe(invocation, settings))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation()));
             }

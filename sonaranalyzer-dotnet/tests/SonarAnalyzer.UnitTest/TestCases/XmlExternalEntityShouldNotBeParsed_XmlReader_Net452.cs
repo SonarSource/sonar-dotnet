@@ -134,4 +134,118 @@ namespace SonarAnalyzer.UnitTest.TestCases
             return null;
         }
     }
+
+    internal class VariousUsages
+    {
+        XmlReader secure = XmlReader.Create("uri"); // Compliant
+        XmlReader unsecure = XmlReader.Create("uri", new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver() }); // Noncompliant
+
+        public XmlReader CreateReader(XmlReaderSettings settings)
+        {
+            return XmlReader.Create("uri", settings); // Compliant
+        }
+
+        public XmlReader CreateReader_AndUpdateSettings_Unsecure(XmlReaderSettings settings)
+        {
+            settings.DtdProcessing = DtdProcessing.Parse;
+            settings.XmlResolver = new XmlUrlResolver();
+
+            return XmlReader.Create("uri", settings); // Noncompliant
+        }
+
+        public XmlReader CreateReader_AndUpdateSettings_Secure(XmlReaderSettings settings)
+        {
+            settings.DtdProcessing = DtdProcessing.Ignore;
+            settings.XmlResolver = null;
+
+            return XmlReader.Create("uri", settings); // Compliant
+        }
+
+        public void InsideTryCatch()
+        {
+            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver()};
+            try
+            {
+                XmlNodeReader.Create("uri", settings).Dispose(); // Noncompliant
+            }
+            catch
+            {
+            }
+        }
+
+        private void InsideLocalFunction()
+        {
+            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver()};
+
+            void LocalFunction()
+            {
+                XmlNodeReader.Create("uri", settings).Dispose(); // Noncompliant
+            }
+        }
+
+        private void InsideLambda()
+        {
+            Func<XmlReaderSettings> settingsFactory = () => new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver()};
+
+            var settings = settingsFactory();
+
+            XmlNodeReader.Create("uri", settingsFactory()).Dispose(); // Noncompliant
+        }
+
+        private XmlUrlResolver GetUrlResolver() => new XmlUrlResolver();
+
+        private void SetUnsafeResolverFromMethod()
+        {
+            var settings = new XmlReaderSettings();
+            settings.DtdProcessing = DtdProcessing.Parse;
+            settings.XmlResolver = GetUrlResolver();
+
+            XmlNodeReader.Create("uri", settings).Dispose(); // Noncompliant
+        }
+    }
+
+    // https://docs.microsoft.com/en-us/dotnet/api/system.xml.xmlreader?view=netframework-4.8#creating-an-xml-reader
+    internal class ConcreteImplementations
+    {
+        public void XmlNodeReader_Default()
+        {
+            XmlNodeReader.Create("uri").Dispose(); // Compliant
+        }
+
+        public void XmlNodeReader_SecureSettings()
+        {
+            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore, XmlResolver = new XmlUrlResolver()};
+
+            XmlNodeReader.Create("uri", settings).Dispose(); // Compliant
+        }
+
+        public void XmlNodeReader_UnsecureSettings()
+        {
+            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver()};
+
+            // Although the XmlNodeReader is safe when using the constructor, the Create method is the one from the base class (XmlReader)
+            // and will return an unsecure XmlReader.
+            XmlNodeReader.Create("uri", settings).Dispose(); // Noncompliant
+        }
+
+        public void XmlTextReader_Default()
+        {
+            XmlTextReader.Create("uri").Dispose(); // Compliant
+        }
+
+        public void XmlTextReader_SecureSettings()
+        {
+            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore, XmlResolver = new XmlUrlResolver()};
+
+            XmlTextReader.Create("uri", settings).Dispose(); // Compliant
+        }
+
+        public void XmlTextReader_UnsecureSettings()
+        {
+            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver()};
+
+            // The Create method is the one from the base class (XmlReader) and will return an unsecure XmlReader.
+            XmlTextReader.Create("uri", settings).Dispose(); // Noncompliant
+        }
+    }
 }
