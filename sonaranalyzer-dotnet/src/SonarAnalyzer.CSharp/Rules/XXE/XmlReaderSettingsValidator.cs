@@ -54,13 +54,13 @@ namespace SonarAnalyzer.Rules.XXE
 
             foreach (var assignment in objectCreationAssignments.Union(assignments))
             {
-                if (assignment.Left.NameIs("ProhibitDtd") ||
-                    assignment.Left.NameIs("DtdProcessing"))
+                var name = assignment.Left.GetName();
+
+                if (name =="ProhibitDtd" || name == "DtdProcessing")
                 {
                     unsafeDtdProcessing = IsXmlResolverDtdProcessingUnsafe(assignment, semanticModel);
                 }
-
-                if (assignment.Left.NameIs("XmlResolver"))
+                else if (assignment.Left.NameIs("XmlResolver"))
                 {
                     unsafeResolver = IsXmlResolverAssignmentUnsafe(assignment, semanticModel);
                 }

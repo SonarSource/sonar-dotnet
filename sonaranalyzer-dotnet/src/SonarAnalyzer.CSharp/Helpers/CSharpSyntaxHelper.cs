@@ -343,20 +343,19 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static bool NameIs(this MemberAccessExpressionSyntax memberAccess, string name) =>
-            memberAccess.Name.Identifier.ValueText.Equals(name, StringComparison.InvariantCulture);
-
-        public static bool NameIs(this ExpressionSyntax expression, string name)
-        {
-            var invocationName = expression switch
+        public static string GetName(this ExpressionSyntax expression) =>
+            expression switch
             {
                 MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier.ValueText,
                 IdentifierNameSyntax identifierName => identifierName.Identifier.ValueText,
                 _ => string.Empty
             };
 
-            return invocationName.Equals(name, StringComparison.InvariantCulture);
-        }
+        public static bool NameIs(this MemberAccessExpressionSyntax memberAccess, string name) =>
+            memberAccess.Name.Identifier.ValueText.Equals(name, StringComparison.InvariantCulture);
+
+        public static bool NameIs(this ExpressionSyntax expression, string name) =>
+            expression.GetName().Equals(name, StringComparison.InvariantCulture);
 
         public static bool NameIs(this IdentifierNameSyntax identifierName, string name)
             => identifierName?.Identifier.ValueText == name;
