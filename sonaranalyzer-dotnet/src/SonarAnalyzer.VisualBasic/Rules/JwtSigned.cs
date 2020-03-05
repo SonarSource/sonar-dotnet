@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,40 +18,28 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.Common;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class VerifyJwtSignature : SonarDiagnosticAnalyzer
+    public sealed class JwtSigned : JwtSignedBase
     {
-        internal const string DiagnosticId = "S5659";
-        private const string MessageFormat = "";
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
+        public JwtSigned() : base(RspecStrings.ResourceManager)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-                {
-                    var node = c.Node;
-                    if (true)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
-                    }
-                },
-                SyntaxKind.InvocationExpression);
+            //FIXME: Doresit
         }
+
     }
 }
 

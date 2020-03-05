@@ -18,22 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.UnitTest.TestFramework;
+using System.Collections.Immutable;
+using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
-    [TestClass]
-    public class VerifyJwtSignatureTest
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [Rule(DiagnosticId)]
+    public sealed class JwtSigned : JwtSignedBase
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void VerifyJwtSignature()
+        public JwtSigned() : base(RspecStrings.ResourceManager)
         {
-            Verifier.VerifyAnalyzer(@"TestCases\VerifyJwtSignature.cs",
-                new VerifyJwtSignature());
+            //FIXME: Doresit
         }
     }
 }

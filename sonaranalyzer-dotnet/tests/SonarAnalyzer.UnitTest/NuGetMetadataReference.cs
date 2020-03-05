@@ -56,6 +56,9 @@ namespace SonarAnalyzer.UnitTest
         public static IEnumerable<MetadataReference> FluentAssertions(string packageVersion) =>
             NugetMetadataFactory.Create("FluentAssertions", packageVersion);
 
+        public static IEnumerable<MetadataReference> JWT(string packageVersion = "6.1.0") =>
+            NugetMetadataFactory.Create("JWT", packageVersion);
+
         public static IEnumerable<MetadataReference> Log4Net(string packageVersion, string targetFramework) =>
             NugetMetadataFactory.Create("log4net", packageVersion, targetFramework);
 
