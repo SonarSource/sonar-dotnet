@@ -25,32 +25,35 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class JwtSignedBase : SonarDiagnosticAnalyzer
+    public abstract class JwtSignedBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+        where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S5659";
         private const string MessageFormat = "Use only strong cipher algorithms when {0} this JWT.";
         private const string MessageVerifying = "verifying the signature of";
 
-        private readonly DiagnosticDescriptor rule;
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected readonly DiagnosticDescriptor verifyingRule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(verifyingRule);
+
+        protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
 
         protected JwtSignedBase(System.Resources.ResourceManager rspecResources)
         {
-            rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, rspecResources);
+            verifyingRule = DiagnosticDescriptorBuilder
+                .GetDescriptor(DiagnosticId, string.Format(MessageFormat, MessageVerifying), rspecResources)
+                .WithNotConfigurable();
         }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            //CSharpInvocationTracker
-            //context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            //    {
-            //        //var node = c.Node;
-            //        //if (true)
-            //        //{
-            //        //    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
-            //        //}
-            //    },
-            //    SyntaxKind.InvocationExpression);
+            InvocationTracker.Track(context,
+                InvocationTracker.MatchMethod(
+                    new MemberDescriptor(KnownType.JWT_IJwtDecoder, "Decode"),
+                    new MemberDescriptor(KnownType.JWT_IJwtDecoder, "DecodeToObject")),
+                Conditions.Or(
+                    InvocationTracker.ArgumentIsBoolConstant("verify", false),
+                    InvocationTracker.MethodHasParameters(1)
+                    ));
         }
 
     }

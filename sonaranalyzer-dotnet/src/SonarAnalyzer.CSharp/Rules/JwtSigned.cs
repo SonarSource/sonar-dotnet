@@ -31,11 +31,11 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class JwtSigned : JwtSignedBase
+    public sealed class JwtSigned : JwtSignedBase<SyntaxKind>
     {
         public JwtSigned() : base(RspecStrings.ResourceManager)
         {
-            //FIXME: Doresit
+            InvocationTracker = new CSharpInvocationTracker(AnalyzerConfiguration.AlwaysEnabled, verifyingRule);
         }
     }
 }

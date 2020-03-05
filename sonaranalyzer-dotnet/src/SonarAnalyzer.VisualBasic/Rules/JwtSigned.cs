@@ -33,11 +33,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class JwtSigned : JwtSignedBase
+    public sealed class JwtSigned : JwtSignedBase<SyntaxKind>
     {
         public JwtSigned() : base(RspecStrings.ResourceManager)
         {
-            //FIXME: Doresit
+            InvocationTracker = new VisualBasicInvocationTracker(AnalyzerConfiguration.AlwaysEnabled, verifyingRule);
         }
 
     }
