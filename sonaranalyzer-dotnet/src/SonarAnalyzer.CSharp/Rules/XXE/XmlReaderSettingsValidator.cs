@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.XXE
         /// <param name="invocation">A method invocation syntax node (e.g. XmlReader.Create).</param>
         /// <param name="settings">The symbol of the XmlReaderSettings node received as parameter. This is used to check
         /// if certain properties (ProhibitDtd, DtdProcessing or XmlUrlResolver) were modified for the given symbol.</param>
-        /// <returns>true, if the XmlReaderSettings is secure; otherwise false.</returns>
+        /// <returns>true, if the XmlReaderSettings is not secure; otherwise false.</returns>
         public bool IsUnsafe(InvocationExpressionSyntax invocation, ISymbol settings)
         {
             // By default ProhibitDtd is 'true' and DtdProcessing is 'ignore'
