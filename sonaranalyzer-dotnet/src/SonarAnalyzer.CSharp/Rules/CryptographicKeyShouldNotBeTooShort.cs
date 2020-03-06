@@ -168,7 +168,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void CheckSystemSecurityEllipticCurve(ITypeSymbol containingType, ExpressionSyntax syntaxElement, ArgumentListSyntax argumentList, SyntaxNodeAnalysisContext c)
+        private void CheckSystemSecurityEllipticCurve(ITypeSymbol containingType, SyntaxNode syntaxElement, ArgumentListSyntax argumentList, SyntaxNodeAnalysisContext c)
         {
             var firstParam = argumentList.Get(0);
             if (firstParam == null || containingType == null || !containingType.DerivesFromAny(SystemSecurityCryptographyCurveClasses))
@@ -192,7 +192,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private void CheckSystemSecurityCryptographyAlgorithms(ITypeSymbol containingType, ObjectCreationExpressionSyntax objectCreation, SyntaxNodeAnalysisContext c)
+        private static void CheckSystemSecurityCryptographyAlgorithms(ITypeSymbol containingType, ObjectCreationExpressionSyntax objectCreation, SyntaxNodeAnalysisContext c)
         {
             var firstParam = objectCreation.ArgumentList.Get(0);
 
@@ -209,7 +209,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void CheckGenericDsaRsaCryptographyAlgorithms(ITypeSymbol containingType, SyntaxNode syntaxElement, ExpressionSyntax keyLengthSyntax, SyntaxNodeAnalysisContext c)
+        private static void CheckGenericDsaRsaCryptographyAlgorithms(ITypeSymbol containingType, SyntaxNode syntaxElement, SyntaxNode keyLengthSyntax, SyntaxNodeAnalysisContext c)
         {
             if (containingType.DerivesFromAny(SystemSecurityCryptographyDsaRsa) && keyLengthSyntax != null && IsInvalidCommonKeyLength(keyLengthSyntax, c))
             {
