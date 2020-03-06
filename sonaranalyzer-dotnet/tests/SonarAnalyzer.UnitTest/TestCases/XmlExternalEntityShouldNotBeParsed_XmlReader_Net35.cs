@@ -35,5 +35,10 @@ namespace SonarAnalyzer.UnitTest.TestCases
         {
             using (XmlReader.Create("uri", new XmlReaderSettings())) { }
         }
+
+        public void XmlReader_NoSettings()
+        {
+            using (XmlReader.Create("uri")) { }
+        }
     }
 }
