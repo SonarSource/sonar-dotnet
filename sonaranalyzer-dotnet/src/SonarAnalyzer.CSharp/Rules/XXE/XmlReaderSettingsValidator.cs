@@ -106,16 +106,10 @@ namespace SonarAnalyzer.Rules.XXE
                 .SelectMany(location => GetDescendantNodes(location, invocation).OfType<ObjectCreationExpressionSyntax>())
                 .FirstOrDefault(objectCreation => objectCreation.Initializer != null && IsXmlReaderSettings(objectCreation, semanticModel));
 
-        private static IEnumerable<SyntaxNode> GetDescendantNodes(Location location, InvocationExpressionSyntax invocation)
+        private static IEnumerable<SyntaxNode> GetDescendantNodes(Location location, SyntaxNode invocation)
         {
             // To optimise, we search first for the class constructor, then for the method declaration.
-            // If these cannot be found, we get the root of the syntax tree and search from there.
-            //
-            // This is needed for cases similar with:
-            // internal class VariousUsages
-            // {
-            //     XmlReader field = XmlReader.Create("uri", new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = new XmlUrlResolver() });
-            // }
+            // If these cannot be found (e.g. fields), we get the root of the syntax tree and search from there.
             var root = location.SourceTree?.GetRoot()?.FindNode(location.SourceSpan) ??
                        invocation.FirstAncestorOrSelf<MethodDeclarationSyntax>() ??
                        invocation.SyntaxTree.GetRoot();
