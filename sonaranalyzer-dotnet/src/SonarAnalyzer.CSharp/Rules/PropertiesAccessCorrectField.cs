@@ -148,6 +148,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static ExpressionSyntax SingleInvocation(BlockSyntax body)
         {
+            if (body == null)
+            {
+                return null;
+            }
+
             var expressions = body.DescendantNodes().OfType<InvocationExpressionSyntax>().Select(x => x.Expression).ToArray();
             if (expressions.Length == 1)
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using GalaSoft.MvvmLight;
+using System.Runtime.CompilerServices;
 
 namespace Tests.Diagnostics
 {
@@ -689,5 +690,13 @@ namespace Tests.Diagnostics
 
         private int GetTooComplex() => this.tooComplex;
         private void SetTooComplex(int value) => this.tooComplex = value;
+
+        public int WithAttributeWithoutBody
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get;
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            private set;
+        }
     }
 }
