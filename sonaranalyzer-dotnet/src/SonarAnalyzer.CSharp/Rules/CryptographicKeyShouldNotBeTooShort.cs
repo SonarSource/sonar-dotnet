@@ -197,7 +197,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var firstParam = objectCreation.ArgumentList.Get(0);
 
             // DSACryptoServiceProvider is always noncompliant as it has a max key size of 1024
-            // RSACryptoServiceProvider default constructor of  is noncompliant as it has default key size of 1024
+            // RSACryptoServiceProvider default constructor is noncompliant as it has default key size of 1024
             if (containingType.Is(KnownType.System_Security_Cryptography_DSACryptoServiceProvider)
                 || (containingType.Is(KnownType.System_Security_Cryptography_RSACryptoServiceProvider) && firstParam == null))
             {
@@ -237,13 +237,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckBouncyCastleKeyGenerationParameters(ITypeSymbol containingType, ObjectCreationExpressionSyntax objectCreation, SyntaxNodeAnalysisContext c)
         {
             var keyLengthParam = objectCreation.ArgumentList.Get(2);
-            if (keyLengthParam == null || !containingType.Is(KnownType.Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters))
-            {
-                return;
-            }
-
-            var optionalKeyLength = c.SemanticModel.GetConstantValue(keyLengthParam);
-            if (optionalKeyLength.HasValue && optionalKeyLength.Value is int keyLength && keyLength < MinimalCommonKeyLength)
+            if (keyLengthParam != null
+                && containingType.Is(KnownType.Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters)
+                && IsInvalidCommonKeyLength(keyLengthParam, c))
             {
                 c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreation.GetLocation(), MinimalCommonKeyLength, "RSA", ""));
             }
