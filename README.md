@@ -78,7 +78,7 @@ If you would like to work on this project full-time, [we are hiring!](https://ww
 ## Custom Rules
 
 If you have an idea for a rule but you are not sure that everyone needs it, you can implement your own Roslyn analyzer.
-- All Roslyn issues from the build are picked up by the [Scanner for MSBuild](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-msbuild/)
+- All Roslyn-based issues are picked up by the [Scanner for MSBuild](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-msbuild/)
 and pushed to SonarQube / SonarCloud as external issues.
 - Also check out the [SonarQube Roslyn SDK](https://github.com/SonarSource-VisualStudio/sonarqube-roslyn-sdk) to embed
 your Roslyn analyzer in SonarQube plugin, if you want to manage your rules from SonarQube.
