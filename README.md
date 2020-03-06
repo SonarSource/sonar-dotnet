@@ -49,21 +49,21 @@ languages and are part of the [SonarQube](http://www.sonarqube.org/), [SonarClou
 
 ## How to contribute
 
-There are many ways you can contribute to the `sonar-dotnet` project, some very easy and others more involved.
+There are many ways you can contribute to the `sonar-dotnet` project. 
 When contributing, please respect our [Code of Conduct](./CODE_OF_CONDUCT.md).
 
 ### Join the discussions
 
-One of the easiest ways to contribute is to participate in discussions on this [GitHub project](https://github.com/SonarSource/sonar-dotnet/issues)
-and on our [Community Forum](https://community.sonarsource.com/).
+One of the easiest ways to contribute is to share your feedback with us (see [give feedback](#do-you-have-a-question-or-feedback)) and also answer questions from [our community forum](https://community.sonarsource.com/).
+You can also monitor the activity on this repository (opened issues, opened PRs) to get more acquainted with what we do.
 
 ### Pull Request (PR)
 
-If you want to fix an issue from [the backlog](https://github.com/SonarSource/sonar-dotnet/issues),
-read [Get started](#get-started) and please make sure that you follow [our coding style](./docs/coding-style.md).
+If you want to fix [an issue](https://github.com/SonarSource/sonar-dotnet/issues),
+please read the [Get started](#get-started) pages first and please sure that you follow [our coding style](./docs/coding-style.md).
 Before submitting the PR, make sure [all tests](./docs/contributing-analyzer.md#running-tests) are passing (all checks must be green).
 
-* We suggest you do not pick issues that have the `Area: CFG` label
+* We suggest you do not pick issues with the `Area: CFG` label
 _(they are difficult, can have many side effects and are less likely to be accepted)_.
 * We suggest you do not implement new rules unless they are already specified for C# and/or VB.NET on
 our [rules repository](https://jira.sonarsource.com/projects/RSPEC).
