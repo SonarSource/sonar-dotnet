@@ -261,14 +261,14 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static bool IsMethodInvocation(this InvocationExpressionSyntax expression, KnownType type, string methodName, SemanticModel semanticModel) =>
-            expression.NameIs(methodName) &&
-            semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol methodSymbol &&
+        public static bool IsMethodInvocation(this InvocationExpressionSyntax invocation, KnownType type, string methodName, SemanticModel semanticModel) =>
+            invocation.Expression.NameIs(methodName) &&
+            semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
             methodSymbol.IsInType(type);
 
-        public static bool IsMethodInvocation(this InvocationExpressionSyntax expression, ImmutableArray<KnownType> types, string methodName, SemanticModel semanticModel) =>
-            expression.NameIs(methodName) &&
-            semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol methodSymbol &&
+        public static bool IsMethodInvocation(this InvocationExpressionSyntax invocation, ImmutableArray<KnownType> types, string methodName, SemanticModel semanticModel) =>
+            invocation.Expression.NameIs(methodName) &&
+            semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
             methodSymbol.IsInType(types);
 
         public static bool IsPropertyInvocation(this MemberAccessExpressionSyntax expression, ImmutableArray<KnownType> types, string propertyName, SemanticModel semanticModel) =>
@@ -278,19 +278,6 @@ namespace SonarAnalyzer.Helpers
 
         public static Location FindIdentifierLocation(this BaseMethodDeclarationSyntax methodDeclaration) =>
             GetIdentifierOrDefault(methodDeclaration)?.GetLocation();
-
-        public static bool IsCatchingAllExceptions(this CatchClauseSyntax catchClause)
-        {
-            if (catchClause.Declaration == null)
-            {
-                return true;
-            }
-
-            var exceptionTypeName = catchClause.Declaration.Type.GetText().ToString().Trim();
-
-            return catchClause.Filter == null &&
-                (exceptionTypeName == "Exception" || exceptionTypeName == "System.Exception");
-        }
 
         /// <summary>
         /// Determines whether the node is being used as part of an expression tree
@@ -356,25 +343,16 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static bool NameIs(this MemberAccessExpressionSyntax memberAccess, string name) =>
-            memberAccess.Name.Identifier.ValueText.Equals(name, StringComparison.InvariantCulture);
-
-        public static bool NameIs(this InvocationExpressionSyntax invocation, string name)
-        {
-            var invocationName = string.Empty;
-            if (invocation.Expression is MemberAccessExpressionSyntax memberAccess)
+        public static string GetName(this ExpressionSyntax expression) =>
+            expression switch
             {
-                invocationName = memberAccess.Name.Identifier.ValueText;
-            }
-            else if (invocation.Expression is IdentifierNameSyntax identifierName)
-            {
-                invocationName = identifierName.Identifier.ValueText;
-            }
-            return invocationName.Equals(name, StringComparison.InvariantCulture);
-        }
+                MemberAccessExpressionSyntax memberAccess => memberAccess.Name.Identifier.ValueText,
+                IdentifierNameSyntax identifierName => identifierName.Identifier.ValueText,
+                _ => string.Empty
+            };
 
-        public static bool NameIs(this IdentifierNameSyntax identifierName, string name)
-            => identifierName?.Identifier.ValueText == name;
+        public static bool NameIs(this ExpressionSyntax expression, string name) =>
+            expression.GetName().Equals(name, StringComparison.InvariantCulture);
 
         public static bool IsConstant(this ExpressionSyntax expression, SemanticModel semanticModel)
         {

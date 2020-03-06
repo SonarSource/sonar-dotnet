@@ -20,12 +20,15 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
+using System.Xml;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.XXE;
 using SonarAnalyzer.SyntaxTrackers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -88,9 +91,31 @@ namespace SonarAnalyzer.Rules.CSharp
                             }
                         },
                         SyntaxKind.SimpleAssignmentExpression);
-                });
 
-         }
+                    ccc.RegisterSyntaxNodeActionInNonGenerated(VerifyXmlReaderInvocations, SyntaxKind.InvocationExpression);
+                });
+        }
+
+        private void VerifyXmlReaderInvocations(SyntaxNodeAnalysisContext context)
+        {
+            var invocation = (InvocationExpressionSyntax)context.Node;
+            if (!invocation.IsMemberAccessOnKnownType("Create", KnownType.System_Xml_XmlReader, context.SemanticModel))
+            {
+                return;
+            }
+
+            var settings = invocation.GetArgumentsOfKnownType(KnownType.System_Xml_XmlReaderSettings, context.SemanticModel).FirstOrDefault();
+            if (settings == null)
+            {
+                return; // safe by default
+            }
+
+            var xmlReaderSettingsValidator = new XmlReaderSettingsValidator(context.SemanticModel, VersionProvider.GetDotNetFrameworkVersion(context.Compilation));
+            if (xmlReaderSettingsValidator.IsUnsafe(invocation, settings))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation()));
+            }
+        }
 
         private static class TrackerFactory
         {
@@ -113,8 +138,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 "ProhibitDtd" // should be true in .NET 3.5
             );
 
-            public static (CSharpObjectInitializationTracker xmlDocumentTracker, CSharpObjectInitializationTracker xmlTextReaderTracker) Create(
-                Compilation compilation, INetFrameworkVersionProvider versionProvider)
+            public static (CSharpObjectInitializationTracker xmlDocumentTracker, CSharpObjectInitializationTracker xmlTextReaderTracker)
+                Create(Compilation compilation, INetFrameworkVersionProvider versionProvider)
             {
                 var netFrameworkVersion = versionProvider.GetDotNetFrameworkVersion(compilation);
                 var constructorIsSafe = ConstructorIsSafe(netFrameworkVersion);
@@ -157,7 +182,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 if (constantValue is int integerValue)
                 {
-                    return integerValue != (int)System.Xml.DtdProcessing.Parse;
+                    return integerValue != (int)DtdProcessing.Parse;
                 }
                 // treat the ProhibitDtd property
                 return constantValue is bool value && value;
@@ -178,4 +203,3 @@ namespace SonarAnalyzer.Rules.CSharp
         }
     }
 }
-
