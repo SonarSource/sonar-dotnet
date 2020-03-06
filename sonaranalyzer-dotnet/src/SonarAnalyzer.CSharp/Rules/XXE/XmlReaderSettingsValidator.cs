@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
@@ -33,11 +32,11 @@ namespace SonarAnalyzer.Rules.XXE
     /// This class is responsible to check if a XmlReaderSettings node is vulnerable to XXE attacks.
     ///
     /// By default the class is safe:
-    ///  - before .Net 4.5.2 it has XmlResolver set to an instance of XmlUrlResolver which is not secure but since has ProhibitDtd set to false it is safe to use
-    ///  - starting with .Net 4.5.2 XmlResolver is set to null, ProhibitDtd (now obsolete) set to false and DtdProcessing set to ignore
+    ///  - before .Net 4.5.2 it has ProhibitDtd set to true (even if the internal XmlResolver is not secure)
+    ///  - starting with .Net 4.5.2 XmlResolver is set to null, ProhibitDtd set to true and DtdProcessing set to ignore
     ///
-    /// If the properties are modified, in order to be secure, we have to check that either ProhibitDtd is set to false, DtdProcessing set to Ignore or
-    /// XmlResolver is set to null or is different than XmlUrlResolver and XmlPreloadedResolver.
+    /// If the properties are modified, in order to be secure, we have to check that either ProhibitDtd is set to true, DtdProcessing set to Ignore or
+    /// the internal XmlResolver is secure.
     /// </summary>
     internal class XmlReaderSettingsValidator
     {
@@ -59,6 +58,7 @@ namespace SonarAnalyzer.Rules.XXE
         /// <returns>true, if the XmlReaderSettings is secure; otherwise false.</returns>
         public bool IsUnsafe(InvocationExpressionSyntax invocation, ISymbol settings)
         {
+            // By default ProhibitDtd is 'true' and DtdProcessing is 'ignore'
             var unsafeDtdProcessing = false;
             var unsafeResolver = isXmlResolverSafeByDefault;
 
@@ -120,7 +120,7 @@ namespace SonarAnalyzer.Rules.XXE
         private static bool IsXmlResolverDtdProcessingUnsafe(AssignmentExpressionSyntax assignment, SemanticModel semanticModel) =>
             semanticModel.GetConstantValue(assignment.Right).Value switch
             {
-                false => true, // If ProhibitDtd is set to false the settings will be secure (there will be no parsing)
+                false => true, // If ProhibitDtd is set to false the settings will be unsafe (parsing is allowed)
                 (int)DtdProcessing.Parse => true,
                 _ => false
             };
