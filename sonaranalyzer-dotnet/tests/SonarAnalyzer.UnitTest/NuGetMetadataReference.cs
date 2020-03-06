@@ -44,6 +44,9 @@ namespace SonarAnalyzer.UnitTest
 
         // passed version
 
+        public static IEnumerable<MetadataReference> BouncyCastle(string packageVersion = "1.8.5") =>
+            NugetMetadataFactory.Create("BouncyCastle", packageVersion);
+
         public static IEnumerable<MetadataReference> Dapper(string packageVersion = "1.50.5") =>
             NugetMetadataFactory.Create("Dapper", packageVersion);
 
@@ -193,6 +196,9 @@ namespace SonarAnalyzer.UnitTest
 
         internal static IEnumerable<MetadataReference> SystemDataOracleClient(string packageVersion = "1.0.8") =>
             NugetMetadataFactory.Create("System.Data.OracleClient", packageVersion);
+
+        public static IEnumerable<MetadataReference> SystemSecurityCryptographyOpenSsl(string packageVersion = "4.7.0") =>
+            NugetMetadataFactory.Create("System.Security.Cryptography.OpenSsl", packageVersion);
 
         public static IEnumerable<MetadataReference> SystemThreadingTasksExtensions(string packageVersion) =>
             NugetMetadataFactory.Create("System.Threading.Tasks.Extensions", packageVersion);

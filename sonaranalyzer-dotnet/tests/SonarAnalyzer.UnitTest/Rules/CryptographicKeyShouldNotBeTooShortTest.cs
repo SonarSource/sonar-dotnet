@@ -19,8 +19,11 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -28,12 +31,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class CryptographicKeyShouldNotBeTooShortTest
     {
+
+        private static IEnumerable<MetadataReference> NetFrameworkCryptographyReferences =>
+            FrameworkMetadataReference.SystemSecurityCryptographyAlgorithms
+            .Concat(NuGetMetadataReference.SystemSecurityCryptographyOpenSsl())
+            .Concat(NuGetMetadataReference.BouncyCastle());
+
         [TestMethod]
         [TestCategory("Rule")]
         public void CryptographicKeyShouldNotBeTooShort()
         {
             Verifier.VerifyAnalyzer(@"TestCases\CryptographicKeyShouldNotBeTooShort.cs",
-                new CryptographicKeyShouldNotBeTooShort());
+                new CryptographicKeyShouldNotBeTooShort(),
+                ParseOptionsHelper.FromCSharp8,
+                additionalReferences: NetFrameworkCryptographyReferences);
         }
     }
 }
