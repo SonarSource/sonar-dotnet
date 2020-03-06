@@ -107,7 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var settings = invocation.GetArgumentsOfKnownType(KnownType.System_Xml_XmlReaderSettings, context.SemanticModel).FirstOrDefault();
             if (settings == null)
             {
-                return;
+                return; // safe by default
             }
 
             var xmlReaderSettingsValidator = new XmlReaderSettingsValidator(context.SemanticModel, VersionProvider.GetDotNetFrameworkVersion(context.Compilation));
