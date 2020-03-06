@@ -439,6 +439,7 @@ namespace Tests.Diagnostics
         public void UseNoncompliantKeyLength()
         {
             this.KeySize = 1024; // Noncompliant {{Use a key length of at least 2048 bits for RSA cipher algorithm.}}
+            KeySize = 1024; // FN
         }
 
         public override RSAParameters ExportParameters(bool includePrivateParameters)
