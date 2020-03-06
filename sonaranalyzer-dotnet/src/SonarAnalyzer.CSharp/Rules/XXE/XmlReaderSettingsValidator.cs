@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.XXE
     /// <summary>
     /// This class is responsible to check if a XmlReaderSettings node is vulnerable to XXE attacks.
     ///
-    /// By default the class is safe:
+    /// By default the XmlReaderSettings is safe:
     ///  - before .Net 4.5.2 it has ProhibitDtd set to true (even if the internal XmlResolver is not secure)
     ///  - starting with .Net 4.5.2 XmlResolver is set to null, ProhibitDtd set to true and DtdProcessing set to ignore
     ///
