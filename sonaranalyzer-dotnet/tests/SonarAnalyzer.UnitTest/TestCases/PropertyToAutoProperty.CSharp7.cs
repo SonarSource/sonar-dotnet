@@ -13,4 +13,15 @@ namespace Tests.Diagnostics
             set => field = value;
         }
     }
+
+    public class VolatileField
+    {
+        private volatile int field;
+
+        public int Property01 // Compliant - cannot have volatile autoproperty
+        {
+            get => field;
+            set => field = value;
+        }
+    }
 }
