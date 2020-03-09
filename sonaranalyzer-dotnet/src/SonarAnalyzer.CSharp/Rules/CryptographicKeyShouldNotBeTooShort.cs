@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S4426";
         private const string MessageFormat = "Use a key length of at least {0} bits for {1} cipher algorithm.{2}";
-        private const string AdditionalInfo = " This assignment does not actually update the underlying key size.";
+        private const string UselessAssignmentInfo = " This assignment does not update the underlying key size.";
 
         private const int MinimalCommonKeyLength = 2048;
         private const int MinimalEllipticCurveKeyLength = 224;
@@ -122,9 +122,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         && c.SemanticModel.GetTypeInfo(memberAccess.Expression).Type is ITypeSymbol containingType)
                     {
                         // Using the KeySize setter on DSACryptoServiceProvider/RSACryptoServiceProvider does not actually change the underlying key size
+                        // https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.dsacryptoserviceprovider.keysize
+                        // https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.rsacryptoserviceprovider.keysize
                         if (containingType.IsAny(KnownType.System_Security_Cryptography_DSACryptoServiceProvider, KnownType.System_Security_Cryptography_RSACryptoServiceProvider))
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignment.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), AdditionalInfo));
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignment.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), UselessAssignmentInfo));
                         }
                         else
                         {
@@ -194,19 +196,24 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckSystemSecurityCryptographyAlgorithms(ITypeSymbol containingType, ObjectCreationExpressionSyntax objectCreation, SyntaxNodeAnalysisContext c)
         {
-            var firstParam = objectCreation.ArgumentList.Get(0);
-
             // DSACryptoServiceProvider is always noncompliant as it has a max key size of 1024
-            // RSACryptoServiceProvider default constructor is noncompliant as it has default key size of 1024
+            // RSACryptoServiceProvider() and RSACryptoServiceProvider(System.Security.Cryptography.CspParameters) constructors are noncompliants as they have a default key size of 1024
             if (containingType.Is(KnownType.System_Security_Cryptography_DSACryptoServiceProvider)
-                || (containingType.Is(KnownType.System_Security_Cryptography_RSACryptoServiceProvider) && firstParam == null))
+                || (containingType.Is(KnownType.System_Security_Cryptography_RSACryptoServiceProvider) && HasDefaultSize(objectCreation.ArgumentList.Arguments, c)))
             {
                 c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreation.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), ""));
             }
             else
             {
+                var firstParam = objectCreation.ArgumentList.Get(0);
                 CheckGenericDsaRsaCryptographyAlgorithms(containingType, objectCreation, firstParam, c);
             }
+        }
+
+        private static bool HasDefaultSize(SeparatedSyntaxList<ArgumentSyntax> arguments, SyntaxNodeAnalysisContext c)
+        {
+            return arguments.Count == 0
+                || (arguments.Count == 1 && c.SemanticModel.GetTypeInfo(arguments[0].Expression).Type is ITypeSymbol type && type.Is(KnownType.System_Security_Cryptography_CspParameters));
         }
 
         private static void CheckGenericDsaRsaCryptographyAlgorithms(ITypeSymbol containingType, SyntaxNode syntaxElement, SyntaxNode keyLengthSyntax, SyntaxNodeAnalysisContext c)

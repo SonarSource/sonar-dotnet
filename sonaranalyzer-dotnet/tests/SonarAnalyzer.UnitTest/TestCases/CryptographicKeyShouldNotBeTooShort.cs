@@ -23,7 +23,7 @@ namespace Tests.Diagnostics
         {
             const int localValidSize = 2048;
             new RSACryptoServiceProvider(); // Noncompliant {{Use a key length of at least 2048 bits for RSA cipher algorithm.}}
-            new RSACryptoServiceProvider(new CspParameters());
+            new RSACryptoServiceProvider(new CspParameters()); // Noncompliant - has default key size of 1024
             new RSACryptoServiceProvider(2048);
             new RSACryptoServiceProvider(localValidSize);
             new RSACryptoServiceProvider(validKeySizeConst);
@@ -42,14 +42,15 @@ namespace Tests.Diagnostics
 
     public class SystemSecurityCryptographyDSA
     {
-        public void DefaultConstructors()
+        public void DefaultConstructors(CspParameters cspParameters)
         {
             var dsa1 = new DSACng(); // Compliant - default is 2048
             var dsa2 = new DSACryptoServiceProvider(); // Noncompliant - default is 1024
-            var dsa3 = new DSAOpenSsl(); // Compliant - default is 2048
+            var dsa3 = new DSACryptoServiceProvider(cspParameters); // Noncompliant - default is 1024
+            var dsa4 = new DSAOpenSsl(); // Compliant - default is 2048
         }
 
-        public void CompliantKeySizeConstructors(CspParameters parameters)
+        public void CompliantKeySizeConstructors()
         {
             var dsa1 = new DSACng(3072);
             var dsa2 = new DSAOpenSsl(2048);
@@ -80,7 +81,7 @@ namespace Tests.Diagnostics
             dsa1.KeySize = 512; // Noncompliant {{Use a key length of at least 2048 bits for DSA cipher algorithm.}}
 
             var dsa2 = new DSACryptoServiceProvider(); // Noncompliant
-            dsa2.KeySize = 2048; // Noncompliant {{Use a key length of at least 2048 bits for DSA cipher algorithm. This assignment does not actually update the underlying key size.}}
+            dsa2.KeySize = 2048; // Noncompliant {{Use a key length of at least 2048 bits for DSA cipher algorithm. This assignment does not update the underlying key size.}}
 //          ^^^^^^^^^^^^^^^^^^^
             var dsa3 = new DSAOpenSsl();
             dsa3.KeySize = 1024; // Noncompliant
@@ -142,7 +143,7 @@ namespace Tests.Diagnostics
             rsa1.KeySize = 1024; // Noncompliant {{Use a key length of at least 2048 bits for RSA cipher algorithm.}}
 
             var rsa3 = new RSACryptoServiceProvider(); // Noncompliant
-            rsa3.KeySize = 2048; // Noncompliant {{Use a key length of at least 2048 bits for RSA cipher algorithm. This assignment does not actually update the underlying key size.}}
+            rsa3.KeySize = 2048; // Noncompliant {{Use a key length of at least 2048 bits for RSA cipher algorithm. This assignment does not update the underlying key size.}}
 
             var rsa4 = new RSAOpenSsl();
             rsa4.KeySize = 512; // Noncompliant
@@ -367,7 +368,7 @@ namespace Tests.Diagnostics
             curve = SecNamedCurves.GetByName("GostR3410-2001-CryptoPro-C"); // Compliant
             curve = SecNamedCurves.GetByName("GostR3410-2001-CryptoPro-B"); // Compliant
 
-            curve = NistNamedCurves.GetByName("B-233");  // Compliant
+            curve = NistNamedCurves.GetByName("B-233"); // Compliant
             curve = NistNamedCurves.GetByName("B-283"); // Compliant
             curve = NistNamedCurves.GetByName("B-409"); // Compliant
             curve = NistNamedCurves.GetByName("B-571"); // Compliant
@@ -393,6 +394,8 @@ namespace Tests.Diagnostics
         {
             X9ECParameters curve = null;
 
+            // Elliptic curves always have the key length as part of their names. Rule implementation looks for this
+            // key length pattern, so that all curves with a key length smaller than 224 will raise an issue
             curve = SecNamedCurves.GetByName("secp192k1"); // Noncompliant {{Use a key length of at least 224 bits for EC cipher algorithm.}}
             curve = SecNamedCurves.GetByName("secp192r1"); // Noncompliant
             curve = SecNamedCurves.GetByName("sect163k1"); // Noncompliant
@@ -439,7 +442,7 @@ namespace Tests.Diagnostics
         public void UseNoncompliantKeyLength()
         {
             this.KeySize = 1024; // Noncompliant {{Use a key length of at least 2048 bits for RSA cipher algorithm.}}
-            KeySize = 1024; // FN
+            KeySize = 1024; // FN - we only look at MemberAccessExpressionSyntax for simplicity
         }
 
         public override RSAParameters ExportParameters(bool includePrivateParameters)
