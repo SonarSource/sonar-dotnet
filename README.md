@@ -60,7 +60,8 @@ You can also monitor the activity on this repository (opened issues, opened PRs)
 ### Pull Request (PR)
 
 If you want to fix [an issue](https://github.com/SonarSource/sonar-dotnet/issues),
-please read the [Get started](#get-started) pages first and please sure that you follow [our coding style](./docs/coding-style.md).
+please read the [Get started](#get-started) pages first and make sure that you follow [our coding style](./docs/coding-style.md).
+
 Before submitting the PR, make sure [all tests](./docs/contributing-analyzer.md#running-tests) are passing (all checks must be green).
 
 * We suggest you do not pick issues with the `Area: CFG` label
