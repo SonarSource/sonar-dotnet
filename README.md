@@ -38,7 +38,7 @@ languages and are part of the [SonarQube](http://www.sonarqube.org/), [SonarClou
 
 ## Do you have a question or feedback?
 
-* [Contact us on Community Forum](https://community.sonarsource.com/) to provide feedback, ask for help, request new rules or features.
+* Contact us on [our Community Forum](https://community.sonarsource.com/) to provide feedback, ask for help, request new rules or features.
 * [Create a GitHub Issue](https://github.com/SonarSource/sonar-dotnet/issues/new/choose) if you've found a bug, False-Positive or False-Negative. 
 
 ## Get started
@@ -78,7 +78,10 @@ If you would like to work on this project full-time, [we are hiring!](https://ww
 
 ## Custom Rules
 
+To request new rules, please [contact us on our Community Forum](https://community.sonarsource.com/c/suggestions/).
+
 If you have an idea for a rule but you are not sure that everyone needs it, you can implement your own Roslyn analyzer.
+- You can start with [this tutorial from Microsoft](https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/tutorials/how-to-write-csharp-analyzer-code-fix) to write an analyzer.
 - All Roslyn-based issues are picked up by the [Scanner for MSBuild](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-msbuild/)
 and pushed to SonarQube / SonarCloud as external issues.
 - Also check out [SonarQube Roslyn SDK](https://github.com/SonarSource-VisualStudio/sonarqube-roslyn-sdk) to embed
