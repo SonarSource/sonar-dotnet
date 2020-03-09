@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,10 +31,19 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void TestSplitCamelCaseToWords()
         {
             AssertSplitEquivalent("thisIsAName", "THIS", "IS", "A", "NAME");
+            AssertSplitEquivalent("thisIsSMTPName", "THIS", "IS", "SMTP", "NAME");
             AssertSplitEquivalent("ThisIsIt", "THIS", "IS", "IT");
             AssertSplitEquivalent("bin2hex", "BIN", "HEX");
-            AssertSplitEquivalent("HTML", "H", "T", "M", "L");
-            AssertSplitEquivalent("PEHeader", "P", "E", "HEADER");
+            AssertSplitEquivalent("HTML", "HTML");
+            AssertSplitEquivalent("SOME_VALUE", "SOME", "VALUE");
+            AssertSplitEquivalent("GR8day", "GR", "DAY");
+            AssertSplitEquivalent("ThisIsEpic", "THIS", "IS", "EPIC");
+            AssertSplitEquivalent("ThisIsEPIC", "THIS", "IS", "EPIC");
+            AssertSplitEquivalent("This_is_EPIC", "THIS", "IS", "EPIC");
+            AssertSplitEquivalent("PEHeader", "PE", "HEADER");
+            AssertSplitEquivalent("PE_Header", "PE", "HEADER");
+            AssertSplitEquivalent("BigB_smallc&GIANTD", "BIG", "B","SMALLC", "GIANTD");
+            AssertSplitEquivalent("SMTPServer", "SMTP", "SERVER");
             AssertSplitEquivalent("__url_foo", "URL", "FOO");
             AssertSplitEquivalent("");
             AssertSplitEquivalent(null);
@@ -42,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         private void AssertSplitEquivalent(string name, params string[] words)
         {
-            CollectionAssert.AreEquivalent(name.SplitCamelCaseToWords().ToList(), words);
+            CollectionAssert.AreEquivalent(words, name.SplitCamelCaseToWords().ToList(), $" Value: {name}");
         }
     }
 }

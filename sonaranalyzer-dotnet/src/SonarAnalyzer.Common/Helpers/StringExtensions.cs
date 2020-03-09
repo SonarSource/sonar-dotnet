@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,44 +28,55 @@ namespace SonarAnalyzer.Helpers
         /// <summary>
         /// Splits the input string to the list of words.
         ///
-        /// Letters and consecutive capital letters are ignored.
+        /// Sequence of upper case letters is considered as single word.
+        ///
         /// For example:
         /// thisIsAName => this is a name
-        /// ThisIsIt => this is it
+        /// ThisIsSMTPName => this is smtp name
         /// bin2hex => bin hex
-        /// HTML => h t m l
-        /// PEHeader => p e header
+        /// HTML => html
+        /// SOME_value => some value
+        /// PEHeader => pe header
         /// </summary>
         /// <param name="name">A string containing words.</param>
         /// <returns>A list of words (all lowercase) contained in the string.</returns>
         public static IEnumerable<string> SplitCamelCaseToWords(this string name)
         {
+            bool IsFollowedByLower(int i) => i + 1 < name.Length && char.IsLower(name[i + 1]);
+
             if (name == null)
             {
                 yield break;
             }
 
             var currentWord = new StringBuilder();
+            var hasLower = false;
 
-            foreach (var c in name)
+            for (var i = 0; i < name.Length; i++)
             {
+                var c = name[i];
                 if (!char.IsLetter(c))
                 {
                     if (currentWord.Length > 0)
                     {
                         yield return currentWord.ToString();
                         currentWord.Clear();
+                        hasLower = false;
                     }
                     continue;
                 }
 
-                if (char.IsUpper(c) && currentWord.Length > 0)
+                if (char.IsUpper(c)
+                    && currentWord.Length > 0
+                    && (hasLower || IsFollowedByLower(i)))
                 {
                     yield return currentWord.ToString();
                     currentWord.Clear();
+                    hasLower = false;
                 }
 
                 currentWord.Append(char.ToUpperInvariant(c));
+                hasLower = hasLower || char.IsLower(c);
             }
 
             if (currentWord.Length > 0)
