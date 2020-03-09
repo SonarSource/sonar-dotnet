@@ -71,6 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         TryGetFieldFromSetter(setter, c.SemanticModel, out var setterField) &&
                         getterField.Equals(setterField) &&
                         !getterField.GetAttributes().Any() &&
+                        !getterField.IsVolatile &&
                         getterField.IsStatic == propertySymbol.IsStatic &&
                         getterField.Type.Equals(propertySymbol.Type))
                     {
