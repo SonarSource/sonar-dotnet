@@ -151,7 +151,7 @@ namespace SonarAnalyzer.Rules
                     return Enumerable.Empty<string>();
                 }
 
-                var credentialWordsFound = (variableName ==null || variableName.Any(x => char.IsLower(x)) ? variableName : variableName.ToLower()) // Prepare "PASSWORD" for SplitCamelCaseToWords()
+                var credentialWordsFound = variableName
                     .SplitCamelCaseToWords()
                     .Intersect(analyzer.splitCredentialWords)
                     .ToHashSet(StringComparer.OrdinalIgnoreCase);

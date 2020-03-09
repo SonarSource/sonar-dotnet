@@ -122,6 +122,8 @@ namespace Tests.Diagnostics
             string passwordName = "UserPasswordValue";
             string password = "Password";
             string pwd = "pwd";
+
+            string myPassword = "pwd"; // Noncompliant, different value from word list is used
         }
 
         public void UriWithUserInfo(string pwd, string domain)

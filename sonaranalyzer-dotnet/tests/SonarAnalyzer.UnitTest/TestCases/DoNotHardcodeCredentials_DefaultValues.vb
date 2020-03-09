@@ -112,6 +112,8 @@ Namespace Tests.Diagnostics
             Dim PasswordName As String = "UserPasswordValue"
             Dim Password As String = "Password"
             Dim pwd As String = "pwd"
+
+            Dim myPassword As String = "pwd"    ' Noncompliant, different value from word list is used
         End Sub
 
         Public Sub UriWithUserInfo(Pwd As String, Domain As String)
