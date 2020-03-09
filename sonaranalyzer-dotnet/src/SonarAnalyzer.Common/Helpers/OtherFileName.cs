@@ -73,5 +73,15 @@ namespace SonarAnalyzer.Helpers
                 yield return currentWord.ToString();
             }
         }
+
+        public static IEnumerable<string> SplitCamelCaseSimple2(string name)
+        {
+            if (name == null)
+            {
+                yield break;
+            }
+            yield return "x";
+        }
+
     }
 }

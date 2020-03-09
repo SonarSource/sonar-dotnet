@@ -45,14 +45,13 @@ namespace SonarAnalyzer.UnitTest.Helpers
         private void AssertSplitEquivalent(string name, params string[] words)
         {
             CollectionAssert.AreEquivalent(name.SplitCamelCaseToWords().ToList(), words);
-            CollectionAssert.AreEquivalent(name.DifferentName().ToList(), words);
+            CollectionAssert.AreEquivalent(name.SplitCamelCaseSimple().ToList(), words);
             CollectionAssert.AreEquivalent(name.SplitCamelCaseTxWords().ToList(), words); //OtherFileName
-            CollectionAssert.AreEquivalent(StringExtensions.SplitCamelCaseNotExtension(name).ToList(), words);
         }
 
         private void AssertSplitSimple(string name, params string[] words)
         {
-            CollectionAssert.AreEquivalent(StringExtensions.SplitCamelCaseSimple(name).ToList(), words);
+            CollectionAssert.AreEquivalent(OtherFileName.SplitCamelCaseSimple2(name).ToList(), words);
             CollectionAssert.AreEquivalent(StringExtensions.SplitCamelCaseNotYield(name).ToList(), words);
         }
     }
