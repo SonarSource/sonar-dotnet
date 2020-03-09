@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -38,11 +38,22 @@ namespace SonarAnalyzer.UnitTest.Helpers
             AssertSplitEquivalent("__url_foo", "URL", "FOO");
             AssertSplitEquivalent("");
             AssertSplitEquivalent(null);
+            AssertSplitSimple(null);
+            AssertSplitSimple("x", "x");
         }
 
         private void AssertSplitEquivalent(string name, params string[] words)
         {
             CollectionAssert.AreEquivalent(name.SplitCamelCaseToWords().ToList(), words);
+            CollectionAssert.AreEquivalent(name.DifferentName().ToList(), words);
+            CollectionAssert.AreEquivalent(name.SplitCamelCaseTxWords().ToList(), words); //OtherFileName
+            CollectionAssert.AreEquivalent(StringExtensions.SplitCamelCaseNotExtension(name).ToList(), words);
+        }
+
+        private void AssertSplitSimple(string name, params string[] words)
+        {
+            CollectionAssert.AreEquivalent(StringExtensions.SplitCamelCaseSimple(name).ToList(), words);
+            CollectionAssert.AreEquivalent(StringExtensions.SplitCamelCaseNotYield(name).ToList(), words);
         }
     }
 }

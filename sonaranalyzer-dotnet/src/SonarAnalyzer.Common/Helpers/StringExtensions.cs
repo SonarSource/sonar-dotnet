@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -72,6 +72,96 @@ namespace SonarAnalyzer.Helpers
             {
                 yield return currentWord.ToString();
             }
+        }
+        public static IEnumerable<string> DifferentName(this string name)
+        {
+            if (name == null)
+            {
+                yield break;
+            }
+
+            var currentWord = new StringBuilder();
+
+            foreach (var c in name)
+            {
+                if (!char.IsLetter(c))
+                {
+                    if (currentWord.Length > 0)
+                    {
+                        yield return currentWord.ToString();
+                        currentWord.Clear();
+                    }
+                    continue;
+                }
+
+                if (char.IsUpper(c) && currentWord.Length > 0)
+                {
+                    yield return currentWord.ToString();
+                    currentWord.Clear();
+                }
+
+                currentWord.Append(char.ToUpperInvariant(c));
+            }
+
+            if (currentWord.Length > 0)
+            {
+                yield return currentWord.ToString();
+            }
+        }
+
+        public static IEnumerable<string> SplitCamelCaseNotExtension(string name)
+        {
+            if (name == null)
+            {
+                yield break;
+            }
+
+            var currentWord = new StringBuilder();
+
+            foreach (var c in name)
+            {
+                if (!char.IsLetter(c))
+                {
+                    if (currentWord.Length > 0)
+                    {
+                        yield return currentWord.ToString();
+                        currentWord.Clear();
+                    }
+                    continue;
+                }
+
+                if (char.IsUpper(c) && currentWord.Length > 0)
+                {
+                    yield return currentWord.ToString();
+                    currentWord.Clear();
+                }
+
+                currentWord.Append(char.ToUpperInvariant(c));
+            }
+
+            if (currentWord.Length > 0)
+            {
+                yield return currentWord.ToString();
+            }
+        }
+
+        public static IEnumerable<string> SplitCamelCaseSimple(string name)
+        {
+            if (name == null)
+            {
+                yield break;
+            }
+            yield return "x";
+        }
+
+        public static IEnumerable<string> SplitCamelCaseNotYield(string name)
+        {
+            if (name == null)
+            {
+                return new string[] { };
+            }
+
+            return new string[] { "x" };
         }
     }
 }
