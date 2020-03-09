@@ -121,6 +121,19 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVRegExProfiles.vb",
+"region":  {
+"startLine":  54,
+"startColumn":  54,
+"endLine":  54,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
+"location":  {
 "uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4137,
