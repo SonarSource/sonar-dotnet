@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -115,6 +115,10 @@ namespace SonarAnalyzer.Helpers
             context =>
                 context.MethodSymbol.Value != null &&
                 context.MethodSymbol.Value.ReturnType.DerivesFrom(returnType);
+
+        public InvocationCondition InvalidBuilderInitialization<TInvocationSyntax>(BuilderPatternCondition<TInvocationSyntax> condition)
+            where TInvocationSyntax : SyntaxNode =>
+            context => condition.InvalidBuilderInitialization(context);
 
         #region Syntax-level checking methods
 

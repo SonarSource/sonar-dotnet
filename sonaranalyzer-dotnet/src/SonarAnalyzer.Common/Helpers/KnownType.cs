@@ -31,6 +31,7 @@ namespace SonarAnalyzer.Helpers
 
         internal static readonly KnownType Void = new KnownType(SpecialType.System_Void, "void");
 
+        internal static readonly KnownType JWT_Builder_JwtBuilder = new KnownType("JWT.Builder.JwtBuilder");
         internal static readonly KnownType JWT_IJwtDecoder = new KnownType("JWT.IJwtDecoder");
         internal static readonly KnownType log4net_Config_XmlConfigurator = new KnownType("log4net.Config.XmlConfigurator");
         internal static readonly KnownType log4net_Config_DOMConfigurator = new KnownType("log4net.Config.DOMConfigurator");

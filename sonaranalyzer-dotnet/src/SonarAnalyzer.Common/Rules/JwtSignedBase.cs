@@ -19,23 +19,27 @@
  */
 
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
+using System;
 using SonarAnalyzer.Helpers;
 using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class JwtSignedBase<TSyntaxKind> : SonarDiagnosticAnalyzer
+    public abstract class JwtSignedBase<TSyntaxKind, TInvocationSyntax> : SonarDiagnosticAnalyzer
         where TSyntaxKind : struct
+        where TInvocationSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S5659";
         private const string MessageFormat = "Use only strong cipher algorithms when {0} this JWT.";
         private const string MessageVerifying = "verifying the signature of";
+        protected const bool JwtBuilderConstructorIsSafe = false;
 
         protected readonly DiagnosticDescriptor verifyingRule;
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(verifyingRule);
 
         protected InvocationTracker<TSyntaxKind> InvocationTracker { get; set; }
+
+        protected abstract BuilderPatternCondition<TInvocationSyntax> BuilderPattern();
 
         protected JwtSignedBase(System.Resources.ResourceManager rspecResources)
         {
@@ -54,8 +58,22 @@ namespace SonarAnalyzer.Rules
                     InvocationTracker.ArgumentIsBoolConstant("verify", false),
                     InvocationTracker.MethodHasParameters(1)
                     ));
+
+            InvocationTracker.Track(context,
+                InvocationTracker.MatchMethod(new MemberDescriptor(KnownType.JWT_Builder_JwtBuilder, "Decode")),
+                InvocationTracker.InvalidBuilderInitialization(BuilderPattern())
+                );
         }
 
+        protected BuilderPatternDescriptor<TInvocationSyntax>[] JwtBuilderDescriptors(Func<InvocationContext, TInvocationSyntax, bool> singleArgumentIsNotFalseLiteral)
+        {
+            return new[]
+            {
+                new BuilderPatternDescriptor<TInvocationSyntax>(true, InvocationTracker.MethodNameIs("MustVerifySignature")),
+                new BuilderPatternDescriptor<TInvocationSyntax>(false, InvocationTracker.MethodNameIs("DoNotVerifySignature")),
+                new BuilderPatternDescriptor<TInvocationSyntax>(singleArgumentIsNotFalseLiteral, InvocationTracker.MethodNameIs("WithVerifySignature"))
+            };
+        }
     }
 }
 

@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -31,12 +30,18 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class JwtSigned : JwtSignedBase<SyntaxKind>
+    public sealed class JwtSigned : JwtSignedBase<SyntaxKind, InvocationExpressionSyntax>
     {
         public JwtSigned() : base(RspecStrings.ResourceManager)
         {
             InvocationTracker = new CSharpInvocationTracker(AnalyzerConfiguration.AlwaysEnabled, verifyingRule);
         }
+
+        protected override BuilderPatternCondition<InvocationExpressionSyntax> BuilderPattern() =>
+            new CSharpBuildPatternCondition(JwtBuilderConstructorIsSafe, JwtBuilderDescriptors(
+                (context, invocation) =>
+                    invocation.ArgumentList?.Arguments.Count != 1
+                    || !invocation.ArgumentList.Arguments.Single().Expression.RemoveParentheses().IsKind(SyntaxKind.FalseLiteralExpression)));
     }
 }
 

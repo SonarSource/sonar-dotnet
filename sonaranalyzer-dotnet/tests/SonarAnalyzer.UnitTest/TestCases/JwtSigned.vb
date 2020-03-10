@@ -16,103 +16,109 @@ Namespace Tests.Diagnostics
         ' Encoding with JWT.NET Is safe
 
         Sub DecodingWithDecoder(Decoder As JwtDecoder)
-            Dim Decoded1 As String = Decoder.Decode(InvalidToken, Secret, True) ' Compliant
+            Dim Decoded1 As String = Decoder.Decode(InvalidToken, Secret, True)
             Dim Decoded2 As String = Decoder.Decode(InvalidToken, Secret, False) ' Noncompliant {{Use only strong cipher algorithms when verifying the signature of this JWT.}}
 
-            Dim Decoded3 As String = Decoder.Decode(InvalidToken, Secret, verify:=True) ' Compliant
+            Dim Decoded3 As String = Decoder.Decode(InvalidToken, Secret, verify:=True)
             Dim Decoded4 As String = Decoder.Decode(InvalidToken, Secret, verify:=False) ' Noncompliant
 
-            Dim Decoded5 As String = Decoder.Decode(InvalidToken, Secret, verify:=True) ' Compliant
+            Dim Decoded5 As String = Decoder.Decode(InvalidToken, Secret, verify:=True)
             Dim Decoded6 As String = Decoder.Decode(InvalidToken, Secret, verify:=False) ' Noncompliant
 
-            Dim Decoded7 As String = Decoder.Decode(InvalidToken, verify:=True, key:=Secret) ' Compliant
+            Dim Decoded7 As String = Decoder.Decode(InvalidToken, verify:=True, key:=Secret)
             Dim Decoded8 As String = Decoder.Decode(InvalidToken, verify:=False, key:=Secret) ' Noncompliant
 
-            Dim Decoded9 As String = Decoder.Decode(InvalidToken, verify:=True, key:={42}) ' Compliant
+            Dim Decoded9 As String = Decoder.Decode(InvalidToken, verify:=True, key:={42})
             Dim Decoded10 As String = Decoder.Decode(InvalidToken, verify:=False, key:={42}) ' Noncompliant
 
             Dim Decoded11 As String = Decoder.Decode(InvalidToken) ' Noncompliant
             Dim Decoded12 As String = Decoder.Decode(InvalidParts) ' Noncompliant
 
-            Dim Decoded21 As Object = Decoder.DecodeToObject(InvalidToken, Secret, True) ' Compliant
+            Dim Decoded21 As Object = Decoder.DecodeToObject(InvalidToken, Secret, True)
             Dim Decoded22 As Object = Decoder.DecodeToObject(InvalidToken, Secret, False) ' Noncompliant
 
-            Dim Decoded31 As UserInfo = Decoder.DecodeToObject(Of UserInfo)(InvalidToken, Secret, True) ' Compliant
+            Dim Decoded31 As UserInfo = Decoder.DecodeToObject(Of UserInfo)(InvalidToken, Secret, True)
             Dim Decoded32 As UserInfo = Decoder.DecodeToObject(Of UserInfo)(InvalidToken, Secret, False) ' Noncompliant
         End Sub
 
         Sub DecodingWithCustomDecoder(Decoder As CustomDecoder)
-            Dim Decoded1 As String = Decoder.Decode(InvalidToken, Secret, True) ' Compliant
+            Dim Decoded1 As String = Decoder.Decode(InvalidToken, Secret, True)
             Dim Decoded2 As String = Decoder.Decode(InvalidToken, Secret, False) ' Noncompliant {{Use only strong cipher algorithms when verifying the signature of this JWT.}}
 
-            Dim Decoded3 As String = Decoder.Decode(InvalidToken, Secret, verify:=True) ' Compliant
+            Dim Decoded3 As String = Decoder.Decode(InvalidToken, Secret, verify:=True)
             Dim Decoded4 As String = Decoder.Decode(InvalidToken, Secret, verify:=False) ' Noncompliant
 
-            Dim Decoded5 As String = Decoder.Decode(InvalidToken, Secret, verify:=True) ' Compliant
+            Dim Decoded5 As String = Decoder.Decode(InvalidToken, Secret, verify:=True)
             Dim Decoded6 As String = Decoder.Decode(InvalidToken, Secret, verify:=False) ' Noncompliant
 
-            Dim Decoded7 As String = Decoder.Decode(InvalidToken, verify:=True, key:=Secret) ' Compliant
+            Dim Decoded7 As String = Decoder.Decode(InvalidToken, verify:=True, key:=Secret)
             Dim Decoded8 As String = Decoder.Decode(InvalidToken, verify:=False, key:=Secret) ' Noncompliant
 
-            Dim Decoded9 As String = Decoder.Decode(InvalidToken, verify:=True, key:={42}) ' Compliant
+            Dim Decoded9 As String = Decoder.Decode(InvalidToken, verify:=True, key:={42})
             Dim Decoded10 As String = Decoder.Decode(InvalidToken, verify:=False, key:={42}) ' Noncompliant
 
             Dim Decoded11 As String = Decoder.Decode(InvalidToken) ' Noncompliant
             Dim Decoded12 As String = Decoder.Decode(InvalidParts) ' Noncompliant
 
-            Dim Decoded21 As Object = Decoder.DecodeToObject(InvalidToken, Secret, True) ' Compliant
+            Dim Decoded21 As Object = Decoder.DecodeToObject(InvalidToken, Secret, True)
             Dim Decoded22 As Object = Decoder.DecodeToObject(InvalidToken, Secret, False) ' Noncompliant
 
-            Dim Decoded31 As UserInfo = Decoder.DecodeToObject(Of UserInfo)(InvalidToken, Secret, True) ' Compliant
+            Dim Decoded31 As UserInfo = Decoder.DecodeToObject(Of UserInfo)(InvalidToken, Secret, True)
             Dim Decoded32 As UserInfo = Decoder.DecodeToObject(Of UserInfo)(InvalidToken, Secret, False) ' Noncompliant
         End Sub
 
         Sub DecodingWithBuilder()
-            Dim Decoded1 As String = New JwtBuilder().
+            Dim Decoded1 As String = New JwtBuilder().  ' Noncompliant {{Use only strong cipher algorithms when verifying the signature of this JWT.}}
                 WithSecret(Secret).
-                Decode(InvalidToken) ' Noncompliant {{Use only strong cipher algorithms when verifying the signature of this JWT.}}
+                Decode(InvalidToken)
 
             Dim Decoded2 As String = New JwtBuilder().
                 WithSecret(Secret).
                 MustVerifySignature().
-                Decode(InvalidToken) ' Compliant
+                Decode(InvalidToken)
 
             Dim builder1 As JwtBuilder = New JwtBuilder().WithSecret(Secret)
             builder1.Decode(InvalidToken) ' Noncompliant
 
             Dim builder2 As JwtBuilder = builder1.MustVerifySignature()
-            builder2.Decode(InvalidToken) ' Compliant
+            builder2.Decode(InvalidToken)
 
             Dim builder3 As JwtBuilder = New JwtBuilder().WithSecret(Secret).MustVerifySignature()
-            builder3.Decode(InvalidToken) ' Compliant
+            builder3.Decode(InvalidToken)
 
-            Dim Decoded11 As String = New JwtBuilder().
+            Dim builder4 As JwtBuilder = New JwtBuilder().WithSecret(Secret)
+            builder4.Decode(InvalidToken) ' Noncompliant
+
+            Dim builder5 As JwtBuilder = New JwtBuilder().WithSecret(Secret).DoNotVerifySignature()
+            builder5.Decode(InvalidToken) ' Noncompliant
+
+            Dim Decoded11 As String = New JwtBuilder().  ' Noncompliant
                 WithSecret(Secret).
                 WithVerifySignature(True).
                 MustVerifySignature().
                 DoNotVerifySignature().
-                Decode(InvalidToken) ' Noncompliant
+                Decode(InvalidToken)
 
             Dim Decoded12 As String = New JwtBuilder().
                 WithSecret(Secret).
                 WithVerifySignature(False).
                 DoNotVerifySignature().
                 MustVerifySignature().
-                Decode(InvalidToken) ' Compliant
+                Decode(InvalidToken)
 
             Dim Decoded21 As String = New JwtBuilder().
                 WithSecret(Secret).
                 DoNotVerifySignature().
                 WithVerifySignature(False).
                 WithVerifySignature(True).
-                Decode(InvalidToken) ' Compliant
+                Decode(InvalidToken)
 
-            Dim Decoded31 As String = New JwtBuilder().
+            Dim Decoded31 As String = New JwtBuilder().  ' Noncompliant
                 WithSecret(Secret).
                 MustVerifySignature().
                 WithVerifySignature(True).
                 WithVerifySignature(False).
-                Decode(InvalidToken) ' Noncompliant
+                Decode(InvalidToken)
         End Sub
 
     End Class

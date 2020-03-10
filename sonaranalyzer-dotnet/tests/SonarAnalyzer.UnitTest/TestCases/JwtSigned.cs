@@ -17,105 +17,139 @@ namespace Tests.Diagnostics
 
         void DecodingWithDecoder(JwtDecoder decoder)
         {
-            var decoded1 = decoder.Decode(invalidToken, secret, true);// Compliant
+            var decoded1 = decoder.Decode(invalidToken, secret, true);
             var decoded2 = decoder.Decode(invalidToken, secret, false); // Noncompliant {{Use only strong cipher algorithms when verifying the signature of this JWT.}}
 
-            var decoded3 = decoder.Decode(invalidToken, secret, verify: true);// Compliant
+            var decoded3 = decoder.Decode(invalidToken, secret, verify: true);
             var decoded4 = decoder.Decode(invalidToken, secret, verify: false); // Noncompliant
 
-            var decoded5 = decoder.Decode(invalidToken, secret, verify: true);// Compliant
+            var decoded5 = decoder.Decode(invalidToken, secret, verify: true);
             var decoded6 = decoder.Decode(invalidToken, secret, verify: false); // Noncompliant
 
-            var decoded7 = decoder.Decode(invalidToken, verify: true, key: secret);// Compliant
+            var decoded7 = decoder.Decode(invalidToken, verify: true, key: secret);
             var decoded8 = decoder.Decode(invalidToken, verify: false, key: secret); // Noncompliant
 
-            var decoded9 = decoder.Decode(invalidToken, verify: true, key: new byte[] { 42 });// Compliant
+            var decoded9 = decoder.Decode(invalidToken, verify: true, key: new byte[] { 42 });
             var decoded10 = decoder.Decode(invalidToken, verify: false, key: new byte[] { 42 }); // Noncompliant
 
             var decoded11 = decoder.Decode(invalidToken); // Noncompliant
             var decoded12 = decoder.Decode(invalidParts); // Noncompliant
 
-            var decoded21 = decoder.DecodeToObject(invalidToken, secret, true); // Compliant
+            var decoded21 = decoder.DecodeToObject(invalidToken, secret, true);
             var decoded22 = decoder.DecodeToObject(invalidToken, secret, false); // Noncompliant
 
-            var decoded31 = decoder.DecodeToObject<UserInfo>(invalidToken, secret, true); // Compliant
+            var decoded31 = decoder.DecodeToObject<UserInfo>(invalidToken, secret, true);
             var decoded32 = decoder.DecodeToObject<UserInfo>(invalidToken, secret, false); // Noncompliant
         }
 
         void DecodingWithCustomDecoder(CustomDecoder decoder)
         {
-            var decoded1 = decoder.Decode(invalidToken, secret, true);// Compliant
+            var decoded1 = decoder.Decode(invalidToken, secret, true);
             var decoded2 = decoder.Decode(invalidToken, secret, false); // Noncompliant {{Use only strong cipher algorithms when verifying the signature of this JWT.}}
 
-            var decoded3 = decoder.Decode(invalidToken, secret, verify: true);// Compliant
+            var decoded3 = decoder.Decode(invalidToken, secret, verify: true);
             var decoded4 = decoder.Decode(invalidToken, secret, verify: false); // Noncompliant
 
-            var decoded5 = decoder.Decode(invalidToken, secret, verify: true);// Compliant
+            var decoded5 = decoder.Decode(invalidToken, secret, verify: true);
             var decoded6 = decoder.Decode(invalidToken, secret, verify: false); // Noncompliant
 
-            var decoded7 = decoder.Decode(invalidToken, verify: true, key: secret);// Compliant
+            var decoded7 = decoder.Decode(invalidToken, verify: true, key: secret);
             var decoded8 = decoder.Decode(invalidToken, verify: false, key: secret); // Noncompliant
 
-            var decoded9 = decoder.Decode(invalidToken, verify: true, key: new byte[] { 42 });// Compliant
+            var decoded9 = decoder.Decode(invalidToken, verify: true, key: new byte[] { 42 });
             var decoded10 = decoder.Decode(invalidToken, verify: false, key: new byte[] { 42 }); // Noncompliant
 
             var decoded11 = decoder.Decode(invalidToken); // Noncompliant
             var decoded12 = decoder.Decode(invalidParts); // Noncompliant
 
-            var decoded21 = decoder.DecodeToObject(invalidToken, secret, true); // Compliant
+            var decoded21 = decoder.DecodeToObject(invalidToken, secret, true);
             var decoded22 = decoder.DecodeToObject(invalidToken, secret, false); // Noncompliant
 
-            var decoded31 = decoder.DecodeToObject<UserInfo>(invalidToken, secret, true); // Compliant
+            var decoded31 = decoder.DecodeToObject<UserInfo>(invalidToken, secret, true);
             var decoded32 = decoder.DecodeToObject<UserInfo>(invalidToken, secret, false); // Noncompliant
         }
 
         void DecodingWithBuilder()
         {
-            var decoded1 = new JwtBuilder()
+            var decoded1 = new JwtBuilder() // Noncompliant {{Use only strong cipher algorithms when verifying the signature of this JWT.}}
               .WithSecret(secret)
-              .Decode(invalidToken); // Noncompliant {{Use only strong cipher algorithms when verifying the signature of this JWT.}}
+              .Decode(invalidToken);
 
             var decoded2 = new JwtBuilder()
               .WithSecret(secret)
               .MustVerifySignature()
-              .Decode(invalidToken); // Compliant
+              .Decode(invalidToken);
 
             var builder1 = new JwtBuilder().WithSecret(secret);
             builder1.Decode(invalidToken); // Noncompliant
 
+            try
+            {
+                if (true)
+                {
+                    builder1.Decode(invalidToken); // Noncompliant, tracking outside nested block
+                }
+            }
+            finally
+            {
+            }
+
             var builder2 = builder1.MustVerifySignature();
-            builder2.Decode(invalidToken); // Compliant
+            builder2.Decode(invalidToken);
 
             var builder3 = new JwtBuilder().WithSecret(secret).MustVerifySignature();
-            builder3.Decode(invalidToken); // Compliant
+            builder3.Decode(invalidToken);
 
-            var decoded11 = new JwtBuilder()
+            var builder4 = (((new JwtBuilder()).WithSecret(secret)));
+            builder4.Decode(invalidToken); // Noncompliant
+
+            var builder5 = new JwtBuilder().WithSecret(secret).DoNotVerifySignature();
+            builder5.Decode(invalidToken); // Noncompliant
+
+            var decoded11 = new JwtBuilder()  // Noncompliant
                 .WithSecret(secret)
                 .WithVerifySignature(true)
                 .MustVerifySignature()
                 .DoNotVerifySignature()
-                .Decode(invalidToken); // Noncompliant
+                .Decode(invalidToken);
 
             var Decoded12 = new JwtBuilder()
                 .WithSecret(secret)
                 .WithVerifySignature(false)
                 .DoNotVerifySignature()
                 .MustVerifySignature()
-                .Decode(invalidToken); // Compliant
+                .Decode(invalidToken);
 
             var Decoded21 = new JwtBuilder()
                 .WithSecret(secret)
                 .DoNotVerifySignature()
                 .WithVerifySignature(false)
                 .WithVerifySignature(true)
-                .Decode(invalidToken); // Compliant
+                .Decode(invalidToken);
 
-            var Decoded31 = new JwtBuilder()
+            var Decoded31 = new JwtBuilder()  // Noncompliant
                 .WithSecret(secret)
                 .MustVerifySignature()
                 .WithVerifySignature(true)
                 .WithVerifySignature(false)
-                .Decode(invalidToken); // Noncompliant
+                .Decode(invalidToken);
+        }
+
+        void DecodingWithBuilder_FNs(bool condition)
+        {
+            var builder1 = new JwtBuilder();
+            if (condition)
+            {
+                builder1 = builder1.WithSecret(secret);
+            }
+            builder1.Decode(invalidToken); // FN, this is not SE rule, only linear initialization is considered
+
+            CreateBuilder().Decode(invalidToken); // FN, cross procedural initialization is not tracked
+        }
+
+        JwtBuilder CreateBuilder()
+        {
+            return new JwtBuilder().DoNotVerifySignature();
         }
     }
 

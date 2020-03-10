@@ -19,7 +19,7 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
+using System.Collections.Immutable; // FIXME: Cleanup
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -33,11 +33,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class JwtSigned : JwtSignedBase<SyntaxKind>
+    public sealed class JwtSigned : JwtSignedBase<SyntaxKind, InvocationExpressionSyntax>
     {
         public JwtSigned() : base(RspecStrings.ResourceManager)
         {
             InvocationTracker = new VisualBasicInvocationTracker(AnalyzerConfiguration.AlwaysEnabled, verifyingRule);
+        }
+
+        protected override BuilderPatternCondition<InvocationExpressionSyntax> BuilderPattern()
+        {
+            throw new System.NotImplementedException();
         }
 
     }
