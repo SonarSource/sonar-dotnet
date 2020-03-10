@@ -47,6 +47,7 @@
     <Compile Include="XmlDocumentTest.cs" />
     <Compile Include="XmlReaderTest.cs" />
     <Compile Include="XmlTextReaderTest.cs" />
+    <Compile Include="XPathDocumentTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
