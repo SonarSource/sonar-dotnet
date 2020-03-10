@@ -216,7 +216,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     symbol.Kind == SymbolKind.Method &&
                     symbol.ContainingType.GetSymbolType().IsAny(UnsafeXmlResolvers);
 
-            private static bool IsAllowedObject(ISymbol symbol) =>
+            private static bool IsAllowedObject(ISymbol symbol, SyntaxNode node, SemanticModel model) =>
                 !IsUnsafeXmlResolverConstructor(symbol) &&
                 !symbol.GetSymbolType().IsAny(UnsafeXmlResolvers) &&
                 !IsUnsafeXmlResolverReturnType(symbol);

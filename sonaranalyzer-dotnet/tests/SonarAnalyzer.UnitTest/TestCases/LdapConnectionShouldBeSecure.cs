@@ -129,4 +129,64 @@ namespace Tests.Diagnostics
             Property6 = new DirectoryEntry(); // Compliant
         }
     }
+
+    public class AllTypes
+    {
+        public void AllTypeInitialization()
+        {
+            new DirectoryEntry("", null, null, AuthenticationTypes.None); // Noncompliant
+            new DirectoryEntry("", null, null, AuthenticationTypes.Secure);
+            new DirectoryEntry("", null, null, AuthenticationTypes.Encryption);
+            new DirectoryEntry("", null, null, AuthenticationTypes.SecureSocketsLayer);
+            new DirectoryEntry("", null, null, AuthenticationTypes.ReadonlyServer);
+            new DirectoryEntry("", null, null, AuthenticationTypes.Anonymous); // Noncompliant
+            new DirectoryEntry("", null, null, AuthenticationTypes.FastBind);
+            new DirectoryEntry("", null, null, AuthenticationTypes.Signing);
+            new DirectoryEntry("", null, null, AuthenticationTypes.Sealing);
+            new DirectoryEntry("", null, null, AuthenticationTypes.Delegation);
+            new DirectoryEntry("", null, null, AuthenticationTypes.ServerBind);
+        }
+    }
+
+    public class AssignmentsAndDeclarators
+    {
+        public void WithTernaryOperatorSecure(bool condition)
+        {
+            var authType = condition ? AuthenticationTypes.SecureSocketsLayer : AuthenticationTypes.Secure;
+            var entry = new DirectoryEntry("", null, null, authType);
+        }
+
+        public void WithTernaryOperatorUnsecure(bool condition)
+        {
+            var authType = condition ? AuthenticationTypes.None : AuthenticationTypes.Anonymous;
+            // Symbolic execution would a better fit to increase precision
+            var entry = new DirectoryEntry("", null, null, authType); // Compliant - FN
+        }
+
+        public void WithDefaultLiteralExpression()
+        {
+            AuthenticationTypes authType = default;
+            new DirectoryEntry("", null, null, authType); // Noncompliant
+        }
+
+        public void WithDefaultExpression()
+        {
+            AuthenticationTypes authType = default(AuthenticationTypes);
+            new DirectoryEntry("", null, null, authType); // Noncompliant
+        }
+
+        public void AssignmentWithDefaultLiteralExpression()
+        {
+            var authType = AuthenticationTypes.Secure;
+            authType = default;
+            new DirectoryEntry("", null, null, authType); // Noncompliant
+        }
+
+        public void AssignmentWithDefaultExpression()
+        {
+            var authType = AuthenticationTypes.Secure;
+            authType = default(AuthenticationTypes);
+            new DirectoryEntry("", null, null, authType); // Noncompliant
+        }
+    }
 }
