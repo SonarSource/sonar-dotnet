@@ -38,7 +38,7 @@ languages and are part of the [SonarQube](http://www.sonarqube.org/), [SonarClou
 
 ## Do you have a question or feedback?
 
-* [Contact us on Community Forum](https://community.sonarsource.com/) to provide feedback, ask for help, request new rules or features.
+* Contact us on [our Community Forum](https://community.sonarsource.com/) to provide feedback, ask for help, request new rules or features.
 * [Create a GitHub Issue](https://github.com/SonarSource/sonar-dotnet/issues/new/choose) if you've found a bug, False-Positive or False-Negative. 
 
 ## Get started
@@ -49,7 +49,43 @@ languages and are part of the [SonarQube](http://www.sonarqube.org/), [SonarClou
 
 ## How to contribute
 
-Check out the [contributing](CONTRIBUTING.md) page to see the best places to log issues and start discussions.
+There are many ways you can contribute to the `sonar-dotnet` project. 
+When contributing, please respect our [Code of Conduct](./CODE_OF_CONDUCT.md).
+
+### Join the discussions
+
+One of the easiest ways to contribute is to share your feedback with us (see [give feedback](#do-you-have-a-question-or-feedback)) and also answer questions from [our community forum](https://community.sonarsource.com/).
+You can also monitor the activity on this repository (opened issues, opened PRs) to get more acquainted with what we do.
+
+### Pull Request (PR)
+
+If you want to fix [an issue](https://github.com/SonarSource/sonar-dotnet/issues),
+please read the [Get started](#get-started) pages first and make sure that you follow [our coding style](./docs/coding-style.md).
+
+Before submitting the PR, make sure [all tests](./docs/contributing-analyzer.md#running-tests) are passing (all checks must be green).
+
+* We suggest you do not pick issues with the `Area: CFG` label
+_(they are difficult, can have many side effects and are less likely to be accepted)_.
+* We suggest you do not implement new rules unless they are already specified for C# and/or VB.NET on
+our [rules repository](https://jira.sonarsource.com/projects/RSPEC).
+
+Note: our CI runs only on PRs opened by sonarsourcers.
+After your PR is ready, we will cherry-pick your commits and open a PR to run the CI (keeping the attribution).
+
+### Join us
+
+If you would like to work on this project full-time, [we are hiring!](https://www.sonarsource.com/company/jobs/static-code-analyzer-cs-developer)
+
+## Custom Rules
+
+To request new rules, Contact us on [our Community Forum](https://community.sonarsource.com/c/suggestions/).
+
+If you have an idea for a rule but you are not sure that everyone needs it, you can implement your own Roslyn analyzer.
+- You can start with [this tutorial from Microsoft](https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/tutorials/how-to-write-csharp-analyzer-code-fix) to write an analyzer.
+- All Roslyn-based issues are picked up by the [Scanner for MSBuild](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-msbuild/)
+and pushed to SonarQube / SonarCloud as external issues.
+- Also check out [SonarQube Roslyn SDK](https://github.com/SonarSource-VisualStudio/sonarqube-roslyn-sdk) to embed
+your Roslyn analyzer in a SonarQube plugin, if you want to manage your rules from SonarQube.
 
 ## License
 
