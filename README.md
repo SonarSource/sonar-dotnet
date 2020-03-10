@@ -78,7 +78,7 @@ If you would like to work on this project full-time, [we are hiring!](https://ww
 
 ## Custom Rules
 
-To request new rules, please [contact us on our Community Forum](https://community.sonarsource.com/c/suggestions/).
+To request new rules, Contact us on [our Community Forum](https://community.sonarsource.com/c/suggestions/).
 
 If you have an idea for a rule but you are not sure that everyone needs it, you can implement your own Roslyn analyzer.
 - You can start with [this tutorial from Microsoft](https://docs.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/tutorials/how-to-write-csharp-analyzer-code-fix) to write an analyzer.
