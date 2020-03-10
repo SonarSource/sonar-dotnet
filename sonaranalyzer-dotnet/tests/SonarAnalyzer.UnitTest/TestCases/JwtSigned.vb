@@ -80,6 +80,13 @@ Namespace Tests.Diagnostics
             Dim builder1 As JwtBuilder = New JwtBuilder().WithSecret(Secret)
             builder1.Decode(InvalidToken) ' Noncompliant
 
+            Try
+                If True Then
+                    builder1.Decode(InvalidToken) ' Noncompliant, tracking outside nested block
+                End If
+            Finally
+            End Try
+
             Dim builder2 As JwtBuilder = builder1.MustVerifySignature()
             builder2.Decode(InvalidToken)
 
@@ -120,6 +127,20 @@ Namespace Tests.Diagnostics
                 WithVerifySignature(False).
                 Decode(InvalidToken)
         End Sub
+
+        Sub DecodingWithBuilder_FNs(Condition As Boolean)
+            Dim builder1 As New JwtBuilder()
+            If Condition Then
+                builder1 = builder1.WithSecret(Secret)
+            End If
+            builder1.Decode(InvalidToken) ' FN, this is not SE rule, only linear initialization is considered
+
+            CreateBuilder().Decode(InvalidToken) ' FN, cross procedural initialization is not tracked
+        End Sub
+
+        Private Function CreateBuilder() As JwtBuilder
+            Return New JwtBuilder().DoNotVerifySignature()
+        End Function
 
     End Class
 

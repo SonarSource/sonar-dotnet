@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Collections.Immutable; // FIXME: Cleanup
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -27,7 +25,7 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Rules.Common;
+using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
@@ -40,10 +38,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
             InvocationTracker = new VisualBasicInvocationTracker(AnalyzerConfiguration.AlwaysEnabled, verifyingRule);
         }
 
-        protected override BuilderPatternCondition<InvocationExpressionSyntax> BuilderPattern()
-        {
-            throw new System.NotImplementedException();
-        }
+        protected override BuilderPatternCondition<InvocationExpressionSyntax> BuilderPattern() =>
+            new VisualBasicBuildPatternCondition(JwtBuilderConstructorIsSafe, JwtBuilderDescriptors(
+                (context, invocation) =>
+                    invocation.ArgumentList?.Arguments.Count != 1
+                    || !invocation.ArgumentList.Arguments.Single().GetExpression().RemoveParentheses().IsKind(SyntaxKind.FalseLiteralExpression)));
 
     }
 }
