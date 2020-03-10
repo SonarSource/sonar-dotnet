@@ -226,4 +226,37 @@ namespace Tests.Diagnostics
         {
         }
     }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/3193
+    public class Repro_3193
+    {
+        void Foo(Log Logger)
+        {
+            {
+                var retryAttempts = 0;
+                while (retryAttempts < 3)
+                {
+                    retryAttempts++;
+                    try
+                    {
+                        // Do something real here.
+                        return; // Noncompliant FP, this should end the loop if previous statement succeeded
+                    }
+                    catch (Exception ex)
+                    {
+                        //Log
+                    }
+                    finally
+                    {
+                        Logger?.Finally(); // Removing ? generates simple block and different CFG shape (Finally is on different location)
+                    }
+                }
+            }
+        }
+    }
+
+    public class Log
+    {
+        public void Finally() { }
+    }
 }
