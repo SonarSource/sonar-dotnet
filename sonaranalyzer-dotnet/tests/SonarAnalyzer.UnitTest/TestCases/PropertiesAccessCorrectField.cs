@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using GalaSoft.MvvmLight;
 using System.Runtime.CompilerServices;
 
@@ -697,6 +698,12 @@ namespace Tests.Diagnostics
             get;
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             private set;
+        }
+
+        public int ReadOnlyProperty
+        {
+            [DebuggerStepThrough]
+            get;
         }
     }
 }

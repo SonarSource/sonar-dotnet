@@ -142,6 +142,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static ExpressionSyntax SingleReturn(BlockSyntax body)
         {
+            if (body == null)
+            {
+                return null;
+            }
             var returns = body.DescendantNodes().OfType<ReturnStatementSyntax>().ToArray();
             return returns.Length == 1 ? returns.Single().Expression : null;
         }
