@@ -29,12 +29,12 @@ namespace MyLibrary
         static void Main()
         {
             var dsa1 = new DSACryptoServiceProvider(); // Noncompliant - default key size is 1024
-            dsa1.KeySize = 2048; // Noncompliant - the setter does not actually update the underlying key size for the DSACryptoServiceProvider class
+            dsa1.KeySize = 2048; // Noncompliant - the setter does not update the underlying key size for the DSACryptoServiceProvider class
 
             var dsa2 = new DSACryptoServiceProvider(2048); // Noncompliant - cannot create DSACryptoServiceProvider with a key size bigger than 1024
 
             var rsa1 = new RSACryptoServiceProvider(); // Noncompliant - default key size is 1024
-            rsa1.KeySize = 2048; // Noncompliant - the setter does not actually update the underlying key size for the RSACryptoServiceProvider class
+            rsa1.KeySize = 2048; // Noncompliant - the setter does not update the underlying key size for the RSACryptoServiceProvider class
 
             var rsa2 = new RSACng(1024); // Noncompliant
 
@@ -43,6 +43,16 @@ namespace MyLibrary
     }
 }
 </pre>
+<p>KeySize property of DSACryptoServiceProvider and RSACryptoServiceProvider does not change the value of underlying KeySize for the algorithm.
+Property setter is ignored without error and KeySize can be changed only by using constructor overload. See:</p>
+<ul>
+  <li> <a
+  href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.dsacryptoserviceprovider.keysize">DSACryptoServiceProvider.KeySize
+  Property</a> </li>
+  <li> <a
+  href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.rsacryptoserviceprovider.keysize">RSACryptoServiceProvider.KeySize
+  Property</a> </li>
+</ul>
 <h2>Compliant Solution</h2>
 <pre>
 using System;
