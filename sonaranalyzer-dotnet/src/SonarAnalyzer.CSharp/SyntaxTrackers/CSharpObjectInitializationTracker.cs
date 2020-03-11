@@ -56,7 +56,7 @@ namespace SonarAnalyzer.SyntaxTrackers
         private readonly Predicate<object> isAllowedConstantValue;
 
         /// <summary>
-        /// Given the symbol of an object, expresion used to populate the value and the semantic model, returns true if it is allowed.
+        /// Given the symbol of an object, the expression used to populate the value and the semantic model, returns true if it is allowed.
         /// </summary>
         private readonly Func<ISymbol, ExpressionSyntax, SemanticModel, bool> isAllowedObject;
 

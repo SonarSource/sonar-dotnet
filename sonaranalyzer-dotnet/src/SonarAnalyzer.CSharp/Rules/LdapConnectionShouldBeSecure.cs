@@ -78,9 +78,9 @@ namespace SonarAnalyzer.Rules.CSharp
                        authTypeExpression.FirstAncestorOrSelf<InterfaceDeclarationSyntax>() ??
                        authTypeExpression.SyntaxTree.GetRoot();
 
-            // The CSharpObjectInitializationTracker is verifying only if AuthenticationType property or DirectoryEntry ctor
+            // The CSharpObjectInitializationTracker is verifying only if the AuthenticationType property or DirectoryEntry ctor
             // was invoked with a valid value, which can be evaluated as a constant.
-            // If the parameter is a variable, in order to reduce FP, we have to check if an unsafe value was set during
+            // When the initialization is done with a variable, we check if an unsafe value was set during
             // variable declaration or later by assignment.
             return !HasUnsafeDeclaration(root, authTypeSymbol, semanticModel) &&
                    !HasUnsafeAssignment(root, authTypeSymbol, semanticModel);
