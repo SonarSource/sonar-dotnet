@@ -96,7 +96,7 @@ Namespace Tests.Diagnostics
             Dim builder4 As JwtBuilder = New JwtBuilder().WithSecret(Secret)
             builder4.Decode(InvalidToken) ' Noncompliant
 
-            Dim builder5 As JwtBuilder = New JwtBuilder().WithSecret(Secret).DoNotVerifySignature()
+            Dim builder5 As JwtBuilder = (((New JwtBuilder()).WithSecret(Secret)).DoNotVerifySignature())
             builder5.Decode(InvalidToken) ' Noncompliant
 
             Dim Decoded11 As String = New JwtBuilder().  ' Noncompliant

@@ -18,16 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using System;
+using System.Linq;
+using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Helpers
 {
-    public class CSharpBuildPatternCondition : BuilderPatternCondition<InvocationExpressionSyntax>
+    public class VisualBasicBuilderPatternCondition : BuilderPatternCondition<InvocationExpressionSyntax>
     {
 
-        public CSharpBuildPatternCondition(bool constructorIsSafe, params BuilderPatternDescriptor<InvocationExpressionSyntax>[] descriptors) : base(constructorIsSafe, descriptors) { }
+        public VisualBasicBuilderPatternCondition(bool constructorIsSafe, params BuilderPatternDescriptor<InvocationExpressionSyntax>[] descriptors) : base(constructorIsSafe, descriptors) { }
 
         protected override SyntaxNode RemoveParentheses(SyntaxNode node) =>
             node.RemoveParentheses();
@@ -68,7 +70,7 @@ namespace SonarAnalyzer.Helpers
 
         protected override bool IsAssignmentToIdentifier(SyntaxNode node, string identifierName, out SyntaxNode rightExpression)
         {
-            if (node is AssignmentExpressionSyntax assignment && assignment.Left.GetIdentifier()?.Identifier.ValueText == identifierName)
+            if (node is AssignmentStatementSyntax assignment && identifierName.Equals(assignment.Left.GetIdentifier()?.Identifier.ValueText, StringComparison.OrdinalIgnoreCase))
             {
                 rightExpression = assignment.Right;
                 return true;
@@ -80,9 +82,11 @@ namespace SonarAnalyzer.Helpers
         protected override bool IsIdentifierDeclaration(SyntaxNode node, string identifierName, out SyntaxNode initializer)
         {
             if (node is LocalDeclarationStatementSyntax declarationStatement
-                        && declarationStatement.Declaration.Variables.SingleOrDefault(x => x.Identifier.ValueText == identifierName) is { } declaration)
+                        && declarationStatement.Declarators.SingleOrDefault(x =>
+                            x.Names.Any(n => identifierName.Equals(n.Identifier.ValueText, StringComparison.OrdinalIgnoreCase))
+                            ) is { } declaration)
             {
-                initializer = declaration.Initializer?.Value;
+                initializer = declaration.Initializer?.Value ?? (declaration.AsClause as AsNewClauseSyntax)?.NewExpression;
                 return true;
             }
             initializer = null;
