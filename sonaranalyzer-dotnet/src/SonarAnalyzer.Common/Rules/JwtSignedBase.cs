@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules
 
             InvocationTracker.Track(context,
                 InvocationTracker.MatchMethod(new MemberDescriptor(KnownType.JWT_Builder_JwtBuilder, "Decode")),
-                InvocationTracker.InvalidBuilderInitialization(BuilderPattern())
+                InvocationTracker.IsInvalidBuilderInitialization(BuilderPattern())
                 );
         }
 

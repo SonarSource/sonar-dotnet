@@ -116,7 +116,7 @@ namespace SonarAnalyzer.Helpers
                 context.MethodSymbol.Value != null &&
                 context.MethodSymbol.Value.ReturnType.DerivesFrom(returnType);
 
-        public InvocationCondition InvalidBuilderInitialization<TInvocationSyntax>(BuilderPatternCondition<TInvocationSyntax> condition)
+        public InvocationCondition IsInvalidBuilderInitialization<TInvocationSyntax>(BuilderPatternCondition<TInvocationSyntax> condition)
             where TInvocationSyntax : SyntaxNode =>
             context => condition.InvalidBuilderInitialization(context);
 
