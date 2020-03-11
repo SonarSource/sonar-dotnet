@@ -133,7 +133,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             condition8.InvalidBuilderInitialization(context_VB).Should().BeTrue(); // Valid constructor, validated by Bbb, invalidated by Ccc
 
             var dddContext = new InvocationContext(FindMethodInvocation_VB(context_VB.Invocation.SyntaxTree, "Ddd"), "Ddd", context_VB.SemanticModel);
-            var condition9 = new CSharpBuilderPatternCondition(false);
+            var condition9 = new VisualBasicBuilderPatternCondition(false);
             condition9.InvalidBuilderInitialization(dddContext).Should().BeFalse(); // Invalid constructor is not tracked throught array propagation
         }
 
