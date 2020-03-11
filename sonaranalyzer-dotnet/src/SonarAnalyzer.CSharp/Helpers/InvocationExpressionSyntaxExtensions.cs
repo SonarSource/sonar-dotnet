@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Helpers
             memberAccessExpressionSyntax.NameIs(identifierName) &&
             semanticModel.GetTypeInfo(invocation).Type.Is(knownType);
 
-        internal static IEnumerable<ISymbol> GetArgumentsOfKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel semanticModel) =>
+        internal static IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel semanticModel) =>
             invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, semanticModel);
     }
 }

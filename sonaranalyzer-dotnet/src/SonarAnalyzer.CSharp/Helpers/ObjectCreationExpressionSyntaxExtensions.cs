@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.Helpers
@@ -28,5 +29,8 @@ namespace SonarAnalyzer.Helpers
     {
         public static IEnumerable<ExpressionSyntax> GetInitializerExpressions(this ObjectCreationExpressionSyntax objectCreation) =>
             objectCreation?.Initializer?.Expressions ?? Enumerable.Empty<ExpressionSyntax>();
+
+        public static IEnumerable<ArgumentSyntax> GetArgumentsOfKnownType(this ObjectCreationExpressionSyntax objectCreation, KnownType knownType, SemanticModel semanticModel) =>
+            objectCreation?.ArgumentList?.Arguments.GetArgumentsOfKnownType(knownType, semanticModel) ?? Enumerable.Empty<ArgumentSyntax>();
     }
 }

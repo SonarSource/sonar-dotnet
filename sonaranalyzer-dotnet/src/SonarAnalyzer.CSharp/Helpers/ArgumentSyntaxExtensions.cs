@@ -27,9 +27,13 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class ArgumentSyntaxExtensions
     {
+        internal static IEnumerable<ArgumentSyntax> GetArgumentsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
+            syntaxList
+                .Where(argument => semanticModel.GetTypeInfo(argument.Expression).Type.Is(knownType));
+
         internal static IEnumerable<ISymbol> GetSymbolsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
             syntaxList
-                .Where(argument => semanticModel.GetTypeInfo(argument.Expression).Type.Is(knownType))
+                .GetArgumentsOfKnownType(knownType, semanticModel)
                 .Select(argument => semanticModel.GetSymbolInfo(argument.Expression).Symbol);
     }
 }
