@@ -112,5 +112,15 @@ namespace Tests.Diagnostics
                 throw new ArgumentNullException(nameof(value));
             }
         }
+
+        // See https://github.com/SonarSource/sonar-dotnet/issues/2665
+        private async void OnButtonPressed( object sender, EventArgs e) // Noncompliant - FP (compliant solution from rule specs does not apply here)
+        {
+            if(e == null)
+                throw new ArgumentException(nameof(e));
+//                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
+
+            await Task.Delay(0);
+        }
     }
 }
