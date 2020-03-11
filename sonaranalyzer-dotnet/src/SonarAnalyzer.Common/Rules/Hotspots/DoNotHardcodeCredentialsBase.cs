@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules
         protected abstract class CredentialWordsFinderBase<TSyntaxNode>
              where TSyntaxNode : SyntaxNode
         {
-            private readonly Regex validCredentialPattern = new Regex(@"^\?|:\w+|\{\d+[^}]*\}$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            private readonly Regex validCredentialPattern = new Regex(@"^\?|:\w+|\{\d+[^}]*\}|""|'$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             private readonly Regex uriUserInfoPattern = new Regex(@"\w+:\/\/(?<Login>[^:]+):(?<Password>[^@]+)@", RegexOptions.Compiled);
             private readonly DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer;
 
@@ -188,7 +188,9 @@ namespace SonarAnalyzer.Rules
             private bool ContainsUriUserInfo(string variableValue)
             {
                 var match = uriUserInfoPattern.Match(variableValue);
-                return match.Success && !string.Equals(match.Groups["Login"].Value, match.Groups["Password"].Value, StringComparison.OrdinalIgnoreCase);
+                return match.Success
+                    && !string.Equals(match.Groups["Login"].Value, match.Groups["Password"].Value, StringComparison.OrdinalIgnoreCase)
+                    && !this.validCredentialPattern.IsMatch(match.Groups["Password"].Value);
             }
         }
     }

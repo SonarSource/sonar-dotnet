@@ -58,6 +58,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     c.RegisterSyntaxNodeActionInNonGenerated(
                         new AssignmentExpressionBannedWordsFinder(this).GetAnalysisAction(rule),
                         SyntaxKind.SimpleAssignmentStatement);
+
+                    c.RegisterSyntaxNodeActionInNonGenerated(
+                        new StringLiteralBannedWordsFinder(this).GetAnalysisAction(rule),
+                        SyntaxKind.StringLiteralExpression);
                 });
         }
 
@@ -95,6 +99,42 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 syntaxNode.IsKind(SyntaxKind.SimpleAssignmentStatement) &&
                 syntaxNode.Left.IsKnownType(KnownType.System_String, semanticModel) &&
                 syntaxNode.Right.IsKind(SyntaxKind.StringLiteralExpression);
+        }
+
+        private class StringLiteralBannedWordsFinder : CredentialWordsFinderBase<LiteralExpressionSyntax>
+        {
+            public StringLiteralBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
+
+            protected override string GetAssignedValue(LiteralExpressionSyntax syntaxNode) =>
+                syntaxNode.GetStringValue();
+
+            protected override string GetVariableName(LiteralExpressionSyntax syntaxNode) =>
+                null;
+
+            protected override bool IsAssignedWithStringLiteral(LiteralExpressionSyntax syntaxNode, SemanticModel semanticModel) =>
+                syntaxNode.IsKind(SyntaxKind.StringLiteralExpression) && !IsHandledByOtherFinder(syntaxNode.GetTopMostContainingMethod(), syntaxNode);
+
+            private static bool IsHandledByOtherFinder(SyntaxNode method, SyntaxNode current)
+            {
+                while (current != null && current != method)
+                {
+                    switch (current.Kind())
+                    {
+                        case SyntaxKind.VariableDeclarator:
+                        case SyntaxKind.SimpleAssignmentStatement:
+                            return true;
+                        case SyntaxKind.InvocationExpression:
+                        case SyntaxKind.SimpleArgument:
+                        case SyntaxKind.AddExpression: // String concatenation is not supported by other finders
+                        case SyntaxKind.ConcatenateExpression:
+                            return false;
+                        default:
+                            current = current.Parent;
+                            break;
+                    }
+                }
+                return false;
+            }
         }
     }
 }

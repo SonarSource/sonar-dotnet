@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -39,6 +39,9 @@ namespace SonarAnalyzer.Helpers.VisualBasic
                 SyntaxKind.StringLiteralExpression,
                 SyntaxKind.TrueLiteralExpression,
             };
+
+        public static SyntaxNode GetTopMostContainingMethod(this SyntaxNode node) =>
+           node.AncestorsAndSelf().LastOrDefault(ancestor => ancestor is MethodBaseSyntax || ancestor is PropertyBlockSyntax);
 
         public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
         {

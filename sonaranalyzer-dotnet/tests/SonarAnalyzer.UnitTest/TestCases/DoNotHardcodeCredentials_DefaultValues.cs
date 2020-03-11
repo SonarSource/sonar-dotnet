@@ -11,7 +11,7 @@ namespace Tests.Diagnostics
 
         private const string secret = "constantValue";
 
-        public void Test()
+        public void Test(string user)
         {
             string password = @"foo"; // Noncompliant {{"password" detected here, make sure this is not a hard-coded credential.}}
 //                 ^^^^^^^^^^^^^^^^^
@@ -37,6 +37,7 @@ namespace Tests.Diagnostics
             string myPassword2 = "";
             string myPassword3 = "        ";
             string myPassword4 = @"foo"; // Noncompliant
+            string query2 = "password=hardcoded;user='" + user + "'"; // Noncompliant
         }
 
         public void DefaultKeywords()
@@ -131,8 +132,7 @@ namespace Tests.Diagnostics
             string n1 = "scheme://user:azerty123@domain.com"; // Noncompliant {{Review this hard-coded URI, which may contain a credential.}}
             string n2 = "scheme://user:With%20%3F%20Encoded@domain.com";              // Noncompliant
             string n3 = "scheme://user:With!$&'()*+,;=OtherCharacters@domain.com";    // Noncompliant
-
-            string fn1 = "scheme://user:azerty123@" + domain;  // Compliant FN, concatenated strings are not supported
+            string n4 = "scheme://user:azerty123@" + domain;  // Noncompliant
 
             string c1 = "scheme://user:" + pwd + "@domain.com";
             string c2 = "scheme://user:@domain.com";
@@ -146,6 +146,30 @@ namespace Tests.Diagnostics
             string e2 = "scheme://abc:abc@domain.com";        // Compliant exception, user and password are the same
             string e3 = "scheme://a%20;c:a%20;c@domain.com";  // Compliant exception, user and password are the same
         }
+
+        public void LiteralAsArgument(string pwd, string server)
+        {
+            using (var conn = new SqlConnection("Server = localhost; Database = Test; User = SA; Password = Secret123")) { } // Noncompliant
+            using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = Secret123")) { } // Noncompliant
+            using (var conn = OpenConn("Server = " + server + "; Database = Test; User = SA; Password = Secret123")) { } // Noncompliant
+
+            using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = " + pwd)) { }
+        }
+
+        private SqlConnection OpenConn(string connectionString)
+        {
+            var ret = new SqlConnection(connectionString);
+            ret.Open();
+            return ret;
+        }
+
+    }
+
+    class SqlConnection : IDisposable
+    {
+        public SqlConnection(string connectionString) { }
+        public void Open() { }
+        public void Dispose() { }
     }
 
     class FalseNegatives
@@ -158,7 +182,6 @@ namespace Tests.Diagnostics
             Configuration.Password = "foo"; // False Negative
             this.password = Configuration.Password = "foo"; // False Negative
             string query1 = "password=':crazy;secret';user=xxx"; // False Negative - passwords enclosed in '' are not covered
-            string query2 = "password=hardcoded;user='" + user + "'"; // False Negative - Only LiteralExpressionSyntax nodes are covered
         }
 
         class Configuration
