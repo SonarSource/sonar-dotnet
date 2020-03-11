@@ -74,30 +74,25 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(NetFrameworkVersion.Unknown, @"TestCases\XmlExternalEntityShouldNotBeParsed_AlwaysSafe.cs")]
         [DataTestMethod]
         [TestCategory("Rule")]
-        public void XmlExternalEntityShouldNotBeParsed_AlwaysSafe(NetFrameworkVersion version, string testFilePath)
-        {
-            // setup
-            var rule = new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version));
-
-            // act & verify
-            Verifier.VerifyAnalyzer(testFilePath, rule,
-                additionalReferences: FrameworkMetadataReference.SystemXml
-                    .Concat(FrameworkMetadataReference.SystemData)
-                    .Concat(FrameworkMetadataReference.SystemXmlLinq)
-                    .ToArray());
-        }
+        public void XmlExternalEntityShouldNotBeParsed_AlwaysSafe(NetFrameworkVersion version, string testFilePath) => VerifyRule(version, testFilePath);
 
         [DataRow(NetFrameworkVersion.Probably35, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_Net35.cs")]
         [DataRow(NetFrameworkVersion.Between4And451, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_Net4.cs")]
         [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_Net452.cs")]
         [DataRow(NetFrameworkVersion.Unknown, @"TestCases\XmlExternalEntityShouldNotBeParsed_XmlReader_Net452.cs")]
+        [DataTestMethod]
+        [TestCategory("Rule")]
+        public void XmlExternalEntityShouldNotBeParsed_XmlReader(NetFrameworkVersion version, string testFilePath) => VerifyRule(version, testFilePath);
+
         [DataRow(NetFrameworkVersion.Probably35, @"TestCases\XmlExternalEntityShouldNotBeParsed_XPathDocument_Net35.cs")]
         [DataRow(NetFrameworkVersion.Between4And451, @"TestCases\XmlExternalEntityShouldNotBeParsed_XPathDocument_Net4.cs")]
         [DataRow(NetFrameworkVersion.After452, @"TestCases\XmlExternalEntityShouldNotBeParsed_XPathDocument_Net452.cs")]
         [DataRow(NetFrameworkVersion.Unknown, @"TestCases\XmlExternalEntityShouldNotBeParsed_XPathDocument_Net452.cs")]
         [DataTestMethod]
         [TestCategory("Rule")]
-        public void XmlExternalEntityShouldNotBeParsed_XmlReaderAndXPathDocument(NetFrameworkVersion version, string testFilePath)
+        public void XmlExternalEntityShouldNotBeParsed_XPathDocument(NetFrameworkVersion version, string testFilePath) => VerifyRule(version, testFilePath);
+
+        private static void VerifyRule(NetFrameworkVersion version, string testFilePath)
         {
             var rule = new XmlExternalEntityShouldNotBeParsed(GetVersionProviderMock(version));
 
