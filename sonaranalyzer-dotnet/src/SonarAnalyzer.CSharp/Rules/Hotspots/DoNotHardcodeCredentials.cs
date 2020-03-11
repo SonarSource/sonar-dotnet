@@ -40,10 +40,8 @@ namespace SonarAnalyzer.Rules.CSharp
             PropertyAccessTracker = new CSharpPropertyAccessTracker(analyzerConfiguration, rule);
         }
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void InitializeSyntax(ParameterLoadingAnalysisContext context)
         {
-            base.Initialize(context);
-
             context.RegisterCompilationStartAction(
                 c =>
                 {

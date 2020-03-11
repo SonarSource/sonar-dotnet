@@ -45,6 +45,8 @@ namespace SonarAnalyzer.Rules
         private Regex passwordValuePattern;
         private readonly IAnalyzerConfiguration analyzerConfiguration;
 
+        protected abstract void InitializeSyntax(ParameterLoadingAnalysisContext context);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         [RuleParameter("credentialWords", PropertyType.String, "Comma separated list of words identifying potential credentials", DefaultCredentialWords)]
@@ -75,7 +77,7 @@ namespace SonarAnalyzer.Rules
             this.analyzerConfiguration = analyzerConfiguration;
         }
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected sealed override void Initialize(ParameterLoadingAnalysisContext context)
         {
             var innerContext = context.GetInnerContext();
 
@@ -94,6 +96,8 @@ namespace SonarAnalyzer.Rules
                PropertyAccessTracker.AssignedValueIsConstant(),
                PropertyAccessTracker.MatchProperty(
                    new MemberDescriptor(KnownType.System_Net_NetworkCredential, "Password")));
+
+            InitializeSyntax(context);
         }
 
         protected bool IsEnabled(AnalyzerOptions options)
