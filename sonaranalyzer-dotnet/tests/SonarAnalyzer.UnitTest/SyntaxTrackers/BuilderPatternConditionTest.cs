@@ -95,6 +95,10 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             var condition8 = new CSharpBuilderPatternCondition(true, cccInvalidator, bbbValidator); // Configuration order has no effect
             condition8.InvalidBuilderInitialization(context_CS).Should().BeTrue(); // Valid constructor, validated by Bbb, invalidated by Ccc
+
+            var dddContext = new InvocationContext(FindMethodInvocation_CS(context_CS.Invocation.SyntaxTree, "Ddd"), "Ddd", context_CS.SemanticModel);
+            var condition9 = new CSharpBuilderPatternCondition(false);
+            condition9.InvalidBuilderInitialization(dddContext).Should().BeFalse(); // Invalid constructor is not tracked throught array propagation
         }
 
         [TestMethod]
@@ -127,6 +131,10 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             var condition8 = new VisualBasicBuilderPatternCondition(true, cccInvalidator, bbbValidator); // Configuration order has no effect
             condition8.InvalidBuilderInitialization(context_VB).Should().BeTrue(); // Valid constructor, validated by Bbb, invalidated by Ccc
+
+            var dddContext = new InvocationContext(FindMethodInvocation_VB(context_VB.Invocation.SyntaxTree, "Ddd"), "Ddd", context_VB.SemanticModel);
+            var condition9 = new CSharpBuilderPatternCondition(false);
+            condition9.InvalidBuilderInitialization(dddContext).Should().BeFalse(); // Invalid constructor is not tracked throught array propagation
         }
 
         private static InvocationContext CreateContext_CS()
@@ -140,18 +148,22 @@ namespace SonarAnalyzer.UnitTest.Helpers
         ret = ret.Aaa();
         return ret.Bbb().Ccc();
     }
+
+    public Item Boo()
+    {
+        var arr = new Item[] {new Item()};
+        return arr[0].Ddd();
+    }
 };
 class Item
 {
     public Item Aaa() { return this;}
     public Item Bbb() { return this;}
     public Item Ccc() { return this;}
+    public Item Ddd() { return this;}
 }";
             var snippet = new SnippetCompiler(source, false, AnalyzerLanguage.CSharp);
-            return new InvocationContext(snippet.SyntaxTree.GetRoot().DescendantNodes()
-                .OfType<CSharpSyntax.InvocationExpressionSyntax>()
-                .Single(x => x.Expression.GetIdentifier()?.Identifier.ValueText == "Ccc"),
-                "Ccc", snippet.SemanticModel);
+            return new InvocationContext(FindMethodInvocation_CS(snippet.SyntaxTree, "Ccc"), "Ccc", snippet.SemanticModel);
         }
 
         private static InvocationContext CreateContext_VB()
@@ -163,6 +175,11 @@ class Item
         Dim Ret As New Item()
         Ret = Ret.Aaa()
         Return Ret.Bbb().Ccc()
+    End Function
+
+    Function Boo() As Item
+        Dim Arr() As Item = {New Item}
+        Return Arr(0).Ddd()
     End Function
 
 End Class
@@ -181,12 +198,24 @@ Class Item
         Return Me
     End Function
 
+    Public Function Ddd() As Item
+        Return Me
+    End Function
+
 End Class";
             var snippet = new SnippetCompiler(source, false, AnalyzerLanguage.VisualBasic);
-            return new InvocationContext(snippet.SyntaxTree.GetRoot().DescendantNodes()
-                .OfType<VBSyntax.InvocationExpressionSyntax>()
-                .Single(x => x.Expression.GetIdentifier()?.Identifier.ValueText == "Ccc"),
-                "Ccc", snippet.SemanticModel);
+            return new InvocationContext(FindMethodInvocation_VB(snippet.SyntaxTree, "Ccc"), "Ccc", snippet.SemanticModel);
         }
+
+        private static SyntaxNode FindMethodInvocation_CS(SyntaxTree tree, string name) =>
+            tree.GetRoot().DescendantNodes()
+                .OfType<CSharpSyntax.InvocationExpressionSyntax>()
+                .Single(x => x.Expression.GetIdentifier()?.Identifier.ValueText == name);
+
+        private static SyntaxNode FindMethodInvocation_VB(SyntaxTree tree, string name) =>
+            tree.GetRoot().DescendantNodes()
+                .OfType<VBSyntax.InvocationExpressionSyntax>()
+                .Single(x => x.Expression.GetIdentifier()?.Identifier.ValueText == name);
+
     }
 }
